@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
+import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getWasmTypeForPrimitive;
 import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
@@ -540,9 +541,17 @@ final class ExpressionTranspiler {
 
   private static boolean isAssignable(
       TypeDescriptor typeDescriptor, TypeDescriptor expressionTypeDescriptor) {
-    if (typeDescriptor.isPrimitive() || expressionTypeDescriptor.isPrimitive()) {
-      return typeDescriptor.equals(expressionTypeDescriptor);
+
+    if (typeDescriptor.isPrimitive() && expressionTypeDescriptor.isPrimitive()) {
+      return getWasmTypeForPrimitive(typeDescriptor)
+          .equals(getWasmTypeForPrimitive(expressionTypeDescriptor));
     }
+
+    // TODO(b/170691747): remove that when boxing/inboxing is implemented
+    if (typeDescriptor.isPrimitive() || expressionTypeDescriptor.isPrimitive()) {
+      return false;
+    }
+
     if (typeDescriptor.isArray()
         && ((ArrayTypeDescriptor) typeDescriptor).getDimensions() > 1
         && expressionTypeDescriptor.equals(TypeDescriptors.get().javaLangObjectArray)) {

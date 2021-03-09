@@ -70,7 +70,7 @@
    (local.set $count_1 (i64.const 0))
    (block $LOOP_1.BREAK
     (loop
-     (br_if 1 (i32.eqz (i64.lt_s (local.get $l) (i64.const 0))))
+     (br_if 1 (i32.eqz (i64.lt_s (local.get $l) (i64.const 100))))
      (block $LOOP_1.CONTINUE
       (block
        ;; (count = (count + 1));

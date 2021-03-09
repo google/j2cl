@@ -31,12 +31,22 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  * contexts.
  */
 public class InsertWideningPrimitiveConversions extends NormalizationPass {
+  private final boolean needFloatOrDoubleWidening;
+
+  public InsertWideningPrimitiveConversions() {
+    this(false);
+  }
+
+  public InsertWideningPrimitiveConversions(boolean needFloatOrDoubleWidening) {
+    this.needFloatOrDoubleWidening = needFloatOrDoubleWidening;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
   }
 
-  private static ConversionContextVisitor.ContextRewriter getContextRewriter() {
+  private ConversionContextVisitor.ContextRewriter getContextRewriter() {
     return new ConversionContextVisitor.ContextRewriter() {
 
       @Override
@@ -93,10 +103,12 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
         .isWiderThan((PrimitiveTypeDescriptor) fromTypeDescriptor);
   }
 
-  private static Expression widenTo(TypeDescriptor toTypeDescriptor, Expression expression) {
+  private Expression widenTo(TypeDescriptor toTypeDescriptor, Expression expression) {
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
+
     // Don't emit known NOOP widenings.
-    if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
+    if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)
+        && !needFloatOrDoubleWidening(toTypeDescriptor)) {
       return expression;
     }
 
@@ -108,5 +120,9 @@ public class InsertWideningPrimitiveConversions extends NormalizationPass {
 
     return RuntimeMethods.createWideningPrimitivesMethodCall(
         expression, (PrimitiveTypeDescriptor) toTypeDescriptor);
+  }
+
+  private boolean needFloatOrDoubleWidening(TypeDescriptor toTypeDescriptor) {
+    return needFloatOrDoubleWidening && TypeDescriptors.isPrimitiveFloatOrDouble(toTypeDescriptor);
   }
 }

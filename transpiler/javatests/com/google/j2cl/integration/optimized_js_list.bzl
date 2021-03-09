@@ -378,6 +378,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/wasm:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/whilestatement:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/whilestatement:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/wideningfloatconversion:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/wideningfloatconversion:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/wideningprimitiveconversion:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/wideningprimitiveconversion:optimized_js.esnext",
 ]

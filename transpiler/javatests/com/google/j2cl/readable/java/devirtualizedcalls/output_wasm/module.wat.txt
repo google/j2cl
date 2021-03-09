@@ -299,9 +299,9 @@
    (drop (call_ref (local.get $dd)(struct.get $java.lang.Double.vtable $m_longValue__long (struct.get $java.lang.Double $vtable(local.get $dd)))))
    ;; dd.shortValue();
    (drop (call_ref (local.get $dd)(struct.get $java.lang.Double.vtable $m_shortValue__short (struct.get $java.lang.Double $vtable(local.get $dd)))))
-   ;; Number s = new Short.<init>(((short) 1));
+   ;; Number s = new Short.<init>(1);
    
-   (local.set $s (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
+   (local.set $s (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 1)))
    ;; s.byteValue();
    (drop (call_ref (local.get $s)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $s)))))
    ;; s.doubleValue();
@@ -314,9 +314,9 @@
    (drop (call_ref (local.get $s)(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $s)))))
    ;; s.shortValue();
    (drop (call_ref (local.get $s)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $s)))))
-   ;; Short ss = new Short.<init>(((short) 1));
+   ;; Short ss = new Short.<init>(1);
    
-   (local.set $ss (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 0)))
+   (local.set $ss (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (global.get $java.lang.Short.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 1)))
    ;; ss.byteValue();
    (drop (call_ref (local.get $ss)(struct.get $java.lang.Short.vtable $m_byteValue__byte (struct.get $java.lang.Short $vtable(local.get $ss)))))
    ;; ss.doubleValue();
@@ -329,9 +329,9 @@
    (drop (call_ref (local.get $ss)(struct.get $java.lang.Short.vtable $m_longValue__long (struct.get $java.lang.Short $vtable(local.get $ss)))))
    ;; ss.shortValue();
    (drop (call_ref (local.get $ss)(struct.get $java.lang.Short.vtable $m_shortValue__short (struct.get $java.lang.Short $vtable(local.get $ss)))))
-   ;; Number b = new Byte.<init>(((byte) 1));
+   ;; Number b = new Byte.<init>(1);
    
-   (local.set $b (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
+   (local.set $b (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 1)))
    ;; b.byteValue();
    (drop (call_ref (local.get $b)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $b)))))
    ;; b.doubleValue();
@@ -344,9 +344,9 @@
    (drop (call_ref (local.get $b)(struct.get $java.lang.Number.vtable $m_longValue__long (struct.get $java.lang.Number $vtable(local.get $b)))))
    ;; b.shortValue();
    (drop (call_ref (local.get $b)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $b)))))
-   ;; Byte bb = new Byte.<init>(((byte) 1));
+   ;; Byte bb = new Byte.<init>(1);
    
-   (local.set $bb (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 0)))
+   (local.set $bb (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (global.get $java.lang.Byte.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 1)))
    ;; bb.byteValue();
    (drop (call_ref (local.get $bb)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $bb)))))
    ;; bb.doubleValue();

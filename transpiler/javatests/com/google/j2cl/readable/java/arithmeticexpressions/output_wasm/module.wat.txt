@@ -64,36 +64,36 @@
  (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
-   ;; byte b = ((byte) 1);
+   ;; byte b = 1;
    
-   (local.set $b (i32.const 0))
-   ;; char c = ((char) 1);
+   (local.set $b (i32.const 1))
+   ;; char c = 1;
    
-   (local.set $c (i32.const 0))
-   ;; short s = ((short) 1);
+   (local.set $c (i32.const 1))
+   ;; short s = 1;
    
-   (local.set $s (i32.const 0))
-   ;; int i = ((int) 1);
+   (local.set $s (i32.const 1))
+   ;; int i = 1;
    
-   (local.set $i (i32.const 0))
-   ;; float f = ((float) 1);
+   (local.set $i (i32.const 1))
+   ;; float f = 1.0;
    
-   (local.set $f (f32.const 0.0))
-   ;; double d = ((double) 1);
+   (local.set $f (f32.const 1.0))
+   ;; double d = 1.0;
    
-   (local.set $d (f64.const 0.0))
-   ;; (b = ((byte) 9223372036854775807));
-   (local.set $b (i32.const 0))
-   ;; (c = ((char) 9223372036854775807));
-   (local.set $c (i32.const 0))
-   ;; (s = ((short) 9223372036854775807));
-   (local.set $s (i32.const 0))
-   ;; (i = ((int) 9223372036854775807));
-   (local.set $i (i32.const 0))
-   ;; (f = ((float) 9223372036854775807));
-   (local.set $f (f32.const 0.0))
-   ;; (d = ((double) 9223372036854775807));
-   (local.set $d (f64.const 0.0))
+   (local.set $d (f64.const 1.0))
+   ;; (b = -1);
+   (local.set $b (i32.const -1))
+   ;; (c = 65535);
+   (local.set $c (i32.const 65535))
+   ;; (s = -1);
+   (local.set $s (i32.const -1))
+   ;; (i = -1);
+   (local.set $i (i32.const -1))
+   ;; (f = 9.223372036854776E18);
+   (local.set $f (f32.const 9.223372036854776E18))
+   ;; (d = 9.223372036854776E18);
+   (local.set $d (f64.const 9.223372036854776E18))
   )
  )
 )
@@ -154,34 +154,34 @@
    (local.set $i (i32.sub (i32.add (i32.add (i32.const 1) (i32.const 1)) (i32.const 2)) (i32.const 5)))
    (local.set $j (i32.mul (i32.add (i32.const 1) (i32.const 2)) (i32.add (i32.const 3) (i32.const 4))))
    (local.set $p (i32.rem_s (i32.mul (i32.div_s (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4)))
-   ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (java.lang.Long.MAX_VALUE != 9.223372036854778E18);
+   ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (javaemul.internal.Primitives.widenLongToDouble(java.lang.Long.MAX_VALUE) != 9.223372036854778E18);
    
    (local.set $k (i32.eqz (i32.eq (i32.add (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4))))
    (local.set $l (i32.ne (i32.add (i32.const 1) (i32.const 2)) (i32.const 4)))
-   (local.set $m (i64.ne (global.get $f_MAX_VALUE__java_lang_Long) (i64.const 0)))
-   ;; double o = (((5 + 1) / 2) - 0.0);
+   (local.set $m (f64.ne (f64.convert_i64_s(global.get $f_MAX_VALUE__java_lang_Long)) (f64.const 9.223372036854778E18)))
+   ;; double o = (javaemul.internal.Primitives.widenIntToDouble(((5 + 1) / 2)) - 0.0);
    
-   (local.set $o (f64.sub (f64.const 0.0) (f64.const 0.0)))
+   (local.set $o (f64.sub (f64.convert_i32_s(i32.div_s (i32.add (i32.const 5) (i32.const 1)) (i32.const 2))) (f64.const 0.0)))
    ;; (a = (a << 31));
-   (local.set $a (i32.shl (local.get $a) (i32.const 0)))
+   (local.set $a (i32.shl (local.get $a) (i32.const 31)))
    ;; (a = (a << 1));
-   (local.set $a (i32.shl (local.get $a) (i32.const 0)))
-   ;; (a = ((int) (a + 1)));
-   (local.set $a (i32.const 0))
-   ;; (a = ((int) (a / 1)));
-   (local.set $a (i32.const 0))
-   ;; (a = ((int) (a + java.lang.Double.MAX_VALUE)));
-   (local.set $a (i32.const 0))
+   (local.set $a (i32.shl (local.get $a) (i32.const 1)))
+   ;; (a = javaemul.internal.Primitives.narrowLongToInt((javaemul.internal.Primitives.widenIntToLong(a) + 1)));
+   (local.set $a (i32.wrap_i64(i64.add (i64.extend_i32_s(local.get $a)) (i64.const 1))))
+   ;; (a = javaemul.internal.Primitives.narrowLongToInt((javaemul.internal.Primitives.widenIntToLong(a) / 1)));
+   (local.set $a (i32.wrap_i64(i64.div_s (i64.extend_i32_s(local.get $a)) (i64.const 1))))
+   ;; (a = javaemul.internal.Primitives.narrowDoubleToInt((javaemul.internal.Primitives.widenIntToDouble(a) + java.lang.Double.MAX_VALUE)));
+   (local.set $a (i32.trunc_sat_f64_s(f64.add (f64.convert_i32_s(local.get $a)) (global.get $f_MAX_VALUE__java_lang_Double))))
    ;; (k = (k | true));
    (local.set $k (i32.or (local.get $k) (i32.const 1)))
    ;; short s = 10;
    
-   (local.set $s (i32.const 0))
-   ;; (k = (((s = ((short) (s + 1))),s) == 10));
+   (local.set $s (i32.const 10))
+   ;; (k = (((s = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowIntToShort((s + 1)))),s) == 10));
    (local.set $k (i32.eq (block (result i32)
-    (local.set $s (i32.const 0))
+    (local.set $s (i32.extend16_s(i32.extend16_s(i32.add (local.get $s) (i32.const 1)))))
     (local.get $s)
-   ) (i32.const 0)))
+   ) (i32.const 10)))
    ;; int q = (3 >> 2);
    
    (local.set $q (i32.shr_s (i32.const 3) (i32.const 2)))
@@ -292,7 +292,7 @@
    
    (local.set $longs (ref.null $long.array))
    ;; (longs[0] = (longs[0] + 1));
-   (array.set $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0) (i64.add (array.get $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0)) (i64.const 0)))
+   (array.set $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0) (i64.add (array.get $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0)) (i64.const 1)))
    ;; (longs[0] = (longs[0] - 1));
    (array.set $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0) (i64.sub (array.get $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0)) (i64.const 1)))
    ;; (longs[0] = (longs[0] - 1));
@@ -318,16 +318,16 @@
    ;; short[] shorts = null;
    
    (local.set $shorts (ref.null $short.array))
-   ;; boolean b = ((short[] $array = shorts,int $index = 0,short $value = ((short) (shorts[0] + 1)),($array[$index] = $value),$value) == 10);
+   ;; boolean b = ((short[] $array = shorts,int $index = 0,short $value = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowIntToShort((shorts[0] + 1))),($array[$index] = $value),$value) == 10);
    
    (local.set $b (i32.eq (block (result i32)
     
     (local.set $$array_4 (local.get $shorts))
     (local.set $$index_4 (i32.const 0))
-    (local.set $$value_2 (i32.const 0))
+    (local.set $$value_2 (i32.extend16_s(i32.extend16_s(i32.add (array.get $short.array.elements (struct.get $short.array $elements (local.get $shorts)) (i32.const 0)) (i32.const 1)))))
     (array.set $short.array.elements (struct.get $short.array $elements (local.get $$array_4)) (local.get $$index_4) (local.get $$value_2))
     (local.get $$value_2)
-   ) (i32.const 0)))
+   ) (i32.const 10)))
   )
  )
 )
@@ -420,12 +420,12 @@
    ;; Byte b = 0;
    
    (local.set $b (ref.null $java.lang.Byte))
-   ;; (b = ((byte) (b + 1)));
+   ;; (b = javaemul.internal.Primitives.narrowIntToByte((b + 1)));
    (local.set $b (ref.null $java.lang.Byte))
    ;; Character ch = 99;
    
    (local.set $ch (ref.null $java.lang.Character))
-   ;; (ch = ((char) (ch + 1)));
+   ;; (ch = javaemul.internal.Primitives.narrowIntToChar((ch + 1)));
    (local.set $ch (ref.null $java.lang.Character))
    (block
     ;; Integer $qualifier = ((f = (f + 1)),f);
@@ -486,7 +486,7 @@
     
     (local.set $$qualifier (call $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions ))
     ;; ($qualifier.intField = ($qualifier.intField + 5));
-    (struct.set $arithmeticexpressions.ArithmeticExpressions $f_intField__arithmeticexpressions_ArithmeticExpressions(local.get $$qualifier) (i64.add (struct.get $arithmeticexpressions.ArithmeticExpressions $f_intField__arithmeticexpressions_ArithmeticExpressions(local.get $$qualifier)) (i64.const 0)))
+    (struct.set $arithmeticexpressions.ArithmeticExpressions $f_intField__arithmeticexpressions_ArithmeticExpressions(local.get $$qualifier) (i64.add (struct.get $arithmeticexpressions.ArithmeticExpressions $f_intField__arithmeticexpressions_ArithmeticExpressions(local.get $$qualifier)) (i64.const 5)))
    )
   )
  )
@@ -526,22 +526,28 @@
    
    ;; double d;
    
-   ;; (l = ((2 - boxedInteger) - 2));
-   (local.set $l (i64.sub (i64.const 0) (i64.const 2)))
-   ;; (l = ((2 | boxedInteger) | 2));
-   (local.set $l (i64.or (i64.const 0) (i64.const 2)))
+   ;; (l = (javaemul.internal.Primitives.widenIntToLong((2 - boxedInteger)) - 2));
+   (local.set $l (i64.sub (i64.extend_i32_s(i32.sub (i32.const 2) (i32.const 0))) (i64.const 2)))
+   ;; (l = (javaemul.internal.Primitives.widenIntToLong((2 | boxedInteger)) | 2));
+   (local.set $l (i64.or (i64.extend_i32_s(i32.or (i32.const 2) (i32.const 0))) (i64.const 2)))
    ;; (l = ((((1000000 * l) * 60) * 60) * 24));
-   (local.set $l (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (local.get $l)) (i64.const 0)) (i64.const 0)) (i64.const 0)))
-   ;; (l = ((((24 * 60) * 60) * l) * 1000000));
-   (local.set $l (i64.mul (i64.mul (i64.const 0) (local.get $l)) (i64.const 1000000)))
-   ;; (d = ((l = ((i = 20),i)),l));
-   (local.set $d (f64.const 0.0))
+   (local.set $l (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (local.get $l)) (i64.const 60)) (i64.const 60)) (i64.const 24)))
+   ;; (l = ((javaemul.internal.Primitives.widenIntToLong(((24 * 60) * 60)) * l) * 1000000));
+   (local.set $l (i64.mul (i64.mul (i64.extend_i32_s(i32.mul (i32.mul (i32.const 24) (i32.const 60)) (i32.const 60))) (local.get $l)) (i64.const 1000000)))
+   ;; (d = javaemul.internal.Primitives.widenLongToDouble(((l = javaemul.internal.Primitives.widenIntToLong(((i = 20),i))),l)));
+   (local.set $d (f64.convert_i64_s(block (result i64)
+    (local.set $l (i64.extend_i32_s(block (result i32)
+     (local.set $i (i32.const 20))
+     (local.get $i)
+    )))
+    (local.get $l)
+   )))
    ;; (l = ((boxedInteger = ((i = 20),i)),boxedInteger));
    (local.set $l (i64.const 0))
-   ;; (l = (((i + boxedInteger) + l) + 20));
-   (local.set $l (i64.add (i64.add (i64.const 0) (local.get $l)) (i64.const 0)))
-   ;; (d = ((20 + l) + d));
-   (local.set $d (f64.add (f64.const 0.0) (local.get $d)))
+   ;; (l = ((javaemul.internal.Primitives.widenIntToLong((i + boxedInteger)) + l) + 20));
+   (local.set $l (i64.add (i64.add (i64.extend_i32_s(i32.add (local.get $i) (i32.const 0))) (local.get $l)) (i64.const 20)))
+   ;; (d = (javaemul.internal.Primitives.widenLongToDouble((20 + l)) + d));
+   (local.set $d (f64.add (f64.convert_i64_s(i64.add (i64.const 20) (local.get $l))) (local.get $d)))
   )
  )
 )
@@ -611,7 +617,7 @@
     ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
     (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
     ;; (arithmeticexpressions.ArithmeticExpressions.one = 1);
-    (global.set $f_one__arithmeticexpressions_ArithmeticExpressions (i64.const 0))
+    (global.set $f_one__arithmeticexpressions_ArithmeticExpressions (i64.const 1))
    )
    (block
     ;; arithmeticexpressions.ArithmeticExpressions.$clinit();

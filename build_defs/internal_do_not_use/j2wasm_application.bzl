@@ -56,6 +56,8 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-function-references")
     args.add("--enable-gc")
     args.add("--enable-reference-types")
+    args.add("--enable-sign-extension")
+    args.add("--enable-saturating-float-to-int")
 
     ctx.actions.run(
         executable = ctx.executable._wasp,

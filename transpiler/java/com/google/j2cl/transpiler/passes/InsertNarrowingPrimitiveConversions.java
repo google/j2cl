@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.Set;
 
 /**
@@ -31,6 +32,16 @@ import java.util.Set;
  * type slot in assignment and cast conversion contexts.
  */
 public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
+  private final boolean treatFloatAsDouble;
+
+  public InsertNarrowingPrimitiveConversions() {
+    this(true);
+  }
+
+  public InsertNarrowingPrimitiveConversions(boolean treatFloatAsDouble) {
+    this.treatFloatAsDouble = treatFloatAsDouble;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
@@ -45,7 +56,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
           Expression expression) {
         TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
-        if (fromTypeDescriptor.isAssignableTo(toTypeDescriptor)
+        if (isAssignable(fromTypeDescriptor, toTypeDescriptor)
             || !shouldNarrow(fromTypeDescriptor, toTypeDescriptor)) {
           return expression;
         }
@@ -61,7 +72,7 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
 
         if (toTypeDescriptor.isPrimitive()
             && fromTypeDescriptor.isPrimitive()
-            && fromTypeDescriptor.isAssignableTo(toTypeDescriptor)) {
+            && isAssignable(fromTypeDescriptor, toTypeDescriptor)) {
           return expression;
         }
 
@@ -112,5 +123,17 @@ public class InsertNarrowingPrimitiveConversions extends NormalizationPass {
             expression, (PrimitiveTypeDescriptor) toTypeDescriptor);
       }
     };
+  }
+
+  private boolean isAssignable(TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
+    return fromTypeDescriptor.isAssignableTo(toTypeDescriptor)
+        && !needsDoubleToFloatNarrowing(fromTypeDescriptor, toTypeDescriptor);
+  }
+
+  private boolean needsDoubleToFloatNarrowing(
+      TypeDescriptor fromTypeDescriptor, TypeDescriptor toTypeDescriptor) {
+    return !treatFloatAsDouble
+        && TypeDescriptors.isPrimitiveDouble(fromTypeDescriptor)
+        && TypeDescriptors.isPrimitiveFloat(toTypeDescriptor);
   }
 }

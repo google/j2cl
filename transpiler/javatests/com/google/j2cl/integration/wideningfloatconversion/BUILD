@@ -11,7 +11,7 @@ package(
 # Provide a custom j2wasm_library. Double and float are two different primitives
 # types in wasm
 j2wasm_library(
-    name = "narrowingdoubletofloat-j2wasm",
+    name = "wideningfloat-j2wasm",
     srcs = ["super-wasm/Main.java"],
     javacopts = ["-XepDisableAllChecks"],
     deps = [
@@ -20,7 +20,7 @@ j2wasm_library(
 )
 
 integration_test(
-    name = "narrowingdoubletofloat",
-    srcs = glob(["*.java"]),
+    name = "wideningfloat",
+    srcs = ["Main.java"],
     enable_wasm = True,
 )

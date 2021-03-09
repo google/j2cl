@@ -307,6 +307,9 @@ public enum Backend {
           // Rewrite 'a != b' to '!(a == b)'
           new RewriteReferenceNotEquals(),
           new RewriteUnaryExpressions(),
+          new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble */ false),
+          new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),
+
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           new RewriteShortcutOperators(),
           new ImplementStringCompileTimeConstants(),

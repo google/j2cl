@@ -1,18 +1,16 @@
 Integration tests size report:
 **************************************
-There are 7 optimized size changes.
+There are 2 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2005805 to 1990678 bytes (100%->99.2%) and from
-  711997 to 707466 bytes (100%->99.4%) gzipped.
+  1990678 to 1990515 bytes (100%->100.0%) and from
+  707466 to 707459 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-        735      674 arraycastsinglesideeffect.esnext (-8.3%)
-      29243    27947 box2d_default.esnext (-4.4%)
-      25568    24490 box2d_noclassmetadata_checksmin.esnext (-4.2%)
-      27130    26059 box2d_noclassmetadata.esnext (-3.9%)
+       2761     2757 wideningprimitiveconversion (-0.1%)
+       2430     2427 wideningprimitiveconversion.esnext (-0.1%)
 
 
 Expansion report highlights:
@@ -30,12 +28,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4021454  4021454 box2d_default (unchanged)
-    2194886  2194886 box2d_default.minified (unchanged)
-    1165889  1165889 box2d_default.rta (unchanged)
-    2417234  2417234 emptyclass (unchanged)
-    1452369  1452369 emptyclass.minified (unchanged)
-     699511   699511 emptyclass.rta (unchanged)
+    4021539  4021539 box2d_default (unchanged)
+    2194971  2194971 box2d_default.minified (unchanged)
+    1165974  1165974 box2d_default.rta (unchanged)
+    2417319  2417319 emptyclass (unchanged)
+    1452454  1452454 emptyclass.minified (unchanged)
+     699596   699596 emptyclass.rta (unchanged)
 
 
 All reports:
@@ -58,7 +56,7 @@ All reports:
        1769     1769 arraybranchinsertion (unchanged)
        1544     1544 arraybranchinsertion.esnext (unchanged)
         969      969 arraycastsinglesideeffect (unchanged)
-        735      674 arraycastsinglesideeffect.esnext (-8.3%)
+        674      674 arraycastsinglesideeffect.esnext (unchanged)
        1648     1648 arrayleafinsertion (unchanged)
        1420     1420 arrayleafinsertion.esnext (unchanged)
        1913     1913 arrayliteral (unchanged)
@@ -88,13 +86,13 @@ All reports:
         908      908 blockscoping (unchanged)
         623      623 blockscoping.esnext (unchanged)
       27091    27091 box2d_default (unchanged)
-      29243    27947 box2d_default.esnext (-4.4%)
+      27947    27947 box2d_default.esnext (unchanged)
       25490    25490 box2d_noclassmetadata (unchanged)
-      27130    26059 box2d_noclassmetadata.esnext (-3.9%)
+      26059    26059 box2d_noclassmetadata.esnext (unchanged)
       23900    23900 box2d_noclassmetadata_checksmin (unchanged)
-      25568    24490 box2d_noclassmetadata_checksmin.esnext (-4.2%)
+      24490    24490 box2d_noclassmetadata_checksmin.esnext (unchanged)
       25342    25342 box2d_noclassmetadata_checksopt (unchanged)
-      26825    25803 box2d_noclassmetadata_checksopt.esnext (-3.8%)
+      25803    25803 box2d_noclassmetadata_checksopt.esnext (unchanged)
         961      961 breakstatement (unchanged)
         675      675 breakstatement.esnext (unchanged)
        2046     2046 bridgejsmethod (unchanged)
@@ -262,9 +260,9 @@ All reports:
         986      986 localgenericclassinitjustonce (unchanged)
         703      703 localgenericclassinitjustonce.esnext (unchanged)
        4630     4630 logging (unchanged)
-       4199     4198 logging.esnext (-0.0%)
+       4198     4198 logging.esnext (unchanged)
        3875     3875 loggingstripped (unchanged)
-       3480     3478 loggingstripped.esnext (-0.1%)
+       3478     3478 loggingstripped.esnext (unchanged)
        2767     2767 longimplicitcasts (unchanged)
        2503     2503 longimplicitcasts.esnext (unchanged)
        2542     2542 longoperationsinglesideeffect (unchanged)
@@ -417,5 +415,7 @@ All reports:
        3064     3064 wasm.esnext (unchanged)
         918      918 whilestatement (unchanged)
         636      636 whilestatement.esnext (unchanged)
-       2761     2761 wideningprimitiveconversion (unchanged)
-       2430     2430 wideningprimitiveconversion.esnext (unchanged)
+         -1     1976 wideningfloatconversion (new)
+         -1     1687 wideningfloatconversion.esnext (new)
+       2761     2757 wideningprimitiveconversion (-0.1%)
+       2430     2427 wideningprimitiveconversion.esnext (-0.1%)

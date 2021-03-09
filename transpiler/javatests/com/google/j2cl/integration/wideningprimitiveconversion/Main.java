@@ -215,13 +215,11 @@ public class Main {
     assertTrue(((double) i == 3.0));
 
     assertTrue(((long) mi == 2147483647L));
-    assertTrue(((float) mi == 2.147483647E9)); // we don't honor float-double precision differences
     assertTrue(((double) mi == 2.147483647E9));
 
     assertTrue(((float) l == 4));
     assertTrue(((double) l == 4));
 
-    assertTrue(((float) ll == 2.415919103E9)); // we don't honor float-double precision differences
     assertTrue(((double) ll == 2.415919103E9));
 
     assertTrue(((float) ml == 9.223372036854776E18));
@@ -229,7 +227,6 @@ public class Main {
 
     assertTrue((((double) f - 2.7) < 1e-7));
 
-    // we don't honor float-double precision differences
     assertTrue(((double) mf == 3.4028234663852886e+38d));
   }
 
@@ -336,21 +333,17 @@ public class Main {
     assertTrue(((rd = i) == 3.0));
 
     assertTrue(((rl = mi) == 2147483647L));
-    assertTrue(((rf = mi) == 2.147483647E9)); // we don't honor float-double precision differences
     assertTrue(((rd = mi) == 2.147483647E9));
 
     assertTrue(((rf = l) == 4));
     assertTrue(((rd = l) == 4));
 
-    assertTrue(((rf = ll) == 2.415919103E9)); // we don't honor float-double precision differences
     assertTrue(((rd = ll) == 2.415919103E9));
 
-    assertTrue(((rf = ml) == 9.223372036854776E18));
     assertTrue(((rd = ml) == 9.223372036854776E18));
 
     assertTrue(((rd = f - 2.7) < 1e-7f));
 
-    // we don't honor float-double precision differences
     assertTrue(((rd = mf) == 3.4028234663852886e+38d));
   }
 

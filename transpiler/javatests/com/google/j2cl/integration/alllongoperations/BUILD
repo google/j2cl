@@ -13,5 +13,6 @@ package(
 integration_test(
     name = "alllongoperations",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
+    # TODO(b/181829823) : re-enable when the bug is fixed.
+    # enable_wasm = True,
 )
