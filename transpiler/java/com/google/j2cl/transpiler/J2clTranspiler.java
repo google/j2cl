@@ -28,6 +28,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.function.Supplier;
 
 /** Translation tool for generating JavaScript source files from Java sources. */
 class J2clTranspiler {
@@ -97,7 +98,7 @@ class J2clTranspiler {
   }
 
   private void desugarUnits(List<CompilationUnit> j2clUnits) {
-    runPasses(j2clUnits, options.getBackend().getDesugaringPasses());
+    runPasses(j2clUnits, options.getBackend().getDesugaringPassFactories());
   }
 
   private void checkUnits(List<CompilationUnit> j2clUnits) {
@@ -108,14 +109,15 @@ class J2clTranspiler {
 
   private void normalizeUnits(List<CompilationUnit> j2clUnits) {
     runPasses(
-        j2clUnits, options.getBackend().getPasses(options.getExperimentalOptimizeAutovalue()));
+        j2clUnits,
+        options.getBackend().getPassFactories(options.getExperimentalOptimizeAutovalue()));
   }
 
   private static void runPasses(
-      List<CompilationUnit> j2clUnits, ImmutableList<NormalizationPass> passes) {
+      List<CompilationUnit> j2clUnits, ImmutableList<Supplier<NormalizationPass>> passFactories) {
     for (CompilationUnit j2clUnit : j2clUnits) {
-      for (NormalizationPass pass : passes) {
-        pass.execute(j2clUnit);
+      for (Supplier<NormalizationPass> passFactory : passFactories) {
+        passFactory.get().execute(j2clUnit);
       }
     }
   }

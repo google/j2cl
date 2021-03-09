@@ -107,6 +107,7 @@ import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
 import com.google.j2cl.transpiler.passes.VerifySingleAstReference;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.function.Supplier;
 
 /** Drives the backend to generate outputs. */
 public enum Backend {
@@ -135,126 +136,128 @@ public enum Backend {
     }
 
     @Override
-    public ImmutableList<NormalizationPass> getDesugaringPasses() {
-      return ImmutableList.of(new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
+    public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
+      return ImmutableList.of(
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
     }
 
     @Override
-    public ImmutableList<NormalizationPass> getPasses(boolean experimentalOptimizeAutovalue) {
+    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
+        boolean experimentalOptimizeAutovalue) {
       // TODO(b/117155139): Review the ordering of passes.
       return ImmutableList.of(
           // Pre-verifications
-          new VerifySingleAstReference(),
-          new VerifyParamAndArgCounts(),
-          new VerifyReferenceScoping(),
+          VerifySingleAstReference::new,
+          VerifyParamAndArgCounts::new,
+          VerifyReferenceScoping::new,
 
           // Class structure normalizations.
-          new OptimizeAutoValue(experimentalOptimizeAutovalue),
-          new ImplementLambdaExpressions(),
-          new OptimizeAnonymousInnerClassesToFunctionExpressions(),
-          new NormalizeFunctionExpressions(),
+          () -> new OptimizeAutoValue(experimentalOptimizeAutovalue),
+          ImplementLambdaExpressions::new,
+          OptimizeAnonymousInnerClassesToFunctionExpressions::new,
+          NormalizeFunctionExpressions::new,
           // Default constructors and explicit super calls should be synthesized first.
-          new CreateImplicitConstructors(),
-          new InsertExplicitSuperCalls(),
-          new BridgeMethodsCreator(),
-          new EnumMethodsCreator(),
+          CreateImplicitConstructors::new,
+          InsertExplicitSuperCalls::new,
+          BridgeMethodsCreator::new,
+          EnumMethodsCreator::new,
           // TODO(b/31865368): Remove RewriteStringEquals pass once delayed field initialization
           //  is introduced and String.java gets updated to use it.
-          new RewriteStringEquals(),
-          new DevirtualizeBoxedTypesAndJsFunctionImplementations(),
-          new NormalizeTryWithResources(),
-          new NormalizeCatchClauses(),
+          RewriteStringEquals::new,
+          DevirtualizeBoxedTypesAndJsFunctionImplementations::new,
+          NormalizeTryWithResources::new,
+          NormalizeCatchClauses::new,
           // Runs before normalizing nested classes.
-          new InsertCastOnNewInstances(),
+          InsertCastOnNewInstances::new,
           // Must run before Enum normalization
-          new FixSuperCallQualifiers(),
+          FixSuperCallQualifiers::new,
 
           // Runs after all passes that synthesize overlays.
-          new NormalizeEnumClasses(),
-          new NormalizeJsEnums(),
-          new NormalizeOverlayMembers(),
-          new NormalizeInterfaceMethods(),
+          NormalizeEnumClasses::new,
+          NormalizeJsEnums::new,
+          NormalizeOverlayMembers::new,
+          NormalizeInterfaceMethods::new,
           // End of class structure normalization.
 
           // Statement/Expression normalizations
-          new NormalizeArrayLiterals(),
-          new NormalizeStaticMemberQualifiers(),
+          NormalizeArrayLiterals::new,
+          NormalizeStaticMemberQualifiers::new,
           // Runs after NormalizeStaticMemberQualifiersPass.
-          new DevirtualizeMethodCalls(),
-          new ControlStatementFormatter(),
-          new NormalizeMultiExpressions(),
+          DevirtualizeMethodCalls::new,
+          ControlStatementFormatter::new,
+          NormalizeMultiExpressions::new,
           // Runs after NormalizeMultiExpressions to make sure it only sees valid l-values.
-          new ExpandCompoundAssignments(),
-          new InsertErasureTypeSafetyCasts(),
+          ExpandCompoundAssignments::new,
+          InsertErasureTypeSafetyCasts::new,
           // Runs before unboxing conversion.
-          new InsertStringConversions(),
-          new InsertNarrowingReferenceConversions(),
-          new InsertUnboxingConversions(),
-          new InsertBoxingConversions(),
-          new InsertNarrowingPrimitiveConversions(),
-          new InsertWideningPrimitiveConversions(),
-          new NormalizeLongs(),
-          new InsertIntegerCoercions(),
-          new InsertBitwiseOperatorBooleanCoercions(),
-          new NormalizeJsFunctionPropertyInvocations(),
+          InsertStringConversions::new,
+          InsertNarrowingReferenceConversions::new,
+          InsertUnboxingConversions::new,
+          InsertBoxingConversions::new,
+          InsertNarrowingPrimitiveConversions::new,
+          InsertWideningPrimitiveConversions::new,
+          NormalizeLongs::new,
+          InsertIntegerCoercions::new,
+          InsertBitwiseOperatorBooleanCoercions::new,
+          NormalizeJsFunctionPropertyInvocations::new,
           // Run before other passes that normalize JsEnum expressions, but after all the normal
           // Java semantic conversions.
-          new InsertJsEnumBoxingAndUnboxingConversions(),
-          new NormalizeSwitchStatements(),
-          new ArrayAccessNormalizer(),
-          new ImplementAssertStatements(),
-          new ImplementSynchronizedStatements(),
-          new NormalizeFieldInitialization(),
-          new ImplementInstanceInitialization(),
-          new NormalizeNestedClassConstructors(),
-          new NormalizeConstructors(),
-          new NormalizeTypeLiterals(),
-          new NormalizeCasts(),
-          new NormalizeInstanceOfs(),
-          new NormalizeEquality(),
-          new NormalizeStaticNativeMemberReferences(),
-          new NormalizeJsVarargs(),
-          new NormalizeArrayCreations(),
-          new InsertExceptionConversions(),
-          new NormalizeLiterals(),
+          InsertJsEnumBoxingAndUnboxingConversions::new,
+          NormalizeSwitchStatements::new,
+          ArrayAccessNormalizer::new,
+          ImplementAssertStatements::new,
+          ImplementSynchronizedStatements::new,
+          NormalizeFieldInitialization::new,
+          ImplementInstanceInitialization::new,
+          NormalizeNestedClassConstructors::new,
+          NormalizeConstructors::new,
+          NormalizeTypeLiterals::new,
+          NormalizeCasts::new,
+          NormalizeInstanceOfs::new,
+          NormalizeEquality::new,
+          NormalizeStaticNativeMemberReferences::new,
+          NormalizeJsVarargs::new,
+          NormalizeArrayCreations::new,
+          InsertExceptionConversions::new,
+          NormalizeLiterals::new,
 
           // Needs to run after passes that do code synthesis are run so that it handles the
           // synthesize code as well.
           // TODO(b/35241823): Revisit this pass if jscompiler adds a way to express constraints
           // to template variables.
-          new InsertCastsToTypeBounds(),
+          InsertCastsToTypeBounds::new,
 
-          // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's new type
+          // TODO(b/72652198): remove the temporary fix once switch to JSCompiler's type
           // checker.
-          new InsertTypeAnnotationOnGenericReturnTypes(),
+          InsertTypeAnnotationOnGenericReturnTypes::new,
 
           // Perform post cleanups.
-          new ImplementStaticInitializationViaClinitFunctionRedirection(),
+          ImplementStaticInitializationViaClinitFunctionRedirection::new,
           // Needs to run after ImplementStaticInitialization since ImplementIsInstanceMethods
           // creates static methods which should not call $clinit.
-          new ImplementInstanceOfs(),
-          new ImplementJsFunctionCopyMethod(),
-          new ImplementClassMetadata(),
+          ImplementInstanceOfs::new,
+          ImplementJsFunctionCopyMethod::new,
+          ImplementClassMetadata::new,
           // Normalize multiexpressions again to remove unnecessary clutter, but run before
           // variable motion.
-          new NormalizeMultiExpressions(),
-          new MoveVariableDeclarationsToEnclosingBlock(),
+          NormalizeMultiExpressions::new,
+          MoveVariableDeclarationsToEnclosingBlock::new,
           // Remove redundant JsDocCasts.
-          new RemoveUnneededJsDocCasts(),
-          new NormalizeJsDocCastExpressions(),
+          RemoveUnneededJsDocCasts::new,
+          NormalizeJsDocCastExpressions::new,
 
           // Handle await keyword.
-          new NormalizeJsAwaitMethodInvocations(),
-          new RemoveNoopStatements(),
+          NormalizeJsAwaitMethodInvocations::new,
+          RemoveNoopStatements::new,
 
           // Enrich source mapping information for better stack deobfuscation.
-          new FilloutMissingSourceMapInformation(),
+          FilloutMissingSourceMapInformation::new,
 
           // Post-verifications
-          new VerifySingleAstReference(),
-          new VerifyParamAndArgCounts(),
-          new VerifyReferenceScoping(),
-          new VerifyNormalizedUnits());
+          VerifySingleAstReference::new,
+          VerifyParamAndArgCounts::new,
+          VerifyReferenceScoping::new,
+          VerifyNormalizedUnits::new);
     }
   },
   WASM {
@@ -273,73 +276,75 @@ public enum Backend {
     }
 
     @Override
-    public ImmutableList<NormalizationPass> getDesugaringPasses() {
+    public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
-          new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false));
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false));
     }
 
     @Override
-    public ImmutableList<NormalizationPass> getPasses(boolean experimentalOptimizeAutovalue) {
+    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
+        boolean experimentalOptimizeAutovalue) {
       return ImmutableList.of(
           // Pre-verifications
-          new VerifySingleAstReference(),
-          new VerifyParamAndArgCounts(),
-          new VerifyReferenceScoping(),
+          VerifySingleAstReference::new,
+          VerifyParamAndArgCounts::new,
+          VerifyReferenceScoping::new,
 
           // Default constructors and explicit super calls should be synthesized first.
-          new CreateImplicitConstructors(),
-          new InsertExplicitSuperCalls(),
-          new BridgeMethodsCreator(),
-          new EnumMethodsCreator(),
+          CreateImplicitConstructors::new,
+          InsertExplicitSuperCalls::new,
+          BridgeMethodsCreator::new,
+          EnumMethodsCreator::new,
 
           // Must run before Enum normalization
-          new FixSuperCallQualifiers(),
-          new NormalizeInstanceCompileTimeConstants(),
-          new NormalizeStringLiterals(),
-          new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
-          new NormalizeStaticMemberQualifiers(),
-          new NormalizeMultiExpressions(),
-          new NormalizeSwitchStatements(),
+          FixSuperCallQualifiers::new,
+          NormalizeInstanceCompileTimeConstants::new,
+          NormalizeStringLiterals::new,
+          () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
+          NormalizeStaticMemberQualifiers::new,
+          NormalizeMultiExpressions::new,
+          NormalizeSwitchStatements::new,
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
-          new ExpandCompoundAssignments(/* expandAll= */ true),
-          new InsertErasureTypeSafetyCasts(),
+          () -> new ExpandCompoundAssignments(/* expandAll= */ true),
+          InsertErasureTypeSafetyCasts::new,
           // Rewrite 'a != b' to '!(a == b)'
-          new RewriteReferenceNotEquals(),
-          new RewriteUnaryExpressions(),
-          new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble */ false),
-          new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),
+          RewriteReferenceNotEquals::new,
+          RewriteUnaryExpressions::new,
+          () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble */ false),
+          () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),
 
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
-          new RewriteShortcutOperators(),
-          new ImplementStringCompileTimeConstants(),
-          new NormalizeFieldInitialization(),
-          new ImplementInstanceInitialization(),
-          new NormalizeNestedClassConstructors(),
-          new NormalizeLabels(),
-          new NormalizeArrayLiterals(),
-          new NormalizeArrayCreationsWasm(),
-          new InsertCastOnArrayAccess(),
-          new ImplementStaticInitializationViaConditionChecks(),
-          new ExtractNonIdempotentExpressions(),
+          RewriteShortcutOperators::new,
+          ImplementStringCompileTimeConstants::new,
+          NormalizeFieldInitialization::new,
+          ImplementInstanceInitialization::new,
+          NormalizeNestedClassConstructors::new,
+          NormalizeLabels::new,
+          NormalizeArrayLiterals::new,
+          NormalizeArrayCreationsWasm::new,
+          InsertCastOnArrayAccess::new,
+          ImplementStaticInitializationViaConditionChecks::new,
+          ExtractNonIdempotentExpressions::new,
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.
-          new NormalizeMultiExpressions(),
+          NormalizeMultiExpressions::new,
 
           // a = b => (a = b, a)
-          new RewriteAssignmentExpressions(),
+          RewriteAssignmentExpressions::new,
           // Post-verifications
-          new VerifySingleAstReference(),
-          new VerifyParamAndArgCounts(),
-          new VerifyReferenceScoping(),
-          new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
+          VerifySingleAstReference::new,
+          VerifyParamAndArgCounts::new,
+          VerifyReferenceScoping::new,
+          () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
     }
   };
 
-  public abstract ImmutableList<NormalizationPass> getDesugaringPasses();
+  public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
 
-  public abstract ImmutableList<NormalizationPass> getPasses(boolean experimentalOptimizeAutovalue);
+  public abstract ImmutableList<Supplier<NormalizationPass>> getPassFactories(
+      boolean experimentalOptimizeAutovalue);
 
   public abstract void generateOutputs(
       List<CompilationUnit> j2clUnits,
