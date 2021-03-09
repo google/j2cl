@@ -15,7 +15,10 @@
  */
 package javaemul.internal;
 
+import javaemul.internal.annotations.Wasm;
+
 /** Platform specific utilities with Wasm specific implementation. */
+@SuppressWarnings("unusable-by-js")
 public final class Platform {
 
   @SuppressWarnings("SelfEquality")
@@ -27,6 +30,9 @@ public final class Platform {
   public static boolean isFinite(double x) {
     return (x - x) == 0;
   }
+
+  @Wasm("ref.is_null")
+  public static native boolean isNull(Object o);
 
   private Platform() {}
 }

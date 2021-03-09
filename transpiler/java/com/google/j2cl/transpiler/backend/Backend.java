@@ -97,7 +97,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
-import com.google.j2cl.transpiler.passes.RewriteReferenceNotEquals;
+import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteStringEquals;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
@@ -309,7 +309,7 @@ public enum Backend {
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           InsertErasureTypeSafetyCasts::new,
           // Rewrite 'a != b' to '!(a == b)'
-          RewriteReferenceNotEquals::new,
+          RewriteReferenceEqualityOperations::new,
           RewriteUnaryExpressions::new,
           () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble */ false),
           () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),

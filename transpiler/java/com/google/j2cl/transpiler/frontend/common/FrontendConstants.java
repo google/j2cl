@@ -60,5 +60,6 @@ public class FrontendConstants {
           "javaemul.internal.Primitives",
           "javaemul.internal.Enums",
           "javaemul.internal.Constructor",
+          "javaemul.internal.Platform",
           "javaemul.internal.WasmArrayHelper");
 }

@@ -120,53 +120,53 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   }
 
   /** Return the logical and of this expression and {@code rhs}. */
-  public Expression infixAnd(Expression rhs) {
+  public BinaryExpression infixAnd(Expression rhs) {
     return infix(BinaryOperator.CONDITIONAL_AND, this, rhs);
   }
 
   /** Return an expression representing {@code this | rhs}. */
-  public Expression infixBitwiseOr(Expression rhs) {
+  public BinaryExpression infixBitwiseOr(Expression rhs) {
     return infix(BinaryOperator.BIT_OR, this, rhs);
   }
 
   /** Return an expression representing {@code this ^ rhs}. */
-  public Expression infixBitwiseXor(Expression rhs) {
+  public BinaryExpression infixBitwiseXor(Expression rhs) {
     return infix(BinaryOperator.BIT_XOR, this, rhs);
   }
 
   /** Return an expression representing {@code this == rhs}. */
-  public Expression infixEquals(Expression rhs) {
+  public BinaryExpression infixEquals(Expression rhs) {
     return infix(BinaryOperator.EQUALS, this, rhs);
   }
 
   /** Return an expression representing {@code this < rhs}. */
-  public Expression infixLessThan(Expression rhs) {
+  public BinaryExpression infixLessThan(Expression rhs) {
     return infix(BinaryOperator.LESS, this, rhs);
   }
 
   /** Return an expression representing {@code this != rhs}. */
-  public Expression infixNotEquals(Expression rhs) {
+  public BinaryExpression infixNotEquals(Expression rhs) {
     return infix(BinaryOperator.NOT_EQUALS, this, rhs);
   }
 
   /** Return an expression representing {@code this == null}. */
-  public Expression infixEqualsNull() {
+  public BinaryExpression infixEqualsNull() {
     checkState(!getTypeDescriptor().isPrimitive());
     return infix(BinaryOperator.EQUALS, this, getTypeDescriptor().getNullValue());
   }
 
   /** Return an expression representing {@code this != null}. */
-  public Expression infixNotEqualsNull() {
+  public BinaryExpression infixNotEqualsNull() {
     checkState(!getTypeDescriptor().isPrimitive());
     return infix(BinaryOperator.NOT_EQUALS, this, getTypeDescriptor().getNullValue());
   }
 
   /** Return an expression representing {@code this - rhs}. */
-  public Expression infixMinus(Expression rhs) {
+  public BinaryExpression infixMinus(Expression rhs) {
     return infix(BinaryOperator.MINUS, this, rhs);
   }
 
-  private static Expression infix(BinaryOperator operator, Expression lhs, Expression rhs) {
+  private static BinaryExpression infix(BinaryOperator operator, Expression lhs, Expression rhs) {
     return BinaryExpression.newBuilder()
         .setOperator(operator)
         .setLeftOperand(lhs)

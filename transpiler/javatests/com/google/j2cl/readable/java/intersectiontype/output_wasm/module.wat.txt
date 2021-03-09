@@ -190,8 +190,8 @@
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
-   ;; if ((o == null)) {
-   (if (ref.eq (local.get $o) (ref.null $java.lang.Object))
+   ;; if (javaemul.internal.Platform.isNull(o)) {
+   (if (ref.is_null(local.get $o))
     (then
      (block
       ;; return (((Getable<T>&Setable)) o);

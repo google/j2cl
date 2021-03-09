@@ -59,8 +59,8 @@
   (block
    ;; jstypeenum.Color.$clinit();
    (call $$clinit__void@jstypeenum.Color )
-   ;; if ((jstypeenum.Color.namesToValuesMap == null)) {
-   (if (ref.eq (global.get $f_namesToValuesMap__jstypeenum_Color_) (ref.null $java.lang.Object))
+   ;; if (javaemul.internal.Platform.isNull(jstypeenum.Color.namesToValuesMap)) {
+   (if (ref.is_null(global.get $f_namesToValuesMap__jstypeenum_Color_))
     (then
      (block
       ;; (jstypeenum.Color.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(jstypeenum.Color.values()));

@@ -56,8 +56,8 @@
   (block
    ;; inferreturn.InferReturn.$clinit();
    (call $$clinit__void@inferreturn.InferReturn )
-   ;; if (!(foo == null)) {
-   (if (i32.eqz (ref.eq (local.get $foo) (ref.null $java.lang.Object)))
+   ;; if (!javaemul.internal.Platform.isNull(foo)) {
+   (if (i32.eqz (ref.is_null(local.get $foo)))
     (then
      (block
       ;; return inferreturn.InferReturn.inferGeneric(foo);

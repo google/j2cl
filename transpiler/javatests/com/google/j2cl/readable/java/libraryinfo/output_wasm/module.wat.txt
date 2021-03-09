@@ -397,8 +397,8 @@
   (block
    ;; libraryinfo.Main.MyEnum.$clinit();
    (call $$clinit__void@libraryinfo.Main.MyEnum )
-   ;; if ((libraryinfo.Main.MyEnum.namesToValuesMap == null)) {
-   (if (ref.eq (global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_) (ref.null $java.lang.Object))
+   ;; if (javaemul.internal.Platform.isNull(libraryinfo.Main.MyEnum.namesToValuesMap)) {
+   (if (ref.is_null(global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_))
     (then
      (block
       ;; (libraryinfo.Main.MyEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(libraryinfo.Main.MyEnum.values()));

@@ -484,8 +484,8 @@
   (block
    ;; lambdas.Lambdas.$clinit();
    (call $$clinit__void@lambdas.Lambdas )
-   ;; if ((lambdas.Lambdas.identityFunction == null)) {
-   (if (ref.eq (global.get $f_identityFunction__lambdas_Lambdas_) (ref.null $java.lang.Object))
+   ;; if (javaemul.internal.Platform.isNull(lambdas.Lambdas.identityFunction)) {
+   (if (ref.is_null(global.get $f_identityFunction__lambdas_Lambdas_))
     (then
      (block
       ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
