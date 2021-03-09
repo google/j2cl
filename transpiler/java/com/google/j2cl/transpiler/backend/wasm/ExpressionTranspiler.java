@@ -327,7 +327,7 @@ final class ExpressionTranspiler {
           if (wasmInfo == null) {
             sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
           } else {
-            sourceBuilder.append("(" + wasmInfo);
+            sourceBuilder.append("(" + wasmInfo + " ");
           }
 
           if (target.isStatic()) {
