@@ -393,6 +393,7 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $libraryinfo.Main.MyEnum))
  (local $return.value (ref null $libraryinfo.Main.MyEnum))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; libraryinfo.Main.MyEnum.$clinit();
@@ -406,8 +407,12 @@
      )
     )
    )
-   ;; return ((MyEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,libraryinfo.Main.MyEnum.namesToValuesMap));
-   (local.set $return.value (ref.cast $java.lang.Object $libraryinfo.Main.MyEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $libraryinfo.Main.MyEnum.rtt)))
+   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,libraryinfo.Main.MyEnum.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((MyEnum) $cast_expression)));
+   (local.set $return.value (block (result (ref null $libraryinfo.Main.MyEnum))
+    
+    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)))
+    (if (result (ref null $libraryinfo.Main.MyEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $libraryinfo.Main.MyEnum)) (else (ref.cast $java.lang.Object $libraryinfo.Main.MyEnum (local.get $$cast_expression) (global.get $libraryinfo.Main.MyEnum.rtt))))
+   ))
    (br $return.label)
   )
  )

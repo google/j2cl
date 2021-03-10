@@ -307,6 +307,7 @@
  (local $return.value (ref null $java.lang.Object))
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $collisions.Other))
  (local.set $this (ref.cast $java.lang.Object $collisions.Other (local.get $this.untyped) (global.get $collisions.Other.rtt)))
  (block $return.label
@@ -314,9 +315,13 @@
    ;; int T = 5;
    
    (local.set $T_1 (i32.const 5))
-   ;; Other<T> o = ((Other<T>) null);
+   ;; Other<T> o = (Object $cast_expression = null,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Other<T>) $cast_expression)));
    
-   (local.set $o (ref.cast $java.lang.Object $collisions.Other (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
+   (local.set $o (block (result (ref null $collisions.Other))
+    
+    (local.set $$cast_expression (ref.null $java.lang.Object))
+    (if (result (ref null $collisions.Other)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $collisions.Other)) (else (ref.cast $java.lang.Object $collisions.Other (local.get $$cast_expression) (global.get $collisions.Other.rtt))))
+   ))
    ;; return null;
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
@@ -331,14 +336,19 @@
  (param $this (ref null $collisions.Other))
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; int T = 3;
    
    (local.set $T_1 (i32.const 3))
-   ;; Other<T> o = ((Other<T>) null);
+   ;; Other<T> o = (Object $cast_expression = null,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Other<T>) $cast_expression)));
    
-   (local.set $o (ref.cast $java.lang.Object $collisions.Other (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
+   (local.set $o (block (result (ref null $collisions.Other))
+    
+    (local.set $$cast_expression (ref.null $java.lang.Object))
+    (if (result (ref null $collisions.Other)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $collisions.Other)) (else (ref.cast $java.lang.Object $collisions.Other (local.get $$cast_expression) (global.get $collisions.Other.rtt))))
+   ))
   )
  )
 )

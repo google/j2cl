@@ -160,6 +160,7 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $gwtincompatible.Implementor.SomeEnum))
  (local $return.value (ref null $gwtincompatible.Implementor.SomeEnum))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; gwtincompatible.Implementor.SomeEnum.$clinit();
@@ -173,8 +174,12 @@
      )
     )
    )
-   ;; return ((SomeEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,gwtincompatible.Implementor.SomeEnum.namesToValuesMap));
-   (local.set $return.value (ref.cast $java.lang.Object $gwtincompatible.Implementor.SomeEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $gwtincompatible.Implementor.SomeEnum.rtt)))
+   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,gwtincompatible.Implementor.SomeEnum.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SomeEnum) $cast_expression)));
+   (local.set $return.value (block (result (ref null $gwtincompatible.Implementor.SomeEnum))
+    
+    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)))
+    (if (result (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $gwtincompatible.Implementor.SomeEnum)) (else (ref.cast $java.lang.Object $gwtincompatible.Implementor.SomeEnum (local.get $$cast_expression) (global.get $gwtincompatible.Implementor.SomeEnum.rtt))))
+   ))
    (br $return.label)
   )
  )

@@ -174,12 +174,17 @@
  (param $elements (ref null $Object.array))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; jsvarargs.Main.$clinit();
    (call $$clinit__void@jsvarargs.Main )
-   ;; return ((T) elements[0]);
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.Object (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
+   ;; return (Object $cast_expression = elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression)));
+   (local.set $return.value (block (result (ref null $java.lang.Object))
+    
+    (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
+   ))
    (br $return.label)
   )
  )
@@ -191,17 +196,27 @@
  (param $elements (ref null $Object.array))
  (result (ref null $jsvarargs.Main))
  (local $return.value (ref null $jsvarargs.Main))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; jsvarargs.Main.$clinit();
    (call $$clinit__void@jsvarargs.Main )
-   ;; return ((Main) (List<Main> $qualifier = ((List<Main>) elements[0]),$qualifier.get(0)));
-   (local.set $return.value (ref.cast $java.lang.Object $jsvarargs.Main (block (result (ref null $java.lang.Object))
+   ;; return (Object $cast_expression = (List<Main> $qualifier = (Object $cast_expression = elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((List<Main>) $cast_expression))),$qualifier.get(0)),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Main) $cast_expression)));
+   (local.set $return.value (block (result (ref null $jsvarargs.Main))
     
-    (local.set $$qualifier (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)))
-    (ref.null $jsvarargs.Main)
-   ) (global.get $jsvarargs.Main.rtt)))
+    (local.set $$cast_expression (block (result (ref null $java.lang.Object))
+     
+     (local.set $$qualifier (block (result (ref null $java.lang.Object))
+      
+      (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)))
+      (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_1)))
+     ))
+     (ref.null $jsvarargs.Main)
+    ))
+    (if (result (ref null $jsvarargs.Main)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $jsvarargs.Main)) (else (ref.cast $java.lang.Object $jsvarargs.Main (local.get $$cast_expression) (global.get $jsvarargs.Main.rtt))))
+   ))
    (br $return.label)
   )
  )
@@ -214,14 +229,19 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; jsvarargs.Main.$clinit();
    (call $$clinit__void@jsvarargs.Main )
-   ;; return (List<T> $qualifier = ((List<T>) elements[0]),$qualifier.get(0));
+   ;; return (List<T> $qualifier = (Object $cast_expression = elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((List<T>) $cast_expression))),$qualifier.get(0));
    (local.set $return.value (block (result (ref null $java.lang.Object))
     
-    (local.set $$qualifier (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)))
+    (local.set $$qualifier (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
+    ))
     (ref.null $java.lang.Object)
    ))
    (br $return.label)
@@ -1020,12 +1040,17 @@
  (param $args (ref null $Object.array))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsvarargs.Main.AFunction))
  (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main.AFunction (local.get $this.untyped) (global.get $jsvarargs.Main.AFunction.rtt)))
  (block $return.label
   (block
-   ;; return ((Object) args[i]);
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.Object (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $args)) (local.get $i)) (global.get $java.lang.Object.rtt)))
+   ;; return (Object $cast_expression = args[i],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
+   (local.set $return.value (block (result (ref null $java.lang.Object))
+    
+    (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $args)) (local.get $i)))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
+   ))
    (br $return.label)
   )
  )

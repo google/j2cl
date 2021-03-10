@@ -206,6 +206,7 @@
  (local $$array_literal (ref null $Object.array))
  (local $$array_literal_1 (ref null $char.array))
  (local $s (ref null $java.lang.String))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $genericmethod.GenericMethod))
  (local.set $this (ref.cast $java.lang.Object $genericmethod.GenericMethod (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
  (block $return.label
@@ -238,9 +239,13 @@
     )))
     (local.get $$array_literal)
    )(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
-   ;; String s = ((String) GenericMethod.this.checked());
+   ;; String s = (Object $cast_expression = GenericMethod.this.checked(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression)));
    
-   (local.set $s (ref.cast $java.lang.Object $java.lang.String (call_ref (local.get $this)(struct.get $genericmethod.GenericMethod.vtable $m_checked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
+   (local.set $s (block (result (ref null $java.lang.String))
+    
+    (local.set $$cast_expression (call_ref (local.get $this)(struct.get $genericmethod.GenericMethod.vtable $m_checked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this)))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+   ))
    ;; (s = /** @type {String} */ (GenericMethod.this.unchecked()));
    (local.set $s (ref.null $java.lang.String))
   )
@@ -275,14 +280,17 @@
  (local $list (ref null $java.lang.Object))
  (local $content (ref null $genericmethod.GenericMethod.Content))
  (local $$qualifier (ref null $genericmethod.GenericMethod.Container))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $nestedWildcardList (ref null $java.lang.Object))
  (local $nestedContent (ref null $genericmethod.GenericMethod.Content))
  (local $$qualifier_1 (ref null $genericmethod.GenericMethod.Container))
  (local $$qualifier_2 (ref null $genericmethod.GenericMethod.SuperContainer))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $deepWildcardList (ref null $java.lang.Object))
  (local $deepContent (ref null $genericmethod.GenericMethod.Content))
  (local $$qualifier_3 (ref null $genericmethod.GenericMethod.Container))
  (local $$qualifier_4 (ref null $genericmethod.GenericMethod.SuperContainer))
+ (local $$cast_expression_2 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; genericmethod.GenericMethod.$clinit();
@@ -290,11 +298,15 @@
    ;; List<Container<?>> list = null;
    
    (local.set $list (ref.null $java.lang.Object))
-   ;; Content content = (Container<?> $qualifier = ((Container<?>) list.get(0)),$qualifier.get());
+   ;; Content content = (Container<?> $qualifier = (Object $cast_expression = list.get(0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Container<?>) $cast_expression))),$qualifier.get());
    
    (local.set $content (block (result (ref null $genericmethod.GenericMethod.Content))
     
-    (local.set $$qualifier (ref.cast $java.lang.Object $genericmethod.GenericMethod.Container (ref.null $genericmethod.GenericMethod.Container) (global.get $genericmethod.GenericMethod.Container.rtt)))
+    (local.set $$qualifier (block (result (ref null $genericmethod.GenericMethod.Container))
+     
+     (local.set $$cast_expression (ref.null $genericmethod.GenericMethod.Container))
+     (if (result (ref null $genericmethod.GenericMethod.Container)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $genericmethod.GenericMethod.Container)) (else (ref.cast $java.lang.Object $genericmethod.GenericMethod.Container (local.get $$cast_expression) (global.get $genericmethod.GenericMethod.Container.rtt))))
+    ))
     (call_ref (local.get $$qualifier)(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier))))
    ))
    ;; genericmethod.GenericMethod.acceptsString(content.getProp());
@@ -304,13 +316,17 @@
    ;; List<SuperContainer<? extends Container<? extends Content>>> nestedWildcardList = null;
    
    (local.set $nestedWildcardList (ref.null $java.lang.Object))
-   ;; Content nestedContent = ( $qualifier = (SuperContainer<? extends Container<? extends Content>> $qualifier = ((SuperContainer<? extends Container<? extends Content>>) nestedWildcardList.get(0)),$qualifier.get()),$qualifier.get());
+   ;; Content nestedContent = ( $qualifier = (SuperContainer<? extends Container<? extends Content>> $qualifier = (Object $cast_expression = nestedWildcardList.get(0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SuperContainer<? extends Container<? extends Content>>) $cast_expression))),$qualifier.get()),$qualifier.get());
    
    (local.set $nestedContent (block (result (ref null $genericmethod.GenericMethod.Content))
     
     (local.set $$qualifier_1 (block (result (ref null $genericmethod.GenericMethod.Container))
      
-     (local.set $$qualifier_2 (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (ref.null $genericmethod.GenericMethod.SuperContainer) (global.get $genericmethod.GenericMethod.SuperContainer.rtt)))
+     (local.set $$qualifier_2 (block (result (ref null $genericmethod.GenericMethod.SuperContainer))
+      
+      (local.set $$cast_expression_1 (ref.null $genericmethod.GenericMethod.SuperContainer))
+      (if (result (ref null $genericmethod.GenericMethod.SuperContainer)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $genericmethod.GenericMethod.SuperContainer)) (else (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (local.get $$cast_expression_1) (global.get $genericmethod.GenericMethod.SuperContainer.rtt))))
+     ))
      (call_ref (local.get $$qualifier_2)(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_2))))
     ))
     (call_ref (local.get $$qualifier_1)(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_1))))
@@ -322,13 +338,17 @@
    ;; List<SuperContainer<Container<? extends Content>>> deepWildcardList = null;
    
    (local.set $deepWildcardList (ref.null $java.lang.Object))
-   ;; Content deepContent = (Container<? extends Content> $qualifier = (SuperContainer<Container<? extends Content>> $qualifier = ((SuperContainer<Container<? extends Content>>) deepWildcardList.get(0)),$qualifier.get()),$qualifier.get());
+   ;; Content deepContent = (Container<? extends Content> $qualifier = (SuperContainer<Container<? extends Content>> $qualifier = (Object $cast_expression = deepWildcardList.get(0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SuperContainer<Container<? extends Content>>) $cast_expression))),$qualifier.get()),$qualifier.get());
    
    (local.set $deepContent (block (result (ref null $genericmethod.GenericMethod.Content))
     
     (local.set $$qualifier_3 (block (result (ref null $genericmethod.GenericMethod.Container))
      
-     (local.set $$qualifier_4 (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (ref.null $genericmethod.GenericMethod.SuperContainer) (global.get $genericmethod.GenericMethod.SuperContainer.rtt)))
+     (local.set $$qualifier_4 (block (result (ref null $genericmethod.GenericMethod.SuperContainer))
+      
+      (local.set $$cast_expression_2 (ref.null $genericmethod.GenericMethod.SuperContainer))
+      (if (result (ref null $genericmethod.GenericMethod.SuperContainer)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $genericmethod.GenericMethod.SuperContainer)) (else (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (local.get $$cast_expression_2) (global.get $genericmethod.GenericMethod.SuperContainer.rtt))))
+     ))
      (call_ref (local.get $$qualifier_4)(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_4))))
     ))
     (call_ref (local.get $$qualifier_3)(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_3))))
@@ -346,14 +366,17 @@
  (local $list (ref null $java.lang.Object))
  (local $content (ref null $genericmethod.GenericMethod.Content))
  (local $$qualifier (ref null $genericmethod.GenericMethod.Container))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $nestedTypeVariableList (ref null $java.lang.Object))
  (local $nestedContent (ref null $genericmethod.GenericMethod.Content))
  (local $$qualifier_1 (ref null $genericmethod.GenericMethod.Container))
  (local $$qualifier_2 (ref null $genericmethod.GenericMethod.SuperContainer))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $deepTypeVariableList (ref null $java.lang.Object))
  (local $deepContent (ref null $genericmethod.GenericMethod.Content))
  (local $$qualifier_3 (ref null $genericmethod.GenericMethod.Container))
  (local $$qualifier_4 (ref null $genericmethod.GenericMethod.SuperContainer))
+ (local $$cast_expression_2 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; genericmethod.GenericMethod.$clinit();
@@ -361,11 +384,15 @@
    ;; List<Container<C>> list = null;
    
    (local.set $list (ref.null $java.lang.Object))
-   ;; Content content = (Container<C> $qualifier = ((Container<C>) list.get(0)),$qualifier.get());
+   ;; Content content = (Container<C> $qualifier = (Object $cast_expression = list.get(0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Container<C>) $cast_expression))),$qualifier.get());
    
    (local.set $content (block (result (ref null $genericmethod.GenericMethod.Content))
     
-    (local.set $$qualifier (ref.cast $java.lang.Object $genericmethod.GenericMethod.Container (ref.null $genericmethod.GenericMethod.Container) (global.get $genericmethod.GenericMethod.Container.rtt)))
+    (local.set $$qualifier (block (result (ref null $genericmethod.GenericMethod.Container))
+     
+     (local.set $$cast_expression (ref.null $genericmethod.GenericMethod.Container))
+     (if (result (ref null $genericmethod.GenericMethod.Container)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $genericmethod.GenericMethod.Container)) (else (ref.cast $java.lang.Object $genericmethod.GenericMethod.Container (local.get $$cast_expression) (global.get $genericmethod.GenericMethod.Container.rtt))))
+    ))
     (call_ref (local.get $$qualifier)(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier))))
    ))
    ;; genericmethod.GenericMethod.acceptsString(content.getProp());
@@ -375,13 +402,17 @@
    ;; List<SuperContainer<CT>> nestedTypeVariableList = null;
    
    (local.set $nestedTypeVariableList (ref.null $java.lang.Object))
-   ;; Content nestedContent = (CT $qualifier = (SuperContainer<CT> $qualifier = ((SuperContainer<CT>) nestedTypeVariableList.get(0)),$qualifier.get()),$qualifier.get());
+   ;; Content nestedContent = (CT $qualifier = (SuperContainer<CT> $qualifier = (Object $cast_expression = nestedTypeVariableList.get(0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SuperContainer<CT>) $cast_expression))),$qualifier.get()),$qualifier.get());
    
    (local.set $nestedContent (block (result (ref null $genericmethod.GenericMethod.Content))
     
     (local.set $$qualifier_1 (block (result (ref null $genericmethod.GenericMethod.Container))
      
-     (local.set $$qualifier_2 (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (ref.null $genericmethod.GenericMethod.SuperContainer) (global.get $genericmethod.GenericMethod.SuperContainer.rtt)))
+     (local.set $$qualifier_2 (block (result (ref null $genericmethod.GenericMethod.SuperContainer))
+      
+      (local.set $$cast_expression_1 (ref.null $genericmethod.GenericMethod.SuperContainer))
+      (if (result (ref null $genericmethod.GenericMethod.SuperContainer)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $genericmethod.GenericMethod.SuperContainer)) (else (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (local.get $$cast_expression_1) (global.get $genericmethod.GenericMethod.SuperContainer.rtt))))
+     ))
      (call_ref (local.get $$qualifier_2)(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_2))))
     ))
     (call_ref (local.get $$qualifier_1)(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_1))))
@@ -393,13 +424,17 @@
    ;; List<SuperContainer<Container<C>>> deepTypeVariableList = null;
    
    (local.set $deepTypeVariableList (ref.null $java.lang.Object))
-   ;; Content deepContent = (Container<C> $qualifier = (SuperContainer<Container<C>> $qualifier = ((SuperContainer<Container<C>>) deepTypeVariableList.get(0)),$qualifier.get()),$qualifier.get());
+   ;; Content deepContent = (Container<C> $qualifier = (SuperContainer<Container<C>> $qualifier = (Object $cast_expression = deepTypeVariableList.get(0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SuperContainer<Container<C>>) $cast_expression))),$qualifier.get()),$qualifier.get());
    
    (local.set $deepContent (block (result (ref null $genericmethod.GenericMethod.Content))
     
     (local.set $$qualifier_3 (block (result (ref null $genericmethod.GenericMethod.Container))
      
-     (local.set $$qualifier_4 (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (ref.null $genericmethod.GenericMethod.SuperContainer) (global.get $genericmethod.GenericMethod.SuperContainer.rtt)))
+     (local.set $$qualifier_4 (block (result (ref null $genericmethod.GenericMethod.SuperContainer))
+      
+      (local.set $$cast_expression_2 (ref.null $genericmethod.GenericMethod.SuperContainer))
+      (if (result (ref null $genericmethod.GenericMethod.SuperContainer)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $genericmethod.GenericMethod.SuperContainer)) (else (ref.cast $java.lang.Object $genericmethod.GenericMethod.SuperContainer (local.get $$cast_expression_2) (global.get $genericmethod.GenericMethod.SuperContainer.rtt))))
+     ))
      (call_ref (local.get $$qualifier_4)(struct.get $genericmethod.GenericMethod.SuperContainer.vtable $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (struct.get $genericmethod.GenericMethod.SuperContainer $vtable(local.get $$qualifier_4))))
     ))
     (call_ref (local.get $$qualifier_3)(struct.get $genericmethod.GenericMethod.Container.vtable $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (struct.get $genericmethod.GenericMethod.Container $vtable(local.get $$qualifier_3))))

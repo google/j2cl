@@ -129,56 +129,94 @@
 ;;; void CastGenerics.testErasureCast()
 (func $m_testErasureCast__void@cast.CastGenerics
  (local $str (ref null $java.lang.String))
+ (local $$cast_expression (ref null $java.lang.Object))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $$qualifier (ref null $cast.CastGenerics))
  (local $containerT (ref null $cast.CastGenerics.Container))
  (local $$qualifier_1 (ref null $java.lang.Object))
+ (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $$qualifier_2 (ref null $java.lang.Object))
+ (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $containerU (ref null $cast.CastGenerics.Container))
  (local $$qualifier_3 (ref null $java.lang.Object))
+ (local $$cast_expression_4 (ref null $java.lang.Object))
  (local $$qualifier_4 (ref null $java.lang.Object))
+ (local $$cast_expression_5 (ref null $java.lang.Object))
  (local $containerArrT (ref null $cast.CastGenerics.Container))
  (local $arrT (ref null $Object.array))
+ (local $$cast_expression_6 (ref null $java.lang.Object))
  (local $$qualifier_5 (ref null $java.lang.Object))
+ (local $$cast_expression_7 (ref null $java.lang.Object))
  (local $$qualifier_6 (ref null $java.lang.Object))
+ (local $$cast_expression_8 (ref null $java.lang.Object))
+ (local $$cast_expression_9 (ref null $java.lang.Object))
  (local $arrA (ref null $Object.array))
+ (local $$cast_expression_10 (ref null $java.lang.Object))
  (local $arrB (ref null $Object.array))
+ (local $$cast_expression_11 (ref null $java.lang.Object))
  (local $containerArrU (ref null $cast.CastGenerics.Container))
  (local $arrU (ref null $Object.array))
+ (local $$cast_expression_12 (ref null $java.lang.Object))
  (local $$qualifier_7 (ref null $java.lang.Object))
+ (local $$cast_expression_13 (ref null $java.lang.Object))
  (local $$qualifier_8 (ref null $java.lang.Object))
+ (local $$cast_expression_14 (ref null $java.lang.Object))
+ (local $$cast_expression_15 (ref null $java.lang.Object))
+ (local $$cast_expression_16 (ref null $java.lang.Object))
+ (local $$cast_expression_17 (ref null $java.lang.Object))
  (local $containerBase (ref null $cast.CastGenerics.Container))
  (local $$qualifier_9 (ref null $cast.CastGenerics.BaseImplementor))
+ (local $$cast_expression_18 (ref null $java.lang.Object))
  (local $$qualifier_10 (ref null $cast.CastGenerics.BaseImplementor))
+ (local $$cast_expression_19 (ref null $java.lang.Object))
  (local $containerImplementor (ref null $cast.CastGenerics.Container))
  (local $$qualifier_11 (ref null $cast.CastGenerics.Implementor))
+ (local $$cast_expression_20 (ref null $java.lang.Object))
  (local $$qualifier_12 (ref null $cast.CastGenerics.Implementor))
+ (local $$cast_expression_21 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; cast.CastGenerics.$clinit();
    (call $$clinit__void@cast.CastGenerics )
-   ;; String str = ((String) new CastGenerics.<init>().field);
+   ;; String str = (Object $cast_expression = new CastGenerics.<init>().field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression)));
    
-   (local.set $str (ref.cast $java.lang.Object $java.lang.String (struct.get $cast.CastGenerics $f_field__cast_CastGenerics(call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
-   ;; (str = ((String) (CastGenerics<String, Number> $qualifier = new CastGenerics.<init>(),$qualifier.method())));
-   (local.set $str (ref.cast $java.lang.Object $java.lang.String (block (result (ref null $java.lang.Object))
+   (local.set $str (block (result (ref null $java.lang.String))
     
-    (local.set $$qualifier (call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt))))
-    (call_ref (local.get $$qualifier)(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
-   ) (global.get $java.lang.String.rtt)))
+    (local.set $$cast_expression (struct.get $cast.CastGenerics $f_field__cast_CastGenerics(call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+   ))
+   ;; (str = (Object $cast_expression = (CastGenerics<String, Number> $qualifier = new CastGenerics.<init>(),$qualifier.method()),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
+   (local.set $str (block (result (ref null $java.lang.String))
+    
+    (local.set $$cast_expression_1 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$qualifier (call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (global.get $cast.CastGenerics.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt))))
+     (call_ref (local.get $$qualifier)(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
+    ))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
+   ))
    ;; Container<T> containerT = null;
    
    (local.set $containerT (ref.null $cast.CastGenerics.Container))
    (block
-    ;; A $qualifier = ((A) containerT.get());
+    ;; A $qualifier = (Object $cast_expression = containerT.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((A) $cast_expression)));
     
-    (local.set $$qualifier_1 (call_ref (local.get $containerT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+    (local.set $$qualifier_1 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_2 (call_ref (local.get $containerT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_2)))
+    ))
     ;; $qualifier.mA();
     
    )
    (block
-    ;; B $qualifier = ((B) containerT.get());
+    ;; B $qualifier = (Object $cast_expression = containerT.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((B) $cast_expression)));
     
-    (local.set $$qualifier_2 (call_ref (local.get $containerT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+    (local.set $$qualifier_2 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_3 (call_ref (local.get $containerT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerT)))))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_3)))
+    ))
     ;; $qualifier.mB();
     
    )
@@ -186,83 +224,147 @@
    
    (local.set $containerU (ref.null $cast.CastGenerics.Container))
    (block
-    ;; A $qualifier = ((A) containerU.get());
+    ;; A $qualifier = (Object $cast_expression = containerU.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((A) $cast_expression)));
     
-    (local.set $$qualifier_3 (call_ref (local.get $containerU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+    (local.set $$qualifier_3 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_4 (call_ref (local.get $containerU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_4)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_4)))
+    ))
     ;; $qualifier.mA();
     
    )
    (block
-    ;; B $qualifier = ((B) containerU.get());
+    ;; B $qualifier = (Object $cast_expression = containerU.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((B) $cast_expression)));
     
-    (local.set $$qualifier_4 (call_ref (local.get $containerU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+    (local.set $$qualifier_4 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_5 (call_ref (local.get $containerU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerU)))))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_5)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_5)))
+    ))
     ;; $qualifier.mB();
     
    )
    ;; Container<T[]> containerArrT = null;
    
    (local.set $containerArrT (ref.null $cast.CastGenerics.Container))
-   ;; T[] arrT = ((T[]) containerArrT.get());
+   ;; T[] arrT = (Object $cast_expression = containerArrT.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T[]) $cast_expression)));
    
-   (local.set $arrT (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))) (global.get $Object.array.rtt)))
-   (block
-    ;; T $qualifier = ((T) arrT[0]);
+   (local.set $arrT (block (result (ref null $Object.array))
     
-    (local.set $$qualifier_5 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrT)) (i32.const 0)))
+    (local.set $$cast_expression_6 (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_6)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_6) (global.get $Object.array.rtt))))
+   ))
+   (block
+    ;; T $qualifier = (Object $cast_expression = arrT[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression)));
+    
+    (local.set $$qualifier_5 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_7 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrT)) (i32.const 0)))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_7)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_7)))
+    ))
     ;; $qualifier.mA();
     
    )
    (block
-    ;; B $qualifier = ((B) ((T) arrT[0]));
+    ;; B $qualifier = (Object $cast_expression = (Object $cast_expression = arrT[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression))),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((B) $cast_expression)));
     
-    (local.set $$qualifier_6 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrT)) (i32.const 0)))
+    (local.set $$qualifier_6 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_8 (block (result (ref null $java.lang.Object))
+      
+      (local.set $$cast_expression_9 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrT)) (i32.const 0)))
+      (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_9)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_9)))
+     ))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_8)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_8)))
+    ))
     ;; $qualifier.mB();
     
    )
-   ;; A[] arrA = ((A[]) containerArrT.get());
+   ;; A[] arrA = (Object $cast_expression = containerArrT.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((A[]) $cast_expression)));
    
-   (local.set $arrA (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))) (global.get $Object.array.rtt)))
-   ;; B[] arrB = ((B[]) containerArrT.get());
+   (local.set $arrA (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_10 (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_10)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_10) (global.get $Object.array.rtt))))
+   ))
+   ;; B[] arrB = (Object $cast_expression = containerArrT.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((B[]) $cast_expression)));
    
-   (local.set $arrB (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))) (global.get $Object.array.rtt)))
+   (local.set $arrB (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_11 (call_ref (local.get $containerArrT)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrT)))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_11)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_11) (global.get $Object.array.rtt))))
+   ))
    ;; Container<U[]> containerArrU = null;
    
    (local.set $containerArrU (ref.null $cast.CastGenerics.Container))
-   ;; U[] arrU = ((U[]) containerArrU.get());
+   ;; U[] arrU = (Object $cast_expression = containerArrU.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((U[]) $cast_expression)));
    
-   (local.set $arrU (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))) (global.get $Object.array.rtt)))
-   (block
-    ;; U $qualifier = ((U) arrU[0]);
+   (local.set $arrU (block (result (ref null $Object.array))
     
-    (local.set $$qualifier_7 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrU)) (i32.const 0)))
+    (local.set $$cast_expression_12 (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_12)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_12) (global.get $Object.array.rtt))))
+   ))
+   (block
+    ;; U $qualifier = (Object $cast_expression = arrU[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((U) $cast_expression)));
+    
+    (local.set $$qualifier_7 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_13 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrU)) (i32.const 0)))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_13)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_13)))
+    ))
     ;; $qualifier.mA();
     
    )
    (block
-    ;; B $qualifier = ((B) ((U) arrU[0]));
+    ;; B $qualifier = (Object $cast_expression = (Object $cast_expression = arrU[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((U) $cast_expression))),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((B) $cast_expression)));
     
-    (local.set $$qualifier_8 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrU)) (i32.const 0)))
+    (local.set $$qualifier_8 (block (result (ref null $java.lang.Object))
+     
+     (local.set $$cast_expression_14 (block (result (ref null $java.lang.Object))
+      
+      (local.set $$cast_expression_15 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $arrU)) (i32.const 0)))
+      (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_15)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_15)))
+     ))
+     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_14)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_14)))
+    ))
     ;; $qualifier.mB();
     
    )
-   ;; (arrA = ((A[]) containerArrU.get()));
-   (local.set $arrA (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))) (global.get $Object.array.rtt)))
-   ;; (arrB = ((B[]) containerArrU.get()));
-   (local.set $arrB (ref.cast $java.lang.Object $Object.array (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))) (global.get $Object.array.rtt)))
+   ;; (arrA = (Object $cast_expression = containerArrU.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((A[]) $cast_expression))));
+   (local.set $arrA (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_16 (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_16)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_16) (global.get $Object.array.rtt))))
+   ))
+   ;; (arrB = (Object $cast_expression = containerArrU.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((B[]) $cast_expression))));
+   (local.set $arrB (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_17 (call_ref (local.get $containerArrU)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerArrU)))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_17)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_17) (global.get $Object.array.rtt))))
+   ))
    ;; Container<BaseImplementor> containerBase = null;
    
    (local.set $containerBase (ref.null $cast.CastGenerics.Container))
    (block
-    ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
+    ;; BaseImplementor $qualifier = (Object $cast_expression = containerBase.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((BaseImplementor) $cast_expression)));
     
-    (local.set $$qualifier_9 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
+    (local.set $$qualifier_9 (block (result (ref null $cast.CastGenerics.BaseImplementor))
+     
+     (local.set $$cast_expression_18 (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))))
+     (if (result (ref null $cast.CastGenerics.BaseImplementor)) (ref.is_null (local.get $$cast_expression_18)) (then (ref.null $cast.CastGenerics.BaseImplementor)) (else (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (local.get $$cast_expression_18) (global.get $cast.CastGenerics.BaseImplementor.rtt))))
+    ))
     ;; $qualifier.mA();
     
    )
    (block
-    ;; BaseImplementor $qualifier = ((BaseImplementor) containerBase.get());
+    ;; BaseImplementor $qualifier = (Object $cast_expression = containerBase.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((BaseImplementor) $cast_expression)));
     
-    (local.set $$qualifier_10 (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
+    (local.set $$qualifier_10 (block (result (ref null $cast.CastGenerics.BaseImplementor))
+     
+     (local.set $$cast_expression_19 (call_ref (local.get $containerBase)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerBase)))))
+     (if (result (ref null $cast.CastGenerics.BaseImplementor)) (ref.is_null (local.get $$cast_expression_19)) (then (ref.null $cast.CastGenerics.BaseImplementor)) (else (ref.cast $java.lang.Object $cast.CastGenerics.BaseImplementor (local.get $$cast_expression_19) (global.get $cast.CastGenerics.BaseImplementor.rtt))))
+    ))
     ;; $qualifier.mB();
     
    )
@@ -270,16 +372,24 @@
    
    (local.set $containerImplementor (ref.null $cast.CastGenerics.Container))
    (block
-    ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
+    ;; Implementor $qualifier = (Object $cast_expression = containerImplementor.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Implementor) $cast_expression)));
     
-    (local.set $$qualifier_11 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
+    (local.set $$qualifier_11 (block (result (ref null $cast.CastGenerics.Implementor))
+     
+     (local.set $$cast_expression_20 (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))))
+     (if (result (ref null $cast.CastGenerics.Implementor)) (ref.is_null (local.get $$cast_expression_20)) (then (ref.null $cast.CastGenerics.Implementor)) (else (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (local.get $$cast_expression_20) (global.get $cast.CastGenerics.Implementor.rtt))))
+    ))
     ;; $qualifier.mA();
     (call_ref (local.get $$qualifier_11)(struct.get $cast.CastGenerics.Implementor.vtable $m_mA__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_11))))
    )
    (block
-    ;; Implementor $qualifier = ((Implementor) containerImplementor.get());
+    ;; Implementor $qualifier = (Object $cast_expression = containerImplementor.get(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Implementor) $cast_expression)));
     
-    (local.set $$qualifier_12 (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))) (global.get $cast.CastGenerics.Implementor.rtt)))
+    (local.set $$qualifier_12 (block (result (ref null $cast.CastGenerics.Implementor))
+     
+     (local.set $$cast_expression_21 (call_ref (local.get $containerImplementor)(struct.get $cast.CastGenerics.Container.vtable $m_get__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics.Container $vtable(local.get $containerImplementor)))))
+     (if (result (ref null $cast.CastGenerics.Implementor)) (ref.is_null (local.get $$cast_expression_21)) (then (ref.null $cast.CastGenerics.Implementor)) (else (ref.cast $java.lang.Object $cast.CastGenerics.Implementor (local.get $$cast_expression_21) (global.get $cast.CastGenerics.Implementor.rtt))))
+    ))
     ;; $qualifier.mB();
     (call_ref (local.get $$qualifier_12)(struct.get $cast.CastGenerics.Implementor.vtable $m_mB__void (struct.get $cast.CastGenerics.Implementor $vtable(local.get $$qualifier_12))))
    )
@@ -291,6 +401,8 @@
 (func $m_testCastToParamterizedType__void@cast.CastGenerics
  (local $o (ref null $java.lang.Object))
  (local $cc (ref null $cast.CastGenerics))
+ (local $$cast_expression (ref null $java.lang.Object))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; cast.CastGenerics.$clinit();
@@ -298,11 +410,19 @@
    ;; Object o = new Integer.<init>(1);
    
    (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
-   ;; CastGenerics<Error, Number> cc = ((CastGenerics<Error, Number>) o);
+   ;; CastGenerics<Error, Number> cc = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((CastGenerics<Error, Number>) $cast_expression)));
    
-   (local.set $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
-   ;; (cc = ((CastGenerics) o));
-   (local.set $cc (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
+   (local.set $cc (block (result (ref null $cast.CastGenerics))
+    
+    (local.set $$cast_expression (local.get $o))
+    (if (result (ref null $cast.CastGenerics)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $cast.CastGenerics)) (else (ref.cast $java.lang.Object $cast.CastGenerics (local.get $$cast_expression) (global.get $cast.CastGenerics.rtt))))
+   ))
+   ;; (cc = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((CastGenerics) $cast_expression))));
+   (local.set $cc (block (result (ref null $cast.CastGenerics))
+    
+    (local.set $$cast_expression_1 (local.get $o))
+    (if (result (ref null $cast.CastGenerics)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $cast.CastGenerics)) (else (ref.cast $java.lang.Object $cast.CastGenerics (local.get $$cast_expression_1) (global.get $cast.CastGenerics.rtt))))
+   ))
   )
  )
 )
@@ -312,9 +432,13 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $e (ref null $java.lang.Number))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Object))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $es (ref null $Object.array))
+ (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $ts (ref null $Object.array))
+ (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
@@ -322,18 +446,34 @@
    ;; Object o = new Integer.<init>(1);
    
    (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
-   ;; E e = ((E) o);
+   ;; E e = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((E) $cast_expression)));
    
-   (local.set $e (ref.cast $java.lang.Object $java.lang.Number (local.get $o) (global.get $java.lang.Number.rtt)))
-   ;; T t = ((T) o);
+   (local.set $e (block (result (ref null $java.lang.Number))
+    
+    (local.set $$cast_expression (local.get $o))
+    (if (result (ref null $java.lang.Number)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Number)) (else (ref.cast $java.lang.Object $java.lang.Number (local.get $$cast_expression) (global.get $java.lang.Number.rtt))))
+   ))
+   ;; T t = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression)));
    
-   (local.set $t (ref.cast $java.lang.Object $java.lang.Object (local.get $o) (global.get $java.lang.Object.rtt)))
-   ;; E[] es = ((E[]) o);
+   (local.set $t (block (result (ref null $java.lang.Object))
+    
+    (local.set $$cast_expression_1 (local.get $o))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression_1) (global.get $java.lang.Object.rtt))))
+   ))
+   ;; E[] es = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((E[]) $cast_expression)));
    
-   (local.set $es (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
-   ;; T[] ts = ((T[]) o);
+   (local.set $es (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_2 (local.get $o))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+   ))
+   ;; T[] ts = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T[]) $cast_expression)));
    
-   (local.set $ts (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
+   (local.set $ts (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_3 (local.get $o))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
+   ))
   )
  )
 )
@@ -344,7 +484,11 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Object))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
+ (local $$cast_expression_2 (ref null $java.lang.Object))
+ (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
@@ -352,16 +496,32 @@
    ;; Object o = new Integer.<init>(1);
    
    (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
-   ;; S s = ((S) o);
+   ;; S s = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((S) $cast_expression)));
    
-   (local.set $s (ref.cast $java.lang.Object $java.lang.Object (local.get $o) (global.get $java.lang.Object.rtt)))
-   ;; Object c = ((CastGenerics<S, Number>) o);
+   (local.set $s (block (result (ref null $java.lang.Object))
+    
+    (local.set $$cast_expression (local.get $o))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
+   ))
+   ;; Object c = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((CastGenerics<S, Number>) $cast_expression)));
    
-   (local.set $c (ref.cast $java.lang.Object $cast.CastGenerics (local.get $o) (global.get $cast.CastGenerics.rtt)))
-   ;; (c = ((S[]) o));
-   (local.set $c (ref.cast $java.lang.Object $Object.array (local.get $o) (global.get $Object.array.rtt)))
-   ;; (c = ((V) o));
-   (local.set $c (ref.cast $java.lang.Object $java.lang.Enum (local.get $o) (global.get $java.lang.Enum.rtt)))
+   (local.set $c (block (result (ref null $cast.CastGenerics))
+    
+    (local.set $$cast_expression_1 (local.get $o))
+    (if (result (ref null $cast.CastGenerics)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $cast.CastGenerics)) (else (ref.cast $java.lang.Object $cast.CastGenerics (local.get $$cast_expression_1) (global.get $cast.CastGenerics.rtt))))
+   ))
+   ;; (c = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((S[]) $cast_expression))));
+   (local.set $c (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_2 (local.get $o))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+   ))
+   ;; (c = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((V) $cast_expression))));
+   (local.set $c (block (result (ref null $java.lang.Enum))
+    
+    (local.set $$cast_expression_3 (local.get $o))
+    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $java.lang.Enum)) (else (ref.cast $java.lang.Object $java.lang.Enum (local.get $$cast_expression_3) (global.get $java.lang.Enum.rtt))))
+   ))
   )
  )
 )
@@ -385,6 +545,7 @@
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast $java.lang.Object $cast.CastGenerics (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block $return.label
@@ -393,8 +554,12 @@
    (if (i32.const 0)
     (then
      (block
-      ;; return ((EE) o);
-      (local.set $return.value (local.get $o))
+      ;; return (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((EE) $cast_expression)));
+      (local.set $return.value (block (result (ref null $java.lang.Object))
+       
+       (local.set $$cast_expression (local.get $o))
+       (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
+      ))
       (br $return.label)
      )
     )
@@ -696,11 +861,16 @@
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $o (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Enum))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
-   ;; TT t = ((TT) o);
+   ;; TT t = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((TT) $cast_expression)));
    
-   (local.set $t (ref.cast $java.lang.Object $java.lang.Enum (local.get $o) (global.get $java.lang.Enum.rtt)))
+   (local.set $t (block (result (ref null $java.lang.Enum))
+    
+    (local.set $$cast_expression (local.get $o))
+    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Enum)) (else (ref.cast $java.lang.Object $java.lang.Enum (local.get $$cast_expression) (global.get $java.lang.Enum.rtt))))
+   ))
   )
  )
 )
@@ -1482,6 +1652,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $c (ref null $cast.Casts))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
@@ -1489,9 +1660,13 @@
    ;; Object o = new Object.<init>();
    
    (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   ;; Casts c = ((Casts) o);
+   ;; Casts c = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Casts) $cast_expression)));
    
-   (local.set $c (ref.cast $java.lang.Object $cast.Casts (local.get $o) (global.get $cast.Casts.rtt)))
+   (local.set $c (block (result (ref null $cast.Casts))
+    
+    (local.set $$cast_expression (local.get $o))
+    (if (result (ref null $cast.Casts)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $cast.Casts)) (else (ref.cast $java.lang.Object $cast.Casts (local.get $$cast_expression) (global.get $cast.Casts.rtt))))
+   ))
   )
  )
 )
@@ -1502,6 +1677,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
@@ -1509,9 +1685,13 @@
    ;; Object o = new Object.<init>();
    
    (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   ;; Serializable s = ((Serializable) o);
+   ;; Serializable s = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Serializable) $cast_expression)));
    
-   (local.set $s (local.get $o))
+   (local.set $s (block (result (ref null $java.lang.Object))
+    
+    (local.set $$cast_expression (local.get $o))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
+   ))
   )
  )
 )
@@ -1522,14 +1702,23 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $b (ref null $java.lang.Byte))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $d (ref null $java.lang.Double))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $f (ref null $java.lang.Float))
+ (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $i (ref null $java.lang.Integer))
+ (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $l (ref null $java.lang.Long))
+ (local $$cast_expression_4 (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Short))
+ (local $$cast_expression_5 (ref null $java.lang.Object))
  (local $n (ref null $java.lang.Number))
+ (local $$cast_expression_6 (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Character))
+ (local $$cast_expression_7 (ref null $java.lang.Object))
  (local $bool (ref null $java.lang.Boolean))
+ (local $$cast_expression_8 (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
@@ -1537,33 +1726,69 @@
    ;; Object o = new Integer.<init>(1);
    
    (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
-   ;; Byte b = ((Byte) o);
+   ;; Byte b = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Byte) $cast_expression)));
    
-   (local.set $b (ref.cast $java.lang.Object $java.lang.Byte (local.get $o) (global.get $java.lang.Byte.rtt)))
-   ;; Double d = ((Double) o);
+   (local.set $b (block (result (ref null $java.lang.Byte))
+    
+    (local.set $$cast_expression (local.get $o))
+    (if (result (ref null $java.lang.Byte)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Byte)) (else (ref.cast $java.lang.Object $java.lang.Byte (local.get $$cast_expression) (global.get $java.lang.Byte.rtt))))
+   ))
+   ;; Double d = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Double) $cast_expression)));
    
-   (local.set $d (ref.cast $java.lang.Object $java.lang.Double (local.get $o) (global.get $java.lang.Double.rtt)))
-   ;; Float f = ((Float) o);
+   (local.set $d (block (result (ref null $java.lang.Double))
+    
+    (local.set $$cast_expression_1 (local.get $o))
+    (if (result (ref null $java.lang.Double)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Double)) (else (ref.cast $java.lang.Object $java.lang.Double (local.get $$cast_expression_1) (global.get $java.lang.Double.rtt))))
+   ))
+   ;; Float f = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Float) $cast_expression)));
    
-   (local.set $f (ref.cast $java.lang.Object $java.lang.Float (local.get $o) (global.get $java.lang.Float.rtt)))
-   ;; Integer i = ((Integer) o);
+   (local.set $f (block (result (ref null $java.lang.Float))
+    
+    (local.set $$cast_expression_2 (local.get $o))
+    (if (result (ref null $java.lang.Float)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $java.lang.Float)) (else (ref.cast $java.lang.Object $java.lang.Float (local.get $$cast_expression_2) (global.get $java.lang.Float.rtt))))
+   ))
+   ;; Integer i = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression)));
    
-   (local.set $i (ref.cast $java.lang.Object $java.lang.Integer (local.get $o) (global.get $java.lang.Integer.rtt)))
-   ;; Long l = ((Long) o);
+   (local.set $i (block (result (ref null $java.lang.Integer))
+    
+    (local.set $$cast_expression_3 (local.get $o))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression_3) (global.get $java.lang.Integer.rtt))))
+   ))
+   ;; Long l = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Long) $cast_expression)));
    
-   (local.set $l (ref.cast $java.lang.Object $java.lang.Long (local.get $o) (global.get $java.lang.Long.rtt)))
-   ;; Short s = ((Short) o);
+   (local.set $l (block (result (ref null $java.lang.Long))
+    
+    (local.set $$cast_expression_4 (local.get $o))
+    (if (result (ref null $java.lang.Long)) (ref.is_null (local.get $$cast_expression_4)) (then (ref.null $java.lang.Long)) (else (ref.cast $java.lang.Object $java.lang.Long (local.get $$cast_expression_4) (global.get $java.lang.Long.rtt))))
+   ))
+   ;; Short s = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Short) $cast_expression)));
    
-   (local.set $s (ref.cast $java.lang.Object $java.lang.Short (local.get $o) (global.get $java.lang.Short.rtt)))
-   ;; Number n = ((Number) o);
+   (local.set $s (block (result (ref null $java.lang.Short))
+    
+    (local.set $$cast_expression_5 (local.get $o))
+    (if (result (ref null $java.lang.Short)) (ref.is_null (local.get $$cast_expression_5)) (then (ref.null $java.lang.Short)) (else (ref.cast $java.lang.Object $java.lang.Short (local.get $$cast_expression_5) (global.get $java.lang.Short.rtt))))
+   ))
+   ;; Number n = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Number) $cast_expression)));
    
-   (local.set $n (ref.cast $java.lang.Object $java.lang.Number (local.get $o) (global.get $java.lang.Number.rtt)))
-   ;; Character c = ((Character) o);
+   (local.set $n (block (result (ref null $java.lang.Number))
+    
+    (local.set $$cast_expression_6 (local.get $o))
+    (if (result (ref null $java.lang.Number)) (ref.is_null (local.get $$cast_expression_6)) (then (ref.null $java.lang.Number)) (else (ref.cast $java.lang.Object $java.lang.Number (local.get $$cast_expression_6) (global.get $java.lang.Number.rtt))))
+   ))
+   ;; Character c = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Character) $cast_expression)));
    
-   (local.set $c (ref.cast $java.lang.Object $java.lang.Character (local.get $o) (global.get $java.lang.Character.rtt)))
-   ;; Boolean bool = ((Boolean) o);
+   (local.set $c (block (result (ref null $java.lang.Character))
+    
+    (local.set $$cast_expression_7 (local.get $o))
+    (if (result (ref null $java.lang.Character)) (ref.is_null (local.get $$cast_expression_7)) (then (ref.null $java.lang.Character)) (else (ref.cast $java.lang.Object $java.lang.Character (local.get $$cast_expression_7) (global.get $java.lang.Character.rtt))))
+   ))
+   ;; Boolean bool = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression)));
    
-   (local.set $bool (ref.cast $java.lang.Object $java.lang.Boolean (local.get $o) (global.get $java.lang.Boolean.rtt)))
+   (local.set $bool (block (result (ref null $java.lang.Boolean))
+    
+    (local.set $$cast_expression_8 (local.get $o))
+    (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression_8)) (then (ref.null $java.lang.Boolean)) (else (ref.cast $java.lang.Object $java.lang.Boolean (local.get $$cast_expression_8) (global.get $java.lang.Boolean.rtt))))
+   ))
   )
  )
 )
@@ -1573,17 +1798,27 @@
 (func $m_testCastToArray__void@cast.Casts
  (param $this.untyped (ref null $java.lang.Object))
  (local $foo (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast $java.lang.Object $cast.Casts (local.get $this.untyped) (global.get $cast.Casts.rtt)))
  (block $return.label
   (block
-   ;; Object foo = ((Object[]) null);
+   ;; Object foo = (Object $cast_expression = null,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object[]) $cast_expression)));
    
-   (local.set $foo (ref.cast $java.lang.Object $Object.array (ref.null $java.lang.Object) (global.get $Object.array.rtt)))
-   ;; Object bar = ((Object[][]) null);
+   (local.set $foo (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression (ref.null $java.lang.Object))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression) (global.get $Object.array.rtt))))
+   ))
+   ;; Object bar = (Object $cast_expression = null,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object[][]) $cast_expression)));
    
-   (local.set $bar (ref.cast $java.lang.Object $Object.array (ref.null $java.lang.Object) (global.get $Object.array.rtt)))
+   (local.set $bar (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression_1 (ref.null $java.lang.Object))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_1) (global.get $Object.array.rtt))))
+   ))
   )
  )
 )

@@ -451,12 +451,17 @@
 (func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.B (local.get $this.untyped) (global.get $bridgejsmethod.Main.B.rtt)))
  (block $return.label
   (block
-   ;; B.this.bar(((String) arg0));
-   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $this))))
+   ;; B.this.bar((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
+   (call_ref (local.get $this)(block (result (ref null $java.lang.String))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+   )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $this))))
   )
  )
 )
@@ -468,12 +473,17 @@
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.B (local.get $this.untyped) (global.get $bridgejsmethod.Main.B.rtt)))
  (block $return.label
   (block
-   ;; return B.this.fun(((String) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $this)))))
+   ;; return B.this.fun((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.String))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+   )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -554,12 +564,17 @@
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.C))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.C (local.get $this.untyped) (global.get $bridgejsmethod.Main.C.rtt)))
  (block $return.label
   (block
-   ;; return C.this.fun(((Integer) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Integer (local.get $arg0) (global.get $java.lang.Integer.rtt))(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $this)))))
+   ;; return C.this.fun((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.Integer))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+   )(struct.get $bridgejsmethod.Main.C.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.C $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -641,12 +656,17 @@
  (param $arg0 (ref null $java.lang.Number))
  (result (ref null $java.lang.Number))
  (local $return.value (ref null $java.lang.Number))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.D (local.get $this.untyped) (global.get $bridgejsmethod.Main.D.rtt)))
  (block $return.label
   (block
-   ;; return D.this.fun(((Integer) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Integer (local.get $arg0) (global.get $java.lang.Integer.rtt))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
+   ;; return D.this.fun((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.Integer))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+   )(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -660,12 +680,17 @@
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.D (local.get $this.untyped) (global.get $bridgejsmethod.Main.D.rtt)))
  (block $return.label
   (block
-   ;; return D.this.fun(((Integer) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Integer (local.get $arg0) (global.get $java.lang.Integer.rtt))(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
+   ;; return D.this.fun((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.Integer))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+   )(struct.get $bridgejsmethod.Main.D.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.D $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -777,12 +802,17 @@
  (param $arg0 (ref null $java.lang.Number))
  (result (ref null $java.lang.Number))
  (local $return.value (ref null $java.lang.Number))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.F (local.get $this.untyped) (global.get $bridgejsmethod.Main.F.rtt)))
  (block $return.label
   (block
-   ;; return F.this.fun(((Integer) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Integer (local.get $arg0) (global.get $java.lang.Integer.rtt))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
+   ;; return F.this.fun((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.Integer))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+   )(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -796,12 +826,17 @@
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.F (local.get $this.untyped) (global.get $bridgejsmethod.Main.F.rtt)))
  (block $return.label
   (block
-   ;; return F.this.fun(((Integer) arg0));
-   (local.set $return.value (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.Integer (local.get $arg0) (global.get $java.lang.Integer.rtt))(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
+   ;; return F.this.fun((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.Integer))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+   )(struct.get $bridgejsmethod.Main.F.vtable $m_fun__java_lang_Integer__java_lang_Integer (struct.get $bridgejsmethod.Main.F $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -815,12 +850,17 @@
  (param $arg0 (ref null $java.lang.Integer))
  (result (ref null $java.lang.Integer))
  (local $return.value (ref null $java.lang.Integer))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.F (local.get $this.untyped) (global.get $bridgejsmethod.Main.F.rtt)))
  (block $return.label
   (block
-   ;; return ((Integer) super.fun(arg0));
-   (local.set $return.value (ref.cast $java.lang.Object $java.lang.Integer (call $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A (local.get $this)(local.get $arg0)) (global.get $java.lang.Integer.rtt)))
+   ;; return (Object $cast_expression = super.fun(arg0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression)));
+   (local.set $return.value (block (result (ref null $java.lang.Integer))
+    
+    (local.set $$cast_expression (call $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A (local.get $this)(local.get $arg0)))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+   ))
    (br $return.label)
   )
  )
@@ -1038,12 +1078,17 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.L))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.L (local.get $this.untyped) (global.get $bridgejsmethod.Main.L.rtt)))
  (block $return.label
   (block
-   ;; L.this.fun(((String) arg0),arg1);
-   (call_ref (local.get $this)(ref.cast $java.lang.Object $java.lang.String (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $this))))
+   ;; L.this.fun((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))),arg1);
+   (call_ref (local.get $this)(block (result (ref null $java.lang.String))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+   )(local.get $arg1)(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $this))))
   )
  )
 )
@@ -1539,12 +1584,17 @@
 (func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.Parent))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $this.untyped) (global.get $bridgejsmethod.Main.Parent.rtt)))
  (block $return.label
   (block
-   ;; Parent.this.jsMethod(((T) arg0));
-   (call_ref (local.get $this)(ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $arg0) (global.get $bridgejsmethod.Main.Parent.rtt))(struct.get $bridgejsmethod.Main.Parent.vtable $m_jsMethod__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
+   ;; Parent.this.jsMethod((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression))));
+   (call_ref (local.get $this)(block (result (ref null $bridgejsmethod.Main.Parent))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $bridgejsmethod.Main.Parent)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $bridgejsmethod.Main.Parent)) (else (ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $$cast_expression) (global.get $bridgejsmethod.Main.Parent.rtt))))
+   )(struct.get $bridgejsmethod.Main.Parent.vtable $m_jsMethod__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
   )
  )
 )
@@ -1554,12 +1604,17 @@
 (func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $bridgejsmethod.Main.Parent))
  (local.set $this (ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $this.untyped) (global.get $bridgejsmethod.Main.Parent.rtt)))
  (block $return.label
   (block
-   ;; Parent.this.method(((T) arg0));
-   (call_ref (local.get $this)(ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $arg0) (global.get $bridgejsmethod.Main.Parent.rtt))(struct.get $bridgejsmethod.Main.Parent.vtable $m_method__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
+   ;; Parent.this.method((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression))));
+   (call_ref (local.get $this)(block (result (ref null $bridgejsmethod.Main.Parent))
+    
+    (local.set $$cast_expression (local.get $arg0))
+    (if (result (ref null $bridgejsmethod.Main.Parent)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $bridgejsmethod.Main.Parent)) (else (ref.cast $java.lang.Object $bridgejsmethod.Main.Parent (local.get $$cast_expression) (global.get $bridgejsmethod.Main.Parent.rtt))))
+   )(struct.get $bridgejsmethod.Main.Parent.vtable $m_method__bridgejsmethod_Main_Parent__void (struct.get $bridgejsmethod.Main.Parent $vtable(local.get $this))))
   )
  )
 )

@@ -84,6 +84,7 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum1))
  (local $return.value (ref null $enums.Enum1))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; enums.Enum1.$clinit();
@@ -97,8 +98,12 @@
      )
     )
    )
-   ;; return ((Enum1) javaemul.internal.Enums.getValueFromNameAndMap(name,enums.Enum1.namesToValuesMap));
-   (local.set $return.value (ref.cast $java.lang.Object $enums.Enum1 (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $enums.Enum1.rtt)))
+   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,enums.Enum1.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Enum1) $cast_expression)));
+   (local.set $return.value (block (result (ref null $enums.Enum1))
+    
+    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)))
+    (if (result (ref null $enums.Enum1)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $enums.Enum1)) (else (ref.cast $java.lang.Object $enums.Enum1 (local.get $$cast_expression) (global.get $enums.Enum1.rtt))))
+   ))
    (br $return.label)
   )
  )
@@ -274,6 +279,7 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum2))
  (local $return.value (ref null $enums.Enum2))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; enums.Enum2.$clinit();
@@ -287,8 +293,12 @@
      )
     )
    )
-   ;; return ((Enum2) javaemul.internal.Enums.getValueFromNameAndMap(name,enums.Enum2.namesToValuesMap));
-   (local.set $return.value (ref.cast $java.lang.Object $enums.Enum2 (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $enums.Enum2.rtt)))
+   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,enums.Enum2.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Enum2) $cast_expression)));
+   (local.set $return.value (block (result (ref null $enums.Enum2))
+    
+    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)))
+    (if (result (ref null $enums.Enum2)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $enums.Enum2)) (else (ref.cast $java.lang.Object $enums.Enum2 (local.get $$cast_expression) (global.get $enums.Enum2.rtt))))
+   ))
    (br $return.label)
   )
  )
@@ -511,6 +521,7 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum3))
  (local $return.value (ref null $enums.Enum3))
+ (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; enums.Enum3.$clinit();
@@ -524,8 +535,12 @@
      )
     )
    )
-   ;; return ((Enum3) javaemul.internal.Enums.getValueFromNameAndMap(name,enums.Enum3.namesToValuesMap));
-   (local.set $return.value (ref.cast $java.lang.Object $enums.Enum3 (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)) (global.get $enums.Enum3.rtt)))
+   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,enums.Enum3.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Enum3) $cast_expression)));
+   (local.set $return.value (block (result (ref null $enums.Enum3))
+    
+    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)))
+    (if (result (ref null $enums.Enum3)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $enums.Enum3)) (else (ref.cast $java.lang.Object $enums.Enum3 (local.get $$cast_expression) (global.get $enums.Enum3.rtt))))
+   ))
    (br $return.label)
   )
  )

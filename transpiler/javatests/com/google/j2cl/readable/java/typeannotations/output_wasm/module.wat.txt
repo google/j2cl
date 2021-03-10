@@ -332,12 +332,17 @@
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast $java.lang.Object $typeannotations.ChildWithNullableParent (local.get $this.untyped) (global.get $typeannotations.ChildWithNullableParent.rtt)))
  (block $return.label
   (block
-   ;; return Parent.this.m(arg0,((Parent) arg1));
-   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(ref.cast $java.lang.Object $typeannotations.Parent (local.get $arg1) (global.get $typeannotations.Parent.rtt))(struct.get $typeannotations.Parent.vtable $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (struct.get $typeannotations.Parent $vtable(local.get $this)))))
+   ;; return Parent.this.m(arg0,(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Parent) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(block (result (ref null $typeannotations.Parent))
+    
+    (local.set $$cast_expression (local.get $arg1))
+    (if (result (ref null $typeannotations.Parent)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $typeannotations.Parent)) (else (ref.cast $java.lang.Object $typeannotations.Parent (local.get $$cast_expression) (global.get $typeannotations.Parent.rtt))))
+   )(struct.get $typeannotations.Parent.vtable $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (struct.get $typeannotations.Parent $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -352,12 +357,17 @@
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast $java.lang.Object $typeannotations.ChildWithNullableParent (local.get $this.untyped) (global.get $typeannotations.ChildWithNullableParent.rtt)))
  (block $return.label
   (block
-   ;; return Parent.this.m(arg0,((Parent) arg1));
-   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(ref.cast $java.lang.Object $typeannotations.Parent (local.get $arg1) (global.get $typeannotations.Parent.rtt))(struct.get $typeannotations.Parent.vtable $m_m__java_util_List__typeannotations_Parent__java_util_List (struct.get $typeannotations.Parent $vtable(local.get $this)))))
+   ;; return Parent.this.m(arg0,(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Parent) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(block (result (ref null $typeannotations.Parent))
+    
+    (local.set $$cast_expression (local.get $arg1))
+    (if (result (ref null $typeannotations.Parent)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $typeannotations.Parent)) (else (ref.cast $java.lang.Object $typeannotations.Parent (local.get $$cast_expression) (global.get $typeannotations.Parent.rtt))))
+   )(struct.get $typeannotations.Parent.vtable $m_m__java_util_List__typeannotations_Parent__java_util_List (struct.get $typeannotations.Parent $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -443,12 +453,17 @@
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast $java.lang.Object $typeannotations.ChildWithNonNullableParent (local.get $this.untyped) (global.get $typeannotations.ChildWithNonNullableParent.rtt)))
  (block $return.label
   (block
-   ;; return Parent.this.m(arg0,((Parent) arg1));
-   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(ref.cast $java.lang.Object $typeannotations.Parent (local.get $arg1) (global.get $typeannotations.Parent.rtt))(struct.get $typeannotations.Parent.vtable $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (struct.get $typeannotations.Parent $vtable(local.get $this)))))
+   ;; return Parent.this.m(arg0,(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Parent) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(block (result (ref null $typeannotations.Parent))
+    
+    (local.set $$cast_expression (local.get $arg1))
+    (if (result (ref null $typeannotations.Parent)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $typeannotations.Parent)) (else (ref.cast $java.lang.Object $typeannotations.Parent (local.get $$cast_expression) (global.get $typeannotations.Parent.rtt))))
+   )(struct.get $typeannotations.Parent.vtable $m_m__java_lang_String__typeannotations_Parent__typeannotations_Parent (struct.get $typeannotations.Parent $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -463,12 +478,17 @@
  (param $arg1 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast $java.lang.Object $typeannotations.ChildWithNonNullableParent (local.get $this.untyped) (global.get $typeannotations.ChildWithNonNullableParent.rtt)))
  (block $return.label
   (block
-   ;; return Parent.this.m(arg0,((Parent) arg1));
-   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(ref.cast $java.lang.Object $typeannotations.Parent (local.get $arg1) (global.get $typeannotations.Parent.rtt))(struct.get $typeannotations.Parent.vtable $m_m__java_util_List__typeannotations_Parent__java_util_List (struct.get $typeannotations.Parent $vtable(local.get $this)))))
+   ;; return Parent.this.m(arg0,(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Parent) $cast_expression))));
+   (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(block (result (ref null $typeannotations.Parent))
+    
+    (local.set $$cast_expression (local.get $arg1))
+    (if (result (ref null $typeannotations.Parent)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $typeannotations.Parent)) (else (ref.cast $java.lang.Object $typeannotations.Parent (local.get $$cast_expression) (global.get $typeannotations.Parent.rtt))))
+   )(struct.get $typeannotations.Parent.vtable $m_m__java_util_List__typeannotations_Parent__java_util_List (struct.get $typeannotations.Parent $vtable(local.get $this)))))
    (br $return.label)
   )
  )

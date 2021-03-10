@@ -114,6 +114,8 @@ public class Main {
   private static void testTerseLiteral() {
     int[] terseLiteral = {0, 1, 2};
     assertTrue(terseLiteral.length == 3);
-    assertTrue(terseLiteral instanceof int[]);
+    assertTrue(terseLiteral[0] == 0);
+    assertTrue(terseLiteral[1] == 1);
+    assertTrue(terseLiteral[2] == 2);
   }
 }

@@ -85,6 +85,7 @@ import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNestedClassConstructors;
+import com.google.j2cl.transpiler.passes.NormalizeNullCasting;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
@@ -332,6 +333,9 @@ public enum Backend {
 
           // a = b => (a = b, a)
           RewriteAssignmentExpressions::new,
+
+          // TODO(b/182007249): remove this pass when j2wasm use WasmGC milestone 3.
+          NormalizeNullCasting::new,
           // Post-verifications
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,

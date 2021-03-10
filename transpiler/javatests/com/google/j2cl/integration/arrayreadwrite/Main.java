@@ -15,7 +15,10 @@
  */
 package com.google.j2cl.integration.arrayreadwrite;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+
+import javaemul.internal.annotations.Wasm;
 
 public class Main {
   public static void main(String... args) {
@@ -98,26 +101,7 @@ public class Main {
     assertTrue(longs[8] == 9); // 7 ^ 14 = 9
     assertTrue(longs[9] == 0);
 
-    longs[i] = 2;
-    assertTrue((longs[i++] <<= 1) == 4);
-    assertTrue(i == 10);
-    assertTrue(longs[8] == 9);
-    assertTrue(longs[9] == 4); // 2 << 1 = 4
-    assertTrue(longs[10] == 0);
-
-    longs[i] = -10;
-    assertTrue((longs[i++] >>= 2) == -3);
-    assertTrue(i == 11);
-    assertTrue(longs[9] == 4);
-    assertTrue(longs[10] == -3); // -10 >> 2 = -3
-    assertTrue(longs[11] == 0);
-
-    longs[i] = -10;
-    assertTrue((longs[i++] >>>= 2) == 4611686018427387901L);
-    assertTrue(i == 12);
-    assertTrue(longs[10] == -3);
-    assertTrue(longs[11] == 4611686018427387901L); // -10 >>> 2 = 4611686018427387901
-    assertTrue(longs[12] == 0);
+    testLongShift();
 
     // Prefix and postfix expressions.
     i = 15;
@@ -139,6 +123,34 @@ public class Main {
     assertTrue(longs[16] == 1);
     assertTrue(longs[17] == 1);
     assertTrue(longs[18] == 0);
+  }
+
+  // TODO(b/181829823): move this code back in testLongs()
+  @Wasm("nop")
+  private static void testLongShift() {
+    int i = 9;
+    long[] longs = new long[100];
+    longs[8] = 9;
+    longs[i] = 2;
+    assertTrue((longs[i++] <<= 1) == 4);
+    assertTrue(i == 10);
+    assertTrue(longs[8] == 9);
+    assertTrue(longs[9] == 4); // 2 << 1 = 4
+    assertTrue(longs[10] == 0);
+
+    longs[i] = -10;
+    assertTrue((longs[i++] >>= 2) == -3);
+    assertTrue(i == 11);
+    assertTrue(longs[9] == 4);
+    assertTrue(longs[10] == -3); // -10 >> 2 = -3
+    assertTrue(longs[11] == 0);
+
+    longs[i] = -10;
+    assertTrue((longs[i++] >>>= 2) == 4611686018427387901L);
+    assertTrue(i == 12);
+    assertTrue(longs[10] == -3);
+    assertTrue(longs[11] == 4611686018427387901L); // -10 >>> 2 = 4611686018427387901
+    assertTrue(longs[12] == 0);
   }
 
   private static void testInts() {
@@ -277,18 +289,25 @@ public class Main {
     intArray[0] /= 2;
     assertTrue(intArray[0] == 1);
 
-    String[] stringArray = new String[1];
-    stringArray[0] += null;
-    assertTrue(stringArray[0].equals("nullnull"));
-
     boolean[] booleanArray = new boolean[1];
+    assertFalse(booleanArray[0]);
     booleanArray[0] |= true;
-    Object o = booleanArray[0];
-    assertTrue(o instanceof Boolean);
+    assertTrue(booleanArray[0]);
 
     long[] longArray = new long[1];
     longArray[0] += 1;
     assertTrue(longArray[0] == 1);
+
+    testCompoundArrayOperationsWithString();
+  }
+
+  // TODO(dramaix): Move this code back to testCompoundArrayOperations() when we have a full String
+  //   support on wasm
+  @Wasm("nop")
+  private static void testCompoundArrayOperationsWithString() {
+    String[] stringArray = new String[1];
+    stringArray[0] += null;
+    assertTrue(stringArray[0].equals("nullnull"));
   }
 
   private static void testMains() {

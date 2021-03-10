@@ -210,6 +210,7 @@
  (local $$index_3 i32)
  (local $booleans (ref null $boolean.array))
  (local $strings (ref null $Object.array))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $shorts (ref null $short.array))
  (local $b i32)
  (local $$array_4 (ref null $short.array))
@@ -313,7 +314,7 @@
    ;; String[] strings = null;
    
    (local.set $strings (ref.null $Object.array))
-   ;; (strings[0] = (((String) strings[0]) + null));
+   ;; (strings[0] = ((Object $cast_expression = strings[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))) + null));
    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $strings)) (i32.const 0) (ref.null $java.lang.String))
    ;; short[] shorts = null;
    
@@ -364,7 +365,9 @@
  (local $$qualifier_1 (ref null $java.lang.Integer))
  (local $$value_2 (ref null $java.lang.Integer))
  (local $ref (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $n i32)
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
@@ -452,9 +455,9 @@
    ;; Ref<Integer> ref = null;
    
    (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
-   ;; (ref.field = (((Integer) ref.field) + 1));
+   ;; (ref.field = ((Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))) + 1));
    (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref) (ref.null $java.lang.Integer))
-   ;; int n = (1 + ((Integer) ref.field));
+   ;; int n = (1 + (Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
    
    (local.set $n (i32.add (i32.const 1) (i32.const 0)))
   )

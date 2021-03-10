@@ -61,6 +61,7 @@
  (local $array2d (ref null $Object.array))
  (local $$array_literal (ref null $int.array))
  (local $length1 i32)
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $length2 i32)
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
  (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.ArrayCalls (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
@@ -77,7 +78,11 @@
    )(i32.const -1)))
    ;; int length1 = <expr>;
    
-   (local.set $length1 (array.len $Object.array.elements (struct.get $Object.array $elements (ref.cast $java.lang.Object $Object.array (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $array2d)) (i32.const 0)) (global.get $Object.array.rtt)))))
+   (local.set $length1 (array.len $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
+    
+    (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $array2d)) (i32.const 0)))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression) (global.get $Object.array.rtt))))
+   ))))
    ;; int length2 = <expr>;
    
    (local.set $length2 (array.len $Object.array.elements (struct.get $Object.array $elements (local.get $array2d))))

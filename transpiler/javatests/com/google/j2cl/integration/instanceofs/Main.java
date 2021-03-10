@@ -162,6 +162,17 @@ public class Main {
     assertTrue(!(ints2d instanceof Comparable));
     assertTrue(ints2d instanceof Serializable);
     assertTrue(ints2d instanceof Cloneable);
+
+    Object intsLiteral = new int[] {1, 2, 3};
+    assertTrue(intsLiteral instanceof Object);
+    assertTrue(!(intsLiteral instanceof Object[]));
+    assertTrue(!(intsLiteral instanceof Object[][]));
+    assertTrue(!(intsLiteral instanceof String[]));
+    assertTrue(!(intsLiteral instanceof String[][]));
+    assertTrue(intsLiteral instanceof int[]);
+    assertTrue(!(intsLiteral instanceof Comparable));
+    assertTrue(intsLiteral instanceof Serializable);
+    assertTrue(intsLiteral instanceof Cloneable);
   }
 
   @SuppressWarnings("BoxedPrimitiveConstructor")
