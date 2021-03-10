@@ -41,24 +41,19 @@ public class RewriteReferenceEqualityOperations extends NormalizationPass {
         new AbstractRewriter() {
           @Override
           public Node rewriteBinaryExpression(BinaryExpression expression) {
-            if (expression.isReferenceComparison()
-                && expression.getOperator() == BinaryOperator.NOT_EQUALS) {
-              return rewriteNotEquals(expression);
+            if (!expression.isReferenceComparison()) {
+              return expression;
             }
 
             if (expression.getOperator() == BinaryOperator.EQUALS) {
               return rewriteNullEquality(expression);
+            } else {
+              return rewriteNullEquality(
+                      expression.getLeftOperand().infixEquals(expression.getRightOperand()))
+                  .prefixNot();
             }
-
-            return expression;
           }
         });
-  }
-
-  private static Expression rewriteNotEquals(BinaryExpression expression) {
-    return rewriteNullEquality(
-            expression.getLeftOperand().infixEquals(expression.getRightOperand()))
-        .prefixNot();
   }
 
   private static Expression rewriteNullEquality(BinaryExpression expression) {
