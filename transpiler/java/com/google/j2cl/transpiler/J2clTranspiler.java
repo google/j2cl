@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
+import com.google.j2cl.transpiler.passes.LibraryNormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -114,8 +115,13 @@ class J2clTranspiler {
 
   private static void runPasses(
       Library library, ImmutableList<Supplier<NormalizationPass>> passFactories) {
-    for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
-      for (Supplier<NormalizationPass> passFactory : passFactories) {
+    for (Supplier<NormalizationPass> passFactory : passFactories) {
+      NormalizationPass pass = passFactory.get();
+      if (pass instanceof LibraryNormalizationPass) {
+        ((LibraryNormalizationPass) pass).execute(library);
+        continue;
+      }
+      for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
         passFactory.get().execute(compilationUnit);
       }
     }
