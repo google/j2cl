@@ -389,14 +389,6 @@ class ImportGatherer extends AbstractVisitor {
   }
 
   private List<Import> doGatherImports(Type type) {
-    // TODO(b/67965153): Remove special casing once getClass() metadata initialization is moved to
-    //  the AST.
-    if (!type.isJsEnum()) {
-      // Util class implements some utility functions and does not depend on any other class, always
-      // import it eagerly.
-      addTypeDeclaration(BootstrapType.NATIVE_UTIL.getDeclaration(), ImportCategory.LOADTIME);
-    }
-
     // Collect type references.
     type.accept(this);
 
