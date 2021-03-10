@@ -23,7 +23,12 @@ import jsinterop.annotations.JsType;
  * operations to some particular Long emulation library. (In this case Closure's goog.math.Long)
  */
 @JsType(namespace = "vmbootstrap")
-class LongUtils {
+public class LongUtils {
+
+  public static long fromBits(int lowBits, int highBits) {
+    return NativeLong.fromBits(lowBits, highBits);
+  }
+
   public static int compare(long a, long b) {
     return toNativeLong(a).compare(b);
   }
