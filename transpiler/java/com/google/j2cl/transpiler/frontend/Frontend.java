@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.frontend;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
@@ -29,14 +30,16 @@ import java.util.List;
 public enum Frontend {
   JDT {
     @Override
-    public List<CompilationUnit> getCompilationUnits(
+    public Library getLibrary(
         List<String> classPath,
         List<FileInfo> sources,
         boolean useTargetClassPath,
         Problems problems) {
       CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
           createJdtUnitsAndResolveBindings(classPath, sources, useTargetClassPath, problems);
-      return convertUnits(jdtUnitsAndResolvedBindings, classPath, problems);
+      return Library.newBuilder()
+          .setCompilationUnits(convertUnits(jdtUnitsAndResolvedBindings, classPath, problems))
+          .build();
     }
 
     private List<CompilationUnit> convertUnits(
@@ -61,17 +64,20 @@ public enum Frontend {
   },
   JAVAC {
     @Override
-    public List<CompilationUnit> getCompilationUnits(
+    public Library getLibrary(
         List<String> classPath,
         List<FileInfo> sources,
         boolean useTargetClassPath,
         Problems problems) {
       init(classPath, problems);
-      return new JavacParser(classPath, problems).parseFiles(sources, useTargetClassPath);
+      return Library.newBuilder()
+          .setCompilationUnits(
+              new JavacParser(classPath, problems).parseFiles(sources, useTargetClassPath))
+          .build();
     }
   };
 
-  public abstract List<CompilationUnit> getCompilationUnits(
+  public abstract Library getLibrary(
       List<String> classPath,
       List<FileInfo> sources,
       boolean useTargetClassPath,

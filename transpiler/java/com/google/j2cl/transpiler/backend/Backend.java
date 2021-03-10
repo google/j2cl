@@ -19,7 +19,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
@@ -106,7 +106,6 @@ import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
 import com.google.j2cl.transpiler.passes.VerifySingleAstReference;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Supplier;
 
 /** Drives the backend to generate outputs. */
@@ -114,7 +113,7 @@ public enum Backend {
   CLOSURE {
     @Override
     public void generateOutputs(
-        List<CompilationUnit> j2clCompilationUnits,
+        Library library,
         ImmutableList<FileInfo> nativeSources,
         Path output,
         Path libraryInfoOutput,
@@ -132,7 +131,7 @@ public enum Backend {
               emitReadableSourceMap,
               generateKytheIndexingMetadata,
               problems)
-          .generateOutputs(j2clCompilationUnits);
+          .generateOutputs(library);
     }
 
     @Override
@@ -263,7 +262,7 @@ public enum Backend {
   WASM {
     @Override
     public void generateOutputs(
-        List<CompilationUnit> j2clUnits,
+        Library library,
         ImmutableList<FileInfo> nativeSources,
         Path output,
         Path libraryInfoOutput,
@@ -272,7 +271,7 @@ public enum Backend {
         boolean generateKytheIndexingMetadata,
         ImmutableSet<String> entryPoints,
         Problems problems) {
-      new WasmModuleGenerator(output, entryPoints, problems).generateOutputs(j2clUnits);
+      new WasmModuleGenerator(output, entryPoints, problems).generateOutputs(library);
     }
 
     @Override
@@ -347,7 +346,7 @@ public enum Backend {
       boolean experimentalOptimizeAutovalue);
 
   public abstract void generateOutputs(
-      List<CompilationUnit> j2clUnits,
+      Library library,
       ImmutableList<FileInfo> nativeSources,
       Path output,
       Path libraryInfoOutput,

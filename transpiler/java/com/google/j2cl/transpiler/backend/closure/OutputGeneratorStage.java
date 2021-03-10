@@ -24,6 +24,7 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.SourceUtils;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
@@ -67,17 +68,18 @@ public class OutputGeneratorStage {
     this.problems = problems;
   }
 
-  public void generateOutputs(List<CompilationUnit> j2clCompilationUnits) {
+  public void generateOutputs(Library library) {
     fileService = Executors.newSingleThreadExecutor();
     try {
-      generateOutputsImpl(j2clCompilationUnits);
+      generateOutputsImpl(library);
     } finally {
       awaitCompletionOfFileWrites();
       fileService = null;
     }
   }
 
-  private void generateOutputsImpl(List<CompilationUnit> j2clCompilationUnits) {
+  private void generateOutputsImpl(Library library) {
+
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable. Actually this one can't actually destabilize output but since
     // it's being safely iterated over now it's best to guard against it being unsafely iterated
@@ -86,7 +88,7 @@ public class OutputGeneratorStage {
         NativeJavaScriptFile.getMap(nativeJavaScriptFiles, problems);
     LibraryInfoBuilder libraryInfoBuilder = new LibraryInfoBuilder();
 
-    for (CompilationUnit j2clCompilationUnit : j2clCompilationUnits) {
+    for (CompilationUnit j2clCompilationUnit : library.getCompilationUnits()) {
       for (Type type : j2clCompilationUnit.getTypes()) {
         List<Import> imports = ImportGatherer.gatherImports(type);
         JavaScriptImplGenerator jsImplGenerator =

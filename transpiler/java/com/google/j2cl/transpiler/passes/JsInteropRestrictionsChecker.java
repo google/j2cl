@@ -48,6 +48,7 @@ import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor;
 import com.google.j2cl.transpiler.ast.JsEnumInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
 import com.google.j2cl.transpiler.ast.JsUtils;
+import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
@@ -80,10 +81,8 @@ import java.util.Set;
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
 
-  public static void check(
-      List<CompilationUnit> compilationUnits, Problems problems, boolean enableWasmChecks) {
-    new JsInteropRestrictionsChecker(problems, enableWasmChecks)
-        .checkCompilationUnits(compilationUnits);
+  public static void check(Library library, Problems problems, boolean enableWasmChecks) {
+    new JsInteropRestrictionsChecker(problems, enableWasmChecks).checkLibrary(library);
   }
 
   private final Problems problems;
@@ -99,8 +98,8 @@ public class JsInteropRestrictionsChecker {
     return qualifiedName.startsWith("java.") || qualifiedName.startsWith("javaemul.");
   }
 
-  private void checkCompilationUnits(List<CompilationUnit> compilationUnits) {
-    for (CompilationUnit compilationUnit : compilationUnits) {
+  private void checkLibrary(Library library) {
+    for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
       checkCompilationUnit(compilationUnit);
     }
     if (wasUnusableByJsWarningReported) {

@@ -18,12 +18,12 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -70,23 +70,23 @@ class J2clTranspiler {
       MemberDescriptor.setWasmManglingPatterns();
       TypeDeclaration.setIgnoreJsEnumAnnotations();
     }
-    List<CompilationUnit> j2clUnits =
+    Library library =
         options
             .getFrontend()
-            .getCompilationUnits(
+            .getLibrary(
                 options.getClasspaths(),
                 options.getSources(),
                 options.getGenerateKytheIndexingMetadata(),
                 problems);
-    if (!j2clUnits.isEmpty()) {
-      desugarUnits(j2clUnits);
-      checkUnits(j2clUnits);
-      normalizeUnits(j2clUnits);
+    if (!library.isEmpty()) {
+      desugarLibrary(library);
+      checkLibrary(library);
+      normalizeLibrary(library);
     }
     options
         .getBackend()
         .generateOutputs(
-            j2clUnits,
+            library,
             options.getNativeSources(),
             options.getOutput(),
             options.getLibraryInfoOutput(),
@@ -97,27 +97,26 @@ class J2clTranspiler {
             problems);
   }
 
-  private void desugarUnits(List<CompilationUnit> j2clUnits) {
-    runPasses(j2clUnits, options.getBackend().getDesugaringPassFactories());
+  private void desugarLibrary(Library library) {
+    runPasses(library, options.getBackend().getDesugaringPassFactories());
   }
 
-  private void checkUnits(List<CompilationUnit> j2clUnits) {
+  private void checkLibrary(Library library) {
     JsInteropRestrictionsChecker.check(
-        j2clUnits, problems, /* enableWasmChecks= */ options.getBackend() == Backend.WASM);
+        library, problems, /* enableWasmChecks= */ options.getBackend() == Backend.WASM);
     problems.abortIfHasErrors();
   }
 
-  private void normalizeUnits(List<CompilationUnit> j2clUnits) {
+  private void normalizeLibrary(Library library) {
     runPasses(
-        j2clUnits,
-        options.getBackend().getPassFactories(options.getExperimentalOptimizeAutovalue()));
+        library, options.getBackend().getPassFactories(options.getExperimentalOptimizeAutovalue()));
   }
 
   private static void runPasses(
-      List<CompilationUnit> j2clUnits, ImmutableList<Supplier<NormalizationPass>> passFactories) {
-    for (CompilationUnit j2clUnit : j2clUnits) {
+      Library library, ImmutableList<Supplier<NormalizationPass>> passFactories) {
+    for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
       for (Supplier<NormalizationPass> passFactory : passFactories) {
-        passFactory.get().execute(j2clUnit);
+        passFactory.get().execute(compilationUnit);
       }
     }
   }

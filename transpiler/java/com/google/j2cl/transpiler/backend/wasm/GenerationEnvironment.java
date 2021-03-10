@@ -30,6 +30,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.HasName;
+import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NameDeclaration;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
@@ -206,7 +207,9 @@ class GenerationEnvironment {
         getWasmTypeName(methodDescriptor.getDispatchReturnTypeDescriptor()));
   }
 
-  GenerationEnvironment(List<CompilationUnit> compilationUnits) {
+  GenerationEnvironment(Library library) {
+    List<CompilationUnit> compilationUnits = library.getCompilationUnits();
+
     // Resolve variable names into unique wasm identifiers.
     compilationUnits.stream()
         .flatMap(c -> c.getTypes().stream())
