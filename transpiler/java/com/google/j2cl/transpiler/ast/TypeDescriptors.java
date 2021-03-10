@@ -22,12 +22,10 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
 
 /** Utility class holding type descriptors that need to be referenced directly. */
@@ -317,16 +315,6 @@ public class TypeDescriptors {
 
     public TypeDeclaration getDeclaration() {
       return typeDescriptor.getTypeDeclaration();
-    }
-
-    public static final Set<DeclaredTypeDescriptor> typeDescriptors;
-
-    static {
-      ImmutableSet.Builder<DeclaredTypeDescriptor> setBuilder = new ImmutableSet.Builder<>();
-      for (BootstrapType value : BootstrapType.values()) {
-        setBuilder.add(value.getDescriptor());
-      }
-      typeDescriptors = setBuilder.build();
     }
   }
 
