@@ -109,11 +109,7 @@ public enum WasmBinaryOperation {
   public static WasmBinaryOperation getOperation(BinaryExpression expression) {
     BinaryOperator operator = expression.getOperator();
 
-    if (!wasmOperationByBinaryOperator.containsKey(operator)) {
-      // TODO(dramaix): remove and checkArgument once compound assignments and inc/decrements
-      //  are transformed.
-      return null;
-    }
+    checkState(wasmOperationByBinaryOperator.containsKey(operator));
 
     if (!expression.getTypeDescriptor().isPrimitive() && operator == BinaryOperator.PLUS) {
       // TODO(dramaix): handle string concatenation
