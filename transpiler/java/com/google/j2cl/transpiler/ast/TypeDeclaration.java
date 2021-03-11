@@ -160,7 +160,7 @@ public abstract class TypeDeclaration
   }
 
   public String getImplModuleName() {
-    return isNative() || isExtern() ? getModuleName() : getModuleName() + "$impl";
+    return isNative() ? getModuleName() : getModuleName() + "$impl";
   }
 
   /** Returns the fully package qualified name like "com.google.common". */
