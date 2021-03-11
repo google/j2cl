@@ -65,14 +65,14 @@
     (then
      (block
       ;; (jstypeenum.Color.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(jstypeenum.Color.values()));
-      (global.set $f_namesToValuesMap__jstypeenum_Color_ (ref.null $java.lang.Object))
+      (global.set $f_namesToValuesMap__jstypeenum_Color_ (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_jstypeenum_Color@jstypeenum.Color )))
      )
     )
    )
    ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,jstypeenum.Color.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Color) $cast_expression)));
    (local.set $return.value (block (result (ref null $jstypeenum.Color))
     
-    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(ref.null $java.lang.Object)))
+    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__jstypeenum_Color_)))
     (if (result (ref null $jstypeenum.Color)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $jstypeenum.Color)) (else (ref.cast $java.lang.Object $jstypeenum.Color (local.get $$cast_expression) (global.get $jstypeenum.Color.rtt))))
    ))
    (br $return.label)

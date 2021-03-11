@@ -51,7 +51,12 @@
 (func $m_examples__void@implicitparenthesis.ImplicitParenthesis
  (local $primitiveInt i32)
  (local $boxedInt (ref null $java.lang.Integer))
+ (local $$qualifier (ref null $java.lang.Integer))
+ (local $$qualifier_1 (ref null $java.lang.Integer))
+ (local $$qualifier_2 (ref null $java.lang.Integer))
+ (local $$qualifier_3 (ref null $java.lang.Integer))
  (local $$value (ref null $java.lang.Integer))
+ (local $$qualifier_4 (ref null $java.lang.Integer))
  (block $return.label
   (block
    ;; int primitiveInt;
@@ -63,8 +68,12 @@
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
     (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
-    ;; (primitiveInt = ((primitiveInt == 5)) ? (new Integer.<init>(15)) : (new Integer.<init>(30)));
-    (local.set $primitiveInt (i32.const 0))
+    ;; (primitiveInt = (Integer $qualifier = ((primitiveInt == 5)) ? (new Integer.<init>(15)) : (new Integer.<init>(30)),$qualifier.intValue()));
+    (local.set $primitiveInt (block (result i32)
+     
+     (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (i32.eq (local.get $primitiveInt) (i32.const 5)) (then (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
+     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+    ))
     ;; assert (primitiveInt == 15);
     ;; unimplemented statement AssertStatement
    )
@@ -73,8 +82,15 @@
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
     (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
-    ;; (primitiveInt = ((boxedInt = (boxedInt + primitiveInt)),boxedInt));
-    (local.set $primitiveInt (i32.const 0))
+    ;; (primitiveInt = (Integer $qualifier = ((boxedInt = java.lang.Integer.valueOf((boxedInt.intValue() + primitiveInt))),boxedInt),$qualifier.intValue()));
+    (local.set $primitiveInt (block (result i32)
+     
+     (local.set $$qualifier_1 (block (result (ref null $java.lang.Integer))
+      (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
+      (local.get $boxedInt)
+     ))
+     (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
+    ))
     ;; assert (primitiveInt == 15);
     ;; unimplemented statement AssertStatement
    )
@@ -83,8 +99,15 @@
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
     (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
-    ;; (primitiveInt = ((boxedInt = primitiveInt),boxedInt));
-    (local.set $primitiveInt (i32.const 0))
+    ;; (primitiveInt = (Integer $qualifier = ((boxedInt = java.lang.Integer.valueOf(primitiveInt)),boxedInt),$qualifier.intValue()));
+    (local.set $primitiveInt (block (result i32)
+     
+     (local.set $$qualifier_2 (block (result (ref null $java.lang.Integer))
+      (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $primitiveInt)))
+      (local.get $boxedInt)
+     ))
+     (call_ref (local.get $$qualifier_2)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
+    ))
     ;; assert (primitiveInt == 5);
     ;; unimplemented statement AssertStatement
    )
@@ -93,8 +116,17 @@
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
     (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
-    ;; (primitiveInt = (Integer $value = boxedInt,(boxedInt = (boxedInt + 1)),$value));
-    (local.set $primitiveInt (i32.const 0))
+    ;; (primitiveInt = (Integer $qualifier = (Integer $value = boxedInt,(boxedInt = java.lang.Integer.valueOf((boxedInt.intValue() + 1))),$value),$qualifier.intValue()));
+    (local.set $primitiveInt (block (result i32)
+     
+     (local.set $$qualifier_3 (block (result (ref null $java.lang.Integer))
+      
+      (local.set $$value (local.get $boxedInt))
+      (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
+      (local.get $$value)
+     ))
+     (call_ref (local.get $$qualifier_3)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
+    ))
     ;; assert (primitiveInt == 10);
     ;; unimplemented statement AssertStatement
    )
@@ -103,8 +135,15 @@
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
     (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
-    ;; (primitiveInt = ((boxedInt = (boxedInt + 1)),boxedInt));
-    (local.set $primitiveInt (i32.const 0))
+    ;; (primitiveInt = (Integer $qualifier = ((boxedInt = java.lang.Integer.valueOf((boxedInt.intValue() + 1))),boxedInt),$qualifier.intValue()));
+    (local.set $primitiveInt (block (result i32)
+     
+     (local.set $$qualifier_4 (block (result (ref null $java.lang.Integer))
+      (local.set $boxedInt (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (i32.const 1))))
+      (local.get $boxedInt)
+     ))
+     (call_ref (local.get $$qualifier_4)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
+    ))
     ;; assert (primitiveInt == 11);
     ;; unimplemented statement AssertStatement
    )
@@ -130,8 +169,8 @@
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
     (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
-    ;; (primitiveInt = (boxedInt - primitiveInt));
-    (local.set $primitiveInt (i32.sub (i32.const 0) (local.get $primitiveInt)))
+    ;; (primitiveInt = (boxedInt.intValue() - primitiveInt));
+    (local.set $primitiveInt (i32.sub (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt)))
     ;; assert (primitiveInt == 5);
     ;; unimplemented statement AssertStatement
    )
@@ -140,11 +179,11 @@
     (local.set $primitiveInt (i32.const 5))
     ;; (boxedInt = new Integer.<init>(10));
     (local.set $boxedInt (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 10)))
-    ;; (boxedBoolean = true);
-    (local.set $boxedBoolean (ref.null $java.lang.Boolean))
-    ;; (boxedBoolean = (boxedInt == primitiveInt));
-    (local.set $boxedBoolean (ref.null $java.lang.Boolean))
-    ;; assert (boxedBoolean == false);
+    ;; (boxedBoolean = java.lang.Boolean.valueOf(true));
+    (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
+    ;; (boxedBoolean = java.lang.Boolean.valueOf((boxedInt.intValue() == primitiveInt)));
+    (local.set $boxedBoolean (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eq (call_ref (local.get $boxedInt)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInt)))) (local.get $primitiveInt))))
+    ;; assert (boxedBoolean.booleanValue() == false);
     ;; unimplemented statement AssertStatement
    )
   )

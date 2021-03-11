@@ -38,6 +38,7 @@
  (local $number i32)
  (local $b i32)
  (local $value i32)
+ (local $$qualifier (ref null $java.lang.Integer))
  (local $this (ref null $ternaryexpression.TernaryExpression))
  (local.set $this (ref.cast $java.lang.Object $ternaryexpression.TernaryExpression (local.get $this.untyped) (global.get $ternaryexpression.TernaryExpression.rtt)))
  (block $return.label
@@ -51,9 +52,13 @@
    ;; boolean b = ((number == 1)) ? ((number == 2)) : ((number == 1));
    
    (local.set $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
-   ;; int value = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30));
+   ;; int value = (Integer $qualifier = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30)),$qualifier.intValue());
    
-   (local.set $value (i32.const 0))
+   (local.set $value (block (result i32)
+    
+    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
+    (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+   ))
   )
  )
 )

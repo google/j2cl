@@ -15,11 +15,9 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -34,6 +32,16 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
  * assignment or method invocation conversion contexts.
  */
 public class InsertBoxingConversions extends NormalizationPass {
+  private final boolean areBooleanAndDoubleBoxed;
+
+  public InsertBoxingConversions() {
+    this(false);
+  }
+
+  public InsertBoxingConversions(boolean areBooleanAndDoubleBoxed) {
+    this.areBooleanAndDoubleBoxed = areBooleanAndDoubleBoxed;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
@@ -62,9 +70,7 @@ public class InsertBoxingConversions extends NormalizationPass {
       public Expression rewriteCastContext(CastExpression castExpression) {
         TypeDescriptor toTypeDescriptor = castExpression.getCastTypeDescriptor();
         TypeDescriptor fromTypeDescriptor = castExpression.getExpression().getTypeDescriptor();
-        if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
-            && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
-            && !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor)) {
+        if (needsBoxing(toTypeDescriptor, fromTypeDescriptor)) {
           // Actually remove the cast and replace it with the boxing.
           Expression boxedExpression = box(castExpression.getExpression());
           // It's possible that casting a primitive type to a non-boxed reference type.
@@ -93,13 +99,18 @@ public class InsertBoxingConversions extends NormalizationPass {
     };
   }
 
-  private static Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (!TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
-        && TypeDescriptors.isNonVoidPrimitiveType(expression.getTypeDescriptor())
-        && !TypeDescriptors.isPrimitiveBooleanOrDouble(expression.getTypeDescriptor())) {
+  private Expression maybeBox(TypeDescriptor toTypeDescriptor, Expression expression) {
+    if (needsBoxing(toTypeDescriptor, expression.getTypeDescriptor())) {
       return box(expression);
     }
     return expression;
+  }
+
+  private boolean needsBoxing(TypeDescriptor toTypeDescriptor, TypeDescriptor fromTypeDescriptor) {
+    return !TypeDescriptors.isNonVoidPrimitiveType(toTypeDescriptor)
+        && TypeDescriptors.isNonVoidPrimitiveType(fromTypeDescriptor)
+        && (areBooleanAndDoubleBoxed
+            || !TypeDescriptors.isPrimitiveBooleanOrDouble(fromTypeDescriptor));
   }
 
   private static Expression maybeNarrowNumberLiteral(
@@ -115,15 +126,14 @@ public class InsertBoxingConversions extends NormalizationPass {
    * Boxes {@code expression} using the valueOf() method of the corresponding boxed type. e.g.
    * expression => Integer.valueOf(expression).
    */
-  private static Expression box(Expression expression) {
+  private Expression box(Expression expression) {
     PrimitiveTypeDescriptor primitiveType =
         (PrimitiveTypeDescriptor) expression.getTypeDescriptor();
-    checkArgument(!TypeDescriptors.isPrimitiveVoid(primitiveType));
-    checkArgument(!TypeDescriptors.isPrimitiveBooleanOrDouble(primitiveType));
-    DeclaredTypeDescriptor boxType = primitiveType.toBoxedType();
 
     MethodDescriptor valueOfMethodDescriptor =
-        boxType.getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
+        primitiveType
+            .toBoxedType()
+            .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, primitiveType);
     return MethodCall.Builder.from(valueOfMethodDescriptor).setArguments(expression).build();
   }
 }

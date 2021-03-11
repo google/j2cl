@@ -382,12 +382,12 @@
     (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 2))
     (local.get $$array_literal)
    )))
-   ;; jsvarargs.Main.generics((Integer[] $array_literal = new Integer[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
+   ;; jsvarargs.Main.generics((Integer[] $array_literal = new Integer[2],($array_literal[0] = java.lang.Integer.valueOf(1)),($array_literal[1] = java.lang.Integer.valueOf(2)),$array_literal));
    (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $Object.array))
     
     (local.set $$array_literal_1 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_1)) (i32.const 0) (ref.null $java.lang.Integer))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_1)) (i32.const 1) (ref.null $java.lang.Integer))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_1)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_1)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
     (local.get $$array_literal_1)
    )))
    ;; jsvarargs.Main.f2((int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
@@ -398,12 +398,12 @@
     (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
     (local.get $$array_literal_2)
    )))
-   ;; jsvarargs.Main.generics((Integer[] $array_literal = new Integer[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
+   ;; jsvarargs.Main.generics((Integer[] $array_literal = new Integer[2],($array_literal[0] = java.lang.Integer.valueOf(1)),($array_literal[1] = java.lang.Integer.valueOf(2)),$array_literal));
    (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $Object.array))
     
     (local.set $$array_literal_3 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_3)) (i32.const 0) (ref.null $java.lang.Integer))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_3)) (i32.const 1) (ref.null $java.lang.Integer))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_3)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_3)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
     (local.get $$array_literal_3)
    )))
    ;; jsvarargs.Main.f2((int[] $array_literal = new int[0],$array_literal));
@@ -471,12 +471,12 @@
     ))
     (local.get $$array_literal_11)
    )))
-   ;; jsvarargs.Main.generics((Integer[] $array_literal = new Integer[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
+   ;; jsvarargs.Main.generics((Integer[] $array_literal = new Integer[2],($array_literal[0] = java.lang.Integer.valueOf(1)),($array_literal[1] = java.lang.Integer.valueOf(2)),$array_literal));
    (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $Object.array))
     
     (local.set $$array_literal_14 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_14)) (i32.const 0) (ref.null $java.lang.Integer))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_14)) (i32.const 1) (ref.null $java.lang.Integer))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_14)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_14)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
     (local.get $$array_literal_14)
    )))
    ;; jsvarargs.Main.f2((int[] $array_literal = new int[0],$array_literal));
@@ -517,13 +517,13 @@
     (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal_20)) (i32.const 1) (i32.const 2))
     (local.get $$array_literal_20)
    ))
-   ;; Integer[] integers = (Integer[] $array_literal = new Integer[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal);
+   ;; Integer[] integers = (Integer[] $array_literal = new Integer[2],($array_literal[0] = java.lang.Integer.valueOf(1)),($array_literal[1] = java.lang.Integer.valueOf(2)),$array_literal);
    
    (local.set $integers (block (result (ref null $Object.array))
     
     (local.set $$array_literal_21 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_21)) (i32.const 0) (ref.null $java.lang.Integer))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_21)) (i32.const 1) (ref.null $java.lang.Integer))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_21)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_21)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
     (local.get $$array_literal_21)
    ))
    ;; jsvarargs.Main.f2(ints);

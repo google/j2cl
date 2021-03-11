@@ -42,6 +42,13 @@ public class AssertsBase {
     }
   }
 
+  // DO NOT INTRODUCE a helper from a Supplier, since the implicit return in the lambda might
+  // introduce casts and autoboxing. The whole purpose of this assert helper is to make sure that
+  // the code written by the user does not omit casts.
+  public static void assertThrowsClassCastException(JsRunnable runnable) {
+    assertThrowsClassCastException(runnable, (String) null);
+  }
+
   public static void assertThrowsClassCastException(
       JsRunnable runnable, String qualifiedBinaryName) {
     try {
@@ -54,6 +61,14 @@ public class AssertsBase {
             expected.getMessage().endsWith("cannot be cast to " + qualifiedBinaryName));
       }
     }
+  }
+
+  public static void assertThrowsClassCastException(JsRunnable runnable, Class<?> toClass) {
+    assertThrowsClassCastException(runnable, toClass.getName());
+  }
+
+  public static void assertThrowsNullPointerException(JsRunnable runnable) {
+    assertThrows(NullPointerException.class, runnable);
   }
 
   public static void assertThrows(Class<? extends Exception> exceptionClass, JsRunnable runnable) {

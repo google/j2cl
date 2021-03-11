@@ -20,6 +20,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.passes.JsInteropRestrictionsChecker;
@@ -70,6 +71,7 @@ class J2clTranspiler {
       // TODO(rluble): cleanup the static state.
       MemberDescriptor.setWasmManglingPatterns();
       TypeDeclaration.setIgnoreJsEnumAnnotations();
+      MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
     }
     Library library =
         options

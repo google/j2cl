@@ -90,8 +90,8 @@
  (local.set $this (ref.cast $java.lang.Object $methodreferences.MethodReferences (local.get $this.untyped) (global.get $methodreferences.MethodReferences.rtt)))
  (block $return.label
   (block
-   ;; return true;
-   (local.set $return.value (ref.null $java.lang.Boolean))
+   ;; return java.lang.Boolean.valueOf(true);
+   (local.set $return.value (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
    (br $return.label)
   )
  )
@@ -127,8 +127,8 @@
  (local.set $this (ref.cast $java.lang.Object $methodreferences.MethodReferences (local.get $this.untyped) (global.get $methodreferences.MethodReferences.rtt)))
  (block $return.label
   (block
-   ;; return false;
-   (local.set $return.value (ref.null $java.lang.Boolean))
+   ;; return java.lang.Boolean.valueOf(false);
+   (local.set $return.value (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
    (br $return.label)
   )
  )
@@ -148,6 +148,7 @@
  (local $arg0_1 (ref null $java.lang.Number))
  (local $objectPredicate (ref null $java.lang.Object))
  (local $arg0_2 (ref null $methodreferences.MethodReferences))
+ (local $$qualifier (ref null $java.lang.Boolean))
  (local $objectCapturingOuterProducer (ref null $java.lang.Object))
  (local $arrayProducer (ref null $java.lang.Object))
  (local $arg0_3 i32)

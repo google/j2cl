@@ -47,6 +47,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** A method parameter descriptor */
   @AutoValue
   public abstract static class ParameterDescriptor {
+
+    // TODO(b/182341814): This is a temporary hack to be able to disable DoNotAutobox annotations
+    //   on wasm
+    private static final ThreadLocal<Boolean> ignoreDoNotAutoboxAnnotations =
+        ThreadLocal.withInitial(() -> false);
+
+    public static void setIgnoreDoNotAutoboxAnnotations() {
+      ignoreDoNotAutoboxAnnotations.set(true);
+    }
+
     public abstract TypeDescriptor getTypeDescriptor();
 
     public abstract boolean isVarargs();
@@ -86,6 +96,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       abstract ParameterDescriptor autoBuild();
 
       public ParameterDescriptor build() {
+        if (ignoreDoNotAutoboxAnnotations.get()) {
+          setDoNotAutobox(false);
+        }
         return interner.intern(autoBuild());
       }
     }

@@ -85,21 +85,6 @@ public class Asserts extends AssertsBase {
     void run();
   }
 
-  // DO NOT INTRODUCE a helper from a Supplier, since the implicit return in the lambda might
-  // introduce casts and autoboxing. The whole purpose of this assert helper is to make sure that
-  // the code written by the user does not omit casts.
-  public static void assertThrowsClassCastException(JsRunnable runnable) {
-    assertThrowsClassCastException(runnable, (String) null);
-  }
-
-  public static void assertThrowsClassCastException(JsRunnable runnable, Class<?> toClass) {
-    assertThrowsClassCastException(runnable, toClass.getName());
-  }
-
-  public static void assertThrowsNullPointerException(JsRunnable runnable) {
-    assertThrows(NullPointerException.class, runnable);
-  }
-
   /**
    * Checks that the actual runtime type of {@code actual} is {@code expectedType}.
    *

@@ -1196,13 +1196,29 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $bool i32)
+ (local $$qualifier (ref null $java.lang.Boolean))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $b i32)
+ (local $$qualifier_1 (ref null $java.lang.Byte))
+ (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $c i32)
+ (local $$qualifier_2 (ref null $java.lang.Character))
+ (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $s i32)
+ (local $$qualifier_3 (ref null $java.lang.Short))
+ (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $i i32)
+ (local $$qualifier_4 (ref null $java.lang.Integer))
+ (local $$cast_expression_4 (ref null $java.lang.Object))
  (local $l i64)
+ (local $$qualifier_5 (ref null $java.lang.Long))
+ (local $$cast_expression_5 (ref null $java.lang.Object))
  (local $f f32)
+ (local $$qualifier_6 (ref null $java.lang.Float))
+ (local $$cast_expression_6 (ref null $java.lang.Object))
  (local $d f64)
+ (local $$qualifier_7 (ref null $java.lang.Double))
+ (local $$cast_expression_7 (ref null $java.lang.Object))
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast $java.lang.Object $cast.CastPrimitives (local.get $this.untyped) (global.get $cast.CastPrimitives.rtt)))
  (block $return.label
@@ -1210,30 +1226,94 @@
    ;; Object o = new Object.<init>();
    
    (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   ;; boolean bool = ((boolean) o);
+   ;; boolean bool = (Boolean $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression))),$qualifier.booleanValue());
    
-   (local.set $bool (i32.const 0))
-   ;; byte b = ((byte) o);
+   (local.set $bool (block (result i32)
+    
+    (local.set $$qualifier (block (result (ref null $java.lang.Boolean))
+     
+     (local.set $$cast_expression (local.get $o))
+     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Boolean)) (else (ref.cast $java.lang.Object $java.lang.Boolean (local.get $$cast_expression) (global.get $java.lang.Boolean.rtt))))
+    ))
+    (call_ref (local.get $$qualifier)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
+   ))
+   ;; byte b = (Byte $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Byte) $cast_expression))),$qualifier.byteValue());
    
-   (local.set $b (i32.const 0))
-   ;; char c = ((char) o);
+   (local.set $b (block (result i32)
+    
+    (local.set $$qualifier_1 (block (result (ref null $java.lang.Byte))
+     
+     (local.set $$cast_expression_1 (local.get $o))
+     (if (result (ref null $java.lang.Byte)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Byte)) (else (ref.cast $java.lang.Object $java.lang.Byte (local.get $$cast_expression_1) (global.get $java.lang.Byte.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $$qualifier_1))))
+   ))
+   ;; char c = (Character $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Character) $cast_expression))),$qualifier.charValue());
    
-   (local.set $c (i32.const 0))
-   ;; short s = ((short) o);
+   (local.set $c (block (result i32)
+    
+    (local.set $$qualifier_2 (block (result (ref null $java.lang.Character))
+     
+     (local.set $$cast_expression_2 (local.get $o))
+     (if (result (ref null $java.lang.Character)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $java.lang.Character)) (else (ref.cast $java.lang.Object $java.lang.Character (local.get $$cast_expression_2) (global.get $java.lang.Character.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_2)(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $$qualifier_2))))
+   ))
+   ;; short s = (Short $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Short) $cast_expression))),$qualifier.shortValue());
    
-   (local.set $s (i32.const 0))
-   ;; int i = ((int) o);
+   (local.set $s (block (result i32)
+    
+    (local.set $$qualifier_3 (block (result (ref null $java.lang.Short))
+     
+     (local.set $$cast_expression_3 (local.get $o))
+     (if (result (ref null $java.lang.Short)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $java.lang.Short)) (else (ref.cast $java.lang.Object $java.lang.Short (local.get $$cast_expression_3) (global.get $java.lang.Short.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_3)(struct.get $java.lang.Short.vtable $m_shortValue__short (struct.get $java.lang.Short $vtable(local.get $$qualifier_3))))
+   ))
+   ;; int i = (Integer $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue());
    
-   (local.set $i (i32.const 0))
-   ;; long l = ((long) o);
+   (local.set $i (block (result i32)
+    
+    (local.set $$qualifier_4 (block (result (ref null $java.lang.Integer))
+     
+     (local.set $$cast_expression_4 (local.get $o))
+     (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression_4)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression_4) (global.get $java.lang.Integer.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_4)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_4))))
+   ))
+   ;; long l = (Long $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Long) $cast_expression))),$qualifier.longValue());
    
-   (local.set $l (i64.const 0))
-   ;; float f = ((float) o);
+   (local.set $l (block (result i64)
+    
+    (local.set $$qualifier_5 (block (result (ref null $java.lang.Long))
+     
+     (local.set $$cast_expression_5 (local.get $o))
+     (if (result (ref null $java.lang.Long)) (ref.is_null (local.get $$cast_expression_5)) (then (ref.null $java.lang.Long)) (else (ref.cast $java.lang.Object $java.lang.Long (local.get $$cast_expression_5) (global.get $java.lang.Long.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_5)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $$qualifier_5))))
+   ))
+   ;; float f = (Float $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Float) $cast_expression))),$qualifier.floatValue());
    
-   (local.set $f (f32.const 0.0))
-   ;; double d = ((double) o);
+   (local.set $f (block (result f32)
+    
+    (local.set $$qualifier_6 (block (result (ref null $java.lang.Float))
+     
+     (local.set $$cast_expression_6 (local.get $o))
+     (if (result (ref null $java.lang.Float)) (ref.is_null (local.get $$cast_expression_6)) (then (ref.null $java.lang.Float)) (else (ref.cast $java.lang.Object $java.lang.Float (local.get $$cast_expression_6) (global.get $java.lang.Float.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_6)(struct.get $java.lang.Float.vtable $m_floatValue__float (struct.get $java.lang.Float $vtable(local.get $$qualifier_6))))
+   ))
+   ;; double d = (Double $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Double) $cast_expression))),$qualifier.doubleValue());
    
-   (local.set $d (f64.const 0.0))
+   (local.set $d (block (result f64)
+    
+    (local.set $$qualifier_7 (block (result (ref null $java.lang.Double))
+     
+     (local.set $$cast_expression_7 (local.get $o))
+     (if (result (ref null $java.lang.Double)) (ref.is_null (local.get $$cast_expression_7)) (then (ref.null $java.lang.Double)) (else (ref.cast $java.lang.Object $java.lang.Double (local.get $$cast_expression_7) (global.get $java.lang.Double.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_7)(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier_7))))
+   ))
   )
  )
 )
@@ -1255,21 +1335,21 @@
    ;; Byte boxedByte = java.lang.Byte.valueOf(0);
    
    (local.set $boxedByte (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 0)))
-   ;; short s = ((short) boxedByte);
+   ;; short s = boxedByte.byteValue();
    
-   (local.set $s (i32.const 0))
-   ;; int i = ((int) boxedByte);
+   (local.set $s (call_ref (local.get $boxedByte)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
+   ;; int i = boxedByte.byteValue();
    
-   (local.set $i (i32.const 0))
-   ;; long l = ((long) boxedByte);
+   (local.set $i (call_ref (local.get $boxedByte)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte)))))
+   ;; long l = javaemul.internal.Primitives.widenByteToLong(boxedByte.byteValue());
    
-   (local.set $l (i64.const 0))
-   ;; float f = ((float) boxedByte);
+   (local.set $l (i64.extend_i32_s (call_ref (local.get $boxedByte)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
+   ;; float f = javaemul.internal.Primitives.widenByteToFloat(boxedByte.byteValue());
    
-   (local.set $f (f32.const 0.0))
-   ;; double d = ((double) boxedByte);
+   (local.set $f (f32.convert_i32_s (call_ref (local.get $boxedByte)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
+   ;; double d = javaemul.internal.Primitives.widenByteToDouble(boxedByte.byteValue());
    
-   (local.set $d (f64.const 0.0))
+   (local.set $d (f64.convert_i32_s (call_ref (local.get $boxedByte)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $boxedByte))))))
   )
  )
 )

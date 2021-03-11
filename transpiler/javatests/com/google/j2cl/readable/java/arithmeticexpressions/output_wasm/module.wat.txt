@@ -365,88 +365,90 @@
  (local $$qualifier_1 (ref null $java.lang.Integer))
  (local $$value_2 (ref null $java.lang.Integer))
  (local $ref (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+ (local $$qualifier_2 (ref null $java.lang.Integer))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $n i32)
+ (local $$qualifier_3 (ref null $java.lang.Integer))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
-   ;; Integer c = 1000;
+   ;; Integer c = java.lang.Integer.valueOf(1000);
    
-   (local.set $c (ref.null $java.lang.Integer))
-   ;; Integer d = 10000;
+   (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1000)))
+   ;; Integer d = java.lang.Integer.valueOf(10000);
    
-   (local.set $d (ref.null $java.lang.Integer))
-   ;; (d = (d + c));
-   (local.set $d (ref.null $java.lang.Integer))
+   (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 10000)))
+   ;; (d = java.lang.Integer.valueOf((d.intValue() + c.intValue())));
+   (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $d)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $d)))) (call_ref (local.get $c)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $c)))))))
    ;; int i = 43;
    
    (local.set $i (i32.const 43))
-   ;; (d = (d + i));
-   (local.set $d (ref.null $java.lang.Integer))
-   ;; (d = (d << i));
-   (local.set $d (ref.null $java.lang.Integer))
-   ;; (i = (i + c));
-   (local.set $i (i32.add (local.get $i) (i32.const 0)))
-   ;; Integer e = ((c = (c + 1)),c);
+   ;; (d = java.lang.Integer.valueOf((d.intValue() + i)));
+   (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $d)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $d)))) (local.get $i))))
+   ;; (d = java.lang.Integer.valueOf((d.intValue() << i)));
+   (local.set $d (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.shl (call_ref (local.get $d)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $d)))) (local.get $i))))
+   ;; (i = (i + c.intValue()));
+   (local.set $i (i32.add (local.get $i) (call_ref (local.get $c)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $c))))))
+   ;; Integer e = ((c = java.lang.Integer.valueOf((c.intValue() + 1))),c);
    
    (local.set $e (block (result (ref null $java.lang.Integer))
-    (local.set $c (ref.null $java.lang.Integer))
+    (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $c)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $c)))) (i32.const 1))))
     (local.get $c)
    ))
-   ;; (e = ((c = (c + 1)),c));
+   ;; (e = ((c = java.lang.Integer.valueOf((c.intValue() + 1))),c));
    (local.set $e (block (result (ref null $java.lang.Integer))
-    (local.set $c (ref.null $java.lang.Integer))
+    (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $c)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $c)))) (i32.const 1))))
     (local.get $c)
    ))
-   ;; Double e2 = 100.0;
+   ;; Double e2 = java.lang.Double.valueOf(100.0);
    
-   (local.set $e2 (ref.null $java.lang.Double))
-   ;; (e2 = (e2 + 1.0));
-   (local.set $e2 (ref.null $java.lang.Double))
-   ;; Integer f = (Integer $value = c,(c = (c + 1)),$value);
+   (local.set $e2 (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 100.0)))
+   ;; (e2 = java.lang.Double.valueOf((e2.doubleValue() + 1.0)));
+   (local.set $e2 (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.add (call_ref (local.get $e2)(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $e2)))) (f64.const 1.0))))
+   ;; Integer f = (Integer $value = c,(c = java.lang.Integer.valueOf((c.intValue() + 1))),$value);
    
    (local.set $f (block (result (ref null $java.lang.Integer))
     
     (local.set $$value (local.get $c))
-    (local.set $c (ref.null $java.lang.Integer))
+    (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $c)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $c)))) (i32.const 1))))
     (local.get $$value)
    ))
-   ;; (f = (Integer $value = c,(c = (c + 1)),$value));
+   ;; (f = (Integer $value = c,(c = java.lang.Integer.valueOf((c.intValue() + 1))),$value));
    (local.set $f (block (result (ref null $java.lang.Integer))
     
     (local.set $$value_1 (local.get $c))
-    (local.set $c (ref.null $java.lang.Integer))
+    (local.set $c (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $c)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $c)))) (i32.const 1))))
     (local.get $$value_1)
    ))
-   ;; Byte b = 0;
+   ;; Byte b = java.lang.Byte.valueOf(0);
    
-   (local.set $b (ref.null $java.lang.Byte))
-   ;; (b = javaemul.internal.Primitives.narrowIntToByte((b + 1)));
-   (local.set $b (ref.null $java.lang.Byte))
-   ;; Character ch = 99;
+   (local.set $b (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 0)))
+   ;; (b = java.lang.Byte.valueOf(javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowIntToByte((b.byteValue() + 1)))));
+   (local.set $b (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.extend8_s (i32.extend8_s (i32.add (call_ref (local.get $b)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $b)))) (i32.const 1))))))
+   ;; Character ch = java.lang.Character.valueOf(99);
    
-   (local.set $ch (ref.null $java.lang.Character))
-   ;; (ch = javaemul.internal.Primitives.narrowIntToChar((ch + 1)));
-   (local.set $ch (ref.null $java.lang.Character))
+   (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (i32.const 99)))
+   ;; (ch = java.lang.Character.valueOf(javaemul.internal.Primitives.narrowIntToChar(javaemul.internal.Primitives.narrowIntToChar((ch.charValue() + 1)))));
+   (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (i32.add (call_ref (local.get $ch)(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $ch)))) (i32.const 1))))))
    (block
-    ;; Integer $qualifier = ((f = (f + 1)),f);
+    ;; Integer $qualifier = ((f = java.lang.Integer.valueOf((f.intValue() + 1))),f);
     
     (local.set $$qualifier (block (result (ref null $java.lang.Integer))
-     (local.set $f (ref.null $java.lang.Integer))
+     (local.set $f (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (call_ref (local.get $f)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $f)))) (i32.const 1))))
      (local.get $f)
     ))
     ;; $qualifier.intValue();
     (drop (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier)))))
    )
    (block
-    ;; Integer $qualifier = (Integer $value = f,(f = (f - 1)),$value);
+    ;; Integer $qualifier = (Integer $value = f,(f = java.lang.Integer.valueOf((f.intValue() - 1))),$value);
     
     (local.set $$qualifier_1 (block (result (ref null $java.lang.Integer))
      
      (local.set $$value_2 (local.get $f))
-     (local.set $f (ref.null $java.lang.Integer))
+     (local.set $f (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.sub (call_ref (local.get $f)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $f)))) (i32.const 1))))
      (local.get $$value_2)
     ))
     ;; $qualifier.intValue();
@@ -455,11 +457,27 @@
    ;; Ref<Integer> ref = null;
    
    (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
-   ;; (ref.field = ((Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))) + 1));
-   (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref) (ref.null $java.lang.Integer))
-   ;; int n = (1 + (Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
+   ;; (ref.field = java.lang.Integer.valueOf(((Integer $qualifier = (Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue()) + 1)));
+   (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (block (result i32)
+    
+    (local.set $$qualifier_2 (block (result (ref null $java.lang.Integer))
+     
+     (local.set $$cast_expression (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref)))
+     (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_2)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
+   ) (i32.const 1))))
+   ;; int n = (1 + (Integer $qualifier = (Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue()));
    
-   (local.set $n (i32.add (i32.const 1) (i32.const 0)))
+   (local.set $n (i32.add (i32.const 1) (block (result i32)
+    
+    (local.set $$qualifier_3 (block (result (ref null $java.lang.Integer))
+     
+     (local.set $$cast_expression_1 (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref)))
+     (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression_1) (global.get $java.lang.Integer.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_3)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
+   )))
   )
  )
 )
@@ -516,23 +534,24 @@
  (local $i i32)
  (local $l i64)
  (local $d f64)
+ (local $$qualifier (ref null $java.lang.Integer))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast $java.lang.Object $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
-   ;; Integer boxedInteger = 3;
+   ;; Integer boxedInteger = java.lang.Integer.valueOf(3);
    
-   (local.set $boxedInteger (ref.null $java.lang.Integer))
+   (local.set $boxedInteger (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 3)))
    ;; int i;
    
    ;; long l;
    
    ;; double d;
    
-   ;; (l = (javaemul.internal.Primitives.widenIntToLong((2 - boxedInteger)) - 2));
-   (local.set $l (i64.sub (i64.extend_i32_s (i32.sub (i32.const 2) (i32.const 0))) (i64.const 2)))
-   ;; (l = (javaemul.internal.Primitives.widenIntToLong((2 | boxedInteger)) | 2));
-   (local.set $l (i64.or (i64.extend_i32_s (i32.or (i32.const 2) (i32.const 0))) (i64.const 2)))
+   ;; (l = (javaemul.internal.Primitives.widenIntToLong((2 - boxedInteger.intValue())) - 2));
+   (local.set $l (i64.sub (i64.extend_i32_s (i32.sub (i32.const 2) (call_ref (local.get $boxedInteger)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInteger)))))) (i64.const 2)))
+   ;; (l = (javaemul.internal.Primitives.widenIntToLong((2 | boxedInteger.intValue())) | 2));
+   (local.set $l (i64.or (i64.extend_i32_s (i32.or (i32.const 2) (call_ref (local.get $boxedInteger)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInteger)))))) (i64.const 2)))
    ;; (l = ((((1000000 * l) * 60) * 60) * 24));
    (local.set $l (i64.mul (i64.mul (i64.mul (i64.mul (i64.const 1000000) (local.get $l)) (i64.const 60)) (i64.const 60)) (i64.const 24)))
    ;; (l = ((javaemul.internal.Primitives.widenIntToLong(((24 * 60) * 60)) * l) * 1000000));
@@ -545,10 +564,20 @@
     )))
     (local.get $l)
    )))
-   ;; (l = ((boxedInteger = ((i = 20),i)),boxedInteger));
-   (local.set $l (i64.const 0))
-   ;; (l = ((javaemul.internal.Primitives.widenIntToLong((i + boxedInteger)) + l) + 20));
-   (local.set $l (i64.add (i64.add (i64.extend_i32_s (i32.add (local.get $i) (i32.const 0))) (local.get $l)) (i64.const 20)))
+   ;; (l = javaemul.internal.Primitives.widenIntToLong((Integer $qualifier = ((boxedInteger = java.lang.Integer.valueOf(((i = 20),i))),boxedInteger),$qualifier.intValue())));
+   (local.set $l (i64.extend_i32_s (block (result i32)
+    
+    (local.set $$qualifier (block (result (ref null $java.lang.Integer))
+     (local.set $boxedInteger (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (block (result i32)
+      (local.set $i (i32.const 20))
+      (local.get $i)
+     )))
+     (local.get $boxedInteger)
+    ))
+    (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+   )))
+   ;; (l = ((javaemul.internal.Primitives.widenIntToLong((i + boxedInteger.intValue())) + l) + 20));
+   (local.set $l (i64.add (i64.add (i64.extend_i32_s (i32.add (local.get $i) (call_ref (local.get $boxedInteger)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxedInteger)))))) (local.get $l)) (i64.const 20)))
    ;; (d = (javaemul.internal.Primitives.widenLongToDouble((20 + l)) + d));
    (local.set $d (f64.add (f64.convert_i64_s (i64.add (i64.const 20) (local.get $l))) (local.get $d)))
   )

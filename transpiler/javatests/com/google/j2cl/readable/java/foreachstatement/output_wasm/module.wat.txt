@@ -152,6 +152,7 @@
  (local $$iterator_1 (ref null $java.lang.Object))
  (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $s_1 i32)
+ (local $$qualifier_1 (ref null $java.lang.Integer))
  (local $$cast_expression_3 (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -206,9 +207,17 @@
      (br_if 1 (i32.eqz (i32.const 0)))
      (block $LOOP_1.CONTINUE
       (block
-       ;; int s = (Object $cast_expression = $iterator.next(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression)));
+       ;; int s = (Integer $qualifier = (Object $cast_expression = $iterator.next(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue());
        
-       (local.set $s_1 (i32.const 0))
+       (local.set $s_1 (block (result i32)
+        
+        (local.set $$qualifier_1 (block (result (ref null $java.lang.Integer))
+         
+         (local.set $$cast_expression_3 (ref.null $java.lang.Integer))
+         (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression_3) (global.get $java.lang.Integer.rtt))))
+        ))
+        (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
+       ))
        (block
        )
       )

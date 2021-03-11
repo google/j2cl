@@ -303,7 +303,6 @@ public enum Backend {
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           NormalizeStaticMemberQualifiers::new,
           NormalizeMultiExpressions::new,
-          NormalizeSwitchStatements::new,
 
           // Rewrite operations that do not have direct support in wasm into ones that have.
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
@@ -311,9 +310,12 @@ public enum Backend {
           // Rewrite 'a != b' to '!(a == b)'
           RewriteReferenceEqualityOperations::new,
           RewriteUnaryExpressions::new,
+          InsertNarrowingReferenceConversions::new,
+          () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed */ true),
+          () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed */ true),
           () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble */ false),
           () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),
-
+          NormalizeSwitchStatements::new,
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           RewriteShortcutOperators::new,
           ImplementStringCompileTimeConstants::new,
@@ -336,6 +338,7 @@ public enum Backend {
 
           // TODO(b/182007249): remove this pass when j2wasm use WasmGC milestone 3.
           NormalizeNullCasting::new,
+
           // Post-verifications
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,

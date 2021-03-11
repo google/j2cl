@@ -36,6 +36,16 @@ import java.util.Optional;
  * method invocation, unary numeric promotion or binary numeric promotion conversion contexts.
  */
 public class InsertUnboxingConversions extends NormalizationPass {
+  private final boolean areBooleanAndDoubleBoxed;
+
+  public InsertUnboxingConversions() {
+    this(false);
+  }
+
+  public InsertUnboxingConversions(boolean areBooleanAndDoubleBoxed) {
+    this.areBooleanAndDoubleBoxed = areBooleanAndDoubleBoxed;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(new ConversionContextVisitor(getContextRewriter()));
@@ -79,14 +89,14 @@ public class InsertUnboxingConversions extends NormalizationPass {
     };
   }
 
-  private static Expression maybeUnbox(Expression expression) {
+  private Expression maybeUnbox(Expression expression) {
     if (TypeDescriptors.isBoxedType(expression.getTypeDescriptor())) {
       return unbox(expression);
     }
     return expression;
   }
 
-  private static Optional<Expression> maybeUnboxAndWiden(
+  private Optional<Expression> maybeUnboxAndWiden(
       TypeDescriptor toTypeDescriptor, Expression expression) {
     TypeDescriptor fromTypeDescriptor = expression.getTypeDescriptor();
 
@@ -116,7 +126,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
    * Unboxes {expression} using the ***Value() method of the corresponding boxed type. e.g
    * expression => expression.intValue().
    */
-  private static Expression unbox(Expression expression) {
+  private Expression unbox(Expression expression) {
     DeclaredTypeDescriptor boxType =
         (DeclaredTypeDescriptor) expression.getTypeDescriptor().toRawTypeDescriptor();
     checkArgument(TypeDescriptors.isBoxedType(boxType));
@@ -128,7 +138,7 @@ public class InsertUnboxingConversions extends NormalizationPass {
     MethodCall methodCall =
         MethodCall.Builder.from(valueMethodDescriptor).setQualifier(expression).build();
 
-    if (TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
+    if (!areBooleanAndDoubleBoxed && TypeDescriptors.isBoxedBooleanOrDouble(boxType)) {
       methodCall = AstUtils.devirtualizeMethodCall(methodCall, boxType);
     }
     return methodCall;

@@ -13,4 +13,5 @@ package(
 integration_test(
     name = "arrayofboxedtype",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
 )

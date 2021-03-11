@@ -120,22 +120,25 @@
    ))
    ;; Boolean br;
    
-   ;; (br = ((Boolean) (ls == rs)));
-   (local.set $br (ref.null $java.lang.Boolean))
-   ;; (br = ((Boolean) (ls != rs)));
-   (local.set $br (ref.null $java.lang.Boolean))
-   ;; (br = ((Boolean) (ls ^ rs)));
-   (local.set $br (ref.null $java.lang.Boolean))
-   ;; (br = ((Boolean) (ls & rs)));
-   (local.set $br (ref.null $java.lang.Boolean))
-   ;; (br = ((Boolean) (ls | rs)));
-   (local.set $br (ref.null $java.lang.Boolean))
-   ;; (br = ((Boolean) (ls) ? (rs) : (false)));
-   (local.set $br (ref.null $java.lang.Boolean))
-   ;; (br = ((Boolean) (ls) ? (true) : (rs)));
-   (local.set $br (ref.null $java.lang.Boolean))
-   ;; (br = ((Boolean) ((ls = rs),ls)));
-   (local.set $br (ref.null $java.lang.Boolean))
+   ;; (br = java.lang.Boolean.valueOf((ls == rs)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eq (local.get $ls) (local.get $rs))))
+   ;; (br = java.lang.Boolean.valueOf((ls != rs)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.ne (local.get $ls) (local.get $rs))))
+   ;; (br = java.lang.Boolean.valueOf((ls ^ rs)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.xor (local.get $ls) (local.get $rs))))
+   ;; (br = java.lang.Boolean.valueOf((ls & rs)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.and (local.get $ls) (local.get $rs))))
+   ;; (br = java.lang.Boolean.valueOf((ls | rs)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.or (local.get $ls) (local.get $rs))))
+   ;; (br = java.lang.Boolean.valueOf((ls) ? (rs) : (false)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (if (result i32) (local.get $ls) (then (local.get $rs)) (else (i32.const 0)))))
+   ;; (br = java.lang.Boolean.valueOf((ls) ? (true) : (rs)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (if (result i32) (local.get $ls) (then (i32.const 1)) (else (local.get $rs)))))
+   ;; (br = java.lang.Boolean.valueOf(((ls = rs),ls)));
+   (local.set $br (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (block (result i32)
+    (local.set $ls (local.get $rs))
+    (local.get $ls)
+   )))
    ;; if ((ls == rs)) {
    (if (i32.eq (local.get $ls) (local.get $rs))
     (then

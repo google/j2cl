@@ -451,7 +451,9 @@
  (local $$array_literal_4 (ref null $Object.array))
  (local $$array_literal_5 (ref null $int.array))
  (local $b i32)
+ (local $$qualifier (ref null $java.lang.Boolean))
  (local $$cast_expression (ref null $java.lang.Object))
+ (local $$qualifier_1 (ref null $java.lang.Boolean))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $$cast_expression_3 (ref null $java.lang.Object))
@@ -464,12 +466,12 @@
    (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 100) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
    ;; (booleans = new Boolean[0]);
    (local.set $booleans (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-   ;; (booleans = (Boolean[] $array_literal = new Boolean[2],($array_literal[0] = true),($array_literal[1] = false),$array_literal));
+   ;; (booleans = (Boolean[] $array_literal = new Boolean[2],($array_literal[0] = java.lang.Boolean.valueOf(true)),($array_literal[1] = java.lang.Boolean.valueOf(false)),$array_literal));
    (local.set $booleans (block (result (ref null $Object.array))
     
     (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (ref.null $java.lang.Boolean))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 1) (ref.null $java.lang.Boolean))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
+    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
     (local.get $$array_literal)
    ))
    ;; Boolean[][] booleans2d = javaemul.internal.WasmArrayHelper.createArray((int[] $array_literal = new int[2],($array_literal[0] = 5),($array_literal[1] = 10),$array_literal),-1);
@@ -481,7 +483,7 @@
     (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal_1)) (i32.const 1) (i32.const 10))
     (local.get $$array_literal_1)
    )(i32.const -1)))
-   ;; (booleans2d = (Boolean[][] $array_literal = javaemul.internal.WasmArrayHelper.createArray((int[] $array_literal = new int[2],($array_literal[0] = 2),($array_literal[1] = -1),$array_literal),-1),($array_literal[0] = (Boolean[] $array_literal = new Boolean[2],($array_literal[0] = true),($array_literal[1] = false),$array_literal)),($array_literal[1] = null),$array_literal));
+   ;; (booleans2d = (Boolean[][] $array_literal = javaemul.internal.WasmArrayHelper.createArray((int[] $array_literal = new int[2],($array_literal[0] = 2),($array_literal[1] = -1),$array_literal),-1),($array_literal[0] = (Boolean[] $array_literal = new Boolean[2],($array_literal[0] = java.lang.Boolean.valueOf(true)),($array_literal[1] = java.lang.Boolean.valueOf(false)),$array_literal)),($array_literal[1] = null),$array_literal));
    (local.set $booleans2d (block (result (ref null $Object.array))
     
     (local.set $$array_literal_2 (call $m_createArray__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArrayHelper (block (result (ref null $int.array))
@@ -494,8 +496,8 @@
     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_2)) (i32.const 0) (block (result (ref null $Object.array))
      
      (local.set $$array_literal_4 (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 2) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_4)) (i32.const 0) (ref.null $java.lang.Boolean))
-     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_4)) (i32.const 1) (ref.null $java.lang.Boolean))
+     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_4)) (i32.const 0) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
+     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_4)) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
      (local.get $$array_literal_4)
     ))
     (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal_2)) (i32.const 1) (ref.null $Object.array))
@@ -509,19 +511,39 @@
     (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal_5)) (i32.const 1) (i32.const -1))
     (local.get $$array_literal_5)
    )(i32.const -1)))
-   ;; boolean b = (Object $cast_expression = booleans[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression)));
+   ;; boolean b = (Boolean $qualifier = (Object $cast_expression = booleans[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression))),$qualifier.booleanValue());
    
-   (local.set $b (i32.const 0))
-   ;; (b = (Object $cast_expression = (Object $cast_expression = booleans2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean[]) $cast_expression)))[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression))));
-   (local.set $b (i32.const 0))
-   ;; (booleans[0] = true);
-   (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $booleans)) (i32.const 0) (ref.null $java.lang.Boolean))
-   ;; ((Object $cast_expression = booleans2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean[]) $cast_expression)))[1] = false);
+   (local.set $b (block (result i32)
+    
+    (local.set $$qualifier (block (result (ref null $java.lang.Boolean))
+     
+     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $booleans)) (i32.const 0)))
+     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Boolean)) (else (ref.cast $java.lang.Object $java.lang.Boolean (local.get $$cast_expression) (global.get $java.lang.Boolean.rtt))))
+    ))
+    (call_ref (local.get $$qualifier)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
+   ))
+   ;; (b = (Boolean $qualifier = (Object $cast_expression = (Object $cast_expression = booleans2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean[]) $cast_expression)))[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression))),$qualifier.booleanValue()));
+   (local.set $b (block (result i32)
+    
+    (local.set $$qualifier_1 (block (result (ref null $java.lang.Boolean))
+     
+     (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
+      
+      (local.set $$cast_expression_2 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $booleans2d)) (i32.const 0)))
+      (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+     )) (i32.const 1)))
+     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Boolean)) (else (ref.cast $java.lang.Object $java.lang.Boolean (local.get $$cast_expression_1) (global.get $java.lang.Boolean.rtt))))
+    ))
+    (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
+   ))
+   ;; (booleans[0] = java.lang.Boolean.valueOf(true));
+   (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $booleans)) (i32.const 0) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
+   ;; ((Object $cast_expression = booleans2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean[]) $cast_expression)))[1] = java.lang.Boolean.valueOf(false));
    (array.set $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
     
     (local.set $$cast_expression_3 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $booleans2d)) (i32.const 0)))
     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
-   )) (i32.const 1) (ref.null $java.lang.Boolean))
+   )) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
   )
  )
 )

@@ -134,11 +134,11 @@
    ;; Object object = new Object.<init>();
    
    (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   ;; Star star = (Object $cast_expression = ((Object) 3.0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Star) $cast_expression)));
+   ;; Star star = (Object $cast_expression = java.lang.Double.valueOf(3.0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Star) $cast_expression)));
    
    (local.set $star (block (result (ref null $java.lang.Object))
     
-    (local.set $$cast_expression (ref.null $java.lang.Object))
+    (local.set $$cast_expression (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))
     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
    ))
    ;; return (Object $cast_expression = star,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Wildcard) $cast_expression)));

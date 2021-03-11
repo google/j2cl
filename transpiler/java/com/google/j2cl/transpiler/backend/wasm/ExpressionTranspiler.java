@@ -25,7 +25,6 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
-import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
@@ -196,10 +195,6 @@ final class ExpressionTranspiler {
       public boolean enterCastExpression(CastExpression castExpression) {
         TypeDescriptor castTypeDescriptor =
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
-        if (castExpression.getExpression().getTypeDescriptor().isPrimitive()) {
-          // TODO(b/170691747): Remove when boxing is done.
-          return enterExpression(castExpression);
-        }
         if (castTypeDescriptor.isInterface()) {
           // TODO(rluble): implement interface casts.
           render(castExpression.getExpression());
@@ -267,11 +262,6 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
         TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-        if (instanceOfExpression.getExpression().getTypeDescriptor().isPrimitive()) {
-          // TODO(b/170691747): Remove when boxing is done.
-          return enterExpression(instanceOfExpression);
-        }
-
         if (testTypeDescriptor.isClass() || testTypeDescriptor.isEnum()) {
           sourceBuilder.append(
               format(
@@ -525,40 +515,24 @@ final class ExpressionTranspiler {
     return isPrimitiveVoid(expression.getTypeDescriptor()) || isAssignmentExpression;
   }
 
-  // TODO(dramaix): remove when coercions and casting are in place.
+  // TODO(b/181829823,b/182436577): remove this method when shift operation on longs take the right
+  //  type in their rhs and when NullLiterals have the correct type.
   public static void renderTypedExpression(
       TypeDescriptor typeDescriptor,
       Expression expression,
       SourceBuilder sourceBuilder,
       GenerationEnvironment environment) {
 
-    if (isAssignable(typeDescriptor, expression.getTypeDescriptor())) {
-      render(expression, sourceBuilder, environment);
-    } else {
+    if (typeDescriptor.isPrimitive()
+        && expression.getTypeDescriptor().isPrimitive()
+        && !getWasmTypeForPrimitive(typeDescriptor)
+            .equals(getWasmTypeForPrimitive(expression.getTypeDescriptor()))) {
       render(typeDescriptor.getDefaultValue(), sourceBuilder, environment);
+    } else if (expression instanceof NullLiteral) {
+      render(typeDescriptor.getDefaultValue(), sourceBuilder, environment);
+    } else {
+      render(expression, sourceBuilder, environment);
     }
-  }
-
-  private static boolean isAssignable(
-      TypeDescriptor typeDescriptor, TypeDescriptor expressionTypeDescriptor) {
-
-    if (typeDescriptor.isPrimitive() && expressionTypeDescriptor.isPrimitive()) {
-      return getWasmTypeForPrimitive(typeDescriptor)
-          .equals(getWasmTypeForPrimitive(expressionTypeDescriptor));
-    }
-
-    // TODO(b/170691747): remove that when boxing/inboxing is implemented
-    if (typeDescriptor.isPrimitive() || expressionTypeDescriptor.isPrimitive()) {
-      return false;
-    }
-
-    if (typeDescriptor.isArray()
-        && ((ArrayTypeDescriptor) typeDescriptor).getDimensions() > 1
-        && expressionTypeDescriptor.equals(TypeDescriptors.get().javaLangObjectArray)) {
-      // At runtime, multidimensionnal arrays are object arrays
-      return true;
-    }
-    return expressionTypeDescriptor.isAssignableTo(typeDescriptor);
   }
 
   private ExpressionTranspiler() {}
