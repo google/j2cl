@@ -77,5 +77,9 @@ public class Main {
     char c2 = 'o';
     int i = c1 + c2;
     assertTrue((c1 + c2 + "o").equals(i + "o"));
+
+    // with integer binary operations
+    result = 1 + 2 + "Foo" + 3 + 2;
+    assertTrue(result.equals("3Foo32"));
   }
 }
