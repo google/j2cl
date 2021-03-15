@@ -104,23 +104,20 @@
  (param $args (ref null $Object.array))
  (local $$qualifier (ref null $java.lang.String))
  (local $$qualifier_1 (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
- (local $$array_literal (ref null $char.array))
  (local $$qualifier_2 (ref null $java.lang.String))
  (local $$qualifier_3 (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
- (local $$array_literal_1 (ref null $char.array))
  (local $$qualifier_4 (ref null $java.lang.String))
  (local $$qualifier_5 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
- (local $$array_literal_2 (ref null $char.array))
  (block $return.label
   (block
    ;; multipleabstractparents.MultipleAbstractParents.$clinit();
    (call $$clinit__void@multipleabstractparents.MultipleAbstractParents )
-   ;; assert (String $qualifier = (ArrayList<String> $qualifier = new ArrayList.<init>(),$qualifier.getFoo(null)),$qualifier.equals(java.lang.String.fromInternalArray((char[] $array_literal = new char[18],($array_literal[0] = 65),($array_literal[1] = 98),($array_literal[2] = 115),($array_literal[3] = 116),($array_literal[4] = 114),($array_literal[5] = 97),($array_literal[6] = 99),($array_literal[7] = 116),($array_literal[8] = 67),($array_literal[9] = 111),($array_literal[10] = 108),($array_literal[11] = 108),($array_literal[12] = 101),($array_literal[13] = 99),($array_literal[14] = 116),($array_literal[15] = 105),($array_literal[16] = 111),($array_literal[17] = 110),$array_literal))));
+   ;; assert (String $qualifier = (ArrayList<String> $qualifier = new ArrayList.<init>(),$qualifier.getFoo(null)),$qualifier.equals(javaemul.internal.StringPool.$getString_|AbstractC|()));
    ;; unimplemented statement AssertStatement
-   ;; assert (String $qualifier = (StringList $qualifier = new StringList.<init>(),$qualifier.getFoo(null)),$qualifier.equals(java.lang.String.fromInternalArray((char[] $array_literal = new char[18],($array_literal[0] = 65),($array_literal[1] = 98),($array_literal[2] = 115),($array_literal[3] = 116),($array_literal[4] = 114),($array_literal[5] = 97),($array_literal[6] = 99),($array_literal[7] = 116),($array_literal[8] = 67),($array_literal[9] = 111),($array_literal[10] = 108),($array_literal[11] = 108),($array_literal[12] = 101),($array_literal[13] = 99),($array_literal[14] = 116),($array_literal[15] = 105),($array_literal[16] = 111),($array_literal[17] = 110),$array_literal))));
+   ;; assert (String $qualifier = (StringList $qualifier = new StringList.<init>(),$qualifier.getFoo(null)),$qualifier.equals(javaemul.internal.StringPool.$getString_|AbstractC|()));
    ;; unimplemented statement AssertStatement
-   ;; assert (String $qualifier = (IStringList $qualifier = (Object $cast_expression = new StringList.<init>(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((IStringList) $cast_expression))),$qualifier.getFoo(null)),$qualifier.equals(java.lang.String.fromInternalArray((char[] $array_literal = new char[18],($array_literal[0] = 65),($array_literal[1] = 98),($array_literal[2] = 115),($array_literal[3] = 116),($array_literal[4] = 114),($array_literal[5] = 97),($array_literal[6] = 99),($array_literal[7] = 116),($array_literal[8] = 67),($array_literal[9] = 111),($array_literal[10] = 108),($array_literal[11] = 108),($array_literal[12] = 101),($array_literal[13] = 99),($array_literal[14] = 116),($array_literal[15] = 105),($array_literal[16] = 111),($array_literal[17] = 110),$array_literal))));
+   ;; assert (String $qualifier = (IStringList $qualifier = (Object $cast_expression = new StringList.<init>(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((IStringList) $cast_expression))),$qualifier.getFoo(null)),$qualifier.equals(javaemul.internal.StringPool.$getString_|AbstractC|()));
    ;; unimplemented statement AssertStatement
   )
  )
@@ -261,35 +258,12 @@
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
- (local $$array_literal (ref null $char.array))
  (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
  (local.set $this (ref.cast $java.lang.Object $multipleabstractparents.MultipleAbstractParents.AbstractCollection (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.rtt)))
  (block $return.label
   (block
-   ;; return java.lang.String.fromInternalArray((char[] $array_literal = new char[18],($array_literal[0] = 65),($array_literal[1] = 98),($array_literal[2] = 115),($array_literal[3] = 116),($array_literal[4] = 114),($array_literal[5] = 97),($array_literal[6] = 99),($array_literal[7] = 116),($array_literal[8] = 67),($array_literal[9] = 111),($array_literal[10] = 108),($array_literal[11] = 108),($array_literal[12] = 101),($array_literal[13] = 99),($array_literal[14] = 116),($array_literal[15] = 105),($array_literal[16] = 111),($array_literal[17] = 110),$array_literal));
-   (local.set $return.value (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-    
-    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 18) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 65))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 98))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 115))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 116))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 4) (i32.const 114))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 5) (i32.const 97))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 6) (i32.const 99))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 7) (i32.const 116))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 8) (i32.const 67))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 9) (i32.const 111))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 10) (i32.const 108))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 11) (i32.const 108))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 12) (i32.const 101))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 13) (i32.const 99))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 14) (i32.const 116))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 15) (i32.const 105))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 16) (i32.const 111))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 17) (i32.const 110))
-    (local.get $$array_literal)
-   )))
+   ;; return javaemul.internal.StringPool.$getString_|AbstractC|();
+   (local.set $return.value (call $$getString_|AbstractC|__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
  )

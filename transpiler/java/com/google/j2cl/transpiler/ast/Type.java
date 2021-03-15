@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.base.CaseFormat;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
@@ -310,5 +311,80 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   @Override
   public Node accept(Processor processor) {
     return Visitor_Type.visit(processor, this);
+  }
+
+  /** Synthesizes a getter and a holder for a lazily initialized field and returns the getter. */
+  // TODO(b/182568721): this pattern should be considered size-effect free when optimizing the code.
+  public MethodDescriptor synthesizeLazilyInitializedField(
+      String fieldName, Expression initializationExpression) {
+    TypeDescriptor expressionTypeDescriptor = initializationExpression.getTypeDescriptor();
+
+    FieldDescriptor holderFieldDescriptor =
+        getLazyFieldHolderFieldDescriptor(getTypeDescriptor(), expressionTypeDescriptor, fieldName);
+
+    // Creates the member that will hold the value.
+    addMember(
+        Field.Builder.from(holderFieldDescriptor).setSourcePosition(SourcePosition.NONE).build());
+
+    MethodDescriptor lazyFieldGetter =
+        getLazyFieldGetterMethodDescriptor(
+            getTypeDescriptor(), expressionTypeDescriptor, fieldName);
+
+    // Synthesizes the getter:
+    // $get<fieldName>() {
+    //   if (<fieldName> == null) {
+    //      <fieldName> = <initializationExpression>;
+    //   }
+    //   return <fieldName>;
+    // }
+    addMember(
+        Method.newBuilder()
+            .setMethodDescriptor(lazyFieldGetter)
+            .addStatements(
+                IfStatement.newBuilder()
+                    .setConditionExpression(
+                        FieldAccess.Builder.from(holderFieldDescriptor).build().infixEqualsNull())
+                    .setThenStatement(
+                        BinaryExpression.Builder.asAssignmentTo(holderFieldDescriptor)
+                            .setRightOperand(initializationExpression)
+                            .build()
+                            .makeStatement(SourcePosition.NONE))
+                    .setSourcePosition(SourcePosition.NONE)
+                    .build(),
+                ReturnStatement.newBuilder()
+                    .setExpression(FieldAccess.Builder.from(holderFieldDescriptor).build())
+                    .setTypeDescriptor(initializationExpression.getTypeDescriptor())
+                    .setSourcePosition(SourcePosition.NONE)
+                    .build())
+            .setSourcePosition(SourcePosition.NONE)
+            .build());
+
+    return lazyFieldGetter;
+  }
+
+  private static FieldDescriptor getLazyFieldHolderFieldDescriptor(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      TypeDescriptor fieldTypeDescriptor,
+      String name) {
+    return FieldDescriptor.newBuilder()
+        .setName("$" + name)
+        .setTypeDescriptor(fieldTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setStatic(true)
+        .setSynthetic(true)
+        .build();
+  }
+
+  private static MethodDescriptor getLazyFieldGetterMethodDescriptor(
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      TypeDescriptor returnTypeDescriptor,
+      String name) {
+    return MethodDescriptor.newBuilder()
+        .setName("$get" + CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_CAMEL, name))
+        .setReturnTypeDescriptor(returnTypeDescriptor)
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setStatic(true)
+        .setSynthetic(true)
+        .build();
   }
 }

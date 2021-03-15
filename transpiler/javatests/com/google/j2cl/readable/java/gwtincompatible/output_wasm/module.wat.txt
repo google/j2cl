@@ -229,8 +229,8 @@
    (block
     ;; gwtincompatible.Implementor.SomeEnum.$clinit();
     (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
-    ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = new $1.<init>("COMPATIBLE",gwtincompatible.Implementor.SomeEnum.COMPATIBLE));
-    (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $m_<init>__java_lang_String__int__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))(ref.null $java.lang.String)(global.get $$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum)))
+    ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = new $1.<init>(javaemul.internal.StringPool.$getString_|COMPATIBL|(),gwtincompatible.Implementor.SomeEnum.COMPATIBLE));
+    (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $m_<init>__java_lang_String__int__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))(call $$getString_|COMPATIBL|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum)))
    )
    ;; (gwtincompatible.Implementor.SomeEnum.namesToValuesMap = null);
    (global.set $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ (ref.null $java.lang.Object))

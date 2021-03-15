@@ -38,16 +38,10 @@
 ;;; void ValueOfNullable.$init()
 (func $$init__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable
  (param $this (ref null $valueofnullable.ValueOfNullable))
- (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
-   ;; (ValueOfNullable.this.nullableString = java.lang.String.fromInternalArray((char[] $array_literal = new char[1],($array_literal[0] = 98),$array_literal)));
-   (struct.set $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this) (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-    
-    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 1) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 98))
-    (local.get $$array_literal)
-   )))
+   ;; (ValueOfNullable.this.nullableString = javaemul.internal.StringPool.$getString_|b|());
+   (struct.set $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this) (call $$getString_|b|__java_lang_String@javaemul.internal.StringPool ))
    ;; (ValueOfNullable.this.someChar = 97);
    (struct.set $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this) (i32.const 97))
    ;; (ValueOfNullable.this.result = (ValueOfNullable.this.someChar + ValueOfNullable.this.nullableString));

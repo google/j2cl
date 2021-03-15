@@ -6,18 +6,13 @@
 (global $f_A__compiletimeconstant_CompileTimeConstant i32 (i32.const 10))
 (global $f_B__compiletimeconstant_CompileTimeConstant i32 (i32.const 20))
 (global $f_C__compiletimeconstant_CompileTimeConstant i32 (i32.const 200))
-(global $f_D__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_E__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_F__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
+(global $f_K__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (global $f_G__compiletimeconstant_CompileTimeConstant i64 (i64.const 10000))
 (global $f_H__compiletimeconstant_CompileTimeConstant i32 (i32.const 65))
 (global $f_I__compiletimeconstant_CompileTimeConstant i32 (i32.const 1))
 (global $f_A2__compiletimeconstant_CompileTimeConstant i32 (i32.const 10))
 (global $f_B2__compiletimeconstant_CompileTimeConstant i32 (i32.const 20))
 (global $f_C2__compiletimeconstant_CompileTimeConstant i32 (i32.const 200))
-(global $f_D2__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_E2__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_F2__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (global $f_G2__compiletimeconstant_CompileTimeConstant i64 (i64.const 10000))
 (global $f_H2__compiletimeconstant_CompileTimeConstant i32 (i32.const 65))
 (global $f_I2__compiletimeconstant_CompileTimeConstant i32 (i32.const 1))
@@ -55,6 +50,7 @@
 (func $$init__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant
  (param $this (ref null $compiletimeconstant.CompileTimeConstant))
  (local $b i32)
+ (local $s (ref null $java.lang.String))
  (block $return.label
   (block
    ;; boolean b = (CompileTimeConstant.this,compiletimeconstant.CompileTimeConstant.I2);
@@ -63,18 +59,15 @@
     (drop (local.get $this))
     (global.get $f_I2__compiletimeconstant_CompileTimeConstant)
    ))
+   ;; String s = (compiletimeconstant.CompileTimeConstant.G + javaemul.internal.StringPool.$getString_|Tur_tleDo|());
+   
+   (local.set $s (ref.null $java.lang.String))
   )
  )
 )
 
 ;;; void CompileTimeConstant.$clinit()
 (func $$clinit__void@compiletimeconstant.CompileTimeConstant
- (local $$array_literal (ref null $char.array))
- (local $$array_literal_1 (ref null $char.array))
- (local $$array_literal_2 (ref null $char.array))
- (local $$array_literal_3 (ref null $char.array))
- (local $$array_literal_4 (ref null $char.array))
- (local $$array_literal_5 (ref null $char.array))
  (block $return.label
   (block
    ;; if (compiletimeconstant.CompileTimeConstant.$initialized) return;
@@ -97,110 +90,8 @@
    (block
     ;; compiletimeconstant.CompileTimeConstant.$clinit();
     (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-    ;; (compiletimeconstant.CompileTimeConstant.D = java.lang.String.fromInternalArray((char[] $array_literal = new char[7],($array_literal[0] = 84),($array_literal[1] = 117),($array_literal[2] = 114),($array_literal[3] = 34),($array_literal[4] = 116),($array_literal[5] = 108),($array_literal[6] = 101),$array_literal)));
-    (global.set $f_D__compiletimeconstant_CompileTimeConstant (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-     
-     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 7) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 84))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 117))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 114))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 34))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 4) (i32.const 116))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 5) (i32.const 108))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 6) (i32.const 101))
-     (local.get $$array_literal)
-    )))
-   )
-   (block
-    ;; compiletimeconstant.CompileTimeConstant.$clinit();
-    (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-    ;; (compiletimeconstant.CompileTimeConstant.E = java.lang.String.fromInternalArray((char[] $array_literal = new char[5],($array_literal[0] = 68),($array_literal[1] = 111),($array_literal[2] = 39),($array_literal[3] = 118),($array_literal[4] = 101),$array_literal)));
-    (global.set $f_E__compiletimeconstant_CompileTimeConstant (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-     
-     (local.set $$array_literal_1 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 5) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 0) (i32.const 68))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 1) (i32.const 111))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 2) (i32.const 39))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 3) (i32.const 118))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_1)) (i32.const 4) (i32.const 101))
-     (local.get $$array_literal_1)
-    )))
-   )
-   (block
-    ;; compiletimeconstant.CompileTimeConstant.$clinit();
-    (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-    ;; (compiletimeconstant.CompileTimeConstant.F = java.lang.String.fromInternalArray((char[] $array_literal = new char[12],($array_literal[0] = 84),($array_literal[1] = 117),($array_literal[2] = 114),($array_literal[3] = 34),($array_literal[4] = 116),($array_literal[5] = 108),($array_literal[6] = 101),($array_literal[7] = 68),($array_literal[8] = 111),($array_literal[9] = 39),($array_literal[10] = 118),($array_literal[11] = 101),$array_literal)));
-    (global.set $f_F__compiletimeconstant_CompileTimeConstant (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-     
-     (local.set $$array_literal_2 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 12) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 0) (i32.const 84))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 1) (i32.const 117))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 2) (i32.const 114))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 3) (i32.const 34))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 4) (i32.const 116))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 5) (i32.const 108))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 6) (i32.const 101))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 7) (i32.const 68))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 8) (i32.const 111))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 9) (i32.const 39))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 10) (i32.const 118))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_2)) (i32.const 11) (i32.const 101))
-     (local.get $$array_literal_2)
-    )))
-   )
-   (block
-    ;; compiletimeconstant.CompileTimeConstant.$clinit();
-    (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-    ;; (compiletimeconstant.CompileTimeConstant.D2 = java.lang.String.fromInternalArray((char[] $array_literal = new char[7],($array_literal[0] = 84),($array_literal[1] = 117),($array_literal[2] = 114),($array_literal[3] = 34),($array_literal[4] = 116),($array_literal[5] = 108),($array_literal[6] = 101),$array_literal)));
-    (global.set $f_D2__compiletimeconstant_CompileTimeConstant (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-     
-     (local.set $$array_literal_3 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 7) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 0) (i32.const 84))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 1) (i32.const 117))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 2) (i32.const 114))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 3) (i32.const 34))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 4) (i32.const 116))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 5) (i32.const 108))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_3)) (i32.const 6) (i32.const 101))
-     (local.get $$array_literal_3)
-    )))
-   )
-   (block
-    ;; compiletimeconstant.CompileTimeConstant.$clinit();
-    (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-    ;; (compiletimeconstant.CompileTimeConstant.E2 = java.lang.String.fromInternalArray((char[] $array_literal = new char[5],($array_literal[0] = 68),($array_literal[1] = 111),($array_literal[2] = 34),($array_literal[3] = 118),($array_literal[4] = 101),$array_literal)));
-    (global.set $f_E2__compiletimeconstant_CompileTimeConstant (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-     
-     (local.set $$array_literal_4 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 5) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_4)) (i32.const 0) (i32.const 68))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_4)) (i32.const 1) (i32.const 111))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_4)) (i32.const 2) (i32.const 34))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_4)) (i32.const 3) (i32.const 118))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_4)) (i32.const 4) (i32.const 101))
-     (local.get $$array_literal_4)
-    )))
-   )
-   (block
-    ;; compiletimeconstant.CompileTimeConstant.$clinit();
-    (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-    ;; (compiletimeconstant.CompileTimeConstant.F2 = java.lang.String.fromInternalArray((char[] $array_literal = new char[12],($array_literal[0] = 84),($array_literal[1] = 117),($array_literal[2] = 114),($array_literal[3] = 34),($array_literal[4] = 116),($array_literal[5] = 108),($array_literal[6] = 101),($array_literal[7] = 68),($array_literal[8] = 111),($array_literal[9] = 34),($array_literal[10] = 118),($array_literal[11] = 101),$array_literal)));
-    (global.set $f_F2__compiletimeconstant_CompileTimeConstant (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-     
-     (local.set $$array_literal_5 (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 12) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 0) (i32.const 84))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 1) (i32.const 117))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 2) (i32.const 114))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 3) (i32.const 34))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 4) (i32.const 116))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 5) (i32.const 108))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 6) (i32.const 101))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 7) (i32.const 68))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 8) (i32.const 111))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 9) (i32.const 34))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 10) (i32.const 118))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal_5)) (i32.const 11) (i32.const 101))
-     (local.get $$array_literal_5)
-    )))
+    ;; (compiletimeconstant.CompileTimeConstant.K = null);
+    (global.set $f_K__compiletimeconstant_CompileTimeConstant (ref.null $java.lang.String))
    )
   )
  )

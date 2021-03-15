@@ -25,6 +25,8 @@ public class CompileTimeConstant {
   public static final String D = "Tur\"tle";
   public static final String E = "Do\'ve";
   public static final String F = D + E;
+  public static final String J = F + F;
+  public static final String K = null;
 
   public static final long G = 10000L;
   public static final char H = 'A';
@@ -44,5 +46,6 @@ public class CompileTimeConstant {
 
   {
     boolean b = I2;
+    String s = G + F;
   }
 }

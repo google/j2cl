@@ -84,7 +84,6 @@
 (func $m_entryPoint__void@libraryinfo.Main
  (local $jsFunction (ref null $java.lang.Object))
  (local $s (ref null $java.lang.String))
- (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
    ;; libraryinfo.Main.$clinit();
@@ -96,7 +95,7 @@
    (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $java.lang.Object))
-   ;; jsFunction.apply(java.lang.String.fromInternalArray((char[] $array_literal = new char[3],($array_literal[0] = 102),($array_literal[1] = 111),($array_literal[2] = 111),$array_literal)));
+   ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
    
    ;; new MyJsType.<init>();
    (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
@@ -109,18 +108,10 @@
 ;;; void Main.execute()
 (func $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main
  (param $this (ref null $libraryinfo.Main))
- (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
-   ;; libraryinfo.Main.log(java.lang.String.fromInternalArray((char[] $array_literal = new char[3],($array_literal[0] = 70),($array_literal[1] = 111),($array_literal[2] = 111),$array_literal)));
-   (call $m_log__java_lang_Object__void@libraryinfo.Main (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-    
-    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 3) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 70))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 111))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 111))
-    (local.get $$array_literal)
-   )))
+   ;; libraryinfo.Main.log(javaemul.internal.StringPool.$getString_|Foo|());
+   (call $m_log__java_lang_Object__void@libraryinfo.Main (call $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool ))
   )
  )
 )
@@ -174,7 +165,6 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void@libraryinfo.Main
- (local $$array_literal (ref null $char.array))
  (block $return.label
   (block
    ;; if (libraryinfo.Main.$initialized) return;
@@ -191,24 +181,8 @@
    (block
     ;; libraryinfo.Main.$clinit();
     (call $$clinit__void@libraryinfo.Main )
-    ;; (libraryinfo.Main.STATIC_FIELD = java.lang.String.fromInternalArray((char[] $array_literal = new char[12],($array_literal[0] = 83),($array_literal[1] = 84),($array_literal[2] = 65),($array_literal[3] = 84),($array_literal[4] = 73),($array_literal[5] = 67),($array_literal[6] = 95),($array_literal[7] = 70),($array_literal[8] = 73),($array_literal[9] = 69),($array_literal[10] = 76),($array_literal[11] = 68),$array_literal)));
-    (global.set $f_STATIC_FIELD__libraryinfo_Main (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-     
-     (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 12) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 83))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 84))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 65))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 3) (i32.const 84))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 4) (i32.const 73))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 5) (i32.const 67))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 6) (i32.const 95))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 7) (i32.const 70))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 8) (i32.const 73))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 9) (i32.const 69))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 10) (i32.const 76))
-     (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 11) (i32.const 68))
-     (local.get $$array_literal)
-    )))
+    ;; (libraryinfo.Main.STATIC_FIELD = javaemul.internal.StringPool.$getString_|STATIC_FI|());
+    (global.set $f_STATIC_FIELD__libraryinfo_Main (call $$getString_|STATIC_FI|__java_lang_String@javaemul.internal.StringPool ))
    )
   )
  )
@@ -470,20 +444,20 @@
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
-    ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>("A",libraryinfo.Main.MyEnum.A));
-    (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(ref.null $java.lang.String)(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
+    ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|A|(),libraryinfo.Main.MyEnum.A));
+    (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|A|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
    )
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
-    ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>("B",libraryinfo.Main.MyEnum.B));
-    (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(ref.null $java.lang.String)(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
+    ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|B|(),libraryinfo.Main.MyEnum.B));
+    (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|B|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
    )
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
-    ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>("C",libraryinfo.Main.MyEnum.C));
-    (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(ref.null $java.lang.String)(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
+    ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|C|(),libraryinfo.Main.MyEnum.C));
+    (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|C|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
    )
    ;; (libraryinfo.Main.MyEnum.namesToValuesMap = null);
    (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (ref.null $java.lang.Object))

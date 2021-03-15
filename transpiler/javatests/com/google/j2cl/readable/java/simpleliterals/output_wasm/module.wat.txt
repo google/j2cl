@@ -39,7 +39,6 @@
  (local $c (ref null $java.lang.Object))
  (local $d i32)
  (local $e (ref null $java.lang.String))
- (local $$array_literal (ref null $char.array))
  (local $f (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast $java.lang.Object $simpleliterals.SimpleLiterals (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
@@ -57,16 +56,9 @@
    ;; int d = 101;
    
    (local.set $d (i32.const 101))
-   ;; String e = java.lang.String.fromInternalArray((char[] $array_literal = new char[3],($array_literal[0] = 102),($array_literal[1] = 111),($array_literal[2] = 111),$array_literal));
+   ;; String e = javaemul.internal.StringPool.$getString_|foo|();
    
-   (local.set $e (call $m_fromInternalArray__arrayOf_char__java_lang_String@java.lang.String (block (result (ref null $char.array))
-    
-    (local.set $$array_literal (struct.new_with_rtt $char.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $char.array.elements (i32.const 3) (global.get $char.array.elements.rtt)) (global.get $char.array.rtt)))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 102))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 111))
-    (array.set $char.array.elements (struct.get $char.array $elements (local.get $$array_literal)) (i32.const 2) (i32.const 111))
-    (local.get $$array_literal)
-   )))
+   (local.set $e (call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool ))
    ;; Class<?> f = SimpleLiterals.class;
    
    (local.set $f (ref.null $java.lang.Class))
