@@ -86,12 +86,6 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterBooleanLiteral(BooleanLiteral booleanLiteral) {
-        print(booleanLiteral.getValue() ? "true" : "false");
-        return false;
-      }
-
-      @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
         print("break");
         if (breakStatement.getLabelReference() != null) {
@@ -320,6 +314,12 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterLiteral(Literal literal) {
+        print(literal.getSourceText());
+        return false;
+      }
+
+      @Override
       public boolean enterMethod(Method method) {
         print(method.getReadableDescription() + " ");
         accept(method.body);
@@ -382,18 +382,6 @@ class ToStringRenderer {
       }
 
       @Override
-      public boolean enterNullLiteral(NullLiteral nullLiteral) {
-        print("null");
-        return false;
-      }
-
-      @Override
-      public boolean enterNumberLiteral(NumberLiteral numberLiteral) {
-        print(numberLiteral.getValue().toString());
-        return false;
-      }
-
-      @Override
       public boolean enterPostfixExpression(PostfixExpression binaryExpression) {
         accept(binaryExpression.getOperand());
         print(binaryExpression.getOperator().getSymbol());
@@ -421,12 +409,6 @@ class ToStringRenderer {
       @Override
       public boolean enterStatement(Statement statement) {
         print("<statement>");
-        return false;
-      }
-
-      @Override
-      public boolean enterStringLiteral(StringLiteral stringLiteral) {
-        print(stringLiteral.getEscapedValue());
         return false;
       }
 
@@ -543,6 +525,13 @@ class ToStringRenderer {
         unIndent();
         newLine();
         print("}");
+        return false;
+      }
+
+      @Override
+      public boolean enterTypeLiteral(TypeLiteral typeLiteral) {
+        print(typeLiteral.getReferencedTypeDescriptor());
+        print(".class");
         return false;
       }
 

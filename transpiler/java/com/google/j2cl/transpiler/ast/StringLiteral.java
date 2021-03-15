@@ -32,7 +32,12 @@ public class StringLiteral extends Literal {
     this.value = checkNotNull(value);
   }
 
-  public String getEscapedValue() {
+  public String getValue() {
+    return value;
+  }
+
+  @Override
+  public String getSourceText() {
     return "\"" + escapeJavaString(value) + "\"";
   }
 

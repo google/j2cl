@@ -40,6 +40,11 @@ public class BooleanLiteral extends Literal {
   }
 
   @Override
+  public String getSourceText() {
+    return value ? "true" : "false";
+  }
+
+  @Override
   public TypeDescriptor getTypeDescriptor() {
     return PrimitiveTypes.BOOLEAN;
   }

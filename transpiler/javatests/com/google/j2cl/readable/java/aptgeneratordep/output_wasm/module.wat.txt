@@ -90,7 +90,7 @@
  (local.set $this (ref.cast $java.lang.Object $aptgeneratordep.Foo (local.get $this.untyped) (global.get $aptgeneratordep.Foo.rtt)))
  (block $return.label
   (block
-   ;; return <expr>.getSimpleName();
+   ;; return Dummy.class.getSimpleName();
    (local.set $return.value (call_ref (ref.null $java.lang.Class)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(ref.null $java.lang.Class)))))
    (br $return.label)
   )

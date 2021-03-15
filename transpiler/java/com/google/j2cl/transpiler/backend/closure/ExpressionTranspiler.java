@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -30,7 +29,6 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.AwaitExpression;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -41,6 +39,7 @@ import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -48,11 +47,9 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
-import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
-import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -116,12 +113,6 @@ public class ExpressionTranspiler {
         processLeftSubExpression(expression, expression.getLeftOperand());
         sourceBuilder.append(" " + expression.getOperator() + " ");
         processRightSubExpression(expression, expression.getRightOperand());
-        return false;
-      }
-
-      @Override
-      public boolean enterBooleanLiteral(BooleanLiteral expression) {
-        sourceBuilder.append(expression.getValue() ? "true" : "false");
         return false;
       }
 
@@ -243,6 +234,12 @@ public class ExpressionTranspiler {
         renderNoParens(conditionalExpression.getTrueExpression());
         sourceBuilder.append(" : ");
         renderNoParens(conditionalExpression.getFalseExpression());
+        return false;
+      }
+
+      @Override
+      public boolean enterLiteral(Literal literal) {
+        sourceBuilder.append(literal.getSourceText());
         return false;
       }
 
@@ -382,15 +379,14 @@ public class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterNullLiteral(NullLiteral expression) {
-        sourceBuilder.append("null");
-        return false;
-      }
-
-      @Override
-      public boolean enterNumberLiteral(NumberLiteral expression) {
-        checkState(!TypeDescriptors.isPrimitiveLong(expression.getTypeDescriptor()));
-        sourceBuilder.append(expression.toString());
+      public boolean enterNumberLiteral(NumberLiteral numberLiteral) {
+        Number value = numberLiteral.getValue();
+        if (value.intValue() == value.doubleValue()) {
+          // Print as an integer to avoid JavaScript literals of the form of 0.0.
+          sourceBuilder.append(Integer.toString(value.intValue()));
+        } else {
+          sourceBuilder.append(value.toString());
+        }
         return false;
       }
 
@@ -406,12 +402,6 @@ public class ExpressionTranspiler {
       public boolean enterPrefixExpression(PrefixExpression expression) {
         sourceBuilder.append(expression.getOperator().toString());
         processRightSubExpression(expression, expression.getOperand());
-        return false;
-      }
-
-      @Override
-      public boolean enterStringLiteral(StringLiteral expression) {
-        sourceBuilder.append(expression.getEscapedValue());
         return false;
       }
 

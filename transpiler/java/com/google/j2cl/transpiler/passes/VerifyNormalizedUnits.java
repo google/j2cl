@@ -34,7 +34,9 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 
 /** Verifies that the AST satisfies the normalization invariants. */
@@ -159,6 +161,13 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitForEachStatement(ForEachStatement continueStatement) {
             checkState(false);
+          }
+
+          @Override
+          public void exitNumberLiteral(NumberLiteral numberLiteral) {
+            if (!verifyForWasm) {
+              checkState(!TypeDescriptors.isPrimitiveLong(numberLiteral.getTypeDescriptor()));
+            }
           }
         });
   }

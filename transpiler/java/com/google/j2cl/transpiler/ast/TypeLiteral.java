@@ -48,6 +48,11 @@ public class TypeLiteral extends Literal implements HasSourcePosition {
   }
 
   @Override
+  public String getSourceText() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
   public TypeLiteral clone() {
     // Type literals are value types do not need to actually clone.
     return this;

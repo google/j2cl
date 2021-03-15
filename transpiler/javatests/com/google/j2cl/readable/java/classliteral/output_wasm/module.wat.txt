@@ -39,10 +39,10 @@
  (local.set $this (ref.cast $java.lang.Object $classliteral.ClassLiteral (local.get $this.untyped) (global.get $classliteral.ClassLiteral.rtt)))
  (block $return.label
   (block
-   ;; Object o = <expr>;
+   ;; Object o = ClassLiteral.class;
    
    (local.set $o (ref.null $java.lang.Class))
-   ;; (o = <expr>);
+   ;; (o = ClassLiteral[][].class);
    (local.set $o (ref.null $java.lang.Class))
   )
  )

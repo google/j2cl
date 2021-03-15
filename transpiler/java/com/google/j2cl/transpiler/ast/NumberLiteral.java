@@ -86,11 +86,7 @@ public class NumberLiteral extends Literal {
   }
 
   @Override
-  public String toString() {
-    if (value.intValue() == value.doubleValue()) {
-      // Print as an integer to avoid JavaScript literals of the form of 0.0.
-      return Integer.toString(value.intValue());
-    }
+  public String getSourceText() {
     return value.toString();
   }
 

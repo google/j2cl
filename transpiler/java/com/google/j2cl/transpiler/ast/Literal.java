@@ -41,6 +41,8 @@ public abstract class Literal extends Expression {
     return true;
   }
 
+  public abstract String getSourceText();
+
   @Override
   public Precedence getPrecedence() {
     // Literals never need enclosing parens.

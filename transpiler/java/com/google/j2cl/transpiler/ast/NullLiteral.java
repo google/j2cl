@@ -38,6 +38,11 @@ public class NullLiteral extends Literal {
   }
 
   @Override
+  public String getSourceText() {
+    return "null";
+  }
+
+  @Override
   public NullLiteral clone() {
     // Null literals are value types do not need to actually clone.
     return this;

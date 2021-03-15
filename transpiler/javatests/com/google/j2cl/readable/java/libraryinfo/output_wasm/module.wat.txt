@@ -165,7 +165,7 @@
    (local.set $foo (ref.null $libraryinfo.Main.Foo))
    ;; foo.instanceMethod();
    (call_ref (local.get $foo)(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
-   ;; Class<?> clazz = <expr>;
+   ;; Class<?> clazz = Foo.class;
    
    (local.set $clazz (ref.null $java.lang.Class))
   )

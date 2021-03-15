@@ -51,7 +51,7 @@ public class NormalizeLiterals extends NormalizationPass {
             } else if (TypeDescriptors.isPrimitiveChar(numberLiteral.getTypeDescriptor())) {
               return numberLiteral.withComment(
                   new StringLiteral("" + ((char) numberLiteral.getValue().intValue()))
-                      .getEscapedValue());
+                      .getSourceText());
             } else {
               return numberLiteral;
             }
