@@ -15,8 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static java.lang.Math.min;
-
+import com.google.common.base.Ascii;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -149,10 +148,9 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
 
   private final Multiset<String> snippets = HashMultiset.create();
 
-  private String createSnippet(String escapedValue) {
-    // Take the first 10 characters of the string remove invalid identifier characters.
-    String prefix =
-        escapedValue.substring(0, min(9, escapedValue.length())).replaceAll("[^A-Za-z0-9.]", "_");
+  private String createSnippet(String value) {
+    // Take the first few characters of the string and remove invalid identifier characters.
+    String prefix = Ascii.truncate(value, 15, "...").replaceAll("[^A-Za-z0-9.]", "_");
 
     int occurrences = snippets.count(prefix);
     snippets.add(prefix);
