@@ -62,7 +62,7 @@ class GenerationEnvironment {
           .build();
 
   static String getWasmTypeForPrimitive(TypeDescriptor typeDescriptor) {
-    checkArgument(typeDescriptor.isPrimitive());
+    checkArgument(typeDescriptor.isPrimitive() && !TypeDescriptors.isPrimitiveVoid(typeDescriptor));
     return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
   }
 
