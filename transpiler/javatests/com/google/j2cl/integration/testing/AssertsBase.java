@@ -81,4 +81,10 @@ public class AssertsBase {
     }
     fail("Should have thrown " + exceptionClass);
   }
+
+  static String getFailureMessage(Object expected, Object actual, String msg) {
+    String expectedString = expected == null ? null : expected.toString();
+    String actualString = actual == null ? null : actual.toString();
+    return "<" + actualString + "> " + msg + " <" + expectedString + ">";
+  }
 }

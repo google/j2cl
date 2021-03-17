@@ -54,4 +54,8 @@ class AssertsBase {
   public static void assertThrowsClassCastException(JsRunnable runnable, Class<?> toClass) {}
 
   public static void assertThrowsNullPointerException(JsRunnable runnable) {}
+
+  static String getFailureMessage(Object expected, Object actual, String msg) {
+    return msg;
+  }
 }

@@ -107,10 +107,4 @@ public class Asserts extends AssertsBase {
   private static String getNotEqualsDefaultFailureMessage(Object expected, Object actual) {
     return getFailureMessage(expected, actual, "should not be equal to");
   }
-
-  private static String getFailureMessage(Object expected, Object actual, String msg) {
-    String expectedString = expected == null ? null : expected.toString();
-    String actualString = actual == null ? null : actual.toString();
-    return "<" + actualString + "> " + msg + " <" + expectedString + ">";
-  }
 }
