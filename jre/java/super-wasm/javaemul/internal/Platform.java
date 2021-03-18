@@ -18,7 +18,6 @@ package javaemul.internal;
 import javaemul.internal.annotations.Wasm;
 
 /** Platform specific utilities with Wasm specific implementation. */
-@SuppressWarnings("unusable-by-js")
 public final class Platform {
 
   @SuppressWarnings("SelfEquality")

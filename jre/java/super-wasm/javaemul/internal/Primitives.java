@@ -18,7 +18,6 @@ package javaemul.internal;
 import javaemul.internal.annotations.Wasm;
 
 /** Static Primitive helper. */
-@SuppressWarnings("unusable-by-js")
 public class Primitives {
   /* Widening methods for byte */
 

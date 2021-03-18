@@ -81,21 +81,25 @@ import java.util.Set;
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
 
-  public static void check(Library library, Problems problems, boolean enableWasmChecks) {
-    new JsInteropRestrictionsChecker(problems, enableWasmChecks).checkLibrary(library);
+  public static void check(Library library, Problems problems, boolean enableWasm) {
+    new JsInteropRestrictionsChecker(problems, enableWasm).checkLibrary(library);
   }
 
   private final Problems problems;
-  private final boolean enableWasmChecks;
+  private final boolean enableWasm;
   private boolean wasUnusableByJsWarningReported = false;
 
-  private JsInteropRestrictionsChecker(Problems problems, boolean enableWasmChecks) {
+  private JsInteropRestrictionsChecker(Problems problems, boolean enableWasm) {
     this.problems = problems;
-    this.enableWasmChecks = enableWasmChecks && Boolean.getBoolean("j2cl.enable_wasm_checks");
+    this.enableWasm = enableWasm;
   }
 
+  private static final boolean ENFORCE_WASM_CHECKS = Boolean.getBoolean("j2cl.enable_wasm_checks");
+
   private static boolean isWasmNativeAllowed(String qualifiedName) {
-    return qualifiedName.startsWith("java.") || qualifiedName.startsWith("javaemul.");
+    return !ENFORCE_WASM_CHECKS
+        || qualifiedName.startsWith("java.")
+        || qualifiedName.startsWith("javaemul.");
   }
 
   private void checkLibrary(Library library) {
@@ -967,16 +971,6 @@ public class JsInteropRestrictionsChecker {
       }
 
       if (memberDescriptor.isNative()) {
-        if (enableWasmChecks) {
-          if (method.getWasmInfo() != null
-              || isWasmNativeAllowed(method.getQualifiedBinaryName())) {
-            return;
-          }
-          problems.error(
-              member.getSourcePosition(),
-              "Native method '%s' is not supported in WASM backend",
-              memberDescriptor.getReadableDescription());
-        }
         checkNativeMethod(method);
       }
       if (memberDescriptor.isJsAsync()) {
@@ -1031,6 +1025,18 @@ public class JsInteropRestrictionsChecker {
 
   private void checkNativeMethod(Method method) {
     MethodDescriptor methodDescriptor = method.getDescriptor();
+
+    if (enableWasm) {
+      if (method.getWasmInfo() != null || isWasmNativeAllowed(method.getQualifiedBinaryName())) {
+        return;
+      }
+      problems.error(
+          method.getSourcePosition(),
+          "Native method '%s' is not supported in WASM backend",
+          methodDescriptor.getReadableDescription());
+      return;
+    }
+
     if (isUnusableByJsSuppressed(methodDescriptor)) {
       return;
     }
@@ -1222,7 +1228,7 @@ public class JsInteropRestrictionsChecker {
     TypeDeclaration typeDeclaration = type.getDeclaration();
     String readableDescription = typeDeclaration.getReadableDescription();
 
-    if (enableWasmChecks) {
+    if (enableWasm) {
       if (!type.isInterface() && !isWasmNativeAllowed(typeDeclaration.getQualifiedBinaryName())) {
         problems.error(
             type.getSourcePosition(),
