@@ -2,15 +2,15 @@ Integration tests size report:
 **************************************
 There are 2 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1960779 to 1960680 bytes (100%->100.0%) and from
-  699632 to 699590 bytes (100%->100.0%) gzipped.
+  1960680 to 1960500 bytes (100%->100.0%) and from
+  699590 to 699530 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       5794     5766 autoboxing (-0.5%)
-       5429     5415 autoboxing.esnext (-0.3%)
+       1688     1655 arrayliteral.esnext (-2.0%)
+       1918     1891 arrayliteral (-1.4%)
 
 
 Expansion report highlights:
@@ -28,12 +28,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4020007  4022777 box2d_default (0.1%)
-    2193891  2195703 box2d_default.minified (0.1%)
-    1165609  1167421 box2d_default.rta (0.2%)
-    2415787  2418557 emptyclass (0.1%)
-    1451374  1453186 emptyclass.minified (0.1%)
-     699231   701043 emptyclass.rta (0.3%)
+    4022777  4022777 box2d_default (unchanged)
+    2195703  2195703 box2d_default.minified (unchanged)
+    1167421  1167421 box2d_default.rta (unchanged)
+    2418557  2418557 emptyclass (unchanged)
+    1453186  1453186 emptyclass.minified (unchanged)
+     701043   701043 emptyclass.rta (unchanged)
 
 
 All reports:
@@ -59,8 +59,8 @@ All reports:
         677      677 arraycastsinglesideeffect.esnext (unchanged)
        1648     1648 arrayleafinsertion (unchanged)
        1411     1411 arrayleafinsertion.esnext (unchanged)
-       1918     1918 arrayliteral (unchanged)
-       1688     1688 arrayliteral.esnext (unchanged)
+       1918     1891 arrayliteral (-1.4%)
+       1688     1655 arrayliteral.esnext (-2.0%)
        1541     1541 arrayobjectcalls (unchanged)
        1284     1284 arrayobjectcalls.esnext (unchanged)
        3473     3473 arrayofboxedtype (unchanged)
@@ -71,8 +71,8 @@ All reports:
        3579     3579 arrayreadwrite.esnext (unchanged)
        2431     2431 assertsimple (unchanged)
        2165     2165 assertsimple.esnext (unchanged)
-       5794     5766 autoboxing (-0.5%)
-       5429     5415 autoboxing.esnext (-0.3%)
+       5766     5766 autoboxing (unchanged)
+       5415     5415 autoboxing.esnext (unchanged)
        3114     3114 autovalue (unchanged)
        2778     2778 autovalue.esnext (unchanged)
        3358     3358 autovalue_inc (unchanged)

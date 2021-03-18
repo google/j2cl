@@ -21,28 +21,15 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class Main {
   public static void main(String... args) {
-    testSimpleArrayLiteral();
-    testOneD();
-    testTwoD();
-    testPartial2D();
-    testUnbalanced2D();
-    testTerseLiteral();
+    testOneDimensionalLiteral();
+    testOneDimensionalLiteral_empty();
+    testOneDimensionalLiteral_terse();
+    testTwoDimensionalLiteral();
+    testTwoDimensionalLiteral_partial();
+    testTwoDimensionalLiteral_unbalanced();
   }
 
-  private static void testSimpleArrayLiteral() {
-    Object[] empty = new Object[] {};
-    assertTrue(empty.length == 0);
-    assertTrue(Object[].class == empty.getClass());
-
-    Main[] emptyM = new Main[] {};
-    assertTrue(emptyM.length == 0);
-    assertTrue(Main[].class == emptyM.getClass());
-
-    Object[] values = new Object[] {"sam", "bob", "charlie"};
-    values[0] = "jimmy";
-  }
-
-  private static void testOneD() {
+  private static void testOneDimensionalLiteral() {
     int[] oneD = new int[] {0, 1, 2};
     assertTrue(oneD.length == 3);
 
@@ -57,23 +44,20 @@ public class Main {
     oneD[2] = 5;
   }
 
-  private static void testPartial2D() {
-    Object[][] partial2D = new Object[][] {null};
-    assertTrue(partial2D.length == 1);
-
-    // Values read fine.
-    assertTrue(partial2D[0] == null);
-
-    // When trying to insert into the uninitialized section you'll get an NPE.
-    assertThrowsNullPointerException(() -> partial2D[0][0] = new Object());
-
-    // You can replace it with a fully initialized array with the right dimensions.
-    Object[][] full2D = new Object[2][2];
-    assertTrue(full2D.length == 2);
-    assertTrue(full2D[0].length == 2);
+  private static void testOneDimensionalLiteral_empty() {
+    Object[] empty = new Object[] {};
+    assertTrue(empty.length == 0);
   }
 
-  private static void testTwoD() {
+  private static void testOneDimensionalLiteral_terse() {
+    int[] terseLiteral = {0, 1, 2};
+    assertTrue(terseLiteral.length == 3);
+    assertTrue(terseLiteral[0] == 0);
+    assertTrue(terseLiteral[1] == 1);
+    assertTrue(terseLiteral[2] == 2);
+  }
+
+  private static void testTwoDimensionalLiteral() {
     Main main = new Main();
     Object[][] twoD = new Main[][] {{main, main}, {main, main}};
     assertTrue(twoD.length == 2);
@@ -99,7 +83,23 @@ public class Main {
     assertThrows(ArrayStoreException.class, () -> ((Object[]) twoD)[1] = new Object());
   }
 
-  private static void testUnbalanced2D() {
+  private static void testTwoDimensionalLiteral_partial() {
+    Object[][] partial2D = new Object[][] {null};
+    assertTrue(partial2D.length == 1);
+
+    // Values read fine.
+    assertTrue(partial2D[0] == null);
+
+    // When trying to insert into the uninitialized section you'll get an NPE.
+    assertThrowsNullPointerException(() -> partial2D[0][0] = new Object());
+
+    // You can replace it with a fully initialized array with the right dimensions.
+    Object[][] full2D = new Object[2][2];
+    assertTrue(full2D.length == 2);
+    assertTrue(full2D[0].length == 2);
+  }
+
+  private static void testTwoDimensionalLiteral_unbalanced() {
     Object[][] unbalanced2D = new Object[][] {{null, null}, null};
     assertTrue(unbalanced2D.length == 2);
 
@@ -108,14 +108,5 @@ public class Main {
     assertTrue(unbalanced2D[0].length == 2);
     // The second branch less so.
     assertTrue(unbalanced2D[1] == null);
-  }
-
-  @SuppressWarnings("cast")
-  private static void testTerseLiteral() {
-    int[] terseLiteral = {0, 1, 2};
-    assertTrue(terseLiteral.length == 3);
-    assertTrue(terseLiteral[0] == 0);
-    assertTrue(terseLiteral[1] == 1);
-    assertTrue(terseLiteral[2] == 2);
   }
 }
