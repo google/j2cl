@@ -15,6 +15,8 @@
  */
 package javaemul.internal;
 
+import static javaemul.internal.InternalPreconditions.checkNotNull;
+
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -28,6 +30,18 @@ public final class Platform {
 
   @JsMethod(namespace = "<window>")
   public static native boolean isFinite(double x);
+
+  public static long doubleToRawLongBits(double value) {
+    return JsUtils.doubleToRawLongBits(value);
+  }
+
+  public static double longBitsToDouble(long value) {
+    return JsUtils.longBitsToDouble(value);
+  }
+
+  public static boolean isEqual(Object x, Object y) {
+    return checkNotNull(x) == y;
+  }
 
   private Platform() {}
 }

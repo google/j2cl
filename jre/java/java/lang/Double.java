@@ -15,7 +15,6 @@
  */
 package java.lang;
 
-import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import javaemul.internal.JsUtils;
 import javaemul.internal.Platform;
@@ -72,7 +71,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   public static long doubleToRawLongBits(double value) {
-    return JsUtils.doubleToRawLongBits(value);
+    return Platform.doubleToRawLongBits(value);
   }
 
   public static int hashCode(double d) {
@@ -92,7 +91,7 @@ public final class Double extends Number implements Comparable<Double> {
   }
 
   public static double longBitsToDouble(long bits) {
-    return JsUtils.longBitsToDouble(bits);
+    return Platform.longBitsToDouble(bits);
   }
 
   public static double max(double a, double b) {
@@ -151,7 +150,7 @@ public final class Double extends Number implements Comparable<Double> {
 
   @Override
   public boolean equals(Object o) {
-    return checkNotNull(this) == o;
+    return Platform.isEqual(this, o);
   }
 
   @Override

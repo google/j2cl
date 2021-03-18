@@ -209,6 +209,7 @@ public class Main {
 
   private static void testUnbox_byParameter() {
     Byte boxB = new Byte((byte) 100);
+    Double boxD = new Double(1111.0);
     Float boxF = new Float(1111.0f);
     Integer boxI = new Integer(1111);
     Long boxL = new Long(1111L);
@@ -218,10 +219,12 @@ public class Main {
 
     // Unbox
     assertTrue((box(boxB).equals(boxB)));
+    assertTrue((box(boxD).equals(boxD)));
+    assertTrue((box(boxF).equals(boxF)));
     assertTrue((box(boxI).equals(boxI)));
     assertTrue((box(boxL).equals(boxL)));
     assertTrue((box(boxS).equals(boxS)));
-    testUnbox_equalsBooleanDoubleFloat();
+    assertTrue((box(boxBool).equals(boxBool)));
     assertTrue((box(boxC).equals(boxC)));
 
     // Unbox and widen
@@ -231,19 +234,6 @@ public class Main {
     assertTrue(takesAndReturnsPrimitiveDouble(boxI) == boxI.intValue());
     assertTrue(takesAndReturnsPrimitiveDouble(boxL) == boxL.longValue());
     assertTrue(takesAndReturnsPrimitiveDouble(boxF) == boxF.floatValue());
-  }
-
-  // TODO (b/182337445): move this code back in testUnbox_byParameter() when equals() works for
-  //   Boolean/Float/Double
-  @Wasm("nop")
-  private static void testUnbox_equalsBooleanDoubleFloat() {
-    Boolean boxBool = new Boolean(true);
-    Double boxD = new Double(1111.0);
-    Float boxF = new Float(1111.0f);
-
-    assertTrue((box(boxBool).equals(boxBool)));
-    assertTrue((box(boxD).equals(boxD)));
-    assertTrue((box(boxF).equals(boxF)));
   }
 
   private static double takesAndReturnsPrimitiveDouble(double d) {
@@ -765,14 +755,6 @@ public class Main {
     assertTrue(tester.longField.longValue() == 1111L);
     assertTrue(tester.sideEffectCount == 8);
 
-    testSideEffects_incrementDecrement_Double();
-  }
-
-  // TODO (b/182337445): move this code back in testUnbox_byParameter() when equals() works for
-  //   Double
-  @Wasm("nop")
-  private static void testSideEffects_incrementDecrement_Double() {
-    SideEffectTester tester = new SideEffectTester();
     assertEquals(new Double(1111.1), tester.causeSideEffect().doubleField++);
     assertTrue(tester.doubleField.equals(new Double(1112.1)));
     assertEquals(new Double(1112.1), tester.causeSideEffect().doubleField--);
@@ -816,14 +798,6 @@ public class Main {
         .fluentAssertEquals(new Integer(1112), tester.integerField++)
         .fluentAssertEquals(new Integer(1113), tester.integerField++);
 
-    testSideEffects_nestedIncrement_Double();
-  }
-
-  // TODO (b/182337445): move this code back in testUnbox_byParameter() when equals() works for
-  //  Double
-  @Wasm("nop")
-  private static void testSideEffects_nestedIncrement_Double() {
-    SideEffectTester tester = new SideEffectTester();
     tester
         .fluentAssertEquals(
             new Double(1113.1),
@@ -837,7 +811,6 @@ public class Main {
                 .fluentAssertEquals(new Double(1114.1), tester.doubleField++)
                 .fluentAssertEquals(new Double(1115.1), tester.doubleField++)
                 .doubleField++);
-
   }
 
   private static Object doFail() {

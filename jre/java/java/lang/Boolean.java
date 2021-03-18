@@ -15,10 +15,10 @@
  */
 package java.lang;
 
-import static javaemul.internal.InternalPreconditions.checkNotNull;
 
 import java.io.Serializable;
 import javaemul.internal.JsUtils;
+import javaemul.internal.Platform;
 import jsinterop.annotations.JsMethod;
 
 /**
@@ -93,7 +93,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
 
   @Override
   public boolean equals(Object o) {
-    return checkNotNull(this) == o;
+    return Platform.isEqual(this, o);
   }
 
   @Override
