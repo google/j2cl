@@ -30,10 +30,10 @@ public final class Platform {
     return (x - x) == 0;
   }
 
-  @Wasm("i64.reinterpret/f64")
+  @Wasm("i64.reinterpret_f64")
   public static native long doubleToRawLongBits(double value);
 
-  @Wasm("f64.reinterpret/i64")
+  @Wasm("f64.reinterpret_i64")
   public static native double longBitsToDouble(long value);
 
   public static boolean isEqual(Boolean x, Object y) {

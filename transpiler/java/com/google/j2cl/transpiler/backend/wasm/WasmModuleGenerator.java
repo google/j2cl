@@ -137,11 +137,11 @@ public class WasmModuleGenerator {
     builder.appendLines(
         format(
             "(global $%s.array.elements.rtt "
-                + "(rtt 1 $%s.array.elements) (rtt.canon $%s.array.elements))",
+                + "(rtt 0 $%s.array.elements) (rtt.canon $%s.array.elements))",
             javaType, javaType, javaType),
         format("(type $%s.array.elements (array (mut %s)))", javaType, wasmType),
         format(
-            "(global $%s.array.rtt (rtt 2 $%s.array) (rtt.sub $%s.array  (global.get %s)))",
+            "(global $%s.array.rtt (rtt 1 $%s.array) (rtt.sub $%s.array  (global.get %s)))",
             javaType,
             javaType,
             javaType,
@@ -189,7 +189,8 @@ public class WasmModuleGenerator {
       // globals that are initialized before.
       emitRttGlobal(superTypeDescriptor.getTypeDeclaration(), emittedRtts);
     }
-    int depth = typeDeclaration.getClassHierarchyDepth();
+    // rtt starts at 0
+    int depth = typeDeclaration.getClassHierarchyDepth() - 1;
     String wasmTypeName = environment.getWasmTypeName(typeDeclaration) + "";
     String superTypeRtt =
         superTypeDescriptor == null
@@ -332,9 +333,7 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append(
           String.format(
-              "(local.set $this (ref.cast %s %s (local.get $this.untyped) (global.get %s)))",
-              environment.getWasmTypeName(TypeDescriptors.get().javaLangObject),
-              environment.getWasmTypeName(enclosingTypeDescriptor),
+              "(local.set $this (ref.cast (local.get $this.untyped) (global.get %s)))",
               environment.getRttGlobalName(enclosingTypeDescriptor)));
     }
     builder.newLine();

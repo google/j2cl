@@ -50,17 +50,17 @@ def _impl_j2wasm_application(ctx):
     )
 
     args = ctx.actions.args()
-    args.add("wat2wasm")
-    args.add(ctx.outputs.wat)
-    args.add("--enable-exceptions")
-    args.add("--enable-function-references")
+    args.add("--enable-exception-handling")
+    args.add("--enable-typed-function-references")
     args.add("--enable-gc")
     args.add("--enable-reference-types")
-    args.add("--enable-sign-extension")
-    args.add("--enable-saturating-float-to-int")
+    args.add("--enable-sign-ext")
+    args.add("--enable-nontrapping-float-to-int")
+    args.add("-o", ctx.outputs.wasm)
+    args.add(ctx.outputs.wat)
 
     ctx.actions.run(
-        executable = ctx.executable._wasp,
+        executable = ctx.executable._binaryen,
         arguments = [args],
         inputs = [ctx.outputs.wat],
         outputs = [ctx.outputs.wasm],
@@ -103,10 +103,10 @@ j2wasm_application = rule(
             executable = True,
             default = Label("//third_party/unzip"),
         ),
-        "_wasp": attr.label(
+        "_binaryen": attr.label(
             cfg = "host",
             executable = True,
-            default = Label("//third_party/wasp"),
+            default = Label("//third_party/binaryen:wasm-as"),
         ),
     },
     outputs = {

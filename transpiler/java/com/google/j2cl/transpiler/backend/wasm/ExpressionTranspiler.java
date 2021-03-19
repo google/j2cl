@@ -203,11 +203,7 @@ final class ExpressionTranspiler {
             || castTypeDescriptor.isEnum()
             || castTypeDescriptor.isArray()) {
           // TODO(b/180967010): implement full support of array cast.
-          sourceBuilder.append(
-              format(
-                  "(ref.cast %s %s ",
-                  environment.getWasmTypeName(TypeDescriptors.get().javaLangObject),
-                  environment.getWasmTypeName(castTypeDescriptor)));
+          sourceBuilder.append("(ref.cast ");
           render(castExpression.getExpression());
           sourceBuilder.append(
               format(" (global.get %s))", environment.getRttGlobalName(castTypeDescriptor)));
@@ -263,11 +259,7 @@ final class ExpressionTranspiler {
       public boolean enterInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
         TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
         if (testTypeDescriptor.isClass() || testTypeDescriptor.isEnum()) {
-          sourceBuilder.append(
-              format(
-                  "(ref.test %s %s ",
-                  environment.getWasmTypeName(TypeDescriptors.get().javaLangObject),
-                  environment.getWasmTypeName(testTypeDescriptor)));
+          sourceBuilder.append("(ref.test ");
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(
               format(
