@@ -1548,8 +1548,8 @@
     (local.set $tlong (i64.extend_i32_s (local.get $fint)))
     ;; (tlong = (tlong + javaemul.internal.Primitives.widenIntToLong(fint)));
     (local.set $tlong (i64.add (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
-    ;; (tlong = (tlong << fint));
-    (local.set $tlong (i64.shl (local.get $tlong) (i64.const 0)))
+    ;; (tlong = (tlong << javaemul.internal.Primitives.widenIntToLong(fint)));
+    (local.set $tlong (i64.shl (local.get $tlong) (i64.extend_i32_s (local.get $fint))))
    )
    (block
     ;; (tlong = (tlong + javaemul.internal.Primitives.widenCharToLong(fchar)));
@@ -1562,8 +1562,8 @@
    (block
     ;; (tlong = (flong * javaemul.internal.Primitives.widenIntToLong(fint)));
     (local.set $tlong (i64.mul (local.get $flong) (i64.extend_i32_s (local.get $fint))))
-    ;; (tlong = (flong >> fint));
-    (local.set $tlong (i64.shr_s (local.get $flong) (i64.const 0)))
+    ;; (tlong = (flong >> javaemul.internal.Primitives.widenIntToLong(fint)));
+    (local.set $tlong (i64.shr_s (local.get $flong) (i64.extend_i32_s (local.get $fint))))
    )
    (block
     ;; (tlong = (flong + javaemul.internal.Primitives.widenShortToLong(fshort)));
@@ -1572,10 +1572,10 @@
     (local.set $tlong (i64.add (local.get $flong) (local.get $flong)))
    )
    (block
-    ;; (tlong = (flong << javaemul.internal.Primitives.narrowLongToInt(tlong)));
-    (local.set $tlong (i64.shl (local.get $flong) (i64.const 0)))
-    ;; (tlong = (tlong << javaemul.internal.Primitives.narrowLongToInt(flong)));
-    (local.set $tlong (i64.shl (local.get $tlong) (i64.const 0)))
+    ;; (tlong = (flong << tlong));
+    (local.set $tlong (i64.shl (local.get $flong) (local.get $tlong)))
+    ;; (tlong = (tlong << flong));
+    (local.set $tlong (i64.shl (local.get $tlong) (local.get $flong)))
    )
    (block
     ;; (tlong = (javaemul.internal.Primitives.widenIntToLong((0 + 1)) + 2));

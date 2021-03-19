@@ -245,7 +245,7 @@
   }] "autoboxing.AutoBoxing.testUnboxing"
 [i += boxI += i += boxI;] => [i = i + (boxI = Integer.m_valueOf__int(boxI.m_intValue__() + (i = i + boxI.m_intValue__() | 0) | 0)).m_intValue__() | 0;] "autoboxing.AutoBoxing.testUnboxing"
 [i <<= boxI;] => [i <<= boxI.m_intValue__();] "autoboxing.AutoBoxing.testUnboxing"
-[i <<= boxL;] => [i = i << $Primitives.narrowLongToInt(boxL.m_longValue__());] "autoboxing.AutoBoxing.testUnboxing"
+[i <<= boxL;] => [i <<= $Primitives.narrowLongToInt(boxL.m_longValue__());] "autoboxing.AutoBoxing.testUnboxing"
 [l <<= boxI;] => [l = $LongUtils.leftShift(l, boxI.m_intValue__());] "autoboxing.AutoBoxing.testUnboxing"
 [l <<= boxL;] => [l = $LongUtils.leftShift(l, $Primitives.narrowLongToInt(boxL.m_longValue__()));] "autoboxing.AutoBoxing.testUnboxing"
 [testUnboxingBoolean] => [m_testUnboxingBoolean__]

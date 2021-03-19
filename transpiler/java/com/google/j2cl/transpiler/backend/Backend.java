@@ -87,6 +87,7 @@ import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNestedClassConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeNullCasting;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
+import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
@@ -180,6 +181,7 @@ public enum Backend {
 
           // Statement/Expression normalizations
           NormalizeArrayLiterals::new,
+          NormalizeShifts::new,
           NormalizeStaticMemberQualifiers::new,
           // Runs after NormalizeStaticMemberQualifiersPass.
           DevirtualizeMethodCalls::new,
@@ -299,6 +301,7 @@ public enum Backend {
           FixSuperCallQualifiers::new,
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
+          () -> new NormalizeShifts(/* narrowAllToInt= */ false),
           NormalizeStaticMemberQualifiers::new,
           NormalizeMultiExpressions::new,
 

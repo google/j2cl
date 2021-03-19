@@ -101,7 +101,26 @@ public class Main {
     assertTrue(longs[8] == 9); // 7 ^ 14 = 9
     assertTrue(longs[9] == 0);
 
-    testLongShift();
+    longs[i] = 2;
+    assertTrue((longs[i++] <<= 1) == 4);
+    assertTrue(i == 10);
+    assertTrue(longs[8] == 9);
+    assertTrue(longs[9] == 4); // 2 << 1 = 4
+    assertTrue(longs[10] == 0);
+
+    longs[i] = -10;
+    assertTrue((longs[i++] >>= 2) == -3);
+    assertTrue(i == 11);
+    assertTrue(longs[9] == 4);
+    assertTrue(longs[10] == -3); // -10 >> 2 = -3
+    assertTrue(longs[11] == 0);
+
+    longs[i] = -10;
+    assertTrue((longs[i++] >>>= 2) == 4611686018427387901L);
+    assertTrue(i == 12);
+    assertTrue(longs[10] == -3);
+    assertTrue(longs[11] == 4611686018427387901L); // -10 >>> 2 = 4611686018427387901
+    assertTrue(longs[12] == 0);
 
     // Prefix and postfix expressions.
     i = 15;
@@ -123,34 +142,6 @@ public class Main {
     assertTrue(longs[16] == 1);
     assertTrue(longs[17] == 1);
     assertTrue(longs[18] == 0);
-  }
-
-  // TODO(b/181829823): move this code back in testLongs()
-  @Wasm("nop")
-  private static void testLongShift() {
-    int i = 9;
-    long[] longs = new long[100];
-    longs[8] = 9;
-    longs[i] = 2;
-    assertTrue((longs[i++] <<= 1) == 4);
-    assertTrue(i == 10);
-    assertTrue(longs[8] == 9);
-    assertTrue(longs[9] == 4); // 2 << 1 = 4
-    assertTrue(longs[10] == 0);
-
-    longs[i] = -10;
-    assertTrue((longs[i++] >>= 2) == -3);
-    assertTrue(i == 11);
-    assertTrue(longs[9] == 4);
-    assertTrue(longs[10] == -3); // -10 >> 2 = -3
-    assertTrue(longs[11] == 0);
-
-    longs[i] = -10;
-    assertTrue((longs[i++] >>>= 2) == 4611686018427387901L);
-    assertTrue(i == 12);
-    assertTrue(longs[10] == -3);
-    assertTrue(longs[11] == 4611686018427387901L); // -10 >>> 2 = 4611686018427387901
-    assertTrue(longs[12] == 0);
   }
 
   private static void testInts() {
@@ -301,8 +292,8 @@ public class Main {
     testCompoundArrayOperationsWithString();
   }
 
-  // TODO(dramaix): Move this code back to testCompoundArrayOperations() when we have a full String
-  //   support on wasm
+  // TODO(b/170691638): Move this code back to testCompoundArrayOperations() when we have a full
+  // String support on wasm
   @Wasm("nop")
   private static void testCompoundArrayOperationsWithString() {
     String[] stringArray = new String[1];
