@@ -41,7 +41,7 @@
 (func $m_foo__void@jsmethodoverride.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsmethodoverride.Parent))
- (local.set $this (ref.cast $java.lang.Object $jsmethodoverride.Parent (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
  (block $return.label
   (block
   )
@@ -101,7 +101,7 @@
 (func $m_foo__void@jsmethodoverride.Child
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsmethodoverride.Child))
- (local.set $this (ref.cast $java.lang.Object $jsmethodoverride.Child (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
  (block $return.label
   (block
   )

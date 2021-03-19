@@ -138,7 +138,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; return ((Main.this.field + m) + numbers[1]);
@@ -157,7 +157,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; return (Main.this.field + numbers[1]);
@@ -183,7 +183,7 @@
    (local.set $return.value (block (result (ref null $java.lang.Object))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $elements)) (i32.const 0)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
    ))
    (br $return.label)
   )
@@ -215,7 +215,7 @@
      ))
      (ref.null $jsvarargs.Main)
     ))
-    (if (result (ref null $jsvarargs.Main)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $jsvarargs.Main)) (else (ref.cast $java.lang.Object $jsvarargs.Main (local.get $$cast_expression) (global.get $jsvarargs.Main.rtt))))
+    (if (result (ref null $jsvarargs.Main)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $jsvarargs.Main)) (else (ref.cast (local.get $$cast_expression) (global.get $jsvarargs.Main.rtt))))
    ))
    (br $return.label)
   )
@@ -264,7 +264,7 @@
  (local $ints (ref null $int.array))
  (local $$array_literal_8 (ref null $int.array))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; jsvarargs.Main.f1(1,(int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
@@ -371,7 +371,7 @@
  (local $integers (ref null $Object.array))
  (local $$array_literal_21 (ref null $Object.array))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; jsvarargs.Main.f2((int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
@@ -548,7 +548,7 @@
  (local $ints (ref null $int.array))
  (local $$array_literal_4 (ref null $int.array))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; Main m = new Main.<init>(1);
@@ -609,7 +609,7 @@
  (local $ints (ref null $int.array))
  (local $$array_literal_4 (ref null $int.array))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; Main m = new Main.<init>(1);
@@ -672,7 +672,7 @@
  (local $os (ref null $Object.array))
  (local $$array_literal_4 (ref null $Object.array))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; AFunction a = new AFunction.<init>();
@@ -735,7 +735,7 @@
  (local $$array_literal (ref null $int.array))
  (local $$qualifier (ref null $jsvarargs.Main))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; int[] ints = (int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal);
@@ -764,7 +764,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $ints (ref null $int.array))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; int[] ints = null;
@@ -784,7 +784,7 @@
  (local $n (ref null $java.lang.Object))
  (local $param (ref null $Object.array))
  (local $this (ref null $jsvarargs.Main))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
    ;; GenericFunction<U> function = function (U n,U[] param){
@@ -1042,14 +1042,14 @@
  (local $return.value (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsvarargs.Main.AFunction))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main.AFunction (local.get $this.untyped) (global.get $jsvarargs.Main.AFunction.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.AFunction.rtt)))
  (block $return.label
   (block
    ;; return (Object $cast_expression = args[i],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
    (local.set $return.value (block (result (ref null $java.lang.Object))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $args)) (local.get $i)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
    ))
    (br $return.label)
   )
@@ -1129,7 +1129,7 @@
  (local $ints (ref null $int.array))
  (local $$array_literal_4 (ref null $int.array))
  (local $this (ref null $jsvarargs.Main.SubMain))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.Main.SubMain (local.get $this.untyped) (global.get $jsvarargs.Main.SubMain.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.SubMain.rtt)))
  (block $return.label
   (block
    ;; int a = super.f3(1,(int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));
@@ -1316,7 +1316,7 @@
  (local $ints (ref null $int.array))
  (local $$array_literal_4 (ref null $int.array))
  (local $this (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
- (local.set $this (ref.cast $java.lang.Object $jsvarargs.QualifiedSuperMethodCall.InnerClass (local.get $this.untyped) (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.rtt)))
  (block $return.label
   (block
    ;; InnerClass.this.this.f3(1,(int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 2),$array_literal));

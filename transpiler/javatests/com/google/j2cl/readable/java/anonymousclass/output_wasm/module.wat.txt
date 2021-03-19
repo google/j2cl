@@ -105,7 +105,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $instance (ref null $anonymousclass.SomeClass))
  (local $this (ref null $anonymousclass.AnonymousClass))
- (local.set $this (ref.cast $java.lang.Object $anonymousclass.AnonymousClass (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.rtt)))
  (block $return.label
   (block
    ;; SomeClass instance = new $1.<init>(AnonymousClass.this,1);
@@ -177,7 +177,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $anonymousclass.AnonymousClass.1))
- (local.set $this (ref.cast $java.lang.Object $anonymousclass.AnonymousClass.1 (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.1.rtt)))
  (block $return.label
   (block
    ;; return javaemul.internal.StringPool.$getString_|a|();
@@ -280,7 +280,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $anonymousclass.SomeInterface.1))
- (local.set $this (ref.cast $java.lang.Object $anonymousclass.SomeInterface.1 (local.get $this.untyped) (global.get $anonymousclass.SomeInterface.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.SomeInterface.1.rtt)))
  (block $return.label
   (block
    ;; return javaemul.internal.StringPool.$getString_|a|();

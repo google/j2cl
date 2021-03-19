@@ -127,7 +127,7 @@
    (local.set $return.value (block (result (ref null $Object.array))
     
     (local.set $$cast_expression (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression) (global.get $Object.array.rtt))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression) (global.get $Object.array.rtt))))
    ))
    (br $return.label)
   )

@@ -48,7 +48,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $f i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
- (local.set $this (ref.cast $java.lang.Object $localclassinheritance.LocalClassInheritance (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.rtt)))
  (block $return.label
   (block
    ;; int f = 1;
@@ -118,7 +118,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
- (local.set $this (ref.cast $java.lang.Object $localclassinheritance.LocalClassInheritance.1Parent (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Parent.rtt)))
  (block $return.label
   (block
    ;; int i = $1Parent.this.f;
@@ -190,7 +190,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
- (local.set $this (ref.cast $java.lang.Object $localclassinheritance.LocalClassInheritance.1Child (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Child.rtt)))
  (block $return.label
   (block
    ;; int i = $1Child.this.f;

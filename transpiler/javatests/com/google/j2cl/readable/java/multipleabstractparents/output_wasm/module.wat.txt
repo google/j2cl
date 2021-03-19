@@ -259,7 +259,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
- (local.set $this (ref.cast $java.lang.Object $multipleabstractparents.MultipleAbstractParents.AbstractCollection (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractCollection.rtt)))
  (block $return.label
   (block
    ;; return javaemul.internal.StringPool.$getString_|AbstractColl...|();
@@ -482,14 +482,14 @@
  (local $return.value (ref null $java.lang.String))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
- (local.set $this (ref.cast $java.lang.Object $multipleabstractparents.MultipleAbstractParents.AbstractStringList (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.rtt)))
  (block $return.label
   (block
    ;; return AbstractStringList.this.getFoo((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
    (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable $m_getFoo__java_lang_String__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -505,7 +505,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
- (local.set $this (ref.cast $java.lang.Object $multipleabstractparents.MultipleAbstractParents.AbstractStringList (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.rtt)))
  (block $return.label
   (block
    ;; return super.getFoo(arg0);
@@ -570,7 +570,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
- (local.set $this (ref.cast $java.lang.Object $multipleabstractparents.MultipleAbstractParents.AbstractStringList2 (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList2.rtt)))
  (block $return.label
   (block
    ;; return List.this.getFoo(arg0);

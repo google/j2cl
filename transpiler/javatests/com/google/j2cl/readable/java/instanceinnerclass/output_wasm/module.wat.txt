@@ -43,7 +43,7 @@
 (func $m_funOuter__void@instanceinnerclass.InstanceInnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
- (local.set $this (ref.cast $java.lang.Object $instanceinnerclass.InstanceInnerClass (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))
  (block $return.label
   (block
   )
@@ -55,7 +55,7 @@
 (func $m_test__void@instanceinnerclass.InstanceInnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $instanceinnerclass.InstanceInnerClass))
- (local.set $this (ref.cast $java.lang.Object $instanceinnerclass.InstanceInnerClass (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))
  (block $return.label
   (block
    ;; new InnerClass.<init>(new InstanceInnerClass.<init>());
@@ -123,7 +123,7 @@
 (func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
- (local.set $this (ref.cast $java.lang.Object $instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt)))
  (block $return.label
   (block
    ;; InnerClass.this.this.funOuter();

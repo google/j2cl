@@ -64,7 +64,7 @@
  (local $$cast_expression (ref null $java.lang.Object))
  (local $length2 i32)
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
- (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.ArrayCalls (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
  (block $return.label
   (block
    ;; Object[][] array2d = javaemul.internal.WasmArrayHelper.createArray((int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 1),$array_literal),-1);
@@ -81,7 +81,7 @@
    (local.set $length1 (array.len $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $array2d)) (i32.const 0)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression) (global.get $Object.array.rtt))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression) (global.get $Object.array.rtt))))
    ))))
    ;; int length2 = <expr>;
    
@@ -143,7 +143,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $cs (ref null $java.lang.Object))
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
  (block $return.label
   (block
    ;; cs.charAt(0);
@@ -158,7 +158,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $s (ref null $java.lang.String))
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.CharSequenceCalls (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
  (block $return.label
   (block
    ;; String s = javaemul.internal.StringPool.$getString_|s|();
@@ -235,7 +235,7 @@
  (local $c (ref null $java.lang.Character))
  (local $bool (ref null $java.lang.Boolean))
  (local $this (ref null $devirtualizedcalls.NumberCalls))
- (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.NumberCalls (local.get $this.untyped) (global.get $devirtualizedcalls.NumberCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.NumberCalls.rtt)))
  (block $return.label
   (block
    ;; Number i = new Integer.<init>(1);
@@ -486,7 +486,7 @@
  (local $object (ref null $java.lang.Object))
  (local $objectCalls (ref null $Object.array))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.ObjectCalls (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
  (block $return.label
   (block
    ;; Object object = new Object.<init>();
@@ -520,7 +520,7 @@
 (func $m_test__void@devirtualizedcalls.ObjectCalls
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.ObjectCalls (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
  (block $return.label
   (block
    ;; ObjectCalls.this.equals(new Object.<init>());
@@ -599,7 +599,7 @@
  (local $trimmed (ref null $java.lang.String))
  (local $newString (ref null $java.lang.String))
  (local $this (ref null $devirtualizedcalls.StringCalls))
- (local.set $this (ref.cast $java.lang.Object $devirtualizedcalls.StringCalls (local.get $this.untyped) (global.get $devirtualizedcalls.StringCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.StringCalls.rtt)))
  (block $return.label
   (block
    ;; String literal = javaemul.internal.StringPool.$getString_|String|();

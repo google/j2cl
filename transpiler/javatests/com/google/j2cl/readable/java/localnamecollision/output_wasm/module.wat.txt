@@ -61,7 +61,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $localnamecollision.Asserts))
- (local.set $this (ref.cast $java.lang.Object $localnamecollision.Asserts (local.get $this.untyped) (global.get $localnamecollision.Asserts.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Asserts.rtt)))
  (block $return.label
   (block
    ;; assert (5 != 4);
@@ -126,7 +126,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $$qualifier (ref null $localnamecollision.Class))
  (local $this (ref null $localnamecollision.Class))
- (local.set $this (ref.cast $java.lang.Object $localnamecollision.Class (local.get $this.untyped) (global.get $localnamecollision.Class.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Class.rtt)))
  (block $return.label
   (block
    (block
@@ -189,7 +189,7 @@
  (local $A i32)
  (local $$qualifier (ref null $localnamecollision.Asserts))
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast $java.lang.Object $localnamecollision.LocalNameCollision (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
  (block $return.label
   (block
    ;; boolean LocalNameCollision = false;
@@ -220,7 +220,7 @@
    
    (local.set $A (i32.const 1))
    ;; (LocalNameCollision = ((((RuntimeException instanceof LocalNameCollision) ? (true) : (RuntimeException instanceof RuntimeException)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof Class));
-   (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test $java.lang.Object $localnamecollision.LocalNameCollision (local.get $RuntimeException) (global.get $localnamecollision.LocalNameCollision.rtt)) (then (i32.const 1)) (else (ref.test $java.lang.Object $java.lang.RuntimeException (local.get $RuntimeException) (global.get $java.lang.RuntimeException.rtt)))) (then (i32.const 1)) (else (ref.test $java.lang.Object $localnamecollision.package1.A (local.get $RuntimeException) (global.get $localnamecollision.package1.A.rtt)))) (then (i32.const 1)) (else (ref.test $java.lang.Object $localnamecollision.package2.A (local.get $RuntimeException) (global.get $localnamecollision.package2.A.rtt)))) (then (i32.const 1)) (else (ref.test $java.lang.Object $localnamecollision.Class (local.get $RuntimeException) (global.get $localnamecollision.Class.rtt)))))
+   (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (local.get $RuntimeException) (global.get $localnamecollision.LocalNameCollision.rtt)) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $java.lang.RuntimeException.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package1.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package2.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.Class.rtt)))))
    ;; assert ((Asserts $qualifier = new Asserts.<init>(),$qualifier.n()) == 5);
    ;; unimplemented statement AssertStatement
   )
@@ -239,11 +239,11 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast $java.lang.Object $localnamecollision.LocalNameCollision (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
  (block $return.label
   (block
    ;; return (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
-   (local.set $return.value (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test $java.lang.Object $localnamecollision.LocalNameCollision (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test $java.lang.Object $localnamecollision.Asserts (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+   (local.set $return.value (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
    (br $return.label)
   )
  )
@@ -267,7 +267,7 @@
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; boolean result = (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
    
-   (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test $java.lang.Object $localnamecollision.LocalNameCollision (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test $java.lang.Object $localnamecollision.Asserts (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+   (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
   )
  )
  (local.get $this)
@@ -325,7 +325,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $localnamecollision.package1.A))
- (local.set $this (ref.cast $java.lang.Object $localnamecollision.package1.A (local.get $this.untyped) (global.get $localnamecollision.package1.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package1.A.rtt)))
  (block $return.label
   (block
    ;; return 1;
@@ -389,7 +389,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $localnamecollision.package2.A))
- (local.set $this (ref.cast $java.lang.Object $localnamecollision.package2.A (local.get $this.untyped) (global.get $localnamecollision.package2.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package2.A.rtt)))
  (block $return.label
   (block
    ;; return 2;

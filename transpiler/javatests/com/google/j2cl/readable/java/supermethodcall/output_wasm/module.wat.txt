@@ -49,7 +49,7 @@
 (func $m_grandParentSimplest__void@supermethodcall.GrandParent
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.GrandParent))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.GrandParent (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
  (block $return.label
   (block
   )
@@ -62,7 +62,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.GrandParent))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.GrandParent (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
  (block $return.label
   (block
   )
@@ -76,7 +76,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.GrandParent))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.GrandParent (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -143,7 +143,7 @@
 (func $m_parentSimplest__void@supermethodcall.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Parent))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Parent (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
  (block $return.label
   (block
   )
@@ -156,7 +156,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.Parent))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Parent (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
  (block $return.label
   (block
   )
@@ -170,7 +170,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Parent))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Parent (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -239,7 +239,7 @@
 (func $m_parentSimplest__void@supermethodcall.Child
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; super.parentSimplest();
@@ -254,7 +254,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; super.parentWithParams(foo);
@@ -270,7 +270,7 @@
  (result (ref null $supermethodcall.Child))
  (local $return.value (ref null $supermethodcall.Child))
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; super.parentWithChangingReturn();
@@ -288,7 +288,7 @@
 (func $m_grandParentSimplest__void@supermethodcall.Child
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; super.grandParentSimplest();
@@ -303,7 +303,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; super.grandParentWithParams(foo);
@@ -319,7 +319,7 @@
  (result (ref null $supermethodcall.Child))
  (local $return.value (ref null $supermethodcall.Child))
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; super.grandParentWithChangingReturn();
@@ -339,7 +339,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; return Child.this.grandParentWithChangingReturn();
@@ -357,7 +357,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
- (local.set $this (ref.cast $java.lang.Object $supermethodcall.Child (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
   (block
    ;; return Child.this.parentWithChangingReturn();

@@ -101,7 +101,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
   (block
    ;; return javaemul.internal.StringPool.$getString_||();
@@ -121,7 +121,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
   (block
    ;; return javaemul.internal.StringPool.$getString_||();
@@ -141,7 +141,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -158,7 +158,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
   (block
   )
@@ -264,7 +264,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.Foo))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.Foo (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
  (block $return.label
   (block
   )
@@ -278,7 +278,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.Foo))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.Foo (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -296,7 +296,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $nullability.Nullability.Foo))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.Foo (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
  (block $return.label
   (block
    ;; return javaemul.internal.StringPool.$getString_|Foo|();
@@ -474,7 +474,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return 0;
@@ -496,18 +496,18 @@
  (local $$cast_expression (ref null $java.lang.Object))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return StringComparator.this.compare((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))),(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
    (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression_1 (local.get $arg1))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
    )(struct.get $nullability.Nullability.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.StringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -522,7 +522,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.reversed();
@@ -541,7 +541,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
@@ -561,7 +561,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
@@ -580,7 +580,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
@@ -599,7 +599,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
@@ -618,7 +618,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
@@ -637,7 +637,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.StringComparator (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
@@ -713,7 +713,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return 0;
@@ -735,18 +735,18 @@
  (local $$cast_expression (ref null $java.lang.Object))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return NullableStringComparator.this.compare((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))),(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
    (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression_1 (local.get $arg1))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
    )(struct.get $nullability.Nullability.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.NullableStringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -761,7 +761,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.reversed();
@@ -780,7 +780,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
@@ -800,7 +800,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
@@ -819,7 +819,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparing(arg0);
@@ -838,7 +838,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
@@ -857,7 +857,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
@@ -876,7 +876,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableStringComparator (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
@@ -962,7 +962,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableTemplatedReturnOverride (local.get $this.untyped) (global.get $nullability.Nullability.NullableTemplatedReturnOverride.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableTemplatedReturnOverride.rtt)))
  (block $return.label
   (block
    ;; return javaemul.internal.StringPool.$getString_|foo|();
@@ -980,7 +980,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
- (local.set $this (ref.cast $java.lang.Object $nullability.Nullability.NullableTemplatedReturnOverride (local.get $this.untyped) (global.get $nullability.Nullability.NullableTemplatedReturnOverride.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableTemplatedReturnOverride.rtt)))
  (block $return.label
   (block
    ;; return NullableTemplatedReturnOverride.this.foo();

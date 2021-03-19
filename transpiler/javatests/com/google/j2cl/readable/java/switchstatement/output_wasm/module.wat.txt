@@ -77,7 +77,7 @@
    (local.set $return.value (block (result (ref null $switchstatement.Numbers))
     
     (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_)))
-    (if (result (ref null $switchstatement.Numbers)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $switchstatement.Numbers)) (else (ref.cast $java.lang.Object $switchstatement.Numbers (local.get $$cast_expression) (global.get $switchstatement.Numbers.rtt))))
+    (if (result (ref null $switchstatement.Numbers)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $switchstatement.Numbers)) (else (ref.cast (local.get $$cast_expression) (global.get $switchstatement.Numbers.rtt))))
    ))
    (br $return.label)
   )
@@ -181,7 +181,7 @@
  (local $$expression_1 i32)
  (local $$qualifier (ref null $switchstatement.Numbers))
  (local $this (ref null $switchstatement.SwitchStatement))
- (local.set $this (ref.cast $java.lang.Object $switchstatement.SwitchStatement (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
  (block $return.label
   (block
    ;; SWITCH: {

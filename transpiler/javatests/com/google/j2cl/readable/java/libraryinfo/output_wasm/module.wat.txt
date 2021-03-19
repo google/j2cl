@@ -122,7 +122,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $libraryinfo.Main))
- (local.set $this (ref.cast $java.lang.Object $libraryinfo.Main (local.get $this.untyped) (global.get $libraryinfo.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.rtt)))
  (block $return.label
   (block
    ;; return super.toString();
@@ -296,7 +296,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (local $this (ref null $libraryinfo.Main.FunctionImpl))
- (local.set $this (ref.cast $java.lang.Object $libraryinfo.Main.FunctionImpl (local.get $this.untyped) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
  (block $return.label
   (block
   )
@@ -385,7 +385,7 @@
    (local.set $return.value (block (result (ref null $libraryinfo.Main.MyEnum))
     
     (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_)))
-    (if (result (ref null $libraryinfo.Main.MyEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $libraryinfo.Main.MyEnum)) (else (ref.cast $java.lang.Object $libraryinfo.Main.MyEnum (local.get $$cast_expression) (global.get $libraryinfo.Main.MyEnum.rtt))))
+    (if (result (ref null $libraryinfo.Main.MyEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $libraryinfo.Main.MyEnum)) (else (ref.cast (local.get $$cast_expression) (global.get $libraryinfo.Main.MyEnum.rtt))))
    ))
    (br $return.label)
   )
@@ -546,7 +546,7 @@
 (func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $libraryinfo.Main.1))
- (local.set $this (ref.cast $java.lang.Object $libraryinfo.Main.1 (local.get $this.untyped) (global.get $libraryinfo.Main.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.1.rtt)))
  (block $return.label
   (block
   )
@@ -608,7 +608,7 @@
 (func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $libraryinfo.Main.Foo))
- (local.set $this (ref.cast $java.lang.Object $libraryinfo.Main.Foo (local.get $this.untyped) (global.get $libraryinfo.Main.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.Foo.rtt)))
  (block $return.label
   (block
   )

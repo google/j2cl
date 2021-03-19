@@ -46,7 +46,7 @@
  (local $object (ref null $java.lang.Object))
  (local $b i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast $java.lang.Object $instanceofexpression.InstanceofExpressions (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block $return.label
   (block
    ;; Object object = new InstanceofExpressions.<init>();
@@ -55,11 +55,11 @@
    ;; boolean b;
    
    ;; (b = object instanceof Object);
-   (local.set $b (ref.test $java.lang.Object $java.lang.Object (local.get $object) (global.get $java.lang.Object.rtt)))
+   (local.set $b (ref.test (local.get $object) (global.get $java.lang.Object.rtt)))
    ;; (b = object instanceof InstanceofExpressions);
-   (local.set $b (ref.test $java.lang.Object $instanceofexpression.InstanceofExpressions (local.get $object) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
+   (local.set $b (ref.test (local.get $object) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
    ;; (b = object instanceof String);
-   (local.set $b (ref.test $java.lang.Object $java.lang.String (local.get $object) (global.get $java.lang.String.rtt)))
+   (local.set $b (ref.test (local.get $object) (global.get $java.lang.String.rtt)))
   )
  )
 )
@@ -71,7 +71,7 @@
  (local $o (ref null $java.lang.Object))
  (local $b i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast $java.lang.Object $instanceofexpression.InstanceofExpressions (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block $return.label
   (block
    ;; Object o = new Object.<init>();
@@ -95,7 +95,7 @@
  (local $a i32)
  (local $d (ref null $java.lang.Double))
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast $java.lang.Object $instanceofexpression.InstanceofExpressions (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block $return.label
   (block
    ;; Object b = new Integer.<init>(1);
@@ -103,32 +103,32 @@
    (local.set $b (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; boolean a = b instanceof Byte;
    
-   (local.set $a (ref.test $java.lang.Object $java.lang.Byte (local.get $b) (global.get $java.lang.Byte.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Byte.rtt)))
    ;; (a = b instanceof Double);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Double (local.get $b) (global.get $java.lang.Double.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Double.rtt)))
    ;; (a = b instanceof Float);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Float (local.get $b) (global.get $java.lang.Float.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Float.rtt)))
    ;; (a = b instanceof Integer);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Integer (local.get $b) (global.get $java.lang.Integer.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Integer.rtt)))
    ;; (a = b instanceof Long);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Long (local.get $b) (global.get $java.lang.Long.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Long.rtt)))
    ;; (a = b instanceof Short);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Short (local.get $b) (global.get $java.lang.Short.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Short.rtt)))
    ;; (a = b instanceof Number);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Number (local.get $b) (global.get $java.lang.Number.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Number.rtt)))
    ;; (a = b instanceof Character);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Character (local.get $b) (global.get $java.lang.Character.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Character.rtt)))
    ;; (a = b instanceof Boolean);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Boolean (local.get $b) (global.get $java.lang.Boolean.rtt)))
+   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Boolean.rtt)))
    ;; Double d = null;
    
    (local.set $d (ref.null $java.lang.Double))
    ;; (a = d instanceof Object);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Object (local.get $d) (global.get $java.lang.Object.rtt)))
+   (local.set $a (ref.test (local.get $d) (global.get $java.lang.Object.rtt)))
    ;; (a = d instanceof Number);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Number (local.get $d) (global.get $java.lang.Number.rtt)))
+   (local.set $a (ref.test (local.get $d) (global.get $java.lang.Number.rtt)))
    ;; (a = d instanceof Double);
-   (local.set $a (ref.test $java.lang.Object $java.lang.Double (local.get $d) (global.get $java.lang.Double.rtt)))
+   (local.set $a (ref.test (local.get $d) (global.get $java.lang.Double.rtt)))
   )
  )
 )
@@ -144,7 +144,7 @@
  (local $stringArray (ref null $Object.array))
  (local $a i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
- (local.set $this (ref.cast $java.lang.Object $instanceofexpression.InstanceofExpressions (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block $return.label
   (block
    ;; Object object = new Object.<init>();

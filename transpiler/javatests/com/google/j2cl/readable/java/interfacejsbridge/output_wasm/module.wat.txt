@@ -110,7 +110,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
- (local.set $this (ref.cast $java.lang.Object $interfacejsbridge.InterfaceImpl (local.get $this.untyped) (global.get $interfacejsbridge.InterfaceImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfacejsbridge.InterfaceImpl.rtt)))
  (block $return.label
   (block
    ;; return 0;
@@ -176,7 +176,7 @@
  (local $c (ref null $java.lang.Object))
  (local $d (ref null $interfacejsbridge.InterfaceImpl))
  (local $this (ref null $interfacejsbridge.Main))
- (local.set $this (ref.cast $java.lang.Object $interfacejsbridge.Main (local.get $this.untyped) (global.get $interfacejsbridge.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfacejsbridge.Main.rtt)))
  (block $return.label
   (block
    ;; MyJsInterface a = new InterfaceImpl.<init>();

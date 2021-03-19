@@ -85,7 +85,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -106,7 +106,7 @@
  (local $$qualifier (ref null $java.lang.Integer))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; int result = (Integer $qualifier = (Object $cast_expression = jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(7))),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue());
@@ -116,7 +116,7 @@
     (local.set $$qualifier (block (result (ref null $java.lang.Integer))
      
      (local.set $$cast_expression (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 7)))))
-     (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+     (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
     ))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
@@ -136,7 +136,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(value)));
@@ -164,9 +164,9 @@
     (local.set $$cast_expression (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (block (result (ref null $java.lang.Void))
      
      (local.set $$cast_expression_1 (ref.null $java.lang.Object))
-     (if (result (ref null $java.lang.Void)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Void)) (else (ref.cast $java.lang.Object $java.lang.Void (local.get $$cast_expression_1) (global.get $java.lang.Void.rtt))))
+     (if (result (ref null $java.lang.Void)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Void)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Void.rtt))))
     ))))
-    (if (result (ref null $java.lang.Void)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Void)) (else (ref.cast $java.lang.Object $java.lang.Void (local.get $$cast_expression) (global.get $java.lang.Void.rtt))))
+    (if (result (ref null $java.lang.Void)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Void)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Void.rtt))))
    )))
    (br $return.label)
   )
@@ -185,7 +185,7 @@
  (local $optimizableJsFunction (ref null $java.lang.Object))
  (local $unoptimizableJsFunction (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast $java.lang.Object $jsasync.Main (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
   (block
    ;; AsyncInterface i = function (){
@@ -288,14 +288,14 @@
  (local $return.value (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main.1))
- (local.set $this (ref.cast $java.lang.Object $jsasync.Main.1 (local.get $this.untyped) (global.get $jsasync.Main.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.1.rtt)))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve((Object $cast_expression = jsasync.Main.await($1.this.this.x),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))));
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (block (result (ref null $java.lang.Integer))
     
     (local.set $$cast_expression (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.1 $$outer_this__jsasync_Main_1(local.get $this)))))
-    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
    )))
    (br $return.label)
   )
@@ -360,7 +360,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main.2))
- (local.set $this (ref.cast $java.lang.Object $jsasync.Main.2 (local.get $this.untyped) (global.get $jsasync.Main.2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.2.rtt)))
  (block $return.label
   (block
    ;; return jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5));
@@ -430,7 +430,7 @@
  (local $tmp (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main.3))
- (local.set $this (ref.cast $java.lang.Object $jsasync.Main.3 (local.get $this.untyped) (global.get $jsasync.Main.3.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.3.rtt)))
  (block $return.label
   (block
    ;; JsFunctionInterface tmp = $3.this;
@@ -440,7 +440,7 @@
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (block (result (ref null $java.lang.Integer))
     
     (local.set $$cast_expression (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.3 $$outer_this__jsasync_Main_3(local.get $this)))))
-    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
    )))
    (br $return.label)
   )
@@ -520,7 +520,7 @@
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (block (result (ref null $java.lang.Integer))
     
     (local.set $$cast_expression (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))))
-    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast $java.lang.Object $java.lang.Integer (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
+    (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
    )))
    (br $return.label)
   )

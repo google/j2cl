@@ -148,7 +148,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $boundedtypesupercall.Main.Bar))
- (local.set $this (ref.cast $java.lang.Object $boundedtypesupercall.Main.Bar (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -166,7 +166,7 @@
  (result (ref null $boundedtypesupercall.Main.Foo))
  (local $return.value (ref null $boundedtypesupercall.Main.Foo))
  (local $this (ref null $boundedtypesupercall.Main.Bar))
- (local.set $this (ref.cast $java.lang.Object $boundedtypesupercall.Main.Bar (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
  (block $return.label
   (block
    ;; return new $1.<init>(Bar.this,Bar.this.getSomething());
@@ -233,7 +233,7 @@
 (func $m_foo__void@boundedtypesupercall.Main.Bar.1
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
- (local.set $this (ref.cast $java.lang.Object $boundedtypesupercall.Main.Bar.1 (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.1.rtt)))
  (block $return.label
   (block
   )

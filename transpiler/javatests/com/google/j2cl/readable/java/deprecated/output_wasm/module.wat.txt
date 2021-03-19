@@ -59,7 +59,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $someArg (ref null $java.lang.String))
  (local $this (ref null $deprecated.DeprecatedExample))
- (local.set $this (ref.cast $java.lang.Object $deprecated.DeprecatedExample (local.get $this.untyped) (global.get $deprecated.DeprecatedExample.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $deprecated.DeprecatedExample.rtt)))
  (block $return.label
   (block
   )
@@ -214,7 +214,7 @@
    (local.set $return.value (block (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
     
     (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_)))
-    (if (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $deprecated.DeprecatedExample.DeprecatedEnum)) (else (ref.cast $java.lang.Object $deprecated.DeprecatedExample.DeprecatedEnum (local.get $$cast_expression) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))))
+    (if (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $deprecated.DeprecatedExample.DeprecatedEnum)) (else (ref.cast (local.get $$cast_expression) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))))
    ))
    (br $return.label)
   )
@@ -336,7 +336,7 @@
    (local.set $return.value (block (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
     
     (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedJsEnum_)))
-    (if (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (else (ref.cast $java.lang.Object $deprecated.DeprecatedExample.DeprecatedJsEnum (local.get $$cast_expression) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt))))
+    (if (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (else (ref.cast (local.get $$cast_expression) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt))))
    ))
    (br $return.label)
   )

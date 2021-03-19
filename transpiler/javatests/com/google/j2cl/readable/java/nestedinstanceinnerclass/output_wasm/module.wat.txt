@@ -47,7 +47,7 @@
 (func $m_test__void@nestedinstanceinnerclass.OuterClass
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
- (local.set $this (ref.cast $java.lang.Object $nestedinstanceinnerclass.OuterClass (local.get $this.untyped) (global.get $nestedinstanceinnerclass.OuterClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestedinstanceinnerclass.OuterClass.rtt)))
  (block $return.label
   (block
    ;; new InnerInnerClass.<init>(new InnerClass.<init>(new OuterClass.<init>()));

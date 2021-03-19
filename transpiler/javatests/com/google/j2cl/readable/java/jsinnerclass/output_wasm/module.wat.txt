@@ -112,7 +112,7 @@
  (local $return.value i32)
  (local $$qualifier (ref null $jsinnerclass.Main.Outer.Inner))
  (local $this (ref null $jsinnerclass.Main.Outer))
- (local.set $this (ref.cast $java.lang.Object $jsinnerclass.Main.Outer (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
  (block $return.label
   (block
    ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
@@ -200,7 +200,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
- (local.set $this (ref.cast $java.lang.Object $jsinnerclass.Main.Outer.Inner (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.Inner.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.Inner.rtt)))
  (block $return.label
   (block
    ;; return Inner.this.b;

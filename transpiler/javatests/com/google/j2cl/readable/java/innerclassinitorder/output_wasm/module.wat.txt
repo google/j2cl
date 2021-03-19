@@ -216,7 +216,7 @@
 (func $m_testOuterThisFromSuperCall__void@innerclassinitorder.InnerClassInitOrder
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; new OuterRefFromSuperCtorCall.<init>(InnerClassInitOrder.this);
@@ -232,7 +232,7 @@
 (func $m_testOuterThisFromThisCall__void@innerclassinitorder.InnerClassInitOrder
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; new OuterRefFromThisCtorCall.<init>(InnerClassInitOrder.this);
@@ -249,7 +249,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; ESOuter o = new ESOuter.<init>();
@@ -273,7 +273,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; ESWGOuter<String> o = new ESWGOuter.<init>();
@@ -298,7 +298,7 @@
  (local $p1 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  (local $p2 (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; P1<?> p1 = new P1.<init>();
@@ -328,7 +328,7 @@
 (func $m_testInnerClassInitialization__void@innerclassinitorder.InnerClassInitOrder
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; new InnerClass.<init>(InnerClassInitOrder.this);
@@ -351,7 +351,7 @@
  (local $theAp (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; AddNumber[] results = new AddNumber[10];
@@ -393,7 +393,7 @@
        (local.set $theAp (block (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
         
         (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $$array)) (local.get $$index)))
-        (if (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (else (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.1AddNumber (local.get $$cast_expression) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt))))
+        (if (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (else (ref.cast (local.get $$cast_expression) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt))))
        ))
        (block
         ;; theAp.act();
@@ -418,7 +418,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; OuterIsNotSuper x = new OuterIsNotSuper.<init>(InnerClassInitOrder.this.outerIsSuper);
@@ -436,7 +436,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; OuterIsNotSuper x = new $2.<init>(InnerClassInitOrder.this,InnerClassInitOrder.this.outerIsSuper);
@@ -454,7 +454,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestQualifiedSuperCall x = new TestQualifiedSuperCall.<init>();
@@ -472,7 +472,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestQualifiedSuperCall x = new $3.<init>(InnerClassInitOrder.this);
@@ -489,7 +489,7 @@
 (func $m_testSuperDispatch__void@innerclassinitorder.InnerClassInitOrder
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; assert (1 == InnerClassInitOrder.this.outerIsSuper.checkDispatchFromSub1());
@@ -506,7 +506,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; OuterIsNotSuper x = InnerClassInitOrder.this.outerIsSuper.unqualifiedAlloc();
@@ -524,7 +524,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestUnqualifiedSuperCall x = new TestUnqualifiedSuperCall.<init>(InnerClassInitOrder.this.outerIsSuper);
@@ -542,7 +542,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
    ;; TestUnqualifiedSuperCall x = new $4.<init>(InnerClassInitOrder.this,InnerClassInitOrder.this.outerIsSuper);
@@ -767,7 +767,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 100));
@@ -900,7 +900,7 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.this.number = ($1.this.this.this.number + 1000));
@@ -970,7 +970,7 @@
 (func $m_callInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.InnerClass (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt)))
  (block $return.label
   (block
    ;; (InnerClass.this.this.number = (InnerClass.this.this.number + 1));
@@ -1049,7 +1049,7 @@
 (func $m_callReallyInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt)))
  (block $return.label
   (block
    ;; ($1ReallyInnerClass.this.this.this.number = ($1ReallyInnerClass.this.this.this.number + 10));
@@ -1315,7 +1315,7 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
  (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.ESOuter (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.rtt)))
  (block $return.label
   (block
    ;; return new ESInner.<init>(ESOuter.this);
@@ -1513,7 +1513,7 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
  (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.ESWGOuter (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.rtt)))
  (block $return.label
   (block
    ;; return new ESWGInner.<init>(ESWGOuter.this);
@@ -1770,7 +1770,7 @@
 (func $m_act__void@innerclassinitorder.InnerClassInitOrder.1
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.1))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt)))
  (block $return.label
   (block
    ;; ($1.this.this.number = ($1.this.this.number + $1.this.num));
@@ -1836,7 +1836,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.rtt)))
  (block $return.label
   (block
    ;; return 1;
@@ -1904,7 +1904,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt)))
  (block $return.label
   (block
    ;; return OuterIsNotSuper.this.this.value;
@@ -1977,7 +1977,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
    ;; return 2;
@@ -1995,7 +1995,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
    ;; return super.checkDispatch();
@@ -2014,7 +2014,7 @@
  (local $return.value i32)
  (local $$qualifier (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
    ;; return (<anonymous> extends Outer $qualifier = new $1.<init>(OuterIsSuper.this,1),$qualifier.go());
@@ -2036,7 +2036,7 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $return.value (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt)))
  (block $return.label
   (block
    ;; return new OuterIsNotSuper.<init>(OuterIsSuper.this);
@@ -2107,7 +2107,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
- (local.set $this (ref.cast $java.lang.Object $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.rtt)))
  (block $return.label
   (block
    ;; return $1.this.this.checkDispatch();

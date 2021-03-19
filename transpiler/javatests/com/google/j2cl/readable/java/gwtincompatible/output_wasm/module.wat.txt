@@ -85,7 +85,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $a i32)
  (local $this (ref null $gwtincompatible.Implementor))
- (local.set $this (ref.cast $java.lang.Object $gwtincompatible.Implementor (local.get $this.untyped) (global.get $gwtincompatible.Implementor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $gwtincompatible.Implementor.rtt)))
  (block $return.label
   (block
    ;; int a = 4;
@@ -178,7 +178,7 @@
    (local.set $return.value (block (result (ref null $gwtincompatible.Implementor.SomeEnum))
     
     (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_)))
-    (if (result (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $gwtincompatible.Implementor.SomeEnum)) (else (ref.cast $java.lang.Object $gwtincompatible.Implementor.SomeEnum (local.get $$cast_expression) (global.get $gwtincompatible.Implementor.SomeEnum.rtt))))
+    (if (result (ref null $gwtincompatible.Implementor.SomeEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $gwtincompatible.Implementor.SomeEnum)) (else (ref.cast (local.get $$cast_expression) (global.get $gwtincompatible.Implementor.SomeEnum.rtt))))
    ))
    (br $return.label)
   )
@@ -278,7 +278,7 @@
 (func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
- (local.set $this (ref.cast $java.lang.Object $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt)))
  (block $return.label
   (block
   )

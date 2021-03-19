@@ -76,7 +76,7 @@
  (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; Object[] objects = new Object[100];
@@ -134,7 +134,7 @@
    (local.set $object (block (result (ref null $java.lang.Object))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
    ))
    ;; (object = (Object $cast_expression = (Object $cast_expression = objects2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object[]) $cast_expression)))[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression))));
    (local.set $object (block (result (ref null $java.lang.Object))
@@ -142,9 +142,9 @@
     (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
      
      (local.set $$cast_expression_2 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects2d)) (i32.const 0)))
-     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
     )) (i32.const 1)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression_1) (global.get $java.lang.Object.rtt))))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Object.rtt))))
    ))
    ;; (objects[0] = null);
    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
@@ -152,7 +152,7 @@
    (array.set $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
     
     (local.set $$cast_expression_3 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects2d)) (i32.const 0)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
    )) (i32.const 1) (ref.null $java.lang.Object))
   )
  )
@@ -176,7 +176,7 @@
  (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; SomeObject[] objects = new SomeObject[100];
@@ -234,7 +234,7 @@
    (local.set $someObject (block (result (ref null $array.Arrays.SomeObject))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0)))
-    (if (result (ref null $array.Arrays.SomeObject)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $array.Arrays.SomeObject)) (else (ref.cast $java.lang.Object $array.Arrays.SomeObject (local.get $$cast_expression) (global.get $array.Arrays.SomeObject.rtt))))
+    (if (result (ref null $array.Arrays.SomeObject)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $array.Arrays.SomeObject)) (else (ref.cast (local.get $$cast_expression) (global.get $array.Arrays.SomeObject.rtt))))
    ))
    ;; (someObject = (Object $cast_expression = (Object $cast_expression = objects2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SomeObject[]) $cast_expression)))[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SomeObject) $cast_expression))));
    (local.set $someObject (block (result (ref null $array.Arrays.SomeObject))
@@ -242,9 +242,9 @@
     (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
      
      (local.set $$cast_expression_2 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects2d)) (i32.const 0)))
-     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
     )) (i32.const 1)))
-    (if (result (ref null $array.Arrays.SomeObject)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $array.Arrays.SomeObject)) (else (ref.cast $java.lang.Object $array.Arrays.SomeObject (local.get $$cast_expression_1) (global.get $array.Arrays.SomeObject.rtt))))
+    (if (result (ref null $array.Arrays.SomeObject)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $array.Arrays.SomeObject)) (else (ref.cast (local.get $$cast_expression_1) (global.get $array.Arrays.SomeObject.rtt))))
    ))
    ;; (objects[0] = null);
    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $objects)) (i32.const 0) (ref.null $array.Arrays.SomeObject))
@@ -252,7 +252,7 @@
    (array.set $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
     
     (local.set $$cast_expression_3 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $objects2d)) (i32.const 0)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
    )) (i32.const 1) (ref.null $array.Arrays.SomeObject))
   )
  )
@@ -274,7 +274,7 @@
  (local $$cast_expression (ref null $java.lang.Object))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; int[] ints = new int[100];
@@ -334,7 +334,7 @@
    (local.set $n (array.get $int.array.elements (struct.get $int.array $elements (block (result (ref null $int.array))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $ints2d)) (i32.const 0)))
-    (if (result (ref null $int.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $int.array)) (else (ref.cast $java.lang.Object $int.array (local.get $$cast_expression) (global.get $int.array.rtt))))
+    (if (result (ref null $int.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $int.array)) (else (ref.cast (local.get $$cast_expression) (global.get $int.array.rtt))))
    )) (i32.const 1)))
    ;; (ints[0] = 1);
    (array.set $int.array.elements (struct.get $int.array $elements (local.get $ints)) (i32.const 0) (i32.const 1))
@@ -342,7 +342,7 @@
    (array.set $int.array.elements (struct.get $int.array $elements (block (result (ref null $int.array))
     
     (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $ints2d)) (i32.const 0)))
-    (if (result (ref null $int.array)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $int.array)) (else (ref.cast $java.lang.Object $int.array (local.get $$cast_expression_1) (global.get $int.array.rtt))))
+    (if (result (ref null $int.array)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $int.array)) (else (ref.cast (local.get $$cast_expression_1) (global.get $int.array.rtt))))
    )) (i32.const 1) (i32.const 1))
   )
  )
@@ -364,7 +364,7 @@
  (local $$cast_expression (ref null $java.lang.Object))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; long[] longs = new long[100];
@@ -424,7 +424,7 @@
    (local.set $n (array.get $long.array.elements (struct.get $long.array $elements (block (result (ref null $long.array))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $longs2d)) (i32.const 0)))
-    (if (result (ref null $long.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $long.array)) (else (ref.cast $java.lang.Object $long.array (local.get $$cast_expression) (global.get $long.array.rtt))))
+    (if (result (ref null $long.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $long.array)) (else (ref.cast (local.get $$cast_expression) (global.get $long.array.rtt))))
    )) (i32.const 1)))
    ;; (longs[0] = 1);
    (array.set $long.array.elements (struct.get $long.array $elements (local.get $longs)) (i32.const 0) (i64.const 1))
@@ -432,7 +432,7 @@
    (array.set $long.array.elements (struct.get $long.array $elements (block (result (ref null $long.array))
     
     (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $longs2d)) (i32.const 0)))
-    (if (result (ref null $long.array)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $long.array)) (else (ref.cast $java.lang.Object $long.array (local.get $$cast_expression_1) (global.get $long.array.rtt))))
+    (if (result (ref null $long.array)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $long.array)) (else (ref.cast (local.get $$cast_expression_1) (global.get $long.array.rtt))))
    )) (i32.const 1) (i64.const 1))
   )
  )
@@ -458,7 +458,7 @@
  (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; Boolean[] booleans = new Boolean[100];
@@ -518,7 +518,7 @@
     (local.set $$qualifier (block (result (ref null $java.lang.Boolean))
      
      (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $booleans)) (i32.const 0)))
-     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Boolean)) (else (ref.cast $java.lang.Object $java.lang.Boolean (local.get $$cast_expression) (global.get $java.lang.Boolean.rtt))))
+     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Boolean)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Boolean.rtt))))
     ))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
    ))
@@ -530,9 +530,9 @@
      (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
       
       (local.set $$cast_expression_2 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $booleans2d)) (i32.const 0)))
-      (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+      (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
      )) (i32.const 1)))
-     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Boolean)) (else (ref.cast $java.lang.Object $java.lang.Boolean (local.get $$cast_expression_1) (global.get $java.lang.Boolean.rtt))))
+     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Boolean)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Boolean.rtt))))
     ))
     (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
    ))
@@ -542,7 +542,7 @@
    (array.set $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
     
     (local.set $$cast_expression_3 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $booleans2d)) (i32.const 0)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
    )) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
   )
  )
@@ -566,7 +566,7 @@
  (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; String[] strings = new String[100];
@@ -624,7 +624,7 @@
    (local.set $b (block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $strings)) (i32.const 0)))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    ))
    ;; (b = (Object $cast_expression = (Object $cast_expression = strings2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String[]) $cast_expression)))[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
    (local.set $b (block (result (ref null $java.lang.String))
@@ -632,9 +632,9 @@
     (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
      
      (local.set $$cast_expression_2 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $strings2d)) (i32.const 0)))
-     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
     )) (i32.const 1)))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
    ))
    ;; (strings[0] = null);
    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $strings)) (i32.const 0) (ref.null $java.lang.String))
@@ -642,7 +642,7 @@
    (array.set $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
     
     (local.set $$cast_expression_3 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $strings2d)) (i32.const 0)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
    )) (i32.const 1) (ref.null $java.lang.String))
   )
  )
@@ -666,7 +666,7 @@
  (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; NativeType[] nativeObjects = new NativeType[100];
@@ -724,7 +724,7 @@
    (local.set $nativeObject (block (result (ref null $array.Arrays.NativeType))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $nativeObjects)) (i32.const 0)))
-    (if (result (ref null $array.Arrays.NativeType)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $array.Arrays.NativeType)) (else (ref.cast $java.lang.Object $array.Arrays.NativeType (local.get $$cast_expression) (global.get $array.Arrays.NativeType.rtt))))
+    (if (result (ref null $array.Arrays.NativeType)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $array.Arrays.NativeType)) (else (ref.cast (local.get $$cast_expression) (global.get $array.Arrays.NativeType.rtt))))
    ))
    ;; (nativeObject = (Object $cast_expression = (Object $cast_expression = nativeObjects2d[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((NativeType[]) $cast_expression)))[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((NativeType) $cast_expression))));
    (local.set $nativeObject (block (result (ref null $array.Arrays.NativeType))
@@ -732,9 +732,9 @@
     (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
      
      (local.set $$cast_expression_2 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $nativeObjects2d)) (i32.const 0)))
-     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
+     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_2) (global.get $Object.array.rtt))))
     )) (i32.const 1)))
-    (if (result (ref null $array.Arrays.NativeType)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $array.Arrays.NativeType)) (else (ref.cast $java.lang.Object $array.Arrays.NativeType (local.get $$cast_expression_1) (global.get $array.Arrays.NativeType.rtt))))
+    (if (result (ref null $array.Arrays.NativeType)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $array.Arrays.NativeType)) (else (ref.cast (local.get $$cast_expression_1) (global.get $array.Arrays.NativeType.rtt))))
    ))
    ;; (nativeObjects[0] = null);
    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $nativeObjects)) (i32.const 0) (ref.null $array.Arrays.NativeType))
@@ -742,7 +742,7 @@
    (array.set $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
     
     (local.set $$cast_expression_3 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $nativeObjects2d)) (i32.const 0)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
+    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_3) (global.get $Object.array.rtt))))
    )) (i32.const 1) (ref.null $array.Arrays.NativeType))
   )
  )
@@ -757,7 +757,7 @@
  (local $$cast_expression (ref null $java.lang.Object))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; ArrayContainer<String> container = null;
@@ -770,9 +770,9 @@
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
      
      (local.set $$cast_expression_1 (struct.get $array.Arrays.ArrayContainer $f_data__array_Arrays_ArrayContainer(local.get $container)))
-     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $Object.array)) (else (ref.cast $java.lang.Object $Object.array (local.get $$cast_expression_1) (global.get $Object.array.rtt))))
+     (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression_1) (global.get $Object.array.rtt))))
     )) (i32.const 0)))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    ))
   )
  )
@@ -783,7 +783,7 @@
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
    ;; Arrays.this.consumesCloneable(new Object[10]);
@@ -800,7 +800,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
   )
@@ -813,7 +813,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
- (local.set $this (ref.cast $java.lang.Object $array.Arrays (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
   (block
   )

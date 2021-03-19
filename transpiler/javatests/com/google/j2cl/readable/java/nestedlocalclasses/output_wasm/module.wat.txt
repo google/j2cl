@@ -70,7 +70,7 @@
  (param $p i32)
  (local $localVar i32)
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses))
- (local.set $this (ref.cast $java.lang.Object $nestedlocalclasses.NestedLocalClasses (local.get $this.untyped) (global.get $nestedlocalclasses.NestedLocalClasses.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestedlocalclasses.NestedLocalClasses.rtt)))
  (block $return.label
   (block
    ;; int localVar = 1;
@@ -140,7 +140,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $localVarInInnerClass i32)
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
- (local.set $this (ref.cast $java.lang.Object $nestedlocalclasses.NestedLocalClasses.1InnerClass (local.get $this.untyped) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.rtt)))
  (block $return.label
   (block
    ;; int localVarInInnerClass = 1;
@@ -379,7 +379,7 @@
 (func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
- (local.set $this (ref.cast $java.lang.Object $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this.untyped) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.rtt)))
  (block $return.label
   (block
    ;; InterfaceWithThisReference.this.foo();

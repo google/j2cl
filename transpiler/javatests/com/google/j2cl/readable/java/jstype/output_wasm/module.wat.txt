@@ -51,7 +51,7 @@
 (func $m_publicMethod__void@jstype.SomeJsType
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
   )
@@ -72,7 +72,7 @@
 (func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
   )
@@ -84,7 +84,7 @@
 (func $m_protectedMethod__void@jstype.SomeJsType
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
   )
@@ -97,7 +97,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $value i32)
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
    ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
@@ -128,7 +128,7 @@
  (local $$cast_expression (ref null $java.lang.Object))
  (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast $java.lang.Object $jstype.SomeJsType (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
   (block
    ;; Object object = new Object.<init>();

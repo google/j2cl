@@ -163,7 +163,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.Bar (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
  (block $return.label
   (block
    ;; return (Bar.this.f + 1);
@@ -180,7 +180,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $x i32)
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.Bar (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
  (block $return.label
   (block
    ;; (Bar.this.f = (x + 2));
@@ -196,7 +196,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.Bar (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
  (block $return.label
   (block
    ;; return (Bar.this.f + 3);
@@ -213,7 +213,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $x i32)
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.Bar (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
  (block $return.label
   (block
    ;; (Bar.this.f = (x + 4));
@@ -275,7 +275,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $jsproperties.NativeFoo))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.NativeFoo (local.get $this.untyped) (global.get $jsproperties.NativeFoo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.NativeFoo.rtt)))
  (block $return.label
   (block
   )
@@ -348,7 +348,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $$qualifier (ref null $jsproperties.NativeFoo))
  (local $this (ref null $jsproperties.Main))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.Main (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
  (block $return.label
   (block
    (block
@@ -369,7 +369,7 @@
 (func $m_testStaticJsProperty__void@jsproperties.Main
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsproperties.Main))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.Main (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
  (block $return.label
   (block
    ;; jsproperties.Foo.getA();
@@ -390,7 +390,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $bar (ref null $jsproperties.Bar))
  (local $this (ref null $jsproperties.Main))
- (local.set $this (ref.cast $java.lang.Object $jsproperties.Main (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
  (block $return.label
   (block
    ;; Bar bar = new Bar.<init>();

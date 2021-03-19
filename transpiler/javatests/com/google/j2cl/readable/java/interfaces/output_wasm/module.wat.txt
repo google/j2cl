@@ -57,7 +57,7 @@
  (local $i (ref null $java.lang.Object))
  (local $x i32)
  (local $this (ref null $interfaces.Main))
- (local.set $this (ref.cast $java.lang.Object $interfaces.Main (local.get $this.untyped) (global.get $interfaces.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.rtt)))
  (block $return.label
   (block
    ;; Interface i = new Implementor.<init>(Main.this);
@@ -222,7 +222,7 @@
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $interfaces.Main.Implementor))
- (local.set $this (ref.cast $java.lang.Object $interfaces.Main.Implementor (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
   (block
   )
@@ -236,14 +236,14 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $interfaces.Main.Implementor))
- (local.set $this (ref.cast $java.lang.Object $interfaces.Main.Implementor (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
   (block
    ;; Implementor.this.defaultMethod((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
    (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $this))))
   )
  )
@@ -255,7 +255,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (local $this (ref null $interfaces.Main.Implementor))
- (local.set $this (ref.cast $java.lang.Object $interfaces.Main.Implementor (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
   (block
    ;; SubInterface.this.defaultMethod(arg0);
@@ -326,14 +326,14 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $interfaces.Main.AbstractImplementor))
- (local.set $this (ref.cast $java.lang.Object $interfaces.Main.AbstractImplementor (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
  (block $return.label
   (block
    ;; AbstractImplementor.this.defaultMethod((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
    (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(struct.get $interfaces.Main.AbstractImplementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.AbstractImplementor $vtable(local.get $this))))
   )
  )
@@ -345,7 +345,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (local $this (ref null $interfaces.Main.AbstractImplementor))
- (local.set $this (ref.cast $java.lang.Object $interfaces.Main.AbstractImplementor (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
  (block $return.label
   (block
    ;; SubInterface.this.defaultMethod(arg0);

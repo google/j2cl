@@ -70,7 +70,7 @@
  (local $localVar i32)
  (local $$qualifier (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
- (local.set $this (ref.cast $java.lang.Object $simplelocalclass.SimpleLocalClass (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
  (block $return.label
   (block
    ;; int localVar = 1;
@@ -95,7 +95,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $localVar i32)
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
- (local.set $this (ref.cast $java.lang.Object $simplelocalclass.SimpleLocalClass (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
  (block $return.label
   (block
    ;; int localVar = 1;
@@ -110,7 +110,7 @@
 (func $m_foo__void@simplelocalclass.SimpleLocalClass
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
- (local.set $this (ref.cast $java.lang.Object $simplelocalclass.SimpleLocalClass (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
  (block $return.label
   (block
   )
@@ -182,7 +182,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
- (local.set $this (ref.cast $java.lang.Object $simplelocalclass.SimpleLocalClass.1InnerClass (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt)))
  (block $return.label
   (block
    ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);

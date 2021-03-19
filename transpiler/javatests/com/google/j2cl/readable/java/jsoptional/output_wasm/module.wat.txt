@@ -59,7 +59,7 @@
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $java.lang.Integer))
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
@@ -74,7 +74,7 @@
  (param $d (ref null $java.lang.Double))
  (param $i (ref null $Object.array))
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
@@ -105,7 +105,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
@@ -118,7 +118,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
   (block
   )
@@ -213,14 +213,14 @@
  (local $return.value (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.AFunction))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.AFunction (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
  (block $return.label
   (block
    ;; return (Object $cast_expression = args[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
    (local.set $return.value (block (result (ref null $java.lang.Object))
     
     (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $args)) (i32.const 0)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast $java.lang.Object $java.lang.Object (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
+    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
    ))
    (br $return.label)
   )
@@ -301,7 +301,7 @@
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.TemplatedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
  (block $return.label
   (block
   )
@@ -316,14 +316,14 @@
  (param $arg1 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.TemplatedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
  (block $return.label
   (block
    ;; TemplatedSubtype.this.m((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression))),arg1);
    (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(local.get $arg1)(struct.get $jsoptional.Main.TemplatedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.TemplatedSubtype $vtable(local.get $this))))
   )
  )
@@ -390,7 +390,7 @@
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.SpecializedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
  (block $return.label
   (block
   )
@@ -405,14 +405,14 @@
  (param $arg1 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.SpecializedSubtype (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
  (block $return.label
   (block
    ;; SpecializedSubtype.this.m((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))),arg1);
    (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(local.get $arg1)(struct.get $jsoptional.Main.SpecializedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.SpecializedSubtype $vtable(local.get $this))))
   )
  )
@@ -472,7 +472,7 @@
  (param $t (ref null $java.lang.String))
  (param $o (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.NonJsTypeSubtype (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
  (block $return.label
   (block
   )
@@ -487,14 +487,14 @@
  (param $arg1 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
- (local.set $this (ref.cast $java.lang.Object $jsoptional.Main.NonJsTypeSubtype (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
  (block $return.label
   (block
    ;; NonJsTypeSubtype.this.m((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))),arg1);
    (call_ref (local.get $this)(block (result (ref null $java.lang.String))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast $java.lang.Object $java.lang.String (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
+    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    )(local.get $arg1)(struct.get $jsoptional.Main.NonJsTypeSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.NonJsTypeSubtype $vtable(local.get $this))))
   )
  )

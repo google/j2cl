@@ -136,7 +136,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; return (Lambdas.this.field + intf.m(n));
@@ -153,7 +153,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
@@ -168,7 +168,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
@@ -183,7 +183,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
@@ -199,7 +199,7 @@
  (local $x i32)
  (local $i i32)
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; int x = 1;
@@ -219,7 +219,7 @@
  (local $i i32)
  (local $y i32)
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; int x = 1;
@@ -236,7 +236,7 @@
 (func $m_funOuter__void@lambdas.Lambdas
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
   )
@@ -249,7 +249,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; Lambdas.this.call(function (int i){
@@ -280,7 +280,7 @@
  (local $wrapped (ref null $java.lang.Object))
  (local $f (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; Functional<T> wrapped = function (Functional<T> f){
@@ -314,7 +314,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; return intf.m(e);
@@ -335,14 +335,14 @@
  (local $return.value (ref null $java.lang.Error))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; return (Object $cast_expression = intf.m(e),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Error) $cast_expression)));
    (local.set $return.value (block (result (ref null $java.lang.Error))
     
     (local.set $$cast_expression (ref.null $java.lang.Error))
-    (if (result (ref null $java.lang.Error)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Error)) (else (ref.cast $java.lang.Object $java.lang.Error (local.get $$cast_expression) (global.get $java.lang.Error.rtt))))
+    (if (result (ref null $java.lang.Error)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Error)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Error.rtt))))
    ))
    (br $return.label)
   )
@@ -366,7 +366,7 @@
    (local.set $return.value (block (result (ref null $java.lang.Enum))
     
     (local.set $$cast_expression (ref.null $java.lang.Enum))
-    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Enum)) (else (ref.cast $java.lang.Object $java.lang.Enum (local.get $$cast_expression) (global.get $java.lang.Enum.rtt))))
+    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Enum)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Enum.rtt))))
    ))
    (br $return.label)
   )
@@ -381,7 +381,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -405,7 +405,7 @@
  (local $f (ref null $java.lang.Object))
  (local $item (ref null $java.lang.Enum))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; Lambdas.this.callWithTypeVariable(function (Error i){
@@ -416,7 +416,7 @@
    (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(block (result (ref null $java.lang.Enum))
     
     (local.set $$cast_expression (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Enum)) (else (ref.cast $java.lang.Object $java.lang.Enum (local.get $$cast_expression) (global.get $java.lang.Enum.rtt))))
+    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Enum)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Enum.rtt))))
    )))
    ;; Lambdas.this.callWithBiFunction(function (Object x,String y){
    (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
@@ -464,7 +464,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $runner (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; FunctionalInterfaceWithMethodReturningVoid runner = function (){
@@ -480,7 +480,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $runner (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; FunctionalInterfaceWithMethodReturningVoid runner = function (){
@@ -601,7 +601,7 @@
  (local $t (ref null $java.lang.String))
  (local $u (ref null $java.lang.String))
  (local $this (ref null $lambdas.Lambdas))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
    ;; Object o = (Object $cast_expression = function (String t,String u){
@@ -724,7 +724,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas.1))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas.1 (local.get $this.untyped) (global.get $lambdas.Lambdas.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.1.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -789,7 +789,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas.2))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas.2 (local.get $this.untyped) (global.get $lambdas.Lambdas.2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.2.rtt)))
  (block $return.label
   (block
    ;; return null;
@@ -1013,7 +1013,7 @@
 (func $m_funInParent__void@lambdas.Lambdas.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas.Parent))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas.Parent (local.get $this.untyped) (global.get $lambdas.Lambdas.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.Parent.rtt)))
  (block $return.label
   (block
   )
@@ -1076,7 +1076,7 @@
  (local $i i32)
  (local $a i32)
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas.LambdaInSubClass (local.get $this.untyped) (global.get $lambdas.Lambdas.LambdaInSubClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.LambdaInSubClass.rtt)))
  (block $return.label
   (block
    ;; FunctionalInterface l = function (int i){
@@ -1197,7 +1197,7 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas.IdentityFunction))
- (local.set $this (ref.cast $java.lang.Object $lambdas.Lambdas.IdentityFunction (local.get $this.untyped) (global.get $lambdas.Lambdas.IdentityFunction.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.IdentityFunction.rtt)))
  (block $return.label
   (block
    ;; return o;

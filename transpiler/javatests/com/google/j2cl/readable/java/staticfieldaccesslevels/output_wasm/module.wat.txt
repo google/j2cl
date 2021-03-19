@@ -41,7 +41,7 @@
  (result i32)
  (local $return.value i32)
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
- (local.set $this (ref.cast $java.lang.Object $staticfieldaccesslevels.StaticFieldAccessLevels (local.get $this.untyped) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
  (block $return.label
   (block
    ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? ((staticfieldaccesslevels.StaticFieldAccessLevels.$clinit(),staticfieldaccesslevels.StaticFieldAccessLevels.a)) : ((staticfieldaccesslevels.StaticFieldAccessLevels.$clinit(),staticfieldaccesslevels.StaticFieldAccessLevels.d));

@@ -41,7 +41,7 @@
  (local $a i32)
  (local $b i32)
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast $java.lang.Object $forstatement.ForStatement (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
  (block $return.label
   (block
    ;; LOOP: for (int i = 0,int count = 0;(i < 100);(i = (i + 1))) {

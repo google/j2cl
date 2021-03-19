@@ -51,7 +51,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Error))
  (local $this (ref null $accidentaloverride.Parent))
- (local.set $this (ref.cast $java.lang.Object $accidentaloverride.Parent (local.get $this.untyped) (global.get $accidentaloverride.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.Parent.rtt)))
  (block $return.label
   (block
   )
@@ -132,14 +132,14 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; AnotherAccidentalOverride.this.foo((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((AssertionError) $cast_expression))));
    (call_ref (local.get $this)(block (result (ref null $java.lang.AssertionError))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.AssertionError)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.AssertionError)) (else (ref.cast $java.lang.Object $java.lang.AssertionError (local.get $$cast_expression) (global.get $java.lang.AssertionError.rtt))))
+    (if (result (ref null $java.lang.AssertionError)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.AssertionError)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.AssertionError.rtt))))
    )(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
   )
  )
@@ -152,14 +152,14 @@
  (param $arg0 (ref null $java.lang.Error))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; AnotherAccidentalOverride.this.foo((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((AssertionError) $cast_expression))));
    (call_ref (local.get $this)(block (result (ref null $java.lang.AssertionError))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.AssertionError)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.AssertionError)) (else (ref.cast $java.lang.Object $java.lang.AssertionError (local.get $$cast_expression) (global.get $java.lang.AssertionError.rtt))))
+    (if (result (ref null $java.lang.AssertionError)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.AssertionError)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.AssertionError.rtt))))
    )(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
   )
  )
@@ -171,7 +171,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.AssertionError))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
- (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AnotherAccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; super.foo(arg0);
@@ -234,14 +234,14 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $accidentaloverride.AccidentalOverride))
- (local.set $this (ref.cast $java.lang.Object $accidentaloverride.AccidentalOverride (local.get $this.untyped) (global.get $accidentaloverride.AccidentalOverride.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AccidentalOverride.rtt)))
  (block $return.label
   (block
    ;; Parent.this.foo((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Error) $cast_expression))));
    (call_ref (local.get $this)(block (result (ref null $java.lang.Error))
     
     (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.Error)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Error)) (else (ref.cast $java.lang.Object $java.lang.Error (local.get $$cast_expression) (global.get $java.lang.Error.rtt))))
+    (if (result (ref null $java.lang.Error)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Error)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Error.rtt))))
    )(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
   )
  )

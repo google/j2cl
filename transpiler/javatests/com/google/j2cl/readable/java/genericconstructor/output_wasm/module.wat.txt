@@ -51,7 +51,7 @@
 (func $m_test__void@genericconstructor.GenericConstructor
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $genericconstructor.GenericConstructor))
- (local.set $this (ref.cast $java.lang.Object $genericconstructor.GenericConstructor (local.get $this.untyped) (global.get $genericconstructor.GenericConstructor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericconstructor.GenericConstructor.rtt)))
  (block $return.label
   (block
    ;; new GenericConstructor.<init>(new Exception.<init>(),new Error.<init>());

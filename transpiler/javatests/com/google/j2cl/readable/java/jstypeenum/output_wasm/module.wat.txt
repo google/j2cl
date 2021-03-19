@@ -73,7 +73,7 @@
    (local.set $return.value (block (result (ref null $jstypeenum.Color))
     
     (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__jstypeenum_Color_)))
-    (if (result (ref null $jstypeenum.Color)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $jstypeenum.Color)) (else (ref.cast $java.lang.Object $jstypeenum.Color (local.get $$cast_expression) (global.get $jstypeenum.Color.rtt))))
+    (if (result (ref null $jstypeenum.Color)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $jstypeenum.Color)) (else (ref.cast (local.get $$cast_expression) (global.get $jstypeenum.Color.rtt))))
    ))
    (br $return.label)
   )
