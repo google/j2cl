@@ -752,6 +752,14 @@
    (local.set $boxI (local.get $boxI))
    ;; (boxI = java.lang.Integer.valueOf((0 - boxI.intValue())));
    (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.sub (i32.const 0) (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))))))
+   ;; (boxI = java.lang.Integer.valueOf((boxI.intValue() << boxI.intValue())));
+   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.shl (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))) (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))))))
+   ;; (boxI = java.lang.Integer.valueOf((boxI.intValue() << javaemul.internal.Primitives.narrowLongToInt(boxL.longValue()))));
+   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.shl (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))) (i32.wrap_i64 (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL))))))))
+   ;; (boxL = java.lang.Long.valueOf((boxL.longValue() << boxI.intValue())));
+   (local.set $boxL (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.shl (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL)))) (i64.const 0))))
+   ;; (boxL = java.lang.Long.valueOf((boxL.longValue() << javaemul.internal.Primitives.narrowLongToInt(boxL.longValue()))));
+   (local.set $boxL (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.shl (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL)))) (i64.const 0))))
    ;; (o = java.lang.Integer.valueOf(15));
    (local.set $o (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 15)))
   )
@@ -926,6 +934,12 @@
     ))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    )))
+   ;; (i = (i << boxI.intValue()));
+   (local.set $i (i32.shl (local.get $i) (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI))))))
+   ;; (i = (i << javaemul.internal.Primitives.narrowLongToInt(boxL.longValue())));
+   (local.set $i (i32.shl (local.get $i) (i32.wrap_i64 (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL)))))))
+   ;; (l = (l << boxI.intValue()));
+   (local.set $l (i64.shl (local.get $l) (i64.const 0)))
    ;; (l = (l << javaemul.internal.Primitives.narrowLongToInt(boxL.longValue())));
    (local.set $l (i64.shl (local.get $l) (i64.const 0)))
   )

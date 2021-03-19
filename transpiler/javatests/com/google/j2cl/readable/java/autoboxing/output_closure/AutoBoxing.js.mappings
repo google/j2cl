@@ -167,6 +167,10 @@
 [boxBool = !boxBool;] => [boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);] "autoboxing.AutoBoxing.testBoxing"
 [boxI = +boxI;] => [boxI = Integer.m_valueOf__int(+boxI.m_intValue__());] "autoboxing.AutoBoxing.testBoxing"
 [boxI = -boxI;] => [boxI = Integer.m_valueOf__int(-boxI.m_intValue__() | 0);] "autoboxing.AutoBoxing.testBoxing"
+[boxI <<= boxI;] => [boxI = Integer.m_valueOf__int(boxI.m_intValue__() << boxI.m_intValue__());] "autoboxing.AutoBoxing.testBoxing"
+[boxI <<= boxL;] => [boxI = Integer.m_valueOf__int(boxI.m_intValue__() << $Primitives.narrowLongToInt(boxL.m_longValue__()));] "autoboxing.AutoBoxing.testBoxing"
+[boxL <<= boxI;] => [boxL = Long.m_valueOf__long($LongUtils.leftShift(boxL.m_longValue__(), boxI.m_intValue__()));] "autoboxing.AutoBoxing.testBoxing"
+[boxL <<= boxL;] => [boxL = Long.m_valueOf__long($LongUtils.leftShift(boxL.m_longValue__(), $Primitives.narrowLongToInt(boxL.m_longValue__())));] "autoboxing.AutoBoxing.testBoxing"
 [o = (Integer & Comparable<Integer>) 15;] => [o = Integer.m_valueOf__int(15);] "autoboxing.AutoBoxing.testBoxing"
 [testUnboxing] => [m_testUnboxing__]
 [Boolean boxBool = new Boolean(true);] => [let boxBool = Boolean.$create__boolean(true);] "autoboxing.AutoBoxing.testUnboxing"
@@ -240,7 +244,10 @@
    default:
   }] "autoboxing.AutoBoxing.testUnboxing"
 [i += boxI += i += boxI;] => [i = i + (boxI = Integer.m_valueOf__int(boxI.m_intValue__() + (i = i + boxI.m_intValue__() | 0) | 0)).m_intValue__() | 0;] "autoboxing.AutoBoxing.testUnboxing"
-[l = l << boxL;] => [l = $LongUtils.leftShift(l, $Primitives.narrowLongToInt(boxL.m_longValue__()));] "autoboxing.AutoBoxing.testUnboxing"
+[i <<= boxI;] => [i <<= boxI.m_intValue__();] "autoboxing.AutoBoxing.testUnboxing"
+[i <<= boxL;] => [i = i << $Primitives.narrowLongToInt(boxL.m_longValue__());] "autoboxing.AutoBoxing.testUnboxing"
+[l <<= boxI;] => [l = $LongUtils.leftShift(l, boxI.m_intValue__());] "autoboxing.AutoBoxing.testUnboxing"
+[l <<= boxL;] => [l = $LongUtils.leftShift(l, $Primitives.narrowLongToInt(boxL.m_longValue__()));] "autoboxing.AutoBoxing.testUnboxing"
 [testUnboxingBoolean] => [m_testUnboxingBoolean__]
 [Boolean boxB1 = new Boolean(true);] => [let boxB1 = Boolean.$create__boolean(true);] "autoboxing.AutoBoxing.testUnboxingBoolean"
 [boxB1] => [boxB1] "boxB1"

@@ -184,6 +184,11 @@ public class AutoBoxing {
     boxI = +boxI;
     boxI = -boxI;
 
+    boxI <<= boxI;
+    boxI <<= boxL;
+    boxL <<= boxI;
+    boxL <<= boxL;
+
     // auto-boxing by intersection cast.
     o = (Integer & Comparable<Integer>) 15;
   }
@@ -252,8 +257,13 @@ public class AutoBoxing {
     switch (boxI) {
       default:
     }
+
     i += boxI += i += boxI;
-    l = l << boxL;
+
+    i <<= boxI;
+    i <<= boxL;
+    l <<= boxI;
+    l <<= boxL;
   }
 
   @SuppressWarnings("unused")

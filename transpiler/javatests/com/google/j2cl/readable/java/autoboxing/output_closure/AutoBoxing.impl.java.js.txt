@@ -208,6 +208,15 @@ class AutoBoxing extends j_l_Object {
     boxBool = !Boolean.m_booleanValue__java_lang_Boolean(boxBool);
     boxI = Integer.m_valueOf__int(+boxI.m_intValue__());
     boxI = Integer.m_valueOf__int(-boxI.m_intValue__() | 0);
+    boxI = Integer.m_valueOf__int(boxI.m_intValue__() << boxI.m_intValue__());
+    boxI = Integer.m_valueOf__int(
+        boxI.m_intValue__()
+        << $Primitives.narrowLongToInt(boxL.m_longValue__()));
+    boxL = Long.m_valueOf__long(
+        $LongUtils.leftShift(boxL.m_longValue__(), boxI.m_intValue__()));
+    boxL = Long.m_valueOf__long($LongUtils.leftShift(
+        boxL.m_longValue__(),
+        $Primitives.narrowLongToInt(boxL.m_longValue__())));
     o = Integer.m_valueOf__int(15);
   }
 
@@ -271,6 +280,9 @@ class AutoBoxing extends j_l_Object {
                  boxI.m_intValue__() + (i = i + boxI.m_intValue__() | 0) | 0))
                 .m_intValue__() |
         0;
+    i <<= boxI.m_intValue__();
+    i = i << $Primitives.narrowLongToInt(boxL.m_longValue__());
+    l = $LongUtils.leftShift(l, boxI.m_intValue__());
     l = $LongUtils.leftShift(
         l, $Primitives.narrowLongToInt(boxL.m_longValue__()));
   }
