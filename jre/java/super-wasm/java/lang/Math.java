@@ -198,9 +198,10 @@ public final class Math {
   }
 
   public static int multiplyExact(int x, int y) {
-    double r = (double) x * (double) y;
-    checkCriticalArithmetic(isSafeIntegerRange(r));
-    return (int) r;
+    long lr = (long) x * (long) y;
+    int r = (int) lr;
+    checkCriticalArithmetic(r == lr);
+    return r;
   }
 
   public static long multiplyExact(long x, long y) {
