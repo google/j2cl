@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
-import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getWasmTypeForPrimitive;
 import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
@@ -507,20 +506,14 @@ final class ExpressionTranspiler {
     return isPrimitiveVoid(expression.getTypeDescriptor()) || isAssignmentExpression;
   }
 
-  // TODO(b/181829823,b/182436577): remove this method when shift operation on longs take the right
-  //  type in their rhs and when NullLiterals have the correct type.
+  // TODO(b/182436577): remove this method when NullLiterals have the correct type.
   public static void renderTypedExpression(
       TypeDescriptor typeDescriptor,
       Expression expression,
       SourceBuilder sourceBuilder,
       GenerationEnvironment environment) {
 
-    if (typeDescriptor.isPrimitive()
-        && expression.getTypeDescriptor().isPrimitive()
-        && !getWasmTypeForPrimitive(typeDescriptor)
-            .equals(getWasmTypeForPrimitive(expression.getTypeDescriptor()))) {
-      render(typeDescriptor.getDefaultValue(), sourceBuilder, environment);
-    } else if (expression instanceof NullLiteral) {
+    if (expression instanceof NullLiteral) {
       render(typeDescriptor.getDefaultValue(), sourceBuilder, environment);
     } else {
       render(expression, sourceBuilder, environment);

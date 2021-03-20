@@ -1102,12 +1102,12 @@
    (local.set $f (f32.convert_i32_s (local.get $b)))
    ;; (d = javaemul.internal.Primitives.widenByteToDouble(b));
    (local.set $d (f64.convert_i32_s (local.get $b)))
-   ;; (b = javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowCharToByte(c)));
-   (local.set $b (i32.extend8_s (i32.extend8_s (local.get $c))))
+   ;; (b = javaemul.internal.Primitives.narrowCharToByte(c));
+   (local.set $b (i32.extend8_s (local.get $c)))
    ;; (c = c);
    (local.set $c (local.get $c))
-   ;; (s = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowCharToShort(c)));
-   (local.set $s (i32.extend16_s (i32.extend16_s (local.get $c))))
+   ;; (s = javaemul.internal.Primitives.narrowCharToShort(c));
+   (local.set $s (i32.extend16_s (local.get $c)))
    ;; (i = c);
    (local.set $i (local.get $c))
    ;; (l = javaemul.internal.Primitives.widenCharToLong(c));
@@ -1116,10 +1116,10 @@
    (local.set $f (f32.convert_i32_u (local.get $c)))
    ;; (d = javaemul.internal.Primitives.widenCharToDouble(c));
    (local.set $d (f64.convert_i32_u (local.get $c)))
-   ;; (b = javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowShortToByte(s)));
-   (local.set $b (i32.extend8_s (i32.extend8_s (local.get $s))))
-   ;; (c = javaemul.internal.Primitives.narrowIntToChar(javaemul.internal.Primitives.narrowShortToChar(s)));
-   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (call $m_narrowShortToChar__short__int@javaemul.internal.Primitives (local.get $s))))
+   ;; (b = javaemul.internal.Primitives.narrowShortToByte(s));
+   (local.set $b (i32.extend8_s (local.get $s)))
+   ;; (c = javaemul.internal.Primitives.narrowShortToChar(s));
+   (local.set $c (call $m_narrowShortToChar__short__int@javaemul.internal.Primitives (local.get $s)))
    ;; (s = s);
    (local.set $s (local.get $s))
    ;; (i = s);
@@ -1130,12 +1130,12 @@
    (local.set $f (f32.convert_i32_s (local.get $s)))
    ;; (d = javaemul.internal.Primitives.widenShortToDouble(s));
    (local.set $d (f64.convert_i32_s (local.get $s)))
-   ;; (b = javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowIntToByte(i)));
-   (local.set $b (i32.extend8_s (i32.extend8_s (local.get $i))))
-   ;; (c = javaemul.internal.Primitives.narrowIntToChar(javaemul.internal.Primitives.narrowIntToChar(i)));
-   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (local.get $i))))
-   ;; (s = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowIntToShort(i)));
-   (local.set $s (i32.extend16_s (i32.extend16_s (local.get $i))))
+   ;; (b = javaemul.internal.Primitives.narrowIntToByte(i));
+   (local.set $b (i32.extend8_s (local.get $i)))
+   ;; (c = javaemul.internal.Primitives.narrowIntToChar(i));
+   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (local.get $i)))
+   ;; (s = javaemul.internal.Primitives.narrowIntToShort(i));
+   (local.set $s (i32.extend16_s (local.get $i)))
    ;; (i = i);
    (local.set $i (local.get $i))
    ;; (l = javaemul.internal.Primitives.widenIntToLong(i));
@@ -1144,12 +1144,12 @@
    (local.set $f (f32.convert_i32_s (local.get $i)))
    ;; (d = javaemul.internal.Primitives.widenIntToDouble(i));
    (local.set $d (f64.convert_i32_s (local.get $i)))
-   ;; (b = javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowLongToByte(l)));
-   (local.set $b (i32.extend8_s (call $m_narrowLongToByte__long__int@javaemul.internal.Primitives (local.get $l))))
-   ;; (c = javaemul.internal.Primitives.narrowIntToChar(javaemul.internal.Primitives.narrowLongToChar(l)));
-   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (call $m_narrowLongToChar__long__int@javaemul.internal.Primitives (local.get $l))))
-   ;; (s = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowLongToShort(l)));
-   (local.set $s (i32.extend16_s (call $m_narrowLongToShort__long__int@javaemul.internal.Primitives (local.get $l))))
+   ;; (b = javaemul.internal.Primitives.narrowLongToByte(l));
+   (local.set $b (call $m_narrowLongToByte__long__int@javaemul.internal.Primitives (local.get $l)))
+   ;; (c = javaemul.internal.Primitives.narrowLongToChar(l));
+   (local.set $c (call $m_narrowLongToChar__long__int@javaemul.internal.Primitives (local.get $l)))
+   ;; (s = javaemul.internal.Primitives.narrowLongToShort(l));
+   (local.set $s (call $m_narrowLongToShort__long__int@javaemul.internal.Primitives (local.get $l)))
    ;; (i = javaemul.internal.Primitives.narrowLongToInt(l));
    (local.set $i (i32.wrap_i64 (local.get $l)))
    ;; (l = l);
@@ -1158,12 +1158,12 @@
    (local.set $f (f32.convert_i64_s (local.get $l)))
    ;; (d = javaemul.internal.Primitives.widenLongToDouble(l));
    (local.set $d (f64.convert_i64_s (local.get $l)))
-   ;; (b = javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowFloatToByte(f)));
-   (local.set $b (i32.extend8_s (call $m_narrowFloatToByte__float__int@javaemul.internal.Primitives (local.get $f))))
-   ;; (c = javaemul.internal.Primitives.narrowIntToChar(javaemul.internal.Primitives.narrowFloatToChar(f)));
-   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (call $m_narrowFloatToChar__float__int@javaemul.internal.Primitives (local.get $f))))
-   ;; (s = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowFloatToShort(f)));
-   (local.set $s (i32.extend16_s (call $m_narrowFloatToShort__float__int@javaemul.internal.Primitives (local.get $f))))
+   ;; (b = javaemul.internal.Primitives.narrowFloatToByte(f));
+   (local.set $b (call $m_narrowFloatToByte__float__int@javaemul.internal.Primitives (local.get $f)))
+   ;; (c = javaemul.internal.Primitives.narrowFloatToChar(f));
+   (local.set $c (call $m_narrowFloatToChar__float__int@javaemul.internal.Primitives (local.get $f)))
+   ;; (s = javaemul.internal.Primitives.narrowFloatToShort(f));
+   (local.set $s (call $m_narrowFloatToShort__float__int@javaemul.internal.Primitives (local.get $f)))
    ;; (i = javaemul.internal.Primitives.narrowFloatToInt(f));
    (local.set $i (i32.trunc_sat_f32_s (local.get $f)))
    ;; (l = javaemul.internal.Primitives.narrowFloatToLong(f));
@@ -1172,12 +1172,12 @@
    (local.set $f (local.get $f))
    ;; (d = javaemul.internal.Primitives.widenFloatToDouble(f));
    (local.set $d (f64.promote_f32 (local.get $f)))
-   ;; (b = javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowDoubleToByte(d)));
-   (local.set $b (i32.extend8_s (call $m_narrowDoubleToByte__double__int@javaemul.internal.Primitives (local.get $d))))
-   ;; (c = javaemul.internal.Primitives.narrowIntToChar(javaemul.internal.Primitives.narrowDoubleToChar(d)));
-   (local.set $c (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (call $m_narrowDoubleToChar__double__int@javaemul.internal.Primitives (local.get $d))))
-   ;; (s = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowDoubleToShort(d)));
-   (local.set $s (i32.extend16_s (call $m_narrowDoubleToShort__double__int@javaemul.internal.Primitives (local.get $d))))
+   ;; (b = javaemul.internal.Primitives.narrowDoubleToByte(d));
+   (local.set $b (call $m_narrowDoubleToByte__double__int@javaemul.internal.Primitives (local.get $d)))
+   ;; (c = javaemul.internal.Primitives.narrowDoubleToChar(d));
+   (local.set $c (call $m_narrowDoubleToChar__double__int@javaemul.internal.Primitives (local.get $d)))
+   ;; (s = javaemul.internal.Primitives.narrowDoubleToShort(d));
+   (local.set $s (call $m_narrowDoubleToShort__double__int@javaemul.internal.Primitives (local.get $d)))
    ;; (i = javaemul.internal.Primitives.narrowDoubleToInt(d));
    (local.set $i (i32.trunc_sat_f64_s (local.get $d)))
    ;; (l = javaemul.internal.Primitives.narrowDoubleToLong(d));

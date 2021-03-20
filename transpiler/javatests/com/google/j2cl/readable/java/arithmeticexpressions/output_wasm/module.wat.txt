@@ -177,9 +177,9 @@
    ;; short s = 10;
    
    (local.set $s (i32.const 10))
-   ;; (k = (((s = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowIntToShort((s + 1)))),s) == 10));
+   ;; (k = (((s = javaemul.internal.Primitives.narrowIntToShort((s + 1))),s) == 10));
    (local.set $k (i32.eq (block (result i32)
-    (local.set $s (i32.extend16_s (i32.extend16_s (i32.add (local.get $s) (i32.const 1)))))
+    (local.set $s (i32.extend16_s (i32.add (local.get $s) (i32.const 1))))
     (local.get $s)
    ) (i32.const 10)))
    ;; int q = (3 >> 2);
@@ -319,13 +319,13 @@
    ;; short[] shorts = null;
    
    (local.set $shorts (ref.null $short.array))
-   ;; boolean b = ((short[] $array = shorts,int $index = 0,short $value = javaemul.internal.Primitives.narrowIntToShort(javaemul.internal.Primitives.narrowIntToShort((shorts[0] + 1))),($array[$index] = $value),$value) == 10);
+   ;; boolean b = ((short[] $array = shorts,int $index = 0,short $value = javaemul.internal.Primitives.narrowIntToShort((shorts[0] + 1)),($array[$index] = $value),$value) == 10);
    
    (local.set $b (i32.eq (block (result i32)
     
     (local.set $$array_4 (local.get $shorts))
     (local.set $$index_4 (i32.const 0))
-    (local.set $$value_2 (i32.extend16_s (i32.extend16_s (i32.add (array.get $short.array.elements (struct.get $short.array $elements (local.get $shorts)) (i32.const 0)) (i32.const 1)))))
+    (local.set $$value_2 (i32.extend16_s (i32.add (array.get $short.array.elements (struct.get $short.array $elements (local.get $shorts)) (i32.const 0)) (i32.const 1))))
     (array.set $short.array.elements (struct.get $short.array $elements (local.get $$array_4)) (local.get $$index_4) (local.get $$value_2))
     (local.get $$value_2)
    ) (i32.const 10)))
@@ -425,13 +425,13 @@
    ;; Byte b = java.lang.Byte.valueOf(0);
    
    (local.set $b (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 0)))
-   ;; (b = java.lang.Byte.valueOf(javaemul.internal.Primitives.narrowIntToByte(javaemul.internal.Primitives.narrowIntToByte((b.byteValue() + 1)))));
-   (local.set $b (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.extend8_s (i32.extend8_s (i32.add (call_ref (local.get $b)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $b)))) (i32.const 1))))))
+   ;; (b = java.lang.Byte.valueOf(javaemul.internal.Primitives.narrowIntToByte((b.byteValue() + 1))));
+   (local.set $b (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.extend8_s (i32.add (call_ref (local.get $b)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $b)))) (i32.const 1)))))
    ;; Character ch = java.lang.Character.valueOf(99);
    
    (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (i32.const 99)))
-   ;; (ch = java.lang.Character.valueOf(javaemul.internal.Primitives.narrowIntToChar(javaemul.internal.Primitives.narrowIntToChar((ch.charValue() + 1)))));
-   (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (i32.add (call_ref (local.get $ch)(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $ch)))) (i32.const 1))))))
+   ;; (ch = java.lang.Character.valueOf(javaemul.internal.Primitives.narrowIntToChar((ch.charValue() + 1))));
+   (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (i32.add (call_ref (local.get $ch)(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $ch)))) (i32.const 1)))))
    (block
     ;; Integer $qualifier = ((f = java.lang.Integer.valueOf((f.intValue() + 1))),f);
     

@@ -74,8 +74,7 @@ class ArithmeticExpressions extends j_l_Object {
     a = $Primitives.narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);
     k = !!(+k | +true);
     let s = 10;
-    k = (s = $Primitives.narrowIntToShort(
-             $Primitives.narrowIntToShort(s + 1 | 0))) == 10;
+    k = (s = $Primitives.narrowIntToShort(s + 1 | 0)) == 10;
     let q = 3 >> 2;
     q = 3 >>> 2 | 0;
   }
@@ -130,10 +129,9 @@ class ArithmeticExpressions extends j_l_Object {
         j_l_String.m_valueOf__java_lang_Object(strings[0]) +
             j_l_String.m_valueOf__java_lang_Object(null));
     let shorts = null;
-    let b = $Arrays.$set(
-                shorts, 0,
-                $Primitives.narrowIntToShort(
-                    $Primitives.narrowIntToShort(shorts[0] + 1 | 0))) == 10;
+    let b =
+        $Arrays.$set(
+            shorts, 0, $Primitives.narrowIntToShort(shorts[0] + 1 | 0)) == 10;
   }
   /** @return {Array<!$Long>} */
   static m_getLongArray__() {
@@ -160,12 +158,11 @@ class ArithmeticExpressions extends j_l_Object {
         ($value_1 = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1 | 0),
          $value_1);
     let b = Byte.m_valueOf__byte(0);
-    b = Byte.m_valueOf__byte($Primitives.narrowIntToByte(
-        $Primitives.narrowIntToByte(b.m_byteValue__() + 1 | 0)));
+    b = Byte.m_valueOf__byte(
+        $Primitives.narrowIntToByte(b.m_byteValue__() + 1 | 0));
     let ch = Character.m_valueOf__char(99 /* "c" */);
     ch = Character.m_valueOf__char(
-        $Primitives.narrowIntToChar($Primitives.narrowIntToChar(
-            ch.m_charValue__() + 1 /* "\u0001" */ | 0)));
+        $Primitives.narrowIntToChar(ch.m_charValue__() + 1 /* "\u0001" */ | 0));
     (f = Integer.m_valueOf__int(f.m_intValue__() + 1 | 0)).m_intValue__();
     ($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1 | 0),
      $value_2)
