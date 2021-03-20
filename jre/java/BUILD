@@ -67,7 +67,9 @@ package_sources(
     super_srcs = select({
         ":experimental_java11_support": glob(
             ["**/*.java"],
-            exclude = glob(["**/super-wasm/*.java"]),
+            exclude = glob(["**/super-wasm/*.java"]) + [
+                "javaemul/internal/LongUtils.java",  # GWT version actually works for WASM in this case.
+            ],
         ),
         "//conditions:default": glob(
             ["**/*.java"],

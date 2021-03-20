@@ -34,6 +34,7 @@ public class Main {
     testDynamicClassMethodDispatch();
     testSwitch();
     testWasmAnnotation();
+    testMathLogAndFriends();
   }
 
   static class A {
@@ -108,4 +109,50 @@ public class Main {
   @JsMethod // Exist to keep to test running under closure output
   @Wasm("i32.mul")
   private static native int multiply(int x, int y);
+
+  private static void testMathLogAndFriends() {
+    assertEquals(Double.NaN, Math.log(Double.NaN));
+    assertEquals(Double.NaN, Math.log(Double.NEGATIVE_INFINITY));
+    assertEquals(Double.NaN, Math.log(-1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log(0.0));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log(-0.0));
+    assertEqualsDelta(1.0, Math.log(Math.E), 1e-15);
+
+    assertEquals(Double.NaN, Math.log10(-2541.057456872342));
+    assertEquals(Double.NaN, Math.log10(-0.1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log10(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(0.0));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log10(-0.0));
+    assertEqualsDelta(3.0, Math.log10(1000.0), 1e-15);
+    assertEqualsDelta(3.73895612695404, Math.log10(5482.2158), 1e-15);
+    assertEquals(308.25471555991675, Math.log10(Double.MAX_VALUE));
+    assertEqualsDelta(-323.30621534311575, Math.log10(Double.MIN_VALUE), 1e-10);
+
+    assertEquals(Double.NaN, Math.log1p(Double.NaN));
+    assertEquals(Double.NaN, Math.log1p(-2));
+    assertEquals(Double.NaN, Math.log1p(Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.log1p(Double.POSITIVE_INFINITY));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.log1p(-1));
+    assertEqualsDelta(Double.MIN_VALUE, Math.log1p(Double.MIN_VALUE), 1e-25);
+    assertEquals(709.782712893384, Math.log1p(Double.MAX_VALUE));
+    assertEquals(0.0, Math.log1p(0.0));
+    assertEquals(-0.0, Math.log1p(-0.0));
+
+    assertEqualsDelta(-0.693147180, Math.log1p(-0.5), 1e-7);
+    assertEqualsDelta(1.313261687, Math.log1p(Math.E), 1e-7);
+    assertEqualsDelta(-0.2941782295312541, Math.log1p(-0.254856327), 1e-7);
+    assertEquals(7.368050685564151, Math.log1p(1583.542));
+    assertEqualsDelta(0.4633708685409921, Math.log1p(0.5894227), 1e-15);
+  }
+
+  private static void assertEqualsDelta(double expected, double actual, double delta) {
+    if (Double.compare(expected, actual) == 0) {
+      return;
+    }
+    if ((Math.abs(expected - actual) <= delta)) {
+      return;
+    }
+    fail();
+  }
 }

@@ -2,20 +2,20 @@ Integration tests size report:
 **************************************
 There are 2 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1960500 to 1960418 bytes (100%->100.0%) and from
-  699530 to 699468 bytes (100%->100.0%) gzipped.
+  1960418 to 1962342 bytes (100%->100.1%) and from
+  699468 to 700302 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-        old      new
-       3579     3549 arrayreadwrite.esnext (-0.8%)
-       3863     3831 arrayreadwrite (-0.8%)
+  none
 
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+       1002     1412 wasm.esnext (40.9%)
+       1298     1722 wasm (32.7%)
 
 
 Incremental size reports (non-gzip):
@@ -67,8 +67,8 @@ All reports:
        3186     3186 arrayofboxedtype.esnext (unchanged)
         332      332 arrayoutofbounds (unchanged)
         334      334 arrayoutofbounds.esnext (unchanged)
-       3863     3831 arrayreadwrite (-0.8%)
-       3579     3549 arrayreadwrite.esnext (-0.8%)
+       3831     3831 arrayreadwrite (unchanged)
+       3549     3549 arrayreadwrite.esnext (unchanged)
        2431     2431 assertsimple (unchanged)
        2165     2165 assertsimple.esnext (unchanged)
        5766     5766 autoboxing (unchanged)
@@ -411,8 +411,8 @@ All reports:
        3350     3350 varargs.esnext (unchanged)
        1001     1001 variables (unchanged)
         712      712 variables.esnext (unchanged)
-       1298     1298 wasm (unchanged)
-       1002     1002 wasm.esnext (unchanged)
+       1298     1722 wasm (32.7%)
+       1002     1412 wasm.esnext (40.9%)
         918      918 whilestatement (unchanged)
         624      624 whilestatement.esnext (unchanged)
        1976     1976 wideningfloatconversion (unchanged)
