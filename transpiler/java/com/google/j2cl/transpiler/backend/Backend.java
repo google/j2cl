@@ -34,7 +34,7 @@ import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
 import com.google.j2cl.transpiler.passes.FixSuperCallQualifiers;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
-import com.google.j2cl.transpiler.passes.ImplementClassMetadata;
+import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaConstructors;
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
@@ -92,7 +92,6 @@ import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
-import com.google.j2cl.transpiler.passes.NormalizeTypeLiterals;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
@@ -212,7 +211,6 @@ public enum Backend {
           ImplementInstanceInitialization::new,
           NormalizeNestedClassConstructors::new,
           NormalizeConstructors::new,
-          NormalizeTypeLiterals::new,
           NormalizeCasts::new,
           NormalizeInstanceOfs::new,
           NormalizeEquality::new,
@@ -238,7 +236,7 @@ public enum Backend {
           // creates static methods which should not call $clinit.
           ImplementInstanceOfs::new,
           ImplementJsFunctionCopyMethod::new,
-          ImplementClassMetadata::new,
+          ImplementClassMetadataViaConstructors::new,
           // Normalize multiexpressions again to remove unnecessary clutter, but run before
           // variable motion.
           NormalizeMultiExpressions::new,
