@@ -537,7 +537,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || statement instanceof BreakStatement
         || statement instanceof ContinueStatement
         || statement instanceof TryStatement
-        || statement instanceof ThrowStatement
         || statement instanceof LabeledStatement
         || statement instanceof SynchronizedStatement) {
       // These statements do not need rewriting.
@@ -556,6 +555,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
                 switchStatement.getSwitchExpression()))
         .setCases(switchStatement.getCases())
         .build();
+  }
+
+  @Override
+  public ThrowStatement rewriteThrowStatement(ThrowStatement throwStatement) {
+    Expression expression = throwStatement.getExpression();
+    return new ThrowStatement(
+        throwStatement.getSourcePosition(),
+        contextRewriter.rewriteTypeConversionContext(
+            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression));
   }
 
   @Override

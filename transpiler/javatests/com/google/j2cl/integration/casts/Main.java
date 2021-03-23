@@ -31,6 +31,7 @@ public class Main {
     testCasts_typeVariableWithNativeBound();
     testCasts_parameterizedNativeType();
     testCasts_exceptionMessages();
+    testCasts_erasureCastOnThrow();
     testArrayCasts_basics();
     testArrayCasts_differentDimensions();
     testArrayCasts_sameDimensions();
@@ -544,5 +545,17 @@ public class Main {
           Qux qux = (Qux) object;
         },
         "<native function>");
+  }
+
+  private static void testCasts_erasureCastOnThrow() {
+    assertThrowsClassCastException(
+        () -> {
+          throw returnObjectAsT(new RuntimeException());
+        },
+        RuntimeException.class);
+  }
+
+  private static <T> T returnObjectAsT(T unused) {
+    return (T) new Object();
   }
 }

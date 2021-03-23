@@ -170,11 +170,12 @@
 ;;; void TryCatch.testThrowGenerics()
 (func $m_testThrowGenerics__void@trycatch.TryCatch
  (param $this.untyped (ref null $java.lang.Object))
+ (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
  (block $return.label
   (block
-   ;; throw TryCatch.this.getT(new Exception.<init>());
+   ;; throw (Object $cast_expression = TryCatch.this.getT(new Exception.<init>()),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Exception) $cast_expression)));
    
    (unreachable)
   )
