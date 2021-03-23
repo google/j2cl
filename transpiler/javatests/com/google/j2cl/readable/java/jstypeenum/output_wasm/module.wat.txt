@@ -153,5 +153,23 @@
  )
 )
 
+;;; Class<?> Color.getClass()
+(func $m_getClass__java_lang_Class@jstypeenum.Color
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jstypeenum.Color))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeenum.Color.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstypeenum.Color();
+   (local.set $return.value (call $$getJstypeenum.Color__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstypeenum.Color)
+
  ;;; Code for jstypeenum.Color [vtable.init]
- (global.set $jstypeenum.Color.vtable (struct.new_with_rtt $jstypeenum.Color.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $jstypeenum.Color.vtable)))
+ (global.set $jstypeenum.Color.vtable (struct.new_with_rtt $jstypeenum.Color.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@jstypeenum.Color) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $jstypeenum.Color.vtable)))

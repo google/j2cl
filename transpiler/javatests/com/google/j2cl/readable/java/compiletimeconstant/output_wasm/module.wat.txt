@@ -109,5 +109,23 @@
  )
 )
 
+;;; Class<?> CompileTimeConstant.getClass()
+(func $m_getClass__java_lang_Class@compiletimeconstant.CompileTimeConstant
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $compiletimeconstant.CompileTimeConstant))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $compiletimeconstant.CompileTimeConstant.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getCompiletimeconstant.CompileTimeConstant();
+   (local.set $return.value (call $$getCompiletimeconstant.CompileTimeConstant__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@compiletimeconstant.CompileTimeConstant)
+
  ;;; Code for compiletimeconstant.CompileTimeConstant [vtable.init]
- (global.set $compiletimeconstant.CompileTimeConstant.vtable (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $compiletimeconstant.CompileTimeConstant.vtable)))
+ (global.set $compiletimeconstant.CompileTimeConstant.vtable (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@compiletimeconstant.CompileTimeConstant) (rtt.canon $compiletimeconstant.CompileTimeConstant.vtable)))

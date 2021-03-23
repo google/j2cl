@@ -63,6 +63,24 @@
  )
 )
 
+;;; Class<?> Outer.getClass()
+(func $m_getClass__java_lang_Class@packageinfo.Outer
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $packageinfo.Outer))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.Outer.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer();
+   (local.set $return.value (call $$getPackageinfo.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@packageinfo.Outer)
+
 ;;; Code for packageinfo.Outer.Inner [CLASS]
 (type $packageinfo.Outer.Inner (struct
  (field $vtable (ref null $packageinfo.Outer.Inner.vtable))
@@ -113,6 +131,24 @@
   )
  )
 )
+
+;;; Class<?> Inner.getClass()
+(func $m_getClass__java_lang_Class@packageinfo.Outer.Inner
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $packageinfo.Outer.Inner))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.Outer.Inner.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer.Inner();
+   (local.set $return.value (call $$getPackageinfo.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@packageinfo.Outer.Inner)
 
 ;;; Code for packageinfo.subpackage.Foo [CLASS]
 (type $packageinfo.subpackage.Foo (struct
@@ -173,11 +209,29 @@
  )
 )
 
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $packageinfo.subpackage.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.subpackage.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.subpackage.Foo();
+   (local.set $return.value (call $$getPackageinfo.subpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo)
+
  ;;; Code for packageinfo.Outer [vtable.init]
- (global.set $packageinfo.Outer.vtable (struct.new_with_rtt $packageinfo.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.Outer.vtable)))
+ (global.set $packageinfo.Outer.vtable (struct.new_with_rtt $packageinfo.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@packageinfo.Outer) (rtt.canon $packageinfo.Outer.vtable)))
 
  ;;; Code for packageinfo.Outer.Inner [vtable.init]
- (global.set $packageinfo.Outer.Inner.vtable (struct.new_with_rtt $packageinfo.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.Outer.Inner.vtable)))
+ (global.set $packageinfo.Outer.Inner.vtable (struct.new_with_rtt $packageinfo.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@packageinfo.Outer.Inner) (rtt.canon $packageinfo.Outer.Inner.vtable)))
 
  ;;; Code for packageinfo.subpackage.Foo [vtable.init]
- (global.set $packageinfo.subpackage.Foo.vtable (struct.new_with_rtt $packageinfo.subpackage.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfo.subpackage.Foo.vtable)))
+ (global.set $packageinfo.subpackage.Foo.vtable (struct.new_with_rtt $packageinfo.subpackage.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo) (rtt.canon $packageinfo.subpackage.Foo.vtable)))

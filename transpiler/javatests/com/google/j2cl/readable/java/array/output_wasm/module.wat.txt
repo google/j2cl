@@ -840,6 +840,24 @@
  )
 )
 
+;;; Class<?> Arrays.getClass()
+(func $m_getClass__java_lang_Class@array.Arrays
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $array.Arrays))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays();
+   (local.set $return.value (call $$getArray.Arrays__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@array.Arrays)
+
 ;;; Code for array.Arrays.SomeObject [CLASS]
 (type $array.Arrays.SomeObject (struct
  (field $vtable (ref null $array.Arrays.SomeObject.vtable))
@@ -889,6 +907,24 @@
  )
 )
 
+;;; Class<?> SomeObject.getClass()
+(func $m_getClass__java_lang_Class@array.Arrays.SomeObject
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $array.Arrays.SomeObject))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.SomeObject.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.SomeObject();
+   (local.set $return.value (call $$getArray.Arrays.SomeObject__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@array.Arrays.SomeObject)
+
 ;;; Code for array.Arrays.NativeType [CLASS]
 (type $array.Arrays.NativeType (struct
  (field $vtable (ref null $array.Arrays.NativeType.vtable))
@@ -936,6 +972,24 @@
  )
 )
 
+;;; Class<?> NativeType.getClass()
+(func $m_getClass__java_lang_Class@array.Arrays.NativeType
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $array.Arrays.NativeType))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.NativeType.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.NativeType();
+   (local.set $return.value (call $$getArray.Arrays.NativeType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@array.Arrays.NativeType)
+
 ;;; Code for array.Arrays.ArrayContainer [CLASS]
 (type $array.Arrays.ArrayContainer (struct
  (field $vtable (ref null $array.Arrays.ArrayContainer.vtable))
@@ -982,14 +1036,32 @@
  )
 )
 
+;;; Class<?> ArrayContainer.getClass()
+(func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $array.Arrays.ArrayContainer))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.ArrayContainer.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getArray.Arrays.ArrayContainer();
+   (local.set $return.value (call $$getArray.Arrays.ArrayContainer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer)
+
  ;;; Code for array.Arrays [vtable.init]
- (global.set $array.Arrays.vtable (struct.new_with_rtt $array.Arrays.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testObjectArray__void@array.Arrays) (ref.func $m_testJavaTypeArray__void@array.Arrays) (ref.func $m_testIntArrays__void_$pp_array@array.Arrays) (ref.func $m_testLongArrays__void_$pp_array@array.Arrays) (ref.func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays) (ref.func $m_testStringArrays__void_$pp_array@array.Arrays) (ref.func $m_testNativeArray__void@array.Arrays) (ref.func $m_testErasureCastsOnArrayAccess__void@array.Arrays) (ref.func $m_testArraysSupertypeClosureTypes__void@array.Arrays) (ref.func $m_consumesCloneable__java_lang_Cloneable__void@array.Arrays) (ref.func $m_consumesSerializable__java_io_Serializable__void@array.Arrays) (rtt.canon $array.Arrays.vtable)))
+ (global.set $array.Arrays.vtable (struct.new_with_rtt $array.Arrays.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@array.Arrays) (ref.func $m_testObjectArray__void@array.Arrays) (ref.func $m_testJavaTypeArray__void@array.Arrays) (ref.func $m_testIntArrays__void_$pp_array@array.Arrays) (ref.func $m_testLongArrays__void_$pp_array@array.Arrays) (ref.func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays) (ref.func $m_testStringArrays__void_$pp_array@array.Arrays) (ref.func $m_testNativeArray__void@array.Arrays) (ref.func $m_testErasureCastsOnArrayAccess__void@array.Arrays) (ref.func $m_testArraysSupertypeClosureTypes__void@array.Arrays) (ref.func $m_consumesCloneable__java_lang_Cloneable__void@array.Arrays) (ref.func $m_consumesSerializable__java_io_Serializable__void@array.Arrays) (rtt.canon $array.Arrays.vtable)))
 
  ;;; Code for array.Arrays.SomeObject [vtable.init]
- (global.set $array.Arrays.SomeObject.vtable (struct.new_with_rtt $array.Arrays.SomeObject.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.SomeObject.vtable)))
+ (global.set $array.Arrays.SomeObject.vtable (struct.new_with_rtt $array.Arrays.SomeObject.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@array.Arrays.SomeObject) (rtt.canon $array.Arrays.SomeObject.vtable)))
 
  ;;; Code for array.Arrays.NativeType [vtable.init]
- (global.set $array.Arrays.NativeType.vtable (struct.new_with_rtt $array.Arrays.NativeType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.NativeType.vtable)))
+ (global.set $array.Arrays.NativeType.vtable (struct.new_with_rtt $array.Arrays.NativeType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@array.Arrays.NativeType) (rtt.canon $array.Arrays.NativeType.vtable)))
 
  ;;; Code for array.Arrays.ArrayContainer [vtable.init]
- (global.set $array.Arrays.ArrayContainer.vtable (struct.new_with_rtt $array.Arrays.ArrayContainer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $array.Arrays.ArrayContainer.vtable)))
+ (global.set $array.Arrays.ArrayContainer.vtable (struct.new_with_rtt $array.Arrays.ArrayContainer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer) (rtt.canon $array.Arrays.ArrayContainer.vtable)))

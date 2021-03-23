@@ -217,6 +217,24 @@
  )
 )
 
+;;; Class<?> InstanceofExpressions.getClass()
+(func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $instanceofexpression.InstanceofExpressions))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInstanceofexpression.InstanceofExpressions();
+   (local.set $return.value (call $$getInstanceofexpression.InstanceofExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions)
+
 ;;; Code for instanceofexpression.InstanceofExpressions.1 [CLASS]
 (type $instanceofexpression.InstanceofExpressions.1 (struct
  (field $vtable (ref null $instanceofexpression.InstanceofExpressions.1.vtable))
@@ -266,8 +284,26 @@
  )
 )
 
+;;; Class<?> <anonymous> implements Serializable.getClass()
+(func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $instanceofexpression.InstanceofExpressions.1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInstanceofexpression.InstanceofExpressions.1();
+   (local.set $return.value (call $$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1)
+
  ;;; Code for instanceofexpression.InstanceofExpressions [vtable.init]
- (global.set $instanceofexpression.InstanceofExpressions.vtable (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions) (rtt.canon $instanceofexpression.InstanceofExpressions.vtable)))
+ (global.set $instanceofexpression.InstanceofExpressions.vtable (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions) (ref.func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions) (rtt.canon $instanceofexpression.InstanceofExpressions.vtable)))
 
  ;;; Code for instanceofexpression.InstanceofExpressions.1 [vtable.init]
- (global.set $instanceofexpression.InstanceofExpressions.1.vtable (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $instanceofexpression.InstanceofExpressions.1.vtable)))
+ (global.set $instanceofexpression.InstanceofExpressions.1.vtable (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1) (rtt.canon $instanceofexpression.InstanceofExpressions.1.vtable)))

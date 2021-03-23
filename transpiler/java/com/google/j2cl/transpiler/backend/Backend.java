@@ -35,6 +35,7 @@ import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
 import com.google.j2cl.transpiler.passes.FixSuperCallQualifiers;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaConstructors;
+import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaGetters;
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
@@ -322,6 +323,7 @@ public enum Backend {
           NormalizeNestedClassConstructors::new,
           NormalizeLabels::new,
           ImplementStaticInitializationViaConditionChecks::new,
+          ImplementClassMetadataViaGetters::new,
           ImplementStringCompileTimeConstants::new,
           NormalizeArrayLiterals::new,
           NormalizeArrayCreationsWasm::new,

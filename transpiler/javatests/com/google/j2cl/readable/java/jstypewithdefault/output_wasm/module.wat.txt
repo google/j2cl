@@ -69,6 +69,24 @@
  )
 )
 
+;;; Class<?> SomeJsType.getClass()
+(func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jstypewithdefault.SomeJsType))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypewithdefault.SomeJsType.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.SomeJsType();
+   (local.set $return.value (call $$getJstypewithdefault.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType)
+
 ;;; Code for jstypewithdefault.Interface [INTERFACE]
 
 ;;; void Interface.defaultMethod()
@@ -98,5 +116,21 @@
  )
 )
 
+;;; Class<?> Interface.getClass()
+(func $m_getClass__java_lang_Class@jstypewithdefault.Interface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.Interface();
+   (local.set $return.value (call $$getJstypewithdefault.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstypewithdefault.Interface)
+
  ;;; Code for jstypewithdefault.SomeJsType [vtable.init]
- (global.set $jstypewithdefault.SomeJsType.vtable (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType) (rtt.canon $jstypewithdefault.SomeJsType.vtable)))
+ (global.set $jstypewithdefault.SomeJsType.vtable (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType) (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType) (rtt.canon $jstypewithdefault.SomeJsType.vtable)))

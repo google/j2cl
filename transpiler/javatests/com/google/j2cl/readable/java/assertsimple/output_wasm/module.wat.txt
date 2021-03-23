@@ -62,5 +62,23 @@
  )
 )
 
+;;; Class<?> AssertSimple.getClass()
+(func $m_getClass__java_lang_Class@assertsimple.AssertSimple
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $assertsimple.AssertSimple))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $assertsimple.AssertSimple.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAssertsimple.AssertSimple();
+   (local.set $return.value (call $$getAssertsimple.AssertSimple__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@assertsimple.AssertSimple)
+
  ;;; Code for assertsimple.AssertSimple [vtable.init]
- (global.set $assertsimple.AssertSimple.vtable (struct.new_with_rtt $assertsimple.AssertSimple.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $assertsimple.AssertSimple.vtable)))
+ (global.set $assertsimple.AssertSimple.vtable (struct.new_with_rtt $assertsimple.AssertSimple.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@assertsimple.AssertSimple) (rtt.canon $assertsimple.AssertSimple.vtable)))

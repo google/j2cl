@@ -78,5 +78,23 @@
  )
 )
 
+;;; Class<?> StaticFieldAccessLevels.getClass()
+(func $m_getClass__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getStaticfieldaccesslevels.StaticFieldAccessLevels();
+   (local.set $return.value (call $$getStaticfieldaccesslevels.StaticFieldAccessLevels__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels)
+
  ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [vtable.init]
- (global.set $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct.new_with_rtt $staticfieldaccesslevels.StaticFieldAccessLevels.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels) (rtt.canon $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)))
+ (global.set $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct.new_with_rtt $staticfieldaccesslevels.StaticFieldAccessLevels.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels) (ref.func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels) (rtt.canon $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)))

@@ -173,6 +173,24 @@
  )
 )
 
+;;; Class<?> SomeJsType.getClass()
+(func $m_getClass__java_lang_Class@jstype.SomeJsType
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jstype.SomeJsType))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType();
+   (local.set $return.value (call $$getJstype.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType)
+
 ;;; Code for jstype.SomeJsType.Star [INTERFACE]
 
 ;;; void Star.$clinit()
@@ -191,6 +209,22 @@
   )
  )
 )
+
+;;; Class<?> Star.getClass()
+(func $m_getClass__java_lang_Class@jstype.SomeJsType.Star
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType.Star();
+   (local.set $return.value (call $$getJstype.SomeJsType.Star__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Star)
 
 ;;; Code for jstype.SomeJsType.Wildcard [INTERFACE]
 
@@ -211,5 +245,21 @@
  )
 )
 
+;;; Class<?> Wildcard.getClass()
+(func $m_getClass__java_lang_Class@jstype.SomeJsType.Wildcard
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType.Wildcard();
+   (local.set $return.value (call $$getJstype.SomeJsType.Wildcard__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Wildcard)
+
  ;;; Code for jstype.SomeJsType [vtable.init]
- (global.set $jstype.SomeJsType.vtable (struct.new_with_rtt $jstype.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_publicMethod__void@jstype.SomeJsType) (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType) (ref.func $m_protectedMethod__void@jstype.SomeJsType) (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType) (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType) (rtt.canon $jstype.SomeJsType.vtable)))
+ (global.set $jstype.SomeJsType.vtable (struct.new_with_rtt $jstype.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jstype.SomeJsType) (ref.func $m_publicMethod__void@jstype.SomeJsType) (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType) (ref.func $m_protectedMethod__void@jstype.SomeJsType) (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType) (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType) (rtt.canon $jstype.SomeJsType.vtable)))

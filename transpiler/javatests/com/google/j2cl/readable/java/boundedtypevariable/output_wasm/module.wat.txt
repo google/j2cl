@@ -49,5 +49,23 @@
  )
 )
 
+;;; Class<?> BoundedTypeVariable.getClass()
+(func $m_getClass__java_lang_Class@boundedtypevariable.BoundedTypeVariable
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $boundedtypevariable.BoundedTypeVariable))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypevariable.BoundedTypeVariable.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypevariable.BoundedTypeVariable();
+   (local.set $return.value (call $$getBoundedtypevariable.BoundedTypeVariable__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@boundedtypevariable.BoundedTypeVariable)
+
  ;;; Code for boundedtypevariable.BoundedTypeVariable [vtable.init]
- (global.set $boundedtypevariable.BoundedTypeVariable.vtable (struct.new_with_rtt $boundedtypevariable.BoundedTypeVariable.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $boundedtypevariable.BoundedTypeVariable.vtable)))
+ (global.set $boundedtypevariable.BoundedTypeVariable.vtable (struct.new_with_rtt $boundedtypevariable.BoundedTypeVariable.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@boundedtypevariable.BoundedTypeVariable) (rtt.canon $boundedtypevariable.BoundedTypeVariable.vtable)))

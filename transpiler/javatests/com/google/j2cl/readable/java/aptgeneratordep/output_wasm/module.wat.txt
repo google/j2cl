@@ -55,6 +55,24 @@
  )
 )
 
+;;; Class<?> Dummy.getClass()
+(func $m_getClass__java_lang_Class@aptgeneratordep.Dummy
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $aptgeneratordep.Dummy))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratordep.Dummy.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Dummy();
+   (local.set $return.value (call $$getAptgeneratordep.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@aptgeneratordep.Dummy)
+
 ;;; Code for aptgeneratordep.Foo [CLASS]
 (type $aptgeneratordep.Foo (struct
  (field $vtable (ref null $aptgeneratordep.Foo.vtable))
@@ -86,12 +104,17 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratordep.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratordep.Foo.rtt)))
  (block $return.label
   (block
-   ;; return Dummy.class.getSimpleName();
-   (local.set $return.value (call_ref (ref.null $java.lang.Class)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(ref.null $java.lang.Class)))))
+   ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Dummy(),$qualifier.getSimpleName());
+   (local.set $return.value (block (result (ref null $java.lang.String))
+    
+    (local.set $$qualifier (call $$getAptgeneratordep.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+    (call_ref (local.get $$qualifier)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
+   ))
    (br $return.label)
   )
  )
@@ -118,8 +141,26 @@
  )
 )
 
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@aptgeneratordep.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $aptgeneratordep.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratordep.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Foo();
+   (local.set $return.value (call $$getAptgeneratordep.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@aptgeneratordep.Foo)
+
  ;;; Code for aptgeneratordep.Dummy [vtable.init]
- (global.set $aptgeneratordep.Dummy.vtable (struct.new_with_rtt $aptgeneratordep.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Dummy.vtable)))
+ (global.set $aptgeneratordep.Dummy.vtable (struct.new_with_rtt $aptgeneratordep.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@aptgeneratordep.Dummy) (rtt.canon $aptgeneratordep.Dummy.vtable)))
 
  ;;; Code for aptgeneratordep.Foo [vtable.init]
- (global.set $aptgeneratordep.Foo.vtable (struct.new_with_rtt $aptgeneratordep.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $aptgeneratordep.Foo.vtable)))
+ (global.set $aptgeneratordep.Foo.vtable (struct.new_with_rtt $aptgeneratordep.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo) (ref.func $m_getClass__java_lang_Class@aptgeneratordep.Foo) (rtt.canon $aptgeneratordep.Foo.vtable)))

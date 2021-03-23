@@ -59,6 +59,24 @@
  )
 )
 
+;;; Class<?> RawType.getClass()
+(func $m_getClass__java_lang_Class@rawtype.RawType
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $rawtype.RawType))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType();
+   (local.set $return.value (call $$getRawtype.RawType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@rawtype.RawType)
+
 ;;; Code for rawtype.RawType.I [INTERFACE]
 
 ;;; void I.f(T t)
@@ -88,6 +106,22 @@
   )
  )
 )
+
+;;; Class<?> I.getClass()
+(func $m_getClass__java_lang_Class@rawtype.RawType.I
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.I();
+   (local.set $return.value (call $$getRawtype.RawType.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@rawtype.RawType.I)
 
 ;;; Code for rawtype.RawType.RawSubclass [CLASS]
 (type $rawtype.RawType.RawSubclass (struct
@@ -150,8 +184,26 @@
  )
 )
 
+;;; Class<?> RawSubclass.getClass()
+(func $m_getClass__java_lang_Class@rawtype.RawType.RawSubclass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $rawtype.RawType.RawSubclass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.RawSubclass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.RawSubclass();
+   (local.set $return.value (call $$getRawtype.RawType.RawSubclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@rawtype.RawType.RawSubclass)
+
  ;;; Code for rawtype.RawType [vtable.init]
- (global.set $rawtype.RawType.vtable (struct.new_with_rtt $rawtype.RawType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $rawtype.RawType.vtable)))
+ (global.set $rawtype.RawType.vtable (struct.new_with_rtt $rawtype.RawType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@rawtype.RawType) (rtt.canon $rawtype.RawType.vtable)))
 
  ;;; Code for rawtype.RawType.RawSubclass [vtable.init]
- (global.set $rawtype.RawType.RawSubclass.vtable (struct.new_with_rtt $rawtype.RawType.RawSubclass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass) (rtt.canon $rawtype.RawType.RawSubclass.vtable)))
+ (global.set $rawtype.RawType.RawSubclass.vtable (struct.new_with_rtt $rawtype.RawType.RawSubclass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@rawtype.RawType.RawSubclass) (ref.func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass) (rtt.canon $rawtype.RawType.RawSubclass.vtable)))

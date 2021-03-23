@@ -159,6 +159,24 @@
  )
 )
 
+;;; Class<?> Strings.getClass()
+(func $m_getClass__java_lang_Class@strings.Strings
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $strings.Strings))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $strings.Strings.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getStrings.Strings();
+   (local.set $return.value (call $$getStrings.Strings__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@strings.Strings)
+
 ;;; Code for strings.Strings.StringHolder [CLASS]
 (type $strings.Strings.StringHolder (struct
  (field $vtable (ref null $strings.Strings.StringHolder.vtable))
@@ -218,8 +236,26 @@
  )
 )
 
+;;; Class<?> StringHolder.getClass()
+(func $m_getClass__java_lang_Class@strings.Strings.StringHolder
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $strings.Strings.StringHolder))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $strings.Strings.StringHolder.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getStrings.Strings.StringHolder();
+   (local.set $return.value (call $$getStrings.Strings.StringHolder__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@strings.Strings.StringHolder)
+
  ;;; Code for strings.Strings [vtable.init]
- (global.set $strings.Strings.vtable (struct.new_with_rtt $strings.Strings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@strings.Strings) (rtt.canon $strings.Strings.vtable)))
+ (global.set $strings.Strings.vtable (struct.new_with_rtt $strings.Strings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@strings.Strings) (ref.func $m_test__void@strings.Strings) (rtt.canon $strings.Strings.vtable)))
 
  ;;; Code for strings.Strings.StringHolder [vtable.init]
- (global.set $strings.Strings.StringHolder.vtable (struct.new_with_rtt $strings.Strings.StringHolder.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $strings.Strings.StringHolder.vtable)))
+ (global.set $strings.Strings.StringHolder.vtable (struct.new_with_rtt $strings.Strings.StringHolder.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@strings.Strings.StringHolder) (rtt.canon $strings.Strings.StringHolder.vtable)))

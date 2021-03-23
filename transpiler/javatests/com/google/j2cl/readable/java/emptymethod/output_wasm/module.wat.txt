@@ -60,5 +60,23 @@
  )
 )
 
+;;; Class<?> EmptyMethod.getClass()
+(func $m_getClass__java_lang_Class@emptymethod.EmptyMethod
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $emptymethod.EmptyMethod))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $emptymethod.EmptyMethod.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getEmptymethod.EmptyMethod();
+   (local.set $return.value (call $$getEmptymethod.EmptyMethod__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@emptymethod.EmptyMethod)
+
  ;;; Code for emptymethod.EmptyMethod [vtable.init]
- (global.set $emptymethod.EmptyMethod.vtable (struct.new_with_rtt $emptymethod.EmptyMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $emptymethod.EmptyMethod.vtable)))
+ (global.set $emptymethod.EmptyMethod.vtable (struct.new_with_rtt $emptymethod.EmptyMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@emptymethod.EmptyMethod) (rtt.canon $emptymethod.EmptyMethod.vtable)))

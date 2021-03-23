@@ -32,6 +32,22 @@
  )
 )
 
+;;; Class<?> SomeInterface.getClass()
+(func $m_getClass__java_lang_Class@overridingmethods.SomeInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.SomeInterface();
+   (local.set $return.value (call $$getOverridingmethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@overridingmethods.SomeInterface)
+
 ;;; Code for overridingmethods.Parent [CLASS]
 (type $overridingmethods.Parent (struct
  (field $vtable (ref null $overridingmethods.Parent.vtable))
@@ -89,6 +105,24 @@
   )
  )
 )
+
+;;; Class<?> Parent.getClass()
+(func $m_getClass__java_lang_Class@overridingmethods.Parent
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $overridingmethods.Parent))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Parent.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Parent();
+   (local.set $return.value (call $$getOverridingmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@overridingmethods.Parent)
 
 ;;; Code for overridingmethods.Child [CLASS]
 (type $overridingmethods.Child (struct
@@ -161,8 +195,26 @@
  )
 )
 
+;;; Class<?> Child.getClass()
+(func $m_getClass__java_lang_Class@overridingmethods.Child
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $overridingmethods.Child))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Child();
+   (local.set $return.value (call $$getOverridingmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@overridingmethods.Child)
+
  ;;; Code for overridingmethods.Parent [vtable.init]
- (global.set $overridingmethods.Parent.vtable (struct.new_with_rtt $overridingmethods.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@overridingmethods.Parent) (rtt.canon $overridingmethods.Parent.vtable)))
+ (global.set $overridingmethods.Parent.vtable (struct.new_with_rtt $overridingmethods.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@overridingmethods.Parent) (ref.func $m_fun__void@overridingmethods.Parent) (rtt.canon $overridingmethods.Parent.vtable)))
 
  ;;; Code for overridingmethods.Child [vtable.init]
- (global.set $overridingmethods.Child.vtable (struct.new_with_rtt $overridingmethods.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@overridingmethods.Child) (ref.func $m_bar__void@overridingmethods.Child) (rtt.canon $overridingmethods.Child.vtable)))
+ (global.set $overridingmethods.Child.vtable (struct.new_with_rtt $overridingmethods.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@overridingmethods.Child) (ref.func $m_fun__void@overridingmethods.Child) (ref.func $m_bar__void@overridingmethods.Child) (rtt.canon $overridingmethods.Child.vtable)))

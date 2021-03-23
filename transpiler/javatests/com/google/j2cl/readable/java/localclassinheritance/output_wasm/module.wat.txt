@@ -78,6 +78,24 @@
  )
 )
 
+;;; Class<?> LocalClassInheritance.getClass()
+(func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclassinheritance.LocalClassInheritance))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance();
+   (local.set $return.value (call $$getLocalclassinheritance.LocalClassInheritance__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance)
+
 ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [CLASS]
 (type $localclassinheritance.LocalClassInheritance.1Parent (struct
  (field $vtable (ref null $localclassinheritance.LocalClassInheritance.1Parent.vtable))
@@ -147,6 +165,24 @@
   )
  )
 )
+
+;;; Class<?> Parent.getClass()
+(func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Parent.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Parent();
+   (local.set $return.value (call $$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
 
 ;;; Code for localclassinheritance.LocalClassInheritance.1Child [CLASS]
 (type $localclassinheritance.LocalClassInheritance.1Child (struct
@@ -220,11 +256,29 @@
  )
 )
 
+;;; Class<?> Child.getClass()
+(func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Child.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Child();
+   (local.set $return.value (call $$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)
+
  ;;; Code for localclassinheritance.LocalClassInheritance [vtable.init]
- (global.set $localclassinheritance.LocalClassInheritance.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@localclassinheritance.LocalClassInheritance) (rtt.canon $localclassinheritance.LocalClassInheritance.vtable)))
+ (global.set $localclassinheritance.LocalClassInheritance.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance) (ref.func $m_test__void@localclassinheritance.LocalClassInheritance) (rtt.canon $localclassinheritance.LocalClassInheritance.vtable)))
 
  ;;; Code for localclassinheritance.LocalClassInheritance.1Parent [vtable.init]
- (global.set $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent) (rtt.canon $localclassinheritance.LocalClassInheritance.1Parent.vtable)))
+ (global.set $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent) (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent) (rtt.canon $localclassinheritance.LocalClassInheritance.1Parent.vtable)))
 
  ;;; Code for localclassinheritance.LocalClassInheritance.1Child [vtable.init]
- (global.set $localclassinheritance.LocalClassInheritance.1Child.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Child) (rtt.canon $localclassinheritance.LocalClassInheritance.1Child.vtable)))
+ (global.set $localclassinheritance.LocalClassInheritance.1Child.vtable (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child) (ref.func $m_n__void@localclassinheritance.LocalClassInheritance.1Child) (rtt.canon $localclassinheritance.LocalClassInheritance.1Child.vtable)))

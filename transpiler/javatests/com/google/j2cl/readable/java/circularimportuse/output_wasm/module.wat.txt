@@ -80,6 +80,24 @@
  )
 )
 
+;;; Class<?> Left.getClass()
+(func $m_getClass__java_lang_Class@circularimportuse.Left
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $circularimportuse.Left))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Left.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Left();
+   (local.set $return.value (call $$getCircularimportuse.Left__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@circularimportuse.Left)
+
 ;;; Code for circularimportuse.Main [CLASS]
 (type $circularimportuse.Main (struct
  (field $vtable (ref null $circularimportuse.Main.vtable))
@@ -143,6 +161,24 @@
   )
  )
 )
+
+;;; Class<?> Main.getClass()
+(func $m_getClass__java_lang_Class@circularimportuse.Main
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $circularimportuse.Main))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Main.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Main();
+   (local.set $return.value (call $$getCircularimportuse.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@circularimportuse.Main)
 
 ;;; Code for circularimportuse.Right [CLASS]
 (type $circularimportuse.Right (struct
@@ -208,11 +244,29 @@
  )
 )
 
+;;; Class<?> Right.getClass()
+(func $m_getClass__java_lang_Class@circularimportuse.Right
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $circularimportuse.Right))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Right.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Right();
+   (local.set $return.value (call $$getCircularimportuse.Right__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@circularimportuse.Right)
+
  ;;; Code for circularimportuse.Left [vtable.init]
- (global.set $circularimportuse.Left.vtable (struct.new_with_rtt $circularimportuse.Left.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left) (rtt.canon $circularimportuse.Left.vtable)))
+ (global.set $circularimportuse.Left.vtable (struct.new_with_rtt $circularimportuse.Left.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@circularimportuse.Left) (ref.func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left) (rtt.canon $circularimportuse.Left.vtable)))
 
  ;;; Code for circularimportuse.Main [vtable.init]
- (global.set $circularimportuse.Main.vtable (struct.new_with_rtt $circularimportuse.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $circularimportuse.Main.vtable)))
+ (global.set $circularimportuse.Main.vtable (struct.new_with_rtt $circularimportuse.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@circularimportuse.Main) (rtt.canon $circularimportuse.Main.vtable)))
 
  ;;; Code for circularimportuse.Right [vtable.init]
- (global.set $circularimportuse.Right.vtable (struct.new_with_rtt $circularimportuse.Right.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right) (rtt.canon $circularimportuse.Right.vtable)))
+ (global.set $circularimportuse.Right.vtable (struct.new_with_rtt $circularimportuse.Right.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@circularimportuse.Right) (ref.func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right) (rtt.canon $circularimportuse.Right.vtable)))

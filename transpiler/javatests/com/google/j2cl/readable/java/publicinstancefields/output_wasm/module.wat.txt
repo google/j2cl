@@ -64,5 +64,23 @@
  )
 )
 
+;;; Class<?> PublicInstanceFields.getClass()
+(func $m_getClass__java_lang_Class@publicinstancefields.PublicInstanceFields
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $publicinstancefields.PublicInstanceFields))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $publicinstancefields.PublicInstanceFields.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getPublicinstancefields.PublicInstanceFields();
+   (local.set $return.value (call $$getPublicinstancefields.PublicInstanceFields__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@publicinstancefields.PublicInstanceFields)
+
  ;;; Code for publicinstancefields.PublicInstanceFields [vtable.init]
- (global.set $publicinstancefields.PublicInstanceFields.vtable (struct.new_with_rtt $publicinstancefields.PublicInstanceFields.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $publicinstancefields.PublicInstanceFields.vtable)))
+ (global.set $publicinstancefields.PublicInstanceFields.vtable (struct.new_with_rtt $publicinstancefields.PublicInstanceFields.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@publicinstancefields.PublicInstanceFields) (rtt.canon $publicinstancefields.PublicInstanceFields.vtable)))

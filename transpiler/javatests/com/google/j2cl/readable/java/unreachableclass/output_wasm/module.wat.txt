@@ -82,6 +82,24 @@
  )
 )
 
+;;; Class<?> Main.getClass()
+(func $m_getClass__java_lang_Class@unreachableclass.Main
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $unreachableclass.Main))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main();
+   (local.set $return.value (call $$getUnreachableclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main)
+
 ;;; Code for unreachableclass.Main.1A [CLASS]
 (type $unreachableclass.Main.1A (struct
  (field $vtable (ref null $unreachableclass.Main.1A.vtable))
@@ -144,6 +162,24 @@
  )
 )
 
+;;; Class<?> A.getClass()
+(func $m_getClass__java_lang_Class@unreachableclass.Main.1A
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $unreachableclass.Main.1A))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A();
+   (local.set $return.value (call $$getUnreachableclass.Main.1A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1A)
+
 ;;; Code for unreachableclass.Main.1A.1B [CLASS]
 (type $unreachableclass.Main.1A.1B (struct
  (field $vtable (ref null $unreachableclass.Main.1A.1B.vtable))
@@ -202,6 +238,24 @@
  )
 )
 
+;;; Class<?> B.getClass()
+(func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $unreachableclass.Main.1A.1B))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.1B.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A.1B();
+   (local.set $return.value (call $$getUnreachableclass.Main.1A.1B__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B)
+
 ;;; Code for unreachableclass.Main.1 [CLASS]
 (type $unreachableclass.Main.1 (struct
  (field $vtable (ref null $unreachableclass.Main.1.vtable))
@@ -251,14 +305,32 @@
  )
 )
 
+;;; Class<?> <anonymous> extends Object.getClass()
+(func $m_getClass__java_lang_Class@unreachableclass.Main.1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $unreachableclass.Main.1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1();
+   (local.set $return.value (call $$getUnreachableclass.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1)
+
  ;;; Code for unreachableclass.Main [vtable.init]
- (global.set $unreachableclass.Main.vtable (struct.new_with_rtt $unreachableclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.vtable)))
+ (global.set $unreachableclass.Main.vtable (struct.new_with_rtt $unreachableclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@unreachableclass.Main) (rtt.canon $unreachableclass.Main.vtable)))
 
  ;;; Code for unreachableclass.Main.1A [vtable.init]
- (global.set $unreachableclass.Main.1A.vtable (struct.new_with_rtt $unreachableclass.Main.1A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A) (rtt.canon $unreachableclass.Main.1A.vtable)))
+ (global.set $unreachableclass.Main.1A.vtable (struct.new_with_rtt $unreachableclass.Main.1A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@unreachableclass.Main.1A) (ref.func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A) (rtt.canon $unreachableclass.Main.1A.vtable)))
 
  ;;; Code for unreachableclass.Main.1A.1B [vtable.init]
- (global.set $unreachableclass.Main.1A.1B.vtable (struct.new_with_rtt $unreachableclass.Main.1A.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.1A.1B.vtable)))
+ (global.set $unreachableclass.Main.1A.1B.vtable (struct.new_with_rtt $unreachableclass.Main.1A.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B) (rtt.canon $unreachableclass.Main.1A.1B.vtable)))
 
  ;;; Code for unreachableclass.Main.1 [vtable.init]
- (global.set $unreachableclass.Main.1.vtable (struct.new_with_rtt $unreachableclass.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $unreachableclass.Main.1.vtable)))
+ (global.set $unreachableclass.Main.1.vtable (struct.new_with_rtt $unreachableclass.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@unreachableclass.Main.1) (rtt.canon $unreachableclass.Main.1.vtable)))

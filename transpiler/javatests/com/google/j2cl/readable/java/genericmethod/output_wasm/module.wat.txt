@@ -457,6 +457,24 @@
  )
 )
 
+;;; Class<?> GenericMethod.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod();
+   (local.set $return.value (call $$getGenericmethod.GenericMethod__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod)
+
 ;;; Code for genericmethod.GenericMethod.1 [CLASS]
 (type $genericmethod.GenericMethod.1 (struct
  (field $vtable (ref null $genericmethod.GenericMethod.1.vtable))
@@ -542,6 +560,24 @@
   )
  )
 )
+
+;;; Class<?> <anonymous> extends GenericMethod<T>.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod.1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1();
+   (local.set $return.value (call $$getGenericmethod.GenericMethod.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1)
 
 ;;; Code for genericmethod.GenericMethod.1LocalClass [CLASS]
 (type $genericmethod.GenericMethod.1LocalClass (struct
@@ -629,6 +665,24 @@
  )
 )
 
+;;; Class<?> LocalClass.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1LocalClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod.1LocalClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.1LocalClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1LocalClass();
+   (local.set $return.value (call $$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1LocalClass)
+
 ;;; Code for genericmethod.GenericMethod.SuperContainer [CLASS]
 (type $genericmethod.GenericMethod.SuperContainer (struct
  (field $vtable (ref null $genericmethod.GenericMethod.SuperContainer.vtable))
@@ -692,6 +746,24 @@
   )
  )
 )
+
+;;; Class<?> SuperContainer.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.SuperContainer
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod.SuperContainer))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.SuperContainer.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.SuperContainer();
+   (local.set $return.value (call $$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.SuperContainer)
 
 ;;; Code for genericmethod.GenericMethod.Container [CLASS]
 (type $genericmethod.GenericMethod.Container (struct
@@ -757,6 +829,24 @@
  )
 )
 
+;;; Class<?> Container.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Container
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod.Container))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.Container.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Container();
+   (local.set $return.value (call $$getGenericmethod.GenericMethod.Container__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Container)
+
 ;;; Code for genericmethod.GenericMethod.Content [CLASS]
 (type $genericmethod.GenericMethod.Content (struct
  (field $vtable (ref null $genericmethod.GenericMethod.Content.vtable))
@@ -821,20 +911,38 @@
  )
 )
 
+;;; Class<?> Content.getClass()
+(func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Content
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericmethod.GenericMethod.Content))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.Content.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Content();
+   (local.set $return.value (call $$getGenericmethod.GenericMethod.Content__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Content)
+
  ;;; Code for genericmethod.GenericMethod [vtable.init]
- (global.set $genericmethod.GenericMethod.vtable (struct.new_with_rtt $genericmethod.GenericMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod) (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod) (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod) (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_test__void@genericmethod.GenericMethod) (rtt.canon $genericmethod.GenericMethod.vtable)))
+ (global.set $genericmethod.GenericMethod.vtable (struct.new_with_rtt $genericmethod.GenericMethod.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericmethod.GenericMethod) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod) (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod) (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod) (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_test__void@genericmethod.GenericMethod) (rtt.canon $genericmethod.GenericMethod.vtable)))
 
  ;;; Code for genericmethod.GenericMethod.1 [vtable.init]
- (global.set $genericmethod.GenericMethod.1.vtable (struct.new_with_rtt $genericmethod.GenericMethod.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod) (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod) (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod) (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_test__void@genericmethod.GenericMethod) (ref.func $m_fun2__java_lang_Error__void@genericmethod.GenericMethod.1) (ref.func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1) (rtt.canon $genericmethod.GenericMethod.1.vtable)))
+ (global.set $genericmethod.GenericMethod.1.vtable (struct.new_with_rtt $genericmethod.GenericMethod.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod) (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod) (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod) (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_test__void@genericmethod.GenericMethod) (ref.func $m_fun2__java_lang_Error__void@genericmethod.GenericMethod.1) (ref.func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1) (rtt.canon $genericmethod.GenericMethod.1.vtable)))
 
  ;;; Code for genericmethod.GenericMethod.1LocalClass [vtable.init]
- (global.set $genericmethod.GenericMethod.1LocalClass.vtable (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod) (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod) (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod) (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_test__void@genericmethod.GenericMethod) (ref.func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1LocalClass) (ref.func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass) (rtt.canon $genericmethod.GenericMethod.1LocalClass.vtable)))
+ (global.set $genericmethod.GenericMethod.1LocalClass.vtable (struct.new_with_rtt $genericmethod.GenericMethod.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1LocalClass) (ref.func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Object__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod) (ref.func $m_fun__java_lang_Error__void@genericmethod.GenericMethod) (ref.func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod) (ref.func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod) (ref.func $m_checked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_unchecked__java_lang_Object@genericmethod.GenericMethod) (ref.func $m_test__void@genericmethod.GenericMethod) (ref.func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1LocalClass) (ref.func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass) (rtt.canon $genericmethod.GenericMethod.1LocalClass.vtable)))
 
  ;;; Code for genericmethod.GenericMethod.SuperContainer [vtable.init]
- (global.set $genericmethod.GenericMethod.SuperContainer.vtable (struct.new_with_rtt $genericmethod.GenericMethod.SuperContainer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer) (rtt.canon $genericmethod.GenericMethod.SuperContainer.vtable)))
+ (global.set $genericmethod.GenericMethod.SuperContainer.vtable (struct.new_with_rtt $genericmethod.GenericMethod.SuperContainer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericmethod.GenericMethod.SuperContainer) (ref.func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer) (rtt.canon $genericmethod.GenericMethod.SuperContainer.vtable)))
 
  ;;; Code for genericmethod.GenericMethod.Container [vtable.init]
- (global.set $genericmethod.GenericMethod.Container.vtable (struct.new_with_rtt $genericmethod.GenericMethod.Container.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container) (rtt.canon $genericmethod.GenericMethod.Container.vtable)))
+ (global.set $genericmethod.GenericMethod.Container.vtable (struct.new_with_rtt $genericmethod.GenericMethod.Container.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Container) (ref.func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container) (rtt.canon $genericmethod.GenericMethod.Container.vtable)))
 
  ;;; Code for genericmethod.GenericMethod.Content [vtable.init]
- (global.set $genericmethod.GenericMethod.Content.vtable (struct.new_with_rtt $genericmethod.GenericMethod.Content.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content) (rtt.canon $genericmethod.GenericMethod.Content.vtable)))
+ (global.set $genericmethod.GenericMethod.Content.vtable (struct.new_with_rtt $genericmethod.GenericMethod.Content.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Content) (ref.func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content) (rtt.canon $genericmethod.GenericMethod.Content.vtable)))

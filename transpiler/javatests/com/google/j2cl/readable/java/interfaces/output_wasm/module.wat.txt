@@ -99,6 +99,24 @@
  )
 )
 
+;;; Class<?> Main.getClass()
+(func $m_getClass__java_lang_Class@interfaces.Main
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main();
+   (local.set $return.value (call $$getInterfaces.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@interfaces.Main)
+
 ;;; Code for interfaces.Main.Interface [INTERFACE]
 
 ;;; void Interface.defaultMethod(T t)
@@ -151,6 +169,22 @@
  )
 )
 
+;;; Class<?> Interface.getClass()
+(func $m_getClass__java_lang_Class@interfaces.Main.Interface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.Interface();
+   (local.set $return.value (call $$getInterfaces.Main.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@interfaces.Main.Interface)
+
 ;;; Code for interfaces.Main.SubInterface [INTERFACE]
 
 ;;; void SubInterface.defaultMethod(String s)
@@ -184,6 +218,22 @@
   )
  )
 )
+
+;;; Class<?> SubInterface.getClass()
+(func $m_getClass__java_lang_Class@interfaces.Main.SubInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.SubInterface();
+   (local.set $return.value (call $$getInterfaces.Main.SubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@interfaces.Main.SubInterface)
 
 ;;; Code for interfaces.Main.Implementor [CLASS]
 (type $interfaces.Main.Implementor (struct
@@ -288,6 +338,24 @@
  )
 )
 
+;;; Class<?> Implementor.getClass()
+(func $m_getClass__java_lang_Class@interfaces.Main.Implementor
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main.Implementor))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.Implementor();
+   (local.set $return.value (call $$getInterfaces.Main.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@interfaces.Main.Implementor)
+
 ;;; Code for interfaces.Main.AbstractImplementor [CLASS]
 (type $interfaces.Main.AbstractImplementor (struct
  (field $vtable (ref null $interfaces.Main.AbstractImplementor.vtable))
@@ -376,8 +444,26 @@
  )
 )
 
+;;; Class<?> AbstractImplementor.getClass()
+(func $m_getClass__java_lang_Class@interfaces.Main.AbstractImplementor
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $interfaces.Main.AbstractImplementor))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.AbstractImplementor();
+   (local.set $return.value (call $$getInterfaces.Main.AbstractImplementor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@interfaces.Main.AbstractImplementor)
+
  ;;; Code for interfaces.Main [vtable.init]
- (global.set $interfaces.Main.vtable (struct.new_with_rtt $interfaces.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main) (rtt.canon $interfaces.Main.vtable)))
+ (global.set $interfaces.Main.vtable (struct.new_with_rtt $interfaces.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@interfaces.Main) (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main) (rtt.canon $interfaces.Main.vtable)))
 
  ;;; Code for interfaces.Main.Implementor [vtable.init]
- (global.set $interfaces.Main.Implementor.vtable (struct.new_with_rtt $interfaces.Main.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor) (rtt.canon $interfaces.Main.Implementor.vtable)))
+ (global.set $interfaces.Main.Implementor.vtable (struct.new_with_rtt $interfaces.Main.Implementor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@interfaces.Main.Implementor) (ref.func $m_interfaceMethod__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor) (ref.func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor) (rtt.canon $interfaces.Main.Implementor.vtable)))

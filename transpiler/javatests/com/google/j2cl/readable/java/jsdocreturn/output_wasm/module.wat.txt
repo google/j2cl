@@ -81,5 +81,23 @@
  )
 )
 
+;;; Class<?> JsDocReturn.getClass()
+(func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jsdocreturn.JsDocReturn))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJsdocreturn.JsDocReturn();
+   (local.set $return.value (call $$getJsdocreturn.JsDocReturn__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn)
+
  ;;; Code for jsdocreturn.JsDocReturn [vtable.init]
- (global.set $jsdocreturn.JsDocReturn.vtable (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test1__void@jsdocreturn.JsDocReturn) (ref.func $m_test2__int@jsdocreturn.JsDocReturn) (rtt.canon $jsdocreturn.JsDocReturn.vtable)))
+ (global.set $jsdocreturn.JsDocReturn.vtable (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn) (ref.func $m_test1__void@jsdocreturn.JsDocReturn) (ref.func $m_test2__int@jsdocreturn.JsDocReturn) (rtt.canon $jsdocreturn.JsDocReturn.vtable)))

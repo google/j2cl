@@ -99,6 +99,24 @@
  )
 )
 
+;;; Class<?> BoundedJsArray.getClass()
+(func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericnativetype.BoundedJsArray))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericnativetype.BoundedJsArray.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericnativetype.BoundedJsArray();
+   (local.set $return.value (call $$getGenericnativetype.BoundedJsArray__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray)
+
 ;;; Code for genericnativetype.BoundedJsArrays [CLASS]
 (type $genericnativetype.BoundedJsArrays (struct
  (field $vtable (ref null $genericnativetype.BoundedJsArrays.vtable))
@@ -177,8 +195,26 @@
  )
 )
 
+;;; Class<?> BoundedJsArrays.getClass()
+(func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArrays
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $genericnativetype.BoundedJsArrays))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericnativetype.BoundedJsArrays.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getGenericnativetype.BoundedJsArrays();
+   (local.set $return.value (call $$getGenericnativetype.BoundedJsArrays__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArrays)
+
  ;;; Code for genericnativetype.BoundedJsArray [vtable.init]
- (global.set $genericnativetype.BoundedJsArray.vtable (struct.new_with_rtt $genericnativetype.BoundedJsArray.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $genericnativetype.BoundedJsArray.vtable)))
+ (global.set $genericnativetype.BoundedJsArray.vtable (struct.new_with_rtt $genericnativetype.BoundedJsArray.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray) (rtt.canon $genericnativetype.BoundedJsArray.vtable)))
 
  ;;; Code for genericnativetype.BoundedJsArrays [vtable.init]
- (global.set $genericnativetype.BoundedJsArrays.vtable (struct.new_with_rtt $genericnativetype.BoundedJsArrays.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $genericnativetype.BoundedJsArrays.vtable)))
+ (global.set $genericnativetype.BoundedJsArrays.vtable (struct.new_with_rtt $genericnativetype.BoundedJsArrays.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArrays) (rtt.canon $genericnativetype.BoundedJsArrays.vtable)))

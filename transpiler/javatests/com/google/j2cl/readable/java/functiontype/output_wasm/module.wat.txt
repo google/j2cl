@@ -26,6 +26,22 @@
  )
 )
 
+;;; Class<?> Function.getClass()
+(func $m_getClass__java_lang_Class@functiontype.Function
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.Function();
+   (local.set $return.value (call $$getFunctiontype.Function__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@functiontype.Function)
+
 ;;; Code for functiontype.FunctionImpl [CLASS]
 (type $functiontype.FunctionImpl (struct
  (field $vtable (ref null $functiontype.FunctionImpl.vtable))
@@ -85,5 +101,23 @@
  )
 )
 
+;;; Class<?> FunctionImpl.getClass()
+(func $m_getClass__java_lang_Class@functiontype.FunctionImpl
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $functiontype.FunctionImpl))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $functiontype.FunctionImpl.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.FunctionImpl();
+   (local.set $return.value (call $$getFunctiontype.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@functiontype.FunctionImpl)
+
  ;;; Code for functiontype.FunctionImpl [vtable.init]
- (global.set $functiontype.FunctionImpl.vtable (struct.new_with_rtt $functiontype.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__functiontype_Function__void@functiontype.FunctionImpl) (rtt.canon $functiontype.FunctionImpl.vtable)))
+ (global.set $functiontype.FunctionImpl.vtable (struct.new_with_rtt $functiontype.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@functiontype.FunctionImpl) (ref.func $m_test__functiontype_Function__void@functiontype.FunctionImpl) (rtt.canon $functiontype.FunctionImpl.vtable)))

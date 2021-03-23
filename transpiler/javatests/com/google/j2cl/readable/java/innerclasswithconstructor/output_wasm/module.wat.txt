@@ -56,6 +56,24 @@
  )
 )
 
+;;; Class<?> InnerClassWithConstructor.getClass()
+(func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclasswithconstructor.InnerClassWithConstructor.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor();
+   (local.set $return.value (call $$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
+
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [CLASS]
 (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (struct
  (field $vtable (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable))
@@ -123,8 +141,26 @@
  )
 )
 
+;;; Class<?> InnerClass.getClass()
+(func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass();
+   (local.set $return.value (call $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
+
  ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable.init]
- (global.set $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.vtable)))
+ (global.set $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.vtable)))
 
  ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable.init]
- (global.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)))
+ (global.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)))

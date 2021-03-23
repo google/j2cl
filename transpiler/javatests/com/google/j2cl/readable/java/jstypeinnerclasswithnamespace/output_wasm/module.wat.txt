@@ -55,6 +55,24 @@
  )
 )
 
+;;; Class<?> JsTypeInnerClassWithNamespace.getClass()
+(func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace();
+   (local.set $return.value (call $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)
+
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [CLASS]
 (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (struct
  (field $vtable (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable))
@@ -100,8 +118,26 @@
  )
 )
 
+;;; Class<?> InnerClass.getClass()
+(func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass();
+   (local.set $return.value (call $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)
+
  ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [vtable.init]
- (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)))
+ (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)))
 
  ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [vtable.init]
- (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)))
+ (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)))

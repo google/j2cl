@@ -73,5 +73,23 @@
  )
 )
 
+;;; Class<?> JSKeyWords.getClass()
+(func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $javascriptkeywords.JSKeyWords))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $javascriptkeywords.JSKeyWords.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJavascriptkeywords.JSKeyWords();
+   (local.set $return.value (call $$getJavascriptkeywords.JSKeyWords__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords)
+
  ;;; Code for javascriptkeywords.JSKeyWords [vtable.init]
- (global.set $javascriptkeywords.JSKeyWords.vtable (struct.new_with_rtt $javascriptkeywords.JSKeyWords.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords) (rtt.canon $javascriptkeywords.JSKeyWords.vtable)))
+ (global.set $javascriptkeywords.JSKeyWords.vtable (struct.new_with_rtt $javascriptkeywords.JSKeyWords.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords) (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords) (rtt.canon $javascriptkeywords.JSKeyWords.vtable)))

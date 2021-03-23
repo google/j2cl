@@ -68,6 +68,24 @@
  )
 )
 
+;;; Class<?> Parent.getClass()
+(func $m_getClass__java_lang_Class@jsmethodoverride.Parent
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jsmethodoverride.Parent))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Parent();
+   (local.set $return.value (call $$getJsmethodoverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Parent)
+
 ;;; Code for jsmethodoverride.Child [CLASS]
 (type $jsmethodoverride.Child (struct
  (field $vtable (ref null $jsmethodoverride.Child.vtable))
@@ -128,8 +146,26 @@
  )
 )
 
+;;; Class<?> Child.getClass()
+(func $m_getClass__java_lang_Class@jsmethodoverride.Child
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jsmethodoverride.Child))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Child();
+   (local.set $return.value (call $$getJsmethodoverride.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Child)
+
  ;;; Code for jsmethodoverride.Parent [vtable.init]
- (global.set $jsmethodoverride.Parent.vtable (struct.new_with_rtt $jsmethodoverride.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@jsmethodoverride.Parent) (rtt.canon $jsmethodoverride.Parent.vtable)))
+ (global.set $jsmethodoverride.Parent.vtable (struct.new_with_rtt $jsmethodoverride.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsmethodoverride.Parent) (ref.func $m_foo__void@jsmethodoverride.Parent) (rtt.canon $jsmethodoverride.Parent.vtable)))
 
  ;;; Code for jsmethodoverride.Child [vtable.init]
- (global.set $jsmethodoverride.Child.vtable (struct.new_with_rtt $jsmethodoverride.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void@jsmethodoverride.Child) (rtt.canon $jsmethodoverride.Child.vtable)))
+ (global.set $jsmethodoverride.Child.vtable (struct.new_with_rtt $jsmethodoverride.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsmethodoverride.Child) (ref.func $m_foo__void@jsmethodoverride.Child) (rtt.canon $jsmethodoverride.Child.vtable)))

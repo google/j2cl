@@ -26,6 +26,22 @@
  )
 )
 
+;;; Class<?> MyInterface.getClass()
+(func $m_getClass__java_lang_Class@abstractinterfaceimpl.MyInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinterfaceimpl.MyInterface();
+   (local.set $return.value (call $$getAbstractinterfaceimpl.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@abstractinterfaceimpl.MyInterface)
+
 ;;; Code for abstractinterfaceimpl.AbstractInterfaceImpl [CLASS]
 (type $abstractinterfaceimpl.AbstractInterfaceImpl (struct
  (field $vtable (ref null $abstractinterfaceimpl.AbstractInterfaceImpl.vtable))
@@ -70,3 +86,21 @@
   )
  )
 )
+
+;;; Class<?> AbstractInterfaceImpl.getClass()
+(func $m_getClass__java_lang_Class@abstractinterfaceimpl.AbstractInterfaceImpl
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinterfaceimpl.AbstractInterfaceImpl.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinterfaceimpl.AbstractInterfaceImpl();
+   (local.set $return.value (call $$getAbstractinterfaceimpl.AbstractInterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@abstractinterfaceimpl.AbstractInterfaceImpl)

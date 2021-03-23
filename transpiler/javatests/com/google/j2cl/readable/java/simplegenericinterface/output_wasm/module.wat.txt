@@ -19,3 +19,19 @@
   )
  )
 )
+
+;;; Class<?> SimpleGenericInterface.getClass()
+(func $m_getClass__java_lang_Class@simplegenericinterface.SimpleGenericInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getSimplegenericinterface.SimpleGenericInterface();
+   (local.set $return.value (call $$getSimplegenericinterface.SimpleGenericInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@simplegenericinterface.SimpleGenericInterface)

@@ -55,5 +55,23 @@
  )
 )
 
+;;; Class<?> StaticBlockLocalVar.getClass()
+(func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $staticblocklocalvar.StaticBlockLocalVar))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticblocklocalvar.StaticBlockLocalVar.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getStaticblocklocalvar.StaticBlockLocalVar();
+   (local.set $return.value (call $$getStaticblocklocalvar.StaticBlockLocalVar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
+
  ;;; Code for staticblocklocalvar.StaticBlockLocalVar [vtable.init]
- (global.set $staticblocklocalvar.StaticBlockLocalVar.vtable (struct.new_with_rtt $staticblocklocalvar.StaticBlockLocalVar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $staticblocklocalvar.StaticBlockLocalVar.vtable)))
+ (global.set $staticblocklocalvar.StaticBlockLocalVar.vtable (struct.new_with_rtt $staticblocklocalvar.StaticBlockLocalVar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar) (rtt.canon $staticblocklocalvar.StaticBlockLocalVar.vtable)))

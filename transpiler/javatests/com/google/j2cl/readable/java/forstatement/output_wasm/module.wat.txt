@@ -174,5 +174,23 @@
  )
 )
 
+;;; Class<?> ForStatement.getClass()
+(func $m_getClass__java_lang_Class@forstatement.ForStatement
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $forstatement.ForStatement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getForstatement.ForStatement();
+   (local.set $return.value (call $$getForstatement.ForStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@forstatement.ForStatement)
+
  ;;; Code for forstatement.ForStatement [vtable.init]
- (global.set $forstatement.ForStatement.vtable (struct.new_with_rtt $forstatement.ForStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@forstatement.ForStatement) (rtt.canon $forstatement.ForStatement.vtable)))
+ (global.set $forstatement.ForStatement.vtable (struct.new_with_rtt $forstatement.ForStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@forstatement.ForStatement) (ref.func $m_test__void@forstatement.ForStatement) (rtt.canon $forstatement.ForStatement.vtable)))

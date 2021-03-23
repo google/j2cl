@@ -104,6 +104,24 @@
  )
 )
 
+;;; Class<?> Date.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.Date
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $importglobaljstypes.Date))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Date.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Date();
+   (local.set $return.value (call $$getImportglobaljstypes.Date__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Date)
+
 ;;; Code for importglobaljstypes.Date.NativeDate [CLASS]
 (type $importglobaljstypes.Date.NativeDate (struct
  (field $vtable (ref null $importglobaljstypes.Date.NativeDate.vtable))
@@ -161,6 +179,24 @@
   )
  )
 )
+
+;;; Class<?> NativeDate.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $importglobaljstypes.Date.NativeDate))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Date.NativeDate.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Date.NativeDate();
+   (local.set $return.value (call $$getImportglobaljstypes.Date.NativeDate__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate)
 
 ;;; Code for importglobaljstypes.Number [CLASS]
 (type $importglobaljstypes.Number (struct
@@ -294,6 +330,24 @@
  )
 )
 
+;;; Class<?> Number.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.Number
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $importglobaljstypes.Number))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Number.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Number();
+   (local.set $return.value (call $$getImportglobaljstypes.Number__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number)
+
 ;;; Code for importglobaljstypes.Number.NativeFunction [INTERFACE]
 
 ;;; void NativeFunction.$clinit()
@@ -312,6 +366,22 @@
   )
  )
 )
+
+;;; Class<?> NativeFunction.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.Number.NativeFunction
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Number.NativeFunction();
+   (local.set $return.value (call $$getImportglobaljstypes.Number.NativeFunction__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number.NativeFunction)
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [INTERFACE]
 
@@ -332,11 +402,27 @@
  )
 )
 
+;;; Class<?> MyLiteralType.getClass()
+(func $m_getClass__java_lang_Class@importglobaljstypes.Number.MyLiteralType
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Number.MyLiteralType();
+   (local.set $return.value (call $$getImportglobaljstypes.Number.MyLiteralType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number.MyLiteralType)
+
  ;;; Code for importglobaljstypes.Date [vtable.init]
- (global.set $importglobaljstypes.Date.vtable (struct.new_with_rtt $importglobaljstypes.Date.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date) (rtt.canon $importglobaljstypes.Date.vtable)))
+ (global.set $importglobaljstypes.Date.vtable (struct.new_with_rtt $importglobaljstypes.Date.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date) (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date) (rtt.canon $importglobaljstypes.Date.vtable)))
 
  ;;; Code for importglobaljstypes.Date.NativeDate [vtable.init]
- (global.set $importglobaljstypes.Date.NativeDate.vtable (struct.new_with_rtt $importglobaljstypes.Date.NativeDate.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $importglobaljstypes.Date.NativeDate.vtable)))
+ (global.set $importglobaljstypes.Date.NativeDate.vtable (struct.new_with_rtt $importglobaljstypes.Date.NativeDate.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate) (rtt.canon $importglobaljstypes.Date.NativeDate.vtable)))
 
  ;;; Code for importglobaljstypes.Number [vtable.init]
- (global.set $importglobaljstypes.Number.vtable (struct.new_with_rtt $importglobaljstypes.Number.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number) (rtt.canon $importglobaljstypes.Number.vtable)))
+ (global.set $importglobaljstypes.Number.vtable (struct.new_with_rtt $importglobaljstypes.Number.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Number) (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number) (rtt.canon $importglobaljstypes.Number.vtable)))

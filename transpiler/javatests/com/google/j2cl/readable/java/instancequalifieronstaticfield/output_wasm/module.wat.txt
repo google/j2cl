@@ -209,5 +209,23 @@
  )
 )
 
+;;; Class<?> InstanceQualifiers.getClass()
+(func $m_getClass__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInstancequalifieronstaticfield.InstanceQualifiers();
+   (local.set $return.value (call $$getInstancequalifieronstaticfield.InstanceQualifiers__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers)
+
  ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [vtable.init]
- (global.set $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $instancequalifieronstaticfield.InstanceQualifiers.vtable)))
+ (global.set $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instancequalifieronstaticfield.InstanceQualifiers) (rtt.canon $instancequalifieronstaticfield.InstanceQualifiers.vtable)))

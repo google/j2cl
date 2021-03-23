@@ -76,6 +76,24 @@
  )
 )
 
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@packageinfosubpackage.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $packageinfosubpackage.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfosubpackage.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo();
+   (local.set $return.value (call $$getPackageinfosubpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
+
 ;;; Code for packageinfosubpackage.Foo.NativeBar [CLASS]
 (type $packageinfosubpackage.Foo.NativeBar (struct
  (field $vtable (ref null $packageinfosubpackage.Foo.NativeBar.vtable))
@@ -122,6 +140,24 @@
   )
  )
 )
+
+;;; Class<?> NativeBar.getClass()
+(func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $packageinfosubpackage.Foo.NativeBar))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfosubpackage.Foo.NativeBar.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo.NativeBar();
+   (local.set $return.value (call $$getPackageinfosubpackage.Foo.NativeBar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar)
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [CLASS]
 (type $packageinfosubpackage.subpackage.Bar (struct
@@ -170,11 +206,29 @@
  )
 )
 
+;;; Class<?> Bar.getClass()
+(func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $packageinfosubpackage.subpackage.Bar))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfosubpackage.subpackage.Bar.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.subpackage.Bar();
+   (local.set $return.value (call $$getPackageinfosubpackage.subpackage.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar)
+
  ;;; Code for packageinfosubpackage.Foo [vtable.init]
- (global.set $packageinfosubpackage.Foo.vtable (struct.new_with_rtt $packageinfosubpackage.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfosubpackage.Foo.vtable)))
+ (global.set $packageinfosubpackage.Foo.vtable (struct.new_with_rtt $packageinfosubpackage.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo) (rtt.canon $packageinfosubpackage.Foo.vtable)))
 
  ;;; Code for packageinfosubpackage.Foo.NativeBar [vtable.init]
- (global.set $packageinfosubpackage.Foo.NativeBar.vtable (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfosubpackage.Foo.NativeBar.vtable)))
+ (global.set $packageinfosubpackage.Foo.NativeBar.vtable (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar) (rtt.canon $packageinfosubpackage.Foo.NativeBar.vtable)))
 
  ;;; Code for packageinfosubpackage.subpackage.Bar [vtable.init]
- (global.set $packageinfosubpackage.subpackage.Bar.vtable (struct.new_with_rtt $packageinfosubpackage.subpackage.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $packageinfosubpackage.subpackage.Bar.vtable)))
+ (global.set $packageinfosubpackage.subpackage.Bar.vtable (struct.new_with_rtt $packageinfosubpackage.subpackage.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar) (rtt.canon $packageinfosubpackage.subpackage.Bar.vtable)))

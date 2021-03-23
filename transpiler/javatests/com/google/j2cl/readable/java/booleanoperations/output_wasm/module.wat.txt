@@ -239,6 +239,24 @@
  )
 )
 
+;;; Class<?> BooleanOperations.getClass()
+(func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $booleanoperations.BooleanOperations))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $booleanoperations.BooleanOperations.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations();
+   (local.set $return.value (call $$getBooleanoperations.BooleanOperations__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
+
 ;;; Code for booleanoperations.BooleanOperations.1Outer [CLASS]
 (type $booleanoperations.BooleanOperations.1Outer (struct
  (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.vtable))
@@ -288,6 +306,24 @@
   )
  )
 )
+
+;;; Class<?> Outer.getClass()
+(func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $booleanoperations.BooleanOperations.1Outer))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $booleanoperations.BooleanOperations.1Outer.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations.1Outer();
+   (local.set $return.value (call $$getBooleanoperations.BooleanOperations.1Outer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [CLASS]
 (type $booleanoperations.BooleanOperations.1Outer.Inner (struct
@@ -351,11 +387,29 @@
  )
 )
 
+;;; Class<?> Inner.getClass()
+(func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $booleanoperations.BooleanOperations.1Outer.Inner.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations.1Outer.Inner();
+   (local.set $return.value (call $$getBooleanoperations.BooleanOperations.1Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
+
  ;;; Code for booleanoperations.BooleanOperations [vtable.init]
- (global.set $booleanoperations.BooleanOperations.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@booleanoperations.BooleanOperations) (rtt.canon $booleanoperations.BooleanOperations.vtable)))
+ (global.set $booleanoperations.BooleanOperations.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations) (ref.func $m_test__void@booleanoperations.BooleanOperations) (rtt.canon $booleanoperations.BooleanOperations.vtable)))
 
  ;;; Code for booleanoperations.BooleanOperations.1Outer [vtable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $booleanoperations.BooleanOperations.1Outer.vtable)))
+ (global.set $booleanoperations.BooleanOperations.1Outer.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer) (rtt.canon $booleanoperations.BooleanOperations.1Outer.vtable)))
 
  ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [vtable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner.vtable)))
+ (global.set $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner) (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner.vtable)))

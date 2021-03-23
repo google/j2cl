@@ -61,6 +61,24 @@
  )
 )
 
+;;; Class<?> GenericClass.getClass()
+(func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $subclassgenericclass.GenericClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.GenericClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericClass();
+   (local.set $return.value (call $$getSubclassgenericclass.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass)
+
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [CLASS]
 (type $subclassgenericclass.GenericSubclassGenericClass (struct
  (field $vtable (ref null $subclassgenericclass.GenericSubclassGenericClass.vtable))
@@ -105,6 +123,24 @@
   )
  )
 )
+
+;;; Class<?> GenericSubclassGenericClass.getClass()
+(func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.GenericSubclassGenericClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericSubclassGenericClass();
+   (local.set $return.value (call $$getSubclassgenericclass.GenericSubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
 
 ;;; Code for subclassgenericclass.SubclassGenericClass [CLASS]
 (type $subclassgenericclass.SubclassGenericClass (struct
@@ -151,11 +187,29 @@
  )
 )
 
+;;; Class<?> SubclassGenericClass.getClass()
+(func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $subclassgenericclass.SubclassGenericClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.SubclassGenericClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.SubclassGenericClass();
+   (local.set $return.value (call $$getSubclassgenericclass.SubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass)
+
  ;;; Code for subclassgenericclass.GenericClass [vtable.init]
- (global.set $subclassgenericclass.GenericClass.vtable (struct.new_with_rtt $subclassgenericclass.GenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $subclassgenericclass.GenericClass.vtable)))
+ (global.set $subclassgenericclass.GenericClass.vtable (struct.new_with_rtt $subclassgenericclass.GenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass) (rtt.canon $subclassgenericclass.GenericClass.vtable)))
 
  ;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
- (global.set $subclassgenericclass.GenericSubclassGenericClass.vtable (struct.new_with_rtt $subclassgenericclass.GenericSubclassGenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $subclassgenericclass.GenericSubclassGenericClass.vtable)))
+ (global.set $subclassgenericclass.GenericSubclassGenericClass.vtable (struct.new_with_rtt $subclassgenericclass.GenericSubclassGenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass) (rtt.canon $subclassgenericclass.GenericSubclassGenericClass.vtable)))
 
  ;;; Code for subclassgenericclass.SubclassGenericClass [vtable.init]
- (global.set $subclassgenericclass.SubclassGenericClass.vtable (struct.new_with_rtt $subclassgenericclass.SubclassGenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $subclassgenericclass.SubclassGenericClass.vtable)))
+ (global.set $subclassgenericclass.SubclassGenericClass.vtable (struct.new_with_rtt $subclassgenericclass.SubclassGenericClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass) (rtt.canon $subclassgenericclass.SubclassGenericClass.vtable)))

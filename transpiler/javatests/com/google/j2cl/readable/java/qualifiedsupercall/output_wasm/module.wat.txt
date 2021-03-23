@@ -74,6 +74,24 @@
  )
 )
 
+;;; Class<?> Parent.getClass()
+(func $m_getClass__java_lang_Class@qualifiedsupercall.Parent
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $qualifiedsupercall.Parent))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $qualifiedsupercall.Parent.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getQualifiedsupercall.Parent();
+   (local.set $return.value (call $$getQualifiedsupercall.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@qualifiedsupercall.Parent)
+
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [CLASS]
 (type $qualifiedsupercall.QualifiedSuperCall (struct
  (field $vtable (ref null $qualifiedsupercall.QualifiedSuperCall.vtable))
@@ -119,6 +137,24 @@
   )
  )
 )
+
+;;; Class<?> QualifiedSuperCall.getClass()
+(func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $qualifiedsupercall.QualifiedSuperCall))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $qualifiedsupercall.QualifiedSuperCall.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getQualifiedsupercall.QualifiedSuperCall();
+   (local.set $return.value (call $$getQualifiedsupercall.QualifiedSuperCall__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall)
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [CLASS]
 (type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct
@@ -184,11 +220,29 @@
  )
 )
 
+;;; Class<?> InnerClass.getClass()
+(func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getQualifiedsupercall.QualifiedSuperCall.InnerClass();
+   (local.set $return.value (call $$getQualifiedsupercall.QualifiedSuperCall.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass)
+
  ;;; Code for qualifiedsupercall.Parent [vtable.init]
- (global.set $qualifiedsupercall.Parent.vtable (struct.new_with_rtt $qualifiedsupercall.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@qualifiedsupercall.Parent) (rtt.canon $qualifiedsupercall.Parent.vtable)))
+ (global.set $qualifiedsupercall.Parent.vtable (struct.new_with_rtt $qualifiedsupercall.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@qualifiedsupercall.Parent) (ref.func $m_fun__void@qualifiedsupercall.Parent) (rtt.canon $qualifiedsupercall.Parent.vtable)))
 
  ;;; Code for qualifiedsupercall.QualifiedSuperCall [vtable.init]
- (global.set $qualifiedsupercall.QualifiedSuperCall.vtable (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_fun__void@qualifiedsupercall.Parent) (rtt.canon $qualifiedsupercall.QualifiedSuperCall.vtable)))
+ (global.set $qualifiedsupercall.QualifiedSuperCall.vtable (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall) (ref.func $m_fun__void@qualifiedsupercall.Parent) (rtt.canon $qualifiedsupercall.QualifiedSuperCall.vtable)))
 
  ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [vtable.init]
- (global.set $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass) (rtt.canon $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)))
+ (global.set $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass) (ref.func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass) (rtt.canon $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)))

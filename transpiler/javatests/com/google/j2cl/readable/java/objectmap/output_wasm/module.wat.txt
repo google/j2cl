@@ -83,5 +83,23 @@
  )
 )
 
+;;; Class<?> ObjectMap.getClass()
+(func $m_getClass__java_lang_Class@objectmap.ObjectMap
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $objectmap.ObjectMap))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $objectmap.ObjectMap.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getObjectmap.ObjectMap();
+   (local.set $return.value (call $$getObjectmap.ObjectMap__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@objectmap.ObjectMap)
+
  ;;; Code for objectmap.ObjectMap [vtable.init]
- (global.set $objectmap.ObjectMap.vtable (struct.new_with_rtt $objectmap.ObjectMap.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $objectmap.ObjectMap.vtable)))
+ (global.set $objectmap.ObjectMap.vtable (struct.new_with_rtt $objectmap.ObjectMap.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@objectmap.ObjectMap) (rtt.canon $objectmap.ObjectMap.vtable)))

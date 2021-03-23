@@ -84,6 +84,24 @@
  )
 )
 
+;;; Class<?> InstanceInnerClass.getClass()
+(func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $instanceinnerclass.InstanceInnerClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInstanceinnerclass.InstanceInnerClass();
+   (local.set $return.value (call $$getInstanceinnerclass.InstanceInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass)
+
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [CLASS]
 (type $instanceinnerclass.InstanceInnerClass.InnerClass (struct
  (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
@@ -167,8 +185,26 @@
  )
 )
 
+;;; Class<?> InnerClass.getClass()
+(func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInstanceinnerclass.InstanceInnerClass.InnerClass();
+   (local.set $return.value (call $$getInstanceinnerclass.InstanceInnerClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass)
+
  ;;; Code for instanceinnerclass.InstanceInnerClass [vtable.init]
- (global.set $instanceinnerclass.InstanceInnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funOuter__void@instanceinnerclass.InstanceInnerClass) (ref.func $m_test__void@instanceinnerclass.InstanceInnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.vtable)))
+ (global.set $instanceinnerclass.InstanceInnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass) (ref.func $m_funOuter__void@instanceinnerclass.InstanceInnerClass) (ref.func $m_test__void@instanceinnerclass.InstanceInnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.vtable)))
 
  ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [vtable.init]
- (global.set $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)))
+ (global.set $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass) (ref.func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)))

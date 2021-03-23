@@ -75,6 +75,24 @@
  )
 )
 
+;;; Class<?> LocalClassWithConstructor.getClass()
+(func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithconstructor.LocalClassWithConstructor.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithconstructor.LocalClassWithConstructor();
+   (local.set $return.value (call $$getLocalclasswithconstructor.LocalClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor)
+
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [CLASS]
 (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct
  (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable))
@@ -156,8 +174,26 @@
  )
 )
 
+;;; Class<?> LocalClass.getClass()
+(func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithconstructor.LocalClassWithConstructor.1LocalClass();
+   (local.set $return.value (call $$getLocalclasswithconstructor.LocalClassWithConstructor.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass)
+
  ;;; Code for localclasswithconstructor.LocalClassWithConstructor [vtable.init]
- (global.set $localclasswithconstructor.LocalClassWithConstructor.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.vtable)))
+ (global.set $localclasswithconstructor.LocalClassWithConstructor.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor) (ref.func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.vtable)))
 
  ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [vtable.init]
- (global.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)))
+ (global.set $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass) (rtt.canon $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)))

@@ -35,6 +35,22 @@
  )
 )
 
+;;; Class<?> GenericInterface.getClass()
+(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterface();
+   (local.set $return.value (call $$getImplementsgenericinterface.GenericInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface)
+
 ;;; Code for implementsgenericinterface.GenericSubInterface [INTERFACE]
 
 ;;; void GenericSubInterface.$clinit()
@@ -53,6 +69,22 @@
   )
  )
 )
+
+;;; Class<?> GenericSubInterface.getClass()
+(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericSubInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericSubInterface();
+   (local.set $return.value (call $$getImplementsgenericinterface.GenericSubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericSubInterface)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [CLASS]
 (type $implementsgenericinterface.GenericInterfaceGenericImpl (struct
@@ -99,6 +131,24 @@
  )
 )
 
+;;; Class<?> GenericInterfaceGenericImpl.getClass()
+(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceGenericImpl();
+   (local.set $return.value (call $$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
+
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [CLASS]
 (type $implementsgenericinterface.GenericInterfaceImpl (struct
  (field $vtable (ref null $implementsgenericinterface.GenericInterfaceImpl.vtable))
@@ -144,8 +194,26 @@
  )
 )
 
+;;; Class<?> GenericInterfaceImpl.getClass()
+(func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $implementsgenericinterface.GenericInterfaceImpl.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceImpl();
+   (local.set $return.value (call $$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)
+
  ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [vtable.init]
- (global.set $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)))
+ (global.set $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl) (rtt.canon $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)))
 
  ;;; Code for implementsgenericinterface.GenericInterfaceImpl [vtable.init]
- (global.set $implementsgenericinterface.GenericInterfaceImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $implementsgenericinterface.GenericInterfaceImpl.vtable)))
+ (global.set $implementsgenericinterface.GenericInterfaceImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl) (rtt.canon $implementsgenericinterface.GenericInterfaceImpl.vtable)))

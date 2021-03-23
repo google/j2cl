@@ -97,6 +97,24 @@
  )
 )
 
+;;; Class<?> GenericType.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.GenericType
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.GenericType))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.GenericType.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.GenericType();
+   (local.set $return.value (call $$getTypewildcards.GenericType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.GenericType)
+
 ;;; Code for typewildcards.TypeWildCards [CLASS]
 (type $typewildcards.TypeWildCards (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.vtable))
@@ -336,6 +354,24 @@
  )
 )
 
+;;; Class<?> TypeWildCards.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards)
+
 ;;; Code for typewildcards.TypeWildCards.X [INTERFACE]
 
 ;;; void X.$clinit()
@@ -355,6 +391,22 @@
  )
 )
 
+;;; Class<?> X.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.X
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.X();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.X__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.X)
+
 ;;; Code for typewildcards.TypeWildCards.Y [INTERFACE]
 
 ;;; void Y.$clinit()
@@ -373,6 +425,22 @@
   )
  )
 )
+
+;;; Class<?> Y.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Y
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.Y();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.Y__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Y)
 
 ;;; Code for typewildcards.TypeWildCards.A [CLASS]
 (type $typewildcards.TypeWildCards.A (struct
@@ -433,6 +501,24 @@
  )
 )
 
+;;; Class<?> A.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.A
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards.A))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.A.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.A();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.A)
+
 ;;; Code for typewildcards.TypeWildCards.IntegerSupplier [INTERFACE]
 
 ;;; void IntegerSupplier.$clinit()
@@ -452,6 +538,22 @@
  )
 )
 
+;;; Class<?> IntegerSupplier.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.IntegerSupplier
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.IntegerSupplier();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.IntegerSupplier__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.IntegerSupplier)
+
 ;;; Code for typewildcards.TypeWildCards.HasKey [INTERFACE]
 
 ;;; void HasKey.$clinit()
@@ -470,6 +572,22 @@
   )
  )
 )
+
+;;; Class<?> HasKey.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.HasKey
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.HasKey();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.HasKey__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.HasKey)
 
 ;;; Code for typewildcards.TypeWildCards.Element [CLASS]
 (type $typewildcards.TypeWildCards.Element (struct
@@ -520,6 +638,24 @@
  )
 )
 
+;;; Class<?> Element.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Element
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards.Element))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.Element.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.Element();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.Element__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Element)
+
 ;;; Code for typewildcards.TypeWildCards.OtherElement [CLASS]
 (type $typewildcards.TypeWildCards.OtherElement (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.OtherElement.vtable))
@@ -568,6 +704,24 @@
   )
  )
 )
+
+;;; Class<?> OtherElement.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.OtherElement
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards.OtherElement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.OtherElement.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.OtherElement();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.OtherElement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.OtherElement)
 
 ;;; Code for typewildcards.TypeWildCards.SubOtherElement [CLASS]
 (type $typewildcards.TypeWildCards.SubOtherElement (struct
@@ -619,6 +773,24 @@
  )
 )
 
+;;; Class<?> SubOtherElement.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.SubOtherElement
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards.SubOtherElement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.SubOtherElement.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.SubOtherElement();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.SubOtherElement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.SubOtherElement)
+
 ;;; Code for typewildcards.TypeWildCards.Foo [CLASS]
 (type $typewildcards.TypeWildCards.Foo (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.Foo.vtable))
@@ -668,14 +840,32 @@
  )
 )
 
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.Foo();
+   (local.set $return.value (call $$getTypewildcards.TypeWildCards.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo)
+
  ;;; Code for typewildcards.GenericType [vtable.init]
- (global.set $typewildcards.GenericType.vtable (struct.new_with_rtt $typewildcards.GenericType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $typewildcards.GenericType.vtable)))
+ (global.set $typewildcards.GenericType.vtable (struct.new_with_rtt $typewildcards.GenericType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@typewildcards.GenericType) (rtt.canon $typewildcards.GenericType.vtable)))
 
  ;;; Code for typewildcards.TypeWildCards [vtable.init]
- (global.set $typewildcards.TypeWildCards.vtable (struct.new_with_rtt $typewildcards.TypeWildCards.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_unbounded__typewildcards_GenericType__void@typewildcards.TypeWildCards) (ref.func $m_upperBound__typewildcards_GenericType__void@typewildcards.TypeWildCards) (ref.func $m_lowerBound__typewildcards_GenericType__void@typewildcards.TypeWildCards) (ref.func $m_test__void@typewildcards.TypeWildCards) (ref.func $m_testInferredGenericIntersection__void@typewildcards.TypeWildCards) (ref.func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards) (rtt.canon $typewildcards.TypeWildCards.vtable)))
+ (global.set $typewildcards.TypeWildCards.vtable (struct.new_with_rtt $typewildcards.TypeWildCards.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards) (ref.func $m_unbounded__typewildcards_GenericType__void@typewildcards.TypeWildCards) (ref.func $m_upperBound__typewildcards_GenericType__void@typewildcards.TypeWildCards) (ref.func $m_lowerBound__typewildcards_GenericType__void@typewildcards.TypeWildCards) (ref.func $m_test__void@typewildcards.TypeWildCards) (ref.func $m_testInferredGenericIntersection__void@typewildcards.TypeWildCards) (ref.func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards) (rtt.canon $typewildcards.TypeWildCards.vtable)))
 
  ;;; Code for typewildcards.TypeWildCards.A [vtable.init]
- (global.set $typewildcards.TypeWildCards.A.vtable (struct.new_with_rtt $typewildcards.TypeWildCards.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_m__void@typewildcards.TypeWildCards.A) (rtt.canon $typewildcards.TypeWildCards.A.vtable)))
+ (global.set $typewildcards.TypeWildCards.A.vtable (struct.new_with_rtt $typewildcards.TypeWildCards.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.A) (ref.func $m_m__void@typewildcards.TypeWildCards.A) (rtt.canon $typewildcards.TypeWildCards.A.vtable)))
 
  ;;; Code for typewildcards.TypeWildCards.Foo [vtable.init]
- (global.set $typewildcards.TypeWildCards.Foo.vtable (struct.new_with_rtt $typewildcards.TypeWildCards.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $typewildcards.TypeWildCards.Foo.vtable)))
+ (global.set $typewildcards.TypeWildCards.Foo.vtable (struct.new_with_rtt $typewildcards.TypeWildCards.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo) (rtt.canon $typewildcards.TypeWildCards.Foo.vtable)))

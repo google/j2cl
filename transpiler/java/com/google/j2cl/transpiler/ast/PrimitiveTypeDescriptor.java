@@ -24,11 +24,17 @@ import java.util.function.Function;
 /** A primitive type. */
 public class PrimitiveTypeDescriptor extends TypeDescriptor {
   private final String name;
+  private final String signature;
   private final String boxedClassName;
   private final int precisionOrder;
 
   public String getSimpleSourceName() {
     return name;
+  }
+
+  /** Returns the type signature that is used in JNI signatures. */
+  public String getSignature() {
+    return signature;
   }
 
   /** Returns the qualified source name of the corresponding boxed class. */
@@ -183,8 +189,10 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
     return getSimpleSourceName();
   }
 
-  PrimitiveTypeDescriptor(String name, String boxedClassName, int precisionOrder) {
+  PrimitiveTypeDescriptor(
+      String name, String signature, String boxedClassName, int precisionOrder) {
     this.name = name;
+    this.signature = signature;
     this.boxedClassName = boxedClassName;
     this.precisionOrder = precisionOrder;
   }

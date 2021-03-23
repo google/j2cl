@@ -156,9 +156,9 @@
    (local.set $foo (ref.null $libraryinfo.Main.Foo))
    ;; foo.instanceMethod();
    (call_ref (local.get $foo)(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
-   ;; Class<?> clazz = Foo.class;
+   ;; Class<?> clazz = javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
    
-   (local.set $clazz (ref.null $java.lang.Class))
+   (local.set $clazz (call $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
   )
  )
 )
@@ -188,6 +188,24 @@
  )
 )
 
+;;; Class<?> Main.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main();
+   (local.set $return.value (call $$getLibraryinfo.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main)
+
 ;;; Code for libraryinfo.Main.JsTypeInterface [INTERFACE]
 
 ;;; void JsTypeInterface.$clinit()
@@ -206,6 +224,22 @@
   )
  )
 )
+
+;;; Class<?> JsTypeInterface.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.JsTypeInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.JsTypeInterface();
+   (local.set $return.value (call $$getLibraryinfo.Main.JsTypeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.JsTypeInterface)
 
 ;;; Code for libraryinfo.Main.FunctionnalInterface [INTERFACE]
 
@@ -226,6 +260,22 @@
  )
 )
 
+;;; Class<?> FunctionnalInterface.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionnalInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.FunctionnalInterface();
+   (local.set $return.value (call $$getLibraryinfo.Main.FunctionnalInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionnalInterface)
+
 ;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [INTERFACE]
 
 ;;; void JsAccessibleFunctionnalInterface.$clinit()
@@ -245,6 +295,22 @@
  )
 )
 
+;;; Class<?> JsAccessibleFunctionnalInterface.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.JsAccessibleFunctionnalInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.JsAccessibleFunctionnalInterface();
+   (local.set $return.value (call $$getLibraryinfo.Main.JsAccessibleFunctionnalInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.JsAccessibleFunctionnalInterface)
+
 ;;; Code for libraryinfo.Main.Function [INTERFACE]
 
 ;;; void Function.$clinit()
@@ -263,6 +329,22 @@
   )
  )
 )
+
+;;; Class<?> Function.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.Function
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Function();
+   (local.set $return.value (call $$getLibraryinfo.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Function)
 
 ;;; Code for libraryinfo.Main.FunctionImpl [CLASS]
 (type $libraryinfo.Main.FunctionImpl (struct
@@ -322,6 +404,24 @@
   )
  )
 )
+
+;;; Class<?> FunctionImpl.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionImpl
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.FunctionImpl))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.FunctionImpl();
+   (local.set $return.value (call $$getLibraryinfo.Main.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionImpl)
 
 ;;; Code for libraryinfo.Main.MyEnum [ENUM]
 (type $libraryinfo.Main.MyEnum (struct
@@ -465,6 +565,24 @@
  )
 )
 
+;;; Class<?> MyEnum.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.MyEnum
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.MyEnum))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.MyEnum.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyEnum();
+   (local.set $return.value (call $$getLibraryinfo.Main.MyEnum__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyEnum)
+
 ;;; Code for libraryinfo.Main.MyJsType [CLASS]
 (type $libraryinfo.Main.MyJsType (struct
  (field $vtable (ref null $libraryinfo.Main.MyJsType.vtable))
@@ -514,6 +632,24 @@
   )
  )
 )
+
+;;; Class<?> MyJsType.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.MyJsType))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.MyJsType.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyJsType();
+   (local.set $return.value (call $$getLibraryinfo.Main.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType)
 
 ;;; Code for libraryinfo.Main.1 [CLASS]
 (type $libraryinfo.Main.1 (struct
@@ -572,6 +708,24 @@
   )
  )
 )
+
+;;; Class<?> <anonymous> extends Object.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.1();
+   (local.set $return.value (call $$getLibraryinfo.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.1)
 
 ;;; Code for libraryinfo.Main.Foo [CLASS]
 (type $libraryinfo.Main.Foo (struct
@@ -635,20 +789,38 @@
  )
 )
 
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
+   (local.set $return.value (call $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)
+
  ;;; Code for libraryinfo.Main [vtable.init]
- (global.set $libraryinfo.Main.vtable (struct.new_with_rtt $libraryinfo.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@libraryinfo.Main) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $libraryinfo.Main.vtable)))
+ (global.set $libraryinfo.Main.vtable (struct.new_with_rtt $libraryinfo.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@libraryinfo.Main) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main) (rtt.canon $libraryinfo.Main.vtable)))
 
  ;;; Code for libraryinfo.Main.FunctionImpl [vtable.init]
- (global.set $libraryinfo.Main.FunctionImpl.vtable (struct.new_with_rtt $libraryinfo.Main.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl) (rtt.canon $libraryinfo.Main.FunctionImpl.vtable)))
+ (global.set $libraryinfo.Main.FunctionImpl.vtable (struct.new_with_rtt $libraryinfo.Main.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionImpl) (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl) (rtt.canon $libraryinfo.Main.FunctionImpl.vtable)))
 
  ;;; Code for libraryinfo.Main.MyEnum [vtable.init]
- (global.set $libraryinfo.Main.MyEnum.vtable (struct.new_with_rtt $libraryinfo.Main.MyEnum.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $libraryinfo.Main.MyEnum.vtable)))
+ (global.set $libraryinfo.Main.MyEnum.vtable (struct.new_with_rtt $libraryinfo.Main.MyEnum.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.MyEnum) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $libraryinfo.Main.MyEnum.vtable)))
 
  ;;; Code for libraryinfo.Main.MyJsType [vtable.init]
- (global.set $libraryinfo.Main.MyJsType.vtable (struct.new_with_rtt $libraryinfo.Main.MyJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $libraryinfo.Main.MyJsType.vtable)))
+ (global.set $libraryinfo.Main.MyJsType.vtable (struct.new_with_rtt $libraryinfo.Main.MyJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType) (rtt.canon $libraryinfo.Main.MyJsType.vtable)))
 
  ;;; Code for libraryinfo.Main.1 [vtable.init]
- (global.set $libraryinfo.Main.1.vtable (struct.new_with_rtt $libraryinfo.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1) (rtt.canon $libraryinfo.Main.1.vtable)))
+ (global.set $libraryinfo.Main.1.vtable (struct.new_with_rtt $libraryinfo.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.1) (ref.func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1) (rtt.canon $libraryinfo.Main.1.vtable)))
 
  ;;; Code for libraryinfo.Main.Foo [vtable.init]
- (global.set $libraryinfo.Main.Foo.vtable (struct.new_with_rtt $libraryinfo.Main.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo) (rtt.canon $libraryinfo.Main.Foo.vtable)))
+ (global.set $libraryinfo.Main.Foo.vtable (struct.new_with_rtt $libraryinfo.Main.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.Foo) (ref.func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo) (rtt.canon $libraryinfo.Main.Foo.vtable)))

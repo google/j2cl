@@ -49,5 +49,23 @@
  )
 )
 
+;;; Class<?> ImportsFullyQualified.getClass()
+(func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $importsfullyqualified.ImportsFullyQualified))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $importsfullyqualified.ImportsFullyQualified.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getImportsfullyqualified.ImportsFullyQualified();
+   (local.set $return.value (call $$getImportsfullyqualified.ImportsFullyQualified__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
+
  ;;; Code for importsfullyqualified.ImportsFullyQualified [vtable.init]
- (global.set $importsfullyqualified.ImportsFullyQualified.vtable (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $importsfullyqualified.ImportsFullyQualified.vtable)))
+ (global.set $importsfullyqualified.ImportsFullyQualified.vtable (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified) (rtt.canon $importsfullyqualified.ImportsFullyQualified.vtable)))

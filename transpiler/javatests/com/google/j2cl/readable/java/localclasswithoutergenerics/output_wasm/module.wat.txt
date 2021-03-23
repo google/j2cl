@@ -79,6 +79,24 @@
  )
 )
 
+;;; Class<?> LocalClassWithOuterGenerics.getClass()
+(func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics();
+   (local.set $return.value (call $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
+
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct
  (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable))
@@ -137,6 +155,24 @@
   )
  )
 )
+
+;;; Class<?> Bar.getClass()
+(func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar();
+   (local.set $return.value (call $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct
@@ -199,11 +235,29 @@
  )
 )
 
+;;; Class<?> Baz.getClass()
+(func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz();
+   (local.set $return.value (call $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
+
  ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [vtable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)))
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)))
 
  ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [vtable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)))
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar) (ref.func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)))
 
  ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [vtable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)))
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz) (ref.func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)))

@@ -75,6 +75,24 @@
  )
 )
 
+;;; Class<?> Main.getClass()
+(func $m_getClass__java_lang_Class@jsinnerclass.Main
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jsinnerclass.Main))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main();
+   (local.set $return.value (call $$getJsinnerclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main)
+
 ;;; Code for jsinnerclass.Main.Outer [CLASS]
 (type $jsinnerclass.Main.Outer (struct
  (field $vtable (ref null $jsinnerclass.Main.Outer.vtable))
@@ -158,6 +176,24 @@
  )
 )
 
+;;; Class<?> Outer.getClass()
+(func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jsinnerclass.Main.Outer))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer();
+   (local.set $return.value (call $$getJsinnerclass.Main.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer)
+
 ;;; Code for jsinnerclass.Main.Outer.Inner [CLASS]
 (type $jsinnerclass.Main.Outer.Inner (struct
  (field $vtable (ref null $jsinnerclass.Main.Outer.Inner.vtable))
@@ -231,11 +267,29 @@
  )
 )
 
+;;; Class<?> Inner.getClass()
+(func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jsinnerclass.Main.Outer.Inner))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.Inner.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer.Inner();
+   (local.set $return.value (call $$getJsinnerclass.Main.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner)
+
  ;;; Code for jsinnerclass.Main [vtable.init]
- (global.set $jsinnerclass.Main.vtable (struct.new_with_rtt $jsinnerclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $jsinnerclass.Main.vtable)))
+ (global.set $jsinnerclass.Main.vtable (struct.new_with_rtt $jsinnerclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main) (rtt.canon $jsinnerclass.Main.vtable)))
 
  ;;; Code for jsinnerclass.Main.Outer [vtable.init]
- (global.set $jsinnerclass.Main.Outer.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_method__int@jsinnerclass.Main.Outer) (rtt.canon $jsinnerclass.Main.Outer.vtable)))
+ (global.set $jsinnerclass.Main.Outer.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer) (ref.func $m_method__int@jsinnerclass.Main.Outer) (rtt.canon $jsinnerclass.Main.Outer.vtable)))
 
  ;;; Code for jsinnerclass.Main.Outer.Inner [vtable.init]
- (global.set $jsinnerclass.Main.Outer.Inner.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner) (rtt.canon $jsinnerclass.Main.Outer.Inner.vtable)))
+ (global.set $jsinnerclass.Main.Outer.Inner.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner) (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner) (rtt.canon $jsinnerclass.Main.Outer.Inner.vtable)))

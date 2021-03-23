@@ -77,5 +77,23 @@
  )
 )
 
+;;; Class<?> BreakStatement.getClass()
+(func $m_getClass__java_lang_Class@breakstatement.BreakStatement
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $breakstatement.BreakStatement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $breakstatement.BreakStatement.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getBreakstatement.BreakStatement();
+   (local.set $return.value (call $$getBreakstatement.BreakStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@breakstatement.BreakStatement)
+
  ;;; Code for breakstatement.BreakStatement [vtable.init]
- (global.set $breakstatement.BreakStatement.vtable (struct.new_with_rtt $breakstatement.BreakStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__void@breakstatement.BreakStatement) (rtt.canon $breakstatement.BreakStatement.vtable)))
+ (global.set $breakstatement.BreakStatement.vtable (struct.new_with_rtt $breakstatement.BreakStatement.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@breakstatement.BreakStatement) (ref.func $m_test__void@breakstatement.BreakStatement) (rtt.canon $breakstatement.BreakStatement.vtable)))

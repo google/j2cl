@@ -1327,6 +1327,24 @@
  )
 )
 
+;;; Class<?> AutoBoxing.getClass()
+(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $autoboxing.AutoBoxing))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing();
+   (local.set $return.value (call $$getAutoboxing.AutoBoxing__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing)
+
 ;;; Code for autoboxing.AutoBoxing.1Local [CLASS]
 (type $autoboxing.AutoBoxing.1Local (struct
  (field $vtable (ref null $autoboxing.AutoBoxing.1Local.vtable))
@@ -1393,6 +1411,24 @@
   )
  )
 )
+
+;;; Class<?> Local.getClass()
+(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $autoboxing.AutoBoxing.1Local))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.1Local.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing.1Local();
+   (local.set $return.value (call $$getAutoboxing.AutoBoxing.1Local__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local)
 
 ;;; Code for autoboxing.AutoBoxing.2Local [CLASS]
 (type $autoboxing.AutoBoxing.2Local (struct
@@ -1461,11 +1497,29 @@
  )
 )
 
+;;; Class<?> Local.getClass()
+(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $autoboxing.AutoBoxing.2Local))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.2Local.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing.2Local();
+   (local.set $return.value (call $$getAutoboxing.AutoBoxing.2Local__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
+
  ;;; Code for autoboxing.AutoBoxing [vtable.init]
- (global.set $autoboxing.AutoBoxing.vtable (struct.new_with_rtt $autoboxing.AutoBoxing.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_box__boolean__java_lang_Boolean@autoboxing.AutoBoxing) (ref.func $m_box__double__java_lang_Double@autoboxing.AutoBoxing) (ref.func $m_box__byte__java_lang_Byte@autoboxing.AutoBoxing) (ref.func $m_box__float__java_lang_Float@autoboxing.AutoBoxing) (ref.func $m_box__int__java_lang_Integer@autoboxing.AutoBoxing) (ref.func $m_box__long__java_lang_Long@autoboxing.AutoBoxing) (ref.func $m_box__short__java_lang_Short@autoboxing.AutoBoxing) (ref.func $m_box__char__java_lang_Character@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Boolean__boolean@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Double__double@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Byte__byte@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Float__float@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Integer__int@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Long__long@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Short__short@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Character__char@autoboxing.AutoBoxing) (ref.func $m_takesAndReturnsPrimitiveDouble__double__double@autoboxing.AutoBoxing) (ref.func $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void@autoboxing.AutoBoxing) (ref.func $m_takesFloatVarArgs__arrayOf_java_lang_Float__void@autoboxing.AutoBoxing) (ref.func $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double@autoboxing.AutoBoxing) (ref.func $m_sumWithoutBoxing__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing) (ref.func $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing) (ref.func $m_testBoxing__void@autoboxing.AutoBoxing) (ref.func $m_testUnboxing__void@autoboxing.AutoBoxing) (ref.func $m_testUnboxingBoolean__void@autoboxing.AutoBoxing) (ref.func $m_testUnboxingEquality__void@autoboxing.AutoBoxing) (ref.func $m_testAssertStatement__void@autoboxing.AutoBoxing) (rtt.canon $autoboxing.AutoBoxing.vtable)))
+ (global.set $autoboxing.AutoBoxing.vtable (struct.new_with_rtt $autoboxing.AutoBoxing.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing) (ref.func $m_box__boolean__java_lang_Boolean@autoboxing.AutoBoxing) (ref.func $m_box__double__java_lang_Double@autoboxing.AutoBoxing) (ref.func $m_box__byte__java_lang_Byte@autoboxing.AutoBoxing) (ref.func $m_box__float__java_lang_Float@autoboxing.AutoBoxing) (ref.func $m_box__int__java_lang_Integer@autoboxing.AutoBoxing) (ref.func $m_box__long__java_lang_Long@autoboxing.AutoBoxing) (ref.func $m_box__short__java_lang_Short@autoboxing.AutoBoxing) (ref.func $m_box__char__java_lang_Character@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Boolean__boolean@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Double__double@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Byte__byte@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Float__float@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Integer__int@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Long__long@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Short__short@autoboxing.AutoBoxing) (ref.func $m_unbox__java_lang_Character__char@autoboxing.AutoBoxing) (ref.func $m_takesAndReturnsPrimitiveDouble__double__double@autoboxing.AutoBoxing) (ref.func $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void@autoboxing.AutoBoxing) (ref.func $m_takesFloatVarArgs__arrayOf_java_lang_Float__void@autoboxing.AutoBoxing) (ref.func $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double@autoboxing.AutoBoxing) (ref.func $m_sumWithoutBoxing__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing) (ref.func $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing) (ref.func $m_testBoxing__void@autoboxing.AutoBoxing) (ref.func $m_testUnboxing__void@autoboxing.AutoBoxing) (ref.func $m_testUnboxingBoolean__void@autoboxing.AutoBoxing) (ref.func $m_testUnboxingEquality__void@autoboxing.AutoBoxing) (ref.func $m_testAssertStatement__void@autoboxing.AutoBoxing) (rtt.canon $autoboxing.AutoBoxing.vtable)))
 
  ;;; Code for autoboxing.AutoBoxing.1Local [vtable.init]
- (global.set $autoboxing.AutoBoxing.1Local.vtable (struct.new_with_rtt $autoboxing.AutoBoxing.1Local.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.1Local) (rtt.canon $autoboxing.AutoBoxing.1Local.vtable)))
+ (global.set $autoboxing.AutoBoxing.1Local.vtable (struct.new_with_rtt $autoboxing.AutoBoxing.1Local.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local) (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.1Local) (rtt.canon $autoboxing.AutoBoxing.1Local.vtable)))
 
  ;;; Code for autoboxing.AutoBoxing.2Local [vtable.init]
- (global.set $autoboxing.AutoBoxing.2Local.vtable (struct.new_with_rtt $autoboxing.AutoBoxing.2Local.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.2Local) (rtt.canon $autoboxing.AutoBoxing.2Local.vtable)))
+ (global.set $autoboxing.AutoBoxing.2Local.vtable (struct.new_with_rtt $autoboxing.AutoBoxing.2Local.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local) (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.2Local) (rtt.canon $autoboxing.AutoBoxing.2Local.vtable)))

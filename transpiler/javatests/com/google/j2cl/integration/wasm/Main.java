@@ -16,6 +16,7 @@
 package com.google.j2cl.integration.wasm;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
@@ -35,6 +36,7 @@ public class Main {
     testSwitch();
     testWasmAnnotation();
     testMathLogAndFriends();
+    testClassLiterals();
   }
 
   static class A {
@@ -154,5 +156,46 @@ public class Main {
       return;
     }
     fail();
+  }
+
+  private static class SomeClass {}
+
+  private interface SomeInterface {}
+
+  private enum SomeEnum {
+    A
+  }
+
+  private static void testClassLiterals() {
+    assertEquals("com.google.j2cl.integration.wasm.Main$SomeClass", SomeClass.class.getName());
+    assertEquals(Object.class, SomeClass.class.getSuperclass());
+    assertFalse(SomeClass.class.isEnum());
+    assertFalse(SomeClass.class.isInterface());
+    assertFalse(SomeClass.class.isArray());
+    assertFalse(SomeClass.class.isPrimitive());
+    assertEquals(
+        "com.google.j2cl.integration.wasm.Main$SomeInterface", SomeInterface.class.getName());
+    assertEquals(null, SomeInterface.class.getSuperclass());
+    assertFalse(SomeInterface.class.isEnum());
+    assertTrue(SomeInterface.class.isInterface());
+    assertFalse(SomeInterface.class.isArray());
+    assertFalse(SomeInterface.class.isPrimitive());
+    assertEquals("com.google.j2cl.integration.wasm.Main$SomeEnum", SomeEnum.class.getName());
+    assertEquals(Enum.class, SomeEnum.class.getSuperclass());
+    assertTrue(SomeEnum.class.isEnum());
+    assertFalse(SomeEnum.class.isInterface());
+    assertFalse(SomeEnum.class.isArray());
+    assertFalse(SomeEnum.class.isPrimitive());
+    assertEquals("int", int.class.getName());
+    assertEquals(null, int.class.getSuperclass());
+    assertFalse(int.class.isEnum());
+    assertFalse(int.class.isInterface());
+    assertFalse(int.class.isArray());
+    assertTrue(int.class.isPrimitive());
+    assertEquals(int.class, int[].class.getComponentType());
+    assertFalse(int[].class.isEnum());
+    assertFalse(int[].class.isInterface());
+    assertTrue(int[].class.isArray());
+    assertFalse(int[].class.isPrimitive());
   }
 }

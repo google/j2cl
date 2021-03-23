@@ -59,9 +59,9 @@
    ;; String e = javaemul.internal.StringPool.$getString_|foo|();
    
    (local.set $e (call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool ))
-   ;; Class<?> f = SimpleLiterals.class;
+   ;; Class<?> f = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
    
-   (local.set $f (ref.null $java.lang.Class))
+   (local.set $f (call $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool ))
   )
  )
 )
@@ -86,5 +86,23 @@
  )
 )
 
+;;; Class<?> SimpleLiterals.getClass()
+(func $m_getClass__java_lang_Class@simpleliterals.SimpleLiterals
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $simpleliterals.SimpleLiterals))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
+   (local.set $return.value (call $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@simpleliterals.SimpleLiterals)
+
  ;;; Code for simpleliterals.SimpleLiterals [vtable.init]
- (global.set $simpleliterals.SimpleLiterals.vtable (struct.new_with_rtt $simpleliterals.SimpleLiterals.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@simpleliterals.SimpleLiterals) (rtt.canon $simpleliterals.SimpleLiterals.vtable)))
+ (global.set $simpleliterals.SimpleLiterals.vtable (struct.new_with_rtt $simpleliterals.SimpleLiterals.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@simpleliterals.SimpleLiterals) (ref.func $m_main__void@simpleliterals.SimpleLiterals) (rtt.canon $simpleliterals.SimpleLiterals.vtable)))

@@ -73,6 +73,24 @@
  )
 )
 
+;;; Class<?> SomeClass.getClass()
+(func $m_getClass__java_lang_Class@anonymousclass.SomeClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.SomeClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.SomeClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.SomeClass();
+   (local.set $return.value (call $$getAnonymousclass.SomeClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@anonymousclass.SomeClass)
+
 ;;; Code for anonymousclass.AnonymousClass [CLASS]
 (type $anonymousclass.AnonymousClass (struct
  (field $vtable (ref null $anonymousclass.AnonymousClass.vtable))
@@ -134,6 +152,24 @@
   )
  )
 )
+
+;;; Class<?> AnonymousClass.getClass()
+(func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.AnonymousClass))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.AnonymousClass();
+   (local.set $return.value (call $$getAnonymousclass.AnonymousClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass)
 
 ;;; Code for anonymousclass.AnonymousClass.1 [CLASS]
 (type $anonymousclass.AnonymousClass.1 (struct
@@ -221,6 +257,24 @@
  )
 )
 
+;;; Class<?> <anonymous> extends SomeClass.getClass()
+(func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.AnonymousClass.1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.AnonymousClass.1();
+   (local.set $return.value (call $$getAnonymousclass.AnonymousClass.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1)
+
 ;;; Code for anonymousclass.SomeInterface [INTERFACE]
 
 ;;; void SomeInterface.$clinit()
@@ -245,6 +299,22 @@
   )
  )
 )
+
+;;; Class<?> SomeInterface.getClass()
+(func $m_getClass__java_lang_Class@anonymousclass.SomeInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.SomeInterface();
+   (local.set $return.value (call $$getAnonymousclass.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@anonymousclass.SomeInterface)
 
 ;;; Code for anonymousclass.SomeInterface.1 [CLASS]
 (type $anonymousclass.SomeInterface.1 (struct
@@ -311,11 +381,29 @@
  )
 )
 
+;;; Class<?> <anonymous> extends SomeClass.getClass()
+(func $m_getClass__java_lang_Class@anonymousclass.SomeInterface.1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $anonymousclass.SomeInterface.1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.SomeInterface.1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.SomeInterface.1();
+   (local.set $return.value (call $$getAnonymousclass.SomeInterface.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@anonymousclass.SomeInterface.1)
+
  ;;; Code for anonymousclass.AnonymousClass [vtable.init]
- (global.set $anonymousclass.AnonymousClass.vtable (struct.new_with_rtt $anonymousclass.AnonymousClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_main__void@anonymousclass.AnonymousClass) (rtt.canon $anonymousclass.AnonymousClass.vtable)))
+ (global.set $anonymousclass.AnonymousClass.vtable (struct.new_with_rtt $anonymousclass.AnonymousClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass) (ref.func $m_main__void@anonymousclass.AnonymousClass) (rtt.canon $anonymousclass.AnonymousClass.vtable)))
 
  ;;; Code for anonymousclass.AnonymousClass.1 [vtable.init]
- (global.set $anonymousclass.AnonymousClass.1.vtable (struct.new_with_rtt $anonymousclass.AnonymousClass.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1) (rtt.canon $anonymousclass.AnonymousClass.1.vtable)))
+ (global.set $anonymousclass.AnonymousClass.1.vtable (struct.new_with_rtt $anonymousclass.AnonymousClass.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1) (ref.func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1) (rtt.canon $anonymousclass.AnonymousClass.1.vtable)))
 
  ;;; Code for anonymousclass.SomeInterface.1 [vtable.init]
- (global.set $anonymousclass.SomeInterface.1.vtable (struct.new_with_rtt $anonymousclass.SomeInterface.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_foo__java_lang_String@anonymousclass.SomeInterface.1) (rtt.canon $anonymousclass.SomeInterface.1.vtable)))
+ (global.set $anonymousclass.SomeInterface.1.vtable (struct.new_with_rtt $anonymousclass.SomeInterface.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousclass.SomeInterface.1) (ref.func $m_foo__java_lang_String@anonymousclass.SomeInterface.1) (rtt.canon $anonymousclass.SomeInterface.1.vtable)))

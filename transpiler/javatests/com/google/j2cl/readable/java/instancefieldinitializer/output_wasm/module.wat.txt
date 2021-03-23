@@ -66,5 +66,23 @@
  )
 )
 
+;;; Class<?> InstanceFieldInitializer.getClass()
+(func $m_getClass__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancefieldinitializer.InstanceFieldInitializer.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getInstancefieldinitializer.InstanceFieldInitializer();
+   (local.set $return.value (call $$getInstancefieldinitializer.InstanceFieldInitializer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer)
+
  ;;; Code for instancefieldinitializer.InstanceFieldInitializer [vtable.init]
- (global.set $instancefieldinitializer.InstanceFieldInitializer.vtable (struct.new_with_rtt $instancefieldinitializer.InstanceFieldInitializer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $instancefieldinitializer.InstanceFieldInitializer.vtable)))
+ (global.set $instancefieldinitializer.InstanceFieldInitializer.vtable (struct.new_with_rtt $instancefieldinitializer.InstanceFieldInitializer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer) (rtt.canon $instancefieldinitializer.InstanceFieldInitializer.vtable)))

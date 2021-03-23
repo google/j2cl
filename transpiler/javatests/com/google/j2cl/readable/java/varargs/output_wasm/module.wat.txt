@@ -239,6 +239,24 @@
  )
 )
 
+;;; Class<?> Varargs.getClass()
+(func $m_getClass__java_lang_Class@varargs.Varargs
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $varargs.Varargs))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Varargs();
+   (local.set $return.value (call $$getVarargs.Varargs__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@varargs.Varargs)
+
 ;;; Code for varargs.Child [CLASS]
 (type $varargs.Child (struct
  (field $vtable (ref null $varargs.Child.vtable))
@@ -294,8 +312,26 @@
  )
 )
 
+;;; Class<?> Child.getClass()
+(func $m_getClass__java_lang_Class@varargs.Child
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $varargs.Child))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Child.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Child();
+   (local.set $return.value (call $$getVarargs.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@varargs.Child)
+
  ;;; Code for varargs.Varargs [vtable.init]
- (global.set $varargs.Varargs.vtable (struct.new_with_rtt $varargs.Varargs.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs) (ref.func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs) (ref.func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs) (ref.func $m_main__void@varargs.Varargs) (rtt.canon $varargs.Varargs.vtable)))
+ (global.set $varargs.Varargs.vtable (struct.new_with_rtt $varargs.Varargs.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@varargs.Varargs) (ref.func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs) (ref.func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs) (ref.func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs) (ref.func $m_main__void@varargs.Varargs) (rtt.canon $varargs.Varargs.vtable)))
 
  ;;; Code for varargs.Child [vtable.init]
- (global.set $varargs.Child.vtable (struct.new_with_rtt $varargs.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs) (ref.func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs) (ref.func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs) (ref.func $m_main__void@varargs.Varargs) (rtt.canon $varargs.Child.vtable)))
+ (global.set $varargs.Child.vtable (struct.new_with_rtt $varargs.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@varargs.Child) (ref.func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs) (ref.func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs) (ref.func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs) (ref.func $m_main__void@varargs.Varargs) (rtt.canon $varargs.Child.vtable)))

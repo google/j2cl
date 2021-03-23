@@ -675,6 +675,24 @@
  )
 )
 
+;;; Class<?> ArithmeticExpressions.getClass()
+(func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getArithmeticexpressions.ArithmeticExpressions();
+   (local.set $return.value (call $$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
+
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [CLASS]
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
  (field $vtable (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable))
@@ -725,8 +743,26 @@
  )
 )
 
+;;; Class<?> Ref.getClass()
+(func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.1Ref.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getArithmeticexpressions.ArithmeticExpressions.1Ref();
+   (local.set $return.value (call $$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)
+
  ;;; Code for arithmeticexpressions.ArithmeticExpressions [vtable.init]
- (global.set $arithmeticexpressions.ArithmeticExpressions.vtable (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions) (rtt.canon $arithmeticexpressions.ArithmeticExpressions.vtable)))
+ (global.set $arithmeticexpressions.ArithmeticExpressions.vtable (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions) (ref.func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions) (rtt.canon $arithmeticexpressions.ArithmeticExpressions.vtable)))
 
  ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [vtable.init]
- (global.set $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@java.lang.Object) (rtt.canon $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)))
+ (global.set $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref) (rtt.canon $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)))
