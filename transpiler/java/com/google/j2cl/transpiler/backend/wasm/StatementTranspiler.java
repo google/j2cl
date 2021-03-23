@@ -231,13 +231,14 @@ class StatementTranspiler {
 
       @Override
       public boolean enterThrowStatement(ThrowStatement throwStatement) {
-        // TODO(rluble): This is a nominal placeholder implementation that throws to JavaScript
-        // until WASM exception handling is added.
-        // renderExpression(throwStatement.getExpression());
-
         builder.newLine();
         builder.emitWithMapping(
-            throwStatement.getSourcePosition(), () -> builder.append("(unreachable)"));
+            throwStatement.getSourcePosition(),
+            () -> {
+              builder.append("(throw $exception.event ");
+              renderExpression(throwStatement.getExpression());
+              builder.append(")");
+            });
         return false;
       }
 

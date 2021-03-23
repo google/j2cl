@@ -177,7 +177,11 @@
   (block
    ;; throw (Object $cast_expression = TryCatch.this.getT(new Exception.<init>()),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Exception) $cast_expression)));
    
-   (unreachable)
+   (throw $exception.event (block (result (ref null $java.lang.Exception))
+    
+    (local.set $$cast_expression (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))))
+    (if (result (ref null $java.lang.Exception)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Exception)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Exception.rtt))))
+   ))
   )
  )
 )
@@ -208,7 +212,7 @@
   (block
    ;; throw TryCatch.this.getThrowable();
    
-   (unreachable)
+   (throw $exception.event (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)))
   )
  )
 )
