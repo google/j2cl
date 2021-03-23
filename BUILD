@@ -15,8 +15,6 @@ exports_files(["LICENSE"])
 # This is not an alias since it is intended only for js targets not j2cl targets
 closure_js_library(
     name = "jre",
-    # TODO(b/183218236): Remove the tag after the bug is fixed
-    tags = ["keep_dep"],
     exports = ["//jre/java:jre"],
 )
 
