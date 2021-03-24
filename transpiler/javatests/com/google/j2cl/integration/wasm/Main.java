@@ -37,6 +37,7 @@ public class Main {
     testWasmAnnotation();
     testMathLogAndFriends();
     testClassLiterals();
+    testTry();
   }
 
   static class A {
@@ -197,5 +198,15 @@ public class Main {
     assertFalse(int[].class.isInterface());
     assertTrue(int[].class.isArray());
     assertFalse(int[].class.isPrimitive());
+  }
+
+  private static void testTry() {
+    int i = 1;
+    try {
+      i += 10;
+    } finally {
+      i += 3;
+    }
+    assertEquals(14, i);
   }
 }

@@ -64,6 +64,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalEnums;
   public DeclaredTypeDescriptor javaemulInternalConstructor;
   public DeclaredTypeDescriptor javaemulInternalPlatform;
+  public DeclaredTypeDescriptor javaemulInternalExceptions;
 
   public ArrayTypeDescriptor javaLangObjectArray;
 
@@ -294,7 +295,6 @@ public class TypeDescriptors {
     ASSERTS("vmbootstrap", "Asserts"),
     ARRAYS("vmbootstrap", "Arrays"),
     CASTS("vmbootstrap", "Casts"),
-    EXCEPTIONS("vmbootstrap", "Exceptions"),
     LONG_UTILS("vmbootstrap", "LongUtils"),
     JAVA_SCRIPT_OBJECT("vmbootstrap", "JavaScriptObject"),
     JAVA_SCRIPT_INTERFACE("vmbootstrap", "JavaScriptInterface"),
@@ -523,6 +523,9 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.Platform":
           typeDescriptors.javaemulInternalPlatform = referenceType;
+          break;
+        case "javaemul.internal.Exceptions":
+          typeDescriptors.javaemulInternalExceptions = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

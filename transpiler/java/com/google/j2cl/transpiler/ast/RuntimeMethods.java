@@ -190,13 +190,10 @@ public class RuntimeMethods {
 
   /** Create a call to an Exceptions method. */
   public static MethodCall createExceptionsMethodCall(String methodName, Expression... arguments) {
-    return createExceptionsMethodCall(methodName, Arrays.asList(arguments));
-  }
-
-  /** Create a call to an Exceptions method. */
-  public static MethodCall createExceptionsMethodCall(
-      String methodName, List<Expression> arguments) {
-    return createRuntimeMethodCall(BootstrapType.EXCEPTIONS.getDescriptor(), methodName, arguments);
+    return MethodCall.Builder.from(
+            TypeDescriptors.get().javaemulInternalExceptions.getMethodDescriptorByName(methodName))
+        .setArguments(Arrays.asList(arguments))
+        .build();
   }
 
   /** Create a call to InternalPreconditions.checkNotNull method. */
@@ -400,31 +397,6 @@ public class RuntimeMethods {
                                           TypeDescriptors.get().javaLangObjectArray,
                                           TypeDescriptors.get().javaLangObject,
                                           PrimitiveTypes.DOUBLE)
-                                      .build())
-                              .build())
-                      .put(
-                          BootstrapType.EXCEPTIONS.getDescriptor(),
-                          // Exception methods
-                          ImmutableMap.<String, MethodInfo>builder()
-                              .put(
-                                  "toJava",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangThrowable)
-                                      .setParameters(TypeDescriptors.get().javaLangObject)
-                                      .build())
-                              .put(
-                                  "toJs",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangObject)
-                                      .setParameters(TypeDescriptors.get().javaLangThrowable)
-                                      .build())
-                              .put(
-                                  "safeClose",
-                                  MethodInfo.newBuilder()
-                                      .setReturnType(TypeDescriptors.get().javaLangThrowable)
-                                      .setParameters(
-                                          TypeDescriptors.get().javaLangObject,
-                                          TypeDescriptors.get().javaLangThrowable)
                                       .build())
                               .build())
                       .put(

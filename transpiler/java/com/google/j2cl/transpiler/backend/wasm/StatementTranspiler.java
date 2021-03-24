@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
+import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.List;
@@ -239,6 +240,17 @@ class StatementTranspiler {
               renderExpression(throwStatement.getExpression());
               builder.append(")");
             });
+        return false;
+      }
+
+      @Override
+      public boolean enterTryStatement(TryStatement tryStatement) {
+        // Minimalistic render of try statements.
+
+        render(tryStatement.getBody());
+        if (tryStatement.getFinallyBlock() != null) {
+          render(tryStatement.getFinallyBlock());
+        }
         return false;
       }
 

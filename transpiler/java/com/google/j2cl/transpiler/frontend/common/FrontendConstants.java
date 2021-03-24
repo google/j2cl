@@ -61,5 +61,6 @@ public class FrontendConstants {
           "javaemul.internal.Enums",
           "javaemul.internal.Constructor",
           "javaemul.internal.Platform",
-          "javaemul.internal.WasmArrayHelper");
+          "javaemul.internal.WasmArrayHelper",
+          "javaemul.internal.Exceptions");
 }
