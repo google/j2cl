@@ -45,10 +45,20 @@ import java.util.Map;
 /** Adds support for type literals and getClass(). */
 public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
+  private final Type classLiteralPoolType =
+      new Type(
+          SourcePosition.NONE,
+          Visibility.PRIVATE,
+          TypeDeclaration.newBuilder()
+              .setClassComponents(ImmutableList.of("javaemul.internal.ClassLiteralPool"))
+              .setKind(Kind.INTERFACE)
+              .build());
+
   @Override
   public void applyTo(Library library) {
     synthesizeGetClassMethods(library);
     replaceTypeLiterals(library);
+    Iterables.getLast(library.getCompilationUnits()).addType(classLiteralPoolType);
   }
 
   /** Synthesizes the getClass() override for this class. */
@@ -62,12 +72,10 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
                 t.getMembers().removeIf(m -> m.getDescriptor().getName().equals("getClass"));
               }
 
-              MethodDescriptor getClassMethodDescriptor =
-                  getGetClassMethodDescriptor(t.getTypeDescriptor());
               // return Type.class;
               t.addMember(
                   Method.newBuilder()
-                      .setMethodDescriptor(getClassMethodDescriptor)
+                      .setMethodDescriptor(getGetClassMethodDescriptor(t.getTypeDescriptor()))
                       .addStatements(
                           ReturnStatement.newBuilder()
                               .setExpression(
@@ -103,51 +111,32 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
   /** Replaces type literals in the AST for the corresponding call to the synthetic lazy getter. */
   private void replaceTypeLiterals(Library library) {
-    Type classLiteralPoolType =
-        new Type(SourcePosition.NONE, Visibility.PRIVATE, getClassLiteralPoolDeclaration());
-
     library.accept(
         new AbstractRewriter() {
           @Override
           public Expression rewriteTypeLiteral(TypeLiteral typeLiteral) {
-            return implementTypeLiteral(
-                classLiteralPoolType, typeLiteral.getReferencedTypeDescriptor());
+            return implementTypeLiteral(typeLiteral.getReferencedTypeDescriptor());
           }
         });
-
-    Iterables.getLast(library.getCompilationUnits()).addType(classLiteralPoolType);
-  }
-
-  private static TypeDeclaration getClassLiteralPoolDeclaration() {
-    return TypeDeclaration.newBuilder()
-        .setClassComponents(ImmutableList.of("javaemul.internal.ClassLiteralPool"))
-        .setKind(Kind.INTERFACE)
-        .build();
   }
 
   /** Returns a call to obtain the class literal using the corresponding lazy getter. */
-  private Expression implementTypeLiteral(
-      Type classLiteralPoolType, TypeDescriptor typeDescriptor) {
+  private Expression implementTypeLiteral(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
       return MethodCall.Builder.from(
               TypeDescriptors.get()
                   .javaLangClass
                   .getMethodDescriptor("getArrayType", PrimitiveTypes.INT))
-          .setQualifier(
-              getClassLiteralMethodCall(
-                  classLiteralPoolType, arrayTypeDescriptor.getLeafTypeDescriptor()))
+          .setQualifier(getClassLiteralMethodCall(arrayTypeDescriptor.getLeafTypeDescriptor()))
           .setArguments(NumberLiteral.fromInt(arrayTypeDescriptor.getDimensions()))
           .build();
     }
-    return getClassLiteralMethodCall(classLiteralPoolType, typeDescriptor);
+    return getClassLiteralMethodCall(typeDescriptor);
   }
 
-  private Expression getClassLiteralMethodCall(
-      Type classLiteralPoolType, TypeDescriptor typeDescriptor) {
-    return MethodCall.Builder.from(
-            getOrCreateClassLiteralMethod(classLiteralPoolType, typeDescriptor))
-        .build();
+  private Expression getClassLiteralMethodCall(TypeDescriptor typeDescriptor) {
+    return MethodCall.Builder.from(getOrCreateClassLiteralMethod(typeDescriptor)).build();
   }
 
   private final Map<TypeDescriptor, MethodDescriptor> lazyGettersByType = new HashMap<>();
@@ -156,8 +145,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
    * Returns the descriptor for the getter of {@code typeDescriptor}, creating it if it did not
    * exist.
    */
-  private MethodDescriptor getOrCreateClassLiteralMethod(
-      Type classLiteralPoolType, TypeDescriptor typeDescriptor) {
+  private MethodDescriptor getOrCreateClassLiteralMethod(TypeDescriptor typeDescriptor) {
     typeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor();
     MethodDescriptor getClassLiteralMethod = lazyGettersByType.get(typeDescriptor);
     if (getClassLiteralMethod == null) {
@@ -168,7 +156,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
       getClassLiteralMethod =
           classLiteralPoolType.synthesizeLazilyInitializedField(
-              fieldName, createClassObject(classLiteralPoolType, typeDescriptor));
+              fieldName, getClassObjectCreationExpression(typeDescriptor));
 
       lazyGettersByType.put(typeDescriptor, getClassLiteralMethod);
     }
@@ -177,7 +165,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
   }
 
   /** Creates expression that instantiates the class object for {@code typeDescriptor}. */
-  private Expression createClassObject(Type classLiteralPoolType, TypeDescriptor typeDescriptor) {
+  private Expression getClassObjectCreationExpression(TypeDescriptor typeDescriptor) {
     if (typeDescriptor.isPrimitive()) {
       PrimitiveTypeDescriptor primitiveTypeDescriptor = (PrimitiveTypeDescriptor) typeDescriptor;
       return getClassObjectCreationExpression(
@@ -192,7 +180,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
       Expression superClassExpression =
           superTypeDescriptor == null
               ? TypeDescriptors.get().javaLangClass.getDefaultValue()
-              : getClassLiteralMethodCall(classLiteralPoolType, superTypeDescriptor);
+              : getClassLiteralMethodCall(superTypeDescriptor);
       return getClassObjectCreationExpression(
           "createForClass",
           new StringLiteral(declaredTypeDescriptor.getQualifiedBinaryName()),
@@ -211,9 +199,9 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
   /** Creates expression that instantiates the class object for {@code typeDescriptor}. */
   private Expression getClassObjectCreationExpression(
       String creationMethodName, Expression... arguments) {
-    DeclaredTypeDescriptor javaLangClass = TypeDescriptors.get().javaLangClass;
-    MethodDescriptor creationMethod = javaLangClass.getMethodDescriptorByName(creationMethodName);
-
-    return MethodCall.Builder.from(creationMethod).setArguments(arguments).build();
+    return MethodCall.Builder.from(
+            TypeDescriptors.get().javaLangClass.getMethodDescriptorByName(creationMethodName))
+        .setArguments(arguments)
+        .build();
   }
 }
