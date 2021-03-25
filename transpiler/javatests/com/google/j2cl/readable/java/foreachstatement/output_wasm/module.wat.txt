@@ -347,7 +347,7 @@
  (block $return.label
   (block
    ;; Iterable.this.forEach(arg0);
-   (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (ref.null $java.lang.Object)(local.get $arg0))
+   (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (local.get $this)(local.get $arg0))
   )
  )
 )
@@ -363,7 +363,7 @@
  (block $return.label
   (block
    ;; return Iterable.this.spliterator();
-   (local.set $return.value (call $m_spliterator__java_util_Spliterator@java.lang.Iterable (ref.null $java.lang.Object)))
+   (local.set $return.value (call $m_spliterator__java_util_Spliterator@java.lang.Iterable (local.get $this)))
    (br $return.label)
   )
  )
@@ -486,7 +486,7 @@
  (block $return.label
   (block
    ;; Iterable.this.forEach(arg0);
-   (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (ref.null $java.lang.Object)(local.get $arg0))
+   (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (local.get $this)(local.get $arg0))
   )
  )
 )
@@ -502,7 +502,7 @@
  (block $return.label
   (block
    ;; return Iterable.this.spliterator();
-   (local.set $return.value (call $m_spliterator__java_util_Spliterator@java.lang.Iterable (ref.null $java.lang.Object)))
+   (local.set $return.value (call $m_spliterator__java_util_Spliterator@java.lang.Iterable (local.get $this)))
    (br $return.label)
   )
  )
@@ -605,7 +605,7 @@
  (block $return.label
   (block
    ;; Iterable.this.forEach(arg0);
-   (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (ref.null $java.lang.Object)(local.get $arg0))
+   (call $m_forEach__java_util_function_Consumer__void@java.lang.Iterable (local.get $this)(local.get $arg0))
   )
  )
 )
@@ -621,7 +621,7 @@
  (block $return.label
   (block
    ;; return Iterable.this.spliterator();
-   (local.set $return.value (call $m_spliterator__java_util_Spliterator@java.lang.Iterable (ref.null $java.lang.Object)))
+   (local.set $return.value (call $m_spliterator__java_util_Spliterator@java.lang.Iterable (local.get $this)))
    (br $return.label)
   )
  )

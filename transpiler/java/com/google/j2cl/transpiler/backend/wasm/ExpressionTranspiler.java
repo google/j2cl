@@ -34,7 +34,9 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
+import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -100,7 +102,7 @@ final class ExpressionTranspiler {
         WasmBinaryOperation wasmOperation = WasmBinaryOperation.getOperation(expression);
         if (wasmOperation == null) {
           // TODO(dramaix): remove and checkArgument once every operator is implemented.
-          enterExpression(expression);
+          renderUnimplementedExpression(expression);
           return;
         }
 
@@ -198,18 +200,25 @@ final class ExpressionTranspiler {
           // TODO(rluble): implement interface casts.
           render(castExpression.getExpression());
           return false;
-        } else if (castTypeDescriptor.isClass()
-            || castTypeDescriptor.isEnum()
-            || castTypeDescriptor.isArray()) {
-          // TODO(b/180967010): implement full support of array cast.
-          sourceBuilder.append("(ref.cast ");
-          render(castExpression.getExpression());
-          sourceBuilder.append(
-              format(" (global.get %s))", environment.getRttGlobalName(castTypeDescriptor)));
-          return false;
         }
-        // TODO(b/170691713) : handle primitive conversions and coersions.
-        return enterExpression(castExpression);
+
+        // TODO(b/180967010): implement full support of array cast.
+        sourceBuilder.append("(ref.cast ");
+        render(castExpression.getExpression());
+        sourceBuilder.append(
+            format(" (global.get %s))", environment.getRttGlobalName(castTypeDescriptor)));
+        return false;
+      }
+
+      @Override
+      public boolean enterJsDocCastExpression(JsDocCastExpression expression) {
+        // TODO(b/183661534): JsDocCastExpressions should not reach the output stage.
+        // Render JsDoc casts as regular casts for now.
+        return enterCastExpression(
+            CastExpression.newBuilder()
+                .setExpression(expression.getExpression())
+                .setCastTypeDescriptor(expression.getTypeDescriptor())
+                .build());
       }
 
       @Override
@@ -227,15 +236,8 @@ final class ExpressionTranspiler {
       }
 
       @Override
-      public boolean enterExpression(Expression expression) {
-        // TODO(rluble): remove this method which is only a place holder until all expressions are
-        // implemented.
-        if (!returnsVoid(expression)) {
-          // This is an unimplemented expression that returns a value (i.e. not a call to a
-          // method returning void).
-          // Emit the default value for the type as a place holder so that the module compiles.
-          render(expression.getTypeDescriptor().getDefaultValue());
-        }
+      public boolean enterFunctionExpression(FunctionExpression expression) {
+        renderUnimplementedExpression(expression);
         return false;
       }
 
@@ -267,8 +269,9 @@ final class ExpressionTranspiler {
                       ((DeclaredTypeDescriptor) testTypeDescriptor).getTypeDeclaration())));
           return false;
         }
-        // TODO(rluble): handle interface, primitive and array casts.
-        return enterExpression(instanceOfExpression);
+        // TODO(rluble): handle interface and array instanceof expressions.
+        renderUnimplementedExpression(instanceOfExpression);
+        return false;
       }
 
       @Override
@@ -324,7 +327,8 @@ final class ExpressionTranspiler {
           return false;
         }
         // TODO(rluble): remove once all method call types are implemented.
-        return super.enterMethodCall(methodCall);
+        renderUnimplementedExpression(methodCall);
+        return false;
       }
 
       @Override
@@ -425,9 +429,6 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterThisReference(ThisReference thisReference) {
-        if (thisReference.getTypeDescriptor().isInterface()) {
-          return super.enterThisReference(thisReference);
-        }
         sourceBuilder.append("(local.get $this)");
         return false;
       }
@@ -485,8 +486,24 @@ final class ExpressionTranspiler {
         return false;
       }
 
+      @Override
+      public boolean enterExpression(Expression expression) {
+        throw new IllegalStateException("Unhandled expression " + expression);
+      }
+
       private void render(Expression expression) {
         expression.accept(this);
+      }
+
+      // TODO(rluble): remove this method which is only a place holder until all expressions are
+      // implemented.
+      private void renderUnimplementedExpression(Expression expression) {
+        if (!returnsVoid(expression)) {
+          // This is an unimplemented expression that returns a value (i.e. not a call to a
+          // method returning void).
+          // Emit the default value for the type as a place holder so that the module compiles.
+          render(expression.getTypeDescriptor().getDefaultValue());
+        }
       }
     }.render(expression);
   }

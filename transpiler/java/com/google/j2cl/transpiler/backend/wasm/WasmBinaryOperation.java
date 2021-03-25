@@ -112,7 +112,7 @@ public enum WasmBinaryOperation {
     checkState(wasmOperationByBinaryOperator.containsKey(operator));
 
     if (!expression.getTypeDescriptor().isPrimitive() && operator == BinaryOperator.PLUS) {
-      // TODO(dramaix): handle string concatenation
+      // TODO(b/170691638): handle string concatenation
       return null;
     }
 

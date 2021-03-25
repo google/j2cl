@@ -393,7 +393,7 @@
  (block $return.label
   (block
    ;; new $1.<init>(InterfaceWithThisReference.this);
-   (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.rtt))(ref.null $java.lang.Object)))
+   (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference__void_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.rtt))(local.get $this)))
   )
  )
 )
@@ -471,7 +471,7 @@
  (block $return.label
   (block
    ;; InterfaceWithThisReference.this.foo();
-   (call $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (ref.null $java.lang.Object))
+   (call $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference (local.get $this))
   )
  )
 )

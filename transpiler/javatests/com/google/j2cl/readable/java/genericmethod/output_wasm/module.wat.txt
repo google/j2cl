@@ -238,7 +238,7 @@
     (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
    ))
    ;; (s = /** @type {String} */ (GenericMethod.this.unchecked()));
-   (local.set $s (ref.null $java.lang.String))
+   (local.set $s (ref.cast (call_ref (local.get $this)(struct.get $genericmethod.GenericMethod.vtable $m_unchecked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))
   )
  )
 )
