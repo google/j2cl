@@ -111,7 +111,111 @@ public final class Math {
   }
 
   public static double exp(double x) {
-    throw new UnsupportedOperationException();
+    // Adapted from V8 ieee754.cc
+
+    final double //
+        one = 1.0,
+        invln2 = 1.44269504088896338700e+00, /* 0x3FF71547, 0x652B82FE */
+        o_threshold = 7.09782712893383973096e+02, /* 0x40862E42, 0xFEFA39EF */
+        u_threshold = -7.45133219101941108420e+02, /* 0xC0874910, 0xD52D3051 */
+        P1 = 1.66666666666666019037e-01, /* 0x3FC55555, 0x5555553E */
+        P2 = -2.77777777770155933842e-03, /* 0xBF66C16C, 0x16BEBD93 */
+        P3 = 6.61375632143793436117e-05, /* 0x3F11566A, 0xAF25DE2C */
+        P4 = -1.65339022054652515390e-06, /* 0xBEBBBD41, 0xC5D26BF1 */
+        P5 = 4.13813679705723846039e-08, /* 0x3E663769, 0x72BEA4D0 */
+        E = 2.718281828459045, /* 0x4005BF0A, 0x8B145769 */
+        huge = 1.0e+300,
+        twom1000 = 9.33263618503218878990e-302, /* 2**-1000=0x01700000,0*/
+        two1023 = 8.988465674311579539e307; /* 0x1p1023 */
+
+    final double[] //
+        halF = {0.5, -0.5},
+        ln2HI =
+            {
+              6.93147180369123816490e-01, /* 0x3FE62E42, 0xFEE00000 */
+              -6.93147180369123816490e-01 /* 0xBFE62E42, 0xFEE00000 */
+            },
+        ln2LO =
+            {
+              1.90821492927058770002e-10, /* 0x3DEA39EF, 0x35793C76 */
+              -1.90821492927058770002e-10 /* 0xBDEA39EF, 0x35793C76 */
+            };
+
+    double y, hi = 0.0, lo = 0.0, c, t, twopk;
+    int k = 0, xsb;
+    int hx;
+
+    hx = LongUtils.getHighBits(Double.doubleToRawLongBits(x));
+    xsb = (hx >> 31) & 1; /* sign bit of x */
+    hx &= 0x7FFFFFFF; /* high word of |x| */
+
+    /* filter out non-finite argument */
+    if (hx >= 0x40862E42) { // if |x|>=709.78...
+      if (hx >= 0x7FF00000) {
+        int lx;
+        lx = (int) Double.doubleToRawLongBits(x);
+        if (((hx & 0xFFFFF) | lx) != 0) {
+          return Double.NaN;
+        } else {
+          return (xsb == 0) ? Double.POSITIVE_INFINITY : 0.0; /* exp(+-inf)={inf,0} */
+        }
+      }
+      if (x > o_threshold) {
+        return huge * huge; /* overflow */
+      }
+      if (x < u_threshold) {
+        return twom1000 * twom1000; /* underflow */
+      }
+    }
+
+    /* argument reduction */
+    if (hx > 0x3FD62E42) { // if  |x| > 0.5 ln2
+      if (hx < 0x3FF0A2B2) { // and |x| < 1.5 ln2
+        if (x == 1.0) {
+          return E;
+        }
+        hi = x - ln2HI[xsb];
+        lo = ln2LO[xsb];
+        k = 1 - xsb - xsb;
+      } else {
+        k = (int) (invln2 * x + halF[xsb]);
+        t = k;
+        hi = x - t * ln2HI[0]; /* t*ln2HI is exact here */
+        lo = t * ln2LO[0];
+      }
+      x = hi - lo;
+    } else if (hx < 0x3E300000) { // when |x|<2**-28
+      if (huge + x > one) {
+        return one + x; /* trigger inexact */
+      }
+    } else {
+      k = 0;
+    }
+
+    /* x is now in primary range */
+    t = x * x;
+    if (k >= -1021) {
+      // INSERT_WORDS(
+      //    twopk, 0x3FF00000 + static_cast < int32_t > (static_cast < uint32_t > (k) << 20), 0);
+      twopk = Double.longBitsToDouble(LongUtils.fromBits(0, 0x3FF00000 + (k << 20)));
+    } else {
+      // INSERT_WORDS(twopk, 0x3FF00000 + (static_cast < uint32_t > (k + 1000) << 20), 0);
+      twopk = Double.longBitsToDouble(LongUtils.fromBits(0, 0x3FF00000 + ((k + 1000) << 20)));
+    }
+    c = x - t * (P1 + t * (P2 + t * (P3 + t * (P4 + t * P5))));
+    if (k == 0) {
+      return one - ((x * c) / (c - 2.0) - x);
+    } else {
+      y = one - ((lo - (x * c) / (2.0 - c)) - hi);
+    }
+    if (k >= -1021) {
+      if (k == 1024) {
+        return y * 2.0 * two1023;
+      }
+      return y * twopk;
+    } else {
+      return y * twopk * twom1000;
+    }
   }
 
   public static double expm1(double d) {

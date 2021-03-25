@@ -147,6 +147,22 @@ public class Main {
     assertEqualsDelta(-0.2941782295312541, Math.log1p(-0.254856327), 1e-7);
     assertEquals(7.368050685564151, Math.log1p(1583.542));
     assertEqualsDelta(0.4633708685409921, Math.log1p(0.5894227), 1e-15);
+
+    assertEquals(Double.NaN, Math.exp(Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.exp(Double.POSITIVE_INFINITY));
+    assertEquals(0.0, Math.exp(Double.NEGATIVE_INFINITY));
+    assertEquals(1.0, Math.exp(0));
+    assertEqualsDelta(0.36787944117144, Math.exp(-1), 0.000001);
+    assertEqualsDelta(2.718281, Math.exp(1), 0.000001);
+
+    assertEquals(-0.0, Math.expm1(-0.0));
+    assertEquals(0.0, Math.expm1(0.0));
+    assertEquals(Double.NaN, Math.expm1(Double.NaN));
+    assertEquals(Double.POSITIVE_INFINITY, Math.expm1(Double.POSITIVE_INFINITY));
+    assertEquals(-1.0, Math.expm1(Double.NEGATIVE_INFINITY));
+    int x = +1;
+    assertEqualsDelta(-0.632, Math.expm1(-1), 0.001);
+    assertEqualsDelta(1.718, Math.expm1(1), 0.001);
   }
 
   private static void assertEqualsDelta(double expected, double actual, double delta) {
@@ -156,7 +172,7 @@ public class Main {
     if ((Math.abs(expected - actual) <= delta)) {
       return;
     }
-    fail();
+    fail("Actual: " + actual);
   }
 
   private static class SomeClass {}
