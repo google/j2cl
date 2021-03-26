@@ -20,15 +20,16 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BreakStatement;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
+import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.Member;
+import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -40,6 +41,8 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
+import java.util.HashMap;
+import java.util.Map;
 
 /** Verifies that the AST satisfies the normalization invariants. */
 public class VerifyNormalizedUnits extends NormalizationPass {
@@ -55,8 +58,8 @@ public class VerifyNormalizedUnits extends NormalizationPass {
   }
 
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(
+  public void applyTo(Type type) {
+    type.accept(
         new AbstractVisitor() {
           @Override
           public void exitType(Type type) {
@@ -69,7 +72,20 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           }
 
           @Override
+          public void exitInitializerBlock(InitializerBlock initializerBlock) {
+            throw new IllegalStateException();
+          }
+
+          @Override
+          public void exitMethod(Method method) {
+            verifyMemberUniqueness(method);
+            // All native methods should be empty.
+            checkState(!method.isNative() || method.getBody().getStatements().isEmpty());
+          }
+
+          @Override
           public void exitField(Field field) {
+            verifyMemberUniqueness(field);
             if (verifyForWasm) {
               // This is only running for WASM due to the transformations in Closure that result in
               // primitive long initializers to be method calls to the runtime.
@@ -77,21 +93,29 @@ public class VerifyNormalizedUnits extends NormalizationPass {
                   field.getInitializer() == null || field.getInitializer().isCompileTimeConstant());
             } else {
               checkState(!field.isNative());
+              // JsEnum only contains the enum fields.
+              checkState(!getCurrentType().isJsEnum() || field.isStatic());
             }
           }
 
-          @Override
-          public void exitMethod(Method method) {
-            // All native methods should be empty.
-            checkState(!method.isNative() || method.getBody().getStatements().isEmpty());
-          }
+          private final Map<String, MemberDescriptor> instanceMembersByMangledName =
+              new HashMap<>();
+          private final Map<String, MemberDescriptor> staticMembersByMangledName = new HashMap<>();
 
-          @Override
-          public void exitMember(Member member) {
-            // JsEnum only contains the enum fields.
-            if (getCurrentType().isJsEnum()) {
-              checkState(member.isField() || member.isStatic());
+          private void verifyMemberUniqueness(Member member) {
+            if (member.isNative()) {
+              return;
             }
+            // Members should have a unique definition.
+            Map<String, MemberDescriptor> membersByMangledName =
+                (member.isStatic() || member.isConstructor())
+                    ? staticMembersByMangledName
+                    : instanceMembersByMangledName;
+            MemberDescriptor oldMember =
+                membersByMangledName.put(
+                    member.getDescriptor().getMangledName(), member.getDescriptor());
+            checkState(
+                oldMember == null, "%s conflicts with %s", member.getDescriptor(), oldMember);
           }
 
           @Override
