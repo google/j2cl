@@ -343,10 +343,10 @@
 ;;; void InnerClassInitOrder.testInnerClassLoop()
 (func $m_testInnerClassLoop__void@innerclassinitorder.InnerClassInitOrder
  (param $this.untyped (ref null $java.lang.Object))
- (local $results (ref null $Object.array))
+ (local $results (ref null $javaemul.internal.WasmArray.OfObject))
  (local $i i32)
  (local $ap (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
- (local $$array (ref null $Object.array))
+ (local $$array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$index i32)
  (local $theAp (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
  (local $$cast_expression (ref null $java.lang.Object))
@@ -354,9 +354,9 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
-   ;; AddNumber[] results = new AddNumber[10];
+   ;; AddNumber[] results = new OfObject.<init>(10);
    
-   (local.set $results (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $results (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
    ;; LOOP: for (int i = 0;(i < 10);(i = (i + 1))) {
    
    
@@ -369,8 +369,8 @@
        ;; AddNumber ap = new $1.<init>(InnerClassInitOrder.this,i);
        
        (local.set $ap (call $m_<init>__innerclassinitorder_InnerClassInitOrder__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.1 (global.get $innerclassinitorder.InnerClassInitOrder.1.vtable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt))(local.get $this)(local.get $i)))
-       ;; (results[i] = ap);
-       (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $results)) (local.get $i) (local.get $ap))
+       ;; (results.elements[i] = ap);
+       (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $results)) (local.get $i) (local.get $ap))
       )
      )
      (local.set $i (i32.add (local.get $i) (i32.const 1)))
@@ -385,14 +385,14 @@
    (local.set $$index (i32.const 0))
    (block $LOOP_1.BREAK
     (loop
-     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len $Object.array.elements (struct.get $Object.array $elements (local.get $$array))))))
+     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array))))))
      (block $LOOP_1.CONTINUE
       (block
-       ;; AddNumber theAp = (Object $cast_expression = $array[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((AddNumber) $cast_expression)));
+       ;; AddNumber theAp = (Object $cast_expression = $array.elements[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((AddNumber) $cast_expression)));
        
        (local.set $theAp (block (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
         
-        (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $$array)) (local.get $$index)))
+        (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
         (if (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (else (ref.cast (local.get $$cast_expression) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt))))
        ))
        (block
@@ -557,7 +557,7 @@
 
 ;;; void InnerClassInitOrder.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@innerclassinitorder.InnerClassInitOrder
- (param $args (ref null $Object.array))
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (local $m (ref null $innerclassinitorder.InnerClassInitOrder))
  (block $return.label
   (block

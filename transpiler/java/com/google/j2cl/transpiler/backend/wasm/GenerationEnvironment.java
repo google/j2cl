@@ -19,9 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.joining;
 
-import com.google.common.base.Preconditions;
 import com.google.common.base.Predicates;
-import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -66,17 +64,6 @@ class GenerationEnvironment {
     return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
   }
 
-  /**
-   * Returns the name for the element array type associated with typeDescriptor.
-   *
-   * <p>In WASM in order to use function references as structure fields (e.g. in the vtable), their
-   * types needs to be declared.
-   */
-  String getElementArrayTypeName(TypeDescriptor typeDescriptor) {
-    Preconditions.checkArgument(typeDescriptor.isArray());
-    return getWasmTypeName(typeDescriptor) + ".elements";
-  }
-
   /** Maps Java type declarations to the corresponding wasm type layout objects. */
   private final Map<TypeDeclaration, WasmTypeLayout> wasmTypeLayoutByTypeDeclaration;
 
@@ -100,13 +87,11 @@ class GenerationEnvironment {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
 
     if (typeDescriptor.isArray()) {
-      TypeDescriptor componentTypeDescriptor =
-          ((ArrayTypeDescriptor) typeDescriptor).getComponentTypeDescriptor();
-      String simpleName =
-          componentTypeDescriptor.isPrimitive()
-              ? ((PrimitiveTypeDescriptor) componentTypeDescriptor).getSimpleSourceName()
-              : "Object";
-      return String.format("$%s.array", simpleName);
+      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
+      if (arrayTypeDescriptor.isNativeWasmArray()) {
+        return getWasmTypeName(arrayTypeDescriptor.getComponentTypeDescriptor()) + ".array";
+      }
+      return getWasmTypeName(TypeDescriptors.getWasmArrayType(arrayTypeDescriptor));
     }
 
     if (typeDescriptor.isInterface()) {
@@ -126,11 +111,6 @@ class GenerationEnvironment {
       return ((DeclaredTypeDescriptor) typeDescriptor).getQualifiedSourceName();
     }
 
-    if (typeDescriptor.isArray()) {
-      ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;
-      return getTypeSignature(arrayTypeDescriptor.getLeafTypeDescriptor())
-          + Strings.repeat("<>", arrayTypeDescriptor.getDimensions());
-    }
     throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
   }
 

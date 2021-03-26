@@ -58,8 +58,8 @@
 ;;; void ArrayCalls.main()
 (func $m_main__void@devirtualizedcalls.ArrayCalls
  (param $this.untyped (ref null $java.lang.Object))
- (local $array2d (ref null $Object.array))
- (local $$array_literal (ref null $int.array))
+ (local $array2d (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (local $length1 i32)
  (local $$cast_expression (ref null $java.lang.Object))
  (local $length2 i32)
@@ -67,25 +67,25 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
  (block $return.label
   (block
-   ;; Object[][] array2d = javaemul.internal.WasmArrayHelper.createArray((int[] $array_literal = new int[2],($array_literal[0] = 1),($array_literal[1] = 1),$array_literal),-1);
+   ;; Object[][] array2d = javaemul.internal.WasmArrayHelper.createArray((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 1),$array_literal),-1);
    
-   (local.set $array2d (call $m_createArray__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArrayHelper (block (result (ref null $int.array))
+   (local.set $array2d (call $m_createArray__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArrayHelper (block (result (ref null $javaemul.internal.WasmArray.OfInt))
     
-    (local.set $$array_literal (struct.new_with_rtt $int.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $int.array.elements (i32.const 2) (global.get $int.array.elements.rtt)) (global.get $int.array.rtt)))
-    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array.elements (struct.get $int.array $elements (local.get $$array_literal)) (i32.const 1) (i32.const 1))
+    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (global.get $javaemul.internal.WasmArray.OfInt.vtable) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 1))
     (local.get $$array_literal)
    )(i32.const -1)))
    ;; int length1 = <expr>;
    
-   (local.set $length1 (array.len $Object.array.elements (struct.get $Object.array $elements (block (result (ref null $Object.array))
+   (local.set $length1 (array.len $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $array2d)) (i32.const 0)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression) (global.get $Object.array.rtt))))
+    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $array2d)) (i32.const 0)))
+    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
    ))))
    ;; int length2 = <expr>;
    
-   (local.set $length2 (array.len $Object.array.elements (struct.get $Object.array $elements (local.get $array2d))))
+   (local.set $length2 (array.len $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $array2d))))
   )
  )
 )
@@ -538,7 +538,7 @@
 (func $m_main__void@devirtualizedcalls.ObjectCalls
  (param $this.untyped (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
- (local $objectCalls (ref null $Object.array))
+ (local $objectCalls (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
  (block $return.label
@@ -554,9 +554,9 @@
    (drop (call_ref (local.get $object)(struct.get $java.lang.Object.vtable $m_toString__java_lang_String (struct.get $java.lang.Object $vtable(local.get $object)))))
    ;; object.getClass();
    (drop (call_ref (local.get $object)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $object)))))
-   ;; ObjectCalls[] objectCalls = new ObjectCalls[1];
+   ;; ObjectCalls[] objectCalls = new OfObject.<init>(1);
    
-   (local.set $objectCalls (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $objectCalls (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
    ;; objectCalls.equals(objectCalls);
    (drop (call_ref (local.get $objectCalls)(local.get $objectCalls)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
    ;; objectCalls.hashCode();

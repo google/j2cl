@@ -49,7 +49,6 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -155,21 +154,11 @@ final class ExpressionTranspiler {
           sourceBuilder.append(
               format(
                   "array.%s %s ",
-                  instruction,
-                  environment.getElementArrayTypeName(arrayExpression.getTypeDescriptor())));
-          renderArrayReference(arrayExpression);
+                  instruction, environment.getWasmTypeName(arrayExpression.getTypeDescriptor())));
+          render(arrayExpression);
           sourceBuilder.append(" ");
           renderTypedExpression(PrimitiveTypes.INT, arrayAccess.getIndexExpression());
         }
-      }
-
-      private void renderArrayReference(Expression arrayExpression) {
-        sourceBuilder.append(
-            format(
-                "(struct.get %s $elements ",
-                environment.getWasmTypeName(arrayExpression.getTypeDescriptor())));
-        render(arrayExpression);
-        sourceBuilder.append(")");
       }
 
       @Override
@@ -185,9 +174,8 @@ final class ExpressionTranspiler {
         sourceBuilder.append(
             format(
                 "(array.len %s ",
-                environment.getElementArrayTypeName(
-                    arrayLength.getArrayExpression().getTypeDescriptor())));
-        renderArrayReference(arrayLength.getArrayExpression());
+                environment.getWasmTypeName(arrayLength.getArrayExpression().getTypeDescriptor())));
+        render(arrayLength.getArrayExpression());
         sourceBuilder.append(")");
         return false;
       }
@@ -353,20 +341,14 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterNewArray(NewArray newArray) {
+        checkArgument(newArray.getTypeDescriptor().isNativeWasmArray());
+
         Expression dimensionExpression = newArray.getDimensionExpressions().get(0);
         String arrayType = environment.getWasmTypeName(newArray.getTypeDescriptor());
-        String elementArrayType = environment.getElementArrayTypeName(newArray.getTypeDescriptor());
 
-        sourceBuilder.append(
-            format(
-                "(struct.new_with_rtt %s "
-                    + "(global.get %s) (i32.const 0) (array.new_default_with_rtt %s ",
-                arrayType,
-                environment.getWasmVtableGlobalName(TypeDescriptors.get().javaLangObject),
-                elementArrayType));
+        sourceBuilder.append(format("(array.new_default_with_rtt %s ", arrayType));
         renderTypedExpression(dimensionExpression.getTypeDescriptor(), dimensionExpression);
-        sourceBuilder.append(
-            format(" (global.get %s.rtt)) (global.get %s.rtt))", elementArrayType, arrayType));
+        sourceBuilder.append(format(" (rtt.canon %s))", arrayType));
         return false;
       }
 

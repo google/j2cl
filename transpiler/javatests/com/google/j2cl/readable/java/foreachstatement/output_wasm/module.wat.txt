@@ -56,7 +56,7 @@
  (local $$iterator (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Throwable))
  (local $$cast_expression (ref null $java.lang.Object))
- (local $$array (ref null $Object.array))
+ (local $$array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$index i32)
  (local $t_1 (ref null $java.lang.Throwable))
  (local $$cast_expression_1 (ref null $java.lang.Object))
@@ -90,21 +90,21 @@
      
     )
    )
-   ;; LOOP: for (Throwable[] $array = new Throwable[10],int $index = 0;($index < <expr>);($index = ($index + 1))) {
+   ;; LOOP: for (Throwable[] $array = new OfObject.<init>(10),int $index = 0;($index < <expr>);($index = ($index + 1))) {
    
    
-   (local.set $$array (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 10) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
+   (local.set $$array (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
    (local.set $$index (i32.const 0))
    (block $LOOP_1.BREAK
     (loop
-     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len $Object.array.elements (struct.get $Object.array $elements (local.get $$array))))))
+     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array))))))
      (block $LOOP_1.CONTINUE
       (block
-       ;; Throwable t = (Object $cast_expression = $array[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Throwable) $cast_expression)));
+       ;; Throwable t = (Object $cast_expression = $array.elements[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Throwable) $cast_expression)));
        
        (local.set $t_1 (block (result (ref null $java.lang.Throwable))
         
-        (local.set $$cast_expression_1 (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $$array)) (local.get $$index)))
+        (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
         (if (result (ref null $java.lang.Throwable)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Throwable)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Throwable.rtt))))
        ))
        (block
@@ -137,7 +137,7 @@
    (block
     ;; throw new Exception.<init>();
     
-    (throw $exception.event (call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
+    (throw $exception.event (call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
    )
   )
  )
@@ -277,8 +277,8 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
- (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $Object.array)))
- (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $Object.array)))
+ (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i32))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i32))
  (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
@@ -296,12 +296,12 @@
  (field $m_getCause__java_lang_Throwable (mut (ref $function.__$java.lang.Throwable)))
  (field $m_getLocalizedMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (mut (ref $function.__$Object.array)))
- (field $m_getSuppressed__arrayOf_java_lang_Throwable (mut (ref $function.__$Object.array)))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
+ (field $m_getSuppressed__arrayOf_java_lang_Throwable (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
  (field $m_initCause__java_lang_Throwable__java_lang_Throwable (mut (ref $function.$java.lang.Throwable__$java.lang.Throwable)))
  (field $m_printStackTrace__void (mut (ref $function.__$void)))
  (field $m_printStackTrace__java_io_PrintStream__void (mut (ref $function.$java.io.PrintStream__$void)))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$Object.array__$void)))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
  (field $m_iterator__java_util_Iterator (mut (ref $function.__$java.lang.Object)))
  (field $m_forEach__java_util_function_Consumer__void (mut (ref $function.$java.lang.Object__$void)))
  (field $m_spliterator__java_util_Spliterator (mut (ref $function.__$java.lang.Object)))
@@ -416,8 +416,8 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
- (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $Object.array)))
- (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $Object.array)))
+ (field $f_suppressedExceptions__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+ (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i32))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i32))
  (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
@@ -435,12 +435,12 @@
  (field $m_getCause__java_lang_Throwable (mut (ref $function.__$java.lang.Throwable)))
  (field $m_getLocalizedMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (mut (ref $function.__$Object.array)))
- (field $m_getSuppressed__arrayOf_java_lang_Throwable (mut (ref $function.__$Object.array)))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
+ (field $m_getSuppressed__arrayOf_java_lang_Throwable (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
  (field $m_initCause__java_lang_Throwable__java_lang_Throwable (mut (ref $function.$java.lang.Throwable__$java.lang.Throwable)))
  (field $m_printStackTrace__void (mut (ref $function.__$void)))
  (field $m_printStackTrace__java_io_PrintStream__void (mut (ref $function.$java.io.PrintStream__$void)))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$Object.array__$void)))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
  (field $m_iterator__java_util_Iterator (mut (ref $function.__$java.lang.Object)))
  (field $m_forEach__java_util_function_Consumer__void (mut (ref $function.$java.lang.Object__$void)))
  (field $m_spliterator__java_util_Spliterator (mut (ref $function.__$java.lang.Object)))

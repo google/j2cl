@@ -50,7 +50,7 @@
  (field $m_fun__java_lang_Exception__void (mut (ref $function.$java.lang.Exception__$void)))
  (field $m_fun__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
  (field $m_bar__genericmethod_GenericMethod (mut (ref $function.__$genericmethod.GenericMethod)))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$Object.array__$Object.array)))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject)))
  (field $m_checked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_unchecked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_test__void (mut (ref $function.__$void)))
@@ -147,9 +147,9 @@
 ;;; T[] GenericMethod.fun(T[] array)
 (func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod
  (param $this.untyped (ref null $java.lang.Object))
- (param $array (ref null $Object.array))
- (result (ref null $Object.array))
- (local $return.value (ref null $Object.array))
+ (param $array (ref null $javaemul.internal.WasmArray.OfObject))
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $return.value (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $genericmethod.GenericMethod))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
  (block $return.label
@@ -203,7 +203,7 @@
 (func $m_test__void@genericmethod.GenericMethod
  (param $this.untyped (ref null $java.lang.Object))
  (local $g (ref null $genericmethod.GenericMethod))
- (local $$array_literal (ref null $Object.array))
+ (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $s (ref null $java.lang.String))
  (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $genericmethod.GenericMethod))
@@ -216,18 +216,18 @@
    ;; g.foo(g,g);
    (call_ref (local.get $g)(local.get $g)(local.get $g)(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.foo(new Error.<init>(),new Exception.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_foo__java_lang_Object__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Object.<init>());
    (call_ref (local.get $g)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Object__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Exception.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Exception__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
    ;; g.fun(new Error.<init>());
-   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $Object.array) (ref.null $Object.array) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
-   ;; g.fun((String[] $array_literal = new String[1],($array_literal[0] = javaemul.internal.StringPool.$getString_|asdf|()),$array_literal));
-   (drop (call_ref (local.get $g)(block (result (ref null $Object.array))
+   (call_ref (local.get $g)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
+   ;; g.fun((String[] $array_literal = new OfObject.<init>(1),($array_literal.elements[0] = javaemul.internal.StringPool.$getString_|asdf|()),$array_literal));
+   (drop (call_ref (local.get $g)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$array_literal (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 1) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (array.set $Object.array.elements (struct.get $Object.array $elements (local.get $$array_literal)) (i32.const 0) (call $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool ))
+    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
+    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (call $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool ))
     (local.get $$array_literal)
    )(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
    ;; String s = (Object $cast_expression = GenericMethod.this.checked(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression)));
@@ -492,7 +492,7 @@
  (field $m_fun__java_lang_Exception__void (mut (ref $function.$java.lang.Exception__$void)))
  (field $m_fun__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
  (field $m_bar__genericmethod_GenericMethod (mut (ref $function.__$genericmethod.GenericMethod)))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$Object.array__$Object.array)))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject)))
  (field $m_checked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_unchecked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_test__void (mut (ref $function.__$void)))
@@ -596,7 +596,7 @@
  (field $m_fun__java_lang_Exception__void (mut (ref $function.$java.lang.Exception__$void)))
  (field $m_fun__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
  (field $m_bar__genericmethod_GenericMethod (mut (ref $function.__$genericmethod.GenericMethod)))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$Object.array__$Object.array)))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject)))
  (field $m_checked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_unchecked__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_test__void (mut (ref $function.__$void)))

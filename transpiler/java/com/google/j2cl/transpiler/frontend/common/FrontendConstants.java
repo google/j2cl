@@ -59,8 +59,18 @@ public class FrontendConstants {
           "javaemul.internal.InternalPreconditions",
           "javaemul.internal.Primitives",
           "javaemul.internal.Enums",
+          "javaemul.internal.Exceptions",
           "javaemul.internal.Constructor",
           "javaemul.internal.Platform",
           "javaemul.internal.WasmArrayHelper",
-          "javaemul.internal.Exceptions");
+          "javaemul.internal.WasmArrayHelper",
+          "javaemul.internal.WasmArray$OfObject",
+          "javaemul.internal.WasmArray$OfByte",
+          "javaemul.internal.WasmArray$OfShort",
+          "javaemul.internal.WasmArray$OfChar",
+          "javaemul.internal.WasmArray$OfInt",
+          "javaemul.internal.WasmArray$OfLong",
+          "javaemul.internal.WasmArray$OfFloat",
+          "javaemul.internal.WasmArray$OfDouble",
+          "javaemul.internal.WasmArray$OfBoolean");
 }

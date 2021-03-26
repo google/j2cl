@@ -473,6 +473,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .build();
   }
 
+  /** Retrieves the field descriptor named {@code name} if it exists, {@code null} otherwise. */
+  public FieldDescriptor getFieldDescriptor(String name) {
+    return getDeclaredFieldDescriptors().stream()
+        .filter(f -> f.getName().equals(name))
+        .collect(toOptional())
+        .orElse(null);
+  }
+
   /**
    * Retrieves the method descriptor with name {@code name} and the corresponding parameter types if
    * there is a method with that signature.

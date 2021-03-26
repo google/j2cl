@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
 import com.google.j2cl.transpiler.passes.FixSuperCallQualifiers;
+import com.google.j2cl.transpiler.passes.ImplementArraysAsClasses;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaConstructors;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaGetters;
@@ -340,6 +341,8 @@ public enum Backend {
 
           // TODO(b/182007249): remove this pass when j2wasm use WasmGC milestone 3.
           NormalizeNullCasting::new,
+          // Needs to run at the end as the types in the ast will be invalid after the pass.
+          ImplementArraysAsClasses::new,
 
           // Post-verifications
           VerifySingleAstReference::new,

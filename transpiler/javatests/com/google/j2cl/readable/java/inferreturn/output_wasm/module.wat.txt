@@ -77,7 +77,7 @@
 ;;; void InferReturn.main()
 (func $m_main__void@inferreturn.InferReturn
  (local $list (ref null $java.util.ArrayList))
- (local $array (ref null $Object.array))
+ (local $array (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
   (block
    ;; inferreturn.InferReturn.$clinit();
@@ -106,7 +106,7 @@
    ;; inferreturn.InferReturn.$clinit();
    (call $$clinit__void@inferreturn.InferReturn )
    ;; return new ArrayList.<init>();
-   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $Object.array) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )
@@ -116,18 +116,18 @@
 ;;; V[] InferReturn.newArray(V foo)
 (func $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn
  (param $foo (ref null $java.lang.Object))
- (result (ref null $Object.array))
- (local $return.value (ref null $Object.array))
+ (result (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $return.value (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; inferreturn.InferReturn.$clinit();
    (call $$clinit__void@inferreturn.InferReturn )
-   ;; return (Object $cast_expression = new Object[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((V[]) $cast_expression)));
-   (local.set $return.value (block (result (ref null $Object.array))
+   ;; return (Object $cast_expression = new OfObject.<init>(0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((V[]) $cast_expression)));
+   (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$cast_expression (struct.new_with_rtt $Object.array (global.get $java.lang.Object.vtable) (i32.const 0) (array.new_default_with_rtt $Object.array.elements (i32.const 0) (global.get $Object.array.elements.rtt)) (global.get $Object.array.rtt)))
-    (if (result (ref null $Object.array)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $Object.array)) (else (ref.cast (local.get $$cast_expression) (global.get $Object.array.rtt))))
+    (local.set $$cast_expression (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
+    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
    ))
    (br $return.label)
   )
@@ -148,7 +148,7 @@
 
 ;;; void InferReturn.acceptsArrayOfObject(Object[] foo)
 (func $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn
- (param $foo (ref null $Object.array))
+ (param $foo (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
   (block
    ;; inferreturn.InferReturn.$clinit();

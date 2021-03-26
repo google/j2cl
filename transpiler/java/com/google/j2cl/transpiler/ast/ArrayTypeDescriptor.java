@@ -72,6 +72,12 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
         || (TypeDescriptors.isJavaLangObject(rawLeafTypeDescriptor) && getDimensions() == 1);
   }
 
+  /**
+   * Returns true for arrays where raw wasm array representation is enough. These arrays are located
+   * in {@see javaemul.internal.WasmArrays}.
+   */
+  public abstract boolean isNativeWasmArray();
+
   @Override
   public abstract boolean isNullable();
 
@@ -128,7 +134,11 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   @Memoized
   public String getUniqueId() {
     String prefix = isNullable() ? "?" : "!";
-    return prefix + Strings.repeat("[]", getDimensions()) + getLeafTypeDescriptor().getUniqueId();
+    String suffix = isNativeWasmArray() ? "(native)" : "";
+    return prefix
+        + Strings.repeat("[]", getDimensions())
+        + getLeafTypeDescriptor().getUniqueId()
+        + suffix;
   }
 
   @Override
@@ -189,16 +199,22 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   public static Builder newBuilder() {
     return new AutoValue_ArrayTypeDescriptor.Builder()
         // Default values.
-        .setNullable(true);
+        .setNullable(true)
+        .setNativeWasmArray(false);
   }
 
   /** Builder for an ArrayTypeDescriptor. */
   @AutoValue.Builder
   public abstract static class Builder {
+    public static Builder from(ArrayTypeDescriptor arrayTypeDescriptor) {
+      return arrayTypeDescriptor.toBuilder();
+    }
 
     public abstract Builder setComponentTypeDescriptor(TypeDescriptor leafTypeDescriptor);
 
     public abstract Builder setNullable(boolean isNullable);
+
+    public abstract Builder setNativeWasmArray(boolean wasmNative);
 
     abstract ArrayTypeDescriptor autoBuild();
 

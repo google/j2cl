@@ -47,7 +47,7 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_method1__int__java_lang_Double__java_lang_Integer__void (mut (ref $function.$int__$java.lang.Double__$java.lang.Integer__$void)))
- (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (mut (ref $function.$java.lang.String__$java.lang.Double__$Object.array__$void)))
+ (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (mut (ref $function.$java.lang.String__$java.lang.Double__$javaemul.internal.WasmArray.OfObject__$void)))
  (field $m_testFunction__jsoptional_Main_Function__void (mut (ref $function.$java.lang.Object__$void)))
  (field $m_testOptionalFunction__jsoptional_Main_Function__void (mut (ref $function.$java.lang.Object__$void)))
 ))
@@ -72,7 +72,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $s1 (ref null $java.lang.String))
  (param $d (ref null $java.lang.Double))
- (param $i (ref null $Object.array))
+ (param $i (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
@@ -130,7 +130,7 @@
 (func $$init__void_$p_jsoptional_Main@jsoptional.Main
  (param $this (ref null $jsoptional.Main))
  (local $s (ref null $java.lang.String))
- (local $varargs (ref null $Object.array))
+ (local $varargs (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
   (block
    ;; (Main.this.f = function (String s,Object[] varargs){
@@ -222,7 +222,7 @@
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.String__$Object.array__$java.lang.Object)))
+ (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.Object)))
 ))
 
 ;;; AFunction()
@@ -242,7 +242,7 @@
 (func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction
  (param $this.untyped (ref null $java.lang.Object))
  (param $i (ref null $java.lang.String))
- (param $args (ref null $Object.array))
+ (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (local $$cast_expression (ref null $java.lang.Object))
@@ -250,10 +250,10 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
  (block $return.label
   (block
-   ;; return (Object $cast_expression = args[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
+   ;; return (Object $cast_expression = args.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
    (local.set $return.value (block (result (ref null $java.lang.Object))
     
-    (local.set $$cast_expression (array.get $Object.array.elements (struct.get $Object.array $elements (local.get $args)) (i32.const 0)))
+    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (i32.const 0)))
     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
    ))
    (br $return.label)

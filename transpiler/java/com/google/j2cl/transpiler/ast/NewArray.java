@@ -88,6 +88,12 @@ public class NewArray extends Expression {
 
   /** Builder for NewArray. */
   public static class Builder {
+    public static Builder from(NewArray newArray) {
+      return newBuilder()
+          .setArrayLiteral(newArray.getArrayLiteral())
+          .setDimensionExpressions(newArray.getDimensionExpressions())
+          .setTypeDescriptor(newArray.getTypeDescriptor());
+    }
 
     private ArrayTypeDescriptor typeDescriptor;
     private ArrayLiteral arrayLiteral;
