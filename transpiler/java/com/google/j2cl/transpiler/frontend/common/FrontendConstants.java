@@ -39,7 +39,7 @@ public class FrontendConstants {
       "javaemul.internal.annotations.DoNotAutobox";
 
   /** Classes that are assumed to be always present. */
-  public static final ImmutableList<String> WELL_KNOWN_CLASS_NAMES =
+  public static final ImmutableList<String> REQUIRED_QUALIFIED_BINARY_NAMES =
       ImmutableList.of(
           "java.io.Serializable",
           "java.lang.CharSequence",

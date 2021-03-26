@@ -98,7 +98,7 @@ public class JavacParser {
       }
 
       JavaEnvironment javaEnvironment =
-          new JavaEnvironment(task.getContext(), FrontendConstants.WELL_KNOWN_CLASS_NAMES);
+          new JavaEnvironment(task.getContext(), FrontendConstants.REQUIRED_QUALIFIED_BINARY_NAMES);
       List<CompilationUnit> compilationUnits =
           CompilationUnitBuilder.build(javacCompilationUnits, javaEnvironment);
 

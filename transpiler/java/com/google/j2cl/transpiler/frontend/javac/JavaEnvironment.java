@@ -104,15 +104,15 @@ class JavaEnvironment {
   Types internalTypes;
   JavacElements elements;
 
-  JavaEnvironment(Context context, List<String> typeElementsNames) {
+  JavaEnvironment(Context context, List<String> requiredQualifiedBinaryNames) {
     this.javacTypes = JavacTypes.instance(context);
     this.internalTypes = Types.instance(context);
     this.elements = JavacElements.instance(context);
 
-    initWellKnownTypes(typeElementsNames);
+    initWellKnownTypes(requiredQualifiedBinaryNames);
   }
 
-  private void initWellKnownTypes(List<String> typeElementsNames) {
+  private void initWellKnownTypes(List<String> requiredQualifiedBinaryNames) {
     if (TypeDescriptors.isInitialized()) {
       return;
     }
@@ -121,10 +121,12 @@ class JavaEnvironment {
       addPrimitive(builder, typeDescriptor);
     }
     // Add well-known, non-primitive types.
-    for (TypeElement typeElement :
-        typeElementsNames.stream().map(this::getTypeElement).collect(toImmutableList())) {
-      builder.addReferenceType(createDeclaredTypeDescriptor(typeElement.asType()));
-    }
+    requiredQualifiedBinaryNames.forEach(
+        binaryName -> {
+          String qualifiedSourceName = binaryName.replace('$', '.');
+          TypeElement element = getTypeElement(qualifiedSourceName);
+          builder.addReferenceType(createDeclaredTypeDescriptor(element.asType()));
+        });
     builder.buildSingleton();
   }
 
