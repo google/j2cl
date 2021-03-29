@@ -101,7 +101,6 @@ import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
-import com.google.j2cl.transpiler.passes.RewriteStringEquals;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
@@ -162,9 +161,6 @@ public enum Backend {
           InsertExplicitSuperCalls::new,
           BridgeMethodsCreator::new,
           EnumMethodsCreator::new,
-          // TODO(b/31865368): Remove RewriteStringEquals pass once delayed field initialization
-          //  is introduced and String.java gets updated to use it.
-          RewriteStringEquals::new,
           DevirtualizeBoxedTypesAndJsFunctionImplementations::new,
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,

@@ -109,11 +109,6 @@ public class BinaryExpression extends Expression {
         && rightOperand.isCompileTimeConstant();
   }
 
-  @Override
-  public boolean isNonNullString() {
-    return AstUtils.matchesStringContext(this);
-  }
-
   public boolean isReferenceComparison() {
     return (getOperator() == BinaryOperator.EQUALS || getOperator() == BinaryOperator.NOT_EQUALS)
         && !getLeftOperand().getTypeDescriptor().isPrimitive()

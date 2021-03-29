@@ -51,11 +51,6 @@ public class StringLiteral extends Literal {
   }
 
   @Override
-  public boolean isNonNullString() {
-    return true;
-  }
-
-  @Override
   public Node accept(Processor processor) {
     return Visitor_StringLiteral.visit(processor, this);
   }

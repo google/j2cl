@@ -15,11 +15,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -38,7 +41,7 @@ public class InsertStringConversions extends NormalizationPass {
       @Override
       public Expression rewriteStringContext(Expression expression) {
         TypeDescriptor typeDescriptor = expression.getTypeDescriptor();
-        if (expression.isNonNullString()) {
+        if (isNonNullString(expression)) {
           return expression;
         }
 
@@ -73,5 +76,20 @@ public class InsertStringConversions extends NormalizationPass {
     return TypeDescriptors.get()
         .javaLangString
         .getMethodDescriptor(MethodDescriptor.VALUE_OF_METHOD_NAME, typeDescriptor);
+  }
+
+  /**
+   * Returns true if {@code expression} is a string literal or if it is a BinaryExpression that
+   * matches String conversion context and one of its operands is non null String.
+   */
+  private static boolean isNonNullString(Expression expression) {
+    if (expression instanceof StringLiteral) {
+      return true;
+    }
+    if (!(expression instanceof BinaryExpression)) {
+      return false;
+    }
+    BinaryExpression binaryExpression = (BinaryExpression) expression;
+    return AstUtils.matchesStringContext(binaryExpression);
   }
 }
