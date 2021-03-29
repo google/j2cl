@@ -1,13 +1,11 @@
 """Common utilities for creating J2CL targets and providers."""
 
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_js_lib_struct", "j2cl_js_provider")
+load("//build_defs/internal_do_not_use:provider.bzl", _J2clInfo = "J2clInfo")
 load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
-J2clInfo = provider(
-    "Provider for the J2CL compilation.\n" +
-    "NOTE: Data under '_private_' is considered private internal data so do not use.",
-    fields = ["_private_", "_is_j2cl_provider"],
-)
+# TODO(b/183965899): Update references to skip this re-export and remove it.
+J2clInfo = _J2clInfo
 
 def _get_jsinfo_provider(j2cl_info):
     return j2cl_info._private_.js_info
