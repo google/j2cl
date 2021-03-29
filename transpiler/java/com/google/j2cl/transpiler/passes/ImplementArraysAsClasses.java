@@ -17,13 +17,11 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
@@ -45,15 +43,14 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   }
 
   private void markNativeWasmArrayTypes(CompilationUnit compilationUnit) {
-    ImmutableSet<DeclaredTypeDescriptor> wasmArrayTypes =
-        ImmutableSet.copyOf(TypeDescriptors.get().wasmArrayTypesByComponentType.values());
-
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public boolean shouldProcessType(Type type) {
             // We do not expect any access to the native arrays outside of these class.
-            return wasmArrayTypes.contains(type.getTypeDescriptor());
+            return TypeDescriptors.get()
+                .javaemulInternalWasmArray
+                .equals(type.getSuperTypeDescriptor());
           }
 
           @Override

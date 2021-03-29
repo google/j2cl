@@ -24,6 +24,52 @@ abstract class WasmArray {
 
   abstract void set(int index, Object o);
 
+  public static Object[] createMultiDimensional(int[] dimensionLengths, int leafType) {
+    return (Object[]) createRecursively(dimensionLengths, 0, leafType);
+  }
+
+  private static Object createRecursively(int[] dimensions, int dimensionIndex, int leafType) {
+    int length = dimensions[dimensionIndex];
+    if (length == -1) {
+      // We reach a sub array that doesn't have a dimension (e.g. 3rd dimension in int[3][2][][])
+      return null;
+    }
+
+    if (dimensionIndex == dimensions.length - 1) {
+      // We have reached the leaf dimension.
+      return createLeaf(length, leafType);
+    } else {
+      Object[] array = new Object[length];
+      for (int i = 0; i < length; i++) {
+        array[i] = createRecursively(dimensions, dimensionIndex + 1, leafType);
+      }
+      return array;
+    }
+  }
+
+  private static Object createLeaf(int length, int leafType) {
+    switch (leafType) {
+      case 1:
+        return new boolean[length];
+      case 2:
+        return new byte[length];
+      case 3:
+        return new short[length];
+      case 4:
+        return new char[length];
+      case 5:
+        return new int[length];
+      case 6:
+        return new long[length];
+      case 7:
+        return new float[length];
+      case 8:
+        return new double[length];
+      default:
+        return new Object[length];
+    }
+  }
+
   static class OfObject extends WasmArray {
 
     Object[] elements;

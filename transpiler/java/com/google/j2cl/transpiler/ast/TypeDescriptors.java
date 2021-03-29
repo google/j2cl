@@ -16,14 +16,12 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.List;
@@ -59,8 +57,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangCloneable;
   public DeclaredTypeDescriptor javaIoSerializable;
 
-  public DeclaredTypeDescriptor javaemulValueType;
-  public DeclaredTypeDescriptor javaemulInternalWasmArrayHelper;
+  public DeclaredTypeDescriptor javaemulInternalWasmArray;
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfByte;
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfShort;
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfChar;
@@ -71,6 +68,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfBoolean;
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfObject;
 
+  public DeclaredTypeDescriptor javaemulInternalValueType;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
   public DeclaredTypeDescriptor javaemulInternalPrimitives;
   public DeclaredTypeDescriptor javaemulInternalEnums;
@@ -79,8 +77,6 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalExceptions;
 
   public ArrayTypeDescriptor javaLangObjectArray;
-
-  public ImmutableMap<TypeDescriptor, DeclaredTypeDescriptor> wasmArrayTypesByComponentType;
 
   // Common browser native types.
   public final DeclaredTypeDescriptor nativeFunction = createGlobalNativeTypeDescriptor("Function");
@@ -424,11 +420,31 @@ public class TypeDescriptors {
   /** Return java implementation class for an array */
   public static DeclaredTypeDescriptor getWasmArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {
     TypeDescriptor componentTypeDescriptor = arrayTypeDescriptor.getComponentTypeDescriptor();
+
     if (!componentTypeDescriptor.isPrimitive()) {
-      componentTypeDescriptor = get().javaLangObject;
+      return TypeDescriptors.get().javaemulInternalWasmArrayOfObject;
     }
 
-    return checkNotNull(get().wasmArrayTypesByComponentType.get(componentTypeDescriptor));
+    switch (((PrimitiveTypeDescriptor) componentTypeDescriptor).getSimpleSourceName()) {
+      case "boolean":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfBoolean;
+      case "short":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfShort;
+      case "char":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfChar;
+      case "byte":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfByte;
+      case "int":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfInt;
+      case "long":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfLong;
+      case "float":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfFloat;
+      case "double":
+        return TypeDescriptors.get().javaemulInternalWasmArrayOfDouble;
+      default:
+        throw new AssertionError("Unsupported primitive type: " + componentTypeDescriptor);
+    }
   }
 
   /** Builder for TypeDescriptors. */
@@ -441,19 +457,6 @@ public class TypeDescriptors {
       typeDescriptors.javaLangObjectArray =
           ArrayTypeDescriptor.newBuilder()
               .setComponentTypeDescriptor(typeDescriptors.javaLangObject)
-              .build();
-      typeDescriptors.wasmArrayTypesByComponentType =
-          ImmutableMap.<TypeDescriptor, DeclaredTypeDescriptor>builder()
-              .put(
-                  typeDescriptors.javaLangObject, typeDescriptors.javaemulInternalWasmArrayOfObject)
-              .put(PrimitiveTypes.BYTE, typeDescriptors.javaemulInternalWasmArrayOfByte)
-              .put(PrimitiveTypes.SHORT, typeDescriptors.javaemulInternalWasmArrayOfShort)
-              .put(PrimitiveTypes.CHAR, typeDescriptors.javaemulInternalWasmArrayOfChar)
-              .put(PrimitiveTypes.INT, typeDescriptors.javaemulInternalWasmArrayOfInt)
-              .put(PrimitiveTypes.LONG, typeDescriptors.javaemulInternalWasmArrayOfLong)
-              .put(PrimitiveTypes.FLOAT, typeDescriptors.javaemulInternalWasmArrayOfFloat)
-              .put(PrimitiveTypes.DOUBLE, typeDescriptors.javaemulInternalWasmArrayOfDouble)
-              .put(PrimitiveTypes.BOOLEAN, typeDescriptors.javaemulInternalWasmArrayOfBoolean)
               .build();
     }
 
@@ -541,16 +544,13 @@ public class TypeDescriptors {
           typeDescriptors.javaUtilIterator = referenceType;
           break;
         case "javaemul.internal.ValueType":
-          typeDescriptors.javaemulValueType = referenceType;
+          typeDescriptors.javaemulInternalValueType = referenceType;
           break;
         case "javaemul.internal.InternalPreconditions":
           typeDescriptors.javaemulInternalPreconditions = referenceType;
           break;
         case "javaemul.internal.Primitives":
           typeDescriptors.javaemulInternalPrimitives = referenceType;
-          break;
-        case "javaemul.internal.WasmArrayHelper":
-          typeDescriptors.javaemulInternalWasmArrayHelper = referenceType;
           break;
         case "javaemul.internal.Enums":
           typeDescriptors.javaemulInternalEnums = referenceType;
@@ -563,6 +563,9 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.Exceptions":
           typeDescriptors.javaemulInternalExceptions = referenceType;
+          break;
+        case "javaemul.internal.WasmArray":
+          typeDescriptors.javaemulInternalWasmArray = referenceType;
           break;
         case "javaemul.internal.WasmArray.OfByte":
           typeDescriptors.javaemulInternalWasmArrayOfByte = referenceType;

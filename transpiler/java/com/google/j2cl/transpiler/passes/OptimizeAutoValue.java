@@ -44,7 +44,7 @@ public class OptimizeAutoValue extends NormalizationPass {
 
     // Change the parent type of AutoValue class to ValueType.
     if (canExtendValueType(type.getDeclaration())) {
-      type.setSuperTypeDescriptor(TypeDescriptors.get().javaemulValueType);
+      type.setSuperTypeDescriptor(TypeDescriptors.get().javaemulInternalValueType);
       return;
     }
 
@@ -103,7 +103,7 @@ public class OptimizeAutoValue extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
-            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaemulValueType)
+            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaemulInternalValueType)
             .setName("mixin")
             .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction, PrimitiveTypes.INT)
             .build();

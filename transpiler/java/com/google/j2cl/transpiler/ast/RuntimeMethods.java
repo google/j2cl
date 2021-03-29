@@ -70,9 +70,9 @@ public class RuntimeMethods {
       Expression dimensions, Expression leafType) {
     return MethodCall.Builder.from(
             TypeDescriptors.get()
-                .javaemulInternalWasmArrayHelper
+                .javaemulInternalWasmArray
                 .getMethodDescriptor(
-                    "createArray",
+                    "createMultiDimensional",
                     ArrayTypeDescriptor.newBuilder()
                         .setComponentTypeDescriptor(PrimitiveTypes.INT)
                         .build(),
