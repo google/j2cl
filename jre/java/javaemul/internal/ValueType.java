@@ -94,7 +94,7 @@ public abstract class ValueType {
     StringJoiner joiner = new StringJoiner(",", thisObject.getClass().getSimpleName() + "{", "}");
     for (String p : keys(thisObject)) {
       Object value = JsUtils.getProperty(thisObject, p);
-      if (NativeArray.isArray(value)) {
+      if (ArrayHelper.isArray(value)) {
         value = Arrays.toString(JsUtils.<Object[]>uncheckedCast(value));
       }
       joiner.add(p + "=" + value);
