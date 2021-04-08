@@ -178,6 +178,31 @@ public class Primitives {
     return value;
   }
 
+  public static double dmod(double x, double y) {
+    if (Double.isNaN(x) || Double.isNaN(y) || Double.isInfinite(x) || y == 0.0d) {
+      return Double.NaN;
+    }
+
+    if (Double.isInfinite(y) || x == 0.0d) {
+      return x;
+    }
+    // See https://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.17.3
+    // and https://en.wikipedia.org/wiki/Modulo_operation#Variants_of_the_definition
+    return x - (y * narrowDoubleToInt(x / y));
+  }
+
+  public static float fmod(float x, float y) {
+    if (Float.isNaN(x) || Float.isNaN(y) || Float.isInfinite(x) || y == 0.0f) {
+      return Float.NaN;
+    }
+
+    if (Float.isInfinite(y) || x == 0.0f) {
+      return x;
+    }
+
+    return x - (y * narrowFloatToInt(x / y));
+  }
+
   /** Narrows a number to an unsigned 16-bit number. */
   private static int toChar(int instance) {
     return instance & 0xFFFF;

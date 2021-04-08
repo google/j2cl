@@ -1,21 +1,23 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1963459 to 1964233 bytes (100%->100.0%) and from
-  700807 to 701075 bytes (100%->100.0%) gzipped.
+  1964233 to 1965715 bytes (100%->100.1%) and from
+  701075 to 701482 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       1896     1893 wasm.esnext (-0.2%)
+       2160     2158 wasm (-0.1%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       1757     1896 wasm.esnext (7.9%)
-       2031     2160 wasm (6.4%)
+       2328     2547 binaryexpressions.esnext (9.4%)
+       2609     2802 binaryexpressions (7.4%)
 
 
 Incremental size reports (non-gzip):
@@ -28,12 +30,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4021125  4021125 box2d_default (unchanged)
-    2193962  2193962 box2d_default.minified (unchanged)
-    1165706  1165706 box2d_default.rta (unchanged)
-    2417688  2417688 emptyclass (unchanged)
-    1452228  1452228 emptyclass.minified (unchanged)
-     700111   700111 emptyclass.rta (unchanged)
+    4021612  4021612 box2d_default (unchanged)
+    2194180  2194180 box2d_default.minified (unchanged)
+    1181510  1181510 box2d_default.rta (unchanged)
+    2418175  2418175 emptyclass (unchanged)
+    1452446  1452446 emptyclass.minified (unchanged)
+     717555   717555 emptyclass.rta (unchanged)
 
 
 All reports:
@@ -81,8 +83,8 @@ All reports:
        2452     2452 autovalue_ref.esnext (unchanged)
         992      992 backwardbridgemethod (unchanged)
         689      689 backwardbridgemethod.esnext (unchanged)
-       2609     2609 binaryexpressions (unchanged)
-       2328     2328 binaryexpressions.esnext (unchanged)
+       2609     2802 binaryexpressions (7.4%)
+       2328     2547 binaryexpressions.esnext (9.4%)
         908      908 blockscoping (unchanged)
         617      617 blockscoping.esnext (unchanged)
       27084    27084 box2d_default (unchanged)
@@ -411,8 +413,8 @@ All reports:
        3350     3350 varargs.esnext (unchanged)
        1001     1001 variables (unchanged)
         712      712 variables.esnext (unchanged)
-       2031     2160 wasm (6.4%)
-       1757     1896 wasm.esnext (7.9%)
+       2160     2158 wasm (-0.1%)
+       1896     1893 wasm.esnext (-0.2%)
         918      918 whilestatement (unchanged)
         624      624 whilestatement.esnext (unchanged)
        1976     1976 wideningfloatconversion (unchanged)

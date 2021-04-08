@@ -15,16 +15,20 @@
  */
 package com.google.j2cl.integration.binaryexpressions;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEqualsDelta;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+
+import javaemul.internal.annotations.Wasm;
 
 /** Test basic binary operations. This test does not aim to test primitive overflow and Coercion. */
 @SuppressWarnings({"NarrowingCompoundAssignment", "ReferenceEquality", "ConstantOverflow"})
 public class Main {
   public static void main(String[] args) {
     testArithmetic();
+    testFloatingPointRemainder();
     testOverflow();
     testBooleanOperations();
-    testStringConcatentation();
+    testStringConcatenation();
     testExtendedOperands();
     testFloatConsistency();
     testParenthesizedLvalues();
@@ -98,6 +102,38 @@ public class Main {
     assertTrue(Integer.MAX_VALUE << 1L == -2);
   }
 
+  private static void testFloatingPointRemainder() {
+    assertTrue(Double.isNaN(Double.NaN % 1.2));
+    assertTrue(Double.isNaN(1.2 % Double.NaN));
+    assertTrue(Double.isNaN(-1.2 % Double.NaN));
+    assertTrue(Double.isNaN(Double.POSITIVE_INFINITY % 1.2));
+    assertTrue(Double.isNaN(Double.NEGATIVE_INFINITY % 1.2));
+    assertTrue(Double.isNaN(-1.2 % 0.0));
+    assertTrue(1.2 % Double.POSITIVE_INFINITY == 1.2);
+    assertTrue(1.2 % Double.NEGATIVE_INFINITY == 1.2);
+    assertTrue(0.0 % 1.2 == 0.0);
+    assertTrue(-0.0 % 1.2 == -0.0);
+    assertEqualsDelta(.2, .7 % .5, 1e-15);
+    assertEqualsDelta(.2, .7 % -.5, 1e-15);
+    assertEqualsDelta(-.2, -.7 % .5, 1e-15);
+    assertEqualsDelta(-.2, -.7 % -.5, 1e-15);
+
+    assertTrue(Float.isNaN(Float.NaN % 1.2f));
+    assertTrue(Float.isNaN(1.2f % Float.NaN));
+    assertTrue(Float.isNaN(-1.2f % Float.NaN));
+    assertTrue(Float.isNaN(Float.POSITIVE_INFINITY % 1.2f));
+    assertTrue(Float.isNaN(Float.NEGATIVE_INFINITY % 1.2f));
+    assertTrue(Float.isNaN(-1.2f % 0.0f));
+    assertTrue(1.2f % Float.POSITIVE_INFINITY == 1.2f);
+    assertTrue(1.2f % Float.NEGATIVE_INFINITY == 1.2f);
+    assertTrue(0.0f % 1.2f == 0.0f);
+    assertTrue(-0.0f % 1.2f == -0.0f);
+    assertEqualsDelta(.2f, .7f % .5f, 1e-7);
+    assertEqualsDelta(.2f, .7f % -.5f, 1e-7);
+    assertEqualsDelta(-.2f, -.7f % .5f, 1e-7);
+    assertEqualsDelta(-.2f, -.7f % -.5f, 1e-7);
+  }
+
   private static void testOverflow() {
     // No overflow, as the mutiplication is always performed in integer precision
     assertTrue(Byte.MAX_VALUE * Byte.MAX_VALUE == 0x3f01);
@@ -115,7 +151,8 @@ public class Main {
   public static void testBooleanOperations() {
     boolean bool = true;
     bool &= false;
-    assertTrue(("" + bool).equals("false"));
+    assertTrue(!bool);
+
     // Compound assignment with enclosing instance.
     class Outer {
 
@@ -143,12 +180,16 @@ public class Main {
     assertTrue(outer.b);
   }
 
-  private static void testStringConcatentation() {
+  @Wasm("nop") // TODO(b/170691638): enable when string concatenation is supported
+  private static void testStringConcatenation() {
     String s = null;
     assertTrue(s + s == "nullnull");
 
     String[] stringArray = new String[1];
     assertTrue(stringArray[0] + stringArray[0] == "nullnull");
+
+    boolean bool = false;
+    assertTrue(("" + bool).equals("false"));
   }
 
   private static void testExtendedOperands() {

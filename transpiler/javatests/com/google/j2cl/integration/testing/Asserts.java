@@ -62,6 +62,18 @@ public class Asserts extends AssertsBase {
     }
   }
 
+  public static void assertEqualsDelta(double expected, double actual, double delta) {
+    if (Double.compare(expected, actual) == 0) {
+      return;
+    }
+
+    if ((Math.abs(expected - actual) <= delta)) {
+      return;
+    }
+
+    fail("Actual: " + actual);
+  }
+
   public static void assertNotEquals(@DoNotAutobox Object expected, @DoNotAutobox Object actual) {
     assertNotEquals(getNotEqualsDefaultFailureMessage(expected, actual), expected, actual);
   }

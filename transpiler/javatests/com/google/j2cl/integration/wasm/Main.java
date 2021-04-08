@@ -16,6 +16,7 @@
 package com.google.j2cl.integration.wasm;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertEqualsDelta;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
@@ -163,16 +164,6 @@ public class Main {
     int x = +1;
     assertEqualsDelta(-0.632, Math.expm1(-1), 0.001);
     assertEqualsDelta(1.718, Math.expm1(1), 0.001);
-  }
-
-  private static void assertEqualsDelta(double expected, double actual, double delta) {
-    if (Double.compare(expected, actual) == 0) {
-      return;
-    }
-    if ((Math.abs(expected - actual) <= delta)) {
-      return;
-    }
-    fail("Actual: " + actual);
   }
 
   private static class SomeClass {}
