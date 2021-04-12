@@ -39,6 +39,7 @@ public class Main {
     testMathLogAndFriends();
     testClassLiterals();
     testTry();
+    testArrayInstanceOf();
   }
 
   static class A {
@@ -215,5 +216,51 @@ public class Main {
       i += 3;
     }
     assertEquals(14, i);
+  }
+
+  private static void testArrayInstanceOf() {
+    Object intArray = new int[0];
+    assertTrue(intArray instanceof int[]);
+    assertFalse(intArray instanceof long[]);
+    assertFalse(intArray instanceof Object[]);
+    assertFalse(intArray instanceof SomeInterface[]);
+
+    Object multiDimIntArray = new int[0][0];
+    assertFalse(multiDimIntArray instanceof int[]);
+    assertFalse(multiDimIntArray instanceof long[]);
+    assertTrue(multiDimIntArray instanceof Object[]);
+    assertTrue(multiDimIntArray instanceof int[][]);
+    // TODO(b/184675805): enable when this is fixed.
+    // assertFalse(multiDimIntArray instanceof long[][]);
+    // assertFalse(multiDimIntArray instanceof SomeInterface[]);
+
+    Object objectArray = new Object[0];
+    assertFalse(objectArray instanceof int[]);
+    assertFalse(objectArray instanceof long[]);
+    assertTrue(objectArray instanceof Object[]);
+    // TODO(b/184675805): enable when this is fixed.
+    // assertFalse(objectArray instanceof int[][]);
+    // assertFalse(objectArray instanceof long[][]);
+    // assertFalse(objectArray instanceof SomeInterface[]);
+
+    Object multiDimObjectArray = new Object[0][0];
+    assertFalse(multiDimObjectArray instanceof int[]);
+    assertFalse(multiDimObjectArray instanceof long[]);
+    assertTrue(multiDimObjectArray instanceof Object[]);
+    assertTrue(multiDimObjectArray instanceof Object[][]);
+    // TODO(b/184675805): enable when this is fixed.
+    // assertFalse(multiDimObjectArray instanceof int[][]);
+    // assertFalse(multiDimObjectArray instanceof long[][]);
+    // assertFalse(multiDimObjectArray instanceof SomeInterface[]);
+
+    Object referencetArray = new SomeInterface[0];
+    assertFalse(referencetArray instanceof int[]);
+    assertFalse(referencetArray instanceof long[]);
+    assertTrue(referencetArray instanceof Object[]);
+    assertTrue(referencetArray instanceof SomeInterface[]);
+    // TODO(b/184675805): enable when this is fixed.
+    // assertFalse(referencetArray instanceof Object[][]);
+    // assertFalse(referencetArray instanceof int[][]);
+    // assertFalse(referencetArray instanceof long[][]);
   }
 }
