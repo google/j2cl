@@ -36,7 +36,8 @@ public class Main {
     testDynamicClassMethodDispatch();
     testSwitch();
     testWasmAnnotation();
-    testMathLogAndFriends();
+    // TODO(b/185422418): Re-eanble after the flakiness is resolved.
+    // testMathLogAndFriends();
     testClassLiterals();
     testTry();
     testArrayInstanceOf();
