@@ -11,7 +11,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = ["Foo.java"],
-    generate_wasm_readables = False,
+    generate_wasm_readables = True,
     plugins = [":dummy-processor"],
 )
 

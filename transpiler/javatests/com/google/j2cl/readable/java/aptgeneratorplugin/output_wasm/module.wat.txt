@@ -1,0 +1,166 @@
+;;; Code for aptgeneratorplugin.Dummy [vtable]
+(global $aptgeneratorplugin.Dummy.vtable (mut (ref null $aptgeneratorplugin.Dummy.vtable)) (ref.null $aptgeneratorplugin.Dummy.vtable))
+
+;;; Code for aptgeneratorplugin.Foo [vtable]
+(global $aptgeneratorplugin.Foo.vtable (mut (ref null $aptgeneratorplugin.Foo.vtable)) (ref.null $aptgeneratorplugin.Foo.vtable))
+
+;;; Code for aptgeneratorplugin.Dummy [static fields]
+(global $f_$initialized__aptgeneratorplugin_Dummy (mut i32) (i32.const 0))
+
+;;; Code for aptgeneratorplugin.Foo [static fields]
+(global $f_$initialized__aptgeneratorplugin_Foo (mut i32) (i32.const 0))
+
+;;; Code for aptgeneratorplugin.Dummy [CLASS]
+(type $aptgeneratorplugin.Dummy (struct
+ (field $vtable (ref null $aptgeneratorplugin.Dummy.vtable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+))
+(type $aptgeneratorplugin.Dummy.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+
+;;; Dummy()
+(func $m_<init>__void@aptgeneratorplugin.Dummy
+ (param $this (ref null $aptgeneratorplugin.Dummy))
+ (result (ref null $aptgeneratorplugin.Dummy))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+  )
+ )
+ (local.get $this)
+)
+
+;;; void Dummy.$clinit()
+(func $$clinit__void@aptgeneratorplugin.Dummy
+ (block $return.label
+  (block
+   ;; if (aptgeneratorplugin.Dummy.$initialized) return;
+   (if (global.get $f_$initialized__aptgeneratorplugin_Dummy)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (aptgeneratorplugin.Dummy.$initialized = true);
+   (global.set $f_$initialized__aptgeneratorplugin_Dummy (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
+;;; Class<?> Dummy.getClass()
+(func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $aptgeneratorplugin.Dummy))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Dummy.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy();
+   (local.set $return.value (call $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy)
+
+;;; Code for aptgeneratorplugin.Foo [CLASS]
+(type $aptgeneratorplugin.Foo (struct
+ (field $vtable (ref null $aptgeneratorplugin.Foo.vtable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+))
+(type $aptgeneratorplugin.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+))
+
+;;; Foo()
+(func $m_<init>__void@aptgeneratorplugin.Foo
+ (param $this (ref null $aptgeneratorplugin.Foo))
+ (result (ref null $aptgeneratorplugin.Foo))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+  )
+ )
+ (local.get $this)
+)
+
+;;; String Foo.toString()
+(func $m_toString__java_lang_String@aptgeneratorplugin.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ (local $return.value (ref null $java.lang.String))
+ (local $$qualifier (ref null $java.lang.Class))
+ (local $this (ref null $aptgeneratorplugin.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy(),$qualifier.getSimpleName());
+   (local.set $return.value (block (result (ref null $java.lang.String))
+    
+    (local.set $$qualifier (call $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+    (call_ref (local.get $$qualifier)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
+   ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_toString__java_lang_String@aptgeneratorplugin.Foo)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@aptgeneratorplugin.Foo
+ (block $return.label
+  (block
+   ;; if (aptgeneratorplugin.Foo.$initialized) return;
+   (if (global.get $f_$initialized__aptgeneratorplugin_Foo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (aptgeneratorplugin.Foo.$initialized = true);
+   (global.set $f_$initialized__aptgeneratorplugin_Foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $aptgeneratorplugin.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Foo();
+   (local.set $return.value (call $$getAptgeneratorplugin.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo)
+
+ ;;; Code for aptgeneratorplugin.Dummy [vtable.init]
+ (global.set $aptgeneratorplugin.Dummy.vtable (struct.new_with_rtt $aptgeneratorplugin.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy) (rtt.canon $aptgeneratorplugin.Dummy.vtable)))
+
+ ;;; Code for aptgeneratorplugin.Foo [vtable.init]
+ (global.set $aptgeneratorplugin.Foo.vtable (struct.new_with_rtt $aptgeneratorplugin.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratorplugin.Foo) (ref.func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo) (rtt.canon $aptgeneratorplugin.Foo.vtable)))

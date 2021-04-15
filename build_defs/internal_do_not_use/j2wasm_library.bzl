@@ -24,10 +24,10 @@ def _impl_j2wasm_library_rule(ctx):
         ctx = ctx,
         name = ctx.label.name,
         srcs = ctx.files.srcs,
-        deps = _to_java_providers(ctx.attr.deps),
-        exports = _to_java_providers(ctx.attr.exports),
-        plugins = ctx.attr.plugins,
-        exported_plugins = ctx.attr.exported_plugins,
+        deps = _get_java_providers_from_j2wasm(ctx.attr.deps),
+        exports = _get_java_providers_from_j2wasm(ctx.attr.exports),
+        plugins = _get_java_providers(ctx.attr.plugins),
+        exported_plugins = _get_java_providers(ctx.attr.exported_plugins),
         output_jar = ctx.outputs.jar,
         javac_opts = ctx.attr.javacopts,
         mnemonic = "J2wasm",
@@ -49,8 +49,11 @@ def _get_transitive_sources(java_provider, deps):
 def _get_transitive_classpath(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_classpath for d in deps])
 
-def _to_java_providers(libs):
+def _get_java_providers_from_j2wasm(libs):
     return [lib[J2wasmInfo]._private_.java_info for lib in libs]
+
+def _get_java_providers(deps):
+    return [d[JavaInfo] for d in deps]
 
 j2wasm_library = rule(
     implementation = _impl_j2wasm_library_rule,
