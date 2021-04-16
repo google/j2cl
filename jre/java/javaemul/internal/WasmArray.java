@@ -15,8 +15,10 @@
  */
 package javaemul.internal;
 
+import java.io.Serializable;
+
 /** A common base abstraction for the arrays in Wasm. */
-abstract class WasmArray {
+abstract class WasmArray implements Serializable, Cloneable {
 
   abstract int getLength();
 
