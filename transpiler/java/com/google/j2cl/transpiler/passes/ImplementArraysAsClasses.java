@@ -32,6 +32,10 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
+import com.google.j2cl.transpiler.ast.Variable;
+import com.google.j2cl.transpiler.ast.VariableReference;
+import java.util.HashMap;
+import java.util.Map;
 
 /** Rewrite Arrays operations for Wasm */
 public class ImplementArraysAsClasses extends NormalizationPass {
@@ -73,6 +77,26 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                 .build();
           }
 
+          private final Map<Variable, Variable> variableReplacements = new HashMap<>();
+
+          @Override
+          public Node rewriteVariable(Variable variable) {
+            if (!variable.getTypeDescriptor().isArray()) {
+              return variable;
+            }
+            Variable newVariable = markVariableTypeDescriptorAsNative(variable);
+            variableReplacements.put(variable, newVariable);
+            return newVariable;
+          }
+
+          @Override
+          public Node rewriteVariableReference(VariableReference variableReference) {
+            if (!variableReference.getTypeDescriptor().isArray()) {
+              return variableReference;
+            }
+            return new VariableReference(variableReplacements.get(variableReference.getTarget()));
+          }
+
           @Override
           public Expression rewriteNewArray(NewArray newArray) {
             return NewArray.Builder.from(newArray)
@@ -108,8 +132,9 @@ public class ImplementArraysAsClasses extends NormalizationPass {
               return arrayLength;
             }
 
-            return ArrayLength.newBuilder()
-                .setArrayExpression(getInnerNativeArrayExpression(arrayLength.getArrayExpression()))
+            return FieldAccess.Builder.from(
+                    TypeDescriptors.get().javaemulInternalWasmArray.getFieldDescriptor("length"))
+                .setQualifier(arrayLength.getArrayExpression())
                 .build();
           }
 
@@ -130,6 +155,13 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
   private static FieldDescriptor markFieldTypeDescriptorAsNative(FieldDescriptor original) {
     return FieldDescriptor.Builder.from(original)
+        .setTypeDescriptor(
+            markArrayTypeDescriptorAsNative((ArrayTypeDescriptor) original.getTypeDescriptor()))
+        .build();
+  }
+
+  private static Variable markVariableTypeDescriptorAsNative(Variable original) {
+    return Variable.Builder.from(original)
         .setTypeDescriptor(
             markArrayTypeDescriptorAsNative((ArrayTypeDescriptor) original.getTypeDescriptor()))
         .build();

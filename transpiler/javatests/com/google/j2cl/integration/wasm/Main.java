@@ -21,6 +21,8 @@ import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
+import java.util.ArrayList;
+import javaemul.internal.ArrayHelper;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
@@ -40,6 +42,12 @@ public class Main {
     // testMathLogAndFriends();
     testClassLiterals();
     testTry();
+    testWasmArrayApis();
+    // TODO(b/171833737): Enable after System.getProperty support is added.
+    // testArrayList();
+    // TODO(b/171833737): Enable after System.getProperty and Class.getComponentType support is
+    // added.
+    // testSystemArrayCopy();
   }
 
   static class A {
@@ -216,5 +224,73 @@ public class Main {
       i += 3;
     }
     assertEquals(14, i);
+  }
+
+  private static void testWasmArrayApis() {
+    Object[] array = new Object[0];
+    ArrayHelper.push(array, "c");
+    ArrayHelper.push(array, "d");
+    assertEquals(array, new Object[] {"c", "d"});
+
+    ArrayHelper.insertTo(array, 0, "a");
+    assertEquals(array, new Object[] {"a", "c", "d"});
+    ArrayHelper.insertTo(array, 1, "b");
+    assertEquals(array, new Object[] {"a", "b", "c", "d"});
+
+    ArrayHelper.removeFrom(array, 3, 1);
+    ArrayHelper.removeFrom(array, 0, 1);
+    assertEquals(array, new Object[] {"b", "c"});
+
+    ArrayHelper.setLength(array, 5);
+    assertEquals(array, new Object[] {"b", "c", null, null, null});
+    ArrayHelper.setLength(array, 1);
+    assertEquals(array, new Object[] {"b"});
+  }
+
+  private static void testArrayList() {
+    ArrayList<String> list = new ArrayList<>();
+    list.add("a");
+    list.add("b");
+    list.add("d");
+    list.add("e");
+    list.add(2, "c");
+    assertEquals(list.toArray(), new Object[] {"a", "b", "c", "d", "e"});
+
+    list.remove(4);
+    list.remove(0);
+    assertEquals(list.toArray(), new Object[] {"b", "c", "d"});
+
+    list.clear();
+    assertEquals(list.toArray(), new Object[] {});
+    list.add("z");
+    assertEquals(list.toArray(), new Object[] {"z"});
+  }
+
+  static class Foo {}
+
+  static class Bar extends Foo {}
+
+  private static void testSystemArrayCopy() {
+    Foo[] fooArray = new Foo[4];
+    Bar[] barArray = new Bar[4];
+    Object[] src = new Object[] {new Bar(), new Bar(), new Foo(), new Bar()};
+    System.arraycopy(src, 0, fooArray, 0, src.length);
+    for (int i = 0; i < src.length; ++i) {
+      assertEquals(src[i], fooArray[i]);
+    }
+
+    String[] strArray = new String[] {"0", "1", "2", "3"};
+
+    System.arraycopy(strArray, 0, strArray, 1, strArray.length - 1);
+    String[] strArrayExpected1 = new String[] {"0", "0", "1", "2"};
+    for (int i = 0; i < strArray.length; ++i) {
+      assertEquals("rev str copy index " + i, strArrayExpected1[i], strArray[i]);
+    }
+
+    System.arraycopy(strArray, 1, strArray, 0, strArray.length - 1);
+    String[] strArrayExpected2 = new String[] {"0", "1", "2", "2"};
+    for (int i = 0; i < strArray.length; ++i) {
+      assertEquals("rev str copy index " + i, strArrayExpected2[i], strArray[i]);
+    }
   }
 }

@@ -1,21 +1,23 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1965021 to 1962903 bytes (100%->99.9%) and from
-  701178 to 700307 bytes (100%->99.9%) gzipped.
+  1962794 to 1964024 bytes (100%->100.1%) and from
+  700331 to 700804 bytes (100%->100.1%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       1752     1316 wasm.esnext (-24.9%)
-       2002     1567 wasm (-21.7%)
+        908      907 classliteralobfuscated (-0.1%)
+       2156     2155 staticinitsuper.esnext (-0.0%)
 
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+       1316     1544 wasm.esnext (17.3%)
+       1567     1814 wasm (15.8%)
 
 
 Incremental size reports (non-gzip):
@@ -28,12 +30,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4021696  4021696 box2d_default (unchanged)
-    2194264  2194264 box2d_default.minified (unchanged)
-    1181594  1181594 box2d_default.rta (unchanged)
-    2418259  2418259 emptyclass (unchanged)
-    1452530  1452530 emptyclass.minified (unchanged)
-     717639   717639 emptyclass.rta (unchanged)
+    4021994  4021672 box2d_default (-0.0%)
+    2194355  2194131 box2d_default.minified (-0.0%)
+    1181685  1166018 box2d_default.rta (-1.3%)
+    2418557  2418235 emptyclass (-0.0%)
+    1452621  1452397 emptyclass.minified (-0.0%)
+     717730   700423 emptyclass.rta (-2.4%)
 
 
 All reports:
@@ -115,7 +117,7 @@ All reports:
         639      639 circularcompiletimeconstant.esnext (unchanged)
        3149     3149 classliteral (unchanged)
        2841     2841 classliteral.esnext (unchanged)
-        908      908 classliteralobfuscated (unchanged)
+        908      907 classliteralobfuscated (-0.1%)
         617      617 classliteralobfuscated.esnext (unchanged)
        2143     2143 classliteralstripped (unchanged)
        1848     1848 classliteralstripped.esnext (unchanged)
@@ -229,8 +231,8 @@ All reports:
         808      808 jsconstructorfieldinitorder.esnext (unchanged)
        1008     1008 jsconstructornested (unchanged)
         715      715 jsconstructornested.esnext (unchanged)
-       6197     6197 jsenum (unchanged)
-       5671     5671 jsenum.esnext (unchanged)
+       6200     6200 jsenum (unchanged)
+       5674     5674 jsenum.esnext (unchanged)
        1182     1182 jsfunction (unchanged)
         868      868 jsfunction.esnext (unchanged)
        1336     1336 jsfunctionbridge (unchanged)
@@ -259,10 +261,10 @@ All reports:
        1884     1884 lambdas.esnext (unchanged)
         986      986 localgenericclassinitjustonce (unchanged)
         690      690 localgenericclassinitjustonce.esnext (unchanged)
-       4630     4630 logging (unchanged)
-       4143     4143 logging.esnext (unchanged)
+       4631     4631 logging (unchanged)
+       4145     4145 logging.esnext (unchanged)
        3875     3875 loggingstripped (unchanged)
-       3441     3441 loggingstripped.esnext (unchanged)
+       3444     3444 loggingstripped.esnext (unchanged)
        2767     2767 longimplicitcasts (unchanged)
        2483     2483 longimplicitcasts.esnext (unchanged)
        2542     2542 longoperationsinglesideeffect (unchanged)
@@ -365,8 +367,8 @@ All reports:
         882      882 staticinitfailfast.esnext (unchanged)
         966      966 staticinitorder (unchanged)
         683      683 staticinitorder.esnext (unchanged)
-       2518     2518 staticinitsuper (unchanged)
-       2155     2155 staticinitsuper.esnext (unchanged)
+       2519     2519 staticinitsuper (unchanged)
+       2156     2155 staticinitsuper.esnext (-0.0%)
         884      884 staticjsmethods (unchanged)
         593      593 staticjsmethods.esnext (unchanged)
         990      990 staticnestedclass (unchanged)
@@ -397,8 +399,8 @@ All reports:
          22       22 systemgetproperty.esnext (unchanged)
        1042     1042 ternaryexpression (unchanged)
         738      738 ternaryexpression.esnext (unchanged)
-       3840     3840 trywithresource (unchanged)
-       3176     3176 trywithresource.esnext (unchanged)
+       3843     3843 trywithresource (unchanged)
+       3178     3178 trywithresource.esnext (unchanged)
        1045     1045 typewildcards (unchanged)
         745      745 typewildcards.esnext (unchanged)
        1144     1144 unaryexpressions (unchanged)
@@ -407,12 +409,12 @@ All reports:
        3195     3195 underflowoverflowconversion.esnext (unchanged)
         179      179 unusedmultiexpressionreturn (unchanged)
         183      183 unusedmultiexpressionreturn.esnext (unchanged)
-       3735     3735 varargs (unchanged)
-       3350     3350 varargs.esnext (unchanged)
+       3738     3738 varargs (unchanged)
+       3352     3352 varargs.esnext (unchanged)
        1001     1001 variables (unchanged)
         712      712 variables.esnext (unchanged)
-       2002     1567 wasm (-21.7%)
-       1752     1316 wasm.esnext (-24.9%)
+       1567     1814 wasm (15.8%)
+       1316     1544 wasm.esnext (17.3%)
         918      918 whilestatement (unchanged)
         624      624 whilestatement.esnext (unchanged)
        1976     1976 wideningfloatconversion (unchanged)

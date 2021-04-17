@@ -505,7 +505,7 @@
    ;; return (MyEnum[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.A)),($array_literal.elements[1] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.B)),($array_literal.elements[2] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.C)),$array_literal);
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
+    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $libraryinfo.Main.MyEnum))
      (call $$clinit__void@libraryinfo.Main.MyEnum )
      (global.get $f_A__libraryinfo_Main_MyEnum)

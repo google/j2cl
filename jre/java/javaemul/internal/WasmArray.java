@@ -20,11 +20,27 @@ import java.io.Serializable;
 /** A common base abstraction for the arrays in Wasm. */
 abstract class WasmArray implements Serializable, Cloneable {
 
-  abstract int getLength();
+  int length;
 
-  abstract Object get(int index);
+  protected WasmArray(int length) {
+    this.length = length;
+  }
 
-  abstract void set(int index, Object o);
+  public final int getLength() {
+    return length;
+  }
+
+  // TODO(b/185437698): convert following methods to abstract when all subtypes implement them.
+
+  /** Create a new array of same type with given length. */
+  Object newArray(int length) {
+    return null;
+  }
+
+  /** Change the length of the array. May resize storage if necessary. */
+  void setLength(int length) {}
+
+  void copyFrom(int offset, WasmArray values, int valueOffset, int len) {}
 
   public static Object[] createMultiDimensional(int[] dimensionLengths, int leafType) {
     return (Object[]) createRecursively(dimensionLengths, 0, leafType);
@@ -73,23 +89,85 @@ abstract class WasmArray implements Serializable, Cloneable {
   }
 
   static class OfObject extends WasmArray {
-
     Object[] elements;
 
     OfObject(int length) {
-      elements = new Object[length];
+      super(length);
+      this.elements = new Object[length];
     }
 
-    public Object get(int index) {
-      return elements[index];
+    @Override
+    Object newArray(int length) {
+      return new WasmArray.OfObject(length);
     }
 
-    public void set(int index, Object o) {
-      elements[index] = o;
+    @Override
+    public void setLength(int newLength) {
+      ensureCapacity(newLength);
+      if (newLength < length) {
+        // Clear to outside contents
+        for (int i = newLength; i < length; i++) {
+          elements[i] = null;
+        }
+      }
+      length = newLength;
     }
 
-    public int getLength() {
-      return elements.length;
+    public void push(Object o) {
+      int newLength = length + 1;
+      ensureCapacity(newLength);
+      elements[length] = o;
+      length = newLength;
+    }
+
+    private void ensureCapacity(int newLength) {
+      if (newLength > elements.length) {
+        // Not enough capacity, increase it.
+        Object[] original = elements;
+        elements = new Object[getNewCapacity(length, newLength)];
+        copy(original, 0, elements, 0, original.length);
+      }
+    }
+
+    public void insertFrom(int insertIndex, WasmArray.OfObject values) {
+      Object[] original = elements;
+      int newLength = length + values.length;
+
+      // Ensure enough capacity.
+      if (newLength > elements.length) {
+        elements = new Object[getNewCapacity(elements.length, newLength)];
+        // Copy only up to index since the other will be moved anyway.
+        copy(original, 0, this.elements, 0, insertIndex);
+      }
+
+      // Copy new values into the insert location.
+      copy(values.elements, 0, this.elements, insertIndex, values.length);
+
+      // Move existing values beyond the insert point until to the end.
+      int insertEndIndex = insertIndex + values.length;
+      copy(original, insertIndex, this.elements, insertEndIndex, newLength - insertEndIndex);
+
+      // Adjust the final size to cover all copied items
+      length = newLength;
+    }
+
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(((WasmArray.OfObject) values).elements, valueOffset, elements, offset, len);
+    }
+
+    private static void copy(Object[] src, int srcOfs, Object[] dest, int destOfs, int len) {
+      if (src == dest && srcOfs < destOfs) {
+        // Reverse copy to handle overlap that would destroy values otherwise.
+        srcOfs += len;
+        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
+          dest[--destEnd] = src[--srcOfs];
+        }
+      } else {
+        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
+          dest[destOfs++] = src[srcOfs++];
+        }
+      }
     }
   }
 
@@ -98,19 +176,8 @@ abstract class WasmArray implements Serializable, Cloneable {
     private byte[] elements;
 
     OfByte(int length) {
+      super(length);
       elements = new byte[length];
-    }
-
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object b) {
-      elements[index] = (byte) b;
-    }
-
-    public int getLength() {
-      return elements.length;
     }
   }
 
@@ -119,19 +186,8 @@ abstract class WasmArray implements Serializable, Cloneable {
     private short[] elements;
 
     OfShort(int length) {
+      super(length);
       elements = new short[length];
-    }
-
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object s) {
-      elements[index] = (short) s;
-    }
-
-    public int getLength() {
-      return elements.length;
     }
   }
 
@@ -140,20 +196,10 @@ abstract class WasmArray implements Serializable, Cloneable {
     private char[] elements;
 
     OfChar(int length) {
+      super(length);
       elements = new char[length];
     }
 
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object c) {
-      elements[index] = (char) c;
-    }
-
-    public int getLength() {
-      return elements.length;
-    }
   }
 
   static class OfInt extends WasmArray {
@@ -161,19 +207,8 @@ abstract class WasmArray implements Serializable, Cloneable {
     private int[] elements;
 
     OfInt(int length) {
+      super(length);
       elements = new int[length];
-    }
-
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object i) {
-      elements[index] = (int) i;
-    }
-
-    public int getLength() {
-      return elements.length;
     }
   }
 
@@ -182,20 +217,10 @@ abstract class WasmArray implements Serializable, Cloneable {
     private long[] elements;
 
     OfLong(int length) {
+      super(length);
       elements = new long[length];
     }
 
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object l) {
-      elements[index] = (long) l;
-    }
-
-    public int getLength() {
-      return elements.length;
-    }
   }
 
   static class OfFloat extends WasmArray {
@@ -203,19 +228,8 @@ abstract class WasmArray implements Serializable, Cloneable {
     private float[] elements;
 
     OfFloat(int length) {
+      super(length);
       elements = new float[length];
-    }
-
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object f) {
-      elements[index] = (float) f;
-    }
-
-    public int getLength() {
-      return elements.length;
     }
   }
 
@@ -224,19 +238,8 @@ abstract class WasmArray implements Serializable, Cloneable {
     private double[] elements;
 
     OfDouble(int length) {
+      super(length);
       elements = new double[length];
-    }
-
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object b) {
-      elements[index] = (double) b;
-    }
-
-    public int getLength() {
-      return elements.length;
     }
   }
 
@@ -245,19 +248,14 @@ abstract class WasmArray implements Serializable, Cloneable {
     private boolean[] elements;
 
     OfBoolean(int length) {
+      super(length);
       elements = new boolean[length];
     }
+  }
 
-    public Object get(int index) {
-      return elements[index];
-    }
-
-    public void set(int index, Object b) {
-      elements[index] = (boolean) b;
-    }
-
-    public int getLength() {
-      return elements.length;
-    }
+  private static int getNewCapacity(int originalCapacity, int requestedCapacity) {
+    // Grow roughly with 1.5x rate at minimum.
+    int minCapacity = originalCapacity + (originalCapacity >> 1) + 1;
+    return Math.max(minCapacity, requestedCapacity);
   }
 }

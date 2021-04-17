@@ -90,14 +90,14 @@
      
     )
    )
-   ;; LOOP: for (Throwable[] $array = new OfObject.<init>(10),int $index = 0;($index < <expr>);($index = ($index + 1))) {
+   ;; LOOP: for (Throwable[] $array = new OfObject.<init>(10),int $index = 0;($index < $array.length);($index = ($index + 1))) {
    
    
-   (local.set $$array (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
+   (local.set $$array (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
    (local.set $$index (i32.const 0))
    (block $LOOP_1.BREAK
     (loop
-     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (array.len $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array))))))
+     (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $$array)))))
      (block $LOOP_1.CONTINUE
       (block
        ;; Throwable t = (Object $cast_expression = $array.elements[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Throwable) $cast_expression)));
