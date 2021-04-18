@@ -47,15 +47,17 @@ def js_devserver(
         **kwargs):
     """Creates a development server target."""
 
+    closure_js_args = dict(kwargs)
+    closure_js_args["defs"] = (closure_js_args.get("defs") or []) + entry_point_defs
+
     closure_js_binary(
         name = name,
         compilation_level = "BUNDLE",
-        defs = entry_point_defs,
         deps = deps,
         # For J2CL it is in impractical to embed all source into sourcemap since
         # it bloats sourcemaps as well as it slows down bundling.
         nodefs = ["--source_map_include_content"],
-        **kwargs
+        **closure_js_args
     )
 
     web_library(

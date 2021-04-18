@@ -67,13 +67,13 @@ def j2cl_application(
     }
     _define_js("%s_config" % name, define_defaults, closure_defines)
 
+    closure_js_args = dict(kwargs)
+    closure_js_args["defs"] = (closure_js_args.get("defs") or []) + J2CL_OPTIMIZED_DEFS + entry_point_defs + [ "--rewrite_polyfills=%s" % rewrite_polyfills, ] + extra_production_args
+
     js_binary(
         name = name,
-        defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + [
-            "--rewrite_polyfills=%s" % rewrite_polyfills,
-        ] + extra_production_args,
         deps = [":%s_config" % name] + deps,
-        **kwargs
+        **closure_js_args
     )
 
     #### Development binary setup ####
