@@ -190,7 +190,8 @@ final class ExpressionTranspiler {
           return false;
         }
 
-        // TODO(b/180967010): implement full support of array cast.
+        // TODO(b/184675805): implement array cast expressions beyond this nominal
+        // implementation.
         sourceBuilder.append("(ref.cast ");
         render(castExpression.getExpression());
         sourceBuilder.append(
@@ -247,17 +248,16 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterInstanceOfExpression(InstanceOfExpression instanceOfExpression) {
         TypeDescriptor testTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-        if (testTypeDescriptor.isClass() || testTypeDescriptor.isEnum()) {
+        // TODO(b/184675805): implement array instanceof expressions beyond this nominal
+        // implementation.
+        if (!testTypeDescriptor.isInterface()) {
           sourceBuilder.append("(ref.test ");
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(
-              format(
-                  " (global.get %s))",
-                  environment.getRttGlobalName(
-                      ((DeclaredTypeDescriptor) testTypeDescriptor).getTypeDeclaration())));
+              format(" (global.get %s))", environment.getRttGlobalName(testTypeDescriptor)));
           return false;
         }
-        // TODO(rluble): handle interface and array instanceof expressions.
+        // TODO(b/170691636): handle interface instanceof expressions.
         renderUnimplementedExpression(instanceOfExpression);
         return false;
       }

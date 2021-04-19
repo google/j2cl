@@ -168,31 +168,31 @@
    ;; boolean a;
    
    ;; (a = object instanceof Object[]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $object) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = object instanceof String[][]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $object) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = object instanceof Object[]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $object) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = object instanceof String[][]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $object) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = objectArray instanceof Object[]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $objectArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = objectArray instanceof String[]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $objectArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = objectArray instanceof Object[][]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $objectArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = objectArray instanceof String[][]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $objectArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = objectDoubleArray instanceof Object[]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $objectDoubleArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = objectDoubleArray instanceof Object[][]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $objectDoubleArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = objectDoubleArray instanceof String[][]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $objectDoubleArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = stringArray instanceof Object[]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $stringArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
    ;; (a = stringArray instanceof String[]);
-   (local.set $a (i32.const 0))
+   (local.set $a (ref.test (local.get $stringArray) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
   )
  )
 )
