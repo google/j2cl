@@ -125,8 +125,6 @@
  (local $return.value (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
  (local $star (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
@@ -134,19 +132,11 @@
    ;; Object object = new Object.<init>();
    
    (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   ;; Star star = (Object $cast_expression = java.lang.Double.valueOf(3.0),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Star) $cast_expression)));
+   ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
    
-   (local.set $star (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
-   ;; return (Object $cast_expression = star,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Wildcard) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_1 (local.get $star))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_1)))
-   ))
+   (local.set $star (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))
+   ;; return ((Wildcard) star);
+   (local.set $return.value (local.get $star))
    (br $return.label)
   )
  )

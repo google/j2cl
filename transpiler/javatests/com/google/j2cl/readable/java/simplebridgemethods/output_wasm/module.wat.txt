@@ -159,17 +159,12 @@
 (func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Error))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Subclass.rtt)))
  (block $return.label
   (block
-   ;; Subclass.this.m1((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((AssertionError) $cast_expression))));
-   (call_ref (local.get $this)(block (result (ref null $java.lang.AssertionError))
-    
-    (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.AssertionError)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.AssertionError)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.AssertionError.rtt))))
-   )(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
+   ;; Subclass.this.m1(((AssertionError) arg0));
+   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
   )
  )
 )
@@ -433,17 +428,12 @@
 (func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.AnotherTask.rtt)))
  (block $return.label
   (block
-   ;; AnotherTask.this.call((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Superclass<T>) $cast_expression))));
-   (call_ref (local.get $this)(block (result (ref null $simplebridgemethods.Superclass))
-    
-    (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $simplebridgemethods.Superclass)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $simplebridgemethods.Superclass)) (else (ref.cast (local.get $$cast_expression) (global.get $simplebridgemethods.Superclass.rtt))))
-   )(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
+   ;; AnotherTask.this.call(((Superclass<T>) arg0));
+   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $simplebridgemethods.Superclass.rtt))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
   )
  )
 )

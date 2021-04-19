@@ -270,22 +270,17 @@
  (param $array (ref null $javaemul.internal.WasmArray.OfInt))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; importglobaljstypes.Number.$clinit();
    (call $$clinit__void@importglobaljstypes.Number )
-   ;; return (Object $cast_expression = (NativeFunction<String> $qualifier = importglobaljstypes.Number.getFromCharCodeFunction(),$qualifier.apply(null,array)),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.String))
+   ;; return ((String) (NativeFunction<String> $qualifier = importglobaljstypes.Number.getFromCharCodeFunction(),$qualifier.apply(null,array)));
+   (local.set $return.value (ref.cast (block (result (ref null $java.lang.Object))
     
-    (local.set $$cast_expression (block (result (ref null $java.lang.Object))
-     
-     (local.set $$qualifier (call $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number ))
-     (ref.null $java.lang.String)
-    ))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
-   ))
+    (local.set $$qualifier (call $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number ))
+    (ref.null $java.lang.String)
+   ) (global.get $java.lang.String.rtt)))
    (br $return.label)
   )
  )

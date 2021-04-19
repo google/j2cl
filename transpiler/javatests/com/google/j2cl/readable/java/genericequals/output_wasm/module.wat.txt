@@ -64,7 +64,6 @@
  (result i32)
  (local $return.value i32)
  (local $other (ref null $genericequals.GenericEquals))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericequals.GenericEquals.rtt)))
  (block $return.label
@@ -89,13 +88,9 @@
      )
     )
    )
-   ;; GenericEquals<?> other = (Object $cast_expression = obj,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((GenericEquals<?>) $cast_expression)));
+   ;; GenericEquals<?> other = ((GenericEquals<?>) obj);
    
-   (local.set $other (block (result (ref null $genericequals.GenericEquals))
-    
-    (local.set $$cast_expression (local.get $obj))
-    (if (result (ref null $genericequals.GenericEquals)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $genericequals.GenericEquals)) (else (ref.cast (local.get $$cast_expression) (global.get $genericequals.GenericEquals.rtt))))
-   ))
+   (local.set $other (ref.cast (local.get $obj) (global.get $genericequals.GenericEquals.rtt)))
    ;; return GenericEquals.this.value.equals(other.value);
    (local.set $return.value (call_ref (struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this))(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $other))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(struct.get $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this))))))
    (br $return.label)

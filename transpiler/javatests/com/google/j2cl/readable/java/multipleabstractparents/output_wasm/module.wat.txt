@@ -108,7 +108,6 @@
  (local $$qualifier_3 (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
  (local $$qualifier_4 (ref null $java.lang.String))
  (local $$qualifier_5 (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; multipleabstractparents.MultipleAbstractParents.$clinit();
@@ -117,7 +116,7 @@
    ;; unimplemented statement AssertStatement
    ;; assert (String $qualifier = (StringList $qualifier = new StringList.<init>(),$qualifier.getFoo(null)),$qualifier.equals(javaemul.internal.StringPool.$getString_|AbstractColl...|()));
    ;; unimplemented statement AssertStatement
-   ;; assert (String $qualifier = (IStringList $qualifier = (Object $cast_expression = new StringList.<init>(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((IStringList) $cast_expression))),$qualifier.getFoo(null)),$qualifier.equals(javaemul.internal.StringPool.$getString_|AbstractColl...|()));
+   ;; assert (String $qualifier = (IStringList $qualifier = ((IStringList) new StringList.<init>()),$qualifier.getFoo(null)),$qualifier.equals(javaemul.internal.StringPool.$getString_|AbstractColl...|()));
    ;; unimplemented statement AssertStatement
   )
  )
@@ -636,17 +635,12 @@
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.rtt)))
  (block $return.label
   (block
-   ;; return AbstractStringList.this.getFoo((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
-   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
-   )(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable $m_getFoo__java_lang_String__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList $vtable(local.get $this)))))
+   ;; return AbstractStringList.this.getFoo(((String) arg0));
+   (local.set $return.value (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable $m_getFoo__java_lang_String__java_lang_String (struct.get $multipleabstractparents.MultipleAbstractParents.AbstractStringList $vtable(local.get $this)))))
    (br $return.label)
   )
  )

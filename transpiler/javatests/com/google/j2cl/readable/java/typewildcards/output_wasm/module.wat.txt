@@ -226,7 +226,6 @@
  (param $t (ref null $typewildcards.TypeWildCards.A))
  (local $i i32)
  (local $$qualifier (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; typewildcards.TypeWildCards.$clinit();
@@ -237,13 +236,9 @@
    ;; t.m();
    (call_ref (local.get $t)(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
    (block
-    ;; Y $qualifier = (Object $cast_expression = t,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Y) $cast_expression)));
+    ;; Y $qualifier = ((Y) t);
     
-    (local.set $$qualifier (block (result (ref null $java.lang.Object))
-     
-     (local.set $$cast_expression (local.get $t))
-     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-    ))
+    (local.set $$qualifier (local.get $t))
     ;; $qualifier.n();
     
    )
@@ -291,9 +286,7 @@
  (local $integers (ref null $java.lang.Object))
  (local $a (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $$qualifier_1 (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
  (block $return.label

@@ -563,22 +563,12 @@
  (param $arg1 (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
   (block
-   ;; return StringComparator.this.compare((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))),(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
-   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
-   )(block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression_1 (local.get $arg1))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
-   )(struct.get $nullability.Nullability.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.StringComparator $vtable(local.get $this)))))
+   ;; return StringComparator.this.compare(((String) arg0),((String) arg1));
+   (local.set $return.value (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $nullability.Nullability.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.StringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
  )
@@ -820,22 +810,12 @@
  (param $arg1 (ref null $java.lang.Object))
  (result i32)
  (local $return.value i32)
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
   (block
-   ;; return NullableStringComparator.this.compare((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))),(Object $cast_expression = arg1,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
-   (local.set $return.value (call_ref (local.get $this)(block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
-   )(block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression_1 (local.get $arg1))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
-   )(struct.get $nullability.Nullability.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.NullableStringComparator $vtable(local.get $this)))))
+   ;; return NullableStringComparator.this.compare(((String) arg0),((String) arg1));
+   (local.set $return.value (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $nullability.Nullability.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.NullableStringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
  )

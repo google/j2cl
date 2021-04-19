@@ -244,19 +244,14 @@
 (func $m_getAndSet__intersectiontype_Getable__void@intersectiontype.IntersectionTypeTest
  (param $object (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
    (block
-    ;; Setable $qualifier = (Object $cast_expression = object,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Setable) $cast_expression)));
+    ;; Setable $qualifier = ((Setable) object);
     
-    (local.set $$qualifier (block (result (ref null $java.lang.Object))
-     
-     (local.set $$cast_expression (local.get $object))
-     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-    ))
+    (local.set $$qualifier (local.get $object))
     ;; $qualifier.set(1);
     
    )
@@ -271,8 +266,6 @@
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
@@ -281,22 +274,14 @@
    (if (ref.is_null (local.get $o))
     (then
      (block
-      ;; return (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((Getable<T>&Setable)) $cast_expression)));
-      (local.set $return.value (block (result (ref null $java.lang.Object))
-       
-       (local.set $$cast_expression (local.get $o))
-       (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-      ))
+      ;; return (((Getable<T>&Setable)) o);
+      (local.set $return.value (local.get $o))
       (br $return.label)
      )
     )
    )
-   ;; return (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((Getable<T>&Setable)) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_1 (local.get $o))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_1)))
-   ))
+   ;; return (((Getable<T>&Setable)) o);
+   (local.set $return.value (local.get $o))
    (br $return.label)
   )
  )
@@ -308,17 +293,12 @@
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
-   ;; return (Object $cast_expression = s,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((Getable<Comparable<String>>&Setable)) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (local.get $s))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
+   ;; return (((Getable<Comparable<String>>&Setable)) s);
+   (local.set $return.value (local.get $s))
    (br $return.label)
   )
  )
@@ -330,17 +310,12 @@
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
-   ;; return (Object $cast_expression = s,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((Getable<Comparable<T>>&Setable)) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (local.get $s))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
+   ;; return (((Getable<Comparable<T>>&Setable)) s);
+   (local.set $return.value (local.get $s))
    (br $return.label)
   )
  )
@@ -370,17 +345,12 @@
 (func $m_method__intersectiontype_Cmp@intersectiontype.IntersectionTypeTest
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
-   ;; return (Object $cast_expression = function (){
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
+   ;; return (((Cmp&Serial)) function (){
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -391,18 +361,13 @@
 (func $m_method2__intersectiontype_Cmp2@intersectiontype.IntersectionTypeTest
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $a i32)
  (block $return.label
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
-   ;; return (Object $cast_expression = function (int a){
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
+   ;; return (((Cmp2&Serial)) function (int a){
+   (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
  )
@@ -413,46 +378,21 @@
 (func $m_testClosureAssignment__java_lang_Object__void@intersectiontype.IntersectionTypeTest
  (param $o (ref null $java.lang.Object))
  (local $e (ref null $intersectiontype.IntersectionTypeTest.A))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
- (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
- (local $$cast_expression_3 (ref null $java.lang.Object))
- (local $$cast_expression_4 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; intersectiontype.IntersectionTypeTest.$clinit();
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
-   ;; A e = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((A&EmptyA&EmptyB)) $cast_expression)));
+   ;; A e = (((A&EmptyA&EmptyB)) o);
    
-   (local.set $e (block (result (ref null $intersectiontype.IntersectionTypeTest.A))
-    
-    (local.set $$cast_expression (local.get $o))
-    (if (result (ref null $intersectiontype.IntersectionTypeTest.A)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $intersectiontype.IntersectionTypeTest.A)) (else (ref.cast (local.get $$cast_expression) (global.get $intersectiontype.IntersectionTypeTest.A.rtt))))
-   ))
-   ;; EmptyA g = (Object $cast_expression = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((A&EmptyA&EmptyB)) $cast_expression))),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((EmptyA) $cast_expression)));
+   (local.set $e (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+   ;; EmptyA g = ((EmptyA) (((A&EmptyA&EmptyB)) o));
    
-   (local.set $g (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_1 (block (result (ref null $intersectiontype.IntersectionTypeTest.A))
-     
-     (local.set $$cast_expression_2 (local.get $o))
-     (if (result (ref null $intersectiontype.IntersectionTypeTest.A)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $intersectiontype.IntersectionTypeTest.A)) (else (ref.cast (local.get $$cast_expression_2) (global.get $intersectiontype.IntersectionTypeTest.A.rtt))))
-    ))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_1)))
-   ))
-   ;; EmptyB s = (Object $cast_expression = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((A&EmptyA&EmptyB)) $cast_expression))),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((EmptyB) $cast_expression)));
+   (local.set $g (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+   ;; EmptyB s = ((EmptyB) (((A&EmptyA&EmptyB)) o));
    
-   (local.set $s (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_3 (block (result (ref null $intersectiontype.IntersectionTypeTest.A))
-     
-     (local.set $$cast_expression_4 (local.get $o))
-     (if (result (ref null $intersectiontype.IntersectionTypeTest.A)) (ref.is_null (local.get $$cast_expression_4)) (then (ref.null $intersectiontype.IntersectionTypeTest.A)) (else (ref.cast (local.get $$cast_expression_4) (global.get $intersectiontype.IntersectionTypeTest.A.rtt))))
-    ))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_3)))
-   ))
+   (local.set $s (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
   )
  )
 )
@@ -476,15 +416,10 @@
 (func $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest
  (result (ref null $intersectiontype.IntersectionTypeTest.A))
  (local $return.value (ref null $intersectiontype.IntersectionTypeTest.A))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
-   ;; return (Object $cast_expression = intersectiontype.IntersectionTypeTest.get(new Object.<init>()),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression)));
-   (local.set $return.value (block (result (ref null $intersectiontype.IntersectionTypeTest.A))
-    
-    (local.set $$cast_expression (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))))
-    (if (result (ref null $intersectiontype.IntersectionTypeTest.A)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $intersectiontype.IntersectionTypeTest.A)) (else (ref.cast (local.get $$cast_expression) (global.get $intersectiontype.IntersectionTypeTest.A.rtt))))
-   ))
+   ;; return ((T) intersectiontype.IntersectionTypeTest.get(new Object.<init>()));
+   (local.set $return.value (ref.cast (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    (br $return.label)
   )
  )
@@ -518,7 +453,6 @@
 (func $m_testMethodCall__void@intersectiontype.IntersectionTypeTest
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.rtt)))
@@ -527,12 +461,8 @@
    ;; Object o = intersectiontype.IntersectionTypeTest.m();
    
    (local.set $o (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
-   ;; intersectiontype.IntersectionTypeTest.set((Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((A&EmptyA)) $cast_expression))));
-   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (block (result (ref null $intersectiontype.IntersectionTypeTest.A))
-    
-    (local.set $$cast_expression (local.get $o))
-    (if (result (ref null $intersectiontype.IntersectionTypeTest.A)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $intersectiontype.IntersectionTypeTest.A)) (else (ref.cast (local.get $$cast_expression) (global.get $intersectiontype.IntersectionTypeTest.A.rtt))))
-   ))
+   ;; intersectiontype.IntersectionTypeTest.set((((A&EmptyA)) o));
+   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    ;; intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m());
    (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
    ;; Getable<?> g = intersectiontype.IntersectionTypeTest.n();
@@ -617,17 +547,12 @@
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.MapEntry.rtt)))
  (block $return.label
   (block
-   ;; return (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : ((((Getable<T>&Setable)) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (local.get $o))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
+   ;; return (((Getable<T>&Setable)) o);
+   (local.set $return.value (local.get $o))
    (br $return.label)
   )
  )

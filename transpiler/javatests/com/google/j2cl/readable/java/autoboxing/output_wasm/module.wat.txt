@@ -432,19 +432,14 @@
  (result f64)
  (local $return.value f64)
  (local $$qualifier (ref null $java.lang.Double))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $autoboxing.AutoBoxing))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.rtt)))
  (block $return.label
   (block
-   ;; return (Double $qualifier = (Object $cast_expression = o,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Double) $cast_expression))),$qualifier.doubleValue());
+   ;; return (Double $qualifier = ((Double) o),$qualifier.doubleValue());
    (local.set $return.value (block (result f64)
     
-    (local.set $$qualifier (block (result (ref null $java.lang.Double))
-     
-     (local.set $$cast_expression (local.get $o))
-     (if (result (ref null $java.lang.Double)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Double)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Double.rtt))))
-    ))
+    (local.set $$qualifier (ref.cast (local.get $o) (global.get $java.lang.Double.rtt)))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier))))
    ))
    (br $return.label)
@@ -464,9 +459,7 @@
  (local $$array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$index i32)
  (local $number (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Double))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $autoboxing.AutoBoxing))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.rtt)))
  (block $return.label
@@ -484,22 +477,14 @@
      (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $$array)))))
      (block $LOOP.CONTINUE
       (block
-       ;; Object number = (Object $cast_expression = $array.elements[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
+       ;; Object number = ((Object) $array.elements[$index]);
        
-       (local.set $number (block (result (ref null $java.lang.Object))
-        
-        (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
-        (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
-       ))
+       (local.set $number (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)) (global.get $java.lang.Object.rtt)))
        (block
-        ;; (sum = (sum + (Double $qualifier = (Object $cast_expression = number,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Double) $cast_expression))),$qualifier.doubleValue())));
+        ;; (sum = (sum + (Double $qualifier = ((Double) number),$qualifier.doubleValue())));
         (local.set $sum (f64.add (local.get $sum) (block (result f64)
          
-         (local.set $$qualifier (block (result (ref null $java.lang.Double))
-          
-          (local.set $$cast_expression_1 (local.get $number))
-          (if (result (ref null $java.lang.Double)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Double)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Double.rtt))))
-         ))
+         (local.set $$qualifier (ref.cast (local.get $number) (global.get $java.lang.Double.rtt)))
          (call_ref (local.get $$qualifier)(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier))))
         )))
        )
@@ -529,9 +514,7 @@
  (local $$array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$index i32)
  (local $number (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Double))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $autoboxing.AutoBoxing))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.rtt)))
  (block $return.label
@@ -549,22 +532,14 @@
      (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $$array)))))
      (block $LOOP.CONTINUE
       (block
-       ;; Object number = (Object $cast_expression = $array.elements[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
+       ;; Object number = ((Object) $array.elements[$index]);
        
-       (local.set $number (block (result (ref null $java.lang.Object))
-        
-        (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
-        (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
-       ))
+       (local.set $number (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)) (global.get $java.lang.Object.rtt)))
        (block
-        ;; (sum = (sum + (Double $qualifier = (Object $cast_expression = number,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Double) $cast_expression))),$qualifier.doubleValue())));
+        ;; (sum = (sum + (Double $qualifier = ((Double) number),$qualifier.doubleValue())));
         (local.set $sum (f64.add (local.get $sum) (block (result f64)
          
-         (local.set $$qualifier (block (result (ref null $java.lang.Double))
-          
-          (local.set $$cast_expression_1 (local.get $number))
-          (if (result (ref null $java.lang.Double)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Double)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Double.rtt))))
-         ))
+         (local.set $$qualifier (ref.cast (local.get $number) (global.get $java.lang.Double.rtt)))
          (call_ref (local.get $$qualifier)(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $$qualifier))))
         )))
        )
@@ -1230,20 +1205,15 @@
 ;;; void AutoBoxing.testUnboxingFromTypeVariable()
 (func $m_testUnboxingFromTypeVariable__void@autoboxing.AutoBoxing
  (local $n (ref null $java.lang.Long))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $l i64)
  (local $$qualifier (ref null $autoboxing.AutoBoxing.1Local))
  (block $return.label
   (block
    ;; autoboxing.AutoBoxing.$clinit();
    (call $$clinit__void@autoboxing.AutoBoxing )
-   ;; T n = (Object $cast_expression = java.lang.Long.valueOf(10),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression)));
+   ;; T n = ((T) java.lang.Long.valueOf(10));
    
-   (local.set $n (block (result (ref null $java.lang.Long))
-    
-    (local.set $$cast_expression (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10)))
-    (if (result (ref null $java.lang.Long)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Long)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Long.rtt))))
-   ))
+   (local.set $n (ref.cast (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10)) (global.get $java.lang.Long.rtt)))
    ;; long l = n.longValue();
    
    (local.set $l (call_ref (local.get $n)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $n)))))
@@ -1266,7 +1236,6 @@
 ;;; void AutoBoxing.testUnboxingFromIntersectionType()
 (func $m_testUnboxingFromIntersectionType__void@autoboxing.AutoBoxing
  (local $n (ref null $java.lang.Long))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $l i64)
  (local $$qualifier (ref null $autoboxing.AutoBoxing.2Local))
  (local $i i32)
@@ -1275,13 +1244,9 @@
   (block
    ;; autoboxing.AutoBoxing.$clinit();
    (call $$clinit__void@autoboxing.AutoBoxing )
-   ;; T n = (Object $cast_expression = java.lang.Long.valueOf(10),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((T) $cast_expression)));
+   ;; T n = ((T) java.lang.Long.valueOf(10));
    
-   (local.set $n (block (result (ref null $java.lang.Long))
-    
-    (local.set $$cast_expression (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10)))
-    (if (result (ref null $java.lang.Long)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Long)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Long.rtt))))
-   ))
+   (local.set $n (ref.cast (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 10)) (global.get $java.lang.Long.rtt)))
    ;; long l = n.longValue();
    
    (local.set $l (call_ref (local.get $n)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $n)))))

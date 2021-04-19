@@ -71,10 +71,6 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_5 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $object (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
- (local $$cast_expression_2 (ref null $java.lang.Object))
- (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -129,31 +125,15 @@
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 1) (i32.const -1))
     (local.get $$array_literal_5)
    )(i32.const -1)))
-   ;; Object object = (Object $cast_expression = objects.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression)));
+   ;; Object object = ((Object) objects.elements[0]);
    
-   (local.set $object (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Object.rtt))))
-   ))
-   ;; (object = (Object $cast_expression = (Object $cast_expression = objects2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object[]) $cast_expression))).elements[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object) $cast_expression))));
-   (local.set $object (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-     
-     (local.set $$cast_expression_2 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))
-     (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_2) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-    )) (i32.const 1)))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Object.rtt))))
-   ))
+   (local.set $object (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
+   ;; (object = ((Object) ((Object[]) objects2d.elements[0]).elements[1]));
+   (local.set $object (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1)) (global.get $java.lang.Object.rtt)))
    ;; (objects.elements[0] = null);
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
-   ;; ((Object $cast_expression = objects2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object[]) $cast_expression))).elements[1] = null);
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
-    (local.set $$cast_expression_3 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_3) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-   )) (i32.const 1) (ref.null $java.lang.Object))
+   ;; (((Object[]) objects2d.elements[0]).elements[1] = null);
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1) (ref.null $java.lang.Object))
   )
  )
 )
@@ -171,10 +151,6 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_5 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $someObject (ref null $array.Arrays.SomeObject))
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
- (local $$cast_expression_2 (ref null $java.lang.Object))
- (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -229,31 +205,15 @@
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 1) (i32.const -1))
     (local.get $$array_literal_5)
    )(i32.const -1)))
-   ;; SomeObject someObject = (Object $cast_expression = objects.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SomeObject) $cast_expression)));
+   ;; SomeObject someObject = ((SomeObject) objects.elements[0]);
    
-   (local.set $someObject (block (result (ref null $array.Arrays.SomeObject))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0)))
-    (if (result (ref null $array.Arrays.SomeObject)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $array.Arrays.SomeObject)) (else (ref.cast (local.get $$cast_expression) (global.get $array.Arrays.SomeObject.rtt))))
-   ))
-   ;; (someObject = (Object $cast_expression = (Object $cast_expression = objects2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SomeObject[]) $cast_expression))).elements[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SomeObject) $cast_expression))));
-   (local.set $someObject (block (result (ref null $array.Arrays.SomeObject))
-    
-    (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-     
-     (local.set $$cast_expression_2 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))
-     (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_2) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-    )) (i32.const 1)))
-    (if (result (ref null $array.Arrays.SomeObject)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $array.Arrays.SomeObject)) (else (ref.cast (local.get $$cast_expression_1) (global.get $array.Arrays.SomeObject.rtt))))
-   ))
+   (local.set $someObject (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0)) (global.get $array.Arrays.SomeObject.rtt)))
+   ;; (someObject = ((SomeObject) ((SomeObject[]) objects2d.elements[0]).elements[1]));
+   (local.set $someObject (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1)) (global.get $array.Arrays.SomeObject.rtt)))
    ;; (objects.elements[0] = null);
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects)) (i32.const 0) (ref.null $java.lang.Object))
-   ;; ((Object $cast_expression = objects2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((SomeObject[]) $cast_expression))).elements[1] = null);
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
-    (local.set $$cast_expression_3 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_3) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-   )) (i32.const 1) (ref.null $java.lang.Object))
+   ;; (((SomeObject[]) objects2d.elements[0]).elements[1] = null);
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $objects2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1) (ref.null $java.lang.Object))
   )
  )
 )
@@ -271,8 +231,6 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $$array_literal_5 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $n i32)
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -330,20 +288,12 @@
    ;; int n = ints.elements[0];
    
    (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0)))
-   ;; (n = (Object $cast_expression = ints2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((int[]) $cast_expression))).elements[1]);
-   (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfInt)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $javaemul.internal.WasmArray.OfInt)) (else (ref.cast (local.get $$cast_expression) (global.get $javaemul.internal.WasmArray.OfInt.rtt))))
-   )) (i32.const 1)))
+   ;; (n = ((int[]) ints2d.elements[0]).elements[1]);
+   (local.set $n (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfInt.rtt))) (i32.const 1)))
    ;; (ints.elements[0] = 1);
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (i32.const 1))
-   ;; ((Object $cast_expression = ints2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((int[]) $cast_expression))).elements[1] = 1);
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    
-    (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfInt)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $javaemul.internal.WasmArray.OfInt)) (else (ref.cast (local.get $$cast_expression_1) (global.get $javaemul.internal.WasmArray.OfInt.rtt))))
-   )) (i32.const 1) (i32.const 1))
+   ;; (((int[]) ints2d.elements[0]).elements[1] = 1);
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $ints2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfInt.rtt))) (i32.const 1) (i32.const 1))
   )
  )
 )
@@ -361,8 +311,6 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfLong))
  (local $$array_literal_5 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $n i64)
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -420,20 +368,12 @@
    ;; long n = longs.elements[0];
    
    (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0)))
-   ;; (n = (Object $cast_expression = longs2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((long[]) $cast_expression))).elements[1]);
-   (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(block (result (ref null $javaemul.internal.WasmArray.OfLong))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfLong)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $javaemul.internal.WasmArray.OfLong)) (else (ref.cast (local.get $$cast_expression) (global.get $javaemul.internal.WasmArray.OfLong.rtt))))
-   )) (i32.const 1)))
+   ;; (n = ((long[]) longs2d.elements[0]).elements[1]);
+   (local.set $n (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfLong.rtt))) (i32.const 1)))
    ;; (longs.elements[0] = 1);
    (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0) (i64.const 1))
-   ;; ((Object $cast_expression = longs2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((long[]) $cast_expression))).elements[1] = 1);
-   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(block (result (ref null $javaemul.internal.WasmArray.OfLong))
-    
-    (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfLong)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $javaemul.internal.WasmArray.OfLong)) (else (ref.cast (local.get $$cast_expression_1) (global.get $javaemul.internal.WasmArray.OfLong.rtt))))
-   )) (i32.const 1) (i64.const 1))
+   ;; (((long[]) longs2d.elements[0]).elements[1] = 1);
+   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $longs2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfLong.rtt))) (i32.const 1) (i64.const 1))
   )
  )
 )
@@ -452,11 +392,7 @@
  (local $$array_literal_5 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $b i32)
  (local $$qualifier (ref null $java.lang.Boolean))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $$qualifier_1 (ref null $java.lang.Boolean))
- (local $$cast_expression_1 (ref null $java.lang.Object))
- (local $$cast_expression_2 (ref null $java.lang.Object))
- (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -511,39 +447,23 @@
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 1) (i32.const -1))
     (local.get $$array_literal_5)
    )(i32.const -1)))
-   ;; boolean b = (Boolean $qualifier = (Object $cast_expression = booleans.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression))),$qualifier.booleanValue());
+   ;; boolean b = (Boolean $qualifier = ((Boolean) booleans.elements[0]),$qualifier.booleanValue());
    
    (local.set $b (block (result i32)
     
-    (local.set $$qualifier (block (result (ref null $java.lang.Boolean))
-     
-     (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans)) (i32.const 0)))
-     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Boolean)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Boolean.rtt))))
-    ))
+    (local.set $$qualifier (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans)) (i32.const 0)) (global.get $java.lang.Boolean.rtt)))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
    ))
-   ;; (b = (Boolean $qualifier = (Object $cast_expression = (Object $cast_expression = booleans2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean[]) $cast_expression))).elements[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean) $cast_expression))),$qualifier.booleanValue()));
+   ;; (b = (Boolean $qualifier = ((Boolean) ((Boolean[]) booleans2d.elements[0]).elements[1]),$qualifier.booleanValue()));
    (local.set $b (block (result i32)
     
-    (local.set $$qualifier_1 (block (result (ref null $java.lang.Boolean))
-     
-     (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-      
-      (local.set $$cast_expression_2 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans2d)) (i32.const 0)))
-      (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_2) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-     )) (i32.const 1)))
-     (if (result (ref null $java.lang.Boolean)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Boolean)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Boolean.rtt))))
-    ))
+    (local.set $$qualifier_1 (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1)) (global.get $java.lang.Boolean.rtt)))
     (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
    ))
    ;; (booleans.elements[0] = java.lang.Boolean.valueOf(true));
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans)) (i32.const 0) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
-   ;; ((Object $cast_expression = booleans2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Boolean[]) $cast_expression))).elements[1] = java.lang.Boolean.valueOf(false));
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
-    (local.set $$cast_expression_3 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_3) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-   )) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
+   ;; (((Boolean[]) booleans2d.elements[0]).elements[1] = java.lang.Boolean.valueOf(false));
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $booleans2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1) (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 0)))
   )
  )
 )
@@ -561,10 +481,6 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_5 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $b (ref null $java.lang.String))
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
- (local $$cast_expression_2 (ref null $java.lang.Object))
- (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -619,31 +535,15 @@
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 1) (i32.const -1))
     (local.get $$array_literal_5)
    )(i32.const -1)))
-   ;; String b = (Object $cast_expression = strings.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression)));
+   ;; String b = ((String) strings.elements[0]);
    
-   (local.set $b (block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0)))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
-   ))
-   ;; (b = (Object $cast_expression = (Object $cast_expression = strings2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String[]) $cast_expression))).elements[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
-   (local.set $b (block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-     
-     (local.set $$cast_expression_2 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings2d)) (i32.const 0)))
-     (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_2) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-    )) (i32.const 1)))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
-   ))
+   (local.set $b (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0)) (global.get $java.lang.String.rtt)))
+   ;; (b = ((String) ((String[]) strings2d.elements[0]).elements[1]));
+   (local.set $b (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1)) (global.get $java.lang.String.rtt)))
    ;; (strings.elements[0] = null);
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (ref.null $java.lang.Object))
-   ;; ((Object $cast_expression = strings2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String[]) $cast_expression))).elements[1] = null);
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
-    (local.set $$cast_expression_3 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_3) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-   )) (i32.const 1) (ref.null $java.lang.Object))
+   ;; (((String[]) strings2d.elements[0]).elements[1] = null);
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1) (ref.null $java.lang.Object))
   )
  )
 )
@@ -661,10 +561,6 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_5 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $nativeObject (ref null $array.Arrays.NativeType))
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
- (local $$cast_expression_2 (ref null $java.lang.Object))
- (local $$cast_expression_3 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -719,31 +615,15 @@
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 1) (i32.const -1))
     (local.get $$array_literal_5)
    )(i32.const -1)))
-   ;; NativeType nativeObject = (Object $cast_expression = nativeObjects.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((NativeType) $cast_expression)));
+   ;; NativeType nativeObject = ((NativeType) nativeObjects.elements[0]);
    
-   (local.set $nativeObject (block (result (ref null $array.Arrays.NativeType))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects)) (i32.const 0)))
-    (if (result (ref null $array.Arrays.NativeType)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $array.Arrays.NativeType)) (else (ref.cast (local.get $$cast_expression) (global.get $array.Arrays.NativeType.rtt))))
-   ))
-   ;; (nativeObject = (Object $cast_expression = (Object $cast_expression = nativeObjects2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((NativeType[]) $cast_expression))).elements[1],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((NativeType) $cast_expression))));
-   (local.set $nativeObject (block (result (ref null $array.Arrays.NativeType))
-    
-    (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-     
-     (local.set $$cast_expression_2 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects2d)) (i32.const 0)))
-     (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_2) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-    )) (i32.const 1)))
-    (if (result (ref null $array.Arrays.NativeType)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $array.Arrays.NativeType)) (else (ref.cast (local.get $$cast_expression_1) (global.get $array.Arrays.NativeType.rtt))))
-   ))
+   (local.set $nativeObject (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects)) (i32.const 0)) (global.get $array.Arrays.NativeType.rtt)))
+   ;; (nativeObject = ((NativeType) ((NativeType[]) nativeObjects2d.elements[0]).elements[1]));
+   (local.set $nativeObject (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1)) (global.get $array.Arrays.NativeType.rtt)))
    ;; (nativeObjects.elements[0] = null);
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects)) (i32.const 0) (ref.null $java.lang.Object))
-   ;; ((Object $cast_expression = nativeObjects2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((NativeType[]) $cast_expression))).elements[1] = null);
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
-    (local.set $$cast_expression_3 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_3) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-   )) (i32.const 1) (ref.null $java.lang.Object))
+   ;; (((NativeType[]) nativeObjects2d.elements[0]).elements[1] = null);
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $nativeObjects2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 1) (ref.null $java.lang.Object))
   )
  )
 )
@@ -754,8 +634,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $container (ref null $array.Arrays.ArrayContainer))
  (local $s (ref null $java.lang.String))
- (local $$cast_expression (ref null $java.lang.Object))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block $return.label
@@ -763,17 +641,9 @@
    ;; ArrayContainer<String> container = null;
    
    (local.set $container (ref.null $array.Arrays.ArrayContainer))
-   ;; String s = (Object $cast_expression = (Object $cast_expression = container.data,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String[]) $cast_expression))).elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression)));
+   ;; String s = ((String) ((String[]) container.data).elements[0]);
    
-   (local.set $s (block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-     
-     (local.set $$cast_expression_1 (struct.get $array.Arrays.ArrayContainer $f_data__array_Arrays_ArrayContainer(local.get $container)))
-     (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression_1) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-    )) (i32.const 0)))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
-   ))
+   (local.set $s (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(ref.cast (struct.get $array.Arrays.ArrayContainer $f_data__array_Arrays_ArrayContainer(local.get $container)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))) (i32.const 0)) (global.get $java.lang.String.rtt)))
   )
  )
 )

@@ -333,17 +333,12 @@
  (param $e (ref null $java.lang.Error))
  (result (ref null $java.lang.Error))
  (local $return.value (ref null $java.lang.Error))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
-   ;; return (Object $cast_expression = intf.m(e),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Error) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Error))
-    
-    (local.set $$cast_expression (ref.null $java.lang.Error))
-    (if (result (ref null $java.lang.Error)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Error)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Error.rtt))))
-   ))
+   ;; return ((Error) intf.m(e));
+   (local.set $return.value (ref.cast (ref.null $java.lang.Error) (global.get $java.lang.Error.rtt)))
    (br $return.label)
   )
  )
@@ -357,17 +352,12 @@
  (param $e (ref null $java.lang.Enum))
  (result (ref null $java.lang.Enum))
  (local $return.value (ref null $java.lang.Enum))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; lambdas.Lambdas.$clinit();
    (call $$clinit__void@lambdas.Lambdas )
-   ;; return (Object $cast_expression = intf.m(e),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Enum<T>) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Enum))
-    
-    (local.set $$cast_expression (ref.null $java.lang.Enum))
-    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Enum)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Enum.rtt))))
-   ))
+   ;; return ((Enum<T>) intf.m(e));
+   (local.set $return.value (ref.cast (ref.null $java.lang.Enum) (global.get $java.lang.Enum.rtt)))
    (br $return.label)
   )
  )
@@ -399,7 +389,6 @@
  (local $i (ref null $java.lang.Error))
  (local $i_1 (ref null $java.lang.Error))
  (local $i_2 (ref null $java.lang.Enum))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $x (ref null $java.lang.Object))
  (local $y (ref null $java.lang.String))
  (local $f (ref null $java.lang.Object))
@@ -413,11 +402,7 @@
    ;; Lambdas.this.callParameterized(function (Error i){
    (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; lambdas.Lambdas.callTypeVariableWithBounds(function (Enum<T> i){
-   (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(block (result (ref null $java.lang.Enum))
-    
-    (local.set $$cast_expression (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Enum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Enum)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Enum.rtt))))
-   )))
+   (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(ref.cast (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt))))
    ;; Lambdas.this.callWithBiFunction(function (Object x,String y){
    (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; Function<? super T, ?> f = function (T item){
@@ -495,7 +480,6 @@
 (func $m_identity__lambdas_Lambdas_GenericJsFunction@lambdas.Lambdas
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; lambdas.Lambdas.$clinit();
@@ -509,12 +493,8 @@
      )
     )
    )
-   ;; return (Object $cast_expression = lambdas.Lambdas.identityFunction,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((GenericJsFunction<E, E>) $cast_expression)));
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (global.get $f_identityFunction__lambdas_Lambdas_))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
+   ;; return ((GenericJsFunction<E, E>) lambdas.Lambdas.identityFunction);
+   (local.set $return.value (global.get $f_identityFunction__lambdas_Lambdas_))
    (br $return.label)
   )
  )
@@ -560,35 +540,20 @@
 ;;; void Lambdas.testIntersectionTyping()
 (func $m_testIntersectionTyping__void@lambdas.Lambdas
  (local $o (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $x (ref null $java.lang.String))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $x_1 (ref null $java.lang.String))
- (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $x_2 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; lambdas.Lambdas.$clinit();
    (call $$clinit__void@lambdas.Lambdas )
-   ;; Object o = (Object $cast_expression = function (String x){
+   ;; Object o = (((GenericFunctionalInterface<String>&JustADefaultT<Number>)) function (String x){
    
-   (local.set $o (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
-   ;; (o = (Object $cast_expression = function (String x){
-   (local.set $o (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_1 (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_1)))
-   ))
-   ;; (o = (Object $cast_expression = function (U x){
-   (local.set $o (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_2 (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_2)))
-   ))
+   (local.set $o (ref.null $java.lang.Object))
+   ;; (o = (((GenericFunctionalInterface<String>&JustADefaultS<Number>)) function (String x){
+   (local.set $o (ref.null $java.lang.Object))
+   ;; (o = (((GenericFunctionalInterface<U>&JustADefaultS<V>)) function (U x){
+   (local.set $o (ref.null $java.lang.Object))
   )
  )
 )
@@ -597,20 +562,15 @@
 (func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $t (ref null $java.lang.String))
  (local $u (ref null $java.lang.String))
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block $return.label
   (block
-   ;; Object o = (Object $cast_expression = function (String t,String u){
+   ;; Object o = (((BiFunction<String, String, String>&MarkerWithDefaultMethod)) function (String t,String u){
    
-   (local.set $o (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression (ref.null $java.lang.Object))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-   ))
+   (local.set $o (ref.null $java.lang.Object))
   )
  )
 )

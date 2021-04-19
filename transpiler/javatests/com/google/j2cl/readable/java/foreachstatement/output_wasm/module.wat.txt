@@ -55,11 +55,9 @@
  (param $iterable (ref null $java.lang.Object))
  (local $$iterator (ref null $java.lang.Object))
  (local $t (ref null $java.lang.Throwable))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $$array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$index i32)
  (local $t_1 (ref null $java.lang.Throwable))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.rtt)))
  (block $return.label
@@ -73,13 +71,9 @@
      (br_if 1 (i32.eqz (i32.const 0)))
      (block $LOOP.CONTINUE
       (block
-       ;; Throwable t = (Object $cast_expression = $iterator.next(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Throwable) $cast_expression)));
+       ;; Throwable t = ((Throwable) $iterator.next());
        
-       (local.set $t (block (result (ref null $java.lang.Throwable))
-        
-        (local.set $$cast_expression (ref.null $java.lang.Throwable))
-        (if (result (ref null $java.lang.Throwable)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Throwable)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Throwable.rtt))))
-       ))
+       (local.set $t (ref.cast (ref.null $java.lang.Throwable) (global.get $java.lang.Throwable.rtt)))
        (block
         ;; t.toString();
         (drop (call_ref (local.get $t)(struct.get $java.lang.Throwable.vtable $m_toString__java_lang_String (struct.get $java.lang.Throwable $vtable(local.get $t)))))
@@ -100,13 +94,9 @@
      (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $$array)))))
      (block $LOOP_1.CONTINUE
       (block
-       ;; Throwable t = (Object $cast_expression = $array.elements[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Throwable) $cast_expression)));
+       ;; Throwable t = ((Throwable) $array.elements[$index]);
        
-       (local.set $t_1 (block (result (ref null $java.lang.Throwable))
-        
-        (local.set $$cast_expression_1 (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
-        (if (result (ref null $java.lang.Throwable)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Throwable)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Throwable.rtt))))
-       ))
+       (local.set $t_1 (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)) (global.get $java.lang.Throwable.rtt)))
        (block
         ;; t.toString();
         (drop (call_ref (local.get $t_1)(struct.get $java.lang.Throwable.vtable $m_toString__java_lang_String (struct.get $java.lang.Throwable $vtable(local.get $t_1)))))
@@ -129,7 +119,6 @@
  (local $e (ref null $java.lang.Exception))
  (local $$iterator (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (block $return.label
   (block
@@ -149,30 +138,22 @@
  (local $iterable (ref null $java.lang.Object))
  (local $$iterator (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $s (ref null $java.lang.String))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $anotherIterable (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local $$iterator_1 (ref null $java.lang.Object))
- (local $$cast_expression_2 (ref null $java.lang.Object))
  (local $s_1 i32)
  (local $$qualifier_1 (ref null $java.lang.Integer))
- (local $$cast_expression_3 (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; U iterable = null;
    
    (local.set $iterable (ref.null $java.lang.Object))
-   ;; LOOP: for (Iterator<String> $iterator = (Iterable<String> $qualifier = (Object $cast_expression = iterable,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Iterable<String>) $cast_expression))),$qualifier.iterator());$iterator.hasNext();) {
+   ;; LOOP: for (Iterator<String> $iterator = (Iterable<String> $qualifier = ((Iterable<String>) iterable),$qualifier.iterator());$iterator.hasNext();) {
    
    
    (local.set $$iterator (block (result (ref null $java.lang.Object))
     
-    (local.set $$qualifier (block (result (ref null $java.lang.Object))
-     
-     (local.set $$cast_expression (local.get $iterable))
-     (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression)))
-    ))
+    (local.set $$qualifier (local.get $iterable))
     (ref.null $java.lang.Object)
    ))
    (block $LOOP.BREAK
@@ -180,13 +161,9 @@
      (br_if 1 (i32.eqz (i32.const 0)))
      (block $LOOP.CONTINUE
       (block
-       ;; String s = (Object $cast_expression = $iterator.next(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression)));
+       ;; String s = ((String) $iterator.next());
        
-       (local.set $s (block (result (ref null $java.lang.String))
-        
-        (local.set $$cast_expression_1 (ref.null $java.lang.String))
-        (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.String.rtt))))
-       ))
+       (local.set $s (ref.cast (ref.null $java.lang.String) (global.get $java.lang.String.rtt)))
        (block
        )
       )
@@ -198,28 +175,20 @@
    ;; IterableReturningTypeVariable<?> anotherIterable = null;
    
    (local.set $anotherIterable (ref.null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
-   ;; LOOP: for (? $iterator = (Object $cast_expression = anotherIterable.iterator(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Iterator<Integer>) $cast_expression)));$iterator.hasNext();) {
+   ;; LOOP: for (? $iterator = ((Iterator<Integer>) anotherIterable.iterator());$iterator.hasNext();) {
    
    
-   (local.set $$iterator_1 (block (result (ref null $java.lang.Object))
-    
-    (local.set $$cast_expression_2 (call_ref (local.get $anotherIterable)(struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable $m_iterator__java_util_Iterator (struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable $vtable(local.get $anotherIterable)))))
-    (if (result (ref null $java.lang.Object)) (ref.is_null (local.get $$cast_expression_2)) (then (ref.null $java.lang.Object)) (else (local.get $$cast_expression_2)))
-   ))
+   (local.set $$iterator_1 (call_ref (local.get $anotherIterable)(struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable $m_iterator__java_util_Iterator (struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable $vtable(local.get $anotherIterable)))))
    (block $LOOP_1.BREAK
     (loop
      (br_if 1 (i32.eqz (i32.const 0)))
      (block $LOOP_1.CONTINUE
       (block
-       ;; int s = (Integer $qualifier = (Object $cast_expression = $iterator.next(),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue());
+       ;; int s = (Integer $qualifier = ((Integer) $iterator.next()),$qualifier.intValue());
        
        (local.set $s_1 (block (result i32)
         
-        (local.set $$qualifier_1 (block (result (ref null $java.lang.Integer))
-         
-         (local.set $$cast_expression_3 (ref.null $java.lang.Integer))
-         (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression_3)) (then (ref.null $java.lang.Integer)) (else (ref.cast (local.get $$cast_expression_3) (global.get $java.lang.Integer.rtt))))
-        ))
+        (local.set $$qualifier_1 (ref.cast (ref.null $java.lang.Integer) (global.get $java.lang.Integer.rtt)))
         (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
        ))
        (block

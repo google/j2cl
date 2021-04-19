@@ -59,7 +59,6 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $switchstatement.Numbers))
  (local $return.value (ref null $switchstatement.Numbers))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; switchstatement.Numbers.$clinit();
@@ -73,12 +72,8 @@
      )
     )
    )
-   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,switchstatement.Numbers.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Numbers) $cast_expression)));
-   (local.set $return.value (block (result (ref null $switchstatement.Numbers))
-    
-    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_)))
-    (if (result (ref null $switchstatement.Numbers)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $switchstatement.Numbers)) (else (ref.cast (local.get $$cast_expression) (global.get $switchstatement.Numbers.rtt))))
-   ))
+   ;; return ((Numbers) javaemul.internal.Enums.getValueFromNameAndMap(name,switchstatement.Numbers.namesToValuesMap));
+   (local.set $return.value (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_)) (global.get $switchstatement.Numbers.rtt)))
    (br $return.label)
   )
  )

@@ -61,7 +61,6 @@
  (local $array2d (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (local $length1 i32)
- (local $$cast_expression (ref null $java.lang.Object))
  (local $length2 i32)
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
@@ -76,13 +75,9 @@
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 1))
     (local.get $$array_literal)
    )(i32.const -1)))
-   ;; int length1 = (Object $cast_expression = array2d.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Object[]) $cast_expression))).length;
+   ;; int length1 = ((Object[]) array2d.elements[0]).length;
    
-   (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
-    (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $array2d)) (i32.const 0)))
-    (if (result (ref null $javaemul.internal.WasmArray.OfObject)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $javaemul.internal.WasmArray.OfObject)) (else (ref.cast (local.get $$cast_expression) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
-   )))
+   (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $array2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
    ;; int length2 = array2d.length;
    
    (local.set $length2 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $array2d)))

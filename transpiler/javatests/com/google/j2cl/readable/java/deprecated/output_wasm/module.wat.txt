@@ -246,7 +246,6 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
  (local $return.value (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
@@ -260,12 +259,8 @@
      )
     )
    )
-   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((DeprecatedEnum) $cast_expression)));
-   (local.set $return.value (block (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
-    
-    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_)))
-    (if (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $deprecated.DeprecatedExample.DeprecatedEnum)) (else (ref.cast (local.get $$cast_expression) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))))
-   ))
+   ;; return ((DeprecatedEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap));
+   (local.set $return.value (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_)) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt)))
    (br $return.label)
   )
  )
@@ -386,7 +381,6 @@
  (param $name (ref null $java.lang.String))
  (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
  (local $return.value (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
- (local $$cast_expression (ref null $java.lang.Object))
  (block $return.label
   (block
    ;; deprecated.DeprecatedExample.DeprecatedJsEnum.$clinit();
@@ -400,12 +394,8 @@
      )
     )
    )
-   ;; return (Object $cast_expression = javaemul.internal.Enums.getValueFromNameAndMap(name,deprecated.DeprecatedExample.DeprecatedJsEnum.namesToValuesMap),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((DeprecatedJsEnum) $cast_expression)));
-   (local.set $return.value (block (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
-    
-    (local.set $$cast_expression (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedJsEnum_)))
-    (if (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $deprecated.DeprecatedExample.DeprecatedJsEnum)) (else (ref.cast (local.get $$cast_expression) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt))))
-   ))
+   ;; return ((DeprecatedJsEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,deprecated.DeprecatedExample.DeprecatedJsEnum.namesToValuesMap));
+   (local.set $return.value (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedJsEnum_)) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt)))
    (br $return.label)
   )
  )

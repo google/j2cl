@@ -258,18 +258,13 @@
 ;;; void TryCatch.testThrowGenerics()
 (func $m_testThrowGenerics__void@trycatch.TryCatch
  (param $this.untyped (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
  (block $return.label
   (block
-   ;; throw (Object $cast_expression = TryCatch.this.getT(new Exception.<init>()),(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Exception) $cast_expression)));
+   ;; throw ((Exception) TryCatch.this.getT(new Exception.<init>()));
    
-   (throw $exception.event (block (result (ref null $java.lang.Exception))
-    
-    (local.set $$cast_expression (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))))
-    (if (result (ref null $java.lang.Exception)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Exception)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Exception.rtt))))
-   ))
+   (throw $exception.event (ref.cast (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))) (global.get $java.lang.Exception.rtt)))
   )
  )
 )

@@ -210,7 +210,6 @@
  (local $$index_3 i32)
  (local $booleans (ref null $javaemul.internal.WasmArray.OfBoolean))
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $shorts (ref null $javaemul.internal.WasmArray.OfShort))
  (local $b i32)
  (local $$array_4 (ref null $javaemul.internal.WasmArray.OfShort))
@@ -314,7 +313,7 @@
    ;; String[] strings = null;
    
    (local.set $strings (ref.null $javaemul.internal.WasmArray.OfObject))
-   ;; (strings.elements[0] = ((Object $cast_expression = strings.elements[0],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))) + null));
+   ;; (strings.elements[0] = (((String) strings.elements[0]) + null));
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (ref.null $java.lang.String))
    ;; short[] shorts = null;
    
@@ -366,10 +365,8 @@
  (local $$value_2 (ref null $java.lang.Integer))
  (local $ref (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (local $$qualifier_2 (ref null $java.lang.Integer))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $n i32)
  (local $$qualifier_3 (ref null $java.lang.Integer))
- (local $$cast_expression_1 (ref null $java.lang.Object))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
@@ -457,25 +454,17 @@
    ;; Ref<Integer> ref = null;
    
    (local.set $ref (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref))
-   ;; (ref.field = java.lang.Integer.valueOf(((Integer $qualifier = (Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue()) + 1)));
+   ;; (ref.field = java.lang.Integer.valueOf(((Integer $qualifier = ((Integer) ref.field),$qualifier.intValue()) + 1)));
    (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (block (result i32)
     
-    (local.set $$qualifier_2 (block (result (ref null $java.lang.Integer))
-     
-     (local.set $$cast_expression (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref)))
-     (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.Integer)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.Integer.rtt))))
-    ))
+    (local.set $$qualifier_2 (ref.cast (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref)) (global.get $java.lang.Integer.rtt)))
     (call_ref (local.get $$qualifier_2)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_2))))
    ) (i32.const 1))))
-   ;; int n = (1 + (Integer $qualifier = (Object $cast_expression = ref.field,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((Integer) $cast_expression))),$qualifier.intValue()));
+   ;; int n = (1 + (Integer $qualifier = ((Integer) ref.field),$qualifier.intValue()));
    
    (local.set $n (i32.add (i32.const 1) (block (result i32)
     
-    (local.set $$qualifier_3 (block (result (ref null $java.lang.Integer))
-     
-     (local.set $$cast_expression_1 (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref)))
-     (if (result (ref null $java.lang.Integer)) (ref.is_null (local.get $$cast_expression_1)) (then (ref.null $java.lang.Integer)) (else (ref.cast (local.get $$cast_expression_1) (global.get $java.lang.Integer.rtt))))
-    ))
+    (local.set $$qualifier_3 (ref.cast (struct.get $arithmeticexpressions.ArithmeticExpressions.1Ref $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $ref)) (global.get $java.lang.Integer.rtt)))
     (call_ref (local.get $$qualifier_3)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_3))))
    )))
   )

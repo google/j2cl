@@ -349,7 +349,6 @@
  (local $$array (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$index i32)
  (local $theAp (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
@@ -388,13 +387,9 @@
      (br_if 1 (i32.eqz (i32.lt_s (local.get $$index) (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $$array)))))
      (block $LOOP_1.CONTINUE
       (block
-       ;; AddNumber theAp = (Object $cast_expression = $array.elements[$index],(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((AddNumber) $cast_expression)));
+       ;; AddNumber theAp = ((AddNumber) $array.elements[$index]);
        
-       (local.set $theAp (block (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
-        
-        (local.set $$cast_expression (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)))
-        (if (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $innerclassinitorder.InnerClassInitOrder.1AddNumber)) (else (ref.cast (local.get $$cast_expression) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt))))
-       ))
+       (local.set $theAp (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt)))
        (block
         ;; theAp.act();
         (call_ref (local.get $theAp)(struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable $m_act__void (struct.get $innerclassinitorder.InnerClassInitOrder.1AddNumber $vtable(local.get $theAp))))

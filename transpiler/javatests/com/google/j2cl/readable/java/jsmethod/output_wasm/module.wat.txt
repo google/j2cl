@@ -279,17 +279,12 @@
 (func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
- (local $$cast_expression (ref null $java.lang.Object))
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
  (block $return.label
   (block
-   ;; Sub.this.m((Object $cast_expression = arg0,(javaemul.internal.Platform.isNull($cast_expression)) ? (null) : (((String) $cast_expression))));
-   (call_ref (local.get $this)(block (result (ref null $java.lang.String))
-    
-    (local.set $$cast_expression (local.get $arg0))
-    (if (result (ref null $java.lang.String)) (ref.is_null (local.get $$cast_expression)) (then (ref.null $java.lang.String)) (else (ref.cast (local.get $$cast_expression) (global.get $java.lang.String.rtt))))
-   )(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
+   ;; Sub.this.m(((String) arg0));
+   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
   )
  )
 )

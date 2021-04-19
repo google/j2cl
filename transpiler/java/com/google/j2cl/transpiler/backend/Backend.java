@@ -88,7 +88,6 @@ import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNestedClassConstructors;
-import com.google.j2cl.transpiler.passes.NormalizeNullCasting;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
@@ -336,9 +335,6 @@ public enum Backend {
 
           // a = b => (a = b, a)
           RewriteAssignmentExpressions::new,
-
-          // TODO(b/182007249): remove this pass when j2wasm use WasmGC milestone 3.
-          NormalizeNullCasting::new,
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
 
