@@ -36,7 +36,9 @@ public abstract class Enum<E extends Enum<E>> implements Comparable<E>, Serializ
 
   @JsIgnore
   public Class<E> getDeclaringClass() {
-    return null;
+    Class<?> clazz = getClass();
+    Class<?> superClass = clazz.getSuperclass();
+    return (Class<E>) (superClass == Enum.class ? clazz : superClass);
   }
 
   public final String name() {
