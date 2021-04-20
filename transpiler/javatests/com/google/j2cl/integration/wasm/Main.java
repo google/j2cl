@@ -38,7 +38,7 @@ public class Main {
     testDynamicClassMethodDispatch();
     testSwitch();
     testWasmAnnotation();
-    testMathLogAndFriends();
+    testMath();
     testClassLiterals();
     testTry();
     testArrayInstanceOf();
@@ -123,7 +123,7 @@ public class Main {
   @Wasm("i32.mul")
   private static native int multiply(int x, int y);
 
-  private static void testMathLogAndFriends() {
+  private static void testMath() {
     assertEquals(Double.NaN, Math.log(Double.NaN));
     assertEquals(Double.NaN, Math.log(Double.NEGATIVE_INFINITY));
     assertEquals(Double.NaN, Math.log(-1));
@@ -132,12 +132,18 @@ public class Main {
     assertEquals(Double.NEGATIVE_INFINITY, Math.log(-0.0));
     assertEqualsDelta(1.0, Math.log(Math.E), 1e-15);
 
+    for (double d = -10; d < 10; d += 0.5) {
+      double answer = Math.log(Math.exp(d));
+      assertEqualsDelta(d, answer, 0.000000001);
+    }
+
     assertEquals(Double.NaN, Math.log10(-2541.057456872342));
     assertEquals(Double.NaN, Math.log10(-0.1));
     assertEquals(Double.POSITIVE_INFINITY, Math.log10(Double.POSITIVE_INFINITY));
     assertEquals(Double.NEGATIVE_INFINITY, Math.log10(0.0));
     assertEquals(Double.NEGATIVE_INFINITY, Math.log10(-0.0));
     assertEqualsDelta(3.0, Math.log10(1000.0), 1e-15);
+    assertEquals(14.0, Math.log10(Math.pow(10, 14)));
     assertEqualsDelta(3.73895612695404, Math.log10(5482.2158), 1e-15);
     assertEquals(308.25471555991675, Math.log10(Double.MAX_VALUE));
     assertEqualsDelta(-323.30621534311575, Math.log10(Double.MIN_VALUE), 1e-10);
@@ -173,6 +179,41 @@ public class Main {
     int x = +1;
     assertEqualsDelta(-0.632, Math.expm1(-1), 0.001);
     assertEqualsDelta(1.718, Math.expm1(1), 0.001);
+
+    assertEquals(1.0, Math.pow(2, 0.0));
+    assertEquals(1.0, Math.pow(2, -0.0));
+    assertEquals(2.0, Math.pow(2, 1));
+    assertEquals(-2.0, Math.pow(-2, 1));
+    assertEquals(Double.NaN, Math.pow(1, Double.NaN));
+    assertEquals(Double.NaN, Math.pow(Double.NaN, Double.NaN));
+    assertEquals(Double.NaN, Math.pow(Double.NaN, 1));
+    assertEquals(1.0, Math.pow(Double.NaN, 0.0));
+    assertEquals(1.0, Math.pow(Double.NaN, -0.0));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(1.1, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-1.1, Double.POSITIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(0.9, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-0.9, Double.NEGATIVE_INFINITY));
+    assertEquals(0.0, Math.pow(1.1, Double.NEGATIVE_INFINITY));
+    assertEquals(0.0, Math.pow(-1.1, Double.NEGATIVE_INFINITY));
+    assertEquals(0.0, Math.pow(0.9, Double.POSITIVE_INFINITY));
+    assertEquals(0.0, Math.pow(-0.9, Double.POSITIVE_INFINITY));
+    assertEquals(Double.NaN, Math.pow(1, Double.POSITIVE_INFINITY));
+    assertEquals(Double.NaN, Math.pow(-1, Double.POSITIVE_INFINITY));
+    assertEquals(Double.NaN, Math.pow(1, Double.NEGATIVE_INFINITY));
+    assertEquals(Double.NaN, Math.pow(-1, Double.NEGATIVE_INFINITY));
+    assertEquals(0.0, Math.pow(0.0, 1));
+    assertEquals(0.0, Math.pow(Double.POSITIVE_INFINITY, -1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(0.0, -1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(Double.POSITIVE_INFINITY, 1));
+    assertEquals(0.0, Math.pow(-0.0, 2));
+    assertEquals(0.0, Math.pow(Double.NEGATIVE_INFINITY, -2));
+    assertEquals(-0.0, Math.pow(-0.0, 1));
+    assertEquals(-0.0, Math.pow(Double.NEGATIVE_INFINITY, -1));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(-0.0, -2));
+    assertEquals(Double.POSITIVE_INFINITY, Math.pow(Double.NEGATIVE_INFINITY, 2));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(-0.0, -1));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(Double.NEGATIVE_INFINITY, 1));
+    assertEquals(Double.NEGATIVE_INFINITY, Math.pow(-10.0, 3.093403029238847E15));
   }
 
   private static class SomeClass {}
