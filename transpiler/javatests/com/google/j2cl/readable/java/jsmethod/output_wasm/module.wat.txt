@@ -181,24 +181,6 @@
  )
 )
 
-;;; Class<?> Base.getClass()
-(func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Base
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $jsmethod.JsMethodExample.Base))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Base.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample.Base();
-   (local.set $return.value (call $$getJsmethod.JsMethodExample.Base__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Base)
-
 ;;; Code for jsmethod.JsMethodExample.I [INTERFACE]
 
 ;;; void I.$clinit()

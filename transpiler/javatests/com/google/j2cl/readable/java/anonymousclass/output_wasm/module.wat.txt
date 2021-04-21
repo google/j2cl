@@ -73,24 +73,6 @@
  )
 )
 
-;;; Class<?> SomeClass.getClass()
-(func $m_getClass__java_lang_Class@anonymousclass.SomeClass
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $anonymousclass.SomeClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.SomeClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.SomeClass();
-   (local.set $return.value (call $$getAnonymousclass.SomeClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@anonymousclass.SomeClass)
-
 ;;; Code for anonymousclass.AnonymousClass [CLASS]
 (type $anonymousclass.AnonymousClass (struct
  (field $vtable (ref null $anonymousclass.AnonymousClass.vtable))

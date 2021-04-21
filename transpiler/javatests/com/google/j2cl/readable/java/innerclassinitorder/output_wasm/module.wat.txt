@@ -2033,24 +2033,6 @@
  )
 )
 
-;;; Class<?> AddNumber.getClass()
-(func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.1AddNumber
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.1AddNumber.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinitorder.InnerClassInitOrder.1AddNumber();
-   (local.set $return.value (call $$getInnerclassinitorder.InnerClassInitOrder.1AddNumber__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.1AddNumber)
-
 ;;; Code for innerclassinitorder.InnerClassInitOrder.1 [CLASS]
 (type $innerclassinitorder.InnerClassInitOrder.1 (struct
  (field $vtable (ref null $innerclassinitorder.InnerClassInitOrder.1.vtable))

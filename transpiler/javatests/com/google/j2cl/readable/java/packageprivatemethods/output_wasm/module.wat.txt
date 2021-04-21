@@ -285,24 +285,6 @@
  )
 )
 
-;;; Class<?> Parent.getClass()
-(func $m_getClass__java_lang_Class@packageprivatemethods.package1.Parent
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $packageprivatemethods.package1.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Parent.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getPackageprivatemethods.package1.Parent();
-   (local.set $return.value (call $$getPackageprivatemethods.package1.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@packageprivatemethods.package1.Parent)
-
 ;;; Code for packageprivatemethods.package1.SuperParent [CLASS]
 (type $packageprivatemethods.package1.SuperParent (struct
  (field $vtable (ref null $packageprivatemethods.package1.SuperParent.vtable))
@@ -585,24 +567,6 @@
   )
  )
 )
-
-;;; Class<?> SubParent.getClass()
-(func $m_getClass__java_lang_Class@packageprivatemethods.package2.SubParent
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $packageprivatemethods.package2.SubParent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package2.SubParent.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getPackageprivatemethods.package2.SubParent();
-   (local.set $return.value (call $$getPackageprivatemethods.package2.SubParent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@packageprivatemethods.package2.SubParent)
 
  ;;; Code for packageprivatemethods.package1.Child [vtable.init]
  (global.set $packageprivatemethods.package1.Child.vtable (struct.new_with_rtt $packageprivatemethods.package1.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@packageprivatemethods.package1.Child) (ref.func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child) (ref.func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent) (ref.func $m_bar__int__int__int__int@packageprivatemethods.package1.Child) (ref.func $m_foo__int__int@packageprivatemethods.package1.Child) (ref.func $m_fun__int__int__int@packageprivatemethods.package1.Child) (rtt.canon $packageprivatemethods.package1.Child.vtable)))

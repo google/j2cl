@@ -156,24 +156,6 @@
  )
 )
 
-;;; Class<?> AbstractType.getClass()
-(func $m_getClass__java_lang_Class@typeannotations.AbstractType
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $typeannotations.AbstractType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.AbstractType.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.AbstractType();
-   (local.set $return.value (call $$getTypeannotations.AbstractType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@typeannotations.AbstractType)
-
 ;;; Code for typeannotations.AbstractTypeNonNull [CLASS]
 (type $typeannotations.AbstractTypeNonNull (struct
  (field $vtable (ref null $typeannotations.AbstractTypeNonNull.vtable))
@@ -240,24 +222,6 @@
   )
  )
 )
-
-;;; Class<?> AbstractTypeNonNull.getClass()
-(func $m_getClass__java_lang_Class@typeannotations.AbstractTypeNonNull
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $typeannotations.AbstractTypeNonNull))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.AbstractTypeNonNull.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTypeannotations.AbstractTypeNonNull();
-   (local.set $return.value (call $$getTypeannotations.AbstractTypeNonNull__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@typeannotations.AbstractTypeNonNull)
 
 ;;; Code for typeannotations.Parent [CLASS]
 (type $typeannotations.Parent (struct

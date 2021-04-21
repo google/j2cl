@@ -576,24 +576,6 @@
  )
 )
 
-;;; Class<?> BaseImplementor.getClass()
-(func $m_getClass__java_lang_Class@cast.CastGenerics.BaseImplementor
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $cast.CastGenerics.BaseImplementor))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.CastGenerics.BaseImplementor.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.BaseImplementor();
-   (local.set $return.value (call $$getCast.CastGenerics.BaseImplementor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.BaseImplementor)
-
 ;;; Code for cast.CastGenerics.Implementor [CLASS]
 (type $cast.CastGenerics.Implementor (struct
  (field $vtable (ref null $cast.CastGenerics.Implementor.vtable))

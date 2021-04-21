@@ -1026,24 +1026,6 @@
  )
 )
 
-;;; Class<?> AbstractMethodWithVarargs.getClass()
-(func $m_getClass__java_lang_Class@jsvarargs.Main.AbstractMethodWithVarargs
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $jsvarargs.Main.AbstractMethodWithVarargs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.AbstractMethodWithVarargs.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.AbstractMethodWithVarargs();
-   (local.set $return.value (call $$getJsvarargs.Main.AbstractMethodWithVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.AbstractMethodWithVarargs)
-
 ;;; Code for jsvarargs.Main.StaticInterfaceMethodWithVarargs [INTERFACE]
 
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)

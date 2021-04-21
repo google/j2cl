@@ -434,24 +434,6 @@
  )
 )
 
-;;; Class<?> AbstractImplementor.getClass()
-(func $m_getClass__java_lang_Class@interfaces.Main.AbstractImplementor
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $interfaces.Main.AbstractImplementor))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.AbstractImplementor();
-   (local.set $return.value (call $$getInterfaces.Main.AbstractImplementor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@interfaces.Main.AbstractImplementor)
-
  ;;; Code for interfaces.Main [vtable.init]
  (global.set $interfaces.Main.vtable (struct.new_with_rtt $interfaces.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@interfaces.Main) (ref.func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main) (rtt.canon $interfaces.Main.vtable)))
 

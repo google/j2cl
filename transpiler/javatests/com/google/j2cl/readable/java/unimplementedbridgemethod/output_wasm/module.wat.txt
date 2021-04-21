@@ -147,24 +147,6 @@
  )
 )
 
-;;; Class<?> Bar.getClass()
-(func $m_getClass__java_lang_Class@unimplementedbridgemethod.Bar
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $unimplementedbridgemethod.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $unimplementedbridgemethod.Bar.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnimplementedbridgemethod.Bar();
-   (local.set $return.value (call $$getUnimplementedbridgemethod.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@unimplementedbridgemethod.Bar)
-
 ;;; Code for unimplementedbridgemethod.Foo [CLASS]
 (type $unimplementedbridgemethod.Foo (struct
  (field $vtable (ref null $unimplementedbridgemethod.Foo.vtable))
@@ -209,21 +191,3 @@
   )
  )
 )
-
-;;; Class<?> Foo.getClass()
-(func $m_getClass__java_lang_Class@unimplementedbridgemethod.Foo
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $unimplementedbridgemethod.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $unimplementedbridgemethod.Foo.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnimplementedbridgemethod.Foo();
-   (local.set $return.value (call $$getUnimplementedbridgemethod.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@unimplementedbridgemethod.Foo)

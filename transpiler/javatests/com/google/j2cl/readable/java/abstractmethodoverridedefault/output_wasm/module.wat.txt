@@ -244,24 +244,6 @@
  )
 )
 
-;;; Class<?> A.getClass()
-(func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.A();
-   (local.set $return.value (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
-
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.B [CLASS]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (struct
  (field $vtable (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable))
@@ -331,24 +313,6 @@
   )
  )
 )
-
-;;; Class<?> B.getClass()
-(func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.B();
-   (local.set $return.value (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.B__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B)
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [CLASS]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (struct

@@ -631,24 +631,6 @@
  )
 )
 
-;;; Class<?> Element.getClass()
-(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Element
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $typewildcards.TypeWildCards.Element))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.Element.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.Element();
-   (local.set $return.value (call $$getTypewildcards.TypeWildCards.Element__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Element)
-
 ;;; Code for typewildcards.TypeWildCards.OtherElement [CLASS]
 (type $typewildcards.TypeWildCards.OtherElement (struct
  (field $vtable (ref null $typewildcards.TypeWildCards.OtherElement.vtable))
@@ -697,24 +679,6 @@
   )
  )
 )
-
-;;; Class<?> OtherElement.getClass()
-(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.OtherElement
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $typewildcards.TypeWildCards.OtherElement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.OtherElement.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.OtherElement();
-   (local.set $return.value (call $$getTypewildcards.TypeWildCards.OtherElement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.OtherElement)
 
 ;;; Code for typewildcards.TypeWildCards.SubOtherElement [CLASS]
 (type $typewildcards.TypeWildCards.SubOtherElement (struct
@@ -765,24 +729,6 @@
   )
  )
 )
-
-;;; Class<?> SubOtherElement.getClass()
-(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.SubOtherElement
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $typewildcards.TypeWildCards.SubOtherElement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.SubOtherElement.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.SubOtherElement();
-   (local.set $return.value (call $$getTypewildcards.TypeWildCards.SubOtherElement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.SubOtherElement)
 
 ;;; Code for typewildcards.TypeWildCards.Foo [CLASS]
 (type $typewildcards.TypeWildCards.Foo (struct

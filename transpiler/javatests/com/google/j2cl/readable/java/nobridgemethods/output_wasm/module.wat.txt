@@ -112,24 +112,6 @@
  )
 )
 
-;;; Class<?> Map.getClass()
-(func $m_getClass__java_lang_Class@nobridgemethods.Map
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (local $this (ref null $nobridgemethods.Map))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $nobridgemethods.Map.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getNobridgemethods.Map();
-   (local.set $return.value (call $$getNobridgemethods.Map__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
- )
- (local.get $return.value)
-)
-(elem declare func $m_getClass__java_lang_Class@nobridgemethods.Map)
-
 ;;; Code for nobridgemethods.TreeMap [CLASS]
 (type $nobridgemethods.TreeMap (struct
  (field $vtable (ref null $nobridgemethods.TreeMap.vtable))

@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.Predicates.not;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
@@ -65,6 +67,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
   private static void synthesizeGetClassMethods(Library library) {
     library.getCompilationUnits().stream()
         .flatMap(cu -> cu.getTypes().stream())
+        .filter(not(Type::isAbstract))
         .forEach(
             t -> {
               if (TypeDescriptors.isJavaLangObject(t.getTypeDescriptor())) {
