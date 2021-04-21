@@ -41,5 +41,3 @@ j2wasm_library = rule(
         "srcjar": "lib%{name}-src.jar",
     },
 )
-
-# Helpers methods
