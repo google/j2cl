@@ -42,6 +42,7 @@ public class Main {
     testClassLiterals();
     testTry();
     testArrayInstanceOf();
+    testArrayGetClass();
     testWasmArrayApis();
     // TODO(b/171833737): Enable after System.getProperty support is added.
     // testArrayList();
@@ -311,6 +312,16 @@ public class Main {
     // assertFalse(referencetArray instanceof Object[][]);
     // assertFalse(referencetArray instanceof int[][]);
     // assertFalse(referencetArray instanceof long[][]);
+  }
+
+  private static void testArrayGetClass() {
+    Object intArray = new int[0];
+    assertEquals(int[].class, intArray.getClass());
+    assertEquals(int.class, intArray.getClass().getComponentType());
+
+    Object objectArray = new Object[0];
+    assertEquals(Object[].class, objectArray.getClass());
+    assertEquals(Object.class, objectArray.getClass().getComponentType());
   }
 
   private static void testWasmArrayApis() {

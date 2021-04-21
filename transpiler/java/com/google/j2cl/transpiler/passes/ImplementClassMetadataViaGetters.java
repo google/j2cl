@@ -82,7 +82,7 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
                       .addStatements(
                           ReturnStatement.newBuilder()
                               .setExpression(
-                                  new TypeLiteral(t.getSourcePosition(), t.getTypeDescriptor()))
+                                  getTypeLiteral(t.getSourcePosition(), t.getTypeDescriptor()))
                               .setTypeDescriptor(specializeJavaLangClass(t.getTypeDescriptor()))
                               .setSourcePosition(SourcePosition.NONE)
                               .build())
@@ -98,6 +98,22 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
         .setEnclosingTypeDescriptor(typeDescriptor)
         .setSynthetic(true)
         .build();
+  }
+
+  private static Expression getTypeLiteral(
+      SourcePosition sourcePosition, DeclaredTypeDescriptor typeDescriptor) {
+    if (TypeDescriptors.get()
+        .javaemulInternalWasmArray
+        .isSameBaseType(typeDescriptor.getSuperTypeDescriptor())) {
+      // This is a WasmArray implementation class, hence we need to return the type literal for
+      // the corresponding array type.
+      // TODO(b/184675805): Remove or refactor workaround when full support for array class
+      // metadata is implemented.
+      return new TypeLiteral(
+          sourcePosition, typeDescriptor.getFieldDescriptor("elements").getTypeDescriptor());
+    }
+
+    return new TypeLiteral(sourcePosition, typeDescriptor);
   }
 
   private static DeclaredTypeDescriptor specializeJavaLangClass(TypeDescriptor typeArgument) {
