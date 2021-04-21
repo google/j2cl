@@ -4,7 +4,7 @@ Takes Java source, translates it into Wasm.
 This is an experimental tool and should not be used.
 """
 
-load(":j2wasm_library.bzl", "J2wasmInfo")
+load(":provider.bzl", "J2wasmInfo")
 
 def _impl_j2wasm_application(ctx):
     deps = ctx.attr.deps + [ctx.attr._jre]

@@ -7,7 +7,7 @@ Should only be used for importing annotation byte code, otherwise may result
 in hard to debug errors!
 """
 
-load(":j2wasm_library.bzl", "J2wasmInfo")
+load(":provider.bzl", "J2wasmInfo")
 
 def _j2wasm_import_impl(ctx):
     java_info = ctx.attr.jar[JavaInfo]

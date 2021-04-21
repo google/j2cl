@@ -26,7 +26,8 @@ j2cl_library(
 """
 
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
-load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library", "to_j2wasm_name")
+load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
+load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2cl_library_build_test.bzl", "build_test")
 
 def j2cl_library(
@@ -57,7 +58,7 @@ def j2cl_library(
     if args.get("srcs") and (generate_build_test == None or generate_build_test):
         build_test(name, kwargs.get("tags", []))
 
-    j2wasm_library_name = to_j2wasm_name(name)
+    j2wasm_library_name = j2wasm_common.to_j2wasm_name(name)
 
     if not native.existing_rule(j2wasm_library_name):
         j2wasm_args = _filter_j2wasm_attrs(dict(kwargs))
@@ -85,10 +86,10 @@ def _to_j2wasm_targets(key, args):
 
 def _to_j2wasm_target(label):
     if type(label) == "string":
-        return to_j2wasm_name(_absolute_label(label))
+        return j2wasm_common.to_j2wasm_name(_absolute_label(label))
 
     # Label Object
-    return label.relative(":%s" % to_j2wasm_name(label.name))
+    return label.relative(":%s" % j2wasm_common.to_j2wasm_name(label.name))
 
 def _absolute_label(label):
     if label.startswith("//") or label.startswith("@"):
