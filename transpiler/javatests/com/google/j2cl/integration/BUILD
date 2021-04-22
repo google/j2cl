@@ -11,9 +11,9 @@ package(
 )
 
 config_setting(
-    name = "tree_artifact_enabled",
-    flag_values = {
-        "//:enable_experimental_tree_artifact_mode": "True",
+    name = "tree_artifacts_enabled",
+    define_values = {
+        "J2CL_TREE_ARTIFACTS": "1",
     },
 )
 
@@ -29,7 +29,7 @@ genrule(
 filegroup(
     name = "integration_tests_warnings_whitelist",
     srcs = select({
-        ":tree_artifact_enabled": ["tree_artifact_integration_tests_warnings_whitelist.txt"],
+        ":tree_artifacts_enabled": ["tree_artifact_integration_tests_warnings_whitelist.txt"],
         "//conditions:default": ["integration_tests_warnings_whitelist.txt"],
     }),
     visibility = [":__subpackages__"],

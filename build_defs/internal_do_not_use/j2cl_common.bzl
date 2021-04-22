@@ -2,7 +2,6 @@
 
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_js_lib_struct", "j2cl_js_provider")
 load("//build_defs/internal_do_not_use:provider.bzl", _J2clInfo = "J2clInfo")
-load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
 # TODO(b/183965899): Update references to skip this re-export and remove it.
 J2clInfo = _J2clInfo
@@ -52,11 +51,7 @@ def _compile(
         javac_opts,
     )
 
-    # TODO(b/155112462): Remove support for --define=J2CL_TREE_ARTIFACTS=1.
-    generate_tree_artifact = (
-        ctx.var.get("J2CL_TREE_ARTIFACTS", None) == "1" or
-        ctx.attr._enable_tree_artifact[BuildSettingInfo].value
-    )
+    generate_tree_artifact = ctx.var.get("J2CL_TREE_ARTIFACTS", None) == "1"
 
     # A note about the zip file: It will be created if:
     #  - tree artifacts are not enabled. In this case the zip file will be part
@@ -267,9 +262,6 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "host",
         executable = True,
         default = Label("@bazel_tools//tools/jdk:jar"),
-    ),
-    "_enable_tree_artifact": attr.label(
-        default = Label("//:enable_experimental_tree_artifact_mode"),
     ),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
