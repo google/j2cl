@@ -11,11 +11,12 @@ def _impl_j2wasm_application(ctx):
     srcs = _get_transitive_srcs(deps)
     classpath = _get_transitive_classpath(deps)
 
+    transpile_out = ctx.actions.declare_file(ctx.label.name + ".zip")
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add("-output", ctx.outputs.zip)
+    args.add("-output", transpile_out)
     args.add("-experimentalBackend", "WASM")
     args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
 
@@ -26,7 +27,7 @@ def _impl_j2wasm_application(ctx):
     ctx.actions.run(
         progress_message = "Transpiling to WASM %s" % ctx.label,
         inputs = depset(transitive = [srcs, classpath]),
-        outputs = [ctx.outputs.zip],
+        outputs = [transpile_out],
         executable = ctx.executable._j2cl_transpiler,
         arguments = ["--jvm_flag=-Dj2cl.enable_wasm_checks=" + str(enable_wasm_checks), args],
         env = dict(LANG = "en_US.UTF-8"),
@@ -37,11 +38,11 @@ def _impl_j2wasm_application(ctx):
     # unzip wat file
     ctx.actions.run_shell(
         progress_message = "Unzipping wat file",
-        inputs = [ctx.outputs.zip],
+        inputs = [transpile_out],
         outputs = [ctx.outputs.wat],
         command = (
             "tmp=$(mktemp -d);" +
-            "%s -q %s -d $tmp;" % (ctx.executable._zip.path, ctx.outputs.zip.path) +
+            "%s -q %s -d $tmp;" % (ctx.executable._zip.path, transpile_out.path) +
             "cp $tmp/module.wat %s;" % ctx.outputs.wat.path +
             "rm -R $tmp;"
         ),
@@ -56,11 +57,12 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-reference-types")
     args.add("--enable-sign-ext")
     args.add("--enable-nontrapping-float-to-int")
+    args.add_all(ctx.attr.opt_args)
     args.add("-o", ctx.outputs.wasm)
     args.add(ctx.outputs.wat)
 
     ctx.actions.run(
-        executable = ctx.executable._binaryen,
+        executable = ctx.executable.binaryen,
         arguments = [args],
         inputs = [ctx.outputs.wat],
         outputs = [ctx.outputs.wasm],
@@ -85,11 +87,16 @@ def _get_transitive_classpath(deps):
 def _trigger_javac_build(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.java_info.transitive_runtime_jars for d in deps])
 
-j2wasm_application = rule(
+_j2wasm_application = rule(
     implementation = _impl_j2wasm_application,
     attrs = {
         "deps": attr.label_list(providers = [J2wasmInfo]),
         "entry_points": attr.string_list(),
+        "opt_args": attr.string_list(),
+        "binaryen": attr.label(
+            cfg = "host",
+            executable = True,
+        ),
         "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
         "_j2cl_transpiler": attr.label(
             default = Label(
@@ -103,16 +110,23 @@ j2wasm_application = rule(
             executable = True,
             default = Label("//third_party/unzip"),
         ),
-        "_binaryen": attr.label(
-            cfg = "host",
-            executable = True,
-            default = Label("//third_party/binaryen:wasm-as"),
-        ),
     },
     outputs = {
-        "zip": "%{name}.zip",
         "wat": "%{name}.wat",
         "wasm": "%{name}.wasm",
         "validate": "%{name}.validate",
     },
 )
+
+def j2wasm_application(name, **kwargs):
+    _j2wasm_application(
+        name = name,
+        opt_args = ["-O"],
+        binaryen = "//third_party/binaryen:wasm-opt",
+        **kwargs
+    )
+    _j2wasm_application(
+        name = name + "_dev",
+        binaryen = "//third_party/binaryen:wasm-as",
+        **kwargs
+    )
