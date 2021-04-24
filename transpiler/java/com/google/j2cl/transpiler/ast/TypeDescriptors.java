@@ -68,6 +68,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfBoolean;
   public DeclaredTypeDescriptor javaemulInternalWasmArrayOfObject;
 
+  public DeclaredTypeDescriptor javaemulInternalAsserts;
   public DeclaredTypeDescriptor javaemulInternalValueType;
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
   public DeclaredTypeDescriptor javaemulInternalPrimitives;
@@ -302,7 +303,6 @@ public class TypeDescriptors {
     COMPARABLES("vmbootstrap", "Comparables"),
     CHAR_SEQUENCES("vmbootstrap", "CharSequences"),
     NUMBERS("vmbootstrap", "Numbers"),
-    ASSERTS("vmbootstrap", "Asserts"),
     ARRAYS("vmbootstrap", "Arrays"),
     CASTS("vmbootstrap", "Casts"),
     LONG_UTILS("vmbootstrap", "LongUtils"),
@@ -593,6 +593,9 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.WasmArray.OfObject":
           typeDescriptors.javaemulInternalWasmArrayOfObject = referenceType;
+          break;
+        case "javaemul.internal.Asserts":
+          typeDescriptors.javaemulInternalAsserts = referenceType;
           break;
         default:
           throw new IllegalStateException("Unexpected reference type in well known set: " + name);

@@ -55,6 +55,7 @@ public class FrontendConstants {
           "java.lang.String",
           "java.lang.Throwable",
           "java.util.Iterator",
+          "javaemul.internal.Asserts",
           "javaemul.internal.ValueType",
           "javaemul.internal.InternalPreconditions",
           "javaemul.internal.Primitives",
