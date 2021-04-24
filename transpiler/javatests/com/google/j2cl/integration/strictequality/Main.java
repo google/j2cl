@@ -17,6 +17,8 @@ package com.google.j2cl.integration.strictequality;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
+
 public class Main {
   public static void main(String... args) {
     testEqualityIsStrict();
@@ -24,6 +26,7 @@ public class Main {
     testBoxedAndDevirtualizedTypes();
   }
 
+  @Wasm("nop")
   private static void testBoxedAndDevirtualizedTypes() {
     assertTrue(new Character((char) 1) != new Character((char) 1));
     assertTrue(Character.valueOf((char) 1) == Character.valueOf((char) 1));
@@ -82,6 +85,7 @@ public class Main {
   }
 
   // Make sure String does not end up compared via '==' (b/33850935).
+  @Wasm("nop")
   private static void testEqualityIsStrict_regression() {
     // java.lang.Object.equals should not optimize to '=='
     assertTrue(!new StringBuilder("data").equals("data"));

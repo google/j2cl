@@ -43,7 +43,8 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     markNativeWasmArrayTypes(compilationUnit);
-    normalizeArrays(compilationUnit);
+    normalizeArrayAccesses(compilationUnit);
+    normalizeArrayCreations(compilationUnit);
   }
 
   private void markNativeWasmArrayTypes(CompilationUnit compilationUnit) {
@@ -106,24 +107,12 @@ public class ImplementArraysAsClasses extends NormalizationPass {
         });
   }
 
-  private static void normalizeArrays(CompilationUnit compilationUnit) {
+  /**
+   * Rewrites array accesses to use the wasm array field from the corresponding WasmArray subclass.
+   */
+  private static void normalizeArrayAccesses(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
-          @Override
-          public Expression rewriteNewArray(NewArray newArray) {
-            if (newArray.getTypeDescriptor().isNativeWasmArray()) {
-              return newArray;
-            }
-
-            checkState(newArray.getDimensionExpressions().size() == 1);
-
-            return NewInstance.Builder.from(
-                    TypeDescriptors.getWasmArrayType(newArray.getTypeDescriptor())
-                        .getMethodDescriptor("<init>", PrimitiveTypes.INT))
-                .setArguments(newArray.getDimensionExpressions().get(0))
-                .build();
-          }
-
           @Override
           public Node rewriteArrayLength(ArrayLength arrayLength) {
             ArrayTypeDescriptor arrayTypeDescriptor =
@@ -148,6 +137,34 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
             return ArrayAccess.Builder.from(arrayAccess)
                 .setArrayExpression(getInnerNativeArrayExpression(arrayAccess.getArrayExpression()))
+                .build();
+          }
+        });
+  }
+
+  /**
+   * Rewrite non native NewArray node to NewInstance of the corresponding WasmArray class.
+   *
+   * <p>This rewriting needs to happen after all rewriting ArrayAccess/ArrayLength. Otherwise it
+   * will break the AST invariant that ArrayAccess/ArrayLength operates on ArrayExpression. E.g.
+   * {@code (new Object[1])[0]} may become {@code new WasmArray.OfObject(1)[0]} where {@code new
+   * WasmArray.OfObject(1)} is not an ArrayExpression.
+   */
+  private static void normalizeArrayCreations(CompilationUnit compilationUnit) {
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Expression rewriteNewArray(NewArray newArray) {
+            if (newArray.getTypeDescriptor().isNativeWasmArray()) {
+              return newArray;
+            }
+
+            checkState(newArray.getDimensionExpressions().size() == 1);
+
+            return NewInstance.Builder.from(
+                    TypeDescriptors.getWasmArrayType(newArray.getTypeDescriptor())
+                        .getMethodDescriptor("<init>", PrimitiveTypes.INT))
+                .setArguments(newArray.getDimensionExpressions().get(0))
                 .build();
           }
         });
