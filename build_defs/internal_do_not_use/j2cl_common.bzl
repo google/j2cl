@@ -38,7 +38,6 @@ def _compile(
     java_deps, js_deps = _split_deps(deps)
     java_exports, js_exports = _split_deps(exports)
 
-    output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     java_provider = _java_compile(
         ctx,
         name,
@@ -144,7 +143,18 @@ def _create_empty_zip(ctx, output_js_zip):
         mnemonic = "J2clZip",
     )
 
-def _java_compile(ctx, name, srcs, deps, exports, plugins, exported_plugins, output_jar, javac_opts, mnemonic = "J2cl"):
+def _java_compile(
+        ctx,
+        name,
+        srcs = [],
+        deps = [],
+        exports = [],
+        plugins = [],
+        exported_plugins = [],
+        output_jar = None,
+        javac_opts = [],
+        mnemonic = "J2cl"):
+    output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
 
     default_j2cl_javac_opts = [
