@@ -140,12 +140,13 @@ abstract class WasmArray implements Serializable, Cloneable {
         copy(original, 0, this.elements, 0, insertIndex);
       }
 
-      // Copy new values into the insert location.
-      copy(values.elements, 0, this.elements, insertIndex, values.length);
-
-      // Move existing values beyond the insert point until to the end.
+      // Make room for the values that will be inserted by moving the existing elements to the
+      // end so that they are not overwritten.
       int insertEndIndex = insertIndex + values.length;
       copy(original, insertIndex, this.elements, insertEndIndex, newLength - insertEndIndex);
+
+      // Copy new values into the insert location.
+      copy(values.elements, 0, this.elements, insertIndex, values.length);
 
       // Adjust the final size to cover all copied items
       length = newLength;

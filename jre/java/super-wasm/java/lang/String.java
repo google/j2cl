@@ -779,7 +779,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
 
   // Internal API to create String instance without an array copy.
   static String fromInternalArray(char[] array) {
-    return new String(0, 0, array);
+    return new String(0, array.length, array);
   }
 
   static String fromCodePoint(int codePoint) {

@@ -57,7 +57,7 @@ public final class ArrayHelper {
   public static void removeFrom(Object[] array, int index, int deleteCount) {
     // Copy the items after deletion end, overwriting deleted items.
     int copyFrom = index + deleteCount;
-    copy(array, index, array, copyFrom, array.length - copyFrom);
+    copy(array, copyFrom, array, index, array.length - copyFrom);
     // Trim the end array.
     setLength(array, array.length - deleteCount);
   }

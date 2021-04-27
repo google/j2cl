@@ -49,6 +49,7 @@ public class Main {
     // TODO(b/171833737): Enable after System.getProperty and Class.getComponentType support is
     // added.
     // testSystemArrayCopy();
+    testStringValueOf();
   }
 
   static class A {
@@ -390,5 +391,9 @@ public class Main {
     for (int i = 0; i < strArray.length; ++i) {
       assertEquals("rev str copy index " + i, strArrayExpected2[i], strArray[i]);
     }
+  }
+
+  private static void testStringValueOf() {
+    assertEquals("5", String.valueOf(5));
   }
 }
