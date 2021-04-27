@@ -12,7 +12,7 @@
 
 ;;; Code for aptgeneratorplugin.Dummy [CLASS]
 (type $aptgeneratorplugin.Dummy (struct
- (field $vtable (ref null $aptgeneratorplugin.Dummy.vtable))
+ (field $vtable (ref null $aptgeneratorplugin.Dummy.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $aptgeneratorplugin.Dummy.vtable (struct
@@ -75,7 +75,7 @@
 
 ;;; Code for aptgeneratorplugin.Foo [CLASS]
 (type $aptgeneratorplugin.Foo (struct
- (field $vtable (ref null $aptgeneratorplugin.Foo.vtable))
+ (field $vtable (ref null $aptgeneratorplugin.Foo.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $aptgeneratorplugin.Foo.vtable (struct
@@ -160,7 +160,29 @@
 (elem declare func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo)
 
  ;;; Code for aptgeneratorplugin.Dummy [vtable.init]
- (global.set $aptgeneratorplugin.Dummy.vtable (struct.new_with_rtt $aptgeneratorplugin.Dummy.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy) (rtt.canon $aptgeneratorplugin.Dummy.vtable)))
+ (global.set $aptgeneratorplugin.Dummy.vtable
+  (struct.new_with_rtt $aptgeneratorplugin.Dummy.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy)
+   (rtt.canon $aptgeneratorplugin.Dummy.vtable)
+  )
+ )
+
+ ;;; Code for aptgeneratorplugin.Dummy [itable.init]
+ (global.set $aptgeneratorplugin.Dummy.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for aptgeneratorplugin.Foo [vtable.init]
- (global.set $aptgeneratorplugin.Foo.vtable (struct.new_with_rtt $aptgeneratorplugin.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@aptgeneratorplugin.Foo) (ref.func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo) (rtt.canon $aptgeneratorplugin.Foo.vtable)))
+ (global.set $aptgeneratorplugin.Foo.vtable
+  (struct.new_with_rtt $aptgeneratorplugin.Foo.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@aptgeneratorplugin.Foo)
+   (ref.func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo)
+   (rtt.canon $aptgeneratorplugin.Foo.vtable)
+  )
+ )
+
+ ;;; Code for aptgeneratorplugin.Foo [itable.init]
+ (global.set $aptgeneratorplugin.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

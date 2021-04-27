@@ -18,6 +18,8 @@ package com.google.j2cl.integration.interfaces;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
+
 /** Test basic interface functionality. */
 @SuppressWarnings("StaticQualifiedUsingExpression")
 public class Main {
@@ -134,6 +136,8 @@ public class Main {
     }
   }
 
+  // TODO(b/170691636): remove wasm nop when interface instance of is implemented.
+  @Wasm("nop")
   private static void testDefaultMethods() {
     assertTrue(new ACollection<Object>().add(null) == COLLECTION_ADD);
     assertTrue(new AConcreteList<Object>().add(null) == ABSTRACT_COLLECTION_ADD);
@@ -159,7 +163,7 @@ public class Main {
     }
 
     private static int privateStaticMethod() {
-      return ((InterfaceWithPrivateMethods) () -> 1).privateInstanceMethod() + 1;
+      return mReturns1.privateInstanceMethod() + 1;
     }
 
     int m();
@@ -169,9 +173,17 @@ public class Main {
     }
   }
 
+  private static InterfaceWithPrivateMethods mReturns1 =
+      new InterfaceWithPrivateMethods() {
+        @Override
+        public int m() {
+          return 1;
+        }
+      };
+
   private static void testPrivateMethods() {
     assertTrue(InterfaceWithPrivateMethods.callPrivateStaticMethod() == 2);
-    assertTrue(((InterfaceWithPrivateMethods) () -> 1).defaultMethod() == 1);
+    assertTrue(mReturns1.defaultMethod() == 1);
   }
 
   interface InterfaceWithDefaultMethod {

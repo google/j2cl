@@ -85,7 +85,7 @@
 
 ;;; Code for lambdas.Lambdas [CLASS]
 (type $lambdas.Lambdas (struct
- (field $vtable (ref null $lambdas.Lambdas.vtable))
+ (field $vtable (ref null $lambdas.Lambdas.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_field__lambdas_Lambdas (mut i32))
 ))
@@ -140,7 +140,7 @@
  (block $return.label
   (block
    ;; return (Lambdas.this.field + intf.m(n));
-   (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this)) (i32.const 0)))
+   (local.set $return.value (i32.add (struct.get $lambdas.Lambdas $f_field__lambdas_Lambdas(local.get $this)) (call_ref (local.get $intf)(local.get $n)(struct.get $lambdas.Lambdas.FunctionalInterface.vtable $m_m__int__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const -1)) (rtt.canon $lambdas.Lambdas.FunctionalInterface.vtable)) ))))
    (br $return.label)
   )
  )
@@ -318,7 +318,7 @@
  (block $return.label
   (block
    ;; return intf.m(e);
-   (local.set $return.value (ref.null $java.lang.Object))
+   (local.set $return.value (call_ref (local.get $intf)(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const -1)) (rtt.canon $lambdas.Lambdas.GenericFunctionalInterface.vtable)) )))
    (br $return.label)
   )
  )
@@ -338,7 +338,7 @@
  (block $return.label
   (block
    ;; return ((Error) intf.m(e));
-   (local.set $return.value (ref.cast (ref.null $java.lang.Error) (global.get $java.lang.Error.rtt)))
+   (local.set $return.value (ref.cast (call_ref (local.get $intf)(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const -1)) (rtt.canon $lambdas.Lambdas.GenericFunctionalInterface.vtable)) )) (global.get $java.lang.Error.rtt)))
    (br $return.label)
   )
  )
@@ -357,7 +357,7 @@
    ;; lambdas.Lambdas.$clinit();
    (call $$clinit__void@lambdas.Lambdas )
    ;; return ((Enum<T>) intf.m(e));
-   (local.set $return.value (ref.cast (ref.null $java.lang.Enum) (global.get $java.lang.Enum.rtt)))
+   (local.set $return.value (ref.cast (call_ref (local.get $intf)(local.get $e)(struct.get $lambdas.Lambdas.GenericFunctionalInterface.vtable $m_m__java_lang_Object__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const -1)) (rtt.canon $lambdas.Lambdas.GenericFunctionalInterface.vtable)) )) (global.get $java.lang.Enum.rtt)))
    (br $return.label)
   )
  )
@@ -398,9 +398,9 @@
  (block $return.label
   (block
    ;; Lambdas.this.callWithTypeVariable(function (Error i){
-   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (global.get $java.lang.Error.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; Lambdas.this.callParameterized(function (Error i){
-   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+   (drop (call_ref (local.get $this)(ref.null $java.lang.Object)(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (global.get $java.lang.Error.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
    ;; lambdas.Lambdas.callTypeVariableWithBounds(function (Enum<T> i){
    (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (ref.null $java.lang.Object)(ref.cast (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt))))
    ;; Lambdas.this.callWithBiFunction(function (Object x,String y){
@@ -489,7 +489,7 @@
     (then
      (block
       ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
-      (global.set $f_identityFunction__lambdas_Lambdas_ (call $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
+      (global.set $f_identityFunction__lambdas_Lambdas_ (call $m_<init>__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (global.get $lambdas.Lambdas.IdentityFunction.vtable) (global.get $lambdas.Lambdas.IdentityFunction.itable) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
      )
     )
    )
@@ -525,14 +525,14 @@
    
    (local.set $stringJsSupplier (ref.null $java.lang.Object))
    ;; stringJsSupplier.get();
-   (drop (ref.null $java.lang.Integer))
+   (drop (call_ref (local.get $stringJsSupplier)(struct.get $lambdas.Lambdas.JsSupplier.vtable $m_get__java_lang_Number (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $stringJsSupplier)) (i32.const -1)) (rtt.canon $lambdas.Lambdas.JsSupplier.vtable)) )))
    ;; Equals equals = stringJsSupplier;
    
    (local.set $equals (local.get $stringJsSupplier))
    ;; equals.equals(null);
-   (drop (i32.const 0))
+   (drop (call_ref (local.get $equals)(ref.null $java.lang.Object)(struct.get $lambdas.Lambdas.Equals.vtable $m_equals__java_lang_Object__boolean (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $equals)) (i32.const -1)) (rtt.canon $lambdas.Lambdas.Equals.vtable)) )))
    ;; equals.get();
-   (drop (ref.null $java.lang.Object))
+   (drop (call_ref (local.get $equals)(struct.get $lambdas.Lambdas.Equals.vtable $m_get__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $equals)) (i32.const -1)) (rtt.canon $lambdas.Lambdas.Equals.vtable)) )))
   )
  )
 )
@@ -627,6 +627,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas)
 
 ;;; Code for lambdas.Lambdas.FunctionalInterface [INTERFACE]
+(type $lambdas.Lambdas.FunctionalInterface.vtable (struct
+ (field $m_m__int__int (mut (ref $function.$int__$int)))
+))
 
 ;;; void FunctionalInterface.$clinit()
 (func $$clinit__void@lambdas.Lambdas.FunctionalInterface
@@ -662,6 +665,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.FunctionalInterface)
 
 ;;; Code for lambdas.Lambdas.Functional [INTERFACE]
+(type $lambdas.Lambdas.Functional.vtable (struct
+ (field $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
 
 ;;; void Functional.$clinit()
 (func $$clinit__void@lambdas.Lambdas.Functional
@@ -698,7 +704,7 @@
 
 ;;; Code for lambdas.Lambdas.1 [CLASS]
 (type $lambdas.Lambdas.1 (struct
- (field $vtable (ref null $lambdas.Lambdas.1.vtable))
+ (field $vtable (ref null $lambdas.Lambdas.1.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__lambdas_Lambdas_1 (mut (ref null $lambdas.Lambdas)))
 ))
@@ -785,7 +791,7 @@
 
 ;;; Code for lambdas.Lambdas.2 [CLASS]
 (type $lambdas.Lambdas.2 (struct
- (field $vtable (ref null $lambdas.Lambdas.2.vtable))
+ (field $vtable (ref null $lambdas.Lambdas.2.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $lambdas.Lambdas.2.vtable (struct
@@ -867,6 +873,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.2)
 
 ;;; Code for lambdas.Lambdas.GenericFunctionalInterface [INTERFACE]
+(type $lambdas.Lambdas.GenericFunctionalInterface.vtable (struct
+ (field $m_m__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
 
 ;;; void GenericFunctionalInterface.$clinit()
 (func $$clinit__void@lambdas.Lambdas.GenericFunctionalInterface
@@ -902,6 +911,10 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.GenericFunctionalInterface)
 
 ;;; Code for lambdas.Lambdas.BiFunction [INTERFACE]
+(type $lambdas.Lambdas.BiFunction.vtable (struct
+ (field $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
+))
 
 ;;; BiFunction<T, U, V> BiFunction.andThen(Function<? super R, ? extends V> after)
 (func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction
@@ -956,6 +969,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.BiFunction)
 
 ;;; Code for lambdas.Lambdas.Function [INTERFACE]
+(type $lambdas.Lambdas.Function.vtable (struct
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
 
 ;;; Function<T, T> Function.identity()
 (func $m_identity__lambdas_Lambdas_Function@lambdas.Lambdas.Function
@@ -1008,6 +1024,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.Function)
 
 ;;; Code for lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid [INTERFACE]
+(type $lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.vtable (struct
+ (field $m_run__void (mut (ref $function.__$void)))
+))
 
 ;;; void FunctionalInterfaceWithMethodReturningVoid.$clinit()
 (func $$clinit__void@lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid
@@ -1044,7 +1063,7 @@
 
 ;;; Code for lambdas.Lambdas.3 [CLASS]
 (type $lambdas.Lambdas.3 (struct
- (field $vtable (ref null $lambdas.Lambdas.3.vtable))
+ (field $vtable (ref null $lambdas.Lambdas.3.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__lambdas_Lambdas_3 (mut (ref null $lambdas.Lambdas)))
 ))
@@ -1111,7 +1130,7 @@
 
 ;;; Code for lambdas.Lambdas.Parent [CLASS]
 (type $lambdas.Lambdas.Parent (struct
- (field $vtable (ref null $lambdas.Lambdas.Parent.vtable))
+ (field $vtable (ref null $lambdas.Lambdas.Parent.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fieldInParent__lambdas_Lambdas_Parent (mut i32))
 ))
@@ -1188,7 +1207,7 @@
 
 ;;; Code for lambdas.Lambdas.LambdaInSubClass [CLASS]
 (type $lambdas.Lambdas.LambdaInSubClass (struct
- (field $vtable (ref null $lambdas.Lambdas.LambdaInSubClass.vtable))
+ (field $vtable (ref null $lambdas.Lambdas.LambdaInSubClass.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fieldInParent__lambdas_Lambdas_Parent (mut i32))
 ))
@@ -1271,6 +1290,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.LambdaInSubClass)
 
 ;;; Code for lambdas.Lambdas.GenericJsFunction [INTERFACE]
+(type $lambdas.Lambdas.GenericJsFunction.vtable (struct
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
 
 ;;; void GenericJsFunction.$clinit()
 (func $$clinit__void@lambdas.Lambdas.GenericJsFunction
@@ -1306,6 +1328,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.GenericJsFunction)
 
 ;;; Code for lambdas.Lambdas.Thenable [INTERFACE]
+(type $lambdas.Lambdas.Thenable.vtable (struct
+ (field $m_then__lambdas_Lambdas_GenericJsFunction__lambdas_Lambdas_GenericJsFunction__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+))
 
 ;;; void Thenable.$clinit()
 (func $$clinit__void@lambdas.Lambdas.Thenable
@@ -1341,6 +1366,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.Thenable)
 
 ;;; Code for lambdas.Lambdas.AnotherThenable [INTERFACE]
+(type $lambdas.Lambdas.AnotherThenable.vtable (struct
+ (field $m_then__lambdas_Lambdas_GenericJsFunction__lambdas_Lambdas_GenericJsFunction__void (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
+))
 
 ;;; void AnotherThenable.$clinit()
 (func $$clinit__void@lambdas.Lambdas.AnotherThenable
@@ -1377,7 +1405,7 @@
 
 ;;; Code for lambdas.Lambdas.IdentityFunction [CLASS]
 (type $lambdas.Lambdas.IdentityFunction (struct
- (field $vtable (ref null $lambdas.Lambdas.IdentityFunction.vtable))
+ (field $vtable (ref null $lambdas.Lambdas.IdentityFunction.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $lambdas.Lambdas.IdentityFunction.vtable (struct
@@ -1459,6 +1487,10 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.IdentityFunction)
 
 ;;; Code for lambdas.Lambdas.Equals [INTERFACE]
+(type $lambdas.Lambdas.Equals.vtable (struct
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_get__java_lang_Object (mut (ref $function.__$java.lang.Object)))
+))
 
 ;;; T Equals.get()
 (func $m_get__java_lang_Object@lambdas.Lambdas.Equals
@@ -1510,6 +1542,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.Equals)
 
 ;;; Code for lambdas.Lambdas.JsSupplier [INTERFACE]
+(type $lambdas.Lambdas.JsSupplier.vtable (struct
+ (field $m_get__java_lang_Number (mut (ref $function.__$java.lang.Number)))
+))
 
 ;;; void JsSupplier.$clinit()
 (func $$clinit__void@lambdas.Lambdas.JsSupplier
@@ -1547,6 +1582,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.JsSupplier)
 
 ;;; Code for lambdas.Lambdas.JustADefaultT [INTERFACE]
+(type $lambdas.Lambdas.JustADefaultT.vtable (struct
+ (field $m_method__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+))
 
 ;;; void JustADefaultT.method(T t)
 (func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultT
@@ -1593,6 +1631,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.JustADefaultT)
 
 ;;; Code for lambdas.Lambdas.JustADefaultS [INTERFACE]
+(type $lambdas.Lambdas.JustADefaultS.vtable (struct
+ (field $m_method__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
+))
 
 ;;; void JustADefaultS.method(S t)
 (func $m_method__java_lang_Object__void@lambdas.Lambdas.JustADefaultS
@@ -1639,6 +1680,9 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.JustADefaultS)
 
 ;;; Code for lambdas.Lambdas.MarkerWithDefaultMethod [INTERFACE]
+(type $lambdas.Lambdas.MarkerWithDefaultMethod.vtable (struct
+ (field $m_defaultMethod__void (mut (ref $function.__$void)))
+))
 
 ;;; void MarkerWithDefaultMethod.defaultMethod()
 (func $m_defaultMethod__void@lambdas.Lambdas.MarkerWithDefaultMethod
@@ -1684,22 +1728,136 @@
 (elem declare func $m_getClass__java_lang_Class@lambdas.Lambdas.MarkerWithDefaultMethod)
 
  ;;; Code for lambdas.Lambdas [vtable.init]
- (global.set $lambdas.Lambdas.vtable (struct.new_with_rtt $lambdas.Lambdas.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas) (ref.func $m_call__lambdas_Lambdas_FunctionalInterface__int__int@lambdas.Lambdas) (ref.func $m_testLambdaExpressionStyle__void@lambdas.Lambdas) (ref.func $m_testLambdaBlockStyle__void@lambdas.Lambdas) (ref.func $m_testLambdaCaptureField__void@lambdas.Lambdas) (ref.func $m_testLambdaCaptureLocal__void@lambdas.Lambdas) (ref.func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas) (ref.func $m_funOuter__void@lambdas.Lambdas) (ref.func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas) (ref.func $m_testInstanceMethodTypeVariableThroughLambda__void@lambdas.Lambdas) (ref.func $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object@lambdas.Lambdas) (ref.func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas) (ref.func $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas@lambdas.Lambdas) (ref.func $m_testLambdaWithGenerics__void@lambdas.Lambdas) (ref.func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas) (ref.func $m_testAnonymousInsideLambda__void@lambdas.Lambdas) (ref.func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas) (rtt.canon $lambdas.Lambdas.vtable)))
+ (global.set $lambdas.Lambdas.vtable
+  (struct.new_with_rtt $lambdas.Lambdas.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas)
+   (ref.func $m_call__lambdas_Lambdas_FunctionalInterface__int__int@lambdas.Lambdas)
+   (ref.func $m_testLambdaExpressionStyle__void@lambdas.Lambdas)
+   (ref.func $m_testLambdaBlockStyle__void@lambdas.Lambdas)
+   (ref.func $m_testLambdaCaptureField__void@lambdas.Lambdas)
+   (ref.func $m_testLambdaCaptureLocal__void@lambdas.Lambdas)
+   (ref.func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas)
+   (ref.func $m_funOuter__void@lambdas.Lambdas)
+   (ref.func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas)
+   (ref.func $m_testInstanceMethodTypeVariableThroughLambda__void@lambdas.Lambdas)
+   (ref.func $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object@lambdas.Lambdas)
+   (ref.func $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error@lambdas.Lambdas)
+   (ref.func $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas@lambdas.Lambdas)
+   (ref.func $m_testLambdaWithGenerics__void@lambdas.Lambdas)
+   (ref.func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas)
+   (ref.func $m_testAnonymousInsideLambda__void@lambdas.Lambdas)
+   (ref.func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas)
+   (rtt.canon $lambdas.Lambdas.vtable)
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas [itable.init]
+ (global.set $lambdas.Lambdas.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for lambdas.Lambdas.1 [vtable.init]
- (global.set $lambdas.Lambdas.1.vtable (struct.new_with_rtt $lambdas.Lambdas.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.1) (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.1) (rtt.canon $lambdas.Lambdas.1.vtable)))
+ (global.set $lambdas.Lambdas.1.vtable
+  (struct.new_with_rtt $lambdas.Lambdas.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.1)
+   (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.1)
+   (rtt.canon $lambdas.Lambdas.1.vtable)
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas.1 [itable.init]
+ (global.set $lambdas.Lambdas.1.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $lambdas.Lambdas.1.itable) (i32.const 0)
+ (struct.new_with_rtt $lambdas.Lambdas.Functional.vtable
+  (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.1)
+  (rtt.canon $lambdas.Lambdas.Functional.vtable)
+ ))
 
  ;;; Code for lambdas.Lambdas.2 [vtable.init]
- (global.set $lambdas.Lambdas.2.vtable (struct.new_with_rtt $lambdas.Lambdas.2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.2) (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.2) (rtt.canon $lambdas.Lambdas.2.vtable)))
+ (global.set $lambdas.Lambdas.2.vtable
+  (struct.new_with_rtt $lambdas.Lambdas.2.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.2)
+   (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.2)
+   (rtt.canon $lambdas.Lambdas.2.vtable)
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas.2 [itable.init]
+ (global.set $lambdas.Lambdas.2.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $lambdas.Lambdas.2.itable) (i32.const 0)
+ (struct.new_with_rtt $lambdas.Lambdas.Functional.vtable
+  (ref.func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.2)
+  (rtt.canon $lambdas.Lambdas.Functional.vtable)
+ ))
 
  ;;; Code for lambdas.Lambdas.3 [vtable.init]
- (global.set $lambdas.Lambdas.3.vtable (struct.new_with_rtt $lambdas.Lambdas.3.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.3) (rtt.canon $lambdas.Lambdas.3.vtable)))
+ (global.set $lambdas.Lambdas.3.vtable
+  (struct.new_with_rtt $lambdas.Lambdas.3.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.3)
+   (rtt.canon $lambdas.Lambdas.3.vtable)
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas.3 [itable.init]
+ (global.set $lambdas.Lambdas.3.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for lambdas.Lambdas.Parent [vtable.init]
- (global.set $lambdas.Lambdas.Parent.vtable (struct.new_with_rtt $lambdas.Lambdas.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.Parent) (ref.func $m_funInParent__void@lambdas.Lambdas.Parent) (rtt.canon $lambdas.Lambdas.Parent.vtable)))
+ (global.set $lambdas.Lambdas.Parent.vtable
+  (struct.new_with_rtt $lambdas.Lambdas.Parent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.Parent)
+   (ref.func $m_funInParent__void@lambdas.Lambdas.Parent)
+   (rtt.canon $lambdas.Lambdas.Parent.vtable)
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas.Parent [itable.init]
+ (global.set $lambdas.Lambdas.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for lambdas.Lambdas.LambdaInSubClass [vtable.init]
- (global.set $lambdas.Lambdas.LambdaInSubClass.vtable (struct.new_with_rtt $lambdas.Lambdas.LambdaInSubClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.LambdaInSubClass) (ref.func $m_funInParent__void@lambdas.Lambdas.Parent) (ref.func $m_testLambdaInSubclass__void@lambdas.Lambdas.LambdaInSubClass) (rtt.canon $lambdas.Lambdas.LambdaInSubClass.vtable)))
+ (global.set $lambdas.Lambdas.LambdaInSubClass.vtable
+  (struct.new_with_rtt $lambdas.Lambdas.LambdaInSubClass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.LambdaInSubClass)
+   (ref.func $m_funInParent__void@lambdas.Lambdas.Parent)
+   (ref.func $m_testLambdaInSubclass__void@lambdas.Lambdas.LambdaInSubClass)
+   (rtt.canon $lambdas.Lambdas.LambdaInSubClass.vtable)
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas.LambdaInSubClass [itable.init]
+ (global.set $lambdas.Lambdas.LambdaInSubClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for lambdas.Lambdas.IdentityFunction [vtable.init]
- (global.set $lambdas.Lambdas.IdentityFunction.vtable (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.IdentityFunction) (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction) (rtt.canon $lambdas.Lambdas.IdentityFunction.vtable)))
+ (global.set $lambdas.Lambdas.IdentityFunction.vtable
+  (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@lambdas.Lambdas.IdentityFunction)
+   (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction)
+   (rtt.canon $lambdas.Lambdas.IdentityFunction.vtable)
+  )
+ )
+
+ ;;; Code for lambdas.Lambdas.IdentityFunction [itable.init]
+ (global.set $lambdas.Lambdas.IdentityFunction.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $lambdas.Lambdas.IdentityFunction.itable) (i32.const 0)
+ (struct.new_with_rtt $lambdas.Lambdas.GenericJsFunction.vtable
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@lambdas.Lambdas.IdentityFunction)
+  (rtt.canon $lambdas.Lambdas.GenericJsFunction.vtable)
+ ))

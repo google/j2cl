@@ -13,6 +13,7 @@ package(
 integration_test(
     name = "allsimplebridges",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
     suppress = ["JSC_UNKNOWN_OVERRIDE"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

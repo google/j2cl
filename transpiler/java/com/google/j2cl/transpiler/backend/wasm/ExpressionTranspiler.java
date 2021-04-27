@@ -265,32 +265,57 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
         MethodDescriptor target = methodCall.getTarget();
-
         DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
+
         if (methodCall.isPolymorphic()) {
+          sourceBuilder.append("(call_ref ");
+
+          // Pass the implicit parameter.
+          Expression implicitParameter = methodCall.getQualifier();
+          renderTypedExpression(enclosingTypeDescriptor, implicitParameter);
+
+          // Pass the rest of the parameters.
+          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+
+          // Retrieve the method reference from the appropriate vtable to provide it to call_ref.
+          sourceBuilder.append(
+              format(
+                  "(struct.get %s %s ",
+                  environment.getWasmVtableTypeName(enclosingTypeDescriptor),
+                  environment.getVtableSlot(target)));
+
+          // Retrieve the corresponding vtable.
           if (target.isClassDynamicDispatch()) {
-            sourceBuilder.append("(call_ref ");
-
-            // Pass the implicit parameter.
-            Expression implicitParameter = methodCall.getQualifier();
-            renderTypedExpression(enclosingTypeDescriptor, implicitParameter);
-
-            // Pass the rest of the parameters.
-            renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
-
-            // Retrieve the method reference from the vtable to provide it to call_ref.
+            // For a class dynamic dispatch the vtable resides in the $vtable field of object passed
+            // as the qualifier.
             sourceBuilder.append(
                 format(
-                    "(struct.get %s %s (struct.get %s $vtable",
-                    environment.getWasmVtableTypeName(enclosingTypeDescriptor),
-                    environment.getVtableSlot(target),
+                    "(struct.get %s $vtable",
                     environment.getWasmTypeName(enclosingTypeDescriptor)));
             renderTypedExpression(enclosingTypeDescriptor, methodCall.getQualifier());
-
-            sourceBuilder.append("))");
             sourceBuilder.append(")");
-            return false;
+          } else {
+            // For a an interface dynamic dispatch the vtable resides in the $itable array field of
+            // object passed as the qualifier.
+
+            // Retrieve the interface vtable...
+            sourceBuilder.append(
+                String.format(
+                    "(ref.cast (array.get $itable (struct.get %s $itable ",
+                    environment.getWasmTypeName(enclosingTypeDescriptor)));
+            renderTypedExpression(enclosingTypeDescriptor, methodCall.getQualifier());
+            // ... from the assigned $table array slot and cast to the particular interface vtable
+            // type using its canonical rtt.
+            sourceBuilder.append(
+                String.format(
+                    ") (i32.const %d)) (rtt.canon %s)) ",
+                    environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration()),
+                    environment.getWasmVtableTypeName(
+                        enclosingTypeDescriptor.toUnparameterizedTypeDescriptor())));
           }
+
+          sourceBuilder.append("))");
+          return false;
         } else {
           // Non polymorphic methods are called directly, regardless of whether they are
           // instance methods or not.
@@ -312,10 +337,7 @@ final class ExpressionTranspiler {
           }
 
           sourceBuilder.append(")");
-          return false;
         }
-        // TODO(rluble): remove once all method call types are implemented.
-        renderUnimplementedExpression(methodCall);
         return false;
       }
 
@@ -358,9 +380,10 @@ final class ExpressionTranspiler {
         sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
         sourceBuilder.append(
             format(
-                "(struct.new_with_rtt %s (global.get %s)",
+                "(struct.new_with_rtt %s (global.get %s) (global.get %s)",
                 environment.getWasmTypeName(newInstance.getTypeDescriptor()),
-                environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor())));
+                environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor()),
+                environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));
 
         // TODO(b/178728155): Go back to using struct.new_default_with_rtt once it supports
         // assigning immutable fields at construction. See b/178738025 for an alternative design

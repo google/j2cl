@@ -6,7 +6,7 @@
 
 ;;; Code for assertsimple.AssertSimple [CLASS]
 (type $assertsimple.AssertSimple (struct
- (field $vtable (ref null $assertsimple.AssertSimple.vtable))
+ (field $vtable (ref null $assertsimple.AssertSimple.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $assertsimple.AssertSimple.vtable (struct
@@ -81,4 +81,15 @@
 (elem declare func $m_getClass__java_lang_Class@assertsimple.AssertSimple)
 
  ;;; Code for assertsimple.AssertSimple [vtable.init]
- (global.set $assertsimple.AssertSimple.vtable (struct.new_with_rtt $assertsimple.AssertSimple.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@assertsimple.AssertSimple) (rtt.canon $assertsimple.AssertSimple.vtable)))
+ (global.set $assertsimple.AssertSimple.vtable
+  (struct.new_with_rtt $assertsimple.AssertSimple.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@assertsimple.AssertSimple)
+   (rtt.canon $assertsimple.AssertSimple.vtable)
+  )
+ )
+
+ ;;; Code for assertsimple.AssertSimple [itable.init]
+ (global.set $assertsimple.AssertSimple.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

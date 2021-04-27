@@ -12,7 +12,7 @@
 
 ;;; Code for srcjar.Foo [CLASS]
 (type $srcjar.Foo (struct
- (field $vtable (ref null $srcjar.Foo.vtable))
+ (field $vtable (ref null $srcjar.Foo.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $srcjar.Foo.vtable (struct
@@ -75,7 +75,7 @@
 
 ;;; Code for srcjar.Srcjar [CLASS]
 (type $srcjar.Srcjar (struct
- (field $vtable (ref null $srcjar.Srcjar.vtable))
+ (field $vtable (ref null $srcjar.Srcjar.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $srcjar.Srcjar.vtable (struct
@@ -108,7 +108,7 @@
    (call $$clinit__void@srcjar.Srcjar )
    ;; Foo foo = new Foo.<init>();
    
-   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.vtable) (i32.const 0) (global.get $srcjar.Foo.rtt))))
+   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.vtable) (global.get $srcjar.Foo.itable) (i32.const 0) (global.get $srcjar.Foo.rtt))))
   )
  )
 )
@@ -151,7 +151,29 @@
 (elem declare func $m_getClass__java_lang_Class@srcjar.Srcjar)
 
  ;;; Code for srcjar.Foo [vtable.init]
- (global.set $srcjar.Foo.vtable (struct.new_with_rtt $srcjar.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@srcjar.Foo) (rtt.canon $srcjar.Foo.vtable)))
+ (global.set $srcjar.Foo.vtable
+  (struct.new_with_rtt $srcjar.Foo.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@srcjar.Foo)
+   (rtt.canon $srcjar.Foo.vtable)
+  )
+ )
+
+ ;;; Code for srcjar.Foo [itable.init]
+ (global.set $srcjar.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for srcjar.Srcjar [vtable.init]
- (global.set $srcjar.Srcjar.vtable (struct.new_with_rtt $srcjar.Srcjar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@srcjar.Srcjar) (rtt.canon $srcjar.Srcjar.vtable)))
+ (global.set $srcjar.Srcjar.vtable
+  (struct.new_with_rtt $srcjar.Srcjar.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@srcjar.Srcjar)
+   (rtt.canon $srcjar.Srcjar.vtable)
+  )
+ )
+
+ ;;; Code for srcjar.Srcjar [itable.init]
+ (global.set $srcjar.Srcjar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

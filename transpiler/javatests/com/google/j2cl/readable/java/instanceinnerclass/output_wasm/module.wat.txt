@@ -12,7 +12,7 @@
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [CLASS]
 (type $instanceinnerclass.InstanceInnerClass (struct
- (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.vtable))
+ (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_instanceField__instanceinnerclass_InstanceInnerClass (mut i32))
 ))
@@ -59,7 +59,7 @@
  (block $return.label
   (block
    ;; new InnerClass.<init>(new InstanceInnerClass.<init>());
-   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__void@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (global.get $instanceinnerclass.InstanceInnerClass.vtable) (i32.const 0) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
+   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__void@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (global.get $instanceinnerclass.InstanceInnerClass.vtable) (global.get $instanceinnerclass.InstanceInnerClass.itable) (i32.const 0) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
   )
  )
 )
@@ -104,7 +104,7 @@
 
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [CLASS]
 (type $instanceinnerclass.InstanceInnerClass.InnerClass (struct
- (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable))
+ (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
  (field $f_field__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32))
@@ -204,7 +204,32 @@
 (elem declare func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass)
 
  ;;; Code for instanceinnerclass.InstanceInnerClass [vtable.init]
- (global.set $instanceinnerclass.InstanceInnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass) (ref.func $m_funOuter__void@instanceinnerclass.InstanceInnerClass) (ref.func $m_test__void@instanceinnerclass.InstanceInnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.vtable)))
+ (global.set $instanceinnerclass.InstanceInnerClass.vtable
+  (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass)
+   (ref.func $m_funOuter__void@instanceinnerclass.InstanceInnerClass)
+   (ref.func $m_test__void@instanceinnerclass.InstanceInnerClass)
+   (rtt.canon $instanceinnerclass.InstanceInnerClass.vtable)
+  )
+ )
+
+ ;;; Code for instanceinnerclass.InstanceInnerClass [itable.init]
+ (global.set $instanceinnerclass.InstanceInnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [vtable.init]
- (global.set $instanceinnerclass.InstanceInnerClass.InnerClass.vtable (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass) (ref.func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass) (rtt.canon $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)))
+ (global.set $instanceinnerclass.InstanceInnerClass.InnerClass.vtable
+  (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@instanceinnerclass.InstanceInnerClass.InnerClass)
+   (ref.func $m_funInner__void@instanceinnerclass.InstanceInnerClass.InnerClass)
+   (rtt.canon $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)
+  )
+ )
+
+ ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [itable.init]
+ (global.set $instanceinnerclass.InstanceInnerClass.InnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

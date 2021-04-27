@@ -6,7 +6,7 @@
 
 ;;; Code for objectmap.ObjectMap [CLASS]
 (type $objectmap.ObjectMap (struct
- (field $vtable (ref null $objectmap.ObjectMap.vtable))
+ (field $vtable (ref null $objectmap.ObjectMap.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $objectmap.ObjectMap.vtable (struct
@@ -102,4 +102,15 @@
 (elem declare func $m_getClass__java_lang_Class@objectmap.ObjectMap)
 
  ;;; Code for objectmap.ObjectMap [vtable.init]
- (global.set $objectmap.ObjectMap.vtable (struct.new_with_rtt $objectmap.ObjectMap.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@objectmap.ObjectMap) (rtt.canon $objectmap.ObjectMap.vtable)))
+ (global.set $objectmap.ObjectMap.vtable
+  (struct.new_with_rtt $objectmap.ObjectMap.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@objectmap.ObjectMap)
+   (rtt.canon $objectmap.ObjectMap.vtable)
+  )
+ )
+
+ ;;; Code for objectmap.ObjectMap [itable.init]
+ (global.set $objectmap.ObjectMap.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

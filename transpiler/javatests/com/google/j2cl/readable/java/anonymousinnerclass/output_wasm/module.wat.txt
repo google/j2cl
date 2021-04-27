@@ -48,7 +48,7 @@
 
 ;;; Code for anonymousinnerclass.A [CLASS]
 (type $anonymousinnerclass.A (struct
- (field $vtable (ref null $anonymousinnerclass.A.vtable))
+ (field $vtable (ref null $anonymousinnerclass.A.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousinnerclass.A.vtable (struct
@@ -111,7 +111,7 @@
 
 ;;; Code for anonymousinnerclass.A.B [CLASS]
 (type $anonymousinnerclass.A.B (struct
- (field $vtable (ref null $anonymousinnerclass.A.B.vtable))
+ (field $vtable (ref null $anonymousinnerclass.A.B.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_A_B (mut (ref null $anonymousinnerclass.A)))
 ))
@@ -178,7 +178,7 @@
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass (struct
- (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.vtable))
+ (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousinnerclass.AnonymousInnerClass.vtable (struct
@@ -217,16 +217,16 @@
   (block
    ;; InnerClass ic = new $1.<init>(AnonymousInnerClass.this);
    
-   (local.set $ic (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt))(local.get $this)))
+   (local.set $ic (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable) (global.get $anonymousinnerclass.AnonymousInnerClass.1.itable) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt))(local.get $this)))
    ;; A a = new A.<init>();
    
-   (local.set $a (call $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.A (struct.new_with_rtt $anonymousinnerclass.A (global.get $anonymousinnerclass.A.vtable) (i32.const 0) (global.get $anonymousinnerclass.A.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_anonymousinnerclass@anonymousinnerclass.A (struct.new_with_rtt $anonymousinnerclass.A (global.get $anonymousinnerclass.A.vtable) (global.get $anonymousinnerclass.A.itable) (i32.const 0) (global.get $anonymousinnerclass.A.rtt))))
    ;; B b = new $2.<init>(AnonymousInnerClass.this,a);
    
-   (local.set $b (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt))(local.get $this)(local.get $a)))
+   (local.set $b (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable) (global.get $anonymousinnerclass.AnonymousInnerClass.2.itable) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt))(local.get $this)(local.get $a)))
    ;; C c = new $3.<init>(AnonymousInnerClass.this,arg);
    
-   (local.set $c (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt))(local.get $this)(local.get $arg)))
+   (local.set $c (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int__void_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable) (global.get $anonymousinnerclass.AnonymousInnerClass.3.itable) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt))(local.get $this)(local.get $arg)))
   )
  )
 )
@@ -271,7 +271,7 @@
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.InnerClass [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.InnerClass (struct
- (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable))
+ (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
 ))
@@ -338,7 +338,7 @@
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1 [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.1 (struct
- (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.1.vtable))
+ (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
@@ -406,7 +406,7 @@
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.2 [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.2 (struct
- (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.2.vtable))
+ (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_A_B (mut (ref null $anonymousinnerclass.A)))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_2 (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
@@ -475,7 +475,7 @@
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.1C [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.1C (struct
- (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.1C.vtable))
+ (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
  (field $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
@@ -560,7 +560,7 @@
 
 ;;; Code for anonymousinnerclass.AnonymousInnerClass.3 [CLASS]
 (type $anonymousinnerclass.AnonymousInnerClass.3 (struct
- (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.3.vtable))
+ (field $vtable (ref null $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C (mut (ref null $anonymousinnerclass.AnonymousInnerClass)))
  (field $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C (mut i32))
@@ -633,25 +633,114 @@
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3)
 
  ;;; Code for anonymousinnerclass.A [vtable.init]
- (global.set $anonymousinnerclass.A.vtable (struct.new_with_rtt $anonymousinnerclass.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.A) (rtt.canon $anonymousinnerclass.A.vtable)))
+ (global.set $anonymousinnerclass.A.vtable
+  (struct.new_with_rtt $anonymousinnerclass.A.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.A)
+   (rtt.canon $anonymousinnerclass.A.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.A [itable.init]
+ (global.set $anonymousinnerclass.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for anonymousinnerclass.A.B [vtable.init]
- (global.set $anonymousinnerclass.A.B.vtable (struct.new_with_rtt $anonymousinnerclass.A.B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.A.B) (rtt.canon $anonymousinnerclass.A.B.vtable)))
+ (global.set $anonymousinnerclass.A.B.vtable
+  (struct.new_with_rtt $anonymousinnerclass.A.B.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.A.B)
+   (rtt.canon $anonymousinnerclass.A.B.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.A.B [itable.init]
+ (global.set $anonymousinnerclass.A.B.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for anonymousinnerclass.AnonymousInnerClass [vtable.init]
- (global.set $anonymousinnerclass.AnonymousInnerClass.vtable (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass) (ref.func $m_test__int__void@anonymousinnerclass.AnonymousInnerClass) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.vtable)))
+ (global.set $anonymousinnerclass.AnonymousInnerClass.vtable
+  (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass)
+   (ref.func $m_test__int__void@anonymousinnerclass.AnonymousInnerClass)
+   (rtt.canon $anonymousinnerclass.AnonymousInnerClass.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.AnonymousInnerClass [itable.init]
+ (global.set $anonymousinnerclass.AnonymousInnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for anonymousinnerclass.AnonymousInnerClass.InnerClass [vtable.init]
- (global.set $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)))
+ (global.set $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable
+  (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass)
+   (rtt.canon $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.AnonymousInnerClass.InnerClass [itable.init]
+ (global.set $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for anonymousinnerclass.AnonymousInnerClass.1 [vtable.init]
- (global.set $anonymousinnerclass.AnonymousInnerClass.1.vtable (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1.vtable)))
+ (global.set $anonymousinnerclass.AnonymousInnerClass.1.vtable
+  (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1)
+   (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.AnonymousInnerClass.1 [itable.init]
+ (global.set $anonymousinnerclass.AnonymousInnerClass.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for anonymousinnerclass.AnonymousInnerClass.2 [vtable.init]
- (global.set $anonymousinnerclass.AnonymousInnerClass.2.vtable (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.2.vtable)))
+ (global.set $anonymousinnerclass.AnonymousInnerClass.2.vtable
+  (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2)
+   (rtt.canon $anonymousinnerclass.AnonymousInnerClass.2.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.AnonymousInnerClass.2 [itable.init]
+ (global.set $anonymousinnerclass.AnonymousInnerClass.2.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for anonymousinnerclass.AnonymousInnerClass.1C [vtable.init]
- (global.set $anonymousinnerclass.AnonymousInnerClass.1C.vtable (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1C.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1C.vtable)))
+ (global.set $anonymousinnerclass.AnonymousInnerClass.1C.vtable
+  (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1C.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C)
+   (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1C.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.AnonymousInnerClass.1C [itable.init]
+ (global.set $anonymousinnerclass.AnonymousInnerClass.1C.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for anonymousinnerclass.AnonymousInnerClass.3 [vtable.init]
- (global.set $anonymousinnerclass.AnonymousInnerClass.3.vtable (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.3.vtable)))
+ (global.set $anonymousinnerclass.AnonymousInnerClass.3.vtable
+  (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3)
+   (rtt.canon $anonymousinnerclass.AnonymousInnerClass.3.vtable)
+  )
+ )
+
+ ;;; Code for anonymousinnerclass.AnonymousInnerClass.3 [itable.init]
+ (global.set $anonymousinnerclass.AnonymousInnerClass.3.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -17,11 +17,14 @@ package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.SetMultimap;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -38,7 +41,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -114,28 +117,48 @@ class GenerationEnvironment {
     throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
   }
 
-  /** Returns the name of the global containing the rtt for {@code typeDeclaration}. */
+  /** Returns the name of the global containing the rtt for a Java type. */
   String getRttGlobalName(TypeDeclaration typeDeclaration) {
     return getRttGlobalName(typeDeclaration.toUnparameterizedTypeDescriptor());
   }
 
-  /** Returns the name of the global containing the rtt for {@code typeDescriptor}. */
+  /** Returns the name of the global containing the rtt for a Java type. */
   String getRttGlobalName(TypeDescriptor typeDescriptor) {
     typeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor();
     checkArgument(typeDescriptor.isClass() || typeDescriptor.isEnum() || typeDescriptor.isArray());
     return getWasmTypeName(typeDescriptor) + ".rtt";
   }
 
-  /** Returns the name of the wasm type of the vtable for a Java type. */
-  public String getWasmVtableTypeName(DeclaredTypeDescriptor typeDescriptor) {
-    return getWasmTypeName(typeDescriptor) + ".vtable";
+  /** Returns the name of the global that stores the itable for a Java type. */
+  public String getWasmItableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
+    return "$" + getTypeSignature(typeDescriptor) + ".itable";
   }
 
-  /** Returns the name of the global that stores the vtable for {@code typeDescriptor}. */
+  /** Returns the name of the global that stores the itable for a Java type. */
+  public String getWasmItableGlobalName(TypeDeclaration typeDeclaration) {
+    return getWasmItableGlobalName(typeDeclaration.toUnparameterizedTypeDescriptor());
+  }
+
+  /** Returns the name of the wasm type of the vtable for a Java type. */
+  public String getWasmVtableTypeName(DeclaredTypeDescriptor typeDescriptor) {
+    return "$" + getTypeSignature(typeDescriptor) + ".vtable";
+  }
+
+  /** Returns the name of the wasm type of the vtable for a Java type. */
+  public String getWasmVtableTypeName(TypeDeclaration typeDeclaration) {
+    return getWasmVtableTypeName(typeDeclaration.toUnparameterizedTypeDescriptor());
+  }
+
+  /** Returns the name of the global that stores the vtable for a Java type. */
   public String getWasmVtableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
+    return getWasmVtableGlobalName(typeDescriptor.getTypeDeclaration());
+  }
+
+  /** Returns the name of the global that stores the vtable for a Java type. */
+  public String getWasmVtableGlobalName(TypeDeclaration typeDeclaration) {
     // We use the same name for the global that holds the vtable as well as for its type since
     // the type namespace and global namespace are different naming scopes.
-    return getWasmVtableTypeName(typeDescriptor);
+    return getWasmVtableTypeName(typeDeclaration);
   }
 
   /** Returns the name of the field in the vtable that corresponds to {@code methodDescriptor}. */
@@ -187,6 +210,14 @@ class GenerationEnvironment {
         getWasmTypeName(methodDescriptor.getDispatchReturnTypeDescriptor()));
   }
 
+  private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration =
+      new LinkedHashMap<>();
+
+  int getInterfaceSlot(TypeDeclaration typeDeclaration) {
+    // Interfaces with no implementors will not have a slot assigned. Use -1 to signal that fact.
+    return slotByInterfaceTypeDeclaration.getOrDefault(typeDeclaration, -1);
+  }
+
   GenerationEnvironment(Library library) {
     List<CompilationUnit> compilationUnits = library.getCompilationUnits();
 
@@ -206,7 +237,7 @@ class GenerationEnvironment {
         .filter(Predicates.not(Type::isInterface))
         // Traverse superclasses before subclasses to ensure that the layout for the superclass
         // is already available to build the layout for the subclass.
-        .sorted(Comparator.comparingInt(t -> t.getDeclaration().getClassHierarchyDepth()))
+        .sorted(comparingInt(t -> t.getDeclaration().getClassHierarchyDepth()))
         .forEach(
             t -> {
               WasmTypeLayout superTypeLayout = null;
@@ -218,5 +249,84 @@ class GenerationEnvironment {
               wasmTypeLayoutByTypeDeclaration.put(
                   t.getDeclaration(), WasmTypeLayout.create(t, superTypeLayout));
             });
+
+    assignInterfaceSlots(compilationUnits);
+  }
+
+  /**
+   * Assigns a slot number (i.e. an index in the itable array) for each interface in the itable.
+   *
+   * <p>Each interfaces implemented in the same class will have a different slots, but across
+   * different parts of the hierarchy slots can be reused. This algorithm heuristically minimizes
+   * the size of the itable by trying to assign slots in order of most implemented interfaces. Each
+   * slot in the itable will have the interface vtable for the class and can be used for both
+   * dynamic interface dispatch and interface "instanceof" checks.
+   *
+   * <p>This is a baseline implementation of "packed encoding" based on the algorithm described in
+   * section 4.3 of "Efficient type inclusion tests" by Vitek et al (OOPSLA 97). Although the ideas
+   * presented in the paper are for performing "instanceof" checks, they generalize to interface
+   * dispatch.
+   */
+  private void assignInterfaceSlots(List<CompilationUnit> compilationUnits) {
+    SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface =
+        LinkedHashMultimap.create();
+    SetMultimap<Integer, TypeDeclaration> concreteTypesBySlot = LinkedHashMultimap.create();
+
+    // Traverse all concrete classes collecting the interfaces they implement. Actual vtable
+    // instances are only required for concrete classes, because they provide the references to the
+    // methods that will be invoked on a specific instance.
+    // Since all dynamic dispatch is performed by obtaining the vtables from an instance,  if there
+    // are no instances for a type there is no need for instances of vtables it.
+    compilationUnits.stream()
+        .flatMap(c -> c.getTypes().stream())
+        .filter(Predicates.not(Type::isInterface))
+        .filter(Predicates.not(Type::isAbstract))
+        .forEach(
+            t ->
+                t.getDeclaration().getAllSuperTypesIncludingSelf().stream()
+                    .filter(TypeDeclaration::isInterface)
+                    .forEach(i -> concreteTypesByInterface.put(i, t.getDeclaration())));
+
+    // Traverse and assign interfaces by most implemented to least implemented so that widely
+    // implemented interfaces get lower slot numbers.
+    concreteTypesByInterface.keySet().stream()
+        .sorted(
+            comparingInt((TypeDeclaration td) -> concreteTypesByInterface.get(td).size())
+                .reversed())
+        .forEach(
+            i -> assignFirstNonConflictingSlot(i, concreteTypesByInterface, concreteTypesBySlot));
+  }
+
+  /** Assigns the lowest non conflicting slot to {@code interfaceToAssign}. */
+  private void assignFirstNonConflictingSlot(
+      TypeDeclaration interfaceToAssign,
+      SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface,
+      SetMultimap<Integer, TypeDeclaration> concreteTypesBySlot) {
+    int slot =
+        getFirstNonConflictingSlot(
+            interfaceToAssign, concreteTypesBySlot, concreteTypesByInterface);
+    slotByInterfaceTypeDeclaration.put(interfaceToAssign, slot);
+    // Add all the concrete implementors for that interface to the assigned slot, to mark
+    // that slot as already used in all those types.
+    concreteTypesBySlot.putAll(slot, concreteTypesByInterface.get(interfaceToAssign));
+  }
+
+  /** Finds the lowest non-conflicting slot for {@code interface}. */
+  private int getFirstNonConflictingSlot(
+      TypeDeclaration interfaceToAssign,
+      SetMultimap<Integer, TypeDeclaration> concreteTypesBySlot,
+      SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface) {
+    // Assign slots by finding the first non conflicting open slot. Interfaces that are
+    // implemented by the same concrete class must have unique slots but interfaces whose
+    // implementers are disjoint can share the same slot.
+    int numberOfSlots = concreteTypesBySlot.keySet().size();
+    for (int slot = 0; slot < numberOfSlots; slot++) {
+      if (Collections.disjoint(
+          concreteTypesBySlot.get(slot), concreteTypesByInterface.get(interfaceToAssign))) {
+        return slot;
+      }
+    }
+    // Couldn't find an existing slot that is not conflicting, return a new slot.
+    return numberOfSlots;
   }
 }

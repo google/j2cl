@@ -14,6 +14,9 @@
 (global $f_$initialized__overridingmethods_Child (mut i32) (i32.const 0))
 
 ;;; Code for overridingmethods.SomeInterface [INTERFACE]
+(type $overridingmethods.SomeInterface.vtable (struct
+ (field $m_bar__void (mut (ref $function.__$void)))
+))
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void@overridingmethods.SomeInterface
@@ -50,7 +53,7 @@
 
 ;;; Code for overridingmethods.Parent [CLASS]
 (type $overridingmethods.Parent (struct
- (field $vtable (ref null $overridingmethods.Parent.vtable))
+ (field $vtable (ref null $overridingmethods.Parent.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overridingmethods.Parent.vtable (struct
@@ -126,7 +129,7 @@
 
 ;;; Code for overridingmethods.Child [CLASS]
 (type $overridingmethods.Child (struct
- (field $vtable (ref null $overridingmethods.Child.vtable))
+ (field $vtable (ref null $overridingmethods.Child.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overridingmethods.Child.vtable (struct
@@ -214,7 +217,37 @@
 (elem declare func $m_getClass__java_lang_Class@overridingmethods.Child)
 
  ;;; Code for overridingmethods.Parent [vtable.init]
- (global.set $overridingmethods.Parent.vtable (struct.new_with_rtt $overridingmethods.Parent.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@overridingmethods.Parent) (ref.func $m_fun__void@overridingmethods.Parent) (rtt.canon $overridingmethods.Parent.vtable)))
+ (global.set $overridingmethods.Parent.vtable
+  (struct.new_with_rtt $overridingmethods.Parent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@overridingmethods.Parent)
+   (ref.func $m_fun__void@overridingmethods.Parent)
+   (rtt.canon $overridingmethods.Parent.vtable)
+  )
+ )
+
+ ;;; Code for overridingmethods.Parent [itable.init]
+ (global.set $overridingmethods.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for overridingmethods.Child [vtable.init]
- (global.set $overridingmethods.Child.vtable (struct.new_with_rtt $overridingmethods.Child.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@overridingmethods.Child) (ref.func $m_fun__void@overridingmethods.Child) (ref.func $m_bar__void@overridingmethods.Child) (rtt.canon $overridingmethods.Child.vtable)))
+ (global.set $overridingmethods.Child.vtable
+  (struct.new_with_rtt $overridingmethods.Child.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@overridingmethods.Child)
+   (ref.func $m_fun__void@overridingmethods.Child)
+   (ref.func $m_bar__void@overridingmethods.Child)
+   (rtt.canon $overridingmethods.Child.vtable)
+  )
+ )
+
+ ;;; Code for overridingmethods.Child [itable.init]
+ (global.set $overridingmethods.Child.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $overridingmethods.Child.itable) (i32.const 0)
+ (struct.new_with_rtt $overridingmethods.SomeInterface.vtable
+  (ref.func $m_bar__void@overridingmethods.Child)
+  (rtt.canon $overridingmethods.SomeInterface.vtable)
+ ))

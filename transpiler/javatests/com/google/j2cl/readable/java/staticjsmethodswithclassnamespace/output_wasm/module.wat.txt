@@ -12,7 +12,7 @@
 
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [CLASS]
 (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (struct
- (field $vtable (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable))
+ (field $vtable (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (struct
@@ -104,7 +104,7 @@
 
 ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [CLASS]
 (type $staticjsmethodswithclassnamespace.ExternalCaller (struct
- (field $vtable (ref null $staticjsmethodswithclassnamespace.ExternalCaller.vtable))
+ (field $vtable (ref null $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticjsmethodswithclassnamespace.ExternalCaller.vtable (struct
@@ -181,7 +181,31 @@
 (elem declare func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller)
 
  ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [vtable.init]
- (global.set $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (struct.new_with_rtt $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) (ref.func $m_test__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace) (rtt.canon $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)))
+ (global.set $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable
+  (struct.new_with_rtt $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
+   (ref.func $m_test__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
+   (rtt.canon $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)
+  )
+ )
+
+ ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [itable.init]
+ (global.set $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [vtable.init]
- (global.set $staticjsmethodswithclassnamespace.ExternalCaller.vtable (struct.new_with_rtt $staticjsmethodswithclassnamespace.ExternalCaller.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller) (ref.func $m_test__void@staticjsmethodswithclassnamespace.ExternalCaller) (rtt.canon $staticjsmethodswithclassnamespace.ExternalCaller.vtable)))
+ (global.set $staticjsmethodswithclassnamespace.ExternalCaller.vtable
+  (struct.new_with_rtt $staticjsmethodswithclassnamespace.ExternalCaller.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller)
+   (ref.func $m_test__void@staticjsmethodswithclassnamespace.ExternalCaller)
+   (rtt.canon $staticjsmethodswithclassnamespace.ExternalCaller.vtable)
+  )
+ )
+
+ ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [itable.init]
+ (global.set $staticjsmethodswithclassnamespace.ExternalCaller.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

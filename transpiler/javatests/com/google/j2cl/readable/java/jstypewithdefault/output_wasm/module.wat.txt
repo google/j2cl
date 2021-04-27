@@ -9,7 +9,7 @@
 
 ;;; Code for jstypewithdefault.SomeJsType [CLASS]
 (type $jstypewithdefault.SomeJsType (struct
- (field $vtable (ref null $jstypewithdefault.SomeJsType.vtable))
+ (field $vtable (ref null $jstypewithdefault.SomeJsType.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jstypewithdefault.SomeJsType.vtable (struct
@@ -88,6 +88,9 @@
 (elem declare func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType)
 
 ;;; Code for jstypewithdefault.Interface [INTERFACE]
+(type $jstypewithdefault.Interface.vtable (struct
+ (field $m_defaultMethod__void (mut (ref $function.__$void)))
+))
 
 ;;; void Interface.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.Interface
@@ -133,4 +136,21 @@
 (elem declare func $m_getClass__java_lang_Class@jstypewithdefault.Interface)
 
  ;;; Code for jstypewithdefault.SomeJsType [vtable.init]
- (global.set $jstypewithdefault.SomeJsType.vtable (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType) (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType) (rtt.canon $jstypewithdefault.SomeJsType.vtable)))
+ (global.set $jstypewithdefault.SomeJsType.vtable
+  (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType)
+   (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
+   (rtt.canon $jstypewithdefault.SomeJsType.vtable)
+  )
+ )
+
+ ;;; Code for jstypewithdefault.SomeJsType [itable.init]
+ (global.set $jstypewithdefault.SomeJsType.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $jstypewithdefault.SomeJsType.itable) (i32.const 0)
+ (struct.new_with_rtt $jstypewithdefault.Interface.vtable
+  (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
+  (rtt.canon $jstypewithdefault.Interface.vtable)
+ ))

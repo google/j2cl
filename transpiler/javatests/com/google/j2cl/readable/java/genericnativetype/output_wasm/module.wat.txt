@@ -12,7 +12,7 @@
 
 ;;; Code for genericnativetype.BoundedJsArray [CLASS]
 (type $genericnativetype.BoundedJsArray (struct
- (field $vtable (ref null $genericnativetype.BoundedJsArray.vtable))
+ (field $vtable (ref null $genericnativetype.BoundedJsArray.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArray.vtable (struct
@@ -71,7 +71,7 @@
    (call $$clinit__void@genericnativetype.BoundedJsArray )
    ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
    
-   (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.vtable) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
+   (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.vtable) (global.get $genericnativetype.BoundedJsArray.itable) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
    ;; return array;
    (local.set $return.value (local.get $array))
    (br $return.label)
@@ -119,7 +119,7 @@
 
 ;;; Code for genericnativetype.BoundedJsArrays [CLASS]
 (type $genericnativetype.BoundedJsArrays (struct
- (field $vtable (ref null $genericnativetype.BoundedJsArrays.vtable))
+ (field $vtable (ref null $genericnativetype.BoundedJsArrays.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArrays.vtable (struct
@@ -214,7 +214,29 @@
 (elem declare func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArrays)
 
  ;;; Code for genericnativetype.BoundedJsArray [vtable.init]
- (global.set $genericnativetype.BoundedJsArray.vtable (struct.new_with_rtt $genericnativetype.BoundedJsArray.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray) (rtt.canon $genericnativetype.BoundedJsArray.vtable)))
+ (global.set $genericnativetype.BoundedJsArray.vtable
+  (struct.new_with_rtt $genericnativetype.BoundedJsArray.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArray)
+   (rtt.canon $genericnativetype.BoundedJsArray.vtable)
+  )
+ )
+
+ ;;; Code for genericnativetype.BoundedJsArray [itable.init]
+ (global.set $genericnativetype.BoundedJsArray.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for genericnativetype.BoundedJsArrays [vtable.init]
- (global.set $genericnativetype.BoundedJsArrays.vtable (struct.new_with_rtt $genericnativetype.BoundedJsArrays.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArrays) (rtt.canon $genericnativetype.BoundedJsArrays.vtable)))
+ (global.set $genericnativetype.BoundedJsArrays.vtable
+  (struct.new_with_rtt $genericnativetype.BoundedJsArrays.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@genericnativetype.BoundedJsArrays)
+   (rtt.canon $genericnativetype.BoundedJsArrays.vtable)
+  )
+ )
+
+ ;;; Code for genericnativetype.BoundedJsArrays [itable.init]
+ (global.set $genericnativetype.BoundedJsArrays.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

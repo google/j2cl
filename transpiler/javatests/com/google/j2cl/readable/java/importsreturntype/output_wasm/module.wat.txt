@@ -18,7 +18,7 @@
 
 ;;; Code for importsreturntype.ImportsReturnType [CLASS]
 (type $importsreturntype.ImportsReturnType (struct
- (field $vtable (ref null $importsreturntype.ImportsReturnType.vtable))
+ (field $vtable (ref null $importsreturntype.ImportsReturnType.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importsreturntype.ImportsReturnType.vtable (struct
@@ -100,7 +100,7 @@
 
 ;;; Code for importsreturntype.ImportsReturnType.Entry [CLASS]
 (type $importsreturntype.ImportsReturnType.Entry (struct
- (field $vtable (ref null $importsreturntype.ImportsReturnType.Entry.vtable))
+ (field $vtable (ref null $importsreturntype.ImportsReturnType.Entry.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importsreturntype.ImportsReturnType.Entry.vtable (struct
@@ -163,7 +163,7 @@
 
 ;;; Code for importsreturntype.ImportsReturnType.Set [CLASS]
 (type $importsreturntype.ImportsReturnType.Set (struct
- (field $vtable (ref null $importsreturntype.ImportsReturnType.Set.vtable))
+ (field $vtable (ref null $importsreturntype.ImportsReturnType.Set.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $importsreturntype.ImportsReturnType.Set.vtable (struct
@@ -225,10 +225,44 @@
 (elem declare func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set)
 
  ;;; Code for importsreturntype.ImportsReturnType [vtable.init]
- (global.set $importsreturntype.ImportsReturnType.vtable (struct.new_with_rtt $importsreturntype.ImportsReturnType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType) (ref.func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType) (rtt.canon $importsreturntype.ImportsReturnType.vtable)))
+ (global.set $importsreturntype.ImportsReturnType.vtable
+  (struct.new_with_rtt $importsreturntype.ImportsReturnType.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType)
+   (ref.func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType)
+   (rtt.canon $importsreturntype.ImportsReturnType.vtable)
+  )
+ )
+
+ ;;; Code for importsreturntype.ImportsReturnType [itable.init]
+ (global.set $importsreturntype.ImportsReturnType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for importsreturntype.ImportsReturnType.Entry [vtable.init]
- (global.set $importsreturntype.ImportsReturnType.Entry.vtable (struct.new_with_rtt $importsreturntype.ImportsReturnType.Entry.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Entry) (rtt.canon $importsreturntype.ImportsReturnType.Entry.vtable)))
+ (global.set $importsreturntype.ImportsReturnType.Entry.vtable
+  (struct.new_with_rtt $importsreturntype.ImportsReturnType.Entry.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Entry)
+   (rtt.canon $importsreturntype.ImportsReturnType.Entry.vtable)
+  )
+ )
+
+ ;;; Code for importsreturntype.ImportsReturnType.Entry [itable.init]
+ (global.set $importsreturntype.ImportsReturnType.Entry.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for importsreturntype.ImportsReturnType.Set [vtable.init]
- (global.set $importsreturntype.ImportsReturnType.Set.vtable (struct.new_with_rtt $importsreturntype.ImportsReturnType.Set.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set) (rtt.canon $importsreturntype.ImportsReturnType.Set.vtable)))
+ (global.set $importsreturntype.ImportsReturnType.Set.vtable
+  (struct.new_with_rtt $importsreturntype.ImportsReturnType.Set.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set)
+   (rtt.canon $importsreturntype.ImportsReturnType.Set.vtable)
+  )
+ )
+
+ ;;; Code for importsreturntype.ImportsReturnType.Set [itable.init]
+ (global.set $importsreturntype.ImportsReturnType.Set.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

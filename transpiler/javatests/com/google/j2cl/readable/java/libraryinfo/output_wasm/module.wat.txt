@@ -56,7 +56,7 @@
 
 ;;; Code for libraryinfo.Main [CLASS]
 (type $libraryinfo.Main (struct
- (field $vtable (ref null $libraryinfo.Main.vtable))
+ (field $vtable (ref null $libraryinfo.Main.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $libraryinfo.Main.vtable (struct
@@ -89,18 +89,18 @@
    ;; libraryinfo.Main.$clinit();
    (call $$clinit__void@libraryinfo.Main )
    ;; new Main.<init>().execute();
-   (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
+   (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (global.get $libraryinfo.Main.itable) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
    ;; Function jsFunction = new FunctionImpl.<init>();
    
-   (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
+   (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (global.get $libraryinfo.Main.FunctionImpl.itable) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = function (String s){
    (local.set $jsFunction (ref.null $java.lang.Object))
    ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
-   
+   (call_ref (local.get $jsFunction)(call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0)) (rtt.canon $libraryinfo.Main.Function.vtable)) ))
    ;; new MyJsType.<init>();
-   (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
+   (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (global.get $libraryinfo.Main.MyJsType.vtable) (global.get $libraryinfo.Main.MyJsType.itable) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
    ;; new $1.<init>();
-   (drop (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.vtable) (i32.const 0) (global.get $libraryinfo.Main.1.rtt))))
+   (drop (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (global.get $libraryinfo.Main.1.vtable) (global.get $libraryinfo.Main.1.itable) (i32.const 0) (global.get $libraryinfo.Main.1.rtt))))
   )
  )
 )
@@ -207,6 +207,10 @@
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main)
 
 ;;; Code for libraryinfo.Main.JsTypeInterface [INTERFACE]
+(type $libraryinfo.Main.JsTypeInterface.vtable (struct
+ (field $m_bar__void (mut (ref $function.__$void)))
+ (field $m_foo__void (mut (ref $function.__$void)))
+))
 
 ;;; void JsTypeInterface.$clinit()
 (func $$clinit__void@libraryinfo.Main.JsTypeInterface
@@ -242,6 +246,9 @@
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.JsTypeInterface)
 
 ;;; Code for libraryinfo.Main.FunctionnalInterface [INTERFACE]
+(type $libraryinfo.Main.FunctionnalInterface.vtable (struct
+ (field $m_foo__void (mut (ref $function.__$void)))
+))
 
 ;;; void FunctionnalInterface.$clinit()
 (func $$clinit__void@libraryinfo.Main.FunctionnalInterface
@@ -277,6 +284,9 @@
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionnalInterface)
 
 ;;; Code for libraryinfo.Main.JsAccessibleFunctionnalInterface [INTERFACE]
+(type $libraryinfo.Main.JsAccessibleFunctionnalInterface.vtable (struct
+ (field $m_accessibleFunctionalInterfaceMethod__void (mut (ref $function.__$void)))
+))
 
 ;;; void JsAccessibleFunctionnalInterface.$clinit()
 (func $$clinit__void@libraryinfo.Main.JsAccessibleFunctionnalInterface
@@ -312,6 +322,9 @@
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.JsAccessibleFunctionnalInterface)
 
 ;;; Code for libraryinfo.Main.Function [INTERFACE]
+(type $libraryinfo.Main.Function.vtable (struct
+ (field $m_apply__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
+))
 
 ;;; void Function.$clinit()
 (func $$clinit__void@libraryinfo.Main.Function
@@ -348,7 +361,7 @@
 
 ;;; Code for libraryinfo.Main.FunctionImpl [CLASS]
 (type $libraryinfo.Main.FunctionImpl (struct
- (field $vtable (ref null $libraryinfo.Main.FunctionImpl.vtable))
+ (field $vtable (ref null $libraryinfo.Main.FunctionImpl.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $libraryinfo.Main.FunctionImpl.vtable (struct
@@ -425,7 +438,7 @@
 
 ;;; Code for libraryinfo.Main.MyEnum [ENUM]
 (type $libraryinfo.Main.MyEnum (struct
- (field $vtable (ref null $libraryinfo.Main.MyEnum.vtable))
+ (field $vtable (ref null $libraryinfo.Main.MyEnum.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -500,7 +513,7 @@
    ;; return (MyEnum[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.A)),($array_literal.elements[1] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.B)),($array_literal.elements[2] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.C)),$array_literal);
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
+    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $libraryinfo.Main.MyEnum))
      (call $$clinit__void@libraryinfo.Main.MyEnum )
      (global.get $f_A__libraryinfo_Main_MyEnum)
@@ -540,19 +553,19 @@
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
     ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|A|(),libraryinfo.Main.MyEnum.A));
-    (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|A|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
+    (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (global.get $libraryinfo.Main.MyEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|A|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
    )
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
     ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|B|(),libraryinfo.Main.MyEnum.B));
-    (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|B|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
+    (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (global.get $libraryinfo.Main.MyEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|B|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
    )
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
     (call $$clinit__void@libraryinfo.Main.MyEnum )
     ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|C|(),libraryinfo.Main.MyEnum.C));
-    (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|C|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
+    (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (global.get $libraryinfo.Main.MyEnum.vtable) (global.get $libraryinfo.Main.MyEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|C|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
    )
    ;; (libraryinfo.Main.MyEnum.namesToValuesMap = null);
    (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (ref.null $java.lang.Object))
@@ -580,7 +593,7 @@
 
 ;;; Code for libraryinfo.Main.MyJsType [CLASS]
 (type $libraryinfo.Main.MyJsType (struct
- (field $vtable (ref null $libraryinfo.Main.MyJsType.vtable))
+ (field $vtable (ref null $libraryinfo.Main.MyJsType.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_someField__libraryinfo_Main_MyJsType (mut (ref null $java.lang.Object)))
 ))
@@ -603,7 +616,7 @@
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MyJsType.this.someField = new Main.<init>());
-   (struct.set $libraryinfo.Main.MyJsType $f_someField__libraryinfo_Main_MyJsType(local.get $this) (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
+   (struct.set $libraryinfo.Main.MyJsType $f_someField__libraryinfo_Main_MyJsType(local.get $this) (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (global.get $libraryinfo.Main.vtable) (global.get $libraryinfo.Main.itable) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
   )
  )
  (local.get $this)
@@ -648,7 +661,7 @@
 
 ;;; Code for libraryinfo.Main.1 [CLASS]
 (type $libraryinfo.Main.1 (struct
- (field $vtable (ref null $libraryinfo.Main.1.vtable))
+ (field $vtable (ref null $libraryinfo.Main.1.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $libraryinfo.Main.1.vtable (struct
@@ -724,7 +737,7 @@
 
 ;;; Code for libraryinfo.Main.Foo [CLASS]
 (type $libraryinfo.Main.Foo (struct
- (field $vtable (ref null $libraryinfo.Main.Foo.vtable))
+ (field $vtable (ref null $libraryinfo.Main.Foo.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__libraryinfo_Main_Foo (mut (ref null $libraryinfo.Main)))
 ))
@@ -803,19 +816,107 @@
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)
 
  ;;; Code for libraryinfo.Main [vtable.init]
- (global.set $libraryinfo.Main.vtable (struct.new_with_rtt $libraryinfo.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@libraryinfo.Main) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main) (rtt.canon $libraryinfo.Main.vtable)))
+ (global.set $libraryinfo.Main.vtable
+  (struct.new_with_rtt $libraryinfo.Main.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@libraryinfo.Main)
+   (ref.func $m_getClass__java_lang_Class@libraryinfo.Main)
+   (rtt.canon $libraryinfo.Main.vtable)
+  )
+ )
+
+ ;;; Code for libraryinfo.Main [itable.init]
+ (global.set $libraryinfo.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for libraryinfo.Main.FunctionImpl [vtable.init]
- (global.set $libraryinfo.Main.FunctionImpl.vtable (struct.new_with_rtt $libraryinfo.Main.FunctionImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionImpl) (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl) (rtt.canon $libraryinfo.Main.FunctionImpl.vtable)))
+ (global.set $libraryinfo.Main.FunctionImpl.vtable
+  (struct.new_with_rtt $libraryinfo.Main.FunctionImpl.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionImpl)
+   (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl)
+   (rtt.canon $libraryinfo.Main.FunctionImpl.vtable)
+  )
+ )
+
+ ;;; Code for libraryinfo.Main.FunctionImpl [itable.init]
+ (global.set $libraryinfo.Main.FunctionImpl.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $libraryinfo.Main.FunctionImpl.itable) (i32.const 0)
+ (struct.new_with_rtt $libraryinfo.Main.Function.vtable
+  (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.FunctionImpl)
+  (rtt.canon $libraryinfo.Main.Function.vtable)
+ ))
 
  ;;; Code for libraryinfo.Main.MyEnum [vtable.init]
- (global.set $libraryinfo.Main.MyEnum.vtable (struct.new_with_rtt $libraryinfo.Main.MyEnum.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Enum) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.MyEnum) (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum) (ref.func $m_name__java_lang_String@java.lang.Enum) (ref.func $m_ordinal__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum) (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum) (rtt.canon $libraryinfo.Main.MyEnum.vtable)))
+ (global.set $libraryinfo.Main.MyEnum.vtable
+  (struct.new_with_rtt $libraryinfo.Main.MyEnum.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Enum)
+   (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.MyEnum)
+   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+   (ref.func $m_name__java_lang_String@java.lang.Enum)
+   (ref.func $m_ordinal__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+   (rtt.canon $libraryinfo.Main.MyEnum.vtable)
+  )
+ )
+
+ ;;; Code for libraryinfo.Main.MyEnum [itable.init]
+ (global.set $libraryinfo.Main.MyEnum.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $libraryinfo.Main.MyEnum.itable) (i32.const 1)
+ (struct.new_with_rtt $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (rtt.canon $java.lang.Comparable.vtable)
+ ))
+ (array.set $itable (global.get $libraryinfo.Main.MyEnum.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))
 
  ;;; Code for libraryinfo.Main.MyJsType [vtable.init]
- (global.set $libraryinfo.Main.MyJsType.vtable (struct.new_with_rtt $libraryinfo.Main.MyJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType) (rtt.canon $libraryinfo.Main.MyJsType.vtable)))
+ (global.set $libraryinfo.Main.MyJsType.vtable
+  (struct.new_with_rtt $libraryinfo.Main.MyJsType.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType)
+   (rtt.canon $libraryinfo.Main.MyJsType.vtable)
+  )
+ )
+
+ ;;; Code for libraryinfo.Main.MyJsType [itable.init]
+ (global.set $libraryinfo.Main.MyJsType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for libraryinfo.Main.1 [vtable.init]
- (global.set $libraryinfo.Main.1.vtable (struct.new_with_rtt $libraryinfo.Main.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.1) (ref.func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1) (rtt.canon $libraryinfo.Main.1.vtable)))
+ (global.set $libraryinfo.Main.1.vtable
+  (struct.new_with_rtt $libraryinfo.Main.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.1)
+   (ref.func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1)
+   (rtt.canon $libraryinfo.Main.1.vtable)
+  )
+ )
+
+ ;;; Code for libraryinfo.Main.1 [itable.init]
+ (global.set $libraryinfo.Main.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for libraryinfo.Main.Foo [vtable.init]
- (global.set $libraryinfo.Main.Foo.vtable (struct.new_with_rtt $libraryinfo.Main.Foo.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.Foo) (ref.func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo) (rtt.canon $libraryinfo.Main.Foo.vtable)))
+ (global.set $libraryinfo.Main.Foo.vtable
+  (struct.new_with_rtt $libraryinfo.Main.Foo.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)
+   (ref.func $m_instanceMethod__void_$pp_libraryinfo@libraryinfo.Main.Foo)
+   (rtt.canon $libraryinfo.Main.Foo.vtable)
+  )
+ )
+
+ ;;; Code for libraryinfo.Main.Foo [itable.init]
+ (global.set $libraryinfo.Main.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

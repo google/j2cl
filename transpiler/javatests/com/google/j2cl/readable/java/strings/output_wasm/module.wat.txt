@@ -12,7 +12,7 @@
 
 ;;; Code for strings.Strings [CLASS]
 (type $strings.Strings (struct
- (field $vtable (ref null $strings.Strings.vtable))
+ (field $vtable (ref null $strings.Strings.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_someString__strings_Strings_ (mut (ref null $java.lang.String)))
  (field $f_nonBmpChar__strings_Strings_ (mut (ref null $java.lang.String)))
@@ -102,21 +102,21 @@
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
-    (local.set $$qualifier (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
+    (local.set $$qualifier (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (global.get $strings.Strings.StringHolder.itable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + s4));
     (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier) (ref.null $java.lang.String))
    )
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
-    (local.set $$qualifier_1 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
+    (local.set $$qualifier_1 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (global.get $strings.Strings.StringHolder.itable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + c1));
     (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_1) (ref.null $java.lang.String))
    )
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     
-    (local.set $$qualifier_2 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
+    (local.set $$qualifier_2 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (global.get $strings.Strings.StringHolder.vtable) (global.get $strings.Strings.StringHolder.itable) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = ($qualifier.s + javaemul.internal.StringPool.$getString_|o|()));
     (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_2) (ref.null $java.lang.String))
    )
@@ -179,7 +179,7 @@
 
 ;;; Code for strings.Strings.StringHolder [CLASS]
 (type $strings.Strings.StringHolder (struct
- (field $vtable (ref null $strings.Strings.StringHolder.vtable))
+ (field $vtable (ref null $strings.Strings.StringHolder.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String)))
 ))
@@ -255,7 +255,30 @@
 (elem declare func $m_getClass__java_lang_Class@strings.Strings.StringHolder)
 
  ;;; Code for strings.Strings [vtable.init]
- (global.set $strings.Strings.vtable (struct.new_with_rtt $strings.Strings.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@strings.Strings) (ref.func $m_test__void@strings.Strings) (rtt.canon $strings.Strings.vtable)))
+ (global.set $strings.Strings.vtable
+  (struct.new_with_rtt $strings.Strings.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@strings.Strings)
+   (ref.func $m_test__void@strings.Strings)
+   (rtt.canon $strings.Strings.vtable)
+  )
+ )
+
+ ;;; Code for strings.Strings [itable.init]
+ (global.set $strings.Strings.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for strings.Strings.StringHolder [vtable.init]
- (global.set $strings.Strings.StringHolder.vtable (struct.new_with_rtt $strings.Strings.StringHolder.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@strings.Strings.StringHolder) (rtt.canon $strings.Strings.StringHolder.vtable)))
+ (global.set $strings.Strings.StringHolder.vtable
+  (struct.new_with_rtt $strings.Strings.StringHolder.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@strings.Strings.StringHolder)
+   (rtt.canon $strings.Strings.StringHolder.vtable)
+  )
+ )
+
+ ;;; Code for strings.Strings.StringHolder [itable.init]
+ (global.set $strings.Strings.StringHolder.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

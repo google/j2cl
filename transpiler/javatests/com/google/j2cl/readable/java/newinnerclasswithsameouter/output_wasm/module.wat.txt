@@ -24,7 +24,7 @@
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter [CLASS]
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter (struct
- (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable))
+ (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable (struct
@@ -87,7 +87,7 @@
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.A [CLASS]
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (struct
- (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable))
+ (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
 ))
@@ -124,9 +124,9 @@
  (block $return.label
   (block
    ;; new B.<init>(A.this.this);
-   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
+   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.itable) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
    ;; new C.<init>(A.this.this);
-   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
+   (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.itable) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
   )
  )
 )
@@ -171,7 +171,7 @@
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.B [CLASS]
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct
- (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable))
+ (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
 ))
@@ -238,7 +238,7 @@
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.C [CLASS]
 (type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct
- (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable))
+ (field $vtable (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
 ))
@@ -304,13 +304,58 @@
 (elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)
 
  ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter [vtable.init]
- (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter) (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)))
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable
+  (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
+   (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)
+  )
+ )
+
+ ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter [itable.init]
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.A [vtable.init]
- (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A) (ref.func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A) (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable)))
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable
+  (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
+   (ref.func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
+   (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable)
+  )
+ )
+
+ ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.A [itable.init]
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.B [vtable.init]
- (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B) (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)))
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable
+  (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
+   (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)
+  )
+ )
+
+ ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.B [itable.init]
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.C [vtable.init]
- (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C) (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)))
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable
+  (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C)
+   (rtt.canon $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)
+  )
+ )
+
+ ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.C [itable.init]
+ (global.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

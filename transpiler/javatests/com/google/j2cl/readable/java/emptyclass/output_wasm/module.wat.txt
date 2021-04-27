@@ -6,7 +6,7 @@
 
 ;;; Code for emptyclass.EmptyClass [CLASS]
 (type $emptyclass.EmptyClass (struct
- (field $vtable (ref null $emptyclass.EmptyClass.vtable))
+ (field $vtable (ref null $emptyclass.EmptyClass.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $emptyclass.EmptyClass.vtable (struct
@@ -68,4 +68,15 @@
 (elem declare func $m_getClass__java_lang_Class@emptyclass.EmptyClass)
 
  ;;; Code for emptyclass.EmptyClass [vtable.init]
- (global.set $emptyclass.EmptyClass.vtable (struct.new_with_rtt $emptyclass.EmptyClass.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@emptyclass.EmptyClass) (rtt.canon $emptyclass.EmptyClass.vtable)))
+ (global.set $emptyclass.EmptyClass.vtable
+  (struct.new_with_rtt $emptyclass.EmptyClass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@emptyclass.EmptyClass)
+   (rtt.canon $emptyclass.EmptyClass.vtable)
+  )
+ )
+
+ ;;; Code for emptyclass.EmptyClass [itable.init]
+ (global.set $emptyclass.EmptyClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -21,7 +21,7 @@
 
 ;;; Code for abstractinnerclass.InnerClasses [CLASS]
 (type $abstractinnerclass.InnerClasses (struct
- (field $vtable (ref null $abstractinnerclass.InnerClasses.vtable))
+ (field $vtable (ref null $abstractinnerclass.InnerClasses.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $abstractinnerclass.InnerClasses.vtable (struct
@@ -83,6 +83,9 @@
 (elem declare func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses)
 
 ;;; Code for abstractinnerclass.InnerClasses.A [INTERFACE]
+(type $abstractinnerclass.InnerClasses.A.vtable (struct
+ (field $m_foo__void (mut (ref $function.__$void)))
+))
 
 ;;; void A.$clinit()
 (func $$clinit__void@abstractinnerclass.InnerClasses.A
@@ -119,7 +122,7 @@
 
 ;;; Code for abstractinnerclass.InnerClasses.B [CLASS]
 (type $abstractinnerclass.InnerClasses.B (struct
- (field $vtable (ref null $abstractinnerclass.InnerClasses.B.vtable))
+ (field $vtable (ref null $abstractinnerclass.InnerClasses.B.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $abstractinnerclass.InnerClasses.B.vtable (struct
@@ -152,7 +155,7 @@
  (block $return.label
   (block
    ;; B.this.foo();
-   
+   (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1)) (rtt.canon $abstractinnerclass.InnerClasses.A.vtable)) ))
   )
  )
 )
@@ -179,7 +182,7 @@
 
 ;;; Code for abstractinnerclass.InnerClasses.C [CLASS]
 (type $abstractinnerclass.InnerClasses.C (struct
- (field $vtable (ref null $abstractinnerclass.InnerClasses.C.vtable))
+ (field $vtable (ref null $abstractinnerclass.InnerClasses.C.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__abstractinnerclass_InnerClasses_C (mut (ref null $abstractinnerclass.InnerClasses)))
 ))
@@ -216,7 +219,7 @@
  (block $return.label
   (block
    ;; C.this.foo();
-   
+   (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1)) (rtt.canon $abstractinnerclass.InnerClasses.A.vtable)) ))
   )
  )
 )
@@ -242,4 +245,15 @@
 )
 
  ;;; Code for abstractinnerclass.InnerClasses [vtable.init]
- (global.set $abstractinnerclass.InnerClasses.vtable (struct.new_with_rtt $abstractinnerclass.InnerClasses.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses) (rtt.canon $abstractinnerclass.InnerClasses.vtable)))
+ (global.set $abstractinnerclass.InnerClasses.vtable
+  (struct.new_with_rtt $abstractinnerclass.InnerClasses.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses)
+   (rtt.canon $abstractinnerclass.InnerClasses.vtable)
+  )
+ )
+
+ ;;; Code for abstractinnerclass.InnerClasses [itable.init]
+ (global.set $abstractinnerclass.InnerClasses.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

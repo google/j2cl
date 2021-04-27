@@ -12,7 +12,7 @@
 
 ;;; Code for exception.MyException [CLASS]
 (type $exception.MyException (struct
- (field $vtable (ref null $exception.MyException.vtable))
+ (field $vtable (ref null $exception.MyException.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -109,7 +109,7 @@
 
 ;;; Code for exception.MyJsException [CLASS]
 (type $exception.MyJsException (struct
- (field $vtable (ref null $exception.MyJsException.vtable))
+ (field $vtable (ref null $exception.MyJsException.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -207,7 +207,63 @@
 (elem declare func $m_getClass__java_lang_Class@exception.MyJsException)
 
  ;;; Code for exception.MyException [vtable.init]
- (global.set $exception.MyException.vtable (struct.new_with_rtt $exception.MyException.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Throwable) (ref.func $m_getClass__java_lang_Class@exception.MyException) (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable) (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable) (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable) (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable) (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable) (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable) (ref.func $m_getMessage__java_lang_String@java.lang.Throwable) (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable) (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable) (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable) (ref.func $m_printStackTrace__void@java.lang.Throwable) (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable) (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable) (rtt.canon $exception.MyException.vtable)))
+ (global.set $exception.MyException.vtable
+  (struct.new_with_rtt $exception.MyException.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+   (ref.func $m_getClass__java_lang_Class@exception.MyException)
+   (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
+   (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
+   (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
+   (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+   (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+   (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+   (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_printStackTrace__void@java.lang.Throwable)
+   (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+   (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+   (rtt.canon $exception.MyException.vtable)
+  )
+ )
+
+ ;;; Code for exception.MyException [itable.init]
+ (global.set $exception.MyException.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $exception.MyException.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))
 
  ;;; Code for exception.MyJsException [vtable.init]
- (global.set $exception.MyJsException.vtable (struct.new_with_rtt $exception.MyJsException.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Throwable) (ref.func $m_getClass__java_lang_Class@exception.MyJsException) (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable) (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable) (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable) (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable) (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable) (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable) (ref.func $m_getMessage__java_lang_String@java.lang.Throwable) (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable) (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable) (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable) (ref.func $m_printStackTrace__void@java.lang.Throwable) (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable) (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable) (rtt.canon $exception.MyJsException.vtable)))
+ (global.set $exception.MyJsException.vtable
+  (struct.new_with_rtt $exception.MyJsException.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+   (ref.func $m_getClass__java_lang_Class@exception.MyJsException)
+   (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
+   (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
+   (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
+   (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+   (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+   (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+   (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+   (ref.func $m_printStackTrace__void@java.lang.Throwable)
+   (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+   (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+   (rtt.canon $exception.MyJsException.vtable)
+  )
+ )
+
+ ;;; Code for exception.MyJsException [itable.init]
+ (global.set $exception.MyJsException.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $exception.MyJsException.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))

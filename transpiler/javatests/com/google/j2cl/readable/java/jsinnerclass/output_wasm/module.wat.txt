@@ -18,7 +18,7 @@
 
 ;;; Code for jsinnerclass.Main [CLASS]
 (type $jsinnerclass.Main (struct
- (field $vtable (ref null $jsinnerclass.Main.vtable))
+ (field $vtable (ref null $jsinnerclass.Main.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsinnerclass.Main.vtable (struct
@@ -95,7 +95,7 @@
 
 ;;; Code for jsinnerclass.Main.Outer [CLASS]
 (type $jsinnerclass.Main.Outer (struct
- (field $vtable (ref null $jsinnerclass.Main.Outer.vtable))
+ (field $vtable (ref null $jsinnerclass.Main.Outer.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_a__jsinnerclass_Main_Outer (mut i32))
 ))
@@ -136,7 +136,7 @@
    ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
    (local.set $return.value (i32.add (block (result i32)
     
-    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (global.get $jsinnerclass.Main.Outer.Inner.vtable) (global.get $jsinnerclass.Main.Outer.Inner.itable) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
     (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
    ) (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this))))
    (br $return.label)
@@ -196,7 +196,7 @@
 
 ;;; Code for jsinnerclass.Main.Outer.Inner [CLASS]
 (type $jsinnerclass.Main.Outer.Inner (struct
- (field $vtable (ref null $jsinnerclass.Main.Outer.Inner.vtable))
+ (field $vtable (ref null $jsinnerclass.Main.Outer.Inner.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsinnerclass_Main_Outer_Inner (mut (ref null $jsinnerclass.Main.Outer)))
  (field $f_b__jsinnerclass_Main_Outer_Inner_ (mut i32))
@@ -286,10 +286,45 @@
 (elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner)
 
  ;;; Code for jsinnerclass.Main [vtable.init]
- (global.set $jsinnerclass.Main.vtable (struct.new_with_rtt $jsinnerclass.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main) (rtt.canon $jsinnerclass.Main.vtable)))
+ (global.set $jsinnerclass.Main.vtable
+  (struct.new_with_rtt $jsinnerclass.Main.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main)
+   (rtt.canon $jsinnerclass.Main.vtable)
+  )
+ )
+
+ ;;; Code for jsinnerclass.Main [itable.init]
+ (global.set $jsinnerclass.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for jsinnerclass.Main.Outer [vtable.init]
- (global.set $jsinnerclass.Main.Outer.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer) (ref.func $m_method__int@jsinnerclass.Main.Outer) (rtt.canon $jsinnerclass.Main.Outer.vtable)))
+ (global.set $jsinnerclass.Main.Outer.vtable
+  (struct.new_with_rtt $jsinnerclass.Main.Outer.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer)
+   (ref.func $m_method__int@jsinnerclass.Main.Outer)
+   (rtt.canon $jsinnerclass.Main.Outer.vtable)
+  )
+ )
+
+ ;;; Code for jsinnerclass.Main.Outer [itable.init]
+ (global.set $jsinnerclass.Main.Outer.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for jsinnerclass.Main.Outer.Inner [vtable.init]
- (global.set $jsinnerclass.Main.Outer.Inner.vtable (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner) (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner) (rtt.canon $jsinnerclass.Main.Outer.Inner.vtable)))
+ (global.set $jsinnerclass.Main.Outer.Inner.vtable
+  (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner)
+   (ref.func $m_getB__int@jsinnerclass.Main.Outer.Inner)
+   (rtt.canon $jsinnerclass.Main.Outer.Inner.vtable)
+  )
+ )
+
+ ;;; Code for jsinnerclass.Main.Outer.Inner [itable.init]
+ (global.set $jsinnerclass.Main.Outer.Inner.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

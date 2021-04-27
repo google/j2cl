@@ -6,7 +6,7 @@
 
 ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [CLASS]
 (type $jstypeswithconstructor.JsTypesWithConstructor (struct
- (field $vtable (ref null $jstypeswithconstructor.JsTypesWithConstructor.vtable))
+ (field $vtable (ref null $jstypeswithconstructor.JsTypesWithConstructor.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jstypeswithconstructor.JsTypesWithConstructor.vtable (struct
@@ -70,4 +70,15 @@
 (elem declare func $m_getClass__java_lang_Class@jstypeswithconstructor.JsTypesWithConstructor)
 
  ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [vtable.init]
- (global.set $jstypeswithconstructor.JsTypesWithConstructor.vtable (struct.new_with_rtt $jstypeswithconstructor.JsTypesWithConstructor.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jstypeswithconstructor.JsTypesWithConstructor) (rtt.canon $jstypeswithconstructor.JsTypesWithConstructor.vtable)))
+ (global.set $jstypeswithconstructor.JsTypesWithConstructor.vtable
+  (struct.new_with_rtt $jstypeswithconstructor.JsTypesWithConstructor.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jstypeswithconstructor.JsTypesWithConstructor)
+   (rtt.canon $jstypeswithconstructor.JsTypesWithConstructor.vtable)
+  )
+ )
+
+ ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [itable.init]
+ (global.set $jstypeswithconstructor.JsTypesWithConstructor.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

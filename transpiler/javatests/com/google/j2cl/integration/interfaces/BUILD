@@ -14,6 +14,10 @@ package(
 integration_test(
     name = "interfaces",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
     # TODO(b/118184493): remove when Java 9 language support is enabled.
     j2cl_library_tags = ["manual"],
+    deps = [
+        "//third_party:gwt-javaemul-internal-annotations-j2cl",
+    ],
 )

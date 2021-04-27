@@ -6,7 +6,7 @@
 
 ;;; Code for multipleconstructors.MultipleConstructors [CLASS]
 (type $multipleconstructors.MultipleConstructors (struct
- (field $vtable (ref null $multipleconstructors.MultipleConstructors.vtable))
+ (field $vtable (ref null $multipleconstructors.MultipleConstructors.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_id__multipleconstructors_MultipleConstructors_ (mut i32))
  (field $f_flag__multipleconstructors_MultipleConstructors_ (mut i32))
@@ -112,4 +112,15 @@
 (elem declare func $m_getClass__java_lang_Class@multipleconstructors.MultipleConstructors)
 
  ;;; Code for multipleconstructors.MultipleConstructors [vtable.init]
- (global.set $multipleconstructors.MultipleConstructors.vtable (struct.new_with_rtt $multipleconstructors.MultipleConstructors.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@multipleconstructors.MultipleConstructors) (rtt.canon $multipleconstructors.MultipleConstructors.vtable)))
+ (global.set $multipleconstructors.MultipleConstructors.vtable
+  (struct.new_with_rtt $multipleconstructors.MultipleConstructors.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@multipleconstructors.MultipleConstructors)
+   (rtt.canon $multipleconstructors.MultipleConstructors.vtable)
+  )
+ )
+
+ ;;; Code for multipleconstructors.MultipleConstructors [itable.init]
+ (global.set $multipleconstructors.MultipleConstructors.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

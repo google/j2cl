@@ -6,7 +6,7 @@
 
 ;;; Code for genericequals.GenericEquals [CLASS]
 (type $genericequals.GenericEquals (struct
- (field $vtable (ref null $genericequals.GenericEquals.vtable))
+ (field $vtable (ref null $genericequals.GenericEquals.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_value__genericequals_GenericEquals_ (mut (ref null $java.lang.Object)))
  (field $f_value2__genericequals_GenericEquals_ (mut (ref null $genericequals.GenericEquals)))
@@ -138,4 +138,16 @@
 (elem declare func $m_getClass__java_lang_Class@genericequals.GenericEquals)
 
  ;;; Code for genericequals.GenericEquals [vtable.init]
- (global.set $genericequals.GenericEquals.vtable (struct.new_with_rtt $genericequals.GenericEquals.vtable  (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@genericequals.GenericEquals) (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals) (rtt.canon $genericequals.GenericEquals.vtable)))
+ (global.set $genericequals.GenericEquals.vtable
+  (struct.new_with_rtt $genericequals.GenericEquals.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@genericequals.GenericEquals)
+   (ref.func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals)
+   (rtt.canon $genericequals.GenericEquals.vtable)
+  )
+ )
+
+ ;;; Code for genericequals.GenericEquals [itable.init]
+ (global.set $genericequals.GenericEquals.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -8,6 +8,9 @@
 (global $f_$initialized__genericinterfaceabstractimpl_AbstractImpl (mut i32) (i32.const 0))
 
 ;;; Code for genericinterfaceabstractimpl.MyInterface [INTERFACE]
+(type $genericinterfaceabstractimpl.MyInterface.vtable (struct
+ (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@genericinterfaceabstractimpl.MyInterface
@@ -44,7 +47,7 @@
 
 ;;; Code for genericinterfaceabstractimpl.AbstractImpl [CLASS]
 (type $genericinterfaceabstractimpl.AbstractImpl (struct
- (field $vtable (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable))
+ (field $vtable (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericinterfaceabstractimpl.AbstractImpl.vtable (struct

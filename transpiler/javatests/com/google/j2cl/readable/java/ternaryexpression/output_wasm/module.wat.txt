@@ -6,7 +6,7 @@
 
 ;;; Code for ternaryexpression.TernaryExpression [CLASS]
 (type $ternaryexpression.TernaryExpression (struct
- (field $vtable (ref null $ternaryexpression.TernaryExpression.vtable))
+ (field $vtable (ref null $ternaryexpression.TernaryExpression.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $ternaryexpression.TernaryExpression.vtable (struct
@@ -56,7 +56,7 @@
    
    (local.set $value (block (result i32)
     
-    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
+    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (global.get $java.lang.Integer.itable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (global.get $java.lang.Integer.itable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
   )
@@ -102,4 +102,16 @@
 (elem declare func $m_getClass__java_lang_Class@ternaryexpression.TernaryExpression)
 
  ;;; Code for ternaryexpression.TernaryExpression [vtable.init]
- (global.set $ternaryexpression.TernaryExpression.vtable (struct.new_with_rtt $ternaryexpression.TernaryExpression.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@ternaryexpression.TernaryExpression) (ref.func $m_test__void@ternaryexpression.TernaryExpression) (rtt.canon $ternaryexpression.TernaryExpression.vtable)))
+ (global.set $ternaryexpression.TernaryExpression.vtable
+  (struct.new_with_rtt $ternaryexpression.TernaryExpression.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@ternaryexpression.TernaryExpression)
+   (ref.func $m_test__void@ternaryexpression.TernaryExpression)
+   (rtt.canon $ternaryexpression.TernaryExpression.vtable)
+  )
+ )
+
+ ;;; Code for ternaryexpression.TernaryExpression [itable.init]
+ (global.set $ternaryexpression.TernaryExpression.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

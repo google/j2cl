@@ -585,7 +585,7 @@ public abstract class TypeDeclaration
   }
 
   @Memoized
-  protected Set<TypeDeclaration> getAllSuperTypesIncludingSelf() {
+  public Set<TypeDeclaration> getAllSuperTypesIncludingSelf() {
     Set<TypeDeclaration> allSupertypesIncludingSelf = new LinkedHashSet<>();
     allSupertypesIncludingSelf.add(this);
     toUnparameterizedTypeDescriptor()

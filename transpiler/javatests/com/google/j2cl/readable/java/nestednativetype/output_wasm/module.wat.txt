@@ -12,7 +12,7 @@
 
 ;;; Code for nestednativetype.NativeArray [CLASS]
 (type $nestednativetype.NativeArray (struct
- (field $vtable (ref null $nestednativetype.NativeArray.vtable))
+ (field $vtable (ref null $nestednativetype.NativeArray.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $nestednativetype.NativeArray.vtable (struct
@@ -49,7 +49,7 @@
  (block $return.label
   (block
    ;; return new $1.<init>(NativeArray.this);
-   (local.set $return.value (call $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (i32.const 0) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))(local.get $this)))
+   (local.set $return.value (call $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (global.get $nestednativetype.NativeArray.1.itable) (i32.const 0) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))(local.get $this)))
    (br $return.label)
   )
  )
@@ -96,7 +96,7 @@
 
 ;;; Code for nestednativetype.NativeArray.1 [CLASS]
 (type $nestednativetype.NativeArray.1 (struct
- (field $vtable (ref null $nestednativetype.NativeArray.1.vtable))
+ (field $vtable (ref null $nestednativetype.NativeArray.1.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestednativetype_NativeArray_1 (mut (ref null $nestednativetype.NativeArray)))
 ))
@@ -162,7 +162,30 @@
 (elem declare func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)
 
  ;;; Code for nestednativetype.NativeArray [vtable.init]
- (global.set $nestednativetype.NativeArray.vtable (struct.new_with_rtt $nestednativetype.NativeArray.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray) (ref.func $m_a__java_lang_Object@nestednativetype.NativeArray) (rtt.canon $nestednativetype.NativeArray.vtable)))
+ (global.set $nestednativetype.NativeArray.vtable
+  (struct.new_with_rtt $nestednativetype.NativeArray.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray)
+   (ref.func $m_a__java_lang_Object@nestednativetype.NativeArray)
+   (rtt.canon $nestednativetype.NativeArray.vtable)
+  )
+ )
+
+ ;;; Code for nestednativetype.NativeArray [itable.init]
+ (global.set $nestednativetype.NativeArray.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for nestednativetype.NativeArray.1 [vtable.init]
- (global.set $nestednativetype.NativeArray.1.vtable (struct.new_with_rtt $nestednativetype.NativeArray.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1) (rtt.canon $nestednativetype.NativeArray.1.vtable)))
+ (global.set $nestednativetype.NativeArray.1.vtable
+  (struct.new_with_rtt $nestednativetype.NativeArray.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)
+   (rtt.canon $nestednativetype.NativeArray.1.vtable)
+  )
+ )
+
+ ;;; Code for nestednativetype.NativeArray.1 [itable.init]
+ (global.set $nestednativetype.NativeArray.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

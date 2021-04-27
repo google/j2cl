@@ -16,7 +16,7 @@
 
 ;;; Code for annotation.Main [CLASS]
 (type $annotation.Main (struct
- (field $vtable (ref null $annotation.Main.vtable))
+ (field $vtable (ref null $annotation.Main.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $annotation.Main.vtable (struct
@@ -78,6 +78,9 @@
 (elem declare func $m_getClass__java_lang_Class@annotation.Main)
 
 ;;; Code for annotation.Main.Foo [INTERFACE]
+(type $annotation.Main.Foo.vtable (struct
+ (field $m_bar__int (mut (ref $function.__$int)))
+))
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@annotation.Main.Foo
@@ -114,7 +117,7 @@
 
 ;;; Code for annotation.Main.Bar [CLASS]
 (type $annotation.Main.Bar (struct
- (field $vtable (ref null $annotation.Main.Bar.vtable))
+ (field $vtable (ref null $annotation.Main.Bar.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__annotation_Main_Bar (mut (ref null $annotation.Main)))
 ))
@@ -157,7 +160,7 @@
    
    (local.set $foo (ref.null $java.lang.Object))
    ;; foo.bar();
-   (drop (i32.const 0))
+   (drop (call_ref (local.get $foo)(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1)) (rtt.canon $annotation.Main.Foo.vtable)) )))
    ;; return annotation.Main.Foo.CONSTANT;
    (local.set $return.value (global.get $f_CONSTANT__annotation_Main_Foo))
    (br $return.label)
@@ -205,7 +208,30 @@
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Bar)
 
  ;;; Code for annotation.Main [vtable.init]
- (global.set $annotation.Main.vtable (struct.new_with_rtt $annotation.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@annotation.Main) (rtt.canon $annotation.Main.vtable)))
+ (global.set $annotation.Main.vtable
+  (struct.new_with_rtt $annotation.Main.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@annotation.Main)
+   (rtt.canon $annotation.Main.vtable)
+  )
+ )
+
+ ;;; Code for annotation.Main [itable.init]
+ (global.set $annotation.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for annotation.Main.Bar [vtable.init]
- (global.set $annotation.Main.Bar.vtable (struct.new_with_rtt $annotation.Main.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@annotation.Main.Bar) (ref.func $m_baz__int_$pp_annotation@annotation.Main.Bar) (rtt.canon $annotation.Main.Bar.vtable)))
+ (global.set $annotation.Main.Bar.vtable
+  (struct.new_with_rtt $annotation.Main.Bar.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@annotation.Main.Bar)
+   (ref.func $m_baz__int_$pp_annotation@annotation.Main.Bar)
+   (rtt.canon $annotation.Main.Bar.vtable)
+  )
+ )
+
+ ;;; Code for annotation.Main.Bar [itable.init]
+ (global.set $annotation.Main.Bar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

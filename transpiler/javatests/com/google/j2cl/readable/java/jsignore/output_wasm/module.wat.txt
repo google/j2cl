@@ -9,7 +9,7 @@
 
 ;;; Code for jsignore.JsIgnoreExample [CLASS]
 (type $jsignore.JsIgnoreExample (struct
- (field $vtable (ref null $jsignore.JsIgnoreExample.vtable))
+ (field $vtable (ref null $jsignore.JsIgnoreExample.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsignore.JsIgnoreExample.vtable (struct
@@ -86,7 +86,7 @@
     ;; jsignore.JsIgnoreExample.$clinit();
     (call $$clinit__void@jsignore.JsIgnoreExample )
     ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
-    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
    )
   )
  )
@@ -111,4 +111,15 @@
 (elem declare func $m_getClass__java_lang_Class@jsignore.JsIgnoreExample)
 
  ;;; Code for jsignore.JsIgnoreExample [vtable.init]
- (global.set $jsignore.JsIgnoreExample.vtable (struct.new_with_rtt $jsignore.JsIgnoreExample.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsignore.JsIgnoreExample) (rtt.canon $jsignore.JsIgnoreExample.vtable)))
+ (global.set $jsignore.JsIgnoreExample.vtable
+  (struct.new_with_rtt $jsignore.JsIgnoreExample.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsignore.JsIgnoreExample)
+   (rtt.canon $jsignore.JsIgnoreExample.vtable)
+  )
+ )
+
+ ;;; Code for jsignore.JsIgnoreExample [itable.init]
+ (global.set $jsignore.JsIgnoreExample.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

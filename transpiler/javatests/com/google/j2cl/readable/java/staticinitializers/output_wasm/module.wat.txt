@@ -8,7 +8,7 @@
 
 ;;; Code for staticinitializers.StaticInitializers [CLASS]
 (type $staticinitializers.StaticInitializers (struct
- (field $vtable (ref null $staticinitializers.StaticInitializers.vtable))
+ (field $vtable (ref null $staticinitializers.StaticInitializers.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $staticinitializers.StaticInitializers.vtable (struct
@@ -99,4 +99,15 @@
 (elem declare func $m_getClass__java_lang_Class@staticinitializers.StaticInitializers)
 
  ;;; Code for staticinitializers.StaticInitializers [vtable.init]
- (global.set $staticinitializers.StaticInitializers.vtable (struct.new_with_rtt $staticinitializers.StaticInitializers.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@staticinitializers.StaticInitializers) (rtt.canon $staticinitializers.StaticInitializers.vtable)))
+ (global.set $staticinitializers.StaticInitializers.vtable
+  (struct.new_with_rtt $staticinitializers.StaticInitializers.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@staticinitializers.StaticInitializers)
+   (rtt.canon $staticinitializers.StaticInitializers.vtable)
+  )
+ )
+
+ ;;; Code for staticinitializers.StaticInitializers [itable.init]
+ (global.set $staticinitializers.StaticInitializers.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

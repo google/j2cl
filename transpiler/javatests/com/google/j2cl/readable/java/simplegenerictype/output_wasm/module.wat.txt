@@ -6,7 +6,7 @@
 
 ;;; Code for simplegenerictype.SimpleGenericType [CLASS]
 (type $simplegenerictype.SimpleGenericType (struct
- (field $vtable (ref null $simplegenerictype.SimpleGenericType.vtable))
+ (field $vtable (ref null $simplegenerictype.SimpleGenericType.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_first__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Object)))
  (field $f_second__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Object)))
@@ -49,7 +49,7 @@
   (block
    ;; SimpleGenericType<Object, Error> g = new SimpleGenericType.<init>(new Object.<init>(),new Error.<init>());
    
-   (local.set $g (call $m_<init>__java_lang_Object__java_lang_Object__void@simplegenerictype.SimpleGenericType (struct.new_with_rtt $simplegenerictype.SimpleGenericType (global.get $simplegenerictype.SimpleGenericType.vtable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $simplegenerictype.SimpleGenericType.rtt))(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt)))(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))))
+   (local.set $g (call $m_<init>__java_lang_Object__java_lang_Object__void@simplegenerictype.SimpleGenericType (struct.new_with_rtt $simplegenerictype.SimpleGenericType (global.get $simplegenerictype.SimpleGenericType.vtable) (global.get $simplegenerictype.SimpleGenericType.itable) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $simplegenerictype.SimpleGenericType.rtt))(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt)))(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (global.get $java.lang.Error.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))))
   )
  )
 )
@@ -93,4 +93,16 @@
 (elem declare func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType)
 
  ;;; Code for simplegenerictype.SimpleGenericType [vtable.init]
- (global.set $simplegenerictype.SimpleGenericType.vtable (struct.new_with_rtt $simplegenerictype.SimpleGenericType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType) (ref.func $m_test__void@simplegenerictype.SimpleGenericType) (rtt.canon $simplegenerictype.SimpleGenericType.vtable)))
+ (global.set $simplegenerictype.SimpleGenericType.vtable
+  (struct.new_with_rtt $simplegenerictype.SimpleGenericType.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType)
+   (ref.func $m_test__void@simplegenerictype.SimpleGenericType)
+   (rtt.canon $simplegenerictype.SimpleGenericType.vtable)
+  )
+ )
+
+ ;;; Code for simplegenerictype.SimpleGenericType [itable.init]
+ (global.set $simplegenerictype.SimpleGenericType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -6,7 +6,7 @@
 
 ;;; Code for newinstance.NewInstanceExpr [CLASS]
 (type $newinstance.NewInstanceExpr (struct
- (field $vtable (ref null $newinstance.NewInstanceExpr.vtable))
+ (field $vtable (ref null $newinstance.NewInstanceExpr.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $newinstance.NewInstanceExpr.vtable (struct
@@ -40,7 +40,7 @@
    (call $$clinit__void@newinstance.NewInstanceExpr )
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
    
-   (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
+   (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (global.get $newinstance.NewInstanceExpr.itable) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
   )
  )
 )
@@ -83,4 +83,15 @@
 (elem declare func $m_getClass__java_lang_Class@newinstance.NewInstanceExpr)
 
  ;;; Code for newinstance.NewInstanceExpr [vtable.init]
- (global.set $newinstance.NewInstanceExpr.vtable (struct.new_with_rtt $newinstance.NewInstanceExpr.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@newinstance.NewInstanceExpr) (rtt.canon $newinstance.NewInstanceExpr.vtable)))
+ (global.set $newinstance.NewInstanceExpr.vtable
+  (struct.new_with_rtt $newinstance.NewInstanceExpr.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@newinstance.NewInstanceExpr)
+   (rtt.canon $newinstance.NewInstanceExpr.vtable)
+  )
+ )
+
+ ;;; Code for newinstance.NewInstanceExpr [itable.init]
+ (global.set $newinstance.NewInstanceExpr.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

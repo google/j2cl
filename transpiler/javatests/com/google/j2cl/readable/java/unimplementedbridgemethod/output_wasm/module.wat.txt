@@ -17,6 +17,9 @@
 (global $f_$initialized__unimplementedbridgemethod_Foo (mut i32) (i32.const 0))
 
 ;;; Code for unimplementedbridgemethod.I [INTERFACE]
+(type $unimplementedbridgemethod.I.vtable (struct
+ (field $m_foo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
+))
 
 ;;; int I.staticFoo()
 (func $m_staticFoo__int@unimplementedbridgemethod.I
@@ -68,6 +71,8 @@
 (elem declare func $m_getClass__java_lang_Class@unimplementedbridgemethod.I)
 
 ;;; Code for unimplementedbridgemethod.J [INTERFACE]
+(type $unimplementedbridgemethod.J.vtable (struct
+))
 
 ;;; void J.$clinit()
 (func $$clinit__void@unimplementedbridgemethod.J
@@ -104,7 +109,7 @@
 
 ;;; Code for unimplementedbridgemethod.Bar [CLASS]
 (type $unimplementedbridgemethod.Bar (struct
- (field $vtable (ref null $unimplementedbridgemethod.Bar.vtable))
+ (field $vtable (ref null $unimplementedbridgemethod.Bar.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $unimplementedbridgemethod.Bar.vtable (struct
@@ -149,7 +154,7 @@
 
 ;;; Code for unimplementedbridgemethod.Foo [CLASS]
 (type $unimplementedbridgemethod.Foo (struct
- (field $vtable (ref null $unimplementedbridgemethod.Foo.vtable))
+ (field $vtable (ref null $unimplementedbridgemethod.Foo.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $unimplementedbridgemethod.Foo.vtable (struct

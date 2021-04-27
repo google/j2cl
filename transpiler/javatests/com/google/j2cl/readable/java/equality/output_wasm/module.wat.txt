@@ -6,7 +6,7 @@
 
 ;;; Code for equality.Equality [CLASS]
 (type $equality.Equality (struct
- (field $vtable (ref null $equality.Equality.vtable))
+ (field $vtable (ref null $equality.Equality.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $equality.Equality.vtable (struct
@@ -105,4 +105,16 @@
 (elem declare func $m_getClass__java_lang_Class@equality.Equality)
 
  ;;; Code for equality.Equality [vtable.init]
- (global.set $equality.Equality.vtable (struct.new_with_rtt $equality.Equality.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@equality.Equality) (ref.func $m_test__void@equality.Equality) (rtt.canon $equality.Equality.vtable)))
+ (global.set $equality.Equality.vtable
+  (struct.new_with_rtt $equality.Equality.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@equality.Equality)
+   (ref.func $m_test__void@equality.Equality)
+   (rtt.canon $equality.Equality.vtable)
+  )
+ )
+
+ ;;; Code for equality.Equality [itable.init]
+ (global.set $equality.Equality.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

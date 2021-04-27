@@ -88,7 +88,7 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
           public Node rewriteFieldAccess(FieldAccess fieldAccess) {
             FieldDescriptor target = fieldAccess.getTarget();
             return isCompileTimeConstantStringField(target)
-                ? initializersByField.get(target)
+                ? initializersByField.get(target.getDeclarationDescriptor())
                 : fieldAccess;
           }
         });

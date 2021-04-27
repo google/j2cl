@@ -6,7 +6,7 @@
 
 ;;; Code for jsdocreturn.JsDocReturn [CLASS]
 (type $jsdocreturn.JsDocReturn (struct
- (field $vtable (ref null $jsdocreturn.JsDocReturn.vtable))
+ (field $vtable (ref null $jsdocreturn.JsDocReturn.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsdocreturn.JsDocReturn.vtable (struct
@@ -100,4 +100,17 @@
 (elem declare func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn)
 
  ;;; Code for jsdocreturn.JsDocReturn [vtable.init]
- (global.set $jsdocreturn.JsDocReturn.vtable (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn) (ref.func $m_test1__void@jsdocreturn.JsDocReturn) (ref.func $m_test2__int@jsdocreturn.JsDocReturn) (rtt.canon $jsdocreturn.JsDocReturn.vtable)))
+ (global.set $jsdocreturn.JsDocReturn.vtable
+  (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn)
+   (ref.func $m_test1__void@jsdocreturn.JsDocReturn)
+   (ref.func $m_test2__int@jsdocreturn.JsDocReturn)
+   (rtt.canon $jsdocreturn.JsDocReturn.vtable)
+  )
+ )
+
+ ;;; Code for jsdocreturn.JsDocReturn [itable.init]
+ (global.set $jsdocreturn.JsDocReturn.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

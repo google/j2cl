@@ -24,7 +24,7 @@
 
 ;;; Code for boundedtypesupercall.Main [CLASS]
 (type $boundedtypesupercall.Main (struct
- (field $vtable (ref null $boundedtypesupercall.Main.vtable))
+ (field $vtable (ref null $boundedtypesupercall.Main.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $boundedtypesupercall.Main.vtable (struct
@@ -87,7 +87,7 @@
 
 ;;; Code for boundedtypesupercall.Main.Foo [CLASS]
 (type $boundedtypesupercall.Main.Foo (struct
- (field $vtable (ref null $boundedtypesupercall.Main.Foo.vtable))
+ (field $vtable (ref null $boundedtypesupercall.Main.Foo.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $boundedtypesupercall.Main.Foo.vtable (struct
@@ -134,7 +134,7 @@
 
 ;;; Code for boundedtypesupercall.Main.Bar [CLASS]
 (type $boundedtypesupercall.Main.Bar (struct
- (field $vtable (ref null $boundedtypesupercall.Main.Bar.vtable))
+ (field $vtable (ref null $boundedtypesupercall.Main.Bar.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $boundedtypesupercall.Main.Bar.vtable (struct
@@ -188,7 +188,7 @@
  (block $return.label
   (block
    ;; return new $1.<init>(Bar.this,Bar.this.getSomething());
-   (local.set $return.value (call $m_<init>__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.vtable) (i32.const 0) (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(local.get $this)(call_ref (local.get $this)(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
+   (local.set $return.value (call $m_<init>__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.vtable) (global.get $boundedtypesupercall.Main.Bar.1.itable) (i32.const 0) (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(local.get $this)(call_ref (local.get $this)(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
    (br $return.label)
   )
  )
@@ -235,7 +235,7 @@
 
 ;;; Code for boundedtypesupercall.Main.Bar.1 [CLASS]
 (type $boundedtypesupercall.Main.Bar.1 (struct
- (field $vtable (ref null $boundedtypesupercall.Main.Bar.1.vtable))
+ (field $vtable (ref null $boundedtypesupercall.Main.Bar.1.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__boundedtypesupercall_Main_Bar_1 (mut (ref null $boundedtypesupercall.Main.Bar)))
 ))
@@ -315,10 +315,46 @@
 (elem declare func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1)
 
  ;;; Code for boundedtypesupercall.Main [vtable.init]
- (global.set $boundedtypesupercall.Main.vtable (struct.new_with_rtt $boundedtypesupercall.Main.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main) (rtt.canon $boundedtypesupercall.Main.vtable)))
+ (global.set $boundedtypesupercall.Main.vtable
+  (struct.new_with_rtt $boundedtypesupercall.Main.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main)
+   (rtt.canon $boundedtypesupercall.Main.vtable)
+  )
+ )
+
+ ;;; Code for boundedtypesupercall.Main [itable.init]
+ (global.set $boundedtypesupercall.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for boundedtypesupercall.Main.Bar [vtable.init]
- (global.set $boundedtypesupercall.Main.Bar.vtable (struct.new_with_rtt $boundedtypesupercall.Main.Bar.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar) (ref.func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar) (ref.func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar) (rtt.canon $boundedtypesupercall.Main.Bar.vtable)))
+ (global.set $boundedtypesupercall.Main.Bar.vtable
+  (struct.new_with_rtt $boundedtypesupercall.Main.Bar.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar)
+   (ref.func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar)
+   (ref.func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar)
+   (rtt.canon $boundedtypesupercall.Main.Bar.vtable)
+  )
+ )
+
+ ;;; Code for boundedtypesupercall.Main.Bar [itable.init]
+ (global.set $boundedtypesupercall.Main.Bar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for boundedtypesupercall.Main.Bar.1 [vtable.init]
- (global.set $boundedtypesupercall.Main.Bar.1.vtable (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1) (ref.func $m_foo__void@boundedtypesupercall.Main.Bar.1) (rtt.canon $boundedtypesupercall.Main.Bar.1.vtable)))
+ (global.set $boundedtypesupercall.Main.Bar.1.vtable
+  (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1)
+   (ref.func $m_foo__void@boundedtypesupercall.Main.Bar.1)
+   (rtt.canon $boundedtypesupercall.Main.Bar.1.vtable)
+  )
+ )
+
+ ;;; Code for boundedtypesupercall.Main.Bar.1 [itable.init]
+ (global.set $boundedtypesupercall.Main.Bar.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

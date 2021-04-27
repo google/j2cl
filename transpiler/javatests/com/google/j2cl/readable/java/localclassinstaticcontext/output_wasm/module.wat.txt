@@ -49,7 +49,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.vtable (struct
@@ -81,10 +81,10 @@
    ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
    (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
    ;; new $1A.<init>();
-   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
+   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.itable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
    ;; Object a = new $3.<init>();
    
-   (local.set $a (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
+   (local.set $a (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.itable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
   )
  )
 )
@@ -109,13 +109,13 @@
     ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
     (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
     ;; (localclassinstaticcontext.LocalClassInStaticContext.f = new $1.<init>());
-    (global.set $f_f__localclassinstaticcontext_LocalClassInStaticContext (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1 (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.rtt))))
+    (global.set $f_f__localclassinstaticcontext_LocalClassInStaticContext (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1 (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.itable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.rtt))))
    )
    ;; new $1B.<init>();
-   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1B (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.rtt))))
+   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1B (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.itable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.rtt))))
    ;; Object b = new $2.<init>();
    
-   (local.set $b (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.2 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.2 (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.rtt))))
+   (local.set $b (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.2 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.2 (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.itable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.rtt))))
   )
  )
 )
@@ -140,7 +140,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1 [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext.1 (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.1.vtable (struct
@@ -203,7 +203,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1A [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext.1A (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable (struct
@@ -266,7 +266,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.3 [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext.3 (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.3.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.3.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.3.vtable (struct
@@ -299,7 +299,7 @@
  (block $return.label
   (block
    ;; new $1A.<init>();
-   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
+   (drop (call $m_<init>__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.itable) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
   )
  )
 )
@@ -344,7 +344,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1B [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext.1B (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable (struct
@@ -407,7 +407,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.2 [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext.2 (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.2.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.2.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclassinstaticcontext.LocalClassInStaticContext.2.vtable (struct
@@ -470,7 +470,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext.C (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f__localclassinstaticcontext_LocalClassInStaticContext_C (mut i32))
 ))
@@ -509,7 +509,7 @@
    (block
     ;; D $qualifier = new $1D.<init>(C.this);
     
-    (local.set $$qualifier (call $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable) (i32.const 0) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.itable) (i32.const 0) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt))(local.get $this)))
     ;; $qualifier.fun();
     (drop (call_ref (local.get $$qualifier)(struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable $m_fun__int (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $vtable(local.get $$qualifier)))))
    )
@@ -568,7 +568,7 @@
 
 ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C.1D [CLASS]
 (type $localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct
- (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable))
+ (field $vtable (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__localclassinstaticcontext_LocalClassInStaticContext_C_1D (mut (ref null $localclassinstaticcontext.LocalClassInStaticContext.C)))
 ))
@@ -653,25 +653,116 @@
 (elem declare func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D)
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1 [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.1.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.1.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1 [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1A [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1A)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1A [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.1A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.3 [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.3.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3) (ref.func $m_m__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.3.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.3.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.3)
+   (ref.func $m_m__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.3.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.3 [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.3.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1B [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.1B)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.1B [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.1B.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.2 [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.2.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.2.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.2.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.2.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.2.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.2)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.2.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.2 [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.2.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.C.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C) (ref.func $m_test__void@localclassinstaticcontext.LocalClassInStaticContext.C) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.C.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C)
+   (ref.func $m_test__void@localclassinstaticcontext.LocalClassInStaticContext.C)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.C.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C.1D [vtable.init]
- (global.set $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D) (ref.func $m_fun__int@localclassinstaticcontext.LocalClassInStaticContext.C.1D) (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)))
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable
+  (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclassinstaticcontext.LocalClassInStaticContext.C.1D)
+   (ref.func $m_fun__int@localclassinstaticcontext.LocalClassInStaticContext.C.1D)
+   (rtt.canon $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)
+  )
+ )
+
+ ;;; Code for localclassinstaticcontext.LocalClassInStaticContext.C.1D [itable.init]
+ (global.set $localclassinstaticcontext.LocalClassInStaticContext.C.1D.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

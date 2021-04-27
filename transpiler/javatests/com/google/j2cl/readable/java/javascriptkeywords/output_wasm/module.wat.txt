@@ -6,7 +6,7 @@
 
 ;;; Code for javascriptkeywords.JSKeyWords [CLASS]
 (type $javascriptkeywords.JSKeyWords (struct
- (field $vtable (ref null $javascriptkeywords.JSKeyWords.vtable))
+ (field $vtable (ref null $javascriptkeywords.JSKeyWords.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $javascriptkeywords.JSKeyWords.vtable (struct
@@ -92,4 +92,16 @@
 (elem declare func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords)
 
  ;;; Code for javascriptkeywords.JSKeyWords [vtable.init]
- (global.set $javascriptkeywords.JSKeyWords.vtable (struct.new_with_rtt $javascriptkeywords.JSKeyWords.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords) (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords) (rtt.canon $javascriptkeywords.JSKeyWords.vtable)))
+ (global.set $javascriptkeywords.JSKeyWords.vtable
+  (struct.new_with_rtt $javascriptkeywords.JSKeyWords.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords)
+   (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords)
+   (rtt.canon $javascriptkeywords.JSKeyWords.vtable)
+  )
+ )
+
+ ;;; Code for javascriptkeywords.JSKeyWords [itable.init]
+ (global.set $javascriptkeywords.JSKeyWords.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

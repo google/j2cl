@@ -18,7 +18,7 @@
 
 ;;; Code for booleanoperations.BooleanOperations [CLASS]
 (type $booleanoperations.BooleanOperations (struct
- (field $vtable (ref null $booleanoperations.BooleanOperations.vtable))
+ (field $vtable (ref null $booleanoperations.BooleanOperations.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $booleanoperations.BooleanOperations.vtable (struct
@@ -204,12 +204,12 @@
    )
    ;; Outer finalOuter = new $1Outer.<init>(BooleanOperations.this);
    
-   (local.set $finalOuter (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
+   (local.set $finalOuter (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (global.get $booleanoperations.BooleanOperations.1Outer.itable) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
    ;; (finalOuter.b = (finalOuter.b | true));
    (struct.set $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $finalOuter) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $finalOuter)) (i32.const 1)))
    ;; Outer outer = new $1Outer.<init>(BooleanOperations.this);
    
-   (local.set $outer (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
+   (local.set $outer (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (global.get $booleanoperations.BooleanOperations.1Outer.vtable) (global.get $booleanoperations.BooleanOperations.1Outer.itable) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
    ;; (outer.b = (outer.b | javaemul.internal.Platform.isNull(((outer = null),outer))));
    (struct.set $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $outer) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $outer)) (ref.is_null (block (result (ref null $booleanoperations.BooleanOperations.1Outer))
     (local.set $outer (ref.null $booleanoperations.BooleanOperations.1Outer))
@@ -259,7 +259,7 @@
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer [CLASS]
 (type $booleanoperations.BooleanOperations.1Outer (struct
- (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.vtable))
+ (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__booleanoperations_BooleanOperations_1Outer (mut (ref null $booleanoperations.BooleanOperations)))
  (field $f_b__booleanoperations_BooleanOperations_1Outer (mut i32))
@@ -327,7 +327,7 @@
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [CLASS]
 (type $booleanoperations.BooleanOperations.1Outer.Inner (struct
- (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.Inner.vtable))
+ (field $vtable (ref null $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner (mut (ref null $booleanoperations.BooleanOperations.1Outer)))
 ))
@@ -406,10 +406,44 @@
 (elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
 
  ;;; Code for booleanoperations.BooleanOperations [vtable.init]
- (global.set $booleanoperations.BooleanOperations.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations) (ref.func $m_test__void@booleanoperations.BooleanOperations) (rtt.canon $booleanoperations.BooleanOperations.vtable)))
+ (global.set $booleanoperations.BooleanOperations.vtable
+  (struct.new_with_rtt $booleanoperations.BooleanOperations.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
+   (ref.func $m_test__void@booleanoperations.BooleanOperations)
+   (rtt.canon $booleanoperations.BooleanOperations.vtable)
+  )
+ )
+
+ ;;; Code for booleanoperations.BooleanOperations [itable.init]
+ (global.set $booleanoperations.BooleanOperations.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for booleanoperations.BooleanOperations.1Outer [vtable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer) (rtt.canon $booleanoperations.BooleanOperations.1Outer.vtable)))
+ (global.set $booleanoperations.BooleanOperations.1Outer.vtable
+  (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
+   (rtt.canon $booleanoperations.BooleanOperations.1Outer.vtable)
+  )
+ )
+
+ ;;; Code for booleanoperations.BooleanOperations.1Outer [itable.init]
+ (global.set $booleanoperations.BooleanOperations.1Outer.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
 
  ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [vtable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner) (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner.vtable)))
+ (global.set $booleanoperations.BooleanOperations.1Outer.Inner.vtable
+  (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
+   (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner.vtable)
+  )
+ )
+
+ ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [itable.init]
+ (global.set $booleanoperations.BooleanOperations.1Outer.Inner.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

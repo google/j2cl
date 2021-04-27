@@ -17,6 +17,8 @@
 (global $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (mut i32) (i32.const 0))
 
 ;;; Code for implementsgenericinterface.GenericInterface [INTERFACE]
+(type $implementsgenericinterface.GenericInterface.vtable (struct
+))
 
 ;;; void GenericInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterface
@@ -52,6 +54,8 @@
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface)
 
 ;;; Code for implementsgenericinterface.GenericSubInterface [INTERFACE]
+(type $implementsgenericinterface.GenericSubInterface.vtable (struct
+))
 
 ;;; void GenericSubInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericSubInterface
@@ -88,7 +92,7 @@
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [CLASS]
 (type $implementsgenericinterface.GenericInterfaceGenericImpl (struct
- (field $vtable (ref null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable))
+ (field $vtable (ref null $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct
@@ -151,7 +155,7 @@
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [CLASS]
 (type $implementsgenericinterface.GenericInterfaceImpl (struct
- (field $vtable (ref null $implementsgenericinterface.GenericInterfaceImpl.vtable))
+ (field $vtable (ref null $implementsgenericinterface.GenericInterfaceImpl.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $implementsgenericinterface.GenericInterfaceImpl.vtable (struct
@@ -213,7 +217,37 @@
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)
 
  ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [vtable.init]
- (global.set $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl) (rtt.canon $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)))
+ (global.set $implementsgenericinterface.GenericInterfaceGenericImpl.vtable
+  (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
+   (rtt.canon $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)
+  )
+ )
+
+ ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [itable.init]
+ (global.set $implementsgenericinterface.GenericInterfaceGenericImpl.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.itable) (i32.const 0)
+ (struct.new_with_rtt $implementsgenericinterface.GenericInterface.vtable
+  (rtt.canon $implementsgenericinterface.GenericInterface.vtable)
+ ))
 
  ;;; Code for implementsgenericinterface.GenericInterfaceImpl [vtable.init]
- (global.set $implementsgenericinterface.GenericInterfaceImpl.vtable (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl) (rtt.canon $implementsgenericinterface.GenericInterfaceImpl.vtable)))
+ (global.set $implementsgenericinterface.GenericInterfaceImpl.vtable
+  (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)
+   (rtt.canon $implementsgenericinterface.GenericInterfaceImpl.vtable)
+  )
+ )
+
+ ;;; Code for implementsgenericinterface.GenericInterfaceImpl [itable.init]
+ (global.set $implementsgenericinterface.GenericInterfaceImpl.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $implementsgenericinterface.GenericInterfaceImpl.itable) (i32.const 0)
+ (struct.new_with_rtt $implementsgenericinterface.GenericInterface.vtable
+  (rtt.canon $implementsgenericinterface.GenericInterface.vtable)
+ ))

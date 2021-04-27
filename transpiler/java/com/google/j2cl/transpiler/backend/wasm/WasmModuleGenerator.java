@@ -16,7 +16,9 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Predicates.not;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.lang.String.format;
+import static java.util.Comparator.naturalOrder;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
@@ -74,6 +76,7 @@ public class WasmModuleGenerator {
     emitGlobals(library);
     emitDynamicDispatchMethodTypes(library);
     emitTypes(library);
+    emitItableSupportTypes();
     emitRuntimeInitialization(library);
     emitNativeArrayTypes(library);
     builder.newLine();
@@ -84,8 +87,19 @@ public class WasmModuleGenerator {
     }
   }
 
+  private void emitItableSupportTypes() {
+    builder.newLine();
+    // Emit a type that is a supertype for all interface vtables. This is needed to be able to cast
+    // to a particular interface vtable type. In the current wasm gc spec generic types like
+    // 'anyref' or 'eqref' can not be cast from using `ref.cast`.
+    builder.append("(type $empty.vtable (struct))");
+    builder.newLine();
+    // The itable is an array of vtables.
+    builder.append("(type $itable (array (mut (ref null $empty.vtable))))");
+  }
+
   private void emitGlobals(Library library) {
-    emitVtableGlobals(library);
+    emitDispatchTableGlobals(library);
     emitStaticFieldGlobals(library);
   }
 
@@ -94,37 +108,30 @@ public class WasmModuleGenerator {
     Set<String> emittedFunctionTypeNames = new HashSet<>();
     library.getCompilationUnits().stream()
         .flatMap(cu -> cu.getTypes().stream())
-        .filter(Predicates.not(Type::isInterface))
-        .flatMap(
-            t ->
-                environment
-                    .getWasmTypeLayout(t.getDeclaration())
-                    .getAllPolymorphicMethods()
-                    .stream())
+        .flatMap(t -> t.getMethods().stream())
         .map(Method::getDescriptor)
-        .forEach(
-            m -> {
-              String typeName = environment.getFunctionTypeName(m);
-              if (!emittedFunctionTypeNames.add(typeName)) {
-                return;
-              }
-              builder.newLine();
-              builder.append(String.format("(type %s (func", typeName));
-              Streams.concat(
-                      // Add the implicit parameter
-                      Stream.of(TypeDescriptors.get().javaLangObject),
-                      m.getDispatchParameterTypeDescriptors().stream())
-                  .forEach(
-                      t ->
-                          builder.append(String.format(" (param %s)", environment.getWasmType(t))));
+        .filter(MethodDescriptor::isPolymorphic)
+        .forEach(m -> emitFunctionType(emittedFunctionTypeNames, m));
+  }
 
-              TypeDescriptor returnTypeDescriptor = m.getDispatchReturnTypeDescriptor();
-              if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
-                builder.append(
-                    String.format(" (result %s)", environment.getWasmType(returnTypeDescriptor)));
-              }
-              builder.append("))");
-            });
+  private void emitFunctionType(Set<String> emittedFunctionTypeNames, MethodDescriptor m) {
+    String typeName = environment.getFunctionTypeName(m);
+    if (!emittedFunctionTypeNames.add(typeName)) {
+      return;
+    }
+    builder.newLine();
+    builder.append(String.format("(type %s (func", typeName));
+    Streams.concat(
+            // Add the implicit parameter
+            Stream.of(TypeDescriptors.get().javaLangObject),
+            m.getDispatchParameterTypeDescriptors().stream())
+        .forEach(t -> builder.append(String.format(" (param %s)", environment.getWasmType(t))));
+
+    TypeDescriptor returnTypeDescriptor = m.getDispatchReturnTypeDescriptor();
+    if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
+      builder.append(String.format(" (result %s)", environment.getWasmType(returnTypeDescriptor)));
+    }
+    builder.append("))");
   }
 
   private void emitTypes(Library library) {
@@ -176,14 +183,50 @@ public class WasmModuleGenerator {
   }
 
   private void renderType(Type type) {
-    if (!type.isInterface()) {
+    if (type.isInterface()) {
       // Interfaces at runtime are treated as java.lang.Object; they don't have an empty structure
       // nor rtts.
+      renderInterfaceVtableStruct(type);
+    } else {
       renderTypeStruct(type);
       renderVtableStruct(type);
     }
 
     renderTypeMethods(type);
+  }
+
+  /**
+   * Renders the struct for the vtable of an interface.
+   *
+   * <p>There is a vtable for each interface, and it consists of fields only for the methods
+   * declared in that interface (not including methods declared in their supers). Calls to interface
+   * methods will always point to an interface that declared them.
+   */
+  private void renderInterfaceVtableStruct(Type type) {
+    // TODO(b/186472671): centralize all concepts related to layout in WasmTypeLayout, including
+    // interface vtables and slot assignments.
+    builder.newLine();
+    builder.append(
+        String.format(
+            "(type %s (struct", environment.getWasmVtableTypeName(type.getTypeDescriptor())));
+    builder.indent();
+    renderInterfaceVtableTypeFields(type.getDeclaration());
+    builder.unindent();
+    builder.newLine();
+    builder.append("))");
+  }
+
+  private void renderInterfaceVtableTypeFields(TypeDeclaration typeDeclaration) {
+    for (MethodDescriptor methodDescriptor : typeDeclaration.getDeclaredMethodDescriptors()) {
+      if (!methodDescriptor.isPolymorphic()) {
+        continue;
+      }
+      String functionTypeName = environment.getFunctionTypeName(methodDescriptor);
+      builder.newLine();
+      builder.append(
+          String.format(
+              "(field $%s (mut (ref %s)))", methodDescriptor.getMangledName(), functionTypeName));
+    }
   }
 
   private void emitStaticFieldGlobals(Library library) {
@@ -365,8 +408,11 @@ public class WasmModuleGenerator {
     // The first field is always the vtable for class dynamic dispatch.
     builder.append(
         String.format(
-            "(field $vtable (ref null %s))",
+            "(field $vtable (ref null %s)) ",
             environment.getWasmVtableTypeName(type.getTypeDescriptor())));
+    // The second field is always the itable for interface method dispatch.
+    builder.append("(field $itable (ref null $itable))");
+
     WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
     for (Field field : wasmType.getAllInstanceFields()) {
       builder.newLine();
@@ -404,11 +450,15 @@ public class WasmModuleGenerator {
     }
   }
 
-  private void emitVtableGlobals(Library library) {
+  private void emitDispatchTableGlobals(Library library) {
     library.getCompilationUnits().stream()
         .flatMap(c -> c.getTypes().stream())
         .filter(not(Type::isInterface)) // Interfaces at runtime are treated as java.lang.Object;
-        .forEach(this::emitVtableGlobal);
+        .forEach(
+            t -> {
+              emitVtableGlobal(t);
+              emitItableGlobal(t);
+            });
   }
 
   private void emitVtableGlobal(Type type) {
@@ -424,49 +474,162 @@ public class WasmModuleGenerator {
     emitEndCodeComment(type, "vtable");
   }
 
-  /** Emit a function that will be used to initialize the runtime at module instantiation time. */
+  private void emitItableGlobal(Type type) {
+    DeclaredTypeDescriptor typeDescriptor = type.getTypeDescriptor();
+    builder.newLine();
+    builder.append(
+        String.format(
+            "(global %s (mut (ref null $itable)) (ref.null $itable))",
+            environment.getWasmItableGlobalName(typeDescriptor)));
+  }
+
+  /**
+   * Emit a function that will be used to initialize the runtime at module instantiation time;
+   * together with the required type definitions.
+   */
   private void emitRuntimeInitialization(Library library) {
     emitBeginCodeComment("runtime initialization");
     builder.newLine();
     builder.append("(func $.runtime.init (block ");
     builder.indent();
     builder.newLine();
-    builder.append(";;; Initialize vtables structures.");
+    // TODO(b/183994530): Initialize dynamic dispatch tables lazily.
+    builder.append(";;; Initialize dynamic dispatch tables.");
     // Populate all vtables.
     library.getCompilationUnits().stream()
         .flatMap(cu -> cu.getTypes().stream())
         .filter(Predicates.not(Type::isInterface))
         .map(Type::getDeclaration)
         .filter(Predicates.not(TypeDeclaration::isAbstract))
-        .forEach(this::emitVtableInitialization);
+        .forEach(this::emitDispatchTablesInitialization);
     builder.unindent();
     builder.newLine();
     builder.append("))");
     builder.newLine();
+    // Run the runtime initialization function at module instantiation.
     builder.append("(start $.runtime.init)");
     emitEndCodeComment("runtime initialization");
   }
 
-  /** Emits the code to initialize the vtable structure for {@code typeDeclaration}. */
-  private void emitVtableInitialization(TypeDeclaration typeDeclaration) {
+  private void emitDispatchTablesInitialization(TypeDeclaration typeDeclaration) {
+    emitClassVtableInitialization(typeDeclaration);
+    emitItableInitialization(typeDeclaration);
+  }
+
+  /** Emits the code to initialize the class vtable structure for {@code typeDeclaration}. */
+  private void emitClassVtableInitialization(TypeDeclaration typeDeclaration) {
+    WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
+
     emitBeginCodeComment(typeDeclaration, "vtable.init");
     builder.newLine();
-    DeclaredTypeDescriptor td = typeDeclaration.toUnparameterizedTypeDescriptor();
+    //  Create the class vtable for this type (which is either a class or an enum) and store it
+    // in a global variable to be able to use it to initialize instance of this class.
+    builder.append(
+        String.format("(global.set %s", environment.getWasmVtableGlobalName(typeDeclaration)));
+    builder.indent();
+    emitVtableInitialization(
+        typeDeclaration,
+        wasmTypeLayout.getAllPolymorphicMethods().stream()
+            .map(Method::getDescriptor)
+            .collect(toImmutableList()));
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
+    emitEndCodeComment(typeDeclaration, "vtable.init");
+  }
+
+  /** Emits the code to initialize the Itable array for {@code typeDeclaration}. */
+  private void emitItableInitialization(TypeDeclaration typeDeclaration) {
+    emitBeginCodeComment(typeDeclaration, "itable.init");
+
+    List<TypeDeclaration> superInterfaces =
+        typeDeclaration.getAllSuperTypesIncludingSelf().stream()
+            .filter(TypeDeclaration::isInterface)
+            .collect(toImmutableList());
+
+    // Determine how many slots are necessary for the itable of this class.
+    int numberOfSlots =
+        superInterfaces.stream().map(environment::getInterfaceSlot).max(naturalOrder()).orElse(-1)
+            + 1;
+
+    // Create the array of interface vtables of the required size and store it in a global variable
+    // to be able to use it when objects of this class are instantiated.
+    builder.newLine();
     builder.append(
         String.format(
-            "(global.set %s (struct.new_with_rtt %s ",
-            environment.getWasmVtableGlobalName(td), environment.getWasmVtableTypeName(td)));
+            "(global.set %s (array.new_default_with_rtt $itable (i32.const %d) (rtt.canon"
+                + " $itable)))",
+            environment.getWasmItableGlobalName(typeDeclaration), numberOfSlots));
+
+    superInterfaces.forEach(
+        superInterface -> emitInterfaceVtableSlotAssignment(superInterface, typeDeclaration));
+    emitEndCodeComment(typeDeclaration, "itable.init");
+  }
+
+  /**
+   * Creates and initializes the vtable for {@code implementedType} with the methods in {@code
+   * methodDescriptors}.
+   *
+   * <p>This is used to initialize both class vtables and interface vtables. Each concrete class
+   * will have a class vtable to implement the dynamic class method dispatch and one vtable for each
+   * interface it implements to implement interface dispatch.
+   */
+  private void emitVtableInitialization(
+      TypeDeclaration implementedType, List<MethodDescriptor> methodDescriptors) {
+    builder.newLine();
+    // Create an instance of the vtable for the type initializing it with the methods that are
+    // passed in methodDescriptors.
+    builder.append(
+        String.format(
+            "(struct.new_with_rtt %s", environment.getWasmVtableTypeName(implementedType)));
+
+    builder.indent();
+    methodDescriptors.forEach(
+        m -> {
+          builder.newLine();
+          builder.append(
+              String.format("(ref.func %s)", environment.getMethodImplementationName(m)));
+        });
+    builder.newLine();
+    // Always use a canonical rtt for vtables.
+    // Vtables corresponding the the class dynamic dispatch never require casting; their assignments
+    // are always statically sound. On the other hand interface dispatch vtables require a cast
+    // but they are only cast to their specific type.
+    builder.append(
+        String.format("(rtt.canon %s)", environment.getWasmVtableTypeName(implementedType)));
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
+  }
+
+  /**
+   * Assigns the vtable for {@code superInterface} to the corresponding slot in {@code
+   * typeDeclaration} itable.
+   */
+  private void emitInterfaceVtableSlotAssignment(
+      TypeDeclaration superInterface, TypeDeclaration typeDeclaration) {
     WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
-    wasmTypeLayout
-        .getAllPolymorphicMethods()
-        .forEach(
-            m ->
-                builder.append(
-                    String.format(
-                        " (ref.func %s)",
-                        environment.getMethodImplementationName(m.getDescriptor()))));
-    builder.append(String.format(" (rtt.canon %s)))", environment.getWasmVtableTypeName(td)));
-    emitEndCodeComment(typeDeclaration, "vtable.init");
+
+    builder.newLine();
+    // Assign the interface vtable for superInterface in this concrete class to the
+    // corresponding slot in the $itable field.
+    builder.append(
+        String.format(
+            "(array.set $itable (global.get %s) (i32.const %d)",
+            environment.getWasmItableGlobalName(typeDeclaration),
+            environment.getInterfaceSlot(superInterface)));
+    List<MethodDescriptor> interfaceMethodImplementations =
+        superInterface.getDeclaredMethodDescriptors().stream()
+            .filter(MethodDescriptor::isPolymorphic)
+            .map(
+                m ->
+                    wasmTypeLayout
+                        .getAllPolymorphicMethodsByMangledName()
+                        .get(m.getMangledName())
+                        .getDescriptor())
+            .collect(toImmutableList());
+    emitVtableInitialization(superInterface, interfaceMethodImplementations);
+    builder.append(")");
   }
 
   private void emitNativeArrayTypes(Library library) {

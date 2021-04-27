@@ -12,7 +12,7 @@
 
 ;;; Code for jstype.SomeJsType [CLASS]
 (type $jstype.SomeJsType (struct
- (field $vtable (ref null $jstype.SomeJsType.vtable))
+ (field $vtable (ref null $jstype.SomeJsType.vtable)) (field $itable (ref null $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_publicField__jstype_SomeJsType (mut i32))
  (field $f_privateField__jstype_SomeJsType_ (mut i32))
@@ -131,7 +131,7 @@
   (block
    ;; Object object = new Object.<init>();
    
-   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
    
    (local.set $star (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))
@@ -182,6 +182,8 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType)
 
 ;;; Code for jstype.SomeJsType.Star [INTERFACE]
+(type $jstype.SomeJsType.Star.vtable (struct
+))
 
 ;;; void Star.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Star
@@ -217,6 +219,8 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Star)
 
 ;;; Code for jstype.SomeJsType.Wildcard [INTERFACE]
+(type $jstype.SomeJsType.Wildcard.vtable (struct
+))
 
 ;;; void Wildcard.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Wildcard
@@ -252,4 +256,20 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Wildcard)
 
  ;;; Code for jstype.SomeJsType [vtable.init]
- (global.set $jstype.SomeJsType.vtable (struct.new_with_rtt $jstype.SomeJsType.vtable  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object) (ref.func $m_hashCode__int@java.lang.Object) (ref.func $m_toString__java_lang_String@java.lang.Object) (ref.func $m_getClass__java_lang_Class@jstype.SomeJsType) (ref.func $m_publicMethod__void@jstype.SomeJsType) (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType) (ref.func $m_protectedMethod__void@jstype.SomeJsType) (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType) (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType) (rtt.canon $jstype.SomeJsType.vtable)))
+ (global.set $jstype.SomeJsType.vtable
+  (struct.new_with_rtt $jstype.SomeJsType.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jstype.SomeJsType)
+   (ref.func $m_publicMethod__void@jstype.SomeJsType)
+   (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
+   (ref.func $m_protectedMethod__void@jstype.SomeJsType)
+   (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
+   (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
+   (rtt.canon $jstype.SomeJsType.vtable)
+  )
+ )
+
+ ;;; Code for jstype.SomeJsType [itable.init]
+ (global.set $jstype.SomeJsType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
