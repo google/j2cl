@@ -44,11 +44,8 @@ public class Main {
     testArrayInstanceOf();
     testArrayGetClass();
     testWasmArrayApis();
-    // TODO(b/171833737): Enable after System.getProperty support is added.
-    // testArrayList();
-    // TODO(b/171833737): Enable after System.getProperty and Class.getComponentType support is
-    // added.
-    // testSystemArrayCopy();
+    testArrayList();
+    testSystemArrayCopy();
     testStringValueOf();
   }
 
