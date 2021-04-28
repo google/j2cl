@@ -34,13 +34,17 @@ abstract class WasmArray implements Serializable, Cloneable {
 
   /** Create a new array of same type with given length. */
   Object newArray(int length) {
-    return null;
+    throw new UnsupportedOperationException();
   }
 
   /** Change the length of the array. May resize storage if necessary. */
-  void setLength(int length) {}
+  void setLength(int length) {
+    throw new UnsupportedOperationException();
+  }
 
-  void copyFrom(int offset, WasmArray values, int valueOffset, int len) {}
+  void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+    throw new UnsupportedOperationException();
+  }
 
   public static Object[] createMultiDimensional(int[] dimensionLengths, int leafType) {
     return (Object[]) createRecursively(dimensionLengths, 0, leafType);
