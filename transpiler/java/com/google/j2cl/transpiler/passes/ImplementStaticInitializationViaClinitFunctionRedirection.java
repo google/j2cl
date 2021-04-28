@@ -30,7 +30,7 @@ import com.google.j2cl.transpiler.ast.FieldDescriptor.FieldOrigin;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.JsMemberType;
-import com.google.j2cl.transpiler.ast.LambdaTypeDescriptors;
+import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -236,7 +236,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
     // no parameters and void return.
     // TODO(b/112308901): remove this hacky code when function types are modeled better.
     DeclaredTypeDescriptor runnableJsFunctionDescriptor =
-        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(
+        LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
             TypeDescriptors.get().javaLangRunnable);
 
     // Class.$clinit = () => {};

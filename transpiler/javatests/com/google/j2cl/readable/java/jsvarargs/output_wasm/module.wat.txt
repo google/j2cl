@@ -16,6 +16,9 @@
 ;;; Code for jsvarargs.Main.SubMain [vtable]
 (global $jsvarargs.Main.SubMain.vtable (mut (ref null $jsvarargs.Main.SubMain.vtable)) (ref.null $jsvarargs.Main.SubMain.vtable))
 
+;;; Code for jsvarargs.Main.$LambdaImplementor$1 [vtable]
+(global $jsvarargs.Main.$LambdaImplementor$1.vtable (mut (ref null $jsvarargs.Main.$LambdaImplementor$1.vtable)) (ref.null $jsvarargs.Main.$LambdaImplementor$1.vtable))
+
 ;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable]
 (global $jsvarargs.QualifiedSuperMethodCall.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.vtable))
 
@@ -48,6 +51,9 @@
 
 ;;; Code for jsvarargs.Main.GenericFunction [static fields]
 (global $f_$initialized__jsvarargs_Main_GenericFunction (mut i32) (i32.const 0))
+
+;;; Code for jsvarargs.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__jsvarargs_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
 
 ;;; Code for jsvarargs.QualifiedSuperMethodCall [static fields]
 (global $f_$initialized__jsvarargs_QualifiedSuperMethodCall (mut i32) (i32.const 0))
@@ -761,15 +767,13 @@
 (func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main
  (param $this.untyped (ref null $java.lang.Object))
  (local $function (ref null $java.lang.Object))
- (local $n (ref null $java.lang.Object))
- (local $param (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
  (block $return.label
   (block
-   ;; GenericFunction<U> function = function (U n,U[] param){
+   ;; GenericFunction<U> function = new $LambdaImplementor$1.<init>();
    
-   (local.set $function (ref.null $java.lang.Object))
+   (local.set $function (call $m_<init>__void@jsvarargs.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsvarargs.Main.$LambdaImplementor$1 (global.get $jsvarargs.Main.$LambdaImplementor$1.vtable) (global.get $jsvarargs.Main.$LambdaImplementor$1.itable) (i32.const 0) (global.get $jsvarargs.Main.$LambdaImplementor$1.rtt))))
   )
  )
 )
@@ -1340,6 +1344,98 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.GenericFunction)
 
+;;; Code for jsvarargs.Main.$LambdaImplementor$1 [CLASS]
+(type $jsvarargs.Main.$LambdaImplementor$1 (struct
+ (field $vtable (ref null $jsvarargs.Main.$LambdaImplementor$1.vtable)) (field $itable (ref null $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+))
+(type $jsvarargs.Main.$LambdaImplementor$1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object)))
+))
+
+;;; $LambdaImplementor$1()
+(func $m_<init>__void@jsvarargs.Main.$LambdaImplementor$1
+ (param $this (ref null $jsvarargs.Main.$LambdaImplementor$1))
+ (result (ref null $jsvarargs.Main.$LambdaImplementor$1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+  )
+ )
+ (local.get $this)
+)
+
+;;; Object $LambdaImplementor$1.m(T n, T... param)
+(func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $n (ref null $java.lang.Object))
+ (param $param (ref null $javaemul.internal.WasmArray.OfObject))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $n_1 (ref null $java.lang.Object))
+ (local $param_1 (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $jsvarargs.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; U n = ((T) n);
+   
+   (local.set $n_1 (ref.cast (local.get $n) (global.get $java.lang.Object.rtt)))
+   ;; U[] param = ((T[]) param);
+   
+   (local.set $param_1 (ref.cast (local.get $param) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
+   ;; return param;
+   (local.set $return.value (local.get $param_1))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@jsvarargs.Main.$LambdaImplementor$1
+ (block $return.label
+  (block
+   ;; if (jsvarargs.Main.$LambdaImplementor$1.$initialized) return;
+   (if (global.get $f_$initialized__jsvarargs_Main_$LambdaImplementor$1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (jsvarargs.Main.$LambdaImplementor$1.$initialized = true);
+   (global.set $f_$initialized__jsvarargs_Main_$LambdaImplementor$1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $jsvarargs.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.$LambdaImplementor$1();
+   (local.set $return.value (call $$getJsvarargs.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1)
+
 ;;; Code for jsvarargs.QualifiedSuperMethodCall [CLASS]
 (type $jsvarargs.QualifiedSuperMethodCall (struct
  (field $vtable (ref null $jsvarargs.QualifiedSuperMethodCall.vtable)) (field $itable (ref null $itable))
@@ -1634,6 +1730,26 @@
 
  ;;; Code for jsvarargs.Main.SubMain [itable.init]
  (global.set $jsvarargs.Main.SubMain.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for jsvarargs.Main.$LambdaImplementor$1 [vtable.init]
+ (global.set $jsvarargs.Main.$LambdaImplementor$1.vtable
+  (struct.new_with_rtt $jsvarargs.Main.$LambdaImplementor$1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1)
+   (ref.func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1)
+   (rtt.canon $jsvarargs.Main.$LambdaImplementor$1.vtable)
+  )
+ )
+
+ ;;; Code for jsvarargs.Main.$LambdaImplementor$1 [itable.init]
+ (global.set $jsvarargs.Main.$LambdaImplementor$1.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $jsvarargs.Main.$LambdaImplementor$1.itable) (i32.const 0)
+ (struct.new_with_rtt $jsvarargs.Main.GenericFunction.vtable
+  (ref.func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1)
+  (rtt.canon $jsvarargs.Main.GenericFunction.vtable)
+ ))
 
  ;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable.init]
  (global.set $jsvarargs.QualifiedSuperMethodCall.vtable

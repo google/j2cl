@@ -13,7 +13,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.j2cl.transpiler.ast.LambdaTypeDescriptors.createJsFunctionTypeDescriptor;
+import static com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -26,7 +26,7 @@ import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.JsInfo;
-import com.google.j2cl.transpiler.ast.LambdaTypeDescriptors;
+import com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -46,7 +46,7 @@ import java.util.Optional;
  * Implements lambdas by treating the lambda as a JavaScript function that is wrapped in a generic
  * adaptor that implements the required Java interfaces.
  */
-public class ImplementLambdaExpressions extends NormalizationPass {
+public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends NormalizationPass {
 
   private int lambdaCounterPerCompilationUnit = 1;
 
@@ -63,9 +63,9 @@ public class ImplementLambdaExpressions extends NormalizationPass {
       if (hasSharedLambdaAdaptor(typeDescriptor)) {
 
         DeclaredTypeDescriptor adaptorTypeDescriptor =
-            LambdaTypeDescriptors.createLambdaAdaptorTypeDescriptor(typeDescriptor);
+            LambdaAdaptorTypeDescriptors.createLambdaAdaptorTypeDescriptor(typeDescriptor);
         DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-            LambdaTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
+            LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
 
         // Create and add the LambdaAdaptor type for the functional interface.
         newLambdaAdaptors.add(
@@ -92,7 +92,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
               // For these cases create a per instance adaptor.
 
               DeclaredTypeDescriptor adaptorTypeDescriptor =
-                  LambdaTypeDescriptors.createLambdaAdaptorTypeDescriptor(
+                  LambdaAdaptorTypeDescriptors.createLambdaAdaptorTypeDescriptor(
                       typeDescriptor,
                       getCurrentType().getTypeDescriptor(),
                       Optional.of(lambdaCounterPerCompilationUnit++));
@@ -123,7 +123,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
             return MethodCall.Builder.from(
                     getAdaptMethodDescriptor(
                         functionalInterfaceTypeDescriptor,
-                        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(
+                        LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
                             functionalInterfaceTypeDescriptor)))
                 .setArguments(
                     FunctionExpression.Builder.from(functionExpression)
@@ -271,7 +271,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
     adaptorTypeDescriptor = adaptorTypeDescriptor.toUnparameterizedTypeDescriptor();
 
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-        LambdaTypeDescriptors.createJsFunctionTypeDescriptor(
+        LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(
             typeDescriptor.toUnparameterizedTypeDescriptor());
     Type adaptorType =
         new Type(sourcePosition, Visibility.PUBLIC, adaptorTypeDescriptor.getTypeDeclaration());
@@ -289,7 +289,7 @@ public class ImplementLambdaExpressions extends NormalizationPass {
     // Create the forwarding method that forwards calls to the functional interface method to
     // the JsFunction lambda.
     MethodDescriptor adaptorForwarderMethodDescriptor =
-        LambdaTypeDescriptors.getAdaptorForwardingMethod(adaptorTypeDescriptor);
+        LambdaAdaptorTypeDescriptors.getAdaptorForwardingMethod(adaptorTypeDescriptor);
 
     MethodDescriptor jsFunctionMethodDescriptor =
         MethodDescriptor.Builder.from(jsFunctionTypeDescriptor.getSingleAbstractMethodDescriptor())

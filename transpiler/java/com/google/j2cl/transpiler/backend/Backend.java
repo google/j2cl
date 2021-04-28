@@ -41,7 +41,8 @@ import com.google.j2cl.transpiler.passes.ImplementFloatingPointRemainderOperatio
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
-import com.google.j2cl.transpiler.passes.ImplementLambdaExpressions;
+import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaImplementorClasses;
+import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunctionAdaptor;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
@@ -154,7 +155,7 @@ public enum Backend {
 
           // Class structure normalizations.
           () -> new OptimizeAutoValue(experimentalOptimizeAutovalue),
-          ImplementLambdaExpressions::new,
+          ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           NormalizeFunctionExpressions::new,
           // Default constructors and explicit super calls should be synthesized first.
@@ -287,6 +288,7 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
+          ImplementLambdaExpressionsViaImplementorClasses::new,
 
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,

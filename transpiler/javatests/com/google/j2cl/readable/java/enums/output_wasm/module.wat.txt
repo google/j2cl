@@ -10,6 +10,9 @@
 ;;; Code for enums.Enum3 [vtable]
 (global $enums.Enum3.vtable (mut (ref null $enums.Enum3.vtable)) (ref.null $enums.Enum3.vtable))
 
+;;; Code for enums.Enum3.$LambdaImplementor$1 [vtable]
+(global $enums.Enum3.$LambdaImplementor$1.vtable (mut (ref null $enums.Enum3.$LambdaImplementor$1.vtable)) (ref.null $enums.Enum3.$LambdaImplementor$1.vtable))
+
 ;;; Code for enums.Enum1 [static fields]
 (global $f_V1__enums_Enum1 (mut (ref null $enums.Enum1)) (ref.null $enums.Enum1))
 (global $f_V2__enums_Enum1 (mut (ref null $enums.Enum1)) (ref.null $enums.Enum1))
@@ -39,6 +42,9 @@
 (global $f_namesToValuesMap__enums_Enum3_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $$ordinal_VALUE1__enums_Enum3 i32 (i32.const 0))
 (global $f_$initialized__enums_Enum3 (mut i32) (i32.const 0))
+
+;;; Code for enums.Enum3.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__enums_Enum3_$LambdaImplementor$1 (mut i32) (i32.const 0))
 
 ;;; Code for enums.Enum1 [ENUM]
 (type $enums.Enum1 (struct
@@ -613,7 +619,6 @@
 
 ;;; void Enum3.$clinit()
 (func $$clinit__void@enums.Enum3
- (local $v (ref null $java.lang.Integer))
  (block $return.label
   (block
    ;; if (enums.Enum3.$initialized) return;
@@ -630,8 +635,8 @@
    (block
     ;; enums.Enum3.$clinit();
     (call $$clinit__void@enums.Enum3 )
-    ;; (enums.Enum3.VALUE1 = new Enum3.<init>(javaemul.internal.StringPool.$getString_|VALUE1|(),enums.Enum3.VALUE1,function (Integer v){
-    (global.set $f_VALUE1__enums_Enum3 (call $m_<init>__java_lang_String__int__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3 (struct.new_with_rtt $enums.Enum3 (global.get $enums.Enum3.vtable) (global.get $enums.Enum3.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum3.rtt))(call $$getString_|VALUE1|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_VALUE1__enums_Enum3)(ref.null $java.lang.Object)))
+    ;; (enums.Enum3.VALUE1 = new Enum3.<init>(javaemul.internal.StringPool.$getString_|VALUE1|(),enums.Enum3.VALUE1,new $LambdaImplementor$1.<init>()));
+    (global.set $f_VALUE1__enums_Enum3 (call $m_<init>__java_lang_String__int__java_util_function_Function__void_$p_enums_Enum3@enums.Enum3 (struct.new_with_rtt $enums.Enum3 (global.get $enums.Enum3.vtable) (global.get $enums.Enum3.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum3.rtt))(call $$getString_|VALUE1|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_VALUE1__enums_Enum3)(call $m_<init>__void@enums.Enum3.$LambdaImplementor$1 (struct.new_with_rtt $enums.Enum3.$LambdaImplementor$1 (global.get $enums.Enum3.$LambdaImplementor$1.vtable) (global.get $enums.Enum3.$LambdaImplementor$1.itable) (i32.const 0) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))))
    )
    ;; (enums.Enum3.namesToValuesMap = null);
    (global.set $f_namesToValuesMap__enums_Enum3_ (ref.null $java.lang.Object))
@@ -656,6 +661,135 @@
  (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@enums.Enum3)
+
+;;; Code for enums.Enum3.$LambdaImplementor$1 [CLASS]
+(type $enums.Enum3.$LambdaImplementor$1 (struct
+ (field $vtable (ref null $enums.Enum3.$LambdaImplementor$1.vtable)) (field $itable (ref null $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+))
+(type $enums.Enum3.$LambdaImplementor$1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_andThen__java_util_function_Function__java_util_function_Function (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+ (field $m_compose__java_util_function_Function__java_util_function_Function (mut (ref $function.$java.lang.Object__$java.lang.Object)))
+))
+
+;;; $LambdaImplementor$1()
+(func $m_<init>__void@enums.Enum3.$LambdaImplementor$1
+ (param $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (result (ref null $enums.Enum3.$LambdaImplementor$1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+  )
+ )
+ (local.get $this)
+)
+
+;;; R $LambdaImplementor$1.apply(T v)
+(func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $v (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $v_1 (ref null $java.lang.Integer))
+ (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; Integer v = ((Integer) ((T) v));
+   
+   (local.set $v_1 (ref.cast (ref.cast (local.get $v) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Integer.rtt)))
+   ;; return java.lang.Integer.valueOf((1 + v.intValue()));
+   (local.set $return.value (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.add (i32.const 1) (call_ref (local.get $v_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $v_1)))))))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
+
+;;; Function<T, V> $LambdaImplementor$1.andThen(Function<? super R, ? extends V> arg0)
+(func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; return Function.this.andThen(arg0);
+   (local.set $return.value (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+
+;;; Function<V, R> $LambdaImplementor$1.compose(Function<? super V, ? extends T> arg0)
+(func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; return Function.this.compose(arg0);
+   (local.set $return.value (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@enums.Enum3.$LambdaImplementor$1
+ (block $return.label
+  (block
+   ;; if (enums.Enum3.$LambdaImplementor$1.$initialized) return;
+   (if (global.get $f_$initialized__enums_Enum3_$LambdaImplementor$1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (enums.Enum3.$LambdaImplementor$1.$initialized = true);
+   (global.set $f_$initialized__enums_Enum3_$LambdaImplementor$1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+   ;; java.util.function.Function.$clinit();
+   (call $$clinit__void@java.util.function.Function )
+  )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@enums.Enum3.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum3.$LambdaImplementor$1();
+   (local.set $return.value (call $$getEnums.Enum3.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@enums.Enum3.$LambdaImplementor$1)
 
  ;;; Code for enums.Enum1 [vtable.init]
  (global.set $enums.Enum1.vtable
@@ -767,4 +901,28 @@
  (array.set $itable (global.get $enums.Enum3.itable) (i32.const 0)
  (struct.new_with_rtt $java.io.Serializable.vtable
   (rtt.canon $java.io.Serializable.vtable)
+ ))
+
+ ;;; Code for enums.Enum3.$LambdaImplementor$1 [vtable.init]
+ (global.set $enums.Enum3.$LambdaImplementor$1.vtable
+  (struct.new_with_rtt $enums.Enum3.$LambdaImplementor$1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@enums.Enum3.$LambdaImplementor$1)
+   (ref.func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
+   (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+   (ref.func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+   (rtt.canon $enums.Enum3.$LambdaImplementor$1.vtable)
+  )
+ )
+
+ ;;; Code for enums.Enum3.$LambdaImplementor$1 [itable.init]
+ (global.set $enums.Enum3.$LambdaImplementor$1.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $enums.Enum3.$LambdaImplementor$1.itable) (i32.const 0)
+ (struct.new_with_rtt $java.util.function.Function.vtable
+  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@enums.Enum3.$LambdaImplementor$1)
+  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@enums.Enum3.$LambdaImplementor$1)
+  (rtt.canon $java.util.function.Function.vtable)
  ))

@@ -16,6 +16,9 @@
 ;;; Code for libraryinfo.Main.Foo [vtable]
 (global $libraryinfo.Main.Foo.vtable (mut (ref null $libraryinfo.Main.Foo.vtable)) (ref.null $libraryinfo.Main.Foo.vtable))
 
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [vtable]
+(global $libraryinfo.Main.$LambdaImplementor$1.vtable (mut (ref null $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.null $libraryinfo.Main.$LambdaImplementor$1.vtable))
+
 ;;; Code for libraryinfo.Main [static fields]
 (global $f_STATIC_FIELD__libraryinfo_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (global $f_$initialized__libraryinfo_Main (mut i32) (i32.const 0))
@@ -54,6 +57,9 @@
 ;;; Code for libraryinfo.Main.Foo [static fields]
 (global $f_$initialized__libraryinfo_Main_Foo (mut i32) (i32.const 0))
 
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
 ;;; Code for libraryinfo.Main [CLASS]
 (type $libraryinfo.Main (struct
  (field $vtable (ref null $libraryinfo.Main.vtable)) (field $itable (ref null $itable))
@@ -83,7 +89,6 @@
 ;;; void Main.entryPoint()
 (func $m_entryPoint__void@libraryinfo.Main
  (local $jsFunction (ref null $java.lang.Object))
- (local $s (ref null $java.lang.String))
  (block $return.label
   (block
    ;; libraryinfo.Main.$clinit();
@@ -93,8 +98,8 @@
    ;; Function jsFunction = new FunctionImpl.<init>();
    
    (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (global.get $libraryinfo.Main.FunctionImpl.vtable) (global.get $libraryinfo.Main.FunctionImpl.itable) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
-   ;; (jsFunction = function (String s){
-   (local.set $jsFunction (ref.null $java.lang.Object))
+   ;; (jsFunction = new $LambdaImplementor$1.<init>());
+   (local.set $jsFunction (call $m_<init>__void@libraryinfo.Main.$LambdaImplementor$1 (struct.new_with_rtt $libraryinfo.Main.$LambdaImplementor$1 (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable) (global.get $libraryinfo.Main.$LambdaImplementor$1.itable) (i32.const 0) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt))))
    ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
    (call_ref (local.get $jsFunction)(call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0)) (rtt.canon $libraryinfo.Main.Function.vtable)) ))
    ;; new MyJsType.<init>();
@@ -815,6 +820,85 @@
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)
 
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [CLASS]
+(type $libraryinfo.Main.$LambdaImplementor$1 (struct
+ (field $vtable (ref null $libraryinfo.Main.$LambdaImplementor$1.vtable)) (field $itable (ref null $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+))
+(type $libraryinfo.Main.$LambdaImplementor$1.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_apply__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
+))
+
+;;; $LambdaImplementor$1()
+(func $m_<init>__void@libraryinfo.Main.$LambdaImplementor$1
+ (param $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (block $return.label
+  (block
+   ;; Object.this.Object.<init>();
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+  )
+ )
+ (local.get $this)
+)
+
+;;; void $LambdaImplementor$1.apply(String s)
+(func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; libraryinfo.Main.log(s);
+   (call $m_log__java_lang_Object__void@libraryinfo.Main (local.get $s))
+  )
+ )
+)
+(elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@libraryinfo.Main.$LambdaImplementor$1
+ (block $return.label
+  (block
+   ;; if (libraryinfo.Main.$LambdaImplementor$1.$initialized) return;
+   (if (global.get $f_$initialized__libraryinfo_Main_$LambdaImplementor$1)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (libraryinfo.Main.$LambdaImplementor$1.$initialized = true);
+   (global.set $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.$LambdaImplementor$1();
+   (local.set $return.value (call $$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
+
  ;;; Code for libraryinfo.Main [vtable.init]
  (global.set $libraryinfo.Main.vtable
   (struct.new_with_rtt $libraryinfo.Main.vtable
@@ -920,3 +1004,23 @@
 
  ;;; Code for libraryinfo.Main.Foo [itable.init]
  (global.set $libraryinfo.Main.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [vtable.init]
+ (global.set $libraryinfo.Main.$LambdaImplementor$1.vtable
+  (struct.new_with_rtt $libraryinfo.Main.$LambdaImplementor$1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
+   (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
+   (rtt.canon $libraryinfo.Main.$LambdaImplementor$1.vtable)
+  )
+ )
+
+ ;;; Code for libraryinfo.Main.$LambdaImplementor$1 [itable.init]
+ (global.set $libraryinfo.Main.$LambdaImplementor$1.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $libraryinfo.Main.$LambdaImplementor$1.itable) (i32.const 0)
+ (struct.new_with_rtt $libraryinfo.Main.Function.vtable
+  (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
+  (rtt.canon $libraryinfo.Main.Function.vtable)
+ ))

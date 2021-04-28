@@ -28,7 +28,7 @@ import java.util.function.Function;
 
 /** Utility TypeDescriptors methods related to lambda synthesis. */
 // TODO(b/63118697): Simplify this code once TD refactoring makes it easier to implement.
-public class LambdaTypeDescriptors {
+public final class LambdaAdaptorTypeDescriptors {
   private static final String FUNCTIONAL_INTERFACE_JSFUNCTION_CLASS_NAME = "JsFunction";
   private static final String FUNCTIONAL_INTERFACE_ADAPTOR_CLASS_NAME = "LambdaAdaptor";
 
@@ -165,7 +165,7 @@ public class LambdaTypeDescriptors {
         // This is the declaration.
         .setDeclarationDescriptor(
             createRelatedMethodDeclaration(
-                LambdaTypeDescriptors::getAdaptorForwardingMethod, adaptorTypeDescriptor))
+                LambdaAdaptorTypeDescriptors::getAdaptorForwardingMethod, adaptorTypeDescriptor))
         .setEnclosingTypeDescriptor(adaptorTypeDescriptor)
         // Remove the method type parameters as they when moved to the adaptor type.
         .setTypeParameterTypeDescriptors(Collections.emptyList())
@@ -293,4 +293,6 @@ public class LambdaTypeDescriptors {
     }
     return creator.apply(unparameterizedTypeDescriptor);
   }
+
+  private LambdaAdaptorTypeDescriptors() {}
 }
