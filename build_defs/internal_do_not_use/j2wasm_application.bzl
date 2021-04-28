@@ -19,6 +19,7 @@ def _impl_j2wasm_application(ctx):
     args.add("-output", transpile_out)
     args.add("-experimentalBackend", "WASM")
     args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
+    args.add_all(ctx.attr.defines, before_each = "-experimentalDefineForWasm")
     args.add_all(ctx.attr.transpiler_args)
 
     args.add_all(srcs)
@@ -99,6 +100,7 @@ _j2wasm_application = rule(
             cfg = "host",
             executable = True,
         ),
+        "defines": attr.string_list(),
         "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
         "_j2cl_transpiler": attr.label(
             default = Label(
@@ -120,16 +122,41 @@ _j2wasm_application = rule(
     },
 )
 
-def j2wasm_application(name, **kwargs):
+def j2wasm_application(name, defines = dict(), **kwargs):
+    # LINF.IfChange
+    default_defines = {
+        "jre.checkedMode": "ENABLED",
+        "jre.checks.checkLevel": "MINIMAL",
+        "jre.checks.bounds": "AUTO",
+        "jre.checks.api": "AUTO",
+        "jre.checks.numeric": "AUTO",
+        "jre.checks.type": "AUTO",
+        "jre.logging.logLevel": "ALL",
+        "jre.logging.simpleConsoleHandler": "ENABLED",
+    }
+
+    dev_defines = dict(default_defines)
+    dev_defines.update(defines)
+
+    optimized_defines = dict(default_defines)
+    optimized_defines.update({
+        "jre.checkedMode": "DISABLED",
+        "jre.logging.logLevel": "SEVERE",
+        "jre.logging.simpleConsoleHandler": "DISABLED",
+    })
+    optimized_defines.update(defines)
+
     _j2wasm_application(
         name = name,
         binaryen_args = ["-O"],
         transpiler_args = ["-experimentalWasmRemoveAssertStatement"],
         binaryen = "//third_party/binaryen:wasm-opt",
+        defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
         **kwargs
     )
     _j2wasm_application(
         name = name + "_dev",
         binaryen = "//third_party/binaryen:wasm-as",
+        defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
         **kwargs
     )

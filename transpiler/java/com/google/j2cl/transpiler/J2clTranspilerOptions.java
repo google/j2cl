@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
@@ -59,6 +60,9 @@ public abstract class J2clTranspilerOptions {
   @Nullable
   public abstract ImmutableSet<String> getWasmEntryPoints();
 
+  @Nullable
+  public abstract ImmutableMap<String, String> getDefinesForWasm();
+
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder()
         .setExperimentalOptimizeAutovalue(false)
@@ -92,6 +96,8 @@ public abstract class J2clTranspilerOptions {
     public abstract Builder setBackend(Backend backend);
 
     public abstract Builder setWasmEntryPoints(ImmutableSet<String> wasmEntryPoints);
+
+    public abstract Builder setDefinesForWasm(ImmutableMap<String, String> definesForWasm);
 
     public abstract Builder setWasmRemoveAssertStatement(boolean wasmRemoveAssertStatement);
 

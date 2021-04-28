@@ -17,6 +17,7 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Ascii;
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.OutputUtils.Output;
@@ -31,9 +32,12 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.Option;
+import org.kohsuke.args4j.spi.MapOptionHandler;
 
 /**
  * The J2cl builder for Bazel that runs as a worker.
@@ -98,6 +102,9 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-experimentalGenerateWasmExport", hidden = true)
   protected List<String> wasmEntryPoints = new ArrayList<>();
 
+  @Option(name = "-experimentalDefineForWasm", handler = MapOptionHandler.class, hidden = true)
+  Map<String, String> definesForWasm = new HashMap<>();
+
   @Option(name = "-experimentalWasmRemoveAssertStatement", hidden = true)
   protected boolean wasmRemoveAssertStatement = false;
 
@@ -154,6 +161,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setFrontend(FRONTEND)
         .setBackend(this.backend)
         .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
+        .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
         .setWasmRemoveAssertStatement(wasmRemoveAssertStatement)
         .build();
   }

@@ -19,8 +19,21 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 public class Main {
 
+  private static int counter = 0;
+
   public static void main(String[] args) {
     assertTrue(System.getProperty("jre.classMetadata").equals("SIMPLE"));
     assertTrue(System.getProperty("jre.bar", "bar").equals("bar"));
+
+    assertTrue(counter == 0);
+    assertTrue(
+        System.getProperty("jre.classMetadata", getDefaultWithSideEffect()).equals("SIMPLE"));
+    // Side effect should not be lost.
+    assertTrue(counter == 1);
+  }
+
+  private static String getDefaultWithSideEffect() {
+    counter++;
+    return "Foo";
   }
 }

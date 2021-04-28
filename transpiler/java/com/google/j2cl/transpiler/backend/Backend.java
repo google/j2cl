@@ -47,6 +47,7 @@ import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitF
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
+import com.google.j2cl.transpiler.passes.ImplementSystemGetProperty;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
 import com.google.j2cl.transpiler.passes.InsertBoxingConversions;
 import com.google.j2cl.transpiler.passes.InsertCastOnArrayAccess;
@@ -109,6 +110,7 @@ import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
 import com.google.j2cl.transpiler.passes.VerifySingleAstReference;
 import java.nio.file.Path;
+import java.util.Map;
 import java.util.function.Supplier;
 
 /** Drives the backend to generate outputs. */
@@ -145,7 +147,9 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-        boolean experimentalOptimizeAutovalue, boolean removeAssertStatements) {
+        boolean experimentalOptimizeAutovalue,
+        boolean removeAssertStatements,
+        Map<String, String> defines) {
       // TODO(b/117155139): Review the ordering of passes.
       return ImmutableList.of(
           // Pre-verifications
@@ -282,7 +286,9 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-        boolean experimentalOptimizeAutovalue, boolean removeAssertStatements) {
+        boolean experimentalOptimizeAutovalue,
+        boolean removeAssertStatements,
+        Map<String, String> defines) {
       return ImmutableList.of(
           // Pre-verifications
           VerifySingleAstReference::new,
@@ -295,6 +301,7 @@ public enum Backend {
           InsertExplicitSuperCalls::new,
           BridgeMethodsCreator::new,
           EnumMethodsCreator::new,
+          () -> new ImplementSystemGetProperty(defines),
 
           // Must run before Enum normalization
           FixSuperCallQualifiers::new,
@@ -353,7 +360,9 @@ public enum Backend {
   public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-      boolean experimentalOptimizeAutovalue, boolean removeAssertStatements);
+      boolean experimentalOptimizeAutovalue,
+      boolean removeAssertStatements,
+      Map<String, String> defines);
 
   public abstract void generateOutputs(
       Library library,

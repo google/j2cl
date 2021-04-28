@@ -117,7 +117,8 @@ class J2clTranspiler {
             .getBackend()
             .getPassFactories(
                 options.getExperimentalOptimizeAutovalue(),
-                options.getWasmRemoveAssertStatement()));
+                options.getWasmRemoveAssertStatement(),
+                options.getDefinesForWasm()));
   }
 
   private static void runPasses(
