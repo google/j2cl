@@ -64,8 +64,6 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Asserts.rtt)))
  (block $return.label
   (block
-   ;; assert (5 != 4);
-   ;; unimplemented statement AssertStatement
    ;; return 5;
    (local.set $return.value (i32.const 5))
    (br $return.label)
@@ -223,7 +221,6 @@
  (local $com_google_j2cl_readable_localnamecollision_package1_A i32)
  (local $com_google_j2cl_readable_localnamecollision_package2_A i32)
  (local $A i32)
- (local $$qualifier (ref null $localnamecollision.Asserts))
  (local $this (ref null $localnamecollision.LocalNameCollision))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
  (block $return.label
@@ -257,8 +254,6 @@
    (local.set $A (i32.const 1))
    ;; (LocalNameCollision = ((((RuntimeException instanceof LocalNameCollision) ? (true) : (RuntimeException instanceof RuntimeException)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof Class));
    (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (local.get $RuntimeException) (global.get $localnamecollision.LocalNameCollision.rtt)) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $java.lang.RuntimeException.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package1.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package2.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.Class.rtt)))))
-   ;; assert ((Asserts $qualifier = new Asserts.<init>(),$qualifier.n()) == 5);
-   ;; unimplemented statement AssertStatement
   )
  )
 )

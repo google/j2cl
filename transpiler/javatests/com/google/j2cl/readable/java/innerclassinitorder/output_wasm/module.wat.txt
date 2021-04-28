@@ -221,8 +221,6 @@
   (block
    ;; new OuterRefFromSuperCtorCall.<init>(InnerClassInitOrder.this);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.rtt))(local.get $this)))
-   ;; assert (InnerClassInitOrder.this.number == 100);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -237,8 +235,6 @@
   (block
    ;; new OuterRefFromThisCtorCall.<init>(InnerClassInitOrder.this);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.rtt))(local.get $this)))
-   ;; assert (InnerClassInitOrder.this.number == 1100);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -255,14 +251,6 @@
    ;; ESOuter o = new ESOuter.<init>();
    
    (local.set $o (call $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.itable) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.ESOuter.rtt))))
-   ;; assert (1 == new ESInner.<init>(o).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (2 == new ESInner.<init>(o,2).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (1 == new ESInnerSubclass.<init>(o).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (2 == new ESInnerSubclass.<init>(2,o).value);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -279,14 +267,6 @@
    ;; ESWGOuter<String> o = new ESWGOuter.<init>();
    
    (local.set $o (call $m_<init>__void_$p_innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.ESWGOuter (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.itable) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.ESWGOuter.rtt))))
-   ;; assert (1 == new ESWGInner.<init>(o).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (2 == new ESWGInner.<init>(o,2).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (1 == new ESWGInnerSubclass.<init>(o).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (2 == new ESWGInnerSubclass.<init>(2,o).value);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -304,21 +284,9 @@
    ;; P1<?> p1 = new P1.<init>();
    
    (local.set $p1 (call $m_<init>__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1 (global.get $innerclassinitorder.InnerClassInitOrder.P1.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.P1.itable) (i32.const 0) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.P1.rtt))))
-   ;; assert (1 == p1.value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (2 == new P1.<init>(2).value);
-   ;; unimplemented statement AssertStatement
    ;; P2<?, ?> p2 = new P2.<init>(p1);
    
    (local.set $p2 (call $m_<init>__innerclassinitorder_InnerClassInitOrder_P1__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.P1.P2 (global.get $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.P1.P2.itable) (i32.const 0) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.P1) (global.get $innerclassinitorder.InnerClassInitOrder.P1.P2.rtt))(local.get $p1)))
-   ;; assert (1 == p2.value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (2 == new P2.<init>(p1,2).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (1 == new P3.<init>(p2).value);
-   ;; unimplemented statement AssertStatement
-   ;; assert (2 == new P3.<init>(p2,2).value);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -333,8 +301,6 @@
   (block
    ;; new InnerClass.<init>(InnerClassInitOrder.this);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.InnerClass (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt))(local.get $this)))
-   ;; assert (InnerClassInitOrder.this.number == 1111);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -401,8 +367,6 @@
      
     )
    )
-   ;; assert (InnerClassInitOrder.this.number == 1156);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -419,8 +383,6 @@
    ;; OuterIsNotSuper x = new OuterIsNotSuper.<init>(InnerClassInitOrder.this.outerIsSuper);
    
    (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.rtt))(struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
-   ;; assert (2 == x.getValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -437,8 +399,6 @@
    ;; OuterIsNotSuper x = new $2.<init>(InnerClassInitOrder.this,InnerClassInitOrder.this.outerIsSuper);
    
    (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.2 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.2 (global.get $innerclassinitorder.InnerClassInitOrder.2.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.2.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.2.rtt))(local.get $this)(struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
-   ;; assert (2 == x.getValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -455,8 +415,6 @@
    ;; TestQualifiedSuperCall x = new TestQualifiedSuperCall.<init>();
    
    (local.set $x (call $m_<init>__void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.rtt))))
-   ;; assert (2 == x.getValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -473,8 +431,6 @@
    ;; TestQualifiedSuperCall x = new $3.<init>(InnerClassInitOrder.this);
    
    (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.3 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.3 (global.get $innerclassinitorder.InnerClassInitOrder.3.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.3.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.3.rtt))(local.get $this)))
-   ;; assert (2 == x.getValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -487,10 +443,6 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
  (block $return.label
   (block
-   ;; assert (1 == InnerClassInitOrder.this.outerIsSuper.checkDispatchFromSub1());
-   ;; unimplemented statement AssertStatement
-   ;; assert (1 == InnerClassInitOrder.this.outerIsSuper.checkDispatchFromSub2());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -507,8 +459,6 @@
    ;; OuterIsNotSuper x = InnerClassInitOrder.this.outerIsSuper.unqualifiedAlloc();
    
    (local.set $x (call_ref (struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))(struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (struct.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $vtable(struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))))
-   ;; assert (2 == x.getValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -525,8 +475,6 @@
    ;; TestUnqualifiedSuperCall x = new TestUnqualifiedSuperCall.<init>(InnerClassInitOrder.this.outerIsSuper);
    
    (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer__void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.rtt))(struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
-   ;; assert (2 == x.getValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -543,8 +491,6 @@
    ;; TestUnqualifiedSuperCall x = new $4.<init>(InnerClassInitOrder.this,InnerClassInitOrder.this.outerIsSuper);
    
    (local.set $x (call $m_<init>__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.4 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.4 (global.get $innerclassinitorder.InnerClassInitOrder.4.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.4.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (ref.null $innerclassinitorder.InnerClassInitOrder) (global.get $innerclassinitorder.InnerClassInitOrder.4.rtt))(local.get $this)(struct.get $innerclassinitorder.InnerClassInitOrder $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_(local.get $this))))
-   ;; assert (2 == x.getValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )

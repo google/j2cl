@@ -958,58 +958,30 @@
    (local.set $boxr (ref.eq (local.get $boxB1) (local.get $boxB2)))
    ;; (br = (boxB1 == boxB2));
    (local.set $br (ref.eq (local.get $boxB1) (local.get $boxB2)))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = !(boxB1 == boxB2));
    (local.set $boxr (i32.eqz (ref.eq (local.get $boxB1) (local.get $boxB2))))
    ;; (br = !(boxB1 == boxB2));
    (local.set $br (i32.eqz (ref.eq (local.get $boxB1) (local.get $boxB2))))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (boxB1.booleanValue() ^ boxB2.booleanValue()));
    (local.set $boxr (i32.xor (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))))
    ;; (br = (boxB1.booleanValue() ^ boxB2.booleanValue()));
    (local.set $br (i32.xor (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (boxB1.booleanValue() & boxB2.booleanValue()));
    (local.set $boxr (i32.and (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))))
    ;; (br = (boxB1.booleanValue() & boxB2.booleanValue()));
    (local.set $br (i32.and (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (boxB1.booleanValue() | boxB2.booleanValue()));
    (local.set $boxr (i32.or (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))))
    ;; (br = (boxB1.booleanValue() | boxB2.booleanValue()));
    (local.set $br (i32.or (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (boxB1.booleanValue()) ? (boxB2.booleanValue()) : (false));
    (local.set $boxr (if (result i32) (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (then (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))) (else (i32.const 0))))
    ;; (br = (boxB1.booleanValue()) ? (boxB2.booleanValue()) : (false));
    (local.set $br (if (result i32) (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (then (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2))))) (else (i32.const 0))))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (boxB1.booleanValue()) ? (true) : (boxB2.booleanValue()));
    (local.set $boxr (if (result i32) (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (then (i32.const 1)) (else (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2)))))))
    ;; (br = (boxB1.booleanValue()) ? (true) : (boxB2.booleanValue()));
    (local.set $br (if (result i32) (call_ref (local.get $boxB1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB1)))) (then (i32.const 1)) (else (call_ref (local.get $boxB2)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxB2)))))))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (Boolean $qualifier = ((boxB1 = boxB2),boxB1),$qualifier.booleanValue()));
    (local.set $boxr (block (result i32)
     
@@ -1028,10 +1000,6 @@
     ))
     (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_1))))
    ))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (Boolean $qualifier = ((boxB1 = java.lang.Boolean.valueOf((boxB1.booleanValue() & boxB2.booleanValue()))),boxB1),$qualifier.booleanValue()));
    (local.set $boxr (block (result i32)
     
@@ -1050,10 +1018,6 @@
     ))
     (call_ref (local.get $$qualifier_3)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_3))))
    ))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (Boolean $qualifier = ((boxB1 = java.lang.Boolean.valueOf((boxB1.booleanValue() | boxB2.booleanValue()))),boxB1),$qualifier.booleanValue()));
    (local.set $boxr (block (result i32)
     
@@ -1072,10 +1036,6 @@
     ))
     (call_ref (local.get $$qualifier_5)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_5))))
    ))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; (boxr = (Boolean $qualifier = ((boxB1 = java.lang.Boolean.valueOf((boxB1.booleanValue() ^ boxB2.booleanValue()))),boxB1),$qualifier.booleanValue()));
    (local.set $boxr (block (result i32)
     
@@ -1094,10 +1054,6 @@
     ))
     (call_ref (local.get $$qualifier_7)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier_7))))
    ))
-   ;; assert boxr;
-   ;; unimplemented statement AssertStatement
-   ;; assert br;
-   ;; unimplemented statement AssertStatement
    ;; Boolean boxB = null;
    
    (local.set $boxB (ref.null $java.lang.Boolean))
@@ -1151,28 +1107,12 @@
    ;; boolean b = false;
    
    (local.set $b (i32.const 0))
-   ;; assert (boxB == boxB);
-   ;; unimplemented statement AssertStatement
-   ;; assert (boxB.booleanValue() == b);
-   ;; unimplemented statement AssertStatement
-   ;; assert (b != b);
-   ;; unimplemented statement AssertStatement
-   ;; assert (b != boxB.booleanValue());
-   ;; unimplemented statement AssertStatement
    ;; Integer boxI = new Integer.<init>(1);
    
    (local.set $boxI (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (global.get $java.lang.Integer.itable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; int i = 1;
    
    (local.set $i (i32.const 1))
-   ;; assert (boxI == boxI);
-   ;; unimplemented statement AssertStatement
-   ;; assert (boxI.intValue() == i);
-   ;; unimplemented statement AssertStatement
-   ;; assert (i != i);
-   ;; unimplemented statement AssertStatement
-   ;; assert (i != boxI.intValue());
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -1193,10 +1133,6 @@
    ;; boolean b = true;
    
    (local.set $b (i32.const 1))
-   ;; assert boxB.booleanValue();
-   ;; unimplemented statement AssertStatement
-   ;; assert b;
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -1217,8 +1153,6 @@
    ;; long l = n.longValue();
    
    (local.set $l (call_ref (local.get $n)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $n)))))
-   ;; assert (l == 10);
-   ;; unimplemented statement AssertStatement
    ;; (n = java.lang.Long.valueOf((n.longValue() + 1)));
    (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call_ref (local.get $n)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $n)))) (i64.const 1))))
    ;; (l = (Local<Long, T> $qualifier = new $1Local.<init>(),$qualifier.toLong(java.lang.Long.valueOf(11))));
@@ -1227,8 +1161,6 @@
     (local.set $$qualifier (call $m_<init>__void_$pp_autoboxing@autoboxing.AutoBoxing.1Local (struct.new_with_rtt $autoboxing.AutoBoxing.1Local (global.get $autoboxing.AutoBoxing.1Local.vtable) (global.get $autoboxing.AutoBoxing.1Local.itable) (i32.const 0) (global.get $autoboxing.AutoBoxing.1Local.rtt))))
     (call_ref (local.get $$qualifier)(call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 11))(struct.get $autoboxing.AutoBoxing.1Local.vtable $m_toLong__java_lang_Long__long_$pp_autoboxing (struct.get $autoboxing.AutoBoxing.1Local $vtable(local.get $$qualifier))))
    ))
-   ;; assert (l == 11);
-   ;; unimplemented statement AssertStatement
   )
  )
 )
@@ -1250,8 +1182,6 @@
    ;; long l = n.longValue();
    
    (local.set $l (call_ref (local.get $n)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $n)))))
-   ;; assert (l == 10);
-   ;; unimplemented statement AssertStatement
    ;; (n = java.lang.Long.valueOf((n.longValue() + 1)));
    (local.set $n (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.add (call_ref (local.get $n)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $n)))) (i64.const 1))))
    ;; (l = (Local<Long, T> $qualifier = new $2Local.<init>(),$qualifier.toLong(java.lang.Long.valueOf(11))));
@@ -1260,8 +1190,6 @@
     (local.set $$qualifier (call $m_<init>__void_$pp_autoboxing@autoboxing.AutoBoxing.2Local (struct.new_with_rtt $autoboxing.AutoBoxing.2Local (global.get $autoboxing.AutoBoxing.2Local.vtable) (global.get $autoboxing.AutoBoxing.2Local.itable) (i32.const 0) (global.get $autoboxing.AutoBoxing.2Local.rtt))))
     (call_ref (local.get $$qualifier)(call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 11))(struct.get $autoboxing.AutoBoxing.2Local.vtable $m_toLong__java_lang_Long__long_$pp_autoboxing (struct.get $autoboxing.AutoBoxing.2Local $vtable(local.get $$qualifier))))
    ))
-   ;; assert (l == 11);
-   ;; unimplemented statement AssertStatement
    ;; int i = (Integer $qualifier = java.lang.Integer.valueOf(10),$qualifier.intValue());
    
    (local.set $i (block (result i32)
@@ -1347,8 +1275,6 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.1Local.rtt)))
  (block $return.label
   (block
-   ;; assert l.equals(java.lang.Long.valueOf(11));
-   ;; unimplemented statement AssertStatement
    ;; return l.longValue();
    (local.set $return.value (call_ref (local.get $l)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $l)))))
    (br $return.label)
@@ -1432,8 +1358,6 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.2Local.rtt)))
  (block $return.label
   (block
-   ;; assert l.equals(java.lang.Long.valueOf(11));
-   ;; unimplemented statement AssertStatement
    ;; return l.longValue();
    (local.set $return.value (call_ref (local.get $l)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $l)))))
    (br $return.label)
