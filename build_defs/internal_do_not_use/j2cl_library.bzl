@@ -30,9 +30,31 @@ load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2cl_library_build_test.bzl", "build_test")
 
+_J2WASM_PACKAGES = [
+    "java/com/google/apps/framework/types",
+    "java/com/google/async/threadsafety",
+    "java/com/google/common",
+    "java/com/google/devtools/staticanalysis/errorprone",
+    "java/com/google/graphics/color",
+    "java/com/google/gwt/corp/emul",
+    "java/com/google/gwt/corp/serialization",
+    "java/com/google/i18n/identifiers",
+    "java/com/google/thirdparty/publicsuffix",
+    "java/com/google/visualization/bigpicture/insights",
+    "third_party/java/auto",
+    "third_party/java/jsr250_annotations",
+    "third_party/java/jsr330_inject",
+    "third_party/java/re2j",
+    "third_party/java_src/google_common/current",
+    "third_party/java_src/j2cl",
+    "third_party/java_src/jsr330_inject",
+    "third_party/java_src/re2j",
+]
+
 def j2cl_library(
         name,
         generate_build_test = None,
+        generate_j2wasm_library = None,
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
 
@@ -60,7 +82,14 @@ def j2cl_library(
 
     j2wasm_library_name = j2wasm_common.to_j2wasm_name(name)
 
-    if not native.existing_rule(j2wasm_library_name):
+    if generate_j2wasm_library == None:
+        # By default refer back to allow list for implicit j2wasm target generation.
+        generate_j2wasm_library = (
+            not native.existing_rule(j2wasm_library_name) and
+            any([p for p in _J2WASM_PACKAGES if native.package_name().startswith(p)])
+        )
+
+    if generate_j2wasm_library:
         j2wasm_args = _filter_j2wasm_attrs(dict(kwargs))
 
         _to_j2wasm_targets("deps", j2wasm_args)
