@@ -255,10 +255,48 @@ final class ExpressionTranspiler {
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(
               format(" (global.get %s))", environment.getRttGlobalName(testTypeDescriptor)));
-          return false;
+        } else {
+          DeclaredTypeDescriptor targetTypeDescriptor = (DeclaredTypeDescriptor) testTypeDescriptor;
+          int interfaceSlot =
+              environment.getInterfaceSlot(targetTypeDescriptor.getTypeDeclaration());
+          if (interfaceSlot == -1) {
+            // The interface does not have implementors, hence instanceof is false.
+            sourceBuilder.append("(i32.const 0)");
+            return false;
+          }
+          sourceBuilder.append("(if (result i32) ");
+          // Classes have itables that are large enough to contain the highest slot of its
+          // implemented interfaces. For example a class that does not implement any interface will
+          // have an itable of size 0. So given an interface slot, we first need to see if the slot
+          // is past the end of the itable.
+          sourceBuilder.indent();
+          sourceBuilder.newLine();
+          sourceBuilder.append(
+              String.format(
+                  "(i32.ge_u (i32.const %d) (array.len $itable (struct.get $java.lang.Object"
+                      + " $itable ",
+                  interfaceSlot));
+          render(instanceOfExpression.getExpression());
+          sourceBuilder.append("))) ");
+          sourceBuilder.newLine();
+          // Interface slot is past the end.
+          sourceBuilder.append("(then (i32.const 0))");
+          sourceBuilder.newLine();
+          // itable could contain the interface, so retrieve the vtable in the specific interface
+          // slot and check that it is the vtable for the interface in the instanceof; recall
+          // that slots are shared and a class that does not implement this interface might
+          // implement a different interface that shares the same slot.
+          sourceBuilder.append(
+              "(else (ref.test (array.get $itable (struct.get $java.lang.Object $itable ");
+          render(instanceOfExpression.getExpression());
+          sourceBuilder.append(
+              String.format(
+                  " ) (i32.const %d)) (rtt.canon %s)))",
+                  interfaceSlot, environment.getWasmVtableTypeName(targetTypeDescriptor)));
+          sourceBuilder.unindent();
+          sourceBuilder.newLine();
+          sourceBuilder.append(")");
         }
-        // TODO(b/170691636): handle interface instanceof expressions.
-        renderUnimplementedExpression(instanceOfExpression);
         return false;
       }
 
@@ -310,8 +348,7 @@ final class ExpressionTranspiler {
                 String.format(
                     ") (i32.const %d)) (rtt.canon %s)) ",
                     environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration()),
-                    environment.getWasmVtableTypeName(
-                        enclosingTypeDescriptor.toUnparameterizedTypeDescriptor())));
+                    environment.getWasmVtableTypeName(enclosingTypeDescriptor)));
           }
 
           sourceBuilder.append("))");

@@ -80,9 +80,17 @@
    ;; boolean b;
    
    ;; (b = o instanceof Serializable);
-   (local.set $b (i32.const 0))
+   (local.set $b (if (result i32) 
+    (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (local.get $o)))) 
+    (then (i32.const 0))
+    (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (local.get $o) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
+   ))
    ;; (b = new $1.<init>(InstanceofExpressions.this) instanceof Serializable);
-   (local.set $b (i32.const 0))
+   (local.set $b (if (result i32) 
+    (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (call $m_<init>__instanceofexpression_InstanceofExpressions__void_$pp_instanceofexpression@instanceofexpression.InstanceofExpressions.1 (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1 (global.get $instanceofexpression.InstanceofExpressions.1.vtable) (global.get $instanceofexpression.InstanceofExpressions.1.itable) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions) (global.get $instanceofexpression.InstanceofExpressions.1.rtt))(local.get $this))))) 
+    (then (i32.const 0))
+    (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (call $m_<init>__instanceofexpression_InstanceofExpressions__void_$pp_instanceofexpression@instanceofexpression.InstanceofExpressions.1 (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1 (global.get $instanceofexpression.InstanceofExpressions.1.vtable) (global.get $instanceofexpression.InstanceofExpressions.1.itable) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions) (global.get $instanceofexpression.InstanceofExpressions.1.rtt))(local.get $this)) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
+   ))
   )
  )
 )

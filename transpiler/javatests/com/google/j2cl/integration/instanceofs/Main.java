@@ -15,9 +15,11 @@
  */
 package com.google.j2cl.integration.instanceofs;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.Wasm;
 
 /**
  * Test instanceof array.
@@ -29,16 +31,22 @@ public class Main {
     testInstanceOf_array();
     testInstanceOf_boxedTypes();
     testInstanceOf_string();
+    testInstanceOf_sideEffects();
   }
 
   private static void testInstanceOf_class() {
+    class SomeClass {}
     Object object = new SomeClass();
     assertTrue(object instanceof SomeClass);
     assertTrue(object instanceof Object);
     assertTrue(!(object instanceof String));
     assertTrue("A String Literal" instanceof String);
     assertTrue(!(null instanceof Object));
+  }
 
+  // TODO(b/170691676): Enable when try/catch is implemented.
+  @Wasm("nop")
+  private static void testInstanceOf_sideEffects() {
     try {
       assertTrue(hasSideEffect() instanceof Object);
       assertTrue(false);
@@ -52,8 +60,6 @@ public class Main {
     }
   }
 
-  private static class SomeClass {}
-
   private static Object hasSideEffect() {
     throw new IllegalArgumentException();
   }
@@ -63,8 +69,8 @@ public class Main {
     assertTrue(object instanceof ParentInterface);
     assertTrue(object instanceof ChildInterface);
     assertTrue(object instanceof GenericInterface);
-    assertTrue(!(object instanceof Serializable));
-    assertTrue(!(object instanceof Cloneable));
+    assertFalse(object instanceof Serializable);
+    assertFalse(object instanceof Cloneable);
 
     // Serializable and Cloneable have custom isInstance implementations; make sure those
     // still behave correctly when classes implement the interface.
@@ -75,15 +81,32 @@ public class Main {
     assertTrue(object instanceof Cloneable);
   }
 
-  public interface ParentInterface {}
+  public interface ParentInterface {
+    // TODO(b/186523011): remove the dummy method that is only added to work around the type
+    // canonicalization issue in WASM.
+    default void dummy() {}
+    ;
+  }
 
-  public interface ChildInterface extends ParentInterface {}
+  public interface ChildInterface extends ParentInterface {
+    // TODO(b/186523011): remove the dummy method that is only added to work around the type
+    // canonicalization issue in WASM.
+    default void dummy(long l) {}
+    ;
+  }
 
-  public interface GenericInterface<T> {}
+  public interface GenericInterface<T> {
+    // TODO(b/186523011): remove the dummy method that is only added to work around the type
+    // canonicalization issue in WASM.
+    default void dummy(int i) {}
+    ;
+  }
 
   private static class Implementor implements ChildInterface, GenericInterface<String> {}
 
   @SuppressWarnings("cast")
+  // TODO(b/184675805): Enable when array metadata is fully implemented.
+  @Wasm("nop")
   private static void testInstanceOf_array() {
     Object object = new Object();
     assertTrue(object instanceof Object);
@@ -176,6 +199,9 @@ public class Main {
   }
 
   @SuppressWarnings("BoxedPrimitiveConstructor")
+  // TODO(b/186523011): Enable when the type canonicalization rtt issue is fixed.
+  // Due to type canonicalization some rtts that should be different end up being the same.
+  @Wasm("nop")
   private static void testInstanceOf_boxedTypes() {
     Object o = new Byte((byte) 1);
     assertTrue(o instanceof Byte);

@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
+import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -38,6 +39,31 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
+          public Expression rewriteInstanceOf(InstanceOfExpression instanceOfExpression) {
+            Expression expression = instanceOfExpression.getExpression();
+
+            // instanceof Interface evaluates the expression twice.
+            if (!expression.isIdempotent()
+                && instanceOfExpression.getTestTypeDescriptor().isInterface()) {
+              Variable qualifierVariable =
+                  Variable.newBuilder()
+                      .setName("$expression")
+                      .setFinal(true)
+                      .setTypeDescriptor(expression.getTypeDescriptor())
+                      .build();
+              return MultiExpression.newBuilder()
+                  .setExpressions(
+                      VariableDeclarationExpression.newBuilder()
+                          .addVariableDeclaration(qualifierVariable, expression)
+                          .build(),
+                      InstanceOfExpression.Builder.from(instanceOfExpression)
+                          .setExpression(qualifierVariable.createReference())
+                          .build())
+                  .build();
+            }
+            return instanceOfExpression;
+          }
+
           @Override
           public Expression rewriteMethodCall(MethodCall methodCall) {
             Expression qualifier = methodCall.getQualifier();
