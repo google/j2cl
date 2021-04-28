@@ -112,7 +112,12 @@ class J2clTranspiler {
 
   private void normalizeLibrary(Library library) {
     runPasses(
-        library, options.getBackend().getPassFactories(options.getExperimentalOptimizeAutovalue()));
+        library,
+        options
+            .getBackend()
+            .getPassFactories(
+                options.getExperimentalOptimizeAutovalue(),
+                options.getWasmRemoveAssertStatement()));
   }
 
   private static void runPasses(

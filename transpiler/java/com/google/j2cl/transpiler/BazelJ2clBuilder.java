@@ -98,6 +98,9 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Option(name = "-experimentalGenerateWasmExport", hidden = true)
   protected List<String> wasmEntryPoints = new ArrayList<>();
 
+  @Option(name = "-experimentalWasmRemoveAssertStatement", hidden = true)
+  protected boolean wasmRemoveAssertStatement = false;
+
   @Override
   protected void run(Problems problems) {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
@@ -151,6 +154,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setFrontend(FRONTEND)
         .setBackend(this.backend)
         .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
+        .setWasmRemoveAssertStatement(wasmRemoveAssertStatement)
         .build();
   }
 

@@ -32,6 +32,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/arrayoutofbounds:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/arrayreadwrite:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/arrayreadwrite:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/assertremoved:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/assertremoved:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/assertsimple:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/assertsimple:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/autoboxing:optimized_js",

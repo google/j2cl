@@ -96,6 +96,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
+import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
@@ -143,7 +144,7 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-        boolean experimentalOptimizeAutovalue) {
+        boolean experimentalOptimizeAutovalue, boolean removeAssertStatements) {
       // TODO(b/117155139): Review the ordering of passes.
       return ImmutableList.of(
           // Pre-verifications
@@ -280,7 +281,7 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-        boolean experimentalOptimizeAutovalue) {
+        boolean experimentalOptimizeAutovalue, boolean removeAssertStatements) {
       return ImmutableList.of(
           // Pre-verifications
           VerifySingleAstReference::new,
@@ -328,6 +329,7 @@ public enum Backend {
           NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
           ExtractNonIdempotentExpressions::new,
+          removeAssertStatements ? RemoveAssertStatements::new : ImplementAssertStatements::new,
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.
@@ -349,7 +351,7 @@ public enum Backend {
   public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-      boolean experimentalOptimizeAutovalue);
+      boolean experimentalOptimizeAutovalue, boolean removeAssertStatements);
 
   public abstract void generateOutputs(
       Library library,

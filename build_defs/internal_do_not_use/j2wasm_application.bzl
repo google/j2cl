@@ -19,6 +19,7 @@ def _impl_j2wasm_application(ctx):
     args.add("-output", transpile_out)
     args.add("-experimentalBackend", "WASM")
     args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
+    args.add_all(ctx.attr.transpiler_args)
 
     args.add_all(srcs)
 
@@ -57,7 +58,7 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-reference-types")
     args.add("--enable-sign-ext")
     args.add("--enable-nontrapping-float-to-int")
-    args.add_all(ctx.attr.opt_args)
+    args.add_all(ctx.attr.binaryen_args)
     args.add("-o", ctx.outputs.wasm)
     args.add(ctx.outputs.wat)
 
@@ -92,7 +93,8 @@ _j2wasm_application = rule(
     attrs = {
         "deps": attr.label_list(providers = [J2wasmInfo]),
         "entry_points": attr.string_list(),
-        "opt_args": attr.string_list(),
+        "binaryen_args": attr.string_list(),
+        "transpiler_args": attr.string_list(),
         "binaryen": attr.label(
             cfg = "host",
             executable = True,
@@ -121,7 +123,8 @@ _j2wasm_application = rule(
 def j2wasm_application(name, **kwargs):
     _j2wasm_application(
         name = name,
-        opt_args = ["-O"],
+        binaryen_args = ["-O"],
+        transpiler_args = ["-experimentalWasmRemoveAssertStatement"],
         binaryen = "//third_party/binaryen:wasm-opt",
         **kwargs
     )

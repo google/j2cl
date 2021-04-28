@@ -54,11 +54,15 @@ public abstract class J2clTranspilerOptions {
 
   public abstract Backend getBackend();
 
+  public abstract boolean getWasmRemoveAssertStatement();
+
   @Nullable
   public abstract ImmutableSet<String> getWasmEntryPoints();
 
   public static Builder newBuilder() {
-    return new AutoValue_J2clTranspilerOptions.Builder().setExperimentalOptimizeAutovalue(false);
+    return new AutoValue_J2clTranspilerOptions.Builder()
+        .setExperimentalOptimizeAutovalue(false)
+        .setWasmRemoveAssertStatement(false);
   }
 
   /** A Builder for J2clTranspilerOptions. */
@@ -88,6 +92,8 @@ public abstract class J2clTranspilerOptions {
     public abstract Builder setBackend(Backend backend);
 
     public abstract Builder setWasmEntryPoints(ImmutableSet<String> wasmEntryPoints);
+
+    public abstract Builder setWasmRemoveAssertStatement(boolean wasmRemoveAssertStatement);
 
     abstract J2clTranspilerOptions autoBuild();
 
