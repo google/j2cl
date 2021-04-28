@@ -19,6 +19,7 @@ def _compile(
         output_jar = None,
         javac_opts = [],
         internal_transpiler_flags = {},
+        generate_kythe_action = False,
         artifact_suffix = ""):
     name = ctx.label.name + artifact_suffix
 
@@ -48,6 +49,7 @@ def _compile(
         exported_plugins,
         output_jar,
         javac_opts,
+        generate_kythe_action = generate_kythe_action,
     )
 
     generate_tree_artifact = ctx.var.get("J2CL_TREE_ARTIFACTS", None) == "1"
@@ -153,6 +155,7 @@ def _java_compile(
         exported_plugins = [],
         output_jar = None,
         javac_opts = [],
+        generate_kythe_action = False,
         mnemonic = "J2cl"):
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
@@ -170,6 +173,24 @@ def _java_compile(
     else:
         java_toolchain = ctx.attr._java_toolchain
         host_javabase = ctx.attr._host_javabase
+
+    if generate_kythe_action and ctx.var.get("GROK_ELLIPSIS_BUILD", None):
+        # An unused JAR that is only generated so that we run javac with the non-stripped sources
+        # that kythe can index. Nothing should depend upon this output as it is not guaranteed
+        # to succeed; it is only best effort for indexing.
+        indexed_output_jar = ctx.actions.declare_file(name + "_j2cl_indexable.jar")
+        java_common.compile(
+            ctx,
+            source_files = srcs,
+            deps = deps,
+            exports = exports,
+            plugins = plugins,
+            exported_plugins = exported_plugins,
+            output = indexed_output_jar,
+            java_toolchain = java_toolchain,
+            host_javabase = host_javabase,
+            javac_opts = default_j2cl_javac_opts + javac_opts,
+        )
 
     return java_common.compile(
         ctx,
