@@ -271,7 +271,8 @@ public class TypeDescriptors {
     return isPrimitiveShort(typeDescriptor)
         || isPrimitiveByte(typeDescriptor)
         || isPrimitiveChar(typeDescriptor)
-        || isPrimitiveInt(typeDescriptor);
+        || isPrimitiveInt(typeDescriptor)
+        || isPrimitiveLong(typeDescriptor);
   }
 
   public static boolean isBoxedOrPrimitiveType(TypeDescriptor typeDescriptor) {

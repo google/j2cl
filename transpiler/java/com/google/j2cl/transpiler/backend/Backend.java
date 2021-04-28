@@ -37,6 +37,7 @@ import com.google.j2cl.transpiler.passes.ImplementArraysAsClasses;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaConstructors;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaGetters;
+import com.google.j2cl.transpiler.passes.ImplementDivisionOperations;
 import com.google.j2cl.transpiler.passes.ImplementFloatingPointRemainderOperation;
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
@@ -323,6 +324,7 @@ public enum Backend {
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed */ true),
           () -> new InsertNarrowingPrimitiveConversions(/* treatFloatAsDouble */ false),
           () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),
+          ImplementDivisionOperations::new,
           ImplementFloatingPointRemainderOperation::new,
           NormalizeSwitchStatements::new,
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'

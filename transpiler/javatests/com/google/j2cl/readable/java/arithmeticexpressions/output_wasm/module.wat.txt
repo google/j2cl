@@ -125,7 +125,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
  (block $return.label
   (block
-   ;; int a = 10,int b = (int $value = a,(a = (a + 1)),$value),int c = (int $value = a,(a = (a - 1)),$value),int d = ((a = (a + 1)),a),int e = ((a = (a - 1)),a),int f = (0 - a),int g = a,int h = (-1 ^ a),int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4)),int p = (((1 / 2) * 3) % 4);
+   ;; int a = 10,int b = (int $value = a,(a = (a + 1)),$value),int c = (int $value = a,(a = (a - 1)),$value),int d = ((a = (a + 1)),a),int e = ((a = (a - 1)),a),int f = (0 - a),int g = a,int h = (-1 ^ a),int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4)),int p = ((javaemul.internal.Primitives.safeDivision(1,2) * 3) % 4);
    
    (local.set $a (i32.const 10))
    (local.set $b (block (result i32)
@@ -153,23 +153,23 @@
    (local.set $h (i32.xor (i32.const -1) (local.get $a)))
    (local.set $i (i32.sub (i32.add (i32.add (i32.const 1) (i32.const 1)) (i32.const 2)) (i32.const 5)))
    (local.set $j (i32.mul (i32.add (i32.const 1) (i32.const 2)) (i32.add (i32.const 3) (i32.const 4))))
-   (local.set $p (i32.rem_s (i32.mul (i32.div_s (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4)))
+   (local.set $p (i32.rem_s (i32.mul (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (i32.const 1)(i32.const 2)) (i32.const 3)) (i32.const 4)))
    ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (javaemul.internal.Primitives.widenLongToDouble(java.lang.Long.MAX_VALUE) != 9.223372036854778E18);
    
    (local.set $k (i32.eqz (i32.eq (i32.add (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4))))
    (local.set $l (i32.ne (i32.add (i32.const 1) (i32.const 2)) (i32.const 4)))
    (local.set $m (f64.ne (f64.convert_i64_s (global.get $f_MAX_VALUE__java_lang_Long)) (f64.const 9.223372036854778E18)))
-   ;; double o = (javaemul.internal.Primitives.widenIntToDouble(((5 + 1) / 2)) - 0.0);
+   ;; double o = (javaemul.internal.Primitives.widenIntToDouble(javaemul.internal.Primitives.safeDivision((5 + 1),2)) - 0.0);
    
-   (local.set $o (f64.sub (f64.convert_i32_s (i32.div_s (i32.add (i32.const 5) (i32.const 1)) (i32.const 2))) (f64.const 0.0)))
+   (local.set $o (f64.sub (f64.convert_i32_s (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (i32.add (i32.const 5) (i32.const 1))(i32.const 2))) (f64.const 0.0)))
    ;; (a = (a << 31));
    (local.set $a (i32.shl (local.get $a) (i32.const 31)))
    ;; (a = (a << 1));
    (local.set $a (i32.shl (local.get $a) (i32.const 1)))
    ;; (a = javaemul.internal.Primitives.narrowLongToInt((javaemul.internal.Primitives.widenIntToLong(a) + 1)));
    (local.set $a (i32.wrap_i64 (i64.add (i64.extend_i32_s (local.get $a)) (i64.const 1))))
-   ;; (a = javaemul.internal.Primitives.narrowLongToInt((javaemul.internal.Primitives.widenIntToLong(a) / 1)));
-   (local.set $a (i32.wrap_i64 (i64.div_s (i64.extend_i32_s (local.get $a)) (i64.const 1))))
+   ;; (a = javaemul.internal.Primitives.narrowLongToInt(javaemul.internal.Primitives.safeDivision(javaemul.internal.Primitives.widenIntToLong(a),1)));
+   (local.set $a (i32.wrap_i64 (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (i64.extend_i32_s (local.get $a))(i64.const 1))))
    ;; (a = javaemul.internal.Primitives.narrowDoubleToInt((javaemul.internal.Primitives.widenIntToDouble(a) + java.lang.Double.MAX_VALUE)));
    (local.set $a (i32.trunc_sat_f64_s (f64.add (f64.convert_i32_s (local.get $a)) (global.get $f_MAX_VALUE__java_lang_Double))))
    ;; (k = (k | true));
@@ -228,8 +228,8 @@
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (i32.sub (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0)) (i32.const 1)))
    ;; (ints.elements[0] = (ints.elements[0] * 1));
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (i32.mul (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0)) (i32.const 1)))
-   ;; (ints.elements[0] = (ints.elements[0] / 1));
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (i32.div_s (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0)) (i32.const 1)))
+   ;; (ints.elements[0] = javaemul.internal.Primitives.safeDivision(ints.elements[0],1));
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0))(i32.const 1)))
    ;; (ints.elements[0] = (ints.elements[0] & 1));
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0) (i32.and (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $ints)) (i32.const 0)) (i32.const 1)))
    ;; (ints.elements[0] = (ints.elements[0] ^ 1));
@@ -285,8 +285,8 @@
      (local.set $i (i32.add (local.get $i) (i32.const 1)))
      (local.get $$value_1)
     ))
-    ;; ($array.elements[$index] = ($array.elements[$index] / 1));
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_2)) (local.get $$index_2) (i32.div_s (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_2)) (local.get $$index_2)) (i32.const 1)))
+    ;; ($array.elements[$index] = javaemul.internal.Primitives.safeDivision($array.elements[$index],1));
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_2)) (local.get $$index_2) (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_2)) (local.get $$index_2))(i32.const 1)))
    )
    ;; long[] longs = null;
    

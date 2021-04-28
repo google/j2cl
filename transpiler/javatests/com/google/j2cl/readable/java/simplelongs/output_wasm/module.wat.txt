@@ -116,8 +116,8 @@
    ;; long c = (a + b);
    
    (local.set $c (i64.add (local.get $a) (local.get $b)))
-   ;; (c = (a / b));
-   (local.set $c (i64.div_s (local.get $a) (local.get $b)))
+   ;; (c = javaemul.internal.Primitives.safeDivision(a,b));
+   (local.set $c (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (local.get $a)(local.get $b)))
    ;; long e = ((a = (a + 1)),a);
    
    (local.set $e (block (result i64)

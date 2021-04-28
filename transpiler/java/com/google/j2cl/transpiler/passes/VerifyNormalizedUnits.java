@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
+import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Field;
@@ -135,6 +136,12 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitBinaryExpression(BinaryExpression binaryExpression) {
             if (verifyForWasm) {
               checkState(!binaryExpression.getOperator().isCompoundAssignment());
+              // All integral divisions have been replaced by a method call where division is safely
+              // implemented.
+              checkState(
+                  !(binaryExpression.getOperator() == BinaryOperator.DIVIDE
+                      && TypeDescriptors.isIntegralPrimitiveType(
+                          binaryExpression.getTypeDescriptor())));
             }
           }
 

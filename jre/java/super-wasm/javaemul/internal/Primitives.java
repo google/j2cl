@@ -173,10 +173,27 @@ public class Primitives {
   @Wasm("f32.demote_f64")
   public static native float narrowDoubleToFloat(double instance);
 
-  public static int coerceDivision(int value) {
-    InternalPreconditions.checkArithmetic(Double.isFinite(value));
-    return value;
+  public static int safeDivision(int dividend, int divisor) {
+    // Division may trap with overflow in WASM division; special case the overflow scenario.
+    if (dividend == Integer.MIN_VALUE && divisor == -1) {
+      return Integer.MIN_VALUE;
+    }
+    return wasmDivision(dividend, divisor);
   }
+
+  @Wasm("i32.div_s")
+  private static native int wasmDivision(int dividend, int divisor);
+
+  public static long safeDivision(long dividend, long divisor) {
+    // Division may trap with overflow in WASM division; special case the overflow scenario.
+    if (dividend == Long.MIN_VALUE && divisor == -1L) {
+      return Long.MIN_VALUE;
+    }
+    return wasmDivision(dividend, divisor);
+  }
+
+  @Wasm("i64.div_s")
+  private static native long wasmDivision(long dividend, long divisor);
 
   public static double dmod(double x, double y) {
     if (Double.isNaN(x) || Double.isNaN(y) || Double.isInfinite(x) || y == 0.0d) {

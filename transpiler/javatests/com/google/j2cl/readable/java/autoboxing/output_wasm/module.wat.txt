@@ -717,10 +717,10 @@
    (local.set $boxBool (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (if (result i32) (call_ref (local.get $boxBool)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxBool)))) (then (call_ref (local.get $boxBool)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxBool))))) (else (i32.const 0)))))
    ;; (boxD = java.lang.Double.valueOf((boxD.doubleValue() + boxD.doubleValue())));
    (local.set $boxD (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.add (call_ref (local.get $boxD)(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $boxD)))) (call_ref (local.get $boxD)(struct.get $java.lang.Double.vtable $m_doubleValue__double (struct.get $java.lang.Double $vtable(local.get $boxD)))))))
-   ;; (boxI = java.lang.Integer.valueOf((boxI.intValue() / boxI.intValue())));
-   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.div_s (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))) (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))))))
-   ;; (boxL = java.lang.Long.valueOf((boxL.longValue() / boxL.longValue())));
-   (local.set $boxL (call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.div_s (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL)))) (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL)))))))
+   ;; (boxI = java.lang.Integer.valueOf(javaemul.internal.Primitives.safeDivision(boxI.intValue(),boxI.intValue())));
+   (local.set $boxI (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI))))(call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))))))
+   ;; (boxL = java.lang.Long.valueOf(javaemul.internal.Primitives.safeDivision(boxL.longValue(),boxL.longValue())));
+   (local.set $boxL (call $m_valueOf__long__java_lang_Long@java.lang.Long (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL))))(call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL)))))))
    ;; (boxBool = java.lang.Boolean.valueOf(!boxBool.booleanValue()));
    (local.set $boxBool (call $m_valueOf__boolean__java_lang_Boolean@java.lang.Boolean (i32.eqz (call_ref (local.get $boxBool)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxBool)))))))
    ;; (boxI = boxI);
@@ -867,8 +867,8 @@
    (local.set $f (f32.sub (call_ref (local.get $boxF)(struct.get $java.lang.Float.vtable $m_floatValue__float (struct.get $java.lang.Float $vtable(local.get $boxF)))) (call_ref (local.get $boxF)(struct.get $java.lang.Float.vtable $m_floatValue__float (struct.get $java.lang.Float $vtable(local.get $boxF))))))
    ;; (i = (boxI.intValue() * boxI.intValue()));
    (local.set $i (i32.mul (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI)))) (call_ref (local.get $boxI)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $boxI))))))
-   ;; (l = (boxL.longValue() / boxL.longValue()));
-   (local.set $l (i64.div_s (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL)))) (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL))))))
+   ;; (l = javaemul.internal.Primitives.safeDivision(boxL.longValue(),boxL.longValue()));
+   (local.set $l (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL))))(call_ref (local.get $boxL)(struct.get $java.lang.Long.vtable $m_longValue__long (struct.get $java.lang.Long $vtable(local.get $boxL))))))
    ;; (bool = !boxBool.booleanValue());
    (local.set $bool (i32.eqz (call_ref (local.get $boxBool)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxBool))))))
    ;; (i = boxI.intValue());

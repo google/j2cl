@@ -34,6 +34,7 @@ public class Main {
     m.testInlineEquality();
     testByteOverflow();
     testNestedOperationsOverflow();
+    testDivisionMultiplicationOverflow();
   }
 
   private byte mb = 127; // Byte.MAX_VALUE
@@ -391,5 +392,30 @@ public class Main {
     assertTrue(ri == 0);
     long rl = 1L / 2L;
     assertTrue(rl == 0L);
+  }
+
+  private static void testDivisionMultiplicationOverflow() {
+    byte minusOneB = -1;
+    short minusOneS = -1;
+    int minusOneI = -1;
+    long minusOneL = -1L;
+
+    assertTrue(Integer.MIN_VALUE * minusOneB == Integer.MIN_VALUE);
+    assertTrue(Integer.MIN_VALUE / minusOneB == Integer.MIN_VALUE);
+    assertTrue(Integer.MIN_VALUE * minusOneS == Integer.MIN_VALUE);
+    assertTrue(Integer.MIN_VALUE / minusOneS == Integer.MIN_VALUE);
+    assertTrue(Integer.MIN_VALUE * minusOneI == Integer.MIN_VALUE);
+    assertTrue(Integer.MIN_VALUE / minusOneI == Integer.MIN_VALUE);
+    assertTrue(Integer.MIN_VALUE * minusOneL == 2147483648L);
+    assertTrue(Integer.MIN_VALUE / minusOneL == 2147483648L);
+
+    assertTrue(Long.MIN_VALUE * minusOneB == Long.MIN_VALUE);
+    assertTrue(Long.MIN_VALUE / minusOneB == Long.MIN_VALUE);
+    assertTrue(Long.MIN_VALUE * minusOneS == Long.MIN_VALUE);
+    assertTrue(Long.MIN_VALUE / minusOneS == Long.MIN_VALUE);
+    assertTrue(Long.MIN_VALUE * minusOneI == Long.MIN_VALUE);
+    assertTrue(Long.MIN_VALUE / minusOneI == Long.MIN_VALUE);
+    assertTrue(Long.MIN_VALUE * minusOneL == Long.MIN_VALUE);
+    assertTrue(Long.MIN_VALUE / minusOneL == Long.MIN_VALUE);
   }
 }
