@@ -135,13 +135,21 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitBinaryExpression(BinaryExpression binaryExpression) {
             if (verifyForWasm) {
-              checkState(!binaryExpression.getOperator().isCompoundAssignment());
+              BinaryOperator operator = binaryExpression.getOperator();
+              checkState(!operator.isCompoundAssignment());
               // All integral divisions have been replaced by a method call where division is safely
               // implemented.
               checkState(
-                  !(binaryExpression.getOperator() == BinaryOperator.DIVIDE
+                  !(operator == BinaryOperator.DIVIDE
                       && TypeDescriptors.isIntegralPrimitiveType(
                           binaryExpression.getTypeDescriptor())));
+              // All remainder operation on float/double have been replaced by a helper method call.
+              checkState(
+                  !(operator == BinaryOperator.REMAINDER
+                      && (TypeDescriptors.isPrimitiveFloatOrDouble(
+                              binaryExpression.getLeftOperand().getTypeDescriptor())
+                          && TypeDescriptors.isPrimitiveFloatOrDouble(
+                              binaryExpression.getRightOperand().getTypeDescriptor()))));
             }
           }
 

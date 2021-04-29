@@ -116,16 +116,6 @@ public enum WasmBinaryOperation {
       return null;
     }
 
-    if (operator == BinaryOperator.REMAINDER
-        && (TypeDescriptors.isPrimitiveFloatOrDouble(
-                expression.getLeftOperand().getTypeDescriptor())
-            || TypeDescriptors.isPrimitiveFloatOrDouble(
-                expression.getRightOperand().getTypeDescriptor()))) {
-      // TODO(b/173176331): remove and checkArgument once float/double remainder operation are
-      //  transformed.
-      return null;
-    }
-
     return wasmOperationByBinaryOperator.get(operator);
   }
 }
