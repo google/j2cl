@@ -62,6 +62,7 @@ import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
@@ -225,15 +226,15 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public AssertStatement rewriteAssertStatement(AssertStatement assertStatement) {
     Expression message = assertStatement.getMessage();
-    // Treat the second parameter as a string context for primitives to enforce the right conversion
-    // rules, but let objects flow so that exceptions are allowed and handled correctly.
-    boolean isMessageStringContext = message != null && message.getTypeDescriptor().isPrimitive();
     return AssertStatement.newBuilder()
         .setSourcePosition(assertStatement.getSourcePosition())
         .setExpression(
             contextRewriter.rewriteBooleanConversionContext(assertStatement.getExpression()))
         .setMessage(
-            isMessageStringContext ? contextRewriter.rewriteStringContext(message) : message)
+            message == null
+                ? null
+                : rewriteTypeConversionContextWithoutDeclaration(
+                    TypeDescriptors.get().javaLangObject, message))
         .build();
   }
 
