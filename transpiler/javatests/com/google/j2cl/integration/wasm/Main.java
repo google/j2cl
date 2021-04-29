@@ -46,7 +46,7 @@ public class Main {
     testWasmArrayApis();
     testArrayList();
     testSystemArrayCopy();
-    testStringValueOf();
+    testString();
   }
 
   static class A {
@@ -390,7 +390,11 @@ public class Main {
     }
   }
 
-  private static void testStringValueOf() {
+  private static void testString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append("x").append("y").append(5).append(true);
+    assertEquals("xy5true", builder.toString());
+
     assertEquals("5", String.valueOf(5));
   }
 }

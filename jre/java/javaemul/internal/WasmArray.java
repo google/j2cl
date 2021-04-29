@@ -205,6 +205,24 @@ abstract class WasmArray implements Serializable, Cloneable {
       elements = new char[length];
     }
 
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(((WasmArray.OfChar) values).elements, valueOffset, elements, offset, len);
+    }
+
+    private static void copy(char[] src, int srcOfs, char[] dest, int destOfs, int len) {
+      if (src == dest && srcOfs < destOfs) {
+        // Reverse copy to handle overlap that would destroy values otherwise.
+        srcOfs += len;
+        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
+          dest[--destEnd] = src[--srcOfs];
+        }
+      } else {
+        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
+          dest[destOfs++] = src[srcOfs++];
+        }
+      }
+    }
   }
 
   static class OfInt extends WasmArray {
