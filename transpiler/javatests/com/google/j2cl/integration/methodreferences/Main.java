@@ -22,6 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointe
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import java.util.function.Function;
+import javaemul.internal.annotations.Wasm;
 
 public class Main {
   public static void main(String[] args) {
@@ -147,6 +148,8 @@ public class Main {
   }
 
   /** Tests different qualifier shapes since J2CL optimizes some of these constructs. */
+  // TODO(b/186685045): enable when the infinite recursion in String.toLowerCase is fixed.
+  @Wasm("nop")
   private static void testQualifierEvaluation() {
     // Variable reference
     String variable = "Hello";

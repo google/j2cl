@@ -15,92 +15,160 @@
  */
 package com.google.j2cl.integration.numberobjectcalls;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+
+import javaemul.internal.annotations.Wasm;
 
 public class Main {
   @SuppressWarnings("cast")
   public static void main(String... args) {
-    Byte b = new Byte((byte) 1);
-    Double d = new Double(1.0);
-    Float f = new Float(1.0f);
-    Integer i = new Integer(1);
-    Long l = new Long(1L);
-    Short s = new Short((short) 1);
-    Character c = new Character('a');
-    Boolean bool = new Boolean(true);
+    testEquals();
+    testHashCode();
+    testToString();
+    testGetClass();
+    testNumberSubclass();
+  }
 
+  private static final Byte B = new Byte((byte) 1);
+  private static final Double D = new Double(1.0);
+  private static final Float F = new Float(1.0f);
+  private static final Integer I = new Integer(1);
+  private static final Long L = new Long(1L);
+  private static final Short S = new Short((short) 1);
+  private static final Character C = new Character('a');
+  private static final Boolean BOOL = new Boolean(true);
+
+  // TODO(b/186523011): Equals uses instanceof which is broken due to canonicalization, that makes
+  // code like new Long(1L).equals(new Integer(1)) to succeed.
+  @Wasm("nop")
+  private static void testEquals() {
     // equals
-    assertTrue((b.equals(b)));
-    assertTrue((b.equals(new Byte((byte) 1))));
-    assertTrue((d.equals(d)));
-    assertTrue((d.equals(new Double(1.0))));
-    assertTrue((f.equals(f)));
-    assertTrue((f.equals(new Float(1.0f))));
-    assertTrue((i.equals(i)));
-    assertTrue((i.equals(new Integer(1))));
-    assertTrue((l.equals(l)));
-    assertTrue((l.equals(new Long(1L))));
-    assertTrue((s.equals(s)));
-    assertTrue((s.equals(new Short((short) 1))));
-    assertTrue((!l.equals(i)));
-    assertTrue((!b.equals(d)));
-    assertTrue((!b.equals(f)));
-    assertTrue((!b.equals(i)));
-    assertTrue((!b.equals(l)));
-    assertTrue((!b.equals(s)));
-    assertTrue((!d.equals(b)));
-    assertTrue((!d.equals(f)));
-    assertTrue((!d.equals(i)));
-    assertTrue((!d.equals(l)));
-    assertTrue((!d.equals(s)));
-    assertTrue((c.equals(c)));
-    assertTrue((c.equals(new Character('a'))));
-    assertTrue((!c.equals(new Character('b'))));
-    assertTrue((bool.equals(bool)));
-    assertTrue((bool.equals(new Boolean(true))));
-    assertTrue((!bool.equals(new Boolean(false))));
+    assertTrue(B.equals(B));
+    assertTrue(B.equals(new Byte((byte) 1)));
+    assertTrue(D.equals(D));
+    assertTrue(D.equals(new Double(1.0)));
+    assertTrue(F.equals(F));
+    assertTrue(F.equals(new Float(1.0f)));
+    assertTrue(I.equals(I));
+    assertTrue(I.equals(new Integer(1)));
+    assertTrue(L.equals(L));
+    assertTrue(L.equals(new Long(1L)));
+    assertTrue(S.equals(S));
+    assertTrue(S.equals(new Short((short) 1)));
+    assertFalse(L.equals(I));
+    assertFalse(B.equals(D));
+    assertFalse(B.equals(F));
+    assertFalse(B.equals(I));
+    assertFalse(B.equals(L));
+    assertFalse(B.equals(S));
+    assertFalse(D.equals(B));
+    assertFalse(D.equals(F));
+    assertFalse(D.equals(I));
+    assertFalse(D.equals(L));
+    assertFalse(D.equals(S));
+    assertTrue(C.equals(C));
+    assertTrue(C.equals(new Character('a')));
+    assertFalse(C.equals(new Character('b')));
+    assertTrue(BOOL.equals(BOOL));
+    assertTrue(BOOL.equals(new Boolean(true)));
+    assertFalse(BOOL.equals(new Boolean(false)));
+  }
 
+  private static void testHashCode() {
     // hashCode
-    assertTrue((b.hashCode() == b.hashCode()));
-    assertTrue((d.hashCode() == d.hashCode()));
-    assertTrue((f.hashCode() == f.hashCode()));
-    assertTrue((i.hashCode() == i.hashCode()));
-    assertTrue((l.hashCode() == l.hashCode()));
-    assertTrue((s.hashCode() == s.hashCode()));
-    assertTrue((b.hashCode() == i.hashCode()));
-    assertTrue((l.hashCode() == i.hashCode()));
+    assertTrue(B.hashCode() == B.hashCode());
+    assertTrue(D.hashCode() == D.hashCode());
+    assertTrue(F.hashCode() == F.hashCode());
+    assertTrue(I.hashCode() == I.hashCode());
+    assertTrue(L.hashCode() == L.hashCode());
+    assertTrue(S.hashCode() == S.hashCode());
+    assertTrue(B.hashCode() == I.hashCode());
+    assertTrue(L.hashCode() == I.hashCode());
     // GWT's JRE Long hashcode comes out different here than the JRE
     // TODO(dankurka): investigate
     // assertTrue((new Long(9223372036854775807L).hashCode() == -2147483648));
-    assertTrue((c.hashCode() == c.hashCode()));
-    assertTrue((bool.hashCode() == bool.hashCode()));
-    assertTrue((bool.hashCode() != new Boolean(false).hashCode()));
+    assertTrue(C.hashCode() == C.hashCode());
+    assertTrue(BOOL.hashCode() == BOOL.hashCode());
+    assertTrue(BOOL.hashCode() != new Boolean(false).hashCode());
+  }
 
-    // toString
-    assertTrue((b.toString().equals("1")));
+  private static void testToString() {
+    assertTrue(B.toString().equals("1"));
     // assertTrue((d.toString().equals("1.0"))); // d.toString().equals("1")
     // assertTrue((f.toString().equals("1.0"))); // f.toString().equals("1")
-    assertTrue((i.toString().equals("1")));
-    assertTrue((l.toString().equals("1")));
-    assertTrue((s.toString().equals("1")));
-    assertTrue((bool.toString().equals("true")));
+    assertTrue(I.toString().equals("1"));
+    assertTrue(L.toString().equals("1"));
+    assertTrue(S.toString().equals("1"));
+    assertTrue(BOOL.toString().equals("true"));
+  }
 
-    // getClass
-    assertTrue((b.getClass() instanceof Class));
-    assertTrue((d.getClass() instanceof Class));
-    assertTrue((f.getClass() instanceof Class));
-    assertTrue((i.getClass() instanceof Class));
-    assertTrue((l.getClass() instanceof Class));
-    assertTrue((s.getClass() instanceof Class));
-    assertTrue((b.getClass().getName().equals("java.lang.Byte")));
-    assertTrue((d.getClass().getName().equals("java.lang.Double")));
-    assertTrue((f.getClass().getName().equals("java.lang.Float")));
-    assertTrue((i.getClass().getName().equals("java.lang.Integer")));
-    assertTrue((l.getClass().getName().equals("java.lang.Long")));
-    assertTrue((s.getClass().getName().equals("java.lang.Short")));
-    assertTrue((c.getClass().getName().equals("java.lang.Character")));
-    assertTrue((bool.getClass().getName().equals("java.lang.Boolean")));
+  private static void testGetClass() {
+    assertTrue(B.getClass() instanceof Class);
+    assertTrue(D.getClass() instanceof Class);
+    assertTrue(F.getClass() instanceof Class);
+    assertTrue(I.getClass() instanceof Class);
+    assertTrue(L.getClass() instanceof Class);
+    assertTrue(S.getClass() instanceof Class);
+    assertTrue(B.getClass().getName().equals("java.lang.Byte"));
+    assertTrue(D.getClass().getName().equals("java.lang.Double"));
+    assertTrue(F.getClass().getName().equals("java.lang.Float"));
+    assertTrue(I.getClass().getName().equals("java.lang.Integer"));
+    assertTrue(L.getClass().getName().equals("java.lang.Long"));
+    assertTrue(S.getClass().getName().equals("java.lang.Short"));
+    assertTrue(C.getClass().getName().equals("java.lang.Character"));
+    assertTrue(BOOL.getClass().getName().equals("java.lang.Boolean"));
+  }
 
-    new SubNumber().test();
+  private static class SubNumber extends Number {
+    @Override
+    public int intValue() {
+      return 0;
+    }
+
+    @Override
+    public long longValue() {
+      return 0;
+    }
+
+    @Override
+    public float floatValue() {
+      return 0;
+    }
+
+    @Override
+    public double doubleValue() {
+      return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      return o instanceof SubNumber;
+    }
+
+    @Override
+    public int hashCode() {
+      return 100;
+    }
+
+    @Override
+    public String toString() {
+      return "SubNumber";
+    }
+  }
+
+  private static void testNumberSubclass() {
+    Number sn1 = new SubNumber();
+    Number sn2 = new SubNumber();
+    assertTrue(sn1.equals(sn2));
+    assertFalse(sn1.equals(new Object()));
+
+    assertTrue(sn1.hashCode() == 100);
+    assertTrue(sn2.hashCode() == 100);
+
+    assertTrue(sn1.toString().equals(sn1.toString()));
+
+    assertTrue(sn1.getClass() instanceof Class);
+    assertTrue(sn1.getClass().equals(sn2.getClass()));
   }
 }

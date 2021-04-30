@@ -15,7 +15,10 @@
  */
 package com.google.j2cl.integration.objectchilddevirtualcalls;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
+
+import javaemul.internal.annotations.Wasm;
 
 /**
  * Verifies that Object methods on the ChildClass class execute properly. It is effectively a test
@@ -30,31 +33,47 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 })
 public class Main {
   public static void main(String... args) {
-    ChildClass childClass1 = new ChildClass();
-    ChildClass childClass2 = new ChildClass();
+    testEquals();
+    testHashCode();
+    testToString();
+    testGetClass();
+    testChildClassOverrides();
+  }
 
-    // Equals
+  private static ChildClass childClass1 = new ChildClass();
+  private static ChildClass childClass2 = new ChildClass();
+
+  private static void testEquals() {
     assertTrue(childClass1.equals(childClass1));
-    assertTrue(!childClass1.equals(childClass2));
-    assertTrue(!childClass1.equals("some string"));
+    assertFalse(childClass1.equals(childClass2));
+    assertFalse(childClass1.equals("some string"));
+  }
 
-    // HashCode
+  private static void testHashCode() {
     assertTrue(childClass1.hashCode() != -1);
     assertTrue(childClass1.hashCode() == childClass1.hashCode());
     assertTrue(childClass1.hashCode() != childClass2.hashCode());
+  }
 
-    // ToString
+  // TODO(b/186691983): Enable when Object.toString is fixed.
+  @Wasm("nop")
+  private static void testToString() {
     assertTrue(childClass1.toString() instanceof String);
     assertTrue(
         childClass1.toString()
             == "com.google.j2cl.integration.objectchilddevirtualcalls.ChildClass@"
                 + Integer.toHexString(childClass1.hashCode()));
     assertTrue(childClass1.toString() != childClass2.toString());
+  }
 
-    // GetClass
+  private static void testGetClass() {
     assertTrue(childClass1.getClass() instanceof Class);
     assertTrue(childClass1.getClass() == childClass2.getClass());
+  }
 
+  // TODO(b/186691983): Enable when Object.toString is fixed.
+  @Wasm("nop")
+  private static void testChildClassOverrides() {
     new ChildClassOverrides().test();
   }
 }

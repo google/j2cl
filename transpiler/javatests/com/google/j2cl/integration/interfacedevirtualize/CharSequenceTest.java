@@ -17,11 +17,13 @@ package com.google.j2cl.integration.interfacedevirtualize;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
+
 /**
  * Test CharSequence Interface on all devirtualized classes that implement it.
  */
 public class CharSequenceTest {
-  
+
   public static void test() {
     final String s = "string";
     CharSequence cs =
@@ -79,6 +81,8 @@ public class CharSequenceTest {
     assertTrue(cs.getClass() != String.class);
   }
 
+  // TODO(b/170691638): enable when String.concat is implemented.
+  @Wasm("nop")
   public static void testViaSuper() {
     CharSequence cs =
         new CharSequence() {

@@ -17,6 +17,8 @@ package com.google.j2cl.integration.stringdevirtualcalls;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
+
 /**
  * Verifies that String methods on the String class execute properly. It is effectively a test that
  * String method devirtualization is occurring and that the implementation being routed to is
@@ -24,36 +26,50 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
  */
 public class Main {
   public static void main(String... args) {
-    testJavaLangObjectMethods();
+    testEquals();
+    testHashCode();
+    testToString();
+    testGetClass();
     testComparableMethods();
     testCharSequenceMethods();
     testStringMethods();
   }
 
-  private static void testJavaLangObjectMethods() {
+  private static void testEquals() {
     String string1 = "string1";
     String string2 = "string2";
 
-    // Equals
     assertTrue(string1.equals(string1));
     assertTrue(!string1.equals(string2));
     assertTrue(!string1.equals(new Object()));
+  }
 
-    // HashCode
+  private static void testHashCode() {
+    String string1 = "string1";
+    String string2 = "string2";
+
     assertTrue(string1.hashCode() != -1);
     assertTrue(string1.hashCode() == string1.hashCode());
     assertTrue(string1.hashCode() != string2.hashCode());
+  }
 
-    // ToString
+  private static void testToString() {
+    String string1 = "string1";
+    String string2 = "string2";
+
     assertTrue(string1.toString() != null);
     assertTrue(string1.toString() == string1);
     assertTrue(string1.toString() != string2.toString());
+  }
 
-    // GetClass
+  private static void testGetClass() {
+    String string1 = "string1";
+    String string2 = "string2";
+
     assertTrue(string1.getClass() instanceof Class);
     assertTrue(string1.getClass() == string2.getClass());
   }
-  
+
   private static void testComparableMethods() {
     String string1 = "string1";
     String string2 = "string2";
@@ -80,10 +96,10 @@ public class Main {
     assertTrue(string1.charAt(6) == '1');
 
     assertTrue(string1.subSequence(0, 2).equals("st"));
-
-    // toString() already tested.
   }
 
+  // TODO(B/170691638): Enable when String.concat is implemented.
+  @Wasm("nop")
   private static void testStringMethods() {
     String string1 = "string1";
 

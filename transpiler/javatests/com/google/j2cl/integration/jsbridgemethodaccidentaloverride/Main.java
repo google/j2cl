@@ -32,6 +32,5 @@ public class Main {
     assertTrue(a.fun(1) == 0);
     assertTrue(b.fun(1) == 0);
     assertTrue(d.fun(1) == 0);
-    assertTrue(a.toString().startsWith(a.getClass().getName()));
   }
 }

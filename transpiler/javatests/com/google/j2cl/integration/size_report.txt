@@ -1,21 +1,25 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 8 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1987638 to 1990581 bytes (100%->100.1%) and from
-  708748 to 709837 bytes (100%->100.2%) gzipped.
+  1990581 to 1990002 bytes (100%->100.0%) and from
+  709837 to 709580 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       1013      695 jsbridgemethodaccidentaloverride.esnext (-31.4%)
+       1272     1000 jsbridgemethodaccidentaloverride (-21.4%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       2165     2679 assertsimple.esnext (23.7%)
-       2431     3006 assertsimple (23.7%)
+       3013     3159 numberobjectcalls (4.8%)
+       2695     2821 numberobjectcalls.esnext (4.7%)
+       1120     1138 objectdevirtualcalls.esnext (1.6%)
+       1283     1297 objectchilddevirtualcalls.esnext (1.1%)
 
 
 Incremental size reports (non-gzip):
@@ -71,8 +75,8 @@ All reports:
        3549     3549 arrayreadwrite.esnext (unchanged)
          22       22 assertremoved (unchanged)
          22       22 assertremoved.esnext (unchanged)
-       2431     3006 assertsimple (23.7%)
-       2165     2679 assertsimple.esnext (23.7%)
+       3006     3006 assertsimple (unchanged)
+       2679     2679 assertsimple.esnext (unchanged)
        5758     5758 autoboxing (unchanged)
        5407     5407 autoboxing.esnext (unchanged)
        3114     3114 autovalue (unchanged)
@@ -219,8 +223,8 @@ All reports:
        1062     1062 jsasync.esnext (unchanged)
          22       22 jsbridgebackward (unchanged)
          22       22 jsbridgebackward.esnext (unchanged)
-       1272     1272 jsbridgemethodaccidentaloverride (unchanged)
-       1013     1013 jsbridgemethodaccidentaloverride.esnext (unchanged)
+       1272     1000 jsbridgemethodaccidentaloverride (-21.4%)
+       1013      695 jsbridgemethodaccidentaloverride.esnext (-31.4%)
          22       22 jsbridgemultipleaccidental (unchanged)
          22       22 jsbridgemultipleaccidental.esnext (unchanged)
        1014     1014 jsbridgemultipleexposing (unchanged)
@@ -311,12 +315,12 @@ All reports:
        1945     1945 numberchilddevirtualcalls.esnext (unchanged)
        2891     2891 numberdevirtualcalls (unchanged)
        2546     2546 numberdevirtualcalls.esnext (unchanged)
-       3013     3013 numberobjectcalls (unchanged)
-       2695     2695 numberobjectcalls.esnext (unchanged)
-       1547     1547 objectchilddevirtualcalls (unchanged)
-       1283     1283 objectchilddevirtualcalls.esnext (unchanged)
-       1378     1378 objectdevirtualcalls (unchanged)
-       1120     1120 objectdevirtualcalls.esnext (unchanged)
+       3013     3159 numberobjectcalls (4.8%)
+       2695     2821 numberobjectcalls.esnext (4.7%)
+       1547     1561 objectchilddevirtualcalls (0.9%)
+       1283     1297 objectchilddevirtualcalls.esnext (1.1%)
+       1378     1393 objectdevirtualcalls (1.1%)
+       1120     1138 objectdevirtualcalls.esnext (1.6%)
         906      906 overloadedmethods (unchanged)
         614      614 overloadedmethods.esnext (unchanged)
        1012     1012 overridingclassmethods (unchanged)

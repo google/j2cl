@@ -62,7 +62,7 @@ public class Main {
   public static void main(String... args) {
     int count = 1;
     for (String string : new Concrete()) {
-      assertTrue(string.equals("" + count));
+      assertTrue(string.equals(String.valueOf(count)));
       count++;
     }
 
@@ -70,7 +70,7 @@ public class Main {
     MyList myList = new Concrete();
     count = 1;
     for (String string : myList) {
-      assertTrue(string.equals("" + count));
+      assertTrue(string.equals(String.valueOf(count)));
       count++;
     }
   }

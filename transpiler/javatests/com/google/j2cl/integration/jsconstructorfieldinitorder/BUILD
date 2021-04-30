@@ -13,5 +13,6 @@ package(
 integration_test(
     name = "jsconstructorfieldinitorder",
     srcs = glob(["*.java"]),
+    enable_wasm = True,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

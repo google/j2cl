@@ -17,6 +17,8 @@ package com.google.j2cl.integration.objectdevirtualcalls;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
+
 /**
  * Verifies that Object methods on the Object class execute properly. It is effectively a test that
  * Object method devirtualization is occurring and that the implementation being routed to is
@@ -24,25 +26,36 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
  */
 public class Main {
   public static void main(String... args) {
-    Object object1 = new Object();
-    Object object2 = new Object();
+    testEquals();
+    testHashCode();
+    testToString();
+    testGetClass();
+  }
 
-    // Equals
+  private static Object object1 = new Object();
+  private static Object object2 = new Object();
+
+  private static void testEquals() {
     assertTrue(object1.equals(object1));
     assertTrue(!object1.equals(object2));
     assertTrue(!object1.equals("some string"));
+  }
 
-    // HashCode
+  private static void testHashCode() {
     assertTrue(object1.hashCode() != -1);
     assertTrue(object1.hashCode() == object1.hashCode());
     assertTrue(object1.hashCode() != object2.hashCode());
+  }
 
-    // ToString
+  // TODO(b/186691983): Enable when Object.toString is fixed.
+  @Wasm("nop")
+  private static void testToString() {
     assertTrue(object1.toString() instanceof String);
     assertTrue(object1.toString() == "java.lang.Object@" + Integer.toHexString(object1.hashCode()));
     assertTrue(object1.toString() != object2.toString());
+  }
 
-    // GetClass
+  private static void testGetClass() {
     assertTrue(object1.getClass() instanceof Class);
     assertTrue(object1.getClass() == object2.getClass());
   }
