@@ -20,4 +20,5 @@ integration_test(
     disable_uncompiled_test = True,
     disable_wasm_dev_test = True,
     enable_wasm = True,
+    tags = ["manual"],
 )
