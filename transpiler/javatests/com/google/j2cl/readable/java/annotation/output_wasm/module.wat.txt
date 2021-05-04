@@ -11,6 +11,9 @@
 (global $f_CONSTANT__annotation_Main_Foo i32 (i32.const 123))
 (global $f_$initialized__annotation_Main_Foo (mut i32) (i32.const 0))
 
+;;; Code for annotation.Main.Zoo [static fields]
+(global $f_$initialized__annotation_Main_Zoo (mut i32) (i32.const 0))
+
 ;;; Code for annotation.Main.Bar [static fields]
 (global $f_$initialized__annotation_Main_Bar (mut i32) (i32.const 0))
 
@@ -114,6 +117,43 @@
  (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Foo)
+
+;;; Code for annotation.Main.Zoo [INTERFACE]
+(type $annotation.Main.Zoo.vtable (struct
+))
+
+;;; void Zoo.$clinit()
+(func $$clinit__void@annotation.Main.Zoo
+ (block $return.label
+  (block
+   ;; if (annotation.Main.Zoo.$initialized) return;
+   (if (global.get $f_$initialized__annotation_Main_Zoo)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (annotation.Main.Zoo.$initialized = true);
+   (global.set $f_$initialized__annotation_Main_Zoo (i32.const 1))
+  )
+ )
+)
+
+;;; Class<?> Zoo.getClass()
+(func $m_getClass__java_lang_Class@annotation.Main.Zoo
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Zoo();
+   (local.set $return.value (call $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@annotation.Main.Zoo)
 
 ;;; Code for annotation.Main.Bar [CLASS]
 (type $annotation.Main.Bar (struct

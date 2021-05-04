@@ -22,6 +22,11 @@ public class Main {
     int bar() default CONSTANT;
   }
 
+  // Note that this inherits the single abstract method defined in its implicit parent
+  // java.lang.Annotation. If this interface was not an annotation interface, it would meet the
+  // requirements to be a functional interface.
+  @interface Zoo {}
+
   class Bar {
 
     int baz() {

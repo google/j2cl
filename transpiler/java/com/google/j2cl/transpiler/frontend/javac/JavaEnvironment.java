@@ -1416,7 +1416,8 @@ class JavaEnvironment {
   }
 
   private boolean isFunctionalInterface(TypeMirror type) {
-    return internalTypes.isFunctionalInterface((Type) type);
+    return internalTypes.isFunctionalInterface((Type) type)
+        && ((Type) type).asElement().getKind() == ElementKind.INTERFACE;
   }
 
   private static boolean isEnum(TypeElement typeElement) {

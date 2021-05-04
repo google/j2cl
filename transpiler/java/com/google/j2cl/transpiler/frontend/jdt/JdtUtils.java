@@ -1103,7 +1103,8 @@ class JdtUtils {
         .setKind(getKindFromTypeBinding(typeBinding))
         .setCapturingEnclosingInstance(capturesEnclosingInstance(typeBinding))
         .setFinal(isFinal)
-        .setFunctionalInterface(typeBinding.getFunctionalInterfaceMethod() != null)
+        .setFunctionalInterface(
+            !typeBinding.isAnnotation() && typeBinding.getFunctionalInterfaceMethod() != null)
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
         .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
         .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
