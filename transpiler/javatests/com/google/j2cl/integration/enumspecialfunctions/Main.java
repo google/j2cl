@@ -18,13 +18,19 @@ package com.google.j2cl.integration.enumspecialfunctions;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
+import javaemul.internal.annotations.Wasm;
+
 /**
  * This class tests the special functions of enum: .values() and .valueOf()
  */
 public class Main {
   public static void main(String[] args) {
-    // TODO(b/36863439): Uncomment the following line once Enum.valueOf is implemented.
-    // assertTrue(Enum.valueOf(Planet.class, "SATURN")
+    testValues();
+    testValueOf();
+    testValueOf_exceptions();
+  }
+
+  private static void testValues() {
     assertTrue(Planet.values().length == 8);
     assertTrue(arrayContains(Planet.MERCURY, Planet.values()));
     assertTrue(arrayContains(Planet.VENUS, Planet.values()));
@@ -34,7 +40,20 @@ public class Main {
     assertTrue(arrayContains(Planet.SATURN, Planet.values()));
     assertTrue(arrayContains(Planet.URANUS, Planet.values()));
     assertTrue(arrayContains(Planet.NEPTUNE, Planet.values()));
+  }
 
+  private static boolean arrayContains(Object obj, Object[] array) {
+    for (Object element : array) {
+      if (element == obj) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static void testValueOf() {
+    // TODO(b/36863439): Uncomment the following line once Enum.valueOf is implemented.
+    // assertTrue(Enum.valueOf(Planet.class, "SATURN")
     assertTrue(Planet.valueOf("MERCURY") == Planet.MERCURY);
     assertTrue(Planet.valueOf("VENUS") == Planet.VENUS);
     assertTrue(Planet.valueOf("EARTH") == Planet.EARTH);
@@ -43,7 +62,11 @@ public class Main {
     assertTrue(Planet.valueOf("SATURN") == Planet.SATURN);
     assertTrue(Planet.valueOf("URANUS") == Planet.URANUS);
     assertTrue(Planet.valueOf("NEPTUNE") == Planet.NEPTUNE);
+  }
 
+  // TODO(b/170691676): Enable when try/catch is implemented in WASM.
+  @Wasm("nop")
+  private static void testValueOf_exceptions() {
     try {
       Planet.valueOf("NOTHING");
       fail("Should have thrown IllegalArgumentException.");
@@ -88,14 +111,4 @@ public class Main {
     } catch (UnsupportedOperationException expected) {
     }
   }
-
-  private static boolean arrayContains(Object obj, Object[] array) {
-    for (Object element : array) {
-      if (element == obj) {
-        return true;
-      }
-    }
-    return false;
-  }
-
 }

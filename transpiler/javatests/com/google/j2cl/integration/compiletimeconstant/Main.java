@@ -17,6 +17,7 @@ package com.google.j2cl.integration.compiletimeconstant;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -54,10 +55,11 @@ public class Main {
   public static boolean ranClinit = false;
 
   public static void main(String... args) {
-    verifyClinitOrder();
+    testClinitOrder();
+    testExternConstant();
   }
 
-  private static void verifyClinitOrder() {
+  private static void testClinitOrder() {
     int total = 0;
 
     total += CompileTimeConstants.CONSTANT;
@@ -81,9 +83,13 @@ public class Main {
     assertTrue(total == 78);
 
     assertTrue(CompileTimeConstants.OBJ == null);
+  }
 
-    total += ExternConstant.CONSTANT;
+  // Tests JavaScript externs, not meaningful in WASM.
+  @Wasm("nop")
+  private static void testExternConstant() {
     assertTrue(Int32Array.BYTES_PER_ELEMENT == 4);
-    assertTrue(total == 82);
+    assertTrue(ExternConstant.CONSTANT == 4);
   }
 }
+

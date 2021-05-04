@@ -16,6 +16,9 @@ integration_test(
     name = "autovalue",
     srcs = glob(["*.java"]),
     closure_defines = {"jre.classMetadata": "'STRIPPED'"},
+    enable_wasm = True,
     experimental_optimize_autovalue = True,
-    deps = ["//third_party:auto_value-j2cl"],
+    deps = [
+        "//third_party:auto_value-j2cl",
+    ],
 )

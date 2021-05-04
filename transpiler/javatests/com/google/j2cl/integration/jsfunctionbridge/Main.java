@@ -18,40 +18,48 @@ package com.google.j2cl.integration.jsfunctionbridge;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 
 public class Main {
   public static void main(String... args) {
-    test();
+    testBridge();
+    testBridge_parameterChecks();
   }
 
-  public static void test() {
-    ApplyFunction<String> foo =
-        new ApplyFunction<String>() {
-          public String field = "a";
+  private static final ApplyFunction<String> FOO =
+      new ApplyFunction<String>() {
+        public String field = "a";
 
-          @Override
-          public String apply(String s) {
-            return s + field + fun();
-          }
+        @Override
+        public String apply(String s) {
+          return s + field + fun();
+        }
 
-          public String fun() {
-            return field + "d";
-          }
-        };
-    assertTrue(("eaad".equals(callGeneric(foo, "e"))));
-    assertThrowsClassCastException(() -> callGeneric(foo, new Object()));
-    assertTrue(("eaad".equals(callParametric(foo, "e"))));
-    assertTrue(("eaad".equals(foo.apply("e"))));
+        public String fun() {
+          return field + "d";
+        }
+      };
+
+  private static void testBridge() {
+    assertTrue(("eaad".equals(callGeneric(FOO, "e"))));
+    assertTrue(("eaad".equals(callParametric(FOO, "e"))));
+    assertTrue(("eaad".equals(FOO.apply("e"))));
     assertTrue("hello".equals(new Identity().apply("hello")));
   }
 
+  // TODO(b/170691676): Enable when try/catch is implemented.
+  @Wasm("nop")
+  private static void testBridge_parameterChecks() {
+    assertThrowsClassCastException(() -> callGeneric(FOO, new Object()));
+  }
+
   @SuppressWarnings({"rawtypes", "unchecked"})
-  public static Object callGeneric(ApplyFunction af, Object o) {
+  private static Object callGeneric(ApplyFunction af, Object o) {
     return af.apply(o);
   }
 
-  public static String callParametric(ApplyFunction<String> af, String s) {
+  private static String callParametric(ApplyFunction<String> af, String s) {
     return af.apply(s);
   }
 
