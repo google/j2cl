@@ -170,6 +170,8 @@
  (result (ref null $packageinfo.subpackage.Foo))
  (block $return.label
   (block
+   ;; packageinfo.subpackage.Foo.$clinit();
+   (call $$clinit__void@packageinfo.subpackage.Foo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Foo.this.$init();

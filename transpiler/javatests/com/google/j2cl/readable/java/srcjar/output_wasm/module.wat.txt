@@ -29,6 +29,8 @@
  (result (ref null $srcjar.Foo))
  (block $return.label
   (block
+   ;; srcjar.Foo.$clinit();
+   (call $$clinit__void@srcjar.Foo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -92,6 +94,8 @@
  (result (ref null $srcjar.Srcjar))
  (block $return.label
   (block
+   ;; srcjar.Srcjar.$clinit();
+   (call $$clinit__void@srcjar.Srcjar )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

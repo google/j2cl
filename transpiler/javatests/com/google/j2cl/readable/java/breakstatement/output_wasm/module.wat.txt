@@ -24,6 +24,8 @@
  (result (ref null $breakstatement.BreakStatement))
  (block $return.label
   (block
+   ;; breakstatement.BreakStatement.$clinit();
+   (call $$clinit__void@breakstatement.BreakStatement )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

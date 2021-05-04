@@ -29,6 +29,8 @@
  (result (ref null $aptgeneratorplugin.Dummy))
  (block $return.label
   (block
+   ;; aptgeneratorplugin.Dummy.$clinit();
+   (call $$clinit__void@aptgeneratorplugin.Dummy )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -92,6 +94,8 @@
  (result (ref null $aptgeneratorplugin.Foo))
  (block $return.label
   (block
+   ;; aptgeneratorplugin.Foo.$clinit();
+   (call $$clinit__void@aptgeneratorplugin.Foo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

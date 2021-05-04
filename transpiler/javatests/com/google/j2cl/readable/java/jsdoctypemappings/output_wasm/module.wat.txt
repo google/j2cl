@@ -95,6 +95,8 @@
  (result (ref null $jsdoctypemappings.JsDocTypeMappings))
  (block $return.label
   (block
+   ;; jsdoctypemappings.JsDocTypeMappings.$clinit();
+   (call $$clinit__void@jsdoctypemappings.JsDocTypeMappings )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -851,6 +853,8 @@
  (result (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
  (block $return.label
   (block
+   ;; jsdoctypemappings.JsDocTypeMappings.ExportedType.$clinit();
+   (call $$clinit__void@jsdoctypemappings.JsDocTypeMappings.ExportedType )
    ;; (ExportedType.this.this = $outer_this);
    (struct.set $jsdoctypemappings.JsDocTypeMappings.ExportedType $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

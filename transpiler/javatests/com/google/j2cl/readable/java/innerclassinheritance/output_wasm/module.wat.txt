@@ -73,6 +73,8 @@
  (result (ref null $innerclassinheritance.ParentOuter))
  (block $return.label
   (block
+   ;; innerclassinheritance.ParentOuter.$clinit();
+   (call $$clinit__void@innerclassinheritance.ParentOuter )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -150,6 +152,8 @@
  (result (ref null $innerclassinheritance.ParentInner))
  (block $return.label
   (block
+   ;; innerclassinheritance.ParentInner.$clinit();
+   (call $$clinit__void@innerclassinheritance.ParentInner )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -230,6 +234,8 @@
  (result (ref null $innerclassinheritance.ChildClass))
  (block $return.label
   (block
+   ;; innerclassinheritance.ChildClass.$clinit();
+   (call $$clinit__void@innerclassinheritance.ChildClass )
    ;; ParentOuter.this.ParentOuter.<init>();
    (drop (call $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentOuter (local.get $this)))
   )
@@ -332,6 +338,8 @@
  (result (ref null $innerclassinheritance.ChildClass.InnerClass))
  (block $return.label
   (block
+   ;; innerclassinheritance.ChildClass.InnerClass.$clinit();
+   (call $$clinit__void@innerclassinheritance.ChildClass.InnerClass )
    ;; (InnerClass.this.this = $outer_this);
    (struct.set $innerclassinheritance.ChildClass.InnerClass $$outer_this__innerclassinheritance_ChildClass_InnerClass(local.get $this) (local.get $$outer_this))
    ;; ParentInner.this.ParentInner.<init>();
@@ -470,6 +478,8 @@
  (result (ref null $innerclassinheritance.ChildClass.1LocalClass))
  (block $return.label
   (block
+   ;; innerclassinheritance.ChildClass.1LocalClass.$clinit();
+   (call $$clinit__void@innerclassinheritance.ChildClass.1LocalClass )
    ;; ($1LocalClass.this.this = $outer_this);
    (struct.set $innerclassinheritance.ChildClass.1LocalClass $$outer_this__innerclassinheritance_ChildClass_1LocalClass(local.get $this) (local.get $$outer_this))
    ;; ChildClass.this.ChildClass.<init>();
@@ -583,6 +593,8 @@
  (result (ref null $innerclassinheritance.MultipleNestings))
  (block $return.label
   (block
+   ;; innerclassinheritance.MultipleNestings.$clinit();
+   (call $$clinit__void@innerclassinheritance.MultipleNestings )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -661,6 +673,8 @@
  (result (ref null $innerclassinheritance.MultipleNestings.Parent))
  (block $return.label
   (block
+   ;; innerclassinheritance.MultipleNestings.Parent.$clinit();
+   (call $$clinit__void@innerclassinheritance.MultipleNestings.Parent )
    ;; (Parent.this.this = $outer_this);
    (struct.set $innerclassinheritance.MultipleNestings.Parent $$outer_this__innerclassinheritance_MultipleNestings_Parent(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -743,6 +757,8 @@
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (block $return.label
   (block
+   ;; innerclassinheritance.MultipleNestings.InnerClass1.$clinit();
+   (call $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1 )
    ;; (InnerClass1.this.this = $outer_this);
    (struct.set $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(local.get $this) (local.get $$outer_this))
    ;; Parent.this.Parent.<init>($outer_this);
@@ -826,6 +842,8 @@
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
  (block $return.label
   (block
+   ;; innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$clinit();
+   (call $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 )
    ;; (InnerClass2.this.this = $outer_this);
    (struct.set $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this) (local.get $$outer_this))
    ;; Parent.this.Parent.<init>($outer_this.this);

@@ -34,6 +34,8 @@
  (result (ref null $varargs.Varargs))
  (block $return.label
   (block
+   ;; varargs.Varargs.$clinit();
+   (call $$clinit__void@varargs.Varargs )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -48,6 +50,8 @@
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block $return.label
   (block
+   ;; varargs.Varargs.$clinit();
+   (call $$clinit__void@varargs.Varargs )
    ;; Varargs.this.Varargs.<init>((int[] $array_literal = new OfInt.<init>(1),($array_literal.elements[0] = 1),$array_literal));
    (drop (call $m_<init>__arrayOf_int__void@varargs.Varargs (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
     
@@ -281,6 +285,8 @@
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block $return.label
   (block
+   ;; varargs.Child.$clinit();
+   (call $$clinit__void@varargs.Child )
    ;; Varargs.this.Varargs.<init>((int[] $array_literal = new OfInt.<init>(1),($array_literal.elements[0] = 1),$array_literal));
    (drop (call $m_<init>__arrayOf_int__void@varargs.Varargs (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
     

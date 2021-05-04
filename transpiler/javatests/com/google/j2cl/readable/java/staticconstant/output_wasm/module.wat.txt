@@ -24,6 +24,8 @@
  (result (ref null $staticconstant.StaticConstant))
  (block $return.label
   (block
+   ;; staticconstant.StaticConstant.$clinit();
+   (call $$clinit__void@staticconstant.StaticConstant )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

@@ -24,6 +24,8 @@
  (result (ref null $labelstatement.LabeledStatement))
  (block $return.label
   (block
+   ;; labelstatement.LabeledStatement.$clinit();
+   (call $$clinit__void@labelstatement.LabeledStatement )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

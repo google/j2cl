@@ -23,6 +23,8 @@
  (result (ref null $importsfullyqualified.ImportsFullyQualified))
  (block $return.label
   (block
+   ;; importsfullyqualified.ImportsFullyQualified.$clinit();
+   (call $$clinit__void@importsfullyqualified.ImportsFullyQualified )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

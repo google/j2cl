@@ -23,6 +23,8 @@
  (result (ref null $newinstance.NewInstanceExpr))
  (block $return.label
   (block
+   ;; newinstance.NewInstanceExpr.$clinit();
+   (call $$clinit__void@newinstance.NewInstanceExpr )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

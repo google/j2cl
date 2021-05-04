@@ -41,6 +41,8 @@
  (result (ref null $boundedtypesupercall.Main))
  (block $return.label
   (block
+   ;; boundedtypesupercall.Main.$clinit();
+   (call $$clinit__void@boundedtypesupercall.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -106,6 +108,8 @@
  (result (ref null $boundedtypesupercall.Main.Foo))
  (block $return.label
   (block
+   ;; boundedtypesupercall.Main.Foo.$clinit();
+   (call $$clinit__void@boundedtypesupercall.Main.Foo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -153,6 +157,8 @@
  (result (ref null $boundedtypesupercall.Main.Bar))
  (block $return.label
   (block
+   ;; boundedtypesupercall.Main.Bar.$clinit();
+   (call $$clinit__void@boundedtypesupercall.Main.Bar )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -256,6 +262,8 @@
  (result (ref null $boundedtypesupercall.Main.Bar.1))
  (block $return.label
   (block
+   ;; boundedtypesupercall.Main.Bar.1.$clinit();
+   (call $$clinit__void@boundedtypesupercall.Main.Bar.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $boundedtypesupercall.Main.Bar.1 $$outer_this__boundedtypesupercall_Main_Bar_1(local.get $this) (local.get $$outer_this))
    ;; Foo.this.Foo.<init>($_0);

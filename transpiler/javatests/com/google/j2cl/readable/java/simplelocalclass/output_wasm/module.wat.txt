@@ -56,6 +56,8 @@
  (result (ref null $simplelocalclass.SimpleLocalClass))
  (block $return.label
   (block
+   ;; simplelocalclass.SimpleLocalClass.$clinit();
+   (call $$clinit__void@simplelocalclass.SimpleLocalClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -181,6 +183,8 @@
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (block $return.label
   (block
+   ;; simplelocalclass.SimpleLocalClass.1InnerClass.$clinit();
+   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClass )
    ;; ($1InnerClass.this.this = $outer_this);
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$outer_this))
    ;; ($1InnerClass.this.localVar = $captured_localVar);
@@ -270,6 +274,8 @@
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (block $return.label
   (block
+   ;; simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$clinit();
+   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures )
    ;; ($1InnerClassWithoutCaptures.this.this = $outer_this);
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -340,6 +346,8 @@
  (result (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (block $return.label
   (block
+   ;; simplelocalclass.SimpleLocalClass.2InnerClass.$clinit();
+   (call $$clinit__void@simplelocalclass.SimpleLocalClass.2InnerClass )
    ;; ($2InnerClass.this.this = $outer_this);
    (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (local.get $$outer_this))
    ;; ($2InnerClass.this.localVar = $captured_localVar);
@@ -422,6 +430,8 @@
  (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (block $return.label
   (block
+   ;; simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$clinit();
+   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass )
    ;; ($1Abc$InnerClass.this.this = $outer_this);
    (struct.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -489,6 +499,8 @@
  (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (block $return.label
   (block
+   ;; simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$clinit();
+   (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass )
    ;; ($1Klm$InnerClass.this.this = $outer_this);
    (struct.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

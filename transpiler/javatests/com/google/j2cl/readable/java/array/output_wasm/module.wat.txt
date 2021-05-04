@@ -52,6 +52,8 @@
  (result (ref null $array.Arrays))
  (block $return.label
   (block
+   ;; array.Arrays.$clinit();
+   (call $$clinit__void@array.Arrays )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

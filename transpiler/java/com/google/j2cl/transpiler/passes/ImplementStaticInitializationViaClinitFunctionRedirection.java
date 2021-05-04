@@ -52,6 +52,10 @@ import java.util.stream.Collectors;
 public class ImplementStaticInitializationViaClinitFunctionRedirection
     extends ImplementStaticInitializationBase {
 
+  public ImplementStaticInitializationViaClinitFunctionRedirection() {
+    super(/* triggerClinitInConstructors = */ false);
+  }
+
   @Override
   public void applyTo(Type type) {
       checkState(!type.isNative());

@@ -91,6 +91,8 @@
  (result (ref null $gwtincompatible.Implementor))
  (block $return.label
   (block
+   ;; gwtincompatible.Implementor.$clinit();
+   (call $$clinit__void@gwtincompatible.Implementor )
    ;; ClassWithAbstractMethod.this.ClassWithAbstractMethod.<init>();
    (drop (call $m_<init>__void@gwtincompatible.Interface.ClassWithAbstractMethod (local.get $this)))
   )
@@ -180,6 +182,8 @@
  (result (ref null $gwtincompatible.Implementor.SomeEnum))
  (block $return.label
   (block
+   ;; gwtincompatible.Implementor.SomeEnum.$clinit();
+   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
    ;; (Enum.this.name = $name);
    (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
    ;; (Enum.this.ordinal = $ordinal);
@@ -298,6 +302,8 @@
  (result (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (block $return.label
   (block
+   ;; gwtincompatible.Implementor.SomeEnum.1.$clinit();
+   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum.1 )
    ;; SomeEnum.this.SomeEnum.<init>($name,$ordinal);
    (drop (call $m_<init>__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum@gwtincompatible.Implementor.SomeEnum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
@@ -447,6 +453,8 @@
  (result (ref null $gwtincompatible.Interface.ClassWithAbstractMethod))
  (block $return.label
   (block
+   ;; gwtincompatible.Interface.ClassWithAbstractMethod.$clinit();
+   (call $$clinit__void@gwtincompatible.Interface.ClassWithAbstractMethod )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

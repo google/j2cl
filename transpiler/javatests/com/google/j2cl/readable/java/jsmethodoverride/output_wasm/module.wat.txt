@@ -30,6 +30,8 @@
  (result (ref null $jsmethodoverride.Parent))
  (block $return.label
   (block
+   ;; jsmethodoverride.Parent.$clinit();
+   (call $$clinit__void@jsmethodoverride.Parent )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

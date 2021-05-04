@@ -33,6 +33,8 @@
  (result (ref null $instanceofexpression.InstanceofExpressions))
  (block $return.label
   (block
+   ;; instanceofexpression.InstanceofExpressions.$clinit();
+   (call $$clinit__void@instanceofexpression.InstanceofExpressions )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -264,6 +266,8 @@
  (result (ref null $instanceofexpression.InstanceofExpressions.1))
  (block $return.label
   (block
+   ;; instanceofexpression.InstanceofExpressions.1.$clinit();
+   (call $$clinit__void@instanceofexpression.InstanceofExpressions.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $instanceofexpression.InstanceofExpressions.1 $$outer_this__instanceofexpression_InstanceofExpressions_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

@@ -122,6 +122,8 @@
  (result (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
  (block $return.label
   (block
+   ;; staticjsmethodswithclassnamespace.ExternalCaller.$clinit();
+   (call $$clinit__void@staticjsmethodswithclassnamespace.ExternalCaller )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

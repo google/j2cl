@@ -23,6 +23,8 @@
  (result (ref null $inferreturn.InferReturn))
  (block $return.label
   (block
+   ;; inferreturn.InferReturn.$clinit();
+   (call $$clinit__void@inferreturn.InferReturn )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

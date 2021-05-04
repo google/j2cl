@@ -37,6 +37,8 @@
  (result (ref null $compiletimeconstant.CompileTimeConstant))
  (block $return.label
   (block
+   ;; compiletimeconstant.CompileTimeConstant.$clinit();
+   (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; CompileTimeConstant.this.$init();

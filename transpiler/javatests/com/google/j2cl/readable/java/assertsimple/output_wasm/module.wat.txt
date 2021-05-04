@@ -23,6 +23,8 @@
  (result (ref null $assertsimple.AssertSimple))
  (block $return.label
   (block
+   ;; assertsimple.AssertSimple.$clinit();
+   (call $$clinit__void@assertsimple.AssertSimple )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

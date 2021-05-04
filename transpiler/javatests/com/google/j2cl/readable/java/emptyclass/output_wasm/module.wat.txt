@@ -23,6 +23,8 @@
  (result (ref null $emptyclass.EmptyClass))
  (block $return.label
   (block
+   ;; emptyclass.EmptyClass.$clinit();
+   (call $$clinit__void@emptyclass.EmptyClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

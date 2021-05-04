@@ -92,6 +92,8 @@
  (result (ref null $jsvarargs.Main))
  (block $return.label
   (block
+   ;; jsvarargs.Main.$clinit();
+   (call $$clinit__void@jsvarargs.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Main.this.field = f);
@@ -1101,6 +1103,8 @@
  (result (ref null $jsvarargs.Main.AFunction))
  (block $return.label
   (block
+   ;; jsvarargs.Main.AFunction.$clinit();
+   (call $$clinit__void@jsvarargs.Main.AFunction )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1195,6 +1199,8 @@
  (result (ref null $jsvarargs.Main.SubMain))
  (block $return.label
   (block
+   ;; jsvarargs.Main.SubMain.$clinit();
+   (call $$clinit__void@jsvarargs.Main.SubMain )
    ;; Main.this.Main.<init>(10);
    (drop (call $m_<init>__int__void@jsvarargs.Main (local.get $this)(i32.const 10)))
   )
@@ -1364,6 +1370,8 @@
  (result (ref null $jsvarargs.Main.$LambdaImplementor$1))
  (block $return.label
   (block
+   ;; jsvarargs.Main.$LambdaImplementor$1.$clinit();
+   (call $$clinit__void@jsvarargs.Main.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1466,6 +1474,8 @@
  (result (ref null $jsvarargs.QualifiedSuperMethodCall))
  (block $return.label
   (block
+   ;; jsvarargs.QualifiedSuperMethodCall.$clinit();
+   (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall )
    ;; Main.this.Main.<init>(0);
    (drop (call $m_<init>__int__void@jsvarargs.Main (local.get $this)(i32.const 0)))
   )
@@ -1532,6 +1542,8 @@
  (result (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (block $return.label
   (block
+   ;; jsvarargs.QualifiedSuperMethodCall.InnerClass.$clinit();
+   (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall.InnerClass )
    ;; (InnerClass.this.this = $outer_this);
    (struct.set $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

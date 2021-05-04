@@ -24,6 +24,8 @@
  (result (ref null $continuestatement.ContinueStatement))
  (block $return.label
   (block
+   ;; continuestatement.ContinueStatement.$clinit();
+   (call $$clinit__void@continuestatement.ContinueStatement )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

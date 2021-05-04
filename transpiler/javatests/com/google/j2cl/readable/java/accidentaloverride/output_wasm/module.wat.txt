@@ -39,6 +39,8 @@
  (result (ref null $accidentaloverride.Parent))
  (block $return.label
   (block
+   ;; accidentaloverride.Parent.$clinit();
+   (call $$clinit__void@accidentaloverride.Parent )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -156,6 +158,8 @@
  (result (ref null $accidentaloverride.AnotherAccidentalOverride))
  (block $return.label
   (block
+   ;; accidentaloverride.AnotherAccidentalOverride.$clinit();
+   (call $$clinit__void@accidentaloverride.AnotherAccidentalOverride )
    ;; Parent.this.Parent.<init>();
    (drop (call $m_<init>__void_$pp_accidentaloverride@accidentaloverride.Parent (local.get $this)))
   )
@@ -266,6 +270,8 @@
  (result (ref null $accidentaloverride.AccidentalOverride))
  (block $return.label
   (block
+   ;; accidentaloverride.AccidentalOverride.$clinit();
+   (call $$clinit__void@accidentaloverride.AccidentalOverride )
    ;; Parent.this.Parent.<init>();
    (drop (call $m_<init>__void_$pp_accidentaloverride@accidentaloverride.Parent (local.get $this)))
   )

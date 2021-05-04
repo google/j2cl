@@ -33,6 +33,8 @@
  (result (ref null $rawtype.RawType))
  (block $return.label
   (block
+   ;; rawtype.RawType.$clinit();
+   (call $$clinit__void@rawtype.RawType )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -146,6 +148,8 @@
  (result (ref null $rawtype.RawType.RawSubclass))
  (block $return.label
   (block
+   ;; rawtype.RawType.RawSubclass.$clinit();
+   (call $$clinit__void@rawtype.RawType.RawSubclass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

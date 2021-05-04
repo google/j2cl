@@ -64,6 +64,8 @@
  (result (ref null $functiontype.FunctionImpl))
  (block $return.label
   (block
+   ;; functiontype.FunctionImpl.$clinit();
+   (call $$clinit__void@functiontype.FunctionImpl )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

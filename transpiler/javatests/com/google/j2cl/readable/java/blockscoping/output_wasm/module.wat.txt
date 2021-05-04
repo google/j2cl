@@ -24,6 +24,8 @@
  (result (ref null $blockscoping.BlockScoping))
  (block $return.label
   (block
+   ;; blockscoping.BlockScoping.$clinit();
+   (call $$clinit__void@blockscoping.BlockScoping )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

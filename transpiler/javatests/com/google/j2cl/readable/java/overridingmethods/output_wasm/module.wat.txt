@@ -71,6 +71,8 @@
  (result (ref null $overridingmethods.Parent))
  (block $return.label
   (block
+   ;; overridingmethods.Parent.$clinit();
+   (call $$clinit__void@overridingmethods.Parent )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -148,6 +150,8 @@
  (result (ref null $overridingmethods.Child))
  (block $return.label
   (block
+   ;; overridingmethods.Child.$clinit();
+   (call $$clinit__void@overridingmethods.Child )
    ;; Parent.this.Parent.<init>();
    (drop (call $m_<init>__void_$pp_overridingmethods@overridingmethods.Parent (local.get $this)))
   )

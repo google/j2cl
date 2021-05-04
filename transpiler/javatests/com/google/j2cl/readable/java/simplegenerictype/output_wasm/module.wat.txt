@@ -28,6 +28,8 @@
  (result (ref null $simplegenerictype.SimpleGenericType))
  (block $return.label
   (block
+   ;; simplegenerictype.SimpleGenericType.$clinit();
+   (call $$clinit__void@simplegenerictype.SimpleGenericType )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (SimpleGenericType.this.first = t);

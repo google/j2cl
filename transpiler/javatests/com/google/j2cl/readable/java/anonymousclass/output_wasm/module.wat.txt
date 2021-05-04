@@ -47,6 +47,8 @@
  (result (ref null $anonymousclass.SomeClass))
  (block $return.label
   (block
+   ;; anonymousclass.SomeClass.$clinit();
+   (call $$clinit__void@anonymousclass.SomeClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -93,6 +95,8 @@
  (result (ref null $anonymousclass.AnonymousClass))
  (block $return.label
   (block
+   ;; anonymousclass.AnonymousClass.$clinit();
+   (call $$clinit__void@anonymousclass.AnonymousClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -178,6 +182,8 @@
  (result (ref null $anonymousclass.AnonymousClass.1))
  (block $return.label
   (block
+   ;; anonymousclass.AnonymousClass.1.$clinit();
+   (call $$clinit__void@anonymousclass.AnonymousClass.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $anonymousclass.AnonymousClass.1 $$outer_this__anonymousclass_AnonymousClass_1(local.get $this) (local.get $$outer_this))
    ;; SomeClass.this.SomeClass.<init>($_0);
@@ -321,6 +327,8 @@
  (result (ref null $anonymousclass.SomeInterface.1))
  (block $return.label
   (block
+   ;; anonymousclass.SomeInterface.1.$clinit();
+   (call $$clinit__void@anonymousclass.SomeInterface.1 )
    ;; SomeClass.this.SomeClass.<init>($_0);
    (drop (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeClass (local.get $this)(local.get $$_0)))
   )

@@ -109,6 +109,8 @@
  (result (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (block $return.label
   (block
+   ;; implementsgenericinterface.GenericInterfaceGenericImpl.$clinit();
+   (call $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -172,6 +174,8 @@
  (result (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (block $return.label
   (block
+   ;; implementsgenericinterface.GenericInterfaceImpl.$clinit();
+   (call $$clinit__void@implementsgenericinterface.GenericInterfaceImpl )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

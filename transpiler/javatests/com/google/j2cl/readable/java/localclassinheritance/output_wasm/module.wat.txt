@@ -36,6 +36,8 @@
  (result (ref null $localclassinheritance.LocalClassInheritance))
  (block $return.label
   (block
+   ;; localclassinheritance.LocalClassInheritance.$clinit();
+   (call $$clinit__void@localclassinheritance.LocalClassInheritance )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -120,6 +122,8 @@
  (result (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (block $return.label
   (block
+   ;; localclassinheritance.LocalClassInheritance.1Parent.$clinit();
+   (call $$clinit__void@localclassinheritance.LocalClassInheritance.1Parent )
    ;; ($1Parent.this.this = $outer_this);
    (struct.set $localclassinheritance.LocalClassInheritance.1Parent $$outer_this__localclassinheritance_LocalClassInheritance_1Parent(local.get $this) (local.get $$outer_this))
    ;; ($1Parent.this.f = $captured_f);
@@ -210,6 +214,8 @@
  (result (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (block $return.label
   (block
+   ;; localclassinheritance.LocalClassInheritance.1Child.$clinit();
+   (call $$clinit__void@localclassinheritance.LocalClassInheritance.1Child )
    ;; ($1Child.this.this = $outer_this);
    (struct.set $localclassinheritance.LocalClassInheritance.1Child $$outer_this__localclassinheritance_LocalClassInheritance_1Child(local.get $this) (local.get $$outer_this))
    ;; ($1Child.this.f = $captured_f);

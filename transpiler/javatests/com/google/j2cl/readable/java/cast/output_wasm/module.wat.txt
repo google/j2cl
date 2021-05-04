@@ -101,6 +101,8 @@
  (result (ref null $cast.CastGenerics))
  (block $return.label
   (block
+   ;; cast.CastGenerics.$clinit();
+   (call $$clinit__void@cast.CastGenerics )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -556,6 +558,8 @@
  (result (ref null $cast.CastGenerics.BaseImplementor))
  (block $return.label
   (block
+   ;; cast.CastGenerics.BaseImplementor.$clinit();
+   (call $$clinit__void@cast.CastGenerics.BaseImplementor )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -774,6 +778,8 @@
  (result (ref null $cast.CastGenerics.1Nested))
  (block $return.label
   (block
+   ;; cast.CastGenerics.1Nested.$clinit();
+   (call $$clinit__void@cast.CastGenerics.1Nested )
    ;; ($1Nested.this.this = $outer_this);
    (struct.set $cast.CastGenerics.1Nested $$outer_this__cast_CastGenerics_1Nested(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -927,6 +933,8 @@
  (result (ref null $cast.CastGenerics.1))
  (block $return.label
   (block
+   ;; cast.CastGenerics.1.$clinit();
+   (call $$clinit__void@cast.CastGenerics.1 )
    ;; Foo.this.Foo.<init>();
    (drop (call $m_<init>__void@cast.CastGenerics.Foo (local.get $this)))
   )
@@ -990,6 +998,8 @@
  (result (ref null $cast.CastGenerics.Foo))
  (block $return.label
   (block
+   ;; cast.CastGenerics.Foo.$clinit();
+   (call $$clinit__void@cast.CastGenerics.Foo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1058,6 +1068,8 @@
  (result (ref null $cast.CastPrimitives))
  (block $return.label
   (block
+   ;; cast.CastPrimitives.$clinit();
+   (call $$clinit__void@cast.CastPrimitives )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1615,6 +1627,8 @@
  (result (ref null $cast.CastPrimitives.IntValueHolder))
  (block $return.label
   (block
+   ;; cast.CastPrimitives.IntValueHolder.$clinit();
+   (call $$clinit__void@cast.CastPrimitives.IntValueHolder )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1679,6 +1693,8 @@
  (result (ref null $cast.CastPrimitives.LongValueHolder))
  (block $return.label
   (block
+   ;; cast.CastPrimitives.LongValueHolder.$clinit();
+   (call $$clinit__void@cast.CastPrimitives.LongValueHolder )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1746,6 +1762,8 @@
  (result (ref null $cast.Casts))
  (block $return.label
   (block
+   ;; cast.Casts.$clinit();
+   (call $$clinit__void@cast.Casts )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

@@ -203,6 +203,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; InnerClassInitOrder.this.$init();
@@ -613,6 +615,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; o.toString();
@@ -680,6 +684,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall )
    ;; (OuterRefFromSuperCtorCall.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall(local.get $this) (local.get $$outer_this))
    ;; OuterRefFromSuperCtorBase.this.OuterRefFromSuperCtorBase.<init>(new $1.<init>(OuterRefFromSuperCtorCall.this));
@@ -747,6 +753,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -835,6 +843,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall )
    ;; (OuterRefFromThisCtorCall.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall(local.get $this) (local.get $$outer_this))
    ;; OuterRefFromSuperCtorBase.this.OuterRefFromSuperCtorBase.<init>(object);
@@ -851,6 +861,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall )
    ;; OuterRefFromThisCtorCall.this.OuterRefFromThisCtorCall.<init>($outer_this,new $1.<init>(OuterRefFromThisCtorCall.this));
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder__java_lang_Object__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (local.get $this)(local.get $$outer_this)(call $m_<init>__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.itable) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall) (global.get $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.rtt))(local.get $this))))
   )
@@ -916,6 +928,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -1004,6 +1018,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.InnerClass.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.InnerClass )
    ;; (InnerClass.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.InnerClass $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -1101,6 +1117,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass )
    ;; ($1ReallyInnerClass.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -1194,6 +1212,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.P1.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.P1 )
    ;; P1.this.P1.<init>(1);
    (drop (call $m_<init>__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1 (local.get $this)(i32.const 1)))
   )
@@ -1208,6 +1228,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.P1.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.P1 )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (P1.this.value = i);
@@ -1276,6 +1298,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.P1.P2.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.P1.P2 )
    ;; P2.this.P2.<init>($outer_this,1);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder_P1__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2 (local.get $this)(local.get $$outer_this)(i32.const 1)))
   )
@@ -1291,6 +1315,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.P1.P2.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.P1.P2 )
    ;; (P2.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.P1.P2 $$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2(local.get $this) (local.get $$outer_this))
    ;; P1.this.P1.<init>(i);
@@ -1360,6 +1386,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.P1.P2.P3.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 )
    ;; P3.this.P3.<init>($outer_this,1);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder_P1_P2__int__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 (local.get $this)(local.get $$outer_this)(i32.const 1)))
   )
@@ -1375,6 +1403,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.P1.P2.P3.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.P1.P2.P3 )
    ;; (P3.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.P1.P2.P3 $$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2_P3(local.get $this) (local.get $$outer_this))
    ;; P2.this.P2.<init>($outer_this,i);
@@ -1441,6 +1471,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESOuter.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESOuter )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1525,6 +1557,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner )
    ;; (ESInner.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $$outer_this__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -1544,6 +1578,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner )
    ;; (ESInner.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner $$outer_this__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -1614,6 +1650,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass )
    ;; ESInner.this.ESInner.<init>(outer);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder_ESOuter__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (local.get $this)(local.get $outer)))
   )
@@ -1629,6 +1667,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass )
    ;; ESInner.this.ESInner.<init>(outer,value);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder_ESOuter__int__void@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner (local.get $this)(local.get $outer)(local.get $value)))
   )
@@ -1693,6 +1733,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESWGOuter.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1777,6 +1819,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner )
    ;; (ESWGInner.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $$outer_this__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -1796,6 +1840,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner )
    ;; (ESWGInner.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner $$outer_this__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -1866,6 +1912,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass )
    ;; ESWGInner.this.ESWGInner.<init>(outer);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder_ESWGOuter__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (local.get $this)(local.get $outer)))
   )
@@ -1881,6 +1929,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass )
    ;; ESWGInner.this.ESWGInner.<init>(outer,value);
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder_ESWGOuter__int__void@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner (local.get $this)(local.get $outer)(local.get $value)))
   )
@@ -1949,6 +1999,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.1AddNumber))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.1AddNumber.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.1AddNumber )
    ;; ($1AddNumber.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.1AddNumber $$outer_this__innerclassinitorder_InnerClassInitOrder_1AddNumber(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -2004,6 +2056,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.1))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.1.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.1 $$outer_this__innerclassinitorder_InnerClassInitOrder_1(local.get $this) (local.get $$outer_this))
    ;; $1AddNumber.this.$1AddNumber.<init>($outer_this,$_0);
@@ -2086,6 +2140,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.Outer.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.Outer )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Outer.this.value = i);
@@ -2172,6 +2228,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper )
    ;; (OuterIsNotSuper.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -2263,6 +2321,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper )
    ;; (OuterIsSuper.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(local.get $this) (local.get $$outer_this))
    ;; Outer.this.Outer.<init>(i);
@@ -2411,6 +2471,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1 $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1(local.get $this) (local.get $$outer_this))
    ;; Outer.this.Outer.<init>($_0);
@@ -2496,6 +2558,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall )
    ;; OuterIsNotSuper.this.OuterIsNotSuper.<init>(new OuterIsSuper.<init>(new Outer.<init>(1),2));
    (drop (call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (local.get $this)(call $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer__int__void@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.itable) (i32.const 0) (i32.const 0) (ref.null $innerclassinitorder.InnerClassInitOrder.Outer) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.rtt))(call $m_<init>__int__void@innerclassinitorder.InnerClassInitOrder.Outer (struct.new_with_rtt $innerclassinitorder.InnerClassInitOrder.Outer (global.get $innerclassinitorder.InnerClassInitOrder.Outer.vtable) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.itable) (i32.const 0) (i32.const 0) (global.get $innerclassinitorder.InnerClassInitOrder.Outer.rtt))(i32.const 1))(i32.const 2))))
   )
@@ -2563,6 +2627,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall )
    ;; (TestUnqualifiedSuperCall.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall(local.get $this) (local.get $$outer_this))
    ;; OuterIsNotSuper.this.OuterIsNotSuper.<init>($outer_this);
@@ -2633,6 +2699,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.2))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.2.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.2 )
    ;; ($2.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.2 $$outer_this__innerclassinitorder_InnerClassInitOrder_2(local.get $this) (local.get $$outer_this))
    ;; OuterIsNotSuper.this.OuterIsNotSuper.<init>($super_outer_this);
@@ -2702,6 +2770,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.3))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.3.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.3 )
    ;; ($3.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.3 $$outer_this__innerclassinitorder_InnerClassInitOrder_3(local.get $this) (local.get $$outer_this))
    ;; TestQualifiedSuperCall.this.TestQualifiedSuperCall.<init>();
@@ -2773,6 +2843,8 @@
  (result (ref null $innerclassinitorder.InnerClassInitOrder.4))
  (block $return.label
   (block
+   ;; innerclassinitorder.InnerClassInitOrder.4.$clinit();
+   (call $$clinit__void@innerclassinitorder.InnerClassInitOrder.4 )
    ;; ($4.this.this = $outer_this);
    (struct.set $innerclassinitorder.InnerClassInitOrder.4 $$outer_this__innerclassinitorder_InnerClassInitOrder_4(local.get $this) (local.get $$outer_this))
    ;; TestUnqualifiedSuperCall.this.TestUnqualifiedSuperCall.<init>($super_outer_this);

@@ -49,6 +49,8 @@
  (result (ref null $exception.MyException))
  (block $return.label
   (block
+   ;; exception.MyException.$clinit();
+   (call $$clinit__void@exception.MyException )
    ;; Exception.this.Exception.<init>();
    (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
   )
@@ -63,6 +65,8 @@
  (result (ref null $exception.MyException))
  (block $return.label
   (block
+   ;; exception.MyException.$clinit();
+   (call $$clinit__void@exception.MyException )
    ;; Exception.this.Exception.<init>(cause);
    (drop (call $m_<init>__java_lang_Throwable__void@java.lang.Exception (local.get $this)(local.get $cause)))
   )
@@ -162,6 +166,8 @@
  (result (ref null $exception.MyJsException))
  (block $return.label
   (block
+   ;; exception.MyJsException.$clinit();
+   (call $$clinit__void@exception.MyJsException )
    ;; MyJsException.this.MyJsException.<init>();
    (drop (call $m_<init>__void@exception.MyJsException (local.get $this)))
   )

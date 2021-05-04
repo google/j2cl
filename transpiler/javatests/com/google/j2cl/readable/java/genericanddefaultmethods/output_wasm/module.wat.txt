@@ -93,6 +93,8 @@
  (result (ref null $genericanddefaultmethods.GenericClass))
  (block $return.label
   (block
+   ;; genericanddefaultmethods.GenericClass.$clinit();
+   (call $$clinit__void@genericanddefaultmethods.GenericClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -182,6 +184,8 @@
  (result (ref null $genericanddefaultmethods.ConcreteClass))
  (block $return.label
   (block
+   ;; genericanddefaultmethods.ConcreteClass.$clinit();
+   (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
    ;; GenericClass.this.GenericClass.<init>();
    (drop (call $m_<init>__void_$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass (local.get $this)))
   )

@@ -36,6 +36,8 @@
  (result (ref null $annotation.Main))
  (block $return.label
   (block
+   ;; annotation.Main.$clinit();
+   (call $$clinit__void@annotation.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -177,6 +179,8 @@
  (result (ref null $annotation.Main.Bar))
  (block $return.label
   (block
+   ;; annotation.Main.Bar.$clinit();
+   (call $$clinit__void@annotation.Main.Bar )
    ;; (Bar.this.this = $outer_this);
    (struct.set $annotation.Main.Bar $$outer_this__annotation_Main_Bar(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

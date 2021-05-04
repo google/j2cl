@@ -24,6 +24,8 @@
  (result (ref null $equality.Equality))
  (block $return.label
   (block
+   ;; equality.Equality.$clinit();
+   (call $$clinit__void@equality.Equality )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

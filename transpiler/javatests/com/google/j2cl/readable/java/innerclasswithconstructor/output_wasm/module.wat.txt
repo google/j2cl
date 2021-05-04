@@ -30,6 +30,8 @@
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (block $return.label
   (block
+   ;; innerclasswithconstructor.InnerClassWithConstructor.$clinit();
+   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -97,6 +99,8 @@
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (block $return.label
   (block
+   ;; innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$clinit();
+   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
    ;; (InnerClass.this.this = $outer_this);
    (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -115,6 +119,8 @@
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (block $return.label
   (block
+   ;; innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$clinit();
+   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
    ;; InnerClass.this.InnerClass.<init>($outer_this,$outer_this.a);
    (drop (call $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this)(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this))))
   )

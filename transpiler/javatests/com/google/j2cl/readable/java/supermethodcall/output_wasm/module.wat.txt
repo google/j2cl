@@ -38,6 +38,8 @@
  (result (ref null $supermethodcall.GrandParent))
  (block $return.label
   (block
+   ;; supermethodcall.GrandParent.$clinit();
+   (call $$clinit__void@supermethodcall.GrandParent )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -150,6 +152,8 @@
  (result (ref null $supermethodcall.Parent))
  (block $return.label
   (block
+   ;; supermethodcall.Parent.$clinit();
+   (call $$clinit__void@supermethodcall.Parent )
    ;; GrandParent.this.GrandParent.<init>();
    (drop (call $m_<init>__void_$pp_supermethodcall@supermethodcall.GrandParent (local.get $this)))
   )
@@ -264,6 +268,8 @@
  (result (ref null $supermethodcall.Child))
  (block $return.label
   (block
+   ;; supermethodcall.Child.$clinit();
+   (call $$clinit__void@supermethodcall.Child )
    ;; Parent.this.Parent.<init>();
    (drop (call $m_<init>__void_$pp_supermethodcall@supermethodcall.Parent (local.get $this)))
   )

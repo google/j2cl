@@ -126,6 +126,8 @@
  (result (ref null $unimplementedbridgemethod.Bar))
  (block $return.label
   (block
+   ;; unimplementedbridgemethod.Bar.$clinit();
+   (call $$clinit__void@unimplementedbridgemethod.Bar )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -171,6 +173,8 @@
  (result (ref null $unimplementedbridgemethod.Foo))
  (block $return.label
   (block
+   ;; unimplementedbridgemethod.Foo.$clinit();
+   (call $$clinit__void@unimplementedbridgemethod.Foo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

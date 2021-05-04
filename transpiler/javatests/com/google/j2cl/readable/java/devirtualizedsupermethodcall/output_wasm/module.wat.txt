@@ -41,6 +41,8 @@
  (result (ref null $devirtualizedsupermethodcall.SubNumber))
  (block $return.label
   (block
+   ;; devirtualizedsupermethodcall.SubNumber.$clinit();
+   (call $$clinit__void@devirtualizedsupermethodcall.SubNumber )
    ;; Number.this.Number.<init>();
    (drop (call $m_<init>__void@java.lang.Number (local.get $this)))
   )
@@ -176,6 +178,8 @@
  (result (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (block $return.label
   (block
+   ;; devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$clinit();
+   (call $$clinit__void@devirtualizedsupermethodcall.FooCallsSuperObjectMethod )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -258,6 +262,8 @@
  (result (ref null $devirtualizedsupermethodcall.Main))
  (block $return.label
   (block
+   ;; devirtualizedsupermethodcall.Main.$clinit();
+   (call $$clinit__void@devirtualizedsupermethodcall.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

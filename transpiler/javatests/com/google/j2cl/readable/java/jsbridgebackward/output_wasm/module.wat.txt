@@ -71,6 +71,8 @@
  (result (ref null $jsbridgebackward.A))
  (block $return.label
   (block
+   ;; jsbridgebackward.A.$clinit();
+   (call $$clinit__void@jsbridgebackward.A )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -154,6 +156,8 @@
  (result (ref null $jsbridgebackward.InterfaceImpl))
  (block $return.label
   (block
+   ;; jsbridgebackward.InterfaceImpl.$clinit();
+   (call $$clinit__void@jsbridgebackward.InterfaceImpl )
    ;; A.this.A.<init>();
    (drop (call $m_<init>__void_$pp_jsbridgebackward@jsbridgebackward.A (local.get $this)))
   )

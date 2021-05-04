@@ -153,6 +153,8 @@
  (result (ref null $interfacejsbridge.InterfaceImpl))
  (block $return.label
   (block
+   ;; interfacejsbridge.InterfaceImpl.$clinit();
+   (call $$clinit__void@interfacejsbridge.InterfaceImpl )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -236,6 +238,8 @@
  (result (ref null $interfacejsbridge.Main))
  (block $return.label
   (block
+   ;; interfacejsbridge.Main.$clinit();
+   (call $$clinit__void@interfacejsbridge.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

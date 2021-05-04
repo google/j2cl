@@ -24,6 +24,8 @@
  (result (ref null $initmethoddispatch.InitMethodDispatch))
  (block $return.label
   (block
+   ;; initmethoddispatch.InitMethodDispatch.$clinit();
+   (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
    ;; InitMethodDispatch.this.InitMethodDispatch.<init>(1);
    (drop (call $m_<init>__int__void_$pp_initmethoddispatch@initmethoddispatch.InitMethodDispatch (local.get $this)(i32.const 1)))
   )
@@ -38,6 +40,8 @@
  (result (ref null $initmethoddispatch.InitMethodDispatch))
  (block $return.label
   (block
+   ;; initmethoddispatch.InitMethodDispatch.$clinit();
+   (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (InitMethodDispatch.this.value = i);

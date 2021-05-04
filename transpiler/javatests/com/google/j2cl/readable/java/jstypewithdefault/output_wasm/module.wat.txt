@@ -27,6 +27,8 @@
  (result (ref null $jstypewithdefault.SomeJsType))
  (block $return.label
   (block
+   ;; jstypewithdefault.SomeJsType.$clinit();
+   (call $$clinit__void@jstypewithdefault.SomeJsType )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

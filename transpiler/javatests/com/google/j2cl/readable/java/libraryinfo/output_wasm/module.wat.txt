@@ -79,6 +79,8 @@
  (result (ref null $libraryinfo.Main))
  (block $return.label
   (block
+   ;; libraryinfo.Main.$clinit();
+   (call $$clinit__void@libraryinfo.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -384,6 +386,8 @@
  (result (ref null $libraryinfo.Main.FunctionImpl))
  (block $return.label
   (block
+   ;; libraryinfo.Main.FunctionImpl.$clinit();
+   (call $$clinit__void@libraryinfo.Main.FunctionImpl )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -684,6 +688,8 @@
  (result (ref null $libraryinfo.Main.1))
  (block $return.label
   (block
+   ;; libraryinfo.Main.1.$clinit();
+   (call $$clinit__void@libraryinfo.Main.1 )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -762,6 +768,8 @@
  (result (ref null $libraryinfo.Main.Foo))
  (block $return.label
   (block
+   ;; libraryinfo.Main.Foo.$clinit();
+   (call $$clinit__void@libraryinfo.Main.Foo )
    ;; (Foo.this.this = $outer_this);
    (struct.set $libraryinfo.Main.Foo $$outer_this__libraryinfo_Main_Foo(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -840,6 +848,8 @@
  (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (block $return.label
   (block
+   ;; libraryinfo.Main.$LambdaImplementor$1.$clinit();
+   (call $$clinit__void@libraryinfo.Main.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

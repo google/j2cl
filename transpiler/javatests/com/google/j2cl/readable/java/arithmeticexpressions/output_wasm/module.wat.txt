@@ -42,6 +42,8 @@
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
  (block $return.label
   (block
+   ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
+   (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; ArithmeticExpressions.this.$init();
@@ -711,6 +713,8 @@
  (result (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (block $return.label
   (block
+   ;; arithmeticexpressions.ArithmeticExpressions.1Ref.$clinit();
+   (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions.1Ref )
    ;; ($1Ref.this.this = $outer_this);
    (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $$outer_this__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

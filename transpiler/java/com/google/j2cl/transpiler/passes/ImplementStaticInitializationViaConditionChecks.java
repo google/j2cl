@@ -43,6 +43,10 @@ import java.util.stream.Collectors;
 public class ImplementStaticInitializationViaConditionChecks
     extends ImplementStaticInitializationBase {
 
+  public ImplementStaticInitializationViaConditionChecks() {
+    super(/* triggerClinitInConstructors = */ true);
+  }
+
   @Override
   public void applyTo(Type type) {
     synthesizeClinitCallsOnFieldAccess(type);

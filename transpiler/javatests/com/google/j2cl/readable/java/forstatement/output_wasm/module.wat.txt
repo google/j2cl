@@ -24,6 +24,8 @@
  (result (ref null $forstatement.ForStatement))
  (block $return.label
   (block
+   ;; forstatement.ForStatement.$clinit();
+   (call $$clinit__void@forstatement.ForStatement )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

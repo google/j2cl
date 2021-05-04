@@ -24,6 +24,8 @@
  (result (ref null $instanceinitializers.InstanceInitializers))
  (block $return.label
   (block
+   ;; instanceinitializers.InstanceInitializers.$clinit();
+   (call $$clinit__void@instanceinitializers.InstanceInitializers )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; InstanceInitializers.this.$init();

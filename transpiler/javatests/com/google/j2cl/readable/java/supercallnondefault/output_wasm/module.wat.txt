@@ -31,6 +31,8 @@
  (result (ref null $supercallnondefault.Parent))
  (block $return.label
   (block
+   ;; supercallnondefault.Parent.$clinit();
+   (call $$clinit__void@supercallnondefault.Parent )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (Parent.this.field = f);
@@ -98,6 +100,8 @@
  (result (ref null $supercallnondefault.Child))
  (block $return.label
   (block
+   ;; supercallnondefault.Child.$clinit();
+   (call $$clinit__void@supercallnondefault.Child )
    ;; Parent.this.Parent.<init>(a);
    (drop (call $m_<init>__int__void@supercallnondefault.Parent (local.get $this)(local.get $a)))
   )

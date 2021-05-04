@@ -26,6 +26,8 @@
  (result (ref null $genericconstructor.GenericConstructor))
  (block $return.label
   (block
+   ;; genericconstructor.GenericConstructor.$clinit();
+   (call $$clinit__void@genericconstructor.GenericConstructor )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -40,6 +42,8 @@
  (result (ref null $genericconstructor.GenericConstructor))
  (block $return.label
   (block
+   ;; genericconstructor.GenericConstructor.$clinit();
+   (call $$clinit__void@genericconstructor.GenericConstructor )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

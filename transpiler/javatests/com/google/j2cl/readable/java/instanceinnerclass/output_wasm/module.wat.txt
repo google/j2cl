@@ -32,6 +32,8 @@
  (result (ref null $instanceinnerclass.InstanceInnerClass))
  (block $return.label
   (block
+   ;; instanceinnerclass.InstanceInnerClass.$clinit();
+   (call $$clinit__void@instanceinnerclass.InstanceInnerClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -126,6 +128,8 @@
  (result (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (block $return.label
   (block
+   ;; instanceinnerclass.InstanceInnerClass.InnerClass.$clinit();
+   (call $$clinit__void@instanceinnerclass.InstanceInnerClass.InnerClass )
    ;; (InnerClass.this.this = $outer_this);
    (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

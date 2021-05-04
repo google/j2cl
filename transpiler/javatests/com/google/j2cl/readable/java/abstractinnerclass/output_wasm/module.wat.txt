@@ -38,6 +38,8 @@
  (result (ref null $abstractinnerclass.InnerClasses))
  (block $return.label
   (block
+   ;; abstractinnerclass.InnerClasses.$clinit();
+   (call $$clinit__void@abstractinnerclass.InnerClasses )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -140,6 +142,8 @@
  (result (ref null $abstractinnerclass.InnerClasses.B))
  (block $return.label
   (block
+   ;; abstractinnerclass.InnerClasses.B.$clinit();
+   (call $$clinit__void@abstractinnerclass.InnerClasses.B )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -202,6 +206,8 @@
  (result (ref null $abstractinnerclass.InnerClasses.C))
  (block $return.label
   (block
+   ;; abstractinnerclass.InnerClasses.C.$clinit();
+   (call $$clinit__void@abstractinnerclass.InnerClasses.C )
    ;; (C.this.this = $outer_this);
    (struct.set $abstractinnerclass.InnerClasses.C $$outer_this__abstractinnerclass_InnerClasses_C(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

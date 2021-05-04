@@ -27,6 +27,8 @@
  (result (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
  (block $return.label
   (block
+   ;; instancefieldaccesslevels.InstanceFieldAccessLevels.$clinit();
+   (call $$clinit__void@instancefieldaccesslevels.InstanceFieldAccessLevels )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

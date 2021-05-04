@@ -40,6 +40,11 @@ import java.util.Set;
 public abstract class ImplementStaticInitializationBase extends NormalizationPass {
 
   private final Set<String> privateStaticMembersCalledFromOtherClasses = new HashSet<>();
+  private final boolean triggerClinitInConstructors;
+
+  public ImplementStaticInitializationBase(boolean triggerClinitInConstructors) {
+    this.triggerClinitInConstructors = triggerClinitInConstructors;
+  }
 
   @Override
   public final void applyTo(CompilationUnit compilationUnit) {
@@ -186,7 +191,9 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
       return false;
     }
 
-    return memberDescriptor.isStatic() || memberDescriptor.isJsConstructor();
+    return memberDescriptor.isStatic()
+        || memberDescriptor.isJsConstructor()
+        || (triggerClinitInConstructors && memberDescriptor.isConstructor());
   }
 
   private boolean isCalledFromOtherClasses(MemberDescriptor memberDescriptor) {

@@ -115,6 +115,8 @@
  (result (ref null $nestednativetype.NativeArray.1))
  (block $return.label
   (block
+   ;; nestednativetype.NativeArray.1.$clinit();
+   (call $$clinit__void@nestednativetype.NativeArray.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $nestednativetype.NativeArray.1 $$outer_this__nestednativetype_NativeArray_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

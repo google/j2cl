@@ -25,6 +25,8 @@
  (result (ref null $staticinitializers.StaticInitializers))
  (block $return.label
   (block
+   ;; staticinitializers.StaticInitializers.$clinit();
+   (call $$clinit__void@staticinitializers.StaticInitializers )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

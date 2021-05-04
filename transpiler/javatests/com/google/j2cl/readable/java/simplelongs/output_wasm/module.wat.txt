@@ -28,6 +28,8 @@
  (result (ref null $simplelongs.SimpleLongs))
  (block $return.label
   (block
+   ;; simplelongs.SimpleLongs.$clinit();
+   (call $$clinit__void@simplelongs.SimpleLongs )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; SimpleLongs.this.$init();

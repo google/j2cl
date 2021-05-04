@@ -25,6 +25,8 @@
  (result (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (block $return.label
   (block
+   ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+   (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

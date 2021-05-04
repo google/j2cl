@@ -23,6 +23,8 @@
  (result (ref null $publicconstructor.PublicConstructor))
  (block $return.label
   (block
+   ;; publicconstructor.PublicConstructor.$clinit();
+   (call $$clinit__void@publicconstructor.PublicConstructor )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

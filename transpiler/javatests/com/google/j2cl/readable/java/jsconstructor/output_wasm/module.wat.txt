@@ -101,6 +101,8 @@
  (result (ref null $jsconstructor.JsConstructorClass))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -166,6 +168,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.A))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.A.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.A )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; A.this.$init();
@@ -183,6 +187,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.A))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.A.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.A )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; A.this.$init();
@@ -281,6 +287,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.B))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.B.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.B )
    ;; B.this.B.<init>(10);
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.const 10)))
    ;; (B.this.fB = 4);
@@ -298,6 +306,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.B))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.B.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.B )
    ;; B.this.B.<init>((x + y));
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.add (local.get $x) (local.get $y))))
    ;; (B.this.fB = (x * y));
@@ -399,6 +409,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.C))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.C.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.C )
    ;; C.this.C.<init>((x + y));
    (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.C (local.get $this)(i32.add (local.get $x) (local.get $y))))
    ;; (C.this.fC = 7);
@@ -498,6 +510,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.D))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.D.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.D )
    ;; D.this.D.<init>();
    (drop (call $m_<init>__void@jsconstructor.JsConstructorClass.D (local.get $this)))
    ;; (D.this.fD = x);
@@ -960,6 +974,8 @@
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.SubVarargs.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
    ;; SubVarargs.this.SubVarargs.<init>(new Object.<init>(),(int[] $array_literal = new OfInt.<init>(1),($array_literal.elements[0] = j),$array_literal));
    (drop (call $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt)))(block (result (ref null $javaemul.internal.WasmArray.OfInt))
     
@@ -1126,6 +1142,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.RegularType))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.RegularType.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.RegularType )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1205,6 +1223,8 @@
  (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (block $return.label
   (block
+   ;; jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.$clinit();
+   (call $$clinit__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType )
    ;; JsConstructorSubtypeOfRegularType.this.JsConstructorSubtypeOfRegularType.<init>(new Object.<init>());
    (drop (call $m_<init>__java_lang_Object__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt)))))
   )

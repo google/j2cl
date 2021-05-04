@@ -36,6 +36,8 @@
  (result (ref null $nestedinstanceinnerclass.OuterClass))
  (block $return.label
   (block
+   ;; nestedinstanceinnerclass.OuterClass.$clinit();
+   (call $$clinit__void@nestedinstanceinnerclass.OuterClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -115,6 +117,8 @@
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (block $return.label
   (block
+   ;; nestedinstanceinnerclass.OuterClass.InnerClass.$clinit();
+   (call $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass )
    ;; (InnerClass.this.this = $outer_this);
    (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -184,6 +188,8 @@
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (block $return.label
   (block
+   ;; nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$clinit();
+   (call $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass )
    ;; (InnerInnerClass.this.this = $outer_this);
    (struct.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

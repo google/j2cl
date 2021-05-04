@@ -63,6 +63,8 @@
  (result (ref null $autoboxing.AutoBoxing))
  (block $return.label
   (block
+   ;; autoboxing.AutoBoxing.$clinit();
+   (call $$clinit__void@autoboxing.AutoBoxing )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1258,6 +1260,8 @@
  (result (ref null $autoboxing.AutoBoxing.1Local))
  (block $return.label
   (block
+   ;; autoboxing.AutoBoxing.1Local.$clinit();
+   (call $$clinit__void@autoboxing.AutoBoxing.1Local )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -1341,6 +1345,8 @@
  (result (ref null $autoboxing.AutoBoxing.2Local))
  (block $return.label
   (block
+   ;; autoboxing.AutoBoxing.2Local.$clinit();
+   (call $$clinit__void@autoboxing.AutoBoxing.2Local )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

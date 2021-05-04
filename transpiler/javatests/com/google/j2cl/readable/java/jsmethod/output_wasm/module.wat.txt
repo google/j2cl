@@ -142,6 +142,8 @@
  (result (ref null $jsmethod.JsMethodExample.Base))
  (block $return.label
   (block
+   ;; jsmethod.JsMethodExample.Base.$clinit();
+   (call $$clinit__void@jsmethod.JsMethodExample.Base )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -240,6 +242,8 @@
  (result (ref null $jsmethod.JsMethodExample.Sub))
  (block $return.label
   (block
+   ;; jsmethod.JsMethodExample.Sub.$clinit();
+   (call $$clinit__void@jsmethod.JsMethodExample.Sub )
    ;; Base.this.Base.<init>();
    (drop (call $m_<init>__void_$pp_jsmethod@jsmethod.JsMethodExample.Base (local.get $this)))
   )

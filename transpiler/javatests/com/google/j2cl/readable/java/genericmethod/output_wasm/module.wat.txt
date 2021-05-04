@@ -62,6 +62,8 @@
  (result (ref null $genericmethod.GenericMethod))
  (block $return.label
   (block
+   ;; genericmethod.GenericMethod.$clinit();
+   (call $$clinit__void@genericmethod.GenericMethod )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -472,6 +474,8 @@
  (result (ref null $genericmethod.GenericMethod.1))
  (block $return.label
   (block
+   ;; genericmethod.GenericMethod.1.$clinit();
+   (call $$clinit__void@genericmethod.GenericMethod.1 )
    ;; ($1.this.this = $outer_this);
    (struct.set $genericmethod.GenericMethod.1 $$outer_this__genericmethod_GenericMethod_1(local.get $this) (local.get $$outer_this))
    ;; GenericMethod.this.GenericMethod.<init>();
@@ -576,6 +580,8 @@
  (result (ref null $genericmethod.GenericMethod.1LocalClass))
  (block $return.label
   (block
+   ;; genericmethod.GenericMethod.1LocalClass.$clinit();
+   (call $$clinit__void@genericmethod.GenericMethod.1LocalClass )
    ;; ($1LocalClass.this.this = $outer_this);
    (struct.set $genericmethod.GenericMethod.1LocalClass $$outer_this__genericmethod_GenericMethod_1LocalClass(local.get $this) (local.get $$outer_this))
    ;; GenericMethod.this.GenericMethod.<init>();
@@ -668,6 +674,8 @@
  (result (ref null $genericmethod.GenericMethod.SuperContainer))
  (block $return.label
   (block
+   ;; genericmethod.GenericMethod.SuperContainer.$clinit();
+   (call $$clinit__void@genericmethod.GenericMethod.SuperContainer )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -750,6 +758,8 @@
  (result (ref null $genericmethod.GenericMethod.Container))
  (block $return.label
   (block
+   ;; genericmethod.GenericMethod.Container.$clinit();
+   (call $$clinit__void@genericmethod.GenericMethod.Container )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -832,6 +842,8 @@
  (result (ref null $genericmethod.GenericMethod.Content))
  (block $return.label
   (block
+   ;; genericmethod.GenericMethod.Content.$clinit();
+   (call $$clinit__void@genericmethod.GenericMethod.Content )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

@@ -24,6 +24,8 @@
  (result (ref null $longinitialvalue.LongInitialValue))
  (block $return.label
   (block
+   ;; longinitialvalue.LongInitialValue.$clinit();
+   (call $$clinit__void@longinitialvalue.LongInitialValue )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

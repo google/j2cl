@@ -28,6 +28,8 @@
  (result (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (block $return.label
   (block
+   ;; staticfieldaccesslevels.StaticFieldAccessLevels.$clinit();
+   (call $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

@@ -29,6 +29,8 @@
  (result (ref null $staticnestedclass.StaticNestedClassParent))
  (block $return.label
   (block
+   ;; staticnestedclass.StaticNestedClassParent.$clinit();
+   (call $$clinit__void@staticnestedclass.StaticNestedClassParent )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -92,6 +94,8 @@
  (result (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (block $return.label
   (block
+   ;; staticnestedclass.StaticNestedClassParent.StaticNestedClass.$clinit();
+   (call $$clinit__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

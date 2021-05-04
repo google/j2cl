@@ -44,6 +44,8 @@
  (result (ref null $interfaces.Main))
  (block $return.label
   (block
+   ;; interfaces.Main.$clinit();
+   (call $$clinit__void@interfaces.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -266,6 +268,8 @@
  (result (ref null $interfaces.Main.Implementor))
  (block $return.label
   (block
+   ;; interfaces.Main.Implementor.$clinit();
+   (call $$clinit__void@interfaces.Main.Implementor )
    ;; (Implementor.this.this = $outer_this);
    (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
@@ -381,6 +385,8 @@
  (result (ref null $interfaces.Main.AbstractImplementor))
  (block $return.label
   (block
+   ;; interfaces.Main.AbstractImplementor.$clinit();
+   (call $$clinit__void@interfaces.Main.AbstractImplementor )
    ;; (AbstractImplementor.this.this = $outer_this);
    (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();

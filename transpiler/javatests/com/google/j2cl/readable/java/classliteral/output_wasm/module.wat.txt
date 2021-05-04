@@ -24,6 +24,8 @@
  (result (ref null $classliteral.ClassLiteral))
  (block $return.label
   (block
+   ;; classliteral.ClassLiteral.$clinit();
+   (call $$clinit__void@classliteral.ClassLiteral )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

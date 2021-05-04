@@ -33,6 +33,8 @@
  (result (ref null $strings.Strings))
  (block $return.label
   (block
+   ;; strings.Strings.$clinit();
+   (call $$clinit__void@strings.Strings )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Strings.this.$init();
@@ -316,6 +318,8 @@
  (result (ref null $strings.Strings.StringHolder))
  (block $return.label
   (block
+   ;; strings.Strings.StringHolder.$clinit();
+   (call $$clinit__void@strings.Strings.StringHolder )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; StringHolder.this.$init();

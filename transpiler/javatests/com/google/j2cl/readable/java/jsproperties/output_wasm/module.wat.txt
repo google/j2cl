@@ -42,6 +42,8 @@
  (result (ref null $jsproperties.Foo))
  (block $return.label
   (block
+   ;; jsproperties.Foo.$clinit();
+   (call $$clinit__void@jsproperties.Foo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -168,6 +170,8 @@
  (result (ref null $jsproperties.Bar))
  (block $return.label
   (block
+   ;; jsproperties.Bar.$clinit();
+   (call $$clinit__void@jsproperties.Bar )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -298,6 +302,8 @@
  (result (ref null $jsproperties.NativeFoo))
  (block $return.label
   (block
+   ;; jsproperties.NativeFoo.$clinit();
+   (call $$clinit__void@jsproperties.NativeFoo )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -390,6 +396,8 @@
  (result (ref null $jsproperties.Main))
  (block $return.label
   (block
+   ;; jsproperties.Main.$clinit();
+   (call $$clinit__void@jsproperties.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

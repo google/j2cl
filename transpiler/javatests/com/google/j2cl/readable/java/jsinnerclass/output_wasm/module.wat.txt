@@ -35,6 +35,8 @@
  (result (ref null $jsinnerclass.Main))
  (block $return.label
   (block
+   ;; jsinnerclass.Main.$clinit();
+   (call $$clinit__void@jsinnerclass.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -111,6 +113,8 @@
  (result (ref null $jsinnerclass.Main.Outer))
  (block $return.label
   (block
+   ;; jsinnerclass.Main.Outer.$clinit();
+   (call $$clinit__void@jsinnerclass.Main.Outer )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Outer.this.$init();

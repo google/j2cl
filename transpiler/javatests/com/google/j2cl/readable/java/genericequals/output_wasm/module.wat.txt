@@ -27,6 +27,8 @@
  (result (ref null $genericequals.GenericEquals))
  (block $return.label
   (block
+   ;; genericequals.GenericEquals.$clinit();
+   (call $$clinit__void@genericequals.GenericEquals )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (GenericEquals.this.value = value);

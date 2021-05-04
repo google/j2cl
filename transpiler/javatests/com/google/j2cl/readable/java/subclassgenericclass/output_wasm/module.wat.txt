@@ -35,6 +35,8 @@
  (result (ref null $subclassgenericclass.GenericClass))
  (block $return.label
   (block
+   ;; subclassgenericclass.GenericClass.$clinit();
+   (call $$clinit__void@subclassgenericclass.GenericClass )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -98,6 +100,8 @@
  (result (ref null $subclassgenericclass.GenericSubclassGenericClass))
  (block $return.label
   (block
+   ;; subclassgenericclass.GenericSubclassGenericClass.$clinit();
+   (call $$clinit__void@subclassgenericclass.GenericSubclassGenericClass )
    ;; GenericClass.this.GenericClass.<init>();
    (drop (call $m_<init>__void_$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
   )
@@ -161,6 +165,8 @@
  (result (ref null $subclassgenericclass.SubclassGenericClass))
  (block $return.label
   (block
+   ;; subclassgenericclass.SubclassGenericClass.$clinit();
+   (call $$clinit__void@subclassgenericclass.SubclassGenericClass )
    ;; GenericClass.this.GenericClass.<init>();
    (drop (call $m_<init>__void_$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
   )

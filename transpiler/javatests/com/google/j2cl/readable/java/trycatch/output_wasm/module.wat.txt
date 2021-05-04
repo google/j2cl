@@ -38,6 +38,8 @@
  (result (ref null $trycatch.TryCatch))
  (block $return.label
   (block
+   ;; trycatch.TryCatch.$clinit();
+   (call $$clinit__void@trycatch.TryCatch )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -371,6 +373,8 @@
  (result (ref null $trycatch.TryCatch.ClosableThing))
  (block $return.label
   (block
+   ;; trycatch.TryCatch.ClosableThing.$clinit();
+   (call $$clinit__void@trycatch.TryCatch.ClosableThing )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

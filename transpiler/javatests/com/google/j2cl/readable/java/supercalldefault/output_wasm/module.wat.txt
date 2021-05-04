@@ -23,6 +23,8 @@
  (result (ref null $supercalldefault.SuperCallDefault))
  (block $return.label
   (block
+   ;; supercalldefault.SuperCallDefault.$clinit();
+   (call $$clinit__void@supercalldefault.SuperCallDefault )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )

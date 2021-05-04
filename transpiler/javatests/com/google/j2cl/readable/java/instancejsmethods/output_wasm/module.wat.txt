@@ -84,6 +84,8 @@
  (result (ref null $instancejsmethods.SuperParent))
  (block $return.label
   (block
+   ;; instancejsmethods.SuperParent.$clinit();
+   (call $$clinit__void@instancejsmethods.SuperParent )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
@@ -190,6 +192,8 @@
  (result (ref null $instancejsmethods.Parent))
  (block $return.label
   (block
+   ;; instancejsmethods.Parent.$clinit();
+   (call $$clinit__void@instancejsmethods.Parent )
    ;; SuperParent.this.SuperParent.<init>();
    (drop (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.SuperParent (local.get $this)))
   )
@@ -316,6 +320,8 @@
  (result (ref null $instancejsmethods.Child))
  (block $return.label
   (block
+   ;; instancejsmethods.Child.$clinit();
+   (call $$clinit__void@instancejsmethods.Child )
    ;; Parent.this.Parent.<init>();
    (drop (call $m_<init>__void_$pp_instancejsmethods@instancejsmethods.Parent (local.get $this)))
   )
@@ -457,6 +463,8 @@
  (result (ref null $instancejsmethods.Main))
  (block $return.label
   (block
+   ;; instancejsmethods.Main.$clinit();
+   (call $$clinit__void@instancejsmethods.Main )
    ;; Object.this.Object.<init>();
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
