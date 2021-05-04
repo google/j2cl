@@ -47,6 +47,7 @@ import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunction
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaConditionChecks;
 import com.google.j2cl.transpiler.passes.ImplementStringCompileTimeConstants;
+import com.google.j2cl.transpiler.passes.ImplementStringConcatenation;
 import com.google.j2cl.transpiler.passes.ImplementSynchronizedStatements;
 import com.google.j2cl.transpiler.passes.ImplementSystemGetProperty;
 import com.google.j2cl.transpiler.passes.InsertBitwiseOperatorBooleanCoercions;
@@ -319,6 +320,7 @@ public enum Backend {
           // Rewrite 'a != b' to '!(a == b)'
           RewriteReferenceEqualityOperations::new,
           RewriteUnaryExpressions::new,
+          ImplementStringConcatenation::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed */ true),
           () -> new InsertBoxingConversions(/* areBooleanAndDoubleBoxed */ true),

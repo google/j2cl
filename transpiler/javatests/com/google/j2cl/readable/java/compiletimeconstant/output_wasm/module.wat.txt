@@ -51,6 +51,7 @@
  (param $this (ref null $compiletimeconstant.CompileTimeConstant))
  (local $b i32)
  (local $s (ref null $java.lang.String))
+ (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $l (ref null $java.lang.String))
  (local $m (ref null $java.lang.String))
  (local $n (ref null $java.lang.String))
@@ -62,9 +63,15 @@
     (drop (local.get $this))
     (global.get $f_I2__compiletimeconstant_CompileTimeConstant)
    ))
-   ;; String s = (compiletimeconstant.CompileTimeConstant.G + javaemul.internal.StringPool.$getString_|Tur_tleDo_ve|());
+   ;; String s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(compiletimeconstant.CompileTimeConstant.G),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Tur_tleDo_ve|()),$stringBuilder.toString());
    
-   (local.set $s (ref.null $java.lang.String))
+   (local.set $s (block (result (ref null $java.lang.String))
+    
+    (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (global.get $java.lang.StringBuilder.vtable) (global.get $java.lang.StringBuilder.itable) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+    (drop (call_ref (local.get $$stringBuilder)(global.get $f_G__compiletimeconstant_CompileTimeConstant)(struct.get $java.lang.StringBuilder.vtable $m_append__long__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (drop (call_ref (local.get $$stringBuilder)(call $$getString_|Tur_tleDo_ve|__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+   ))
    ;; String l = javaemul.internal.StringPool.$getString_|ThisIsALongS...|();
    
    (local.set $l (call $$getString_|ThisIsALongS...|__java_lang_String@javaemul.internal.StringPool ))

@@ -21,6 +21,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertSame;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsNullPointerException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsConstructor;
 import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
@@ -135,6 +136,7 @@ public class Main {
     VALUE
   }
 
+  @Wasm("nop") // javascript only
   private static void testJsEnum() {
     Object o = MyJsEnum.VALUE;
     assertSame(MyJsEnum.class, o.getClass());
@@ -152,6 +154,7 @@ public class Main {
     assertLiteralType("MyJsEnum.VALUE.class", LiteralType.CLASS, o.getClass());
   }
 
+  @Wasm("nop") // TODO(b/184675805): enable when class metadata is implemented for array
   private static void testArray() {
     Object o = new Foo[3];
     assertSame(Foo[].class, o.getClass());
@@ -183,6 +186,7 @@ public class Main {
   @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
   private static class NativeClass {}
 
+  @Wasm("nop") // javascript only
   private static void testNative() {
     Class<?> clazz = NativeFunction.class;
     assertEquals("<native function>", clazz.getName());

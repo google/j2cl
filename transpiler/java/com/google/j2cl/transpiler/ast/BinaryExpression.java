@@ -203,11 +203,18 @@ public class BinaryExpression extends Expression {
     }
   }
 
+  public boolean isStringConcatenation() {
+    return isStringConcatenation(
+        operator, leftOperand.getTypeDescriptor(), rightOperand.getTypeDescriptor());
+  }
+
   private static boolean isStringConcatenation(
       BinaryOperator operator, TypeDescriptor leftOperandType, TypeDescriptor rightOperandType) {
-    if (operator != BinaryOperator.PLUS) {
+
+    if (!operator.isPlusOperator()) {
       return false;
     }
+
     if (TypeDescriptors.isJavaLangString(leftOperandType)
         || TypeDescriptors.isJavaLangString(rightOperandType)) {
       return true;

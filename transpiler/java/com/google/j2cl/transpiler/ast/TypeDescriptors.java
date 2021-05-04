@@ -40,6 +40,7 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaLangLong;
   public DeclaredTypeDescriptor javaLangShort;
   public DeclaredTypeDescriptor javaLangString;
+  public DeclaredTypeDescriptor javaLangStringBuilder;
   public DeclaredTypeDescriptor javaLangVoid;
 
   public DeclaredTypeDescriptor javaLangClass;
@@ -504,6 +505,9 @@ public class TypeDescriptors {
           break;
         case "java.lang.String":
           typeDescriptors.javaLangString = referenceType;
+          break;
+        case "java.lang.StringBuilder":
+          typeDescriptors.javaLangStringBuilder = referenceType;
           break;
         case "java.lang.Void":
           typeDescriptors.javaLangVoid = referenceType;

@@ -46,6 +46,16 @@ public final class StringBuilder extends AbstractStringBuilder
     return this;
   }
 
+  public StringBuilder append(short s) {
+    IntegralToString.appendInt(this, s);
+    return this;
+  }
+
+  public StringBuilder append(byte b) {
+    IntegralToString.appendInt(this, b);
+    return this;
+  }
+
   public StringBuilder append(int i) {
     IntegralToString.appendInt(this, i);
     return this;

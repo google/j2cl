@@ -17,6 +17,8 @@ package com.google.j2cl.integration.stringconversion;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
+import javaemul.internal.annotations.Wasm;
+
 public class Main {
   private static class Person {
     private String firstName;
@@ -46,19 +48,9 @@ public class Main {
     result = nullPerson + " is located in nowhere";
     assertTrue(result.equals("null is located in nowhere"));
 
-    // Boxable primitive
-    result = 9999 + " is greater than " + 8888;
-    assertTrue(result.equals("9999 is greater than 8888"));
-
-    // Devirtualized primitive
-    result = true + " is not " + false;
-    assertTrue(result.equals("true is not false"));
-    result = new Boolean(true) + " is not " + new Boolean(false);
-    assertTrue(result.equals("true is not false"));
-
     // Two Null String instances.
     String s1 = null;
-    String s2 = (new String[0])[0]; // undefined
+    String s2 = null;
     String s3 = s1 + s2; // two nullable string instances
     assertTrue((s3.equals("nullnull")));
     s2 += s2; // nullable string compound assignment, plus a nullable string.
@@ -81,5 +73,75 @@ public class Main {
     // with integer binary operations
     result = 1 + 2 + "Foo" + 3 + 2;
     assertTrue(result.equals("3Foo32"));
+
+    char[] charArray = new char[] {'f', 'o', 'o'};
+    // TODO(b/186691983): enable it when array.toString return the right value in j2wasm
+    // assertTrue(("bar" + charArray).startsWith("bar[C@"));
+    // assertFalse("barfoo".equals("bar" + charArray));
+
+    testCharSequenceConcatenation();
+    testPrimitiveConcatenation();
+    testConcatenationWithUndefined();
+  }
+
+  private static class SimpleCharSequence implements CharSequence {
+    public String toString() {
+      return "some string";
+    }
+
+    public int length() {
+      throw new UnsupportedOperationException();
+    }
+
+    public char charAt(int index) {
+      throw new UnsupportedOperationException();
+    }
+
+    public CharSequence subSequence(int start, int end) {
+      throw new UnsupportedOperationException();
+    }
+  }
+
+  private static void testCharSequenceConcatenation() {
+    StringBuilder stringBuilder = new StringBuilder("foo").append("bar");
+    assertTrue((stringBuilder + "baz").equals("foobarbaz"));
+
+    StringBuffer stringBuffer = new StringBuffer("foo").append("bar");
+    assertTrue((stringBuffer + "baz").equals("foobarbaz"));
+
+    assertTrue(
+        (new SimpleCharSequence() + " from SimpleCharSequence")
+            .equals("some string from SimpleCharSequence"));
+  }
+
+  private static void testPrimitiveConcatenation() {
+    boolean bool = true;
+    assertTrue((bool + " is true").equals("true is true"));
+    short s = 1;
+    assertTrue((s + " is 1").equals("1 is 1"));
+    byte b = 1;
+    assertTrue((b + " is 1").equals("1 is 1"));
+    char c = 'F';
+    assertTrue((c + "oo").equals("Foo"));
+    int i = 1;
+    assertTrue((i + " is 1").equals("1 is 1"));
+    long l = 1L;
+    assertTrue((l + " is 1").equals("1 is 1"));
+    double d = 1.1d;
+    assertTrue((d + " is 1.1").equals("1.1 is 1.1"));
+    float f = 1.1f;
+    // TODO(b/186909158): enable this test when Float.floatToRawIntBit is not delegating to JsUtils
+    // assertTrue((f + " is 1.1").equals("1.1 is 1.1"));
+
+    String result = new Boolean(true) + " is not " + new Boolean(false);
+    assertTrue(result.equals("true is not false"));
+  }
+
+  @Wasm("nop") // specific test for js
+  private static void testConcatenationWithUndefined() {
+    String s1 = null;
+    String s2 = (new String[0])[0]; // undefined
+    String s3 = s1 + s2; // two nullable string instances
+    assertTrue((s3.equals("nullnull")));
   }
 }

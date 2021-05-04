@@ -53,6 +53,7 @@ public class FrontendConstants {
           "java.lang.Object",
           "java.lang.Runnable",
           "java.lang.String",
+          "java.lang.StringBuilder",
           "java.lang.Throwable",
           "java.util.Iterator",
           "javaemul.internal.Asserts",

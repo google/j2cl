@@ -110,11 +110,7 @@ public enum WasmBinaryOperation {
     BinaryOperator operator = expression.getOperator();
 
     checkState(wasmOperationByBinaryOperator.containsKey(operator));
-
-    if (!expression.getTypeDescriptor().isPrimitive() && operator == BinaryOperator.PLUS) {
-      // TODO(b/170691638): handle string concatenation
-      return null;
-    }
+    checkState(expression.getTypeDescriptor().isPrimitive());
 
     return wasmOperationByBinaryOperator.get(operator);
   }

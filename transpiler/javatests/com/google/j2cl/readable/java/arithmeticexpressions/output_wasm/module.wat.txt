@@ -210,6 +210,7 @@
  (local $$index_3 i32)
  (local $booleans (ref null $javaemul.internal.WasmArray.OfBoolean))
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $shorts (ref null $javaemul.internal.WasmArray.OfShort))
  (local $b i32)
  (local $$array_4 (ref null $javaemul.internal.WasmArray.OfShort))
@@ -313,8 +314,14 @@
    ;; String[] strings = null;
    
    (local.set $strings (ref.null $javaemul.internal.WasmArray.OfObject))
-   ;; (strings.elements[0] = (((String) strings.elements[0]) + null));
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (ref.null $java.lang.String))
+   ;; (strings.elements[0] = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(((String) strings.elements[0])),$stringBuilder.append(null),$stringBuilder.toString()));
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (block (result (ref null $java.lang.String))
+    
+    (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (global.get $java.lang.StringBuilder.vtable) (global.get $java.lang.StringBuilder.itable) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+    (drop (call_ref (local.get $$stringBuilder)(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0)) (global.get $java.lang.String.rtt))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (drop (call_ref (local.get $$stringBuilder)(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+   ))
    ;; short[] shorts = null;
    
    (local.set $shorts (ref.null $javaemul.internal.WasmArray.OfShort))

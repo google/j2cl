@@ -140,6 +140,13 @@ public enum BinaryOperator implements Operator {
     }
   }
 
+  public boolean isPlusOperator() {
+    if (isCompoundAssignment()) {
+      return getUnderlyingBinaryOperator().isPlusOperator();
+    }
+    return this == PLUS;
+  }
+
   /** Returns the precedence of this operator. See {@link Expression#getPrecedence()}. */
   public Expression.Precedence getPrecedence() {
     return precedence;

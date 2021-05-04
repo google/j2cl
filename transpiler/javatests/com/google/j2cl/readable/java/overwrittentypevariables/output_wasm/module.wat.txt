@@ -329,12 +329,19 @@
  (param $input (ref null $java.lang.Enum))
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
+ (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $this (ref null $overwrittentypevariables.HashFunctions.2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overwrittentypevariables.HashFunctions.2.rtt)))
  (block $return.label
   (block
-   ;; return (javaemul.internal.StringPool.$getString_||() + input.ordinal());
-   (local.set $return.value (ref.null $java.lang.String))
+   ;; return (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(javaemul.internal.StringPool.$getString_||()),$stringBuilder.append(input.ordinal()),$stringBuilder.toString());
+   (local.set $return.value (block (result (ref null $java.lang.String))
+    
+    (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (global.get $java.lang.StringBuilder.vtable) (global.get $java.lang.StringBuilder.itable) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+    (drop (call_ref (local.get $$stringBuilder)(call $$getString_||__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (drop (call_ref (local.get $$stringBuilder)(call_ref (local.get $input)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
+   ))
    (br $return.label)
   )
  )

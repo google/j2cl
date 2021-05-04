@@ -18,8 +18,6 @@ package com.google.j2cl.integration.binaryexpressions;
 import static com.google.j2cl.integration.testing.Asserts.assertEqualsDelta;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
-
 /** Test basic binary operations. This test does not aim to test primitive overflow and Coercion. */
 @SuppressWarnings({"NarrowingCompoundAssignment", "ReferenceEquality", "ConstantOverflow"})
 public class Main {
@@ -180,13 +178,16 @@ public class Main {
     assertTrue(outer.b);
   }
 
-  @Wasm("nop") // TODO(b/170691638): enable when string concatenation is supported
   private static void testStringConcatenation() {
+    String foo = "foo";
+    String bar = "bar";
+    assertTrue("foobar".equals(foo + bar));
+
     String s = null;
-    assertTrue(s + s == "nullnull");
+    assertTrue((s + s).equals("nullnull"));
 
     String[] stringArray = new String[1];
-    assertTrue(stringArray[0] + stringArray[0] == "nullnull");
+    assertTrue((stringArray[0] + stringArray[0]).equals("nullnull"));
 
     boolean bool = false;
     assertTrue(("" + bool).equals("false"));

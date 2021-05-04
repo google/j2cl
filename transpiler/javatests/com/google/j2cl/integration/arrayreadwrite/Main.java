@@ -18,8 +18,6 @@ package com.google.j2cl.integration.arrayreadwrite;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
-
 public class Main {
   public static void main(String... args) {
     testObjects();
@@ -289,13 +287,6 @@ public class Main {
     longArray[0] += 1;
     assertTrue(longArray[0] == 1);
 
-    testCompoundArrayOperationsWithString();
-  }
-
-  // TODO(b/170691638): Move this code back to testCompoundArrayOperations() when we have a full
-  // String support on wasm
-  @Wasm("nop")
-  private static void testCompoundArrayOperationsWithString() {
     String[] stringArray = new String[1];
     stringArray[0] += null;
     assertTrue(stringArray[0].equals("nullnull"));
