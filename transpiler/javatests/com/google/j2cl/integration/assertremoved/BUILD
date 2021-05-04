@@ -15,10 +15,9 @@ integration_test(
     srcs = glob(["*.java"]),
     defs = [
         # Turn off asserts since it is what this test is testing.
-        "--remove_j2cl_asserts=true",
+        "--remove_j2cl_asserts",
     ],
     disable_uncompiled_test = True,
     disable_wasm_dev_test = True,
     enable_wasm = True,
-    tags = ["manual"],
 )
