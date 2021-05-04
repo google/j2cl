@@ -47,6 +47,7 @@ public class Main {
     testArrayList();
     testSystemArrayCopy();
     testString();
+    testLambda();
   }
 
   static class A {
@@ -396,5 +397,22 @@ public class Main {
     assertEquals("xy5true", builder.toString());
 
     assertEquals("5", String.valueOf(5));
+  }
+
+  interface Function {
+    int apply();
+  }
+
+  private static void testLambda() {
+    boolean b = true;
+    Function f =
+        () -> {
+          if (!b) {
+            return 1;
+          } else {
+            return 2;
+          }
+        };
+    assertEquals(2, f.apply());
   }
 }

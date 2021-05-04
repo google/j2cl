@@ -56,7 +56,7 @@ public class IfStatement extends Statement {
   public IfStatement clone() {
     return new IfStatement(
         getSourcePosition(),
-        conditionExpression,
+        conditionExpression.clone(),
         thenStatement.clone(),
         AstUtils.clone(elseStatement));
   }
