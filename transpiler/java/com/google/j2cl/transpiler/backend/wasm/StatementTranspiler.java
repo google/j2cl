@@ -32,6 +32,7 @@ import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.WhileStatement;
@@ -228,6 +229,16 @@ class StatementTranspiler {
         renderUnconditionalBranch(
             defaultCaseNumber != -1 ? defaultCaseNumber : switchStatement.getCases().size());
         builder.closeParens();
+      }
+
+      @Override
+      public boolean enterSynchronizedStatement(SynchronizedStatement synchronizedStatement) {
+        render(
+            synchronizedStatement
+                .getExpression()
+                .makeStatement(synchronizedStatement.getSourcePosition()));
+        render(synchronizedStatement.getBody());
+        return false;
       }
 
       @Override

@@ -41,7 +41,13 @@
  (block $return.label
   (block
    ;; synchronized (SynchronizedStatement.this);{
-   ;; unimplemented statement SynchronizedStatement
+   ;; SynchronizedStatement.this;
+   (drop (local.get $this))(block
+    ;; (SynchronizedStatement.this.a = (SynchronizedStatement.this.a + 1));
+    (struct.set $synchronizedstatement.SynchronizedStatement $f_a__synchronizedstatement_SynchronizedStatement_(local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $f_a__synchronizedstatement_SynchronizedStatement_(local.get $this)) (i32.const 1)))
+    ;; (SynchronizedStatement.this.b = (SynchronizedStatement.this.b - 1));
+    (struct.set $synchronizedstatement.SynchronizedStatement $f_b__synchronizedstatement_SynchronizedStatement_(local.get $this) (i32.sub (struct.get $synchronizedstatement.SynchronizedStatement $f_b__synchronizedstatement_SynchronizedStatement_(local.get $this)) (i32.const 1)))
+   )
   )
  )
 )
