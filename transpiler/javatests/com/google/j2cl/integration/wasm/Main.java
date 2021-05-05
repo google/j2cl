@@ -397,6 +397,100 @@ public class Main {
     assertEquals("xy5true", builder.toString());
 
     assertEquals("5", String.valueOf(5));
+
+    // TODO(b/186909158): Enable after floatToRawBits is fixed.
+    // assertEquals("5.5", String.valueOf(5.5f));
+    // assertTrue(String.valueOf(123.459980f).startsWith("123.4599"));
+
+    assertDoubleToStringEquals("5.5", 5.5d);
+    assertDoubleToStringEquals("NaN", Double.NaN);
+    assertDoubleToStringEquals("Infinity", Double.POSITIVE_INFINITY);
+    assertDoubleToStringEquals("-Infinity", Double.NEGATIVE_INFINITY);
+    assertDoubleToStringEquals("1.7976931348623157E308", Double.MAX_VALUE);
+    // Double min value is different for Closure and Java.
+    // assertDoubleToStringEquals("4.9E-324", Double.MIN_VALUE);
+
+    // Ported from j2objc
+    double d;
+    d = Double.longBitsToDouble(0x470fffffffffffffL);
+    assertDoubleToStringEquals("2.0769187434139308E34", d);
+    d = Double.longBitsToDouble(0x4710000000000000L);
+    assertDoubleToStringEquals("2.076918743413931E34", d);
+
+    d = Double.longBitsToDouble(0x470000000000000aL);
+    assertDoubleToStringEquals("1.0384593717069678E34", d);
+    d = Double.longBitsToDouble(0x470000000000000bL);
+    assertDoubleToStringEquals("1.038459371706968E34", d);
+
+    d = Double.longBitsToDouble(0x4700000000000017L);
+    assertDoubleToStringEquals("1.0384593717069708E34", d);
+    d = Double.longBitsToDouble(0x4700000000000018L);
+    assertDoubleToStringEquals("1.038459371706971E34", d);
+
+    d = Double.longBitsToDouble(0x4700000000000024L);
+    assertDoubleToStringEquals("1.0384593717069738E34", d);
+    d = Double.longBitsToDouble(0x4700000000000025L);
+    assertDoubleToStringEquals("1.038459371706974E34", d);
+
+    d = Double.longBitsToDouble(0x4700000000000031L);
+    assertDoubleToStringEquals("1.0384593717069768E34", d);
+    d = Double.longBitsToDouble(0x4700000000000032L);
+    assertDoubleToStringEquals("1.038459371706977E34", d);
+
+    d = Double.longBitsToDouble(0x470000000000003eL);
+    assertDoubleToStringEquals("1.0384593717069798E34", d);
+    d = Double.longBitsToDouble(0x470000000000003fL);
+    assertDoubleToStringEquals("1.03845937170698E34", d);
+
+    d = Double.longBitsToDouble(0x7e00000000000003L);
+    assertDoubleToStringEquals("8.371160993642719E298", d);
+    d = Double.longBitsToDouble(0x7e00000000000004L);
+    assertDoubleToStringEquals("8.37116099364272E298", d);
+
+    d = Double.longBitsToDouble(0x7e00000000000008L);
+    assertDoubleToStringEquals("8.371160993642728E298", d);
+    d = Double.longBitsToDouble(0x7e00000000000009L);
+    assertDoubleToStringEquals("8.37116099364273E298", d);
+
+    d = Double.longBitsToDouble(0x7e00000000000013L);
+    assertDoubleToStringEquals("8.371160993642749E298", d);
+    d = Double.longBitsToDouble(0x7e00000000000014L);
+    assertDoubleToStringEquals("8.37116099364275E298", d);
+
+    d = Double.longBitsToDouble(0x7e00000000000023L);
+    assertDoubleToStringEquals("8.371160993642779E298", d);
+    d = Double.longBitsToDouble(0x7e00000000000024L);
+    assertDoubleToStringEquals("8.37116099364278E298", d);
+
+    d = Double.longBitsToDouble(0x7e0000000000002eL);
+    assertDoubleToStringEquals("8.371160993642799E298", d);
+    d = Double.longBitsToDouble(0x7e0000000000002fL);
+    assertDoubleToStringEquals("8.3711609936428E298", d);
+
+    d = Double.longBitsToDouble(0xda00000000000001L);
+    assertDoubleToStringEquals("-3.3846065602060736E125", d);
+    d = Double.longBitsToDouble(0xda00000000000002L);
+    assertDoubleToStringEquals("-3.384606560206074E125", d);
+
+    d = Double.longBitsToDouble(0xda00000000000005L);
+    assertDoubleToStringEquals("-3.3846065602060766E125", d);
+    d = Double.longBitsToDouble(0xda00000000000006L);
+    assertDoubleToStringEquals("-3.384606560206077E125", d);
+
+    d = Double.longBitsToDouble(0xda00000000000009L);
+    assertDoubleToStringEquals("-3.3846065602060796E125", d);
+    d = Double.longBitsToDouble(0xda0000000000000aL);
+    assertDoubleToStringEquals("-3.38460656020608E125", d);
+
+    d = Double.longBitsToDouble(0xda0000000000000dL);
+    assertDoubleToStringEquals("-3.3846065602060826E125", d);
+    d = Double.longBitsToDouble(0xda0000000000000eL);
+    assertDoubleToStringEquals("-3.384606560206083E125", d);
+  }
+
+  private static void assertDoubleToStringEquals(String expected, double d) {
+    // Closure version uses 'e+' for exponential so normalize it back to Java style.
+    assertEquals(expected, String.valueOf(d).replace("e+", "E"));
   }
 
   interface Function {

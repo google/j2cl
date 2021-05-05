@@ -244,6 +244,24 @@ abstract class WasmArray implements Serializable, Cloneable {
       elements = new long[length];
     }
 
+    @Override
+    void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
+      copy(((WasmArray.OfLong) values).elements, valueOffset, elements, offset, len);
+    }
+
+    private static void copy(long[] src, int srcOfs, long[] dest, int destOfs, int len) {
+      if (src == dest && srcOfs < destOfs) {
+        // Reverse copy to handle overlap that would destroy values otherwise.
+        srcOfs += len;
+        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
+          dest[--destEnd] = src[--srcOfs];
+        }
+      } else {
+        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
+          dest[destOfs++] = src[srcOfs++];
+        }
+      }
+    }
   }
 
   static class OfFloat extends WasmArray {

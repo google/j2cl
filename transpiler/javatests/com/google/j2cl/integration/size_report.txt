@@ -1,23 +1,21 @@
 Integration tests size report:
 **************************************
-There are 4 optimized size changes.
+There are 2 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  1996831 to 1996789 bytes (100%->100.0%) and from
-  712379 to 712338 bytes (100%->100.0%) gzipped.
+  1996789 to 2006072 bytes (100%->100.5%) and from
+  712338 to 715591 bytes (100%->100.5%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-        old      new
-        765      735 compiletimeconstant.esnext (-3.9%)
-       1055     1023 compiletimeconstant (-3.0%)
-       1052     1040 jsfunctionbridge.esnext (-1.1%)
+  none
 
 
 Expansion report highlights:
 **************************************
         old      new
-       1336     1369 jsfunctionbridge (2.5%)
+       4755     6376 wasm.esnext (34.1%)
+       5141     6773 wasm (31.7%)
 
 
 Incremental size reports (non-gzip):
@@ -30,12 +28,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4022265  4022265 box2d_default (unchanged)
-    2194602  2194602 box2d_default.minified (unchanged)
-    1166230  1166230 box2d_default.rta (unchanged)
-    2418828  2418828 emptyclass (unchanged)
-    1452868  1452868 emptyclass.minified (unchanged)
-     700620   700620 emptyclass.rta (unchanged)
+    4022270  4022580 box2d_default (0.0%)
+    2194607  2194823 box2d_default.minified (0.0%)
+    1166235  1166451 box2d_default.rta (0.0%)
+    2418833  2419143 emptyclass (0.0%)
+    1452873  1453089 emptyclass.minified (0.0%)
+     700625   700841 emptyclass.rta (0.0%)
 
 
 All reports:
@@ -123,8 +121,8 @@ All reports:
         617      617 classliteralobfuscated.esnext (unchanged)
        2143     2143 classliteralstripped (unchanged)
        1848     1848 classliteralstripped.esnext (unchanged)
-       1055     1023 compiletimeconstant (-3.0%)
-        765      735 compiletimeconstant.esnext (-3.9%)
+       1023     1023 compiletimeconstant (unchanged)
+        735      735 compiletimeconstant.esnext (unchanged)
        1015     1015 complexcascadingconstructor (unchanged)
         725      725 complexcascadingconstructor.esnext (unchanged)
         987      987 continuestatement (unchanged)
@@ -237,8 +235,8 @@ All reports:
        5674     5674 jsenum.esnext (unchanged)
        1182     1182 jsfunction (unchanged)
         868      868 jsfunction.esnext (unchanged)
-       1336     1369 jsfunctionbridge (2.5%)
-       1052     1040 jsfunctionbridge.esnext (-1.1%)
+       1369     1369 jsfunctionbridge (unchanged)
+       1040     1040 jsfunctionbridge.esnext (unchanged)
        1765     1765 jsfunctiontypeannotation (unchanged)
        1466     1466 jsfunctiontypeannotation.esnext (unchanged)
         971      971 jsinnerclass (unchanged)
@@ -415,8 +413,8 @@ All reports:
        3352     3352 varargs.esnext (unchanged)
        1001     1001 variables (unchanged)
         712      712 variables.esnext (unchanged)
-       5141     5141 wasm (unchanged)
-       4755     4755 wasm.esnext (unchanged)
+       5141     6773 wasm (31.7%)
+       4755     6376 wasm.esnext (34.1%)
         918      918 whilestatement (unchanged)
         624      624 whilestatement.esnext (unchanged)
        1976     1976 wideningfloatconversion (unchanged)
