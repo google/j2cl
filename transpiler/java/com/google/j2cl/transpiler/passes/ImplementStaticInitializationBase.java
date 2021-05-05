@@ -40,6 +40,8 @@ import java.util.Set;
 public abstract class ImplementStaticInitializationBase extends NormalizationPass {
 
   private final Set<String> privateStaticMembersCalledFromOtherClasses = new HashSet<>();
+
+  // TODO(b/187218486): Remove after adding a pass to convert constructors to static methods.
   private final boolean triggerClinitInConstructors;
 
   public ImplementStaticInitializationBase(boolean triggerClinitInConstructors) {

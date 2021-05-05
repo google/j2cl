@@ -322,7 +322,8 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
     body.accept(
         new AbstractRewriter() {
 
-          // TODO(rluble): move the computation of captures from CompilationUnitBuilder to a pass.
+          // TODO(b/186272309): move the computation of captures from CompilationUnitBuilder to a
+          // pass.
           @Override
           public boolean shouldProcessNewInstance(NewInstance newInstance) {
             TypeDeclaration targetClass =

@@ -69,20 +69,10 @@ public enum WasmBinaryOperation {
       return TypeDescriptors.get().javaLangObject;
     }
 
+    // All conversion and coercion passes have already run; both operands have consistent types,
+    // return the left one.
     checkState(expression.getTypeDescriptor().isPrimitive());
-
-    // TODO(dramaix): when coercion are implemented, we should always return the left operand type
-    //  descriptor for both relational and arithmetic operation.
-    if (expression.getOperator().isRelationalOperator()) {
-      // For relational expressions, the type of the wasm instruction to use is the type of the
-      // operands. E.g. if you compare int, you need to use i32.eq; if you compare float you need to
-      // use f32.eq.
-      return expression.getLeftOperand().getTypeDescriptor();
-    }
-
-    // For Arithmetic expressions, the type of the wasm instruction to use is the type of the
-    // BinaryExpression result. In the future, operands will be casted/coerced upfront.
-    return expression.getTypeDescriptor();
+    return expression.getLeftOperand().getTypeDescriptor();
   }
 
   private static final Map<BinaryOperator, WasmBinaryOperation> wasmOperationByBinaryOperator =

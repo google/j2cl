@@ -16,38 +16,19 @@
 package com.google.j2cl.transpiler.backend.wasm;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloatOrDouble;
 
 import com.google.common.base.Ascii;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.PrefixOperator;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
 
 /** Abstract the wasm unary instructions set used by j2wasm. */
 public enum WasmUnaryOperation {
-  EQZ {
-    @Override
-    public TypeDescriptor getOperandType(UnaryExpression expression) {
-      // TODO(dramaix): return expression.getOperand().getTypeDescriptor() when coercion are in
-      //  place.
-      return PrimitiveTypes.BOOLEAN;
-    }
-  },
-  NEG {
-    @Override
-    public TypeDescriptor getOperandType(UnaryExpression expression) {
-      TypeDescriptor operandType = expression.getOperand().getTypeDescriptor();
-      // negations on integers have been previously transformed.
-      checkArgument(isPrimitiveFloatOrDouble(operandType));
-      return operandType;
-    }
-  },
-  ;
+  EQZ,
+  NEG;
 
   public static WasmUnaryOperation get(UnaryExpression expression) {
-    // PostfixExpressions have been transformed to PrefixExpression
+    // PostfixExpressions have been transformed to PrefixExpressions
     checkArgument(expression instanceof PrefixExpression);
 
     PrefixOperator operator = ((PrefixExpression) expression).getOperator();
@@ -63,10 +44,9 @@ public enum WasmUnaryOperation {
   }
 
   public String getInstruction(UnaryExpression expression) {
-    return GenerationEnvironment.getWasmTypeForPrimitive(getOperandType(expression))
+    return GenerationEnvironment.getWasmTypeForPrimitive(
+            expression.getOperand().getTypeDescriptor())
         + "."
         + Ascii.toLowerCase(name());
   }
-
-  public abstract TypeDescriptor getOperandType(UnaryExpression expression);
 }

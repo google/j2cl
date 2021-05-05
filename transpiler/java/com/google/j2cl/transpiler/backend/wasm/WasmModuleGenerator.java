@@ -287,7 +287,6 @@ public class WasmModuleGenerator {
       // enclosing type because they are not overridden but normal instance methods have to
       // declare the parameter more generically as java.lang.Object, since all the overrides need
       // to have matching signatures.
-      // TODO(rluble): revisit once the wasm gc spec and implementation have function subtyping.
       builder.newLine();
       if (methodDescriptor.isClassDynamicDispatch()) {
         builder.append(
@@ -311,15 +310,16 @@ public class WasmModuleGenerator {
     // Emit return type
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
     if (method.isConstructor()) {
-      // TODO(rluble): Remove after constructor normalization is in place, constructors should not
-      // reach the back end.
+      // TODO(b/187218486): Remove after constructor normalization is in place, constructors should
+      // not reach the output stage.
       // Constructors are modelled for now as if they return the object that was created.
       builder.newLine();
       builder.append("(result " + environment.getWasmType(enclosingTypeDescriptor) + ")");
     } else if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.newLine();
       builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
-      // TODO(rluble): Add a pass to make all methods return from the top block.
+      // TODO(b/187233926): Add a pass to normalize and have only one return at the end of the
+      // function body.
       // Define a local variable to hold the result value to allow for returns that appear in
       // the inner blocks.
       builder.newLine();
@@ -358,7 +358,7 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(")");
     if (method.isConstructor()) {
-      // TODO(rluble): Add a pass to transform constructors into static methods.
+      // TODO(b/187218486): Add a pass to transform constructors into static methods.
       builder.newLine();
       builder.append("(local.get $this)");
     } else if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {

@@ -34,7 +34,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -99,11 +98,6 @@ final class ExpressionTranspiler {
 
       private void renderBinaryOperation(BinaryExpression expression) {
         WasmBinaryOperation wasmOperation = WasmBinaryOperation.getOperation(expression);
-        if (wasmOperation == null) {
-          // TODO(dramaix): remove and checkArgument once every operator is implemented.
-          renderUnimplementedExpression(expression);
-          return;
-        }
 
         sourceBuilder.append("(" + wasmOperation.getInstruction(expression) + " ");
         renderTypedExpression(
@@ -185,7 +179,8 @@ final class ExpressionTranspiler {
         TypeDescriptor castTypeDescriptor =
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
         if (castTypeDescriptor.isInterface()) {
-          // TODO(rluble): implement interface casts.
+          // TODO(b/186523011): implement interface casts, in this version the type check for
+          // interfaces is delayed until a method is called.
           render(castExpression.getExpression());
           return false;
         }
@@ -221,12 +216,6 @@ final class ExpressionTranspiler {
         sourceBuilder.append(") (else ");
         renderTypedExpression(typeDescriptor, conditionalExpression.getFalseExpression());
         sourceBuilder.append("))");
-        return false;
-      }
-
-      @Override
-      public boolean enterFunctionExpression(FunctionExpression expression) {
-        renderUnimplementedExpression(expression);
         return false;
       }
 
@@ -486,8 +475,7 @@ final class ExpressionTranspiler {
         WasmUnaryOperation wasmUnaryOperation = WasmUnaryOperation.get(expression);
 
         sourceBuilder.append("(" + wasmUnaryOperation.getInstruction(expression) + " ");
-        renderTypedExpression(
-            wasmUnaryOperation.getOperandType(expression), expression.getOperand());
+        render(expression.getOperand());
 
         sourceBuilder.append(")");
         return false;
@@ -506,7 +494,7 @@ final class ExpressionTranspiler {
         }
       }
 
-      // TODO(dramaix): remove when coercions and casting are in place.
+      // TODO(b/182436577): remove this method when NullLiterals have the correct type.
       private void renderTypedExpression(TypeDescriptor typeDescriptor, Expression expression) {
         ExpressionTranspiler.renderTypedExpression(
             typeDescriptor, expression, sourceBuilder, environment);
@@ -535,17 +523,6 @@ final class ExpressionTranspiler {
 
       private void render(Expression expression) {
         expression.accept(this);
-      }
-
-      // TODO(rluble): remove this method which is only a place holder until all expressions are
-      // implemented.
-      private void renderUnimplementedExpression(Expression expression) {
-        if (!returnsVoid(expression)) {
-          // This is an unimplemented expression that returns a value (i.e. not a call to a
-          // method returning void).
-          // Emit the default value for the type as a place holder so that the module compiles.
-          render(expression.getTypeDescriptor().getDefaultValue());
-        }
       }
     }.render(expression);
   }
