@@ -179,8 +179,9 @@ final class ExpressionTranspiler {
         TypeDescriptor castTypeDescriptor =
             castExpression.getCastTypeDescriptor().toRawTypeDescriptor();
         if (castTypeDescriptor.isInterface()) {
-          // TODO(b/186523011): implement interface casts, in this version the type check for
-          // interfaces is delayed until a method is called.
+          // TODO(b/183769034): At the moment the actual cast check is performed at interface
+          // method call. Depending on whether WASM NPEs become catchable there might need to be
+          // instrumentation code here.
           render(castExpression.getExpression());
           return false;
         }
