@@ -16,9 +16,11 @@
 package java.lang;
 
 import static javaemul.internal.InternalPreconditions.checkCriticalArithmetic;
+import static jsinterop.annotations.JsPackage.GLOBAL;
 
 import javaemul.internal.LongUtils;
 import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
 
 /**
  * Math utility methods and constants.
@@ -754,9 +756,8 @@ public final class Math {
     return s * z;
   }
 
-  public static double random() {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.random")
+  public static native double random();
 
   @Wasm("f64.nearest")
   public static native double rint(double x);

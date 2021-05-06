@@ -4,6 +4,7 @@
 
 load("//build_defs:rules.bzl", "j2cl_library", "j2wasm_library")
 load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
+load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(":package_sources.bzl", "package_sources")
 load(":jdk_system.bzl", "jdk_system")
 
@@ -97,6 +98,12 @@ j2wasm_library(
         "//third_party:gwt-javaemul-internal-annotations-j2wasm",
         "//third_party:gwt-jsinterop-annotations-j2wasm",
     ],
+)
+
+closure_js_library(
+    name = "j2wasm_js",
+    srcs = ["super-wasm/j2wasm.js"],
+    visibility = ["//:__pkg__"],
 )
 
 j2cl_library(

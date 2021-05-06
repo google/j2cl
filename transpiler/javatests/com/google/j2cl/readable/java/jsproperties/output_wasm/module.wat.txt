@@ -327,14 +327,8 @@
 (elem declare func $m_getA__java_lang_Object@jsproperties.NativeFoo)
 
 ;;; double NativeFoo.getB()
-(func $m_getB__double@jsproperties.NativeFoo
+(func $m_getB__double@jsproperties.NativeFoo (import "imports" "Math.PI") 
  (result f64)
- (local $return.value f64)
- (block $return.label
-  (block
-  )
- )
- (local.get $return.value)
 )
 
 ;;; void NativeFoo.$clinit()

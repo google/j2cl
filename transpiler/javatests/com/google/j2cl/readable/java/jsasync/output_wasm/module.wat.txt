@@ -206,15 +206,9 @@
 (elem declare func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main)
 
 ;;; T Main.await(IThenable<T> thenable)
-(func $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main
+(func $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (import "imports" "await") 
  (param $thenable (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
- (block $return.label
-  (block
-  )
- )
- (local.get $return.value)
 )
 
 ;;; void Main.$init()
@@ -805,15 +799,9 @@
 )
 
 ;;; Promise<T> Promise.resolve(T value)
-(func $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise
+(func $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (import "imports" "Promise.resolve") 
  (param $value (ref null $java.lang.Object))
  (result (ref null $jsasync.Main.Promise))
- (local $return.value (ref null $jsasync.Main.Promise))
- (block $return.label
-  (block
-  )
- )
- (local.get $return.value)
 )
 
 ;;; void Promise.$clinit()

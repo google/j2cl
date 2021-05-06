@@ -85,7 +85,6 @@ public class Main {
   }
 
   // Make sure String does not end up compared via '==' (b/33850935).
-  @Wasm("nop")
   private static void testEqualityIsStrict_regression() {
     // java.lang.Object.equals should not optimize to '=='
     assertTrue(!new StringBuilder("data").equals("data"));

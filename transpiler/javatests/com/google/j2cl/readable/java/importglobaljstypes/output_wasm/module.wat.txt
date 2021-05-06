@@ -153,14 +153,8 @@
 )
 
 ;;; double NativeDate.now()
-(func $m_now__double@importglobaljstypes.Date.NativeDate
+(func $m_now__double@importglobaljstypes.Date.NativeDate (import "imports" "Date.now") 
  (result f64)
- (local $return.value f64)
- (block $return.label
-  (block
-  )
- )
- (local.get $return.value)
 )
 
 ;;; void NativeDate.$clinit()
@@ -230,15 +224,9 @@
 )
 
 ;;; boolean Number.fun(double x)
-(func $m_fun__double__boolean@importglobaljstypes.Number
+(func $m_fun__double__boolean@importglobaljstypes.Number (import "imports" "Number.isInteger") 
  (param $x f64)
  (result i32)
- (local $return.value i32)
- (block $return.label
-  (block
-  )
- )
- (local.get $return.value)
 )
 
 ;;; boolean Number.test(double x)
@@ -259,14 +247,8 @@
 )
 
 ;;; NativeFunction<String> Number.getFromCharCodeFunction()
-(func $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number
+(func $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number (import "imports" "String.fromCharCode") 
  (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
- (block $return.label
-  (block
-  )
- )
- (local.get $return.value)
 )
 
 ;;; String Number.fromCharCode(int[] array)

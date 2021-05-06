@@ -270,6 +270,12 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append("(func " + environment.getMethodImplementationName(method.getDescriptor()));
 
+    boolean isStaticExtern = method.getDescriptor().isExtern() && method.getDescriptor().isStatic();
+    if (isStaticExtern) {
+      builder.append(
+          String.format(
+              " (import \"imports\" \"%s\") ", method.getDescriptor().getQualifiedJsName()));
+    }
     if (pendingEntryPoints.remove(method.getQualifiedBinaryName())) {
       if (!method.isStatic()) {
         problems.error("Entry point [%s] is not a static method.", method.getQualifiedBinaryName());
@@ -318,12 +324,24 @@ public class WasmModuleGenerator {
     } else if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.newLine();
       builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
-      // TODO(b/187233926): Add a pass to normalize and have only one return at the end of the
-      // function body.
+
       // Define a local variable to hold the result value to allow for returns that appear in
       // the inner blocks.
+      // TODO(b/187233926): Add a pass to normalize and have only one return at the end of the
+      // function body.
+      if (!isStaticExtern) {
+        builder.newLine();
+        builder.append(
+            "(local $return.value " + environment.getWasmType(returnTypeDescriptor) + ")");
+      }
+    }
+
+    if (isStaticExtern) {
+      // Imports don't define locals nor body.
+      builder.unindent();
       builder.newLine();
-      builder.append("(local $return.value " + environment.getWasmType(returnTypeDescriptor) + ")");
+      builder.append(")");
+      return;
     }
 
     // Emit locals.

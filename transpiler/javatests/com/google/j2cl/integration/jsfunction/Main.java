@@ -19,7 +19,6 @@ import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 
@@ -97,8 +96,6 @@ public class Main {
     return null;
   }
 
-  // TODO(b/186759656): Math.random is not implemented yet.
-  @Wasm("nop")
   private static void testParameterizedJsFunctionMethod() {
     class A {
       String m() {
