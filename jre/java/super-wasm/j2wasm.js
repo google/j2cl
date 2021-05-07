@@ -25,6 +25,13 @@ goog.module('j2wasm');
  */
 async function instantiate(moduleObject, userImports) {
   const jreImports = {
+    'Math.acos': Math.acos,
+    'Math.asin': Math.asin,
+    'Math.atan': Math.atan,
+    'Math.atan2': Math.atan2,
+    'Math.cos': Math.cos,
+    'Math.sin': Math.sin,
+    'Math.tan': Math.tan,
     'Math.random': Math.random,
     'Date.now': Date.now,
     // The following are declared in the JRE but unimplemented for now.

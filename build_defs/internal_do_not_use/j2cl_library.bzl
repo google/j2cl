@@ -42,6 +42,8 @@ _J2WASM_PACKAGES = [
     "java/com/google/thirdparty/publicsuffix",
     "java/com/google/visualization/bigpicture/insights",
     "third_party/java/auto",
+    "third_party/java/jbox2d",
+    "third_party/java_src/jbox2d/jbox2dlibrary/src/main/java",
     "third_party/java/jsr250_annotations",
     "third_party/java/jsr330_inject",
     "third_party/java/re2j",

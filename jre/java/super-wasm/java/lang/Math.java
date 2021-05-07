@@ -51,13 +51,11 @@ public final class Math {
     return (x + y) ^ y;
   }
 
-  public static double acos(double x) {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.acos")
+  public static native double acos(double x);
 
-  public static double asin(double x) {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.asin")
+  public static native double asin(double x);
 
   public static int addExact(int x, int y) {
     int r = x + y;
@@ -73,13 +71,11 @@ public final class Math {
     return r;
   }
 
-  public static double atan(double x) {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.atan")
+  public static native double atan(double x);
 
-  public static double atan2(double y, double x) {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.atan2")
+  public static native double atan2(double y, double x);
 
   public static double cbrt(double x) {
     return x == 0 || !Double.isFinite(x) ? x : pow(x, 1.0 / 3.0);
@@ -94,9 +90,8 @@ public final class Math {
   @Wasm("f32.copysign")
   public static native float copySign(float magnitude, float sign);
 
-  public static double cos(double x) {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.cos")
+  public static native double cos(double x);
 
   public static double cosh(double x) {
     return (exp(x) + exp(-x)) / 2;
@@ -825,9 +820,8 @@ public final class Math {
     return (float) signum((double) f);
   }
 
-  public static double sin(double x) {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.sin")
+  public static native double sin(double x);
 
   public static double sinh(double x) {
     return x == 0.0 ? x : (exp(x) - exp(-x)) / 2;
@@ -836,9 +830,8 @@ public final class Math {
   @Wasm("f64.sqrt")
   public static native double sqrt(double x);
 
-  public static double tan(double x) {
-    throw new UnsupportedOperationException();
-  }
+  @JsMethod(namespace = GLOBAL, name = "Math.tan")
+  public static native double tan(double x);
 
   public static double tanh(double x) {
     if (x == 0.0) {
