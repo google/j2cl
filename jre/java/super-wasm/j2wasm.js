@@ -24,6 +24,34 @@ goog.module('j2wasm');
  * @return {!Promise<!WebAssembly.Instance>}
  */
 async function instantiate(moduleObject, userImports) {
+  const {instance} = await WebAssembly.instantiate(
+      moduleObject, createImportObject(userImports));
+  return instance;
+}
+
+/**
+ * Instantiates a web assembly module passing the necessary imports and any
+ * additional import the user might need to provide for their application.
+ *
+ * Use of this function is discouraged. Many browsers require when calling the
+ * WebAssembly constructor that the number of bytes of the module is under a
+ * small threshold, mandating the async functions for all non-trivial apps. This
+ * function can be used in other contexts, such as the D8 command line.
+ *
+ * @param {!BufferSource} moduleObject
+ * @param {?Object<string, !Function>=} userImports
+ * @return {!WebAssembly.Instance}
+ */
+function instantiateBlocking(moduleObject, userImports) {
+  return new WebAssembly.Instance(
+      new WebAssembly.Module(moduleObject), createImportObject(userImports));
+}
+
+/**
+ * @param {?Object<string, !Function>=} userImports
+ * @return {!Object<!Object>} Wasm import object
+ */
+function createImportObject(userImports) {
   const jreImports = {
     'Math.acos': Math.acos,
     'Math.asin': Math.asin,
@@ -46,13 +74,12 @@ async function instantiate(moduleObject, userImports) {
     'typeof': unimplemented,
   };
 
-  const {instance} = await WebAssembly.instantiate(moduleObject, {
+  return {
     // Pass the imports required by the jre plus the additional provided by the
     // user. The user imports will override the jre imports if they provide
     // the same key.
     'imports': Object.assign({}, jreImports, userImports)
-  });
-  return instance;
+  };
 }
 
 /** @return {void} */
@@ -60,4 +87,7 @@ function unimplemented() {
   throw new Error('Unimplemented extern');
 }
 
-exports = {instantiate};
+exports = {
+  instantiate,
+  instantiateBlocking
+};
