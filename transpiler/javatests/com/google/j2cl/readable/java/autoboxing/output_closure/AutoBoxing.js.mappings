@@ -356,6 +356,11 @@
 [assert l == 11L;] => [$Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));] "autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [int i = (Integer & Comparable<Integer>) 10;] => [let i = Integer.m_valueOf__int(10).m_intValue__();] "autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [i] => [i] "i"
+[testUnbox_withCast] => [m_testUnbox_withCast__]
+[Supplier<Integer> supplier = new Supplier<>();] => [let supplier = /**@type {!$1Supplier<Integer>}*/ ($1Supplier.$create__autoboxing_AutoBoxing(this));] "autoboxing.AutoBoxing.testUnbox_withCast"
+[supplier] => [supplier] "supplier"
+[int i = (int) supplier.get();] => [let i = /**@type {Integer}*/ ($Casts.$to(supplier.m_get___$pp_autoboxing(), Integer)).m_intValue__();] "autoboxing.AutoBoxing.testUnbox_withCast"
+[i] => [i] "i"
 [AutoBoxing] => [$clinit]
 [AutoBoxing] => [AutoBoxing.$clinit = () =>{};] "autoboxing.AutoBoxing.<clinit>"
 [AutoBoxing] => [AutoBoxing.$loadModules();] "autoboxing.AutoBoxing.<clinit>"

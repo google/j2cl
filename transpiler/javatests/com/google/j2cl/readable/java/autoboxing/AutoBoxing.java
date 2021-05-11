@@ -407,4 +407,14 @@ public class AutoBoxing {
 
     int i = (Integer & Comparable<Integer>) 10;
   }
+
+  public void testUnbox_withCast() {
+    class Supplier<T> {
+      T get() {
+        return null;
+      }
+    }
+    Supplier<Integer> supplier = new Supplier<>();
+    int i = (int) supplier.get();
+  }
 }

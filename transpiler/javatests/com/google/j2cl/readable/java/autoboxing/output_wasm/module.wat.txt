@@ -7,6 +7,9 @@
 ;;; Code for autoboxing.AutoBoxing.2Local [vtable]
 (global $autoboxing.AutoBoxing.2Local.vtable (mut (ref null $autoboxing.AutoBoxing.2Local.vtable)) (ref.null $autoboxing.AutoBoxing.2Local.vtable))
 
+;;; Code for autoboxing.AutoBoxing.1Supplier [vtable]
+(global $autoboxing.AutoBoxing.1Supplier.vtable (mut (ref null $autoboxing.AutoBoxing.1Supplier.vtable)) (ref.null $autoboxing.AutoBoxing.1Supplier.vtable))
+
 ;;; Code for autoboxing.AutoBoxing [static fields]
 (global $f_COMPILE_TIME_CONSTANT__autoboxing_AutoBoxing f32 (f32.const 1.100000023841858))
 (global $f_$initialized__autoboxing_AutoBoxing (mut i32) (i32.const 0))
@@ -16,6 +19,9 @@
 
 ;;; Code for autoboxing.AutoBoxing.2Local [static fields]
 (global $f_$initialized__autoboxing_AutoBoxing_2Local (mut i32) (i32.const 0))
+
+;;; Code for autoboxing.AutoBoxing.1Supplier [static fields]
+(global $f_$initialized__autoboxing_AutoBoxing_1Supplier (mut i32) (i32.const 0))
 
 ;;; Code for autoboxing.AutoBoxing [CLASS]
 (type $autoboxing.AutoBoxing (struct
@@ -55,6 +61,7 @@
  (field $m_testUnboxingBoolean__void (mut (ref $function.__$void)))
  (field $m_testUnboxingEquality__void (mut (ref $function.__$void)))
  (field $m_testAssertStatement__void (mut (ref $function.__$void)))
+ (field $m_testUnbox_withCast__void (mut (ref $function.__$void)))
 ))
 
 ;;; AutoBoxing()
@@ -1203,6 +1210,31 @@
  )
 )
 
+;;; void AutoBoxing.testUnbox_withCast()
+(func $m_testUnbox_withCast__void@autoboxing.AutoBoxing
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $supplier (ref null $autoboxing.AutoBoxing.1Supplier))
+ (local $i i32)
+ (local $$qualifier (ref null $java.lang.Integer))
+ (local $this (ref null $autoboxing.AutoBoxing))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.rtt)))
+ (block $return.label
+  (block
+   ;; Supplier<Integer> supplier = new $1Supplier.<init>(AutoBoxing.this);
+   
+   (local.set $supplier (call $m_<init>__autoboxing_AutoBoxing__void_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier (struct.new_with_rtt $autoboxing.AutoBoxing.1Supplier (global.get $autoboxing.AutoBoxing.1Supplier.vtable) (global.get $autoboxing.AutoBoxing.1Supplier.itable) (i32.const 0) (ref.null $autoboxing.AutoBoxing) (global.get $autoboxing.AutoBoxing.1Supplier.rtt))(local.get $this)))
+   ;; int i = (Integer $qualifier = ((Integer) supplier.get()),$qualifier.intValue());
+   
+   (local.set $i (block (result i32)
+    
+    (local.set $$qualifier (ref.cast (call_ref (local.get $supplier)(struct.get $autoboxing.AutoBoxing.1Supplier.vtable $m_get__java_lang_Object_$pp_autoboxing (struct.get $autoboxing.AutoBoxing.1Supplier $vtable(local.get $supplier)))) (global.get $java.lang.Integer.rtt)))
+    (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+   ))
+  )
+ )
+)
+(elem declare func $m_testUnbox_withCast__void@autoboxing.AutoBoxing)
+
 ;;; void AutoBoxing.$clinit()
 (func $$clinit__void@autoboxing.AutoBoxing
  (block $return.label
@@ -1410,6 +1442,94 @@
 )
 (elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
 
+;;; Code for autoboxing.AutoBoxing.1Supplier [CLASS]
+(type $autoboxing.AutoBoxing.1Supplier (struct
+ (field $vtable (ref null $autoboxing.AutoBoxing.1Supplier.vtable)) (field $itable (ref null $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__autoboxing_AutoBoxing_1Supplier (mut (ref null $autoboxing.AutoBoxing)))
+))
+(type $autoboxing.AutoBoxing.1Supplier.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_get__java_lang_Object_$pp_autoboxing (mut (ref $function.__$java.lang.Object)))
+))
+
+;;; Supplier(AutoBoxing $outer_this)
+(func $m_<init>__autoboxing_AutoBoxing__void_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier
+ (param $this (ref null $autoboxing.AutoBoxing.1Supplier))
+ (param $$outer_this (ref null $autoboxing.AutoBoxing))
+ (result (ref null $autoboxing.AutoBoxing.1Supplier))
+ (block $return.label
+  (block
+   ;; autoboxing.AutoBoxing.1Supplier.$clinit();
+   (call $$clinit__void@autoboxing.AutoBoxing.1Supplier )
+   ;; ($1Supplier.this.this = $outer_this);
+   (struct.set $autoboxing.AutoBoxing.1Supplier $$outer_this__autoboxing_AutoBoxing_1Supplier(local.get $this) (local.get $$outer_this))
+   ;; Object.this.Object.<init>();
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+  )
+ )
+ (local.get $this)
+)
+
+;;; T Supplier.get()
+(func $m_get__java_lang_Object_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $autoboxing.AutoBoxing.1Supplier))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.1Supplier.rtt)))
+ (block $return.label
+  (block
+   ;; return null;
+   (local.set $return.value (ref.null $java.lang.Object))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_get__java_lang_Object_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier)
+
+;;; void Supplier.$clinit()
+(func $$clinit__void@autoboxing.AutoBoxing.1Supplier
+ (block $return.label
+  (block
+   ;; if (autoboxing.AutoBoxing.1Supplier.$initialized) return;
+   (if (global.get $f_$initialized__autoboxing_AutoBoxing_1Supplier)
+    (then
+     ;; return;
+     (br $return.label)
+    )
+   )
+   ;; (autoboxing.AutoBoxing.1Supplier.$initialized = true);
+   (global.set $f_$initialized__autoboxing_AutoBoxing_1Supplier (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
+;;; Class<?> Supplier.getClass()
+(func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $autoboxing.AutoBoxing.1Supplier))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.1Supplier.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getAutoboxing.AutoBoxing.1Supplier();
+   (local.set $return.value (call $$getAutoboxing.AutoBoxing.1Supplier__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier)
+
  ;;; Code for autoboxing.AutoBoxing [vtable.init]
  (global.set $autoboxing.AutoBoxing.vtable
   (struct.new_with_rtt $autoboxing.AutoBoxing.vtable
@@ -1444,6 +1564,7 @@
    (ref.func $m_testUnboxingBoolean__void@autoboxing.AutoBoxing)
    (ref.func $m_testUnboxingEquality__void@autoboxing.AutoBoxing)
    (ref.func $m_testAssertStatement__void@autoboxing.AutoBoxing)
+   (ref.func $m_testUnbox_withCast__void@autoboxing.AutoBoxing)
    (rtt.canon $autoboxing.AutoBoxing.vtable)
   )
  )
@@ -1480,3 +1601,18 @@
 
  ;;; Code for autoboxing.AutoBoxing.2Local [itable.init]
  (global.set $autoboxing.AutoBoxing.2Local.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for autoboxing.AutoBoxing.1Supplier [vtable.init]
+ (global.set $autoboxing.AutoBoxing.1Supplier.vtable
+  (struct.new_with_rtt $autoboxing.AutoBoxing.1Supplier.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier)
+   (ref.func $m_get__java_lang_Object_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier)
+   (rtt.canon $autoboxing.AutoBoxing.1Supplier.vtable)
+  )
+ )
+
+ ;;; Code for autoboxing.AutoBoxing.1Supplier [itable.init]
+ (global.set $autoboxing.AutoBoxing.1Supplier.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

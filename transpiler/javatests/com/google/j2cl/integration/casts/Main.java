@@ -32,6 +32,7 @@ public class Main {
     testCasts_parameterizedNativeType();
     testCasts_exceptionMessages();
     testCasts_erasureCastOnThrow();
+    testCasts_erasureCastOnConversion();
     testArrayCasts_basics();
     testArrayCasts_differentDimensions();
     testArrayCasts_sameDimensions();
@@ -553,6 +554,14 @@ public class Main {
           throw returnObjectAsT(new RuntimeException());
         },
         RuntimeException.class);
+  }
+
+  private static void testCasts_erasureCastOnConversion() {
+    assertThrowsClassCastException(
+        () -> {
+          int i = (int) returnObjectAsT(new Integer(1));
+        },
+        Integer.class);
   }
 
   private static <T> T returnObjectAsT(T unused) {

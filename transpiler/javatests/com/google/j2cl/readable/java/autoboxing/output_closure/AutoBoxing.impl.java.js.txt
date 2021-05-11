@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let $1Local = goog.forwardDeclare('autoboxing.AutoBoxing.$1Local$impl');
+let $1Supplier = goog.forwardDeclare('autoboxing.AutoBoxing.$1Supplier$impl');
 let $2Local = goog.forwardDeclare('autoboxing.AutoBoxing.$2Local$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let Byte = goog.forwardDeclare('java.lang.Byte$impl');
@@ -437,6 +438,14 @@ class AutoBoxing extends j_l_Object {
     let i = Integer.m_valueOf__int(10).m_intValue__();
   }
 
+  m_testUnbox_withCast__() {
+    let supplier = /**@type {!$1Supplier<Integer>}*/ (
+        $1Supplier.$create__autoboxing_AutoBoxing(this));
+    let i = /**@type {Integer}*/ (
+                $Casts.$to(supplier.m_get___$pp_autoboxing(), Integer))
+                .m_intValue__();
+  }
+
   static $clinit() {
     AutoBoxing.$clinit = () => {};
     AutoBoxing.$loadModules();
@@ -449,6 +458,7 @@ class AutoBoxing extends j_l_Object {
 
   static $loadModules() {
     $1Local = goog.module.get('autoboxing.AutoBoxing.$1Local$impl');
+    $1Supplier = goog.module.get('autoboxing.AutoBoxing.$1Supplier$impl');
     $2Local = goog.module.get('autoboxing.AutoBoxing.$2Local$impl');
     Boolean = goog.module.get('java.lang.Boolean$impl');
     Byte = goog.module.get('java.lang.Byte$impl');
