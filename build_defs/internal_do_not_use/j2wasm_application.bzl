@@ -63,11 +63,17 @@ def _impl_j2wasm_application(ctx):
     args.add("-o", ctx.outputs.wasm)
     args.add(ctx.outputs.wat)
 
+    outputs = [ctx.outputs.wasm]
+    if ctx.attr.generate_symbol_map:
+        symbolmap = ctx.actions.declare_file(ctx.label.name + ".map")
+        args.add("--symbolmap", symbolmap.path)
+        outputs = outputs + [symbolmap]
+
     ctx.actions.run(
         executable = ctx.executable.binaryen,
         arguments = [args],
         inputs = [ctx.outputs.wat],
-        outputs = [ctx.outputs.wasm],
+        outputs = outputs,
         mnemonic = "J2wasm",
         progress_message = "Compiling wat2wasm",
     )
@@ -95,6 +101,7 @@ _j2wasm_application = rule(
         "deps": attr.label_list(providers = [J2wasmInfo]),
         "entry_points": attr.string_list(),
         "binaryen_args": attr.string_list(),
+        "generate_symbol_map": attr.bool(default = False),
         "transpiler_args": attr.string_list(),
         "binaryen": attr.label(
             cfg = "host",
@@ -158,5 +165,6 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         name = name + "_dev",
         binaryen = "//third_party/binaryen:wasm-as",
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
+        generate_symbol_map = True,
         **kwargs
     )
