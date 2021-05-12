@@ -16,6 +16,7 @@
 package java.lang;
 
 import javaemul.internal.JsUtils;
+import javaemul.internal.LongUtils;
 
 /** Converts integral types to strings. */
 final class IntegralToString {
@@ -79,41 +80,6 @@ final class IntegralToString {
   }
 
   public static String longToString(long value, int intRadix) {
-    if (intRadix == 10 || intRadix < Character.MIN_RADIX || intRadix > Character.MAX_RADIX) {
-      return String.valueOf(value);
-    }
-
-    int intValue = (int) value;
-    if (intValue == value) {
-      return Integer.toString(intValue, intRadix);
-    }
-
-    /*
-     * If v is positive, negate it. This is the opposite of what one might expect. It is necessary
-     * because the range of the negative values is strictly larger than that of the positive values:
-     * there is no positive value corresponding to Long.MIN_VALUE.
-     */
-    boolean negative = value < 0;
-    if (!negative) {
-      value = -value;
-    }
-
-    int bufLen = intRadix < 8 ? 65 : 23; // Max chars in result (conservative)
-    char[] buf = new char[bufLen];
-    int cursor = bufLen;
-
-    // Convert radix to long before hand to avoid costly conversion on each iteration.
-    long radix = intRadix;
-    do {
-      long q = value / radix;
-      buf[--cursor] = Character.forDigit((int) (radix * q - value));
-      value = q;
-    } while (value != 0);
-
-    if (negative) {
-      buf[--cursor] = '-';
-    }
-
-    return String.valueOf(buf, cursor, bufLen - cursor);
+    return LongUtils.toString(value, intRadix);
   }
 }

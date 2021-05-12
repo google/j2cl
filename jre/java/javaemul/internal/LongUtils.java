@@ -136,8 +136,8 @@ public class LongUtils {
     return toNativeLong(valueLong).getLowBits();
   }
 
-  public static String toString(long valueLong) {
-    return toNativeLong(valueLong).toString();
+  public static String toString(long valueLong, int radix) {
+    return toNativeLong(valueLong).toString(radix);
   }
 
   public static void checkDivisorZero(long divisor) {
@@ -203,6 +203,8 @@ public class LongUtils {
     public native double toNumber();
 
     public native long xor(long rightLong);
+
+    public native String toString(int radix);
 
     // This is a native object whose hashCode method should never be called.
     @SuppressWarnings("EqualsHashCode")
