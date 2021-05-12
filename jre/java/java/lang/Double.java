@@ -110,8 +110,8 @@ public final class Double extends Number implements Comparable<Double> {
     return a + b;
   }
 
-  public static String toString(double b) {
-    return String.valueOf(b);
+  public static String toString(double d) {
+    return RealToString.doubleToString(d);
   }
 
   public static Double valueOf(double d) {

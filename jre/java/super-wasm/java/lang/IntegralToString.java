@@ -206,6 +206,49 @@ final class IntegralToString {
     }
   }
 
+  public static String longToString(long v, int radix) {
+    int i = (int) v;
+    if (i == v) {
+      return intToString(i, radix);
+    }
+
+    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX) {
+      radix = 10;
+    }
+    if (radix == 10) {
+      return longToString(v);
+    }
+
+    /*
+     * If v is positive, negate it. This is the opposite of what one might
+     * expect. It is necessary because the range of the negative values is
+     * strictly larger than that of the positive values: there is no
+     * positive value corresponding to Integer.MIN_VALUE.
+     */
+    boolean negative = false;
+    if (v < 0) {
+      negative = true;
+    } else {
+      v = -v;
+    }
+
+    int bufLen = radix < 8 ? 65 : 23; // Max chars in result (conservative)
+    char[] buf = new char[bufLen];
+    int cursor = bufLen;
+
+    do {
+      long q = v / radix;
+      buf[--cursor] = DIGITS[(int) (radix * q - v)];
+      v = q;
+    } while (v != 0);
+
+    if (negative) {
+      buf[--cursor] = '-';
+    }
+
+    return new String(cursor, bufLen - cursor, buf);
+  }
+
   /** Equivalent to Long.toString(l). */
   public static String longToString(long l) {
     return convertLong(null, l);
@@ -317,6 +360,58 @@ final class IntegralToString {
       n = q;
     }
     return cursor;
+  }
+
+  public static String intToBinaryString(int value) {
+    return intToPowerOfTwoUnsignedString(value, 1);
+  }
+
+  public static String intToHexString(int value) {
+    return intToPowerOfTwoUnsignedString(value, 4);
+  }
+
+  public static String intToOctalString(int value) {
+    return intToPowerOfTwoUnsignedString(value, 3);
+  }
+
+  private static String intToPowerOfTwoUnsignedString(int value, int shift) {
+    final int radix = 1 << shift;
+    final int mask = radix - 1;
+    final int bufSize = 32 / shift + 1;
+    char[] buf = new char[bufSize];
+    int pos = bufSize;
+    do {
+      buf[--pos] = Character.forDigit(value & mask);
+      value >>>= shift;
+    } while (value != 0);
+
+    return String.valueOf(buf, pos, bufSize - pos);
+  }
+
+  public static String longToBinaryString(long value) {
+    return longToPowerOfTwoUnsignedString(value, 1);
+  }
+
+  public static String longToHexString(long value) {
+    return longToPowerOfTwoUnsignedString(value, 4);
+  }
+
+  public static String longToOctalString(long value) {
+    return longToPowerOfTwoUnsignedString(value, 3);
+  }
+
+  private static String longToPowerOfTwoUnsignedString(long value, int shift) {
+    final int radix = 1 << shift;
+    final int mask = radix - 1;
+    final int bufSize = 64 / shift + 1;
+    char[] buf = new char[bufSize];
+    int pos = bufSize;
+    do {
+      buf[--pos] = Character.forDigit(((int) value) & mask);
+      value >>>= shift;
+    } while (value != 0);
+
+    return String.valueOf(buf, pos, bufSize - pos);
   }
 
   /**

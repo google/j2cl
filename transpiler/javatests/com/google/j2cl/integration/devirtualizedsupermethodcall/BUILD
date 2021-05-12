@@ -14,6 +14,5 @@ package(
 integration_test(
     name = "devirtualizedsupermethodcall",
     srcs = glob(["*.java"]),
-    # TODO(b/186691983): Reenable wasm tests when j.l.Object.toString is fixed.
-    enable_wasm = False,
+    enable_wasm = True,
 )

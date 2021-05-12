@@ -31,6 +31,14 @@ public final class Platform {
   @JsMethod(namespace = "<window>")
   public static native boolean isFinite(double x);
 
+  public static int floatToRawIntBits(float value) {
+    return JsUtils.floatToRawIntBits(value);
+  }
+
+  public static float intBitsToFloat(int value) {
+    return JsUtils.intBitsToFloat(value);
+  }
+
   public static long doubleToRawLongBits(double value) {
     return JsUtils.doubleToRawLongBits(value);
   }

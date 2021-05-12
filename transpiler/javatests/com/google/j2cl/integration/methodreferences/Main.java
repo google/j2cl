@@ -215,7 +215,6 @@ public class Main {
     int hashCode();
   }
 
-  @Wasm("nop") // TODO(b/186691983): enable when toString does no longer throw an exception.
   private static void testQualifierEvaluation_implicitObjectMethods() {
     Interface i = new Interface() {};
     Producer<String> stringProducer = i::toString;
@@ -233,7 +232,6 @@ public class Main {
     assertEquals(interfaceWithHashcode.hashCode(), integerProducer.produce().intValue());
   }
 
-  @Wasm("nop") // TODO(b/186691983): enable when toString does no longer throw an exception.
   private static void testQualifierEvaluation_array() {
     // Array methods.
     String[] array = {returnSequenceAsString()};

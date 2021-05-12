@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.integration.stringconversion;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import javaemul.internal.annotations.Wasm;
@@ -70,14 +71,16 @@ public class Main {
     int i = c1 + c2;
     assertTrue((c1 + c2 + "o").equals(i + "o"));
 
+    // Boolean boxed type as JS primitive.
+    result = new Boolean(true) + " is not " + new Boolean(false);
+    assertTrue(result.equals("true is not false"));
+
     // with integer binary operations
     result = 1 + 2 + "Foo" + 3 + 2;
     assertTrue(result.equals("3Foo32"));
 
     char[] charArray = new char[] {'f', 'o', 'o'};
-    // TODO(b/186691983): enable it when array.toString return the right value in j2wasm
-    // assertTrue(("bar" + charArray).startsWith("bar[C@"));
-    // assertFalse("barfoo".equals("bar" + charArray));
+    assertFalse("barfoo".equals("bar" + charArray));
 
     testCharSequenceConcatenation();
     testPrimitiveConcatenation();
@@ -129,12 +132,8 @@ public class Main {
     assertTrue((l + " is 1").equals("1 is 1"));
     double d = 1.1d;
     assertTrue((d + " is 1.1").equals("1.1 is 1.1"));
-    float f = 1.1f;
-    // TODO(b/186909158): enable this test when Float.floatToRawIntBit is not delegating to JsUtils
-    // assertTrue((f + " is 1.1").equals("1.1 is 1.1"));
-
-    String result = new Boolean(true) + " is not " + new Boolean(false);
-    assertTrue(result.equals("true is not false"));
+    float f = 1.5f;
+    assertTrue((f + " is 1.5").equals("1.5 is 1.5"));
   }
 
   @Wasm("nop") // specific test for js

@@ -15,9 +15,8 @@
  */
 package com.google.j2cl.integration.objectdevirtualcalls;
 
+import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
-
-import javaemul.internal.annotations.Wasm;
 
 /**
  * Verifies that Object methods on the Object class execute properly. It is effectively a test that
@@ -47,12 +46,10 @@ public class Main {
     assertTrue(object1.hashCode() != object2.hashCode());
   }
 
-  // TODO(b/186691983): Enable when Object.toString is fixed.
-  @Wasm("nop")
   private static void testToString() {
-    assertTrue(object1.toString() instanceof String);
-    assertTrue(object1.toString() == "java.lang.Object@" + Integer.toHexString(object1.hashCode()));
-    assertTrue(object1.toString() != object2.toString());
+    assertTrue(
+        object1.toString().equals("java.lang.Object@" + Integer.toHexString(object1.hashCode())));
+    assertFalse(object1.toString().equals(object2.toString()));
   }
 
   private static void testGetClass() {

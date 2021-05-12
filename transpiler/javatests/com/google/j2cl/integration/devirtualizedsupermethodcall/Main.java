@@ -26,7 +26,7 @@ public class Main {
 
     assertTrue(fooCallsSuperObjectMethods.equals(fooCallsSuperObjectMethods));
     assertTrue(fooCallsSuperObjectMethods.hashCode() == fooCallsSuperObjectMethods.hashCode());
-    assertTrue(fooCallsSuperObjectMethods.toString() == fooCallsSuperObjectMethods.toString());
+    assertTrue(fooCallsSuperObjectMethods.toString().equals(fooCallsSuperObjectMethods.toString()));
     // Would verify for getClass() as well but it's final and can't be overridden.
   }
 }

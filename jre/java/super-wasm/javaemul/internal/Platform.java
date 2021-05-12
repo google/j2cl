@@ -36,6 +36,12 @@ public final class Platform {
   @Wasm("f64.reinterpret_i64")
   public static native double longBitsToDouble(long value);
 
+  @Wasm("i32.reinterpret_f32")
+  public static native int floatToRawIntBits(float value);
+
+  @Wasm("f32.reinterpret_i32")
+  public static native float intBitsToFloat(int value);
+
   public static boolean isEqual(Boolean x, Object y) {
     return y instanceof Boolean && x.booleanValue() == ((Boolean) y).booleanValue();
   }

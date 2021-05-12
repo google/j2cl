@@ -53,15 +53,12 @@ public final class Class<T> implements Type, Serializable {
   }
 
   public String getName() {
-    String className = ctor.getClassName();
     if (isArray()) {
-      if (ctor.isPrimitive()) {
-        className = ctor.getPrimitiveShortName();
-      } else {
-        className = "L" + className + ";";
-      }
+      String className =
+          ctor.isPrimitive() ? ctor.getPrimitiveShortName() : "L" + ctor.getClassName() + ";";
+      return repeatString("[", dimensionCount) + className;
     }
-    return repeatString("[", dimensionCount) + className;
+    return ctor.getClassName();
   }
 
   // J2CL doesn't follow JLS strictly here and provides an approximation that is good enough for

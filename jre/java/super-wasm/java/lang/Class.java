@@ -59,13 +59,8 @@ public final class Class<T> implements Type, Serializable {
   }
 
   public String getName() {
-    String className = name;
     if (isArray()) {
-      if (isPrimitive()) {
-        className = primitiveShortName;
-      } else {
-        className = "L" + className + ";";
-      }
+      String className = isPrimitive ? primitiveShortName : "L" + name + ";";
       return repeatString("[", dimensionCount) + className;
     }
     return name;

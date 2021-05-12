@@ -18,8 +18,6 @@ package com.google.j2cl.integration.objectchilddevirtualcalls;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
-
 /**
  * Verifies that Object methods on the ChildClass class execute properly. It is effectively a test
  * that Object method devirtualization is occurring even for children of Object and that the
@@ -55,15 +53,14 @@ public class Main {
     assertTrue(childClass1.hashCode() != childClass2.hashCode());
   }
 
-  // TODO(b/186691983): Enable when Object.toString is fixed.
-  @Wasm("nop")
   private static void testToString() {
-    assertTrue(childClass1.toString() instanceof String);
     assertTrue(
-        childClass1.toString()
-            == "com.google.j2cl.integration.objectchilddevirtualcalls.ChildClass@"
-                + Integer.toHexString(childClass1.hashCode()));
-    assertTrue(childClass1.toString() != childClass2.toString());
+        childClass1
+            .toString()
+            .equals(
+                "com.google.j2cl.integration.objectchilddevirtualcalls.ChildClass@"
+                    + Integer.toHexString(childClass1.hashCode())));
+    assertFalse(childClass1.toString().equals(childClass2.toString()));
   }
 
   private static void testGetClass() {
@@ -71,8 +68,6 @@ public class Main {
     assertTrue(childClass1.getClass() == childClass2.getClass());
   }
 
-  // TODO(b/186691983): Enable when Object.toString is fixed.
-  @Wasm("nop")
   private static void testChildClassOverrides() {
     new ChildClassOverrides().test();
   }
