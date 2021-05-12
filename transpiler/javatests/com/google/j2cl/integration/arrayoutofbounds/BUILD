@@ -13,4 +13,7 @@ package(
 integration_test(
     name = "arrayoutofbounds",
     srcs = glob(["*.java"]),
+    # This is testing that you can insert elements past the end of array;
+    # functionality that is supported in JavaScript but not in WASM.
+    enable_wasm = False,
 )

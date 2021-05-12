@@ -17,4 +17,7 @@ integration_test(
         "jre.checks.numeric": "DISABLED",
         "jre.checkedMode": "DISABLED",
     },
+    # This test makes sense only in JavaScript where integral divide by 0 can
+    # be made not to throw.
+    enable_wasm = False,
 )

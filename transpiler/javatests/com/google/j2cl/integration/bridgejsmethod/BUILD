@@ -17,6 +17,8 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    # Disabled because it is testing bridging needed for @JsMethod.
+    enable_wasm = False,
     suppress = ["JSC_TYPE_MISMATCH"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

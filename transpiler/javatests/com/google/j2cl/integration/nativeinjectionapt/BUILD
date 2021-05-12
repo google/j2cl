@@ -17,6 +17,8 @@ integration_test(
         "*.java",
         "super/**/*.java",
     ]),
+    # JsInterop features are not supported in WASM.
+    enable_wasm = False,
     deps = [
         "//third_party:gwt-jsinterop-annotations-j2cl",
         "//transpiler/javatests/com/google/j2cl/integration/nativeinjectionapt/apt:annotation",

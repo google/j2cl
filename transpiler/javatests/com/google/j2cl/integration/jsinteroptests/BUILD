@@ -17,6 +17,8 @@ integration_test(
         "**/*.java",
         "**/*.js",
     ]),
+    # JsInterop features are not supported in WASM.
+    enable_wasm = False,
     j2cl_library_tags = ["manual"],
     deps = [
         "//third_party:closure_reflect",

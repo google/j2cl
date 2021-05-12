@@ -20,6 +20,8 @@ integration_test(
     # Java code, RTA would actually remove it. Hence we disable RTA for this
     # test only.
     enable_rta = False,
+    # JsInterop features are not supported in WASM.
+    enable_wasm = False,
     suppress = ["JSC_BAD_PROTECTED_PROPERTY_ACCESS"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

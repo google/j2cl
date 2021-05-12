@@ -22,6 +22,7 @@ import com.google.j2cl.integration.varargs.innerpackage.SubclassWithImplicitCons
 import com.google.j2cl.integration.varargs.innerpackage.SuperWithNoPublicConstructors;
 import java.util.ArrayList;
 import java.util.List;
+import javaemul.internal.annotations.Wasm;
 
 /** Tests varargs. */
 public class Main {
@@ -118,10 +119,14 @@ public class Main {
     }
   }
 
+  // TODO(b/184675805): Enable when arrays have metadata.
+  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall() {
     assertEquals("String", new ChildWithImplicitSuperCall().which);
   }
 
+  // TODO(b/184675805): Enable when arrays have metadata.
+  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall_implicitParameters() {
     int captured = 1;
     class Outer {
@@ -182,6 +187,8 @@ public class Main {
     assertEquals("Protected", new SubclassInDifferentPackage().which);
   }
 
+  // TODO(b/184675805): Enable when arrays have metadata.
+  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall_genericTypes() {
     int captured = 1;
     class Parent<T extends List<?>, U extends ArrayList<?>> {
@@ -226,6 +233,8 @@ public class Main {
     String which;
   }
 
+  // TODO(b/184675805): Enable when arrays have metadata.
+  @Wasm("nop")
   private static void testVarargs_implicitSuperConstructorCall_enum() {
     assertEquals("String", MyEnum.A.which);
     assertEquals("Object", MyEnum.B.which);

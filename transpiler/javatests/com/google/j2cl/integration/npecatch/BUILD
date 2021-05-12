@@ -14,4 +14,6 @@ package(
 integration_test(
     name = "npecatch",
     srcs = glob(["*.java"]),
+    # TODO(b/183769034): Enable once the wasm traps vs exceptions is solved.
+    enable_wasm = False,
 )

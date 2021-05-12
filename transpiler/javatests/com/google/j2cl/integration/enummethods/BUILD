@@ -17,5 +17,7 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    # Disabled because it uses native types to test the enum properties.
+    enable_wasm = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

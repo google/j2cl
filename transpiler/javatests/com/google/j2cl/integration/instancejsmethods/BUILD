@@ -47,6 +47,8 @@ integration_test(
         "Main.java",
         "Main.native.js",
     ],
+    # JsInterop features are not supported in WASM.
+    enable_wasm = False,
     deps = [
         ":Child",
         ":MyInterface",

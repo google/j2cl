@@ -17,6 +17,8 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    # JsInterop features are not supported in WASM.
+    enable_wasm = False,
     suppress = ["JSC_TYPE_MISMATCH"],
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
