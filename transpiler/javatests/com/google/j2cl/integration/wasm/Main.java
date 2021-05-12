@@ -47,6 +47,7 @@ public class Main {
     testArrayList();
     testSystemArrayCopy();
     testString();
+    testParse();
     testLambda();
   }
 
@@ -491,6 +492,36 @@ public class Main {
   private static void assertDoubleToStringEquals(String expected, double d) {
     // Closure version uses 'e+' for exponential so normalize it back to Java style.
     assertEquals(expected, String.valueOf(d).replace("e+", "E"));
+  }
+
+  private static void testParse() {
+    assertEquals(123, Byte.parseByte("123"));
+    assertEquals(123, Byte.parseByte("+123"));
+    assertEquals(-123, Byte.parseByte("-123"));
+    assertEquals(0, Byte.parseByte("0"));
+    assertEquals(Byte.MAX_VALUE, Integer.parseInt(String.valueOf(Byte.MAX_VALUE)));
+    assertEquals(Byte.MIN_VALUE, Integer.parseInt(String.valueOf(Byte.MIN_VALUE)));
+    assertEquals(51, Byte.parseByte("123", 6));
+
+    assertEquals(12345, Integer.parseInt("12345"));
+    assertEquals(12345, Integer.parseInt("+12345"));
+    assertEquals(-12345, Integer.parseInt("-12345"));
+    assertEquals(0, Integer.parseInt("0"));
+    assertEquals(Integer.MAX_VALUE, Integer.parseInt(String.valueOf(Integer.MAX_VALUE)));
+    assertEquals(Integer.MIN_VALUE, Integer.parseInt(String.valueOf(Integer.MIN_VALUE)));
+    assertEquals(1865, Integer.parseInt("12345", 6));
+
+    assertEquals(0L, Long.parseLong("0"));
+    assertEquals(100000000000L, Long.parseLong("100000000000"));
+    assertEquals(100000000000L, Long.parseLong("+100000000000"));
+    assertEquals(-100000000000L, Long.parseLong("-100000000000"));
+    assertEquals(10L, Long.parseLong("010"));
+    assertEquals(Long.MAX_VALUE, Long.parseLong(String.valueOf(Long.MAX_VALUE)));
+    assertEquals(Long.MIN_VALUE, Long.parseLong(String.valueOf(Long.MIN_VALUE)));
+
+    assertEquals(1865, Integer.parseInt("12345", 6));
+    assertEquals(0xdeadbeefdeadL, Long.parseLong("deadbeefdead", 16));
+    assertEquals(-0xdeadbeefdeadL, Long.parseLong("-deadbeefdead", 16));
   }
 
   interface Function {
