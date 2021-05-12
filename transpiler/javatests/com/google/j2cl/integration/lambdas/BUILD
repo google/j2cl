@@ -14,7 +14,6 @@ package(
 integration_test(
     name = "lambdas",
     srcs = glob(["*.java"]),
-    # TODO(b/118184493): remove when Java 11 language support is enabled.
     j2cl_library_tags = ["manual"],
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
