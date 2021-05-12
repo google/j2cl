@@ -14,8 +14,6 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/arithmeticexception:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/arithmeticexceptiondisabled:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/arithmeticexceptiondisabled:optimized_js.esnext",
-    "//transpiler/javatests/com/google/j2cl/integration/arithmeticexceptiondisabledresultused:optimized_js",
-    "//transpiler/javatests/com/google/j2cl/integration/arithmeticexceptiondisabledresultused:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/arraybranchinsertion:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/arraybranchinsertion:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/arraycastsinglesideeffect:optimized_js",
