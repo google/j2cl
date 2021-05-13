@@ -93,8 +93,8 @@ public class Primitives {
   @Wasm("i32.extend8_s")
   public static native int narrowShortToByte(short instance);
 
-  // This method returns int in order to avoid to return a cast. char and int are represented as i32
-  // number in Wasm.
+  // This method returns int in order to avoid a cast. char and short are represented as i32 number
+  // in Wasm.
   public static int narrowShortToChar(short instance) {
     return toChar(instance);
   }
@@ -104,8 +104,8 @@ public class Primitives {
   @Wasm("i32.extend8_s")
   public static native int narrowIntToByte(int instance);
 
-  // This method returns int in order to avoid to return a cast. char and int are represented as i32
-  // number in Wasm.
+  // This method returns int in order to avoid a cast. char and int are represented as i32 number
+  // in Wasm.
   public static int narrowIntToChar(int instance) {
     return toChar(instance);
   }
