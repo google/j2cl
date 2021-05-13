@@ -62,6 +62,9 @@ function createImportObject(userImports) {
     'Math.tan': Math.tan,
     'Math.random': Math.random,
     'Date.now': Date.now,
+    'Character.toLowerCase': charToLowerCase,
+    'Character.toUpperCase': charToUpperCase,
+
     // The following are declared in the JRE but unimplemented for now.
     'Date.UTC': unimplemented,
     'Date.parse': unimplemented,
@@ -80,6 +83,22 @@ function createImportObject(userImports) {
     // the same key.
     'imports': Object.assign({}, jreImports, userImports)
   };
+}
+
+/**
+ * @param {number} value
+ * @return {number}
+ */
+function charToLowerCase(value) {
+    return String.fromCharCode(value).toLowerCase().charCodeAt(0);
+}
+
+/**
+ * @param {number} value
+ * @return {number}
+ */
+function charToUpperCase(value) {
+    return String.fromCharCode(value).toUpperCase().charCodeAt(0);
 }
 
 /** @return {void} */

@@ -16,6 +16,8 @@
 package java.lang;
 
 import java.util.Locale;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /** Performs case operations as described by http://unicode.org/reports/tr21/tr21-5.html. */
 class CaseMapper {
@@ -53,7 +55,7 @@ class CaseMapper {
       } else if (ch == GREEK_CAPITAL_SIGMA && isFinalSigma(value, offset, count, i)) {
         newCh = GREEK_SMALL_FINAL_SIGMA;
       } else {
-        newCh = Character.toLowerCase(ch);
+        newCh = charToLowerCase(ch);
       }
       if (newValue == null && ch != newCh) {
         newValue = new char[count]; // The result can't be longer than the input.
@@ -191,4 +193,10 @@ class CaseMapper {
         ? new String(0, i, output)
         : new String(output, 0, i);
   }
+
+  @JsMethod(name = "Character.toLowerCase", namespace = JsPackage.GLOBAL)
+  public static native char charToLowerCase(char value);
+
+  @JsMethod(name = "Character.toUpperCase", namespace = JsPackage.GLOBAL)
+  public static native char charToUpperCase(char value);
 }
