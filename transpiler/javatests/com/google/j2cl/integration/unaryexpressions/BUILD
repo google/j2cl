@@ -13,5 +13,4 @@ package(
 integration_test(
     name = "unaryexpressions",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )

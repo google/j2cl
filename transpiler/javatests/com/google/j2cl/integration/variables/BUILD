@@ -13,6 +13,5 @@ package(
 integration_test(
     name = "variables",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
     j2cl_library_tags = ["manual"],
 )

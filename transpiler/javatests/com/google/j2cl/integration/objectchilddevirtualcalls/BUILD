@@ -14,5 +14,4 @@ package(
 integration_test(
     name = "objectchilddevirtualcalls",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )

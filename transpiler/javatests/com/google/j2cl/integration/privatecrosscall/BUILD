@@ -14,5 +14,4 @@ package(
 integration_test(
     name = "privatecrosscall",
     srcs = glob(["**/*.java"]),
-    enable_wasm = True,
 )

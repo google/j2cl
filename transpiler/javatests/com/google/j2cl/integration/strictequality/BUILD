@@ -14,7 +14,6 @@ package(
 integration_test(
     name = "strictequality",
     srcs = ["Main.java"],
-    enable_wasm = True,
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
     ],

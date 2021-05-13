@@ -22,5 +22,4 @@ j2wasm_library(
 integration_test(
     name = "wideningfloat",
     srcs = ["Main.java"],
-    enable_wasm = True,
 )

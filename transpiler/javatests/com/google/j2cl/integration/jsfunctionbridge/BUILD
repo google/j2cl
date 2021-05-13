@@ -14,7 +14,6 @@ package(
 integration_test(
     name = "jsfunctionbridge",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
     suppress = ["JSC_TYPE_MISMATCH"],
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",

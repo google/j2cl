@@ -13,5 +13,4 @@ package(
 integration_test(
     name = "inlineinstancefieldinit",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )

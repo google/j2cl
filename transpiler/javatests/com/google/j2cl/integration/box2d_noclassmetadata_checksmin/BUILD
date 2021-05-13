@@ -24,7 +24,6 @@ integration_test(
         # Strip enum names:
         "--replace_strings=module$exports$nativebootstrap$Util$impl.$makeEnumName(?)",
     ],
-    enable_wasm = True,
     tags = ["manual"],
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/box2d:box2d_j2cl",

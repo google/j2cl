@@ -14,6 +14,5 @@ package(
 integration_test(
     name = "staticinitsuper",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
     tags = ["manual"],
 )

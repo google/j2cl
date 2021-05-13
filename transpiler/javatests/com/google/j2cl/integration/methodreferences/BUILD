@@ -15,7 +15,6 @@ integration_test(
     name = "methodreferences",
     srcs = glob(["*.java"]),
     enable_rta = False,  # TODO(b/146458562): Enable RTA when this bug is fixed.
-    enable_wasm = True,
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
     ],

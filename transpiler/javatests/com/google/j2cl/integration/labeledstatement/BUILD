@@ -14,5 +14,4 @@ package(
 integration_test(
     name = "labeledstatement",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )

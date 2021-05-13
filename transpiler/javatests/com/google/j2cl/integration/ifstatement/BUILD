@@ -14,5 +14,4 @@ package(
 integration_test(
     name = "ifstatement",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )

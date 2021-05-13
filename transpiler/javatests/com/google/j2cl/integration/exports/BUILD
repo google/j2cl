@@ -37,6 +37,5 @@ j2cl_library(
 integration_test(
     name = "exports",
     srcs = ["Main.java"],
-    enable_wasm = True,
     deps = [":ExportLayerTwo"],
 )

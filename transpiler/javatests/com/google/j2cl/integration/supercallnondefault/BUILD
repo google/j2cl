@@ -14,5 +14,4 @@ package(
 integration_test(
     name = "supercallnondefault",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )

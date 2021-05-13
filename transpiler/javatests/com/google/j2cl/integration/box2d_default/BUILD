@@ -18,7 +18,6 @@ integration_test(
         "jre.checks.checkLevel": "NORMAL",
     },
     enable_bundle_size_report = True,
-    enable_wasm = True,
     deps = [
         "//transpiler/javatests/com/google/j2cl/integration/box2d:box2d_j2cl",
     ],

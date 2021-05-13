@@ -14,7 +14,6 @@ package(
 integration_test(
     name = "numberobjectcalls",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
     ],

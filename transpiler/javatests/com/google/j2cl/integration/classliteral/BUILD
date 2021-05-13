@@ -13,7 +13,6 @@ package(
 integration_test(
     name = "classliteral",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",

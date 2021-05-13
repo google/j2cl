@@ -14,6 +14,5 @@ package(
 integration_test(
     name = "bridgemethods",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
     suppress = ["JSC_TYPE_MISMATCH"],
 )

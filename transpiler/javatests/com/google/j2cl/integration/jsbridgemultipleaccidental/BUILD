@@ -14,6 +14,5 @@ package(
 integration_test(
     name = "jsbridgemultipleaccidental",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

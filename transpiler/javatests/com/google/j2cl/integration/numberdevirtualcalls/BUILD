@@ -14,5 +14,4 @@ package(
 integration_test(
     name = "numberdevirtualcalls",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )

@@ -13,5 +13,4 @@ package(
 integration_test(
     name = "cascadedstaticinit",
     srcs = glob(["*.java"]),
-    enable_wasm = True,
 )
