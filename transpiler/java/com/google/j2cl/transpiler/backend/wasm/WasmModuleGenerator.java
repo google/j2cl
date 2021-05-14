@@ -89,13 +89,9 @@ public class WasmModuleGenerator {
 
   private void emitItableSupportTypes() {
     builder.newLine();
-    // Emit a type that is a supertype for all interface vtables. This is needed to be able to cast
-    // to a particular interface vtable type. In the current wasm gc spec generic types like
-    // 'anyref' or 'eqref' can not be cast from using `ref.cast`.
-    builder.append("(type $empty.vtable (struct))");
-    builder.newLine();
-    // The itable is an array of vtables.
-    builder.append("(type $itable (array (mut (ref null $empty.vtable))))");
+    // The itable is an array of interface vtables. However since there is no common super type
+    // for all vtables, the array is defined as array of 'data' which is the top type for structs.
+    builder.append("(type $itable (array (mut (ref null data))))");
   }
 
   private void emitGlobals(Library library) {
