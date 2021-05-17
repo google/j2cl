@@ -53,7 +53,7 @@ public final class Boolean implements Comparable<Boolean>, Serializable {
   }
 
   public static boolean parseBoolean(String s) {
-    return "true".equalsIgnoreCase(s);
+    return s != null && "true".equals(s.toLowerCase());
   }
 
   public static String toString(boolean x) {
