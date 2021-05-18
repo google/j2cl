@@ -86,7 +86,10 @@ package_sources(
 
 filegroup(
     name = "jre_native_files",
-    srcs = glob(["**/*.js"]) + [
+    srcs = glob(
+        ["**/*.js"],
+        exclude = ["super-wasm/**/*"],
+    ) + [
         "//jre/java/javaemul/internal/vmbootstrap/primitives",
     ],
 )
