@@ -215,6 +215,30 @@ public class Main {
     assertEquals(Double.NEGATIVE_INFINITY, Math.pow(-0.0, -1));
     assertEquals(Double.NEGATIVE_INFINITY, Math.pow(Double.NEGATIVE_INFINITY, 1));
     assertEquals(Double.NEGATIVE_INFINITY, Math.pow(-10.0, 3.093403029238847E15));
+
+    for (int scaleFactor = -32; scaleFactor <= 32; scaleFactor++) {
+      assertEquals(Double.NaN, Math.scalb(Double.NaN, scaleFactor));
+      assertEquals(Double.POSITIVE_INFINITY, Math.scalb(Double.POSITIVE_INFINITY, scaleFactor));
+      assertEquals(Double.NEGATIVE_INFINITY, Math.scalb(Double.NEGATIVE_INFINITY, scaleFactor));
+      assertEquals(0.0, Math.scalb(0.0, scaleFactor));
+      assertEquals(-0.0, Math.scalb(-0.0, scaleFactor));
+    }
+
+    assertEquals(40.0d, Math.scalb(5d, 3));
+    assertEquals(40.0f, Math.scalb(5f, 3));
+
+    assertEquals(64.0d, Math.scalb(64d, 0));
+    assertEquals(64.0f, Math.scalb(64f, 0));
+
+    // Cases in which we can't use integer shift (|scaleFactor| >= 31):
+
+    assertEquals(2147483648.0d, Math.scalb(1d, 31));
+    assertEquals(4294967296.0d, Math.scalb(1d, 32));
+    assertEqualsDelta(2.3283064e-10d, Math.scalb(1d, -32), 1e-7d);
+
+    assertEquals(2147483648.0f, Math.scalb(1f, 31));
+    assertEquals(4294967296.0f, Math.scalb(1f, 32));
+    assertEqualsDelta(2.3283064e-10f, Math.scalb(1f, -32), 1e-7f);
   }
 
   private static class SomeClass {}
