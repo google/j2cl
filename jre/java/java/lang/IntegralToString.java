@@ -59,8 +59,10 @@ final class IntegralToString {
 
   private static String toPowerOfTwoUnsignedString(long value, int shift) {
     final int radix = 1 << shift;
-    if (Integer.MIN_VALUE <= value && value <= Integer.MAX_VALUE) {
-      return Integer.toString((int) value, radix);
+
+    int highBits = LongUtils.getHighBits(value);
+    if (highBits == 0) {
+      return intToUnsignedString(LongUtils.getLowBits(value), radix);
     }
 
     final int mask = radix - 1;
