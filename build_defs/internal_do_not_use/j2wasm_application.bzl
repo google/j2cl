@@ -59,6 +59,7 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-reference-types")
     args.add("--enable-sign-ext")
     args.add("--enable-nontrapping-float-to-int")
+    args.add("--debuginfo")
     args.add_all(ctx.attr.binaryen_args)
     args.add("-o", ctx.outputs.wasm)
     args.add(ctx.outputs.wat)
