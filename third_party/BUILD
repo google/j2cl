@@ -188,13 +188,17 @@ alias(
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations-j2wasm",
 )
 
-j2cl_library(
+alias(
     name = "jbox2d",
-    srcs = ["@org_jbox2d//:j2cl_sources"],
-    javacopts = [
-        "-source 8",
-        "-target 8",
-        "-Xep:EqualsHashCode:OFF",  # See go/equals-hashcode-lsc
-    ],
-    deps = [":gwt-jsinterop-annotations-j2cl"],
+    actual = "@org_jbox2d//:jbox2d",
+)
+
+alias(
+    name = "jbox2d-j2cl",
+    actual = "@org_jbox2d//:jbox2d-j2cl",
+)
+
+alias(
+    name = "jbox2d-j2wasm",
+    actual = "@org_jbox2d//:jbox2d-j2wasm",
 )
