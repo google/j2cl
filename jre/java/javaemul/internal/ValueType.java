@@ -50,7 +50,7 @@ public abstract class ValueType {
 
   // Package private to ensure clinit is run when called from types that use this class as a mixin.
   static boolean equals(ValueType thisObject, Object o) {
-    if (thisObject.getClass() != o.getClass()) {
+    if (o == null || o.getClass() != thisObject.getClass()) {
       return false;
     }
 
