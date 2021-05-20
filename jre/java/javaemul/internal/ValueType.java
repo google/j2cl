@@ -83,8 +83,12 @@ public abstract class ValueType {
       if (e == null) {
         continue;
       }
-      hashCode = 31 * hashCode + e.hashCode();
-      hashCode |= 0; // make sure we don't overflow
+      // AutoValue supports primitives arrays, that needs special handling for hashCode.
+      int h =
+          ArrayHelper.isArray(e)
+              ? Arrays.hashCode(JsUtils.<Object[]>uncheckedCast(e))
+              : e.hashCode();
+      hashCode = 31 * hashCode + h;
     }
     return hashCode;
   }
