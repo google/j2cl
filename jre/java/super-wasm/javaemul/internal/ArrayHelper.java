@@ -19,6 +19,10 @@ package javaemul.internal;
 /** Provides utilities to perform operations on Arrays. */
 public final class ArrayHelper {
 
+  public static <T> T[] clone(T[] array) {
+    return (T[]) cloneImpl(array, 0, array.length);
+  }
+
   public static <T> T[] clone(T[] array, int fromIndex, int toIndex) {
     return (T[]) cloneImpl(array, fromIndex, toIndex);
   }
