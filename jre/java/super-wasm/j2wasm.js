@@ -109,7 +109,6 @@ function charToUpperCase(value) {
     return String.fromCharCode(value).toUpperCase().charCodeAt(0);
 }
 
-
 /** @return {void} */
 function unimplemented() {
   throw new Error('Unimplemented extern');

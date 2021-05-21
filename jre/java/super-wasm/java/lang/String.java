@@ -874,12 +874,12 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     return buffer;
   }
 
-  /** Returns a JavaScrpt string that can be used to pass to JavaScript imports. */
+  /** Returns a JavaScript string that can be used to pass to JavaScript imported methods. */
   public WasmExtern toJsString() {
     return bufferToString(toJsArray());
   }
 
-  /** Returns a String using the char values provided as a JavaScript array or. */
+  /** Returns a String using the char values provided as a JavaScript array. */
   public static String fromJsArray(WasmExtern buffer) {
     char[] array = new char[getBufferSize(buffer)];
     for (int i = 0; i < array.length; i++) {
