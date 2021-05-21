@@ -25,6 +25,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
@@ -159,6 +160,11 @@ public class OutputUtils {
     }
     Files.getFileAttributeView(path, BasicFileAttributeView.class)
         .setTimes(FileTime.fromMillis(0), FileTime.fromMillis(0), FileTime.fromMillis(0));
+  }
+
+  /** Returns the package relative path for a file. */
+  public static String getPackageRelativePath(String packageName, String filename) {
+    return Paths.get(packageName.replace('.', '/'), filename).toString();
   }
 
   private OutputUtils() {}

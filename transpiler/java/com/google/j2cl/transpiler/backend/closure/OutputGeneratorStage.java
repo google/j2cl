@@ -301,18 +301,14 @@ public class OutputGeneratorStage {
 
   /** Returns the relative output path for a given type. */
   private static String getPackageRelativePath(TypeDeclaration typeDeclaration) {
-    return getPackageRelativePath(
+    return OutputUtils.getPackageRelativePath(
         typeDeclaration.getPackageName(), typeDeclaration.getSimpleBinaryName());
   }
 
   /** Returns the relative output path for a given type. */
   private static String getPackageRelativePath(CompilationUnit compilationUnit) {
-    return getPackageRelativePath(compilationUnit.getPackageName(), compilationUnit.getName());
-  }
-
-  /** Returns the relative output path for a given type. */
-  private static String getPackageRelativePath(String packageName, String suffix) {
-    return Paths.get(packageName.replace('.', '/'), suffix).toString();
+    return OutputUtils.getPackageRelativePath(
+        compilationUnit.getPackageName(), compilationUnit.getName());
   }
 
   private static NativeJavaScriptFile getMatchingNativeFile(

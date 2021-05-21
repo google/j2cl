@@ -21,6 +21,7 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.auto.value.AutoValue;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Iterables;
+import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import java.lang.annotation.Annotation;
@@ -164,7 +165,8 @@ public class PackageInfoCache {
   @SuppressWarnings({"resource", "unused"})
   private Annotation[] findBytecodePackageAnnotations(String classPathEntry, String packagePath) {
     checkNotNull(classPathEntry);
-    String packageInfoRelativeFilePath = packagePath.replace('.', '/') + "/package-info.class";
+    String packageInfoRelativeFilePath =
+        OutputUtils.getPackageRelativePath(packagePath, "package-info.class");
     String packageInfoSourceName = packagePath + ".package-info";
 
     Annotation[] annotations = {};
@@ -218,7 +220,7 @@ public class PackageInfoCache {
     }
   }
 
-  private String getPackagePath(String topLevelTypeSourceName) {
+  private String getPackage(String topLevelTypeSourceName) {
     int lastDotIndex = topLevelTypeSourceName.lastIndexOf(".");
     if (lastDotIndex == -1) {
       return topLevelTypeSourceName;
@@ -232,7 +234,7 @@ public class PackageInfoCache {
     }
 
     String originClassPathEntry = findOriginClassPathEntry(topLevelTypeSourceName);
-    String packagePath = getPackagePath(topLevelTypeSourceName);
+    String packagePath = getPackage(topLevelTypeSourceName);
     String specificPackagePath = toSpecificPackagePath(originClassPathEntry, packagePath);
 
     if (originClassPathEntry == null) {
@@ -281,7 +283,7 @@ public class PackageInfoCache {
   private void propagateSpecificInfo(String classPathEntry, String topLevelTypeSourceName) {
     PackageReport packageReport =
         packageReportBySpecificPackagePath.get(
-            toSpecificPackagePath(classPathEntry, getPackagePath(topLevelTypeSourceName)));
+            toSpecificPackagePath(classPathEntry, getPackage(topLevelTypeSourceName)));
     if (packageReport == null) {
       packageReport = DEFAULT_PACKAGE_REPORT;
     }
