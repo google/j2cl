@@ -130,6 +130,11 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
+  public boolean isWasmExtern() {
+    return getQualifiedBinaryName().equals("javaemul.internal.WasmExtern");
+  }
+
+  @Override
   public boolean isNoopCast() {
     return getTypeDeclaration().isNoopCast();
   }

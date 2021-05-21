@@ -106,6 +106,11 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
     return false;
   }
 
+  /** Returns whether the described type is a WASM extern or not. */
+  public boolean isWasmExtern() {
+    return false;
+  }
+
   /**
    * Returns the mangled name of a type.
    *

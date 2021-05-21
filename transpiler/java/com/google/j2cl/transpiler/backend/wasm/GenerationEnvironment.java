@@ -76,6 +76,10 @@ class GenerationEnvironment {
   }
 
   String getWasmType(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.toRawTypeDescriptor().isWasmExtern()) {
+      return "externref";
+    }
+
     if (typeDescriptor.isPrimitive()) {
       return getWasmTypeForPrimitive(typeDescriptor);
     }
@@ -88,6 +92,10 @@ class GenerationEnvironment {
 
   String getWasmTypeName(TypeDescriptor typeDescriptor) {
     typeDescriptor = typeDescriptor.toRawTypeDescriptor();
+
+    if (typeDescriptor.isWasmExtern()) {
+      return "extern";
+    }
 
     if (typeDescriptor.isArray()) {
       ArrayTypeDescriptor arrayTypeDescriptor = (ArrayTypeDescriptor) typeDescriptor;

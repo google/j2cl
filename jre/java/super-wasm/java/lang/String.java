@@ -28,6 +28,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
 import javaemul.internal.EmulatedCharset;
+import javaemul.internal.WasmExtern;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * An immutable sequence of characters/code units ({@code char}s). A {@code String} is represented
@@ -858,4 +861,46 @@ public final class String implements Serializable, Comparable<String>, CharSeque
     int r = Character.offsetByCodePoints(value, offset, count, s, codePointOffset);
     return r - offset;
   }
+
+  // Helper methods to pass and receive strings to and from JavaScript.
+  // These will be removed after Array interop support in WASM is implemented.
+
+  /** Returns a JavaScript array containing the char values in the string. */
+  public WasmExtern toJsArray() {
+    WasmExtern buffer = createBuffer(length());
+    for (int i = 0; i < length(); i++) {
+      setBufferAt(buffer, i, charAt(i));
+    }
+    return buffer;
+  }
+
+  /** Returns a JavaScrpt string that can be used to pass to JavaScript imports. */
+  public WasmExtern toJsString() {
+    return bufferToString(toJsArray());
+  }
+
+  /** Returns a String using the char values provided as a JavaScript array or. */
+  public static String fromJsArray(WasmExtern buffer) {
+    char[] array = new char[getBufferSize(buffer)];
+    for (int i = 0; i < array.length; i++) {
+      array[i] = getBufferAt(buffer, i);
+    }
+    return String.fromInternalArray(array);
+  }
+
+  // Imported helper methods to interop J2WASM strings and arrays and JavaScript strings and arrays.
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native WasmExtern createBuffer(int size);
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native void setBufferAt(WasmExtern o, int i, char value);
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native char getBufferAt(WasmExtern o, int i);
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native int getBufferSize(WasmExtern o);
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native WasmExtern bufferToString(WasmExtern o);
 }

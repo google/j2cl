@@ -64,6 +64,14 @@ function createImportObject(userImports) {
     'Date.now': Date.now,
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,
+    'ConsoleLogger.log': (level, message) => console[level](message),
+
+    // Utilites to interop strings and arrays. From String.java.
+    'createBuffer': size => new Array(size),
+    'setBufferAt': (buffer, index, value) => buffer[index] = value,
+    'getBufferAt': (buffer, index) => buffer[index],
+    'getBufferSize': buffer => buffer.length,
+    'bufferToString': buffer => String.fromCharCode.apply(null, buffer),
 
     // The following are declared in the JRE but unimplemented for now.
     'Date.UTC': unimplemented,
@@ -100,6 +108,7 @@ function charToLowerCase(value) {
 function charToUpperCase(value) {
     return String.fromCharCode(value).toUpperCase().charCodeAt(0);
 }
+
 
 /** @return {void} */
 function unimplemented() {

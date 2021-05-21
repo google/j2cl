@@ -133,6 +133,9 @@ public class WasmModuleGenerator {
   private void emitTypes(Library library) {
     for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
       for (Type type : compilationUnit.getTypes()) {
+        if (type.getTypeDescriptor().isWasmExtern()) {
+          continue;
+        }
         emitBeginCodeComment(type, type.getKind().name());
         renderType(type);
         emitEndCodeComment(type, type.getKind().name());

@@ -15,6 +15,9 @@
  */
 package javaemul.internal;
 
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
+
 /**
  * A helper to print log messages to console.
  *
@@ -22,10 +25,17 @@ package javaemul.internal;
  */
 public class ConsoleLogger {
   public static ConsoleLogger createIfSupported() {
-    return null;
+    return new ConsoleLogger();
   }
 
-  public void log(String level, String message) {}
+  public void log(String level, String message) {
+    log(level.toJsString(), message.toJsString());
+  }
 
-  public void log(String level, Throwable t) {}
+  public void log(String level, Throwable t) {
+    log(level.toJsString(), t.toString().toJsString());
+  }
+
+  @JsMethod(namespace = JsPackage.GLOBAL, name = "ConsoleLogger.log")
+  private static native void log(WasmExtern level, WasmExtern message);
 }
