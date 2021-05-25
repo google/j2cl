@@ -9,8 +9,8 @@ def _impl_j2cl_library(ctx):
         srcs = ctx.files.srcs,
         deps = _j2cl_or_js_providers_of(ctx.attr.deps),
         exports = _j2cl_or_js_providers_of(ctx.attr.exports),
-        plugins = _java_providers_of(ctx.attr.plugins),
-        exported_plugins = _java_providers_of(ctx.attr.exported_plugins),
+        plugins = _javaplugin_providers_of(ctx.attr.plugins),
+        exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
         output_jar = ctx.outputs.jar,
         javac_opts = ctx.attr.javacopts,
         internal_transpiler_flags = {
@@ -42,6 +42,10 @@ def _j2cl_or_js_provider_of(dep):
 
 def _java_providers_of(deps):
     return [d[JavaInfo] for d in deps]
+
+def _javaplugin_providers_of(deps):
+    plugin_provider = getattr(native, "JavaPluginInfo") if hasattr(native, "JavaPluginInfo") else JavaInfo
+    return [d[plugin_provider] for d in deps]
 
 def _collect_runfiles(ctx, files, deps):
     transitive_runfiles = [d[DefaultInfo].default_runfiles.files for d in deps]

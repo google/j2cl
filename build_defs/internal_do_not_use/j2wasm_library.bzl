@@ -20,14 +20,15 @@ J2WASM_LIB_ATTRS = {
 J2WASM_LIB_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
 
 def _impl_j2wasm_library_rule(ctx):
+    plugin_provider = getattr(native, "JavaPluginInfo") if hasattr(native, "JavaPluginInfo") else JavaInfo
     return [j2wasm_common.compile(
         ctx = ctx,
         name = ctx.label.name,
         srcs = ctx.files.srcs,
         deps = [d[J2wasmInfo] for d in ctx.attr.deps],
         exports = [e[J2wasmInfo] for e in ctx.attr.exports],
-        plugins = [p[JavaInfo] for p in ctx.attr.plugins],
-        exported_plugins = [p[JavaInfo] for p in ctx.attr.exported_plugins],
+        plugins = [p[plugin_provider] for p in ctx.attr.plugins],
+        exported_plugins = [p[plugin_provider] for p in ctx.attr.exported_plugins],
         output_jar = ctx.outputs.jar,
         javac_opts = ctx.attr.javacopts,
     )]
