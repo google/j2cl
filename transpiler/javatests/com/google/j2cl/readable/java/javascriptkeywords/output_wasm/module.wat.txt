@@ -23,10 +23,13 @@
  (param $this (ref null $javascriptkeywords.JSKeyWords))
  (result (ref null $javascriptkeywords.JSKeyWords))
  (block $return.label
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (block
    ;; javascriptkeywords.JSKeyWords.$clinit();
+   ;;@ javascriptkeywords/JSKeyWords.java:18:13
    (call $$clinit__void@javascriptkeywords.JSKeyWords )
    ;; Object.this.Object.<init>();
+   ;;@ javascriptkeywords/JSKeyWords.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -43,11 +46,14 @@
  (local $this (ref null $javascriptkeywords.JSKeyWords))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $javascriptkeywords.JSKeyWords.rtt)))
  (block $return.label
+  ;;@ javascriptkeywords/JSKeyWords.java:19:13
   (block
    ;; int let = 0;
+   ;;@ javascriptkeywords/JSKeyWords.java:20:4
    
    (local.set $let (i32.const 0))
    ;; return (let + in);
+   ;;@ javascriptkeywords/JSKeyWords.java:21:4
    (local.set $return.value (i32.add (local.get $let) (local.get $in)))
    (br $return.label)
   )
@@ -59,17 +65,22 @@
 ;;; void JSKeyWords.$clinit()
 (func $$clinit__void@javascriptkeywords.JSKeyWords
  (block $return.label
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (block
    ;; if (javascriptkeywords.JSKeyWords.$initialized) return;
+   ;;@ javascriptkeywords/JSKeyWords.java:18:13
    (if (global.get $f_$initialized__javascriptkeywords_JSKeyWords)
     (then
      ;; return;
+     ;;@ javascriptkeywords/JSKeyWords.java:18:13
      (br $return.label)
     )
    )
    ;; (javascriptkeywords.JSKeyWords.$initialized = true);
+   ;;@ javascriptkeywords/JSKeyWords.java:18:13
    (global.set $f_$initialized__javascriptkeywords_JSKeyWords (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ javascriptkeywords/JSKeyWords.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

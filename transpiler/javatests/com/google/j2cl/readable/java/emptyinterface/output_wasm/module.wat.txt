@@ -8,15 +8,19 @@
 ;;; void EmptyInterface.$clinit()
 (func $$clinit__void@emptyinterface.EmptyInterface
  (block $return.label
+  ;;@ emptyinterface/EmptyInterface.java:18:17
   (block
    ;; if (emptyinterface.EmptyInterface.$initialized) return;
+   ;;@ emptyinterface/EmptyInterface.java:18:17
    (if (global.get $f_$initialized__emptyinterface_EmptyInterface)
     (then
      ;; return;
+     ;;@ emptyinterface/EmptyInterface.java:18:17
      (br $return.label)
     )
    )
    ;; (emptyinterface.EmptyInterface.$initialized = true);
+   ;;@ emptyinterface/EmptyInterface.java:18:17
    (global.set $f_$initialized__emptyinterface_EmptyInterface (i32.const 1))
   )
  )

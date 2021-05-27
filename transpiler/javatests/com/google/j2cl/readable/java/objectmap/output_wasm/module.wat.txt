@@ -22,10 +22,13 @@
  (param $this (ref null $objectmap.ObjectMap))
  (result (ref null $objectmap.ObjectMap))
  (block $return.label
+  ;;@ objectmap/ObjectMap.java:23:13
   (block
    ;; objectmap.ObjectMap.$clinit();
+   ;;@ objectmap/ObjectMap.java:23:13
    (call $$clinit__void@objectmap.ObjectMap )
    ;; Object.this.Object.<init>();
+   ;;@ objectmap/ObjectMap.java:23:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -37,10 +40,13 @@
  (result (ref null $objectmap.ObjectMap))
  (local $return.value (ref null $objectmap.ObjectMap))
  (block $return.label
+  ;;@ objectmap/ObjectMap.java:25:26
   (block
    ;; objectmap.ObjectMap.$clinit();
+   ;;@ objectmap/ObjectMap.java:25:26
    (call $$clinit__void@objectmap.ObjectMap )
    ;; return null;
+   ;;@ objectmap/ObjectMap.java:26:4
    (local.set $return.value (ref.null $objectmap.ObjectMap))
    (br $return.label)
   )
@@ -53,10 +59,13 @@
  (result (ref null $objectmap.ObjectMap))
  (local $return.value (ref null $objectmap.ObjectMap))
  (block $return.label
+  ;;@ objectmap/ObjectMap.java:30:27
   (block
    ;; objectmap.ObjectMap.$clinit();
+   ;;@ objectmap/ObjectMap.java:30:27
    (call $$clinit__void@objectmap.ObjectMap )
    ;; return null;
+   ;;@ objectmap/ObjectMap.java:31:4
    (local.set $return.value (ref.null $objectmap.ObjectMap))
    (br $return.label)
   )
@@ -67,17 +76,22 @@
 ;;; void ObjectMap.$clinit()
 (func $$clinit__void@objectmap.ObjectMap
  (block $return.label
+  ;;@ objectmap/ObjectMap.java:23:13
   (block
    ;; if (objectmap.ObjectMap.$initialized) return;
+   ;;@ objectmap/ObjectMap.java:23:13
    (if (global.get $f_$initialized__objectmap_ObjectMap)
     (then
      ;; return;
+     ;;@ objectmap/ObjectMap.java:23:13
      (br $return.label)
     )
    )
    ;; (objectmap.ObjectMap.$initialized = true);
+   ;;@ objectmap/ObjectMap.java:23:13
    (global.set $f_$initialized__objectmap_ObjectMap (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ objectmap/ObjectMap.java:23:13
    (call $$clinit__void@java.lang.Object )
   )
  )

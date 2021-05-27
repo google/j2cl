@@ -23,10 +23,13 @@
  (param $this (ref null $longinitialvalue.LongInitialValue))
  (result (ref null $longinitialvalue.LongInitialValue))
  (block $return.label
+  ;;@ longinitialvalue/LongInitialValue.java:18:22
   (block
    ;; longinitialvalue.LongInitialValue.$clinit();
+   ;;@ longinitialvalue/LongInitialValue.java:18:22
    (call $$clinit__void@longinitialvalue.LongInitialValue )
    ;; Object.this.Object.<init>();
+   ;;@ longinitialvalue/LongInitialValue.java:18:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -36,17 +39,22 @@
 ;;; void LongInitialValue.$clinit()
 (func $$clinit__void@longinitialvalue.LongInitialValue
  (block $return.label
+  ;;@ longinitialvalue/LongInitialValue.java:18:22
   (block
    ;; if (longinitialvalue.LongInitialValue.$initialized) return;
+   ;;@ longinitialvalue/LongInitialValue.java:18:22
    (if (global.get $f_$initialized__longinitialvalue_LongInitialValue)
     (then
      ;; return;
+     ;;@ longinitialvalue/LongInitialValue.java:18:22
      (br $return.label)
     )
    )
    ;; (longinitialvalue.LongInitialValue.$initialized = true);
+   ;;@ longinitialvalue/LongInitialValue.java:18:22
    (global.set $f_$initialized__longinitialvalue_LongInitialValue (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ longinitialvalue/LongInitialValue.java:18:22
    (call $$clinit__void@java.lang.Object )
   )
  )

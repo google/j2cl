@@ -43,6 +43,8 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
 
   public abstract @Nullable String getName();
 
+  public abstract @Nullable String getPackageRelativePath();
+
   @Override
   public int compareTo(SourcePosition o) {
     if (getFilePath() != null) {
@@ -76,6 +78,8 @@ public abstract class SourcePosition implements Comparable<SourcePosition> {
     public abstract Builder setEndFilePosition(FilePosition filePosition);
 
     public abstract Builder setFilePath(String filePath);
+
+    public abstract Builder setPackageRelativePath(String packageRelativePath);
 
     public abstract Builder setName(String name);
 

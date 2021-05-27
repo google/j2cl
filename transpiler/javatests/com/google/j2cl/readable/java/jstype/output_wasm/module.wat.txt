@@ -37,10 +37,13 @@
  (param $this (ref null $jstype.SomeJsType))
  (result (ref null $jstype.SomeJsType))
  (block $return.label
+  ;;@ jstype/SomeJsType.java:22:13
   (block
    ;; jstype.SomeJsType.$clinit();
+   ;;@ jstype/SomeJsType.java:22:13
    (call $$clinit__void@jstype.SomeJsType )
    ;; Object.this.Object.<init>();
+   ;;@ jstype/SomeJsType.java:22:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -53,6 +56,7 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
+  ;;@ jstype/SomeJsType.java:28:14
   (block
   )
  )
@@ -63,6 +67,7 @@
 (func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType
  (param $this (ref null $jstype.SomeJsType))
  (block $return.label
+  ;;@ jstype/SomeJsType.java:30:15
   (block
   )
  )
@@ -74,6 +79,7 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
+  ;;@ jstype/SomeJsType.java:32:7
   (block
   )
  )
@@ -86,6 +92,7 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
+  ;;@ jstype/SomeJsType.java:34:17
   (block
   )
  )
@@ -99,17 +106,23 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
+  ;;@ jstype/SomeJsType.java:36:14
   (block
    ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
+   ;;@ jstype/SomeJsType.java:37:4
    
    (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $f_publicField__jstype_SomeJsType(local.get $this)) (struct.get $jstype.SomeJsType $f_privateField__jstype_SomeJsType_(local.get $this))) (struct.get $jstype.SomeJsType $f_packageField__jstype_SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $f_protectedField__jstype_SomeJsType(local.get $this))))
    ;; SomeJsType.this.publicMethod();
+   ;;@ jstype/SomeJsType.java:39:4
    (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_publicMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
    ;; SomeJsType.this.privateMethod();
+   ;;@ jstype/SomeJsType.java:40:4
    (call $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType (local.get $this))
    ;; SomeJsType.this.packageMethod();
+   ;;@ jstype/SomeJsType.java:41:4
    (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_packageMethod__void_$pp_jstype (struct.get $jstype.SomeJsType $vtable(local.get $this))))
    ;; SomeJsType.this.protectedMethod();
+   ;;@ jstype/SomeJsType.java:42:4
    (call_ref (local.get $this)(struct.get $jstype.SomeJsType.vtable $m_protectedMethod__void (struct.get $jstype.SomeJsType $vtable(local.get $this))))
   )
  )
@@ -128,14 +141,18 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block $return.label
+  ;;@ jstype/SomeJsType.java:51:18
   (block
    ;; Object object = new Object.<init>();
+   ;;@ jstype/SomeJsType.java:52:4
    
    (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
+   ;;@ jstype/SomeJsType.java:54:4
    
    (local.set $star (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))
    ;; return ((Wildcard) star);
+   ;;@ jstype/SomeJsType.java:55:4
    (local.set $return.value (local.get $star))
    (br $return.label)
   )
@@ -147,17 +164,22 @@
 ;;; void SomeJsType.$clinit()
 (func $$clinit__void@jstype.SomeJsType
  (block $return.label
+  ;;@ jstype/SomeJsType.java:22:13
   (block
    ;; if (jstype.SomeJsType.$initialized) return;
+   ;;@ jstype/SomeJsType.java:22:13
    (if (global.get $f_$initialized__jstype_SomeJsType)
     (then
      ;; return;
+     ;;@ jstype/SomeJsType.java:22:13
      (br $return.label)
     )
    )
    ;; (jstype.SomeJsType.$initialized = true);
+   ;;@ jstype/SomeJsType.java:22:13
    (global.set $f_$initialized__jstype_SomeJsType (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jstype/SomeJsType.java:22:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -188,15 +210,19 @@
 ;;; void Star.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Star
  (block $return.label
+  ;;@ jstype/SomeJsType.java:46:12
   (block
    ;; if (jstype.SomeJsType.Star.$initialized) return;
+   ;;@ jstype/SomeJsType.java:46:12
    (if (global.get $f_$initialized__jstype_SomeJsType_Star)
     (then
      ;; return;
+     ;;@ jstype/SomeJsType.java:46:12
      (br $return.label)
     )
    )
    ;; (jstype.SomeJsType.Star.$initialized = true);
+   ;;@ jstype/SomeJsType.java:46:12
    (global.set $f_$initialized__jstype_SomeJsType_Star (i32.const 1))
   )
  )
@@ -225,15 +251,19 @@
 ;;; void Wildcard.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Wildcard
  (block $return.label
+  ;;@ jstype/SomeJsType.java:49:12
   (block
    ;; if (jstype.SomeJsType.Wildcard.$initialized) return;
+   ;;@ jstype/SomeJsType.java:49:12
    (if (global.get $f_$initialized__jstype_SomeJsType_Wildcard)
     (then
      ;; return;
+     ;;@ jstype/SomeJsType.java:49:12
      (br $return.label)
     )
    )
    ;; (jstype.SomeJsType.Wildcard.$initialized = true);
+   ;;@ jstype/SomeJsType.java:49:12
    (global.set $f_$initialized__jstype_SomeJsType_Wildcard (i32.const 1))
   )
  )

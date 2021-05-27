@@ -37,12 +37,16 @@
  (param $this (ref null $defaultnullable.DefaultNullable))
  (result (ref null $defaultnullable.DefaultNullable))
  (block $return.label
+  ;;@ defaultnullable/DefaultNullable.java:26:13
   (block
    ;; defaultnullable.DefaultNullable.$clinit();
+   ;;@ defaultnullable/DefaultNullable.java:26:13
    (call $$clinit__void@defaultnullable.DefaultNullable )
    ;; Object.this.Object.<init>();
+   ;;@ defaultnullable/DefaultNullable.java:26:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; DefaultNullable.this.$init();
+   ;;@ defaultnullable/DefaultNullable.java:26:13
    (call $$init__void_$p_defaultnullable_DefaultNullable@defaultnullable.DefaultNullable (local.get $this))
   )
  )
@@ -59,8 +63,10 @@
  (local $this (ref null $defaultnullable.DefaultNullable))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $defaultnullable.DefaultNullable.rtt)))
  (block $return.label
+  ;;@ defaultnullable/DefaultNullable.java:41:16
   (block
    ;; return javaemul.internal.StringPool.$getString_||();
+   ;;@ defaultnullable/DefaultNullable.java:42:4
    (local.set $return.value (call $$getString_||__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -79,8 +85,10 @@
  (local $this (ref null $defaultnullable.DefaultNullable))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $defaultnullable.DefaultNullable.rtt)))
  (block $return.label
+  ;;@ defaultnullable/DefaultNullable.java:46:16
   (block
    ;; return null;
+   ;;@ defaultnullable/DefaultNullable.java:47:4
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
   )
@@ -96,6 +104,7 @@
  (local $this (ref null $defaultnullable.DefaultNullable))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $defaultnullable.DefaultNullable.rtt)))
  (block $return.label
+  ;;@ defaultnullable/DefaultNullable.java:51:14
   (block
   )
  )
@@ -109,42 +118,55 @@
  (local $$array_literal_1 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_2 (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
+  ;;@ defaultnullable/DefaultNullable.java:26:13
   (block
    ;; (DefaultNullable.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
+   ;;@ defaultnullable/DefaultNullable.java:27:2
    (struct.set $defaultnullable.DefaultNullable $f_f1__defaultnullable_DefaultNullable_(local.get $this) (call $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool ))
    ;; (DefaultNullable.this.f2 = null);
+   ;;@ defaultnullable/DefaultNullable.java:28:2
    (struct.set $defaultnullable.DefaultNullable $f_f2__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.String))
    ;; (DefaultNullable.this.f3 = null);
+   ;;@ defaultnullable/DefaultNullable.java:29:2
    (struct.set $defaultnullable.DefaultNullable $f_f3__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.String))
    ;; (DefaultNullable.this.f4 = new ArrayList.<init>());
+   ;;@ defaultnullable/DefaultNullable.java:30:2
    (struct.set $defaultnullable.DefaultNullable $f_f4__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (DefaultNullable.this.f5 = new ArrayList.<init>());
+   ;;@ defaultnullable/DefaultNullable.java:31:2
    (struct.set $defaultnullable.DefaultNullable $f_f5__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (DefaultNullable.this.f6 = new ArrayList.<init>());
+   ;;@ defaultnullable/DefaultNullable.java:32:2
    (struct.set $defaultnullable.DefaultNullable $f_f6__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (DefaultNullable.this.f7 = null);
+   ;;@ defaultnullable/DefaultNullable.java:33:2
    (struct.set $defaultnullable.DefaultNullable $f_f7__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Object))
    ;; (DefaultNullable.this.f8 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ defaultnullable/DefaultNullable.java:34:2
    (struct.set $defaultnullable.DefaultNullable $f_f8__defaultnullable_DefaultNullable_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal)
    ))
    ;; (DefaultNullable.this.f9 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ defaultnullable/DefaultNullable.java:36:2
    (struct.set $defaultnullable.DefaultNullable $f_f9__defaultnullable_DefaultNullable_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal_1 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal_1)
    ))
    ;; (DefaultNullable.this.f10 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ defaultnullable/DefaultNullable.java:38:2
    (struct.set $defaultnullable.DefaultNullable $f_f10__defaultnullable_DefaultNullable_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal_2 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal_2)
    ))
    ;; (DefaultNullable.this.f11 = null);
+   ;;@ defaultnullable/DefaultNullable.java:39:2
    (struct.set $defaultnullable.DefaultNullable $f_f11__defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Void))
    ;; (DefaultNullable.this.f12 = new Object.<init>());
+   ;;@ defaultnullable/DefaultNullable.java:40:2
    (struct.set $defaultnullable.DefaultNullable $f_f12__defaultnullable_DefaultNullable_(local.get $this) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
   )
  )
@@ -153,17 +175,22 @@
 ;;; void DefaultNullable.$clinit()
 (func $$clinit__void@defaultnullable.DefaultNullable
  (block $return.label
+  ;;@ defaultnullable/DefaultNullable.java:26:13
   (block
    ;; if (defaultnullable.DefaultNullable.$initialized) return;
+   ;;@ defaultnullable/DefaultNullable.java:26:13
    (if (global.get $f_$initialized__defaultnullable_DefaultNullable)
     (then
      ;; return;
+     ;;@ defaultnullable/DefaultNullable.java:26:13
      (br $return.label)
     )
    )
    ;; (defaultnullable.DefaultNullable.$initialized = true);
+   ;;@ defaultnullable/DefaultNullable.java:26:13
    (global.set $f_$initialized__defaultnullable_DefaultNullable (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ defaultnullable/DefaultNullable.java:26:13
    (call $$clinit__void@java.lang.Object )
   )
  )

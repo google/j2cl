@@ -23,10 +23,13 @@
  (param $this (ref null $ternaryexpression.TernaryExpression))
  (result (ref null $ternaryexpression.TernaryExpression))
  (block $return.label
+  ;;@ ternaryexpression/TernaryExpression.java:18:13
   (block
    ;; ternaryexpression.TernaryExpression.$clinit();
+   ;;@ ternaryexpression/TernaryExpression.java:18:13
    (call $$clinit__void@ternaryexpression.TernaryExpression )
    ;; Object.this.Object.<init>();
+   ;;@ ternaryexpression/TernaryExpression.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -44,17 +47,22 @@
  (local $this (ref null $ternaryexpression.TernaryExpression))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $ternaryexpression.TernaryExpression.rtt)))
  (block $return.label
+  ;;@ ternaryexpression/TernaryExpression.java:20:14
   (block
    ;; boolean a = true;
+   ;;@ ternaryexpression/TernaryExpression.java:21:4
    
    (local.set $a (i32.const 1))
    ;; int number = (a) ? (1) : (2);
+   ;;@ ternaryexpression/TernaryExpression.java:22:4
    
    (local.set $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
    ;; boolean b = ((number == 1)) ? ((number == 2)) : ((number == 1));
+   ;;@ ternaryexpression/TernaryExpression.java:24:4
    
    (local.set $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
    ;; int value = (Integer $qualifier = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30)),$qualifier.intValue());
+   ;;@ ternaryexpression/TernaryExpression.java:26:4
    
    (local.set $value (block (result i32)
     
@@ -69,17 +77,22 @@
 ;;; void TernaryExpression.$clinit()
 (func $$clinit__void@ternaryexpression.TernaryExpression
  (block $return.label
+  ;;@ ternaryexpression/TernaryExpression.java:18:13
   (block
    ;; if (ternaryexpression.TernaryExpression.$initialized) return;
+   ;;@ ternaryexpression/TernaryExpression.java:18:13
    (if (global.get $f_$initialized__ternaryexpression_TernaryExpression)
     (then
      ;; return;
+     ;;@ ternaryexpression/TernaryExpression.java:18:13
      (br $return.label)
     )
    )
    ;; (ternaryexpression.TernaryExpression.$initialized = true);
+   ;;@ ternaryexpression/TernaryExpression.java:18:13
    (global.set $f_$initialized__ternaryexpression_TernaryExpression (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ ternaryexpression/TernaryExpression.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

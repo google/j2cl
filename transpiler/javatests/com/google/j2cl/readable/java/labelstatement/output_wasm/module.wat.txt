@@ -23,10 +23,13 @@
  (param $this (ref null $labelstatement.LabeledStatement))
  (result (ref null $labelstatement.LabeledStatement))
  (block $return.label
+  ;;@ labelstatement/LabeledStatement.java:18:13
   (block
    ;; labelstatement.LabeledStatement.$clinit();
+   ;;@ labelstatement/LabeledStatement.java:18:13
    (call $$clinit__void@labelstatement.LabeledStatement )
    ;; Object.this.Object.<init>();
+   ;;@ labelstatement/LabeledStatement.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -39,15 +42,19 @@
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
  (block $return.label
+  ;;@ labelstatement/LabeledStatement.java:19:14
   (block
    ;; LABEL: for (;true;) {
+   ;;@ labelstatement/LabeledStatement.java:20:4
    
    (block $LABEL.BREAK
     (loop
      (br_if 1 (i32.eqz (i32.const 1)))
      (block $LABEL.CONTINUE
+      ;;@ labelstatement/LabeledStatement.java:21:15
       (block
        ;; break LABEL;
+       ;;@ labelstatement/LabeledStatement.java:22:6
        (br $LABEL.BREAK)
       )
      )
@@ -56,13 +63,16 @@
     )
    )
    ;; LABEL1: for (;true;) {
+   ;;@ labelstatement/LabeledStatement.java:25:4
    
    (block $LABEL1.BREAK
     (loop
      (br_if 1 (i32.eqz (i32.const 1)))
      (block $LABEL1.CONTINUE
+      ;;@ labelstatement/LabeledStatement.java:26:15
       (block
        ;; continue LABEL1;
+       ;;@ labelstatement/LabeledStatement.java:27:6
        (br $LABEL1.CONTINUE)
       )
      )
@@ -78,17 +88,22 @@
 ;;; void LabeledStatement.$clinit()
 (func $$clinit__void@labelstatement.LabeledStatement
  (block $return.label
+  ;;@ labelstatement/LabeledStatement.java:18:13
   (block
    ;; if (labelstatement.LabeledStatement.$initialized) return;
+   ;;@ labelstatement/LabeledStatement.java:18:13
    (if (global.get $f_$initialized__labelstatement_LabeledStatement)
     (then
      ;; return;
+     ;;@ labelstatement/LabeledStatement.java:18:13
      (br $return.label)
     )
    )
    ;; (labelstatement.LabeledStatement.$initialized = true);
+   ;;@ labelstatement/LabeledStatement.java:18:13
    (global.set $f_$initialized__labelstatement_LabeledStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ labelstatement/LabeledStatement.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

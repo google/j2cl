@@ -22,10 +22,13 @@
  (param $this (ref null $emptyclass.EmptyClass))
  (result (ref null $emptyclass.EmptyClass))
  (block $return.label
+  ;;@ emptyclass/EmptyClass.java:18:13
   (block
    ;; emptyclass.EmptyClass.$clinit();
+   ;;@ emptyclass/EmptyClass.java:18:13
    (call $$clinit__void@emptyclass.EmptyClass )
    ;; Object.this.Object.<init>();
+   ;;@ emptyclass/EmptyClass.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -35,17 +38,22 @@
 ;;; void EmptyClass.$clinit()
 (func $$clinit__void@emptyclass.EmptyClass
  (block $return.label
+  ;;@ emptyclass/EmptyClass.java:18:13
   (block
    ;; if (emptyclass.EmptyClass.$initialized) return;
+   ;;@ emptyclass/EmptyClass.java:18:13
    (if (global.get $f_$initialized__emptyclass_EmptyClass)
     (then
      ;; return;
+     ;;@ emptyclass/EmptyClass.java:18:13
      (br $return.label)
     )
    )
    ;; (emptyclass.EmptyClass.$initialized = true);
+   ;;@ emptyclass/EmptyClass.java:18:13
    (global.set $f_$initialized__emptyclass_EmptyClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ emptyclass/EmptyClass.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

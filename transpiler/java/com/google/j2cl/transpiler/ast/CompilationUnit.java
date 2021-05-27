@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.visitor.Context;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -36,11 +37,15 @@ public class CompilationUnit extends Node {
 
   private final String filePath;
   private final String packageName;
+  private final String packageRelativePath;
+
   @Visitable List<Type> types = new ArrayList<>();
 
   public CompilationUnit(String filePath, String packageName) {
     this.filePath = checkNotNull(filePath);
     this.packageName = checkNotNull(packageName);
+    this.packageRelativePath = OutputUtils.getPackageRelativePath(packageName, getName() + ".java");
+
     checkState(filePath.endsWith(COMPILATION_UNIT_FILENAME_SUFFIX));
   }
 
@@ -53,6 +58,10 @@ public class CompilationUnit extends Node {
       return "";
     }
     return filePath.substring(0, filePath.lastIndexOf(File.separator));
+  }
+
+  public String getPackageRelativePath() {
+    return packageRelativePath;
   }
 
   public String getPackageName() {

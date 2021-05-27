@@ -81,12 +81,16 @@
  (param $this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main))
  (block $return.label
+  ;;@ jsasync/Main.java:24:13
   (block
    ;; jsasync.Main.$clinit();
+   ;;@ jsasync/Main.java:24:13
    (call $$clinit__void@jsasync.Main )
    ;; Object.this.Object.<init>();
+   ;;@ jsasync/Main.java:24:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Main.this.$init();
+   ;;@ jsasync/Main.java:24:13
    (call $$init__void_$p_jsasync_Main@jsasync.Main (local.get $this))
   )
  )
@@ -101,8 +105,10 @@
  (local $this (ref null $jsasync.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:29:18
   (block
    ;; return null;
+   ;;@ jsasync/Main.java:30:4
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -121,8 +127,10 @@
  (local $this (ref null $jsasync.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:34:21
   (block
    ;; int result = (Integer $qualifier = ((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(7)))),$qualifier.intValue());
+   ;;@ jsasync/Main.java:35:4
    
    (local.set $result (block (result i32)
     
@@ -130,6 +138,7 @@
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
    ;; return Main.this.parametricAsyncMethod(java.lang.Integer.valueOf(result));
+   ;;@ jsasync/Main.java:36:4
    (local.set $return.value (call_ref (local.get $this)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (local.get $result))(struct.get $jsasync.Main.vtable $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (struct.get $jsasync.Main $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -147,8 +156,10 @@
  (local $this (ref null $jsasync.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:40:19
   (block
    ;; return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(value)));
+   ;;@ jsasync/Main.java:41:4
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (local.get $value)))))
    (br $return.label)
   )
@@ -162,10 +173,13 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
+  ;;@ jsasync/Main.java:45:25
   (block
    ;; jsasync.Main.$clinit();
+   ;;@ jsasync/Main.java:45:25
    (call $$clinit__void@jsasync.Main )
    ;; return jsasync.Main.Promise.resolve(((Void) jsasync.Main.await(jsasync.Main.Promise.resolve(((Void) null)))));
+   ;;@ jsasync/Main.java:46:4
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (ref.null $java.lang.Object) (global.get $java.lang.Void.rtt)))) (global.get $java.lang.Void.rtt))))
    (br $return.label)
   )
@@ -184,20 +198,26 @@
  (local $this (ref null $jsasync.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:50:7
   (block
    ;; AsyncInterface i = new $LambdaImplementor$1.<init>();
+   ;;@ jsasync/Main.java:51:4
    
    (local.set $i (call $m_<init>__void@jsasync.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (global.get $jsasync.Main.$LambdaImplementor$1.vtable) (global.get $jsasync.Main.$LambdaImplementor$1.itable) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$1.rtt))))
    ;; BaseInterface o = new $1.<init>(Main.this);
+   ;;@ jsasync/Main.java:53:4
    
    (local.set $o (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (global.get $jsasync.Main.1.vtable) (global.get $jsasync.Main.1.itable) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))(local.get $this)))
    ;; AsyncJsFunctionInterface j = new $LambdaImplementor$2.<init>();
+   ;;@ jsasync/Main.java:62:4
    
    (local.set $j (call $m_<init>__void@jsasync.Main.$LambdaImplementor$2 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (global.get $jsasync.Main.$LambdaImplementor$2.vtable) (global.get $jsasync.Main.$LambdaImplementor$2.itable) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$2.rtt))))
    ;; JsFunctionInterface optimizableJsFunction = new $2.<init>(Main.this);
+   ;;@ jsasync/Main.java:64:4
    
    (local.set $optimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (global.get $jsasync.Main.2.vtable) (global.get $jsasync.Main.2.itable) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))(local.get $this)))
    ;; JsFunctionInterface unoptimizableJsFunction = new $3.<init>(Main.this);
+   ;;@ jsasync/Main.java:75:4
    
    (local.set $unoptimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (global.get $jsasync.Main.3.vtable) (global.get $jsasync.Main.3.itable) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))(local.get $this)))
   )
@@ -215,8 +235,10 @@
 (func $$init__void_$p_jsasync_Main@jsasync.Main
  (param $this (ref null $jsasync.Main))
  (block $return.label
+  ;;@ jsasync/Main.java:24:13
   (block
    ;; (Main.this.x = jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(10)));
+   ;;@ jsasync/Main.java:26:2
    (struct.set $jsasync.Main $f_x__jsasync_Main_(local.get $this) (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 10))))
   )
  )
@@ -225,17 +247,22 @@
 ;;; void Main.$clinit()
 (func $$clinit__void@jsasync.Main
  (block $return.label
+  ;;@ jsasync/Main.java:24:13
   (block
    ;; if (jsasync.Main.$initialized) return;
+   ;;@ jsasync/Main.java:24:13
    (if (global.get $f_$initialized__jsasync_Main)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:24:13
      (br $return.label)
     )
    )
    ;; (jsasync.Main.$initialized = true);
+   ;;@ jsasync/Main.java:24:13
    (global.set $f_$initialized__jsasync_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsasync/Main.java:24:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -280,12 +307,16 @@
  (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.1))
  (block $return.label
+  ;;@ jsasync/Main.java:54:28
   (block
    ;; jsasync.Main.1.$clinit();
+   ;;@ jsasync/Main.java:54:28
    (call $$clinit__void@jsasync.Main.1 )
    ;; ($1.this.this = $outer_this);
+   ;;@ jsasync/Main.java:54:28
    (struct.set $jsasync.Main.1 $$outer_this__jsasync_Main_1(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ jsasync/Main.java:54:28
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -300,8 +331,10 @@
  (local $this (ref null $jsasync.Main.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.1.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:57:36
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($1.this.this.x)));
+   ;;@ jsasync/Main.java:58:12
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.1 $$outer_this__jsasync_Main_1(local.get $this)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
@@ -313,17 +346,22 @@
 ;;; void <anonymous> implements BaseInterface.$clinit()
 (func $$clinit__void@jsasync.Main.1
  (block $return.label
+  ;;@ jsasync/Main.java:54:28
   (block
    ;; if (jsasync.Main.1.$initialized) return;
+   ;;@ jsasync/Main.java:54:28
    (if (global.get $f_$initialized__jsasync_Main_1)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:54:28
      (br $return.label)
     )
    )
    ;; (jsasync.Main.1.$initialized = true);
+   ;;@ jsasync/Main.java:54:28
    (global.set $f_$initialized__jsasync_Main_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsasync/Main.java:54:28
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -368,12 +406,16 @@
  (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.2))
  (block $return.label
+  ;;@ jsasync/Main.java:65:34
   (block
    ;; jsasync.Main.2.$clinit();
+   ;;@ jsasync/Main.java:65:34
    (call $$clinit__void@jsasync.Main.2 )
    ;; ($2.this.this = $outer_this);
+   ;;@ jsasync/Main.java:65:34
    (struct.set $jsasync.Main.2 $$outer_this__jsasync_Main_2(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ jsasync/Main.java:65:34
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -388,8 +430,10 @@
  (local $this (ref null $jsasync.Main.2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.2.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:68:36
   (block
    ;; return jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5));
+   ;;@ jsasync/Main.java:71:12
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5))))
    (br $return.label)
   )
@@ -401,17 +445,22 @@
 ;;; void <anonymous> implements JsFunctionInterface.$clinit()
 (func $$clinit__void@jsasync.Main.2
  (block $return.label
+  ;;@ jsasync/Main.java:65:34
   (block
    ;; if (jsasync.Main.2.$initialized) return;
+   ;;@ jsasync/Main.java:65:34
    (if (global.get $f_$initialized__jsasync_Main_2)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:65:34
      (br $return.label)
     )
    )
    ;; (jsasync.Main.2.$initialized = true);
+   ;;@ jsasync/Main.java:65:34
    (global.set $f_$initialized__jsasync_Main_2 (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsasync/Main.java:65:34
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -456,12 +505,16 @@
  (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.3))
  (block $return.label
+  ;;@ jsasync/Main.java:76:34
   (block
    ;; jsasync.Main.3.$clinit();
+   ;;@ jsasync/Main.java:76:34
    (call $$clinit__void@jsasync.Main.3 )
    ;; ($3.this.this = $outer_this);
+   ;;@ jsasync/Main.java:76:34
    (struct.set $jsasync.Main.3 $$outer_this__jsasync_Main_3(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ jsasync/Main.java:76:34
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -477,11 +530,14 @@
  (local $this (ref null $jsasync.Main.3))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.3.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:79:36
   (block
    ;; JsFunctionInterface tmp = $3.this;
+   ;;@ jsasync/Main.java:80:12
    
    (local.set $tmp (local.get $this))
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($3.this.this.x)));
+   ;;@ jsasync/Main.java:82:12
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.3 $$outer_this__jsasync_Main_3(local.get $this)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
@@ -493,17 +549,22 @@
 ;;; void <anonymous> implements JsFunctionInterface.$clinit()
 (func $$clinit__void@jsasync.Main.3
  (block $return.label
+  ;;@ jsasync/Main.java:76:34
   (block
    ;; if (jsasync.Main.3.$initialized) return;
+   ;;@ jsasync/Main.java:76:34
    (if (global.get $f_$initialized__jsasync_Main_3)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:76:34
      (br $return.label)
     )
    )
    ;; (jsasync.Main.3.$initialized = true);
+   ;;@ jsasync/Main.java:76:34
    (global.set $f_$initialized__jsasync_Main_3 (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsasync/Main.java:76:34
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -535,15 +596,19 @@
 ;;; void BaseInterface.$clinit()
 (func $$clinit__void@jsasync.Main.BaseInterface
  (block $return.label
+  ;;@ jsasync/Main.java:87:12
   (block
    ;; if (jsasync.Main.BaseInterface.$initialized) return;
+   ;;@ jsasync/Main.java:87:12
    (if (global.get $f_$initialized__jsasync_Main_BaseInterface)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:87:12
      (br $return.label)
     )
    )
    ;; (jsasync.Main.BaseInterface.$initialized = true);
+   ;;@ jsasync/Main.java:87:12
    (global.set $f_$initialized__jsasync_Main_BaseInterface (i32.const 1))
   )
  )
@@ -573,15 +638,19 @@
 ;;; void AsyncInterface.$clinit()
 (func $$clinit__void@jsasync.Main.AsyncInterface
  (block $return.label
+  ;;@ jsasync/Main.java:91:12
   (block
    ;; if (jsasync.Main.AsyncInterface.$initialized) return;
+   ;;@ jsasync/Main.java:91:12
    (if (global.get $f_$initialized__jsasync_Main_AsyncInterface)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:91:12
      (br $return.label)
     )
    )
    ;; (jsasync.Main.AsyncInterface.$initialized = true);
+   ;;@ jsasync/Main.java:91:12
    (global.set $f_$initialized__jsasync_Main_AsyncInterface (i32.const 1))
   )
  )
@@ -614,8 +683,10 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
+  ;;@ jsasync/Main.java:99:31
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
+   ;;@ jsasync/Main.java:100:6
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
@@ -627,15 +698,19 @@
 ;;; void InterfaceWithAsyncDefaultMethod.$clinit()
 (func $$clinit__void@jsasync.Main.InterfaceWithAsyncDefaultMethod
  (block $return.label
+  ;;@ jsasync/Main.java:97:12
   (block
    ;; if (jsasync.Main.InterfaceWithAsyncDefaultMethod.$initialized) return;
+   ;;@ jsasync/Main.java:97:12
    (if (global.get $f_$initialized__jsasync_Main_InterfaceWithAsyncDefaultMethod)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:97:12
      (br $return.label)
     )
    )
    ;; (jsasync.Main.InterfaceWithAsyncDefaultMethod.$initialized = true);
+   ;;@ jsasync/Main.java:97:12
    (global.set $f_$initialized__jsasync_Main_InterfaceWithAsyncDefaultMethod (i32.const 1))
   )
  )
@@ -665,15 +740,19 @@
 ;;; void JsFunctionInterface.$clinit()
 (func $$clinit__void@jsasync.Main.JsFunctionInterface
  (block $return.label
+  ;;@ jsasync/Main.java:105:12
   (block
    ;; if (jsasync.Main.JsFunctionInterface.$initialized) return;
+   ;;@ jsasync/Main.java:105:12
    (if (global.get $f_$initialized__jsasync_Main_JsFunctionInterface)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:105:12
      (br $return.label)
     )
    )
    ;; (jsasync.Main.JsFunctionInterface.$initialized = true);
+   ;;@ jsasync/Main.java:105:12
    (global.set $f_$initialized__jsasync_Main_JsFunctionInterface (i32.const 1))
   )
  )
@@ -703,15 +782,19 @@
 ;;; void AsyncJsFunctionInterface.$clinit()
 (func $$clinit__void@jsasync.Main.AsyncJsFunctionInterface
  (block $return.label
+  ;;@ jsasync/Main.java:110:12
   (block
    ;; if (jsasync.Main.AsyncJsFunctionInterface.$initialized) return;
+   ;;@ jsasync/Main.java:110:12
    (if (global.get $f_$initialized__jsasync_Main_AsyncJsFunctionInterface)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:110:12
      (br $return.label)
     )
    )
    ;; (jsasync.Main.AsyncJsFunctionInterface.$initialized = true);
+   ;;@ jsasync/Main.java:110:12
    (global.set $f_$initialized__jsasync_Main_AsyncJsFunctionInterface (i32.const 1))
   )
  )
@@ -740,15 +823,19 @@
 ;;; void IThenable.$clinit()
 (func $$clinit__void@jsasync.Main.IThenable
  (block $return.label
+  ;;@ jsasync/Main.java:116:19
   (block
    ;; if (jsasync.Main.IThenable.$initialized) return;
+   ;;@ jsasync/Main.java:116:19
    (if (global.get $f_$initialized__jsasync_Main_IThenable)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:116:19
      (br $return.label)
     )
    )
    ;; (jsasync.Main.IThenable.$initialized = true);
+   ;;@ jsasync/Main.java:116:19
    (global.set $f_$initialized__jsasync_Main_IThenable (i32.const 1))
   )
  )
@@ -788,10 +875,13 @@
  (param $this (ref null $jsasync.Main.Promise))
  (result (ref null $jsasync.Main.Promise))
  (block $return.label
+  ;;@ jsasync/Main.java:119:23
   (block
    ;; jsasync.Main.Promise.$clinit();
+   ;;@ jsasync/Main.java:119:23
    (call $$clinit__void@jsasync.Main.Promise )
    ;; Object.this.Object.<init>();
+   ;;@ jsasync/Main.java:119:23
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -807,17 +897,22 @@
 ;;; void Promise.$clinit()
 (func $$clinit__void@jsasync.Main.Promise
  (block $return.label
+  ;;@ jsasync/Main.java:119:23
   (block
    ;; if (jsasync.Main.Promise.$initialized) return;
+   ;;@ jsasync/Main.java:119:23
    (if (global.get $f_$initialized__jsasync_Main_Promise)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:119:23
      (br $return.label)
     )
    )
    ;; (jsasync.Main.Promise.$initialized = true);
+   ;;@ jsasync/Main.java:119:23
    (global.set $f_$initialized__jsasync_Main_Promise (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsasync/Main.java:119:23
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -860,10 +955,13 @@
  (param $this (ref null $jsasync.Main.$LambdaImplementor$1))
  (result (ref null $jsasync.Main.$LambdaImplementor$1))
  (block $return.label
+  ;;@ jsasync/Main.java:51:23
   (block
    ;; jsasync.Main.$LambdaImplementor$1.$clinit();
+   ;;@ jsasync/Main.java:51:23
    (call $$clinit__void@jsasync.Main.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
+   ;;@ jsasync/Main.java:51:23
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -878,8 +976,10 @@
  (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.$LambdaImplementor$1.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:51:23
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
+   ;;@ jsasync/Main.java:51:29
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
@@ -891,17 +991,22 @@
 ;;; void $LambdaImplementor$1.$clinit()
 (func $$clinit__void@jsasync.Main.$LambdaImplementor$1
  (block $return.label
+  ;;@ jsasync/Main.java:51:23
   (block
    ;; if (jsasync.Main.$LambdaImplementor$1.$initialized) return;
+   ;;@ jsasync/Main.java:51:23
    (if (global.get $f_$initialized__jsasync_Main_$LambdaImplementor$1)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:51:23
      (br $return.label)
     )
    )
    ;; (jsasync.Main.$LambdaImplementor$1.$initialized = true);
+   ;;@ jsasync/Main.java:51:23
    (global.set $f_$initialized__jsasync_Main_$LambdaImplementor$1 (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsasync/Main.java:51:23
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -944,10 +1049,13 @@
  (param $this (ref null $jsasync.Main.$LambdaImplementor$2))
  (result (ref null $jsasync.Main.$LambdaImplementor$2))
  (block $return.label
+  ;;@ jsasync/Main.java:62:33
   (block
    ;; jsasync.Main.$LambdaImplementor$2.$clinit();
+   ;;@ jsasync/Main.java:62:33
    (call $$clinit__void@jsasync.Main.$LambdaImplementor$2 )
    ;; Object.this.Object.<init>();
+   ;;@ jsasync/Main.java:62:33
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -962,8 +1070,10 @@
  (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.$LambdaImplementor$2.rtt)))
  (block $return.label
+  ;;@ jsasync/Main.java:62:33
   (block
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
+   ;;@ jsasync/Main.java:62:39
    (local.set $return.value (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (global.get $java.lang.Integer.rtt))))
    (br $return.label)
   )
@@ -975,17 +1085,22 @@
 ;;; void $LambdaImplementor$2.$clinit()
 (func $$clinit__void@jsasync.Main.$LambdaImplementor$2
  (block $return.label
+  ;;@ jsasync/Main.java:62:33
   (block
    ;; if (jsasync.Main.$LambdaImplementor$2.$initialized) return;
+   ;;@ jsasync/Main.java:62:33
    (if (global.get $f_$initialized__jsasync_Main_$LambdaImplementor$2)
     (then
      ;; return;
+     ;;@ jsasync/Main.java:62:33
      (br $return.label)
     )
    )
    ;; (jsasync.Main.$LambdaImplementor$2.$initialized = true);
+   ;;@ jsasync/Main.java:62:33
    (global.set $f_$initialized__jsasync_Main_$LambdaImplementor$2 (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsasync/Main.java:62:33
    (call $$clinit__void@java.lang.Object )
   )
  )

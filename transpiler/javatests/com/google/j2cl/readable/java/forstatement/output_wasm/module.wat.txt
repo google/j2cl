@@ -23,10 +23,13 @@
  (param $this (ref null $forstatement.ForStatement))
  (result (ref null $forstatement.ForStatement))
  (block $return.label
+  ;;@ forstatement/ForStatement.java:18:13
   (block
    ;; forstatement.ForStatement.$clinit();
+   ;;@ forstatement/ForStatement.java:18:13
    (call $$clinit__void@forstatement.ForStatement )
    ;; Object.this.Object.<init>();
+   ;;@ forstatement/ForStatement.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -45,8 +48,10 @@
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
  (block $return.label
+  ;;@ forstatement/ForStatement.java:19:14
   (block
    ;; LOOP: for (int i = 0,int count = 0;(i < 100);(i = (i + 1))) {
+   ;;@ forstatement/ForStatement.java:20:4
    
    
    (local.set $i (i32.const 0))
@@ -55,8 +60,10 @@
     (loop
      (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 100))))
      (block $LOOP.CONTINUE
+      ;;@ forstatement/ForStatement.java:20:45
       (block
        ;; (count = (count + 1));
+       ;;@ forstatement/ForStatement.java:21:6
        (local.set $count (i32.add (local.get $count) (i32.const 1)))
       )
      )
@@ -66,6 +73,7 @@
     )
    )
    ;; LOOP: for (long l = 0,long count = 0;(l < 100);(l = (l + 1)),(l = (l + 1))) {
+   ;;@ forstatement/ForStatement.java:24:4
    
    
    (local.set $l (i64.const 0))
@@ -74,8 +82,10 @@
     (loop
      (br_if 1 (i32.eqz (i64.lt_s (local.get $l) (i64.const 100))))
      (block $LOOP_1.CONTINUE
+      ;;@ forstatement/ForStatement.java:24:51
       (block
        ;; (count = (count + 1));
+       ;;@ forstatement/ForStatement.java:25:6
        (local.set $count_1 (i64.add (local.get $count_1) (i64.const 1)))
       )
      )
@@ -86,9 +96,11 @@
     )
    )
    ;; boolean a = false;
+   ;;@ forstatement/ForStatement.java:28:4
    
    (local.set $a (i32.const 0))
    ;; LOOP: for (;((a = (a | true)),a);) {
+   ;;@ forstatement/ForStatement.java:29:4
    
    (block $LOOP_2.BREAK
     (loop
@@ -97,6 +109,7 @@
       (local.get $a)
      )))
      (block $LOOP_2.CONTINUE
+      ;;@ forstatement/ForStatement.java:29:24
       (block
       )
      )
@@ -105,9 +118,11 @@
     )
    )
    ;; boolean b = false;
+   ;;@ forstatement/ForStatement.java:31:4
    
    (local.set $b (i32.const 0))
    ;; LOOP: for (;((b = a),b);) {
+   ;;@ forstatement/ForStatement.java:32:4
    
    (block $LOOP_3.BREAK
     (loop
@@ -116,6 +131,7 @@
       (local.get $b)
      )))
      (block $LOOP_3.CONTINUE
+      ;;@ forstatement/ForStatement.java:32:20
       (block
       )
      )
@@ -124,12 +140,14 @@
     )
    )
    ;; LOOP: for (forstatement.ForStatement.returnsValue();true;forstatement.ForStatement.returnsValue()) {
+   ;;@ forstatement/ForStatement.java:34:4
    
    (drop (call $m_returnsValue__int@forstatement.ForStatement ))
    (block $LOOP_4.BREAK
     (loop
      (br_if 1 (i32.eqz (i32.const 1)))
      (block $LOOP_4.CONTINUE
+      ;;@ forstatement/ForStatement.java:34:43
       (block
       )
      )
@@ -148,8 +166,10 @@
  (result i32)
  (local $return.value i32)
  (block $return.label
+  ;;@ forstatement/ForStatement.java:37:21
   (block
    ;; return 1;
+   ;;@ forstatement/ForStatement.java:38:4
    (local.set $return.value (i32.const 1))
    (br $return.label)
   )
@@ -160,17 +180,22 @@
 ;;; void ForStatement.$clinit()
 (func $$clinit__void@forstatement.ForStatement
  (block $return.label
+  ;;@ forstatement/ForStatement.java:18:13
   (block
    ;; if (forstatement.ForStatement.$initialized) return;
+   ;;@ forstatement/ForStatement.java:18:13
    (if (global.get $f_$initialized__forstatement_ForStatement)
     (then
      ;; return;
+     ;;@ forstatement/ForStatement.java:18:13
      (br $return.label)
     )
    )
    ;; (forstatement.ForStatement.$initialized = true);
+   ;;@ forstatement/ForStatement.java:18:13
    (global.set $f_$initialized__forstatement_ForStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ forstatement/ForStatement.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

@@ -67,6 +67,7 @@
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:26:14
   (block
   )
  )
@@ -82,6 +83,7 @@
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:29:14
   (block
   )
  )
@@ -94,12 +96,16 @@
  (param $a (ref null $java.lang.String))
  (result (ref null $jsoptional.Main))
  (block $return.label
+  ;;@ jsoptional/Main.java:39:9
   (block
    ;; jsoptional.Main.$clinit();
+   ;;@ jsoptional/Main.java:39:9
    (call $$clinit__void@jsoptional.Main )
    ;; Object.this.Object.<init>();
+   ;;@ jsoptional/Main.java:39:9
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Main.this.$init();
+   ;;@ jsoptional/Main.java:39:9
    (call $$init__void_$p_jsoptional_Main@jsoptional.Main (local.get $this))
   )
  )
@@ -113,6 +119,7 @@
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:48:14
   (block
   )
  )
@@ -126,6 +133,7 @@
  (local $this (ref null $jsoptional.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:51:14
   (block
   )
  )
@@ -136,8 +144,10 @@
 (func $$init__void_$p_jsoptional_Main@jsoptional.Main
  (param $this (ref null $jsoptional.Main))
  (block $return.label
+  ;;@ jsoptional/Main.java:24:13
   (block
    ;; (Main.this.f = new $LambdaImplementor$1.<init>());
+   ;;@ jsoptional/Main.java:36:2
    (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (call $m_<init>__void@jsoptional.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (global.get $jsoptional.Main.$LambdaImplementor$1.vtable) (global.get $jsoptional.Main.$LambdaImplementor$1.itable) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt))))
   )
  )
@@ -146,17 +156,22 @@
 ;;; void Main.$clinit()
 (func $$clinit__void@jsoptional.Main
  (block $return.label
+  ;;@ jsoptional/Main.java:24:13
   (block
    ;; if (jsoptional.Main.$initialized) return;
+   ;;@ jsoptional/Main.java:24:13
    (if (global.get $f_$initialized__jsoptional_Main)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:24:13
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.$initialized = true);
+   ;;@ jsoptional/Main.java:24:13
    (global.set $f_$initialized__jsoptional_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsoptional/Main.java:24:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -188,15 +203,19 @@
 ;;; void Function.$clinit()
 (func $$clinit__void@jsoptional.Main.Function
  (block $return.label
+  ;;@ jsoptional/Main.java:32:12
   (block
    ;; if (jsoptional.Main.Function.$initialized) return;
+   ;;@ jsoptional/Main.java:32:12
    (if (global.get $f_$initialized__jsoptional_Main_Function)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:32:12
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.Function.$initialized = true);
+   ;;@ jsoptional/Main.java:32:12
    (global.set $f_$initialized__jsoptional_Main_Function (i32.const 1))
   )
  )
@@ -237,10 +256,13 @@
  (param $this (ref null $jsoptional.Main.AFunction))
  (result (ref null $jsoptional.Main.AFunction))
  (block $return.label
+  ;;@ jsoptional/Main.java:41:21
   (block
    ;; jsoptional.Main.AFunction.$clinit();
+   ;;@ jsoptional/Main.java:41:21
    (call $$clinit__void@jsoptional.Main.AFunction )
    ;; Object.this.Object.<init>();
+   ;;@ jsoptional/Main.java:41:21
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -257,8 +279,10 @@
  (local $this (ref null $jsoptional.Main.AFunction))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:43:18
   (block
    ;; return ((Object) args.elements[0]);
+   ;;@ jsoptional/Main.java:44:6
    (local.set $return.value (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
    (br $return.label)
   )
@@ -270,17 +294,22 @@
 ;;; void AFunction.$clinit()
 (func $$clinit__void@jsoptional.Main.AFunction
  (block $return.label
+  ;;@ jsoptional/Main.java:41:21
   (block
    ;; if (jsoptional.Main.AFunction.$initialized) return;
+   ;;@ jsoptional/Main.java:41:21
    (if (global.get $f_$initialized__jsoptional_Main_AFunction)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:41:21
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.AFunction.$initialized = true);
+   ;;@ jsoptional/Main.java:41:21
    (global.set $f_$initialized__jsoptional_Main_AFunction (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsoptional/Main.java:41:21
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -312,15 +341,19 @@
 ;;; void I.$clinit()
 (func $$clinit__void@jsoptional.Main.I
  (block $return.label
+  ;;@ jsoptional/Main.java:54:12
   (block
    ;; if (jsoptional.Main.I.$initialized) return;
+   ;;@ jsoptional/Main.java:54:12
    (if (global.get $f_$initialized__jsoptional_Main_I)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:54:12
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.I.$initialized = true);
+   ;;@ jsoptional/Main.java:54:12
    (global.set $f_$initialized__jsoptional_Main_I (i32.const 1))
   )
  )
@@ -362,10 +395,13 @@
  (param $this (ref null $jsoptional.Main.TemplatedSubtype))
  (result (ref null $jsoptional.Main.TemplatedSubtype))
  (block $return.label
+  ;;@ jsoptional/Main.java:59:15
   (block
    ;; jsoptional.Main.TemplatedSubtype.$clinit();
+   ;;@ jsoptional/Main.java:59:15
    (call $$clinit__void@jsoptional.Main.TemplatedSubtype )
    ;; Object.this.Object.<init>();
+   ;;@ jsoptional/Main.java:59:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -380,6 +416,7 @@
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:61:16
   (block
   )
  )
@@ -394,8 +431,10 @@
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:59:15
   (block
    ;; TemplatedSubtype.this.m(((T) arg0),arg1);
+   ;;@ jsoptional/Main.java:59:15
    (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.TemplatedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.TemplatedSubtype $vtable(local.get $this))))
   )
  )
@@ -405,17 +444,22 @@
 ;;; void TemplatedSubtype.$clinit()
 (func $$clinit__void@jsoptional.Main.TemplatedSubtype
  (block $return.label
+  ;;@ jsoptional/Main.java:59:15
   (block
    ;; if (jsoptional.Main.TemplatedSubtype.$initialized) return;
+   ;;@ jsoptional/Main.java:59:15
    (if (global.get $f_$initialized__jsoptional_Main_TemplatedSubtype)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:59:15
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.TemplatedSubtype.$initialized = true);
+   ;;@ jsoptional/Main.java:59:15
    (global.set $f_$initialized__jsoptional_Main_TemplatedSubtype (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsoptional/Main.java:59:15
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -462,12 +506,16 @@
  (param $a (ref null $java.lang.Object))
  (result (ref null $jsoptional.Main.SpecializedSubtype))
  (block $return.label
+  ;;@ jsoptional/Main.java:68:11
   (block
    ;; jsoptional.Main.SpecializedSubtype.$clinit();
+   ;;@ jsoptional/Main.java:68:11
    (call $$clinit__void@jsoptional.Main.SpecializedSubtype )
    ;; (SpecializedSubtype.this.this = $outer_this);
+   ;;@ jsoptional/Main.java:68:11
    (struct.set $jsoptional.Main.SpecializedSubtype $$outer_this__jsoptional_Main_SpecializedSubtype(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ jsoptional/Main.java:68:11
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -482,6 +530,7 @@
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:71:16
   (block
   )
  )
@@ -496,8 +545,10 @@
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:66:8
   (block
    ;; SpecializedSubtype.this.m(((String) arg0),arg1);
+   ;;@ jsoptional/Main.java:66:8
    (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.SpecializedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.SpecializedSubtype $vtable(local.get $this))))
   )
  )
@@ -507,17 +558,22 @@
 ;;; void SpecializedSubtype.$clinit()
 (func $$clinit__void@jsoptional.Main.SpecializedSubtype
  (block $return.label
+  ;;@ jsoptional/Main.java:66:8
   (block
    ;; if (jsoptional.Main.SpecializedSubtype.$initialized) return;
+   ;;@ jsoptional/Main.java:66:8
    (if (global.get $f_$initialized__jsoptional_Main_SpecializedSubtype)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:66:8
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.SpecializedSubtype.$initialized = true);
+   ;;@ jsoptional/Main.java:66:8
    (global.set $f_$initialized__jsoptional_Main_SpecializedSubtype (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsoptional/Main.java:66:8
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -561,10 +617,13 @@
  (param $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (result (ref null $jsoptional.Main.NonJsTypeSubtype))
  (block $return.label
+  ;;@ jsoptional/Main.java:74:15
   (block
    ;; jsoptional.Main.NonJsTypeSubtype.$clinit();
+   ;;@ jsoptional/Main.java:74:15
    (call $$clinit__void@jsoptional.Main.NonJsTypeSubtype )
    ;; Object.this.Object.<init>();
+   ;;@ jsoptional/Main.java:74:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -579,6 +638,7 @@
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:76:16
   (block
   )
  )
@@ -593,8 +653,10 @@
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:74:15
   (block
    ;; NonJsTypeSubtype.this.m(((String) arg0),arg1);
+   ;;@ jsoptional/Main.java:74:15
    (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.NonJsTypeSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.NonJsTypeSubtype $vtable(local.get $this))))
   )
  )
@@ -604,17 +666,22 @@
 ;;; void NonJsTypeSubtype.$clinit()
 (func $$clinit__void@jsoptional.Main.NonJsTypeSubtype
  (block $return.label
+  ;;@ jsoptional/Main.java:74:15
   (block
    ;; if (jsoptional.Main.NonJsTypeSubtype.$initialized) return;
+   ;;@ jsoptional/Main.java:74:15
    (if (global.get $f_$initialized__jsoptional_Main_NonJsTypeSubtype)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:74:15
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.NonJsTypeSubtype.$initialized = true);
+   ;;@ jsoptional/Main.java:74:15
    (global.set $f_$initialized__jsoptional_Main_NonJsTypeSubtype (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsoptional/Main.java:74:15
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -657,10 +724,13 @@
  (param $this (ref null $jsoptional.Main.$LambdaImplementor$1))
  (result (ref null $jsoptional.Main.$LambdaImplementor$1))
  (block $return.label
+  ;;@ jsoptional/Main.java:36:15
   (block
    ;; jsoptional.Main.$LambdaImplementor$1.$clinit();
+   ;;@ jsoptional/Main.java:36:15
    (call $$clinit__void@jsoptional.Main.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
+   ;;@ jsoptional/Main.java:36:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -677,8 +747,10 @@
  (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt)))
  (block $return.label
+  ;;@ jsoptional/Main.java:36:15
   (block
    ;; return s;
+   ;;@ jsoptional/Main.java:36:31
    (local.set $return.value (local.get $s))
    (br $return.label)
   )
@@ -690,17 +762,22 @@
 ;;; void $LambdaImplementor$1.$clinit()
 (func $$clinit__void@jsoptional.Main.$LambdaImplementor$1
  (block $return.label
+  ;;@ jsoptional/Main.java:36:15
   (block
    ;; if (jsoptional.Main.$LambdaImplementor$1.$initialized) return;
+   ;;@ jsoptional/Main.java:36:15
    (if (global.get $f_$initialized__jsoptional_Main_$LambdaImplementor$1)
     (then
      ;; return;
+     ;;@ jsoptional/Main.java:36:15
      (br $return.label)
     )
    )
    ;; (jsoptional.Main.$LambdaImplementor$1.$initialized = true);
+   ;;@ jsoptional/Main.java:36:15
    (global.set $f_$initialized__jsoptional_Main_$LambdaImplementor$1 (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsoptional/Main.java:36:15
    (call $$clinit__void@java.lang.Object )
   )
  )

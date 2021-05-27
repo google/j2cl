@@ -722,6 +722,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       int endColumn = jdtCompilationUnit.getColumnNumber(endCharacterPosition) + 1;
       return SourcePosition.newBuilder()
           .setFilePath(getCurrentCompilationUnit().getFilePath())
+          .setPackageRelativePath(getCurrentCompilationUnit().getPackageRelativePath())
           .setName(name)
           .setStartFilePosition(
               FilePosition.newBuilder()

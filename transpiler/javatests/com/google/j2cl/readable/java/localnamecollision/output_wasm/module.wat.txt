@@ -47,10 +47,13 @@
  (param $this (ref null $localnamecollision.Asserts))
  (result (ref null $localnamecollision.Asserts))
  (block $return.label
+  ;;@ localnamecollision/Asserts.java:18:13
   (block
    ;; localnamecollision.Asserts.$clinit();
+   ;;@ localnamecollision/Asserts.java:18:13
    (call $$clinit__void@localnamecollision.Asserts )
    ;; Object.this.Object.<init>();
+   ;;@ localnamecollision/Asserts.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -65,8 +68,10 @@
  (local $this (ref null $localnamecollision.Asserts))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Asserts.rtt)))
  (block $return.label
+  ;;@ localnamecollision/Asserts.java:19:6
   (block
    ;; return 5;
+   ;;@ localnamecollision/Asserts.java:21:4
    (local.set $return.value (i32.const 5))
    (br $return.label)
   )
@@ -78,17 +83,22 @@
 ;;; void Asserts.$clinit()
 (func $$clinit__void@localnamecollision.Asserts
  (block $return.label
+  ;;@ localnamecollision/Asserts.java:18:13
   (block
    ;; if (localnamecollision.Asserts.$initialized) return;
+   ;;@ localnamecollision/Asserts.java:18:13
    (if (global.get $f_$initialized__localnamecollision_Asserts)
     (then
      ;; return;
+     ;;@ localnamecollision/Asserts.java:18:13
      (br $return.label)
     )
    )
    ;; (localnamecollision.Asserts.$initialized = true);
+   ;;@ localnamecollision/Asserts.java:18:13
    (global.set $f_$initialized__localnamecollision_Asserts (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localnamecollision/Asserts.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -131,10 +141,13 @@
  (param $this (ref null $localnamecollision.Class))
  (result (ref null $localnamecollision.Class))
  (block $return.label
+  ;;@ localnamecollision/Class.java:18:13
   (block
    ;; localnamecollision.Class.$clinit();
+   ;;@ localnamecollision/Class.java:18:13
    (call $$clinit__void@localnamecollision.Class )
    ;; Object.this.Object.<init>();
+   ;;@ localnamecollision/Class.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -148,12 +161,16 @@
  (local $this (ref null $localnamecollision.Class))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Class.rtt)))
  (block $return.label
+  ;;@ localnamecollision/Class.java:19:14
   (block
+   ;;@ localnamecollision/Class.java:20:4
    (block
     ;; Class $qualifier = new Class.<init>();
+    ;;@ localnamecollision/Class.java:20:4
     
     (local.set $$qualifier (call $m_<init>__void@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (global.get $localnamecollision.Class.vtable) (global.get $localnamecollision.Class.itable) (i32.const 0) (global.get $localnamecollision.Class.rtt))))
     ;; $qualifier.getClass();
+    ;;@ localnamecollision/Class.java:20:4
     (drop (call_ref (local.get $$qualifier)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
    )
   )
@@ -164,17 +181,22 @@
 ;;; void Class.$clinit()
 (func $$clinit__void@localnamecollision.Class
  (block $return.label
+  ;;@ localnamecollision/Class.java:18:13
   (block
    ;; if (localnamecollision.Class.$initialized) return;
+   ;;@ localnamecollision/Class.java:18:13
    (if (global.get $f_$initialized__localnamecollision_Class)
     (then
      ;; return;
+     ;;@ localnamecollision/Class.java:18:13
      (br $return.label)
     )
    )
    ;; (localnamecollision.Class.$initialized = true);
+   ;;@ localnamecollision/Class.java:18:13
    (global.set $f_$initialized__localnamecollision_Class (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localnamecollision/Class.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -228,35 +250,46 @@
  (local $this (ref null $localnamecollision.LocalNameCollision))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
  (block $return.label
+  ;;@ localnamecollision/LocalNameCollision.java:20:14
   (block
    ;; boolean LocalNameCollision = false;
+   ;;@ localnamecollision/LocalNameCollision.java:21:4
    
    (local.set $LocalNameCollision (i32.const 0))
    ;; Object RuntimeException = null;
+   ;;@ localnamecollision/LocalNameCollision.java:22:4
    
    (local.set $RuntimeException (ref.null $java.lang.Object))
    ;; int Asserts = 1;
+   ;;@ localnamecollision/LocalNameCollision.java:23:4
    
    (local.set $Asserts (i32.const 1))
    ;; int $Asserts = 1;
+   ;;@ localnamecollision/LocalNameCollision.java:24:4
    
    (local.set $$Asserts (i32.const 1))
    ;; int l_Asserts = 1;
+   ;;@ localnamecollision/LocalNameCollision.java:25:4
    
    (local.set $l_Asserts (i32.const 1))
    ;; int com_google_j2cl_readable_localnamecollision_Class = 1;
+   ;;@ localnamecollision/LocalNameCollision.java:26:4
    
    (local.set $com_google_j2cl_readable_localnamecollision_Class (i32.const 1))
    ;; int com_google_j2cl_readable_localnamecollision_package1_A = 1;
+   ;;@ localnamecollision/LocalNameCollision.java:27:4
    
    (local.set $com_google_j2cl_readable_localnamecollision_package1_A (i32.const 1))
    ;; int com_google_j2cl_readable_localnamecollision_package2_A = 1;
+   ;;@ localnamecollision/LocalNameCollision.java:28:4
    
    (local.set $com_google_j2cl_readable_localnamecollision_package2_A (i32.const 1))
    ;; int A = 1;
+   ;;@ localnamecollision/LocalNameCollision.java:29:4
    
    (local.set $A (i32.const 1))
    ;; (LocalNameCollision = ((((RuntimeException instanceof LocalNameCollision) ? (true) : (RuntimeException instanceof RuntimeException)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof Class));
+   ;;@ localnamecollision/LocalNameCollision.java:30:4
    (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (local.get $RuntimeException) (global.get $localnamecollision.LocalNameCollision.rtt)) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $java.lang.RuntimeException.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package1.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package2.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.Class.rtt)))))
   )
  )
@@ -276,8 +309,10 @@
  (local $this (ref null $localnamecollision.LocalNameCollision))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
  (block $return.label
+  ;;@ localnamecollision/LocalNameCollision.java:39:17
   (block
    ;; return (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
+   ;;@ localnamecollision/LocalNameCollision.java:41:4
    (local.set $return.value (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
    (br $return.label)
   )
@@ -297,12 +332,16 @@
  (result (ref null $localnamecollision.LocalNameCollision))
  (local $result i32)
  (block $return.label
+  ;;@ localnamecollision/LocalNameCollision.java:49:9
   (block
    ;; localnamecollision.LocalNameCollision.$clinit();
+   ;;@ localnamecollision/LocalNameCollision.java:49:9
    (call $$clinit__void@localnamecollision.LocalNameCollision )
    ;; Object.this.Object.<init>();
+   ;;@ localnamecollision/LocalNameCollision.java:49:9
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; boolean result = (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
+   ;;@ localnamecollision/LocalNameCollision.java:51:4
    
    (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
   )
@@ -313,17 +352,22 @@
 ;;; void LocalNameCollision.$clinit()
 (func $$clinit__void@localnamecollision.LocalNameCollision
  (block $return.label
+  ;;@ localnamecollision/LocalNameCollision.java:18:13
   (block
    ;; if (localnamecollision.LocalNameCollision.$initialized) return;
+   ;;@ localnamecollision/LocalNameCollision.java:18:13
    (if (global.get $f_$initialized__localnamecollision_LocalNameCollision)
     (then
      ;; return;
+     ;;@ localnamecollision/LocalNameCollision.java:18:13
      (br $return.label)
     )
    )
    ;; (localnamecollision.LocalNameCollision.$initialized = true);
+   ;;@ localnamecollision/LocalNameCollision.java:18:13
    (global.set $f_$initialized__localnamecollision_LocalNameCollision (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localnamecollision/LocalNameCollision.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -366,10 +410,13 @@
  (param $this (ref null $localnamecollision.package1.A))
  (result (ref null $localnamecollision.package1.A))
  (block $return.label
+  ;;@ localnamecollision/package1/A.java:18:13
   (block
    ;; localnamecollision.package1.A.$clinit();
+   ;;@ localnamecollision/package1/A.java:18:13
    (call $$clinit__void@localnamecollision.package1.A )
    ;; Object.this.Object.<init>();
+   ;;@ localnamecollision/package1/A.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -384,8 +431,10 @@
  (local $this (ref null $localnamecollision.package1.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package1.A.rtt)))
  (block $return.label
+  ;;@ localnamecollision/package1/A.java:19:13
   (block
    ;; return 1;
+   ;;@ localnamecollision/package1/A.java:20:4
    (local.set $return.value (i32.const 1))
    (br $return.label)
   )
@@ -397,17 +446,22 @@
 ;;; void A.$clinit()
 (func $$clinit__void@localnamecollision.package1.A
  (block $return.label
+  ;;@ localnamecollision/package1/A.java:18:13
   (block
    ;; if (localnamecollision.package1.A.$initialized) return;
+   ;;@ localnamecollision/package1/A.java:18:13
    (if (global.get $f_$initialized__localnamecollision_package1_A)
     (then
      ;; return;
+     ;;@ localnamecollision/package1/A.java:18:13
      (br $return.label)
     )
    )
    ;; (localnamecollision.package1.A.$initialized = true);
+   ;;@ localnamecollision/package1/A.java:18:13
    (global.set $f_$initialized__localnamecollision_package1_A (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localnamecollision/package1/A.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -450,10 +504,13 @@
  (param $this (ref null $localnamecollision.package2.A))
  (result (ref null $localnamecollision.package2.A))
  (block $return.label
+  ;;@ localnamecollision/package2/A.java:18:13
   (block
    ;; localnamecollision.package2.A.$clinit();
+   ;;@ localnamecollision/package2/A.java:18:13
    (call $$clinit__void@localnamecollision.package2.A )
    ;; Object.this.Object.<init>();
+   ;;@ localnamecollision/package2/A.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -468,8 +525,10 @@
  (local $this (ref null $localnamecollision.package2.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package2.A.rtt)))
  (block $return.label
+  ;;@ localnamecollision/package2/A.java:19:13
   (block
    ;; return 2;
+   ;;@ localnamecollision/package2/A.java:20:4
    (local.set $return.value (i32.const 2))
    (br $return.label)
   )
@@ -481,17 +540,22 @@
 ;;; void A.$clinit()
 (func $$clinit__void@localnamecollision.package2.A
  (block $return.label
+  ;;@ localnamecollision/package2/A.java:18:13
   (block
    ;; if (localnamecollision.package2.A.$initialized) return;
+   ;;@ localnamecollision/package2/A.java:18:13
    (if (global.get $f_$initialized__localnamecollision_package2_A)
     (then
      ;; return;
+     ;;@ localnamecollision/package2/A.java:18:13
      (br $return.label)
     )
    )
    ;; (localnamecollision.package2.A.$initialized = true);
+   ;;@ localnamecollision/package2/A.java:18:13
    (global.set $f_$initialized__localnamecollision_package2_A (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localnamecollision/package2/A.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

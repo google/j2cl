@@ -55,10 +55,13 @@
  (param $this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
   (block
    ;; simplelocalclass.SimpleLocalClass.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
    (call $$clinit__void@simplelocalclass.SimpleLocalClass )
    ;; Object.this.Object.<init>();
+   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -74,18 +77,24 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:19:14
   (block
    ;; int localVar = 1;
+   ;;@ simplelocalclass/SimpleLocalClass.java:20:4
    
    (local.set $localVar (i32.const 1))
+   ;;@ simplelocalclass/SimpleLocalClass.java:26:4
    (block
     ;; InnerClass $qualifier = new $1InnerClass.<init>(SimpleLocalClass.this,localVar,p);
+    ;;@ simplelocalclass/SimpleLocalClass.java:26:4
     
     (local.set $$qualifier (call $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.itable) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)))
     ;; $qualifier.fun();
+    ;;@ simplelocalclass/SimpleLocalClass.java:26:4
     (drop (call_ref (local.get $$qualifier)(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
    )
    ;; new $1InnerClassWithoutCaptures.<init>(SimpleLocalClass.this);
+   ;;@ simplelocalclass/SimpleLocalClass.java:30:4
    (drop (call $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))(local.get $this)))
   )
  )
@@ -99,8 +108,10 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:34:14
   (block
    ;; int localVar = 1;
+   ;;@ simplelocalclass/SimpleLocalClass.java:35:4
    
    (local.set $localVar (i32.const 1))
   )
@@ -114,6 +125,7 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:42:14
   (block
   )
  )
@@ -123,17 +135,22 @@
 ;;; void SimpleLocalClass.$clinit()
 (func $$clinit__void@simplelocalclass.SimpleLocalClass
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:18:13
   (block
    ;; if (simplelocalclass.SimpleLocalClass.$initialized) return;
+   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
    (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass)
     (then
      ;; return;
+     ;;@ simplelocalclass/SimpleLocalClass.java:18:13
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.$initialized = true);
+   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
    (global.set $f_$initialized__simplelocalclass_SimpleLocalClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -182,16 +199,22 @@
  (param $$captured_p i32)
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
   (block
    ;; simplelocalclass.SimpleLocalClass.1InnerClass.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClass )
    ;; ($1InnerClass.this.this = $outer_this);
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$outer_this))
    ;; ($1InnerClass.this.localVar = $captured_localVar);
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$captured_localVar))
    ;; ($1InnerClass.this.p = $captured_p);
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$captured_p))
    ;; Object.this.Object.<init>();
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -206,8 +229,10 @@
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt)))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:22:17
   (block
    ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);
+   ;;@ simplelocalclass/SimpleLocalClass.java:23:8
    (local.set $return.value (i32.add (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this)) (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this))))
    (br $return.label)
   )
@@ -219,17 +244,22 @@
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClass
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:21:10
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1InnerClass.$initialized) return;
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass)
     (then
      ;; return;
+     ;;@ simplelocalclass/SimpleLocalClass.java:21:10
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1InnerClass.$initialized = true);
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -273,12 +303,16 @@
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
   (block
    ;; simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
    (call $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures )
    ;; ($1InnerClassWithoutCaptures.this.this = $outer_this);
+   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -288,17 +322,22 @@
 ;;; void InnerClassWithoutCaptures.$clinit()
 (func $$clinit__void@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:29:10
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$initialized) return;
+   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
    (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures)
     (then
      ;; return;
+     ;;@ simplelocalclass/SimpleLocalClass.java:29:10
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.$initialized = true);
+   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
    (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -345,16 +384,22 @@
  (param $$captured_localVar i32)
  (result (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
   (block
    ;; simplelocalclass.SimpleLocalClass.2InnerClass.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (call $$clinit__void@simplelocalclass.SimpleLocalClass.2InnerClass )
    ;; ($2InnerClass.this.this = $outer_this);
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (local.get $$outer_this))
    ;; ($2InnerClass.this.localVar = $captured_localVar);
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (local.get $$captured_localVar))
    ;; Object.this.Object.<init>();
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; $2InnerClass.this.$init();
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (call $$init__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this))
   )
  )
@@ -365,8 +410,10 @@
 (func $$init__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
   (block
    ;; ($2InnerClass.this.field = $2InnerClass.this.localVar);
+   ;;@ simplelocalclass/SimpleLocalClass.java:37:6
    (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $f_field__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (struct.get $simplelocalclass.SimpleLocalClass.2InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this)))
   )
  )
@@ -375,17 +422,22 @@
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@simplelocalclass.SimpleLocalClass.2InnerClass
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:36:10
   (block
    ;; if (simplelocalclass.SimpleLocalClass.2InnerClass.$initialized) return;
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass)
     (then
      ;; return;
+     ;;@ simplelocalclass/SimpleLocalClass.java:36:10
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.2InnerClass.$initialized = true);
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_2InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -429,12 +481,16 @@
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
   (block
    ;; simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
    (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass )
    ;; ($1Abc$InnerClass.this.this = $outer_this);
+   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
    (struct.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -444,17 +500,22 @@
 ;;; void Abc$InnerClass.$clinit()
 (func $$clinit__void@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:43:10
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$initialized) return;
+   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
    (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass)
     (then
      ;; return;
+     ;;@ simplelocalclass/SimpleLocalClass.java:43:10
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1Abc$InnerClass.$initialized = true);
+   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
    (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -498,12 +559,16 @@
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
   (block
    ;; simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
    (call $$clinit__void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass )
    ;; ($1Klm$InnerClass.this.this = $outer_this);
+   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
    (struct.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -513,17 +578,22 @@
 ;;; void Klm$InnerClass.$clinit()
 (func $$clinit__void@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (block $return.label
+  ;;@ simplelocalclass/SimpleLocalClass.java:44:10
   (block
    ;; if (simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$initialized) return;
+   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
    (if (global.get $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass)
     (then
      ;; return;
+     ;;@ simplelocalclass/SimpleLocalClass.java:44:10
      (br $return.label)
     )
    )
    ;; (simplelocalclass.SimpleLocalClass.1Klm$InnerClass.$initialized = true);
+   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
    (global.set $f_$initialized__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
    (call $$clinit__void@java.lang.Object )
   )
  )

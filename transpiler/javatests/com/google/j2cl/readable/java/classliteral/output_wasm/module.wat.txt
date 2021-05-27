@@ -23,10 +23,13 @@
  (param $this (ref null $classliteral.ClassLiteral))
  (result (ref null $classliteral.ClassLiteral))
  (block $return.label
+  ;;@ classliteral/ClassLiteral.java:18:13
   (block
    ;; classliteral.ClassLiteral.$clinit();
+   ;;@ classliteral/ClassLiteral.java:18:13
    (call $$clinit__void@classliteral.ClassLiteral )
    ;; Object.this.Object.<init>();
+   ;;@ classliteral/ClassLiteral.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -41,11 +44,14 @@
  (local $this (ref null $classliteral.ClassLiteral))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $classliteral.ClassLiteral.rtt)))
  (block $return.label
+  ;;@ classliteral/ClassLiteral.java:20:14
   (block
    ;; Object o = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
+   ;;@ classliteral/ClassLiteral.java:21:4
    
    (local.set $o (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
    ;; (o = (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral(),$qualifier.getArrayType(2)));
+   ;;@ classliteral/ClassLiteral.java:22:4
    (local.set $o (block (result (ref null $java.lang.Class))
     
     (local.set $$qualifier (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
@@ -59,17 +65,22 @@
 ;;; void ClassLiteral.$clinit()
 (func $$clinit__void@classliteral.ClassLiteral
  (block $return.label
+  ;;@ classliteral/ClassLiteral.java:18:13
   (block
    ;; if (classliteral.ClassLiteral.$initialized) return;
+   ;;@ classliteral/ClassLiteral.java:18:13
    (if (global.get $f_$initialized__classliteral_ClassLiteral)
     (then
      ;; return;
+     ;;@ classliteral/ClassLiteral.java:18:13
      (br $return.label)
     )
    )
    ;; (classliteral.ClassLiteral.$initialized = true);
+   ;;@ classliteral/ClassLiteral.java:18:13
    (global.set $f_$initialized__classliteral_ClassLiteral (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ classliteral/ClassLiteral.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

@@ -37,10 +37,13 @@
  (param $this (ref null $supermethodcall.GrandParent))
  (result (ref null $supermethodcall.GrandParent))
  (block $return.label
+  ;;@ supermethodcall/Child.java:18:6
   (block
    ;; supermethodcall.GrandParent.$clinit();
+   ;;@ supermethodcall/Child.java:18:6
    (call $$clinit__void@supermethodcall.GrandParent )
    ;; Object.this.Object.<init>();
+   ;;@ supermethodcall/Child.java:18:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -53,6 +56,7 @@
  (local $this (ref null $supermethodcall.GrandParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:19:14
   (block
   )
  )
@@ -66,6 +70,7 @@
  (local $this (ref null $supermethodcall.GrandParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:22:14
   (block
   )
  )
@@ -80,8 +85,10 @@
  (local $this (ref null $supermethodcall.GrandParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:24:16
   (block
    ;; return null;
+   ;;@ supermethodcall/Child.java:25:4
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -93,17 +100,22 @@
 ;;; void GrandParent.$clinit()
 (func $$clinit__void@supermethodcall.GrandParent
  (block $return.label
+  ;;@ supermethodcall/Child.java:18:6
   (block
    ;; if (supermethodcall.GrandParent.$initialized) return;
+   ;;@ supermethodcall/Child.java:18:6
    (if (global.get $f_$initialized__supermethodcall_GrandParent)
     (then
      ;; return;
+     ;;@ supermethodcall/Child.java:18:6
      (br $return.label)
     )
    )
    ;; (supermethodcall.GrandParent.$initialized = true);
+   ;;@ supermethodcall/Child.java:18:6
    (global.set $f_$initialized__supermethodcall_GrandParent (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ supermethodcall/Child.java:18:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -151,10 +163,13 @@
  (param $this (ref null $supermethodcall.Parent))
  (result (ref null $supermethodcall.Parent))
  (block $return.label
+  ;;@ supermethodcall/Child.java:29:6
   (block
    ;; supermethodcall.Parent.$clinit();
+   ;;@ supermethodcall/Child.java:29:6
    (call $$clinit__void@supermethodcall.Parent )
    ;; GrandParent.this.GrandParent.<init>();
+   ;;@ supermethodcall/Child.java:29:6
    (drop (call $m_<init>__void_$pp_supermethodcall@supermethodcall.GrandParent (local.get $this)))
   )
  )
@@ -167,6 +182,7 @@
  (local $this (ref null $supermethodcall.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:30:14
   (block
   )
  )
@@ -180,6 +196,7 @@
  (local $this (ref null $supermethodcall.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:33:14
   (block
   )
  )
@@ -194,8 +211,10 @@
  (local $this (ref null $supermethodcall.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:35:16
   (block
    ;; return null;
+   ;;@ supermethodcall/Child.java:36:4
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -207,17 +226,22 @@
 ;;; void Parent.$clinit()
 (func $$clinit__void@supermethodcall.Parent
  (block $return.label
+  ;;@ supermethodcall/Child.java:29:6
   (block
    ;; if (supermethodcall.Parent.$initialized) return;
+   ;;@ supermethodcall/Child.java:29:6
    (if (global.get $f_$initialized__supermethodcall_Parent)
     (then
      ;; return;
+     ;;@ supermethodcall/Child.java:29:6
      (br $return.label)
     )
    )
    ;; (supermethodcall.Parent.$initialized = true);
+   ;;@ supermethodcall/Child.java:29:6
    (global.set $f_$initialized__supermethodcall_Parent (i32.const 1))
    ;; supermethodcall.GrandParent.$clinit();
+   ;;@ supermethodcall/Child.java:29:6
    (call $$clinit__void@supermethodcall.GrandParent )
   )
  )
@@ -267,10 +291,13 @@
  (param $this (ref null $supermethodcall.Child))
  (result (ref null $supermethodcall.Child))
  (block $return.label
+  ;;@ supermethodcall/Child.java:40:13
   (block
    ;; supermethodcall.Child.$clinit();
+   ;;@ supermethodcall/Child.java:40:13
    (call $$clinit__void@supermethodcall.Child )
    ;; Parent.this.Parent.<init>();
+   ;;@ supermethodcall/Child.java:40:13
    (drop (call $m_<init>__void_$pp_supermethodcall@supermethodcall.Parent (local.get $this)))
   )
  )
@@ -283,8 +310,10 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:42:14
   (block
    ;; super.parentSimplest();
+   ;;@ supermethodcall/Child.java:43:4
    (call $m_parentSimplest__void@supermethodcall.Parent (local.get $this))
   )
  )
@@ -298,8 +327,10 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:47:14
   (block
    ;; super.parentWithParams(foo);
+   ;;@ supermethodcall/Child.java:48:4
    (call $m_parentWithParams__int__void@supermethodcall.Parent (local.get $this)(local.get $foo))
   )
  )
@@ -314,10 +345,13 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:52:15
   (block
    ;; super.parentWithChangingReturn();
+   ;;@ supermethodcall/Child.java:53:4
    (drop (call $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent (local.get $this)))
    ;; return Child.this;
+   ;;@ supermethodcall/Child.java:54:4
    (local.set $return.value (local.get $this))
    (br $return.label)
   )
@@ -332,8 +366,10 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:58:14
   (block
    ;; super.grandParentSimplest();
+   ;;@ supermethodcall/Child.java:59:4
    (call $m_grandParentSimplest__void@supermethodcall.GrandParent (local.get $this))
   )
  )
@@ -347,8 +383,10 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:63:14
   (block
    ;; super.grandParentWithParams(foo);
+   ;;@ supermethodcall/Child.java:64:4
    (call $m_grandParentWithParams__int__void@supermethodcall.GrandParent (local.get $this)(local.get $foo))
   )
  )
@@ -363,10 +401,13 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:68:15
   (block
    ;; super.grandParentWithChangingReturn();
+   ;;@ supermethodcall/Child.java:69:4
    (drop (call $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent (local.get $this)))
    ;; return Child.this;
+   ;;@ supermethodcall/Child.java:70:4
    (local.set $return.value (local.get $this))
    (br $return.label)
   )
@@ -383,8 +424,10 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:40:13
   (block
    ;; return Child.this.grandParentWithChangingReturn();
+   ;;@ supermethodcall/Child.java:40:13
    (local.set $return.value (call_ref (local.get $this)(struct.get $supermethodcall.Child.vtable $m_grandParentWithChangingReturn__supermethodcall_Child (struct.get $supermethodcall.Child $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -401,8 +444,10 @@
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
  (block $return.label
+  ;;@ supermethodcall/Child.java:40:13
   (block
    ;; return Child.this.parentWithChangingReturn();
+   ;;@ supermethodcall/Child.java:40:13
    (local.set $return.value (call_ref (local.get $this)(struct.get $supermethodcall.Child.vtable $m_parentWithChangingReturn__supermethodcall_Child (struct.get $supermethodcall.Child $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -414,17 +459,22 @@
 ;;; void Child.$clinit()
 (func $$clinit__void@supermethodcall.Child
  (block $return.label
+  ;;@ supermethodcall/Child.java:40:13
   (block
    ;; if (supermethodcall.Child.$initialized) return;
+   ;;@ supermethodcall/Child.java:40:13
    (if (global.get $f_$initialized__supermethodcall_Child)
     (then
      ;; return;
+     ;;@ supermethodcall/Child.java:40:13
      (br $return.label)
     )
    )
    ;; (supermethodcall.Child.$initialized = true);
+   ;;@ supermethodcall/Child.java:40:13
    (global.set $f_$initialized__supermethodcall_Child (i32.const 1))
    ;; supermethodcall.Parent.$clinit();
+   ;;@ supermethodcall/Child.java:40:13
    (call $$clinit__void@supermethodcall.Parent )
   )
  )

@@ -23,10 +23,13 @@
  (param $this (ref null $initmethoddispatch.InitMethodDispatch))
  (result (ref null $initmethoddispatch.InitMethodDispatch))
  (block $return.label
+  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
   (block
    ;; initmethoddispatch.InitMethodDispatch.$clinit();
+   ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
    (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
    ;; InitMethodDispatch.this.InitMethodDispatch.<init>(1);
+   ;;@ initmethoddispatch/InitMethodDispatch.java:22:4
    (drop (call $m_<init>__int__void_$pp_initmethoddispatch@initmethoddispatch.InitMethodDispatch (local.get $this)(i32.const 1)))
   )
  )
@@ -39,12 +42,16 @@
  (param $i i32)
  (result (ref null $initmethoddispatch.InitMethodDispatch))
  (block $return.label
+  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
   (block
    ;; initmethoddispatch.InitMethodDispatch.$clinit();
+   ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
    (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
    ;; Object.this.Object.<init>();
+   ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (InitMethodDispatch.this.value = i);
+   ;;@ initmethoddispatch/InitMethodDispatch.java:28:4
    (struct.set $initmethoddispatch.InitMethodDispatch $f_value__initmethoddispatch_InitMethodDispatch(local.get $this) (local.get $i))
   )
  )
@@ -54,17 +61,22 @@
 ;;; void InitMethodDispatch.$clinit()
 (func $$clinit__void@initmethoddispatch.InitMethodDispatch
  (block $return.label
+  ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
   (block
    ;; if (initmethoddispatch.InitMethodDispatch.$initialized) return;
+   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
    (if (global.get $f_$initialized__initmethoddispatch_InitMethodDispatch)
     (then
      ;; return;
+     ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
      (br $return.label)
     )
    )
    ;; (initmethoddispatch.InitMethodDispatch.$initialized = true);
+   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
    (global.set $f_$initialized__initmethoddispatch_InitMethodDispatch (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ initmethoddispatch/InitMethodDispatch.java:18:6
    (call $$clinit__void@java.lang.Object )
   )
  )

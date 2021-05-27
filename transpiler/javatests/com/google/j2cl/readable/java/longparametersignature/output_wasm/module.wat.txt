@@ -23,10 +23,13 @@
  (param $this (ref null $longparametersignature.LongParameterSignature))
  (result (ref null $longparametersignature.LongParameterSignature))
  (block $return.label
+  ;;@ longparametersignature/LongParameterSignature.java:18:13
   (block
    ;; longparametersignature.LongParameterSignature.$clinit();
+   ;;@ longparametersignature/LongParameterSignature.java:18:13
    (call $$clinit__void@longparametersignature.LongParameterSignature )
    ;; Object.this.Object.<init>();
+   ;;@ longparametersignature/LongParameterSignature.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -40,6 +43,7 @@
  (local $this (ref null $longparametersignature.LongParameterSignature))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $longparametersignature.LongParameterSignature.rtt)))
  (block $return.label
+  ;;@ longparametersignature/LongParameterSignature.java:19:14
   (block
   )
  )
@@ -49,17 +53,22 @@
 ;;; void LongParameterSignature.$clinit()
 (func $$clinit__void@longparametersignature.LongParameterSignature
  (block $return.label
+  ;;@ longparametersignature/LongParameterSignature.java:18:13
   (block
    ;; if (longparametersignature.LongParameterSignature.$initialized) return;
+   ;;@ longparametersignature/LongParameterSignature.java:18:13
    (if (global.get $f_$initialized__longparametersignature_LongParameterSignature)
     (then
      ;; return;
+     ;;@ longparametersignature/LongParameterSignature.java:18:13
      (br $return.label)
     )
    )
    ;; (longparametersignature.LongParameterSignature.$initialized = true);
+   ;;@ longparametersignature/LongParameterSignature.java:18:13
    (global.set $f_$initialized__longparametersignature_LongParameterSignature (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ longparametersignature/LongParameterSignature.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

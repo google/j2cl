@@ -35,10 +35,13 @@
  (param $this (ref null $qualifiedsupercall.Parent))
  (result (ref null $qualifiedsupercall.Parent))
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (block
    ;; qualifiedsupercall.Parent.$clinit();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
    (call $$clinit__void@qualifiedsupercall.Parent )
    ;; Object.this.Object.<init>();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -51,6 +54,7 @@
  (local $this (ref null $qualifiedsupercall.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $qualifiedsupercall.Parent.rtt)))
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:19:14
   (block
   )
  )
@@ -60,17 +64,22 @@
 ;;; void Parent.$clinit()
 (func $$clinit__void@qualifiedsupercall.Parent
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (block
    ;; if (qualifiedsupercall.Parent.$initialized) return;
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
    (if (global.get $f_$initialized__qualifiedsupercall_Parent)
     (then
      ;; return;
+     ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
      (br $return.label)
     )
    )
    ;; (qualifiedsupercall.Parent.$initialized = true);
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
    (global.set $f_$initialized__qualifiedsupercall_Parent (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -113,10 +122,13 @@
  (param $this (ref null $qualifiedsupercall.QualifiedSuperCall))
  (result (ref null $qualifiedsupercall.QualifiedSuperCall))
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (block
    ;; qualifiedsupercall.QualifiedSuperCall.$clinit();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
    (call $$clinit__void@qualifiedsupercall.QualifiedSuperCall )
    ;; Parent.this.Parent.<init>();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
    (drop (call $m_<init>__void_$pp_qualifiedsupercall@qualifiedsupercall.Parent (local.get $this)))
   )
  )
@@ -126,17 +138,22 @@
 ;;; void QualifiedSuperCall.$clinit()
 (func $$clinit__void@qualifiedsupercall.QualifiedSuperCall
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (block
    ;; if (qualifiedsupercall.QualifiedSuperCall.$initialized) return;
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
    (if (global.get $f_$initialized__qualifiedsupercall_QualifiedSuperCall)
     (then
      ;; return;
+     ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
      (br $return.label)
     )
    )
    ;; (qualifiedsupercall.QualifiedSuperCall.$initialized = true);
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
    (global.set $f_$initialized__qualifiedsupercall_QualifiedSuperCall (i32.const 1))
    ;; qualifiedsupercall.Parent.$clinit();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
    (call $$clinit__void@qualifiedsupercall.Parent )
   )
  )
@@ -181,12 +198,16 @@
  (param $$outer_this (ref null $qualifiedsupercall.QualifiedSuperCall))
  (result (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (block
    ;; qualifiedsupercall.QualifiedSuperCall.InnerClass.$clinit();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
    (call $$clinit__void@qualifiedsupercall.QualifiedSuperCall.InnerClass )
    ;; (InnerClass.this.this = $outer_this);
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
    (struct.set $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -199,8 +220,10 @@
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.rtt)))
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:24:16
   (block
    ;; InnerClass.this.this.fun();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:25:6
    (call $m_fun__void@qualifiedsupercall.Parent (struct.get $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass(local.get $this)))
   )
  )
@@ -210,17 +233,22 @@
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@qualifiedsupercall.QualifiedSuperCall.InnerClass
  (block $return.label
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (block
    ;; if (qualifiedsupercall.QualifiedSuperCall.InnerClass.$initialized) return;
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
    (if (global.get $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass)
     (then
      ;; return;
+     ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
      (br $return.label)
     )
    )
    ;; (qualifiedsupercall.QualifiedSuperCall.InnerClass.$initialized = true);
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
    (global.set $f_$initialized__qualifiedsupercall_QualifiedSuperCall_InnerClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
    (call $$clinit__void@java.lang.Object )
   )
  )

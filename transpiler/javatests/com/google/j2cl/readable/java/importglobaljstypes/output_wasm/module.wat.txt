@@ -41,10 +41,13 @@
  (param $this (ref null $importglobaljstypes.Date))
  (result (ref null $importglobaljstypes.Date))
  (block $return.label
+  ;;@ importglobaljstypes/Date.java:27:13
   (block
    ;; importglobaljstypes.Date.$clinit();
+   ;;@ importglobaljstypes/Date.java:27:13
    (call $$clinit__void@importglobaljstypes.Date )
    ;; Object.this.Object.<init>();
+   ;;@ importglobaljstypes/Date.java:27:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -57,10 +60,13 @@
  (result f64)
  (local $return.value f64)
  (block $return.label
+  ;;@ importglobaljstypes/Date.java:28:23
   (block
    ;; importglobaljstypes.Date.$clinit();
+   ;;@ importglobaljstypes/Date.java:28:23
    (call $$clinit__void@importglobaljstypes.Date )
    ;; return importglobaljstypes.Date.NativeDate.now();
+   ;;@ importglobaljstypes/Date.java:29:4
    (local.set $return.value (call $m_now__double@importglobaljstypes.Date.NativeDate ))
    (br $return.label)
   )
@@ -77,8 +83,10 @@
  (local $this (ref null $importglobaljstypes.Date))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Date.rtt)))
  (block $return.label
+  ;;@ importglobaljstypes/Date.java:33:20
   (block
    ;; return d;
+   ;;@ importglobaljstypes/Date.java:34:4
    (local.set $return.value (local.get $d))
    (br $return.label)
   )
@@ -90,17 +98,22 @@
 ;;; void Date.$clinit()
 (func $$clinit__void@importglobaljstypes.Date
  (block $return.label
+  ;;@ importglobaljstypes/Date.java:27:13
   (block
    ;; if (importglobaljstypes.Date.$initialized) return;
+   ;;@ importglobaljstypes/Date.java:27:13
    (if (global.get $f_$initialized__importglobaljstypes_Date)
     (then
      ;; return;
+     ;;@ importglobaljstypes/Date.java:27:13
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Date.$initialized = true);
+   ;;@ importglobaljstypes/Date.java:27:13
    (global.set $f_$initialized__importglobaljstypes_Date (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ importglobaljstypes/Date.java:27:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -142,10 +155,13 @@
  (param $this (ref null $importglobaljstypes.Date.NativeDate))
  (result (ref null $importglobaljstypes.Date.NativeDate))
  (block $return.label
+  ;;@ importglobaljstypes/Date.java:38:22
   (block
    ;; importglobaljstypes.Date.NativeDate.$clinit();
+   ;;@ importglobaljstypes/Date.java:38:22
    (call $$clinit__void@importglobaljstypes.Date.NativeDate )
    ;; Object.this.Object.<init>();
+   ;;@ importglobaljstypes/Date.java:38:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -160,17 +176,22 @@
 ;;; void NativeDate.$clinit()
 (func $$clinit__void@importglobaljstypes.Date.NativeDate
  (block $return.label
+  ;;@ importglobaljstypes/Date.java:38:22
   (block
    ;; if (importglobaljstypes.Date.NativeDate.$initialized) return;
+   ;;@ importglobaljstypes/Date.java:38:22
    (if (global.get $f_$initialized__importglobaljstypes_Date_NativeDate)
     (then
      ;; return;
+     ;;@ importglobaljstypes/Date.java:38:22
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Date.NativeDate.$initialized = true);
+   ;;@ importglobaljstypes/Date.java:38:22
    (global.set $f_$initialized__importglobaljstypes_Date_NativeDate (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ importglobaljstypes/Date.java:38:22
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -213,10 +234,13 @@
  (param $this (ref null $importglobaljstypes.Number))
  (result (ref null $importglobaljstypes.Number))
  (block $return.label
+  ;;@ importglobaljstypes/Number.java:27:13
   (block
    ;; importglobaljstypes.Number.$clinit();
+   ;;@ importglobaljstypes/Number.java:27:13
    (call $$clinit__void@importglobaljstypes.Number )
    ;; Object.this.Object.<init>();
+   ;;@ importglobaljstypes/Number.java:27:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -235,10 +259,13 @@
  (result i32)
  (local $return.value i32)
  (block $return.label
+  ;;@ importglobaljstypes/Number.java:32:24
   (block
    ;; importglobaljstypes.Number.$clinit();
+   ;;@ importglobaljstypes/Number.java:32:24
    (call $$clinit__void@importglobaljstypes.Number )
    ;; return importglobaljstypes.Number.fun(x);
+   ;;@ importglobaljstypes/Number.java:33:4
    (local.set $return.value (call $m_fun__double__boolean@importglobaljstypes.Number (local.get $x)))
    (br $return.label)
   )
@@ -258,10 +285,13 @@
  (local $return.value (ref null $java.lang.String))
  (local $$qualifier (ref null $java.lang.Object))
  (block $return.label
+  ;;@ importglobaljstypes/Number.java:47:23
   (block
    ;; importglobaljstypes.Number.$clinit();
+   ;;@ importglobaljstypes/Number.java:47:23
    (call $$clinit__void@importglobaljstypes.Number )
    ;; return ((String) (NativeFunction<String> $qualifier = importglobaljstypes.Number.getFromCharCodeFunction(),$qualifier.apply(null,array)));
+   ;;@ importglobaljstypes/Number.java:48:4
    (local.set $return.value (ref.cast (block (result (ref null $java.lang.Object))
     
     (local.set $$qualifier (call $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number ))
@@ -282,8 +312,10 @@
  (local $this (ref null $importglobaljstypes.Number))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Number.rtt)))
  (block $return.label
+  ;;@ importglobaljstypes/Number.java:54:23
   (block
    ;; return a;
+   ;;@ importglobaljstypes/Number.java:55:4
    (local.set $return.value (local.get $a))
    (br $return.label)
   )
@@ -295,17 +327,22 @@
 ;;; void Number.$clinit()
 (func $$clinit__void@importglobaljstypes.Number
  (block $return.label
+  ;;@ importglobaljstypes/Number.java:27:13
   (block
    ;; if (importglobaljstypes.Number.$initialized) return;
+   ;;@ importglobaljstypes/Number.java:27:13
    (if (global.get $f_$initialized__importglobaljstypes_Number)
     (then
      ;; return;
+     ;;@ importglobaljstypes/Number.java:27:13
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Number.$initialized = true);
+   ;;@ importglobaljstypes/Number.java:27:13
    (global.set $f_$initialized__importglobaljstypes_Number (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ importglobaljstypes/Number.java:27:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -337,15 +374,19 @@
 ;;; void NativeFunction.$clinit()
 (func $$clinit__void@importglobaljstypes.Number.NativeFunction
  (block $return.label
+  ;;@ importglobaljstypes/Number.java:40:20
   (block
    ;; if (importglobaljstypes.Number.NativeFunction.$initialized) return;
+   ;;@ importglobaljstypes/Number.java:40:20
    (if (global.get $f_$initialized__importglobaljstypes_Number_NativeFunction)
     (then
      ;; return;
+     ;;@ importglobaljstypes/Number.java:40:20
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Number.NativeFunction.$initialized = true);
+   ;;@ importglobaljstypes/Number.java:40:20
    (global.set $f_$initialized__importglobaljstypes_Number_NativeFunction (i32.const 1))
   )
  )
@@ -374,15 +415,19 @@
 ;;; void MyLiteralType.$clinit()
 (func $$clinit__void@importglobaljstypes.Number.MyLiteralType
  (block $return.label
+  ;;@ importglobaljstypes/Number.java:52:26
   (block
    ;; if (importglobaljstypes.Number.MyLiteralType.$initialized) return;
+   ;;@ importglobaljstypes/Number.java:52:26
    (if (global.get $f_$initialized__importglobaljstypes_Number_MyLiteralType)
     (then
      ;; return;
+     ;;@ importglobaljstypes/Number.java:52:26
      (br $return.label)
     )
    )
    ;; (importglobaljstypes.Number.MyLiteralType.$initialized = true);
+   ;;@ importglobaljstypes/Number.java:52:26
    (global.set $f_$initialized__importglobaljstypes_Number_MyLiteralType (i32.const 1))
   )
  )

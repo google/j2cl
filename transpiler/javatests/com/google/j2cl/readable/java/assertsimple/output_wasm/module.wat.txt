@@ -22,10 +22,13 @@
  (param $this (ref null $assertsimple.AssertSimple))
  (result (ref null $assertsimple.AssertSimple))
  (block $return.label
+  ;;@ assertsimple/AssertSimple.java:18:13
   (block
    ;; assertsimple.AssertSimple.$clinit();
+   ;;@ assertsimple/AssertSimple.java:18:13
    (call $$clinit__void@assertsimple.AssertSimple )
    ;; Object.this.Object.<init>();
+   ;;@ assertsimple/AssertSimple.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -36,8 +39,10 @@
 (func $m_main__arrayOf_java_lang_String__void@assertsimple.AssertSimple
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
+  ;;@ assertsimple/AssertSimple.java:19:21
   (block
    ;; assertsimple.AssertSimple.$clinit();
+   ;;@ assertsimple/AssertSimple.java:19:21
    (call $$clinit__void@assertsimple.AssertSimple )
   )
  )
@@ -46,17 +51,22 @@
 ;;; void AssertSimple.$clinit()
 (func $$clinit__void@assertsimple.AssertSimple
  (block $return.label
+  ;;@ assertsimple/AssertSimple.java:18:13
   (block
    ;; if (assertsimple.AssertSimple.$initialized) return;
+   ;;@ assertsimple/AssertSimple.java:18:13
    (if (global.get $f_$initialized__assertsimple_AssertSimple)
     (then
      ;; return;
+     ;;@ assertsimple/AssertSimple.java:18:13
      (br $return.label)
     )
    )
    ;; (assertsimple.AssertSimple.$initialized = true);
+   ;;@ assertsimple/AssertSimple.java:18:13
    (global.set $f_$initialized__assertsimple_AssertSimple (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ assertsimple/AssertSimple.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

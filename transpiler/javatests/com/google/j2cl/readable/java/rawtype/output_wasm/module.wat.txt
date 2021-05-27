@@ -32,10 +32,13 @@
  (param $this (ref null $rawtype.RawType))
  (result (ref null $rawtype.RawType))
  (block $return.label
+  ;;@ rawtype/RawType.java:19:6
   (block
    ;; rawtype.RawType.$clinit();
+   ;;@ rawtype/RawType.java:19:6
    (call $$clinit__void@rawtype.RawType )
    ;; Object.this.Object.<init>();
+   ;;@ rawtype/RawType.java:19:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -45,17 +48,22 @@
 ;;; void RawType.$clinit()
 (func $$clinit__void@rawtype.RawType
  (block $return.label
+  ;;@ rawtype/RawType.java:19:6
   (block
    ;; if (rawtype.RawType.$initialized) return;
+   ;;@ rawtype/RawType.java:19:6
    (if (global.get $f_$initialized__rawtype_RawType)
     (then
      ;; return;
+     ;;@ rawtype/RawType.java:19:6
      (br $return.label)
     )
    )
    ;; (rawtype.RawType.$initialized = true);
+   ;;@ rawtype/RawType.java:19:6
    (global.set $f_$initialized__rawtype_RawType (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ rawtype/RawType.java:19:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -89,6 +97,7 @@
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
  (block $return.label
+  ;;@ rawtype/RawType.java:23:17
   (block
   )
  )
@@ -98,15 +107,19 @@
 ;;; void I.$clinit()
 (func $$clinit__void@rawtype.RawType.I
  (block $return.label
+  ;;@ rawtype/RawType.java:22:12
   (block
    ;; if (rawtype.RawType.I.$initialized) return;
+   ;;@ rawtype/RawType.java:22:12
    (if (global.get $f_$initialized__rawtype_RawType_I)
     (then
      ;; return;
+     ;;@ rawtype/RawType.java:22:12
      (br $return.label)
     )
    )
    ;; (rawtype.RawType.I.$initialized = true);
+   ;;@ rawtype/RawType.java:22:12
    (global.set $f_$initialized__rawtype_RawType_I (i32.const 1))
   )
  )
@@ -147,10 +160,13 @@
  (param $this (ref null $rawtype.RawType.RawSubclass))
  (result (ref null $rawtype.RawType.RawSubclass))
  (block $return.label
+  ;;@ rawtype/RawType.java:26:15
   (block
    ;; rawtype.RawType.RawSubclass.$clinit();
+   ;;@ rawtype/RawType.java:26:15
    (call $$clinit__void@rawtype.RawType.RawSubclass )
    ;; Object.this.Object.<init>();
+   ;;@ rawtype/RawType.java:26:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -164,6 +180,7 @@
  (local $this (ref null $rawtype.RawType.RawSubclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.RawSubclass.rtt)))
  (block $return.label
+  ;;@ rawtype/RawType.java:28:16
   (block
   )
  )
@@ -173,19 +190,25 @@
 ;;; void RawSubclass.$clinit()
 (func $$clinit__void@rawtype.RawType.RawSubclass
  (block $return.label
+  ;;@ rawtype/RawType.java:26:15
   (block
    ;; if (rawtype.RawType.RawSubclass.$initialized) return;
+   ;;@ rawtype/RawType.java:26:15
    (if (global.get $f_$initialized__rawtype_RawType_RawSubclass)
     (then
      ;; return;
+     ;;@ rawtype/RawType.java:26:15
      (br $return.label)
     )
    )
    ;; (rawtype.RawType.RawSubclass.$initialized = true);
+   ;;@ rawtype/RawType.java:26:15
    (global.set $f_$initialized__rawtype_RawType_RawSubclass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ rawtype/RawType.java:26:15
    (call $$clinit__void@java.lang.Object )
    ;; rawtype.RawType.I.$clinit();
+   ;;@ rawtype/RawType.java:26:15
    (call $$clinit__void@rawtype.RawType.I )
   )
  )

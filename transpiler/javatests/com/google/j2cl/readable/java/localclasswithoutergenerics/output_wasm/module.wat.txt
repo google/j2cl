@@ -34,10 +34,13 @@
  (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
   (block
    ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.$clinit();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics )
    ;; Object.this.Object.<init>();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -49,13 +52,17 @@
  (local $bar (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (local $baz (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:20:25
   (block
    ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.$clinit();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:20:25
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics )
    ;; Bar<T> bar = new $1Bar.<init>();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:24:4
    
    (local.set $bar (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
    ;; Baz<Object, T> baz = new $1Baz.<init>();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:29:4
    
    (local.set $baz (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
   )
@@ -65,17 +72,22 @@
 ;;; void LocalClassWithOuterGenerics.$clinit()
 (func $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
   (block
    ;; if (localclasswithoutergenerics.LocalClassWithOuterGenerics.$initialized) return;
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
    (if (global.get $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics)
     (then
      ;; return;
+     ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
      (br $return.label)
     )
    )
    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.$initialized = true);
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
    (global.set $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -118,10 +130,13 @@
  (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
   (block
    ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$clinit();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar )
    ;; Object.this.Object.<init>();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -135,6 +150,7 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt)))
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:22:11
   (block
   )
  )
@@ -144,17 +160,22 @@
 ;;; void Bar.$clinit()
 (func $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
   (block
    ;; if (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$initialized) return;
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
    (if (global.get $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar)
     (then
      ;; return;
+     ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
      (br $return.label)
     )
    )
    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$initialized = true);
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
    (global.set $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -197,10 +218,13 @@
  (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
   (block
    ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$clinit();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz )
    ;; Object.this.Object.<init>();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -216,6 +240,7 @@
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt)))
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:27:11
   (block
   )
  )
@@ -225,17 +250,22 @@
 ;;; void Baz.$clinit()
 (func $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
  (block $return.label
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
   (block
    ;; if (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$initialized) return;
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
    (if (global.get $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz)
     (then
      ;; return;
+     ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
      (br $return.label)
     )
    )
    ;; (localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$initialized = true);
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
    (global.set $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
    (call $$clinit__void@java.lang.Object )
   )
  )

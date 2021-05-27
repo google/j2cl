@@ -28,10 +28,13 @@
  (param $this (ref null $multipletopclasses.AnotherClass))
  (result (ref null $multipletopclasses.AnotherClass))
  (block $return.label
+  ;;@ multipletopclasses/MultipleTopClasses.java:18:6
   (block
    ;; multipletopclasses.AnotherClass.$clinit();
+   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
    (call $$clinit__void@multipletopclasses.AnotherClass )
    ;; Object.this.Object.<init>();
+   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -41,17 +44,22 @@
 ;;; void AnotherClass.$clinit()
 (func $$clinit__void@multipletopclasses.AnotherClass
  (block $return.label
+  ;;@ multipletopclasses/MultipleTopClasses.java:18:6
   (block
    ;; if (multipletopclasses.AnotherClass.$initialized) return;
+   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
    (if (global.get $f_$initialized__multipletopclasses_AnotherClass)
     (then
      ;; return;
+     ;;@ multipletopclasses/MultipleTopClasses.java:18:6
      (br $return.label)
     )
    )
    ;; (multipletopclasses.AnotherClass.$initialized = true);
+   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
    (global.set $f_$initialized__multipletopclasses_AnotherClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -93,10 +101,13 @@
  (param $this (ref null $multipletopclasses.MultipleTopClasses))
  (result (ref null $multipletopclasses.MultipleTopClasses))
  (block $return.label
+  ;;@ multipletopclasses/MultipleTopClasses.java:20:13
   (block
    ;; multipletopclasses.MultipleTopClasses.$clinit();
+   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
    (call $$clinit__void@multipletopclasses.MultipleTopClasses )
    ;; AnotherClass.this.AnotherClass.<init>();
+   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
    (drop (call $m_<init>__void_$pp_multipletopclasses@multipletopclasses.AnotherClass (local.get $this)))
   )
  )
@@ -106,17 +117,22 @@
 ;;; void MultipleTopClasses.$clinit()
 (func $$clinit__void@multipletopclasses.MultipleTopClasses
  (block $return.label
+  ;;@ multipletopclasses/MultipleTopClasses.java:20:13
   (block
    ;; if (multipletopclasses.MultipleTopClasses.$initialized) return;
+   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
    (if (global.get $f_$initialized__multipletopclasses_MultipleTopClasses)
     (then
      ;; return;
+     ;;@ multipletopclasses/MultipleTopClasses.java:20:13
      (br $return.label)
     )
    )
    ;; (multipletopclasses.MultipleTopClasses.$initialized = true);
+   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
    (global.set $f_$initialized__multipletopclasses_MultipleTopClasses (i32.const 1))
    ;; multipletopclasses.AnotherClass.$clinit();
+   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
    (call $$clinit__void@multipletopclasses.AnotherClass )
   )
  )

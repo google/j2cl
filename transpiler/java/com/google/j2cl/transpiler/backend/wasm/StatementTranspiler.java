@@ -404,7 +404,24 @@ class StatementTranspiler {
     }
 
     renderFirstLineAsComment(statement, builder);
+    renderSourceMappingComment(statement, builder);
     statement.accept(new SourceTransformer());
+  }
+
+  private static void renderSourceMappingComment(Statement statement, SourceBuilder builder) {
+    SourcePosition sourcePosition = statement.getSourcePosition();
+    if (sourcePosition != SourcePosition.NONE) {
+      String filePath = sourcePosition.getPackageRelativePath();
+      builder.append(
+          String.format(
+              ";;@ %s:%d:%d",
+              filePath,
+              // Lines and column are zero based, but DevTools expects lines to be 1-based and
+              // columns to be zeor based.
+              sourcePosition.getStartFilePosition().getLine() + 1,
+              sourcePosition.getStartFilePosition().getColumn()));
+      builder.newLine();
+    }
   }
 
   /** Render first line of the source code for {@code statement} as a WASM comment. * */

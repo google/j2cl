@@ -22,10 +22,13 @@
  (param $this (ref null $emptymethod.EmptyMethod))
  (result (ref null $emptymethod.EmptyMethod))
  (block $return.label
+  ;;@ emptymethod/EmptyMethod.java:18:13
   (block
    ;; emptymethod.EmptyMethod.$clinit();
+   ;;@ emptymethod/EmptyMethod.java:18:13
    (call $$clinit__void@emptymethod.EmptyMethod )
    ;; Object.this.Object.<init>();
+   ;;@ emptymethod/EmptyMethod.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -36,8 +39,10 @@
 (func $m_main__arrayOf_java_lang_String__void@emptymethod.EmptyMethod (export "main")
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
+  ;;@ emptymethod/EmptyMethod.java:19:21
   (block
    ;; emptymethod.EmptyMethod.$clinit();
+   ;;@ emptymethod/EmptyMethod.java:19:21
    (call $$clinit__void@emptymethod.EmptyMethod )
   )
  )
@@ -46,17 +51,22 @@
 ;;; void EmptyMethod.$clinit()
 (func $$clinit__void@emptymethod.EmptyMethod
  (block $return.label
+  ;;@ emptymethod/EmptyMethod.java:18:13
   (block
    ;; if (emptymethod.EmptyMethod.$initialized) return;
+   ;;@ emptymethod/EmptyMethod.java:18:13
    (if (global.get $f_$initialized__emptymethod_EmptyMethod)
     (then
      ;; return;
+     ;;@ emptymethod/EmptyMethod.java:18:13
      (br $return.label)
     )
    )
    ;; (emptymethod.EmptyMethod.$initialized = true);
+   ;;@ emptymethod/EmptyMethod.java:18:13
    (global.set $f_$initialized__emptymethod_EmptyMethod (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ emptymethod/EmptyMethod.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

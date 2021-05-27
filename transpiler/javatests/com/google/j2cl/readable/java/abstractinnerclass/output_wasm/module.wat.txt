@@ -37,10 +37,13 @@
  (param $this (ref null $abstractinnerclass.InnerClasses))
  (result (ref null $abstractinnerclass.InnerClasses))
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:18:13
   (block
    ;; abstractinnerclass.InnerClasses.$clinit();
+   ;;@ abstractinnerclass/InnerClasses.java:18:13
    (call $$clinit__void@abstractinnerclass.InnerClasses )
    ;; Object.this.Object.<init>();
+   ;;@ abstractinnerclass/InnerClasses.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -50,17 +53,22 @@
 ;;; void InnerClasses.$clinit()
 (func $$clinit__void@abstractinnerclass.InnerClasses
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:18:13
   (block
    ;; if (abstractinnerclass.InnerClasses.$initialized) return;
+   ;;@ abstractinnerclass/InnerClasses.java:18:13
    (if (global.get $f_$initialized__abstractinnerclass_InnerClasses)
     (then
      ;; return;
+     ;;@ abstractinnerclass/InnerClasses.java:18:13
      (br $return.label)
     )
    )
    ;; (abstractinnerclass.InnerClasses.$initialized = true);
+   ;;@ abstractinnerclass/InnerClasses.java:18:13
    (global.set $f_$initialized__abstractinnerclass_InnerClasses (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ abstractinnerclass/InnerClasses.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -92,15 +100,19 @@
 ;;; void A.$clinit()
 (func $$clinit__void@abstractinnerclass.InnerClasses.A
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:19:12
   (block
    ;; if (abstractinnerclass.InnerClasses.A.$initialized) return;
+   ;;@ abstractinnerclass/InnerClasses.java:19:12
    (if (global.get $f_$initialized__abstractinnerclass_InnerClasses_A)
     (then
      ;; return;
+     ;;@ abstractinnerclass/InnerClasses.java:19:12
      (br $return.label)
     )
    )
    ;; (abstractinnerclass.InnerClasses.A.$initialized = true);
+   ;;@ abstractinnerclass/InnerClasses.java:19:12
    (global.set $f_$initialized__abstractinnerclass_InnerClasses_A (i32.const 1))
   )
  )
@@ -141,10 +153,13 @@
  (param $this (ref null $abstractinnerclass.InnerClasses.B))
  (result (ref null $abstractinnerclass.InnerClasses.B))
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:23:24
   (block
    ;; abstractinnerclass.InnerClasses.B.$clinit();
+   ;;@ abstractinnerclass/InnerClasses.java:23:24
    (call $$clinit__void@abstractinnerclass.InnerClasses.B )
    ;; Object.this.Object.<init>();
+   ;;@ abstractinnerclass/InnerClasses.java:23:24
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -157,8 +172,10 @@
  (local $this (ref null $abstractinnerclass.InnerClasses.B))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.B.rtt)))
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:24:9
   (block
    ;; B.this.foo();
+   ;;@ abstractinnerclass/InnerClasses.java:25:6
    (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1)) (rtt.canon $abstractinnerclass.InnerClasses.A.vtable)) ))
   )
  )
@@ -168,17 +185,22 @@
 ;;; void B.$clinit()
 (func $$clinit__void@abstractinnerclass.InnerClasses.B
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:23:24
   (block
    ;; if (abstractinnerclass.InnerClasses.B.$initialized) return;
+   ;;@ abstractinnerclass/InnerClasses.java:23:24
    (if (global.get $f_$initialized__abstractinnerclass_InnerClasses_B)
     (then
      ;; return;
+     ;;@ abstractinnerclass/InnerClasses.java:23:24
      (br $return.label)
     )
    )
    ;; (abstractinnerclass.InnerClasses.B.$initialized = true);
+   ;;@ abstractinnerclass/InnerClasses.java:23:24
    (global.set $f_$initialized__abstractinnerclass_InnerClasses_B (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ abstractinnerclass/InnerClasses.java:23:24
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -205,12 +227,16 @@
  (param $$outer_this (ref null $abstractinnerclass.InnerClasses))
  (result (ref null $abstractinnerclass.InnerClasses.C))
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:29:17
   (block
    ;; abstractinnerclass.InnerClasses.C.$clinit();
+   ;;@ abstractinnerclass/InnerClasses.java:29:17
    (call $$clinit__void@abstractinnerclass.InnerClasses.C )
    ;; (C.this.this = $outer_this);
+   ;;@ abstractinnerclass/InnerClasses.java:29:17
    (struct.set $abstractinnerclass.InnerClasses.C $$outer_this__abstractinnerclass_InnerClasses_C(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ abstractinnerclass/InnerClasses.java:29:17
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -223,8 +249,10 @@
  (local $this (ref null $abstractinnerclass.InnerClasses.C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.C.rtt)))
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:30:9
   (block
    ;; C.this.foo();
+   ;;@ abstractinnerclass/InnerClasses.java:31:6
    (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1)) (rtt.canon $abstractinnerclass.InnerClasses.A.vtable)) ))
   )
  )
@@ -234,17 +262,22 @@
 ;;; void C.$clinit()
 (func $$clinit__void@abstractinnerclass.InnerClasses.C
  (block $return.label
+  ;;@ abstractinnerclass/InnerClasses.java:29:17
   (block
    ;; if (abstractinnerclass.InnerClasses.C.$initialized) return;
+   ;;@ abstractinnerclass/InnerClasses.java:29:17
    (if (global.get $f_$initialized__abstractinnerclass_InnerClasses_C)
     (then
      ;; return;
+     ;;@ abstractinnerclass/InnerClasses.java:29:17
      (br $return.label)
     )
    )
    ;; (abstractinnerclass.InnerClasses.C.$initialized = true);
+   ;;@ abstractinnerclass/InnerClasses.java:29:17
    (global.set $f_$initialized__abstractinnerclass_InnerClasses_C (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ abstractinnerclass/InnerClasses.java:29:17
    (call $$clinit__void@java.lang.Object )
   )
  )

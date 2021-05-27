@@ -42,12 +42,16 @@
  (param $$ordinal i32)
  (result (ref null $switchstatement.Numbers))
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:18:5
   (block
    ;; (Enum.this.name = $name);
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
    ;; (Enum.this.ordinal = $ordinal);
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
    ;; Enum.this.Enum.<init>($name,$ordinal);
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
@@ -60,19 +64,25 @@
  (result (ref null $switchstatement.Numbers))
  (local $return.value (ref null $switchstatement.Numbers))
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:18:5
   (block
    ;; switchstatement.Numbers.$clinit();
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (call $$clinit__void@switchstatement.Numbers )
    ;; if (javaemul.internal.Platform.isNull(switchstatement.Numbers.namesToValuesMap)) {
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (if (ref.is_null (global.get $f_namesToValuesMap__switchstatement_Numbers_))
     (then
+     ;;@ switchstatement/SwitchStatement.java:18:5
      (block
       ;; (switchstatement.Numbers.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(switchstatement.Numbers.values()));
+      ;;@ switchstatement/SwitchStatement.java:18:5
       (global.set $f_namesToValuesMap__switchstatement_Numbers_ (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_switchstatement_Numbers@switchstatement.Numbers )))
      )
     )
    )
    ;; return ((Numbers) javaemul.internal.Enums.getValueFromNameAndMap(name,switchstatement.Numbers.namesToValuesMap));
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (local.set $return.value (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_)) (global.get $switchstatement.Numbers.rtt)))
    (br $return.label)
   )
@@ -86,10 +96,13 @@
  (local $return.value (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:18:5
   (block
    ;; switchstatement.Numbers.$clinit();
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (call $$clinit__void@switchstatement.Numbers )
    ;; return (Numbers[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE)),($array_literal.elements[1] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.TWO)),$array_literal);
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
@@ -112,31 +125,43 @@
 ;;; void Numbers.$clinit()
 (func $$clinit__void@switchstatement.Numbers
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:18:5
   (block
    ;; if (switchstatement.Numbers.$initialized) return;
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (if (global.get $f_$initialized__switchstatement_Numbers)
     (then
      ;; return;
+     ;;@ switchstatement/SwitchStatement.java:18:5
      (br $return.label)
     )
    )
    ;; (switchstatement.Numbers.$initialized = true);
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (global.set $f_$initialized__switchstatement_Numbers (i32.const 1))
    ;; java.lang.Enum.$clinit();
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (call $$clinit__void@java.lang.Enum )
+   ;;@ switchstatement/SwitchStatement.java:19:2
    (block
     ;; switchstatement.Numbers.$clinit();
+    ;;@ switchstatement/SwitchStatement.java:19:2
     (call $$clinit__void@switchstatement.Numbers )
     ;; (switchstatement.Numbers.ONE = new Numbers.<init>(javaemul.internal.StringPool.$getString_|ONE|(),switchstatement.Numbers.ONE));
+    ;;@ switchstatement/SwitchStatement.java:19:2
     (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (global.get $switchstatement.Numbers.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_ONE__switchstatement_Numbers)))
    )
+   ;;@ switchstatement/SwitchStatement.java:20:2
    (block
     ;; switchstatement.Numbers.$clinit();
+    ;;@ switchstatement/SwitchStatement.java:20:2
     (call $$clinit__void@switchstatement.Numbers )
     ;; (switchstatement.Numbers.TWO = new Numbers.<init>(javaemul.internal.StringPool.$getString_|TWO|(),switchstatement.Numbers.TWO));
+    ;;@ switchstatement/SwitchStatement.java:20:2
     (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (global.get $switchstatement.Numbers.vtable) (global.get $switchstatement.Numbers.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_TWO__switchstatement_Numbers)))
    )
    ;; (switchstatement.Numbers.namesToValuesMap = null);
+   ;;@ switchstatement/SwitchStatement.java:18:5
    (global.set $f_namesToValuesMap__switchstatement_Numbers_ (ref.null $java.lang.Object))
   )
  )
@@ -179,10 +204,13 @@
  (param $this (ref null $switchstatement.SwitchStatement))
  (result (ref null $switchstatement.SwitchStatement))
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:23:13
   (block
    ;; switchstatement.SwitchStatement.$clinit();
+   ;;@ switchstatement/SwitchStatement.java:23:13
    (call $$clinit__void@switchstatement.SwitchStatement )
    ;; Object.this.Object.<init>();
+   ;;@ switchstatement/SwitchStatement.java:23:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -198,14 +226,18 @@
  (local $this (ref null $switchstatement.SwitchStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:24:14
   (block
    ;; SWITCH: {
+   ;;@ switchstatement/SwitchStatement.java:26:4
    (block $SWITCH.BREAK
     (block
      ;; T $expression = javaemul.internal.InternalPreconditions.checkNotNull(javaemul.internal.StringPool.$getString_|one|());
+     ;;@ switchstatement/SwitchStatement.java:26:4
      
      (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $$getString_|one|__java_lang_String@javaemul.internal.StringPool )))
      ;; switch ($expression) {
+     ;;@ switchstatement/SwitchStatement.java:26:4
      
      (block
       (block
@@ -219,17 +251,21 @@
        )
        ;; case javaemul.internal.StringPool.$getString_|two|():
        ;; break SWITCH;
+       ;;@ switchstatement/SwitchStatement.java:29:8
        (br $SWITCH.BREAK)
       )
       ;; default:
       ;; return;
+      ;;@ switchstatement/SwitchStatement.java:31:8
       (br $return.label)
      )
     )
    )
    ;; SWITCH: switch (49) {
+   ;;@ switchstatement/SwitchStatement.java:35:4
    (block $SWITCH_1.BREAK
     ;; switch (49) {
+    ;;@ switchstatement/SwitchStatement.java:35:4
     
     (block
      (block
@@ -243,16 +279,20 @@
       )
       ;; case 50:
       ;; break SWITCH;
+      ;;@ switchstatement/SwitchStatement.java:38:8
       (br $SWITCH_1.BREAK)
      )
      ;; default:
      ;; return;
+     ;;@ switchstatement/SwitchStatement.java:40:8
      (br $return.label)
     )
    )
    ;; SWITCH: switch (1) {
+   ;;@ switchstatement/SwitchStatement.java:44:4
    (block $SWITCH_2.BREAK
     ;; switch (1) {
+    ;;@ switchstatement/SwitchStatement.java:44:4
     
     (block
      (block
@@ -266,17 +306,21 @@
       )
       ;; case 2:
       ;; break SWITCH;
+      ;;@ switchstatement/SwitchStatement.java:47:8
       (br $SWITCH_2.BREAK)
      )
      ;; default:
      ;; return;
+     ;;@ switchstatement/SwitchStatement.java:49:8
      (br $return.label)
     )
    )
    ;; SWITCH: {
+   ;;@ switchstatement/SwitchStatement.java:53:4
    (block $SWITCH_3.BREAK
     (block
      ;; int $expression = (Numbers $qualifier = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE),$qualifier.ordinal());
+     ;;@ switchstatement/SwitchStatement.java:53:4
      
      (local.set $$expression_1 (block (result i32)
       
@@ -287,6 +331,7 @@
       (call_ref (local.get $$qualifier)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
      ))
      ;; switch ($expression) {
+     ;;@ switchstatement/SwitchStatement.java:53:4
      
      (block
       (block
@@ -300,10 +345,12 @@
        )
        ;; case switchstatement.Numbers.TWO:
        ;; break SWITCH;
+       ;;@ switchstatement/SwitchStatement.java:56:8
        (br $SWITCH_3.BREAK)
       )
       ;; default:
       ;; return;
+      ;;@ switchstatement/SwitchStatement.java:58:8
       (br $return.label)
      )
     )
@@ -322,10 +369,13 @@
  (local $b i32)
  (local $i_1 i32)
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:63:22
   (block
    ;; SWITCH: switch (3) {
+   ;;@ switchstatement/SwitchStatement.java:64:4
    (block $SWITCH.BREAK
     ;; switch (3) {
+    ;;@ switchstatement/SwitchStatement.java:64:4
     
     (block
      (block
@@ -336,27 +386,35 @@
       )
       ;; case 1:
       ;; int unassigned,int unassigned2;
+      ;;@ switchstatement/SwitchStatement.java:66:8
       
       ;; int i = 0;
+      ;;@ switchstatement/SwitchStatement.java:67:8
       
       (local.set $i (i32.const 0))
       ;; int j = 2,int b = (j + 1);
+      ;;@ switchstatement/SwitchStatement.java:68:8
       
       (local.set $j (i32.const 2))
       (local.set $b (i32.add (local.get $j) (i32.const 1)))
       ;; break SWITCH;
+      ;;@ switchstatement/SwitchStatement.java:69:8
       (br $SWITCH.BREAK)
      )
      ;; case 3:
      ;; (i = 3);
+     ;;@ switchstatement/SwitchStatement.java:71:8
      (local.set $i (i32.const 3))
      ;; return;
+     ;;@ switchstatement/SwitchStatement.java:73:8
      (br $return.label)
     )
    )
    ;; SWITCH: switch (5) {
+   ;;@ switchstatement/SwitchStatement.java:76:4
    (block $SWITCH_1.BREAK
     ;; switch (5) {
+    ;;@ switchstatement/SwitchStatement.java:76:4
     
     (block
      (block ;; evaluate expression and jump
@@ -365,9 +423,11 @@
      )
      ;; case 5:
      ;; int i = 1;
+     ;;@ switchstatement/SwitchStatement.java:78:8
      
      (local.set $i_1 (i32.const 1))
      ;; break SWITCH;
+     ;;@ switchstatement/SwitchStatement.java:79:8
      (br $SWITCH_1.BREAK)
     )
    )
@@ -378,17 +438,22 @@
 ;;; void SwitchStatement.$clinit()
 (func $$clinit__void@switchstatement.SwitchStatement
  (block $return.label
+  ;;@ switchstatement/SwitchStatement.java:23:13
   (block
    ;; if (switchstatement.SwitchStatement.$initialized) return;
+   ;;@ switchstatement/SwitchStatement.java:23:13
    (if (global.get $f_$initialized__switchstatement_SwitchStatement)
     (then
      ;; return;
+     ;;@ switchstatement/SwitchStatement.java:23:13
      (br $return.label)
     )
    )
    ;; (switchstatement.SwitchStatement.$initialized = true);
+   ;;@ switchstatement/SwitchStatement.java:23:13
    (global.set $f_$initialized__switchstatement_SwitchStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ switchstatement/SwitchStatement.java:23:13
    (call $$clinit__void@java.lang.Object )
   )
  )

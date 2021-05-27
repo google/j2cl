@@ -40,10 +40,13 @@
  (param $this (ref null $boundedtypesupercall.Main))
  (result (ref null $boundedtypesupercall.Main))
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:18:13
   (block
    ;; boundedtypesupercall.Main.$clinit();
+   ;;@ boundedtypesupercall/Main.java:18:13
    (call $$clinit__void@boundedtypesupercall.Main )
    ;; Object.this.Object.<init>();
+   ;;@ boundedtypesupercall/Main.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -53,17 +56,22 @@
 ;;; void Main.$clinit()
 (func $$clinit__void@boundedtypesupercall.Main
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:18:13
   (block
    ;; if (boundedtypesupercall.Main.$initialized) return;
+   ;;@ boundedtypesupercall/Main.java:18:13
    (if (global.get $f_$initialized__boundedtypesupercall_Main)
     (then
      ;; return;
+     ;;@ boundedtypesupercall/Main.java:18:13
      (br $return.label)
     )
    )
    ;; (boundedtypesupercall.Main.$initialized = true);
+   ;;@ boundedtypesupercall/Main.java:18:13
    (global.set $f_$initialized__boundedtypesupercall_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ boundedtypesupercall/Main.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -107,10 +115,13 @@
  (param $foo (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Foo))
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:21:11
   (block
    ;; boundedtypesupercall.Main.Foo.$clinit();
+   ;;@ boundedtypesupercall/Main.java:21:11
    (call $$clinit__void@boundedtypesupercall.Main.Foo )
    ;; Object.this.Object.<init>();
+   ;;@ boundedtypesupercall/Main.java:21:11
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -120,17 +131,22 @@
 ;;; void Foo.$clinit()
 (func $$clinit__void@boundedtypesupercall.Main.Foo
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:20:31
   (block
    ;; if (boundedtypesupercall.Main.Foo.$initialized) return;
+   ;;@ boundedtypesupercall/Main.java:20:31
    (if (global.get $f_$initialized__boundedtypesupercall_Main_Foo)
     (then
      ;; return;
+     ;;@ boundedtypesupercall/Main.java:20:31
      (br $return.label)
     )
    )
    ;; (boundedtypesupercall.Main.Foo.$initialized = true);
+   ;;@ boundedtypesupercall/Main.java:20:31
    (global.set $f_$initialized__boundedtypesupercall_Main_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ boundedtypesupercall/Main.java:20:31
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -156,10 +172,13 @@
  (param $this (ref null $boundedtypesupercall.Main.Bar))
  (result (ref null $boundedtypesupercall.Main.Bar))
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:25:22
   (block
    ;; boundedtypesupercall.Main.Bar.$clinit();
+   ;;@ boundedtypesupercall/Main.java:25:22
    (call $$clinit__void@boundedtypesupercall.Main.Bar )
    ;; Object.this.Object.<init>();
+   ;;@ boundedtypesupercall/Main.java:25:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -174,8 +193,10 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:27:13
   (block
    ;; return null;
+   ;;@ boundedtypesupercall/Main.java:28:6
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -192,8 +213,10 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.rtt)))
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:31:18
   (block
    ;; return new $1.<init>(Bar.this,Bar.this.getSomething());
+   ;;@ boundedtypesupercall/Main.java:32:6
    (local.set $return.value (call $m_<init>__boundedtypesupercall_Main_Bar__java_lang_Comparable__void_$pp_boundedtypesupercall@boundedtypesupercall.Main.Bar.1 (struct.new_with_rtt $boundedtypesupercall.Main.Bar.1 (global.get $boundedtypesupercall.Main.Bar.1.vtable) (global.get $boundedtypesupercall.Main.Bar.1.itable) (i32.const 0) (ref.null $boundedtypesupercall.Main.Bar) (global.get $boundedtypesupercall.Main.Bar.1.rtt))(local.get $this)(call_ref (local.get $this)(struct.get $boundedtypesupercall.Main.Bar.vtable $m_getSomething__java_lang_Comparable (struct.get $boundedtypesupercall.Main.Bar $vtable(local.get $this))))))
    (br $return.label)
   )
@@ -205,17 +228,22 @@
 ;;; void Bar.$clinit()
 (func $$clinit__void@boundedtypesupercall.Main.Bar
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:25:22
   (block
    ;; if (boundedtypesupercall.Main.Bar.$initialized) return;
+   ;;@ boundedtypesupercall/Main.java:25:22
    (if (global.get $f_$initialized__boundedtypesupercall_Main_Bar)
     (then
      ;; return;
+     ;;@ boundedtypesupercall/Main.java:25:22
      (br $return.label)
     )
    )
    ;; (boundedtypesupercall.Main.Bar.$initialized = true);
+   ;;@ boundedtypesupercall/Main.java:25:22
    (global.set $f_$initialized__boundedtypesupercall_Main_Bar (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ boundedtypesupercall/Main.java:25:22
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -261,12 +289,16 @@
  (param $$_0 (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Bar.1))
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:32:40
   (block
    ;; boundedtypesupercall.Main.Bar.1.$clinit();
+   ;;@ boundedtypesupercall/Main.java:32:40
    (call $$clinit__void@boundedtypesupercall.Main.Bar.1 )
    ;; ($1.this.this = $outer_this);
+   ;;@ boundedtypesupercall/Main.java:32:40
    (struct.set $boundedtypesupercall.Main.Bar.1 $$outer_this__boundedtypesupercall_Main_Bar_1(local.get $this) (local.get $$outer_this))
    ;; Foo.this.Foo.<init>($_0);
+   ;;@ boundedtypesupercall/Main.java:32:40
    (drop (call $m_<init>__java_lang_Object__void@boundedtypesupercall.Main.Foo (local.get $this)(local.get $$_0)))
   )
  )
@@ -279,6 +311,7 @@
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypesupercall.Main.Bar.1.rtt)))
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:34:20
   (block
   )
  )
@@ -288,17 +321,22 @@
 ;;; void <anonymous> extends Foo<T>.$clinit()
 (func $$clinit__void@boundedtypesupercall.Main.Bar.1
  (block $return.label
+  ;;@ boundedtypesupercall/Main.java:32:40
   (block
    ;; if (boundedtypesupercall.Main.Bar.1.$initialized) return;
+   ;;@ boundedtypesupercall/Main.java:32:40
    (if (global.get $f_$initialized__boundedtypesupercall_Main_Bar_1)
     (then
      ;; return;
+     ;;@ boundedtypesupercall/Main.java:32:40
      (br $return.label)
     )
    )
    ;; (boundedtypesupercall.Main.Bar.1.$initialized = true);
+   ;;@ boundedtypesupercall/Main.java:32:40
    (global.set $f_$initialized__boundedtypesupercall_Main_Bar_1 (i32.const 1))
    ;; boundedtypesupercall.Main.Foo.$clinit();
+   ;;@ boundedtypesupercall/Main.java:32:40
    (call $$clinit__void@boundedtypesupercall.Main.Foo )
   )
  )

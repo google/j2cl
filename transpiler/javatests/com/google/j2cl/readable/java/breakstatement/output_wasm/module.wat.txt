@@ -23,10 +23,13 @@
  (param $this (ref null $breakstatement.BreakStatement))
  (result (ref null $breakstatement.BreakStatement))
  (block $return.label
+  ;;@ breakstatement/BreakStatement.java:18:13
   (block
    ;; breakstatement.BreakStatement.$clinit();
+   ;;@ breakstatement/BreakStatement.java:18:13
    (call $$clinit__void@breakstatement.BreakStatement )
    ;; Object.this.Object.<init>();
+   ;;@ breakstatement/BreakStatement.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -39,15 +42,19 @@
  (local $this (ref null $breakstatement.BreakStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $breakstatement.BreakStatement.rtt)))
  (block $return.label
+  ;;@ breakstatement/BreakStatement.java:19:14
   (block
    ;; LOOP: for (;true;) {
+   ;;@ breakstatement/BreakStatement.java:20:4
    
    (block $LOOP.BREAK
     (loop
      (br_if 1 (i32.eqz (i32.const 1)))
      (block $LOOP.CONTINUE
+      ;;@ breakstatement/BreakStatement.java:20:15
       (block
        ;; break LOOP;
+       ;;@ breakstatement/BreakStatement.java:21:6
        (br $LOOP.BREAK)
       )
      )
@@ -63,17 +70,22 @@
 ;;; void BreakStatement.$clinit()
 (func $$clinit__void@breakstatement.BreakStatement
  (block $return.label
+  ;;@ breakstatement/BreakStatement.java:18:13
   (block
    ;; if (breakstatement.BreakStatement.$initialized) return;
+   ;;@ breakstatement/BreakStatement.java:18:13
    (if (global.get $f_$initialized__breakstatement_BreakStatement)
     (then
      ;; return;
+     ;;@ breakstatement/BreakStatement.java:18:13
      (br $return.label)
     )
    )
    ;; (breakstatement.BreakStatement.$initialized = true);
+   ;;@ breakstatement/BreakStatement.java:18:13
    (global.set $f_$initialized__breakstatement_BreakStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ breakstatement/BreakStatement.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

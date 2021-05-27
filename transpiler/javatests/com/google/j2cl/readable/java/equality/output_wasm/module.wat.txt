@@ -23,10 +23,13 @@
  (param $this (ref null $equality.Equality))
  (result (ref null $equality.Equality))
  (block $return.label
+  ;;@ equality/Equality.java:18:13
   (block
    ;; equality.Equality.$clinit();
+   ;;@ equality/Equality.java:18:13
    (call $$clinit__void@equality.Equality )
    ;; Object.this.Object.<init>();
+   ;;@ equality/Equality.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -39,15 +42,21 @@
  (local $this (ref null $equality.Equality))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $equality.Equality.rtt)))
  (block $return.label
+  ;;@ equality/Equality.java:19:14
   (block
+   ;;@ equality/Equality.java:21:4
    (block
    )
+   ;;@ equality/Equality.java:27:4
    (block
    )
+   ;;@ equality/Equality.java:32:4
    (block
    )
+   ;;@ equality/Equality.java:37:4
    (block
    )
+   ;;@ equality/Equality.java:42:4
    (block
    )
   )
@@ -58,17 +67,22 @@
 ;;; void Equality.$clinit()
 (func $$clinit__void@equality.Equality
  (block $return.label
+  ;;@ equality/Equality.java:18:13
   (block
    ;; if (equality.Equality.$initialized) return;
+   ;;@ equality/Equality.java:18:13
    (if (global.get $f_$initialized__equality_Equality)
     (then
      ;; return;
+     ;;@ equality/Equality.java:18:13
      (br $return.label)
     )
    )
    ;; (equality.Equality.$initialized = true);
+   ;;@ equality/Equality.java:18:13
    (global.set $f_$initialized__equality_Equality (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ equality/Equality.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

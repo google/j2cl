@@ -35,10 +35,13 @@
  (param $this (ref null $localclassinheritance.LocalClassInheritance))
  (result (ref null $localclassinheritance.LocalClassInheritance))
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:18:13
   (block
    ;; localclassinheritance.LocalClassInheritance.$clinit();
+   ;;@ localclassinheritance/LocalClassInheritance.java:18:13
    (call $$clinit__void@localclassinheritance.LocalClassInheritance )
    ;; Object.this.Object.<init>();
+   ;;@ localclassinheritance/LocalClassInheritance.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -52,8 +55,10 @@
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.rtt)))
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:19:14
   (block
    ;; int f = 1;
+   ;;@ localclassinheritance/LocalClassInheritance.java:20:4
    
    (local.set $f (i32.const 1))
   )
@@ -64,17 +69,22 @@
 ;;; void LocalClassInheritance.$clinit()
 (func $$clinit__void@localclassinheritance.LocalClassInheritance
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:18:13
   (block
    ;; if (localclassinheritance.LocalClassInheritance.$initialized) return;
+   ;;@ localclassinheritance/LocalClassInheritance.java:18:13
    (if (global.get $f_$initialized__localclassinheritance_LocalClassInheritance)
     (then
      ;; return;
+     ;;@ localclassinheritance/LocalClassInheritance.java:18:13
      (br $return.label)
     )
    )
    ;; (localclassinheritance.LocalClassInheritance.$initialized = true);
+   ;;@ localclassinheritance/LocalClassInheritance.java:18:13
    (global.set $f_$initialized__localclassinheritance_LocalClassInheritance (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localclassinheritance/LocalClassInheritance.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -121,14 +131,19 @@
  (param $$captured_f i32)
  (result (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:21:10
   (block
    ;; localclassinheritance.LocalClassInheritance.1Parent.$clinit();
+   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
    (call $$clinit__void@localclassinheritance.LocalClassInheritance.1Parent )
    ;; ($1Parent.this.this = $outer_this);
+   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
    (struct.set $localclassinheritance.LocalClassInheritance.1Parent $$outer_this__localclassinheritance_LocalClassInheritance_1Parent(local.get $this) (local.get $$outer_this))
    ;; ($1Parent.this.f = $captured_f);
+   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
    (struct.set $localclassinheritance.LocalClassInheritance.1Parent $$captured_f__localclassinheritance_LocalClassInheritance_1Parent(local.get $this) (local.get $$captured_f))
    ;; Object.this.Object.<init>();
+   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -142,8 +157,10 @@
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Parent.rtt)))
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:22:18
   (block
    ;; int i = $1Parent.this.f;
+   ;;@ localclassinheritance/LocalClassInheritance.java:23:8
    
    (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Parent $$captured_f__localclassinheritance_LocalClassInheritance_1Parent(local.get $this)))
   )
@@ -154,17 +171,22 @@
 ;;; void Parent.$clinit()
 (func $$clinit__void@localclassinheritance.LocalClassInheritance.1Parent
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:21:10
   (block
    ;; if (localclassinheritance.LocalClassInheritance.1Parent.$initialized) return;
+   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
    (if (global.get $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent)
     (then
      ;; return;
+     ;;@ localclassinheritance/LocalClassInheritance.java:21:10
      (br $return.label)
     )
    )
    ;; (localclassinheritance.LocalClassInheritance.1Parent.$initialized = true);
+   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
    (global.set $f_$initialized__localclassinheritance_LocalClassInheritance_1Parent (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -213,14 +235,19 @@
  (param $$captured_f i32)
  (result (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:26:10
   (block
    ;; localclassinheritance.LocalClassInheritance.1Child.$clinit();
+   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
    (call $$clinit__void@localclassinheritance.LocalClassInheritance.1Child )
    ;; ($1Child.this.this = $outer_this);
+   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
    (struct.set $localclassinheritance.LocalClassInheritance.1Child $$outer_this__localclassinheritance_LocalClassInheritance_1Child(local.get $this) (local.get $$outer_this))
    ;; ($1Child.this.f = $captured_f);
+   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
    (struct.set $localclassinheritance.LocalClassInheritance.1Child $$captured_f__localclassinheritance_LocalClassInheritance_1Child(local.get $this) (local.get $$captured_f))
    ;; $1Parent.this.$1Parent.<init>($outer_this,$captured_f);
+   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
    (drop (call $m_<init>__localclassinheritance_LocalClassInheritance__int__void_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Parent (local.get $this)(local.get $$outer_this)(local.get $$captured_f)))
   )
  )
@@ -234,8 +261,10 @@
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Child.rtt)))
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:27:18
   (block
    ;; int i = $1Child.this.f;
+   ;;@ localclassinheritance/LocalClassInheritance.java:28:8
    
    (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Child $$captured_f__localclassinheritance_LocalClassInheritance_1Child(local.get $this)))
   )
@@ -246,17 +275,22 @@
 ;;; void Child.$clinit()
 (func $$clinit__void@localclassinheritance.LocalClassInheritance.1Child
  (block $return.label
+  ;;@ localclassinheritance/LocalClassInheritance.java:26:10
   (block
    ;; if (localclassinheritance.LocalClassInheritance.1Child.$initialized) return;
+   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
    (if (global.get $f_$initialized__localclassinheritance_LocalClassInheritance_1Child)
     (then
      ;; return;
+     ;;@ localclassinheritance/LocalClassInheritance.java:26:10
      (br $return.label)
     )
    )
    ;; (localclassinheritance.LocalClassInheritance.1Child.$initialized = true);
+   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
    (global.set $f_$initialized__localclassinheritance_LocalClassInheritance_1Child (i32.const 1))
    ;; localclassinheritance.LocalClassInheritance.1Parent.$clinit();
+   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
    (call $$clinit__void@localclassinheritance.LocalClassInheritance.1Parent )
   )
  )

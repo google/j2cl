@@ -23,10 +23,13 @@
  (param $this (ref null $dowhilestatement.DoWhileStatement))
  (result (ref null $dowhilestatement.DoWhileStatement))
  (block $return.label
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (block
    ;; dowhilestatement.DoWhileStatement.$clinit();
+   ;;@ dowhilestatement/DoWhileStatement.java:18:13
    (call $$clinit__void@dowhilestatement.DoWhileStatement )
    ;; Object.this.Object.<init>();
+   ;;@ dowhilestatement/DoWhileStatement.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -40,17 +43,22 @@
  (local $this (ref null $dowhilestatement.DoWhileStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $dowhilestatement.DoWhileStatement.rtt)))
  (block $return.label
+  ;;@ dowhilestatement/DoWhileStatement.java:19:14
   (block
    ;; int count = 0;
+   ;;@ dowhilestatement/DoWhileStatement.java:20:4
    
    (local.set $count (i32.const 0))
    ;; LOOP: do {
+   ;;@ dowhilestatement/DoWhileStatement.java:21:4
    
    (block $LOOP.BREAK
     (loop
      (block $LOOP.CONTINUE
+      ;;@ dowhilestatement/DoWhileStatement.java:21:7
       (block
        ;; (count = (count + 1));
+       ;;@ dowhilestatement/DoWhileStatement.java:22:6
        (local.set $count (i32.add (local.get $count) (i32.const 1)))
       )
      )
@@ -66,17 +74,22 @@
 ;;; void DoWhileStatement.$clinit()
 (func $$clinit__void@dowhilestatement.DoWhileStatement
  (block $return.label
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (block
    ;; if (dowhilestatement.DoWhileStatement.$initialized) return;
+   ;;@ dowhilestatement/DoWhileStatement.java:18:13
    (if (global.get $f_$initialized__dowhilestatement_DoWhileStatement)
     (then
      ;; return;
+     ;;@ dowhilestatement/DoWhileStatement.java:18:13
      (br $return.label)
     )
    )
    ;; (dowhilestatement.DoWhileStatement.$initialized = true);
+   ;;@ dowhilestatement/DoWhileStatement.java:18:13
    (global.set $f_$initialized__dowhilestatement_DoWhileStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ dowhilestatement/DoWhileStatement.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

@@ -36,12 +36,16 @@
  (param $this (ref null $packageinfosubpackage.Foo))
  (result (ref null $packageinfosubpackage.Foo))
  (block $return.label
+  ;;@ packageinfosubpackage/Foo.java:20:13
   (block
    ;; packageinfosubpackage.Foo.$clinit();
+   ;;@ packageinfosubpackage/Foo.java:20:13
    (call $$clinit__void@packageinfosubpackage.Foo )
    ;; Object.this.Object.<init>();
+   ;;@ packageinfosubpackage/Foo.java:20:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Foo.this.$init();
+   ;;@ packageinfosubpackage/Foo.java:20:13
    (call $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $this))
   )
  )
@@ -52,8 +56,10 @@
 (func $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo
  (param $this (ref null $packageinfosubpackage.Foo))
  (block $return.label
+  ;;@ packageinfosubpackage/Foo.java:20:13
   (block
    ;; (Foo.this.nativeBar = new NativeBar.<init>());
+   ;;@ packageinfosubpackage/Foo.java:25:2
    (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (global.get $packageinfosubpackage.Foo.NativeBar.vtable) (global.get $packageinfosubpackage.Foo.NativeBar.itable) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
   )
  )
@@ -62,17 +68,22 @@
 ;;; void Foo.$clinit()
 (func $$clinit__void@packageinfosubpackage.Foo
  (block $return.label
+  ;;@ packageinfosubpackage/Foo.java:20:13
   (block
    ;; if (packageinfosubpackage.Foo.$initialized) return;
+   ;;@ packageinfosubpackage/Foo.java:20:13
    (if (global.get $f_$initialized__packageinfosubpackage_Foo)
     (then
      ;; return;
+     ;;@ packageinfosubpackage/Foo.java:20:13
      (br $return.label)
     )
    )
    ;; (packageinfosubpackage.Foo.$initialized = true);
+   ;;@ packageinfosubpackage/Foo.java:20:13
    (global.set $f_$initialized__packageinfosubpackage_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ packageinfosubpackage/Foo.java:20:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -114,10 +125,13 @@
  (param $this (ref null $packageinfosubpackage.Foo.NativeBar))
  (result (ref null $packageinfosubpackage.Foo.NativeBar))
  (block $return.label
+  ;;@ packageinfosubpackage/Foo.java:23:23
   (block
    ;; packageinfosubpackage.Foo.NativeBar.$clinit();
+   ;;@ packageinfosubpackage/Foo.java:23:23
    (call $$clinit__void@packageinfosubpackage.Foo.NativeBar )
    ;; Object.this.Object.<init>();
+   ;;@ packageinfosubpackage/Foo.java:23:23
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -127,17 +141,22 @@
 ;;; void NativeBar.$clinit()
 (func $$clinit__void@packageinfosubpackage.Foo.NativeBar
  (block $return.label
+  ;;@ packageinfosubpackage/Foo.java:23:23
   (block
    ;; if (packageinfosubpackage.Foo.NativeBar.$initialized) return;
+   ;;@ packageinfosubpackage/Foo.java:23:23
    (if (global.get $f_$initialized__packageinfosubpackage_Foo_NativeBar)
     (then
      ;; return;
+     ;;@ packageinfosubpackage/Foo.java:23:23
      (br $return.label)
     )
    )
    ;; (packageinfosubpackage.Foo.NativeBar.$initialized = true);
+   ;;@ packageinfosubpackage/Foo.java:23:23
    (global.set $f_$initialized__packageinfosubpackage_Foo_NativeBar (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ packageinfosubpackage/Foo.java:23:23
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -179,10 +198,13 @@
  (param $this (ref null $packageinfosubpackage.subpackage.Bar))
  (result (ref null $packageinfosubpackage.subpackage.Bar))
  (block $return.label
+  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (block
    ;; packageinfosubpackage.subpackage.Bar.$clinit();
+   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
    (call $$clinit__void@packageinfosubpackage.subpackage.Bar )
    ;; Object.this.Object.<init>();
+   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -192,17 +214,22 @@
 ;;; void Bar.$clinit()
 (func $$clinit__void@packageinfosubpackage.subpackage.Bar
  (block $return.label
+  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (block
    ;; if (packageinfosubpackage.subpackage.Bar.$initialized) return;
+   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
    (if (global.get $f_$initialized__packageinfosubpackage_subpackage_Bar)
     (then
      ;; return;
+     ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
      (br $return.label)
     )
    )
    ;; (packageinfosubpackage.subpackage.Bar.$initialized = true);
+   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
    (global.set $f_$initialized__packageinfosubpackage_subpackage_Bar (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
    (call $$clinit__void@java.lang.Object )
   )
  )

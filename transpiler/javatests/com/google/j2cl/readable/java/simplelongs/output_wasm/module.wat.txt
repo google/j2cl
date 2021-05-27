@@ -27,12 +27,16 @@
  (param $this (ref null $simplelongs.SimpleLongs))
  (result (ref null $simplelongs.SimpleLongs))
  (block $return.label
+  ;;@ simplelongs/SimpleLongs.java:18:13
   (block
    ;; simplelongs.SimpleLongs.$clinit();
+   ;;@ simplelongs/SimpleLongs.java:18:13
    (call $$clinit__void@simplelongs.SimpleLongs )
    ;; Object.this.Object.<init>();
+   ;;@ simplelongs/SimpleLongs.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; SimpleLongs.this.$init();
+   ;;@ simplelongs/SimpleLongs.java:18:13
    (call $$init__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (local.get $this))
   )
  )
@@ -47,8 +51,10 @@
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelongs.SimpleLongs.rtt)))
  (block $return.label
+  ;;@ simplelongs/SimpleLongs.java:21:14
   (block
    ;; return 0;
+   ;;@ simplelongs/SimpleLongs.java:22:4
    (local.set $return.value (i64.const 0))
    (br $return.label)
   )
@@ -65,10 +71,13 @@
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelongs.SimpleLongs.rtt)))
  (block $return.label
+  ;;@ simplelongs/SimpleLongs.java:28:21
   (block
    ;; (SimpleLongs.this.sideEffect = (SimpleLongs.this.sideEffect + 1));
+   ;;@ simplelongs/SimpleLongs.java:29:4
    (struct.set $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_(local.get $this) (i32.add (struct.get $simplelongs.SimpleLongs $f_sideEffect__simplelongs_SimpleLongs_(local.get $this)) (i32.const 1)))
    ;; return SimpleLongs.this;
+   ;;@ simplelongs/SimpleLongs.java:30:4
    (local.set $return.value (local.get $this))
    (br $return.label)
   )
@@ -98,35 +107,47 @@
  (local $this (ref null $simplelongs.SimpleLongs))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelongs.SimpleLongs.rtt)))
  (block $return.label
+  ;;@ simplelongs/SimpleLongs.java:34:14
   (block
    ;; long a = 0;
+   ;;@ simplelongs/SimpleLongs.java:36:4
    
    (local.set $a (i64.const 0))
    ;; (a = (0 - 100000));
+   ;;@ simplelongs/SimpleLongs.java:37:4
    (local.set $a (i64.sub (i64.const 0) (i64.const 100000)))
    ;; (a = 100000);
+   ;;@ simplelongs/SimpleLongs.java:38:4
    (local.set $a (i64.const 100000))
    ;; long b = (0 - 2147483648);
+   ;;@ simplelongs/SimpleLongs.java:41:4
    
    (local.set $b (i64.sub (i64.const 0) (i64.const 2147483648)))
    ;; (b = 2147483648);
+   ;;@ simplelongs/SimpleLongs.java:42:4
    (local.set $b (i64.const 2147483648))
    ;; (b = -9223372036854775808);
+   ;;@ simplelongs/SimpleLongs.java:43:4
    (local.set $b (i64.const -9223372036854775808))
    ;; (b = 9223372036854775807);
+   ;;@ simplelongs/SimpleLongs.java:44:4
    (local.set $b (i64.const 9223372036854775807))
    ;; long c = (a + b);
+   ;;@ simplelongs/SimpleLongs.java:47:4
    
    (local.set $c (i64.add (local.get $a) (local.get $b)))
    ;; (c = javaemul.internal.Primitives.safeDivision(a,b));
+   ;;@ simplelongs/SimpleLongs.java:48:4
    (local.set $c (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (local.get $a)(local.get $b)))
    ;; long e = ((a = (a + 1)),a);
+   ;;@ simplelongs/SimpleLongs.java:51:4
    
    (local.set $e (block (result i64)
     (local.set $a (i64.add (local.get $a) (i64.const 1)))
     (local.get $a)
    ))
    ;; (e = (SimpleLongs $qualifier = SimpleLongs.this,long $value = (SimpleLongs.this.foo + 1),($qualifier.foo = $value),$value));
+   ;;@ simplelongs/SimpleLongs.java:52:4
    (local.set $e (block (result i64)
     
     (local.set $$qualifier (local.get $this))
@@ -135,6 +156,7 @@
     (local.get $$value)
    ))
    ;; (e = (SimpleLongs $qualifier = SimpleLongs.this.getWithSideEffect(),(SimpleLongs $qualifier = $qualifier,long $value = ($qualifier.foo + 1),($qualifier.foo = $value),$value)));
+   ;;@ simplelongs/SimpleLongs.java:53:4
    (local.set $e (block (result i64)
     
     (local.set $$qualifier_1 (call_ref (local.get $this)(struct.get $simplelongs.SimpleLongs.vtable $m_getWithSideEffect__simplelongs_SimpleLongs (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
@@ -147,6 +169,7 @@
     )
    ))
    ;; long f = (long $value = a,(a = (a + 1)),$value);
+   ;;@ simplelongs/SimpleLongs.java:56:4
    
    (local.set $f (block (result i64)
     
@@ -155,6 +178,7 @@
     (local.get $$value_2)
    ))
    ;; (f = (long $value = SimpleLongs.this.foo,(SimpleLongs.this.foo = (SimpleLongs.this.foo + 1)),$value));
+   ;;@ simplelongs/SimpleLongs.java:57:4
    (local.set $f (block (result i64)
     
     (local.set $$value_3 (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this)))
@@ -162,6 +186,7 @@
     (local.get $$value_3)
    ))
    ;; (f = (SimpleLongs $qualifier = SimpleLongs.this.getWithSideEffect(),long $value = $qualifier.foo,($qualifier.foo = ($qualifier.foo + 1)),$value));
+   ;;@ simplelongs/SimpleLongs.java:58:4
    (local.set $f (block (result i64)
     
     (local.set $$qualifier_3 (call_ref (local.get $this)(struct.get $simplelongs.SimpleLongs.vtable $m_getWithSideEffect__simplelongs_SimpleLongs (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
@@ -170,9 +195,11 @@
     (local.get $$value_4)
    ))
    ;; long g = SimpleLongs.this.foo;
+   ;;@ simplelongs/SimpleLongs.java:61:4
    
    (local.set $g (struct.get $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this)))
    ;; (g = SimpleLongs.this.getBar());
+   ;;@ simplelongs/SimpleLongs.java:62:4
    (local.set $g (call_ref (local.get $this)(struct.get $simplelongs.SimpleLongs.vtable $m_getBar__long (struct.get $simplelongs.SimpleLongs $vtable(local.get $this)))))
   )
  )
@@ -183,8 +210,10 @@
 (func $$init__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs
  (param $this (ref null $simplelongs.SimpleLongs))
  (block $return.label
+  ;;@ simplelongs/SimpleLongs.java:18:13
   (block
    ;; (SimpleLongs.this.foo = 0);
+   ;;@ simplelongs/SimpleLongs.java:19:2
    (struct.set $simplelongs.SimpleLongs $f_foo__simplelongs_SimpleLongs(local.get $this) (i64.const 0))
   )
  )
@@ -193,17 +222,22 @@
 ;;; void SimpleLongs.$clinit()
 (func $$clinit__void@simplelongs.SimpleLongs
  (block $return.label
+  ;;@ simplelongs/SimpleLongs.java:18:13
   (block
    ;; if (simplelongs.SimpleLongs.$initialized) return;
+   ;;@ simplelongs/SimpleLongs.java:18:13
    (if (global.get $f_$initialized__simplelongs_SimpleLongs)
     (then
      ;; return;
+     ;;@ simplelongs/SimpleLongs.java:18:13
      (br $return.label)
     )
    )
    ;; (simplelongs.SimpleLongs.$initialized = true);
+   ;;@ simplelongs/SimpleLongs.java:18:13
    (global.set $f_$initialized__simplelongs_SimpleLongs (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ simplelongs/SimpleLongs.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

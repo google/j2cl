@@ -26,10 +26,13 @@
  (param $this (ref null $jstypewithdefault.SomeJsType))
  (result (ref null $jstypewithdefault.SomeJsType))
  (block $return.label
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
   (block
    ;; jstypewithdefault.SomeJsType.$clinit();
+   ;;@ jstypewithdefault/SomeJsType.java:20:13
    (call $$clinit__void@jstypewithdefault.SomeJsType )
    ;; Object.this.Object.<init>();
+   ;;@ jstypewithdefault/SomeJsType.java:20:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -42,8 +45,10 @@
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypewithdefault.SomeJsType.rtt)))
  (block $return.label
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
   (block
    ;; Interface.this.defaultMethod();
+   ;;@ jstypewithdefault/SomeJsType.java:20:13
    (call $m_defaultMethod__void@jstypewithdefault.Interface (local.get $this))
   )
  )
@@ -53,19 +58,25 @@
 ;;; void SomeJsType.$clinit()
 (func $$clinit__void@jstypewithdefault.SomeJsType
  (block $return.label
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
   (block
    ;; if (jstypewithdefault.SomeJsType.$initialized) return;
+   ;;@ jstypewithdefault/SomeJsType.java:20:13
    (if (global.get $f_$initialized__jstypewithdefault_SomeJsType)
     (then
      ;; return;
+     ;;@ jstypewithdefault/SomeJsType.java:20:13
      (br $return.label)
     )
    )
    ;; (jstypewithdefault.SomeJsType.$initialized = true);
+   ;;@ jstypewithdefault/SomeJsType.java:20:13
    (global.set $f_$initialized__jstypewithdefault_SomeJsType (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jstypewithdefault/SomeJsType.java:20:13
    (call $$clinit__void@java.lang.Object )
    ;; jstypewithdefault.Interface.$clinit();
+   ;;@ jstypewithdefault/SomeJsType.java:20:13
    (call $$clinit__void@jstypewithdefault.Interface )
   )
  )
@@ -98,6 +109,7 @@
 (func $m_defaultMethod__void@jstypewithdefault.Interface
  (param $this (ref null $java.lang.Object))
  (block $return.label
+  ;;@ jstypewithdefault/SomeJsType.java:24:15
   (block
   )
  )
@@ -107,15 +119,19 @@
 ;;; void Interface.$clinit()
 (func $$clinit__void@jstypewithdefault.Interface
  (block $return.label
+  ;;@ jstypewithdefault/SomeJsType.java:23:10
   (block
    ;; if (jstypewithdefault.Interface.$initialized) return;
+   ;;@ jstypewithdefault/SomeJsType.java:23:10
    (if (global.get $f_$initialized__jstypewithdefault_Interface)
     (then
      ;; return;
+     ;;@ jstypewithdefault/SomeJsType.java:23:10
      (br $return.label)
     )
    )
    ;; (jstypewithdefault.Interface.$initialized = true);
+   ;;@ jstypewithdefault/SomeJsType.java:23:10
    (global.set $f_$initialized__jstypewithdefault_Interface (i32.const 1))
   )
  )

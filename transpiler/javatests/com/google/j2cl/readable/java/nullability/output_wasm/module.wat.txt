@@ -80,12 +80,16 @@
  (param $a (ref null $java.lang.String))
  (result (ref null $nullability.Nullability))
  (block $return.label
+  ;;@ nullability/Nullability.java:46:9
   (block
    ;; nullability.Nullability.$clinit();
+   ;;@ nullability/Nullability.java:46:9
    (call $$clinit__void@nullability.Nullability )
    ;; Object.this.Object.<init>();
+   ;;@ nullability/Nullability.java:46:9
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Nullability.this.$init();
+   ;;@ nullability/Nullability.java:46:9
    (call $$init__void_$p_nullability_Nullability@nullability.Nullability (local.get $this))
   )
  )
@@ -103,8 +107,10 @@
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:49:16
   (block
    ;; return javaemul.internal.StringPool.$getString_||();
+   ;;@ nullability/Nullability.java:50:4
    (local.set $return.value (call $$getString_||__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -123,8 +129,10 @@
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:53:16
   (block
    ;; return javaemul.internal.StringPool.$getString_||();
+   ;;@ nullability/Nullability.java:54:4
    (local.set $return.value (call $$getString_||__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -143,8 +151,10 @@
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:58:16
   (block
    ;; return null;
+   ;;@ nullability/Nullability.java:59:4
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
   )
@@ -160,6 +170,7 @@
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:62:14
   (block
   )
  )
@@ -173,40 +184,52 @@
  (local $$array_literal_1 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_2 (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
+  ;;@ nullability/Nullability.java:29:13
   (block
    ;; (Nullability.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
+   ;;@ nullability/Nullability.java:30:2
    (struct.set $nullability.Nullability $f_f1__nullability_Nullability_(local.get $this) (call $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool ))
    ;; (Nullability.this.f2 = null);
+   ;;@ nullability/Nullability.java:31:2
    (struct.set $nullability.Nullability $f_f2__nullability_Nullability_(local.get $this) (ref.null $java.lang.String))
    ;; (Nullability.this.f3 = null);
+   ;;@ nullability/Nullability.java:32:2
    (struct.set $nullability.Nullability $f_f3__nullability_Nullability_(local.get $this) (ref.null $java.lang.String))
    ;; (Nullability.this.f4 = new ArrayList.<init>());
+   ;;@ nullability/Nullability.java:33:2
    (struct.set $nullability.Nullability $f_f4__nullability_Nullability_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Nullability.this.f5 = new ArrayList.<init>());
+   ;;@ nullability/Nullability.java:34:2
    (struct.set $nullability.Nullability $f_f5__nullability_Nullability_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Nullability.this.f6 = new ArrayList.<init>());
+   ;;@ nullability/Nullability.java:35:2
    (struct.set $nullability.Nullability $f_f6__nullability_Nullability_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Nullability.this.f7 = null);
+   ;;@ nullability/Nullability.java:36:2
    (struct.set $nullability.Nullability $f_f7__nullability_Nullability_(local.get $this) (ref.null $java.lang.Object))
    ;; (Nullability.this.f8 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ nullability/Nullability.java:37:2
    (struct.set $nullability.Nullability $f_f8__nullability_Nullability_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal)
    ))
    ;; (Nullability.this.f9 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ nullability/Nullability.java:39:2
    (struct.set $nullability.Nullability $f_f9__nullability_Nullability_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal_1 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal_1)
    ))
    ;; (Nullability.this.f10 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ nullability/Nullability.java:41:2
    (struct.set $nullability.Nullability $f_f10__nullability_Nullability_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal_2 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal_2)
    ))
    ;; (Nullability.this.f12 = new ArrayList.<init>());
+   ;;@ nullability/Nullability.java:43:2
    (struct.set $nullability.Nullability $f_f12__nullability_Nullability_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
   )
  )
@@ -215,17 +238,22 @@
 ;;; void Nullability.$clinit()
 (func $$clinit__void@nullability.Nullability
  (block $return.label
+  ;;@ nullability/Nullability.java:29:13
   (block
    ;; if (nullability.Nullability.$initialized) return;
+   ;;@ nullability/Nullability.java:29:13
    (if (global.get $f_$initialized__nullability_Nullability)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:29:13
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.$initialized = true);
+   ;;@ nullability/Nullability.java:29:13
    (global.set $f_$initialized__nullability_Nullability (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nullability/Nullability.java:29:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -269,10 +297,13 @@
  (param $this (ref null $nullability.Nullability.Foo))
  (result (ref null $nullability.Nullability.Foo))
  (block $return.label
+  ;;@ nullability/Nullability.java:64:15
   (block
    ;; nullability.Nullability.Foo.$clinit();
+   ;;@ nullability/Nullability.java:64:15
    (call $$clinit__void@nullability.Nullability.Foo )
    ;; Object.this.Object.<init>();
+   ;;@ nullability/Nullability.java:64:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -286,6 +317,7 @@
  (local $this (ref null $nullability.Nullability.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:65:9
   (block
   )
  )
@@ -300,8 +332,10 @@
  (local $this (ref null $nullability.Nullability.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:68:6
   (block
    ;; return null;
+   ;;@ nullability/Nullability.java:69:6
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -318,8 +352,10 @@
  (local $this (ref null $nullability.Nullability.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.Foo.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:73:18
   (block
    ;; return javaemul.internal.StringPool.$getString_|Foo|();
+   ;;@ nullability/Nullability.java:74:6
    (local.set $return.value (call $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -331,17 +367,22 @@
 ;;; void Foo.$clinit()
 (func $$clinit__void@nullability.Nullability.Foo
  (block $return.label
+  ;;@ nullability/Nullability.java:64:15
   (block
    ;; if (nullability.Nullability.Foo.$initialized) return;
+   ;;@ nullability/Nullability.java:64:15
    (if (global.get $f_$initialized__nullability_Nullability_Foo)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:64:15
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.Foo.$initialized = true);
+   ;;@ nullability/Nullability.java:64:15
    (global.set $f_$initialized__nullability_Nullability_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nullability/Nullability.java:64:15
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -373,15 +414,19 @@
 ;;; void MyFunction.$clinit()
 (func $$clinit__void@nullability.Nullability.MyFunction
  (block $return.label
+  ;;@ nullability/Nullability.java:79:12
   (block
    ;; if (nullability.Nullability.MyFunction.$initialized) return;
+   ;;@ nullability/Nullability.java:79:12
    (if (global.get $f_$initialized__nullability_Nullability_MyFunction)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:79:12
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.MyFunction.$initialized = true);
+   ;;@ nullability/Nullability.java:79:12
    (global.set $f_$initialized__nullability_Nullability_MyFunction (i32.const 1))
   )
  )
@@ -461,10 +506,13 @@
  (param $this (ref null $nullability.Nullability.StringList))
  (result (ref null $nullability.Nullability.StringList))
  (block $return.label
+  ;;@ nullability/Nullability.java:84:22
   (block
    ;; nullability.Nullability.StringList.$clinit();
+   ;;@ nullability/Nullability.java:84:22
    (call $$clinit__void@nullability.Nullability.StringList )
    ;; ArrayList.this.ArrayList.<init>();
+   ;;@ nullability/Nullability.java:84:22
    (drop (call $m_<init>__void@java.util.ArrayList (local.get $this)))
   )
  )
@@ -474,17 +522,22 @@
 ;;; void StringList.$clinit()
 (func $$clinit__void@nullability.Nullability.StringList
  (block $return.label
+  ;;@ nullability/Nullability.java:84:22
   (block
    ;; if (nullability.Nullability.StringList.$initialized) return;
+   ;;@ nullability/Nullability.java:84:22
    (if (global.get $f_$initialized__nullability_Nullability_StringList)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:84:22
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.StringList.$initialized = true);
+   ;;@ nullability/Nullability.java:84:22
    (global.set $f_$initialized__nullability_Nullability_StringList (i32.const 1))
    ;; java.util.ArrayList.$clinit();
+   ;;@ nullability/Nullability.java:84:22
    (call $$clinit__void@java.util.ArrayList )
   )
  )
@@ -535,10 +588,13 @@
  (param $this (ref null $nullability.Nullability.StringComparator))
  (result (ref null $nullability.Nullability.StringComparator))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; nullability.Nullability.StringComparator.$clinit();
+   ;;@ nullability/Nullability.java:87:22
    (call $$clinit__void@nullability.Nullability.StringComparator )
    ;; Object.this.Object.<init>();
+   ;;@ nullability/Nullability.java:87:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -555,8 +611,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:89:15
   (block
    ;; return 0;
+   ;;@ nullability/Nullability.java:90:6
    (local.set $return.value (i32.const 0))
    (br $return.label)
   )
@@ -575,8 +633,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return StringComparator.this.compare(((String) arg0),((String) arg1));
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $nullability.Nullability.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.StringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -593,8 +653,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return Comparator.this.reversed();
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call $m_reversed__java_util_Comparator@java.util.Comparator (local.get $this)))
    (br $return.label)
   )
@@ -612,8 +674,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -632,8 +696,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)(local.get $arg1)))
    (br $return.label)
   )
@@ -651,8 +717,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -670,8 +738,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -689,8 +759,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -708,8 +780,10 @@
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.StringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
+   ;;@ nullability/Nullability.java:87:22
    (local.set $return.value (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -721,19 +795,25 @@
 ;;; void StringComparator.$clinit()
 (func $$clinit__void@nullability.Nullability.StringComparator
  (block $return.label
+  ;;@ nullability/Nullability.java:87:22
   (block
    ;; if (nullability.Nullability.StringComparator.$initialized) return;
+   ;;@ nullability/Nullability.java:87:22
    (if (global.get $f_$initialized__nullability_Nullability_StringComparator)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:87:22
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.StringComparator.$initialized = true);
+   ;;@ nullability/Nullability.java:87:22
    (global.set $f_$initialized__nullability_Nullability_StringComparator (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nullability/Nullability.java:87:22
    (call $$clinit__void@java.lang.Object )
    ;; java.util.Comparator.$clinit();
+   ;;@ nullability/Nullability.java:87:22
    (call $$clinit__void@java.util.Comparator )
   )
  )
@@ -784,10 +864,13 @@
  (param $this (ref null $nullability.Nullability.NullableStringComparator))
  (result (ref null $nullability.Nullability.NullableStringComparator))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; nullability.Nullability.NullableStringComparator.$clinit();
+   ;;@ nullability/Nullability.java:95:22
    (call $$clinit__void@nullability.Nullability.NullableStringComparator )
    ;; Object.this.Object.<init>();
+   ;;@ nullability/Nullability.java:95:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -804,8 +887,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:97:15
   (block
    ;; return 0;
+   ;;@ nullability/Nullability.java:98:6
    (local.set $return.value (i32.const 0))
    (br $return.label)
   )
@@ -824,8 +909,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return NullableStringComparator.this.compare(((String) arg0),((String) arg1));
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $nullability.Nullability.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.NullableStringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -842,8 +929,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return Comparator.this.reversed();
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call $m_reversed__java_util_Comparator@java.util.Comparator (local.get $this)))
    (br $return.label)
   )
@@ -861,8 +950,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -881,8 +972,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)(local.get $arg1)))
    (br $return.label)
   )
@@ -900,8 +993,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -919,8 +1014,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -938,8 +1035,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -957,8 +1056,10 @@
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
+   ;;@ nullability/Nullability.java:95:22
    (local.set $return.value (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -970,19 +1071,25 @@
 ;;; void NullableStringComparator.$clinit()
 (func $$clinit__void@nullability.Nullability.NullableStringComparator
  (block $return.label
+  ;;@ nullability/Nullability.java:95:22
   (block
    ;; if (nullability.Nullability.NullableStringComparator.$initialized) return;
+   ;;@ nullability/Nullability.java:95:22
    (if (global.get $f_$initialized__nullability_Nullability_NullableStringComparator)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:95:22
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.NullableStringComparator.$initialized = true);
+   ;;@ nullability/Nullability.java:95:22
    (global.set $f_$initialized__nullability_Nullability_NullableStringComparator (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nullability/Nullability.java:95:22
    (call $$clinit__void@java.lang.Object )
    ;; java.util.Comparator.$clinit();
+   ;;@ nullability/Nullability.java:95:22
    (call $$clinit__void@java.util.Comparator )
   )
  )
@@ -1014,15 +1121,19 @@
 ;;; void NullableTemplatedReturn.$clinit()
 (func $$clinit__void@nullability.Nullability.NullableTemplatedReturn
  (block $return.label
+  ;;@ nullability/Nullability.java:102:12
   (block
    ;; if (nullability.Nullability.NullableTemplatedReturn.$initialized) return;
+   ;;@ nullability/Nullability.java:102:12
    (if (global.get $f_$initialized__nullability_Nullability_NullableTemplatedReturn)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:102:12
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.NullableTemplatedReturn.$initialized = true);
+   ;;@ nullability/Nullability.java:102:12
    (global.set $f_$initialized__nullability_Nullability_NullableTemplatedReturn (i32.const 1))
   )
  )
@@ -1064,10 +1175,13 @@
  (param $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (result (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (block $return.label
+  ;;@ nullability/Nullability.java:107:22
   (block
    ;; nullability.Nullability.NullableTemplatedReturnOverride.$clinit();
+   ;;@ nullability/Nullability.java:107:22
    (call $$clinit__void@nullability.Nullability.NullableTemplatedReturnOverride )
    ;; Object.this.Object.<init>();
+   ;;@ nullability/Nullability.java:107:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -1082,8 +1196,10 @@
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableTemplatedReturnOverride.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:110:18
   (block
    ;; return javaemul.internal.StringPool.$getString_|foo|();
+   ;;@ nullability/Nullability.java:111:6
    (local.set $return.value (call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -1100,8 +1216,10 @@
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.Nullability.NullableTemplatedReturnOverride.rtt)))
  (block $return.label
+  ;;@ nullability/Nullability.java:107:22
   (block
    ;; return NullableTemplatedReturnOverride.this.foo();
+   ;;@ nullability/Nullability.java:107:22
    (local.set $return.value (call_ref (local.get $this)(struct.get $nullability.Nullability.NullableTemplatedReturnOverride.vtable $m_foo__java_lang_String (struct.get $nullability.Nullability.NullableTemplatedReturnOverride $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -1113,17 +1231,22 @@
 ;;; void NullableTemplatedReturnOverride.$clinit()
 (func $$clinit__void@nullability.Nullability.NullableTemplatedReturnOverride
  (block $return.label
+  ;;@ nullability/Nullability.java:107:22
   (block
    ;; if (nullability.Nullability.NullableTemplatedReturnOverride.$initialized) return;
+   ;;@ nullability/Nullability.java:107:22
    (if (global.get $f_$initialized__nullability_Nullability_NullableTemplatedReturnOverride)
     (then
      ;; return;
+     ;;@ nullability/Nullability.java:107:22
      (br $return.label)
     )
    )
    ;; (nullability.Nullability.NullableTemplatedReturnOverride.$initialized = true);
+   ;;@ nullability/Nullability.java:107:22
    (global.set $f_$initialized__nullability_Nullability_NullableTemplatedReturnOverride (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nullability/Nullability.java:107:22
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -1165,10 +1288,13 @@
  (param $this (ref null $nullability.subpackage.ClassInSubpackage))
  (result (ref null $nullability.subpackage.ClassInSubpackage))
  (block $return.label
+  ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
   (block
    ;; nullability.subpackage.ClassInSubpackage.$clinit();
+   ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
    (call $$clinit__void@nullability.subpackage.ClassInSubpackage )
    ;; Object.this.Object.<init>();
+   ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -1180,10 +1306,13 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (block $return.label
+  ;;@ nullability/subpackage/ClassInSubpackage.java:21:23
   (block
    ;; nullability.subpackage.ClassInSubpackage.$clinit();
+   ;;@ nullability/subpackage/ClassInSubpackage.java:21:23
    (call $$clinit__void@nullability.subpackage.ClassInSubpackage )
    ;; return null;
+   ;;@ nullability/subpackage/ClassInSubpackage.java:22:4
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
   )
@@ -1196,10 +1325,13 @@
  (result (ref null $java.lang.String))
  (local $return.value (ref null $java.lang.String))
  (block $return.label
+  ;;@ nullability/subpackage/ClassInSubpackage.java:26:23
   (block
    ;; nullability.subpackage.ClassInSubpackage.$clinit();
+   ;;@ nullability/subpackage/ClassInSubpackage.java:26:23
    (call $$clinit__void@nullability.subpackage.ClassInSubpackage )
    ;; return javaemul.internal.StringPool.$getString_|Hello|();
+   ;;@ nullability/subpackage/ClassInSubpackage.java:27:4
    (local.set $return.value (call $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -1210,17 +1342,22 @@
 ;;; void ClassInSubpackage.$clinit()
 (func $$clinit__void@nullability.subpackage.ClassInSubpackage
  (block $return.label
+  ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
   (block
    ;; if (nullability.subpackage.ClassInSubpackage.$initialized) return;
+   ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
    (if (global.get $f_$initialized__nullability_subpackage_ClassInSubpackage)
     (then
      ;; return;
+     ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
      (br $return.label)
     )
    )
    ;; (nullability.subpackage.ClassInSubpackage.$initialized = true);
+   ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
    (global.set $f_$initialized__nullability_subpackage_ClassInSubpackage (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nullability/subpackage/ClassInSubpackage.java:20:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -1345,7 +1482,7 @@
   (ref.func $m_subList__int__int__java_util_List@java.util.AbstractList)
   (rtt.canon $java.util.List.vtable)
  ))
- (array.set $itable (global.get $nullability.Nullability.StringList.itable) (i32.const 2)
+ (array.set $itable (global.get $nullability.Nullability.StringList.itable) (i32.const 1)
  (struct.new_with_rtt $java.util.Collection.vtable
   (ref.func $m_add__java_lang_Object__boolean@java.util.ArrayList)
   (ref.func $m_addAll__java_util_Collection__boolean@java.util.ArrayList)
@@ -1365,7 +1502,7 @@
   (ref.func $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object@java.util.ArrayList)
   (rtt.canon $java.util.Collection.vtable)
  ))
- (array.set $itable (global.get $nullability.Nullability.StringList.itable) (i32.const 1)
+ (array.set $itable (global.get $nullability.Nullability.StringList.itable) (i32.const 2)
  (struct.new_with_rtt $java.lang.Iterable.vtable
   (ref.func $m_forEach__java_util_function_Consumer__void@java.util.ArrayList)
   (ref.func $m_iterator__java_util_Iterator@java.util.ArrayList)

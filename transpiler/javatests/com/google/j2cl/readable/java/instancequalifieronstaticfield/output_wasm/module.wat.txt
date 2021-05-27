@@ -24,10 +24,13 @@
  (param $this (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (result (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (block $return.label
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
   (block
    ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
    (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
    ;; Object.this.Object.<init>();
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -39,10 +42,13 @@
  (result i32)
  (local $return.value i32)
  (block $return.label
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:22:20
   (block
    ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:22:20
    (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
    ;; return (instancequalifieronstaticfield.InstanceQualifiers.$clinit(),instancequalifieronstaticfield.InstanceQualifiers.staticField);
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:23:4
    (local.set $return.value (block (result i32)
     (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
     (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers)
@@ -58,10 +64,13 @@
  (result (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (local $return.value (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (block $return.label
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:26:35
   (block
    ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:26:35
    (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
    ;; return null;
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:27:4
    (local.set $return.value (ref.null $instancequalifieronstaticfield.InstanceQualifiers))
    (br $return.label)
   )
@@ -75,54 +84,75 @@
  (local $main (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  (local $i i32)
  (block $return.label
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:30:21
   (block
    ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:30:21
    (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
    ;; InstanceQualifiers main = new InstanceQualifiers.<init>();
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:31:4
    
    (local.set $main (call $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable) (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable) (i32.const 0) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
    ;; int i = 0;
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:32:4
    
    (local.set $i (i32.const 0))
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:34:4
    (block
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:35:6
     (block
      ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:35:6
      (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
      ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = 100);
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:35:6
      (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 100))
     )
    )
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:38:4
    (block
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:39:6
     (block
      ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:39:6
      (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
      ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = 100);
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:39:6
      (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 100))
     )
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:40:6
     (block
      ;; instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers();
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:40:6
      (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:40:6
      (block
       ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+      ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:40:6
       (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
       ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = 300);
+      ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:40:6
       (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 300))
      )
     )
    )
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:43:4
    (block
     ;; (i = (main,instancequalifieronstaticfield.InstanceQualifiers.$clinit(),instancequalifieronstaticfield.InstanceQualifiers.staticField));
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:44:6
     (local.set $i (block (result i32)
      (drop (local.get $main))
      (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
      (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers)
     ))
     ;; (i = (main,instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()));
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:45:6
     (local.set $i (block (result i32)
      (drop (local.get $main))
      (call $m_getStaticValue__int@instancequalifieronstaticfield.InstanceQualifiers )
     ))
     ;; (i = (main,instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers(),instancequalifieronstaticfield.InstanceQualifiers.$clinit(),instancequalifieronstaticfield.InstanceQualifiers.staticField));
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:46:6
     (local.set $i (block (result i32)
      (drop (local.get $main))
      (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
@@ -130,23 +160,32 @@
      (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers)
     ))
    )
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:49:4
    (block
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:50:6
     (block
      ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:50:6
      (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
      ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = ((instancequalifieronstaticfield.InstanceQualifiers.$clinit(),instancequalifieronstaticfield.InstanceQualifiers.staticField) + 100));
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:50:6
      (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.add (block (result i32)
       (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
       (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers)
      ) (i32.const 100)))
     )
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:51:6
     (block
      ;; instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers();
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:51:6
      (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:51:6
      (block
       ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+      ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:51:6
       (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
       ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = ((instancequalifieronstaticfield.InstanceQualifiers.$clinit(),instancequalifieronstaticfield.InstanceQualifiers.staticField) + 100));
+      ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:51:6
       (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.add (block (result i32)
        (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
        (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers)
@@ -154,16 +193,23 @@
      )
     )
    )
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:54:4
    (block
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
     (block
      ;; instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers();
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
      (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
      ;; instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers();
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
      (drop (call $m_getStaticInstanceQualifiers__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
      (block
       ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+      ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
       (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
       ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = ((instancequalifieronstaticfield.InstanceQualifiers.$clinit(),instancequalifieronstaticfield.InstanceQualifiers.staticField) + (main,instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers(),instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers(),instancequalifieronstaticfield.InstanceQualifiers.getStaticValue())));
+      ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:55:6
       (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.add (block (result i32)
        (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
        (global.get $f_staticField__instancequalifieronstaticfield_InstanceQualifiers)
@@ -183,28 +229,39 @@
 ;;; void InstanceQualifiers.$clinit()
 (func $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers
  (block $return.label
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
   (block
    ;; if (instancequalifieronstaticfield.InstanceQualifiers.$initialized) return;
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
    (if (global.get $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers)
     (then
      ;; return;
+     ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
      (br $return.label)
     )
    )
    ;; (instancequalifieronstaticfield.InstanceQualifiers.$initialized = true);
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
    (global.set $f_$initialized__instancequalifieronstaticfield_InstanceQualifiers (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
    (call $$clinit__void@java.lang.Object )
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:19:2
    (block
     ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:19:2
     (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
     ;; (instancequalifieronstaticfield.InstanceQualifiers.staticField = 100);
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:19:2
     (global.set $f_staticField__instancequalifieronstaticfield_InstanceQualifiers (i32.const 100))
    )
+   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:20:2
    (block
     ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:20:2
     (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
     ;; (instancequalifieronstaticfield.InstanceQualifiers.sideEffectCount = 0);
+    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:20:2
     (global.set $f_sideEffectCount__instancequalifieronstaticfield_InstanceQualifiers (i32.const 0))
    )
   )

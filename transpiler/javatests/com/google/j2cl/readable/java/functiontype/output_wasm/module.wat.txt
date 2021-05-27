@@ -14,15 +14,19 @@
 ;;; void Function.$clinit()
 (func $$clinit__void@functiontype.Function
  (block $return.label
+  ;;@ functiontype/FunctionImpl.java:18:10
   (block
    ;; if (functiontype.Function.$initialized) return;
+   ;;@ functiontype/FunctionImpl.java:18:10
    (if (global.get $f_$initialized__functiontype_Function)
     (then
      ;; return;
+     ;;@ functiontype/FunctionImpl.java:18:10
      (br $return.label)
     )
    )
    ;; (functiontype.Function.$initialized = true);
+   ;;@ functiontype/FunctionImpl.java:18:10
    (global.set $f_$initialized__functiontype_Function (i32.const 1))
   )
  )
@@ -63,10 +67,13 @@
  (param $this (ref null $functiontype.FunctionImpl))
  (result (ref null $functiontype.FunctionImpl))
  (block $return.label
+  ;;@ functiontype/FunctionImpl.java:20:13
   (block
    ;; functiontype.FunctionImpl.$clinit();
+   ;;@ functiontype/FunctionImpl.java:20:13
    (call $$clinit__void@functiontype.FunctionImpl )
    ;; Object.this.Object.<init>();
+   ;;@ functiontype/FunctionImpl.java:20:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -80,6 +87,7 @@
  (local $this (ref null $functiontype.FunctionImpl))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $functiontype.FunctionImpl.rtt)))
  (block $return.label
+  ;;@ functiontype/FunctionImpl.java:21:14
   (block
   )
  )
@@ -89,17 +97,22 @@
 ;;; void FunctionImpl.$clinit()
 (func $$clinit__void@functiontype.FunctionImpl
  (block $return.label
+  ;;@ functiontype/FunctionImpl.java:20:13
   (block
    ;; if (functiontype.FunctionImpl.$initialized) return;
+   ;;@ functiontype/FunctionImpl.java:20:13
    (if (global.get $f_$initialized__functiontype_FunctionImpl)
     (then
      ;; return;
+     ;;@ functiontype/FunctionImpl.java:20:13
      (br $return.label)
     )
    )
    ;; (functiontype.FunctionImpl.$initialized = true);
+   ;;@ functiontype/FunctionImpl.java:20:13
    (global.set $f_$initialized__functiontype_FunctionImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ functiontype/FunctionImpl.java:20:13
    (call $$clinit__void@java.lang.Object )
   )
  )

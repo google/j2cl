@@ -29,10 +29,13 @@
  (param $this (ref null $jsmethodoverride.Parent))
  (result (ref null $jsmethodoverride.Parent))
  (block $return.label
+  ;;@ jsmethodoverride/Child.java:21:6
   (block
    ;; jsmethodoverride.Parent.$clinit();
+   ;;@ jsmethodoverride/Child.java:21:6
    (call $$clinit__void@jsmethodoverride.Parent )
    ;; Object.this.Object.<init>();
+   ;;@ jsmethodoverride/Child.java:21:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -45,6 +48,7 @@
  (local $this (ref null $jsmethodoverride.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
  (block $return.label
+  ;;@ jsmethodoverride/Child.java:23:14
   (block
   )
  )
@@ -54,17 +58,22 @@
 ;;; void Parent.$clinit()
 (func $$clinit__void@jsmethodoverride.Parent
  (block $return.label
+  ;;@ jsmethodoverride/Child.java:21:6
   (block
    ;; if (jsmethodoverride.Parent.$initialized) return;
+   ;;@ jsmethodoverride/Child.java:21:6
    (if (global.get $f_$initialized__jsmethodoverride_Parent)
     (then
      ;; return;
+     ;;@ jsmethodoverride/Child.java:21:6
      (br $return.label)
     )
    )
    ;; (jsmethodoverride.Parent.$initialized = true);
+   ;;@ jsmethodoverride/Child.java:21:6
    (global.set $f_$initialized__jsmethodoverride_Parent (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsmethodoverride/Child.java:21:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -107,10 +116,13 @@
  (param $this (ref null $jsmethodoverride.Child))
  (result (ref null $jsmethodoverride.Child))
  (block $return.label
+  ;;@ jsmethodoverride/Child.java:27:13
   (block
    ;; jsmethodoverride.Child.$clinit();
+   ;;@ jsmethodoverride/Child.java:27:13
    (call $$clinit__void@jsmethodoverride.Child )
    ;; Parent.this.Parent.<init>();
+   ;;@ jsmethodoverride/Child.java:27:13
    (drop (call $m_<init>__void_$pp_jsmethodoverride@jsmethodoverride.Parent (local.get $this)))
   )
  )
@@ -123,6 +135,7 @@
  (local $this (ref null $jsmethodoverride.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
  (block $return.label
+  ;;@ jsmethodoverride/Child.java:29:14
   (block
   )
  )
@@ -132,17 +145,22 @@
 ;;; void Child.$clinit()
 (func $$clinit__void@jsmethodoverride.Child
  (block $return.label
+  ;;@ jsmethodoverride/Child.java:27:13
   (block
    ;; if (jsmethodoverride.Child.$initialized) return;
+   ;;@ jsmethodoverride/Child.java:27:13
    (if (global.get $f_$initialized__jsmethodoverride_Child)
     (then
      ;; return;
+     ;;@ jsmethodoverride/Child.java:27:13
      (br $return.label)
     )
    )
    ;; (jsmethodoverride.Child.$initialized = true);
+   ;;@ jsmethodoverride/Child.java:27:13
    (global.set $f_$initialized__jsmethodoverride_Child (i32.const 1))
    ;; jsmethodoverride.Parent.$clinit();
+   ;;@ jsmethodoverride/Child.java:27:13
    (call $$clinit__void@jsmethodoverride.Parent )
   )
  )

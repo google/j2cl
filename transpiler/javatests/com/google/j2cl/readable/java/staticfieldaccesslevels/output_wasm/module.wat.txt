@@ -27,10 +27,13 @@
  (param $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (result (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (block $return.label
+  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
   (block
    ;; staticfieldaccesslevels.StaticFieldAccessLevels.$clinit();
+   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
    (call $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels )
    ;; Object.this.Object.<init>();
+   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -45,8 +48,10 @@
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
  (block $return.label
+  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:24:13
   (block
    ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? ((staticfieldaccesslevels.StaticFieldAccessLevels.$clinit(),staticfieldaccesslevels.StaticFieldAccessLevels.a)) : ((staticfieldaccesslevels.StaticFieldAccessLevels.$clinit(),staticfieldaccesslevels.StaticFieldAccessLevels.d));
+   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:25:4
    (local.set $return.value (if (result i32) (global.get $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_) (then (block (result i32)
     (call $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels )
     (global.get $f_a__staticfieldaccesslevels_StaticFieldAccessLevels)
@@ -64,17 +69,22 @@
 ;;; void StaticFieldAccessLevels.$clinit()
 (func $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels
  (block $return.label
+  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
   (block
    ;; if (staticfieldaccesslevels.StaticFieldAccessLevels.$initialized) return;
+   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
    (if (global.get $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels)
     (then
      ;; return;
+     ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
      (br $return.label)
     )
    )
    ;; (staticfieldaccesslevels.StaticFieldAccessLevels.$initialized = true);
+   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
    (global.set $f_$initialized__staticfieldaccesslevels_StaticFieldAccessLevels (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

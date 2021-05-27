@@ -24,10 +24,13 @@
  (param $this (ref null $staticfieldinitializer.StaticFieldInitializer))
  (result (ref null $staticfieldinitializer.StaticFieldInitializer))
  (block $return.label
+  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (block
    ;; staticfieldinitializer.StaticFieldInitializer.$clinit();
+   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
    (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
    ;; Object.this.Object.<init>();
+   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -37,28 +40,39 @@
 ;;; void StaticFieldInitializer.$clinit()
 (func $$clinit__void@staticfieldinitializer.StaticFieldInitializer
  (block $return.label
+  ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (block
    ;; if (staticfieldinitializer.StaticFieldInitializer.$initialized) return;
+   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
    (if (global.get $f_$initialized__staticfieldinitializer_StaticFieldInitializer)
     (then
      ;; return;
+     ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
      (br $return.label)
     )
    )
    ;; (staticfieldinitializer.StaticFieldInitializer.$initialized = true);
+   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
    (global.set $f_$initialized__staticfieldinitializer_StaticFieldInitializer (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
    (call $$clinit__void@java.lang.Object )
+   ;;@ staticfieldinitializer/StaticFieldInitializer.java:19:2
    (block
     ;; staticfieldinitializer.StaticFieldInitializer.$clinit();
+    ;;@ staticfieldinitializer/StaticFieldInitializer.java:19:2
     (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
     ;; (staticfieldinitializer.StaticFieldInitializer.a = 2);
+    ;;@ staticfieldinitializer/StaticFieldInitializer.java:19:2
     (global.set $f_a__staticfieldinitializer_StaticFieldInitializer (i32.const 2))
    )
+   ;;@ staticfieldinitializer/StaticFieldInitializer.java:20:2
    (block
     ;; staticfieldinitializer.StaticFieldInitializer.$clinit();
+    ;;@ staticfieldinitializer/StaticFieldInitializer.java:20:2
     (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
     ;; (staticfieldinitializer.StaticFieldInitializer.b = ((staticfieldinitializer.StaticFieldInitializer.$clinit(),staticfieldinitializer.StaticFieldInitializer.a) * 4));
+    ;;@ staticfieldinitializer/StaticFieldInitializer.java:20:2
     (global.set $f_b__staticfieldinitializer_StaticFieldInitializer (i32.mul (block (result i32)
      (call $$clinit__void@staticfieldinitializer.StaticFieldInitializer )
      (global.get $f_a__staticfieldinitializer_StaticFieldInitializer)

@@ -88,8 +88,8 @@ public class OutputGeneratorStage {
         NativeJavaScriptFile.getMap(nativeJavaScriptFiles, problems);
     LibraryInfoBuilder libraryInfoBuilder = new LibraryInfoBuilder();
 
-    for (CompilationUnit j2clCompilationUnit : library.getCompilationUnits()) {
-      for (Type type : j2clCompilationUnit.getTypes()) {
+    for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
+      for (Type type : compilationUnit.getTypes()) {
         List<Import> imports = ImportGatherer.gatherImports(type);
         JavaScriptImplGenerator jsImplGenerator =
             new JavaScriptImplGenerator(problems, type, imports);
@@ -97,7 +97,7 @@ public class OutputGeneratorStage {
         String typeRelativePath = getPackageRelativePath(type.getDeclaration());
 
         NativeJavaScriptFile matchingNativeFile =
-            getMatchingNativeFile(nativeFilesByPath, j2clCompilationUnit, type);
+            getMatchingNativeFile(nativeFilesByPath, compilationUnit, type);
 
         if (matchingNativeFile != null) {
           jsImplGenerator.setNativeSource(matchingNativeFile);
@@ -152,7 +152,7 @@ public class OutputGeneratorStage {
 
         if (shouldGenerateReadableSourceMaps) {
           outputReadableSourceMap(
-              j2clCompilationUnit,
+              compilationUnit,
               type,
               javaScriptImplementationSource,
               jsImplGenerator.getSourceMappings(),
@@ -179,7 +179,7 @@ public class OutputGeneratorStage {
       }
 
       if (!generateKytheIndexingMetadata) {
-        copyJavaSourceToOutput(j2clCompilationUnit);
+        copyJavaSourceToOutput(compilationUnit);
       }
     }
 
@@ -276,10 +276,9 @@ public class OutputGeneratorStage {
    * Copy Java source files to the output. Sourcemaps reference locations in the Java source file,
    * and having it available as output simplifies the process of source debugging in the browser.
    */
-  private void copyJavaSourceToOutput(CompilationUnit j2clUnit) {
-    String relativePath = getPackageRelativePath(j2clUnit);
-    Path absolutePath = outputPath.resolve(relativePath + ".java");
-    copyFile(Paths.get(j2clUnit.getFilePath()), absolutePath);
+  private void copyJavaSourceToOutput(CompilationUnit compilationUnit) {
+    Path absolutePath = outputPath.resolve(compilationUnit.getPackageRelativePath());
+    copyFile(Paths.get(compilationUnit.getFilePath()), absolutePath);
   }
 
   private void copyNativeJsFileToOutput(NativeJavaScriptFile nativeJavaScriptFile) {
@@ -303,12 +302,6 @@ public class OutputGeneratorStage {
   private static String getPackageRelativePath(TypeDeclaration typeDeclaration) {
     return OutputUtils.getPackageRelativePath(
         typeDeclaration.getPackageName(), typeDeclaration.getSimpleBinaryName());
-  }
-
-  /** Returns the relative output path for a given type. */
-  private static String getPackageRelativePath(CompilationUnit compilationUnit) {
-    return OutputUtils.getPackageRelativePath(
-        compilationUnit.getPackageName(), compilationUnit.getName());
   }
 
   private static NativeJavaScriptFile getMatchingNativeFile(

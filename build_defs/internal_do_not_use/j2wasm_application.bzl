@@ -68,7 +68,10 @@ def _impl_j2wasm_application(ctx):
     if ctx.attr.generate_symbol_map:
         symbolmap = ctx.actions.declare_file(ctx.label.name + ".map")
         args.add("--symbolmap", symbolmap.path)
-        outputs = outputs + [symbolmap]
+        sourcemap = ctx.actions.declare_file(ctx.label.name + ".source.map")
+        args.add("--source-map", sourcemap.path)
+        args.add("--source-map-url", "http://localhost:8000/" + ctx.label.name + ".source.map")
+        outputs = outputs + [symbolmap, sourcemap]
 
     ctx.actions.run(
         executable = ctx.executable.binaryen,

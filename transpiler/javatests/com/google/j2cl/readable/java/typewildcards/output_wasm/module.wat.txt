@@ -76,10 +76,13 @@
  (param $this (ref null $typewildcards.GenericType))
  (result (ref null $typewildcards.GenericType))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:21:6
   (block
    ;; typewildcards.GenericType.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:21:6
    (call $$clinit__void@typewildcards.GenericType )
    ;; Object.this.Object.<init>();
+   ;;@ typewildcards/TypeWildCards.java:21:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -89,17 +92,22 @@
 ;;; void GenericType.$clinit()
 (func $$clinit__void@typewildcards.GenericType
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:21:6
   (block
    ;; if (typewildcards.GenericType.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:21:6
    (if (global.get $f_$initialized__typewildcards_GenericType)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:21:6
      (br $return.label)
     )
    )
    ;; (typewildcards.GenericType.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:21:6
    (global.set $f_$initialized__typewildcards_GenericType (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:21:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -147,10 +155,13 @@
  (param $this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:23:13
   (block
    ;; typewildcards.TypeWildCards.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:23:13
    (call $$clinit__void@typewildcards.TypeWildCards )
    ;; Object.this.Object.<init>();
+   ;;@ typewildcards/TypeWildCards.java:23:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -164,6 +175,7 @@
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:24:14
   (block
   )
  )
@@ -177,6 +189,7 @@
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:26:14
   (block
   )
  )
@@ -190,6 +203,7 @@
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:28:14
   (block
   )
  )
@@ -202,12 +216,16 @@
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:30:14
   (block
    ;; TypeWildCards.this.unbounded(new GenericType.<init>());
+   ;;@ typewildcards/TypeWildCards.java:31:4
    (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.itable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.upperBound(new GenericType.<init>());
+   ;;@ typewildcards/TypeWildCards.java:32:4
    (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.itable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.lowerBound(new GenericType.<init>());
+   ;;@ typewildcards/TypeWildCards.java:33:4
    (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.itable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   )
  )
@@ -219,13 +237,17 @@
  (param $t (ref null $typewildcards.TypeWildCards.A))
  (local $i i32)
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:51:35
   (block
    ;; typewildcards.TypeWildCards.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:51:35
    (call $$clinit__void@typewildcards.TypeWildCards )
    ;; int i = t.f;
+   ;;@ typewildcards/TypeWildCards.java:52:4
    
    (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A(local.get $t)))
    ;; t.m();
+   ;;@ typewildcards/TypeWildCards.java:53:4
    (call_ref (local.get $t)(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
   )
  )
@@ -237,19 +259,26 @@
  (local $i i32)
  (local $$qualifier (ref null $java.lang.Object))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:56:39
   (block
    ;; typewildcards.TypeWildCards.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:56:39
    (call $$clinit__void@typewildcards.TypeWildCards )
    ;; int i = t.f;
+   ;;@ typewildcards/TypeWildCards.java:57:4
    
    (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A(local.get $t)))
    ;; t.m();
+   ;;@ typewildcards/TypeWildCards.java:58:4
    (call_ref (local.get $t)(struct.get $typewildcards.TypeWildCards.A.vtable $m_m__void (struct.get $typewildcards.TypeWildCards.A $vtable(local.get $t))))
+   ;;@ typewildcards/TypeWildCards.java:59:4
    (block
     ;; Y $qualifier = ((Y) t);
+    ;;@ typewildcards/TypeWildCards.java:59:4
     
     (local.set $$qualifier (local.get $t))
     ;; $qualifier.n();
+    ;;@ typewildcards/TypeWildCards.java:59:4
     (call_ref (local.get $$qualifier)(struct.get $typewildcards.TypeWildCards.Y.vtable $m_n__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1)) (rtt.canon $typewildcards.TypeWildCards.Y.vtable)) ))
    )
   )
@@ -263,8 +292,10 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:76:32
   (block
    ;; return null;
+   ;;@ typewildcards/TypeWildCards.java:77:4
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -279,8 +310,10 @@
  (result (ref null $java.lang.Object))
  (local $return.value (ref null $java.lang.Object))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:80:29
   (block
    ;; return null;
+   ;;@ typewildcards/TypeWildCards.java:81:4
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -297,14 +330,18 @@
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:84:14
   (block
    ;; List<Element> elements = null;
+   ;;@ typewildcards/TypeWildCards.java:85:4
    
    (local.set $elements (ref.null $java.lang.Object))
    ;; List<SubOtherElement> otherElements = null;
+   ;;@ typewildcards/TypeWildCards.java:86:4
    
    (local.set $otherElements (ref.null $java.lang.Object))
    ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),new $LambdaImplementor$1.<init>());
+   ;;@ typewildcards/TypeWildCards.java:89:4
    
    (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $m_<init>__void@typewildcards.TypeWildCards.$LambdaImplementor$1 (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable) (i32.const 0) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))))
   )
@@ -316,6 +353,7 @@
 (func $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards
  (param $foo (ref null $typewildcards.GenericType))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:100:22
   (block
   )
  )
@@ -327,8 +365,10 @@
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:102:14
   (block
    ;; typewildcards.TypeWildCards.takesRecursiveGeneric(new Foo.<init>(TypeWildCards.this));
+   ;;@ typewildcards/TypeWildCards.java:103:4
    (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.vtable) (global.get $typewildcards.TypeWildCards.Foo.itable) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
   )
  )
@@ -338,17 +378,22 @@
 ;;; void TypeWildCards.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:23:13
   (block
    ;; if (typewildcards.TypeWildCards.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:23:13
    (if (global.get $f_$initialized__typewildcards_TypeWildCards)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:23:13
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:23:13
    (global.set $f_$initialized__typewildcards_TypeWildCards (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:23:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -380,15 +425,19 @@
 ;;; void X.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.X
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:36:20
   (block
    ;; if (typewildcards.TypeWildCards.X.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:36:20
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_X)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:36:20
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.X.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:36:20
    (global.set $f_$initialized__typewildcards_TypeWildCards_X (i32.const 1))
   )
  )
@@ -418,15 +467,19 @@
 ;;; void Y.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.Y
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:40:20
   (block
    ;; if (typewildcards.TypeWildCards.Y.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:40:20
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_Y)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:40:20
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.Y.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:40:20
    (global.set $f_$initialized__typewildcards_TypeWildCards_Y (i32.const 1))
   )
  )
@@ -468,8 +521,10 @@
  (param $this (ref null $typewildcards.TypeWildCards.A))
  (result (ref null $typewildcards.TypeWildCards.A))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:44:23
   (block
    ;; Object.this.Object.<init>();
+   ;;@ typewildcards/TypeWildCards.java:44:23
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -482,6 +537,7 @@
  (local $this (ref null $typewildcards.TypeWildCards.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.A.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:48:16
   (block
   )
  )
@@ -491,17 +547,22 @@
 ;;; void A.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.A
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:44:23
   (block
    ;; if (typewildcards.TypeWildCards.A.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:44:23
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_A)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:44:23
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.A.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:44:23
    (global.set $f_$initialized__typewildcards_TypeWildCards_A (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:44:23
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -533,15 +594,19 @@
 ;;; void IntegerSupplier.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.IntegerSupplier
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:62:19
   (block
    ;; if (typewildcards.TypeWildCards.IntegerSupplier.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:62:19
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_IntegerSupplier)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:62:19
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.IntegerSupplier.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:62:19
    (global.set $f_$initialized__typewildcards_TypeWildCards_IntegerSupplier (i32.const 1))
   )
  )
@@ -571,15 +636,19 @@
 ;;; void HasKey.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.HasKey
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:66:19
   (block
    ;; if (typewildcards.TypeWildCards.HasKey.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:66:19
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_HasKey)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:66:19
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.HasKey.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:66:19
    (global.set $f_$initialized__typewildcards_TypeWildCards_HasKey (i32.const 1))
   )
  )
@@ -621,12 +690,16 @@
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.Element))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:70:24
   (block
    ;; typewildcards.TypeWildCards.Element.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:70:24
    (call $$clinit__void@typewildcards.TypeWildCards.Element )
    ;; (Element.this.this = $outer_this);
+   ;;@ typewildcards/TypeWildCards.java:70:24
    (struct.set $typewildcards.TypeWildCards.Element $$outer_this__typewildcards_TypeWildCards_Element(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ typewildcards/TypeWildCards.java:70:24
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -636,17 +709,22 @@
 ;;; void Element.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.Element
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:70:24
   (block
    ;; if (typewildcards.TypeWildCards.Element.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:70:24
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_Element)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:70:24
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.Element.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:70:24
    (global.set $f_$initialized__typewildcards_TypeWildCards_Element (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:70:24
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -672,12 +750,16 @@
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.OtherElement))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:72:24
   (block
    ;; typewildcards.TypeWildCards.OtherElement.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:72:24
    (call $$clinit__void@typewildcards.TypeWildCards.OtherElement )
    ;; (OtherElement.this.this = $outer_this);
+   ;;@ typewildcards/TypeWildCards.java:72:24
    (struct.set $typewildcards.TypeWildCards.OtherElement $$outer_this__typewildcards_TypeWildCards_OtherElement(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ typewildcards/TypeWildCards.java:72:24
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -687,17 +769,22 @@
 ;;; void OtherElement.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.OtherElement
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:72:24
   (block
    ;; if (typewildcards.TypeWildCards.OtherElement.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:72:24
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_OtherElement)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:72:24
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.OtherElement.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:72:24
    (global.set $f_$initialized__typewildcards_TypeWildCards_OtherElement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:72:24
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -724,12 +811,16 @@
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.SubOtherElement))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:74:24
   (block
    ;; typewildcards.TypeWildCards.SubOtherElement.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:74:24
    (call $$clinit__void@typewildcards.TypeWildCards.SubOtherElement )
    ;; (SubOtherElement.this.this = $outer_this);
+   ;;@ typewildcards/TypeWildCards.java:74:24
    (struct.set $typewildcards.TypeWildCards.SubOtherElement $$outer_this__typewildcards_TypeWildCards_SubOtherElement(local.get $this) (local.get $$outer_this))
    ;; OtherElement.this.OtherElement.<init>($outer_this);
+   ;;@ typewildcards/TypeWildCards.java:74:24
    (drop (call $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.OtherElement (local.get $this)(local.get $$outer_this)))
   )
  )
@@ -739,17 +830,22 @@
 ;;; void SubOtherElement.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.SubOtherElement
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:74:24
   (block
    ;; if (typewildcards.TypeWildCards.SubOtherElement.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:74:24
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_SubOtherElement)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:74:24
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.SubOtherElement.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:74:24
    (global.set $f_$initialized__typewildcards_TypeWildCards_SubOtherElement (i32.const 1))
    ;; typewildcards.TypeWildCards.OtherElement.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:74:24
    (call $$clinit__void@typewildcards.TypeWildCards.OtherElement )
   )
  )
@@ -775,12 +871,16 @@
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.Foo))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:98:8
   (block
    ;; typewildcards.TypeWildCards.Foo.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:98:8
    (call $$clinit__void@typewildcards.TypeWildCards.Foo )
    ;; (Foo.this.this = $outer_this);
+   ;;@ typewildcards/TypeWildCards.java:98:8
    (struct.set $typewildcards.TypeWildCards.Foo $$outer_this__typewildcards_TypeWildCards_Foo(local.get $this) (local.get $$outer_this))
    ;; GenericType.this.GenericType.<init>();
+   ;;@ typewildcards/TypeWildCards.java:98:8
    (drop (call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (local.get $this)))
   )
  )
@@ -790,17 +890,22 @@
 ;;; void Foo.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.Foo
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:98:8
   (block
    ;; if (typewildcards.TypeWildCards.Foo.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:98:8
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_Foo)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:98:8
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.Foo.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:98:8
    (global.set $f_$initialized__typewildcards_TypeWildCards_Foo (i32.const 1))
    ;; typewildcards.GenericType.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:98:8
    (call $$clinit__void@typewildcards.GenericType )
   )
  )
@@ -845,10 +950,13 @@
  (param $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (result (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:92:12
   (block
    ;; typewildcards.TypeWildCards.$LambdaImplementor$1.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (call $$clinit__void@typewildcards.TypeWildCards.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -867,18 +975,24 @@
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:92:12
   (block
    ;; (Object&HasKey&IntegerSupplier) a = ((T) a);
+   ;;@ typewildcards/TypeWildCards.java:92:12
    
    (local.set $a_1 (ref.cast (local.get $a) (global.get $java.lang.Object.rtt)))
+   ;;@ typewildcards/TypeWildCards.java:93:14
    (block
     ;; HasKey $qualifier = ((HasKey) a);
+    ;;@ typewildcards/TypeWildCards.java:93:14
     
     (local.set $$qualifier (local.get $a_1))
     ;; $qualifier.getKey();
+    ;;@ typewildcards/TypeWildCards.java:93:14
     (drop (call_ref (local.get $$qualifier)(struct.get $typewildcards.TypeWildCards.HasKey.vtable $m_getKey__java_lang_String (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1)) (rtt.canon $typewildcards.TypeWildCards.HasKey.vtable)) )))
    )
    ;; return (IntegerSupplier $qualifier = ((IntegerSupplier) a),$qualifier.get());
+   ;;@ typewildcards/TypeWildCards.java:94:14
    (local.set $return.value (block (result (ref null $java.lang.Integer))
     
     (local.set $$qualifier_1 (local.get $a_1))
@@ -900,8 +1014,10 @@
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:92:12
   (block
    ;; return Function.this.andThen(arg0);
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (local.set $return.value (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -919,8 +1035,10 @@
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:92:12
   (block
    ;; return Function.this.compose(arg0);
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (local.set $return.value (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -932,19 +1050,25 @@
 ;;; void $LambdaImplementor$1.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.$LambdaImplementor$1
  (block $return.label
+  ;;@ typewildcards/TypeWildCards.java:92:12
   (block
    ;; if (typewildcards.TypeWildCards.$LambdaImplementor$1.$initialized) return;
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (if (global.get $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1)
     (then
      ;; return;
+     ;;@ typewildcards/TypeWildCards.java:92:12
      (br $return.label)
     )
    )
    ;; (typewildcards.TypeWildCards.$LambdaImplementor$1.$initialized = true);
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (global.set $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (call $$clinit__void@java.lang.Object )
    ;; java.util.function.Function.$clinit();
+   ;;@ typewildcards/TypeWildCards.java:92:12
    (call $$clinit__void@java.util.function.Function )
   )
  )

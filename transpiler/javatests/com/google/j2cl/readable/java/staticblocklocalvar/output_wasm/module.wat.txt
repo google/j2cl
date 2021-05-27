@@ -22,10 +22,13 @@
  (param $this (ref null $staticblocklocalvar.StaticBlockLocalVar))
  (result (ref null $staticblocklocalvar.StaticBlockLocalVar))
  (block $return.label
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
   (block
    ;; staticblocklocalvar.StaticBlockLocalVar.$clinit();
+   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
    (call $$clinit__void@staticblocklocalvar.StaticBlockLocalVar )
    ;; Object.this.Object.<init>();
+   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -36,22 +39,29 @@
 (func $$clinit__void@staticblocklocalvar.StaticBlockLocalVar
  (local $i i32)
  (block $return.label
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
   (block
    ;; if (staticblocklocalvar.StaticBlockLocalVar.$initialized) return;
+   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
    (if (global.get $f_$initialized__staticblocklocalvar_StaticBlockLocalVar)
     (then
      ;; return;
+     ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
      (br $return.label)
     )
    )
    ;; (staticblocklocalvar.StaticBlockLocalVar.$initialized = true);
+   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
    (global.set $f_$initialized__staticblocklocalvar_StaticBlockLocalVar (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
    (call $$clinit__void@java.lang.Object )
    ;; int i = 10;
+   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:21:4
    
    (local.set $i (i32.const 10))
    ;; (i = (i + 20));
+   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:22:4
    (local.set $i (i32.add (local.get $i) (i32.const 20)))
   )
  )

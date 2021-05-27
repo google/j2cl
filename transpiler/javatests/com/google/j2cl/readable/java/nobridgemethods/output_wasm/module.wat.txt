@@ -38,15 +38,19 @@
 ;;; void Entry.$clinit()
 (func $$clinit__void@nobridgemethods.Entry
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:18:10
   (block
    ;; if (nobridgemethods.Entry.$initialized) return;
+   ;;@ nobridgemethods/CharSet.java:18:10
    (if (global.get $f_$initialized__nobridgemethods_Entry)
     (then
      ;; return;
+     ;;@ nobridgemethods/CharSet.java:18:10
      (br $return.label)
     )
    )
    ;; (nobridgemethods.Entry.$initialized = true);
+   ;;@ nobridgemethods/CharSet.java:18:10
    (global.set $f_$initialized__nobridgemethods_Entry (i32.const 1))
   )
  )
@@ -87,10 +91,13 @@
  (param $this (ref null $nobridgemethods.Map))
  (result (ref null $nobridgemethods.Map))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:20:15
   (block
    ;; nobridgemethods.Map.$clinit();
+   ;;@ nobridgemethods/CharSet.java:20:15
    (call $$clinit__void@nobridgemethods.Map )
    ;; Object.this.Object.<init>();
+   ;;@ nobridgemethods/CharSet.java:20:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -100,17 +107,22 @@
 ;;; void Map.$clinit()
 (func $$clinit__void@nobridgemethods.Map
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:20:15
   (block
    ;; if (nobridgemethods.Map.$initialized) return;
+   ;;@ nobridgemethods/CharSet.java:20:15
    (if (global.get $f_$initialized__nobridgemethods_Map)
     (then
      ;; return;
+     ;;@ nobridgemethods/CharSet.java:20:15
      (br $return.label)
     )
    )
    ;; (nobridgemethods.Map.$initialized = true);
+   ;;@ nobridgemethods/CharSet.java:20:15
    (global.set $f_$initialized__nobridgemethods_Map (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nobridgemethods/CharSet.java:20:15
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -136,10 +148,13 @@
  (param $this (ref null $nobridgemethods.TreeMap))
  (result (ref null $nobridgemethods.TreeMap))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:24:6
   (block
    ;; nobridgemethods.TreeMap.$clinit();
+   ;;@ nobridgemethods/CharSet.java:24:6
    (call $$clinit__void@nobridgemethods.TreeMap )
    ;; Map.this.Map.<init>();
+   ;;@ nobridgemethods/CharSet.java:24:6
    (drop (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.Map (local.get $this)))
   )
  )
@@ -155,8 +170,10 @@
  (local $this (ref null $nobridgemethods.TreeMap))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nobridgemethods.TreeMap.rtt)))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:28:23
   (block
    ;; return new InnerEntry.<init>();
+   ;;@ nobridgemethods/CharSet.java:29:4
    (local.set $return.value (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.TreeMap.InnerEntry (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.vtable) (global.get $nobridgemethods.TreeMap.InnerEntry.itable) (i32.const 0) (global.get $nobridgemethods.TreeMap.InnerEntry.rtt))))
    (br $return.label)
   )
@@ -174,8 +191,10 @@
  (local $this (ref null $nobridgemethods.TreeMap))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nobridgemethods.TreeMap.rtt)))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:24:6
   (block
    ;; return TreeMap.this.getCeilingEntry(arg0);
+   ;;@ nobridgemethods/CharSet.java:24:6
    (local.set $return.value (call_ref (local.get $this)(local.get $arg0)(struct.get $nobridgemethods.TreeMap.vtable $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (struct.get $nobridgemethods.TreeMap $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -187,17 +206,22 @@
 ;;; void TreeMap.$clinit()
 (func $$clinit__void@nobridgemethods.TreeMap
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:24:6
   (block
    ;; if (nobridgemethods.TreeMap.$initialized) return;
+   ;;@ nobridgemethods/CharSet.java:24:6
    (if (global.get $f_$initialized__nobridgemethods_TreeMap)
     (then
      ;; return;
+     ;;@ nobridgemethods/CharSet.java:24:6
      (br $return.label)
     )
    )
    ;; (nobridgemethods.TreeMap.$initialized = true);
+   ;;@ nobridgemethods/CharSet.java:24:6
    (global.set $f_$initialized__nobridgemethods_TreeMap (i32.const 1))
    ;; nobridgemethods.Map.$clinit();
+   ;;@ nobridgemethods/CharSet.java:24:6
    (call $$clinit__void@nobridgemethods.Map )
   )
  )
@@ -239,10 +263,13 @@
  (param $this (ref null $nobridgemethods.TreeMap.InnerEntry))
  (result (ref null $nobridgemethods.TreeMap.InnerEntry))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:25:15
   (block
    ;; nobridgemethods.TreeMap.InnerEntry.$clinit();
+   ;;@ nobridgemethods/CharSet.java:25:15
    (call $$clinit__void@nobridgemethods.TreeMap.InnerEntry )
    ;; Object.this.Object.<init>();
+   ;;@ nobridgemethods/CharSet.java:25:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -252,17 +279,22 @@
 ;;; void InnerEntry.$clinit()
 (func $$clinit__void@nobridgemethods.TreeMap.InnerEntry
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:25:15
   (block
    ;; if (nobridgemethods.TreeMap.InnerEntry.$initialized) return;
+   ;;@ nobridgemethods/CharSet.java:25:15
    (if (global.get $f_$initialized__nobridgemethods_TreeMap_InnerEntry)
     (then
      ;; return;
+     ;;@ nobridgemethods/CharSet.java:25:15
      (br $return.label)
     )
    )
    ;; (nobridgemethods.TreeMap.InnerEntry.$initialized = true);
+   ;;@ nobridgemethods/CharSet.java:25:15
    (global.set $f_$initialized__nobridgemethods_TreeMap_InnerEntry (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nobridgemethods/CharSet.java:25:15
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -304,10 +336,13 @@
  (param $this (ref null $nobridgemethods.CharSet))
  (result (ref null $nobridgemethods.CharSet))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:33:13
   (block
    ;; nobridgemethods.CharSet.$clinit();
+   ;;@ nobridgemethods/CharSet.java:33:13
    (call $$clinit__void@nobridgemethods.CharSet )
    ;; Object.this.Object.<init>();
+   ;;@ nobridgemethods/CharSet.java:33:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -319,10 +354,13 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (local $treeMap (ref null $nobridgemethods.TreeMap))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:35:21
   (block
    ;; nobridgemethods.CharSet.$clinit();
+   ;;@ nobridgemethods/CharSet.java:35:21
    (call $$clinit__void@nobridgemethods.CharSet )
    ;; TreeMap<String> treeMap = new $1.<init>();
+   ;;@ nobridgemethods/CharSet.java:36:4
    
    (local.set $treeMap (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.CharSet.1 (struct.new_with_rtt $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.vtable) (global.get $nobridgemethods.CharSet.1.itable) (i32.const 0) (global.get $nobridgemethods.CharSet.1.rtt))))
   )
@@ -332,17 +370,22 @@
 ;;; void CharSet.$clinit()
 (func $$clinit__void@nobridgemethods.CharSet
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:33:13
   (block
    ;; if (nobridgemethods.CharSet.$initialized) return;
+   ;;@ nobridgemethods/CharSet.java:33:13
    (if (global.get $f_$initialized__nobridgemethods_CharSet)
     (then
      ;; return;
+     ;;@ nobridgemethods/CharSet.java:33:13
      (br $return.label)
     )
    )
    ;; (nobridgemethods.CharSet.$initialized = true);
+   ;;@ nobridgemethods/CharSet.java:33:13
    (global.set $f_$initialized__nobridgemethods_CharSet (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ nobridgemethods/CharSet.java:33:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -386,10 +429,13 @@
  (param $this (ref null $nobridgemethods.CharSet.1))
  (result (ref null $nobridgemethods.CharSet.1))
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:36:52
   (block
    ;; nobridgemethods.CharSet.1.$clinit();
+   ;;@ nobridgemethods/CharSet.java:36:52
    (call $$clinit__void@nobridgemethods.CharSet.1 )
    ;; TreeMap.this.TreeMap.<init>();
+   ;;@ nobridgemethods/CharSet.java:36:52
    (drop (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.TreeMap (local.get $this)))
   )
  )
@@ -399,17 +445,22 @@
 ;;; void <anonymous> extends TreeMap<String>.$clinit()
 (func $$clinit__void@nobridgemethods.CharSet.1
  (block $return.label
+  ;;@ nobridgemethods/CharSet.java:36:52
   (block
    ;; if (nobridgemethods.CharSet.1.$initialized) return;
+   ;;@ nobridgemethods/CharSet.java:36:52
    (if (global.get $f_$initialized__nobridgemethods_CharSet_1)
     (then
      ;; return;
+     ;;@ nobridgemethods/CharSet.java:36:52
      (br $return.label)
     )
    )
    ;; (nobridgemethods.CharSet.1.$initialized = true);
+   ;;@ nobridgemethods/CharSet.java:36:52
    (global.set $f_$initialized__nobridgemethods_CharSet_1 (i32.const 1))
    ;; nobridgemethods.TreeMap.$clinit();
+   ;;@ nobridgemethods/CharSet.java:36:52
    (call $$clinit__void@nobridgemethods.TreeMap )
   )
  )

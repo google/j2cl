@@ -22,8 +22,10 @@
  (param $this (ref null $privateconstructor.PrivateConstructor))
  (result (ref null $privateconstructor.PrivateConstructor))
  (block $return.label
+  ;;@ privateconstructor/PrivateConstructor.java:19:10
   (block
    ;; Object.this.Object.<init>();
+   ;;@ privateconstructor/PrivateConstructor.java:19:10
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -33,17 +35,22 @@
 ;;; void PrivateConstructor.$clinit()
 (func $$clinit__void@privateconstructor.PrivateConstructor
  (block $return.label
+  ;;@ privateconstructor/PrivateConstructor.java:18:13
   (block
    ;; if (privateconstructor.PrivateConstructor.$initialized) return;
+   ;;@ privateconstructor/PrivateConstructor.java:18:13
    (if (global.get $f_$initialized__privateconstructor_PrivateConstructor)
     (then
      ;; return;
+     ;;@ privateconstructor/PrivateConstructor.java:18:13
      (br $return.label)
     )
    )
    ;; (privateconstructor.PrivateConstructor.$initialized = true);
+   ;;@ privateconstructor/PrivateConstructor.java:18:13
    (global.set $f_$initialized__privateconstructor_PrivateConstructor (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ privateconstructor/PrivateConstructor.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

@@ -28,10 +28,13 @@
  (param $this (ref null $staticnestedclass.StaticNestedClassParent))
  (result (ref null $staticnestedclass.StaticNestedClassParent))
  (block $return.label
+  ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (block
    ;; staticnestedclass.StaticNestedClassParent.$clinit();
+   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
    (call $$clinit__void@staticnestedclass.StaticNestedClassParent )
    ;; Object.this.Object.<init>();
+   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -41,17 +44,22 @@
 ;;; void StaticNestedClassParent.$clinit()
 (func $$clinit__void@staticnestedclass.StaticNestedClassParent
  (block $return.label
+  ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (block
    ;; if (staticnestedclass.StaticNestedClassParent.$initialized) return;
+   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
    (if (global.get $f_$initialized__staticnestedclass_StaticNestedClassParent)
     (then
      ;; return;
+     ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
      (br $return.label)
     )
    )
    ;; (staticnestedclass.StaticNestedClassParent.$initialized = true);
+   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
    (global.set $f_$initialized__staticnestedclass_StaticNestedClassParent (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -93,10 +101,13 @@
  (param $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (result (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
  (block $return.label
+  ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (block
    ;; staticnestedclass.StaticNestedClassParent.StaticNestedClass.$clinit();
+   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
    (call $$clinit__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass )
    ;; Object.this.Object.<init>();
+   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -106,17 +117,22 @@
 ;;; void StaticNestedClass.$clinit()
 (func $$clinit__void@staticnestedclass.StaticNestedClassParent.StaticNestedClass
  (block $return.label
+  ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (block
    ;; if (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$initialized) return;
+   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
    (if (global.get $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass)
     (then
      ;; return;
+     ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
      (br $return.label)
     )
    )
    ;; (staticnestedclass.StaticNestedClassParent.StaticNestedClass.$initialized = true);
+   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
    (global.set $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
    (call $$clinit__void@java.lang.Object )
   )
  )

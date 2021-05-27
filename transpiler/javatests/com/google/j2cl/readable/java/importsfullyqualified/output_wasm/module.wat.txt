@@ -22,10 +22,13 @@
  (param $this (ref null $importsfullyqualified.ImportsFullyQualified))
  (result (ref null $importsfullyqualified.ImportsFullyQualified))
  (block $return.label
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (block
    ;; importsfullyqualified.ImportsFullyQualified.$clinit();
+   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
    (call $$clinit__void@importsfullyqualified.ImportsFullyQualified )
    ;; Object.this.Object.<init>();
+   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -35,17 +38,22 @@
 ;;; void ImportsFullyQualified.$clinit()
 (func $$clinit__void@importsfullyqualified.ImportsFullyQualified
  (block $return.label
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (block
    ;; if (importsfullyqualified.ImportsFullyQualified.$initialized) return;
+   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
    (if (global.get $f_$initialized__importsfullyqualified_ImportsFullyQualified)
     (then
      ;; return;
+     ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
      (br $return.label)
     )
    )
    ;; (importsfullyqualified.ImportsFullyQualified.$initialized = true);
+   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
    (global.set $f_$initialized__importsfullyqualified_ImportsFullyQualified (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

@@ -22,10 +22,13 @@
  (param $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
  (result (ref null $jstypewithnamespace.JsTypeWithNamespace))
  (block $return.label
+  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (block
    ;; jstypewithnamespace.JsTypeWithNamespace.$clinit();
+   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
    (call $$clinit__void@jstypewithnamespace.JsTypeWithNamespace )
    ;; Object.this.Object.<init>();
+   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -35,17 +38,22 @@
 ;;; void JsTypeWithNamespace.$clinit()
 (func $$clinit__void@jstypewithnamespace.JsTypeWithNamespace
  (block $return.label
+  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (block
    ;; if (jstypewithnamespace.JsTypeWithNamespace.$initialized) return;
+   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
    (if (global.get $f_$initialized__jstypewithnamespace_JsTypeWithNamespace)
     (then
      ;; return;
+     ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
      (br $return.label)
     )
    )
    ;; (jstypewithnamespace.JsTypeWithNamespace.$initialized = true);
+   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
    (global.set $f_$initialized__jstypewithnamespace_JsTypeWithNamespace (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
    (call $$clinit__void@java.lang.Object )
   )
  )

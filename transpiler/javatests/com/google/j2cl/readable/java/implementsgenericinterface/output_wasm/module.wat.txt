@@ -23,15 +23,19 @@
 ;;; void GenericInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterface
  (block $return.label
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
   (block
    ;; if (implementsgenericinterface.GenericInterface.$initialized) return;
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
    (if (global.get $f_$initialized__implementsgenericinterface_GenericInterface)
     (then
      ;; return;
+     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericInterface.$initialized = true);
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
    (global.set $f_$initialized__implementsgenericinterface_GenericInterface (i32.const 1))
   )
  )
@@ -60,15 +64,19 @@
 ;;; void GenericSubInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericSubInterface
  (block $return.label
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
   (block
    ;; if (implementsgenericinterface.GenericSubInterface.$initialized) return;
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
    (if (global.get $f_$initialized__implementsgenericinterface_GenericSubInterface)
     (then
      ;; return;
+     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericSubInterface.$initialized = true);
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
    (global.set $f_$initialized__implementsgenericinterface_GenericSubInterface (i32.const 1))
   )
  )
@@ -108,10 +116,13 @@
  (param $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (result (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (block $return.label
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (block
    ;; implementsgenericinterface.GenericInterfaceGenericImpl.$clinit();
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
    (call $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl )
    ;; Object.this.Object.<init>();
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -121,17 +132,22 @@
 ;;; void GenericInterfaceGenericImpl.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl
  (block $return.label
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (block
    ;; if (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized) return;
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
    (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl)
     (then
      ;; return;
+     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized = true);
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
    (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -173,10 +189,13 @@
  (param $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (result (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (block $return.label
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (block
    ;; implementsgenericinterface.GenericInterfaceImpl.$clinit();
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
    (call $$clinit__void@implementsgenericinterface.GenericInterfaceImpl )
    ;; Object.this.Object.<init>();
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -186,17 +205,22 @@
 ;;; void GenericInterfaceImpl.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterfaceImpl
  (block $return.label
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (block
    ;; if (implementsgenericinterface.GenericInterfaceImpl.$initialized) return;
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
    (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceImpl)
     (then
      ;; return;
+     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
      (br $return.label)
     )
    )
    ;; (implementsgenericinterface.GenericInterfaceImpl.$initialized = true);
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
    (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
    (call $$clinit__void@java.lang.Object )
   )
  )

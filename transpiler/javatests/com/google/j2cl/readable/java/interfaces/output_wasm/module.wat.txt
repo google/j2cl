@@ -43,10 +43,13 @@
  (param $this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main))
  (block $return.label
+  ;;@ interfaces/Main.java:18:13
   (block
    ;; interfaces.Main.$clinit();
+   ;;@ interfaces/Main.java:18:13
    (call $$clinit__void@interfaces.Main )
    ;; Object.this.Object.<init>();
+   ;;@ interfaces/Main.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -61,17 +64,23 @@
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.rtt)))
  (block $return.label
+  ;;@ interfaces/Main.java:49:7
   (block
    ;; Interface i = new Implementor.<init>(Main.this);
+   ;;@ interfaces/Main.java:50:4
    
    (local.set $i (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (global.get $interfaces.Main.Implementor.itable) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
    ;; i.interfaceMethod();
+   ;;@ interfaces/Main.java:51:4
    (call_ref (local.get $i)(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1)) (rtt.canon $interfaces.Main.Interface.vtable)) ))
    ;; i.defaultMethod(null);
+   ;;@ interfaces/Main.java:52:4
    (call_ref (local.get $i)(ref.null $java.lang.Object)(struct.get $interfaces.Main.Interface.vtable $m_defaultMethod__java_lang_Object__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1)) (rtt.canon $interfaces.Main.Interface.vtable)) ))
    ;; interfaces.Main.Interface.staticInterfaceMethod();
+   ;;@ interfaces/Main.java:53:4
    (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
    ;; int x = ((new Implementor.<init>(Main.this),interfaces.Main.Interface.a) + interfaces.Main.Interface.b);
+   ;;@ interfaces/Main.java:54:4
    
    (local.set $x (i32.add (block (result i32)
     (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (global.get $interfaces.Main.Implementor.itable) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
@@ -85,17 +94,22 @@
 ;;; void Main.$clinit()
 (func $$clinit__void@interfaces.Main
  (block $return.label
+  ;;@ interfaces/Main.java:18:13
   (block
    ;; if (interfaces.Main.$initialized) return;
+   ;;@ interfaces/Main.java:18:13
    (if (global.get $f_$initialized__interfaces_Main)
     (then
      ;; return;
+     ;;@ interfaces/Main.java:18:13
      (br $return.label)
     )
    )
    ;; (interfaces.Main.$initialized = true);
+   ;;@ interfaces/Main.java:18:13
    (global.set $f_$initialized__interfaces_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ interfaces/Main.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -130,8 +144,10 @@
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
+  ;;@ interfaces/Main.java:26:17
   (block
    ;; Interface.this.privateMethod(t);
+   ;;@ interfaces/Main.java:27:6
    (call $m_privateMethod__java_lang_Object__void_$p_interfaces_Main_Interface@interfaces.Main.Interface (local.get $this)(local.get $t))
   )
  )
@@ -143,6 +159,7 @@
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (block $return.label
+  ;;@ interfaces/Main.java:30:17
   (block
   )
  )
@@ -151,8 +168,10 @@
 ;;; void Interface.staticInterfaceMethod()
 (func $m_staticInterfaceMethod__void@interfaces.Main.Interface
  (block $return.label
+  ;;@ interfaces/Main.java:32:16
   (block
    ;; interfaces.Main.Interface.$clinit();
+   ;;@ interfaces/Main.java:32:16
    (call $$clinit__void@interfaces.Main.Interface )
   )
  )
@@ -161,15 +180,19 @@
 ;;; void Interface.$clinit()
 (func $$clinit__void@interfaces.Main.Interface
  (block $return.label
+  ;;@ interfaces/Main.java:20:12
   (block
    ;; if (interfaces.Main.Interface.$initialized) return;
+   ;;@ interfaces/Main.java:20:12
    (if (global.get $f_$initialized__interfaces_Main_Interface)
     (then
      ;; return;
+     ;;@ interfaces/Main.java:20:12
      (br $return.label)
     )
    )
    ;; (interfaces.Main.Interface.$initialized = true);
+   ;;@ interfaces/Main.java:20:12
    (global.set $f_$initialized__interfaces_Main_Interface (i32.const 1))
   )
  )
@@ -201,8 +224,10 @@
  (param $this (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (block $return.label
+  ;;@ interfaces/Main.java:36:17
   (block
    ;; Interface.this.defaultMethod(s);
+   ;;@ interfaces/Main.java:37:6
    (call $m_defaultMethod__java_lang_Object__void@interfaces.Main.Interface (local.get $this)(local.get $s))
   )
  )
@@ -212,17 +237,22 @@
 ;;; void SubInterface.$clinit()
 (func $$clinit__void@interfaces.Main.SubInterface
  (block $return.label
+  ;;@ interfaces/Main.java:35:12
   (block
    ;; if (interfaces.Main.SubInterface.$initialized) return;
+   ;;@ interfaces/Main.java:35:12
    (if (global.get $f_$initialized__interfaces_Main_SubInterface)
     (then
      ;; return;
+     ;;@ interfaces/Main.java:35:12
      (br $return.label)
     )
    )
    ;; (interfaces.Main.SubInterface.$initialized = true);
+   ;;@ interfaces/Main.java:35:12
    (global.set $f_$initialized__interfaces_Main_SubInterface (i32.const 1))
    ;; interfaces.Main.Interface.$clinit();
+   ;;@ interfaces/Main.java:35:12
    (call $$clinit__void@interfaces.Main.Interface )
   )
  )
@@ -267,12 +297,16 @@
  (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.Implementor))
  (block $return.label
+  ;;@ interfaces/Main.java:41:8
   (block
    ;; interfaces.Main.Implementor.$clinit();
+   ;;@ interfaces/Main.java:41:8
    (call $$clinit__void@interfaces.Main.Implementor )
    ;; (Implementor.this.this = $outer_this);
+   ;;@ interfaces/Main.java:41:8
    (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ interfaces/Main.java:41:8
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -285,6 +319,7 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
+  ;;@ interfaces/Main.java:43:16
   (block
   )
  )
@@ -298,8 +333,10 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
+  ;;@ interfaces/Main.java:41:8
   (block
    ;; Implementor.this.defaultMethod(((String) arg0));
+   ;;@ interfaces/Main.java:41:8
    (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $interfaces.Main.Implementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.Implementor $vtable(local.get $this))))
   )
  )
@@ -313,8 +350,10 @@
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
  (block $return.label
+  ;;@ interfaces/Main.java:41:8
   (block
    ;; SubInterface.this.defaultMethod(arg0);
+   ;;@ interfaces/Main.java:41:8
    (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (local.get $this)(local.get $arg0))
   )
  )
@@ -324,21 +363,28 @@
 ;;; void Implementor.$clinit()
 (func $$clinit__void@interfaces.Main.Implementor
  (block $return.label
+  ;;@ interfaces/Main.java:41:8
   (block
    ;; if (interfaces.Main.Implementor.$initialized) return;
+   ;;@ interfaces/Main.java:41:8
    (if (global.get $f_$initialized__interfaces_Main_Implementor)
     (then
      ;; return;
+     ;;@ interfaces/Main.java:41:8
      (br $return.label)
     )
    )
    ;; (interfaces.Main.Implementor.$initialized = true);
+   ;;@ interfaces/Main.java:41:8
    (global.set $f_$initialized__interfaces_Main_Implementor (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ interfaces/Main.java:41:8
    (call $$clinit__void@java.lang.Object )
    ;; interfaces.Main.SubInterface.$clinit();
+   ;;@ interfaces/Main.java:41:8
    (call $$clinit__void@interfaces.Main.SubInterface )
    ;; interfaces.Main.Interface.$clinit();
+   ;;@ interfaces/Main.java:41:8
    (call $$clinit__void@interfaces.Main.Interface )
   )
  )
@@ -384,12 +430,16 @@
  (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.AbstractImplementor))
  (block $return.label
+  ;;@ interfaces/Main.java:47:17
   (block
    ;; interfaces.Main.AbstractImplementor.$clinit();
+   ;;@ interfaces/Main.java:47:17
    (call $$clinit__void@interfaces.Main.AbstractImplementor )
    ;; (AbstractImplementor.this.this = $outer_this);
+   ;;@ interfaces/Main.java:47:17
    (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
+   ;;@ interfaces/Main.java:47:17
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -403,8 +453,10 @@
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
  (block $return.label
+  ;;@ interfaces/Main.java:47:17
   (block
    ;; AbstractImplementor.this.defaultMethod(((String) arg0));
+   ;;@ interfaces/Main.java:47:17
    (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $interfaces.Main.AbstractImplementor.vtable $m_defaultMethod__java_lang_String__void (struct.get $interfaces.Main.AbstractImplementor $vtable(local.get $this))))
   )
  )
@@ -418,8 +470,10 @@
  (local $this (ref null $interfaces.Main.AbstractImplementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.AbstractImplementor.rtt)))
  (block $return.label
+  ;;@ interfaces/Main.java:47:17
   (block
    ;; SubInterface.this.defaultMethod(arg0);
+   ;;@ interfaces/Main.java:47:17
    (call $m_defaultMethod__java_lang_String__void@interfaces.Main.SubInterface (local.get $this)(local.get $arg0))
   )
  )
@@ -429,19 +483,25 @@
 ;;; void AbstractImplementor.$clinit()
 (func $$clinit__void@interfaces.Main.AbstractImplementor
  (block $return.label
+  ;;@ interfaces/Main.java:47:17
   (block
    ;; if (interfaces.Main.AbstractImplementor.$initialized) return;
+   ;;@ interfaces/Main.java:47:17
    (if (global.get $f_$initialized__interfaces_Main_AbstractImplementor)
     (then
      ;; return;
+     ;;@ interfaces/Main.java:47:17
      (br $return.label)
     )
    )
    ;; (interfaces.Main.AbstractImplementor.$initialized = true);
+   ;;@ interfaces/Main.java:47:17
    (global.set $f_$initialized__interfaces_Main_AbstractImplementor (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ interfaces/Main.java:47:17
    (call $$clinit__void@java.lang.Object )
    ;; interfaces.Main.SubInterface.$clinit();
+   ;;@ interfaces/Main.java:47:17
    (call $$clinit__void@interfaces.Main.SubInterface )
   )
  )

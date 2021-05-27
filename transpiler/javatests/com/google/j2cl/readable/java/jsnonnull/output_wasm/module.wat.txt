@@ -64,12 +64,16 @@
  (param $a (ref null $java.lang.String))
  (result (ref null $jsnonnull.Main))
  (block $return.label
+  ;;@ jsnonnull/Main.java:42:9
   (block
    ;; jsnonnull.Main.$clinit();
+   ;;@ jsnonnull/Main.java:42:9
    (call $$clinit__void@jsnonnull.Main )
    ;; Object.this.Object.<init>();
+   ;;@ jsnonnull/Main.java:42:9
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Main.this.$init();
+   ;;@ jsnonnull/Main.java:42:9
    (call $$init__void_$p_jsnonnull_Main@jsnonnull.Main (local.get $this))
   )
  )
@@ -87,8 +91,10 @@
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:45:16
   (block
    ;; return javaemul.internal.StringPool.$getString_||();
+   ;;@ jsnonnull/Main.java:46:4
    (local.set $return.value (call $$getString_||__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -107,8 +113,10 @@
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:49:16
   (block
    ;; return javaemul.internal.StringPool.$getString_||();
+   ;;@ jsnonnull/Main.java:50:4
    (local.set $return.value (call $$getString_||__java_lang_String@javaemul.internal.StringPool ))
    (br $return.label)
   )
@@ -127,8 +135,10 @@
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:54:16
   (block
    ;; return null;
+   ;;@ jsnonnull/Main.java:55:4
    (local.set $return.value (ref.null $java.lang.String))
    (br $return.label)
   )
@@ -144,6 +154,7 @@
  (local $this (ref null $jsnonnull.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:58:14
   (block
   )
  )
@@ -157,38 +168,49 @@
  (local $$array_literal_1 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_2 (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
+  ;;@ jsnonnull/Main.java:26:13
   (block
    ;; (Main.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
+   ;;@ jsnonnull/Main.java:27:2
    (struct.set $jsnonnull.Main $f_f1__jsnonnull_Main_(local.get $this) (call $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool ))
    ;; (Main.this.f2 = null);
+   ;;@ jsnonnull/Main.java:28:2
    (struct.set $jsnonnull.Main $f_f2__jsnonnull_Main_(local.get $this) (ref.null $java.lang.String))
    ;; (Main.this.f4 = new ArrayList.<init>());
+   ;;@ jsnonnull/Main.java:29:2
    (struct.set $jsnonnull.Main $f_f4__jsnonnull_Main_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Main.this.f5 = new ArrayList.<init>());
+   ;;@ jsnonnull/Main.java:30:2
    (struct.set $jsnonnull.Main $f_f5__jsnonnull_Main_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Main.this.f6 = new ArrayList.<init>());
+   ;;@ jsnonnull/Main.java:31:2
    (struct.set $jsnonnull.Main $f_f6__jsnonnull_Main_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    ;; (Main.this.f7 = null);
+   ;;@ jsnonnull/Main.java:32:2
    (struct.set $jsnonnull.Main $f_f7__jsnonnull_Main_(local.get $this) (ref.null $java.lang.Object))
    ;; (Main.this.f8 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ jsnonnull/Main.java:33:2
    (struct.set $jsnonnull.Main $f_f8__jsnonnull_Main_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal)
    ))
    ;; (Main.this.f9 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ jsnonnull/Main.java:35:2
    (struct.set $jsnonnull.Main $f_f9__jsnonnull_Main_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal_1 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal_1)
    ))
    ;; (Main.this.f10 = (String[] $array_literal = new OfObject.<init>(0),$array_literal));
+   ;;@ jsnonnull/Main.java:37:2
    (struct.set $jsnonnull.Main $f_f10__jsnonnull_Main_(local.get $this) (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal_2 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
     (local.get $$array_literal_2)
    ))
    ;; (Main.this.f12 = new ArrayList.<init>());
+   ;;@ jsnonnull/Main.java:39:2
    (struct.set $jsnonnull.Main $f_f12__jsnonnull_Main_(local.get $this) (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
   )
  )
@@ -197,17 +219,22 @@
 ;;; void Main.$clinit()
 (func $$clinit__void@jsnonnull.Main
  (block $return.label
+  ;;@ jsnonnull/Main.java:26:13
   (block
    ;; if (jsnonnull.Main.$initialized) return;
+   ;;@ jsnonnull/Main.java:26:13
    (if (global.get $f_$initialized__jsnonnull_Main)
     (then
      ;; return;
+     ;;@ jsnonnull/Main.java:26:13
      (br $return.label)
     )
    )
    ;; (jsnonnull.Main.$initialized = true);
+   ;;@ jsnonnull/Main.java:26:13
    (global.set $f_$initialized__jsnonnull_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsnonnull/Main.java:26:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -239,15 +266,19 @@
 ;;; void MyFunction.$clinit()
 (func $$clinit__void@jsnonnull.Main.MyFunction
  (block $return.label
+  ;;@ jsnonnull/Main.java:61:12
   (block
    ;; if (jsnonnull.Main.MyFunction.$initialized) return;
+   ;;@ jsnonnull/Main.java:61:12
    (if (global.get $f_$initialized__jsnonnull_Main_MyFunction)
     (then
      ;; return;
+     ;;@ jsnonnull/Main.java:61:12
      (br $return.label)
     )
    )
    ;; (jsnonnull.Main.MyFunction.$initialized = true);
+   ;;@ jsnonnull/Main.java:61:12
    (global.set $f_$initialized__jsnonnull_Main_MyFunction (i32.const 1))
   )
  )
@@ -296,10 +327,13 @@
  (param $this (ref null $jsnonnull.Main.StringComparator))
  (result (ref null $jsnonnull.Main.StringComparator))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; jsnonnull.Main.StringComparator.$clinit();
+   ;;@ jsnonnull/Main.java:66:22
    (call $$clinit__void@jsnonnull.Main.StringComparator )
    ;; Object.this.Object.<init>();
+   ;;@ jsnonnull/Main.java:66:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -316,8 +350,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:68:15
   (block
    ;; return 0;
+   ;;@ jsnonnull/Main.java:69:6
    (local.set $return.value (i32.const 0))
    (br $return.label)
   )
@@ -336,8 +372,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return StringComparator.this.compare(((String) arg0),((String) arg1));
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $jsnonnull.Main.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.StringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -354,8 +392,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return Comparator.this.reversed();
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call $m_reversed__java_util_Comparator@java.util.Comparator (local.get $this)))
    (br $return.label)
   )
@@ -373,8 +413,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -393,8 +435,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)(local.get $arg1)))
    (br $return.label)
   )
@@ -412,8 +456,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -431,8 +477,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -450,8 +498,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -469,8 +519,10 @@
  (local $this (ref null $jsnonnull.Main.StringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
+   ;;@ jsnonnull/Main.java:66:22
    (local.set $return.value (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -482,19 +534,25 @@
 ;;; void StringComparator.$clinit()
 (func $$clinit__void@jsnonnull.Main.StringComparator
  (block $return.label
+  ;;@ jsnonnull/Main.java:66:22
   (block
    ;; if (jsnonnull.Main.StringComparator.$initialized) return;
+   ;;@ jsnonnull/Main.java:66:22
    (if (global.get $f_$initialized__jsnonnull_Main_StringComparator)
     (then
      ;; return;
+     ;;@ jsnonnull/Main.java:66:22
      (br $return.label)
     )
    )
    ;; (jsnonnull.Main.StringComparator.$initialized = true);
+   ;;@ jsnonnull/Main.java:66:22
    (global.set $f_$initialized__jsnonnull_Main_StringComparator (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsnonnull/Main.java:66:22
    (call $$clinit__void@java.lang.Object )
    ;; java.util.Comparator.$clinit();
+   ;;@ jsnonnull/Main.java:66:22
    (call $$clinit__void@java.util.Comparator )
   )
  )
@@ -545,10 +603,13 @@
  (param $this (ref null $jsnonnull.Main.NullableStringComparator))
  (result (ref null $jsnonnull.Main.NullableStringComparator))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; jsnonnull.Main.NullableStringComparator.$clinit();
+   ;;@ jsnonnull/Main.java:74:22
    (call $$clinit__void@jsnonnull.Main.NullableStringComparator )
    ;; Object.this.Object.<init>();
+   ;;@ jsnonnull/Main.java:74:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -565,8 +626,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:76:15
   (block
    ;; return 0;
+   ;;@ jsnonnull/Main.java:77:6
    (local.set $return.value (i32.const 0))
    (br $return.label)
   )
@@ -585,8 +648,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return NullableStringComparator.this.compare(((String) arg0),((String) arg1));
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $jsnonnull.Main.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.NullableStringComparator $vtable(local.get $this)))))
    (br $return.label)
   )
@@ -603,8 +668,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return Comparator.this.reversed();
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call $m_reversed__java_util_Comparator@java.util.Comparator (local.get $this)))
    (br $return.label)
   )
@@ -622,8 +689,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call $m_thenComparing__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -642,8 +711,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return Comparator.this.thenComparing(arg0,arg1);
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)(local.get $arg1)))
    (br $return.label)
   )
@@ -661,8 +732,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return Comparator.this.thenComparing(arg0);
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call $m_thenComparing__java_util_function_Function__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -680,8 +753,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return Comparator.this.thenComparingDouble(arg0);
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -699,8 +774,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return Comparator.this.thenComparingInt(arg0);
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -718,8 +795,10 @@
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; return Comparator.this.thenComparingLong(arg0);
+   ;;@ jsnonnull/Main.java:74:22
    (local.set $return.value (call $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@java.util.Comparator (local.get $this)(local.get $arg0)))
    (br $return.label)
   )
@@ -731,19 +810,25 @@
 ;;; void NullableStringComparator.$clinit()
 (func $$clinit__void@jsnonnull.Main.NullableStringComparator
  (block $return.label
+  ;;@ jsnonnull/Main.java:74:22
   (block
    ;; if (jsnonnull.Main.NullableStringComparator.$initialized) return;
+   ;;@ jsnonnull/Main.java:74:22
    (if (global.get $f_$initialized__jsnonnull_Main_NullableStringComparator)
     (then
      ;; return;
+     ;;@ jsnonnull/Main.java:74:22
      (br $return.label)
     )
    )
    ;; (jsnonnull.Main.NullableStringComparator.$initialized = true);
+   ;;@ jsnonnull/Main.java:74:22
    (global.set $f_$initialized__jsnonnull_Main_NullableStringComparator (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsnonnull/Main.java:74:22
    (call $$clinit__void@java.lang.Object )
    ;; java.util.Comparator.$clinit();
+   ;;@ jsnonnull/Main.java:74:22
    (call $$clinit__void@java.util.Comparator )
   )
  )
@@ -794,10 +879,13 @@
  (param $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (result (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (block $return.label
+  ;;@ jsnonnull/Main.java:81:22
   (block
    ;; jsnonnull.Main.NonNullableStringSubNullableComparator.$clinit();
+   ;;@ jsnonnull/Main.java:81:22
    (call $$clinit__void@jsnonnull.Main.NonNullableStringSubNullableComparator )
    ;; NullableStringComparator.this.NullableStringComparator.<init>();
+   ;;@ jsnonnull/Main.java:81:22
    (drop (call $m_<init>__void@jsnonnull.Main.NullableStringComparator (local.get $this)))
   )
  )
@@ -814,8 +902,10 @@
  (local $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.rtt)))
  (block $return.label
+  ;;@ jsnonnull/Main.java:85:15
   (block
    ;; return 0;
+   ;;@ jsnonnull/Main.java:86:6
    (local.set $return.value (i32.const 0))
    (br $return.label)
   )
@@ -827,17 +917,22 @@
 ;;; void NonNullableStringSubNullableComparator.$clinit()
 (func $$clinit__void@jsnonnull.Main.NonNullableStringSubNullableComparator
  (block $return.label
+  ;;@ jsnonnull/Main.java:81:22
   (block
    ;; if (jsnonnull.Main.NonNullableStringSubNullableComparator.$initialized) return;
+   ;;@ jsnonnull/Main.java:81:22
    (if (global.get $f_$initialized__jsnonnull_Main_NonNullableStringSubNullableComparator)
     (then
      ;; return;
+     ;;@ jsnonnull/Main.java:81:22
      (br $return.label)
     )
    )
    ;; (jsnonnull.Main.NonNullableStringSubNullableComparator.$initialized = true);
+   ;;@ jsnonnull/Main.java:81:22
    (global.set $f_$initialized__jsnonnull_Main_NonNullableStringSubNullableComparator (i32.const 1))
    ;; jsnonnull.Main.NullableStringComparator.$clinit();
+   ;;@ jsnonnull/Main.java:81:22
    (call $$clinit__void@jsnonnull.Main.NullableStringComparator )
   )
  )
@@ -870,15 +965,19 @@
 ;;; void NonNullableTemplatedReturn.$clinit()
 (func $$clinit__void@jsnonnull.Main.NonNullableTemplatedReturn
  (block $return.label
+  ;;@ jsnonnull/Main.java:90:12
   (block
    ;; if (jsnonnull.Main.NonNullableTemplatedReturn.$initialized) return;
+   ;;@ jsnonnull/Main.java:90:12
    (if (global.get $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn)
     (then
      ;; return;
+     ;;@ jsnonnull/Main.java:90:12
      (br $return.label)
     )
    )
    ;; (jsnonnull.Main.NonNullableTemplatedReturn.$initialized = true);
+   ;;@ jsnonnull/Main.java:90:12
    (global.set $f_$initialized__jsnonnull_Main_NonNullableTemplatedReturn (i32.const 1))
   )
  )
@@ -909,15 +1008,19 @@
 ;;; void NonNullableTemplate.$clinit()
 (func $$clinit__void@jsnonnull.Main.NonNullableTemplate
  (block $return.label
+  ;;@ jsnonnull/Main.java:98:12
   (block
    ;; if (jsnonnull.Main.NonNullableTemplate.$initialized) return;
+   ;;@ jsnonnull/Main.java:98:12
    (if (global.get $f_$initialized__jsnonnull_Main_NonNullableTemplate)
     (then
      ;; return;
+     ;;@ jsnonnull/Main.java:98:12
      (br $return.label)
     )
    )
    ;; (jsnonnull.Main.NonNullableTemplate.$initialized = true);
+   ;;@ jsnonnull/Main.java:98:12
    (global.set $f_$initialized__jsnonnull_Main_NonNullableTemplate (i32.const 1))
   )
  )

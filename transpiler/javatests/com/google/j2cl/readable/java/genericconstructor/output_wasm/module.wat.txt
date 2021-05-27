@@ -25,10 +25,13 @@
  (param $t (ref null $java.lang.Object))
  (result (ref null $genericconstructor.GenericConstructor))
  (block $return.label
+  ;;@ genericconstructor/GenericConstructor.java:20:13
   (block
    ;; genericconstructor.GenericConstructor.$clinit();
+   ;;@ genericconstructor/GenericConstructor.java:20:13
    (call $$clinit__void@genericconstructor.GenericConstructor )
    ;; Object.this.Object.<init>();
+   ;;@ genericconstructor/GenericConstructor.java:20:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -41,10 +44,13 @@
  (param $t (ref null $java.lang.Object))
  (result (ref null $genericconstructor.GenericConstructor))
  (block $return.label
+  ;;@ genericconstructor/GenericConstructor.java:23:13
   (block
    ;; genericconstructor.GenericConstructor.$clinit();
+   ;;@ genericconstructor/GenericConstructor.java:23:13
    (call $$clinit__void@genericconstructor.GenericConstructor )
    ;; Object.this.Object.<init>();
+   ;;@ genericconstructor/GenericConstructor.java:23:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -57,10 +63,13 @@
  (local $this (ref null $genericconstructor.GenericConstructor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericconstructor.GenericConstructor.rtt)))
  (block $return.label
+  ;;@ genericconstructor/GenericConstructor.java:25:14
   (block
    ;; new GenericConstructor.<init>(new Exception.<init>(),new Error.<init>());
+   ;;@ genericconstructor/GenericConstructor.java:26:4
    (drop (call $m_<init>__java_lang_Object__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.vtable) (global.get $genericconstructor.GenericConstructor.itable) (i32.const 0) (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (global.get $java.lang.Exception.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))(call $m_<init>__void@java.lang.Error (struct.new_with_rtt $java.lang.Error (global.get $java.lang.Error.vtable) (global.get $java.lang.Error.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))))
    ;; new GenericConstructor.<init>(new Exception.<init>());
+   ;;@ genericconstructor/GenericConstructor.java:27:4
    (drop (call $m_<init>__java_lang_Object__void@genericconstructor.GenericConstructor (struct.new_with_rtt $genericconstructor.GenericConstructor (global.get $genericconstructor.GenericConstructor.vtable) (global.get $genericconstructor.GenericConstructor.itable) (i32.const 0) (global.get $genericconstructor.GenericConstructor.rtt))(call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (global.get $java.lang.Exception.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))))
   )
  )
@@ -70,17 +79,22 @@
 ;;; void GenericConstructor.$clinit()
 (func $$clinit__void@genericconstructor.GenericConstructor
  (block $return.label
+  ;;@ genericconstructor/GenericConstructor.java:18:13
   (block
    ;; if (genericconstructor.GenericConstructor.$initialized) return;
+   ;;@ genericconstructor/GenericConstructor.java:18:13
    (if (global.get $f_$initialized__genericconstructor_GenericConstructor)
     (then
      ;; return;
+     ;;@ genericconstructor/GenericConstructor.java:18:13
      (br $return.label)
     )
    )
    ;; (genericconstructor.GenericConstructor.$initialized = true);
+   ;;@ genericconstructor/GenericConstructor.java:18:13
    (global.set $f_$initialized__genericconstructor_GenericConstructor (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ genericconstructor/GenericConstructor.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

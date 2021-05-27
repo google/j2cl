@@ -22,10 +22,13 @@
  (param $this (ref null $supercalldefault.SuperCallDefault))
  (result (ref null $supercalldefault.SuperCallDefault))
  (block $return.label
+  ;;@ supercalldefault/SuperCallDefault.java:19:9
   (block
    ;; supercalldefault.SuperCallDefault.$clinit();
+   ;;@ supercalldefault/SuperCallDefault.java:19:9
    (call $$clinit__void@supercalldefault.SuperCallDefault )
    ;; Object.this.Object.<init>();
+   ;;@ supercalldefault/SuperCallDefault.java:20:4
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -35,17 +38,22 @@
 ;;; void SuperCallDefault.$clinit()
 (func $$clinit__void@supercalldefault.SuperCallDefault
  (block $return.label
+  ;;@ supercalldefault/SuperCallDefault.java:18:13
   (block
    ;; if (supercalldefault.SuperCallDefault.$initialized) return;
+   ;;@ supercalldefault/SuperCallDefault.java:18:13
    (if (global.get $f_$initialized__supercalldefault_SuperCallDefault)
     (then
      ;; return;
+     ;;@ supercalldefault/SuperCallDefault.java:18:13
      (br $return.label)
     )
    )
    ;; (supercalldefault.SuperCallDefault.$initialized = true);
+   ;;@ supercalldefault/SuperCallDefault.java:18:13
    (global.set $f_$initialized__supercalldefault_SuperCallDefault (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ supercalldefault/SuperCallDefault.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

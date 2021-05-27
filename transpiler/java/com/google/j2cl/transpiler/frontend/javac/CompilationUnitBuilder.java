@@ -678,6 +678,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     int endColumn = javacUnit.getLineMap().getColumnNumber(endCharacterPosition) - 1;
     return SourcePosition.newBuilder()
         .setFilePath(javacUnit.getSourceFile().getName())
+        .setPackageRelativePath(getCurrentCompilationUnit().getPackageRelativePath())
         .setName(name)
         .setStartFilePosition(
             FilePosition.newBuilder()

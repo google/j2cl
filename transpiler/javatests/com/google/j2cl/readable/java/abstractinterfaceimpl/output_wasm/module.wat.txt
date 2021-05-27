@@ -15,15 +15,19 @@
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@abstractinterfaceimpl.MyInterface
  (block $return.label
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
   (block
    ;; if (abstractinterfaceimpl.MyInterface.$initialized) return;
+   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
    (if (global.get $f_$initialized__abstractinterfaceimpl_MyInterface)
     (then
      ;; return;
+     ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
      (br $return.label)
     )
    )
    ;; (abstractinterfaceimpl.MyInterface.$initialized = true);
+   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
    (global.set $f_$initialized__abstractinterfaceimpl_MyInterface (i32.const 1))
   )
  )
@@ -63,10 +67,13 @@
  (param $this (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
  (result (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
  (block $return.label
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
   (block
    ;; abstractinterfaceimpl.AbstractInterfaceImpl.$clinit();
+   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
    (call $$clinit__void@abstractinterfaceimpl.AbstractInterfaceImpl )
    ;; Object.this.Object.<init>();
+   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -76,17 +83,22 @@
 ;;; void AbstractInterfaceImpl.$clinit()
 (func $$clinit__void@abstractinterfaceimpl.AbstractInterfaceImpl
  (block $return.label
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
   (block
    ;; if (abstractinterfaceimpl.AbstractInterfaceImpl.$initialized) return;
+   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
    (if (global.get $f_$initialized__abstractinterfaceimpl_AbstractInterfaceImpl)
     (then
      ;; return;
+     ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
      (br $return.label)
     )
    )
    ;; (abstractinterfaceimpl.AbstractInterfaceImpl.$initialized = true);
+   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
    (global.set $f_$initialized__abstractinterfaceimpl_AbstractInterfaceImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
    (call $$clinit__void@java.lang.Object )
   )
  )

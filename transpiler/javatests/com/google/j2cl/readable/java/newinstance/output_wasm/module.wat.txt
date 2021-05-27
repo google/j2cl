@@ -22,10 +22,13 @@
  (param $this (ref null $newinstance.NewInstanceExpr))
  (result (ref null $newinstance.NewInstanceExpr))
  (block $return.label
+  ;;@ newinstance/NewInstanceExpr.java:18:13
   (block
    ;; newinstance.NewInstanceExpr.$clinit();
+   ;;@ newinstance/NewInstanceExpr.java:18:13
    (call $$clinit__void@newinstance.NewInstanceExpr )
    ;; Object.this.Object.<init>();
+   ;;@ newinstance/NewInstanceExpr.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -37,10 +40,13 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (local $a (ref null $newinstance.NewInstanceExpr))
  (block $return.label
+  ;;@ newinstance/NewInstanceExpr.java:19:21
   (block
    ;; newinstance.NewInstanceExpr.$clinit();
+   ;;@ newinstance/NewInstanceExpr.java:19:21
    (call $$clinit__void@newinstance.NewInstanceExpr )
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
+   ;;@ newinstance/NewInstanceExpr.java:20:4
    
    (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (global.get $newinstance.NewInstanceExpr.itable) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
   )
@@ -50,17 +56,22 @@
 ;;; void NewInstanceExpr.$clinit()
 (func $$clinit__void@newinstance.NewInstanceExpr
  (block $return.label
+  ;;@ newinstance/NewInstanceExpr.java:18:13
   (block
    ;; if (newinstance.NewInstanceExpr.$initialized) return;
+   ;;@ newinstance/NewInstanceExpr.java:18:13
    (if (global.get $f_$initialized__newinstance_NewInstanceExpr)
     (then
      ;; return;
+     ;;@ newinstance/NewInstanceExpr.java:18:13
      (br $return.label)
     )
    )
    ;; (newinstance.NewInstanceExpr.$initialized = true);
+   ;;@ newinstance/NewInstanceExpr.java:18:13
    (global.set $f_$initialized__newinstance_NewInstanceExpr (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ newinstance/NewInstanceExpr.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

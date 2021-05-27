@@ -52,10 +52,13 @@
  (param $this (ref null $collisions.goog))
  (result (ref null $collisions.goog))
  (block $return.label
+  ;;@ collisions/goog.java:23:13
   (block
    ;; collisions.goog.$clinit();
+   ;;@ collisions/goog.java:23:13
    (call $$clinit__void@collisions.goog )
    ;; Object.this.Object.<init>();
+   ;;@ collisions/goog.java:23:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -65,17 +68,22 @@
 ;;; void goog.$clinit()
 (func $$clinit__void@collisions.goog
  (block $return.label
+  ;;@ collisions/goog.java:23:13
   (block
    ;; if (collisions.goog.$initialized) return;
+   ;;@ collisions/goog.java:23:13
    (if (global.get $f_$initialized__collisions_goog)
     (then
      ;; return;
+     ;;@ collisions/goog.java:23:13
      (br $return.label)
     )
    )
    ;; (collisions.goog.$initialized = true);
+   ;;@ collisions/goog.java:23:13
    (global.set $f_$initialized__collisions_goog (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ collisions/goog.java:23:13
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -117,10 +125,13 @@
  (param $this (ref null $collisions.Blah))
  (result (ref null $collisions.Blah))
  (block $return.label
+  ;;@ collisions/goog.java:26:6
   (block
    ;; collisions.Blah.$clinit();
+   ;;@ collisions/goog.java:26:6
    (call $$clinit__void@collisions.Blah )
    ;; Object.this.Object.<init>();
+   ;;@ collisions/goog.java:26:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -139,17 +150,22 @@
 ;;; void Blah.$clinit()
 (func $$clinit__void@collisions.Blah
  (block $return.label
+  ;;@ collisions/goog.java:26:6
   (block
    ;; if (collisions.Blah.$initialized) return;
+   ;;@ collisions/goog.java:26:6
    (if (global.get $f_$initialized__collisions_Blah)
     (then
      ;; return;
+     ;;@ collisions/goog.java:26:6
      (br $return.label)
     )
    )
    ;; (collisions.Blah.$initialized = true);
+   ;;@ collisions/goog.java:26:6
    (global.set $f_$initialized__collisions_Blah (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ collisions/goog.java:26:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -191,10 +207,13 @@
  (param $this (ref null $collisions.foo))
  (result (ref null $collisions.foo))
  (block $return.label
+  ;;@ collisions/goog.java:34:6
   (block
    ;; collisions.foo.$clinit();
+   ;;@ collisions/goog.java:34:6
    (call $$clinit__void@collisions.foo )
    ;; Object.this.Object.<init>();
+   ;;@ collisions/goog.java:34:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -204,17 +223,22 @@
 ;;; void foo.$clinit()
 (func $$clinit__void@collisions.foo
  (block $return.label
+  ;;@ collisions/goog.java:34:6
   (block
    ;; if (collisions.foo.$initialized) return;
+   ;;@ collisions/goog.java:34:6
    (if (global.get $f_$initialized__collisions_foo)
     (then
      ;; return;
+     ;;@ collisions/goog.java:34:6
      (br $return.label)
     )
    )
    ;; (collisions.foo.$initialized = true);
+   ;;@ collisions/goog.java:34:6
    (global.set $f_$initialized__collisions_foo (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ collisions/goog.java:34:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -256,12 +280,16 @@
  (param $this (ref null $collisions.bar))
  (result (ref null $collisions.bar))
  (block $return.label
+  ;;@ collisions/goog.java:36:6
   (block
    ;; collisions.bar.$clinit();
+   ;;@ collisions/goog.java:36:6
    (call $$clinit__void@collisions.bar )
    ;; Object.this.Object.<init>();
+   ;;@ collisions/goog.java:36:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; bar.this.$init();
+   ;;@ collisions/goog.java:36:6
    (call $$init__void_$p_collisions_bar@collisions.bar (local.get $this))
   )
  )
@@ -279,23 +307,32 @@
  (local $delete i32)
  (local $undefined i32)
  (block $return.label
+  ;;@ collisions/goog.java:36:6
   (block
    ;; int foo,int bar,int goog,int flip,int window;
+   ;;@ collisions/goog.java:38:4
    
    ;; collisions.Blah.m();
+   ;;@ collisions/goog.java:39:4
    (call $m_m__void@collisions.Blah )
    ;; collisions.Blah.getN();
+   ;;@ collisions/goog.java:40:4
    (drop (call $m_getN__double@collisions.Blah ))
    ;; new Blah.<init>();
+   ;;@ collisions/goog.java:41:4
    (drop (call $m_<init>__void_$pp_collisions@collisions.Blah (struct.new_with_rtt $collisions.Blah (global.get $collisions.Blah.vtable) (global.get $collisions.Blah.itable) (i32.const 0) (global.get $collisions.Blah.rtt))))
    ;; new goog.<init>();
+   ;;@ collisions/goog.java:42:4
    (drop (call $m_<init>__void@collisions.goog (struct.new_with_rtt $collisions.goog (global.get $collisions.goog.vtable) (global.get $collisions.goog.itable) (i32.const 0) (global.get $collisions.goog.rtt))))
    ;; new foo.<init>();
+   ;;@ collisions/goog.java:43:4
    (drop (call $m_<init>__void_$pp_collisions@collisions.foo (struct.new_with_rtt $collisions.foo (global.get $collisions.foo.vtable) (global.get $collisions.foo.itable) (i32.const 0) (global.get $collisions.foo.rtt))))
    ;; int delete = 1;
+   ;;@ collisions/goog.java:46:4
    
    (local.set $delete (i32.const 1))
    ;; int undefined = 3;
+   ;;@ collisions/goog.java:47:4
    
    (local.set $undefined (i32.const 3))
   )
@@ -305,17 +342,22 @@
 ;;; void bar.$clinit()
 (func $$clinit__void@collisions.bar
  (block $return.label
+  ;;@ collisions/goog.java:36:6
   (block
    ;; if (collisions.bar.$initialized) return;
+   ;;@ collisions/goog.java:36:6
    (if (global.get $f_$initialized__collisions_bar)
     (then
      ;; return;
+     ;;@ collisions/goog.java:36:6
      (br $return.label)
     )
    )
    ;; (collisions.bar.$initialized = true);
+   ;;@ collisions/goog.java:36:6
    (global.set $f_$initialized__collisions_bar (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ collisions/goog.java:36:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -358,12 +400,16 @@
  (param $this (ref null $collisions.Other))
  (result (ref null $collisions.Other))
  (block $return.label
+  ;;@ collisions/goog.java:51:6
   (block
    ;; collisions.Other.$clinit();
+   ;;@ collisions/goog.java:51:6
    (call $$clinit__void@collisions.Other )
    ;; Object.this.Object.<init>();
+   ;;@ collisions/goog.java:51:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; Other.this.$init();
+   ;;@ collisions/goog.java:51:6
    (call $$init__void_$p_collisions_Other@collisions.Other (local.get $this))
   )
  )
@@ -380,14 +426,18 @@
  (local $this (ref null $collisions.Other))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $collisions.Other.rtt)))
  (block $return.label
+  ;;@ collisions/goog.java:57:8
   (block
    ;; int T = 5;
+   ;;@ collisions/goog.java:58:4
    
    (local.set $T_1 (i32.const 5))
    ;; Other<T> o = ((Other<T>) null);
+   ;;@ collisions/goog.java:59:4
    
    (local.set $o (ref.cast (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
    ;; return null;
+   ;;@ collisions/goog.java:60:4
    (local.set $return.value (ref.null $java.lang.Object))
    (br $return.label)
   )
@@ -402,11 +452,14 @@
  (local $T_1 i32)
  (local $o (ref null $collisions.Other))
  (block $return.label
+  ;;@ collisions/goog.java:51:6
   (block
    ;; int T = 3;
+   ;;@ collisions/goog.java:53:4
    
    (local.set $T_1 (i32.const 3))
    ;; Other<T> o = ((Other<T>) null);
+   ;;@ collisions/goog.java:54:4
    
    (local.set $o (ref.cast (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
   )
@@ -416,17 +469,22 @@
 ;;; void Other.$clinit()
 (func $$clinit__void@collisions.Other
  (block $return.label
+  ;;@ collisions/goog.java:51:6
   (block
    ;; if (collisions.Other.$initialized) return;
+   ;;@ collisions/goog.java:51:6
    (if (global.get $f_$initialized__collisions_Other)
     (then
      ;; return;
+     ;;@ collisions/goog.java:51:6
      (br $return.label)
     )
    )
    ;; (collisions.Other.$initialized = true);
+   ;;@ collisions/goog.java:51:6
    (global.set $f_$initialized__collisions_Other (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ collisions/goog.java:51:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -470,10 +528,13 @@
  (param $this (ref null $collisions.T))
  (result (ref null $collisions.T))
  (block $return.label
+  ;;@ collisions/goog.java:64:6
   (block
    ;; collisions.T.$clinit();
+   ;;@ collisions/goog.java:64:6
    (call $$clinit__void@collisions.T )
    ;; Object.this.Object.<init>();
+   ;;@ collisions/goog.java:64:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -488,8 +549,10 @@
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $collisions.T.rtt)))
  (block $return.label
+  ;;@ collisions/goog.java:65:4
   (block
    ;; return null;
+   ;;@ collisions/goog.java:66:4
    (local.set $return.value (ref.null $java.lang.Number))
    (br $return.label)
   )
@@ -508,8 +571,10 @@
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $collisions.T.rtt)))
  (block $return.label
+  ;;@ collisions/goog.java:69:4
   (block
    ;; T t = (T<T> $qualifier = new T.<init>(),$qualifier.m());
+   ;;@ collisions/goog.java:70:4
    
    (local.set $t (block (result (ref null $java.lang.Number))
     
@@ -517,8 +582,10 @@
     (call_ref (local.get $$qualifier)(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
    ))
    ;; t.byteValue();
+   ;;@ collisions/goog.java:71:4
    (drop (call_ref (local.get $t)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $t)))))
    ;; return t;
+   ;;@ collisions/goog.java:72:4
    (local.set $return.value (local.get $t))
    (br $return.label)
   )
@@ -530,17 +597,22 @@
 ;;; void T.$clinit()
 (func $$clinit__void@collisions.T
  (block $return.label
+  ;;@ collisions/goog.java:64:6
   (block
    ;; if (collisions.T.$initialized) return;
+   ;;@ collisions/goog.java:64:6
    (if (global.get $f_$initialized__collisions_T)
     (then
      ;; return;
+     ;;@ collisions/goog.java:64:6
      (br $return.label)
     )
    )
    ;; (collisions.T.$initialized = true);
+   ;;@ collisions/goog.java:64:6
    (global.set $f_$initialized__collisions_T (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ collisions/goog.java:64:6
    (call $$clinit__void@java.lang.Object )
   )
  )

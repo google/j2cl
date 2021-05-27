@@ -21,15 +21,19 @@
 ;;; void MyJsInterface.$clinit()
 (func $$clinit__void@jsbridgebackward.MyJsInterface
  (block $return.label
+  ;;@ jsbridgebackward/InterfaceImpl.java:21:10
   (block
    ;; if (jsbridgebackward.MyJsInterface.$initialized) return;
+   ;;@ jsbridgebackward/InterfaceImpl.java:21:10
    (if (global.get $f_$initialized__jsbridgebackward_MyJsInterface)
     (then
      ;; return;
+     ;;@ jsbridgebackward/InterfaceImpl.java:21:10
      (br $return.label)
     )
    )
    ;; (jsbridgebackward.MyJsInterface.$initialized = true);
+   ;;@ jsbridgebackward/InterfaceImpl.java:21:10
    (global.set $f_$initialized__jsbridgebackward_MyJsInterface (i32.const 1))
   )
  )
@@ -70,10 +74,13 @@
  (param $this (ref null $jsbridgebackward.A))
  (result (ref null $jsbridgebackward.A))
  (block $return.label
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (block
    ;; jsbridgebackward.A.$clinit();
+   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
    (call $$clinit__void@jsbridgebackward.A )
    ;; Object.this.Object.<init>();
+   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -89,8 +96,10 @@
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsbridgebackward.A.rtt)))
  (block $return.label
+  ;;@ jsbridgebackward/InterfaceImpl.java:26:13
   (block
    ;; return a;
+   ;;@ jsbridgebackward/InterfaceImpl.java:27:4
    (local.set $return.value (local.get $a))
    (br $return.label)
   )
@@ -102,17 +111,22 @@
 ;;; void A.$clinit()
 (func $$clinit__void@jsbridgebackward.A
  (block $return.label
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (block
    ;; if (jsbridgebackward.A.$initialized) return;
+   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
    (if (global.get $f_$initialized__jsbridgebackward_A)
     (then
      ;; return;
+     ;;@ jsbridgebackward/InterfaceImpl.java:25:6
      (br $return.label)
     )
    )
    ;; (jsbridgebackward.A.$initialized = true);
+   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
    (global.set $f_$initialized__jsbridgebackward_A (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -155,10 +169,13 @@
  (param $this (ref null $jsbridgebackward.InterfaceImpl))
  (result (ref null $jsbridgebackward.InterfaceImpl))
  (block $return.label
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (block
    ;; jsbridgebackward.InterfaceImpl.$clinit();
+   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
    (call $$clinit__void@jsbridgebackward.InterfaceImpl )
    ;; A.this.A.<init>();
+   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
    (drop (call $m_<init>__void_$pp_jsbridgebackward@jsbridgebackward.A (local.get $this)))
   )
  )
@@ -168,17 +185,22 @@
 ;;; void InterfaceImpl.$clinit()
 (func $$clinit__void@jsbridgebackward.InterfaceImpl
  (block $return.label
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (block
    ;; if (jsbridgebackward.InterfaceImpl.$initialized) return;
+   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
    (if (global.get $f_$initialized__jsbridgebackward_InterfaceImpl)
     (then
      ;; return;
+     ;;@ jsbridgebackward/InterfaceImpl.java:31:13
      (br $return.label)
     )
    )
    ;; (jsbridgebackward.InterfaceImpl.$initialized = true);
+   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
    (global.set $f_$initialized__jsbridgebackward_InterfaceImpl (i32.const 1))
    ;; jsbridgebackward.A.$clinit();
+   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
    (call $$clinit__void@jsbridgebackward.A )
   )
  )

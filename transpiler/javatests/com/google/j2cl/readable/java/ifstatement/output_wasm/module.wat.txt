@@ -23,10 +23,13 @@
  (param $this (ref null $ifstatement.IfStatement))
  (result (ref null $ifstatement.IfStatement))
  (block $return.label
+  ;;@ ifstatement/IfStatement.java:18:13
   (block
    ;; ifstatement.IfStatement.$clinit();
+   ;;@ ifstatement/IfStatement.java:18:13
    (call $$clinit__void@ifstatement.IfStatement )
    ;; Object.this.Object.<init>();
+   ;;@ ifstatement/IfStatement.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -42,32 +45,43 @@
  (local $this (ref null $ifstatement.IfStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $ifstatement.IfStatement.rtt)))
  (block $return.label
+  ;;@ ifstatement/IfStatement.java:19:14
   (block
    ;; boolean a = true,boolean b = true;
+   ;;@ ifstatement/IfStatement.java:20:4
    
    (local.set $a (i32.const 1))
    (local.set $b (i32.const 1))
    ;; int number = 1;
+   ;;@ ifstatement/IfStatement.java:21:4
    
    (local.set $number (i32.const 1))
    ;; if (a) {
+   ;;@ ifstatement/IfStatement.java:22:4
    (if (local.get $a)
     (then
+     ;;@ ifstatement/IfStatement.java:22:11
      (block
       ;; (number = 2);
+      ;;@ ifstatement/IfStatement.java:23:6
       (local.set $number (i32.const 2))
      )
     )(else
      ;; if (b) {
+     ;;@ ifstatement/IfStatement.java:24:11
      (if (local.get $b)
       (then
+       ;;@ ifstatement/IfStatement.java:24:18
        (block
         ;; (number = 3);
+        ;;@ ifstatement/IfStatement.java:25:6
         (local.set $number (i32.const 3))
        )
       )(else
+       ;;@ ifstatement/IfStatement.java:26:11
        (block
         ;; (number = 4);
+        ;;@ ifstatement/IfStatement.java:27:6
         (local.set $number (i32.const 4))
        )
       )
@@ -75,12 +89,15 @@
     )
    )
    ;; if (a) (number = 5); else (number = 6);
+   ;;@ ifstatement/IfStatement.java:30:4
    (if (local.get $a)
     (then
      ;; (number = 5);
+     ;;@ ifstatement/IfStatement.java:30:11
      (local.set $number (i32.const 5))
     )(else
      ;; (number = 6);
+     ;;@ ifstatement/IfStatement.java:31:9
      (local.set $number (i32.const 6))
     )
    )
@@ -92,17 +109,22 @@
 ;;; void IfStatement.$clinit()
 (func $$clinit__void@ifstatement.IfStatement
  (block $return.label
+  ;;@ ifstatement/IfStatement.java:18:13
   (block
    ;; if (ifstatement.IfStatement.$initialized) return;
+   ;;@ ifstatement/IfStatement.java:18:13
    (if (global.get $f_$initialized__ifstatement_IfStatement)
     (then
      ;; return;
+     ;;@ ifstatement/IfStatement.java:18:13
      (br $return.label)
     )
    )
    ;; (ifstatement.IfStatement.$initialized = true);
+   ;;@ ifstatement/IfStatement.java:18:13
    (global.set $f_$initialized__ifstatement_IfStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ ifstatement/IfStatement.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

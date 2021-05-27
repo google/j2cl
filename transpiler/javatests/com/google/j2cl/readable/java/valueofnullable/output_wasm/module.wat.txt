@@ -25,12 +25,16 @@
  (param $this (ref null $valueofnullable.ValueOfNullable))
  (result (ref null $valueofnullable.ValueOfNullable))
  (block $return.label
+  ;;@ valueofnullable/ValueOfNullable.java:18:13
   (block
    ;; valueofnullable.ValueOfNullable.$clinit();
+   ;;@ valueofnullable/ValueOfNullable.java:18:13
    (call $$clinit__void@valueofnullable.ValueOfNullable )
    ;; Object.this.Object.<init>();
+   ;;@ valueofnullable/ValueOfNullable.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; ValueOfNullable.this.$init();
+   ;;@ valueofnullable/ValueOfNullable.java:18:13
    (call $$init__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable (local.get $this))
   )
  )
@@ -42,12 +46,16 @@
  (param $this (ref null $valueofnullable.ValueOfNullable))
  (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (block $return.label
+  ;;@ valueofnullable/ValueOfNullable.java:18:13
   (block
    ;; (ValueOfNullable.this.nullableString = javaemul.internal.StringPool.$getString_|b|());
+   ;;@ valueofnullable/ValueOfNullable.java:19:2
    (struct.set $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this) (call $$getString_|b|__java_lang_String@javaemul.internal.StringPool ))
    ;; (ValueOfNullable.this.someChar = 97);
+   ;;@ valueofnullable/ValueOfNullable.java:20:2
    (struct.set $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this) (i32.const 97))
    ;; (ValueOfNullable.this.result = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(ValueOfNullable.this.someChar),$stringBuilder.append(ValueOfNullable.this.nullableString),$stringBuilder.toString()));
+   ;;@ valueofnullable/ValueOfNullable.java:21:2
    (struct.set $valueofnullable.ValueOfNullable $f_result__valueofnullable_ValueOfNullable(local.get $this) (block (result (ref null $java.lang.String))
     
     (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (global.get $java.lang.StringBuilder.vtable) (global.get $java.lang.StringBuilder.itable) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
@@ -62,17 +70,22 @@
 ;;; void ValueOfNullable.$clinit()
 (func $$clinit__void@valueofnullable.ValueOfNullable
  (block $return.label
+  ;;@ valueofnullable/ValueOfNullable.java:18:13
   (block
    ;; if (valueofnullable.ValueOfNullable.$initialized) return;
+   ;;@ valueofnullable/ValueOfNullable.java:18:13
    (if (global.get $f_$initialized__valueofnullable_ValueOfNullable)
     (then
      ;; return;
+     ;;@ valueofnullable/ValueOfNullable.java:18:13
      (br $return.label)
     )
    )
    ;; (valueofnullable.ValueOfNullable.$initialized = true);
+   ;;@ valueofnullable/ValueOfNullable.java:18:13
    (global.set $f_$initialized__valueofnullable_ValueOfNullable (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ valueofnullable/ValueOfNullable.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )

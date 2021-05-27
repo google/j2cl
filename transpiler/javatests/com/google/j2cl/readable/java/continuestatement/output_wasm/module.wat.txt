@@ -23,10 +23,13 @@
  (param $this (ref null $continuestatement.ContinueStatement))
  (result (ref null $continuestatement.ContinueStatement))
  (block $return.label
+  ;;@ continuestatement/ContinueStatement.java:18:13
   (block
    ;; continuestatement.ContinueStatement.$clinit();
+   ;;@ continuestatement/ContinueStatement.java:18:13
    (call $$clinit__void@continuestatement.ContinueStatement )
    ;; Object.this.Object.<init>();
+   ;;@ continuestatement/ContinueStatement.java:18:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -39,15 +42,19 @@
  (local $this (ref null $continuestatement.ContinueStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $continuestatement.ContinueStatement.rtt)))
  (block $return.label
+  ;;@ continuestatement/ContinueStatement.java:19:14
   (block
    ;; LOOP: for (;true;) {
+   ;;@ continuestatement/ContinueStatement.java:20:4
    
    (block $LOOP.BREAK
     (loop
      (br_if 1 (i32.eqz (i32.const 1)))
      (block $LOOP.CONTINUE
+      ;;@ continuestatement/ContinueStatement.java:20:15
       (block
        ;; continue LOOP;
+       ;;@ continuestatement/ContinueStatement.java:21:6
        (br $LOOP.CONTINUE)
       )
      )
@@ -63,17 +70,22 @@
 ;;; void ContinueStatement.$clinit()
 (func $$clinit__void@continuestatement.ContinueStatement
  (block $return.label
+  ;;@ continuestatement/ContinueStatement.java:18:13
   (block
    ;; if (continuestatement.ContinueStatement.$initialized) return;
+   ;;@ continuestatement/ContinueStatement.java:18:13
    (if (global.get $f_$initialized__continuestatement_ContinueStatement)
     (then
      ;; return;
+     ;;@ continuestatement/ContinueStatement.java:18:13
      (br $return.label)
     )
    )
    ;; (continuestatement.ContinueStatement.$initialized = true);
+   ;;@ continuestatement/ContinueStatement.java:18:13
    (global.set $f_$initialized__continuestatement_ContinueStatement (i32.const 1))
    ;; java.lang.Object.$clinit();
+   ;;@ continuestatement/ContinueStatement.java:18:13
    (call $$clinit__void@java.lang.Object )
   )
  )
