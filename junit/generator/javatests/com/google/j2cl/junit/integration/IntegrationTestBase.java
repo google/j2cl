@@ -139,7 +139,7 @@ public abstract class IntegrationTestBase {
       logs = logs.subList(startIndex, logs.size());
     }
 
-    // Rewrite zipp aths into tree artifact paths so that both modes work.
+    // Rewrite zip paths into tree artifact paths so that both modes work.
     // TODO(b/172518926): Remove once the switch to tree artifacts is complete.
     logs =
         logs.stream()
@@ -147,7 +147,7 @@ public abstract class IntegrationTestBase {
                 line ->
                     line.replace(
                         "third_party/java_src/j2cl/jre/java/jre.js.zip!/",
-                        "third_party/java_src/j2cl/jre/java/jre/"))
+                        "third_party/java_src/j2cl/jre/java/jre.js/"))
             .collect(toImmutableList());
 
     return logs;

@@ -64,7 +64,7 @@ def _compile(
 
     if java_srcs:
         if generate_tree_artifact:
-            output_js = ctx.actions.declare_directory(name)
+            output_js = ctx.actions.declare_directory("%s.js" % name)
             _zip_output(ctx, output_js, output_jszip)
         else:
             output_js = output_jszip
