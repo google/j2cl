@@ -11,12 +11,12 @@ def _impl_j2wasm_application(ctx):
     srcs = _get_transitive_srcs(deps)
     classpath = _get_transitive_classpath(deps)
 
-    transpile_out = ctx.actions.declare_file(ctx.label.name + ".zip")
+    transpile_out = ctx.actions.declare_directory(ctx.label.name + "_out")
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add("-output", transpile_out)
+    args.add("-output", transpile_out.path)
     args.add("-experimentalBackend", "WASM")
     args.add_all(ctx.attr.entry_points, before_each = "-experimentalGenerateWasmExport")
     args.add_all(ctx.attr.defines, before_each = "-experimentalDefineForWasm")
@@ -37,19 +37,12 @@ def _impl_j2wasm_application(ctx):
         mnemonic = "J2wasm",
     )
 
-    # unzip wat file
+    # Link the wat file for the named output
     ctx.actions.run_shell(
-        progress_message = "Unzipping wat file",
         inputs = [transpile_out],
         outputs = [ctx.outputs.wat],
-        command = (
-            "tmp=$(mktemp -d);" +
-            "%s -q %s -d $tmp;" % (ctx.executable._zip.path, transpile_out.path) +
-            "cp $tmp/module.wat %s;" % ctx.outputs.wat.path +
-            "rm -R $tmp;"
-        ),
-        tools = [ctx.executable._zip],
-        mnemonic = "J2wasmZip",
+        # TODO(b/176105504): Link instead copying when Blaze native tree support lands.
+        command = "cp %s/module.wat %s" % (transpile_out.path, ctx.outputs.wat.path),
     )
 
     args = ctx.actions.args()
@@ -64,14 +57,34 @@ def _impl_j2wasm_application(ctx):
     args.add("-o", ctx.outputs.wasm)
     args.add(ctx.outputs.wat)
 
+    runfiles = [ctx.outputs.wasm]
     outputs = [ctx.outputs.wasm]
     if ctx.attr.generate_symbol_map:
         symbolmap = ctx.actions.declare_file(ctx.label.name + ".map")
+        outputs.append(symbolmap)
         args.add("--symbolmap", symbolmap.path)
-        sourcemap = ctx.actions.declare_file(ctx.label.name + ".source.map")
-        args.add("--source-map", sourcemap.path)
-        args.add("--source-map-url", "http://localhost:8000/" + ctx.label.name + ".source.map")
-        outputs = outputs + [symbolmap, sourcemap]
+
+        debug_dir_name = ctx.label.name + "_debug"
+        source_map_name = ctx.label.name + "_source.map"
+        source_map = ctx.actions.declare_file(source_map_name)
+        outputs.append(source_map)
+        args.add("--source-map", source_map)
+        args.add("--source-map-url", debug_dir_name + "/" + source_map_name)
+
+        # Make the debugging data available in runfiles.
+        # Note that we are making sure that the sourcemap file is in the root next to
+        # others so the relative paths are correct.
+        debug_dir = ctx.actions.declare_directory(debug_dir_name)
+        runfiles.append(debug_dir)
+        ctx.actions.run_shell(
+            inputs = [transpile_out, source_map],
+            outputs = [debug_dir],
+            # TODO(b/176105504): Link instead copy when native tree support lands.
+            command = (
+                "cp -rL %s/* %s;" % (transpile_out.path, debug_dir.path) +
+                "cp %s %s" % (source_map.path, debug_dir.path)
+            ),
+        )
 
     ctx.actions.run(
         executable = ctx.executable.binaryen,
@@ -89,6 +102,8 @@ def _impl_j2wasm_application(ctx):
         command = "touch $1",
         inputs = _trigger_javac_build(ctx.attr.deps),
     )
+
+    return DefaultInfo(data_runfiles = ctx.runfiles(files = runfiles))
 
 def _get_transitive_srcs(deps):
     return depset(transitive = [d[J2wasmInfo]._private_.transitive_srcs for d in deps])
@@ -119,11 +134,6 @@ _j2wasm_application = rule(
             ),
             cfg = "host",
             executable = True,
-        ),
-        "_zip": attr.label(
-            cfg = "host",
-            executable = True,
-            default = Label("//third_party/unzip"),
         ),
     },
     outputs = {

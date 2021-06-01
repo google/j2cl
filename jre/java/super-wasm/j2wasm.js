@@ -19,13 +19,15 @@ goog.module('j2wasm');
  * Instantiates a web assembly module passing the necessary imports and any
  * additional import the user might need to provide for their application.
  *
- * @param {!BufferSource} moduleObject
+ * @param {string|!Promise<!Response>} urlOrResponse
  * @param {?Object<string, !Function>=} userImports
  * @return {!Promise<!WebAssembly.Instance>}
  */
-async function instantiate(moduleObject, userImports) {
-  const {instance} = await WebAssembly.instantiate(
-      moduleObject, createImportObject(userImports));
+async function instantiateStreaming(urlOrResponse, userImports) {
+  const response =
+      typeof urlOrResponse == 'string' ? fetch(urlOrResponse) : urlOrResponse;
+  const {instance} = await WebAssembly.instantiateStreaming(
+      response, createImportObject(userImports));
   return instance;
 }
 
@@ -115,6 +117,6 @@ function unimplemented() {
 }
 
 exports = {
-  instantiate,
-  instantiateBlocking
+  instantiateStreaming,
+  instantiateBlocking,
 };
