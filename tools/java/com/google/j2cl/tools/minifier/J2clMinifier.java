@@ -152,8 +152,9 @@ public class J2clMinifier {
   }
 
   private static final String MINIFICATION_SEPARATOR = "_$";
+  // TODO(b/149248404): Remove zip handling.
   private static final String ZIP_FILE_SEPARATOR = "!/";
-  private static final int ZIP_FILE_SEPARATOR_OFFSET = ZIP_FILE_SEPARATOR.length();
+  private static final String JS_DIR_SEPARATOR = ".js/";
 
   private static final int[][] nextState;
 
@@ -383,7 +384,12 @@ public class J2clMinifier {
     String key = fullPath;
     int keyStartIndex = fullPath.indexOf(ZIP_FILE_SEPARATOR);
     if (keyStartIndex > 0) {
-      key = key.substring(keyStartIndex + ZIP_FILE_SEPARATOR_OFFSET);
+      key = key.substring(keyStartIndex + ZIP_FILE_SEPARATOR.length());
+    } else {
+      keyStartIndex = fullPath.indexOf(JS_DIR_SEPARATOR);
+      if (keyStartIndex > 0) {
+        key = key.substring(keyStartIndex + JS_DIR_SEPARATOR.length());
+      }
     }
 
     return key;
