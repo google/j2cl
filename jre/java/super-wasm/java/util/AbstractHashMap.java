@@ -71,10 +71,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
    */
   private transient int threshold;
 
-  // Views - lazily initialized
-  private transient Set<K> keySet;
   private transient Set<Entry<K, V>> entrySet;
-  private transient Collection<V> values;
 
   @SuppressWarnings("unchecked")
   public AbstractHashMap() {
@@ -476,17 +473,6 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     }
   }
 
-  @Override
-  public Set<K> keySet() {
-    Set<K> ks = keySet;
-    return (ks != null) ? ks : (keySet = new KeySet());
-  }
-
-  @Override
-  public Collection<V> values() {
-    Collection<V> vs = values;
-    return (vs != null) ? vs : (values = new Values());
-  }
 
   public Set<Entry<K, V>> entrySet() {
     Set<Entry<K, V>> es = entrySet;
@@ -660,72 +646,10 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     }
     return false; // No entry for key
   }
-  // Subclass (LinkedHashMap) overrides these for correct iteration order
-  Iterator<K> newKeyIterator() {
-    return new KeyIterator();
-  }
-
-  Iterator<V> newValueIterator() {
-    return new ValueIterator();
-  }
-
-  Iterator<Entry<K, V>> newEntryIterator() {
-    return new EntryIterator();
-  }
-
-  private final class KeySet extends AbstractSet<K> {
-    public Iterator<K> iterator() {
-      return newKeyIterator();
-    }
-
-    public int size() {
-      return size;
-    }
-
-    public boolean isEmpty() {
-      return size == 0;
-    }
-
-    public boolean contains(Object o) {
-      return containsKey(o);
-    }
-
-    public boolean remove(Object o) {
-      int oldSize = size;
-      AbstractHashMap.this.remove(o);
-      return size != oldSize;
-    }
-
-    public void clear() {
-      AbstractHashMap.this.clear();
-    }
-  }
-
-  private final class Values extends AbstractCollection<V> {
-    public Iterator<V> iterator() {
-      return newValueIterator();
-    }
-
-    public int size() {
-      return size;
-    }
-
-    public boolean isEmpty() {
-      return size == 0;
-    }
-
-    public boolean contains(Object o) {
-      return containsValue(o);
-    }
-
-    public void clear() {
-      AbstractHashMap.this.clear();
-    }
-  }
 
   private final class EntrySet extends AbstractSet<Entry<K, V>> {
     public Iterator<Entry<K, V>> iterator() {
-      return newEntryIterator();
+      return new EntryIterator();
     }
 
     public boolean contains(Object o) {

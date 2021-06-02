@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 4 optimized size changes.
+There are 2 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2007652 to 2008184 bytes (100%->100.0%) and from
-  712433 to 712634 bytes (100%->100.0%) gzipped.
+  2008220 to 2024717 bytes (100%->100.8%) and from
+  712649 to 717101 bytes (100%->100.6%) gzipped.
 
 
 Shrinkage report highlights:
@@ -14,10 +14,8 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
         old      new
-       3110     3163 autovalue (1.7%)
-       3349     3406 autovalue_inc (1.7%)
-       2765     2810 autovalue.esnext (1.6%)
-       3000     3046 autovalue_inc.esnext (1.5%)
+       7901    10203 wasm (29.1%)
+       7473     9623 wasm.esnext (28.8%)
 
 
 Incremental size reports (non-gzip):
@@ -30,12 +28,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4026967  4026967 box2d_default (unchanged)
-    2197850  2197850 box2d_default.minified (unchanged)
-    1169446  1169802 box2d_default.rta (0.0%)
-    2422000  2422000 emptyclass (unchanged)
-    1454586  1454586 emptyclass.minified (unchanged)
-     702292   702648 emptyclass.rta (0.1%)
+    4027421  4027421 box2d_default (unchanged)
+    2198304  2198304 box2d_default.minified (unchanged)
+    1170256  1170256 box2d_default.rta (unchanged)
+    2422454  2422454 emptyclass (unchanged)
+    1455040  1455040 emptyclass.minified (unchanged)
+     703102   703102 emptyclass.rta (unchanged)
 
 
 All reports:
@@ -75,10 +73,10 @@ All reports:
        2628     2628 assertsimple.esnext (unchanged)
        5747     5747 autoboxing (unchanged)
        5396     5396 autoboxing.esnext (unchanged)
-       3110     3163 autovalue (1.7%)
-       2765     2810 autovalue.esnext (1.6%)
-       3349     3406 autovalue_inc (1.7%)
-       3000     3046 autovalue_inc.esnext (1.5%)
+       3167     3167 autovalue (unchanged)
+       2813     2813 autovalue.esnext (unchanged)
+       3410     3410 autovalue_inc (unchanged)
+       3050     3050 autovalue_inc.esnext (unchanged)
        2702     2702 autovalue_ref (unchanged)
        2459     2459 autovalue_ref.esnext (unchanged)
         998      998 backwardbridgemethod (unchanged)
@@ -413,8 +411,8 @@ All reports:
        3348     3348 varargs.esnext (unchanged)
        1005     1005 variables (unchanged)
         669      669 variables.esnext (unchanged)
-       7901     7901 wasm (unchanged)
-       7473     7473 wasm.esnext (unchanged)
+       7901    10203 wasm (29.1%)
+       7473     9623 wasm.esnext (28.8%)
         923      923 whilestatement (unchanged)
         588      588 whilestatement.esnext (unchanged)
        1964     1964 wideningfloatconversion (unchanged)

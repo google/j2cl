@@ -22,6 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
@@ -45,6 +46,7 @@ public class Main {
     testArrayGetClass();
     testWasmArrayApis();
     testArrayList();
+    testLinkedHashMap();
     testSystemArrayCopy();
     testString();
     testParse();
@@ -386,6 +388,19 @@ public class Main {
     assertEquals(list.toArray(), new Object[] {});
     list.add("z");
     assertEquals(list.toArray(), new Object[] {"z"});
+  }
+
+  private static void testLinkedHashMap() {
+    LinkedHashMap<String, String> map = new LinkedHashMap<>();
+    map.put("a", "1");
+    map.put("b", "2");
+    assertEquals(2, map.keySet().size());
+    assertTrue(map.keySet().contains("a"));
+    assertTrue(map.keySet().contains("b"));
+
+    map.remove("a");
+    assertEquals(1, map.keySet().size());
+    assertTrue(map.keySet().contains("b"));
   }
 
   static class Foo {}
