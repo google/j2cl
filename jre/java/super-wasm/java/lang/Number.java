@@ -16,8 +16,10 @@
 package java.lang;
 
 import java.io.Serializable;
-import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
+import javaemul.internal.WasmExtern;
+import jsinterop.annotations.JsMethod;
+import jsinterop.annotations.JsPackage;
 
 /**
  * Abstract base class for numeric wrapper classes.
@@ -94,11 +96,11 @@ public abstract class Number implements Serializable {
    * point number and validating the range.
    */
   protected static double __parseAndValidateDouble(String s) throws NumberFormatException {
-    if (!__isValidDouble(s)) {
-      throw NumberFormatException.forInputString(s);
-    }
-    return JsUtils.parseFloat(s);
+    return parseAndValidateDouble(s.toJsString());
   }
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native double parseAndValidateDouble(WasmExtern str);
 
   /**
    * @skip This function contains common logic for parsing a String in a given radix and validating
@@ -199,21 +201,6 @@ public abstract class Number implements Serializable {
     }
 
     return result;
-  }
-
-  /**
-   * @skip
-   *
-   * @param str
-   * @return {@code true} if the string matches the float format, {@code false} otherwise
-   */
-  private static boolean __isValidDouble(String str) {
-    if (floatRegex == null) {
-      floatRegex =
-          new NativeRegExp(
-              "^\\s*[+-]?(NaN|Infinity|((\\d+\\.?\\d*)|(\\.\\d+))([eE][+-]?\\d+)?[dDfF]?)\\s*$");
-    }
-    return floatRegex.test(str);
   }
 
   // CHECKSTYLE_ON

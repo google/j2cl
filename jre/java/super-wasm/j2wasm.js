@@ -67,6 +67,7 @@ function createImportObject(userImports) {
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,
     'ConsoleLogger.log': (level, message) => console[level](message),
+    'parseAndValidateDouble': parseAndValidateDouble,
 
     // Utilites to interop strings and arrays. From String.java.
     'createBuffer': size => new Array(size),
@@ -109,6 +110,19 @@ function charToLowerCase(value) {
  */
 function charToUpperCase(value) {
     return String.fromCharCode(value).toUpperCase().charCodeAt(0);
+}
+
+/**
+ * @param {string} str
+ * @return {number}
+ */
+function parseAndValidateDouble(str){
+  const valid = /^\s*[+-]?(NaN|Infinity|((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?[dDfF]?)\s*$/
+      .test(str);
+  if (!valid) {
+    throw new Error("NumberFormatException for " + str);
+  }
+  return parseFloat(str);
 }
 
 /** @return {void} */

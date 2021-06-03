@@ -438,9 +438,8 @@ public class Main {
 
     assertEquals("5", String.valueOf(5));
 
-    // TODO(b/186909158): Enable after floatToRawBits is fixed.
-    // assertEquals("5.5", String.valueOf(5.5f));
-    // assertTrue(String.valueOf(123.459980f).startsWith("123.4599"));
+    assertEquals("5.5", String.valueOf(5.5f));
+    assertTrue(String.valueOf(123.459980f).startsWith("123.4599"));
 
     assertDoubleToStringEquals("5.5", 5.5d);
     assertDoubleToStringEquals("NaN", Double.NaN);
@@ -561,6 +560,29 @@ public class Main {
     assertEquals(1865, Integer.parseInt("12345", 6));
     assertEquals(0xdeadbeefdeadL, Long.parseLong("deadbeefdead", 16));
     assertEquals(-0xdeadbeefdeadL, Long.parseLong("-deadbeefdead", 16));
+
+    assertEquals(0.0, Double.parseDouble("0"));
+    assertEquals(100.0, Double.parseDouble("1e2"));
+    assertEquals(-100.0, Double.parseDouble("-1e2"));
+    assertEquals(-1.5, Double.parseDouble("-1.5"));
+    assertEquals(3.0, Double.parseDouble("3."));
+    assertEquals(0.5, Double.parseDouble(".5"));
+    assertEquals(2.98e8, Double.parseDouble("2.98e8"));
+    assertEquals(-2.98e-8, Double.parseDouble("-2.98e-8"));
+    assertEquals(+2.98E+8, Double.parseDouble("+2.98E+8"));
+    assertEquals(2.56789e1, Double.parseDouble("2.56789e1"));
+    assertEquals(2.56789e1, Double.parseDouble("  2.56789E+1"));
+    assertEquals(2.56789e1, Double.parseDouble("2.56789e1   "));
+    assertEquals(1.0d, Double.parseDouble("1.0f"));
+    assertEquals(1.0d, Double.parseDouble("1.0F"));
+    assertEquals(1.0d, Double.parseDouble("1.0d"));
+    assertEquals(1.0d, Double.parseDouble("1.0D"));
+    assertEquals(Double.NaN, Double.parseDouble("+NaN"));
+    assertEquals(Double.NaN, Double.parseDouble("NaN"));
+    assertEquals(Double.NaN, Double.parseDouble("-NaN"));
+    assertEquals(Double.POSITIVE_INFINITY, Double.parseDouble("+Infinity"));
+    assertEquals(Double.POSITIVE_INFINITY, Double.parseDouble("Infinity"));
+    assertEquals(Double.NEGATIVE_INFINITY, Double.parseDouble("-Infinity"));
   }
 
   interface Function {
