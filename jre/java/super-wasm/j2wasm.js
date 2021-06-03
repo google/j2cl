@@ -68,6 +68,7 @@ function createImportObject(userImports) {
     'Character.toUpperCase': charToUpperCase,
     'ConsoleLogger.log': (level, message) => console[level](message),
     'parseAndValidateDouble': parseAndValidateDouble,
+    'performance.now': () => performance.now(),
 
     // Utilites to interop strings and arrays. From String.java.
     'createBuffer': size => new Array(size),
