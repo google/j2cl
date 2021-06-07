@@ -114,7 +114,7 @@ public class WasmModuleGenerator {
     builder.append(")");
     OutputUtils.writeToFile(outputPath.resolve("module.wat"), builder.build(), problems);
     if (!pendingEntryPoints.isEmpty()) {
-      problems.error("Entry points %s not found.", pendingEntryPoints);
+      problems.error("Static entry points %s not found.", pendingEntryPoints);
     }
   }
 
@@ -306,10 +306,7 @@ public class WasmModuleGenerator {
           String.format(
               " (import \"imports\" \"%s\") ", method.getDescriptor().getQualifiedJsName()));
     }
-    if (pendingEntryPoints.remove(method.getQualifiedBinaryName())) {
-      if (!method.isStatic()) {
-        problems.error("Entry point [%s] is not a static method.", method.getQualifiedBinaryName());
-      }
+    if (method.isStatic() && pendingEntryPoints.remove(method.getQualifiedBinaryName())) {
       builder.append(" (export \"" + method.getDescriptor().getName() + "\")");
     }
     MethodDescriptor methodDescriptor = method.getDescriptor();
