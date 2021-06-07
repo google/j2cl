@@ -4,7 +4,6 @@ load(
     "@io_bazel_rules_closure//closure:defs.bzl",
     "CLOSURE_JS_TOOLCHAIN_ATTRS",
     "closure_js_binary",
-    "closure_js_library",
     "create_closure_js_library",
     "web_library",
 )
@@ -67,9 +66,6 @@ def js_devserver(
             "ibazel_notify_changes",  # Do not to restart the server on changes.
         ],
     )
-
-def simple_js_lib(**kwargs):
-    closure_js_library(no_closure_library = True, **kwargs)
 
 js_binary = closure_js_binary
 

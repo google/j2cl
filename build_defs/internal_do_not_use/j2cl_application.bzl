@@ -1,6 +1,6 @@
 """Macro for generating binary targets for j2cl apps."""
 
-load(":j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS", "js_binary", "js_devserver", "simple_js_lib")
+load(":j2cl_js_common.bzl", "J2CL_OPTIMIZED_DEFS", "js_binary", "js_devserver")
 
 def j2cl_application(
         name,
@@ -60,19 +60,20 @@ def j2cl_application(
 
     #### Production binary setup ####
 
-    define_defaults = {
+    define_prod = {
         "jre.checks.checkLevel": jre_checks_check_level,
         "jre.logging.logLevel": jre_logging_log_level,
         "jre.classMetadata": jre_class_metadata,
     }
-    _define_js("%s_config" % name, define_defaults, closure_defines)
+    define_prod.update(closure_defines)
+    define_prod_defs = ["--define=%s=%s" % (k, v) for (k, v) in define_prod.items()]
 
     js_binary(
         name = name,
-        defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + [
+        defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + define_prod_defs + [
             "--rewrite_polyfills=%s" % rewrite_polyfills,
         ] + extra_production_args,
-        deps = [":%s_config" % name] + deps,
+        deps = deps,
         **kwargs
     )
 
@@ -83,7 +84,7 @@ def j2cl_application(
     # It is essential for config js to be loaded the first to be effective for
     # uncompiled code. As a workaround we load it via script tag just before
     # dev.js (see below).
-    define_dev_defaults = {
+    define_dev = {
         # closure debug loader is slow and complains about cyclic deps.
         "goog.ENABLE_DEBUG_LOADER": False,
         # checks are  always enabled in debug but setting it make sure user code
@@ -91,7 +92,8 @@ def j2cl_application(
         # to assertion errors.
         "jre.checks.checkLevel": jre_checks_check_level,
     }
-    _define_js("%s_dev_config" % name, define_dev_defaults, closure_defines)
+    define_dev.update(closure_defines)
+    define_dev_content = "var CLOSURE_DEFINES = %s;" % struct(**define_dev).to_json()
 
     index_html = """
 <head><script>
@@ -109,7 +111,7 @@ loadScript(`$${appName}_dev.js`);
 
     dev_resources = [
         ":%s_dev.js" % name,
-        ":%s_dev_config.js" % name,
+        _generate_file("%s_dev_config.js" % name, define_dev_content),
         _generate_file("%s_dev.html" % name, index_html % name),
     ] + extra_dev_resources
 
@@ -119,14 +121,6 @@ loadScript(`$${appName}_dev.js`);
         deps = deps,
         dev_resources = dev_resources,
         **kwargs
-    )
-
-def _define_js(name, defines, user_overrides):
-    defines.update(user_overrides)
-    content = "var CLOSURE_DEFINES = %s;" % struct(**defines).to_json()
-    simple_js_lib(
-        name = name,
-        srcs = [_generate_file("%s.js" % name, content)],
     )
 
 def _generate_file(file_name, content):
