@@ -329,12 +329,7 @@ class JdtUtils {
     return createTypeDescriptorWithNullability(typeBinding, new IAnnotationBinding[0]);
   }
 
-  /**
-   * Creates a type descriptor for the given type binding, taking into account nullability.
-   *
-   * @param typeBinding the type binding, used to create the type descriptor.
-   * @param elementAnnotations the annotations on the element
-   */
+  /** Creates a type descriptor for the given type binding, taking into account nullability. */
   private static TypeDescriptor createTypeDescriptorWithNullability(
       ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
     if (typeBinding == null) {
@@ -388,9 +383,7 @@ class JdtUtils {
     if (bounds.length == 1) {
       return createTypeDescriptor(bounds[0]);
     }
-    return IntersectionTypeDescriptor.newBuilder()
-        .setIntersectionTypeDescriptors(createTypeDescriptors(bounds, DeclaredTypeDescriptor.class))
-        .build();
+    return createIntersectionType(typeBinding);
   }
 
   private static DeclaredTypeDescriptor withNullability(
@@ -942,13 +935,7 @@ class JdtUtils {
     builder.addPrimitiveBoxedTypeDescriptorPair(typeDescriptor, boxedType);
   }
 
-  /**
-   * Since we don't have access to the enclosing class, the proper package and naming cannot be
-   * computed here. Instead we have an early normalization pass that traverses the intersection
-   * types and sets the correct package and binaryName etc.
-   */
   private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
-    checkArgument(isIntersectionType(typeBinding));
     List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(typeBinding.getTypeBounds(), DeclaredTypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
@@ -965,15 +952,12 @@ class JdtUtils {
   private static Map<ITypeBinding, DeclaredTypeDescriptor>
       cachedDeclaredTypeDescriptorByTypeBinding = new Hashtable<>();
 
-  // This is only used by TypeProxyUtils, and cannot be used elsewhere. Because to create a
-  // TypeDescriptor from a TypeBinding, it should go through the path to check array type.
   private static DeclaredTypeDescriptor createDeclaredType(final ITypeBinding typeBinding) {
     if (cachedDeclaredTypeDescriptorByTypeBinding.containsKey(typeBinding)) {
       return cachedDeclaredTypeDescriptorByTypeBinding.get(typeBinding);
     }
 
-    checkArgument(!typeBinding.isArray());
-    checkArgument(!typeBinding.isPrimitive());
+    checkArgument(typeBinding.isClass() || typeBinding.isEnum() || typeBinding.isInterface());
 
     Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
         () ->
