@@ -13,13 +13,9 @@
 # limitations under the License.
 """Util funcs for running Blaze on int. tests in live  and j2size repo."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 import getpass
 import os
 import re
-import shutil
 import subprocess
 import zlib
 from six.moves import zip
@@ -79,12 +75,12 @@ def get_js_files_by_test_name(test_targets):
   """Finds and returns a test_name<->optimized_js_file map."""
 
   # Convert to a map of names<->jsFile pairs
-  test_names = [get_test_name(size_target) for size_target in test_targets]
+  test_names = [_get_test_name(size_target) for size_target in test_targets]
   js_files = [get_file_from_target(t) for t in test_targets]
   return dict(zip(test_names, js_files))
 
 
-def get_test_name(target):
+def _get_test_name(target):
   """Returns the test name for a target."""
 
   pattern = re.compile(INTEGRATION_ROOT + r"(\w+):[\w-]+((.\w+)?)")
@@ -124,35 +120,6 @@ def sync_j2size_repo():
 
 def get_j2size_repo_path():
   return "/google/src/cloud/%s/j2cl-size/google3" % getpass.getuser()
-
-
-def diff_target(test_name, js_target):
-  """Diffs j2size repo and current CL for the output."""
-
-  js_file_path = "blaze-bin/" + get_file_from_target(js_target)
-
-  print("Constructing a diff of JS changes in '%s'." % test_name)
-
-  print("  blaze building JS for '%s' in the j2size repo" % test_name)
-  sync_j2size_repo()
-  build_tests([js_target], get_j2size_repo_path())
-
-  print("    formatting JS")
-  orig_js_file = "/tmp/orig.%s.js" % test_name
-  shutil.copyfile(get_j2size_repo_path() + "/" + js_file_path, orig_js_file)
-  run_cmd(["clang-format", "-i", orig_js_file])
-
-  print("  blaze building JS for '%s' in the live repo" % test_name)
-  build_tests([js_target])
-
-  print("    formatting JS")
-  modified_js_file = "/tmp/modified.%s.js" % test_name
-  shutil.copyfile(js_file_path, modified_js_file)
-  run_cmd(["clang-format", "-i", modified_js_file])
-
-  print("  starting diff")
-  subprocess.Popen(
-      "$P4DIFF %s %s" % (orig_js_file, modified_js_file), shell=True).wait()
 
 
 def run_cmd(cmd_args, cwd=None, shell=False):
