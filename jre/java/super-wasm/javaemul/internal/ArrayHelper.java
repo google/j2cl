@@ -34,7 +34,8 @@ public final class ArrayHelper {
   private static Object cloneImpl(Object array, int fromIndex, int toIndex) {
     int newLength = toIndex - fromIndex;
     Object targetArray = asWasmArray(array).newArray(newLength);
-    copy(array, 0, targetArray, 0, newLength);
+    int endIndex = Math.min(getLength(array), toIndex);
+    copy(array, fromIndex, targetArray, 0, endIndex - fromIndex);
     return targetArray;
   }
 

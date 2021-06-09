@@ -369,6 +369,9 @@ public class Main {
     assertEquals(array, new Object[] {"b", "c", null, null, null});
     ArrayHelper.setLength(array, 1);
     assertEquals(array, new Object[] {"b"});
+
+    Object[] clone = ArrayHelper.clone(new Object[] {"a", "b"}, 0, 4);
+    assertEquals(clone, new Object[] {"a", "b", null, null});
   }
 
   private static void testArrayList() {
