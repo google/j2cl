@@ -1,0 +1,55 @@
+goog.module('cast.Casts.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Casts = goog.forwardDeclare('cast.Casts$impl');
+
+class Foo extends j_l_Object {
+  /** @protected */
+  constructor() {
+    super();
+    /**@type {Casts}*/
+    this.$outer_this__cast_Casts_Foo;
+    /**@type {*}*/
+    this.f_field__cast_Casts_Foo;
+  }
+  /** @return {!Foo} */
+  static $create__cast_Casts(/** Casts */ $outer_this) {
+    Foo.$clinit();
+    let $instance = new Foo();
+    $instance.$ctor__cast_Casts_Foo__cast_Casts($outer_this);
+    return $instance;
+  }
+
+  $ctor__cast_Casts_Foo__cast_Casts(/** Casts */ $outer_this) {
+    this.$outer_this__cast_Casts_Foo = $outer_this;
+    this.$ctor__java_lang_Object__();
+    this.$init___$p_cast_Casts_Foo();
+  }
+  /** @return {*} */
+  m_method__() {
+    return j_l_Object.$create__();
+  }
+  /** @private */
+  $init___$p_cast_Casts_Foo() {
+    this.f_field__cast_Casts_Foo = j_l_Object.$create__();
+  }
+
+  static $clinit() {
+    Foo.$clinit = () => {};
+    Foo.$loadModules();
+    j_l_Object.$clinit();
+  }
+  /** @return {boolean} */
+  static $isInstance(/** ? */ instance) {
+    return instance instanceof Foo;
+  }
+
+  static $loadModules() {}
+}
+$Util.$setClassMetadata(Foo, 'cast.Casts$Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Casts$Foo.js.map

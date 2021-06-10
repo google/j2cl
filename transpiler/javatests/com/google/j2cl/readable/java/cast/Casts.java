@@ -46,4 +46,71 @@ public class Casts {
     Object foo = (Object[]) null;
     Object bar = (Object[][]) null;
   }
+
+  private void functionForInstanceofTest() {}
+
+  public void testCastObjectAfterInstanceOf() {
+    Object o = new Object();
+    if (o instanceof Casts) {
+      Casts c = (Casts) o;
+    }
+    if (o instanceof Casts) {
+      Casts cAvoidsCastsTo = (Casts) o;
+      o = new Object();
+      Casts cNotAvoidCastsTo = (Casts) o;
+    }
+    if (o instanceof Casts) {
+      Casts cAvoidsCastsTo = (Casts) o;
+      o = new Foo();
+      Casts cNotAvoidCastsTo = (Casts) o;
+    }
+    if (o instanceof Casts) {
+      Casts cAvoidsCastsTo = (Casts) o;
+      o = new Object();
+      Casts cAvoidCastsTo = (Casts) o;
+    }
+    if (o instanceof Casts) {
+      Casts cAvoidsCastsTo = (Casts) o;
+      functionForInstanceofTest();
+      Casts cNotAvoidCastsTo = (Casts) o;
+    }
+  }
+
+  /** Class for testing purposes */
+  private class Foo {
+    public Object field = new Object();
+
+    public Object method() {
+      return new Object();
+    }
+  }
+
+  public void testCastFieldAfterInstanceOf() {
+    Foo foo = new Foo();
+    if (foo.field instanceof Casts) {
+      Casts c = (Casts) foo.field;
+    }
+    if (foo.field instanceof Casts) {
+      Casts cAvoidsCastsTo = (Casts) foo.field;
+      foo.field = new Object();
+      Casts cNotAvoidCastsTo = (Casts) foo.field;
+    }
+    if (foo.field instanceof Casts) {
+      Casts cAvoidsCastsTo = (Casts) foo.field;
+      foo = new Foo();
+      Casts cNotAvoidCastsTo = (Casts) foo.field;
+    }
+    if (foo.field instanceof Casts) {
+      Casts cAvoidsCastsTo = (Casts) foo.field;
+      functionForInstanceofTest();
+      Casts cNotAvoidCastsTo = (Casts) foo.field;
+    }
+  }
+
+  public void testCaseMethodAfterInstanceOf() {
+    Foo foo = new Foo();
+    if (foo.method() instanceof Casts) {
+      Casts cNotAvoidCastsTo = (Casts) foo.method();
+    }
+  }
 }

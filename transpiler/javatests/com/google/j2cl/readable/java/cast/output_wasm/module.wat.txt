@@ -31,6 +31,9 @@
 ;;; Code for cast.Casts [vtable]
 (global $cast.Casts.vtable (mut (ref null $cast.Casts.vtable)) (ref.null $cast.Casts.vtable))
 
+;;; Code for cast.Casts.Foo [vtable]
+(global $cast.Casts.Foo.vtable (mut (ref null $cast.Casts.Foo.vtable)) (ref.null $cast.Casts.Foo.vtable))
+
 ;;; Code for cast.CastGenerics [static fields]
 (global $f_$initialized__cast_CastGenerics (mut i32) (i32.const 0))
 
@@ -75,6 +78,9 @@
 
 ;;; Code for cast.Casts [static fields]
 (global $f_$initialized__cast_Casts (mut i32) (i32.const 0))
+
+;;; Code for cast.Casts.Foo [static fields]
+(global $f_$initialized__cast_Casts_Foo (mut i32) (i32.const 0))
 
 ;;; Code for cast.CastGenerics [CLASS]
 (type $cast.CastGenerics (struct
@@ -2072,6 +2078,9 @@
  (field $m_testCasToInterface__void (mut (ref $function.__$void)))
  (field $m_testCastToBoxedType__void (mut (ref $function.__$void)))
  (field $m_testCastToArray__void (mut (ref $function.__$void)))
+ (field $m_testCastObjectAfterInstanceOf__void (mut (ref $function.__$void)))
+ (field $m_testCastFieldAfterInstanceOf__void (mut (ref $function.__$void)))
+ (field $m_testCaseMethodAfterInstanceOf__void (mut (ref $function.__$void)))
 ))
 
 ;;; Casts()
@@ -2224,6 +2233,266 @@
 )
 (elem declare func $m_testCastToArray__void@cast.Casts)
 
+;;; void Casts.functionForInstanceofTest()
+(func $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts
+ (param $this (ref null $cast.Casts))
+ (block $return.label
+  ;;@ cast/Casts.java:50:15
+  (block
+  )
+ )
+)
+
+;;; void Casts.testCastObjectAfterInstanceOf()
+(func $m_testCastObjectAfterInstanceOf__void@cast.Casts
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $o (ref null $java.lang.Object))
+ (local $c (ref null $cast.Casts))
+ (local $cAvoidsCastsTo (ref null $cast.Casts))
+ (local $cNotAvoidCastsTo (ref null $cast.Casts))
+ (local $cAvoidsCastsTo_1 (ref null $cast.Casts))
+ (local $cNotAvoidCastsTo_1 (ref null $cast.Casts))
+ (local $cAvoidsCastsTo_2 (ref null $cast.Casts))
+ (local $cAvoidCastsTo (ref null $cast.Casts))
+ (local $cAvoidsCastsTo_3 (ref null $cast.Casts))
+ (local $cNotAvoidCastsTo_2 (ref null $cast.Casts))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.Casts.rtt)))
+ (block $return.label
+  ;;@ cast/Casts.java:52:14
+  (block
+   ;; Object o = new Object.<init>();
+   ;;@ cast/Casts.java:53:4
+   
+   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   ;; if (o instanceof Casts) {
+   ;;@ cast/Casts.java:54:4
+   (if (ref.test (local.get $o) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:54:28
+     (block
+      ;; Casts c = ((Casts) o);
+      ;;@ cast/Casts.java:55:6
+      
+      (local.set $c (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+   ;; if (o instanceof Casts) {
+   ;;@ cast/Casts.java:57:4
+   (if (ref.test (local.get $o) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:57:28
+     (block
+      ;; Casts cAvoidsCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:58:6
+      
+      (local.set $cAvoidsCastsTo (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+      ;; (o = new Object.<init>());
+      ;;@ cast/Casts.java:59:6
+      (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+      ;; Casts cNotAvoidCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:60:6
+      
+      (local.set $cNotAvoidCastsTo (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+   ;; if (o instanceof Casts) {
+   ;;@ cast/Casts.java:62:4
+   (if (ref.test (local.get $o) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:62:28
+     (block
+      ;; Casts cAvoidsCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:63:6
+      
+      (local.set $cAvoidsCastsTo_1 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+      ;; (o = new Foo.<init>(Casts.this));
+      ;;@ cast/Casts.java:64:6
+      (local.set $o (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (global.get $cast.Casts.Foo.vtable) (global.get $cast.Casts.Foo.itable) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+      ;; Casts cNotAvoidCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:65:6
+      
+      (local.set $cNotAvoidCastsTo_1 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+   ;; if (o instanceof Casts) {
+   ;;@ cast/Casts.java:67:4
+   (if (ref.test (local.get $o) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:67:28
+     (block
+      ;; Casts cAvoidsCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:68:6
+      
+      (local.set $cAvoidsCastsTo_2 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+      ;; (o = new Object.<init>());
+      ;;@ cast/Casts.java:69:6
+      (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+      ;; Casts cAvoidCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:70:6
+      
+      (local.set $cAvoidCastsTo (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+   ;; if (o instanceof Casts) {
+   ;;@ cast/Casts.java:72:4
+   (if (ref.test (local.get $o) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:72:28
+     (block
+      ;; Casts cAvoidsCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:73:6
+      
+      (local.set $cAvoidsCastsTo_3 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+      ;; Casts.this.functionForInstanceofTest();
+      ;;@ cast/Casts.java:74:6
+      (call $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts (local.get $this))
+      ;; Casts cNotAvoidCastsTo = ((Casts) o);
+      ;;@ cast/Casts.java:75:6
+      
+      (local.set $cNotAvoidCastsTo_2 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_testCastObjectAfterInstanceOf__void@cast.Casts)
+
+;;; void Casts.testCastFieldAfterInstanceOf()
+(func $m_testCastFieldAfterInstanceOf__void@cast.Casts
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $foo (ref null $cast.Casts.Foo))
+ (local $c (ref null $cast.Casts))
+ (local $cAvoidsCastsTo (ref null $cast.Casts))
+ (local $cNotAvoidCastsTo (ref null $cast.Casts))
+ (local $cAvoidsCastsTo_1 (ref null $cast.Casts))
+ (local $cNotAvoidCastsTo_1 (ref null $cast.Casts))
+ (local $cAvoidsCastsTo_2 (ref null $cast.Casts))
+ (local $cNotAvoidCastsTo_2 (ref null $cast.Casts))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.Casts.rtt)))
+ (block $return.label
+  ;;@ cast/Casts.java:88:14
+  (block
+   ;; Foo foo = new Foo.<init>(Casts.this);
+   ;;@ cast/Casts.java:89:4
+   
+   (local.set $foo (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (global.get $cast.Casts.Foo.vtable) (global.get $cast.Casts.Foo.itable) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+   ;; if (foo.field instanceof Casts) {
+   ;;@ cast/Casts.java:90:4
+   (if (ref.test (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:90:36
+     (block
+      ;; Casts c = ((Casts) foo.field);
+      ;;@ cast/Casts.java:91:6
+      
+      (local.set $c (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+   ;; if (foo.field instanceof Casts) {
+   ;;@ cast/Casts.java:93:4
+   (if (ref.test (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:93:36
+     (block
+      ;; Casts cAvoidsCastsTo = ((Casts) foo.field);
+      ;;@ cast/Casts.java:94:6
+      
+      (local.set $cAvoidsCastsTo (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
+      ;; (foo.field = new Object.<init>());
+      ;;@ cast/Casts.java:95:6
+      (struct.set $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+      ;; Casts cNotAvoidCastsTo = ((Casts) foo.field);
+      ;;@ cast/Casts.java:96:6
+      
+      (local.set $cNotAvoidCastsTo (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+   ;; if (foo.field instanceof Casts) {
+   ;;@ cast/Casts.java:98:4
+   (if (ref.test (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:98:36
+     (block
+      ;; Casts cAvoidsCastsTo = ((Casts) foo.field);
+      ;;@ cast/Casts.java:99:6
+      
+      (local.set $cAvoidsCastsTo_1 (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
+      ;; (foo = new Foo.<init>(Casts.this));
+      ;;@ cast/Casts.java:100:6
+      (local.set $foo (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (global.get $cast.Casts.Foo.vtable) (global.get $cast.Casts.Foo.itable) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+      ;; Casts cNotAvoidCastsTo = ((Casts) foo.field);
+      ;;@ cast/Casts.java:101:6
+      
+      (local.set $cNotAvoidCastsTo_1 (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+   ;; if (foo.field instanceof Casts) {
+   ;;@ cast/Casts.java:103:4
+   (if (ref.test (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:103:36
+     (block
+      ;; Casts cAvoidsCastsTo = ((Casts) foo.field);
+      ;;@ cast/Casts.java:104:6
+      
+      (local.set $cAvoidsCastsTo_2 (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
+      ;; Casts.this.functionForInstanceofTest();
+      ;;@ cast/Casts.java:105:6
+      (call $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts (local.get $this))
+      ;; Casts cNotAvoidCastsTo = ((Casts) foo.field);
+      ;;@ cast/Casts.java:106:6
+      
+      (local.set $cNotAvoidCastsTo_2 (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_testCastFieldAfterInstanceOf__void@cast.Casts)
+
+;;; void Casts.testCaseMethodAfterInstanceOf()
+(func $m_testCaseMethodAfterInstanceOf__void@cast.Casts
+ (param $this.untyped (ref null $java.lang.Object))
+ (local $foo (ref null $cast.Casts.Foo))
+ (local $cNotAvoidCastsTo (ref null $cast.Casts))
+ (local $this (ref null $cast.Casts))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.Casts.rtt)))
+ (block $return.label
+  ;;@ cast/Casts.java:110:14
+  (block
+   ;; Foo foo = new Foo.<init>(Casts.this);
+   ;;@ cast/Casts.java:111:4
+   
+   (local.set $foo (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (global.get $cast.Casts.Foo.vtable) (global.get $cast.Casts.Foo.itable) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+   ;; if (foo.method() instanceof Casts) {
+   ;;@ cast/Casts.java:112:4
+   (if (ref.test (call_ref (local.get $foo)(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))) (global.get $cast.Casts.rtt))
+    (then
+     ;;@ cast/Casts.java:112:39
+     (block
+      ;; Casts cNotAvoidCastsTo = ((Casts) foo.method());
+      ;;@ cast/Casts.java:113:6
+      
+      (local.set $cNotAvoidCastsTo (ref.cast (call_ref (local.get $foo)(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))) (global.get $cast.Casts.rtt)))
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_testCaseMethodAfterInstanceOf__void@cast.Casts)
+
 ;;; void Casts.$clinit()
 (func $$clinit__void@cast.Casts
  (block $return.label
@@ -2265,6 +2534,122 @@
  (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@cast.Casts)
+
+;;; Code for cast.Casts.Foo [CLASS]
+(type $cast.Casts.Foo (struct
+ (field $vtable (ref null $cast.Casts.Foo.vtable)) (field $itable (ref null $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__cast_Casts_Foo (mut (ref null $cast.Casts)))
+ (field $f_field__cast_Casts_Foo (mut (ref null $java.lang.Object)))
+))
+(type $cast.Casts.Foo.vtable (struct
+ 
+ (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
+ (field $m_hashCode__int (mut (ref $function.__$int)))
+ (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
+ (field $m_method__java_lang_Object (mut (ref $function.__$java.lang.Object)))
+))
+
+;;; Foo(Casts $outer_this)
+(func $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo
+ (param $this (ref null $cast.Casts.Foo))
+ (param $$outer_this (ref null $cast.Casts))
+ (result (ref null $cast.Casts.Foo))
+ (block $return.label
+  ;;@ cast/Casts.java:80:16
+  (block
+   ;; cast.Casts.Foo.$clinit();
+   ;;@ cast/Casts.java:80:16
+   (call $$clinit__void@cast.Casts.Foo )
+   ;; (Foo.this.this = $outer_this);
+   ;;@ cast/Casts.java:80:16
+   (struct.set $cast.Casts.Foo $$outer_this__cast_Casts_Foo(local.get $this) (local.get $$outer_this))
+   ;; Object.this.Object.<init>();
+   ;;@ cast/Casts.java:80:16
+   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   ;; Foo.this.$init();
+   ;;@ cast/Casts.java:80:16
+   (call $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo (local.get $this))
+  )
+ )
+ (local.get $this)
+)
+
+;;; Object Foo.method()
+(func $m_method__java_lang_Object@cast.Casts.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ (local $return.value (ref null $java.lang.Object))
+ (local $this (ref null $cast.Casts.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.Casts.Foo.rtt)))
+ (block $return.label
+  ;;@ cast/Casts.java:83:18
+  (block
+   ;; return new Object.<init>();
+   ;;@ cast/Casts.java:84:6
+   (local.set $return.value (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_method__java_lang_Object@cast.Casts.Foo)
+
+;;; void Foo.$init()
+(func $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo
+ (param $this (ref null $cast.Casts.Foo))
+ (block $return.label
+  ;;@ cast/Casts.java:80:16
+  (block
+   ;; (Foo.this.field = new Object.<init>());
+   ;;@ cast/Casts.java:81:4
+   (struct.set $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $this) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  )
+ )
+)
+
+;;; void Foo.$clinit()
+(func $$clinit__void@cast.Casts.Foo
+ (block $return.label
+  ;;@ cast/Casts.java:80:16
+  (block
+   ;; if (cast.Casts.Foo.$initialized) return;
+   ;;@ cast/Casts.java:80:16
+   (if (global.get $f_$initialized__cast_Casts_Foo)
+    (then
+     ;; return;
+     ;;@ cast/Casts.java:80:16
+     (br $return.label)
+    )
+   )
+   ;; (cast.Casts.Foo.$initialized = true);
+   ;;@ cast/Casts.java:80:16
+   (global.set $f_$initialized__cast_Casts_Foo (i32.const 1))
+   ;; java.lang.Object.$clinit();
+   ;;@ cast/Casts.java:80:16
+   (call $$clinit__void@java.lang.Object )
+  )
+ )
+)
+
+;;; Class<?> Foo.getClass()
+(func $m_getClass__java_lang_Class@cast.Casts.Foo
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $return.value (ref null $java.lang.Class))
+ (local $this (ref null $cast.Casts.Foo))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.Casts.Foo.rtt)))
+ (block $return.label
+  (block
+   ;; return javaemul.internal.ClassLiteralPool.$getCast.Casts.Foo();
+   (local.set $return.value (call $$getCast.Casts.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (br $return.label)
+  )
+ )
+ (local.get $return.value)
+)
+(elem declare func $m_getClass__java_lang_Class@cast.Casts.Foo)
 
  ;;; Code for cast.CastGenerics [vtable.init]
  (global.set $cast.CastGenerics.vtable
@@ -2426,9 +2811,27 @@
    (ref.func $m_testCasToInterface__void@cast.Casts)
    (ref.func $m_testCastToBoxedType__void@cast.Casts)
    (ref.func $m_testCastToArray__void@cast.Casts)
+   (ref.func $m_testCastObjectAfterInstanceOf__void@cast.Casts)
+   (ref.func $m_testCastFieldAfterInstanceOf__void@cast.Casts)
+   (ref.func $m_testCaseMethodAfterInstanceOf__void@cast.Casts)
    (rtt.canon $cast.Casts.vtable)
   )
  )
 
  ;;; Code for cast.Casts [itable.init]
  (global.set $cast.Casts.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for cast.Casts.Foo [vtable.init]
+ (global.set $cast.Casts.Foo.vtable
+  (struct.new_with_rtt $cast.Casts.Foo.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@cast.Casts.Foo)
+   (ref.func $m_method__java_lang_Object@cast.Casts.Foo)
+   (rtt.canon $cast.Casts.Foo.vtable)
+  )
+ )
+
+ ;;; Code for cast.Casts.Foo [itable.init]
+ (global.set $cast.Casts.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
