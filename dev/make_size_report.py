@@ -15,9 +15,7 @@
 """Reports size changes caused by the current CL."""
 
 from __future__ import print_function
-from multiprocessing import Pool
 import os
-import signal
 import repo_util
 
 
@@ -26,20 +24,6 @@ size_format = "  %9s%9s"
 
 def print_table_header(size_report_file):
   size_report_file.write((size_format + "\n") % ("old", "new"))
-
-
-def console_log(message):
-  """Prints a string to the console."""
-  # Necessary because lambda methods can not invoke print statements.
-  print(message)
-
-
-def create_pool():
-  """Create a pool that does not capture ctrl-c."""
-  original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
-  pool = Pool(processes=2)
-  signal.signal(signal.SIGINT, original_sigint_handler)
-  return pool
 
 
 def make_size_report(path_name, original_bundled_targets, original_opt_targets,
@@ -53,24 +37,9 @@ def make_size_report(path_name, original_bundled_targets, original_opt_targets,
 
   print("  Building original and modified targets.")
 
-  pool = create_pool()
-
   original_targets = original_bundled_targets + original_opt_targets
-  original_result = pool.apply_async(
-      repo_util.build_tests,
-      [original_targets, repo_util.get_j2size_repo_path()],
-      callback=lambda x: console_log("    Original done building."))
   modified_targets = modified_bundled_targets + modified_opt_targets
-  modified_result = pool.apply_async(
-      repo_util.build_tests, [modified_targets],
-      callback=lambda x: console_log("    Modified done building."))
-  pool.close()
-  pool.join()
-
-  # Invoke get() on async results to "propagate" the exceptions that
-  # were raised if any.
-  original_result.get()
-  modified_result.get()
+  repo_util.build_original_and_modified(original_targets, modified_targets)
 
   print("  Collecting original and modified sizes.")
 
@@ -244,8 +213,9 @@ def make_optimized_test_list(optimized_tests):
 
 
 def main(unused_argv):
-  repo_util.sync_j2size_repo()
   print("Generating the size change report:")
+
+  repo_util.sync_j2size_repo()
 
   (original_bundled, original_opt) = repo_util.get_all_size_tests(
       repo_util.get_j2size_repo_path())

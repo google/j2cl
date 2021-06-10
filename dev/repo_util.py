@@ -14,11 +14,12 @@
 """Util funcs for running Blaze on int. tests in live  and j2size repo."""
 
 import getpass
+import multiprocessing
 import os
 import re
+import signal
 import subprocess
 import zlib
-from six.moves import zip
 
 INTEGRATION_ROOT = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/integration/"
 OBFUSCATED_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:optimized_js%s"
@@ -27,8 +28,32 @@ SIZE_REPORT = INTEGRATION_ROOT + "size_report.txt"
 TEST_LIST = INTEGRATION_ROOT + "optimized_js_list.bzl"
 
 
+def build_original_and_modified(original_targets, modified_targets):
+  """Blaze builds provided original/modified integration tests in parallel."""
+
+  # Create a pool that does not capture ctrl-c.
+  original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+  pool = multiprocessing.Pool(processes=2)
+  signal.signal(signal.SIGINT, original_sigint_handler)
+
+  original_result = pool.apply_async(
+      build_tests, [original_targets, get_j2size_repo_path()],
+      callback=lambda x: print("    Original done building."))
+
+  modified_result = pool.apply_async(
+      build_tests, [modified_targets],
+      callback=lambda x: print("    Modified done building."))
+  pool.close()
+  pool.join()
+
+  # Invoke get() on async results to "propagate" the exceptions that
+  # were raised if any.
+  original_result.get()
+  modified_result.get()
+
+
 def build_tests(test_targets, cwd=None):
-  """Blaze builds all integration tests in parallel."""
+  """Blaze builds provided integration tests in parallel."""
   js_targets = [t + ".js" for t in test_targets]
   run_cmd(["blaze", "build"] + js_targets, cwd=cwd)
 

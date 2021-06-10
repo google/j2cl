@@ -21,32 +21,26 @@ import repo_util
 
 def main(argv):
   test_name = argv.test_name[0]
-  # TODO(goktug): run diff builds in parallel.
+
+  print("Constructing a diff of JS changes in '%s'." % test_name)
+
+  repo_util.sync_j2size_repo()
 
   js_target = repo_util.get_readable_optimized_test(test_name)
   js_file_path = "blaze-bin/" + repo_util.get_file_from_target(js_target)
 
-  print("Constructing a diff of JS changes in '%s'." % test_name)
+  print("  blaze building JS for '%s'" % test_name)
+  repo_util.build_original_and_modified([js_target], [js_target])
 
-  print("  blaze building JS for '%s' in the j2size repo" % test_name)
-  repo_util.sync_j2size_repo()
-  repo_util.build_tests([js_target], repo_util.get_j2size_repo_path())
-
-  print("    formatting JS")
+  print("  Formatting")
   orig_js_file = "/tmp/orig.%s.js" % test_name
   shutil.copyfile(repo_util.get_j2size_repo_path() + "/" + js_file_path,
                   orig_js_file)
-  repo_util.run_cmd(["clang-format", "-i", orig_js_file])
-
-  print("  blaze building JS for '%s' in the live repo" % test_name)
-  repo_util.build_tests([js_target])
-
-  print("    formatting JS")
   modified_js_file = "/tmp/modified.%s.js" % test_name
   shutil.copyfile(js_file_path, modified_js_file)
-  repo_util.run_cmd(["clang-format", "-i", modified_js_file])
+  repo_util.run_cmd(["clang-format", "-i", orig_js_file, modified_js_file])
 
-  print("  starting diff")
+  print("  Starting diff")
   subprocess.call(
       "$P4DIFF %s %s" % (orig_js_file, modified_js_file), shell=True)
 
