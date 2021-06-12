@@ -84,7 +84,7 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Option(
       name = "-experimentaloptimizeautovalue",
-      usage = "Enables experomental optimizations for AutoValue. Not production ready.",
+      usage = "Enables experimental optimizations for AutoValue. Not production ready.",
       hidden = true)
   protected boolean experimentalOptimizeAutovalue = false;
 
@@ -94,8 +94,10 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Option(
       name = "-experimentalBackend",
-      metaVar = "(CLOSURE | WASM)",
-      usage = "Select the backend to use: CLOSURE (default), WASM (experimental).",
+      metaVar = "(CLOSURE | WASM | KOTLIN)",
+      usage =
+          "Select the backend to use: CLOSURE (default), WASM (experimental), KOTLIN"
+              + " (experimental).",
       hidden = true)
   protected Backend backend = Backend.CLOSURE;
 

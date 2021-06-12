@@ -11,3 +11,9 @@ J2wasmInfo = provider(
     "NOTE: Data under '_private_' is considered private internal data so do not use.",
     fields = ["_private_"],
 )
+
+J2ktInfo = provider(
+    "Provider for the J2KT compilation.\n" +
+    "NOTE: Data under '_private_' is considered private internal data so do not use.",
+    fields = ["_private_"],
+)

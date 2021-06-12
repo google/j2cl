@@ -17,6 +17,7 @@ load(
     "//build_defs:rules.bzl",
     "J2CL_OPTIMIZED_DEFS",
     "j2cl_library",
+    "j2kt_library",
     "j2wasm_application",
 )
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
@@ -25,16 +26,20 @@ JAVAC_FLAGS = [
     "-XepDisableAllChecks",
 ]
 
+# TODO(dpo): instead of getting explicit kt_deps, we normally would auto generate them via a naming
+# convention (e.g. replace foo-j2cl with foo-j2kt)
 def readable_example(
         srcs,
         deps = [],
+        kt_deps = [],
         plugins = [],
         defs = [],
         generate_library_info = False,
         j2cl_library_tags = [],
         javacopts = [],
-        generate_wasm_readables = True,
+        generate_wasm_readables = False,
         wasm_entry_points = [],
+        generate_kt_readables = False,
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -92,4 +97,13 @@ def readable_example(
         build_test(
             name = "readable_wasm_build_test",
             targets = ["readable_wasm"],
+        )
+
+    if generate_kt_readables:
+        j2kt_library(
+            name = "readable_kt",
+            srcs = srcs,
+            deps = kt_deps,
+            plugins = plugins,
+            **kwargs
         )

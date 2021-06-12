@@ -21,6 +21,7 @@ import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
+import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
@@ -358,6 +359,38 @@ public enum Backend {
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
           () -> new VerifyNormalizedUnits(/* verifyForWasm= **/ true));
+    }
+  },
+  KOTLIN {
+    @Override
+    public void generateOutputs(
+        Library library,
+        ImmutableList<FileInfo> nativeSources,
+        Path output,
+        Path libraryInfoOutput,
+        boolean emitReadableLibraryInfo,
+        boolean emitReadableSourceMap,
+        boolean generateKytheIndexingMetadata,
+        ImmutableSet<String> entryPoints,
+        Problems problems) {
+
+      new KotlinGeneratorStage(output, problems).generateOutputs(library);
+    }
+
+    @Override
+    public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
+      return ImmutableList.of(
+          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
+    }
+
+    @Override
+    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
+        boolean experimentalOptimizeAutovalue,
+        boolean removeAssertStatements,
+        Map<String, String> defines) {
+      return ImmutableList.of(
+          // Pre-verifications
+          VerifySingleAstReference::new, VerifyParamAndArgCounts::new, VerifyReferenceScoping::new);
     }
   };
 
