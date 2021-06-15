@@ -26,6 +26,19 @@ OBFUSCATED_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:optimized_js%s"
 READABLE_OPT_TEST_PATTERN = INTEGRATION_ROOT + "%s:readable_optimized_js%s"
 SIZE_REPORT = INTEGRATION_ROOT + "size_report.txt"
 TEST_LIST = INTEGRATION_ROOT + "optimized_js_list.bzl"
+BENCH_ROOT = "third_party/java_src/j2cl/benchmarking/java/com/google/j2cl/benchmarks/"
+JVM_BENCH_PATTERN = BENCH_ROOT + "%s"
+J2CL_BENCH_PATTERN = BENCH_ROOT + "%s-j2cl"
+J2WASM_BENCH_PATTERN = BENCH_ROOT + "%s-j2wasm"
+
+
+def get_benchmarks(bench_name):
+  """Returns the targets for given benchmark name."""
+  return {
+      "JVM": JVM_BENCH_PATTERN % bench_name,
+      "J2CL": J2CL_BENCH_PATTERN % bench_name,
+      "J2WASM": J2WASM_BENCH_PATTERN % bench_name,
+  }
 
 
 def build_original_and_modified(original_targets, modified_targets):
