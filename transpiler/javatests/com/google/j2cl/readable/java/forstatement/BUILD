@@ -10,5 +10,4 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    generate_wasm_readables = True,
 )

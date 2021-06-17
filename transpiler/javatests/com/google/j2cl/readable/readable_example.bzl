@@ -37,7 +37,7 @@ def readable_example(
         generate_library_info = False,
         j2cl_library_tags = [],
         javacopts = [],
-        generate_wasm_readables = False,
+        generate_wasm_readables = True,
         wasm_entry_points = [],
         generate_kt_readables = False,
         **kwargs):
