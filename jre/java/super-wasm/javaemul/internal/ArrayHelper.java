@@ -59,6 +59,19 @@ public final class ArrayHelper {
     ((WasmArray.OfObject) asWasmArray(array)).push(o);
   }
 
+  public static <T> T setAt(T[] array, int index, T value) {
+    WasmArray wasmArray = asWasmArray(array);
+    T originalValue;
+    if (wasmArray.getLength() < index + 1) {
+      wasmArray.setLength(index + 1);
+      originalValue = null;
+    } else {
+      originalValue = array[index];
+    }
+    array[index] = value;
+    return originalValue;
+  }
+
   public static void removeFrom(Object[] array, int index, int deleteCount) {
     // Copy the items after deletion end, overwriting deleted items.
     int copyFrom = index + deleteCount;
