@@ -53,13 +53,13 @@ def _impl_j2kt_library_rule(ctx):
         java_provider.compilation_info.boot_classpath,
         transitive = [java_provider.compilation_info.compilation_classpath],
     )
-    transpile_out = ctx.outputs.ktzip
+    transpile_out = ctx.actions.declare_directory("%s.kt" % ctx.attr.name)
 
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
     args.set_param_file_format("multiline")
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
-    args.add("-output", transpile_out)
+    args.add("-output", transpile_out.path)
     args.add("-experimentalBackend", "KOTLIN")
 
     args.add_all(all_srcs)
@@ -77,11 +77,14 @@ def _impl_j2kt_library_rule(ctx):
 
     # TODO(dpo): we need to return a provider used by kotlin blaze rule, so
     # these rules can depend directly in any j2kt_library
-    return [J2ktInfo(
-        _private_ = struct(
-            java_info = java_provider,
+    return [
+        DefaultInfo(files = depset([transpile_out])),
+        J2ktInfo(
+            _private_ = struct(
+                java_info = java_provider,
+            ),
         ),
-    )]
+    ]
 
 j2kt_library = rule(
     implementation = _impl_j2kt_library_rule,
@@ -90,6 +93,5 @@ j2kt_library = rule(
     outputs = {
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
-        "ktzip": "%{name}.kt.zip",
     },
 )
