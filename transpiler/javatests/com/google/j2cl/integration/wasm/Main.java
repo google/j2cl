@@ -22,6 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import javaemul.internal.ArrayHelper;
 import javaemul.internal.annotations.Wasm;
@@ -51,6 +52,9 @@ public class Main {
     testString();
     testParse();
     testLambda();
+    testEnumMap_get_put();
+    testEnumMap_remove();
+    testEnumMap_containsKey();
   }
 
   static class A {
@@ -603,5 +607,57 @@ public class Main {
           }
         };
     assertEquals(2, f.apply());
+  }
+
+  private static void testEnumMap_get_put() {
+    EnumMap<MyEnum, Integer> enumMap = new EnumMap<>(MyEnum.class);
+    assertEquals(0, enumMap.size());
+
+    enumMap.put(MyEnum.B, 5);
+    assertEquals(1, enumMap.size());
+    assertEquals(null, enumMap.get(MyEnum.A));
+    assertEquals(Integer.valueOf(5), enumMap.get(MyEnum.B));
+
+    enumMap.put(MyEnum.B, 4);
+    assertEquals(1, enumMap.size());
+    assertEquals(null, enumMap.get(MyEnum.A));
+    assertEquals(Integer.valueOf(4), enumMap.get(MyEnum.B));
+
+    enumMap.put(MyEnum.A, 3);
+    assertEquals(2, enumMap.size());
+    assertEquals(Integer.valueOf(3), enumMap.get(MyEnum.A));
+    assertEquals(Integer.valueOf(4), enumMap.get(MyEnum.B));
+
+    enumMap.put(MyEnum.A, 7);
+    assertEquals(2, enumMap.size());
+    assertEquals(Integer.valueOf(7), enumMap.get(MyEnum.A));
+    assertEquals(Integer.valueOf(4), enumMap.get(MyEnum.B));
+  }
+
+  private static void testEnumMap_remove() {
+    EnumMap<MyEnum, Integer> enumMap = new EnumMap<>(MyEnum.class);
+    assertEquals(null, enumMap.remove(MyEnum.A));
+    assertEquals(null, enumMap.remove(MyEnum.B));
+
+    enumMap.put(MyEnum.A, 3);
+    enumMap.put(MyEnum.B, 7);
+    assertEquals(Integer.valueOf(3), enumMap.remove(MyEnum.A));
+    assertEquals(null, enumMap.remove(MyEnum.A));
+    assertEquals(Integer.valueOf(7), enumMap.remove(MyEnum.B));
+    assertEquals(null, enumMap.remove(MyEnum.B));
+  }
+
+  private static void testEnumMap_containsKey() {
+    EnumMap<MyEnum, Integer> enumMap = new EnumMap<>(MyEnum.class);
+    assertFalse(enumMap.containsKey(MyEnum.A));
+    assertFalse(enumMap.containsKey(MyEnum.B));
+
+    enumMap.put(MyEnum.A, 3);
+    assertTrue(enumMap.containsKey(MyEnum.A));
+    assertFalse(enumMap.containsKey(MyEnum.B));
+
+    enumMap.put(MyEnum.B, 3);
+    assertTrue(enumMap.containsKey(MyEnum.A));
+    assertTrue(enumMap.containsKey(MyEnum.B));
   }
 }
