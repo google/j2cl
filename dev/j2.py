@@ -16,6 +16,7 @@
 """Entry point for various tools useful for J2CL development."""
 
 import argparse
+import sys
 
 import bench
 import diff
@@ -49,5 +50,6 @@ if __name__ == "__main__":
 
   args = base_parser.parse_args()
   if not hasattr(args, "func"):
-    base_parser.error("too few arguments")
+    base_parser.print_help(sys.stderr)
+    sys.exit(1)
   args.func(args)
