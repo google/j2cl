@@ -21,6 +21,10 @@ J2WASM_LIB_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
 
 def _impl_j2wasm_library_rule(ctx):
     plugin_provider = getattr(native, "JavaPluginInfo") if hasattr(native, "JavaPluginInfo") else JavaInfo
+    default_j2cl_javac_opts = [
+        # Avoid log site injection which introduces calls to unsupported APIs
+        "-XDinjectLogSites=false",
+    ]
     return [j2wasm_common.compile(
         ctx = ctx,
         name = ctx.label.name,
@@ -30,7 +34,7 @@ def _impl_j2wasm_library_rule(ctx):
         plugins = [p[plugin_provider] for p in ctx.attr.plugins],
         exported_plugins = [p[plugin_provider] for p in ctx.attr.exported_plugins],
         output_jar = ctx.outputs.jar,
-        javac_opts = ctx.attr.javacopts,
+        javac_opts = default_j2cl_javac_opts + ctx.attr.javacopts,
     )]
 
 j2wasm_library = rule(

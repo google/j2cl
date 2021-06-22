@@ -20,7 +20,7 @@ config_setting(
     },
 )
 
-JRE_JAVAC_OPTS = select({
+JRE_JAVAC_VERSION_OPTS = select({
     ":experimental_java11_support": [
         # Remove the system (aka pre Java9 'bootclasspath').
         # We need this to compile JRE otherwise it will result in a split package for JRE sources.
@@ -42,6 +42,11 @@ JRE_JAVAC_OPTS = select({
         "8",
     ],
 })
+
+JRE_JAVAC_OPTS = JRE_JAVAC_VERSION_OPTS + [
+    # Avoid log site injection which introduces calls to unsupported APIs
+    "-XDinjectLogSites=false",
+]
 
 package_sources(
     name = "jre_java_files",
