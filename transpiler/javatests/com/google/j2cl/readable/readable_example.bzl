@@ -72,7 +72,7 @@ def readable_example(
     js_binary(
         name = "readable_binary",
         defs = J2CL_OPTIMIZED_DEFS + [
-            "--conformance_config=third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",
+            "--conformance_config=transpiler/javatests/com/google/j2cl/readable/conformance_proto.txt",
             "--jscomp_warning=conformanceViolations",
             "--jscomp_warning=strictPrimitiveOperators",
             "--summary_detail_level=3",

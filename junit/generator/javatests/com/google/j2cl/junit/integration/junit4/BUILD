@@ -9,7 +9,7 @@ package(
 
 # For debugging purposes it can be helpful to have the test log results of
 # the integration tests to stdout. This can be done with:
-# blaze test --test_arg=--output_command_line third_party/java_src/j2cl/junit/generator/javatests/com/google/j2cl/junit/integration/junit4:JUnit4IntegrationTest
+# blaze test --test_arg=--output_command_line junit/generator/javatests/com/google/j2cl/junit/integration/junit4:JUnit4IntegrationTest
 j2cl_test_integration_test(
     name = "JUnit4IntegrationTest",
     test_data = [

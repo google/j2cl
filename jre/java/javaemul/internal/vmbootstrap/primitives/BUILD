@@ -11,8 +11,8 @@ package(
 )
 
 # You can see the generated file with following commands:
-# blaze build third_party/java_src/j2cl/transpiler/vmbootstrap/primitives:all
-# gnome-open blaze-genfiles/third_party/java_src/j2cl/transpiler/vmbootstrap/primitives/
+# blaze build transpiler/vmbootstrap/primitives:all
+# gnome-open blaze-genfiles/transpiler/vmbootstrap/primitives/
 
 generate_primitive_type(
     name = "double",
