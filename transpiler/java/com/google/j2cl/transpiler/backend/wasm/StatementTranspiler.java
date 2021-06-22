@@ -47,9 +47,8 @@ class StatementTranspiler {
 
     class SourceTransformer extends AbstractVisitor {
       @Override
-      public boolean enterStatement(Statement assertStatement) {
-        builder.append(";; unimplemented statement " + assertStatement.getClass().getSimpleName());
-        return false;
+      public boolean enterStatement(Statement statement) {
+        throw new IllegalStateException("Unhandled statement " + statement);
       }
 
       @Override
