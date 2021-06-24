@@ -23,3 +23,39 @@ frustration later on.
 
 All submissions, including submissions by project members, require a code
 review. We use GitHub pull requests for this purpose.
+
+### J2CL code priorities
+
+- Transpiler runs fast (productivity)
+- Output is understandable (ease integration and debugging)
+- Output optimizes well with Closure compiler (performance)
+- Output executes fast in the Browser (performance)
+
+### Shell aliasing and running j2 script
+
+- Alias J2CL's dev script (dev/j2.py). **Do this before anything else**.
+
+```shell
+
+    # alias j2 for ease of use
+    alias j2='python3 dev/j2.py'
+```
+
+- Running `j2` in the shell will show the available commands for J2CL
+development.
+
+
+### Working with the codebase
+
+- When iterating quickly it's best to run `j2 test`  and `j2 gen` for individual
+  targets.
+- When starting a review always first run `j2 gen all && j2 size && j2 testall`,
+  and of course if you see anything unexpected then correct it before beginning
+  the review.
+- It's important that you run both `j2 gen all && j2 size` after
+  syncing. If you don't then the build.log's you've previously created might not
+  reflect the current state of the repo. Also if you don't then the baseline
+  against which size changes are compared in the size_report.txt won't be the
+  right baseline.
+
+TODO(b/191867903): Add a `j2 presubmit` script to handle all the testing neccessary for starting a J2CL review
