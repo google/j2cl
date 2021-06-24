@@ -24,14 +24,21 @@ def main(argv):
     print("Make sure d8 is installed via jsvu")
     sys.exit(1)
 
-  targets = repo_util.get_benchmarks(argv.bench_name[0].replace("/", ":"))
-  subprocess.run(["blaze", "build"] + list(targets.values()), check=True)
-  for platform, target in targets.items():
-    binary = "blaze-bin/" + target.replace(":", "/")
-    subprocess.run(
-        "echo -n '%s: ' && %s" % (platform, binary), shell=True, check=True)
+  benchs = [(n, repo_util.get_benchmarks(n)) for n in argv.bench_names]
+
+  print("Building...")
+  # Join all the targets to build them in one shot.
+  targets = sum([list(bench.values()) for (_, bench) in benchs], [])
+  repo_util.run_cmd(["blaze", "build"] + targets)
+
+  print("Starting benchmarks.")
+  for name, bench_set in benchs:
+    print("[%s]" % name)
+    for platform, target in bench_set.items():
+      print(platform, end=": ", flush=True)
+      print(repo_util.run_cmd(["blaze-bin/" + target]), end="")
 
 
 def add_arguments(parser):
   parser.add_argument(
-      "bench_name", nargs=1, metavar="<name>", help="benchmark name")
+      "bench_names", nargs="+", metavar="<name>", help="benchmark name(s)")

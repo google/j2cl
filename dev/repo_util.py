@@ -106,7 +106,7 @@ def _get_tests_with_tag(tag, cwd=None):
       "attr(\"tags\",\"%s\",%s...)" % (tag, INTEGRATION_ROOT)
   ]
 
-  return run_cmd(command, cwd=cwd).decode().splitlines()
+  return run_cmd(command, cwd=cwd).splitlines()
 
 
 def get_js_files_by_test_name(test_targets):
@@ -178,4 +178,4 @@ def run_cmd(cmd_args, cwd=None, shell=False):
     print("============\n")
     raise Exception("cmd invocation FAILED: " + " ".join(cmd_args))
 
-  return output[0]
+  return output[0].decode("utf-8")
