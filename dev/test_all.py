@@ -13,6 +13,7 @@
 # limitations under the License.
 """Runs various tests in the repository."""
 
+import argparse
 import subprocess
 
 
@@ -28,3 +29,8 @@ def add_arguments(parser):
       metavar="<root>",
       nargs="*",
       help="test root(s). e.g. transpiler jre")
+
+
+def run_for_presubmit():
+  argv = argparse.Namespace(test_pattern=[])
+  main(argv)

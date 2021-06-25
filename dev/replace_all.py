@@ -13,11 +13,10 @@
 # limitations under the License.
 """Regenerates readable JS and build logs."""
 
+import argparse
 import os
 import re
-from subprocess import PIPE
-from subprocess import Popen
-
+import subprocess
 
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/"
 READABLE_TARGET_PATTERN = JAVA_DIR + "..."
@@ -41,8 +40,13 @@ def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
   """Runs a cmd command and returns output as a string."""
 
   process = (
-      Popen(
-          cmd_args, shell=shell, stdin=PIPE, stdout=PIPE, stderr=PIPE, cwd=cwd))
+      subprocess.Popen(
+          cmd_args,
+          shell=shell,
+          stdin=subprocess.PIPE,
+          stdout=subprocess.PIPE,
+          stderr=subprocess.PIPE,
+          cwd=cwd))
   results = process.communicate()
   output = results[0].decode("utf-8")
   if include_stderr:
@@ -77,12 +81,8 @@ def blaze_clean():
 def blaze_build(js_readable_dirs, wasm_readable_dirs):
   """Blaze build everything in 1-go, for speed."""
 
-  build_targets = [
-      d + "/readable.js.zip" for d in js_readable_dirs
-  ]
-  build_targets += [
-      d + "/readable_wasm" for d in wasm_readable_dirs
-  ]
+  build_targets = [d + "/readable.js.zip" for d in js_readable_dirs]
+  build_targets += [d + "/readable_wasm" for d in wasm_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
@@ -123,8 +123,8 @@ def _filter_wat_file(wat_file_path, java_package):
         if filtered_lines:
           filtered_lines.append("\n")
         skip_line = False
-      elif trimmed_line.startswith(
-          ";;; Code for ") or trimmed_line.startswith(";;; End of "):
+      elif trimmed_line.startswith(";;; Code for ") or trimmed_line.startswith(
+          ";;; End of "):
         skip_line = True
 
       if not skip_line:
@@ -153,9 +153,8 @@ def replace_transpiled_js(readable_dirs):
 
     # Normalize the path relative to output directory if needed.
     output_java_package = output + "/" + os.path.relpath(readable_dir, JAVA_DIR)
-    run_cmd_get_output([
-        "mv " + output_java_package + "/* " + output
-    ], shell=True)
+    run_cmd_get_output(["mv " + output_java_package + "/* " + output],
+                       shell=True)
 
     find_command_sources = ["find", output, "-name", "*.js"]
 
@@ -272,7 +271,7 @@ def main(argv):
   print("  Copying and reformatting transpiled WASM")
   replace_transpiled_wasm(wasm_readable_dirs)
 
-  print("run diff on repo to see changes")
+  print("Check for changes in the readable examples")
 
 
 def add_arguments(parser):
@@ -285,3 +284,8 @@ def add_arguments(parser):
       nargs=1,
       metavar="<name>",
       help="readable name (or 'all' for everything)")
+
+
+def run_for_presubmit():
+  argv = argparse.Namespace(readable_name=["all"], nologs=False)
+  main(argv)
