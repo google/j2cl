@@ -11,44 +11,40 @@ let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
  * @extends {Foo<T>}
  */
 class $1 extends Foo {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {Bar<T>}*/
-    this.$outer_this__boundedtypesupercall_Main_Bar_1;
-  }
-  /** @template T @return {!$1<T>} */
-  static $create__boundedtypesupercall_Main_Bar__java_lang_Comparable(
-      /** Bar<T> */ $outer_this, /** T */ $_0) {
-    $1.$clinit();
-    let $instance = new $1();
-    $instance
-        .$ctor__boundedtypesupercall_Main_Bar_1__boundedtypesupercall_Main_Bar__java_lang_Comparable(
-            $outer_this, $_0);
-    return $instance;
-  }
-
-  $ctor__boundedtypesupercall_Main_Bar_1__boundedtypesupercall_Main_Bar__java_lang_Comparable(
-      /** Bar<T> */ $outer_this, /** T */ $_0) {
-    this.$outer_this__boundedtypesupercall_Main_Bar_1 = $outer_this;
-    this.$ctor__boundedtypesupercall_Main_Foo__java_lang_Object($_0);
-  }
-  /** @override */
-  m_foo__() {}
-
-  static $clinit() {
-    $1.$clinit = () => {};
-    $1.$loadModules();
-    Foo.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $1;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Bar<T>}*/
+  this.$outer_this__boundedtypesupercall_Main_Bar_1;
+ }
+ /** @template T @return {!$1<T>} */
+ static $create__boundedtypesupercall_Main_Bar__java_lang_Comparable(/** Bar<T> */ $outer_this, /** T */ $_0) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__boundedtypesupercall_Main_Bar_1__boundedtypesupercall_Main_Bar__java_lang_Comparable($outer_this, $_0);
+  return $instance;
+ }
+ 
+ $ctor__boundedtypesupercall_Main_Bar_1__boundedtypesupercall_Main_Bar__java_lang_Comparable(/** Bar<T> */ $outer_this, /** T */ $_0) {
+  this.$outer_this__boundedtypesupercall_Main_Bar_1 = $outer_this;
+  this.$ctor__boundedtypesupercall_Main_Foo__java_lang_Object($_0);
+ }
+ /** @override */
+ m_foo__() {}
+ 
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  Foo.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($1, 'boundedtypesupercall.Main$Bar$1');
+$Util.$setClassMetadata($1, "boundedtypesupercall.Main$Bar$1");
 
 exports = $1;
 

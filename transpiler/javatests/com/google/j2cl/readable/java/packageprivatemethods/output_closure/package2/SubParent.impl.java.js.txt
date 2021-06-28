@@ -7,32 +7,32 @@ const Parent = goog.require('packageprivatemethods.package1.Parent$impl');
  * @abstract
  */
 class SubParent extends Parent {
-  /** @protected */
-  constructor() {
-    super();
-  }
-
-  $ctor__packageprivatemethods_package2_SubParent__() {
-    this.$ctor__packageprivatemethods_package1_Parent__();
-  }
-  /** @return {number} */
-  m_foo__int_$pp_packageprivatemethods_package2(/** number */ a) {
-    return a;
-  }
-
-  static $clinit() {
-    SubParent.$clinit = () => {};
-    SubParent.$loadModules();
-    Parent.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SubParent;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ 
+ $ctor__packageprivatemethods_package2_SubParent__() {
+  this.$ctor__packageprivatemethods_package1_Parent__();
+ }
+ /** @return {number} */
+ m_foo__int_$pp_packageprivatemethods_package2(/** number */ a) {
+  return a;
+ }
+ 
+ static $clinit() {
+  SubParent.$clinit = () =>{};
+  SubParent.$loadModules();
+  Parent.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubParent;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(SubParent, 'packageprivatemethods.package2.SubParent');
+$Util.$setClassMetadata(SubParent, "packageprivatemethods.package2.SubParent");
 
 exports = SubParent;
 

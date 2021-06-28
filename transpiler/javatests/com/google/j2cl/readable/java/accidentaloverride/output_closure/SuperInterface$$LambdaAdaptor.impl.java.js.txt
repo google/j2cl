@@ -9,44 +9,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {SuperInterface<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function(T):void */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function(T):void}*/
-    this.f_fn__accidentaloverride_SuperInterface_$LambdaAdaptor;
-    this.$ctor__accidentaloverride_SuperInterface_$LambdaAdaptor__accidentaloverride_SuperInterface_$JsFunction(
-        fn);
+ 
+ constructor(/** ?function(T):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(T):void}*/
+  this.f_fn__accidentaloverride_SuperInterface_$LambdaAdaptor;
+  this.$ctor__accidentaloverride_SuperInterface_$LambdaAdaptor__accidentaloverride_SuperInterface_$JsFunction(fn);
+ }
+ 
+ $ctor__accidentaloverride_SuperInterface_$LambdaAdaptor__accidentaloverride_SuperInterface_$JsFunction(/** ?function(T):void */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__accidentaloverride_SuperInterface_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ m_foo__java_lang_Object(/** T */ arg0) {
+  {
+   let $function = this.f_fn__accidentaloverride_SuperInterface_$LambdaAdaptor;
+   $function(arg0);
   }
-
-  $ctor__accidentaloverride_SuperInterface_$LambdaAdaptor__accidentaloverride_SuperInterface_$JsFunction(
-      /** ?function(T):void */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__accidentaloverride_SuperInterface_$LambdaAdaptor = fn;
-  }
-  /** @override */
-  m_foo__java_lang_Object(/** T */ arg0) {
-    {
-      let $function =
-          this.f_fn__accidentaloverride_SuperInterface_$LambdaAdaptor;
-      $function(arg0);
-    }
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 SuperInterface.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'accidentaloverride.SuperInterface$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "accidentaloverride.SuperInterface$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

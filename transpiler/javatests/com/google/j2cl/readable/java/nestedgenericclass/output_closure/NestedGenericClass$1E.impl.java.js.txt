@@ -9,42 +9,38 @@ let NestedGenericClass = goog.forwardDeclare('nestedgenericclass.NestedGenericCl
  * @template S, S_1, T
  */
 class $1E extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {NestedGenericClass<T>}*/
-    this.$outer_this__nestedgenericclass_NestedGenericClass_1E;
-  }
-  /** @template S, S_1, T @return {!$1E<S, S_1, T>} */
-  static $create__nestedgenericclass_NestedGenericClass(
-      /** NestedGenericClass<T> */ $outer_this) {
-    $1E.$clinit();
-    let $instance = new $1E();
-    $instance
-        .$ctor__nestedgenericclass_NestedGenericClass_1E__nestedgenericclass_NestedGenericClass(
-            $outer_this);
-    return $instance;
-  }
-
-  $ctor__nestedgenericclass_NestedGenericClass_1E__nestedgenericclass_NestedGenericClass(
-      /** NestedGenericClass<T> */ $outer_this) {
-    this.$outer_this__nestedgenericclass_NestedGenericClass_1E = $outer_this;
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    $1E.$clinit = () => {};
-    $1E.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $1E;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {NestedGenericClass<T>}*/
+  this.$outer_this__nestedgenericclass_NestedGenericClass_1E;
+ }
+ /** @template S, S_1, T @return {!$1E<S, S_1, T>} */
+ static $create__nestedgenericclass_NestedGenericClass(/** NestedGenericClass<T> */ $outer_this) {
+  $1E.$clinit();
+  let $instance = new $1E();
+  $instance.$ctor__nestedgenericclass_NestedGenericClass_1E__nestedgenericclass_NestedGenericClass($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__nestedgenericclass_NestedGenericClass_1E__nestedgenericclass_NestedGenericClass(/** NestedGenericClass<T> */ $outer_this) {
+  this.$outer_this__nestedgenericclass_NestedGenericClass_1E = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  $1E.$clinit = () =>{};
+  $1E.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1E;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($1E, 'nestedgenericclass.NestedGenericClass$1E');
+$Util.$setClassMetadata($1E, "nestedgenericclass.NestedGenericClass$1E");
 
 exports = $1E;
 

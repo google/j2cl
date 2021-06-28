@@ -5,23 +5,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
 
 class $Overlay {
-  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
-    $Overlay.$clinit();
-    console.log('test');
-  }
-
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof console;
-  }
-
-  static $loadModules() {}
+ 
+ static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
+  $Overlay.$clinit();
+  console.log("test");
+ }
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof console;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'console');
+$Util.$setClassMetadata($Overlay, "console");
 
 exports = $Overlay;
 

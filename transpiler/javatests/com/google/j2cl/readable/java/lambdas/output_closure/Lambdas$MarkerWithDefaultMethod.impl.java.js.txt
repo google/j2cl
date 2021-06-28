@@ -6,34 +6,30 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class MarkerWithDefaultMethod {
-  /** @abstract */
-  m_defaultMethod__() {}
-
-  static m_defaultMethod__$default__lambdas_Lambdas_MarkerWithDefaultMethod(
-      /** !MarkerWithDefaultMethod */ $thisArg) {
-    MarkerWithDefaultMethod.$clinit();
-  }
-
-  static $clinit() {
-    MarkerWithDefaultMethod.$clinit = () => {};
-    MarkerWithDefaultMethod.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__lambdas_Lambdas_MarkerWithDefaultMethod = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__lambdas_Lambdas_MarkerWithDefaultMethod;
-  }
-
-  static $loadModules() {}
+ /** @abstract */
+ m_defaultMethod__() {}
+ 
+ static m_defaultMethod__$default__lambdas_Lambdas_MarkerWithDefaultMethod(/** !MarkerWithDefaultMethod */ $thisArg) {
+  MarkerWithDefaultMethod.$clinit();
+ }
+ 
+ static $clinit() {
+  MarkerWithDefaultMethod.$clinit = () =>{};
+  MarkerWithDefaultMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_MarkerWithDefaultMethod = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_MarkerWithDefaultMethod;
+ }
+ 
+ static $loadModules() {}
 }
-MarkerWithDefaultMethod.$markImplementor(
-    /**@type {Function}*/ (MarkerWithDefaultMethod));
-$Util.$setClassMetadataForInterface(
-    MarkerWithDefaultMethod, 'lambdas.Lambdas$MarkerWithDefaultMethod');
+MarkerWithDefaultMethod.$markImplementor(/**@type {Function}*/ (MarkerWithDefaultMethod));
+$Util.$setClassMetadataForInterface(MarkerWithDefaultMethod, "lambdas.Lambdas$MarkerWithDefaultMethod");
 
 exports = MarkerWithDefaultMethod;
 

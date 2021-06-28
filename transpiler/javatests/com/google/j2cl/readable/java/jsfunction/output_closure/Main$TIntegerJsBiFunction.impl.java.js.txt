@@ -11,63 +11,53 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @template T
  */
 class TIntegerJsBiFunction extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {function(T, Integer):T} */
-  static $create__() {
-    TIntegerJsBiFunction.$clinit();
-    let $instance = new TIntegerJsBiFunction();
-    $instance.$ctor__jsfunction_Main_TIntegerJsBiFunction__();
-    return $Util.$makeLambdaFunction(
-        TIntegerJsBiFunction.prototype
-            .m_apply__java_lang_Object__java_lang_Number,
-        $instance, TIntegerJsBiFunction.$copy);
-  }
-  /** @suppress {invalidCasts} */
-  $ctor__jsfunction_Main_TIntegerJsBiFunction__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @template T @return {T} */
-  static m_apply__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
-      /** function(T, Integer):T */ $thisArg, /** T */ element,
-      /** Integer */ i) {
-    TIntegerJsBiFunction.$clinit();
-    return null;
-  }
-  // Bridge method.
-  /** @template T @this {?function(T, Integer):T} @return {T} */
-  m_apply__java_lang_Object__java_lang_Number(
-      /** T */ arg0, /** Integer */ arg1) {
-    return TIntegerJsBiFunction
-        .m_apply__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(
-            this, arg0, /**@type {Integer}*/ ($Casts.$to(arg1, Integer)));
-  }
-
-  static $clinit() {
-    TIntegerJsBiFunction.$clinit = () => {};
-    TIntegerJsBiFunction.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$is__jsfunction_Main_TIntegerJsBiFunction;
-  }
-
-  static $copy(/** ? */ from, /** ? */ to) {
-    to.$is__jsfunction_Main_TIntegerJsBiFunction = true;
-  }
-
-  static $loadModules() {
-    Integer = goog.module.get('java.lang.Integer$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {function(T, Integer):T} */
+ static $create__() {
+  TIntegerJsBiFunction.$clinit();
+  let $instance = new TIntegerJsBiFunction();
+  $instance.$ctor__jsfunction_Main_TIntegerJsBiFunction__();
+  return $Util.$makeLambdaFunction(TIntegerJsBiFunction.prototype.m_apply__java_lang_Object__java_lang_Number, $instance, TIntegerJsBiFunction.$copy);
+ }
+ /** @suppress {invalidCasts} */
+ $ctor__jsfunction_Main_TIntegerJsBiFunction__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @template T @return {T} */
+ static m_apply__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(/** function(T, Integer):T */ $thisArg, /** T */ element, /** Integer */ i) {
+  TIntegerJsBiFunction.$clinit();
+  return null;
+ }
+ //Bridge method.
+ /** @template T @this {?function(T, Integer):T} @return {T} */
+ m_apply__java_lang_Object__java_lang_Number(/** T */ arg0, /** Integer */ arg1) {
+  return TIntegerJsBiFunction.m_apply__jsfunction_Main_TIntegerJsBiFunction__java_lang_Object__java_lang_Integer(this, arg0, /**@type {Integer}*/ ($Casts.$to(arg1, Integer)));
+ }
+ 
+ static $clinit() {
+  TIntegerJsBiFunction.$clinit = () =>{};
+  TIntegerJsBiFunction.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_Main_TIntegerJsBiFunction;
+ }
+ 
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsfunction_Main_TIntegerJsBiFunction = true;
+ }
+ 
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 $JavaScriptFunction.$markImplementor(TIntegerJsBiFunction);
-$Util.$setClassMetadata(
-    TIntegerJsBiFunction, 'jsfunction.Main$TIntegerJsBiFunction');
+$Util.$setClassMetadata(TIntegerJsBiFunction, "jsfunction.Main$TIntegerJsBiFunction");
 
 exports = TIntegerJsBiFunction;
 

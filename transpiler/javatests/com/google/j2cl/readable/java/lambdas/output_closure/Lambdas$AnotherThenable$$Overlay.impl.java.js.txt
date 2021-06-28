@@ -4,23 +4,20 @@ let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.AnotherThenable.$LambdaAdaptor$impl');
 
 class $Overlay {
-  /** @template T @return {?} */
-  static $adapt__lambdas_Lambdas_AnotherThenable_$JsFunction(
-      /** ?function(?function(T):?void, ?function(Throwable):?void):void */
-      fn) {
-    $Overlay.$clinit();
-    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
-  }
-
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('lambdas.Lambdas.AnotherThenable.$LambdaAdaptor$impl');
-  }
+ /** @template T @return {?} */
+ static $adapt__lambdas_Lambdas_AnotherThenable_$JsFunction(/** ?function(?function(T):?void, ?function(Throwable):?void):void */ fn) {
+  $Overlay.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.AnotherThenable.$LambdaAdaptor$impl');
+ }
 }
 
 exports = $Overlay;

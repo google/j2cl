@@ -11,79 +11,61 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<Numbers>}
  */
 class Numbers extends Enum {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Numbers} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new Numbers();
+  $instance.$ctor__switchstatement_Numbers__java_lang_String__int($name, $ordinal);
+  return $instance;
+ }
+ 
+ $ctor__switchstatement_Numbers__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+ }
+ /** @return {!Numbers} */
+ static m_valueOf__java_lang_String(/** string */ name) {
+  Numbers.$clinit();
+  if ($Equality.$same(Numbers.f_namesToValuesMap__switchstatement_Numbers_, null)) {
+   Numbers.f_namesToValuesMap__switchstatement_Numbers_ = /**@type {Map<?string, !Numbers>}*/ ($Enums.createMapFromValues(Numbers.m_values__()));
   }
-  /** @return {!Numbers} */
-  static $create__java_lang_String__int(
-      /** ?string */ $name, /** number */ $ordinal) {
-    let $instance = new Numbers();
-    $instance.$ctor__switchstatement_Numbers__java_lang_String__int(
-        $name, $ordinal);
-    return $instance;
-  }
-
-  $ctor__switchstatement_Numbers__java_lang_String__int(
-      /** ?string */ $name, /** number */ $ordinal) {
-    this.f_name__java_lang_Enum_ = $name;
-    this.f_ordinal__java_lang_Enum_ = $ordinal;
-  }
-  /** @return {!Numbers} */
-  static m_valueOf__java_lang_String(/** string */ name) {
-    Numbers.$clinit();
-    if ($Equality.$same(
-            Numbers.f_namesToValuesMap__switchstatement_Numbers_, null)) {
-      Numbers.f_namesToValuesMap__switchstatement_Numbers_ =
-          /**@type {Map<?string, !Numbers>}*/ (
-              $Enums.createMapFromValues(Numbers.m_values__()));
-    }
-    return /**@type {Numbers}*/ ($Enums.getValueFromNameAndMap(
-        name, Numbers.f_namesToValuesMap__switchstatement_Numbers_));
-  }
-  /** @return {!Array<!Numbers>} */
-  static m_values__() {
-    Numbers.$clinit();
-    return /**@type {!Array<Numbers>}*/ ($Arrays.$init(
-        [
-          Numbers.$static_ONE__switchstatement_Numbers,
-          Numbers.$static_TWO__switchstatement_Numbers
-        ],
-        Numbers));
-  }
-  /** @return {!Numbers} */
-  static get f_ONE__switchstatement_Numbers() {
-    return (Numbers.$clinit(), Numbers.$static_ONE__switchstatement_Numbers);
-  }
-  /** @return {!Numbers} */
-  static get f_TWO__switchstatement_Numbers() {
-    return (Numbers.$clinit(), Numbers.$static_TWO__switchstatement_Numbers);
-  }
-
-  static $clinit() {
-    Numbers.$clinit = () => {};
-    Numbers.$loadModules();
-    Enum.$clinit();
-    Numbers.$static_ONE__switchstatement_Numbers =
-        Numbers.$create__java_lang_String__int(
-            $Util.$makeEnumName('ONE'),
-            Numbers.$ordinal_ONE__switchstatement_Numbers);
-    Numbers.$static_TWO__switchstatement_Numbers =
-        Numbers.$create__java_lang_String__int(
-            $Util.$makeEnumName('TWO'),
-            Numbers.$ordinal_TWO__switchstatement_Numbers);
-    Numbers.f_namesToValuesMap__switchstatement_Numbers_ = null;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Numbers;
-  }
-
-  static $loadModules() {
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Enums = goog.module.get('vmbootstrap.Enums$impl');
-  }
+  return /**@type {Numbers}*/ ($Enums.getValueFromNameAndMap(name, Numbers.f_namesToValuesMap__switchstatement_Numbers_));
+ }
+ /** @return {!Array<!Numbers>} */
+ static m_values__() {
+  Numbers.$clinit();
+  return /**@type {!Array<Numbers>}*/ ($Arrays.$init([Numbers.$static_ONE__switchstatement_Numbers, Numbers.$static_TWO__switchstatement_Numbers], Numbers));
+ }
+ /** @return {!Numbers} */
+ static get f_ONE__switchstatement_Numbers() {
+  return (Numbers.$clinit(), Numbers.$static_ONE__switchstatement_Numbers);
+ }
+ /** @return {!Numbers} */
+ static get f_TWO__switchstatement_Numbers() {
+  return (Numbers.$clinit(), Numbers.$static_TWO__switchstatement_Numbers);
+ }
+ 
+ static $clinit() {
+  Numbers.$clinit = () =>{};
+  Numbers.$loadModules();
+  Enum.$clinit();
+  Numbers.$static_ONE__switchstatement_Numbers = Numbers.$create__java_lang_String__int($Util.$makeEnumName("ONE"), Numbers.$ordinal_ONE__switchstatement_Numbers);
+  Numbers.$static_TWO__switchstatement_Numbers = Numbers.$create__java_lang_String__int($Util.$makeEnumName("TWO"), Numbers.$ordinal_TWO__switchstatement_Numbers);
+  Numbers.f_namesToValuesMap__switchstatement_Numbers_ = null;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Numbers;
+ }
+ 
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
 }
 /**@private {!Numbers}*/
 Numbers.$static_ONE__switchstatement_Numbers;
@@ -95,7 +77,7 @@ Numbers.f_namesToValuesMap__switchstatement_Numbers_;
 Numbers.$ordinal_ONE__switchstatement_Numbers = 0;
 /**@const {number}*/
 Numbers.$ordinal_TWO__switchstatement_Numbers = 1;
-$Util.$setClassMetadataForEnum(Numbers, 'switchstatement.Numbers');
+$Util.$setClassMetadataForEnum(Numbers, "switchstatement.Numbers");
 
 exports = Numbers;
 

@@ -7,69 +7,57 @@ let OuterIsNotSuper = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrd
 let $1 = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$1$impl');
 
 class OuterIsSuper extends Outer {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {Outer}*/
-    this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper;
-  }
-  /** @return {!OuterIsSuper} */
-  static $create__innerclassinitorder_InnerClassInitOrder_Outer__int(
-      /** Outer */ $outer_this, /** number */ i) {
-    OuterIsSuper.$clinit();
-    let $instance = new OuterIsSuper();
-    $instance
-        .$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__innerclassinitorder_InnerClassInitOrder_Outer__int(
-            $outer_this, i);
-    return $instance;
-  }
-
-  $ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__innerclassinitorder_InnerClassInitOrder_Outer__int(
-      /** Outer */ $outer_this, /** number */ i) {
-    this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper =
-        $outer_this;
-    this.$ctor__innerclassinitorder_InnerClassInitOrder_Outer__int(i);
-  }
-  /** @override @return {number} */
-  m_checkDispatch__() {
-    return 2;
-  }
-  /** @return {number} */
-  m_checkDispatchFromSub1__() {
-    return super.m_checkDispatch__();
-  }
-  /** @return {number} */
-  m_checkDispatchFromSub2__() {
-    return $1
-        .$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int(
-            this, 1)
-        .m_go__();
-  }
-  /** @return {OuterIsNotSuper} */
-  m_unqualifiedAlloc__() {
-    return OuterIsNotSuper
-        .$create__innerclassinitorder_InnerClassInitOrder_Outer(this);
-  }
-
-  static $clinit() {
-    OuterIsSuper.$clinit = () => {};
-    OuterIsSuper.$loadModules();
-    Outer.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof OuterIsSuper;
-  }
-
-  static $loadModules() {
-    OuterIsNotSuper = goog.module.get(
-        'innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
-    $1 = goog.module.get(
-        'innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$1$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Outer}*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper;
+ }
+ /** @return {!OuterIsSuper} */
+ static $create__innerclassinitorder_InnerClassInitOrder_Outer__int(/** Outer */ $outer_this, /** number */ i) {
+  OuterIsSuper.$clinit();
+  let $instance = new OuterIsSuper();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__innerclassinitorder_InnerClassInitOrder_Outer__int($outer_this, i);
+  return $instance;
+ }
+ 
+ $ctor__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__innerclassinitorder_InnerClassInitOrder_Outer__int(/** Outer */ $outer_this, /** number */ i) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper = $outer_this;
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_Outer__int(i);
+ }
+ /** @override @return {number} */
+ m_checkDispatch__() {
+  return 2;
+ }
+ /** @return {number} */
+ m_checkDispatchFromSub1__() {
+  return super.m_checkDispatch__();
+ }
+ /** @return {number} */
+ m_checkDispatchFromSub2__() {
+  return $1.$create__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int(this, 1).m_go__();
+ }
+ /** @return {OuterIsNotSuper} */
+ m_unqualifiedAlloc__() {
+  return OuterIsNotSuper.$create__innerclassinitorder_InnerClassInitOrder_Outer(this);
+ }
+ 
+ static $clinit() {
+  OuterIsSuper.$clinit = () =>{};
+  OuterIsSuper.$loadModules();
+  Outer.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterIsSuper;
+ }
+ 
+ static $loadModules() {
+  OuterIsNotSuper = goog.module.get('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper$impl');
+  $1 = goog.module.get('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.$1$impl');
+ }
 }
-$Util.$setClassMetadata(
-    OuterIsSuper, 'innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper');
+$Util.$setClassMetadata(OuterIsSuper, "innerclassinitorder.InnerClassInitOrder$Outer$OuterIsSuper");
 
 exports = OuterIsSuper;
 

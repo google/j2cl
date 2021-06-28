@@ -9,36 +9,36 @@ const Entry = goog.require('nobridgemethods.Entry$impl');
  * @implements {Entry<K>}
  */
 class InnerEntry extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template K @return {!InnerEntry<K>} */
-  static $create__() {
-    InnerEntry.$clinit();
-    let $instance = new InnerEntry();
-    $instance.$ctor__nobridgemethods_TreeMap_InnerEntry__();
-    return $instance;
-  }
-
-  $ctor__nobridgemethods_TreeMap_InnerEntry__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    InnerEntry.$clinit = () => {};
-    InnerEntry.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof InnerEntry;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template K @return {!InnerEntry<K>} */
+ static $create__() {
+  InnerEntry.$clinit();
+  let $instance = new InnerEntry();
+  $instance.$ctor__nobridgemethods_TreeMap_InnerEntry__();
+  return $instance;
+ }
+ 
+ $ctor__nobridgemethods_TreeMap_InnerEntry__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  InnerEntry.$clinit = () =>{};
+  InnerEntry.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerEntry;
+ }
+ 
+ static $loadModules() {}
 }
 Entry.$markImplementor(InnerEntry);
-$Util.$setClassMetadata(InnerEntry, 'nobridgemethods.TreeMap$InnerEntry');
+$Util.$setClassMetadata(InnerEntry, "nobridgemethods.TreeMap$InnerEntry");
 
 exports = InnerEntry;
 

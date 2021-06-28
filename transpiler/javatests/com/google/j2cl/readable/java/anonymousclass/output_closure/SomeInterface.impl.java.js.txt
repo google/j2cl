@@ -9,38 +9,33 @@ let $1 = goog.forwardDeclare('anonymousclass.SomeInterface.$1$impl');
  * @interface
  */
 class SomeInterface {
-  /** @return {SomeClass} */
-  static get f_implicitlyStatic__anonymousclass_SomeInterface() {
-    return (
-        SomeInterface.$clinit(),
-        SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface);
-  }
-
-  static $clinit() {
-    SomeInterface.$clinit = () => {};
-    SomeInterface.$loadModules();
-    SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface =
-        $1.$create__int(1);
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__anonymousclass_SomeInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__anonymousclass_SomeInterface;
-  }
-
-  static $loadModules() {
-    $1 = goog.module.get('anonymousclass.SomeInterface.$1$impl');
-  }
+ /** @return {SomeClass} */
+ static get f_implicitlyStatic__anonymousclass_SomeInterface() {
+  return (SomeInterface.$clinit(), SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface);
+ }
+ 
+ static $clinit() {
+  SomeInterface.$clinit = () =>{};
+  SomeInterface.$loadModules();
+  SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface = $1.$create__int(1);
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__anonymousclass_SomeInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__anonymousclass_SomeInterface;
+ }
+ 
+ static $loadModules() {
+  $1 = goog.module.get('anonymousclass.SomeInterface.$1$impl');
+ }
 }
 /**@private {SomeClass}*/
 SomeInterface.$static_implicitlyStatic__anonymousclass_SomeInterface;
 SomeInterface.$markImplementor(/**@type {Function}*/ (SomeInterface));
-$Util.$setClassMetadataForInterface(
-    SomeInterface, 'anonymousclass.SomeInterface');
+$Util.$setClassMetadataForInterface(SomeInterface, "anonymousclass.SomeInterface");
 
 exports = SomeInterface;
 

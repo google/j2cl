@@ -8,37 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterface.$L
  * @interface
  */
 class FunctionalInterface {
-  /** @abstract @return {number} */
-  m_m__int(/** number */ i) {}
-  /** @return {FunctionalInterface} */
-  static $adapt(/** ?function(number):number */ fn) {
-    FunctionalInterface.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    FunctionalInterface.$clinit = () => {};
-    FunctionalInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__lambdas_Lambdas_FunctionalInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__lambdas_Lambdas_FunctionalInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract @return {number} */
+ m_m__int(/** number */ i) {}
+ /** @return {FunctionalInterface} */
+ static $adapt(/** ?function(number):number */ fn) {
+  FunctionalInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  FunctionalInterface.$clinit = () =>{};
+  FunctionalInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_FunctionalInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_FunctionalInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.FunctionalInterface.$LambdaAdaptor$impl');
+ }
 }
-FunctionalInterface.$markImplementor(
-    /**@type {Function}*/ (FunctionalInterface));
-$Util.$setClassMetadataForInterface(
-    FunctionalInterface, 'lambdas.Lambdas$FunctionalInterface');
+FunctionalInterface.$markImplementor(/**@type {Function}*/ (FunctionalInterface));
+$Util.$setClassMetadataForInterface(FunctionalInterface, "lambdas.Lambdas$FunctionalInterface");
 
 exports = FunctionalInterface;
 

@@ -4,30 +4,30 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const NonNativeUpper = goog.require('transitivejsoverlayimport.NonNativeUpper$impl');
 
 class NonNativeLower extends NonNativeUpper {
-  constructor() {
-    NonNativeLower.$clinit();
-    super();
-    this.$ctor__transitivejsoverlayimport_NonNativeLower__();
-  }
-
-  $ctor__transitivejsoverlayimport_NonNativeLower__() {}
-
-  m_doNonNativeLowerInstanceMethod___$pp_transitivejsoverlayimport() {}
-
-  static $clinit() {
-    NonNativeLower.$clinit = () => {};
-    NonNativeLower.$loadModules();
-    NonNativeUpper.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof NonNativeLower;
-  }
-
-  static $loadModules() {}
+ 
+ constructor() {
+  NonNativeLower.$clinit();
+  super();
+  this.$ctor__transitivejsoverlayimport_NonNativeLower__();
+ }
+ 
+ $ctor__transitivejsoverlayimport_NonNativeLower__() {}
+ 
+ m_doNonNativeLowerInstanceMethod___$pp_transitivejsoverlayimport() {}
+ 
+ static $clinit() {
+  NonNativeLower.$clinit = () =>{};
+  NonNativeLower.$loadModules();
+  NonNativeUpper.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NonNativeLower;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    NonNativeLower, 'transitivejsoverlayimport.NonNativeLower');
+$Util.$setClassMetadata(NonNativeLower, "transitivejsoverlayimport.NonNativeLower");
 
 exports = NonNativeLower;
 

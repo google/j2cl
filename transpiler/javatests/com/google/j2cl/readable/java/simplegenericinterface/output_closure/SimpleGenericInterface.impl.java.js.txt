@@ -9,38 +9,33 @@ let $LambdaAdaptor = goog.forwardDeclare('simplegenericinterface.SimpleGenericIn
  * @template T
  */
 class SimpleGenericInterface {
-  /** @abstract @return {T} */
-  m_fun__java_lang_Object(/** T */ t) {}
-  /** @template T @return {SimpleGenericInterface<T>} */
-  static $adapt(/** ?function(T):T */ fn) {
-    SimpleGenericInterface.$clinit();
-    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
-  }
-
-  static $clinit() {
-    SimpleGenericInterface.$clinit = () => {};
-    SimpleGenericInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__simplegenericinterface_SimpleGenericInterface =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__simplegenericinterface_SimpleGenericInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract @return {T} */
+ m_fun__java_lang_Object(/** T */ t) {}
+ /** @template T @return {SimpleGenericInterface<T>} */
+ static $adapt(/** ?function(T):T */ fn) {
+  SimpleGenericInterface.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  SimpleGenericInterface.$clinit = () =>{};
+  SimpleGenericInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__simplegenericinterface_SimpleGenericInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__simplegenericinterface_SimpleGenericInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('simplegenericinterface.SimpleGenericInterface.$LambdaAdaptor$impl');
+ }
 }
-SimpleGenericInterface.$markImplementor(
-    /**@type {Function}*/ (SimpleGenericInterface));
-$Util.$setClassMetadataForInterface(
-    SimpleGenericInterface, 'simplegenericinterface.SimpleGenericInterface');
+SimpleGenericInterface.$markImplementor(/**@type {Function}*/ (SimpleGenericInterface));
+$Util.$setClassMetadataForInterface(SimpleGenericInterface, "simplegenericinterface.SimpleGenericInterface");
 
 exports = SimpleGenericInterface;
 

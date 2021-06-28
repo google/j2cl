@@ -6,42 +6,42 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Foo = goog.forwardDeclare('srcjar.Foo$impl');
 
 class Srcjar extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Srcjar} */
-  static $create__() {
-    Srcjar.$clinit();
-    let $instance = new Srcjar();
-    $instance.$ctor__srcjar_Srcjar__();
-    return $instance;
-  }
-
-  $ctor__srcjar_Srcjar__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static m_test__() {
-    Srcjar.$clinit();
-    let foo = Foo.$create__();
-  }
-
-  static $clinit() {
-    Srcjar.$clinit = () => {};
-    Srcjar.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Srcjar;
-  }
-
-  static $loadModules() {
-    Foo = goog.module.get('srcjar.Foo$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Srcjar} */
+ static $create__() {
+  Srcjar.$clinit();
+  let $instance = new Srcjar();
+  $instance.$ctor__srcjar_Srcjar__();
+  return $instance;
+ }
+ 
+ $ctor__srcjar_Srcjar__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static m_test__() {
+  Srcjar.$clinit();
+  let foo = Foo.$create__();
+ }
+ 
+ static $clinit() {
+  Srcjar.$clinit = () =>{};
+  Srcjar.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Srcjar;
+ }
+ 
+ static $loadModules() {
+  Foo = goog.module.get('srcjar.Foo$impl');
+ }
 }
-$Util.$setClassMetadata(Srcjar, 'srcjar.Srcjar');
+$Util.$setClassMetadata(Srcjar, "srcjar.Srcjar");
 
 exports = Srcjar;
 

@@ -4,41 +4,41 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class BreakStatement extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!BreakStatement} */
+ static $create__() {
+  BreakStatement.$clinit();
+  let $instance = new BreakStatement();
+  $instance.$ctor__breakstatement_BreakStatement__();
+  return $instance;
+ }
+ 
+ $ctor__breakstatement_BreakStatement__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__() {
+  for (; true; ) {
+   break;
   }
-  /** @return {!BreakStatement} */
-  static $create__() {
-    BreakStatement.$clinit();
-    let $instance = new BreakStatement();
-    $instance.$ctor__breakstatement_BreakStatement__();
-    return $instance;
-  }
-
-  $ctor__breakstatement_BreakStatement__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__() {
-    for (; true;) {
-      break;
-    }
-  }
-
-  static $clinit() {
-    BreakStatement.$clinit = () => {};
-    BreakStatement.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof BreakStatement;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  BreakStatement.$clinit = () =>{};
+  BreakStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BreakStatement;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(BreakStatement, 'breakstatement.BreakStatement');
+$Util.$setClassMetadata(BreakStatement, "breakstatement.BreakStatement");
 
 exports = BreakStatement;
 

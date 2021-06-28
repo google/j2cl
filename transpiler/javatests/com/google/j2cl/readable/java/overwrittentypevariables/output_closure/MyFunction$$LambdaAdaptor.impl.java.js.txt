@@ -9,44 +9,39 @@ const MyFunction = goog.require('overwrittentypevariables.MyFunction$impl');
  * @implements {MyFunction<F, T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function(F):T */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function(F):T}*/
-    this.f_fn__overwrittentypevariables_MyFunction_$LambdaAdaptor;
-    this.$ctor__overwrittentypevariables_MyFunction_$LambdaAdaptor__overwrittentypevariables_MyFunction_$JsFunction(
-        fn);
-  }
-
-  $ctor__overwrittentypevariables_MyFunction_$LambdaAdaptor__overwrittentypevariables_MyFunction_$JsFunction(
-      /** ?function(F):T */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__overwrittentypevariables_MyFunction_$LambdaAdaptor = fn;
-  }
-  /** @override @return {T} */
-  m_apply__java_lang_Object(/** F */ arg0) {
-    let /** ?function(F):T */ $function;
-    return (
-        $function =
-            this.f_fn__overwrittentypevariables_MyFunction_$LambdaAdaptor,
-        $function(arg0));
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** ?function(F):T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(F):T}*/
+  this.f_fn__overwrittentypevariables_MyFunction_$LambdaAdaptor;
+  this.$ctor__overwrittentypevariables_MyFunction_$LambdaAdaptor__overwrittentypevariables_MyFunction_$JsFunction(fn);
+ }
+ 
+ $ctor__overwrittentypevariables_MyFunction_$LambdaAdaptor__overwrittentypevariables_MyFunction_$JsFunction(/** ?function(F):T */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__overwrittentypevariables_MyFunction_$LambdaAdaptor = fn;
+ }
+ /** @override @return {T} */
+ m_apply__java_lang_Object(/** F */ arg0) {
+  let /** ?function(F):T */ $function;
+  return ($function = this.f_fn__overwrittentypevariables_MyFunction_$LambdaAdaptor, $function(arg0));
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 MyFunction.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'overwrittentypevariables.MyFunction$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "overwrittentypevariables.MyFunction$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

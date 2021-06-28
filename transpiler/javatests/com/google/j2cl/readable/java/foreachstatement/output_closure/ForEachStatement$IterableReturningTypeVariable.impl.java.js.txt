@@ -14,57 +14,51 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
  * @implements {Iterable<Integer>}
  */
 class IterableReturningTypeVariable extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {!IterableReturningTypeVariable<T>} */
-  static $create__() {
-    IterableReturningTypeVariable.$clinit();
-    let $instance = new IterableReturningTypeVariable();
-    $instance
-        .$ctor__foreachstatement_ForEachStatement_IterableReturningTypeVariable__();
-    return $instance;
-  }
-
-  $ctor__foreachstatement_ForEachStatement_IterableReturningTypeVariable__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @override @return {T} */
-  m_iterator__() {
-    return null;
-  }
-  // Default method forwarding stub.
-  /** @override */
-  m_forEach__java_util_function_Consumer(/** Consumer<?> */ arg0) {
-    Iterable
-        .m_forEach__$default__java_lang_Iterable__java_util_function_Consumer(
-            this, arg0);
-  }
-  // Default method forwarding stub.
-  /** @override @return {Spliterator<Integer>} */
-  m_spliterator__() {
-    return /**@type {Spliterator<Integer>}*/ (
-        Iterable.m_spliterator__$default__java_lang_Iterable(this));
-  }
-
-  static $clinit() {
-    IterableReturningTypeVariable.$clinit = () => {};
-    IterableReturningTypeVariable.$loadModules();
-    j_l_Object.$clinit();
-    Iterable.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof IterableReturningTypeVariable;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!IterableReturningTypeVariable<T>} */
+ static $create__() {
+  IterableReturningTypeVariable.$clinit();
+  let $instance = new IterableReturningTypeVariable();
+  $instance.$ctor__foreachstatement_ForEachStatement_IterableReturningTypeVariable__();
+  return $instance;
+ }
+ 
+ $ctor__foreachstatement_ForEachStatement_IterableReturningTypeVariable__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @override @return {T} */
+ m_iterator__() {
+  return null;
+ }
+ //Default method forwarding stub.
+ /** @override */
+ m_forEach__java_util_function_Consumer(/** Consumer<?> */ arg0) {
+  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @return {Spliterator<Integer>} */
+ m_spliterator__() {
+  return /**@type {Spliterator<Integer>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable(this));
+ }
+ 
+ static $clinit() {
+  IterableReturningTypeVariable.$clinit = () =>{};
+  IterableReturningTypeVariable.$loadModules();
+  j_l_Object.$clinit();
+  Iterable.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IterableReturningTypeVariable;
+ }
+ 
+ static $loadModules() {}
 }
 Iterable.$markImplementor(IterableReturningTypeVariable);
-$Util.$setClassMetadata(
-    IterableReturningTypeVariable,
-    'foreachstatement.ForEachStatement$IterableReturningTypeVariable');
+$Util.$setClassMetadata(IterableReturningTypeVariable, "foreachstatement.ForEachStatement$IterableReturningTypeVariable");
 
 exports = IterableReturningTypeVariable;
 

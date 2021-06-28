@@ -7,26 +7,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class GenericInterface {
-  static $clinit() {
-    GenericInterface.$clinit = () => {};
-    GenericInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__implementsgenericinterface_GenericInterface =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__implementsgenericinterface_GenericInterface;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  GenericInterface.$clinit = () =>{};
+  GenericInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__implementsgenericinterface_GenericInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__implementsgenericinterface_GenericInterface;
+ }
+ 
+ static $loadModules() {}
 }
 GenericInterface.$markImplementor(/**@type {Function}*/ (GenericInterface));
-$Util.$setClassMetadataForInterface(
-    GenericInterface, 'implementsgenericinterface.GenericInterface');
+$Util.$setClassMetadataForInterface(GenericInterface, "implementsgenericinterface.GenericInterface");
 
 exports = GenericInterface;
 

@@ -8,24 +8,25 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {Annotation}
  */
 class Zoo {
-  static $clinit() {
-    Zoo.$clinit = () => {};
-    Zoo.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    Annotation.$markImplementor(ctor);
-    ctor.prototype.$implements__annotation_Main_Zoo = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null && !!instance.$implements__annotation_Main_Zoo;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  Zoo.$clinit = () =>{};
+  Zoo.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  Annotation.$markImplementor(ctor);
+  ctor.prototype.$implements__annotation_Main_Zoo = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__annotation_Main_Zoo;
+ }
+ 
+ static $loadModules() {}
 }
 Zoo.$markImplementor(/**@type {Function}*/ (Zoo));
-$Util.$setClassMetadataForInterface(Zoo, 'annotation.Main$Zoo');
+$Util.$setClassMetadataForInterface(Zoo, "annotation.Main$Zoo");
 
 exports = Zoo;
 

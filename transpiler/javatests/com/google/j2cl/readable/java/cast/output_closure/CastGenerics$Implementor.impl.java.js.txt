@@ -4,38 +4,38 @@ const BaseImplementor = goog.require('cast.CastGenerics.BaseImplementor$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Implementor extends BaseImplementor {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Implementor} */
-  static $create__() {
-    let $instance = new Implementor();
-    $instance.$ctor__cast_CastGenerics_Implementor__();
-    return $instance;
-  }
-
-  $ctor__cast_CastGenerics_Implementor__() {
-    this.$ctor__cast_CastGenerics_BaseImplementor__();
-  }
-  /** @override */
-  m_mA__() {}
-  /** @override */
-  m_mB__() {}
-
-  static $clinit() {
-    Implementor.$clinit = () => {};
-    Implementor.$loadModules();
-    BaseImplementor.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Implementor;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Implementor} */
+ static $create__() {
+  let $instance = new Implementor();
+  $instance.$ctor__cast_CastGenerics_Implementor__();
+  return $instance;
+ }
+ 
+ $ctor__cast_CastGenerics_Implementor__() {
+  this.$ctor__cast_CastGenerics_BaseImplementor__();
+ }
+ /** @override */
+ m_mA__() {}
+ /** @override */
+ m_mB__() {}
+ 
+ static $clinit() {
+  Implementor.$clinit = () =>{};
+  Implementor.$loadModules();
+  BaseImplementor.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Implementor;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Implementor, 'cast.CastGenerics$Implementor');
+$Util.$setClassMetadata(Implementor, "cast.CastGenerics$Implementor");
 
 exports = Implementor;
 

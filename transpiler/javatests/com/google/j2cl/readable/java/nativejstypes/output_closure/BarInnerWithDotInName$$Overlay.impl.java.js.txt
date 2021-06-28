@@ -4,18 +4,19 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const Bar = goog.require('nativejstypes.Bar');
 
 class $Overlay {
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Bar.Inner;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Bar.Inner;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'nativejstypes.Bar.Inner');
+$Util.$setClassMetadata($Overlay, "nativejstypes.Bar.Inner");
 
 exports = $Overlay;
 

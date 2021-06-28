@@ -8,35 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.TestCase102.BI1.$LambdaA
  * @interface
  */
 class BI1 {
-  /** @abstract */
-  m_set__java_lang_String(/** ?string */ value) {}
-  /** @return {BI1} */
-  static $adapt(/** ?function(?string):void */ fn) {
-    BI1.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    BI1.$clinit = () => {};
-    BI1.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__bridgemethods_TestCase102_BI1 = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__bridgemethods_TestCase102_BI1;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('bridgemethods.TestCase102.BI1.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_set__java_lang_String(/** ?string */ value) {}
+ /** @return {BI1} */
+ static $adapt(/** ?function(?string):void */ fn) {
+  BI1.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  BI1.$clinit = () =>{};
+  BI1.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_TestCase102_BI1 = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_TestCase102_BI1;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('bridgemethods.TestCase102.BI1.$LambdaAdaptor$impl');
+ }
 }
 BI1.$markImplementor(/**@type {Function}*/ (BI1));
-$Util.$setClassMetadataForInterface(BI1, 'bridgemethods.TestCase102$BI1');
+$Util.$setClassMetadataForInterface(BI1, "bridgemethods.TestCase102$BI1");
 
 exports = BI1;
 

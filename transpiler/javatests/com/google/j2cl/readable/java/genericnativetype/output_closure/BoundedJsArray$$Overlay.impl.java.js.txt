@@ -3,31 +3,31 @@ goog.module('genericnativetype.BoundedJsArray.$Overlay$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
-  /** @template V @return {Array<V>} */
-  static m_create__() {
-    $Overlay.$clinit();
-    let array = null;
-    return array;
-  }
-  /** @template V @return {Array<V>} */
-  static m_create__int(/** number */ size) {
-    $Overlay.$clinit();
-    let array = /**@type {!Array<V>}*/ (new Array(size));
-    return array;
-  }
-
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Array;
-  }
-
-  static $loadModules() {}
+ /** @template V @return {Array<V>} */
+ static m_create__() {
+  $Overlay.$clinit();
+  let array = null;
+  return array;
+ }
+ /** @template V @return {Array<V>} */
+ static m_create__int(/** number */ size) {
+  $Overlay.$clinit();
+  let array = /**@type {!Array<V>}*/ (new Array(size));
+  return array;
+ }
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Array;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'Array');
+$Util.$setClassMetadata($Overlay, "Array");
 
 exports = $Overlay;
 

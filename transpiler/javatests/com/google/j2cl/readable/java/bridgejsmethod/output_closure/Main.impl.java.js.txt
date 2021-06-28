@@ -13,67 +13,67 @@ let L = goog.forwardDeclare('bridgejsmethod.Main.L$impl');
 let Integer = goog.forwardDeclare('java.lang.Integer$impl');
 
 class Main extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Main} */
-  static $create__() {
-    Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__bridgejsmethod_Main__();
-    return $instance;
-  }
-
-  $ctor__bridgejsmethod_Main__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static m_test__() {
-    Main.$clinit();
-    let a = /**@type {!A<Integer>}*/ (A.$create__());
-    a.fun(Integer.m_valueOf__int(1));
-    a.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
-    let b = B.$create__();
-    b.fun('abc');
-    b.bar('abc');
-    let c = C.$create__();
-    c.fun(Integer.m_valueOf__int(1));
-    c.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
-    let d = D.$create__();
-    d.fun(Integer.m_valueOf__int(1));
-    d.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
-    let e = E.$create__();
-    e.fun('abc');
-    e.bar('abc');
-    let h = /**@type {!H<Integer>}*/ (H.$create__());
-    h.enclose(Integer.m_valueOf__int(1));
-    let l = /**@type {!L<Integer>}*/ (L.$create__());
-    l.fun('foo', Integer.m_valueOf__int(1));
-  }
-
-  static $clinit() {
-    Main.$clinit = () => {};
-    Main.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Main;
-  }
-
-  static $loadModules() {
-    A = goog.module.get('bridgejsmethod.Main.A$impl');
-    B = goog.module.get('bridgejsmethod.Main.B$impl');
-    C = goog.module.get('bridgejsmethod.Main.C$impl');
-    D = goog.module.get('bridgejsmethod.Main.D$impl');
-    E = goog.module.get('bridgejsmethod.Main.E$impl');
-    H = goog.module.get('bridgejsmethod.Main.H$impl');
-    L = goog.module.get('bridgejsmethod.Main.L$impl');
-    Integer = goog.module.get('java.lang.Integer$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__bridgejsmethod_Main__();
+  return $instance;
+ }
+ 
+ $ctor__bridgejsmethod_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static m_test__() {
+  Main.$clinit();
+  let a = /**@type {!A<Integer>}*/ (A.$create__());
+  a.fun(Integer.m_valueOf__int(1));
+  a.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
+  let b = B.$create__();
+  b.fun("abc");
+  b.bar("abc");
+  let c = C.$create__();
+  c.fun(Integer.m_valueOf__int(1));
+  c.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
+  let d = D.$create__();
+  d.fun(Integer.m_valueOf__int(1));
+  d.m_bar__java_lang_Object(Integer.m_valueOf__int(1));
+  let e = E.$create__();
+  e.fun("abc");
+  e.bar("abc");
+  let h = /**@type {!H<Integer>}*/ (H.$create__());
+  h.enclose(Integer.m_valueOf__int(1));
+  let l = /**@type {!L<Integer>}*/ (L.$create__());
+  l.fun("foo", Integer.m_valueOf__int(1));
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  A = goog.module.get('bridgejsmethod.Main.A$impl');
+  B = goog.module.get('bridgejsmethod.Main.B$impl');
+  C = goog.module.get('bridgejsmethod.Main.C$impl');
+  D = goog.module.get('bridgejsmethod.Main.D$impl');
+  E = goog.module.get('bridgejsmethod.Main.E$impl');
+  H = goog.module.get('bridgejsmethod.Main.H$impl');
+  L = goog.module.get('bridgejsmethod.Main.L$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+ }
 }
-$Util.$setClassMetadata(Main, 'bridgejsmethod.Main');
+$Util.$setClassMetadata(Main, "bridgejsmethod.Main");
 
 exports = Main;
 

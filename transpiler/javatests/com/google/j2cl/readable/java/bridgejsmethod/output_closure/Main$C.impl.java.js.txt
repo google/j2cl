@@ -9,39 +9,39 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @extends {A<Integer>}
  */
 class C extends A {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!C} */
-  static $create__() {
-    C.$clinit();
-    let $instance = new C();
-    $instance.$ctor__bridgejsmethod_Main_C__();
-    return $instance;
-  }
-
-  $ctor__bridgejsmethod_Main_C__() {
-    this.$ctor__bridgejsmethod_Main_A__();
-  }
-  /** @override @return {Integer} */
-  fun(/** Integer */ i) {
-    return i;
-  }
-
-  static $clinit() {
-    C.$clinit = () => {};
-    C.$loadModules();
-    A.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof C;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!C} */
+ static $create__() {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__bridgejsmethod_Main_C__();
+  return $instance;
+ }
+ 
+ $ctor__bridgejsmethod_Main_C__() {
+  this.$ctor__bridgejsmethod_Main_A__();
+ }
+ /** @override @return {Integer} */
+ fun(/** Integer */ i) {
+  return i;
+ }
+ 
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  A.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(C, 'bridgejsmethod.Main$C');
+$Util.$setClassMetadata(C, "bridgejsmethod.Main$C");
 
 exports = C;
 

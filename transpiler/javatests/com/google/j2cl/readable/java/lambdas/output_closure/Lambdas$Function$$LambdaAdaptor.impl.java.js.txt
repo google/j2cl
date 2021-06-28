@@ -9,43 +9,39 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Lambdas_Function<T, R>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function(T):R */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function(T):R}*/
-    this.f_fn__lambdas_Lambdas_Function_$LambdaAdaptor;
-    this.$ctor__lambdas_Lambdas_Function_$LambdaAdaptor__lambdas_Lambdas_Function_$JsFunction(
-        fn);
-  }
-
-  $ctor__lambdas_Lambdas_Function_$LambdaAdaptor__lambdas_Lambdas_Function_$JsFunction(
-      /** ?function(T):R */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__lambdas_Lambdas_Function_$LambdaAdaptor = fn;
-  }
-  /** @override @return {R} */
-  m_apply__java_lang_Object(/** T */ arg0) {
-    let /** ?function(T):R */ $function;
-    return (
-        $function = this.f_fn__lambdas_Lambdas_Function_$LambdaAdaptor,
-        $function(arg0));
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** ?function(T):R */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(T):R}*/
+  this.f_fn__lambdas_Lambdas_Function_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_Function_$LambdaAdaptor__lambdas_Lambdas_Function_$JsFunction(fn);
+ }
+ 
+ $ctor__lambdas_Lambdas_Function_$LambdaAdaptor__lambdas_Lambdas_Function_$JsFunction(/** ?function(T):R */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__lambdas_Lambdas_Function_$LambdaAdaptor = fn;
+ }
+ /** @override @return {R} */
+ m_apply__java_lang_Object(/** T */ arg0) {
+  let /** ?function(T):R */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_Function_$LambdaAdaptor, $function(arg0));
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 Lambdas_Function.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'lambdas.Lambdas$Function$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "lambdas.Lambdas$Function$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

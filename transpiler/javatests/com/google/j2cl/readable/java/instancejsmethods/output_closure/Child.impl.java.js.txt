@@ -8,57 +8,57 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {MyInterface}
  */
 class Child extends Parent {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Child} */
-  static $create__() {
-    Child.$clinit();
-    let $instance = new Child();
-    $instance.$ctor__instancejsmethods_Child__();
-    return $instance;
-  }
-
-  $ctor__instancejsmethods_Child__() {
-    this.$ctor__instancejsmethods_Parent__();
-  }
-  /** @override @return {number} */
-  sum(/** number */ a, /** number */ b) {
-    return a + b + 1 | 0;
-  }
-  /** @override @return {number} */
-  bar(/** number */ a, /** number */ b) {
-    return Math.imul(a, b) + 1 | 0;
-  }
-  /** @override @return {number} */
-  myFoo(/** number */ a) {
-    return a;
-  }
-  /** @return {number} */
-  intfFoo() {
-    return 1;
-  }
-  // Bridge method.
-  /** @override @return {number} */
-  m_intfFoo__() {
-    return this.intfFoo();
-  }
-
-  static $clinit() {
-    Child.$clinit = () => {};
-    Child.$loadModules();
-    Parent.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Child;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Child} */
+ static $create__() {
+  Child.$clinit();
+  let $instance = new Child();
+  $instance.$ctor__instancejsmethods_Child__();
+  return $instance;
+ }
+ 
+ $ctor__instancejsmethods_Child__() {
+  this.$ctor__instancejsmethods_Parent__();
+ }
+ /** @override @return {number} */
+ sum(/** number */ a, /** number */ b) {
+  return a + b + 1 | 0;
+ }
+ /** @override @return {number} */
+ bar(/** number */ a, /** number */ b) {
+  return Math.imul(a, b) + 1 | 0;
+ }
+ /** @override @return {number} */
+ myFoo(/** number */ a) {
+  return a;
+ }
+ /** @return {number} */
+ intfFoo() {
+  return 1;
+ }
+ //Bridge method.
+ /** @override @return {number} */
+ m_intfFoo__() {
+  return this.intfFoo();
+ }
+ 
+ static $clinit() {
+  Child.$clinit = () =>{};
+  Child.$loadModules();
+  Parent.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Child;
+ }
+ 
+ static $loadModules() {}
 }
 MyInterface.$markImplementor(Child);
-$Util.$setClassMetadata(Child, 'instancejsmethods.Child');
+$Util.$setClassMetadata(Child, "instancejsmethods.Child");
 
 exports = Child;
 

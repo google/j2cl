@@ -7,32 +7,28 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class NonNullableTemplatedReturn {
-  /** @abstract @return {T} */
-  m_get__() {}
-  /** @abstract @return {Array<T>} */
-  m_getArray__() {}
-
-  static $clinit() {
-    NonNullableTemplatedReturn.$clinit = () => {};
-    NonNullableTemplatedReturn.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__jsnonnull_Main_NonNullableTemplatedReturn =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__jsnonnull_Main_NonNullableTemplatedReturn;
-  }
-
-  static $loadModules() {}
+ /** @abstract @return {T} */
+ m_get__() {}
+ /** @abstract @return {Array<T>} */
+ m_getArray__() {}
+ 
+ static $clinit() {
+  NonNullableTemplatedReturn.$clinit = () =>{};
+  NonNullableTemplatedReturn.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsnonnull_Main_NonNullableTemplatedReturn = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsnonnull_Main_NonNullableTemplatedReturn;
+ }
+ 
+ static $loadModules() {}
 }
-NonNullableTemplatedReturn.$markImplementor(
-    /**@type {Function}*/ (NonNullableTemplatedReturn));
-$Util.$setClassMetadataForInterface(
-    NonNullableTemplatedReturn, 'jsnonnull.Main$NonNullableTemplatedReturn');
+NonNullableTemplatedReturn.$markImplementor(/**@type {Function}*/ (NonNullableTemplatedReturn));
+$Util.$setClassMetadataForInterface(NonNullableTemplatedReturn, "jsnonnull.Main$NonNullableTemplatedReturn");
 
 exports = NonNullableTemplatedReturn;
 

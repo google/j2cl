@@ -6,39 +6,38 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let A = goog.forwardDeclare('anonymousinnerclass.A$impl');
 
 class B extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {A}*/
-    this.$outer_this__anonymousinnerclass_A_B;
-  }
-  /** @return {!B} */
-  static $create__anonymousinnerclass_A(/** A */ $outer_this) {
-    B.$clinit();
-    let $instance = new B();
-    $instance.$ctor__anonymousinnerclass_A_B__anonymousinnerclass_A(
-        $outer_this);
-    return $instance;
-  }
-
-  $ctor__anonymousinnerclass_A_B__anonymousinnerclass_A(/** A */ $outer_this) {
-    this.$outer_this__anonymousinnerclass_A_B = $outer_this;
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    B.$clinit = () => {};
-    B.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof B;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {A}*/
+  this.$outer_this__anonymousinnerclass_A_B;
+ }
+ /** @return {!B} */
+ static $create__anonymousinnerclass_A(/** A */ $outer_this) {
+  B.$clinit();
+  let $instance = new B();
+  $instance.$ctor__anonymousinnerclass_A_B__anonymousinnerclass_A($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__anonymousinnerclass_A_B__anonymousinnerclass_A(/** A */ $outer_this) {
+  this.$outer_this__anonymousinnerclass_A_B = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(B, 'anonymousinnerclass.A$B');
+$Util.$setClassMetadata(B, "anonymousinnerclass.A$B");
 
 exports = B;
 

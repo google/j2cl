@@ -10,45 +10,42 @@ let Error = goog.forwardDeclare('java.lang.Error$impl');
  * @extends {GenericMethod<T>}
  */
 class $1 extends GenericMethod {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {GenericMethod<T_1>}*/
-    this.$outer_this__genericmethod_GenericMethod_1;
-  }
-  /** @template T, T_1 @return {!$1<T, T_1>} */
-  static $create__genericmethod_GenericMethod(
-      /** GenericMethod<T_1> */ $outer_this) {
-    $1.$clinit();
-    let $instance = new $1();
-    $instance.$ctor__genericmethod_GenericMethod_1__genericmethod_GenericMethod(
-        $outer_this);
-    return $instance;
-  }
-
-  $ctor__genericmethod_GenericMethod_1__genericmethod_GenericMethod(
-      /** GenericMethod<T_1> */ $outer_this) {
-    this.$outer_this__genericmethod_GenericMethod_1 = $outer_this;
-    this.$ctor__genericmethod_GenericMethod__();
-  }
-
-  m_fun2__java_lang_Error(/** T */ t) {}
-  /** @template T_2 */
-  m_fun2__java_lang_Object(/** T_2 */ t) {}
-
-  static $clinit() {
-    $1.$clinit = () => {};
-    $1.$loadModules();
-    GenericMethod.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $1;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {GenericMethod<T_1>}*/
+  this.$outer_this__genericmethod_GenericMethod_1;
+ }
+ /** @template T, T_1 @return {!$1<T, T_1>} */
+ static $create__genericmethod_GenericMethod(/** GenericMethod<T_1> */ $outer_this) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__genericmethod_GenericMethod_1__genericmethod_GenericMethod($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__genericmethod_GenericMethod_1__genericmethod_GenericMethod(/** GenericMethod<T_1> */ $outer_this) {
+  this.$outer_this__genericmethod_GenericMethod_1 = $outer_this;
+  this.$ctor__genericmethod_GenericMethod__();
+ }
+ 
+ m_fun2__java_lang_Error(/** T */ t) {}
+ /** @template T_2 */
+ m_fun2__java_lang_Object(/** T_2 */ t) {}
+ 
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  GenericMethod.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($1, 'genericmethod.GenericMethod$1');
+$Util.$setClassMetadata($1, "genericmethod.GenericMethod$1");
 
 exports = $1;
 

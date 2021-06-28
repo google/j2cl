@@ -9,39 +9,33 @@ let $LambdaAdaptor = goog.forwardDeclare('deprecated.DeprecatedExample.Deprecate
  * @deprecated
  */
 class DeprecatedInterface {
-  /** @abstract @deprecated */
-  doAThing(/** number */ anInt) {}
-  /** @return {DeprecatedInterface} */
-  static $adapt(/** ?function(number):void */ fn) {
-    DeprecatedInterface.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    DeprecatedInterface.$clinit = () => {};
-    DeprecatedInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype
-        .$implements__deprecated_DeprecatedExample_DeprecatedInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance
-              .$implements__deprecated_DeprecatedExample_DeprecatedInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract @deprecated */
+ doAThing(/** number */ anInt) {}
+ /** @return {DeprecatedInterface} */
+ static $adapt(/** ?function(number):void */ fn) {
+  DeprecatedInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  DeprecatedInterface.$clinit = () =>{};
+  DeprecatedInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__deprecated_DeprecatedExample_DeprecatedInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__deprecated_DeprecatedExample_DeprecatedInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('deprecated.DeprecatedExample.DeprecatedInterface.$LambdaAdaptor$impl');
+ }
 }
-DeprecatedInterface.$markImplementor(
-    /**@type {Function}*/ (DeprecatedInterface));
-$Util.$setClassMetadataForInterface(
-    DeprecatedInterface, 'deprecated.DeprecatedExample$DeprecatedInterface');
+DeprecatedInterface.$markImplementor(/**@type {Function}*/ (DeprecatedInterface));
+$Util.$setClassMetadataForInterface(DeprecatedInterface, "deprecated.DeprecatedExample$DeprecatedInterface");
 
 exports = DeprecatedInterface;
 

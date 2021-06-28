@@ -10,43 +10,39 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @implements {BaseInterface}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():IThenable<Integer> */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():IThenable<Integer>}*/
-    this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor;
-    this.$ctor__jsasync_Main_BaseInterface_$LambdaAdaptor__jsasync_Main_BaseInterface_$JsFunction(
-        fn);
-  }
-
-  $ctor__jsasync_Main_BaseInterface_$LambdaAdaptor__jsasync_Main_BaseInterface_$JsFunction(
-      /** ?function():IThenable<Integer> */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor = fn;
-  }
-  /** @override @return {IThenable<Integer>} */
-  m_asyncCall__() {
-    let /** ?function():IThenable<Integer> */ $function;
-    return (
-        $function = this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor,
-        $function());
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** ?function():IThenable<Integer> */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():IThenable<Integer>}*/
+  this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor;
+  this.$ctor__jsasync_Main_BaseInterface_$LambdaAdaptor__jsasync_Main_BaseInterface_$JsFunction(fn);
+ }
+ 
+ $ctor__jsasync_Main_BaseInterface_$LambdaAdaptor__jsasync_Main_BaseInterface_$JsFunction(/** ?function():IThenable<Integer> */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor = fn;
+ }
+ /** @override @return {IThenable<Integer>} */
+ m_asyncCall__() {
+  let /** ?function():IThenable<Integer> */ $function;
+  return ($function = this.f_fn__jsasync_Main_BaseInterface_$LambdaAdaptor, $function());
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 BaseInterface.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'jsasync.Main$BaseInterface$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "jsasync.Main$BaseInterface$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

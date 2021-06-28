@@ -19,219 +19,214 @@ let $LongUtils = goog.forwardDeclare('vmbootstrap.LongUtils$impl');
 let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class CastPrimitives extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!CastPrimitives} */
+ static $create__() {
+  CastPrimitives.$clinit();
+  let $instance = new CastPrimitives();
+  $instance.$ctor__cast_CastPrimitives__();
+  return $instance;
+ }
+ 
+ $ctor__cast_CastPrimitives__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_testPrimitiveCasts__() {
+  let b = 1;
+  let c = 1 /* "\u0001" */;
+  let s = 1;
+  let i = 1;
+  let l = $Long.fromInt(1);
+  let f = 1.100000023841858;
+  let d = 1.1;
+  b = b;
+  c = $Primitives.widenByteToChar(b);
+  s = b;
+  i = b;
+  l = $Primitives.widenByteToLong(b);
+  f = b;
+  d = b;
+  b = $Primitives.narrowCharToByte(c);
+  c = c;
+  s = $Primitives.narrowCharToShort(c);
+  i = c;
+  l = $Primitives.widenCharToLong(c);
+  f = c;
+  d = c;
+  b = $Primitives.narrowShortToByte(s);
+  c = $Primitives.narrowShortToChar(s);
+  s = s;
+  i = s;
+  l = $Primitives.widenShortToLong(s);
+  f = s;
+  d = s;
+  b = $Primitives.narrowIntToByte(i);
+  c = $Primitives.narrowIntToChar(i);
+  s = $Primitives.narrowIntToShort(i);
+  i = i;
+  l = $Primitives.widenIntToLong(i);
+  f = i;
+  d = i;
+  b = $Primitives.narrowLongToByte(l);
+  c = $Primitives.narrowLongToChar(l);
+  s = $Primitives.narrowLongToShort(l);
+  i = $Primitives.narrowLongToInt(l);
+  l = l;
+  f = $Primitives.widenLongToFloat(l);
+  d = $Primitives.widenLongToDouble(l);
+  b = $Primitives.narrowFloatToByte(f);
+  c = $Primitives.narrowFloatToChar(f);
+  s = $Primitives.narrowFloatToShort(f);
+  i = $Primitives.narrowFloatToInt(f);
+  l = $Primitives.narrowFloatToLong(f);
+  f = f;
+  d = f;
+  b = $Primitives.narrowDoubleToByte(d);
+  c = $Primitives.narrowDoubleToChar(d);
+  s = $Primitives.narrowDoubleToShort(d);
+  i = $Primitives.narrowDoubleToInt(d);
+  l = $Primitives.narrowDoubleToLong(d);
+  f = d;
+  d = d;
+ }
+ 
+ m_testReferenceToPrimitive__() {
+  let o = j_l_Object.$create__();
+  let bool = Boolean.m_booleanValue__java_lang_Boolean(/**@type {?boolean}*/ ($Casts.$to(o, Boolean)));
+  let b = /**@type {Byte}*/ ($Casts.$to(o, Byte)).m_byteValue__();
+  let c = /**@type {Character}*/ ($Casts.$to(o, Character)).m_charValue__();
+  let s = /**@type {Short}*/ ($Casts.$to(o, Short)).m_shortValue__();
+  let i = /**@type {Integer}*/ ($Casts.$to(o, Integer)).m_intValue__();
+  let l = /**@type {Long}*/ ($Casts.$to(o, Long)).m_longValue__();
+  let f = /**@type {Float}*/ ($Casts.$to(o, Float)).m_floatValue__();
+  let d = Double.m_doubleValue__java_lang_Double(/**@type {?number}*/ ($Casts.$to(o, Double)));
+ }
+ 
+ m_testUnboxAndWiden__() {
+  let boxedByte = Byte.m_valueOf__byte(0);
+  let s = boxedByte.m_byteValue__();
+  let i = boxedByte.m_byteValue__();
+  let l = $Primitives.widenByteToLong(boxedByte.m_byteValue__());
+  let f = boxedByte.m_byteValue__();
+  let d = boxedByte.m_byteValue__();
+ }
+ 
+ m_testImplicitArgumentCasts__() {
+  let b = 127;
+  let c = 65535 /* "\uFFFF" */;
+  let s = 32767;
+  let i = 2147483647;
+  let l = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
+  let f = 3.4028234663852886E38;
+  let d = 1.7976931348623157E308;
+  CastPrimitives.m_getShort__short(b);
+  CastPrimitives.m_getInt__int(b);
+  CastPrimitives.m_getLong__long($Primitives.widenByteToLong(b));
+  CastPrimitives.m_getFloat__float(b);
+  CastPrimitives.m_getDouble__double(b);
+  CastPrimitives.m_getFloat__float($Primitives.widenLongToFloat(l));
+  CastPrimitives.m_getDouble__double($Primitives.widenLongToDouble(l));
+  CastPrimitives.m_getDouble__double(f);
+  IntValueHolder.$create__int(b);
+  IntValueHolder.$create__int(c);
+  IntValueHolder.$create__int(s);
+  LongValueHolder.$create__long($Primitives.widenByteToLong(b));
+  LongValueHolder.$create__long($Primitives.widenCharToLong(c));
+  LongValueHolder.$create__long($Primitives.widenIntToLong(i));
+ }
+ /** @return {number} */
+ static m_getShort__short(/** number */ value) {
+  return value;
+ }
+ /** @return {number} */
+ static m_getInt__int(/** number */ value) {
+  return value;
+ }
+ /** @return {!$Long} */
+ static m_getLong__long(/** !$Long */ value) {
+  return value;
+ }
+ /** @return {number} */
+ static m_getFloat__float(/** number */ value) {
+  return value;
+ }
+ /** @return {number} */
+ static m_getDouble__double(/** number */ value) {
+  return value;
+ }
+ 
+ m_testImplicitLongAssignmentCasts__() {
+  let fbyte = 11;
+  let fchar = 12 /* "\f" */;
+  let fshort = 13;
+  let fint = 14;
+  let flong = $Long.fromInt(15);
+  let ffloat = 16;
+  let fdouble = 17;
+  let tlong = $Long.fromInt(0);
+  {
+   tlong = $Primitives.widenByteToLong(fbyte);
+   tlong = flong;
   }
-  /** @return {!CastPrimitives} */
-  static $create__() {
-    CastPrimitives.$clinit();
-    let $instance = new CastPrimitives();
-    $instance.$ctor__cast_CastPrimitives__();
-    return $instance;
+  {
+   tlong = $Primitives.widenIntToLong(fint);
+   tlong = $LongUtils.plus(tlong, $Primitives.widenIntToLong(fint));
+   tlong = $LongUtils.leftShift(tlong, fint);
   }
-
-  $ctor__cast_CastPrimitives__() {
-    this.$ctor__java_lang_Object__();
+  {
+   tlong = $LongUtils.plus(tlong, $Primitives.widenCharToLong(fchar));
+   tlong = $LongUtils.plus(tlong, flong);
+   tlong = $Primitives.narrowFloatToLong($Primitives.widenLongToFloat(tlong) + ffloat);
   }
-
-  m_testPrimitiveCasts__() {
-    let b = 1;
-    let c = 1 /* "\u0001" */;
-    let s = 1;
-    let i = 1;
-    let l = $Long.fromInt(1);
-    let f = 1.100000023841858;
-    let d = 1.1;
-    b = b;
-    c = $Primitives.widenByteToChar(b);
-    s = b;
-    i = b;
-    l = $Primitives.widenByteToLong(b);
-    f = b;
-    d = b;
-    b = $Primitives.narrowCharToByte(c);
-    c = c;
-    s = $Primitives.narrowCharToShort(c);
-    i = c;
-    l = $Primitives.widenCharToLong(c);
-    f = c;
-    d = c;
-    b = $Primitives.narrowShortToByte(s);
-    c = $Primitives.narrowShortToChar(s);
-    s = s;
-    i = s;
-    l = $Primitives.widenShortToLong(s);
-    f = s;
-    d = s;
-    b = $Primitives.narrowIntToByte(i);
-    c = $Primitives.narrowIntToChar(i);
-    s = $Primitives.narrowIntToShort(i);
-    i = i;
-    l = $Primitives.widenIntToLong(i);
-    f = i;
-    d = i;
-    b = $Primitives.narrowLongToByte(l);
-    c = $Primitives.narrowLongToChar(l);
-    s = $Primitives.narrowLongToShort(l);
-    i = $Primitives.narrowLongToInt(l);
-    l = l;
-    f = $Primitives.widenLongToFloat(l);
-    d = $Primitives.widenLongToDouble(l);
-    b = $Primitives.narrowFloatToByte(f);
-    c = $Primitives.narrowFloatToChar(f);
-    s = $Primitives.narrowFloatToShort(f);
-    i = $Primitives.narrowFloatToInt(f);
-    l = $Primitives.narrowFloatToLong(f);
-    f = f;
-    d = f;
-    b = $Primitives.narrowDoubleToByte(d);
-    c = $Primitives.narrowDoubleToChar(d);
-    s = $Primitives.narrowDoubleToShort(d);
-    i = $Primitives.narrowDoubleToInt(d);
-    l = $Primitives.narrowDoubleToLong(d);
-    f = d;
-    d = d;
+  {
+   tlong = $LongUtils.times(flong, $Primitives.widenIntToLong(fint));
+   tlong = $LongUtils.rightShiftSigned(flong, fint);
   }
-
-  m_testReferenceToPrimitive__() {
-    let o = j_l_Object.$create__();
-    let bool = Boolean.m_booleanValue__java_lang_Boolean(
-        /**@type {?boolean}*/ ($Casts.$to(o, Boolean)));
-    let b = /**@type {Byte}*/ ($Casts.$to(o, Byte)).m_byteValue__();
-    let c = /**@type {Character}*/ ($Casts.$to(o, Character)).m_charValue__();
-    let s = /**@type {Short}*/ ($Casts.$to(o, Short)).m_shortValue__();
-    let i = /**@type {Integer}*/ ($Casts.$to(o, Integer)).m_intValue__();
-    let l = /**@type {Long}*/ ($Casts.$to(o, Long)).m_longValue__();
-    let f = /**@type {Float}*/ ($Casts.$to(o, Float)).m_floatValue__();
-    let d = Double.m_doubleValue__java_lang_Double(
-        /**@type {?number}*/ ($Casts.$to(o, Double)));
+  {
+   tlong = $LongUtils.plus(flong, $Primitives.widenShortToLong(fshort));
+   tlong = $LongUtils.plus(flong, flong);
   }
-
-  m_testUnboxAndWiden__() {
-    let boxedByte = Byte.m_valueOf__byte(0);
-    let s = boxedByte.m_byteValue__();
-    let i = boxedByte.m_byteValue__();
-    let l = $Primitives.widenByteToLong(boxedByte.m_byteValue__());
-    let f = boxedByte.m_byteValue__();
-    let d = boxedByte.m_byteValue__();
+  {
+   tlong = $LongUtils.leftShift(flong, $Primitives.narrowLongToInt(tlong));
+   tlong = $LongUtils.leftShift(tlong, $Primitives.narrowLongToInt(flong));
   }
-
-  m_testImplicitArgumentCasts__() {
-    let b = 127;
-    let c = 65535 /* "\uFFFF" */;
-    let s = 32767;
-    let i = 2147483647;
-    let l = $Long.fromBits(-1, 2147483647) /* 9223372036854775807 */;
-    let f = 3.4028234663852886E38;
-    let d = 1.7976931348623157E308;
-    CastPrimitives.m_getShort__short(b);
-    CastPrimitives.m_getInt__int(b);
-    CastPrimitives.m_getLong__long($Primitives.widenByteToLong(b));
-    CastPrimitives.m_getFloat__float(b);
-    CastPrimitives.m_getDouble__double(b);
-    CastPrimitives.m_getFloat__float($Primitives.widenLongToFloat(l));
-    CastPrimitives.m_getDouble__double($Primitives.widenLongToDouble(l));
-    CastPrimitives.m_getDouble__double(f);
-    IntValueHolder.$create__int(b);
-    IntValueHolder.$create__int(c);
-    IntValueHolder.$create__int(s);
-    LongValueHolder.$create__long($Primitives.widenByteToLong(b));
-    LongValueHolder.$create__long($Primitives.widenCharToLong(c));
-    LongValueHolder.$create__long($Primitives.widenIntToLong(i));
+  {
+   tlong = $LongUtils.plus($Primitives.widenIntToLong(0 + 1 | 0), $Long.fromInt(2));
   }
-  /** @return {number} */
-  static m_getShort__short(/** number */ value) {
-    return value;
-  }
-  /** @return {number} */
-  static m_getInt__int(/** number */ value) {
-    return value;
-  }
-  /** @return {!$Long} */
-  static m_getLong__long(/** !$Long */ value) {
-    return value;
-  }
-  /** @return {number} */
-  static m_getFloat__float(/** number */ value) {
-    return value;
-  }
-  /** @return {number} */
-  static m_getDouble__double(/** number */ value) {
-    return value;
-  }
-
-  m_testImplicitLongAssignmentCasts__() {
-    let fbyte = 11;
-    let fchar = 12 /* "\f" */;
-    let fshort = 13;
-    let fint = 14;
-    let flong = $Long.fromInt(15);
-    let ffloat = 16;
-    let fdouble = 17;
-    let tlong = $Long.fromInt(0);
-    {
-      tlong = $Primitives.widenByteToLong(fbyte);
-      tlong = flong;
-    }
-    {
-      tlong = $Primitives.widenIntToLong(fint);
-      tlong = $LongUtils.plus(tlong, $Primitives.widenIntToLong(fint));
-      tlong = $LongUtils.leftShift(tlong, fint);
-    }
-    {
-      tlong = $LongUtils.plus(tlong, $Primitives.widenCharToLong(fchar));
-      tlong = $LongUtils.plus(tlong, flong);
-      tlong = $Primitives.narrowFloatToLong(
-          $Primitives.widenLongToFloat(tlong) + ffloat);
-    }
-    {
-      tlong = $LongUtils.times(flong, $Primitives.widenIntToLong(fint));
-      tlong = $LongUtils.rightShiftSigned(flong, fint);
-    }
-    {
-      tlong = $LongUtils.plus(flong, $Primitives.widenShortToLong(fshort));
-      tlong = $LongUtils.plus(flong, flong);
-    }
-    {
-      tlong = $LongUtils.leftShift(flong, $Primitives.narrowLongToInt(tlong));
-      tlong = $LongUtils.leftShift(tlong, $Primitives.narrowLongToInt(flong));
-    }
-    {
-      tlong = $LongUtils.plus(
-          $Primitives.widenIntToLong(0 + 1 | 0), $Long.fromInt(2));
-    }
-  }
-
-  static $clinit() {
-    CastPrimitives.$clinit = () => {};
-    CastPrimitives.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof CastPrimitives;
-  }
-
-  static $loadModules() {
-    IntValueHolder = goog.module.get('cast.CastPrimitives.IntValueHolder$impl');
-    LongValueHolder =
-        goog.module.get('cast.CastPrimitives.LongValueHolder$impl');
-    Boolean = goog.module.get('java.lang.Boolean$impl');
-    Byte = goog.module.get('java.lang.Byte$impl');
-    Character = goog.module.get('java.lang.Character$impl');
-    Double = goog.module.get('java.lang.Double$impl');
-    Float = goog.module.get('java.lang.Float$impl');
-    Integer = goog.module.get('java.lang.Integer$impl');
-    Long = goog.module.get('java.lang.Long$impl');
-    Short = goog.module.get('java.lang.Short$impl');
-    $Long = goog.module.get('nativebootstrap.Long$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-    $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
-    $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
-  }
+ }
+ 
+ static $clinit() {
+  CastPrimitives.$clinit = () =>{};
+  CastPrimitives.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof CastPrimitives;
+ }
+ 
+ static $loadModules() {
+  IntValueHolder = goog.module.get('cast.CastPrimitives.IntValueHolder$impl');
+  LongValueHolder = goog.module.get('cast.CastPrimitives.LongValueHolder$impl');
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  Byte = goog.module.get('java.lang.Byte$impl');
+  Character = goog.module.get('java.lang.Character$impl');
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  Integer = goog.module.get('java.lang.Integer$impl');
+  Long = goog.module.get('java.lang.Long$impl');
+  Short = goog.module.get('java.lang.Short$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+  $LongUtils = goog.module.get('vmbootstrap.LongUtils$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
+ }
 }
-$Util.$setClassMetadata(CastPrimitives, 'cast.CastPrimitives');
+$Util.$setClassMetadata(CastPrimitives, "cast.CastPrimitives");
 
 exports = CastPrimitives;
 

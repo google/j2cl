@@ -8,35 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('typewildcards.TypeWildCards.Y.$LambdaA
  * @interface
  */
 class Y {
-  /** @abstract */
-  m_n__() {}
-  /** @return {Y} */
-  static $adapt(/** ?function():void */ fn) {
-    Y.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    Y.$clinit = () => {};
-    Y.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__typewildcards_TypeWildCards_Y = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__typewildcards_TypeWildCards_Y;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('typewildcards.TypeWildCards.Y.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_n__() {}
+ /** @return {Y} */
+ static $adapt(/** ?function():void */ fn) {
+  Y.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  Y.$clinit = () =>{};
+  Y.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__typewildcards_TypeWildCards_Y = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__typewildcards_TypeWildCards_Y;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('typewildcards.TypeWildCards.Y.$LambdaAdaptor$impl');
+ }
 }
 Y.$markImplementor(/**@type {Function}*/ (Y));
-$Util.$setClassMetadataForInterface(Y, 'typewildcards.TypeWildCards$Y');
+$Util.$setClassMetadataForInterface(Y, "typewildcards.TypeWildCards$Y");
 
 exports = Y;
 

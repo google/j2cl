@@ -8,92 +8,90 @@ let Numbers = goog.forwardDeclare('switchstatement.Numbers$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class SwitchStatement extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!SwitchStatement} */
+ static $create__() {
+  SwitchStatement.$clinit();
+  let $instance = new SwitchStatement();
+  $instance.$ctor__switchstatement_SwitchStatement__();
+  return $instance;
+ }
+ 
+ $ctor__switchstatement_SwitchStatement__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_main__() {
+  switch (InternalPreconditions.m_checkNotNull__java_lang_Object("one")) {
+   case "one": 
+   case "two": 
+    break;
+   default: 
+    return;
   }
-  /** @return {!SwitchStatement} */
-  static $create__() {
-    SwitchStatement.$clinit();
-    let $instance = new SwitchStatement();
-    $instance.$ctor__switchstatement_SwitchStatement__();
-    return $instance;
+  switch (49 /* "1" */) {
+   case 49 /* "1" */: 
+   case 50 /* "2" */: 
+    break;
+   default: 
+    return;
   }
-
-  $ctor__switchstatement_SwitchStatement__() {
-    this.$ctor__java_lang_Object__();
+  switch (1) {
+   case 1: 
+   case 2: 
+    break;
+   default: 
+    return;
   }
-
-  m_main__() {
-    switch (InternalPreconditions.m_checkNotNull__java_lang_Object('one')) {
-      case 'one':
-      case 'two':
-        break;
-      default:
-        return;
-    }
-    switch (49 /* "1" */) {
-      case 49 /* "1" */:
-      case 50 /* "2" */:
-        break;
-      default:
-        return;
-    }
-    switch (1) {
-      case 1:
-      case 2:
-        break;
-      default:
-        return;
-    }
-    switch (Numbers.f_ONE__switchstatement_Numbers.ordinal()) {
-      case Numbers.$ordinal_ONE__switchstatement_Numbers:
-      case Numbers.$ordinal_TWO__switchstatement_Numbers:
-        break;
-      default:
-        return;
-    }
+  switch (Numbers.f_ONE__switchstatement_Numbers.ordinal()) {
+   case Numbers.$ordinal_ONE__switchstatement_Numbers: 
+   case Numbers.$ordinal_TWO__switchstatement_Numbers: 
+    break;
+   default: 
+    return;
   }
-
-  static m_testSwitchVariableDeclarations__() {
-    let /** number */ unassigned, /** number */ unassigned2, /** number */ i,
-        /** number */ j, /** number */ b, /** number */ i_1;
-    switch (3) {
-      case 1:
-        i = 0;
-        (j = 2, b = j + 1 | 0);
-        break;
-      case 3:
-        i = 3;
-        $Asserts.$assert(i == 3);
-        return;
-    }
-    switch (5) {
-      case 5:
-        i_1 = 1;
-        break;
-    }
-    $Asserts.$assert(false);
+ }
+ 
+ static m_testSwitchVariableDeclarations__() {
+  let /** number */ unassigned, /** number */ unassigned2, /** number */ i, /** number */ j, /** number */ b, /** number */ i_1;
+  switch (3) {
+   case 1: 
+    i = 0;
+    (j = 2, b = j + 1 | 0);
+    break;
+   case 3: 
+    i = 3;
+    $Asserts.$assert(i == 3);
+    return;
   }
-
-  static $clinit() {
-    SwitchStatement.$clinit = () => {};
-    SwitchStatement.$loadModules();
-    j_l_Object.$clinit();
+  switch (5) {
+   case 5: 
+    i_1 = 1;
+    break;
   }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SwitchStatement;
-  }
-
-  static $loadModules() {
-    InternalPreconditions =
-        goog.module.get('javaemul.internal.InternalPreconditions$impl');
-    Numbers = goog.module.get('switchstatement.Numbers$impl');
-    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-  }
+  $Asserts.$assert(false);
+ }
+ 
+ static $clinit() {
+  SwitchStatement.$clinit = () =>{};
+  SwitchStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SwitchStatement;
+ }
+ 
+ static $loadModules() {
+  InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
+  Numbers = goog.module.get('switchstatement.Numbers$impl');
+  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+ }
 }
-$Util.$setClassMetadata(SwitchStatement, 'switchstatement.SwitchStatement');
+$Util.$setClassMetadata(SwitchStatement, "switchstatement.SwitchStatement");
 
 exports = SwitchStatement;
 

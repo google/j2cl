@@ -10,41 +10,41 @@ let InnerEntry = goog.forwardDeclare('nobridgemethods.TreeMap.InnerEntry$impl');
  * @extends {Map<K>}
  */
 class TreeMap extends Map {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template K @return {!TreeMap<K>} */
-  static $create__() {
-    TreeMap.$clinit();
-    let $instance = new TreeMap();
-    $instance.$ctor__nobridgemethods_TreeMap__();
-    return $instance;
-  }
-
-  $ctor__nobridgemethods_TreeMap__() {
-    this.$ctor__nobridgemethods_Map__();
-  }
-  /** @override @return {InnerEntry<K>} */
-  m_getCeilingEntry__java_lang_Object(/** K */ key) {
-    return /**@type {!InnerEntry<K>}*/ (InnerEntry.$create__());
-  }
-
-  static $clinit() {
-    TreeMap.$clinit = () => {};
-    TreeMap.$loadModules();
-    Map.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof TreeMap;
-  }
-
-  static $loadModules() {
-    InnerEntry = goog.module.get('nobridgemethods.TreeMap.InnerEntry$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template K @return {!TreeMap<K>} */
+ static $create__() {
+  TreeMap.$clinit();
+  let $instance = new TreeMap();
+  $instance.$ctor__nobridgemethods_TreeMap__();
+  return $instance;
+ }
+ 
+ $ctor__nobridgemethods_TreeMap__() {
+  this.$ctor__nobridgemethods_Map__();
+ }
+ /** @override @return {InnerEntry<K>} */
+ m_getCeilingEntry__java_lang_Object(/** K */ key) {
+  return /**@type {!InnerEntry<K>}*/ (InnerEntry.$create__());
+ }
+ 
+ static $clinit() {
+  TreeMap.$clinit = () =>{};
+  TreeMap.$loadModules();
+  Map.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof TreeMap;
+ }
+ 
+ static $loadModules() {
+  InnerEntry = goog.module.get('nobridgemethods.TreeMap.InnerEntry$impl');
+ }
 }
-$Util.$setClassMetadata(TreeMap, 'nobridgemethods.TreeMap');
+$Util.$setClassMetadata(TreeMap, "nobridgemethods.TreeMap");
 
 exports = TreeMap;
 

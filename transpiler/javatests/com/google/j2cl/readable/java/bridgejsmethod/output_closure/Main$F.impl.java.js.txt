@@ -11,36 +11,36 @@ let Integer = goog.forwardDeclare('java.lang.Integer$impl');
  * @implements {I<Integer>}
  */
 class F extends A {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!F} */
-  static $create__() {
-    F.$clinit();
-    let $instance = new F();
-    $instance.$ctor__bridgejsmethod_Main_F__();
-    return $instance;
-  }
-
-  $ctor__bridgejsmethod_Main_F__() {
-    this.$ctor__bridgejsmethod_Main_A__();
-  }
-
-  static $clinit() {
-    F.$clinit = () => {};
-    F.$loadModules();
-    A.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof F;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!F} */
+ static $create__() {
+  F.$clinit();
+  let $instance = new F();
+  $instance.$ctor__bridgejsmethod_Main_F__();
+  return $instance;
+ }
+ 
+ $ctor__bridgejsmethod_Main_F__() {
+  this.$ctor__bridgejsmethod_Main_A__();
+ }
+ 
+ static $clinit() {
+  F.$clinit = () =>{};
+  F.$loadModules();
+  A.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof F;
+ }
+ 
+ static $loadModules() {}
 }
 I.$markImplementor(F);
-$Util.$setClassMetadata(F, 'bridgejsmethod.Main$F');
+$Util.$setClassMetadata(F, "bridgejsmethod.Main$F");
 
 exports = F;
 

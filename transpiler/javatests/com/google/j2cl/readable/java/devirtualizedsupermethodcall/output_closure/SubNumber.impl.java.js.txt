@@ -6,53 +6,53 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 class SubNumber extends Number {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!SubNumber} */
-  static $create__() {
-    SubNumber.$clinit();
-    let $instance = new SubNumber();
-    $instance.$ctor__devirtualizedsupermethodcall_SubNumber__();
-    return $instance;
-  }
-
-  $ctor__devirtualizedsupermethodcall_SubNumber__() {
-    this.$ctor__java_lang_Number__();
-  }
-  /** @override @return {number} */
-  m_intValue__() {
-    return 0;
-  }
-  /** @override @return {!$Long} */
-  m_longValue__() {
-    return $Long.fromInt(0);
-  }
-  /** @override @return {number} */
-  m_floatValue__() {
-    return 0;
-  }
-  /** @override @return {number} */
-  m_doubleValue__() {
-    return 0;
-  }
-
-  static $clinit() {
-    SubNumber.$clinit = () => {};
-    SubNumber.$loadModules();
-    Number.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SubNumber;
-  }
-
-  static $loadModules() {
-    $Long = goog.module.get('nativebootstrap.Long$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!SubNumber} */
+ static $create__() {
+  SubNumber.$clinit();
+  let $instance = new SubNumber();
+  $instance.$ctor__devirtualizedsupermethodcall_SubNumber__();
+  return $instance;
+ }
+ 
+ $ctor__devirtualizedsupermethodcall_SubNumber__() {
+  this.$ctor__java_lang_Number__();
+ }
+ /** @override @return {number} */
+ m_intValue__() {
+  return 0;
+ }
+ /** @override @return {!$Long} */
+ m_longValue__() {
+  return $Long.fromInt(0);
+ }
+ /** @override @return {number} */
+ m_floatValue__() {
+  return 0;
+ }
+ /** @override @return {number} */
+ m_doubleValue__() {
+  return 0;
+ }
+ 
+ static $clinit() {
+  SubNumber.$clinit = () =>{};
+  SubNumber.$loadModules();
+  Number.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubNumber;
+ }
+ 
+ static $loadModules() {
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+ }
 }
-$Util.$setClassMetadata(SubNumber, 'devirtualizedsupermethodcall.SubNumber');
+$Util.$setClassMetadata(SubNumber, "devirtualizedsupermethodcall.SubNumber");
 
 exports = SubNumber;
 

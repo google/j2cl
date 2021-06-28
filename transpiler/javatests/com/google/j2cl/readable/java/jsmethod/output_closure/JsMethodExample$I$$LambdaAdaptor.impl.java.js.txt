@@ -8,43 +8,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {I}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function(?string):void */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function(?string):void}*/
-    this.f_fn__jsmethod_JsMethodExample_I_$LambdaAdaptor;
-    this.$ctor__jsmethod_JsMethodExample_I_$LambdaAdaptor__jsmethod_JsMethodExample_I_$JsFunction(
-        fn);
+ 
+ constructor(/** ?function(?string):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(?string):void}*/
+  this.f_fn__jsmethod_JsMethodExample_I_$LambdaAdaptor;
+  this.$ctor__jsmethod_JsMethodExample_I_$LambdaAdaptor__jsmethod_JsMethodExample_I_$JsFunction(fn);
+ }
+ 
+ $ctor__jsmethod_JsMethodExample_I_$LambdaAdaptor__jsmethod_JsMethodExample_I_$JsFunction(/** ?function(?string):void */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__jsmethod_JsMethodExample_I_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ m(/** ?string */ arg0) {
+  {
+   let $function = this.f_fn__jsmethod_JsMethodExample_I_$LambdaAdaptor;
+   $function(arg0);
   }
-
-  $ctor__jsmethod_JsMethodExample_I_$LambdaAdaptor__jsmethod_JsMethodExample_I_$JsFunction(
-      /** ?function(?string):void */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__jsmethod_JsMethodExample_I_$LambdaAdaptor = fn;
-  }
-  /** @override */
-  m(/** ?string */ arg0) {
-    {
-      let $function = this.f_fn__jsmethod_JsMethodExample_I_$LambdaAdaptor;
-      $function(arg0);
-    }
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 I.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'jsmethod.JsMethodExample$I$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "jsmethod.JsMethodExample$I$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

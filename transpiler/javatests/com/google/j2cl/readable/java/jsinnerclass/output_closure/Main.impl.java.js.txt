@@ -7,43 +7,43 @@ let Outer = goog.forwardDeclare('jsinnerclass.Main.Outer$impl');
 let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 
 class Main extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Main} */
-  static $create__() {
-    Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__jsinnerclass_Main__();
-    return $instance;
-  }
-
-  $ctor__jsinnerclass_Main__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
-    Main.$clinit();
-    $Asserts.$assert(Outer.$create__().m_method__() == 5);
-  }
-
-  static $clinit() {
-    Main.$clinit = () => {};
-    Main.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Main;
-  }
-
-  static $loadModules() {
-    Outer = goog.module.get('jsinnerclass.Main.Outer$impl');
-    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__jsinnerclass_Main__();
+  return $instance;
+ }
+ 
+ $ctor__jsinnerclass_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
+  Main.$clinit();
+  $Asserts.$assert(Outer.$create__().m_method__() == 5);
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  Outer = goog.module.get('jsinnerclass.Main.Outer$impl');
+  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+ }
 }
-$Util.$setClassMetadata(Main, 'jsinnerclass.Main');
+$Util.$setClassMetadata(Main, "jsinnerclass.Main");
 
 exports = Main;
 

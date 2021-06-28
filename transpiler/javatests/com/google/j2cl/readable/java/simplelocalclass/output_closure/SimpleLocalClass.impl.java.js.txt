@@ -7,55 +7,50 @@ let $1InnerClass = goog.forwardDeclare('simplelocalclass.SimpleLocalClass.$1Inne
 let $1InnerClassWithoutCaptures = goog.forwardDeclare('simplelocalclass.SimpleLocalClass.$1InnerClassWithoutCaptures$impl');
 
 class SimpleLocalClass extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!SimpleLocalClass} */
-  static $create__() {
-    SimpleLocalClass.$clinit();
-    let $instance = new SimpleLocalClass();
-    $instance.$ctor__simplelocalclass_SimpleLocalClass__();
-    return $instance;
-  }
-
-  $ctor__simplelocalclass_SimpleLocalClass__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__int(/** number */ p) {
-    let localVar = 1;
-    $1InnerClass
-        .$create__simplelocalclass_SimpleLocalClass__int__int(this, localVar, p)
-        .m_fun__();
-    $1InnerClassWithoutCaptures.$create__simplelocalclass_SimpleLocalClass(
-        this);
-  }
-
-  m_fun__() {
-    let localVar = 1;
-  }
-
-  m_foo__() {}
-
-  static $clinit() {
-    SimpleLocalClass.$clinit = () => {};
-    SimpleLocalClass.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SimpleLocalClass;
-  }
-
-  static $loadModules() {
-    $1InnerClass =
-        goog.module.get('simplelocalclass.SimpleLocalClass.$1InnerClass$impl');
-    $1InnerClassWithoutCaptures = goog.module.get(
-        'simplelocalclass.SimpleLocalClass.$1InnerClassWithoutCaptures$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!SimpleLocalClass} */
+ static $create__() {
+  SimpleLocalClass.$clinit();
+  let $instance = new SimpleLocalClass();
+  $instance.$ctor__simplelocalclass_SimpleLocalClass__();
+  return $instance;
+ }
+ 
+ $ctor__simplelocalclass_SimpleLocalClass__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__int(/** number */ p) {
+  let localVar = 1;
+  $1InnerClass.$create__simplelocalclass_SimpleLocalClass__int__int(this, localVar, p).m_fun__();
+  $1InnerClassWithoutCaptures.$create__simplelocalclass_SimpleLocalClass(this);
+ }
+ 
+ m_fun__() {
+  let localVar = 1;
+ }
+ 
+ m_foo__() {}
+ 
+ static $clinit() {
+  SimpleLocalClass.$clinit = () =>{};
+  SimpleLocalClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SimpleLocalClass;
+ }
+ 
+ static $loadModules() {
+  $1InnerClass = goog.module.get('simplelocalclass.SimpleLocalClass.$1InnerClass$impl');
+  $1InnerClassWithoutCaptures = goog.module.get('simplelocalclass.SimpleLocalClass.$1InnerClassWithoutCaptures$impl');
+ }
 }
-$Util.$setClassMetadata(SimpleLocalClass, 'simplelocalclass.SimpleLocalClass');
+$Util.$setClassMetadata(SimpleLocalClass, "simplelocalclass.SimpleLocalClass");
 
 exports = SimpleLocalClass;
 

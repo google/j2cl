@@ -8,34 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgejsmethod.Main.P.$LambdaAdaptor$i
  * @interface
  */
 class P {
-  /** @abstract @return {?string} */
-  m_getKey__() {}
-  /** @return {P} */
-  static $adapt(/** ?function():?string */ fn) {
-    P.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    P.$clinit = () => {};
-    P.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__bridgejsmethod_Main_P = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null && !!instance.$implements__bridgejsmethod_Main_P;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('bridgejsmethod.Main.P.$LambdaAdaptor$impl');
-  }
+ /** @abstract @return {?string} */
+ m_getKey__() {}
+ /** @return {P} */
+ static $adapt(/** ?function():?string */ fn) {
+  P.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  P.$clinit = () =>{};
+  P.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgejsmethod_Main_P = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgejsmethod_Main_P;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('bridgejsmethod.Main.P.$LambdaAdaptor$impl');
+ }
 }
 P.$markImplementor(/**@type {Function}*/ (P));
-$Util.$setClassMetadataForInterface(P, 'bridgejsmethod.Main$P');
+$Util.$setClassMetadataForInterface(P, "bridgejsmethod.Main$P");
 
 exports = P;
 

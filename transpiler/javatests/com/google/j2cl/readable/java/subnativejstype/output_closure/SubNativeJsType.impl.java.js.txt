@@ -4,40 +4,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const MyNativeJsType = goog.require('test.foo.MyNativeJsType');
 
 class SubNativeJsType extends MyNativeJsType {
-  // JsConstructor 'SubNativeJsType(int)'.
-
-  constructor(/** number */ x) {
-    SubNativeJsType.$clinit();
-    super(x + 1 | 0);
-    this.$ctor__subnativejstype_SubNativeJsType__int(x);
-  }
-  // Initialization from constructor 'SubNativeJsType(int)'.
-
-  $ctor__subnativejstype_SubNativeJsType__int(/** number */ x) {}
-  // Factory method corresponding to constructor 'SubNativeJsType()'.
-  /** @return {!SubNativeJsType} */
-  static $create__() {
-    SubNativeJsType.$clinit();
-    let $instance = new SubNativeJsType(10);
-    $instance.$ctor__subnativejstype_SubNativeJsType__();
-    return $instance;
-  }
-  // Initialization from constructor 'SubNativeJsType()'.
-
-  $ctor__subnativejstype_SubNativeJsType__() {}
-
-  static $clinit() {
-    SubNativeJsType.$clinit = () => {};
-    SubNativeJsType.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SubNativeJsType;
-  }
-
-  static $loadModules() {}
+ //JsConstructor 'SubNativeJsType(int)'.
+ 
+ constructor(/** number */ x) {
+  SubNativeJsType.$clinit();
+  super(x + 1 | 0);
+  this.$ctor__subnativejstype_SubNativeJsType__int(x);
+ }
+ //Initialization from constructor 'SubNativeJsType(int)'.
+ 
+ $ctor__subnativejstype_SubNativeJsType__int(/** number */ x) {}
+ //Factory method corresponding to constructor 'SubNativeJsType()'.
+ /** @return {!SubNativeJsType} */
+ static $create__() {
+  SubNativeJsType.$clinit();
+  let $instance = new SubNativeJsType(10);
+  $instance.$ctor__subnativejstype_SubNativeJsType__();
+  return $instance;
+ }
+ //Initialization from constructor 'SubNativeJsType()'.
+ 
+ $ctor__subnativejstype_SubNativeJsType__() {}
+ 
+ static $clinit() {
+  SubNativeJsType.$clinit = () =>{};
+  SubNativeJsType.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SubNativeJsType;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(SubNativeJsType, 'subnativejstype.SubNativeJsType');
+$Util.$setClassMetadata(SubNativeJsType, "subnativejstype.SubNativeJsType");
 
 exports = SubNativeJsType;
 

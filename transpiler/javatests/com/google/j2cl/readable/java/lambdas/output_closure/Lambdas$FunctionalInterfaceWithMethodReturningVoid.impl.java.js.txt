@@ -8,41 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('lambdas.Lambdas.FunctionalInterfaceWit
  * @interface
  */
 class FunctionalInterfaceWithMethodReturningVoid {
-  /** @abstract */
-  m_run__() {}
-  /** @return {FunctionalInterfaceWithMethodReturningVoid} */
-  static $adapt(/** ?function():void */ fn) {
-    FunctionalInterfaceWithMethodReturningVoid.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    FunctionalInterfaceWithMethodReturningVoid.$clinit = () => {};
-    FunctionalInterfaceWithMethodReturningVoid.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype
-        .$implements__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance
-              .$implements__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_run__() {}
+ /** @return {FunctionalInterfaceWithMethodReturningVoid} */
+ static $adapt(/** ?function():void */ fn) {
+  FunctionalInterfaceWithMethodReturningVoid.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  FunctionalInterfaceWithMethodReturningVoid.$clinit = () =>{};
+  FunctionalInterfaceWithMethodReturningVoid.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_FunctionalInterfaceWithMethodReturningVoid;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('lambdas.Lambdas.FunctionalInterfaceWithMethodReturningVoid.$LambdaAdaptor$impl');
+ }
 }
-FunctionalInterfaceWithMethodReturningVoid.$markImplementor(
-    /**@type {Function}*/ (FunctionalInterfaceWithMethodReturningVoid));
-$Util.$setClassMetadataForInterface(
-    FunctionalInterfaceWithMethodReturningVoid,
-    'lambdas.Lambdas$FunctionalInterfaceWithMethodReturningVoid');
+FunctionalInterfaceWithMethodReturningVoid.$markImplementor(/**@type {Function}*/ (FunctionalInterfaceWithMethodReturningVoid));
+$Util.$setClassMetadataForInterface(FunctionalInterfaceWithMethodReturningVoid, "lambdas.Lambdas$FunctionalInterfaceWithMethodReturningVoid");
 
 exports = FunctionalInterfaceWithMethodReturningVoid;
 

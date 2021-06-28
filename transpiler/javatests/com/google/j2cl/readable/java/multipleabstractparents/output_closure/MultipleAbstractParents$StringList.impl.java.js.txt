@@ -4,37 +4,35 @@ const AbstractStringList = goog.require('multipleabstractparents.MultipleAbstrac
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StringList extends AbstractStringList {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!StringList} */
-  static $create__() {
-    StringList.$clinit();
-    let $instance = new StringList();
-    $instance
-        .$ctor__multipleabstractparents_MultipleAbstractParents_StringList__();
-    return $instance;
-  }
-
-  $ctor__multipleabstractparents_MultipleAbstractParents_StringList__() {
-    this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractStringList__();
-  }
-
-  static $clinit() {
-    StringList.$clinit = () => {};
-    StringList.$loadModules();
-    AbstractStringList.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof StringList;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!StringList} */
+ static $create__() {
+  StringList.$clinit();
+  let $instance = new StringList();
+  $instance.$ctor__multipleabstractparents_MultipleAbstractParents_StringList__();
+  return $instance;
+ }
+ 
+ $ctor__multipleabstractparents_MultipleAbstractParents_StringList__() {
+  this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractStringList__();
+ }
+ 
+ static $clinit() {
+  StringList.$clinit = () =>{};
+  StringList.$loadModules();
+  AbstractStringList.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringList;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    StringList, 'multipleabstractparents.MultipleAbstractParents$StringList');
+$Util.$setClassMetadata(StringList, "multipleabstractparents.MultipleAbstractParents$StringList");
 
 exports = StringList;
 

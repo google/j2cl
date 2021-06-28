@@ -6,46 +6,45 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Throwable = goog.forwardDeclare('java.lang.Throwable$impl');
 
 class MyJsException extends Exception {
-  // JsConstructor 'MyJsException()'.
-
-  constructor() {
-    MyJsException.$clinit();
-    super();
-    this.$ctor__exception_MyJsException__();
-    this.m_privateInitError__java_lang_Object_$pp_java_lang(new Error(this));
-  }
-  // Initialization from constructor 'MyJsException()'.
-
-  $ctor__exception_MyJsException__() {
-    this.$ctor__java_lang_Exception__();
-  }
-  // Factory method corresponding to constructor 'MyJsException(Throwable)'.
-  /** @return {!MyJsException} */
-  static $create__java_lang_Throwable(/** Throwable */ cause) {
-    MyJsException.$clinit();
-    let $instance = new MyJsException();
-    $instance.$ctor__exception_MyJsException__java_lang_Throwable(cause);
-    $instance.m_privateInitError__java_lang_Object_$pp_java_lang(
-        new Error($instance));
-    return $instance;
-  }
-  // Initialization from constructor 'MyJsException(Throwable)'.
-
-  $ctor__exception_MyJsException__java_lang_Throwable(/** Throwable */ cause) {}
-
-  static $clinit() {
-    MyJsException.$clinit = () => {};
-    MyJsException.$loadModules();
-    Exception.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof MyJsException;
-  }
-
-  static $loadModules() {}
+ //JsConstructor 'MyJsException()'.
+ 
+ constructor() {
+  MyJsException.$clinit();
+  super();
+  this.$ctor__exception_MyJsException__();
+  this.m_privateInitError__java_lang_Object_$pp_java_lang(new Error(this));
+ }
+ //Initialization from constructor 'MyJsException()'.
+ 
+ $ctor__exception_MyJsException__() {
+  this.$ctor__java_lang_Exception__();
+ }
+ //Factory method corresponding to constructor 'MyJsException(Throwable)'.
+ /** @return {!MyJsException} */
+ static $create__java_lang_Throwable(/** Throwable */ cause) {
+  MyJsException.$clinit();
+  let $instance = new MyJsException();
+  $instance.$ctor__exception_MyJsException__java_lang_Throwable(cause);
+  $instance.m_privateInitError__java_lang_Object_$pp_java_lang(new Error($instance));
+  return $instance;
+ }
+ //Initialization from constructor 'MyJsException(Throwable)'.
+ 
+ $ctor__exception_MyJsException__java_lang_Throwable(/** Throwable */ cause) {}
+ 
+ static $clinit() {
+  MyJsException.$clinit = () =>{};
+  MyJsException.$loadModules();
+  Exception.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyJsException;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(MyJsException, 'exception.MyJsException');
+$Util.$setClassMetadata(MyJsException, "exception.MyJsException");
 
 exports = MyJsException;
 

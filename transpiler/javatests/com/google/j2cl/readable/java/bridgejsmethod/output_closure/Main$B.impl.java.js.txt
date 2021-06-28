@@ -10,49 +10,49 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @extends {A<?string>}
  */
 class B extends A {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!B} */
-  static $create__() {
-    B.$clinit();
-    let $instance = new B();
-    $instance.$ctor__bridgejsmethod_Main_B__();
-    return $instance;
-  }
-
-  $ctor__bridgejsmethod_Main_B__() {
-    this.$ctor__bridgejsmethod_Main_A__();
-  }
-  /** @override @return {?string} */
-  fun(/** ?string */ s) {
-    return s;
-  }
-
-  bar(/** ?string */ s) {}
-  // Bridge method.
-  /** @override */
-  m_bar__java_lang_Object(/** ?string */ arg0) {
-    this.bar(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
-  }
-
-  static $clinit() {
-    B.$clinit = () => {};
-    B.$loadModules();
-    A.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof B;
-  }
-
-  static $loadModules() {
-    j_l_String = goog.module.get('java.lang.String$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!B} */
+ static $create__() {
+  B.$clinit();
+  let $instance = new B();
+  $instance.$ctor__bridgejsmethod_Main_B__();
+  return $instance;
+ }
+ 
+ $ctor__bridgejsmethod_Main_B__() {
+  this.$ctor__bridgejsmethod_Main_A__();
+ }
+ /** @override @return {?string} */
+ fun(/** ?string */ s) {
+  return s;
+ }
+ 
+ bar(/** ?string */ s) {}
+ //Bridge method.
+ /** @override */
+ m_bar__java_lang_Object(/** ?string */ arg0) {
+  this.bar(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ 
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  A.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
-$Util.$setClassMetadata(B, 'bridgejsmethod.Main$B');
+$Util.$setClassMetadata(B, "bridgejsmethod.Main$B");
 
 exports = B;
 

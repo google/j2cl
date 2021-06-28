@@ -9,46 +9,39 @@ const NullableTemplatedReturn = goog.require('nullability.Nullability.NullableTe
  * @implements {NullableTemplatedReturn<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():T */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():T}*/
-    this.f_fn__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor;
-    this.$ctor__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor__nullability_Nullability_NullableTemplatedReturn_$JsFunction(
-        fn);
-  }
-
-  $ctor__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor__nullability_Nullability_NullableTemplatedReturn_$JsFunction(
-      /** ?function():T */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor =
-        fn;
-  }
-  /** @override @return {T} */
-  m_foo__() {
-    let /** ?function():T */ $function;
-    return (
-        $function =
-            this.f_fn__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor,
-        $function());
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** ?function():T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():T}*/
+  this.f_fn__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor;
+  this.$ctor__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor__nullability_Nullability_NullableTemplatedReturn_$JsFunction(fn);
+ }
+ 
+ $ctor__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor__nullability_Nullability_NullableTemplatedReturn_$JsFunction(/** ?function():T */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor = fn;
+ }
+ /** @override @return {T} */
+ m_foo__() {
+  let /** ?function():T */ $function;
+  return ($function = this.f_fn__nullability_Nullability_NullableTemplatedReturn_$LambdaAdaptor, $function());
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 NullableTemplatedReturn.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor,
-    'nullability.Nullability$NullableTemplatedReturn$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "nullability.Nullability$NullableTemplatedReturn$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

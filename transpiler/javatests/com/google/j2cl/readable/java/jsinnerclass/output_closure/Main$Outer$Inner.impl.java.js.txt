@@ -6,42 +6,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Outer = goog.forwardDeclare('jsinnerclass.Main.Outer$impl');
 
 class Inner extends j_l_Object {
-  constructor(/** Outer */ $outer_this) {
-    Inner.$clinit();
-    super();
-    /**@type {Outer}*/
-    this.$outer_this__jsinnerclass_Main_Outer_Inner;
-    /**@type {number}*/
-    this.f_b__jsinnerclass_Main_Outer_Inner_ = 0;
-    this.$ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer(
-        $outer_this);
-  }
-
-  $ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer(
-      /** Outer */ $outer_this) {
-    this.$outer_this__jsinnerclass_Main_Outer_Inner = $outer_this;
-    this.$ctor__java_lang_Object__();
-    this.f_b__jsinnerclass_Main_Outer_Inner_ =
-        $outer_this.f_a__jsinnerclass_Main_Outer + 1 | 0;
-  }
-  /** @return {number} */
-  getB() {
-    return this.f_b__jsinnerclass_Main_Outer_Inner_;
-  }
-
-  static $clinit() {
-    Inner.$clinit = () => {};
-    Inner.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Inner;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** Outer */ $outer_this) {
+  Inner.$clinit();
+  super();
+  /**@type {Outer}*/
+  this.$outer_this__jsinnerclass_Main_Outer_Inner;
+  /**@type {number}*/
+  this.f_b__jsinnerclass_Main_Outer_Inner_ = 0;
+  this.$ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer($outer_this);
+ }
+ 
+ $ctor__jsinnerclass_Main_Outer_Inner__jsinnerclass_Main_Outer(/** Outer */ $outer_this) {
+  this.$outer_this__jsinnerclass_Main_Outer_Inner = $outer_this;
+  this.$ctor__java_lang_Object__();
+  this.f_b__jsinnerclass_Main_Outer_Inner_ = $outer_this.f_a__jsinnerclass_Main_Outer + 1 | 0;
+ }
+ /** @return {number} */
+ getB() {
+  return this.f_b__jsinnerclass_Main_Outer_Inner_;
+ }
+ 
+ static $clinit() {
+  Inner.$clinit = () =>{};
+  Inner.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Inner, 'jsinnerclass.Main$Outer$Inner');
+$Util.$setClassMetadata(Inner, "jsinnerclass.Main$Outer$Inner");
 
 exports = Inner;
 

@@ -6,25 +6,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class EmptyInterface {
-  static $clinit() {
-    EmptyInterface.$clinit = () => {};
-    EmptyInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__emptyinterface_EmptyInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__emptyinterface_EmptyInterface;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  EmptyInterface.$clinit = () =>{};
+  EmptyInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__emptyinterface_EmptyInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__emptyinterface_EmptyInterface;
+ }
+ 
+ static $loadModules() {}
 }
 EmptyInterface.$markImplementor(/**@type {Function}*/ (EmptyInterface));
-$Util.$setClassMetadataForInterface(
-    EmptyInterface, 'emptyinterface.EmptyInterface');
+$Util.$setClassMetadataForInterface(EmptyInterface, "emptyinterface.EmptyInterface");
 
 exports = EmptyInterface;
 

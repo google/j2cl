@@ -9,35 +9,33 @@ let $LambdaAdaptor = goog.forwardDeclare('simplebridgemethods.Callable.$LambdaAd
  * @template V
  */
 class Callable {
-  /** @abstract */
-  m_call__java_lang_Object(/** V */ v) {}
-  /** @template V @return {Callable<V>} */
-  static $adapt(/** ?function(V):void */ fn) {
-    Callable.$clinit();
-    return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
-  }
-
-  static $clinit() {
-    Callable.$clinit = () => {};
-    Callable.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__simplebridgemethods_Callable = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__simplebridgemethods_Callable;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('simplebridgemethods.Callable.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_call__java_lang_Object(/** V */ v) {}
+ /** @template V @return {Callable<V>} */
+ static $adapt(/** ?function(V):void */ fn) {
+  Callable.$clinit();
+  return /**@type {!$LambdaAdaptor<V>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  Callable.$clinit = () =>{};
+  Callable.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__simplebridgemethods_Callable = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__simplebridgemethods_Callable;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('simplebridgemethods.Callable.$LambdaAdaptor$impl');
+ }
 }
 Callable.$markImplementor(/**@type {Function}*/ (Callable));
-$Util.$setClassMetadataForInterface(Callable, 'simplebridgemethods.Callable');
+$Util.$setClassMetadataForInterface(Callable, "simplebridgemethods.Callable");
 
 exports = Callable;
 

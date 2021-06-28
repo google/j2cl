@@ -10,41 +10,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {NestedInterface}
  */
 class Implementor extends ClassWithAbstractMethod {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Implementor} */
-  static $create__() {
-    Implementor.$clinit();
-    let $instance = new Implementor();
-    $instance.$ctor__gwtincompatible_Implementor__();
-    return $instance;
-  }
-
-  $ctor__gwtincompatible_Implementor__() {
-    this.$ctor__gwtincompatible_Interface_ClassWithAbstractMethod__();
-  }
-
-  m_compatibleMethod__() {
-    let a = 4;
-  }
-
-  static $clinit() {
-    Implementor.$clinit = () => {};
-    Implementor.$loadModules();
-    ClassWithAbstractMethod.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Implementor;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Implementor} */
+ static $create__() {
+  Implementor.$clinit();
+  let $instance = new Implementor();
+  $instance.$ctor__gwtincompatible_Implementor__();
+  return $instance;
+ }
+ 
+ $ctor__gwtincompatible_Implementor__() {
+  this.$ctor__gwtincompatible_Interface_ClassWithAbstractMethod__();
+ }
+ 
+ m_compatibleMethod__() {
+  let a = 4;
+ }
+ 
+ static $clinit() {
+  Implementor.$clinit = () =>{};
+  Implementor.$loadModules();
+  ClassWithAbstractMethod.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Implementor;
+ }
+ 
+ static $loadModules() {}
 }
 Interface.$markImplementor(Implementor);
 NestedInterface.$markImplementor(Implementor);
-$Util.$setClassMetadata(Implementor, 'gwtincompatible.Implementor');
+$Util.$setClassMetadata(Implementor, "gwtincompatible.Implementor");
 
 exports = Implementor;
 

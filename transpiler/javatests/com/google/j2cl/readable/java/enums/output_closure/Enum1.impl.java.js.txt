@@ -11,69 +11,61 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<Enum1>}
  */
 class Enum1 extends Enum {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Enum1} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new Enum1();
+  $instance.$ctor__enums_Enum1__java_lang_String__int($name, $ordinal);
+  return $instance;
+ }
+ 
+ $ctor__enums_Enum1__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+ }
+ /** @return {!Enum1} */
+ static m_valueOf__java_lang_String(/** string */ name) {
+  Enum1.$clinit();
+  if ($Equality.$same(Enum1.f_namesToValuesMap__enums_Enum1_, null)) {
+   Enum1.f_namesToValuesMap__enums_Enum1_ = /**@type {Map<?string, !Enum1>}*/ ($Enums.createMapFromValues(Enum1.m_values__()));
   }
-  /** @return {!Enum1} */
-  static $create__java_lang_String__int(
-      /** ?string */ $name, /** number */ $ordinal) {
-    let $instance = new Enum1();
-    $instance.$ctor__enums_Enum1__java_lang_String__int($name, $ordinal);
-    return $instance;
-  }
-
-  $ctor__enums_Enum1__java_lang_String__int(
-      /** ?string */ $name, /** number */ $ordinal) {
-    this.f_name__java_lang_Enum_ = $name;
-    this.f_ordinal__java_lang_Enum_ = $ordinal;
-  }
-  /** @return {!Enum1} */
-  static m_valueOf__java_lang_String(/** string */ name) {
-    Enum1.$clinit();
-    if ($Equality.$same(Enum1.f_namesToValuesMap__enums_Enum1_, null)) {
-      Enum1.f_namesToValuesMap__enums_Enum1_ =
-          /**@type {Map<?string, !Enum1>}*/ (
-              $Enums.createMapFromValues(Enum1.m_values__()));
-    }
-    return /**@type {Enum1}*/ ($Enums.getValueFromNameAndMap(
-        name, Enum1.f_namesToValuesMap__enums_Enum1_));
-  }
-  /** @return {!Array<!Enum1>} */
-  static m_values__() {
-    Enum1.$clinit();
-    return /**@type {!Array<Enum1>}*/ ($Arrays.$init(
-        [Enum1.$static_V1__enums_Enum1, Enum1.$static_V2__enums_Enum1], Enum1));
-  }
-  /** @return {!Enum1} */
-  static get f_V1__enums_Enum1() {
-    return (Enum1.$clinit(), Enum1.$static_V1__enums_Enum1);
-  }
-  /** @return {!Enum1} */
-  static get f_V2__enums_Enum1() {
-    return (Enum1.$clinit(), Enum1.$static_V2__enums_Enum1);
-  }
-
-  static $clinit() {
-    Enum1.$clinit = () => {};
-    Enum1.$loadModules();
-    Enum.$clinit();
-    Enum1.$static_V1__enums_Enum1 = Enum1.$create__java_lang_String__int(
-        $Util.$makeEnumName('V1'), Enum1.$ordinal_V1__enums_Enum1);
-    Enum1.$static_V2__enums_Enum1 = Enum1.$create__java_lang_String__int(
-        $Util.$makeEnumName('V2'), Enum1.$ordinal_V2__enums_Enum1);
-    Enum1.f_namesToValuesMap__enums_Enum1_ = null;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Enum1;
-  }
-
-  static $loadModules() {
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Enums = goog.module.get('vmbootstrap.Enums$impl');
-  }
+  return /**@type {Enum1}*/ ($Enums.getValueFromNameAndMap(name, Enum1.f_namesToValuesMap__enums_Enum1_));
+ }
+ /** @return {!Array<!Enum1>} */
+ static m_values__() {
+  Enum1.$clinit();
+  return /**@type {!Array<Enum1>}*/ ($Arrays.$init([Enum1.$static_V1__enums_Enum1, Enum1.$static_V2__enums_Enum1], Enum1));
+ }
+ /** @return {!Enum1} */
+ static get f_V1__enums_Enum1() {
+  return (Enum1.$clinit(), Enum1.$static_V1__enums_Enum1);
+ }
+ /** @return {!Enum1} */
+ static get f_V2__enums_Enum1() {
+  return (Enum1.$clinit(), Enum1.$static_V2__enums_Enum1);
+ }
+ 
+ static $clinit() {
+  Enum1.$clinit = () =>{};
+  Enum1.$loadModules();
+  Enum.$clinit();
+  Enum1.$static_V1__enums_Enum1 = Enum1.$create__java_lang_String__int($Util.$makeEnumName("V1"), Enum1.$ordinal_V1__enums_Enum1);
+  Enum1.$static_V2__enums_Enum1 = Enum1.$create__java_lang_String__int($Util.$makeEnumName("V2"), Enum1.$ordinal_V2__enums_Enum1);
+  Enum1.f_namesToValuesMap__enums_Enum1_ = null;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Enum1;
+ }
+ 
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
 }
 /**@private {!Enum1}*/
 Enum1.$static_V1__enums_Enum1;
@@ -85,7 +77,7 @@ Enum1.f_namesToValuesMap__enums_Enum1_;
 Enum1.$ordinal_V1__enums_Enum1 = 0;
 /**@const {number}*/
 Enum1.$ordinal_V2__enums_Enum1 = 1;
-$Util.$setClassMetadataForEnum(Enum1, 'enums.Enum1');
+$Util.$setClassMetadataForEnum(Enum1, "enums.Enum1");
 
 exports = Enum1;
 

@@ -8,37 +8,35 @@ const GenericClass = goog.require('subclassgenericclass.GenericClass$impl');
  * @extends {GenericClass<T>}
  */
 class GenericSubclassGenericClass extends GenericClass {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {!GenericSubclassGenericClass<T>} */
-  static $create__() {
-    GenericSubclassGenericClass.$clinit();
-    let $instance = new GenericSubclassGenericClass();
-    $instance.$ctor__subclassgenericclass_GenericSubclassGenericClass__();
-    return $instance;
-  }
-
-  $ctor__subclassgenericclass_GenericSubclassGenericClass__() {
-    this.$ctor__subclassgenericclass_GenericClass__();
-  }
-
-  static $clinit() {
-    GenericSubclassGenericClass.$clinit = () => {};
-    GenericSubclassGenericClass.$loadModules();
-    GenericClass.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof GenericSubclassGenericClass;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!GenericSubclassGenericClass<T>} */
+ static $create__() {
+  GenericSubclassGenericClass.$clinit();
+  let $instance = new GenericSubclassGenericClass();
+  $instance.$ctor__subclassgenericclass_GenericSubclassGenericClass__();
+  return $instance;
+ }
+ 
+ $ctor__subclassgenericclass_GenericSubclassGenericClass__() {
+  this.$ctor__subclassgenericclass_GenericClass__();
+ }
+ 
+ static $clinit() {
+  GenericSubclassGenericClass.$clinit = () =>{};
+  GenericSubclassGenericClass.$loadModules();
+  GenericClass.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericSubclassGenericClass;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    GenericSubclassGenericClass,
-    'subclassgenericclass.GenericSubclassGenericClass');
+$Util.$setClassMetadata(GenericSubclassGenericClass, "subclassgenericclass.GenericSubclassGenericClass");
 
 exports = GenericSubclassGenericClass;
 

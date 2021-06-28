@@ -4,41 +4,39 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class FooCallsSuperObjectMethod extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!FooCallsSuperObjectMethod} */
-  static $create__() {
-    FooCallsSuperObjectMethod.$clinit();
-    let $instance = new FooCallsSuperObjectMethod();
-    $instance.$ctor__devirtualizedsupermethodcall_FooCallsSuperObjectMethod__();
-    return $instance;
-  }
-
-  $ctor__devirtualizedsupermethodcall_FooCallsSuperObjectMethod__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @override @return {number} */
-  hashCode() {
-    return super.hashCode();
-  }
-
-  static $clinit() {
-    FooCallsSuperObjectMethod.$clinit = () => {};
-    FooCallsSuperObjectMethod.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof FooCallsSuperObjectMethod;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!FooCallsSuperObjectMethod} */
+ static $create__() {
+  FooCallsSuperObjectMethod.$clinit();
+  let $instance = new FooCallsSuperObjectMethod();
+  $instance.$ctor__devirtualizedsupermethodcall_FooCallsSuperObjectMethod__();
+  return $instance;
+ }
+ 
+ $ctor__devirtualizedsupermethodcall_FooCallsSuperObjectMethod__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return super.hashCode();
+ }
+ 
+ static $clinit() {
+  FooCallsSuperObjectMethod.$clinit = () =>{};
+  FooCallsSuperObjectMethod.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof FooCallsSuperObjectMethod;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    FooCallsSuperObjectMethod,
-    'devirtualizedsupermethodcall.FooCallsSuperObjectMethod');
+$Util.$setClassMetadata(FooCallsSuperObjectMethod, "devirtualizedsupermethodcall.FooCallsSuperObjectMethod");
 
 exports = FooCallsSuperObjectMethod;
 

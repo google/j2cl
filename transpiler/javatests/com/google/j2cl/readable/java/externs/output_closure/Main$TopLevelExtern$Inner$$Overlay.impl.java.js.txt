@@ -4,18 +4,19 @@ const Inner = goog.require('externs.Main.FooImpl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Inner;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Inner;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'externs.Main.FooImpl');
+$Util.$setClassMetadata($Overlay, "externs.Main.FooImpl");
 
 exports = $Overlay;
 

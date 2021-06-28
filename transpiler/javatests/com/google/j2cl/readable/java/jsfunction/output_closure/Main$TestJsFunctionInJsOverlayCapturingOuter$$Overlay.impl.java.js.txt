@@ -3,25 +3,24 @@ goog.module('jsfunction.Main.TestJsFunctionInJsOverlayCapturingOuter.$Overlay$im
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 
 class $Overlay {
-  static m_test__$devirt__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter(
-      /** !Array */ $thisArg) {
-    $Overlay.$clinit();
-    $thisArg.sort((/** number */ a) => {
-      return $Equality.$same($thisArg, null) ? 0 : 1;
-    });
-  }
-
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-
-  static $loadModules() {
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
-  }
+ 
+ static m_test__$devirt__jsfunction_Main_TestJsFunctionInJsOverlayCapturingOuter(/** !Array */ $thisArg) {
+  $Overlay.$clinit();
+  $thisArg.sort((/** number */ a) =>{
+   return $Equality.$same($thisArg, null) ? 0 : 1;
+  });
+ }
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ 
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
 }
 
 exports = $Overlay;
 
-//#
-//sourceMappingURL=Main$TestJsFunctionInJsOverlayCapturingOuter$$Overlay.js.map
+//# sourceMappingURL=Main$TestJsFunctionInJsOverlayCapturingOuter$$Overlay.js.map

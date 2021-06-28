@@ -4,18 +4,19 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const NativeBar = goog.require('packageinfosubpackage.subpackage.Bar');
 
 class $Overlay {
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof NativeBar;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeBar;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'packageinfosubpackage.subpackage.Bar');
+$Util.$setClassMetadata($Overlay, "packageinfosubpackage.subpackage.Bar");
 
 exports = $Overlay;
 

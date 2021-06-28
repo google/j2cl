@@ -6,44 +6,43 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 
 class ArrayCalls extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!ArrayCalls} */
-  static $create__() {
-    ArrayCalls.$clinit();
-    let $instance = new ArrayCalls();
-    $instance.$ctor__devirtualizedcalls_ArrayCalls__();
-    return $instance;
-  }
-
-  $ctor__devirtualizedcalls_ArrayCalls__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_main__() {
-    let array2d =
-        /**@type {!Array<Array<*>>}*/ ($Arrays.$create([1, 1], j_l_Object));
-    let length1 = array2d[0].length;
-    let length2 = array2d.length;
-  }
-
-  static $clinit() {
-    ArrayCalls.$clinit = () => {};
-    ArrayCalls.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof ArrayCalls;
-  }
-
-  static $loadModules() {
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!ArrayCalls} */
+ static $create__() {
+  ArrayCalls.$clinit();
+  let $instance = new ArrayCalls();
+  $instance.$ctor__devirtualizedcalls_ArrayCalls__();
+  return $instance;
+ }
+ 
+ $ctor__devirtualizedcalls_ArrayCalls__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_main__() {
+  let array2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([1, 1], j_l_Object));
+  let length1 = array2d[0].length;
+  let length2 = array2d.length;
+ }
+ 
+ static $clinit() {
+  ArrayCalls.$clinit = () =>{};
+  ArrayCalls.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ArrayCalls;
+ }
+ 
+ static $loadModules() {
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
 }
-$Util.$setClassMetadata(ArrayCalls, 'devirtualizedcalls.ArrayCalls');
+$Util.$setClassMetadata(ArrayCalls, "devirtualizedcalls.ArrayCalls");
 
 exports = ArrayCalls;
 

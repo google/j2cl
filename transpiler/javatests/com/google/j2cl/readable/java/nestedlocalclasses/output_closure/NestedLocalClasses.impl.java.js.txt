@@ -4,40 +4,39 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class NestedLocalClasses extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!NestedLocalClasses} */
-  static $create__() {
-    NestedLocalClasses.$clinit();
-    let $instance = new NestedLocalClasses();
-    $instance.$ctor__nestedlocalclasses_NestedLocalClasses__();
-    return $instance;
-  }
-
-  $ctor__nestedlocalclasses_NestedLocalClasses__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__int(/** number */ p) {
-    let localVar = 1;
-  }
-
-  static $clinit() {
-    NestedLocalClasses.$clinit = () => {};
-    NestedLocalClasses.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof NestedLocalClasses;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!NestedLocalClasses} */
+ static $create__() {
+  NestedLocalClasses.$clinit();
+  let $instance = new NestedLocalClasses();
+  $instance.$ctor__nestedlocalclasses_NestedLocalClasses__();
+  return $instance;
+ }
+ 
+ $ctor__nestedlocalclasses_NestedLocalClasses__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__int(/** number */ p) {
+  let localVar = 1;
+ }
+ 
+ static $clinit() {
+  NestedLocalClasses.$clinit = () =>{};
+  NestedLocalClasses.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NestedLocalClasses;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    NestedLocalClasses, 'nestedlocalclasses.NestedLocalClasses');
+$Util.$setClassMetadata(NestedLocalClasses, "nestedlocalclasses.NestedLocalClasses");
 
 exports = NestedLocalClasses;
 

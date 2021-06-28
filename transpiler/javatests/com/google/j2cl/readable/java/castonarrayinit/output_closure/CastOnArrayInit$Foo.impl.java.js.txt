@@ -7,35 +7,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class Foo extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {!Foo<T>} */
-  static $create__() {
-    Foo.$clinit();
-    let $instance = new Foo();
-    $instance.$ctor__castonarrayinit_CastOnArrayInit_Foo__();
-    return $instance;
-  }
-
-  $ctor__castonarrayinit_CastOnArrayInit_Foo__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    Foo.$clinit = () => {};
-    Foo.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Foo;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!Foo<T>} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__castonarrayinit_CastOnArrayInit_Foo__();
+  return $instance;
+ }
+ 
+ $ctor__castonarrayinit_CastOnArrayInit_Foo__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Foo, 'castonarrayinit.CastOnArrayInit$Foo');
+$Util.$setClassMetadata(Foo, "castonarrayinit.CastOnArrayInit$Foo");
 
 exports = Foo;
 

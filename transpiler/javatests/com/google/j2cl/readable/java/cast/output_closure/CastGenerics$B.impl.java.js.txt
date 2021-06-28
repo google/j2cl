@@ -8,33 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('cast.CastGenerics.B.$LambdaAdaptor$imp
  * @interface
  */
 class B {
-  /** @abstract */
-  m_mB__() {}
-  /** @return {B} */
-  static $adapt(/** ?function():void */ fn) {
-    B.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    B.$clinit = () => {};
-    B.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__cast_CastGenerics_B = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null && !!instance.$implements__cast_CastGenerics_B;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get('cast.CastGenerics.B.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_mB__() {}
+ /** @return {B} */
+ static $adapt(/** ?function():void */ fn) {
+  B.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__cast_CastGenerics_B = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__cast_CastGenerics_B;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('cast.CastGenerics.B.$LambdaAdaptor$impl');
+ }
 }
 B.$markImplementor(/**@type {Function}*/ (B));
-$Util.$setClassMetadataForInterface(B, 'cast.CastGenerics$B');
+$Util.$setClassMetadataForInterface(B, "cast.CastGenerics$B");
 
 exports = B;
 

@@ -9,44 +9,34 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @interface
  */
 class InterfaceWithAsyncDefaultMethod {
-  /** @abstract @return {IThenable<Integer>} */
-  m_asyncCall__() {}
-  /** @return {IThenable<Integer>} */
-  static async m_asyncCall__$default__jsasync_Main_InterfaceWithAsyncDefaultMethod(
-      /** !InterfaceWithAsyncDefaultMethod */ $thisArg) {
-    InterfaceWithAsyncDefaultMethod.$clinit();
-    return /**@type {Promise<Integer>}*/ (
-        Promise.resolve(/**@type {Integer}*/ ($Casts.$to(
-            await /**@type {Promise<Integer>}*/ (
-                Promise.resolve(Integer.m_valueOf__int(5))),
-            Integer))));
-  }
-
-  static $clinit() {
-    InterfaceWithAsyncDefaultMethod.$clinit = () => {};
-    InterfaceWithAsyncDefaultMethod.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__jsasync_Main_InterfaceWithAsyncDefaultMethod =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__jsasync_Main_InterfaceWithAsyncDefaultMethod;
-  }
-
-  static $loadModules() {
-    Integer = goog.module.get('java.lang.Integer$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+ /** @abstract @return {IThenable<Integer>} */
+ m_asyncCall__() {}
+ /** @return {IThenable<Integer>} */
+ static async m_asyncCall__$default__jsasync_Main_InterfaceWithAsyncDefaultMethod(/** !InterfaceWithAsyncDefaultMethod */ $thisArg) {
+  InterfaceWithAsyncDefaultMethod.$clinit();
+  return /**@type {Promise<Integer>}*/ (Promise.resolve(/**@type {Integer}*/ ($Casts.$to(await /**@type {Promise<Integer>}*/ (Promise.resolve(Integer.m_valueOf__int(5))), Integer))));
+ }
+ 
+ static $clinit() {
+  InterfaceWithAsyncDefaultMethod.$clinit = () =>{};
+  InterfaceWithAsyncDefaultMethod.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsasync_Main_InterfaceWithAsyncDefaultMethod = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsasync_Main_InterfaceWithAsyncDefaultMethod;
+ }
+ 
+ static $loadModules() {
+  Integer = goog.module.get('java.lang.Integer$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
-InterfaceWithAsyncDefaultMethod.$markImplementor(
-    /**@type {Function}*/ (InterfaceWithAsyncDefaultMethod));
-$Util.$setClassMetadataForInterface(
-    InterfaceWithAsyncDefaultMethod,
-    'jsasync.Main$InterfaceWithAsyncDefaultMethod');
+InterfaceWithAsyncDefaultMethod.$markImplementor(/**@type {Function}*/ (InterfaceWithAsyncDefaultMethod));
+$Util.$setClassMetadataForInterface(InterfaceWithAsyncDefaultMethod, "jsasync.Main$InterfaceWithAsyncDefaultMethod");
 
 exports = InterfaceWithAsyncDefaultMethod;
 

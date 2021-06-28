@@ -4,38 +4,35 @@ const Enum2 = goog.require('enums.Enum2$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $1 extends Enum2 {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!$1} */
-  static $create__java_lang_String__int__int(
-      /** ?string */ $name, /** number */ $ordinal, /** number */ $_0) {
-    $1.$clinit();
-    let $instance = new $1();
-    $instance.$ctor__enums_Enum2_1__java_lang_String__int__int(
-        $name, $ordinal, $_0);
-    return $instance;
-  }
-
-  $ctor__enums_Enum2_1__java_lang_String__int__int(
-      /** ?string */ $name, /** number */ $ordinal, /** number */ $_0) {
-    this.$ctor__enums_Enum2__java_lang_String__int__int($name, $ordinal, $_0);
-  }
-
-  static $clinit() {
-    $1.$clinit = () => {};
-    $1.$loadModules();
-    Enum2.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $1;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!$1} */
+ static $create__java_lang_String__int__int(/** ?string */ $name, /** number */ $ordinal, /** number */ $_0) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__enums_Enum2_1__java_lang_String__int__int($name, $ordinal, $_0);
+  return $instance;
+ }
+ 
+ $ctor__enums_Enum2_1__java_lang_String__int__int(/** ?string */ $name, /** number */ $ordinal, /** number */ $_0) {
+  this.$ctor__enums_Enum2__java_lang_String__int__int($name, $ordinal, $_0);
+ }
+ 
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  Enum2.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($1, 'enums.Enum2$1');
+$Util.$setClassMetadata($1, "enums.Enum2$1");
 
 exports = $1;
 

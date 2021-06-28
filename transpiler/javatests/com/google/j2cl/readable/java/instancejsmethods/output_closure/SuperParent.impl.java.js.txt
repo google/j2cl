@@ -4,43 +4,43 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class SuperParent extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!SuperParent} */
-  static $create__() {
-    SuperParent.$clinit();
-    let $instance = new SuperParent();
-    $instance.$ctor__instancejsmethods_SuperParent__();
-    return $instance;
-  }
-
-  $ctor__instancejsmethods_SuperParent__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {number} */
-  m_fun__int__int(/** number */ a, /** number */ b) {
-    return a + b + 111 | 0;
-  }
-  /** @return {number} */
-  m_bar__int__int(/** number */ a, /** number */ b) {
-    return Math.imul(a, b) + 222 | 0;
-  }
-
-  static $clinit() {
-    SuperParent.$clinit = () => {};
-    SuperParent.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SuperParent;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!SuperParent} */
+ static $create__() {
+  SuperParent.$clinit();
+  let $instance = new SuperParent();
+  $instance.$ctor__instancejsmethods_SuperParent__();
+  return $instance;
+ }
+ 
+ $ctor__instancejsmethods_SuperParent__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {number} */
+ m_fun__int__int(/** number */ a, /** number */ b) {
+  return a + b + 111 | 0;
+ }
+ /** @return {number} */
+ m_bar__int__int(/** number */ a, /** number */ b) {
+  return Math.imul(a, b) + 222 | 0;
+ }
+ 
+ static $clinit() {
+  SuperParent.$clinit = () =>{};
+  SuperParent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SuperParent;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(SuperParent, 'instancejsmethods.SuperParent');
+$Util.$setClassMetadata(SuperParent, "instancejsmethods.SuperParent");
 
 exports = SuperParent;
 

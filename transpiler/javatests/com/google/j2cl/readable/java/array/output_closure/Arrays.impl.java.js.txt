@@ -14,199 +14,148 @@ let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 let $$long = goog.forwardDeclare('vmbootstrap.primitives.$long$impl');
 
 class Arrays extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Arrays} */
-  static $create__() {
-    Arrays.$clinit();
-    let $instance = new Arrays();
-    $instance.$ctor__array_Arrays__();
-    return $instance;
-  }
-
-  $ctor__array_Arrays__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_testObjectArray__() {
-    let objects = new Array(100);
-    objects = new Array(0);
-    objects = [null, null];
-    let objects2d =
-        /**@type {!Array<Array<*>>}*/ ($Arrays.$create([5, 10], j_l_Object));
-    objects2d = /**@type {!Array<Array<*>>}*/ (
-        $Arrays.$init([[null, null], null], j_l_Object, 2));
-    objects2d =
-        /**@type {!Array<Array<*>>}*/ ($Arrays.$create([20, null], j_l_Object));
-    let object = objects[0];
-    object = objects2d[0][1];
-    $Arrays.$set(objects, 0, null);
-    $Arrays.$set(objects2d[0], 1, null);
-  }
-
-  m_testJavaTypeArray__() {
-    let objects =
-        /**@type {!Array<SomeObject>}*/ ($Arrays.$create([100], SomeObject));
-    objects =
-        /**@type {!Array<SomeObject>}*/ ($Arrays.$create([0], SomeObject));
-    objects = /**@type {!Array<SomeObject>}*/ (
-        $Arrays.$init([null, null], SomeObject));
-    let objects2d = /**@type {!Array<Array<SomeObject>>}*/ (
-        $Arrays.$create([5, 10], SomeObject));
-    objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$init(
-        [
-          /**@type {!Array<SomeObject>}*/ (
-              $Arrays.$init([null, null], SomeObject)),
-          null
-        ],
-        SomeObject, 2));
-    objects2d = /**@type {!Array<Array<SomeObject>>}*/ (
-        $Arrays.$create([20, null], SomeObject));
-    let someObject = objects[0];
-    someObject = objects2d[0][1];
-    $Arrays.$set(objects, 0, null);
-    $Arrays.$set(objects2d[0], 1, null);
-  }
-
-  m_testIntArrays___$pp_array() {
-    let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));
-    ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));
-    ints = /**@type {!Array<number>}*/ ($Arrays.$init([0, 1], $$int));
-    let ints2d =
-        /**@type {!Array<Array<number>>}*/ ($Arrays.$create([5, 10], $$int));
-    ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$init(
-        [/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int)), null],
-        $$int, 2));
-    ints2d =
-        /**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $$int));
-    let n = ints[0];
-    n = ints2d[0][1];
-    $Arrays.$set(ints, 0, 1);
-    $Arrays.$set(ints2d[0], 1, 1);
-  }
-
-  m_testLongArrays___$pp_array() {
-    let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));
-    longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
-    longs = /**@type {!Array<!$Long>}*/ (
-        $Arrays.$init([$Long.fromInt(0), $Long.fromInt(1)], $$long));
-    let longs2d =
-        /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([5, 10], $$long));
-    longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$init(
-        [
-          /**@type {!Array<!$Long>}*/ (
-              $Arrays.$init([$Long.fromInt(1), $Long.fromInt(2)], $$long)),
-          null
-        ],
-        $$long, 2));
-    longs2d = /**@type {!Array<Array<!$Long>>}*/ (
-        $Arrays.$create([20, null], $$long));
-    let n = longs[0];
-    n = longs2d[0][1];
-    $Arrays.$set(longs, 0, $Long.fromInt(1));
-    $Arrays.$set(longs2d[0], 1, $Long.fromInt(1));
-  }
-
-  m_testDevirtualizedTypeArrays___$pp_array() {
-    let booleans =
-        /**@type {!Array<?boolean>}*/ ($Arrays.$create([100], Boolean));
-    booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([0], Boolean));
-    booleans =
-        /**@type {!Array<?boolean>}*/ ($Arrays.$init([true, false], Boolean));
-    let booleans2d = /**@type {!Array<Array<?boolean>>}*/ (
-        $Arrays.$create([5, 10], Boolean));
-    booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$init(
-        [
-          /**@type {!Array<?boolean>}*/ ($Arrays.$init([true, false], Boolean)),
-          null
-        ],
-        Boolean, 2));
-    booleans2d = /**@type {!Array<Array<?boolean>>}*/ (
-        $Arrays.$create([20, null], Boolean));
-    let b = Boolean.m_booleanValue__java_lang_Boolean(booleans[0]);
-    b = Boolean.m_booleanValue__java_lang_Boolean(booleans2d[0][1]);
-    $Arrays.$set(booleans, 0, true);
-    $Arrays.$set(booleans2d[0], 1, false);
-  }
-
-  m_testStringArrays___$pp_array() {
-    let strings =
-        /**@type {!Array<?string>}*/ ($Arrays.$create([100], j_l_String));
-    strings = /**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String));
-    strings =
-        /**@type {!Array<?string>}*/ ($Arrays.$init([null, null], j_l_String));
-    let strings2d = /**@type {!Array<Array<?string>>}*/ (
-        $Arrays.$create([5, 10], j_l_String));
-    strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$init(
-        [
-          /**@type {!Array<?string>}*/ (
-              $Arrays.$init([null, null], j_l_String)),
-          null
-        ],
-        j_l_String, 2));
-    strings2d = /**@type {!Array<Array<?string>>}*/ (
-        $Arrays.$create([20, null], j_l_String));
-    let b = strings[0];
-    b = strings2d[0][1];
-    $Arrays.$set(strings, 0, null);
-    $Arrays.$set(strings2d[0], 1, null);
-  }
-
-  m_testNativeArray__() {
-    let nativeObjects = new Array(100);
-    nativeObjects = new Array(0);
-    nativeObjects = [null, null];
-    let nativeObjects2d =
-        /**@type {!Array<Array<String>>}*/ ($Arrays.$createNative([5, 10]));
-    nativeObjects2d = [[null, null], null];
-    nativeObjects2d =
-        /**@type {!Array<Array<String>>}*/ ($Arrays.$createNative([20, null]));
-    let nativeObject = nativeObjects[0];
-    nativeObject = nativeObjects2d[0][1];
-    $Arrays.$set(nativeObjects, 0, null);
-    $Arrays.$set(nativeObjects2d[0], 1, null);
-  }
-
-  m_testErasureCastsOnArrayAccess__() {
-    let container = null;
-    let s = /**@type {Array<?string>}*/ ($Arrays.$castTo(
-        container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];
-  }
-
-  m_testArraysSupertypeClosureTypes__() {
-    this.m_consumesCloneable__java_lang_Cloneable(new Array(10));
-    this.m_consumesSerializable__java_io_Serializable(new Array(10));
-  }
-
-  m_consumesCloneable__java_lang_Cloneable(/** (Cloneable|Array) */ cloneable) {
-  }
-
-  m_consumesSerializable__java_io_Serializable(
-      /** (Serializable|Array) */ serializable) {}
-
-  static $clinit() {
-    Arrays.$clinit = () => {};
-    Arrays.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Arrays;
-  }
-
-  static $loadModules() {
-    SomeObject = goog.module.get('array.Arrays.SomeObject$impl');
-    Boolean = goog.module.get('java.lang.Boolean$impl');
-    j_l_String = goog.module.get('java.lang.String$impl');
-    $Long = goog.module.get('nativebootstrap.Long$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
-    $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Arrays} */
+ static $create__() {
+  Arrays.$clinit();
+  let $instance = new Arrays();
+  $instance.$ctor__array_Arrays__();
+  return $instance;
+ }
+ 
+ $ctor__array_Arrays__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_testObjectArray__() {
+  let objects = new Array(100);
+  objects = new Array(0);
+  objects = [null, null];
+  let objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([5, 10], j_l_Object));
+  objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$init([[null, null], null], j_l_Object, 2));
+  objects2d = /**@type {!Array<Array<*>>}*/ ($Arrays.$create([20, null], j_l_Object));
+  let object = objects[0];
+  object = objects2d[0][1];
+  $Arrays.$set(objects, 0, null);
+  $Arrays.$set(objects2d[0], 1, null);
+ }
+ 
+ m_testJavaTypeArray__() {
+  let objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([100], SomeObject));
+  objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$create([0], SomeObject));
+  objects = /**@type {!Array<SomeObject>}*/ ($Arrays.$init([null, null], SomeObject));
+  let objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$create([5, 10], SomeObject));
+  objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$init([/**@type {!Array<SomeObject>}*/ ($Arrays.$init([null, null], SomeObject)), null], SomeObject, 2));
+  objects2d = /**@type {!Array<Array<SomeObject>>}*/ ($Arrays.$create([20, null], SomeObject));
+  let someObject = objects[0];
+  someObject = objects2d[0][1];
+  $Arrays.$set(objects, 0, null);
+  $Arrays.$set(objects2d[0], 1, null);
+ }
+ 
+ m_testIntArrays___$pp_array() {
+  let ints = /**@type {!Array<number>}*/ ($Arrays.$create([100], $$int));
+  ints = /**@type {!Array<number>}*/ ($Arrays.$create([0], $$int));
+  ints = /**@type {!Array<number>}*/ ($Arrays.$init([0, 1], $$int));
+  let ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$create([5, 10], $$int));
+  ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$init([/**@type {!Array<number>}*/ ($Arrays.$init([1, 2], $$int)), null], $$int, 2));
+  ints2d = /**@type {!Array<Array<number>>}*/ ($Arrays.$create([20, null], $$int));
+  let n = ints[0];
+  n = ints2d[0][1];
+  $Arrays.$set(ints, 0, 1);
+  $Arrays.$set(ints2d[0], 1, 1);
+ }
+ 
+ m_testLongArrays___$pp_array() {
+  let longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([100], $$long));
+  longs = /**@type {!Array<!$Long>}*/ ($Arrays.$create([0], $$long));
+  longs = /**@type {!Array<!$Long>}*/ ($Arrays.$init([$Long.fromInt(0), $Long.fromInt(1)], $$long));
+  let longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([5, 10], $$long));
+  longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$init([/**@type {!Array<!$Long>}*/ ($Arrays.$init([$Long.fromInt(1), $Long.fromInt(2)], $$long)), null], $$long, 2));
+  longs2d = /**@type {!Array<Array<!$Long>>}*/ ($Arrays.$create([20, null], $$long));
+  let n = longs[0];
+  n = longs2d[0][1];
+  $Arrays.$set(longs, 0, $Long.fromInt(1));
+  $Arrays.$set(longs2d[0], 1, $Long.fromInt(1));
+ }
+ 
+ m_testDevirtualizedTypeArrays___$pp_array() {
+  let booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([100], Boolean));
+  booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$create([0], Boolean));
+  booleans = /**@type {!Array<?boolean>}*/ ($Arrays.$init([true, false], Boolean));
+  let booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$create([5, 10], Boolean));
+  booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$init([/**@type {!Array<?boolean>}*/ ($Arrays.$init([true, false], Boolean)), null], Boolean, 2));
+  booleans2d = /**@type {!Array<Array<?boolean>>}*/ ($Arrays.$create([20, null], Boolean));
+  let b = Boolean.m_booleanValue__java_lang_Boolean(booleans[0]);
+  b = Boolean.m_booleanValue__java_lang_Boolean(booleans2d[0][1]);
+  $Arrays.$set(booleans, 0, true);
+  $Arrays.$set(booleans2d[0], 1, false);
+ }
+ 
+ m_testStringArrays___$pp_array() {
+  let strings = /**@type {!Array<?string>}*/ ($Arrays.$create([100], j_l_String));
+  strings = /**@type {!Array<?string>}*/ ($Arrays.$create([0], j_l_String));
+  strings = /**@type {!Array<?string>}*/ ($Arrays.$init([null, null], j_l_String));
+  let strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$create([5, 10], j_l_String));
+  strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$init([/**@type {!Array<?string>}*/ ($Arrays.$init([null, null], j_l_String)), null], j_l_String, 2));
+  strings2d = /**@type {!Array<Array<?string>>}*/ ($Arrays.$create([20, null], j_l_String));
+  let b = strings[0];
+  b = strings2d[0][1];
+  $Arrays.$set(strings, 0, null);
+  $Arrays.$set(strings2d[0], 1, null);
+ }
+ 
+ m_testNativeArray__() {
+  let nativeObjects = new Array(100);
+  nativeObjects = new Array(0);
+  nativeObjects = [null, null];
+  let nativeObjects2d = /**@type {!Array<Array<String>>}*/ ($Arrays.$createNative([5, 10]));
+  nativeObjects2d = [[null, null], null];
+  nativeObjects2d = /**@type {!Array<Array<String>>}*/ ($Arrays.$createNative([20, null]));
+  let nativeObject = nativeObjects[0];
+  nativeObject = nativeObjects2d[0][1];
+  $Arrays.$set(nativeObjects, 0, null);
+  $Arrays.$set(nativeObjects2d[0], 1, null);
+ }
+ 
+ m_testErasureCastsOnArrayAccess__() {
+  let container = null;
+  let s = /**@type {Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];
+ }
+ 
+ m_testArraysSupertypeClosureTypes__() {
+  this.m_consumesCloneable__java_lang_Cloneable(new Array(10));
+  this.m_consumesSerializable__java_io_Serializable(new Array(10));
+ }
+ 
+ m_consumesCloneable__java_lang_Cloneable(/** (Cloneable|Array) */ cloneable) {}
+ 
+ m_consumesSerializable__java_io_Serializable(/** (Serializable|Array) */ serializable) {}
+ 
+ static $clinit() {
+  Arrays.$clinit = () =>{};
+  Arrays.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Arrays;
+ }
+ 
+ static $loadModules() {
+  SomeObject = goog.module.get('array.Arrays.SomeObject$impl');
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+  $$long = goog.module.get('vmbootstrap.primitives.$long$impl');
+ }
 }
-$Util.$setClassMetadata(Arrays, 'array.Arrays');
+$Util.$setClassMetadata(Arrays, "array.Arrays");
 
 exports = Arrays;
 

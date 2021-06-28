@@ -4,35 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class AnotherClass extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!AnotherClass} */
-  static $create__() {
-    AnotherClass.$clinit();
-    let $instance = new AnotherClass();
-    $instance.$ctor__multipletopclasses_AnotherClass__();
-    return $instance;
-  }
-
-  $ctor__multipletopclasses_AnotherClass__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    AnotherClass.$clinit = () => {};
-    AnotherClass.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof AnotherClass;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!AnotherClass} */
+ static $create__() {
+  AnotherClass.$clinit();
+  let $instance = new AnotherClass();
+  $instance.$ctor__multipletopclasses_AnotherClass__();
+  return $instance;
+ }
+ 
+ $ctor__multipletopclasses_AnotherClass__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  AnotherClass.$clinit = () =>{};
+  AnotherClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AnotherClass;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(AnotherClass, 'multipletopclasses.AnotherClass');
+$Util.$setClassMetadata(AnotherClass, "multipletopclasses.AnotherClass");
 
 exports = AnotherClass;
 

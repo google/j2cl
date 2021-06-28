@@ -6,44 +6,44 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Outer = goog.forwardDeclare('readable.packageinfo.Outer$impl');
 
 class Foo extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {Outer}*/
-    this.f_outer__packageinfo_subpackage_Foo;
-  }
-  /** @return {!Foo} */
-  static $create__() {
-    Foo.$clinit();
-    let $instance = new Foo();
-    $instance.$ctor__packageinfo_subpackage_Foo__();
-    return $instance;
-  }
-
-  $ctor__packageinfo_subpackage_Foo__() {
-    this.$ctor__java_lang_Object__();
-    this.$init___$p_packageinfo_subpackage_Foo();
-  }
-  /** @private */
-  $init___$p_packageinfo_subpackage_Foo() {
-    this.f_outer__packageinfo_subpackage_Foo = new Outer();
-  }
-
-  static $clinit() {
-    Foo.$clinit = () => {};
-    Foo.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Foo;
-  }
-
-  static $loadModules() {
-    Outer = goog.module.get('readable.packageinfo.Outer$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Outer}*/
+  this.f_outer__packageinfo_subpackage_Foo;
+ }
+ /** @return {!Foo} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__packageinfo_subpackage_Foo__();
+  return $instance;
+ }
+ 
+ $ctor__packageinfo_subpackage_Foo__() {
+  this.$ctor__java_lang_Object__();
+  this.$init___$p_packageinfo_subpackage_Foo();
+ }
+ /** @private */
+ $init___$p_packageinfo_subpackage_Foo() {
+  this.f_outer__packageinfo_subpackage_Foo = new Outer();
+ }
+ 
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ static $loadModules() {
+  Outer = goog.module.get('readable.packageinfo.Outer$impl');
+ }
 }
-$Util.$setClassMetadata(Foo, 'packageinfo.subpackage.Foo');
+$Util.$setClassMetadata(Foo, "packageinfo.subpackage.Foo");
 
 exports = Foo;
 

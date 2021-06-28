@@ -4,42 +4,41 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class ClassWithJsFunctionProperty extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {?function(?string):void}*/
-    this.f_function__jsfunction_Main_ClassWithJsFunctionProperty;
-  }
-  /** @return {!ClassWithJsFunctionProperty} */
-  static $create__() {
-    ClassWithJsFunctionProperty.$clinit();
-    let $instance = new ClassWithJsFunctionProperty();
-    $instance.$ctor__jsfunction_Main_ClassWithJsFunctionProperty__();
-    return $instance;
-  }
-
-  $ctor__jsfunction_Main_ClassWithJsFunctionProperty__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {?function(?string):void} */
-  get function() {
-    return null;
-  }
-
-  static $clinit() {
-    ClassWithJsFunctionProperty.$clinit = () => {};
-    ClassWithJsFunctionProperty.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof ClassWithJsFunctionProperty;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {?function(?string):void}*/
+  this.f_function__jsfunction_Main_ClassWithJsFunctionProperty;
+ }
+ /** @return {!ClassWithJsFunctionProperty} */
+ static $create__() {
+  ClassWithJsFunctionProperty.$clinit();
+  let $instance = new ClassWithJsFunctionProperty();
+  $instance.$ctor__jsfunction_Main_ClassWithJsFunctionProperty__();
+  return $instance;
+ }
+ 
+ $ctor__jsfunction_Main_ClassWithJsFunctionProperty__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {?function(?string):void} */
+ get function() {
+  return null;
+ }
+ 
+ static $clinit() {
+  ClassWithJsFunctionProperty.$clinit = () =>{};
+  ClassWithJsFunctionProperty.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassWithJsFunctionProperty;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    ClassWithJsFunctionProperty, 'jsfunction.Main$ClassWithJsFunctionProperty');
+$Util.$setClassMetadata(ClassWithJsFunctionProperty, "jsfunction.Main$ClassWithJsFunctionProperty");
 
 exports = ClassWithJsFunctionProperty;
 

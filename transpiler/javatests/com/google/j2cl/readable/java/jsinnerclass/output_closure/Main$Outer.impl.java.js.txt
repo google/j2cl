@@ -6,48 +6,48 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Inner = goog.forwardDeclare('com.google.test.Inner$impl');
 
 class Outer extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {number}*/
-    this.f_a__jsinnerclass_Main_Outer = 0;
-  }
-  /** @return {!Outer} */
-  static $create__() {
-    Outer.$clinit();
-    let $instance = new Outer();
-    $instance.$ctor__jsinnerclass_Main_Outer__();
-    return $instance;
-  }
-
-  $ctor__jsinnerclass_Main_Outer__() {
-    this.$ctor__java_lang_Object__();
-    this.$init___$p_jsinnerclass_Main_Outer();
-  }
-  /** @return {number} */
-  m_method__() {
-    return new Inner(this).getB() + this.f_a__jsinnerclass_Main_Outer | 0;
-  }
-  /** @private */
-  $init___$p_jsinnerclass_Main_Outer() {
-    this.f_a__jsinnerclass_Main_Outer = 2;
-  }
-
-  static $clinit() {
-    Outer.$clinit = () => {};
-    Outer.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Outer;
-  }
-
-  static $loadModules() {
-    Inner = goog.module.get('com.google.test.Inner$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_a__jsinnerclass_Main_Outer = 0;
+ }
+ /** @return {!Outer} */
+ static $create__() {
+  Outer.$clinit();
+  let $instance = new Outer();
+  $instance.$ctor__jsinnerclass_Main_Outer__();
+  return $instance;
+ }
+ 
+ $ctor__jsinnerclass_Main_Outer__() {
+  this.$ctor__java_lang_Object__();
+  this.$init___$p_jsinnerclass_Main_Outer();
+ }
+ /** @return {number} */
+ m_method__() {
+  return new Inner(this).getB() + this.f_a__jsinnerclass_Main_Outer | 0;
+ }
+ /** @private */
+ $init___$p_jsinnerclass_Main_Outer() {
+  this.f_a__jsinnerclass_Main_Outer = 2;
+ }
+ 
+ static $clinit() {
+  Outer.$clinit = () =>{};
+  Outer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Outer;
+ }
+ 
+ static $loadModules() {
+  Inner = goog.module.get('com.google.test.Inner$impl');
+ }
 }
-$Util.$setClassMetadata(Outer, 'jsinnerclass.Main$Outer');
+$Util.$setClassMetadata(Outer, "jsinnerclass.Main$Outer");
 
 exports = Outer;
 

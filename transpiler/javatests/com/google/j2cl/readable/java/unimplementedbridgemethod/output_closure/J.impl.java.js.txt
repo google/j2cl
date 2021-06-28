@@ -10,34 +10,32 @@ let $LambdaAdaptor = goog.forwardDeclare('unimplementedbridgemethod.J.$LambdaAda
  * @extends {I<?string>}
  */
 class J {
-  /** @return {J} */
-  static $adapt(/** ?function(?string):number */ fn) {
-    J.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    J.$clinit = () => {};
-    J.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    I.$markImplementor(ctor);
-    ctor.prototype.$implements__unimplementedbridgemethod_J = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__unimplementedbridgemethod_J;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('unimplementedbridgemethod.J.$LambdaAdaptor$impl');
-  }
+ /** @return {J} */
+ static $adapt(/** ?function(?string):number */ fn) {
+  J.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  J.$clinit = () =>{};
+  J.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  I.$markImplementor(ctor);
+  ctor.prototype.$implements__unimplementedbridgemethod_J = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__unimplementedbridgemethod_J;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('unimplementedbridgemethod.J.$LambdaAdaptor$impl');
+ }
 }
 J.$markImplementor(/**@type {Function}*/ (J));
-$Util.$setClassMetadataForInterface(J, 'unimplementedbridgemethod.J');
+$Util.$setClassMetadataForInterface(J, "unimplementedbridgemethod.J");
 
 exports = J;
 

@@ -11,86 +11,85 @@ let $JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl')
 let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 
 class Main extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Main} */
-  static $create__() {
-    Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__nativejstypes_Main__();
-    return $instance;
-  }
-
-  $ctor__nativejstypes_Main__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {number} */
-  static m_testNativeJsTypeWithNamespace__() {
-    Main.$clinit();
-    let foo = new Foo();
-    foo.x = 50;
-    foo.y = 5;
-    return foo.sum();
-  }
-  /** @return {number} */
-  static m_testNativeJsTypeWithoutNamespace__() {
-    Main.$clinit();
-    let bar = new Bar(6, 7);
-    bar.x = 50;
-    bar.y = 5;
-    Bar.f = 10;
-    return bar.product();
-  }
-
-  static m_testInnerNativeJsType__() {
-    Main.$clinit();
-    let unusedBarInner = new Bar.Inner(1);
-    let unusedBarInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);
-  }
-
-  static m_testGlobalNativeJsType__() {
-    Main.$clinit();
-    let header = new Headers();
-    header.append('Content-Type', 'text/xml');
-  }
-
-  static m_testNativeTypeClassLiteral__() {
-    Main.$clinit();
-    let o1 = Class.$get($JavaScriptObject);
-    o1 = Class.$get(j_l_Object, 1);
-  }
-
-  static m_testNativeTypeObjectMethods__() {
-    Main.$clinit();
-    let bar = new Bar(6, 7);
-    $Objects.m_toString__java_lang_Object(bar);
-    $Objects.m_hashCode__java_lang_Object(bar);
-    $Objects.m_equals__java_lang_Object__java_lang_Object(
-        bar, j_l_Object.$create__());
-  }
-
-  static $clinit() {
-    Main.$clinit = () => {};
-    Main.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Main;
-  }
-
-  static $loadModules() {
-    Foo = goog.module.get('com.acme.MyFoo');
-    Class = goog.module.get('java.lang.Class$impl');
-    Bar = goog.module.get('nativejstypes.Bar');
-    $synthetic_nativejstypes_Bar = goog.module.get('nativejstypes.Bar');
-    $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
-    $Objects = goog.module.get('vmbootstrap.Objects$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__nativejstypes_Main__();
+  return $instance;
+ }
+ 
+ $ctor__nativejstypes_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {number} */
+ static m_testNativeJsTypeWithNamespace__() {
+  Main.$clinit();
+  let foo = new Foo();
+  foo.x = 50;
+  foo.y = 5;
+  return foo.sum();
+ }
+ /** @return {number} */
+ static m_testNativeJsTypeWithoutNamespace__() {
+  Main.$clinit();
+  let bar = new Bar(6, 7);
+  bar.x = 50;
+  bar.y = 5;
+  Bar.f = 10;
+  return bar.product();
+ }
+ 
+ static m_testInnerNativeJsType__() {
+  Main.$clinit();
+  let unusedBarInner = new Bar.Inner(1);
+  let unusedBarInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);
+ }
+ 
+ static m_testGlobalNativeJsType__() {
+  Main.$clinit();
+  let header = new Headers();
+  header.append("Content-Type", "text/xml");
+ }
+ 
+ static m_testNativeTypeClassLiteral__() {
+  Main.$clinit();
+  let o1 = Class.$get($JavaScriptObject);
+  o1 = Class.$get(j_l_Object, 1);
+ }
+ 
+ static m_testNativeTypeObjectMethods__() {
+  Main.$clinit();
+  let bar = new Bar(6, 7);
+  $Objects.m_toString__java_lang_Object(bar);
+  $Objects.m_hashCode__java_lang_Object(bar);
+  $Objects.m_equals__java_lang_Object__java_lang_Object(bar, j_l_Object.$create__());
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  Foo = goog.module.get('com.acme.MyFoo');
+  Class = goog.module.get('java.lang.Class$impl');
+  Bar = goog.module.get('nativejstypes.Bar');
+  $synthetic_nativejstypes_Bar = goog.module.get('nativejstypes.Bar');
+  $JavaScriptObject = goog.module.get('vmbootstrap.JavaScriptObject$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+ }
 }
-$Util.$setClassMetadata(Main, 'nativejstypes.Main');
+$Util.$setClassMetadata(Main, "nativejstypes.Main");
 
 exports = Main;
 

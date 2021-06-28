@@ -6,44 +6,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ESInner = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
 
 class ESOuter extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!ESOuter} */
-  static $create__() {
-    ESOuter.$clinit();
-    let $instance = new ESOuter();
-    $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__();
-    return $instance;
-  }
-
-  $ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {ESInner} */
-  m_newESInner__() {
-    return ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(
-        this);
-  }
-
-  static $clinit() {
-    ESOuter.$clinit = () => {};
-    ESOuter.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof ESOuter;
-  }
-
-  static $loadModules() {
-    ESInner = goog.module.get(
-        'innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!ESOuter} */
+ static $create__() {
+  ESOuter.$clinit();
+  let $instance = new ESOuter();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__();
+  return $instance;
+ }
+ 
+ $ctor__innerclassinitorder_InnerClassInitOrder_ESOuter__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {ESInner} */
+ m_newESInner__() {
+  return ESInner.$create__innerclassinitorder_InnerClassInitOrder_ESOuter(this);
+ }
+ 
+ static $clinit() {
+  ESOuter.$clinit = () =>{};
+  ESOuter.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ESOuter;
+ }
+ 
+ static $loadModules() {
+  ESInner = goog.module.get('innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner$impl');
+ }
 }
-$Util.$setClassMetadata(
-    ESOuter, 'innerclassinitorder.InnerClassInitOrder$ESOuter');
+$Util.$setClassMetadata(ESOuter, "innerclassinitorder.InnerClassInitOrder$ESOuter");
 
 exports = ESOuter;
 

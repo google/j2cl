@@ -8,58 +8,56 @@ let FooImpl = goog.forwardDeclare('externs.Main.FooImpl$impl');
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 
 class Main extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {Foo}*/
-    this.f_aFoo__externs_Main;
-    /**@type {TopLevelExtern.InnerExtern}*/
-    this.f_innerExtern__externs_Main;
-    /**@type {Inner}*/
-    this.f_inner__externs_Main;
-  }
-  /** @return {!Main} */
-  static $create__() {
-    Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__externs_Main__();
-    return $instance;
-  }
-
-  $ctor__externs_Main__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {boolean} */
-  static m_testFooOverlay__externs_Main_FooOverlay(/** Foo */ fooOverlay) {
-    return j_l_String.m_equals__java_lang_String__java_lang_Object(
-        fooOverlay.foo, 'Hello');
-  }
-  //
-  // native static m_useDirectlyAsFoo__java_lang_Object(/** * */ fooOverlay)
-
-  static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
-    Main.$clinit();
-    Main.m_testFooOverlay__externs_Main_FooOverlay(
-        /**@type {Foo}*/ (FooImpl.$create__()));
-    Main.m_useDirectlyAsFoo__java_lang_Object(FooImpl.$create__());
-  }
-
-  static $clinit() {
-    Main.$clinit = () => {};
-    Main.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Main;
-  }
-
-  static $loadModules() {
-    FooImpl = goog.module.get('externs.Main.FooImpl$impl');
-    j_l_String = goog.module.get('java.lang.String$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Foo}*/
+  this.f_aFoo__externs_Main;
+  /**@type {TopLevelExtern.InnerExtern}*/
+  this.f_innerExtern__externs_Main;
+  /**@type {Inner}*/
+  this.f_inner__externs_Main;
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__externs_Main__();
+  return $instance;
+ }
+ 
+ $ctor__externs_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {boolean} */
+ static m_testFooOverlay__externs_Main_FooOverlay(/** Foo */ fooOverlay) {
+  return j_l_String.m_equals__java_lang_String__java_lang_Object(fooOverlay.foo, "Hello");
+ }
+ // 
+ // native static m_useDirectlyAsFoo__java_lang_Object(/** * */ fooOverlay) 
+ 
+ static m_main__arrayOf_java_lang_String(/** Array<?string> */ args) {
+  Main.$clinit();
+  Main.m_testFooOverlay__externs_Main_FooOverlay(/**@type {Foo}*/ (FooImpl.$create__()));
+  Main.m_useDirectlyAsFoo__java_lang_Object(FooImpl.$create__());
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  FooImpl = goog.module.get('externs.Main.FooImpl$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+ }
 }
-$Util.$setClassMetadata(Main, 'externs.Main');
+$Util.$setClassMetadata(Main, "externs.Main");
 
 /* NATIVE.JS EPILOG */
 

@@ -9,42 +9,38 @@ let TypeWildCards = goog.forwardDeclare('typewildcards.TypeWildCards$impl');
  * @extends {GenericType<Foo>}
  */
 class Foo extends GenericType {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {TypeWildCards}*/
-    this.$outer_this__typewildcards_TypeWildCards_Foo;
-  }
-  /** @return {!Foo} */
-  static $create__typewildcards_TypeWildCards(
-      /** TypeWildCards */ $outer_this) {
-    Foo.$clinit();
-    let $instance = new Foo();
-    $instance
-        .$ctor__typewildcards_TypeWildCards_Foo__typewildcards_TypeWildCards(
-            $outer_this);
-    return $instance;
-  }
-
-  $ctor__typewildcards_TypeWildCards_Foo__typewildcards_TypeWildCards(
-      /** TypeWildCards */ $outer_this) {
-    this.$outer_this__typewildcards_TypeWildCards_Foo = $outer_this;
-    this.$ctor__typewildcards_GenericType__();
-  }
-
-  static $clinit() {
-    Foo.$clinit = () => {};
-    Foo.$loadModules();
-    GenericType.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Foo;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {TypeWildCards}*/
+  this.$outer_this__typewildcards_TypeWildCards_Foo;
+ }
+ /** @return {!Foo} */
+ static $create__typewildcards_TypeWildCards(/** TypeWildCards */ $outer_this) {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__typewildcards_TypeWildCards_Foo__typewildcards_TypeWildCards($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__typewildcards_TypeWildCards_Foo__typewildcards_TypeWildCards(/** TypeWildCards */ $outer_this) {
+  this.$outer_this__typewildcards_TypeWildCards_Foo = $outer_this;
+  this.$ctor__typewildcards_GenericType__();
+ }
+ 
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  GenericType.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Foo, 'typewildcards.TypeWildCards$Foo');
+$Util.$setClassMetadata(Foo, "typewildcards.TypeWildCards$Foo");
 
 exports = Foo;
 

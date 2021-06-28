@@ -10,79 +10,79 @@ let FunctionImpl = goog.forwardDeclare('libraryinfo.Main.FunctionImpl$impl');
 let MyJsType = goog.forwardDeclare('libraryinfo.Main.MyJsType$impl');
 
 class Main extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Main} */
-  static $create__() {
-    Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__libraryinfo_Main__();
-    return $instance;
-  }
-
-  $ctor__libraryinfo_Main__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static entryPoint() {
-    Main.$clinit();
-    Main.$create__().m_execute___$p_libraryinfo_Main();
-    let jsFunction = FunctionImpl.$create__();
-    jsFunction = (/** ?string */ s) => {
-      console.log(s);
-    };
-    jsFunction('foo');
-    new MyJsType();
-    $1.$create__();
-  }
-
-  m_execute___$p_libraryinfo_Main() {
-    console.log('Foo');
-  }
-  /** @override @return {?string} */
-  toString() {
-    return super.toString();
-  }
-
-  static main() {
-    Main.$clinit();
-    let foo = null;
-    foo.m_instanceMethod___$pp_libraryinfo();
-    let clazz = Class.$get(Foo);
-  }
-  /** @return {?string} */
-  static get f_STATIC_FIELD__libraryinfo_Main() {
-    return (Main.$clinit(), Main.$static_STATIC_FIELD__libraryinfo_Main);
-  }
-
-  static set f_STATIC_FIELD__libraryinfo_Main(/** ?string */ value) {
-    (Main.$clinit(), Main.$static_STATIC_FIELD__libraryinfo_Main = value);
-  }
-
-  static $clinit() {
-    Main.$clinit = () => {};
-    Main.$loadModules();
-    j_l_Object.$clinit();
-    Main.$static_STATIC_FIELD__libraryinfo_Main = 'STATIC_FIELD';
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Main;
-  }
-
-  static $loadModules() {
-    Class = goog.module.get('java.lang.Class$impl');
-    $1 = goog.module.get('libraryinfo.Main.$1$impl');
-    Foo = goog.module.get('libraryinfo.Main.Foo$impl');
-    FunctionImpl = goog.module.get('libraryinfo.Main.FunctionImpl$impl');
-    MyJsType = goog.module.get('libraryinfo.Main.MyJsType$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__libraryinfo_Main__();
+  return $instance;
+ }
+ 
+ $ctor__libraryinfo_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static entryPoint() {
+  Main.$clinit();
+  Main.$create__().m_execute___$p_libraryinfo_Main();
+  let jsFunction = FunctionImpl.$create__();
+  jsFunction = (/** ?string */ s) =>{
+   console.log(s);
+  };
+  jsFunction("foo");
+  new MyJsType();
+  $1.$create__();
+ }
+ 
+ m_execute___$p_libraryinfo_Main() {
+  console.log("Foo");
+ }
+ /** @override @return {?string} */
+ toString() {
+  return super.toString();
+ }
+ 
+ static main() {
+  Main.$clinit();
+  let foo = null;
+  foo.m_instanceMethod___$pp_libraryinfo();
+  let clazz = Class.$get(Foo);
+ }
+ /** @return {?string} */
+ static get f_STATIC_FIELD__libraryinfo_Main() {
+  return (Main.$clinit(), Main.$static_STATIC_FIELD__libraryinfo_Main);
+ }
+ 
+ static set f_STATIC_FIELD__libraryinfo_Main(/** ?string */ value) {
+  (Main.$clinit(), Main.$static_STATIC_FIELD__libraryinfo_Main = value);
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+  Main.$static_STATIC_FIELD__libraryinfo_Main = "STATIC_FIELD";
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
+  $1 = goog.module.get('libraryinfo.Main.$1$impl');
+  Foo = goog.module.get('libraryinfo.Main.Foo$impl');
+  FunctionImpl = goog.module.get('libraryinfo.Main.FunctionImpl$impl');
+  MyJsType = goog.module.get('libraryinfo.Main.MyJsType$impl');
+ }
 }
 /**@private {?string}*/
 Main.$static_STATIC_FIELD__libraryinfo_Main;
-$Util.$setClassMetadata(Main, 'libraryinfo.Main');
+$Util.$setClassMetadata(Main, "libraryinfo.Main");
 
 exports = Main;
 

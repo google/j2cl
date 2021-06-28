@@ -8,53 +8,47 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {J}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():void */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():void}*/
-    this.f_fn__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor;
-    this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$JsFunction(
-        fn);
+ 
+ constructor(/** ?function():void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():void}*/
+  this.f_fn__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor;
+  this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$JsFunction(fn);
+ }
+ 
+ $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$JsFunction(/** ?function():void */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ m_bar__() {
+  {
+   let $function = this.f_fn__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor;
+   $function();
   }
-
-  $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$JsFunction(
-      /** ?function():void */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor =
-        fn;
-  }
-  /** @override */
-  m_bar__() {
-    {
-      let $function =
-          this.f_fn__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J_$LambdaAdaptor;
-      $function();
-    }
-  }
-  // Default method forwarding stub.
-  /** @override */
-  m_foo__() {
-    J.m_foo__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J(
-        this);
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-    J.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ }
+ //Default method forwarding stub.
+ /** @override */
+ m_foo__() {
+  J.m_foo__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J(this);
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  J.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 J.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor,
-    'abstractmethodoverridedefault.AbstractMethodOverrideDefault$J$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "abstractmethodoverridedefault.AbstractMethodOverrideDefault$J$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

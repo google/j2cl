@@ -10,38 +10,36 @@ let Main = goog.forwardDeclare('jsoptional.Main$impl');
  * @implements {I<?string>}
  */
 class SpecializedSubtype extends j_l_Object {
-  constructor(/** Main */ $outer_this, /** *= */ a) {
-    SpecializedSubtype.$clinit();
-    super();
-    /**@type {Main}*/
-    this.$outer_this__jsoptional_Main_SpecializedSubtype;
-    this.$ctor__jsoptional_Main_SpecializedSubtype__jsoptional_Main__java_lang_Object(
-        $outer_this, a);
-  }
-
-  $ctor__jsoptional_Main_SpecializedSubtype__jsoptional_Main__java_lang_Object(
-      /** Main */ $outer_this, /** * */ a) {
-    this.$outer_this__jsoptional_Main_SpecializedSubtype = $outer_this;
-    this.$ctor__java_lang_Object__();
-  }
-  /** @override */
-  m(/** ?string */ t, /** *= */ o) {}
-
-  static $clinit() {
-    SpecializedSubtype.$clinit = () => {};
-    SpecializedSubtype.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SpecializedSubtype;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** Main */ $outer_this, /** *= */ a) {
+  SpecializedSubtype.$clinit();
+  super();
+  /**@type {Main}*/
+  this.$outer_this__jsoptional_Main_SpecializedSubtype;
+  this.$ctor__jsoptional_Main_SpecializedSubtype__jsoptional_Main__java_lang_Object($outer_this, a);
+ }
+ 
+ $ctor__jsoptional_Main_SpecializedSubtype__jsoptional_Main__java_lang_Object(/** Main */ $outer_this, /** * */ a) {
+  this.$outer_this__jsoptional_Main_SpecializedSubtype = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ /** @override */
+ m(/** ?string */ t, /** *= */ o) {}
+ 
+ static $clinit() {
+  SpecializedSubtype.$clinit = () =>{};
+  SpecializedSubtype.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SpecializedSubtype;
+ }
+ 
+ static $loadModules() {}
 }
 I.$markImplementor(SpecializedSubtype);
-$Util.$setClassMetadata(
-    SpecializedSubtype, 'jsoptional.Main$SpecializedSubtype');
+$Util.$setClassMetadata(SpecializedSubtype, "jsoptional.Main$SpecializedSubtype");
 
 exports = SpecializedSubtype;
 

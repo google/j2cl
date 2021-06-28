@@ -6,47 +6,42 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let $1LocalClass = goog.forwardDeclare('localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
 
 class LocalClassWithConstructor extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!LocalClassWithConstructor} */
-  static $create__() {
-    LocalClassWithConstructor.$clinit();
-    let $instance = new LocalClassWithConstructor();
-    $instance.$ctor__localclasswithconstructor_LocalClassWithConstructor__();
-    return $instance;
-  }
-
-  $ctor__localclasswithconstructor_LocalClassWithConstructor__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__int(/** number */ p) {
-    let localVar = 1;
-    $1LocalClass
-        .$create__localclasswithconstructor_LocalClassWithConstructor__int__int__int(
-            this, localVar, p, 1);
-  }
-
-  static $clinit() {
-    LocalClassWithConstructor.$clinit = () => {};
-    LocalClassWithConstructor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof LocalClassWithConstructor;
-  }
-
-  static $loadModules() {
-    $1LocalClass = goog.module.get(
-        'localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!LocalClassWithConstructor} */
+ static $create__() {
+  LocalClassWithConstructor.$clinit();
+  let $instance = new LocalClassWithConstructor();
+  $instance.$ctor__localclasswithconstructor_LocalClassWithConstructor__();
+  return $instance;
+ }
+ 
+ $ctor__localclasswithconstructor_LocalClassWithConstructor__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__int(/** number */ p) {
+  let localVar = 1;
+  $1LocalClass.$create__localclasswithconstructor_LocalClassWithConstructor__int__int__int(this, localVar, p, 1);
+ }
+ 
+ static $clinit() {
+  LocalClassWithConstructor.$clinit = () =>{};
+  LocalClassWithConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LocalClassWithConstructor;
+ }
+ 
+ static $loadModules() {
+  $1LocalClass = goog.module.get('localclasswithconstructor.LocalClassWithConstructor.$1LocalClass$impl');
+ }
 }
-$Util.$setClassMetadata(
-    LocalClassWithConstructor,
-    'localclasswithconstructor.LocalClassWithConstructor');
+$Util.$setClassMetadata(LocalClassWithConstructor, "localclasswithconstructor.LocalClassWithConstructor");
 
 exports = LocalClassWithConstructor;
 

@@ -7,50 +7,40 @@ let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassIni
 let $1 = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.$1$impl');
 
 class OuterRefFromSuperCtorCall extends OuterRefFromSuperCtorBase {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {InnerClassInitOrder}*/
-    this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall;
-  }
-  /** @return {!OuterRefFromSuperCtorCall} */
-  static $create__innerclassinitorder_InnerClassInitOrder(
-      /** InnerClassInitOrder */ $outer_this) {
-    OuterRefFromSuperCtorCall.$clinit();
-    let $instance = new OuterRefFromSuperCtorCall();
-    $instance
-        .$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder(
-            $outer_this);
-    return $instance;
-  }
-
-  $ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder(
-      /** InnerClassInitOrder */ $outer_this) {
-    this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall =
-        $outer_this;
-    this.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object(
-        $1.$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall(
-            this));
-  }
-
-  static $clinit() {
-    OuterRefFromSuperCtorCall.$clinit = () => {};
-    OuterRefFromSuperCtorCall.$loadModules();
-    OuterRefFromSuperCtorBase.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof OuterRefFromSuperCtorCall;
-  }
-
-  static $loadModules() {
-    $1 = goog.module.get(
-        'innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.$1$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {InnerClassInitOrder}*/
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall;
+ }
+ /** @return {!OuterRefFromSuperCtorCall} */
+ static $create__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
+  OuterRefFromSuperCtorCall.$clinit();
+  let $instance = new OuterRefFromSuperCtorCall();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
+  this.$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall = $outer_this;
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorBase__java_lang_Object($1.$create__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall(this));
+ }
+ 
+ static $clinit() {
+  OuterRefFromSuperCtorCall.$clinit = () =>{};
+  OuterRefFromSuperCtorCall.$loadModules();
+  OuterRefFromSuperCtorBase.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterRefFromSuperCtorCall;
+ }
+ 
+ static $loadModules() {
+  $1 = goog.module.get('innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.$1$impl');
+ }
 }
-$Util.$setClassMetadata(
-    OuterRefFromSuperCtorCall,
-    'innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall');
+$Util.$setClassMetadata(OuterRefFromSuperCtorCall, "innerclassinitorder.InnerClassInitOrder$OuterRefFromSuperCtorCall");
 
 exports = OuterRefFromSuperCtorCall;
 

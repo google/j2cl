@@ -3,18 +3,19 @@ goog.module('staticjsmembers.StaticJsMembers.Extern.$Overlay$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof window.Object;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof window.Object;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'window.Object');
+$Util.$setClassMetadata($Overlay, "window.Object");
 
 exports = $Overlay;
 

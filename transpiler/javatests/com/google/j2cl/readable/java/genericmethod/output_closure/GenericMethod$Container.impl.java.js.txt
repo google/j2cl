@@ -9,39 +9,39 @@ let Content = goog.forwardDeclare('genericmethod.GenericMethod.Content$impl');
  * @template CT
  */
 class Container extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template CT @return {!Container<CT>} */
-  static $create__() {
-    Container.$clinit();
-    let $instance = new Container();
-    $instance.$ctor__genericmethod_GenericMethod_Container__();
-    return $instance;
-  }
-
-  $ctor__genericmethod_GenericMethod_Container__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {CT} */
-  m_get___$pp_genericmethod() {
-    return null;
-  }
-
-  static $clinit() {
-    Container.$clinit = () => {};
-    Container.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Container;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template CT @return {!Container<CT>} */
+ static $create__() {
+  Container.$clinit();
+  let $instance = new Container();
+  $instance.$ctor__genericmethod_GenericMethod_Container__();
+  return $instance;
+ }
+ 
+ $ctor__genericmethod_GenericMethod_Container__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {CT} */
+ m_get___$pp_genericmethod() {
+  return null;
+ }
+ 
+ static $clinit() {
+  Container.$clinit = () =>{};
+  Container.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Container;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Container, 'genericmethod.GenericMethod$Container');
+$Util.$setClassMetadata(Container, "genericmethod.GenericMethod$Container");
 
 exports = Container;
 

@@ -7,45 +7,45 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class Foo extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {!Foo<T>} */
-  static $create__() {
-    Foo.$clinit();
-    let $instance = new Foo();
-    $instance.$ctor__nullability_Nullability_Foo__();
-    return $instance;
-  }
-
-  $ctor__nullability_Nullability_Foo__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_bar__java_lang_Object_$pp_nullability(/** T */ t) {}
-  /** @return {T} */
-  m_baz___$pp_nullability() {
-    return null;
-  }
-  /** @override @return {?string} */
-  toString() {
-    return 'Foo';
-  }
-
-  static $clinit() {
-    Foo.$clinit = () => {};
-    Foo.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Foo;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!Foo<T>} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__nullability_Nullability_Foo__();
+  return $instance;
+ }
+ 
+ $ctor__nullability_Nullability_Foo__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_bar__java_lang_Object_$pp_nullability(/** T */ t) {}
+ /** @return {T} */
+ m_baz___$pp_nullability() {
+  return null;
+ }
+ /** @override @return {?string} */
+ toString() {
+  return "Foo";
+ }
+ 
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Foo, 'nullability.Nullability$Foo');
+$Util.$setClassMetadata(Foo, "nullability.Nullability$Foo");
 
 exports = Foo;
 

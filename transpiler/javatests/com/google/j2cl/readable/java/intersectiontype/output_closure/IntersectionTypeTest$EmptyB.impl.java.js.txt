@@ -6,26 +6,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class EmptyB {
-  static $clinit() {
-    EmptyB.$clinit = () => {};
-    EmptyB.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__intersectiontype_IntersectionTypeTest_EmptyB =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__intersectiontype_IntersectionTypeTest_EmptyB;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  EmptyB.$clinit = () =>{};
+  EmptyB.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__intersectiontype_IntersectionTypeTest_EmptyB = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__intersectiontype_IntersectionTypeTest_EmptyB;
+ }
+ 
+ static $loadModules() {}
 }
 EmptyB.$markImplementor(/**@type {Function}*/ (EmptyB));
-$Util.$setClassMetadataForInterface(
-    EmptyB, 'intersectiontype.IntersectionTypeTest$EmptyB');
+$Util.$setClassMetadataForInterface(EmptyB, "intersectiontype.IntersectionTypeTest$EmptyB");
 
 exports = EmptyB;
 

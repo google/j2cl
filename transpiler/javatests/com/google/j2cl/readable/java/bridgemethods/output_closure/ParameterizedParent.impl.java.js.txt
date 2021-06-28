@@ -7,40 +7,39 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class ParameterizedParent extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {!ParameterizedParent<T>} */
-  static $create__() {
-    ParameterizedParent.$clinit();
-    let $instance = new ParameterizedParent();
-    $instance.$ctor__bridgemethods_ParameterizedParent__();
-    return $instance;
-  }
-
-  $ctor__bridgemethods_ParameterizedParent__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @template Q @return {Q} */
-  m_m__bridgemethods_ParameterizedParent_$pp_bridgemethods(/** Q */ t) {
-    return null;
-  }
-
-  static $clinit() {
-    ParameterizedParent.$clinit = () => {};
-    ParameterizedParent.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof ParameterizedParent;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!ParameterizedParent<T>} */
+ static $create__() {
+  ParameterizedParent.$clinit();
+  let $instance = new ParameterizedParent();
+  $instance.$ctor__bridgemethods_ParameterizedParent__();
+  return $instance;
+ }
+ 
+ $ctor__bridgemethods_ParameterizedParent__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @template Q @return {Q} */
+ m_m__bridgemethods_ParameterizedParent_$pp_bridgemethods(/** Q */ t) {
+  return null;
+ }
+ 
+ static $clinit() {
+  ParameterizedParent.$clinit = () =>{};
+  ParameterizedParent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ParameterizedParent;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    ParameterizedParent, 'bridgemethods.ParameterizedParent');
+$Util.$setClassMetadata(ParameterizedParent, "bridgemethods.ParameterizedParent");
 
 exports = ParameterizedParent;
 

@@ -4,35 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class IntValueHolder extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!IntValueHolder} */
-  static $create__int(/** number */ value) {
-    IntValueHolder.$clinit();
-    let $instance = new IntValueHolder();
-    $instance.$ctor__cast_CastPrimitives_IntValueHolder__int(value);
-    return $instance;
-  }
-
-  $ctor__cast_CastPrimitives_IntValueHolder__int(/** number */ value) {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    IntValueHolder.$clinit = () => {};
-    IntValueHolder.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof IntValueHolder;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!IntValueHolder} */
+ static $create__int(/** number */ value) {
+  IntValueHolder.$clinit();
+  let $instance = new IntValueHolder();
+  $instance.$ctor__cast_CastPrimitives_IntValueHolder__int(value);
+  return $instance;
+ }
+ 
+ $ctor__cast_CastPrimitives_IntValueHolder__int(/** number */ value) {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  IntValueHolder.$clinit = () =>{};
+  IntValueHolder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof IntValueHolder;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(IntValueHolder, 'cast.CastPrimitives$IntValueHolder');
+$Util.$setClassMetadata(IntValueHolder, "cast.CastPrimitives$IntValueHolder");
 
 exports = IntValueHolder;
 

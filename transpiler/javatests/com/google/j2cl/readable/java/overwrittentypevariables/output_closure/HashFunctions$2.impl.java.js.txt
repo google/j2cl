@@ -12,49 +12,48 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {HashFunction<T>}
  */
 class $2 extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {!$2<T>} */
-  static $create__() {
-    $2.$clinit();
-    let $instance = new $2();
-    $instance.$ctor__overwrittentypevariables_HashFunctions_2__();
-    return $instance;
-  }
-
-  $ctor__overwrittentypevariables_HashFunctions_2__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {?string} */
-  m_apply__java_lang_Enum(/** T */ input) {
-    return '' + /**@type {Enum}*/ (input).ordinal();
-  }
-  // Bridge method.
-  /** @override @return {?string} */
-  m_apply__java_lang_Object(/** T */ arg0) {
-    return this.m_apply__java_lang_Enum(
-        /**@type {T}*/ ($Casts.$to(arg0, Enum)));
-  }
-
-  static $clinit() {
-    $2.$clinit = () => {};
-    $2.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $2;
-  }
-
-  static $loadModules() {
-    Enum = goog.module.get('java.lang.Enum$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!$2<T>} */
+ static $create__() {
+  $2.$clinit();
+  let $instance = new $2();
+  $instance.$ctor__overwrittentypevariables_HashFunctions_2__();
+  return $instance;
+ }
+ 
+ $ctor__overwrittentypevariables_HashFunctions_2__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {?string} */
+ m_apply__java_lang_Enum(/** T */ input) {
+  return "" + /**@type {Enum}*/ (input).ordinal();
+ }
+ //Bridge method.
+ /** @override @return {?string} */
+ m_apply__java_lang_Object(/** T */ arg0) {
+  return this.m_apply__java_lang_Enum(/**@type {T}*/ ($Casts.$to(arg0, Enum)));
+ }
+ 
+ static $clinit() {
+  $2.$clinit = () =>{};
+  $2.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $2;
+ }
+ 
+ static $loadModules() {
+  Enum = goog.module.get('java.lang.Enum$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 HashFunction.$markImplementor($2);
-$Util.$setClassMetadata($2, 'overwrittentypevariables.HashFunctions$2');
+$Util.$setClassMetadata($2, "overwrittentypevariables.HashFunctions$2");
 
 exports = $2;
 

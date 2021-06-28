@@ -11,45 +11,44 @@ let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
  * @template T, T_1
  */
 class $1Local extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T, T_1 @return {!$1Local<T, T_1>} */
-  static $create__() {
-    $1Local.$clinit();
-    let $instance = new $1Local();
-    $instance.$ctor__autoboxing_AutoBoxing_1Local__();
-    return $instance;
-  }
-
-  $ctor__autoboxing_AutoBoxing_1Local__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {!$Long} */
-  m_toLong__java_lang_Long_$pp_autoboxing(/** T */ l) {
-    $Asserts.$assert(
-        /**@type {Long}*/ (l).equals(Long.m_valueOf__long($Long.fromInt(11))));
-    return /**@type {Long}*/ (l).m_longValue__();
-  }
-
-  static $clinit() {
-    $1Local.$clinit = () => {};
-    $1Local.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $1Local;
-  }
-
-  static $loadModules() {
-    Long = goog.module.get('java.lang.Long$impl');
-    $Long = goog.module.get('nativebootstrap.Long$impl');
-    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T, T_1 @return {!$1Local<T, T_1>} */
+ static $create__() {
+  $1Local.$clinit();
+  let $instance = new $1Local();
+  $instance.$ctor__autoboxing_AutoBoxing_1Local__();
+  return $instance;
+ }
+ 
+ $ctor__autoboxing_AutoBoxing_1Local__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {!$Long} */
+ m_toLong__java_lang_Long_$pp_autoboxing(/** T */ l) {
+  $Asserts.$assert(/**@type {Long}*/ (l).equals(Long.m_valueOf__long($Long.fromInt(11))));
+  return /**@type {Long}*/ (l).m_longValue__();
+ }
+ 
+ static $clinit() {
+  $1Local.$clinit = () =>{};
+  $1Local.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1Local;
+ }
+ 
+ static $loadModules() {
+  Long = goog.module.get('java.lang.Long$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
+  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+ }
 }
-$Util.$setClassMetadata($1Local, 'autoboxing.AutoBoxing$1Local');
+$Util.$setClassMetadata($1Local, "autoboxing.AutoBoxing$1Local");
 
 exports = $1Local;
 

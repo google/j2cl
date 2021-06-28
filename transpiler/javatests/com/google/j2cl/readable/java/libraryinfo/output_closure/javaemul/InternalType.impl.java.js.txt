@@ -4,37 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class InternalType extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!InternalType} */
-  static $create__() {
-    InternalType.$clinit();
-    let $instance = new InternalType();
-    $instance.$ctor__javaemul_InternalType__();
-    return $instance;
-  }
-
-  $ctor__javaemul_InternalType__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  foo() {}
-
-  static $clinit() {
-    InternalType.$clinit = () => {};
-    InternalType.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof InternalType;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!InternalType} */
+ static $create__() {
+  InternalType.$clinit();
+  let $instance = new InternalType();
+  $instance.$ctor__javaemul_InternalType__();
+  return $instance;
+ }
+ 
+ $ctor__javaemul_InternalType__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ foo() {}
+ 
+ static $clinit() {
+  InternalType.$clinit = () =>{};
+  InternalType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InternalType;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(InternalType, 'javaemul.InternalType');
+$Util.$setClassMetadata(InternalType, "javaemul.InternalType");
 
 exports = InternalType;
 

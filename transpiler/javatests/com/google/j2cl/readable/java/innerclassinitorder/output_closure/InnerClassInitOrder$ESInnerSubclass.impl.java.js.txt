@@ -6,62 +6,50 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ESOuter = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.ESOuter$impl');
 
 class ESInnerSubclass extends ESInner {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  // Factory method corresponding to constructor 'ESInnerSubclass(ESOuter)'.
-  /** @return {!ESInnerSubclass} */
-  static $create__innerclassinitorder_InnerClassInitOrder_ESOuter(
-      /** ESOuter */ outer) {
-    ESInnerSubclass.$clinit();
-    let $instance = new ESInnerSubclass();
-    $instance
-        .$ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__innerclassinitorder_InnerClassInitOrder_ESOuter(
-            outer);
-    return $instance;
-  }
-  // Initialization from constructor 'ESInnerSubclass(ESOuter)'.
-
-  $ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__innerclassinitorder_InnerClassInitOrder_ESOuter(
-      /** ESOuter */ outer) {
-    this.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__innerclassinitorder_InnerClassInitOrder_ESOuter(
-        outer);
-  }
-  // Factory method corresponding to constructor 'ESInnerSubclass(int,
-  // ESOuter)'.
-  /** @return {!ESInnerSubclass} */
-  static $create__int__innerclassinitorder_InnerClassInitOrder_ESOuter(
-      /** number */ value, /** ESOuter */ outer) {
-    ESInnerSubclass.$clinit();
-    let $instance = new ESInnerSubclass();
-    $instance
-        .$ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__innerclassinitorder_InnerClassInitOrder_ESOuter(
-            value, outer);
-    return $instance;
-  }
-  // Initialization from constructor 'ESInnerSubclass(int, ESOuter)'.
-
-  $ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__innerclassinitorder_InnerClassInitOrder_ESOuter(
-      /** number */ value, /** ESOuter */ outer) {
-    this.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__innerclassinitorder_InnerClassInitOrder_ESOuter__int(
-        outer, value);
-  }
-
-  static $clinit() {
-    ESInnerSubclass.$clinit = () => {};
-    ESInnerSubclass.$loadModules();
-    ESInner.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof ESInnerSubclass;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ //Factory method corresponding to constructor 'ESInnerSubclass(ESOuter)'.
+ /** @return {!ESInnerSubclass} */
+ static $create__innerclassinitorder_InnerClassInitOrder_ESOuter(/** ESOuter */ outer) {
+  ESInnerSubclass.$clinit();
+  let $instance = new ESInnerSubclass();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__innerclassinitorder_InnerClassInitOrder_ESOuter(outer);
+  return $instance;
+ }
+ //Initialization from constructor 'ESInnerSubclass(ESOuter)'.
+ 
+ $ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__innerclassinitorder_InnerClassInitOrder_ESOuter(/** ESOuter */ outer) {
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__innerclassinitorder_InnerClassInitOrder_ESOuter(outer);
+ }
+ //Factory method corresponding to constructor 'ESInnerSubclass(int, ESOuter)'.
+ /** @return {!ESInnerSubclass} */
+ static $create__int__innerclassinitorder_InnerClassInitOrder_ESOuter(/** number */ value, /** ESOuter */ outer) {
+  ESInnerSubclass.$clinit();
+  let $instance = new ESInnerSubclass();
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__innerclassinitorder_InnerClassInitOrder_ESOuter(value, outer);
+  return $instance;
+ }
+ //Initialization from constructor 'ESInnerSubclass(int, ESOuter)'.
+ 
+ $ctor__innerclassinitorder_InnerClassInitOrder_ESInnerSubclass__int__innerclassinitorder_InnerClassInitOrder_ESOuter(/** number */ value, /** ESOuter */ outer) {
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner__innerclassinitorder_InnerClassInitOrder_ESOuter__int(outer, value);
+ }
+ 
+ static $clinit() {
+  ESInnerSubclass.$clinit = () =>{};
+  ESInnerSubclass.$loadModules();
+  ESInner.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ESInnerSubclass;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    ESInnerSubclass, 'innerclassinitorder.InnerClassInitOrder$ESInnerSubclass');
+$Util.$setClassMetadata(ESInnerSubclass, "innerclassinitorder.InnerClassInitOrder$ESInnerSubclass");
 
 exports = ESInnerSubclass;
 

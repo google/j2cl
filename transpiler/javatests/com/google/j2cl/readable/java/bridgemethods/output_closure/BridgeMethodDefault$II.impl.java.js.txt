@@ -8,33 +8,31 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {I<?string>}
  */
 class II {
-  /** @abstract */
-  m_m__java_lang_String(/** ?string */ s) {}
-
-  static m_m__$default__bridgemethods_BridgeMethodDefault_II__java_lang_String(
-      /** !II */ $thisArg, /** ?string */ s) {
-    II.$clinit();
-  }
-
-  static $clinit() {
-    II.$clinit = () => {};
-    II.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    I.$markImplementor(ctor);
-    ctor.prototype.$implements__bridgemethods_BridgeMethodDefault_II = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__bridgemethods_BridgeMethodDefault_II;
-  }
-
-  static $loadModules() {}
+ /** @abstract */
+ m_m__java_lang_String(/** ?string */ s) {}
+ 
+ static m_m__$default__bridgemethods_BridgeMethodDefault_II__java_lang_String(/** !II */ $thisArg, /** ?string */ s) {
+  II.$clinit();
+ }
+ 
+ static $clinit() {
+  II.$clinit = () =>{};
+  II.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  I.$markImplementor(ctor);
+  ctor.prototype.$implements__bridgemethods_BridgeMethodDefault_II = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_BridgeMethodDefault_II;
+ }
+ 
+ static $loadModules() {}
 }
 II.$markImplementor(/**@type {Function}*/ (II));
-$Util.$setClassMetadataForInterface(II, 'bridgemethods.BridgeMethodDefault$II');
+$Util.$setClassMetadataForInterface(II, "bridgemethods.BridgeMethodDefault$II");
 
 exports = II;
 

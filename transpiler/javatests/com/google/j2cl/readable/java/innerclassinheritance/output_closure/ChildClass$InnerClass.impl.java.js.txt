@@ -6,75 +6,62 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let ChildClass = goog.forwardDeclare('innerclassinheritance.ChildClass$impl');
 
 class InnerClass extends ParentInner {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {ChildClass}*/
-    this.$outer_this__innerclassinheritance_ChildClass_InnerClass;
-    /**@type {number}*/
-    this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass = 0;
-  }
-  /** @return {!InnerClass} */
-  static $create__innerclassinheritance_ChildClass(
-      /** ChildClass */ $outer_this) {
-    InnerClass.$clinit();
-    let $instance = new InnerClass();
-    $instance
-        .$ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass(
-            $outer_this);
-    return $instance;
-  }
-
-  $ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass(
-      /** ChildClass */ $outer_this) {
-    this.$outer_this__innerclassinheritance_ChildClass_InnerClass = $outer_this;
-    this.$ctor__innerclassinheritance_ParentInner__();
-  }
-
-  m_funInInner__() {}
-  /** @return {number} */
-  m_testInnerClass__() {
-    this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-        .m_funInParentOuter__();
-    this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-        .m_funInParentOuter__();
-    this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-        .m_funInOuter__();
-    this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-        .m_funInOuter__();
-    this.m_funInParentInner__();
-    this.m_funInParentInner__();
-    this.m_funInInner__();
-    this.m_funInInner__();
-    let a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-                .f_fieldInParentOuter__innerclassinheritance_ParentOuter;
-    a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-            .f_fieldInParentOuter__innerclassinheritance_ParentOuter;
-    a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-            .f_fieldInOuter__innerclassinheritance_ChildClass;
-    a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass
-            .f_fieldInOuter__innerclassinheritance_ChildClass;
-    a = this.f_fieldInParentInner__innerclassinheritance_ParentInner;
-    a = this.f_fieldInParentInner__innerclassinheritance_ParentInner;
-    a = this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass;
-    a = this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass;
-    return a;
-  }
-
-  static $clinit() {
-    InnerClass.$clinit = () => {};
-    InnerClass.$loadModules();
-    ParentInner.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof InnerClass;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {ChildClass}*/
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass;
+  /**@type {number}*/
+  this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass = 0;
+ }
+ /** @return {!InnerClass} */
+ static $create__innerclassinheritance_ChildClass(/** ChildClass */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__innerclassinheritance_ChildClass_InnerClass__innerclassinheritance_ChildClass(/** ChildClass */ $outer_this) {
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass = $outer_this;
+  this.$ctor__innerclassinheritance_ParentInner__();
+ }
+ 
+ m_funInInner__() {}
+ /** @return {number} */
+ m_testInnerClass__() {
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__();
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInParentOuter__();
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInOuter__();
+  this.$outer_this__innerclassinheritance_ChildClass_InnerClass.m_funInOuter__();
+  this.m_funInParentInner__();
+  this.m_funInParentInner__();
+  this.m_funInInner__();
+  this.m_funInInner__();
+  let a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.f_fieldInParentOuter__innerclassinheritance_ParentOuter;
+  a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.f_fieldInParentOuter__innerclassinheritance_ParentOuter;
+  a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.f_fieldInOuter__innerclassinheritance_ChildClass;
+  a = this.$outer_this__innerclassinheritance_ChildClass_InnerClass.f_fieldInOuter__innerclassinheritance_ChildClass;
+  a = this.f_fieldInParentInner__innerclassinheritance_ParentInner;
+  a = this.f_fieldInParentInner__innerclassinheritance_ParentInner;
+  a = this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass;
+  a = this.f_fieldInInner__innerclassinheritance_ChildClass_InnerClass;
+  return a;
+ }
+ 
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  ParentInner.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    InnerClass, 'innerclassinheritance.ChildClass$InnerClass');
+$Util.$setClassMetadata(InnerClass, "innerclassinheritance.ChildClass$InnerClass");
 
 exports = InnerClass;
 

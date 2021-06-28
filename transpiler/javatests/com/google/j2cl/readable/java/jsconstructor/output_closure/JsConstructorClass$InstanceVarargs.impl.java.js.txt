@@ -8,40 +8,37 @@ let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class InstanceVarargs extends A {
-  constructor(/** JsConstructorClass */ $outer_this, .../** ...number */ args) {
-    InstanceVarargs.$clinit();
-    $Arrays.$stampType(args, $$int, 1);
-    super();
-    /**@type {JsConstructorClass}*/
-    this.$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs;
-    this.$ctor__jsconstructor_JsConstructorClass_InstanceVarargs__jsconstructor_JsConstructorClass__arrayOf_int(
-        $outer_this, args);
-  }
-
-  $ctor__jsconstructor_JsConstructorClass_InstanceVarargs__jsconstructor_JsConstructorClass__arrayOf_int(
-      /** JsConstructorClass */ $outer_this, /** Array<number> */ args) {
-    this.$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs =
-        $outer_this;
-    this.$ctor__jsconstructor_JsConstructorClass_A__int(args[1]);
-  }
-
-  static $clinit() {
-    InstanceVarargs.$clinit = () => {};
-    InstanceVarargs.$loadModules();
-    A.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof InstanceVarargs;
-  }
-
-  static $loadModules() {
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
-  }
+ 
+ constructor(/** JsConstructorClass */ $outer_this, .../** ...number */ args) {
+  InstanceVarargs.$clinit();
+  $Arrays.$stampType(args, $$int, 1);
+  super();
+  /**@type {JsConstructorClass}*/
+  this.$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs;
+  this.$ctor__jsconstructor_JsConstructorClass_InstanceVarargs__jsconstructor_JsConstructorClass__arrayOf_int($outer_this, args);
+ }
+ 
+ $ctor__jsconstructor_JsConstructorClass_InstanceVarargs__jsconstructor_JsConstructorClass__arrayOf_int(/** JsConstructorClass */ $outer_this, /** Array<number> */ args) {
+  this.$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs = $outer_this;
+  this.$ctor__jsconstructor_JsConstructorClass_A__int(args[1]);
+ }
+ 
+ static $clinit() {
+  InstanceVarargs.$clinit = () =>{};
+  InstanceVarargs.$loadModules();
+  A.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InstanceVarargs;
+ }
+ 
+ static $loadModules() {
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
 }
-$Util.$setClassMetadata(
-    InstanceVarargs, 'jsconstructor.JsConstructorClass$InstanceVarargs');
+$Util.$setClassMetadata(InstanceVarargs, "jsconstructor.JsConstructorClass$InstanceVarargs");
 
 exports = InstanceVarargs;
 

@@ -12,51 +12,47 @@ let Equals = goog.forwardDeclare('lambdas.Lambdas.Equals$impl');
  * @implements {JsSupplier<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():T */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():T}*/
-    this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor;
-    this.$ctor__lambdas_Lambdas_JsSupplier_$LambdaAdaptor__lambdas_Lambdas_JsSupplier_$JsFunction(
-        fn);
-  }
-
-  $ctor__lambdas_Lambdas_JsSupplier_$LambdaAdaptor__lambdas_Lambdas_JsSupplier_$JsFunction(
-      /** ?function():T */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor = fn;
-  }
-  /** @override @return {T} */
-  get() {
-    let /** ?function():T */ $function;
-    return (
-        $function = this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor,
-        $function());
-  }
-  // Bridge method.
-  /** @override @return {T} */
-  m_get__() {
-    return this.get();
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-    Equals.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {
-    Equals = goog.module.get('lambdas.Lambdas.Equals$impl');
-  }
+ 
+ constructor(/** ?function():T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():T}*/
+  this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor;
+  this.$ctor__lambdas_Lambdas_JsSupplier_$LambdaAdaptor__lambdas_Lambdas_JsSupplier_$JsFunction(fn);
+ }
+ 
+ $ctor__lambdas_Lambdas_JsSupplier_$LambdaAdaptor__lambdas_Lambdas_JsSupplier_$JsFunction(/** ?function():T */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor = fn;
+ }
+ /** @override @return {T} */
+ get() {
+  let /** ?function():T */ $function;
+  return ($function = this.f_fn__lambdas_Lambdas_JsSupplier_$LambdaAdaptor, $function());
+ }
+ //Bridge method.
+ /** @override @return {T} */
+ m_get__() {
+  return this.get();
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+  Equals.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {
+  Equals = goog.module.get('lambdas.Lambdas.Equals$impl');
+ }
 }
 JsSupplier.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'lambdas.Lambdas$JsSupplier$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "lambdas.Lambdas$JsSupplier$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

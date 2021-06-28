@@ -158,19 +158,9 @@ def replace_transpiled_js(readable_dirs):
 
     find_command_sources = ["find", output, "-name", "*.js"]
 
-    run_cmd_get_output(find_command_sources +
-                       ["-exec", "/usr/bin/clang-format", "-i", "{}", "+"])
-
     # Move the newly unzipped files => {file}.txt
     run_cmd_get_output(find_command_sources +
                        ["-exec", "mv", "{}", "{}.txt", ";"])
-
-    # Format library_info_debug.json if it is present
-    run_cmd_get_output([
-        "find", output, "-name", "library_info_debug.json", "-exec",
-        "/usr/bin/clang-format", "-style", "{BreakStringLiterals: false}", "-i",
-        "{}", "+"
-    ])
 
 
 def is_spam(line):

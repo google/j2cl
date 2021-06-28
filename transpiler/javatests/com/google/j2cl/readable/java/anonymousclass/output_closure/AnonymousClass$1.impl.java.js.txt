@@ -6,57 +6,52 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let AnonymousClass = goog.forwardDeclare('anonymousclass.AnonymousClass$impl');
 
 class $1 extends SomeClass {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {AnonymousClass}*/
-    this.$outer_this__anonymousclass_AnonymousClass_1;
-    /**@type {*}*/
-    this.f_object__anonymousclass_AnonymousClass_1;
-    /**@type {*}*/
-    this.f_outer__anonymousclass_AnonymousClass_1;
-  }
-  /** @return {!$1} */
-  static $create__anonymousclass_AnonymousClass__int(
-      /** AnonymousClass */ $outer_this, /** number */ $_0) {
-    $1.$clinit();
-    let $instance = new $1();
-    $instance
-        .$ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__int(
-            $outer_this, $_0);
-    return $instance;
-  }
-
-  $ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__int(
-      /** AnonymousClass */ $outer_this, /** number */ $_0) {
-    this.$outer_this__anonymousclass_AnonymousClass_1 = $outer_this;
-    this.$ctor__anonymousclass_SomeClass__int($_0);
-    this.$init___$p_anonymousclass_AnonymousClass_1();
-  }
-  /** @override @return {?string} */
-  m_foo__() {
-    return 'a';
-  }
-  /** @private */
-  $init___$p_anonymousclass_AnonymousClass_1() {
-    this.f_object__anonymousclass_AnonymousClass_1 = this;
-    this.f_outer__anonymousclass_AnonymousClass_1 =
-        this.$outer_this__anonymousclass_AnonymousClass_1;
-  }
-
-  static $clinit() {
-    $1.$clinit = () => {};
-    $1.$loadModules();
-    SomeClass.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $1;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {AnonymousClass}*/
+  this.$outer_this__anonymousclass_AnonymousClass_1;
+  /**@type {*}*/
+  this.f_object__anonymousclass_AnonymousClass_1;
+  /**@type {*}*/
+  this.f_outer__anonymousclass_AnonymousClass_1;
+ }
+ /** @return {!$1} */
+ static $create__anonymousclass_AnonymousClass__int(/** AnonymousClass */ $outer_this, /** number */ $_0) {
+  $1.$clinit();
+  let $instance = new $1();
+  $instance.$ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__int($outer_this, $_0);
+  return $instance;
+ }
+ 
+ $ctor__anonymousclass_AnonymousClass_1__anonymousclass_AnonymousClass__int(/** AnonymousClass */ $outer_this, /** number */ $_0) {
+  this.$outer_this__anonymousclass_AnonymousClass_1 = $outer_this;
+  this.$ctor__anonymousclass_SomeClass__int($_0);
+  this.$init___$p_anonymousclass_AnonymousClass_1();
+ }
+ /** @override @return {?string} */
+ m_foo__() {
+  return "a";
+ }
+ /** @private */
+ $init___$p_anonymousclass_AnonymousClass_1() {
+  this.f_object__anonymousclass_AnonymousClass_1 = this;
+  this.f_outer__anonymousclass_AnonymousClass_1 = this.$outer_this__anonymousclass_AnonymousClass_1;
+ }
+ 
+ static $clinit() {
+  $1.$clinit = () =>{};
+  $1.$loadModules();
+  SomeClass.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($1, 'anonymousclass.AnonymousClass$1');
+$Util.$setClassMetadata($1, "anonymousclass.AnonymousClass$1");
 
 exports = $1;
 

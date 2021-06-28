@@ -9,37 +9,33 @@ let $LambdaAdaptor = goog.forwardDeclare('typewildcards.TypeWildCards.IntegerSup
  * @interface
  */
 class IntegerSupplier {
-  /** @abstract @return {Integer} */
-  m_get__() {}
-  /** @return {IntegerSupplier} */
-  static $adapt(/** ?function():Integer */ fn) {
-    IntegerSupplier.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    IntegerSupplier.$clinit = () => {};
-    IntegerSupplier.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__typewildcards_TypeWildCards_IntegerSupplier =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__typewildcards_TypeWildCards_IntegerSupplier;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'typewildcards.TypeWildCards.IntegerSupplier.$LambdaAdaptor$impl');
-  }
+ /** @abstract @return {Integer} */
+ m_get__() {}
+ /** @return {IntegerSupplier} */
+ static $adapt(/** ?function():Integer */ fn) {
+  IntegerSupplier.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  IntegerSupplier.$clinit = () =>{};
+  IntegerSupplier.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__typewildcards_TypeWildCards_IntegerSupplier = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__typewildcards_TypeWildCards_IntegerSupplier;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('typewildcards.TypeWildCards.IntegerSupplier.$LambdaAdaptor$impl');
+ }
 }
 IntegerSupplier.$markImplementor(/**@type {Function}*/ (IntegerSupplier));
-$Util.$setClassMetadataForInterface(
-    IntegerSupplier, 'typewildcards.TypeWildCards$IntegerSupplier');
+$Util.$setClassMetadataForInterface(IntegerSupplier, "typewildcards.TypeWildCards$IntegerSupplier");
 
 exports = IntegerSupplier;
 

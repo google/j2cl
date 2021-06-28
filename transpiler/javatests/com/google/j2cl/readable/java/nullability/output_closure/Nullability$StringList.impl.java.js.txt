@@ -7,35 +7,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {ArrayList<?string>}
  */
 class StringList extends ArrayList {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!StringList} */
-  static $create__() {
-    StringList.$clinit();
-    let $instance = new StringList();
-    $instance.$ctor__nullability_Nullability_StringList__();
-    return $instance;
-  }
-
-  $ctor__nullability_Nullability_StringList__() {
-    this.$ctor__java_util_ArrayList__();
-  }
-
-  static $clinit() {
-    StringList.$clinit = () => {};
-    StringList.$loadModules();
-    ArrayList.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof StringList;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!StringList} */
+ static $create__() {
+  StringList.$clinit();
+  let $instance = new StringList();
+  $instance.$ctor__nullability_Nullability_StringList__();
+  return $instance;
+ }
+ 
+ $ctor__nullability_Nullability_StringList__() {
+  this.$ctor__java_util_ArrayList__();
+ }
+ 
+ static $clinit() {
+  StringList.$clinit = () =>{};
+  StringList.$loadModules();
+  ArrayList.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StringList;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(StringList, 'nullability.Nullability$StringList');
+$Util.$setClassMetadata(StringList, "nullability.Nullability$StringList");
 
 exports = StringList;
 

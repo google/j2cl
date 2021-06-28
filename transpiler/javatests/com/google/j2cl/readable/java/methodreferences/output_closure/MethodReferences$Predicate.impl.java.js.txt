@@ -9,37 +9,33 @@ let $LambdaAdaptor = goog.forwardDeclare('methodreferences.MethodReferences.Pred
  * @template T
  */
 class Predicate {
-  /** @abstract @return {boolean} */
-  m_apply__java_lang_Object(/** T */ parameter) {}
-  /** @template T @return {Predicate<T>} */
-  static $adapt(/** ?function(T):boolean */ fn) {
-    Predicate.$clinit();
-    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
-  }
-
-  static $clinit() {
-    Predicate.$clinit = () => {};
-    Predicate.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__methodreferences_MethodReferences_Predicate =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__methodreferences_MethodReferences_Predicate;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'methodreferences.MethodReferences.Predicate.$LambdaAdaptor$impl');
-  }
+ /** @abstract @return {boolean} */
+ m_apply__java_lang_Object(/** T */ parameter) {}
+ /** @template T @return {Predicate<T>} */
+ static $adapt(/** ?function(T):boolean */ fn) {
+  Predicate.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  Predicate.$clinit = () =>{};
+  Predicate.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__methodreferences_MethodReferences_Predicate = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__methodreferences_MethodReferences_Predicate;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('methodreferences.MethodReferences.Predicate.$LambdaAdaptor$impl');
+ }
 }
 Predicate.$markImplementor(/**@type {Function}*/ (Predicate));
-$Util.$setClassMetadataForInterface(
-    Predicate, 'methodreferences.MethodReferences$Predicate');
+$Util.$setClassMetadataForInterface(Predicate, "methodreferences.MethodReferences$Predicate");
 
 exports = Predicate;
 

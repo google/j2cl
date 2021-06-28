@@ -10,51 +10,46 @@ let NativeJsTypeInterfaceWithOverlay = goog.forwardDeclare('test.foo.NativeJsTyp
  * @implements {NativeJsTypeInterfaceWithOverlay}
  */
 class NativeJsTypeInterfaceWithOverlayImpl extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!NativeJsTypeInterfaceWithOverlayImpl} */
-  static $create__() {
-    NativeJsTypeInterfaceWithOverlayImpl.$clinit();
-    let $instance = new NativeJsTypeInterfaceWithOverlayImpl();
-    $instance.$ctor__jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__();
-    return $instance;
-  }
-
-  $ctor__jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @override @return {number} */
-  m() {
-    return 0;
-  }
-  // Default method forwarding stub.
-  /** @return {number} */
-  m_callM__() {
-    return $Overlay
-        .m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(
-            this);
-  }
-
-  static $clinit() {
-    NativeJsTypeInterfaceWithOverlayImpl.$clinit = () => {};
-    NativeJsTypeInterfaceWithOverlayImpl.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof NativeJsTypeInterfaceWithOverlayImpl;
-  }
-
-  static $loadModules() {
-    $Overlay = goog.module.get(
-        'jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!NativeJsTypeInterfaceWithOverlayImpl} */
+ static $create__() {
+  NativeJsTypeInterfaceWithOverlayImpl.$clinit();
+  let $instance = new NativeJsTypeInterfaceWithOverlayImpl();
+  $instance.$ctor__jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__();
+  return $instance;
+ }
+ 
+ $ctor__jsoverlay_Main_NativeJsTypeInterfaceWithOverlayImpl__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @override @return {number} */
+ m() {
+  return 0;
+ }
+ //Default method forwarding stub.
+ /** @return {number} */
+ m_callM__() {
+  return $Overlay.m_callM__$devirt__jsoverlay_Main_NativeJsTypeInterfaceWithOverlay(this);
+ }
+ 
+ static $clinit() {
+  NativeJsTypeInterfaceWithOverlayImpl.$clinit = () =>{};
+  NativeJsTypeInterfaceWithOverlayImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeJsTypeInterfaceWithOverlayImpl;
+ }
+ 
+ static $loadModules() {
+  $Overlay = goog.module.get('jsoverlay.Main.NativeJsTypeInterfaceWithOverlay.$Overlay$impl');
+ }
 }
-$Util.$setClassMetadata(
-    NativeJsTypeInterfaceWithOverlayImpl,
-    'jsoverlay.Main$NativeJsTypeInterfaceWithOverlayImpl');
+$Util.$setClassMetadata(NativeJsTypeInterfaceWithOverlayImpl, "jsoverlay.Main$NativeJsTypeInterfaceWithOverlayImpl");
 
 exports = NativeJsTypeInterfaceWithOverlayImpl;
 

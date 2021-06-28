@@ -9,56 +9,50 @@ let $LambdaAdaptor = goog.forwardDeclare('interfaces.Main.Interface.$LambdaAdapt
  * @template T
  */
 class Interface {
-  /** @abstract */
-  m_interfaceMethod__() {}
-  /** @abstract */
-  m_defaultMethod__java_lang_Object(/** T */ t) {}
-
-  static m_staticInterfaceMethod__() {
-    Interface.$clinit();
-  }
-  /** @template T @return {Interface<T>} */
-  static $adapt(/** ?function():void */ fn) {
-    Interface.$clinit();
-    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
-  }
-  /** @template T */
-  static m_defaultMethod__$default__interfaces_Main_Interface__java_lang_Object(
-      /** !Interface<T> */ $thisArg, /** T */ t) {
-    Interface.$clinit();
-    Interface
-        .m_privateMethod__$private__interfaces_Main_Interface__java_lang_Object(
-            $thisArg, t);
-  }
-  /** @template T */
-  static m_privateMethod__$private__interfaces_Main_Interface__java_lang_Object(
-      /** !Interface<T> */ $thisArg, /** T */ t) {}
-
-  static $clinit() {
-    Interface.$clinit = () => {};
-    Interface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__interfaces_Main_Interface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__interfaces_Main_Interface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('interfaces.Main.Interface.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_interfaceMethod__() {}
+ /** @abstract */
+ m_defaultMethod__java_lang_Object(/** T */ t) {}
+ 
+ static m_staticInterfaceMethod__() {
+  Interface.$clinit();
+ }
+ /** @template T @return {Interface<T>} */
+ static $adapt(/** ?function():void */ fn) {
+  Interface.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ /** @template T */
+ static m_defaultMethod__$default__interfaces_Main_Interface__java_lang_Object(/** !Interface<T> */ $thisArg, /** T */ t) {
+  Interface.$clinit();
+  Interface.m_privateMethod__$private__interfaces_Main_Interface__java_lang_Object($thisArg, t);
+ }
+ /** @template T */
+ static m_privateMethod__$private__interfaces_Main_Interface__java_lang_Object(/** !Interface<T> */ $thisArg, /** T */ t) {}
+ 
+ static $clinit() {
+  Interface.$clinit = () =>{};
+  Interface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__interfaces_Main_Interface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__interfaces_Main_Interface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('interfaces.Main.Interface.$LambdaAdaptor$impl');
+ }
 }
 /**@const {number}*/
 Interface.f_a__interfaces_Main_Interface = 1;
 /**@const {number}*/
 Interface.f_b__interfaces_Main_Interface = 2;
 Interface.$markImplementor(/**@type {Function}*/ (Interface));
-$Util.$setClassMetadataForInterface(Interface, 'interfaces.Main$Interface');
+$Util.$setClassMetadataForInterface(Interface, "interfaces.Main$Interface");
 
 exports = Interface;
 

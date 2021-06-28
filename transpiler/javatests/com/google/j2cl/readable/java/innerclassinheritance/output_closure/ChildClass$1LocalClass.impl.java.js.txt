@@ -4,63 +4,55 @@ const ChildClass = goog.require('innerclassinheritance.ChildClass$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $1LocalClass extends ChildClass {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {ChildClass}*/
-    this.$outer_this__innerclassinheritance_ChildClass_1LocalClass;
-    /**@type {*}*/
-    this.f_object__innerclassinheritance_ChildClass_1LocalClass;
-  }
-  /** @return {!$1LocalClass} */
-  static $create__innerclassinheritance_ChildClass(
-      /** ChildClass */ $outer_this) {
-    $1LocalClass.$clinit();
-    let $instance = new $1LocalClass();
-    $instance
-        .$ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass(
-            $outer_this);
-    return $instance;
-  }
-
-  $ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass(
-      /** ChildClass */ $outer_this) {
-    this.$outer_this__innerclassinheritance_ChildClass_1LocalClass =
-        $outer_this;
-    this.$ctor__innerclassinheritance_ChildClass__();
-    this.$init___$p_innerclassinheritance_ChildClass_1LocalClass();
-  }
-  /** @override */
-  m_funInParentOuter__() {}
-
-  m_test__() {
-    this.m_funInOuter__();
-    this.$outer_this__innerclassinheritance_ChildClass_1LocalClass
-        .m_funInOuter__();
-    this.m_funInParentOuter__();
-    this.m_funInParentOuter__();
-    this.$outer_this__innerclassinheritance_ChildClass_1LocalClass
-        .m_funInParentOuter__();
-  }
-  /** @private */
-  $init___$p_innerclassinheritance_ChildClass_1LocalClass() {
-    this.f_object__innerclassinheritance_ChildClass_1LocalClass = this;
-  }
-
-  static $clinit() {
-    $1LocalClass.$clinit = () => {};
-    $1LocalClass.$loadModules();
-    ChildClass.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $1LocalClass;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {ChildClass}*/
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass;
+  /**@type {*}*/
+  this.f_object__innerclassinheritance_ChildClass_1LocalClass;
+ }
+ /** @return {!$1LocalClass} */
+ static $create__innerclassinheritance_ChildClass(/** ChildClass */ $outer_this) {
+  $1LocalClass.$clinit();
+  let $instance = new $1LocalClass();
+  $instance.$ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__innerclassinheritance_ChildClass_1LocalClass__innerclassinheritance_ChildClass(/** ChildClass */ $outer_this) {
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass = $outer_this;
+  this.$ctor__innerclassinheritance_ChildClass__();
+  this.$init___$p_innerclassinheritance_ChildClass_1LocalClass();
+ }
+ /** @override */
+ m_funInParentOuter__() {}
+ 
+ m_test__() {
+  this.m_funInOuter__();
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass.m_funInOuter__();
+  this.m_funInParentOuter__();
+  this.m_funInParentOuter__();
+  this.$outer_this__innerclassinheritance_ChildClass_1LocalClass.m_funInParentOuter__();
+ }
+ /** @private */
+ $init___$p_innerclassinheritance_ChildClass_1LocalClass() {
+  this.f_object__innerclassinheritance_ChildClass_1LocalClass = this;
+ }
+ 
+ static $clinit() {
+  $1LocalClass.$clinit = () =>{};
+  $1LocalClass.$loadModules();
+  ChildClass.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $1LocalClass;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    $1LocalClass, 'innerclassinheritance.ChildClass$1LocalClass');
+$Util.$setClassMetadata($1LocalClass, "innerclassinheritance.ChildClass$1LocalClass");
 
 exports = $1LocalClass;
 

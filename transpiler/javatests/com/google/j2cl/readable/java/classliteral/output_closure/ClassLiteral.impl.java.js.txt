@@ -6,42 +6,42 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let Class = goog.forwardDeclare('java.lang.Class$impl');
 
 class ClassLiteral extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!ClassLiteral} */
-  static $create__() {
-    ClassLiteral.$clinit();
-    let $instance = new ClassLiteral();
-    $instance.$ctor__classliteral_ClassLiteral__();
-    return $instance;
-  }
-
-  $ctor__classliteral_ClassLiteral__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_main__() {
-    let o = Class.$get(ClassLiteral);
-    o = Class.$get(ClassLiteral, 2);
-  }
-
-  static $clinit() {
-    ClassLiteral.$clinit = () => {};
-    ClassLiteral.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof ClassLiteral;
-  }
-
-  static $loadModules() {
-    Class = goog.module.get('java.lang.Class$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!ClassLiteral} */
+ static $create__() {
+  ClassLiteral.$clinit();
+  let $instance = new ClassLiteral();
+  $instance.$ctor__classliteral_ClassLiteral__();
+  return $instance;
+ }
+ 
+ $ctor__classliteral_ClassLiteral__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_main__() {
+  let o = Class.$get(ClassLiteral);
+  o = Class.$get(ClassLiteral, 2);
+ }
+ 
+ static $clinit() {
+  ClassLiteral.$clinit = () =>{};
+  ClassLiteral.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ClassLiteral;
+ }
+ 
+ static $loadModules() {
+  Class = goog.module.get('java.lang.Class$impl');
+ }
 }
-$Util.$setClassMetadata(ClassLiteral, 'classliteral.ClassLiteral');
+$Util.$setClassMetadata(ClassLiteral, "classliteral.ClassLiteral");
 
 exports = ClassLiteral;
 

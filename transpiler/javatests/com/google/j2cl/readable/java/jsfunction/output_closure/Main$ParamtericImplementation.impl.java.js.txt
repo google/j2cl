@@ -8,48 +8,44 @@ const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
  * @template T
  */
 class ParamtericImplementation extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {function(T):void} */
-  static $create__() {
-    ParamtericImplementation.$clinit();
-    let $instance = new ParamtericImplementation();
-    $instance.$ctor__jsfunction_Main_ParamtericImplementation__();
-    return $Util.$makeLambdaFunction(
-        ParamtericImplementation.prototype.m_call__java_lang_Object, $instance,
-        ParamtericImplementation.$copy);
-  }
-  /** @suppress {invalidCasts} */
-  $ctor__jsfunction_Main_ParamtericImplementation__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @template T @this {?function(T):void} */
-  m_call__java_lang_Object(/** T */ t) {
-    let o = /**@type {T}*/ (t);
-  }
-
-  static $clinit() {
-    ParamtericImplementation.$clinit = () => {};
-    ParamtericImplementation.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$is__jsfunction_Main_ParamtericImplementation;
-  }
-
-  static $copy(/** ? */ from, /** ? */ to) {
-    to.$is__jsfunction_Main_ParamtericImplementation = true;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {function(T):void} */
+ static $create__() {
+  ParamtericImplementation.$clinit();
+  let $instance = new ParamtericImplementation();
+  $instance.$ctor__jsfunction_Main_ParamtericImplementation__();
+  return $Util.$makeLambdaFunction(ParamtericImplementation.prototype.m_call__java_lang_Object, $instance, ParamtericImplementation.$copy);
+ }
+ /** @suppress {invalidCasts} */
+ $ctor__jsfunction_Main_ParamtericImplementation__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @template T @this {?function(T):void} */
+ m_call__java_lang_Object(/** T */ t) {
+  let o = /**@type {T}*/ (t);
+ }
+ 
+ static $clinit() {
+  ParamtericImplementation.$clinit = () =>{};
+  ParamtericImplementation.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsfunction_Main_ParamtericImplementation;
+ }
+ 
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsfunction_Main_ParamtericImplementation = true;
+ }
+ 
+ static $loadModules() {}
 }
 $JavaScriptFunction.$markImplementor(ParamtericImplementation);
-$Util.$setClassMetadata(
-    ParamtericImplementation, 'jsfunction.Main$ParamtericImplementation');
+$Util.$setClassMetadata(ParamtericImplementation, "jsfunction.Main$ParamtericImplementation");
 
 exports = ParamtericImplementation;
 

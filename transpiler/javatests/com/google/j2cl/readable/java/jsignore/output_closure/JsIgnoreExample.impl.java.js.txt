@@ -4,68 +4,59 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class JsIgnoreExample extends j_l_Object {
-  constructor() {
-    JsIgnoreExample.$clinit();
-    super();
-    this.$ctor__jsignore_JsIgnoreExample__();
-  }
-
-  $ctor__jsignore_JsIgnoreExample__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static exportedFunction() {
-    JsIgnoreExample.$clinit();
-  }
-
-  static m_notExportedFunction__() {
-    JsIgnoreExample.$clinit();
-  }
-  /** @return {number} */
-  static get exportedField() {
-    return (
-        JsIgnoreExample.$clinit(),
-        JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample);
-  }
-
-  static set exportedField(/** number */ value) {
-    (JsIgnoreExample.$clinit(),
-     JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample = value);
-  }
-  /** @return {number} */
-  static get f_notExportedField__jsignore_JsIgnoreExample() {
-    return (
-        JsIgnoreExample.$clinit(),
-        JsIgnoreExample.$static_notExportedField__jsignore_JsIgnoreExample);
-  }
-
-  static set f_notExportedField__jsignore_JsIgnoreExample(/** number */ value) {
-    (JsIgnoreExample.$clinit(),
-     JsIgnoreExample.$static_notExportedField__jsignore_JsIgnoreExample =
-         value);
-  }
-  /** @return {*} */
-  static get CONSTNAME() {
-    return (
-        JsIgnoreExample.$clinit(),
-        JsIgnoreExample.$static_CONSTNAME__jsignore_JsIgnoreExample);
-  }
-
-  static $clinit() {
-    JsIgnoreExample.$clinit = () => {};
-    JsIgnoreExample.$loadModules();
-    j_l_Object.$clinit();
-    JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample = 10;
-    JsIgnoreExample.$static_notExportedField__jsignore_JsIgnoreExample = 20;
-    JsIgnoreExample.$static_CONSTNAME__jsignore_JsIgnoreExample =
-        j_l_Object.$create__();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof JsIgnoreExample;
-  }
-
-  static $loadModules() {}
+ 
+ constructor() {
+  JsIgnoreExample.$clinit();
+  super();
+  this.$ctor__jsignore_JsIgnoreExample__();
+ }
+ 
+ $ctor__jsignore_JsIgnoreExample__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static exportedFunction() {
+  JsIgnoreExample.$clinit();
+ }
+ 
+ static m_notExportedFunction__() {
+  JsIgnoreExample.$clinit();
+ }
+ /** @return {number} */
+ static get exportedField() {
+  return (JsIgnoreExample.$clinit(), JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample);
+ }
+ 
+ static set exportedField(/** number */ value) {
+  (JsIgnoreExample.$clinit(), JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample = value);
+ }
+ /** @return {number} */
+ static get f_notExportedField__jsignore_JsIgnoreExample() {
+  return (JsIgnoreExample.$clinit(), JsIgnoreExample.$static_notExportedField__jsignore_JsIgnoreExample);
+ }
+ 
+ static set f_notExportedField__jsignore_JsIgnoreExample(/** number */ value) {
+  (JsIgnoreExample.$clinit(), JsIgnoreExample.$static_notExportedField__jsignore_JsIgnoreExample = value);
+ }
+ /** @return {*} */
+ static get CONSTNAME() {
+  return (JsIgnoreExample.$clinit(), JsIgnoreExample.$static_CONSTNAME__jsignore_JsIgnoreExample);
+ }
+ 
+ static $clinit() {
+  JsIgnoreExample.$clinit = () =>{};
+  JsIgnoreExample.$loadModules();
+  j_l_Object.$clinit();
+  JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample = 10;
+  JsIgnoreExample.$static_notExportedField__jsignore_JsIgnoreExample = 20;
+  JsIgnoreExample.$static_CONSTNAME__jsignore_JsIgnoreExample = j_l_Object.$create__();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof JsIgnoreExample;
+ }
+ 
+ static $loadModules() {}
 }
 /**@private {number}*/
 JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample = 0;
@@ -73,7 +64,7 @@ JsIgnoreExample.$static_exportedField__jsignore_JsIgnoreExample = 0;
 JsIgnoreExample.$static_notExportedField__jsignore_JsIgnoreExample = 0;
 /**@private {*}*/
 JsIgnoreExample.$static_CONSTNAME__jsignore_JsIgnoreExample;
-$Util.$setClassMetadata(JsIgnoreExample, 'jsignore.JsIgnoreExample');
+$Util.$setClassMetadata(JsIgnoreExample, "jsignore.JsIgnoreExample");
 
 exports = JsIgnoreExample;
 

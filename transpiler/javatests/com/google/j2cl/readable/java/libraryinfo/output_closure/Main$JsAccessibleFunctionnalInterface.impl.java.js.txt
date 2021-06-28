@@ -8,40 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('libraryinfo.Main.JsAccessibleFunctionn
  * @interface
  */
 class JsAccessibleFunctionnalInterface {
-  /** @abstract */
-  accessibleFunctionalInterfaceMethod() {}
-  /** @return {JsAccessibleFunctionnalInterface} */
-  static $adapt(/** ?function():void */ fn) {
-    JsAccessibleFunctionnalInterface.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    JsAccessibleFunctionnalInterface.$clinit = () => {};
-    JsAccessibleFunctionnalInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype
-        .$implements__libraryinfo_Main_JsAccessibleFunctionnalInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance
-              .$implements__libraryinfo_Main_JsAccessibleFunctionnalInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ accessibleFunctionalInterfaceMethod() {}
+ /** @return {JsAccessibleFunctionnalInterface} */
+ static $adapt(/** ?function():void */ fn) {
+  JsAccessibleFunctionnalInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  JsAccessibleFunctionnalInterface.$clinit = () =>{};
+  JsAccessibleFunctionnalInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__libraryinfo_Main_JsAccessibleFunctionnalInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__libraryinfo_Main_JsAccessibleFunctionnalInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('libraryinfo.Main.JsAccessibleFunctionnalInterface.$LambdaAdaptor$impl');
+ }
 }
-JsAccessibleFunctionnalInterface.$markImplementor(
-    /**@type {Function}*/ (JsAccessibleFunctionnalInterface));
-$Util.$setClassMetadataForInterface(
-    JsAccessibleFunctionnalInterface,
-    'libraryinfo.Main$JsAccessibleFunctionnalInterface');
+JsAccessibleFunctionnalInterface.$markImplementor(/**@type {Function}*/ (JsAccessibleFunctionnalInterface));
+$Util.$setClassMetadataForInterface(JsAccessibleFunctionnalInterface, "libraryinfo.Main$JsAccessibleFunctionnalInterface");
 
 exports = JsAccessibleFunctionnalInterface;
 

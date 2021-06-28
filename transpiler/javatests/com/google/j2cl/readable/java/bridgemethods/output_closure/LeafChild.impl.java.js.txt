@@ -7,35 +7,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @extends {ReparametrerizedChild<LeafChild>}
  */
 class LeafChild extends ReparametrerizedChild {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!LeafChild} */
-  static $create__() {
-    LeafChild.$clinit();
-    let $instance = new LeafChild();
-    $instance.$ctor__bridgemethods_LeafChild__();
-    return $instance;
-  }
-
-  $ctor__bridgemethods_LeafChild__() {
-    this.$ctor__bridgemethods_ReparametrerizedChild__();
-  }
-
-  static $clinit() {
-    LeafChild.$clinit = () => {};
-    LeafChild.$loadModules();
-    ReparametrerizedChild.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof LeafChild;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!LeafChild} */
+ static $create__() {
+  LeafChild.$clinit();
+  let $instance = new LeafChild();
+  $instance.$ctor__bridgemethods_LeafChild__();
+  return $instance;
+ }
+ 
+ $ctor__bridgemethods_LeafChild__() {
+  this.$ctor__bridgemethods_ReparametrerizedChild__();
+ }
+ 
+ static $clinit() {
+  LeafChild.$clinit = () =>{};
+  LeafChild.$loadModules();
+  ReparametrerizedChild.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof LeafChild;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(LeafChild, 'bridgemethods.LeafChild');
+$Util.$setClassMetadata(LeafChild, "bridgemethods.LeafChild");
 
 exports = LeafChild;
 

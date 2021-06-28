@@ -10,45 +10,40 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Serial}
  */
 class $LambdaAdaptor$1 extends j_l_Object {
-  constructor(/** ?function():number */ fn) {
-    $LambdaAdaptor$1.$clinit();
-    super();
-    /**@type {?function():number}*/
-    this.f_fn__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1;
-    this.$ctor__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__intersectiontype_Cmp_$JsFunction(
-        fn);
-  }
-
-  $ctor__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__intersectiontype_Cmp_$JsFunction(
-      /** ?function():number */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1 = fn;
-  }
-  /** @override @return {number} */
-  m_cmp__() {
-    let /** ?function():number */ $function;
-    return (
-        $function =
-            this.f_fn__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1,
-        $function());
-  }
-
-  static $clinit() {
-    $LambdaAdaptor$1.$clinit = () => {};
-    $LambdaAdaptor$1.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor$1;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** ?function():number */ fn) {
+  $LambdaAdaptor$1.$clinit();
+  super();
+  /**@type {?function():number}*/
+  this.f_fn__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1;
+  this.$ctor__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__intersectiontype_Cmp_$JsFunction(fn);
+ }
+ 
+ $ctor__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1__intersectiontype_Cmp_$JsFunction(/** ?function():number */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1 = fn;
+ }
+ /** @override @return {number} */
+ m_cmp__() {
+  let /** ?function():number */ $function;
+  return ($function = this.f_fn__intersectiontype_IntersectionTypeTest_$LambdaAdaptor$1, $function());
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor$1.$clinit = () =>{};
+  $LambdaAdaptor$1.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor$1;
+ }
+ 
+ static $loadModules() {}
 }
 Cmp.$markImplementor($LambdaAdaptor$1);
 Serial.$markImplementor($LambdaAdaptor$1);
-$Util.$setClassMetadata(
-    $LambdaAdaptor$1, 'intersectiontype.IntersectionTypeTest$$LambdaAdaptor$1');
+$Util.$setClassMetadata($LambdaAdaptor$1, "intersectiontype.IntersectionTypeTest$$LambdaAdaptor$1");
 
 exports = $LambdaAdaptor$1;
 

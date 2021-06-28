@@ -10,42 +10,39 @@ let B = goog.forwardDeclare('bridgejsmethod.Main.B$impl');
  * @implements {M}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():B */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():B}*/
-    this.f_fn__bridgejsmethod_Main_M_$LambdaAdaptor;
-    this.$ctor__bridgejsmethod_Main_M_$LambdaAdaptor__bridgejsmethod_Main_M_$JsFunction(
-        fn);
-  }
-
-  $ctor__bridgejsmethod_Main_M_$LambdaAdaptor__bridgejsmethod_Main_M_$JsFunction(
-      /** ?function():B */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__bridgejsmethod_Main_M_$LambdaAdaptor = fn;
-  }
-  /** @override @return {B} */
-  m_getB__() {
-    let /** ?function():B */ $function;
-    return (
-        $function = this.f_fn__bridgejsmethod_Main_M_$LambdaAdaptor,
-        $function());
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** ?function():B */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():B}*/
+  this.f_fn__bridgejsmethod_Main_M_$LambdaAdaptor;
+  this.$ctor__bridgejsmethod_Main_M_$LambdaAdaptor__bridgejsmethod_Main_M_$JsFunction(fn);
+ }
+ 
+ $ctor__bridgejsmethod_Main_M_$LambdaAdaptor__bridgejsmethod_Main_M_$JsFunction(/** ?function():B */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__bridgejsmethod_Main_M_$LambdaAdaptor = fn;
+ }
+ /** @override @return {B} */
+ m_getB__() {
+  let /** ?function():B */ $function;
+  return ($function = this.f_fn__bridgejsmethod_Main_M_$LambdaAdaptor, $function());
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 M.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata($LambdaAdaptor, 'bridgejsmethod.Main$M$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "bridgejsmethod.Main$M$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

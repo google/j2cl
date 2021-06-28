@@ -8,36 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('jsbridgebackward.MyJsInterface.$Lambda
  * @interface
  */
 class MyJsInterface {
-  /** @abstract @return {number} */
-  foo(/** number */ a) {}
-  /** @return {MyJsInterface} */
-  static $adapt(/** ?function(number):number */ fn) {
-    MyJsInterface.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    MyJsInterface.$clinit = () => {};
-    MyJsInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__jsbridgebackward_MyJsInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__jsbridgebackward_MyJsInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('jsbridgebackward.MyJsInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract @return {number} */
+ foo(/** number */ a) {}
+ /** @return {MyJsInterface} */
+ static $adapt(/** ?function(number):number */ fn) {
+  MyJsInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  MyJsInterface.$clinit = () =>{};
+  MyJsInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__jsbridgebackward_MyJsInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsbridgebackward_MyJsInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('jsbridgebackward.MyJsInterface.$LambdaAdaptor$impl');
+ }
 }
 MyJsInterface.$markImplementor(/**@type {Function}*/ (MyJsInterface));
-$Util.$setClassMetadataForInterface(
-    MyJsInterface, 'jsbridgebackward.MyJsInterface');
+$Util.$setClassMetadataForInterface(MyJsInterface, "jsbridgebackward.MyJsInterface");
 
 exports = MyJsInterface;
 

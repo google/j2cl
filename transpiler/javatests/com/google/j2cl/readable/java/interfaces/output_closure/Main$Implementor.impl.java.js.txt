@@ -14,60 +14,57 @@ let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
  * @implements {Interface<?string>}
  */
 class Implementor extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {Main}*/
-    this.$outer_this__interfaces_Main_Implementor;
-  }
-  /** @return {!Implementor} */
-  static $create__interfaces_Main(/** Main */ $outer_this) {
-    Implementor.$clinit();
-    let $instance = new Implementor();
-    $instance.$ctor__interfaces_Main_Implementor__interfaces_Main($outer_this);
-    return $instance;
-  }
-
-  $ctor__interfaces_Main_Implementor__interfaces_Main(/** Main */ $outer_this) {
-    this.$outer_this__interfaces_Main_Implementor = $outer_this;
-    this.$ctor__java_lang_Object__();
-  }
-  /** @override */
-  m_interfaceMethod__() {}
-  // Bridge method.
-  /** @override */
-  m_defaultMethod__java_lang_Object(/** ?string */ arg0) {
-    this.m_defaultMethod__java_lang_String(
-        /**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
-  }
-  // Default method forwarding stub.
-  /** @override */
-  m_defaultMethod__java_lang_String(/** ?string */ arg0) {
-    SubInterface
-        .m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String(
-            this, arg0);
-  }
-
-  static $clinit() {
-    Implementor.$clinit = () => {};
-    Implementor.$loadModules();
-    j_l_Object.$clinit();
-    SubInterface.$clinit();
-    Interface.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Implementor;
-  }
-
-  static $loadModules() {
-    j_l_String = goog.module.get('java.lang.String$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Main}*/
+  this.$outer_this__interfaces_Main_Implementor;
+ }
+ /** @return {!Implementor} */
+ static $create__interfaces_Main(/** Main */ $outer_this) {
+  Implementor.$clinit();
+  let $instance = new Implementor();
+  $instance.$ctor__interfaces_Main_Implementor__interfaces_Main($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__interfaces_Main_Implementor__interfaces_Main(/** Main */ $outer_this) {
+  this.$outer_this__interfaces_Main_Implementor = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ /** @override */
+ m_interfaceMethod__() {}
+ //Bridge method.
+ /** @override */
+ m_defaultMethod__java_lang_Object(/** ?string */ arg0) {
+  this.m_defaultMethod__java_lang_String(/**@type {?string}*/ ($Casts.$to(arg0, j_l_String)));
+ }
+ //Default method forwarding stub.
+ /** @override */
+ m_defaultMethod__java_lang_String(/** ?string */ arg0) {
+  SubInterface.m_defaultMethod__$default__interfaces_Main_SubInterface__java_lang_String(this, arg0);
+ }
+ 
+ static $clinit() {
+  Implementor.$clinit = () =>{};
+  Implementor.$loadModules();
+  j_l_Object.$clinit();
+  SubInterface.$clinit();
+  Interface.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Implementor;
+ }
+ 
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
 SubInterface.$markImplementor(Implementor);
 Interface.$markImplementor(Implementor);
-$Util.$setClassMetadata(Implementor, 'interfaces.Main$Implementor');
+$Util.$setClassMetadata(Implementor, "interfaces.Main$Implementor");
 
 exports = Implementor;
 

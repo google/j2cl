@@ -12,57 +12,52 @@ let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
  * @implements {Iterable<?string>}
  */
 class Exception1 extends Exception {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Exception1} */
-  static $create__() {
-    Exception1.$clinit();
-    let $instance = new Exception1();
-    $instance.$ctor__foreachstatement_ForEachStatement_Exception1__();
-    $instance.m_privateInitError__java_lang_Object_$pp_java_lang(
-        new Error($instance));
-    return $instance;
-  }
-
-  $ctor__foreachstatement_ForEachStatement_Exception1__() {
-    this.$ctor__java_lang_Exception__();
-  }
-  /** @override @return {Iterator<?string>} */
-  m_iterator__() {
-    return null;
-  }
-  // Default method forwarding stub.
-  /** @override */
-  m_forEach__java_util_function_Consumer(/** Consumer<?> */ arg0) {
-    Iterable
-        .m_forEach__$default__java_lang_Iterable__java_util_function_Consumer(
-            this, arg0);
-  }
-  // Default method forwarding stub.
-  /** @override @return {Spliterator<?string>} */
-  m_spliterator__() {
-    return /**@type {Spliterator<?string>}*/ (
-        Iterable.m_spliterator__$default__java_lang_Iterable(this));
-  }
-
-  static $clinit() {
-    Exception1.$clinit = () => {};
-    Exception1.$loadModules();
-    Exception.$clinit();
-    Iterable.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Exception1;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Exception1} */
+ static $create__() {
+  Exception1.$clinit();
+  let $instance = new Exception1();
+  $instance.$ctor__foreachstatement_ForEachStatement_Exception1__();
+  $instance.m_privateInitError__java_lang_Object_$pp_java_lang(new Error($instance));
+  return $instance;
+ }
+ 
+ $ctor__foreachstatement_ForEachStatement_Exception1__() {
+  this.$ctor__java_lang_Exception__();
+ }
+ /** @override @return {Iterator<?string>} */
+ m_iterator__() {
+  return null;
+ }
+ //Default method forwarding stub.
+ /** @override */
+ m_forEach__java_util_function_Consumer(/** Consumer<?> */ arg0) {
+  Iterable.m_forEach__$default__java_lang_Iterable__java_util_function_Consumer(this, arg0);
+ }
+ //Default method forwarding stub.
+ /** @override @return {Spliterator<?string>} */
+ m_spliterator__() {
+  return /**@type {Spliterator<?string>}*/ (Iterable.m_spliterator__$default__java_lang_Iterable(this));
+ }
+ 
+ static $clinit() {
+  Exception1.$clinit = () =>{};
+  Exception1.$loadModules();
+  Exception.$clinit();
+  Iterable.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Exception1;
+ }
+ 
+ static $loadModules() {}
 }
 Iterable.$markImplementor(Exception1);
-$Util.$setClassMetadata(
-    Exception1, 'foreachstatement.ForEachStatement$Exception1');
+$Util.$setClassMetadata(Exception1, "foreachstatement.ForEachStatement$Exception1");
 
 exports = Exception1;
 

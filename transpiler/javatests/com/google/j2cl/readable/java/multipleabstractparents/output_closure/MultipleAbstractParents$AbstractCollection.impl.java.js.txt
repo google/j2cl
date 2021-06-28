@@ -8,34 +8,32 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class AbstractCollection extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-
-  $ctor__multipleabstractparents_MultipleAbstractParents_AbstractCollection__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {?string} */
-  m_getFoo__java_lang_Object(/** T */ t) {
-    return 'AbstractCollection';
-  }
-
-  static $clinit() {
-    AbstractCollection.$clinit = () => {};
-    AbstractCollection.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof AbstractCollection;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ 
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractCollection__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {?string} */
+ m_getFoo__java_lang_Object(/** T */ t) {
+  return "AbstractCollection";
+ }
+ 
+ static $clinit() {
+  AbstractCollection.$clinit = () =>{};
+  AbstractCollection.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractCollection;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    AbstractCollection,
-    'multipleabstractparents.MultipleAbstractParents$AbstractCollection');
+$Util.$setClassMetadata(AbstractCollection, "multipleabstractparents.MultipleAbstractParents$AbstractCollection");
 
 exports = AbstractCollection;
 

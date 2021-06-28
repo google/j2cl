@@ -4,35 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Dummy extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Dummy} */
-  static $create__() {
-    Dummy.$clinit();
-    let $instance = new Dummy();
-    $instance.$ctor__aptgeneratordep_Dummy__();
-    return $instance;
-  }
-
-  $ctor__aptgeneratordep_Dummy__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    Dummy.$clinit = () => {};
-    Dummy.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Dummy;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Dummy} */
+ static $create__() {
+  Dummy.$clinit();
+  let $instance = new Dummy();
+  $instance.$ctor__aptgeneratordep_Dummy__();
+  return $instance;
+ }
+ 
+ $ctor__aptgeneratordep_Dummy__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  Dummy.$clinit = () =>{};
+  Dummy.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Dummy;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Dummy, 'aptgeneratordep.Dummy');
+$Util.$setClassMetadata(Dummy, "aptgeneratordep.Dummy");
 
 exports = Dummy;
 

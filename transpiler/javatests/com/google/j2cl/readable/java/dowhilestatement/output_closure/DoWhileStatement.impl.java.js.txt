@@ -4,42 +4,42 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class DoWhileStatement extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!DoWhileStatement} */
-  static $create__() {
-    DoWhileStatement.$clinit();
-    let $instance = new DoWhileStatement();
-    $instance.$ctor__dowhilestatement_DoWhileStatement__();
-    return $instance;
-  }
-
-  $ctor__dowhilestatement_DoWhileStatement__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__() {
-    let count = 0;
-    do {
-      count = count + 1 | 0;
-    } while (count < 5);
-  }
-
-  static $clinit() {
-    DoWhileStatement.$clinit = () => {};
-    DoWhileStatement.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof DoWhileStatement;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!DoWhileStatement} */
+ static $create__() {
+  DoWhileStatement.$clinit();
+  let $instance = new DoWhileStatement();
+  $instance.$ctor__dowhilestatement_DoWhileStatement__();
+  return $instance;
+ }
+ 
+ $ctor__dowhilestatement_DoWhileStatement__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__() {
+  let count = 0;
+  do {
+   count = count + 1 | 0;
+  }while (count < 5);
+ }
+ 
+ static $clinit() {
+  DoWhileStatement.$clinit = () =>{};
+  DoWhileStatement.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DoWhileStatement;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(DoWhileStatement, 'dowhilestatement.DoWhileStatement');
+$Util.$setClassMetadata(DoWhileStatement, "dowhilestatement.DoWhileStatement");
 
 exports = DoWhileStatement;
 

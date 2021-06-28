@@ -4,40 +4,39 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class StaticJsMethodsWithClassNamespace extends j_l_Object {
-  constructor() {
-    StaticJsMethodsWithClassNamespace.$clinit();
-    super();
-    this.$ctor__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__();
-  }
-
-  $ctor__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static replacedName() {
-    StaticJsMethodsWithClassNamespace.$clinit();
-  }
-
-  test() {
-    StaticJsMethodsWithClassNamespace.replacedName();
-    StaticJsMethodsWithClassNamespace.replacedName();
-  }
-
-  static $clinit() {
-    StaticJsMethodsWithClassNamespace.$clinit = () => {};
-    StaticJsMethodsWithClassNamespace.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof StaticJsMethodsWithClassNamespace;
-  }
-
-  static $loadModules() {}
+ 
+ constructor() {
+  StaticJsMethodsWithClassNamespace.$clinit();
+  super();
+  this.$ctor__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__();
+ }
+ 
+ $ctor__staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static replacedName() {
+  StaticJsMethodsWithClassNamespace.$clinit();
+ }
+ 
+ test() {
+  StaticJsMethodsWithClassNamespace.replacedName();
+  StaticJsMethodsWithClassNamespace.replacedName();
+ }
+ 
+ static $clinit() {
+  StaticJsMethodsWithClassNamespace.$clinit = () =>{};
+  StaticJsMethodsWithClassNamespace.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof StaticJsMethodsWithClassNamespace;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    StaticJsMethodsWithClassNamespace,
-    'staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace');
+$Util.$setClassMetadata(StaticJsMethodsWithClassNamespace, "staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace");
 
 exports = StaticJsMethodsWithClassNamespace;
 

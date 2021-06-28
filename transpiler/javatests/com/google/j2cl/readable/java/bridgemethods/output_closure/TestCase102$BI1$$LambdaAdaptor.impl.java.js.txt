@@ -8,43 +8,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {BI1}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function(?string):void */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function(?string):void}*/
-    this.f_fn__bridgemethods_TestCase102_BI1_$LambdaAdaptor;
-    this.$ctor__bridgemethods_TestCase102_BI1_$LambdaAdaptor__bridgemethods_TestCase102_BI1_$JsFunction(
-        fn);
+ 
+ constructor(/** ?function(?string):void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function(?string):void}*/
+  this.f_fn__bridgemethods_TestCase102_BI1_$LambdaAdaptor;
+  this.$ctor__bridgemethods_TestCase102_BI1_$LambdaAdaptor__bridgemethods_TestCase102_BI1_$JsFunction(fn);
+ }
+ 
+ $ctor__bridgemethods_TestCase102_BI1_$LambdaAdaptor__bridgemethods_TestCase102_BI1_$JsFunction(/** ?function(?string):void */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__bridgemethods_TestCase102_BI1_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ m_set__java_lang_String(/** ?string */ arg0) {
+  {
+   let $function = this.f_fn__bridgemethods_TestCase102_BI1_$LambdaAdaptor;
+   $function(arg0);
   }
-
-  $ctor__bridgemethods_TestCase102_BI1_$LambdaAdaptor__bridgemethods_TestCase102_BI1_$JsFunction(
-      /** ?function(?string):void */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__bridgemethods_TestCase102_BI1_$LambdaAdaptor = fn;
-  }
-  /** @override */
-  m_set__java_lang_String(/** ?string */ arg0) {
-    {
-      let $function = this.f_fn__bridgemethods_TestCase102_BI1_$LambdaAdaptor;
-      $function(arg0);
-    }
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 BI1.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'bridgemethods.TestCase102$BI1$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "bridgemethods.TestCase102$BI1$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

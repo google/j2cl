@@ -5,47 +5,44 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const $JavaScriptFunction = goog.require('vmbootstrap.JavaScriptFunction$impl');
 
 class AFunction extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {function(?string=, ...*):*} */
-  static $create__() {
-    AFunction.$clinit();
-    let $instance = new AFunction();
-    $instance.$ctor__jsoptional_Main_AFunction__();
-    return $Util.$makeLambdaFunction(
-        AFunction.prototype.m_f1__java_lang_String__arrayOf_java_lang_Object,
-        $instance, AFunction.$copy);
-  }
-  /** @suppress {invalidCasts} */
-  $ctor__jsoptional_Main_AFunction__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @this {?function(?string=, ...*):*} @return {*} */
-  m_f1__java_lang_String__arrayOf_java_lang_Object(
-      /** ?string= */ i, .../** ...* */ args) {
-    return args[0];
-  }
-
-  static $clinit() {
-    AFunction.$clinit = () => {};
-    AFunction.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null && !!instance.$is__jsoptional_Main_AFunction;
-  }
-
-  static $copy(/** ? */ from, /** ? */ to) {
-    to.$is__jsoptional_Main_AFunction = true;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {function(?string=, ...*):*} */
+ static $create__() {
+  AFunction.$clinit();
+  let $instance = new AFunction();
+  $instance.$ctor__jsoptional_Main_AFunction__();
+  return $Util.$makeLambdaFunction(AFunction.prototype.m_f1__java_lang_String__arrayOf_java_lang_Object, $instance, AFunction.$copy);
+ }
+ /** @suppress {invalidCasts} */
+ $ctor__jsoptional_Main_AFunction__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @this {?function(?string=, ...*):*} @return {*} */
+ m_f1__java_lang_String__arrayOf_java_lang_Object(/** ?string= */ i, .../** ...* */ args) {
+  return args[0];
+ }
+ 
+ static $clinit() {
+  AFunction.$clinit = () =>{};
+  AFunction.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$is__jsoptional_Main_AFunction;
+ }
+ 
+ static $copy(/** ? */ from, /** ? */ to) {
+  to.$is__jsoptional_Main_AFunction = true;
+ }
+ 
+ static $loadModules() {}
 }
 $JavaScriptFunction.$markImplementor(AFunction);
-$Util.$setClassMetadata(AFunction, 'jsoptional.Main$AFunction');
+$Util.$setClassMetadata(AFunction, "jsoptional.Main$AFunction");
 
 exports = AFunction;
 

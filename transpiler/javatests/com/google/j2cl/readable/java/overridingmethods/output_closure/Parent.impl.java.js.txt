@@ -4,37 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Parent extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Parent} */
-  static $create__() {
-    Parent.$clinit();
-    let $instance = new Parent();
-    $instance.$ctor__overridingmethods_Parent__();
-    return $instance;
-  }
-
-  $ctor__overridingmethods_Parent__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_fun__() {}
-
-  static $clinit() {
-    Parent.$clinit = () => {};
-    Parent.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Parent;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Parent} */
+ static $create__() {
+  Parent.$clinit();
+  let $instance = new Parent();
+  $instance.$ctor__overridingmethods_Parent__();
+  return $instance;
+ }
+ 
+ $ctor__overridingmethods_Parent__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_fun__() {}
+ 
+ static $clinit() {
+  Parent.$clinit = () =>{};
+  Parent.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Parent;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Parent, 'overridingmethods.Parent');
+$Util.$setClassMetadata(Parent, "overridingmethods.Parent");
 
 exports = Parent;
 

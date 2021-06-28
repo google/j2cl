@@ -9,38 +9,38 @@ const Callable = goog.require('simplebridgemethods.Callable$impl');
  * @implements {Callable<T>}
  */
 class Task extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @template T @return {!Task<T>} */
-  static $create__() {
-    Task.$clinit();
-    let $instance = new Task();
-    $instance.$ctor__simplebridgemethods_Task__();
-    return $instance;
-  }
-
-  $ctor__simplebridgemethods_Task__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @override */
-  m_call__java_lang_Object(/** T */ t) {}
-
-  static $clinit() {
-    Task.$clinit = () => {};
-    Task.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Task;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!Task<T>} */
+ static $create__() {
+  Task.$clinit();
+  let $instance = new Task();
+  $instance.$ctor__simplebridgemethods_Task__();
+  return $instance;
+ }
+ 
+ $ctor__simplebridgemethods_Task__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @override */
+ m_call__java_lang_Object(/** T */ t) {}
+ 
+ static $clinit() {
+  Task.$clinit = () =>{};
+  Task.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Task;
+ }
+ 
+ static $loadModules() {}
 }
 Callable.$markImplementor(Task);
-$Util.$setClassMetadata(Task, 'simplebridgemethods.Task');
+$Util.$setClassMetadata(Task, "simplebridgemethods.Task");
 
 exports = Task;
 

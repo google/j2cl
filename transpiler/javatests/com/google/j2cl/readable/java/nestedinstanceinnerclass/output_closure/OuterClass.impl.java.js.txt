@@ -7,46 +7,42 @@ let InnerClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass.InnerC
 let InnerInnerClass = goog.forwardDeclare('nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
 
 class OuterClass extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!OuterClass} */
-  static $create__() {
-    OuterClass.$clinit();
-    let $instance = new OuterClass();
-    $instance.$ctor__nestedinstanceinnerclass_OuterClass__();
-    return $instance;
-  }
-
-  $ctor__nestedinstanceinnerclass_OuterClass__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__() {
-    InnerInnerClass.$create__nestedinstanceinnerclass_OuterClass_InnerClass(
-        InnerClass.$create__nestedinstanceinnerclass_OuterClass(
-            OuterClass.$create__()));
-  }
-
-  static $clinit() {
-    OuterClass.$clinit = () => {};
-    OuterClass.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof OuterClass;
-  }
-
-  static $loadModules() {
-    InnerClass =
-        goog.module.get('nestedinstanceinnerclass.OuterClass.InnerClass$impl');
-    InnerInnerClass = goog.module.get(
-        'nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!OuterClass} */
+ static $create__() {
+  OuterClass.$clinit();
+  let $instance = new OuterClass();
+  $instance.$ctor__nestedinstanceinnerclass_OuterClass__();
+  return $instance;
+ }
+ 
+ $ctor__nestedinstanceinnerclass_OuterClass__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__() {
+  InnerInnerClass.$create__nestedinstanceinnerclass_OuterClass_InnerClass(InnerClass.$create__nestedinstanceinnerclass_OuterClass(OuterClass.$create__()));
+ }
+ 
+ static $clinit() {
+  OuterClass.$clinit = () =>{};
+  OuterClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof OuterClass;
+ }
+ 
+ static $loadModules() {
+  InnerClass = goog.module.get('nestedinstanceinnerclass.OuterClass.InnerClass$impl');
+  InnerInnerClass = goog.module.get('nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass$impl');
+ }
 }
-$Util.$setClassMetadata(OuterClass, 'nestedinstanceinnerclass.OuterClass');
+$Util.$setClassMetadata(OuterClass, "nestedinstanceinnerclass.OuterClass");
 
 exports = OuterClass;
 

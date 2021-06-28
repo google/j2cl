@@ -4,37 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class NativeFoo extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!NativeFoo} */
-  static $create__() {
-    NativeFoo.$clinit();
-    let $instance = new NativeFoo();
-    $instance.$ctor__jsproperties_NativeFoo__();
-    return $instance;
-  }
-
-  $ctor__jsproperties_NativeFoo__() {
-    this.$ctor__java_lang_Object__();
-  }
-  // /** @return {*} */
-  // native get hasOwnProperty()
-
-  static $clinit() {
-    NativeFoo.$clinit = () => {};
-    NativeFoo.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof NativeFoo;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!NativeFoo} */
+ static $create__() {
+  NativeFoo.$clinit();
+  let $instance = new NativeFoo();
+  $instance.$ctor__jsproperties_NativeFoo__();
+  return $instance;
+ }
+ 
+ $ctor__jsproperties_NativeFoo__() {
+  this.$ctor__java_lang_Object__();
+ }
+ // /** @return {*} */
+ // native get hasOwnProperty() 
+ 
+ static $clinit() {
+  NativeFoo.$clinit = () =>{};
+  NativeFoo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeFoo;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(NativeFoo, 'jsproperties.NativeFoo');
+$Util.$setClassMetadata(NativeFoo, "jsproperties.NativeFoo");
 
 exports = NativeFoo;
 

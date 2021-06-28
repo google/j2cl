@@ -4,36 +4,35 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 const Parent = goog.require('qualifiedsupercall.Parent$impl');
 
 class QualifiedSuperCall extends Parent {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!QualifiedSuperCall} */
-  static $create__() {
-    QualifiedSuperCall.$clinit();
-    let $instance = new QualifiedSuperCall();
-    $instance.$ctor__qualifiedsupercall_QualifiedSuperCall__();
-    return $instance;
-  }
-
-  $ctor__qualifiedsupercall_QualifiedSuperCall__() {
-    this.$ctor__qualifiedsupercall_Parent__();
-  }
-
-  static $clinit() {
-    QualifiedSuperCall.$clinit = () => {};
-    QualifiedSuperCall.$loadModules();
-    Parent.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof QualifiedSuperCall;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!QualifiedSuperCall} */
+ static $create__() {
+  QualifiedSuperCall.$clinit();
+  let $instance = new QualifiedSuperCall();
+  $instance.$ctor__qualifiedsupercall_QualifiedSuperCall__();
+  return $instance;
+ }
+ 
+ $ctor__qualifiedsupercall_QualifiedSuperCall__() {
+  this.$ctor__qualifiedsupercall_Parent__();
+ }
+ 
+ static $clinit() {
+  QualifiedSuperCall.$clinit = () =>{};
+  QualifiedSuperCall.$loadModules();
+  Parent.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof QualifiedSuperCall;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    QualifiedSuperCall, 'qualifiedsupercall.QualifiedSuperCall');
+$Util.$setClassMetadata(QualifiedSuperCall, "qualifiedsupercall.QualifiedSuperCall");
 
 exports = QualifiedSuperCall;
 

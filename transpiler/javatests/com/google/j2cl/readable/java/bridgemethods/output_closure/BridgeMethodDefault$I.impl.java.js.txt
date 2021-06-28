@@ -9,35 +9,33 @@ let $LambdaAdaptor = goog.forwardDeclare('bridgemethods.BridgeMethodDefault.I.$L
  * @template T
  */
 class I {
-  /** @abstract */
-  m_m__java_lang_Object(/** T */ t) {}
-  /** @template T @return {I<T>} */
-  static $adapt(/** ?function(T):void */ fn) {
-    I.$clinit();
-    return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
-  }
-
-  static $clinit() {
-    I.$clinit = () => {};
-    I.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__bridgemethods_BridgeMethodDefault_I = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__bridgemethods_BridgeMethodDefault_I;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'bridgemethods.BridgeMethodDefault.I.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_m__java_lang_Object(/** T */ t) {}
+ /** @template T @return {I<T>} */
+ static $adapt(/** ?function(T):void */ fn) {
+  I.$clinit();
+  return /**@type {!$LambdaAdaptor<T>}*/ (new $LambdaAdaptor(fn));
+ }
+ 
+ static $clinit() {
+  I.$clinit = () =>{};
+  I.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__bridgemethods_BridgeMethodDefault_I = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__bridgemethods_BridgeMethodDefault_I;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('bridgemethods.BridgeMethodDefault.I.$LambdaAdaptor$impl');
+ }
 }
 I.$markImplementor(/**@type {Function}*/ (I));
-$Util.$setClassMetadataForInterface(I, 'bridgemethods.BridgeMethodDefault$I');
+$Util.$setClassMetadataForInterface(I, "bridgemethods.BridgeMethodDefault$I");
 
 exports = I;
 

@@ -6,47 +6,43 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let I = goog.forwardDeclare('abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
 
 class C extends A {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!C} */
-  static $create__() {
-    C.$clinit();
-    let $instance = new C();
-    $instance
-        .$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__();
-    return $instance;
-  }
-
-  $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__() {
-    this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
-  }
-  /** @override */
-  m_foo__() {}
-  /** @override */
-  m_bar__() {
-    I.m_bar__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(
-        this);
-  }
-
-  static $clinit() {
-    C.$clinit = () => {};
-    C.$loadModules();
-    A.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof C;
-  }
-
-  static $loadModules() {
-    I = goog.module.get(
-        'abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!C} */
+ static $create__() {
+  C.$clinit();
+  let $instance = new C();
+  $instance.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__();
+  return $instance;
+ }
+ 
+ $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C__() {
+  this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
+ }
+ /** @override */
+ m_foo__() {}
+ /** @override */
+ m_bar__() {
+  I.m_bar__$default__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I(this);
+ }
+ 
+ static $clinit() {
+  C.$clinit = () =>{};
+  C.$loadModules();
+  A.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof C;
+ }
+ 
+ static $loadModules() {
+  I = goog.module.get('abstractmethodoverridedefault.AbstractMethodOverrideDefault.I$impl');
+ }
 }
-$Util.$setClassMetadata(
-    C, 'abstractmethodoverridedefault.AbstractMethodOverrideDefault$C');
+$Util.$setClassMetadata(C, "abstractmethodoverridedefault.AbstractMethodOverrideDefault$C");
 
 exports = C;
 

@@ -13,67 +13,53 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<SomeEnum>}
  */
 class SomeEnum extends Enum {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ 
+ $ctor__gwtincompatible_Implementor_SomeEnum__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+ }
+ /** @abstract */
+ m_method___$pp_gwtincompatible() {}
+ /** @return {!SomeEnum} */
+ static m_valueOf__java_lang_String(/** string */ name) {
+  SomeEnum.$clinit();
+  if ($Equality.$same(SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_, null)) {
+   SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ = /**@type {Map<?string, !SomeEnum>}*/ ($Enums.createMapFromValues(SomeEnum.m_values__()));
   }
-
-  $ctor__gwtincompatible_Implementor_SomeEnum__java_lang_String__int(
-      /** ?string */ $name, /** number */ $ordinal) {
-    this.f_name__java_lang_Enum_ = $name;
-    this.f_ordinal__java_lang_Enum_ = $ordinal;
-  }
-  /** @abstract */
-  m_method___$pp_gwtincompatible() {}
-  /** @return {!SomeEnum} */
-  static m_valueOf__java_lang_String(/** string */ name) {
-    SomeEnum.$clinit();
-    if ($Equality.$same(
-            SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_,
-            null)) {
-      SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ =
-          /**@type {Map<?string, !SomeEnum>}*/ (
-              $Enums.createMapFromValues(SomeEnum.m_values__()));
-    }
-    return /**@type {SomeEnum}*/ ($Enums.getValueFromNameAndMap(
-        name,
-        SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_));
-  }
-  /** @return {!Array<!SomeEnum>} */
-  static m_values__() {
-    SomeEnum.$clinit();
-    return /**@type {!Array<SomeEnum>}*/ ($Arrays.$init(
-        [SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum],
-        SomeEnum));
-  }
-  /** @return {!SomeEnum} */
-  static get f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum() {
-    return (
-        SomeEnum.$clinit(),
-        SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum);
-  }
-
-  static $clinit() {
-    SomeEnum.$clinit = () => {};
-    SomeEnum.$loadModules();
-    Enum.$clinit();
-    SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum =
-        $1.$create__java_lang_String__int(
-            $Util.$makeEnumName('COMPATIBLE'),
-            SomeEnum.$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum);
-    SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ = null;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof SomeEnum;
-  }
-
-  static $loadModules() {
-    $1 = goog.module.get('gwtincompatible.Implementor.SomeEnum.$1$impl');
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Enums = goog.module.get('vmbootstrap.Enums$impl');
-  }
+  return /**@type {SomeEnum}*/ ($Enums.getValueFromNameAndMap(name, SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_));
+ }
+ /** @return {!Array<!SomeEnum>} */
+ static m_values__() {
+  SomeEnum.$clinit();
+  return /**@type {!Array<SomeEnum>}*/ ($Arrays.$init([SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum], SomeEnum));
+ }
+ /** @return {!SomeEnum} */
+ static get f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum() {
+  return (SomeEnum.$clinit(), SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum);
+ }
+ 
+ static $clinit() {
+  SomeEnum.$clinit = () =>{};
+  SomeEnum.$loadModules();
+  Enum.$clinit();
+  SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum = $1.$create__java_lang_String__int($Util.$makeEnumName("COMPATIBLE"), SomeEnum.$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum);
+  SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_ = null;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof SomeEnum;
+ }
+ 
+ static $loadModules() {
+  $1 = goog.module.get('gwtincompatible.Implementor.SomeEnum.$1$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
 }
 /**@private {!SomeEnum}*/
 SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum;
@@ -81,8 +67,7 @@ SomeEnum.$static_COMPATIBLE__gwtincompatible_Implementor_SomeEnum;
 SomeEnum.f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_;
 /**@const {number}*/
 SomeEnum.$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum = 0;
-$Util.$setClassMetadataForEnum(
-    SomeEnum, 'gwtincompatible.Implementor$SomeEnum');
+$Util.$setClassMetadataForEnum(SomeEnum, "gwtincompatible.Implementor$SomeEnum");
 
 exports = SomeEnum;
 

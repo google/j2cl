@@ -11,82 +11,66 @@ let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
  * @extends {Enum<Color>}
  */
 class Color extends Enum {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Color} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new Color();
+  $instance.$ctor__jstypeenum_Color__java_lang_String__int($name, $ordinal);
+  return $instance;
+ }
+ 
+ $ctor__jstypeenum_Color__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+ }
+ /** @return {!Color} */
+ static valueOf(/** string */ name) {
+  Color.$clinit();
+  if ($Equality.$same(Color.f_namesToValuesMap__jstypeenum_Color_, null)) {
+   Color.f_namesToValuesMap__jstypeenum_Color_ = /**@type {Map<?string, !Color>}*/ ($Enums.createMapFromValues(Color.values()));
   }
-  /** @return {!Color} */
-  static $create__java_lang_String__int(
-      /** ?string */ $name, /** number */ $ordinal) {
-    let $instance = new Color();
-    $instance.$ctor__jstypeenum_Color__java_lang_String__int($name, $ordinal);
-    return $instance;
-  }
-
-  $ctor__jstypeenum_Color__java_lang_String__int(
-      /** ?string */ $name, /** number */ $ordinal) {
-    this.f_name__java_lang_Enum_ = $name;
-    this.f_ordinal__java_lang_Enum_ = $ordinal;
-  }
-  /** @return {!Color} */
-  static valueOf(/** string */ name) {
-    Color.$clinit();
-    if ($Equality.$same(Color.f_namesToValuesMap__jstypeenum_Color_, null)) {
-      Color.f_namesToValuesMap__jstypeenum_Color_ =
-          /**@type {Map<?string, !Color>}*/ (
-              $Enums.createMapFromValues(Color.values()));
-    }
-    return /**@type {Color}*/ ($Enums.getValueFromNameAndMap(
-        name, Color.f_namesToValuesMap__jstypeenum_Color_));
-  }
-  /** @return {!Array<!Color>} */
-  static values() {
-    Color.$clinit();
-    return /**@type {!Array<Color>}*/ ($Arrays.$init(
-        [
-          Color.$static_RED__jstypeenum_Color,
-          Color.$static_GREEN__jstypeenum_Color,
-          Color.$static_BLUE__jstypeenum_Color
-        ],
-        Color));
-  }
-  /** @return {!Color} */
-  static get RED() {
-    return (Color.$clinit(), Color.$static_RED__jstypeenum_Color);
-  }
-  /** @return {!Color} */
-  static get GREEN() {
-    return (Color.$clinit(), Color.$static_GREEN__jstypeenum_Color);
-  }
-  /** @return {!Color} */
-  static get BLUE() {
-    return (Color.$clinit(), Color.$static_BLUE__jstypeenum_Color);
-  }
-
-  static $clinit() {
-    Color.$clinit = () => {};
-    Color.$loadModules();
-    Enum.$clinit();
-    Color.$static_RED__jstypeenum_Color = Color.$create__java_lang_String__int(
-        $Util.$makeEnumName('RED'), Color.$ordinal_RED__jstypeenum_Color);
-    Color.$static_GREEN__jstypeenum_Color =
-        Color.$create__java_lang_String__int(
-            $Util.$makeEnumName('GREEN'),
-            Color.$ordinal_GREEN__jstypeenum_Color);
-    Color.$static_BLUE__jstypeenum_Color = Color.$create__java_lang_String__int(
-        $Util.$makeEnumName('BLUE'), Color.$ordinal_BLUE__jstypeenum_Color);
-    Color.f_namesToValuesMap__jstypeenum_Color_ = null;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Color;
-  }
-
-  static $loadModules() {
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-    $Enums = goog.module.get('vmbootstrap.Enums$impl');
-  }
+  return /**@type {Color}*/ ($Enums.getValueFromNameAndMap(name, Color.f_namesToValuesMap__jstypeenum_Color_));
+ }
+ /** @return {!Array<!Color>} */
+ static values() {
+  Color.$clinit();
+  return /**@type {!Array<Color>}*/ ($Arrays.$init([Color.$static_RED__jstypeenum_Color, Color.$static_GREEN__jstypeenum_Color, Color.$static_BLUE__jstypeenum_Color], Color));
+ }
+ /** @return {!Color} */
+ static get RED() {
+  return (Color.$clinit(), Color.$static_RED__jstypeenum_Color);
+ }
+ /** @return {!Color} */
+ static get GREEN() {
+  return (Color.$clinit(), Color.$static_GREEN__jstypeenum_Color);
+ }
+ /** @return {!Color} */
+ static get BLUE() {
+  return (Color.$clinit(), Color.$static_BLUE__jstypeenum_Color);
+ }
+ 
+ static $clinit() {
+  Color.$clinit = () =>{};
+  Color.$loadModules();
+  Enum.$clinit();
+  Color.$static_RED__jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("RED"), Color.$ordinal_RED__jstypeenum_Color);
+  Color.$static_GREEN__jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("GREEN"), Color.$ordinal_GREEN__jstypeenum_Color);
+  Color.$static_BLUE__jstypeenum_Color = Color.$create__java_lang_String__int($Util.$makeEnumName("BLUE"), Color.$ordinal_BLUE__jstypeenum_Color);
+  Color.f_namesToValuesMap__jstypeenum_Color_ = null;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Color;
+ }
+ 
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
 }
 /**@private {!Color}*/
 Color.$static_RED__jstypeenum_Color;
@@ -102,7 +86,7 @@ Color.$ordinal_RED__jstypeenum_Color = 0;
 Color.$ordinal_GREEN__jstypeenum_Color = 1;
 /**@const {number}*/
 Color.$ordinal_BLUE__jstypeenum_Color = 2;
-$Util.$setClassMetadataForEnum(Color, 'jstypeenum.Color');
+$Util.$setClassMetadataForEnum(Color, "jstypeenum.Color");
 
 exports = Color;
 

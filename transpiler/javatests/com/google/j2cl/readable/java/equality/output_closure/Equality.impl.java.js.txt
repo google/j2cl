@@ -10,65 +10,61 @@ let $Asserts = goog.forwardDeclare('vmbootstrap.Asserts$impl');
 let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
 
 class Equality extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Equality} */
+ static $create__() {
+  Equality.$clinit();
+  let $instance = new Equality();
+  $instance.$ctor__equality_Equality__();
+  return $instance;
+ }
+ 
+ $ctor__equality_Equality__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__() {
+  {
+   $Asserts.$assert(false == false);
+   $Asserts.$assert(0 != 1);
   }
-  /** @return {!Equality} */
-  static $create__() {
-    Equality.$clinit();
-    let $instance = new Equality();
-    $instance.$ctor__equality_Equality__();
-    return $instance;
+  {
+   $Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), j_l_Object.$create__()));
   }
-
-  $ctor__equality_Equality__() {
-    this.$ctor__java_lang_Object__();
+  {
+   $Asserts.$assert($Equality.$same(/**@type {?number}*/ ($Casts.$to(0, Double)), /**@type {?number}*/ ($Casts.$to(0, Double))));
   }
-
-  m_test__() {
-    {
-      $Asserts.$assert(false == false);
-      $Asserts.$assert(0 != 1);
-    }
-    {
-      $Asserts.$assert(
-          !$Equality.$same(j_l_Object.$create__(), j_l_Object.$create__()));
-    }
-    {
-      $Asserts.$assert($Equality.$same(
-          /**@type {?number}*/ ($Casts.$to(0, Double)),
-          /**@type {?number}*/ ($Casts.$to(0, Double))));
-    }
-    {
-      $Asserts.$assert($Equality.$same(
-          Float.m_valueOf__float(0), Float.m_valueOf__float(0)));
-    }
-    {
-      $Asserts.$assert(!$Equality.$same(null, j_l_Object.$create__()));
-      $Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));
-    }
+  {
+   $Asserts.$assert($Equality.$same(Float.m_valueOf__float(0), Float.m_valueOf__float(0)));
   }
-
-  static $clinit() {
-    Equality.$clinit = () => {};
-    Equality.$loadModules();
-    j_l_Object.$clinit();
+  {
+   $Asserts.$assert(!$Equality.$same(null, j_l_Object.$create__()));
+   $Asserts.$assert(!$Equality.$same(j_l_Object.$create__(), null));
   }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Equality;
-  }
-
-  static $loadModules() {
-    Double = goog.module.get('java.lang.Double$impl');
-    Float = goog.module.get('java.lang.Float$impl');
-    $Equality = goog.module.get('nativebootstrap.Equality$impl');
-    $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
-    $Casts = goog.module.get('vmbootstrap.Casts$impl');
-  }
+ }
+ 
+ static $clinit() {
+  Equality.$clinit = () =>{};
+  Equality.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Equality;
+ }
+ 
+ static $loadModules() {
+  Double = goog.module.get('java.lang.Double$impl');
+  Float = goog.module.get('java.lang.Float$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Asserts = goog.module.get('vmbootstrap.Asserts$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
 }
-$Util.$setClassMetadata(Equality, 'equality.Equality');
+$Util.$setClassMetadata(Equality, "equality.Equality");
 
 exports = Equality;
 

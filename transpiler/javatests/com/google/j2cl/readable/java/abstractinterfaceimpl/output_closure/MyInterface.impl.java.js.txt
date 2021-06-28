@@ -8,36 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('abstractinterfaceimpl.MyInterface.$Lam
  * @interface
  */
 class MyInterface {
-  /** @abstract @return {number} */
-  m_foo__() {}
-  /** @return {MyInterface} */
-  static $adapt(/** ?function():number */ fn) {
-    MyInterface.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    MyInterface.$clinit = () => {};
-    MyInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__abstractinterfaceimpl_MyInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__abstractinterfaceimpl_MyInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'abstractinterfaceimpl.MyInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract @return {number} */
+ m_foo__() {}
+ /** @return {MyInterface} */
+ static $adapt(/** ?function():number */ fn) {
+  MyInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  MyInterface.$clinit = () =>{};
+  MyInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__abstractinterfaceimpl_MyInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__abstractinterfaceimpl_MyInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('abstractinterfaceimpl.MyInterface.$LambdaAdaptor$impl');
+ }
 }
 MyInterface.$markImplementor(/**@type {Function}*/ (MyInterface));
-$Util.$setClassMetadataForInterface(
-    MyInterface, 'abstractinterfaceimpl.MyInterface');
+$Util.$setClassMetadataForInterface(MyInterface, "abstractinterfaceimpl.MyInterface");
 
 exports = MyInterface;
 

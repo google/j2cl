@@ -4,39 +4,39 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class NativeClass extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!NativeClass} */
-  static $create__() {
-    NativeClass.$clinit();
-    let $instance = new NativeClass();
-    $instance.$ctor__nativeinjection_NativeClass__();
-    return $instance;
-  }
-
-  $ctor__nativeinjection_NativeClass__() {
-    this.$ctor__java_lang_Object__();
-  }
-  // /** @return {?string} */
-  // native m_nativeInstanceMethod__()
-  // /** @return {NativeClass} */
-  // native static m_nativeStaticMethod__()
-
-  static $clinit() {
-    NativeClass.$clinit = () => {};
-    NativeClass.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof NativeClass;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!NativeClass} */
+ static $create__() {
+  NativeClass.$clinit();
+  let $instance = new NativeClass();
+  $instance.$ctor__nativeinjection_NativeClass__();
+  return $instance;
+ }
+ 
+ $ctor__nativeinjection_NativeClass__() {
+  this.$ctor__java_lang_Object__();
+ }
+ // /** @return {?string} */
+ // native m_nativeInstanceMethod__() 
+ // /** @return {NativeClass} */
+ // native static m_nativeStaticMethod__() 
+ 
+ static $clinit() {
+  NativeClass.$clinit = () =>{};
+  NativeClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof NativeClass;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(NativeClass, 'nativeinjection.NativeClass');
+$Util.$setClassMetadata(NativeClass, "nativeinjection.NativeClass");
 
 /* NATIVE.JS EPILOG */
 

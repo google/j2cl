@@ -12,39 +12,39 @@ let B = goog.forwardDeclare('bridgejsmethod.Main.B$impl');
  * @implements {M}
  */
 class N extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {Main}*/
-    this.$outer_this__bridgejsmethod_Main_N;
-  }
-
-  $ctor__bridgejsmethod_Main_N__bridgejsmethod_Main(/** Main */ $outer_this) {
-    this.$outer_this__bridgejsmethod_Main_N = $outer_this;
-    this.$ctor__java_lang_Object__();
-  }
-  /** @abstract @return {B} */
-  getB() {}
-  // Bridge method.
-  /** @override @return {B} */
-  m_getB__() {
-    return this.getB();
-  }
-
-  static $clinit() {
-    N.$clinit = () => {};
-    N.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof N;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {Main}*/
+  this.$outer_this__bridgejsmethod_Main_N;
+ }
+ 
+ $ctor__bridgejsmethod_Main_N__bridgejsmethod_Main(/** Main */ $outer_this) {
+  this.$outer_this__bridgejsmethod_Main_N = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ /** @abstract @return {B} */
+ getB() {}
+ //Bridge method.
+ /** @override @return {B} */
+ m_getB__() {
+  return this.getB();
+ }
+ 
+ static $clinit() {
+  N.$clinit = () =>{};
+  N.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof N;
+ }
+ 
+ static $loadModules() {}
 }
 M.$markImplementor(N);
-$Util.$setClassMetadata(N, 'bridgejsmethod.Main$N');
+$Util.$setClassMetadata(N, "bridgejsmethod.Main$N");
 
 exports = N;
 

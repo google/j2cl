@@ -10,37 +10,36 @@ let Number = goog.forwardDeclare('java.lang.Number$impl');
  * @implements {GenericInterface<(Number|number)>}
  */
 class GenericInterfaceImpl extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!GenericInterfaceImpl} */
-  static $create__() {
-    GenericInterfaceImpl.$clinit();
-    let $instance = new GenericInterfaceImpl();
-    $instance.$ctor__implementsgenericinterface_GenericInterfaceImpl__();
-    return $instance;
-  }
-
-  $ctor__implementsgenericinterface_GenericInterfaceImpl__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    GenericInterfaceImpl.$clinit = () => {};
-    GenericInterfaceImpl.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof GenericInterfaceImpl;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!GenericInterfaceImpl} */
+ static $create__() {
+  GenericInterfaceImpl.$clinit();
+  let $instance = new GenericInterfaceImpl();
+  $instance.$ctor__implementsgenericinterface_GenericInterfaceImpl__();
+  return $instance;
+ }
+ 
+ $ctor__implementsgenericinterface_GenericInterfaceImpl__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  GenericInterfaceImpl.$clinit = () =>{};
+  GenericInterfaceImpl.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericInterfaceImpl;
+ }
+ 
+ static $loadModules() {}
 }
 GenericInterface.$markImplementor(GenericInterfaceImpl);
-$Util.$setClassMetadata(
-    GenericInterfaceImpl, 'implementsgenericinterface.GenericInterfaceImpl');
+$Util.$setClassMetadata(GenericInterfaceImpl, "implementsgenericinterface.GenericInterfaceImpl");
 
 exports = GenericInterfaceImpl;
 

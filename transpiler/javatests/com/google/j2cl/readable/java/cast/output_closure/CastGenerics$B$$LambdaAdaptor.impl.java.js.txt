@@ -8,42 +8,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {B}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():void */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():void}*/
-    this.f_fn__cast_CastGenerics_B_$LambdaAdaptor;
-    this.$ctor__cast_CastGenerics_B_$LambdaAdaptor__cast_CastGenerics_B_$JsFunction(
-        fn);
+ 
+ constructor(/** ?function():void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():void}*/
+  this.f_fn__cast_CastGenerics_B_$LambdaAdaptor;
+  this.$ctor__cast_CastGenerics_B_$LambdaAdaptor__cast_CastGenerics_B_$JsFunction(fn);
+ }
+ 
+ $ctor__cast_CastGenerics_B_$LambdaAdaptor__cast_CastGenerics_B_$JsFunction(/** ?function():void */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__cast_CastGenerics_B_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ m_mB__() {
+  {
+   let $function = this.f_fn__cast_CastGenerics_B_$LambdaAdaptor;
+   $function();
   }
-
-  $ctor__cast_CastGenerics_B_$LambdaAdaptor__cast_CastGenerics_B_$JsFunction(
-      /** ?function():void */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__cast_CastGenerics_B_$LambdaAdaptor = fn;
-  }
-  /** @override */
-  m_mB__() {
-    {
-      let $function = this.f_fn__cast_CastGenerics_B_$LambdaAdaptor;
-      $function();
-    }
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 B.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata($LambdaAdaptor, 'cast.CastGenerics$B$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "cast.CastGenerics$B$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

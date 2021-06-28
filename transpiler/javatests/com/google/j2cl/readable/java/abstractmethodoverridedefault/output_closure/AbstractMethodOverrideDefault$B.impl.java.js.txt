@@ -9,37 +9,36 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {J}
  */
 class B extends A {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ 
+ $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B__() {
+  this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
+ }
+ /** @override */
+ m_bar__() {
+  if (false) {
+   this.m_bar__();
   }
-
-  $ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B__() {
-    this.$ctor__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A__();
-  }
-  /** @override */
-  m_bar__() {
-    if (false) {
-      this.m_bar__();
-    }
-  }
-
-  static $clinit() {
-    B.$clinit = () => {};
-    B.$loadModules();
-    A.$clinit();
-    J.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof B;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  B.$clinit = () =>{};
+  B.$loadModules();
+  A.$clinit();
+  J.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof B;
+ }
+ 
+ static $loadModules() {}
 }
 J.$markImplementor(B);
-$Util.$setClassMetadata(
-    B, 'abstractmethodoverridedefault.AbstractMethodOverrideDefault$B');
+$Util.$setClassMetadata(B, "abstractmethodoverridedefault.AbstractMethodOverrideDefault$B");
 
 exports = B;
 

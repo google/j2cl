@@ -4,45 +4,44 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class PublicInstanceFields extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {number}*/
-    this.f_a__publicinstancefields_PublicInstanceFields = 0;
-    /**@type {number}*/
-    this.f_b__publicinstancefields_PublicInstanceFields = 0;
-  }
-  /** @return {!PublicInstanceFields} */
-  static $create__() {
-    PublicInstanceFields.$clinit();
-    let $instance = new PublicInstanceFields();
-    $instance.$ctor__publicinstancefields_PublicInstanceFields__();
-    return $instance;
-  }
-
-  $ctor__publicinstancefields_PublicInstanceFields__() {
-    this.$ctor__java_lang_Object__();
-    this.$init___$p_publicinstancefields_PublicInstanceFields();
-  }
-  /** @private */
-  $init___$p_publicinstancefields_PublicInstanceFields() {
-    this.f_a__publicinstancefields_PublicInstanceFields = 1;
-  }
-
-  static $clinit() {
-    PublicInstanceFields.$clinit = () => {};
-    PublicInstanceFields.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof PublicInstanceFields;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_a__publicinstancefields_PublicInstanceFields = 0;
+  /**@type {number}*/
+  this.f_b__publicinstancefields_PublicInstanceFields = 0;
+ }
+ /** @return {!PublicInstanceFields} */
+ static $create__() {
+  PublicInstanceFields.$clinit();
+  let $instance = new PublicInstanceFields();
+  $instance.$ctor__publicinstancefields_PublicInstanceFields__();
+  return $instance;
+ }
+ 
+ $ctor__publicinstancefields_PublicInstanceFields__() {
+  this.$ctor__java_lang_Object__();
+  this.$init___$p_publicinstancefields_PublicInstanceFields();
+ }
+ /** @private */
+ $init___$p_publicinstancefields_PublicInstanceFields() {
+  this.f_a__publicinstancefields_PublicInstanceFields = 1;
+ }
+ 
+ static $clinit() {
+  PublicInstanceFields.$clinit = () =>{};
+  PublicInstanceFields.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PublicInstanceFields;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    PublicInstanceFields, 'publicinstancefields.PublicInstanceFields');
+$Util.$setClassMetadata(PublicInstanceFields, "publicinstancefields.PublicInstanceFields");
 
 exports = PublicInstanceFields;
 

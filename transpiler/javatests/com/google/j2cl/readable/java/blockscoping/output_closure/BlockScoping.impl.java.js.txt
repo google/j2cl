@@ -4,40 +4,44 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class BlockScoping extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!BlockScoping} */
+ static $create__() {
+  BlockScoping.$clinit();
+  let $instance = new BlockScoping();
+  $instance.$ctor__blockscoping_BlockScoping__();
+  return $instance;
+ }
+ 
+ $ctor__blockscoping_BlockScoping__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_main__() {
+  {
+   let i = 0;
   }
-  /** @return {!BlockScoping} */
-  static $create__() {
-    BlockScoping.$clinit();
-    let $instance = new BlockScoping();
-    $instance.$ctor__blockscoping_BlockScoping__();
-    return $instance;
+  {
+   let i_1 = 1;
   }
-
-  $ctor__blockscoping_BlockScoping__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_main__() {
-    { let i = 0; }
-    { let i_1 = 1; }
-  }
-
-  static $clinit() {
-    BlockScoping.$clinit = () => {};
-    BlockScoping.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof BlockScoping;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  BlockScoping.$clinit = () =>{};
+  BlockScoping.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof BlockScoping;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(BlockScoping, 'blockscoping.BlockScoping');
+$Util.$setClassMetadata(BlockScoping, "blockscoping.BlockScoping");
 
 exports = BlockScoping;
 

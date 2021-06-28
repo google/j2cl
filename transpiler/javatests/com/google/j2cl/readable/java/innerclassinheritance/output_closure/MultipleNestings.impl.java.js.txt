@@ -4,38 +4,37 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class MultipleNestings extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!MultipleNestings} */
-  static $create__() {
-    MultipleNestings.$clinit();
-    let $instance = new MultipleNestings();
-    $instance.$ctor__innerclassinheritance_MultipleNestings__();
-    return $instance;
-  }
-
-  $ctor__innerclassinheritance_MultipleNestings__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_funInM__() {}
-
-  static $clinit() {
-    MultipleNestings.$clinit = () => {};
-    MultipleNestings.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof MultipleNestings;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!MultipleNestings} */
+ static $create__() {
+  MultipleNestings.$clinit();
+  let $instance = new MultipleNestings();
+  $instance.$ctor__innerclassinheritance_MultipleNestings__();
+  return $instance;
+ }
+ 
+ $ctor__innerclassinheritance_MultipleNestings__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_funInM__() {}
+ 
+ static $clinit() {
+  MultipleNestings.$clinit = () =>{};
+  MultipleNestings.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MultipleNestings;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(
-    MultipleNestings, 'innerclassinheritance.MultipleNestings');
+$Util.$setClassMetadata(MultipleNestings, "innerclassinheritance.MultipleNestings");
 
 exports = MultipleNestings;
 

@@ -8,73 +8,73 @@ let Parent = goog.forwardDeclare('instancejsmethods.Parent$impl');
 let SuperParent = goog.forwardDeclare('instancejsmethods.SuperParent$impl');
 
 class Main extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Main} */
-  static $create__() {
-    Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__instancejsmethods_Main__();
-    return $instance;
-  }
-
-  $ctor__instancejsmethods_Main__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_testCallBySuperParent__() {
-    let sp = SuperParent.$create__();
-    let p = Parent.$create__();
-    let c = Child.$create__();
-    let pp = Parent.$create__();
-    let cc = Child.$create__();
-    let intf = Child.$create__();
-    sp.m_fun__int__int(12, 35);
-    sp.m_bar__int__int(6, 7);
-    p.m_fun__int__int(12, 35);
-    p.m_bar__int__int(6, 7);
-    c.m_fun__int__int(12, 35);
-    c.m_bar__int__int(6, 7);
-    pp.myFoo(1);
-    cc.myFoo(1);
-    intf.m_intfFoo__();
-  }
-
-  static m_testCallByConcreteType__() {
-    Main.$clinit();
-    let sp = SuperParent.$create__();
-    let p = Parent.$create__();
-    let c = Child.$create__();
-    sp.m_fun__int__int(12, 35);
-    sp.m_bar__int__int(6, 7);
-    p.sum(12, 35);
-    p.bar(6, 7);
-    p.myFoo(1);
-    c.sum(12, 35);
-    c.bar(6, 7);
-    c.myFoo(1);
-    c.intfFoo();
-  }
-
-  static $clinit() {
-    Main.$clinit = () => {};
-    Main.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Main;
-  }
-
-  static $loadModules() {
-    Child = goog.module.get('instancejsmethods.Child$impl');
-    Parent = goog.module.get('instancejsmethods.Parent$impl');
-    SuperParent = goog.module.get('instancejsmethods.SuperParent$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__instancejsmethods_Main__();
+  return $instance;
+ }
+ 
+ $ctor__instancejsmethods_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_testCallBySuperParent__() {
+  let sp = SuperParent.$create__();
+  let p = Parent.$create__();
+  let c = Child.$create__();
+  let pp = Parent.$create__();
+  let cc = Child.$create__();
+  let intf = Child.$create__();
+  sp.m_fun__int__int(12, 35);
+  sp.m_bar__int__int(6, 7);
+  p.m_fun__int__int(12, 35);
+  p.m_bar__int__int(6, 7);
+  c.m_fun__int__int(12, 35);
+  c.m_bar__int__int(6, 7);
+  pp.myFoo(1);
+  cc.myFoo(1);
+  intf.m_intfFoo__();
+ }
+ 
+ static m_testCallByConcreteType__() {
+  Main.$clinit();
+  let sp = SuperParent.$create__();
+  let p = Parent.$create__();
+  let c = Child.$create__();
+  sp.m_fun__int__int(12, 35);
+  sp.m_bar__int__int(6, 7);
+  p.sum(12, 35);
+  p.bar(6, 7);
+  p.myFoo(1);
+  c.sum(12, 35);
+  c.bar(6, 7);
+  c.myFoo(1);
+  c.intfFoo();
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  Child = goog.module.get('instancejsmethods.Child$impl');
+  Parent = goog.module.get('instancejsmethods.Parent$impl');
+  SuperParent = goog.module.get('instancejsmethods.SuperParent$impl');
+ }
 }
-$Util.$setClassMetadata(Main, 'instancejsmethods.Main');
+$Util.$setClassMetadata(Main, "instancejsmethods.Main");
 
 exports = Main;
 

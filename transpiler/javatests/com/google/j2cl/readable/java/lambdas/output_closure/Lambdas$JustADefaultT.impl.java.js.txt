@@ -7,33 +7,30 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @template T
  */
 class JustADefaultT {
-  /** @abstract */
-  m_method__java_lang_Object(/** T */ t) {}
-  /** @template T */
-  static m_method__$default__lambdas_Lambdas_JustADefaultT__java_lang_Object(
-      /** !JustADefaultT<T> */ $thisArg, /** T */ t) {
-    JustADefaultT.$clinit();
-  }
-
-  static $clinit() {
-    JustADefaultT.$clinit = () => {};
-    JustADefaultT.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__lambdas_Lambdas_JustADefaultT = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__lambdas_Lambdas_JustADefaultT;
-  }
-
-  static $loadModules() {}
+ /** @abstract */
+ m_method__java_lang_Object(/** T */ t) {}
+ /** @template T */
+ static m_method__$default__lambdas_Lambdas_JustADefaultT__java_lang_Object(/** !JustADefaultT<T> */ $thisArg, /** T */ t) {
+  JustADefaultT.$clinit();
+ }
+ 
+ static $clinit() {
+  JustADefaultT.$clinit = () =>{};
+  JustADefaultT.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__lambdas_Lambdas_JustADefaultT = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__lambdas_Lambdas_JustADefaultT;
+ }
+ 
+ static $loadModules() {}
 }
 JustADefaultT.$markImplementor(/**@type {Function}*/ (JustADefaultT));
-$Util.$setClassMetadataForInterface(
-    JustADefaultT, 'lambdas.Lambdas$JustADefaultT');
+$Util.$setClassMetadataForInterface(JustADefaultT, "lambdas.Lambdas$JustADefaultT");
 
 exports = JustADefaultT;
 

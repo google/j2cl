@@ -8,37 +8,33 @@ let $LambdaAdaptor = goog.forwardDeclare('libraryinfo.Main.FunctionnalInterface.
  * @interface
  */
 class FunctionnalInterface {
-  /** @abstract */
-  m_foo__() {}
-  /** @return {FunctionnalInterface} */
-  static $adapt(/** ?function():void */ fn) {
-    FunctionnalInterface.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    FunctionnalInterface.$clinit = () => {};
-    FunctionnalInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__libraryinfo_Main_FunctionnalInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__libraryinfo_Main_FunctionnalInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor = goog.module.get(
-        'libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract */
+ m_foo__() {}
+ /** @return {FunctionnalInterface} */
+ static $adapt(/** ?function():void */ fn) {
+  FunctionnalInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  FunctionnalInterface.$clinit = () =>{};
+  FunctionnalInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__libraryinfo_Main_FunctionnalInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__libraryinfo_Main_FunctionnalInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('libraryinfo.Main.FunctionnalInterface.$LambdaAdaptor$impl');
+ }
 }
-FunctionnalInterface.$markImplementor(
-    /**@type {Function}*/ (FunctionnalInterface));
-$Util.$setClassMetadataForInterface(
-    FunctionnalInterface, 'libraryinfo.Main$FunctionnalInterface');
+FunctionnalInterface.$markImplementor(/**@type {Function}*/ (FunctionnalInterface));
+$Util.$setClassMetadataForInterface(FunctionnalInterface, "libraryinfo.Main$FunctionnalInterface");
 
 exports = FunctionnalInterface;
 

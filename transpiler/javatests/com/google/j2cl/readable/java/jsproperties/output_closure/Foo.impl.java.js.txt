@@ -4,57 +4,57 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Foo extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Foo} */
-  static $create__() {
-    Foo.$clinit();
-    let $instance = new Foo();
-    $instance.$ctor__jsproperties_Foo__();
-    return $instance;
-  }
-
-  $ctor__jsproperties_Foo__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {number} */
-  static get a() {
-    Foo.$clinit();
-    return Foo.f_f__jsproperties_Foo_ + 1 | 0;
-  }
-
-  static set a(/** number */ x) {
-    Foo.$clinit();
-    Foo.f_f__jsproperties_Foo_ = x + 2 | 0;
-  }
-  /** @return {number} */
-  static get abc() {
-    Foo.$clinit();
-    return Foo.f_f__jsproperties_Foo_ + 3 | 0;
-  }
-
-  static set abc(/** number */ x) {
-    Foo.$clinit();
-    Foo.f_f__jsproperties_Foo_ = x + 4 | 0;
-  }
-
-  static $clinit() {
-    Foo.$clinit = () => {};
-    Foo.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Foo;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Foo} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__jsproperties_Foo__();
+  return $instance;
+ }
+ 
+ $ctor__jsproperties_Foo__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {number} */
+ static get a() {
+  Foo.$clinit();
+  return Foo.f_f__jsproperties_Foo_ + 1 | 0;
+ }
+ 
+ static set a(/** number */ x) {
+  Foo.$clinit();
+  Foo.f_f__jsproperties_Foo_ = x + 2 | 0;
+ }
+ /** @return {number} */
+ static get abc() {
+  Foo.$clinit();
+  return Foo.f_f__jsproperties_Foo_ + 3 | 0;
+ }
+ 
+ static set abc(/** number */ x) {
+  Foo.$clinit();
+  Foo.f_f__jsproperties_Foo_ = x + 4 | 0;
+ }
+ 
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ static $loadModules() {}
 }
 /**@type {number}*/
 Foo.f_f__jsproperties_Foo_ = 0;
-$Util.$setClassMetadata(Foo, 'jsproperties.Foo');
+$Util.$setClassMetadata(Foo, "jsproperties.Foo");
 
 exports = Foo;
 

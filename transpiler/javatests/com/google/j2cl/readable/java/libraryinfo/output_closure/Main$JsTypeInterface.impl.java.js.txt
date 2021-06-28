@@ -6,30 +6,28 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class JsTypeInterface {
-  /** @abstract */
-  foo() {}
-  /** @abstract */
-  bar() {}
-
-  static $clinit() {
-    JsTypeInterface.$clinit = () => {};
-    JsTypeInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__libraryinfo_Main_JsTypeInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__libraryinfo_Main_JsTypeInterface;
-  }
-
-  static $loadModules() {}
+ /** @abstract */
+ foo() {}
+ /** @abstract */
+ bar() {}
+ 
+ static $clinit() {
+  JsTypeInterface.$clinit = () =>{};
+  JsTypeInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__libraryinfo_Main_JsTypeInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__libraryinfo_Main_JsTypeInterface;
+ }
+ 
+ static $loadModules() {}
 }
 JsTypeInterface.$markImplementor(/**@type {Function}*/ (JsTypeInterface));
-$Util.$setClassMetadataForInterface(
-    JsTypeInterface, 'libraryinfo.Main$JsTypeInterface');
+$Util.$setClassMetadataForInterface(JsTypeInterface, "libraryinfo.Main$JsTypeInterface");
 
 exports = JsTypeInterface;
 

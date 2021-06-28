@@ -9,43 +9,39 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {Getable<T>}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():T */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():T}*/
-    this.f_fn__intersectiontype_Getable_$LambdaAdaptor;
-    this.$ctor__intersectiontype_Getable_$LambdaAdaptor__intersectiontype_Getable_$JsFunction(
-        fn);
-  }
-
-  $ctor__intersectiontype_Getable_$LambdaAdaptor__intersectiontype_Getable_$JsFunction(
-      /** ?function():T */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__intersectiontype_Getable_$LambdaAdaptor = fn;
-  }
-  /** @override @return {T} */
-  m_get__() {
-    let /** ?function():T */ $function;
-    return (
-        $function = this.f_fn__intersectiontype_Getable_$LambdaAdaptor,
-        $function());
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ 
+ constructor(/** ?function():T */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():T}*/
+  this.f_fn__intersectiontype_Getable_$LambdaAdaptor;
+  this.$ctor__intersectiontype_Getable_$LambdaAdaptor__intersectiontype_Getable_$JsFunction(fn);
+ }
+ 
+ $ctor__intersectiontype_Getable_$LambdaAdaptor__intersectiontype_Getable_$JsFunction(/** ?function():T */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__intersectiontype_Getable_$LambdaAdaptor = fn;
+ }
+ /** @override @return {T} */
+ m_get__() {
+  let /** ?function():T */ $function;
+  return ($function = this.f_fn__intersectiontype_Getable_$LambdaAdaptor, $function());
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 Getable.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor, 'intersectiontype.Getable$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "intersectiontype.Getable$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

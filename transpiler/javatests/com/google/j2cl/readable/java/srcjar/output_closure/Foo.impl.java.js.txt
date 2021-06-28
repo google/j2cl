@@ -4,35 +4,35 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class Foo extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Foo} */
-  static $create__() {
-    Foo.$clinit();
-    let $instance = new Foo();
-    $instance.$ctor__srcjar_Foo__();
-    return $instance;
-  }
-
-  $ctor__srcjar_Foo__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  static $clinit() {
-    Foo.$clinit = () => {};
-    Foo.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Foo;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Foo} */
+ static $create__() {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__srcjar_Foo__();
+  return $instance;
+ }
+ 
+ $ctor__srcjar_Foo__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata(Foo, 'srcjar.Foo');
+$Util.$setClassMetadata(Foo, "srcjar.Foo");
 
 exports = Foo;
 

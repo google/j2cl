@@ -7,54 +7,54 @@ let MyJsType = goog.forwardDeclare('jsbridgeaccidentaloverride.MyJsType$impl');
 let SubJsType = goog.forwardDeclare('jsbridgeaccidentaloverride.SubJsType$impl');
 
 class Main extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!Main} */
-  static $create__() {
-    Main.$clinit();
-    let $instance = new Main();
-    $instance.$ctor__jsbridgeaccidentaloverride_Main__();
-    return $instance;
-  }
-
-  $ctor__jsbridgeaccidentaloverride_Main__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__() {
-    let a = MyJsType.$create__();
-    let b = SubJsType.$create__();
-    let c = SubJsType.$create__();
-    let d = SubJsType.$create__();
-    a.foo(1);
-    b.foo(1);
-    c.m_foo__int(1);
-    a.bar(1);
-    b.bar(1);
-    c.m_bar__int(1);
-    a.fun(1);
-    b.fun(1);
-    d.m_fun__int(1);
-  }
-
-  static $clinit() {
-    Main.$clinit = () => {};
-    Main.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof Main;
-  }
-
-  static $loadModules() {
-    MyJsType = goog.module.get('jsbridgeaccidentaloverride.MyJsType$impl');
-    SubJsType = goog.module.get('jsbridgeaccidentaloverride.SubJsType$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Main} */
+ static $create__() {
+  Main.$clinit();
+  let $instance = new Main();
+  $instance.$ctor__jsbridgeaccidentaloverride_Main__();
+  return $instance;
+ }
+ 
+ $ctor__jsbridgeaccidentaloverride_Main__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__() {
+  let a = MyJsType.$create__();
+  let b = SubJsType.$create__();
+  let c = SubJsType.$create__();
+  let d = SubJsType.$create__();
+  a.foo(1);
+  b.foo(1);
+  c.m_foo__int(1);
+  a.bar(1);
+  b.bar(1);
+  c.m_bar__int(1);
+  a.fun(1);
+  b.fun(1);
+  d.m_fun__int(1);
+ }
+ 
+ static $clinit() {
+  Main.$clinit = () =>{};
+  Main.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Main;
+ }
+ 
+ static $loadModules() {
+  MyJsType = goog.module.get('jsbridgeaccidentaloverride.MyJsType$impl');
+  SubJsType = goog.module.get('jsbridgeaccidentaloverride.SubJsType$impl');
+ }
 }
-$Util.$setClassMetadata(Main, 'jsbridgeaccidentaloverride.Main');
+$Util.$setClassMetadata(Main, "jsbridgeaccidentaloverride.Main");
 
 exports = Main;
 

@@ -11,31 +11,29 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {List<T>}
  */
 class AbstractList extends AbstractCollection {
-  /** @protected */
-  constructor() {
-    super();
-  }
-
-  $ctor__multipleabstractparents_MultipleAbstractParents_AbstractList__() {
-    this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractCollection__();
-  }
-
-  static $clinit() {
-    AbstractList.$clinit = () => {};
-    AbstractList.$loadModules();
-    AbstractCollection.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof AbstractList;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ 
+ $ctor__multipleabstractparents_MultipleAbstractParents_AbstractList__() {
+  this.$ctor__multipleabstractparents_MultipleAbstractParents_AbstractCollection__();
+ }
+ 
+ static $clinit() {
+  AbstractList.$clinit = () =>{};
+  AbstractList.$loadModules();
+  AbstractCollection.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AbstractList;
+ }
+ 
+ static $loadModules() {}
 }
 List.$markImplementor(AbstractList);
-$Util.$setClassMetadata(
-    AbstractList,
-    'multipleabstractparents.MultipleAbstractParents$AbstractList');
+$Util.$setClassMetadata(AbstractList, "multipleabstractparents.MultipleAbstractParents$AbstractList");
 
 exports = AbstractList;
 

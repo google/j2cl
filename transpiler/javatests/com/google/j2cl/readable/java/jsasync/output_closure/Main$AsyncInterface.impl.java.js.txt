@@ -11,37 +11,34 @@ let $LambdaAdaptor = goog.forwardDeclare('jsasync.Main.AsyncInterface.$LambdaAda
  * @extends {BaseInterface}
  */
 class AsyncInterface {
-  /** @abstract @override @return {IThenable<Integer>} */
-  m_asyncCall__() {}
-  /** @return {AsyncInterface} */
-  static $adapt(/** ?function():IThenable<Integer> */ fn) {
-    AsyncInterface.$clinit();
-    return new $LambdaAdaptor(fn);
-  }
-
-  static $clinit() {
-    AsyncInterface.$clinit = () => {};
-    AsyncInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    BaseInterface.$markImplementor(ctor);
-    ctor.prototype.$implements__jsasync_Main_AsyncInterface = true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__jsasync_Main_AsyncInterface;
-  }
-
-  static $loadModules() {
-    $LambdaAdaptor =
-        goog.module.get('jsasync.Main.AsyncInterface.$LambdaAdaptor$impl');
-  }
+ /** @abstract @override @return {IThenable<Integer>} */
+ m_asyncCall__() {}
+ /** @return {AsyncInterface} */
+ static $adapt(/** ?function():IThenable<Integer> */ fn) {
+  AsyncInterface.$clinit();
+  return new $LambdaAdaptor(fn);
+ }
+ 
+ static $clinit() {
+  AsyncInterface.$clinit = () =>{};
+  AsyncInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  BaseInterface.$markImplementor(ctor);
+  ctor.prototype.$implements__jsasync_Main_AsyncInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__jsasync_Main_AsyncInterface;
+ }
+ 
+ static $loadModules() {
+  $LambdaAdaptor = goog.module.get('jsasync.Main.AsyncInterface.$LambdaAdaptor$impl');
+ }
 }
 AsyncInterface.$markImplementor(/**@type {Function}*/ (AsyncInterface));
-$Util.$setClassMetadataForInterface(
-    AsyncInterface, 'jsasync.Main$AsyncInterface');
+$Util.$setClassMetadataForInterface(AsyncInterface, "jsasync.Main$AsyncInterface");
 
 exports = AsyncInterface;
 

@@ -6,43 +6,43 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let A = goog.forwardDeclare('mixednestings.MixedNestings.A$impl');
 
 class MixedNestings extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!MixedNestings} */
-  static $create__() {
-    MixedNestings.$clinit();
-    let $instance = new MixedNestings();
-    $instance.$ctor__mixednestings_MixedNestings__();
-    return $instance;
-  }
-
-  $ctor__mixednestings_MixedNestings__() {
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_mm__() {}
-
-  m_test__() {
-    A.$create__mixednestings_MixedNestings(this).m_a__();
-  }
-
-  static $clinit() {
-    MixedNestings.$clinit = () => {};
-    MixedNestings.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof MixedNestings;
-  }
-
-  static $loadModules() {
-    A = goog.module.get('mixednestings.MixedNestings.A$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!MixedNestings} */
+ static $create__() {
+  MixedNestings.$clinit();
+  let $instance = new MixedNestings();
+  $instance.$ctor__mixednestings_MixedNestings__();
+  return $instance;
+ }
+ 
+ $ctor__mixednestings_MixedNestings__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_mm__() {}
+ 
+ m_test__() {
+  A.$create__mixednestings_MixedNestings(this).m_a__();
+ }
+ 
+ static $clinit() {
+  MixedNestings.$clinit = () =>{};
+  MixedNestings.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MixedNestings;
+ }
+ 
+ static $loadModules() {
+  A = goog.module.get('mixednestings.MixedNestings.A$impl');
+ }
 }
-$Util.$setClassMetadata(MixedNestings, 'mixednestings.MixedNestings');
+$Util.$setClassMetadata(MixedNestings, "mixednestings.MixedNestings");
 
 exports = MixedNestings;
 

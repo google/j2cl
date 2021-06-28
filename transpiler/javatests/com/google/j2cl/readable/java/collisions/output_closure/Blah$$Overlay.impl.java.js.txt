@@ -3,18 +3,19 @@ goog.module('collisions.Blah.$Overlay$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 class $Overlay {
-  static $clinit() {
-    $Overlay.$clinit = () => {};
-    $Overlay.$loadModules();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof String;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  $Overlay.$clinit = () =>{};
+  $Overlay.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof String;
+ }
+ 
+ static $loadModules() {}
 }
-$Util.$setClassMetadata($Overlay, 'String');
+$Util.$setClassMetadata($Overlay, "String");
 
 exports = $Overlay;
 

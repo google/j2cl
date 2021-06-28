@@ -7,51 +7,44 @@ let Parent = goog.forwardDeclare('qualifiedsupercall.Parent$impl');
 let QualifiedSuperCall = goog.forwardDeclare('qualifiedsupercall.QualifiedSuperCall$impl');
 
 class InnerClass extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-    /**@type {QualifiedSuperCall}*/
-    this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass;
-  }
-  /** @return {!InnerClass} */
-  static $create__qualifiedsupercall_QualifiedSuperCall(
-      /** QualifiedSuperCall */ $outer_this) {
-    InnerClass.$clinit();
-    let $instance = new InnerClass();
-    $instance
-        .$ctor__qualifiedsupercall_QualifiedSuperCall_InnerClass__qualifiedsupercall_QualifiedSuperCall(
-            $outer_this);
-    return $instance;
-  }
-
-  $ctor__qualifiedsupercall_QualifiedSuperCall_InnerClass__qualifiedsupercall_QualifiedSuperCall(
-      /** QualifiedSuperCall */ $outer_this) {
-    this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass =
-        $outer_this;
-    this.$ctor__java_lang_Object__();
-  }
-
-  m_test__() {
-    Parent.prototype.m_fun__.call(
-        this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass);
-  }
-
-  static $clinit() {
-    InnerClass.$clinit = () => {};
-    InnerClass.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof InnerClass;
-  }
-
-  static $loadModules() {
-    Parent = goog.module.get('qualifiedsupercall.Parent$impl');
-  }
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {QualifiedSuperCall}*/
+  this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass;
+ }
+ /** @return {!InnerClass} */
+ static $create__qualifiedsupercall_QualifiedSuperCall(/** QualifiedSuperCall */ $outer_this) {
+  InnerClass.$clinit();
+  let $instance = new InnerClass();
+  $instance.$ctor__qualifiedsupercall_QualifiedSuperCall_InnerClass__qualifiedsupercall_QualifiedSuperCall($outer_this);
+  return $instance;
+ }
+ 
+ $ctor__qualifiedsupercall_QualifiedSuperCall_InnerClass__qualifiedsupercall_QualifiedSuperCall(/** QualifiedSuperCall */ $outer_this) {
+  this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass = $outer_this;
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_test__() {
+  Parent.prototype.m_fun__.call(this.$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass);
+ }
+ 
+ static $clinit() {
+  InnerClass.$clinit = () =>{};
+  InnerClass.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InnerClass;
+ }
+ 
+ static $loadModules() {
+  Parent = goog.module.get('qualifiedsupercall.Parent$impl');
+ }
 }
-$Util.$setClassMetadata(
-    InnerClass, 'qualifiedsupercall.QualifiedSuperCall$InnerClass');
+$Util.$setClassMetadata(InnerClass, "qualifiedsupercall.QualifiedSuperCall$InnerClass");
 
 exports = InnerClass;
 

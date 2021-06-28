@@ -8,46 +8,41 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {JsAccessibleFunctionnalInterface}
  */
 class $LambdaAdaptor extends j_l_Object {
-  constructor(/** ?function():void */ fn) {
-    $LambdaAdaptor.$clinit();
-    super();
-    /**@type {?function():void}*/
-    this.f_fn__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor;
-    this.$ctor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$JsFunction(
-        fn);
+ 
+ constructor(/** ?function():void */ fn) {
+  $LambdaAdaptor.$clinit();
+  super();
+  /**@type {?function():void}*/
+  this.f_fn__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor;
+  this.$ctor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$JsFunction(fn);
+ }
+ 
+ $ctor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$JsFunction(/** ?function():void */ fn) {
+  this.$ctor__java_lang_Object__();
+  this.f_fn__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor = fn;
+ }
+ /** @override */
+ accessibleFunctionalInterfaceMethod() {
+  {
+   let $function = this.f_fn__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor;
+   $function();
   }
-
-  $ctor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor__libraryinfo_Main_JsAccessibleFunctionnalInterface_$JsFunction(
-      /** ?function():void */ fn) {
-    this.$ctor__java_lang_Object__();
-    this.f_fn__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor =
-        fn;
-  }
-  /** @override */
-  accessibleFunctionalInterfaceMethod() {
-    {
-      let $function =
-          this.f_fn__libraryinfo_Main_JsAccessibleFunctionnalInterface_$LambdaAdaptor;
-      $function();
-    }
-  }
-
-  static $clinit() {
-    $LambdaAdaptor.$clinit = () => {};
-    $LambdaAdaptor.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof $LambdaAdaptor;
-  }
-
-  static $loadModules() {}
+ }
+ 
+ static $clinit() {
+  $LambdaAdaptor.$clinit = () =>{};
+  $LambdaAdaptor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $LambdaAdaptor;
+ }
+ 
+ static $loadModules() {}
 }
 JsAccessibleFunctionnalInterface.$markImplementor($LambdaAdaptor);
-$Util.$setClassMetadata(
-    $LambdaAdaptor,
-    'libraryinfo.Main$JsAccessibleFunctionnalInterface$$LambdaAdaptor');
+$Util.$setClassMetadata($LambdaAdaptor, "libraryinfo.Main$JsAccessibleFunctionnalInterface$$LambdaAdaptor");
 
 exports = $LambdaAdaptor;
 

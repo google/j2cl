@@ -6,26 +6,24 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @interface
  */
 class RegularInterface {
-  static $clinit() {
-    RegularInterface.$clinit = () => {};
-    RegularInterface.$loadModules();
-  }
-
-  static $markImplementor(/** Function */ ctor) {
-    ctor.prototype.$implements__markimplementornativetypes_RegularInterface =
-        true;
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance != null &&
-        !!instance.$implements__markimplementornativetypes_RegularInterface;
-  }
-
-  static $loadModules() {}
+ 
+ static $clinit() {
+  RegularInterface.$clinit = () =>{};
+  RegularInterface.$loadModules();
+ }
+ 
+ static $markImplementor(/** Function */ ctor) {
+  ctor.prototype.$implements__markimplementornativetypes_RegularInterface = true;
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance != null && !!instance.$implements__markimplementornativetypes_RegularInterface;
+ }
+ 
+ static $loadModules() {}
 }
 RegularInterface.$markImplementor(/**@type {Function}*/ (RegularInterface));
-$Util.$setClassMetadataForInterface(
-    RegularInterface, 'markimplementornativetypes.RegularInterface');
+$Util.$setClassMetadataForInterface(RegularInterface, "markimplementornativetypes.RegularInterface");
 
 exports = RegularInterface;
 

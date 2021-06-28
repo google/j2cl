@@ -8,53 +8,53 @@ const $Util = goog.require('nativebootstrap.Util$impl');
  * @implements {OtherInterface}
  */
 class MyJsType extends j_l_Object {
-  /** @protected */
-  constructor() {
-    super();
-  }
-  /** @return {!MyJsType} */
-  static $create__() {
-    MyJsType.$clinit();
-    let $instance = new MyJsType();
-    $instance.$ctor__jsbridgeaccidentaloverride_MyJsType__();
-    return $instance;
-  }
-
-  $ctor__jsbridgeaccidentaloverride_MyJsType__() {
-    this.$ctor__java_lang_Object__();
-  }
-  /** @return {number} */
-  foo(/** number */ a) {
-    return a;
-  }
-  /** @return {number} */
-  bar(/** number */ a) {
-    return a + 1 | 0;
-  }
-  /** @return {number} */
-  fun(/** number */ a) {
-    return a - 1 | 0;
-  }
-  // Bridge method.
-  /** @override @return {number} */
-  m_fun__int(/** number */ arg0) {
-    return this.fun(arg0);
-  }
-
-  static $clinit() {
-    MyJsType.$clinit = () => {};
-    MyJsType.$loadModules();
-    j_l_Object.$clinit();
-  }
-  /** @return {boolean} */
-  static $isInstance(/** ? */ instance) {
-    return instance instanceof MyJsType;
-  }
-
-  static $loadModules() {}
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!MyJsType} */
+ static $create__() {
+  MyJsType.$clinit();
+  let $instance = new MyJsType();
+  $instance.$ctor__jsbridgeaccidentaloverride_MyJsType__();
+  return $instance;
+ }
+ 
+ $ctor__jsbridgeaccidentaloverride_MyJsType__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @return {number} */
+ foo(/** number */ a) {
+  return a;
+ }
+ /** @return {number} */
+ bar(/** number */ a) {
+  return a + 1 | 0;
+ }
+ /** @return {number} */
+ fun(/** number */ a) {
+  return a - 1 | 0;
+ }
+ //Bridge method.
+ /** @override @return {number} */
+ m_fun__int(/** number */ arg0) {
+  return this.fun(arg0);
+ }
+ 
+ static $clinit() {
+  MyJsType.$clinit = () =>{};
+  MyJsType.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyJsType;
+ }
+ 
+ static $loadModules() {}
 }
 OtherInterface.$markImplementor(MyJsType);
-$Util.$setClassMetadata(MyJsType, 'jsbridgeaccidentaloverride.MyJsType');
+$Util.$setClassMetadata(MyJsType, "jsbridgeaccidentaloverride.MyJsType");
 
 exports = MyJsType;
 
