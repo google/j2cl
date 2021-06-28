@@ -495,7 +495,7 @@ public class JavaScriptImplGenerator extends JavaScriptGenerator {
   private void renderExports() {
     sourceBuilder.newLine();
     sourceBuilder.appendLines("exports = " + environment.aliasForType(type.getDeclaration()) + ";");
-    // TODO(b/77961191): add a new line once the bug is resolved.
+    sourceBuilder.newLine();
   }
 
 }

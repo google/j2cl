@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.backend.closure;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
@@ -52,11 +51,6 @@ public class ReadableSourceMapGenerator {
 
     List<Entry<SourcePosition, SourcePosition>> entries =
         new ArrayList<>(javaSourcePositionByOutputSourcePosition.entrySet());
-    // remove the EOF marker.
-    SourcePosition eofMarker = entries.get(entries.size() - 1).getValue();
-    // Make sure we are not removing a meaninful mapping instead of the eofMarker.
-    checkState(eofMarker.getEndFilePosition().equals(eofMarker.getStartFilePosition()));
-    entries.remove(entries.size() - 1);
 
     List<String> javaScriptSourceLines =
         Arrays.asList(javaScriptImplementationFileContents.split("\n"));
