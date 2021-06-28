@@ -42,6 +42,7 @@ import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
 import com.google.j2cl.transpiler.ast.UnaryExpression;
+import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -221,6 +222,14 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitTypeLiteral(TypeLiteral typeLiteral) {
             if (verifyForWasm) {
+              throw new IllegalStateException();
+            }
+          }
+
+          @Override
+          public void exitVariableDeclarationExpression(
+              VariableDeclarationExpression variableDeclarationExpression) {
+            if (variableDeclarationExpression.getFragments().isEmpty()) {
               throw new IllegalStateException();
             }
           }
