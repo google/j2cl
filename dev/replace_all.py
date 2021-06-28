@@ -17,6 +17,10 @@ import argparse
 import os
 import re
 import subprocess
+import tempfile
+import time
+from subprocess import PIPE
+from subprocess import Popen
 
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/"
 READABLE_TARGET_PATTERN = JAVA_DIR + "..."
@@ -69,7 +73,7 @@ def _get_dirs_from_blaze_query(rules_filter):
       "blaze", "query",
       "filter('%s', %s)" % (rules_filter, READABLE_TARGET_PATTERN),
       "--output=package"
-  ]).split("\n")
+  ]).splitlines()
   return list(filter(bool, dirs))
 
 
@@ -138,29 +142,34 @@ def replace_transpiled_js(readable_dirs):
   """Copy and reformat and replace with Blaze built JS."""
 
   for readable_dir in readable_dirs:
-    zip_file_path = "blaze-bin/%s/readable.js.zip" % readable_dir
-    output = readable_dir + "/output_closure"
+    with tempfile.TemporaryDirectory() as tmpdirname:
+      zip_file_path = "blaze-bin/%s/readable.js.zip" % readable_dir
+      output = readable_dir + "/output_closure"
 
-    # Clean the output directory from the result of last run.
-    run_cmd_get_output(["rm", "-Rf", output])
-    run_cmd_get_output(["mkdir", output])
+      # Clean the output directory from the result of last run.
+      run_cmd_get_output(["rm", "-Rf", output])
+      run_cmd_get_output(["mkdir", output])
 
-    # Update the output directory with result of the new run.
-    run_cmd_get_output([
-        "unzip", "-o", "-d", output, zip_file_path, "-x", "*.java", "-x",
-        "*.map"
-    ])
+      # Update the tmp directory with result of the new run.
+      run_cmd_get_output([
+          "unzip", "-o", "-d", tmpdirname, zip_file_path, "-x", "*.java", "-x",
+          "*.map"
+      ])
 
-    # Normalize the path relative to output directory if needed.
-    output_java_package = output + "/" + os.path.relpath(readable_dir, JAVA_DIR)
-    run_cmd_get_output(["mv " + output_java_package + "/* " + output],
-                       shell=True)
+      # Normalize the path relative to output directory.
+      run_cmd_get_output([
+          "mv " + tmpdirname + "/" + os.path.relpath(readable_dir, JAVA_DIR) +
+          "/* " + tmpdirname
+      ],
+                         shell=True)
 
-    find_command_sources = ["find", output, "-name", "*.js"]
+      # Move all files to => {file}.txt
+      run_cmd_get_output(
+          ["find", "-type", "f", "-exec", "mv", "{}", "{}.txt", ";"],
+          cwd=tmpdirname)
 
-    # Move the newly unzipped files => {file}.txt
-    run_cmd_get_output(find_command_sources +
-                       ["-exec", "mv", "{}", "{}.txt", ";"])
+      # Move all the files to readable directory.
+      run_cmd_get_output(["mv " + tmpdirname + "/* " + output], shell=True)
 
 
 def is_spam(line):
