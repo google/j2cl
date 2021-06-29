@@ -160,7 +160,7 @@ def get_j2size_repo_path():
   return "/google/src/cloud/%s/j2cl-size/google3" % getpass.getuser()
 
 
-def run_cmd(cmd_args, cwd=None, shell=False):
+def run_cmd(cmd_args, cwd=None, include_stderr=False, shell=False):
   """Runs a command and returns output as a string."""
 
   process = subprocess.Popen(
@@ -178,4 +178,7 @@ def run_cmd(cmd_args, cwd=None, shell=False):
     print("============\n")
     raise Exception("cmd invocation FAILED: " + " ".join(cmd_args))
 
-  return output[0].decode("utf-8")
+  rv = output[0].decode("utf-8")
+  if include_stderr:
+    rv = (rv + "\n" if rv else "") + output[1].decode("utf-8")
+  return rv

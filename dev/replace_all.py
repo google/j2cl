@@ -16,11 +16,8 @@
 import argparse
 import os
 import re
-import subprocess
 import tempfile
-import time
-from subprocess import PIPE
-from subprocess import Popen
+import repo_util
 
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/"
 READABLE_TARGET_PATTERN = JAVA_DIR + "..."
@@ -40,28 +37,6 @@ def replace_pattern(pattern_string, replacement, in_value):
   return re.compile(pattern_string).sub(replacement, in_value)
 
 
-def run_cmd_get_output(cmd_args, include_stderr=False, cwd=None, shell=False):
-  """Runs a cmd command and returns output as a string."""
-
-  process = (
-      subprocess.Popen(
-          cmd_args,
-          shell=shell,
-          stdin=subprocess.PIPE,
-          stdout=subprocess.PIPE,
-          stderr=subprocess.PIPE,
-          cwd=cwd))
-  results = process.communicate()
-  output = results[0].decode("utf-8")
-  if include_stderr:
-    output = (output + "\n" if output else "") + results[1].decode("utf-8")
-  if process.wait() != 0:
-    raise CmdExecutionError("cmd invocation " + str(cmd_args) +
-                            " failed with\n" + results[1].decode("utf-8"))
-
-  return output
-
-
 def get_readable_dirs(name_filter, rule_suffix=""):
   """Finds and returns the dirs of readable examples."""
   return _get_dirs_from_blaze_query("%s:readable%s$" %
@@ -69,7 +44,7 @@ def get_readable_dirs(name_filter, rule_suffix=""):
 
 
 def _get_dirs_from_blaze_query(rules_filter):
-  dirs = run_cmd_get_output([
+  dirs = repo_util.run_cmd([
       "blaze", "query",
       "filter('%s', %s)" % (rules_filter, READABLE_TARGET_PATTERN),
       "--output=package"
@@ -79,7 +54,7 @@ def _get_dirs_from_blaze_query(rules_filter):
 
 def blaze_clean():
   """Clean output to force full compilation of all targets."""
-  run_cmd_get_output(["blaze", "clean", "--expunge"])
+  repo_util.run_cmd(["blaze", "clean", "--expunge"])
 
 
 def blaze_build(js_readable_dirs, wasm_readable_dirs):
@@ -91,7 +66,7 @@ def blaze_build(js_readable_dirs, wasm_readable_dirs):
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
   cmd = ["blaze", "build", "-c", "fastbuild"] + build_targets
-  return run_cmd_get_output(cmd, include_stderr=True)
+  return repo_util.run_cmd(cmd, include_stderr=True)
 
 
 def replace_transpiled_wasm(readable_dirs):
@@ -102,10 +77,10 @@ def replace_transpiled_wasm(readable_dirs):
     output = readable_dir + "/output_wasm"
     output_file_path = output + "/module.wat.txt"
 
-    run_cmd_get_output(["mkdir", "-p", output])
-    run_cmd_get_output(["cp", file_path, output_file_path])
+    repo_util.run_cmd(["mkdir", "-p", output])
+    repo_util.run_cmd(["cp", file_path, output_file_path])
     # Temporary to keep readables unchanged.
-    run_cmd_get_output(["chmod", "-x", output_file_path])
+    repo_util.run_cmd(["chmod", "-x", output_file_path])
 
     java_package = os.path.relpath(readable_dir, JAVA_DIR).replace("/", ".")
     _filter_wat_file(output_file_path, java_package)
@@ -147,29 +122,28 @@ def replace_transpiled_js(readable_dirs):
       output = readable_dir + "/output_closure"
 
       # Clean the output directory from the result of last run.
-      run_cmd_get_output(["rm", "-Rf", output])
-      run_cmd_get_output(["mkdir", output])
+      repo_util.run_cmd(["rm", "-Rf", output])
+      repo_util.run_cmd(["mkdir", output])
 
       # Update the tmp directory with result of the new run.
-      run_cmd_get_output([
+      repo_util.run_cmd([
           "unzip", "-o", "-d", tmpdirname, zip_file_path, "-x", "*.java", "-x",
           "*.map"
       ])
 
       # Normalize the path relative to output directory.
-      run_cmd_get_output([
+      repo_util.run_cmd([
           "mv " + tmpdirname + "/" + os.path.relpath(readable_dir, JAVA_DIR) +
           "/* " + tmpdirname
-      ],
-                         shell=True)
+      ], shell=True)
 
       # Move all files to => {file}.txt
-      run_cmd_get_output(
+      repo_util.run_cmd(
           ["find", "-type", "f", "-exec", "mv", "{}", "{}.txt", ";"],
           cwd=tmpdirname)
 
       # Move all the files to readable directory.
-      run_cmd_get_output(["mv " + tmpdirname + "/* " + output], shell=True)
+      repo_util.run_cmd(["mv " + tmpdirname + "/* " + output], shell=True)
 
 
 def is_spam(line):
