@@ -1,0 +1,56 @@
+goog.module('autovalue.AutoValue_AutoValueWithExtensions$impl');
+
+const $AutoValue__AutoValueWithExtensions = goog.require('autovalue.$AutoValue_AutoValueWithExtensions$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class AutoValue__AutoValueWithExtensions extends $AutoValue__AutoValueWithExtensions {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_ = 0;
+  /**@type {boolean}*/
+  this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_ = false;
+ }
+ /** @return {!AutoValue__AutoValueWithExtensions} */
+ static $create__int__java_lang_String(/** number */ intField$, /** ?string */ stringField$) {
+  AutoValue__AutoValueWithExtensions.$clinit();
+  let $instance = new AutoValue__AutoValueWithExtensions();
+  $instance.$ctor__autovalue_AutoValue_AutoValueWithExtensions__int__java_lang_String(intField$, stringField$);
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField$, /** ?string */ stringField$) {
+  this.$ctor__autovalue_$AutoValue_AutoValueWithExtensions__int__java_lang_String(intField$, stringField$);
+ }
+ /** @override @return {number} */
+ m_getMemoizedNative___$pp_autovalue() {
+  if (!this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_) {
+   {
+    $Util.$synchronized(this);
+    if (!this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_) {
+     this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_ = super.m_getMemoizedNative___$pp_autovalue();
+     this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_ = true;
+    }
+   }
+  }
+  return this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_;
+ }
+ 
+ static $clinit() {
+  AutoValue__AutoValueWithExtensions.$clinit = () =>{};
+  AutoValue__AutoValueWithExtensions.$loadModules();
+  $AutoValue__AutoValueWithExtensions.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__AutoValueWithExtensions;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValue__AutoValueWithExtensions, "autovalue.AutoValue_AutoValueWithExtensions");
+
+exports = AutoValue__AutoValueWithExtensions;
+
+//# sourceMappingURL=AutoValue_AutoValueWithExtensions.js.map

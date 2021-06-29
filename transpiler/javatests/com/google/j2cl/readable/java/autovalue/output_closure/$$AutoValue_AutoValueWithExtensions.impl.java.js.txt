@@ -1,0 +1,60 @@
+goog.module('autovalue.$$AutoValue_AutoValueWithExtensions$impl');
+
+const AutoValueWithExtensions = goog.require('autovalue.AutoValueWithExtensions$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+/**
+ * @abstract
+ */
+class $$AutoValue__AutoValueWithExtensions extends AutoValueWithExtensions {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ = 0;
+  /**@type {?string}*/
+  this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_;
+ }
+ 
+ $ctor__autovalue_$$AutoValue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField, /** ?string */ stringField) {
+  this.$ctor__autovalue_AutoValueWithExtensions__();
+  this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ = intField;
+  if ($Equality.$same(stringField, null)) {
+   throw $Exceptions.toJs(NullPointerException.$create__java_lang_String("Null stringField"));
+  }
+  this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ = stringField;
+ }
+ /** @override @return {number} */
+ m_getIntField__() {
+  return this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_;
+ }
+ /** @override @return {?string} */
+ m_getStringField__() {
+  return this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_;
+ }
+ 
+ static $clinit() {
+  $$AutoValue__AutoValueWithExtensions.$clinit = () =>{};
+  $$AutoValue__AutoValueWithExtensions.$loadModules();
+  AutoValueWithExtensions.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof $$AutoValue__AutoValueWithExtensions;
+ }
+ 
+ static $loadModules() {
+  NullPointerException = goog.module.get('java.lang.NullPointerException$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata($$AutoValue__AutoValueWithExtensions, "autovalue.$$AutoValue_AutoValueWithExtensions");
+
+exports = $$AutoValue__AutoValueWithExtensions;
+
+//# sourceMappingURL=$$AutoValue_AutoValueWithExtensions.js.map
