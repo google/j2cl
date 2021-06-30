@@ -64,13 +64,11 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
-          @SuppressWarnings("ReferenceEquality")
           public void exitInvocation(Invocation invocation) {
             recordMemberReference(getCurrentType().getDeclaration(), invocation.getTarget());
           }
 
           @Override
-          @SuppressWarnings("ReferenceEquality")
           public void exitFieldAccess(FieldAccess fieldAccess) {
             recordMemberReference(getCurrentType().getDeclaration(), fieldAccess.getTarget());
           }
