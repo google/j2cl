@@ -49,6 +49,7 @@ if __name__ == "__main__":
 
   # TODO(goktug): Add WASM deobfuscation support.
   # TODO(goktug): Add top level filter for different backends (--platform).
+  # TODO(b/192387727): Add script for manually running benchmark on chamber
 
   args = base_parser.parse_args()
   if not hasattr(args, "func"):
