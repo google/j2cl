@@ -33,5 +33,9 @@ public class Main {
     } catch (ClassCastException e) {
       // expected
     }
+
+    if (object instanceof Main) {
+      Main foo = (Main) object;
+    }
   }
 }
