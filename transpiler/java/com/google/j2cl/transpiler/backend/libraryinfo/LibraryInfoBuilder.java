@@ -103,13 +103,6 @@ public final class LibraryInfoBuilder {
         continue;
       }
 
-      if (memberDescriptor.isField() && !mayTriggerClinit(memberDescriptor)) {
-        // We don't need to record fields, there is not much value on pruning them. However there is
-        // slight complication for fields that may trigger clinit which may (or may not) generated
-        // as getter, so we need to record their usage (hence their data here as well).
-        continue;
-      }
-
       MemberInfo.Builder builder =
           memberInfoBuilders.computeIfAbsent(
               getMemberId(memberDescriptor),
@@ -201,10 +194,6 @@ public final class LibraryInfoBuilder {
 
             if (isJsAccessible(target)) {
               // We don't record access to js accessible fields since they are never pruned.
-              return;
-            }
-
-            if (!mayTriggerClinit(target)) {
               return;
             }
 
@@ -305,10 +294,6 @@ public final class LibraryInfoBuilder {
 
     // Avoid unintented collissions by using the seperate namespace for static and non-static.
     return memberDescriptor.isInstanceMember() ? mangledName + "_$i" : mangledName;
-  }
-
-  private static boolean mayTriggerClinit(MemberDescriptor memberDescriptor) {
-    return memberDescriptor.isStatic() && !memberDescriptor.isCompileTimeConstant();
   }
 
   private static boolean isPropertyAccessor(MemberDescriptor memberDescriptor) {
