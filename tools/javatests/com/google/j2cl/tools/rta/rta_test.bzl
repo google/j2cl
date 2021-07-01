@@ -1,7 +1,6 @@
 """Test macro for j2cl_rta"""
 
 load("//build_defs:rules.bzl", "j2cl_rta")
-load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
 def rta_test(
         name,
@@ -29,11 +28,6 @@ def rta_test(
         targets = targets,
         legacy_keep_jstype_interfaces_do_not_use = keep_jstype_interfaces,
         generate_unused_methods_for_testing_do_not_use = True,
-    )
-
-    build_test(
-        name = "%s_build_test" % rta_rule_name,
-        targets = [":%s" % rta_rule_name],
     )
 
     native.java_test(
