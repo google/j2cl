@@ -7,10 +7,7 @@ package(
 
 j2cl_library(
     name = "jsaccessible_library",
-    srcs = [
-        "Instantiated.java",
-        "NotInstantiated.java",
-    ],
+    srcs = glob(["*.java"]),
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )
 
