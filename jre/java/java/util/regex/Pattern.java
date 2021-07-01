@@ -12,7 +12,7 @@ public final class Pattern {
 
   @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
   private static class NativeRegExp {
-    public NativeRegExp(String regEx, String mode) {}
+    public NativeRegExp(String regEx) {}
 
     public native String[] exec(String s);
   }
@@ -42,7 +42,7 @@ public final class Pattern {
   private Pattern(String pattern, int flags) {
     this.pattern = pattern;
     this.flags = flags;
-    this.nativeRegExp = new NativeRegExp(pattern, "g");
+    this.nativeRegExp = new NativeRegExp(pattern);
     if (flags != 0) {
       throw new UnsupportedOperationException("flags not supported");
     }
