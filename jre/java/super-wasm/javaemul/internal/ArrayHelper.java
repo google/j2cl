@@ -59,6 +59,10 @@ public final class ArrayHelper {
     ((WasmArray.OfObject) asWasmArray(array)).push(o);
   }
 
+  public static void push(byte[] array, byte o) {
+    ((WasmArray.OfByte) asWasmArray(array)).push(o);
+  }
+
   public static <T> T setAt(T[] array, int index, T value) {
     WasmArray wasmArray = asWasmArray(array);
     T originalValue;

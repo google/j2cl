@@ -184,6 +184,36 @@ abstract class WasmArray implements Serializable, Cloneable {
       super(length);
       elements = new byte[length];
     }
+
+    public void push(byte o) {
+      int newLength = length + 1;
+      ensureCapacity(newLength);
+      elements[length] = o;
+      length = newLength;
+    }
+
+    private void ensureCapacity(int newLength) {
+      if (newLength > elements.length) {
+        // Not enough capacity, increase it.
+        byte[] original = elements;
+        elements = new byte[getNewCapacity(length, newLength)];
+        copy(original, 0, elements, 0, original.length);
+      }
+    }
+
+    private static void copy(byte[] src, int srcOfs, byte[] dest, int destOfs, int len) {
+      if (src == dest && srcOfs < destOfs) {
+        // Reverse copy to handle overlap that would destroy values otherwise.
+        srcOfs += len;
+        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
+          dest[--destEnd] = src[--srcOfs];
+        }
+      } else {
+        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
+          dest[destOfs++] = src[srcOfs++];
+        }
+      }
+    }
   }
 
   static class OfShort extends WasmArray {

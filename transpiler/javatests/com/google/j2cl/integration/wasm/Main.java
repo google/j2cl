@@ -22,6 +22,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import javaemul.internal.ArrayHelper;
@@ -36,7 +37,7 @@ import jsinterop.annotations.JsMethod;
  */
 public class Main {
 
-  public static void main(String... args) {
+  public static void main(String... args) throws Exception {
     testDynamicClassMethodDispatch();
     testSwitch();
     testWasmAnnotation();
@@ -438,7 +439,9 @@ public class Main {
     }
   }
 
-  private static void testString() {
+  private static void testString() throws Exception {
+    assertTrue(Arrays.equals(new byte[] {70, 111, 111}, "Foo".getBytes("UTF-8")));
+
     StringBuilder builder = new StringBuilder();
     builder.append("x").append("y").append(5).append(true);
     assertEquals("xy5true", builder.toString());
