@@ -19,21 +19,24 @@ import com.google.auto.value.AutoValue;
 import javax.annotation.Nullable;
 
 @AutoValue
-public abstract class SimpleAutoValue {
-  public abstract int getIntField();
-
+public abstract class AutoValueWithBuilder {
   public abstract boolean getBooleanField();
-
-  public abstract String getStringField();
-
-  public abstract Double getDoubleField();
 
   @Nullable
   public abstract Double getNullableField();
 
-  public abstract int[] getArrayField();
+  public abstract Builder toBuilder();
 
-  static SimpleAutoValue create() {
-    return new AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0, new int[] {45});
+  @AutoValue.Builder
+  abstract static class Builder {
+    public abstract Builder setBooleanField(boolean x);
+
+    public abstract Builder setNullableField(Double x);
+
+    public abstract AutoValueWithBuilder build();
+  }
+
+  static AutoValueWithBuilder create() {
+    return new AutoValue_AutoValueWithBuilder.Builder().setBooleanField(true).build();
   }
 }

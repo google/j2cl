@@ -1,0 +1,43 @@
+goog.module('autovalue.AutoValueWithBuilder.Builder$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoValueWithBuilder = goog.forwardDeclare('autovalue.AutoValueWithBuilder$impl');
+
+/**
+ * @abstract
+ */
+class Builder extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ 
+ $ctor__autovalue_AutoValueWithBuilder_Builder__() {
+  this.$ctor__java_lang_Object__();
+ }
+ /** @abstract @return {Builder} */
+ m_setBooleanField__boolean(/** boolean */ x) {}
+ /** @abstract @return {Builder} */
+ m_setNullableField__java_lang_Double(/** ?number */ x) {}
+ /** @abstract @return {AutoValueWithBuilder} */
+ m_build__() {}
+ 
+ static $clinit() {
+  Builder.$clinit = () =>{};
+  Builder.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Builder;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Builder, "autovalue.AutoValueWithBuilder$Builder");
+
+exports = Builder;
+
+//# sourceMappingURL=AutoValueWithBuilder$Builder.js.map

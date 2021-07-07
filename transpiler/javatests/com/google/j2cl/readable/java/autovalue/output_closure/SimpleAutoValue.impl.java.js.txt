@@ -3,6 +3,10 @@ goog.module('autovalue.SimpleAutoValue$impl');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let AutoValue__SimpleAutoValue = goog.forwardDeclare('autovalue.AutoValue_SimpleAutoValue$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
+
 /**
  * @abstract
  */
@@ -27,6 +31,11 @@ class SimpleAutoValue extends ValueType {
  m_getNullableField__() {}
  /** @abstract @return {Array<number>} */
  m_getArrayField__() {}
+ /** @return {SimpleAutoValue} */
+ static m_create__() {
+  SimpleAutoValue.$clinit();
+  return AutoValue__SimpleAutoValue.$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(42, true, "text", 43, 44, /**@type {!Array<number>}*/ ($Arrays.$init([45], $$int)));
+ }
  
  static $clinit() {
   SimpleAutoValue.$clinit = () =>{};
@@ -38,7 +47,11 @@ class SimpleAutoValue extends ValueType {
   return instance instanceof SimpleAutoValue;
  }
  
- static $loadModules() {}
+ static $loadModules() {
+  AutoValue__SimpleAutoValue = goog.module.get('autovalue.AutoValue_SimpleAutoValue$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
+ }
 }
 $Util.$setClassMetadata(SimpleAutoValue, "autovalue.SimpleAutoValue");
 
