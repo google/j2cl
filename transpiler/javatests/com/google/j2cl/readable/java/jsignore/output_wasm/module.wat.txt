@@ -9,7 +9,7 @@
 
 ;;; Code for jsignore.JsIgnoreExample [CLASS]
 (type $jsignore.JsIgnoreExample (struct
- (field $vtable (ref null $jsignore.JsIgnoreExample.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsignore.JsIgnoreExample.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsignore.JsIgnoreExample.vtable (struct
@@ -107,7 +107,7 @@
     (call $$clinit__void@jsignore.JsIgnoreExample )
     ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
     ;;@ jsignore/JsIgnoreExample.java:34:2
-    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    )
   )
  )

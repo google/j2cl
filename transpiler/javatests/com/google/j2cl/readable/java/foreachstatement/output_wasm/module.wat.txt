@@ -24,7 +24,7 @@
 
 ;;; Code for foreachstatement.ForEachStatement [CLASS]
 (type $foreachstatement.ForEachStatement (struct
- (field $vtable (ref null $foreachstatement.ForEachStatement.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $foreachstatement.ForEachStatement.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $foreachstatement.ForEachStatement.vtable (struct
@@ -98,7 +98,7 @@
    ;;@ foreachstatement/ForEachStatement.java:26:4
    
    
-   (local.set $$array (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
+   (local.set $$array (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
    (local.set $$index (i32.const 0))
    (block $LOOP_1.BREAK
     (loop
@@ -144,7 +144,7 @@
     ;; throw new Exception.<init>();
     ;;@ foreachstatement/ForEachStatement.java:45:6
     
-    (throw $exception.event (call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (global.get $java.lang.Exception.vtable) (global.get $java.lang.Exception.itable) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
+    (throw $exception.event (call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
    )
   )
  )
@@ -274,7 +274,7 @@
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [CLASS]
 (type $foreachstatement.ForEachStatement.Exception1 (struct
- (field $vtable (ref null $foreachstatement.ForEachStatement.Exception1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $foreachstatement.ForEachStatement.Exception1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -430,7 +430,7 @@
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [CLASS]
 (type $foreachstatement.ForEachStatement.Exception2 (struct
- (field $vtable (ref null $foreachstatement.ForEachStatement.Exception2.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $foreachstatement.ForEachStatement.Exception2.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -586,7 +586,7 @@
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [CLASS]
 (type $foreachstatement.ForEachStatement.IterableReturningTypeVariable (struct
- (field $vtable (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable (struct

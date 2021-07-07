@@ -6,7 +6,7 @@
 
 ;;; Code for ternaryexpression.TernaryExpression [CLASS]
 (type $ternaryexpression.TernaryExpression (struct
- (field $vtable (ref null $ternaryexpression.TernaryExpression.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $ternaryexpression.TernaryExpression.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $ternaryexpression.TernaryExpression.vtable (struct
@@ -66,7 +66,7 @@
    
    (local.set $value (block (result i32)
     
-    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (global.get $java.lang.Integer.itable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (global.get $java.lang.Integer.vtable) (global.get $java.lang.Integer.itable) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
+    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
   )

@@ -107,7 +107,7 @@
 
 ;;; Code for overwrittentypevariables.HashFunctions [CLASS]
 (type $overwrittentypevariables.HashFunctions (struct
- (field $vtable (ref null $overwrittentypevariables.HashFunctions.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $overwrittentypevariables.HashFunctions.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overwrittentypevariables.HashFunctions.vtable (struct
@@ -148,7 +148,7 @@
    (call $$clinit__void@overwrittentypevariables.HashFunctions )
    ;; return new $1.<init>();
    ;;@ overwrittentypevariables/HashFunctions.java:26:4
-   (local.set $return.value (call $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.1 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1 (global.get $overwrittentypevariables.HashFunctions.1.vtable) (global.get $overwrittentypevariables.HashFunctions.1.itable) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.1.rtt))))
+   (local.set $return.value (call $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.1 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1 (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.1.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.1.itable)) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.1.rtt))))
    (br $return.label)
   )
  )
@@ -167,7 +167,7 @@
    (call $$clinit__void@overwrittentypevariables.HashFunctions )
    ;; return new $2.<init>();
    ;;@ overwrittentypevariables/HashFunctions.java:35:4
-   (local.set $return.value (call $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.2 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2 (global.get $overwrittentypevariables.HashFunctions.2.vtable) (global.get $overwrittentypevariables.HashFunctions.2.itable) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.2.rtt))))
+   (local.set $return.value (call $m_<init>__void_$pp_overwrittentypevariables@overwrittentypevariables.HashFunctions.2 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2 (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.2.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.2.itable)) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.2.rtt))))
    (br $return.label)
   )
  )
@@ -218,7 +218,7 @@
 
 ;;; Code for overwrittentypevariables.HashFunctions.1 [CLASS]
 (type $overwrittentypevariables.HashFunctions.1 (struct
- (field $vtable (ref null $overwrittentypevariables.HashFunctions.1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $overwrittentypevariables.HashFunctions.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overwrittentypevariables.HashFunctions.1.vtable (struct
@@ -335,7 +335,7 @@
 
 ;;; Code for overwrittentypevariables.HashFunctions.2 [CLASS]
 (type $overwrittentypevariables.HashFunctions.2 (struct
- (field $vtable (ref null $overwrittentypevariables.HashFunctions.2.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $overwrittentypevariables.HashFunctions.2.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $overwrittentypevariables.HashFunctions.2.vtable (struct
@@ -382,7 +382,7 @@
    ;;@ overwrittentypevariables/HashFunctions.java:38:8
    (local.set $return.value (block (result (ref null $java.lang.String))
     
-    (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (global.get $java.lang.StringBuilder.vtable) (global.get $java.lang.StringBuilder.itable) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+    (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder)(call $$getString_||__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (drop (call_ref (local.get $$stringBuilder)(call_ref (local.get $input)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))

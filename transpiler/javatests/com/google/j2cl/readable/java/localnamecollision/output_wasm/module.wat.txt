@@ -30,7 +30,7 @@
 
 ;;; Code for localnamecollision.Asserts [CLASS]
 (type $localnamecollision.Asserts (struct
- (field $vtable (ref null $localnamecollision.Asserts.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localnamecollision.Asserts.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.Asserts.vtable (struct
@@ -124,7 +124,7 @@
 
 ;;; Code for localnamecollision.Class [CLASS]
 (type $localnamecollision.Class (struct
- (field $vtable (ref null $localnamecollision.Class.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localnamecollision.Class.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.Class.vtable (struct
@@ -168,7 +168,7 @@
     ;; Class $qualifier = new Class.<init>();
     ;;@ localnamecollision/Class.java:20:4
     
-    (local.set $$qualifier (call $m_<init>__void@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (global.get $localnamecollision.Class.vtable) (global.get $localnamecollision.Class.itable) (i32.const 0) (global.get $localnamecollision.Class.rtt))))
+    (local.set $$qualifier (call $m_<init>__void@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0) (global.get $localnamecollision.Class.rtt))))
     ;; $qualifier.getClass();
     ;;@ localnamecollision/Class.java:20:4
     (drop (call_ref (local.get $$qualifier)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
@@ -222,7 +222,7 @@
 
 ;;; Code for localnamecollision.LocalNameCollision [CLASS]
 (type $localnamecollision.LocalNameCollision (struct
- (field $vtable (ref null $localnamecollision.LocalNameCollision.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localnamecollision.LocalNameCollision.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.LocalNameCollision.vtable (struct
@@ -393,7 +393,7 @@
 
 ;;; Code for localnamecollision.package1.A [CLASS]
 (type $localnamecollision.package1.A (struct
- (field $vtable (ref null $localnamecollision.package1.A.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localnamecollision.package1.A.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.package1.A.vtable (struct
@@ -487,7 +487,7 @@
 
 ;;; Code for localnamecollision.package2.A [CLASS]
 (type $localnamecollision.package2.A (struct
- (field $vtable (ref null $localnamecollision.package2.A.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localnamecollision.package2.A.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localnamecollision.package2.A.vtable (struct

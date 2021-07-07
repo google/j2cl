@@ -77,7 +77,7 @@
 
 ;;; Code for gwtincompatible.Implementor [CLASS]
 (type $gwtincompatible.Implementor (struct
- (field $vtable (ref null $gwtincompatible.Implementor.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $gwtincompatible.Implementor.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $gwtincompatible.Implementor.vtable (struct
@@ -169,7 +169,7 @@
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum [ENUM]
 (type $gwtincompatible.Implementor.SomeEnum (struct
- (field $vtable (ref null $gwtincompatible.Implementor.SomeEnum.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -261,7 +261,7 @@
    ;;@ gwtincompatible/Implementor.java:38:7
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
+    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $gwtincompatible.Implementor.SomeEnum))
      (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
      (global.get $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum)
@@ -301,7 +301,7 @@
     (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
     ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = new $1.<init>(javaemul.internal.StringPool.$getString_|COMPATIBLE|(),gwtincompatible.Implementor.SomeEnum.COMPATIBLE));
     ;;@ gwtincompatible/Implementor.java:39:4
-    (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $m_<init>__java_lang_String__int__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable) (global.get $gwtincompatible.Implementor.SomeEnum.1.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))(call $$getString_|COMPATIBLE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum)))
+    (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $m_<init>__java_lang_String__int__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1 (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt))(call $$getString_|COMPATIBLE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_COMPATIBLE__gwtincompatible_Implementor_SomeEnum)))
    )
    ;; (gwtincompatible.Implementor.SomeEnum.namesToValuesMap = null);
    ;;@ gwtincompatible/Implementor.java:38:7
@@ -312,7 +312,7 @@
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [CLASS]
 (type $gwtincompatible.Implementor.SomeEnum.1 (struct
- (field $vtable (ref null $gwtincompatible.Implementor.SomeEnum.1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -490,7 +490,7 @@
 
 ;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [CLASS]
 (type $gwtincompatible.Interface.ClassWithAbstractMethod (struct
- (field $vtable (ref null $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (struct

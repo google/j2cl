@@ -12,7 +12,7 @@
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [CLASS]
 (type $localclasswithconstructor.LocalClassWithConstructor (struct
- (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclasswithconstructor.LocalClassWithConstructor.vtable (struct
@@ -58,7 +58,7 @@
    (local.set $localVar (i32.const 1))
    ;; new $1LocalClass.<init>(LocalClassWithConstructor.this,localVar,p,1);
    ;;@ localclasswithconstructor/LocalClassWithConstructor.java:34:4
-   (drop (call $m_<init>__localclasswithconstructor_LocalClassWithConstructor__int__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable) (i32.const 0) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)(i32.const 1)))
+   (drop (call $m_<init>__localclasswithconstructor_LocalClassWithConstructor__int__int__int__void@localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct.new_with_rtt $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (ref.as_non_null (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.itable)) (i32.const 0) (ref.null $localclasswithconstructor.LocalClassWithConstructor) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)(i32.const 1)))
   )
  )
 )
@@ -108,7 +108,7 @@
 
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor.1LocalClass [CLASS]
 (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass (struct
- (field $vtable (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut (ref null $localclasswithconstructor.LocalClassWithConstructor)))
  (field $f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))

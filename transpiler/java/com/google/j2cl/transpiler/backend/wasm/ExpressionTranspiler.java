@@ -407,7 +407,8 @@ final class ExpressionTranspiler {
         sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
         sourceBuilder.append(
             format(
-                "(struct.new_with_rtt %s (global.get %s) (global.get %s)",
+                "(struct.new_with_rtt %s "
+                    + "(ref.as_non_null (global.get %s)) (ref.as_non_null (global.get %s))",
                 environment.getWasmTypeName(newInstance.getTypeDescriptor()),
                 environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor()),
                 environment.getWasmItableGlobalName(newInstance.getTypeDescriptor())));

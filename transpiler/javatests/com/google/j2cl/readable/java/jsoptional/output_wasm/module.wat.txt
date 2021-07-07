@@ -42,7 +42,7 @@
 
 ;;; Code for jsoptional.Main [CLASS]
 (type $jsoptional.Main (struct
- (field $vtable (ref null $jsoptional.Main.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsoptional.Main.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f__jsoptional_Main (mut (ref null $java.lang.Object)))
 ))
@@ -148,7 +148,7 @@
   (block
    ;; (Main.this.f = new $LambdaImplementor$1.<init>());
    ;;@ jsoptional/Main.java:36:2
-   (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (call $m_<init>__void@jsoptional.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (global.get $jsoptional.Main.$LambdaImplementor$1.vtable) (global.get $jsoptional.Main.$LambdaImplementor$1.itable) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt))))
+   (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (call $m_<init>__void@jsoptional.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt))))
   )
  )
 )
@@ -239,7 +239,7 @@
 
 ;;; Code for jsoptional.Main.AFunction [CLASS]
 (type $jsoptional.Main.AFunction (struct
- (field $vtable (ref null $jsoptional.Main.AFunction.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsoptional.Main.AFunction.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsoptional.Main.AFunction.vtable (struct
@@ -377,7 +377,7 @@
 
 ;;; Code for jsoptional.Main.TemplatedSubtype [CLASS]
 (type $jsoptional.Main.TemplatedSubtype (struct
- (field $vtable (ref null $jsoptional.Main.TemplatedSubtype.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsoptional.Main.TemplatedSubtype.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsoptional.Main.TemplatedSubtype.vtable (struct
@@ -485,7 +485,7 @@
 
 ;;; Code for jsoptional.Main.SpecializedSubtype [CLASS]
 (type $jsoptional.Main.SpecializedSubtype (struct
- (field $vtable (ref null $jsoptional.Main.SpecializedSubtype.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsoptional.Main.SpecializedSubtype.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsoptional_Main_SpecializedSubtype (mut (ref null $jsoptional.Main)))
 ))
@@ -599,7 +599,7 @@
 
 ;;; Code for jsoptional.Main.NonJsTypeSubtype [CLASS]
 (type $jsoptional.Main.NonJsTypeSubtype (struct
- (field $vtable (ref null $jsoptional.Main.NonJsTypeSubtype.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsoptional.Main.NonJsTypeSubtype.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsoptional.Main.NonJsTypeSubtype.vtable (struct
@@ -707,7 +707,7 @@
 
 ;;; Code for jsoptional.Main.$LambdaImplementor$1 [CLASS]
 (type $jsoptional.Main.$LambdaImplementor$1 (struct
- (field $vtable (ref null $jsoptional.Main.$LambdaImplementor$1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsoptional.Main.$LambdaImplementor$1.vtable (struct

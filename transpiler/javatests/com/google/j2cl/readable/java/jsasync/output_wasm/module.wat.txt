@@ -60,7 +60,7 @@
 
 ;;; Code for jsasync.Main [CLASS]
 (type $jsasync.Main (struct
- (field $vtable (ref null $jsasync.Main.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsasync.Main.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_x__jsasync_Main_ (mut (ref null $java.lang.Object)))
 ))
@@ -203,23 +203,23 @@
    ;; AsyncInterface i = new $LambdaImplementor$1.<init>();
    ;;@ jsasync/Main.java:51:4
    
-   (local.set $i (call $m_<init>__void@jsasync.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (global.get $jsasync.Main.$LambdaImplementor$1.vtable) (global.get $jsasync.Main.$LambdaImplementor$1.itable) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$1.rtt))))
+   (local.set $i (call $m_<init>__void@jsasync.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$1.rtt))))
    ;; BaseInterface o = new $1.<init>(Main.this);
    ;;@ jsasync/Main.java:53:4
    
-   (local.set $o (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (global.get $jsasync.Main.1.vtable) (global.get $jsasync.Main.1.itable) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))(local.get $this)))
+   (local.set $o (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))(local.get $this)))
    ;; AsyncJsFunctionInterface j = new $LambdaImplementor$2.<init>();
    ;;@ jsasync/Main.java:62:4
    
-   (local.set $j (call $m_<init>__void@jsasync.Main.$LambdaImplementor$2 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (global.get $jsasync.Main.$LambdaImplementor$2.vtable) (global.get $jsasync.Main.$LambdaImplementor$2.itable) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$2.rtt))))
+   (local.set $j (call $m_<init>__void@jsasync.Main.$LambdaImplementor$2 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$2.rtt))))
    ;; JsFunctionInterface optimizableJsFunction = new $2.<init>(Main.this);
    ;;@ jsasync/Main.java:64:4
    
-   (local.set $optimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (global.get $jsasync.Main.2.vtable) (global.get $jsasync.Main.2.itable) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))(local.get $this)))
+   (local.set $optimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))(local.get $this)))
    ;; JsFunctionInterface unoptimizableJsFunction = new $3.<init>(Main.this);
    ;;@ jsasync/Main.java:75:4
    
-   (local.set $unoptimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (global.get $jsasync.Main.3.vtable) (global.get $jsasync.Main.3.itable) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))(local.get $this)))
+   (local.set $unoptimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))(local.get $this)))
   )
  )
 )
@@ -288,7 +288,7 @@
 
 ;;; Code for jsasync.Main.1 [CLASS]
 (type $jsasync.Main.1 (struct
- (field $vtable (ref null $jsasync.Main.1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsasync.Main.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsasync_Main_1 (mut (ref null $jsasync.Main)))
 ))
@@ -387,7 +387,7 @@
 
 ;;; Code for jsasync.Main.2 [CLASS]
 (type $jsasync.Main.2 (struct
- (field $vtable (ref null $jsasync.Main.2.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsasync.Main.2.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsasync_Main_2 (mut (ref null $jsasync.Main)))
 ))
@@ -486,7 +486,7 @@
 
 ;;; Code for jsasync.Main.3 [CLASS]
 (type $jsasync.Main.3 (struct
- (field $vtable (ref null $jsasync.Main.3.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsasync.Main.3.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsasync_Main_3 (mut (ref null $jsasync.Main)))
 ))
@@ -859,7 +859,7 @@
 
 ;;; Code for jsasync.Main.Promise [CLASS]
 (type $jsasync.Main.Promise (struct
- (field $vtable (ref null $jsasync.Main.Promise.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsasync.Main.Promise.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsasync.Main.Promise.vtable (struct
@@ -938,7 +938,7 @@
 
 ;;; Code for jsasync.Main.$LambdaImplementor$1 [CLASS]
 (type $jsasync.Main.$LambdaImplementor$1 (struct
- (field $vtable (ref null $jsasync.Main.$LambdaImplementor$1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsasync.Main.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsasync.Main.$LambdaImplementor$1.vtable (struct
@@ -1032,7 +1032,7 @@
 
 ;;; Code for jsasync.Main.$LambdaImplementor$2 [CLASS]
 (type $jsasync.Main.$LambdaImplementor$2 (struct
- (field $vtable (ref null $jsasync.Main.$LambdaImplementor$2.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsasync.Main.$LambdaImplementor$2.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsasync.Main.$LambdaImplementor$2.vtable (struct

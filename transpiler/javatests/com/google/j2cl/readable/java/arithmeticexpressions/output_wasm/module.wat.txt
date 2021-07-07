@@ -18,7 +18,7 @@
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [CLASS]
 (type $arithmeticexpressions.ArithmeticExpressions (struct
- (field $vtable (ref null $arithmeticexpressions.ArithmeticExpressions.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_bar__arithmeticexpressions_ArithmeticExpressions (mut i64))
  (field $f_intField__arithmeticexpressions_ArithmeticExpressions (mut i64))
@@ -386,7 +386,7 @@
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:103:4
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (block (result (ref null $java.lang.String))
     
-    (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (global.get $java.lang.StringBuilder.vtable) (global.get $java.lang.StringBuilder.itable) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+    (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder)(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0)) (global.get $java.lang.String.rtt))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (drop (call_ref (local.get $$stringBuilder)(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
@@ -828,7 +828,7 @@
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [CLASS]
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
- (field $vtable (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $arithmeticexpressions.ArithmeticExpressions)))
  (field $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $java.lang.Object)))

@@ -25,7 +25,7 @@
 
 ;;; Code for jsproperties.Foo [CLASS]
 (type $jsproperties.Foo (struct
- (field $vtable (ref null $jsproperties.Foo.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsproperties.Foo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsproperties.Foo.vtable (struct
@@ -168,7 +168,7 @@
 
 ;;; Code for jsproperties.Bar [CLASS]
 (type $jsproperties.Bar (struct
- (field $vtable (ref null $jsproperties.Bar.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsproperties.Bar.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f__jsproperties_Bar_ (mut i32))
 ))
@@ -320,7 +320,7 @@
 
 ;;; Code for jsproperties.NativeFoo [CLASS]
 (type $jsproperties.NativeFoo (struct
- (field $vtable (ref null $jsproperties.NativeFoo.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsproperties.NativeFoo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsproperties.NativeFoo.vtable (struct
@@ -415,7 +415,7 @@
 
 ;;; Code for jsproperties.Main [CLASS]
 (type $jsproperties.Main (struct
- (field $vtable (ref null $jsproperties.Main.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jsproperties.Main.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $jsproperties.Main.vtable (struct
@@ -461,7 +461,7 @@
     ;; NativeFoo $qualifier = new NativeFoo.<init>();
     ;;@ jsproperties/Main.java:82:4
     
-    (local.set $$qualifier (call $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (global.get $jsproperties.NativeFoo.vtable) (global.get $jsproperties.NativeFoo.itable) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt))))
+    (local.set $$qualifier (call $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt))))
     ;; $qualifier.getA();
     ;;@ jsproperties/Main.java:82:4
     (drop (call_ref (local.get $$qualifier)(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
@@ -511,7 +511,7 @@
    ;; Bar bar = new Bar.<init>();
    ;;@ jsproperties/Main.java:94:4
    
-   (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (global.get $jsproperties.Bar.vtable) (global.get $jsproperties.Bar.itable) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
+   (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
    ;; bar.getA();
    ;;@ jsproperties/Main.java:95:4
    (drop (call_ref (local.get $bar)(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))

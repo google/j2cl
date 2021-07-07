@@ -18,7 +18,7 @@
 
 ;;; Code for circularimportuse.Left [CLASS]
 (type $circularimportuse.Left (struct
- (field $vtable (ref null $circularimportuse.Left.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $circularimportuse.Left.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $circularimportuse.Left.vtable (struct
@@ -60,7 +60,7 @@
   (block
    ;; return new Right.<init>();
    ;;@ circularimportuse/Left.java:20:4
-   (local.set $return.value (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.vtable) (global.get $circularimportuse.Right.itable) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
+   (local.set $return.value (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
    (br $return.label)
   )
  )
@@ -112,7 +112,7 @@
 
 ;;; Code for circularimportuse.Main [CLASS]
 (type $circularimportuse.Main (struct
- (field $vtable (ref null $circularimportuse.Main.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $circularimportuse.Main.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $circularimportuse.Main.vtable (struct
@@ -155,11 +155,11 @@
    ;; Left left = new Left.<init>();
    ;;@ circularimportuse/Main.java:21:4
    
-   (local.set $left (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.vtable) (global.get $circularimportuse.Left.itable) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
+   (local.set $left (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
    ;; Right right = new Right.<init>();
    ;;@ circularimportuse/Main.java:22:4
    
-   (local.set $right (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (global.get $circularimportuse.Right.vtable) (global.get $circularimportuse.Right.itable) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
+   (local.set $right (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
   )
  )
 )
@@ -208,7 +208,7 @@
 
 ;;; Code for circularimportuse.Right [CLASS]
 (type $circularimportuse.Right (struct
- (field $vtable (ref null $circularimportuse.Right.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $circularimportuse.Right.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $circularimportuse.Right.vtable (struct
@@ -250,7 +250,7 @@
   (block
    ;; return new Left.<init>();
    ;;@ circularimportuse/Right.java:20:4
-   (local.set $return.value (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (global.get $circularimportuse.Left.vtable) (global.get $circularimportuse.Left.itable) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
+   (local.set $return.value (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
    (br $return.label)
   )
  )

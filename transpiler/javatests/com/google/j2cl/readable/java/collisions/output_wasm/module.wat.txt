@@ -36,7 +36,7 @@
 
 ;;; Code for collisions.goog [CLASS]
 (type $collisions.goog (struct
- (field $vtable (ref null $collisions.goog.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $collisions.goog.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $collisions.goog.vtable (struct
@@ -109,7 +109,7 @@
 
 ;;; Code for collisions.Blah [CLASS]
 (type $collisions.Blah (struct
- (field $vtable (ref null $collisions.Blah.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $collisions.Blah.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $collisions.Blah.vtable (struct
@@ -191,7 +191,7 @@
 
 ;;; Code for collisions.foo [CLASS]
 (type $collisions.foo (struct
- (field $vtable (ref null $collisions.foo.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $collisions.foo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $collisions.foo.vtable (struct
@@ -264,7 +264,7 @@
 
 ;;; Code for collisions.bar [CLASS]
 (type $collisions.bar (struct
- (field $vtable (ref null $collisions.bar.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $collisions.bar.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $collisions.bar.vtable (struct
@@ -320,13 +320,13 @@
    (drop (call $m_getN__double@collisions.Blah ))
    ;; new Blah.<init>();
    ;;@ collisions/goog.java:41:4
-   (drop (call $m_<init>__void_$pp_collisions@collisions.Blah (struct.new_with_rtt $collisions.Blah (global.get $collisions.Blah.vtable) (global.get $collisions.Blah.itable) (i32.const 0) (global.get $collisions.Blah.rtt))))
+   (drop (call $m_<init>__void_$pp_collisions@collisions.Blah (struct.new_with_rtt $collisions.Blah (ref.as_non_null (global.get $collisions.Blah.vtable)) (ref.as_non_null (global.get $collisions.Blah.itable)) (i32.const 0) (global.get $collisions.Blah.rtt))))
    ;; new goog.<init>();
    ;;@ collisions/goog.java:42:4
-   (drop (call $m_<init>__void@collisions.goog (struct.new_with_rtt $collisions.goog (global.get $collisions.goog.vtable) (global.get $collisions.goog.itable) (i32.const 0) (global.get $collisions.goog.rtt))))
+   (drop (call $m_<init>__void@collisions.goog (struct.new_with_rtt $collisions.goog (ref.as_non_null (global.get $collisions.goog.vtable)) (ref.as_non_null (global.get $collisions.goog.itable)) (i32.const 0) (global.get $collisions.goog.rtt))))
    ;; new foo.<init>();
    ;;@ collisions/goog.java:43:4
-   (drop (call $m_<init>__void_$pp_collisions@collisions.foo (struct.new_with_rtt $collisions.foo (global.get $collisions.foo.vtable) (global.get $collisions.foo.itable) (i32.const 0) (global.get $collisions.foo.rtt))))
+   (drop (call $m_<init>__void_$pp_collisions@collisions.foo (struct.new_with_rtt $collisions.foo (ref.as_non_null (global.get $collisions.foo.vtable)) (ref.as_non_null (global.get $collisions.foo.itable)) (i32.const 0) (global.get $collisions.foo.rtt))))
    ;; int delete = 1;
    ;;@ collisions/goog.java:46:4
    
@@ -383,7 +383,7 @@
 
 ;;; Code for collisions.Other [CLASS]
 (type $collisions.Other (struct
- (field $vtable (ref null $collisions.Other.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $collisions.Other.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $collisions.Other.vtable (struct
@@ -510,7 +510,7 @@
 
 ;;; Code for collisions.T [CLASS]
 (type $collisions.T (struct
- (field $vtable (ref null $collisions.T.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $collisions.T.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $collisions.T.vtable (struct
@@ -578,7 +578,7 @@
    
    (local.set $t (block (result (ref null $java.lang.Number))
     
-    (local.set $$qualifier (call $m_<init>__void_$pp_collisions@collisions.T (struct.new_with_rtt $collisions.T (global.get $collisions.T.vtable) (global.get $collisions.T.itable) (i32.const 0) (global.get $collisions.T.rtt))))
+    (local.set $$qualifier (call $m_<init>__void_$pp_collisions@collisions.T (struct.new_with_rtt $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $collisions.T.itable)) (i32.const 0) (global.get $collisions.T.rtt))))
     (call_ref (local.get $$qualifier)(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
    ))
    ;; t.byteValue();

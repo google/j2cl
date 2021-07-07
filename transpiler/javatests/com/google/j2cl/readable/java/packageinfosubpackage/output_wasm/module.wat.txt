@@ -19,7 +19,7 @@
 
 ;;; Code for packageinfosubpackage.Foo [CLASS]
 (type $packageinfosubpackage.Foo (struct
- (field $vtable (ref null $packageinfosubpackage.Foo.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $packageinfosubpackage.Foo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null $packageinfosubpackage.Foo.NativeBar)))
 ))
@@ -60,7 +60,7 @@
   (block
    ;; (Foo.this.nativeBar = new NativeBar.<init>());
    ;;@ packageinfosubpackage/Foo.java:25:2
-   (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (global.get $packageinfosubpackage.Foo.NativeBar.vtable) (global.get $packageinfosubpackage.Foo.NativeBar.itable) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
+   (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
   )
  )
 )
@@ -109,7 +109,7 @@
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [CLASS]
 (type $packageinfosubpackage.Foo.NativeBar (struct
- (field $vtable (ref null $packageinfosubpackage.Foo.NativeBar.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $packageinfosubpackage.Foo.NativeBar.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageinfosubpackage.Foo.NativeBar.vtable (struct
@@ -182,7 +182,7 @@
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [CLASS]
 (type $packageinfosubpackage.subpackage.Bar (struct
- (field $vtable (ref null $packageinfosubpackage.subpackage.Bar.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageinfosubpackage.subpackage.Bar.vtable (struct

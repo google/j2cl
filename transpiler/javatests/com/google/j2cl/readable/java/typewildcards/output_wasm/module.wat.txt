@@ -60,7 +60,7 @@
 
 ;;; Code for typewildcards.GenericType [CLASS]
 (type $typewildcards.GenericType (struct
- (field $vtable (ref null $typewildcards.GenericType.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.GenericType.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typewildcards.GenericType.vtable (struct
@@ -133,7 +133,7 @@
 
 ;;; Code for typewildcards.TypeWildCards [CLASS]
 (type $typewildcards.TypeWildCards (struct
- (field $vtable (ref null $typewildcards.TypeWildCards.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.TypeWildCards.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typewildcards.TypeWildCards.vtable (struct
@@ -220,13 +220,13 @@
   (block
    ;; TypeWildCards.this.unbounded(new GenericType.<init>());
    ;;@ typewildcards/TypeWildCards.java:31:4
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.itable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.upperBound(new GenericType.<init>());
    ;;@ typewildcards/TypeWildCards.java:32:4
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.itable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.lowerBound(new GenericType.<init>());
    ;;@ typewildcards/TypeWildCards.java:33:4
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (global.get $typewildcards.GenericType.vtable) (global.get $typewildcards.GenericType.itable) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   )
  )
 )
@@ -343,7 +343,7 @@
    ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),new $LambdaImplementor$1.<init>());
    ;;@ typewildcards/TypeWildCards.java:89:4
    
-   (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $m_<init>__void@typewildcards.TypeWildCards.$LambdaImplementor$1 (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable) (i32.const 0) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))))
+   (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $m_<init>__void@typewildcards.TypeWildCards.$LambdaImplementor$1 (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))))
   )
  )
 )
@@ -369,7 +369,7 @@
   (block
    ;; typewildcards.TypeWildCards.takesRecursiveGeneric(new Foo.<init>(TypeWildCards.this));
    ;;@ typewildcards/TypeWildCards.java:103:4
-   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (global.get $typewildcards.TypeWildCards.Foo.vtable) (global.get $typewildcards.TypeWildCards.Foo.itable) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
+   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
   )
  )
 )
@@ -503,7 +503,7 @@
 
 ;;; Code for typewildcards.TypeWildCards.A [CLASS]
 (type $typewildcards.TypeWildCards.A (struct
- (field $vtable (ref null $typewildcards.TypeWildCards.A.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.TypeWildCards.A.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f__typewildcards_TypeWildCards_A (mut i32))
 ))
@@ -672,7 +672,7 @@
 
 ;;; Code for typewildcards.TypeWildCards.Element [CLASS]
 (type $typewildcards.TypeWildCards.Element (struct
- (field $vtable (ref null $typewildcards.TypeWildCards.Element.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.TypeWildCards.Element.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__typewildcards_TypeWildCards_Element (mut (ref null $typewildcards.TypeWildCards)))
 ))
@@ -732,7 +732,7 @@
 
 ;;; Code for typewildcards.TypeWildCards.OtherElement [CLASS]
 (type $typewildcards.TypeWildCards.OtherElement (struct
- (field $vtable (ref null $typewildcards.TypeWildCards.OtherElement.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.TypeWildCards.OtherElement.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
 ))
@@ -792,7 +792,7 @@
 
 ;;; Code for typewildcards.TypeWildCards.SubOtherElement [CLASS]
 (type $typewildcards.TypeWildCards.SubOtherElement (struct
- (field $vtable (ref null $typewildcards.TypeWildCards.SubOtherElement.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.TypeWildCards.SubOtherElement.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
  (field $$outer_this__typewildcards_TypeWildCards_SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
@@ -853,7 +853,7 @@
 
 ;;; Code for typewildcards.TypeWildCards.Foo [CLASS]
 (type $typewildcards.TypeWildCards.Foo (struct
- (field $vtable (ref null $typewildcards.TypeWildCards.Foo.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.TypeWildCards.Foo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__typewildcards_TypeWildCards_Foo (mut (ref null $typewildcards.TypeWildCards)))
 ))
@@ -931,7 +931,7 @@
 
 ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [CLASS]
 (type $typewildcards.TypeWildCards.$LambdaImplementor$1 (struct
- (field $vtable (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (struct

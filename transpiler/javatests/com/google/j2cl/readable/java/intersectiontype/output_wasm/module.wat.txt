@@ -260,7 +260,7 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest [CLASS]
 (type $intersectiontype.IntersectionTypeTest (struct
- (field $vtable (ref null $intersectiontype.IntersectionTypeTest.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $intersectiontype.IntersectionTypeTest.vtable (struct
@@ -424,7 +424,7 @@
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
    ;; return (((Cmp&Serial)) new $LambdaImplementor$1.<init>());
    ;;@ intersectiontype/IntersectionTypeTest.java:71:4
-   (local.set $return.value (call $m_<init>__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.rtt))))
+   (local.set $return.value (call $m_<init>__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.rtt))))
    (br $return.label)
   )
  )
@@ -443,7 +443,7 @@
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
    ;; return (((Cmp2&Serial)) new $LambdaImplementor$2.<init>());
    ;;@ intersectiontype/IntersectionTypeTest.java:76:4
-   (local.set $return.value (call $m_<init>__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.rtt))))
+   (local.set $return.value (call $m_<init>__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.rtt))))
    (br $return.label)
   )
  )
@@ -504,7 +504,7 @@
   (block
    ;; return ((T) intersectiontype.IntersectionTypeTest.get(new Object.<init>()));
    ;;@ intersectiontype/IntersectionTypeTest.java:96:4
-   (local.set $return.value (ref.cast (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt)))) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+   (local.set $return.value (ref.cast (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    (br $return.label)
   )
  )
@@ -610,7 +610,7 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [CLASS]
 (type $intersectiontype.IntersectionTypeTest.MapEntry (struct
- (field $vtable (ref null $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (mut (ref null $intersectiontype.IntersectionTypeTest)))
 ))
@@ -710,7 +710,7 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest.A [CLASS]
 (type $intersectiontype.IntersectionTypeTest.A (struct
- (field $vtable (ref null $intersectiontype.IntersectionTypeTest.A.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.A.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $intersectiontype.IntersectionTypeTest.A.vtable (struct
@@ -862,7 +862,7 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [CLASS]
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (struct
- (field $vtable (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable (struct
@@ -956,7 +956,7 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [CLASS]
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (struct
- (field $vtable (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable (struct

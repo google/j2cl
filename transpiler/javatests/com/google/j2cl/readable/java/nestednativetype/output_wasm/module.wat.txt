@@ -12,7 +12,7 @@
 
 ;;; Code for nestednativetype.NativeArray [CLASS]
 (type $nestednativetype.NativeArray (struct
- (field $vtable (ref null $nestednativetype.NativeArray.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $nestednativetype.NativeArray.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $nestednativetype.NativeArray.vtable (struct
@@ -54,7 +54,7 @@
   (block
    ;; return new $1.<init>(NativeArray.this);
    ;;@ nestednativetype/NativeArray.java:26:4
-   (local.set $return.value (call $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (global.get $nestednativetype.NativeArray.1.vtable) (global.get $nestednativetype.NativeArray.1.itable) (i32.const 0) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))(local.get $this)))
+   (local.set $return.value (call $m_<init>__nestednativetype_NativeArray__void_$pp_nestednativetype@nestednativetype.NativeArray.1 (struct.new_with_rtt $nestednativetype.NativeArray.1 (ref.as_non_null (global.get $nestednativetype.NativeArray.1.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.1.itable)) (i32.const 0) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt))(local.get $this)))
    (br $return.label)
   )
  )
@@ -106,7 +106,7 @@
 
 ;;; Code for nestednativetype.NativeArray.1 [CLASS]
 (type $nestednativetype.NativeArray.1 (struct
- (field $vtable (ref null $nestednativetype.NativeArray.1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $nestednativetype.NativeArray.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestednativetype_NativeArray_1 (mut (ref null $nestednativetype.NativeArray)))
 ))

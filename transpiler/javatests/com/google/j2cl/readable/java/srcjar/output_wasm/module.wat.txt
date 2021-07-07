@@ -12,7 +12,7 @@
 
 ;;; Code for srcjar.Foo [CLASS]
 (type $srcjar.Foo (struct
- (field $vtable (ref null $srcjar.Foo.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $srcjar.Foo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $srcjar.Foo.vtable (struct
@@ -85,7 +85,7 @@
 
 ;;; Code for srcjar.Srcjar [CLASS]
 (type $srcjar.Srcjar (struct
- (field $vtable (ref null $srcjar.Srcjar.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $srcjar.Srcjar.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $srcjar.Srcjar.vtable (struct
@@ -126,7 +126,7 @@
    ;; Foo foo = new Foo.<init>();
    ;;@ srcjar/Srcjar.java:21:4
    
-   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (global.get $srcjar.Foo.vtable) (global.get $srcjar.Foo.itable) (i32.const 0) (global.get $srcjar.Foo.rtt))))
+   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (global.get $srcjar.Foo.rtt))))
   )
  )
 )

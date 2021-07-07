@@ -12,7 +12,7 @@
 
 ;;; Code for genericnativetype.BoundedJsArray [CLASS]
 (type $genericnativetype.BoundedJsArray (struct
- (field $vtable (ref null $genericnativetype.BoundedJsArray.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $genericnativetype.BoundedJsArray.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArray.vtable (struct
@@ -81,7 +81,7 @@
    ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
    ;;@ genericnativetype/BoundedJsArray.java:40:4
    
-   (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (global.get $genericnativetype.BoundedJsArray.vtable) (global.get $genericnativetype.BoundedJsArray.itable) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
+   (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
    ;; return array;
    ;;@ genericnativetype/BoundedJsArray.java:41:4
    (local.set $return.value (local.get $array))
@@ -135,7 +135,7 @@
 
 ;;; Code for genericnativetype.BoundedJsArrays [CLASS]
 (type $genericnativetype.BoundedJsArrays (struct
- (field $vtable (ref null $genericnativetype.BoundedJsArrays.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $genericnativetype.BoundedJsArrays.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $genericnativetype.BoundedJsArrays.vtable (struct

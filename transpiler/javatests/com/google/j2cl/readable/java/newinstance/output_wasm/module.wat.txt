@@ -6,7 +6,7 @@
 
 ;;; Code for newinstance.NewInstanceExpr [CLASS]
 (type $newinstance.NewInstanceExpr (struct
- (field $vtable (ref null $newinstance.NewInstanceExpr.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $newinstance.NewInstanceExpr.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $newinstance.NewInstanceExpr.vtable (struct
@@ -48,7 +48,7 @@
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
    ;;@ newinstance/NewInstanceExpr.java:20:4
    
-   (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (global.get $newinstance.NewInstanceExpr.vtable) (global.get $newinstance.NewInstanceExpr.itable) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
+   (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
   )
  )
 )

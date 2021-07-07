@@ -26,7 +26,7 @@
 
 ;;; Code for interfaces.Main [CLASS]
 (type $interfaces.Main (struct
- (field $vtable (ref null $interfaces.Main.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $interfaces.Main.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $interfaces.Main.vtable (struct
@@ -69,7 +69,7 @@
    ;; Interface i = new Implementor.<init>(Main.this);
    ;;@ interfaces/Main.java:50:4
    
-   (local.set $i (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (global.get $interfaces.Main.Implementor.itable) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
+   (local.set $i (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
    ;; i.interfaceMethod();
    ;;@ interfaces/Main.java:51:4
    (call_ref (local.get $i)(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1)) (rtt.canon $interfaces.Main.Interface.vtable)) ))
@@ -83,7 +83,7 @@
    ;;@ interfaces/Main.java:54:4
    
    (local.set $x (i32.add (block (result i32)
-    (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (global.get $interfaces.Main.Implementor.vtable) (global.get $interfaces.Main.Implementor.itable) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
+    (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
     (global.get $f_a__interfaces_Main_Interface)
    ) (global.get $f_b__interfaces_Main_Interface)))
   )
@@ -276,7 +276,7 @@
 
 ;;; Code for interfaces.Main.Implementor [CLASS]
 (type $interfaces.Main.Implementor (struct
- (field $vtable (ref null $interfaces.Main.Implementor.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $interfaces.Main.Implementor.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__interfaces_Main_Implementor (mut (ref null $interfaces.Main)))
 ))
@@ -410,7 +410,7 @@
 
 ;;; Code for interfaces.Main.AbstractImplementor [CLASS]
 (type $interfaces.Main.AbstractImplementor (struct
- (field $vtable (ref null $interfaces.Main.AbstractImplementor.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__interfaces_Main_AbstractImplementor (mut (ref null $interfaces.Main)))
 ))

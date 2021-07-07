@@ -452,10 +452,10 @@ public class WasmModuleGenerator {
     // The first field is always the vtable for class dynamic dispatch.
     builder.append(
         String.format(
-            "(field $vtable (ref null %s)) ",
+            "(field $vtable (ref %s)) ",
             environment.getWasmVtableTypeName(type.getTypeDescriptor())));
     // The second field is always the itable for interface method dispatch.
-    builder.append("(field $itable (ref null $itable))");
+    builder.append("(field $itable (ref $itable))");
 
     WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
     for (Field field : wasmType.getAllInstanceFields()) {

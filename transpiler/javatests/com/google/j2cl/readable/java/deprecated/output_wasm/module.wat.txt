@@ -30,7 +30,7 @@
 
 ;;; Code for deprecated.DeprecatedExample [CLASS]
 (type $deprecated.DeprecatedExample (struct
- (field $vtable (ref null $deprecated.DeprecatedExample.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $deprecated.DeprecatedExample.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (mut (ref null $java.lang.String)))
 ))
@@ -232,7 +232,7 @@
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [ENUM]
 (type $deprecated.DeprecatedExample.DeprecatedEnum (struct
- (field $vtable (ref null $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -320,7 +320,7 @@
    ;;@ deprecated/DeprecatedExample.java:55:7
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
+    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
      (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
      (global.get $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum)
@@ -360,7 +360,7 @@
     (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum )
     ;; (deprecated.DeprecatedExample.DeprecatedEnum.A_VALUE = new DeprecatedEnum.<init>(javaemul.internal.StringPool.$getString_|A_VALUE|(),deprecated.DeprecatedExample.DeprecatedEnum.A_VALUE));
     ;;@ deprecated/DeprecatedExample.java:56:4
-    (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum (call $m_<init>__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedEnum (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))(call $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum)))
+    (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum (call $m_<init>__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedEnum.rtt))(call $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum)))
    )
    ;; (deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap = null);
    ;;@ deprecated/DeprecatedExample.java:55:7
@@ -389,7 +389,7 @@
 
 ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [ENUM]
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum (struct
- (field $vtable (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
@@ -477,7 +477,7 @@
    ;;@ deprecated/DeprecatedExample.java:62:7
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (global.get $javaemul.internal.WasmArray.OfObject.vtable) (global.get $javaemul.internal.WasmArray.OfObject.itable) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
+    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
      (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedJsEnum )
      (global.get $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum)
@@ -517,7 +517,7 @@
     (call $$clinit__void@deprecated.DeprecatedExample.DeprecatedJsEnum )
     ;; (deprecated.DeprecatedExample.DeprecatedJsEnum.A_VALUE = new DeprecatedJsEnum.<init>(javaemul.internal.StringPool.$getString_|A_VALUE|(),deprecated.DeprecatedExample.DeprecatedJsEnum.A_VALUE));
     ;;@ deprecated/DeprecatedExample.java:63:4
-    (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum (call $m_<init>__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedJsEnum (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt))(call $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum)))
+    (global.set $f_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum (call $m_<init>__java_lang_String__int__void_$p_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedJsEnum (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (ref.as_non_null (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.rtt))(call $$getString_|A_VALUE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum)))
    )
    ;; (deprecated.DeprecatedExample.DeprecatedJsEnum.namesToValuesMap = null);
    ;;@ deprecated/DeprecatedExample.java:62:7

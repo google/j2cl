@@ -8,7 +8,7 @@
 
 ;;; Code for instancequalifieronstaticfield.InstanceQualifiers [CLASS]
 (type $instancequalifieronstaticfield.InstanceQualifiers (struct
- (field $vtable (ref null $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $instancequalifieronstaticfield.InstanceQualifiers.vtable (struct
@@ -92,7 +92,7 @@
    ;; InstanceQualifiers main = new InstanceQualifiers.<init>();
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:31:4
    
-   (local.set $main (call $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable) (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable) (i32.const 0) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
+   (local.set $main (call $m_<init>__void@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable)) (i32.const 0) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
    ;; int i = 0;
    ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:32:4
    

@@ -18,7 +18,7 @@
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics (struct
- (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (struct
@@ -60,11 +60,11 @@
    ;; Bar<T> bar = new $1Bar.<init>();
    ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:24:4
    
-   (local.set $bar (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
+   (local.set $bar (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
    ;; Baz<Object, T> baz = new $1Baz.<init>();
    ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:29:4
    
-   (local.set $baz (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
+   (local.set $baz (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
   )
  )
 )
@@ -113,7 +113,7 @@
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct
- (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable (struct
@@ -201,7 +201,7 @@
 
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct
- (field $vtable (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable (struct

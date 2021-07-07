@@ -28,7 +28,7 @@
 
 ;;; Code for anonymousclass.SomeClass [CLASS]
 (type $anonymousclass.SomeClass (struct
- (field $vtable (ref null $anonymousclass.SomeClass.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $anonymousclass.SomeClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousclass.SomeClass.vtable (struct
@@ -85,7 +85,7 @@
 
 ;;; Code for anonymousclass.AnonymousClass [CLASS]
 (type $anonymousclass.AnonymousClass (struct
- (field $vtable (ref null $anonymousclass.AnonymousClass.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $anonymousclass.AnonymousClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousclass.AnonymousClass.vtable (struct
@@ -127,7 +127,7 @@
    ;; SomeClass instance = new $1.<init>(AnonymousClass.this,1);
    ;;@ anonymousclass/AnonymousClass.java:26:4
    
-   (local.set $instance (call $m_<init>__anonymousclass_AnonymousClass__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (global.get $anonymousclass.AnonymousClass.1.vtable) (global.get $anonymousclass.AnonymousClass.1.itable) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(local.get $this)(i32.const 1)))
+   (local.set $instance (call $m_<init>__anonymousclass_AnonymousClass__int__void_$pp_anonymousclass@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.vtable)) (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.itable)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(local.get $this)(i32.const 1)))
   )
  )
 )
@@ -177,7 +177,7 @@
 
 ;;; Code for anonymousclass.AnonymousClass.1 [CLASS]
 (type $anonymousclass.AnonymousClass.1 (struct
- (field $vtable (ref null $anonymousclass.AnonymousClass.1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousclass_AnonymousClass_1 (mut (ref null $anonymousclass.AnonymousClass)))
  (field $f_object__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
@@ -324,7 +324,7 @@
     (call $$clinit__void@anonymousclass.SomeInterface )
     ;; (anonymousclass.SomeInterface.implicitlyStatic = new $1.<init>(1));
     ;;@ anonymousclass/AnonymousClass.java:39:2
-    (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (global.get $anonymousclass.SomeInterface.1.vtable) (global.get $anonymousclass.SomeInterface.1.itable) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
+    (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $m_<init>__int__void_$pp_anonymousclass@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.itable)) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
    )
   )
  )
@@ -348,7 +348,7 @@
 
 ;;; Code for anonymousclass.SomeInterface.1 [CLASS]
 (type $anonymousclass.SomeInterface.1 (struct
- (field $vtable (ref null $anonymousclass.SomeInterface.1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $anonymousclass.SomeInterface.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $anonymousclass.SomeInterface.1.vtable (struct

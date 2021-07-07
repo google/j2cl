@@ -74,7 +74,7 @@
 
 ;;; Code for nobridgemethods.Map [CLASS]
 (type $nobridgemethods.Map (struct
- (field $vtable (ref null $nobridgemethods.Map.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $nobridgemethods.Map.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $nobridgemethods.Map.vtable (struct
@@ -130,7 +130,7 @@
 
 ;;; Code for nobridgemethods.TreeMap [CLASS]
 (type $nobridgemethods.TreeMap (struct
- (field $vtable (ref null $nobridgemethods.TreeMap.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $nobridgemethods.TreeMap.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $nobridgemethods.TreeMap.vtable (struct
@@ -174,7 +174,7 @@
   (block
    ;; return new InnerEntry.<init>();
    ;;@ nobridgemethods/CharSet.java:29:4
-   (local.set $return.value (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.TreeMap.InnerEntry (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (global.get $nobridgemethods.TreeMap.InnerEntry.vtable) (global.get $nobridgemethods.TreeMap.InnerEntry.itable) (i32.const 0) (global.get $nobridgemethods.TreeMap.InnerEntry.rtt))))
+   (local.set $return.value (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.TreeMap.InnerEntry (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.itable)) (i32.const 0) (global.get $nobridgemethods.TreeMap.InnerEntry.rtt))))
    (br $return.label)
   )
  )
@@ -247,7 +247,7 @@
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [CLASS]
 (type $nobridgemethods.TreeMap.InnerEntry (struct
- (field $vtable (ref null $nobridgemethods.TreeMap.InnerEntry.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $nobridgemethods.TreeMap.InnerEntry.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $nobridgemethods.TreeMap.InnerEntry.vtable (struct
@@ -320,7 +320,7 @@
 
 ;;; Code for nobridgemethods.CharSet [CLASS]
 (type $nobridgemethods.CharSet (struct
- (field $vtable (ref null $nobridgemethods.CharSet.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $nobridgemethods.CharSet.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $nobridgemethods.CharSet.vtable (struct
@@ -362,7 +362,7 @@
    ;; TreeMap<String> treeMap = new $1.<init>();
    ;;@ nobridgemethods/CharSet.java:36:4
    
-   (local.set $treeMap (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.CharSet.1 (struct.new_with_rtt $nobridgemethods.CharSet.1 (global.get $nobridgemethods.CharSet.1.vtable) (global.get $nobridgemethods.CharSet.1.itable) (i32.const 0) (global.get $nobridgemethods.CharSet.1.rtt))))
+   (local.set $treeMap (call $m_<init>__void_$pp_nobridgemethods@nobridgemethods.CharSet.1 (struct.new_with_rtt $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0) (global.get $nobridgemethods.CharSet.1.rtt))))
   )
  )
 )
@@ -411,7 +411,7 @@
 
 ;;; Code for nobridgemethods.CharSet.1 [CLASS]
 (type $nobridgemethods.CharSet.1 (struct
- (field $vtable (ref null $nobridgemethods.CharSet.1.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $nobridgemethods.CharSet.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $nobridgemethods.CharSet.1.vtable (struct

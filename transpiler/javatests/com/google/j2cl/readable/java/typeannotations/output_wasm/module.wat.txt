@@ -102,7 +102,7 @@
 
 ;;; Code for typeannotations.AbstractType [CLASS]
 (type $typeannotations.AbstractType (struct
- (field $vtable (ref null $typeannotations.AbstractType.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typeannotations.AbstractType.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typeannotations.AbstractType.vtable (struct
@@ -182,7 +182,7 @@
 
 ;;; Code for typeannotations.AbstractTypeNonNull [CLASS]
 (type $typeannotations.AbstractTypeNonNull (struct
- (field $vtable (ref null $typeannotations.AbstractTypeNonNull.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typeannotations.AbstractTypeNonNull.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typeannotations.AbstractTypeNonNull.vtable (struct
@@ -262,7 +262,7 @@
 
 ;;; Code for typeannotations.Parent [CLASS]
 (type $typeannotations.Parent (struct
- (field $vtable (ref null $typeannotations.Parent.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typeannotations.Parent.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typeannotations.Parent.vtable (struct
@@ -329,7 +329,7 @@
   (block
    ;; return new ArrayList.<init>();
    ;;@ typeannotations/TypeAnnotations.java:36:4
-   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (ref.as_non_null (global.get $java.util.ArrayList.vtable)) (ref.as_non_null (global.get $java.util.ArrayList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )
@@ -381,7 +381,7 @@
 
 ;;; Code for typeannotations.ChildWithNullableParent [CLASS]
 (type $typeannotations.ChildWithNullableParent (struct
- (field $vtable (ref null $typeannotations.ChildWithNullableParent.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typeannotations.ChildWithNullableParent.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typeannotations.ChildWithNullableParent.vtable (struct
@@ -527,7 +527,7 @@
 
 ;;; Code for typeannotations.ChildWithNonNullableParent [CLASS]
 (type $typeannotations.ChildWithNonNullableParent (struct
- (field $vtable (ref null $typeannotations.ChildWithNonNullableParent.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typeannotations.ChildWithNonNullableParent.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typeannotations.ChildWithNonNullableParent.vtable (struct
@@ -673,7 +673,7 @@
 
 ;;; Code for typeannotations.TypeAnnotations [CLASS]
 (type $typeannotations.TypeAnnotations (struct
- (field $vtable (ref null $typeannotations.TypeAnnotations.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $typeannotations.TypeAnnotations.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $typeannotations.TypeAnnotations.vtable (struct
@@ -714,7 +714,7 @@
    ;; List<String> list = new ArrayList.<init>();
    ;;@ typeannotations/TypeAnnotations.java:53:4
    
-   (local.set $list (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (global.get $java.util.ArrayList.vtable) (global.get $java.util.ArrayList.itable) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $list (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (ref.as_non_null (global.get $java.util.ArrayList.vtable)) (ref.as_non_null (global.get $java.util.ArrayList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
   )
  )
 )

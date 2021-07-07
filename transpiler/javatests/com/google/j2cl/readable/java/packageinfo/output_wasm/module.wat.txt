@@ -18,7 +18,7 @@
 
 ;;; Code for packageinfo.Outer [CLASS]
 (type $packageinfo.Outer (struct
- (field $vtable (ref null $packageinfo.Outer.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $packageinfo.Outer.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
 ))
 (type $packageinfo.Outer.vtable (struct
@@ -91,7 +91,7 @@
 
 ;;; Code for packageinfo.Outer.Inner [CLASS]
 (type $packageinfo.Outer.Inner (struct
- (field $vtable (ref null $packageinfo.Outer.Inner.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $packageinfo.Outer.Inner.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__packageinfo_Outer_Inner (mut (ref null $packageinfo.Outer)))
 ))
@@ -169,7 +169,7 @@
 
 ;;; Code for packageinfo.subpackage.Foo [CLASS]
 (type $packageinfo.subpackage.Foo (struct
- (field $vtable (ref null $packageinfo.subpackage.Foo.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $packageinfo.subpackage.Foo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer)))
 ))
@@ -210,7 +210,7 @@
   (block
    ;; (Foo.this.outer = new Outer.<init>());
    ;;@ packageinfo/subpackage/Foo.java:22:2
-   (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (global.get $packageinfo.Outer.vtable) (global.get $packageinfo.Outer.itable) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
+   (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
   )
  )
 )

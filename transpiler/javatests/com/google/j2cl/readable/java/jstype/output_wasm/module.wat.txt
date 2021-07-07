@@ -12,7 +12,7 @@
 
 ;;; Code for jstype.SomeJsType [CLASS]
 (type $jstype.SomeJsType (struct
- (field $vtable (ref null $jstype.SomeJsType.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $jstype.SomeJsType.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_publicField__jstype_SomeJsType (mut i32))
  (field $f_privateField__jstype_SomeJsType_ (mut i32))
@@ -146,7 +146,7 @@
    ;; Object object = new Object.<init>();
    ;;@ jstype/SomeJsType.java:52:4
    
-   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (global.get $java.lang.Object.vtable) (global.get $java.lang.Object.itable) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
    ;;@ jstype/SomeJsType.java:54:4
    

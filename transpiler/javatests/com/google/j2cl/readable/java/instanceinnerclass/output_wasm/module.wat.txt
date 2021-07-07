@@ -12,7 +12,7 @@
 
 ;;; Code for instanceinnerclass.InstanceInnerClass [CLASS]
 (type $instanceinnerclass.InstanceInnerClass (struct
- (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $instanceinnerclass.InstanceInnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_instanceField__instanceinnerclass_InstanceInnerClass (mut i32))
 ))
@@ -67,7 +67,7 @@
   (block
    ;; new InnerClass.<init>(new InstanceInnerClass.<init>());
    ;;@ instanceinnerclass/InstanceInnerClass.java:34:4
-   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__void@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (global.get $instanceinnerclass.InstanceInnerClass.vtable) (global.get $instanceinnerclass.InstanceInnerClass.itable) (i32.const 0) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
+   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable)) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__void@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.itable)) (i32.const 0) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
   )
  )
 )
@@ -117,7 +117,7 @@
 
 ;;; Code for instanceinnerclass.InstanceInnerClass.InnerClass [CLASS]
 (type $instanceinnerclass.InstanceInnerClass.InnerClass (struct
- (field $vtable (ref null $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (field $itable (ref null $itable))
+ (field $vtable (ref $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass (mut (ref null $instanceinnerclass.InstanceInnerClass)))
  (field $f_field__instanceinnerclass_InstanceInnerClass_InnerClass (mut i32))
