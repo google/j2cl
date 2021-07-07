@@ -50,6 +50,11 @@ public class BooleanLiteral extends Literal {
   }
 
   @Override
+  public Expression prefixNot() {
+    return get(!value);
+  }
+
+  @Override
   public BooleanLiteral clone() {
     // Boolean literals are value types do not need to be actually cloned.
     return this;

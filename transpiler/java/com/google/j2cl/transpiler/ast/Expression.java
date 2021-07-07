@@ -85,22 +85,22 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
   }
 
   /** Prefix expression with a spread unary operator. */
-  public UnaryExpression prefixSpread() {
+  public Expression prefixSpread() {
     return prefix(PrefixOperator.SPREAD);
   }
 
   /** Prefix expression with a plus unary operator. */
-  public UnaryExpression prefixPlus() {
+  public Expression prefixPlus() {
     return prefix(PrefixOperator.PLUS);
   }
 
   /** Returns the logically negated expression. */
-  public UnaryExpression prefixNot() {
+  public Expression prefixNot() {
     return prefix(PrefixOperator.NOT);
   }
 
   /** Returns expression prefixed with unary operator {@code prefixOperator}. */
-  public UnaryExpression prefix(PrefixOperator prefixOperator) {
+  public Expression prefix(PrefixOperator prefixOperator) {
     return PrefixExpression.newBuilder().setOperator(prefixOperator).setOperand(this).build();
   }
 

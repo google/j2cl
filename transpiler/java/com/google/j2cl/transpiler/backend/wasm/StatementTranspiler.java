@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
@@ -352,6 +353,14 @@ class StatementTranspiler {
 
       private void renderConditionalBranch(
           SourcePosition sourcePosition, Expression condition, int target) {
+        if (condition.equals(BooleanLiteral.get(false))) {
+          // Do not emit the conditional exit if it will never be taken. This covers cases like:
+          //    while (true) { ... }
+          // Removing this condition in these cases brings the WASM verifier to be inline with
+          // the static analysis performed by Java and allows us to avoid inserting unnecessary
+          // (unreachable) operations.
+          return;
+        }
         builder.newLine();
         builder.emitWithMapping(
             sourcePosition,
