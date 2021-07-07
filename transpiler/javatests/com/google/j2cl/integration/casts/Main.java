@@ -33,6 +33,7 @@ public class Main {
     testCasts_exceptionMessages();
     testCasts_erasureCastOnThrow();
     testCasts_erasureCastOnConversion();
+    testCasts_notOptimizeable();
     testArrayCasts_basics();
     testArrayCasts_differentDimensions();
     testArrayCasts_sameDimensions();
@@ -566,5 +567,43 @@ public class Main {
 
   private static <T> T returnObjectAsT(T unused) {
     return (T) new Object();
+  }
+
+  private static class Holder {
+    public Object f = null;
+
+    public Holder reset() {
+      f = f instanceof Foo ? new Bar() : new Foo();
+      return this;
+    }
+  }
+
+  private static Object staticObject = new Foo();
+
+  private static class StaticClass {
+    static Holder a = new Holder();
+
+    static {
+      staticObject = new Object();
+    }
+  }
+
+  public static void testCasts_notOptimizeable() {
+
+    assertThrowsClassCastException(
+        () -> {
+          if (staticObject instanceof Foo) {
+            StaticClass.a.f = (Foo) staticObject;
+          }
+        });
+
+    Holder h = new Holder();
+
+    assertThrowsClassCastException(
+        () -> {
+          if (h.reset().f instanceof Foo) {
+            Foo foo = (Foo) h.reset().f;
+          }
+        });
   }
 }

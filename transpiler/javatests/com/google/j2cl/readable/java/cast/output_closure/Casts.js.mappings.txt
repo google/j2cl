@@ -51,18 +51,18 @@
 [if (o instanceof Casts) {
       Casts c = (Casts) o;
     }] => [if (Casts.$isInstance(o)) {
-   let c = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+   let c = /**@type {Casts}*/ (o);
   }] "cast.Casts.testCastObjectAfterInstanceOf"
-[Casts c = (Casts) o;] => [let c = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
+[Casts c = (Casts) o;] => [let c = /**@type {Casts}*/ (o);] "cast.Casts.testCastObjectAfterInstanceOf"
 [c] => [c] "c"
 [if (o instanceof Casts) {
       Casts cAvoidsCastsTo = (Casts) o;
 ...      Casts cNotAvoidCastsTo = (Casts) o;
     }] => [if (Casts.$isInstance(o)) {
-   let cAvoidsCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+   let cAvoidsCastsTo = /**@type {Casts}*/ (o);
 ...   let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }] "cast.Casts.testCastObjectAfterInstanceOf"
-[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
+[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo = /**@type {Casts}*/ (o);] "cast.Casts.testCastObjectAfterInstanceOf"
 [cAvoidsCastsTo] => [cAvoidsCastsTo] "cAvoidsCastsTo"
 [o = new Object();] => [o = j_l_Object.$create__();] "cast.Casts.testCastObjectAfterInstanceOf"
 [Casts cNotAvoidCastsTo = (Casts) o;] => [let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
@@ -71,10 +71,10 @@
       Casts cAvoidsCastsTo = (Casts) o;
 ...      Casts cNotAvoidCastsTo = (Casts) o;
     }] => [if (Casts.$isInstance(o)) {
-   let cAvoidsCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+   let cAvoidsCastsTo_1 = /**@type {Casts}*/ (o);
 ...   let cNotAvoidCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }] "cast.Casts.testCastObjectAfterInstanceOf"
-[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
+[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo_1 = /**@type {Casts}*/ (o);] "cast.Casts.testCastObjectAfterInstanceOf"
 [cAvoidsCastsTo] => [cAvoidsCastsTo_1] "cAvoidsCastsTo"
 [o = new Foo();] => [o = Foo.$create__cast_Casts(this);] "cast.Casts.testCastObjectAfterInstanceOf"
 [Casts cNotAvoidCastsTo = (Casts) o;] => [let cNotAvoidCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
@@ -83,10 +83,10 @@
       Casts cAvoidsCastsTo = (Casts) o;
 ...      Casts cAvoidCastsTo = (Casts) o;
     }] => [if (Casts.$isInstance(o)) {
-   let cAvoidsCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+   let cAvoidsCastsTo_2 = /**@type {Casts}*/ (o);
 ...   let cAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }] "cast.Casts.testCastObjectAfterInstanceOf"
-[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
+[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo_2 = /**@type {Casts}*/ (o);] "cast.Casts.testCastObjectAfterInstanceOf"
 [cAvoidsCastsTo] => [cAvoidsCastsTo_2] "cAvoidsCastsTo"
 [o = new Object();] => [o = j_l_Object.$create__();] "cast.Casts.testCastObjectAfterInstanceOf"
 [Casts cAvoidCastsTo = (Casts) o;] => [let cAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
@@ -95,10 +95,10 @@
       Casts cAvoidsCastsTo = (Casts) o;
 ...      Casts cNotAvoidCastsTo = (Casts) o;
     }] => [if (Casts.$isInstance(o)) {
-   let cAvoidsCastsTo_3 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
+   let cAvoidsCastsTo_3 = /**@type {Casts}*/ (o);
 ...   let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(o, Casts));
   }] "cast.Casts.testCastObjectAfterInstanceOf"
-[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo_3 = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
+[Casts cAvoidsCastsTo = (Casts) o;] => [let cAvoidsCastsTo_3 = /**@type {Casts}*/ (o);] "cast.Casts.testCastObjectAfterInstanceOf"
 [cAvoidsCastsTo] => [cAvoidsCastsTo_3] "cAvoidsCastsTo"
 [functionForInstanceofTest();] => [this.m_functionForInstanceofTest___$p_cast_Casts();] "cast.Casts.testCastObjectAfterInstanceOf"
 [Casts cNotAvoidCastsTo = (Casts) o;] => [let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(o, Casts));] "cast.Casts.testCastObjectAfterInstanceOf"
@@ -109,18 +109,18 @@
 [if (foo.field instanceof Casts) {
       Casts c = (Casts) foo.field;
     }] => [if (Casts.$isInstance(foo.f_field__cast_Casts_Foo)) {
-   let c = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
+   let c = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);
   }] "cast.Casts.testCastFieldAfterInstanceOf"
-[Casts c = (Casts) foo.field;] => [let c = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));] "cast.Casts.testCastFieldAfterInstanceOf"
+[Casts c = (Casts) foo.field;] => [let c = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);] "cast.Casts.testCastFieldAfterInstanceOf"
 [c] => [c] "c"
 [if (foo.field instanceof Casts) {
       Casts cAvoidsCastsTo = (Casts) foo.field;
 ...      Casts cNotAvoidCastsTo = (Casts) foo.field;
     }] => [if (Casts.$isInstance(foo.f_field__cast_Casts_Foo)) {
-   let cAvoidsCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
+   let cAvoidsCastsTo = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);
 ...   let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
   }] "cast.Casts.testCastFieldAfterInstanceOf"
-[Casts cAvoidsCastsTo = (Casts) foo.field;] => [let cAvoidsCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));] "cast.Casts.testCastFieldAfterInstanceOf"
+[Casts cAvoidsCastsTo = (Casts) foo.field;] => [let cAvoidsCastsTo = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);] "cast.Casts.testCastFieldAfterInstanceOf"
 [cAvoidsCastsTo] => [cAvoidsCastsTo] "cAvoidsCastsTo"
 [foo.field = new Object();] => [foo.f_field__cast_Casts_Foo = j_l_Object.$create__();] "cast.Casts.testCastFieldAfterInstanceOf"
 [Casts cNotAvoidCastsTo = (Casts) foo.field;] => [let cNotAvoidCastsTo = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));] "cast.Casts.testCastFieldAfterInstanceOf"
@@ -129,10 +129,10 @@
       Casts cAvoidsCastsTo = (Casts) foo.field;
 ...      Casts cNotAvoidCastsTo = (Casts) foo.field;
     }] => [if (Casts.$isInstance(foo.f_field__cast_Casts_Foo)) {
-   let cAvoidsCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
+   let cAvoidsCastsTo_1 = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);
 ...   let cNotAvoidCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
   }] "cast.Casts.testCastFieldAfterInstanceOf"
-[Casts cAvoidsCastsTo = (Casts) foo.field;] => [let cAvoidsCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));] "cast.Casts.testCastFieldAfterInstanceOf"
+[Casts cAvoidsCastsTo = (Casts) foo.field;] => [let cAvoidsCastsTo_1 = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);] "cast.Casts.testCastFieldAfterInstanceOf"
 [cAvoidsCastsTo] => [cAvoidsCastsTo_1] "cAvoidsCastsTo"
 [foo = new Foo();] => [foo = Foo.$create__cast_Casts(this);] "cast.Casts.testCastFieldAfterInstanceOf"
 [Casts cNotAvoidCastsTo = (Casts) foo.field;] => [let cNotAvoidCastsTo_1 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));] "cast.Casts.testCastFieldAfterInstanceOf"
@@ -141,10 +141,10 @@
       Casts cAvoidsCastsTo = (Casts) foo.field;
 ...      Casts cNotAvoidCastsTo = (Casts) foo.field;
     }] => [if (Casts.$isInstance(foo.f_field__cast_Casts_Foo)) {
-   let cAvoidsCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
+   let cAvoidsCastsTo_2 = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);
 ...   let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));
   }] "cast.Casts.testCastFieldAfterInstanceOf"
-[Casts cAvoidsCastsTo = (Casts) foo.field;] => [let cAvoidsCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));] "cast.Casts.testCastFieldAfterInstanceOf"
+[Casts cAvoidsCastsTo = (Casts) foo.field;] => [let cAvoidsCastsTo_2 = /**@type {Casts}*/ (foo.f_field__cast_Casts_Foo);] "cast.Casts.testCastFieldAfterInstanceOf"
 [cAvoidsCastsTo] => [cAvoidsCastsTo_2] "cAvoidsCastsTo"
 [functionForInstanceofTest();] => [this.m_functionForInstanceofTest___$p_cast_Casts();] "cast.Casts.testCastFieldAfterInstanceOf"
 [Casts cNotAvoidCastsTo = (Casts) foo.field;] => [let cNotAvoidCastsTo_2 = /**@type {Casts}*/ ($Casts.$to(foo.f_field__cast_Casts_Foo, Casts));] "cast.Casts.testCastFieldAfterInstanceOf"

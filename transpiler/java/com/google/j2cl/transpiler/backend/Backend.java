@@ -103,6 +103,7 @@ import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunction
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
+import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
@@ -210,6 +211,7 @@ public enum Backend {
           // Run before other passes that normalize JsEnum expressions, but after all the normal
           // Java semantic conversions.
           InsertJsEnumBoxingAndUnboxingConversions::new,
+          RemoveUnneededCasts::new,
           NormalizeSwitchStatements::new,
           ArrayAccessNormalizer::new,
           ImplementAssertStatements::new,
