@@ -19,10 +19,16 @@ import jsinterop.annotations.JsEnum;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 public class Main {
+
   public static String STATIC_FIELD = "STATIC_FIELD";
+
+  public static final String CONSTANT = "STATIC_FIELD";
+
+  @JsProperty public static final String JS_CONSTANT = "STATIC_FIELD";
 
   @JsType
   interface JsTypeInterface {

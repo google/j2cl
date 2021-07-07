@@ -78,13 +78,13 @@
  (param $this (ref null $libraryinfo.Main))
  (result (ref null $libraryinfo.Main))
  (block $return.label
-  ;;@ libraryinfo/Main.java:24:13
+  ;;@ libraryinfo/Main.java:25:13
   (block
    ;; libraryinfo.Main.$clinit();
-   ;;@ libraryinfo/Main.java:24:13
+   ;;@ libraryinfo/Main.java:25:13
    (call $$clinit__void@libraryinfo.Main )
    ;; Object.this.Object.<init>();
-   ;;@ libraryinfo/Main.java:24:13
+   ;;@ libraryinfo/Main.java:25:13
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -95,29 +95,29 @@
 (func $m_entryPoint__void@libraryinfo.Main
  (local $jsFunction (ref null $java.lang.Object))
  (block $return.label
-  ;;@ libraryinfo/Main.java:69:21
+  ;;@ libraryinfo/Main.java:75:21
   (block
    ;; libraryinfo.Main.$clinit();
-   ;;@ libraryinfo/Main.java:69:21
+   ;;@ libraryinfo/Main.java:75:21
    (call $$clinit__void@libraryinfo.Main )
    ;; new Main.<init>().execute();
-   ;;@ libraryinfo/Main.java:70:4
+   ;;@ libraryinfo/Main.java:76:4
    (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.itable)) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
    ;; Function jsFunction = new FunctionImpl.<init>();
-   ;;@ libraryinfo/Main.java:72:4
+   ;;@ libraryinfo/Main.java:78:4
    
    (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.itable)) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = new $LambdaImplementor$1.<init>());
-   ;;@ libraryinfo/Main.java:73:4
+   ;;@ libraryinfo/Main.java:79:4
    (local.set $jsFunction (call $m_<init>__void@libraryinfo.Main.$LambdaImplementor$1 (struct.new_with_rtt $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt))))
    ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
-   ;;@ libraryinfo/Main.java:74:4
+   ;;@ libraryinfo/Main.java:80:4
    (call_ref (local.get $jsFunction)(call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0)) (rtt.canon $libraryinfo.Main.Function.vtable)) ))
    ;; new MyJsType.<init>();
-   ;;@ libraryinfo/Main.java:76:4
+   ;;@ libraryinfo/Main.java:82:4
    (drop (call $m_<init>__void@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
    ;; new $1.<init>();
-   ;;@ libraryinfo/Main.java:78:4
+   ;;@ libraryinfo/Main.java:84:4
    (drop (call $m_<init>__void_$pp_libraryinfo@libraryinfo.Main.1 (struct.new_with_rtt $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.1.itable)) (i32.const 0) (global.get $libraryinfo.Main.1.rtt))))
   )
  )
@@ -127,10 +127,10 @@
 (func $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main
  (param $this (ref null $libraryinfo.Main))
  (block $return.label
-  ;;@ libraryinfo/Main.java:84:15
+  ;;@ libraryinfo/Main.java:90:15
   (block
    ;; libraryinfo.Main.log(javaemul.internal.StringPool.$getString_|Foo|());
-   ;;@ libraryinfo/Main.java:85:4
+   ;;@ libraryinfo/Main.java:91:4
    (call $m_log__java_lang_Object__void@libraryinfo.Main (call $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool ))
   )
  )
@@ -144,10 +144,10 @@
  (local $this (ref null $libraryinfo.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.rtt)))
  (block $return.label
-  ;;@ libraryinfo/Main.java:89:16
+  ;;@ libraryinfo/Main.java:95:16
   (block
    ;; return super.toString();
-   ;;@ libraryinfo/Main.java:90:4
+   ;;@ libraryinfo/Main.java:96:4
    (local.set $return.value (call $m_toString__java_lang_String@java.lang.Object (local.get $this)))
    (br $return.label)
   )
@@ -166,20 +166,20 @@
  (local $foo (ref null $libraryinfo.Main.Foo))
  (local $clazz (ref null $java.lang.Class))
  (block $return.label
-  ;;@ libraryinfo/Main.java:101:21
+  ;;@ libraryinfo/Main.java:107:21
   (block
    ;; libraryinfo.Main.$clinit();
-   ;;@ libraryinfo/Main.java:101:21
+   ;;@ libraryinfo/Main.java:107:21
    (call $$clinit__void@libraryinfo.Main )
    ;; Foo foo = null;
-   ;;@ libraryinfo/Main.java:102:4
+   ;;@ libraryinfo/Main.java:108:4
    
    (local.set $foo (ref.null $libraryinfo.Main.Foo))
    ;; foo.instanceMethod();
-   ;;@ libraryinfo/Main.java:103:4
+   ;;@ libraryinfo/Main.java:109:4
    (call_ref (local.get $foo)(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
    ;; Class<?> clazz = javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
-   ;;@ libraryinfo/Main.java:105:4
+   ;;@ libraryinfo/Main.java:111:4
    
    (local.set $clazz (call $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
   )
@@ -189,30 +189,30 @@
 ;;; void Main.$clinit()
 (func $$clinit__void@libraryinfo.Main
  (block $return.label
-  ;;@ libraryinfo/Main.java:24:13
+  ;;@ libraryinfo/Main.java:25:13
   (block
    ;; if (libraryinfo.Main.$initialized) return;
-   ;;@ libraryinfo/Main.java:24:13
+   ;;@ libraryinfo/Main.java:25:13
    (if (global.get $f_$initialized__libraryinfo_Main)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:24:13
+     ;;@ libraryinfo/Main.java:25:13
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.$initialized = true);
-   ;;@ libraryinfo/Main.java:24:13
+   ;;@ libraryinfo/Main.java:25:13
    (global.set $f_$initialized__libraryinfo_Main (i32.const 1))
    ;; java.lang.Object.$clinit();
-   ;;@ libraryinfo/Main.java:24:13
+   ;;@ libraryinfo/Main.java:25:13
    (call $$clinit__void@java.lang.Object )
-   ;;@ libraryinfo/Main.java:25:2
+   ;;@ libraryinfo/Main.java:27:2
    (block
     ;; libraryinfo.Main.$clinit();
-    ;;@ libraryinfo/Main.java:25:2
+    ;;@ libraryinfo/Main.java:27:2
     (call $$clinit__void@libraryinfo.Main )
     ;; (libraryinfo.Main.STATIC_FIELD = javaemul.internal.StringPool.$getString_|STATIC_FIELD|());
-    ;;@ libraryinfo/Main.java:25:2
+    ;;@ libraryinfo/Main.java:27:2
     (global.set $f_STATIC_FIELD__libraryinfo_Main (call $$getString_|STATIC_FIELD|__java_lang_String@javaemul.internal.StringPool ))
    )
   )
@@ -246,19 +246,19 @@
 ;;; void JsTypeInterface.$clinit()
 (func $$clinit__void@libraryinfo.Main.JsTypeInterface
  (block $return.label
-  ;;@ libraryinfo/Main.java:28:12
+  ;;@ libraryinfo/Main.java:34:12
   (block
    ;; if (libraryinfo.Main.JsTypeInterface.$initialized) return;
-   ;;@ libraryinfo/Main.java:28:12
+   ;;@ libraryinfo/Main.java:34:12
    (if (global.get $f_$initialized__libraryinfo_Main_JsTypeInterface)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:28:12
+     ;;@ libraryinfo/Main.java:34:12
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.JsTypeInterface.$initialized = true);
-   ;;@ libraryinfo/Main.java:28:12
+   ;;@ libraryinfo/Main.java:34:12
    (global.set $f_$initialized__libraryinfo_Main_JsTypeInterface (i32.const 1))
   )
  )
@@ -288,19 +288,19 @@
 ;;; void FunctionnalInterface.$clinit()
 (func $$clinit__void@libraryinfo.Main.FunctionnalInterface
  (block $return.label
-  ;;@ libraryinfo/Main.java:34:12
+  ;;@ libraryinfo/Main.java:40:12
   (block
    ;; if (libraryinfo.Main.FunctionnalInterface.$initialized) return;
-   ;;@ libraryinfo/Main.java:34:12
+   ;;@ libraryinfo/Main.java:40:12
    (if (global.get $f_$initialized__libraryinfo_Main_FunctionnalInterface)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:34:12
+     ;;@ libraryinfo/Main.java:40:12
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.FunctionnalInterface.$initialized = true);
-   ;;@ libraryinfo/Main.java:34:12
+   ;;@ libraryinfo/Main.java:40:12
    (global.set $f_$initialized__libraryinfo_Main_FunctionnalInterface (i32.const 1))
   )
  )
@@ -330,19 +330,19 @@
 ;;; void JsAccessibleFunctionnalInterface.$clinit()
 (func $$clinit__void@libraryinfo.Main.JsAccessibleFunctionnalInterface
  (block $return.label
-  ;;@ libraryinfo/Main.java:38:12
+  ;;@ libraryinfo/Main.java:44:12
   (block
    ;; if (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized) return;
-   ;;@ libraryinfo/Main.java:38:12
+   ;;@ libraryinfo/Main.java:44:12
    (if (global.get $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:38:12
+     ;;@ libraryinfo/Main.java:44:12
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.JsAccessibleFunctionnalInterface.$initialized = true);
-   ;;@ libraryinfo/Main.java:38:12
+   ;;@ libraryinfo/Main.java:44:12
    (global.set $f_$initialized__libraryinfo_Main_JsAccessibleFunctionnalInterface (i32.const 1))
   )
  )
@@ -372,19 +372,19 @@
 ;;; void Function.$clinit()
 (func $$clinit__void@libraryinfo.Main.Function
  (block $return.label
-  ;;@ libraryinfo/Main.java:44:12
+  ;;@ libraryinfo/Main.java:50:12
   (block
    ;; if (libraryinfo.Main.Function.$initialized) return;
-   ;;@ libraryinfo/Main.java:44:12
+   ;;@ libraryinfo/Main.java:50:12
    (if (global.get $f_$initialized__libraryinfo_Main_Function)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:44:12
+     ;;@ libraryinfo/Main.java:50:12
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.Function.$initialized = true);
-   ;;@ libraryinfo/Main.java:44:12
+   ;;@ libraryinfo/Main.java:50:12
    (global.set $f_$initialized__libraryinfo_Main_Function (i32.const 1))
   )
  )
@@ -425,13 +425,13 @@
  (param $this (ref null $libraryinfo.Main.FunctionImpl))
  (result (ref null $libraryinfo.Main.FunctionImpl))
  (block $return.label
-  ;;@ libraryinfo/Main.java:48:29
+  ;;@ libraryinfo/Main.java:54:29
   (block
    ;; libraryinfo.Main.FunctionImpl.$clinit();
-   ;;@ libraryinfo/Main.java:48:29
+   ;;@ libraryinfo/Main.java:54:29
    (call $$clinit__void@libraryinfo.Main.FunctionImpl )
    ;; Object.this.Object.<init>();
-   ;;@ libraryinfo/Main.java:48:29
+   ;;@ libraryinfo/Main.java:54:29
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -445,7 +445,7 @@
  (local $this (ref null $libraryinfo.Main.FunctionImpl))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
  (block $return.label
-  ;;@ libraryinfo/Main.java:49:16
+  ;;@ libraryinfo/Main.java:55:16
   (block
   )
  )
@@ -455,22 +455,22 @@
 ;;; void FunctionImpl.$clinit()
 (func $$clinit__void@libraryinfo.Main.FunctionImpl
  (block $return.label
-  ;;@ libraryinfo/Main.java:48:29
+  ;;@ libraryinfo/Main.java:54:29
   (block
    ;; if (libraryinfo.Main.FunctionImpl.$initialized) return;
-   ;;@ libraryinfo/Main.java:48:29
+   ;;@ libraryinfo/Main.java:54:29
    (if (global.get $f_$initialized__libraryinfo_Main_FunctionImpl)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:48:29
+     ;;@ libraryinfo/Main.java:54:29
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.FunctionImpl.$initialized = true);
-   ;;@ libraryinfo/Main.java:48:29
+   ;;@ libraryinfo/Main.java:54:29
    (global.set $f_$initialized__libraryinfo_Main_FunctionImpl (i32.const 1))
    ;; java.lang.Object.$clinit();
-   ;;@ libraryinfo/Main.java:48:29
+   ;;@ libraryinfo/Main.java:54:29
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -521,16 +521,16 @@
  (param $$ordinal i32)
  (result (ref null $libraryinfo.Main.MyEnum))
  (block $return.label
-  ;;@ libraryinfo/Main.java:53:7
+  ;;@ libraryinfo/Main.java:59:7
   (block
    ;; (Enum.this.name = $name);
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (struct.set $java.lang.Enum $f_name__java_lang_Enum_(local.get $this) (local.get $$name))
    ;; (Enum.this.ordinal = $ordinal);
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
    ;; Enum.this.Enum.<init>($name,$ordinal);
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
@@ -543,25 +543,25 @@
  (result (ref null $libraryinfo.Main.MyEnum))
  (local $return.value (ref null $libraryinfo.Main.MyEnum))
  (block $return.label
-  ;;@ libraryinfo/Main.java:53:7
+  ;;@ libraryinfo/Main.java:59:7
   (block
    ;; libraryinfo.Main.MyEnum.$clinit();
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (call $$clinit__void@libraryinfo.Main.MyEnum )
    ;; if (javaemul.internal.Platform.isNull(libraryinfo.Main.MyEnum.namesToValuesMap)) {
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (if (ref.is_null (global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_))
     (then
-     ;;@ libraryinfo/Main.java:53:7
+     ;;@ libraryinfo/Main.java:59:7
      (block
       ;; (libraryinfo.Main.MyEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(libraryinfo.Main.MyEnum.values()));
-      ;;@ libraryinfo/Main.java:53:7
+      ;;@ libraryinfo/Main.java:59:7
       (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (call $m_createMapFromValues__arrayOf_java_lang_Enum__java_util_Map@javaemul.internal.Enums (call $m_values__arrayOf_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum )))
      )
     )
    )
    ;; return ((MyEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,libraryinfo.Main.MyEnum.namesToValuesMap));
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (local.set $return.value (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_)) (global.get $libraryinfo.Main.MyEnum.rtt)))
    (br $return.label)
   )
@@ -575,13 +575,13 @@
  (local $return.value (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (block $return.label
-  ;;@ libraryinfo/Main.java:53:7
+  ;;@ libraryinfo/Main.java:59:7
   (block
    ;; libraryinfo.Main.MyEnum.$clinit();
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (call $$clinit__void@libraryinfo.Main.MyEnum )
    ;; return (MyEnum[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.A)),($array_literal.elements[1] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.B)),($array_literal.elements[2] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.C)),$array_literal);
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
     
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
@@ -608,52 +608,52 @@
 ;;; void MyEnum.$clinit()
 (func $$clinit__void@libraryinfo.Main.MyEnum
  (block $return.label
-  ;;@ libraryinfo/Main.java:53:7
+  ;;@ libraryinfo/Main.java:59:7
   (block
    ;; if (libraryinfo.Main.MyEnum.$initialized) return;
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (if (global.get $f_$initialized__libraryinfo_Main_MyEnum)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:53:7
+     ;;@ libraryinfo/Main.java:59:7
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.MyEnum.$initialized = true);
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (global.set $f_$initialized__libraryinfo_Main_MyEnum (i32.const 1))
    ;; java.lang.Enum.$clinit();
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (call $$clinit__void@java.lang.Enum )
-   ;;@ libraryinfo/Main.java:54:4
+   ;;@ libraryinfo/Main.java:60:4
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
-    ;;@ libraryinfo/Main.java:54:4
+    ;;@ libraryinfo/Main.java:60:4
     (call $$clinit__void@libraryinfo.Main.MyEnum )
     ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|A|(),libraryinfo.Main.MyEnum.A));
-    ;;@ libraryinfo/Main.java:54:4
+    ;;@ libraryinfo/Main.java:60:4
     (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|A|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
    )
-   ;;@ libraryinfo/Main.java:55:4
+   ;;@ libraryinfo/Main.java:61:4
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
-    ;;@ libraryinfo/Main.java:55:4
+    ;;@ libraryinfo/Main.java:61:4
     (call $$clinit__void@libraryinfo.Main.MyEnum )
     ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|B|(),libraryinfo.Main.MyEnum.B));
-    ;;@ libraryinfo/Main.java:55:4
+    ;;@ libraryinfo/Main.java:61:4
     (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|B|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
    )
-   ;;@ libraryinfo/Main.java:56:4
+   ;;@ libraryinfo/Main.java:62:4
    (block
     ;; libraryinfo.Main.MyEnum.$clinit();
-    ;;@ libraryinfo/Main.java:56:4
+    ;;@ libraryinfo/Main.java:62:4
     (call $$clinit__void@libraryinfo.Main.MyEnum )
     ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|C|(),libraryinfo.Main.MyEnum.C));
-    ;;@ libraryinfo/Main.java:56:4
+    ;;@ libraryinfo/Main.java:62:4
     (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|C|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
    )
    ;; (libraryinfo.Main.MyEnum.namesToValuesMap = null);
-   ;;@ libraryinfo/Main.java:53:7
+   ;;@ libraryinfo/Main.java:59:7
    (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (ref.null $java.lang.Object))
   )
  )
@@ -696,16 +696,16 @@
  (param $this (ref null $libraryinfo.Main.MyJsType))
  (result (ref null $libraryinfo.Main.MyJsType))
  (block $return.label
-  ;;@ libraryinfo/Main.java:63:11
+  ;;@ libraryinfo/Main.java:69:11
   (block
    ;; libraryinfo.Main.MyJsType.$clinit();
-   ;;@ libraryinfo/Main.java:63:11
+   ;;@ libraryinfo/Main.java:69:11
    (call $$clinit__void@libraryinfo.Main.MyJsType )
    ;; Object.this.Object.<init>();
-   ;;@ libraryinfo/Main.java:63:11
+   ;;@ libraryinfo/Main.java:69:11
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; (MyJsType.this.someField = new Main.<init>());
-   ;;@ libraryinfo/Main.java:64:6
+   ;;@ libraryinfo/Main.java:70:6
    (struct.set $libraryinfo.Main.MyJsType $f_someField__libraryinfo_Main_MyJsType(local.get $this) (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.itable)) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
   )
  )
@@ -715,22 +715,22 @@
 ;;; void MyJsType.$clinit()
 (func $$clinit__void@libraryinfo.Main.MyJsType
  (block $return.label
-  ;;@ libraryinfo/Main.java:60:22
+  ;;@ libraryinfo/Main.java:66:22
   (block
    ;; if (libraryinfo.Main.MyJsType.$initialized) return;
-   ;;@ libraryinfo/Main.java:60:22
+   ;;@ libraryinfo/Main.java:66:22
    (if (global.get $f_$initialized__libraryinfo_Main_MyJsType)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:60:22
+     ;;@ libraryinfo/Main.java:66:22
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.MyJsType.$initialized = true);
-   ;;@ libraryinfo/Main.java:60:22
+   ;;@ libraryinfo/Main.java:66:22
    (global.set $f_$initialized__libraryinfo_Main_MyJsType (i32.const 1))
    ;; java.lang.Object.$clinit();
-   ;;@ libraryinfo/Main.java:60:22
+   ;;@ libraryinfo/Main.java:66:22
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -773,13 +773,13 @@
  (param $this (ref null $libraryinfo.Main.1))
  (result (ref null $libraryinfo.Main.1))
  (block $return.label
-  ;;@ libraryinfo/Main.java:78:17
+  ;;@ libraryinfo/Main.java:84:17
   (block
    ;; libraryinfo.Main.1.$clinit();
-   ;;@ libraryinfo/Main.java:78:17
+   ;;@ libraryinfo/Main.java:84:17
    (call $$clinit__void@libraryinfo.Main.1 )
    ;; Object.this.Object.<init>();
-   ;;@ libraryinfo/Main.java:78:17
+   ;;@ libraryinfo/Main.java:84:17
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -792,7 +792,7 @@
  (local $this (ref null $libraryinfo.Main.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.1.rtt)))
  (block $return.label
-  ;;@ libraryinfo/Main.java:80:11
+  ;;@ libraryinfo/Main.java:86:11
   (block
   )
  )
@@ -802,22 +802,22 @@
 ;;; void <anonymous> extends Object.$clinit()
 (func $$clinit__void@libraryinfo.Main.1
  (block $return.label
-  ;;@ libraryinfo/Main.java:78:17
+  ;;@ libraryinfo/Main.java:84:17
   (block
    ;; if (libraryinfo.Main.1.$initialized) return;
-   ;;@ libraryinfo/Main.java:78:17
+   ;;@ libraryinfo/Main.java:84:17
    (if (global.get $f_$initialized__libraryinfo_Main_1)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:78:17
+     ;;@ libraryinfo/Main.java:84:17
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.1.$initialized = true);
-   ;;@ libraryinfo/Main.java:78:17
+   ;;@ libraryinfo/Main.java:84:17
    (global.set $f_$initialized__libraryinfo_Main_1 (i32.const 1))
    ;; java.lang.Object.$clinit();
-   ;;@ libraryinfo/Main.java:78:17
+   ;;@ libraryinfo/Main.java:84:17
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -862,16 +862,16 @@
  (param $$outer_this (ref null $libraryinfo.Main))
  (result (ref null $libraryinfo.Main.Foo))
  (block $return.label
-  ;;@ libraryinfo/Main.java:96:15
+  ;;@ libraryinfo/Main.java:102:15
   (block
    ;; libraryinfo.Main.Foo.$clinit();
-   ;;@ libraryinfo/Main.java:96:15
+   ;;@ libraryinfo/Main.java:102:15
    (call $$clinit__void@libraryinfo.Main.Foo )
    ;; (Foo.this.this = $outer_this);
-   ;;@ libraryinfo/Main.java:96:15
+   ;;@ libraryinfo/Main.java:102:15
    (struct.set $libraryinfo.Main.Foo $$outer_this__libraryinfo_Main_Foo(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
-   ;;@ libraryinfo/Main.java:96:15
+   ;;@ libraryinfo/Main.java:102:15
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -884,7 +884,7 @@
  (local $this (ref null $libraryinfo.Main.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.Foo.rtt)))
  (block $return.label
-  ;;@ libraryinfo/Main.java:97:9
+  ;;@ libraryinfo/Main.java:103:9
   (block
   )
  )
@@ -894,22 +894,22 @@
 ;;; void Foo.$clinit()
 (func $$clinit__void@libraryinfo.Main.Foo
  (block $return.label
-  ;;@ libraryinfo/Main.java:96:15
+  ;;@ libraryinfo/Main.java:102:15
   (block
    ;; if (libraryinfo.Main.Foo.$initialized) return;
-   ;;@ libraryinfo/Main.java:96:15
+   ;;@ libraryinfo/Main.java:102:15
    (if (global.get $f_$initialized__libraryinfo_Main_Foo)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:96:15
+     ;;@ libraryinfo/Main.java:102:15
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.Foo.$initialized = true);
-   ;;@ libraryinfo/Main.java:96:15
+   ;;@ libraryinfo/Main.java:102:15
    (global.set $f_$initialized__libraryinfo_Main_Foo (i32.const 1))
    ;; java.lang.Object.$clinit();
-   ;;@ libraryinfo/Main.java:96:15
+   ;;@ libraryinfo/Main.java:102:15
    (call $$clinit__void@java.lang.Object )
   )
  )
@@ -952,13 +952,13 @@
  (param $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (block $return.label
-  ;;@ libraryinfo/Main.java:73:17
+  ;;@ libraryinfo/Main.java:79:17
   (block
    ;; libraryinfo.Main.$LambdaImplementor$1.$clinit();
-   ;;@ libraryinfo/Main.java:73:17
+   ;;@ libraryinfo/Main.java:79:17
    (call $$clinit__void@libraryinfo.Main.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
-   ;;@ libraryinfo/Main.java:73:17
+   ;;@ libraryinfo/Main.java:79:17
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
   )
  )
@@ -972,10 +972,10 @@
  (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt)))
  (block $return.label
-  ;;@ libraryinfo/Main.java:73:17
+  ;;@ libraryinfo/Main.java:79:17
   (block
    ;; libraryinfo.Main.log(s);
-   ;;@ libraryinfo/Main.java:73:22
+   ;;@ libraryinfo/Main.java:79:22
    (call $m_log__java_lang_Object__void@libraryinfo.Main (local.get $s))
   )
  )
@@ -985,22 +985,22 @@
 ;;; void $LambdaImplementor$1.$clinit()
 (func $$clinit__void@libraryinfo.Main.$LambdaImplementor$1
  (block $return.label
-  ;;@ libraryinfo/Main.java:73:17
+  ;;@ libraryinfo/Main.java:79:17
   (block
    ;; if (libraryinfo.Main.$LambdaImplementor$1.$initialized) return;
-   ;;@ libraryinfo/Main.java:73:17
+   ;;@ libraryinfo/Main.java:79:17
    (if (global.get $f_$initialized__libraryinfo_Main_$LambdaImplementor$1)
     (then
      ;; return;
-     ;;@ libraryinfo/Main.java:73:17
+     ;;@ libraryinfo/Main.java:79:17
      (br $return.label)
     )
    )
    ;; (libraryinfo.Main.$LambdaImplementor$1.$initialized = true);
-   ;;@ libraryinfo/Main.java:73:17
+   ;;@ libraryinfo/Main.java:79:17
    (global.set $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (i32.const 1))
    ;; java.lang.Object.$clinit();
-   ;;@ libraryinfo/Main.java:73:17
+   ;;@ libraryinfo/Main.java:79:17
    (call $$clinit__void@java.lang.Object )
   )
  )
