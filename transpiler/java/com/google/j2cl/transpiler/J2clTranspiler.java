@@ -75,31 +75,13 @@ class J2clTranspiler {
       // TODO(b/178738483): Remove hack that makes it possible to ignore DoNotAutobox in WASM.
       MethodDescriptor.ParameterDescriptor.setIgnoreDoNotAutoboxAnnotations();
     }
-    Library library =
-        options
-            .getFrontend()
-            .getLibrary(
-                options.getClasspaths(),
-                options.getSources(),
-                options.getGenerateKytheIndexingMetadata(),
-                problems);
+    Library library = options.getFrontend().getLibrary(options, problems);
     if (!library.isEmpty()) {
       desugarLibrary(library);
       checkLibrary(library);
       normalizeLibrary(library);
     }
-    options
-        .getBackend()
-        .generateOutputs(
-            library,
-            options.getNativeSources(),
-            options.getOutput(),
-            options.getLibraryInfoOutput(),
-            options.getEmitReadableLibraryInfo(),
-            options.getEmitReadableSourceMap(),
-            options.getGenerateKytheIndexingMetadata(),
-            options.getWasmEntryPoints(),
-            problems);
+    options.getBackend().generateOutputs(options, library, problems);
   }
 
   private void desugarLibrary(Library library) {
@@ -108,19 +90,12 @@ class J2clTranspiler {
 
   private void checkLibrary(Library library) {
     JsInteropRestrictionsChecker.check(
-        library, problems, /* enableWasmChecks= */ options.getBackend() == Backend.WASM);
+        library, problems, /* enableWasm= */ options.getBackend() == Backend.WASM);
     problems.abortIfHasErrors();
   }
 
   private void normalizeLibrary(Library library) {
-    runPasses(
-        library,
-        options
-            .getBackend()
-            .getPassFactories(
-                options.getExperimentalOptimizeAutovalue(),
-                options.getWasmRemoveAssertStatement(),
-                options.getDefinesForWasm()));
+    runPasses(library, options.getBackend().getPassFactories(options));
   }
 
   private static void runPasses(

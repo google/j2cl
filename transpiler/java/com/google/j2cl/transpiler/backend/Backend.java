@@ -16,10 +16,7 @@
 package com.google.j2cl.transpiler.backend;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
@@ -114,32 +111,20 @@ import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
 import com.google.j2cl.transpiler.passes.VerifySingleAstReference;
-import java.nio.file.Path;
-import java.util.Map;
 import java.util.function.Supplier;
 
 /** Drives the backend to generate outputs. */
 public enum Backend {
   CLOSURE {
     @Override
-    public void generateOutputs(
-        Library library,
-        ImmutableList<FileInfo> nativeSources,
-        Output output,
-        Path libraryInfoOutput,
-        boolean emitReadableLibraryInfo,
-        boolean emitReadableSourceMap,
-        boolean generateKytheIndexingMetadata,
-        ImmutableSet<String> entryPoints,
-        Problems problems) {
-
+    public void generateOutputs(BackendOptions options, Library library, Problems problems) {
       new OutputGeneratorStage(
-              nativeSources,
-              output,
-              libraryInfoOutput,
-              emitReadableLibraryInfo,
-              emitReadableSourceMap,
-              generateKytheIndexingMetadata,
+              options.getNativeSources(),
+              options.getOutput(),
+              options.getLibraryInfoOutput(),
+              options.getEmitReadableLibraryInfo(),
+              options.getEmitReadableSourceMap(),
+              options.getGenerateKytheIndexingMetadata(),
               problems)
           .generateOutputs(library);
     }
@@ -151,10 +136,7 @@ public enum Backend {
     }
 
     @Override
-    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-        boolean experimentalOptimizeAutovalue,
-        boolean removeAssertStatements,
-        Map<String, String> defines) {
+    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(BackendOptions options) {
       // TODO(b/117155139): Review the ordering of passes.
       return ImmutableList.of(
           // Pre-verifications
@@ -163,7 +145,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Class structure normalizations.
-          () -> new OptimizeAutoValue(experimentalOptimizeAutovalue),
+          () -> new OptimizeAutoValue(options.getExperimentalOptimizeAutovalue()),
           ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           NormalizeFunctionExpressions::new,
@@ -271,17 +253,9 @@ public enum Backend {
   },
   WASM {
     @Override
-    public void generateOutputs(
-        Library library,
-        ImmutableList<FileInfo> nativeSources,
-        Output output,
-        Path libraryInfoOutput,
-        boolean emitReadableLibraryInfo,
-        boolean emitReadableSourceMap,
-        boolean generateKytheIndexingMetadata,
-        ImmutableSet<String> entryPoints,
-        Problems problems) {
-      new WasmModuleGenerator(output, entryPoints, problems).generateOutputs(library);
+    public void generateOutputs(BackendOptions options, Library library, Problems problems) {
+      new WasmModuleGenerator(options.getOutput(), options.getWasmEntryPoints(), problems)
+          .generateOutputs(library);
     }
 
     @Override
@@ -291,10 +265,7 @@ public enum Backend {
     }
 
     @Override
-    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-        boolean experimentalOptimizeAutovalue,
-        boolean removeAssertStatements,
-        Map<String, String> defines) {
+    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(BackendOptions options) {
       return ImmutableList.of(
           // Pre-verifications
           VerifySingleAstReference::new,
@@ -307,7 +278,7 @@ public enum Backend {
           InsertExplicitSuperCalls::new,
           BridgeMethodsCreator::new,
           EnumMethodsCreator::new,
-          () -> new ImplementSystemGetProperty(defines),
+          () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
 
           // Must run before Enum normalization
           FixSuperCallQualifiers::new,
@@ -346,7 +317,9 @@ public enum Backend {
           NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
           ExtractNonIdempotentExpressions::new,
-          removeAssertStatements ? RemoveAssertStatements::new : ImplementAssertStatements::new,
+          options.getWasmRemoveAssertStatement()
+              ? RemoveAssertStatements::new
+              : ImplementAssertStatements::new,
 
           // Normalize multiexpressions before rewriting assignments so that whenever there is a
           // multiexpression, the result is used.
@@ -366,18 +339,8 @@ public enum Backend {
   },
   KOTLIN {
     @Override
-    public void generateOutputs(
-        Library library,
-        ImmutableList<FileInfo> nativeSources,
-        Output output,
-        Path libraryInfoOutput,
-        boolean emitReadableLibraryInfo,
-        boolean emitReadableSourceMap,
-        boolean generateKytheIndexingMetadata,
-        ImmutableSet<String> entryPoints,
-        Problems problems) {
-
-      new KotlinGeneratorStage(output, problems).generateOutputs(library);
+    public void generateOutputs(BackendOptions options, Library library, Problems problems) {
+      new KotlinGeneratorStage(options.getOutput(), problems).generateOutputs(library);
     }
 
     @Override
@@ -387,10 +350,7 @@ public enum Backend {
     }
 
     @Override
-    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-        boolean experimentalOptimizeAutovalue,
-        boolean removeAssertStatements,
-        Map<String, String> defines) {
+    public ImmutableList<Supplier<NormalizationPass>> getPassFactories(BackendOptions options) {
       return ImmutableList.of(
           // Pre-verifications
           VerifySingleAstReference::new, VerifyParamAndArgCounts::new, VerifyReferenceScoping::new);
@@ -400,18 +360,7 @@ public enum Backend {
   public abstract ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories();
 
   public abstract ImmutableList<Supplier<NormalizationPass>> getPassFactories(
-      boolean experimentalOptimizeAutovalue,
-      boolean removeAssertStatements,
-      Map<String, String> defines);
+      BackendOptions options);
 
-  public abstract void generateOutputs(
-      Library library,
-      ImmutableList<FileInfo> nativeSources,
-      Output output,
-      Path libraryInfoOutput,
-      boolean emitReadableLibraryInfo,
-      boolean emitReadableSourceMap,
-      boolean generateKytheIndexingMetadata,
-      ImmutableSet<String> entryPoints,
-      Problems problems);
+  public abstract void generateOutputs(BackendOptions options, Library library, Problems problems);
 }

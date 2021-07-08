@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.frontend;
 
 import com.google.j2cl.common.Problems;
-import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
@@ -30,61 +29,31 @@ import java.util.List;
 public enum Frontend {
   JDT {
     @Override
-    public Library getLibrary(
-        List<String> classPath,
-        List<FileInfo> sources,
-        boolean useTargetClassPath,
-        Problems problems) {
-      CompilationUnitsAndTypeBindings jdtUnitsAndResolvedBindings =
-          createJdtUnitsAndResolveBindings(classPath, sources, useTargetClassPath, problems);
-      return Library.newBuilder()
-          .setCompilationUnits(convertUnits(jdtUnitsAndResolvedBindings, classPath, problems))
-          .build();
-    }
-
-    private List<CompilationUnit> convertUnits(
-        CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings,
-        List<String> classPath,
-        Problems problems) {
-      init(classPath, problems);
-      return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
-    }
-
-    private CompilationUnitsAndTypeBindings createJdtUnitsAndResolveBindings(
-        List<String> classPath,
-        List<FileInfo> sources,
-        boolean useTargetClassPath,
-        Problems problems) {
-      JdtParser parser = new JdtParser(classPath, problems);
+    public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
+      JdtParser parser = new JdtParser(options.getClasspaths(), problems);
       CompilationUnitsAndTypeBindings compilationUnitsAndTypeBindings =
-          parser.parseFiles(sources, useTargetClassPath);
+          parser.parseFiles(
+              options.getSources(),
+              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata());
       problems.abortIfHasErrors();
-      return compilationUnitsAndTypeBindings;
+      return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
     }
   },
   JAVAC {
     @Override
-    public Library getLibrary(
-        List<String> classPath,
-        List<FileInfo> sources,
-        boolean useTargetClassPath,
-        Problems problems) {
-      init(classPath, problems);
-      return Library.newBuilder()
-          .setCompilationUnits(
-              new JavacParser(classPath, problems).parseFiles(sources, useTargetClassPath))
-          .build();
+    public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
+      return new JavacParser(options.getClasspaths(), problems)
+          .parseFiles(
+              options.getSources(),
+              /* useTargetPath= */ options.getGenerateKytheIndexingMetadata());
     }
   };
 
-  public abstract Library getLibrary(
-      List<String> classPath,
-      List<FileInfo> sources,
-      boolean useTargetClassPath,
-      Problems problems);
-
-  private static void init(List<String> classPath, Problems problems) {
+  public Library getLibrary(FrontendOptions options, Problems problems) {
     // Records information about package-info files supplied as byte code.
-    PackageInfoCache.init(classPath, problems);
+    PackageInfoCache.init(options.getClasspaths(), problems);
+    return Library.newBuilder().setCompilationUnits(compile(options, problems)).build();
   }
+
+  abstract List<CompilationUnit> compile(FrontendOptions options, Problems problems);
 }

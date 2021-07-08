@@ -18,51 +18,25 @@ package com.google.j2cl.transpiler;
 import static com.google.common.base.Preconditions.checkState;
 
 import com.google.auto.value.AutoValue;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
+import com.google.j2cl.transpiler.backend.BackendOptions;
 import com.google.j2cl.transpiler.frontend.Frontend;
+import com.google.j2cl.transpiler.frontend.FrontendOptions;
 import java.nio.file.Path;
 import java.util.List;
 import javax.annotation.Nullable;
 
-/** Frontend options, which is initialized by a Flag instance that is already parsed. */
+/** Configuration for the transpiler. */
 @AutoValue
-public abstract class J2clTranspilerOptions {
-
-  public abstract ImmutableList<FileInfo> getSources();
-
-  public abstract ImmutableList<FileInfo> getNativeSources();
-
-  public abstract ImmutableList<String> getClasspaths();
-
-  public abstract Output getOutput();
-
-  @Nullable
-  public abstract Path getLibraryInfoOutput();
-
-  public abstract boolean getEmitReadableLibraryInfo();
-
-  public abstract boolean getEmitReadableSourceMap();
-
-  public abstract boolean getGenerateKytheIndexingMetadata();
-
-  public abstract boolean getExperimentalOptimizeAutovalue();
+public abstract class J2clTranspilerOptions implements FrontendOptions, BackendOptions {
 
   public abstract Frontend getFrontend();
 
   public abstract Backend getBackend();
-
-  public abstract boolean getWasmRemoveAssertStatement();
-
-  @Nullable
-  public abstract ImmutableSet<String> getWasmEntryPoints();
-
-  @Nullable
-  public abstract ImmutableMap<String, String> getDefinesForWasm();
 
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder()
