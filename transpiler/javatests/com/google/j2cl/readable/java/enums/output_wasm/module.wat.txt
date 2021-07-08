@@ -135,7 +135,6 @@
    ;; return (Enum1[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = (enums.Enum1.$clinit(),enums.Enum1.V1)),($array_literal.elements[1] = (enums.Enum1.$clinit(),enums.Enum1.V2)),$array_literal);
    ;;@ enums/Enum1.java:20:12
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $enums.Enum1))
      (call $$clinit__void@enums.Enum1 )
@@ -384,7 +383,6 @@
    ;; return (Enum2[] $array_literal = new OfObject.<init>(4),($array_literal.elements[0] = (enums.Enum2.$clinit(),enums.Enum2.VALUE1)),($array_literal.elements[1] = (enums.Enum2.$clinit(),enums.Enum2.VALUE2)),($array_literal.elements[2] = (enums.Enum2.$clinit(),enums.Enum2.VALUE3)),($array_literal.elements[3] = (enums.Enum2.$clinit(),enums.Enum2.VALUE4)),$array_literal);
    ;;@ enums/Enum1.java:25:5
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 4)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $enums.Enum2))
      (call $$clinit__void@enums.Enum2 )
@@ -420,7 +418,6 @@
    ;; (Enum2.this.foo = (Enum1 $qualifier = (enums.Enum1.$clinit(),enums.Enum1.V1),$qualifier.ordinal()));
    ;;@ enums/Enum1.java:31:2
    (struct.set $enums.Enum2 $f_foo__enums_Enum2(local.get $this) (block (result i32)
-    
     (local.set $$qualifier (block (result (ref null $enums.Enum1))
      (call $$clinit__void@enums.Enum1 )
      (global.get $f_V1__enums_Enum1)
@@ -481,7 +478,6 @@
     ;; (enums.Enum2.VALUE3 = new Enum2.<init>(javaemul.internal.StringPool.$getString_|VALUE3|(),enums.Enum2.VALUE3,(Object[] $array_literal = new OfObject.<init>(0),$array_literal)));
     ;;@ enums/Enum1.java:28:2
     (global.set $f_VALUE3__enums_Enum2 (call $m_<init>__java_lang_String__int__arrayOf_java_lang_Object__void_$p_enums_Enum2@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(call $$getString_|VALUE3|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_VALUE3__enums_Enum2)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-     
      (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
      (local.get $$array_literal)
     )))
@@ -703,7 +699,6 @@
    ;; return (Enum3[] $array_literal = new OfObject.<init>(1),($array_literal.elements[0] = (enums.Enum3.$clinit(),enums.Enum3.VALUE1)),$array_literal);
    ;;@ enums/Enum1.java:52:5
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $enums.Enum3))
      (call $$clinit__void@enums.Enum3 )
@@ -819,7 +814,6 @@
   (block
    ;; Integer v = ((Integer) ((T) v));
    ;;@ enums/Enum1.java:53:9
-   
    (local.set $v_1 (ref.cast (ref.cast (local.get $v) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Integer.rtt)))
    ;; return java.lang.Integer.valueOf((1 + v.intValue()));
    ;;@ enums/Enum1.java:53:14

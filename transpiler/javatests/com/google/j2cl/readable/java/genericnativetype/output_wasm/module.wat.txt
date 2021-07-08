@@ -55,7 +55,6 @@
    (call $$clinit__void@genericnativetype.BoundedJsArray )
    ;; BoundedJsArray<V> array = null;
    ;;@ genericnativetype/BoundedJsArray.java:31:4
-   
    (local.set $array (ref.null $genericnativetype.BoundedJsArray))
    ;; return array;
    ;;@ genericnativetype/BoundedJsArray.java:32:4
@@ -80,7 +79,6 @@
    (call $$clinit__void@genericnativetype.BoundedJsArray )
    ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
    ;;@ genericnativetype/BoundedJsArray.java:40:4
-   
    (local.set $array (call $m_<init>__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
    ;; return array;
    ;;@ genericnativetype/BoundedJsArray.java:41:4

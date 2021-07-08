@@ -81,13 +81,11 @@
   (block
    ;; int localVar = 1;
    ;;@ simplelocalclass/SimpleLocalClass.java:20:4
-   
    (local.set $localVar (i32.const 1))
    ;;@ simplelocalclass/SimpleLocalClass.java:26:4
    (block
     ;; InnerClass $qualifier = new $1InnerClass.<init>(SimpleLocalClass.this,localVar,p);
     ;;@ simplelocalclass/SimpleLocalClass.java:26:4
-    
     (local.set $$qualifier (call $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)))
     ;; $qualifier.fun();
     ;;@ simplelocalclass/SimpleLocalClass.java:26:4
@@ -112,7 +110,6 @@
   (block
    ;; int localVar = 1;
    ;;@ simplelocalclass/SimpleLocalClass.java:35:4
-   
    (local.set $localVar (i32.const 1))
   )
  )

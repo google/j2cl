@@ -104,7 +104,6 @@
    ;; return (Numbers[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE)),($array_literal.elements[1] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.TWO)),$array_literal);
    ;;@ switchstatement/SwitchStatement.java:18:5
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $switchstatement.Numbers))
      (call $$clinit__void@switchstatement.Numbers )
@@ -234,11 +233,9 @@
     (block
      ;; T $expression = javaemul.internal.InternalPreconditions.checkNotNull(javaemul.internal.StringPool.$getString_|one|());
      ;;@ switchstatement/SwitchStatement.java:26:4
-     
      (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $$getString_|one|__java_lang_String@javaemul.internal.StringPool )))
      ;; switch ($expression) {
      ;;@ switchstatement/SwitchStatement.java:26:4
-     
      (block
       (block
        (block
@@ -266,7 +263,6 @@
    (block $SWITCH_1.BREAK
     ;; switch (49) {
     ;;@ switchstatement/SwitchStatement.java:35:4
-    
     (block
      (block
       (block
@@ -293,7 +289,6 @@
    (block $SWITCH_2.BREAK
     ;; switch (1) {
     ;;@ switchstatement/SwitchStatement.java:44:4
-    
     (block
      (block
       (block
@@ -321,9 +316,7 @@
     (block
      ;; int $expression = (Numbers $qualifier = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE),$qualifier.ordinal());
      ;;@ switchstatement/SwitchStatement.java:53:4
-     
      (local.set $$expression_1 (block (result i32)
-      
       (local.set $$qualifier (block (result (ref null $switchstatement.Numbers))
        (call $$clinit__void@switchstatement.Numbers )
        (global.get $f_ONE__switchstatement_Numbers)
@@ -332,7 +325,6 @@
      ))
      ;; switch ($expression) {
      ;;@ switchstatement/SwitchStatement.java:53:4
-     
      (block
       (block
        (block
@@ -376,7 +368,6 @@
    (block $SWITCH.BREAK
     ;; switch (3) {
     ;;@ switchstatement/SwitchStatement.java:64:4
-    
     (block
      (block
       (block ;; evaluate expression and jump
@@ -390,11 +381,9 @@
       
       ;; int i = 0;
       ;;@ switchstatement/SwitchStatement.java:67:8
-      
       (local.set $i (i32.const 0))
       ;; int j = 2,int b = (j + 1);
       ;;@ switchstatement/SwitchStatement.java:68:8
-      
       (local.set $j (i32.const 2))
       (local.set $b (i32.add (local.get $j) (i32.const 1)))
       ;; break SWITCH;
@@ -415,7 +404,6 @@
    (block $SWITCH_1.BREAK
     ;; switch (5) {
     ;;@ switchstatement/SwitchStatement.java:76:4
-    
     (block
      (block ;; evaluate expression and jump
       (br_if 0 (i32.eq (i32.const 5) (i32.const 5)))
@@ -424,7 +412,6 @@
      ;; case 5:
      ;; int i = 1;
      ;;@ switchstatement/SwitchStatement.java:78:8
-     
      (local.set $i_1 (i32.const 1))
      ;; break SWITCH;
      ;;@ switchstatement/SwitchStatement.java:79:8

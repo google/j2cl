@@ -290,7 +290,6 @@
    (block
     ;; LocalClass $qualifier = new $1LocalClass.<init>(ChildClass.this);
     ;;@ innerclassinheritance/ChildClass.java:87:4
-    
     (local.set $$qualifier (call $m_<init>__innerclassinheritance_ChildClass__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object) (global.get $innerclassinheritance.ChildClass.1LocalClass.rtt))(local.get $this)))
     ;; $qualifier.test();
     ;;@ innerclassinheritance/ChildClass.java:87:4
@@ -434,7 +433,6 @@
    (call_ref (local.get $this)(struct.get $innerclassinheritance.ChildClass.InnerClass.vtable $m_funInInner__void (struct.get $innerclassinheritance.ChildClass.InnerClass $vtable(local.get $this))))
    ;; int a = InnerClass.this.this.fieldInParentOuter;
    ;;@ innerclassinheritance/ChildClass.java:58:6
-   
    (local.set $a (struct.get $innerclassinheritance.ParentOuter $f_fieldInParentOuter__innerclassinheritance_ParentOuter(struct.get $innerclassinheritance.ChildClass.InnerClass $$outer_this__innerclassinheritance_ChildClass_InnerClass(local.get $this))))
    ;; (a = InnerClass.this.this.fieldInParentOuter);
    ;;@ innerclassinheritance/ChildClass.java:59:6

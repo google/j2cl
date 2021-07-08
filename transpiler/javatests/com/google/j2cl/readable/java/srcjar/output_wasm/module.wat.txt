@@ -125,7 +125,6 @@
    (call $$clinit__void@srcjar.Srcjar )
    ;; Foo foo = new Foo.<init>();
    ;;@ srcjar/Srcjar.java:21:4
-   
    (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (global.get $srcjar.Foo.rtt))))
   )
  )

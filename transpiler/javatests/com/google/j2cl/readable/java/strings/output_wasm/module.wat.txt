@@ -83,17 +83,13 @@
   (block
    ;; String s1 = null;
    ;;@ strings/Strings.java:31:4
-   
    (local.set $s1 (ref.null $java.lang.String))
    ;; String s2 = null;
    ;;@ strings/Strings.java:32:4
-   
    (local.set $s2 (ref.null $java.lang.String))
    ;; String s3 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s1),$stringBuilder.append(s2),$stringBuilder.toString());
    ;;@ strings/Strings.java:33:4
-   
    (local.set $s3 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder)(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (drop (call_ref (local.get $$stringBuilder)(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
@@ -102,7 +98,6 @@
    ;; (s2 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s2),$stringBuilder.append(s2),$stringBuilder.toString()));
    ;;@ strings/Strings.java:34:4
    (local.set $s2 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_1 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_1)(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_1)))))
     (drop (call_ref (local.get $$stringBuilder_1)(local.get $s2)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_1)))))
@@ -111,7 +106,6 @@
    ;; (s1 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s1),$stringBuilder.append(javaemul.internal.StringPool.$getString_|a|()),$stringBuilder.toString()));
    ;;@ strings/Strings.java:35:4
    (local.set $s1 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_2 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_2)(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_2)))))
     (drop (call_ref (local.get $$stringBuilder_2)(call $$getString_|a|__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_2)))))
@@ -120,7 +114,6 @@
    ;; (s3 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s1),$stringBuilder.append(s1),$stringBuilder.append(s2),$stringBuilder.append(null),$stringBuilder.append(javaemul.internal.StringPool.$getString_|a|()),$stringBuilder.toString()));
    ;;@ strings/Strings.java:37:4
    (local.set $s3 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_3 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_3)(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
     (drop (call_ref (local.get $$stringBuilder_3)(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_3)))))
@@ -132,7 +125,6 @@
    ;; (s3 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(javaemul.internal.StringPool.$getString_|a|()),$stringBuilder.append(s1),$stringBuilder.append(s1),$stringBuilder.append(s2),$stringBuilder.append(null),$stringBuilder.toString()));
    ;;@ strings/Strings.java:39:4
    (local.set $s3 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_4 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_4)(call $$getString_|a|__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
     (drop (call_ref (local.get $$stringBuilder_4)(local.get $s1)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_4)))))
@@ -146,16 +138,13 @@
    
    ;; char c1 = 70;
    ;;@ strings/Strings.java:43:4
-   
    (local.set $c1 (i32.const 70))
    ;; char c2 = 111;
    ;;@ strings/Strings.java:44:4
-   
    (local.set $c2 (i32.const 111))
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append((c1 + c2)),$stringBuilder.append(javaemul.internal.StringPool.$getString_|o|()),$stringBuilder.toString()));
    ;;@ strings/Strings.java:45:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_5 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_5)(i32.add (local.get $c1) (local.get $c2))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_5)))))
     (drop (call_ref (local.get $$stringBuilder_5)(call $$getString_|o|__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_5)))))
@@ -164,7 +153,6 @@
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s4),$stringBuilder.append(1),$stringBuilder.append(javaemul.internal.StringPool.$getString_||()),$stringBuilder.toString()));
    ;;@ strings/Strings.java:46:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_6 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_6)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_6)))))
     (drop (call_ref (local.get $$stringBuilder_6)(i64.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__long__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_6)))))
@@ -174,7 +162,6 @@
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s4),$stringBuilder.append(1),$stringBuilder.toString()));
    ;;@ strings/Strings.java:49:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_7 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_7)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_7)))))
     (drop (call_ref (local.get $$stringBuilder_7)(i64.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__long__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_7)))))
@@ -183,7 +170,6 @@
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s4),$stringBuilder.append(67),$stringBuilder.toString()));
    ;;@ strings/Strings.java:50:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_8 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_8)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_8)))))
     (drop (call_ref (local.get $$stringBuilder_8)(i32.const 67)(struct.get $java.lang.StringBuilder.vtable $m_append__char__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_8)))))
@@ -192,7 +178,6 @@
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s4),$stringBuilder.append(1),$stringBuilder.toString()));
    ;;@ strings/Strings.java:51:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_9 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_9)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_9)))))
     (drop (call_ref (local.get $$stringBuilder_9)(i32.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_9)))))
@@ -201,7 +186,6 @@
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s4),$stringBuilder.append(1.0),$stringBuilder.toString()));
    ;;@ strings/Strings.java:52:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_10 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_10)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_10)))))
     (drop (call_ref (local.get $$stringBuilder_10)(f64.const 1.0)(struct.get $java.lang.StringBuilder.vtable $m_append__double__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_10)))))
@@ -210,7 +194,6 @@
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s4),$stringBuilder.append(1.0),$stringBuilder.toString()));
    ;;@ strings/Strings.java:53:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_11 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_11)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_11)))))
     (drop (call_ref (local.get $$stringBuilder_11)(f32.const 1.0)(struct.get $java.lang.StringBuilder.vtable $m_append__float__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_11)))))
@@ -219,7 +202,6 @@
    ;; (s4 = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(s4),$stringBuilder.append(1),$stringBuilder.toString()));
    ;;@ strings/Strings.java:54:4
    (local.set $s4 (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder_12 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder_12)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_12)))))
     (drop (call_ref (local.get $$stringBuilder_12)(i32.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__short__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_12)))))
@@ -229,12 +211,10 @@
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     ;;@ strings/Strings.java:56:4
-    
     (local.set $$qualifier (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append($qualifier.s),$stringBuilder.append(s4),$stringBuilder.toString()));
     ;;@ strings/Strings.java:56:4
     (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier) (block (result (ref null $java.lang.String))
-     
      (local.set $$stringBuilder_13 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
      (drop (call_ref (local.get $$stringBuilder_13)(struct.get $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_13)))))
      (drop (call_ref (local.get $$stringBuilder_13)(local.get $s4)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_13)))))
@@ -245,12 +225,10 @@
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     ;;@ strings/Strings.java:57:4
-    
     (local.set $$qualifier_1 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append($qualifier.s),$stringBuilder.append(c1),$stringBuilder.toString()));
     ;;@ strings/Strings.java:57:4
     (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_1) (block (result (ref null $java.lang.String))
-     
      (local.set $$stringBuilder_14 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
      (drop (call_ref (local.get $$stringBuilder_14)(struct.get $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_1))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_14)))))
      (drop (call_ref (local.get $$stringBuilder_14)(local.get $c1)(struct.get $java.lang.StringBuilder.vtable $m_append__char__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_14)))))
@@ -261,12 +239,10 @@
    (block
     ;; StringHolder $qualifier = new StringHolder.<init>();
     ;;@ strings/Strings.java:58:4
-    
     (local.set $$qualifier_2 (call $m_<init>__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
     ;; ($qualifier.s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append($qualifier.s),$stringBuilder.append(javaemul.internal.StringPool.$getString_|o|()),$stringBuilder.toString()));
     ;;@ strings/Strings.java:58:4
     (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_2) (block (result (ref null $java.lang.String))
-     
      (local.set $$stringBuilder_15 (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
      (drop (call_ref (local.get $$stringBuilder_15)(struct.get $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_2))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_15)))))
      (drop (call_ref (local.get $$stringBuilder_15)(call $$getString_|o|__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_15)))))

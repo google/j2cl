@@ -293,7 +293,6 @@
    ;; return ((String) (NativeFunction<String> $qualifier = importglobaljstypes.Number.getFromCharCodeFunction(),$qualifier.apply(null,array)));
    ;;@ importglobaljstypes/Number.java:48:4
    (local.set $return.value (ref.cast (block (result (ref null $java.lang.Object))
-    
     (local.set $$qualifier (call $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number ))
     (call_ref (local.get $$qualifier)(ref.null $java.lang.Object)(local.get $array)(struct.get $importglobaljstypes.Number.NativeFunction.vtable $m_apply__java_lang_Object__arrayOf_int__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1)) (rtt.canon $importglobaljstypes.Number.NativeFunction.vtable)) ))
    ) (global.get $java.lang.String.rtt)))

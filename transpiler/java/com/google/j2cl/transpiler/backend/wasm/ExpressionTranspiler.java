@@ -481,15 +481,21 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterVariableDeclarationExpression(VariableDeclarationExpression expression) {
-        expression.getFragments().forEach(this::renderVariableDeclarationFragment);
-        return false;
-      }
+        // Render the first declaration with no preceeding newline. Most places that can have a
+        // declaration already emit the newline (e.g. ExpressionStatement and MultiExpression).
+        boolean isFirst = true;
+        for (VariableDeclarationFragment fragment : expression.getFragments()) {
+          if (fragment.getInitializer() != null) {
+            if (!isFirst) {
+              sourceBuilder.newLine();
+            }
+            isFirst = false;
 
-      private void renderVariableDeclarationFragment(VariableDeclarationFragment fragment) {
-        if (fragment.getInitializer() != null) {
-          sourceBuilder.newLine();
-          renderAssignment(fragment.getVariable().createReference(), fragment.getInitializer());
+            renderAssignment(fragment.getVariable().createReference(), fragment.getInitializer());
+          }
         }
+
+        return false;
       }
 
       // TODO(b/182436577): remove this method when NullLiterals have the correct type.

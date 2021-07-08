@@ -57,7 +57,6 @@
   (block
    ;; Object object = new InstanceofExpressions.<init>();
    ;;@ instanceofexpression/InstanceofExpressions.java:23:4
-   
    (local.set $object (call $m_<init>__void@instanceofexpression.InstanceofExpressions (struct.new_with_rtt $instanceofexpression.InstanceofExpressions (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.itable)) (i32.const 0) (global.get $instanceofexpression.InstanceofExpressions.rtt))))
    ;; boolean b;
    ;;@ instanceofexpression/InstanceofExpressions.java:24:4
@@ -88,7 +87,6 @@
   (block
    ;; Object o = new Object.<init>();
    ;;@ instanceofexpression/InstanceofExpressions.java:31:4
-   
    (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; boolean b;
    ;;@ instanceofexpression/InstanceofExpressions.java:32:4
@@ -125,11 +123,9 @@
   (block
    ;; Object b = new Integer.<init>(1);
    ;;@ instanceofexpression/InstanceofExpressions.java:38:4
-   
    (local.set $b (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; boolean a = b instanceof Byte;
    ;;@ instanceofexpression/InstanceofExpressions.java:40:4
-   
    (local.set $a (ref.test (local.get $b) (global.get $java.lang.Byte.rtt)))
    ;; (a = b instanceof Double);
    ;;@ instanceofexpression/InstanceofExpressions.java:41:4
@@ -157,7 +153,6 @@
    (local.set $a (ref.test (local.get $b) (global.get $java.lang.Boolean.rtt)))
    ;; Double d = null;
    ;;@ instanceofexpression/InstanceofExpressions.java:50:4
-   
    (local.set $d (ref.null $java.lang.Double))
    ;; (a = d instanceof Object);
    ;;@ instanceofexpression/InstanceofExpressions.java:51:4
@@ -189,17 +184,13 @@
   (block
    ;; Object object = new Object.<init>();
    ;;@ instanceofexpression/InstanceofExpressions.java:57:4
-   
    (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Object[] objectArray = new OfObject.<init>(0);
    ;;@ instanceofexpression/InstanceofExpressions.java:58:4
-   
    (local.set $objectArray (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
    ;; Object[][] objectDoubleArray = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 0),($array_literal.elements[1] = -1),$array_literal),-1);
    ;;@ instanceofexpression/InstanceofExpressions.java:59:4
-   
    (local.set $objectDoubleArray (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 0))
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const -1))
@@ -207,7 +198,6 @@
    )(i32.const -1)))
    ;; String[] stringArray = new OfObject.<init>(0);
    ;;@ instanceofexpression/InstanceofExpressions.java:60:4
-   
    (local.set $stringArray (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
    ;; boolean a;
    ;;@ instanceofexpression/InstanceofExpressions.java:62:4

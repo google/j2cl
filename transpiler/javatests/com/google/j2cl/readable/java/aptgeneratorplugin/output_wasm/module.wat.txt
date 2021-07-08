@@ -128,7 +128,6 @@
    ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy(),$qualifier.getSimpleName());
    ;;@ aptgeneratorplugin/Foo.java:23:4
    (local.set $return.value (block (result (ref null $java.lang.String))
-    
     (local.set $$qualifier (call $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
    ))

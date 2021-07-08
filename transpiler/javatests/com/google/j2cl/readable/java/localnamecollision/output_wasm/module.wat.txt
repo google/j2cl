@@ -167,7 +167,6 @@
    (block
     ;; Class $qualifier = new Class.<init>();
     ;;@ localnamecollision/Class.java:20:4
-    
     (local.set $$qualifier (call $m_<init>__void@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0) (global.get $localnamecollision.Class.rtt))))
     ;; $qualifier.getClass();
     ;;@ localnamecollision/Class.java:20:4
@@ -254,39 +253,30 @@
   (block
    ;; boolean LocalNameCollision = false;
    ;;@ localnamecollision/LocalNameCollision.java:21:4
-   
    (local.set $LocalNameCollision (i32.const 0))
    ;; Object RuntimeException = null;
    ;;@ localnamecollision/LocalNameCollision.java:22:4
-   
    (local.set $RuntimeException (ref.null $java.lang.Object))
    ;; int Asserts = 1;
    ;;@ localnamecollision/LocalNameCollision.java:23:4
-   
    (local.set $Asserts (i32.const 1))
    ;; int $Asserts = 1;
    ;;@ localnamecollision/LocalNameCollision.java:24:4
-   
    (local.set $$Asserts (i32.const 1))
    ;; int l_Asserts = 1;
    ;;@ localnamecollision/LocalNameCollision.java:25:4
-   
    (local.set $l_Asserts (i32.const 1))
    ;; int com_google_j2cl_readable_localnamecollision_Class = 1;
    ;;@ localnamecollision/LocalNameCollision.java:26:4
-   
    (local.set $com_google_j2cl_readable_localnamecollision_Class (i32.const 1))
    ;; int com_google_j2cl_readable_localnamecollision_package1_A = 1;
    ;;@ localnamecollision/LocalNameCollision.java:27:4
-   
    (local.set $com_google_j2cl_readable_localnamecollision_package1_A (i32.const 1))
    ;; int com_google_j2cl_readable_localnamecollision_package2_A = 1;
    ;;@ localnamecollision/LocalNameCollision.java:28:4
-   
    (local.set $com_google_j2cl_readable_localnamecollision_package2_A (i32.const 1))
    ;; int A = 1;
    ;;@ localnamecollision/LocalNameCollision.java:29:4
-   
    (local.set $A (i32.const 1))
    ;; (LocalNameCollision = ((((RuntimeException instanceof LocalNameCollision) ? (true) : (RuntimeException instanceof RuntimeException)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof Class));
    ;;@ localnamecollision/LocalNameCollision.java:30:4
@@ -342,7 +332,6 @@
    (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
    ;; boolean result = (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
    ;;@ localnamecollision/LocalNameCollision.java:51:4
-   
    (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
   )
  )

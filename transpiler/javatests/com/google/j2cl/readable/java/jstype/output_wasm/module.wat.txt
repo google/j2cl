@@ -110,7 +110,6 @@
   (block
    ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
    ;;@ jstype/SomeJsType.java:37:4
-   
    (local.set $value (i32.add (i32.add (i32.add (struct.get $jstype.SomeJsType $f_publicField__jstype_SomeJsType(local.get $this)) (struct.get $jstype.SomeJsType $f_privateField__jstype_SomeJsType_(local.get $this))) (struct.get $jstype.SomeJsType $f_packageField__jstype_SomeJsType(local.get $this))) (struct.get $jstype.SomeJsType $f_protectedField__jstype_SomeJsType(local.get $this))))
    ;; SomeJsType.this.publicMethod();
    ;;@ jstype/SomeJsType.java:39:4
@@ -145,11 +144,9 @@
   (block
    ;; Object object = new Object.<init>();
    ;;@ jstype/SomeJsType.java:52:4
-   
    (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
    ;;@ jstype/SomeJsType.java:54:4
-   
    (local.set $star (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))
    ;; return ((Wildcard) star);
    ;;@ jstype/SomeJsType.java:55:4

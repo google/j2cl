@@ -131,9 +131,7 @@
   (block
    ;; int result = (Integer $qualifier = ((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(7)))),$qualifier.intValue());
    ;;@ jsasync/Main.java:35:4
-   
    (local.set $result (block (result i32)
-    
     (local.set $$qualifier (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 7)))) (global.get $java.lang.Integer.rtt)))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
@@ -202,23 +200,18 @@
   (block
    ;; AsyncInterface i = new $LambdaImplementor$1.<init>();
    ;;@ jsasync/Main.java:51:4
-   
    (local.set $i (call $m_<init>__void@jsasync.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$1.rtt))))
    ;; BaseInterface o = new $1.<init>(Main.this);
    ;;@ jsasync/Main.java:53:4
-   
    (local.set $o (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))(local.get $this)))
    ;; AsyncJsFunctionInterface j = new $LambdaImplementor$2.<init>();
    ;;@ jsasync/Main.java:62:4
-   
    (local.set $j (call $m_<init>__void@jsasync.Main.$LambdaImplementor$2 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$2.rtt))))
    ;; JsFunctionInterface optimizableJsFunction = new $2.<init>(Main.this);
    ;;@ jsasync/Main.java:64:4
-   
    (local.set $optimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))(local.get $this)))
    ;; JsFunctionInterface unoptimizableJsFunction = new $3.<init>(Main.this);
    ;;@ jsasync/Main.java:75:4
-   
    (local.set $unoptimizableJsFunction (call $m_<init>__jsasync_Main__void_$pp_jsasync@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))(local.get $this)))
   )
  )
@@ -534,7 +527,6 @@
   (block
    ;; JsFunctionInterface tmp = $3.this;
    ;;@ jsasync/Main.java:80:12
-   
    (local.set $tmp (local.get $this))
    ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($3.this.this.x)));
    ;;@ jsasync/Main.java:82:12

@@ -304,7 +304,6 @@
   (block
    ;; Producer<Object> objectFactory = new $LambdaImplementor$2.<init>();
    ;;@ methodreferences/MethodReferences.java:83:4
-   
    (local.set $objectFactory (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$2 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$2 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$2.rtt))))
    ;; (objectFactory = new $LambdaImplementor$3.<init>());
    ;;@ methodreferences/MethodReferences.java:85:4
@@ -312,52 +311,41 @@
    ;; (objectFactory = (MethodReferences<T> $$q = new MethodReferences.<init>(),new $LambdaImplementor$4.<init>($$q)));
    ;;@ methodreferences/MethodReferences.java:88:4
    (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
-    
     (local.set $$$q (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (ref.as_non_null (global.get $methodreferences.MethodReferences.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.rtt))))
     (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$4 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$4 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$4.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$4.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$4.rtt))(local.get $$$q))
    ))
    ;; BiFunction<MethodReferences<T>, Number, Boolean> biFunction = new $LambdaImplementor$5.<init>();
    ;;@ methodreferences/MethodReferences.java:90:4
-   
    (local.set $biFunction (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$5 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$5 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$5.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$5.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$5.rtt))))
    ;; Function<Number, Boolean> functionWithParameters = new $LambdaImplementor$6.<init>(MethodReferences.this);
    ;;@ methodreferences/MethodReferences.java:92:4
-   
    (local.set $functionWithParameters (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$6 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$6 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$6.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$6.rtt))(local.get $this)))
    ;; Predicate<MethodReferences<T>> objectPredicate = new $LambdaImplementor$7.<init>();
    ;;@ methodreferences/MethodReferences.java:95:4
-   
    (local.set $objectPredicate (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$7 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$7 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$7.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$7.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$7.rtt))))
    ;; Producer<ObjectCapturingOuter<T>> objectCapturingOuterProducer = new $LambdaImplementor$8.<init>(MethodReferences.this);
    ;;@ methodreferences/MethodReferences.java:97:4
-   
    (local.set $objectCapturingOuterProducer (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$8 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$8 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$8.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$8.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$8.rtt))(local.get $this)))
    ;; ArrayProducer<Object> arrayProducer = new $LambdaImplementor$9.<init>();
    ;;@ methodreferences/MethodReferences.java:99:4
-   
    (local.set $arrayProducer (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$9 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$9 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$9.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$9.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$9.rtt))))
    ;; (objectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),new $LambdaImplementor$10.<init>($$q)));
    ;;@ methodreferences/MethodReferences.java:101:4
    (local.set $objectFactory (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
-    
     (local.set $$$q_1 (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (ref.as_non_null (global.get $methodreferences.MethodReferences.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.rtt))))
     (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$10 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$10 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$10.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$10.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$10.rtt))(local.get $$$q_1))
    ))
    ;; Function<MethodReferences<T>, Object> function = new $LambdaImplementor$11.<init>();
    ;;@ methodreferences/MethodReferences.java:103:4
-   
    (local.set $function (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$11 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$11 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$11.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$11.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$11.rtt))))
    ;; Function<Integer, Object[]> arrayFactory = new $LambdaImplementor$12.<init>();
    ;;@ methodreferences/MethodReferences.java:105:4
-   
    (local.set $arrayFactory (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$12 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$12 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$12.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$12.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$12.rtt))))
    ;; Producer<String> superToStringProducer = new $LambdaImplementor$13.<init>(MethodReferences.this);
    ;;@ methodreferences/MethodReferences.java:107:4
-   
    (local.set $superToStringProducer (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$13 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$13 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$13.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$13.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$13.rtt))(local.get $this)))
    ;; JsProducer<Object> jsobjectFactory = new $LambdaImplementor$14.<init>();
    ;;@ methodreferences/MethodReferences.java:109:4
-   
    (local.set $jsobjectFactory (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$14 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$14 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$14.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$14.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$14.rtt))))
    ;; (jsobjectFactory = new $LambdaImplementor$15.<init>());
    ;;@ methodreferences/MethodReferences.java:110:4
@@ -365,29 +353,23 @@
    ;; (jsobjectFactory = (MethodReferences<Object> $$q = new MethodReferences.<init>(),new $LambdaImplementor$16.<init>($$q)));
    ;;@ methodreferences/MethodReferences.java:112:4
    (local.set $jsobjectFactory (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
-    
     (local.set $$$q_2 (call $m_<init>__void@methodreferences.MethodReferences (struct.new_with_rtt $methodreferences.MethodReferences (ref.as_non_null (global.get $methodreferences.MethodReferences.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.rtt))))
     (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$16 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$16 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$16.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$16.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$16.rtt))(local.get $$$q_2))
    ))
    ;; JsFunctionInterface<MethodReferences<T>, Object> jsfunction = new $LambdaImplementor$17.<init>();
    ;;@ methodreferences/MethodReferences.java:114:4
-   
    (local.set $jsfunction (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$17 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$17 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$17.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$17.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$17.rtt))))
    ;; JsFunctionInterface<Integer, Object[]> jsarrayFactory = new $LambdaImplementor$18.<init>();
    ;;@ methodreferences/MethodReferences.java:116:4
-   
    (local.set $jsarrayFactory (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$18 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$18 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$18.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$18.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$18.rtt))))
    ;; JsProducer<String> jsSuperToStringProducer = new $LambdaImplementor$19.<init>(MethodReferences.this);
    ;;@ methodreferences/MethodReferences.java:118:4
-   
    (local.set $jsSuperToStringProducer (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$19 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$19 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$19.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$19.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$19.rtt))(local.get $this)))
    ;; JsBiFunction<MethodReferences<T>, Number, Boolean> jsbiFunction = new $LambdaImplementor$20.<init>();
    ;;@ methodreferences/MethodReferences.java:120:4
-   
    (local.set $jsbiFunction (call $m_<init>__void@methodreferences.MethodReferences.$LambdaImplementor$20 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$20 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$20.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$20.itable)) (i32.const 0) (global.get $methodreferences.MethodReferences.$LambdaImplementor$20.rtt))))
    ;; JsFunctionInterface<Number, Boolean> jsFunctionWithParameters = new $LambdaImplementor$21.<init>(MethodReferences.this);
    ;;@ methodreferences/MethodReferences.java:122:4
-   
    (local.set $jsFunctionWithParameters (call $m_<init>__methodreferences_MethodReferences__void@methodreferences.MethodReferences.$LambdaImplementor$21 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$21 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$21.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$21.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.$LambdaImplementor$21.rtt))(local.get $this)))
   )
  )
@@ -423,7 +405,6 @@
     ;; (methodreferences.MethodReferences.staticStringProducer = (Object $$q = methodreferences.MethodReferences.m(),new $LambdaImplementor$1.<init>($$q)));
     ;;@ methodreferences/MethodReferences.java:76:2
     (global.set $f_staticStringProducer__methodreferences_MethodReferences (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
-     
      (local.set $$$q (call $m_m__java_lang_Object@methodreferences.MethodReferences ))
      (call $m_<init>__java_lang_Object__void@methodreferences.MethodReferences.$LambdaImplementor$1 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$1 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.rtt))(local.get $$$q))
     ))
@@ -1319,11 +1300,9 @@
   (block
    ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:90:66
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $methodreferences.MethodReferences.rtt)))
    ;; Number arg1 = ((Number) ((U) arg1));
    ;;@ methodreferences/MethodReferences.java:90:66
-   
    (local.set $arg1_1 (ref.cast (ref.cast (local.get $arg1) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Number.rtt)))
    ;; return arg0.sameAs(arg1);
    ;;@ methodreferences/MethodReferences.java:90:66
@@ -1428,7 +1407,6 @@
   (block
    ;; Number arg0 = ((Number) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:92:55
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Number.rtt)))
    ;; return $LambdaImplementor$6.this.$captured.this.sameAs(arg0);
    ;;@ methodreferences/MethodReferences.java:92:55
@@ -1529,12 +1507,10 @@
   (block
    ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:95:53
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $methodreferences.MethodReferences.rtt)))
    ;; return (Boolean $qualifier = arg0.isA(),$qualifier.booleanValue());
    ;;@ methodreferences/MethodReferences.java:95:53
    (local.set $return.value (block (result i32)
-    
     (local.set $$qualifier (call_ref (local.get $arg0_1)(struct.get $methodreferences.MethodReferences.vtable $m_isA__java_lang_Boolean (struct.get $methodreferences.MethodReferences $vtable(local.get $arg0_1)))))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $$qualifier))))
    ))
@@ -1926,7 +1902,6 @@
   (block
    ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:103:53
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $methodreferences.MethodReferences.rtt)))
    ;; return arg0.self();
    ;;@ methodreferences/MethodReferences.java:103:53
@@ -2026,7 +2001,6 @@
   (block
    ;; Integer arg0 = ((Integer) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:105:47
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Integer.rtt)))
    ;; return new OfObject.<init>(arg0.intValue());
    ;;@ methodreferences/MethodReferences.java:105:47
@@ -2512,7 +2486,6 @@
   (block
    ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:114:66
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $methodreferences.MethodReferences.rtt)))
    ;; return arg0.self();
    ;;@ methodreferences/MethodReferences.java:114:66
@@ -2612,7 +2585,6 @@
   (block
    ;; Integer arg0 = ((Integer) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:116:60
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Integer.rtt)))
    ;; return new OfObject.<init>(arg0.intValue());
    ;;@ methodreferences/MethodReferences.java:116:60
@@ -2813,11 +2785,9 @@
   (block
    ;; MethodReferences<T> arg0 = ((MethodReferences<T>) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:120:70
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $methodreferences.MethodReferences.rtt)))
    ;; Number arg1 = ((Number) ((U) arg1));
    ;;@ methodreferences/MethodReferences.java:120:70
-   
    (local.set $arg1_1 (ref.cast (ref.cast (local.get $arg1) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Number.rtt)))
    ;; return arg0.sameAs(arg1);
    ;;@ methodreferences/MethodReferences.java:120:70
@@ -2922,7 +2892,6 @@
   (block
    ;; Number arg0 = ((Number) ((T) arg0));
    ;;@ methodreferences/MethodReferences.java:122:68
-   
    (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Number.rtt)))
    ;; return $LambdaImplementor$21.this.$captured.this.sameAs(arg0);
    ;;@ methodreferences/MethodReferences.java:122:68

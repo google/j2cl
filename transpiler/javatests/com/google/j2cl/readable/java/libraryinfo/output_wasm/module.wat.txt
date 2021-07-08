@@ -105,7 +105,6 @@
    (call $m_execute__void_$p_libraryinfo_Main@libraryinfo.Main (call $m_<init>__void@libraryinfo.Main (struct.new_with_rtt $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.itable)) (i32.const 0) (global.get $libraryinfo.Main.rtt))))
    ;; Function jsFunction = new FunctionImpl.<init>();
    ;;@ libraryinfo/Main.java:78:4
-   
    (local.set $jsFunction (call $m_<init>__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.itable)) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt))))
    ;; (jsFunction = new $LambdaImplementor$1.<init>());
    ;;@ libraryinfo/Main.java:79:4
@@ -173,14 +172,12 @@
    (call $$clinit__void@libraryinfo.Main )
    ;; Foo foo = null;
    ;;@ libraryinfo/Main.java:108:4
-   
    (local.set $foo (ref.null $libraryinfo.Main.Foo))
    ;; foo.instanceMethod();
    ;;@ libraryinfo/Main.java:109:4
    (call_ref (local.get $foo)(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
    ;; Class<?> clazz = javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
    ;;@ libraryinfo/Main.java:111:4
-   
    (local.set $clazz (call $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
   )
  )
@@ -583,7 +580,6 @@
    ;; return (MyEnum[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.A)),($array_literal.elements[1] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.B)),($array_literal.elements[2] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.C)),$array_literal);
    ;;@ libraryinfo/Main.java:59:7
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $libraryinfo.Main.MyEnum))
      (call $$clinit__void@libraryinfo.Main.MyEnum )

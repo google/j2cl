@@ -48,12 +48,10 @@
   (block
    ;; Object o = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
    ;;@ classliteral/ClassLiteral.java:21:4
-   
    (local.set $o (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
    ;; (o = (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral(),$qualifier.getArrayType(2)));
    ;;@ classliteral/ClassLiteral.java:22:4
    (local.set $o (block (result (ref null $java.lang.Class))
-    
     (local.set $$qualifier (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
     (call_ref (local.get $$qualifier)(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
    ))

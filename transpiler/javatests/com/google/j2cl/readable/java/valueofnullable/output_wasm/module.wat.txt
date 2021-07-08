@@ -57,7 +57,6 @@
    ;; (ValueOfNullable.this.result = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(ValueOfNullable.this.someChar),$stringBuilder.append(ValueOfNullable.this.nullableString),$stringBuilder.toString()));
    ;;@ valueofnullable/ValueOfNullable.java:21:2
    (struct.set $valueofnullable.ValueOfNullable $f_result__valueofnullable_ValueOfNullable(local.get $this) (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder)(struct.get $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__char__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (drop (call_ref (local.get $$stringBuilder)(struct.get $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))

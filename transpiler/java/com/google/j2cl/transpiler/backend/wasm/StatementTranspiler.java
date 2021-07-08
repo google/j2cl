@@ -54,6 +54,7 @@ class StatementTranspiler {
 
       @Override
       public boolean enterBlock(Block block) {
+        builder.newLine();
         builder.openParens("block");
         renderStatements(block.getStatements());
         builder.closeParens();
@@ -61,15 +62,12 @@ class StatementTranspiler {
       }
 
       private void renderStatements(List<Statement> statements) {
-        statements.forEach(
-            s -> {
-              builder.newLine();
-              render(s);
-            });
+        statements.forEach(this::render);
       }
 
       @Override
       public boolean enterBreakStatement(BreakStatement breakStatement) {
+        builder.newLine();
         builder.append(
             "(br " + getBreakLabelName(breakStatement.getLabelReference().getTarget()) + ")");
         return false;
@@ -77,6 +75,7 @@ class StatementTranspiler {
 
       @Override
       public boolean enterContinueStatement(ContinueStatement continueStatement) {
+        builder.newLine();
         builder.append(
             "(br " + getContinueLabelName(continueStatement.getLabelReference().getTarget()) + ")");
         return false;
@@ -85,6 +84,7 @@ class StatementTranspiler {
       @Override
       public boolean enterExpressionStatement(ExpressionStatement expressionStatement) {
         Expression expression = expressionStatement.getExpression();
+        builder.newLine();
         builder.emitWithMapping(
             expressionStatement.getSourcePosition(),
             () -> ExpressionTranspiler.renderWithUnusedResult(expression, builder, environment));
@@ -94,18 +94,17 @@ class StatementTranspiler {
 
       @Override
       public boolean enterIfStatement(IfStatement ifStatement) {
+        builder.newLine();
         builder.openParens("if ");
         builder.emitWithMapping(
             ifStatement.getSourcePosition(),
             () -> renderExpression(ifStatement.getConditionExpression()));
         builder.newLine();
         builder.openParens("then");
-        builder.newLine();
         render(ifStatement.getThenStatement());
         builder.closeParens();
         if (ifStatement.getElseStatement() != null) {
           builder.openParens("else");
-          builder.newLine();
           render(ifStatement.getElseStatement());
           builder.closeParens();
         }
@@ -121,8 +120,8 @@ class StatementTranspiler {
           return true;
         }
         String label = getBreakLabelName(labeledStatement.getLabel());
-        builder.openParens("block " + label);
         builder.newLine();
+        builder.openParens("block " + label);
         render(labeledStatement.getStatement());
         builder.closeParens();
         return false;
@@ -134,6 +133,7 @@ class StatementTranspiler {
             returnStatement.getSourcePosition(),
             () -> {
               if (returnStatement.getExpression() != null) {
+                builder.newLine();
                 builder.append("(local.set $return.value ");
                 // TODO(b/182436577): Replace with renderExpression once renderTypedExpression
                 // is removed.
@@ -143,8 +143,8 @@ class StatementTranspiler {
                     builder,
                     environment);
                 builder.append(")");
-                builder.newLine();
               }
+              builder.newLine();
               builder.append("(br $return.label)");
             });
         return false;
@@ -387,7 +387,6 @@ class StatementTranspiler {
       void renderLabeledStatement(String label, Statement statement) {
         builder.newLine();
         builder.openParens("block " + label);
-        builder.newLine();
         render(statement);
         builder.closeParens();
       }
@@ -422,6 +421,7 @@ class StatementTranspiler {
     SourcePosition sourcePosition = statement.getSourcePosition();
     if (sourcePosition != SourcePosition.NONE) {
       String filePath = sourcePosition.getPackageRelativePath();
+      builder.newLine();
       builder.append(
           String.format(
               ";;@ %s:%d:%d",
@@ -430,7 +430,6 @@ class StatementTranspiler {
               // columns to be zeor based.
               sourcePosition.getStartFilePosition().getLine() + 1,
               sourcePosition.getStartFilePosition().getColumn()));
-      builder.newLine();
     }
   }
 
@@ -440,8 +439,8 @@ class StatementTranspiler {
       return;
     }
     String[] parts = s.toString().split("\n", 2);
+    builder.newLine();
     builder.append(";; ");
     builder.append(parts[0]);
-    builder.newLine();
   }
 }

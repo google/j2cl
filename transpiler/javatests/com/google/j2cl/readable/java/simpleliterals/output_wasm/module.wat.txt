@@ -52,27 +52,21 @@
   (block
    ;; boolean a = false;
    ;;@ simpleliterals/SimpleLiterals.java:21:4
-   
    (local.set $a (i32.const 0))
    ;; char b = 97;
    ;;@ simpleliterals/SimpleLiterals.java:22:4
-   
    (local.set $b (i32.const 97))
    ;; Object c = null;
    ;;@ simpleliterals/SimpleLiterals.java:23:4
-   
    (local.set $c (ref.null $java.lang.Object))
    ;; int d = 101;
    ;;@ simpleliterals/SimpleLiterals.java:24:4
-   
    (local.set $d (i32.const 101))
    ;; String e = javaemul.internal.StringPool.$getString_|foo|();
    ;;@ simpleliterals/SimpleLiterals.java:25:4
-   
    (local.set $e (call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool ))
    ;; Class<?> f = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
    ;;@ simpleliterals/SimpleLiterals.java:26:4
-   
    (local.set $f (call $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool ))
   )
  )

@@ -460,7 +460,6 @@
    (block
     ;; NativeFoo $qualifier = new NativeFoo.<init>();
     ;;@ jsproperties/Main.java:82:4
-    
     (local.set $$qualifier (call $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt))))
     ;; $qualifier.getA();
     ;;@ jsproperties/Main.java:82:4
@@ -510,7 +509,6 @@
   (block
    ;; Bar bar = new Bar.<init>();
    ;;@ jsproperties/Main.java:94:4
-   
    (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
    ;; bar.getA();
    ;;@ jsproperties/Main.java:95:4

@@ -305,7 +305,6 @@
    (block
     ;; Setable $qualifier = ((Setable) object);
     ;;@ intersectiontype/IntersectionTypeTest.java:39:4
-    
     (local.set $$qualifier (local.get $object))
     ;; $qualifier.set(1);
     ;;@ intersectiontype/IntersectionTypeTest.java:39:4
@@ -464,15 +463,12 @@
    (call $$clinit__void@intersectiontype.IntersectionTypeTest )
    ;; A e = (((A&EmptyA&EmptyB)) o);
    ;;@ intersectiontype/IntersectionTypeTest.java:86:4
-   
    (local.set $e (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    ;; EmptyA g = ((EmptyA) (((A&EmptyA&EmptyB)) o));
    ;;@ intersectiontype/IntersectionTypeTest.java:87:4
-   
    (local.set $g (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
    ;; EmptyB s = ((EmptyB) (((A&EmptyA&EmptyB)) o));
    ;;@ intersectiontype/IntersectionTypeTest.java:88:4
-   
    (local.set $s (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
   )
  )
@@ -549,7 +545,6 @@
   (block
    ;; Object o = intersectiontype.IntersectionTypeTest.m();
    ;;@ intersectiontype/IntersectionTypeTest.java:106:4
-   
    (local.set $o (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
    ;; intersectiontype.IntersectionTypeTest.set((((A&EmptyA)) o));
    ;;@ intersectiontype/IntersectionTypeTest.java:107:4
@@ -559,7 +554,6 @@
    (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
    ;; Getable<?> g = intersectiontype.IntersectionTypeTest.n();
    ;;@ intersectiontype/IntersectionTypeTest.java:109:4
-   
    (local.set $g (call $m_n__intersectiontype_Getable@intersectiontype.IntersectionTypeTest ))
   )
  )

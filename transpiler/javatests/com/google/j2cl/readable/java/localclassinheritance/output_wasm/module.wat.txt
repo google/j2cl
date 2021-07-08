@@ -59,7 +59,6 @@
   (block
    ;; int f = 1;
    ;;@ localclassinheritance/LocalClassInheritance.java:20:4
-   
    (local.set $f (i32.const 1))
   )
  )
@@ -161,7 +160,6 @@
   (block
    ;; int i = $1Parent.this.f;
    ;;@ localclassinheritance/LocalClassInheritance.java:23:8
-   
    (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Parent $$captured_f__localclassinheritance_LocalClassInheritance_1Parent(local.get $this)))
   )
  )
@@ -265,7 +263,6 @@
   (block
    ;; int i = $1Child.this.f;
    ;;@ localclassinheritance/LocalClassInheritance.java:28:8
-   
    (local.set $i (struct.get $localclassinheritance.LocalClassInheritance.1Child $$captured_f__localclassinheritance_LocalClassInheritance_1Child(local.get $this)))
   )
  )

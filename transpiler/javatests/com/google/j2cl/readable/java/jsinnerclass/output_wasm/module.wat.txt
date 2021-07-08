@@ -152,7 +152,6 @@
    ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
    ;;@ jsinnerclass/Main.java:38:6
    (local.set $return.value (i32.add (block (result i32)
-    
     (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.itable)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
     (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
    ) (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this))))

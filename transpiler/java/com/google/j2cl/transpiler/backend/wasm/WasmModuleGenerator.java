@@ -395,7 +395,6 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append("(block $return.label");
     builder.indent();
-    builder.newLine();
 
     StatementTranspiler.render(method.getBody(), builder, environment);
     builder.unindent();

@@ -100,7 +100,6 @@
    ;; return (Color[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = (jstypeenum.Color.$clinit(),jstypeenum.Color.RED)),($array_literal.elements[1] = (jstypeenum.Color.$clinit(),jstypeenum.Color.GREEN)),($array_literal.elements[2] = (jstypeenum.Color.$clinit(),jstypeenum.Color.BLUE)),$array_literal);
    ;;@ jstypeenum/Color.java:21:12
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    
     (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $jstypeenum.Color))
      (call $$clinit__void@jstypeenum.Color )

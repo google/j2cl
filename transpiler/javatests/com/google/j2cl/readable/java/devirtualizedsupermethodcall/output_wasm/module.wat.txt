@@ -312,14 +312,12 @@
   (block
    ;; FooCallsSuperObjectMethod fooCallsSuperObjectMethods = new FooCallsSuperObjectMethod.<init>();
    ;;@ devirtualizedsupermethodcall/Main.java:49:4
-   
    (local.set $fooCallsSuperObjectMethods (call $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable)) (i32.const 0) (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt))))
    ;; fooCallsSuperObjectMethods.hashCode();
    ;;@ devirtualizedsupermethodcall/Main.java:50:4
    (drop (call_ref (local.get $fooCallsSuperObjectMethods)(struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable $m_hashCode__int (struct.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod $vtable(local.get $fooCallsSuperObjectMethods)))))
    ;; SubNumber sn = new SubNumber.<init>();
    ;;@ devirtualizedsupermethodcall/Main.java:52:4
-   
    (local.set $sn (call $m_<init>__void_$pp_devirtualizedsupermethodcall@devirtualizedsupermethodcall.SubNumber (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.itable)) (i32.const 0) (global.get $devirtualizedsupermethodcall.SubNumber.rtt))))
    ;; sn.byteValue();
    ;;@ devirtualizedsupermethodcall/Main.java:53:4

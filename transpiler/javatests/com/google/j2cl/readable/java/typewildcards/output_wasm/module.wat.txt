@@ -244,7 +244,6 @@
    (call $$clinit__void@typewildcards.TypeWildCards )
    ;; int i = t.f;
    ;;@ typewildcards/TypeWildCards.java:52:4
-   
    (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A(local.get $t)))
    ;; t.m();
    ;;@ typewildcards/TypeWildCards.java:53:4
@@ -266,7 +265,6 @@
    (call $$clinit__void@typewildcards.TypeWildCards )
    ;; int i = t.f;
    ;;@ typewildcards/TypeWildCards.java:57:4
-   
    (local.set $i (struct.get $typewildcards.TypeWildCards.A $f_f__typewildcards_TypeWildCards_A(local.get $t)))
    ;; t.m();
    ;;@ typewildcards/TypeWildCards.java:58:4
@@ -275,7 +273,6 @@
    (block
     ;; Y $qualifier = ((Y) t);
     ;;@ typewildcards/TypeWildCards.java:59:4
-    
     (local.set $$qualifier (local.get $t))
     ;; $qualifier.n();
     ;;@ typewildcards/TypeWildCards.java:59:4
@@ -334,15 +331,12 @@
   (block
    ;; List<Element> elements = null;
    ;;@ typewildcards/TypeWildCards.java:85:4
-   
    (local.set $elements (ref.null $java.lang.Object))
    ;; List<SubOtherElement> otherElements = null;
    ;;@ typewildcards/TypeWildCards.java:86:4
-   
    (local.set $otherElements (ref.null $java.lang.Object))
    ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),new $LambdaImplementor$1.<init>());
    ;;@ typewildcards/TypeWildCards.java:89:4
-   
    (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $m_<init>__void@typewildcards.TypeWildCards.$LambdaImplementor$1 (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))))
   )
  )
@@ -979,13 +973,11 @@
   (block
    ;; (Object&HasKey&IntegerSupplier) a = ((T) a);
    ;;@ typewildcards/TypeWildCards.java:92:12
-   
    (local.set $a_1 (ref.cast (local.get $a) (global.get $java.lang.Object.rtt)))
    ;;@ typewildcards/TypeWildCards.java:93:14
    (block
     ;; HasKey $qualifier = ((HasKey) a);
     ;;@ typewildcards/TypeWildCards.java:93:14
-    
     (local.set $$qualifier (local.get $a_1))
     ;; $qualifier.getKey();
     ;;@ typewildcards/TypeWildCards.java:93:14
@@ -994,7 +986,6 @@
    ;; return (IntegerSupplier $qualifier = ((IntegerSupplier) a),$qualifier.get());
    ;;@ typewildcards/TypeWildCards.java:94:14
    (local.set $return.value (block (result (ref null $java.lang.Integer))
-    
     (local.set $$qualifier_1 (local.get $a_1))
     (call_ref (local.get $$qualifier_1)(struct.get $typewildcards.TypeWildCards.IntegerSupplier.vtable $m_get__java_lang_Integer (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const -1)) (rtt.canon $typewildcards.TypeWildCards.IntegerSupplier.vtable)) ))
    ))

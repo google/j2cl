@@ -119,7 +119,6 @@
    (block
     ;; G<Error, T, T> $qualifier = new $1G.<init>(NestedGenericClass.this);
     ;;@ nestedgenericclass/NestedGenericClass.java:56:4
-    
     (local.set $$qualifier (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1G.rtt))(local.get $this)))
     ;; $qualifier.bar();
     ;;@ nestedgenericclass/NestedGenericClass.java:56:4
@@ -143,15 +142,12 @@
   (block
    ;; NestedGenericClass<Number> n = new NestedGenericClass.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:60:4
-   
    (local.set $n (call $m_<init>__void@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.itable)) (i32.const 0) (global.get $nestedgenericclass.NestedGenericClass.rtt))))
    ;; A<Error, Number> a = new A.<init>(n);
    ;;@ nestedgenericclass/NestedGenericClass.java:61:4
-   
    (local.set $a (call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))(local.get $n)))
    ;; B<Exception, Error, Number> b = new B.<init>(a);
    ;;@ nestedgenericclass/NestedGenericClass.java:62:4
-   
    (local.set $b (call $m_<init>__nestedgenericclass_NestedGenericClass_A__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.B.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.B.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))(local.get $a)))
    ;; new C.<init>(n);
    ;;@ nestedgenericclass/NestedGenericClass.java:64:4

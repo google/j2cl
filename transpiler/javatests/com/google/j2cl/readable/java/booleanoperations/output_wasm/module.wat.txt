@@ -74,15 +74,12 @@
   (block
    ;; boolean ls = true;
    ;;@ booleanoperations/BooleanOperations.java:26:4
-   
    (local.set $ls (i32.const 1))
    ;; boolean rs = true;
    ;;@ booleanoperations/BooleanOperations.java:27:4
-   
    (local.set $rs (i32.const 1))
    ;; boolean r = true;
    ;;@ booleanoperations/BooleanOperations.java:28:4
-   
    (local.set $r (i32.const 1))
    ;; (r = (ls == rs));
    ;;@ booleanoperations/BooleanOperations.java:31:4
@@ -263,14 +260,12 @@
    )
    ;; Outer finalOuter = new $1Outer.<init>(BooleanOperations.this);
    ;;@ booleanoperations/BooleanOperations.java:99:4
-   
    (local.set $finalOuter (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
    ;; (finalOuter.b = (finalOuter.b | true));
    ;;@ booleanoperations/BooleanOperations.java:100:4
    (struct.set $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $finalOuter) (i32.or (struct.get $booleanoperations.BooleanOperations.1Outer $f_b__booleanoperations_BooleanOperations_1Outer(local.get $finalOuter)) (i32.const 1)))
    ;; Outer outer = new $1Outer.<init>(BooleanOperations.this);
    ;;@ booleanoperations/BooleanOperations.java:102:4
-   
    (local.set $outer (call $m_<init>__booleanoperations_BooleanOperations__void_$pp_booleanoperations@booleanoperations.BooleanOperations.1Outer (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt))(local.get $this)))
    ;; (outer.b = (outer.b | javaemul.internal.Platform.isNull(((outer = null),outer))));
    ;;@ booleanoperations/BooleanOperations.java:103:4

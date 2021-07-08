@@ -52,8 +52,6 @@
   (block
    ;; LOOP: for (int i = 0,int count = 0;(i < 100);(i = (i + 1))) {
    ;;@ forstatement/ForStatement.java:20:4
-   
-   
    (local.set $i (i32.const 0))
    (local.set $count (i32.const 0))
    (block $LOOP.BREAK
@@ -74,8 +72,6 @@
    )
    ;; LOOP: for (long l = 0,long count = 0;(l < 100);(l = (l + 1)),(l = (l + 1))) {
    ;;@ forstatement/ForStatement.java:24:4
-   
-   
    (local.set $l (i64.const 0))
    (local.set $count_1 (i64.const 0))
    (block $LOOP_1.BREAK
@@ -97,11 +93,9 @@
    )
    ;; boolean a = false;
    ;;@ forstatement/ForStatement.java:28:4
-   
    (local.set $a (i32.const 0))
    ;; LOOP: for (;((a = (a | true)),a);) {
    ;;@ forstatement/ForStatement.java:29:4
-   
    (block $LOOP_2.BREAK
     (loop
      (br_if 1 (i32.eqz (block (result i32)
@@ -119,11 +113,9 @@
    )
    ;; boolean b = false;
    ;;@ forstatement/ForStatement.java:31:4
-   
    (local.set $b (i32.const 0))
    ;; LOOP: for (;((b = a),b);) {
    ;;@ forstatement/ForStatement.java:32:4
-   
    (block $LOOP_3.BREAK
     (loop
      (br_if 1 (i32.eqz (block (result i32)
@@ -141,7 +133,6 @@
    )
    ;; LOOP: for (forstatement.ForStatement.returnsValue();true;forstatement.ForStatement.returnsValue()) {
    ;;@ forstatement/ForStatement.java:34:4
-   
    (drop (call $m_returnsValue__int@forstatement.ForStatement ))
    (block $LOOP_4.BREAK
     (loop

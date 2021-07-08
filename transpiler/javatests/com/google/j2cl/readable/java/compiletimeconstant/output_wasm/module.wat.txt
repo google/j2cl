@@ -66,16 +66,13 @@
   (block
    ;; boolean b = (CompileTimeConstant.this,compiletimeconstant.CompileTimeConstant.I2);
    ;;@ compiletimeconstant/CompileTimeConstant.java:51:4
-   
    (local.set $b (block (result i32)
     (drop (local.get $this))
     (global.get $f_I2__compiletimeconstant_CompileTimeConstant)
    ))
    ;; String s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(compiletimeconstant.CompileTimeConstant.G),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Tur_tleDo_ve|()),$stringBuilder.toString());
    ;;@ compiletimeconstant/CompileTimeConstant.java:52:4
-   
    (local.set $s (block (result (ref null $java.lang.String))
-    
     (local.set $$stringBuilder (call $m_<init>__void@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
     (drop (call_ref (local.get $$stringBuilder)(global.get $f_G__compiletimeconstant_CompileTimeConstant)(struct.get $java.lang.StringBuilder.vtable $m_append__long__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
     (drop (call_ref (local.get $$stringBuilder)(call $$getString_|Tur_tleDo_ve|__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
@@ -83,15 +80,12 @@
    ))
    ;; String l = javaemul.internal.StringPool.$getString_|ThisIsALongS...|();
    ;;@ compiletimeconstant/CompileTimeConstant.java:53:4
-   
    (local.set $l (call $$getString_|ThisIsALongS...|__java_lang_String@javaemul.internal.StringPool ))
    ;; String m = javaemul.internal.StringPool.$getString_|ThisIsALongS...|_1();
    ;;@ compiletimeconstant/CompileTimeConstant.java:54:4
-   
    (local.set $m (call $$getString_|ThisIsALongS...|_1__java_lang_String@javaemul.internal.StringPool ))
    ;; String n = javaemul.internal.StringPool.$getString_|ThisIsALongS...|_2();
    ;;@ compiletimeconstant/CompileTimeConstant.java:55:4
-   
    (local.set $n (call $$getString_|ThisIsALongS...|_2__java_lang_String@javaemul.internal.StringPool ))
   )
  )

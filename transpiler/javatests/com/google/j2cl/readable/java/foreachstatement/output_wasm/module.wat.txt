@@ -70,8 +70,6 @@
   (block
    ;; LOOP: for (Iterator<Throwable> $iterator = iterable.iterator();$iterator.hasNext();) {
    ;;@ foreachstatement/ForEachStatement.java:22:4
-   
-   
    (local.set $$iterator (call_ref (local.get $iterable)(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $iterable)) (i32.const 1)) (rtt.canon $java.lang.Iterable.vtable)) )))
    (block $LOOP.BREAK
     (loop
@@ -80,7 +78,6 @@
       (block
        ;; Throwable t = ((Throwable) $iterator.next());
        ;;@ foreachstatement/ForEachStatement.java:22:4
-       
        (local.set $t (ref.cast (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) )) (global.get $java.lang.Throwable.rtt)))
        ;;@ foreachstatement/ForEachStatement.java:22:33
        (block
@@ -96,8 +93,6 @@
    )
    ;; LOOP: for (Throwable[] $array = new OfObject.<init>(10),int $index = 0;($index < $array.length);($index = ($index + 1))) {
    ;;@ foreachstatement/ForEachStatement.java:26:4
-   
-   
    (local.set $$array (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
    (local.set $$index (i32.const 0))
    (block $LOOP_1.BREAK
@@ -107,7 +102,6 @@
       (block
        ;; Throwable t = ((Throwable) $array.elements[$index]);
        ;;@ foreachstatement/ForEachStatement.java:26:4
-       
        (local.set $t_1 (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)) (global.get $java.lang.Throwable.rtt)))
        ;;@ foreachstatement/ForEachStatement.java:26:42
        (block
@@ -143,7 +137,6 @@
    (block
     ;; throw new Exception.<init>();
     ;;@ foreachstatement/ForEachStatement.java:45:6
-    
     (throw $exception.event (call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
    )
   )
@@ -166,14 +159,10 @@
   (block
    ;; U iterable = null;
    ;;@ foreachstatement/ForEachStatement.java:59:4
-   
    (local.set $iterable (ref.null $java.lang.Object))
    ;; LOOP: for (Iterator<String> $iterator = (Iterable<String> $qualifier = ((Iterable<String>) iterable),$qualifier.iterator());$iterator.hasNext();) {
    ;;@ foreachstatement/ForEachStatement.java:60:4
-   
-   
    (local.set $$iterator (block (result (ref null $java.lang.Object))
-    
     (local.set $$qualifier (local.get $iterable))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 1)) (rtt.canon $java.lang.Iterable.vtable)) ))
    ))
@@ -184,7 +173,6 @@
       (block
        ;; String s = ((String) $iterator.next());
        ;;@ foreachstatement/ForEachStatement.java:60:4
-       
        (local.set $s (ref.cast (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) )) (global.get $java.lang.String.rtt)))
        ;;@ foreachstatement/ForEachStatement.java:60:30
        (block
@@ -197,12 +185,9 @@
    )
    ;; IterableReturningTypeVariable<?> anotherIterable = null;
    ;;@ foreachstatement/ForEachStatement.java:62:4
-   
    (local.set $anotherIterable (ref.null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
    ;; LOOP: for (? $iterator = ((Iterator<Integer>) anotherIterable.iterator());$iterator.hasNext();) {
    ;;@ foreachstatement/ForEachStatement.java:63:4
-   
-   
    (local.set $$iterator_1 (call_ref (local.get $anotherIterable)(struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable $m_iterator__java_util_Iterator (struct.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable $vtable(local.get $anotherIterable)))))
    (block $LOOP_1.BREAK
     (loop
@@ -211,9 +196,7 @@
       (block
        ;; int s = (Integer $qualifier = ((Integer) $iterator.next()),$qualifier.intValue());
        ;;@ foreachstatement/ForEachStatement.java:63:4
-       
        (local.set $s_1 (block (result i32)
-        
         (local.set $$qualifier_1 (ref.cast (call_ref (local.get $$iterator_1)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator_1)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) )) (global.get $java.lang.Integer.rtt)))
         (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
        ))

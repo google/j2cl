@@ -329,11 +329,9 @@
    (drop (call $m_<init>__void_$pp_collisions@collisions.foo (struct.new_with_rtt $collisions.foo (ref.as_non_null (global.get $collisions.foo.vtable)) (ref.as_non_null (global.get $collisions.foo.itable)) (i32.const 0) (global.get $collisions.foo.rtt))))
    ;; int delete = 1;
    ;;@ collisions/goog.java:46:4
-   
    (local.set $delete (i32.const 1))
    ;; int undefined = 3;
    ;;@ collisions/goog.java:47:4
-   
    (local.set $undefined (i32.const 3))
   )
  )
@@ -430,11 +428,9 @@
   (block
    ;; int T = 5;
    ;;@ collisions/goog.java:58:4
-   
    (local.set $T_1 (i32.const 5))
    ;; Other<T> o = ((Other<T>) null);
    ;;@ collisions/goog.java:59:4
-   
    (local.set $o (ref.cast (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
    ;; return null;
    ;;@ collisions/goog.java:60:4
@@ -456,11 +452,9 @@
   (block
    ;; int T = 3;
    ;;@ collisions/goog.java:53:4
-   
    (local.set $T_1 (i32.const 3))
    ;; Other<T> o = ((Other<T>) null);
    ;;@ collisions/goog.java:54:4
-   
    (local.set $o (ref.cast (ref.null $java.lang.Object) (global.get $collisions.Other.rtt)))
   )
  )
@@ -575,9 +569,7 @@
   (block
    ;; T t = (T<T> $qualifier = new T.<init>(),$qualifier.m());
    ;;@ collisions/goog.java:70:4
-   
    (local.set $t (block (result (ref null $java.lang.Number))
-    
     (local.set $$qualifier (call $m_<init>__void_$pp_collisions@collisions.T (struct.new_with_rtt $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $collisions.T.itable)) (i32.const 0) (global.get $collisions.T.rtt))))
     (call_ref (local.get $$qualifier)(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
    ))
