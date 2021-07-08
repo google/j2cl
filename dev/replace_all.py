@@ -210,8 +210,10 @@ def main(argv):
   build_all = readable_name == "all"
 
   readable_pattern = ".*" if build_all else readable_name
-  js_readable_dirs = get_readable_dirs(readable_pattern)
-  wasm_readable_dirs = get_readable_dirs(readable_pattern, "_wasm")
+  js_readable_dirs = get_readable_dirs(
+      readable_pattern) if "CLOSURE" in args.platforms else []
+  wasm_readable_dirs = get_readable_dirs(
+      readable_pattern, "_wasm") if "WASM" in args.platforms else []
 
   if not js_readable_dirs and not wasm_readable_dirs:
     print("No matching readables!")
@@ -232,17 +234,18 @@ def main(argv):
 
   build_log = blaze_build(js_readable_dirs, wasm_readable_dirs)
 
-  if args.nologs:
-    print("  Skipping logs!!!")
-  else:
-    print("  Processing build logs")
-    gather_closure_warnings(build_log)
+  if js_readable_dirs:
+    if args.nologs:
+      print("  Skipping logs!!!")
+    else:
+      print("  Processing build logs")
+      gather_closure_warnings(build_log)
+    print("  Copying and reformatting transpiled JS")
+    replace_transpiled_js(js_readable_dirs)
 
-  print("  Copying and reformatting transpiled JS")
-  replace_transpiled_js(js_readable_dirs)
-
-  print("  Copying and reformatting transpiled WASM")
-  replace_transpiled_wasm(wasm_readable_dirs)
+  if wasm_readable_dirs:
+    print("  Copying and reformatting transpiled WASM")
+    replace_transpiled_wasm(wasm_readable_dirs)
 
   print("Check for changes in the readable examples")
 

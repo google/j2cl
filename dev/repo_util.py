@@ -32,13 +32,16 @@ J2CL_BENCH_PATTERN = BENCH_ROOT + "%s-j2cl"
 J2WASM_BENCH_PATTERN = BENCH_ROOT + "%s-j2wasm"
 
 
-def get_benchmarks(bench_name):
+def get_benchmarks(bench_name, platforms):
   """Returns the targets for given benchmark name."""
-  return {
-      "JVM": JVM_BENCH_PATTERN % bench_name,
-      "J2CL": J2CL_BENCH_PATTERN % bench_name,
-      "J2WASM": J2WASM_BENCH_PATTERN % bench_name,
-  }
+  benchmarks = {}
+  if "JVM" in platforms:
+    benchmarks["JVM"] = JVM_BENCH_PATTERN % bench_name
+  if "CLOSURE" in platforms:
+    benchmarks["J2CL"] = J2CL_BENCH_PATTERN % bench_name
+  if "WASM" in platforms:
+    benchmarks["J2WASM"] = J2WASM_BENCH_PATTERN % bench_name
+  return benchmarks
 
 
 def build_original_and_modified(original_targets, modified_targets):
@@ -84,6 +87,21 @@ def get_readable_optimized_test(test_name):
 def get_all_tests(test_name):
   """Returns the path to the obfuscated opt JS file the given test."""
   return INTEGRATION_ROOT + test_name + ":all"
+
+
+def create_test_filter(platforms):
+  """Returns filter based on platform or empty if all platforms are enabled."""
+
+  tags = []
+  if "CLOSURE" not in platforms:
+    tags += ["-j2cl"]
+  if "WASM" not in platforms:
+    tags += ["-j2wasm"]
+  if "JVM" not in platforms:
+    tags += ["-jvm"]
+
+  return ["--build_tests_only"
+         ] + (["--test_tag_filters=" + ",".join(tags)] if tags else [])
 
 
 def parse_name(test_name):

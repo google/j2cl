@@ -34,8 +34,16 @@ def _add_cmd(subparsers, name, handler, descr):
   parser.set_defaults(func=handler.main)
 
 
+_PLATFORMS = ["CLOSURE", "WASM", "JVM"]
+
 if __name__ == "__main__":
   base_parser = argparse.ArgumentParser(description="j2 dev script.")
+  base_parser.add_argument(
+      "-p",
+      action="append",
+      choices=_PLATFORMS,
+      dest="platforms",
+      help="Configure the platforms included for this command.")
   parsers = base_parser.add_subparsers()
 
   _add_cmd(parsers, "size", make_size_report, "Generate size report.")
@@ -47,12 +55,11 @@ if __name__ == "__main__":
   _add_cmd(parsers, "presubmit", presubmit,
            "Run the tasks needed before submit")
 
-  # TODO(goktug): Add WASM deobfuscation support.
-  # TODO(goktug): Add top level filter for different backends (--platform).
   # TODO(b/192387727): Add script for manually running benchmark on chamber
 
   args = base_parser.parse_args()
   if not hasattr(args, "func"):
     base_parser.print_help(sys.stderr)
     sys.exit(1)
+  args.platforms = args.platforms or _PLATFORMS
   args.func(args)

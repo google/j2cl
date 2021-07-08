@@ -24,7 +24,9 @@ def main(argv):
     print("Make sure d8 is installed via jsvu")
     sys.exit(1)
 
-  benchs = [(n, repo_util.get_benchmarks(n)) for n in argv.bench_names]
+  benchs = [
+      (n, repo_util.get_benchmarks(n, argv.platforms)) for n in argv.bench_names
+  ]
 
   print("Building...")
   # Join all the targets to build them in one shot.

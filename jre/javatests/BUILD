@@ -141,6 +141,7 @@ j2cl_test(
 
 build_test(
     name = "conformance_test",
+    tags = ["j2cl"],
     targets = [
         ":conformance_binary",
         ":conformance_binary_head",
@@ -200,6 +201,7 @@ sh_test(
     srcs = ["file_empty_check.sh"],
     args = ["$(location conformance_binary_opensource-stderr.txt)"],
     data = ["conformance_binary_opensource-stderr.txt"],
+    tags = ["j2cl"],
 )
 
 # TODO(dankuka): Eventually we want to provide a library target for apps that

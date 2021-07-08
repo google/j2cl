@@ -18,9 +18,10 @@ import repo_util
 
 
 def main(argv):
-  test_name = argv.test_name[0]
-  target = [repo_util.get_all_tests(test_name)]
-  subprocess.call(["blaze", "test"] + target)
+  cmd = ["blaze", "test", "--keep_going"]
+  cmd += [repo_util.get_all_tests(argv.test_name[0])]
+  cmd += repo_util.create_test_filter(argv.platforms)
+  subprocess.call(cmd)
 
 
 def add_arguments(parser):

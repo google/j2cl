@@ -85,6 +85,7 @@ def readable_example(
     build_test(
         name = "readable_build_test",
         targets = ["readable_binary"],
+        tags = ["j2cl"],
     )
 
     if generate_wasm_readables:
@@ -97,6 +98,7 @@ def readable_example(
         build_test(
             name = "readable_wasm_build_test",
             targets = ["readable_wasm"],
+            tags = ["j2wasm"],
         )
 
     if generate_kt_readables:

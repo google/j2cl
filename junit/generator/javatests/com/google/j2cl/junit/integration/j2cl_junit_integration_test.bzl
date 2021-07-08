@@ -21,6 +21,7 @@ def j2cl_test_integration_test(name, test_data, test_data_java_only = [], deps =
             "//third_party/java/truth",
             "//junit/generator/javatests/com/google/j2cl/junit/integration:junit_integration_helper",
         ],
+        tags = ["j2cl"],
     )
 
 # Flags needed to run the testing infrastucture in a way that outputs to stdout/stderr
