@@ -16,6 +16,7 @@
 package com.google.j2cl.common;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.Problems.FatalError;
@@ -30,16 +31,44 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.FileTime;
 import java.util.Collections;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** Utilities for tools to process output. */
 public class OutputUtils {
 
   /** Abstract output of a command. */
-  public interface Output extends AutoCloseable {
-    Path getRoot();
+  public static class Output implements AutoCloseable {
+    private final ExecutorService fileService = Executors.newSingleThreadExecutor();
+    private final Problems problems;
+    private final Path root;
+
+    private Output(Problems problems, Path root) {
+      this.problems = problems;
+      this.root = root;
+    }
+
+    public void write(String path, String content) {
+      Path outputPath = root.resolve(path);
+      fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
+    }
+
+    public void copyFile(String fromAbsolute, String to) {
+      Path fromPath = Paths.get(fromAbsolute);
+      Path toPath = root.resolve(to);
+      fileService.execute(() -> OutputUtils.copyFile(fromPath, toPath, problems));
+    }
 
     @Override
-    void close();
+    public void close() {
+      try {
+        fileService.shutdown();
+        fileService.awaitTermination(Long.MAX_VALUE, SECONDS);
+      } catch (InterruptedException ie) {
+        // Preserve interrupt status
+        Thread.currentThread().interrupt();
+      }
+    }
   }
 
   public static Output initOutput(Path output, Problems problems) {
@@ -53,28 +82,17 @@ public class OutputUtils {
       problems.fatal(FatalError.OUTPUT_LOCATION, output);
     }
 
-    return new Output() {
-      @Override
-      public Path getRoot() {
-        return output;
-      }
-
-      @Override
-      public void close() {}
-    };
+    return new Output(problems, output);
   }
 
   private static Output getZipOutput(Path output, Problems problems) {
     FileSystem newFileSystem = initZipOutput(output, problems);
 
-    return new Output() {
-      @Override
-      public Path getRoot() {
-        return newFileSystem.getPath("/");
-      }
+    return new Output(problems, newFileSystem.getPath("/")) {
 
       @Override
       public void close() {
+        super.close();
         try {
           newFileSystem.close();
         } catch (IOException e) {
@@ -101,7 +119,7 @@ public class OutputUtils {
     }
   }
 
-  public static void writeToFile(Path outputPath, String content, Problems problems) {
+  private static void writeToFile(Path outputPath, String content, Problems problems) {
     try {
       createDirectories(outputPath.getParent());
       Files.write(outputPath, Collections.singleton(content), UTF_8);
@@ -125,7 +143,7 @@ public class OutputUtils {
     }
   }
 
-  public static void copyFile(Path from, Path to, Problems problems) {
+  private static void copyFile(Path from, Path to, Problems problems) {
     try {
       createDirectories(to.getParent());
       Files.copy(from, to, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);

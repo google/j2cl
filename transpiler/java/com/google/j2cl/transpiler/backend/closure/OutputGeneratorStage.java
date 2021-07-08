@@ -15,9 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.closure;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 import com.google.j2cl.common.OutputUtils;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.Problems.FatalError;
 import com.google.j2cl.common.SourcePosition;
@@ -30,11 +29,8 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.backend.libraryinfo.LibraryInfoBuilder;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the JavaScript output
@@ -42,10 +38,9 @@ import java.util.concurrent.Executors;
  * generating header, implementation and sourcemap files for each Java Type.
  */
 public class OutputGeneratorStage {
-  private ExecutorService fileService;
   private final List<FileInfo> nativeJavaScriptFiles;
   private final Problems problems;
-  private final Path outputPath;
+  private final Output output;
   private final Path libraryInfoOutputPath;
   private final boolean shouldGenerateReadableSourceMaps;
   private final boolean shouldGenerateReadableLibraryInfo;
@@ -53,14 +48,14 @@ public class OutputGeneratorStage {
 
   public OutputGeneratorStage(
       List<FileInfo> nativeJavaScriptFiles,
-      Path outputPath,
+      Output output,
       Path libraryInfoOutputPath,
       boolean shouldGenerateReadableLibraryInfo,
       boolean shouldGenerateReadableSourceMaps,
       boolean generateKytheIndexingMetadata,
       Problems problems) {
     this.nativeJavaScriptFiles = nativeJavaScriptFiles;
-    this.outputPath = outputPath;
+    this.output = output;
     this.libraryInfoOutputPath = libraryInfoOutputPath;
     this.shouldGenerateReadableLibraryInfo = shouldGenerateReadableLibraryInfo;
     this.shouldGenerateReadableSourceMaps = shouldGenerateReadableSourceMaps;
@@ -69,16 +64,6 @@ public class OutputGeneratorStage {
   }
 
   public void generateOutputs(Library library) {
-    fileService = Executors.newSingleThreadExecutor();
-    try {
-      generateOutputsImpl(library);
-    } finally {
-      awaitCompletionOfFileWrites();
-      fileService = null;
-    }
-  }
-
-  private void generateOutputsImpl(Library library) {
 
     // The map must be ordered because it will be iterated over later and if it was not ordered then
     // our output would be unstable. Actually this one can't actually destabilize output but since
@@ -144,9 +129,7 @@ public class OutputGeneratorStage {
                 String.format(
                     "%n//# sourceMappingURL=%s",
                     type.getDeclaration().getSimpleBinaryName() + SOURCE_MAP_SUFFIX);
-            Path absolutePathForSourceMap =
-                outputPath.resolve(typeRelativePath + SOURCE_MAP_SUFFIX);
-            writeToFile(absolutePathForSourceMap, sourceMap);
+            output.write(typeRelativePath + SOURCE_MAP_SUFFIX, sourceMap);
           }
         }
 
@@ -160,10 +143,10 @@ public class OutputGeneratorStage {
         }
 
         String implRelativePath = typeRelativePath + jsImplGenerator.getSuffix();
-        writeToFile(outputPath.resolve(implRelativePath), javaScriptImplementationSource);
+        output.write(implRelativePath, javaScriptImplementationSource);
 
         String headerRelativePath = typeRelativePath + jsHeaderGenerator.getSuffix();
-        writeToFile(outputPath.resolve(headerRelativePath), javaScriptHeaderSource);
+        output.write(headerRelativePath, javaScriptHeaderSource);
 
         if (libraryInfoOutputPath != null || shouldGenerateReadableLibraryInfo) {
           libraryInfoBuilder.addType(
@@ -174,22 +157,23 @@ public class OutputGeneratorStage {
         }
 
         if (matchingNativeFile != null) {
-          copyNativeJsFileToOutput(matchingNativeFile);
+          // Copy native js file to output.
+          output.write(matchingNativeFile.getRelativeFilePath(), matchingNativeFile.getContent());
         }
       }
 
       if (!generateKytheIndexingMetadata) {
-        copyJavaSourceToOutput(compilationUnit);
+        // Copy java sources to output.
+        output.copyFile(compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath());
       }
     }
 
-    if (libraryInfoOutputPath != null) {
-      writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray());
+    if (shouldGenerateReadableLibraryInfo) {
+      output.write("library_info_debug.json", libraryInfoBuilder.toJson(problems));
     }
 
-    if (shouldGenerateReadableLibraryInfo) {
-      writeToFile(
-          outputPath.resolve("library_info_debug.json"), libraryInfoBuilder.toJson(problems));
+    if (libraryInfoOutputPath != null) {
+      OutputUtils.writeToFile(libraryInfoOutputPath, libraryInfoBuilder.toByteArray(), problems);
     }
 
     // Error if any of the native implementation files were not used.
@@ -197,16 +181,6 @@ public class OutputGeneratorStage {
       if (!file.wasUsed()) {
         problems.error("Unused native file '%s'.", file);
       }
-    }
-  }
-
-  private void awaitCompletionOfFileWrites() {
-    try {
-      fileService.shutdown();
-      fileService.awaitTermination(Long.MAX_VALUE, SECONDS);
-    } catch (InterruptedException ie) {
-      // Preserve interrupt status
-      Thread.currentThread().interrupt();
     }
   }
 
@@ -265,37 +239,10 @@ public class OutputGeneratorStage {
             j2clUnit.getFilePath(),
             problems);
     if (!readableOutput.isEmpty()) {
-      Path absolutePathForReadableSourceMap =
-          outputPath.resolve(
-              getPackageRelativePath(type.getDeclaration()) + READABLE_MAPPINGS_SUFFIX);
-      writeToFile(absolutePathForReadableSourceMap, readableOutput);
+      String readableSourceMapRelativePath =
+          getPackageRelativePath(type.getDeclaration()) + READABLE_MAPPINGS_SUFFIX;
+      output.write(readableSourceMapRelativePath, readableOutput);
     }
-  }
-
-  /**
-   * Copy Java source files to the output. Sourcemaps reference locations in the Java source file,
-   * and having it available as output simplifies the process of source debugging in the browser.
-   */
-  private void copyJavaSourceToOutput(CompilationUnit compilationUnit) {
-    Path absolutePath = outputPath.resolve(compilationUnit.getPackageRelativePath());
-    copyFile(Paths.get(compilationUnit.getFilePath()), absolutePath);
-  }
-
-  private void copyNativeJsFileToOutput(NativeJavaScriptFile nativeJavaScriptFile) {
-    Path absolutePath = outputPath.resolve(nativeJavaScriptFile.getRelativeFilePath());
-    writeToFile(absolutePath, nativeJavaScriptFile.getContent());
-  }
-
-  private void writeToFile(Path outputPath, String content) {
-    fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
-  }
-
-  private void writeToFile(Path outputPath, byte[] content) {
-    fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
-  }
-
-  private void copyFile(Path from, Path to) {
-    fileService.execute(() -> OutputUtils.copyFile(from, to, problems));
   }
 
   /** Returns the relative output path for a given type. */

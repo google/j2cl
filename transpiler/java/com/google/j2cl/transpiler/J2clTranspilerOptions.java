@@ -21,6 +21,7 @@ import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
@@ -38,7 +39,7 @@ public abstract class J2clTranspilerOptions {
 
   public abstract ImmutableList<String> getClasspaths();
 
-  public abstract Path getOutput();
+  public abstract Output getOutput();
 
   @Nullable
   public abstract Path getLibraryInfoOutput();
@@ -79,7 +80,7 @@ public abstract class J2clTranspilerOptions {
 
     public abstract Builder setClasspaths(List<String> entries);
 
-    public abstract Builder setOutput(Path path);
+    public abstract Builder setOutput(Output output);
 
     public abstract Builder setLibraryInfoOutput(@Nullable Path path);
 

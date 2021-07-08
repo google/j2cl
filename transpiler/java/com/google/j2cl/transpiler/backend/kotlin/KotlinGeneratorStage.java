@@ -15,64 +15,37 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 import com.google.j2cl.common.OutputUtils;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import java.nio.file.Path;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the Kotlin output
  * for the transpiler. It is responsible for generating implementation files for each Java file.
  */
 public class KotlinGeneratorStage {
-  private ExecutorService fileService;
   private final Problems problems;
-  private final Path outputPath;
+  private final Output output;
 
-  public KotlinGeneratorStage(
-      Path outputPath,
-      Problems problems) {
-    this.outputPath = outputPath;
+  public KotlinGeneratorStage(Output output, Problems problems) {
+    this.output = output;
     this.problems = problems;
   }
 
   public void generateOutputs(Library library) {
-    fileService = Executors.newSingleThreadExecutor();
-    try {
       for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
         for (Type type : compilationUnit.getTypes()) {
           KotlinGenerator ktGenerator = new KotlinGenerator(problems, type);
           String typeRelativePath = getPackageRelativePath(type.getDeclaration());
           String kotlinSource = ktGenerator.renderOutput();
           String relativePath = typeRelativePath + ktGenerator.getSuffix();
-          writeToFile(outputPath.resolve(relativePath), kotlinSource);
-        }
+        output.write(relativePath, kotlinSource);
       }
-    } finally {
-      awaitCompletionOfFileWrites();
-      fileService = null;
     }
-  }
-
-  private void awaitCompletionOfFileWrites() {
-    try {
-      fileService.shutdown();
-      fileService.awaitTermination(Long.MAX_VALUE, SECONDS);
-    } catch (InterruptedException ie) {
-      // Preserve interrupt status
-      Thread.currentThread().interrupt();
-    }
-  }
-
-  private void writeToFile(Path outputPath, String content) {
-    fileService.execute(() -> OutputUtils.writeToFile(outputPath, content, problems));
   }
 
   /** Returns the relative output path for a given type. */

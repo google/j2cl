@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.backend.Backend;
 import com.google.j2cl.transpiler.frontend.Frontend;
 import java.io.File;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -113,11 +112,11 @@ final class BazelJ2clBuilder extends BazelWorker {
   @Override
   protected void run(Problems problems) {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
-      J2clTranspiler.transpile(createOptions(out.getRoot(), problems), problems);
+      J2clTranspiler.transpile(createOptions(out, problems), problems);
     }
   }
 
-  private J2clTranspilerOptions createOptions(Path outputPath, Problems problems) {
+  private J2clTranspilerOptions createOptions(Output output, Problems problems) {
 
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
       problems.warning(
@@ -145,16 +144,13 @@ final class BazelJ2clBuilder extends BazelWorker {
     // Directly put all supplied js sources into the zip file.
     allSources.stream()
         .filter(p -> p.sourcePath().endsWith(".js") && !p.sourcePath().endsWith("native.js"))
-        .forEach(
-            f ->
-                OutputUtils.copyFile(
-                    Paths.get(f.sourcePath()), outputPath.resolve(f.targetPath()), problems));
+        .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
 
     return J2clTranspilerOptions.newBuilder()
         .setSources(allJavaSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
-        .setOutput(outputPath)
+        .setOutput(output)
         .setLibraryInfoOutput(this.libraryInfoOutput)
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.common.SourceUtils.FileInfo;
 import com.google.j2cl.transpiler.ast.Library;
@@ -124,7 +125,7 @@ public enum Backend {
     public void generateOutputs(
         Library library,
         ImmutableList<FileInfo> nativeSources,
-        Path output,
+        Output output,
         Path libraryInfoOutput,
         boolean emitReadableLibraryInfo,
         boolean emitReadableSourceMap,
@@ -273,7 +274,7 @@ public enum Backend {
     public void generateOutputs(
         Library library,
         ImmutableList<FileInfo> nativeSources,
-        Path output,
+        Output output,
         Path libraryInfoOutput,
         boolean emitReadableLibraryInfo,
         boolean emitReadableSourceMap,
@@ -368,7 +369,7 @@ public enum Backend {
     public void generateOutputs(
         Library library,
         ImmutableList<FileInfo> nativeSources,
-        Path output,
+        Output output,
         Path libraryInfoOutput,
         boolean emitReadableLibraryInfo,
         boolean emitReadableSourceMap,
@@ -406,7 +407,7 @@ public enum Backend {
   public abstract void generateOutputs(
       Library library,
       ImmutableList<FileInfo> nativeSources,
-      Path output,
+      Output output,
       Path libraryInfoOutput,
       boolean emitReadableLibraryInfo,
       boolean emitReadableSourceMap,

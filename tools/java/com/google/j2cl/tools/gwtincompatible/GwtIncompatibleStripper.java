@@ -51,12 +51,12 @@ public final class GwtIncompatibleStripper {
           SourceUtils.getAllSources(files, problems)
               .filter(f -> f.targetPath().endsWith(".java"))
               .collect(toImmutableList());
-      preprocessFiles(allPaths, out.getRoot(), problems);
+      preprocessFiles(allPaths, out, problems);
     }
   }
 
   /** Preprocess all provided files and put them to provided output path. */
-  private static void preprocessFiles(List<FileInfo> fileInfos, Path output, Problems problems) {
+  private static void preprocessFiles(List<FileInfo> fileInfos, Output output, Problems problems) {
     for (FileInfo fileInfo : fileInfos) {
       String processedFileContent;
       try {
@@ -68,8 +68,7 @@ public final class GwtIncompatibleStripper {
       }
 
       // Write the processed file to output
-      OutputUtils.writeToFile(
-          output.resolve(fileInfo.originalPath()), processedFileContent, problems);
+      output.write(fileInfo.originalPath(), processedFileContent);
     }
   }
 

@@ -19,12 +19,11 @@ import static com.google.common.base.Predicates.not;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static java.lang.String.format;
 import static java.util.Comparator.naturalOrder;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Streams;
-import com.google.j2cl.common.OutputUtils;
+import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -40,55 +39,35 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.stream.Stream;
 
 /** Generates a WASM module containing all the code for the application. */
 public class WasmModuleGenerator {
 
-  private ExecutorService fileService;
   private final Problems problems;
-  private final Path outputPath;
+  private final Output output;
   private final Set<String> pendingEntryPoints;
   private final SourceBuilder builder = new SourceBuilder();
   private GenerationEnvironment environment;
 
-  public WasmModuleGenerator(Path outputPath, ImmutableSet<String> entryPoints, Problems problems) {
-    this.outputPath = outputPath;
+  public WasmModuleGenerator(Output output, ImmutableSet<String> entryPoints, Problems problems) {
+    this.output = output;
     this.pendingEntryPoints = new HashSet<>(entryPoints);
     this.problems = problems;
   }
 
   public void generateOutputs(Library library) {
-    fileService = Executors.newSingleThreadExecutor();
-    try {
-      copyJavaSources(library);
-      generateWasmModule(library);
-    } finally {
-      try {
-        fileService.shutdown();
-        fileService.awaitTermination(Long.MAX_VALUE, SECONDS);
-      } catch (InterruptedException e) {
-        // Preserve interrupt status
-        Thread.currentThread().interrupt();
-      }
-    }
+    copyJavaSources(library);
+    generateWasmModule(library);
   }
 
   private void copyJavaSources(Library library) {
     for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
-      Path absolutePath = outputPath.resolve(compilationUnit.getPackageRelativePath());
-      fileService.execute(
-          () ->
-              OutputUtils.copyFile(
-                  Paths.get(compilationUnit.getFilePath()), absolutePath, problems));
+      output.copyFile(compilationUnit.getFilePath(), compilationUnit.getPackageRelativePath());
     }
   }
 
@@ -111,7 +90,7 @@ public class WasmModuleGenerator {
     emitNativeArrayTypes(library);
     builder.newLine();
     builder.append(")");
-    OutputUtils.writeToFile(outputPath.resolve("module.wat"), builder.build(), problems);
+    output.write("module.wat", builder.build());
     if (!pendingEntryPoints.isEmpty()) {
       problems.error("Static entry points %s not found.", pendingEntryPoints);
     }

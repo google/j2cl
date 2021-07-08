@@ -84,11 +84,11 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   @Override
   protected void run(Problems problems) {
     try (Output out = OutputUtils.initOutput(this.output, problems)) {
-      J2clTranspiler.transpile(createOptions(out.getRoot(), problems), problems);
+      J2clTranspiler.transpile(createOptions(out, problems), problems);
     }
   }
 
-  private J2clTranspilerOptions createOptions(Path outputPath, Problems problems) {
+  private J2clTranspilerOptions createOptions(Output output, Problems problems) {
     checkSourceFiles(problems, files, ".java", ".srcjar", ".jar");
 
     if (this.readableSourceMaps && this.generateKytheIndexingMetadata) {
@@ -107,7 +107,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
                 .filter(p -> p.sourcePath().endsWith(".native.js"))
                 .collect(ImmutableList.toImmutableList()))
         .setClasspaths(getPathEntries(this.classPath))
-        .setOutput(outputPath)
+        .setOutput(output)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setEmitReadableLibraryInfo(false)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
