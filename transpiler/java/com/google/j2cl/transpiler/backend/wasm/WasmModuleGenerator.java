@@ -313,23 +313,24 @@ public class WasmModuleGenerator {
 
     // Emit parameters
     builder.indent();
-    if (!method.isStatic()) {
-      // Add the implicit "this" parameter to instance methods and constructors.
-      // Note that constructors and private methods can declare the parameter type to be the
-      // enclosing type because they are not overridden but normal instance methods have to
-      // declare the parameter more generically as java.lang.Object, since all the overrides need
-      // to have matching signatures.
+    // Add the implicit "this" parameter to instance methods and constructors.
+    // Note that constructors and private methods can declare the parameter type to be the
+    // enclosing type because they are not overridden but normal instance methods have to
+    // declare the parameter more generically as java.lang.Object, since all the overrides need
+    // to have matching signatures.
+    if (methodDescriptor.isClassDynamicDispatch()) {
       builder.newLine();
-      if (methodDescriptor.isClassDynamicDispatch()) {
-        builder.append(
-            String.format(
-                "(param $this.untyped %s)",
-                environment.getWasmType(TypeDescriptors.get().javaLangObject)));
-      } else {
-        builder.append(
-            String.format("(param $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
-      }
+      builder.append(
+          String.format(
+              "(param $this.untyped %s)",
+              environment.getWasmType(TypeDescriptors.get().javaLangObject)));
+    } else if (!method.isStatic()) {
+      // Private methods and constructors receive the instance with the actual type.
+      builder.newLine();
+      builder.append(
+          String.format("(param $this %s)", environment.getWasmType(enclosingTypeDescriptor)));
     }
+
     for (Variable parameter : method.getParameters()) {
       builder.newLine();
       builder.append(
