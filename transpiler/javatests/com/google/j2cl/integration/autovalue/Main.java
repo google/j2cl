@@ -16,17 +16,18 @@
 package com.google.j2cl.integration.autovalue;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
-import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
 
 import com.google.auto.value.AutoValue;
+import com.google.auto.value.extension.memoized.Memoized;
 
 public class Main {
 
   public static void main(String... args) {
     testComposite();
-    // TODO(b/155944756): Fix the equals behavior for unread values.
-    // testUnreadValue();
+    testUnreadValue();
+    testExtending();
+    testMemoized();
   }
 
   private static void testComposite() {
@@ -70,7 +71,51 @@ public class Main {
   }
 
   private static void testUnreadValue() {
-    assertNotEquals(
-        new AutoValue_Main_TypeWithUnreadField(5), new AutoValue_Main_TypeWithUnreadField(6));
+    // TODO(b/155944756): Fix the equals behavior for unread values.
+    // assertNotEquals(
+    //     new AutoValue_Main_TypeWithUnreadField(5), new AutoValue_Main_TypeWithUnreadField(6));
+  }
+
+  private static class BaseClass {
+    int bar;
+  }
+
+  @AutoValue
+  protected abstract static class ExtendingAutoValue extends BaseClass {
+    public abstract int foo();
+  }
+
+  private static void testExtending() {
+    ExtendingAutoValue o1 = new AutoValue_Main_ExtendingAutoValue(12);
+    ExtendingAutoValue o2 = new AutoValue_Main_ExtendingAutoValue(12);
+    assertEquals(o1, o2);
+    assertEquals(o1.hashCode(), o2.hashCode());
+
+    // TODO(b/160369891): Fix the equals behavior with extra fields.
+    // o1.bar = 2;
+    // assertEquals(o1, o2);
+    // assertEquals(o1.hashCode(), o2.hashCode());
+  }
+
+  @AutoValue
+  protected abstract static class TypeWithMemoization {
+    public abstract int foo();
+
+    @Memoized
+    public int memoized() {
+      return foo() * 2;
+    }
+  }
+
+  private static void testMemoized() {
+    TypeWithMemoization o1 = new AutoValue_Main_TypeWithMemoization(11);
+    TypeWithMemoization o2 = new AutoValue_Main_TypeWithMemoization(11);
+    assertEquals(o1, o2);
+    assertEquals(o1.hashCode(), o2.hashCode());
+
+    // TODO(b/160369891): Fix the equals behavior for extension values.
+    // assertEquals(22, o2.memoized());
+    // assertEquals(o1, o2);
+    // assertEquals(o1.hashCode(), o2.hashCode());
   }
 }
