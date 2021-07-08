@@ -135,6 +135,8 @@ class StatementTranspiler {
             () -> {
               if (returnStatement.getExpression() != null) {
                 builder.append("(local.set $return.value ");
+                // TODO(b/182436577): Replace with renderExpression once renderTypedExpression
+                // is removed.
                 ExpressionTranspiler.renderTypedExpression(
                     returnStatement.getTypeDescriptor(),
                     returnStatement.getExpression(),

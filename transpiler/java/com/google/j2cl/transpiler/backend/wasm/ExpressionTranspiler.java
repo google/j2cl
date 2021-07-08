@@ -44,7 +44,6 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.NullLiteral;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -100,11 +99,9 @@ final class ExpressionTranspiler {
         WasmBinaryOperation wasmOperation = WasmBinaryOperation.getOperation(expression);
 
         sourceBuilder.append("(" + wasmOperation.getInstruction(expression) + " ");
-        renderTypedExpression(
-            wasmOperation.getOperandType(expression), expression.getLeftOperand());
+        render(expression.getLeftOperand());
         sourceBuilder.append(" ");
-        renderTypedExpression(
-            wasmOperation.getOperandType(expression), expression.getRightOperand());
+        render(expression.getRightOperand());
         sourceBuilder.append(")");
       }
 
@@ -151,7 +148,7 @@ final class ExpressionTranspiler {
                   instruction, environment.getWasmTypeName(arrayExpression.getTypeDescriptor())));
           render(arrayExpression);
           sourceBuilder.append(" ");
-          renderTypedExpression(PrimitiveTypes.INT, arrayAccess.getIndexExpression());
+          render(arrayAccess.getIndexExpression());
         }
       }
 
@@ -210,8 +207,7 @@ final class ExpressionTranspiler {
       public boolean enterConditionalExpression(ConditionalExpression conditionalExpression) {
         TypeDescriptor typeDescriptor = conditionalExpression.getTypeDescriptor();
         sourceBuilder.append("(if (result " + environment.getWasmType(typeDescriptor) + ") ");
-        renderTypedExpression(
-            PrimitiveTypes.BOOLEAN, conditionalExpression.getConditionExpression());
+        render(conditionalExpression.getConditionExpression());
         sourceBuilder.append(" (then ");
         renderTypedExpression(typeDescriptor, conditionalExpression.getTrueExpression());
         sourceBuilder.append(") (else ");
@@ -300,7 +296,7 @@ final class ExpressionTranspiler {
 
           // Pass the implicit parameter.
           Expression implicitParameter = methodCall.getQualifier();
-          renderTypedExpression(enclosingTypeDescriptor, implicitParameter);
+          render(implicitParameter);
 
           // Pass the rest of the parameters.
           renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
