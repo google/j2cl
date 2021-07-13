@@ -8,22 +8,20 @@
 
 ;;; void SimpleGenericInterface.$clinit()
 (func $$clinit__void@simplegenericinterface.SimpleGenericInterface
- (block $return.label
+ ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
+ (block
+  ;; if (simplegenericinterface.SimpleGenericInterface.$initialized) return;
   ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
-  (block
-   ;; if (simplegenericinterface.SimpleGenericInterface.$initialized) return;
-   ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
-   (if (global.get $f_$initialized__simplegenericinterface_SimpleGenericInterface)
-    (then
-     ;; return;
-     ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplegenericinterface_SimpleGenericInterface)
+   (then
+    ;; return;
+    ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
+    (return )
    )
-   ;; (simplegenericinterface.SimpleGenericInterface.$initialized = true);
-   ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
-   (global.set $f_$initialized__simplegenericinterface_SimpleGenericInterface (i32.const 1))
   )
+  ;; (simplegenericinterface.SimpleGenericInterface.$initialized = true);
+  ;;@ simplegenericinterface/SimpleGenericInterface.java:18:17
+  (global.set $f_$initialized__simplegenericinterface_SimpleGenericInterface (i32.const 1))
  )
 )
 
@@ -31,14 +29,9 @@
 (func $m_getClass__java_lang_Class@simplegenericinterface.SimpleGenericInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplegenericinterface.SimpleGenericInterface();
-   (local.set $return.value (call $$getSimplegenericinterface.SimpleGenericInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplegenericinterface.SimpleGenericInterface();
+  (return (call $$getSimplegenericinterface.SimpleGenericInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplegenericinterface.SimpleGenericInterface)

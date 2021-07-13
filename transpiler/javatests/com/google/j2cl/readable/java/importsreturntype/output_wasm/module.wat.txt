@@ -34,61 +34,54 @@
 (func $m_<init>__@importsreturntype.ImportsReturnType
  (param $this (ref null $importsreturntype.ImportsReturnType))
  (result (ref null $importsreturntype.ImportsReturnType))
- (block $return.label
+ ;;@ importsreturntype/ImportsReturnType.java:18:13
+ (block
+  ;; importsreturntype.ImportsReturnType.$clinit();
   ;;@ importsreturntype/ImportsReturnType.java:18:13
-  (block
-   ;; importsreturntype.ImportsReturnType.$clinit();
-   ;;@ importsreturntype/ImportsReturnType.java:18:13
-   (call $$clinit__void@importsreturntype.ImportsReturnType )
-   ;; Object.this.Object.<init>();
-   ;;@ importsreturntype/ImportsReturnType.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@importsreturntype.ImportsReturnType )
+  ;; Object.this.Object.<init>();
+  ;;@ importsreturntype/ImportsReturnType.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return ImportsReturnType.this;
+  ;;@ importsreturntype/ImportsReturnType.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; Set<Entry> ImportsReturnType.get()
 (func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $importsreturntype.ImportsReturnType.Set))
- (local $return.value (ref null $importsreturntype.ImportsReturnType.Set))
  (local $this (ref null $importsreturntype.ImportsReturnType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $importsreturntype.ImportsReturnType.rtt)))
- (block $return.label
-  ;;@ importsreturntype/ImportsReturnType.java:23:20
-  (block
-   ;; return null;
-   ;;@ importsreturntype/ImportsReturnType.java:24:4
-   (local.set $return.value (ref.null $importsreturntype.ImportsReturnType.Set))
-   (br $return.label)
-  )
+ ;;@ importsreturntype/ImportsReturnType.java:23:20
+ (block
+  ;; return null;
+  ;;@ importsreturntype/ImportsReturnType.java:24:4
+  (return (ref.null $importsreturntype.ImportsReturnType.Set))
  )
- (local.get $return.value)
 )
 (elem declare func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType)
 
 ;;; void ImportsReturnType.$clinit()
 (func $$clinit__void@importsreturntype.ImportsReturnType
- (block $return.label
+ ;;@ importsreturntype/ImportsReturnType.java:18:13
+ (block
+  ;; if (importsreturntype.ImportsReturnType.$initialized) return;
   ;;@ importsreturntype/ImportsReturnType.java:18:13
-  (block
-   ;; if (importsreturntype.ImportsReturnType.$initialized) return;
-   ;;@ importsreturntype/ImportsReturnType.java:18:13
-   (if (global.get $f_$initialized__importsreturntype_ImportsReturnType)
-    (then
-     ;; return;
-     ;;@ importsreturntype/ImportsReturnType.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__importsreturntype_ImportsReturnType)
+   (then
+    ;; return;
+    ;;@ importsreturntype/ImportsReturnType.java:18:13
+    (return )
    )
-   ;; (importsreturntype.ImportsReturnType.$initialized = true);
-   ;;@ importsreturntype/ImportsReturnType.java:18:13
-   (global.set $f_$initialized__importsreturntype_ImportsReturnType (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ importsreturntype/ImportsReturnType.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (importsreturntype.ImportsReturnType.$initialized = true);
+  ;;@ importsreturntype/ImportsReturnType.java:18:13
+  (global.set $f_$initialized__importsreturntype_ImportsReturnType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ importsreturntype/ImportsReturnType.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -96,17 +89,12 @@
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $importsreturntype.ImportsReturnType.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType();
-   (local.set $return.value (call $$getImportsreturntype.ImportsReturnType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType();
+  (return (call $$getImportsreturntype.ImportsReturnType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType)
 
@@ -127,41 +115,39 @@
 (func $m_<init>__@importsreturntype.ImportsReturnType.Entry
  (param $this (ref null $importsreturntype.ImportsReturnType.Entry))
  (result (ref null $importsreturntype.ImportsReturnType.Entry))
- (block $return.label
+ ;;@ importsreturntype/ImportsReturnType.java:19:22
+ (block
+  ;; importsreturntype.ImportsReturnType.Entry.$clinit();
   ;;@ importsreturntype/ImportsReturnType.java:19:22
-  (block
-   ;; importsreturntype.ImportsReturnType.Entry.$clinit();
-   ;;@ importsreturntype/ImportsReturnType.java:19:22
-   (call $$clinit__void@importsreturntype.ImportsReturnType.Entry )
-   ;; Object.this.Object.<init>();
-   ;;@ importsreturntype/ImportsReturnType.java:19:22
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@importsreturntype.ImportsReturnType.Entry )
+  ;; Object.this.Object.<init>();
+  ;;@ importsreturntype/ImportsReturnType.java:19:22
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Entry.this;
+  ;;@ importsreturntype/ImportsReturnType.java:19:22
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Entry.$clinit()
 (func $$clinit__void@importsreturntype.ImportsReturnType.Entry
- (block $return.label
+ ;;@ importsreturntype/ImportsReturnType.java:19:22
+ (block
+  ;; if (importsreturntype.ImportsReturnType.Entry.$initialized) return;
   ;;@ importsreturntype/ImportsReturnType.java:19:22
-  (block
-   ;; if (importsreturntype.ImportsReturnType.Entry.$initialized) return;
-   ;;@ importsreturntype/ImportsReturnType.java:19:22
-   (if (global.get $f_$initialized__importsreturntype_ImportsReturnType_Entry)
-    (then
-     ;; return;
-     ;;@ importsreturntype/ImportsReturnType.java:19:22
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__importsreturntype_ImportsReturnType_Entry)
+   (then
+    ;; return;
+    ;;@ importsreturntype/ImportsReturnType.java:19:22
+    (return )
    )
-   ;; (importsreturntype.ImportsReturnType.Entry.$initialized = true);
-   ;;@ importsreturntype/ImportsReturnType.java:19:22
-   (global.set $f_$initialized__importsreturntype_ImportsReturnType_Entry (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ importsreturntype/ImportsReturnType.java:19:22
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (importsreturntype.ImportsReturnType.Entry.$initialized = true);
+  ;;@ importsreturntype/ImportsReturnType.java:19:22
+  (global.set $f_$initialized__importsreturntype_ImportsReturnType_Entry (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ importsreturntype/ImportsReturnType.java:19:22
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -169,17 +155,12 @@
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Entry
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Entry))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $importsreturntype.ImportsReturnType.Entry.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType.Entry();
-   (local.set $return.value (call $$getImportsreturntype.ImportsReturnType.Entry__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType.Entry();
+  (return (call $$getImportsreturntype.ImportsReturnType.Entry__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Entry)
 
@@ -200,41 +181,39 @@
 (func $m_<init>__@importsreturntype.ImportsReturnType.Set
  (param $this (ref null $importsreturntype.ImportsReturnType.Set))
  (result (ref null $importsreturntype.ImportsReturnType.Set))
- (block $return.label
+ ;;@ importsreturntype/ImportsReturnType.java:21:22
+ (block
+  ;; importsreturntype.ImportsReturnType.Set.$clinit();
   ;;@ importsreturntype/ImportsReturnType.java:21:22
-  (block
-   ;; importsreturntype.ImportsReturnType.Set.$clinit();
-   ;;@ importsreturntype/ImportsReturnType.java:21:22
-   (call $$clinit__void@importsreturntype.ImportsReturnType.Set )
-   ;; Object.this.Object.<init>();
-   ;;@ importsreturntype/ImportsReturnType.java:21:22
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@importsreturntype.ImportsReturnType.Set )
+  ;; Object.this.Object.<init>();
+  ;;@ importsreturntype/ImportsReturnType.java:21:22
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Set.this;
+  ;;@ importsreturntype/ImportsReturnType.java:21:22
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Set.$clinit()
 (func $$clinit__void@importsreturntype.ImportsReturnType.Set
- (block $return.label
+ ;;@ importsreturntype/ImportsReturnType.java:21:22
+ (block
+  ;; if (importsreturntype.ImportsReturnType.Set.$initialized) return;
   ;;@ importsreturntype/ImportsReturnType.java:21:22
-  (block
-   ;; if (importsreturntype.ImportsReturnType.Set.$initialized) return;
-   ;;@ importsreturntype/ImportsReturnType.java:21:22
-   (if (global.get $f_$initialized__importsreturntype_ImportsReturnType_Set)
-    (then
-     ;; return;
-     ;;@ importsreturntype/ImportsReturnType.java:21:22
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__importsreturntype_ImportsReturnType_Set)
+   (then
+    ;; return;
+    ;;@ importsreturntype/ImportsReturnType.java:21:22
+    (return )
    )
-   ;; (importsreturntype.ImportsReturnType.Set.$initialized = true);
-   ;;@ importsreturntype/ImportsReturnType.java:21:22
-   (global.set $f_$initialized__importsreturntype_ImportsReturnType_Set (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ importsreturntype/ImportsReturnType.java:21:22
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (importsreturntype.ImportsReturnType.Set.$initialized = true);
+  ;;@ importsreturntype/ImportsReturnType.java:21:22
+  (global.set $f_$initialized__importsreturntype_ImportsReturnType_Set (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ importsreturntype/ImportsReturnType.java:21:22
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -242,17 +221,12 @@
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Set))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $importsreturntype.ImportsReturnType.Set.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType.Set();
-   (local.set $return.value (call $$getImportsreturntype.ImportsReturnType.Set__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType.Set();
+  (return (call $$getImportsreturntype.ImportsReturnType.Set__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set)
 

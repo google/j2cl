@@ -27,41 +27,39 @@
 (func $m_<init>__@aptgeneratorplugin.Dummy
  (param $this (ref null $aptgeneratorplugin.Dummy))
  (result (ref null $aptgeneratorplugin.Dummy))
- (block $return.label
+ ;;@ aptgeneratorplugin/Dummy.java:3:13
+ (block
+  ;; aptgeneratorplugin.Dummy.$clinit();
   ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (block
-   ;; aptgeneratorplugin.Dummy.$clinit();
-   ;;@ aptgeneratorplugin/Dummy.java:3:13
-   (call $$clinit__void@aptgeneratorplugin.Dummy )
-   ;; Object.this.Object.<init>();
-   ;;@ aptgeneratorplugin/Dummy.java:3:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@aptgeneratorplugin.Dummy )
+  ;; Object.this.Object.<init>();
+  ;;@ aptgeneratorplugin/Dummy.java:3:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Dummy.this;
+  ;;@ aptgeneratorplugin/Dummy.java:3:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Dummy.$clinit()
 (func $$clinit__void@aptgeneratorplugin.Dummy
- (block $return.label
+ ;;@ aptgeneratorplugin/Dummy.java:3:13
+ (block
+  ;; if (aptgeneratorplugin.Dummy.$initialized) return;
   ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (block
-   ;; if (aptgeneratorplugin.Dummy.$initialized) return;
-   ;;@ aptgeneratorplugin/Dummy.java:3:13
-   (if (global.get $f_$initialized__aptgeneratorplugin_Dummy)
-    (then
-     ;; return;
-     ;;@ aptgeneratorplugin/Dummy.java:3:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__aptgeneratorplugin_Dummy)
+   (then
+    ;; return;
+    ;;@ aptgeneratorplugin/Dummy.java:3:13
+    (return )
    )
-   ;; (aptgeneratorplugin.Dummy.$initialized = true);
-   ;;@ aptgeneratorplugin/Dummy.java:3:13
-   (global.set $f_$initialized__aptgeneratorplugin_Dummy (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ aptgeneratorplugin/Dummy.java:3:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (aptgeneratorplugin.Dummy.$initialized = true);
+  ;;@ aptgeneratorplugin/Dummy.java:3:13
+  (global.set $f_$initialized__aptgeneratorplugin_Dummy (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ aptgeneratorplugin/Dummy.java:3:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -69,17 +67,12 @@
 (func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Dummy))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Dummy.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy();
-   (local.set $return.value (call $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy();
+  (return (call $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy)
 
@@ -100,65 +93,58 @@
 (func $m_<init>__@aptgeneratorplugin.Foo
  (param $this (ref null $aptgeneratorplugin.Foo))
  (result (ref null $aptgeneratorplugin.Foo))
- (block $return.label
+ ;;@ aptgeneratorplugin/Foo.java:18:13
+ (block
+  ;; aptgeneratorplugin.Foo.$clinit();
   ;;@ aptgeneratorplugin/Foo.java:18:13
-  (block
-   ;; aptgeneratorplugin.Foo.$clinit();
-   ;;@ aptgeneratorplugin/Foo.java:18:13
-   (call $$clinit__void@aptgeneratorplugin.Foo )
-   ;; Object.this.Object.<init>();
-   ;;@ aptgeneratorplugin/Foo.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@aptgeneratorplugin.Foo )
+  ;; Object.this.Object.<init>();
+  ;;@ aptgeneratorplugin/Foo.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Foo.this;
+  ;;@ aptgeneratorplugin/Foo.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; String Foo.toString()
 (func $m_toString__java_lang_String@aptgeneratorplugin.Foo
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
- (local $return.value (ref null $java.lang.String))
  (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Foo.rtt)))
- (block $return.label
-  ;;@ aptgeneratorplugin/Foo.java:21:16
-  (block
-   ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy(),$qualifier.getSimpleName());
-   ;;@ aptgeneratorplugin/Foo.java:23:4
-   (local.set $return.value (block (result (ref null $java.lang.String))
-    (local.set $$qualifier (call $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-    (call_ref (local.get $$qualifier)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
-   ))
-   (br $return.label)
-  )
+ ;;@ aptgeneratorplugin/Foo.java:21:16
+ (block
+  ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy(),$qualifier.getSimpleName());
+  ;;@ aptgeneratorplugin/Foo.java:23:4
+  (return (block (result (ref null $java.lang.String))
+   (local.set $$qualifier (call $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (call_ref (local.get $$qualifier)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
+  ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_toString__java_lang_String@aptgeneratorplugin.Foo)
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@aptgeneratorplugin.Foo
- (block $return.label
+ ;;@ aptgeneratorplugin/Foo.java:18:13
+ (block
+  ;; if (aptgeneratorplugin.Foo.$initialized) return;
   ;;@ aptgeneratorplugin/Foo.java:18:13
-  (block
-   ;; if (aptgeneratorplugin.Foo.$initialized) return;
-   ;;@ aptgeneratorplugin/Foo.java:18:13
-   (if (global.get $f_$initialized__aptgeneratorplugin_Foo)
-    (then
-     ;; return;
-     ;;@ aptgeneratorplugin/Foo.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__aptgeneratorplugin_Foo)
+   (then
+    ;; return;
+    ;;@ aptgeneratorplugin/Foo.java:18:13
+    (return )
    )
-   ;; (aptgeneratorplugin.Foo.$initialized = true);
-   ;;@ aptgeneratorplugin/Foo.java:18:13
-   (global.set $f_$initialized__aptgeneratorplugin_Foo (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ aptgeneratorplugin/Foo.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (aptgeneratorplugin.Foo.$initialized = true);
+  ;;@ aptgeneratorplugin/Foo.java:18:13
+  (global.set $f_$initialized__aptgeneratorplugin_Foo (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ aptgeneratorplugin/Foo.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -166,17 +152,12 @@
 (func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Foo.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Foo();
-   (local.set $return.value (call $$getAptgeneratorplugin.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Foo();
+  (return (call $$getAptgeneratorplugin.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo)
 

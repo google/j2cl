@@ -20,22 +20,20 @@
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void@overridingmethods.SomeInterface
- (block $return.label
+ ;;@ overridingmethods/Child.java:18:10
+ (block
+  ;; if (overridingmethods.SomeInterface.$initialized) return;
   ;;@ overridingmethods/Child.java:18:10
-  (block
-   ;; if (overridingmethods.SomeInterface.$initialized) return;
-   ;;@ overridingmethods/Child.java:18:10
-   (if (global.get $f_$initialized__overridingmethods_SomeInterface)
-    (then
-     ;; return;
-     ;;@ overridingmethods/Child.java:18:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__overridingmethods_SomeInterface)
+   (then
+    ;; return;
+    ;;@ overridingmethods/Child.java:18:10
+    (return )
    )
-   ;; (overridingmethods.SomeInterface.$initialized = true);
-   ;;@ overridingmethods/Child.java:18:10
-   (global.set $f_$initialized__overridingmethods_SomeInterface (i32.const 1))
   )
+  ;; (overridingmethods.SomeInterface.$initialized = true);
+  ;;@ overridingmethods/Child.java:18:10
+  (global.set $f_$initialized__overridingmethods_SomeInterface (i32.const 1))
  )
 )
 
@@ -43,15 +41,10 @@
 (func $m_getClass__java_lang_Class@overridingmethods.SomeInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.SomeInterface();
-   (local.set $return.value (call $$getOverridingmethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.SomeInterface();
+  (return (call $$getOverridingmethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@overridingmethods.SomeInterface)
 
@@ -73,18 +66,18 @@
 (func $m_<init>___$pp_overridingmethods@overridingmethods.Parent
  (param $this (ref null $overridingmethods.Parent))
  (result (ref null $overridingmethods.Parent))
- (block $return.label
+ ;;@ overridingmethods/Child.java:22:6
+ (block
+  ;; overridingmethods.Parent.$clinit();
   ;;@ overridingmethods/Child.java:22:6
-  (block
-   ;; overridingmethods.Parent.$clinit();
-   ;;@ overridingmethods/Child.java:22:6
-   (call $$clinit__void@overridingmethods.Parent )
-   ;; Object.this.Object.<init>();
-   ;;@ overridingmethods/Child.java:22:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@overridingmethods.Parent )
+  ;; Object.this.Object.<init>();
+  ;;@ overridingmethods/Child.java:22:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Parent.this;
+  ;;@ overridingmethods/Child.java:22:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Parent.fun()
@@ -92,35 +85,31 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Parent.rtt)))
- (block $return.label
-  ;;@ overridingmethods/Child.java:23:14
-  (block
-  )
+ ;;@ overridingmethods/Child.java:23:14
+ (block
  )
 )
 (elem declare func $m_fun__void@overridingmethods.Parent)
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@overridingmethods.Parent
- (block $return.label
+ ;;@ overridingmethods/Child.java:22:6
+ (block
+  ;; if (overridingmethods.Parent.$initialized) return;
   ;;@ overridingmethods/Child.java:22:6
-  (block
-   ;; if (overridingmethods.Parent.$initialized) return;
-   ;;@ overridingmethods/Child.java:22:6
-   (if (global.get $f_$initialized__overridingmethods_Parent)
-    (then
-     ;; return;
-     ;;@ overridingmethods/Child.java:22:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__overridingmethods_Parent)
+   (then
+    ;; return;
+    ;;@ overridingmethods/Child.java:22:6
+    (return )
    )
-   ;; (overridingmethods.Parent.$initialized = true);
-   ;;@ overridingmethods/Child.java:22:6
-   (global.set $f_$initialized__overridingmethods_Parent (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ overridingmethods/Child.java:22:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (overridingmethods.Parent.$initialized = true);
+  ;;@ overridingmethods/Child.java:22:6
+  (global.set $f_$initialized__overridingmethods_Parent (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ overridingmethods/Child.java:22:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -128,17 +117,12 @@
 (func $m_getClass__java_lang_Class@overridingmethods.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Parent.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Parent();
-   (local.set $return.value (call $$getOverridingmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Parent();
+  (return (call $$getOverridingmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@overridingmethods.Parent)
 
@@ -161,18 +145,18 @@
 (func $m_<init>__@overridingmethods.Child
  (param $this (ref null $overridingmethods.Child))
  (result (ref null $overridingmethods.Child))
- (block $return.label
+ ;;@ overridingmethods/Child.java:26:13
+ (block
+  ;; overridingmethods.Child.$clinit();
   ;;@ overridingmethods/Child.java:26:13
-  (block
-   ;; overridingmethods.Child.$clinit();
-   ;;@ overridingmethods/Child.java:26:13
-   (call $$clinit__void@overridingmethods.Child )
-   ;; Parent.this.Parent.<init>();
-   ;;@ overridingmethods/Child.java:26:13
-   (drop (call $m_<init>___$pp_overridingmethods@overridingmethods.Parent (local.get $this)))
-  )
+  (call $$clinit__void@overridingmethods.Child )
+  ;; Parent.this.Parent.<init>();
+  ;;@ overridingmethods/Child.java:26:13
+  (drop (call $m_<init>___$pp_overridingmethods@overridingmethods.Parent (local.get $this)))
+  ;; return Child.this;
+  ;;@ overridingmethods/Child.java:26:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Child.fun()
@@ -180,10 +164,8 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
- (block $return.label
-  ;;@ overridingmethods/Child.java:28:14
-  (block
-  )
+ ;;@ overridingmethods/Child.java:28:14
+ (block
  )
 )
 (elem declare func $m_fun__void@overridingmethods.Child)
@@ -193,35 +175,31 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
- (block $return.label
-  ;;@ overridingmethods/Child.java:31:14
-  (block
-  )
+ ;;@ overridingmethods/Child.java:31:14
+ (block
  )
 )
 (elem declare func $m_bar__void@overridingmethods.Child)
 
 ;;; void Child.$clinit()
 (func $$clinit__void@overridingmethods.Child
- (block $return.label
+ ;;@ overridingmethods/Child.java:26:13
+ (block
+  ;; if (overridingmethods.Child.$initialized) return;
   ;;@ overridingmethods/Child.java:26:13
-  (block
-   ;; if (overridingmethods.Child.$initialized) return;
-   ;;@ overridingmethods/Child.java:26:13
-   (if (global.get $f_$initialized__overridingmethods_Child)
-    (then
-     ;; return;
-     ;;@ overridingmethods/Child.java:26:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__overridingmethods_Child)
+   (then
+    ;; return;
+    ;;@ overridingmethods/Child.java:26:13
+    (return )
    )
-   ;; (overridingmethods.Child.$initialized = true);
-   ;;@ overridingmethods/Child.java:26:13
-   (global.set $f_$initialized__overridingmethods_Child (i32.const 1))
-   ;; overridingmethods.Parent.$clinit();
-   ;;@ overridingmethods/Child.java:26:13
-   (call $$clinit__void@overridingmethods.Parent )
   )
+  ;; (overridingmethods.Child.$initialized = true);
+  ;;@ overridingmethods/Child.java:26:13
+  (global.set $f_$initialized__overridingmethods_Child (i32.const 1))
+  ;; overridingmethods.Parent.$clinit();
+  ;;@ overridingmethods/Child.java:26:13
+  (call $$clinit__void@overridingmethods.Parent )
  )
 )
 
@@ -229,17 +207,12 @@
 (func $m_getClass__java_lang_Class@overridingmethods.Child
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Child();
-   (local.set $return.value (call $$getOverridingmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Child();
+  (return (call $$getOverridingmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@overridingmethods.Child)
 

@@ -22,18 +22,18 @@
 (func $m_<init>__@blockscoping.BlockScoping
  (param $this (ref null $blockscoping.BlockScoping))
  (result (ref null $blockscoping.BlockScoping))
- (block $return.label
+ ;;@ blockscoping/BlockScoping.java:18:13
+ (block
+  ;; blockscoping.BlockScoping.$clinit();
   ;;@ blockscoping/BlockScoping.java:18:13
-  (block
-   ;; blockscoping.BlockScoping.$clinit();
-   ;;@ blockscoping/BlockScoping.java:18:13
-   (call $$clinit__void@blockscoping.BlockScoping )
-   ;; Object.this.Object.<init>();
-   ;;@ blockscoping/BlockScoping.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@blockscoping.BlockScoping )
+  ;; Object.this.Object.<init>();
+  ;;@ blockscoping/BlockScoping.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return BlockScoping.this;
+  ;;@ blockscoping/BlockScoping.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void BlockScoping.main()
@@ -43,21 +43,19 @@
  (local $i_1 i32)
  (local $this (ref null $blockscoping.BlockScoping))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $blockscoping.BlockScoping.rtt)))
- (block $return.label
-  ;;@ blockscoping/BlockScoping.java:20:14
+ ;;@ blockscoping/BlockScoping.java:20:14
+ (block
+  ;;@ blockscoping/BlockScoping.java:21:4
   (block
-   ;;@ blockscoping/BlockScoping.java:21:4
-   (block
-    ;; int i = 0;
-    ;;@ blockscoping/BlockScoping.java:22:6
-    (local.set $i (i32.const 0))
-   )
-   ;;@ blockscoping/BlockScoping.java:24:4
-   (block
-    ;; int i = 1;
-    ;;@ blockscoping/BlockScoping.java:25:6
-    (local.set $i_1 (i32.const 1))
-   )
+   ;; int i = 0;
+   ;;@ blockscoping/BlockScoping.java:22:6
+   (local.set $i (i32.const 0))
+  )
+  ;;@ blockscoping/BlockScoping.java:24:4
+  (block
+   ;; int i = 1;
+   ;;@ blockscoping/BlockScoping.java:25:6
+   (local.set $i_1 (i32.const 1))
   )
  )
 )
@@ -65,25 +63,23 @@
 
 ;;; void BlockScoping.$clinit()
 (func $$clinit__void@blockscoping.BlockScoping
- (block $return.label
+ ;;@ blockscoping/BlockScoping.java:18:13
+ (block
+  ;; if (blockscoping.BlockScoping.$initialized) return;
   ;;@ blockscoping/BlockScoping.java:18:13
-  (block
-   ;; if (blockscoping.BlockScoping.$initialized) return;
-   ;;@ blockscoping/BlockScoping.java:18:13
-   (if (global.get $f_$initialized__blockscoping_BlockScoping)
-    (then
-     ;; return;
-     ;;@ blockscoping/BlockScoping.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__blockscoping_BlockScoping)
+   (then
+    ;; return;
+    ;;@ blockscoping/BlockScoping.java:18:13
+    (return )
    )
-   ;; (blockscoping.BlockScoping.$initialized = true);
-   ;;@ blockscoping/BlockScoping.java:18:13
-   (global.set $f_$initialized__blockscoping_BlockScoping (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ blockscoping/BlockScoping.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (blockscoping.BlockScoping.$initialized = true);
+  ;;@ blockscoping/BlockScoping.java:18:13
+  (global.set $f_$initialized__blockscoping_BlockScoping (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ blockscoping/BlockScoping.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -91,17 +87,12 @@
 (func $m_getClass__java_lang_Class@blockscoping.BlockScoping
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $blockscoping.BlockScoping))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $blockscoping.BlockScoping.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getBlockscoping.BlockScoping();
-   (local.set $return.value (call $$getBlockscoping.BlockScoping__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getBlockscoping.BlockScoping();
+  (return (call $$getBlockscoping.BlockScoping__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@blockscoping.BlockScoping)
 

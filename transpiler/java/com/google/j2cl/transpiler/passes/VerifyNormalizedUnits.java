@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
+import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InitializerBlock;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
@@ -230,6 +231,13 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           public void exitVariableDeclarationExpression(
               VariableDeclarationExpression variableDeclarationExpression) {
             if (variableDeclarationExpression.getFragments().isEmpty()) {
+              throw new IllegalStateException();
+            }
+          }
+
+          @Override
+          public void exitFunctionExpression(FunctionExpression functionExpression) {
+            if (verifyForWasm) {
               throw new IllegalStateException();
             }
           }

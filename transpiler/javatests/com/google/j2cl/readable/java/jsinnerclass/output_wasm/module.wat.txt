@@ -33,54 +33,50 @@
 (func $m_<init>__@jsinnerclass.Main
  (param $this (ref null $jsinnerclass.Main))
  (result (ref null $jsinnerclass.Main))
- (block $return.label
+ ;;@ jsinnerclass/Main.java:20:13
+ (block
+  ;; jsinnerclass.Main.$clinit();
   ;;@ jsinnerclass/Main.java:20:13
-  (block
-   ;; jsinnerclass.Main.$clinit();
-   ;;@ jsinnerclass/Main.java:20:13
-   (call $$clinit__void@jsinnerclass.Main )
-   ;; Object.this.Object.<init>();
-   ;;@ jsinnerclass/Main.java:20:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsinnerclass.Main )
+  ;; Object.this.Object.<init>();
+  ;;@ jsinnerclass/Main.java:20:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Main.this;
+  ;;@ jsinnerclass/Main.java:20:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Main.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
- (block $return.label
+ ;;@ jsinnerclass/Main.java:42:21
+ (block
+  ;; jsinnerclass.Main.$clinit();
   ;;@ jsinnerclass/Main.java:42:21
-  (block
-   ;; jsinnerclass.Main.$clinit();
-   ;;@ jsinnerclass/Main.java:42:21
-   (call $$clinit__void@jsinnerclass.Main )
-  )
+  (call $$clinit__void@jsinnerclass.Main )
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void@jsinnerclass.Main
- (block $return.label
+ ;;@ jsinnerclass/Main.java:20:13
+ (block
+  ;; if (jsinnerclass.Main.$initialized) return;
   ;;@ jsinnerclass/Main.java:20:13
-  (block
-   ;; if (jsinnerclass.Main.$initialized) return;
-   ;;@ jsinnerclass/Main.java:20:13
-   (if (global.get $f_$initialized__jsinnerclass_Main)
-    (then
-     ;; return;
-     ;;@ jsinnerclass/Main.java:20:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsinnerclass_Main)
+   (then
+    ;; return;
+    ;;@ jsinnerclass/Main.java:20:13
+    (return )
    )
-   ;; (jsinnerclass.Main.$initialized = true);
-   ;;@ jsinnerclass/Main.java:20:13
-   (global.set $f_$initialized__jsinnerclass_Main (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsinnerclass/Main.java:20:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsinnerclass.Main.$initialized = true);
+  ;;@ jsinnerclass/Main.java:20:13
+  (global.set $f_$initialized__jsinnerclass_Main (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsinnerclass/Main.java:20:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -88,17 +84,12 @@
 (func $m_getClass__java_lang_Class@jsinnerclass.Main
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main();
-   (local.set $return.value (call $$getJsinnerclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main();
+  (return (call $$getJsinnerclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main)
 
@@ -121,81 +112,72 @@
 (func $m_<init>___$pp_jsinnerclass@jsinnerclass.Main.Outer
  (param $this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer))
- (block $return.label
+ ;;@ jsinnerclass/Main.java:21:15
+ (block
+  ;; jsinnerclass.Main.Outer.$clinit();
   ;;@ jsinnerclass/Main.java:21:15
-  (block
-   ;; jsinnerclass.Main.Outer.$clinit();
-   ;;@ jsinnerclass/Main.java:21:15
-   (call $$clinit__void@jsinnerclass.Main.Outer )
-   ;; Object.this.Object.<init>();
-   ;;@ jsinnerclass/Main.java:21:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-   ;; Outer.this.$init();
-   ;;@ jsinnerclass/Main.java:21:15
-   (call $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (local.get $this))
-  )
+  (call $$clinit__void@jsinnerclass.Main.Outer )
+  ;; Object.this.Object.<init>();
+  ;;@ jsinnerclass/Main.java:21:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; Outer.this.$init();
+  ;;@ jsinnerclass/Main.java:21:15
+  (call $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (local.get $this))
+  ;; return Outer.this;
+  ;;@ jsinnerclass/Main.java:21:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; int Outer.method()
 (func $m_method__int@jsinnerclass.Main.Outer
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
- (local $return.value i32)
  (local $$qualifier (ref null $jsinnerclass.Main.Outer.Inner))
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
- (block $return.label
-  ;;@ jsinnerclass/Main.java:37:15
-  (block
-   ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
-   ;;@ jsinnerclass/Main.java:38:6
-   (local.set $return.value (i32.add (block (result i32)
-    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.itable)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
-    (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
-   ) (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this))))
-   (br $return.label)
-  )
+ ;;@ jsinnerclass/Main.java:37:15
+ (block
+  ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
+  ;;@ jsinnerclass/Main.java:38:6
+  (return (i32.add (block (result i32)
+   (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.itable)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
+   (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
+  ) (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this))))
  )
- (local.get $return.value)
 )
 (elem declare func $m_method__int@jsinnerclass.Main.Outer)
 
 ;;; void Outer.$init()
 (func $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer
  (param $this (ref null $jsinnerclass.Main.Outer))
- (block $return.label
-  ;;@ jsinnerclass/Main.java:21:15
-  (block
-   ;; (Outer.this.a = 2);
-   ;;@ jsinnerclass/Main.java:22:4
-   (struct.set $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this) (i32.const 2))
-  )
+ ;;@ jsinnerclass/Main.java:21:15
+ (block
+  ;; (Outer.this.a = 2);
+  ;;@ jsinnerclass/Main.java:22:4
+  (struct.set $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this) (i32.const 2))
  )
 )
 
 ;;; void Outer.$clinit()
 (func $$clinit__void@jsinnerclass.Main.Outer
- (block $return.label
+ ;;@ jsinnerclass/Main.java:21:15
+ (block
+  ;; if (jsinnerclass.Main.Outer.$initialized) return;
   ;;@ jsinnerclass/Main.java:21:15
-  (block
-   ;; if (jsinnerclass.Main.Outer.$initialized) return;
-   ;;@ jsinnerclass/Main.java:21:15
-   (if (global.get $f_$initialized__jsinnerclass_Main_Outer)
-    (then
-     ;; return;
-     ;;@ jsinnerclass/Main.java:21:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsinnerclass_Main_Outer)
+   (then
+    ;; return;
+    ;;@ jsinnerclass/Main.java:21:15
+    (return )
    )
-   ;; (jsinnerclass.Main.Outer.$initialized = true);
-   ;;@ jsinnerclass/Main.java:21:15
-   (global.set $f_$initialized__jsinnerclass_Main_Outer (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsinnerclass/Main.java:21:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsinnerclass.Main.Outer.$initialized = true);
+  ;;@ jsinnerclass/Main.java:21:15
+  (global.set $f_$initialized__jsinnerclass_Main_Outer (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsinnerclass/Main.java:21:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -203,17 +185,12 @@
 (func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer();
-   (local.set $return.value (call $$getJsinnerclass.Main.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer();
+  (return (call $$getJsinnerclass.Main.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer)
 
@@ -238,67 +215,60 @@
  (param $this (ref null $jsinnerclass.Main.Outer.Inner))
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer.Inner))
- (block $return.label
+ ;;@ jsinnerclass/Main.java:28:13
+ (block
+  ;; jsinnerclass.Main.Outer.Inner.$clinit();
   ;;@ jsinnerclass/Main.java:28:13
-  (block
-   ;; jsinnerclass.Main.Outer.Inner.$clinit();
-   ;;@ jsinnerclass/Main.java:28:13
-   (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
-   ;; (Inner.this.this = $outer_this);
-   ;;@ jsinnerclass/Main.java:28:13
-   (struct.set $jsinnerclass.Main.Outer.Inner $$outer_this__jsinnerclass_Main_Outer_Inner(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ jsinnerclass/Main.java:28:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-   ;; (Inner.this.b = ($outer_this.a + 1));
-   ;;@ jsinnerclass/Main.java:29:8
-   (struct.set $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $$outer_this)) (i32.const 1)))
-  )
+  (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
+  ;; (Inner.this.this = $outer_this);
+  ;;@ jsinnerclass/Main.java:28:13
+  (struct.set $jsinnerclass.Main.Outer.Inner $$outer_this__jsinnerclass_Main_Outer_Inner(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ jsinnerclass/Main.java:28:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; (Inner.this.b = ($outer_this.a + 1));
+  ;;@ jsinnerclass/Main.java:29:8
+  (struct.set $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $$outer_this)) (i32.const 1)))
+  ;; return Inner.this;
+  ;;@ jsinnerclass/Main.java:28:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; int Inner.getB()
 (func $m_getB__int@jsinnerclass.Main.Outer.Inner
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
- (local $return.value i32)
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.Inner.rtt)))
- (block $return.label
-  ;;@ jsinnerclass/Main.java:32:17
-  (block
-   ;; return Inner.this.b;
-   ;;@ jsinnerclass/Main.java:33:8
-   (local.set $return.value (struct.get $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this)))
-   (br $return.label)
-  )
+ ;;@ jsinnerclass/Main.java:32:17
+ (block
+  ;; return Inner.this.b;
+  ;;@ jsinnerclass/Main.java:33:8
+  (return (struct.get $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this)))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getB__int@jsinnerclass.Main.Outer.Inner)
 
 ;;; void Inner.$clinit()
 (func $$clinit__void@jsinnerclass.Main.Outer.Inner
- (block $return.label
+ ;;@ jsinnerclass/Main.java:25:17
+ (block
+  ;; if (jsinnerclass.Main.Outer.Inner.$initialized) return;
   ;;@ jsinnerclass/Main.java:25:17
-  (block
-   ;; if (jsinnerclass.Main.Outer.Inner.$initialized) return;
-   ;;@ jsinnerclass/Main.java:25:17
-   (if (global.get $f_$initialized__jsinnerclass_Main_Outer_Inner)
-    (then
-     ;; return;
-     ;;@ jsinnerclass/Main.java:25:17
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsinnerclass_Main_Outer_Inner)
+   (then
+    ;; return;
+    ;;@ jsinnerclass/Main.java:25:17
+    (return )
    )
-   ;; (jsinnerclass.Main.Outer.Inner.$initialized = true);
-   ;;@ jsinnerclass/Main.java:25:17
-   (global.set $f_$initialized__jsinnerclass_Main_Outer_Inner (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsinnerclass/Main.java:25:17
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsinnerclass.Main.Outer.Inner.$initialized = true);
+  ;;@ jsinnerclass/Main.java:25:17
+  (global.set $f_$initialized__jsinnerclass_Main_Outer_Inner (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsinnerclass/Main.java:25:17
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -306,17 +276,12 @@
 (func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.Inner.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer.Inner();
-   (local.set $return.value (call $$getJsinnerclass.Main.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsinnerclass.Main.Outer.Inner();
+  (return (call $$getJsinnerclass.Main.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner)
 

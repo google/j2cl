@@ -20,22 +20,20 @@
 
 ;;; void MyJsInterface.$clinit()
 (func $$clinit__void@jsbridgebackward.MyJsInterface
- (block $return.label
+ ;;@ jsbridgebackward/InterfaceImpl.java:21:10
+ (block
+  ;; if (jsbridgebackward.MyJsInterface.$initialized) return;
   ;;@ jsbridgebackward/InterfaceImpl.java:21:10
-  (block
-   ;; if (jsbridgebackward.MyJsInterface.$initialized) return;
-   ;;@ jsbridgebackward/InterfaceImpl.java:21:10
-   (if (global.get $f_$initialized__jsbridgebackward_MyJsInterface)
-    (then
-     ;; return;
-     ;;@ jsbridgebackward/InterfaceImpl.java:21:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsbridgebackward_MyJsInterface)
+   (then
+    ;; return;
+    ;;@ jsbridgebackward/InterfaceImpl.java:21:10
+    (return )
    )
-   ;; (jsbridgebackward.MyJsInterface.$initialized = true);
-   ;;@ jsbridgebackward/InterfaceImpl.java:21:10
-   (global.set $f_$initialized__jsbridgebackward_MyJsInterface (i32.const 1))
   )
+  ;; (jsbridgebackward.MyJsInterface.$initialized = true);
+  ;;@ jsbridgebackward/InterfaceImpl.java:21:10
+  (global.set $f_$initialized__jsbridgebackward_MyJsInterface (i32.const 1))
  )
 )
 
@@ -43,15 +41,10 @@
 (func $m_getClass__java_lang_Class@jsbridgebackward.MyJsInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.MyJsInterface();
-   (local.set $return.value (call $$getJsbridgebackward.MyJsInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.MyJsInterface();
+  (return (call $$getJsbridgebackward.MyJsInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgebackward.MyJsInterface)
 
@@ -73,18 +66,18 @@
 (func $m_<init>___$pp_jsbridgebackward@jsbridgebackward.A
  (param $this (ref null $jsbridgebackward.A))
  (result (ref null $jsbridgebackward.A))
- (block $return.label
+ ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+ (block
+  ;; jsbridgebackward.A.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (block
-   ;; jsbridgebackward.A.$clinit();
-   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-   (call $$clinit__void@jsbridgebackward.A )
-   ;; Object.this.Object.<init>();
-   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsbridgebackward.A )
+  ;; Object.this.Object.<init>();
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return A.this;
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; int A.foo(int a)
@@ -92,43 +85,36 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
- (local $return.value i32)
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsbridgebackward.A.rtt)))
- (block $return.label
-  ;;@ jsbridgebackward/InterfaceImpl.java:26:13
-  (block
-   ;; return a;
-   ;;@ jsbridgebackward/InterfaceImpl.java:27:4
-   (local.set $return.value (local.get $a))
-   (br $return.label)
-  )
+ ;;@ jsbridgebackward/InterfaceImpl.java:26:13
+ (block
+  ;; return a;
+  ;;@ jsbridgebackward/InterfaceImpl.java:27:4
+  (return (local.get $a))
  )
- (local.get $return.value)
 )
 (elem declare func $m_foo__int__int@jsbridgebackward.A)
 
 ;;; void A.$clinit()
 (func $$clinit__void@jsbridgebackward.A
- (block $return.label
+ ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+ (block
+  ;; if (jsbridgebackward.A.$initialized) return;
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (block
-   ;; if (jsbridgebackward.A.$initialized) return;
-   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-   (if (global.get $f_$initialized__jsbridgebackward_A)
-    (then
-     ;; return;
-     ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsbridgebackward_A)
+   (then
+    ;; return;
+    ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+    (return )
    )
-   ;; (jsbridgebackward.A.$initialized = true);
-   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-   (global.set $f_$initialized__jsbridgebackward_A (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsbridgebackward.A.$initialized = true);
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  (global.set $f_$initialized__jsbridgebackward_A (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -136,17 +122,12 @@
 (func $m_getClass__java_lang_Class@jsbridgebackward.A
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsbridgebackward.A.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.A();
-   (local.set $return.value (call $$getJsbridgebackward.A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.A();
+  (return (call $$getJsbridgebackward.A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgebackward.A)
 
@@ -168,41 +149,39 @@
 (func $m_<init>__@jsbridgebackward.InterfaceImpl
  (param $this (ref null $jsbridgebackward.InterfaceImpl))
  (result (ref null $jsbridgebackward.InterfaceImpl))
- (block $return.label
+ ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+ (block
+  ;; jsbridgebackward.InterfaceImpl.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-  (block
-   ;; jsbridgebackward.InterfaceImpl.$clinit();
-   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-   (call $$clinit__void@jsbridgebackward.InterfaceImpl )
-   ;; A.this.A.<init>();
-   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-   (drop (call $m_<init>___$pp_jsbridgebackward@jsbridgebackward.A (local.get $this)))
-  )
+  (call $$clinit__void@jsbridgebackward.InterfaceImpl )
+  ;; A.this.A.<init>();
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  (drop (call $m_<init>___$pp_jsbridgebackward@jsbridgebackward.A (local.get $this)))
+  ;; return InterfaceImpl.this;
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void InterfaceImpl.$clinit()
 (func $$clinit__void@jsbridgebackward.InterfaceImpl
- (block $return.label
+ ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+ (block
+  ;; if (jsbridgebackward.InterfaceImpl.$initialized) return;
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-  (block
-   ;; if (jsbridgebackward.InterfaceImpl.$initialized) return;
-   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-   (if (global.get $f_$initialized__jsbridgebackward_InterfaceImpl)
-    (then
-     ;; return;
-     ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsbridgebackward_InterfaceImpl)
+   (then
+    ;; return;
+    ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+    (return )
    )
-   ;; (jsbridgebackward.InterfaceImpl.$initialized = true);
-   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-   (global.set $f_$initialized__jsbridgebackward_InterfaceImpl (i32.const 1))
-   ;; jsbridgebackward.A.$clinit();
-   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-   (call $$clinit__void@jsbridgebackward.A )
   )
+  ;; (jsbridgebackward.InterfaceImpl.$initialized = true);
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  (global.set $f_$initialized__jsbridgebackward_InterfaceImpl (i32.const 1))
+  ;; jsbridgebackward.A.$clinit();
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  (call $$clinit__void@jsbridgebackward.A )
  )
 )
 
@@ -210,17 +189,12 @@
 (func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.InterfaceImpl))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsbridgebackward.InterfaceImpl.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.InterfaceImpl();
-   (local.set $return.value (call $$getJsbridgebackward.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.InterfaceImpl();
+  (return (call $$getJsbridgebackward.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl)
 

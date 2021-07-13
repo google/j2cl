@@ -33,41 +33,39 @@
 (func $m_<init>__@packageinfo.Outer
  (param $this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer))
- (block $return.label
+ ;;@ packageinfo/Outer.java:21:13
+ (block
+  ;; packageinfo.Outer.$clinit();
   ;;@ packageinfo/Outer.java:21:13
-  (block
-   ;; packageinfo.Outer.$clinit();
-   ;;@ packageinfo/Outer.java:21:13
-   (call $$clinit__void@packageinfo.Outer )
-   ;; Object.this.Object.<init>();
-   ;;@ packageinfo/Outer.java:21:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@packageinfo.Outer )
+  ;; Object.this.Object.<init>();
+  ;;@ packageinfo/Outer.java:21:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Outer.this;
+  ;;@ packageinfo/Outer.java:21:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Outer.$clinit()
 (func $$clinit__void@packageinfo.Outer
- (block $return.label
+ ;;@ packageinfo/Outer.java:21:13
+ (block
+  ;; if (packageinfo.Outer.$initialized) return;
   ;;@ packageinfo/Outer.java:21:13
-  (block
-   ;; if (packageinfo.Outer.$initialized) return;
-   ;;@ packageinfo/Outer.java:21:13
-   (if (global.get $f_$initialized__packageinfo_Outer)
-    (then
-     ;; return;
-     ;;@ packageinfo/Outer.java:21:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__packageinfo_Outer)
+   (then
+    ;; return;
+    ;;@ packageinfo/Outer.java:21:13
+    (return )
    )
-   ;; (packageinfo.Outer.$initialized = true);
-   ;;@ packageinfo/Outer.java:21:13
-   (global.set $f_$initialized__packageinfo_Outer (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ packageinfo/Outer.java:21:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (packageinfo.Outer.$initialized = true);
+  ;;@ packageinfo/Outer.java:21:13
+  (global.set $f_$initialized__packageinfo_Outer (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ packageinfo/Outer.java:21:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -75,17 +73,12 @@
 (func $m_getClass__java_lang_Class@packageinfo.Outer
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.Outer.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer();
-   (local.set $return.value (call $$getPackageinfo.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer();
+  (return (call $$getPackageinfo.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@packageinfo.Outer)
 
@@ -108,44 +101,42 @@
  (param $this (ref null $packageinfo.Outer.Inner))
  (param $$outer_this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer.Inner))
- (block $return.label
+ ;;@ packageinfo/Outer.java:24:15
+ (block
+  ;; packageinfo.Outer.Inner.$clinit();
   ;;@ packageinfo/Outer.java:24:15
-  (block
-   ;; packageinfo.Outer.Inner.$clinit();
-   ;;@ packageinfo/Outer.java:24:15
-   (call $$clinit__void@packageinfo.Outer.Inner )
-   ;; (Inner.this.this = $outer_this);
-   ;;@ packageinfo/Outer.java:24:15
-   (struct.set $packageinfo.Outer.Inner $$outer_this__packageinfo_Outer_Inner(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ packageinfo/Outer.java:24:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@packageinfo.Outer.Inner )
+  ;; (Inner.this.this = $outer_this);
+  ;;@ packageinfo/Outer.java:24:15
+  (struct.set $packageinfo.Outer.Inner $$outer_this__packageinfo_Outer_Inner(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ packageinfo/Outer.java:24:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Inner.this;
+  ;;@ packageinfo/Outer.java:24:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Inner.$clinit()
 (func $$clinit__void@packageinfo.Outer.Inner
- (block $return.label
+ ;;@ packageinfo/Outer.java:24:15
+ (block
+  ;; if (packageinfo.Outer.Inner.$initialized) return;
   ;;@ packageinfo/Outer.java:24:15
-  (block
-   ;; if (packageinfo.Outer.Inner.$initialized) return;
-   ;;@ packageinfo/Outer.java:24:15
-   (if (global.get $f_$initialized__packageinfo_Outer_Inner)
-    (then
-     ;; return;
-     ;;@ packageinfo/Outer.java:24:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__packageinfo_Outer_Inner)
+   (then
+    ;; return;
+    ;;@ packageinfo/Outer.java:24:15
+    (return )
    )
-   ;; (packageinfo.Outer.Inner.$initialized = true);
-   ;;@ packageinfo/Outer.java:24:15
-   (global.set $f_$initialized__packageinfo_Outer_Inner (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ packageinfo/Outer.java:24:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (packageinfo.Outer.Inner.$initialized = true);
+  ;;@ packageinfo/Outer.java:24:15
+  (global.set $f_$initialized__packageinfo_Outer_Inner (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ packageinfo/Outer.java:24:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -153,17 +144,12 @@
 (func $m_getClass__java_lang_Class@packageinfo.Outer.Inner
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer.Inner))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.Outer.Inner.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer.Inner();
-   (local.set $return.value (call $$getPackageinfo.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer.Inner();
+  (return (call $$getPackageinfo.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@packageinfo.Outer.Inner)
 
@@ -185,57 +171,53 @@
 (func $m_<init>__@packageinfo.subpackage.Foo
  (param $this (ref null $packageinfo.subpackage.Foo))
  (result (ref null $packageinfo.subpackage.Foo))
- (block $return.label
+ ;;@ packageinfo/subpackage/Foo.java:20:13
+ (block
+  ;; packageinfo.subpackage.Foo.$clinit();
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (block
-   ;; packageinfo.subpackage.Foo.$clinit();
-   ;;@ packageinfo/subpackage/Foo.java:20:13
-   (call $$clinit__void@packageinfo.subpackage.Foo )
-   ;; Object.this.Object.<init>();
-   ;;@ packageinfo/subpackage/Foo.java:20:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-   ;; Foo.this.$init();
-   ;;@ packageinfo/subpackage/Foo.java:20:13
-   (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $this))
-  )
+  (call $$clinit__void@packageinfo.subpackage.Foo )
+  ;; Object.this.Object.<init>();
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; Foo.this.$init();
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $this))
+  ;; return Foo.this;
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Foo.$init()
 (func $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo
  (param $this (ref null $packageinfo.subpackage.Foo))
- (block $return.label
-  ;;@ packageinfo/subpackage/Foo.java:20:13
-  (block
-   ;; (Foo.this.outer = new Outer.<init>());
-   ;;@ packageinfo/subpackage/Foo.java:22:2
-   (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
-  )
+ ;;@ packageinfo/subpackage/Foo.java:20:13
+ (block
+  ;; (Foo.this.outer = new Outer.<init>());
+  ;;@ packageinfo/subpackage/Foo.java:22:2
+  (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
  )
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@packageinfo.subpackage.Foo
- (block $return.label
+ ;;@ packageinfo/subpackage/Foo.java:20:13
+ (block
+  ;; if (packageinfo.subpackage.Foo.$initialized) return;
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (block
-   ;; if (packageinfo.subpackage.Foo.$initialized) return;
-   ;;@ packageinfo/subpackage/Foo.java:20:13
-   (if (global.get $f_$initialized__packageinfo_subpackage_Foo)
-    (then
-     ;; return;
-     ;;@ packageinfo/subpackage/Foo.java:20:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__packageinfo_subpackage_Foo)
+   (then
+    ;; return;
+    ;;@ packageinfo/subpackage/Foo.java:20:13
+    (return )
    )
-   ;; (packageinfo.subpackage.Foo.$initialized = true);
-   ;;@ packageinfo/subpackage/Foo.java:20:13
-   (global.set $f_$initialized__packageinfo_subpackage_Foo (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ packageinfo/subpackage/Foo.java:20:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (packageinfo.subpackage.Foo.$initialized = true);
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (global.set $f_$initialized__packageinfo_subpackage_Foo (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -243,17 +225,12 @@
 (func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.subpackage.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.subpackage.Foo.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.subpackage.Foo();
-   (local.set $return.value (call $$getPackageinfo.subpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.subpackage.Foo();
+  (return (call $$getPackageinfo.subpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@packageinfo.subpackage.Foo)
 

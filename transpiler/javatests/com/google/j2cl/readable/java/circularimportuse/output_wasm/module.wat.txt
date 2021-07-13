@@ -34,61 +34,54 @@
 (func $m_<init>__@circularimportuse.Left
  (param $this (ref null $circularimportuse.Left))
  (result (ref null $circularimportuse.Left))
- (block $return.label
+ ;;@ circularimportuse/Left.java:18:13
+ (block
+  ;; circularimportuse.Left.$clinit();
   ;;@ circularimportuse/Left.java:18:13
-  (block
-   ;; circularimportuse.Left.$clinit();
-   ;;@ circularimportuse/Left.java:18:13
-   (call $$clinit__void@circularimportuse.Left )
-   ;; Object.this.Object.<init>();
-   ;;@ circularimportuse/Left.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@circularimportuse.Left )
+  ;; Object.this.Object.<init>();
+  ;;@ circularimportuse/Left.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Left.this;
+  ;;@ circularimportuse/Left.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; Right Left.createRight()
 (func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $circularimportuse.Right))
- (local $return.value (ref null $circularimportuse.Right))
  (local $this (ref null $circularimportuse.Left))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Left.rtt)))
- (block $return.label
-  ;;@ circularimportuse/Left.java:19:8
-  (block
-   ;; return new Right.<init>();
-   ;;@ circularimportuse/Left.java:20:4
-   (local.set $return.value (call $m_<init>__@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
-   (br $return.label)
-  )
+ ;;@ circularimportuse/Left.java:19:8
+ (block
+  ;; return new Right.<init>();
+  ;;@ circularimportuse/Left.java:20:4
+  (return (call $m_<init>__@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
  )
- (local.get $return.value)
 )
 (elem declare func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left)
 
 ;;; void Left.$clinit()
 (func $$clinit__void@circularimportuse.Left
- (block $return.label
+ ;;@ circularimportuse/Left.java:18:13
+ (block
+  ;; if (circularimportuse.Left.$initialized) return;
   ;;@ circularimportuse/Left.java:18:13
-  (block
-   ;; if (circularimportuse.Left.$initialized) return;
-   ;;@ circularimportuse/Left.java:18:13
-   (if (global.get $f_$initialized__circularimportuse_Left)
-    (then
-     ;; return;
-     ;;@ circularimportuse/Left.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__circularimportuse_Left)
+   (then
+    ;; return;
+    ;;@ circularimportuse/Left.java:18:13
+    (return )
    )
-   ;; (circularimportuse.Left.$initialized = true);
-   ;;@ circularimportuse/Left.java:18:13
-   (global.set $f_$initialized__circularimportuse_Left (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ circularimportuse/Left.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (circularimportuse.Left.$initialized = true);
+  ;;@ circularimportuse/Left.java:18:13
+  (global.set $f_$initialized__circularimportuse_Left (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ circularimportuse/Left.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -96,17 +89,12 @@
 (func $m_getClass__java_lang_Class@circularimportuse.Left
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Left))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Left.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Left();
-   (local.set $return.value (call $$getCircularimportuse.Left__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Left();
+  (return (call $$getCircularimportuse.Left__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@circularimportuse.Left)
 
@@ -127,18 +115,18 @@
 (func $m_<init>__@circularimportuse.Main
  (param $this (ref null $circularimportuse.Main))
  (result (ref null $circularimportuse.Main))
- (block $return.label
+ ;;@ circularimportuse/Main.java:18:13
+ (block
+  ;; circularimportuse.Main.$clinit();
   ;;@ circularimportuse/Main.java:18:13
-  (block
-   ;; circularimportuse.Main.$clinit();
-   ;;@ circularimportuse/Main.java:18:13
-   (call $$clinit__void@circularimportuse.Main )
-   ;; Object.this.Object.<init>();
-   ;;@ circularimportuse/Main.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@circularimportuse.Main )
+  ;; Object.this.Object.<init>();
+  ;;@ circularimportuse/Main.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Main.this;
+  ;;@ circularimportuse/Main.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Main.main(String... args)
@@ -146,43 +134,39 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (local $left (ref null $circularimportuse.Left))
  (local $right (ref null $circularimportuse.Right))
- (block $return.label
+ ;;@ circularimportuse/Main.java:20:21
+ (block
+  ;; circularimportuse.Main.$clinit();
   ;;@ circularimportuse/Main.java:20:21
-  (block
-   ;; circularimportuse.Main.$clinit();
-   ;;@ circularimportuse/Main.java:20:21
-   (call $$clinit__void@circularimportuse.Main )
-   ;; Left left = new Left.<init>();
-   ;;@ circularimportuse/Main.java:21:4
-   (local.set $left (call $m_<init>__@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
-   ;; Right right = new Right.<init>();
-   ;;@ circularimportuse/Main.java:22:4
-   (local.set $right (call $m_<init>__@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
-  )
+  (call $$clinit__void@circularimportuse.Main )
+  ;; Left left = new Left.<init>();
+  ;;@ circularimportuse/Main.java:21:4
+  (local.set $left (call $m_<init>__@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
+  ;; Right right = new Right.<init>();
+  ;;@ circularimportuse/Main.java:22:4
+  (local.set $right (call $m_<init>__@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void@circularimportuse.Main
- (block $return.label
+ ;;@ circularimportuse/Main.java:18:13
+ (block
+  ;; if (circularimportuse.Main.$initialized) return;
   ;;@ circularimportuse/Main.java:18:13
-  (block
-   ;; if (circularimportuse.Main.$initialized) return;
-   ;;@ circularimportuse/Main.java:18:13
-   (if (global.get $f_$initialized__circularimportuse_Main)
-    (then
-     ;; return;
-     ;;@ circularimportuse/Main.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__circularimportuse_Main)
+   (then
+    ;; return;
+    ;;@ circularimportuse/Main.java:18:13
+    (return )
    )
-   ;; (circularimportuse.Main.$initialized = true);
-   ;;@ circularimportuse/Main.java:18:13
-   (global.set $f_$initialized__circularimportuse_Main (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ circularimportuse/Main.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (circularimportuse.Main.$initialized = true);
+  ;;@ circularimportuse/Main.java:18:13
+  (global.set $f_$initialized__circularimportuse_Main (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ circularimportuse/Main.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -190,17 +174,12 @@
 (func $m_getClass__java_lang_Class@circularimportuse.Main
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Main.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Main();
-   (local.set $return.value (call $$getCircularimportuse.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Main();
+  (return (call $$getCircularimportuse.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@circularimportuse.Main)
 
@@ -222,61 +201,54 @@
 (func $m_<init>__@circularimportuse.Right
  (param $this (ref null $circularimportuse.Right))
  (result (ref null $circularimportuse.Right))
- (block $return.label
+ ;;@ circularimportuse/Right.java:18:13
+ (block
+  ;; circularimportuse.Right.$clinit();
   ;;@ circularimportuse/Right.java:18:13
-  (block
-   ;; circularimportuse.Right.$clinit();
-   ;;@ circularimportuse/Right.java:18:13
-   (call $$clinit__void@circularimportuse.Right )
-   ;; Object.this.Object.<init>();
-   ;;@ circularimportuse/Right.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@circularimportuse.Right )
+  ;; Object.this.Object.<init>();
+  ;;@ circularimportuse/Right.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Right.this;
+  ;;@ circularimportuse/Right.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; Left Right.createLeft()
 (func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $circularimportuse.Left))
- (local $return.value (ref null $circularimportuse.Left))
  (local $this (ref null $circularimportuse.Right))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Right.rtt)))
- (block $return.label
-  ;;@ circularimportuse/Right.java:19:7
-  (block
-   ;; return new Left.<init>();
-   ;;@ circularimportuse/Right.java:20:4
-   (local.set $return.value (call $m_<init>__@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
-   (br $return.label)
-  )
+ ;;@ circularimportuse/Right.java:19:7
+ (block
+  ;; return new Left.<init>();
+  ;;@ circularimportuse/Right.java:20:4
+  (return (call $m_<init>__@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
  )
- (local.get $return.value)
 )
 (elem declare func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right)
 
 ;;; void Right.$clinit()
 (func $$clinit__void@circularimportuse.Right
- (block $return.label
+ ;;@ circularimportuse/Right.java:18:13
+ (block
+  ;; if (circularimportuse.Right.$initialized) return;
   ;;@ circularimportuse/Right.java:18:13
-  (block
-   ;; if (circularimportuse.Right.$initialized) return;
-   ;;@ circularimportuse/Right.java:18:13
-   (if (global.get $f_$initialized__circularimportuse_Right)
-    (then
-     ;; return;
-     ;;@ circularimportuse/Right.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__circularimportuse_Right)
+   (then
+    ;; return;
+    ;;@ circularimportuse/Right.java:18:13
+    (return )
    )
-   ;; (circularimportuse.Right.$initialized = true);
-   ;;@ circularimportuse/Right.java:18:13
-   (global.set $f_$initialized__circularimportuse_Right (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ circularimportuse/Right.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (circularimportuse.Right.$initialized = true);
+  ;;@ circularimportuse/Right.java:18:13
+  (global.set $f_$initialized__circularimportuse_Right (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ circularimportuse/Right.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -284,17 +256,12 @@
 (func $m_getClass__java_lang_Class@circularimportuse.Right
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Right))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Right.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Right();
-   (local.set $return.value (call $$getCircularimportuse.Right__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Right();
+  (return (call $$getCircularimportuse.Right__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@circularimportuse.Right)
 

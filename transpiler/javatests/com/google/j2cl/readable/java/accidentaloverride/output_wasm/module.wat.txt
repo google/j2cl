@@ -37,18 +37,18 @@
 (func $m_<init>___$pp_accidentaloverride@accidentaloverride.Parent
  (param $this (ref null $accidentaloverride.Parent))
  (result (ref null $accidentaloverride.Parent))
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:18:6
+ (block
+  ;; accidentaloverride.Parent.$clinit();
   ;;@ accidentaloverride/AccidentalOverride.java:18:6
-  (block
-   ;; accidentaloverride.Parent.$clinit();
-   ;;@ accidentaloverride/AccidentalOverride.java:18:6
-   (call $$clinit__void@accidentaloverride.Parent )
-   ;; Object.this.Object.<init>();
-   ;;@ accidentaloverride/AccidentalOverride.java:18:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@accidentaloverride.Parent )
+  ;; Object.this.Object.<init>();
+  ;;@ accidentaloverride/AccidentalOverride.java:18:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Parent.this;
+  ;;@ accidentaloverride/AccidentalOverride.java:18:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Parent.foo(T e)
@@ -57,35 +57,31 @@
  (param $e (ref null $java.lang.Error))
  (local $this (ref null $accidentaloverride.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.Parent.rtt)))
- (block $return.label
-  ;;@ accidentaloverride/AccidentalOverride.java:20:14
-  (block
-  )
+ ;;@ accidentaloverride/AccidentalOverride.java:20:14
+ (block
  )
 )
 (elem declare func $m_foo__java_lang_Error__void@accidentaloverride.Parent)
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@accidentaloverride.Parent
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:18:6
+ (block
+  ;; if (accidentaloverride.Parent.$initialized) return;
   ;;@ accidentaloverride/AccidentalOverride.java:18:6
-  (block
-   ;; if (accidentaloverride.Parent.$initialized) return;
-   ;;@ accidentaloverride/AccidentalOverride.java:18:6
-   (if (global.get $f_$initialized__accidentaloverride_Parent)
-    (then
-     ;; return;
-     ;;@ accidentaloverride/AccidentalOverride.java:18:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__accidentaloverride_Parent)
+   (then
+    ;; return;
+    ;;@ accidentaloverride/AccidentalOverride.java:18:6
+    (return )
    )
-   ;; (accidentaloverride.Parent.$initialized = true);
-   ;;@ accidentaloverride/AccidentalOverride.java:18:6
-   (global.set $f_$initialized__accidentaloverride_Parent (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ accidentaloverride/AccidentalOverride.java:18:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (accidentaloverride.Parent.$initialized = true);
+  ;;@ accidentaloverride/AccidentalOverride.java:18:6
+  (global.set $f_$initialized__accidentaloverride_Parent (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ accidentaloverride/AccidentalOverride.java:18:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -93,17 +89,12 @@
 (func $m_getClass__java_lang_Class@accidentaloverride.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.Parent.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.Parent();
-   (local.set $return.value (call $$getAccidentaloverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.Parent();
+  (return (call $$getAccidentaloverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.Parent)
 
@@ -114,22 +105,20 @@
 
 ;;; void SuperInterface.$clinit()
 (func $$clinit__void@accidentaloverride.SuperInterface
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:23:10
+ (block
+  ;; if (accidentaloverride.SuperInterface.$initialized) return;
   ;;@ accidentaloverride/AccidentalOverride.java:23:10
-  (block
-   ;; if (accidentaloverride.SuperInterface.$initialized) return;
-   ;;@ accidentaloverride/AccidentalOverride.java:23:10
-   (if (global.get $f_$initialized__accidentaloverride_SuperInterface)
-    (then
-     ;; return;
-     ;;@ accidentaloverride/AccidentalOverride.java:23:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__accidentaloverride_SuperInterface)
+   (then
+    ;; return;
+    ;;@ accidentaloverride/AccidentalOverride.java:23:10
+    (return )
    )
-   ;; (accidentaloverride.SuperInterface.$initialized = true);
-   ;;@ accidentaloverride/AccidentalOverride.java:23:10
-   (global.set $f_$initialized__accidentaloverride_SuperInterface (i32.const 1))
   )
+  ;; (accidentaloverride.SuperInterface.$initialized = true);
+  ;;@ accidentaloverride/AccidentalOverride.java:23:10
+  (global.set $f_$initialized__accidentaloverride_SuperInterface (i32.const 1))
  )
 )
 
@@ -137,15 +126,10 @@
 (func $m_getClass__java_lang_Class@accidentaloverride.SuperInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.SuperInterface();
-   (local.set $return.value (call $$getAccidentaloverride.SuperInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.SuperInterface();
+  (return (call $$getAccidentaloverride.SuperInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.SuperInterface)
 
@@ -169,18 +153,18 @@
 (func $m_<init>___$pp_accidentaloverride@accidentaloverride.AnotherAccidentalOverride
  (param $this (ref null $accidentaloverride.AnotherAccidentalOverride))
  (result (ref null $accidentaloverride.AnotherAccidentalOverride))
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:31:6
+ (block
+  ;; accidentaloverride.AnotherAccidentalOverride.$clinit();
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (block
-   ;; accidentaloverride.AnotherAccidentalOverride.$clinit();
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (call $$clinit__void@accidentaloverride.AnotherAccidentalOverride )
-   ;; Parent.this.Parent.<init>();
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (drop (call $m_<init>___$pp_accidentaloverride@accidentaloverride.Parent (local.get $this)))
-  )
+  (call $$clinit__void@accidentaloverride.AnotherAccidentalOverride )
+  ;; Parent.this.Parent.<init>();
+  ;;@ accidentaloverride/AccidentalOverride.java:31:6
+  (drop (call $m_<init>___$pp_accidentaloverride@accidentaloverride.Parent (local.get $this)))
+  ;; return AnotherAccidentalOverride.this;
+  ;;@ accidentaloverride/AccidentalOverride.java:31:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AnotherAccidentalOverride.foo(Object arg0)
@@ -189,13 +173,11 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:31:6
+ (block
+  ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (block
-   ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
-  )
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride)
@@ -206,13 +188,11 @@
  (param $arg0 (ref null $java.lang.Error))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:31:6
+ (block
+  ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (block
-   ;; AnotherAccidentalOverride.this.foo(((AssertionError) arg0));
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
-  )
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $accidentaloverride.AnotherAccidentalOverride.vtable $m_foo__java_lang_AssertionError__void (struct.get $accidentaloverride.AnotherAccidentalOverride $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride)
@@ -223,38 +203,34 @@
  (param $arg0 (ref null $java.lang.AssertionError))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:31:6
+ (block
+  ;; super.foo(arg0);
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (block
-   ;; super.foo(arg0);
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (call $m_foo__java_lang_Error__void@accidentaloverride.Parent (local.get $this)(local.get $arg0))
-  )
+  (call $m_foo__java_lang_Error__void@accidentaloverride.Parent (local.get $this)(local.get $arg0))
  )
 )
 (elem declare func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; void AnotherAccidentalOverride.$clinit()
 (func $$clinit__void@accidentaloverride.AnotherAccidentalOverride
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:31:6
+ (block
+  ;; if (accidentaloverride.AnotherAccidentalOverride.$initialized) return;
   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-  (block
-   ;; if (accidentaloverride.AnotherAccidentalOverride.$initialized) return;
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (if (global.get $f_$initialized__accidentaloverride_AnotherAccidentalOverride)
-    (then
-     ;; return;
-     ;;@ accidentaloverride/AccidentalOverride.java:31:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__accidentaloverride_AnotherAccidentalOverride)
+   (then
+    ;; return;
+    ;;@ accidentaloverride/AccidentalOverride.java:31:6
+    (return )
    )
-   ;; (accidentaloverride.AnotherAccidentalOverride.$initialized = true);
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (global.set $f_$initialized__accidentaloverride_AnotherAccidentalOverride (i32.const 1))
-   ;; accidentaloverride.Parent.$clinit();
-   ;;@ accidentaloverride/AccidentalOverride.java:31:6
-   (call $$clinit__void@accidentaloverride.Parent )
   )
+  ;; (accidentaloverride.AnotherAccidentalOverride.$initialized = true);
+  ;;@ accidentaloverride/AccidentalOverride.java:31:6
+  (global.set $f_$initialized__accidentaloverride_AnotherAccidentalOverride (i32.const 1))
+  ;; accidentaloverride.Parent.$clinit();
+  ;;@ accidentaloverride/AccidentalOverride.java:31:6
+  (call $$clinit__void@accidentaloverride.Parent )
  )
 )
 
@@ -262,17 +238,12 @@
 (func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AnotherAccidentalOverride.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.AnotherAccidentalOverride();
-   (local.set $return.value (call $$getAccidentaloverride.AnotherAccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.AnotherAccidentalOverride();
+  (return (call $$getAccidentaloverride.AnotherAccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
 
@@ -295,18 +266,18 @@
 (func $m_<init>__@accidentaloverride.AccidentalOverride
  (param $this (ref null $accidentaloverride.AccidentalOverride))
  (result (ref null $accidentaloverride.AccidentalOverride))
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:41:13
+ (block
+  ;; accidentaloverride.AccidentalOverride.$clinit();
   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-  (block
-   ;; accidentaloverride.AccidentalOverride.$clinit();
-   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-   (call $$clinit__void@accidentaloverride.AccidentalOverride )
-   ;; Parent.this.Parent.<init>();
-   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-   (drop (call $m_<init>___$pp_accidentaloverride@accidentaloverride.Parent (local.get $this)))
-  )
+  (call $$clinit__void@accidentaloverride.AccidentalOverride )
+  ;; Parent.this.Parent.<init>();
+  ;;@ accidentaloverride/AccidentalOverride.java:41:13
+  (drop (call $m_<init>___$pp_accidentaloverride@accidentaloverride.Parent (local.get $this)))
+  ;; return AccidentalOverride.this;
+  ;;@ accidentaloverride/AccidentalOverride.java:41:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AccidentalOverride.foo(Object arg0)
@@ -315,38 +286,34 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $accidentaloverride.AccidentalOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AccidentalOverride.rtt)))
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:41:13
+ (block
+  ;; Parent.this.foo(((Error) arg0));
   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-  (block
-   ;; Parent.this.foo(((Error) arg0));
-   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.Error.rtt))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
-  )
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.Error.rtt))(struct.get $accidentaloverride.Parent.vtable $m_foo__java_lang_Error__void (struct.get $accidentaloverride.Parent $vtable(local.get $this))))
  )
 )
 (elem declare func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride)
 
 ;;; void AccidentalOverride.$clinit()
 (func $$clinit__void@accidentaloverride.AccidentalOverride
- (block $return.label
+ ;;@ accidentaloverride/AccidentalOverride.java:41:13
+ (block
+  ;; if (accidentaloverride.AccidentalOverride.$initialized) return;
   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-  (block
-   ;; if (accidentaloverride.AccidentalOverride.$initialized) return;
-   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-   (if (global.get $f_$initialized__accidentaloverride_AccidentalOverride)
-    (then
-     ;; return;
-     ;;@ accidentaloverride/AccidentalOverride.java:41:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__accidentaloverride_AccidentalOverride)
+   (then
+    ;; return;
+    ;;@ accidentaloverride/AccidentalOverride.java:41:13
+    (return )
    )
-   ;; (accidentaloverride.AccidentalOverride.$initialized = true);
-   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-   (global.set $f_$initialized__accidentaloverride_AccidentalOverride (i32.const 1))
-   ;; accidentaloverride.Parent.$clinit();
-   ;;@ accidentaloverride/AccidentalOverride.java:41:13
-   (call $$clinit__void@accidentaloverride.Parent )
   )
+  ;; (accidentaloverride.AccidentalOverride.$initialized = true);
+  ;;@ accidentaloverride/AccidentalOverride.java:41:13
+  (global.set $f_$initialized__accidentaloverride_AccidentalOverride (i32.const 1))
+  ;; accidentaloverride.Parent.$clinit();
+  ;;@ accidentaloverride/AccidentalOverride.java:41:13
+  (call $$clinit__void@accidentaloverride.Parent )
  )
 )
 
@@ -354,17 +321,12 @@
 (func $m_getClass__java_lang_Class@accidentaloverride.AccidentalOverride
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AccidentalOverride))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $accidentaloverride.AccidentalOverride.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.AccidentalOverride();
-   (local.set $return.value (call $$getAccidentaloverride.AccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAccidentaloverride.AccidentalOverride();
+  (return (call $$getAccidentaloverride.AccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.AccidentalOverride)
 

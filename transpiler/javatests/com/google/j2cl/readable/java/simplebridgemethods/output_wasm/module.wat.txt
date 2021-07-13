@@ -55,18 +55,18 @@
 (func $m_<init>___$pp_simplebridgemethods@simplebridgemethods.Superclass
  (param $this (ref null $simplebridgemethods.Superclass))
  (result (ref null $simplebridgemethods.Superclass))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
+ (block
+  ;; simplebridgemethods.Superclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-  (block
-   ;; simplebridgemethods.Superclass.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-   (call $$clinit__void@simplebridgemethods.Superclass )
-   ;; Object.this.Object.<init>();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@simplebridgemethods.Superclass )
+  ;; Object.this.Object.<init>();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Superclass.this;
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Superclass.m1(T t)
@@ -75,35 +75,31 @@
  (param $t (ref null $java.lang.Error))
  (local $this (ref null $simplebridgemethods.Superclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Superclass.rtt)))
- (block $return.label
-  ;;@ simplebridgemethods/SimpleBridgeMethods.java:19:14
-  (block
-  )
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:19:14
+ (block
  )
 )
 (elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
 
 ;;; void Superclass.$clinit()
 (func $$clinit__void@simplebridgemethods.Superclass
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
+ (block
+  ;; if (simplebridgemethods.Superclass.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-  (block
-   ;; if (simplebridgemethods.Superclass.$initialized) return;
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-   (if (global.get $f_$initialized__simplebridgemethods_Superclass)
-    (then
-     ;; return;
-     ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplebridgemethods_Superclass)
+   (then
+    ;; return;
+    ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
+    (return )
    )
-   ;; (simplebridgemethods.Superclass.$initialized = true);
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-   (global.set $f_$initialized__simplebridgemethods_Superclass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (simplebridgemethods.Superclass.$initialized = true);
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
+  (global.set $f_$initialized__simplebridgemethods_Superclass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -111,17 +107,12 @@
 (func $m_getClass__java_lang_Class@simplebridgemethods.Superclass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Superclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Superclass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Superclass();
-   (local.set $return.value (call $$getSimplebridgemethods.Superclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Superclass();
+  (return (call $$getSimplebridgemethods.Superclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.Superclass)
 
@@ -144,18 +135,18 @@
 (func $m_<init>___$pp_simplebridgemethods@simplebridgemethods.Subclass
  (param $this (ref null $simplebridgemethods.Subclass))
  (result (ref null $simplebridgemethods.Subclass))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+ (block
+  ;; simplebridgemethods.Subclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (block
-   ;; simplebridgemethods.Subclass.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-   (call $$clinit__void@simplebridgemethods.Subclass )
-   ;; Superclass.this.Superclass.<init>();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-   (drop (call $m_<init>___$pp_simplebridgemethods@simplebridgemethods.Superclass (local.get $this)))
-  )
+  (call $$clinit__void@simplebridgemethods.Subclass )
+  ;; Superclass.this.Superclass.<init>();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+  (drop (call $m_<init>___$pp_simplebridgemethods@simplebridgemethods.Superclass (local.get $this)))
+  ;; return Subclass.this;
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Subclass.m1(AssertionError a)
@@ -164,10 +155,8 @@
  (param $a (ref null $java.lang.AssertionError))
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Subclass.rtt)))
- (block $return.label
-  ;;@ simplebridgemethods/SimpleBridgeMethods.java:26:14
-  (block
-  )
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:26:14
+ (block
  )
 )
 (elem declare func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass)
@@ -178,38 +167,34 @@
  (param $arg0 (ref null $java.lang.Error))
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Subclass.rtt)))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+ (block
+  ;; Subclass.this.m1(((AssertionError) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (block
-   ;; Subclass.this.m1(((AssertionError) arg0));
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
-  )
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.AssertionError.rtt))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
 
 ;;; void Subclass.$clinit()
 (func $$clinit__void@simplebridgemethods.Subclass
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+ (block
+  ;; if (simplebridgemethods.Subclass.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (block
-   ;; if (simplebridgemethods.Subclass.$initialized) return;
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-   (if (global.get $f_$initialized__simplebridgemethods_Subclass)
-    (then
-     ;; return;
-     ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplebridgemethods_Subclass)
+   (then
+    ;; return;
+    ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+    (return )
    )
-   ;; (simplebridgemethods.Subclass.$initialized = true);
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-   (global.set $f_$initialized__simplebridgemethods_Subclass (i32.const 1))
-   ;; simplebridgemethods.Superclass.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-   (call $$clinit__void@simplebridgemethods.Superclass )
   )
+  ;; (simplebridgemethods.Subclass.$initialized = true);
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+  (global.set $f_$initialized__simplebridgemethods_Subclass (i32.const 1))
+  ;; simplebridgemethods.Superclass.$clinit();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
+  (call $$clinit__void@simplebridgemethods.Superclass )
  )
 )
 
@@ -217,17 +202,12 @@
 (func $m_getClass__java_lang_Class@simplebridgemethods.Subclass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Subclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Subclass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Subclass();
-   (local.set $return.value (call $$getSimplebridgemethods.Subclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Subclass();
+  (return (call $$getSimplebridgemethods.Subclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.Subclass)
 
@@ -249,41 +229,39 @@
 (func $m_<init>___$pp_simplebridgemethods@simplebridgemethods.AnotherSubclass
  (param $this (ref null $simplebridgemethods.AnotherSubclass))
  (result (ref null $simplebridgemethods.AnotherSubclass))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
+ (block
+  ;; simplebridgemethods.AnotherSubclass.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-  (block
-   ;; simplebridgemethods.AnotherSubclass.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-   (call $$clinit__void@simplebridgemethods.AnotherSubclass )
-   ;; Superclass.this.Superclass.<init>();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-   (drop (call $m_<init>___$pp_simplebridgemethods@simplebridgemethods.Superclass (local.get $this)))
-  )
+  (call $$clinit__void@simplebridgemethods.AnotherSubclass )
+  ;; Superclass.this.Superclass.<init>();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
+  (drop (call $m_<init>___$pp_simplebridgemethods@simplebridgemethods.Superclass (local.get $this)))
+  ;; return AnotherSubclass.this;
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AnotherSubclass.$clinit()
 (func $$clinit__void@simplebridgemethods.AnotherSubclass
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
+ (block
+  ;; if (simplebridgemethods.AnotherSubclass.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-  (block
-   ;; if (simplebridgemethods.AnotherSubclass.$initialized) return;
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-   (if (global.get $f_$initialized__simplebridgemethods_AnotherSubclass)
-    (then
-     ;; return;
-     ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplebridgemethods_AnotherSubclass)
+   (then
+    ;; return;
+    ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
+    (return )
    )
-   ;; (simplebridgemethods.AnotherSubclass.$initialized = true);
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-   (global.set $f_$initialized__simplebridgemethods_AnotherSubclass (i32.const 1))
-   ;; simplebridgemethods.Superclass.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-   (call $$clinit__void@simplebridgemethods.Superclass )
   )
+  ;; (simplebridgemethods.AnotherSubclass.$initialized = true);
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
+  (global.set $f_$initialized__simplebridgemethods_AnotherSubclass (i32.const 1))
+  ;; simplebridgemethods.Superclass.$clinit();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
+  (call $$clinit__void@simplebridgemethods.Superclass )
  )
 )
 
@@ -291,17 +269,12 @@
 (func $m_getClass__java_lang_Class@simplebridgemethods.AnotherSubclass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherSubclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.AnotherSubclass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.AnotherSubclass();
-   (local.set $return.value (call $$getSimplebridgemethods.AnotherSubclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.AnotherSubclass();
+  (return (call $$getSimplebridgemethods.AnotherSubclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.AnotherSubclass)
 
@@ -312,22 +285,20 @@
 
 ;;; void Callable.$clinit()
 (func $$clinit__void@simplebridgemethods.Callable
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
+ (block
+  ;; if (simplebridgemethods.Callable.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
-  (block
-   ;; if (simplebridgemethods.Callable.$initialized) return;
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
-   (if (global.get $f_$initialized__simplebridgemethods_Callable)
-    (then
-     ;; return;
-     ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplebridgemethods_Callable)
+   (then
+    ;; return;
+    ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
+    (return )
    )
-   ;; (simplebridgemethods.Callable.$initialized = true);
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
-   (global.set $f_$initialized__simplebridgemethods_Callable (i32.const 1))
   )
+  ;; (simplebridgemethods.Callable.$initialized = true);
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:34:10
+  (global.set $f_$initialized__simplebridgemethods_Callable (i32.const 1))
  )
 )
 
@@ -335,15 +306,10 @@
 (func $m_getClass__java_lang_Class@simplebridgemethods.Callable
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Callable();
-   (local.set $return.value (call $$getSimplebridgemethods.Callable__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Callable();
+  (return (call $$getSimplebridgemethods.Callable__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.Callable)
 
@@ -365,18 +331,18 @@
 (func $m_<init>___$pp_simplebridgemethods@simplebridgemethods.Task
  (param $this (ref null $simplebridgemethods.Task))
  (result (ref null $simplebridgemethods.Task))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
+ (block
+  ;; simplebridgemethods.Task.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-  (block
-   ;; simplebridgemethods.Task.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-   (call $$clinit__void@simplebridgemethods.Task )
-   ;; Object.this.Object.<init>();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@simplebridgemethods.Task )
+  ;; Object.this.Object.<init>();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Task.this;
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Task.call(T t)
@@ -385,35 +351,31 @@
  (param $t (ref null $java.lang.Object))
  (local $this (ref null $simplebridgemethods.Task))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Task.rtt)))
- (block $return.label
-  ;;@ simplebridgemethods/SimpleBridgeMethods.java:42:14
-  (block
-  )
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:42:14
+ (block
  )
 )
 (elem declare func $m_call__java_lang_Object__void@simplebridgemethods.Task)
 
 ;;; void Task.$clinit()
 (func $$clinit__void@simplebridgemethods.Task
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
+ (block
+  ;; if (simplebridgemethods.Task.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-  (block
-   ;; if (simplebridgemethods.Task.$initialized) return;
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-   (if (global.get $f_$initialized__simplebridgemethods_Task)
-    (then
-     ;; return;
-     ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplebridgemethods_Task)
+   (then
+    ;; return;
+    ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
+    (return )
    )
-   ;; (simplebridgemethods.Task.$initialized = true);
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-   (global.set $f_$initialized__simplebridgemethods_Task (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (simplebridgemethods.Task.$initialized = true);
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
+  (global.set $f_$initialized__simplebridgemethods_Task (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -421,17 +383,12 @@
 (func $m_getClass__java_lang_Class@simplebridgemethods.Task
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Task))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.Task.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Task();
-   (local.set $return.value (call $$getSimplebridgemethods.Task__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Task();
+  (return (call $$getSimplebridgemethods.Task__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.Task)
 
@@ -454,18 +411,18 @@
 (func $m_<init>___$pp_simplebridgemethods@simplebridgemethods.AnotherTask
  (param $this (ref null $simplebridgemethods.AnotherTask))
  (result (ref null $simplebridgemethods.AnotherTask))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+ (block
+  ;; simplebridgemethods.AnotherTask.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (block
-   ;; simplebridgemethods.AnotherTask.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-   (call $$clinit__void@simplebridgemethods.AnotherTask )
-   ;; Object.this.Object.<init>();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@simplebridgemethods.AnotherTask )
+  ;; Object.this.Object.<init>();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return AnotherTask.this;
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AnotherTask.call(Superclass<T> t)
@@ -474,10 +431,8 @@
  (param $t (ref null $simplebridgemethods.Superclass))
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.AnotherTask.rtt)))
- (block $return.label
-  ;;@ simplebridgemethods/SimpleBridgeMethods.java:50:14
-  (block
-  )
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:50:14
+ (block
  )
 )
 (elem declare func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask)
@@ -488,38 +443,34 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.AnotherTask.rtt)))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+ (block
+  ;; AnotherTask.this.call(((Superclass<T>) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (block
-   ;; AnotherTask.this.call(((Superclass<T>) arg0));
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-   (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $simplebridgemethods.Superclass.rtt))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
-  )
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $simplebridgemethods.Superclass.rtt))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
 
 ;;; void AnotherTask.$clinit()
 (func $$clinit__void@simplebridgemethods.AnotherTask
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+ (block
+  ;; if (simplebridgemethods.AnotherTask.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (block
-   ;; if (simplebridgemethods.AnotherTask.$initialized) return;
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-   (if (global.get $f_$initialized__simplebridgemethods_AnotherTask)
-    (then
-     ;; return;
-     ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplebridgemethods_AnotherTask)
+   (then
+    ;; return;
+    ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+    (return )
    )
-   ;; (simplebridgemethods.AnotherTask.$initialized = true);
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-   (global.set $f_$initialized__simplebridgemethods_AnotherTask (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (simplebridgemethods.AnotherTask.$initialized = true);
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+  (global.set $f_$initialized__simplebridgemethods_AnotherTask (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -527,17 +478,12 @@
 (func $m_getClass__java_lang_Class@simplebridgemethods.AnotherTask
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherTask))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.AnotherTask.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.AnotherTask();
-   (local.set $return.value (call $$getSimplebridgemethods.AnotherTask__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.AnotherTask();
+  (return (call $$getSimplebridgemethods.AnotherTask__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.AnotherTask)
 
@@ -558,41 +504,39 @@
 (func $m_<init>__@simplebridgemethods.SimpleBridgeMethods
  (param $this (ref null $simplebridgemethods.SimpleBridgeMethods))
  (result (ref null $simplebridgemethods.SimpleBridgeMethods))
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
+ (block
+  ;; simplebridgemethods.SimpleBridgeMethods.$clinit();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-  (block
-   ;; simplebridgemethods.SimpleBridgeMethods.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-   (call $$clinit__void@simplebridgemethods.SimpleBridgeMethods )
-   ;; Object.this.Object.<init>();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@simplebridgemethods.SimpleBridgeMethods )
+  ;; Object.this.Object.<init>();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return SimpleBridgeMethods.this;
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void SimpleBridgeMethods.$clinit()
 (func $$clinit__void@simplebridgemethods.SimpleBridgeMethods
- (block $return.label
+ ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
+ (block
+  ;; if (simplebridgemethods.SimpleBridgeMethods.$initialized) return;
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-  (block
-   ;; if (simplebridgemethods.SimpleBridgeMethods.$initialized) return;
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-   (if (global.get $f_$initialized__simplebridgemethods_SimpleBridgeMethods)
-    (then
-     ;; return;
-     ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simplebridgemethods_SimpleBridgeMethods)
+   (then
+    ;; return;
+    ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
+    (return )
    )
-   ;; (simplebridgemethods.SimpleBridgeMethods.$initialized = true);
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-   (global.set $f_$initialized__simplebridgemethods_SimpleBridgeMethods (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (simplebridgemethods.SimpleBridgeMethods.$initialized = true);
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
+  (global.set $f_$initialized__simplebridgemethods_SimpleBridgeMethods (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -600,17 +544,12 @@
 (func $m_getClass__java_lang_Class@simplebridgemethods.SimpleBridgeMethods
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.SimpleBridgeMethods))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplebridgemethods.SimpleBridgeMethods.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.SimpleBridgeMethods();
-   (local.set $return.value (call $$getSimplebridgemethods.SimpleBridgeMethods__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.SimpleBridgeMethods();
+  (return (call $$getSimplebridgemethods.SimpleBridgeMethods__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.SimpleBridgeMethods)
 

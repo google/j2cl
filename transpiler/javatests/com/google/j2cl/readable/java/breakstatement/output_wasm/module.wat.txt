@@ -22,18 +22,18 @@
 (func $m_<init>__@breakstatement.BreakStatement
  (param $this (ref null $breakstatement.BreakStatement))
  (result (ref null $breakstatement.BreakStatement))
- (block $return.label
+ ;;@ breakstatement/BreakStatement.java:18:13
+ (block
+  ;; breakstatement.BreakStatement.$clinit();
   ;;@ breakstatement/BreakStatement.java:18:13
-  (block
-   ;; breakstatement.BreakStatement.$clinit();
-   ;;@ breakstatement/BreakStatement.java:18:13
-   (call $$clinit__void@breakstatement.BreakStatement )
-   ;; Object.this.Object.<init>();
-   ;;@ breakstatement/BreakStatement.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@breakstatement.BreakStatement )
+  ;; Object.this.Object.<init>();
+  ;;@ breakstatement/BreakStatement.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return BreakStatement.this;
+  ;;@ breakstatement/BreakStatement.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void BreakStatement.test()
@@ -41,24 +41,22 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $breakstatement.BreakStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $breakstatement.BreakStatement.rtt)))
- (block $return.label
-  ;;@ breakstatement/BreakStatement.java:19:14
-  (block
-   ;; LOOP: for (;true;) {
-   ;;@ breakstatement/BreakStatement.java:20:4
-   (block $LOOP.BREAK
-    (loop
-     (block $LOOP.CONTINUE
-      ;;@ breakstatement/BreakStatement.java:20:15
-      (block
-       ;; break LOOP;
-       ;;@ breakstatement/BreakStatement.java:21:6
-       (br $LOOP.BREAK)
-      )
+ ;;@ breakstatement/BreakStatement.java:19:14
+ (block
+  ;; LOOP: for (;true;) {
+  ;;@ breakstatement/BreakStatement.java:20:4
+  (block $LOOP.BREAK
+   (loop
+    (block $LOOP.CONTINUE
+     ;;@ breakstatement/BreakStatement.java:20:15
+     (block
+      ;; break LOOP;
+      ;;@ breakstatement/BreakStatement.java:21:6
+      (br $LOOP.BREAK)
      )
-     (br 0)
-     
     )
+    (br 0)
+    
    )
   )
  )
@@ -67,25 +65,23 @@
 
 ;;; void BreakStatement.$clinit()
 (func $$clinit__void@breakstatement.BreakStatement
- (block $return.label
+ ;;@ breakstatement/BreakStatement.java:18:13
+ (block
+  ;; if (breakstatement.BreakStatement.$initialized) return;
   ;;@ breakstatement/BreakStatement.java:18:13
-  (block
-   ;; if (breakstatement.BreakStatement.$initialized) return;
-   ;;@ breakstatement/BreakStatement.java:18:13
-   (if (global.get $f_$initialized__breakstatement_BreakStatement)
-    (then
-     ;; return;
-     ;;@ breakstatement/BreakStatement.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__breakstatement_BreakStatement)
+   (then
+    ;; return;
+    ;;@ breakstatement/BreakStatement.java:18:13
+    (return )
    )
-   ;; (breakstatement.BreakStatement.$initialized = true);
-   ;;@ breakstatement/BreakStatement.java:18:13
-   (global.set $f_$initialized__breakstatement_BreakStatement (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ breakstatement/BreakStatement.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (breakstatement.BreakStatement.$initialized = true);
+  ;;@ breakstatement/BreakStatement.java:18:13
+  (global.set $f_$initialized__breakstatement_BreakStatement (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ breakstatement/BreakStatement.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -93,17 +89,12 @@
 (func $m_getClass__java_lang_Class@breakstatement.BreakStatement
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $breakstatement.BreakStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $breakstatement.BreakStatement.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getBreakstatement.BreakStatement();
-   (local.set $return.value (call $$getBreakstatement.BreakStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getBreakstatement.BreakStatement();
+  (return (call $$getBreakstatement.BreakStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@breakstatement.BreakStatement)
 

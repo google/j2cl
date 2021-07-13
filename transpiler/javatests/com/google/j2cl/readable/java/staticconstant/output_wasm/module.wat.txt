@@ -22,41 +22,39 @@
 (func $m_<init>__@staticconstant.StaticConstant
  (param $this (ref null $staticconstant.StaticConstant))
  (result (ref null $staticconstant.StaticConstant))
- (block $return.label
+ ;;@ staticconstant/StaticConstant.java:18:13
+ (block
+  ;; staticconstant.StaticConstant.$clinit();
   ;;@ staticconstant/StaticConstant.java:18:13
-  (block
-   ;; staticconstant.StaticConstant.$clinit();
-   ;;@ staticconstant/StaticConstant.java:18:13
-   (call $$clinit__void@staticconstant.StaticConstant )
-   ;; Object.this.Object.<init>();
-   ;;@ staticconstant/StaticConstant.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@staticconstant.StaticConstant )
+  ;; Object.this.Object.<init>();
+  ;;@ staticconstant/StaticConstant.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return StaticConstant.this;
+  ;;@ staticconstant/StaticConstant.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void StaticConstant.$clinit()
 (func $$clinit__void@staticconstant.StaticConstant
- (block $return.label
+ ;;@ staticconstant/StaticConstant.java:18:13
+ (block
+  ;; if (staticconstant.StaticConstant.$initialized) return;
   ;;@ staticconstant/StaticConstant.java:18:13
-  (block
-   ;; if (staticconstant.StaticConstant.$initialized) return;
-   ;;@ staticconstant/StaticConstant.java:18:13
-   (if (global.get $f_$initialized__staticconstant_StaticConstant)
-    (then
-     ;; return;
-     ;;@ staticconstant/StaticConstant.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__staticconstant_StaticConstant)
+   (then
+    ;; return;
+    ;;@ staticconstant/StaticConstant.java:18:13
+    (return )
    )
-   ;; (staticconstant.StaticConstant.$initialized = true);
-   ;;@ staticconstant/StaticConstant.java:18:13
-   (global.set $f_$initialized__staticconstant_StaticConstant (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ staticconstant/StaticConstant.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (staticconstant.StaticConstant.$initialized = true);
+  ;;@ staticconstant/StaticConstant.java:18:13
+  (global.set $f_$initialized__staticconstant_StaticConstant (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ staticconstant/StaticConstant.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -64,17 +62,12 @@
 (func $m_getClass__java_lang_Class@staticconstant.StaticConstant
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $staticconstant.StaticConstant))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticconstant.StaticConstant.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getStaticconstant.StaticConstant();
-   (local.set $return.value (call $$getStaticconstant.StaticConstant__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getStaticconstant.StaticConstant();
+  (return (call $$getStaticconstant.StaticConstant__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@staticconstant.StaticConstant)
 

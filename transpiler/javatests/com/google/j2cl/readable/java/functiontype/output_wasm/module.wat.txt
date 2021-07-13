@@ -13,22 +13,20 @@
 
 ;;; void Function.$clinit()
 (func $$clinit__void@functiontype.Function
- (block $return.label
+ ;;@ functiontype/FunctionImpl.java:18:10
+ (block
+  ;; if (functiontype.Function.$initialized) return;
   ;;@ functiontype/FunctionImpl.java:18:10
-  (block
-   ;; if (functiontype.Function.$initialized) return;
-   ;;@ functiontype/FunctionImpl.java:18:10
-   (if (global.get $f_$initialized__functiontype_Function)
-    (then
-     ;; return;
-     ;;@ functiontype/FunctionImpl.java:18:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__functiontype_Function)
+   (then
+    ;; return;
+    ;;@ functiontype/FunctionImpl.java:18:10
+    (return )
    )
-   ;; (functiontype.Function.$initialized = true);
-   ;;@ functiontype/FunctionImpl.java:18:10
-   (global.set $f_$initialized__functiontype_Function (i32.const 1))
   )
+  ;; (functiontype.Function.$initialized = true);
+  ;;@ functiontype/FunctionImpl.java:18:10
+  (global.set $f_$initialized__functiontype_Function (i32.const 1))
  )
 )
 
@@ -36,15 +34,10 @@
 (func $m_getClass__java_lang_Class@functiontype.Function
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.Function();
-   (local.set $return.value (call $$getFunctiontype.Function__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.Function();
+  (return (call $$getFunctiontype.Function__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@functiontype.Function)
 
@@ -66,18 +59,18 @@
 (func $m_<init>__@functiontype.FunctionImpl
  (param $this (ref null $functiontype.FunctionImpl))
  (result (ref null $functiontype.FunctionImpl))
- (block $return.label
+ ;;@ functiontype/FunctionImpl.java:20:13
+ (block
+  ;; functiontype.FunctionImpl.$clinit();
   ;;@ functiontype/FunctionImpl.java:20:13
-  (block
-   ;; functiontype.FunctionImpl.$clinit();
-   ;;@ functiontype/FunctionImpl.java:20:13
-   (call $$clinit__void@functiontype.FunctionImpl )
-   ;; Object.this.Object.<init>();
-   ;;@ functiontype/FunctionImpl.java:20:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@functiontype.FunctionImpl )
+  ;; Object.this.Object.<init>();
+  ;;@ functiontype/FunctionImpl.java:20:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return FunctionImpl.this;
+  ;;@ functiontype/FunctionImpl.java:20:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void FunctionImpl.test(Function f)
@@ -86,35 +79,31 @@
  (param $f (ref null $java.lang.Object))
  (local $this (ref null $functiontype.FunctionImpl))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $functiontype.FunctionImpl.rtt)))
- (block $return.label
-  ;;@ functiontype/FunctionImpl.java:21:14
-  (block
-  )
+ ;;@ functiontype/FunctionImpl.java:21:14
+ (block
  )
 )
 (elem declare func $m_test__functiontype_Function__void@functiontype.FunctionImpl)
 
 ;;; void FunctionImpl.$clinit()
 (func $$clinit__void@functiontype.FunctionImpl
- (block $return.label
+ ;;@ functiontype/FunctionImpl.java:20:13
+ (block
+  ;; if (functiontype.FunctionImpl.$initialized) return;
   ;;@ functiontype/FunctionImpl.java:20:13
-  (block
-   ;; if (functiontype.FunctionImpl.$initialized) return;
-   ;;@ functiontype/FunctionImpl.java:20:13
-   (if (global.get $f_$initialized__functiontype_FunctionImpl)
-    (then
-     ;; return;
-     ;;@ functiontype/FunctionImpl.java:20:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__functiontype_FunctionImpl)
+   (then
+    ;; return;
+    ;;@ functiontype/FunctionImpl.java:20:13
+    (return )
    )
-   ;; (functiontype.FunctionImpl.$initialized = true);
-   ;;@ functiontype/FunctionImpl.java:20:13
-   (global.set $f_$initialized__functiontype_FunctionImpl (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ functiontype/FunctionImpl.java:20:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (functiontype.FunctionImpl.$initialized = true);
+  ;;@ functiontype/FunctionImpl.java:20:13
+  (global.set $f_$initialized__functiontype_FunctionImpl (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ functiontype/FunctionImpl.java:20:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -122,17 +111,12 @@
 (func $m_getClass__java_lang_Class@functiontype.FunctionImpl
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $functiontype.FunctionImpl))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $functiontype.FunctionImpl.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.FunctionImpl();
-   (local.set $return.value (call $$getFunctiontype.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.FunctionImpl();
+  (return (call $$getFunctiontype.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@functiontype.FunctionImpl)
 

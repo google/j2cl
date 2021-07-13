@@ -31,41 +31,39 @@
 (func $m_<init>___$pp_rawtype@rawtype.RawType
  (param $this (ref null $rawtype.RawType))
  (result (ref null $rawtype.RawType))
- (block $return.label
+ ;;@ rawtype/RawType.java:19:6
+ (block
+  ;; rawtype.RawType.$clinit();
   ;;@ rawtype/RawType.java:19:6
-  (block
-   ;; rawtype.RawType.$clinit();
-   ;;@ rawtype/RawType.java:19:6
-   (call $$clinit__void@rawtype.RawType )
-   ;; Object.this.Object.<init>();
-   ;;@ rawtype/RawType.java:19:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@rawtype.RawType )
+  ;; Object.this.Object.<init>();
+  ;;@ rawtype/RawType.java:19:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return RawType.this;
+  ;;@ rawtype/RawType.java:19:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void RawType.$clinit()
 (func $$clinit__void@rawtype.RawType
- (block $return.label
+ ;;@ rawtype/RawType.java:19:6
+ (block
+  ;; if (rawtype.RawType.$initialized) return;
   ;;@ rawtype/RawType.java:19:6
-  (block
-   ;; if (rawtype.RawType.$initialized) return;
-   ;;@ rawtype/RawType.java:19:6
-   (if (global.get $f_$initialized__rawtype_RawType)
-    (then
-     ;; return;
-     ;;@ rawtype/RawType.java:19:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__rawtype_RawType)
+   (then
+    ;; return;
+    ;;@ rawtype/RawType.java:19:6
+    (return )
    )
-   ;; (rawtype.RawType.$initialized = true);
-   ;;@ rawtype/RawType.java:19:6
-   (global.set $f_$initialized__rawtype_RawType (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ rawtype/RawType.java:19:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (rawtype.RawType.$initialized = true);
+  ;;@ rawtype/RawType.java:19:6
+  (global.set $f_$initialized__rawtype_RawType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ rawtype/RawType.java:19:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -73,17 +71,12 @@
 (func $m_getClass__java_lang_Class@rawtype.RawType
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType();
-   (local.set $return.value (call $$getRawtype.RawType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType();
+  (return (call $$getRawtype.RawType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@rawtype.RawType)
 
@@ -96,32 +89,28 @@
 (func $m_f__rawtype_RawType__void@rawtype.RawType.I
  (param $this (ref null $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
- (block $return.label
-  ;;@ rawtype/RawType.java:23:17
-  (block
-  )
+ ;;@ rawtype/RawType.java:23:17
+ (block
  )
 )
 (elem declare func $m_f__rawtype_RawType__void@rawtype.RawType.I)
 
 ;;; void I.$clinit()
 (func $$clinit__void@rawtype.RawType.I
- (block $return.label
+ ;;@ rawtype/RawType.java:22:12
+ (block
+  ;; if (rawtype.RawType.I.$initialized) return;
   ;;@ rawtype/RawType.java:22:12
-  (block
-   ;; if (rawtype.RawType.I.$initialized) return;
-   ;;@ rawtype/RawType.java:22:12
-   (if (global.get $f_$initialized__rawtype_RawType_I)
-    (then
-     ;; return;
-     ;;@ rawtype/RawType.java:22:12
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__rawtype_RawType_I)
+   (then
+    ;; return;
+    ;;@ rawtype/RawType.java:22:12
+    (return )
    )
-   ;; (rawtype.RawType.I.$initialized = true);
-   ;;@ rawtype/RawType.java:22:12
-   (global.set $f_$initialized__rawtype_RawType_I (i32.const 1))
   )
+  ;; (rawtype.RawType.I.$initialized = true);
+  ;;@ rawtype/RawType.java:22:12
+  (global.set $f_$initialized__rawtype_RawType_I (i32.const 1))
  )
 )
 
@@ -129,15 +118,10 @@
 (func $m_getClass__java_lang_Class@rawtype.RawType.I
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.I();
-   (local.set $return.value (call $$getRawtype.RawType.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.I();
+  (return (call $$getRawtype.RawType.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@rawtype.RawType.I)
 
@@ -159,18 +143,18 @@
 (func $m_<init>___$pp_rawtype@rawtype.RawType.RawSubclass
  (param $this (ref null $rawtype.RawType.RawSubclass))
  (result (ref null $rawtype.RawType.RawSubclass))
- (block $return.label
+ ;;@ rawtype/RawType.java:26:15
+ (block
+  ;; rawtype.RawType.RawSubclass.$clinit();
   ;;@ rawtype/RawType.java:26:15
-  (block
-   ;; rawtype.RawType.RawSubclass.$clinit();
-   ;;@ rawtype/RawType.java:26:15
-   (call $$clinit__void@rawtype.RawType.RawSubclass )
-   ;; Object.this.Object.<init>();
-   ;;@ rawtype/RawType.java:26:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@rawtype.RawType.RawSubclass )
+  ;; Object.this.Object.<init>();
+  ;;@ rawtype/RawType.java:26:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return RawSubclass.this;
+  ;;@ rawtype/RawType.java:26:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void RawSubclass.f(RawType t)
@@ -179,38 +163,34 @@
  (param $t (ref null $rawtype.RawType))
  (local $this (ref null $rawtype.RawType.RawSubclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.RawSubclass.rtt)))
- (block $return.label
-  ;;@ rawtype/RawType.java:28:16
-  (block
-  )
+ ;;@ rawtype/RawType.java:28:16
+ (block
  )
 )
 (elem declare func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass)
 
 ;;; void RawSubclass.$clinit()
 (func $$clinit__void@rawtype.RawType.RawSubclass
- (block $return.label
+ ;;@ rawtype/RawType.java:26:15
+ (block
+  ;; if (rawtype.RawType.RawSubclass.$initialized) return;
   ;;@ rawtype/RawType.java:26:15
-  (block
-   ;; if (rawtype.RawType.RawSubclass.$initialized) return;
-   ;;@ rawtype/RawType.java:26:15
-   (if (global.get $f_$initialized__rawtype_RawType_RawSubclass)
-    (then
-     ;; return;
-     ;;@ rawtype/RawType.java:26:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__rawtype_RawType_RawSubclass)
+   (then
+    ;; return;
+    ;;@ rawtype/RawType.java:26:15
+    (return )
    )
-   ;; (rawtype.RawType.RawSubclass.$initialized = true);
-   ;;@ rawtype/RawType.java:26:15
-   (global.set $f_$initialized__rawtype_RawType_RawSubclass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ rawtype/RawType.java:26:15
-   (call $$clinit__void@java.lang.Object )
-   ;; rawtype.RawType.I.$clinit();
-   ;;@ rawtype/RawType.java:26:15
-   (call $$clinit__void@rawtype.RawType.I )
   )
+  ;; (rawtype.RawType.RawSubclass.$initialized = true);
+  ;;@ rawtype/RawType.java:26:15
+  (global.set $f_$initialized__rawtype_RawType_RawSubclass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ rawtype/RawType.java:26:15
+  (call $$clinit__void@java.lang.Object )
+  ;; rawtype.RawType.I.$clinit();
+  ;;@ rawtype/RawType.java:26:15
+  (call $$clinit__void@rawtype.RawType.I )
  )
 )
 
@@ -218,17 +198,12 @@
 (func $m_getClass__java_lang_Class@rawtype.RawType.RawSubclass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.RawSubclass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.RawSubclass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.RawSubclass();
-   (local.set $return.value (call $$getRawtype.RawType.RawSubclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.RawSubclass();
+  (return (call $$getRawtype.RawType.RawSubclass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@rawtype.RawType.RawSubclass)
 

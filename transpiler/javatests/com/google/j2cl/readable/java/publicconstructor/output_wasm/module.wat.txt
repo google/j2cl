@@ -21,41 +21,39 @@
 (func $m_<init>__@publicconstructor.PublicConstructor
  (param $this (ref null $publicconstructor.PublicConstructor))
  (result (ref null $publicconstructor.PublicConstructor))
- (block $return.label
+ ;;@ publicconstructor/PublicConstructor.java:19:9
+ (block
+  ;; publicconstructor.PublicConstructor.$clinit();
   ;;@ publicconstructor/PublicConstructor.java:19:9
-  (block
-   ;; publicconstructor.PublicConstructor.$clinit();
-   ;;@ publicconstructor/PublicConstructor.java:19:9
-   (call $$clinit__void@publicconstructor.PublicConstructor )
-   ;; Object.this.Object.<init>();
-   ;;@ publicconstructor/PublicConstructor.java:19:9
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@publicconstructor.PublicConstructor )
+  ;; Object.this.Object.<init>();
+  ;;@ publicconstructor/PublicConstructor.java:19:9
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return PublicConstructor.this;
+  ;;@ publicconstructor/PublicConstructor.java:19:9
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void PublicConstructor.$clinit()
 (func $$clinit__void@publicconstructor.PublicConstructor
- (block $return.label
+ ;;@ publicconstructor/PublicConstructor.java:18:13
+ (block
+  ;; if (publicconstructor.PublicConstructor.$initialized) return;
   ;;@ publicconstructor/PublicConstructor.java:18:13
-  (block
-   ;; if (publicconstructor.PublicConstructor.$initialized) return;
-   ;;@ publicconstructor/PublicConstructor.java:18:13
-   (if (global.get $f_$initialized__publicconstructor_PublicConstructor)
-    (then
-     ;; return;
-     ;;@ publicconstructor/PublicConstructor.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__publicconstructor_PublicConstructor)
+   (then
+    ;; return;
+    ;;@ publicconstructor/PublicConstructor.java:18:13
+    (return )
    )
-   ;; (publicconstructor.PublicConstructor.$initialized = true);
-   ;;@ publicconstructor/PublicConstructor.java:18:13
-   (global.set $f_$initialized__publicconstructor_PublicConstructor (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ publicconstructor/PublicConstructor.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (publicconstructor.PublicConstructor.$initialized = true);
+  ;;@ publicconstructor/PublicConstructor.java:18:13
+  (global.set $f_$initialized__publicconstructor_PublicConstructor (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ publicconstructor/PublicConstructor.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -63,17 +61,12 @@
 (func $m_getClass__java_lang_Class@publicconstructor.PublicConstructor
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $publicconstructor.PublicConstructor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $publicconstructor.PublicConstructor.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getPublicconstructor.PublicConstructor();
-   (local.set $return.value (call $$getPublicconstructor.PublicConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getPublicconstructor.PublicConstructor();
+  (return (call $$getPublicconstructor.PublicConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@publicconstructor.PublicConstructor)
 

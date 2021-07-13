@@ -21,41 +21,39 @@
 (func $m_<init>__@supercalldefault.SuperCallDefault
  (param $this (ref null $supercalldefault.SuperCallDefault))
  (result (ref null $supercalldefault.SuperCallDefault))
- (block $return.label
+ ;;@ supercalldefault/SuperCallDefault.java:19:9
+ (block
+  ;; supercalldefault.SuperCallDefault.$clinit();
   ;;@ supercalldefault/SuperCallDefault.java:19:9
-  (block
-   ;; supercalldefault.SuperCallDefault.$clinit();
-   ;;@ supercalldefault/SuperCallDefault.java:19:9
-   (call $$clinit__void@supercalldefault.SuperCallDefault )
-   ;; Object.this.Object.<init>();
-   ;;@ supercalldefault/SuperCallDefault.java:20:4
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@supercalldefault.SuperCallDefault )
+  ;; Object.this.Object.<init>();
+  ;;@ supercalldefault/SuperCallDefault.java:20:4
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return SuperCallDefault.this;
+  ;;@ supercalldefault/SuperCallDefault.java:19:9
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void SuperCallDefault.$clinit()
 (func $$clinit__void@supercalldefault.SuperCallDefault
- (block $return.label
+ ;;@ supercalldefault/SuperCallDefault.java:18:13
+ (block
+  ;; if (supercalldefault.SuperCallDefault.$initialized) return;
   ;;@ supercalldefault/SuperCallDefault.java:18:13
-  (block
-   ;; if (supercalldefault.SuperCallDefault.$initialized) return;
-   ;;@ supercalldefault/SuperCallDefault.java:18:13
-   (if (global.get $f_$initialized__supercalldefault_SuperCallDefault)
-    (then
-     ;; return;
-     ;;@ supercalldefault/SuperCallDefault.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__supercalldefault_SuperCallDefault)
+   (then
+    ;; return;
+    ;;@ supercalldefault/SuperCallDefault.java:18:13
+    (return )
    )
-   ;; (supercalldefault.SuperCallDefault.$initialized = true);
-   ;;@ supercalldefault/SuperCallDefault.java:18:13
-   (global.set $f_$initialized__supercalldefault_SuperCallDefault (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ supercalldefault/SuperCallDefault.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (supercalldefault.SuperCallDefault.$initialized = true);
+  ;;@ supercalldefault/SuperCallDefault.java:18:13
+  (global.set $f_$initialized__supercalldefault_SuperCallDefault (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ supercalldefault/SuperCallDefault.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -63,17 +61,12 @@
 (func $m_getClass__java_lang_Class@supercalldefault.SuperCallDefault
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $supercalldefault.SuperCallDefault))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supercalldefault.SuperCallDefault.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSupercalldefault.SuperCallDefault();
-   (local.set $return.value (call $$getSupercalldefault.SuperCallDefault__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSupercalldefault.SuperCallDefault();
+  (return (call $$getSupercalldefault.SuperCallDefault__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@supercalldefault.SuperCallDefault)
 

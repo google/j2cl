@@ -22,22 +22,20 @@
 
 ;;; void GenericInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterface
- (block $return.label
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
+ (block
+  ;; if (implementsgenericinterface.GenericInterface.$initialized) return;
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
-  (block
-   ;; if (implementsgenericinterface.GenericInterface.$initialized) return;
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
-   (if (global.get $f_$initialized__implementsgenericinterface_GenericInterface)
-    (then
-     ;; return;
-     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__implementsgenericinterface_GenericInterface)
+   (then
+    ;; return;
+    ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
+    (return )
    )
-   ;; (implementsgenericinterface.GenericInterface.$initialized = true);
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
-   (global.set $f_$initialized__implementsgenericinterface_GenericInterface (i32.const 1))
   )
+  ;; (implementsgenericinterface.GenericInterface.$initialized = true);
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:18:10
+  (global.set $f_$initialized__implementsgenericinterface_GenericInterface (i32.const 1))
  )
 )
 
@@ -45,15 +43,10 @@
 (func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterface();
-   (local.set $return.value (call $$getImplementsgenericinterface.GenericInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterface();
+  (return (call $$getImplementsgenericinterface.GenericInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface)
 
@@ -63,22 +56,20 @@
 
 ;;; void GenericSubInterface.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericSubInterface
- (block $return.label
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
+ (block
+  ;; if (implementsgenericinterface.GenericSubInterface.$initialized) return;
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
-  (block
-   ;; if (implementsgenericinterface.GenericSubInterface.$initialized) return;
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
-   (if (global.get $f_$initialized__implementsgenericinterface_GenericSubInterface)
-    (then
-     ;; return;
-     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__implementsgenericinterface_GenericSubInterface)
+   (then
+    ;; return;
+    ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
+    (return )
    )
-   ;; (implementsgenericinterface.GenericSubInterface.$initialized = true);
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
-   (global.set $f_$initialized__implementsgenericinterface_GenericSubInterface (i32.const 1))
   )
+  ;; (implementsgenericinterface.GenericSubInterface.$initialized = true);
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:20:10
+  (global.set $f_$initialized__implementsgenericinterface_GenericSubInterface (i32.const 1))
  )
 )
 
@@ -86,15 +77,10 @@
 (func $m_getClass__java_lang_Class@implementsgenericinterface.GenericSubInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericSubInterface();
-   (local.set $return.value (call $$getImplementsgenericinterface.GenericSubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericSubInterface();
+  (return (call $$getImplementsgenericinterface.GenericSubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericSubInterface)
 
@@ -115,41 +101,39 @@
 (func $m_<init>___$pp_implementsgenericinterface@implementsgenericinterface.GenericInterfaceGenericImpl
  (param $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (result (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
- (block $return.label
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+ (block
+  ;; implementsgenericinterface.GenericInterfaceGenericImpl.$clinit();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-  (block
-   ;; implementsgenericinterface.GenericInterfaceGenericImpl.$clinit();
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-   (call $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl )
-   ;; Object.this.Object.<init>();
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl )
+  ;; Object.this.Object.<init>();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return GenericInterfaceGenericImpl.this;
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void GenericInterfaceGenericImpl.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl
- (block $return.label
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+ (block
+  ;; if (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized) return;
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-  (block
-   ;; if (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized) return;
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-   (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl)
-    (then
-     ;; return;
-     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl)
+   (then
+    ;; return;
+    ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+    (return )
    )
-   ;; (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized = true);
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-   (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (implementsgenericinterface.GenericInterfaceGenericImpl.$initialized = true);
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+  (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceGenericImpl (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -157,17 +141,12 @@
 (func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceGenericImpl();
-   (local.set $return.value (call $$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceGenericImpl();
+  (return (call $$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
 
@@ -188,41 +167,39 @@
 (func $m_<init>__@implementsgenericinterface.GenericInterfaceImpl
  (param $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (result (ref null $implementsgenericinterface.GenericInterfaceImpl))
- (block $return.label
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+ (block
+  ;; implementsgenericinterface.GenericInterfaceImpl.$clinit();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-  (block
-   ;; implementsgenericinterface.GenericInterfaceImpl.$clinit();
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-   (call $$clinit__void@implementsgenericinterface.GenericInterfaceImpl )
-   ;; Object.this.Object.<init>();
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@implementsgenericinterface.GenericInterfaceImpl )
+  ;; Object.this.Object.<init>();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return GenericInterfaceImpl.this;
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void GenericInterfaceImpl.$clinit()
 (func $$clinit__void@implementsgenericinterface.GenericInterfaceImpl
- (block $return.label
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+ (block
+  ;; if (implementsgenericinterface.GenericInterfaceImpl.$initialized) return;
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-  (block
-   ;; if (implementsgenericinterface.GenericInterfaceImpl.$initialized) return;
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-   (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceImpl)
-    (then
-     ;; return;
-     ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__implementsgenericinterface_GenericInterfaceImpl)
+   (then
+    ;; return;
+    ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+    (return )
    )
-   ;; (implementsgenericinterface.GenericInterfaceImpl.$initialized = true);
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-   (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (implementsgenericinterface.GenericInterfaceImpl.$initialized = true);
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+  (global.set $f_$initialized__implementsgenericinterface_GenericInterfaceImpl (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -230,17 +207,12 @@
 (func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $implementsgenericinterface.GenericInterfaceImpl.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceImpl();
-   (local.set $return.value (call $$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceImpl();
+  (return (call $$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl)
 

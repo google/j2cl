@@ -21,41 +21,39 @@
 (func $m_<init>__@importsfullyqualified.ImportsFullyQualified
  (param $this (ref null $importsfullyqualified.ImportsFullyQualified))
  (result (ref null $importsfullyqualified.ImportsFullyQualified))
- (block $return.label
+ ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+ (block
+  ;; importsfullyqualified.ImportsFullyQualified.$clinit();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-  (block
-   ;; importsfullyqualified.ImportsFullyQualified.$clinit();
-   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-   (call $$clinit__void@importsfullyqualified.ImportsFullyQualified )
-   ;; Object.this.Object.<init>();
-   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@importsfullyqualified.ImportsFullyQualified )
+  ;; Object.this.Object.<init>();
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return ImportsFullyQualified.this;
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void ImportsFullyQualified.$clinit()
 (func $$clinit__void@importsfullyqualified.ImportsFullyQualified
- (block $return.label
+ ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+ (block
+  ;; if (importsfullyqualified.ImportsFullyQualified.$initialized) return;
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-  (block
-   ;; if (importsfullyqualified.ImportsFullyQualified.$initialized) return;
-   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-   (if (global.get $f_$initialized__importsfullyqualified_ImportsFullyQualified)
-    (then
-     ;; return;
-     ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__importsfullyqualified_ImportsFullyQualified)
+   (then
+    ;; return;
+    ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+    (return )
    )
-   ;; (importsfullyqualified.ImportsFullyQualified.$initialized = true);
-   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-   (global.set $f_$initialized__importsfullyqualified_ImportsFullyQualified (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (importsfullyqualified.ImportsFullyQualified.$initialized = true);
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+  (global.set $f_$initialized__importsfullyqualified_ImportsFullyQualified (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -63,17 +61,12 @@
 (func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $importsfullyqualified.ImportsFullyQualified))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $importsfullyqualified.ImportsFullyQualified.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getImportsfullyqualified.ImportsFullyQualified();
-   (local.set $return.value (call $$getImportsfullyqualified.ImportsFullyQualified__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getImportsfullyqualified.ImportsFullyQualified();
+  (return (call $$getImportsfullyqualified.ImportsFullyQualified__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
 

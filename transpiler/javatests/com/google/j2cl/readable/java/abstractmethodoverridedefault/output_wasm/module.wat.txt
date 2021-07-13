@@ -45,41 +45,39 @@
 (func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+ (block
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (block
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault )
-   ;; Object.this.Object.<init>();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault )
+  ;; Object.this.Object.<init>();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return AbstractMethodOverrideDefault.this;
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AbstractMethodOverrideDefault.$clinit()
 (func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+ (block
+  ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$initialized) return;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (block
-   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$initialized) return;
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-   (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault)
-    (then
-     ;; return;
-     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault)
+   (then
+    ;; return;
+    ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+    (return )
    )
-   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$initialized = true);
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-   (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.$initialized = true);
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+  (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -87,17 +85,12 @@
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault();
-   (local.set $return.value (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault();
+  (return (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
 
@@ -110,32 +103,28 @@
 ;;; void I.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
  (param $this (ref null $java.lang.Object))
- (block $return.label
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:22:17
-  (block
-  )
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:22:17
+ (block
  )
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I)
 
 ;;; void I.$clinit()
 (func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:19:12
+ (block
+  ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$initialized) return;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:19:12
-  (block
-   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$initialized) return;
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:19:12
-   (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I)
-    (then
-     ;; return;
-     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:19:12
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I)
+   (then
+    ;; return;
+    ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:19:12
+    (return )
    )
-   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$initialized = true);
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:19:12
-   (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I (i32.const 1))
   )
+  ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$initialized = true);
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:19:12
+  (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_I (i32.const 1))
  )
 )
 
@@ -143,15 +132,10 @@
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.I();
-   (local.set $return.value (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.I();
+  (return (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I)
 
@@ -164,32 +148,28 @@
 ;;; void J.foo()
 (func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
  (param $this (ref null $java.lang.Object))
- (block $return.label
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:26:17
-  (block
-  )
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:26:17
+ (block
  )
 )
 (elem declare func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J)
 
 ;;; void J.$clinit()
 (func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
+ (block
+  ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$initialized) return;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
-  (block
-   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$initialized) return;
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
-   (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J)
-    (then
-     ;; return;
-     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J)
+   (then
+    ;; return;
+    ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
+    (return )
    )
-   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$initialized = true);
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
-   (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J (i32.const 1))
   )
+  ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$initialized = true);
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:25:12
+  (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_J (i32.const 1))
  )
 )
 
@@ -197,15 +177,10 @@
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.J();
-   (local.set $return.value (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.J__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.J();
+  (return (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.J__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J)
 
@@ -228,18 +203,18 @@
 (func $m_<init>___$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+ (block
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-  (block
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
-   ;; Object.this.Object.<init>();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
+  ;; Object.this.Object.<init>();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return A.this;
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void A.bar()
@@ -247,41 +222,37 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.rtt)))
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+ (block
+  ;; I.this.bar();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-  (block
-   ;; I.this.bar();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-   (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (local.get $this))
-  )
+  (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (local.get $this))
  )
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
 
 ;;; void A.$clinit()
 (func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+ (block
+  ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$initialized) return;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-  (block
-   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$initialized) return;
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-   (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A)
-    (then
-     ;; return;
-     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A)
+   (then
+    ;; return;
+    ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+    (return )
    )
-   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$initialized = true);
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-   (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-   (call $$clinit__void@java.lang.Object )
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I )
   )
+  ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$initialized = true);
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+  (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_A (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+  (call $$clinit__void@java.lang.Object )
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.$clinit();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I )
  )
 )
 
@@ -304,18 +275,18 @@
 (func $m_<init>___$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+ (block
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-  (block
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B )
-   ;; A.this.A.<init>();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-   (drop (call $m_<init>___$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
-  )
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B )
+  ;; A.this.A.<init>();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+  (drop (call $m_<init>___$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
+  ;; return B.this;
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void B.bar()
@@ -323,19 +294,17 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.rtt)))
- (block $return.label
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:39:16
-  (block
-   ;; if (false) {
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:40:6
-   (if (i32.const 0)
-    (then
-     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:40:17
-     (block
-      ;; B.this.bar();
-      ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:41:8
-      (call_ref (local.get $this)(struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable $m_bar__void (struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B $vtable(local.get $this))))
-     )
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:39:16
+ (block
+  ;; if (false) {
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:40:6
+  (if (i32.const 0)
+   (then
+    ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:40:17
+    (block
+     ;; B.this.bar();
+     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:41:8
+     (call_ref (local.get $this)(struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable $m_bar__void (struct.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B $vtable(local.get $this))))
     )
    )
   )
@@ -345,28 +314,26 @@
 
 ;;; void B.$clinit()
 (func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+ (block
+  ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$initialized) return;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-  (block
-   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$initialized) return;
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-   (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B)
-    (then
-     ;; return;
-     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B)
+   (then
+    ;; return;
+    ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+    (return )
    )
-   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$initialized = true);
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-   (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B (i32.const 1))
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J )
   )
+  ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$initialized = true);
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+  (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_B (i32.const 1))
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.$clinit();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J )
  )
 )
 
@@ -389,18 +356,18 @@
 (func $m_<init>___$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+ (block
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-  (block
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C )
-   ;; A.this.A.<init>();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-   (drop (call $m_<init>___$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
-  )
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C )
+  ;; A.this.A.<init>();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+  (drop (call $m_<init>___$pp_abstractmethodoverridedefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
+  ;; return C.this;
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void C.foo()
@@ -408,10 +375,8 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
- (block $return.label
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:47:16
-  (block
-  )
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:47:16
+ (block
  )
 )
 (elem declare func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
@@ -421,38 +386,34 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
- (block $return.label
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:49:16
-  (block
-   ;; I.this.bar();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:50:6
-   (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (local.get $this))
-  )
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:49:16
+ (block
+  ;; I.this.bar();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:50:6
+  (call $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I (local.get $this))
  )
 )
 (elem declare func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
 
 ;;; void C.$clinit()
 (func $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
- (block $return.label
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+ (block
+  ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$initialized) return;
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-  (block
-   ;; if (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$initialized) return;
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-   (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C)
-    (then
-     ;; return;
-     ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C)
+   (then
+    ;; return;
+    ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+    (return )
    )
-   ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$initialized = true);
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-   (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C (i32.const 1))
-   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
-   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
   )
+  ;; (abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$initialized = true);
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+  (global.set $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C (i32.const 1))
+  ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+  (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
  )
 )
 
@@ -460,17 +421,12 @@
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C();
-   (local.set $return.value (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C();
+  (return (call $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
 

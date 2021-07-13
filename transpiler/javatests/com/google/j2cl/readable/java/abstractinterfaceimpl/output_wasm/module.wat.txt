@@ -14,22 +14,20 @@
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@abstractinterfaceimpl.MyInterface
- (block $return.label
+ ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+ (block
+  ;; if (abstractinterfaceimpl.MyInterface.$initialized) return;
   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
-  (block
-   ;; if (abstractinterfaceimpl.MyInterface.$initialized) return;
-   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
-   (if (global.get $f_$initialized__abstractinterfaceimpl_MyInterface)
-    (then
-     ;; return;
-     ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractinterfaceimpl_MyInterface)
+   (then
+    ;; return;
+    ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+    (return )
    )
-   ;; (abstractinterfaceimpl.MyInterface.$initialized = true);
-   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
-   (global.set $f_$initialized__abstractinterfaceimpl_MyInterface (i32.const 1))
   )
+  ;; (abstractinterfaceimpl.MyInterface.$initialized = true);
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:18:10
+  (global.set $f_$initialized__abstractinterfaceimpl_MyInterface (i32.const 1))
  )
 )
 
@@ -37,15 +35,10 @@
 (func $m_getClass__java_lang_Class@abstractinterfaceimpl.MyInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinterfaceimpl.MyInterface();
-   (local.set $return.value (call $$getAbstractinterfaceimpl.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAbstractinterfaceimpl.MyInterface();
+  (return (call $$getAbstractinterfaceimpl.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@abstractinterfaceimpl.MyInterface)
 
@@ -66,40 +59,38 @@
 (func $m_<init>__@abstractinterfaceimpl.AbstractInterfaceImpl
  (param $this (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
  (result (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
- (block $return.label
+ ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+ (block
+  ;; abstractinterfaceimpl.AbstractInterfaceImpl.$clinit();
   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-  (block
-   ;; abstractinterfaceimpl.AbstractInterfaceImpl.$clinit();
-   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-   (call $$clinit__void@abstractinterfaceimpl.AbstractInterfaceImpl )
-   ;; Object.this.Object.<init>();
-   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@abstractinterfaceimpl.AbstractInterfaceImpl )
+  ;; Object.this.Object.<init>();
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return AbstractInterfaceImpl.this;
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AbstractInterfaceImpl.$clinit()
 (func $$clinit__void@abstractinterfaceimpl.AbstractInterfaceImpl
- (block $return.label
+ ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+ (block
+  ;; if (abstractinterfaceimpl.AbstractInterfaceImpl.$initialized) return;
   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-  (block
-   ;; if (abstractinterfaceimpl.AbstractInterfaceImpl.$initialized) return;
-   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-   (if (global.get $f_$initialized__abstractinterfaceimpl_AbstractInterfaceImpl)
-    (then
-     ;; return;
-     ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__abstractinterfaceimpl_AbstractInterfaceImpl)
+   (then
+    ;; return;
+    ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+    (return )
    )
-   ;; (abstractinterfaceimpl.AbstractInterfaceImpl.$initialized = true);
-   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-   (global.set $f_$initialized__abstractinterfaceimpl_AbstractInterfaceImpl (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (abstractinterfaceimpl.AbstractInterfaceImpl.$initialized = true);
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (global.set $f_$initialized__abstractinterfaceimpl_AbstractInterfaceImpl (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
+  (call $$clinit__void@java.lang.Object )
  )
 )

@@ -28,41 +28,39 @@
 (func $m_<init>__@innerclasswithconstructor.InnerClassWithConstructor
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor))
- (block $return.label
+ ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
+ (block
+  ;; innerclasswithconstructor.InnerClassWithConstructor.$clinit();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-  (block
-   ;; innerclasswithconstructor.InnerClassWithConstructor.$clinit();
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor )
-   ;; Object.this.Object.<init>();
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor )
+  ;; Object.this.Object.<init>();
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return InnerClassWithConstructor.this;
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void InnerClassWithConstructor.$clinit()
 (func $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor
- (block $return.label
+ ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
+ (block
+  ;; if (innerclasswithconstructor.InnerClassWithConstructor.$initialized) return;
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-  (block
-   ;; if (innerclasswithconstructor.InnerClassWithConstructor.$initialized) return;
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-   (if (global.get $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor)
-    (then
-     ;; return;
-     ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor)
+   (then
+    ;; return;
+    ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
+    (return )
    )
-   ;; (innerclasswithconstructor.InnerClassWithConstructor.$initialized = true);
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-   (global.set $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (innerclasswithconstructor.InnerClassWithConstructor.$initialized = true);
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
+  (global.set $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -70,17 +68,12 @@
 (func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclasswithconstructor.InnerClassWithConstructor.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor();
-   (local.set $return.value (call $$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor();
+  (return (call $$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
 
@@ -105,24 +98,24 @@
  (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (param $b i32)
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
- (block $return.label
+ ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
+ (block
+  ;; innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$clinit();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
-  (block
-   ;; innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$clinit();
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
-   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
-   ;; (InnerClass.this.this = $outer_this);
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
-   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-   ;; (InnerClass.this.b = ($outer_this.a + b));
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:25:6
-   (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (i32.add (struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this)) (local.get $b)))
-  )
+  (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
+  ;; (InnerClass.this.this = $outer_this);
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
+  (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; (InnerClass.this.b = ($outer_this.a + b));
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:25:6
+  (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (i32.add (struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this)) (local.get $b)))
+  ;; return InnerClass.this;
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; InnerClass(InnerClassWithConstructor $outer_this)
@@ -130,41 +123,39 @@
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
- (block $return.label
+ ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
+ (block
+  ;; innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$clinit();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
-  (block
-   ;; innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$clinit();
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
-   (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
-   ;; InnerClass.this.InnerClass.<init>($outer_this,$outer_this.a);
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:29:6
-   (drop (call $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this)(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this))))
-  )
+  (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
+  ;; InnerClass.this.InnerClass.<init>($outer_this,$outer_this.a);
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:29:6
+  (drop (call $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this)(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this))))
+  ;; return InnerClass.this;
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
- (block $return.label
+ ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
+ (block
+  ;; if (innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$initialized) return;
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
-  (block
-   ;; if (innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$initialized) return;
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
-   (if (global.get $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass)
-    (then
-     ;; return;
-     ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass)
+   (then
+    ;; return;
+    ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
+    (return )
    )
-   ;; (innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$initialized = true);
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
-   (global.set $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (innerclasswithconstructor.InnerClassWithConstructor.InnerClass.$initialized = true);
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
+  (global.set $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:21:8
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -172,17 +163,12 @@
 (func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass();
-   (local.set $return.value (call $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass();
+  (return (call $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
 

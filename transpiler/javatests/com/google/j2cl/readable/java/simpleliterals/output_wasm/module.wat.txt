@@ -22,18 +22,18 @@
 (func $m_<init>__@simpleliterals.SimpleLiterals
  (param $this (ref null $simpleliterals.SimpleLiterals))
  (result (ref null $simpleliterals.SimpleLiterals))
- (block $return.label
+ ;;@ simpleliterals/SimpleLiterals.java:18:13
+ (block
+  ;; simpleliterals.SimpleLiterals.$clinit();
   ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (block
-   ;; simpleliterals.SimpleLiterals.$clinit();
-   ;;@ simpleliterals/SimpleLiterals.java:18:13
-   (call $$clinit__void@simpleliterals.SimpleLiterals )
-   ;; Object.this.Object.<init>();
-   ;;@ simpleliterals/SimpleLiterals.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@simpleliterals.SimpleLiterals )
+  ;; Object.this.Object.<init>();
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return SimpleLiterals.this;
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void SimpleLiterals.main()
@@ -47,53 +47,49 @@
  (local $f (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
- (block $return.label
-  ;;@ simpleliterals/SimpleLiterals.java:20:14
-  (block
-   ;; boolean a = false;
-   ;;@ simpleliterals/SimpleLiterals.java:21:4
-   (local.set $a (i32.const 0))
-   ;; char b = 97;
-   ;;@ simpleliterals/SimpleLiterals.java:22:4
-   (local.set $b (i32.const 97))
-   ;; Object c = null;
-   ;;@ simpleliterals/SimpleLiterals.java:23:4
-   (local.set $c (ref.null $java.lang.Object))
-   ;; int d = 101;
-   ;;@ simpleliterals/SimpleLiterals.java:24:4
-   (local.set $d (i32.const 101))
-   ;; String e = javaemul.internal.StringPool.$getString_|foo|();
-   ;;@ simpleliterals/SimpleLiterals.java:25:4
-   (local.set $e (call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool ))
-   ;; Class<?> f = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
-   ;;@ simpleliterals/SimpleLiterals.java:26:4
-   (local.set $f (call $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-  )
+ ;;@ simpleliterals/SimpleLiterals.java:20:14
+ (block
+  ;; boolean a = false;
+  ;;@ simpleliterals/SimpleLiterals.java:21:4
+  (local.set $a (i32.const 0))
+  ;; char b = 97;
+  ;;@ simpleliterals/SimpleLiterals.java:22:4
+  (local.set $b (i32.const 97))
+  ;; Object c = null;
+  ;;@ simpleliterals/SimpleLiterals.java:23:4
+  (local.set $c (ref.null $java.lang.Object))
+  ;; int d = 101;
+  ;;@ simpleliterals/SimpleLiterals.java:24:4
+  (local.set $d (i32.const 101))
+  ;; String e = javaemul.internal.StringPool.$getString_|foo|();
+  ;;@ simpleliterals/SimpleLiterals.java:25:4
+  (local.set $e (call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool ))
+  ;; Class<?> f = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
+  ;;@ simpleliterals/SimpleLiterals.java:26:4
+  (local.set $f (call $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
 )
 (elem declare func $m_main__void@simpleliterals.SimpleLiterals)
 
 ;;; void SimpleLiterals.$clinit()
 (func $$clinit__void@simpleliterals.SimpleLiterals
- (block $return.label
+ ;;@ simpleliterals/SimpleLiterals.java:18:13
+ (block
+  ;; if (simpleliterals.SimpleLiterals.$initialized) return;
   ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (block
-   ;; if (simpleliterals.SimpleLiterals.$initialized) return;
-   ;;@ simpleliterals/SimpleLiterals.java:18:13
-   (if (global.get $f_$initialized__simpleliterals_SimpleLiterals)
-    (then
-     ;; return;
-     ;;@ simpleliterals/SimpleLiterals.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__simpleliterals_SimpleLiterals)
+   (then
+    ;; return;
+    ;;@ simpleliterals/SimpleLiterals.java:18:13
+    (return )
    )
-   ;; (simpleliterals.SimpleLiterals.$initialized = true);
-   ;;@ simpleliterals/SimpleLiterals.java:18:13
-   (global.set $f_$initialized__simpleliterals_SimpleLiterals (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ simpleliterals/SimpleLiterals.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (simpleliterals.SimpleLiterals.$initialized = true);
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (global.set $f_$initialized__simpleliterals_SimpleLiterals (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -101,17 +97,12 @@
 (func $m_getClass__java_lang_Class@simpleliterals.SimpleLiterals
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
-   (local.set $return.value (call $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
+  (return (call $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@simpleliterals.SimpleLiterals)
 

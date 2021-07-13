@@ -27,41 +27,39 @@
 (func $m_<init>__@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
  (param $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
  (result (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
- (block $return.label
+ ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
+ (block
+  ;; jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$clinit();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-  (block
-   ;; jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$clinit();
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-   (call $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace )
-   ;; Object.this.Object.<init>();
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace )
+  ;; Object.this.Object.<init>();
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return JsTypeInnerClassWithNamespace.this;
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void JsTypeInnerClassWithNamespace.$clinit()
 (func $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
- (block $return.label
+ ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
+ (block
+  ;; if (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$initialized) return;
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-  (block
-   ;; if (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$initialized) return;
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-   (if (global.get $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace)
-    (then
-     ;; return;
-     ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace)
+   (then
+    ;; return;
+    ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
+    (return )
    )
-   ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$initialized = true);
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-   (global.set $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.$initialized = true);
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
+  (global.set $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -69,17 +67,12 @@
 (func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace();
-   (local.set $return.value (call $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace();
+  (return (call $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)
 
@@ -100,41 +93,39 @@
 (func $m_<init>___$pp_jstypeinnerclasswithnamespace@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
  (param $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
  (result (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
- (block $return.label
+ ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
+ (block
+  ;; jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$clinit();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-  (block
-   ;; jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$clinit();
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-   (call $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass )
-   ;; Object.this.Object.<init>();
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass )
+  ;; Object.this.Object.<init>();
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return InnerClass.this;
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
- (block $return.label
+ ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
+ (block
+  ;; if (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$initialized) return;
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-  (block
-   ;; if (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$initialized) return;
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-   (if (global.get $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass)
-    (then
-     ;; return;
-     ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass)
+   (then
+    ;; return;
+    ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
+    (return )
    )
-   ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$initialized = true);
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-   (global.set $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.$initialized = true);
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
+  (global.set $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -142,17 +133,12 @@
 (func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass();
-   (local.set $return.value (call $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass();
+  (return (call $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)
 

@@ -21,48 +21,46 @@
 (func $m_<init>__@staticblocklocalvar.StaticBlockLocalVar
  (param $this (ref null $staticblocklocalvar.StaticBlockLocalVar))
  (result (ref null $staticblocklocalvar.StaticBlockLocalVar))
- (block $return.label
+ ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
+ (block
+  ;; staticblocklocalvar.StaticBlockLocalVar.$clinit();
   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-  (block
-   ;; staticblocklocalvar.StaticBlockLocalVar.$clinit();
-   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-   (call $$clinit__void@staticblocklocalvar.StaticBlockLocalVar )
-   ;; Object.this.Object.<init>();
-   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@staticblocklocalvar.StaticBlockLocalVar )
+  ;; Object.this.Object.<init>();
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return StaticBlockLocalVar.this;
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void StaticBlockLocalVar.$clinit()
 (func $$clinit__void@staticblocklocalvar.StaticBlockLocalVar
  (local $i i32)
- (block $return.label
+ ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
+ (block
+  ;; if (staticblocklocalvar.StaticBlockLocalVar.$initialized) return;
   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-  (block
-   ;; if (staticblocklocalvar.StaticBlockLocalVar.$initialized) return;
-   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-   (if (global.get $f_$initialized__staticblocklocalvar_StaticBlockLocalVar)
-    (then
-     ;; return;
-     ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__staticblocklocalvar_StaticBlockLocalVar)
+   (then
+    ;; return;
+    ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
+    (return )
    )
-   ;; (staticblocklocalvar.StaticBlockLocalVar.$initialized = true);
-   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-   (global.set $f_$initialized__staticblocklocalvar_StaticBlockLocalVar (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-   (call $$clinit__void@java.lang.Object )
-   ;; int i = 10;
-   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:21:4
-   (local.set $i (i32.const 10))
-   ;; (i = (i + 20));
-   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:22:4
-   (local.set $i (i32.add (local.get $i) (i32.const 20)))
   )
+  ;; (staticblocklocalvar.StaticBlockLocalVar.$initialized = true);
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
+  (global.set $f_$initialized__staticblocklocalvar_StaticBlockLocalVar (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
+  (call $$clinit__void@java.lang.Object )
+  ;; int i = 10;
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:21:4
+  (local.set $i (i32.const 10))
+  ;; (i = (i + 20));
+  ;;@ staticblocklocalvar/StaticBlockLocalVar.java:22:4
+  (local.set $i (i32.add (local.get $i) (i32.const 20)))
  )
 )
 
@@ -70,17 +68,12 @@
 (func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $staticblocklocalvar.StaticBlockLocalVar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticblocklocalvar.StaticBlockLocalVar.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getStaticblocklocalvar.StaticBlockLocalVar();
-   (local.set $return.value (call $$getStaticblocklocalvar.StaticBlockLocalVar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getStaticblocklocalvar.StaticBlockLocalVar();
+  (return (call $$getStaticblocklocalvar.StaticBlockLocalVar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
 

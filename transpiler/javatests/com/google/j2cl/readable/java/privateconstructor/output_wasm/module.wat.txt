@@ -21,38 +21,36 @@
 (func $m_<init>___$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor
  (param $this (ref null $privateconstructor.PrivateConstructor))
  (result (ref null $privateconstructor.PrivateConstructor))
- (block $return.label
+ ;;@ privateconstructor/PrivateConstructor.java:19:10
+ (block
+  ;; Object.this.Object.<init>();
   ;;@ privateconstructor/PrivateConstructor.java:19:10
-  (block
-   ;; Object.this.Object.<init>();
-   ;;@ privateconstructor/PrivateConstructor.java:19:10
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return PrivateConstructor.this;
+  ;;@ privateconstructor/PrivateConstructor.java:19:10
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void PrivateConstructor.$clinit()
 (func $$clinit__void@privateconstructor.PrivateConstructor
- (block $return.label
+ ;;@ privateconstructor/PrivateConstructor.java:18:13
+ (block
+  ;; if (privateconstructor.PrivateConstructor.$initialized) return;
   ;;@ privateconstructor/PrivateConstructor.java:18:13
-  (block
-   ;; if (privateconstructor.PrivateConstructor.$initialized) return;
-   ;;@ privateconstructor/PrivateConstructor.java:18:13
-   (if (global.get $f_$initialized__privateconstructor_PrivateConstructor)
-    (then
-     ;; return;
-     ;;@ privateconstructor/PrivateConstructor.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__privateconstructor_PrivateConstructor)
+   (then
+    ;; return;
+    ;;@ privateconstructor/PrivateConstructor.java:18:13
+    (return )
    )
-   ;; (privateconstructor.PrivateConstructor.$initialized = true);
-   ;;@ privateconstructor/PrivateConstructor.java:18:13
-   (global.set $f_$initialized__privateconstructor_PrivateConstructor (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ privateconstructor/PrivateConstructor.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (privateconstructor.PrivateConstructor.$initialized = true);
+  ;;@ privateconstructor/PrivateConstructor.java:18:13
+  (global.set $f_$initialized__privateconstructor_PrivateConstructor (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ privateconstructor/PrivateConstructor.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -60,17 +58,12 @@
 (func $m_getClass__java_lang_Class@privateconstructor.PrivateConstructor
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $privateconstructor.PrivateConstructor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $privateconstructor.PrivateConstructor.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getPrivateconstructor.PrivateConstructor();
-   (local.set $return.value (call $$getPrivateconstructor.PrivateConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getPrivateconstructor.PrivateConstructor();
+  (return (call $$getPrivateconstructor.PrivateConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@privateconstructor.PrivateConstructor)
 

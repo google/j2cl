@@ -132,9 +132,9 @@ class StatementTranspiler {
         builder.emitWithMapping(
             returnStatement.getSourcePosition(),
             () -> {
+              builder.newLine();
+              builder.append("(return ");
               if (returnStatement.getExpression() != null) {
-                builder.newLine();
-                builder.append("(local.set $return.value ");
                 // TODO(b/182436577): Replace with renderExpression once renderTypedExpression
                 // is removed.
                 ExpressionTranspiler.renderTypedExpression(
@@ -142,10 +142,8 @@ class StatementTranspiler {
                     returnStatement.getExpression(),
                     builder,
                     environment);
-                builder.append(")");
               }
-              builder.newLine();
-              builder.append("(br $return.label)");
+              builder.append(")");
             });
         return false;
       }

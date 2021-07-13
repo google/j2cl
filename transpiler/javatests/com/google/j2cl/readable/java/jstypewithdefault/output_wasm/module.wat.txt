@@ -25,18 +25,18 @@
 (func $m_<init>__@jstypewithdefault.SomeJsType
  (param $this (ref null $jstypewithdefault.SomeJsType))
  (result (ref null $jstypewithdefault.SomeJsType))
- (block $return.label
+ ;;@ jstypewithdefault/SomeJsType.java:20:13
+ (block
+  ;; jstypewithdefault.SomeJsType.$clinit();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (block
-   ;; jstypewithdefault.SomeJsType.$clinit();
-   ;;@ jstypewithdefault/SomeJsType.java:20:13
-   (call $$clinit__void@jstypewithdefault.SomeJsType )
-   ;; Object.this.Object.<init>();
-   ;;@ jstypewithdefault/SomeJsType.java:20:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jstypewithdefault.SomeJsType )
+  ;; Object.this.Object.<init>();
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return SomeJsType.this;
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void SomeJsType.defaultMethod()
@@ -44,41 +44,37 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypewithdefault.SomeJsType.rtt)))
- (block $return.label
+ ;;@ jstypewithdefault/SomeJsType.java:20:13
+ (block
+  ;; Interface.this.defaultMethod();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (block
-   ;; Interface.this.defaultMethod();
-   ;;@ jstypewithdefault/SomeJsType.java:20:13
-   (call $m_defaultMethod__void@jstypewithdefault.Interface (local.get $this))
-  )
+  (call $m_defaultMethod__void@jstypewithdefault.Interface (local.get $this))
  )
 )
 (elem declare func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
 
 ;;; void SomeJsType.$clinit()
 (func $$clinit__void@jstypewithdefault.SomeJsType
- (block $return.label
+ ;;@ jstypewithdefault/SomeJsType.java:20:13
+ (block
+  ;; if (jstypewithdefault.SomeJsType.$initialized) return;
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (block
-   ;; if (jstypewithdefault.SomeJsType.$initialized) return;
-   ;;@ jstypewithdefault/SomeJsType.java:20:13
-   (if (global.get $f_$initialized__jstypewithdefault_SomeJsType)
-    (then
-     ;; return;
-     ;;@ jstypewithdefault/SomeJsType.java:20:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jstypewithdefault_SomeJsType)
+   (then
+    ;; return;
+    ;;@ jstypewithdefault/SomeJsType.java:20:13
+    (return )
    )
-   ;; (jstypewithdefault.SomeJsType.$initialized = true);
-   ;;@ jstypewithdefault/SomeJsType.java:20:13
-   (global.set $f_$initialized__jstypewithdefault_SomeJsType (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jstypewithdefault/SomeJsType.java:20:13
-   (call $$clinit__void@java.lang.Object )
-   ;; jstypewithdefault.Interface.$clinit();
-   ;;@ jstypewithdefault/SomeJsType.java:20:13
-   (call $$clinit__void@jstypewithdefault.Interface )
   )
+  ;; (jstypewithdefault.SomeJsType.$initialized = true);
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (global.set $f_$initialized__jstypewithdefault_SomeJsType (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (call $$clinit__void@java.lang.Object )
+  ;; jstypewithdefault.Interface.$clinit();
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (call $$clinit__void@jstypewithdefault.Interface )
  )
 )
 
@@ -86,17 +82,12 @@
 (func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jstypewithdefault.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypewithdefault.SomeJsType.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.SomeJsType();
-   (local.set $return.value (call $$getJstypewithdefault.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.SomeJsType();
+  (return (call $$getJstypewithdefault.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType)
 
@@ -108,32 +99,28 @@
 ;;; void Interface.defaultMethod()
 (func $m_defaultMethod__void@jstypewithdefault.Interface
  (param $this (ref null $java.lang.Object))
- (block $return.label
-  ;;@ jstypewithdefault/SomeJsType.java:24:15
-  (block
-  )
+ ;;@ jstypewithdefault/SomeJsType.java:24:15
+ (block
  )
 )
 (elem declare func $m_defaultMethod__void@jstypewithdefault.Interface)
 
 ;;; void Interface.$clinit()
 (func $$clinit__void@jstypewithdefault.Interface
- (block $return.label
+ ;;@ jstypewithdefault/SomeJsType.java:23:10
+ (block
+  ;; if (jstypewithdefault.Interface.$initialized) return;
   ;;@ jstypewithdefault/SomeJsType.java:23:10
-  (block
-   ;; if (jstypewithdefault.Interface.$initialized) return;
-   ;;@ jstypewithdefault/SomeJsType.java:23:10
-   (if (global.get $f_$initialized__jstypewithdefault_Interface)
-    (then
-     ;; return;
-     ;;@ jstypewithdefault/SomeJsType.java:23:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jstypewithdefault_Interface)
+   (then
+    ;; return;
+    ;;@ jstypewithdefault/SomeJsType.java:23:10
+    (return )
    )
-   ;; (jstypewithdefault.Interface.$initialized = true);
-   ;;@ jstypewithdefault/SomeJsType.java:23:10
-   (global.set $f_$initialized__jstypewithdefault_Interface (i32.const 1))
   )
+  ;; (jstypewithdefault.Interface.$initialized = true);
+  ;;@ jstypewithdefault/SomeJsType.java:23:10
+  (global.set $f_$initialized__jstypewithdefault_Interface (i32.const 1))
  )
 )
 
@@ -141,15 +128,10 @@
 (func $m_getClass__java_lang_Class@jstypewithdefault.Interface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.Interface();
-   (local.set $return.value (call $$getJstypewithdefault.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.Interface();
+  (return (call $$getJstypewithdefault.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jstypewithdefault.Interface)
 

@@ -33,41 +33,39 @@
 (func $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass
  (param $this (ref null $subclassgenericclass.GenericClass))
  (result (ref null $subclassgenericclass.GenericClass))
- (block $return.label
+ ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+ (block
+  ;; subclassgenericclass.GenericClass.$clinit();
   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-  (block
-   ;; subclassgenericclass.GenericClass.$clinit();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-   (call $$clinit__void@subclassgenericclass.GenericClass )
-   ;; Object.this.Object.<init>();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@subclassgenericclass.GenericClass )
+  ;; Object.this.Object.<init>();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return GenericClass.this;
+  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void GenericClass.$clinit()
 (func $$clinit__void@subclassgenericclass.GenericClass
- (block $return.label
+ ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+ (block
+  ;; if (subclassgenericclass.GenericClass.$initialized) return;
   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-  (block
-   ;; if (subclassgenericclass.GenericClass.$initialized) return;
-   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-   (if (global.get $f_$initialized__subclassgenericclass_GenericClass)
-    (then
-     ;; return;
-     ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__subclassgenericclass_GenericClass)
+   (then
+    ;; return;
+    ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+    (return )
    )
-   ;; (subclassgenericclass.GenericClass.$initialized = true);
-   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-   (global.set $f_$initialized__subclassgenericclass_GenericClass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (subclassgenericclass.GenericClass.$initialized = true);
+  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+  (global.set $f_$initialized__subclassgenericclass_GenericClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -75,17 +73,12 @@
 (func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.GenericClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.GenericClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericClass();
-   (local.set $return.value (call $$getSubclassgenericclass.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericClass();
+  (return (call $$getSubclassgenericclass.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass)
 
@@ -106,41 +99,39 @@
 (func $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericSubclassGenericClass
  (param $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
  (result (ref null $subclassgenericclass.GenericSubclassGenericClass))
- (block $return.label
+ ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+ (block
+  ;; subclassgenericclass.GenericSubclassGenericClass.$clinit();
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-  (block
-   ;; subclassgenericclass.GenericSubclassGenericClass.$clinit();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-   (call $$clinit__void@subclassgenericclass.GenericSubclassGenericClass )
-   ;; GenericClass.this.GenericClass.<init>();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-   (drop (call $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
-  )
+  (call $$clinit__void@subclassgenericclass.GenericSubclassGenericClass )
+  ;; GenericClass.this.GenericClass.<init>();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+  (drop (call $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
+  ;; return GenericSubclassGenericClass.this;
+  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void GenericSubclassGenericClass.$clinit()
 (func $$clinit__void@subclassgenericclass.GenericSubclassGenericClass
- (block $return.label
+ ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+ (block
+  ;; if (subclassgenericclass.GenericSubclassGenericClass.$initialized) return;
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-  (block
-   ;; if (subclassgenericclass.GenericSubclassGenericClass.$initialized) return;
-   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-   (if (global.get $f_$initialized__subclassgenericclass_GenericSubclassGenericClass)
-    (then
-     ;; return;
-     ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__subclassgenericclass_GenericSubclassGenericClass)
+   (then
+    ;; return;
+    ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+    (return )
    )
-   ;; (subclassgenericclass.GenericSubclassGenericClass.$initialized = true);
-   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-   (global.set $f_$initialized__subclassgenericclass_GenericSubclassGenericClass (i32.const 1))
-   ;; subclassgenericclass.GenericClass.$clinit();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-   (call $$clinit__void@subclassgenericclass.GenericClass )
   )
+  ;; (subclassgenericclass.GenericSubclassGenericClass.$initialized = true);
+  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+  (global.set $f_$initialized__subclassgenericclass_GenericSubclassGenericClass (i32.const 1))
+  ;; subclassgenericclass.GenericClass.$clinit();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+  (call $$clinit__void@subclassgenericclass.GenericClass )
  )
 )
 
@@ -148,17 +139,12 @@
 (func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.GenericSubclassGenericClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericSubclassGenericClass();
-   (local.set $return.value (call $$getSubclassgenericclass.GenericSubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericSubclassGenericClass();
+  (return (call $$getSubclassgenericclass.GenericSubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
 
@@ -179,41 +165,39 @@
 (func $m_<init>__@subclassgenericclass.SubclassGenericClass
  (param $this (ref null $subclassgenericclass.SubclassGenericClass))
  (result (ref null $subclassgenericclass.SubclassGenericClass))
- (block $return.label
+ ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+ (block
+  ;; subclassgenericclass.SubclassGenericClass.$clinit();
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-  (block
-   ;; subclassgenericclass.SubclassGenericClass.$clinit();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-   (call $$clinit__void@subclassgenericclass.SubclassGenericClass )
-   ;; GenericClass.this.GenericClass.<init>();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-   (drop (call $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
-  )
+  (call $$clinit__void@subclassgenericclass.SubclassGenericClass )
+  ;; GenericClass.this.GenericClass.<init>();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+  (drop (call $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
+  ;; return SubclassGenericClass.this;
+  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void SubclassGenericClass.$clinit()
 (func $$clinit__void@subclassgenericclass.SubclassGenericClass
- (block $return.label
+ ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+ (block
+  ;; if (subclassgenericclass.SubclassGenericClass.$initialized) return;
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-  (block
-   ;; if (subclassgenericclass.SubclassGenericClass.$initialized) return;
-   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-   (if (global.get $f_$initialized__subclassgenericclass_SubclassGenericClass)
-    (then
-     ;; return;
-     ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__subclassgenericclass_SubclassGenericClass)
+   (then
+    ;; return;
+    ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+    (return )
    )
-   ;; (subclassgenericclass.SubclassGenericClass.$initialized = true);
-   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-   (global.set $f_$initialized__subclassgenericclass_SubclassGenericClass (i32.const 1))
-   ;; subclassgenericclass.GenericClass.$clinit();
-   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-   (call $$clinit__void@subclassgenericclass.GenericClass )
   )
+  ;; (subclassgenericclass.SubclassGenericClass.$initialized = true);
+  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+  (global.set $f_$initialized__subclassgenericclass_SubclassGenericClass (i32.const 1))
+  ;; subclassgenericclass.GenericClass.$clinit();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+  (call $$clinit__void@subclassgenericclass.GenericClass )
  )
 )
 
@@ -221,17 +205,12 @@
 (func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.SubclassGenericClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.SubclassGenericClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.SubclassGenericClass();
-   (local.set $return.value (call $$getSubclassgenericclass.SubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.SubclassGenericClass();
+  (return (call $$getSubclassgenericclass.SubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass)
 

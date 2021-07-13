@@ -24,91 +24,85 @@
 (func $m_<init>__@jsignore.JsIgnoreExample
  (param $this (ref null $jsignore.JsIgnoreExample))
  (result (ref null $jsignore.JsIgnoreExample))
- (block $return.label
+ ;;@ jsignore/JsIgnoreExample.java:22:13
+ (block
+  ;; jsignore.JsIgnoreExample.$clinit();
   ;;@ jsignore/JsIgnoreExample.java:22:13
-  (block
-   ;; jsignore.JsIgnoreExample.$clinit();
-   ;;@ jsignore/JsIgnoreExample.java:22:13
-   (call $$clinit__void@jsignore.JsIgnoreExample )
-   ;; Object.this.Object.<init>();
-   ;;@ jsignore/JsIgnoreExample.java:22:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsignore.JsIgnoreExample )
+  ;; Object.this.Object.<init>();
+  ;;@ jsignore/JsIgnoreExample.java:22:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return JsIgnoreExample.this;
+  ;;@ jsignore/JsIgnoreExample.java:22:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void JsIgnoreExample.exportedFunction()
 (func $m_exportedFunction__void@jsignore.JsIgnoreExample
- (block $return.label
+ ;;@ jsignore/JsIgnoreExample.java:24:21
+ (block
+  ;; jsignore.JsIgnoreExample.$clinit();
   ;;@ jsignore/JsIgnoreExample.java:24:21
-  (block
-   ;; jsignore.JsIgnoreExample.$clinit();
-   ;;@ jsignore/JsIgnoreExample.java:24:21
-   (call $$clinit__void@jsignore.JsIgnoreExample )
-  )
+  (call $$clinit__void@jsignore.JsIgnoreExample )
  )
 )
 
 ;;; void JsIgnoreExample.notExportedFunction()
 (func $m_notExportedFunction__void@jsignore.JsIgnoreExample
- (block $return.label
+ ;;@ jsignore/JsIgnoreExample.java:27:21
+ (block
+  ;; jsignore.JsIgnoreExample.$clinit();
   ;;@ jsignore/JsIgnoreExample.java:27:21
-  (block
-   ;; jsignore.JsIgnoreExample.$clinit();
-   ;;@ jsignore/JsIgnoreExample.java:27:21
-   (call $$clinit__void@jsignore.JsIgnoreExample )
-  )
+  (call $$clinit__void@jsignore.JsIgnoreExample )
  )
 )
 
 ;;; void JsIgnoreExample.$clinit()
 (func $$clinit__void@jsignore.JsIgnoreExample
- (block $return.label
+ ;;@ jsignore/JsIgnoreExample.java:22:13
+ (block
+  ;; if (jsignore.JsIgnoreExample.$initialized) return;
   ;;@ jsignore/JsIgnoreExample.java:22:13
+  (if (global.get $f_$initialized__jsignore_JsIgnoreExample)
+   (then
+    ;; return;
+    ;;@ jsignore/JsIgnoreExample.java:22:13
+    (return )
+   )
+  )
+  ;; (jsignore.JsIgnoreExample.$initialized = true);
+  ;;@ jsignore/JsIgnoreExample.java:22:13
+  (global.set $f_$initialized__jsignore_JsIgnoreExample (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsignore/JsIgnoreExample.java:22:13
+  (call $$clinit__void@java.lang.Object )
+  ;;@ jsignore/JsIgnoreExample.java:29:2
   (block
-   ;; if (jsignore.JsIgnoreExample.$initialized) return;
-   ;;@ jsignore/JsIgnoreExample.java:22:13
-   (if (global.get $f_$initialized__jsignore_JsIgnoreExample)
-    (then
-     ;; return;
-     ;;@ jsignore/JsIgnoreExample.java:22:13
-     (br $return.label)
-    )
-   )
-   ;; (jsignore.JsIgnoreExample.$initialized = true);
-   ;;@ jsignore/JsIgnoreExample.java:22:13
-   (global.set $f_$initialized__jsignore_JsIgnoreExample (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsignore/JsIgnoreExample.java:22:13
-   (call $$clinit__void@java.lang.Object )
+   ;; jsignore.JsIgnoreExample.$clinit();
    ;;@ jsignore/JsIgnoreExample.java:29:2
-   (block
-    ;; jsignore.JsIgnoreExample.$clinit();
-    ;;@ jsignore/JsIgnoreExample.java:29:2
-    (call $$clinit__void@jsignore.JsIgnoreExample )
-    ;; (jsignore.JsIgnoreExample.exportedField = 10);
-    ;;@ jsignore/JsIgnoreExample.java:29:2
-    (global.set $f_exportedField__jsignore_JsIgnoreExample (i32.const 10))
-   )
+   (call $$clinit__void@jsignore.JsIgnoreExample )
+   ;; (jsignore.JsIgnoreExample.exportedField = 10);
+   ;;@ jsignore/JsIgnoreExample.java:29:2
+   (global.set $f_exportedField__jsignore_JsIgnoreExample (i32.const 10))
+  )
+  ;;@ jsignore/JsIgnoreExample.java:31:2
+  (block
+   ;; jsignore.JsIgnoreExample.$clinit();
    ;;@ jsignore/JsIgnoreExample.java:31:2
-   (block
-    ;; jsignore.JsIgnoreExample.$clinit();
-    ;;@ jsignore/JsIgnoreExample.java:31:2
-    (call $$clinit__void@jsignore.JsIgnoreExample )
-    ;; (jsignore.JsIgnoreExample.notExportedField = 20);
-    ;;@ jsignore/JsIgnoreExample.java:31:2
-    (global.set $f_notExportedField__jsignore_JsIgnoreExample (i32.const 20))
-   )
+   (call $$clinit__void@jsignore.JsIgnoreExample )
+   ;; (jsignore.JsIgnoreExample.notExportedField = 20);
+   ;;@ jsignore/JsIgnoreExample.java:31:2
+   (global.set $f_notExportedField__jsignore_JsIgnoreExample (i32.const 20))
+  )
+  ;;@ jsignore/JsIgnoreExample.java:34:2
+  (block
+   ;; jsignore.JsIgnoreExample.$clinit();
    ;;@ jsignore/JsIgnoreExample.java:34:2
-   (block
-    ;; jsignore.JsIgnoreExample.$clinit();
-    ;;@ jsignore/JsIgnoreExample.java:34:2
-    (call $$clinit__void@jsignore.JsIgnoreExample )
-    ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
-    ;;@ jsignore/JsIgnoreExample.java:34:2
-    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   )
+   (call $$clinit__void@jsignore.JsIgnoreExample )
+   ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
+   ;;@ jsignore/JsIgnoreExample.java:34:2
+   (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
   )
  )
 )
@@ -117,17 +111,12 @@
 (func $m_getClass__java_lang_Class@jsignore.JsIgnoreExample
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsignore.JsIgnoreExample))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsignore.JsIgnoreExample.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsignore.JsIgnoreExample();
-   (local.set $return.value (call $$getJsignore.JsIgnoreExample__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsignore.JsIgnoreExample();
+  (return (call $$getJsignore.JsIgnoreExample__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsignore.JsIgnoreExample)
 

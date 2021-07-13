@@ -23,79 +23,77 @@
 (func $m_<init>__@staticinitializers.StaticInitializers
  (param $this (ref null $staticinitializers.StaticInitializers))
  (result (ref null $staticinitializers.StaticInitializers))
- (block $return.label
+ ;;@ staticinitializers/StaticInitializers.java:18:13
+ (block
+  ;; staticinitializers.StaticInitializers.$clinit();
   ;;@ staticinitializers/StaticInitializers.java:18:13
-  (block
-   ;; staticinitializers.StaticInitializers.$clinit();
-   ;;@ staticinitializers/StaticInitializers.java:18:13
-   (call $$clinit__void@staticinitializers.StaticInitializers )
-   ;; Object.this.Object.<init>();
-   ;;@ staticinitializers/StaticInitializers.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@staticinitializers.StaticInitializers )
+  ;; Object.this.Object.<init>();
+  ;;@ staticinitializers/StaticInitializers.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return StaticInitializers.this;
+  ;;@ staticinitializers/StaticInitializers.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void StaticInitializers.$clinit()
 (func $$clinit__void@staticinitializers.StaticInitializers
  (local $duplicated i32)
  (local $duplicated_1 i32)
- (block $return.label
+ ;;@ staticinitializers/StaticInitializers.java:18:13
+ (block
+  ;; if (staticinitializers.StaticInitializers.$initialized) return;
   ;;@ staticinitializers/StaticInitializers.java:18:13
-  (block
-   ;; if (staticinitializers.StaticInitializers.$initialized) return;
-   ;;@ staticinitializers/StaticInitializers.java:18:13
-   (if (global.get $f_$initialized__staticinitializers_StaticInitializers)
-    (then
-     ;; return;
-     ;;@ staticinitializers/StaticInitializers.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__staticinitializers_StaticInitializers)
+   (then
+    ;; return;
+    ;;@ staticinitializers/StaticInitializers.java:18:13
+    (return )
    )
-   ;; (staticinitializers.StaticInitializers.$initialized = true);
-   ;;@ staticinitializers/StaticInitializers.java:18:13
-   (global.set $f_$initialized__staticinitializers_StaticInitializers (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ staticinitializers/StaticInitializers.java:18:13
-   (call $$clinit__void@java.lang.Object )
-   ;;@ staticinitializers/StaticInitializers.java:19:2
-   (block
-    ;; staticinitializers.StaticInitializers.$clinit();
-    ;;@ staticinitializers/StaticInitializers.java:19:2
-    (call $$clinit__void@staticinitializers.StaticInitializers )
-    ;; (staticinitializers.StaticInitializers.a = 5);
-    ;;@ staticinitializers/StaticInitializers.java:19:2
-    (global.set $f_a__staticinitializers_StaticInitializers (i32.const 5))
-   )
-   ;;@ staticinitializers/StaticInitializers.java:21:2
-   (block
-    ;; staticinitializers.StaticInitializers.$clinit();
-    ;;@ staticinitializers/StaticInitializers.java:21:2
-    (call $$clinit__void@staticinitializers.StaticInitializers )
-    ;; (staticinitializers.StaticInitializers.b = ((staticinitializers.StaticInitializers.$clinit(),staticinitializers.StaticInitializers.a) * 2));
-    ;;@ staticinitializers/StaticInitializers.java:21:2
-    (global.set $f_b__staticinitializers_StaticInitializers (i32.mul (block (result i32)
-     (call $$clinit__void@staticinitializers.StaticInitializers )
-     (global.get $f_a__staticinitializers_StaticInitializers)
-    ) (i32.const 2)))
-   )
-   ;;@ staticinitializers/StaticInitializers.java:24:4
-   (block
-    ;; staticinitializers.StaticInitializers.$clinit();
-    ;;@ staticinitializers/StaticInitializers.java:24:4
-    (call $$clinit__void@staticinitializers.StaticInitializers )
-    ;; (staticinitializers.StaticInitializers.a = 10);
-    ;;@ staticinitializers/StaticInitializers.java:24:4
-    (global.set $f_a__staticinitializers_StaticInitializers (i32.const 10))
-   )
-   ;; int duplicated = 0;
-   ;;@ staticinitializers/StaticInitializers.java:25:4
-   (local.set $duplicated (i32.const 0))
-   ;; int duplicated = 1;
-   ;;@ staticinitializers/StaticInitializers.java:29:4
-   (local.set $duplicated_1 (i32.const 1))
   )
+  ;; (staticinitializers.StaticInitializers.$initialized = true);
+  ;;@ staticinitializers/StaticInitializers.java:18:13
+  (global.set $f_$initialized__staticinitializers_StaticInitializers (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ staticinitializers/StaticInitializers.java:18:13
+  (call $$clinit__void@java.lang.Object )
+  ;;@ staticinitializers/StaticInitializers.java:19:2
+  (block
+   ;; staticinitializers.StaticInitializers.$clinit();
+   ;;@ staticinitializers/StaticInitializers.java:19:2
+   (call $$clinit__void@staticinitializers.StaticInitializers )
+   ;; (staticinitializers.StaticInitializers.a = 5);
+   ;;@ staticinitializers/StaticInitializers.java:19:2
+   (global.set $f_a__staticinitializers_StaticInitializers (i32.const 5))
+  )
+  ;;@ staticinitializers/StaticInitializers.java:21:2
+  (block
+   ;; staticinitializers.StaticInitializers.$clinit();
+   ;;@ staticinitializers/StaticInitializers.java:21:2
+   (call $$clinit__void@staticinitializers.StaticInitializers )
+   ;; (staticinitializers.StaticInitializers.b = ((staticinitializers.StaticInitializers.$clinit(),staticinitializers.StaticInitializers.a) * 2));
+   ;;@ staticinitializers/StaticInitializers.java:21:2
+   (global.set $f_b__staticinitializers_StaticInitializers (i32.mul (block (result i32)
+    (call $$clinit__void@staticinitializers.StaticInitializers )
+    (global.get $f_a__staticinitializers_StaticInitializers)
+   ) (i32.const 2)))
+  )
+  ;;@ staticinitializers/StaticInitializers.java:24:4
+  (block
+   ;; staticinitializers.StaticInitializers.$clinit();
+   ;;@ staticinitializers/StaticInitializers.java:24:4
+   (call $$clinit__void@staticinitializers.StaticInitializers )
+   ;; (staticinitializers.StaticInitializers.a = 10);
+   ;;@ staticinitializers/StaticInitializers.java:24:4
+   (global.set $f_a__staticinitializers_StaticInitializers (i32.const 10))
+  )
+  ;; int duplicated = 0;
+  ;;@ staticinitializers/StaticInitializers.java:25:4
+  (local.set $duplicated (i32.const 0))
+  ;; int duplicated = 1;
+  ;;@ staticinitializers/StaticInitializers.java:29:4
+  (local.set $duplicated_1 (i32.const 1))
  )
 )
 
@@ -103,17 +101,12 @@
 (func $m_getClass__java_lang_Class@staticinitializers.StaticInitializers
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $staticinitializers.StaticInitializers))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticinitializers.StaticInitializers.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getStaticinitializers.StaticInitializers();
-   (local.set $return.value (call $$getStaticinitializers.StaticInitializers__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getStaticinitializers.StaticInitializers();
+  (return (call $$getStaticinitializers.StaticInitializers__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@staticinitializers.StaticInitializers)
 

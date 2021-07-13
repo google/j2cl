@@ -34,41 +34,39 @@
 (func $m_<init>__@annotation.Main
  (param $this (ref null $annotation.Main))
  (result (ref null $annotation.Main))
- (block $return.label
+ ;;@ annotation/Main.java:18:13
+ (block
+  ;; annotation.Main.$clinit();
   ;;@ annotation/Main.java:18:13
-  (block
-   ;; annotation.Main.$clinit();
-   ;;@ annotation/Main.java:18:13
-   (call $$clinit__void@annotation.Main )
-   ;; Object.this.Object.<init>();
-   ;;@ annotation/Main.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@annotation.Main )
+  ;; Object.this.Object.<init>();
+  ;;@ annotation/Main.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Main.this;
+  ;;@ annotation/Main.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void@annotation.Main
- (block $return.label
+ ;;@ annotation/Main.java:18:13
+ (block
+  ;; if (annotation.Main.$initialized) return;
   ;;@ annotation/Main.java:18:13
-  (block
-   ;; if (annotation.Main.$initialized) return;
-   ;;@ annotation/Main.java:18:13
-   (if (global.get $f_$initialized__annotation_Main)
-    (then
-     ;; return;
-     ;;@ annotation/Main.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__annotation_Main)
+   (then
+    ;; return;
+    ;;@ annotation/Main.java:18:13
+    (return )
    )
-   ;; (annotation.Main.$initialized = true);
-   ;;@ annotation/Main.java:18:13
-   (global.set $f_$initialized__annotation_Main (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ annotation/Main.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (annotation.Main.$initialized = true);
+  ;;@ annotation/Main.java:18:13
+  (global.set $f_$initialized__annotation_Main (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ annotation/Main.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -76,17 +74,12 @@
 (func $m_getClass__java_lang_Class@annotation.Main
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main();
-   (local.set $return.value (call $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main();
+  (return (call $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main)
 
@@ -97,22 +90,20 @@
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@annotation.Main.Foo
- (block $return.label
+ ;;@ annotation/Main.java:19:13
+ (block
+  ;; if (annotation.Main.Foo.$initialized) return;
   ;;@ annotation/Main.java:19:13
-  (block
-   ;; if (annotation.Main.Foo.$initialized) return;
-   ;;@ annotation/Main.java:19:13
-   (if (global.get $f_$initialized__annotation_Main_Foo)
-    (then
-     ;; return;
-     ;;@ annotation/Main.java:19:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__annotation_Main_Foo)
+   (then
+    ;; return;
+    ;;@ annotation/Main.java:19:13
+    (return )
    )
-   ;; (annotation.Main.Foo.$initialized = true);
-   ;;@ annotation/Main.java:19:13
-   (global.set $f_$initialized__annotation_Main_Foo (i32.const 1))
   )
+  ;; (annotation.Main.Foo.$initialized = true);
+  ;;@ annotation/Main.java:19:13
+  (global.set $f_$initialized__annotation_Main_Foo (i32.const 1))
  )
 )
 
@@ -120,15 +111,10 @@
 (func $m_getClass__java_lang_Class@annotation.Main.Foo
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Foo();
-   (local.set $return.value (call $$getAnnotation.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Foo();
+  (return (call $$getAnnotation.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Foo)
 
@@ -138,22 +124,20 @@
 
 ;;; void Zoo.$clinit()
 (func $$clinit__void@annotation.Main.Zoo
- (block $return.label
+ ;;@ annotation/Main.java:28:13
+ (block
+  ;; if (annotation.Main.Zoo.$initialized) return;
   ;;@ annotation/Main.java:28:13
-  (block
-   ;; if (annotation.Main.Zoo.$initialized) return;
-   ;;@ annotation/Main.java:28:13
-   (if (global.get $f_$initialized__annotation_Main_Zoo)
-    (then
-     ;; return;
-     ;;@ annotation/Main.java:28:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__annotation_Main_Zoo)
+   (then
+    ;; return;
+    ;;@ annotation/Main.java:28:13
+    (return )
    )
-   ;; (annotation.Main.Zoo.$initialized = true);
-   ;;@ annotation/Main.java:28:13
-   (global.set $f_$initialized__annotation_Main_Zoo (i32.const 1))
   )
+  ;; (annotation.Main.Zoo.$initialized = true);
+  ;;@ annotation/Main.java:28:13
+  (global.set $f_$initialized__annotation_Main_Zoo (i32.const 1))
  )
 )
 
@@ -161,15 +145,10 @@
 (func $m_getClass__java_lang_Class@annotation.Main.Zoo
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Zoo();
-   (local.set $return.value (call $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Zoo();
+  (return (call $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Zoo)
 
@@ -193,71 +172,64 @@
  (param $this (ref null $annotation.Main.Bar))
  (param $$outer_this (ref null $annotation.Main))
  (result (ref null $annotation.Main.Bar))
- (block $return.label
+ ;;@ annotation/Main.java:30:8
+ (block
+  ;; annotation.Main.Bar.$clinit();
   ;;@ annotation/Main.java:30:8
-  (block
-   ;; annotation.Main.Bar.$clinit();
-   ;;@ annotation/Main.java:30:8
-   (call $$clinit__void@annotation.Main.Bar )
-   ;; (Bar.this.this = $outer_this);
-   ;;@ annotation/Main.java:30:8
-   (struct.set $annotation.Main.Bar $$outer_this__annotation_Main_Bar(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ annotation/Main.java:30:8
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@annotation.Main.Bar )
+  ;; (Bar.this.this = $outer_this);
+  ;;@ annotation/Main.java:30:8
+  (struct.set $annotation.Main.Bar $$outer_this__annotation_Main_Bar(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ annotation/Main.java:30:8
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Bar.this;
+  ;;@ annotation/Main.java:30:8
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; int Bar.baz()
 (func $m_baz__int_$pp_annotation@annotation.Main.Bar
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
- (local $return.value i32)
  (local $foo (ref null $java.lang.Object))
  (local $this (ref null $annotation.Main.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.Bar.rtt)))
- (block $return.label
-  ;;@ annotation/Main.java:32:8
-  (block
-   ;; Foo foo = null;
-   ;;@ annotation/Main.java:33:6
-   (local.set $foo (ref.null $java.lang.Object))
-   ;; foo.bar();
-   ;;@ annotation/Main.java:34:6
-   (drop (call_ref (local.get $foo)(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1)) (rtt.canon $annotation.Main.Foo.vtable)) )))
-   ;; return annotation.Main.Foo.CONSTANT;
-   ;;@ annotation/Main.java:35:6
-   (local.set $return.value (global.get $f_CONSTANT__annotation_Main_Foo))
-   (br $return.label)
-  )
+ ;;@ annotation/Main.java:32:8
+ (block
+  ;; Foo foo = null;
+  ;;@ annotation/Main.java:33:6
+  (local.set $foo (ref.null $java.lang.Object))
+  ;; foo.bar();
+  ;;@ annotation/Main.java:34:6
+  (drop (call_ref (local.get $foo)(struct.get $annotation.Main.Foo.vtable $m_bar__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $foo)) (i32.const -1)) (rtt.canon $annotation.Main.Foo.vtable)) )))
+  ;; return annotation.Main.Foo.CONSTANT;
+  ;;@ annotation/Main.java:35:6
+  (return (global.get $f_CONSTANT__annotation_Main_Foo))
  )
- (local.get $return.value)
 )
 (elem declare func $m_baz__int_$pp_annotation@annotation.Main.Bar)
 
 ;;; void Bar.$clinit()
 (func $$clinit__void@annotation.Main.Bar
- (block $return.label
+ ;;@ annotation/Main.java:30:8
+ (block
+  ;; if (annotation.Main.Bar.$initialized) return;
   ;;@ annotation/Main.java:30:8
-  (block
-   ;; if (annotation.Main.Bar.$initialized) return;
-   ;;@ annotation/Main.java:30:8
-   (if (global.get $f_$initialized__annotation_Main_Bar)
-    (then
-     ;; return;
-     ;;@ annotation/Main.java:30:8
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__annotation_Main_Bar)
+   (then
+    ;; return;
+    ;;@ annotation/Main.java:30:8
+    (return )
    )
-   ;; (annotation.Main.Bar.$initialized = true);
-   ;;@ annotation/Main.java:30:8
-   (global.set $f_$initialized__annotation_Main_Bar (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ annotation/Main.java:30:8
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (annotation.Main.Bar.$initialized = true);
+  ;;@ annotation/Main.java:30:8
+  (global.set $f_$initialized__annotation_Main_Bar (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ annotation/Main.java:30:8
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -265,17 +237,12 @@
 (func $m_getClass__java_lang_Class@annotation.Main.Bar
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.Bar.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Bar();
-   (local.set $return.value (call $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Bar();
+  (return (call $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Bar)
 

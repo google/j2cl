@@ -21,41 +21,39 @@
 (func $m_<init>__@boundedtypevariable.BoundedTypeVariable
  (param $this (ref null $boundedtypevariable.BoundedTypeVariable))
  (result (ref null $boundedtypevariable.BoundedTypeVariable))
- (block $return.label
+ ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+ (block
+  ;; boundedtypevariable.BoundedTypeVariable.$clinit();
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (block
-   ;; boundedtypevariable.BoundedTypeVariable.$clinit();
-   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-   (call $$clinit__void@boundedtypevariable.BoundedTypeVariable )
-   ;; Object.this.Object.<init>();
-   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@boundedtypevariable.BoundedTypeVariable )
+  ;; Object.this.Object.<init>();
+  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return BoundedTypeVariable.this;
+  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void BoundedTypeVariable.$clinit()
 (func $$clinit__void@boundedtypevariable.BoundedTypeVariable
- (block $return.label
+ ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+ (block
+  ;; if (boundedtypevariable.BoundedTypeVariable.$initialized) return;
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (block
-   ;; if (boundedtypevariable.BoundedTypeVariable.$initialized) return;
-   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-   (if (global.get $f_$initialized__boundedtypevariable_BoundedTypeVariable)
-    (then
-     ;; return;
-     ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__boundedtypevariable_BoundedTypeVariable)
+   (then
+    ;; return;
+    ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+    (return )
    )
-   ;; (boundedtypevariable.BoundedTypeVariable.$initialized = true);
-   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-   (global.set $f_$initialized__boundedtypevariable_BoundedTypeVariable (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (boundedtypevariable.BoundedTypeVariable.$initialized = true);
+  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+  (global.set $f_$initialized__boundedtypevariable_BoundedTypeVariable (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -63,17 +61,12 @@
 (func $m_getClass__java_lang_Class@boundedtypevariable.BoundedTypeVariable
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $boundedtypevariable.BoundedTypeVariable))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $boundedtypevariable.BoundedTypeVariable.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypevariable.BoundedTypeVariable();
-   (local.set $return.value (call $$getBoundedtypevariable.BoundedTypeVariable__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypevariable.BoundedTypeVariable();
+  (return (call $$getBoundedtypevariable.BoundedTypeVariable__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@boundedtypevariable.BoundedTypeVariable)
 

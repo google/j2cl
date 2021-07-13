@@ -15,22 +15,20 @@
 
 ;;; void BothInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.BothInInterface
- (block $return.label
+ ;;@ equalsandhashcodeininterface/BothInInterface.java:18:17
+ (block
+  ;; if (equalsandhashcodeininterface.BothInInterface.$initialized) return;
   ;;@ equalsandhashcodeininterface/BothInInterface.java:18:17
-  (block
-   ;; if (equalsandhashcodeininterface.BothInInterface.$initialized) return;
-   ;;@ equalsandhashcodeininterface/BothInInterface.java:18:17
-   (if (global.get $f_$initialized__equalsandhashcodeininterface_BothInInterface)
-    (then
-     ;; return;
-     ;;@ equalsandhashcodeininterface/BothInInterface.java:18:17
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__equalsandhashcodeininterface_BothInInterface)
+   (then
+    ;; return;
+    ;;@ equalsandhashcodeininterface/BothInInterface.java:18:17
+    (return )
    )
-   ;; (equalsandhashcodeininterface.BothInInterface.$initialized = true);
-   ;;@ equalsandhashcodeininterface/BothInInterface.java:18:17
-   (global.set $f_$initialized__equalsandhashcodeininterface_BothInInterface (i32.const 1))
   )
+  ;; (equalsandhashcodeininterface.BothInInterface.$initialized = true);
+  ;;@ equalsandhashcodeininterface/BothInInterface.java:18:17
+  (global.set $f_$initialized__equalsandhashcodeininterface_BothInInterface (i32.const 1))
  )
 )
 
@@ -38,15 +36,10 @@
 (func $m_getClass__java_lang_Class@equalsandhashcodeininterface.BothInInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getEqualsandhashcodeininterface.BothInInterface();
-   (local.set $return.value (call $$getEqualsandhashcodeininterface.BothInInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getEqualsandhashcodeininterface.BothInInterface();
+  (return (call $$getEqualsandhashcodeininterface.BothInInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@equalsandhashcodeininterface.BothInInterface)
 
@@ -56,22 +49,20 @@
 
 ;;; void NeitherInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.NeitherInInterface
- (block $return.label
+ ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
+ (block
+  ;; if (equalsandhashcodeininterface.NeitherInInterface.$initialized) return;
   ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
-  (block
-   ;; if (equalsandhashcodeininterface.NeitherInInterface.$initialized) return;
-   ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
-   (if (global.get $f_$initialized__equalsandhashcodeininterface_NeitherInInterface)
-    (then
-     ;; return;
-     ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__equalsandhashcodeininterface_NeitherInInterface)
+   (then
+    ;; return;
+    ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
+    (return )
    )
-   ;; (equalsandhashcodeininterface.NeitherInInterface.$initialized = true);
-   ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
-   (global.set $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (i32.const 1))
   )
+  ;; (equalsandhashcodeininterface.NeitherInInterface.$initialized = true);
+  ;;@ equalsandhashcodeininterface/NeitherInInterface.java:18:17
+  (global.set $f_$initialized__equalsandhashcodeininterface_NeitherInInterface (i32.const 1))
  )
 )
 
@@ -79,15 +70,10 @@
 (func $m_getClass__java_lang_Class@equalsandhashcodeininterface.NeitherInInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getEqualsandhashcodeininterface.NeitherInInterface();
-   (local.set $return.value (call $$getEqualsandhashcodeininterface.NeitherInInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getEqualsandhashcodeininterface.NeitherInInterface();
+  (return (call $$getEqualsandhashcodeininterface.NeitherInInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@equalsandhashcodeininterface.NeitherInInterface)
 
@@ -99,22 +85,20 @@
 
 ;;; void ViaJsMethodInInterface.$clinit()
 (func $$clinit__void@equalsandhashcodeininterface.ViaJsMethodInInterface
- (block $return.label
+ ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
+ (block
+  ;; if (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized) return;
   ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-  (block
-   ;; if (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized) return;
-   ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-   (if (global.get $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface)
-    (then
-     ;; return;
-     ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface)
+   (then
+    ;; return;
+    ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
+    (return )
    )
-   ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized = true);
-   ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
-   (global.set $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (i32.const 1))
   )
+  ;; (equalsandhashcodeininterface.ViaJsMethodInInterface.$initialized = true);
+  ;;@ equalsandhashcodeininterface/ViaJsMethodInInterface.java:23:17
+  (global.set $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (i32.const 1))
  )
 )
 
@@ -122,14 +106,9 @@
 (func $m_getClass__java_lang_Class@equalsandhashcodeininterface.ViaJsMethodInInterface
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getEqualsandhashcodeininterface.ViaJsMethodInInterface();
-   (local.set $return.value (call $$getEqualsandhashcodeininterface.ViaJsMethodInInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getEqualsandhashcodeininterface.ViaJsMethodInInterface();
+  (return (call $$getEqualsandhashcodeininterface.ViaJsMethodInInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@equalsandhashcodeininterface.ViaJsMethodInInterface)

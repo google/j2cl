@@ -23,18 +23,18 @@
 (func $m_<init>__@jsdocreturn.JsDocReturn
  (param $this (ref null $jsdocreturn.JsDocReturn))
  (result (ref null $jsdocreturn.JsDocReturn))
- (block $return.label
+ ;;@ jsdocreturn/JsDocReturn.java:18:13
+ (block
+  ;; jsdocreturn.JsDocReturn.$clinit();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (block
-   ;; jsdocreturn.JsDocReturn.$clinit();
-   ;;@ jsdocreturn/JsDocReturn.java:18:13
-   (call $$clinit__void@jsdocreturn.JsDocReturn )
-   ;; Object.this.Object.<init>();
-   ;;@ jsdocreturn/JsDocReturn.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsdocreturn.JsDocReturn )
+  ;; Object.this.Object.<init>();
+  ;;@ jsdocreturn/JsDocReturn.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return JsDocReturn.this;
+  ;;@ jsdocreturn/JsDocReturn.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void JsDocReturn.test1()
@@ -42,10 +42,8 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsdocreturn.JsDocReturn))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
- (block $return.label
-  ;;@ jsdocreturn/JsDocReturn.java:19:14
-  (block
-  )
+ ;;@ jsdocreturn/JsDocReturn.java:19:14
+ (block
  )
 )
 (elem declare func $m_test1__void@jsdocreturn.JsDocReturn)
@@ -54,43 +52,36 @@
 (func $m_test2__int@jsdocreturn.JsDocReturn
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
- (local $return.value i32)
  (local $this (ref null $jsdocreturn.JsDocReturn))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
- (block $return.label
-  ;;@ jsdocreturn/JsDocReturn.java:21:13
-  (block
-   ;; return 1;
-   ;;@ jsdocreturn/JsDocReturn.java:22:4
-   (local.set $return.value (i32.const 1))
-   (br $return.label)
-  )
+ ;;@ jsdocreturn/JsDocReturn.java:21:13
+ (block
+  ;; return 1;
+  ;;@ jsdocreturn/JsDocReturn.java:22:4
+  (return (i32.const 1))
  )
- (local.get $return.value)
 )
 (elem declare func $m_test2__int@jsdocreturn.JsDocReturn)
 
 ;;; void JsDocReturn.$clinit()
 (func $$clinit__void@jsdocreturn.JsDocReturn
- (block $return.label
+ ;;@ jsdocreturn/JsDocReturn.java:18:13
+ (block
+  ;; if (jsdocreturn.JsDocReturn.$initialized) return;
   ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (block
-   ;; if (jsdocreturn.JsDocReturn.$initialized) return;
-   ;;@ jsdocreturn/JsDocReturn.java:18:13
-   (if (global.get $f_$initialized__jsdocreturn_JsDocReturn)
-    (then
-     ;; return;
-     ;;@ jsdocreturn/JsDocReturn.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsdocreturn_JsDocReturn)
+   (then
+    ;; return;
+    ;;@ jsdocreturn/JsDocReturn.java:18:13
+    (return )
    )
-   ;; (jsdocreturn.JsDocReturn.$initialized = true);
-   ;;@ jsdocreturn/JsDocReturn.java:18:13
-   (global.set $f_$initialized__jsdocreturn_JsDocReturn (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsdocreturn/JsDocReturn.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsdocreturn.JsDocReturn.$initialized = true);
+  ;;@ jsdocreturn/JsDocReturn.java:18:13
+  (global.set $f_$initialized__jsdocreturn_JsDocReturn (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsdocreturn/JsDocReturn.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -98,17 +89,12 @@
 (func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsdocreturn.JsDocReturn))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsdocreturn.JsDocReturn();
-   (local.set $return.value (call $$getJsdocreturn.JsDocReturn__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsdocreturn.JsDocReturn();
+  (return (call $$getJsdocreturn.JsDocReturn__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn)
 

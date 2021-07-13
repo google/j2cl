@@ -22,18 +22,18 @@
 (func $m_<init>__@classliteral.ClassLiteral
  (param $this (ref null $classliteral.ClassLiteral))
  (result (ref null $classliteral.ClassLiteral))
- (block $return.label
+ ;;@ classliteral/ClassLiteral.java:18:13
+ (block
+  ;; classliteral.ClassLiteral.$clinit();
   ;;@ classliteral/ClassLiteral.java:18:13
-  (block
-   ;; classliteral.ClassLiteral.$clinit();
-   ;;@ classliteral/ClassLiteral.java:18:13
-   (call $$clinit__void@classliteral.ClassLiteral )
-   ;; Object.this.Object.<init>();
-   ;;@ classliteral/ClassLiteral.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@classliteral.ClassLiteral )
+  ;; Object.this.Object.<init>();
+  ;;@ classliteral/ClassLiteral.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return ClassLiteral.this;
+  ;;@ classliteral/ClassLiteral.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void ClassLiteral.main()
@@ -43,44 +43,40 @@
  (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $classliteral.ClassLiteral))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $classliteral.ClassLiteral.rtt)))
- (block $return.label
-  ;;@ classliteral/ClassLiteral.java:20:14
-  (block
-   ;; Object o = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
-   ;;@ classliteral/ClassLiteral.java:21:4
-   (local.set $o (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   ;; (o = (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral(),$qualifier.getArrayType(2)));
-   ;;@ classliteral/ClassLiteral.java:22:4
-   (local.set $o (block (result (ref null $java.lang.Class))
-    (local.set $$qualifier (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-    (call_ref (local.get $$qualifier)(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
-   ))
-  )
+ ;;@ classliteral/ClassLiteral.java:20:14
+ (block
+  ;; Object o = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
+  ;;@ classliteral/ClassLiteral.java:21:4
+  (local.set $o (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  ;; (o = (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral(),$qualifier.getArrayType(2)));
+  ;;@ classliteral/ClassLiteral.java:22:4
+  (local.set $o (block (result (ref null $java.lang.Class))
+   (local.set $$qualifier (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (call_ref (local.get $$qualifier)(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
+  ))
  )
 )
 (elem declare func $m_main__void@classliteral.ClassLiteral)
 
 ;;; void ClassLiteral.$clinit()
 (func $$clinit__void@classliteral.ClassLiteral
- (block $return.label
+ ;;@ classliteral/ClassLiteral.java:18:13
+ (block
+  ;; if (classliteral.ClassLiteral.$initialized) return;
   ;;@ classliteral/ClassLiteral.java:18:13
-  (block
-   ;; if (classliteral.ClassLiteral.$initialized) return;
-   ;;@ classliteral/ClassLiteral.java:18:13
-   (if (global.get $f_$initialized__classliteral_ClassLiteral)
-    (then
-     ;; return;
-     ;;@ classliteral/ClassLiteral.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__classliteral_ClassLiteral)
+   (then
+    ;; return;
+    ;;@ classliteral/ClassLiteral.java:18:13
+    (return )
    )
-   ;; (classliteral.ClassLiteral.$initialized = true);
-   ;;@ classliteral/ClassLiteral.java:18:13
-   (global.set $f_$initialized__classliteral_ClassLiteral (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ classliteral/ClassLiteral.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (classliteral.ClassLiteral.$initialized = true);
+  ;;@ classliteral/ClassLiteral.java:18:13
+  (global.set $f_$initialized__classliteral_ClassLiteral (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ classliteral/ClassLiteral.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -88,17 +84,12 @@
 (func $m_getClass__java_lang_Class@classliteral.ClassLiteral
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $classliteral.ClassLiteral))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $classliteral.ClassLiteral.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
-   (local.set $return.value (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
+  (return (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@classliteral.ClassLiteral)
 

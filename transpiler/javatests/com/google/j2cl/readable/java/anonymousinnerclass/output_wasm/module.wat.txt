@@ -63,41 +63,39 @@
 (func $m_<init>___$pp_anonymousinnerclass@anonymousinnerclass.A
  (param $this (ref null $anonymousinnerclass.A))
  (result (ref null $anonymousinnerclass.A))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
+ (block
+  ;; anonymousinnerclass.A.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-  (block
-   ;; anonymousinnerclass.A.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-   (call $$clinit__void@anonymousinnerclass.A )
-   ;; Object.this.Object.<init>();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@anonymousinnerclass.A )
+  ;; Object.this.Object.<init>();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return A.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void A.$clinit()
 (func $$clinit__void@anonymousinnerclass.A
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
+ (block
+  ;; if (anonymousinnerclass.A.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-  (block
-   ;; if (anonymousinnerclass.A.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-   (if (global.get $f_$initialized__anonymousinnerclass_A)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_A)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
+    (return )
    )
-   ;; (anonymousinnerclass.A.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-   (global.set $f_$initialized__anonymousinnerclass_A (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (anonymousinnerclass.A.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
+  (global.set $f_$initialized__anonymousinnerclass_A (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -105,17 +103,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.A
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.A.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A();
-   (local.set $return.value (call $$getAnonymousinnerclass.A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A();
+  (return (call $$getAnonymousinnerclass.A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.A)
 
@@ -138,44 +131,42 @@
  (param $this (ref null $anonymousinnerclass.A.B))
  (param $$outer_this (ref null $anonymousinnerclass.A))
  (result (ref null $anonymousinnerclass.A.B))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+ (block
+  ;; anonymousinnerclass.A.B.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-  (block
-   ;; anonymousinnerclass.A.B.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-   (call $$clinit__void@anonymousinnerclass.A.B )
-   ;; (B.this.this = $outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-   (struct.set $anonymousinnerclass.A.B $$outer_this__anonymousinnerclass_A_B(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@anonymousinnerclass.A.B )
+  ;; (B.this.this = $outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+  (struct.set $anonymousinnerclass.A.B $$outer_this__anonymousinnerclass_A_B(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return B.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void B.$clinit()
 (func $$clinit__void@anonymousinnerclass.A.B
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+ (block
+  ;; if (anonymousinnerclass.A.B.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-  (block
-   ;; if (anonymousinnerclass.A.B.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-   (if (global.get $f_$initialized__anonymousinnerclass_A_B)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_A_B)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+    (return )
    )
-   ;; (anonymousinnerclass.A.B.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-   (global.set $f_$initialized__anonymousinnerclass_A_B (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (anonymousinnerclass.A.B.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+  (global.set $f_$initialized__anonymousinnerclass_A_B (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -183,17 +174,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.A.B
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.A.B))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.A.B.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A.B();
-   (local.set $return.value (call $$getAnonymousinnerclass.A.B__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A.B();
+  (return (call $$getAnonymousinnerclass.A.B__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.A.B)
 
@@ -215,18 +201,18 @@
 (func $m_<init>__@anonymousinnerclass.AnonymousInnerClass
  (param $this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (result (ref null $anonymousinnerclass.AnonymousInnerClass))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
+ (block
+  ;; anonymousinnerclass.AnonymousInnerClass.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-  (block
-   ;; anonymousinnerclass.AnonymousInnerClass.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass )
-   ;; Object.this.Object.<init>();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass )
+  ;; Object.this.Object.<init>();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return AnonymousInnerClass.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AnonymousInnerClass.test(int arg)
@@ -239,47 +225,43 @@
  (local $c (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.rtt)))
- (block $return.label
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:26:14
-  (block
-   ;; InnerClass ic = new $1.<init>(AnonymousInnerClass.this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:4
-   (local.set $ic (call $m_<init>__anonymousinnerclass_AnonymousInnerClass_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt))(local.get $this)))
-   ;; A a = new A.<init>();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:28:4
-   (local.set $a (call $m_<init>___$pp_anonymousinnerclass@anonymousinnerclass.A (struct.new_with_rtt $anonymousinnerclass.A (ref.as_non_null (global.get $anonymousinnerclass.A.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.itable)) (i32.const 0) (global.get $anonymousinnerclass.A.rtt))))
-   ;; B b = new $2.<init>(AnonymousInnerClass.this,a);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:4
-   (local.set $b (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt))(local.get $this)(local.get $a)))
-   ;; C c = new $3.<init>(AnonymousInnerClass.this,arg);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:4
-   (local.set $c (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt))(local.get $this)(local.get $arg)))
-  )
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:26:14
+ (block
+  ;; InnerClass ic = new $1.<init>(AnonymousInnerClass.this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:4
+  (local.set $ic (call $m_<init>__anonymousinnerclass_AnonymousInnerClass_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt))(local.get $this)))
+  ;; A a = new A.<init>();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:28:4
+  (local.set $a (call $m_<init>___$pp_anonymousinnerclass@anonymousinnerclass.A (struct.new_with_rtt $anonymousinnerclass.A (ref.as_non_null (global.get $anonymousinnerclass.A.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.itable)) (i32.const 0) (global.get $anonymousinnerclass.A.rtt))))
+  ;; B b = new $2.<init>(AnonymousInnerClass.this,a);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:4
+  (local.set $b (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.2 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt))(local.get $this)(local.get $a)))
+  ;; C c = new $3.<init>(AnonymousInnerClass.this,arg);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:4
+  (local.set $c (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.3 (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt))(local.get $this)(local.get $arg)))
  )
 )
 (elem declare func $m_test__int__void@anonymousinnerclass.AnonymousInnerClass)
 
 ;;; void AnonymousInnerClass.$clinit()
 (func $$clinit__void@anonymousinnerclass.AnonymousInnerClass
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
+ (block
+  ;; if (anonymousinnerclass.AnonymousInnerClass.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-  (block
-   ;; if (anonymousinnerclass.AnonymousInnerClass.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-   (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
+    (return )
    )
-   ;; (anonymousinnerclass.AnonymousInnerClass.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-   (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (anonymousinnerclass.AnonymousInnerClass.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
+  (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -287,17 +269,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass();
-   (local.set $return.value (call $$getAnonymousinnerclass.AnonymousInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass();
+  (return (call $$getAnonymousinnerclass.AnonymousInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass)
 
@@ -320,44 +297,42 @@
  (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+ (block
+  ;; anonymousinnerclass.AnonymousInnerClass.InnerClass.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-  (block
-   ;; anonymousinnerclass.AnonymousInnerClass.InnerClass.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.InnerClass )
-   ;; (InnerClass.this.this = $outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.InnerClass $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.InnerClass )
+  ;; (InnerClass.this.this = $outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.InnerClass $$outer_this__anonymousinnerclass_AnonymousInnerClass_InnerClass(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return InnerClass.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@anonymousinnerclass.AnonymousInnerClass.InnerClass
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+ (block
+  ;; if (anonymousinnerclass.AnonymousInnerClass.InnerClass.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-  (block
-   ;; if (anonymousinnerclass.AnonymousInnerClass.InnerClass.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-   (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_InnerClass)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_InnerClass)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+    (return )
    )
-   ;; (anonymousinnerclass.AnonymousInnerClass.InnerClass.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-   (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_InnerClass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (anonymousinnerclass.AnonymousInnerClass.InnerClass.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+  (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_InnerClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -365,17 +340,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.InnerClass();
-   (local.set $return.value (call $$getAnonymousinnerclass.AnonymousInnerClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.InnerClass();
+  (return (call $$getAnonymousinnerclass.AnonymousInnerClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.InnerClass)
 
@@ -399,44 +369,42 @@
  (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.1))
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.1))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+ (block
+  ;; anonymousinnerclass.AnonymousInnerClass.1.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-  (block
-   ;; anonymousinnerclass.AnonymousInnerClass.1.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1 )
-   ;; ($1.this.this = $outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.1 $$outer_this__anonymousinnerclass_AnonymousInnerClass_1(local.get $this) (local.get $$outer_this))
-   ;; InnerClass.this.InnerClass.<init>($outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-   (drop (call $m_<init>__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass (local.get $this)(local.get $$outer_this)))
-  )
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1 )
+  ;; ($1.this.this = $outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.1 $$outer_this__anonymousinnerclass_AnonymousInnerClass_1(local.get $this) (local.get $$outer_this))
+  ;; InnerClass.this.InnerClass.<init>($outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+  (drop (call $m_<init>__anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass (local.get $this)(local.get $$outer_this)))
+  ;; return $1.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void <anonymous> extends InnerClass.$clinit()
 (func $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+ (block
+  ;; if (anonymousinnerclass.AnonymousInnerClass.1.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-  (block
-   ;; if (anonymousinnerclass.AnonymousInnerClass.1.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-   (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+    (return )
    )
-   ;; (anonymousinnerclass.AnonymousInnerClass.1.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-   (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1 (i32.const 1))
-   ;; anonymousinnerclass.AnonymousInnerClass.InnerClass.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.InnerClass )
   )
+  ;; (anonymousinnerclass.AnonymousInnerClass.1.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+  (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1 (i32.const 1))
+  ;; anonymousinnerclass.AnonymousInnerClass.InnerClass.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.InnerClass )
  )
 )
 
@@ -444,17 +412,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1();
-   (local.set $return.value (call $$getAnonymousinnerclass.AnonymousInnerClass.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1();
+  (return (call $$getAnonymousinnerclass.AnonymousInnerClass.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1)
 
@@ -479,44 +442,42 @@
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (param $$super_outer_this (ref null $anonymousinnerclass.A))
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.2))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+ (block
+  ;; anonymousinnerclass.AnonymousInnerClass.2.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-  (block
-   ;; anonymousinnerclass.AnonymousInnerClass.2.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.2 )
-   ;; ($2.this.this = $outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.2 $$outer_this__anonymousinnerclass_AnonymousInnerClass_2(local.get $this) (local.get $$outer_this))
-   ;; B.this.B.<init>($super_outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-   (drop (call $m_<init>__anonymousinnerclass_A_$pp_anonymousinnerclass@anonymousinnerclass.A.B (local.get $this)(local.get $$super_outer_this)))
-  )
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.2 )
+  ;; ($2.this.this = $outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.2 $$outer_this__anonymousinnerclass_AnonymousInnerClass_2(local.get $this) (local.get $$outer_this))
+  ;; B.this.B.<init>($super_outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+  (drop (call $m_<init>__anonymousinnerclass_A_$pp_anonymousinnerclass@anonymousinnerclass.A.B (local.get $this)(local.get $$super_outer_this)))
+  ;; return $2.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void <anonymous> extends B.$clinit()
 (func $$clinit__void@anonymousinnerclass.AnonymousInnerClass.2
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+ (block
+  ;; if (anonymousinnerclass.AnonymousInnerClass.2.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-  (block
-   ;; if (anonymousinnerclass.AnonymousInnerClass.2.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-   (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_2)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_2)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+    (return )
    )
-   ;; (anonymousinnerclass.AnonymousInnerClass.2.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-   (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_2 (i32.const 1))
-   ;; anonymousinnerclass.A.B.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-   (call $$clinit__void@anonymousinnerclass.A.B )
   )
+  ;; (anonymousinnerclass.AnonymousInnerClass.2.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+  (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_2 (i32.const 1))
+  ;; anonymousinnerclass.A.B.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
+  (call $$clinit__void@anonymousinnerclass.A.B )
  )
 )
 
@@ -524,17 +485,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.2();
-   (local.set $return.value (call $$getAnonymousinnerclass.AnonymousInnerClass.2__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.2();
+  (return (call $$getAnonymousinnerclass.AnonymousInnerClass.2__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.2)
 
@@ -560,63 +516,59 @@
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (param $$captured_arg i32)
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+ (block
+  ;; anonymousinnerclass.AnonymousInnerClass.1C.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-  (block
-   ;; anonymousinnerclass.AnonymousInnerClass.1C.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1C )
-   ;; ($1C.this.this = $outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (local.get $$outer_this))
-   ;; ($1C.this.arg = $captured_arg);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (local.get $$captured_arg))
-   ;; Object.this.Object.<init>();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-   ;; $1C.this.$init();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (call $$init__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C (local.get $this))
-  )
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1C )
+  ;; ($1C.this.this = $outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $$outer_this__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (local.get $$outer_this))
+  ;; ($1C.this.arg = $captured_arg);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (local.get $$captured_arg))
+  ;; Object.this.Object.<init>();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; $1C.this.$init();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+  (call $$init__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C (local.get $this))
+  ;; return $1C.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void C.$init()
 (func $$init__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C
  (param $this (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
- (block $return.label
-  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-  (block
-   ;; ($1C.this.fInC = $1C.this.arg);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:31:6
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (struct.get $anonymousinnerclass.AnonymousInnerClass.1C $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this)))
-  )
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+ (block
+  ;; ($1C.this.fInC = $1C.this.arg);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:31:6
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.1C $f_fInC__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this) (struct.get $anonymousinnerclass.AnonymousInnerClass.1C $$captured_arg__anonymousinnerclass_AnonymousInnerClass_1C(local.get $this)))
  )
 )
 
 ;;; void C.$clinit()
 (func $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1C
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+ (block
+  ;; if (anonymousinnerclass.AnonymousInnerClass.1C.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-  (block
-   ;; if (anonymousinnerclass.AnonymousInnerClass.1C.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1C)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1C)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+    (return )
    )
-   ;; (anonymousinnerclass.AnonymousInnerClass.1C.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1C (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (anonymousinnerclass.AnonymousInnerClass.1C.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+  (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_1C (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -624,17 +576,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.1C.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1C();
-   (local.set $return.value (call $$getAnonymousinnerclass.AnonymousInnerClass.1C__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1C();
+  (return (call $$getAnonymousinnerclass.AnonymousInnerClass.1C__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.1C)
 
@@ -662,47 +609,45 @@
  (param $$outer_this (ref null $anonymousinnerclass.AnonymousInnerClass))
  (param $$captured_arg i32)
  (result (ref null $anonymousinnerclass.AnonymousInnerClass.3))
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+ (block
+  ;; anonymousinnerclass.AnonymousInnerClass.3.$clinit();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-  (block
-   ;; anonymousinnerclass.AnonymousInnerClass.3.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.3 )
-   ;; ($3.this.this = $outer_this);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.3 $$outer_this__anonymousinnerclass_AnonymousInnerClass_3(local.get $this) (local.get $$outer_this))
-   ;; ($3.this.arg = $captured_arg);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-   (struct.set $anonymousinnerclass.AnonymousInnerClass.3 $$captured_arg__anonymousinnerclass_AnonymousInnerClass_3(local.get $this) (local.get $$captured_arg))
-   ;; $1C.this.$1C.<init>($outer_this,$captured_arg);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-   (drop (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1C (local.get $this)(local.get $$outer_this)(local.get $$captured_arg)))
-  )
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.3 )
+  ;; ($3.this.this = $outer_this);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.3 $$outer_this__anonymousinnerclass_AnonymousInnerClass_3(local.get $this) (local.get $$outer_this))
+  ;; ($3.this.arg = $captured_arg);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+  (struct.set $anonymousinnerclass.AnonymousInnerClass.3 $$captured_arg__anonymousinnerclass_AnonymousInnerClass_3(local.get $this) (local.get $$captured_arg))
+  ;; $1C.this.$1C.<init>($outer_this,$captured_arg);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+  (drop (call $m_<init>__anonymousinnerclass_AnonymousInnerClass__int_$pp_anonymousinnerclass@anonymousinnerclass.AnonymousInnerClass.1C (local.get $this)(local.get $$outer_this)(local.get $$captured_arg)))
+  ;; return $3.this;
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void <anonymous> extends C.$clinit()
 (func $$clinit__void@anonymousinnerclass.AnonymousInnerClass.3
- (block $return.label
+ ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+ (block
+  ;; if (anonymousinnerclass.AnonymousInnerClass.3.$initialized) return;
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-  (block
-   ;; if (anonymousinnerclass.AnonymousInnerClass.3.$initialized) return;
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-   (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_3)
-    (then
-     ;; return;
-     ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__anonymousinnerclass_AnonymousInnerClass_3)
+   (then
+    ;; return;
+    ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+    (return )
    )
-   ;; (anonymousinnerclass.AnonymousInnerClass.3.$initialized = true);
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-   (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_3 (i32.const 1))
-   ;; anonymousinnerclass.AnonymousInnerClass.1C.$clinit();
-   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-   (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1C )
   )
+  ;; (anonymousinnerclass.AnonymousInnerClass.3.$initialized = true);
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+  (global.set $f_$initialized__anonymousinnerclass_AnonymousInnerClass_3 (i32.const 1))
+  ;; anonymousinnerclass.AnonymousInnerClass.1C.$clinit();
+  ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
+  (call $$clinit__void@anonymousinnerclass.AnonymousInnerClass.1C )
  )
 )
 
@@ -710,17 +655,12 @@
 (func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.3))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.3();
-   (local.set $return.value (call $$getAnonymousinnerclass.AnonymousInnerClass.3__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.3();
+  (return (call $$getAnonymousinnerclass.AnonymousInnerClass.3__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousinnerclass.AnonymousInnerClass.3)
 

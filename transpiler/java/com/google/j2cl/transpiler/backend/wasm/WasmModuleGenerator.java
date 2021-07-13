@@ -268,7 +268,10 @@ public class WasmModuleGenerator {
   }
 
   private void renderTypeMethods(Type type) {
-    type.getMethods().stream().filter(not(Method::isAbstract)).forEach(this::renderMethod);
+    type.getMethods().stream()
+        .filter(not(Method::isAbstract))
+        .filter(m -> m.getDescriptor().getWasmInfo() == null)
+        .forEach(this::renderMethod);
   }
 
   private void renderMethod(Method method) {
@@ -319,27 +322,13 @@ public class WasmModuleGenerator {
               + environment.getWasmType(parameter.getTypeDescriptor())
               + ")");
     }
-    // Emit return type
+
     TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
-    if (method.isConstructor()) {
-      // TODO(b/187218486): Remove after constructor normalization is in place, constructors should
-      // not reach the output stage.
-      // Constructors are modelled for now as if they return the object that was created.
-      builder.newLine();
-      builder.append("(result " + environment.getWasmType(enclosingTypeDescriptor) + ")");
-    } else if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
+
+    // Emit return type.
+    if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.newLine();
       builder.append("(result " + environment.getWasmType(returnTypeDescriptor) + ")");
-
-      // Define a local variable to hold the result value to allow for returns that appear in
-      // the inner blocks.
-      // TODO(b/187233926): Add a pass to normalize and have only one return at the end of the
-      // function body.
-      if (!isStaticExtern) {
-        builder.newLine();
-        builder.append(
-            "(local $return.value " + environment.getWasmType(returnTypeDescriptor) + ")");
-      }
     }
 
     if (isStaticExtern) {
@@ -372,21 +361,13 @@ public class WasmModuleGenerator {
               "(local.set $this (ref.cast (local.get $this.untyped) (global.get %s)))",
               environment.getRttGlobalName(enclosingTypeDescriptor)));
     }
-    builder.newLine();
-    builder.append("(block $return.label");
-    builder.indent();
 
     StatementTranspiler.render(method.getBody(), builder, environment);
-    builder.unindent();
-    builder.newLine();
-    builder.append(")");
-    if (method.isConstructor()) {
-      // TODO(b/187218486): Add a pass to transform constructors into static methods.
+    if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor) && method.isNative()) {
+      // Unforunately we still have native method calls in JRE so we need to synthesize stubs for
+      // such methods to pass WASM checks.
       builder.newLine();
-      builder.append("(local.get $this)");
-    } else if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
-      builder.newLine();
-      builder.append("(local.get $return.value)");
+      builder.append("(unreachable)");
     }
     builder.unindent();
     builder.newLine();

@@ -28,18 +28,18 @@
 (func $m_<init>___$pp_jsmethodoverride@jsmethodoverride.Parent
  (param $this (ref null $jsmethodoverride.Parent))
  (result (ref null $jsmethodoverride.Parent))
- (block $return.label
+ ;;@ jsmethodoverride/Child.java:21:6
+ (block
+  ;; jsmethodoverride.Parent.$clinit();
   ;;@ jsmethodoverride/Child.java:21:6
-  (block
-   ;; jsmethodoverride.Parent.$clinit();
-   ;;@ jsmethodoverride/Child.java:21:6
-   (call $$clinit__void@jsmethodoverride.Parent )
-   ;; Object.this.Object.<init>();
-   ;;@ jsmethodoverride/Child.java:21:6
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsmethodoverride.Parent )
+  ;; Object.this.Object.<init>();
+  ;;@ jsmethodoverride/Child.java:21:6
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Parent.this;
+  ;;@ jsmethodoverride/Child.java:21:6
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Parent.foo()
@@ -47,35 +47,31 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsmethodoverride.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
- (block $return.label
-  ;;@ jsmethodoverride/Child.java:23:14
-  (block
-  )
+ ;;@ jsmethodoverride/Child.java:23:14
+ (block
  )
 )
 (elem declare func $m_foo__void@jsmethodoverride.Parent)
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@jsmethodoverride.Parent
- (block $return.label
+ ;;@ jsmethodoverride/Child.java:21:6
+ (block
+  ;; if (jsmethodoverride.Parent.$initialized) return;
   ;;@ jsmethodoverride/Child.java:21:6
-  (block
-   ;; if (jsmethodoverride.Parent.$initialized) return;
-   ;;@ jsmethodoverride/Child.java:21:6
-   (if (global.get $f_$initialized__jsmethodoverride_Parent)
-    (then
-     ;; return;
-     ;;@ jsmethodoverride/Child.java:21:6
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsmethodoverride_Parent)
+   (then
+    ;; return;
+    ;;@ jsmethodoverride/Child.java:21:6
+    (return )
    )
-   ;; (jsmethodoverride.Parent.$initialized = true);
-   ;;@ jsmethodoverride/Child.java:21:6
-   (global.set $f_$initialized__jsmethodoverride_Parent (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsmethodoverride/Child.java:21:6
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsmethodoverride.Parent.$initialized = true);
+  ;;@ jsmethodoverride/Child.java:21:6
+  (global.set $f_$initialized__jsmethodoverride_Parent (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsmethodoverride/Child.java:21:6
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -83,17 +79,12 @@
 (func $m_getClass__java_lang_Class@jsmethodoverride.Parent
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Parent();
-   (local.set $return.value (call $$getJsmethodoverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Parent();
+  (return (call $$getJsmethodoverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Parent)
 
@@ -115,18 +106,18 @@
 (func $m_<init>__@jsmethodoverride.Child
  (param $this (ref null $jsmethodoverride.Child))
  (result (ref null $jsmethodoverride.Child))
- (block $return.label
+ ;;@ jsmethodoverride/Child.java:27:13
+ (block
+  ;; jsmethodoverride.Child.$clinit();
   ;;@ jsmethodoverride/Child.java:27:13
-  (block
-   ;; jsmethodoverride.Child.$clinit();
-   ;;@ jsmethodoverride/Child.java:27:13
-   (call $$clinit__void@jsmethodoverride.Child )
-   ;; Parent.this.Parent.<init>();
-   ;;@ jsmethodoverride/Child.java:27:13
-   (drop (call $m_<init>___$pp_jsmethodoverride@jsmethodoverride.Parent (local.get $this)))
-  )
+  (call $$clinit__void@jsmethodoverride.Child )
+  ;; Parent.this.Parent.<init>();
+  ;;@ jsmethodoverride/Child.java:27:13
+  (drop (call $m_<init>___$pp_jsmethodoverride@jsmethodoverride.Parent (local.get $this)))
+  ;; return Child.this;
+  ;;@ jsmethodoverride/Child.java:27:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Child.foo()
@@ -134,35 +125,31 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsmethodoverride.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
- (block $return.label
-  ;;@ jsmethodoverride/Child.java:29:14
-  (block
-  )
+ ;;@ jsmethodoverride/Child.java:29:14
+ (block
  )
 )
 (elem declare func $m_foo__void@jsmethodoverride.Child)
 
 ;;; void Child.$clinit()
 (func $$clinit__void@jsmethodoverride.Child
- (block $return.label
+ ;;@ jsmethodoverride/Child.java:27:13
+ (block
+  ;; if (jsmethodoverride.Child.$initialized) return;
   ;;@ jsmethodoverride/Child.java:27:13
-  (block
-   ;; if (jsmethodoverride.Child.$initialized) return;
-   ;;@ jsmethodoverride/Child.java:27:13
-   (if (global.get $f_$initialized__jsmethodoverride_Child)
-    (then
-     ;; return;
-     ;;@ jsmethodoverride/Child.java:27:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsmethodoverride_Child)
+   (then
+    ;; return;
+    ;;@ jsmethodoverride/Child.java:27:13
+    (return )
    )
-   ;; (jsmethodoverride.Child.$initialized = true);
-   ;;@ jsmethodoverride/Child.java:27:13
-   (global.set $f_$initialized__jsmethodoverride_Child (i32.const 1))
-   ;; jsmethodoverride.Parent.$clinit();
-   ;;@ jsmethodoverride/Child.java:27:13
-   (call $$clinit__void@jsmethodoverride.Parent )
   )
+  ;; (jsmethodoverride.Child.$initialized = true);
+  ;;@ jsmethodoverride/Child.java:27:13
+  (global.set $f_$initialized__jsmethodoverride_Child (i32.const 1))
+  ;; jsmethodoverride.Parent.$clinit();
+  ;;@ jsmethodoverride/Child.java:27:13
+  (call $$clinit__void@jsmethodoverride.Parent )
  )
 )
 
@@ -170,17 +157,12 @@
 (func $m_getClass__java_lang_Class@jsmethodoverride.Child
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Child();
-   (local.set $return.value (call $$getJsmethodoverride.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Child();
+  (return (call $$getJsmethodoverride.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Child)
 

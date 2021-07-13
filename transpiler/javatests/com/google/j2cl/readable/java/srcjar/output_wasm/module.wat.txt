@@ -27,41 +27,39 @@
 (func $m_<init>__@srcjar.Foo
  (param $this (ref null $srcjar.Foo))
  (result (ref null $srcjar.Foo))
- (block $return.label
+ ;;@ srcjar/Foo.java:21:13
+ (block
+  ;; srcjar.Foo.$clinit();
   ;;@ srcjar/Foo.java:21:13
-  (block
-   ;; srcjar.Foo.$clinit();
-   ;;@ srcjar/Foo.java:21:13
-   (call $$clinit__void@srcjar.Foo )
-   ;; Object.this.Object.<init>();
-   ;;@ srcjar/Foo.java:21:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@srcjar.Foo )
+  ;; Object.this.Object.<init>();
+  ;;@ srcjar/Foo.java:21:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Foo.this;
+  ;;@ srcjar/Foo.java:21:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@srcjar.Foo
- (block $return.label
+ ;;@ srcjar/Foo.java:21:13
+ (block
+  ;; if (srcjar.Foo.$initialized) return;
   ;;@ srcjar/Foo.java:21:13
-  (block
-   ;; if (srcjar.Foo.$initialized) return;
-   ;;@ srcjar/Foo.java:21:13
-   (if (global.get $f_$initialized__srcjar_Foo)
-    (then
-     ;; return;
-     ;;@ srcjar/Foo.java:21:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__srcjar_Foo)
+   (then
+    ;; return;
+    ;;@ srcjar/Foo.java:21:13
+    (return )
    )
-   ;; (srcjar.Foo.$initialized = true);
-   ;;@ srcjar/Foo.java:21:13
-   (global.set $f_$initialized__srcjar_Foo (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ srcjar/Foo.java:21:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (srcjar.Foo.$initialized = true);
+  ;;@ srcjar/Foo.java:21:13
+  (global.set $f_$initialized__srcjar_Foo (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ srcjar/Foo.java:21:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -69,17 +67,12 @@
 (func $m_getClass__java_lang_Class@srcjar.Foo
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $srcjar.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $srcjar.Foo.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Foo();
-   (local.set $return.value (call $$getSrcjar.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Foo();
+  (return (call $$getSrcjar.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@srcjar.Foo)
 
@@ -100,57 +93,53 @@
 (func $m_<init>__@srcjar.Srcjar
  (param $this (ref null $srcjar.Srcjar))
  (result (ref null $srcjar.Srcjar))
- (block $return.label
+ ;;@ srcjar/Srcjar.java:18:13
+ (block
+  ;; srcjar.Srcjar.$clinit();
   ;;@ srcjar/Srcjar.java:18:13
-  (block
-   ;; srcjar.Srcjar.$clinit();
-   ;;@ srcjar/Srcjar.java:18:13
-   (call $$clinit__void@srcjar.Srcjar )
-   ;; Object.this.Object.<init>();
-   ;;@ srcjar/Srcjar.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@srcjar.Srcjar )
+  ;; Object.this.Object.<init>();
+  ;;@ srcjar/Srcjar.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Srcjar.this;
+  ;;@ srcjar/Srcjar.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Srcjar.test()
 (func $m_test__void@srcjar.Srcjar
  (local $foo (ref null $srcjar.Foo))
- (block $return.label
+ ;;@ srcjar/Srcjar.java:20:21
+ (block
+  ;; srcjar.Srcjar.$clinit();
   ;;@ srcjar/Srcjar.java:20:21
-  (block
-   ;; srcjar.Srcjar.$clinit();
-   ;;@ srcjar/Srcjar.java:20:21
-   (call $$clinit__void@srcjar.Srcjar )
-   ;; Foo foo = new Foo.<init>();
-   ;;@ srcjar/Srcjar.java:21:4
-   (local.set $foo (call $m_<init>__@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (global.get $srcjar.Foo.rtt))))
-  )
+  (call $$clinit__void@srcjar.Srcjar )
+  ;; Foo foo = new Foo.<init>();
+  ;;@ srcjar/Srcjar.java:21:4
+  (local.set $foo (call $m_<init>__@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (global.get $srcjar.Foo.rtt))))
  )
 )
 
 ;;; void Srcjar.$clinit()
 (func $$clinit__void@srcjar.Srcjar
- (block $return.label
+ ;;@ srcjar/Srcjar.java:18:13
+ (block
+  ;; if (srcjar.Srcjar.$initialized) return;
   ;;@ srcjar/Srcjar.java:18:13
-  (block
-   ;; if (srcjar.Srcjar.$initialized) return;
-   ;;@ srcjar/Srcjar.java:18:13
-   (if (global.get $f_$initialized__srcjar_Srcjar)
-    (then
-     ;; return;
-     ;;@ srcjar/Srcjar.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__srcjar_Srcjar)
+   (then
+    ;; return;
+    ;;@ srcjar/Srcjar.java:18:13
+    (return )
    )
-   ;; (srcjar.Srcjar.$initialized = true);
-   ;;@ srcjar/Srcjar.java:18:13
-   (global.set $f_$initialized__srcjar_Srcjar (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ srcjar/Srcjar.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (srcjar.Srcjar.$initialized = true);
+  ;;@ srcjar/Srcjar.java:18:13
+  (global.set $f_$initialized__srcjar_Srcjar (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ srcjar/Srcjar.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -158,17 +147,12 @@
 (func $m_getClass__java_lang_Class@srcjar.Srcjar
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $srcjar.Srcjar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $srcjar.Srcjar.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Srcjar();
-   (local.set $return.value (call $$getSrcjar.Srcjar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Srcjar();
+  (return (call $$getSrcjar.Srcjar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@srcjar.Srcjar)
 

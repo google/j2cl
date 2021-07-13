@@ -21,41 +21,39 @@
 (func $m_<init>__@emptyclass.EmptyClass
  (param $this (ref null $emptyclass.EmptyClass))
  (result (ref null $emptyclass.EmptyClass))
- (block $return.label
+ ;;@ emptyclass/EmptyClass.java:18:13
+ (block
+  ;; emptyclass.EmptyClass.$clinit();
   ;;@ emptyclass/EmptyClass.java:18:13
-  (block
-   ;; emptyclass.EmptyClass.$clinit();
-   ;;@ emptyclass/EmptyClass.java:18:13
-   (call $$clinit__void@emptyclass.EmptyClass )
-   ;; Object.this.Object.<init>();
-   ;;@ emptyclass/EmptyClass.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@emptyclass.EmptyClass )
+  ;; Object.this.Object.<init>();
+  ;;@ emptyclass/EmptyClass.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return EmptyClass.this;
+  ;;@ emptyclass/EmptyClass.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void EmptyClass.$clinit()
 (func $$clinit__void@emptyclass.EmptyClass
- (block $return.label
+ ;;@ emptyclass/EmptyClass.java:18:13
+ (block
+  ;; if (emptyclass.EmptyClass.$initialized) return;
   ;;@ emptyclass/EmptyClass.java:18:13
-  (block
-   ;; if (emptyclass.EmptyClass.$initialized) return;
-   ;;@ emptyclass/EmptyClass.java:18:13
-   (if (global.get $f_$initialized__emptyclass_EmptyClass)
-    (then
-     ;; return;
-     ;;@ emptyclass/EmptyClass.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__emptyclass_EmptyClass)
+   (then
+    ;; return;
+    ;;@ emptyclass/EmptyClass.java:18:13
+    (return )
    )
-   ;; (emptyclass.EmptyClass.$initialized = true);
-   ;;@ emptyclass/EmptyClass.java:18:13
-   (global.set $f_$initialized__emptyclass_EmptyClass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ emptyclass/EmptyClass.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (emptyclass.EmptyClass.$initialized = true);
+  ;;@ emptyclass/EmptyClass.java:18:13
+  (global.set $f_$initialized__emptyclass_EmptyClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ emptyclass/EmptyClass.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -63,17 +61,12 @@
 (func $m_getClass__java_lang_Class@emptyclass.EmptyClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $emptyclass.EmptyClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $emptyclass.EmptyClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getEmptyclass.EmptyClass();
-   (local.set $return.value (call $$getEmptyclass.EmptyClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getEmptyclass.EmptyClass();
+  (return (call $$getEmptyclass.EmptyClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@emptyclass.EmptyClass)
 

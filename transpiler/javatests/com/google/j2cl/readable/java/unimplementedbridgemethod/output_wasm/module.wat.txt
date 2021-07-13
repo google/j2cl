@@ -24,40 +24,33 @@
 ;;; int I.staticFoo()
 (func $m_staticFoo__int@unimplementedbridgemethod.I
  (result i32)
- (local $return.value i32)
- (block $return.label
+ ;;@ unimplementedbridgemethod/Foo.java:20:13
+ (block
+  ;; unimplementedbridgemethod.I.$clinit();
   ;;@ unimplementedbridgemethod/Foo.java:20:13
-  (block
-   ;; unimplementedbridgemethod.I.$clinit();
-   ;;@ unimplementedbridgemethod/Foo.java:20:13
-   (call $$clinit__void@unimplementedbridgemethod.I )
-   ;; return 0;
-   ;;@ unimplementedbridgemethod/Foo.java:21:4
-   (local.set $return.value (i32.const 0))
-   (br $return.label)
-  )
+  (call $$clinit__void@unimplementedbridgemethod.I )
+  ;; return 0;
+  ;;@ unimplementedbridgemethod/Foo.java:21:4
+  (return (i32.const 0))
  )
- (local.get $return.value)
 )
 
 ;;; void I.$clinit()
 (func $$clinit__void@unimplementedbridgemethod.I
- (block $return.label
+ ;;@ unimplementedbridgemethod/Foo.java:18:10
+ (block
+  ;; if (unimplementedbridgemethod.I.$initialized) return;
   ;;@ unimplementedbridgemethod/Foo.java:18:10
-  (block
-   ;; if (unimplementedbridgemethod.I.$initialized) return;
-   ;;@ unimplementedbridgemethod/Foo.java:18:10
-   (if (global.get $f_$initialized__unimplementedbridgemethod_I)
-    (then
-     ;; return;
-     ;;@ unimplementedbridgemethod/Foo.java:18:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unimplementedbridgemethod_I)
+   (then
+    ;; return;
+    ;;@ unimplementedbridgemethod/Foo.java:18:10
+    (return )
    )
-   ;; (unimplementedbridgemethod.I.$initialized = true);
-   ;;@ unimplementedbridgemethod/Foo.java:18:10
-   (global.set $f_$initialized__unimplementedbridgemethod_I (i32.const 1))
   )
+  ;; (unimplementedbridgemethod.I.$initialized = true);
+  ;;@ unimplementedbridgemethod/Foo.java:18:10
+  (global.set $f_$initialized__unimplementedbridgemethod_I (i32.const 1))
  )
 )
 
@@ -65,15 +58,10 @@
 (func $m_getClass__java_lang_Class@unimplementedbridgemethod.I
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnimplementedbridgemethod.I();
-   (local.set $return.value (call $$getUnimplementedbridgemethod.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getUnimplementedbridgemethod.I();
+  (return (call $$getUnimplementedbridgemethod.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@unimplementedbridgemethod.I)
 
@@ -83,22 +71,20 @@
 
 ;;; void J.$clinit()
 (func $$clinit__void@unimplementedbridgemethod.J
- (block $return.label
+ ;;@ unimplementedbridgemethod/Foo.java:25:10
+ (block
+  ;; if (unimplementedbridgemethod.J.$initialized) return;
   ;;@ unimplementedbridgemethod/Foo.java:25:10
-  (block
-   ;; if (unimplementedbridgemethod.J.$initialized) return;
-   ;;@ unimplementedbridgemethod/Foo.java:25:10
-   (if (global.get $f_$initialized__unimplementedbridgemethod_J)
-    (then
-     ;; return;
-     ;;@ unimplementedbridgemethod/Foo.java:25:10
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unimplementedbridgemethod_J)
+   (then
+    ;; return;
+    ;;@ unimplementedbridgemethod/Foo.java:25:10
+    (return )
    )
-   ;; (unimplementedbridgemethod.J.$initialized = true);
-   ;;@ unimplementedbridgemethod/Foo.java:25:10
-   (global.set $f_$initialized__unimplementedbridgemethod_J (i32.const 1))
   )
+  ;; (unimplementedbridgemethod.J.$initialized = true);
+  ;;@ unimplementedbridgemethod/Foo.java:25:10
+  (global.set $f_$initialized__unimplementedbridgemethod_J (i32.const 1))
  )
 )
 
@@ -106,15 +92,10 @@
 (func $m_getClass__java_lang_Class@unimplementedbridgemethod.J
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnimplementedbridgemethod.J();
-   (local.set $return.value (call $$getUnimplementedbridgemethod.J__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getUnimplementedbridgemethod.J();
+  (return (call $$getUnimplementedbridgemethod.J__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@unimplementedbridgemethod.J)
 
@@ -135,41 +116,39 @@
 (func $m_<init>___$pp_unimplementedbridgemethod@unimplementedbridgemethod.Bar
  (param $this (ref null $unimplementedbridgemethod.Bar))
  (result (ref null $unimplementedbridgemethod.Bar))
- (block $return.label
+ ;;@ unimplementedbridgemethod/Foo.java:33:15
+ (block
+  ;; unimplementedbridgemethod.Bar.$clinit();
   ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (block
-   ;; unimplementedbridgemethod.Bar.$clinit();
-   ;;@ unimplementedbridgemethod/Foo.java:33:15
-   (call $$clinit__void@unimplementedbridgemethod.Bar )
-   ;; Object.this.Object.<init>();
-   ;;@ unimplementedbridgemethod/Foo.java:33:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@unimplementedbridgemethod.Bar )
+  ;; Object.this.Object.<init>();
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Bar.this;
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Bar.$clinit()
 (func $$clinit__void@unimplementedbridgemethod.Bar
- (block $return.label
+ ;;@ unimplementedbridgemethod/Foo.java:33:15
+ (block
+  ;; if (unimplementedbridgemethod.Bar.$initialized) return;
   ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (block
-   ;; if (unimplementedbridgemethod.Bar.$initialized) return;
-   ;;@ unimplementedbridgemethod/Foo.java:33:15
-   (if (global.get $f_$initialized__unimplementedbridgemethod_Bar)
-    (then
-     ;; return;
-     ;;@ unimplementedbridgemethod/Foo.java:33:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unimplementedbridgemethod_Bar)
+   (then
+    ;; return;
+    ;;@ unimplementedbridgemethod/Foo.java:33:15
+    (return )
    )
-   ;; (unimplementedbridgemethod.Bar.$initialized = true);
-   ;;@ unimplementedbridgemethod/Foo.java:33:15
-   (global.set $f_$initialized__unimplementedbridgemethod_Bar (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ unimplementedbridgemethod/Foo.java:33:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (unimplementedbridgemethod.Bar.$initialized = true);
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (global.set $f_$initialized__unimplementedbridgemethod_Bar (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ unimplementedbridgemethod/Foo.java:33:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -190,40 +169,38 @@
 (func $m_<init>__@unimplementedbridgemethod.Foo
  (param $this (ref null $unimplementedbridgemethod.Foo))
  (result (ref null $unimplementedbridgemethod.Foo))
- (block $return.label
+ ;;@ unimplementedbridgemethod/Foo.java:41:22
+ (block
+  ;; unimplementedbridgemethod.Foo.$clinit();
   ;;@ unimplementedbridgemethod/Foo.java:41:22
-  (block
-   ;; unimplementedbridgemethod.Foo.$clinit();
-   ;;@ unimplementedbridgemethod/Foo.java:41:22
-   (call $$clinit__void@unimplementedbridgemethod.Foo )
-   ;; Object.this.Object.<init>();
-   ;;@ unimplementedbridgemethod/Foo.java:41:22
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@unimplementedbridgemethod.Foo )
+  ;; Object.this.Object.<init>();
+  ;;@ unimplementedbridgemethod/Foo.java:41:22
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return Foo.this;
+  ;;@ unimplementedbridgemethod/Foo.java:41:22
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@unimplementedbridgemethod.Foo
- (block $return.label
+ ;;@ unimplementedbridgemethod/Foo.java:41:22
+ (block
+  ;; if (unimplementedbridgemethod.Foo.$initialized) return;
   ;;@ unimplementedbridgemethod/Foo.java:41:22
-  (block
-   ;; if (unimplementedbridgemethod.Foo.$initialized) return;
-   ;;@ unimplementedbridgemethod/Foo.java:41:22
-   (if (global.get $f_$initialized__unimplementedbridgemethod_Foo)
-    (then
-     ;; return;
-     ;;@ unimplementedbridgemethod/Foo.java:41:22
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unimplementedbridgemethod_Foo)
+   (then
+    ;; return;
+    ;;@ unimplementedbridgemethod/Foo.java:41:22
+    (return )
    )
-   ;; (unimplementedbridgemethod.Foo.$initialized = true);
-   ;;@ unimplementedbridgemethod/Foo.java:41:22
-   (global.set $f_$initialized__unimplementedbridgemethod_Foo (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ unimplementedbridgemethod/Foo.java:41:22
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (unimplementedbridgemethod.Foo.$initialized = true);
+  ;;@ unimplementedbridgemethod/Foo.java:41:22
+  (global.set $f_$initialized__unimplementedbridgemethod_Foo (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ unimplementedbridgemethod/Foo.java:41:22
+  (call $$clinit__void@java.lang.Object )
  )
 )

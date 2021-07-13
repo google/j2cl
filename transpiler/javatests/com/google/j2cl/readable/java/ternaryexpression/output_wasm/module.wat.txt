@@ -22,18 +22,18 @@
 (func $m_<init>__@ternaryexpression.TernaryExpression
  (param $this (ref null $ternaryexpression.TernaryExpression))
  (result (ref null $ternaryexpression.TernaryExpression))
- (block $return.label
+ ;;@ ternaryexpression/TernaryExpression.java:18:13
+ (block
+  ;; ternaryexpression.TernaryExpression.$clinit();
   ;;@ ternaryexpression/TernaryExpression.java:18:13
-  (block
-   ;; ternaryexpression.TernaryExpression.$clinit();
-   ;;@ ternaryexpression/TernaryExpression.java:18:13
-   (call $$clinit__void@ternaryexpression.TernaryExpression )
-   ;; Object.this.Object.<init>();
-   ;;@ ternaryexpression/TernaryExpression.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@ternaryexpression.TernaryExpression )
+  ;; Object.this.Object.<init>();
+  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return TernaryExpression.this;
+  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void TernaryExpression.test()
@@ -46,50 +46,46 @@
  (local $$qualifier (ref null $java.lang.Integer))
  (local $this (ref null $ternaryexpression.TernaryExpression))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $ternaryexpression.TernaryExpression.rtt)))
- (block $return.label
-  ;;@ ternaryexpression/TernaryExpression.java:20:14
-  (block
-   ;; boolean a = true;
-   ;;@ ternaryexpression/TernaryExpression.java:21:4
-   (local.set $a (i32.const 1))
-   ;; int number = (a) ? (1) : (2);
-   ;;@ ternaryexpression/TernaryExpression.java:22:4
-   (local.set $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
-   ;; boolean b = ((number == 1)) ? ((number == 2)) : ((number == 1));
-   ;;@ ternaryexpression/TernaryExpression.java:24:4
-   (local.set $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
-   ;; int value = (Integer $qualifier = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30)),$qualifier.intValue());
-   ;;@ ternaryexpression/TernaryExpression.java:26:4
-   (local.set $value (block (result i32)
-    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
-    (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
-   ))
-  )
+ ;;@ ternaryexpression/TernaryExpression.java:20:14
+ (block
+  ;; boolean a = true;
+  ;;@ ternaryexpression/TernaryExpression.java:21:4
+  (local.set $a (i32.const 1))
+  ;; int number = (a) ? (1) : (2);
+  ;;@ ternaryexpression/TernaryExpression.java:22:4
+  (local.set $number (if (result i32) (local.get $a) (then (i32.const 1)) (else (i32.const 2))))
+  ;; boolean b = ((number == 1)) ? ((number == 2)) : ((number == 1));
+  ;;@ ternaryexpression/TernaryExpression.java:24:4
+  (local.set $b (if (result i32) (i32.eq (local.get $number) (i32.const 1)) (then (i32.eq (local.get $number) (i32.const 2))) (else (i32.eq (local.get $number) (i32.const 1)))))
+  ;; int value = (Integer $qualifier = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30)),$qualifier.intValue());
+  ;;@ ternaryexpression/TernaryExpression.java:26:4
+  (local.set $value (block (result i32)
+   (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
+   (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
+  ))
  )
 )
 (elem declare func $m_test__void@ternaryexpression.TernaryExpression)
 
 ;;; void TernaryExpression.$clinit()
 (func $$clinit__void@ternaryexpression.TernaryExpression
- (block $return.label
+ ;;@ ternaryexpression/TernaryExpression.java:18:13
+ (block
+  ;; if (ternaryexpression.TernaryExpression.$initialized) return;
   ;;@ ternaryexpression/TernaryExpression.java:18:13
-  (block
-   ;; if (ternaryexpression.TernaryExpression.$initialized) return;
-   ;;@ ternaryexpression/TernaryExpression.java:18:13
-   (if (global.get $f_$initialized__ternaryexpression_TernaryExpression)
-    (then
-     ;; return;
-     ;;@ ternaryexpression/TernaryExpression.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__ternaryexpression_TernaryExpression)
+   (then
+    ;; return;
+    ;;@ ternaryexpression/TernaryExpression.java:18:13
+    (return )
    )
-   ;; (ternaryexpression.TernaryExpression.$initialized = true);
-   ;;@ ternaryexpression/TernaryExpression.java:18:13
-   (global.set $f_$initialized__ternaryexpression_TernaryExpression (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ ternaryexpression/TernaryExpression.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (ternaryexpression.TernaryExpression.$initialized = true);
+  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  (global.set $f_$initialized__ternaryexpression_TernaryExpression (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ ternaryexpression/TernaryExpression.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -97,17 +93,12 @@
 (func $m_getClass__java_lang_Class@ternaryexpression.TernaryExpression
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $ternaryexpression.TernaryExpression))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $ternaryexpression.TernaryExpression.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTernaryexpression.TernaryExpression();
-   (local.set $return.value (call $$getTernaryexpression.TernaryExpression__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getTernaryexpression.TernaryExpression();
+  (return (call $$getTernaryexpression.TernaryExpression__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@ternaryexpression.TernaryExpression)
 

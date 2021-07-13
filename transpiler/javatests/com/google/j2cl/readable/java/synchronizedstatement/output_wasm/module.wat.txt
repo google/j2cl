@@ -24,18 +24,18 @@
 (func $m_<init>__@synchronizedstatement.SynchronizedStatement
  (param $this (ref null $synchronizedstatement.SynchronizedStatement))
  (result (ref null $synchronizedstatement.SynchronizedStatement))
- (block $return.label
+ ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+ (block
+  ;; synchronizedstatement.SynchronizedStatement.$clinit();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (block
-   ;; synchronizedstatement.SynchronizedStatement.$clinit();
-   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-   (call $$clinit__void@synchronizedstatement.SynchronizedStatement )
-   ;; Object.this.Object.<init>();
-   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@synchronizedstatement.SynchronizedStatement )
+  ;; Object.this.Object.<init>();
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return SynchronizedStatement.this;
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void SynchronizedStatement.main()
@@ -43,23 +43,21 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $synchronizedstatement.SynchronizedStatement.rtt)))
- (block $return.label
-  ;;@ synchronizedstatement/SynchronizedStatement.java:22:14
+ ;;@ synchronizedstatement/SynchronizedStatement.java:22:14
+ (block
+  ;; synchronized (SynchronizedStatement.this);{
+  ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
+  ;; SynchronizedStatement.this;
+  ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
+  (drop (local.get $this))
+  ;;@ synchronizedstatement/SynchronizedStatement.java:23:24
   (block
-   ;; synchronized (SynchronizedStatement.this);{
-   ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
-   ;; SynchronizedStatement.this;
-   ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
-   (drop (local.get $this))
-   ;;@ synchronizedstatement/SynchronizedStatement.java:23:24
-   (block
-    ;; (SynchronizedStatement.this.a = (SynchronizedStatement.this.a + 1));
-    ;;@ synchronizedstatement/SynchronizedStatement.java:24:6
-    (struct.set $synchronizedstatement.SynchronizedStatement $f_a__synchronizedstatement_SynchronizedStatement_(local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $f_a__synchronizedstatement_SynchronizedStatement_(local.get $this)) (i32.const 1)))
-    ;; (SynchronizedStatement.this.b = (SynchronizedStatement.this.b - 1));
-    ;;@ synchronizedstatement/SynchronizedStatement.java:25:6
-    (struct.set $synchronizedstatement.SynchronizedStatement $f_b__synchronizedstatement_SynchronizedStatement_(local.get $this) (i32.sub (struct.get $synchronizedstatement.SynchronizedStatement $f_b__synchronizedstatement_SynchronizedStatement_(local.get $this)) (i32.const 1)))
-   )
+   ;; (SynchronizedStatement.this.a = (SynchronizedStatement.this.a + 1));
+   ;;@ synchronizedstatement/SynchronizedStatement.java:24:6
+   (struct.set $synchronizedstatement.SynchronizedStatement $f_a__synchronizedstatement_SynchronizedStatement_(local.get $this) (i32.add (struct.get $synchronizedstatement.SynchronizedStatement $f_a__synchronizedstatement_SynchronizedStatement_(local.get $this)) (i32.const 1)))
+   ;; (SynchronizedStatement.this.b = (SynchronizedStatement.this.b - 1));
+   ;;@ synchronizedstatement/SynchronizedStatement.java:25:6
+   (struct.set $synchronizedstatement.SynchronizedStatement $f_b__synchronizedstatement_SynchronizedStatement_(local.get $this) (i32.sub (struct.get $synchronizedstatement.SynchronizedStatement $f_b__synchronizedstatement_SynchronizedStatement_(local.get $this)) (i32.const 1)))
   )
  )
 )
@@ -67,25 +65,23 @@
 
 ;;; void SynchronizedStatement.$clinit()
 (func $$clinit__void@synchronizedstatement.SynchronizedStatement
- (block $return.label
+ ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+ (block
+  ;; if (synchronizedstatement.SynchronizedStatement.$initialized) return;
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (block
-   ;; if (synchronizedstatement.SynchronizedStatement.$initialized) return;
-   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-   (if (global.get $f_$initialized__synchronizedstatement_SynchronizedStatement)
-    (then
-     ;; return;
-     ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__synchronizedstatement_SynchronizedStatement)
+   (then
+    ;; return;
+    ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+    (return )
    )
-   ;; (synchronizedstatement.SynchronizedStatement.$initialized = true);
-   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-   (global.set $f_$initialized__synchronizedstatement_SynchronizedStatement (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (synchronizedstatement.SynchronizedStatement.$initialized = true);
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (global.set $f_$initialized__synchronizedstatement_SynchronizedStatement (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -93,17 +89,12 @@
 (func $m_getClass__java_lang_Class@synchronizedstatement.SynchronizedStatement
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $synchronizedstatement.SynchronizedStatement.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getSynchronizedstatement.SynchronizedStatement();
-   (local.set $return.value (call $$getSynchronizedstatement.SynchronizedStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getSynchronizedstatement.SynchronizedStatement();
+  (return (call $$getSynchronizedstatement.SynchronizedStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@synchronizedstatement.SynchronizedStatement)
 

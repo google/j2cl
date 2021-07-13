@@ -90,21 +90,21 @@
  (param $this (ref null $jsvarargs.Main))
  (param $f i32)
  (result (ref null $jsvarargs.Main))
- (block $return.label
+ ;;@ jsvarargs/Main.java:86:9
+ (block
+  ;; jsvarargs.Main.$clinit();
   ;;@ jsvarargs/Main.java:86:9
-  (block
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/Main.java:86:9
-   (call $$clinit__void@jsvarargs.Main )
-   ;; Object.this.Object.<init>();
-   ;;@ jsvarargs/Main.java:86:9
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-   ;; (Main.this.field = f);
-   ;;@ jsvarargs/Main.java:87:4
-   (struct.set $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this) (local.get $f))
-  )
+  (call $$clinit__void@jsvarargs.Main )
+  ;; Object.this.Object.<init>();
+  ;;@ jsvarargs/Main.java:86:9
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; (Main.this.field = f);
+  ;;@ jsvarargs/Main.java:87:4
+  (struct.set $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this) (local.get $f))
+  ;; return Main.this;
+  ;;@ jsvarargs/Main.java:86:9
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; int Main.f1(int multiplier, int... numbers)
@@ -112,40 +112,30 @@
  (param $multiplier i32)
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
  (result i32)
- (local $return.value i32)
- (block $return.label
+ ;;@ jsvarargs/Main.java:92:20
+ (block
+  ;; jsvarargs.Main.$clinit();
   ;;@ jsvarargs/Main.java:92:20
-  (block
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/Main.java:92:20
-   (call $$clinit__void@jsvarargs.Main )
-   ;; return ((numbers.length + numbers.elements[0]) + multiplier);
-   ;;@ jsvarargs/Main.java:93:4
-   (local.set $return.value (i32.add (i32.add (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $numbers)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 0))) (local.get $multiplier)))
-   (br $return.label)
-  )
+  (call $$clinit__void@jsvarargs.Main )
+  ;; return ((numbers.length + numbers.elements[0]) + multiplier);
+  ;;@ jsvarargs/Main.java:93:4
+  (return (i32.add (i32.add (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $numbers)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 0))) (local.get $multiplier)))
  )
- (local.get $return.value)
 )
 
 ;;; int Main.f2(int... numbers)
 (func $m_f2__arrayOf_int__int@jsvarargs.Main
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
  (result i32)
- (local $return.value i32)
- (block $return.label
+ ;;@ jsvarargs/Main.java:98:20
+ (block
+  ;; jsvarargs.Main.$clinit();
   ;;@ jsvarargs/Main.java:98:20
-  (block
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/Main.java:98:20
-   (call $$clinit__void@jsvarargs.Main )
-   ;; return (numbers.length + numbers.elements[0]);
-   ;;@ jsvarargs/Main.java:99:4
-   (local.set $return.value (i32.add (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $numbers)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 0))))
-   (br $return.label)
-  )
+  (call $$clinit__void@jsvarargs.Main )
+  ;; return (numbers.length + numbers.elements[0]);
+  ;;@ jsvarargs/Main.java:99:4
+  (return (i32.add (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $numbers)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 0))))
  )
- (local.get $return.value)
 )
 
 ;;; int Main.f3(int m, int... numbers)
@@ -154,19 +144,14 @@
  (param $m i32)
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
  (result i32)
- (local $return.value i32)
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:104:13
-  (block
-   ;; return ((Main.this.field + m) + numbers.elements[1]);
-   ;;@ jsvarargs/Main.java:105:4
-   (local.set $return.value (i32.add (i32.add (struct.get $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this)) (local.get $m)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 1))))
-   (br $return.label)
-  )
+ ;;@ jsvarargs/Main.java:104:13
+ (block
+  ;; return ((Main.this.field + m) + numbers.elements[1]);
+  ;;@ jsvarargs/Main.java:105:4
+  (return (i32.add (i32.add (struct.get $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this)) (local.get $m)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 1))))
  )
- (local.get $return.value)
 )
 (elem declare func $m_f3__int__arrayOf_int__int@jsvarargs.Main)
 
@@ -175,19 +160,14 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
  (result i32)
- (local $return.value i32)
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:110:13
-  (block
-   ;; return (Main.this.field + numbers.elements[1]);
-   ;;@ jsvarargs/Main.java:111:4
-   (local.set $return.value (i32.add (struct.get $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 1))))
-   (br $return.label)
-  )
+ ;;@ jsvarargs/Main.java:110:13
+ (block
+  ;; return (Main.this.field + numbers.elements[1]);
+  ;;@ jsvarargs/Main.java:111:4
+  (return (i32.add (struct.get $jsvarargs.Main $f_field__jsvarargs_Main(local.get $this)) (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $numbers)) (i32.const 1))))
  )
- (local.get $return.value)
 )
 (elem declare func $m_f4__arrayOf_int__int@jsvarargs.Main)
 
@@ -195,68 +175,53 @@
 (func $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
- (block $return.label
+ ;;@ jsvarargs/Main.java:115:22
+ (block
+  ;; jsvarargs.Main.$clinit();
   ;;@ jsvarargs/Main.java:115:22
-  (block
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/Main.java:115:22
-   (call $$clinit__void@jsvarargs.Main )
-   ;; return ((T) elements.elements[0]);
-   ;;@ jsvarargs/Main.java:116:4
-   (local.set $return.value (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
-   (br $return.label)
-  )
+  (call $$clinit__void@jsvarargs.Main )
+  ;; return ((T) elements.elements[0]);
+  ;;@ jsvarargs/Main.java:116:4
+  (return (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
  )
- (local.get $return.value)
 )
 
 ;;; Main Main.parameterizedType(List<Main>... elements)
 (func $m_parameterizedType__arrayOf_java_util_List__jsvarargs_Main@jsvarargs.Main
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $jsvarargs.Main))
- (local $return.value (ref null $jsvarargs.Main))
  (local $$qualifier (ref null $java.lang.Object))
- (block $return.label
+ ;;@ jsvarargs/Main.java:120:21
+ (block
+  ;; jsvarargs.Main.$clinit();
   ;;@ jsvarargs/Main.java:120:21
-  (block
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/Main.java:120:21
-   (call $$clinit__void@jsvarargs.Main )
-   ;; return ((Main) (List<Main> $qualifier = ((List<Main>) elements.elements[0]),$qualifier.get(0)));
-   ;;@ jsvarargs/Main.java:121:4
-   (local.set $return.value (ref.cast (block (result (ref null $java.lang.Object))
-    (local.set $$qualifier (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)))
-    (call_ref (local.get $$qualifier)(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4)) (rtt.canon $java.util.List.vtable)) ))
-   ) (global.get $jsvarargs.Main.rtt)))
-   (br $return.label)
-  )
+  (call $$clinit__void@jsvarargs.Main )
+  ;; return ((Main) (List<Main> $qualifier = ((List<Main>) elements.elements[0]),$qualifier.get(0)));
+  ;;@ jsvarargs/Main.java:121:4
+  (return (ref.cast (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)))
+   (call_ref (local.get $$qualifier)(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4)) (rtt.canon $java.util.List.vtable)) ))
+  ) (global.get $jsvarargs.Main.rtt)))
  )
- (local.get $return.value)
 )
 
 ;;; T Main.parameterizedByT(List<T>... elements)
 (func $m_parameterizedByT__arrayOf_java_util_List__java_lang_Object@jsvarargs.Main
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
- (block $return.label
+ ;;@ jsvarargs/Main.java:125:22
+ (block
+  ;; jsvarargs.Main.$clinit();
   ;;@ jsvarargs/Main.java:125:22
-  (block
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/Main.java:125:22
-   (call $$clinit__void@jsvarargs.Main )
-   ;; return (List<T> $qualifier = ((List<T>) elements.elements[0]),$qualifier.get(0));
-   ;;@ jsvarargs/Main.java:126:4
-   (local.set $return.value (block (result (ref null $java.lang.Object))
-    (local.set $$qualifier (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)))
-    (call_ref (local.get $$qualifier)(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4)) (rtt.canon $java.util.List.vtable)) ))
-   ))
-   (br $return.label)
-  )
+  (call $$clinit__void@jsvarargs.Main )
+  ;; return (List<T> $qualifier = ((List<T>) elements.elements[0]),$qualifier.get(0));
+  ;;@ jsvarargs/Main.java:126:4
+  (return (block (result (ref null $java.lang.Object))
+   (local.set $$qualifier (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $elements)) (i32.const 0)))
+   (call_ref (local.get $$qualifier)(i32.const 0)(struct.get $java.util.List.vtable $m_get__int__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 4)) (rtt.canon $java.util.List.vtable)) ))
+  ))
  )
- (local.get $return.value)
 )
 
 ;;; void Main.testStaticMethodNotFirst()
@@ -274,83 +239,81 @@
  (local $$array_literal_8 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:129:14
-  (block
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:131:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal)
-   )))
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:132:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_1)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_1)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_1)
-   )))
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:134:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_2)
-   )))
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:135:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_3)
-   )))
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:137:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_4)
-   )))
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:138:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_5 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_5)
-   )))
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:140:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_6 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_6)
-   )))
-   ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:141:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_7 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_7)
-   )))
-   ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
-   ;;@ jsvarargs/Main.java:143:4
-   (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_8 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_8)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_8)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_8)
-   ))
-   ;; jsvarargs.Main.f1(1,ints);
-   ;;@ jsvarargs/Main.java:144:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(local.get $ints)))
-   ;; jsvarargs.Main.f1(1,ints);
-   ;;@ jsvarargs/Main.java:145:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(local.get $ints)))
-   ;; jsvarargs.Main.f1(1,null);
-   ;;@ jsvarargs/Main.java:146:4
-   (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $javaemul.internal.WasmArray.OfInt)))
-  )
+ ;;@ jsvarargs/Main.java:129:14
+ (block
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:131:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal)
+  )))
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:132:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_1)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_1)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_1)
+  )))
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:134:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_2)
+  )))
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:135:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_3)
+  )))
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:137:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_4)
+  )))
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:138:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_5 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_5)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_5)
+  )))
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:140:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_6 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_6)
+  )))
+  ;; jsvarargs.Main.f1(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:141:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_7 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_7)
+  )))
+  ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
+  ;;@ jsvarargs/Main.java:143:4
+  (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_8 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_8)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_8)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_8)
+  ))
+  ;; jsvarargs.Main.f1(1,ints);
+  ;;@ jsvarargs/Main.java:144:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(local.get $ints)))
+  ;; jsvarargs.Main.f1(1,ints);
+  ;;@ jsvarargs/Main.java:145:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(local.get $ints)))
+  ;; jsvarargs.Main.f1(1,null);
+  ;;@ jsvarargs/Main.java:146:4
+  (drop (call $m_f1__int__arrayOf_int__int@jsvarargs.Main (i32.const 1)(ref.null $javaemul.internal.WasmArray.OfInt)))
  )
 )
 (elem declare func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
@@ -384,165 +347,163 @@
  (local $$array_literal_21 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:149:14
-  (block
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:151:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal)
-   )))
-   ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal));
-   ;;@ jsvarargs/Main.java:152:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
-    (local.get $$array_literal_1)
-   )))
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:153:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_2)
-   )))
-   ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal));
-   ;;@ jsvarargs/Main.java:154:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_3)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_3)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
-    (local.get $$array_literal_3)
-   )))
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:156:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_4)
-   )))
-   ;; jsvarargs.Main.generics((Object[] $array_literal = new OfObject.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:157:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_5 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
-    (local.get $$array_literal_5)
-   )))
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:158:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_6 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_6)
-   )))
-   ;; jsvarargs.Main.generics((Object[] $array_literal = new OfObject.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:159:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_7 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
-    (local.get $$array_literal_7)
-   )))
-   ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:160:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_8 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
-    (local.get $$array_literal_8)
-   )))
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:162:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_9 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_9)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_9)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_9)
-   )))
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:163:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_10 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_10)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_10)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_10)
-   )))
-   ;; jsvarargs.Main.generics((int[][] $array_literal = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = -1),$array_literal),5),($array_literal.elements[0] = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal)),$array_literal));
-   ;;@ jsvarargs/Main.java:164:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_11 (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-     (local.set $$array_literal_12 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_12)) (i32.const 0) (i32.const 1))
-     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_12)) (i32.const 1) (i32.const -1))
-     (local.get $$array_literal_12)
-    )(i32.const 5)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_11)) (i32.const 0) (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-     (local.set $$array_literal_13 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_13)) (i32.const 0) (i32.const 1))
-     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_13)) (i32.const 1) (i32.const 2))
-     (local.get $$array_literal_13)
-    ))
-    (local.get $$array_literal_11)
-   )))
-   ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal));
-   ;;@ jsvarargs/Main.java:165:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_14 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_14)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_14)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
-    (local.get $$array_literal_14)
-   )))
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:167:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_15 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_15)
-   )))
-   ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:168:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_16 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_16)
-   )))
-   ;; jsvarargs.Main.generics((int[][] $array_literal = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = -1),$array_literal),5),($array_literal.elements[0] = (int[] $array_literal = new OfInt.<init>(0),$array_literal)),$array_literal));
-   ;;@ jsvarargs/Main.java:169:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_17 (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-     (local.set $$array_literal_18 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_18)) (i32.const 0) (i32.const 1))
-     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_18)) (i32.const 1) (i32.const -1))
-     (local.get $$array_literal_18)
-    )(i32.const 5)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_17)) (i32.const 0) (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-     (local.set $$array_literal_19 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-     (local.get $$array_literal_19)
-    ))
-    (local.get $$array_literal_17)
-   )))
-   ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
-   ;;@ jsvarargs/Main.java:171:4
-   (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_20 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_20)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_20)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_20)
+ ;;@ jsvarargs/Main.java:149:14
+ (block
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:151:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal)
+  )))
+  ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal));
+  ;;@ jsvarargs/Main.java:152:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
+   (local.get $$array_literal_1)
+  )))
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:153:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_2)
+  )))
+  ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal));
+  ;;@ jsvarargs/Main.java:154:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_3)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_3)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
+   (local.get $$array_literal_3)
+  )))
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:156:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_4)
+  )))
+  ;; jsvarargs.Main.generics((Object[] $array_literal = new OfObject.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:157:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_5 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
+   (local.get $$array_literal_5)
+  )))
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:158:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_6 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_6)
+  )))
+  ;; jsvarargs.Main.generics((Object[] $array_literal = new OfObject.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:159:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_7 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
+   (local.get $$array_literal_7)
+  )))
+  ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:160:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_8 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
+   (local.get $$array_literal_8)
+  )))
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:162:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_9 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_9)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_9)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_9)
+  )))
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:163:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_10 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_10)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_10)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_10)
+  )))
+  ;; jsvarargs.Main.generics((int[][] $array_literal = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = -1),$array_literal),5),($array_literal.elements[0] = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal)),$array_literal));
+  ;;@ jsvarargs/Main.java:164:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_11 (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+    (local.set $$array_literal_12 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_12)) (i32.const 0) (i32.const 1))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_12)) (i32.const 1) (i32.const -1))
+    (local.get $$array_literal_12)
+   )(i32.const 5)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_11)) (i32.const 0) (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+    (local.set $$array_literal_13 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_13)) (i32.const 0) (i32.const 1))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_13)) (i32.const 1) (i32.const 2))
+    (local.get $$array_literal_13)
    ))
-   ;; Integer[] integers = (Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal);
-   ;;@ jsvarargs/Main.java:172:4
-   (local.set $integers (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_21 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_21)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_21)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
-    (local.get $$array_literal_21)
+   (local.get $$array_literal_11)
+  )))
+  ;; jsvarargs.Main.generics((Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal));
+  ;;@ jsvarargs/Main.java:165:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_14 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_14)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_14)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
+   (local.get $$array_literal_14)
+  )))
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:167:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_15 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_15)
+  )))
+  ;; jsvarargs.Main.f2((int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:168:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_16 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_16)
+  )))
+  ;; jsvarargs.Main.generics((int[][] $array_literal = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = -1),$array_literal),5),($array_literal.elements[0] = (int[] $array_literal = new OfInt.<init>(0),$array_literal)),$array_literal));
+  ;;@ jsvarargs/Main.java:169:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_17 (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+    (local.set $$array_literal_18 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_18)) (i32.const 0) (i32.const 1))
+    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_18)) (i32.const 1) (i32.const -1))
+    (local.get $$array_literal_18)
+   )(i32.const 5)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_17)) (i32.const 0) (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+    (local.set $$array_literal_19 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+    (local.get $$array_literal_19)
    ))
-   ;; jsvarargs.Main.f2(ints);
-   ;;@ jsvarargs/Main.java:173:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints)))
-   ;; jsvarargs.Main.f2(ints);
-   ;;@ jsvarargs/Main.java:174:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints)))
-   ;; jsvarargs.Main.generics(integers);
-   ;;@ jsvarargs/Main.java:175:4
-   (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (local.get $integers)))
-  )
+   (local.get $$array_literal_17)
+  )))
+  ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
+  ;;@ jsvarargs/Main.java:171:4
+  (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_20 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_20)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_20)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_20)
+  ))
+  ;; Integer[] integers = (Integer[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Integer.valueOf(2)),$array_literal);
+  ;;@ jsvarargs/Main.java:172:4
+  (local.set $integers (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_21 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_21)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_21)) (i32.const 1) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 2)))
+   (local.get $$array_literal_21)
+  ))
+  ;; jsvarargs.Main.f2(ints);
+  ;;@ jsvarargs/Main.java:173:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints)))
+  ;; jsvarargs.Main.f2(ints);
+  ;;@ jsvarargs/Main.java:174:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints)))
+  ;; jsvarargs.Main.generics(integers);
+  ;;@ jsvarargs/Main.java:175:4
+  (drop (call $m_generics__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main (local.get $integers)))
  )
 )
 (elem declare func $m_testStaticMethodFirst__void@jsvarargs.Main)
@@ -559,52 +520,50 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:178:14
-  (block
-   ;; Main m = new Main.<init>(1);
-   ;;@ jsvarargs/Main.java:179:4
-   (local.set $m (call $m_<init>__int@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
-   ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:181:4
-   (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal)
-   )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:183:4
-   (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_1)
-   )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:185:4
-   (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_2)
-   )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:187:4
-   (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_3)
-   )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
-   ;;@ jsvarargs/Main.java:189:4
-   (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_4)
-   ))
-   ;; m.f3(1,ints);
-   ;;@ jsvarargs/Main.java:190:4
-   (drop (call_ref (local.get $m)(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-  )
+ ;;@ jsvarargs/Main.java:178:14
+ (block
+  ;; Main m = new Main.<init>(1);
+  ;;@ jsvarargs/Main.java:179:4
+  (local.set $m (call $m_<init>__int@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+  ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:181:4
+  (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal)
+  )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:183:4
+  (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_1)
+  )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:185:4
+  (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_2)
+  )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; m.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:187:4
+  (drop (call_ref (local.get $m)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_3)
+  )(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
+  ;;@ jsvarargs/Main.java:189:4
+  (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_4)
+  ))
+  ;; m.f3(1,ints);
+  ;;@ jsvarargs/Main.java:190:4
+  (drop (call_ref (local.get $m)(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
  )
 )
 (elem declare func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
@@ -621,52 +580,50 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:193:14
-  (block
-   ;; Main m = new Main.<init>(1);
-   ;;@ jsvarargs/Main.java:194:4
-   (local.set $m (call $m_<init>__int@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
-   ;; m.f4((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:196:4
-   (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal)
-   )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; m.f4((int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:198:4
-   (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_1)
-   )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; m.f4((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:200:4
-   (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_2)
-   )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; m.f4((int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:202:4
-   (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_3)
-   )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-   ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
-   ;;@ jsvarargs/Main.java:204:4
-   (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_4)
-   ))
-   ;; m.f4(ints);
-   ;;@ jsvarargs/Main.java:205:4
-   (drop (call_ref (local.get $m)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
-  )
+ ;;@ jsvarargs/Main.java:193:14
+ (block
+  ;; Main m = new Main.<init>(1);
+  ;;@ jsvarargs/Main.java:194:4
+  (local.set $m (call $m_<init>__int@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+  ;; m.f4((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:196:4
+  (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal)
+  )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; m.f4((int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:198:4
+  (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_1)
+  )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; m.f4((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:200:4
+  (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_2)
+  )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; m.f4((int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:202:4
+  (drop (call_ref (local.get $m)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_3)
+  )(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
+  ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
+  ;;@ jsvarargs/Main.java:204:4
+  (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_4)
+  ))
+  ;; m.f4(ints);
+  ;;@ jsvarargs/Main.java:205:4
+  (drop (call_ref (local.get $m)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f4__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $m)))))
  )
 )
 (elem declare func $m_testInstanceMethodFirst__void@jsvarargs.Main)
@@ -685,58 +642,56 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:208:14
-  (block
-   ;; AFunction a = new AFunction.<init>();
-   ;;@ jsvarargs/Main.java:209:4
-   (local.set $a (call $m_<init>___$pp_jsvarargs@jsvarargs.Main.AFunction (struct.new_with_rtt $jsvarargs.Main.AFunction (ref.as_non_null (global.get $jsvarargs.Main.AFunction.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.AFunction.itable)) (i32.const 0) (global.get $jsvarargs.Main.AFunction.rtt))))
-   ;; Object o1 = new Object.<init>();
-   ;;@ jsvarargs/Main.java:210:4
-   (local.set $o1 (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   ;; Object o2 = new Object.<init>();
-   ;;@ jsvarargs/Main.java:211:4
-   (local.set $o2 (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
-   ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = o1),($array_literal.elements[1] = o2),$array_literal));
-   ;;@ jsvarargs/Main.java:213:4
-   (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (local.get $o1))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (local.get $o2))
-    (local.get $$array_literal)
-   )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
-   ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:215:4
-   (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
-    (local.get $$array_literal_1)
-   )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
-   ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = o1),($array_literal.elements[1] = o2),$array_literal));
-   ;;@ jsvarargs/Main.java:217:4
-   (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 0) (local.get $o1))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 1) (local.get $o2))
-    (local.get $$array_literal_2)
-   )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
-   ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(0),$array_literal));
-   ;;@ jsvarargs/Main.java:219:4
-   (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
-    (local.get $$array_literal_3)
-   )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
-   ;; Object[] os = (Object[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = o1),($array_literal.elements[1] = o2),$array_literal);
-   ;;@ jsvarargs/Main.java:221:4
-   (local.set $os (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_4)) (i32.const 0) (local.get $o1))
-    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_4)) (i32.const 1) (local.get $o2))
-    (local.get $$array_literal_4)
-   ))
-   ;; a.f1(0,os);
-   ;;@ jsvarargs/Main.java:222:4
-   (drop (call_ref (local.get $a)(i32.const 0)(local.get $os)(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
-  )
+ ;;@ jsvarargs/Main.java:208:14
+ (block
+  ;; AFunction a = new AFunction.<init>();
+  ;;@ jsvarargs/Main.java:209:4
+  (local.set $a (call $m_<init>___$pp_jsvarargs@jsvarargs.Main.AFunction (struct.new_with_rtt $jsvarargs.Main.AFunction (ref.as_non_null (global.get $jsvarargs.Main.AFunction.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.AFunction.itable)) (i32.const 0) (global.get $jsvarargs.Main.AFunction.rtt))))
+  ;; Object o1 = new Object.<init>();
+  ;;@ jsvarargs/Main.java:210:4
+  (local.set $o1 (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  ;; Object o2 = new Object.<init>();
+  ;;@ jsvarargs/Main.java:211:4
+  (local.set $o2 (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = o1),($array_literal.elements[1] = o2),$array_literal));
+  ;;@ jsvarargs/Main.java:213:4
+  (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (local.get $o1))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (local.get $o2))
+   (local.get $$array_literal)
+  )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:215:4
+  (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
+   (local.get $$array_literal_1)
+  )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = o1),($array_literal.elements[1] = o2),$array_literal));
+  ;;@ jsvarargs/Main.java:217:4
+  (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 0) (local.get $o1))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 1) (local.get $o2))
+   (local.get $$array_literal_2)
+  )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  ;; a.f1(0,(Object[] $array_literal = new OfObject.<init>(0),$array_literal));
+  ;;@ jsvarargs/Main.java:219:4
+  (drop (call_ref (local.get $a)(i32.const 0)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
+   (local.get $$array_literal_3)
+  )(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
+  ;; Object[] os = (Object[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = o1),($array_literal.elements[1] = o2),$array_literal);
+  ;;@ jsvarargs/Main.java:221:4
+  (local.set $os (block (result (ref null $javaemul.internal.WasmArray.OfObject))
+   (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_4)) (i32.const 0) (local.get $o1))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_4)) (i32.const 1) (local.get $o2))
+   (local.get $$array_literal_4)
+  ))
+  ;; a.f1(0,os);
+  ;;@ jsvarargs/Main.java:222:4
+  (drop (call_ref (local.get $a)(i32.const 0)(local.get $os)(struct.get $jsvarargs.Main.AFunction.vtable $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (struct.get $jsvarargs.Main.AFunction $vtable(local.get $a)))))
  )
 )
 (elem declare func $m_testJsFunction__void@jsvarargs.Main)
@@ -749,26 +704,24 @@
  (local $$qualifier (ref null $jsvarargs.Main))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:225:14
+ ;;@ jsvarargs/Main.java:225:14
+ (block
+  ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
+  ;;@ jsvarargs/Main.java:226:4
+  (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal)
+  ))
+  ;;@ jsvarargs/Main.java:227:4
   (block
-   ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
-   ;;@ jsvarargs/Main.java:226:4
-   (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal)
-   ))
+   ;; Main $qualifier = new Main.<init>(1);
    ;;@ jsvarargs/Main.java:227:4
-   (block
-    ;; Main $qualifier = new Main.<init>(1);
-    ;;@ jsvarargs/Main.java:227:4
-    (local.set $$qualifier (call $m_<init>__int@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
-    ;; $qualifier.f3(1,ints);
-    ;;@ jsvarargs/Main.java:227:4
-    (drop (call_ref (local.get $$qualifier)(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $$qualifier)))))
-   )
+   (local.set $$qualifier (call $m_<init>__int@jsvarargs.Main (struct.new_with_rtt $jsvarargs.Main (ref.as_non_null (global.get $jsvarargs.Main.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.itable)) (i32.const 0) (i32.const 0) (global.get $jsvarargs.Main.rtt))(i32.const 1)))
+   ;; $qualifier.f3(1,ints);
+   ;;@ jsvarargs/Main.java:227:4
+   (drop (call_ref (local.get $$qualifier)(i32.const 1)(local.get $ints)(struct.get $jsvarargs.Main.vtable $m_f3__int__arrayOf_int__int (struct.get $jsvarargs.Main $vtable(local.get $$qualifier)))))
   )
  )
 )
@@ -780,16 +733,14 @@
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:230:14
-  (block
-   ;; int[] ints = null;
-   ;;@ jsvarargs/Main.java:231:4
-   (local.set $ints (ref.null $javaemul.internal.WasmArray.OfInt))
-   ;; jsvarargs.Main.f2(ints);
-   ;;@ jsvarargs/Main.java:232:4
-   (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints)))
-  )
+ ;;@ jsvarargs/Main.java:230:14
+ (block
+  ;; int[] ints = null;
+  ;;@ jsvarargs/Main.java:231:4
+  (local.set $ints (ref.null $javaemul.internal.WasmArray.OfInt))
+  ;; jsvarargs.Main.f2(ints);
+  ;;@ jsvarargs/Main.java:232:4
+  (drop (call $m_f2__arrayOf_int__int@jsvarargs.Main (local.get $ints)))
  )
 )
 (elem declare func $m_testNullJsVarargs__void@jsvarargs.Main)
@@ -800,38 +751,34 @@
  (local $function (ref null $java.lang.Object))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:240:18
-  (block
-   ;; GenericFunction<U> function = new $LambdaImplementor$1.<init>();
-   ;;@ jsvarargs/Main.java:241:4
-   (local.set $function (call $m_<init>__@jsvarargs.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsvarargs.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsvarargs.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsvarargs.Main.$LambdaImplementor$1.rtt))))
-  )
+ ;;@ jsvarargs/Main.java:240:18
+ (block
+  ;; GenericFunction<U> function = new $LambdaImplementor$1.<init>();
+  ;;@ jsvarargs/Main.java:241:4
+  (local.set $function (call $m_<init>__@jsvarargs.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsvarargs.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsvarargs.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsvarargs.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsvarargs.Main.$LambdaImplementor$1.rtt))))
  )
 )
 (elem declare func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
 
 ;;; void Main.$clinit()
 (func $$clinit__void@jsvarargs.Main
- (block $return.label
+ ;;@ jsvarargs/Main.java:25:13
+ (block
+  ;; if (jsvarargs.Main.$initialized) return;
   ;;@ jsvarargs/Main.java:25:13
-  (block
-   ;; if (jsvarargs.Main.$initialized) return;
-   ;;@ jsvarargs/Main.java:25:13
-   (if (global.get $f_$initialized__jsvarargs_Main)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:25:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:25:13
+    (return )
    )
-   ;; (jsvarargs.Main.$initialized = true);
-   ;;@ jsvarargs/Main.java:25:13
-   (global.set $f_$initialized__jsvarargs_Main (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsvarargs/Main.java:25:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsvarargs.Main.$initialized = true);
+  ;;@ jsvarargs/Main.java:25:13
+  (global.set $f_$initialized__jsvarargs_Main (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsvarargs/Main.java:25:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -839,17 +786,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main();
-   (local.set $return.value (call $$getJsvarargs.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main();
+  (return (call $$getJsvarargs.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main)
 
@@ -871,41 +813,39 @@
  (param $this (ref null $jsvarargs.Main.NativeObject))
  (param $pars (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $jsvarargs.Main.NativeObject))
- (block $return.label
+ ;;@ jsvarargs/Main.java:29:11
+ (block
+  ;; jsvarargs.Main.NativeObject.$clinit();
   ;;@ jsvarargs/Main.java:29:11
-  (block
-   ;; jsvarargs.Main.NativeObject.$clinit();
-   ;;@ jsvarargs/Main.java:29:11
-   (call $$clinit__void@jsvarargs.Main.NativeObject )
-   ;; Object.this.Object.<init>();
-   ;;@ jsvarargs/Main.java:29:11
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsvarargs.Main.NativeObject )
+  ;; Object.this.Object.<init>();
+  ;;@ jsvarargs/Main.java:29:11
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return NativeObject.this;
+  ;;@ jsvarargs/Main.java:29:11
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void NativeObject.$clinit()
 (func $$clinit__void@jsvarargs.Main.NativeObject
- (block $return.label
+ ;;@ jsvarargs/Main.java:28:15
+ (block
+  ;; if (jsvarargs.Main.NativeObject.$initialized) return;
   ;;@ jsvarargs/Main.java:28:15
-  (block
-   ;; if (jsvarargs.Main.NativeObject.$initialized) return;
-   ;;@ jsvarargs/Main.java:28:15
-   (if (global.get $f_$initialized__jsvarargs_Main_NativeObject)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:28:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_NativeObject)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:28:15
+    (return )
    )
-   ;; (jsvarargs.Main.NativeObject.$initialized = true);
-   ;;@ jsvarargs/Main.java:28:15
-   (global.set $f_$initialized__jsvarargs_Main_NativeObject (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsvarargs/Main.java:28:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsvarargs.Main.NativeObject.$initialized = true);
+  ;;@ jsvarargs/Main.java:28:15
+  (global.set $f_$initialized__jsvarargs_Main_NativeObject (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsvarargs/Main.java:28:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -913,17 +853,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.NativeObject
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.NativeObject))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.NativeObject.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.NativeObject();
-   (local.set $return.value (call $$getJsvarargs.Main.NativeObject__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.NativeObject();
+  (return (call $$getJsvarargs.Main.NativeObject__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.NativeObject)
 
@@ -946,38 +881,36 @@
  (param $i i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $jsvarargs.Main.SubVarargsConstructorClass))
- (block $return.label
+ ;;@ jsvarargs/Main.java:34:11
+ (block
+  ;; jsvarargs.Main.SubVarargsConstructorClass.$clinit();
   ;;@ jsvarargs/Main.java:34:11
-  (block
-   ;; jsvarargs.Main.SubVarargsConstructorClass.$clinit();
-   ;;@ jsvarargs/Main.java:34:11
-   (call $$clinit__void@jsvarargs.Main.SubVarargsConstructorClass )
-   ;; NativeObject.this.NativeObject.<init>(args);
-   ;;@ jsvarargs/Main.java:35:6
-   (drop (call $m_<init>__arrayOf_java_lang_Object@jsvarargs.Main.NativeObject (local.get $this)(local.get $args)))
-  )
+  (call $$clinit__void@jsvarargs.Main.SubVarargsConstructorClass )
+  ;; NativeObject.this.NativeObject.<init>(args);
+  ;;@ jsvarargs/Main.java:35:6
+  (drop (call $m_<init>__arrayOf_java_lang_Object@jsvarargs.Main.NativeObject (local.get $this)(local.get $args)))
+  ;; return SubVarargsConstructorClass.this;
+  ;;@ jsvarargs/Main.java:34:11
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void SubVarargsConstructorClass.$clinit()
 (func $$clinit__void@jsvarargs.Main.SubVarargsConstructorClass
- (block $return.label
+ ;;@ jsvarargs/Main.java:32:15
+ (block
+  ;; if (jsvarargs.Main.SubVarargsConstructorClass.$initialized) return;
   ;;@ jsvarargs/Main.java:32:15
-  (block
-   ;; if (jsvarargs.Main.SubVarargsConstructorClass.$initialized) return;
-   ;;@ jsvarargs/Main.java:32:15
-   (if (global.get $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:32:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:32:15
+    (return )
    )
-   ;; (jsvarargs.Main.SubVarargsConstructorClass.$initialized = true);
-   ;;@ jsvarargs/Main.java:32:15
-   (global.set $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass (i32.const 1))
   )
+  ;; (jsvarargs.Main.SubVarargsConstructorClass.$initialized = true);
+  ;;@ jsvarargs/Main.java:32:15
+  (global.set $f_$initialized__jsvarargs_Main_SubVarargsConstructorClass (i32.const 1))
  )
 )
 
@@ -985,17 +918,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.SubVarargsConstructorClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.SubVarargsConstructorClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.SubVarargsConstructorClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.SubVarargsConstructorClass();
-   (local.set $return.value (call $$getJsvarargs.Main.SubVarargsConstructorClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.SubVarargsConstructorClass();
+  (return (call $$getJsvarargs.Main.SubVarargsConstructorClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.SubVarargsConstructorClass)
 
@@ -1006,22 +934,20 @@
 
 ;;; void Function.$clinit()
 (func $$clinit__void@jsvarargs.Main.Function
- (block $return.label
+ ;;@ jsvarargs/Main.java:40:12
+ (block
+  ;; if (jsvarargs.Main.Function.$initialized) return;
   ;;@ jsvarargs/Main.java:40:12
-  (block
-   ;; if (jsvarargs.Main.Function.$initialized) return;
-   ;;@ jsvarargs/Main.java:40:12
-   (if (global.get $f_$initialized__jsvarargs_Main_Function)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:40:12
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_Function)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:40:12
+    (return )
    )
-   ;; (jsvarargs.Main.Function.$initialized = true);
-   ;;@ jsvarargs/Main.java:40:12
-   (global.set $f_$initialized__jsvarargs_Main_Function (i32.const 1))
   )
+  ;; (jsvarargs.Main.Function.$initialized = true);
+  ;;@ jsvarargs/Main.java:40:12
+  (global.set $f_$initialized__jsvarargs_Main_Function (i32.const 1))
  )
 )
 
@@ -1029,15 +955,10 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.Function
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.Function();
-   (local.set $return.value (call $$getJsvarargs.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.Function();
+  (return (call $$getJsvarargs.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.Function)
 
@@ -1059,41 +980,39 @@
 (func $m_<init>__@jsvarargs.Main.AbstractMethodWithVarargs
  (param $this (ref null $jsvarargs.Main.AbstractMethodWithVarargs))
  (result (ref null $jsvarargs.Main.AbstractMethodWithVarargs))
- (block $return.label
+ ;;@ jsvarargs/Main.java:45:31
+ (block
+  ;; jsvarargs.Main.AbstractMethodWithVarargs.$clinit();
   ;;@ jsvarargs/Main.java:45:31
-  (block
-   ;; jsvarargs.Main.AbstractMethodWithVarargs.$clinit();
-   ;;@ jsvarargs/Main.java:45:31
-   (call $$clinit__void@jsvarargs.Main.AbstractMethodWithVarargs )
-   ;; Object.this.Object.<init>();
-   ;;@ jsvarargs/Main.java:45:31
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsvarargs.Main.AbstractMethodWithVarargs )
+  ;; Object.this.Object.<init>();
+  ;;@ jsvarargs/Main.java:45:31
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return AbstractMethodWithVarargs.this;
+  ;;@ jsvarargs/Main.java:45:31
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void AbstractMethodWithVarargs.$clinit()
 (func $$clinit__void@jsvarargs.Main.AbstractMethodWithVarargs
- (block $return.label
+ ;;@ jsvarargs/Main.java:45:31
+ (block
+  ;; if (jsvarargs.Main.AbstractMethodWithVarargs.$initialized) return;
   ;;@ jsvarargs/Main.java:45:31
-  (block
-   ;; if (jsvarargs.Main.AbstractMethodWithVarargs.$initialized) return;
-   ;;@ jsvarargs/Main.java:45:31
-   (if (global.get $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:45:31
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:45:31
+    (return )
    )
-   ;; (jsvarargs.Main.AbstractMethodWithVarargs.$initialized = true);
-   ;;@ jsvarargs/Main.java:45:31
-   (global.set $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsvarargs/Main.java:45:31
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsvarargs.Main.AbstractMethodWithVarargs.$initialized = true);
+  ;;@ jsvarargs/Main.java:45:31
+  (global.set $f_$initialized__jsvarargs_Main_AbstractMethodWithVarargs (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsvarargs/Main.java:45:31
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -1104,34 +1023,30 @@
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)
 (func $m_staticMethod__arrayOf_int__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
- (block $return.label
+ ;;@ jsvarargs/Main.java:51:16
+ (block
+  ;; jsvarargs.Main.StaticInterfaceMethodWithVarargs.$clinit();
   ;;@ jsvarargs/Main.java:51:16
-  (block
-   ;; jsvarargs.Main.StaticInterfaceMethodWithVarargs.$clinit();
-   ;;@ jsvarargs/Main.java:51:16
-   (call $$clinit__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs )
-  )
+  (call $$clinit__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs )
  )
 )
 
 ;;; void StaticInterfaceMethodWithVarargs.$clinit()
 (func $$clinit__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
- (block $return.label
+ ;;@ jsvarargs/Main.java:50:19
+ (block
+  ;; if (jsvarargs.Main.StaticInterfaceMethodWithVarargs.$initialized) return;
   ;;@ jsvarargs/Main.java:50:19
-  (block
-   ;; if (jsvarargs.Main.StaticInterfaceMethodWithVarargs.$initialized) return;
-   ;;@ jsvarargs/Main.java:50:19
-   (if (global.get $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:50:19
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:50:19
+    (return )
    )
-   ;; (jsvarargs.Main.StaticInterfaceMethodWithVarargs.$initialized = true);
-   ;;@ jsvarargs/Main.java:50:19
-   (global.set $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs (i32.const 1))
   )
+  ;; (jsvarargs.Main.StaticInterfaceMethodWithVarargs.$initialized = true);
+  ;;@ jsvarargs/Main.java:50:19
+  (global.set $f_$initialized__jsvarargs_Main_StaticInterfaceMethodWithVarargs (i32.const 1))
  )
 )
 
@@ -1139,15 +1054,10 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.StaticInterfaceMethodWithVarargs
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.StaticInterfaceMethodWithVarargs();
-   (local.set $return.value (call $$getJsvarargs.Main.StaticInterfaceMethodWithVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.StaticInterfaceMethodWithVarargs();
+  (return (call $$getJsvarargs.Main.StaticInterfaceMethodWithVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.StaticInterfaceMethodWithVarargs)
 
@@ -1169,18 +1079,18 @@
 (func $m_<init>___$pp_jsvarargs@jsvarargs.Main.AFunction
  (param $this (ref null $jsvarargs.Main.AFunction))
  (result (ref null $jsvarargs.Main.AFunction))
- (block $return.label
+ ;;@ jsvarargs/Main.java:54:21
+ (block
+  ;; jsvarargs.Main.AFunction.$clinit();
   ;;@ jsvarargs/Main.java:54:21
-  (block
-   ;; jsvarargs.Main.AFunction.$clinit();
-   ;;@ jsvarargs/Main.java:54:21
-   (call $$clinit__void@jsvarargs.Main.AFunction )
-   ;; Object.this.Object.<init>();
-   ;;@ jsvarargs/Main.java:54:21
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsvarargs.Main.AFunction )
+  ;; Object.this.Object.<init>();
+  ;;@ jsvarargs/Main.java:54:21
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return AFunction.this;
+  ;;@ jsvarargs/Main.java:54:21
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; Object AFunction.f1(int i, Object... args)
@@ -1189,43 +1099,36 @@
  (param $i i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
  (local $this (ref null $jsvarargs.Main.AFunction))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.AFunction.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:57:18
-  (block
-   ;; return ((Object) args.elements[i]);
-   ;;@ jsvarargs/Main.java:58:6
-   (local.set $return.value (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (local.get $i)) (global.get $java.lang.Object.rtt)))
-   (br $return.label)
-  )
+ ;;@ jsvarargs/Main.java:57:18
+ (block
+  ;; return ((Object) args.elements[i]);
+  ;;@ jsvarargs/Main.java:58:6
+  (return (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (local.get $i)) (global.get $java.lang.Object.rtt)))
  )
- (local.get $return.value)
 )
 (elem declare func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction)
 
 ;;; void AFunction.$clinit()
 (func $$clinit__void@jsvarargs.Main.AFunction
- (block $return.label
+ ;;@ jsvarargs/Main.java:54:21
+ (block
+  ;; if (jsvarargs.Main.AFunction.$initialized) return;
   ;;@ jsvarargs/Main.java:54:21
-  (block
-   ;; if (jsvarargs.Main.AFunction.$initialized) return;
-   ;;@ jsvarargs/Main.java:54:21
-   (if (global.get $f_$initialized__jsvarargs_Main_AFunction)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:54:21
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_AFunction)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:54:21
+    (return )
    )
-   ;; (jsvarargs.Main.AFunction.$initialized = true);
-   ;;@ jsvarargs/Main.java:54:21
-   (global.set $f_$initialized__jsvarargs_Main_AFunction (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsvarargs/Main.java:54:21
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsvarargs.Main.AFunction.$initialized = true);
+  ;;@ jsvarargs/Main.java:54:21
+  (global.set $f_$initialized__jsvarargs_Main_AFunction (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsvarargs/Main.java:54:21
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -1233,17 +1136,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.AFunction
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.AFunction))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.AFunction.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.AFunction();
-   (local.set $return.value (call $$getJsvarargs.Main.AFunction__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.AFunction();
+  (return (call $$getJsvarargs.Main.AFunction__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.AFunction)
 
@@ -1275,18 +1173,18 @@
 (func $m_<init>__@jsvarargs.Main.SubMain
  (param $this (ref null $jsvarargs.Main.SubMain))
  (result (ref null $jsvarargs.Main.SubMain))
- (block $return.label
+ ;;@ jsvarargs/Main.java:63:11
+ (block
+  ;; jsvarargs.Main.SubMain.$clinit();
   ;;@ jsvarargs/Main.java:63:11
-  (block
-   ;; jsvarargs.Main.SubMain.$clinit();
-   ;;@ jsvarargs/Main.java:63:11
-   (call $$clinit__void@jsvarargs.Main.SubMain )
-   ;; Main.this.Main.<init>(10);
-   ;;@ jsvarargs/Main.java:64:6
-   (drop (call $m_<init>__int@jsvarargs.Main (local.get $this)(i32.const 10)))
-  )
+  (call $$clinit__void@jsvarargs.Main.SubMain )
+  ;; Main.this.Main.<init>(10);
+  ;;@ jsvarargs/Main.java:64:6
+  (drop (call $m_<init>__int@jsvarargs.Main (local.get $this)(i32.const 10)))
+  ;; return SubMain.this;
+  ;;@ jsvarargs/Main.java:63:11
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; int SubMain.f3(int m, int... numbers)
@@ -1295,7 +1193,6 @@
  (param $m i32)
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
  (result i32)
- (local $return.value i32)
  (local $a i32)
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (local $$array_literal_1 (ref null $javaemul.internal.WasmArray.OfInt))
@@ -1305,79 +1202,73 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $this (ref null $jsvarargs.Main.SubMain))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.SubMain.rtt)))
- (block $return.label
-  ;;@ jsvarargs/Main.java:68:15
-  (block
-   ;; int a = super.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/Main.java:70:6
-   (local.set $a (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal)
-   )))
-   ;; (a = (a + super.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal))));
-   ;;@ jsvarargs/Main.java:72:6
-   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_1)
-   ))))
-   ;; (a = (a + super.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal))));
-   ;;@ jsvarargs/Main.java:74:6
-   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_2)
-   ))))
-   ;; (a = (a + super.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal))));
-   ;;@ jsvarargs/Main.java:76:6
-   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_3)
-   ))))
-   ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
-   ;;@ jsvarargs/Main.java:78:6
-   (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_4)
-   ))
-   ;; (a = (a + super.f3(1,ints)));
-   ;;@ jsvarargs/Main.java:79:6
-   (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(local.get $ints))))
-   ;; return a;
-   ;;@ jsvarargs/Main.java:80:6
-   (local.set $return.value (local.get $a))
-   (br $return.label)
-  )
+ ;;@ jsvarargs/Main.java:68:15
+ (block
+  ;; int a = super.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/Main.java:70:6
+  (local.set $a (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal)
+  )))
+  ;; (a = (a + super.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal))));
+  ;;@ jsvarargs/Main.java:72:6
+  (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_1)
+  ))))
+  ;; (a = (a + super.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal))));
+  ;;@ jsvarargs/Main.java:74:6
+  (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_2)
+  ))))
+  ;; (a = (a + super.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal))));
+  ;;@ jsvarargs/Main.java:76:6
+  (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_3)
+  ))))
+  ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
+  ;;@ jsvarargs/Main.java:78:6
+  (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_4)
+  ))
+  ;; (a = (a + super.f3(1,ints)));
+  ;;@ jsvarargs/Main.java:79:6
+  (local.set $a (i32.add (local.get $a) (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (local.get $this)(i32.const 1)(local.get $ints))))
+  ;; return a;
+  ;;@ jsvarargs/Main.java:80:6
+  (return (local.get $a))
  )
- (local.get $return.value)
 )
 (elem declare func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain)
 
 ;;; void SubMain.$clinit()
 (func $$clinit__void@jsvarargs.Main.SubMain
- (block $return.label
+ ;;@ jsvarargs/Main.java:62:15
+ (block
+  ;; if (jsvarargs.Main.SubMain.$initialized) return;
   ;;@ jsvarargs/Main.java:62:15
-  (block
-   ;; if (jsvarargs.Main.SubMain.$initialized) return;
-   ;;@ jsvarargs/Main.java:62:15
-   (if (global.get $f_$initialized__jsvarargs_Main_SubMain)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:62:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_SubMain)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:62:15
+    (return )
    )
-   ;; (jsvarargs.Main.SubMain.$initialized = true);
-   ;;@ jsvarargs/Main.java:62:15
-   (global.set $f_$initialized__jsvarargs_Main_SubMain (i32.const 1))
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/Main.java:62:15
-   (call $$clinit__void@jsvarargs.Main )
   )
+  ;; (jsvarargs.Main.SubMain.$initialized = true);
+  ;;@ jsvarargs/Main.java:62:15
+  (global.set $f_$initialized__jsvarargs_Main_SubMain (i32.const 1))
+  ;; jsvarargs.Main.$clinit();
+  ;;@ jsvarargs/Main.java:62:15
+  (call $$clinit__void@jsvarargs.Main )
  )
 )
 
@@ -1385,17 +1276,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.SubMain
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.SubMain))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.SubMain.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.SubMain();
-   (local.set $return.value (call $$getJsvarargs.Main.SubMain__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.SubMain();
+  (return (call $$getJsvarargs.Main.SubMain__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.SubMain)
 
@@ -1406,22 +1292,20 @@
 
 ;;; void GenericFunction.$clinit()
 (func $$clinit__void@jsvarargs.Main.GenericFunction
- (block $return.label
+ ;;@ jsvarargs/Main.java:236:12
+ (block
+  ;; if (jsvarargs.Main.GenericFunction.$initialized) return;
   ;;@ jsvarargs/Main.java:236:12
-  (block
-   ;; if (jsvarargs.Main.GenericFunction.$initialized) return;
-   ;;@ jsvarargs/Main.java:236:12
-   (if (global.get $f_$initialized__jsvarargs_Main_GenericFunction)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:236:12
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_GenericFunction)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:236:12
+    (return )
    )
-   ;; (jsvarargs.Main.GenericFunction.$initialized = true);
-   ;;@ jsvarargs/Main.java:236:12
-   (global.set $f_$initialized__jsvarargs_Main_GenericFunction (i32.const 1))
   )
+  ;; (jsvarargs.Main.GenericFunction.$initialized = true);
+  ;;@ jsvarargs/Main.java:236:12
+  (global.set $f_$initialized__jsvarargs_Main_GenericFunction (i32.const 1))
  )
 )
 
@@ -1429,15 +1313,10 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.GenericFunction
  (param $this (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.GenericFunction();
-   (local.set $return.value (call $$getJsvarargs.Main.GenericFunction__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.GenericFunction();
+  (return (call $$getJsvarargs.Main.GenericFunction__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.GenericFunction)
 
@@ -1459,18 +1338,18 @@
 (func $m_<init>__@jsvarargs.Main.$LambdaImplementor$1
  (param $this (ref null $jsvarargs.Main.$LambdaImplementor$1))
  (result (ref null $jsvarargs.Main.$LambdaImplementor$1))
- (block $return.label
+ ;;@ jsvarargs/Main.java:241:34
+ (block
+  ;; jsvarargs.Main.$LambdaImplementor$1.$clinit();
   ;;@ jsvarargs/Main.java:241:34
-  (block
-   ;; jsvarargs.Main.$LambdaImplementor$1.$clinit();
-   ;;@ jsvarargs/Main.java:241:34
-   (call $$clinit__void@jsvarargs.Main.$LambdaImplementor$1 )
-   ;; Object.this.Object.<init>();
-   ;;@ jsvarargs/Main.java:241:34
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsvarargs.Main.$LambdaImplementor$1 )
+  ;; Object.this.Object.<init>();
+  ;;@ jsvarargs/Main.java:241:34
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return $LambdaImplementor$1.this;
+  ;;@ jsvarargs/Main.java:241:34
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; Object $LambdaImplementor$1.m(T n, T... param)
@@ -1479,51 +1358,44 @@
  (param $n (ref null $java.lang.Object))
  (param $param (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
  (local $n_1 (ref null $java.lang.Object))
  (local $param_1 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $jsvarargs.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.$LambdaImplementor$1.rtt)))
- (block $return.label
+ ;;@ jsvarargs/Main.java:241:34
+ (block
+  ;; U n = ((T) n);
   ;;@ jsvarargs/Main.java:241:34
-  (block
-   ;; U n = ((T) n);
-   ;;@ jsvarargs/Main.java:241:34
-   (local.set $n_1 (ref.cast (local.get $n) (global.get $java.lang.Object.rtt)))
-   ;; U[] param = ((T[]) param);
-   ;;@ jsvarargs/Main.java:241:34
-   (local.set $param_1 (ref.cast (local.get $param) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
-   ;; return param;
-   ;;@ jsvarargs/Main.java:241:48
-   (local.set $return.value (local.get $param_1))
-   (br $return.label)
-  )
+  (local.set $n_1 (ref.cast (local.get $n) (global.get $java.lang.Object.rtt)))
+  ;; U[] param = ((T[]) param);
+  ;;@ jsvarargs/Main.java:241:34
+  (local.set $param_1 (ref.cast (local.get $param) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
+  ;; return param;
+  ;;@ jsvarargs/Main.java:241:48
+  (return (local.get $param_1))
  )
- (local.get $return.value)
 )
 (elem declare func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1)
 
 ;;; void $LambdaImplementor$1.$clinit()
 (func $$clinit__void@jsvarargs.Main.$LambdaImplementor$1
- (block $return.label
+ ;;@ jsvarargs/Main.java:241:34
+ (block
+  ;; if (jsvarargs.Main.$LambdaImplementor$1.$initialized) return;
   ;;@ jsvarargs/Main.java:241:34
-  (block
-   ;; if (jsvarargs.Main.$LambdaImplementor$1.$initialized) return;
-   ;;@ jsvarargs/Main.java:241:34
-   (if (global.get $f_$initialized__jsvarargs_Main_$LambdaImplementor$1)
-    (then
-     ;; return;
-     ;;@ jsvarargs/Main.java:241:34
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_Main_$LambdaImplementor$1)
+   (then
+    ;; return;
+    ;;@ jsvarargs/Main.java:241:34
+    (return )
    )
-   ;; (jsvarargs.Main.$LambdaImplementor$1.$initialized = true);
-   ;;@ jsvarargs/Main.java:241:34
-   (global.set $f_$initialized__jsvarargs_Main_$LambdaImplementor$1 (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsvarargs/Main.java:241:34
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsvarargs.Main.$LambdaImplementor$1.$initialized = true);
+  ;;@ jsvarargs/Main.java:241:34
+  (global.set $f_$initialized__jsvarargs_Main_$LambdaImplementor$1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsvarargs/Main.java:241:34
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -1531,17 +1403,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.Main.$LambdaImplementor$1.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.$LambdaImplementor$1();
-   (local.set $return.value (call $$getJsvarargs.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.$LambdaImplementor$1();
+  (return (call $$getJsvarargs.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1)
 
@@ -1573,41 +1440,39 @@
 (func $m_<init>__@jsvarargs.QualifiedSuperMethodCall
  (param $this (ref null $jsvarargs.QualifiedSuperMethodCall))
  (result (ref null $jsvarargs.QualifiedSuperMethodCall))
- (block $return.label
+ ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:9
+ (block
+  ;; jsvarargs.QualifiedSuperMethodCall.$clinit();
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:9
-  (block
-   ;; jsvarargs.QualifiedSuperMethodCall.$clinit();
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:9
-   (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall )
-   ;; Main.this.Main.<init>(0);
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:20:4
-   (drop (call $m_<init>__int@jsvarargs.Main (local.get $this)(i32.const 0)))
-  )
+  (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall )
+  ;; Main.this.Main.<init>(0);
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:20:4
+  (drop (call $m_<init>__int@jsvarargs.Main (local.get $this)(i32.const 0)))
+  ;; return QualifiedSuperMethodCall.this;
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:9
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void QualifiedSuperMethodCall.$clinit()
 (func $$clinit__void@jsvarargs.QualifiedSuperMethodCall
- (block $return.label
+ ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
+ (block
+  ;; if (jsvarargs.QualifiedSuperMethodCall.$initialized) return;
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
-  (block
-   ;; if (jsvarargs.QualifiedSuperMethodCall.$initialized) return;
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
-   (if (global.get $f_$initialized__jsvarargs_QualifiedSuperMethodCall)
-    (then
-     ;; return;
-     ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_QualifiedSuperMethodCall)
+   (then
+    ;; return;
+    ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
+    (return )
    )
-   ;; (jsvarargs.QualifiedSuperMethodCall.$initialized = true);
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
-   (global.set $f_$initialized__jsvarargs_QualifiedSuperMethodCall (i32.const 1))
-   ;; jsvarargs.Main.$clinit();
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
-   (call $$clinit__void@jsvarargs.Main )
   )
+  ;; (jsvarargs.QualifiedSuperMethodCall.$initialized = true);
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
+  (global.set $f_$initialized__jsvarargs_QualifiedSuperMethodCall (i32.const 1))
+  ;; jsvarargs.Main.$clinit();
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:18:13
+  (call $$clinit__void@jsvarargs.Main )
  )
 )
 
@@ -1615,17 +1480,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.QualifiedSuperMethodCall))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.QualifiedSuperMethodCall.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.QualifiedSuperMethodCall();
-   (local.set $return.value (call $$getJsvarargs.QualifiedSuperMethodCall__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.QualifiedSuperMethodCall();
+  (return (call $$getJsvarargs.QualifiedSuperMethodCall__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall)
 
@@ -1649,21 +1509,21 @@
  (param $this (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (param $$outer_this (ref null $jsvarargs.QualifiedSuperMethodCall))
  (result (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
- (block $return.label
+ ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+ (block
+  ;; jsvarargs.QualifiedSuperMethodCall.InnerClass.$clinit();
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-  (block
-   ;; jsvarargs.QualifiedSuperMethodCall.InnerClass.$clinit();
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-   (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall.InnerClass )
-   ;; (InnerClass.this.this = $outer_this);
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-   (struct.set $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall.InnerClass )
+  ;; (InnerClass.this.this = $outer_this);
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+  (struct.set $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return InnerClass.this;
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void InnerClass.test()
@@ -1677,74 +1537,70 @@
  (local $$array_literal_4 (ref null $javaemul.internal.WasmArray.OfInt))
  (local $this (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.rtt)))
- (block $return.label
-  ;;@ jsvarargs/QualifiedSuperMethodCall.java:24:16
-  (block
-   ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:26:6
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal)
-   )))
-   ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:28:6
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_1)
-   )))
-   ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:30:6
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_2)
-   )))
-   ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:32:6
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
-    (local.get $$array_literal_3)
-   )))
-   ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:34:6
-   (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
-    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
-    (local.get $$array_literal_4)
-   ))
-   ;; InnerClass.this.this.f3(1,ints);
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:35:6
-   (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(local.get $ints)))
-  )
+ ;;@ jsvarargs/QualifiedSuperMethodCall.java:24:16
+ (block
+  ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:26:6
+  (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal)
+  )))
+  ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:28:6
+  (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_1)
+  )))
+  ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal));
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:30:6
+  (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_2)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_2)
+  )))
+  ;; InnerClass.this.this.f3(1,(int[] $array_literal = new OfInt.<init>(0),$array_literal));
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:32:6
+  (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_3 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 0)))
+   (local.get $$array_literal_3)
+  )))
+  ;; int[] ints = (int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),$array_literal);
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:34:6
+  (local.set $ints (block (result (ref null $javaemul.internal.WasmArray.OfInt))
+   (local.set $$array_literal_4 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 0) (i32.const 1))
+   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal_4)) (i32.const 1) (i32.const 2))
+   (local.get $$array_literal_4)
+  ))
+  ;; InnerClass.this.this.f3(1,ints);
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:35:6
+  (drop (call $m_f3__int__arrayOf_int__int@jsvarargs.Main (struct.get $jsvarargs.QualifiedSuperMethodCall.InnerClass $$outer_this__jsvarargs_QualifiedSuperMethodCall_InnerClass(local.get $this))(i32.const 1)(local.get $ints)))
  )
 )
 (elem declare func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass)
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
- (block $return.label
+ ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+ (block
+  ;; if (jsvarargs.QualifiedSuperMethodCall.InnerClass.$initialized) return;
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-  (block
-   ;; if (jsvarargs.QualifiedSuperMethodCall.InnerClass.$initialized) return;
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-   (if (global.get $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass)
-    (then
-     ;; return;
-     ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass)
+   (then
+    ;; return;
+    ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+    (return )
    )
-   ;; (jsvarargs.QualifiedSuperMethodCall.InnerClass.$initialized = true);
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-   (global.set $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (jsvarargs.QualifiedSuperMethodCall.InnerClass.$initialized = true);
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+  (global.set $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:23:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -1752,17 +1608,12 @@
 (func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall.InnerClass
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsvarargs.QualifiedSuperMethodCall.InnerClass.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.QualifiedSuperMethodCall.InnerClass();
-   (local.set $return.value (call $$getJsvarargs.QualifiedSuperMethodCall.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.QualifiedSuperMethodCall.InnerClass();
+  (return (call $$getJsvarargs.QualifiedSuperMethodCall.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall.InnerClass)
 

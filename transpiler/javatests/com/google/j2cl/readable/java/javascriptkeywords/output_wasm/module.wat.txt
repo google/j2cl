@@ -22,18 +22,18 @@
 (func $m_<init>__@javascriptkeywords.JSKeyWords
  (param $this (ref null $javascriptkeywords.JSKeyWords))
  (result (ref null $javascriptkeywords.JSKeyWords))
- (block $return.label
+ ;;@ javascriptkeywords/JSKeyWords.java:18:13
+ (block
+  ;; javascriptkeywords.JSKeyWords.$clinit();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (block
-   ;; javascriptkeywords.JSKeyWords.$clinit();
-   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-   (call $$clinit__void@javascriptkeywords.JSKeyWords )
-   ;; Object.this.Object.<init>();
-   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@javascriptkeywords.JSKeyWords )
+  ;; Object.this.Object.<init>();
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return JSKeyWords.this;
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; int JSKeyWords.test(int in)
@@ -41,47 +41,40 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $in i32)
  (result i32)
- (local $return.value i32)
  (local $let i32)
  (local $this (ref null $javascriptkeywords.JSKeyWords))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $javascriptkeywords.JSKeyWords.rtt)))
- (block $return.label
-  ;;@ javascriptkeywords/JSKeyWords.java:19:13
-  (block
-   ;; int let = 0;
-   ;;@ javascriptkeywords/JSKeyWords.java:20:4
-   (local.set $let (i32.const 0))
-   ;; return (let + in);
-   ;;@ javascriptkeywords/JSKeyWords.java:21:4
-   (local.set $return.value (i32.add (local.get $let) (local.get $in)))
-   (br $return.label)
-  )
+ ;;@ javascriptkeywords/JSKeyWords.java:19:13
+ (block
+  ;; int let = 0;
+  ;;@ javascriptkeywords/JSKeyWords.java:20:4
+  (local.set $let (i32.const 0))
+  ;; return (let + in);
+  ;;@ javascriptkeywords/JSKeyWords.java:21:4
+  (return (i32.add (local.get $let) (local.get $in)))
  )
- (local.get $return.value)
 )
 (elem declare func $m_test__int__int@javascriptkeywords.JSKeyWords)
 
 ;;; void JSKeyWords.$clinit()
 (func $$clinit__void@javascriptkeywords.JSKeyWords
- (block $return.label
+ ;;@ javascriptkeywords/JSKeyWords.java:18:13
+ (block
+  ;; if (javascriptkeywords.JSKeyWords.$initialized) return;
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (block
-   ;; if (javascriptkeywords.JSKeyWords.$initialized) return;
-   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-   (if (global.get $f_$initialized__javascriptkeywords_JSKeyWords)
-    (then
-     ;; return;
-     ;;@ javascriptkeywords/JSKeyWords.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__javascriptkeywords_JSKeyWords)
+   (then
+    ;; return;
+    ;;@ javascriptkeywords/JSKeyWords.java:18:13
+    (return )
    )
-   ;; (javascriptkeywords.JSKeyWords.$initialized = true);
-   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-   (global.set $f_$initialized__javascriptkeywords_JSKeyWords (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (javascriptkeywords.JSKeyWords.$initialized = true);
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (global.set $f_$initialized__javascriptkeywords_JSKeyWords (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -89,17 +82,12 @@
 (func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $javascriptkeywords.JSKeyWords))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $javascriptkeywords.JSKeyWords.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getJavascriptkeywords.JSKeyWords();
-   (local.set $return.value (call $$getJavascriptkeywords.JSKeyWords__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJavascriptkeywords.JSKeyWords();
+  (return (call $$getJavascriptkeywords.JSKeyWords__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords)
 

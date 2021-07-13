@@ -36,18 +36,18 @@
 (func $m_<init>__@trycatch.TryCatch
  (param $this (ref null $trycatch.TryCatch))
  (result (ref null $trycatch.TryCatch))
- (block $return.label
+ ;;@ trycatch/TryCatch.java:18:13
+ (block
+  ;; trycatch.TryCatch.$clinit();
   ;;@ trycatch/TryCatch.java:18:13
-  (block
-   ;; trycatch.TryCatch.$clinit();
-   ;;@ trycatch/TryCatch.java:18:13
-   (call $$clinit__void@trycatch.TryCatch )
-   ;; Object.this.Object.<init>();
-   ;;@ trycatch/TryCatch.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@trycatch.TryCatch )
+  ;; Object.this.Object.<init>();
+  ;;@ trycatch/TryCatch.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return TryCatch.this;
+  ;;@ trycatch/TryCatch.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void TryCatch.testMultiCatch()
@@ -57,17 +57,15 @@
  (local $r (ref null $java.lang.RuntimeException))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:20:14
+ ;;@ trycatch/TryCatch.java:20:14
+ (block
+  ;; try {
+  ;;@ trycatch/TryCatch.java:21:4
+  ;;@ trycatch/TryCatch.java:21:8
   (block
-   ;; try {
-   ;;@ trycatch/TryCatch.java:21:4
-   ;;@ trycatch/TryCatch.java:21:8
-   (block
-    ;; throw new ClassCastException.<init>();
-    ;;@ trycatch/TryCatch.java:22:6
-    (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
-   )
+   ;; throw new ClassCastException.<init>();
+   ;;@ trycatch/TryCatch.java:22:6
+   (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
   )
  )
 )
@@ -81,25 +79,23 @@
  (local $e_2 (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:30:14
+ ;;@ trycatch/TryCatch.java:30:14
+ (block
+  ;; try {
+  ;;@ trycatch/TryCatch.java:31:4
+  ;;@ trycatch/TryCatch.java:31:8
   (block
-   ;; try {
-   ;;@ trycatch/TryCatch.java:31:4
-   ;;@ trycatch/TryCatch.java:31:8
-   (block
-    ;; throw new ClassCastException.<init>();
-    ;;@ trycatch/TryCatch.java:32:6
-    (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
-   )
-   ;; try {
-   ;;@ trycatch/TryCatch.java:37:4
-   ;;@ trycatch/TryCatch.java:37:8
-   (block
-    ;; throw new ClassCastException.<init>();
-    ;;@ trycatch/TryCatch.java:38:6
-    (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
-   )
+   ;; throw new ClassCastException.<init>();
+   ;;@ trycatch/TryCatch.java:32:6
+   (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
+  )
+  ;; try {
+  ;;@ trycatch/TryCatch.java:37:4
+  ;;@ trycatch/TryCatch.java:37:8
+  (block
+   ;; throw new ClassCastException.<init>();
+   ;;@ trycatch/TryCatch.java:38:6
+   (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
   )
  )
 )
@@ -111,17 +107,15 @@
  (local $e (ref null $java.lang.Throwable))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:46:14
+ ;;@ trycatch/TryCatch.java:46:14
+ (block
+  ;; try {
+  ;;@ trycatch/TryCatch.java:47:4
+  ;;@ trycatch/TryCatch.java:47:8
   (block
-   ;; try {
-   ;;@ trycatch/TryCatch.java:47:4
-   ;;@ trycatch/TryCatch.java:47:8
-   (block
-    ;; throw new ClassCastException.<init>();
-    ;;@ trycatch/TryCatch.java:48:6
-    (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
-   )
+   ;; throw new ClassCastException.<init>();
+   ;;@ trycatch/TryCatch.java:48:6
+   (throw $exception.event (call $m_<init>__@java.lang.ClassCastException (struct.new_with_rtt $java.lang.ClassCastException (ref.as_non_null (global.get $java.lang.ClassCastException.vtable)) (ref.as_non_null (global.get $java.lang.ClassCastException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.ClassCastException.rtt))))
   )
  )
 )
@@ -132,17 +126,15 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:54:14
+ ;;@ trycatch/TryCatch.java:54:14
+ (block
+  ;; try {
+  ;;@ trycatch/TryCatch.java:55:4
+  ;;@ trycatch/TryCatch.java:55:8
   (block
-   ;; try {
-   ;;@ trycatch/TryCatch.java:55:4
-   ;;@ trycatch/TryCatch.java:55:8
-   (block
-   )
-   ;;@ trycatch/TryCatch.java:57:14
-   (block
-   )
+  )
+  ;;@ trycatch/TryCatch.java:57:14
+  (block
   )
  )
 )
@@ -158,52 +150,50 @@
  (local $e (ref null $java.lang.Exception))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:66:14
+ ;;@ trycatch/TryCatch.java:66:14
+ (block
+  ;; try {
+  ;;@ trycatch/TryCatch.java:67:4
+  ;;@ trycatch/TryCatch.java:67:4
   (block
+   ;; Throwable $primaryExc;
+   ;;@ trycatch/TryCatch.java:67:4
+   
+   ;; ClosableThing thing;
+   ;;@ trycatch/TryCatch.java:67:4
+   
+   ;; ClosableThing thing2;
+   ;;@ trycatch/TryCatch.java:67:4
+   
    ;; try {
    ;;@ trycatch/TryCatch.java:67:4
    ;;@ trycatch/TryCatch.java:67:4
    (block
-    ;; Throwable $primaryExc;
+    ;; (thing = new ClosableThing.<init>());
     ;;@ trycatch/TryCatch.java:67:4
-    
-    ;; ClosableThing thing;
+    (local.set $thing (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+    ;; (thing2 = new ClosableThing.<init>());
     ;;@ trycatch/TryCatch.java:67:4
-    
-    ;; ClosableThing thing2;
+    (local.set $thing2 (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+    ;; throw new Exception.<init>();
+    ;;@ trycatch/TryCatch.java:69:6
+    (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
+   )
+   ;;@ trycatch/TryCatch.java:67:4
+   (block
+    ;; ($primaryExc = javaemul.internal.Exceptions.safeClose(thing2,$primaryExc));
     ;;@ trycatch/TryCatch.java:67:4
-    
-    ;; try {
+    (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $thing2)(local.get $$primaryExc)))
+    ;; ($primaryExc = javaemul.internal.Exceptions.safeClose(thing,$primaryExc));
     ;;@ trycatch/TryCatch.java:67:4
+    (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $thing)(local.get $$primaryExc)))
+    ;; if (!javaemul.internal.Platform.isNull($primaryExc)) throw $primaryExc;
     ;;@ trycatch/TryCatch.java:67:4
-    (block
-     ;; (thing = new ClosableThing.<init>());
-     ;;@ trycatch/TryCatch.java:67:4
-     (local.set $thing (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
-     ;; (thing2 = new ClosableThing.<init>());
-     ;;@ trycatch/TryCatch.java:67:4
-     (local.set $thing2 (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
-     ;; throw new Exception.<init>();
-     ;;@ trycatch/TryCatch.java:69:6
-     (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
-    )
-    ;;@ trycatch/TryCatch.java:67:4
-    (block
-     ;; ($primaryExc = javaemul.internal.Exceptions.safeClose(thing2,$primaryExc));
-     ;;@ trycatch/TryCatch.java:67:4
-     (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $thing2)(local.get $$primaryExc)))
-     ;; ($primaryExc = javaemul.internal.Exceptions.safeClose(thing,$primaryExc));
-     ;;@ trycatch/TryCatch.java:67:4
-     (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $thing)(local.get $$primaryExc)))
-     ;; if (!javaemul.internal.Platform.isNull($primaryExc)) throw $primaryExc;
-     ;;@ trycatch/TryCatch.java:67:4
-     (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
-      (then
-       ;; throw $primaryExc;
-       ;;@ trycatch/TryCatch.java:67:4
-       (throw $exception.event (local.get $$primaryExc))
-      )
+    (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
+     (then
+      ;; throw $primaryExc;
+      ;;@ trycatch/TryCatch.java:67:4
+      (throw $exception.event (local.get $$primaryExc))
      )
     )
    )
@@ -224,58 +214,56 @@
  (local $e (ref null $java.lang.Exception))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:75:14
+ ;;@ trycatch/TryCatch.java:75:14
+ (block
+  ;; ClosableThing thing = new ClosableThing.<init>();
+  ;;@ trycatch/TryCatch.java:76:4
+  (local.set $thing (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+  ;; ClosableThing thing2 = new ClosableThing.<init>();
+  ;;@ trycatch/TryCatch.java:77:4
+  (local.set $thing2 (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+  ;; try {
+  ;;@ trycatch/TryCatch.java:78:4
+  ;;@ trycatch/TryCatch.java:78:4
   (block
-   ;; ClosableThing thing = new ClosableThing.<init>();
-   ;;@ trycatch/TryCatch.java:76:4
-   (local.set $thing (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
-   ;; ClosableThing thing2 = new ClosableThing.<init>();
-   ;;@ trycatch/TryCatch.java:77:4
-   (local.set $thing2 (call $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing (struct.new_with_rtt $trycatch.TryCatch.ClosableThing (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.vtable)) (ref.as_non_null (global.get $trycatch.TryCatch.ClosableThing.itable)) (i32.const 0) (global.get $trycatch.TryCatch.ClosableThing.rtt))))
+   ;; Throwable $primaryExc;
+   ;;@ trycatch/TryCatch.java:78:4
+   
+   ;; ClosableThing $resource;
+   ;;@ trycatch/TryCatch.java:78:4
+   
+   ;; ClosableThing $resource;
+   ;;@ trycatch/TryCatch.java:78:4
+   
    ;; try {
    ;;@ trycatch/TryCatch.java:78:4
    ;;@ trycatch/TryCatch.java:78:4
    (block
-    ;; Throwable $primaryExc;
+    ;; ($resource = thing);
     ;;@ trycatch/TryCatch.java:78:4
-    
-    ;; ClosableThing $resource;
+    (local.set $$resource (local.get $thing))
+    ;; ($resource = thing2);
     ;;@ trycatch/TryCatch.java:78:4
-    
-    ;; ClosableThing $resource;
+    (local.set $$resource_1 (local.get $thing2))
+    ;; throw new Exception.<init>();
+    ;;@ trycatch/TryCatch.java:79:6
+    (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
+   )
+   ;;@ trycatch/TryCatch.java:78:4
+   (block
+    ;; ($primaryExc = javaemul.internal.Exceptions.safeClose($resource,$primaryExc));
     ;;@ trycatch/TryCatch.java:78:4
-    
-    ;; try {
+    (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $$resource_1)(local.get $$primaryExc)))
+    ;; ($primaryExc = javaemul.internal.Exceptions.safeClose($resource,$primaryExc));
     ;;@ trycatch/TryCatch.java:78:4
+    (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $$resource)(local.get $$primaryExc)))
+    ;; if (!javaemul.internal.Platform.isNull($primaryExc)) throw $primaryExc;
     ;;@ trycatch/TryCatch.java:78:4
-    (block
-     ;; ($resource = thing);
-     ;;@ trycatch/TryCatch.java:78:4
-     (local.set $$resource (local.get $thing))
-     ;; ($resource = thing2);
-     ;;@ trycatch/TryCatch.java:78:4
-     (local.set $$resource_1 (local.get $thing2))
-     ;; throw new Exception.<init>();
-     ;;@ trycatch/TryCatch.java:79:6
-     (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
-    )
-    ;;@ trycatch/TryCatch.java:78:4
-    (block
-     ;; ($primaryExc = javaemul.internal.Exceptions.safeClose($resource,$primaryExc));
-     ;;@ trycatch/TryCatch.java:78:4
-     (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $$resource_1)(local.get $$primaryExc)))
-     ;; ($primaryExc = javaemul.internal.Exceptions.safeClose($resource,$primaryExc));
-     ;;@ trycatch/TryCatch.java:78:4
-     (local.set $$primaryExc (call $m_safeClose__java_lang_AutoCloseable__java_lang_Throwable__java_lang_Throwable@javaemul.internal.Exceptions (local.get $$resource)(local.get $$primaryExc)))
-     ;; if (!javaemul.internal.Platform.isNull($primaryExc)) throw $primaryExc;
-     ;;@ trycatch/TryCatch.java:78:4
-     (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
-      (then
-       ;; throw $primaryExc;
-       ;;@ trycatch/TryCatch.java:78:4
-       (throw $exception.event (local.get $$primaryExc))
-      )
+    (if (i32.eqz (ref.is_null (local.get $$primaryExc)))
+     (then
+      ;; throw $primaryExc;
+      ;;@ trycatch/TryCatch.java:78:4
+      (throw $exception.event (local.get $$primaryExc))
      )
     )
    )
@@ -291,17 +279,15 @@
  (local $ie (ref null $java.lang.Exception))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:85:14
+ ;;@ trycatch/TryCatch.java:85:14
+ (block
+  ;; try {
+  ;;@ trycatch/TryCatch.java:86:4
+  ;;@ trycatch/TryCatch.java:86:8
   (block
-   ;; try {
-   ;;@ trycatch/TryCatch.java:86:4
-   ;;@ trycatch/TryCatch.java:86:8
-   (block
-    ;; throw new Exception.<init>();
-    ;;@ trycatch/TryCatch.java:87:6
-    (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
-   )
+   ;; throw new Exception.<init>();
+   ;;@ trycatch/TryCatch.java:87:6
+   (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
   )
  )
 )
@@ -312,13 +298,11 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:97:14
-  (block
-   ;; throw ((Exception) TryCatch.this.getT(new Exception.<init>()));
-   ;;@ trycatch/TryCatch.java:98:4
-   (throw $exception.event (ref.cast (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))) (global.get $java.lang.Exception.rtt)))
-  )
+ ;;@ trycatch/TryCatch.java:97:14
+ (block
+  ;; throw ((Exception) TryCatch.this.getT(new Exception.<init>()));
+  ;;@ trycatch/TryCatch.java:98:4
+  (throw $exception.event (ref.cast (call $m_getT__java_lang_Object__java_lang_Object_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)(call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt)))) (global.get $java.lang.Exception.rtt)))
  )
 )
 (elem declare func $m_testThrowGenerics__void@trycatch.TryCatch)
@@ -328,17 +312,12 @@
  (param $this (ref null $trycatch.TryCatch))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- (local $return.value (ref null $java.lang.Object))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:101:16
-  (block
-   ;; return t;
-   ;;@ trycatch/TryCatch.java:102:4
-   (local.set $return.value (local.get $t))
-   (br $return.label)
-  )
+ ;;@ trycatch/TryCatch.java:101:16
+ (block
+  ;; return t;
+  ;;@ trycatch/TryCatch.java:102:4
+  (return (local.get $t))
  )
- (local.get $return.value)
 )
 
 ;;; void TryCatch.testThrowBoundGenerics()
@@ -346,13 +325,11 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:105:14
-  (block
-   ;; throw TryCatch.this.getThrowable();
-   ;;@ trycatch/TryCatch.java:106:4
-   (throw $exception.event (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)))
-  )
+ ;;@ trycatch/TryCatch.java:105:14
+ (block
+  ;; throw TryCatch.this.getThrowable();
+  ;;@ trycatch/TryCatch.java:106:4
+  (throw $exception.event (call $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch (local.get $this)))
  )
 )
 (elem declare func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
@@ -361,40 +338,33 @@
 (func $m_getThrowable__java_lang_Throwable_$p_trycatch_TryCatch@trycatch.TryCatch
  (param $this (ref null $trycatch.TryCatch))
  (result (ref null $java.lang.Throwable))
- (local $return.value (ref null $java.lang.Throwable))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:109:34
-  (block
-   ;; return null;
-   ;;@ trycatch/TryCatch.java:110:4
-   (local.set $return.value (ref.null $java.lang.Throwable))
-   (br $return.label)
-  )
+ ;;@ trycatch/TryCatch.java:109:34
+ (block
+  ;; return null;
+  ;;@ trycatch/TryCatch.java:110:4
+  (return (ref.null $java.lang.Throwable))
  )
- (local.get $return.value)
 )
 
 ;;; void TryCatch.$clinit()
 (func $$clinit__void@trycatch.TryCatch
- (block $return.label
+ ;;@ trycatch/TryCatch.java:18:13
+ (block
+  ;; if (trycatch.TryCatch.$initialized) return;
   ;;@ trycatch/TryCatch.java:18:13
-  (block
-   ;; if (trycatch.TryCatch.$initialized) return;
-   ;;@ trycatch/TryCatch.java:18:13
-   (if (global.get $f_$initialized__trycatch_TryCatch)
-    (then
-     ;; return;
-     ;;@ trycatch/TryCatch.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__trycatch_TryCatch)
+   (then
+    ;; return;
+    ;;@ trycatch/TryCatch.java:18:13
+    (return )
    )
-   ;; (trycatch.TryCatch.$initialized = true);
-   ;;@ trycatch/TryCatch.java:18:13
-   (global.set $f_$initialized__trycatch_TryCatch (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ trycatch/TryCatch.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (trycatch.TryCatch.$initialized = true);
+  ;;@ trycatch/TryCatch.java:18:13
+  (global.set $f_$initialized__trycatch_TryCatch (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ trycatch/TryCatch.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -402,17 +372,12 @@
 (func $m_getClass__java_lang_Class@trycatch.TryCatch
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTrycatch.TryCatch();
-   (local.set $return.value (call $$getTrycatch.TryCatch__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getTrycatch.TryCatch();
+  (return (call $$getTrycatch.TryCatch__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@trycatch.TryCatch)
 
@@ -434,18 +399,18 @@
 (func $m_<init>___$pp_trycatch@trycatch.TryCatch.ClosableThing
  (param $this (ref null $trycatch.TryCatch.ClosableThing))
  (result (ref null $trycatch.TryCatch.ClosableThing))
- (block $return.label
+ ;;@ trycatch/TryCatch.java:61:15
+ (block
+  ;; trycatch.TryCatch.ClosableThing.$clinit();
   ;;@ trycatch/TryCatch.java:61:15
-  (block
-   ;; trycatch.TryCatch.ClosableThing.$clinit();
-   ;;@ trycatch/TryCatch.java:61:15
-   (call $$clinit__void@trycatch.TryCatch.ClosableThing )
-   ;; Object.this.Object.<init>();
-   ;;@ trycatch/TryCatch.java:61:15
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@trycatch.TryCatch.ClosableThing )
+  ;; Object.this.Object.<init>();
+  ;;@ trycatch/TryCatch.java:61:15
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return ClosableThing.this;
+  ;;@ trycatch/TryCatch.java:61:15
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void ClosableThing.close()
@@ -453,35 +418,31 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.ClosableThing.rtt)))
- (block $return.label
-  ;;@ trycatch/TryCatch.java:63:16
-  (block
-  )
+ ;;@ trycatch/TryCatch.java:63:16
+ (block
  )
 )
 (elem declare func $m_close__void@trycatch.TryCatch.ClosableThing)
 
 ;;; void ClosableThing.$clinit()
 (func $$clinit__void@trycatch.TryCatch.ClosableThing
- (block $return.label
+ ;;@ trycatch/TryCatch.java:61:15
+ (block
+  ;; if (trycatch.TryCatch.ClosableThing.$initialized) return;
   ;;@ trycatch/TryCatch.java:61:15
-  (block
-   ;; if (trycatch.TryCatch.ClosableThing.$initialized) return;
-   ;;@ trycatch/TryCatch.java:61:15
-   (if (global.get $f_$initialized__trycatch_TryCatch_ClosableThing)
-    (then
-     ;; return;
-     ;;@ trycatch/TryCatch.java:61:15
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__trycatch_TryCatch_ClosableThing)
+   (then
+    ;; return;
+    ;;@ trycatch/TryCatch.java:61:15
+    (return )
    )
-   ;; (trycatch.TryCatch.ClosableThing.$initialized = true);
-   ;;@ trycatch/TryCatch.java:61:15
-   (global.set $f_$initialized__trycatch_TryCatch_ClosableThing (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ trycatch/TryCatch.java:61:15
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (trycatch.TryCatch.ClosableThing.$initialized = true);
+  ;;@ trycatch/TryCatch.java:61:15
+  (global.set $f_$initialized__trycatch_TryCatch_ClosableThing (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ trycatch/TryCatch.java:61:15
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -489,17 +450,12 @@
 (func $m_getClass__java_lang_Class@trycatch.TryCatch.ClosableThing
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.ClosableThing.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getTrycatch.TryCatch.ClosableThing();
-   (local.set $return.value (call $$getTrycatch.TryCatch.ClosableThing__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getTrycatch.TryCatch.ClosableThing();
+  (return (call $$getTrycatch.TryCatch.ClosableThing__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@trycatch.TryCatch.ClosableThing)
 

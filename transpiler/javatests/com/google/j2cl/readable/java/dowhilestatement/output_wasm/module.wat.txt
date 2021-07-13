@@ -22,18 +22,18 @@
 (func $m_<init>__@dowhilestatement.DoWhileStatement
  (param $this (ref null $dowhilestatement.DoWhileStatement))
  (result (ref null $dowhilestatement.DoWhileStatement))
- (block $return.label
+ ;;@ dowhilestatement/DoWhileStatement.java:18:13
+ (block
+  ;; dowhilestatement.DoWhileStatement.$clinit();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-  (block
-   ;; dowhilestatement.DoWhileStatement.$clinit();
-   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-   (call $$clinit__void@dowhilestatement.DoWhileStatement )
-   ;; Object.this.Object.<init>();
-   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@dowhilestatement.DoWhileStatement )
+  ;; Object.this.Object.<init>();
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return DoWhileStatement.this;
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void DoWhileStatement.test()
@@ -42,27 +42,25 @@
  (local $count i32)
  (local $this (ref null $dowhilestatement.DoWhileStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $dowhilestatement.DoWhileStatement.rtt)))
- (block $return.label
-  ;;@ dowhilestatement/DoWhileStatement.java:19:14
-  (block
-   ;; int count = 0;
-   ;;@ dowhilestatement/DoWhileStatement.java:20:4
-   (local.set $count (i32.const 0))
-   ;; LOOP: do {
-   ;;@ dowhilestatement/DoWhileStatement.java:21:4
-   (block $LOOP.BREAK
-    (loop
-     (block $LOOP.CONTINUE
-      ;;@ dowhilestatement/DoWhileStatement.java:21:7
-      (block
-       ;; (count = (count + 1));
-       ;;@ dowhilestatement/DoWhileStatement.java:22:6
-       (local.set $count (i32.add (local.get $count) (i32.const 1)))
-      )
+ ;;@ dowhilestatement/DoWhileStatement.java:19:14
+ (block
+  ;; int count = 0;
+  ;;@ dowhilestatement/DoWhileStatement.java:20:4
+  (local.set $count (i32.const 0))
+  ;; LOOP: do {
+  ;;@ dowhilestatement/DoWhileStatement.java:21:4
+  (block $LOOP.BREAK
+   (loop
+    (block $LOOP.CONTINUE
+     ;;@ dowhilestatement/DoWhileStatement.java:21:7
+     (block
+      ;; (count = (count + 1));
+      ;;@ dowhilestatement/DoWhileStatement.java:22:6
+      (local.set $count (i32.add (local.get $count) (i32.const 1)))
      )
-     (br_if 0 (i32.lt_s (local.get $count) (i32.const 5)))
-     
     )
+    (br_if 0 (i32.lt_s (local.get $count) (i32.const 5)))
+    
    )
   )
  )
@@ -71,25 +69,23 @@
 
 ;;; void DoWhileStatement.$clinit()
 (func $$clinit__void@dowhilestatement.DoWhileStatement
- (block $return.label
+ ;;@ dowhilestatement/DoWhileStatement.java:18:13
+ (block
+  ;; if (dowhilestatement.DoWhileStatement.$initialized) return;
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-  (block
-   ;; if (dowhilestatement.DoWhileStatement.$initialized) return;
-   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-   (if (global.get $f_$initialized__dowhilestatement_DoWhileStatement)
-    (then
-     ;; return;
-     ;;@ dowhilestatement/DoWhileStatement.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__dowhilestatement_DoWhileStatement)
+   (then
+    ;; return;
+    ;;@ dowhilestatement/DoWhileStatement.java:18:13
+    (return )
    )
-   ;; (dowhilestatement.DoWhileStatement.$initialized = true);
-   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-   (global.set $f_$initialized__dowhilestatement_DoWhileStatement (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (dowhilestatement.DoWhileStatement.$initialized = true);
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
+  (global.set $f_$initialized__dowhilestatement_DoWhileStatement (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -97,17 +93,12 @@
 (func $m_getClass__java_lang_Class@dowhilestatement.DoWhileStatement
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $dowhilestatement.DoWhileStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $dowhilestatement.DoWhileStatement.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getDowhilestatement.DoWhileStatement();
-   (local.set $return.value (call $$getDowhilestatement.DoWhileStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getDowhilestatement.DoWhileStatement();
+  (return (call $$getDowhilestatement.DoWhileStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@dowhilestatement.DoWhileStatement)
 

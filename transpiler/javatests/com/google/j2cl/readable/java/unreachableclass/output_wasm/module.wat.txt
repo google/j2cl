@@ -39,21 +39,21 @@
 (func $m_<init>__@unreachableclass.Main
  (param $this (ref null $unreachableclass.Main))
  (result (ref null $unreachableclass.Main))
- (block $return.label
+ ;;@ unreachableclass/Main.java:18:13
+ (block
+  ;; unreachableclass.Main.$clinit();
   ;;@ unreachableclass/Main.java:18:13
-  (block
-   ;; unreachableclass.Main.$clinit();
-   ;;@ unreachableclass/Main.java:18:13
-   (call $$clinit__void@unreachableclass.Main )
-   ;; Object.this.Object.<init>();
-   ;;@ unreachableclass/Main.java:18:13
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-   ;; Main.this.$init();
-   ;;@ unreachableclass/Main.java:18:13
-   (call $$init__void_$p_unreachableclass_Main@unreachableclass.Main (local.get $this))
-  )
+  (call $$clinit__void@unreachableclass.Main )
+  ;; Object.this.Object.<init>();
+  ;;@ unreachableclass/Main.java:18:13
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; Main.this.$init();
+  ;;@ unreachableclass/Main.java:18:13
+  (call $$init__void_$p_unreachableclass_Main@unreachableclass.Main (local.get $this))
+  ;; return Main.this;
+  ;;@ unreachableclass/Main.java:18:13
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void Main.$init()
@@ -61,39 +61,35 @@
  (param $this (ref null $unreachableclass.Main))
  (local $e (ref null $java.lang.RuntimeException))
  (local $$qualifier (ref null $unreachableclass.Main.1A))
- (block $return.label
-  ;;@ unreachableclass/Main.java:18:13
+ ;;@ unreachableclass/Main.java:18:13
+ (block
+  ;; try {
+  ;;@ unreachableclass/Main.java:20:4
+  ;;@ unreachableclass/Main.java:20:8
   (block
-   ;; try {
-   ;;@ unreachableclass/Main.java:20:4
-   ;;@ unreachableclass/Main.java:20:8
-   (block
-   )
   )
  )
 )
 
 ;;; void Main.$clinit()
 (func $$clinit__void@unreachableclass.Main
- (block $return.label
+ ;;@ unreachableclass/Main.java:18:13
+ (block
+  ;; if (unreachableclass.Main.$initialized) return;
   ;;@ unreachableclass/Main.java:18:13
-  (block
-   ;; if (unreachableclass.Main.$initialized) return;
-   ;;@ unreachableclass/Main.java:18:13
-   (if (global.get $f_$initialized__unreachableclass_Main)
-    (then
-     ;; return;
-     ;;@ unreachableclass/Main.java:18:13
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unreachableclass_Main)
+   (then
+    ;; return;
+    ;;@ unreachableclass/Main.java:18:13
+    (return )
    )
-   ;; (unreachableclass.Main.$initialized = true);
-   ;;@ unreachableclass/Main.java:18:13
-   (global.set $f_$initialized__unreachableclass_Main (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ unreachableclass/Main.java:18:13
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (unreachableclass.Main.$initialized = true);
+  ;;@ unreachableclass/Main.java:18:13
+  (global.set $f_$initialized__unreachableclass_Main (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ unreachableclass/Main.java:18:13
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -101,17 +97,12 @@
 (func $m_getClass__java_lang_Class@unreachableclass.Main
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main();
-   (local.set $return.value (call $$getUnreachableclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main();
+  (return (call $$getUnreachableclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@unreachableclass.Main)
 
@@ -135,21 +126,21 @@
  (param $this (ref null $unreachableclass.Main.1A))
  (param $$outer_this (ref null $unreachableclass.Main))
  (result (ref null $unreachableclass.Main.1A))
- (block $return.label
+ ;;@ unreachableclass/Main.java:22:12
+ (block
+  ;; unreachableclass.Main.1A.$clinit();
   ;;@ unreachableclass/Main.java:22:12
-  (block
-   ;; unreachableclass.Main.1A.$clinit();
-   ;;@ unreachableclass/Main.java:22:12
-   (call $$clinit__void@unreachableclass.Main.1A )
-   ;; ($1A.this.this = $outer_this);
-   ;;@ unreachableclass/Main.java:22:12
-   (struct.set $unreachableclass.Main.1A $$outer_this__unreachableclass_Main_1A(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ unreachableclass/Main.java:22:12
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@unreachableclass.Main.1A )
+  ;; ($1A.this.this = $outer_this);
+  ;;@ unreachableclass/Main.java:22:12
+  (struct.set $unreachableclass.Main.1A $$outer_this__unreachableclass_Main_1A(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ unreachableclass/Main.java:22:12
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return $1A.this;
+  ;;@ unreachableclass/Main.java:22:12
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void A.m()
@@ -157,35 +148,31 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $unreachableclass.Main.1A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.rtt)))
- (block $return.label
-  ;;@ unreachableclass/Main.java:23:13
-  (block
-  )
+ ;;@ unreachableclass/Main.java:23:13
+ (block
  )
 )
 (elem declare func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A)
 
 ;;; void A.$clinit()
 (func $$clinit__void@unreachableclass.Main.1A
- (block $return.label
+ ;;@ unreachableclass/Main.java:22:12
+ (block
+  ;; if (unreachableclass.Main.1A.$initialized) return;
   ;;@ unreachableclass/Main.java:22:12
-  (block
-   ;; if (unreachableclass.Main.1A.$initialized) return;
-   ;;@ unreachableclass/Main.java:22:12
-   (if (global.get $f_$initialized__unreachableclass_Main_1A)
-    (then
-     ;; return;
-     ;;@ unreachableclass/Main.java:22:12
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unreachableclass_Main_1A)
+   (then
+    ;; return;
+    ;;@ unreachableclass/Main.java:22:12
+    (return )
    )
-   ;; (unreachableclass.Main.1A.$initialized = true);
-   ;;@ unreachableclass/Main.java:22:12
-   (global.set $f_$initialized__unreachableclass_Main_1A (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ unreachableclass/Main.java:22:12
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (unreachableclass.Main.1A.$initialized = true);
+  ;;@ unreachableclass/Main.java:22:12
+  (global.set $f_$initialized__unreachableclass_Main_1A (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ unreachableclass/Main.java:22:12
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -193,17 +180,12 @@
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1A
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A();
-   (local.set $return.value (call $$getUnreachableclass.Main.1A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A();
+  (return (call $$getUnreachableclass.Main.1A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1A)
 
@@ -226,54 +208,50 @@
  (param $this (ref null $unreachableclass.Main.1A.1B))
  (param $$outer_this (ref null $unreachableclass.Main.1A))
  (result (ref null $unreachableclass.Main.1A.1B))
- (block $return.label
+ ;;@ unreachableclass/Main.java:24:16
+ (block
+  ;; unreachableclass.Main.1A.1B.$clinit();
   ;;@ unreachableclass/Main.java:24:16
-  (block
-   ;; unreachableclass.Main.1A.1B.$clinit();
-   ;;@ unreachableclass/Main.java:24:16
-   (call $$clinit__void@unreachableclass.Main.1A.1B )
-   ;; ($1B.this.this = $outer_this);
-   ;;@ unreachableclass/Main.java:24:16
-   (struct.set $unreachableclass.Main.1A.1B $$outer_this__unreachableclass_Main_1A_1B(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ unreachableclass/Main.java:24:16
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@unreachableclass.Main.1A.1B )
+  ;; ($1B.this.this = $outer_this);
+  ;;@ unreachableclass/Main.java:24:16
+  (struct.set $unreachableclass.Main.1A.1B $$outer_this__unreachableclass_Main_1A_1B(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ unreachableclass/Main.java:24:16
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return $1B.this;
+  ;;@ unreachableclass/Main.java:24:16
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void B.n()
 (func $m_n__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B
  (param $this (ref null $unreachableclass.Main.1A.1B))
- (block $return.label
-  ;;@ unreachableclass/Main.java:25:25
-  (block
-  )
+ ;;@ unreachableclass/Main.java:25:25
+ (block
  )
 )
 
 ;;; void B.$clinit()
 (func $$clinit__void@unreachableclass.Main.1A.1B
- (block $return.label
+ ;;@ unreachableclass/Main.java:24:16
+ (block
+  ;; if (unreachableclass.Main.1A.1B.$initialized) return;
   ;;@ unreachableclass/Main.java:24:16
-  (block
-   ;; if (unreachableclass.Main.1A.1B.$initialized) return;
-   ;;@ unreachableclass/Main.java:24:16
-   (if (global.get $f_$initialized__unreachableclass_Main_1A_1B)
-    (then
-     ;; return;
-     ;;@ unreachableclass/Main.java:24:16
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unreachableclass_Main_1A_1B)
+   (then
+    ;; return;
+    ;;@ unreachableclass/Main.java:24:16
+    (return )
    )
-   ;; (unreachableclass.Main.1A.1B.$initialized = true);
-   ;;@ unreachableclass/Main.java:24:16
-   (global.set $f_$initialized__unreachableclass_Main_1A_1B (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ unreachableclass/Main.java:24:16
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (unreachableclass.Main.1A.1B.$initialized = true);
+  ;;@ unreachableclass/Main.java:24:16
+  (global.set $f_$initialized__unreachableclass_Main_1A_1B (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ unreachableclass/Main.java:24:16
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -281,17 +259,12 @@
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A.1B))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.1B.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A.1B();
-   (local.set $return.value (call $$getUnreachableclass.Main.1A.1B__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A.1B();
+  (return (call $$getUnreachableclass.Main.1A.1B__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B)
 
@@ -314,44 +287,42 @@
  (param $this (ref null $unreachableclass.Main.1))
  (param $$outer_this (ref null $unreachableclass.Main))
  (result (ref null $unreachableclass.Main.1))
- (block $return.label
+ ;;@ unreachableclass/Main.java:30:19
+ (block
+  ;; unreachableclass.Main.1.$clinit();
   ;;@ unreachableclass/Main.java:30:19
-  (block
-   ;; unreachableclass.Main.1.$clinit();
-   ;;@ unreachableclass/Main.java:30:19
-   (call $$clinit__void@unreachableclass.Main.1 )
-   ;; ($1.this.this = $outer_this);
-   ;;@ unreachableclass/Main.java:30:19
-   (struct.set $unreachableclass.Main.1 $$outer_this__unreachableclass_Main_1(local.get $this) (local.get $$outer_this))
-   ;; Object.this.Object.<init>();
-   ;;@ unreachableclass/Main.java:30:19
-   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  )
+  (call $$clinit__void@unreachableclass.Main.1 )
+  ;; ($1.this.this = $outer_this);
+  ;;@ unreachableclass/Main.java:30:19
+  (struct.set $unreachableclass.Main.1 $$outer_this__unreachableclass_Main_1(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ unreachableclass/Main.java:30:19
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return $1.this;
+  ;;@ unreachableclass/Main.java:30:19
+  (return (local.get $this))
  )
- (local.get $this)
 )
 
 ;;; void <anonymous> extends Object.$clinit()
 (func $$clinit__void@unreachableclass.Main.1
- (block $return.label
+ ;;@ unreachableclass/Main.java:30:19
+ (block
+  ;; if (unreachableclass.Main.1.$initialized) return;
   ;;@ unreachableclass/Main.java:30:19
-  (block
-   ;; if (unreachableclass.Main.1.$initialized) return;
-   ;;@ unreachableclass/Main.java:30:19
-   (if (global.get $f_$initialized__unreachableclass_Main_1)
-    (then
-     ;; return;
-     ;;@ unreachableclass/Main.java:30:19
-     (br $return.label)
-    )
+  (if (global.get $f_$initialized__unreachableclass_Main_1)
+   (then
+    ;; return;
+    ;;@ unreachableclass/Main.java:30:19
+    (return )
    )
-   ;; (unreachableclass.Main.1.$initialized = true);
-   ;;@ unreachableclass/Main.java:30:19
-   (global.set $f_$initialized__unreachableclass_Main_1 (i32.const 1))
-   ;; java.lang.Object.$clinit();
-   ;;@ unreachableclass/Main.java:30:19
-   (call $$clinit__void@java.lang.Object )
   )
+  ;; (unreachableclass.Main.1.$initialized = true);
+  ;;@ unreachableclass/Main.java:30:19
+  (global.set $f_$initialized__unreachableclass_Main_1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ unreachableclass/Main.java:30:19
+  (call $$clinit__void@java.lang.Object )
  )
 )
 
@@ -359,17 +330,12 @@
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
- (local $return.value (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1.rtt)))
- (block $return.label
-  (block
-   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1();
-   (local.set $return.value (call $$getUnreachableclass.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
-   (br $return.label)
-  )
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1();
+  (return (call $$getUnreachableclass.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
  )
- (local.get $return.value)
 )
 (elem declare func $m_getClass__java_lang_Class@unreachableclass.Main.1)
 
