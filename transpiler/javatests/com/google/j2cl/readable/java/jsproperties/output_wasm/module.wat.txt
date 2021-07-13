@@ -37,7 +37,7 @@
 ))
 
 ;;; Foo()
-(func $m_<init>__void_$pp_jsproperties@jsproperties.Foo
+(func $m_<init>___$pp_jsproperties@jsproperties.Foo
  (param $this (ref null $jsproperties.Foo))
  (result (ref null $jsproperties.Foo))
  (block $return.label
@@ -48,7 +48,7 @@
    (call $$clinit__void@jsproperties.Foo )
    ;; Object.this.Object.<init>();
    ;;@ jsproperties/Main.java:22:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -185,7 +185,7 @@
 ))
 
 ;;; Bar()
-(func $m_<init>__void_$pp_jsproperties@jsproperties.Bar
+(func $m_<init>___$pp_jsproperties@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
  (result (ref null $jsproperties.Bar))
  (block $return.label
@@ -196,7 +196,7 @@
    (call $$clinit__void@jsproperties.Bar )
    ;; Object.this.Object.<init>();
    ;;@ jsproperties/Main.java:47:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -333,7 +333,7 @@
 ))
 
 ;;; NativeFoo()
-(func $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo
+(func $m_<init>___$pp_jsproperties@jsproperties.NativeFoo
  (param $this (ref null $jsproperties.NativeFoo))
  (result (ref null $jsproperties.NativeFoo))
  (block $return.label
@@ -344,7 +344,7 @@
    (call $$clinit__void@jsproperties.NativeFoo )
    ;; Object.this.Object.<init>();
    ;;@ jsproperties/Main.java:72:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -430,7 +430,7 @@
 ))
 
 ;;; Main()
-(func $m_<init>__void@jsproperties.Main
+(func $m_<init>__@jsproperties.Main
  (param $this (ref null $jsproperties.Main))
  (result (ref null $jsproperties.Main))
  (block $return.label
@@ -441,7 +441,7 @@
    (call $$clinit__void@jsproperties.Main )
    ;; Object.this.Object.<init>();
    ;;@ jsproperties/Main.java:80:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -460,7 +460,7 @@
    (block
     ;; NativeFoo $qualifier = new NativeFoo.<init>();
     ;;@ jsproperties/Main.java:82:4
-    (local.set $$qualifier (call $m_<init>__void_$pp_jsproperties@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt))))
+    (local.set $$qualifier (call $m_<init>___$pp_jsproperties@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt))))
     ;; $qualifier.getA();
     ;;@ jsproperties/Main.java:82:4
     (drop (call_ref (local.get $$qualifier)(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
@@ -509,7 +509,7 @@
   (block
    ;; Bar bar = new Bar.<init>();
    ;;@ jsproperties/Main.java:94:4
-   (local.set $bar (call $m_<init>__void_$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
+   (local.set $bar (call $m_<init>___$pp_jsproperties@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
    ;; bar.getA();
    ;;@ jsproperties/Main.java:95:4
    (drop (call_ref (local.get $bar)(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))

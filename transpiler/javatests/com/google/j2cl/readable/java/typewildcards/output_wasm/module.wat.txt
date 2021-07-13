@@ -72,7 +72,7 @@
 ))
 
 ;;; GenericType()
-(func $m_<init>__void_$pp_typewildcards@typewildcards.GenericType
+(func $m_<init>___$pp_typewildcards@typewildcards.GenericType
  (param $this (ref null $typewildcards.GenericType))
  (result (ref null $typewildcards.GenericType))
  (block $return.label
@@ -83,7 +83,7 @@
    (call $$clinit__void@typewildcards.GenericType )
    ;; Object.this.Object.<init>();
    ;;@ typewildcards/TypeWildCards.java:21:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -151,7 +151,7 @@
 ))
 
 ;;; TypeWildCards()
-(func $m_<init>__void@typewildcards.TypeWildCards
+(func $m_<init>__@typewildcards.TypeWildCards
  (param $this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards))
  (block $return.label
@@ -162,7 +162,7 @@
    (call $$clinit__void@typewildcards.TypeWildCards )
    ;; Object.this.Object.<init>();
    ;;@ typewildcards/TypeWildCards.java:23:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -220,13 +220,13 @@
   (block
    ;; TypeWildCards.this.unbounded(new GenericType.<init>());
    ;;@ typewildcards/TypeWildCards.java:31:4
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>___$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.upperBound(new GenericType.<init>());
    ;;@ typewildcards/TypeWildCards.java:32:4
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>___$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
    ;; TypeWildCards.this.lowerBound(new GenericType.<init>());
    ;;@ typewildcards/TypeWildCards.java:33:4
-   (call_ref (local.get $this)(call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+   (call_ref (local.get $this)(call $m_<init>___$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   )
  )
 )
@@ -337,7 +337,7 @@
    (local.set $otherElements (ref.null $java.lang.Object))
    ;; List<Integer> integers = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements,otherElements),new $LambdaImplementor$1.<init>());
    ;;@ typewildcards/TypeWildCards.java:89:4
-   (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $m_<init>__void@typewildcards.TypeWildCards.$LambdaImplementor$1 (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))))
+   (local.set $integers (call $m_transform__java_util_List__java_util_function_Function__java_util_List@typewildcards.TypeWildCards (call $m_concat__java_util_List__java_util_List__java_util_List@typewildcards.TypeWildCards (local.get $elements)(local.get $otherElements))(call $m_<init>__@typewildcards.TypeWildCards.$LambdaImplementor$1 (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))))
   )
  )
 )
@@ -363,7 +363,7 @@
   (block
    ;; typewildcards.TypeWildCards.takesRecursiveGeneric(new Foo.<init>(TypeWildCards.this));
    ;;@ typewildcards/TypeWildCards.java:103:4
-   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
+   (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
   )
  )
 )
@@ -511,7 +511,7 @@
 ))
 
 ;;; A()
-(func $m_<init>__void_$p_typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A
+(func $m_<init>___$p_typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A
  (param $this (ref null $typewildcards.TypeWildCards.A))
  (result (ref null $typewildcards.TypeWildCards.A))
  (block $return.label
@@ -519,7 +519,7 @@
   (block
    ;; Object.this.Object.<init>();
    ;;@ typewildcards/TypeWildCards.java:44:23
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -679,7 +679,7 @@
 ))
 
 ;;; Element(TypeWildCards $outer_this)
-(func $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.Element
+(func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Element
  (param $this (ref null $typewildcards.TypeWildCards.Element))
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.Element))
@@ -694,7 +694,7 @@
    (struct.set $typewildcards.TypeWildCards.Element $$outer_this__typewildcards_TypeWildCards_Element(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ typewildcards/TypeWildCards.java:70:24
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -739,7 +739,7 @@
 ))
 
 ;;; OtherElement(TypeWildCards $outer_this)
-(func $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.OtherElement
+(func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.OtherElement
  (param $this (ref null $typewildcards.TypeWildCards.OtherElement))
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.OtherElement))
@@ -754,7 +754,7 @@
    (struct.set $typewildcards.TypeWildCards.OtherElement $$outer_this__typewildcards_TypeWildCards_OtherElement(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ typewildcards/TypeWildCards.java:72:24
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -800,7 +800,7 @@
 ))
 
 ;;; SubOtherElement(TypeWildCards $outer_this)
-(func $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.SubOtherElement
+(func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.SubOtherElement
  (param $this (ref null $typewildcards.TypeWildCards.SubOtherElement))
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.SubOtherElement))
@@ -815,7 +815,7 @@
    (struct.set $typewildcards.TypeWildCards.SubOtherElement $$outer_this__typewildcards_TypeWildCards_SubOtherElement(local.get $this) (local.get $$outer_this))
    ;; OtherElement.this.OtherElement.<init>($outer_this);
    ;;@ typewildcards/TypeWildCards.java:74:24
-   (drop (call $m_<init>__typewildcards_TypeWildCards__void@typewildcards.TypeWildCards.OtherElement (local.get $this)(local.get $$outer_this)))
+   (drop (call $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.OtherElement (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)
@@ -860,7 +860,7 @@
 ))
 
 ;;; Foo(TypeWildCards $outer_this)
-(func $m_<init>__typewildcards_TypeWildCards__void_$pp_typewildcards@typewildcards.TypeWildCards.Foo
+(func $m_<init>__typewildcards_TypeWildCards_$pp_typewildcards@typewildcards.TypeWildCards.Foo
  (param $this (ref null $typewildcards.TypeWildCards.Foo))
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.Foo))
@@ -875,7 +875,7 @@
    (struct.set $typewildcards.TypeWildCards.Foo $$outer_this__typewildcards_TypeWildCards_Foo(local.get $this) (local.get $$outer_this))
    ;; GenericType.this.GenericType.<init>();
    ;;@ typewildcards/TypeWildCards.java:98:8
-   (drop (call $m_<init>__void_$pp_typewildcards@typewildcards.GenericType (local.get $this)))
+   (drop (call $m_<init>___$pp_typewildcards@typewildcards.GenericType (local.get $this)))
   )
  )
  (local.get $this)
@@ -940,7 +940,7 @@
 ))
 
 ;;; $LambdaImplementor$1()
-(func $m_<init>__void@typewildcards.TypeWildCards.$LambdaImplementor$1
+(func $m_<init>__@typewildcards.TypeWildCards.$LambdaImplementor$1
  (param $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (result (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
  (block $return.label
@@ -951,7 +951,7 @@
    (call $$clinit__void@typewildcards.TypeWildCards.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
    ;;@ typewildcards/TypeWildCards.java:92:12
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

@@ -91,7 +91,7 @@
 (elem declare func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main)
 
 ;;; Main(String a)
-(func $m_<init>__java_lang_String__void@jsoptional.Main
+(func $m_<init>__java_lang_String@jsoptional.Main
  (param $this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.String))
  (result (ref null $jsoptional.Main))
@@ -103,7 +103,7 @@
    (call $$clinit__void@jsoptional.Main )
    ;; Object.this.Object.<init>();
    ;;@ jsoptional/Main.java:39:9
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; Main.this.$init();
    ;;@ jsoptional/Main.java:39:9
    (call $$init__void_$p_jsoptional_Main@jsoptional.Main (local.get $this))
@@ -148,7 +148,7 @@
   (block
    ;; (Main.this.f = new $LambdaImplementor$1.<init>());
    ;;@ jsoptional/Main.java:36:2
-   (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (call $m_<init>__void@jsoptional.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt))))
+   (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (call $m_<init>__@jsoptional.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt))))
   )
  )
 )
@@ -252,7 +252,7 @@
 ))
 
 ;;; AFunction()
-(func $m_<init>__void_$pp_jsoptional@jsoptional.Main.AFunction
+(func $m_<init>___$pp_jsoptional@jsoptional.Main.AFunction
  (param $this (ref null $jsoptional.Main.AFunction))
  (result (ref null $jsoptional.Main.AFunction))
  (block $return.label
@@ -263,7 +263,7 @@
    (call $$clinit__void@jsoptional.Main.AFunction )
    ;; Object.this.Object.<init>();
    ;;@ jsoptional/Main.java:41:21
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -391,7 +391,7 @@
 ))
 
 ;;; TemplatedSubtype()
-(func $m_<init>__void_$pp_jsoptional@jsoptional.Main.TemplatedSubtype
+(func $m_<init>___$pp_jsoptional@jsoptional.Main.TemplatedSubtype
  (param $this (ref null $jsoptional.Main.TemplatedSubtype))
  (result (ref null $jsoptional.Main.TemplatedSubtype))
  (block $return.label
@@ -402,7 +402,7 @@
    (call $$clinit__void@jsoptional.Main.TemplatedSubtype )
    ;; Object.this.Object.<init>();
    ;;@ jsoptional/Main.java:59:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -500,7 +500,7 @@
 ))
 
 ;;; SpecializedSubtype(Main $outer_this, Object a)
-(func $m_<init>__jsoptional_Main__java_lang_Object__void@jsoptional.Main.SpecializedSubtype
+(func $m_<init>__jsoptional_Main__java_lang_Object@jsoptional.Main.SpecializedSubtype
  (param $this (ref null $jsoptional.Main.SpecializedSubtype))
  (param $$outer_this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.Object))
@@ -516,7 +516,7 @@
    (struct.set $jsoptional.Main.SpecializedSubtype $$outer_this__jsoptional_Main_SpecializedSubtype(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ jsoptional/Main.java:68:11
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -613,7 +613,7 @@
 ))
 
 ;;; NonJsTypeSubtype()
-(func $m_<init>__void_$pp_jsoptional@jsoptional.Main.NonJsTypeSubtype
+(func $m_<init>___$pp_jsoptional@jsoptional.Main.NonJsTypeSubtype
  (param $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  (result (ref null $jsoptional.Main.NonJsTypeSubtype))
  (block $return.label
@@ -624,7 +624,7 @@
    (call $$clinit__void@jsoptional.Main.NonJsTypeSubtype )
    ;; Object.this.Object.<init>();
    ;;@ jsoptional/Main.java:74:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -720,7 +720,7 @@
 ))
 
 ;;; $LambdaImplementor$1()
-(func $m_<init>__void@jsoptional.Main.$LambdaImplementor$1
+(func $m_<init>__@jsoptional.Main.$LambdaImplementor$1
  (param $this (ref null $jsoptional.Main.$LambdaImplementor$1))
  (result (ref null $jsoptional.Main.$LambdaImplementor$1))
  (block $return.label
@@ -731,7 +731,7 @@
    (call $$clinit__void@jsoptional.Main.$LambdaImplementor$1 )
    ;; Object.this.Object.<init>();
    ;;@ jsoptional/Main.java:36:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

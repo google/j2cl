@@ -44,7 +44,7 @@
 ))
 
 ;;; MyException()
-(func $m_<init>__void_$pp_exception@exception.MyException
+(func $m_<init>___$pp_exception@exception.MyException
  (param $this (ref null $exception.MyException))
  (result (ref null $exception.MyException))
  (block $return.label
@@ -55,14 +55,14 @@
    (call $$clinit__void@exception.MyException )
    ;; Exception.this.Exception.<init>();
    ;;@ exception/MyException.java:19:2
-   (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Exception (local.get $this)))
   )
  )
  (local.get $this)
 )
 
 ;;; MyException(Throwable cause)
-(func $m_<init>__java_lang_Throwable__void_$pp_exception@exception.MyException
+(func $m_<init>__java_lang_Throwable_$pp_exception@exception.MyException
  (param $this (ref null $exception.MyException))
  (param $cause (ref null $java.lang.Throwable))
  (result (ref null $exception.MyException))
@@ -74,7 +74,7 @@
    (call $$clinit__void@exception.MyException )
    ;; Exception.this.Exception.<init>(cause);
    ;;@ exception/MyException.java:22:4
-   (drop (call $m_<init>__java_lang_Throwable__void@java.lang.Exception (local.get $this)(local.get $cause)))
+   (drop (call $m_<init>__java_lang_Throwable@java.lang.Exception (local.get $this)(local.get $cause)))
   )
  )
  (local.get $this)
@@ -156,7 +156,7 @@
 ))
 
 ;;; MyJsException()
-(func $m_<init>__void@exception.MyJsException
+(func $m_<init>__@exception.MyJsException
  (param $this (ref null $exception.MyJsException))
  (result (ref null $exception.MyJsException))
  (block $return.label
@@ -167,14 +167,14 @@
    (call $$clinit__void@exception.MyJsException )
    ;; Exception.this.Exception.<init>();
    ;;@ exception/MyJsException.java:23:9
-   (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Exception (local.get $this)))
   )
  )
  (local.get $this)
 )
 
 ;;; MyJsException(Throwable cause)
-(func $m_<init>__java_lang_Throwable__void@exception.MyJsException
+(func $m_<init>__java_lang_Throwable@exception.MyJsException
  (param $this (ref null $exception.MyJsException))
  (param $cause (ref null $java.lang.Throwable))
  (result (ref null $exception.MyJsException))
@@ -186,7 +186,7 @@
    (call $$clinit__void@exception.MyJsException )
    ;; MyJsException.this.MyJsException.<init>();
    ;;@ exception/MyJsException.java:27:4
-   (drop (call $m_<init>__void@exception.MyJsException (local.get $this)))
+   (drop (call $m_<init>__@exception.MyJsException (local.get $this)))
   )
  )
  (local.get $this)

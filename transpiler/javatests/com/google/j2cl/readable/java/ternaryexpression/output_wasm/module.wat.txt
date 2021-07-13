@@ -19,7 +19,7 @@
 ))
 
 ;;; TernaryExpression()
-(func $m_<init>__void@ternaryexpression.TernaryExpression
+(func $m_<init>__@ternaryexpression.TernaryExpression
  (param $this (ref null $ternaryexpression.TernaryExpression))
  (result (ref null $ternaryexpression.TernaryExpression))
  (block $return.label
@@ -30,7 +30,7 @@
    (call $$clinit__void@ternaryexpression.TernaryExpression )
    ;; Object.this.Object.<init>();
    ;;@ ternaryexpression/TernaryExpression.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -61,7 +61,7 @@
    ;; int value = (Integer $qualifier = (b) ? (new Integer.<init>(15)) : (new Integer.<init>(30)),$qualifier.intValue());
    ;;@ ternaryexpression/TernaryExpression.java:26:4
    (local.set $value (block (result i32)
-    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
+    (local.set $$qualifier (if (result (ref null $java.lang.Integer)) (local.get $b) (then (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 15))) (else (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 30)))))
     (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
    ))
   )

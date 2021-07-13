@@ -68,7 +68,7 @@
 ))
 
 ;;; ParentOuter()
-(func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentOuter
+(func $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentOuter
  (param $this (ref null $innerclassinheritance.ParentOuter))
  (result (ref null $innerclassinheritance.ParentOuter))
  (block $return.label
@@ -79,7 +79,7 @@
    (call $$clinit__void@innerclassinheritance.ParentOuter )
    ;; Object.this.Object.<init>();
    ;;@ innerclassinheritance/ChildClass.java:18:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -156,7 +156,7 @@
 ))
 
 ;;; ParentInner()
-(func $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentInner
+(func $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentInner
  (param $this (ref null $innerclassinheritance.ParentInner))
  (result (ref null $innerclassinheritance.ParentInner))
  (block $return.label
@@ -167,7 +167,7 @@
    (call $$clinit__void@innerclassinheritance.ParentInner )
    ;; Object.this.Object.<init>();
    ;;@ innerclassinheritance/ChildClass.java:24:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -247,7 +247,7 @@
 ))
 
 ;;; ChildClass()
-(func $m_<init>__void@innerclassinheritance.ChildClass
+(func $m_<init>__@innerclassinheritance.ChildClass
  (param $this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass))
  (block $return.label
@@ -258,7 +258,7 @@
    (call $$clinit__void@innerclassinheritance.ChildClass )
    ;; ParentOuter.this.ParentOuter.<init>();
    ;;@ innerclassinheritance/ChildClass.java:30:13
-   (drop (call $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentOuter (local.get $this)))
+   (drop (call $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentOuter (local.get $this)))
   )
  )
  (local.get $this)
@@ -290,7 +290,7 @@
    (block
     ;; LocalClass $qualifier = new $1LocalClass.<init>(ChildClass.this);
     ;;@ innerclassinheritance/ChildClass.java:87:4
-    (local.set $$qualifier (call $m_<init>__innerclassinheritance_ChildClass__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object) (global.get $innerclassinheritance.ChildClass.1LocalClass.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__innerclassinheritance_ChildClass_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object) (global.get $innerclassinheritance.ChildClass.1LocalClass.rtt))(local.get $this)))
     ;; $qualifier.test();
     ;;@ innerclassinheritance/ChildClass.java:87:4
     (call_ref (local.get $$qualifier)(struct.get $innerclassinheritance.ChildClass.1LocalClass.vtable $m_test__void (struct.get $innerclassinheritance.ChildClass.1LocalClass $vtable(local.get $$qualifier))))
@@ -362,7 +362,7 @@
 ))
 
 ;;; InnerClass(ChildClass $outer_this)
-(func $m_<init>__innerclassinheritance_ChildClass__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.InnerClass
+(func $m_<init>__innerclassinheritance_ChildClass_$pp_innerclassinheritance@innerclassinheritance.ChildClass.InnerClass
  (param $this (ref null $innerclassinheritance.ChildClass.InnerClass))
  (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.InnerClass))
@@ -377,7 +377,7 @@
    (struct.set $innerclassinheritance.ChildClass.InnerClass $$outer_this__innerclassinheritance_ChildClass_InnerClass(local.get $this) (local.get $$outer_this))
    ;; ParentInner.this.ParentInner.<init>();
    ;;@ innerclassinheritance/ChildClass.java:35:8
-   (drop (call $m_<init>__void_$pp_innerclassinheritance@innerclassinheritance.ParentInner (local.get $this)))
+   (drop (call $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentInner (local.get $this)))
   )
  )
  (local.get $this)
@@ -529,7 +529,7 @@
 ))
 
 ;;; LocalClass(ChildClass $outer_this)
-(func $m_<init>__innerclassinheritance_ChildClass__void_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass
+(func $m_<init>__innerclassinheritance_ChildClass_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass
  (param $this (ref null $innerclassinheritance.ChildClass.1LocalClass))
  (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.1LocalClass))
@@ -544,7 +544,7 @@
    (struct.set $innerclassinheritance.ChildClass.1LocalClass $$outer_this__innerclassinheritance_ChildClass_1LocalClass(local.get $this) (local.get $$outer_this))
    ;; ChildClass.this.ChildClass.<init>();
    ;;@ innerclassinheritance/ChildClass.java:73:10
-   (drop (call $m_<init>__void@innerclassinheritance.ChildClass (local.get $this)))
+   (drop (call $m_<init>__@innerclassinheritance.ChildClass (local.get $this)))
    ;; $1LocalClass.this.$init();
    ;;@ innerclassinheritance/ChildClass.java:73:10
    (call $$init__void_$p_innerclassinheritance_ChildClass_1LocalClass@innerclassinheritance.ChildClass.1LocalClass (local.get $this))
@@ -664,7 +664,7 @@
 ))
 
 ;;; MultipleNestings()
-(func $m_<init>__void@innerclassinheritance.MultipleNestings
+(func $m_<init>__@innerclassinheritance.MultipleNestings
  (param $this (ref null $innerclassinheritance.MultipleNestings))
  (result (ref null $innerclassinheritance.MultipleNestings))
  (block $return.label
@@ -675,7 +675,7 @@
    (call $$clinit__void@innerclassinheritance.MultipleNestings )
    ;; Object.this.Object.<init>();
    ;;@ innerclassinheritance/MultipleNestings.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -752,7 +752,7 @@
 ))
 
 ;;; Parent(MultipleNestings $outer_this)
-(func $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.Parent
+(func $m_<init>__innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings.Parent
  (param $this (ref null $innerclassinheritance.MultipleNestings.Parent))
  (param $$outer_this (ref null $innerclassinheritance.MultipleNestings))
  (result (ref null $innerclassinheritance.MultipleNestings.Parent))
@@ -767,7 +767,7 @@
    (struct.set $innerclassinheritance.MultipleNestings.Parent $$outer_this__innerclassinheritance_MultipleNestings_Parent(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ innerclassinheritance/MultipleNestings.java:19:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -846,7 +846,7 @@
 ))
 
 ;;; InnerClass1(MultipleNestings $outer_this)
-(func $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.InnerClass1
+(func $m_<init>__innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings.InnerClass1
  (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (param $$outer_this (ref null $innerclassinheritance.MultipleNestings))
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
@@ -861,7 +861,7 @@
    (struct.set $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(local.get $this) (local.get $$outer_this))
    ;; Parent.this.Parent.<init>($outer_this);
    ;;@ innerclassinheritance/MultipleNestings.java:25:15
-   (drop (call $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.Parent (local.get $this)(local.get $$outer_this)))
+   (drop (call $m_<init>__innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings.Parent (local.get $this)(local.get $$outer_this)))
   )
  )
  (local.get $this)
@@ -941,7 +941,7 @@
 ))
 
 ;;; InnerClass2(InnerClass1 $outer_this)
-(func $m_<init>__innerclassinheritance_MultipleNestings_InnerClass1__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+(func $m_<init>__innerclassinheritance_MultipleNestings_InnerClass1@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
  (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
  (param $$outer_this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
  (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
@@ -956,7 +956,7 @@
    (struct.set $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this) (local.get $$outer_this))
    ;; Parent.this.Parent.<init>($outer_this.this);
    ;;@ innerclassinheritance/MultipleNestings.java:31:17
-   (drop (call $m_<init>__innerclassinheritance_MultipleNestings__void@innerclassinheritance.MultipleNestings.Parent (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(local.get $$outer_this))))
+   (drop (call $m_<init>__innerclassinheritance_MultipleNestings@innerclassinheritance.MultipleNestings.Parent (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(local.get $$outer_this))))
   )
  )
  (local.get $this)

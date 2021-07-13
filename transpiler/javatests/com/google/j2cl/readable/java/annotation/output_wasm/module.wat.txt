@@ -31,7 +31,7 @@
 ))
 
 ;;; Main()
-(func $m_<init>__void@annotation.Main
+(func $m_<init>__@annotation.Main
  (param $this (ref null $annotation.Main))
  (result (ref null $annotation.Main))
  (block $return.label
@@ -42,7 +42,7 @@
    (call $$clinit__void@annotation.Main )
    ;; Object.this.Object.<init>();
    ;;@ annotation/Main.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -189,7 +189,7 @@
 ))
 
 ;;; Bar(Main $outer_this)
-(func $m_<init>__annotation_Main__void_$pp_annotation@annotation.Main.Bar
+(func $m_<init>__annotation_Main_$pp_annotation@annotation.Main.Bar
  (param $this (ref null $annotation.Main.Bar))
  (param $$outer_this (ref null $annotation.Main))
  (result (ref null $annotation.Main.Bar))
@@ -204,7 +204,7 @@
    (struct.set $annotation.Main.Bar $$outer_this__annotation_Main_Bar(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ annotation/Main.java:30:8
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

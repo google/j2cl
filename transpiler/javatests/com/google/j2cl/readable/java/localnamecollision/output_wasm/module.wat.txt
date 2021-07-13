@@ -43,7 +43,7 @@
 ))
 
 ;;; Asserts()
-(func $m_<init>__void@localnamecollision.Asserts
+(func $m_<init>__@localnamecollision.Asserts
  (param $this (ref null $localnamecollision.Asserts))
  (result (ref null $localnamecollision.Asserts))
  (block $return.label
@@ -54,7 +54,7 @@
    (call $$clinit__void@localnamecollision.Asserts )
    ;; Object.this.Object.<init>();
    ;;@ localnamecollision/Asserts.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -137,7 +137,7 @@
 ))
 
 ;;; Class()
-(func $m_<init>__void@localnamecollision.Class
+(func $m_<init>__@localnamecollision.Class
  (param $this (ref null $localnamecollision.Class))
  (result (ref null $localnamecollision.Class))
  (block $return.label
@@ -148,7 +148,7 @@
    (call $$clinit__void@localnamecollision.Class )
    ;; Object.this.Object.<init>();
    ;;@ localnamecollision/Class.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -167,7 +167,7 @@
    (block
     ;; Class $qualifier = new Class.<init>();
     ;;@ localnamecollision/Class.java:20:4
-    (local.set $$qualifier (call $m_<init>__void@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0) (global.get $localnamecollision.Class.rtt))))
+    (local.set $$qualifier (call $m_<init>__@localnamecollision.Class (struct.new_with_rtt $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0) (global.get $localnamecollision.Class.rtt))))
     ;; $qualifier.getClass();
     ;;@ localnamecollision/Class.java:20:4
     (drop (call_ref (local.get $$qualifier)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $$qualifier)))))
@@ -312,7 +312,7 @@
 (elem declare func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision)
 
 ;;; LocalNameCollision(boolean LocalNameCollision, Object Asserts, Object $Asserts, int l_Asserts, int A)
-(func $m_<init>__boolean__java_lang_Object__java_lang_Object__int__int__void@localnamecollision.LocalNameCollision
+(func $m_<init>__boolean__java_lang_Object__java_lang_Object__int__int@localnamecollision.LocalNameCollision
  (param $this (ref null $localnamecollision.LocalNameCollision))
  (param $LocalNameCollision i32)
  (param $Asserts (ref null $java.lang.Object))
@@ -329,7 +329,7 @@
    (call $$clinit__void@localnamecollision.LocalNameCollision )
    ;; Object.this.Object.<init>();
    ;;@ localnamecollision/LocalNameCollision.java:49:9
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; boolean result = (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
    ;;@ localnamecollision/LocalNameCollision.java:51:4
    (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
@@ -395,7 +395,7 @@
 ))
 
 ;;; A()
-(func $m_<init>__void@localnamecollision.package1.A
+(func $m_<init>__@localnamecollision.package1.A
  (param $this (ref null $localnamecollision.package1.A))
  (result (ref null $localnamecollision.package1.A))
  (block $return.label
@@ -406,7 +406,7 @@
    (call $$clinit__void@localnamecollision.package1.A )
    ;; Object.this.Object.<init>();
    ;;@ localnamecollision/package1/A.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -489,7 +489,7 @@
 ))
 
 ;;; A()
-(func $m_<init>__void@localnamecollision.package2.A
+(func $m_<init>__@localnamecollision.package2.A
  (param $this (ref null $localnamecollision.package2.A))
  (result (ref null $localnamecollision.package2.A))
  (block $return.label
@@ -500,7 +500,7 @@
    (call $$clinit__void@localnamecollision.package2.A )
    ;; Object.this.Object.<init>();
    ;;@ localnamecollision/package2/A.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

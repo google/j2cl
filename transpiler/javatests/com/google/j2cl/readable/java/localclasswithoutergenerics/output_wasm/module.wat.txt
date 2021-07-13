@@ -30,7 +30,7 @@
 ))
 
 ;;; LocalClassWithOuterGenerics()
-(func $m_<init>__void@localclasswithoutergenerics.LocalClassWithOuterGenerics
+(func $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics
  (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  (block $return.label
@@ -41,7 +41,7 @@
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics )
    ;; Object.this.Object.<init>();
    ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -59,10 +59,10 @@
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics )
    ;; Bar<T> bar = new $1Bar.<init>();
    ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:24:4
-   (local.set $bar (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
+   (local.set $bar (call $m_<init>___$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
    ;; Baz<Object, T> baz = new $1Baz.<init>();
    ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:29:4
-   (local.set $baz (call $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
+   (local.set $baz (call $m_<init>___$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
   )
  )
 )
@@ -124,7 +124,7 @@
 ))
 
 ;;; Bar()
-(func $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+(func $m_<init>___$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
  (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (block $return.label
@@ -135,7 +135,7 @@
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar )
    ;; Object.this.Object.<init>();
    ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -212,7 +212,7 @@
 ))
 
 ;;; Baz()
-(func $m_<init>__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+(func $m_<init>___$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
  (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (block $return.label
@@ -223,7 +223,7 @@
    (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz )
    ;; Object.this.Object.<init>();
    ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

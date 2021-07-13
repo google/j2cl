@@ -51,7 +51,7 @@
 ))
 
 ;;; SimpleLocalClass()
-(func $m_<init>__void@simplelocalclass.SimpleLocalClass
+(func $m_<init>__@simplelocalclass.SimpleLocalClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass))
  (block $return.label
@@ -62,7 +62,7 @@
    (call $$clinit__void@simplelocalclass.SimpleLocalClass )
    ;; Object.this.Object.<init>();
    ;;@ simplelocalclass/SimpleLocalClass.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -86,14 +86,14 @@
    (block
     ;; InnerClass $qualifier = new $1InnerClass.<init>(SimpleLocalClass.this,localVar,p);
     ;;@ simplelocalclass/SimpleLocalClass.java:26:4
-    (local.set $$qualifier (call $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)))
+    (local.set $$qualifier (call $m_<init>__simplelocalclass_SimpleLocalClass__int__int_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt))(local.get $this)(local.get $localVar)(local.get $p)))
     ;; $qualifier.fun();
     ;;@ simplelocalclass/SimpleLocalClass.java:26:4
     (drop (call_ref (local.get $$qualifier)(struct.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable $m_fun__int (struct.get $simplelocalclass.SimpleLocalClass.1InnerClass $vtable(local.get $$qualifier)))))
    )
    ;; new $1InnerClassWithoutCaptures.<init>(SimpleLocalClass.this);
    ;;@ simplelocalclass/SimpleLocalClass.java:30:4
-   (drop (call $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))(local.get $this)))
+   (drop (call $m_<init>__simplelocalclass_SimpleLocalClass_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt))(local.get $this)))
   )
  )
 )
@@ -189,7 +189,7 @@
 ))
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar, int $captured_p)
-(func $m_<init>__simplelocalclass_SimpleLocalClass__int__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass
+(func $m_<init>__simplelocalclass_SimpleLocalClass__int__int_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (param $$captured_localVar i32)
@@ -212,7 +212,7 @@
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClass $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass(local.get $this) (local.get $$captured_p))
    ;; Object.this.Object.<init>();
    ;;@ simplelocalclass/SimpleLocalClass.java:21:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -295,7 +295,7 @@
 ))
 
 ;;; InnerClassWithoutCaptures(SimpleLocalClass $outer_this)
-(func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+(func $m_<init>__simplelocalclass_SimpleLocalClass_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
@@ -310,7 +310,7 @@
    (struct.set $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ simplelocalclass/SimpleLocalClass.java:29:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -375,7 +375,7 @@
 ))
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar)
-(func $m_<init>__simplelocalclass_SimpleLocalClass__int__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass
+(func $m_<init>__simplelocalclass_SimpleLocalClass__int_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.2InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (param $$captured_localVar i32)
@@ -394,7 +394,7 @@
    (struct.set $simplelocalclass.SimpleLocalClass.2InnerClass $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass(local.get $this) (local.get $$captured_localVar))
    ;; Object.this.Object.<init>();
    ;;@ simplelocalclass/SimpleLocalClass.java:36:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; $2InnerClass.this.$init();
    ;;@ simplelocalclass/SimpleLocalClass.java:36:10
    (call $$init__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $this))
@@ -473,7 +473,7 @@
 ))
 
 ;;; Abc$InnerClass(SimpleLocalClass $outer_this)
-(func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+(func $m_<init>__simplelocalclass_SimpleLocalClass_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
@@ -488,7 +488,7 @@
    (struct.set $simplelocalclass.SimpleLocalClass.1Abc$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ simplelocalclass/SimpleLocalClass.java:43:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -551,7 +551,7 @@
 ))
 
 ;;; Klm$InnerClass(SimpleLocalClass $outer_this)
-(func $m_<init>__simplelocalclass_SimpleLocalClass__void_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+(func $m_<init>__simplelocalclass_SimpleLocalClass_$pp_simplelocalclass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
  (param $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
  (param $$outer_this (ref null $simplelocalclass.SimpleLocalClass))
  (result (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
@@ -566,7 +566,7 @@
    (struct.set $simplelocalclass.SimpleLocalClass.1Klm$InnerClass $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ simplelocalclass/SimpleLocalClass.java:44:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

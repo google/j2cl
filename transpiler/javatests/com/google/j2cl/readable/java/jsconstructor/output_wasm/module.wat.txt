@@ -96,7 +96,7 @@
 ))
 
 ;;; JsConstructorClass()
-(func $m_<init>__void@jsconstructor.JsConstructorClass
+(func $m_<init>__@jsconstructor.JsConstructorClass
  (param $this (ref null $jsconstructor.JsConstructorClass))
  (result (ref null $jsconstructor.JsConstructorClass))
  (block $return.label
@@ -107,7 +107,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass )
    ;; Object.this.Object.<init>();
    ;;@ jsconstructor/JsConstructorClass.java:41:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -170,7 +170,7 @@
 ))
 
 ;;; A(int x)
-(func $m_<init>__int__void@jsconstructor.JsConstructorClass.A
+(func $m_<init>__int@jsconstructor.JsConstructorClass.A
  (param $this (ref null $jsconstructor.JsConstructorClass.A))
  (param $x i32)
  (result (ref null $jsconstructor.JsConstructorClass.A))
@@ -182,7 +182,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.A )
    ;; Object.this.Object.<init>();
    ;;@ jsconstructor/JsConstructorClass.java:48:11
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; A.this.$init();
    ;;@ jsconstructor/JsConstructorClass.java:48:11
    (call $$init__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (local.get $this))
@@ -195,7 +195,7 @@
 )
 
 ;;; A()
-(func $m_<init>__void@jsconstructor.JsConstructorClass.A
+(func $m_<init>__@jsconstructor.JsConstructorClass.A
  (param $this (ref null $jsconstructor.JsConstructorClass.A))
  (result (ref null $jsconstructor.JsConstructorClass.A))
  (block $return.label
@@ -206,7 +206,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.A )
    ;; Object.this.Object.<init>();
    ;;@ jsconstructor/JsConstructorClass.java:52:11
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; A.this.$init();
    ;;@ jsconstructor/JsConstructorClass.java:52:11
    (call $$init__void_$p_jsconstructor_JsConstructorClass_A@jsconstructor.JsConstructorClass.A (local.get $this))
@@ -286,7 +286,7 @@
 ))
 
 ;;; B(int x)
-(func $m_<init>__int__void@jsconstructor.JsConstructorClass.B
+(func $m_<init>__int@jsconstructor.JsConstructorClass.B
  (param $this (ref null $jsconstructor.JsConstructorClass.B))
  (param $x i32)
  (result (ref null $jsconstructor.JsConstructorClass.B))
@@ -298,7 +298,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.B )
    ;; A.this.A.<init>((x + 1));
    ;;@ jsconstructor/JsConstructorClass.java:63:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.A (local.get $this)(i32.add (local.get $x) (i32.const 1))))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.A (local.get $this)(i32.add (local.get $x) (i32.const 1))))
    ;; B.this.$init();
    ;;@ jsconstructor/JsConstructorClass.java:62:11
    (call $$init__void_$p_jsconstructor_JsConstructorClass_B@jsconstructor.JsConstructorClass.B (local.get $this))
@@ -311,7 +311,7 @@
 )
 
 ;;; B()
-(func $m_<init>__void@jsconstructor.JsConstructorClass.B
+(func $m_<init>__@jsconstructor.JsConstructorClass.B
  (param $this (ref null $jsconstructor.JsConstructorClass.B))
  (result (ref null $jsconstructor.JsConstructorClass.B))
  (block $return.label
@@ -322,7 +322,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.B )
    ;; B.this.B.<init>(10);
    ;;@ jsconstructor/JsConstructorClass.java:68:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.const 10)))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.B (local.get $this)(i32.const 10)))
    ;; (B.this.fB = 4);
    ;;@ jsconstructor/JsConstructorClass.java:69:6
    (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.const 4))
@@ -332,7 +332,7 @@
 )
 
 ;;; B(int x, int y)
-(func $m_<init>__int__int__void@jsconstructor.JsConstructorClass.B
+(func $m_<init>__int__int@jsconstructor.JsConstructorClass.B
  (param $this (ref null $jsconstructor.JsConstructorClass.B))
  (param $x i32)
  (param $y i32)
@@ -345,7 +345,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.B )
    ;; B.this.B.<init>((x + y));
    ;;@ jsconstructor/JsConstructorClass.java:73:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.add (local.get $x) (local.get $y))))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.B (local.get $this)(i32.add (local.get $x) (local.get $y))))
    ;; (B.this.fB = (x * y));
    ;;@ jsconstructor/JsConstructorClass.java:74:6
    (struct.set $jsconstructor.JsConstructorClass.B $f_fB__jsconstructor_JsConstructorClass_B(local.get $this) (i32.mul (local.get $x) (local.get $y)))
@@ -426,7 +426,7 @@
 ))
 
 ;;; C(int x)
-(func $m_<init>__int__void@jsconstructor.JsConstructorClass.C
+(func $m_<init>__int@jsconstructor.JsConstructorClass.C
  (param $this (ref null $jsconstructor.JsConstructorClass.C))
  (param $x i32)
  (result (ref null $jsconstructor.JsConstructorClass.C))
@@ -438,7 +438,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.C )
    ;; B.this.B.<init>((x * 2));
    ;;@ jsconstructor/JsConstructorClass.java:86:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.mul (local.get $x) (i32.const 2))))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.B (local.get $this)(i32.mul (local.get $x) (i32.const 2))))
    ;; C.this.$init();
    ;;@ jsconstructor/JsConstructorClass.java:85:11
    (call $$init__void_$p_jsconstructor_JsConstructorClass_C@jsconstructor.JsConstructorClass.C (local.get $this))
@@ -451,7 +451,7 @@
 )
 
 ;;; C(int x, int y)
-(func $m_<init>__int__int__void@jsconstructor.JsConstructorClass.C
+(func $m_<init>__int__int@jsconstructor.JsConstructorClass.C
  (param $this (ref null $jsconstructor.JsConstructorClass.C))
  (param $x i32)
  (param $y i32)
@@ -464,7 +464,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.C )
    ;; C.this.C.<init>((x + y));
    ;;@ jsconstructor/JsConstructorClass.java:91:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.C (local.get $this)(i32.add (local.get $x) (local.get $y))))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.C (local.get $this)(i32.add (local.get $x) (local.get $y))))
    ;; (C.this.fC = 7);
    ;;@ jsconstructor/JsConstructorClass.java:92:6
    (struct.set $jsconstructor.JsConstructorClass.C $f_fC__jsconstructor_JsConstructorClass_C(local.get $this) (i32.const 7))
@@ -545,7 +545,7 @@
 ))
 
 ;;; D()
-(func $m_<init>__void@jsconstructor.JsConstructorClass.D
+(func $m_<init>__@jsconstructor.JsConstructorClass.D
  (param $this (ref null $jsconstructor.JsConstructorClass.D))
  (result (ref null $jsconstructor.JsConstructorClass.D))
  (block $return.label
@@ -556,7 +556,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.D )
    ;; B.this.B.<init>(9);
    ;;@ jsconstructor/JsConstructorClass.java:104:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.B (local.get $this)(i32.const 9)))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.B (local.get $this)(i32.const 9)))
    ;; D.this.$init();
    ;;@ jsconstructor/JsConstructorClass.java:103:11
    (call $$init__void_$p_jsconstructor_JsConstructorClass_D@jsconstructor.JsConstructorClass.D (local.get $this))
@@ -569,7 +569,7 @@
 )
 
 ;;; D(int x)
-(func $m_<init>__int__void@jsconstructor.JsConstructorClass.D
+(func $m_<init>__int@jsconstructor.JsConstructorClass.D
  (param $this (ref null $jsconstructor.JsConstructorClass.D))
  (param $x i32)
  (result (ref null $jsconstructor.JsConstructorClass.D))
@@ -581,7 +581,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.D )
    ;; D.this.D.<init>();
    ;;@ jsconstructor/JsConstructorClass.java:109:6
-   (drop (call $m_<init>__void@jsconstructor.JsConstructorClass.D (local.get $this)))
+   (drop (call $m_<init>__@jsconstructor.JsConstructorClass.D (local.get $this)))
    ;; (D.this.fD = x);
    ;;@ jsconstructor/JsConstructorClass.java:110:6
    (struct.set $jsconstructor.JsConstructorClass.D $f_fD__jsconstructor_JsConstructorClass_D(local.get $this) (local.get $x))
@@ -663,7 +663,7 @@
 ))
 
 ;;; E()
-(func $m_<init>__void@jsconstructor.JsConstructorClass.E
+(func $m_<init>__@jsconstructor.JsConstructorClass.E
  (param $this (ref null $jsconstructor.JsConstructorClass.E))
  (result (ref null $jsconstructor.JsConstructorClass.E))
  (block $return.label
@@ -674,7 +674,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.E )
    ;; C.this.C.<init>(10);
    ;;@ jsconstructor/JsConstructorClass.java:122:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.C (local.get $this)(i32.const 10)))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.C (local.get $this)(i32.const 10)))
    ;; E.this.$init();
    ;;@ jsconstructor/JsConstructorClass.java:121:11
    (call $$init__void_$p_jsconstructor_JsConstructorClass_E@jsconstructor.JsConstructorClass.E (local.get $this))
@@ -759,7 +759,7 @@
 ))
 
 ;;; F(int x)
-(func $m_<init>__int__void@jsconstructor.JsConstructorClass.F
+(func $m_<init>__int@jsconstructor.JsConstructorClass.F
  (param $this (ref null $jsconstructor.JsConstructorClass.F))
  (param $x i32)
  (result (ref null $jsconstructor.JsConstructorClass.F))
@@ -771,7 +771,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.F )
    ;; C.this.C.<init>((x + 2));
    ;;@ jsconstructor/JsConstructorClass.java:135:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.C (local.get $this)(i32.add (local.get $x) (i32.const 2))))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.C (local.get $this)(i32.add (local.get $x) (i32.const 2))))
    ;; F.this.$init();
    ;;@ jsconstructor/JsConstructorClass.java:134:11
    (call $$init__void_$p_jsconstructor_JsConstructorClass_F@jsconstructor.JsConstructorClass.F (local.get $this))
@@ -852,7 +852,7 @@
 ))
 
 ;;; G()
-(func $m_<init>__void@jsconstructor.JsConstructorClass.G
+(func $m_<init>__@jsconstructor.JsConstructorClass.G
  (param $this (ref null $jsconstructor.JsConstructorClass.G))
  (result (ref null $jsconstructor.JsConstructorClass.G))
  (block $return.label
@@ -863,7 +863,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.G )
    ;; Object.this.Object.<init>();
    ;;@ jsconstructor/JsConstructorClass.java:144:22
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -925,7 +925,7 @@
 ))
 
 ;;; H()
-(func $m_<init>__void@jsconstructor.JsConstructorClass.H
+(func $m_<init>__@jsconstructor.JsConstructorClass.H
  (param $this (ref null $jsconstructor.JsConstructorClass.H))
  (result (ref null $jsconstructor.JsConstructorClass.H))
  (block $return.label
@@ -936,7 +936,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.H )
    ;; G.this.G.<init>();
    ;;@ jsconstructor/JsConstructorClass.java:149:11
-   (drop (call $m_<init>__void@jsconstructor.JsConstructorClass.G (local.get $this)))
+   (drop (call $m_<init>__@jsconstructor.JsConstructorClass.G (local.get $this)))
   )
  )
  (local.get $this)
@@ -999,7 +999,7 @@
 ))
 
 ;;; Varargs(int... args)
-(func $m_<init>__arrayOf_int__void@jsconstructor.JsConstructorClass.Varargs
+(func $m_<init>__arrayOf_int@jsconstructor.JsConstructorClass.Varargs
  (param $this (ref null $jsconstructor.JsConstructorClass.Varargs))
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  (result (ref null $jsconstructor.JsConstructorClass.Varargs))
@@ -1011,7 +1011,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.Varargs )
    ;; A.this.A.<init>(args.elements[1]);
    ;;@ jsconstructor/JsConstructorClass.java:155:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.A (local.get $this)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $args)) (i32.const 1))))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.A (local.get $this)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $args)) (i32.const 1))))
   )
  )
  (local.get $this)
@@ -1074,7 +1074,7 @@
 ))
 
 ;;; SubVarargs(Object i, int... args)
-(func $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs
+(func $m_<init>__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs
  (param $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (param $i (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
@@ -1087,14 +1087,14 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
    ;; Varargs.this.Varargs.<init>(args);
    ;;@ jsconstructor/JsConstructorClass.java:162:6
-   (drop (call $m_<init>__arrayOf_int__void@jsconstructor.JsConstructorClass.Varargs (local.get $this)(local.get $args)))
+   (drop (call $m_<init>__arrayOf_int@jsconstructor.JsConstructorClass.Varargs (local.get $this)(local.get $args)))
   )
  )
  (local.get $this)
 )
 
 ;;; SubVarargs(int j)
-(func $m_<init>__int__void@jsconstructor.JsConstructorClass.SubVarargs
+(func $m_<init>__int@jsconstructor.JsConstructorClass.SubVarargs
  (param $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (param $j i32)
  (result (ref null $jsconstructor.JsConstructorClass.SubVarargs))
@@ -1107,8 +1107,8 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
    ;; SubVarargs.this.SubVarargs.<init>(new Object.<init>(),(int[] $array_literal = new OfInt.<init>(1),($array_literal.elements[0] = j),$array_literal));
    ;;@ jsconstructor/JsConstructorClass.java:166:6
-   (drop (call $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 1)))
+   (drop (call $m_<init>__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (local.get $this)(call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 1)))
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (local.get $j))
     (local.get $$array_literal)
    )))
@@ -1130,11 +1130,11 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
    ;; SubVarargs unusedS1 = new SubVarargs.<init>(2);
    ;;@ jsconstructor/JsConstructorClass.java:170:6
-   (local.set $unusedS1 (call $m_<init>__int__void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(i32.const 2)))
+   (local.set $unusedS1 (call $m_<init>__int@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(i32.const 2)))
    ;; SubVarargs unusedS2 = new SubVarargs.<init>(new Object.<init>(),(int[] $array_literal = new OfInt.<init>(3),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),($array_literal.elements[2] = 3),$array_literal));
    ;;@ jsconstructor/JsConstructorClass.java:171:6
-   (local.set $unusedS2 (call $m_<init>__java_lang_Object__arrayOf_int__void@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 3)))
+   (local.set $unusedS2 (call $m_<init>__java_lang_Object__arrayOf_int@jsconstructor.JsConstructorClass.SubVarargs (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.as_non_null (global.get $jsconstructor.JsConstructorClass.SubVarargs.itable)) (i32.const 0) (i32.const 0) (global.get $jsconstructor.JsConstructorClass.SubVarargs.rtt))(call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))(block (result (ref null $javaemul.internal.WasmArray.OfInt))
+    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 3)))
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
     (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 2) (i32.const 3))
@@ -1202,7 +1202,7 @@
 ))
 
 ;;; InstanceVarargs(JsConstructorClass $outer_this, int... args)
-(func $m_<init>__jsconstructor_JsConstructorClass__arrayOf_int__void@jsconstructor.JsConstructorClass.InstanceVarargs
+(func $m_<init>__jsconstructor_JsConstructorClass__arrayOf_int@jsconstructor.JsConstructorClass.InstanceVarargs
  (param $this (ref null $jsconstructor.JsConstructorClass.InstanceVarargs))
  (param $$outer_this (ref null $jsconstructor.JsConstructorClass))
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
@@ -1218,7 +1218,7 @@
    (struct.set $jsconstructor.JsConstructorClass.InstanceVarargs $$outer_this__jsconstructor_JsConstructorClass_InstanceVarargs(local.get $this) (local.get $$outer_this))
    ;; A.this.A.<init>(args.elements[1]);
    ;;@ jsconstructor/JsConstructorClass.java:179:6
-   (drop (call $m_<init>__int__void@jsconstructor.JsConstructorClass.A (local.get $this)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $args)) (i32.const 1))))
+   (drop (call $m_<init>__int@jsconstructor.JsConstructorClass.A (local.get $this)(array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $args)) (i32.const 1))))
   )
  )
  (local.get $this)
@@ -1280,7 +1280,7 @@
 ))
 
 ;;; RegularType(Object b)
-(func $m_<init>__java_lang_Object__void@jsconstructor.JsConstructorClass.RegularType
+(func $m_<init>__java_lang_Object@jsconstructor.JsConstructorClass.RegularType
  (param $this (ref null $jsconstructor.JsConstructorClass.RegularType))
  (param $b (ref null $java.lang.Object))
  (result (ref null $jsconstructor.JsConstructorClass.RegularType))
@@ -1292,7 +1292,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.RegularType )
    ;; Object.this.Object.<init>();
    ;;@ jsconstructor/JsConstructorClass.java:184:11
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1354,7 +1354,7 @@
 ))
 
 ;;; JsConstructorSubtypeOfRegularType(Object object)
-(func $m_<init>__java_lang_Object__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
+(func $m_<init>__java_lang_Object@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
  (param $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (param $object (ref null $java.lang.Object))
  (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
@@ -1366,14 +1366,14 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType )
    ;; RegularType.this.RegularType.<init>(object);
    ;;@ jsconstructor/JsConstructorClass.java:190:6
-   (drop (call $m_<init>__java_lang_Object__void@jsconstructor.JsConstructorClass.RegularType (local.get $this)(local.get $object)))
+   (drop (call $m_<init>__java_lang_Object@jsconstructor.JsConstructorClass.RegularType (local.get $this)(local.get $object)))
   )
  )
  (local.get $this)
 )
 
 ;;; JsConstructorSubtypeOfRegularType()
-(func $m_<init>__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
+(func $m_<init>__@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType
  (param $this (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (result (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType))
  (block $return.label
@@ -1384,7 +1384,7 @@
    (call $$clinit__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType )
    ;; JsConstructorSubtypeOfRegularType.this.JsConstructorSubtypeOfRegularType.<init>(new Object.<init>());
    ;;@ jsconstructor/JsConstructorClass.java:194:6
-   (drop (call $m_<init>__java_lang_Object__void@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (local.get $this)(call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))))
+   (drop (call $m_<init>__java_lang_Object@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType (local.get $this)(call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))))
   )
  )
  (local.get $this)

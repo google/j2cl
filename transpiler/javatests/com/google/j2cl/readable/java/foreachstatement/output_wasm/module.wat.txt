@@ -37,7 +37,7 @@
 ))
 
 ;;; ForEachStatement()
-(func $m_<init>__void@foreachstatement.ForEachStatement
+(func $m_<init>__@foreachstatement.ForEachStatement
  (param $this (ref null $foreachstatement.ForEachStatement))
  (result (ref null $foreachstatement.ForEachStatement))
  (block $return.label
@@ -48,7 +48,7 @@
    (call $$clinit__void@foreachstatement.ForEachStatement )
    ;; Object.this.Object.<init>();
    ;;@ foreachstatement/ForEachStatement.java:20:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -93,7 +93,7 @@
    )
    ;; LOOP: for (Throwable[] $array = new OfObject.<init>(10),int $index = 0;($index < $array.length);($index = ($index + 1))) {
    ;;@ foreachstatement/ForEachStatement.java:26:4
-   (local.set $$array (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
+   (local.set $$array (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 10)))
    (local.set $$index (i32.const 0))
    (block $LOOP_1.BREAK
     (loop
@@ -137,7 +137,7 @@
    (block
     ;; throw new Exception.<init>();
     ;;@ foreachstatement/ForEachStatement.java:45:6
-    (throw $exception.event (call $m_<init>__void@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
+    (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
    )
   )
  )
@@ -292,7 +292,7 @@
 ))
 
 ;;; Exception1()
-(func $m_<init>__void_$pp_foreachstatement@foreachstatement.ForEachStatement.Exception1
+(func $m_<init>___$pp_foreachstatement@foreachstatement.ForEachStatement.Exception1
  (param $this (ref null $foreachstatement.ForEachStatement.Exception1))
  (result (ref null $foreachstatement.ForEachStatement.Exception1))
  (block $return.label
@@ -303,7 +303,7 @@
    (call $$clinit__void@foreachstatement.ForEachStatement.Exception1 )
    ;; Exception.this.Exception.<init>();
    ;;@ foreachstatement/ForEachStatement.java:31:15
-   (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Exception (local.get $this)))
   )
  )
  (local.get $this)
@@ -448,7 +448,7 @@
 ))
 
 ;;; Exception2()
-(func $m_<init>__void_$pp_foreachstatement@foreachstatement.ForEachStatement.Exception2
+(func $m_<init>___$pp_foreachstatement@foreachstatement.ForEachStatement.Exception2
  (param $this (ref null $foreachstatement.ForEachStatement.Exception2))
  (result (ref null $foreachstatement.ForEachStatement.Exception2))
  (block $return.label
@@ -459,7 +459,7 @@
    (call $$clinit__void@foreachstatement.ForEachStatement.Exception2 )
    ;; Exception.this.Exception.<init>();
    ;;@ foreachstatement/ForEachStatement.java:37:15
-   (drop (call $m_<init>__void@java.lang.Exception (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Exception (local.get $this)))
   )
  )
  (local.get $this)
@@ -584,7 +584,7 @@
 ))
 
 ;;; IterableReturningTypeVariable()
-(func $m_<init>__void_$pp_foreachstatement@foreachstatement.ForEachStatement.IterableReturningTypeVariable
+(func $m_<init>___$pp_foreachstatement@foreachstatement.ForEachStatement.IterableReturningTypeVariable
  (param $this (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (result (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (block $return.label
@@ -595,7 +595,7 @@
    (call $$clinit__void@foreachstatement.ForEachStatement.IterableReturningTypeVariable )
    ;; Object.this.Object.<init>();
    ;;@ foreachstatement/ForEachStatement.java:51:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

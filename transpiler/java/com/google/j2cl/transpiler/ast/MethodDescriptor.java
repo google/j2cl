@@ -520,7 +520,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     Iterable<String> manglingDescriptors =
-        useWasmManglingPatterns()
+        // Add the return type to the mangled name in WASM except for constructors. Constructors
+        // always return the same type and there is no need to make the mangled name longer
+        // unnecessarily.
+        useWasmManglingPatterns() && !isConstructor()
             ? Iterables.concat(
                 getMangledParameterTypes(),
                 ImmutableList.of(getReturnTypeDescriptor().toRawTypeDescriptor().getMangledName()))
@@ -676,8 +679,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setUncheckedCast(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(Collections.emptyList())
-        .setTypeParameterTypeDescriptors(Collections.emptyList())
-        .setReturnTypeDescriptor(PrimitiveTypes.VOID);
+        .setTypeParameterTypeDescriptors(Collections.emptyList());
   }
 
   /** Returns a description that is useful for error messages. */
@@ -1015,6 +1017,10 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     abstract Optional<String> getName();
 
+    abstract DeclaredTypeDescriptor getEnclosingTypeDescriptor();
+
+    abstract Optional<TypeDescriptor> getReturnTypeDescriptor();
+
     abstract MethodDescriptor autoBuild();
 
     private static final String CONSTRUCTOR_METHOD_NAME = "<init>";
@@ -1023,8 +1029,18 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       if (isConstructor()) {
         // Constructors have a constant name <init>.
         checkState(!getName().isPresent() || getName().get().equals(CONSTRUCTOR_METHOD_NAME));
+        checkState(
+            !getReturnTypeDescriptor().isPresent()
+                || getReturnTypeDescriptor().get().equals(getEnclosingTypeDescriptor()));
 
         setName(CONSTRUCTOR_METHOD_NAME);
+      }
+
+      if (!getReturnTypeDescriptor().isPresent()) {
+        // The default return type for constructors is their enclosing type and void for everything
+        // else.
+        setReturnTypeDescriptor(
+            isConstructor() ? getEnclosingTypeDescriptor() : PrimitiveTypes.VOID);
       }
 
       checkState(getName().isPresent());
@@ -1118,12 +1134,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
 
     public static Builder from(MethodDescriptor methodDescriptor) {
-      Builder builder = methodDescriptor.toBuilder();
-      if (builder.isConstructor()) {
-        // clear the name.
-        builder.setName(null);
-      }
-      return builder;
+      return methodDescriptor.toBuilder();
     }
 
     private static final ThreadLocalInterner<MethodDescriptor> interner =

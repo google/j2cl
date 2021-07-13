@@ -18,7 +18,7 @@
 ))
 
 ;;; NewInstanceExpr()
-(func $m_<init>__void@newinstance.NewInstanceExpr
+(func $m_<init>__@newinstance.NewInstanceExpr
  (param $this (ref null $newinstance.NewInstanceExpr))
  (result (ref null $newinstance.NewInstanceExpr))
  (block $return.label
@@ -29,7 +29,7 @@
    (call $$clinit__void@newinstance.NewInstanceExpr )
    ;; Object.this.Object.<init>();
    ;;@ newinstance/NewInstanceExpr.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -47,7 +47,7 @@
    (call $$clinit__void@newinstance.NewInstanceExpr )
    ;; NewInstanceExpr a = new NewInstanceExpr.<init>();
    ;;@ newinstance/NewInstanceExpr.java:20:4
-   (local.set $a (call $m_<init>__void@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
+   (local.set $a (call $m_<init>__@newinstance.NewInstanceExpr (struct.new_with_rtt $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt))))
   )
  )
 )

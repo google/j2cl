@@ -30,7 +30,7 @@
 ))
 
 ;;; Main()
-(func $m_<init>__void@jsinnerclass.Main
+(func $m_<init>__@jsinnerclass.Main
  (param $this (ref null $jsinnerclass.Main))
  (result (ref null $jsinnerclass.Main))
  (block $return.label
@@ -41,7 +41,7 @@
    (call $$clinit__void@jsinnerclass.Main )
    ;; Object.this.Object.<init>();
    ;;@ jsinnerclass/Main.java:20:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -118,7 +118,7 @@
 ))
 
 ;;; Outer()
-(func $m_<init>__void_$pp_jsinnerclass@jsinnerclass.Main.Outer
+(func $m_<init>___$pp_jsinnerclass@jsinnerclass.Main.Outer
  (param $this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer))
  (block $return.label
@@ -129,7 +129,7 @@
    (call $$clinit__void@jsinnerclass.Main.Outer )
    ;; Object.this.Object.<init>();
    ;;@ jsinnerclass/Main.java:21:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; Outer.this.$init();
    ;;@ jsinnerclass/Main.java:21:15
    (call $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer (local.get $this))
@@ -152,7 +152,7 @@
    ;; return ((Inner $qualifier = new Inner.<init>(Outer.this),$qualifier.getB()) + Outer.this.a);
    ;;@ jsinnerclass/Main.java:38:6
    (local.set $return.value (i32.add (block (result i32)
-    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.itable)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner (struct.new_with_rtt $jsinnerclass.Main.Outer.Inner (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.vtable)) (ref.as_non_null (global.get $jsinnerclass.Main.Outer.Inner.itable)) (i32.const 0) (ref.null $jsinnerclass.Main.Outer) (i32.const 0) (global.get $jsinnerclass.Main.Outer.Inner.rtt))(local.get $this)))
     (call_ref (local.get $$qualifier)(struct.get $jsinnerclass.Main.Outer.Inner.vtable $m_getB__int (struct.get $jsinnerclass.Main.Outer.Inner $vtable(local.get $$qualifier))))
    ) (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $this))))
    (br $return.label)
@@ -234,7 +234,7 @@
 ))
 
 ;;; Inner(Outer $outer_this)
-(func $m_<init>__jsinnerclass_Main_Outer__void@jsinnerclass.Main.Outer.Inner
+(func $m_<init>__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner
  (param $this (ref null $jsinnerclass.Main.Outer.Inner))
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer.Inner))
@@ -249,7 +249,7 @@
    (struct.set $jsinnerclass.Main.Outer.Inner $$outer_this__jsinnerclass_Main_Outer_Inner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ jsinnerclass/Main.java:28:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; (Inner.this.b = ($outer_this.a + 1));
    ;;@ jsinnerclass/Main.java:29:8
    (struct.set $jsinnerclass.Main.Outer.Inner $f_b__jsinnerclass_Main_Outer_Inner_(local.get $this) (i32.add (struct.get $jsinnerclass.Main.Outer $f_a__jsinnerclass_Main_Outer(local.get $$outer_this)) (i32.const 1)))

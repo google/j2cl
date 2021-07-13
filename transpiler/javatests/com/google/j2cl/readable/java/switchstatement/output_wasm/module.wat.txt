@@ -36,7 +36,7 @@
 ))
 
 ;;; Numbers(String $name, int $ordinal)
-(func $m_<init>__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers
+(func $m_<init>__java_lang_String__int_$p_switchstatement_Numbers@switchstatement.Numbers
  (param $this (ref null $switchstatement.Numbers))
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
@@ -52,7 +52,7 @@
    (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
    ;; Enum.this.Enum.<init>($name,$ordinal);
    ;;@ switchstatement/SwitchStatement.java:18:5
-   (drop (call $m_<init>__java_lang_String__int__void@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
+   (drop (call $m_<init>__java_lang_String__int@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   )
  )
  (local.get $this)
@@ -104,7 +104,7 @@
    ;; return (Numbers[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE)),($array_literal.elements[1] = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.TWO)),$array_literal);
    ;;@ switchstatement/SwitchStatement.java:18:5
    (local.set $return.value (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $switchstatement.Numbers))
      (call $$clinit__void@switchstatement.Numbers )
      (global.get $f_ONE__switchstatement_Numbers)
@@ -148,7 +148,7 @@
     (call $$clinit__void@switchstatement.Numbers )
     ;; (switchstatement.Numbers.ONE = new Numbers.<init>(javaemul.internal.StringPool.$getString_|ONE|(),switchstatement.Numbers.ONE));
     ;;@ switchstatement/SwitchStatement.java:19:2
-    (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_ONE__switchstatement_Numbers)))
+    (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_ONE__switchstatement_Numbers)))
    )
    ;;@ switchstatement/SwitchStatement.java:20:2
    (block
@@ -157,7 +157,7 @@
     (call $$clinit__void@switchstatement.Numbers )
     ;; (switchstatement.Numbers.TWO = new Numbers.<init>(javaemul.internal.StringPool.$getString_|TWO|(),switchstatement.Numbers.TWO));
     ;;@ switchstatement/SwitchStatement.java:20:2
-    (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_TWO__switchstatement_Numbers)))
+    (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int_$p_switchstatement_Numbers@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_TWO__switchstatement_Numbers)))
    )
    ;; (switchstatement.Numbers.namesToValuesMap = null);
    ;;@ switchstatement/SwitchStatement.java:18:5
@@ -199,7 +199,7 @@
 ))
 
 ;;; SwitchStatement()
-(func $m_<init>__void@switchstatement.SwitchStatement
+(func $m_<init>__@switchstatement.SwitchStatement
  (param $this (ref null $switchstatement.SwitchStatement))
  (result (ref null $switchstatement.SwitchStatement))
  (block $return.label
@@ -210,7 +210,7 @@
    (call $$clinit__void@switchstatement.SwitchStatement )
    ;; Object.this.Object.<init>();
    ;;@ switchstatement/SwitchStatement.java:23:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

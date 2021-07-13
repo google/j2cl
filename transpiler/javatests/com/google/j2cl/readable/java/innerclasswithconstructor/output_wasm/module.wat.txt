@@ -25,7 +25,7 @@
 ))
 
 ;;; InnerClassWithConstructor()
-(func $m_<init>__void@innerclasswithconstructor.InnerClassWithConstructor
+(func $m_<init>__@innerclasswithconstructor.InnerClassWithConstructor
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (block $return.label
@@ -36,7 +36,7 @@
    (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor )
    ;; Object.this.Object.<init>();
    ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -100,7 +100,7 @@
 ))
 
 ;;; InnerClass(InnerClassWithConstructor $outer_this, int b)
-(func $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+(func $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (param $b i32)
@@ -116,7 +116,7 @@
    (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; (InnerClass.this.b = ($outer_this.a + b));
    ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:25:6
    (struct.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass(local.get $this) (i32.add (struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this)) (local.get $b)))
@@ -126,7 +126,7 @@
 )
 
 ;;; InnerClass(InnerClassWithConstructor $outer_this)
-(func $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
+(func $m_<init>__innerclasswithconstructor_InnerClassWithConstructor@innerclasswithconstructor.InnerClassWithConstructor.InnerClass
  (param $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
  (param $$outer_this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
  (result (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
@@ -138,7 +138,7 @@
    (call $$clinit__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass )
    ;; InnerClass.this.InnerClass.<init>($outer_this,$outer_this.a);
    ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:29:6
-   (drop (call $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int__void@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this)(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this))))
+   (drop (call $m_<init>__innerclasswithconstructor_InnerClassWithConstructor__int@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $this)(local.get $$outer_this)(struct.get $innerclasswithconstructor.InnerClassWithConstructor $f_a__innerclasswithconstructor_InnerClassWithConstructor(local.get $$outer_this))))
   )
  )
  (local.get $this)

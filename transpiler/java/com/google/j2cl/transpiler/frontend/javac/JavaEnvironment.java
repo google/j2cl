@@ -825,7 +825,7 @@ class JavaEnvironment {
         .setName(isConstructor ? null : methodName)
         .setParameterDescriptors(parameterDescriptorBuilder.build())
         .setDeclarationDescriptor(declarationMethodDescriptor)
-        .setReturnTypeDescriptor(returnTypeDescriptor)
+        .setReturnTypeDescriptor(isConstructor ? enclosingTypeDescriptor : returnTypeDescriptor)
         .setTypeParameterTypeDescriptors(typeParameterTypeDescriptors)
         .setJsInfo(jsInfo)
         .setJsFunction(isOrOverridesJsFunctionMethod(declarationMethodElement))

@@ -25,7 +25,7 @@
 ))
 
 ;;; Parent()
-(func $m_<init>__void_$pp_jsmethodoverride@jsmethodoverride.Parent
+(func $m_<init>___$pp_jsmethodoverride@jsmethodoverride.Parent
  (param $this (ref null $jsmethodoverride.Parent))
  (result (ref null $jsmethodoverride.Parent))
  (block $return.label
@@ -36,7 +36,7 @@
    (call $$clinit__void@jsmethodoverride.Parent )
    ;; Object.this.Object.<init>();
    ;;@ jsmethodoverride/Child.java:21:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -112,7 +112,7 @@
 ))
 
 ;;; Child()
-(func $m_<init>__void@jsmethodoverride.Child
+(func $m_<init>__@jsmethodoverride.Child
  (param $this (ref null $jsmethodoverride.Child))
  (result (ref null $jsmethodoverride.Child))
  (block $return.label
@@ -123,7 +123,7 @@
    (call $$clinit__void@jsmethodoverride.Child )
    ;; Parent.this.Parent.<init>();
    ;;@ jsmethodoverride/Child.java:27:13
-   (drop (call $m_<init>__void_$pp_jsmethodoverride@jsmethodoverride.Parent (local.get $this)))
+   (drop (call $m_<init>___$pp_jsmethodoverride@jsmethodoverride.Parent (local.get $this)))
   )
  )
  (local.get $this)

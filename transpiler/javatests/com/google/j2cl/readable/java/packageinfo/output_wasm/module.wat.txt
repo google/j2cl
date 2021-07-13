@@ -30,7 +30,7 @@
 ))
 
 ;;; Outer()
-(func $m_<init>__void@packageinfo.Outer
+(func $m_<init>__@packageinfo.Outer
  (param $this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer))
  (block $return.label
@@ -41,7 +41,7 @@
    (call $$clinit__void@packageinfo.Outer )
    ;; Object.this.Object.<init>();
    ;;@ packageinfo/Outer.java:21:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -104,7 +104,7 @@
 ))
 
 ;;; Inner(Outer $outer_this)
-(func $m_<init>__packageinfo_Outer__void@packageinfo.Outer.Inner
+(func $m_<init>__packageinfo_Outer@packageinfo.Outer.Inner
  (param $this (ref null $packageinfo.Outer.Inner))
  (param $$outer_this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer.Inner))
@@ -119,7 +119,7 @@
    (struct.set $packageinfo.Outer.Inner $$outer_this__packageinfo_Outer_Inner(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ packageinfo/Outer.java:24:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -182,7 +182,7 @@
 ))
 
 ;;; Foo()
-(func $m_<init>__void@packageinfo.subpackage.Foo
+(func $m_<init>__@packageinfo.subpackage.Foo
  (param $this (ref null $packageinfo.subpackage.Foo))
  (result (ref null $packageinfo.subpackage.Foo))
  (block $return.label
@@ -193,7 +193,7 @@
    (call $$clinit__void@packageinfo.subpackage.Foo )
    ;; Object.this.Object.<init>();
    ;;@ packageinfo/subpackage/Foo.java:20:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; Foo.this.$init();
    ;;@ packageinfo/subpackage/Foo.java:20:13
    (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $this))
@@ -210,7 +210,7 @@
   (block
    ;; (Foo.this.outer = new Outer.<init>());
    ;;@ packageinfo/subpackage/Foo.java:22:2
-   (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__void@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
+   (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
   )
  )
 )

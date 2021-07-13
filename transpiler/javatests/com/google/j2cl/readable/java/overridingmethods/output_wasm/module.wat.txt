@@ -70,7 +70,7 @@
 ))
 
 ;;; Parent()
-(func $m_<init>__void_$pp_overridingmethods@overridingmethods.Parent
+(func $m_<init>___$pp_overridingmethods@overridingmethods.Parent
  (param $this (ref null $overridingmethods.Parent))
  (result (ref null $overridingmethods.Parent))
  (block $return.label
@@ -81,7 +81,7 @@
    (call $$clinit__void@overridingmethods.Parent )
    ;; Object.this.Object.<init>();
    ;;@ overridingmethods/Child.java:22:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -158,7 +158,7 @@
 ))
 
 ;;; Child()
-(func $m_<init>__void@overridingmethods.Child
+(func $m_<init>__@overridingmethods.Child
  (param $this (ref null $overridingmethods.Child))
  (result (ref null $overridingmethods.Child))
  (block $return.label
@@ -169,7 +169,7 @@
    (call $$clinit__void@overridingmethods.Child )
    ;; Parent.this.Parent.<init>();
    ;;@ overridingmethods/Child.java:26:13
-   (drop (call $m_<init>__void_$pp_overridingmethods@overridingmethods.Parent (local.get $this)))
+   (drop (call $m_<init>___$pp_overridingmethods@overridingmethods.Parent (local.get $this)))
   )
  )
  (local.get $this)

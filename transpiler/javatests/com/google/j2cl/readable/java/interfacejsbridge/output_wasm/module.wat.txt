@@ -160,7 +160,7 @@
 ))
 
 ;;; InterfaceImpl()
-(func $m_<init>__void@interfacejsbridge.InterfaceImpl
+(func $m_<init>__@interfacejsbridge.InterfaceImpl
  (param $this (ref null $interfacejsbridge.InterfaceImpl))
  (result (ref null $interfacejsbridge.InterfaceImpl))
  (block $return.label
@@ -171,7 +171,7 @@
    (call $$clinit__void@interfacejsbridge.InterfaceImpl )
    ;; Object.this.Object.<init>();
    ;;@ interfacejsbridge/InterfaceImpl.java:34:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -255,7 +255,7 @@
 ))
 
 ;;; Main()
-(func $m_<init>__void@interfacejsbridge.Main
+(func $m_<init>__@interfacejsbridge.Main
  (param $this (ref null $interfacejsbridge.Main))
  (result (ref null $interfacejsbridge.Main))
  (block $return.label
@@ -266,7 +266,7 @@
    (call $$clinit__void@interfacejsbridge.Main )
    ;; Object.this.Object.<init>();
    ;;@ interfacejsbridge/Main.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -286,16 +286,16 @@
   (block
    ;; MyJsInterface a = new InterfaceImpl.<init>();
    ;;@ interfacejsbridge/Main.java:20:4
-   (local.set $a (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $a (call $m_<init>__@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; MyInterface b = new InterfaceImpl.<init>();
    ;;@ interfacejsbridge/Main.java:21:4
-   (local.set $b (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $b (call $m_<init>__@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; SubInterface c = new InterfaceImpl.<init>();
    ;;@ interfacejsbridge/Main.java:22:4
-   (local.set $c (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $c (call $m_<init>__@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; InterfaceImpl d = new InterfaceImpl.<init>();
    ;;@ interfacejsbridge/Main.java:23:4
-   (local.set $d (call $m_<init>__void@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
+   (local.set $d (call $m_<init>__@interfacejsbridge.InterfaceImpl (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (global.get $interfacejsbridge.InterfaceImpl.rtt))))
    ;; a.foo(1);
    ;;@ interfacejsbridge/Main.java:24:4
    (drop (call_ref (local.get $a)(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $a)) (i32.const 1)) (rtt.canon $interfacejsbridge.MyJsInterface.vtable)) )))

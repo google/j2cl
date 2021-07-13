@@ -39,7 +39,7 @@
 ))
 
 ;;; Main()
-(func $m_<init>__void@interfaces.Main
+(func $m_<init>__@interfaces.Main
  (param $this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main))
  (block $return.label
@@ -50,7 +50,7 @@
    (call $$clinit__void@interfaces.Main )
    ;; Object.this.Object.<init>();
    ;;@ interfaces/Main.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -68,7 +68,7 @@
   (block
    ;; Interface i = new Implementor.<init>(Main.this);
    ;;@ interfaces/Main.java:50:4
-   (local.set $i (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
+   (local.set $i (call $m_<init>__interfaces_Main_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
    ;; i.interfaceMethod();
    ;;@ interfaces/Main.java:51:4
    (call_ref (local.get $i)(struct.get $interfaces.Main.Interface.vtable $m_interfaceMethod__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $i)) (i32.const 1)) (rtt.canon $interfaces.Main.Interface.vtable)) ))
@@ -81,7 +81,7 @@
    ;; int x = ((new Implementor.<init>(Main.this),interfaces.Main.Interface.a) + interfaces.Main.Interface.b);
    ;;@ interfaces/Main.java:54:4
    (local.set $x (i32.add (block (result i32)
-    (drop (call $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
+    (drop (call $m_<init>__interfaces_Main_$pp_interfaces@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
     (global.get $f_a__interfaces_Main_Interface)
    ) (global.get $f_b__interfaces_Main_Interface)))
   )
@@ -290,7 +290,7 @@
 ))
 
 ;;; Implementor(Main $outer_this)
-(func $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.Implementor
+(func $m_<init>__interfaces_Main_$pp_interfaces@interfaces.Main.Implementor
  (param $this (ref null $interfaces.Main.Implementor))
  (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.Implementor))
@@ -305,7 +305,7 @@
    (struct.set $interfaces.Main.Implementor $$outer_this__interfaces_Main_Implementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ interfaces/Main.java:41:8
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -423,7 +423,7 @@
 ))
 
 ;;; AbstractImplementor(Main $outer_this)
-(func $m_<init>__interfaces_Main__void_$pp_interfaces@interfaces.Main.AbstractImplementor
+(func $m_<init>__interfaces_Main_$pp_interfaces@interfaces.Main.AbstractImplementor
  (param $this (ref null $interfaces.Main.AbstractImplementor))
  (param $$outer_this (ref null $interfaces.Main))
  (result (ref null $interfaces.Main.AbstractImplementor))
@@ -438,7 +438,7 @@
    (struct.set $interfaces.Main.AbstractImplementor $$outer_this__interfaces_Main_AbstractImplementor(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ interfaces/Main.java:47:17
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

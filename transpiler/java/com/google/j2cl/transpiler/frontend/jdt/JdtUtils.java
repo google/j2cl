@@ -672,8 +672,10 @@ class JdtUtils {
     String methodName = methodBinding.getName();
 
     TypeDescriptor returnTypeDescriptor =
-        createTypeDescriptorWithNullability(
-            methodBinding.getReturnType(), methodBinding.getAnnotations());
+        isConstructor
+            ? enclosingTypeDescriptor
+            : createTypeDescriptorWithNullability(
+                methodBinding.getReturnType(), methodBinding.getAnnotations());
 
     MethodDescriptor declarationMethodDescriptor = null;
     if (methodBinding.getMethodDeclaration() != methodBinding) {

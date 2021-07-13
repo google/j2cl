@@ -115,7 +115,7 @@
 ))
 
 ;;; AbstractType()
-(func $m_<init>__void_$pp_typeannotations@typeannotations.AbstractType
+(func $m_<init>___$pp_typeannotations@typeannotations.AbstractType
  (param $this (ref null $typeannotations.AbstractType))
  (result (ref null $typeannotations.AbstractType))
  (block $return.label
@@ -126,7 +126,7 @@
    (call $$clinit__void@typeannotations.AbstractType )
    ;; Object.this.Object.<init>();
    ;;@ typeannotations/TypeAnnotations.java:22:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -195,7 +195,7 @@
 ))
 
 ;;; AbstractTypeNonNull()
-(func $m_<init>__void_$pp_typeannotations@typeannotations.AbstractTypeNonNull
+(func $m_<init>___$pp_typeannotations@typeannotations.AbstractTypeNonNull
  (param $this (ref null $typeannotations.AbstractTypeNonNull))
  (result (ref null $typeannotations.AbstractTypeNonNull))
  (block $return.label
@@ -206,7 +206,7 @@
    (call $$clinit__void@typeannotations.AbstractTypeNonNull )
    ;; Object.this.Object.<init>();
    ;;@ typeannotations/TypeAnnotations.java:26:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -276,7 +276,7 @@
 ))
 
 ;;; Parent()
-(func $m_<init>__void_$pp_typeannotations@typeannotations.Parent
+(func $m_<init>___$pp_typeannotations@typeannotations.Parent
  (param $this (ref null $typeannotations.Parent))
  (result (ref null $typeannotations.Parent))
  (block $return.label
@@ -287,7 +287,7 @@
    (call $$clinit__void@typeannotations.Parent )
    ;; Object.this.Object.<init>();
    ;;@ typeannotations/TypeAnnotations.java:30:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -329,7 +329,7 @@
   (block
    ;; return new ArrayList.<init>();
    ;;@ typeannotations/TypeAnnotations.java:36:4
-   (local.set $return.value (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (ref.as_non_null (global.get $java.util.ArrayList.vtable)) (ref.as_non_null (global.get $java.util.ArrayList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $return.value (call $m_<init>__@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (ref.as_non_null (global.get $java.util.ArrayList.vtable)) (ref.as_non_null (global.get $java.util.ArrayList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
    (br $return.label)
   )
  )
@@ -398,7 +398,7 @@
 ))
 
 ;;; ChildWithNullableParent()
-(func $m_<init>__void_$pp_typeannotations@typeannotations.ChildWithNullableParent
+(func $m_<init>___$pp_typeannotations@typeannotations.ChildWithNullableParent
  (param $this (ref null $typeannotations.ChildWithNullableParent))
  (result (ref null $typeannotations.ChildWithNullableParent))
  (block $return.label
@@ -409,7 +409,7 @@
    (call $$clinit__void@typeannotations.ChildWithNullableParent )
    ;; Parent.this.Parent.<init>();
    ;;@ typeannotations/TypeAnnotations.java:40:6
-   (drop (call $m_<init>__void_$pp_typeannotations@typeannotations.Parent (local.get $this)))
+   (drop (call $m_<init>___$pp_typeannotations@typeannotations.Parent (local.get $this)))
   )
  )
  (local.get $this)
@@ -544,7 +544,7 @@
 ))
 
 ;;; ChildWithNonNullableParent()
-(func $m_<init>__void_$pp_typeannotations@typeannotations.ChildWithNonNullableParent
+(func $m_<init>___$pp_typeannotations@typeannotations.ChildWithNonNullableParent
  (param $this (ref null $typeannotations.ChildWithNonNullableParent))
  (result (ref null $typeannotations.ChildWithNonNullableParent))
  (block $return.label
@@ -555,7 +555,7 @@
    (call $$clinit__void@typeannotations.ChildWithNonNullableParent )
    ;; Parent.this.Parent.<init>();
    ;;@ typeannotations/TypeAnnotations.java:45:6
-   (drop (call $m_<init>__void_$pp_typeannotations@typeannotations.Parent (local.get $this)))
+   (drop (call $m_<init>___$pp_typeannotations@typeannotations.Parent (local.get $this)))
   )
  )
  (local.get $this)
@@ -685,7 +685,7 @@
 ))
 
 ;;; TypeAnnotations()
-(func $m_<init>__void@typeannotations.TypeAnnotations
+(func $m_<init>__@typeannotations.TypeAnnotations
  (param $this (ref null $typeannotations.TypeAnnotations))
  (result (ref null $typeannotations.TypeAnnotations))
  (block $return.label
@@ -696,7 +696,7 @@
    (call $$clinit__void@typeannotations.TypeAnnotations )
    ;; Object.this.Object.<init>();
    ;;@ typeannotations/TypeAnnotations.java:50:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -713,7 +713,7 @@
    (call $$clinit__void@typeannotations.TypeAnnotations )
    ;; List<String> list = new ArrayList.<init>();
    ;;@ typeannotations/TypeAnnotations.java:53:4
-   (local.set $list (call $m_<init>__void@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (ref.as_non_null (global.get $java.util.ArrayList.vtable)) (ref.as_non_null (global.get $java.util.ArrayList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+   (local.set $list (call $m_<init>__@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (ref.as_non_null (global.get $java.util.ArrayList.vtable)) (ref.as_non_null (global.get $java.util.ArrayList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
   )
  )
 )

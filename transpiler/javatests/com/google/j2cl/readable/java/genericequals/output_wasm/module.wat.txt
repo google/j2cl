@@ -21,7 +21,7 @@
 ))
 
 ;;; GenericEquals(T value)
-(func $m_<init>__java_lang_Object__void@genericequals.GenericEquals
+(func $m_<init>__java_lang_Object@genericequals.GenericEquals
  (param $this (ref null $genericequals.GenericEquals))
  (param $value (ref null $java.lang.Object))
  (result (ref null $genericequals.GenericEquals))
@@ -33,7 +33,7 @@
    (call $$clinit__void@genericequals.GenericEquals )
    ;; Object.this.Object.<init>();
    ;;@ genericequals/GenericEquals.java:23:9
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; (GenericEquals.this.value = value);
    ;;@ genericequals/GenericEquals.java:24:4
    (struct.set $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this) (local.get $value))

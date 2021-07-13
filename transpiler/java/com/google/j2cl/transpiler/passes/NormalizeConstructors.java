@@ -554,6 +554,7 @@ public class NormalizeConstructors extends NormalizationPass {
             constructor.isDeclaration()
                 ? null
                 : ctorMethodDescriptorFromJavaConstructor(constructor.getDeclarationDescriptor()))
+        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .setName(getCtorName(constructor))
         .setConstructor(false)
         .setStatic(false)
@@ -601,7 +602,6 @@ public class NormalizeConstructors extends NormalizationPass {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingType)
         .setConstructor(true)
-        .setReturnTypeDescriptor(PrimitiveTypes.VOID)
         .build();
   }
 
@@ -614,7 +614,6 @@ public class NormalizeConstructors extends NormalizationPass {
         MethodDescriptor.newBuilder()
             .setEnclosingTypeDescriptor(enclosingType)
             .setConstructor(true)
-            .setReturnTypeDescriptor(PrimitiveTypes.VOID)
             .setParameterDescriptors(
                 constructorDescriptor.getDeclarationDescriptor().getParameterDescriptors())
             .setJsInfo(JsInfo.newBuilder().setJsMemberType(JsMemberType.CONSTRUCTOR).build())

@@ -33,7 +33,7 @@
 ))
 
 ;;; SomeJsType()
-(func $m_<init>__void@jstype.SomeJsType
+(func $m_<init>__@jstype.SomeJsType
  (param $this (ref null $jstype.SomeJsType))
  (result (ref null $jstype.SomeJsType))
  (block $return.label
@@ -44,7 +44,7 @@
    (call $$clinit__void@jstype.SomeJsType )
    ;; Object.this.Object.<init>();
    ;;@ jstype/SomeJsType.java:22:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -144,7 +144,7 @@
   (block
    ;; Object object = new Object.<init>();
    ;;@ jstype/SomeJsType.java:52:4
-   (local.set $object (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $object (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
    ;;@ jstype/SomeJsType.java:54:4
    (local.set $star (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))

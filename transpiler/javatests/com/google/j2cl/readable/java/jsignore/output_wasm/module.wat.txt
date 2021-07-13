@@ -21,7 +21,7 @@
 ))
 
 ;;; JsIgnoreExample()
-(func $m_<init>__void@jsignore.JsIgnoreExample
+(func $m_<init>__@jsignore.JsIgnoreExample
  (param $this (ref null $jsignore.JsIgnoreExample))
  (result (ref null $jsignore.JsIgnoreExample))
  (block $return.label
@@ -32,7 +32,7 @@
    (call $$clinit__void@jsignore.JsIgnoreExample )
    ;; Object.this.Object.<init>();
    ;;@ jsignore/JsIgnoreExample.java:22:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -107,7 +107,7 @@
     (call $$clinit__void@jsignore.JsIgnoreExample )
     ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
     ;;@ jsignore/JsIgnoreExample.java:34:2
-    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+    (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    )
   )
  )

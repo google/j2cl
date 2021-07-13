@@ -27,7 +27,7 @@
 ))
 
 ;;; InstanceInnerClass()
-(func $m_<init>__void@instanceinnerclass.InstanceInnerClass
+(func $m_<init>__@instanceinnerclass.InstanceInnerClass
  (param $this (ref null $instanceinnerclass.InstanceInnerClass))
  (result (ref null $instanceinnerclass.InstanceInnerClass))
  (block $return.label
@@ -38,7 +38,7 @@
    (call $$clinit__void@instanceinnerclass.InstanceInnerClass )
    ;; Object.this.Object.<init>();
    ;;@ instanceinnerclass/InstanceInnerClass.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -67,7 +67,7 @@
   (block
    ;; new InnerClass.<init>(new InstanceInnerClass.<init>());
    ;;@ instanceinnerclass/InstanceInnerClass.java:34:4
-   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable)) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__void@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.itable)) (i32.const 0) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
+   (drop (call $m_<init>__instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass.InnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.itable)) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (i32.const 0) (ref.null $instanceinnerclass.InstanceInnerClass) (global.get $instanceinnerclass.InstanceInnerClass.InnerClass.rtt))(call $m_<init>__@instanceinnerclass.InstanceInnerClass (struct.new_with_rtt $instanceinnerclass.InstanceInnerClass (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.vtable)) (ref.as_non_null (global.get $instanceinnerclass.InstanceInnerClass.itable)) (i32.const 0) (i32.const 0) (global.get $instanceinnerclass.InstanceInnerClass.rtt)))))
   )
  )
 )
@@ -133,7 +133,7 @@
 ))
 
 ;;; InnerClass(InstanceInnerClass $outer_this)
-(func $m_<init>__instanceinnerclass_InstanceInnerClass__void@instanceinnerclass.InstanceInnerClass.InnerClass
+(func $m_<init>__instanceinnerclass_InstanceInnerClass@instanceinnerclass.InstanceInnerClass.InnerClass
  (param $this (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
  (param $$outer_this (ref null $instanceinnerclass.InstanceInnerClass))
  (result (ref null $instanceinnerclass.InstanceInnerClass.InnerClass))
@@ -148,7 +148,7 @@
    (struct.set $instanceinnerclass.InstanceInnerClass.InnerClass $$outer_this__instanceinnerclass_InstanceInnerClass_InnerClass(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; InnerClass.this.$init();
    ;;@ instanceinnerclass/InstanceInnerClass.java:23:15
    (call $$init__void_$p_instanceinnerclass_InstanceInnerClass_InnerClass@instanceinnerclass.InstanceInnerClass.InnerClass (local.get $this))

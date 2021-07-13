@@ -263,7 +263,7 @@
 ))
 
 ;;; A()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.A
+(func $m_<init>___$pp_bridgemethods@bridgemethods.A
  (param $this (ref null $bridgemethods.A))
  (result (ref null $bridgemethods.A))
  (block $return.label
@@ -274,7 +274,7 @@
    (call $$clinit__void@bridgemethods.A )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/AccidentalOverride.java:22:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -380,7 +380,7 @@
 ))
 
 ;;; B()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.B
+(func $m_<init>___$pp_bridgemethods@bridgemethods.B
  (param $this (ref null $bridgemethods.B))
  (result (ref null $bridgemethods.B))
  (block $return.label
@@ -391,7 +391,7 @@
    (call $$clinit__void@bridgemethods.B )
    ;; A.this.A.<init>();
    ;;@ bridgemethods/AccidentalOverride.java:32:6
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.A (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.A (local.get $this)))
   )
  )
  (local.get $this)
@@ -410,7 +410,7 @@
   (block
    ;; return new Integer.<init>(1);
    ;;@ bridgemethods/AccidentalOverride.java:37:4
-   (local.set $return.value (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $return.value (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    (br $return.label)
   )
  )
@@ -542,7 +542,7 @@
 ))
 
 ;;; AccidentalOverride()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverride
+(func $m_<init>___$pp_bridgemethods@bridgemethods.AccidentalOverride
  (param $this (ref null $bridgemethods.AccidentalOverride))
  (result (ref null $bridgemethods.AccidentalOverride))
  (block $return.label
@@ -553,7 +553,7 @@
    (call $$clinit__void@bridgemethods.AccidentalOverride )
    ;; A.this.A.<init>();
    ;;@ bridgemethods/AccidentalOverride.java:48:6
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.A (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.A (local.get $this)))
   )
  )
  (local.get $this)
@@ -721,7 +721,7 @@
 ))
 
 ;;; SuperParent()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperParent
+(func $m_<init>___$pp_bridgemethods@bridgemethods.SuperParent
  (param $this (ref null $bridgemethods.SuperParent))
  (result (ref null $bridgemethods.SuperParent))
  (block $return.label
@@ -732,7 +732,7 @@
    (call $$clinit__void@bridgemethods.SuperParent )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:26:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -813,7 +813,7 @@
 ))
 
 ;;; Parent()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.Parent
+(func $m_<init>___$pp_bridgemethods@bridgemethods.Parent
  (param $this (ref null $bridgemethods.Parent))
  (result (ref null $bridgemethods.Parent))
  (block $return.label
@@ -824,7 +824,7 @@
    (call $$clinit__void@bridgemethods.Parent )
    ;; SuperParent.this.SuperParent.<init>();
    ;;@ bridgemethods/BridgeMethod.java:30:6
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperParent (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.SuperParent (local.get $this)))
   )
  )
  (local.get $this)
@@ -954,7 +954,7 @@
 ))
 
 ;;; BridgeMethod()
-(func $m_<init>__void@bridgemethods.BridgeMethod
+(func $m_<init>__@bridgemethods.BridgeMethod
  (param $this (ref null $bridgemethods.BridgeMethod))
  (result (ref null $bridgemethods.BridgeMethod))
  (block $return.label
@@ -965,7 +965,7 @@
    (call $$clinit__void@bridgemethods.BridgeMethod )
    ;; Parent.this.Parent.<init>();
    ;;@ bridgemethods/BridgeMethod.java:42:13
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.Parent (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.Parent (local.get $this)))
   )
  )
  (local.get $this)
@@ -1153,7 +1153,7 @@
 ))
 
 ;;; DualUnrelatedBridges()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedBridges
+(func $m_<init>___$pp_bridgemethods@bridgemethods.DualUnrelatedBridges
  (param $this (ref null $bridgemethods.DualUnrelatedBridges))
  (result (ref null $bridgemethods.DualUnrelatedBridges))
  (block $return.label
@@ -1164,7 +1164,7 @@
    (call $$clinit__void@bridgemethods.DualUnrelatedBridges )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:61:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1312,7 +1312,7 @@
 ))
 
 ;;; SuperDualUnrelatedAccidentalBridges()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges
+(func $m_<init>___$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges
  (param $this (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
  (result (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
  (block $return.label
@@ -1323,7 +1323,7 @@
    (call $$clinit__void@bridgemethods.SuperDualUnrelatedAccidentalBridges )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:72:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1420,7 +1420,7 @@
 ))
 
 ;;; DualUnrelatedAccidentalBridges()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.DualUnrelatedAccidentalBridges
+(func $m_<init>___$pp_bridgemethods@bridgemethods.DualUnrelatedAccidentalBridges
  (param $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  (result (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  (block $return.label
@@ -1431,7 +1431,7 @@
    (call $$clinit__void@bridgemethods.DualUnrelatedAccidentalBridges )
    ;; SuperDualUnrelatedAccidentalBridges.this.SuperDualUnrelatedAccidentalBridges.<init>();
    ;;@ bridgemethods/BridgeMethod.java:78:6
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.SuperDualUnrelatedAccidentalBridges (local.get $this)))
   )
  )
  (local.get $this)
@@ -1590,7 +1590,7 @@
 ))
 
 ;;; ClassWithParameterizedGet()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet
+(func $m_<init>___$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet
  (param $this (ref null $bridgemethods.ClassWithParameterizedGet))
  (result (ref null $bridgemethods.ClassWithParameterizedGet))
  (block $return.label
@@ -1601,7 +1601,7 @@
    (call $$clinit__void@bridgemethods.ClassWithParameterizedGet )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:89:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1687,7 +1687,7 @@
 ))
 
 ;;; AccidentalOverrideBridge()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge
+(func $m_<init>___$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge
  (param $this (ref null $bridgemethods.AccidentalOverrideBridge))
  (result (ref null $bridgemethods.AccidentalOverrideBridge))
  (block $return.label
@@ -1698,7 +1698,7 @@
    (call $$clinit__void@bridgemethods.AccidentalOverrideBridge )
    ;; ClassWithParameterizedGet.this.ClassWithParameterizedGet.<init>();
    ;;@ bridgemethods/BridgeMethod.java:95:6
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.ClassWithParameterizedGet (local.get $this)))
   )
  )
  (local.get $this)
@@ -1715,7 +1715,7 @@
   (block
    ;; Getter g = new AccidentalOverrideBridge.<init>();
    ;;@ bridgemethods/BridgeMethod.java:99:4
-   (local.set $g (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.vtable)) (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.itable)) (i32.const 0) (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
+   (local.set $g (call $m_<init>___$pp_bridgemethods@bridgemethods.AccidentalOverrideBridge (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.vtable)) (ref.as_non_null (global.get $bridgemethods.AccidentalOverrideBridge.itable)) (i32.const 0) (global.get $bridgemethods.AccidentalOverrideBridge.rtt))))
    ;; g.get(javaemul.internal.StringPool.$getString_||());
    ;;@ bridgemethods/BridgeMethod.java:100:4
    (drop (call_ref (local.get $g)(call $$getString_||__java_lang_String@javaemul.internal.StringPool )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $g)) (i32.const 0)) (rtt.canon $bridgemethods.Getter.vtable)) )))
@@ -1822,7 +1822,7 @@
 ))
 
 ;;; TestCase10036()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036
+(func $m_<init>___$pp_bridgemethods@bridgemethods.TestCase10036
  (param $this (ref null $bridgemethods.TestCase10036))
  (result (ref null $bridgemethods.TestCase10036))
  (block $return.label
@@ -1833,7 +1833,7 @@
    (call $$clinit__void@bridgemethods.TestCase10036 )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:104:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2044,7 +2044,7 @@
 ))
 
 ;;; B()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase10036.B
+(func $m_<init>___$pp_bridgemethods@bridgemethods.TestCase10036.B
  (param $this (ref null $bridgemethods.TestCase10036.B))
  (result (ref null $bridgemethods.TestCase10036.B))
  (block $return.label
@@ -2055,7 +2055,7 @@
    (call $$clinit__void@bridgemethods.TestCase10036.B )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:121:24
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2102,7 +2102,7 @@
 ))
 
 ;;; TestCase102()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102
+(func $m_<init>___$pp_bridgemethods@bridgemethods.TestCase102
  (param $this (ref null $bridgemethods.TestCase102))
  (result (ref null $bridgemethods.TestCase102))
  (block $return.label
@@ -2113,7 +2113,7 @@
    (call $$clinit__void@bridgemethods.TestCase102 )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:129:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2260,7 +2260,7 @@
 ))
 
 ;;; B()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B
+(func $m_<init>___$pp_bridgemethods@bridgemethods.TestCase102.B
  (param $this (ref null $bridgemethods.TestCase102.B))
  (result (ref null $bridgemethods.TestCase102.B))
  (block $return.label
@@ -2271,7 +2271,7 @@
    (call $$clinit__void@bridgemethods.TestCase102.B )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:139:24
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2318,7 +2318,7 @@
 ))
 
 ;;; C(TestCase102 $outer_this)
-(func $m_<init>__bridgemethods_TestCase102__void_$pp_bridgemethods@bridgemethods.TestCase102.C
+(func $m_<init>__bridgemethods_TestCase102_$pp_bridgemethods@bridgemethods.TestCase102.C
  (param $this (ref null $bridgemethods.TestCase102.C))
  (param $$outer_this (ref null $bridgemethods.TestCase102))
  (result (ref null $bridgemethods.TestCase102.C))
@@ -2333,7 +2333,7 @@
    (struct.set $bridgemethods.TestCase102.C $$outer_this__bridgemethods_TestCase102_C(local.get $this) (local.get $$outer_this))
    ;; B.this.B.<init>();
    ;;@ bridgemethods/BridgeMethod.java:144:8
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.TestCase102.B (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.TestCase102.B (local.get $this)))
   )
  )
  (local.get $this)
@@ -2424,7 +2424,7 @@
 ))
 
 ;;; ParameterizedParent()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.ParameterizedParent
+(func $m_<init>___$pp_bridgemethods@bridgemethods.ParameterizedParent
  (param $this (ref null $bridgemethods.ParameterizedParent))
  (result (ref null $bridgemethods.ParameterizedParent))
  (block $return.label
@@ -2435,7 +2435,7 @@
    (call $$clinit__void@bridgemethods.ParameterizedParent )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethod.java:153:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2520,7 +2520,7 @@
 ))
 
 ;;; ReparametrerizedChild()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
+(func $m_<init>___$pp_bridgemethods@bridgemethods.ReparametrerizedChild
  (param $this (ref null $bridgemethods.ReparametrerizedChild))
  (result (ref null $bridgemethods.ReparametrerizedChild))
  (block $return.label
@@ -2531,7 +2531,7 @@
    (call $$clinit__void@bridgemethods.ReparametrerizedChild )
    ;; ParameterizedParent.this.ParameterizedParent.<init>();
    ;;@ bridgemethods/BridgeMethod.java:159:6
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.ParameterizedParent (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.ParameterizedParent (local.get $this)))
   )
  )
  (local.get $this)
@@ -2637,7 +2637,7 @@
 ))
 
 ;;; LeafChild()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.LeafChild
+(func $m_<init>___$pp_bridgemethods@bridgemethods.LeafChild
  (param $this (ref null $bridgemethods.LeafChild))
  (result (ref null $bridgemethods.LeafChild))
  (block $return.label
@@ -2648,7 +2648,7 @@
    (call $$clinit__void@bridgemethods.LeafChild )
    ;; ReparametrerizedChild.this.ReparametrerizedChild.<init>();
    ;;@ bridgemethods/BridgeMethod.java:165:6
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.ReparametrerizedChild (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.ReparametrerizedChild (local.get $this)))
   )
  )
  (local.get $this)
@@ -2710,7 +2710,7 @@
 ))
 
 ;;; BridgeMethodDefault()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault
+(func $m_<init>___$pp_bridgemethods@bridgemethods.BridgeMethodDefault
  (param $this (ref null $bridgemethods.BridgeMethodDefault))
  (result (ref null $bridgemethods.BridgeMethodDefault))
  (block $return.label
@@ -2721,7 +2721,7 @@
    (call $$clinit__void@bridgemethods.BridgeMethodDefault )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethodDefault.java:20:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2881,7 +2881,7 @@
 ))
 
 ;;; A()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.A
+(func $m_<init>___$pp_bridgemethods@bridgemethods.BridgeMethodDefault.A
  (param $this (ref null $bridgemethods.BridgeMethodDefault.A))
  (result (ref null $bridgemethods.BridgeMethodDefault.A))
  (block $return.label
@@ -2892,7 +2892,7 @@
    (call $$clinit__void@bridgemethods.BridgeMethodDefault.A )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethodDefault.java:30:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -3046,7 +3046,7 @@
 ))
 
 ;;; B()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodDefault.B
+(func $m_<init>___$pp_bridgemethods@bridgemethods.BridgeMethodDefault.B
  (param $this (ref null $bridgemethods.BridgeMethodDefault.B))
  (result (ref null $bridgemethods.BridgeMethodDefault.B))
  (block $return.label
@@ -3057,7 +3057,7 @@
    (call $$clinit__void@bridgemethods.BridgeMethodDefault.B )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethodDefault.java:38:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -3139,7 +3139,7 @@
 ))
 
 ;;; BridgeMethodShadowedSignature()
-(func $m_<init>__void@bridgemethods.BridgeMethodShadowedSignature
+(func $m_<init>__@bridgemethods.BridgeMethodShadowedSignature
  (param $this (ref null $bridgemethods.BridgeMethodShadowedSignature))
  (result (ref null $bridgemethods.BridgeMethodShadowedSignature))
  (block $return.label
@@ -3150,7 +3150,7 @@
    (call $$clinit__void@bridgemethods.BridgeMethodShadowedSignature )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethodShadowedSignature.java:20:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -3255,7 +3255,7 @@
 ))
 
 ;;; B()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B
+(func $m_<init>___$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B
  (param $this (ref null $bridgemethods.BridgeMethodShadowedSignature.B))
  (result (ref null $bridgemethods.BridgeMethodShadowedSignature.B))
  (block $return.label
@@ -3266,7 +3266,7 @@
    (call $$clinit__void@bridgemethods.BridgeMethodShadowedSignature.B )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/BridgeMethodShadowedSignature.java:26:24
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -3333,7 +3333,7 @@
 ))
 
 ;;; C()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.C
+(func $m_<init>___$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.C
  (param $this (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
  (result (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
  (block $return.label
@@ -3344,7 +3344,7 @@
    (call $$clinit__void@bridgemethods.BridgeMethodShadowedSignature.C )
    ;; B.this.B.<init>();
    ;;@ bridgemethods/BridgeMethodShadowedSignature.java:32:15
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.BridgeMethodShadowedSignature.B (local.get $this)))
   )
  )
  (local.get $this)
@@ -3491,7 +3491,7 @@
 ))
 
 ;;; AbstractMap()
-(func $m_<init>__void_$pp_bridgemethods@bridgemethods.AbstractMap
+(func $m_<init>___$pp_bridgemethods@bridgemethods.AbstractMap
  (param $this (ref null $bridgemethods.AbstractMap))
  (result (ref null $bridgemethods.AbstractMap))
  (block $return.label
@@ -3502,7 +3502,7 @@
    (call $$clinit__void@bridgemethods.AbstractMap )
    ;; Object.this.Object.<init>();
    ;;@ bridgemethods/EnumMap.java:22:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -3588,7 +3588,7 @@
 ))
 
 ;;; EnumMap()
-(func $m_<init>__void@bridgemethods.EnumMap
+(func $m_<init>__@bridgemethods.EnumMap
  (param $this (ref null $bridgemethods.EnumMap))
  (result (ref null $bridgemethods.EnumMap))
  (block $return.label
@@ -3599,7 +3599,7 @@
    (call $$clinit__void@bridgemethods.EnumMap )
    ;; AbstractMap.this.AbstractMap.<init>();
    ;;@ bridgemethods/EnumMap.java:29:13
-   (drop (call $m_<init>__void_$pp_bridgemethods@bridgemethods.AbstractMap (local.get $this)))
+   (drop (call $m_<init>___$pp_bridgemethods@bridgemethods.AbstractMap (local.get $this)))
   )
  )
  (local.get $this)

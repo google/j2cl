@@ -95,7 +95,7 @@
 ))
 
 ;;; GenericClass()
-(func $m_<init>__void_$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass
+(func $m_<init>___$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass
  (param $this (ref null $genericanddefaultmethods.GenericClass))
  (result (ref null $genericanddefaultmethods.GenericClass))
  (block $return.label
@@ -106,7 +106,7 @@
    (call $$clinit__void@genericanddefaultmethods.GenericClass )
    ;; Object.this.Object.<init>();
    ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -197,7 +197,7 @@
 ))
 
 ;;; ConcreteClass()
-(func $m_<init>__void@genericanddefaultmethods.ConcreteClass
+(func $m_<init>__@genericanddefaultmethods.ConcreteClass
  (param $this (ref null $genericanddefaultmethods.ConcreteClass))
  (result (ref null $genericanddefaultmethods.ConcreteClass))
  (block $return.label
@@ -208,7 +208,7 @@
    (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
    ;; GenericClass.this.GenericClass.<init>();
    ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-   (drop (call $m_<init>__void_$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass (local.get $this)))
+   (drop (call $m_<init>___$pp_genericanddefaultmethods@genericanddefaultmethods.GenericClass (local.get $this)))
   )
  )
  (local.get $this)

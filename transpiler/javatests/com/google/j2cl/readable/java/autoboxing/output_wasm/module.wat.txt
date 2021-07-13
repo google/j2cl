@@ -65,7 +65,7 @@
 ))
 
 ;;; AutoBoxing()
-(func $m_<init>__void@autoboxing.AutoBoxing
+(func $m_<init>__@autoboxing.AutoBoxing
  (param $this (ref null $autoboxing.AutoBoxing))
  (result (ref null $autoboxing.AutoBoxing))
  (block $return.label
@@ -76,7 +76,7 @@
    (call $$clinit__void@autoboxing.AutoBoxing )
    ;; Object.this.Object.<init>();
    ;;@ autoboxing/AutoBoxing.java:27:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -747,7 +747,7 @@
    ;; (unusedDouble = AutoBoxing.this.sumWithoutBoxing((Object[] $array_literal = new OfObject.<init>(5),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Double.valueOf(2.2)),($array_literal.elements[2] = java.lang.Byte.valueOf(1)),($array_literal.elements[3] = java.lang.Short.valueOf(1)),($array_literal.elements[4] = java.lang.Float.valueOf(2.2)),$array_literal)));
    ;;@ autoboxing/AutoBoxing.java:167:4
    (local.set $unusedDouble (call_ref (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 5)))
+    (local.set $$array_literal (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 5)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 2.2)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 2) (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 1)))
@@ -758,7 +758,7 @@
    ;; (unusedDouble = AutoBoxing.this.sumWithoutBoxingJsVarargs((Object[] $array_literal = new OfObject.<init>(5),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Double.valueOf(2.2)),($array_literal.elements[2] = java.lang.Byte.valueOf(1)),($array_literal.elements[3] = java.lang.Short.valueOf(1)),($array_literal.elements[4] = java.lang.Float.valueOf(2.2)),$array_literal)));
    ;;@ autoboxing/AutoBoxing.java:168:4
    (local.set $unusedDouble (call_ref (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_1 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 5)))
+    (local.set $$array_literal_1 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 5)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 1) (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 2.2)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 2) (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 1)))
@@ -769,7 +769,7 @@
    ;; AutoBoxing.this.takesFloatVarArgs((Float[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = java.lang.Float.valueOf(1.100000023841858)),($array_literal.elements[1] = java.lang.Float.valueOf(97.0)),($array_literal.elements[2] = java.lang.Float.valueOf(2.2)),$array_literal));
    ;;@ autoboxing/AutoBoxing.java:169:4
    (call_ref (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-    (local.set $$array_literal_2 (call $m_<init>__int__void_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
+    (local.set $$array_literal_2 (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 0) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 1.100000023841858)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 1) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 97.0)))
     (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 2) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 2.2)))
@@ -860,28 +860,28 @@
   (block
    ;; Boolean boxBool = new Boolean.<init>(true);
    ;;@ autoboxing/AutoBoxing.java:198:4
-   (local.set $boxBool (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
+   (local.set $boxBool (call $m_<init>__boolean@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
    ;; Double boxD = new Double.<init>(2.2);
    ;;@ autoboxing/AutoBoxing.java:199:4
-   (local.set $boxD (call $m_<init>__double__void@java.lang.Double (struct.new_with_rtt $java.lang.Double (ref.as_non_null (global.get $java.lang.Double.vtable)) (ref.as_non_null (global.get $java.lang.Double.itable)) (i32.const 0) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 2.2)))
+   (local.set $boxD (call $m_<init>__double@java.lang.Double (struct.new_with_rtt $java.lang.Double (ref.as_non_null (global.get $java.lang.Double.vtable)) (ref.as_non_null (global.get $java.lang.Double.itable)) (i32.const 0) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 2.2)))
    ;; Byte boxB = new Byte.<init>(1);
    ;;@ autoboxing/AutoBoxing.java:200:4
-   (local.set $boxB (call $m_<init>__byte__void@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (ref.as_non_null (global.get $java.lang.Byte.vtable)) (ref.as_non_null (global.get $java.lang.Byte.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 1)))
+   (local.set $boxB (call $m_<init>__byte@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (ref.as_non_null (global.get $java.lang.Byte.vtable)) (ref.as_non_null (global.get $java.lang.Byte.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 1)))
    ;; Float boxF = new Float.<init>(1.100000023841858);
    ;;@ autoboxing/AutoBoxing.java:201:4
-   (local.set $boxF (call $m_<init>__float__void@java.lang.Float (struct.new_with_rtt $java.lang.Float (ref.as_non_null (global.get $java.lang.Float.vtable)) (ref.as_non_null (global.get $java.lang.Float.itable)) (i32.const 0) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
+   (local.set $boxF (call $m_<init>__float@java.lang.Float (struct.new_with_rtt $java.lang.Float (ref.as_non_null (global.get $java.lang.Float.vtable)) (ref.as_non_null (global.get $java.lang.Float.itable)) (i32.const 0) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
    ;; Integer boxI = new Integer.<init>(1);
    ;;@ autoboxing/AutoBoxing.java:202:4
-   (local.set $boxI (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $boxI (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; Long boxL = new Long.<init>(1);
    ;;@ autoboxing/AutoBoxing.java:203:4
-   (local.set $boxL (call $m_<init>__long__void@java.lang.Long (struct.new_with_rtt $java.lang.Long (ref.as_non_null (global.get $java.lang.Long.vtable)) (ref.as_non_null (global.get $java.lang.Long.itable)) (i32.const 0) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
+   (local.set $boxL (call $m_<init>__long@java.lang.Long (struct.new_with_rtt $java.lang.Long (ref.as_non_null (global.get $java.lang.Long.vtable)) (ref.as_non_null (global.get $java.lang.Long.itable)) (i32.const 0) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
    ;; Short boxS = new Short.<init>(1);
    ;;@ autoboxing/AutoBoxing.java:204:4
-   (local.set $boxS (call $m_<init>__short__void@java.lang.Short (struct.new_with_rtt $java.lang.Short (ref.as_non_null (global.get $java.lang.Short.vtable)) (ref.as_non_null (global.get $java.lang.Short.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 1)))
+   (local.set $boxS (call $m_<init>__short@java.lang.Short (struct.new_with_rtt $java.lang.Short (ref.as_non_null (global.get $java.lang.Short.vtable)) (ref.as_non_null (global.get $java.lang.Short.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 1)))
    ;; Character boxC = new Character.<init>(97);
    ;;@ autoboxing/AutoBoxing.java:205:4
-   (local.set $boxC (call $m_<init>__char__void@java.lang.Character (struct.new_with_rtt $java.lang.Character (ref.as_non_null (global.get $java.lang.Character.vtable)) (ref.as_non_null (global.get $java.lang.Character.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Character.rtt))(i32.const 97)))
+   (local.set $boxC (call $m_<init>__char@java.lang.Character (struct.new_with_rtt $java.lang.Character (ref.as_non_null (global.get $java.lang.Character.vtable)) (ref.as_non_null (global.get $java.lang.Character.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Character.rtt))(i32.const 97)))
    ;; boolean bool = boxBool.booleanValue();
    ;;@ autoboxing/AutoBoxing.java:208:4
    (local.set $bool (call_ref (local.get $boxBool)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $boxBool)))))
@@ -1073,10 +1073,10 @@
   (block
    ;; Boolean boxB1 = new Boolean.<init>(true);
    ;;@ autoboxing/AutoBoxing.java:271:4
-   (local.set $boxB1 (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
+   (local.set $boxB1 (call $m_<init>__boolean@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
    ;; Boolean boxB2 = new Boolean.<init>(false);
    ;;@ autoboxing/AutoBoxing.java:272:4
-   (local.set $boxB2 (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 0)))
+   (local.set $boxB2 (call $m_<init>__boolean@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 0)))
    ;; boolean br;
    ;;@ autoboxing/AutoBoxing.java:274:4
    
@@ -1252,13 +1252,13 @@
   (block
    ;; Boolean boxB = new Boolean.<init>(true);
    ;;@ autoboxing/AutoBoxing.java:343:4
-   (local.set $boxB (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
+   (local.set $boxB (call $m_<init>__boolean@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
    ;; boolean b = false;
    ;;@ autoboxing/AutoBoxing.java:344:4
    (local.set $b (i32.const 0))
    ;; Integer boxI = new Integer.<init>(1);
    ;;@ autoboxing/AutoBoxing.java:352:4
-   (local.set $boxI (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $boxI (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; int i = 1;
    ;;@ autoboxing/AutoBoxing.java:353:4
    (local.set $i (i32.const 1))
@@ -1279,7 +1279,7 @@
   (block
    ;; Boolean boxB = new Boolean.<init>(true);
    ;;@ autoboxing/AutoBoxing.java:363:4
-   (local.set $boxB (call $m_<init>__boolean__void@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
+   (local.set $boxB (call $m_<init>__boolean@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
    ;; boolean b = true;
    ;;@ autoboxing/AutoBoxing.java:364:4
    (local.set $b (i32.const 1))
@@ -1311,7 +1311,7 @@
    ;; (l = (Local<Long, T> $qualifier = new $1Local.<init>(),$qualifier.toLong(java.lang.Long.valueOf(11))));
    ;;@ autoboxing/AutoBoxing.java:385:4
    (local.set $l (block (result i64)
-    (local.set $$qualifier (call $m_<init>__void_$pp_autoboxing@autoboxing.AutoBoxing.1Local (struct.new_with_rtt $autoboxing.AutoBoxing.1Local (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Local.vtable)) (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Local.itable)) (i32.const 0) (global.get $autoboxing.AutoBoxing.1Local.rtt))))
+    (local.set $$qualifier (call $m_<init>___$pp_autoboxing@autoboxing.AutoBoxing.1Local (struct.new_with_rtt $autoboxing.AutoBoxing.1Local (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Local.vtable)) (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Local.itable)) (i32.const 0) (global.get $autoboxing.AutoBoxing.1Local.rtt))))
     (call_ref (local.get $$qualifier)(call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 11))(struct.get $autoboxing.AutoBoxing.1Local.vtable $m_toLong__java_lang_Long__long_$pp_autoboxing (struct.get $autoboxing.AutoBoxing.1Local $vtable(local.get $$qualifier))))
    ))
   )
@@ -1343,7 +1343,7 @@
    ;; (l = (Local<Long, T> $qualifier = new $2Local.<init>(),$qualifier.toLong(java.lang.Long.valueOf(11))));
    ;;@ autoboxing/AutoBoxing.java:405:4
    (local.set $l (block (result i64)
-    (local.set $$qualifier (call $m_<init>__void_$pp_autoboxing@autoboxing.AutoBoxing.2Local (struct.new_with_rtt $autoboxing.AutoBoxing.2Local (ref.as_non_null (global.get $autoboxing.AutoBoxing.2Local.vtable)) (ref.as_non_null (global.get $autoboxing.AutoBoxing.2Local.itable)) (i32.const 0) (global.get $autoboxing.AutoBoxing.2Local.rtt))))
+    (local.set $$qualifier (call $m_<init>___$pp_autoboxing@autoboxing.AutoBoxing.2Local (struct.new_with_rtt $autoboxing.AutoBoxing.2Local (ref.as_non_null (global.get $autoboxing.AutoBoxing.2Local.vtable)) (ref.as_non_null (global.get $autoboxing.AutoBoxing.2Local.itable)) (i32.const 0) (global.get $autoboxing.AutoBoxing.2Local.rtt))))
     (call_ref (local.get $$qualifier)(call $m_valueOf__long__java_lang_Long@java.lang.Long (i64.const 11))(struct.get $autoboxing.AutoBoxing.2Local.vtable $m_toLong__java_lang_Long__long_$pp_autoboxing (struct.get $autoboxing.AutoBoxing.2Local $vtable(local.get $$qualifier))))
    ))
    ;; int i = (Integer $qualifier = java.lang.Integer.valueOf(10),$qualifier.intValue());
@@ -1369,7 +1369,7 @@
   (block
    ;; Supplier<Integer> supplier = new $1Supplier.<init>(AutoBoxing.this);
    ;;@ autoboxing/AutoBoxing.java:417:4
-   (local.set $supplier (call $m_<init>__autoboxing_AutoBoxing__void_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier (struct.new_with_rtt $autoboxing.AutoBoxing.1Supplier (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Supplier.vtable)) (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Supplier.itable)) (i32.const 0) (ref.null $autoboxing.AutoBoxing) (global.get $autoboxing.AutoBoxing.1Supplier.rtt))(local.get $this)))
+   (local.set $supplier (call $m_<init>__autoboxing_AutoBoxing_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier (struct.new_with_rtt $autoboxing.AutoBoxing.1Supplier (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Supplier.vtable)) (ref.as_non_null (global.get $autoboxing.AutoBoxing.1Supplier.itable)) (i32.const 0) (ref.null $autoboxing.AutoBoxing) (global.get $autoboxing.AutoBoxing.1Supplier.rtt))(local.get $this)))
    ;; int i = (Integer $qualifier = ((Integer) supplier.get()),$qualifier.intValue());
    ;;@ autoboxing/AutoBoxing.java:418:4
    (local.set $i (block (result i32)
@@ -1438,7 +1438,7 @@
 ))
 
 ;;; Local()
-(func $m_<init>__void_$pp_autoboxing@autoboxing.AutoBoxing.1Local
+(func $m_<init>___$pp_autoboxing@autoboxing.AutoBoxing.1Local
  (param $this (ref null $autoboxing.AutoBoxing.1Local))
  (result (ref null $autoboxing.AutoBoxing.1Local))
  (block $return.label
@@ -1449,7 +1449,7 @@
    (call $$clinit__void@autoboxing.AutoBoxing.1Local )
    ;; Object.this.Object.<init>();
    ;;@ autoboxing/AutoBoxing.java:378:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1533,7 +1533,7 @@
 ))
 
 ;;; Local()
-(func $m_<init>__void_$pp_autoboxing@autoboxing.AutoBoxing.2Local
+(func $m_<init>___$pp_autoboxing@autoboxing.AutoBoxing.2Local
  (param $this (ref null $autoboxing.AutoBoxing.2Local))
  (result (ref null $autoboxing.AutoBoxing.2Local))
  (block $return.label
@@ -1544,7 +1544,7 @@
    (call $$clinit__void@autoboxing.AutoBoxing.2Local )
    ;; Object.this.Object.<init>();
    ;;@ autoboxing/AutoBoxing.java:397:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1629,7 +1629,7 @@
 ))
 
 ;;; Supplier(AutoBoxing $outer_this)
-(func $m_<init>__autoboxing_AutoBoxing__void_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier
+(func $m_<init>__autoboxing_AutoBoxing_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier
  (param $this (ref null $autoboxing.AutoBoxing.1Supplier))
  (param $$outer_this (ref null $autoboxing.AutoBoxing))
  (result (ref null $autoboxing.AutoBoxing.1Supplier))
@@ -1644,7 +1644,7 @@
    (struct.set $autoboxing.AutoBoxing.1Supplier $$outer_this__autoboxing_AutoBoxing_1Supplier(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ autoboxing/AutoBoxing.java:412:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

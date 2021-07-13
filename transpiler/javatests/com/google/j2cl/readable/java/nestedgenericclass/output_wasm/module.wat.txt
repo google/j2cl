@@ -69,7 +69,7 @@
 ))
 
 ;;; NestedGenericClass()
-(func $m_<init>__void@nestedgenericclass.NestedGenericClass
+(func $m_<init>__@nestedgenericclass.NestedGenericClass
  (param $this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass))
  (block $return.label
@@ -80,7 +80,7 @@
    (call $$clinit__void@nestedgenericclass.NestedGenericClass )
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -97,10 +97,10 @@
   (block
    ;; new $1E.<init>(NestedGenericClass.this);
    ;;@ nestedgenericclass/NestedGenericClass.java:44:4
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1E.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1E.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1E.rtt))(local.get $this)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1E.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1E.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1E.rtt))(local.get $this)))
    ;; new $1F.<init>(NestedGenericClass.this);
    ;;@ nestedgenericclass/NestedGenericClass.java:45:4
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1F.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1F.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.1F.rtt))(local.get $this)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1F.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1F.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.1F.rtt))(local.get $this)))
   )
  )
 )
@@ -119,7 +119,7 @@
    (block
     ;; G<Error, T, T> $qualifier = new $1G.<init>(NestedGenericClass.this);
     ;;@ nestedgenericclass/NestedGenericClass.java:56:4
-    (local.set $$qualifier (call $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1G.rtt))(local.get $this)))
+    (local.set $$qualifier (call $m_<init>__nestedgenericclass_NestedGenericClass_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.1G.rtt))(local.get $this)))
     ;; $qualifier.bar();
     ;;@ nestedgenericclass/NestedGenericClass.java:56:4
     (call_ref (local.get $$qualifier)(struct.get $nestedgenericclass.NestedGenericClass.1G.vtable $m_bar__void (struct.get $nestedgenericclass.NestedGenericClass.1G $vtable(local.get $$qualifier))))
@@ -142,19 +142,19 @@
   (block
    ;; NestedGenericClass<Number> n = new NestedGenericClass.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:60:4
-   (local.set $n (call $m_<init>__void@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.itable)) (i32.const 0) (global.get $nestedgenericclass.NestedGenericClass.rtt))))
+   (local.set $n (call $m_<init>__@nestedgenericclass.NestedGenericClass (struct.new_with_rtt $nestedgenericclass.NestedGenericClass (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.itable)) (i32.const 0) (global.get $nestedgenericclass.NestedGenericClass.rtt))))
    ;; A<Error, Number> a = new A.<init>(n);
    ;;@ nestedgenericclass/NestedGenericClass.java:61:4
-   (local.set $a (call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))(local.get $n)))
+   (local.set $a (call $m_<init>__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.A (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (global.get $nestedgenericclass.NestedGenericClass.A.rtt))(local.get $n)))
    ;; B<Exception, Error, Number> b = new B.<init>(a);
    ;;@ nestedgenericclass/NestedGenericClass.java:62:4
-   (local.set $b (call $m_<init>__nestedgenericclass_NestedGenericClass_A__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.B.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.B.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))(local.get $a)))
+   (local.set $b (call $m_<init>__nestedgenericclass_NestedGenericClass_A_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.B.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.A.B.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.A) (global.get $nestedgenericclass.NestedGenericClass.A.B.rtt))(local.get $a)))
    ;; new C.<init>(n);
    ;;@ nestedgenericclass/NestedGenericClass.java:64:4
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n)))
    ;; new D.<init>(new C.<init>(n));
    ;;@ nestedgenericclass/NestedGenericClass.java:65:4
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_C__void@nestedgenericclass.NestedGenericClass.C.D (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.D.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.D.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.C) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt))(call $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n))))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_C@nestedgenericclass.NestedGenericClass.C.D (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.D.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.D.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.C) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.D.rtt))(call $m_<init>__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.C (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.C.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass) (ref.null $java.lang.Object) (global.get $nestedgenericclass.NestedGenericClass.C.rtt))(local.get $n))))
   )
  )
 )
@@ -217,7 +217,7 @@
 ))
 
 ;;; A(NestedGenericClass<T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.A
+(func $m_<init>__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.A
  (param $this (ref null $nestedgenericclass.NestedGenericClass.A))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.A))
@@ -232,7 +232,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.A $$outer_this__nestedgenericclass_NestedGenericClass_A(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:20:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -295,7 +295,7 @@
 ))
 
 ;;; B(A<T, T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass_A__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B
+(func $m_<init>__nestedgenericclass_NestedGenericClass_A_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B
  (param $this (ref null $nestedgenericclass.NestedGenericClass.A.B))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass.A))
  (result (ref null $nestedgenericclass.NestedGenericClass.A.B))
@@ -310,14 +310,14 @@
    (struct.set $nestedgenericclass.NestedGenericClass.A.B $$outer_this__nestedgenericclass_NestedGenericClass_A_B(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:22:6
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
 )
 
 ;;; B(A<T, T> $outer_this, U u)
-(func $m_<init>__nestedgenericclass_NestedGenericClass_A__java_lang_Object__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B
+(func $m_<init>__nestedgenericclass_NestedGenericClass_A__java_lang_Object_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.A.B
  (param $this (ref null $nestedgenericclass.NestedGenericClass.A.B))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass.A))
  (param $u (ref null $java.lang.Object))
@@ -333,7 +333,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.A.B $$outer_this__nestedgenericclass_NestedGenericClass_A_B(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:25:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -397,7 +397,7 @@
 ))
 
 ;;; C(NestedGenericClass<T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass__void@nestedgenericclass.NestedGenericClass.C
+(func $m_<init>__nestedgenericclass_NestedGenericClass@nestedgenericclass.NestedGenericClass.C
  (param $this (ref null $nestedgenericclass.NestedGenericClass.C))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.C))
@@ -412,7 +412,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.C $$outer_this__nestedgenericclass_NestedGenericClass_C(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:30:15
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -476,7 +476,7 @@
 ))
 
 ;;; D(C<T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass_C__void@nestedgenericclass.NestedGenericClass.C.D
+(func $m_<init>__nestedgenericclass_NestedGenericClass_C@nestedgenericclass.NestedGenericClass.C.D
  (param $this (ref null $nestedgenericclass.NestedGenericClass.C.D))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass.C))
  (result (ref null $nestedgenericclass.NestedGenericClass.C.D))
@@ -491,7 +491,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.C.D $$outer_this__nestedgenericclass_NestedGenericClass_C_D(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:33:17
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -554,7 +554,7 @@
 ))
 
 ;;; E(NestedGenericClass<T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E
+(func $m_<init>__nestedgenericclass_NestedGenericClass_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1E
  (param $this (ref null $nestedgenericclass.NestedGenericClass.1E))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.1E))
@@ -569,7 +569,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.1E $$outer_this__nestedgenericclass_NestedGenericClass_1E(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:40:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -633,7 +633,7 @@
 ))
 
 ;;; F(NestedGenericClass<T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F
+(func $m_<init>__nestedgenericclass_NestedGenericClass_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1F
  (param $this (ref null $nestedgenericclass.NestedGenericClass.1F))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.1F))
@@ -648,7 +648,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.1F $$outer_this__nestedgenericclass_NestedGenericClass_1F(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:41:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -712,7 +712,7 @@
 ))
 
 ;;; G(NestedGenericClass<T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G
+(func $m_<init>__nestedgenericclass_NestedGenericClass_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G
  (param $this (ref null $nestedgenericclass.NestedGenericClass.1G))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass))
  (result (ref null $nestedgenericclass.NestedGenericClass.1G))
@@ -727,7 +727,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.1G $$outer_this__nestedgenericclass_NestedGenericClass_1G(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:50:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -743,7 +743,7 @@
   (block
    ;; new $1H.<init>($1G.this);
    ;;@ nestedgenericclass/NestedGenericClass.java:53:8
-   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_1G__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.1H.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.1H.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.1G) (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt))(local.get $this)))
+   (drop (call $m_<init>__nestedgenericclass_NestedGenericClass_1G_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.1H.vtable)) (ref.as_non_null (global.get $nestedgenericclass.NestedGenericClass.1G.1H.itable)) (i32.const 0) (ref.null $nestedgenericclass.NestedGenericClass.1G) (global.get $nestedgenericclass.NestedGenericClass.1G.1H.rtt))(local.get $this)))
   )
  )
 )
@@ -806,7 +806,7 @@
 ))
 
 ;;; H(G<T, T, T> $outer_this)
-(func $m_<init>__nestedgenericclass_NestedGenericClass_1G__void_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H
+(func $m_<init>__nestedgenericclass_NestedGenericClass_1G_$pp_nestedgenericclass@nestedgenericclass.NestedGenericClass.1G.1H
  (param $this (ref null $nestedgenericclass.NestedGenericClass.1G.1H))
  (param $$outer_this (ref null $nestedgenericclass.NestedGenericClass.1G))
  (result (ref null $nestedgenericclass.NestedGenericClass.1G.1H))
@@ -821,7 +821,7 @@
    (struct.set $nestedgenericclass.NestedGenericClass.1G.1H $$outer_this__nestedgenericclass_NestedGenericClass_1G_1H(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ nestedgenericclass/NestedGenericClass.java:52:14
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

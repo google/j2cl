@@ -31,7 +31,7 @@
 ))
 
 ;;; Left()
-(func $m_<init>__void@circularimportuse.Left
+(func $m_<init>__@circularimportuse.Left
  (param $this (ref null $circularimportuse.Left))
  (result (ref null $circularimportuse.Left))
  (block $return.label
@@ -42,7 +42,7 @@
    (call $$clinit__void@circularimportuse.Left )
    ;; Object.this.Object.<init>();
    ;;@ circularimportuse/Left.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -60,7 +60,7 @@
   (block
    ;; return new Right.<init>();
    ;;@ circularimportuse/Left.java:20:4
-   (local.set $return.value (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
+   (local.set $return.value (call $m_<init>__@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
    (br $return.label)
   )
  )
@@ -124,7 +124,7 @@
 ))
 
 ;;; Main()
-(func $m_<init>__void@circularimportuse.Main
+(func $m_<init>__@circularimportuse.Main
  (param $this (ref null $circularimportuse.Main))
  (result (ref null $circularimportuse.Main))
  (block $return.label
@@ -135,7 +135,7 @@
    (call $$clinit__void@circularimportuse.Main )
    ;; Object.this.Object.<init>();
    ;;@ circularimportuse/Main.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -154,10 +154,10 @@
    (call $$clinit__void@circularimportuse.Main )
    ;; Left left = new Left.<init>();
    ;;@ circularimportuse/Main.java:21:4
-   (local.set $left (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
+   (local.set $left (call $m_<init>__@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
    ;; Right right = new Right.<init>();
    ;;@ circularimportuse/Main.java:22:4
-   (local.set $right (call $m_<init>__void@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
+   (local.set $right (call $m_<init>__@circularimportuse.Right (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt))))
   )
  )
 )
@@ -219,7 +219,7 @@
 ))
 
 ;;; Right()
-(func $m_<init>__void@circularimportuse.Right
+(func $m_<init>__@circularimportuse.Right
  (param $this (ref null $circularimportuse.Right))
  (result (ref null $circularimportuse.Right))
  (block $return.label
@@ -230,7 +230,7 @@
    (call $$clinit__void@circularimportuse.Right )
    ;; Object.this.Object.<init>();
    ;;@ circularimportuse/Right.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -248,7 +248,7 @@
   (block
    ;; return new Left.<init>();
    ;;@ circularimportuse/Right.java:20:4
-   (local.set $return.value (call $m_<init>__void@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
+   (local.set $return.value (call $m_<init>__@circularimportuse.Left (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt))))
    (br $return.label)
   )
  )

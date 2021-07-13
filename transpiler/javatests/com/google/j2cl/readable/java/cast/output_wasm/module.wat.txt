@@ -102,7 +102,7 @@
 ))
 
 ;;; CastGenerics()
-(func $m_<init>__void@cast.CastGenerics
+(func $m_<init>__@cast.CastGenerics
  (param $this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics))
  (block $return.label
@@ -113,7 +113,7 @@
    (call $$clinit__void@cast.CastGenerics )
    ;; Object.this.Object.<init>();
    ;;@ cast/CastGenerics.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -173,11 +173,11 @@
    (call $$clinit__void@cast.CastGenerics )
    ;; String str = ((String) new CastGenerics.<init>().field);
    ;;@ cast/CastGenerics.java:48:4
-   (local.set $str (ref.cast (struct.get $cast.CastGenerics $f_field__cast_CastGenerics(call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (ref.as_non_null (global.get $cast.CastGenerics.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
+   (local.set $str (ref.cast (struct.get $cast.CastGenerics $f_field__cast_CastGenerics(call $m_<init>__@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (ref.as_non_null (global.get $cast.CastGenerics.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt)))) (global.get $java.lang.String.rtt)))
    ;; (str = ((String) (CastGenerics<String, Number> $qualifier = new CastGenerics.<init>(),$qualifier.method())));
    ;;@ cast/CastGenerics.java:49:4
    (local.set $str (ref.cast (block (result (ref null $java.lang.Object))
-    (local.set $$qualifier (call $m_<init>__void@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (ref.as_non_null (global.get $cast.CastGenerics.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt))))
+    (local.set $$qualifier (call $m_<init>__@cast.CastGenerics (struct.new_with_rtt $cast.CastGenerics (ref.as_non_null (global.get $cast.CastGenerics.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $cast.CastGenerics.rtt))))
     (call_ref (local.get $$qualifier)(struct.get $cast.CastGenerics.vtable $m_method__java_lang_Object_$pp_cast (struct.get $cast.CastGenerics $vtable(local.get $$qualifier))))
    ) (global.get $java.lang.String.rtt)))
    ;; Container<T> containerT = null;
@@ -340,7 +340,7 @@
    (call $$clinit__void@cast.CastGenerics )
    ;; Object o = new Integer.<init>(1);
    ;;@ cast/CastGenerics.java:85:4
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; CastGenerics<Error, Number> cc = ((CastGenerics<Error, Number>) o);
    ;;@ cast/CastGenerics.java:86:4
    (local.set $cc (ref.cast (local.get $o) (global.get $cast.CastGenerics.rtt)))
@@ -366,7 +366,7 @@
   (block
    ;; Object o = new Integer.<init>(1);
    ;;@ cast/CastGenerics.java:91:4
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; E e = ((E) o);
    ;;@ cast/CastGenerics.java:92:4
    (local.set $e (ref.cast (local.get $o) (global.get $java.lang.Number.rtt)))
@@ -397,7 +397,7 @@
   (block
    ;; Object o = new Integer.<init>(1);
    ;;@ cast/CastGenerics.java:99:4
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; S s = ((S) o);
    ;;@ cast/CastGenerics.java:100:4
    (local.set $s (ref.cast (local.get $o) (global.get $java.lang.Object.rtt)))
@@ -474,7 +474,7 @@
    (call $$clinit__void@cast.CastGenerics )
    ;; return new $1.<init>();
    ;;@ cast/CastGenerics.java:131:4
-   (local.set $return.value (call $m_<init>__void_$pp_cast@cast.CastGenerics.1 (struct.new_with_rtt $cast.CastGenerics.1 (ref.as_non_null (global.get $cast.CastGenerics.1.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.1.itable)) (i32.const 0) (global.get $cast.CastGenerics.1.rtt))))
+   (local.set $return.value (call $m_<init>___$pp_cast@cast.CastGenerics.1 (struct.new_with_rtt $cast.CastGenerics.1 (ref.as_non_null (global.get $cast.CastGenerics.1.vtable)) (ref.as_non_null (global.get $cast.CastGenerics.1.itable)) (i32.const 0) (global.get $cast.CastGenerics.1.rtt))))
    (br $return.label)
   )
  )
@@ -621,7 +621,7 @@
 ))
 
 ;;; BaseImplementor()
-(func $m_<init>__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor
+(func $m_<init>___$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor
  (param $this (ref null $cast.CastGenerics.BaseImplementor))
  (result (ref null $cast.CastGenerics.BaseImplementor))
  (block $return.label
@@ -632,7 +632,7 @@
    (call $$clinit__void@cast.CastGenerics.BaseImplementor )
    ;; Object.this.Object.<init>();
    ;;@ cast/CastGenerics.java:33:32
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -678,7 +678,7 @@
 ))
 
 ;;; Implementor()
-(func $m_<init>__void_$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor
+(func $m_<init>___$p_cast_CastGenerics_Implementor@cast.CastGenerics.Implementor
  (param $this (ref null $cast.CastGenerics.Implementor))
  (result (ref null $cast.CastGenerics.Implementor))
  (block $return.label
@@ -686,7 +686,7 @@
   (block
    ;; BaseImplementor.this.BaseImplementor.<init>();
    ;;@ cast/CastGenerics.java:35:23
-   (drop (call $m_<init>__void_$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor (local.get $this)))
+   (drop (call $m_<init>___$p_cast_CastGenerics_BaseImplementor@cast.CastGenerics.BaseImplementor (local.get $this)))
   )
  )
  (local.get $this)
@@ -775,7 +775,7 @@
 ))
 
 ;;; Container()
-(func $m_<init>__void_$p_cast_CastGenerics_Container@cast.CastGenerics.Container
+(func $m_<init>___$p_cast_CastGenerics_Container@cast.CastGenerics.Container
  (param $this (ref null $cast.CastGenerics.Container))
  (result (ref null $cast.CastGenerics.Container))
  (block $return.label
@@ -783,7 +783,7 @@
   (block
    ;; Object.this.Object.<init>();
    ;;@ cast/CastGenerics.java:41:23
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -866,7 +866,7 @@
 ))
 
 ;;; Nested(CastGenerics<T, E> $outer_this)
-(func $m_<init>__cast_CastGenerics__void_$pp_cast@cast.CastGenerics.1Nested
+(func $m_<init>__cast_CastGenerics_$pp_cast@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $$outer_this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics.1Nested))
@@ -881,7 +881,7 @@
    (struct.set $cast.CastGenerics.1Nested $$outer_this__cast_CastGenerics_1Nested(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ cast/CastGenerics.java:111:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1040,7 +1040,7 @@
 ))
 
 ;;; <anonymous> extends Foo<T>()
-(func $m_<init>__void_$pp_cast@cast.CastGenerics.1
+(func $m_<init>___$pp_cast@cast.CastGenerics.1
  (param $this (ref null $cast.CastGenerics.1))
  (result (ref null $cast.CastGenerics.1))
  (block $return.label
@@ -1051,7 +1051,7 @@
    (call $$clinit__void@cast.CastGenerics.1 )
    ;; Foo.this.Foo.<init>();
    ;;@ cast/CastGenerics.java:131:24
-   (drop (call $m_<init>__void@cast.CastGenerics.Foo (local.get $this)))
+   (drop (call $m_<init>__@cast.CastGenerics.Foo (local.get $this)))
   )
  )
  (local.get $this)
@@ -1113,7 +1113,7 @@
 ))
 
 ;;; Foo()
-(func $m_<init>__void@cast.CastGenerics.Foo
+(func $m_<init>__@cast.CastGenerics.Foo
  (param $this (ref null $cast.CastGenerics.Foo))
  (result (ref null $cast.CastGenerics.Foo))
  (block $return.label
@@ -1124,7 +1124,7 @@
    (call $$clinit__void@cast.CastGenerics.Foo )
    ;; Object.this.Object.<init>();
    ;;@ cast/CastGenerics.java:134:22
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1191,7 +1191,7 @@
 ))
 
 ;;; CastPrimitives()
-(func $m_<init>__void@cast.CastPrimitives
+(func $m_<init>__@cast.CastPrimitives
  (param $this (ref null $cast.CastPrimitives))
  (result (ref null $cast.CastPrimitives))
  (block $return.label
@@ -1202,7 +1202,7 @@
    (call $$clinit__void@cast.CastPrimitives )
    ;; Object.this.Object.<init>();
    ;;@ cast/CastPrimitives.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1423,7 +1423,7 @@
   (block
    ;; Object o = new Object.<init>();
    ;;@ cast/CastPrimitives.java:86:4
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; boolean bool = (Boolean $qualifier = ((Boolean) o),$qualifier.booleanValue());
    ;;@ cast/CastPrimitives.java:87:4
    (local.set $bool (block (result i32)
@@ -1576,22 +1576,22 @@
    (drop (call $m_getDouble__double__double@cast.CastPrimitives (f64.promote_f32 (local.get $f))))
    ;; new IntValueHolder.<init>(b);
    ;;@ cast/CastPrimitives.java:128:4
-   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(local.get $b)))
+   (drop (call $m_<init>__int_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(local.get $b)))
    ;; new IntValueHolder.<init>(c);
    ;;@ cast/CastPrimitives.java:129:4
-   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(local.get $c)))
+   (drop (call $m_<init>__int_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(local.get $c)))
    ;; new IntValueHolder.<init>(s);
    ;;@ cast/CastPrimitives.java:130:4
-   (drop (call $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(local.get $s)))
+   (drop (call $m_<init>__int_$pp_cast@cast.CastPrimitives.IntValueHolder (struct.new_with_rtt $cast.CastPrimitives.IntValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.IntValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.IntValueHolder.rtt))(local.get $s)))
    ;; new LongValueHolder.<init>(javaemul.internal.Primitives.widenByteToLong(b));
    ;;@ cast/CastPrimitives.java:132:4
-   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.extend_i32_s (local.get $b))))
+   (drop (call $m_<init>__long_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.extend_i32_s (local.get $b))))
    ;; new LongValueHolder.<init>(javaemul.internal.Primitives.widenCharToLong(c));
    ;;@ cast/CastPrimitives.java:133:4
-   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.extend_i32_u (local.get $c))))
+   (drop (call $m_<init>__long_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.extend_i32_u (local.get $c))))
    ;; new LongValueHolder.<init>(javaemul.internal.Primitives.widenIntToLong(i));
    ;;@ cast/CastPrimitives.java:134:4
-   (drop (call $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.extend_i32_s (local.get $i))))
+   (drop (call $m_<init>__long_$pp_cast@cast.CastPrimitives.LongValueHolder (struct.new_with_rtt $cast.CastPrimitives.LongValueHolder (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.vtable)) (ref.as_non_null (global.get $cast.CastPrimitives.LongValueHolder.itable)) (i32.const 0) (global.get $cast.CastPrimitives.LongValueHolder.rtt))(i64.extend_i32_s (local.get $i))))
   )
  )
 )
@@ -1849,7 +1849,7 @@
 ))
 
 ;;; IntValueHolder(int value)
-(func $m_<init>__int__void_$pp_cast@cast.CastPrimitives.IntValueHolder
+(func $m_<init>__int_$pp_cast@cast.CastPrimitives.IntValueHolder
  (param $this (ref null $cast.CastPrimitives.IntValueHolder))
  (param $value i32)
  (result (ref null $cast.CastPrimitives.IntValueHolder))
@@ -1861,7 +1861,7 @@
    (call $$clinit__void@cast.CastPrimitives.IntValueHolder )
    ;; Object.this.Object.<init>();
    ;;@ cast/CastPrimitives.java:158:4
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -1923,7 +1923,7 @@
 ))
 
 ;;; LongValueHolder(long value)
-(func $m_<init>__long__void_$pp_cast@cast.CastPrimitives.LongValueHolder
+(func $m_<init>__long_$pp_cast@cast.CastPrimitives.LongValueHolder
  (param $this (ref null $cast.CastPrimitives.LongValueHolder))
  (param $value i64)
  (result (ref null $cast.CastPrimitives.LongValueHolder))
@@ -1935,7 +1935,7 @@
    (call $$clinit__void@cast.CastPrimitives.LongValueHolder )
    ;; Object.this.Object.<init>();
    ;;@ cast/CastPrimitives.java:162:4
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2004,7 +2004,7 @@
 ))
 
 ;;; Casts()
-(func $m_<init>__void@cast.Casts
+(func $m_<init>__@cast.Casts
  (param $this (ref null $cast.Casts))
  (result (ref null $cast.Casts))
  (block $return.label
@@ -2015,7 +2015,7 @@
    (call $$clinit__void@cast.Casts )
    ;; Object.this.Object.<init>();
    ;;@ cast/Casts.java:20:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -2033,7 +2033,7 @@
   (block
    ;; Object o = new Object.<init>();
    ;;@ cast/Casts.java:23:4
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Casts c = ((Casts) o);
    ;;@ cast/Casts.java:24:4
    (local.set $c (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
@@ -2054,7 +2054,7 @@
   (block
    ;; Object o = new Object.<init>();
    ;;@ cast/Casts.java:28:4
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; Serializable s = ((Serializable) o);
    ;;@ cast/Casts.java:29:4
    (local.set $s (local.get $o))
@@ -2083,7 +2083,7 @@
   (block
    ;; Object o = new Integer.<init>(1);
    ;;@ cast/Casts.java:33:4
-   (local.set $o (call $m_<init>__int__void@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+   (local.set $o (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
    ;; Byte b = ((Byte) o);
    ;;@ cast/Casts.java:34:4
    (local.set $b (ref.cast (local.get $o) (global.get $java.lang.Byte.rtt)))
@@ -2167,7 +2167,7 @@
   (block
    ;; Object o = new Object.<init>();
    ;;@ cast/Casts.java:53:4
-   (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $o (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    ;; if (o instanceof Casts) {
    ;;@ cast/Casts.java:54:4
    (if (ref.test (local.get $o) (global.get $cast.Casts.rtt))
@@ -2191,7 +2191,7 @@
       (local.set $cAvoidsCastsTo (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
       ;; (o = new Object.<init>());
       ;;@ cast/Casts.java:59:6
-      (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+      (local.set $o (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
       ;; Casts cNotAvoidCastsTo = ((Casts) o);
       ;;@ cast/Casts.java:60:6
       (local.set $cNotAvoidCastsTo (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
@@ -2209,7 +2209,7 @@
       (local.set $cAvoidsCastsTo_1 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
       ;; (o = new Foo.<init>(Casts.this));
       ;;@ cast/Casts.java:64:6
-      (local.set $o (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+      (local.set $o (call $m_<init>__cast_Casts_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
       ;; Casts cNotAvoidCastsTo = ((Casts) o);
       ;;@ cast/Casts.java:65:6
       (local.set $cNotAvoidCastsTo_1 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
@@ -2227,7 +2227,7 @@
       (local.set $cAvoidsCastsTo_2 (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
       ;; (o = new Object.<init>());
       ;;@ cast/Casts.java:69:6
-      (local.set $o (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+      (local.set $o (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
       ;; Casts cAvoidCastsTo = ((Casts) o);
       ;;@ cast/Casts.java:70:6
       (local.set $cAvoidCastsTo (ref.cast (local.get $o) (global.get $cast.Casts.rtt)))
@@ -2275,7 +2275,7 @@
   (block
    ;; Foo foo = new Foo.<init>(Casts.this);
    ;;@ cast/Casts.java:89:4
-   (local.set $foo (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+   (local.set $foo (call $m_<init>__cast_Casts_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
    ;; if (foo.field instanceof Casts) {
    ;;@ cast/Casts.java:90:4
    (if (ref.test (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt))
@@ -2299,7 +2299,7 @@
       (local.set $cAvoidsCastsTo (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
       ;; (foo.field = new Object.<init>());
       ;;@ cast/Casts.java:95:6
-      (struct.set $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+      (struct.set $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo) (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
       ;; Casts cNotAvoidCastsTo = ((Casts) foo.field);
       ;;@ cast/Casts.java:96:6
       (local.set $cNotAvoidCastsTo (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
@@ -2317,7 +2317,7 @@
       (local.set $cAvoidsCastsTo_1 (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
       ;; (foo = new Foo.<init>(Casts.this));
       ;;@ cast/Casts.java:100:6
-      (local.set $foo (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+      (local.set $foo (call $m_<init>__cast_Casts_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
       ;; Casts cNotAvoidCastsTo = ((Casts) foo.field);
       ;;@ cast/Casts.java:101:6
       (local.set $cNotAvoidCastsTo_1 (ref.cast (struct.get $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $foo)) (global.get $cast.Casts.rtt)))
@@ -2359,7 +2359,7 @@
   (block
    ;; Foo foo = new Foo.<init>(Casts.this);
    ;;@ cast/Casts.java:111:4
-   (local.set $foo (call $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
+   (local.set $foo (call $m_<init>__cast_Casts_$p_cast_Casts_Foo@cast.Casts.Foo (struct.new_with_rtt $cast.Casts.Foo (ref.as_non_null (global.get $cast.Casts.Foo.vtable)) (ref.as_non_null (global.get $cast.Casts.Foo.itable)) (i32.const 0) (ref.null $cast.Casts) (ref.null $java.lang.Object) (global.get $cast.Casts.Foo.rtt))(local.get $this)))
    ;; if (foo.method() instanceof Casts) {
    ;;@ cast/Casts.java:112:4
    (if (ref.test (call_ref (local.get $foo)(struct.get $cast.Casts.Foo.vtable $m_method__java_lang_Object (struct.get $cast.Casts.Foo $vtable(local.get $foo)))) (global.get $cast.Casts.rtt))
@@ -2436,7 +2436,7 @@
 ))
 
 ;;; Foo(Casts $outer_this)
-(func $m_<init>__cast_Casts__void_$p_cast_Casts_Foo@cast.Casts.Foo
+(func $m_<init>__cast_Casts_$p_cast_Casts_Foo@cast.Casts.Foo
  (param $this (ref null $cast.Casts.Foo))
  (param $$outer_this (ref null $cast.Casts))
  (result (ref null $cast.Casts.Foo))
@@ -2451,7 +2451,7 @@
    (struct.set $cast.Casts.Foo $$outer_this__cast_Casts_Foo(local.get $this) (local.get $$outer_this))
    ;; Object.this.Object.<init>();
    ;;@ cast/Casts.java:80:16
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; Foo.this.$init();
    ;;@ cast/Casts.java:80:16
    (call $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo (local.get $this))
@@ -2472,7 +2472,7 @@
   (block
    ;; return new Object.<init>();
    ;;@ cast/Casts.java:84:6
-   (local.set $return.value (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (local.set $return.value (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
    (br $return.label)
   )
  )
@@ -2488,7 +2488,7 @@
   (block
    ;; (Foo.this.field = new Object.<init>());
    ;;@ cast/Casts.java:81:4
-   (struct.set $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $this) (call $m_<init>__void@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+   (struct.set $cast.Casts.Foo $f_field__cast_Casts_Foo(local.get $this) (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
   )
  )
 )

@@ -24,7 +24,7 @@
 ))
 
 ;;; Foo()
-(func $m_<init>__void@srcjar.Foo
+(func $m_<init>__@srcjar.Foo
  (param $this (ref null $srcjar.Foo))
  (result (ref null $srcjar.Foo))
  (block $return.label
@@ -35,7 +35,7 @@
    (call $$clinit__void@srcjar.Foo )
    ;; Object.this.Object.<init>();
    ;;@ srcjar/Foo.java:21:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -97,7 +97,7 @@
 ))
 
 ;;; Srcjar()
-(func $m_<init>__void@srcjar.Srcjar
+(func $m_<init>__@srcjar.Srcjar
  (param $this (ref null $srcjar.Srcjar))
  (result (ref null $srcjar.Srcjar))
  (block $return.label
@@ -108,7 +108,7 @@
    (call $$clinit__void@srcjar.Srcjar )
    ;; Object.this.Object.<init>();
    ;;@ srcjar/Srcjar.java:18:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -125,7 +125,7 @@
    (call $$clinit__void@srcjar.Srcjar )
    ;; Foo foo = new Foo.<init>();
    ;;@ srcjar/Srcjar.java:21:4
-   (local.set $foo (call $m_<init>__void@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (global.get $srcjar.Foo.rtt))))
+   (local.set $foo (call $m_<init>__@srcjar.Foo (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (global.get $srcjar.Foo.rtt))))
   )
  )
 )

@@ -32,7 +32,7 @@
 ))
 
 ;;; Foo()
-(func $m_<init>__void@packageinfosubpackage.Foo
+(func $m_<init>__@packageinfosubpackage.Foo
  (param $this (ref null $packageinfosubpackage.Foo))
  (result (ref null $packageinfosubpackage.Foo))
  (block $return.label
@@ -43,7 +43,7 @@
    (call $$clinit__void@packageinfosubpackage.Foo )
    ;; Object.this.Object.<init>();
    ;;@ packageinfosubpackage/Foo.java:20:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; Foo.this.$init();
    ;;@ packageinfosubpackage/Foo.java:20:13
    (call $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $this))
@@ -60,7 +60,7 @@
   (block
    ;; (Foo.this.nativeBar = new NativeBar.<init>());
    ;;@ packageinfosubpackage/Foo.java:25:2
-   (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
+   (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $m_<init>___$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
   )
  )
 )
@@ -121,7 +121,7 @@
 ))
 
 ;;; NativeBar()
-(func $m_<init>__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar
+(func $m_<init>___$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar
  (param $this (ref null $packageinfosubpackage.Foo.NativeBar))
  (result (ref null $packageinfosubpackage.Foo.NativeBar))
  (block $return.label
@@ -132,7 +132,7 @@
    (call $$clinit__void@packageinfosubpackage.Foo.NativeBar )
    ;; Object.this.Object.<init>();
    ;;@ packageinfosubpackage/Foo.java:23:23
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)
@@ -194,7 +194,7 @@
 ))
 
 ;;; Bar()
-(func $m_<init>__void@packageinfosubpackage.subpackage.Bar
+(func $m_<init>__@packageinfosubpackage.subpackage.Bar
  (param $this (ref null $packageinfosubpackage.subpackage.Bar))
  (result (ref null $packageinfosubpackage.subpackage.Bar))
  (block $return.label
@@ -205,7 +205,7 @@
    (call $$clinit__void@packageinfosubpackage.subpackage.Bar )
    ;; Object.this.Object.<init>();
    ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   )
  )
  (local.get $this)

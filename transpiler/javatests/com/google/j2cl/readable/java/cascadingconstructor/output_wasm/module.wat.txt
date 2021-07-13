@@ -20,7 +20,7 @@
 ))
 
 ;;; CascadingConstructor(int a, int b)
-(func $m_<init>__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor
+(func $m_<init>__int__int_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor
  (param $this (ref null $cascadingconstructor.CascadingConstructor))
  (param $a i32)
  (param $b i32)
@@ -30,7 +30,7 @@
   (block
    ;; Object.this.Object.<init>();
    ;;@ cascadingconstructor/CascadingConstructor.java:22:10
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; (CascadingConstructor.this.a = a);
    ;;@ cascadingconstructor/CascadingConstructor.java:23:4
    (struct.set $cascadingconstructor.CascadingConstructor $f_a__cascadingconstructor_CascadingConstructor_(local.get $this) (local.get $a))
@@ -43,7 +43,7 @@
 )
 
 ;;; CascadingConstructor(int a)
-(func $m_<init>__int__void@cascadingconstructor.CascadingConstructor
+(func $m_<init>__int@cascadingconstructor.CascadingConstructor
  (param $this (ref null $cascadingconstructor.CascadingConstructor))
  (param $a i32)
  (result (ref null $cascadingconstructor.CascadingConstructor))
@@ -55,7 +55,7 @@
    (call $$clinit__void@cascadingconstructor.CascadingConstructor )
    ;; CascadingConstructor.this.CascadingConstructor.<init>(a,(a * 2));
    ;;@ cascadingconstructor/CascadingConstructor.java:28:4
-   (drop (call $m_<init>__int__int__void_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (local.get $this)(local.get $a)(i32.mul (local.get $a) (i32.const 2))))
+   (drop (call $m_<init>__int__int_$p_cascadingconstructor_CascadingConstructor@cascadingconstructor.CascadingConstructor (local.get $this)(local.get $a)(i32.mul (local.get $a) (i32.const 2))))
   )
  )
  (local.get $this)

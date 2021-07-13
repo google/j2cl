@@ -25,7 +25,7 @@
 ))
 
 ;;; Parent(int f)
-(func $m_<init>__int__void@supercallnondefault.Parent
+(func $m_<init>__int@supercallnondefault.Parent
  (param $this (ref null $supercallnondefault.Parent))
  (param $f i32)
  (result (ref null $supercallnondefault.Parent))
@@ -37,7 +37,7 @@
    (call $$clinit__void@supercallnondefault.Parent )
    ;; Object.this.Object.<init>();
    ;;@ supercallnondefault/Child.java:21:9
-   (drop (call $m_<init>__void@java.lang.Object (local.get $this)))
+   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
    ;; (Parent.this.field = f);
    ;;@ supercallnondefault/Child.java:22:4
    (struct.set $supercallnondefault.Parent $f_field__supercallnondefault_Parent(local.get $this) (local.get $f))
@@ -103,7 +103,7 @@
 ))
 
 ;;; Child(int a)
-(func $m_<init>__int__void@supercallnondefault.Child
+(func $m_<init>__int@supercallnondefault.Child
  (param $this (ref null $supercallnondefault.Child))
  (param $a i32)
  (result (ref null $supercallnondefault.Child))
@@ -115,7 +115,7 @@
    (call $$clinit__void@supercallnondefault.Child )
    ;; Parent.this.Parent.<init>(a);
    ;;@ supercallnondefault/Child.java:28:4
-   (drop (call $m_<init>__int__void@supercallnondefault.Parent (local.get $this)(local.get $a)))
+   (drop (call $m_<init>__int@supercallnondefault.Parent (local.get $this)(local.get $a)))
   )
  )
  (local.get $this)
