@@ -28,6 +28,7 @@ public class Main {
     testUnreadValue();
     testExtending();
     testMemoized();
+    testAbstractEquals();
   }
 
   private static void testComposite() {
@@ -117,5 +118,20 @@ public class Main {
     // assertEquals(22, o2.memoized());
     // assertEquals(o1, o2);
     // assertEquals(o1.hashCode(), o2.hashCode());
+  }
+
+  @AutoValue
+  abstract static class AbstractEquals {
+    abstract String string();
+
+    // TODO(b/188737593): Fix overriden abstract method handling.
+    // @Override
+    // public abstract boolean equals(Object o);
+  }
+
+  private static void testAbstractEquals() {
+    AbstractEquals o1 = new AutoValue_Main_AbstractEquals("a");
+    AbstractEquals o2 = new AutoValue_Main_AbstractEquals("a");
+    assertEquals(o1, o2);
   }
 }
