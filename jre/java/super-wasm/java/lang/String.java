@@ -863,7 +863,7 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   // Helper methods to pass and receive strings to and from JavaScript.
-  // These will be removed after Array interop support in WASM is implemented.
+  // TODO(b/193532287): These will be removed after Array interop support in WASM is implemented.
 
   /** Returns a JavaScript array containing the char values in the string. */
   public WasmExtern toJsArray() {

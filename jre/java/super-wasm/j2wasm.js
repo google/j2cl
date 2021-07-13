@@ -71,6 +71,8 @@ function createImportObject(userImports) {
     'performance.now': () => performance.now(),
 
     // Utilites to interop strings and arrays. From String.java.
+    // TODO(b/193532287): These will be removed after Array interop support in
+    // WASM is implemented.
     'createBuffer': size => new Array(size),
     'setBufferAt': (buffer, index, value) => buffer[index] = value,
     'getBufferAt': (buffer, index) => buffer[index],
