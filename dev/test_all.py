@@ -20,7 +20,7 @@ import repo_util
 
 def main(argv):
   root = "//third_party/java_src/j2cl/"
-  cmd = ["blaze", "test", "--keep_going"]
+  cmd = ["blaze", "test", "--test_tag_filters=-chamber", "--keep_going"]
   cmd += [root + t + "/..." for t in argv.test_pattern] or [root + "..."]
   cmd += repo_util.create_test_filter(argv.platforms)
   subprocess.call(cmd)
