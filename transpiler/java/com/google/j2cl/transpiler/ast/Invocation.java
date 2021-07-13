@@ -128,14 +128,6 @@ public abstract class Invocation extends Expression implements MemberReference {
       return getThis();
     }
 
-    public final T setEnclosingTypeDescriptor(DeclaredTypeDescriptor enclosingTypeDescriptor) {
-      this.methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
-              .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-              .build();
-      return getThis();
-    }
-
     @SuppressWarnings("unchecked")
     private T getThis() {
       return (T) this;
