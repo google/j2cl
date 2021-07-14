@@ -469,9 +469,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return getManglingDescriptor().getMangledName();
     }
 
+    // Do not use JsInfo when producing mangled names for wasm.
     if (!useWasmManglingPatterns()) {
-      // Do not use JsInfo when producing mangled names for wasm.
-      if (isConstructor()) {
+      if (isJsConstructor() || getOrigin() == MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR) {
         return "constructor";
       }
 

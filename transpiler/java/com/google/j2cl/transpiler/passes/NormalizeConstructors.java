@@ -281,12 +281,7 @@ public class NormalizeConstructors extends NormalizationPass {
     }
 
     MethodDescriptor constructorDescriptor =
-        MethodDescriptor.newBuilder()
-            .setConstructor(true)
-            .setEnclosingTypeDescriptor(type.getTypeDescriptor())
-            .setVisibility(Visibility.PUBLIC)
-            .setOrigin(MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR)
-            .build();
+        getImplicitJavascriptConstructorDescriptor(type.getTypeDescriptor());
 
     return Method.newBuilder()
         .setMethodDescriptor(constructorDescriptor)
@@ -297,12 +292,7 @@ public class NormalizeConstructors extends NormalizationPass {
 
   /** Synthesizes a "super" call to the constructor. */
   private static MethodCall synthesizeEmptySuperCall(DeclaredTypeDescriptor superType) {
-    MethodDescriptor superDescriptor =
-        MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(superType)
-            .setConstructor(true)
-            .build();
-    return MethodCall.Builder.from(superDescriptor).build();
+    return MethodCall.Builder.from(getImplicitJavascriptConstructorDescriptor(superType)).build();
   }
 
   private static MethodCall synthesizeAssertClinit(Type type) {
@@ -602,6 +592,8 @@ public class NormalizeConstructors extends NormalizationPass {
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingType)
         .setConstructor(true)
+        .setVisibility(Visibility.PUBLIC)
+        .setOrigin(MethodOrigin.SYNTHETIC_NOOP_JAVASCRIPT_CONSTRUCTOR)
         .build();
   }
 
