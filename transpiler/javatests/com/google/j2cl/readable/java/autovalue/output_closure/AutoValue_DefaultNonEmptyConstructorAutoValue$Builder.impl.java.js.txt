@@ -1,0 +1,69 @@
+goog.module('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder$impl');
+
+const DefaultNonEmptyConstructorAutoValue_Builder = goog.require('autovalue.DefaultNonEmptyConstructorAutoValue.Builder$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoValue__DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$impl');
+let DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+
+class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {?boolean}*/
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_;
+ }
+ /** @return {!Builder} */
+ static $create__() {
+  Builder.$clinit();
+  let $instance = new Builder();
+  $instance.$ctor__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder__();
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder__() {
+  this.$ctor__autovalue_DefaultNonEmptyConstructorAutoValue_Builder__();
+ }
+ /** @override @return {DefaultNonEmptyConstructorAutoValue_Builder} */
+ m_setBooleanField__boolean(/** boolean */ booleanField) {
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = booleanField;
+  return this;
+ }
+ /** @override @return {DefaultNonEmptyConstructorAutoValue} */
+ m_build__() {
+  if ($Equality.$same(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_, null)) {
+   let missing = " booleanField";
+   throw $Exceptions.toJs(IllegalStateException.$create__java_lang_String("Missing required properties:" + j_l_String.m_valueOf__java_lang_Object(missing)));
+  }
+  return AutoValue__DefaultNonEmptyConstructorAutoValue.$create__boolean(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_));
+ }
+ 
+ static $clinit() {
+  Builder.$clinit = () =>{};
+  Builder.$loadModules();
+  DefaultNonEmptyConstructorAutoValue_Builder.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Builder;
+ }
+ 
+ static $loadModules() {
+  AutoValue__DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$impl');
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
+}
+$Util.$setClassMetadata(Builder, "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder");
+
+exports = Builder;
+
+//# sourceMappingURL=AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.js.map

@@ -1,0 +1,46 @@
+goog.module('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$impl');
+
+const DefaultNonEmptyConstructorAutoValue = goog.require('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class AutoValue__DefaultNonEmptyConstructorAutoValue extends DefaultNonEmptyConstructorAutoValue {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ = false;
+ }
+ /** @return {!AutoValue__DefaultNonEmptyConstructorAutoValue} */
+ static $create__boolean(/** boolean */ booleanField) {
+  AutoValue__DefaultNonEmptyConstructorAutoValue.$clinit();
+  let $instance = new AutoValue__DefaultNonEmptyConstructorAutoValue();
+  $instance.$ctor__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue__boolean(booleanField);
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue__boolean(/** boolean */ booleanField) {
+  this.$ctor__autovalue_DefaultNonEmptyConstructorAutoValue__();
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ = booleanField;
+ }
+ /** @override @return {boolean} */
+ m_getBooleanField__() {
+  return this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_;
+ }
+ 
+ static $clinit() {
+  AutoValue__DefaultNonEmptyConstructorAutoValue.$clinit = () =>{};
+  AutoValue__DefaultNonEmptyConstructorAutoValue.$loadModules();
+  DefaultNonEmptyConstructorAutoValue.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__DefaultNonEmptyConstructorAutoValue;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValue__DefaultNonEmptyConstructorAutoValue, "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue");
+
+exports = AutoValue__DefaultNonEmptyConstructorAutoValue;
+
+//# sourceMappingURL=AutoValue_DefaultNonEmptyConstructorAutoValue.js.map
