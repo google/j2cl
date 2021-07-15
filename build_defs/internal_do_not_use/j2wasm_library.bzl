@@ -19,6 +19,13 @@ J2WASM_LIB_ATTRS = {
 
 J2WASM_LIB_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
 
+# Override the java toolchain to use the j2wasm one.
+J2WASM_LIB_ATTRS.update({
+    "_java_toolchain": attr.label(
+        default = Label("//build_defs/internal_do_not_use:j2wasm_java_toolchain"),
+    ),
+})
+
 def _impl_j2wasm_library_rule(ctx):
     plugin_provider = getattr(native, "JavaPluginInfo") if hasattr(native, "JavaPluginInfo") else JavaInfo
     default_j2cl_javac_opts = [

@@ -137,11 +137,22 @@ j2cl_library(
     ],
 )
 
-# Note that this target is separately compiled as a java_library to avoid circular
-# dependency.
+# Note that these two targets below are separately compiled as a java_library
+# to avoid circular dependency.
 java_library(
     name = "jre_bootclasspath",
     srcs = [":jre_java_files"],
+    javacopts = JRE_JAVAC_OPTS,
+    visibility = ["//transpiler/javatests:__subpackages__"],
+    deps = [
+        "//third_party:gwt-javaemul-internal-annotations",
+        "//third_party:gwt-jsinterop-annotations",
+    ],
+)
+
+java_library(
+    name = "jre_bootclasspath-j2wasm",
+    srcs = [":jre_java_files-j2wasm"],
     javacopts = JRE_JAVAC_OPTS,
     visibility = ["//transpiler/javatests:__subpackages__"],
     deps = [
@@ -155,6 +166,11 @@ jdk_system(
     bootclasspath = ":jre_bootclasspath",
 )
 
+jdk_system(
+    name = "jdk_system-j2wasm",
+    bootclasspath = ":jre_bootclasspath-j2wasm",
+)
+
 JAVA_VERSION = select({
     ":experimental_java11_support": "11",
     "//conditions:default": "8",
@@ -163,6 +179,14 @@ JAVA_VERSION = select({
 default_java_toolchain(
     name = "j2cl_java_toolchain",
     bootclasspath = [":jdk_system"],
+    source_version = JAVA_VERSION,
+    target_version = JAVA_VERSION,
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+)
+
+default_java_toolchain(
+    name = "j2wasm_java_toolchain",
+    bootclasspath = [":jdk_system-j2wasm"],
     source_version = JAVA_VERSION,
     target_version = JAVA_VERSION,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
