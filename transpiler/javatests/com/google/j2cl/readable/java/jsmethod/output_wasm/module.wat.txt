@@ -133,7 +133,7 @@
 ))
 
 ;;; Base()
-(func $m_<init>___$pp_jsmethod@jsmethod.JsMethodExample.Base
+(func $m_<init>__@jsmethod.JsMethodExample.Base
  (param $this (ref null $jsmethod.JsMethodExample.Base))
  (result (ref null $jsmethod.JsMethodExample.Base))
  ;;@ jsmethod/JsMethodExample.java:43:24
@@ -235,7 +235,7 @@
 ))
 
 ;;; Sub()
-(func $m_<init>___$pp_jsmethod@jsmethod.JsMethodExample.Sub
+(func $m_<init>__@jsmethod.JsMethodExample.Sub
  (param $this (ref null $jsmethod.JsMethodExample.Sub))
  (result (ref null $jsmethod.JsMethodExample.Sub))
  ;;@ jsmethod/JsMethodExample.java:54:15
@@ -245,7 +245,7 @@
   (call $$clinit__void@jsmethod.JsMethodExample.Sub )
   ;; Base.this.Base.<init>();
   ;;@ jsmethod/JsMethodExample.java:54:15
-  (drop (call $m_<init>___$pp_jsmethod@jsmethod.JsMethodExample.Base (local.get $this)))
+  (drop (call $m_<init>__@jsmethod.JsMethodExample.Base (local.get $this)))
   ;; return Sub.this;
   ;;@ jsmethod/JsMethodExample.java:54:15
   (return (local.get $this))

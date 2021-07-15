@@ -103,7 +103,7 @@
 ))
 
 ;;; AbstractType()
-(func $m_<init>___$pp_typeannotations@typeannotations.AbstractType
+(func $m_<init>__@typeannotations.AbstractType
  (param $this (ref null $typeannotations.AbstractType))
  (result (ref null $typeannotations.AbstractType))
  ;;@ typeannotations/TypeAnnotations.java:22:15
@@ -176,7 +176,7 @@
 ))
 
 ;;; AbstractTypeNonNull()
-(func $m_<init>___$pp_typeannotations@typeannotations.AbstractTypeNonNull
+(func $m_<init>__@typeannotations.AbstractTypeNonNull
  (param $this (ref null $typeannotations.AbstractTypeNonNull))
  (result (ref null $typeannotations.AbstractTypeNonNull))
  ;;@ typeannotations/TypeAnnotations.java:26:15
@@ -250,7 +250,7 @@
 ))
 
 ;;; Parent()
-(func $m_<init>___$pp_typeannotations@typeannotations.Parent
+(func $m_<init>__@typeannotations.Parent
  (param $this (ref null $typeannotations.Parent))
  (result (ref null $typeannotations.Parent))
  ;;@ typeannotations/TypeAnnotations.java:30:6
@@ -355,7 +355,7 @@
 ))
 
 ;;; ChildWithNullableParent()
-(func $m_<init>___$pp_typeannotations@typeannotations.ChildWithNullableParent
+(func $m_<init>__@typeannotations.ChildWithNullableParent
  (param $this (ref null $typeannotations.ChildWithNullableParent))
  (result (ref null $typeannotations.ChildWithNullableParent))
  ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -365,7 +365,7 @@
   (call $$clinit__void@typeannotations.ChildWithNullableParent )
   ;; Parent.this.Parent.<init>();
   ;;@ typeannotations/TypeAnnotations.java:40:6
-  (drop (call $m_<init>___$pp_typeannotations@typeannotations.Parent (local.get $this)))
+  (drop (call $m_<init>__@typeannotations.Parent (local.get $this)))
   ;; return ChildWithNullableParent.this;
   ;;@ typeannotations/TypeAnnotations.java:40:6
   (return (local.get $this))
@@ -479,7 +479,7 @@
 ))
 
 ;;; ChildWithNonNullableParent()
-(func $m_<init>___$pp_typeannotations@typeannotations.ChildWithNonNullableParent
+(func $m_<init>__@typeannotations.ChildWithNonNullableParent
  (param $this (ref null $typeannotations.ChildWithNonNullableParent))
  (result (ref null $typeannotations.ChildWithNonNullableParent))
  ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -489,7 +489,7 @@
   (call $$clinit__void@typeannotations.ChildWithNonNullableParent )
   ;; Parent.this.Parent.<init>();
   ;;@ typeannotations/TypeAnnotations.java:45:6
-  (drop (call $m_<init>___$pp_typeannotations@typeannotations.Parent (local.get $this)))
+  (drop (call $m_<init>__@typeannotations.Parent (local.get $this)))
   ;; return ChildWithNonNullableParent.this;
   ;;@ typeannotations/TypeAnnotations.java:45:6
   (return (local.get $this))

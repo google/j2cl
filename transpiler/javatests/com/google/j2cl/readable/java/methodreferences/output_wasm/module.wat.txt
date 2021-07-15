@@ -523,7 +523,7 @@
 ))
 
 ;;; ObjectCapturingOuter(MethodReferences<T> $outer_this)
-(func $m_<init>__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
+(func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.ObjectCapturingOuter
  (param $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
  (param $$outer_this (ref null $methodreferences.MethodReferences))
  (result (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
@@ -1429,7 +1429,7 @@
  (block
   ;; return new ObjectCapturingOuter.<init>($LambdaImplementor$8.this.$captured.this);
   ;;@ methodreferences/MethodReferences.java:97:66
-  (return (call $m_<init>__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter (struct.new_with_rtt $methodreferences.MethodReferences.ObjectCapturingOuter (ref.as_non_null (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.rtt))(struct.get $methodreferences.MethodReferences.$LambdaImplementor$8 $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$8_(local.get $this))))
+  (return (call $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.ObjectCapturingOuter (struct.new_with_rtt $methodreferences.MethodReferences.ObjectCapturingOuter (ref.as_non_null (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.itable)) (i32.const 0) (ref.null $methodreferences.MethodReferences) (global.get $methodreferences.MethodReferences.ObjectCapturingOuter.rtt))(struct.get $methodreferences.MethodReferences.$LambdaImplementor$8 $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$8_(local.get $this))))
  )
 )
 (elem declare func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$8)
@@ -1512,7 +1512,7 @@
  (block
   ;; return new OfObject.<init>(arg0);
   ;;@ methodreferences/MethodReferences.java:99:42
-  (return (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(local.get $arg0)))
+  (return (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(local.get $arg0)))
  )
 )
 (elem declare func $m_produce__int__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$9)
@@ -1773,7 +1773,7 @@
   (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Integer.rtt)))
   ;; return new OfObject.<init>(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:105:47
-  (return (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(call_ref (local.get $arg0_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
+  (return (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(call_ref (local.get $arg0_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12)
@@ -2285,7 +2285,7 @@
   (local.set $arg0_1 (ref.cast (ref.cast (local.get $arg0) (global.get $java.lang.Object.rtt)) (global.get $java.lang.Integer.rtt)))
   ;; return new OfObject.<init>(arg0.intValue());
   ;;@ methodreferences/MethodReferences.java:116:60
-  (return (call $m_<init>__int_$pp_javaemul_internal@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(call_ref (local.get $arg0_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
+  (return (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(call_ref (local.get $arg0_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $arg0_1))))))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18)

@@ -30,7 +30,7 @@
 ))
 
 ;;; GenericClass()
-(func $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass
+(func $m_<init>__@subclassgenericclass.GenericClass
  (param $this (ref null $subclassgenericclass.GenericClass))
  (result (ref null $subclassgenericclass.GenericClass))
  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
@@ -96,7 +96,7 @@
 ))
 
 ;;; GenericSubclassGenericClass()
-(func $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericSubclassGenericClass
+(func $m_<init>__@subclassgenericclass.GenericSubclassGenericClass
  (param $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
  (result (ref null $subclassgenericclass.GenericSubclassGenericClass))
  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
@@ -106,7 +106,7 @@
   (call $$clinit__void@subclassgenericclass.GenericSubclassGenericClass )
   ;; GenericClass.this.GenericClass.<init>();
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-  (drop (call $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
+  (drop (call $m_<init>__@subclassgenericclass.GenericClass (local.get $this)))
   ;; return GenericSubclassGenericClass.this;
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
   (return (local.get $this))
@@ -172,7 +172,7 @@
   (call $$clinit__void@subclassgenericclass.SubclassGenericClass )
   ;; GenericClass.this.GenericClass.<init>();
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-  (drop (call $m_<init>___$pp_subclassgenericclass@subclassgenericclass.GenericClass (local.get $this)))
+  (drop (call $m_<init>__@subclassgenericclass.GenericClass (local.get $this)))
   ;; return SubclassGenericClass.this;
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
   (return (local.get $this))

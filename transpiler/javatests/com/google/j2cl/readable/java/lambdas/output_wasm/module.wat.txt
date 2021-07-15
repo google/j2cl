@@ -626,7 +626,7 @@
     (block
      ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
      ;;@ lambdas/Lambdas.java:228:6
-     (global.set $f_identityFunction__lambdas_Lambdas_ (call $m_<init>___$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.itable)) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
+     (global.set $f_identityFunction__lambdas_Lambdas_ (call $m_<init>__@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.itable)) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
     )
    )
   )
@@ -841,7 +841,7 @@
 ))
 
 ;;; <anonymous> implements Functional<T>(Lambdas $outer_this)
-(func $m_<init>__lambdas_Lambdas_$pp_lambdas@lambdas.Lambdas.1
+(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.1
  (param $this (ref null $lambdas.Lambdas.1))
  (param $$outer_this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.1))
@@ -928,7 +928,7 @@
 ))
 
 ;;; <anonymous> implements Functional<T>()
-(func $m_<init>___$pp_lambdas@lambdas.Lambdas.2
+(func $m_<init>__@lambdas.Lambdas.2
  (param $this (ref null $lambdas.Lambdas.2))
  (result (ref null $lambdas.Lambdas.2))
  ;;@ lambdas/Lambdas.java:103:32
@@ -1180,7 +1180,7 @@
 ))
 
 ;;; <anonymous> extends Object(Lambdas $outer_this)
-(func $m_<init>__lambdas_Lambdas_$pp_lambdas@lambdas.Lambdas.3
+(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.3
  (param $this (ref null $lambdas.Lambdas.3))
  (param $$outer_this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.3))
@@ -1252,7 +1252,7 @@
 ))
 
 ;;; Parent()
-(func $m_<init>___$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent
+(func $m_<init>__@lambdas.Lambdas.Parent
  (param $this (ref null $lambdas.Lambdas.Parent))
  (result (ref null $lambdas.Lambdas.Parent))
  ;;@ lambdas/Lambdas.java:180:23
@@ -1332,14 +1332,14 @@
 ))
 
 ;;; LambdaInSubClass()
-(func $m_<init>___$p_lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass
+(func $m_<init>__@lambdas.Lambdas.LambdaInSubClass
  (param $this (ref null $lambdas.Lambdas.LambdaInSubClass))
  (result (ref null $lambdas.Lambdas.LambdaInSubClass))
  ;;@ lambdas/Lambdas.java:186:23
  (block
   ;; Parent.this.Parent.<init>();
   ;;@ lambdas/Lambdas.java:186:23
-  (drop (call $m_<init>___$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent (local.get $this)))
+  (drop (call $m_<init>__@lambdas.Lambdas.Parent (local.get $this)))
   ;; return LambdaInSubClass.this;
   ;;@ lambdas/Lambdas.java:186:23
   (return (local.get $this))
@@ -1516,7 +1516,7 @@
 ))
 
 ;;; IdentityFunction()
-(func $m_<init>___$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction
+(func $m_<init>__@lambdas.Lambdas.IdentityFunction
  (param $this (ref null $lambdas.Lambdas.IdentityFunction))
  (result (ref null $lambdas.Lambdas.IdentityFunction))
  ;;@ lambdas/Lambdas.java:233:29
@@ -2472,7 +2472,7 @@
  (block
   ;; return new $1.<init>($LambdaImplementor$8.this.$captured.this);
   ;;@ lambdas/Lambdas.java:91:12
-  (return (call $m_<init>__lambdas_Lambdas_$pp_lambdas@lambdas.Lambdas.1 (struct.new_with_rtt $lambdas.Lambdas.1 (ref.as_non_null (global.get $lambdas.Lambdas.1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.1.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.1.rtt))(struct.get $lambdas.Lambdas.$LambdaImplementor$8 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$8_(local.get $this))))
+  (return (call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.1 (struct.new_with_rtt $lambdas.Lambdas.1 (ref.as_non_null (global.get $lambdas.Lambdas.1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.1.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.1.rtt))(struct.get $lambdas.Lambdas.$LambdaImplementor$8 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$8_(local.get $this))))
  )
 )
 (elem declare func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.$LambdaImplementor$8)
@@ -2555,7 +2555,7 @@
  (block
   ;; return new $2.<init>();
   ;;@ lambdas/Lambdas.java:103:12
-  (return (call $m_<init>___$pp_lambdas@lambdas.Lambdas.2 (struct.new_with_rtt $lambdas.Lambdas.2 (ref.as_non_null (global.get $lambdas.Lambdas.2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.2.itable)) (i32.const 0) (global.get $lambdas.Lambdas.2.rtt))))
+  (return (call $m_<init>__@lambdas.Lambdas.2 (struct.new_with_rtt $lambdas.Lambdas.2 (ref.as_non_null (global.get $lambdas.Lambdas.2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.2.itable)) (i32.const 0) (global.get $lambdas.Lambdas.2.rtt))))
  )
 )
 (elem declare func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.$LambdaImplementor$9)
@@ -3269,7 +3269,7 @@
  (block
   ;; new $3.<init>($LambdaImplementor$17.this.$captured.this);
   ;;@ lambdas/Lambdas.java:177:62
-  (drop (call $m_<init>__lambdas_Lambdas_$pp_lambdas@lambdas.Lambdas.3 (struct.new_with_rtt $lambdas.Lambdas.3 (ref.as_non_null (global.get $lambdas.Lambdas.3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.3.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.3.rtt))(struct.get $lambdas.Lambdas.$LambdaImplementor$17 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$17_(local.get $this))))
+  (drop (call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.3 (struct.new_with_rtt $lambdas.Lambdas.3 (ref.as_non_null (global.get $lambdas.Lambdas.3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.3.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.3.rtt))(struct.get $lambdas.Lambdas.$LambdaImplementor$17 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$17_(local.get $this))))
  )
 )
 (elem declare func $m_run__void@lambdas.Lambdas.$LambdaImplementor$17)

@@ -72,7 +72,7 @@
 ))
 
 ;;; GenericType()
-(func $m_<init>___$pp_typewildcards@typewildcards.GenericType
+(func $m_<init>__@typewildcards.GenericType
  (param $this (ref null $typewildcards.GenericType))
  (result (ref null $typewildcards.GenericType))
  ;;@ typewildcards/TypeWildCards.java:21:6
@@ -206,13 +206,13 @@
  (block
   ;; TypeWildCards.this.unbounded(new GenericType.<init>());
   ;;@ typewildcards/TypeWildCards.java:31:4
-  (call_ref (local.get $this)(call $m_<init>___$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref (local.get $this)(call $m_<init>__@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_unbounded__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   ;; TypeWildCards.this.upperBound(new GenericType.<init>());
   ;;@ typewildcards/TypeWildCards.java:32:4
-  (call_ref (local.get $this)(call $m_<init>___$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref (local.get $this)(call $m_<init>__@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_upperBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
   ;; TypeWildCards.this.lowerBound(new GenericType.<init>());
   ;;@ typewildcards/TypeWildCards.java:33:4
-  (call_ref (local.get $this)(call $m_<init>___$pp_typewildcards@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
+  (call_ref (local.get $this)(call $m_<init>__@typewildcards.GenericType (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))(struct.get $typewildcards.TypeWildCards.vtable $m_lowerBound__typewildcards_GenericType__void (struct.get $typewildcards.TypeWildCards $vtable(local.get $this))))
  )
 )
 (elem declare func $m_test__void@typewildcards.TypeWildCards)
@@ -329,7 +329,7 @@
  (block
   ;; typewildcards.TypeWildCards.takesRecursiveGeneric(new Foo.<init>(TypeWildCards.this));
   ;;@ typewildcards/TypeWildCards.java:103:4
-  (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards_$pp_typewildcards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
+  (call $m_takesRecursiveGeneric__typewildcards_GenericType__void@typewildcards.TypeWildCards (call $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Foo (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt))(local.get $this)))
  )
 )
 (elem declare func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards)
@@ -455,7 +455,7 @@
 ))
 
 ;;; A()
-(func $m_<init>___$p_typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A
+(func $m_<init>__@typewildcards.TypeWildCards.A
  (param $this (ref null $typewildcards.TypeWildCards.A))
  (result (ref null $typewildcards.TypeWildCards.A))
  ;;@ typewildcards/TypeWildCards.java:44:23
@@ -775,7 +775,7 @@
 ))
 
 ;;; Foo(TypeWildCards $outer_this)
-(func $m_<init>__typewildcards_TypeWildCards_$pp_typewildcards@typewildcards.TypeWildCards.Foo
+(func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Foo
  (param $this (ref null $typewildcards.TypeWildCards.Foo))
  (param $$outer_this (ref null $typewildcards.TypeWildCards))
  (result (ref null $typewildcards.TypeWildCards.Foo))
@@ -789,7 +789,7 @@
   (struct.set $typewildcards.TypeWildCards.Foo $$outer_this__typewildcards_TypeWildCards_Foo(local.get $this) (local.get $$outer_this))
   ;; GenericType.this.GenericType.<init>();
   ;;@ typewildcards/TypeWildCards.java:98:8
-  (drop (call $m_<init>___$pp_typewildcards@typewildcards.GenericType (local.get $this)))
+  (drop (call $m_<init>__@typewildcards.GenericType (local.get $this)))
   ;; return Foo.this;
   ;;@ typewildcards/TypeWildCards.java:98:8
   (return (local.get $this))

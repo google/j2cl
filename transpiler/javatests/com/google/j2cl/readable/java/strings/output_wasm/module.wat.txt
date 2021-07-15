@@ -210,7 +210,7 @@
   (block
    ;; StringHolder $qualifier = new StringHolder.<init>();
    ;;@ strings/Strings.java:56:4
-   (local.set $$qualifier (call $m_<init>___$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
+   (local.set $$qualifier (call $m_<init>__@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
    ;; ($qualifier.s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append($qualifier.s),$stringBuilder.append(s4),$stringBuilder.toString()));
    ;;@ strings/Strings.java:56:4
    (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier) (block (result (ref null $java.lang.String))
@@ -224,7 +224,7 @@
   (block
    ;; StringHolder $qualifier = new StringHolder.<init>();
    ;;@ strings/Strings.java:57:4
-   (local.set $$qualifier_1 (call $m_<init>___$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
+   (local.set $$qualifier_1 (call $m_<init>__@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
    ;; ($qualifier.s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append($qualifier.s),$stringBuilder.append(c1),$stringBuilder.toString()));
    ;;@ strings/Strings.java:57:4
    (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_1) (block (result (ref null $java.lang.String))
@@ -238,7 +238,7 @@
   (block
    ;; StringHolder $qualifier = new StringHolder.<init>();
    ;;@ strings/Strings.java:58:4
-   (local.set $$qualifier_2 (call $m_<init>___$p_strings_Strings_StringHolder@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
+   (local.set $$qualifier_2 (call $m_<init>__@strings.Strings.StringHolder (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (global.get $strings.Strings.StringHolder.rtt))))
    ;; ($qualifier.s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append($qualifier.s),$stringBuilder.append(javaemul.internal.StringPool.$getString_|o|()),$stringBuilder.toString()));
    ;;@ strings/Strings.java:58:4
    (struct.set $strings.Strings.StringHolder $f_s__strings_Strings_StringHolder(local.get $$qualifier_2) (block (result (ref null $java.lang.String))
@@ -319,7 +319,7 @@
 ))
 
 ;;; StringHolder()
-(func $m_<init>___$p_strings_Strings_StringHolder@strings.Strings.StringHolder
+(func $m_<init>__@strings.Strings.StringHolder
  (param $this (ref null $strings.Strings.StringHolder))
  (result (ref null $strings.Strings.StringHolder))
  ;;@ strings/Strings.java:25:23

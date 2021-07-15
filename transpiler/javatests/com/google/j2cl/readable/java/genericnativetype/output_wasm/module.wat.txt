@@ -24,7 +24,7 @@
 ))
 
 ;;; BoundedJsArray(int size)
-(func $m_<init>__int_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
+(func $m_<init>__int@genericnativetype.BoundedJsArray
  (param $this (ref null $genericnativetype.BoundedJsArray))
  (param $size i32)
  (result (ref null $genericnativetype.BoundedJsArray))
@@ -72,7 +72,7 @@
   (call $$clinit__void@genericnativetype.BoundedJsArray )
   ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
   ;;@ genericnativetype/BoundedJsArray.java:40:4
-  (local.set $array (call $m_<init>__int_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
+  (local.set $array (call $m_<init>__int@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
   ;; return array;
   ;;@ genericnativetype/BoundedJsArray.java:41:4
   (return (local.get $array))
@@ -128,7 +128,7 @@
 ))
 
 ;;; BoundedJsArrays()
-(func $m_<init>___$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays
+(func $m_<init>__@genericnativetype.BoundedJsArrays
  (param $this (ref null $genericnativetype.BoundedJsArrays))
  (result (ref null $genericnativetype.BoundedJsArrays))
  ;;@ genericnativetype/BoundedJsArrays.java:19:10

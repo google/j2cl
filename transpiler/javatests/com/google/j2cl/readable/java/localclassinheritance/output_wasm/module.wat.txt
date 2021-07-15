@@ -115,7 +115,7 @@
 ))
 
 ;;; Parent(LocalClassInheritance $outer_this, int $captured_f)
-(func $m_<init>__localclassinheritance_LocalClassInheritance__int_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Parent
+(func $m_<init>__localclassinheritance_LocalClassInheritance__int@localclassinheritance.LocalClassInheritance.1Parent
  (param $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_f i32)
@@ -209,7 +209,7 @@
 ))
 
 ;;; Child(LocalClassInheritance $outer_this, int $captured_f)
-(func $m_<init>__localclassinheritance_LocalClassInheritance__int_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Child
+(func $m_<init>__localclassinheritance_LocalClassInheritance__int@localclassinheritance.LocalClassInheritance.1Child
  (param $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (param $$outer_this (ref null $localclassinheritance.LocalClassInheritance))
  (param $$captured_f i32)
@@ -227,7 +227,7 @@
   (struct.set $localclassinheritance.LocalClassInheritance.1Child $$captured_f__localclassinheritance_LocalClassInheritance_1Child(local.get $this) (local.get $$captured_f))
   ;; $1Parent.this.$1Parent.<init>($outer_this,$captured_f);
   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
-  (drop (call $m_<init>__localclassinheritance_LocalClassInheritance__int_$pp_localclassinheritance@localclassinheritance.LocalClassInheritance.1Parent (local.get $this)(local.get $$outer_this)(local.get $$captured_f)))
+  (drop (call $m_<init>__localclassinheritance_LocalClassInheritance__int@localclassinheritance.LocalClassInheritance.1Parent (local.get $this)(local.get $$outer_this)(local.get $$captured_f)))
   ;; return $1Child.this;
   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
   (return (local.get $this))

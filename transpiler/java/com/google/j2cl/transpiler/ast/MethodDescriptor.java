@@ -496,7 +496,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     // All special cases have been handled. Go ahead and construct the mangled name for a plain
     // Java method.
     String suffix = "";
-    if (!isStatic()) {
+    if (isInstanceMember()) {
       // Only use suffixes for instance methods. Static methods are always called through the
       // right constructor, no need to add a suffix to avoid collisions.
       switch (getVisibility()) {

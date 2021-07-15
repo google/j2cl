@@ -137,7 +137,7 @@
 ))
 
 ;;; InnerClass(NestedLocalClasses $outer_this, int $captured_localVar)
-(func $m_<init>__nestedlocalclasses_NestedLocalClasses__int_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass
+(func $m_<init>__nestedlocalclasses_NestedLocalClasses__int@nestedlocalclasses.NestedLocalClasses.1InnerClass
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
  (param $$outer_this (ref null $nestedlocalclasses.NestedLocalClasses))
  (param $$captured_localVar i32)
@@ -175,7 +175,7 @@
   (local.set $localVarInInnerClass (i32.const 1))
   ;; new $1InnerInnerClass.<init>($1InnerClass.this,$1InnerClass.this.localVar,localVarInInnerClass);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:28:8
-  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.itable)) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt))(local.get $this)(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass(local.get $this))(local.get $localVarInInnerClass)))
+  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.itable)) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt))(local.get $this)(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass(local.get $this))(local.get $localVarInInnerClass)))
  )
 )
 (elem declare func $m_fun__void@nestedlocalclasses.NestedLocalClasses.1InnerClass)
@@ -233,7 +233,7 @@
 ))
 
 ;;; InnerInnerClass(InnerClass $outer_this, int $captured_localVar, int $captured_localVarInInnerClass)
-(func $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
+(func $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
  (param $$outer_this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
  (param $$captured_localVar i32)
@@ -328,7 +328,7 @@
 ))
 
 ;;; ClassIndirectlyCapturingLocal(InnerClass $outer_this, int $captured_localVar, int $captured_localVarInInnerClass)
-(func $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
+(func $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
  (param $$outer_this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
  (param $$captured_localVar i32)
@@ -367,7 +367,7 @@
  (block
   ;; new $1InnerInnerClass.<init>($1ClassIndirectlyCapturingLocal.this.this,$1ClassIndirectlyCapturingLocal.this.localVar,$1ClassIndirectlyCapturingLocal.this.localVarInInnerClass);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:32:12
-  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.itable)) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt))(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal $$outer_this__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal(local.get $this))(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal(local.get $this))(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal(local.get $this))))
+  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_1InnerClass__int__int@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.itable)) (i32.const 0) (ref.null $nestedlocalclasses.NestedLocalClasses.1InnerClass) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.rtt))(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal $$outer_this__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal(local.get $this))(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal(local.get $this))(struct.get $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal(local.get $this))))
  )
 )
 
@@ -418,7 +418,7 @@
  (block
   ;; new $1.<init>(InterfaceWithThisReference.this);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:42:6
-  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.rtt))(local.get $this)))
+  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct.new_with_rtt $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)) (ref.as_non_null (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.rtt))(local.get $this)))
  )
 )
 (elem declare func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)
@@ -469,7 +469,7 @@
 ))
 
 ;;; Super(InterfaceWithThisReference $outer_this)
-(func $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
+(func $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
  (param $$outer_this (ref null $java.lang.Object))
  (result (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
@@ -559,7 +559,7 @@
 ))
 
 ;;; <anonymous> extends Super(InterfaceWithThisReference $outer_this)
-(func $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
+(func $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
  (param $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
  (param $$outer_this (ref null $java.lang.Object))
  (result (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
@@ -573,7 +573,7 @@
   (struct.set $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1(local.get $this) (local.get $$outer_this))
   ;; $1Super.this.$1Super.<init>($1.this);
   ;;@ nestedlocalclasses/NestedLocalClasses.java:42:18
-  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_$pp_nestedlocalclasses@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this)(local.get $this)))
+  (drop (call $m_<init>__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this)(local.get $this)))
   ;; return $1.this;
   ;;@ nestedlocalclasses/NestedLocalClasses.java:42:18
   (return (local.get $this))

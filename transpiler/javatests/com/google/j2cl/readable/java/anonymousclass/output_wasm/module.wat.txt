@@ -41,7 +41,7 @@
 ))
 
 ;;; SomeClass(int i)
-(func $m_<init>__int_$pp_anonymousclass@anonymousclass.SomeClass
+(func $m_<init>__int@anonymousclass.SomeClass
  (param $this (ref null $anonymousclass.SomeClass))
  (param $i i32)
  (result (ref null $anonymousclass.SomeClass))
@@ -123,7 +123,7 @@
  (block
   ;; SomeClass instance = new $1.<init>(AnonymousClass.this,1);
   ;;@ anonymousclass/AnonymousClass.java:26:4
-  (local.set $instance (call $m_<init>__anonymousclass_AnonymousClass__int_$pp_anonymousclass@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.vtable)) (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.itable)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(local.get $this)(i32.const 1)))
+  (local.set $instance (call $m_<init>__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.1 (struct.new_with_rtt $anonymousclass.AnonymousClass.1 (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.vtable)) (ref.as_non_null (global.get $anonymousclass.AnonymousClass.1.itable)) (i32.const 0) (ref.null $anonymousclass.AnonymousClass) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $anonymousclass.AnonymousClass.1.rtt))(local.get $this)(i32.const 1)))
  )
 )
 (elem declare func $m_main__void@anonymousclass.AnonymousClass)
@@ -181,7 +181,7 @@
 ))
 
 ;;; <anonymous> extends SomeClass(AnonymousClass $outer_this, int $_0)
-(func $m_<init>__anonymousclass_AnonymousClass__int_$pp_anonymousclass@anonymousclass.AnonymousClass.1
+(func $m_<init>__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.1
  (param $this (ref null $anonymousclass.AnonymousClass.1))
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$_0 i32)
@@ -196,7 +196,7 @@
   (struct.set $anonymousclass.AnonymousClass.1 $$outer_this__anonymousclass_AnonymousClass_1(local.get $this) (local.get $$outer_this))
   ;; SomeClass.this.SomeClass.<init>($_0);
   ;;@ anonymousclass/AnonymousClass.java:27:25
-  (drop (call $m_<init>__int_$pp_anonymousclass@anonymousclass.SomeClass (local.get $this)(local.get $$_0)))
+  (drop (call $m_<init>__int@anonymousclass.SomeClass (local.get $this)(local.get $$_0)))
   ;; $1.this.$init();
   ;;@ anonymousclass/AnonymousClass.java:27:25
   (call $$init__void_$p_anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1 (local.get $this))
@@ -297,7 +297,7 @@
    (call $$clinit__void@anonymousclass.SomeInterface )
    ;; (anonymousclass.SomeInterface.implicitlyStatic = new $1.<init>(1));
    ;;@ anonymousclass/AnonymousClass.java:39:2
-   (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $m_<init>__int_$pp_anonymousclass@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.itable)) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
+   (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $m_<init>__int@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.itable)) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
   )
  )
 )
@@ -328,7 +328,7 @@
 ))
 
 ;;; <anonymous> extends SomeClass(int $_0)
-(func $m_<init>__int_$pp_anonymousclass@anonymousclass.SomeInterface.1
+(func $m_<init>__int@anonymousclass.SomeInterface.1
  (param $this (ref null $anonymousclass.SomeInterface.1))
  (param $$_0 i32)
  (result (ref null $anonymousclass.SomeInterface.1))
@@ -339,7 +339,7 @@
   (call $$clinit__void@anonymousclass.SomeInterface.1 )
   ;; SomeClass.this.SomeClass.<init>($_0);
   ;;@ anonymousclass/AnonymousClass.java:40:23
-  (drop (call $m_<init>__int_$pp_anonymousclass@anonymousclass.SomeClass (local.get $this)(local.get $$_0)))
+  (drop (call $m_<init>__int@anonymousclass.SomeClass (local.get $this)(local.get $$_0)))
   ;; return $1.this;
   ;;@ anonymousclass/AnonymousClass.java:40:23
   (return (local.get $this))

@@ -68,7 +68,7 @@
 ))
 
 ;;; ParentOuter()
-(func $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentOuter
+(func $m_<init>__@innerclassinheritance.ParentOuter
  (param $this (ref null $innerclassinheritance.ParentOuter))
  (result (ref null $innerclassinheritance.ParentOuter))
  ;;@ innerclassinheritance/ChildClass.java:18:6
@@ -147,7 +147,7 @@
 ))
 
 ;;; ParentInner()
-(func $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentInner
+(func $m_<init>__@innerclassinheritance.ParentInner
  (param $this (ref null $innerclassinheritance.ParentInner))
  (result (ref null $innerclassinheritance.ParentInner))
  ;;@ innerclassinheritance/ChildClass.java:24:6
@@ -239,7 +239,7 @@
   (call $$clinit__void@innerclassinheritance.ChildClass )
   ;; ParentOuter.this.ParentOuter.<init>();
   ;;@ innerclassinheritance/ChildClass.java:30:13
-  (drop (call $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentOuter (local.get $this)))
+  (drop (call $m_<init>__@innerclassinheritance.ParentOuter (local.get $this)))
   ;; return ChildClass.this;
   ;;@ innerclassinheritance/ChildClass.java:30:13
   (return (local.get $this))
@@ -269,7 +269,7 @@
   (block
    ;; LocalClass $qualifier = new $1LocalClass.<init>(ChildClass.this);
    ;;@ innerclassinheritance/ChildClass.java:87:4
-   (local.set $$qualifier (call $m_<init>__innerclassinheritance_ChildClass_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object) (global.get $innerclassinheritance.ChildClass.1LocalClass.rtt))(local.get $this)))
+   (local.set $$qualifier (call $m_<init>__innerclassinheritance_ChildClass@innerclassinheritance.ChildClass.1LocalClass (struct.new_with_rtt $innerclassinheritance.ChildClass.1LocalClass (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.vtable)) (ref.as_non_null (global.get $innerclassinheritance.ChildClass.1LocalClass.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $innerclassinheritance.ChildClass) (ref.null $java.lang.Object) (global.get $innerclassinheritance.ChildClass.1LocalClass.rtt))(local.get $this)))
    ;; $qualifier.test();
    ;;@ innerclassinheritance/ChildClass.java:87:4
    (call_ref (local.get $$qualifier)(struct.get $innerclassinheritance.ChildClass.1LocalClass.vtable $m_test__void (struct.get $innerclassinheritance.ChildClass.1LocalClass $vtable(local.get $$qualifier))))
@@ -333,7 +333,7 @@
 ))
 
 ;;; InnerClass(ChildClass $outer_this)
-(func $m_<init>__innerclassinheritance_ChildClass_$pp_innerclassinheritance@innerclassinheritance.ChildClass.InnerClass
+(func $m_<init>__innerclassinheritance_ChildClass@innerclassinheritance.ChildClass.InnerClass
  (param $this (ref null $innerclassinheritance.ChildClass.InnerClass))
  (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.InnerClass))
@@ -347,7 +347,7 @@
   (struct.set $innerclassinheritance.ChildClass.InnerClass $$outer_this__innerclassinheritance_ChildClass_InnerClass(local.get $this) (local.get $$outer_this))
   ;; ParentInner.this.ParentInner.<init>();
   ;;@ innerclassinheritance/ChildClass.java:35:8
-  (drop (call $m_<init>___$pp_innerclassinheritance@innerclassinheritance.ParentInner (local.get $this)))
+  (drop (call $m_<init>__@innerclassinheritance.ParentInner (local.get $this)))
   ;; return InnerClass.this;
   ;;@ innerclassinheritance/ChildClass.java:35:8
   (return (local.get $this))
@@ -486,7 +486,7 @@
 ))
 
 ;;; LocalClass(ChildClass $outer_this)
-(func $m_<init>__innerclassinheritance_ChildClass_$pp_innerclassinheritance@innerclassinheritance.ChildClass.1LocalClass
+(func $m_<init>__innerclassinheritance_ChildClass@innerclassinheritance.ChildClass.1LocalClass
  (param $this (ref null $innerclassinheritance.ChildClass.1LocalClass))
  (param $$outer_this (ref null $innerclassinheritance.ChildClass))
  (result (ref null $innerclassinheritance.ChildClass.1LocalClass))
