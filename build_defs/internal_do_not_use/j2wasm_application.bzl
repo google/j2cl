@@ -11,6 +11,9 @@ def _impl_j2wasm_application(ctx):
     srcs = _get_transitive_srcs(deps)
     classpath = _get_transitive_classpath(deps)
 
+    runfiles = []
+    outputs = []
+
     transpile_out = ctx.actions.declare_directory(ctx.label.name + "_out")
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
@@ -54,45 +57,46 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-nontrapping-float-to-int")
     args.add("--debuginfo")
     args.add_all(ctx.attr.binaryen_args)
+
     args.add("-o", ctx.outputs.wasm)
+    outputs.append(ctx.outputs.wasm)
+    runfiles.append(ctx.outputs.wasm)
+
+    symbolmap = ctx.actions.declare_file(ctx.label.name + ".map")
+    args.add("--symbolmap=" + symbolmap.path)
+    outputs.append(symbolmap)
+
+    debug_dir_name = ctx.label.name + "_debug"
+    source_map_name = ctx.label.name + "_source.map"
+    source_map = ctx.actions.declare_file(source_map_name)
+    args.add("--output-source-map", source_map)
+    outputs.append(source_map)
+    args.add("--output-source-map-url", debug_dir_name + "/" + source_map_name)
+
     args.add(ctx.outputs.wat)
 
-    runfiles = [ctx.outputs.wasm]
-    outputs = [ctx.outputs.wasm]
-    if ctx.attr.generate_symbol_map:
-        symbolmap = ctx.actions.declare_file(ctx.label.name + ".map")
-        outputs.append(symbolmap)
-        args.add("--symbolmap", symbolmap.path)
-
-        debug_dir_name = ctx.label.name + "_debug"
-        source_map_name = ctx.label.name + "_source.map"
-        source_map = ctx.actions.declare_file(source_map_name)
-        outputs.append(source_map)
-        args.add("--source-map", source_map)
-        args.add("--source-map-url", debug_dir_name + "/" + source_map_name)
-
-        # Make the debugging data available in runfiles.
-        # Note that we are making sure that the sourcemap file is in the root next to
-        # others so the relative paths are correct.
-        debug_dir = ctx.actions.declare_directory(debug_dir_name)
-        runfiles.append(debug_dir)
-        ctx.actions.run_shell(
-            inputs = [transpile_out, source_map],
-            outputs = [debug_dir],
-            # TODO(b/176105504): Link instead copy when native tree support lands.
-            command = (
-                "cp -rL %s/* %s;" % (transpile_out.path, debug_dir.path) +
-                "cp %s %s" % (source_map.path, debug_dir.path)
-            ),
-        )
-
     ctx.actions.run(
-        executable = ctx.executable.binaryen,
+        executable = ctx.executable._binaryen,
         arguments = [args],
         inputs = [ctx.outputs.wat],
         outputs = outputs,
         mnemonic = "J2wasm",
-        progress_message = "Compiling wat2wasm",
+        progress_message = "Compiling to WASM",
+    )
+
+    # Make the debugging data available in runfiles.
+    # Note that we are making sure that the sourcemap file is in the root next to
+    # others so the relative paths are correct.
+    debug_dir = ctx.actions.declare_directory(debug_dir_name)
+    runfiles.append(debug_dir)
+    ctx.actions.run_shell(
+        inputs = [transpile_out, source_map],
+        outputs = [debug_dir],
+        # TODO(b/176105504): Link instead copy when native tree support lands.
+        command = (
+            "cp -rL %s/* %s;" % (transpile_out.path, debug_dir.path) +
+            "cp %s %s" % (source_map.path, debug_dir.path)
+        ),
     )
 
     # Trigger a parallel Javac build to provide better error messages than JDT.
@@ -120,7 +124,6 @@ _j2wasm_application = rule(
         "deps": attr.label_list(providers = [J2wasmInfo]),
         "entry_points": attr.string_list(),
         "binaryen_args": attr.string_list(),
-        "generate_symbol_map": attr.bool(default = False),
         "transpiler_args": attr.string_list(),
         "binaryen": attr.label(
             cfg = "host",
@@ -134,6 +137,11 @@ _j2wasm_application = rule(
             ),
             cfg = "host",
             executable = True,
+        ),
+        "_binaryen": attr.label(
+            cfg = "host",
+            executable = True,
+            default = Label("//third_party/binaryen:wasm-opt"),
         ),
     },
     outputs = {
@@ -171,14 +179,11 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         name = name,
         binaryen_args = ["-O"],
         transpiler_args = ["-experimentalWasmRemoveAssertStatement"],
-        binaryen = "//third_party/binaryen:wasm-opt",
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
         **kwargs
     )
     _j2wasm_application(
         name = name + "_dev",
-        binaryen = "//third_party/binaryen:wasm-as",
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
-        generate_symbol_map = True,
         **kwargs
     )
