@@ -112,6 +112,24 @@ public abstract class TypeVariable extends TypeDescriptor implements HasName {
   }
 
   @Override
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+    // Avoid the recursion that might arise from type variable declarations,
+    // (e.g. class Enum<T extends Enum<T>>).
+    if (!seen.add(this)) {
+      return this;
+    }
+    TypeDescriptor bound = getBoundTypeDescriptor();
+    TypeDescriptor newBound = replaceTypeDescriptors(bound, fn, seen);
+    if (bound != newBound) {
+      return Builder.from(this)
+          .setBoundTypeDescriptorSupplier(() -> newBound)
+          .setUniqueKey("<Auto>" + getUniqueId())
+          .build();
+    }
+    return this;
+  }
+
+  @Override
   public Set<TypeVariable> getAllTypeVariables() {
     if (!isWildcardOrCapture()) {
       return ImmutableSet.of(this);

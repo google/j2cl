@@ -945,7 +945,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setParameterDescriptors(toParameterDescriptors(parameterTypeDescriptors));
     }
 
-    private Builder updateParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
+    public Builder updateParameterTypeDescriptors(List<TypeDescriptor> parameterTypeDescriptors) {
       return setParameterDescriptors(
           Streams.zip(
                   getParameterDescriptors().stream(),

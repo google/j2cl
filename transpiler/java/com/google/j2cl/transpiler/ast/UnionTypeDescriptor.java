@@ -21,6 +21,7 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.ThreadLocalInterner;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -132,6 +133,16 @@ public abstract class UnionTypeDescriptor extends TypeDescriptor {
   @Override
   public boolean canBeReferencedExternally() {
     return false;
+  }
+
+  @Override
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+    List<TypeDescriptor> unionTypes = getUnionTypeDescriptors();
+    List<TypeDescriptor> newUnionTypes = replaceTypeDescriptors(unionTypes, fn, seen);
+    if (!unionTypes.equals(newUnionTypes)) {
+      return UnionTypeDescriptor.newBuilder().setUnionTypeDescriptors(newUnionTypes).build();
+    }
+    return this;
   }
 
   @Override

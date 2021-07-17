@@ -960,6 +960,23 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   @Override
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+    List<TypeDescriptor> typeArguments = getTypeArgumentDescriptors();
+    List<TypeDescriptor> newtypeArguments = replaceTypeDescriptors(typeArguments, fn, seen);
+    if (!typeArguments.equals(newtypeArguments)) {
+      return Builder.from(this).setTypeArgumentDescriptors(newtypeArguments).build();
+    }
+
+    // We should also re-write TypeVariable for the TypeDescriptor however the type model  currently
+    // doesn't allow that since they are not part of the key. This leaves edge cases where we may
+    // leave a reference however JavaScript stack will detect that.
+    // Note that this limitation is acceptable since in practice user shouldn't refer to AutoValue
+    // generated classes (this is where this functionality is currently only used) other than a few
+    // trival scenarios. What we have here is already an overkill in practice for well formed code.
+    return this;
+  }
+
+  @Override
   public DeclaredTypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> parameterization) {
     if (AstUtils.isIdentityFunction(parameterization)) {

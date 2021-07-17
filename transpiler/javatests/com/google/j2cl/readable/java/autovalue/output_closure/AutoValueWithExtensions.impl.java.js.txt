@@ -4,6 +4,9 @@ const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AutoValue__AutoValueWithExtensions = goog.forwardDeclare('autovalue.AutoValue_AutoValueWithExtensions$impl');
+let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
 /**
  * @abstract
@@ -12,15 +15,11 @@ class AutoValueWithExtensions extends ValueType {
  /** @protected */
  constructor() {
   super();
+  /**@type {number}*/
+  this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ = 0;
+  /**@type {?string}*/
+  this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_;
  }
- 
- $ctor__autovalue_AutoValueWithExtensions__() {
-  this.$ctor__java_lang_Object__();
- }
- /** @abstract @return {number} */
- m_getIntField__() {}
- /** @abstract @return {?string} */
- m_getStringField__() {}
  /** @return {number} */
  m_getMemoizedNative___$pp_autovalue() {
   return Math.imul(this.m_getIntField__(), 2);
@@ -31,6 +30,23 @@ class AutoValueWithExtensions extends ValueType {
  static m_create__() {
   AutoValueWithExtensions.$clinit();
   return AutoValue__AutoValueWithExtensions.$create__int__java_lang_String(42, "text");
+ }
+ 
+ $ctor__autovalue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField, /** ?string */ stringField) {
+  this.$ctor__java_lang_Object__();
+  this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ = intField;
+  if ($Equality.$same(stringField, null)) {
+   throw $Exceptions.toJs(NullPointerException.$create__java_lang_String("Null stringField"));
+  }
+  this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ = stringField;
+ }
+ /** @return {number} */
+ m_getIntField__() {
+  return this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_;
+ }
+ /** @return {?string} */
+ m_getStringField__() {
+  return this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_;
  }
  
  static $clinit() {
@@ -45,6 +61,9 @@ class AutoValueWithExtensions extends ValueType {
  
  static $loadModules() {
   AutoValue__AutoValueWithExtensions = goog.module.get('autovalue.AutoValue_AutoValueWithExtensions$impl');
+  NullPointerException = goog.module.get('java.lang.NullPointerException$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
 $Util.$setClassMetadata(AutoValueWithExtensions, "autovalue.AutoValueWithExtensions");

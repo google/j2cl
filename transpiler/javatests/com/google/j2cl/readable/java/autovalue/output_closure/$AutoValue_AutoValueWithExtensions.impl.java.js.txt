@@ -1,6 +1,6 @@
 goog.module('autovalue.$AutoValue_AutoValueWithExtensions$impl');
 
-const $$AutoValue__AutoValueWithExtensions = goog.require('autovalue.$$AutoValue_AutoValueWithExtensions$impl');
+const AutoValueWithExtensions = goog.require('autovalue.AutoValueWithExtensions$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let j_l_String = goog.forwardDeclare('java.lang.String$impl');
@@ -11,14 +11,14 @@ let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 /**
  * @abstract
  */
-class $AutoValue__AutoValueWithExtensions extends $$AutoValue__AutoValueWithExtensions {
+class $AutoValue__AutoValueWithExtensions extends AutoValueWithExtensions {
  /** @protected */
  constructor() {
   super();
  }
  
  $ctor__autovalue_$AutoValue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField$, /** ?string */ stringField$) {
-  this.$ctor__autovalue_$$AutoValue_AutoValueWithExtensions__int__java_lang_String(intField$, stringField$);
+  this.$ctor__autovalue_AutoValueWithExtensions__int__java_lang_String(intField$, stringField$);
  }
  /** @override @return {?string} */
  m_toPrettyString___$pp_autovalue() {
@@ -43,7 +43,7 @@ class $AutoValue__AutoValueWithExtensions extends $$AutoValue__AutoValueWithExte
  static $clinit() {
   $AutoValue__AutoValueWithExtensions.$clinit = () =>{};
   $AutoValue__AutoValueWithExtensions.$loadModules();
-  $$AutoValue__AutoValueWithExtensions.$clinit();
+  AutoValueWithExtensions.$clinit();
  }
  /** @return {boolean} */
  static $isInstance(/** ? */ instance) {

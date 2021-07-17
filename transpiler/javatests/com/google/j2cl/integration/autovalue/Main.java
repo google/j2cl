@@ -79,6 +79,10 @@ public class Main {
 
   private static class BaseClass {
     int bar;
+
+    BaseClass() {
+      bar = 42;
+    }
   }
 
   @AutoValue
@@ -88,6 +92,7 @@ public class Main {
 
   private static void testExtending() {
     ExtendingAutoValue o1 = new AutoValue_Main_ExtendingAutoValue(12);
+    assertEquals(42, o1.bar); // Make sure the parent constructor is still called.
     ExtendingAutoValue o2 = new AutoValue_Main_ExtendingAutoValue(12);
     assertEquals(o1, o2);
     assertEquals(o1.hashCode(), o2.hashCode());
@@ -124,9 +129,8 @@ public class Main {
   abstract static class AbstractEquals {
     abstract String string();
 
-    // TODO(b/188737593): Fix overriden abstract method handling.
-    // @Override
-    // public abstract boolean equals(Object o);
+    @Override
+    public abstract boolean equals(Object o);
   }
 
   private static void testAbstractEquals() {

@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import java.util.Set;
 import java.util.function.Function;
 
 /** A primitive type. */
@@ -175,6 +176,11 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
   @Override
   public TypeDeclaration getMetadataTypeDeclaration() {
     return TypeDescriptors.createPrimitiveMetadataTypeDescriptor(this).getTypeDeclaration();
+  }
+
+  @Override
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+    return this;
   }
 
   @Override

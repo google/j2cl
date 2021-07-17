@@ -5,27 +5,46 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Builder = goog.forwardDeclare('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder$impl');
 
-/**
- * @abstract
- */
 class DefaultNonEmptyConstructorAutoValue extends ValueType {
  /** @protected */
  constructor() {
   super();
   /**@type {number}*/
   this.f_field__autovalue_DefaultNonEmptyConstructorAutoValue_ = 0;
+  /**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ = false;
+ }
+ /** @return {!DefaultNonEmptyConstructorAutoValue} */
+ static $create__() {
+  DefaultNonEmptyConstructorAutoValue.$clinit();
+  let $instance = new DefaultNonEmptyConstructorAutoValue();
+  $instance.$ctor__autovalue_DefaultNonEmptyConstructorAutoValue__();
+  return $instance;
  }
  
  $ctor__autovalue_DefaultNonEmptyConstructorAutoValue__() {
   this.$ctor__java_lang_Object__();
   this.f_field__autovalue_DefaultNonEmptyConstructorAutoValue_ = 1;
  }
- /** @abstract @return {boolean} */
- m_getBooleanField__() {}
  /** @return {DefaultNonEmptyConstructorAutoValue} */
  static m_create__() {
   DefaultNonEmptyConstructorAutoValue.$clinit();
   return Builder.$create__().m_setBooleanField__boolean(true).m_build__();
+ }
+ /** @return {!DefaultNonEmptyConstructorAutoValue} */
+ static $create__boolean(/** boolean */ booleanField) {
+  let $instance = new DefaultNonEmptyConstructorAutoValue();
+  $instance.$ctor__autovalue_DefaultNonEmptyConstructorAutoValue__boolean(booleanField);
+  return $instance;
+ }
+ 
+ $ctor__autovalue_DefaultNonEmptyConstructorAutoValue__boolean(/** boolean */ booleanField) {
+  this.$ctor__java_lang_Object__();
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_ = booleanField;
+ }
+ /** @return {boolean} */
+ m_getBooleanField__() {
+  return this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_;
  }
  
  static $clinit() {

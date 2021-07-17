@@ -4,23 +4,43 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let DefaultConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultConstructorAutoValue$impl');
+let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
+let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
-/**
- * @abstract
- */
 class Builder extends j_l_Object {
  /** @protected */
  constructor() {
   super();
+  /**@type {?boolean}*/
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_;
+ }
+ /** @return {!Builder} */
+ static $create__() {
+  Builder.$clinit();
+  let $instance = new Builder();
+  $instance.$ctor__autovalue_DefaultConstructorAutoValue_Builder__();
+  return $instance;
  }
  
  $ctor__autovalue_DefaultConstructorAutoValue_Builder__() {
   this.$ctor__java_lang_Object__();
  }
- /** @abstract @return {Builder} */
- m_setBooleanField__boolean(/** boolean */ x) {}
- /** @abstract @return {DefaultConstructorAutoValue} */
- m_build__() {}
+ /** @return {Builder} */
+ m_setBooleanField__boolean_$pp_autovalue(/** boolean */ booleanField) {
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_ = booleanField;
+  return this;
+ }
+ /** @return {DefaultConstructorAutoValue} */
+ m_build__() {
+  if ($Equality.$same(this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_, null)) {
+   let missing = " booleanField";
+   throw $Exceptions.toJs(IllegalStateException.$create__java_lang_String("Missing required properties:" + j_l_String.m_valueOf__java_lang_Object(missing)));
+  }
+  return DefaultConstructorAutoValue.$create__boolean(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_Builder_));
+ }
  
  static $clinit() {
   Builder.$clinit = () =>{};
@@ -32,7 +52,14 @@ class Builder extends j_l_Object {
   return instance instanceof Builder;
  }
  
- static $loadModules() {}
+ static $loadModules() {
+  DefaultConstructorAutoValue = goog.module.get('autovalue.DefaultConstructorAutoValue$impl');
+  Boolean = goog.module.get('java.lang.Boolean$impl');
+  IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+ }
 }
 $Util.$setClassMetadata(Builder, "autovalue.DefaultConstructorAutoValue$Builder");
 

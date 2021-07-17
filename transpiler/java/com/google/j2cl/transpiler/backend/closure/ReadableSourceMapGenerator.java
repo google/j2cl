@@ -58,6 +58,10 @@ public class ReadableSourceMapGenerator {
       SourcePosition javaSourcePosition = checkNotNull(entry.getValue());
       SourcePosition javaScriptSourcePosition = checkNotNull(entry.getKey());
       List<String> javaSourceLines = sourceLinesByFileName.get(javaSourcePosition.getFileName());
+      if (javaSourceLines == null) {
+        // ReadableSourceMapGenerator doesn't work over multiple files so inlining is not handled.
+        continue;
+      }
 
       boolean hasName = javaSourcePosition.getName() != null;
 

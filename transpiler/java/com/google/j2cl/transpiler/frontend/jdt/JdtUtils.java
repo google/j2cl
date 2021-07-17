@@ -1094,6 +1094,7 @@ class JdtUtils {
         .setJsFunctionInterface(JsInteropUtils.isJsFunction(typeBinding))
         .setAnnotatedWithFunctionalInterface(isAnnotatedWithFunctionalInterface(typeBinding))
         .setAnnotatedWithAutoValue(isAnnotatedWithAutoValue(typeBinding))
+        .setAnnotatedWithAutoValueBuilder(isAnnotatedWithAutoValueBuilder(typeBinding))
         .setJsType(JsInteropUtils.isJsType(typeBinding))
         .setJsEnumInfo(jsEnumInfo)
         .setNative(JsInteropUtils.isJsNativeType(typeBinding))
@@ -1120,6 +1121,10 @@ class JdtUtils {
 
   private static boolean isAnnotatedWithAutoValue(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue");
+  }
+
+  private static boolean isAnnotatedWithAutoValueBuilder(ITypeBinding typeBinding) {
+    return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue.Builder");
   }
 
   private JdtUtils() {}

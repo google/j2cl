@@ -1,0 +1,49 @@
+goog.module('autovalue.SimpleAutoValue.GenericType$impl');
+
+const AbstractCollection = goog.require('java.util.AbstractCollection$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let SimpleAutoValue = goog.forwardDeclare('autovalue.SimpleAutoValue$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let $Casts = goog.forwardDeclare('vmbootstrap.Casts$impl');
+
+/**
+ * @abstract
+ * @extends {AbstractCollection<SimpleAutoValue>}
+ */
+class GenericType extends AbstractCollection {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ 
+ $ctor__autovalue_SimpleAutoValue_GenericType__() {
+  this.$ctor__java_util_AbstractCollection__();
+ }
+ /** @template T @return {T} */
+ m_foo__java_util_List__java_util_List_$pp_autovalue(/** List<?> */ o1, /** List<SimpleAutoValue> */ o2) {
+  this.m_foo__java_util_List__java_util_List_$pp_autovalue(null, null).m_getArrayField__();
+  let o = /**@type {SimpleAutoValue}*/ ($Casts.$to(o1.getAtIndex(0), SimpleAutoValue));
+  return null;
+ }
+ 
+ static $clinit() {
+  GenericType.$clinit = () =>{};
+  GenericType.$loadModules();
+  AbstractCollection.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof GenericType;
+ }
+ 
+ static $loadModules() {
+  SimpleAutoValue = goog.module.get('autovalue.SimpleAutoValue$impl');
+  $Casts = goog.module.get('vmbootstrap.Casts$impl');
+ }
+}
+$Util.$setClassMetadata(GenericType, "autovalue.SimpleAutoValue$GenericType");
+
+exports = GenericType;
+
+//# sourceMappingURL=SimpleAutoValue$GenericType.js.map

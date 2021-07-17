@@ -22,6 +22,7 @@ import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
 import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.ThreadLocalInterner;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -143,6 +144,16 @@ public abstract class IntersectionTypeDescriptor extends TypeDescriptor {
     return getIntersectionTypeDescriptors()
         .stream()
         .anyMatch(TypeDescriptor::canBeReferencedExternally);
+  }
+
+  @Override
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+    List<DeclaredTypeDescriptor> intersections = getIntersectionTypeDescriptors();
+    List<DeclaredTypeDescriptor> newIntersections = replaceTypeDescriptors(intersections, fn, seen);
+    if (!intersections.equals(newIntersections)) {
+      return newBuilder().setIntersectionTypeDescriptors(newIntersections).build();
+    }
+    return this;
   }
 
   @Override

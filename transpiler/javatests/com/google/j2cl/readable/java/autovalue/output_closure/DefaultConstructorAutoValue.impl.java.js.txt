@@ -3,26 +3,46 @@ goog.module('autovalue.DefaultConstructorAutoValue$impl');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let Builder = goog.forwardDeclare('autovalue.AutoValue_DefaultConstructorAutoValue.Builder$impl');
+let Builder = goog.forwardDeclare('autovalue.DefaultConstructorAutoValue.Builder$impl');
 
-/**
- * @abstract
- */
 class DefaultConstructorAutoValue extends ValueType {
  /** @protected */
  constructor() {
   super();
+  /**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ = false;
+ }
+ /** @return {!DefaultConstructorAutoValue} */
+ static $create__() {
+  DefaultConstructorAutoValue.$clinit();
+  let $instance = new DefaultConstructorAutoValue();
+  $instance.$ctor__autovalue_DefaultConstructorAutoValue__();
+  return $instance;
  }
  
  $ctor__autovalue_DefaultConstructorAutoValue__() {
   this.$ctor__java_lang_Object__();
  }
- /** @abstract @return {boolean} */
- m_getBooleanField__() {}
  /** @return {DefaultConstructorAutoValue} */
  static m_create__() {
   DefaultConstructorAutoValue.$clinit();
-  return Builder.$create__().m_setBooleanField__boolean(true).m_build__();
+  return Builder.$create__().m_setBooleanField__boolean_$pp_autovalue(true).m_build__();
+ }
+ /** @return {!DefaultConstructorAutoValue} */
+ static $create__boolean(/** boolean */ booleanField) {
+  DefaultConstructorAutoValue.$clinit();
+  let $instance = new DefaultConstructorAutoValue();
+  $instance.$ctor__autovalue_DefaultConstructorAutoValue__boolean(booleanField);
+  return $instance;
+ }
+ 
+ $ctor__autovalue_DefaultConstructorAutoValue__boolean(/** boolean */ booleanField) {
+  this.$ctor__java_lang_Object__();
+  this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_ = booleanField;
+ }
+ /** @return {boolean} */
+ m_getBooleanField__() {
+  return this.f_booleanField__autovalue_AutoValue_DefaultConstructorAutoValue_;
  }
  
  static $clinit() {
@@ -36,7 +56,7 @@ class DefaultConstructorAutoValue extends ValueType {
  }
  
  static $loadModules() {
-  Builder = goog.module.get('autovalue.AutoValue_DefaultConstructorAutoValue.Builder$impl');
+  Builder = goog.module.get('autovalue.DefaultConstructorAutoValue.Builder$impl');
  }
 }
 $Util.$setClassMetadata(DefaultConstructorAutoValue, "autovalue.DefaultConstructorAutoValue");

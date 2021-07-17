@@ -71,6 +71,10 @@ public abstract class Member extends Node
     return getDescriptor().getQualifiedBinaryName();
   }
 
+  public final String getMangledName() {
+    return getDescriptor().getMangledName();
+  }
+
   @Override
   public final String getSimpleJsName() {
     return getDescriptor().getSimpleJsName();

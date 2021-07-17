@@ -448,9 +448,7 @@ public class WasmModuleGenerator {
       String functionTypeName = environment.getFunctionTypeName(method.getDescriptor());
       builder.newLine();
       builder.append(
-          String.format(
-              "(field $%s (mut (ref %s)))",
-              method.getDescriptor().getMangledName(), functionTypeName));
+          String.format("(field $%s (mut (ref %s)))", method.getMangledName(), functionTypeName));
     }
   }
 

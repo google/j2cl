@@ -41,6 +41,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   @Visitable List<Member> members = new ArrayList<>();
   @Visitable List<Statement> loadTimeStatements = new ArrayList<>();
   private final SourcePosition sourcePosition;
+  private boolean isAbstract;
   private DeclaredTypeDescriptor superTypeDescriptor;
 
   public Type(
@@ -50,6 +51,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         typeDeclaration.isInterface() || typeDeclaration.isClass() || typeDeclaration.isEnum());
     this.visibility = visibility;
     this.typeDeclaration = typeDeclaration;
+    this.isAbstract = typeDeclaration.isAbstract();
     this.superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
   }
 
@@ -65,13 +67,16 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return typeDeclaration.getKind();
   }
 
+  public void setStatic(boolean isStatic) {
+    this.isStatic = isStatic;
+  }
+
   public boolean isStatic() {
     return isStatic;
   }
 
   public boolean containsMethod(String mangledName) {
-    return getMethods().stream()
-        .anyMatch(method -> method.getDescriptor().getMangledName().equals(mangledName));
+    return getMethods().stream().anyMatch(method -> method.getMangledName().equals(mangledName));
   }
 
   public boolean containsNonJsNativeMethods() {
@@ -80,12 +85,12 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .anyMatch(method -> !method.getDescriptor().isJsMember());
   }
 
-  public void setStatic(boolean isStatic) {
-    this.isStatic = isStatic;
+  public void setAbstract(boolean isAbstract) {
+    this.isAbstract = isAbstract;
   }
 
   public boolean isAbstract() {
-    return typeDeclaration.isAbstract();
+    return isAbstract;
   }
 
   public boolean isEnum() {
@@ -102,10 +107,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean isClass() {
     return typeDeclaration.isClass();
-  }
-
-  public void setSuperTypeDescriptor(DeclaredTypeDescriptor superTypeDescriptor) {
-    this.superTypeDescriptor = superTypeDescriptor;
   }
 
   public TypeDeclaration getOverlaidTypeDeclaration() {
@@ -222,6 +223,10 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public TypeDeclaration getEnclosingTypeDeclaration() {
     return typeDeclaration.getEnclosingTypeDeclaration();
+  }
+
+  public void setSuperTypeDescriptor(DeclaredTypeDescriptor superTypeDescriptor) {
+    this.superTypeDescriptor = superTypeDescriptor;
   }
 
   public DeclaredTypeDescriptor getSuperTypeDescriptor() {

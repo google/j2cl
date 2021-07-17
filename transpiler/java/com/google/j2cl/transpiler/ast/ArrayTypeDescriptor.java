@@ -182,6 +182,16 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
+  TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen) {
+    TypeDescriptor component = getComponentTypeDescriptor();
+    TypeDescriptor newComponent = replaceTypeDescriptors(component, fn, seen);
+    if (component != newComponent) {
+      return Builder.from(this).setComponentTypeDescriptor(newComponent).build();
+    }
+    return this;
+  }
+
+  @Override
   public ArrayTypeDescriptor specializeTypeVariables(
       Function<TypeVariable, ? extends TypeDescriptor> replacementTypeArgumentByTypeVariable) {
     if (AstUtils.isIdentityFunction(replacementTypeArgumentByTypeVariable)) {

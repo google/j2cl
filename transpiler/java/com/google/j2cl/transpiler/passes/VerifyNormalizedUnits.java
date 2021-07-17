@@ -115,8 +115,7 @@ public class VerifyNormalizedUnits extends NormalizationPass {
                     ? staticMembersByMangledName
                     : instanceMembersByMangledName;
             MemberDescriptor oldMember =
-                membersByMangledName.put(
-                    member.getDescriptor().getMangledName(), member.getDescriptor());
+                membersByMangledName.put(member.getMangledName(), member.getDescriptor());
             checkState(
                 oldMember == null, "%s conflicts with %s", member.getDescriptor(), oldMember);
           }

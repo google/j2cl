@@ -3,7 +3,6 @@ goog.module('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder$imp
 const DefaultNonEmptyConstructorAutoValue_Builder = goog.require('autovalue.DefaultNonEmptyConstructorAutoValue.Builder$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let AutoValue__DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$impl');
 let DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
@@ -40,7 +39,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
    let missing = " booleanField";
    throw $Exceptions.toJs(IllegalStateException.$create__java_lang_String("Missing required properties:" + j_l_String.m_valueOf__java_lang_Object(missing)));
   }
-  return AutoValue__DefaultNonEmptyConstructorAutoValue.$create__boolean(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_));
+  return DefaultNonEmptyConstructorAutoValue.$create__boolean(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_));
  }
  
  static $clinit() {
@@ -54,7 +53,7 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  }
  
  static $loadModules() {
-  AutoValue__DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$impl');
+  DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
   Boolean = goog.module.get('java.lang.Boolean$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
   j_l_String = goog.module.get('java.lang.String$impl');

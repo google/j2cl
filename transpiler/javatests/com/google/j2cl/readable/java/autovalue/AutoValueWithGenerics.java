@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Google Inc.
+ * Copyright 2021 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,23 +18,10 @@ package autovalue;
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-public abstract class DefaultConstructorAutoValue {
-
-  DefaultConstructorAutoValue() {}
-
+public abstract class AutoValueWithGenerics<T> {
   public abstract boolean getBooleanField();
 
-  @AutoValue.Builder
-  abstract static class Builder {
-
-    protected Builder() {}
-
-    abstract Builder setBooleanField(boolean x);
-
-    public abstract DefaultConstructorAutoValue build();
-  }
-
-  static DefaultConstructorAutoValue create() {
-    return new AutoValue_DefaultConstructorAutoValue.Builder().setBooleanField(true).build();
+  static <T> AutoValueWithGenerics<T> create() {
+    return new AutoValue_AutoValueWithGenerics<T>(true);
   }
 }

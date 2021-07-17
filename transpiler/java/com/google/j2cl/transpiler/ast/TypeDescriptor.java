@@ -16,8 +16,12 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -183,6 +187,47 @@ public abstract class TypeDescriptor implements Comparable<TypeDescriptor>, HasR
   public final JavaScriptConstructorReference getMetadataConstructorReference() {
     return new JavaScriptConstructorReference(getMetadataTypeDeclaration());
   }
+
+  /** A function that replaces a TypeDescriptor. */
+  public interface TypeReplacer {
+    <T extends TypeDescriptor> T apply(T t);
+  }
+
+  /** Replaces all occurrences of a type for the type specified by the mapping function. */
+  public static <T extends TypeDescriptor> T replaceTypeDescriptors(T t, TypeReplacer fn) {
+    return replaceTypeDescriptors(t, fn, new HashSet<TypeDescriptor>());
+  }
+
+  static <T extends TypeDescriptor> T replaceTypeDescriptors(
+      T t, TypeReplacer fn, Set<TypeDescriptor> seen) {
+    if (t == null) {
+      return null;
+    }
+    T typeDescriptor = fn.apply(t);
+    // Note that the use of generics is sketchy here. 'T' here is actually intendeted to be the
+    // "this" type. As long as TypeReplacer guarantees preservation of type during replacement based
+    // on its T -> T contract, we should be able to preserve 'this' type. However there is no way to
+    // represent that through return here via Java generics without overhauling TypeDescriptor type
+    // to have generics.
+    @SuppressWarnings("unchecked")
+    T replacement = (T) typeDescriptor.replaceInternalTypeDescriptors(fn, seen);
+    return replacement;
+  }
+
+  /** Replaces all occurrences of a type for the type specified by the mapping function. */
+  public static <T extends TypeDescriptor> ImmutableList<T> replaceTypeDescriptors(
+      List<T> descriptors, TypeReplacer fn) {
+    return replaceTypeDescriptors(descriptors, fn, new HashSet<TypeDescriptor>());
+  }
+
+  static <T extends TypeDescriptor> ImmutableList<T> replaceTypeDescriptors(
+      List<T> descriptors, TypeReplacer fn, Set<TypeDescriptor> seen) {
+    return descriptors.stream()
+        .map(t -> replaceTypeDescriptors(t, fn, seen))
+        .collect(toImmutableList());
+  }
+
+  abstract TypeDescriptor replaceInternalTypeDescriptors(TypeReplacer fn, Set<TypeDescriptor> seen);
 
   /** Returns all the free type variables that appear in the type. */
   public Set<TypeVariable> getAllTypeVariables() {

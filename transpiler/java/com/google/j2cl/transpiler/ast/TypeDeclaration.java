@@ -233,6 +233,9 @@ public abstract class TypeDeclaration
   /** Returns whether the described type has the @AutoValue annotation. */
   public abstract boolean isAnnotatedWithAutoValue();
 
+  /** Returns whether the described type has the @AutoValue.Builder annotation. */
+  public abstract boolean isAnnotatedWithAutoValueBuilder();
+
   @Memoized
   public boolean isJsFunctionImplementation() {
     return isClass()
@@ -535,7 +538,7 @@ public abstract class TypeDeclaration
     return getSuperTypeDescriptorFactory().get(this);
   }
 
-  private TypeDeclaration getSuperTypeDeclaration() {
+  public TypeDeclaration getSuperTypeDeclaration() {
     return getSuperTypeDescriptor() == null ? null : getSuperTypeDescriptor().getTypeDeclaration();
   }
 
@@ -694,6 +697,7 @@ public abstract class TypeDeclaration
         .setFunctionalInterface(false)
         .setAnnotatedWithFunctionalInterface(false)
         .setAnnotatedWithAutoValue(false)
+        .setAnnotatedWithAutoValueBuilder(false)
         .setJsFunctionInterface(false)
         .setJsType(false)
         .setLocal(false)
@@ -744,6 +748,8 @@ public abstract class TypeDeclaration
     public abstract Builder setAnnotatedWithFunctionalInterface(boolean isAnnotated);
 
     public abstract Builder setAnnotatedWithAutoValue(boolean annotatedWithAutoValue);
+
+    public abstract Builder setAnnotatedWithAutoValueBuilder(boolean annotatedWithAutoValueBuilder);
 
     public abstract Builder setJsFunctionInterface(boolean isJsFunctionInterface);
 
