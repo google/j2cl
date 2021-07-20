@@ -45,7 +45,6 @@
  (param $this (ref null $anonymousclass.SomeClass))
  (param $i i32)
  (result (ref null $anonymousclass.SomeClass))
- ;;@ anonymousclass/AnonymousClass.java:21:2
  (block
   ;; anonymousclass.SomeClass.$clinit();
   ;;@ anonymousclass/AnonymousClass.java:21:2
@@ -61,7 +60,6 @@
 
 ;;; void SomeClass.$clinit()
 (func $$clinit__void@anonymousclass.SomeClass
- ;;@ anonymousclass/AnonymousClass.java:18:15
  (block
   ;; if (anonymousclass.SomeClass.$initialized) return;
   ;;@ anonymousclass/AnonymousClass.java:18:15
@@ -99,7 +97,6 @@
 (func $m_<init>__@anonymousclass.AnonymousClass
  (param $this (ref null $anonymousclass.AnonymousClass))
  (result (ref null $anonymousclass.AnonymousClass))
- ;;@ anonymousclass/AnonymousClass.java:24:13
  (block
   ;; anonymousclass.AnonymousClass.$clinit();
   ;;@ anonymousclass/AnonymousClass.java:24:13
@@ -119,7 +116,6 @@
  (local $instance (ref null $anonymousclass.SomeClass))
  (local $this (ref null $anonymousclass.AnonymousClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.rtt)))
- ;;@ anonymousclass/AnonymousClass.java:25:14
  (block
   ;; SomeClass instance = new $1.<init>(AnonymousClass.this,1);
   ;;@ anonymousclass/AnonymousClass.java:26:4
@@ -130,7 +126,6 @@
 
 ;;; void AnonymousClass.$clinit()
 (func $$clinit__void@anonymousclass.AnonymousClass
- ;;@ anonymousclass/AnonymousClass.java:24:13
  (block
   ;; if (anonymousclass.AnonymousClass.$initialized) return;
   ;;@ anonymousclass/AnonymousClass.java:24:13
@@ -186,7 +181,6 @@
  (param $$outer_this (ref null $anonymousclass.AnonymousClass))
  (param $$_0 i32)
  (result (ref null $anonymousclass.AnonymousClass.1))
- ;;@ anonymousclass/AnonymousClass.java:27:25
  (block
   ;; anonymousclass.AnonymousClass.1.$clinit();
   ;;@ anonymousclass/AnonymousClass.java:27:25
@@ -212,7 +206,6 @@
  (result (ref null $java.lang.String))
  (local $this (ref null $anonymousclass.AnonymousClass.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.AnonymousClass.1.rtt)))
- ;;@ anonymousclass/AnonymousClass.java:31:24
  (block
   ;; return javaemul.internal.StringPool.$getString_|a|();
   ;;@ anonymousclass/AnonymousClass.java:32:12
@@ -224,7 +217,6 @@
 ;;; void <anonymous> extends SomeClass.$init()
 (func $$init__void_$p_anonymousclass_AnonymousClass_1@anonymousclass.AnonymousClass.1
  (param $this (ref null $anonymousclass.AnonymousClass.1))
- ;;@ anonymousclass/AnonymousClass.java:27:25
  (block
   ;; ($1.this.object = $1.this);
   ;;@ anonymousclass/AnonymousClass.java:28:10
@@ -237,7 +229,6 @@
 
 ;;; void <anonymous> extends SomeClass.$clinit()
 (func $$clinit__void@anonymousclass.AnonymousClass.1
- ;;@ anonymousclass/AnonymousClass.java:27:25
  (block
   ;; if (anonymousclass.AnonymousClass.1.$initialized) return;
   ;;@ anonymousclass/AnonymousClass.java:27:25
@@ -276,7 +267,6 @@
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void@anonymousclass.SomeInterface
- ;;@ anonymousclass/AnonymousClass.java:38:10
  (block
   ;; if (anonymousclass.SomeInterface.$initialized) return;
   ;;@ anonymousclass/AnonymousClass.java:38:10
@@ -290,7 +280,6 @@
   ;; (anonymousclass.SomeInterface.$initialized = true);
   ;;@ anonymousclass/AnonymousClass.java:38:10
   (global.set $f_$initialized__anonymousclass_SomeInterface (i32.const 1))
-  ;;@ anonymousclass/AnonymousClass.java:39:2
   (block
    ;; anonymousclass.SomeInterface.$clinit();
    ;;@ anonymousclass/AnonymousClass.java:39:2
@@ -332,7 +321,6 @@
  (param $this (ref null $anonymousclass.SomeInterface.1))
  (param $$_0 i32)
  (result (ref null $anonymousclass.SomeInterface.1))
- ;;@ anonymousclass/AnonymousClass.java:40:23
  (block
   ;; anonymousclass.SomeInterface.1.$clinit();
   ;;@ anonymousclass/AnonymousClass.java:40:23
@@ -352,7 +340,6 @@
  (result (ref null $java.lang.String))
  (local $this (ref null $anonymousclass.SomeInterface.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousclass.SomeInterface.1.rtt)))
- ;;@ anonymousclass/AnonymousClass.java:41:22
  (block
   ;; return javaemul.internal.StringPool.$getString_|a|();
   ;;@ anonymousclass/AnonymousClass.java:42:10
@@ -363,7 +350,6 @@
 
 ;;; void <anonymous> extends SomeClass.$clinit()
 (func $$clinit__void@anonymousclass.SomeInterface.1
- ;;@ anonymousclass/AnonymousClass.java:40:23
  (block
   ;; if (anonymousclass.SomeInterface.1.$initialized) return;
   ;;@ anonymousclass/AnonymousClass.java:40:23

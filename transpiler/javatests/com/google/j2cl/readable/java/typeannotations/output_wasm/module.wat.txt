@@ -49,7 +49,6 @@
  (param $this (ref null $java.lang.Object))
  (param $l (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
- ;;@ typeannotations/ParametricType.java:28:29
  (block
   ;; return null;
   ;;@ typeannotations/ParametricType.java:35:4
@@ -60,7 +59,6 @@
 
 ;;; void ParametricType.$clinit()
 (func $$clinit__void@typeannotations.ParametricType
- ;;@ typeannotations/ParametricType.java:23:10
  (block
   ;; if (typeannotations.ParametricType.$initialized) return;
   ;;@ typeannotations/ParametricType.java:23:10
@@ -106,7 +104,6 @@
 (func $m_<init>__@typeannotations.AbstractType
  (param $this (ref null $typeannotations.AbstractType))
  (result (ref null $typeannotations.AbstractType))
- ;;@ typeannotations/TypeAnnotations.java:22:15
  (block
   ;; typeannotations.AbstractType.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:22:15
@@ -127,7 +124,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.AbstractType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.AbstractType.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:22:15
  (block
   ;; return ParametricType.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:22:15
@@ -138,7 +134,6 @@
 
 ;;; void AbstractType.$clinit()
 (func $$clinit__void@typeannotations.AbstractType
- ;;@ typeannotations/TypeAnnotations.java:22:15
  (block
   ;; if (typeannotations.AbstractType.$initialized) return;
   ;;@ typeannotations/TypeAnnotations.java:22:15
@@ -179,7 +174,6 @@
 (func $m_<init>__@typeannotations.AbstractTypeNonNull
  (param $this (ref null $typeannotations.AbstractTypeNonNull))
  (result (ref null $typeannotations.AbstractTypeNonNull))
- ;;@ typeannotations/TypeAnnotations.java:26:15
  (block
   ;; typeannotations.AbstractTypeNonNull.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:26:15
@@ -200,7 +194,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.AbstractTypeNonNull))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.AbstractTypeNonNull.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:26:15
  (block
   ;; return ParametricType.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:26:15
@@ -211,7 +204,6 @@
 
 ;;; void AbstractTypeNonNull.$clinit()
 (func $$clinit__void@typeannotations.AbstractTypeNonNull
- ;;@ typeannotations/TypeAnnotations.java:26:15
  (block
   ;; if (typeannotations.AbstractTypeNonNull.$initialized) return;
   ;;@ typeannotations/TypeAnnotations.java:26:15
@@ -253,7 +245,6 @@
 (func $m_<init>__@typeannotations.Parent
  (param $this (ref null $typeannotations.Parent))
  (result (ref null $typeannotations.Parent))
- ;;@ typeannotations/TypeAnnotations.java:30:6
  (block
   ;; typeannotations.Parent.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:30:6
@@ -275,7 +266,6 @@
  (result (ref null $typeannotations.Parent))
  (local $this (ref null $typeannotations.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.Parent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:31:16
  (block
   ;; return c;
   ;;@ typeannotations/TypeAnnotations.java:32:4
@@ -292,7 +282,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.Parent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:35:33
  (block
   ;; return new ArrayList.<init>();
   ;;@ typeannotations/TypeAnnotations.java:36:4
@@ -303,7 +292,6 @@
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@typeannotations.Parent
- ;;@ typeannotations/TypeAnnotations.java:30:6
  (block
   ;; if (typeannotations.Parent.$initialized) return;
   ;;@ typeannotations/TypeAnnotations.java:30:6
@@ -358,7 +346,6 @@
 (func $m_<init>__@typeannotations.ChildWithNullableParent
  (param $this (ref null $typeannotations.ChildWithNullableParent))
  (result (ref null $typeannotations.ChildWithNullableParent))
- ;;@ typeannotations/TypeAnnotations.java:40:6
  (block
   ;; typeannotations.ChildWithNullableParent.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -380,7 +367,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.ChildWithNullableParent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:40:6
  (block
   ;; return Parent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -397,7 +383,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.ChildWithNullableParent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:40:6
  (block
   ;; return Parent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -413,7 +398,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNullableParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.ChildWithNullableParent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:40:6
  (block
   ;; return ParametricType.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -424,7 +408,6 @@
 
 ;;; void ChildWithNullableParent.$clinit()
 (func $$clinit__void@typeannotations.ChildWithNullableParent
- ;;@ typeannotations/TypeAnnotations.java:40:6
  (block
   ;; if (typeannotations.ChildWithNullableParent.$initialized) return;
   ;;@ typeannotations/TypeAnnotations.java:40:6
@@ -482,7 +465,6 @@
 (func $m_<init>__@typeannotations.ChildWithNonNullableParent
  (param $this (ref null $typeannotations.ChildWithNonNullableParent))
  (result (ref null $typeannotations.ChildWithNonNullableParent))
- ;;@ typeannotations/TypeAnnotations.java:45:6
  (block
   ;; typeannotations.ChildWithNonNullableParent.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -504,7 +486,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.ChildWithNonNullableParent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:45:6
  (block
   ;; return Parent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -521,7 +502,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.ChildWithNonNullableParent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:45:6
  (block
   ;; return Parent.this.m(arg0,((Parent) arg1));
   ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -537,7 +517,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $typeannotations.ChildWithNonNullableParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typeannotations.ChildWithNonNullableParent.rtt)))
- ;;@ typeannotations/TypeAnnotations.java:45:6
  (block
   ;; return ParametricType.this.m(arg0);
   ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -548,7 +527,6 @@
 
 ;;; void ChildWithNonNullableParent.$clinit()
 (func $$clinit__void@typeannotations.ChildWithNonNullableParent
- ;;@ typeannotations/TypeAnnotations.java:45:6
  (block
   ;; if (typeannotations.ChildWithNonNullableParent.$initialized) return;
   ;;@ typeannotations/TypeAnnotations.java:45:6
@@ -601,7 +579,6 @@
 (func $m_<init>__@typeannotations.TypeAnnotations
  (param $this (ref null $typeannotations.TypeAnnotations))
  (result (ref null $typeannotations.TypeAnnotations))
- ;;@ typeannotations/TypeAnnotations.java:50:13
  (block
   ;; typeannotations.TypeAnnotations.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:50:13
@@ -618,7 +595,6 @@
 ;;; void TypeAnnotations.main()
 (func $m_main__void@typeannotations.TypeAnnotations
  (local $list (ref null $java.lang.Object))
- ;;@ typeannotations/TypeAnnotations.java:51:21
  (block
   ;; typeannotations.TypeAnnotations.$clinit();
   ;;@ typeannotations/TypeAnnotations.java:51:21
@@ -631,7 +607,6 @@
 
 ;;; void TypeAnnotations.$clinit()
 (func $$clinit__void@typeannotations.TypeAnnotations
- ;;@ typeannotations/TypeAnnotations.java:50:13
  (block
   ;; if (typeannotations.TypeAnnotations.$initialized) return;
   ;;@ typeannotations/TypeAnnotations.java:50:13

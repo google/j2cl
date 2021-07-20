@@ -34,7 +34,6 @@
 (func $m_<init>__@circularimportuse.Left
  (param $this (ref null $circularimportuse.Left))
  (result (ref null $circularimportuse.Left))
- ;;@ circularimportuse/Left.java:18:13
  (block
   ;; circularimportuse.Left.$clinit();
   ;;@ circularimportuse/Left.java:18:13
@@ -54,7 +53,6 @@
  (result (ref null $circularimportuse.Right))
  (local $this (ref null $circularimportuse.Left))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Left.rtt)))
- ;;@ circularimportuse/Left.java:19:8
  (block
   ;; return new Right.<init>();
   ;;@ circularimportuse/Left.java:20:4
@@ -65,7 +63,6 @@
 
 ;;; void Left.$clinit()
 (func $$clinit__void@circularimportuse.Left
- ;;@ circularimportuse/Left.java:18:13
  (block
   ;; if (circularimportuse.Left.$initialized) return;
   ;;@ circularimportuse/Left.java:18:13
@@ -115,7 +112,6 @@
 (func $m_<init>__@circularimportuse.Main
  (param $this (ref null $circularimportuse.Main))
  (result (ref null $circularimportuse.Main))
- ;;@ circularimportuse/Main.java:18:13
  (block
   ;; circularimportuse.Main.$clinit();
   ;;@ circularimportuse/Main.java:18:13
@@ -134,7 +130,6 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (local $left (ref null $circularimportuse.Left))
  (local $right (ref null $circularimportuse.Right))
- ;;@ circularimportuse/Main.java:20:21
  (block
   ;; circularimportuse.Main.$clinit();
   ;;@ circularimportuse/Main.java:20:21
@@ -150,7 +145,6 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void@circularimportuse.Main
- ;;@ circularimportuse/Main.java:18:13
  (block
   ;; if (circularimportuse.Main.$initialized) return;
   ;;@ circularimportuse/Main.java:18:13
@@ -201,7 +195,6 @@
 (func $m_<init>__@circularimportuse.Right
  (param $this (ref null $circularimportuse.Right))
  (result (ref null $circularimportuse.Right))
- ;;@ circularimportuse/Right.java:18:13
  (block
   ;; circularimportuse.Right.$clinit();
   ;;@ circularimportuse/Right.java:18:13
@@ -221,7 +214,6 @@
  (result (ref null $circularimportuse.Left))
  (local $this (ref null $circularimportuse.Right))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Right.rtt)))
- ;;@ circularimportuse/Right.java:19:7
  (block
   ;; return new Left.<init>();
   ;;@ circularimportuse/Right.java:20:4
@@ -232,7 +224,6 @@
 
 ;;; void Right.$clinit()
 (func $$clinit__void@circularimportuse.Right
- ;;@ circularimportuse/Right.java:18:13
  (block
   ;; if (circularimportuse.Right.$initialized) return;
   ;;@ circularimportuse/Right.java:18:13

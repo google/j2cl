@@ -34,7 +34,6 @@
 (func $m_<init>__@nestedinstanceinnerclass.OuterClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
  (block
   ;; nestedinstanceinnerclass.OuterClass.$clinit();
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
@@ -53,7 +52,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestedinstanceinnerclass.OuterClass.rtt)))
- ;;@ nestedinstanceinnerclass/OuterClass.java:26:14
  (block
   ;; new InnerInnerClass.<init>(new InnerClass.<init>(new OuterClass.<init>()));
   ;;@ nestedinstanceinnerclass/OuterClass.java:27:4
@@ -64,7 +62,6 @@
 
 ;;; void OuterClass.$clinit()
 (func $$clinit__void@nestedinstanceinnerclass.OuterClass
- ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
  (block
   ;; if (nestedinstanceinnerclass.OuterClass.$initialized) return;
   ;;@ nestedinstanceinnerclass/OuterClass.java:18:13
@@ -116,7 +113,6 @@
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
  (block
   ;; nestedinstanceinnerclass.OuterClass.InnerClass.$clinit();
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
@@ -135,7 +131,6 @@
 
 ;;; void InnerClass.$clinit()
 (func $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass
- ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
  (block
   ;; if (nestedinstanceinnerclass.OuterClass.InnerClass.$initialized) return;
   ;;@ nestedinstanceinnerclass/OuterClass.java:19:15
@@ -189,7 +184,6 @@
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
  (param $$outer_this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
  (result (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
  (block
   ;; nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$clinit();
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
@@ -212,7 +206,6 @@
 ;;; void InnerInnerClass.$init()
 (func $$init__void_$p_nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
  (param $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))
- ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
  (block
   ;; (InnerInnerClass.this.x = InnerInnerClass.this.this);
   ;;@ nestedinstanceinnerclass/OuterClass.java:21:6
@@ -225,7 +218,6 @@
 
 ;;; void InnerInnerClass.$clinit()
 (func $$clinit__void@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
- ;;@ nestedinstanceinnerclass/OuterClass.java:20:17
  (block
   ;; if (nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.$initialized) return;
   ;;@ nestedinstanceinnerclass/OuterClass.java:20:17

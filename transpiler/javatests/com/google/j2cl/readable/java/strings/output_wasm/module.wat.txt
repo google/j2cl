@@ -31,7 +31,6 @@
 (func $m_<init>__@strings.Strings
  (param $this (ref null $strings.Strings))
  (result (ref null $strings.Strings))
- ;;@ strings/Strings.java:18:13
  (block
   ;; strings.Strings.$clinit();
   ;;@ strings/Strings.java:18:13
@@ -78,7 +77,6 @@
  (local $$stringBuilder_15 (ref null $java.lang.StringBuilder))
  (local $this (ref null $strings.Strings))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $strings.Strings.rtt)))
- ;;@ strings/Strings.java:29:14
  (block
   ;; String s1 = null;
   ;;@ strings/Strings.java:31:4
@@ -206,7 +204,6 @@
    (drop (call_ref (local.get $$stringBuilder_12)(i32.const 1)(struct.get $java.lang.StringBuilder.vtable $m_append__short__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder_12)))))
    (call_ref (local.get $$stringBuilder_12)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_12))))
   ))
-  ;;@ strings/Strings.java:56:4
   (block
    ;; StringHolder $qualifier = new StringHolder.<init>();
    ;;@ strings/Strings.java:56:4
@@ -220,7 +217,6 @@
     (call_ref (local.get $$stringBuilder_13)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_13))))
    ))
   )
-  ;;@ strings/Strings.java:57:4
   (block
    ;; StringHolder $qualifier = new StringHolder.<init>();
    ;;@ strings/Strings.java:57:4
@@ -234,7 +230,6 @@
     (call_ref (local.get $$stringBuilder_14)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder_14))))
    ))
   )
-  ;;@ strings/Strings.java:58:4
   (block
    ;; StringHolder $qualifier = new StringHolder.<init>();
    ;;@ strings/Strings.java:58:4
@@ -255,7 +250,6 @@
 ;;; void Strings.$init()
 (func $$init__void_$p_strings_Strings@strings.Strings
  (param $this (ref null $strings.Strings))
- ;;@ strings/Strings.java:18:13
  (block
   ;; (Strings.this.someString = javaemul.internal.StringPool.$getString_|This_is_a_st...|());
   ;;@ strings/Strings.java:19:2
@@ -271,7 +265,6 @@
 
 ;;; void Strings.$clinit()
 (func $$clinit__void@strings.Strings
- ;;@ strings/Strings.java:18:13
  (block
   ;; if (strings.Strings.$initialized) return;
   ;;@ strings/Strings.java:18:13
@@ -322,7 +315,6 @@
 (func $m_<init>__@strings.Strings.StringHolder
  (param $this (ref null $strings.Strings.StringHolder))
  (result (ref null $strings.Strings.StringHolder))
- ;;@ strings/Strings.java:25:23
  (block
   ;; strings.Strings.StringHolder.$clinit();
   ;;@ strings/Strings.java:25:23
@@ -342,7 +334,6 @@
 ;;; void StringHolder.$init()
 (func $$init__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder
  (param $this (ref null $strings.Strings.StringHolder))
- ;;@ strings/Strings.java:25:23
  (block
   ;; (StringHolder.this.s = javaemul.internal.StringPool.$getString_|A|());
   ;;@ strings/Strings.java:26:4
@@ -352,7 +343,6 @@
 
 ;;; void StringHolder.$clinit()
 (func $$clinit__void@strings.Strings.StringHolder
- ;;@ strings/Strings.java:25:23
  (block
   ;; if (strings.Strings.StringHolder.$initialized) return;
   ;;@ strings/Strings.java:25:23

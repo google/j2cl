@@ -23,9 +23,7 @@
  (param $this (ref null $java.lang.Object))
  (param $value (ref null $java.lang.String))
  (local $$qualifier (ref null $java.io.PrintStream))
- ;;@ genericanddefaultmethods/ConcreteClass.java:19:15
  (block
-  ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
   (block
    ;; PrintStream $qualifier = (java.lang.System.$clinit(),java.lang.System.out);
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
@@ -43,7 +41,6 @@
 
 ;;; void InterfaceWithDefault.$clinit()
 (func $$clinit__void@genericanddefaultmethods.InterfaceWithDefault
- ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
  (block
   ;; if (genericanddefaultmethods.InterfaceWithDefault.$initialized) return;
   ;;@ genericanddefaultmethods/ConcreteClass.java:18:10
@@ -89,7 +86,6 @@
 (func $m_<init>__@genericanddefaultmethods.GenericClass
  (param $this (ref null $genericanddefaultmethods.GenericClass))
  (result (ref null $genericanddefaultmethods.GenericClass))
- ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
   ;; genericanddefaultmethods.GenericClass.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
@@ -110,9 +106,7 @@
  (local $$qualifier (ref null $java.io.PrintStream))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericanddefaultmethods.GenericClass.rtt)))
- ;;@ genericanddefaultmethods/ConcreteClass.java:25:14
  (block
-  ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
   (block
    ;; PrintStream $qualifier = (java.lang.System.$clinit(),java.lang.System.out);
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
@@ -130,7 +124,6 @@
 
 ;;; void GenericClass.$clinit()
 (func $$clinit__void@genericanddefaultmethods.GenericClass
- ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
   ;; if (genericanddefaultmethods.GenericClass.$initialized) return;
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
@@ -182,7 +175,6 @@
 (func $m_<init>__@genericanddefaultmethods.ConcreteClass
  (param $this (ref null $genericanddefaultmethods.ConcreteClass))
  (result (ref null $genericanddefaultmethods.ConcreteClass))
- ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
   ;; genericanddefaultmethods.ConcreteClass.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -202,7 +194,6 @@
  (param $arg0 (ref null $java.lang.String))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericanddefaultmethods.ConcreteClass.rtt)))
- ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
   ;; super.foo(arg0);
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -217,7 +208,6 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericanddefaultmethods.ConcreteClass.rtt)))
- ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
   ;; ConcreteClass.this.foo(((String) arg0));
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -228,7 +218,6 @@
 
 ;;; void ConcreteClass.$clinit()
 (func $$clinit__void@genericanddefaultmethods.ConcreteClass
- ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
   ;; if (genericanddefaultmethods.ConcreteClass.$initialized) return;
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13

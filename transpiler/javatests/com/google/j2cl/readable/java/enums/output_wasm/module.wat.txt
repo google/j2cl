@@ -72,7 +72,6 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $enums.Enum1))
- ;;@ enums/Enum1.java:20:12
  (block
   ;; (Enum.this.name = $name);
   ;;@ enums/Enum1.java:20:12
@@ -93,7 +92,6 @@
 (func $m_valueOf__java_lang_String__enums_Enum1@enums.Enum1
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum1))
- ;;@ enums/Enum1.java:20:12
  (block
   ;; enums.Enum1.$clinit();
   ;;@ enums/Enum1.java:20:12
@@ -102,7 +100,6 @@
   ;;@ enums/Enum1.java:20:12
   (if (ref.is_null (global.get $f_namesToValuesMap__enums_Enum1_))
    (then
-    ;;@ enums/Enum1.java:20:12
     (block
      ;; (enums.Enum1.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(enums.Enum1.values()));
      ;;@ enums/Enum1.java:20:12
@@ -120,7 +117,6 @@
 (func $m_values__arrayOf_enums_Enum1@enums.Enum1
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:20:12
  (block
   ;; enums.Enum1.$clinit();
   ;;@ enums/Enum1.java:20:12
@@ -144,7 +140,6 @@
 
 ;;; void Enum1.$clinit()
 (func $$clinit__void@enums.Enum1
- ;;@ enums/Enum1.java:20:12
  (block
   ;; if (enums.Enum1.$initialized) return;
   ;;@ enums/Enum1.java:20:12
@@ -161,7 +156,6 @@
   ;; java.lang.Enum.$clinit();
   ;;@ enums/Enum1.java:20:12
   (call $$clinit__void@java.lang.Enum )
-  ;;@ enums/Enum1.java:21:2
   (block
    ;; enums.Enum1.$clinit();
    ;;@ enums/Enum1.java:21:2
@@ -170,7 +164,6 @@
    ;;@ enums/Enum1.java:21:2
    (global.set $f_V1__enums_Enum1 (call $m_<init>__java_lang_String__int@enums.Enum1 (struct.new_with_rtt $enums.Enum1 (ref.as_non_null (global.get $enums.Enum1.vtable)) (ref.as_non_null (global.get $enums.Enum1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $enums.Enum1.rtt))(call $$getString_|V1|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_V1__enums_Enum1)))
   )
-  ;;@ enums/Enum1.java:22:2
   (block
    ;; enums.Enum1.$clinit();
    ;;@ enums/Enum1.java:22:2
@@ -226,7 +219,6 @@
  (param $$ordinal i32)
  (param $foo i32)
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:33:2
  (block
   ;; enums.Enum2.$clinit();
   ;;@ enums/Enum1.java:33:2
@@ -259,7 +251,6 @@
  (param $$ordinal i32)
  (param $foo (ref null $java.lang.Enum))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:37:2
  (block
   ;; (Enum.this.name = $name);
   ;;@ enums/Enum1.java:37:2
@@ -283,7 +274,6 @@
  (param $$ordinal i32)
  (param $somePars (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:41:2
  (block
   ;; (Enum.this.name = $name);
   ;;@ enums/Enum1.java:41:2
@@ -304,7 +294,6 @@
 (func $m_f__java_lang_Object__enums_Enum2@enums.Enum2
  (param $o (ref null $java.lang.Object))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:45:15
  (block
   ;; enums.Enum2.$clinit();
   ;;@ enums/Enum1.java:45:15
@@ -319,7 +308,6 @@
 (func $m_valueOf__java_lang_String__enums_Enum2@enums.Enum2
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum2))
- ;;@ enums/Enum1.java:25:5
  (block
   ;; enums.Enum2.$clinit();
   ;;@ enums/Enum1.java:25:5
@@ -328,7 +316,6 @@
   ;;@ enums/Enum1.java:25:5
   (if (ref.is_null (global.get $f_namesToValuesMap__enums_Enum2_))
    (then
-    ;;@ enums/Enum1.java:25:5
     (block
      ;; (enums.Enum2.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(enums.Enum2.values()));
      ;;@ enums/Enum1.java:25:5
@@ -346,7 +333,6 @@
 (func $m_values__arrayOf_enums_Enum2@enums.Enum2
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:25:5
  (block
   ;; enums.Enum2.$clinit();
   ;;@ enums/Enum1.java:25:5
@@ -380,7 +366,6 @@
 (func $$init__void_$p_enums_Enum2@enums.Enum2
  (param $this (ref null $enums.Enum2))
  (local $$qualifier (ref null $enums.Enum1))
- ;;@ enums/Enum1.java:25:5
  (block
   ;; (Enum2.this.foo = (Enum1 $qualifier = (enums.Enum1.$clinit(),enums.Enum1.V1),$qualifier.ordinal()));
   ;;@ enums/Enum1.java:31:2
@@ -397,7 +382,6 @@
 ;;; void Enum2.$clinit()
 (func $$clinit__void@enums.Enum2
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:25:5
  (block
   ;; if (enums.Enum2.$initialized) return;
   ;;@ enums/Enum1.java:25:5
@@ -414,7 +398,6 @@
   ;; java.lang.Enum.$clinit();
   ;;@ enums/Enum1.java:25:5
   (call $$clinit__void@java.lang.Enum )
-  ;;@ enums/Enum1.java:26:2
   (block
    ;; enums.Enum2.$clinit();
    ;;@ enums/Enum1.java:26:2
@@ -423,7 +406,6 @@
    ;;@ enums/Enum1.java:26:2
    (global.set $f_VALUE1__enums_Enum2 (call $m_<init>__java_lang_String__int__int@enums.Enum2 (struct.new_with_rtt $enums.Enum2 (ref.as_non_null (global.get $enums.Enum2.vtable)) (ref.as_non_null (global.get $enums.Enum2.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.rtt))(call $$getString_|VALUE1|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_VALUE1__enums_Enum2)(i32.const 2)))
   )
-  ;;@ enums/Enum1.java:27:2
   (block
    ;; enums.Enum2.$clinit();
    ;;@ enums/Enum1.java:27:2
@@ -435,7 +417,6 @@
     (global.get $f_V1__enums_Enum1)
    )))
   )
-  ;;@ enums/Enum1.java:28:2
   (block
    ;; enums.Enum2.$clinit();
    ;;@ enums/Enum1.java:28:2
@@ -447,7 +428,6 @@
     (local.get $$array_literal)
    )))
   )
-  ;;@ enums/Enum1.java:29:2
   (block
    ;; enums.Enum2.$clinit();
    ;;@ enums/Enum1.java:29:2
@@ -456,7 +436,6 @@
    ;;@ enums/Enum1.java:29:2
    (global.set $f_VALUE4__enums_Enum2 (call $m_<init>__java_lang_String__int__int@enums.Enum2.1 (struct.new_with_rtt $enums.Enum2.1 (ref.as_non_null (global.get $enums.Enum2.1.vtable)) (ref.as_non_null (global.get $enums.Enum2.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0) (global.get $enums.Enum2.1.rtt))(call $$getString_|VALUE4|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_VALUE4__enums_Enum2)(i32.const 5)))
   )
-  ;;@ enums/Enum1.java:49:2
   (block
    ;; enums.Enum2.$clinit();
    ;;@ enums/Enum1.java:49:2
@@ -512,7 +491,6 @@
  (param $$ordinal i32)
  (param $$_0 i32)
  (result (ref null $enums.Enum2.1))
- ;;@ enums/Enum1.java:29:12
  (block
   ;; enums.Enum2.1.$clinit();
   ;;@ enums/Enum1.java:29:12
@@ -528,7 +506,6 @@
 
 ;;; void <anonymous> extends Enum2.$clinit()
 (func $$clinit__void@enums.Enum2.1
- ;;@ enums/Enum1.java:29:12
  (block
   ;; if (enums.Enum2.1.$initialized) return;
   ;;@ enums/Enum1.java:29:12
@@ -588,7 +565,6 @@
  (param $$ordinal i32)
  (param $function (ref null $java.lang.Object))
  (result (ref null $enums.Enum3))
- ;;@ enums/Enum1.java:55:2
  (block
   ;; (Enum.this.name = $name);
   ;;@ enums/Enum1.java:55:2
@@ -609,7 +585,6 @@
 (func $m_valueOf__java_lang_String__enums_Enum3@enums.Enum3
  (param $name (ref null $java.lang.String))
  (result (ref null $enums.Enum3))
- ;;@ enums/Enum1.java:52:5
  (block
   ;; enums.Enum3.$clinit();
   ;;@ enums/Enum1.java:52:5
@@ -618,7 +593,6 @@
   ;;@ enums/Enum1.java:52:5
   (if (ref.is_null (global.get $f_namesToValuesMap__enums_Enum3_))
    (then
-    ;;@ enums/Enum1.java:52:5
     (block
      ;; (enums.Enum3.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(enums.Enum3.values()));
      ;;@ enums/Enum1.java:52:5
@@ -636,7 +610,6 @@
 (func $m_values__arrayOf_enums_Enum3@enums.Enum3
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ enums/Enum1.java:52:5
  (block
   ;; enums.Enum3.$clinit();
   ;;@ enums/Enum1.java:52:5
@@ -656,7 +629,6 @@
 
 ;;; void Enum3.$clinit()
 (func $$clinit__void@enums.Enum3
- ;;@ enums/Enum1.java:52:5
  (block
   ;; if (enums.Enum3.$initialized) return;
   ;;@ enums/Enum1.java:52:5
@@ -673,7 +645,6 @@
   ;; java.lang.Enum.$clinit();
   ;;@ enums/Enum1.java:52:5
   (call $$clinit__void@java.lang.Enum )
-  ;;@ enums/Enum1.java:53:2
   (block
    ;; enums.Enum3.$clinit();
    ;;@ enums/Enum1.java:53:2
@@ -721,7 +692,6 @@
 (func $m_<init>__@enums.Enum3.$LambdaImplementor$1
  (param $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (result (ref null $enums.Enum3.$LambdaImplementor$1))
- ;;@ enums/Enum1.java:53:9
  (block
   ;; enums.Enum3.$LambdaImplementor$1.$clinit();
   ;;@ enums/Enum1.java:53:9
@@ -743,7 +713,6 @@
  (local $v_1 (ref null $java.lang.Integer))
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))
- ;;@ enums/Enum1.java:53:9
  (block
   ;; Integer v = ((Integer) ((T) v));
   ;;@ enums/Enum1.java:53:9
@@ -762,7 +731,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))
- ;;@ enums/Enum1.java:53:9
  (block
   ;; return Function.this.andThen(arg0);
   ;;@ enums/Enum1.java:53:9
@@ -778,7 +746,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $enums.Enum3.$LambdaImplementor$1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $enums.Enum3.$LambdaImplementor$1.rtt)))
- ;;@ enums/Enum1.java:53:9
  (block
   ;; return Function.this.compose(arg0);
   ;;@ enums/Enum1.java:53:9
@@ -789,7 +756,6 @@
 
 ;;; void $LambdaImplementor$1.$clinit()
 (func $$clinit__void@enums.Enum3.$LambdaImplementor$1
- ;;@ enums/Enum1.java:53:9
  (block
   ;; if (enums.Enum3.$LambdaImplementor$1.$initialized) return;
   ;;@ enums/Enum1.java:53:9

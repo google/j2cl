@@ -25,7 +25,6 @@
  (param $this (ref null $genericequals.GenericEquals))
  (param $value (ref null $java.lang.Object))
  (result (ref null $genericequals.GenericEquals))
- ;;@ genericequals/GenericEquals.java:23:9
  (block
   ;; genericequals.GenericEquals.$clinit();
   ;;@ genericequals/GenericEquals.java:23:9
@@ -52,7 +51,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericequals.GenericEquals.rtt)))
- ;;@ genericequals/GenericEquals.java:28:16
  (block
   ;; return other.value2.value;
   ;;@ genericequals/GenericEquals.java:29:4
@@ -69,13 +67,11 @@
  (local $other (ref null $genericequals.GenericEquals))
  (local $this (ref null $genericequals.GenericEquals))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericequals.GenericEquals.rtt)))
- ;;@ genericequals/GenericEquals.java:33:17
  (block
   ;; if ((obj == GenericEquals.this)) {
   ;;@ genericequals/GenericEquals.java:34:4
   (if (ref.eq (local.get $obj) (local.get $this))
    (then
-    ;;@ genericequals/GenericEquals.java:34:21
     (block
      ;; return true;
      ;;@ genericequals/GenericEquals.java:35:6
@@ -87,7 +83,6 @@
   ;;@ genericequals/GenericEquals.java:37:4
   (if (i32.eqz (ref.test (local.get $obj) (global.get $genericequals.GenericEquals.rtt)))
    (then
-    ;;@ genericequals/GenericEquals.java:37:41
     (block
      ;; return false;
      ;;@ genericequals/GenericEquals.java:38:6
@@ -107,7 +102,6 @@
 
 ;;; void GenericEquals.$clinit()
 (func $$clinit__void@genericequals.GenericEquals
- ;;@ genericequals/GenericEquals.java:18:13
  (block
   ;; if (genericequals.GenericEquals.$initialized) return;
   ;;@ genericequals/GenericEquals.java:18:13

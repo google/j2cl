@@ -40,7 +40,6 @@
 (func $m_<init>__@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
  (block
   ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
@@ -68,7 +67,6 @@
  (local $d f64)
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:23:14
  (block
   ;; byte b = 1;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:24:4
@@ -134,7 +132,6 @@
  (local $q i32)
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:38:14
  (block
   ;; int a = 10,int b = (int $value = a,(a = (a + 1)),$value),int c = (int $value = a,(a = (a - 1)),$value),int d = ((a = (a + 1)),a),int e = ((a = (a - 1)),a),int f = (0 - a),int g = a,int h = (-1 ^ a),int i = (((1 + 1) + 2) - 5),int j = ((1 + 2) * (3 + 4)),int p = ((javaemul.internal.Primitives.safeDivision(1,2) * 3) % 4);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:39:4
@@ -234,7 +231,6 @@
  (local $$value_2 i32)
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:73:14
  (block
   ;; int[] ints = null;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:74:4
@@ -281,7 +277,6 @@
   ;; int i = 0;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:88:4
   (local.set $i (i32.const 0))
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:89:4
   (block
    ;; int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value);
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:89:4
@@ -295,7 +290,6 @@
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:89:4
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array)) (local.get $$index) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array)) (local.get $$index)) (i32.const 1)))
   )
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:90:4
   (block
    ;; int[] $array = ints,int $index = ((i = (i + 1)),i);
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:90:4
@@ -308,7 +302,6 @@
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:90:4
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_1)) (local.get $$index_1) (i32.add (array.get $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_1)) (local.get $$index_1)) (i32.const 1)))
   )
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:91:4
   (block
    ;; int[] $array = ints,int $index = (int $value = i,(i = (i + 1)),$value);
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:91:4
@@ -334,7 +327,6 @@
   ;; (longs.elements[0] = (longs.elements[0] - 1));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:96:4
   (array.set $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0) (i64.sub (array.get $long.array (struct.get $javaemul.internal.WasmArray.OfLong $f_elements__javaemul_internal_WasmArray_OfLong_(local.get $longs)) (i32.const 0)) (i64.const 1)))
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:97:4
   (block
    ;; long[] $array = arithmeticexpressions.ArithmeticExpressions.getLongArray(),int $index = 0;
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:97:4
@@ -380,7 +372,6 @@
 ;;; long[] ArithmeticExpressions.getLongArray()
 (func $m_getLongArray__arrayOf_long@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $javaemul.internal.WasmArray.OfLong))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:109:24
  (block
   ;; return null;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:110:4
@@ -410,7 +401,6 @@
  (local $$qualifier_3 (ref null $java.lang.Integer))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:113:14
  (block
   ;; Integer c = java.lang.Integer.valueOf(1000);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:114:4
@@ -477,7 +467,6 @@
   ;; (ch = java.lang.Character.valueOf(javaemul.internal.Primitives.narrowIntToChar((ch.charValue() + 1))));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:137:4
   (local.set $ch (call $m_valueOf__char__java_lang_Character@java.lang.Character (call $m_narrowIntToChar__int__int@javaemul.internal.Primitives (i32.add (call_ref (local.get $ch)(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $ch)))) (i32.const 1)))))
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:140:4
   (block
    ;; Integer $qualifier = ((f = java.lang.Integer.valueOf((f.intValue() + 1))),f);
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:140:4
@@ -489,7 +478,6 @@
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:140:4
    (drop (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier)))))
   )
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:141:4
   (block
    ;; Integer $qualifier = (Integer $value = f,(f = java.lang.Integer.valueOf((f.intValue() - 1))),$value);
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:141:4
@@ -524,7 +512,6 @@
 ;;; Integer ArithmeticExpressions.getInteger()
 (func $m_getInteger__java_lang_Integer@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $java.lang.Integer))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:152:25
  (block
   ;; return null;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:153:4
@@ -535,9 +522,7 @@
 ;;; void ArithmeticExpressions.testSideEffect()
 (func $m_testSideEffect__void@arithmeticexpressions.ArithmeticExpressions
  (local $$qualifier (ref null $arithmeticexpressions.ArithmeticExpressions))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:158:22
  (block
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:159:4
   (block
    ;; ArithmeticExpressions $qualifier = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect();
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:159:4
@@ -552,7 +537,6 @@
 ;;; ArithmeticExpressions ArithmeticExpressions.getWithSideEffect()
 (func $m_getWithSideEffect__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:162:39
  (block
   ;; return null;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:163:4
@@ -570,7 +554,6 @@
  (local $$qualifier (ref null $java.lang.Integer))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:169:14
  (block
   ;; Integer boxedInteger = java.lang.Integer.valueOf(3);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:170:4
@@ -631,7 +614,6 @@
 (func $m_incrementCounter__long@arithmeticexpressions.ArithmeticExpressions
  (result i64)
  (local $$value i64)
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:186:22
  (block
   ;; return (long $value = (arithmeticexpressions.ArithmeticExpressions.counter + 1),(arithmeticexpressions.ArithmeticExpressions.counter = $value),$value);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:187:4
@@ -647,7 +629,6 @@
 (func $$init__void_$p_arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local $$value i64)
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
  (block
   ;; (ArithmeticExpressions.this.bar = (long $value = (arithmeticexpressions.ArithmeticExpressions.$clinit(),arithmeticexpressions.ArithmeticExpressions.foo),arithmeticexpressions.ArithmeticExpressions.$clinit(),(arithmeticexpressions.ArithmeticExpressions.foo = ((arithmeticexpressions.ArithmeticExpressions.$clinit(),arithmeticexpressions.ArithmeticExpressions.foo) + 1)),$value));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:71:2
@@ -669,7 +650,6 @@
 ;;; void ArithmeticExpressions.$clinit()
 (func $$clinit__void@arithmeticexpressions.ArithmeticExpressions
  (local $$value i64)
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
  (block
   ;; if (arithmeticexpressions.ArithmeticExpressions.$initialized) return;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
@@ -686,7 +666,6 @@
   ;; java.lang.Object.$clinit();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
   (call $$clinit__void@java.lang.Object )
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:69:2
   (block
    ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:69:2
@@ -695,7 +674,6 @@
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:69:2
    (global.set $f_one__arithmeticexpressions_ArithmeticExpressions (i64.const 1))
   )
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:70:2
   (block
    ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
    ;;@ arithmeticexpressions/ArithmeticExpressions.java:70:2
@@ -754,7 +732,6 @@
  (param $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (param $$outer_this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:143:10
  (block
   ;; arithmeticexpressions.ArithmeticExpressions.1Ref.$clinit();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:143:10
@@ -773,7 +750,6 @@
 
 ;;; void Ref.$clinit()
 (func $$clinit__void@arithmeticexpressions.ArithmeticExpressions.1Ref
- ;;@ arithmeticexpressions/ArithmeticExpressions.java:143:10
  (block
   ;; if (arithmeticexpressions.ArithmeticExpressions.1Ref.$initialized) return;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:143:10

@@ -40,7 +40,6 @@
 (func $m_<init>__@foreachstatement.ForEachStatement
  (param $this (ref null $foreachstatement.ForEachStatement))
  (result (ref null $foreachstatement.ForEachStatement))
- ;;@ foreachstatement/ForEachStatement.java:20:13
  (block
   ;; foreachstatement.ForEachStatement.$clinit();
   ;;@ foreachstatement/ForEachStatement.java:20:13
@@ -65,7 +64,6 @@
  (local $t_1 (ref null $java.lang.Throwable))
  (local $this (ref null $foreachstatement.ForEachStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:21:14
  (block
   ;; LOOP: for (Iterator<Throwable> $iterator = iterable.iterator();$iterator.hasNext();) {
   ;;@ foreachstatement/ForEachStatement.java:22:4
@@ -78,7 +76,6 @@
       ;; Throwable t = ((Throwable) $iterator.next());
       ;;@ foreachstatement/ForEachStatement.java:22:4
       (local.set $t (ref.cast (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) )) (global.get $java.lang.Throwable.rtt)))
-      ;;@ foreachstatement/ForEachStatement.java:22:33
       (block
        ;; t.toString();
        ;;@ foreachstatement/ForEachStatement.java:23:6
@@ -102,7 +99,6 @@
       ;; Throwable t = ((Throwable) $array.elements[$index]);
       ;;@ foreachstatement/ForEachStatement.java:26:4
       (local.set $t_1 (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array)) (local.get $$index)) (global.get $java.lang.Throwable.rtt)))
-      ;;@ foreachstatement/ForEachStatement.java:26:42
       (block
        ;; t.toString();
        ;;@ foreachstatement/ForEachStatement.java:27:6
@@ -126,11 +122,9 @@
  (local $$iterator (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
- ;;@ foreachstatement/ForEachStatement.java:43:15
  (block
   ;; try {
   ;;@ foreachstatement/ForEachStatement.java:44:4
-  ;;@ foreachstatement/ForEachStatement.java:44:8
   (block
    ;; throw new Exception.<init>();
    ;;@ foreachstatement/ForEachStatement.java:45:6
@@ -150,7 +144,6 @@
  (local $$iterator_1 (ref null $java.lang.Object))
  (local $s_1 i32)
  (local $$qualifier_1 (ref null $java.lang.Integer))
- ;;@ foreachstatement/ForEachStatement.java:58:66
  (block
   ;; U iterable = null;
   ;;@ foreachstatement/ForEachStatement.java:59:4
@@ -169,7 +162,6 @@
       ;; String s = ((String) $iterator.next());
       ;;@ foreachstatement/ForEachStatement.java:60:4
       (local.set $s (ref.cast (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) )) (global.get $java.lang.String.rtt)))
-      ;;@ foreachstatement/ForEachStatement.java:60:30
       (block
       )
      )
@@ -195,7 +187,6 @@
        (local.set $$qualifier_1 (ref.cast (call_ref (local.get $$iterator_1)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator_1)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) )) (global.get $java.lang.Integer.rtt)))
        (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
       ))
-      ;;@ foreachstatement/ForEachStatement.java:63:34
       (block
       )
      )
@@ -209,7 +200,6 @@
 
 ;;; void ForEachStatement.$clinit()
 (func $$clinit__void@foreachstatement.ForEachStatement
- ;;@ foreachstatement/ForEachStatement.java:20:13
  (block
   ;; if (foreachstatement.ForEachStatement.$initialized) return;
   ;;@ foreachstatement/ForEachStatement.java:20:13
@@ -282,7 +272,6 @@
 (func $m_<init>__@foreachstatement.ForEachStatement.Exception1
  (param $this (ref null $foreachstatement.ForEachStatement.Exception1))
  (result (ref null $foreachstatement.ForEachStatement.Exception1))
- ;;@ foreachstatement/ForEachStatement.java:31:15
  (block
   ;; foreachstatement.ForEachStatement.Exception1.$clinit();
   ;;@ foreachstatement/ForEachStatement.java:31:15
@@ -302,7 +291,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.Exception1.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:32:28
  (block
   ;; return null;
   ;;@ foreachstatement/ForEachStatement.java:33:6
@@ -317,7 +305,6 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.Exception1.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:31:15
  (block
   ;; Iterable.this.forEach(arg0);
   ;;@ foreachstatement/ForEachStatement.java:31:15
@@ -332,7 +319,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.Exception1.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:31:15
  (block
   ;; return Iterable.this.spliterator();
   ;;@ foreachstatement/ForEachStatement.java:31:15
@@ -343,7 +329,6 @@
 
 ;;; void Exception1.$clinit()
 (func $$clinit__void@foreachstatement.ForEachStatement.Exception1
- ;;@ foreachstatement/ForEachStatement.java:31:15
  (block
   ;; if (foreachstatement.ForEachStatement.Exception1.$initialized) return;
   ;;@ foreachstatement/ForEachStatement.java:31:15
@@ -419,7 +404,6 @@
 (func $m_<init>__@foreachstatement.ForEachStatement.Exception2
  (param $this (ref null $foreachstatement.ForEachStatement.Exception2))
  (result (ref null $foreachstatement.ForEachStatement.Exception2))
- ;;@ foreachstatement/ForEachStatement.java:37:15
  (block
   ;; foreachstatement.ForEachStatement.Exception2.$clinit();
   ;;@ foreachstatement/ForEachStatement.java:37:15
@@ -439,7 +423,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.Exception2.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:38:28
  (block
   ;; return null;
   ;;@ foreachstatement/ForEachStatement.java:39:6
@@ -454,7 +437,6 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.Exception2.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:37:15
  (block
   ;; Iterable.this.forEach(arg0);
   ;;@ foreachstatement/ForEachStatement.java:37:15
@@ -469,7 +451,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.Exception2.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:37:15
  (block
   ;; return Iterable.this.spliterator();
   ;;@ foreachstatement/ForEachStatement.java:37:15
@@ -480,7 +461,6 @@
 
 ;;; void Exception2.$clinit()
 (func $$clinit__void@foreachstatement.ForEachStatement.Exception2
- ;;@ foreachstatement/ForEachStatement.java:37:15
  (block
   ;; if (foreachstatement.ForEachStatement.Exception2.$initialized) return;
   ;;@ foreachstatement/ForEachStatement.java:37:15
@@ -536,7 +516,6 @@
 (func $m_<init>__@foreachstatement.ForEachStatement.IterableReturningTypeVariable
  (param $this (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (result (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
- ;;@ foreachstatement/ForEachStatement.java:51:15
  (block
   ;; foreachstatement.ForEachStatement.IterableReturningTypeVariable.$clinit();
   ;;@ foreachstatement/ForEachStatement.java:51:15
@@ -556,7 +535,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:53:13
  (block
   ;; return null;
   ;;@ foreachstatement/ForEachStatement.java:54:6
@@ -571,7 +549,6 @@
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:51:15
  (block
   ;; Iterable.this.forEach(arg0);
   ;;@ foreachstatement/ForEachStatement.java:51:15
@@ -586,7 +563,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.rtt)))
- ;;@ foreachstatement/ForEachStatement.java:51:15
  (block
   ;; return Iterable.this.spliterator();
   ;;@ foreachstatement/ForEachStatement.java:51:15
@@ -597,7 +573,6 @@
 
 ;;; void IterableReturningTypeVariable.$clinit()
 (func $$clinit__void@foreachstatement.ForEachStatement.IterableReturningTypeVariable
- ;;@ foreachstatement/ForEachStatement.java:51:15
  (block
   ;; if (foreachstatement.ForEachStatement.IterableReturningTypeVariable.$initialized) return;
   ;;@ foreachstatement/ForEachStatement.java:51:15

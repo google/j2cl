@@ -24,7 +24,6 @@
 (func $m_<init>__@synchronizedstatement.SynchronizedStatement
  (param $this (ref null $synchronizedstatement.SynchronizedStatement))
  (result (ref null $synchronizedstatement.SynchronizedStatement))
- ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
  (block
   ;; synchronizedstatement.SynchronizedStatement.$clinit();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
@@ -43,14 +42,12 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $synchronizedstatement.SynchronizedStatement.rtt)))
- ;;@ synchronizedstatement/SynchronizedStatement.java:22:14
  (block
   ;; synchronized (SynchronizedStatement.this);{
   ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
   ;; SynchronizedStatement.this;
   ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
   (drop (local.get $this))
-  ;;@ synchronizedstatement/SynchronizedStatement.java:23:24
   (block
    ;; (SynchronizedStatement.this.a = (SynchronizedStatement.this.a + 1));
    ;;@ synchronizedstatement/SynchronizedStatement.java:24:6
@@ -65,7 +62,6 @@
 
 ;;; void SynchronizedStatement.$clinit()
 (func $$clinit__void@synchronizedstatement.SynchronizedStatement
- ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
  (block
   ;; if (synchronizedstatement.SynchronizedStatement.$initialized) return;
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13

@@ -50,7 +50,6 @@
 (func $m_<init>__@array.Arrays
  (param $this (ref null $array.Arrays))
  (result (ref null $array.Arrays))
- ;;@ array/Arrays.java:22:13
  (block
   ;; array.Arrays.$clinit();
   ;;@ array/Arrays.java:22:13
@@ -78,7 +77,6 @@
  (local $object (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:23:14
  (block
   ;; Object[] objects = new OfObject.<init>(100);
   ;;@ array/Arrays.java:25:4
@@ -158,7 +156,6 @@
  (local $someObject (ref null $array.Arrays.SomeObject))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:43:14
  (block
   ;; SomeObject[] objects = new OfObject.<init>(100);
   ;;@ array/Arrays.java:45:4
@@ -238,7 +235,6 @@
  (local $n i32)
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:61:7
  (block
   ;; int[] ints = new OfInt.<init>(100);
   ;;@ array/Arrays.java:63:4
@@ -318,7 +314,6 @@
  (local $n i64)
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:79:7
  (block
   ;; long[] longs = new OfLong.<init>(100);
   ;;@ array/Arrays.java:81:4
@@ -400,7 +395,6 @@
  (local $$qualifier_1 (ref null $java.lang.Boolean))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:98:7
  (block
   ;; Boolean[] booleans = new OfObject.<init>(100);
   ;;@ array/Arrays.java:100:4
@@ -486,7 +480,6 @@
  (local $b (ref null $java.lang.String))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:116:7
  (block
   ;; String[] strings = new OfObject.<init>(100);
   ;;@ array/Arrays.java:118:4
@@ -566,7 +559,6 @@
  (local $nativeObject (ref null $array.Arrays.NativeType))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:137:14
  (block
   ;; NativeType[] nativeObjects = new OfObject.<init>(100);
   ;;@ array/Arrays.java:139:4
@@ -639,7 +631,6 @@
  (local $s (ref null $java.lang.String))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:155:14
  (block
   ;; ArrayContainer<String> container = null;
   ;;@ array/Arrays.java:156:4
@@ -656,7 +647,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:164:14
  (block
   ;; Arrays.this.consumesCloneable(new OfObject.<init>(10));
   ;;@ array/Arrays.java:165:4
@@ -674,7 +664,6 @@
  (param $cloneable (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:169:14
  (block
  )
 )
@@ -686,7 +675,6 @@
  (param $serializable (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
- ;;@ array/Arrays.java:171:14
  (block
  )
 )
@@ -694,7 +682,6 @@
 
 ;;; void Arrays.$clinit()
 (func $$clinit__void@array.Arrays
- ;;@ array/Arrays.java:22:13
  (block
   ;; if (array.Arrays.$initialized) return;
   ;;@ array/Arrays.java:22:13
@@ -746,7 +733,6 @@
  (param $this (ref null $array.Arrays.SomeObject))
  (param $$outer_this (ref null $array.Arrays))
  (result (ref null $array.Arrays.SomeObject))
- ;;@ array/Arrays.java:41:16
  (block
   ;; (SomeObject.this.this = $outer_this);
   ;;@ array/Arrays.java:41:16
@@ -762,7 +748,6 @@
 
 ;;; void SomeObject.$clinit()
 (func $$clinit__void@array.Arrays.SomeObject
- ;;@ array/Arrays.java:41:16
  (block
   ;; if (array.Arrays.SomeObject.$initialized) return;
   ;;@ array/Arrays.java:41:16
@@ -812,7 +797,6 @@
 (func $m_<init>__@array.Arrays.NativeType
  (param $this (ref null $array.Arrays.NativeType))
  (result (ref null $array.Arrays.NativeType))
- ;;@ array/Arrays.java:135:23
  (block
   ;; array.Arrays.NativeType.$clinit();
   ;;@ array/Arrays.java:135:23
@@ -828,7 +812,6 @@
 
 ;;; void NativeType.$clinit()
 (func $$clinit__void@array.Arrays.NativeType
- ;;@ array/Arrays.java:135:23
  (block
   ;; if (array.Arrays.NativeType.$initialized) return;
   ;;@ array/Arrays.java:135:23
@@ -879,7 +862,6 @@
 (func $m_<init>__@array.Arrays.ArrayContainer
  (param $this (ref null $array.Arrays.ArrayContainer))
  (result (ref null $array.Arrays.ArrayContainer))
- ;;@ array/Arrays.java:160:23
  (block
   ;; Object.this.Object.<init>();
   ;;@ array/Arrays.java:160:23
@@ -892,7 +874,6 @@
 
 ;;; void ArrayContainer.$clinit()
 (func $$clinit__void@array.Arrays.ArrayContainer
- ;;@ array/Arrays.java:160:23
  (block
   ;; if (array.Arrays.ArrayContainer.$initialized) return;
   ;;@ array/Arrays.java:160:23

@@ -22,7 +22,6 @@
 (func $m_<init>__@whilestatement.WhileStatement
  (param $this (ref null $whilestatement.WhileStatement))
  (result (ref null $whilestatement.WhileStatement))
- ;;@ whilestatement/WhileStatement.java:18:13
  (block
   ;; whilestatement.WhileStatement.$clinit();
   ;;@ whilestatement/WhileStatement.java:18:13
@@ -42,7 +41,6 @@
  (local $count i32)
  (local $this (ref null $whilestatement.WhileStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $whilestatement.WhileStatement.rtt)))
- ;;@ whilestatement/WhileStatement.java:19:14
  (block
   ;; int count = 0;
   ;;@ whilestatement/WhileStatement.java:20:4
@@ -53,7 +51,6 @@
    (loop
     (br_if 1 (i32.eqz (i32.lt_s (local.get $count) (i32.const 5))))
     (block $LOOP.CONTINUE
-     ;;@ whilestatement/WhileStatement.java:21:22
      (block
       ;; (count = (count + 1));
       ;;@ whilestatement/WhileStatement.java:22:6
@@ -70,7 +67,6 @@
 
 ;;; void WhileStatement.$clinit()
 (func $$clinit__void@whilestatement.WhileStatement
- ;;@ whilestatement/WhileStatement.java:18:13
  (block
   ;; if (whilestatement.WhileStatement.$initialized) return;
   ;;@ whilestatement/WhileStatement.java:18:13

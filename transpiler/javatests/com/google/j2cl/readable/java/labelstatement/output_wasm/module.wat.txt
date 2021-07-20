@@ -22,7 +22,6 @@
 (func $m_<init>__@labelstatement.LabeledStatement
  (param $this (ref null $labelstatement.LabeledStatement))
  (result (ref null $labelstatement.LabeledStatement))
- ;;@ labelstatement/LabeledStatement.java:18:13
  (block
   ;; labelstatement.LabeledStatement.$clinit();
   ;;@ labelstatement/LabeledStatement.java:18:13
@@ -41,14 +40,12 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
- ;;@ labelstatement/LabeledStatement.java:19:14
  (block
   ;; LABEL: for (;true;) {
   ;;@ labelstatement/LabeledStatement.java:20:4
   (block $LABEL.BREAK
    (loop
     (block $LABEL.CONTINUE
-     ;;@ labelstatement/LabeledStatement.java:21:15
      (block
       ;; break LABEL;
       ;;@ labelstatement/LabeledStatement.java:22:6
@@ -64,7 +61,6 @@
   (block $LABEL1.BREAK
    (loop
     (block $LABEL1.CONTINUE
-     ;;@ labelstatement/LabeledStatement.java:26:15
      (block
       ;; continue LABEL1;
       ;;@ labelstatement/LabeledStatement.java:27:6
@@ -81,7 +77,6 @@
 
 ;;; void LabeledStatement.$clinit()
 (func $$clinit__void@labelstatement.LabeledStatement
- ;;@ labelstatement/LabeledStatement.java:18:13
  (block
   ;; if (labelstatement.LabeledStatement.$initialized) return;
   ;;@ labelstatement/LabeledStatement.java:18:13

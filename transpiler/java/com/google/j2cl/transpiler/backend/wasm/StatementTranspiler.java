@@ -410,8 +410,10 @@ class StatementTranspiler {
       }
     }
 
-    renderFirstLineAsComment(statement, builder);
-    renderSourceMappingComment(statement, builder);
+    if (!(statement instanceof Block)) {
+      renderFirstLineAsComment(statement, builder);
+      renderSourceMappingComment(statement, builder);
+    }
     statement.accept(new SourceTransformer());
   }
 
@@ -433,9 +435,6 @@ class StatementTranspiler {
 
   /** Render first line of the source code for {@code statement} as a WASM comment. * */
   private static void renderFirstLineAsComment(Statement s, SourceBuilder builder) {
-    if (s instanceof Block) {
-      return;
-    }
     String[] parts = s.toString().split("\n", 2);
     builder.newLine();
     builder.append(";; ");

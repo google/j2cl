@@ -40,7 +40,6 @@
 (func $m_<init>__@jsproperties.Foo
  (param $this (ref null $jsproperties.Foo))
  (result (ref null $jsproperties.Foo))
- ;;@ jsproperties/Main.java:22:6
  (block
   ;; jsproperties.Foo.$clinit();
   ;;@ jsproperties/Main.java:22:6
@@ -57,7 +56,6 @@
 ;;; int Foo.getA()
 (func $m_getA__int@jsproperties.Foo
  (result i32)
- ;;@ jsproperties/Main.java:26:20
  (block
   ;; jsproperties.Foo.$clinit();
   ;;@ jsproperties/Main.java:26:20
@@ -71,7 +69,6 @@
 ;;; void Foo.setA(int x)
 (func $m_setA__int__void@jsproperties.Foo
  (param $x i32)
- ;;@ jsproperties/Main.java:31:21
  (block
   ;; jsproperties.Foo.$clinit();
   ;;@ jsproperties/Main.java:31:21
@@ -85,7 +82,6 @@
 ;;; int Foo.getB()
 (func $m_getB__int@jsproperties.Foo
  (result i32)
- ;;@ jsproperties/Main.java:36:20
  (block
   ;; jsproperties.Foo.$clinit();
   ;;@ jsproperties/Main.java:36:20
@@ -99,7 +95,6 @@
 ;;; void Foo.setB(int x)
 (func $m_setB__int__void@jsproperties.Foo
  (param $x i32)
- ;;@ jsproperties/Main.java:41:21
  (block
   ;; jsproperties.Foo.$clinit();
   ;;@ jsproperties/Main.java:41:21
@@ -112,7 +107,6 @@
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@jsproperties.Foo
- ;;@ jsproperties/Main.java:22:6
  (block
   ;; if (jsproperties.Foo.$initialized) return;
   ;;@ jsproperties/Main.java:22:6
@@ -167,7 +161,6 @@
 (func $m_<init>__@jsproperties.Bar
  (param $this (ref null $jsproperties.Bar))
  (result (ref null $jsproperties.Bar))
- ;;@ jsproperties/Main.java:47:6
  (block
   ;; jsproperties.Bar.$clinit();
   ;;@ jsproperties/Main.java:47:6
@@ -187,7 +180,6 @@
  (result i32)
  (local $this (ref null $jsproperties.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
- ;;@ jsproperties/Main.java:51:13
  (block
   ;; return (Bar.this.f + 1);
   ;;@ jsproperties/Main.java:52:4
@@ -202,7 +194,6 @@
  (param $x i32)
  (local $this (ref null $jsproperties.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
- ;;@ jsproperties/Main.java:56:14
  (block
   ;; (Bar.this.f = (x + 2));
   ;;@ jsproperties/Main.java:57:4
@@ -217,7 +208,6 @@
  (result i32)
  (local $this (ref null $jsproperties.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
- ;;@ jsproperties/Main.java:61:13
  (block
   ;; return (Bar.this.f + 3);
   ;;@ jsproperties/Main.java:62:4
@@ -232,7 +222,6 @@
  (param $x i32)
  (local $this (ref null $jsproperties.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Bar.rtt)))
- ;;@ jsproperties/Main.java:66:14
  (block
   ;; (Bar.this.f = (x + 4));
   ;;@ jsproperties/Main.java:67:4
@@ -243,7 +232,6 @@
 
 ;;; void Bar.$clinit()
 (func $$clinit__void@jsproperties.Bar
- ;;@ jsproperties/Main.java:47:6
  (block
   ;; if (jsproperties.Bar.$initialized) return;
   ;;@ jsproperties/Main.java:47:6
@@ -294,7 +282,6 @@
 (func $m_<init>__@jsproperties.NativeFoo
  (param $this (ref null $jsproperties.NativeFoo))
  (result (ref null $jsproperties.NativeFoo))
- ;;@ jsproperties/Main.java:72:6
  (block
   ;; jsproperties.NativeFoo.$clinit();
   ;;@ jsproperties/Main.java:72:6
@@ -314,7 +301,6 @@
  (result (ref null $java.lang.Object))
  (local $this (ref null $jsproperties.NativeFoo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.NativeFoo.rtt)))
- ;;@ jsproperties/Main.java:74:23
  (block
  )
  (unreachable)
@@ -328,7 +314,6 @@
 
 ;;; void NativeFoo.$clinit()
 (func $$clinit__void@jsproperties.NativeFoo
- ;;@ jsproperties/Main.java:72:6
  (block
   ;; if (jsproperties.NativeFoo.$initialized) return;
   ;;@ jsproperties/Main.java:72:6
@@ -381,7 +366,6 @@
 (func $m_<init>__@jsproperties.Main
  (param $this (ref null $jsproperties.Main))
  (result (ref null $jsproperties.Main))
- ;;@ jsproperties/Main.java:80:13
  (block
   ;; jsproperties.Main.$clinit();
   ;;@ jsproperties/Main.java:80:13
@@ -401,9 +385,7 @@
  (local $$qualifier (ref null $jsproperties.NativeFoo))
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
- ;;@ jsproperties/Main.java:81:14
  (block
-  ;;@ jsproperties/Main.java:82:4
   (block
    ;; NativeFoo $qualifier = new NativeFoo.<init>();
    ;;@ jsproperties/Main.java:82:4
@@ -424,7 +406,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
- ;;@ jsproperties/Main.java:86:14
  (block
   ;; jsproperties.Foo.getA();
   ;;@ jsproperties/Main.java:87:4
@@ -448,7 +429,6 @@
  (local $bar (ref null $jsproperties.Bar))
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
- ;;@ jsproperties/Main.java:93:14
  (block
   ;; Bar bar = new Bar.<init>();
   ;;@ jsproperties/Main.java:94:4
@@ -471,7 +451,6 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void@jsproperties.Main
- ;;@ jsproperties/Main.java:80:13
  (block
   ;; if (jsproperties.Main.$initialized) return;
   ;;@ jsproperties/Main.java:80:13

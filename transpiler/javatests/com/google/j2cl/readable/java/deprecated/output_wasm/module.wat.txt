@@ -46,7 +46,6 @@
 ;;; void DeprecatedExample.deprecatedStaticMethod(Object someObject)
 (func $m_deprecatedStaticMethod__java_lang_Object__void@deprecated.DeprecatedExample
  (param $someObject (ref null $java.lang.Object))
- ;;@ deprecated/DeprecatedExample.java:31:21
  (block
   ;; deprecated.DeprecatedExample.$clinit();
   ;;@ deprecated/DeprecatedExample.java:31:21
@@ -60,7 +59,6 @@
  (param $someArg (ref null $java.lang.String))
  (local $this (ref null $deprecated.DeprecatedExample))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $deprecated.DeprecatedExample.rtt)))
- ;;@ deprecated/DeprecatedExample.java:34:14
  (block
  )
 )
@@ -70,7 +68,6 @@
 (func $m_<init>__@deprecated.DeprecatedExample
  (param $this (ref null $deprecated.DeprecatedExample))
  (result (ref null $deprecated.DeprecatedExample))
- ;;@ deprecated/DeprecatedExample.java:37:9
  (block
   ;; deprecated.DeprecatedExample.$clinit();
   ;;@ deprecated/DeprecatedExample.java:37:9
@@ -90,7 +87,6 @@
 ;;; void DeprecatedExample.$init()
 (func $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample
  (param $this (ref null $deprecated.DeprecatedExample))
- ;;@ deprecated/DeprecatedExample.java:25:13
  (block
   ;; (DeprecatedExample.this.deprecatedInstanceField = javaemul.internal.StringPool.$getString_|deprecated_f...|());
   ;;@ deprecated/DeprecatedExample.java:28:2
@@ -100,7 +96,6 @@
 
 ;;; void DeprecatedExample.$clinit()
 (func $$clinit__void@deprecated.DeprecatedExample
- ;;@ deprecated/DeprecatedExample.java:25:13
  (block
   ;; if (deprecated.DeprecatedExample.$initialized) return;
   ;;@ deprecated/DeprecatedExample.java:25:13
@@ -140,7 +135,6 @@
 
 ;;; void DeprecatedInterface.$clinit()
 (func $$clinit__void@deprecated.DeprecatedExample.DeprecatedInterface
- ;;@ deprecated/DeprecatedExample.java:41:12
  (block
   ;; if (deprecated.DeprecatedExample.DeprecatedInterface.$initialized) return;
   ;;@ deprecated/DeprecatedExample.java:41:12
@@ -175,7 +169,6 @@
 
 ;;; void DeprecatedJsFunction.$clinit()
 (func $$clinit__void@deprecated.DeprecatedExample.DeprecatedJsFunction
- ;;@ deprecated/DeprecatedExample.java:48:12
  (block
   ;; if (deprecated.DeprecatedExample.DeprecatedJsFunction.$initialized) return;
   ;;@ deprecated/DeprecatedExample.java:48:12
@@ -229,7 +222,6 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
- ;;@ deprecated/DeprecatedExample.java:55:7
  (block
   ;; (Enum.this.name = $name);
   ;;@ deprecated/DeprecatedExample.java:55:7
@@ -250,7 +242,6 @@
 (func $m_valueOf__java_lang_String__deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
  (param $name (ref null $java.lang.String))
  (result (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
- ;;@ deprecated/DeprecatedExample.java:55:7
  (block
   ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
   ;;@ deprecated/DeprecatedExample.java:55:7
@@ -259,7 +250,6 @@
   ;;@ deprecated/DeprecatedExample.java:55:7
   (if (ref.is_null (global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_))
    (then
-    ;;@ deprecated/DeprecatedExample.java:55:7
     (block
      ;; (deprecated.DeprecatedExample.DeprecatedEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(deprecated.DeprecatedExample.DeprecatedEnum.values()));
      ;;@ deprecated/DeprecatedExample.java:55:7
@@ -277,7 +267,6 @@
 (func $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedEnum@deprecated.DeprecatedExample.DeprecatedEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ deprecated/DeprecatedExample.java:55:7
  (block
   ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
   ;;@ deprecated/DeprecatedExample.java:55:7
@@ -297,7 +286,6 @@
 
 ;;; void DeprecatedEnum.$clinit()
 (func $$clinit__void@deprecated.DeprecatedExample.DeprecatedEnum
- ;;@ deprecated/DeprecatedExample.java:55:7
  (block
   ;; if (deprecated.DeprecatedExample.DeprecatedEnum.$initialized) return;
   ;;@ deprecated/DeprecatedExample.java:55:7
@@ -314,7 +302,6 @@
   ;; java.lang.Enum.$clinit();
   ;;@ deprecated/DeprecatedExample.java:55:7
   (call $$clinit__void@java.lang.Enum )
-  ;;@ deprecated/DeprecatedExample.java:56:4
   (block
    ;; deprecated.DeprecatedExample.DeprecatedEnum.$clinit();
    ;;@ deprecated/DeprecatedExample.java:56:4
@@ -368,7 +355,6 @@
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
- ;;@ deprecated/DeprecatedExample.java:62:7
  (block
   ;; (Enum.this.name = $name);
   ;;@ deprecated/DeprecatedExample.java:62:7
@@ -389,7 +375,6 @@
 (func $m_valueOf__java_lang_String__deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
  (param $name (ref null $java.lang.String))
  (result (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))
- ;;@ deprecated/DeprecatedExample.java:62:7
  (block
   ;; deprecated.DeprecatedExample.DeprecatedJsEnum.$clinit();
   ;;@ deprecated/DeprecatedExample.java:62:7
@@ -398,7 +383,6 @@
   ;;@ deprecated/DeprecatedExample.java:62:7
   (if (ref.is_null (global.get $f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedJsEnum_))
    (then
-    ;;@ deprecated/DeprecatedExample.java:62:7
     (block
      ;; (deprecated.DeprecatedExample.DeprecatedJsEnum.namesToValuesMap = javaemul.internal.Enums.createMapFromValues(deprecated.DeprecatedExample.DeprecatedJsEnum.values()));
      ;;@ deprecated/DeprecatedExample.java:62:7
@@ -416,7 +400,6 @@
 (func $m_values__arrayOf_deprecated_DeprecatedExample_DeprecatedJsEnum@deprecated.DeprecatedExample.DeprecatedJsEnum
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
- ;;@ deprecated/DeprecatedExample.java:62:7
  (block
   ;; deprecated.DeprecatedExample.DeprecatedJsEnum.$clinit();
   ;;@ deprecated/DeprecatedExample.java:62:7
@@ -436,7 +419,6 @@
 
 ;;; void DeprecatedJsEnum.$clinit()
 (func $$clinit__void@deprecated.DeprecatedExample.DeprecatedJsEnum
- ;;@ deprecated/DeprecatedExample.java:62:7
  (block
   ;; if (deprecated.DeprecatedExample.DeprecatedJsEnum.$initialized) return;
   ;;@ deprecated/DeprecatedExample.java:62:7
@@ -453,7 +435,6 @@
   ;; java.lang.Enum.$clinit();
   ;;@ deprecated/DeprecatedExample.java:62:7
   (call $$clinit__void@java.lang.Enum )
-  ;;@ deprecated/DeprecatedExample.java:63:4
   (block
    ;; deprecated.DeprecatedExample.DeprecatedJsEnum.$clinit();
    ;;@ deprecated/DeprecatedExample.java:63:4

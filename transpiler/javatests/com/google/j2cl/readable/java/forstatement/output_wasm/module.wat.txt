@@ -22,7 +22,6 @@
 (func $m_<init>__@forstatement.ForStatement
  (param $this (ref null $forstatement.ForStatement))
  (result (ref null $forstatement.ForStatement))
- ;;@ forstatement/ForStatement.java:18:13
  (block
   ;; forstatement.ForStatement.$clinit();
   ;;@ forstatement/ForStatement.java:18:13
@@ -47,7 +46,6 @@
  (local $b i32)
  (local $this (ref null $forstatement.ForStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
- ;;@ forstatement/ForStatement.java:19:14
  (block
   ;; LOOP: for (int i = 0,int count = 0;(i < 100);(i = (i + 1))) {
   ;;@ forstatement/ForStatement.java:20:4
@@ -57,7 +55,6 @@
    (loop
     (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 100))))
     (block $LOOP.CONTINUE
-     ;;@ forstatement/ForStatement.java:20:45
      (block
       ;; (count = (count + 1));
       ;;@ forstatement/ForStatement.java:21:6
@@ -77,7 +74,6 @@
    (loop
     (br_if 1 (i32.eqz (i64.lt_s (local.get $l) (i64.const 100))))
     (block $LOOP_1.CONTINUE
-     ;;@ forstatement/ForStatement.java:24:51
      (block
       ;; (count = (count + 1));
       ;;@ forstatement/ForStatement.java:25:6
@@ -102,7 +98,6 @@
      (local.get $a)
     )))
     (block $LOOP_2.CONTINUE
-     ;;@ forstatement/ForStatement.java:29:24
      (block
      )
     )
@@ -122,7 +117,6 @@
      (local.get $b)
     )))
     (block $LOOP_3.CONTINUE
-     ;;@ forstatement/ForStatement.java:32:20
      (block
      )
     )
@@ -136,7 +130,6 @@
   (block $LOOP_4.BREAK
    (loop
     (block $LOOP_4.CONTINUE
-     ;;@ forstatement/ForStatement.java:34:43
      (block
      )
     )
@@ -152,7 +145,6 @@
 ;;; int ForStatement.returnsValue()
 (func $m_returnsValue__int@forstatement.ForStatement
  (result i32)
- ;;@ forstatement/ForStatement.java:37:21
  (block
   ;; return 1;
   ;;@ forstatement/ForStatement.java:38:4
@@ -162,7 +154,6 @@
 
 ;;; void ForStatement.$clinit()
 (func $$clinit__void@forstatement.ForStatement
- ;;@ forstatement/ForStatement.java:18:13
  (block
   ;; if (forstatement.ForStatement.$initialized) return;
   ;;@ forstatement/ForStatement.java:18:13

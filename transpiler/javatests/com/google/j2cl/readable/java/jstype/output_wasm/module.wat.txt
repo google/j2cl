@@ -36,7 +36,6 @@
 (func $m_<init>__@jstype.SomeJsType
  (param $this (ref null $jstype.SomeJsType))
  (result (ref null $jstype.SomeJsType))
- ;;@ jstype/SomeJsType.java:22:13
  (block
   ;; jstype.SomeJsType.$clinit();
   ;;@ jstype/SomeJsType.java:22:13
@@ -55,7 +54,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
- ;;@ jstype/SomeJsType.java:28:14
  (block
  )
 )
@@ -64,7 +62,6 @@
 ;;; void SomeJsType.privateMethod()
 (func $m_privateMethod__void_$p_jstype_SomeJsType@jstype.SomeJsType
  (param $this (ref null $jstype.SomeJsType))
- ;;@ jstype/SomeJsType.java:30:15
  (block
  )
 )
@@ -74,7 +71,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
- ;;@ jstype/SomeJsType.java:32:7
  (block
  )
 )
@@ -85,7 +81,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
- ;;@ jstype/SomeJsType.java:34:17
  (block
  )
 )
@@ -97,7 +92,6 @@
  (local $value i32)
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
- ;;@ jstype/SomeJsType.java:36:14
  (block
   ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
   ;;@ jstype/SomeJsType.java:37:4
@@ -128,7 +122,6 @@
  (local $star (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
- ;;@ jstype/SomeJsType.java:51:18
  (block
   ;; Object object = new Object.<init>();
   ;;@ jstype/SomeJsType.java:52:4
@@ -145,7 +138,6 @@
 
 ;;; void SomeJsType.$clinit()
 (func $$clinit__void@jstype.SomeJsType
- ;;@ jstype/SomeJsType.java:22:13
  (block
   ;; if (jstype.SomeJsType.$initialized) return;
   ;;@ jstype/SomeJsType.java:22:13
@@ -184,7 +176,6 @@
 
 ;;; void Star.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Star
- ;;@ jstype/SomeJsType.java:46:12
  (block
   ;; if (jstype.SomeJsType.Star.$initialized) return;
   ;;@ jstype/SomeJsType.java:46:12
@@ -218,7 +209,6 @@
 
 ;;; void Wildcard.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Wildcard
- ;;@ jstype/SomeJsType.java:49:12
  (block
   ;; if (jstype.SomeJsType.Wildcard.$initialized) return;
   ;;@ jstype/SomeJsType.java:49:12

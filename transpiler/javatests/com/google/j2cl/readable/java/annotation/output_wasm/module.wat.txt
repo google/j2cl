@@ -34,7 +34,6 @@
 (func $m_<init>__@annotation.Main
  (param $this (ref null $annotation.Main))
  (result (ref null $annotation.Main))
- ;;@ annotation/Main.java:18:13
  (block
   ;; annotation.Main.$clinit();
   ;;@ annotation/Main.java:18:13
@@ -50,7 +49,6 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void@annotation.Main
- ;;@ annotation/Main.java:18:13
  (block
   ;; if (annotation.Main.$initialized) return;
   ;;@ annotation/Main.java:18:13
@@ -90,7 +88,6 @@
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@annotation.Main.Foo
- ;;@ annotation/Main.java:19:13
  (block
   ;; if (annotation.Main.Foo.$initialized) return;
   ;;@ annotation/Main.java:19:13
@@ -124,7 +121,6 @@
 
 ;;; void Zoo.$clinit()
 (func $$clinit__void@annotation.Main.Zoo
- ;;@ annotation/Main.java:28:13
  (block
   ;; if (annotation.Main.Zoo.$initialized) return;
   ;;@ annotation/Main.java:28:13
@@ -172,7 +168,6 @@
  (param $this (ref null $annotation.Main.Bar))
  (param $$outer_this (ref null $annotation.Main))
  (result (ref null $annotation.Main.Bar))
- ;;@ annotation/Main.java:30:8
  (block
   ;; annotation.Main.Bar.$clinit();
   ;;@ annotation/Main.java:30:8
@@ -196,7 +191,6 @@
  (local $foo (ref null $java.lang.Object))
  (local $this (ref null $annotation.Main.Bar))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.Bar.rtt)))
- ;;@ annotation/Main.java:32:8
  (block
   ;; Foo foo = null;
   ;;@ annotation/Main.java:33:6
@@ -213,7 +207,6 @@
 
 ;;; void Bar.$clinit()
 (func $$clinit__void@annotation.Main.Bar
- ;;@ annotation/Main.java:30:8
  (block
   ;; if (annotation.Main.Bar.$initialized) return;
   ;;@ annotation/Main.java:30:8

@@ -32,7 +32,6 @@
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@instancejsmethods.MyInterface
- ;;@ instancejsmethods/Main.java:20:10
  (block
   ;; if (instancejsmethods.MyInterface.$initialized) return;
   ;;@ instancejsmethods/Main.java:20:10
@@ -79,7 +78,6 @@
 (func $m_<init>__@instancejsmethods.SuperParent
  (param $this (ref null $instancejsmethods.SuperParent))
  (result (ref null $instancejsmethods.SuperParent))
- ;;@ instancejsmethods/Main.java:24:6
  (block
   ;; instancejsmethods.SuperParent.$clinit();
   ;;@ instancejsmethods/Main.java:24:6
@@ -101,7 +99,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.SuperParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.SuperParent.rtt)))
- ;;@ instancejsmethods/Main.java:25:13
  (block
   ;; return ((a + b) + 111);
   ;;@ instancejsmethods/Main.java:26:4
@@ -118,7 +115,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.SuperParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.SuperParent.rtt)))
- ;;@ instancejsmethods/Main.java:29:13
  (block
   ;; return ((a * b) + 222);
   ;;@ instancejsmethods/Main.java:30:4
@@ -129,7 +125,6 @@
 
 ;;; void SuperParent.$clinit()
 (func $$clinit__void@instancejsmethods.SuperParent
- ;;@ instancejsmethods/Main.java:24:6
  (block
   ;; if (instancejsmethods.SuperParent.$initialized) return;
   ;;@ instancejsmethods/Main.java:24:6
@@ -182,7 +177,6 @@
 (func $m_<init>__@instancejsmethods.Parent
  (param $this (ref null $instancejsmethods.Parent))
  (result (ref null $instancejsmethods.Parent))
- ;;@ instancejsmethods/Main.java:34:6
  (block
   ;; instancejsmethods.Parent.$clinit();
   ;;@ instancejsmethods/Main.java:34:6
@@ -204,7 +198,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Parent.rtt)))
- ;;@ instancejsmethods/Main.java:42:13
  (block
   ;; return (a + b);
   ;;@ instancejsmethods/Main.java:43:4
@@ -221,7 +214,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Parent.rtt)))
- ;;@ instancejsmethods/Main.java:53:13
  (block
   ;; return (a * b);
   ;;@ instancejsmethods/Main.java:54:4
@@ -237,7 +229,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Parent.rtt)))
- ;;@ instancejsmethods/Main.java:63:13
  (block
   ;; return a;
   ;;@ instancejsmethods/Main.java:64:4
@@ -248,7 +239,6 @@
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@instancejsmethods.Parent
- ;;@ instancejsmethods/Main.java:34:6
  (block
   ;; if (instancejsmethods.Parent.$initialized) return;
   ;;@ instancejsmethods/Main.java:34:6
@@ -302,7 +292,6 @@
 (func $m_<init>__@instancejsmethods.Child
  (param $this (ref null $instancejsmethods.Child))
  (result (ref null $instancejsmethods.Child))
- ;;@ instancejsmethods/Main.java:68:6
  (block
   ;; instancejsmethods.Child.$clinit();
   ;;@ instancejsmethods/Main.java:68:6
@@ -324,7 +313,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Child.rtt)))
- ;;@ instancejsmethods/Main.java:76:13
  (block
   ;; return ((a + b) + 1);
   ;;@ instancejsmethods/Main.java:77:4
@@ -341,7 +329,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Child.rtt)))
- ;;@ instancejsmethods/Main.java:87:13
  (block
   ;; return ((a * b) + 1);
   ;;@ instancejsmethods/Main.java:88:4
@@ -357,7 +344,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Child.rtt)))
- ;;@ instancejsmethods/Main.java:98:13
  (block
   ;; return a;
   ;;@ instancejsmethods/Main.java:99:4
@@ -372,7 +358,6 @@
  (result i32)
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Child.rtt)))
- ;;@ instancejsmethods/Main.java:109:13
  (block
   ;; return 1;
   ;;@ instancejsmethods/Main.java:110:4
@@ -383,7 +368,6 @@
 
 ;;; void Child.$clinit()
 (func $$clinit__void@instancejsmethods.Child
- ;;@ instancejsmethods/Main.java:68:6
  (block
   ;; if (instancejsmethods.Child.$initialized) return;
   ;;@ instancejsmethods/Main.java:68:6
@@ -434,7 +418,6 @@
 (func $m_<init>__@instancejsmethods.Main
  (param $this (ref null $instancejsmethods.Main))
  (result (ref null $instancejsmethods.Main))
- ;;@ instancejsmethods/Main.java:114:13
  (block
   ;; instancejsmethods.Main.$clinit();
   ;;@ instancejsmethods/Main.java:114:13
@@ -459,7 +442,6 @@
  (local $intf (ref null $java.lang.Object))
  (local $this (ref null $instancejsmethods.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Main.rtt)))
- ;;@ instancejsmethods/Main.java:115:14
  (block
   ;; SuperParent sp = new SuperParent.<init>();
   ;;@ instancejsmethods/Main.java:116:4
@@ -515,7 +497,6 @@
  (local $sp (ref null $instancejsmethods.SuperParent))
  (local $p (ref null $instancejsmethods.Parent))
  (local $c (ref null $instancejsmethods.Child))
- ;;@ instancejsmethods/Main.java:134:21
  (block
   ;; instancejsmethods.Main.$clinit();
   ;;@ instancejsmethods/Main.java:134:21
@@ -561,7 +542,6 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void@instancejsmethods.Main
- ;;@ instancejsmethods/Main.java:114:13
  (block
   ;; if (instancejsmethods.Main.$initialized) return;
   ;;@ instancejsmethods/Main.java:114:13
