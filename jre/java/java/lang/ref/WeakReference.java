@@ -1,15 +1,27 @@
 package java.lang.ref;
 
+import jsinterop.annotations.JsType;
+
+import static jsinterop.annotations.JsPackage.GLOBAL;
+
 public class WeakReference<T> {
 
-  private T referent;
+  @JsType(isNative = true, name = "WeakRef", namespace = GLOBAL)
+  static class JsWeakRef<T> {
+    public JsWeakRef(T referent) {
+    }
+
+    public native T deref();
+  }
+
+  private JsWeakRef<T> referent;
 
   public WeakReference(T referent) {
-    this.referent = referent;
+    this.referent = new JsWeakRef<>(referent);
   }
 
   public T get() {
-    return referent;
+    return referent.deref();
   }
 
   public void clear() {
