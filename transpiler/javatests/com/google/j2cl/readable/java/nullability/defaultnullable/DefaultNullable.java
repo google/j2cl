@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package defaultnullable;
+package nullability.defaultnullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ import javax.annotation.Nullable;
 import jsinterop.annotations.JsMethod;
 import org.checkerframework.checker.nullness.compatqual.NullableType;
 
-// TODO(simionato): Update this example after there is support for @NotNull.
 public class DefaultNullable {
   private String f1 = "Hello";
   @Nullable private String f2 = null;
