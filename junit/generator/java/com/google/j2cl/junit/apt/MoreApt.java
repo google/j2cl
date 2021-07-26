@@ -18,6 +18,7 @@ package com.google.j2cl.junit.apt;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
+import com.google.auto.common.AnnotationValues;
 import com.google.auto.common.MoreTypes;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
@@ -86,9 +87,8 @@ public class MoreApt {
     checkArgument(value instanceof List, "The annotation value does not represent a list");
     @SuppressWarnings("unchecked")
     List<AnnotationValue> values = (List<AnnotationValue>) value;
-    return values
-        .stream()
-        .map(input -> extractClassName(input.toString()))
+    return values.stream()
+        .map(input -> extractClassName(AnnotationValues.toString(input)))
         .collect(toImmutableList());
   }
 
@@ -103,7 +103,7 @@ public class MoreApt {
       Element value, final Class<? extends Annotation> annotationClass, String field) {
     Optional<AnnotationValue> annotationValue = getAnnotationValue(value, annotationClass, field);
     if (annotationValue.isPresent()) {
-      return Optional.of(extractClassName(annotationValue.get().toString()));
+      return Optional.of(extractClassName(AnnotationValues.toString(annotationValue.get())));
     }
     return Optional.absent();
   }
