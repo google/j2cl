@@ -152,7 +152,6 @@ _j2wasm_application = rule(
 )
 
 def j2wasm_application(name, defines = dict(), **kwargs):
-    # LINF.IfChange
     default_defines = {
         "jre.checkedMode": "ENABLED",
         "jre.checks.checkLevel": "MINIMAL",
