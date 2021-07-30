@@ -49,10 +49,10 @@
  (result (ref null $exception.MyException))
  (block
   ;; exception.MyException.$clinit();
-  ;;@ exception/MyException.java:19:2
+  ;;@ exception/MyException.java:19:16
   (call $$clinit__void@exception.MyException )
   ;; Exception.this.Exception.<init>();
-  ;;@ exception/MyException.java:19:2
+  ;;@ exception/MyException.java:19:16
   (drop (call $m_<init>__@java.lang.Exception (local.get $this)))
   ;; return MyException.this;
   ;;@ exception/MyException.java:19:2
@@ -67,7 +67,7 @@
  (result (ref null $exception.MyException))
  (block
   ;; exception.MyException.$clinit();
-  ;;@ exception/MyException.java:21:2
+  ;;@ exception/MyException.java:21:31
   (call $$clinit__void@exception.MyException )
   ;; Exception.this.Exception.<init>(cause);
   ;;@ exception/MyException.java:22:4
@@ -151,10 +151,10 @@
  (result (ref null $exception.MyJsException))
  (block
   ;; exception.MyJsException.$clinit();
-  ;;@ exception/MyJsException.java:23:9
+  ;;@ exception/MyJsException.java:23:25
   (call $$clinit__void@exception.MyJsException )
   ;; Exception.this.Exception.<init>();
-  ;;@ exception/MyJsException.java:23:9
+  ;;@ exception/MyJsException.java:23:25
   (drop (call $m_<init>__@java.lang.Exception (local.get $this)))
   ;; return MyJsException.this;
   ;;@ exception/MyJsException.java:23:9
@@ -169,7 +169,7 @@
  (result (ref null $exception.MyJsException))
  (block
   ;; exception.MyJsException.$clinit();
-  ;;@ exception/MyJsException.java:26:9
+  ;;@ exception/MyJsException.java:26:40
   (call $$clinit__void@exception.MyJsException )
   ;; MyJsException.this.MyJsException.<init>();
   ;;@ exception/MyJsException.java:27:4

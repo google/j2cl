@@ -9,7 +9,10 @@
 [Main] => [$ctor__nativejstypeobjectmethods_Main__]
 [Main] => [this.$ctor__java_lang_Object__();] "nativejstypeobjectmethods.Main.<init>"
 [test] => [m_test__]
-[test] => [Main.$clinit();] "nativejstypeobjectmethods.Main.test"
+[{
+    NativeJsTypeWithToString n1 = new NativeJsTypeWithToString();
+...    n4.toString();
+  }] => [Main.$clinit();] "nativejstypeobjectmethods.Main.test"
 [NativeJsTypeWithToString n1 = new NativeJsTypeWithToString();] => [let n1 = new NativeJsTypeWithToString();] "nativejstypeobjectmethods.Main.test"
 [n1] => [n1] "n1"
 [n1.toString();] => [n1.toString();] "nativejstypeobjectmethods.Main.test"

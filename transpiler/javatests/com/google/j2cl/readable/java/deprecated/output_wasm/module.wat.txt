@@ -48,7 +48,7 @@
  (param $someObject (ref null $java.lang.Object))
  (block
   ;; deprecated.DeprecatedExample.$clinit();
-  ;;@ deprecated/DeprecatedExample.java:31:21
+  ;;@ deprecated/DeprecatedExample.java:31:63
   (call $$clinit__void@deprecated.DeprecatedExample )
  )
 )
@@ -70,13 +70,13 @@
  (result (ref null $deprecated.DeprecatedExample))
  (block
   ;; deprecated.DeprecatedExample.$clinit();
-  ;;@ deprecated/DeprecatedExample.java:37:9
+  ;;@ deprecated/DeprecatedExample.java:37:29
   (call $$clinit__void@deprecated.DeprecatedExample )
   ;; Object.this.Object.<init>();
-  ;;@ deprecated/DeprecatedExample.java:37:9
+  ;;@ deprecated/DeprecatedExample.java:37:29
   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   ;; DeprecatedExample.this.$init();
-  ;;@ deprecated/DeprecatedExample.java:37:9
+  ;;@ deprecated/DeprecatedExample.java:37:29
   (call $$init__void_$p_deprecated_DeprecatedExample@deprecated.DeprecatedExample (local.get $this))
   ;; return DeprecatedExample.this;
   ;;@ deprecated/DeprecatedExample.java:37:9

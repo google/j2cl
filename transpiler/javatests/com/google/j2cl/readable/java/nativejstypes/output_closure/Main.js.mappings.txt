@@ -9,14 +9,20 @@
 [Main] => [$ctor__nativejstypes_Main__]
 [Main] => [this.$ctor__java_lang_Object__();] "nativejstypes.Main.<init>"
 [testNativeJsTypeWithNamespace] => [m_testNativeJsTypeWithNamespace__]
-[testNativeJsTypeWithNamespace] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
+[{
+    Foo foo = new Foo();
+...    return foo.sum();
+  }] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [Foo foo = new Foo();] => [let foo = new Foo();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [foo] => [foo] "foo"
 [foo.x = 50;] => [foo.x = 50;] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [foo.y = 5;] => [foo.y = 5;] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [return foo.sum();] => [return foo.sum();] "nativejstypes.Main.testNativeJsTypeWithNamespace"
 [testNativeJsTypeWithoutNamespace] => [m_testNativeJsTypeWithoutNamespace__]
-[testNativeJsTypeWithoutNamespace] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
+[{
+    Bar bar = new Bar(6, 7);
+...    return bar.product();
+  }] => [Main.$clinit();] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [bar] => [bar] "bar"
 [bar.x = 50;] => [bar.x = 50;] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
@@ -24,23 +30,35 @@
 [Bar.f = 10;] => [Bar.f = 10;] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [return bar.product();] => [return bar.product();] "nativejstypes.Main.testNativeJsTypeWithoutNamespace"
 [testInnerNativeJsType] => [m_testInnerNativeJsType__]
-[testInnerNativeJsType] => [Main.$clinit();] "nativejstypes.Main.testInnerNativeJsType"
+[{
+    Bar.Inner unusedBarInner = new Bar.Inner(1);
+    BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);
+  }] => [Main.$clinit();] "nativejstypes.Main.testInnerNativeJsType"
 [Bar.Inner unusedBarInner = new Bar.Inner(1);] => [let unusedBarInner = new Bar.Inner(1);] "nativejstypes.Main.testInnerNativeJsType"
 [unusedBarInner] => [unusedBarInner] "unusedBarInner"
 [BarInnerWithDotInName unusedBarInnerWithDotInName = new BarInnerWithDotInName(2);] => [let unusedBarInnerWithDotInName = new $synthetic_nativejstypes_Bar.Inner(2);] "nativejstypes.Main.testInnerNativeJsType"
 [unusedBarInnerWithDotInName] => [unusedBarInnerWithDotInName] "unusedBarInnerWithDotInName"
 [testGlobalNativeJsType] => [m_testGlobalNativeJsType__]
-[testGlobalNativeJsType] => [Main.$clinit();] "nativejstypes.Main.testGlobalNativeJsType"
+[{
+    Headers header = new Headers();
+    header.append("Content-Type", "text/xml");
+  }] => [Main.$clinit();] "nativejstypes.Main.testGlobalNativeJsType"
 [Headers header = new Headers();] => [let header = new Headers();] "nativejstypes.Main.testGlobalNativeJsType"
 [header] => [header] "header"
 [header.append("Content-Type", "text/xml");] => [header.append("Content-Type", "text/xml");] "nativejstypes.Main.testGlobalNativeJsType"
 [testNativeTypeClassLiteral] => [m_testNativeTypeClassLiteral__]
-[testNativeTypeClassLiteral] => [Main.$clinit();] "nativejstypes.Main.testNativeTypeClassLiteral"
+[{
+    Object o1 = Bar.class;
+    o1 = Bar[][].class;
+  }] => [Main.$clinit();] "nativejstypes.Main.testNativeTypeClassLiteral"
 [Object o1 = Bar.class;] => [let o1 = Class.$get($JavaScriptObject);] "nativejstypes.Main.testNativeTypeClassLiteral"
 [o1] => [o1] "o1"
 [o1 = Bar[][].class;] => [o1 = Class.$get(j_l_Object, 1);] "nativejstypes.Main.testNativeTypeClassLiteral"
 [testNativeTypeObjectMethods] => [m_testNativeTypeObjectMethods__]
-[testNativeTypeObjectMethods] => [Main.$clinit();] "nativejstypes.Main.testNativeTypeObjectMethods"
+[{
+    Bar bar = new Bar(6, 7);
+...    bar.equals(new Object());
+  }] => [Main.$clinit();] "nativejstypes.Main.testNativeTypeObjectMethods"
 [Bar bar = new Bar(6, 7);] => [let bar = new Bar(6, 7);] "nativejstypes.Main.testNativeTypeObjectMethods"
 [bar] => [bar] "bar"
 [bar.toString();] => [$Objects.m_toString__java_lang_Object(bar);] "nativejstypes.Main.testNativeTypeObjectMethods"

@@ -14,7 +14,10 @@
 [method] => [m_method___$pp_cast]
 [return null;] => [return null;] "cast.CastGenerics.method"
 [testErasureCast] => [m_testErasureCast__]
-[testErasureCast] => [CastGenerics.$clinit();] "cast.CastGenerics.testErasureCast"
+[{
+    String str = new CastGenerics<String, Number>().field;
+...    containerImplementor.get().mB();
+  }] => [CastGenerics.$clinit();] "cast.CastGenerics.testErasureCast"
 [String str = new CastGenerics<String, Number>().field;] => [let str = /**@type {?string}*/ ($Casts.$to(/**@type {!CastGenerics<?string, (Number|number)>}*/ (CastGenerics.$create__()).f_field__cast_CastGenerics, j_l_String));] "cast.CastGenerics.testErasureCast"
 [str] => [str] "str"
 [str = new CastGenerics<String, Number>().method();] => [str = /**@type {?string}*/ ($Casts.$to(/**@type {!CastGenerics<?string, (Number|number)>}*/ (CastGenerics.$create__()).m_method___$pp_cast(), j_l_String));] "cast.CastGenerics.testErasureCast"
@@ -53,7 +56,10 @@
 [containerImplementor.get().mA();] => [/**@type {Implementor}*/ ($Casts.$to(containerImplementor.m_get___$pp_cast(), Implementor)).m_mA__();] "cast.CastGenerics.testErasureCast"
 [containerImplementor.get().mB();] => [/**@type {Implementor}*/ ($Casts.$to(containerImplementor.m_get___$pp_cast(), Implementor)).m_mB__();] "cast.CastGenerics.testErasureCast"
 [testCastToParamterizedType] => [m_testCastToParamterizedType__]
-[testCastToParamterizedType] => [CastGenerics.$clinit();] "cast.CastGenerics.testCastToParamterizedType"
+[{
+    Object o = new Integer(1);
+...    cc = (CastGenerics) o;
+  }] => [CastGenerics.$clinit();] "cast.CastGenerics.testCastToParamterizedType"
 [Object o = new Integer(1);] => [let o = Integer.$create__int(1);] "cast.CastGenerics.testCastToParamterizedType"
 [o] => [o] "o"
 [CastGenerics<Error, Number> cc = (CastGenerics<Error, Number>) o;] => [let cc = /**@type {CastGenerics<Error, (Number|number)>}*/ ($Casts.$to(o, CastGenerics));] "cast.CastGenerics.testCastToParamterizedType"
@@ -90,7 +96,9 @@
 [return (EE) o;] => [return /**@type {EE}*/ ($Casts.$to(o, Empty1));] "cast.CastGenerics.method"
 [return null;] => [return null;] "cast.CastGenerics.method"
 [doSomething] => [m_doSomething__]
-[doSomething] => [CastGenerics.$clinit();] "cast.CastGenerics.doSomething"
+[{
+    return new Foo<T>() { };
+  }] => [CastGenerics.$clinit();] "cast.CastGenerics.doSomething"
 [return new Foo<T>() { };] => [return /**@type {!$1<T_1>}*/ ($1.$create__());] "cast.CastGenerics.doSomething"
 [CastGenerics] => [$clinit]
 [CastGenerics] => [CastGenerics.$clinit = () =>{};] "cast.CastGenerics.<clinit>"

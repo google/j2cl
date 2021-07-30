@@ -10,7 +10,9 @@
 [Main] => [this.$ctor__java_lang_Object__();] "jsinnerclass.Main.<init>"
 [main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
-[main] => [Main.$clinit();] "jsinnerclass.Main.main"
+[{
+    assert new Outer().method() == 5;
+  }] => [Main.$clinit();] "jsinnerclass.Main.main"
 [assert new Outer().method() == 5;] => [$Asserts.$assert(Outer.$create__().m_method__() == 5);] "jsinnerclass.Main.main"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "jsinnerclass.Main.<clinit>"

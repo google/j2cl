@@ -22,7 +22,9 @@
 [value] => [value] "value"
 [return Promise.resolve(await(Promise.resolve(value)));] => [return /**@type {Promise<T>}*/ (Promise.resolve(await /**@type {Promise<T>}*/ (Promise.resolve(value))));] "jsasync.Main.parametricAsyncMethod"
 [staticAsyncMethod] => [m_staticAsyncMethod__]
-[staticAsyncMethod] => [Main.$clinit();] "jsasync.Main.staticAsyncMethod"
+[{
+    return Promise.resolve(await(Promise.resolve((Void) null)));
+  }] => [Main.$clinit();] "jsasync.Main.staticAsyncMethod"
 [return Promise.resolve(await(Promise.resolve((Void) null)));] => [return /**@type {Promise<?void>}*/ (Promise.resolve(/**@type {?void}*/ ($Casts.$to(await /**@type {Promise<?void>}*/ (Promise.resolve(/**@type {?void}*/ (null))), Void))));] "jsasync.Main.staticAsyncMethod"
 [testAsyncLambdas] => [m_testAsyncLambdas___$pp_jsasync]
 [AsyncInterface i = () -> Promise.resolve(await(Promise.resolve(5)));] => [let i = AsyncInterface.$adapt(async () =>{

@@ -9,14 +9,21 @@
 [InstanceQualifiers] => [$ctor__instancequalifieronstaticfield_InstanceQualifiers__]
 [InstanceQualifiers] => [this.$ctor__java_lang_Object__();] "instancequalifieronstaticfield.InstanceQualifiers.<init>"
 [getStaticValue] => [m_getStaticValue__]
-[getStaticValue] => [InstanceQualifiers.$clinit();] "instancequalifieronstaticfield.InstanceQualifiers.getStaticValue"
+[{
+    return staticField;
+  }] => [InstanceQualifiers.$clinit();] "instancequalifieronstaticfield.InstanceQualifiers.getStaticValue"
 [return staticField;] => [return InstanceQualifiers.$static_staticField__instancequalifieronstaticfield_InstanceQualifiers;] "instancequalifieronstaticfield.InstanceQualifiers.getStaticValue"
 [getStaticInstanceQualifiers] => [m_getStaticInstanceQualifiers__]
-[getStaticInstanceQualifiers] => [InstanceQualifiers.$clinit();] "instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers"
+[{
+    return null;
+  }] => [InstanceQualifiers.$clinit();] "instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers"
 [return null;] => [return null;] "instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers"
 [main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
-[main] => [InstanceQualifiers.$clinit();] "instancequalifieronstaticfield.InstanceQualifiers.main"
+[{
+    InstanceQualifiers main = new InstanceQualifiers();
+...    }
+  }] => [InstanceQualifiers.$clinit();] "instancequalifieronstaticfield.InstanceQualifiers.main"
 [InstanceQualifiers main = new InstanceQualifiers();] => [let main = InstanceQualifiers.$create__();] "instancequalifieronstaticfield.InstanceQualifiers.main"
 [main] => [main] "main"
 [int i = 0;] => [let i = 0;] "instancequalifieronstaticfield.InstanceQualifiers.main"

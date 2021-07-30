@@ -335,7 +335,10 @@
 [assert boxB;] => [$Asserts.$assert(Boolean.m_booleanValue__java_lang_Boolean(boxB));] "autoboxing.AutoBoxing.testAssertStatement"
 [assert b;] => [$Asserts.$assert(b);] "autoboxing.AutoBoxing.testAssertStatement"
 [testUnboxingFromTypeVariable] => [m_testUnboxingFromTypeVariable__]
-[testUnboxingFromTypeVariable] => [AutoBoxing.$clinit();] "autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
+[{
+    T n = (T) (Long) 10L;
+...    assert l == 11L;
+  }] => [AutoBoxing.$clinit();] "autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [T n = (T) (Long) 10L;] => [let n = /**@type {T}*/ (Long.m_valueOf__long($Long.fromInt(10)));] "autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [n] => [n] "n"
 [long l = n;] => [let l = /**@type {Long}*/ (n).m_longValue__();] "autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
@@ -345,7 +348,10 @@
 [l = new Local<>().toLong(11L);] => [l = /**@type {!$1Local<Long, T>}*/ ($1Local.$create__()).m_toLong__java_lang_Long_$pp_autoboxing(Long.m_valueOf__long($Long.fromInt(11)));] "autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [assert l == 11L;] => [$Asserts.$assert($LongUtils.equals(l, $Long.fromInt(11)));] "autoboxing.AutoBoxing.testUnboxingFromTypeVariable"
 [testUnboxingFromIntersectionType] => [m_testUnboxingFromIntersectionType__]
-[testUnboxingFromIntersectionType] => [AutoBoxing.$clinit();] "autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
+[{
+    T n = (T) (Long) 10L;
+...    int i = (Integer & Comparable<Integer>) 10;
+  }] => [AutoBoxing.$clinit();] "autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [T n = (T) (Long) 10L;] => [let n = /**@type {T}*/ (Long.m_valueOf__long($Long.fromInt(10)));] "autoboxing.AutoBoxing.testUnboxingFromIntersectionType"
 [n] => [n] "n"
 [long l = n;] => [let l = /**@type {Long}*/ (n).m_longValue__();] "autoboxing.AutoBoxing.testUnboxingFromIntersectionType"

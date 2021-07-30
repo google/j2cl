@@ -247,6 +247,11 @@ public class Method extends Member implements MethodLike {
       return this;
     }
 
+    public Builder setBodySourcePosition(SourcePosition sourcePosition) {
+      this.bodySourcePosition = sourcePosition;
+      return this;
+    }
+
     public Method build() {
       if (bodySourcePosition == null) {
         bodySourcePosition = sourcePosition;

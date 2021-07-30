@@ -221,7 +221,7 @@
  (result (ref null $enums.Enum2))
  (block
   ;; enums.Enum2.$clinit();
-  ;;@ enums/Enum1.java:33:2
+  ;;@ enums/Enum1.java:33:17
   (call $$clinit__void@enums.Enum2 )
   ;; (Enum.this.name = $name);
   ;;@ enums/Enum1.java:33:2
@@ -230,10 +230,10 @@
   ;;@ enums/Enum1.java:33:2
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum.this.Enum.<init>($name,$ordinal);
-  ;;@ enums/Enum1.java:33:2
+  ;;@ enums/Enum1.java:33:17
   (drop (call $m_<init>__java_lang_String__int@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   ;; Enum2.this.$init();
-  ;;@ enums/Enum1.java:33:2
+  ;;@ enums/Enum1.java:33:17
   (call $$init__void_$p_enums_Enum2@enums.Enum2 (local.get $this))
   ;; (Enum2.this.foo = foo);
   ;;@ enums/Enum1.java:34:4
@@ -296,7 +296,7 @@
  (result (ref null $enums.Enum2))
  (block
   ;; enums.Enum2.$clinit();
-  ;;@ enums/Enum1.java:45:15
+  ;;@ enums/Enum1.java:45:27
   (call $$clinit__void@enums.Enum2 )
   ;; return null;
   ;;@ enums/Enum1.java:46:4
@@ -573,7 +573,7 @@
   ;;@ enums/Enum1.java:55:2
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
   ;; Enum.this.Enum.<init>($name,$ordinal);
-  ;;@ enums/Enum1.java:55:2
+  ;;@ enums/Enum1.java:55:45
   (drop (call $m_<init>__java_lang_String__int@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
   ;; return Enum3.this;
   ;;@ enums/Enum1.java:55:2

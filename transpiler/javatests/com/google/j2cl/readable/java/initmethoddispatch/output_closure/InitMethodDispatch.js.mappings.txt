@@ -19,7 +19,10 @@
 [InitMethodDispatch] => [return $instance;] "initmethoddispatch.InitMethodDispatch.<synthetic: ctor_create>"
 [InitMethodDispatch] => [$ctor__initmethoddispatch_InitMethodDispatch__int]
 [i] => [i] "i"
-[InitMethodDispatch] => [this.$ctor__java_lang_Object__();] "initmethoddispatch.InitMethodDispatch.<init>"
+[{
+    value = i;
+    // This will translate to a $ctor method that *does* dispatch to $init().
+  }] => [this.$ctor__java_lang_Object__();] "initmethoddispatch.InitMethodDispatch.<init>"
 [value = i;] => [this.f_value__initmethoddispatch_InitMethodDispatch = i;] "initmethoddispatch.InitMethodDispatch.<init>"
 [InitMethodDispatch] => [$clinit]
 [InitMethodDispatch] => [InitMethodDispatch.$clinit = () =>{};] "initmethoddispatch.InitMethodDispatch.<clinit>"

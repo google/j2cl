@@ -315,6 +315,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                   : convertBlock(methodDeclaration.getBody());
 
           return newMethodBuilder(methodDeclaration.sym)
+              .setBodySourcePosition(body.getSourcePosition())
               .setSourcePosition(getNamePosition(methodDeclaration))
               .setParameters(parameters)
               .addStatements(body.getStatements())

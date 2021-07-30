@@ -10,9 +10,12 @@
 [CastOnArrayInit] => [this.$ctor__java_lang_Object__();] "castonarrayinit.CastOnArrayInit.<init>"
 [fun] => [m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo]
 [args] => [args] "args"
-[fun] => [CastOnArrayInit.$clinit();] "castonarrayinit.CastOnArrayInit.fun"
+[{}] => [CastOnArrayInit.$clinit();] "castonarrayinit.CastOnArrayInit.fun"
 [test] => [m_test__]
-[test] => [CastOnArrayInit.$clinit();] "castonarrayinit.CastOnArrayInit.test"
+[{
+    Foo<E> f1 = new Foo<>();
+...    fun(f1, f2);
+  }] => [CastOnArrayInit.$clinit();] "castonarrayinit.CastOnArrayInit.test"
 [Foo<E> f1 = new Foo<>();] => [let f1 = /**@type {!Foo<E>}*/ (Foo.$create__());] "castonarrayinit.CastOnArrayInit.test"
 [f1] => [f1] "f1"
 [Foo<E> f2 = new Foo<>();] => [let f2 = /**@type {!Foo<E>}*/ (Foo.$create__());] "castonarrayinit.CastOnArrayInit.test"

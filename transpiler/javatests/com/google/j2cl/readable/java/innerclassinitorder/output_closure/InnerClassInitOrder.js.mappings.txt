@@ -116,7 +116,10 @@
 [assert (2 == x.getValue());] => [$Asserts.$assert(2 == x.m_getValue__());] "innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCallAnon"
 [main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
-[main] => [InnerClassInitOrder.$clinit();] "innerclassinitorder.InnerClassInitOrder.main"
+[{
+    InnerClassInitOrder m = new InnerClassInitOrder();
+...    m.testUnqualifiedSuperCallAnon();
+  }] => [InnerClassInitOrder.$clinit();] "innerclassinitorder.InnerClassInitOrder.main"
 [InnerClassInitOrder m = new InnerClassInitOrder();] => [let m = InnerClassInitOrder.$create__();] "innerclassinitorder.InnerClassInitOrder.main"
 [m] => [m] "m"
 [m.testOuterThisFromSuperCall();] => [m.m_testOuterThisFromSuperCall__();] "innerclassinitorder.InnerClassInitOrder.main"

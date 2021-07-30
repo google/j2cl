@@ -10,7 +10,10 @@
 [MultipleAbstractParents] => [this.$ctor__java_lang_Object__();] "multipleabstractparents.MultipleAbstractParents.<init>"
 [main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
-[main] => [MultipleAbstractParents.$clinit();] "multipleabstractparents.MultipleAbstractParents.main"
+[{
+    assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");
+...    assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");
+  }] => [MultipleAbstractParents.$clinit();] "multipleabstractparents.MultipleAbstractParents.main"
 [assert new ArrayList<String>().getFoo(null).equals("AbstractCollection");] => [$Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(/**@type {!ArrayList<?string>}*/ (ArrayList.$create__()).m_getFoo__java_lang_Object(null), "AbstractCollection"));] "multipleabstractparents.MultipleAbstractParents.main"
 [assert new StringList().getFoo(null).equals("AbstractCollection");] => [$Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(StringList.$create__().m_getFoo__java_lang_Object(null), "AbstractCollection"));] "multipleabstractparents.MultipleAbstractParents.main"
 [assert ((IStringList) new StringList()).getFoo(null).equals("AbstractCollection");] => [$Asserts.$assert(j_l_String.m_equals__java_lang_String__java_lang_Object(/**@type {IStringList}*/ (StringList.$create__()).m_getFoo__java_lang_String(null), "AbstractCollection"));] "multipleabstractparents.MultipleAbstractParents.main"

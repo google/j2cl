@@ -45,12 +45,15 @@
 [s = unchecked();] => [s = /**@type {?string}*/ (this.m_unchecked__());] "genericmethod.GenericMethod.test"
 [acceptsContent] => [m_acceptsContent__genericmethod_GenericMethod_Content]
 [content] => [content] "content"
-[acceptsContent] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.acceptsContent"
+[{}] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.acceptsContent"
 [acceptsString] => [m_acceptsString__java_lang_String]
 [string] => [string_1] "string"
-[acceptsString] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.acceptsString"
+[{}] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.acceptsString"
 [testErasureCast_wildcard] => [m_testErasureCast_wildcard__]
-[testErasureCast_wildcard] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testErasureCast_wildcard"
+[{
+    List<Container<?>> list = null;
+...    acceptsContent(deepContent);
+  }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [List<Container<?>> list = null;] => [let list = null;] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [list] => [list] "list"
 [Content content = list.get(0).get();] => [let content = /**@type {Container<Content>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get___$pp_genericmethod();] "genericmethod.GenericMethod.testErasureCast_wildcard"
@@ -70,7 +73,10 @@
 [acceptsString(deepContent.getProp());] => [GenericMethod.m_acceptsString__java_lang_String(deepContent.m_getProp___$pp_genericmethod());] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [acceptsContent(deepContent);] => [GenericMethod.m_acceptsContent__genericmethod_GenericMethod_Content(deepContent);] "genericmethod.GenericMethod.testErasureCast_wildcard"
 [testErasureCast_typeVariable] => [m_testErasureCast_typeVariable__]
-[testErasureCast_typeVariable] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testErasureCast_typeVariable"
+[{
+    List<Container<C>> list = null;
+...    acceptsContent(deepContent);
+  }] => [GenericMethod.$clinit();] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [List<Container<C>> list = null;] => [let list = null;] "genericmethod.GenericMethod.testErasureCast_typeVariable"
 [list] => [list] "list"
 [Content content = list.get(0).get();] => [let content = /**@type {Container<C>}*/ ($Casts.$to(list.getAtIndex(0), Container)).m_get___$pp_genericmethod();] "genericmethod.GenericMethod.testErasureCast_typeVariable"

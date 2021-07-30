@@ -51,7 +51,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   ;; jsinnerclass.Main.$clinit();
-  ;;@ jsinnerclass/Main.java:42:21
+  ;;@ jsinnerclass/Main.java:42:42
   (call $$clinit__void@jsinnerclass.Main )
  )
 )
@@ -210,13 +210,13 @@
  (result (ref null $jsinnerclass.Main.Outer.Inner))
  (block
   ;; jsinnerclass.Main.Outer.Inner.$clinit();
-  ;;@ jsinnerclass/Main.java:28:13
+  ;;@ jsinnerclass/Main.java:28:21
   (call $$clinit__void@jsinnerclass.Main.Outer.Inner )
   ;; (Inner.this.this = $outer_this);
   ;;@ jsinnerclass/Main.java:28:13
   (struct.set $jsinnerclass.Main.Outer.Inner $$outer_this__jsinnerclass_Main_Outer_Inner(local.get $this) (local.get $$outer_this))
   ;; Object.this.Object.<init>();
-  ;;@ jsinnerclass/Main.java:28:13
+  ;;@ jsinnerclass/Main.java:28:21
   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   ;; (Inner.this.b = ($outer_this.a + 1));
   ;;@ jsinnerclass/Main.java:29:8

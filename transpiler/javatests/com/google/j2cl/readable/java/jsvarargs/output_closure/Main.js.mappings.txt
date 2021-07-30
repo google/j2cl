@@ -12,41 +12,65 @@
 [Main] => [return $instance;] "jsvarargs.Main.<synthetic: ctor_create>"
 [Main] => [$ctor__jsvarargs_Main__int]
 [f] => [f] "f"
-[Main] => [this.$ctor__java_lang_Object__();] "jsvarargs.Main.<init>"
+[{
+    this.field = f;
+  }] => [this.$ctor__java_lang_Object__();] "jsvarargs.Main.<init>"
 [this.field = f;] => [this.f_field__jsvarargs_Main = f;] "jsvarargs.Main.<init>"
 [f1] => [f1]
 [multiplier] => [multiplier] "multiplier"
 [numbers] => [numbers] "numbers"
-[f1] => [Main.$clinit();] "jsvarargs.Main.f1"
-[f1] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f1"
+[{
+    return numbers.length + numbers[0] + multiplier;
+  }] => [Main.$clinit();] "jsvarargs.Main.f1"
+[{
+    return numbers.length + numbers[0] + multiplier;
+  }] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f1"
 [return numbers.length + numbers[0] + multiplier;] => [return numbers.length + numbers[0] + multiplier | 0;] "jsvarargs.Main.f1"
 [f2] => [f2]
 [numbers] => [numbers] "numbers"
-[f2] => [Main.$clinit();] "jsvarargs.Main.f2"
-[f2] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f2"
+[{
+    return numbers.length + numbers[0];
+  }] => [Main.$clinit();] "jsvarargs.Main.f2"
+[{
+    return numbers.length + numbers[0];
+  }] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f2"
 [return numbers.length + numbers[0];] => [return numbers.length + numbers[0] | 0;] "jsvarargs.Main.f2"
 [f3] => [f3]
 [m] => [m] "m"
 [numbers] => [numbers] "numbers"
-[f3] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f3"
+[{
+    return this.field + m + numbers[1];
+  }] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f3"
 [return this.field + m + numbers[1];] => [return this.f_field__jsvarargs_Main + m + numbers[1] | 0;] "jsvarargs.Main.f3"
 [f4] => [f4]
 [numbers] => [numbers] "numbers"
-[f4] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f4"
+[{
+    return this.field + numbers[1];
+  }] => [$Arrays.$stampType(numbers, $$int, 1);] "jsvarargs.Main.f4"
 [return this.field + numbers[1];] => [return this.f_field__jsvarargs_Main + numbers[1] | 0;] "jsvarargs.Main.f4"
 [generics] => [generics]
 [elements] => [elements] "elements"
-[generics] => [Main.$clinit();] "jsvarargs.Main.generics"
+[{
+    return elements[0];
+  }] => [Main.$clinit();] "jsvarargs.Main.generics"
 [return elements[0];] => [return elements[0];] "jsvarargs.Main.generics"
 [parameterizedType] => [parameterizedType]
 [elements] => [elements] "elements"
-[parameterizedType] => [Main.$clinit();] "jsvarargs.Main.parameterizedType"
-[parameterizedType] => [$Arrays.$stampType(elements, List, 1);] "jsvarargs.Main.parameterizedType"
+[{
+    return elements[0].get(0);
+  }] => [Main.$clinit();] "jsvarargs.Main.parameterizedType"
+[{
+    return elements[0].get(0);
+  }] => [$Arrays.$stampType(elements, List, 1);] "jsvarargs.Main.parameterizedType"
 [return elements[0].get(0);] => [return /**@type {Main}*/ ($Casts.$to(elements[0].getAtIndex(0), Main));] "jsvarargs.Main.parameterizedType"
 [parameterizedByT] => [parameterizedByT]
 [elements] => [elements] "elements"
-[parameterizedByT] => [Main.$clinit();] "jsvarargs.Main.parameterizedByT"
-[parameterizedByT] => [$Arrays.$stampType(elements, List, 1);] "jsvarargs.Main.parameterizedByT"
+[{
+    return elements[0].get(0);
+  }] => [Main.$clinit();] "jsvarargs.Main.parameterizedByT"
+[{
+    return elements[0].get(0);
+  }] => [$Arrays.$stampType(elements, List, 1);] "jsvarargs.Main.parameterizedByT"
 [return elements[0].get(0);] => [return elements[0].getAtIndex(0);] "jsvarargs.Main.parameterizedByT"
 [testStaticMethodNotFirst] => [m_testStaticMethodNotFirst__]
 [f1(1, 1, 2);] => [Main.f1(1, 1, 2);] "jsvarargs.Main.testStaticMethodNotFirst"

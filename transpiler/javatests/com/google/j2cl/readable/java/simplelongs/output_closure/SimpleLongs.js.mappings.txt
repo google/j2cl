@@ -21,7 +21,10 @@
 [sideEffect++;] => [this.f_sideEffect__simplelongs_SimpleLongs_ = this.f_sideEffect__simplelongs_SimpleLongs_ + 1 | 0;] "simplelongs.SimpleLongs.getWithSideEffect"
 [return this;] => [return this;] "simplelongs.SimpleLongs.getWithSideEffect"
 [main] => [m_main__]
-[main] => [let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value_1, /** SimpleLongs */ $qualifier_1, /** !$Long */ $value_2;] "simplelongs.SimpleLongs.main"
+[{
+    // Small literals.
+...    g = getBar();
+  }] => [let /** SimpleLongs */ $qualifier, /** !$Long */ $value, /** !$Long */ $value_1, /** SimpleLongs */ $qualifier_1, /** !$Long */ $value_2;] "simplelongs.SimpleLongs.main"
 [long a = 0L;] => [let a = $Long.fromInt(0);] "simplelongs.SimpleLongs.main"
 [a] => [a] "a"
 [a = -100000L;] => [a = $LongUtils.negate($Long.fromInt(100000));] "simplelongs.SimpleLongs.main"

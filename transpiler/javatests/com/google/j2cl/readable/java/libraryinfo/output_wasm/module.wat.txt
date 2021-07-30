@@ -95,7 +95,7 @@
  (local $jsFunction (ref null $java.lang.Object))
  (block
   ;; libraryinfo.Main.$clinit();
-  ;;@ libraryinfo/Main.java:75:21
+  ;;@ libraryinfo/Main.java:75:34
   (call $$clinit__void@libraryinfo.Main )
   ;; new Main.<init>().execute();
   ;;@ libraryinfo/Main.java:76:4
@@ -153,7 +153,7 @@
  (local $clazz (ref null $java.lang.Class))
  (block
   ;; libraryinfo.Main.$clinit();
-  ;;@ libraryinfo/Main.java:107:21
+  ;;@ libraryinfo/Main.java:107:28
   (call $$clinit__void@libraryinfo.Main )
   ;; Foo foo = null;
   ;;@ libraryinfo/Main.java:108:4
@@ -599,10 +599,10 @@
  (result (ref null $libraryinfo.Main.MyJsType))
  (block
   ;; libraryinfo.Main.MyJsType.$clinit();
-  ;;@ libraryinfo/Main.java:69:11
+  ;;@ libraryinfo/Main.java:69:22
   (call $$clinit__void@libraryinfo.Main.MyJsType )
   ;; Object.this.Object.<init>();
-  ;;@ libraryinfo/Main.java:69:11
+  ;;@ libraryinfo/Main.java:69:22
   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   ;; (MyJsType.this.someField = new Main.<init>());
   ;;@ libraryinfo/Main.java:70:6

@@ -13,7 +13,9 @@
 [foo] => [foo] "foo"
 [Enum2] => [this.f_name__java_lang_Enum_ = $name;] "enums.Enum2.<init>"
 [Enum2] => [this.f_ordinal__java_lang_Enum_ = $ordinal;] "enums.Enum2.<init>"
-[Enum2] => [this.$init___$p_enums_Enum2();] "enums.Enum2.<init>"
+[{
+    this.foo = foo;
+  }] => [this.$init___$p_enums_Enum2();] "enums.Enum2.<init>"
 [this.foo = foo;] => [this.f_foo__enums_Enum2 = foo;] "enums.Enum2.<init>"
 [Enum2] => [$create__java_lang_String__int__java_lang_Enum]
 [foo] => [foo] "foo"
@@ -37,7 +39,9 @@
 [this(somePars.length);] => [this.$ctor__enums_Enum2__java_lang_String__int__int($name, $ordinal, somePars.length);] "enums.Enum2.<init>"
 [f] => [m_f__java_lang_Object]
 [o] => [o] "o"
-[f] => [Enum2.$clinit();] "enums.Enum2.f"
+[{
+    return null;
+  }] => [Enum2.$clinit();] "enums.Enum2.f"
 [return null;] => [return null;] "enums.Enum2.f"
 [Enum2] => [m_valueOf__java_lang_String]
 [Enum2] => [Enum2.$clinit();] "enums.Enum2.valueOf"

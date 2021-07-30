@@ -9,7 +9,7 @@
 [Varargs] => [return $instance;] "varargs.Varargs.<synthetic: ctor_create>"
 [Varargs] => [$ctor__varargs_Varargs__arrayOf_int]
 [args] => [args] "args"
-[Varargs] => [this.$ctor__java_lang_Object__();] "varargs.Varargs.<init>"
+[{}] => [this.$ctor__java_lang_Object__();] "varargs.Varargs.<init>"
 [Varargs] => [$create__]
 [Varargs] => [Varargs.$clinit();] "varargs.Varargs.<synthetic: ctor_create>"
 [Varargs] => [let $instance = new Varargs();] "varargs.Varargs.<synthetic: ctor_create>"
@@ -26,11 +26,13 @@
 [args] => [args] "args"
 [fun] => [m_fun__arrayOf_java_lang_Object]
 [elements] => [elements] "elements"
-[fun] => [Varargs.$clinit();] "varargs.Varargs.fun"
+[{}] => [Varargs.$clinit();] "varargs.Varargs.fun"
 [bar] => [m_bar__java_lang_Object__java_lang_Object]
 [a] => [a] "a"
 [b] => [b] "b"
-[bar] => [Varargs.$clinit();] "varargs.Varargs.bar"
+[{
+    fun(a, b);
+  }] => [Varargs.$clinit();] "varargs.Varargs.bar"
 [fun(a, b);] => [Varargs.m_fun__arrayOf_java_lang_Object([a, b]);] "varargs.Varargs.bar"
 [main] => [m_main__]
 [Varargs v = new Varargs();] => [let v = Varargs.$create__();] "varargs.Varargs.main"

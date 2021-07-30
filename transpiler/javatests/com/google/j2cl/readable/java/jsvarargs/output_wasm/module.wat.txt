@@ -92,10 +92,10 @@
  (result (ref null $jsvarargs.Main))
  (block
   ;; jsvarargs.Main.$clinit();
-  ;;@ jsvarargs/Main.java:86:9
+  ;;@ jsvarargs/Main.java:86:21
   (call $$clinit__void@jsvarargs.Main )
   ;; Object.this.Object.<init>();
-  ;;@ jsvarargs/Main.java:86:9
+  ;;@ jsvarargs/Main.java:86:21
   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   ;; (Main.this.field = f);
   ;;@ jsvarargs/Main.java:87:4
@@ -113,7 +113,7 @@
  (result i32)
  (block
   ;; jsvarargs.Main.$clinit();
-  ;;@ jsvarargs/Main.java:92:20
+  ;;@ jsvarargs/Main.java:92:55
   (call $$clinit__void@jsvarargs.Main )
   ;; return ((numbers.length + numbers.elements[0]) + multiplier);
   ;;@ jsvarargs/Main.java:93:4
@@ -127,7 +127,7 @@
  (result i32)
  (block
   ;; jsvarargs.Main.$clinit();
-  ;;@ jsvarargs/Main.java:98:20
+  ;;@ jsvarargs/Main.java:98:39
   (call $$clinit__void@jsvarargs.Main )
   ;; return (numbers.length + numbers.elements[0]);
   ;;@ jsvarargs/Main.java:99:4
@@ -172,7 +172,7 @@
  (result (ref null $java.lang.Object))
  (block
   ;; jsvarargs.Main.$clinit();
-  ;;@ jsvarargs/Main.java:115:22
+  ;;@ jsvarargs/Main.java:115:46
   (call $$clinit__void@jsvarargs.Main )
   ;; return ((T) elements.elements[0]);
   ;;@ jsvarargs/Main.java:116:4
@@ -187,7 +187,7 @@
  (local $$qualifier (ref null $java.lang.Object))
  (block
   ;; jsvarargs.Main.$clinit();
-  ;;@ jsvarargs/Main.java:120:21
+  ;;@ jsvarargs/Main.java:120:63
   (call $$clinit__void@jsvarargs.Main )
   ;; return ((Main) (List<Main> $qualifier = ((List<Main>) elements.elements[0]),$qualifier.get(0)));
   ;;@ jsvarargs/Main.java:121:4
@@ -205,7 +205,7 @@
  (local $$qualifier (ref null $java.lang.Object))
  (block
   ;; jsvarargs.Main.$clinit();
-  ;;@ jsvarargs/Main.java:125:22
+  ;;@ jsvarargs/Main.java:125:60
   (call $$clinit__void@jsvarargs.Main )
   ;; return (List<T> $qualifier = ((List<T>) elements.elements[0]),$qualifier.get(0));
   ;;@ jsvarargs/Main.java:126:4
@@ -797,10 +797,10 @@
  (result (ref null $jsvarargs.Main.NativeObject))
  (block
   ;; jsvarargs.Main.NativeObject.$clinit();
-  ;;@ jsvarargs/Main.java:29:11
+  ;;@ jsvarargs/Main.java:29:40
   (call $$clinit__void@jsvarargs.Main.NativeObject )
   ;; Object.this.Object.<init>();
-  ;;@ jsvarargs/Main.java:29:11
+  ;;@ jsvarargs/Main.java:29:40
   (drop (call $m_<init>__@java.lang.Object (local.get $this)))
   ;; return NativeObject.this;
   ;;@ jsvarargs/Main.java:29:11
@@ -863,7 +863,7 @@
  (result (ref null $jsvarargs.Main.SubVarargsConstructorClass))
  (block
   ;; jsvarargs.Main.SubVarargsConstructorClass.$clinit();
-  ;;@ jsvarargs/Main.java:34:11
+  ;;@ jsvarargs/Main.java:34:61
   (call $$clinit__void@jsvarargs.Main.SubVarargsConstructorClass )
   ;; NativeObject.this.NativeObject.<init>(args);
   ;;@ jsvarargs/Main.java:35:6
@@ -1000,7 +1000,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  (block
   ;; jsvarargs.Main.StaticInterfaceMethodWithVarargs.$clinit();
-  ;;@ jsvarargs/Main.java:51:16
+  ;;@ jsvarargs/Main.java:51:42
   (call $$clinit__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs )
  )
 )
@@ -1145,7 +1145,7 @@
  (result (ref null $jsvarargs.Main.SubMain))
  (block
   ;; jsvarargs.Main.SubMain.$clinit();
-  ;;@ jsvarargs/Main.java:63:11
+  ;;@ jsvarargs/Main.java:63:21
   (call $$clinit__void@jsvarargs.Main.SubMain )
   ;; Main.this.Main.<init>(10);
   ;;@ jsvarargs/Main.java:64:6
@@ -1405,7 +1405,7 @@
  (result (ref null $jsvarargs.QualifiedSuperMethodCall))
  (block
   ;; jsvarargs.QualifiedSuperMethodCall.$clinit();
-  ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:9
+  ;;@ jsvarargs/QualifiedSuperMethodCall.java:19:36
   (call $$clinit__void@jsvarargs.QualifiedSuperMethodCall )
   ;; Main.this.Main.<init>(0);
   ;;@ jsvarargs/QualifiedSuperMethodCall.java:20:4

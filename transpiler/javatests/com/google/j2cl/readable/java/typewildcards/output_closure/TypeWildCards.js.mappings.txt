@@ -20,13 +20,19 @@
 [lowerBound(new GenericType<TypeWildCards>());] => [this.m_lowerBound__typewildcards_GenericType(/**@type {!GenericType<TypeWildCards>}*/ (GenericType.$create__()));] "typewildcards.TypeWildCards.test"
 [testBoundedTypeMemberAccess] => [m_testBoundedTypeMemberAccess__typewildcards_TypeWildCards_A]
 [t] => [t] "t"
-[testBoundedTypeMemberAccess] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
+[{
+    int i = t.f;
+    t.m();
+  }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [i] => [i] "i"
 [t.m();] => [/**@type {A}*/ (t).m_m__();] "typewildcards.TypeWildCards.testBoundedTypeMemberAccess"
 [testIntersectionBoundedTypeMemberAccess] => [m_testIntersectionBoundedTypeMemberAccess__typewildcards_TypeWildCards_A]
 [t] => [t] "t"
-[testIntersectionBoundedTypeMemberAccess] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[{
+    int i = t.f;
+...    t.n();
+  }] => [TypeWildCards.$clinit();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [i] => [i] "i"
 [t.m();] => [/**@type {A}*/ (t).m_m__();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"

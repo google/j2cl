@@ -9,7 +9,10 @@
 [C] => [this.$ctor__jsconstructor_JsConstructorClass_C__int(x);] "jsconstructor.JsConstructorClass$C.<init>"
 [C] => [$ctor__jsconstructor_JsConstructorClass_C__int]
 [x] => [x] "x"
-[C] => [this.$init___$p_jsconstructor_JsConstructorClass_C();] "jsconstructor.JsConstructorClass$C.<init>"
+[{
+      super(x * 2); // must call super(int), cannot call super().
+      this.fC = 6;
+    }] => [this.$init___$p_jsconstructor_JsConstructorClass_C();] "jsconstructor.JsConstructorClass$C.<init>"
 [this.fC = 6;] => [this.f_fC__jsconstructor_JsConstructorClass_C = 6;] "jsconstructor.JsConstructorClass$C.<init>"
 [C] => [$create__int__int]
 [x] => [x] "x"

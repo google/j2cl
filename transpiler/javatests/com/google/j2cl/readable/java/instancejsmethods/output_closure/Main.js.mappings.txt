@@ -31,7 +31,10 @@
 [cc.foo(1);] => [cc.myFoo(1);] "instancejsmethods.Main.testCallBySuperParent"
 [intf.intfFoo();] => [intf.m_intfFoo__();] "instancejsmethods.Main.testCallBySuperParent"
 [testCallByConcreteType] => [m_testCallByConcreteType__]
-[testCallByConcreteType] => [Main.$clinit();] "instancejsmethods.Main.testCallByConcreteType"
+[{
+    SuperParent sp = new SuperParent();
+...    c.intfFoo();
+  }] => [Main.$clinit();] "instancejsmethods.Main.testCallByConcreteType"
 [SuperParent sp = new SuperParent();] => [let sp = SuperParent.$create__();] "instancejsmethods.Main.testCallByConcreteType"
 [sp] => [sp] "sp"
 [Parent p = new Parent();] => [let p = Parent.$create__();] "instancejsmethods.Main.testCallByConcreteType"

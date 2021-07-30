@@ -372,6 +372,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               : processEnclosedBy(methodDescriptor, () -> convert(methodDeclaration.getBody()));
 
       return newMethodBuilder(methodDescriptor)
+          .setBodySourcePosition(body.getSourcePosition())
           .setSourcePosition(getSourcePosition(methodDeclaration.getName()))
           .setParameters(parameters)
           .addStatements(body.getStatements())
@@ -804,7 +805,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .setSourcePosition(getSourcePosition(statement))
           .build();
     }
-
 
     private DoWhileStatement convert(org.eclipse.jdt.core.dom.DoStatement statement) {
       return DoWhileStatement.newBuilder()

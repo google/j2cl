@@ -9,7 +9,9 @@
 [return getIntField() * 2;] => [return Math.imul(this.m_getIntField__(), 2);] "autovalue.AutoValueWithExtensions.getMemoizedNative"
 [toPrettyString] => [m_toPrettyString___$pp_autovalue]
 [create] => [m_create__]
-[create] => [AutoValueWithExtensions.$clinit();] "autovalue.AutoValueWithExtensions.create"
+[{
+    return new AutoValue_AutoValueWithExtensions(42, "text");
+  }] => [AutoValueWithExtensions.$clinit();] "autovalue.AutoValueWithExtensions.create"
 [return new AutoValue_AutoValueWithExtensions(42, "text");] => [return AutoValue__AutoValueWithExtensions.$create__int__java_lang_String(42, "text");] "autovalue.AutoValueWithExtensions.create"
 [AutoValueWithExtensions] => [$clinit]
 [AutoValueWithExtensions] => [AutoValueWithExtensions.$clinit = () =>{};] "autovalue.AutoValueWithExtensions.<clinit>"

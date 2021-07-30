@@ -23,11 +23,15 @@
 [SimpleAutoValue] => [/**@type {Array<number>}*/
   this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_;] "autovalue.SimpleAutoValue.<synthetic: ctor_js>"
 [create] => [m_create__]
-[create] => [SimpleAutoValue.$clinit();] "autovalue.SimpleAutoValue.create"
+[{
+    return new AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0, new int[] {45});
+  }] => [SimpleAutoValue.$clinit();] "autovalue.SimpleAutoValue.create"
 [return new AutoValue_SimpleAutoValue(42, true, "text", 43.0, 44.0, new int[] {45});] => [return SimpleAutoValue.$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int(42, true, "text", 43, 44, /**@type {!Array<number>}*/ ($Arrays.$init([45], $$int)));] "autovalue.SimpleAutoValue.create"
 [castAndInstanceOf] => [m_castAndInstanceOf__java_lang_Object]
 [o] => [o] "o"
-[castAndInstanceOf] => [SimpleAutoValue.$clinit();] "autovalue.SimpleAutoValue.castAndInstanceOf"
+[{
+    return o instanceof AutoValue_SimpleAutoValue[] ? (AutoValue_SimpleAutoValue[]) o : null;
+  }] => [SimpleAutoValue.$clinit();] "autovalue.SimpleAutoValue.castAndInstanceOf"
 [return o instanceof AutoValue_SimpleAutoValue[] ? (AutoValue_SimpleAutoValue[]) o : null;] => [return $Arrays.$instanceIsOfType(o, SimpleAutoValue, 1) ? /**@type {Array<SimpleAutoValue>}*/ ($Arrays.$castTo(o, SimpleAutoValue, 1)) : null;] "autovalue.SimpleAutoValue.castAndInstanceOf"
 [SimpleAutoValue] => [$clinit]
 [SimpleAutoValue] => [SimpleAutoValue.$clinit = () =>{};] "autovalue.SimpleAutoValue.<clinit>"

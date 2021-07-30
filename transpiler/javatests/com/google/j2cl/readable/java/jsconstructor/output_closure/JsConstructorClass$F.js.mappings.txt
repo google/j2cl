@@ -9,7 +9,10 @@
 [F] => [this.$ctor__jsconstructor_JsConstructorClass_F__int(x);] "jsconstructor.JsConstructorClass$F.<init>"
 [F] => [$ctor__jsconstructor_JsConstructorClass_F__int]
 [x] => [x] "x"
-[F] => [this.$init___$p_jsconstructor_JsConstructorClass_F();] "jsconstructor.JsConstructorClass$F.<init>"
+[{
+      super(x + 2); // must call super(int), cannot call super(int, int).
+      this.fF = x + 3;
+    }] => [this.$init___$p_jsconstructor_JsConstructorClass_F();] "jsconstructor.JsConstructorClass$F.<init>"
 [this.fF = x + 3;] => [this.f_fF__jsconstructor_JsConstructorClass_F = x + 3 | 0;] "jsconstructor.JsConstructorClass$F.<init>"
 [F] => [$init___$p_jsconstructor_JsConstructorClass_F]
 [public int fF = 13;] => [this.f_fF__jsconstructor_JsConstructorClass_F = 13;] "jsconstructor.JsConstructorClass$F.<init>"

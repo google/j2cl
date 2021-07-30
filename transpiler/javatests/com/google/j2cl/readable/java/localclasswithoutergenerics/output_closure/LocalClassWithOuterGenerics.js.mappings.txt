@@ -9,7 +9,10 @@
 [LocalClassWithOuterGenerics] => [$ctor__localclasswithoutergenerics_LocalClassWithOuterGenerics__]
 [LocalClassWithOuterGenerics] => [this.$ctor__java_lang_Object__();] "localclasswithoutergenerics.LocalClassWithOuterGenerics.<init>"
 [foo] => [m_foo__]
-[foo] => [LocalClassWithOuterGenerics.$clinit();] "localclasswithoutergenerics.LocalClassWithOuterGenerics.foo"
+[{
+    class Bar {
+...    Baz<Object> baz = new Baz<>();
+  }] => [LocalClassWithOuterGenerics.$clinit();] "localclasswithoutergenerics.LocalClassWithOuterGenerics.foo"
 [Bar bar = new Bar();] => [let bar = /**@type {!$1Bar<T>}*/ ($1Bar.$create__());] "localclasswithoutergenerics.LocalClassWithOuterGenerics.foo"
 [bar] => [bar] "bar"
 [Baz<Object> baz = new Baz<>();] => [let baz = /**@type {!$1Baz<*, T>}*/ ($1Baz.$create__());] "localclasswithoutergenerics.LocalClassWithOuterGenerics.foo"

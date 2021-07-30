@@ -9,7 +9,10 @@
 [Main] => [$ctor__jsenum_Main__]
 [Main] => [this.$ctor__java_lang_Object__();] "jsenum.Main.<init>"
 [testJsEnumSwitch] => [m_testJsEnumSwitch__]
-[testJsEnumSwitch] => [Main.$clinit();] "jsenum.Main.testJsEnumSwitch"
+[{
+    ComparableJsEnum comparableJsEnum =
+...    Consumer<ComparableJsEnum> consummer = e -> e.ordinal();
+  }] => [Main.$clinit();] "jsenum.Main.testJsEnumSwitch"
 [ComparableJsEnum comparableJsEnum =
         ComparableJsEnum.ONE.getValue() == 1 ? ComparableJsEnum.TWO : null;] => [let comparableJsEnum = $Overlay.m_getValue__$devirt__jsenum_Main_ComparableJsEnum(ComparableJsEnum.ONE) == 1 ? ComparableJsEnum.TWO : /**@type {?ComparableJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
 [comparableJsEnum] => [comparableJsEnum] "comparableJsEnum"

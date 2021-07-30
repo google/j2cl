@@ -9,7 +9,10 @@
 [Main] => [$ctor__libraryinfo_Main__]
 [Main] => [this.$ctor__java_lang_Object__();] "libraryinfo.Main.<init>"
 [entryPoint] => [entryPoint]
-[entryPoint] => [Main.$clinit();] "libraryinfo.Main.entryPoint"
+[{
+    new Main().execute();
+...    };
+  }] => [Main.$clinit();] "libraryinfo.Main.entryPoint"
 [new Main().execute();] => [Main.$create__().m_execute___$p_libraryinfo_Main();] "libraryinfo.Main.entryPoint"
 [Function jsFunction = new FunctionImpl();] => [let jsFunction = FunctionImpl.$create__();] "libraryinfo.Main.entryPoint"
 [jsFunction] => [jsFunction] "jsFunction"
@@ -29,7 +32,10 @@
 [toString] => [toString]
 [return super.toString();] => [return super.toString();] "libraryinfo.Main.toString"
 [main] => [main]
-[main] => [Main.$clinit();] "libraryinfo.Main.main"
+[{
+    Foo foo = null;
+...    Class<?> clazz = Foo.class;
+  }] => [Main.$clinit();] "libraryinfo.Main.main"
 [Foo foo = null;] => [let foo = null;] "libraryinfo.Main.main"
 [foo] => [foo] "foo"
 [foo.instanceMethod();] => [foo.m_instanceMethod___$pp_libraryinfo();] "libraryinfo.Main.main"

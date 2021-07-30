@@ -10,11 +10,15 @@
 [Number] => [this.$ctor__java_lang_Object__();] "importglobaljstypes.Number.<init>"
 [test] => [m_test__double]
 [x] => [x] "x"
-[test] => [importglobaljstypes_Number.$clinit();] "importglobaljstypes.Number.test"
+[{
+    return Number.fun(x);
+  }] => [importglobaljstypes_Number.$clinit();] "importglobaljstypes.Number.test"
 [return Number.fun(x);] => [return Number.isInteger(x);] "importglobaljstypes.Number.test"
 [fromCharCode] => [m_fromCharCode__arrayOf_int]
 [array] => [array] "array"
-[fromCharCode] => [importglobaljstypes_Number.$clinit();] "importglobaljstypes.Number.fromCharCode"
+[{
+    return getFromCharCodeFunction().apply(null, array);
+  }] => [importglobaljstypes_Number.$clinit();] "importglobaljstypes.Number.fromCharCode"
 [return getFromCharCodeFunction().apply(null, array);] => [return /**@type {?string}*/ ($Casts.$to(String.fromCharCode.apply(null, array), j_l_String));] "importglobaljstypes.Number.fromCharCode"
 [testJsDocForLiteralType] => [m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType]
 [a] => [a] "a"

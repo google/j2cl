@@ -46,7 +46,10 @@
 [break;] => [break;] "switchstatement.SwitchStatement.main"
 [return;] => [return;] "switchstatement.SwitchStatement.main"
 [testSwitchVariableDeclarations] => [m_testSwitchVariableDeclarations__]
-[testSwitchVariableDeclarations] => [let /** number */ unassigned, /** number */ unassigned2, /** number */ i, /** number */ j, /** number */ b, /** number */ i_1;] "switchstatement.SwitchStatement.testSwitchVariableDeclarations"
+[{
+    switch (3) {
+...    assert false;
+  }] => [let /** number */ unassigned, /** number */ unassigned2, /** number */ i, /** number */ j, /** number */ b, /** number */ i_1;] "switchstatement.SwitchStatement.testSwitchVariableDeclarations"
 [unassigned] => [unassigned] "unassigned"
 [unassigned2] => [unassigned2] "unassigned2"
 [i] => [i] "i"

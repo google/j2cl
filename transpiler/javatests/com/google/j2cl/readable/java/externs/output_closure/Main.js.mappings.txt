@@ -24,7 +24,10 @@
 [fooOverlay] => [fooOverlay] "fooOverlay"
 [main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
-[main] => [Main.$clinit();] "externs.Main.main"
+[{
+    testFooOverlay((FooOverlay) (Object) new FooImpl());
+    useDirectlyAsFoo(new FooImpl());
+  }] => [Main.$clinit();] "externs.Main.main"
 [testFooOverlay((FooOverlay) (Object) new FooImpl());] => [Main.m_testFooOverlay__externs_Main_FooOverlay(/**@type {Foo}*/ (FooImpl.$create__()));] "externs.Main.main"
 [useDirectlyAsFoo(new FooImpl());] => [Main.m_useDirectlyAsFoo__java_lang_Object(FooImpl.$create__());] "externs.Main.main"
 [Main] => [$clinit]

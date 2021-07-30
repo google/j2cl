@@ -9,7 +9,10 @@
 [Main] => [$ctor__bridgejsmethod_Main__]
 [Main] => [this.$ctor__java_lang_Object__();] "bridgejsmethod.Main.<init>"
 [test] => [m_test__]
-[test] => [Main.$clinit();] "bridgejsmethod.Main.test"
+[{
+    A a = new A<Integer>();
+...    l.fun("foo", 1);
+  }] => [Main.$clinit();] "bridgejsmethod.Main.test"
 [A a = new A<Integer>();] => [let a = /**@type {!A<Integer>}*/ (A.$create__());] "bridgejsmethod.Main.test"
 [a] => [a] "a"
 [a.fun(1);] => [a.fun(Integer.m_valueOf__int(1));] "bridgejsmethod.Main.test"

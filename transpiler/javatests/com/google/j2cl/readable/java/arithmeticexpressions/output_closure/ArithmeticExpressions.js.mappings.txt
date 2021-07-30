@@ -35,7 +35,10 @@
 [f = (float) 9223372036854775807L;] => [f = 9.223372036854776E18;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [d = (double) 9223372036854775807L;] => [d = 9.223372036854776E18;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [testPrimitives] => [m_testPrimitives__]
-[testPrimitives] => [let /** number */ $value, /** number */ $value_1;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[{
+    int a = 10,
+...    q = 3 >>> 2;
+  }] => [let /** number */ $value, /** number */ $value_1;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [int a = 10,
         b = a++,
 ...        j = (1 + 2) * (3 + 4),
@@ -115,7 +118,10 @@
 [getLongArray] => [m_getLongArray__]
 [return null;] => [return null;] "arithmeticexpressions.ArithmeticExpressions.getLongArray"
 [testCompoundBoxedTypes] => [m_testCompoundBoxedTypes__]
-[testCompoundBoxedTypes] => [let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
+[{
+    Integer c = 1000;
+...    int n = 1 + ref.field;
+  }] => [let /** Integer */ $value, /** Integer */ $value_1, /** Integer */ $value_2;] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [Integer c = 1000;] => [let c = Integer.m_valueOf__int(1000);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"
 [c] => [c] "c"
 [Integer d = 10000;] => [let d = Integer.m_valueOf__int(10000);] "arithmeticexpressions.ArithmeticExpressions.testCompoundBoxedTypes"

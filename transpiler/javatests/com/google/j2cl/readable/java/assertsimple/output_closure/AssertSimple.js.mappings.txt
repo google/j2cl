@@ -10,7 +10,9 @@
 [AssertSimple] => [this.$ctor__java_lang_Object__();] "assertsimple.AssertSimple.<init>"
 [main] => [m_main__arrayOf_java_lang_String]
 [args] => [args] "args"
-[main] => [AssertSimple.$clinit();] "assertsimple.AssertSimple.main"
+[{
+    assert 1 + 2 == 3;
+  }] => [AssertSimple.$clinit();] "assertsimple.AssertSimple.main"
 [assert 1 + 2 == 3;] => [$Asserts.$assert((1 + 2 | 0) == 3);] "assertsimple.AssertSimple.main"
 [AssertSimple] => [$clinit]
 [AssertSimple] => [AssertSimple.$clinit = () =>{};] "assertsimple.AssertSimple.<clinit>"
