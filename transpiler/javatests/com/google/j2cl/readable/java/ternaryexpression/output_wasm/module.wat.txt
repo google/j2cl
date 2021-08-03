@@ -7,16 +7,18 @@
 ;;; Code for ternaryexpression.TernaryExpression [CLASS]
 (type $ternaryexpression.TernaryExpression (struct
  (field $vtable (ref $ternaryexpression.TernaryExpression.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $ternaryexpression.TernaryExpression.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; TernaryExpression()
 (func $m_<init>__@ternaryexpression.TernaryExpression
@@ -37,6 +39,7 @@
 
 ;;; void TernaryExpression.test()
 (func $m_test__void@ternaryexpression.TernaryExpression
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $a i32)
  (local $number i32)
@@ -88,6 +91,7 @@
 
 ;;; Class<?> TernaryExpression.getClass()
 (func $m_getClass__java_lang_Class@ternaryexpression.TernaryExpression
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $ternaryexpression.TernaryExpression))

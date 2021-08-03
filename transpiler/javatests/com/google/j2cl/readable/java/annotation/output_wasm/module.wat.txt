@@ -20,15 +20,17 @@
 ;;; Code for annotation.Main [CLASS]
 (type $annotation.Main (struct
  (field $vtable (ref $annotation.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $annotation.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@annotation.Main
@@ -70,6 +72,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@annotation.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main))
@@ -152,16 +155,18 @@
 (type $annotation.Main.Bar (struct
  (field $vtable (ref $annotation.Main.Bar.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__annotation_Main_Bar (mut (ref null $annotation.Main)))
-))
+ (field $$outer_this__annotation_Main_Bar (mut (ref null $annotation.Main))))
+ (extends $java.lang.Object)
+)
 (type $annotation.Main.Bar.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_baz__int_$pp_annotation (mut (ref $function.__$int)))
-))
+ (field $m_baz__int_$pp_annotation (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Bar(Main $outer_this)
 (func $m_<init>__annotation_Main@annotation.Main.Bar
@@ -186,6 +191,7 @@
 
 ;;; int Bar.baz()
 (func $m_baz__int_$pp_annotation@annotation.Main.Bar
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $foo (ref null $java.lang.Object))
@@ -228,6 +234,7 @@
 
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@annotation.Main.Bar
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main.Bar))

@@ -13,8 +13,9 @@
 ;;; Code for varargs.Varargs [CLASS]
 (type $varargs.Varargs (struct
  (field $vtable (ref $varargs.Varargs.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $varargs.Varargs.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -24,8 +25,9 @@
  (field $m_test__int__arrayOf_java_lang_Object__void (mut (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$void)))
  (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
  (field $m_testSerializable__arrayOf_java_io_Serializable__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
- (field $m_main__void (mut (ref $function.__$void)))
-))
+ (field $m_main__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Varargs(int... args)
 (func $m_<init>__arrayOf_int@varargs.Varargs
@@ -69,6 +71,7 @@
 
 ;;; void Varargs.test(int a, Object... args)
 (func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs
+ (type $function.$int__$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
@@ -81,6 +84,7 @@
 
 ;;; void Varargs.testCloneable(Cloneable... args)
 (func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs
+ (type $function.$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $varargs.Varargs))
@@ -92,6 +96,7 @@
 
 ;;; void Varargs.testSerializable(Serializable... args)
 (func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs
+ (type $function.$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $varargs.Varargs))
@@ -133,6 +138,7 @@
 
 ;;; void Varargs.main()
 (func $m_main__void@varargs.Varargs
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $v (ref null $varargs.Varargs))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
@@ -237,6 +243,7 @@
 
 ;;; Class<?> Varargs.getClass()
 (func $m_getClass__java_lang_Class@varargs.Varargs
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Varargs))
@@ -251,8 +258,9 @@
 ;;; Code for varargs.Child [CLASS]
 (type $varargs.Child (struct
  (field $vtable (ref $varargs.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $varargs.Varargs)
+)
 (type $varargs.Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -262,8 +270,9 @@
  (field $m_test__int__arrayOf_java_lang_Object__void (mut (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$void)))
  (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
  (field $m_testSerializable__arrayOf_java_io_Serializable__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
- (field $m_main__void (mut (ref $function.__$void)))
-))
+ (field $m_main__void (mut (ref $function.__$void))))
+ (extends $varargs.Varargs.vtable)
+)
 
 ;;; Child()
 (func $m_<init>__@varargs.Child
@@ -310,6 +319,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@varargs.Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Child))

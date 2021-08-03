@@ -172,8 +172,9 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_number__innerclassinitorder_InnerClassInitOrder (mut i32))
  (field $f_outer__innerclassinitorder_InnerClassInitOrder_ (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
- (field $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_ (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
-))
+ (field $f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_ (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -194,8 +195,9 @@
  (field $m_testSuperDispatch__void (mut (ref $function.__$void)))
  (field $m_testUnqualifiedAlloc__void (mut (ref $function.__$void)))
  (field $m_testUnqualifiedSuperCall__void (mut (ref $function.__$void)))
- (field $m_testUnqualifiedSuperCallAnon__void (mut (ref $function.__$void)))
-))
+ (field $m_testUnqualifiedSuperCallAnon__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClassInitOrder()
 (func $m_<init>__@innerclassinitorder.InnerClassInitOrder
@@ -219,6 +221,7 @@
 
 ;;; void InnerClassInitOrder.testOuterThisFromSuperCall()
 (func $m_testOuterThisFromSuperCall__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
@@ -232,6 +235,7 @@
 
 ;;; void InnerClassInitOrder.testOuterThisFromThisCall()
 (func $m_testOuterThisFromThisCall__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
@@ -245,6 +249,7 @@
 
 ;;; void InnerClassInitOrder.testExtendsNested()
 (func $m_testExtendsNested__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -259,6 +264,7 @@
 
 ;;; void InnerClassInitOrder.testExtendsNestedWithGenerics()
 (func $m_testExtendsNestedWithGenerics__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -273,6 +279,7 @@
 
 ;;; void InnerClassInitOrder.testInnerClassCtors()
 (func $m_testInnerClassCtors__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $p1 (ref null $innerclassinitorder.InnerClassInitOrder.P1))
  (local $p2 (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
@@ -291,6 +298,7 @@
 
 ;;; void InnerClassInitOrder.testInnerClassInitialization()
 (func $m_testInnerClassInitialization__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
@@ -304,6 +312,7 @@
 
 ;;; void InnerClassInitOrder.testInnerClassLoop()
 (func $m_testInnerClassLoop__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $results (ref null $javaemul.internal.WasmArray.OfObject))
  (local $i i32)
@@ -368,6 +377,7 @@
 
 ;;; void InnerClassInitOrder.testOuterIsNotSuper()
 (func $m_testOuterIsNotSuper__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -382,6 +392,7 @@
 
 ;;; void InnerClassInitOrder.testOuterIsNotSuperAnon()
 (func $m_testOuterIsNotSuperAnon__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -396,6 +407,7 @@
 
 ;;; void InnerClassInitOrder.testQualifiedSuperCall()
 (func $m_testQualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -410,6 +422,7 @@
 
 ;;; void InnerClassInitOrder.testQualifiedSuperCallAnon()
 (func $m_testQualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -424,6 +437,7 @@
 
 ;;; void InnerClassInitOrder.testSuperDispatch()
 (func $m_testSuperDispatch__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.rtt)))
@@ -434,6 +448,7 @@
 
 ;;; void InnerClassInitOrder.testUnqualifiedAlloc()
 (func $m_testUnqualifiedAlloc__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -448,6 +463,7 @@
 
 ;;; void InnerClassInitOrder.testUnqualifiedSuperCall()
 (func $m_testUnqualifiedSuperCall__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -462,6 +478,7 @@
 
 ;;; void InnerClassInitOrder.testUnqualifiedSuperCallAnon()
 (func $m_testUnqualifiedSuperCallAnon__void@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $x (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -572,6 +589,7 @@
 
 ;;; Class<?> InnerClassInitOrder.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder))
@@ -586,15 +604,17 @@
 ;;; Code for innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase [CLASS]
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; OuterRefFromSuperCtorBase(Object o)
 (func $m_<init>__java_lang_Object@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
@@ -640,6 +660,7 @@
 
 ;;; Class<?> OuterRefFromSuperCtorBase.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase))
@@ -655,15 +676,17 @@
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder))))
+ (extends $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase)
+)
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable)
+)
 
 ;;; OuterRefFromSuperCtorCall(InnerClassInitOrder $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
@@ -709,6 +732,7 @@
 
 ;;; Class<?> OuterRefFromSuperCtorCall.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))
@@ -724,15 +748,17 @@
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1 (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall))))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; <anonymous> extends Object(OuterRefFromSuperCtorCall $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_OuterRefFromSuperCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
@@ -757,6 +783,7 @@
 
 ;;; String <anonymous> extends Object.toString()
 (func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
+ (type $function.__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
@@ -795,6 +822,7 @@
 
 ;;; Class<?> <anonymous> extends Object.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall.1))
@@ -810,15 +838,17 @@
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall (mut (ref null $innerclassinitorder.InnerClassInitOrder))))
+ (extends $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase)
+)
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorBase.vtable)
+)
 
 ;;; OuterRefFromThisCtorCall(InnerClassInitOrder $outer_this, Object object)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder__java_lang_Object@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
@@ -883,6 +913,7 @@
 
 ;;; Class<?> OuterRefFromThisCtorCall.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))
@@ -898,15 +929,17 @@
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1 (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall))))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; <anonymous> extends Object(OuterRefFromThisCtorCall $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_OuterRefFromThisCtorCall@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
@@ -931,6 +964,7 @@
 
 ;;; String <anonymous> extends Object.toString()
 (func $m_toString__java_lang_String@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
+ (type $function.__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
@@ -969,6 +1003,7 @@
 
 ;;; Class<?> <anonymous> extends Object.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall.1))
@@ -984,16 +1019,18 @@
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder))))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_callInner__void_$pp_innerclassinitorder (mut (ref $function.__$void)))
-))
+ (field $m_callInner__void_$pp_innerclassinitorder (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClass(InnerClassInitOrder $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.InnerClass
@@ -1021,6 +1058,7 @@
 
 ;;; void InnerClass.callInner()
 (func $m_callInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.rtt)))
@@ -1068,6 +1106,7 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.InnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))
@@ -1083,16 +1122,18 @@
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_InnerClass_1ReallyInnerClass (mut (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass))))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_callReallyInner__void_$pp_innerclassinitorder (mut (ref $function.__$void)))
-))
+ (field $m_callReallyInner__void_$pp_innerclassinitorder (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ReallyInnerClass(InnerClass $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_InnerClass@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
@@ -1120,6 +1161,7 @@
 
 ;;; void ReallyInnerClass.callReallyInner()
 (func $m_callReallyInner__void_$pp_innerclassinitorder@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass.rtt)))
@@ -1164,6 +1206,7 @@
 
 ;;; Class<?> ReallyInnerClass.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.InnerClass.1ReallyInnerClass))
@@ -1179,15 +1222,17 @@
 (type $innerclassinitorder.InnerClassInitOrder.P1 (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.P1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_value__innerclassinitorder_InnerClassInitOrder_P1 (mut i32))
-))
+ (field $f_value__innerclassinitorder_InnerClassInitOrder_P1 (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.P1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; P1()
 (func $m_<init>__@innerclassinitorder.InnerClassInitOrder.P1
@@ -1250,6 +1295,7 @@
 
 ;;; Class<?> P1.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.P1))
@@ -1266,15 +1312,17 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_value__innerclassinitorder_InnerClassInitOrder_P1 (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1))))
+ (extends $innerclassinitorder.InnerClassInitOrder.P1)
+)
 (type $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $innerclassinitorder.InnerClassInitOrder.P1.vtable)
+)
 
 ;;; P2(P1<T1> $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_P1@innerclassinitorder.InnerClassInitOrder.P1.P2
@@ -1339,6 +1387,7 @@
 
 ;;; Class<?> P2.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1.P2
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))
@@ -1356,15 +1405,17 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_value__innerclassinitorder_InnerClassInitOrder_P1 (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1)))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2_P3 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_P1_P2_P3 (mut (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2))))
+ (extends $innerclassinitorder.InnerClassInitOrder.P1.P2)
+)
 (type $innerclassinitorder.InnerClassInitOrder.P1.P2.P3.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $innerclassinitorder.InnerClassInitOrder.P1.P2.vtable)
+)
 
 ;;; P3(P2<T2, T1> $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_P1_P2@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
@@ -1429,6 +1480,7 @@
 
 ;;; Class<?> P3.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.P1.P2.P3
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.P1.P2.P3))
@@ -1443,16 +1495,18 @@
 ;;; Code for innerclassinitorder.InnerClassInitOrder.ESOuter [CLASS]
 (type $innerclassinitorder.InnerClassInitOrder.ESOuter (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.ESOuter.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner)))
-))
+ (field $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ESOuter()
 (func $m_<init>__@innerclassinitorder.InnerClassInitOrder.ESOuter
@@ -1473,6 +1527,7 @@
 
 ;;; ESInner ESOuter.newESInner()
 (func $m_newESInner__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner@innerclassinitorder.InnerClassInitOrder.ESOuter
+ (type $function.__$innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
@@ -1508,6 +1563,7 @@
 
 ;;; Class<?> ESOuter.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESOuter
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter))
@@ -1524,15 +1580,17 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter)))
- (field $f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut i32))
-))
+ (field $f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ESInner(ESOuter $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
@@ -1606,6 +1664,7 @@
 
 ;;; Class<?> ESInner.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner))
@@ -1622,15 +1681,17 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESOuter)))
- (field $f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut i32))
-))
+ (field $f_value__innerclassinitorder_InnerClassInitOrder_ESOuter_ESInner (mut i32)))
+ (extends $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner)
+)
 (type $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $innerclassinitorder.InnerClassInitOrder.ESOuter.ESInner.vtable)
+)
 
 ;;; ESInnerSubclass(ESOuter outer)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESOuter@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
@@ -1692,6 +1753,7 @@
 
 ;;; Class<?> ESInnerSubclass.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESInnerSubclass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESInnerSubclass))
@@ -1706,16 +1768,18 @@
 ;;; Code for innerclassinitorder.InnerClassInitOrder.ESWGOuter [CLASS]
 (type $innerclassinitorder.InnerClassInitOrder.ESWGOuter (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.ESWGOuter.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner)))
-))
+ (field $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ESWGOuter()
 (func $m_<init>__@innerclassinitorder.InnerClassInitOrder.ESWGOuter
@@ -1736,6 +1800,7 @@
 
 ;;; ESWGInner<T> ESWGOuter.newESWGInner()
 (func $m_newESWGInner__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner@innerclassinitorder.InnerClassInitOrder.ESWGOuter
+ (type $function.__$innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
@@ -1771,6 +1836,7 @@
 
 ;;; Class<?> ESWGOuter.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESWGOuter
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter))
@@ -1787,15 +1853,17 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter)))
- (field $f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut i32))
-))
+ (field $f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ESWGInner(ESWGOuter<T> $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
@@ -1869,6 +1937,7 @@
 
 ;;; Class<?> ESWGInner.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner))
@@ -1885,15 +1954,17 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut (ref null $innerclassinitorder.InnerClassInitOrder.ESWGOuter)))
- (field $f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut i32))
-))
+ (field $f_value__innerclassinitorder_InnerClassInitOrder_ESWGOuter_ESWGInner (mut i32)))
+ (extends $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner)
+)
 (type $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $innerclassinitorder.InnerClassInitOrder.ESWGOuter.ESWGInner.vtable)
+)
 
 ;;; ESWGInnerSubclass(ESWGOuter<String> outer)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_ESWGOuter@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
@@ -1955,6 +2026,7 @@
 
 ;;; Class<?> ESWGInnerSubclass.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.ESWGInnerSubclass))
@@ -1971,16 +2043,18 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_1AddNumber (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
- (field $f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber (mut i32))
-))
+ (field $f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_act__void (mut (ref $function.__$void)))
-))
+ (field $m_act__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; AddNumber(InnerClassInitOrder $outer_this, int i)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder__int@innerclassinitorder.InnerClassInitOrder.1AddNumber
@@ -2034,16 +2108,18 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_1AddNumber (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
  (field $f_num__innerclassinitorder_InnerClassInitOrder_1AddNumber (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder))))
+ (extends $innerclassinitorder.InnerClassInitOrder.1AddNumber)
+)
 (type $innerclassinitorder.InnerClassInitOrder.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_act__void (mut (ref $function.__$void)))
-))
+ (field $m_act__void (mut (ref $function.__$void))))
+ (extends $innerclassinitorder.InnerClassInitOrder.1AddNumber.vtable)
+)
 
 ;;; <anonymous> extends AddNumber(InnerClassInitOrder $outer_this, int $_0)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder__int@innerclassinitorder.InnerClassInitOrder.1
@@ -2069,6 +2145,7 @@
 
 ;;; void <anonymous> extends AddNumber.act()
 (func $m_act__void@innerclassinitorder.InnerClassInitOrder.1
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclassinitorder.InnerClassInitOrder.1.rtt)))
@@ -2103,6 +2180,7 @@
 
 ;;; Class<?> <anonymous> extends AddNumber.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.1))
@@ -2118,16 +2196,18 @@
 (type $innerclassinitorder.InnerClassInitOrder.Outer (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.Outer.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_value__innerclassinitorder_InnerClassInitOrder_Outer (mut i32))
-))
+ (field $f_value__innerclassinitorder_InnerClassInitOrder_Outer (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.Outer.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_checkDispatch__int (mut (ref $function.__$int)))
-))
+ (field $m_checkDispatch__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Outer(int i)
 (func $m_<init>__int@innerclassinitorder.InnerClassInitOrder.Outer
@@ -2152,6 +2232,7 @@
 
 ;;; int Outer.checkDispatch()
 (func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
@@ -2187,6 +2268,7 @@
 
 ;;; Class<?> Outer.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer))
@@ -2202,16 +2284,18 @@
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer))))
+ (extends $java.lang.Object)
+)
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getValue__int (mut (ref $function.__$int)))
-))
+ (field $m_getValue__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; OuterIsNotSuper(Outer $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
@@ -2236,6 +2320,7 @@
 
 ;;; int OuterIsNotSuper.getValue()
 (func $m_getValue__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
@@ -2271,6 +2356,7 @@
 
 ;;; Class<?> OuterIsNotSuper.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
@@ -2287,8 +2373,9 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_value__innerclassinitorder_InnerClassInitOrder_Outer (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer)
+)
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -2298,8 +2385,9 @@
  (field $m_checkDispatch__int (mut (ref $function.__$int)))
  (field $m_checkDispatchFromSub1__int (mut (ref $function.__$int)))
  (field $m_checkDispatchFromSub2__int (mut (ref $function.__$int)))
- (field $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper)))
-))
+ (field $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref $function.__$innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.vtable)
+)
 
 ;;; OuterIsSuper(Outer $outer_this, int i)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
@@ -2325,6 +2413,7 @@
 
 ;;; int OuterIsSuper.checkDispatch()
 (func $m_checkDispatch__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
@@ -2339,6 +2428,7 @@
 
 ;;; int OuterIsSuper.checkDispatchFromSub1()
 (func $m_checkDispatchFromSub1__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
@@ -2353,6 +2443,7 @@
 
 ;;; int OuterIsSuper.checkDispatchFromSub2()
 (func $m_checkDispatchFromSub2__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $$qualifier (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
@@ -2371,6 +2462,7 @@
 
 ;;; OuterIsNotSuper OuterIsSuper.unqualifiedAlloc()
 (func $m_unqualifiedAlloc__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (type $function.__$innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
@@ -2406,6 +2498,7 @@
 
 ;;; Class<?> OuterIsSuper.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))
@@ -2422,8 +2515,9 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_value__innerclassinitorder_InnerClassInitOrder_Outer (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper_1 (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer)
+)
 (type $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -2431,8 +2525,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_checkDispatch__int (mut (ref $function.__$int)))
- (field $m_go__int (mut (ref $function.__$int)))
-))
+ (field $m_go__int (mut (ref $function.__$int))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.vtable)
+)
 
 ;;; <anonymous> extends Outer(OuterIsSuper $outer_this, int $_0)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
@@ -2458,6 +2553,7 @@
 
 ;;; int <anonymous> extends Outer.go()
 (func $m_go__int@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
@@ -2493,6 +2589,7 @@
 
 ;;; Class<?> <anonymous> extends Outer.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper.1))
@@ -2508,16 +2605,18 @@
 (type $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall (struct
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper)
+)
 (type $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getValue__int (mut (ref $function.__$int)))
-))
+ (field $m_getValue__int (mut (ref $function.__$int))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable)
+)
 
 ;;; TestQualifiedSuperCall()
 (func $m_<init>__@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
@@ -2559,6 +2658,7 @@
 
 ;;; Class<?> TestQualifiedSuperCall.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall))
@@ -2575,16 +2675,18 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper)
+)
 (type $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getValue__int (mut (ref $function.__$int)))
-))
+ (field $m_getValue__int (mut (ref $function.__$int))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable)
+)
 
 ;;; TestUnqualifiedSuperCall(Outer $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder_Outer@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
@@ -2630,6 +2732,7 @@
 
 ;;; Class<?> TestUnqualifiedSuperCall.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall))
@@ -2646,16 +2749,18 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.2.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_2 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_2 (mut (ref null $innerclassinitorder.InnerClassInitOrder))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper)
+)
 (type $innerclassinitorder.InnerClassInitOrder.2.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getValue__int (mut (ref $function.__$int)))
-))
+ (field $m_getValue__int (mut (ref $function.__$int))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper.vtable)
+)
 
 ;;; <anonymous> extends OuterIsNotSuper(InnerClassInitOrder $outer_this, OuterIsSuper $super_outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.2
@@ -2702,6 +2807,7 @@
 
 ;;; Class<?> <anonymous> extends OuterIsNotSuper.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.2
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.2))
@@ -2718,16 +2824,18 @@
  (field $vtable (ref $innerclassinitorder.InnerClassInitOrder.3.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_3 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_3 (mut (ref null $innerclassinitorder.InnerClassInitOrder))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall)
+)
 (type $innerclassinitorder.InnerClassInitOrder.3.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getValue__int (mut (ref $function.__$int)))
-))
+ (field $m_getValue__int (mut (ref $function.__$int))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall.vtable)
+)
 
 ;;; <anonymous> extends TestQualifiedSuperCall(InnerClassInitOrder $outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder@innerclassinitorder.InnerClassInitOrder.3
@@ -2773,6 +2881,7 @@
 
 ;;; Class<?> <anonymous> extends TestQualifiedSuperCall.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.3
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.3))
@@ -2790,16 +2899,18 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsNotSuper (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
  (field $$outer_this__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall (mut (ref null $innerclassinitorder.InnerClassInitOrder.Outer)))
- (field $$outer_this__innerclassinitorder_InnerClassInitOrder_4 (mut (ref null $innerclassinitorder.InnerClassInitOrder)))
-))
+ (field $$outer_this__innerclassinitorder_InnerClassInitOrder_4 (mut (ref null $innerclassinitorder.InnerClassInitOrder))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall)
+)
 (type $innerclassinitorder.InnerClassInitOrder.4.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getValue__int (mut (ref $function.__$int)))
-))
+ (field $m_getValue__int (mut (ref $function.__$int))))
+ (extends $innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall.vtable)
+)
 
 ;;; <anonymous> extends TestUnqualifiedSuperCall(InnerClassInitOrder $outer_this, OuterIsSuper $super_outer_this)
 (func $m_<init>__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper@innerclassinitorder.InnerClassInitOrder.4
@@ -2846,6 +2957,7 @@
 
 ;;; Class<?> <anonymous> extends TestUnqualifiedSuperCall.getClass()
 (func $m_getClass__java_lang_Class@innerclassinitorder.InnerClassInitOrder.4
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclassinitorder.InnerClassInitOrder.4))

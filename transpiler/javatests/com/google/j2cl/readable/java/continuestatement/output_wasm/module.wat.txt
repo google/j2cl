@@ -7,16 +7,18 @@
 ;;; Code for continuestatement.ContinueStatement [CLASS]
 (type $continuestatement.ContinueStatement (struct
  (field $vtable (ref $continuestatement.ContinueStatement.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $continuestatement.ContinueStatement.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ContinueStatement()
 (func $m_<init>__@continuestatement.ContinueStatement
@@ -37,6 +39,7 @@
 
 ;;; void ContinueStatement.test()
 (func $m_test__void@continuestatement.ContinueStatement
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $continuestatement.ContinueStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $continuestatement.ContinueStatement.rtt)))
@@ -83,6 +86,7 @@
 
 ;;; Class<?> ContinueStatement.getClass()
 (func $m_getClass__java_lang_Class@continuestatement.ContinueStatement
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $continuestatement.ContinueStatement))

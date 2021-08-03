@@ -29,16 +29,18 @@
 ;;; Code for anonymousclass.SomeClass [CLASS]
 (type $anonymousclass.SomeClass (struct
  (field $vtable (ref $anonymousclass.SomeClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $anonymousclass.SomeClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
-))
+ (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SomeClass(int i)
 (func $m_<init>__int@anonymousclass.SomeClass
@@ -82,16 +84,18 @@
 ;;; Code for anonymousclass.AnonymousClass [CLASS]
 (type $anonymousclass.AnonymousClass (struct
  (field $vtable (ref $anonymousclass.AnonymousClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $anonymousclass.AnonymousClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_main__void (mut (ref $function.__$void)))
-))
+ (field $m_main__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; AnonymousClass()
 (func $m_<init>__@anonymousclass.AnonymousClass
@@ -112,6 +116,7 @@
 
 ;;; void AnonymousClass.main()
 (func $m_main__void@anonymousclass.AnonymousClass
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $instance (ref null $anonymousclass.SomeClass))
  (local $this (ref null $anonymousclass.AnonymousClass))
@@ -147,6 +152,7 @@
 
 ;;; Class<?> AnonymousClass.getClass()
 (func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousclass.AnonymousClass))
@@ -164,16 +170,18 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousclass_AnonymousClass_1 (mut (ref null $anonymousclass.AnonymousClass)))
  (field $f_object__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
- (field $f_outer__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
-))
+ (field $f_outer__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object))))
+ (extends $anonymousclass.SomeClass)
+)
 (type $anonymousclass.AnonymousClass.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
-))
+ (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String))))
+ (extends $anonymousclass.SomeClass.vtable)
+)
 
 ;;; <anonymous> extends SomeClass(AnonymousClass $outer_this, int $_0)
 (func $m_<init>__anonymousclass_AnonymousClass__int@anonymousclass.AnonymousClass.1
@@ -202,6 +210,7 @@
 
 ;;; String <anonymous> extends SomeClass.foo()
 (func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1
+ (type $function.__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $this (ref null $anonymousclass.AnonymousClass.1))
@@ -250,6 +259,7 @@
 
 ;;; Class<?> <anonymous> extends SomeClass.getClass()
 (func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousclass.AnonymousClass.1))
@@ -305,16 +315,18 @@
 ;;; Code for anonymousclass.SomeInterface.1 [CLASS]
 (type $anonymousclass.SomeInterface.1 (struct
  (field $vtable (ref $anonymousclass.SomeInterface.1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $anonymousclass.SomeClass)
+)
 (type $anonymousclass.SomeInterface.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String)))
-))
+ (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String))))
+ (extends $anonymousclass.SomeClass.vtable)
+)
 
 ;;; <anonymous> extends SomeClass(int $_0)
 (func $m_<init>__int@anonymousclass.SomeInterface.1
@@ -336,6 +348,7 @@
 
 ;;; String <anonymous> extends SomeClass.foo()
 (func $m_foo__java_lang_String@anonymousclass.SomeInterface.1
+ (type $function.__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  (local $this (ref null $anonymousclass.SomeInterface.1))
@@ -371,6 +384,7 @@
 
 ;;; Class<?> <anonymous> extends SomeClass.getClass()
 (func $m_getClass__java_lang_Class@anonymousclass.SomeInterface.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousclass.SomeInterface.1))

@@ -302,6 +302,8 @@ public class WasmModuleGenerator {
     // to have matching signatures.
     if (methodDescriptor.isClassDynamicDispatch()) {
       builder.newLine();
+      builder.append(String.format("(type %s)", environment.getFunctionTypeName(methodDescriptor)));
+      builder.newLine();
       builder.append(
           String.format(
               "(param $this.untyped %s)",
@@ -402,9 +404,15 @@ public class WasmModuleGenerator {
     builder.append("(type " + environment.getWasmTypeName(type.getTypeDescriptor()) + " (struct");
     builder.indent();
     renderTypeFields(type);
+    builder.append(")");
+    if (type.getSuperTypeDescriptor() != null) {
+      builder.newLine();
+      builder.append(
+          "(extends " + environment.getWasmTypeName(type.getSuperTypeDescriptor()) + ")");
+    }
     builder.unindent();
     builder.newLine();
-    builder.append("))");
+    builder.append(")");
   }
 
   private void renderTypeFields(Type type) {
@@ -436,9 +444,16 @@ public class WasmModuleGenerator {
             "(type %s (struct", environment.getWasmVtableTypeName(type.getTypeDescriptor())));
     builder.indent();
     renderVtableTypeFields(type);
+    builder.append(")");
+    if (type.getSuperTypeDescriptor() != null) {
+      builder.newLine();
+      builder.append(
+          "(extends " + environment.getWasmVtableTypeName(type.getSuperTypeDescriptor()) + ")");
+    }
+
     builder.unindent();
     builder.newLine();
-    builder.append("))");
+    builder.append(")");
   }
 
   private void renderVtableTypeFields(Type type) {

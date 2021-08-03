@@ -25,15 +25,17 @@
 ;;; Code for unreachableclass.Main [CLASS]
 (type $unreachableclass.Main (struct
  (field $vtable (ref $unreachableclass.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $unreachableclass.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@unreachableclass.Main
@@ -127,6 +129,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main))
@@ -142,16 +145,18 @@
 (type $unreachableclass.Main.1A (struct
  (field $vtable (ref $unreachableclass.Main.1A.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__unreachableclass_Main_1A (mut (ref null $unreachableclass.Main)))
-))
+ (field $$outer_this__unreachableclass_Main_1A (mut (ref null $unreachableclass.Main))))
+ (extends $java.lang.Object)
+)
 (type $unreachableclass.Main.1A.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_m__void_$pp_unreachableclass (mut (ref $function.__$void)))
-))
+ (field $m_m__void_$pp_unreachableclass (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; A(Main $outer_this)
 (func $m_<init>__unreachableclass_Main@unreachableclass.Main.1A
@@ -176,6 +181,7 @@
 
 ;;; void A.m()
 (func $m_m__void_$pp_unreachableclass@unreachableclass.Main.1A
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $unreachableclass.Main.1A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.rtt)))
@@ -207,6 +213,7 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1A
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A))
@@ -222,15 +229,17 @@
 (type $unreachableclass.Main.1A.1B (struct
  (field $vtable (ref $unreachableclass.Main.1A.1B.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__unreachableclass_Main_1A_1B (mut (ref null $unreachableclass.Main.1A)))
-))
+ (field $$outer_this__unreachableclass_Main_1A_1B (mut (ref null $unreachableclass.Main.1A))))
+ (extends $java.lang.Object)
+)
 (type $unreachableclass.Main.1A.1B.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; B(A $outer_this)
 (func $m_<init>__unreachableclass_Main_1A@unreachableclass.Main.1A.1B
@@ -283,6 +292,7 @@
 
 ;;; Class<?> B.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1A.1B
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A.1B))
@@ -298,15 +308,17 @@
 (type $unreachableclass.Main.1 (struct
  (field $vtable (ref $unreachableclass.Main.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__unreachableclass_Main_1 (mut (ref null $unreachableclass.Main)))
-))
+ (field $$outer_this__unreachableclass_Main_1 (mut (ref null $unreachableclass.Main))))
+ (extends $java.lang.Object)
+)
 (type $unreachableclass.Main.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; <anonymous> extends Object(Main $outer_this)
 (func $m_<init>__unreachableclass_Main@unreachableclass.Main.1
@@ -352,6 +364,7 @@
 
 ;;; Class<?> <anonymous> extends Object.getClass()
 (func $m_getClass__java_lang_Class@unreachableclass.Main.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1))

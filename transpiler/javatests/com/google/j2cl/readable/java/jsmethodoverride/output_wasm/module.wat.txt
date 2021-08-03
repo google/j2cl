@@ -13,16 +13,18 @@
 ;;; Code for jsmethodoverride.Parent [CLASS]
 (type $jsmethodoverride.Parent (struct
  (field $vtable (ref $jsmethodoverride.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $jsmethodoverride.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__void (mut (ref $function.__$void)))
-))
+ (field $m_foo__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Parent()
 (func $m_<init>__@jsmethodoverride.Parent
@@ -43,6 +45,7 @@
 
 ;;; void Parent.foo()
 (func $m_foo__void@jsmethodoverride.Parent
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsmethodoverride.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
@@ -74,6 +77,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@jsmethodoverride.Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Parent))
@@ -88,16 +92,18 @@
 ;;; Code for jsmethodoverride.Child [CLASS]
 (type $jsmethodoverride.Child (struct
  (field $vtable (ref $jsmethodoverride.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $jsmethodoverride.Parent)
+)
 (type $jsmethodoverride.Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__void (mut (ref $function.__$void)))
-))
+ (field $m_foo__void (mut (ref $function.__$void))))
+ (extends $jsmethodoverride.Parent.vtable)
+)
 
 ;;; Child()
 (func $m_<init>__@jsmethodoverride.Child
@@ -118,6 +124,7 @@
 
 ;;; void Child.foo()
 (func $m_foo__void@jsmethodoverride.Child
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsmethodoverride.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
@@ -149,6 +156,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@jsmethodoverride.Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Child))

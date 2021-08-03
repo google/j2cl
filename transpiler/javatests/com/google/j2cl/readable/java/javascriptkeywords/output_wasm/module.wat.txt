@@ -7,16 +7,18 @@
 ;;; Code for javascriptkeywords.JSKeyWords [CLASS]
 (type $javascriptkeywords.JSKeyWords (struct
  (field $vtable (ref $javascriptkeywords.JSKeyWords.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $javascriptkeywords.JSKeyWords.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__int__int (mut (ref $function.$int__$int)))
-))
+ (field $m_test__int__int (mut (ref $function.$int__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; JSKeyWords()
 (func $m_<init>__@javascriptkeywords.JSKeyWords
@@ -37,6 +39,7 @@
 
 ;;; int JSKeyWords.test(int in)
 (func $m_test__int__int@javascriptkeywords.JSKeyWords
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $in i32)
  (result i32)
@@ -77,6 +80,7 @@
 
 ;;; Class<?> JSKeyWords.getClass()
 (func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $javascriptkeywords.JSKeyWords))

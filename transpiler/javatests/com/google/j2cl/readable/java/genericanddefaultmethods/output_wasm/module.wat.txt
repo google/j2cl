@@ -71,16 +71,18 @@
 ;;; Code for genericanddefaultmethods.GenericClass [CLASS]
 (type $genericanddefaultmethods.GenericClass (struct
  (field $vtable (ref $genericanddefaultmethods.GenericClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $genericanddefaultmethods.GenericClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
-))
+ (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; GenericClass()
 (func $m_<init>__@genericanddefaultmethods.GenericClass
@@ -101,6 +103,7 @@
 
 ;;; void GenericClass.foo(T value)
 (func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.io.PrintStream))
@@ -145,6 +148,7 @@
 
 ;;; Class<?> GenericClass.getClass()
 (func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
@@ -159,8 +163,9 @@
 ;;; Code for genericanddefaultmethods.ConcreteClass [CLASS]
 (type $genericanddefaultmethods.ConcreteClass (struct
  (field $vtable (ref $genericanddefaultmethods.ConcreteClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $genericanddefaultmethods.GenericClass)
+)
 (type $genericanddefaultmethods.ConcreteClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -168,8 +173,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_foo__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
-))
+ (field $m_foo__java_lang_String__void (mut (ref $function.$java.lang.String__$void))))
+ (extends $genericanddefaultmethods.GenericClass.vtable)
+)
 
 ;;; ConcreteClass()
 (func $m_<init>__@genericanddefaultmethods.ConcreteClass
@@ -190,6 +196,7 @@
 
 ;;; void ConcreteClass.foo(String arg0)
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass
+ (type $function.$java.lang.String__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
@@ -204,6 +211,7 @@
 
 ;;; void ConcreteClass.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
@@ -242,6 +250,7 @@
 
 ;;; Class<?> ConcreteClass.getClass()
 (func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))

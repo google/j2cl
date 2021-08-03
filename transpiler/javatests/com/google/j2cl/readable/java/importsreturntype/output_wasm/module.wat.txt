@@ -19,16 +19,18 @@
 ;;; Code for importsreturntype.ImportsReturnType [CLASS]
 (type $importsreturntype.ImportsReturnType (struct
  (field $vtable (ref $importsreturntype.ImportsReturnType.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $importsreturntype.ImportsReturnType.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_get__importsreturntype_ImportsReturnType_Set (mut (ref $function.__$importsreturntype.ImportsReturnType.Set)))
-))
+ (field $m_get__importsreturntype_ImportsReturnType_Set (mut (ref $function.__$importsreturntype.ImportsReturnType.Set))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ImportsReturnType()
 (func $m_<init>__@importsreturntype.ImportsReturnType
@@ -49,6 +51,7 @@
 
 ;;; Set<Entry> ImportsReturnType.get()
 (func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType
+ (type $function.__$importsreturntype.ImportsReturnType.Set)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $importsreturntype.ImportsReturnType.Set))
  (local $this (ref null $importsreturntype.ImportsReturnType))
@@ -84,6 +87,7 @@
 
 ;;; Class<?> ImportsReturnType.getClass()
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType))
@@ -98,15 +102,17 @@
 ;;; Code for importsreturntype.ImportsReturnType.Entry [CLASS]
 (type $importsreturntype.ImportsReturnType.Entry (struct
  (field $vtable (ref $importsreturntype.ImportsReturnType.Entry.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $importsreturntype.ImportsReturnType.Entry.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Entry()
 (func $m_<init>__@importsreturntype.ImportsReturnType.Entry
@@ -148,6 +154,7 @@
 
 ;;; Class<?> Entry.getClass()
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Entry
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Entry))
@@ -162,15 +169,17 @@
 ;;; Code for importsreturntype.ImportsReturnType.Set [CLASS]
 (type $importsreturntype.ImportsReturnType.Set (struct
  (field $vtable (ref $importsreturntype.ImportsReturnType.Set.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $importsreturntype.ImportsReturnType.Set.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Set()
 (func $m_<init>__@importsreturntype.ImportsReturnType.Set
@@ -212,6 +221,7 @@
 
 ;;; Class<?> Set.getClass()
 (func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Set))

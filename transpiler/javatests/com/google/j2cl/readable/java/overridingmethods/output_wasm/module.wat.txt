@@ -50,16 +50,18 @@
 ;;; Code for overridingmethods.Parent [CLASS]
 (type $overridingmethods.Parent (struct
  (field $vtable (ref $overridingmethods.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $overridingmethods.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__void (mut (ref $function.__$void)))
-))
+ (field $m_fun__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Parent()
 (func $m_<init>__@overridingmethods.Parent
@@ -80,6 +82,7 @@
 
 ;;; void Parent.fun()
 (func $m_fun__void@overridingmethods.Parent
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Parent.rtt)))
@@ -111,6 +114,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@overridingmethods.Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Parent))
@@ -125,8 +129,9 @@
 ;;; Code for overridingmethods.Child [CLASS]
 (type $overridingmethods.Child (struct
  (field $vtable (ref $overridingmethods.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $overridingmethods.Parent)
+)
 (type $overridingmethods.Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -134,8 +139,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_fun__void (mut (ref $function.__$void)))
- (field $m_bar__void (mut (ref $function.__$void)))
-))
+ (field $m_bar__void (mut (ref $function.__$void))))
+ (extends $overridingmethods.Parent.vtable)
+)
 
 ;;; Child()
 (func $m_<init>__@overridingmethods.Child
@@ -156,6 +162,7 @@
 
 ;;; void Child.fun()
 (func $m_fun__void@overridingmethods.Child
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
@@ -166,6 +173,7 @@
 
 ;;; void Child.bar()
 (func $m_bar__void@overridingmethods.Child
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
@@ -197,6 +205,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@overridingmethods.Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Child))

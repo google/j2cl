@@ -62,8 +62,9 @@
 ;;; Code for instancejsmethods.SuperParent [CLASS]
 (type $instancejsmethods.SuperParent (struct
  (field $vtable (ref $instancejsmethods.SuperParent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $instancejsmethods.SuperParent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -71,8 +72,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
- (field $m_bar__int__int__int (mut (ref $function.$int__$int__$int)))
-))
+ (field $m_bar__int__int__int (mut (ref $function.$int__$int__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SuperParent()
 (func $m_<init>__@instancejsmethods.SuperParent
@@ -93,6 +95,7 @@
 
 ;;; int SuperParent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.SuperParent
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -109,6 +112,7 @@
 
 ;;; int SuperParent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.SuperParent
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -146,6 +150,7 @@
 
 ;;; Class<?> SuperParent.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.SuperParent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.SuperParent))
@@ -160,8 +165,9 @@
 ;;; Code for instancejsmethods.Parent [CLASS]
 (type $instancejsmethods.Parent (struct
  (field $vtable (ref $instancejsmethods.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $instancejsmethods.SuperParent)
+)
 (type $instancejsmethods.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -170,8 +176,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
  (field $m_bar__int__int__int (mut (ref $function.$int__$int__$int)))
- (field $m_foo__int__int (mut (ref $function.$int__$int)))
-))
+ (field $m_foo__int__int (mut (ref $function.$int__$int))))
+ (extends $instancejsmethods.SuperParent.vtable)
+)
 
 ;;; Parent()
 (func $m_<init>__@instancejsmethods.Parent
@@ -192,6 +199,7 @@
 
 ;;; int Parent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Parent
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -208,6 +216,7 @@
 
 ;;; int Parent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Parent
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -224,6 +233,7 @@
 
 ;;; int Parent.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Parent
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -260,6 +270,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Parent))
@@ -274,8 +285,9 @@
 ;;; Code for instancejsmethods.Child [CLASS]
 (type $instancejsmethods.Child (struct
  (field $vtable (ref $instancejsmethods.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $instancejsmethods.Parent)
+)
 (type $instancejsmethods.Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -285,8 +297,9 @@
  (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
  (field $m_bar__int__int__int (mut (ref $function.$int__$int__$int)))
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
- (field $m_intfFoo__int (mut (ref $function.__$int)))
-))
+ (field $m_intfFoo__int (mut (ref $function.__$int))))
+ (extends $instancejsmethods.Parent.vtable)
+)
 
 ;;; Child()
 (func $m_<init>__@instancejsmethods.Child
@@ -307,6 +320,7 @@
 
 ;;; int Child.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Child
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -323,6 +337,7 @@
 
 ;;; int Child.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Child
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -339,6 +354,7 @@
 
 ;;; int Child.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Child
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -354,6 +370,7 @@
 
 ;;; int Child.intfFoo()
 (func $m_intfFoo__int@instancejsmethods.Child
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $instancejsmethods.Child))
@@ -389,6 +406,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Child))
@@ -403,16 +421,18 @@
 ;;; Code for instancejsmethods.Main [CLASS]
 (type $instancejsmethods.Main (struct
  (field $vtable (ref $instancejsmethods.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $instancejsmethods.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_testCallBySuperParent__void (mut (ref $function.__$void)))
-))
+ (field $m_testCallBySuperParent__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@instancejsmethods.Main
@@ -433,6 +453,7 @@
 
 ;;; void Main.testCallBySuperParent()
 (func $m_testCallBySuperParent__void@instancejsmethods.Main
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $sp (ref null $instancejsmethods.SuperParent))
  (local $p (ref null $instancejsmethods.SuperParent))
@@ -563,6 +584,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Main))

@@ -16,16 +16,18 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_someString__strings_Strings_ (mut (ref null $java.lang.String)))
  (field $f_nonBmpChar__strings_Strings_ (mut (ref null $java.lang.String)))
- (field $f_wideColon__strings_Strings_ (mut (ref null $java.lang.String)))
-))
+ (field $f_wideColon__strings_Strings_ (mut (ref null $java.lang.String))))
+ (extends $java.lang.Object)
+)
 (type $strings.Strings.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Strings()
 (func $m_<init>__@strings.Strings
@@ -49,6 +51,7 @@
 
 ;;; void Strings.test()
 (func $m_test__void@strings.Strings
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $s1 (ref null $java.lang.String))
  (local $s2 (ref null $java.lang.String))
@@ -286,6 +289,7 @@
 
 ;;; Class<?> Strings.getClass()
 (func $m_getClass__java_lang_Class@strings.Strings
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings))
@@ -301,15 +305,17 @@
 (type $strings.Strings.StringHolder (struct
  (field $vtable (ref $strings.Strings.StringHolder.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String)))
-))
+ (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String))))
+ (extends $java.lang.Object)
+)
 (type $strings.Strings.StringHolder.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; StringHolder()
 (func $m_<init>__@strings.Strings.StringHolder
@@ -364,6 +370,7 @@
 
 ;;; Class<?> StringHolder.getClass()
 (func $m_getClass__java_lang_Class@strings.Strings.StringHolder
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings.StringHolder))

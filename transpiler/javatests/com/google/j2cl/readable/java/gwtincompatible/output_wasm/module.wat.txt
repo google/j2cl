@@ -70,16 +70,18 @@
 ;;; Code for gwtincompatible.Implementor [CLASS]
 (type $gwtincompatible.Implementor (struct
  (field $vtable (ref $gwtincompatible.Implementor.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $gwtincompatible.Interface.ClassWithAbstractMethod)
+)
 (type $gwtincompatible.Implementor.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_compatibleMethod__void (mut (ref $function.__$void)))
-))
+ (field $m_compatibleMethod__void (mut (ref $function.__$void))))
+ (extends $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)
+)
 
 ;;; Implementor()
 (func $m_<init>__@gwtincompatible.Implementor
@@ -100,6 +102,7 @@
 
 ;;; void Implementor.compatibleMethod()
 (func $m_compatibleMethod__void@gwtincompatible.Implementor
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $a i32)
  (local $this (ref null $gwtincompatible.Implementor))
@@ -135,6 +138,7 @@
 
 ;;; Class<?> Implementor.getClass()
 (func $m_getClass__java_lang_Class@gwtincompatible.Implementor
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor))
@@ -151,8 +155,9 @@
  (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-))
+ (field $f_ordinal__java_lang_Enum_ (mut i32)))
+ (extends $java.lang.Enum)
+)
 (type $gwtincompatible.Implementor.SomeEnum.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -164,8 +169,9 @@
  (field $m_ordinal__int (mut (ref $function.__$int)))
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
- (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void)))
-))
+ (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void))))
+ (extends $java.lang.Enum.vtable)
+)
 
 ;;; SomeEnum(String $name, int $ordinal)
 (func $m_<init>__java_lang_String__int@gwtincompatible.Implementor.SomeEnum
@@ -275,8 +281,9 @@
  (field $vtable (ref $gwtincompatible.Implementor.SomeEnum.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-))
+ (field $f_ordinal__java_lang_Enum_ (mut i32)))
+ (extends $gwtincompatible.Implementor.SomeEnum)
+)
 (type $gwtincompatible.Implementor.SomeEnum.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -288,8 +295,9 @@
  (field $m_ordinal__int (mut (ref $function.__$int)))
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
  (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
- (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void)))
-))
+ (field $m_method__void_$pp_gwtincompatible (mut (ref $function.__$void))))
+ (extends $gwtincompatible.Implementor.SomeEnum.vtable)
+)
 
 ;;; <anonymous> extends SomeEnum(String $name, int $ordinal)
 (func $m_<init>__java_lang_String__int@gwtincompatible.Implementor.SomeEnum.1
@@ -312,6 +320,7 @@
 
 ;;; void <anonymous> extends SomeEnum.method()
 (func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $gwtincompatible.Implementor.SomeEnum.1.rtt)))
@@ -343,6 +352,7 @@
 
 ;;; Class<?> <anonymous> extends SomeEnum.getClass()
 (func $m_getClass__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
@@ -423,15 +433,17 @@
 ;;; Code for gwtincompatible.Interface.ClassWithAbstractMethod [CLASS]
 (type $gwtincompatible.Interface.ClassWithAbstractMethod (struct
  (field $vtable (ref $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ClassWithAbstractMethod()
 (func $m_<init>__@gwtincompatible.Interface.ClassWithAbstractMethod

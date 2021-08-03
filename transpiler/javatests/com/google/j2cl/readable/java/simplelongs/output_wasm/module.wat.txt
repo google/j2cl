@@ -9,8 +9,9 @@
  (field $vtable (ref $simplelongs.SimpleLongs.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_foo__simplelongs_SimpleLongs (mut i64))
- (field $f_sideEffect__simplelongs_SimpleLongs_ (mut i32))
-))
+ (field $f_sideEffect__simplelongs_SimpleLongs_ (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $simplelongs.SimpleLongs.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -19,8 +20,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_getBar__long (mut (ref $function.__$long)))
  (field $m_getWithSideEffect__simplelongs_SimpleLongs (mut (ref $function.__$simplelongs.SimpleLongs)))
- (field $m_main__void (mut (ref $function.__$void)))
-))
+ (field $m_main__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SimpleLongs()
 (func $m_<init>__@simplelongs.SimpleLongs
@@ -44,6 +46,7 @@
 
 ;;; long SimpleLongs.getBar()
 (func $m_getBar__long@simplelongs.SimpleLongs
+ (type $function.__$long)
  (param $this.untyped (ref null $java.lang.Object))
  (result i64)
  (local $this (ref null $simplelongs.SimpleLongs))
@@ -58,6 +61,7 @@
 
 ;;; SimpleLongs SimpleLongs.getWithSideEffect()
 (func $m_getWithSideEffect__simplelongs_SimpleLongs@simplelongs.SimpleLongs
+ (type $function.__$simplelongs.SimpleLongs)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $simplelongs.SimpleLongs))
  (local $this (ref null $simplelongs.SimpleLongs))
@@ -75,6 +79,7 @@
 
 ;;; void SimpleLongs.main()
 (func $m_main__void@simplelongs.SimpleLongs
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $a i64)
  (local $b i64)
@@ -211,6 +216,7 @@
 
 ;;; Class<?> SimpleLongs.getClass()
 (func $m_getClass__java_lang_Class@simplelongs.SimpleLongs
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelongs.SimpleLongs))

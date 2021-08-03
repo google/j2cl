@@ -85,15 +85,17 @@
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [CLASS]
 (type $implementsgenericinterface.GenericInterfaceGenericImpl (struct
  (field $vtable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; GenericInterfaceGenericImpl()
 (func $m_<init>__@implementsgenericinterface.GenericInterfaceGenericImpl
@@ -135,6 +137,7 @@
 
 ;;; Class<?> GenericInterfaceGenericImpl.getClass()
 (func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
@@ -149,15 +152,17 @@
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [CLASS]
 (type $implementsgenericinterface.GenericInterfaceImpl (struct
  (field $vtable (ref $implementsgenericinterface.GenericInterfaceImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $implementsgenericinterface.GenericInterfaceImpl.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; GenericInterfaceImpl()
 (func $m_<init>__@implementsgenericinterface.GenericInterfaceImpl
@@ -199,6 +204,7 @@
 
 ;;; Class<?> GenericInterfaceImpl.getClass()
 (func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceImpl
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceImpl))

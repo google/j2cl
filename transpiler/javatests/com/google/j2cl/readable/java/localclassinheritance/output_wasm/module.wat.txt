@@ -19,16 +19,18 @@
 ;;; Code for localclassinheritance.LocalClassInheritance [CLASS]
 (type $localclassinheritance.LocalClassInheritance (struct
  (field $vtable (ref $localclassinheritance.LocalClassInheritance.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $localclassinheritance.LocalClassInheritance.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; LocalClassInheritance()
 (func $m_<init>__@localclassinheritance.LocalClassInheritance
@@ -49,6 +51,7 @@
 
 ;;; void LocalClassInheritance.test()
 (func $m_test__void@localclassinheritance.LocalClassInheritance
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $f i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
@@ -84,6 +87,7 @@
 
 ;;; Class<?> LocalClassInheritance.getClass()
 (func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
@@ -100,16 +104,18 @@
  (field $vtable (ref $localclassinheritance.LocalClassInheritance.1Parent.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
- (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent (mut i32))
-))
+ (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_n__void (mut (ref $function.__$void)))
-))
+ (field $m_n__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Parent(LocalClassInheritance $outer_this, int $captured_f)
 (func $m_<init>__localclassinheritance_LocalClassInheritance__int@localclassinheritance.LocalClassInheritance.1Parent
@@ -138,6 +144,7 @@
 
 ;;; void Parent.n()
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
@@ -173,6 +180,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
@@ -191,16 +199,18 @@
  (field $$outer_this__localclassinheritance_LocalClassInheritance_1Parent (mut (ref null $localclassinheritance.LocalClassInheritance)))
  (field $$captured_f__localclassinheritance_LocalClassInheritance_1Parent (mut i32))
  (field $$outer_this__localclassinheritance_LocalClassInheritance_1Child (mut (ref null $localclassinheritance.LocalClassInheritance)))
- (field $$captured_f__localclassinheritance_LocalClassInheritance_1Child (mut i32))
-))
+ (field $$captured_f__localclassinheritance_LocalClassInheritance_1Child (mut i32)))
+ (extends $localclassinheritance.LocalClassInheritance.1Parent)
+)
 (type $localclassinheritance.LocalClassInheritance.1Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_n__void (mut (ref $function.__$void)))
-))
+ (field $m_n__void (mut (ref $function.__$void))))
+ (extends $localclassinheritance.LocalClassInheritance.1Parent.vtable)
+)
 
 ;;; Child(LocalClassInheritance $outer_this, int $captured_f)
 (func $m_<init>__localclassinheritance_LocalClassInheritance__int@localclassinheritance.LocalClassInheritance.1Child
@@ -229,6 +239,7 @@
 
 ;;; void Child.n()
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Child
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
@@ -264,6 +275,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))

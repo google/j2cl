@@ -19,15 +19,17 @@
 ;;; Code for jsinnerclass.Main [CLASS]
 (type $jsinnerclass.Main (struct
  (field $vtable (ref $jsinnerclass.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $jsinnerclass.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@jsinnerclass.Main
@@ -79,6 +81,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsinnerclass.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main))
@@ -94,16 +97,18 @@
 (type $jsinnerclass.Main.Outer (struct
  (field $vtable (ref $jsinnerclass.Main.Outer.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_a__jsinnerclass_Main_Outer (mut i32))
-))
+ (field $f_a__jsinnerclass_Main_Outer (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $jsinnerclass.Main.Outer.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_method__int (mut (ref $function.__$int)))
-))
+ (field $m_method__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Outer()
 (func $m_<init>__@jsinnerclass.Main.Outer
@@ -127,6 +132,7 @@
 
 ;;; int Outer.method()
 (func $m_method__int@jsinnerclass.Main.Outer
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $$qualifier (ref null $jsinnerclass.Main.Outer.Inner))
@@ -176,6 +182,7 @@
 
 ;;; Class<?> Outer.getClass()
 (func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer))
@@ -192,16 +199,18 @@
  (field $vtable (ref $jsinnerclass.Main.Outer.Inner.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__jsinnerclass_Main_Outer_Inner (mut (ref null $jsinnerclass.Main.Outer)))
- (field $f_b__jsinnerclass_Main_Outer_Inner_ (mut i32))
-))
+ (field $f_b__jsinnerclass_Main_Outer_Inner_ (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $jsinnerclass.Main.Outer.Inner.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getB__int (mut (ref $function.__$int)))
-))
+ (field $m_getB__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Inner(Outer $outer_this)
 (func $m_<init>__jsinnerclass_Main_Outer@jsinnerclass.Main.Outer.Inner
@@ -229,6 +238,7 @@
 
 ;;; int Inner.getB()
 (func $m_getB__int@jsinnerclass.Main.Outer.Inner
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
@@ -264,6 +274,7 @@
 
 ;;; Class<?> Inner.getClass()
 (func $m_getClass__java_lang_Class@jsinnerclass.Main.Outer.Inner
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))

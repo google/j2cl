@@ -31,15 +31,17 @@
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [CLASS]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault (struct
  (field $vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; AbstractMethodOverrideDefault()
 (func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault
@@ -81,6 +83,7 @@
 
 ;;; Class<?> AbstractMethodOverrideDefault.getClass()
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
@@ -181,8 +184,9 @@
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.A [CLASS]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (struct
  (field $vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -190,8 +194,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__void (mut (ref $function.__$void)))
- (field $m_bar__void (mut (ref $function.__$void)))
-))
+ (field $m_bar__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; A()
 (func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
@@ -212,6 +217,7 @@
 
 ;;; void A.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.rtt)))
@@ -250,8 +256,9 @@
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.B [CLASS]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B (struct
  (field $vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
+)
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -259,8 +266,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__void (mut (ref $function.__$void)))
- (field $m_bar__void (mut (ref $function.__$void)))
-))
+ (field $m_bar__void (mut (ref $function.__$void))))
+ (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
+)
 
 ;;; B()
 (func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
@@ -281,6 +289,7 @@
 
 ;;; void B.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.rtt)))
@@ -327,8 +336,9 @@
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [CLASS]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (struct
  (field $vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
+)
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -336,8 +346,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__void (mut (ref $function.__$void)))
- (field $m_bar__void (mut (ref $function.__$void)))
-))
+ (field $m_bar__void (mut (ref $function.__$void))))
+ (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
+)
 
 ;;; C()
 (func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
@@ -358,6 +369,7 @@
 
 ;;; void C.foo()
 (func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
@@ -368,6 +380,7 @@
 
 ;;; void C.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
@@ -402,6 +415,7 @@
 
 ;;; Class<?> C.getClass()
 (func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))

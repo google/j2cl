@@ -92,15 +92,17 @@
 ;;; Code for overwrittentypevariables.HashFunctions [CLASS]
 (type $overwrittentypevariables.HashFunctions (struct
  (field $vtable (ref $overwrittentypevariables.HashFunctions.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $overwrittentypevariables.HashFunctions.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; HashFunctions()
 (func $m_<init>__@overwrittentypevariables.HashFunctions
@@ -168,6 +170,7 @@
 
 ;;; Class<?> HashFunctions.getClass()
 (func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overwrittentypevariables.HashFunctions))
@@ -182,8 +185,9 @@
 ;;; Code for overwrittentypevariables.HashFunctions.1 [CLASS]
 (type $overwrittentypevariables.HashFunctions.1 (struct
  (field $vtable (ref $overwrittentypevariables.HashFunctions.1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $overwrittentypevariables.HashFunctions.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -191,8 +195,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_apply__java_lang_Object__java_lang_String (mut (ref $function.$java.lang.Object__$java.lang.String)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; <anonymous> implements HashFunction<T>()
 (func $m_<init>__@overwrittentypevariables.HashFunctions.1
@@ -213,6 +218,7 @@
 
 ;;; String <anonymous> implements HashFunction<T>.apply(T input)
 (func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.1
+ (type $function.$java.lang.Object__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $input (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
@@ -228,6 +234,7 @@
 
 ;;; String <anonymous> implements HashFunction<T>.apply(Object arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -264,6 +271,7 @@
 
 ;;; Class<?> <anonymous> implements HashFunction<T>.getClass()
 (func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overwrittentypevariables.HashFunctions.1))
@@ -278,8 +286,9 @@
 ;;; Code for overwrittentypevariables.HashFunctions.2 [CLASS]
 (type $overwrittentypevariables.HashFunctions.2 (struct
  (field $vtable (ref $overwrittentypevariables.HashFunctions.2.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $overwrittentypevariables.HashFunctions.2.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -287,8 +296,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_apply__java_lang_Enum__java_lang_String (mut (ref $function.$java.lang.Enum__$java.lang.String)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; <anonymous> implements HashFunction<T>()
 (func $m_<init>__@overwrittentypevariables.HashFunctions.2
@@ -309,6 +319,7 @@
 
 ;;; String <anonymous> implements HashFunction<T>.apply(T input)
 (func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2
+ (type $function.$java.lang.Enum__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $input (ref null $java.lang.Enum))
  (result (ref null $java.lang.String))
@@ -330,6 +341,7 @@
 
 ;;; String <anonymous> implements HashFunction<T>.apply(Object arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -366,6 +378,7 @@
 
 ;;; Class<?> <anonymous> implements HashFunction<T>.getClass()
 (func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.2
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overwrittentypevariables.HashFunctions.2))

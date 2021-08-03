@@ -221,8 +221,9 @@
 ;;; Code for intersectiontype.IntersectionTypeTest [CLASS]
 (type $intersectiontype.IntersectionTypeTest (struct
  (field $vtable (ref $intersectiontype.IntersectionTypeTest.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $intersectiontype.IntersectionTypeTest.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -230,8 +231,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_cast3__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_testMethodCall__void (mut (ref $function.__$void)))
-))
+ (field $m_testMethodCall__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; IntersectionTypeTest()
 (func $m_<init>__@intersectiontype.IntersectionTypeTest
@@ -327,6 +329,7 @@
 
 ;;; Object IntersectionTypeTest.cast3(Object s)
 (func $m_cast3__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -428,6 +431,7 @@
 
 ;;; void IntersectionTypeTest.testMethodCall()
 (func $m_testMethodCall__void@intersectiontype.IntersectionTypeTest
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
@@ -473,6 +477,7 @@
 
 ;;; Class<?> IntersectionTypeTest.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
@@ -488,16 +493,18 @@
 (type $intersectiontype.IntersectionTypeTest.MapEntry (struct
  (field $vtable (ref $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (mut (ref null $intersectiontype.IntersectionTypeTest)))
-))
+ (field $$outer_this__intersectiontype_IntersectionTypeTest_MapEntry (mut (ref null $intersectiontype.IntersectionTypeTest))))
+ (extends $java.lang.Object)
+)
 (type $intersectiontype.IntersectionTypeTest.MapEntry.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_method__java_lang_Object__intersectiontype_Getable (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_method__java_lang_Object__intersectiontype_Getable (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; MapEntry(IntersectionTypeTest<U> $outer_this)
 (func $m_<init>__intersectiontype_IntersectionTypeTest@intersectiontype.IntersectionTypeTest.MapEntry
@@ -522,6 +529,7 @@
 
 ;;; Getable<T> MapEntry.method(Object o)
 (func $m_method__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest.MapEntry
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -558,6 +566,7 @@
 
 ;;; Class<?> MapEntry.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
@@ -572,15 +581,17 @@
 ;;; Code for intersectiontype.IntersectionTypeTest.A [CLASS]
 (type $intersectiontype.IntersectionTypeTest.A (struct
  (field $vtable (ref $intersectiontype.IntersectionTypeTest.A.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $intersectiontype.IntersectionTypeTest.A.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; A()
 (func $m_<init>__@intersectiontype.IntersectionTypeTest.A
@@ -619,6 +630,7 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.A
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.A))
@@ -699,16 +711,18 @@
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [CLASS]
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (struct
  (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_cmp__int (mut (ref $function.__$int)))
-))
+ (field $m_cmp__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$1()
 (func $m_<init>__@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
@@ -729,6 +743,7 @@
 
 ;;; int $LambdaImplementor$1.cmp()
 (func $m_cmp__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
@@ -764,6 +779,7 @@
 
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
@@ -778,16 +794,18 @@
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [CLASS]
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (struct
  (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_cmp__int__int (mut (ref $function.$int__$int)))
-))
+ (field $m_cmp__int__int (mut (ref $function.$int__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$2()
 (func $m_<init>__@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
@@ -808,6 +826,7 @@
 
 ;;; int $LambdaImplementor$2.cmp(int a)
 (func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -844,6 +863,7 @@
 
 ;;; Class<?> $LambdaImplementor$2.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))

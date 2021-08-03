@@ -19,15 +19,17 @@
 ;;; Code for subclassgenericclass.GenericClass [CLASS]
 (type $subclassgenericclass.GenericClass (struct
  (field $vtable (ref $subclassgenericclass.GenericClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $subclassgenericclass.GenericClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; GenericClass()
 (func $m_<init>__@subclassgenericclass.GenericClass
@@ -69,6 +71,7 @@
 
 ;;; Class<?> GenericClass.getClass()
 (func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.GenericClass))
@@ -83,15 +86,17 @@
 ;;; Code for subclassgenericclass.GenericSubclassGenericClass [CLASS]
 (type $subclassgenericclass.GenericSubclassGenericClass (struct
  (field $vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $subclassgenericclass.GenericClass)
+)
 (type $subclassgenericclass.GenericSubclassGenericClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $subclassgenericclass.GenericClass.vtable)
+)
 
 ;;; GenericSubclassGenericClass()
 (func $m_<init>__@subclassgenericclass.GenericSubclassGenericClass
@@ -133,6 +138,7 @@
 
 ;;; Class<?> GenericSubclassGenericClass.getClass()
 (func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
@@ -147,15 +153,17 @@
 ;;; Code for subclassgenericclass.SubclassGenericClass [CLASS]
 (type $subclassgenericclass.SubclassGenericClass (struct
  (field $vtable (ref $subclassgenericclass.SubclassGenericClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $subclassgenericclass.GenericClass)
+)
 (type $subclassgenericclass.SubclassGenericClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $subclassgenericclass.GenericClass.vtable)
+)
 
 ;;; SubclassGenericClass()
 (func $m_<init>__@subclassgenericclass.SubclassGenericClass
@@ -197,6 +205,7 @@
 
 ;;; Class<?> SubclassGenericClass.getClass()
 (func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.SubclassGenericClass))

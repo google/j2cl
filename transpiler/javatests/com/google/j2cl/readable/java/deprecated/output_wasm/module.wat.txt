@@ -32,16 +32,18 @@
 (type $deprecated.DeprecatedExample (struct
  (field $vtable (ref $deprecated.DeprecatedExample.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (mut (ref null $java.lang.String)))
-))
+ (field $f_deprecatedInstanceField__deprecated_DeprecatedExample (mut (ref null $java.lang.String))))
+ (extends $java.lang.Object)
+)
 (type $deprecated.DeprecatedExample.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_deprecatedInstanceMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
-))
+ (field $m_deprecatedInstanceMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; void DeprecatedExample.deprecatedStaticMethod(Object someObject)
 (func $m_deprecatedStaticMethod__java_lang_Object__void@deprecated.DeprecatedExample
@@ -55,6 +57,7 @@
 
 ;;; void DeprecatedExample.deprecatedInstanceMethod(String someArg)
 (func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample
+ (type $function.$java.lang.String__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $someArg (ref null $java.lang.String))
  (local $this (ref null $deprecated.DeprecatedExample))
@@ -117,6 +120,7 @@
 
 ;;; Class<?> DeprecatedExample.getClass()
 (func $m_getClass__java_lang_Class@deprecated.DeprecatedExample
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample))
@@ -201,8 +205,9 @@
  (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedEnum.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-))
+ (field $f_ordinal__java_lang_Enum_ (mut i32)))
+ (extends $java.lang.Enum)
+)
 (type $deprecated.DeprecatedExample.DeprecatedEnum.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -213,8 +218,9 @@
  (field $m_name__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_ordinal__int (mut (ref $function.__$int)))
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
- (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
-))
+ (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int))))
+ (extends $java.lang.Enum.vtable)
+)
 
 ;;; DeprecatedEnum(String $name, int $ordinal)
 (func $m_<init>__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedEnum
@@ -318,6 +324,7 @@
 
 ;;; Class<?> DeprecatedEnum.getClass()
 (func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedEnum))
@@ -334,8 +341,9 @@
  (field $vtable (ref $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-))
+ (field $f_ordinal__java_lang_Enum_ (mut i32)))
+ (extends $java.lang.Enum)
+)
 (type $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -346,8 +354,9 @@
  (field $m_name__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_ordinal__int (mut (ref $function.__$int)))
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
- (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
-))
+ (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int))))
+ (extends $java.lang.Enum.vtable)
+)
 
 ;;; DeprecatedJsEnum(String $name, int $ordinal)
 (func $m_<init>__java_lang_String__int@deprecated.DeprecatedExample.DeprecatedJsEnum
@@ -451,6 +460,7 @@
 
 ;;; Class<?> DeprecatedJsEnum.getClass()
 (func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $deprecated.DeprecatedExample.DeprecatedJsEnum))

@@ -44,15 +44,17 @@
 ;;; Code for abstractinterfaceimpl.AbstractInterfaceImpl [CLASS]
 (type $abstractinterfaceimpl.AbstractInterfaceImpl (struct
  (field $vtable (ref $abstractinterfaceimpl.AbstractInterfaceImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $abstractinterfaceimpl.AbstractInterfaceImpl.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; AbstractInterfaceImpl()
 (func $m_<init>__@abstractinterfaceimpl.AbstractInterfaceImpl

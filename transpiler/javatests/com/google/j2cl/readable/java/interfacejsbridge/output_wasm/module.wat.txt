@@ -124,16 +124,18 @@
 ;;; Code for interfacejsbridge.InterfaceImpl [CLASS]
 (type $interfacejsbridge.InterfaceImpl (struct
  (field $vtable (ref $interfacejsbridge.InterfaceImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $interfacejsbridge.InterfaceImpl.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__int__int (mut (ref $function.$int__$int)))
-))
+ (field $m_foo__int__int (mut (ref $function.$int__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InterfaceImpl()
 (func $m_<init>__@interfacejsbridge.InterfaceImpl
@@ -154,6 +156,7 @@
 
 ;;; int InterfaceImpl.foo(int a)
 (func $m_foo__int__int@interfacejsbridge.InterfaceImpl
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -190,6 +193,7 @@
 
 ;;; Class<?> InterfaceImpl.getClass()
 (func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
@@ -204,16 +208,18 @@
 ;;; Code for interfacejsbridge.Main [CLASS]
 (type $interfacejsbridge.Main (struct
  (field $vtable (ref $interfacejsbridge.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $interfacejsbridge.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@interfacejsbridge.Main
@@ -234,6 +240,7 @@
 
 ;;; void Main.test()
 (func $m_test__void@interfacejsbridge.Main
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $a (ref null $java.lang.Object))
  (local $b (ref null $java.lang.Object))
@@ -293,6 +300,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@interfacejsbridge.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.Main))

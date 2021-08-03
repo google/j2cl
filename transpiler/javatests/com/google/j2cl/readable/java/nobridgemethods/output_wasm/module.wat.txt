@@ -67,16 +67,18 @@
 ;;; Code for nobridgemethods.Map [CLASS]
 (type $nobridgemethods.Map (struct
  (field $vtable (ref $nobridgemethods.Map.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $nobridgemethods.Map.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Map()
 (func $m_<init>__@nobridgemethods.Map
@@ -119,8 +121,9 @@
 ;;; Code for nobridgemethods.TreeMap [CLASS]
 (type $nobridgemethods.TreeMap (struct
  (field $vtable (ref $nobridgemethods.TreeMap.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $nobridgemethods.Map)
+)
 (type $nobridgemethods.TreeMap.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -128,8 +131,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (mut (ref $function.$java.lang.Object__$nobridgemethods.TreeMap.InnerEntry)))
-))
+ (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (mut (ref $function.$java.lang.Object__$nobridgemethods.TreeMap.InnerEntry))))
+ (extends $nobridgemethods.Map.vtable)
+)
 
 ;;; TreeMap()
 (func $m_<init>__@nobridgemethods.TreeMap
@@ -150,6 +154,7 @@
 
 ;;; InnerEntry<K> TreeMap.getCeilingEntry(K key)
 (func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap
+ (type $function.$java.lang.Object__$nobridgemethods.TreeMap.InnerEntry)
  (param $this.untyped (ref null $java.lang.Object))
  (param $key (ref null $java.lang.Object))
  (result (ref null $nobridgemethods.TreeMap.InnerEntry))
@@ -165,6 +170,7 @@
 
 ;;; InnerEntry<K> TreeMap.getCeilingEntry(Object arg0)
 (func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -201,6 +207,7 @@
 
 ;;; Class<?> TreeMap.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.TreeMap
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap))
@@ -215,15 +222,17 @@
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [CLASS]
 (type $nobridgemethods.TreeMap.InnerEntry (struct
  (field $vtable (ref $nobridgemethods.TreeMap.InnerEntry.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $nobridgemethods.TreeMap.InnerEntry.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerEntry()
 (func $m_<init>__@nobridgemethods.TreeMap.InnerEntry
@@ -265,6 +274,7 @@
 
 ;;; Class<?> InnerEntry.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap.InnerEntry))
@@ -279,15 +289,17 @@
 ;;; Code for nobridgemethods.CharSet [CLASS]
 (type $nobridgemethods.CharSet (struct
  (field $vtable (ref $nobridgemethods.CharSet.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $nobridgemethods.CharSet.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; CharSet()
 (func $m_<init>__@nobridgemethods.CharSet
@@ -343,6 +355,7 @@
 
 ;;; Class<?> CharSet.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.CharSet
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet))
@@ -357,8 +370,9 @@
 ;;; Code for nobridgemethods.CharSet.1 [CLASS]
 (type $nobridgemethods.CharSet.1 (struct
  (field $vtable (ref $nobridgemethods.CharSet.1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $nobridgemethods.TreeMap)
+)
 (type $nobridgemethods.CharSet.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -366,8 +380,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (mut (ref $function.$java.lang.Object__$nobridgemethods.TreeMap.InnerEntry)))
-))
+ (field $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry (mut (ref $function.$java.lang.Object__$nobridgemethods.TreeMap.InnerEntry))))
+ (extends $nobridgemethods.TreeMap.vtable)
+)
 
 ;;; <anonymous> extends TreeMap<String>()
 (func $m_<init>__@nobridgemethods.CharSet.1
@@ -409,6 +424,7 @@
 
 ;;; Class<?> <anonymous> extends TreeMap<String>.getClass()
 (func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet.1))

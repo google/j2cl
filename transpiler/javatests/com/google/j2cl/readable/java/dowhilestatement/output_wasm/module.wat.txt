@@ -7,16 +7,18 @@
 ;;; Code for dowhilestatement.DoWhileStatement [CLASS]
 (type $dowhilestatement.DoWhileStatement (struct
  (field $vtable (ref $dowhilestatement.DoWhileStatement.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $dowhilestatement.DoWhileStatement.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; DoWhileStatement()
 (func $m_<init>__@dowhilestatement.DoWhileStatement
@@ -37,6 +39,7 @@
 
 ;;; void DoWhileStatement.test()
 (func $m_test__void@dowhilestatement.DoWhileStatement
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $count i32)
  (local $this (ref null $dowhilestatement.DoWhileStatement))
@@ -87,6 +90,7 @@
 
 ;;; Class<?> DoWhileStatement.getClass()
 (func $m_getClass__java_lang_Class@dowhilestatement.DoWhileStatement
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $dowhilestatement.DoWhileStatement))

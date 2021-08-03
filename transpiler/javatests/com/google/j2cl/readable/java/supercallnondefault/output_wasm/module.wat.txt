@@ -14,15 +14,17 @@
 (type $supercallnondefault.Parent (struct
  (field $vtable (ref $supercallnondefault.Parent.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__supercallnondefault_Parent (mut i32))
-))
+ (field $f_field__supercallnondefault_Parent (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $supercallnondefault.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Parent(int f)
 (func $m_<init>__int@supercallnondefault.Parent
@@ -68,6 +70,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@supercallnondefault.Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supercallnondefault.Parent))
@@ -83,15 +86,17 @@
 (type $supercallnondefault.Child (struct
  (field $vtable (ref $supercallnondefault.Child.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__supercallnondefault_Parent (mut i32))
-))
+ (field $f_field__supercallnondefault_Parent (mut i32)))
+ (extends $supercallnondefault.Parent)
+)
 (type $supercallnondefault.Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $supercallnondefault.Parent.vtable)
+)
 
 ;;; Child(int a)
 (func $m_<init>__int@supercallnondefault.Child
@@ -134,6 +139,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@supercallnondefault.Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supercallnondefault.Child))

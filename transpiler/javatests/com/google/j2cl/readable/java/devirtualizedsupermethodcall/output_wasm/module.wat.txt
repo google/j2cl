@@ -19,8 +19,9 @@
 ;;; Code for devirtualizedsupermethodcall.SubNumber [CLASS]
 (type $devirtualizedsupermethodcall.SubNumber (struct
  (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Number)
+)
 (type $devirtualizedsupermethodcall.SubNumber.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -32,8 +33,9 @@
  (field $m_floatValue__float (mut (ref $function.__$float)))
  (field $m_intValue__int (mut (ref $function.__$int)))
  (field $m_longValue__long (mut (ref $function.__$long)))
- (field $m_shortValue__short (mut (ref $function.__$short)))
-))
+ (field $m_shortValue__short (mut (ref $function.__$short))))
+ (extends $java.lang.Number.vtable)
+)
 
 ;;; SubNumber()
 (func $m_<init>__@devirtualizedsupermethodcall.SubNumber
@@ -54,6 +56,7 @@
 
 ;;; int SubNumber.intValue()
 (func $m_intValue__int@devirtualizedsupermethodcall.SubNumber
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -68,6 +71,7 @@
 
 ;;; long SubNumber.longValue()
 (func $m_longValue__long@devirtualizedsupermethodcall.SubNumber
+ (type $function.__$long)
  (param $this.untyped (ref null $java.lang.Object))
  (result i64)
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -82,6 +86,7 @@
 
 ;;; float SubNumber.floatValue()
 (func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber
+ (type $function.__$float)
  (param $this.untyped (ref null $java.lang.Object))
  (result f32)
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -96,6 +101,7 @@
 
 ;;; double SubNumber.doubleValue()
 (func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber
+ (type $function.__$double)
  (param $this.untyped (ref null $java.lang.Object))
  (result f64)
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -131,6 +137,7 @@
 
 ;;; Class<?> SubNumber.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.SubNumber
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -145,15 +152,17 @@
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [CLASS]
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct
  (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; FooCallsSuperObjectMethod()
 (func $m_<init>__@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
@@ -174,6 +183,7 @@
 
 ;;; int FooCallsSuperObjectMethod.hashCode()
 (func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
@@ -209,6 +219,7 @@
 
 ;;; Class<?> FooCallsSuperObjectMethod.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
@@ -223,16 +234,18 @@
 ;;; Code for devirtualizedsupermethodcall.Main [CLASS]
 (type $devirtualizedsupermethodcall.Main (struct
  (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $devirtualizedsupermethodcall.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_main__void (mut (ref $function.__$void)))
-))
+ (field $m_main__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@devirtualizedsupermethodcall.Main
@@ -253,6 +266,7 @@
 
 ;;; void Main.main()
 (func $m_main__void@devirtualizedsupermethodcall.Main
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $fooCallsSuperObjectMethods (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (local $sn (ref null $devirtualizedsupermethodcall.SubNumber))
@@ -310,6 +324,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.Main))

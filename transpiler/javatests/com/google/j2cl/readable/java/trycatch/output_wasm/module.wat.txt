@@ -13,8 +13,9 @@
 ;;; Code for trycatch.TryCatch [CLASS]
 (type $trycatch.TryCatch (struct
  (field $vtable (ref $trycatch.TryCatch.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $trycatch.TryCatch.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -29,8 +30,9 @@
  (field $m_testTryWithResourceJava9__void (mut (ref $function.__$void)))
  (field $m_testNestedTryCatch__void (mut (ref $function.__$void)))
  (field $m_testThrowGenerics__void (mut (ref $function.__$void)))
- (field $m_testThrowBoundGenerics__void (mut (ref $function.__$void)))
-))
+ (field $m_testThrowBoundGenerics__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; TryCatch()
 (func $m_<init>__@trycatch.TryCatch
@@ -51,6 +53,7 @@
 
 ;;; void TryCatch.testMultiCatch()
 (func $m_testMultiCatch__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.RuntimeException))
@@ -113,6 +116,7 @@
 
 ;;; void TryCatch.testEmptyThrowableCatch()
 (func $m_testEmptyThrowableCatch__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $__$exc_1 (ref null $java.lang.Throwable))
@@ -166,6 +170,7 @@
 
 ;;; void TryCatch.testEmptyThrowableRethrow()
 (func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.Throwable))
@@ -200,6 +205,7 @@
 
 ;;; void TryCatch.testFinally()
 (func $m_testFinally__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
@@ -217,6 +223,7 @@
 
 ;;; void TryCatch.testTryWithResource()
 (func $m_testTryWithResource__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $$primaryExc (ref null $java.lang.Throwable))
  (local $thing (ref null $trycatch.TryCatch.ClosableThing))
@@ -315,6 +322,7 @@
 
 ;;; void TryCatch.testTryWithResourceJava9()
 (func $m_testTryWithResourceJava9__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $thing (ref null $trycatch.TryCatch.ClosableThing))
  (local $thing2 (ref null $trycatch.TryCatch.ClosableThing))
@@ -421,6 +429,7 @@
 
 ;;; void TryCatch.testNestedTryCatch()
 (func $m_testNestedTryCatch__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $__$exc (ref null $java.lang.Throwable))
  (local $ae (ref null $java.lang.Exception))
@@ -493,6 +502,7 @@
 
 ;;; void TryCatch.testThrowGenerics()
 (func $m_testThrowGenerics__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
@@ -518,6 +528,7 @@
 
 ;;; void TryCatch.testThrowBoundGenerics()
 (func $m_testThrowBoundGenerics__void@trycatch.TryCatch
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.rtt)))
@@ -563,6 +574,7 @@
 
 ;;; Class<?> TryCatch.getClass()
 (func $m_getClass__java_lang_Class@trycatch.TryCatch
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch))
@@ -577,16 +589,18 @@
 ;;; Code for trycatch.TryCatch.ClosableThing [CLASS]
 (type $trycatch.TryCatch.ClosableThing (struct
  (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $trycatch.TryCatch.ClosableThing.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_close__void (mut (ref $function.__$void)))
-))
+ (field $m_close__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ClosableThing()
 (func $m_<init>__@trycatch.TryCatch.ClosableThing
@@ -607,6 +621,7 @@
 
 ;;; void ClosableThing.close()
 (func $m_close__void@trycatch.TryCatch.ClosableThing
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $trycatch.TryCatch.ClosableThing))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $trycatch.TryCatch.ClosableThing.rtt)))
@@ -638,6 +653,7 @@
 
 ;;; Class<?> ClosableThing.getClass()
 (func $m_getClass__java_lang_Class@trycatch.TryCatch.ClosableThing
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $trycatch.TryCatch.ClosableThing))

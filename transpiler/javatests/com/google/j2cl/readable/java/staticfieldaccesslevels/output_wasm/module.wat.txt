@@ -11,16 +11,18 @@
 ;;; Code for staticfieldaccesslevels.StaticFieldAccessLevels [CLASS]
 (type $staticfieldaccesslevels.StaticFieldAccessLevels (struct
  (field $vtable (ref $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__int (mut (ref $function.__$int)))
-))
+ (field $m_test__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; StaticFieldAccessLevels()
 (func $m_<init>__@staticfieldaccesslevels.StaticFieldAccessLevels
@@ -41,6 +43,7 @@
 
 ;;; int StaticFieldAccessLevels.test()
 (func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
@@ -82,6 +85,7 @@
 
 ;;; Class<?> StaticFieldAccessLevels.getClass()
 (func $m_getClass__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))

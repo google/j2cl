@@ -19,16 +19,18 @@
 ;;; Code for nestedinstanceinnerclass.OuterClass [CLASS]
 (type $nestedinstanceinnerclass.OuterClass (struct
  (field $vtable (ref $nestedinstanceinnerclass.OuterClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $nestedinstanceinnerclass.OuterClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; OuterClass()
 (func $m_<init>__@nestedinstanceinnerclass.OuterClass
@@ -49,6 +51,7 @@
 
 ;;; void OuterClass.test()
 (func $m_test__void@nestedinstanceinnerclass.OuterClass
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestedinstanceinnerclass.OuterClass.rtt)))
@@ -83,6 +86,7 @@
 
 ;;; Class<?> OuterClass.getClass()
 (func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass))
@@ -98,15 +102,17 @@
 (type $nestedinstanceinnerclass.OuterClass.InnerClass (struct
  (field $vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
-))
+ (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass))))
+ (extends $java.lang.Object)
+)
 (type $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClass(OuterClass $outer_this)
 (func $m_<init>__nestedinstanceinnerclass_OuterClass@nestedinstanceinnerclass.OuterClass.InnerClass
@@ -152,6 +158,7 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass))
@@ -169,15 +176,17 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
  (field $f_x__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass)))
- (field $f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass)))
-))
+ (field $f_y__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut (ref null $nestedinstanceinnerclass.OuterClass))))
+ (extends $java.lang.Object)
+)
 (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerInnerClass(InnerClass $outer_this)
 (func $m_<init>__nestedinstanceinnerclass_OuterClass_InnerClass@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
@@ -239,6 +248,7 @@
 
 ;;; Class<?> InnerInnerClass.getClass()
 (func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass))

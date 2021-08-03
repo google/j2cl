@@ -55,6 +55,9 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-reference-types")
     args.add("--enable-sign-ext")
     args.add("--enable-nontrapping-float-to-int")
+
+    # TODO(b/191258766): Switch to nominal typing when binaryen and Chrome supports it.
+    # args.add("--nominal")
     args.add("--debuginfo")
     args.add_all(ctx.attr.binaryen_args)
 

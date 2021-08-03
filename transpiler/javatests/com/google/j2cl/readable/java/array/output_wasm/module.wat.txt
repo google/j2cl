@@ -25,8 +25,9 @@
 ;;; Code for array.Arrays [CLASS]
 (type $array.Arrays (struct
  (field $vtable (ref $array.Arrays.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $array.Arrays.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -43,8 +44,9 @@
  (field $m_testErasureCastsOnArrayAccess__void (mut (ref $function.__$void)))
  (field $m_testArraysSupertypeClosureTypes__void (mut (ref $function.__$void)))
  (field $m_consumesCloneable__java_lang_Cloneable__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_consumesSerializable__java_io_Serializable__void (mut (ref $function.$java.lang.Object__$void)))
-))
+ (field $m_consumesSerializable__java_io_Serializable__void (mut (ref $function.$java.lang.Object__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Arrays()
 (func $m_<init>__@array.Arrays
@@ -65,6 +67,7 @@
 
 ;;; void Arrays.testObjectArray()
 (func $m_testObjectArray__void@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
@@ -144,6 +147,7 @@
 
 ;;; void Arrays.testJavaTypeArray()
 (func $m_testJavaTypeArray__void@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
@@ -223,6 +227,7 @@
 
 ;;; void Arrays.testIntArrays()
 (func $m_testIntArrays__void_$pp_array@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
@@ -302,6 +307,7 @@
 
 ;;; void Arrays.testLongArrays()
 (func $m_testLongArrays__void_$pp_array@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $longs (ref null $javaemul.internal.WasmArray.OfLong))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfLong))
@@ -381,6 +387,7 @@
 
 ;;; void Arrays.testDevirtualizedTypeArrays()
 (func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $booleans (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
@@ -468,6 +475,7 @@
 
 ;;; void Arrays.testStringArrays()
 (func $m_testStringArrays__void_$pp_array@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
@@ -547,6 +555,7 @@
 
 ;;; void Arrays.testNativeArray()
 (func $m_testNativeArray__void@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $nativeObjects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
@@ -626,6 +635,7 @@
 
 ;;; void Arrays.testErasureCastsOnArrayAccess()
 (func $m_testErasureCastsOnArrayAccess__void@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $container (ref null $array.Arrays.ArrayContainer))
  (local $s (ref null $java.lang.String))
@@ -644,6 +654,7 @@
 
 ;;; void Arrays.testArraysSupertypeClosureTypes()
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
@@ -660,6 +671,7 @@
 
 ;;; void Arrays.consumesCloneable(Cloneable cloneable)
 (func $m_consumesCloneable__java_lang_Cloneable__void@array.Arrays
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
@@ -671,6 +683,7 @@
 
 ;;; void Arrays.consumesSerializable(Serializable serializable)
 (func $m_consumesSerializable__java_io_Serializable__void@array.Arrays
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
  (local $this (ref null $array.Arrays))
@@ -703,6 +716,7 @@
 
 ;;; Class<?> Arrays.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays))
@@ -718,15 +732,17 @@
 (type $array.Arrays.SomeObject (struct
  (field $vtable (ref $array.Arrays.SomeObject.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__array_Arrays_SomeObject (mut (ref null $array.Arrays)))
-))
+ (field $$outer_this__array_Arrays_SomeObject (mut (ref null $array.Arrays))))
+ (extends $java.lang.Object)
+)
 (type $array.Arrays.SomeObject.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SomeObject(Arrays $outer_this)
 (func $m_<init>__array_Arrays@array.Arrays.SomeObject
@@ -769,6 +785,7 @@
 
 ;;; Class<?> SomeObject.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.SomeObject
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.SomeObject))
@@ -783,15 +800,17 @@
 ;;; Code for array.Arrays.NativeType [CLASS]
 (type $array.Arrays.NativeType (struct
  (field $vtable (ref $array.Arrays.NativeType.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $array.Arrays.NativeType.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; NativeType()
 (func $m_<init>__@array.Arrays.NativeType
@@ -833,6 +852,7 @@
 
 ;;; Class<?> NativeType.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.NativeType
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.NativeType))
@@ -848,15 +868,17 @@
 (type $array.Arrays.ArrayContainer (struct
  (field $vtable (ref $array.Arrays.ArrayContainer.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject)))
-))
+ (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject))))
+ (extends $java.lang.Object)
+)
 (type $array.Arrays.ArrayContainer.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ArrayContainer()
 (func $m_<init>__@array.Arrays.ArrayContainer
@@ -895,6 +917,7 @@
 
 ;;; Class<?> ArrayContainer.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.ArrayContainer))

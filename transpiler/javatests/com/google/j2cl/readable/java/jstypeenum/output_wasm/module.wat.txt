@@ -16,8 +16,9 @@
  (field $vtable (ref $jstypeenum.Color.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-))
+ (field $f_ordinal__java_lang_Enum_ (mut i32)))
+ (extends $java.lang.Enum)
+)
 (type $jstypeenum.Color.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -28,8 +29,9 @@
  (field $m_name__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_ordinal__int (mut (ref $function.__$int)))
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
- (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
-))
+ (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int))))
+ (extends $java.lang.Enum.vtable)
+)
 
 ;;; Color(String $name, int $ordinal)
 (func $m_<init>__java_lang_String__int@jstypeenum.Color
@@ -157,6 +159,7 @@
 
 ;;; Class<?> Color.getClass()
 (func $m_getClass__java_lang_Class@jstypeenum.Color
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeenum.Color))

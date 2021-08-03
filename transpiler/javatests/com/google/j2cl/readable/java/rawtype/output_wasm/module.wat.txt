@@ -17,15 +17,17 @@
 (type $rawtype.RawType (struct
  (field $vtable (ref $rawtype.RawType.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_c__rawtype_RawType (mut (ref null $java.lang.Object)))
-))
+ (field $f_c__rawtype_RawType (mut (ref null $java.lang.Object))))
+ (extends $java.lang.Object)
+)
 (type $rawtype.RawType.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; RawType()
 (func $m_<init>__@rawtype.RawType
@@ -67,6 +69,7 @@
 
 ;;; Class<?> RawType.getClass()
 (func $m_getClass__java_lang_Class@rawtype.RawType
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType))
@@ -124,16 +127,18 @@
 ;;; Code for rawtype.RawType.RawSubclass [CLASS]
 (type $rawtype.RawType.RawSubclass (struct
  (field $vtable (ref $rawtype.RawType.RawSubclass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $rawtype.RawType.RawSubclass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_f__rawtype_RawType__void (mut (ref $function.$rawtype.RawType__$void)))
-))
+ (field $m_f__rawtype_RawType__void (mut (ref $function.$rawtype.RawType__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; RawSubclass()
 (func $m_<init>__@rawtype.RawType.RawSubclass
@@ -154,6 +159,7 @@
 
 ;;; void RawSubclass.f(RawType t)
 (func $m_f__rawtype_RawType__void@rawtype.RawType.RawSubclass
+ (type $function.$rawtype.RawType__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $rawtype.RawType))
  (local $this (ref null $rawtype.RawType.RawSubclass))
@@ -189,6 +195,7 @@
 
 ;;; Class<?> RawSubclass.getClass()
 (func $m_getClass__java_lang_Class@rawtype.RawType.RawSubclass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.RawSubclass))

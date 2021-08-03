@@ -19,16 +19,18 @@
 ;;; Code for qualifiedsupercall.Parent [CLASS]
 (type $qualifiedsupercall.Parent (struct
  (field $vtable (ref $qualifiedsupercall.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $qualifiedsupercall.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__void (mut (ref $function.__$void)))
-))
+ (field $m_fun__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Parent()
 (func $m_<init>__@qualifiedsupercall.Parent
@@ -49,6 +51,7 @@
 
 ;;; void Parent.fun()
 (func $m_fun__void@qualifiedsupercall.Parent
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $qualifiedsupercall.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $qualifiedsupercall.Parent.rtt)))
@@ -80,6 +83,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@qualifiedsupercall.Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $qualifiedsupercall.Parent))
@@ -94,16 +98,18 @@
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [CLASS]
 (type $qualifiedsupercall.QualifiedSuperCall (struct
  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $qualifiedsupercall.Parent)
+)
 (type $qualifiedsupercall.QualifiedSuperCall.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__void (mut (ref $function.__$void)))
-))
+ (field $m_fun__void (mut (ref $function.__$void))))
+ (extends $qualifiedsupercall.Parent.vtable)
+)
 
 ;;; QualifiedSuperCall()
 (func $m_<init>__@qualifiedsupercall.QualifiedSuperCall
@@ -145,6 +151,7 @@
 
 ;;; Class<?> QualifiedSuperCall.getClass()
 (func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall))
@@ -160,16 +167,18 @@
 (type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct
  (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall)))
-))
+ (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall))))
+ (extends $java.lang.Object)
+)
 (type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClass(QualifiedSuperCall $outer_this)
 (func $m_<init>__qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall.InnerClass
@@ -194,6 +203,7 @@
 
 ;;; void InnerClass.test()
 (func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.rtt)))
@@ -228,6 +238,7 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))

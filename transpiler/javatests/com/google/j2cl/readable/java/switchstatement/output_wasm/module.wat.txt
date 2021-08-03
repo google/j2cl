@@ -20,8 +20,9 @@
  (field $vtable (ref $switchstatement.Numbers.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
-))
+ (field $f_ordinal__java_lang_Enum_ (mut i32)))
+ (extends $java.lang.Enum)
+)
 (type $switchstatement.Numbers.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -32,8 +33,9 @@
  (field $m_name__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_ordinal__int (mut (ref $function.__$int)))
  (field $m_compareTo__java_lang_Enum__int (mut (ref $function.$java.lang.Enum__$int)))
- (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int)))
-))
+ (field $m_compareTo__java_lang_Object__int (mut (ref $function.$java.lang.Object__$int))))
+ (extends $java.lang.Enum.vtable)
+)
 
 ;;; Numbers(String $name, int $ordinal)
 (func $m_<init>__java_lang_String__int@switchstatement.Numbers
@@ -149,6 +151,7 @@
 
 ;;; Class<?> Numbers.getClass()
 (func $m_getClass__java_lang_Class@switchstatement.Numbers
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.Numbers))
@@ -163,16 +166,18 @@
 ;;; Code for switchstatement.SwitchStatement [CLASS]
 (type $switchstatement.SwitchStatement (struct
  (field $vtable (ref $switchstatement.SwitchStatement.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $switchstatement.SwitchStatement.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_main__void (mut (ref $function.__$void)))
-))
+ (field $m_main__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SwitchStatement()
 (func $m_<init>__@switchstatement.SwitchStatement
@@ -193,6 +198,7 @@
 
 ;;; void SwitchStatement.main()
 (func $m_main__void@switchstatement.SwitchStatement
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $$expression (ref null $java.lang.Object))
  (local $$expression_1 i32)
@@ -414,6 +420,7 @@
 
 ;;; Class<?> SwitchStatement.getClass()
 (func $m_getClass__java_lang_Class@switchstatement.SwitchStatement
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.SwitchStatement))

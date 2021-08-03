@@ -17,8 +17,9 @@
  (field $f_publicField__jstype_SomeJsType (mut i32))
  (field $f_privateField__jstype_SomeJsType_ (mut i32))
  (field $f_packageField__jstype_SomeJsType (mut i32))
- (field $f_protectedField__jstype_SomeJsType (mut i32))
-))
+ (field $f_protectedField__jstype_SomeJsType (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $jstype.SomeJsType.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -29,8 +30,9 @@
  (field $m_packageMethod__void_$pp_jstype (mut (ref $function.__$void)))
  (field $m_protectedMethod__void (mut (ref $function.__$void)))
  (field $m_useFieldsAndMethods__void (mut (ref $function.__$void)))
- (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SomeJsType()
 (func $m_<init>__@jstype.SomeJsType
@@ -51,6 +53,7 @@
 
 ;;; void SomeJsType.publicMethod()
 (func $m_publicMethod__void@jstype.SomeJsType
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
@@ -68,6 +71,7 @@
 
 ;;; void SomeJsType.packageMethod()
 (func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
@@ -78,6 +82,7 @@
 
 ;;; void SomeJsType.protectedMethod()
 (func $m_protectedMethod__void@jstype.SomeJsType
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
@@ -88,6 +93,7 @@
 
 ;;; void SomeJsType.useFieldsAndMethods()
 (func $m_useFieldsAndMethods__void@jstype.SomeJsType
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $value i32)
  (local $this (ref null $jstype.SomeJsType))
@@ -114,6 +120,7 @@
 
 ;;; Wildcard SomeJsType.testStarAndWildCard(Star s, Wildcard w)
 (func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (param $w (ref null $java.lang.Object))
@@ -159,6 +166,7 @@
 
 ;;; Class<?> SomeJsType.getClass()
 (func $m_getClass__java_lang_Class@jstype.SomeJsType
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstype.SomeJsType))

@@ -20,8 +20,9 @@
  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i32))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i32))
- (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
-))
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object))))
+ (extends $java.lang.Exception)
+)
 (type $exception.MyException.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -40,8 +41,9 @@
  (field $m_initCause__java_lang_Throwable__java_lang_Throwable (mut (ref $function.$java.lang.Throwable__$java.lang.Throwable)))
  (field $m_printStackTrace__void (mut (ref $function.__$void)))
  (field $m_printStackTrace__java_io_PrintStream__void (mut (ref $function.$java.io.PrintStream__$void)))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
-))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void))))
+ (extends $java.lang.Exception.vtable)
+)
 
 ;;; MyException()
 (func $m_<init>__@exception.MyException
@@ -101,6 +103,7 @@
 
 ;;; Class<?> MyException.getClass()
 (func $m_getClass__java_lang_Class@exception.MyException
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $exception.MyException))
@@ -122,8 +125,9 @@
  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i32))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i32))
- (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
-))
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object))))
+ (extends $java.lang.Exception)
+)
 (type $exception.MyJsException.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -142,8 +146,9 @@
  (field $m_initCause__java_lang_Throwable__java_lang_Throwable (mut (ref $function.$java.lang.Throwable__$java.lang.Throwable)))
  (field $m_printStackTrace__void (mut (ref $function.__$void)))
  (field $m_printStackTrace__java_io_PrintStream__void (mut (ref $function.$java.io.PrintStream__$void)))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
-))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void))))
+ (extends $java.lang.Exception.vtable)
+)
 
 ;;; MyJsException()
 (func $m_<init>__@exception.MyJsException
@@ -203,6 +208,7 @@
 
 ;;; Class<?> MyJsException.getClass()
 (func $m_getClass__java_lang_Class@exception.MyJsException
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $exception.MyJsException))

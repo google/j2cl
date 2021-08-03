@@ -13,8 +13,9 @@
 ;;; Code for instanceofexpression.InstanceofExpressions [CLASS]
 (type $instanceofexpression.InstanceofExpressions (struct
  (field $vtable (ref $instanceofexpression.InstanceofExpressions.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $instanceofexpression.InstanceofExpressions.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -24,8 +25,9 @@
  (field $m_testInstanceofClass__void (mut (ref $function.__$void)))
  (field $m_testInstanceofInterface__void (mut (ref $function.__$void)))
  (field $m_testInstanceofBoxedType__void (mut (ref $function.__$void)))
- (field $m_testInstanceOfArray__void (mut (ref $function.__$void)))
-))
+ (field $m_testInstanceOfArray__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InstanceofExpressions()
 (func $m_<init>__@instanceofexpression.InstanceofExpressions
@@ -46,6 +48,7 @@
 
 ;;; void InstanceofExpressions.testInstanceofClass()
 (func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
  (local $b i32)
@@ -73,6 +76,7 @@
 
 ;;; void InstanceofExpressions.testInstanceofInterface()
 (func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $o (ref null $java.lang.Object))
  (local $b i32)
@@ -105,6 +109,7 @@
 
 ;;; void InstanceofExpressions.testInstanceofBoxedType()
 (func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $b (ref null $java.lang.Object))
  (local $a i32)
@@ -160,6 +165,7 @@
 
 ;;; void InstanceofExpressions.testInstanceOfArray()
 (func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $object (ref null $java.lang.Object))
  (local $objectArray (ref null $javaemul.internal.WasmArray.OfObject))
@@ -256,6 +262,7 @@
 
 ;;; Class<?> InstanceofExpressions.getClass()
 (func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
@@ -271,15 +278,17 @@
 (type $instanceofexpression.InstanceofExpressions.1 (struct
  (field $vtable (ref $instanceofexpression.InstanceofExpressions.1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__instanceofexpression_InstanceofExpressions_1 (mut (ref null $instanceofexpression.InstanceofExpressions)))
-))
+ (field $$outer_this__instanceofexpression_InstanceofExpressions_1 (mut (ref null $instanceofexpression.InstanceofExpressions))))
+ (extends $java.lang.Object)
+)
 (type $instanceofexpression.InstanceofExpressions.1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; <anonymous> implements Serializable(InstanceofExpressions $outer_this)
 (func $m_<init>__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1
@@ -325,6 +334,7 @@
 
 ;;; Class<?> <anonymous> implements Serializable.getClass()
 (func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions.1))

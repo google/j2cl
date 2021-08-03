@@ -19,15 +19,17 @@
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics (struct
  (field $vtable (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; LocalClassWithOuterGenerics()
 (func $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics
@@ -86,6 +88,7 @@
 
 ;;; Class<?> LocalClassWithOuterGenerics.getClass()
 (func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
@@ -100,16 +103,18 @@
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct
  (field $vtable (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics (mut (ref $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__$void)))
-))
+ (field $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics (mut (ref $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Bar()
 (func $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
@@ -130,6 +135,7 @@
 
 ;;; void Bar.baz(Bar<T> other)
 (func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+ (type $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $other (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
@@ -162,6 +168,7 @@
 
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
@@ -176,16 +183,18 @@
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct
  (field $vtable (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics (mut (ref $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$void)))
-))
+ (field $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics (mut (ref $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Baz()
 (func $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
@@ -206,6 +215,7 @@
 
 ;;; void Baz.qux(Baz<S, T> foo, Baz<T, T> bar, Baz<String, T> baz)
 (func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+ (type $function.$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  (param $bar (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
@@ -240,6 +250,7 @@
 
 ;;; Class<?> Baz.getClass()
 (func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))

@@ -13,16 +13,18 @@
 ;;; Code for localclasswithconstructor.LocalClassWithConstructor [CLASS]
 (type $localclasswithconstructor.LocalClassWithConstructor (struct
  (field $vtable (ref $localclasswithconstructor.LocalClassWithConstructor.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $localclasswithconstructor.LocalClassWithConstructor.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__int__void (mut (ref $function.$int__$void)))
-))
+ (field $m_test__int__void (mut (ref $function.$int__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; LocalClassWithConstructor()
 (func $m_<init>__@localclasswithconstructor.LocalClassWithConstructor
@@ -43,6 +45,7 @@
 
 ;;; void LocalClassWithConstructor.test(int p)
 (func $m_test__int__void@localclasswithconstructor.LocalClassWithConstructor
+ (type $function.$int__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $p i32)
  (local $localVar i32)
@@ -82,6 +85,7 @@
 
 ;;; Class<?> LocalClassWithConstructor.getClass()
 (func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor))
@@ -100,15 +104,17 @@
  (field $$outer_this__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut (ref null $localclasswithconstructor.LocalClassWithConstructor)))
  (field $f_field__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
  (field $$captured_localVar__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
- (field $$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32))
-))
+ (field $$captured_p__localclasswithconstructor_LocalClassWithConstructor_1LocalClass (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $localclasswithconstructor.LocalClassWithConstructor.1LocalClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; LocalClass(LocalClassWithConstructor $outer_this, int $captured_localVar, int $captured_p, int a, int b)
 (func $m_<init>__localclasswithconstructor_LocalClassWithConstructor__int__int__int__int@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
@@ -191,6 +197,7 @@
 
 ;;; Class<?> LocalClass.getClass()
 (func $m_getClass__java_lang_Class@localclasswithconstructor.LocalClassWithConstructor.1LocalClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithconstructor.LocalClassWithConstructor.1LocalClass))

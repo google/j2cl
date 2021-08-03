@@ -7,16 +7,18 @@
 ;;; Code for blockscoping.BlockScoping [CLASS]
 (type $blockscoping.BlockScoping (struct
  (field $vtable (ref $blockscoping.BlockScoping.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $blockscoping.BlockScoping.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_main__void (mut (ref $function.__$void)))
-))
+ (field $m_main__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; BlockScoping()
 (func $m_<init>__@blockscoping.BlockScoping
@@ -37,6 +39,7 @@
 
 ;;; void BlockScoping.main()
 (func $m_main__void@blockscoping.BlockScoping
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $i i32)
  (local $i_1 i32)
@@ -80,6 +83,7 @@
 
 ;;; Class<?> BlockScoping.getClass()
 (func $m_getClass__java_lang_Class@blockscoping.BlockScoping
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $blockscoping.BlockScoping))

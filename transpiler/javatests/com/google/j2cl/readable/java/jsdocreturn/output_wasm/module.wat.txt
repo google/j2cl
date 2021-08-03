@@ -7,8 +7,9 @@
 ;;; Code for jsdocreturn.JsDocReturn [CLASS]
 (type $jsdocreturn.JsDocReturn (struct
  (field $vtable (ref $jsdocreturn.JsDocReturn.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $jsdocreturn.JsDocReturn.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -16,8 +17,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test1__void (mut (ref $function.__$void)))
- (field $m_test2__int (mut (ref $function.__$int)))
-))
+ (field $m_test2__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; JsDocReturn()
 (func $m_<init>__@jsdocreturn.JsDocReturn
@@ -38,6 +40,7 @@
 
 ;;; void JsDocReturn.test1()
 (func $m_test1__void@jsdocreturn.JsDocReturn
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $jsdocreturn.JsDocReturn))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
@@ -48,6 +51,7 @@
 
 ;;; int JsDocReturn.test2()
 (func $m_test2__int@jsdocreturn.JsDocReturn
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $jsdocreturn.JsDocReturn))
@@ -83,6 +87,7 @@
 
 ;;; Class<?> JsDocReturn.getClass()
 (func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdocreturn.JsDocReturn))

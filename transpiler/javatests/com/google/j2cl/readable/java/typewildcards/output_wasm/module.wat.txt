@@ -61,15 +61,17 @@
 ;;; Code for typewildcards.GenericType [CLASS]
 (type $typewildcards.GenericType (struct
  (field $vtable (ref $typewildcards.GenericType.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $typewildcards.GenericType.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; GenericType()
 (func $m_<init>__@typewildcards.GenericType
@@ -111,6 +113,7 @@
 
 ;;; Class<?> GenericType.getClass()
 (func $m_getClass__java_lang_Class@typewildcards.GenericType
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.GenericType))
@@ -125,8 +128,9 @@
 ;;; Code for typewildcards.TypeWildCards [CLASS]
 (type $typewildcards.TypeWildCards (struct
  (field $vtable (ref $typewildcards.TypeWildCards.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $typewildcards.TypeWildCards.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -138,8 +142,9 @@
  (field $m_lowerBound__typewildcards_GenericType__void (mut (ref $function.$typewildcards.GenericType__$void)))
  (field $m_test__void (mut (ref $function.__$void)))
  (field $m_testInferredGenericIntersection__void (mut (ref $function.__$void)))
- (field $m_testRecursiveGeneric__void (mut (ref $function.__$void)))
-))
+ (field $m_testRecursiveGeneric__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; TypeWildCards()
 (func $m_<init>__@typewildcards.TypeWildCards
@@ -160,6 +165,7 @@
 
 ;;; void TypeWildCards.unbounded(GenericType<?> g)
 (func $m_unbounded__typewildcards_GenericType__void@typewildcards.TypeWildCards
+ (type $function.$typewildcards.GenericType__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $g (ref null $typewildcards.GenericType))
  (local $this (ref null $typewildcards.TypeWildCards))
@@ -171,6 +177,7 @@
 
 ;;; void TypeWildCards.upperBound(GenericType<? extends TypeWildCards> g)
 (func $m_upperBound__typewildcards_GenericType__void@typewildcards.TypeWildCards
+ (type $function.$typewildcards.GenericType__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $g (ref null $typewildcards.GenericType))
  (local $this (ref null $typewildcards.TypeWildCards))
@@ -182,6 +189,7 @@
 
 ;;; void TypeWildCards.lowerBound(GenericType<? super TypeWildCards> g)
 (func $m_lowerBound__typewildcards_GenericType__void@typewildcards.TypeWildCards
+ (type $function.$typewildcards.GenericType__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $g (ref null $typewildcards.GenericType))
  (local $this (ref null $typewildcards.TypeWildCards))
@@ -193,6 +201,7 @@
 
 ;;; void TypeWildCards.test()
 (func $m_test__void@typewildcards.TypeWildCards
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
@@ -279,6 +288,7 @@
 
 ;;; void TypeWildCards.testInferredGenericIntersection()
 (func $m_testInferredGenericIntersection__void@typewildcards.TypeWildCards
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $elements (ref null $java.lang.Object))
  (local $otherElements (ref null $java.lang.Object))
@@ -308,6 +318,7 @@
 
 ;;; void TypeWildCards.testRecursiveGeneric()
 (func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
@@ -342,6 +353,7 @@
 
 ;;; Class<?> TypeWildCards.getClass()
 (func $m_getClass__java_lang_Class@typewildcards.TypeWildCards
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards))
@@ -425,16 +437,18 @@
 (type $typewildcards.TypeWildCards.A (struct
  (field $vtable (ref $typewildcards.TypeWildCards.A.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f__typewildcards_TypeWildCards_A (mut i32))
-))
+ (field $f_f__typewildcards_TypeWildCards_A (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $typewildcards.TypeWildCards.A.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_m__void (mut (ref $function.__$void)))
-))
+ (field $m_m__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; A()
 (func $m_<init>__@typewildcards.TypeWildCards.A
@@ -452,6 +466,7 @@
 
 ;;; void A.m()
 (func $m_m__void@typewildcards.TypeWildCards.A
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.A.rtt)))
@@ -483,6 +498,7 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.A
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.A))
@@ -566,15 +582,17 @@
 (type $typewildcards.TypeWildCards.Element (struct
  (field $vtable (ref $typewildcards.TypeWildCards.Element.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_Element (mut (ref null $typewildcards.TypeWildCards)))
-))
+ (field $$outer_this__typewildcards_TypeWildCards_Element (mut (ref null $typewildcards.TypeWildCards))))
+ (extends $java.lang.Object)
+)
 (type $typewildcards.TypeWildCards.Element.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Element(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Element
@@ -622,15 +640,17 @@
 (type $typewildcards.TypeWildCards.OtherElement (struct
  (field $vtable (ref $typewildcards.TypeWildCards.OtherElement.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
-))
+ (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards))))
+ (extends $java.lang.Object)
+)
 (type $typewildcards.TypeWildCards.OtherElement.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; OtherElement(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.OtherElement
@@ -679,15 +699,17 @@
  (field $vtable (ref $typewildcards.TypeWildCards.SubOtherElement.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__typewildcards_TypeWildCards_OtherElement (mut (ref null $typewildcards.TypeWildCards)))
- (field $$outer_this__typewildcards_TypeWildCards_SubOtherElement (mut (ref null $typewildcards.TypeWildCards)))
-))
+ (field $$outer_this__typewildcards_TypeWildCards_SubOtherElement (mut (ref null $typewildcards.TypeWildCards))))
+ (extends $typewildcards.TypeWildCards.OtherElement)
+)
 (type $typewildcards.TypeWildCards.SubOtherElement.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $typewildcards.TypeWildCards.OtherElement.vtable)
+)
 
 ;;; SubOtherElement(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.SubOtherElement
@@ -735,15 +757,17 @@
 (type $typewildcards.TypeWildCards.Foo (struct
  (field $vtable (ref $typewildcards.TypeWildCards.Foo.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__typewildcards_TypeWildCards_Foo (mut (ref null $typewildcards.TypeWildCards)))
-))
+ (field $$outer_this__typewildcards_TypeWildCards_Foo (mut (ref null $typewildcards.TypeWildCards))))
+ (extends $typewildcards.GenericType)
+)
 (type $typewildcards.TypeWildCards.Foo.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $typewildcards.GenericType.vtable)
+)
 
 ;;; Foo(TypeWildCards $outer_this)
 (func $m_<init>__typewildcards_TypeWildCards@typewildcards.TypeWildCards.Foo
@@ -789,6 +813,7 @@
 
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.Foo))
@@ -803,8 +828,9 @@
 ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [CLASS]
 (type $typewildcards.TypeWildCards.$LambdaImplementor$1 (struct
  (field $vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -813,8 +839,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
  (field $m_andThen__java_util_function_Function__java_util_function_Function (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_compose__java_util_function_Function__java_util_function_Function (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_compose__java_util_function_Function__java_util_function_Function (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$1()
 (func $m_<init>__@typewildcards.TypeWildCards.$LambdaImplementor$1
@@ -835,6 +862,7 @@
 
 ;;; R $LambdaImplementor$1.apply(T a)
 (func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -867,6 +895,7 @@
 
 ;;; Function<T, V> $LambdaImplementor$1.andThen(Function<? super R, ? extends V> arg0)
 (func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -882,6 +911,7 @@
 
 ;;; Function<V, R> $LambdaImplementor$1.compose(Function<? super V, ? extends T> arg0)
 (func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -921,6 +951,7 @@
 
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))

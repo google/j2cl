@@ -50,16 +50,18 @@
 ;;; Code for jsbridgebackward.A [CLASS]
 (type $jsbridgebackward.A (struct
  (field $vtable (ref $jsbridgebackward.A.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $jsbridgebackward.A.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__int__int (mut (ref $function.$int__$int)))
-))
+ (field $m_foo__int__int (mut (ref $function.$int__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; A()
 (func $m_<init>__@jsbridgebackward.A
@@ -80,6 +82,7 @@
 
 ;;; int A.foo(int a)
 (func $m_foo__int__int@jsbridgebackward.A
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -116,6 +119,7 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@jsbridgebackward.A
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.A))
@@ -130,16 +134,18 @@
 ;;; Code for jsbridgebackward.InterfaceImpl [CLASS]
 (type $jsbridgebackward.InterfaceImpl (struct
  (field $vtable (ref $jsbridgebackward.InterfaceImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $jsbridgebackward.A)
+)
 (type $jsbridgebackward.InterfaceImpl.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__int__int (mut (ref $function.$int__$int)))
-))
+ (field $m_foo__int__int (mut (ref $function.$int__$int))))
+ (extends $jsbridgebackward.A.vtable)
+)
 
 ;;; InterfaceImpl()
 (func $m_<init>__@jsbridgebackward.InterfaceImpl
@@ -181,6 +187,7 @@
 
 ;;; Class<?> InterfaceImpl.getClass()
 (func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.InterfaceImpl))

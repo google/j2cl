@@ -27,16 +27,18 @@
 ;;; Code for interfaces.Main [CLASS]
 (type $interfaces.Main (struct
  (field $vtable (ref $interfaces.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $interfaces.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_testInterfaceMembers__void_$pp_interfaces (mut (ref $function.__$void)))
-))
+ (field $m_testInterfaceMembers__void_$pp_interfaces (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@interfaces.Main
@@ -57,6 +59,7 @@
 
 ;;; void Main.testInterfaceMembers()
 (func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $i (ref null $java.lang.Object))
  (local $x i32)
@@ -108,6 +111,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@interfaces.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main))
@@ -236,8 +240,9 @@
 (type $interfaces.Main.Implementor (struct
  (field $vtable (ref $interfaces.Main.Implementor.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__interfaces_Main_Implementor (mut (ref null $interfaces.Main)))
-))
+ (field $$outer_this__interfaces_Main_Implementor (mut (ref null $interfaces.Main))))
+ (extends $java.lang.Object)
+)
 (type $interfaces.Main.Implementor.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -246,8 +251,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_interfaceMethod__void (mut (ref $function.__$void)))
  (field $m_defaultMethod__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
-))
+ (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Implementor(Main $outer_this)
 (func $m_<init>__interfaces_Main@interfaces.Main.Implementor
@@ -272,6 +278,7 @@
 
 ;;; void Implementor.interfaceMethod()
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $interfaces.Main.Implementor.rtt)))
@@ -282,6 +289,7 @@
 
 ;;; void Implementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $interfaces.Main.Implementor))
@@ -296,6 +304,7 @@
 
 ;;; void Implementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
+ (type $function.$java.lang.String__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (local $this (ref null $interfaces.Main.Implementor))
@@ -337,6 +346,7 @@
 
 ;;; Class<?> Implementor.getClass()
 (func $m_getClass__java_lang_Class@interfaces.Main.Implementor
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main.Implementor))
@@ -352,8 +362,9 @@
 (type $interfaces.Main.AbstractImplementor (struct
  (field $vtable (ref $interfaces.Main.AbstractImplementor.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__interfaces_Main_AbstractImplementor (mut (ref null $interfaces.Main)))
-))
+ (field $$outer_this__interfaces_Main_AbstractImplementor (mut (ref null $interfaces.Main))))
+ (extends $java.lang.Object)
+)
 (type $interfaces.Main.AbstractImplementor.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -361,8 +372,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_defaultMethod__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void)))
-))
+ (field $m_defaultMethod__java_lang_String__void (mut (ref $function.$java.lang.String__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; AbstractImplementor(Main $outer_this)
 (func $m_<init>__interfaces_Main@interfaces.Main.AbstractImplementor
@@ -387,6 +399,7 @@
 
 ;;; void AbstractImplementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $interfaces.Main.AbstractImplementor))
@@ -401,6 +414,7 @@
 
 ;;; void AbstractImplementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
+ (type $function.$java.lang.String__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (local $this (ref null $interfaces.Main.AbstractImplementor))

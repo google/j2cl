@@ -37,8 +37,9 @@
 ;;; Code for simplelocalclass.SimpleLocalClass [CLASS]
 (type $simplelocalclass.SimpleLocalClass (struct
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $simplelocalclass.SimpleLocalClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -47,8 +48,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_test__int__void (mut (ref $function.$int__$void)))
  (field $m_fun__void (mut (ref $function.__$void)))
- (field $m_foo__void (mut (ref $function.__$void)))
-))
+ (field $m_foo__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SimpleLocalClass()
 (func $m_<init>__@simplelocalclass.SimpleLocalClass
@@ -69,6 +71,7 @@
 
 ;;; void SimpleLocalClass.test(int p)
 (func $m_test__int__void@simplelocalclass.SimpleLocalClass
+ (type $function.$int__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $p i32)
  (local $localVar i32)
@@ -96,6 +99,7 @@
 
 ;;; void SimpleLocalClass.fun()
 (func $m_fun__void@simplelocalclass.SimpleLocalClass
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $localVar i32)
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
@@ -110,6 +114,7 @@
 
 ;;; void SimpleLocalClass.foo()
 (func $m_foo__void@simplelocalclass.SimpleLocalClass
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
@@ -141,6 +146,7 @@
 
 ;;; Class<?> SimpleLocalClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
@@ -158,16 +164,18 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
  (field $$captured_localVar__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32))
- (field $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32))
-))
+ (field $$captured_p__simplelocalclass_SimpleLocalClass_1InnerClass (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__int (mut (ref $function.__$int)))
-))
+ (field $m_fun__int (mut (ref $function.__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar, int $captured_p)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__int__int@simplelocalclass.SimpleLocalClass.1InnerClass
@@ -200,6 +208,7 @@
 
 ;;; int InnerClass.fun()
 (func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass
+ (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
@@ -235,6 +244,7 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
@@ -250,15 +260,17 @@
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (struct
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass)))
-))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures (mut (ref null $simplelocalclass.SimpleLocalClass))))
+ (extends $java.lang.Object)
+)
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClassWithoutCaptures(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
@@ -304,6 +316,7 @@
 
 ;;; Class<?> InnerClassWithoutCaptures.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
@@ -321,15 +334,17 @@
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__simplelocalclass_SimpleLocalClass_2InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
  (field $f_field__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32))
- (field $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32))
-))
+ (field $$captured_localVar__simplelocalclass_SimpleLocalClass_2InnerClass (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClass(SimpleLocalClass $outer_this, int $captured_localVar)
 (func $m_<init>__simplelocalclass_SimpleLocalClass__int@simplelocalclass.SimpleLocalClass.2InnerClass
@@ -392,6 +407,7 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.2InnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
@@ -407,15 +423,17 @@
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (struct
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
-))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_1Abc$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass))))
+ (extends $java.lang.Object)
+)
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Abc$InnerClass(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
@@ -461,6 +479,7 @@
 
 ;;; Class<?> Abc$InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
@@ -476,15 +495,17 @@
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (struct
  (field $vtable (ref $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass)))
-))
+ (field $$outer_this__simplelocalclass_SimpleLocalClass_1Klm$InnerClass (mut (ref null $simplelocalclass.SimpleLocalClass))))
+ (extends $java.lang.Object)
+)
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Klm$InnerClass(SimpleLocalClass $outer_this)
 (func $m_<init>__simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
@@ -530,6 +551,7 @@
 
 ;;; Class<?> Klm$InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))

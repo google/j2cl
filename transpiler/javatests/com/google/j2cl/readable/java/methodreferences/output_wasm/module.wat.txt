@@ -164,8 +164,9 @@
 ;;; Code for methodreferences.MethodReferences [CLASS]
 (type $methodreferences.MethodReferences (struct
  (field $vtable (ref $methodreferences.MethodReferences.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -175,8 +176,9 @@
  (field $m_isA__java_lang_Boolean (mut (ref $function.__$java.lang.Boolean)))
  (field $m_self__java_lang_Object_$pp_methodreferences (mut (ref $function.__$java.lang.Object)))
  (field $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (mut (ref $function.$java.lang.Number__$java.lang.Boolean)))
- (field $m_main__void_$pp_methodreferences (mut (ref $function.__$void)))
-))
+ (field $m_main__void_$pp_methodreferences (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; MethodReferences()
 (func $m_<init>__@methodreferences.MethodReferences
@@ -210,6 +212,7 @@
 
 ;;; Boolean MethodReferences.isA()
 (func $m_isA__java_lang_Boolean@methodreferences.MethodReferences
+ (type $function.__$java.lang.Boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Boolean))
  (local $this (ref null $methodreferences.MethodReferences))
@@ -224,6 +227,7 @@
 
 ;;; Object MethodReferences.self()
 (func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences))
@@ -238,6 +242,7 @@
 
 ;;; Boolean MethodReferences.sameAs(Number n)
 (func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences
+ (type $function.$java.lang.Number__$java.lang.Boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (param $n (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
@@ -253,6 +258,7 @@
 
 ;;; void MethodReferences.main()
 (func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $objectFactory (ref null $java.lang.Object))
  (local $$$q (ref null $methodreferences.MethodReferences))
@@ -383,6 +389,7 @@
 
 ;;; Class<?> MethodReferences.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences))
@@ -500,16 +507,18 @@
 (type $methodreferences.MethodReferences.ObjectCapturingOuter (struct
  (field $vtable (ref $methodreferences.MethodReferences.ObjectCapturingOuter.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $$outer_this__methodreferences_MethodReferences_ObjectCapturingOuter (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (mut (ref $function.__$methodreferences.MethodReferences)))
-))
+ (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (mut (ref $function.__$methodreferences.MethodReferences))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; ObjectCapturingOuter(MethodReferences<T> $outer_this)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.ObjectCapturingOuter
@@ -534,6 +543,7 @@
 
 ;;; MethodReferences<T> ObjectCapturingOuter.getMain()
 (func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
+ (type $function.__$methodreferences.MethodReferences)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $methodreferences.MethodReferences))
  (local $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
@@ -569,6 +579,7 @@
 
 ;;; Class<?> ObjectCapturingOuter.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.ObjectCapturingOuter
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
@@ -754,16 +765,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$1 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$1_ (mut (ref null $java.lang.Object)))
-))
+ (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$1_ (mut (ref null $java.lang.Object))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$1.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$1(Object $$q)
 (func $m_<init>__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1
@@ -788,6 +801,7 @@
 
 ;;; T $LambdaImplementor$1.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
@@ -823,6 +837,7 @@
 
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$1
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
@@ -837,16 +852,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$2 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$2 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$2.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$2.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$2()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$2
@@ -867,6 +884,7 @@
 
 ;;; T $LambdaImplementor$2.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$2
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$2))
@@ -902,6 +920,7 @@
 
 ;;; Class<?> $LambdaImplementor$2.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$2
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$2))
@@ -916,16 +935,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$3 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$3 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$3.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$3.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$3()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$3
@@ -946,6 +967,7 @@
 
 ;;; T $LambdaImplementor$3.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$3
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$3))
@@ -981,6 +1003,7 @@
 
 ;;; Class<?> $LambdaImplementor$3.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$3
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$3))
@@ -996,16 +1019,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$4 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$4.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$4_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$4_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$4.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$4(MethodReferences<T> $$q)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$4
@@ -1030,6 +1055,7 @@
 
 ;;; T $LambdaImplementor$4.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$4
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
@@ -1065,6 +1091,7 @@
 
 ;;; Class<?> $LambdaImplementor$4.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$4
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
@@ -1079,16 +1106,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$5 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$5 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$5.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$5.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$5()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$5
@@ -1109,6 +1138,7 @@
 
 ;;; V $LambdaImplementor$5.apply(T arg0, U arg1)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$5
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1154,6 +1184,7 @@
 
 ;;; Class<?> $LambdaImplementor$5.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$5
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$5))
@@ -1169,16 +1200,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$6 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$6.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$6_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$6_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$6.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$6(MethodReferences<T> $captured.this)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$6
@@ -1203,6 +1236,7 @@
 
 ;;; U $LambdaImplementor$6.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$6
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1243,6 +1277,7 @@
 
 ;;; Class<?> $LambdaImplementor$6.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$6
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$6))
@@ -1257,16 +1292,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$7 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$7 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$7.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$7.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
-))
+ (field $m_apply__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$7()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$7
@@ -1287,6 +1324,7 @@
 
 ;;; boolean $LambdaImplementor$7.apply(T arg0)
 (func $m_apply__java_lang_Object__boolean@methodreferences.MethodReferences.$LambdaImplementor$7
+ (type $function.$java.lang.Object__$boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result i32)
@@ -1331,6 +1369,7 @@
 
 ;;; Class<?> $LambdaImplementor$7.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$7
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$7))
@@ -1346,16 +1385,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$8 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$8.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$8_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$8_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$8.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$8(MethodReferences<T> $captured.this)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$8
@@ -1380,6 +1421,7 @@
 
 ;;; T $LambdaImplementor$8.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$8
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
@@ -1415,6 +1457,7 @@
 
 ;;; Class<?> $LambdaImplementor$8.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$8
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
@@ -1429,16 +1472,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$9 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$9 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$9.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$9.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__int__arrayOf_java_lang_Object (mut (ref $function.$int__$javaemul.internal.WasmArray.OfObject)))
-))
+ (field $m_produce__int__arrayOf_java_lang_Object (mut (ref $function.$int__$javaemul.internal.WasmArray.OfObject))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$9()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$9
@@ -1459,6 +1504,7 @@
 
 ;;; T[] $LambdaImplementor$9.produce(int arg0)
 (func $m_produce__int__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$9
+ (type $function.$int__$javaemul.internal.WasmArray.OfObject)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (result (ref null $javaemul.internal.WasmArray.OfObject))
@@ -1495,6 +1541,7 @@
 
 ;;; Class<?> $LambdaImplementor$9.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$9
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$9))
@@ -1510,16 +1557,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$10 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$10.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$10_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$10_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$10.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$10(MethodReferences<Object> $$q)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$10
@@ -1544,6 +1593,7 @@
 
 ;;; T $LambdaImplementor$10.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$10
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
@@ -1579,6 +1629,7 @@
 
 ;;; Class<?> $LambdaImplementor$10.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$10
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
@@ -1593,16 +1644,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$11 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$11 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$11.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$11.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$11()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$11
@@ -1623,6 +1676,7 @@
 
 ;;; U $LambdaImplementor$11.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$11
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1663,6 +1717,7 @@
 
 ;;; Class<?> $LambdaImplementor$11.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$11
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$11))
@@ -1677,16 +1732,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$12 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$12 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$12.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$12.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$12()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$12
@@ -1707,6 +1764,7 @@
 
 ;;; U $LambdaImplementor$12.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1747,6 +1805,7 @@
 
 ;;; Class<?> $LambdaImplementor$12.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$12
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$12))
@@ -1762,16 +1821,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$13 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$13.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$13_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$13_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$13.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$13(MethodReferences<T> $captured.this)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$13
@@ -1796,6 +1857,7 @@
 
 ;;; T $LambdaImplementor$13.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$13
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
@@ -1831,6 +1893,7 @@
 
 ;;; Class<?> $LambdaImplementor$13.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$13
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
@@ -1845,16 +1908,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$14 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$14 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$14.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$14.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$14()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$14
@@ -1875,6 +1940,7 @@
 
 ;;; T $LambdaImplementor$14.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$14
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
@@ -1910,6 +1976,7 @@
 
 ;;; Class<?> $LambdaImplementor$14.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$14
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
@@ -1924,16 +1991,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$15 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$15 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$15.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$15.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$15()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$15
@@ -1954,6 +2023,7 @@
 
 ;;; T $LambdaImplementor$15.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$15
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
@@ -1989,6 +2059,7 @@
 
 ;;; Class<?> $LambdaImplementor$15.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$15
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
@@ -2004,16 +2075,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$16 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$16.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$16_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$$q__methodreferences_MethodReferences_$LambdaImplementor$16_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$16.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$16(MethodReferences<Object> $$q)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$16
@@ -2038,6 +2111,7 @@
 
 ;;; T $LambdaImplementor$16.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$16
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
@@ -2073,6 +2147,7 @@
 
 ;;; Class<?> $LambdaImplementor$16.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$16
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
@@ -2087,16 +2162,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$17 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$17 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$17.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$17.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$17()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$17
@@ -2117,6 +2194,7 @@
 
 ;;; U $LambdaImplementor$17.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$17
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2157,6 +2235,7 @@
 
 ;;; Class<?> $LambdaImplementor$17.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$17
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$17))
@@ -2171,16 +2250,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$18 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$18 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$18.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$18.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$18()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$18
@@ -2201,6 +2282,7 @@
 
 ;;; U $LambdaImplementor$18.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2241,6 +2323,7 @@
 
 ;;; Class<?> $LambdaImplementor$18.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$18
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$18))
@@ -2256,16 +2339,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$19 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$19.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$19_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$19_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$19.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_produce__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$19(MethodReferences<T> $captured.this)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$19
@@ -2290,6 +2375,7 @@
 
 ;;; T $LambdaImplementor$19.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$19
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
@@ -2325,6 +2411,7 @@
 
 ;;; Class<?> $LambdaImplementor$19.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$19
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
@@ -2339,16 +2426,18 @@
 ;;; Code for methodreferences.MethodReferences.$LambdaImplementor$20 [CLASS]
 (type $methodreferences.MethodReferences.$LambdaImplementor$20 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$20.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$20.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$20()
 (func $m_<init>__@methodreferences.MethodReferences.$LambdaImplementor$20
@@ -2369,6 +2458,7 @@
 
 ;;; V $LambdaImplementor$20.apply(T arg0, U arg1)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$20
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -2414,6 +2504,7 @@
 
 ;;; Class<?> $LambdaImplementor$20.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$20
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$20))
@@ -2429,16 +2520,18 @@
 (type $methodreferences.MethodReferences.$LambdaImplementor$21 (struct
  (field $vtable (ref $methodreferences.MethodReferences.$LambdaImplementor$21.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$21_ (mut (ref null $methodreferences.MethodReferences)))
-))
+ (field $f_$captured.this__methodreferences_MethodReferences_$LambdaImplementor$21_ (mut (ref null $methodreferences.MethodReferences))))
+ (extends $java.lang.Object)
+)
 (type $methodreferences.MethodReferences.$LambdaImplementor$21.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; $LambdaImplementor$21(MethodReferences<T> $captured.this)
 (func $m_<init>__methodreferences_MethodReferences@methodreferences.MethodReferences.$LambdaImplementor$21
@@ -2463,6 +2556,7 @@
 
 ;;; U $LambdaImplementor$21.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2503,6 +2597,7 @@
 
 ;;; Class<?> $LambdaImplementor$21.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$21
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$21))

@@ -9,16 +9,18 @@
  (field $vtable (ref $genericequals.GenericEquals.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_value__genericequals_GenericEquals_ (mut (ref null $java.lang.Object)))
- (field $f_value2__genericequals_GenericEquals_ (mut (ref null $genericequals.GenericEquals)))
-))
+ (field $f_value2__genericequals_GenericEquals_ (mut (ref null $genericequals.GenericEquals))))
+ (extends $java.lang.Object)
+)
 (type $genericequals.GenericEquals.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__genericequals_GenericEquals__java_lang_Object (mut (ref $function.$genericequals.GenericEquals__$java.lang.Object)))
-))
+ (field $m_foo__genericequals_GenericEquals__java_lang_Object (mut (ref $function.$genericequals.GenericEquals__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; GenericEquals(T value)
 (func $m_<init>__java_lang_Object@genericequals.GenericEquals
@@ -46,6 +48,7 @@
 
 ;;; Object GenericEquals.foo(GenericEquals<?> other)
 (func $m_foo__genericequals_GenericEquals__java_lang_Object@genericequals.GenericEquals
+ (type $function.$genericequals.GenericEquals__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $other (ref null $genericequals.GenericEquals))
  (result (ref null $java.lang.Object))
@@ -61,6 +64,7 @@
 
 ;;; boolean GenericEquals.equals(Object obj)
 (func $m_equals__java_lang_Object__boolean@genericequals.GenericEquals
+ (type $function.$java.lang.Object__$boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (param $obj (ref null $java.lang.Object))
  (result i32)
@@ -123,6 +127,7 @@
 
 ;;; Class<?> GenericEquals.getClass()
 (func $m_getClass__java_lang_Class@genericequals.GenericEquals
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericequals.GenericEquals))

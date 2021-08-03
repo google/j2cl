@@ -31,8 +31,9 @@
 ;;; Code for packageprivatemethods.package1.Child [CLASS]
 (type $packageprivatemethods.package1.Child (struct
  (field $vtable (ref $packageprivatemethods.package1.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $packageprivatemethods.package1.Parent)
+)
 (type $packageprivatemethods.package1.Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -44,8 +45,9 @@
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
  (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
- (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
-))
+ (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int))))
+ (extends $packageprivatemethods.package1.Parent.vtable)
+)
 
 ;;; Child()
 (func $m_<init>__@packageprivatemethods.package1.Child
@@ -66,6 +68,7 @@
 
 ;;; int Child.foo(int a)
 (func $m_foo__int__int@packageprivatemethods.package1.Child
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -81,6 +84,7 @@
 
 ;;; int Child.fun(int a, int b)
 (func $m_fun__int__int__int@packageprivatemethods.package1.Child
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -97,6 +101,7 @@
 
 ;;; int Child.bar(int a, int b, int c)
 (func $m_bar__int__int__int__int@packageprivatemethods.package1.Child
+ (type $function.$int__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -114,6 +119,7 @@
 
 ;;; int Child.foo(int arg0)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (result i32)
@@ -129,6 +135,7 @@
 
 ;;; int Child.fun(int arg0, int arg1)
 (func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Child
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
@@ -166,6 +173,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@packageprivatemethods.package1.Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.Child))
@@ -180,8 +188,9 @@
 ;;; Code for packageprivatemethods.package1.Parent [CLASS]
 (type $packageprivatemethods.package1.Parent (struct
  (field $vtable (ref $packageprivatemethods.package1.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $packageprivatemethods.package1.SuperParent)
+)
 (type $packageprivatemethods.package1.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -191,8 +200,9 @@
  (field $m_foo__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int)))
  (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
- (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
-))
+ (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int))))
+ (extends $packageprivatemethods.package1.SuperParent.vtable)
+)
 
 ;;; Parent()
 (func $m_<init>__@packageprivatemethods.package1.Parent
@@ -213,6 +223,7 @@
 
 ;;; int Parent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -228,6 +239,7 @@
 
 ;;; int Parent.bar(int arg0, int arg1, int arg2)
 (func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.Parent
+ (type $function.$int__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (param $arg1 i32)
@@ -267,8 +279,9 @@
 ;;; Code for packageprivatemethods.package1.SuperParent [CLASS]
 (type $packageprivatemethods.package1.SuperParent (struct
  (field $vtable (ref $packageprivatemethods.package1.SuperParent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $packageprivatemethods.package1.SuperParent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -277,8 +290,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int)))
  (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
- (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
-))
+ (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; SuperParent()
 (func $m_<init>__@packageprivatemethods.package1.SuperParent
@@ -299,6 +313,7 @@
 
 ;;; int SuperParent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -314,6 +329,7 @@
 
 ;;; int SuperParent.fun(int a, int b)
 (func $m_fun__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
+ (type $function.$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -330,6 +346,7 @@
 
 ;;; int SuperParent.bar(int a, int b, int c)
 (func $m_bar__int__int__int__int_$pp_packageprivatemethods_package1@packageprivatemethods.package1.SuperParent
+ (type $function.$int__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -368,6 +385,7 @@
 
 ;;; Class<?> SuperParent.getClass()
 (func $m_getClass__java_lang_Class@packageprivatemethods.package1.SuperParent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
@@ -382,8 +400,9 @@
 ;;; Code for packageprivatemethods.package2.SubChild [CLASS]
 (type $packageprivatemethods.package2.SubChild (struct
  (field $vtable (ref $packageprivatemethods.package2.SubChild.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $packageprivatemethods.package1.Child)
+)
 (type $packageprivatemethods.package2.SubChild.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -395,8 +414,9 @@
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
  (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
- (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int)))
-))
+ (field $m_fun__int__int__int (mut (ref $function.$int__$int__$int))))
+ (extends $packageprivatemethods.package1.Child.vtable)
+)
 
 ;;; SubChild()
 (func $m_<init>__@packageprivatemethods.package2.SubChild
@@ -417,6 +437,7 @@
 
 ;;; int SubChild.foo(int a)
 (func $m_foo__int__int@packageprivatemethods.package2.SubChild
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -453,6 +474,7 @@
 
 ;;; Class<?> SubChild.getClass()
 (func $m_getClass__java_lang_Class@packageprivatemethods.package2.SubChild
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package2.SubChild))
@@ -467,8 +489,9 @@
 ;;; Code for packageprivatemethods.package2.SubParent [CLASS]
 (type $packageprivatemethods.package2.SubParent (struct
  (field $vtable (ref $packageprivatemethods.package2.SubParent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $packageprivatemethods.package1.Parent)
+)
 (type $packageprivatemethods.package2.SubParent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -479,8 +502,9 @@
  (field $m_fun__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int)))
  (field $m_bar__int__int__int__int_$pp_packageprivatemethods_package1 (mut (ref $function.$int__$int__$int__$int)))
  (field $m_bar__int__int__int__int (mut (ref $function.$int__$int__$int__$int)))
- (field $m_foo__int__int_$pp_packageprivatemethods_package2 (mut (ref $function.$int__$int)))
-))
+ (field $m_foo__int__int_$pp_packageprivatemethods_package2 (mut (ref $function.$int__$int))))
+ (extends $packageprivatemethods.package1.Parent.vtable)
+)
 
 ;;; SubParent()
 (func $m_<init>__@packageprivatemethods.package2.SubParent
@@ -501,6 +525,7 @@
 
 ;;; int SubParent.foo(int a)
 (func $m_foo__int__int_$pp_packageprivatemethods_package2@packageprivatemethods.package2.SubParent
+ (type $function.$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)

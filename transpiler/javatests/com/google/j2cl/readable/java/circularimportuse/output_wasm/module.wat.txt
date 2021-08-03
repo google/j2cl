@@ -19,16 +19,18 @@
 ;;; Code for circularimportuse.Left [CLASS]
 (type $circularimportuse.Left (struct
  (field $vtable (ref $circularimportuse.Left.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $circularimportuse.Left.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_createRight__circularimportuse_Right_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Right)))
-))
+ (field $m_createRight__circularimportuse_Right_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Right))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Left()
 (func $m_<init>__@circularimportuse.Left
@@ -49,6 +51,7 @@
 
 ;;; Right Left.createRight()
 (func $m_createRight__circularimportuse_Right_$pp_circularimportuse@circularimportuse.Left
+ (type $function.__$circularimportuse.Right)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $circularimportuse.Right))
  (local $this (ref null $circularimportuse.Left))
@@ -84,6 +87,7 @@
 
 ;;; Class<?> Left.getClass()
 (func $m_getClass__java_lang_Class@circularimportuse.Left
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Left))
@@ -98,15 +102,17 @@
 ;;; Code for circularimportuse.Main [CLASS]
 (type $circularimportuse.Main (struct
  (field $vtable (ref $circularimportuse.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $circularimportuse.Main.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Main()
 (func $m_<init>__@circularimportuse.Main
@@ -166,6 +172,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@circularimportuse.Main
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Main))
@@ -180,16 +187,18 @@
 ;;; Code for circularimportuse.Right [CLASS]
 (type $circularimportuse.Right (struct
  (field $vtable (ref $circularimportuse.Right.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $circularimportuse.Right.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_createLeft__circularimportuse_Left_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Left)))
-))
+ (field $m_createLeft__circularimportuse_Left_$pp_circularimportuse (mut (ref $function.__$circularimportuse.Left))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Right()
 (func $m_<init>__@circularimportuse.Right
@@ -210,6 +219,7 @@
 
 ;;; Left Right.createLeft()
 (func $m_createLeft__circularimportuse_Left_$pp_circularimportuse@circularimportuse.Right
+ (type $function.__$circularimportuse.Left)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $circularimportuse.Left))
  (local $this (ref null $circularimportuse.Right))
@@ -245,6 +255,7 @@
 
 ;;; Class<?> Right.getClass()
 (func $m_getClass__java_lang_Class@circularimportuse.Right
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Right))

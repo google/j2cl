@@ -25,16 +25,18 @@
 ;;; Code for importglobaljstypes.Date [CLASS]
 (type $importglobaljstypes.Date (struct
  (field $vtable (ref $importglobaljstypes.Date.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $importglobaljstypes.Date.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate (mut (ref $function.$importglobaljstypes.Date.NativeDate__$importglobaljstypes.Date.NativeDate)))
-))
+ (field $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate (mut (ref $function.$importglobaljstypes.Date.NativeDate__$importglobaljstypes.Date.NativeDate))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Date()
 (func $m_<init>__@importglobaljstypes.Date
@@ -69,6 +71,7 @@
 
 ;;; NativeDate Date.copy(NativeDate d)
 (func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date
+ (type $function.$importglobaljstypes.Date.NativeDate__$importglobaljstypes.Date.NativeDate)
  (param $this.untyped (ref null $java.lang.Object))
  (param $d (ref null $importglobaljstypes.Date.NativeDate))
  (result (ref null $importglobaljstypes.Date.NativeDate))
@@ -105,6 +108,7 @@
 
 ;;; Class<?> Date.getClass()
 (func $m_getClass__java_lang_Class@importglobaljstypes.Date
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date))
@@ -119,15 +123,17 @@
 ;;; Code for importglobaljstypes.Date.NativeDate [CLASS]
 (type $importglobaljstypes.Date.NativeDate (struct
  (field $vtable (ref $importglobaljstypes.Date.NativeDate.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $importglobaljstypes.Date.NativeDate.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; NativeDate()
 (func $m_<init>__@importglobaljstypes.Date.NativeDate
@@ -174,6 +180,7 @@
 
 ;;; Class<?> NativeDate.getClass()
 (func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date.NativeDate))
@@ -188,16 +195,18 @@
 ;;; Code for importglobaljstypes.Number [CLASS]
 (type $importglobaljstypes.Number (struct
  (field $vtable (ref $importglobaljstypes.Number.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $importglobaljstypes.Number.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType (mut (ref $function.$java.lang.Object__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Number()
 (func $m_<init>__@importglobaljstypes.Number
@@ -261,6 +270,7 @@
 
 ;;; MyLiteralType Number.testJsDocForLiteralType(MyLiteralType a)
 (func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -297,6 +307,7 @@
 
 ;;; Class<?> Number.getClass()
 (func $m_getClass__java_lang_Class@importglobaljstypes.Number
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Number))

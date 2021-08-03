@@ -43,16 +43,18 @@
 ;;; Code for functiontype.FunctionImpl [CLASS]
 (type $functiontype.FunctionImpl (struct
  (field $vtable (ref $functiontype.FunctionImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $functiontype.FunctionImpl.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__functiontype_Function__void (mut (ref $function.$java.lang.Object__$void)))
-))
+ (field $m_test__functiontype_Function__void (mut (ref $function.$java.lang.Object__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; FunctionImpl()
 (func $m_<init>__@functiontype.FunctionImpl
@@ -73,6 +75,7 @@
 
 ;;; void FunctionImpl.test(Function f)
 (func $m_test__functiontype_Function__void@functiontype.FunctionImpl
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (local $this (ref null $functiontype.FunctionImpl))
@@ -105,6 +108,7 @@
 
 ;;; Class<?> FunctionImpl.getClass()
 (func $m_getClass__java_lang_Class@functiontype.FunctionImpl
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $functiontype.FunctionImpl))

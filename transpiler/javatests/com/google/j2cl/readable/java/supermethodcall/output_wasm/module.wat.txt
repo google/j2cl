@@ -19,8 +19,9 @@
 ;;; Code for supermethodcall.GrandParent [CLASS]
 (type $supermethodcall.GrandParent (struct
  (field $vtable (ref $supermethodcall.GrandParent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $supermethodcall.GrandParent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -29,8 +30,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_grandParentSimplest__void (mut (ref $function.__$void)))
  (field $m_grandParentWithParams__int__void (mut (ref $function.$int__$void)))
- (field $m_grandParentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_grandParentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; GrandParent()
 (func $m_<init>__@supermethodcall.GrandParent
@@ -51,6 +53,7 @@
 
 ;;; void GrandParent.grandParentSimplest()
 (func $m_grandParentSimplest__void@supermethodcall.GrandParent
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.GrandParent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.GrandParent.rtt)))
@@ -61,6 +64,7 @@
 
 ;;; void GrandParent.grandParentWithParams(int foo)
 (func $m_grandParentWithParams__int__void@supermethodcall.GrandParent
+ (type $function.$int__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.GrandParent))
@@ -72,6 +76,7 @@
 
 ;;; Object GrandParent.grandParentWithChangingReturn()
 (func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.GrandParent))
@@ -107,6 +112,7 @@
 
 ;;; Class<?> GrandParent.getClass()
 (func $m_getClass__java_lang_Class@supermethodcall.GrandParent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supermethodcall.GrandParent))
@@ -121,8 +127,9 @@
 ;;; Code for supermethodcall.Parent [CLASS]
 (type $supermethodcall.Parent (struct
  (field $vtable (ref $supermethodcall.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $supermethodcall.GrandParent)
+)
 (type $supermethodcall.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -134,8 +141,9 @@
  (field $m_grandParentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_parentSimplest__void (mut (ref $function.__$void)))
  (field $m_parentWithParams__int__void (mut (ref $function.$int__$void)))
- (field $m_parentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_parentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object))))
+ (extends $supermethodcall.GrandParent.vtable)
+)
 
 ;;; Parent()
 (func $m_<init>__@supermethodcall.Parent
@@ -156,6 +164,7 @@
 
 ;;; void Parent.parentSimplest()
 (func $m_parentSimplest__void@supermethodcall.Parent
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Parent.rtt)))
@@ -166,6 +175,7 @@
 
 ;;; void Parent.parentWithParams(int foo)
 (func $m_parentWithParams__int__void@supermethodcall.Parent
+ (type $function.$int__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.Parent))
@@ -177,6 +187,7 @@
 
 ;;; Object Parent.parentWithChangingReturn()
 (func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Parent))
@@ -212,6 +223,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@supermethodcall.Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supermethodcall.Parent))
@@ -226,8 +238,9 @@
 ;;; Code for supermethodcall.Child [CLASS]
 (type $supermethodcall.Child (struct
  (field $vtable (ref $supermethodcall.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $supermethodcall.Parent)
+)
 (type $supermethodcall.Child.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -241,8 +254,9 @@
  (field $m_parentWithParams__int__void (mut (ref $function.$int__$void)))
  (field $m_parentWithChangingReturn__java_lang_Object (mut (ref $function.__$java.lang.Object)))
  (field $m_parentWithChangingReturn__supermethodcall_Child (mut (ref $function.__$supermethodcall.Child)))
- (field $m_grandParentWithChangingReturn__supermethodcall_Child (mut (ref $function.__$supermethodcall.Child)))
-))
+ (field $m_grandParentWithChangingReturn__supermethodcall_Child (mut (ref $function.__$supermethodcall.Child))))
+ (extends $supermethodcall.Parent.vtable)
+)
 
 ;;; Child()
 (func $m_<init>__@supermethodcall.Child
@@ -263,6 +277,7 @@
 
 ;;; void Child.parentSimplest()
 (func $m_parentSimplest__void@supermethodcall.Child
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
@@ -276,6 +291,7 @@
 
 ;;; void Child.parentWithParams(int foo)
 (func $m_parentWithParams__int__void@supermethodcall.Child
+ (type $function.$int__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.Child))
@@ -290,6 +306,7 @@
 
 ;;; Child Child.parentWithChangingReturn()
 (func $m_parentWithChangingReturn__supermethodcall_Child@supermethodcall.Child
+ (type $function.__$supermethodcall.Child)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $supermethodcall.Child))
  (local $this (ref null $supermethodcall.Child))
@@ -307,6 +324,7 @@
 
 ;;; void Child.grandParentSimplest()
 (func $m_grandParentSimplest__void@supermethodcall.Child
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $supermethodcall.Child.rtt)))
@@ -320,6 +338,7 @@
 
 ;;; void Child.grandParentWithParams(int foo)
 (func $m_grandParentWithParams__int__void@supermethodcall.Child
+ (type $function.$int__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $foo i32)
  (local $this (ref null $supermethodcall.Child))
@@ -334,6 +353,7 @@
 
 ;;; Child Child.grandParentWithChangingReturn()
 (func $m_grandParentWithChangingReturn__supermethodcall_Child@supermethodcall.Child
+ (type $function.__$supermethodcall.Child)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $supermethodcall.Child))
  (local $this (ref null $supermethodcall.Child))
@@ -351,6 +371,7 @@
 
 ;;; Child Child.grandParentWithChangingReturn()
 (func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.Child
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
@@ -365,6 +386,7 @@
 
 ;;; Child Child.parentWithChangingReturn()
 (func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $supermethodcall.Child))
@@ -400,6 +422,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@supermethodcall.Child
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supermethodcall.Child))

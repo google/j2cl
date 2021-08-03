@@ -26,8 +26,9 @@
 ;;; Code for autoboxing.AutoBoxing [CLASS]
 (type $autoboxing.AutoBoxing (struct
  (field $vtable (ref $autoboxing.AutoBoxing.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $autoboxing.AutoBoxing.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -61,8 +62,9 @@
  (field $m_testUnboxingBoolean__void (mut (ref $function.__$void)))
  (field $m_testUnboxingEquality__void (mut (ref $function.__$void)))
  (field $m_testAssertStatement__void (mut (ref $function.__$void)))
- (field $m_testUnbox_withCast__void (mut (ref $function.__$void)))
-))
+ (field $m_testUnbox_withCast__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; AutoBoxing()
 (func $m_<init>__@autoboxing.AutoBoxing
@@ -83,6 +85,7 @@
 
 ;;; Boolean AutoBoxing.box(boolean b)
 (func $m_box__boolean__java_lang_Boolean@autoboxing.AutoBoxing
+ (type $function.$boolean__$java.lang.Boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (param $b i32)
  (result (ref null $java.lang.Boolean))
@@ -98,6 +101,7 @@
 
 ;;; Double AutoBoxing.box(double d)
 (func $m_box__double__java_lang_Double@autoboxing.AutoBoxing
+ (type $function.$double__$java.lang.Double)
  (param $this.untyped (ref null $java.lang.Object))
  (param $d f64)
  (result (ref null $java.lang.Double))
@@ -113,6 +117,7 @@
 
 ;;; Byte AutoBoxing.box(byte b)
 (func $m_box__byte__java_lang_Byte@autoboxing.AutoBoxing
+ (type $function.$byte__$java.lang.Byte)
  (param $this.untyped (ref null $java.lang.Object))
  (param $b i32)
  (result (ref null $java.lang.Byte))
@@ -128,6 +133,7 @@
 
 ;;; Float AutoBoxing.box(float f)
 (func $m_box__float__java_lang_Float@autoboxing.AutoBoxing
+ (type $function.$float__$java.lang.Float)
  (param $this.untyped (ref null $java.lang.Object))
  (param $f f32)
  (result (ref null $java.lang.Float))
@@ -143,6 +149,7 @@
 
 ;;; Integer AutoBoxing.box(int i)
 (func $m_box__int__java_lang_Integer@autoboxing.AutoBoxing
+ (type $function.$int__$java.lang.Integer)
  (param $this.untyped (ref null $java.lang.Object))
  (param $i i32)
  (result (ref null $java.lang.Integer))
@@ -158,6 +165,7 @@
 
 ;;; Long AutoBoxing.box(long l)
 (func $m_box__long__java_lang_Long@autoboxing.AutoBoxing
+ (type $function.$long__$java.lang.Long)
  (param $this.untyped (ref null $java.lang.Object))
  (param $l i64)
  (result (ref null $java.lang.Long))
@@ -173,6 +181,7 @@
 
 ;;; Short AutoBoxing.box(short s)
 (func $m_box__short__java_lang_Short@autoboxing.AutoBoxing
+ (type $function.$short__$java.lang.Short)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s i32)
  (result (ref null $java.lang.Short))
@@ -188,6 +197,7 @@
 
 ;;; Character AutoBoxing.box(char c)
 (func $m_box__char__java_lang_Character@autoboxing.AutoBoxing
+ (type $function.$char__$java.lang.Character)
  (param $this.untyped (ref null $java.lang.Object))
  (param $c i32)
  (result (ref null $java.lang.Character))
@@ -203,6 +213,7 @@
 
 ;;; boolean AutoBoxing.unbox(Boolean b)
 (func $m_unbox__java_lang_Boolean__boolean@autoboxing.AutoBoxing
+ (type $function.$java.lang.Boolean__$boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (param $b (ref null $java.lang.Boolean))
  (result i32)
@@ -218,6 +229,7 @@
 
 ;;; double AutoBoxing.unbox(Double d)
 (func $m_unbox__java_lang_Double__double@autoboxing.AutoBoxing
+ (type $function.$java.lang.Double__$double)
  (param $this.untyped (ref null $java.lang.Object))
  (param $d (ref null $java.lang.Double))
  (result f64)
@@ -233,6 +245,7 @@
 
 ;;; byte AutoBoxing.unbox(Byte b)
 (func $m_unbox__java_lang_Byte__byte@autoboxing.AutoBoxing
+ (type $function.$java.lang.Byte__$byte)
  (param $this.untyped (ref null $java.lang.Object))
  (param $b (ref null $java.lang.Byte))
  (result i32)
@@ -248,6 +261,7 @@
 
 ;;; float AutoBoxing.unbox(Float f)
 (func $m_unbox__java_lang_Float__float@autoboxing.AutoBoxing
+ (type $function.$java.lang.Float__$float)
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Float))
  (result f32)
@@ -263,6 +277,7 @@
 
 ;;; int AutoBoxing.unbox(Integer i)
 (func $m_unbox__java_lang_Integer__int@autoboxing.AutoBoxing
+ (type $function.$java.lang.Integer__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $i (ref null $java.lang.Integer))
  (result i32)
@@ -278,6 +293,7 @@
 
 ;;; long AutoBoxing.unbox(Long l)
 (func $m_unbox__java_lang_Long__long@autoboxing.AutoBoxing
+ (type $function.$java.lang.Long__$long)
  (param $this.untyped (ref null $java.lang.Object))
  (param $l (ref null $java.lang.Long))
  (result i64)
@@ -293,6 +309,7 @@
 
 ;;; short AutoBoxing.unbox(Short s)
 (func $m_unbox__java_lang_Short__short@autoboxing.AutoBoxing
+ (type $function.$java.lang.Short__$short)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Short))
  (result i32)
@@ -308,6 +325,7 @@
 
 ;;; char AutoBoxing.unbox(Character c)
 (func $m_unbox__java_lang_Character__char@autoboxing.AutoBoxing
+ (type $function.$java.lang.Character__$char)
  (param $this.untyped (ref null $java.lang.Object))
  (param $c (ref null $java.lang.Character))
  (result i32)
@@ -323,6 +341,7 @@
 
 ;;; double AutoBoxing.takesAndReturnsPrimitiveDouble(double d)
 (func $m_takesAndReturnsPrimitiveDouble__double__double@autoboxing.AutoBoxing
+ (type $function.$double__$double)
  (param $this.untyped (ref null $java.lang.Object))
  (param $d f64)
  (result f64)
@@ -338,6 +357,7 @@
 
 ;;; Void AutoBoxing.takesAndReturnsVoid(Void v)
 (func $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void@autoboxing.AutoBoxing
+ (type $function.$java.lang.Void__$java.lang.Void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $v (ref null $java.lang.Void))
  (result (ref null $java.lang.Void))
@@ -353,6 +373,7 @@
 
 ;;; void AutoBoxing.takesFloatVarArgs(Float... elements)
 (func $m_takesFloatVarArgs__arrayOf_java_lang_Float__void@autoboxing.AutoBoxing
+ (type $function.$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $autoboxing.AutoBoxing))
@@ -364,6 +385,7 @@
 
 ;;; double AutoBoxing.takesObjectAndReturnsPrimitiveDouble(Object o)
 (func $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double@autoboxing.AutoBoxing
+ (type $function.$java.lang.Object__$double)
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result f64)
@@ -383,6 +405,7 @@
 
 ;;; double AutoBoxing.sumWithoutBoxing(Object... numbers)
 (func $m_sumWithoutBoxing__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing
+ (type $function.$javaemul.internal.WasmArray.OfObject__$double)
  (param $this.untyped (ref null $java.lang.Object))
  (param $numbers (ref null $javaemul.internal.WasmArray.OfObject))
  (result f64)
@@ -433,6 +456,7 @@
 
 ;;; double AutoBoxing.sumWithoutBoxingJsVarargs(Object... numbers)
 (func $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing
+ (type $function.$javaemul.internal.WasmArray.OfObject__$double)
  (param $this.untyped (ref null $java.lang.Object))
  (param $numbers (ref null $javaemul.internal.WasmArray.OfObject))
  (result f64)
@@ -483,6 +507,7 @@
 
 ;;; void AutoBoxing.testBoxing()
 (func $m_testBoxing__void@autoboxing.AutoBoxing
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $bool i32)
  (local $d f64)
@@ -698,6 +723,7 @@
 
 ;;; void AutoBoxing.testUnboxing()
 (func $m_testUnboxing__void@autoboxing.AutoBoxing
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $boxBool (ref null $java.lang.Boolean))
  (local $boxD (ref null $java.lang.Double))
@@ -912,6 +938,7 @@
 
 ;;; void AutoBoxing.testUnboxingBoolean()
 (func $m_testUnboxingBoolean__void@autoboxing.AutoBoxing
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $boxB1 (ref null $java.lang.Boolean))
  (local $boxB2 (ref null $java.lang.Boolean))
@@ -1098,6 +1125,7 @@
 
 ;;; void AutoBoxing.testUnboxingEquality()
 (func $m_testUnboxingEquality__void@autoboxing.AutoBoxing
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $boxB (ref null $java.lang.Boolean))
  (local $b i32)
@@ -1124,6 +1152,7 @@
 
 ;;; void AutoBoxing.testAssertStatement()
 (func $m_testAssertStatement__void@autoboxing.AutoBoxing
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $boxB (ref null $java.lang.Boolean))
  (local $b i32)
@@ -1204,6 +1233,7 @@
 
 ;;; void AutoBoxing.testUnbox_withCast()
 (func $m_testUnbox_withCast__void@autoboxing.AutoBoxing
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $supplier (ref null $autoboxing.AutoBoxing.1Supplier))
  (local $i i32)
@@ -1247,6 +1277,7 @@
 
 ;;; Class<?> AutoBoxing.getClass()
 (func $m_getClass__java_lang_Class@autoboxing.AutoBoxing
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing))
@@ -1261,16 +1292,18 @@
 ;;; Code for autoboxing.AutoBoxing.1Local [CLASS]
 (type $autoboxing.AutoBoxing.1Local (struct
  (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $autoboxing.AutoBoxing.1Local.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_toLong__java_lang_Long__long_$pp_autoboxing (mut (ref $function.$java.lang.Long__$long)))
-))
+ (field $m_toLong__java_lang_Long__long_$pp_autoboxing (mut (ref $function.$java.lang.Long__$long))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Local()
 (func $m_<init>__@autoboxing.AutoBoxing.1Local
@@ -1291,6 +1324,7 @@
 
 ;;; long Local.toLong(T l)
 (func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.1Local
+ (type $function.$java.lang.Long__$long)
  (param $this.untyped (ref null $java.lang.Object))
  (param $l (ref null $java.lang.Long))
  (result i64)
@@ -1327,6 +1361,7 @@
 
 ;;; Class<?> Local.getClass()
 (func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing.1Local))
@@ -1341,16 +1376,18 @@
 ;;; Code for autoboxing.AutoBoxing.2Local [CLASS]
 (type $autoboxing.AutoBoxing.2Local (struct
  (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $autoboxing.AutoBoxing.2Local.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_toLong__java_lang_Long__long_$pp_autoboxing (mut (ref $function.$java.lang.Long__$long)))
-))
+ (field $m_toLong__java_lang_Long__long_$pp_autoboxing (mut (ref $function.$java.lang.Long__$long))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Local()
 (func $m_<init>__@autoboxing.AutoBoxing.2Local
@@ -1371,6 +1408,7 @@
 
 ;;; long Local.toLong(T l)
 (func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.2Local
+ (type $function.$java.lang.Long__$long)
  (param $this.untyped (ref null $java.lang.Object))
  (param $l (ref null $java.lang.Long))
  (result i64)
@@ -1407,6 +1445,7 @@
 
 ;;; Class<?> Local.getClass()
 (func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing.2Local))
@@ -1422,16 +1461,18 @@
 (type $autoboxing.AutoBoxing.1Supplier (struct
  (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__autoboxing_AutoBoxing_1Supplier (mut (ref null $autoboxing.AutoBoxing)))
-))
+ (field $$outer_this__autoboxing_AutoBoxing_1Supplier (mut (ref null $autoboxing.AutoBoxing))))
+ (extends $java.lang.Object)
+)
 (type $autoboxing.AutoBoxing.1Supplier.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_get__java_lang_Object_$pp_autoboxing (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_get__java_lang_Object_$pp_autoboxing (mut (ref $function.__$java.lang.Object))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Supplier(AutoBoxing $outer_this)
 (func $m_<init>__autoboxing_AutoBoxing@autoboxing.AutoBoxing.1Supplier
@@ -1456,6 +1497,7 @@
 
 ;;; T Supplier.get()
 (func $m_get__java_lang_Object_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier
+ (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  (local $this (ref null $autoboxing.AutoBoxing.1Supplier))
@@ -1491,6 +1533,7 @@
 
 ;;; Class<?> Supplier.getClass()
 (func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autoboxing.AutoBoxing.1Supplier))

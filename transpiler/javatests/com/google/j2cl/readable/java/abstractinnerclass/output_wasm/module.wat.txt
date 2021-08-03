@@ -22,15 +22,17 @@
 ;;; Code for abstractinnerclass.InnerClasses [CLASS]
 (type $abstractinnerclass.InnerClasses (struct
  (field $vtable (ref $abstractinnerclass.InnerClasses.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $abstractinnerclass.InnerClasses.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
-))
+ (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; InnerClasses()
 (func $m_<init>__@abstractinnerclass.InnerClasses
@@ -72,6 +74,7 @@
 
 ;;; Class<?> InnerClasses.getClass()
 (func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractinnerclass.InnerClasses))
@@ -120,16 +123,18 @@
 ;;; Code for abstractinnerclass.InnerClasses.B [CLASS]
 (type $abstractinnerclass.InnerClasses.B (struct
  (field $vtable (ref $abstractinnerclass.InnerClasses.B.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $abstractinnerclass.InnerClasses.B.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void)))
-))
+ (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; B()
 (func $m_<init>__@abstractinnerclass.InnerClasses.B
@@ -150,6 +155,7 @@
 
 ;;; void B.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractinnerclass.InnerClasses.B))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.B.rtt)))
@@ -186,16 +192,18 @@
 (type $abstractinnerclass.InnerClasses.C (struct
  (field $vtable (ref $abstractinnerclass.InnerClasses.C.vtable)) (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__abstractinnerclass_InnerClasses_C (mut (ref null $abstractinnerclass.InnerClasses)))
-))
+ (field $$outer_this__abstractinnerclass_InnerClasses_C (mut (ref null $abstractinnerclass.InnerClasses))))
+ (extends $java.lang.Object)
+)
 (type $abstractinnerclass.InnerClasses.C.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void)))
-))
+ (field $m_bar__void_$pp_abstractinnerclass (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; C(InnerClasses $outer_this)
 (func $m_<init>__abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses.C
@@ -220,6 +228,7 @@
 
 ;;; void C.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $abstractinnerclass.InnerClasses.C))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.C.rtt)))

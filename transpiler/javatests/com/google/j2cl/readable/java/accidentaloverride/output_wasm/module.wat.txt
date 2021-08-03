@@ -22,16 +22,18 @@
 ;;; Code for accidentaloverride.Parent [CLASS]
 (type $accidentaloverride.Parent (struct
  (field $vtable (ref $accidentaloverride.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $accidentaloverride.Parent.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
-))
+ (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; Parent()
 (func $m_<init>__@accidentaloverride.Parent
@@ -52,6 +54,7 @@
 
 ;;; void Parent.foo(T e)
 (func $m_foo__java_lang_Error__void@accidentaloverride.Parent
+ (type $function.$java.lang.Error__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Error))
  (local $this (ref null $accidentaloverride.Parent))
@@ -84,6 +87,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@accidentaloverride.Parent
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.Parent))
@@ -132,8 +136,9 @@
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [CLASS]
 (type $accidentaloverride.AnotherAccidentalOverride (struct
  (field $vtable (ref $accidentaloverride.AnotherAccidentalOverride.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $accidentaloverride.Parent)
+)
 (type $accidentaloverride.AnotherAccidentalOverride.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -142,8 +147,9 @@
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
  (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_foo__java_lang_AssertionError__void (mut (ref $function.$java.lang.AssertionError__$void)))
-))
+ (field $m_foo__java_lang_AssertionError__void (mut (ref $function.$java.lang.AssertionError__$void))))
+ (extends $accidentaloverride.Parent.vtable)
+)
 
 ;;; AnotherAccidentalOverride()
 (func $m_<init>__@accidentaloverride.AnotherAccidentalOverride
@@ -164,6 +170,7 @@
 
 ;;; void AnotherAccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
@@ -178,6 +185,7 @@
 
 ;;; void AnotherAccidentalOverride.foo(Error arg0)
 (func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.$java.lang.Error__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Error))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
@@ -192,6 +200,7 @@
 
 ;;; void AnotherAccidentalOverride.foo(AssertionError arg0)
 (func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
+ (type $function.$java.lang.AssertionError__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.AssertionError))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
@@ -227,6 +236,7 @@
 
 ;;; Class<?> AnotherAccidentalOverride.getClass()
 (func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
@@ -241,8 +251,9 @@
 ;;; Code for accidentaloverride.AccidentalOverride [CLASS]
 (type $accidentaloverride.AccidentalOverride (struct
  (field $vtable (ref $accidentaloverride.AccidentalOverride.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $accidentaloverride.Parent)
+)
 (type $accidentaloverride.AccidentalOverride.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
@@ -250,8 +261,9 @@
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
  (field $m_foo__java_lang_Error__void (mut (ref $function.$java.lang.Error__$void)))
- (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
-))
+ (field $m_foo__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void))))
+ (extends $accidentaloverride.Parent.vtable)
+)
 
 ;;; AccidentalOverride()
 (func $m_<init>__@accidentaloverride.AccidentalOverride
@@ -272,6 +284,7 @@
 
 ;;; void AccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (local $this (ref null $accidentaloverride.AccidentalOverride))
@@ -307,6 +320,7 @@
 
 ;;; Class<?> AccidentalOverride.getClass()
 (func $m_getClass__java_lang_Class@accidentaloverride.AccidentalOverride
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AccidentalOverride))

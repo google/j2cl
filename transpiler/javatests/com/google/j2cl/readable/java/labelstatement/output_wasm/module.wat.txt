@@ -7,16 +7,18 @@
 ;;; Code for labelstatement.LabeledStatement [CLASS]
 (type $labelstatement.LabeledStatement (struct
  (field $vtable (ref $labelstatement.LabeledStatement.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
+ (extends $java.lang.Object)
+)
 (type $labelstatement.LabeledStatement.vtable (struct
  
  (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
  (field $m_hashCode__int (mut (ref $function.__$int)))
  (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
  (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void)))
-))
+ (field $m_test__void (mut (ref $function.__$void))))
+ (extends $java.lang.Object.vtable)
+)
 
 ;;; LabeledStatement()
 (func $m_<init>__@labelstatement.LabeledStatement
@@ -37,6 +39,7 @@
 
 ;;; void LabeledStatement.test()
 (func $m_test__void@labelstatement.LabeledStatement
+ (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (local $this (ref null $labelstatement.LabeledStatement))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
@@ -98,6 +101,7 @@
 
 ;;; Class<?> LabeledStatement.getClass()
 (func $m_getClass__java_lang_Class@labelstatement.LabeledStatement
+ (type $function.__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $labelstatement.LabeledStatement))
