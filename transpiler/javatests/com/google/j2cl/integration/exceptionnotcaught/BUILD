@@ -13,6 +13,4 @@ package(
 integration_test(
     name = "exceptionnotcaught",
     srcs = glob(["*.java"]),
-    # TODO(b/170691676): Enable when try/catch is implemented.
-    enable_wasm = False,
 )

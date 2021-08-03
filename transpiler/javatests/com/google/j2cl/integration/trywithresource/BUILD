@@ -14,7 +14,8 @@ package(
 integration_test(
     name = "trywithresource",
     srcs = glob(["*.java"]),
-    # TODO(b/170691676): Enable when try/catch is implemented.
+    # TODO(b/170691676): Enable when full try/catch/finally semantics are
+    # implemented.
     enable_wasm = False,
     j2cl_library_tags = ["manual"],
 )

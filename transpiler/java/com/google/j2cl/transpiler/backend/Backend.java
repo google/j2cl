@@ -284,6 +284,7 @@ public enum Backend {
           // Must run before Enum normalization
           FixSuperCallQualifiers::new,
           NormalizeTryWithResources::new,
+          NormalizeCatchClauses::new,
           NormalizeInstanceCompileTimeConstants::new,
           () -> new NormalizeEnumClasses(/* useMakeEnumNameIndirection= */ false),
           () -> new NormalizeShifts(/* narrowAllToInt= */ false),

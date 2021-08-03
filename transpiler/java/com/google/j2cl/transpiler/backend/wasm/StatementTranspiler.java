@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.BreakStatement;
+import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -36,6 +38,7 @@ import com.google.j2cl.transpiler.ast.SwitchStatement;
 import com.google.j2cl.transpiler.ast.SynchronizedStatement;
 import com.google.j2cl.transpiler.ast.ThrowStatement;
 import com.google.j2cl.transpiler.ast.TryStatement;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.List;
@@ -256,9 +259,30 @@ class StatementTranspiler {
 
       @Override
       public boolean enterTryStatement(TryStatement tryStatement) {
-        // Minimalistic render of try statements.
-
-        render(tryStatement.getBody());
+        builder.newLine();
+        CatchClause catchClause = Iterables.getOnlyElement(tryStatement.getCatchClauses(), null);
+        if (catchClause != null) {
+          builder.append("(try (do ");
+          builder.indent();
+          builder.newLine();
+          render(tryStatement.getBody());
+          builder.unindent();
+          builder.newLine();
+          builder.append(") (catch $exception.event (block");
+          builder.indent();
+          builder.newLine();
+          builder.append(
+              String.format(
+                  "(local.set %s (pop %s))",
+                  environment.getDeclarationName(catchClause.getExceptionVariable()),
+                  environment.getWasmType(TypeDescriptors.get().javaLangThrowable)));
+          render(catchClause.getBody());
+          builder.unindent();
+          builder.newLine();
+          builder.append(")))");
+        } else {
+          render(tryStatement.getBody());
+        }
         if (tryStatement.getFinallyBlock() != null) {
           render(tryStatement.getFinallyBlock());
         }

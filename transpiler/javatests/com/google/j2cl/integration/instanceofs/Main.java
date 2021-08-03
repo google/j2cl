@@ -44,8 +44,6 @@ public class Main {
     assertTrue(!(null instanceof Object));
   }
 
-  // TODO(b/170691676): Enable when try/catch is implemented.
-  @Wasm("nop")
   private static void testInstanceOf_sideEffects() {
     try {
       assertTrue(hasSideEffect() instanceof Object);

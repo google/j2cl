@@ -18,8 +18,6 @@ package com.google.j2cl.integration.enumspecialfunctions;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 import static com.google.j2cl.integration.testing.Asserts.fail;
 
-import javaemul.internal.annotations.Wasm;
-
 /**
  * This class tests the special functions of enum: .values() and .valueOf()
  */
@@ -64,8 +62,6 @@ public class Main {
     assertTrue(Planet.valueOf("NEPTUNE") == Planet.NEPTUNE);
   }
 
-  // TODO(b/170691676): Enable when try/catch is implemented in WASM.
-  @Wasm("nop")
   private static void testValueOf_exceptions() {
     try {
       Planet.valueOf("NOTHING");

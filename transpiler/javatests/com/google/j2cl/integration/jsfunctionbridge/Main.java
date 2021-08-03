@@ -18,7 +18,6 @@ package com.google.j2cl.integration.jsfunctionbridge;
 import static com.google.j2cl.integration.testing.Asserts.assertThrowsClassCastException;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsFunction;
 
 public class Main {
@@ -48,8 +47,6 @@ public class Main {
     assertTrue("hello".equals(new Identity().apply("hello")));
   }
 
-  // TODO(b/170691676): Enable when try/catch is implemented.
-  @Wasm("nop")
   private static void testBridge_parameterChecks() {
     assertThrowsClassCastException(() -> callGeneric(FOO, new Object()));
   }

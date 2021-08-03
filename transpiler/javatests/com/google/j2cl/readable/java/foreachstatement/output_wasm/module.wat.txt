@@ -118,6 +118,7 @@
 ;;; void ForEachStatement.testMulticatch()
 (func $m_testMulticatch__void_$p_foreachstatement_ForEachStatement@foreachstatement.ForEachStatement
  (param $this (ref null $foreachstatement.ForEachStatement))
+ (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.Exception))
  (local $$iterator (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Object))
@@ -125,11 +126,57 @@
  (block
   ;; try {
   ;;@ foreachstatement/ForEachStatement.java:44:4
-  (block
-   ;; throw new Exception.<init>();
-   ;;@ foreachstatement/ForEachStatement.java:45:6
-   (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
-  )
+  (try (do 
+   
+   (block
+    ;; throw new Exception.<init>();
+    ;;@ foreachstatement/ForEachStatement.java:45:6
+    (throw $exception.event (call $m_<init>__@java.lang.Exception (struct.new_with_rtt $java.lang.Exception (ref.as_non_null (global.get $java.lang.Exception.vtable)) (ref.as_non_null (global.get $java.lang.Exception.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Exception.rtt))))
+   )
+  ) (catch $exception.event (block
+   (local.set $__$exc (pop (ref null $java.lang.Throwable)))
+   (block
+    ;; if ((__$exc instanceof Exception1) ? (true) : (__$exc instanceof Exception2)) {
+    ;;@ foreachstatement/ForEachStatement.java:46:40
+    (if (if (result i32) (ref.test (local.get $__$exc) (global.get $foreachstatement.ForEachStatement.Exception1.rtt)) (then (i32.const 1)) (else (ref.test (local.get $__$exc) (global.get $foreachstatement.ForEachStatement.Exception2.rtt))))
+     (then
+      (block
+       ;; (Exception1|Exception2) e = /** @type {(Exception1|Exception2)} */ (__$exc);
+       ;;@ foreachstatement/ForEachStatement.java:46:40
+       (local.set $e (ref.cast (local.get $__$exc) (global.get $java.lang.Exception.rtt)))
+       ;; LOOP: for (Iterator<Object> $iterator = (Iterable<Object> $qualifier = ((Iterable<Object>) e),$qualifier.iterator());$iterator.hasNext();) {
+       ;;@ foreachstatement/ForEachStatement.java:47:6
+       (local.set $$iterator (block (result (ref null $java.lang.Object))
+        (local.set $$qualifier (local.get $e))
+        (call_ref (local.get $$qualifier)(struct.get $java.lang.Iterable.vtable $m_iterator__java_util_Iterator (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const 1)) (rtt.canon $java.lang.Iterable.vtable)) ))
+       ))
+       (block $LOOP.BREAK
+        (loop
+         (br_if 1 (i32.eqz (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_hasNext__boolean (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) ))))
+         (block $LOOP.CONTINUE
+          (block
+           ;; Object o = $iterator.next();
+           ;;@ foreachstatement/ForEachStatement.java:47:6
+           (local.set $o (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0)) (rtt.canon $java.util.Iterator.vtable)) )))
+           (block
+           )
+          )
+         )
+         (br 0)
+         
+        )
+       )
+      )
+     )(else
+      (block
+       ;; throw __$exc;
+       ;;@ foreachstatement/ForEachStatement.java:46:40
+       (throw $exception.event (local.get $__$exc))
+      )
+     )
+    )
+   )
+  )))
  )
 )
 

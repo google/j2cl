@@ -58,13 +58,49 @@
 ;;; void Main.$init()
 (func $$init__void_$p_unreachableclass_Main@unreachableclass.Main
  (param $this (ref null $unreachableclass.Main))
+ (local $__$exc (ref null $java.lang.Throwable))
  (local $e (ref null $java.lang.RuntimeException))
  (local $$qualifier (ref null $unreachableclass.Main.1A))
  (block
   ;; try {
   ;;@ unreachableclass/Main.java:20:4
-  (block
-  )
+  (try (do 
+   
+   (block
+   )
+  ) (catch $exception.event (block
+   (local.set $__$exc (pop (ref null $java.lang.Throwable)))
+   (block
+    ;; if (__$exc instanceof RuntimeException) {
+    ;;@ unreachableclass/Main.java:21:33
+    (if (ref.test (local.get $__$exc) (global.get $java.lang.RuntimeException.rtt))
+     (then
+      (block
+       ;; RuntimeException e = /** @type {RuntimeException} */ (__$exc);
+       ;;@ unreachableclass/Main.java:21:33
+       (local.set $e (ref.cast (local.get $__$exc) (global.get $java.lang.RuntimeException.rtt)))
+       (block
+        ;; A $qualifier = new $1A.<init>(Main.this);
+        ;;@ unreachableclass/Main.java:29:6
+        (local.set $$qualifier (call $m_<init>__unreachableclass_Main@unreachableclass.Main.1A (struct.new_with_rtt $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.itable)) (i32.const 0) (ref.null $unreachableclass.Main) (global.get $unreachableclass.Main.1A.rtt))(local.get $this)))
+        ;; $qualifier.m();
+        ;;@ unreachableclass/Main.java:29:6
+        (call_ref (local.get $$qualifier)(struct.get $unreachableclass.Main.1A.vtable $m_m__void_$pp_unreachableclass (struct.get $unreachableclass.Main.1A $vtable(local.get $$qualifier))))
+       )
+       ;; new $1.<init>(Main.this);
+       ;;@ unreachableclass/Main.java:30:6
+       (drop (call $m_<init>__unreachableclass_Main@unreachableclass.Main.1 (struct.new_with_rtt $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1.itable)) (i32.const 0) (ref.null $unreachableclass.Main) (global.get $unreachableclass.Main.1.rtt))(local.get $this)))
+      )
+     )(else
+      (block
+       ;; throw __$exc;
+       ;;@ unreachableclass/Main.java:21:33
+       (throw $exception.event (local.get $__$exc))
+      )
+     )
+    )
+   )
+  )))
  )
 )
 

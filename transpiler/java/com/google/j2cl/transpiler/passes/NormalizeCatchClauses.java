@@ -97,7 +97,7 @@ public class NormalizeCatchClauses extends NormalizationPass {
     Variable exceptionVariable =
         Variable.newBuilder()
             .setName("__$exc")
-            .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setTypeDescriptor(TypeDescriptors.get().javaLangThrowable)
             .build();
 
     Statement body = bodyBuilder(sourcePosition, clauses, exceptionVariable);
