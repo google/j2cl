@@ -22,7 +22,7 @@ def main(argv):
   # TODO(goktug): Run all the build together to speed up the flow.
   print_header("Regenerating all readable Examples")
 
-  replace_all.run_for_presubmit()
+  replace_all.run_for_presubmit(argv)
 
   print_header("Making size report")
   make_size_report.main(argv)

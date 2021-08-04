@@ -262,6 +262,7 @@ def add_arguments(parser):
       help="readable name (or 'all' for everything)")
 
 
-def run_for_presubmit():
-  argv = argparse.Namespace(readable_name=["all"], nologs=False)
+def run_for_presubmit(argv):
+  argv = argparse.Namespace(
+      readable_name=["all"], nologs=False, platforms=argv.platforms)
   main(argv)
