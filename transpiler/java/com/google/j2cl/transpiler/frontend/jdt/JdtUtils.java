@@ -52,8 +52,8 @@ import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -945,18 +945,10 @@ class JdtUtils {
         .build();
   }
 
-  /**
-   * This cache is a Hashtable so is already synchronized and safe to use from multiple threads. We
-   * don't need a separate cache for each thread (like interners have) since JDT's ITypeBinding
-   * instances (which we are using as keys) are unique per JDT parse.
-   */
-  @SuppressWarnings("JdkObsolete")
-  private static Map<ITypeBinding, DeclaredTypeDescriptor>
-      cachedDeclaredTypeDescriptorByTypeBinding = new Hashtable<>();
-
   private static DeclaredTypeDescriptor createDeclaredType(final ITypeBinding typeBinding) {
-    if (cachedDeclaredTypeDescriptorByTypeBinding.containsKey(typeBinding)) {
-      return cachedDeclaredTypeDescriptorByTypeBinding.get(typeBinding);
+    DeclaredTypeDescriptor cachedTypeDescriptor = getCachedTypeDescriptor(typeBinding);
+    if (cachedTypeDescriptor != null) {
+      return cachedTypeDescriptor;
     }
 
     checkArgument(typeBinding.isClass() || typeBinding.isEnum() || typeBinding.isInterface());
@@ -996,8 +988,20 @@ class JdtUtils {
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
             .build();
-    cachedDeclaredTypeDescriptorByTypeBinding.put(typeBinding, typeDescriptor);
+    putTypeDescriptorInCache(typeBinding, typeDescriptor);
     return typeDescriptor;
+  }
+
+  private static final ThreadLocal<Map<ITypeBinding, DeclaredTypeDescriptor>>
+      cachedDeclaredTypeDescriptorByTypeBinding = ThreadLocal.withInitial(HashMap::new);
+
+  private static DeclaredTypeDescriptor getCachedTypeDescriptor(ITypeBinding typeBinding) {
+    return cachedDeclaredTypeDescriptorByTypeBinding.get().get(typeBinding);
+  }
+
+  private static void putTypeDescriptorInCache(
+      ITypeBinding typeBinding, DeclaredTypeDescriptor typeDescriptor) {
+    cachedDeclaredTypeDescriptorByTypeBinding.get().put(typeBinding, typeDescriptor);
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
