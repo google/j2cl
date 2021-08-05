@@ -2022,10 +2022,8 @@ public class JsInteropRestrictionsChecker {
 
     if (member.isMethod()) {
       Method method = (Method) member;
-      MethodDescriptor methodDescriptor = method.getDescriptor();
-      warnIfUnusableByJs(methodDescriptor, "Method", member);
 
-      TypeDescriptor returnTypeDescriptor = methodDescriptor.getReturnTypeDescriptor();
+      TypeDescriptor returnTypeDescriptor = method.getDescriptor().getReturnTypeDescriptor();
       warnIfUnusableByJs(returnTypeDescriptor, "Return type of", member);
 
       Variable varargsParameter = method.getJsVarargsParameter();
@@ -2063,14 +2061,6 @@ public class JsInteropRestrictionsChecker {
 
   private void warnIfUnusableByJs(TypeDescriptor typeDescriptor, String prefix, Member member) {
     if (typeDescriptor.canBeReferencedExternally()) {
-      return;
-    }
-
-    warnUnusableByJs(prefix, member);
-  }
-
-  private void warnIfUnusableByJs(MemberDescriptor memberDescriptor, String prefix, Member member) {
-    if (memberDescriptor.canBeReferencedExternally()) {
       return;
     }
 
