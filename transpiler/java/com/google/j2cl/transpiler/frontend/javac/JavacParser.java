@@ -85,9 +85,7 @@ public class JavacParser {
                   null,
                   fileManager,
                   diagnostics,
-                  // TODO(b/143213486): Remove -source 8 and figure out how to configure
-                  // SYSTEM_MODULES and MODULE_PATH to prevent searching for modules.
-                  ImmutableList.of("-source", "8"),
+                  ImmutableList.of("--add-reads", "java.base=ALL-UNNAMED"),
                   null,
                   fileManager.getJavaFileObjectsFromFiles(
                       targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));

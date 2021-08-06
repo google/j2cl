@@ -151,7 +151,6 @@ import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.ExecutableType;
-import javax.lang.model.type.TypeMirror;
 
 /** Creates a J2CL Java AST from the AST provided by JavaC. */
 public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
@@ -893,20 +892,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           getSourcePosition(memberReference));
     }
 
+    com.sun.tools.javac.code.Type returnType =
+        methodSymbol.isConstructor()
+            ? methodSymbol.getEnclosingElement().asType()
+            : memberReference.referentType.getReturnType();
     MethodDescriptor targetMethodDescriptor =
         environment.createMethodDescriptor(
-            (ExecutableType) memberReference.referentType,
-            memberReference.referentType.getReturnType(),
-            methodSymbol);
+            (ExecutableType) memberReference.referentType, returnType, methodSymbol);
     if (methodSymbol.isConstructor()) {
-      TypeMirror type = memberReference.referentType.getReturnType();
-      if (((com.sun.tools.javac.code.Type) type).isReference()) {
-        targetMethodDescriptor =
-            MethodDescriptor.Builder.from(targetMethodDescriptor)
-                .setEnclosingTypeDescriptor(environment.createDeclaredTypeDescriptor(type))
-                .build();
-      }
-
       Expression qualifier =
           targetMethodDescriptor
                   .getEnclosingTypeDescriptor()
