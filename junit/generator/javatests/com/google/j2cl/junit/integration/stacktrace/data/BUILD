@@ -11,6 +11,23 @@ package(
 )
 
 j2cl_test_integration_test_data(
+    name = "DuplicateFileNameStacktraceTest",
+    extra_defs = ["--inline_functions=false"],
+    deps = [
+        ":base",
+        ":duplicate_names",
+    ],
+)
+
+java_and_j2cl_library(
+    name = "duplicate_names",
+    srcs = [
+        "package1/DuplicateFileName.java",
+        "package2/DuplicateFileName.java",
+    ],
+)
+
+j2cl_test_integration_test_data(
     name = "AnonymousClassesStacktraceTest",
     extra_defs = ["--inline_functions=false"],
     deps = [":base"],

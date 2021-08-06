@@ -56,4 +56,9 @@ public class StacktraceIntegration2Test extends IntegrationTestBase {
   public void testExceptionWithCause() throws Exception {
     runStacktraceTest("ExceptionWithCauseStacktraceTest");
   }
+
+  @Test
+  public void testDuplicateFileName() throws Exception {
+    runStacktraceTest("DuplicateFileNameStacktraceTest");
+  }
 }
