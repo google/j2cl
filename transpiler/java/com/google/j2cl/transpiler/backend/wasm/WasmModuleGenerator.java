@@ -111,8 +111,8 @@ public class WasmModuleGenerator {
   /** Emit the type for all function signatures that will be needed to reference vtable methods. */
   private void emitDynamicDispatchMethodTypes(Library library) {
     Set<String> emittedFunctionTypeNames = new HashSet<>();
-    library.getCompilationUnits().stream()
-        .flatMap(cu -> cu.getTypes().stream())
+    library
+        .streamTypes()
         .flatMap(t -> t.getMethods().stream())
         .map(Method::getDescriptor)
         .filter(MethodDescriptor::isPolymorphic)
@@ -157,8 +157,8 @@ public class WasmModuleGenerator {
     // TODO(b/174715079): Consider tagging or emitting together with the rest of the type
     // to make the rtts show in the readables.
     Set<TypeDeclaration> emittedRtts = new HashSet<>();
-    library.getCompilationUnits().stream()
-        .flatMap(c -> c.getTypes().stream())
+    library
+        .streamTypes()
         .filter(not(Type::isInterface)) // Interfaces do not have rtts.
         .forEach(t -> emitRttGlobal(t.getDeclaration(), emittedRtts));
   }
@@ -238,9 +238,7 @@ public class WasmModuleGenerator {
   }
 
   private void emitStaticFieldGlobals(Library library) {
-    library.getCompilationUnits().stream()
-        .flatMap(c -> c.getTypes().stream())
-        .forEach(this::emitStaticFieldGlobals);
+    library.streamTypes().forEach(this::emitStaticFieldGlobals);
   }
 
   private void emitStaticFieldGlobals(Type type) {
@@ -468,8 +466,8 @@ public class WasmModuleGenerator {
   }
 
   private void emitDispatchTableGlobals(Library library) {
-    library.getCompilationUnits().stream()
-        .flatMap(c -> c.getTypes().stream())
+    library
+        .streamTypes()
         .filter(not(Type::isInterface)) // Interfaces at runtime are treated as java.lang.Object;
         .forEach(
             t -> {
@@ -513,8 +511,8 @@ public class WasmModuleGenerator {
     // TODO(b/183994530): Initialize dynamic dispatch tables lazily.
     builder.append(";;; Initialize dynamic dispatch tables.");
     // Populate all vtables.
-    library.getCompilationUnits().stream()
-        .flatMap(cu -> cu.getTypes().stream())
+    library
+        .streamTypes()
         .filter(Predicates.not(Type::isInterface))
         .map(Type::getDeclaration)
         .filter(Predicates.not(TypeDeclaration::isAbstract))

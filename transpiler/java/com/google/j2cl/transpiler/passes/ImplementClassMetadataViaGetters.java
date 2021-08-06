@@ -65,8 +65,8 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
   /** Synthesizes the getClass() override for this class. */
   private static void synthesizeGetClassMethods(Library library) {
-    library.getCompilationUnits().stream()
-        .flatMap(cu -> cu.getTypes().stream())
+    library
+        .streamTypes()
         .filter(not(Type::isAbstract))
         .forEach(
             t -> {

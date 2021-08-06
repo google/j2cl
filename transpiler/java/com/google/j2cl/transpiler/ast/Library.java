@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.List;
+import java.util.stream.Stream;
 
 /** Class representing a library, which is the collection of compilation units compiled together. */
 @Visitable
@@ -34,8 +35,12 @@ public class Library extends Node {
     return compilationUnits;
   }
 
+  public Stream<Type> streamTypes() {
+    return compilationUnits.stream().flatMap(c -> c.getTypes().stream());
+  }
+
   public boolean isEmpty() {
-    return getCompilationUnits().isEmpty();
+    return compilationUnits.isEmpty();
   }
 
   @Override

@@ -73,8 +73,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
 
   private static void inlineImplementationTypes(Library library) {
     Set<TypeDeclaration> optimizableTypes =
-        library.getCompilationUnits().stream()
-            .flatMap(c -> c.getTypes().stream())
+        library
+            .streamTypes()
             .filter(t -> canBeInlinedTo(t))
             .map(Type::getDeclaration)
             .collect(toImmutableSet());
@@ -83,16 +83,16 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     }
 
     Map<TypeDeclaration, Type> superTypeToInlinedType =
-        library.getCompilationUnits().stream()
-            .flatMap(c -> c.getTypes().stream())
+        library
+            .streamTypes()
             .filter(t -> optimizableTypes.contains(t.getDeclaration().getSuperTypeDeclaration()))
             .collect(
                 toImmutableMap(
                     t -> t.getSuperTypeDescriptor().getTypeDeclaration(), Function.identity()));
 
     // Inline the types.
-    library.getCompilationUnits().stream()
-        .flatMap(c -> c.getTypes().stream())
+    library
+        .streamTypes()
         .forEach(
             type -> {
               Type typeToInline = superTypeToInlinedType.get(type.getDeclaration());
@@ -302,8 +302,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   }
 
   private void optimizeAsValueTypes(Library library) {
-    library.getCompilationUnits().stream()
-        .flatMap(c -> c.getTypes().stream())
+    library
+        .streamTypes()
         .filter(t -> t.getDeclaration().isAnnotatedWithAutoValue())
         .forEach(
             autoValue -> {
