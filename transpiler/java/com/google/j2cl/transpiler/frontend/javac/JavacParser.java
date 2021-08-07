@@ -85,7 +85,14 @@ public class JavacParser {
                   null,
                   fileManager,
                   diagnostics,
-                  ImmutableList.of("--add-reads", "java.base=ALL-UNNAMED"),
+                  // TODO(b/143213486): Figure out how to make the pipeline work with the module
+                  // system.
+                  ImmutableList.of(
+                      "--patch-module",
+                      "java.base=.",
+                      // Allow JRE classes are allowed to depend on the jsinterop annotations
+                      "--add-reads",
+                      "java.base=ALL-UNNAMED"),
                   null,
                   fileManager.getJavaFileObjectsFromFiles(
                       targetPathBySourcePath.keySet().stream().map(File::new).collect(toList())));
