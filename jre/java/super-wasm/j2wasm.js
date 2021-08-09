@@ -67,7 +67,8 @@ function createImportObject(userImports) {
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,
     'ConsoleLogger.log': (level, message) => console[level](message),
-    'parseAndValidateDouble': parseAndValidateDouble,
+    'isValidDouble': isValidDouble,
+    'parseFloat': parseFloat,
     'performance.now': () => performance.now(),
 
     // Utilites to interop strings and arrays. From String.java.
@@ -87,7 +88,6 @@ function createImportObject(userImports) {
     'Object.keys': unimplemented,
     'Object.values': unimplemented,
     'parseInt': unimplemented,
-    'parseFloat': unimplemented,
     'typeof': unimplemented,
   };
 
@@ -104,7 +104,7 @@ function createImportObject(userImports) {
  * @return {number}
  */
 function charToLowerCase(value) {
-    return String.fromCharCode(value).toLowerCase().charCodeAt(0);
+  return String.fromCharCode(value).toLowerCase().charCodeAt(0);
 }
 
 /**
@@ -112,20 +112,16 @@ function charToLowerCase(value) {
  * @return {number}
  */
 function charToUpperCase(value) {
-    return String.fromCharCode(value).toUpperCase().charCodeAt(0);
+  return String.fromCharCode(value).toUpperCase().charCodeAt(0);
 }
 
 /**
  * @param {string} str
- * @return {number}
+ * @return {boolean} Whether the argument is a valid Java double parsing input.
  */
-function parseAndValidateDouble(str){
-  const valid = /^\s*[+-]?(NaN|Infinity|((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?[dDfF]?)\s*$/
+function isValidDouble(str) {
+  return /^\s*[+-]?(NaN|Infinity|((\d+\.?\d*)|(\.\d+))([eE][+-]?\d+)?[dDfF]?)\s*$/
       .test(str);
-  if (!valid) {
-    throw new Error("NumberFormatException for " + str);
-  }
-  return parseFloat(str);
 }
 
 /** @return {void} */

@@ -21,14 +21,10 @@ import javaemul.internal.WasmExtern;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
-/**
- * Abstract base class for numeric wrapper classes.
- */
+/** Abstract base class for numeric wrapper classes. */
 public abstract class Number implements Serializable {
 
-  /**
-   * Stores a regular expression object to verify the format of float values.
-   */
+  /** Stores a regular expression object to verify the format of float values. */
   private static NativeRegExp floatRegex;
 
   // CHECKSTYLE_OFF: A special need to use unusual identifiers to avoid
@@ -45,17 +41,14 @@ public abstract class Number implements Serializable {
   }
 
   /**
-   * @skip
-   *
-   * This function will determine the radix that the string is expressed in
-   * based on the parsing rules defined in the Javadocs for Integer.decode() and
-   * invoke __parseAndValidateInt.
+   * @skip This function will determine the radix that the string is expressed in based on the
+   *     parsing rules defined in the Javadocs for Integer.decode() and invoke
+   *     __parseAndValidateInt.
    */
-  protected static int __decodeAndValidateInt(String s, int lowerBound,
-      int upperBound) throws NumberFormatException {
+  protected static int __decodeAndValidateInt(String s, int lowerBound, int upperBound)
+      throws NumberFormatException {
     __Decode decode = __decodeNumberString(s);
-    return __parseAndValidateInt(decode.payload, decode.radix, lowerBound,
-        upperBound);
+    return __parseAndValidateInt(decode.payload, decode.radix, lowerBound, upperBound);
   }
 
   protected static __Decode __decodeNumberString(String s) {
@@ -90,17 +83,28 @@ public abstract class Number implements Serializable {
   }
 
   /**
-   * @skip
-   *
-   * This function contains common logic for parsing a String as a floating-
-   * point number and validating the range.
+   * @skip This function contains common logic for parsing a String as a floating- point number and
+   *     validating the range.
    */
   protected static double __parseAndValidateDouble(String s) throws NumberFormatException {
-    return parseAndValidateDouble(s.toJsString());
+    WasmExtern extern = s.toJsString();
+    if (!isValidDouble(extern)) {
+      throw NumberFormatException.forInputString(s);
+    }
+    return parseFloat(extern);
   }
 
+  /**
+   * Returns whether the value is valid for {@link #parseAndValidateDouble}.
+   *
+   * <p>If false, then the caller should throw {@link NumberFormatException} rather than trying to
+   * parse the value.
+   */
   @JsMethod(namespace = JsPackage.GLOBAL)
-  private static native double parseAndValidateDouble(WasmExtern str);
+  private static native boolean isValidDouble(WasmExtern str);
+
+  @JsMethod(namespace = JsPackage.GLOBAL)
+  private static native double parseFloat(WasmExtern str);
 
   /**
    * @skip This function contains common logic for parsing a String in a given radix and validating
