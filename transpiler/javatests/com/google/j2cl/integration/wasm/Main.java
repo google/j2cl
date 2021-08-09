@@ -246,6 +246,18 @@ public class Main {
     assertEquals(2147483648.0f, Math.scalb(1f, 31));
     assertEquals(4294967296.0f, Math.scalb(1f, 32));
     assertEqualsDelta(2.3283064e-10f, Math.scalb(1f, -32), 1e-7f);
+
+    assertTrue(1 == Math.round(0.5f));
+    assertTrue(Integer.MAX_VALUE == Math.round(Float.POSITIVE_INFINITY));
+    assertTrue(Integer.MIN_VALUE == Math.round(Float.NEGATIVE_INFINITY));
+    assertTrue(0 == Math.round(Float.NaN));
+
+    assertTrue(1L == Math.round(0.5d));
+    assertTrue(Long.MIN_VALUE == Math.round(-Double.MAX_VALUE));
+    assertTrue(Long.MAX_VALUE == Math.round(Double.POSITIVE_INFINITY));
+    assertTrue(Long.MAX_VALUE == Math.round(Double.MAX_VALUE));
+    assertTrue(Long.MIN_VALUE == Math.round(Double.NEGATIVE_INFINITY));
+    assertTrue(0L == Math.round(Double.NaN));
   }
 
   private static class SomeClass {}

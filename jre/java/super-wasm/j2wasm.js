@@ -63,6 +63,7 @@ function createImportObject(userImports) {
     'Math.sin': Math.sin,
     'Math.tan': Math.tan,
     'Math.random': Math.random,
+    'Math.round': Math.round,
     'Date.now': Date.now,
     'Character.toLowerCase': charToLowerCase,
     'Character.toUpperCase': charToUpperCase,

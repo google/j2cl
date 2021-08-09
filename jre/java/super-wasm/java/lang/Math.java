@@ -761,20 +761,15 @@ public final class Math {
   private static native float rint(float x);
 
   public static long round(double x) {
-    if (Double.isFinite(x)) {
-      double mod2 = x % 2;
-      if (mod2 == -1.5 || mod2 == 0.5) {
-        x = floor(x);
-      } else {
-        x = rint(x);
-      }
-    }
-    return (long) x;
+    return (long) nativeRound(x);
   }
 
   public static int round(float x) {
-    return (int) round(x);
+    return (int) nativeRound(x);
   }
+
+  @JsMethod(namespace = GLOBAL, name = "Math.round")
+  public static native double nativeRound(double x);
 
   public static int subtractExact(int x, int y) {
     int r = x - y;
