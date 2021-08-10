@@ -222,6 +222,17 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             MethodDescriptor descriptor = method.getDescriptor();
             MethodDescriptor newDescriptor = rewriteMethodDescriptor(descriptor);
             if (descriptor != newDescriptor) {
+              // Due to limitation of Docs nullability preprocessor, generated build methods are not
+              // recorded non-nullable. This works around that.
+              // TODO(b/110176004): Remove the workaround after nullability preprocessor is removed.
+              if (newDescriptor.getReturnTypeDescriptor().isNullable()
+                  && newDescriptor.getName().equals("build")) {
+                newDescriptor =
+                    MethodDescriptor.Builder.from(newDescriptor)
+                        .setReturnTypeDescriptor(
+                            newDescriptor.getReturnTypeDescriptor().toNonNullable())
+                        .build();
+              }
               method = Method.Builder.from(method).setMethodDescriptor(newDescriptor).build();
             }
             return method;
