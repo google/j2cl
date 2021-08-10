@@ -33,10 +33,10 @@
     ArrayList<Object> list = newArrayList("foo");
 ...    acceptsArrayOfObject(array);
   }] => [InferReturn.$clinit();] "inferreturn.InferReturn.main"
-[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>}*/ (InferReturn.m_newArrayList__java_lang_Object("foo"));] "inferreturn.InferReturn.main"
+[ArrayList<Object> list = newArrayList("foo");] => [let list = /**@type {ArrayList<*>}*/ (InferReturn.m_newArrayList__java_lang_Object('foo'));] "inferreturn.InferReturn.main"
 [list] => [list] "list"
 [acceptsArrayListOfObject(list);] => [InferReturn.m_acceptsArrayListOfObject__java_util_ArrayList(list);] "inferreturn.InferReturn.main"
-[Object[] array = newArray("foo");] => [let array = InferReturn.m_newArray__java_lang_Object("foo");] "inferreturn.InferReturn.main"
+[Object[] array = newArray("foo");] => [let array = InferReturn.m_newArray__java_lang_Object('foo');] "inferreturn.InferReturn.main"
 [array] => [array] "array"
 [acceptsArrayOfObject(array);] => [InferReturn.m_acceptsArrayOfObject__arrayOf_java_lang_Object(array);] "inferreturn.InferReturn.main"
 [newArrayList] => [m_newArrayList__java_lang_Object]

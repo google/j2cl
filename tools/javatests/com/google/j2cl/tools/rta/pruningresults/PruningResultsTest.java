@@ -94,7 +94,7 @@ public class PruningResultsTest {
   public void testFooImplFileIsCorrectlyPruned() {
     ImmutableList<String> removedLinesRegexs =
         ImmutableList.of(
-            "constructor\\(\\) \\{", "create..\\(\\) \\{", "\\(\"This is unused\"\\);"
+            "constructor\\(\\) \\{", "create..\\(\\) \\{", "\\('This is unused'\\);"
             // TODO(b/116175766): getter and setter need to be removed before enabling this check
             // "unusedStaticField"
             );

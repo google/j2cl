@@ -45,7 +45,7 @@
 [boolean isInstance = intJsEnum instanceof IntJsEnum;] => [let isInstance = !$Equality.$same(intJsEnum, null);] "jsenum.Main.testJsEnumSwitch"
 [isInstance] => [isInstance] "isInstance"
 [isInstance = intJsEnum instanceof Comparable;] => [isInstance = Comparable.$isInstance(/**@type {$Enums_BoxedLightEnum<*>}*/ ($Enums.box(intJsEnum, IntJsEnum_$Overlay)));] "jsenum.Main.testJsEnumSwitch"
-[StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;] => [let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum(StringJsEnum.ONE), "10") ? StringJsEnum.THREE : /**@type {?StringJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
+[StringJsEnum stringJsEnum = StringJsEnum.ONE.getValue() == "10" ? StringJsEnum.THREE : null;] => [let stringJsEnum = $Equality.$same(StringJsEnum_$Overlay.m_getValue__$devirt__jsenum_Main_StringJsEnum(StringJsEnum.ONE), '10') ? StringJsEnum.THREE : /**@type {?StringJsEnum}*/ ($Enums.unbox(null));] "jsenum.Main.testJsEnumSwitch"
 [stringJsEnum] => [stringJsEnum] "stringJsEnum"
 [switch (stringJsEnum) {
       case ONE:

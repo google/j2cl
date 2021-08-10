@@ -148,7 +148,7 @@ class AutoBoxing extends j_l_Object {
   let i = 1;
   let l = $Long.fromInt(2);
   let s = 1;
-  let c = 97 /* "a" */;
+  let c = 97 /* 'a' */;
   let boxBool = bool;
   let boxD = d;
   let boxB = Byte.m_valueOf__byte(b);
@@ -164,8 +164,8 @@ class AutoBoxing extends j_l_Object {
   boxI = Integer.m_valueOf__int(1);
   boxL = Long.m_valueOf__long($Long.fromInt(2));
   boxS = Short.m_valueOf__short(1);
-  boxC = Character.m_valueOf__char(1 /* "\u0001" */);
-  boxC = Character.m_valueOf__char(97 /* "a" */);
+  boxC = Character.m_valueOf__char(1 /* '\u0001' */);
+  boxC = Character.m_valueOf__char(97 /* 'a' */);
   bool = this.m_unbox__java_lang_Boolean(bool);
   d = this.m_unbox__java_lang_Double(d);
   b = this.m_unbox__java_lang_Byte(Byte.m_valueOf__byte(b));
@@ -177,12 +177,12 @@ class AutoBoxing extends j_l_Object {
   let unusedDouble = this.m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object(4);
   unusedDouble = this.m_sumWithoutBoxing__arrayOf_java_lang_Object([/**@type {*}*/ (1), /**@type {*}*/ (2.2), /**@type {*}*/ (1), /**@type {*}*/ (1), /**@type {*}*/ (2.2)]);
   unusedDouble = this.sumWithoutBoxingJsVarargs(/**@type {*}*/ (1), /**@type {*}*/ (2.2), /**@type {*}*/ (1), /**@type {*}*/ (1), /**@type {*}*/ (2.2));
-  this.m_takesFloatVarArgs__arrayOf_java_lang_Float(/**@type {!Array<Float>}*/ ($Arrays.$init([Float.m_valueOf__float(1.100000023841858), Float.m_valueOf__float(97 /* "a" */), Float.m_valueOf__float(2.2)], Float)));
+  this.m_takesFloatVarArgs__arrayOf_java_lang_Float(/**@type {!Array<Float>}*/ ($Arrays.$init([Float.m_valueOf__float(1.100000023841858), Float.m_valueOf__float(97 /* 'a' */), Float.m_valueOf__float(2.2)], Float)));
   let /** * */ o;
   o = 2.2;
   o = Float.m_valueOf__float(1.100000023841858);
   o = Integer.m_valueOf__int(1);
-  o = Character.m_valueOf__char(97 /* "a" */);
+  o = Character.m_valueOf__char(97 /* 'a' */);
   boxBool = Boolean.m_booleanValue__java_lang_Boolean(boxBool) && Boolean.m_booleanValue__java_lang_Boolean(boxBool);
   boxD = Double.m_doubleValue__java_lang_Double(boxD) + Double.m_doubleValue__java_lang_Double(boxD);
   boxI = Integer.m_valueOf__int($Primitives.coerceDivision(boxI.m_intValue__() / boxI.m_intValue__()));
@@ -205,7 +205,7 @@ class AutoBoxing extends j_l_Object {
   let boxI = Integer.$create__int(1);
   let boxL = Long.$create__long($Long.fromInt(1));
   let boxS = Short.$create__short(1);
-  let boxC = Character.$create__char(97 /* "a" */);
+  let boxC = Character.$create__char(97 /* 'a' */);
   let bool = Boolean.m_booleanValue__java_lang_Boolean(boxBool);
   let d = Double.m_doubleValue__java_lang_Double(boxD);
   let b = boxB.m_byteValue__();
@@ -395,7 +395,7 @@ class AutoBoxing extends j_l_Object {
 }
 /**@const {number}*/
 AutoBoxing.f_COMPILE_TIME_CONSTANT__autoboxing_AutoBoxing = 1.100000023841858;
-$Util.$setClassMetadata(AutoBoxing, "autoboxing.AutoBoxing");
+$Util.$setClassMetadata(AutoBoxing, 'autoboxing.AutoBoxing');
 
 exports = AutoBoxing;
 

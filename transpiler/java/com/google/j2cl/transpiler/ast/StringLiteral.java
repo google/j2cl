@@ -38,12 +38,12 @@ public class StringLiteral extends Literal {
 
   @Override
   public String getSourceText() {
-    return "\"" + escapeJavaString(value) + "\"";
+    return "\'" + escapeJavaString(value) + "\'";
   }
 
   private static String escapeJavaString(String string) {
-    // NOTE: StringEscapeUtils.escapeJava does not escape unprintable character 127 (delete).
-    return StringEscapeUtils.escapeJava(string).replace("\u007f", "\\u007F");
+    // NOTE: StringEscapeUtils.escapeEcmaScript does not escape unprintable character 127 (delete).
+    return StringEscapeUtils.escapeEcmaScript(string).replace("\u007f", "\\u007F");
   }
 
   public ImmutableList<NumberLiteral> toCharLiterals() {

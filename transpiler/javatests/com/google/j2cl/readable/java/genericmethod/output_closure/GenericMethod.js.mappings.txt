@@ -39,7 +39,7 @@
 [g.fun(new Object());] => [g.m_fun__java_lang_Object(j_l_Object.$create__());] "genericmethod.GenericMethod.test"
 [g.fun(new Exception());] => [g.m_fun__java_lang_Exception(Exception.$create__());] "genericmethod.GenericMethod.test"
 [g.fun(new Error());] => [g.m_fun__java_lang_Error(Error.$create__());] "genericmethod.GenericMethod.test"
-[g.fun(new String[] {"asdf"});] => [g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>}*/ ($Arrays.$init(["asdf"], j_l_String)));] "genericmethod.GenericMethod.test"
+[g.fun(new String[] {"asdf"});] => [g.m_fun__arrayOf_java_lang_Object(/**@type {!Array<?string>}*/ ($Arrays.$init(['asdf'], j_l_String)));] "genericmethod.GenericMethod.test"
 [String s = checked();] => [let s = /**@type {?string}*/ ($Casts.$to(this.m_checked__(), j_l_String));] "genericmethod.GenericMethod.test"
 [s] => [s] "s"
 [s = unchecked();] => [s = /**@type {?string}*/ (this.m_unchecked__());] "genericmethod.GenericMethod.test"

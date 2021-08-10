@@ -36,16 +36,16 @@ class Strings extends j_l_Object {
   let s2 = null;
   let s3 = j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s2);
   s2 = j_l_String.m_valueOf__java_lang_Object(s2) + j_l_String.m_valueOf__java_lang_Object(s2);
-  s1 = j_l_String.m_valueOf__java_lang_Object(s1) + "a";
-  s3 = j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s2) + j_l_String.m_valueOf__java_lang_Object(null) + "a";
-  s3 = "a" + j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s2) + j_l_String.m_valueOf__java_lang_Object(null);
+  s1 = j_l_String.m_valueOf__java_lang_Object(s1) + 'a';
+  s3 = j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s2) + j_l_String.m_valueOf__java_lang_Object(null) + 'a';
+  s3 = 'a' + j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s1) + j_l_String.m_valueOf__java_lang_Object(s2) + j_l_String.m_valueOf__java_lang_Object(null);
   let /** ?string */ s4;
-  let c1 = 70 /* "F" */;
-  let c2 = 111 /* "o" */;
-  s4 = (c1 + c2 | 0) + "o";
-  s4 = j_l_String.m_valueOf__java_lang_Object(s4) + ($Long.fromInt(1) + "");
+  let c1 = 70 /* 'F' */;
+  let c2 = 111 /* 'o' */;
+  s4 = (c1 + c2 | 0) + 'o';
+  s4 = j_l_String.m_valueOf__java_lang_Object(s4) + ($Long.fromInt(1) + '');
   s4 = j_l_String.m_valueOf__java_lang_Object(s4) + $Long.fromInt(1);
-  s4 = j_l_String.m_valueOf__java_lang_Object(s4) + j_l_String.m_valueOf__char(67 /* "C" */);
+  s4 = j_l_String.m_valueOf__java_lang_Object(s4) + j_l_String.m_valueOf__char(67 /* 'C' */);
   s4 = j_l_String.m_valueOf__java_lang_Object(s4) + 1;
   s4 = j_l_String.m_valueOf__java_lang_Object(s4) + 1;
   s4 = j_l_String.m_valueOf__java_lang_Object(s4) + 1;
@@ -60,14 +60,14 @@ class Strings extends j_l_Object {
   }
   {
    let $qualifier_2 = StringHolder.$create__();
-   $qualifier_2.f_s__strings_Strings_StringHolder = j_l_String.m_valueOf__java_lang_Object($qualifier_2.f_s__strings_Strings_StringHolder) + "o";
+   $qualifier_2.f_s__strings_Strings_StringHolder = j_l_String.m_valueOf__java_lang_Object($qualifier_2.f_s__strings_Strings_StringHolder) + 'o';
   }
  }
  /** @private */
  $init___$p_strings_Strings() {
-  this.f_someString__strings_Strings_ = "This is a string literal";
-  this.f_nonBmpChar__strings_Strings_ = "\uD800\uDF46";
-  this.f_wideColon__strings_Strings_ = "\uFF1A";
+  this.f_someString__strings_Strings_ = 'This is a string literal';
+  this.f_nonBmpChar__strings_Strings_ = '\uD800\uDF46';
+  this.f_wideColon__strings_Strings_ = '\uFF1A';
  }
  
  static $clinit() {
@@ -87,10 +87,10 @@ class Strings extends j_l_Object {
  }
 }
 /**@const {?string}*/
-Strings.f_ESCAPE_CODES__strings_Strings_ = "\b\f\n\r\t\"'\\\u0000\u007F\uD800\uDF46\uFF1A";
+Strings.f_ESCAPE_CODES__strings_Strings_ = '\b\f\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
 /**@const {?string}*/
-Strings.f_ESCAPE_CODES_COPY__strings_Strings_ = "\b\f\n\r\t\"'\\\u0000\u007F\uD800\uDF46\uFF1A";
-$Util.$setClassMetadata(Strings, "strings.Strings");
+Strings.f_ESCAPE_CODES_COPY__strings_Strings_ = '\b\f\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A';
+$Util.$setClassMetadata(Strings, 'strings.Strings');
 
 exports = Strings;
 

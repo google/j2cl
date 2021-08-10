@@ -39,13 +39,13 @@ class ArithmeticExpressions extends j_l_Object {
  
  m_testCoercions__() {
   let b = 1;
-  let c = 1 /* "\u0001" */;
+  let c = 1 /* '\u0001' */;
   let s = 1;
   let i = 1;
   let f = 1;
   let d = 1;
   b = -1;
-  c = 65535 /* "\uFFFF" */;
+  c = 65535 /* '\uFFFF' */;
   s = -1;
   i = -1;
   f = 9.223372036854776E18;
@@ -136,8 +136,8 @@ class ArithmeticExpressions extends j_l_Object {
   f = ($value_1 = c, c = Integer.m_valueOf__int(c.m_intValue__() + 1 | 0), $value_1);
   let b = Byte.m_valueOf__byte(0);
   b = Byte.m_valueOf__byte($Primitives.narrowIntToByte(b.m_byteValue__() + 1 | 0));
-  let ch = Character.m_valueOf__char(99 /* "c" */);
-  ch = Character.m_valueOf__char($Primitives.narrowIntToChar(ch.m_charValue__() + 1 /* "\u0001" */ | 0));
+  let ch = Character.m_valueOf__char(99 /* 'c' */);
+  ch = Character.m_valueOf__char($Primitives.narrowIntToChar(ch.m_charValue__() + 1 /* '\u0001' */ | 0));
   (f = Integer.m_valueOf__int(f.m_intValue__() + 1 | 0)).m_intValue__();
   ($value_2 = f, f = Integer.m_valueOf__int(f.m_intValue__() - 1 | 0), $value_2).m_intValue__();
   let ref = null;
@@ -239,7 +239,7 @@ ArithmeticExpressions.$static_one__arithmeticexpressions_ArithmeticExpressions =
 ArithmeticExpressions.$static_foo__arithmeticexpressions_ArithmeticExpressions = $Long.fromInt(0);
 /**@type {!$Long}*/
 ArithmeticExpressions.f_counter__arithmeticexpressions_ArithmeticExpressions_ = $Long.fromInt(0);
-$Util.$setClassMetadata(ArithmeticExpressions, "arithmeticexpressions.ArithmeticExpressions");
+$Util.$setClassMetadata(ArithmeticExpressions, 'arithmeticexpressions.ArithmeticExpressions');
 
 exports = ArithmeticExpressions;
 
