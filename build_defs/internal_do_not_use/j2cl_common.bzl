@@ -253,7 +253,11 @@ def _j2cl_transpile(
     for flag, value in internal_transpiler_flags.items():
         if value:
             args.add("-" + flag.replace("_", ""))
-    if ctx.var.get("GROK_ELLIPSIS_BUILD", None):
+    if ctx.var.get("GROK_ELLIPSIS_BUILD", None) or (
+        # Support Kythe integration testing that required metadata as part
+        # of regular test run that can't use GROK_ELLIPSIS_BUILD.
+        hasattr(ctx.attr, "tags") and "generate_kythe_metadata" in ctx.attr.tags
+    ):
         args.add("-generatekytheindexingmetadata")
     args.add_all(srcs)
 
