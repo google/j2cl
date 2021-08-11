@@ -16,7 +16,7 @@ def _jdk_system(ctx):
         outputs = [system],
         tools = [zip_tool],
         command = "\n".join([
-            "set -eux",
+            "set -eu",
             "JAVABASE=%s" % java_runtime.java_home,
             "MODULE_DIR=%s" % system.path,
             "WD=$(pwd)",
