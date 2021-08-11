@@ -13,7 +13,6 @@
  */
 package com.google.j2cl.transpiler;
 
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
 
@@ -392,8 +391,11 @@ public class TranspilerTester {
 
     private static boolean compare(String actual, String expected) {
       Matcher matcher = messagePattern.matcher(actual);
-      checkState(matcher.matches());
-      return matcher.group("message").equals(expected);
+      return matcher.matches()
+          // Get just the text of the error without the filename and line number.
+          ? matcher.group("message").equals(expected)
+          // The error was not emitted with a filename and line number, match the whole message.
+          : actual.equals(expected);
     }
   }
 

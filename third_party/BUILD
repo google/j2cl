@@ -1,12 +1,12 @@
 # Description:
 #   Thirdparty dependencies indirection for bazel.
 
+load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library")
+
 package(
     default_visibility = ["//:__subpackages__"],
     licenses = ["notice"],  # Apache 2.0
 )
-
-load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library")
 
 alias(
     name = "guava",
@@ -22,6 +22,16 @@ java_library(
 alias(
     name = "jsr305_annotations",
     actual = "@com_google_code_findbugs_jsr305",
+)
+
+alias(
+    name = "jspecify_annotations",
+    actual = "@org_jspecify",
+)
+
+j2cl_import(
+    name = "jspecify_annotations-j2cl",
+    jar = "@org_jspecify//jar",
 )
 
 alias(

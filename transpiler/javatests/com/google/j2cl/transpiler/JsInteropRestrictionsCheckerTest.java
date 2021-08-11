@@ -3442,6 +3442,16 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     //      + "usable by but exposed to JavaScript.");
   }
 
+  public void testNullMarkedWarns() {
+    newTesterWithDefaults()
+        // Define the annotation here since we don't have it as a dependency.
+        .addCompilationUnit("org.jspecify.nullness.NullMarked", "public @interface NullMarked {}")
+        .addCompilationUnit(
+            "test.Buggy", "@org.jspecify.nullness.NullMarked", "class NullMarkedType {", "}")
+        .assertTranspileSucceeds()
+        .assertWarningsWithoutSourcePosition("@NullMarked annotation is not supported.");
+  }
+
   public void testCorrectLineNumbers() {
     assertTranspileFails(
             "test.Buggy",

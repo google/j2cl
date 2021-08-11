@@ -86,6 +86,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
+import com.google.j2cl.transpiler.frontend.common.Nullability;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
 import com.sun.source.tree.CompilationUnitTree;
 import com.sun.source.tree.Tree.Kind;
@@ -879,7 +880,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodSymbol methodSymbol = (MethodSymbol) memberReference.sym;
 
     DeclaredTypeDescriptor expressionTypeDescriptor =
-        environment.createTypeDescriptor(memberReference.type, DeclaredTypeDescriptor.class);
+        environment.createDeclaredTypeDescriptor(memberReference.type);
     MethodDescriptor functionalMethodDescriptor =
         environment.getJsFunctionMethodDescriptor(memberReference.type);
 
@@ -1386,9 +1387,13 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         && javacUnit.getPackage() != null) {
       String packageName = javacUnit.getPackageName().toString();
       String packageJsNamespace = getPackageJsNamespace(javacUnit);
+      boolean isNullMarked = isNullMarked(javacUnit);
       PackageInfoCache.get()
-          .setPackageJsNamespace(
-              PackageInfoCache.SOURCE_CLASS_PATH_ENTRY, packageName, packageJsNamespace);
+          .setPackageProperties(
+              PackageInfoCache.SOURCE_CLASS_PATH_ENTRY,
+              packageName,
+              packageJsNamespace,
+              isNullMarked);
     }
     setCurrentCompilationUnit(
         new CompilationUnit(
@@ -1424,6 +1429,17 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     return JsInteropAnnotationUtils.getJsNamespace(packge);
+  }
+
+  private static boolean isNullMarked(JCCompilationUnit javacUnit) {
+    PackageSymbol packge = javacUnit.packge;
+    if (packge == null) {
+      return false;
+    }
+
+    return AnnotationUtils.findAnnotationBindingByName(
+            packge.getAnnotationMirrors(), Nullability.ORG_JSPECIFY_NULLNESS_NULL_MAKED)
+        != null;
   }
 
   private static void sortPackageInfoFirst(List<CompilationUnitTree> compilationUnits) {

@@ -22,7 +22,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_EN
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_IGNORE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_NONNULL_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OVERLAY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
@@ -38,7 +37,6 @@ import com.sun.tools.javac.code.Attribute.Compound;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Symbol.MethodSymbol;
 import com.sun.tools.javac.code.TargetType;
-import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.code.TypeAnnotationPosition;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -48,7 +46,6 @@ import javax.lang.model.AnnotatedConstruct;
 import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.TypeMirror;
 
 /** Utility methods to get information about Js Interop annotations. */
 public class JsInteropAnnotationUtils {
@@ -182,19 +179,6 @@ public class JsInteropAnnotationUtils {
         throw new InternalCompilerError(
             "Unsupported element kind in MoreAnnotation#isAnnotationOnType: %s.", sym.getKind());
     }
-  }
-
-  public static boolean hasJsNonNullAnnotation(AnnotatedConstruct typeBinding) {
-    return AnnotationUtils.findAnnotationBindingByName(
-            typeBinding.getAnnotationMirrors(), JS_NONNULL_ANNOTATION_NAME)
-        != null;
-  }
-
-  public static boolean isJsNonNullAnnotation(TypeMirror annotationType) {
-    return ((Type) annotationType)
-        .asElement()
-        .getQualifiedName()
-        .contentEquals(JS_NONNULL_ANNOTATION_NAME);
   }
 
   public static boolean isJsPackageAnnotation(AnnotationMirror annotation) {

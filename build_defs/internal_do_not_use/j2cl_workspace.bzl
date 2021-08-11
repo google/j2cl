@@ -50,6 +50,13 @@ def setup_j2cl_workspace(**kwargs):
     )
 
     jvm_maven_import_external(
+        name = "org_jspecify",
+        artifact = "org.jspecify:jspecify:0.2.0",
+        server_urls = _MAVEN_CENTRAL_URLS,
+        licenses = ["notice"],
+    )
+
+    jvm_maven_import_external(
         name = "org_apache_commons_collections",
         artifact = "commons-collections:commons-collections:3.2.2",
         server_urls = _MAVEN_CENTRAL_URLS,

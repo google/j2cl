@@ -75,10 +75,14 @@ public abstract class AbstractCompilationUnitBuilder {
   private String currentSourceFile;
   private CompilationUnit currentCompilationUnit;
 
-  /** Sets the JS namespace for a package that is being compiled from source. */
-  protected void setPackageJsNamespaceFromSource(String packageName, String jsNamespace) {
-    packageInfoCache.setPackageJsNamespace(
-        PackageInfoCache.SOURCE_CLASS_PATH_ENTRY, packageName, jsNamespace);
+  /**
+   * Sets the JS namespace and whether it defines a null marked scope for a package that is being
+   * compiled from source.
+   */
+  protected void setPackagePropertiesFromSource(
+      String packageName, String jsNamespace, boolean isNullMarked) {
+    packageInfoCache.setPackageProperties(
+        PackageInfoCache.SOURCE_CLASS_PATH_ENTRY, packageName, jsNamespace, isNullMarked);
   }
 
   protected String getCurrentSourceFile() {

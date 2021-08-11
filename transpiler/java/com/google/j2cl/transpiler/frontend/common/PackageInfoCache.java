@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 import jsinterop.annotations.JsPackage;
+import org.jspecify.nullness.NullMarked;
 
 /**
  * A cache for information on package-info files that are needed for transpilation, like JsInterop
@@ -58,8 +59,10 @@ public class PackageInfoCache {
     @Nullable
     public abstract String getJsNamespace();
 
+    public abstract boolean isNullMarked();
+
     public static Builder newBuilder() {
-      return new AutoValue_PackageInfoCache_PackageReport.Builder();
+      return new AutoValue_PackageInfoCache_PackageReport.Builder().setNullMarked(false);
     }
 
     /** A Builder for PackageReport. */
@@ -67,6 +70,8 @@ public class PackageInfoCache {
     public abstract static class Builder {
 
       public abstract Builder setJsNamespace(String jsNamespace);
+
+      public abstract Builder setNullMarked(boolean isNullMarked);
 
       abstract PackageReport autoBuild();
 
@@ -140,6 +145,10 @@ public class PackageInfoCache {
     return getPackageReport(topLevelTypeSourceName).getJsNamespace();
   }
 
+  public boolean isNullMarked(String topLevelTypeSourceName) {
+    return getPackageReport(topLevelTypeSourceName).isNullMarked();
+  }
+
   /**
    * Let the PackageInfoCache know that this class is Source, otherwise it would have to rummage
    * around in the class path to figure it out and it might even come up with the wrong answer. For
@@ -151,15 +160,18 @@ public class PackageInfoCache {
   }
 
   /**
-   * Specify the JavaScript namespace for a given package (as identified by the combination of class
-   * path entry and package path).
+   * Specify the JavaScript namespace and whether it defines a null marked scope for a given package
+   * (as identified by the combination of class path entry and package path).
    */
-  public void setPackageJsNamespace(
-      String classPathEntry, String packagePath, String packageJsNamespace) {
+  public void setPackageProperties(
+      String classPathEntry, String packagePath, String packageJsNamespace, boolean isNullMarked) {
     setReportForPackage(
         classPathEntry,
         packagePath,
-        PackageReport.newBuilder().setJsNamespace(packageJsNamespace).build());
+        PackageReport.newBuilder()
+            .setJsNamespace(packageJsNamespace)
+            .setNullMarked(isNullMarked)
+            .build());
   }
 
   @SuppressWarnings({"resource", "unused"})
@@ -258,7 +270,11 @@ public class PackageInfoCache {
       String classPathEntry, String packagePath, String topLevelTypeSourceName) {
     Annotation[] packageAnnotations = findBytecodePackageAnnotations(classPathEntry, packagePath);
 
-    setPackageJsNamespace(classPathEntry, packagePath, getPackageJsNamespace(packageAnnotations));
+    setPackageProperties(
+        classPathEntry,
+        packagePath,
+        getPackageJsNamespace(packageAnnotations),
+        hasNullMarkedAnnotation(packageAnnotations));
     propagateSpecificInfo(classPathEntry, topLevelTypeSourceName);
   }
 
@@ -273,6 +289,14 @@ public class PackageInfoCache {
         .map(JsPackage.class::cast)
         .map(JsPackage::namespace)
         .orElse(null);
+  }
+
+  private static boolean hasNullMarkedAnnotation(Annotation[] packageAnnotations) {
+    if (packageAnnotations == null) {
+      return false;
+    }
+
+    return Arrays.stream(packageAnnotations).anyMatch(NullMarked.class::isInstance);
   }
 
   /**

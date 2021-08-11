@@ -1,0 +1,100 @@
+goog.module('nullability.explicitnotnullable.ExplicitNotNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+class ExplicitNotNullable extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {string}*/
+  this.f_f1__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {?string}*/
+  this.f_f2__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {?string}*/
+  this.f_f3__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {!List<string>}*/
+  this.f_f4__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {List<string>}*/
+  this.f_f5__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {!List<?string>}*/
+  this.f_f6__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {List<?string>}*/
+  this.f_f7__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {!Array<string>}*/
+  this.f_f8__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {!Array<?string>}*/
+  this.f_f9__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {Array<string>}*/
+  this.f_f10__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {?void}*/
+  this.f_f11__nullability_explicitnotnullable_ExplicitNotNullable_;
+  /**@type {!*}*/
+  this.f_f12__nullability_explicitnotnullable_ExplicitNotNullable_;
+ }
+ /** @return {!ExplicitNotNullable} */
+ static $create__() {
+  ExplicitNotNullable.$clinit();
+  let $instance = new ExplicitNotNullable();
+  $instance.$ctor__nullability_explicitnotnullable_ExplicitNotNullable__();
+  return $instance;
+ }
+ 
+ $ctor__nullability_explicitnotnullable_ExplicitNotNullable__() {
+  this.$ctor__java_lang_Object__();
+  this.$init___$p_nullability_explicitnotnullable_ExplicitNotNullable();
+ }
+ /** @return {string} */
+ m_m1__java_lang_String__java_util_List(/** string */ a, /** !List<number> */ b) {
+  return '';
+ }
+ /** @return {?string} */
+ m_m2__java_lang_String__java_util_List(/** ?string */ a, /** !List<?number> */ b) {
+  return null;
+ }
+ 
+ m3(.../** ...string */ args) {
+  $Arrays.$stampType(args, j_l_String, 1);
+ }
+ /** @private */
+ $init___$p_nullability_explicitnotnullable_ExplicitNotNullable() {
+  this.f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ = 'Hello';
+  this.f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ = null;
+  this.f_f3__nullability_explicitnotnullable_ExplicitNotNullable_ = null;
+  this.f_f4__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f5__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f6__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f7__nullability_explicitnotnullable_ExplicitNotNullable_ = null;
+  this.f_f8__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+  this.f_f9__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+  this.f_f10__nullability_explicitnotnullable_ExplicitNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+  this.f_f11__nullability_explicitnotnullable_ExplicitNotNullable_ = null;
+  this.f_f12__nullability_explicitnotnullable_ExplicitNotNullable_ = j_l_Object.$create__();
+ }
+ 
+ static $clinit() {
+  ExplicitNotNullable.$clinit = () =>{};
+  ExplicitNotNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof ExplicitNotNullable;
+ }
+ 
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(ExplicitNotNullable, 'nullability.explicitnotnullable.ExplicitNotNullable');
+
+exports = ExplicitNotNullable;
+
+//# sourceMappingURL=ExplicitNotNullable.js.map

@@ -92,6 +92,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.Visibility;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder;
+import com.google.j2cl.transpiler.frontend.common.Nullability;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -143,12 +144,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       this.jdtCompilationUnit = jdtCompilationUnit;
 
       setCurrentSourceFile(sourceFilePath);
-      String packageName = JdtUtils.getCompilationUnitPackageName(jdtCompilationUnit);
+      String packageName =
+          jdtCompilationUnit.getPackage() == null
+              ? ""
+              : jdtCompilationUnit.getPackage().getName().getFullyQualifiedName();
       setCurrentCompilationUnit(new CompilationUnit(sourceFilePath, packageName));
       // Records information about package-info files supplied as source code.
       if (getCurrentSourceFile().endsWith("package-info.java")
           && jdtCompilationUnit.getPackage() != null) {
-        setPackageJsNamespaceFromSource(packageName, getPackageJsNamespace(jdtCompilationUnit));
+        setPackagePropertiesFromSource(
+            packageName,
+            getPackageJsNamespace(jdtCompilationUnit),
+            isNullMarked(jdtCompilationUnit));
       }
       for (Object object : jdtCompilationUnit.types()) {
         AbstractTypeDeclaration abstractTypeDeclaration = (AbstractTypeDeclaration) object;
@@ -172,6 +179,23 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           .findFirst()
           .map(JsInteropAnnotationUtils::getJsNamespace)
           .orElse(null);
+    }
+
+    private boolean isNullMarked(org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit) {
+      List<Annotation> packageAnnotations =
+          JdtUtils.asTypedList(jdtCompilationUnit.getPackage().annotations());
+
+      if (packageAnnotations == null) {
+        return false;
+      }
+
+      return packageAnnotations.stream()
+          .map(Annotation::resolveAnnotationBinding)
+          .anyMatch(
+              a ->
+                  a.getAnnotationType()
+                      .getQualifiedName()
+                      .equals(Nullability.ORG_JSPECIFY_NULLNESS_NULL_MAKED));
     }
 
     private void convert(AbstractTypeDeclaration typeDeclaration) {

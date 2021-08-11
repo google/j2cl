@@ -1031,7 +1031,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         checkState(!getName().isPresent() || getName().get().equals(CONSTRUCTOR_METHOD_NAME));
         checkState(
             !getReturnTypeDescriptor().isPresent()
-                || getReturnTypeDescriptor().get().equals(getEnclosingTypeDescriptor()));
+                || getReturnTypeDescriptor().get().isSameBaseType(getEnclosingTypeDescriptor()));
 
         setName(CONSTRUCTOR_METHOD_NAME);
       }

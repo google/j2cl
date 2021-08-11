@@ -22,7 +22,6 @@ import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_EN
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_FUNCTION_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_IGNORE_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_METHOD_ANNOTATION_NAME;
-import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_NONNULL_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OPTIONAL_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_OVERLAY_ANNOTATION_NAME;
 import static com.google.j2cl.transpiler.frontend.common.FrontendConstants.JS_PACKAGE_ANNOTATION_NAME;
@@ -96,12 +95,6 @@ public class JsInteropAnnotationUtils {
   public static IAnnotationBinding getJsOverlayAnnotation(IBinding methodBinding) {
     return JdtAnnotationUtils.findAnnotationBindingByName(
         methodBinding.getAnnotations(), JS_OVERLAY_ANNOTATION_NAME);
-  }
-
-  public static boolean hasJsNonNullAnnotation(ITypeBinding typeBinding) {
-    return JdtAnnotationUtils.findAnnotationBindingByName(
-            typeBinding.getTypeAnnotations(), JS_NONNULL_ANNOTATION_NAME)
-        != null;
   }
 
   public static boolean isJsPackageAnnotation(IAnnotationBinding annotation) {

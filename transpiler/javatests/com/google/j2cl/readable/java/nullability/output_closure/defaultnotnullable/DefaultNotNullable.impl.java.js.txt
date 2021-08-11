@@ -1,0 +1,100 @@
+goog.module('nullability.defaultnotnullable.DefaultNotNullable$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
+let ArrayList = goog.forwardDeclare('java.util.ArrayList$impl');
+let List = goog.forwardDeclare('java.util.List$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+
+class DefaultNotNullable extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {string}*/
+  this.f_f1__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {?string}*/
+  this.f_f2__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {?string}*/
+  this.f_f3__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {!List<string>}*/
+  this.f_f4__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {List<string>}*/
+  this.f_f5__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {!List<?string>}*/
+  this.f_f6__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {List<?string>}*/
+  this.f_f7__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {!Array<string>}*/
+  this.f_f8__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {!Array<?string>}*/
+  this.f_f9__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {Array<string>}*/
+  this.f_f10__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {?void}*/
+  this.f_f11__nullability_defaultnotnullable_DefaultNotNullable_;
+  /**@type {!*}*/
+  this.f_f12__nullability_defaultnotnullable_DefaultNotNullable_;
+ }
+ /** @return {!DefaultNotNullable} */
+ static $create__() {
+  DefaultNotNullable.$clinit();
+  let $instance = new DefaultNotNullable();
+  $instance.$ctor__nullability_defaultnotnullable_DefaultNotNullable__();
+  return $instance;
+ }
+ 
+ $ctor__nullability_defaultnotnullable_DefaultNotNullable__() {
+  this.$ctor__java_lang_Object__();
+  this.$init___$p_nullability_defaultnotnullable_DefaultNotNullable();
+ }
+ /** @return {string} */
+ m_m1__java_lang_String__java_util_List(/** string */ a, /** !List<number> */ b) {
+  return '';
+ }
+ /** @return {?string} */
+ m_m2__java_lang_String__java_util_List(/** ?string */ a, /** !List<?number> */ b) {
+  return null;
+ }
+ 
+ m3(.../** ...string */ args) {
+  $Arrays.$stampType(args, j_l_String, 1);
+ }
+ /** @private */
+ $init___$p_nullability_defaultnotnullable_DefaultNotNullable() {
+  this.f_f1__nullability_defaultnotnullable_DefaultNotNullable_ = 'Hello';
+  this.f_f2__nullability_defaultnotnullable_DefaultNotNullable_ = null;
+  this.f_f3__nullability_defaultnotnullable_DefaultNotNullable_ = null;
+  this.f_f4__nullability_defaultnotnullable_DefaultNotNullable_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f5__nullability_defaultnotnullable_DefaultNotNullable_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f6__nullability_defaultnotnullable_DefaultNotNullable_ = /**@type {!ArrayList<?string>}*/ (ArrayList.$create__());
+  this.f_f7__nullability_defaultnotnullable_DefaultNotNullable_ = null;
+  this.f_f8__nullability_defaultnotnullable_DefaultNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+  this.f_f9__nullability_defaultnotnullable_DefaultNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+  this.f_f10__nullability_defaultnotnullable_DefaultNotNullable_ = /**@type {!Array<?string>}*/ ($Arrays.$init([], j_l_String));
+  this.f_f11__nullability_defaultnotnullable_DefaultNotNullable_ = null;
+  this.f_f12__nullability_defaultnotnullable_DefaultNotNullable_ = j_l_Object.$create__();
+ }
+ 
+ static $clinit() {
+  DefaultNotNullable.$clinit = () =>{};
+  DefaultNotNullable.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof DefaultNotNullable;
+ }
+ 
+ static $loadModules() {
+  j_l_String = goog.module.get('java.lang.String$impl');
+  ArrayList = goog.module.get('java.util.ArrayList$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+ }
+}
+$Util.$setClassMetadata(DefaultNotNullable, 'nullability.defaultnotnullable.DefaultNotNullable');
+
+exports = DefaultNotNullable;
+
+//# sourceMappingURL=DefaultNotNullable.js.map

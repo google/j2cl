@@ -90,7 +90,10 @@ class J2clTranspiler {
 
   private void checkLibrary(Library library) {
     JsInteropRestrictionsChecker.check(
-        library, problems, /* enableWasm= */ options.getBackend() == Backend.WASM);
+        library,
+        problems,
+        /* enableWasm= */ options.getBackend() == Backend.WASM,
+        /* isNullMarkedSupported= */ options.isNullMarkedSupported());
     problems.abortIfHasErrors();
   }
 

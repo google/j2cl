@@ -417,6 +417,8 @@ public abstract class TypeDeclaration
   @Nullable
   abstract String getCustomizedJsNamespace();
 
+  public abstract boolean isNullMarked();
+
   @Memoized
   public TypeDeclaration getMetadataTypeDeclaration() {
     if (isNative() || isJsEnum()) {
@@ -703,6 +705,7 @@ public abstract class TypeDeclaration
         .setLocal(false)
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
+        .setNullMarked(false)
         .setTypeParameterDescriptors(ImmutableList.of())
         .setDeclaredMethodDescriptorsFactory(() -> ImmutableList.of())
         .setDeclaredFieldDescriptorsFactory(() -> ImmutableList.of())
@@ -775,6 +778,8 @@ public abstract class TypeDeclaration
     public abstract Builder setSimpleJsName(String simpleJsName);
 
     public abstract Builder setCustomizedJsNamespace(String jsNamespace);
+
+    public abstract Builder setNullMarked(boolean isNullMarked);
 
     public abstract Builder setInterfaceTypeDescriptorsFactory(
         DescriptorFactory<ImmutableList<DeclaredTypeDescriptor>> interfaceTypeDescriptorsFactory);

@@ -48,8 +48,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeVariable;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.Visibility;
+import com.google.j2cl.transpiler.frontend.common.Nullability;
 import com.google.j2cl.transpiler.frontend.common.PackageInfoCache;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -57,13 +57,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Queue;
 import java.util.Set;
 import java.util.function.Supplier;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.Assignment;
 import org.eclipse.jdt.core.dom.BodyDeclaration;
-import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
@@ -76,78 +74,6 @@ import org.eclipse.jdt.core.dom.PrefixExpression;
 
 /** Utility functions to manipulate JDT internal representations. */
 class JdtUtils {
-  // JdtUtil members are all package private. Code outside frontend should not be aware of the
-  // dependency on JDT.
-  public static String getCompilationUnitPackageName(CompilationUnit compilationUnit) {
-    return compilationUnit.getPackage() == null
-        ? ""
-        : compilationUnit.getPackage().getName().getFullyQualifiedName();
-  }
-
-  public static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
-    checkArgument(!isArrayLengthBinding(variableBinding));
-
-    boolean isStatic = isStatic(variableBinding);
-    Visibility visibility = getVisibility(variableBinding);
-    DeclaredTypeDescriptor enclosingTypeDescriptor =
-        createDeclaredTypeDescriptor(variableBinding.getDeclaringClass());
-    String fieldName = variableBinding.getName();
-
-    TypeDescriptor thisTypeDescriptor =
-        createTypeDescriptorWithNullability(
-            variableBinding.getType(), variableBinding.getAnnotations());
-
-    if (variableBinding.isEnumConstant()) {
-      // Enum fields are always non-nullable.
-      thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
-    }
-
-    FieldDescriptor declarationFieldDescriptor = null;
-    if (variableBinding.getVariableDeclaration() != variableBinding) {
-      declarationFieldDescriptor = createFieldDescriptor(variableBinding.getVariableDeclaration());
-    }
-
-    JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
-    boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
-    boolean isFinal = JdtUtils.isFinal(variableBinding);
-    return FieldDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(fieldName)
-        .setTypeDescriptor(thisTypeDescriptor)
-        .setStatic(isStatic)
-        .setVisibility(visibility)
-        .setJsInfo(jsInfo)
-        .setFinal(isFinal)
-        .setCompileTimeConstant(isCompileTimeConstant)
-        .setDeclarationDescriptor(declarationFieldDescriptor)
-        .setEnumConstant(variableBinding.isEnumConstant())
-        .setUnusableByJsSuppressed(
-            JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
-        .setDeprecated(isDeprecated(variableBinding))
-        .build();
-  }
-
-  public static Variable createVariable(
-      SourcePosition sourcePosition, IVariableBinding variableBinding) {
-    String name = variableBinding.getName();
-    TypeDescriptor typeDescriptor =
-        variableBinding.isParameter()
-            ? createTypeDescriptorWithNullability(
-                variableBinding.getType(), variableBinding.getAnnotations())
-            : createTypeDescriptor(variableBinding.getType());
-    boolean isFinal = variableBinding.isEffectivelyFinal();
-    boolean isParameter = variableBinding.isParameter();
-    boolean isUnusableByJsSuppressed =
-        JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding);
-    return Variable.newBuilder()
-        .setName(name)
-        .setTypeDescriptor(typeDescriptor)
-        .setFinal(isFinal)
-        .setParameter(isParameter)
-        .setUnusableByJsSuppressed(isUnusableByJsSuppressed)
-        .setSourcePosition(sourcePosition)
-        .build();
-  }
 
   public static BinaryOperator getBinaryOperator(InfixExpression.Operator operator) {
     switch (operator.toString()) {
@@ -225,35 +151,6 @@ class JdtUtils {
     }
   }
 
-  public static IMethodBinding getMethodBinding(
-      ITypeBinding typeBinding, String methodName, ITypeBinding... parameterTypes) {
-
-    Queue<ITypeBinding> deque = new ArrayDeque<>();
-    deque.add(typeBinding);
-
-    while (!deque.isEmpty()) {
-      typeBinding = deque.poll();
-      for (IMethodBinding methodBinding : typeBinding.getDeclaredMethods()) {
-        if (methodBinding.getName().equals(methodName)
-            && Arrays.equals(methodBinding.getParameterTypes(), parameterTypes)) {
-          return methodBinding;
-        }
-      }
-      ITypeBinding superclass = typeBinding.getSuperclass();
-      if (superclass != null) {
-        deque.add(superclass);
-      }
-
-      ITypeBinding[] superInterfaces = typeBinding.getInterfaces();
-      if (superInterfaces != null) {
-        for (ITypeBinding superInterface : superInterfaces) {
-          deque.add(superInterface);
-        }
-      }
-    }
-    return null;
-  }
-
   public static PrefixOperator getPrefixOperator(PrefixExpression.Operator operator) {
     switch (operator.toString()) {
       case "++":
@@ -282,6 +179,30 @@ class JdtUtils {
       default:
         return null;
     }
+  }
+
+  public static Variable createVariable(
+      SourcePosition sourcePosition, IVariableBinding variableBinding) {
+    String name = variableBinding.getName();
+    TypeDescriptor typeDescriptor =
+        variableBinding.isParameter()
+            ? createTypeDescriptorWithNullability(
+                variableBinding.getType(),
+                variableBinding.getAnnotations(),
+                /* inNullMarkedScope= */ false)
+            : createTypeDescriptor(variableBinding.getType());
+    boolean isFinal = variableBinding.isEffectivelyFinal();
+    boolean isParameter = variableBinding.isParameter();
+    boolean isUnusableByJsSuppressed =
+        JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding);
+    return Variable.newBuilder()
+        .setName(name)
+        .setTypeDescriptor(typeDescriptor)
+        .setFinal(isFinal)
+        .setParameter(isParameter)
+        .setUnusableByJsSuppressed(isUnusableByJsSuppressed)
+        .setSourcePosition(sourcePosition)
+        .build();
   }
 
   public static Expression createFieldAccess(Expression qualifier, IVariableBinding fieldBinding) {
@@ -315,23 +236,44 @@ class JdtUtils {
 
   /** Creates a DeclaredTypeDescriptor from a JDT TypeBinding. */
   public static DeclaredTypeDescriptor createDeclaredTypeDescriptor(ITypeBinding typeBinding) {
-    return createTypeDescriptor(typeBinding, DeclaredTypeDescriptor.class);
+    return createDeclaredTypeDescriptor(typeBinding, /* inNullMarkedScope= */ false);
+  }
+
+  /**
+   * Creates a DeclaredTypeDescriptor from a JDT TypeBinding applying the nullability rules
+   * according to the scope this descriptor appears in.
+   */
+  public static DeclaredTypeDescriptor createDeclaredTypeDescriptor(
+      ITypeBinding typeBinding, boolean inNullMarkedScope) {
+    return createTypeDescriptor(typeBinding, inNullMarkedScope, DeclaredTypeDescriptor.class);
   }
 
   /** Creates a DeclaredTypeDescriptor from a JDT TypeBinding. */
   private static <T extends TypeDescriptor> T createTypeDescriptor(
-      ITypeBinding typeBinding, Class<T> clazz) {
-    return clazz.cast(createTypeDescriptor(typeBinding));
+      ITypeBinding typeBinding, boolean inNullMarkedScope, Class<T> clazz) {
+    return clazz.cast(createTypeDescriptor(typeBinding, inNullMarkedScope));
   }
 
   /** Creates a TypeDescriptor from a JDT TypeBinding. */
   public static TypeDescriptor createTypeDescriptor(ITypeBinding typeBinding) {
-    return createTypeDescriptorWithNullability(typeBinding, new IAnnotationBinding[0]);
+    return createTypeDescriptor(typeBinding, /* inNullMarkedScope= */ false);
+  }
+
+  /**
+   * Creates a TypeDescriptor from a JDT TypeBinding applying the nullability rules according to the
+   * scope this descriptor appears in.
+   */
+  public static TypeDescriptor createTypeDescriptor(
+      ITypeBinding typeBinding, boolean inNullMarkedScope) {
+    return createTypeDescriptorWithNullability(
+        typeBinding, new IAnnotationBinding[0], inNullMarkedScope);
   }
 
   /** Creates a type descriptor for the given type binding, taking into account nullability. */
   private static TypeDescriptor createTypeDescriptorWithNullability(
-      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
+      ITypeBinding typeBinding,
+      IAnnotationBinding[] elementAnnotations,
+      boolean inNullMarkedScope) {
     if (typeBinding == null) {
       return null;
     }
@@ -352,16 +294,19 @@ class JdtUtils {
       return createTypeVariable(typeBinding);
     }
 
-    boolean isNullable = isNullable(typeBinding, elementAnnotations);
+    boolean isNullable = isNullable(typeBinding, elementAnnotations, inNullMarkedScope);
     if (typeBinding.isArray()) {
-      TypeDescriptor componentTypeDescriptor = createTypeDescriptor(typeBinding.getComponentType());
+      TypeDescriptor componentTypeDescriptor =
+          createTypeDescriptor(typeBinding.getComponentType(), inNullMarkedScope);
       return ArrayTypeDescriptor.newBuilder()
           .setComponentTypeDescriptor(componentTypeDescriptor)
           .setNullable(isNullable)
           .build();
     }
 
-    return withNullability(createDeclaredType(typeBinding), isNullable);
+    // Propagate the context to the creation of the type, so that its type arguments are created
+    // in the right context and then apply the nullability rules to the outer type.
+    return withNullability(createDeclaredType(typeBinding, inNullMarkedScope), isNullable);
   }
 
   private static TypeDescriptor createTypeVariable(ITypeBinding typeBinding) {
@@ -380,6 +325,7 @@ class JdtUtils {
     if (bounds == null || bounds.length == 0) {
       return TypeDescriptors.get().javaLangObject;
     }
+    // TODO(b/190520117): Handle nullability annotations in bounds.
     if (bounds.length == 1) {
       return createTypeDescriptor(bounds[0]);
     }
@@ -396,7 +342,9 @@ class JdtUtils {
    * and if nullability is enabled for the package containing the binding.
    */
   private static boolean isNullable(
-      ITypeBinding typeBinding, IAnnotationBinding[] elementAnnotations) {
+      ITypeBinding typeBinding,
+      IAnnotationBinding[] elementAnnotations,
+      boolean inNullMarkedScope) {
     checkArgument(!typeBinding.isPrimitive());
 
     if (typeBinding.getQualifiedName().equals("java.lang.Void")) {
@@ -404,25 +352,24 @@ class JdtUtils {
       return true;
     }
 
-    if (JsInteropAnnotationUtils.hasJsNonNullAnnotation(typeBinding)) {
-      return false;
-    }
-
-    // TODO(b/70164536): Deprecate non J2CL-specific nullability annotations.
     Iterable<IAnnotationBinding> allAnnotations =
         Iterables.concat(
             Arrays.asList(elementAnnotations),
             Arrays.asList(typeBinding.getTypeAnnotations()),
             Arrays.asList(typeBinding.getAnnotations()));
     for (IAnnotationBinding annotation : allAnnotations) {
-      String annotationName = annotation.getName();
+      String annotationName = annotation.getAnnotationType().getQualifiedName();
 
-      if (annotationName.equalsIgnoreCase("Nonnull")) {
+      if (Nullability.isNonNullAnnotation(annotationName)) {
         return false;
+      }
+
+      if (Nullability.isNullableAnnotation(annotationName)) {
+        return true;
       }
     }
 
-    return true;
+    return !inNullMarkedScope;
   }
 
   /**
@@ -495,19 +442,20 @@ class JdtUtils {
     return binaryName;
   }
 
-  private static List<TypeDescriptor> getTypeArgumentTypeDescriptors(ITypeBinding typeBinding) {
-    return getTypeArgumentTypeDescriptors(typeBinding, TypeDescriptor.class);
+  private static List<TypeDescriptor> getTypeArgumentTypeDescriptors(
+      ITypeBinding typeBinding, boolean inNullMarkedScope) {
+    return getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope, TypeDescriptor.class);
   }
 
   private static <T extends TypeDescriptor> List<T> getTypeArgumentTypeDescriptors(
-      ITypeBinding typeBinding, Class<T> clazz) {
+      ITypeBinding typeBinding, boolean inNullMarkedScope, Class<T> clazz) {
     ImmutableList.Builder<T> typeArgumentDescriptorsBuilder = ImmutableList.builder();
     if (typeBinding.isParameterizedType()) {
       typeArgumentDescriptorsBuilder.addAll(
-          createTypeDescriptors(typeBinding.getTypeArguments(), clazz));
+          createTypeDescriptors(typeBinding.getTypeArguments(), inNullMarkedScope, clazz));
     } else {
       typeArgumentDescriptorsBuilder.addAll(
-          createTypeDescriptors(typeBinding.getTypeParameters(), clazz));
+          createTypeDescriptors(typeBinding.getTypeParameters(), inNullMarkedScope, clazz));
     }
 
     // DO NOT USE getDeclaringMethod(). getDeclaringMethod() returns a synthetic static method
@@ -517,12 +465,13 @@ class JdtUtils {
     IBinding declarationBinding = getDeclaringMethodOrFieldBinding(typeBinding);
     if (declarationBinding instanceof IMethodBinding) {
       typeArgumentDescriptorsBuilder.addAll(
-          createTypeDescriptors(((IMethodBinding) declarationBinding).getTypeParameters(), clazz));
+          createTypeDescriptors(
+              ((IMethodBinding) declarationBinding).getTypeParameters(), inNullMarkedScope, clazz));
     }
 
     if (capturesEnclosingInstance(typeBinding.getTypeDeclaration())) {
       // Find type parameters in the enclosing scope and copy them over as well.
-      createDeclaredTypeDescriptor(typeBinding.getDeclaringClass())
+      createDeclaredTypeDescriptor(typeBinding.getDeclaringClass(), inNullMarkedScope)
           .getTypeArgumentDescriptors()
           .stream()
           .map(clazz::cast)
@@ -648,6 +597,52 @@ class JdtUtils {
         && ((IMethodBinding) binding).getDeclaringMember() != null;
   }
 
+  /** Create a FieldDescriptor directly based on the given JDT field variable binding. */
+  public static FieldDescriptor createFieldDescriptor(IVariableBinding variableBinding) {
+    checkArgument(!isArrayLengthBinding(variableBinding));
+
+    boolean isStatic = isStatic(variableBinding);
+    Visibility visibility = getVisibility(variableBinding);
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        createDeclaredTypeDescriptor(variableBinding.getDeclaringClass());
+    String fieldName = variableBinding.getName();
+
+    TypeDescriptor thisTypeDescriptor =
+        createTypeDescriptorWithNullability(
+            variableBinding.getType(),
+            variableBinding.getAnnotations(),
+            enclosingTypeDescriptor.getTypeDeclaration().isNullMarked());
+
+    if (variableBinding.isEnumConstant()) {
+      // Enum fields are always non-nullable.
+      thisTypeDescriptor = thisTypeDescriptor.toNonNullable();
+    }
+
+    FieldDescriptor declarationFieldDescriptor = null;
+    if (variableBinding.getVariableDeclaration() != variableBinding) {
+      declarationFieldDescriptor = createFieldDescriptor(variableBinding.getVariableDeclaration());
+    }
+
+    JsInfo jsInfo = JsInteropUtils.getJsInfo(variableBinding);
+    boolean isCompileTimeConstant = variableBinding.getConstantValue() != null;
+    boolean isFinal = JdtUtils.isFinal(variableBinding);
+    return FieldDescriptor.newBuilder()
+        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+        .setName(fieldName)
+        .setTypeDescriptor(thisTypeDescriptor)
+        .setStatic(isStatic)
+        .setVisibility(visibility)
+        .setJsInfo(jsInfo)
+        .setFinal(isFinal)
+        .setCompileTimeConstant(isCompileTimeConstant)
+        .setDeclarationDescriptor(declarationFieldDescriptor)
+        .setEnumConstant(variableBinding.isEnumConstant())
+        .setUnusableByJsSuppressed(
+            JsInteropAnnotationUtils.isUnusableByJsSuppressed(variableBinding))
+        .setDeprecated(isDeprecated(variableBinding))
+        .build();
+  }
+
   /** Create a MethodDescriptor directly based on the given JDT method binding. */
   public static MethodDescriptor createMethodDescriptor(IMethodBinding methodBinding) {
     if (methodBinding == null) {
@@ -656,6 +651,7 @@ class JdtUtils {
 
     DeclaredTypeDescriptor enclosingTypeDescriptor =
         createDeclaredTypeDescriptor(methodBinding.getDeclaringClass());
+    boolean inNullMarkedScope = enclosingTypeDescriptor.getTypeDeclaration().isNullMarked();
 
     boolean isStatic = isStatic(methodBinding);
     Visibility visibility = getVisibility(methodBinding);
@@ -673,9 +669,9 @@ class JdtUtils {
 
     TypeDescriptor returnTypeDescriptor =
         isConstructor
-            ? enclosingTypeDescriptor
+            ? enclosingTypeDescriptor.toNonNullable()
             : createTypeDescriptorWithNullability(
-                methodBinding.getReturnType(), methodBinding.getAnnotations());
+                methodBinding.getReturnType(), methodBinding.getAnnotations(), inNullMarkedScope);
 
     MethodDescriptor declarationMethodDescriptor = null;
     if (methodBinding.getMethodDeclaration() != methodBinding) {
@@ -690,7 +686,7 @@ class JdtUtils {
     Iterable<TypeVariable> typeParameterTypeDescriptors =
         FluentIterable.from(methodBinding.getTypeParameters())
             .transform(JdtUtils::createTypeDescriptor)
-            .transform(typeDescriptor -> (TypeVariable) typeDescriptor);
+            .transform(TypeVariable.class::cast);
 
     ImmutableList.Builder<ParameterDescriptor> parameterDescriptorBuilder = ImmutableList.builder();
     for (int i = 0; i < methodBinding.getParameterTypes().length; i++) {
@@ -699,7 +695,8 @@ class JdtUtils {
               .setTypeDescriptor(
                   createTypeDescriptorWithNullability(
                       methodBinding.getParameterTypes()[i],
-                      methodBinding.getParameterAnnotations(i)))
+                      methodBinding.getParameterAnnotations(i),
+                      inNullMarkedScope))
               .setJsOptional(JsInteropUtils.isJsOptional(methodBinding, i))
               .setVarargs(
                   i == methodBinding.getParameterTypes().length - 1 && methodBinding.isVarargs())
@@ -900,15 +897,20 @@ class JdtUtils {
   }
 
   private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
-      List<ITypeBinding> typeBindings, Class<T> clazz) {
+      List<ITypeBinding> typeBindings, boolean inNullMarkedScope, Class<T> clazz) {
     return typeBindings.stream()
-        .map(typeBinding -> createTypeDescriptor(typeBinding, clazz))
+        .map(typeBinding -> createTypeDescriptor(typeBinding, inNullMarkedScope, clazz))
         .collect(toImmutableList());
   }
 
   private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
       ITypeBinding[] typeBindings, Class<T> clazz) {
-    return createTypeDescriptors(Arrays.asList(typeBindings), clazz);
+    return createTypeDescriptors(typeBindings, /* inNullMarkedScope= */ false, clazz);
+  }
+
+  private static <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
+      ITypeBinding[] typeBindings, boolean inNullMarkedScope, Class<T> clazz) {
+    return createTypeDescriptors(Arrays.asList(typeBindings), inNullMarkedScope, clazz);
   }
 
   private static ThreadLocal<ITypeBinding> javaLangObjectTypeBinding = new ThreadLocal<>();
@@ -938,6 +940,8 @@ class JdtUtils {
   }
 
   private static final TypeDescriptor createIntersectionType(ITypeBinding typeBinding) {
+    // Intersection types created with this method only occur in method bodies, default nullability
+    // can be ignored.
     List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
         createTypeDescriptors(typeBinding.getTypeBounds(), DeclaredTypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
@@ -945,20 +949,20 @@ class JdtUtils {
         .build();
   }
 
-  private static DeclaredTypeDescriptor createDeclaredType(final ITypeBinding typeBinding) {
-    DeclaredTypeDescriptor cachedTypeDescriptor = getCachedTypeDescriptor(typeBinding);
-    if (cachedTypeDescriptor != null) {
-      return cachedTypeDescriptor;
-    }
+  private static DeclaredTypeDescriptor createDeclaredType(
+      final ITypeBinding typeBinding, boolean inNullMarkedScope) {
 
-    checkArgument(typeBinding.isClass() || typeBinding.isEnum() || typeBinding.isInterface());
+    DeclaredTypeDescriptor typeDescriptor = getCachedTypeDescriptor(inNullMarkedScope, typeBinding);
+    if (typeDescriptor != null) {
+      return typeDescriptor;
+    }
+    checkArgument(typeBinding.isClass() || typeBinding.isInterface() || typeBinding.isEnum());
 
     Supplier<ImmutableList<MethodDescriptor>> declaredMethods =
         () ->
             Arrays.stream(typeBinding.getDeclaredMethods())
                 .map(JdtUtils::createMethodDescriptor)
                 .collect(toImmutableList());
-    ;
 
     Supplier<ImmutableList<FieldDescriptor>> declaredFields =
         () ->
@@ -970,7 +974,7 @@ class JdtUtils {
         JdtUtils.createDeclarationForType(typeBinding.getTypeDeclaration());
 
     // Compute these even later
-    DeclaredTypeDescriptor typeDescriptor =
+    typeDescriptor =
         DeclaredTypeDescriptor.newBuilder()
             .setTypeDeclaration(typeDeclaration)
             .setEnclosingTypeDescriptor(
@@ -983,25 +987,40 @@ class JdtUtils {
                 () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
             .setSuperTypeDescriptorFactory(
-                () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
-            .setTypeArgumentDescriptors(getTypeArgumentTypeDescriptors(typeBinding))
+                () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), inNullMarkedScope))
+            .setTypeArgumentDescriptors(
+                getTypeArgumentTypeDescriptors(typeBinding, inNullMarkedScope))
             .setDeclaredFieldDescriptorsFactory(declaredFields)
             .setDeclaredMethodDescriptorsFactory(declaredMethods)
             .build();
-    putTypeDescriptorInCache(typeBinding, typeDescriptor);
+    putTypeDescriptorInCache(inNullMarkedScope, typeBinding, typeDescriptor);
     return typeDescriptor;
   }
 
   private static final ThreadLocal<Map<ITypeBinding, DeclaredTypeDescriptor>>
-      cachedDeclaredTypeDescriptorByTypeBinding = ThreadLocal.withInitial(HashMap::new);
+      cachedDeclaredTypeDescriptorByTypeBindingInNullMarkedScope =
+          ThreadLocal.withInitial(HashMap::new);
 
-  private static DeclaredTypeDescriptor getCachedTypeDescriptor(ITypeBinding typeBinding) {
-    return cachedDeclaredTypeDescriptorByTypeBinding.get().get(typeBinding);
+  private static final ThreadLocal<Map<ITypeBinding, DeclaredTypeDescriptor>>
+      cachedDeclaredTypeDescriptorByTypeBindingOutOfNullMarkedScope =
+          ThreadLocal.withInitial(HashMap::new);
+
+  private static DeclaredTypeDescriptor getCachedTypeDescriptor(
+      boolean inNullMarkedScope, ITypeBinding typeBinding) {
+    Map<ITypeBinding, DeclaredTypeDescriptor> cache =
+        inNullMarkedScope
+            ? cachedDeclaredTypeDescriptorByTypeBindingInNullMarkedScope.get()
+            : cachedDeclaredTypeDescriptorByTypeBindingOutOfNullMarkedScope.get();
+    return cache.get(typeBinding);
   }
 
   private static void putTypeDescriptorInCache(
-      ITypeBinding typeBinding, DeclaredTypeDescriptor typeDescriptor) {
-    cachedDeclaredTypeDescriptorByTypeBinding.get().put(typeBinding, typeDescriptor);
+      boolean inNullMarkedScope, ITypeBinding typeBinding, DeclaredTypeDescriptor typeDescriptor) {
+    Map<ITypeBinding, DeclaredTypeDescriptor> cache =
+        inNullMarkedScope
+            ? cachedDeclaredTypeDescriptorByTypeBindingInNullMarkedScope.get()
+            : cachedDeclaredTypeDescriptorByTypeBindingOutOfNullMarkedScope.get();
+    cache.put(typeBinding, typeDescriptor);
   }
 
   private static Kind getKindFromTypeBinding(ITypeBinding typeBinding) {
@@ -1083,6 +1102,7 @@ class JdtUtils {
 
     JsEnumInfo jsEnumInfo = JsInteropUtils.getJsEnumInfo(typeBinding);
 
+    boolean isNullMarked = isNullMarked(typeBinding, packageInfoCache);
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeBinding))
         .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
@@ -1106,17 +1126,37 @@ class JdtUtils {
         .setLocal(isLocal(typeBinding))
         .setSimpleJsName(getJsName(typeBinding))
         .setCustomizedJsNamespace(getJsNamespace(typeBinding, packageInfoCache))
+        .setNullMarked(isNullMarked)
         .setPackageName(packageName)
         .setSuperTypeDescriptorFactory(
             () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
         .setTypeParameterDescriptors(
-            getTypeArgumentTypeDescriptors(typeBinding, TypeVariable.class))
+            getTypeArgumentTypeDescriptors(
+                typeBinding, /* inNullMarkedScope= */ false, TypeVariable.class))
         .setVisibility(getVisibility(typeBinding))
         .setDeclaredMethodDescriptorsFactory(declaredMethods)
         .setDeclaredFieldDescriptorsFactory(declaredFields)
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(typeBinding))
         .setDeprecated(isDeprecated(typeBinding))
         .build();
+  }
+
+  private static boolean isNullMarked(ITypeBinding typeBinding, PackageInfoCache packageInfoCache) {
+    return hasNullMarkedAnnotation(typeBinding)
+        || packageInfoCache.isNullMarked(
+            getBinaryNameFromTypeBinding(toTopLevelTypeBinding(typeBinding)));
+  }
+
+  /**
+   * Returns true if {@code typeBinding} or one of its enclosing types has a @NullMarked annotation.
+   */
+  private static boolean hasNullMarkedAnnotation(ITypeBinding typeBinding) {
+    if (JdtAnnotationUtils.hasAnnotation(
+        typeBinding, Nullability.ORG_JSPECIFY_NULLNESS_NULL_MAKED)) {
+      return true;
+    }
+    return typeBinding.getDeclaringClass() != null
+        && hasNullMarkedAnnotation(typeBinding.getDeclaringClass());
   }
 
   private static boolean isAnnotatedWithFunctionalInterface(ITypeBinding typeBinding) {

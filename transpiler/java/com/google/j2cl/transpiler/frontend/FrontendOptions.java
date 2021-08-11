@@ -25,4 +25,6 @@ public interface FrontendOptions {
   ImmutableList<String> getClasspaths();
 
   boolean getGenerateKytheIndexingMetadata();
+
+  boolean isNullMarkedSupported();
 }

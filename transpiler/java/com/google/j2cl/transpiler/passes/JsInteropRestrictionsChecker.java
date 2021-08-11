@@ -81,17 +81,22 @@ import java.util.Set;
 /** Checks and throws errors for invalid JsInterop constructs. */
 public class JsInteropRestrictionsChecker {
 
-  public static void check(Library library, Problems problems, boolean enableWasm) {
-    new JsInteropRestrictionsChecker(problems, enableWasm).checkLibrary(library);
+  public static void check(
+      Library library, Problems problems, boolean enableWasm, boolean isNullMarkedSupported) {
+    new JsInteropRestrictionsChecker(problems, enableWasm, isNullMarkedSupported)
+        .checkLibrary(library);
   }
 
   private final Problems problems;
   private final boolean enableWasm;
+  private final boolean isNullMarkedSupported;
   private boolean wasUnusableByJsWarningReported = false;
 
-  private JsInteropRestrictionsChecker(Problems problems, boolean enableWasm) {
+  private JsInteropRestrictionsChecker(
+      Problems problems, boolean enableWasm, boolean isNullMarkedSupported) {
     this.problems = problems;
     this.enableWasm = enableWasm;
+    this.isNullMarkedSupported = isNullMarkedSupported;
   }
 
   private static final boolean ENFORCE_WASM_CHECKS = Boolean.getBoolean("j2cl.enable_wasm_checks");
@@ -121,6 +126,12 @@ public class JsInteropRestrictionsChecker {
 
   private void checkType(Type type) {
     TypeDeclaration typeDeclaration = type.getDeclaration();
+
+    if (!enableWasm && !isNullMarkedSupported) {
+      if (!checkJSpecifyUsage(typeDeclaration)) {
+        return;
+      }
+    }
 
     if (typeDeclaration.isJsType()) {
       if (!checkJsType(type)) {
@@ -161,6 +172,14 @@ public class JsInteropRestrictionsChecker {
     checkJsEnumUsages(type);
     checkJsFunctionLambdas(type);
     checkSystemProperties(type);
+  }
+
+  private boolean checkJSpecifyUsage(TypeDeclaration typeDeclaration) {
+    if (typeDeclaration.isNullMarked()) {
+      problems.warning("@NullMarked annotation is not supported.");
+      return false;
+    }
+    return true;
   }
 
   private void checkSystemProperties(Type type) {

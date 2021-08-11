@@ -87,6 +87,18 @@ final class BazelJ2clBuilder extends BazelWorker {
       hidden = true)
   protected boolean experimentalOptimizeAutovalue = false;
 
+  @Option(
+      name =
+          "-experimentalenablejspecifysupportdonotenablewithoutjspecifystaticcheckingoryoumightcauseanoutage",
+      usage =
+          "Enables support for JSpecify semantics. Do not use if the code is not being actually"
+              + " separately checked by a static checker. When these annotations applied the code"
+              + " will mislead developers to think that a null check is unnecessary without the"
+              + " compile time validation. Such misleading code has caused outages in the past for"
+              + " products.",
+      hidden = true)
+  protected boolean enableJSpecifySupport = false;
+
   /** Temporary flag to select the frontend during the transition to javac. */
   private static final Frontend FRONTEND =
       Frontend.valueOf(Ascii.toUpperCase(System.getProperty("j2cl.frontend", "jdt")));
@@ -161,6 +173,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))
         .setWasmRemoveAssertStatement(wasmRemoveAssertStatement)
+        .setNullMarkedSupported(this.enableJSpecifySupport)
         .build();
   }
 
