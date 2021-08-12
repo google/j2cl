@@ -34,6 +34,7 @@
  (param $this (ref null $varargs.Varargs))
  (param $args (ref null $javaemul.internal.WasmArray.OfInt))
  (result (ref null $varargs.Varargs))
+ ;;@ varargs/Varargs.java:21:9
  (block
   ;; varargs.Varargs.$clinit();
   ;;@ varargs/Varargs.java:21:30
@@ -51,6 +52,7 @@
 (func $m_<init>__@varargs.Varargs
  (param $this (ref null $varargs.Varargs))
  (result (ref null $varargs.Varargs))
+ ;;@ varargs/Varargs.java:23:9
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block
   ;; varargs.Varargs.$clinit();
@@ -75,6 +77,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ varargs/Varargs.java:27:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
  (block
@@ -87,6 +90,7 @@
  (type $function.$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ varargs/Varargs.java:29:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
  (block
@@ -99,6 +103,7 @@
  (type $function.$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ varargs/Varargs.java:31:14
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
  (block
@@ -109,6 +114,7 @@
 ;;; void Varargs.fun(T... elements)
 (func $m_fun__arrayOf_java_lang_Object__void@varargs.Varargs
  (param $elements (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ varargs/Varargs.java:33:25
  (block
   ;; varargs.Varargs.$clinit();
   ;;@ varargs/Varargs.java:33:44
@@ -120,6 +126,7 @@
 (func $m_bar__java_lang_Object__java_lang_Object__void@varargs.Varargs
  (param $a (ref null $java.lang.Object))
  (param $b (ref null $java.lang.Object))
+ ;;@ varargs/Varargs.java:35:25
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   ;; varargs.Varargs.$clinit();
@@ -140,6 +147,7 @@
 (func $m_main__void@varargs.Varargs
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ varargs/Varargs.java:39:14
  (local $v (ref null $varargs.Varargs))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal_1 (ref null $javaemul.internal.WasmArray.OfObject))
@@ -222,6 +230,7 @@
 
 ;;; void Varargs.$clinit()
 (func $$clinit__void@varargs.Varargs
+ ;;@ varargs/Varargs.java:20:13
  (block
   ;; if (varargs.Varargs.$initialized) return;
   ;;@ varargs/Varargs.java:20:13
@@ -278,6 +287,7 @@
 (func $m_<init>__@varargs.Child
  (param $this (ref null $varargs.Child))
  (result (ref null $varargs.Child))
+ ;;@ varargs/Varargs.java:52:9
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block
   ;; varargs.Child.$clinit();
@@ -298,6 +308,7 @@
 
 ;;; void Child.$clinit()
 (func $$clinit__void@varargs.Child
+ ;;@ varargs/Varargs.java:51:6
  (block
   ;; if (varargs.Child.$initialized) return;
   ;;@ varargs/Varargs.java:51:6

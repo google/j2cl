@@ -107,6 +107,7 @@
 (func $m_<init>__@cast.CastGenerics
  (param $this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics))
+ ;;@ cast/CastGenerics.java:18:13
  (block
   ;; cast.CastGenerics.$clinit();
   ;;@ cast/CastGenerics.java:18:13
@@ -125,6 +126,7 @@
  (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:21:4
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block
@@ -137,6 +139,7 @@
 
 ;;; void CastGenerics.testErasureCast()
 (func $m_testErasureCast__void@cast.CastGenerics
+ ;;@ cast/CastGenerics.java:47:52
  (local $str (ref null $java.lang.String))
  (local $$qualifier (ref null $cast.CastGenerics))
  (local $containerT (ref null $cast.CastGenerics.Container))
@@ -311,6 +314,7 @@
 
 ;;; void CastGenerics.testCastToParamterizedType()
 (func $m_testCastToParamterizedType__void@cast.CastGenerics
+ ;;@ cast/CastGenerics.java:84:21
  (local $o (ref null $java.lang.Object))
  (local $cc (ref null $cast.CastGenerics))
  (block
@@ -333,6 +337,7 @@
 (func $m_testCastToTypeVariable__void@cast.CastGenerics
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:90:14
  (local $o (ref null $java.lang.Object))
  (local $e (ref null $java.lang.Number))
  (local $t (ref null $java.lang.Object))
@@ -364,6 +369,7 @@
 (func $m_testCastToMethodTypeVariable__void@cast.CastGenerics
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:98:37
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
  (local $c (ref null $java.lang.Object))
@@ -393,6 +399,7 @@
 (func $m_outerGenericMethod__void@cast.CastGenerics
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:110:32
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block
@@ -406,6 +413,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:122:45
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.CastGenerics.rtt)))
  (block
@@ -430,6 +438,7 @@
 ;;; Foo<T> CastGenerics.doSomething()
 (func $m_doSomething__cast_CastGenerics_Foo@cast.CastGenerics
  (result (ref null $cast.CastGenerics.Foo))
+ ;;@ cast/CastGenerics.java:130:27
  (block
   ;; cast.CastGenerics.$clinit();
   ;;@ cast/CastGenerics.java:130:41
@@ -442,6 +451,7 @@
 
 ;;; void CastGenerics.$clinit()
 (func $$clinit__void@cast.CastGenerics
+ ;;@ cast/CastGenerics.java:18:13
  (block
   ;; if (cast.CastGenerics.$initialized) return;
   ;;@ cast/CastGenerics.java:18:13
@@ -482,6 +492,7 @@
 
 ;;; void A.$clinit()
 (func $$clinit__void@cast.CastGenerics.A
+ ;;@ cast/CastGenerics.java:25:12
  (block
   ;; if (cast.CastGenerics.A.$initialized) return;
   ;;@ cast/CastGenerics.java:25:12
@@ -516,6 +527,7 @@
 
 ;;; void B.$clinit()
 (func $$clinit__void@cast.CastGenerics.B
+ ;;@ cast/CastGenerics.java:29:12
  (block
   ;; if (cast.CastGenerics.B.$initialized) return;
   ;;@ cast/CastGenerics.java:29:12
@@ -562,6 +574,7 @@
 (func $m_<init>__@cast.CastGenerics.BaseImplementor
  (param $this (ref null $cast.CastGenerics.BaseImplementor))
  (result (ref null $cast.CastGenerics.BaseImplementor))
+ ;;@ cast/CastGenerics.java:33:32
  (block
   ;; cast.CastGenerics.BaseImplementor.$clinit();
   ;;@ cast/CastGenerics.java:33:32
@@ -577,6 +590,7 @@
 
 ;;; void BaseImplementor.$clinit()
 (func $$clinit__void@cast.CastGenerics.BaseImplementor
+ ;;@ cast/CastGenerics.java:33:32
  (block
   ;; if (cast.CastGenerics.BaseImplementor.$initialized) return;
   ;;@ cast/CastGenerics.java:33:32
@@ -617,6 +631,7 @@
 (func $m_<init>__@cast.CastGenerics.Implementor
  (param $this (ref null $cast.CastGenerics.Implementor))
  (result (ref null $cast.CastGenerics.Implementor))
+ ;;@ cast/CastGenerics.java:35:23
  (block
   ;; BaseImplementor.this.BaseImplementor.<init>();
   ;;@ cast/CastGenerics.java:35:23
@@ -631,6 +646,7 @@
 (func $m_mA__void@cast.CastGenerics.Implementor
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:36:16
  (local $this (ref null $cast.CastGenerics.Implementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.CastGenerics.Implementor.rtt)))
  (block
@@ -642,6 +658,7 @@
 (func $m_mB__void@cast.CastGenerics.Implementor
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:38:16
  (local $this (ref null $cast.CastGenerics.Implementor))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.CastGenerics.Implementor.rtt)))
  (block
@@ -651,6 +668,7 @@
 
 ;;; void Implementor.$clinit()
 (func $$clinit__void@cast.CastGenerics.Implementor
+ ;;@ cast/CastGenerics.java:35:23
  (block
   ;; if (cast.CastGenerics.Implementor.$initialized) return;
   ;;@ cast/CastGenerics.java:35:23
@@ -704,6 +722,7 @@
 (func $m_<init>__@cast.CastGenerics.Container
  (param $this (ref null $cast.CastGenerics.Container))
  (result (ref null $cast.CastGenerics.Container))
+ ;;@ cast/CastGenerics.java:41:23
  (block
   ;; Object.this.Object.<init>();
   ;;@ cast/CastGenerics.java:41:23
@@ -719,6 +738,7 @@
  (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:42:6
  (local $this (ref null $cast.CastGenerics.Container))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.CastGenerics.Container.rtt)))
  (block
@@ -731,6 +751,7 @@
 
 ;;; void Container.$clinit()
 (func $$clinit__void@cast.CastGenerics.Container
+ ;;@ cast/CastGenerics.java:41:23
  (block
   ;; if (cast.CastGenerics.Container.$initialized) return;
   ;;@ cast/CastGenerics.java:41:23
@@ -785,6 +806,7 @@
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $$outer_this (ref null $cast.CastGenerics))
  (result (ref null $cast.CastGenerics.1Nested))
+ ;;@ cast/CastGenerics.java:111:10
  (block
   ;; cast.CastGenerics.1Nested.$clinit();
   ;;@ cast/CastGenerics.java:111:10
@@ -805,6 +827,7 @@
 (func $m_nestedGenericMethod__java_lang_Object__void_$p_cast_CastGenerics_1Nested@cast.CastGenerics.1Nested
  (param $this (ref null $cast.CastGenerics.1Nested))
  (param $o (ref null $java.lang.Object))
+ ;;@ cast/CastGenerics.java:112:19
  (local $t (ref null $java.lang.Enum))
  (block
   ;; TT t = ((TT) o);
@@ -815,6 +838,7 @@
 
 ;;; void Nested.$clinit()
 (func $$clinit__void@cast.CastGenerics.1Nested
+ ;;@ cast/CastGenerics.java:111:10
  (block
   ;; if (cast.CastGenerics.1Nested.$initialized) return;
   ;;@ cast/CastGenerics.java:111:10
@@ -854,6 +878,7 @@
 
 ;;; void Empty1.$clinit()
 (func $$clinit__void@cast.CastGenerics.Empty1
+ ;;@ cast/CastGenerics.java:118:12
  (block
   ;; if (cast.CastGenerics.Empty1.$initialized) return;
   ;;@ cast/CastGenerics.java:118:12
@@ -887,6 +912,7 @@
 
 ;;; void Empty2.$clinit()
 (func $$clinit__void@cast.CastGenerics.Empty2
+ ;;@ cast/CastGenerics.java:120:12
  (block
   ;; if (cast.CastGenerics.Empty2.$initialized) return;
   ;;@ cast/CastGenerics.java:120:12
@@ -933,6 +959,7 @@
 (func $m_<init>__@cast.CastGenerics.1
  (param $this (ref null $cast.CastGenerics.1))
  (result (ref null $cast.CastGenerics.1))
+ ;;@ cast/CastGenerics.java:131:24
  (block
   ;; cast.CastGenerics.1.$clinit();
   ;;@ cast/CastGenerics.java:131:24
@@ -948,6 +975,7 @@
 
 ;;; void <anonymous> extends Foo<T>.$clinit()
 (func $$clinit__void@cast.CastGenerics.1
+ ;;@ cast/CastGenerics.java:131:24
  (block
   ;; if (cast.CastGenerics.1.$initialized) return;
   ;;@ cast/CastGenerics.java:131:24
@@ -1000,6 +1028,7 @@
 (func $m_<init>__@cast.CastGenerics.Foo
  (param $this (ref null $cast.CastGenerics.Foo))
  (result (ref null $cast.CastGenerics.Foo))
+ ;;@ cast/CastGenerics.java:134:22
  (block
   ;; cast.CastGenerics.Foo.$clinit();
   ;;@ cast/CastGenerics.java:134:22
@@ -1015,6 +1044,7 @@
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@cast.CastGenerics.Foo
+ ;;@ cast/CastGenerics.java:134:22
  (block
   ;; if (cast.CastGenerics.Foo.$initialized) return;
   ;;@ cast/CastGenerics.java:134:22
@@ -1072,6 +1102,7 @@
 (func $m_<init>__@cast.CastPrimitives
  (param $this (ref null $cast.CastPrimitives))
  (result (ref null $cast.CastPrimitives))
+ ;;@ cast/CastPrimitives.java:18:13
  (block
   ;; cast.CastPrimitives.$clinit();
   ;;@ cast/CastPrimitives.java:18:13
@@ -1089,6 +1120,7 @@
 (func $m_testPrimitiveCasts__void@cast.CastPrimitives
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastPrimitives.java:19:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1275,6 +1307,7 @@
 (func $m_testReferenceToPrimitive__void@cast.CastPrimitives
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastPrimitives.java:85:14
  (local $o (ref null $java.lang.Object))
  (local $bool i32)
  (local $$qualifier (ref null $java.lang.Boolean))
@@ -1354,6 +1387,7 @@
 (func $m_testUnboxAndWiden__void@cast.CastPrimitives
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastPrimitives.java:97:14
  (local $boxedByte (ref null $java.lang.Byte))
  (local $s i32)
  (local $i i32)
@@ -1389,6 +1423,7 @@
 (func $m_testImplicitArgumentCasts__void@cast.CastPrimitives
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastPrimitives.java:108:14
  (local $b i32)
  (local $c i32)
  (local $s i32)
@@ -1470,6 +1505,7 @@
 (func $m_getShort__short__short@cast.CastPrimitives
  (param $value i32)
  (result i32)
+ ;;@ cast/CastPrimitives.java:137:23
  (block
   ;; return value;
   ;;@ cast/CastPrimitives.java:138:4
@@ -1481,6 +1517,7 @@
 (func $m_getInt__int__int@cast.CastPrimitives
  (param $value i32)
  (result i32)
+ ;;@ cast/CastPrimitives.java:141:21
  (block
   ;; return value;
   ;;@ cast/CastPrimitives.java:142:4
@@ -1492,6 +1529,7 @@
 (func $m_getLong__long__long@cast.CastPrimitives
  (param $value i64)
  (result i64)
+ ;;@ cast/CastPrimitives.java:145:22
  (block
   ;; return value;
   ;;@ cast/CastPrimitives.java:146:4
@@ -1503,6 +1541,7 @@
 (func $m_getFloat__float__float@cast.CastPrimitives
  (param $value f32)
  (result f32)
+ ;;@ cast/CastPrimitives.java:149:23
  (block
   ;; return value;
   ;;@ cast/CastPrimitives.java:150:4
@@ -1514,6 +1553,7 @@
 (func $m_getDouble__double__double@cast.CastPrimitives
  (param $value f64)
  (result f64)
+ ;;@ cast/CastPrimitives.java:153:24
  (block
   ;; return value;
   ;;@ cast/CastPrimitives.java:154:4
@@ -1525,6 +1565,7 @@
 (func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/CastPrimitives.java:165:14
  (local $fbyte i32)
  (local $fchar i32)
  (local $fshort i32)
@@ -1625,6 +1666,7 @@
 
 ;;; void CastPrimitives.$clinit()
 (func $$clinit__void@cast.CastPrimitives
+ ;;@ cast/CastPrimitives.java:18:13
  (block
   ;; if (cast.CastPrimitives.$initialized) return;
   ;;@ cast/CastPrimitives.java:18:13
@@ -1678,6 +1720,7 @@
  (param $this (ref null $cast.CastPrimitives.IntValueHolder))
  (param $value i32)
  (result (ref null $cast.CastPrimitives.IntValueHolder))
+ ;;@ cast/CastPrimitives.java:158:4
  (block
   ;; cast.CastPrimitives.IntValueHolder.$clinit();
   ;;@ cast/CastPrimitives.java:158:30
@@ -1693,6 +1736,7 @@
 
 ;;; void IntValueHolder.$clinit()
 (func $$clinit__void@cast.CastPrimitives.IntValueHolder
+ ;;@ cast/CastPrimitives.java:157:23
  (block
   ;; if (cast.CastPrimitives.IntValueHolder.$initialized) return;
   ;;@ cast/CastPrimitives.java:157:23
@@ -1746,6 +1790,7 @@
  (param $this (ref null $cast.CastPrimitives.LongValueHolder))
  (param $value i64)
  (result (ref null $cast.CastPrimitives.LongValueHolder))
+ ;;@ cast/CastPrimitives.java:162:4
  (block
   ;; cast.CastPrimitives.LongValueHolder.$clinit();
   ;;@ cast/CastPrimitives.java:162:32
@@ -1761,6 +1806,7 @@
 
 ;;; void LongValueHolder.$clinit()
 (func $$clinit__void@cast.CastPrimitives.LongValueHolder
+ ;;@ cast/CastPrimitives.java:161:23
  (block
   ;; if (cast.CastPrimitives.LongValueHolder.$initialized) return;
   ;;@ cast/CastPrimitives.java:161:23
@@ -1820,6 +1866,7 @@
 (func $m_<init>__@cast.Casts
  (param $this (ref null $cast.Casts))
  (result (ref null $cast.Casts))
+ ;;@ cast/Casts.java:20:13
  (block
   ;; cast.Casts.$clinit();
   ;;@ cast/Casts.java:20:13
@@ -1837,6 +1884,7 @@
 (func $m_testCastToClass__void@cast.Casts
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:22:14
  (local $o (ref null $java.lang.Object))
  (local $c (ref null $cast.Casts))
  (local $this (ref null $cast.Casts))
@@ -1856,6 +1904,7 @@
 (func $m_testCasToInterface__void@cast.Casts
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:27:14
  (local $o (ref null $java.lang.Object))
  (local $s (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
@@ -1875,6 +1924,7 @@
 (func $m_testCastToBoxedType__void@cast.Casts
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:32:14
  (local $o (ref null $java.lang.Object))
  (local $b (ref null $java.lang.Byte))
  (local $d (ref null $java.lang.Double))
@@ -1926,6 +1976,7 @@
 (func $m_testCastToArray__void@cast.Casts
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:45:14
  (local $foo (ref null $java.lang.Object))
  (local $bar (ref null $java.lang.Object))
  (local $this (ref null $cast.Casts))
@@ -1944,6 +1995,7 @@
 ;;; void Casts.functionForInstanceofTest()
 (func $m_functionForInstanceofTest__void_$p_cast_Casts@cast.Casts
  (param $this (ref null $cast.Casts))
+ ;;@ cast/Casts.java:50:15
  (block
  )
 )
@@ -1952,6 +2004,7 @@
 (func $m_testCastObjectAfterInstanceOf__void@cast.Casts
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:52:14
  (local $o (ref null $java.lang.Object))
  (local $c (ref null $cast.Casts))
  (local $cAvoidsCastsTo (ref null $cast.Casts))
@@ -2055,6 +2108,7 @@
 (func $m_testCastFieldAfterInstanceOf__void@cast.Casts
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:88:14
  (local $foo (ref null $cast.Casts.Foo))
  (local $c (ref null $cast.Casts))
  (local $cAvoidsCastsTo (ref null $cast.Casts))
@@ -2139,6 +2193,7 @@
 (func $m_testCaseMethodAfterInstanceOf__void@cast.Casts
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:110:14
  (local $foo (ref null $cast.Casts.Foo))
  (local $cNotAvoidCastsTo (ref null $cast.Casts))
  (local $this (ref null $cast.Casts))
@@ -2164,6 +2219,7 @@
 
 ;;; void Casts.$clinit()
 (func $$clinit__void@cast.Casts
+ ;;@ cast/Casts.java:20:13
  (block
   ;; if (cast.Casts.$initialized) return;
   ;;@ cast/Casts.java:20:13
@@ -2220,6 +2276,7 @@
  (param $this (ref null $cast.Casts.Foo))
  (param $$outer_this (ref null $cast.Casts))
  (result (ref null $cast.Casts.Foo))
+ ;;@ cast/Casts.java:80:16
  (block
   ;; cast.Casts.Foo.$clinit();
   ;;@ cast/Casts.java:80:16
@@ -2244,6 +2301,7 @@
  (type $function.__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
+ ;;@ cast/Casts.java:83:18
  (local $this (ref null $cast.Casts.Foo))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $cast.Casts.Foo.rtt)))
  (block
@@ -2257,6 +2315,7 @@
 ;;; void Foo.$init()
 (func $$init__void_$p_cast_Casts_Foo@cast.Casts.Foo
  (param $this (ref null $cast.Casts.Foo))
+ ;;@ cast/Casts.java:80:16
  (block
   ;; (Foo.this.field = new Object.<init>());
   ;;@ cast/Casts.java:81:4
@@ -2266,6 +2325,7 @@
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@cast.Casts.Foo
+ ;;@ cast/Casts.java:80:16
  (block
   ;; if (cast.Casts.Foo.$initialized) return;
   ;;@ cast/Casts.java:80:16

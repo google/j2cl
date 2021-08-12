@@ -35,6 +35,7 @@
 (func $m_<init>__@jsinnerclass.Main
  (param $this (ref null $jsinnerclass.Main))
  (result (ref null $jsinnerclass.Main))
+ ;;@ jsinnerclass/Main.java:20:13
  (block
   ;; jsinnerclass.Main.$clinit();
   ;;@ jsinnerclass/Main.java:20:13
@@ -51,6 +52,7 @@
 ;;; void Main.main(String... args)
 (func $m_main__arrayOf_java_lang_String__void@jsinnerclass.Main
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
+ ;;@ jsinnerclass/Main.java:42:21
  (block
   ;; jsinnerclass.Main.$clinit();
   ;;@ jsinnerclass/Main.java:42:42
@@ -60,6 +62,7 @@
 
 ;;; void Main.$clinit()
 (func $$clinit__void@jsinnerclass.Main
+ ;;@ jsinnerclass/Main.java:20:13
  (block
   ;; if (jsinnerclass.Main.$initialized) return;
   ;;@ jsinnerclass/Main.java:20:13
@@ -114,6 +117,7 @@
 (func $m_<init>__@jsinnerclass.Main.Outer
  (param $this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer))
+ ;;@ jsinnerclass/Main.java:21:15
  (block
   ;; jsinnerclass.Main.Outer.$clinit();
   ;;@ jsinnerclass/Main.java:21:15
@@ -135,6 +139,7 @@
  (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
+ ;;@ jsinnerclass/Main.java:37:15
  (local $$qualifier (ref null $jsinnerclass.Main.Outer.Inner))
  (local $this (ref null $jsinnerclass.Main.Outer))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.rtt)))
@@ -152,6 +157,7 @@
 ;;; void Outer.$init()
 (func $$init__void_$p_jsinnerclass_Main_Outer@jsinnerclass.Main.Outer
  (param $this (ref null $jsinnerclass.Main.Outer))
+ ;;@ jsinnerclass/Main.java:21:15
  (block
   ;; (Outer.this.a = 2);
   ;;@ jsinnerclass/Main.java:22:4
@@ -161,6 +167,7 @@
 
 ;;; void Outer.$clinit()
 (func $$clinit__void@jsinnerclass.Main.Outer
+ ;;@ jsinnerclass/Main.java:21:15
  (block
   ;; if (jsinnerclass.Main.Outer.$initialized) return;
   ;;@ jsinnerclass/Main.java:21:15
@@ -217,6 +224,7 @@
  (param $this (ref null $jsinnerclass.Main.Outer.Inner))
  (param $$outer_this (ref null $jsinnerclass.Main.Outer))
  (result (ref null $jsinnerclass.Main.Outer.Inner))
+ ;;@ jsinnerclass/Main.java:28:13
  (block
   ;; jsinnerclass.Main.Outer.Inner.$clinit();
   ;;@ jsinnerclass/Main.java:28:21
@@ -241,6 +249,7 @@
  (type $function.__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
+ ;;@ jsinnerclass/Main.java:32:17
  (local $this (ref null $jsinnerclass.Main.Outer.Inner))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsinnerclass.Main.Outer.Inner.rtt)))
  (block
@@ -253,6 +262,7 @@
 
 ;;; void Inner.$clinit()
 (func $$clinit__void@jsinnerclass.Main.Outer.Inner
+ ;;@ jsinnerclass/Main.java:25:17
  (block
   ;; if (jsinnerclass.Main.Outer.Inner.$initialized) return;
   ;;@ jsinnerclass/Main.java:25:17

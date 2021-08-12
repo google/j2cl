@@ -436,20 +436,19 @@ class StatementTranspiler {
 
     if (!(statement instanceof Block)) {
       renderFirstLineAsComment(statement, builder);
-      renderSourceMappingComment(statement, builder);
+      renderSourceMappingComment(statement.getSourcePosition(), builder);
     }
     statement.accept(new SourceTransformer());
   }
 
-  private static void renderSourceMappingComment(Statement statement, SourceBuilder builder) {
-    SourcePosition sourcePosition = statement.getSourcePosition();
+  public static void renderSourceMappingComment(
+      SourcePosition sourcePosition, SourceBuilder builder) {
     if (sourcePosition != SourcePosition.NONE) {
-      String filePath = sourcePosition.getPackageRelativePath();
       builder.newLine();
       builder.append(
           String.format(
               ";;@ %s:%d:%d",
-              filePath,
+              sourcePosition.getPackageRelativePath(),
               // Lines and column are zero based, but DevTools expects lines to be 1-based and
               // columns to be zeor based.
               sourcePosition.getStartFilePosition().getLine() + 1,

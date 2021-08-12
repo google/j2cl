@@ -339,6 +339,10 @@ public class WasmModuleGenerator {
       return;
     }
 
+    // Emit a source mapping at the entry of a method so that when stepping into a method
+    // the debugger shows the right source line.
+    StatementTranspiler.renderSourceMappingComment(method.getSourcePosition(), builder);
+
     // Emit locals.
     for (Variable variable : collectLocals(method)) {
       builder.newLine();

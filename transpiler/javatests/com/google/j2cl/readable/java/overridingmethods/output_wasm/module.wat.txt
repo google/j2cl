@@ -20,6 +20,7 @@
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void@overridingmethods.SomeInterface
+ ;;@ overridingmethods/Child.java:18:10
  (block
   ;; if (overridingmethods.SomeInterface.$initialized) return;
   ;;@ overridingmethods/Child.java:18:10
@@ -67,6 +68,7 @@
 (func $m_<init>__@overridingmethods.Parent
  (param $this (ref null $overridingmethods.Parent))
  (result (ref null $overridingmethods.Parent))
+ ;;@ overridingmethods/Child.java:22:6
  (block
   ;; overridingmethods.Parent.$clinit();
   ;;@ overridingmethods/Child.java:22:6
@@ -84,6 +86,7 @@
 (func $m_fun__void@overridingmethods.Parent
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ overridingmethods/Child.java:23:14
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Parent.rtt)))
  (block
@@ -93,6 +96,7 @@
 
 ;;; void Parent.$clinit()
 (func $$clinit__void@overridingmethods.Parent
+ ;;@ overridingmethods/Child.java:22:6
  (block
   ;; if (overridingmethods.Parent.$initialized) return;
   ;;@ overridingmethods/Child.java:22:6
@@ -147,6 +151,7 @@
 (func $m_<init>__@overridingmethods.Child
  (param $this (ref null $overridingmethods.Child))
  (result (ref null $overridingmethods.Child))
+ ;;@ overridingmethods/Child.java:26:13
  (block
   ;; overridingmethods.Child.$clinit();
   ;;@ overridingmethods/Child.java:26:13
@@ -164,6 +169,7 @@
 (func $m_fun__void@overridingmethods.Child
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ overridingmethods/Child.java:28:14
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
  (block
@@ -175,6 +181,7 @@
 (func $m_bar__void@overridingmethods.Child
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ overridingmethods/Child.java:31:14
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overridingmethods.Child.rtt)))
  (block
@@ -184,6 +191,7 @@
 
 ;;; void Child.$clinit()
 (func $$clinit__void@overridingmethods.Child
+ ;;@ overridingmethods/Child.java:26:13
  (block
   ;; if (overridingmethods.Child.$initialized) return;
   ;;@ overridingmethods/Child.java:26:13

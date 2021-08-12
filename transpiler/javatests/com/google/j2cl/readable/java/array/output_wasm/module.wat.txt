@@ -52,6 +52,7 @@
 (func $m_<init>__@array.Arrays
  (param $this (ref null $array.Arrays))
  (result (ref null $array.Arrays))
+ ;;@ array/Arrays.java:22:13
  (block
   ;; array.Arrays.$clinit();
   ;;@ array/Arrays.java:22:13
@@ -69,6 +70,7 @@
 (func $m_testObjectArray__void@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:23:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -149,6 +151,7 @@
 (func $m_testJavaTypeArray__void@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:43:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objects2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -229,6 +232,7 @@
 (func $m_testIntArrays__void_$pp_array@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:61:7
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (local $ints2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -309,6 +313,7 @@
 (func $m_testLongArrays__void_$pp_array@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:79:7
  (local $longs (ref null $javaemul.internal.WasmArray.OfLong))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfLong))
  (local $longs2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -389,6 +394,7 @@
 (func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:98:7
  (local $booleans (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $booleans2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -477,6 +483,7 @@
 (func $m_testStringArrays__void_$pp_array@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:116:7
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $strings2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -557,6 +564,7 @@
 (func $m_testNativeArray__void@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:137:14
  (local $nativeObjects (ref null $javaemul.internal.WasmArray.OfObject))
  (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $nativeObjects2d (ref null $javaemul.internal.WasmArray.OfObject))
@@ -637,6 +645,7 @@
 (func $m_testErasureCastsOnArrayAccess__void@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:155:14
  (local $container (ref null $array.Arrays.ArrayContainer))
  (local $s (ref null $java.lang.String))
  (local $this (ref null $array.Arrays))
@@ -656,6 +665,7 @@
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
  (type $function.__$void)
  (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:164:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block
@@ -674,6 +684,7 @@
  (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:169:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block
@@ -686,6 +697,7 @@
  (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:171:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $array.Arrays.rtt)))
  (block
@@ -695,6 +707,7 @@
 
 ;;; void Arrays.$clinit()
 (func $$clinit__void@array.Arrays
+ ;;@ array/Arrays.java:22:13
  (block
   ;; if (array.Arrays.$initialized) return;
   ;;@ array/Arrays.java:22:13
@@ -749,6 +762,7 @@
  (param $this (ref null $array.Arrays.SomeObject))
  (param $$outer_this (ref null $array.Arrays))
  (result (ref null $array.Arrays.SomeObject))
+ ;;@ array/Arrays.java:41:16
  (block
   ;; (SomeObject.this.this = $outer_this);
   ;;@ array/Arrays.java:41:16
@@ -764,6 +778,7 @@
 
 ;;; void SomeObject.$clinit()
 (func $$clinit__void@array.Arrays.SomeObject
+ ;;@ array/Arrays.java:41:16
  (block
   ;; if (array.Arrays.SomeObject.$initialized) return;
   ;;@ array/Arrays.java:41:16
@@ -816,6 +831,7 @@
 (func $m_<init>__@array.Arrays.NativeType
  (param $this (ref null $array.Arrays.NativeType))
  (result (ref null $array.Arrays.NativeType))
+ ;;@ array/Arrays.java:135:23
  (block
   ;; array.Arrays.NativeType.$clinit();
   ;;@ array/Arrays.java:135:23
@@ -831,6 +847,7 @@
 
 ;;; void NativeType.$clinit()
 (func $$clinit__void@array.Arrays.NativeType
+ ;;@ array/Arrays.java:135:23
  (block
   ;; if (array.Arrays.NativeType.$initialized) return;
   ;;@ array/Arrays.java:135:23
@@ -884,6 +901,7 @@
 (func $m_<init>__@array.Arrays.ArrayContainer
  (param $this (ref null $array.Arrays.ArrayContainer))
  (result (ref null $array.Arrays.ArrayContainer))
+ ;;@ array/Arrays.java:160:23
  (block
   ;; Object.this.Object.<init>();
   ;;@ array/Arrays.java:160:23
@@ -896,6 +914,7 @@
 
 ;;; void ArrayContainer.$clinit()
 (func $$clinit__void@array.Arrays.ArrayContainer
+ ;;@ array/Arrays.java:160:23
  (block
   ;; if (array.Arrays.ArrayContainer.$initialized) return;
   ;;@ array/Arrays.java:160:23

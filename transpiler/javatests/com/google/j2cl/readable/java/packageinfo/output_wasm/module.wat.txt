@@ -35,6 +35,7 @@
 (func $m_<init>__@packageinfo.Outer
  (param $this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer))
+ ;;@ packageinfo/Outer.java:21:13
  (block
   ;; packageinfo.Outer.$clinit();
   ;;@ packageinfo/Outer.java:21:13
@@ -50,6 +51,7 @@
 
 ;;; void Outer.$clinit()
 (func $$clinit__void@packageinfo.Outer
+ ;;@ packageinfo/Outer.java:21:13
  (block
   ;; if (packageinfo.Outer.$initialized) return;
   ;;@ packageinfo/Outer.java:21:13
@@ -104,6 +106,7 @@
  (param $this (ref null $packageinfo.Outer.Inner))
  (param $$outer_this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer.Inner))
+ ;;@ packageinfo/Outer.java:24:15
  (block
   ;; packageinfo.Outer.Inner.$clinit();
   ;;@ packageinfo/Outer.java:24:15
@@ -122,6 +125,7 @@
 
 ;;; void Inner.$clinit()
 (func $$clinit__void@packageinfo.Outer.Inner
+ ;;@ packageinfo/Outer.java:24:15
  (block
   ;; if (packageinfo.Outer.Inner.$initialized) return;
   ;;@ packageinfo/Outer.java:24:15
@@ -175,6 +179,7 @@
 (func $m_<init>__@packageinfo.subpackage.Foo
  (param $this (ref null $packageinfo.subpackage.Foo))
  (result (ref null $packageinfo.subpackage.Foo))
+ ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
   ;; packageinfo.subpackage.Foo.$clinit();
   ;;@ packageinfo/subpackage/Foo.java:20:13
@@ -194,6 +199,7 @@
 ;;; void Foo.$init()
 (func $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo
  (param $this (ref null $packageinfo.subpackage.Foo))
+ ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
   ;; (Foo.this.outer = new Outer.<init>());
   ;;@ packageinfo/subpackage/Foo.java:22:2
@@ -203,6 +209,7 @@
 
 ;;; void Foo.$clinit()
 (func $$clinit__void@packageinfo.subpackage.Foo
+ ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
   ;; if (packageinfo.subpackage.Foo.$initialized) return;
   ;;@ packageinfo/subpackage/Foo.java:20:13
