@@ -29,10 +29,9 @@ public class Nullability {
           "org.jspecify.nullness.NullnessUnspecified",
           // Annotations supported by Checker Framework. J2CL currently supports the full list of
           // Nullable and NonNull annotations supported by Checker Framework
-          // (see https://checkerframework.org/manual/#nullness-related-work). It is important to
-          // convey accurate nullability information so that users that write JavaScript code
-          // against JAva code compiled by J2CL are not mislead and don't assume that null checks
-          // can be avoided when they should not.
+          // (see https://checkerframework.org/manual/#nullness-related-work). This is important
+          // until users stop using the Checker Framework for the static checking. (Otherwise the
+          // JavaScript code interacting with Java will not be null-checked correctly).
           "android.annotation.Nullable",
           "android.support.annotation.Nullable",
           "androidx.annotation.Nullable",
