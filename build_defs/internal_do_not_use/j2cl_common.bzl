@@ -161,8 +161,10 @@ def _java_compile(
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
 
     default_j2cl_javac_opts = [
-        # Avoid log site injection which introduces calls to unsupported APIs
+        # Avoid log site injection which introduces calls to unsupported APIs.
         "-XDinjectLogSites=false",
+        # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
+        "-XDstringConcat=inline",
     ]
 
     # Use find_java_toolchain / find_java_runtime_toolchain after the next Bazel release,

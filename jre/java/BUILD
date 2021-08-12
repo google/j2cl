@@ -26,9 +26,14 @@ JRE_JAVAC_VERSION_OPTS = select({
         # We need this to compile JRE otherwise it will result in a split package for JRE sources.
         "--system",
         "none",
+        # Make sure java.base could be redefined, since we are redeclaring files for java.base.
+        "--patch-module",
+        "java.base=.",
         # Allow JRE classes are allowed to depend on the jsinterop annotations
         "--add-reads",
         "java.base=ALL-UNNAMED",
+        # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
+        "-XDstringConcat=inline",
         # Enable Java 11 for the JRE sources
         "-source",
         "11",
@@ -171,23 +176,48 @@ jdk_system(
     bootclasspath = ":jre_bootclasspath-j2wasm",
 )
 
-JAVA_VERSION = select({
-    ":experimental_java11_support": "11",
-    "//conditions:default": "8",
-})
+default_java_toolchain(
+    name = "j2cl_java_toolchain_8",
+    bootclasspath = [":jdk_system"],
+    source_version = "8",
+    target_version = "8",
+)
 
 default_java_toolchain(
-    name = "j2cl_java_toolchain",
+    name = "j2cl_java_toolchain_11",
     bootclasspath = [":jdk_system"],
-    source_version = JAVA_VERSION,
-    target_version = JAVA_VERSION,
+    source_version = "11",
+    target_version = "11",
+)
+
+alias(
+    name = "j2cl_java_toolchain",
+    actual = select({
+        ":experimental_java11_support": ":j2cl_java_toolchain_11",
+        "//conditions:default": ":j2cl_java_toolchain_8",
+    }),
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )
 
 default_java_toolchain(
-    name = "j2wasm_java_toolchain",
+    name = "j2wasm_java_toolchain_8",
     bootclasspath = [":jdk_system-j2wasm"],
-    source_version = JAVA_VERSION,
-    target_version = JAVA_VERSION,
+    source_version = "8",
+    target_version = "8",
+)
+
+default_java_toolchain(
+    name = "j2wasm_java_toolchain_11",
+    bootclasspath = [":jdk_system-j2wasm"],
+    source_version = "11",
+    target_version = "11",
+)
+
+alias(
+    name = "j2wasm_java_toolchain",
+    actual = select({
+        ":experimental_java11_support": ":j2wasm_java_toolchain_11",
+        "//conditions:default": ":j2wasm_java_toolchain_8",
+    }),
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
 )
