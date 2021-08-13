@@ -5,6 +5,20 @@
 (global $f_FOO__staticconstant_StaticConstant i32 (i32.const 1))
 (global $f_$initialized__staticconstant_StaticConstant (mut i32) (i32.const 0))
 
+ ;;; Code for staticconstant.StaticConstant [vtable.init]
+ (global.set $staticconstant.StaticConstant.vtable
+  (struct.new_with_rtt $staticconstant.StaticConstant.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@staticconstant.StaticConstant)
+   (rtt.canon $staticconstant.StaticConstant.vtable)
+  )
+ )
+
+ ;;; Code for staticconstant.StaticConstant [itable.init]
+ (global.set $staticconstant.StaticConstant.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for staticconstant.StaticConstant [CLASS]
 (type $staticconstant.StaticConstant (struct
  (field $vtable (ref $staticconstant.StaticConstant.vtable)) (field $itable (ref $itable))
@@ -73,17 +87,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@staticconstant.StaticConstant)
-
- ;;; Code for staticconstant.StaticConstant [vtable.init]
- (global.set $staticconstant.StaticConstant.vtable
-  (struct.new_with_rtt $staticconstant.StaticConstant.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@staticconstant.StaticConstant)
-   (rtt.canon $staticconstant.StaticConstant.vtable)
-  )
- )
-
- ;;; Code for staticconstant.StaticConstant [itable.init]
- (global.set $staticconstant.StaticConstant.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

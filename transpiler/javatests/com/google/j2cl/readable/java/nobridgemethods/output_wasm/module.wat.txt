@@ -31,6 +31,70 @@
 ;;; Code for nobridgemethods.CharSet.1 [static fields]
 (global $f_$initialized__nobridgemethods_CharSet_1 (mut i32) (i32.const 0))
 
+ ;;; Code for nobridgemethods.TreeMap [vtable.init]
+ (global.set $nobridgemethods.TreeMap.vtable
+  (struct.new_with_rtt $nobridgemethods.TreeMap.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap)
+   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
+   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
+   (rtt.canon $nobridgemethods.TreeMap.vtable)
+  )
+ )
+
+ ;;; Code for nobridgemethods.TreeMap [itable.init]
+ (global.set $nobridgemethods.TreeMap.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for nobridgemethods.TreeMap.InnerEntry [vtable.init]
+ (global.set $nobridgemethods.TreeMap.InnerEntry.vtable
+  (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
+   (rtt.canon $nobridgemethods.TreeMap.InnerEntry.vtable)
+  )
+ )
+
+ ;;; Code for nobridgemethods.TreeMap.InnerEntry [itable.init]
+ (global.set $nobridgemethods.TreeMap.InnerEntry.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $nobridgemethods.TreeMap.InnerEntry.itable) (i32.const 0)
+ (struct.new_with_rtt $nobridgemethods.Entry.vtable
+  (rtt.canon $nobridgemethods.Entry.vtable)
+ ))
+
+ ;;; Code for nobridgemethods.CharSet [vtable.init]
+ (global.set $nobridgemethods.CharSet.vtable
+  (struct.new_with_rtt $nobridgemethods.CharSet.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet)
+   (rtt.canon $nobridgemethods.CharSet.vtable)
+  )
+ )
+
+ ;;; Code for nobridgemethods.CharSet [itable.init]
+ (global.set $nobridgemethods.CharSet.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for nobridgemethods.CharSet.1 [vtable.init]
+ (global.set $nobridgemethods.CharSet.1.vtable
+  (struct.new_with_rtt $nobridgemethods.CharSet.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1)
+   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
+   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
+   (rtt.canon $nobridgemethods.CharSet.1.vtable)
+  )
+ )
+
+ ;;; Code for nobridgemethods.CharSet.1 [itable.init]
+ (global.set $nobridgemethods.CharSet.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for nobridgemethods.Entry [INTERFACE]
 (type $nobridgemethods.Entry.vtable (struct
 ))
@@ -449,67 +513,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1)
-
- ;;; Code for nobridgemethods.TreeMap [vtable.init]
- (global.set $nobridgemethods.TreeMap.vtable
-  (struct.new_with_rtt $nobridgemethods.TreeMap.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap)
-   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
-   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
-   (rtt.canon $nobridgemethods.TreeMap.vtable)
-  )
- )
-
- ;;; Code for nobridgemethods.TreeMap [itable.init]
- (global.set $nobridgemethods.TreeMap.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for nobridgemethods.TreeMap.InnerEntry [vtable.init]
- (global.set $nobridgemethods.TreeMap.InnerEntry.vtable
-  (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
-   (rtt.canon $nobridgemethods.TreeMap.InnerEntry.vtable)
-  )
- )
-
- ;;; Code for nobridgemethods.TreeMap.InnerEntry [itable.init]
- (global.set $nobridgemethods.TreeMap.InnerEntry.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $nobridgemethods.TreeMap.InnerEntry.itable) (i32.const 0)
- (struct.new_with_rtt $nobridgemethods.Entry.vtable
-  (rtt.canon $nobridgemethods.Entry.vtable)
- ))
-
- ;;; Code for nobridgemethods.CharSet [vtable.init]
- (global.set $nobridgemethods.CharSet.vtable
-  (struct.new_with_rtt $nobridgemethods.CharSet.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet)
-   (rtt.canon $nobridgemethods.CharSet.vtable)
-  )
- )
-
- ;;; Code for nobridgemethods.CharSet [itable.init]
- (global.set $nobridgemethods.CharSet.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for nobridgemethods.CharSet.1 [vtable.init]
- (global.set $nobridgemethods.CharSet.1.vtable
-  (struct.new_with_rtt $nobridgemethods.CharSet.1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1)
-   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
-   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
-   (rtt.canon $nobridgemethods.CharSet.1.vtable)
-  )
- )
-
- ;;; Code for nobridgemethods.CharSet.1 [itable.init]
- (global.set $nobridgemethods.CharSet.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

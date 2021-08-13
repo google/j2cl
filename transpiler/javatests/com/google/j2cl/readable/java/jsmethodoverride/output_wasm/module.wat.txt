@@ -10,6 +10,36 @@
 ;;; Code for jsmethodoverride.Child [static fields]
 (global $f_$initialized__jsmethodoverride_Child (mut i32) (i32.const 0))
 
+ ;;; Code for jsmethodoverride.Parent [vtable.init]
+ (global.set $jsmethodoverride.Parent.vtable
+  (struct.new_with_rtt $jsmethodoverride.Parent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsmethodoverride.Parent)
+   (ref.func $m_foo__void@jsmethodoverride.Parent)
+   (rtt.canon $jsmethodoverride.Parent.vtable)
+  )
+ )
+
+ ;;; Code for jsmethodoverride.Parent [itable.init]
+ (global.set $jsmethodoverride.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for jsmethodoverride.Child [vtable.init]
+ (global.set $jsmethodoverride.Child.vtable
+  (struct.new_with_rtt $jsmethodoverride.Child.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsmethodoverride.Child)
+   (ref.func $m_foo__void@jsmethodoverride.Child)
+   (rtt.canon $jsmethodoverride.Child.vtable)
+  )
+ )
+
+ ;;; Code for jsmethodoverride.Child [itable.init]
+ (global.set $jsmethodoverride.Child.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for jsmethodoverride.Parent [CLASS]
 (type $jsmethodoverride.Parent (struct
  (field $vtable (ref $jsmethodoverride.Parent.vtable)) (field $itable (ref $itable))
@@ -173,33 +203,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Child)
-
- ;;; Code for jsmethodoverride.Parent [vtable.init]
- (global.set $jsmethodoverride.Parent.vtable
-  (struct.new_with_rtt $jsmethodoverride.Parent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsmethodoverride.Parent)
-   (ref.func $m_foo__void@jsmethodoverride.Parent)
-   (rtt.canon $jsmethodoverride.Parent.vtable)
-  )
- )
-
- ;;; Code for jsmethodoverride.Parent [itable.init]
- (global.set $jsmethodoverride.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for jsmethodoverride.Child [vtable.init]
- (global.set $jsmethodoverride.Child.vtable
-  (struct.new_with_rtt $jsmethodoverride.Child.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsmethodoverride.Child)
-   (ref.func $m_foo__void@jsmethodoverride.Child)
-   (rtt.canon $jsmethodoverride.Child.vtable)
-  )
- )
-
- ;;; Code for jsmethodoverride.Child [itable.init]
- (global.set $jsmethodoverride.Child.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -4,6 +4,20 @@
 ;;; Code for emptymethod.EmptyMethod [static fields]
 (global $f_$initialized__emptymethod_EmptyMethod (mut i32) (i32.const 0))
 
+ ;;; Code for emptymethod.EmptyMethod [vtable.init]
+ (global.set $emptymethod.EmptyMethod.vtable
+  (struct.new_with_rtt $emptymethod.EmptyMethod.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@emptymethod.EmptyMethod)
+   (rtt.canon $emptymethod.EmptyMethod.vtable)
+  )
+ )
+
+ ;;; Code for emptymethod.EmptyMethod [itable.init]
+ (global.set $emptymethod.EmptyMethod.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for emptymethod.EmptyMethod [CLASS]
 (type $emptymethod.EmptyMethod (struct
  (field $vtable (ref $emptymethod.EmptyMethod.vtable)) (field $itable (ref $itable))
@@ -83,17 +97,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@emptymethod.EmptyMethod)
-
- ;;; Code for emptymethod.EmptyMethod [vtable.init]
- (global.set $emptymethod.EmptyMethod.vtable
-  (struct.new_with_rtt $emptymethod.EmptyMethod.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@emptymethod.EmptyMethod)
-   (rtt.canon $emptymethod.EmptyMethod.vtable)
-  )
- )
-
- ;;; Code for emptymethod.EmptyMethod [itable.init]
- (global.set $emptymethod.EmptyMethod.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

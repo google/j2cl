@@ -4,6 +4,28 @@
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
 (global $f_$initialized__interfacedevirtualize_InterfaceDevirtualize (mut i32) (i32.const 0))
 
+ ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
+ (global.set $interfacedevirtualize.InterfaceDevirtualize.vtable
+  (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
+   (ref.func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
+   (rtt.canon $interfacedevirtualize.InterfaceDevirtualize.vtable)
+  )
+ )
+
+ ;;; Code for interfacedevirtualize.InterfaceDevirtualize [itable.init]
+ (global.set $interfacedevirtualize.InterfaceDevirtualize.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [CLASS]
 (type $interfacedevirtualize.InterfaceDevirtualize (struct
  (field $vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable)) (field $itable (ref $itable))
@@ -224,25 +246,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)
-
- ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
- (global.set $interfacedevirtualize.InterfaceDevirtualize.vtable
-  (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
-   (rtt.canon $interfacedevirtualize.InterfaceDevirtualize.vtable)
-  )
- )
-
- ;;; Code for interfacedevirtualize.InterfaceDevirtualize [itable.init]
- (global.set $interfacedevirtualize.InterfaceDevirtualize.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -16,6 +16,50 @@
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [static fields]
 (global $f_$initialized__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz (mut i32) (i32.const 0))
 
+ ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [vtable.init]
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable
+  (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
+   (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)
+  )
+ )
+
+ ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [itable.init]
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [vtable.init]
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable
+  (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
+   (ref.func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
+   (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)
+  )
+ )
+
+ ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [itable.init]
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [vtable.init]
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable
+  (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
+   (ref.func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
+   (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)
+  )
+ )
+
+ ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [itable.init]
+ (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [CLASS]
 (type $localclasswithoutergenerics.LocalClassWithOuterGenerics (struct
  (field $vtable (ref $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (field $itable (ref $itable))
@@ -270,47 +314,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
-
- ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [vtable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable
-  (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics)
-   (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)
-  )
- )
-
- ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics [itable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [vtable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable
-  (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
-   (ref.func $m_baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)
-   (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)
-  )
- )
-
- ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar [itable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [vtable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable
-  (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
-   (ref.func $m_qux__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz__void_$pp_localclasswithoutergenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)
-   (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)
-  )
- )
-
- ;;; Code for localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz [itable.init]
- (global.set $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -22,6 +22,70 @@
 ;;; Code for overwrittentypevariables.HashFunctions.2 [static fields]
 (global $f_$initialized__overwrittentypevariables_HashFunctions_2 (mut i32) (i32.const 0))
 
+ ;;; Code for overwrittentypevariables.HashFunctions [vtable.init]
+ (global.set $overwrittentypevariables.HashFunctions.vtable
+  (struct.new_with_rtt $overwrittentypevariables.HashFunctions.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions)
+   (rtt.canon $overwrittentypevariables.HashFunctions.vtable)
+  )
+ )
+
+ ;;; Code for overwrittentypevariables.HashFunctions [itable.init]
+ (global.set $overwrittentypevariables.HashFunctions.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for overwrittentypevariables.HashFunctions.1 [vtable.init]
+ (global.set $overwrittentypevariables.HashFunctions.1.vtable
+  (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.1)
+   (ref.func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.1)
+   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
+   (rtt.canon $overwrittentypevariables.HashFunctions.1.vtable)
+  )
+ )
+
+ ;;; Code for overwrittentypevariables.HashFunctions.1 [itable.init]
+ (global.set $overwrittentypevariables.HashFunctions.1.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $overwrittentypevariables.HashFunctions.1.itable) (i32.const 0)
+ (struct.new_with_rtt $overwrittentypevariables.HashFunction.vtable
+  (rtt.canon $overwrittentypevariables.HashFunction.vtable)
+ ))
+ (array.set $itable (global.get $overwrittentypevariables.HashFunctions.1.itable) (i32.const 1)
+ (struct.new_with_rtt $overwrittentypevariables.MyFunction.vtable
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
+  (rtt.canon $overwrittentypevariables.MyFunction.vtable)
+ ))
+
+ ;;; Code for overwrittentypevariables.HashFunctions.2 [vtable.init]
+ (global.set $overwrittentypevariables.HashFunctions.2.vtable
+  (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.2)
+   (ref.func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2)
+   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)
+   (rtt.canon $overwrittentypevariables.HashFunctions.2.vtable)
+  )
+ )
+
+ ;;; Code for overwrittentypevariables.HashFunctions.2 [itable.init]
+ (global.set $overwrittentypevariables.HashFunctions.2.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $overwrittentypevariables.HashFunctions.2.itable) (i32.const 0)
+ (struct.new_with_rtt $overwrittentypevariables.HashFunction.vtable
+  (rtt.canon $overwrittentypevariables.HashFunction.vtable)
+ ))
+ (array.set $itable (global.get $overwrittentypevariables.HashFunctions.2.itable) (i32.const 1)
+ (struct.new_with_rtt $overwrittentypevariables.MyFunction.vtable
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)
+  (rtt.canon $overwrittentypevariables.MyFunction.vtable)
+ ))
+
 ;;; Code for overwrittentypevariables.MyFunction [INTERFACE]
 (type $overwrittentypevariables.MyFunction.vtable (struct
  (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
@@ -403,67 +467,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.2)
-
- ;;; Code for overwrittentypevariables.HashFunctions [vtable.init]
- (global.set $overwrittentypevariables.HashFunctions.vtable
-  (struct.new_with_rtt $overwrittentypevariables.HashFunctions.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions)
-   (rtt.canon $overwrittentypevariables.HashFunctions.vtable)
-  )
- )
-
- ;;; Code for overwrittentypevariables.HashFunctions [itable.init]
- (global.set $overwrittentypevariables.HashFunctions.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for overwrittentypevariables.HashFunctions.1 [vtable.init]
- (global.set $overwrittentypevariables.HashFunctions.1.vtable
-  (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.1)
-   (ref.func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.1)
-   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
-   (rtt.canon $overwrittentypevariables.HashFunctions.1.vtable)
-  )
- )
-
- ;;; Code for overwrittentypevariables.HashFunctions.1 [itable.init]
- (global.set $overwrittentypevariables.HashFunctions.1.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $overwrittentypevariables.HashFunctions.1.itable) (i32.const 0)
- (struct.new_with_rtt $overwrittentypevariables.HashFunction.vtable
-  (rtt.canon $overwrittentypevariables.HashFunction.vtable)
- ))
- (array.set $itable (global.get $overwrittentypevariables.HashFunctions.1.itable) (i32.const 1)
- (struct.new_with_rtt $overwrittentypevariables.MyFunction.vtable
-  (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1)
-  (rtt.canon $overwrittentypevariables.MyFunction.vtable)
- ))
-
- ;;; Code for overwrittentypevariables.HashFunctions.2 [vtable.init]
- (global.set $overwrittentypevariables.HashFunctions.2.vtable
-  (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.2)
-   (ref.func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2)
-   (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)
-   (rtt.canon $overwrittentypevariables.HashFunctions.2.vtable)
-  )
- )
-
- ;;; Code for overwrittentypevariables.HashFunctions.2 [itable.init]
- (global.set $overwrittentypevariables.HashFunctions.2.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $overwrittentypevariables.HashFunctions.2.itable) (i32.const 0)
- (struct.new_with_rtt $overwrittentypevariables.HashFunction.vtable
-  (rtt.canon $overwrittentypevariables.HashFunction.vtable)
- ))
- (array.set $itable (global.get $overwrittentypevariables.HashFunctions.2.itable) (i32.const 1)
- (struct.new_with_rtt $overwrittentypevariables.MyFunction.vtable
-  (ref.func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2)
-  (rtt.canon $overwrittentypevariables.MyFunction.vtable)
- ))

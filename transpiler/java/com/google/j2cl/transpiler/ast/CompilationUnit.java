@@ -69,13 +69,15 @@ public class CompilationUnit extends Node {
   }
 
   public void addType(Type type) {
-    this.types.add(checkNotNull(type));
+    types.add(checkNotNull(type));
+  }
+
+  public void addType(int position, Type type) {
+    types.add(position, checkNotNull(type));
   }
 
   public void addTypes(Iterable<Type> types) {
-    for (Type type : types) {
-      addType(type);
-    }
+    types.forEach(this::addType);
   }
 
   public List<Type> getTypes() {

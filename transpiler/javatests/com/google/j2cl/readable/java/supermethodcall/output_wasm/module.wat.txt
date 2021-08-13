@@ -16,6 +16,65 @@
 ;;; Code for supermethodcall.Child [static fields]
 (global $f_$initialized__supermethodcall_Child (mut i32) (i32.const 0))
 
+ ;;; Code for supermethodcall.GrandParent [vtable.init]
+ (global.set $supermethodcall.GrandParent.vtable
+  (struct.new_with_rtt $supermethodcall.GrandParent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@supermethodcall.GrandParent)
+   (ref.func $m_grandParentSimplest__void@supermethodcall.GrandParent)
+   (ref.func $m_grandParentWithParams__int__void@supermethodcall.GrandParent)
+   (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent)
+   (rtt.canon $supermethodcall.GrandParent.vtable)
+  )
+ )
+
+ ;;; Code for supermethodcall.GrandParent [itable.init]
+ (global.set $supermethodcall.GrandParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for supermethodcall.Parent [vtable.init]
+ (global.set $supermethodcall.Parent.vtable
+  (struct.new_with_rtt $supermethodcall.Parent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@supermethodcall.Parent)
+   (ref.func $m_grandParentSimplest__void@supermethodcall.GrandParent)
+   (ref.func $m_grandParentWithParams__int__void@supermethodcall.GrandParent)
+   (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent)
+   (ref.func $m_parentSimplest__void@supermethodcall.Parent)
+   (ref.func $m_parentWithParams__int__void@supermethodcall.Parent)
+   (ref.func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent)
+   (rtt.canon $supermethodcall.Parent.vtable)
+  )
+ )
+
+ ;;; Code for supermethodcall.Parent [itable.init]
+ (global.set $supermethodcall.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for supermethodcall.Child [vtable.init]
+ (global.set $supermethodcall.Child.vtable
+  (struct.new_with_rtt $supermethodcall.Child.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@supermethodcall.Child)
+   (ref.func $m_grandParentSimplest__void@supermethodcall.Child)
+   (ref.func $m_grandParentWithParams__int__void@supermethodcall.Child)
+   (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.Child)
+   (ref.func $m_parentSimplest__void@supermethodcall.Child)
+   (ref.func $m_parentWithParams__int__void@supermethodcall.Child)
+   (ref.func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child)
+   (ref.func $m_parentWithChangingReturn__supermethodcall_Child@supermethodcall.Child)
+   (ref.func $m_grandParentWithChangingReturn__supermethodcall_Child@supermethodcall.Child)
+   (rtt.canon $supermethodcall.Child.vtable)
+  )
+ )
+
+ ;;; Code for supermethodcall.Child [itable.init]
+ (global.set $supermethodcall.Child.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for supermethodcall.GrandParent [CLASS]
 (type $supermethodcall.GrandParent (struct
  (field $vtable (ref $supermethodcall.GrandParent.vtable)) (field $itable (ref $itable))
@@ -453,62 +512,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@supermethodcall.Child)
-
- ;;; Code for supermethodcall.GrandParent [vtable.init]
- (global.set $supermethodcall.GrandParent.vtable
-  (struct.new_with_rtt $supermethodcall.GrandParent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@supermethodcall.GrandParent)
-   (ref.func $m_grandParentSimplest__void@supermethodcall.GrandParent)
-   (ref.func $m_grandParentWithParams__int__void@supermethodcall.GrandParent)
-   (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent)
-   (rtt.canon $supermethodcall.GrandParent.vtable)
-  )
- )
-
- ;;; Code for supermethodcall.GrandParent [itable.init]
- (global.set $supermethodcall.GrandParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for supermethodcall.Parent [vtable.init]
- (global.set $supermethodcall.Parent.vtable
-  (struct.new_with_rtt $supermethodcall.Parent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@supermethodcall.Parent)
-   (ref.func $m_grandParentSimplest__void@supermethodcall.GrandParent)
-   (ref.func $m_grandParentWithParams__int__void@supermethodcall.GrandParent)
-   (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.GrandParent)
-   (ref.func $m_parentSimplest__void@supermethodcall.Parent)
-   (ref.func $m_parentWithParams__int__void@supermethodcall.Parent)
-   (ref.func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Parent)
-   (rtt.canon $supermethodcall.Parent.vtable)
-  )
- )
-
- ;;; Code for supermethodcall.Parent [itable.init]
- (global.set $supermethodcall.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for supermethodcall.Child [vtable.init]
- (global.set $supermethodcall.Child.vtable
-  (struct.new_with_rtt $supermethodcall.Child.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@supermethodcall.Child)
-   (ref.func $m_grandParentSimplest__void@supermethodcall.Child)
-   (ref.func $m_grandParentWithParams__int__void@supermethodcall.Child)
-   (ref.func $m_grandParentWithChangingReturn__java_lang_Object@supermethodcall.Child)
-   (ref.func $m_parentSimplest__void@supermethodcall.Child)
-   (ref.func $m_parentWithParams__int__void@supermethodcall.Child)
-   (ref.func $m_parentWithChangingReturn__java_lang_Object@supermethodcall.Child)
-   (ref.func $m_parentWithChangingReturn__supermethodcall_Child@supermethodcall.Child)
-   (ref.func $m_grandParentWithChangingReturn__supermethodcall_Child@supermethodcall.Child)
-   (rtt.canon $supermethodcall.Child.vtable)
-  )
- )
-
- ;;; Code for supermethodcall.Child [itable.init]
- (global.set $supermethodcall.Child.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

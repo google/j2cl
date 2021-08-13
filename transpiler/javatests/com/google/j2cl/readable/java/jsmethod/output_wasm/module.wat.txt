@@ -19,6 +19,42 @@
 ;;; Code for jsmethod.JsMethodExample.Sub [static fields]
 (global $f_$initialized__jsmethod_JsMethodExample_Sub (mut i32) (i32.const 0))
 
+ ;;; Code for jsmethod.JsMethodExample [vtable.init]
+ (global.set $jsmethod.JsMethodExample.vtable
+  (struct.new_with_rtt $jsmethod.JsMethodExample.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsmethod.JsMethodExample)
+   (ref.func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample)
+   (rtt.canon $jsmethod.JsMethodExample.vtable)
+  )
+ )
+
+ ;;; Code for jsmethod.JsMethodExample [itable.init]
+ (global.set $jsmethod.JsMethodExample.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for jsmethod.JsMethodExample.Sub [vtable.init]
+ (global.set $jsmethod.JsMethodExample.Sub.vtable
+  (struct.new_with_rtt $jsmethod.JsMethodExample.Sub.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub)
+   (ref.func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub)
+   (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
+   (rtt.canon $jsmethod.JsMethodExample.Sub.vtable)
+  )
+ )
+
+ ;;; Code for jsmethod.JsMethodExample.Sub [itable.init]
+ (global.set $jsmethod.JsMethodExample.Sub.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $jsmethod.JsMethodExample.Sub.itable) (i32.const 0)
+ (struct.new_with_rtt $jsmethod.JsMethodExample.I.vtable
+  (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
+  (rtt.canon $jsmethod.JsMethodExample.I.vtable)
+ ))
+
 ;;; Code for jsmethod.JsMethodExample [CLASS]
 (type $jsmethod.JsMethodExample (struct
  (field $vtable (ref $jsmethod.JsMethodExample.vtable)) (field $itable (ref $itable))
@@ -325,39 +361,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub)
-
- ;;; Code for jsmethod.JsMethodExample [vtable.init]
- (global.set $jsmethod.JsMethodExample.vtable
-  (struct.new_with_rtt $jsmethod.JsMethodExample.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsmethod.JsMethodExample)
-   (ref.func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample)
-   (rtt.canon $jsmethod.JsMethodExample.vtable)
-  )
- )
-
- ;;; Code for jsmethod.JsMethodExample [itable.init]
- (global.set $jsmethod.JsMethodExample.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for jsmethod.JsMethodExample.Sub [vtable.init]
- (global.set $jsmethod.JsMethodExample.Sub.vtable
-  (struct.new_with_rtt $jsmethod.JsMethodExample.Sub.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub)
-   (ref.func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub)
-   (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
-   (rtt.canon $jsmethod.JsMethodExample.Sub.vtable)
-  )
- )
-
- ;;; Code for jsmethod.JsMethodExample.Sub [itable.init]
- (global.set $jsmethod.JsMethodExample.Sub.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsmethod.JsMethodExample.Sub.itable) (i32.const 0)
- (struct.new_with_rtt $jsmethod.JsMethodExample.I.vtable
-  (ref.func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub)
-  (rtt.canon $jsmethod.JsMethodExample.I.vtable)
- ))

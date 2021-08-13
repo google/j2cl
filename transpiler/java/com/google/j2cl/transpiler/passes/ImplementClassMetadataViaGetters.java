@@ -19,7 +19,6 @@ import static com.google.common.base.Predicates.not;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -60,7 +59,10 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
   public void applyTo(Library library) {
     synthesizeGetClassMethods(library);
     replaceTypeLiterals(library);
-    Iterables.getLast(library.getCompilationUnits()).addType(classLiteralPoolType);
+    // Add the ClassLiteralPool type at the beginning of the library so that it does not
+    // accidentally inherit an unrelated source position.
+    // In the wasm output, code with no source position will inherit the last seen source position.
+    library.getCompilationUnits().get(0).addType(/* position= */ 0, classLiteralPoolType);
   }
 
   /** Synthesizes the getClass() override for this class. */

@@ -16,6 +16,59 @@
 ;;; Code for devirtualizedsupermethodcall.Main [static fields]
 (global $f_$initialized__devirtualizedsupermethodcall_Main (mut i32) (i32.const 0))
 
+ ;;; Code for devirtualizedsupermethodcall.SubNumber [vtable.init]
+ (global.set $devirtualizedsupermethodcall.SubNumber.vtable
+  (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.SubNumber)
+   (ref.func $m_byteValue__byte@java.lang.Number)
+   (ref.func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber)
+   (ref.func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber)
+   (ref.func $m_intValue__int@devirtualizedsupermethodcall.SubNumber)
+   (ref.func $m_longValue__long@devirtualizedsupermethodcall.SubNumber)
+   (ref.func $m_shortValue__short@java.lang.Number)
+   (rtt.canon $devirtualizedsupermethodcall.SubNumber.vtable)
+  )
+ )
+
+ ;;; Code for devirtualizedsupermethodcall.SubNumber [itable.init]
+ (global.set $devirtualizedsupermethodcall.SubNumber.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $devirtualizedsupermethodcall.SubNumber.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))
+
+ ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable.init]
+ (global.set $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable
+  (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
+   (rtt.canon $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)
+  )
+ )
+
+ ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [itable.init]
+ (global.set $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for devirtualizedsupermethodcall.Main [vtable.init]
+ (global.set $devirtualizedsupermethodcall.Main.vtable
+  (struct.new_with_rtt $devirtualizedsupermethodcall.Main.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.Main)
+   (ref.func $m_main__void@devirtualizedsupermethodcall.Main)
+   (rtt.canon $devirtualizedsupermethodcall.Main.vtable)
+  )
+ )
+
+ ;;; Code for devirtualizedsupermethodcall.Main [itable.init]
+ (global.set $devirtualizedsupermethodcall.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for devirtualizedsupermethodcall.SubNumber [CLASS]
 (type $devirtualizedsupermethodcall.SubNumber (struct
  (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable)) (field $itable (ref $itable))
@@ -347,56 +400,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.Main)
-
- ;;; Code for devirtualizedsupermethodcall.SubNumber [vtable.init]
- (global.set $devirtualizedsupermethodcall.SubNumber.vtable
-  (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.SubNumber)
-   (ref.func $m_byteValue__byte@java.lang.Number)
-   (ref.func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber)
-   (ref.func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber)
-   (ref.func $m_intValue__int@devirtualizedsupermethodcall.SubNumber)
-   (ref.func $m_longValue__long@devirtualizedsupermethodcall.SubNumber)
-   (ref.func $m_shortValue__short@java.lang.Number)
-   (rtt.canon $devirtualizedsupermethodcall.SubNumber.vtable)
-  )
- )
-
- ;;; Code for devirtualizedsupermethodcall.SubNumber [itable.init]
- (global.set $devirtualizedsupermethodcall.SubNumber.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $devirtualizedsupermethodcall.SubNumber.itable) (i32.const 0)
- (struct.new_with_rtt $java.io.Serializable.vtable
-  (rtt.canon $java.io.Serializable.vtable)
- ))
-
- ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [vtable.init]
- (global.set $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable
-  (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
-   (rtt.canon $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)
-  )
- )
-
- ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [itable.init]
- (global.set $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for devirtualizedsupermethodcall.Main [vtable.init]
- (global.set $devirtualizedsupermethodcall.Main.vtable
-  (struct.new_with_rtt $devirtualizedsupermethodcall.Main.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.Main)
-   (ref.func $m_main__void@devirtualizedsupermethodcall.Main)
-   (rtt.canon $devirtualizedsupermethodcall.Main.vtable)
-  )
- )
-
- ;;; Code for devirtualizedsupermethodcall.Main [itable.init]
- (global.set $devirtualizedsupermethodcall.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

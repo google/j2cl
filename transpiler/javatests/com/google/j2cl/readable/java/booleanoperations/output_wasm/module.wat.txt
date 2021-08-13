@@ -16,6 +16,49 @@
 ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [static fields]
 (global $f_$initialized__booleanoperations_BooleanOperations_1Outer_Inner (mut i32) (i32.const 0))
 
+ ;;; Code for booleanoperations.BooleanOperations [vtable.init]
+ (global.set $booleanoperations.BooleanOperations.vtable
+  (struct.new_with_rtt $booleanoperations.BooleanOperations.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
+   (ref.func $m_test__void@booleanoperations.BooleanOperations)
+   (rtt.canon $booleanoperations.BooleanOperations.vtable)
+  )
+ )
+
+ ;;; Code for booleanoperations.BooleanOperations [itable.init]
+ (global.set $booleanoperations.BooleanOperations.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for booleanoperations.BooleanOperations.1Outer [vtable.init]
+ (global.set $booleanoperations.BooleanOperations.1Outer.vtable
+  (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
+   (rtt.canon $booleanoperations.BooleanOperations.1Outer.vtable)
+  )
+ )
+
+ ;;; Code for booleanoperations.BooleanOperations.1Outer [itable.init]
+ (global.set $booleanoperations.BooleanOperations.1Outer.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [vtable.init]
+ (global.set $booleanoperations.BooleanOperations.1Outer.Inner.vtable
+  (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
+   (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner.vtable)
+  )
+ )
+
+ ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [itable.init]
+ (global.set $booleanoperations.BooleanOperations.1Outer.Inner.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for booleanoperations.BooleanOperations [CLASS]
 (type $booleanoperations.BooleanOperations (struct
  (field $vtable (ref $booleanoperations.BooleanOperations.vtable)) (field $itable (ref $itable))
@@ -468,46 +511,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
-
- ;;; Code for booleanoperations.BooleanOperations [vtable.init]
- (global.set $booleanoperations.BooleanOperations.vtable
-  (struct.new_with_rtt $booleanoperations.BooleanOperations.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
-   (ref.func $m_test__void@booleanoperations.BooleanOperations)
-   (rtt.canon $booleanoperations.BooleanOperations.vtable)
-  )
- )
-
- ;;; Code for booleanoperations.BooleanOperations [itable.init]
- (global.set $booleanoperations.BooleanOperations.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for booleanoperations.BooleanOperations.1Outer [vtable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.vtable
-  (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
-   (rtt.canon $booleanoperations.BooleanOperations.1Outer.vtable)
-  )
- )
-
- ;;; Code for booleanoperations.BooleanOperations.1Outer [itable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [vtable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.Inner.vtable
-  (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer.Inner)
-   (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner.vtable)
-  )
- )
-
- ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [itable.init]
- (global.set $booleanoperations.BooleanOperations.1Outer.Inner.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

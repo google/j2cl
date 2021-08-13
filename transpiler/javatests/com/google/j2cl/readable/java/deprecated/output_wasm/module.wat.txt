@@ -28,6 +28,77 @@
 (global $$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedJsEnum i32 (i32.const 0))
 (global $f_$initialized__deprecated_DeprecatedExample_DeprecatedJsEnum (mut i32) (i32.const 0))
 
+ ;;; Code for deprecated.DeprecatedExample [vtable.init]
+ (global.set $deprecated.DeprecatedExample.vtable
+  (struct.new_with_rtt $deprecated.DeprecatedExample.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample)
+   (ref.func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample)
+   (rtt.canon $deprecated.DeprecatedExample.vtable)
+  )
+ )
+
+ ;;; Code for deprecated.DeprecatedExample [itable.init]
+ (global.set $deprecated.DeprecatedExample.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [vtable.init]
+ (global.set $deprecated.DeprecatedExample.DeprecatedEnum.vtable
+  (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedEnum.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Enum)
+   (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum)
+   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+   (ref.func $m_name__java_lang_String@java.lang.Enum)
+   (ref.func $m_ordinal__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+   (rtt.canon $deprecated.DeprecatedExample.DeprecatedEnum.vtable)
+  )
+ )
+
+ ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [itable.init]
+ (global.set $deprecated.DeprecatedExample.DeprecatedEnum.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable) (i32.const 1)
+ (struct.new_with_rtt $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (rtt.canon $java.lang.Comparable.vtable)
+ ))
+ (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))
+
+ ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [vtable.init]
+ (global.set $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable
+  (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Enum)
+   (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum)
+   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+   (ref.func $m_name__java_lang_String@java.lang.Enum)
+   (ref.func $m_ordinal__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+   (rtt.canon $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)
+  )
+ )
+
+ ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [itable.init]
+ (global.set $deprecated.DeprecatedExample.DeprecatedJsEnum.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable) (i32.const 1)
+ (struct.new_with_rtt $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (rtt.canon $java.lang.Comparable.vtable)
+ ))
+ (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))
+
 ;;; Code for deprecated.DeprecatedExample [CLASS]
 (type $deprecated.DeprecatedExample (struct
  (field $vtable (ref $deprecated.DeprecatedExample.vtable)) (field $itable (ref $itable))
@@ -486,74 +557,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum)
-
- ;;; Code for deprecated.DeprecatedExample [vtable.init]
- (global.set $deprecated.DeprecatedExample.vtable
-  (struct.new_with_rtt $deprecated.DeprecatedExample.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample)
-   (ref.func $m_deprecatedInstanceMethod__java_lang_String__void@deprecated.DeprecatedExample)
-   (rtt.canon $deprecated.DeprecatedExample.vtable)
-  )
- )
-
- ;;; Code for deprecated.DeprecatedExample [itable.init]
- (global.set $deprecated.DeprecatedExample.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [vtable.init]
- (global.set $deprecated.DeprecatedExample.DeprecatedEnum.vtable
-  (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedEnum.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Enum)
-   (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedEnum)
-   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
-   (ref.func $m_name__java_lang_String@java.lang.Enum)
-   (ref.func $m_ordinal__int@java.lang.Enum)
-   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
-   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-   (rtt.canon $deprecated.DeprecatedExample.DeprecatedEnum.vtable)
-  )
- )
-
- ;;; Code for deprecated.DeprecatedExample.DeprecatedEnum [itable.init]
- (global.set $deprecated.DeprecatedExample.DeprecatedEnum.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable) (i32.const 1)
- (struct.new_with_rtt $java.lang.Comparable.vtable
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-  (rtt.canon $java.lang.Comparable.vtable)
- ))
- (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedEnum.itable) (i32.const 0)
- (struct.new_with_rtt $java.io.Serializable.vtable
-  (rtt.canon $java.io.Serializable.vtable)
- ))
-
- ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [vtable.init]
- (global.set $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable
-  (struct.new_with_rtt $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Enum)
-   (ref.func $m_getClass__java_lang_Class@deprecated.DeprecatedExample.DeprecatedJsEnum)
-   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
-   (ref.func $m_name__java_lang_String@java.lang.Enum)
-   (ref.func $m_ordinal__int@java.lang.Enum)
-   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
-   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-   (rtt.canon $deprecated.DeprecatedExample.DeprecatedJsEnum.vtable)
-  )
- )
-
- ;;; Code for deprecated.DeprecatedExample.DeprecatedJsEnum [itable.init]
- (global.set $deprecated.DeprecatedExample.DeprecatedJsEnum.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable) (i32.const 1)
- (struct.new_with_rtt $java.lang.Comparable.vtable
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-  (rtt.canon $java.lang.Comparable.vtable)
- ))
- (array.set $itable (global.get $deprecated.DeprecatedExample.DeprecatedJsEnum.itable) (i32.const 0)
- (struct.new_with_rtt $java.io.Serializable.vtable
-  (rtt.canon $java.io.Serializable.vtable)
- ))

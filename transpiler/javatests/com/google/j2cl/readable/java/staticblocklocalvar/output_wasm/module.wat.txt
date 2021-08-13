@@ -4,6 +4,20 @@
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [static fields]
 (global $f_$initialized__staticblocklocalvar_StaticBlockLocalVar (mut i32) (i32.const 0))
 
+ ;;; Code for staticblocklocalvar.StaticBlockLocalVar [vtable.init]
+ (global.set $staticblocklocalvar.StaticBlockLocalVar.vtable
+  (struct.new_with_rtt $staticblocklocalvar.StaticBlockLocalVar.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
+   (rtt.canon $staticblocklocalvar.StaticBlockLocalVar.vtable)
+  )
+ )
+
+ ;;; Code for staticblocklocalvar.StaticBlockLocalVar [itable.init]
+ (global.set $staticblocklocalvar.StaticBlockLocalVar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [CLASS]
 (type $staticblocklocalvar.StaticBlockLocalVar (struct
  (field $vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable)) (field $itable (ref $itable))
@@ -79,17 +93,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
-
- ;;; Code for staticblocklocalvar.StaticBlockLocalVar [vtable.init]
- (global.set $staticblocklocalvar.StaticBlockLocalVar.vtable
-  (struct.new_with_rtt $staticblocklocalvar.StaticBlockLocalVar.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
-   (rtt.canon $staticblocklocalvar.StaticBlockLocalVar.vtable)
-  )
- )
-
- ;;; Code for staticblocklocalvar.StaticBlockLocalVar [itable.init]
- (global.set $staticblocklocalvar.StaticBlockLocalVar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

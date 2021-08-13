@@ -205,6 +205,483 @@
 ;;; Code for bridgemethods.EnumMap [static fields]
 (global $f_$initialized__bridgemethods_EnumMap (mut i32) (i32.const 0))
 
+ ;;; Code for bridgemethods.A [vtable.init]
+ (global.set $bridgemethods.A.vtable
+  (struct.new_with_rtt $bridgemethods.A.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.A)
+   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A)
+   (ref.func $m_get__java_lang_Object@bridgemethods.A)
+   (rtt.canon $bridgemethods.A.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.A [itable.init]
+ (global.set $bridgemethods.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.B [vtable.init]
+ (global.set $bridgemethods.B.vtable
+  (struct.new_with_rtt $bridgemethods.B.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.B)
+   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B)
+   (ref.func $m_get__java_lang_Object@bridgemethods.A)
+   (ref.func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B)
+   (rtt.canon $bridgemethods.B.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.B [itable.init]
+ (global.set $bridgemethods.B.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.B.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.I.vtable
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B)
+  (rtt.canon $bridgemethods.I.vtable)
+ ))
+
+ ;;; Code for bridgemethods.AccidentalOverride [vtable.init]
+ (global.set $bridgemethods.AccidentalOverride.vtable
+  (struct.new_with_rtt $bridgemethods.AccidentalOverride.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverride)
+   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride)
+   (ref.func $m_get__java_lang_Object@bridgemethods.A)
+   (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride)
+   (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
+   (rtt.canon $bridgemethods.AccidentalOverride.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.AccidentalOverride [itable.init]
+ (global.set $bridgemethods.AccidentalOverride.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.AccidentalOverride.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.SpecializedInterface.vtable
+  (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride)
+  (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
+  (rtt.canon $bridgemethods.SpecializedInterface.vtable)
+ ))
+
+ ;;; Code for bridgemethods.SuperParent [vtable.init]
+ (global.set $bridgemethods.SuperParent.vtable
+  (struct.new_with_rtt $bridgemethods.SuperParent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.SuperParent)
+   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent)
+   (rtt.canon $bridgemethods.SuperParent.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.SuperParent [itable.init]
+ (global.set $bridgemethods.SuperParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.Parent [vtable.init]
+ (global.set $bridgemethods.Parent.vtable
+  (struct.new_with_rtt $bridgemethods.Parent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.Parent)
+   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
+   (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent)
+   (ref.func $m_bar__java_lang_Number__void@bridgemethods.Parent)
+   (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent)
+   (rtt.canon $bridgemethods.Parent.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.Parent [itable.init]
+ (global.set $bridgemethods.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.BridgeMethod [vtable.init]
+ (global.set $bridgemethods.BridgeMethod.vtable
+  (struct.new_with_rtt $bridgemethods.BridgeMethod.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethod)
+   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
+   (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod)
+   (ref.func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod)
+   (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent)
+   (ref.func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod)
+   (ref.func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod)
+   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod)
+   (rtt.canon $bridgemethods.BridgeMethod.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.BridgeMethod [itable.init]
+ (global.set $bridgemethods.BridgeMethod.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.BridgeMethod.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.SomeInterface.vtable
+  (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
+  (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod)
+  (rtt.canon $bridgemethods.SomeInterface.vtable)
+ ))
+
+ ;;; Code for bridgemethods.DualUnrelatedBridges [vtable.init]
+ (global.set $bridgemethods.DualUnrelatedBridges.vtable
+  (struct.new_with_rtt $bridgemethods.DualUnrelatedBridges.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedBridges)
+   (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
+   (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
+   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges)
+   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
+   (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
+   (rtt.canon $bridgemethods.DualUnrelatedBridges.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.DualUnrelatedBridges [itable.init]
+ (global.set $bridgemethods.DualUnrelatedBridges.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.DualUnrelatedBridges.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.SomeInterface.vtable
+  (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges)
+  (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
+  (rtt.canon $bridgemethods.SomeInterface.vtable)
+ ))
+ (array.set $itable (global.get $bridgemethods.DualUnrelatedBridges.itable) (i32.const 1)
+ (struct.new_with_rtt $bridgemethods.SomeOtherFooInterface.vtable
+  (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
+  (rtt.canon $bridgemethods.SomeOtherFooInterface.vtable)
+ ))
+
+ ;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [vtable.init]
+ (global.set $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable
+  (struct.new_with_rtt $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.SuperDualUnrelatedAccidentalBridges)
+   (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
+   (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
+   (rtt.canon $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [itable.init]
+ (global.set $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [vtable.init]
+ (global.set $bridgemethods.DualUnrelatedAccidentalBridges.vtable
+  (struct.new_with_rtt $bridgemethods.DualUnrelatedAccidentalBridges.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedAccidentalBridges)
+   (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
+   (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
+   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges)
+   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges)
+   (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges)
+   (rtt.canon $bridgemethods.DualUnrelatedAccidentalBridges.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [itable.init]
+ (global.set $bridgemethods.DualUnrelatedAccidentalBridges.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.DualUnrelatedAccidentalBridges.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.SomeInterface.vtable
+  (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges)
+  (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges)
+  (rtt.canon $bridgemethods.SomeInterface.vtable)
+ ))
+ (array.set $itable (global.get $bridgemethods.DualUnrelatedAccidentalBridges.itable) (i32.const 1)
+ (struct.new_with_rtt $bridgemethods.SomeOtherFooInterface.vtable
+  (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges)
+  (rtt.canon $bridgemethods.SomeOtherFooInterface.vtable)
+ ))
+
+ ;;; Code for bridgemethods.ClassWithParameterizedGet [vtable.init]
+ (global.set $bridgemethods.ClassWithParameterizedGet.vtable
+  (struct.new_with_rtt $bridgemethods.ClassWithParameterizedGet.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.ClassWithParameterizedGet)
+   (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet)
+   (rtt.canon $bridgemethods.ClassWithParameterizedGet.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.ClassWithParameterizedGet [itable.init]
+ (global.set $bridgemethods.ClassWithParameterizedGet.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.AccidentalOverrideBridge [vtable.init]
+ (global.set $bridgemethods.AccidentalOverrideBridge.vtable
+  (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverrideBridge)
+   (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge)
+   (ref.func $m_test__void@bridgemethods.AccidentalOverrideBridge)
+   (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
+   (rtt.canon $bridgemethods.AccidentalOverrideBridge.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.AccidentalOverrideBridge [itable.init]
+ (global.set $bridgemethods.AccidentalOverrideBridge.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.AccidentalOverrideBridge.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.Getter.vtable
+  (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
+  (rtt.canon $bridgemethods.Getter.vtable)
+ ))
+
+ ;;; Code for bridgemethods.TestCase10036 [vtable.init]
+ (global.set $bridgemethods.TestCase10036.vtable
+  (struct.new_with_rtt $bridgemethods.TestCase10036.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.TestCase10036)
+   (rtt.canon $bridgemethods.TestCase10036.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.TestCase10036 [itable.init]
+ (global.set $bridgemethods.TestCase10036.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.TestCase102 [vtable.init]
+ (global.set $bridgemethods.TestCase102.vtable
+  (struct.new_with_rtt $bridgemethods.TestCase102.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.TestCase102)
+   (rtt.canon $bridgemethods.TestCase102.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.TestCase102 [itable.init]
+ (global.set $bridgemethods.TestCase102.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.TestCase102.C [vtable.init]
+ (global.set $bridgemethods.TestCase102.C.vtable
+  (struct.new_with_rtt $bridgemethods.TestCase102.C.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.TestCase102.C)
+   (ref.func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C)
+   (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
+   (rtt.canon $bridgemethods.TestCase102.C.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.TestCase102.C [itable.init]
+ (global.set $bridgemethods.TestCase102.C.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.TestCase102.C.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.TestCase102.BI1.vtable
+  (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
+  (rtt.canon $bridgemethods.TestCase102.BI1.vtable)
+ ))
+ (array.set $itable (global.get $bridgemethods.TestCase102.C.itable) (i32.const 1)
+ (struct.new_with_rtt $bridgemethods.TestCase102.BI2.vtable
+  (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
+  (rtt.canon $bridgemethods.TestCase102.BI2.vtable)
+ ))
+
+ ;;; Code for bridgemethods.ParameterizedParent [vtable.init]
+ (global.set $bridgemethods.ParameterizedParent.vtable
+  (struct.new_with_rtt $bridgemethods.ParameterizedParent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.ParameterizedParent)
+   (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent)
+   (rtt.canon $bridgemethods.ParameterizedParent.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.ParameterizedParent [itable.init]
+ (global.set $bridgemethods.ParameterizedParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.ReparametrerizedChild [vtable.init]
+ (global.set $bridgemethods.ReparametrerizedChild.vtable
+  (struct.new_with_rtt $bridgemethods.ReparametrerizedChild.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.ReparametrerizedChild)
+   (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
+   (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
+   (rtt.canon $bridgemethods.ReparametrerizedChild.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.ReparametrerizedChild [itable.init]
+ (global.set $bridgemethods.ReparametrerizedChild.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.LeafChild [vtable.init]
+ (global.set $bridgemethods.LeafChild.vtable
+  (struct.new_with_rtt $bridgemethods.LeafChild.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.LeafChild)
+   (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
+   (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
+   (rtt.canon $bridgemethods.LeafChild.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.LeafChild [itable.init]
+ (global.set $bridgemethods.LeafChild.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.BridgeMethodDefault [vtable.init]
+ (global.set $bridgemethods.BridgeMethodDefault.vtable
+  (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault)
+   (rtt.canon $bridgemethods.BridgeMethodDefault.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.BridgeMethodDefault [itable.init]
+ (global.set $bridgemethods.BridgeMethodDefault.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.BridgeMethodDefault.A [vtable.init]
+ (global.set $bridgemethods.BridgeMethodDefault.A.vtable
+  (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.A.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.A)
+   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
+   (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A)
+   (rtt.canon $bridgemethods.BridgeMethodDefault.A.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.BridgeMethodDefault.A [itable.init]
+ (global.set $bridgemethods.BridgeMethodDefault.A.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.A.itable) (i32.const 1)
+ (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.II.vtable
+  (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A)
+  (rtt.canon $bridgemethods.BridgeMethodDefault.II.vtable)
+ ))
+ (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.A.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.I.vtable
+  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
+  (rtt.canon $bridgemethods.BridgeMethodDefault.I.vtable)
+ ))
+
+ ;;; Code for bridgemethods.BridgeMethodDefault.B [vtable.init]
+ (global.set $bridgemethods.BridgeMethodDefault.B.vtable
+  (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.B.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.B)
+   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
+   (rtt.canon $bridgemethods.BridgeMethodDefault.B.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.BridgeMethodDefault.B [itable.init]
+ (global.set $bridgemethods.BridgeMethodDefault.B.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.B.itable) (i32.const 1)
+ (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.JJ.vtable
+  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
+  (rtt.canon $bridgemethods.BridgeMethodDefault.JJ.vtable)
+ ))
+ (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.B.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.I.vtable
+  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
+  (rtt.canon $bridgemethods.BridgeMethodDefault.I.vtable)
+ ))
+
+ ;;; Code for bridgemethods.BridgeMethodShadowedSignature [vtable.init]
+ (global.set $bridgemethods.BridgeMethodShadowedSignature.vtable
+  (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature)
+   (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.BridgeMethodShadowedSignature [itable.init]
+ (global.set $bridgemethods.BridgeMethodShadowedSignature.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [vtable.init]
+ (global.set $bridgemethods.BridgeMethodShadowedSignature.C.vtable
+  (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.C.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.C)
+   (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
+   (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
+   (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.C.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [itable.init]
+ (global.set $bridgemethods.BridgeMethodShadowedSignature.C.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.BridgeMethodShadowedSignature.C.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.I.vtable
+  (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
+  (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.I.vtable)
+ ))
+
+ ;;; Code for bridgemethods.AbstractMap [vtable.init]
+ (global.set $bridgemethods.AbstractMap.vtable
+  (struct.new_with_rtt $bridgemethods.AbstractMap.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.AbstractMap)
+   (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap)
+   (rtt.canon $bridgemethods.AbstractMap.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.AbstractMap [itable.init]
+ (global.set $bridgemethods.AbstractMap.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.AbstractMap.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.Map.vtable
+  (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap)
+  (rtt.canon $bridgemethods.Map.vtable)
+ ))
+
+ ;;; Code for bridgemethods.EnumMap [vtable.init]
+ (global.set $bridgemethods.EnumMap.vtable
+  (struct.new_with_rtt $bridgemethods.EnumMap.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@bridgemethods.EnumMap)
+   (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
+   (ref.func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
+   (rtt.canon $bridgemethods.EnumMap.vtable)
+  )
+ )
+
+ ;;; Code for bridgemethods.EnumMap [itable.init]
+ (global.set $bridgemethods.EnumMap.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $bridgemethods.EnumMap.itable) (i32.const 0)
+ (struct.new_with_rtt $bridgemethods.Map.vtable
+  (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
+  (rtt.canon $bridgemethods.Map.vtable)
+ ))
+
 ;;; Code for bridgemethods.I [INTERFACE]
 (type $bridgemethods.I.vtable (struct
  (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
@@ -3378,480 +3855,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.EnumMap)
-
- ;;; Code for bridgemethods.A [vtable.init]
- (global.set $bridgemethods.A.vtable
-  (struct.new_with_rtt $bridgemethods.A.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.A)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A)
-   (ref.func $m_get__java_lang_Object@bridgemethods.A)
-   (rtt.canon $bridgemethods.A.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.A [itable.init]
- (global.set $bridgemethods.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.B [vtable.init]
- (global.set $bridgemethods.B.vtable
-  (struct.new_with_rtt $bridgemethods.B.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.B)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B)
-   (ref.func $m_get__java_lang_Object@bridgemethods.A)
-   (ref.func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B)
-   (rtt.canon $bridgemethods.B.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.B [itable.init]
- (global.set $bridgemethods.B.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.B.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.I.vtable
-  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B)
-  (rtt.canon $bridgemethods.I.vtable)
- ))
-
- ;;; Code for bridgemethods.AccidentalOverride [vtable.init]
- (global.set $bridgemethods.AccidentalOverride.vtable
-  (struct.new_with_rtt $bridgemethods.AccidentalOverride.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverride)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride)
-   (ref.func $m_get__java_lang_Object@bridgemethods.A)
-   (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride)
-   (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
-   (rtt.canon $bridgemethods.AccidentalOverride.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.AccidentalOverride [itable.init]
- (global.set $bridgemethods.AccidentalOverride.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.AccidentalOverride.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.SpecializedInterface.vtable
-  (ref.func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride)
-  (ref.func $m_get__java_lang_String@bridgemethods.AccidentalOverride)
-  (rtt.canon $bridgemethods.SpecializedInterface.vtable)
- ))
-
- ;;; Code for bridgemethods.SuperParent [vtable.init]
- (global.set $bridgemethods.SuperParent.vtable
-  (struct.new_with_rtt $bridgemethods.SuperParent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.SuperParent)
-   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent)
-   (rtt.canon $bridgemethods.SuperParent.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.SuperParent [itable.init]
- (global.set $bridgemethods.SuperParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.Parent [vtable.init]
- (global.set $bridgemethods.Parent.vtable
-  (struct.new_with_rtt $bridgemethods.Parent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.Parent)
-   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
-   (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent)
-   (ref.func $m_bar__java_lang_Number__void@bridgemethods.Parent)
-   (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent)
-   (rtt.canon $bridgemethods.Parent.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.Parent [itable.init]
- (global.set $bridgemethods.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.BridgeMethod [vtable.init]
- (global.set $bridgemethods.BridgeMethod.vtable
-  (struct.new_with_rtt $bridgemethods.BridgeMethod.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethod)
-   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
-   (ref.func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod)
-   (ref.func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod)
-   (ref.func $m_fun__java_lang_Object__void@bridgemethods.Parent)
-   (ref.func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod)
-   (ref.func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod)
-   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod)
-   (rtt.canon $bridgemethods.BridgeMethod.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.BridgeMethod [itable.init]
- (global.set $bridgemethods.BridgeMethod.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.BridgeMethod.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.SomeInterface.vtable
-  (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent)
-  (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod)
-  (rtt.canon $bridgemethods.SomeInterface.vtable)
- ))
-
- ;;; Code for bridgemethods.DualUnrelatedBridges [vtable.init]
- (global.set $bridgemethods.DualUnrelatedBridges.vtable
-  (struct.new_with_rtt $bridgemethods.DualUnrelatedBridges.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedBridges)
-   (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
-   (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
-   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges)
-   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
-   (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
-   (rtt.canon $bridgemethods.DualUnrelatedBridges.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.DualUnrelatedBridges [itable.init]
- (global.set $bridgemethods.DualUnrelatedBridges.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.DualUnrelatedBridges.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.SomeInterface.vtable
-  (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges)
-  (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges)
-  (rtt.canon $bridgemethods.SomeInterface.vtable)
- ))
- (array.set $itable (global.get $bridgemethods.DualUnrelatedBridges.itable) (i32.const 1)
- (struct.new_with_rtt $bridgemethods.SomeOtherFooInterface.vtable
-  (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges)
-  (rtt.canon $bridgemethods.SomeOtherFooInterface.vtable)
- ))
-
- ;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [vtable.init]
- (global.set $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable
-  (struct.new_with_rtt $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.SuperDualUnrelatedAccidentalBridges)
-   (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
-   (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
-   (rtt.canon $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.SuperDualUnrelatedAccidentalBridges [itable.init]
- (global.set $bridgemethods.SuperDualUnrelatedAccidentalBridges.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [vtable.init]
- (global.set $bridgemethods.DualUnrelatedAccidentalBridges.vtable
-  (struct.new_with_rtt $bridgemethods.DualUnrelatedAccidentalBridges.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedAccidentalBridges)
-   (ref.func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
-   (ref.func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges)
-   (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges)
-   (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges)
-   (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges)
-   (rtt.canon $bridgemethods.DualUnrelatedAccidentalBridges.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.DualUnrelatedAccidentalBridges [itable.init]
- (global.set $bridgemethods.DualUnrelatedAccidentalBridges.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.DualUnrelatedAccidentalBridges.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.SomeInterface.vtable
-  (ref.func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges)
-  (ref.func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges)
-  (rtt.canon $bridgemethods.SomeInterface.vtable)
- ))
- (array.set $itable (global.get $bridgemethods.DualUnrelatedAccidentalBridges.itable) (i32.const 1)
- (struct.new_with_rtt $bridgemethods.SomeOtherFooInterface.vtable
-  (ref.func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges)
-  (rtt.canon $bridgemethods.SomeOtherFooInterface.vtable)
- ))
-
- ;;; Code for bridgemethods.ClassWithParameterizedGet [vtable.init]
- (global.set $bridgemethods.ClassWithParameterizedGet.vtable
-  (struct.new_with_rtt $bridgemethods.ClassWithParameterizedGet.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.ClassWithParameterizedGet)
-   (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet)
-   (rtt.canon $bridgemethods.ClassWithParameterizedGet.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.ClassWithParameterizedGet [itable.init]
- (global.set $bridgemethods.ClassWithParameterizedGet.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.AccidentalOverrideBridge [vtable.init]
- (global.set $bridgemethods.AccidentalOverrideBridge.vtable
-  (struct.new_with_rtt $bridgemethods.AccidentalOverrideBridge.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverrideBridge)
-   (ref.func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge)
-   (ref.func $m_test__void@bridgemethods.AccidentalOverrideBridge)
-   (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
-   (rtt.canon $bridgemethods.AccidentalOverrideBridge.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.AccidentalOverrideBridge [itable.init]
- (global.set $bridgemethods.AccidentalOverrideBridge.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.AccidentalOverrideBridge.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.Getter.vtable
-  (ref.func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge)
-  (rtt.canon $bridgemethods.Getter.vtable)
- ))
-
- ;;; Code for bridgemethods.TestCase10036 [vtable.init]
- (global.set $bridgemethods.TestCase10036.vtable
-  (struct.new_with_rtt $bridgemethods.TestCase10036.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.TestCase10036)
-   (rtt.canon $bridgemethods.TestCase10036.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.TestCase10036 [itable.init]
- (global.set $bridgemethods.TestCase10036.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.TestCase102 [vtable.init]
- (global.set $bridgemethods.TestCase102.vtable
-  (struct.new_with_rtt $bridgemethods.TestCase102.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.TestCase102)
-   (rtt.canon $bridgemethods.TestCase102.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.TestCase102 [itable.init]
- (global.set $bridgemethods.TestCase102.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.TestCase102.C [vtable.init]
- (global.set $bridgemethods.TestCase102.C.vtable
-  (struct.new_with_rtt $bridgemethods.TestCase102.C.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.TestCase102.C)
-   (ref.func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C)
-   (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
-   (rtt.canon $bridgemethods.TestCase102.C.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.TestCase102.C [itable.init]
- (global.set $bridgemethods.TestCase102.C.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.TestCase102.C.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.TestCase102.BI1.vtable
-  (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
-  (rtt.canon $bridgemethods.TestCase102.BI1.vtable)
- ))
- (array.set $itable (global.get $bridgemethods.TestCase102.C.itable) (i32.const 1)
- (struct.new_with_rtt $bridgemethods.TestCase102.BI2.vtable
-  (ref.func $m_set__java_lang_String__void@bridgemethods.TestCase102.C)
-  (rtt.canon $bridgemethods.TestCase102.BI2.vtable)
- ))
-
- ;;; Code for bridgemethods.ParameterizedParent [vtable.init]
- (global.set $bridgemethods.ParameterizedParent.vtable
-  (struct.new_with_rtt $bridgemethods.ParameterizedParent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.ParameterizedParent)
-   (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent)
-   (rtt.canon $bridgemethods.ParameterizedParent.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.ParameterizedParent [itable.init]
- (global.set $bridgemethods.ParameterizedParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.ReparametrerizedChild [vtable.init]
- (global.set $bridgemethods.ReparametrerizedChild.vtable
-  (struct.new_with_rtt $bridgemethods.ReparametrerizedChild.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.ReparametrerizedChild)
-   (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
-   (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
-   (rtt.canon $bridgemethods.ReparametrerizedChild.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.ReparametrerizedChild [itable.init]
- (global.set $bridgemethods.ReparametrerizedChild.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.LeafChild [vtable.init]
- (global.set $bridgemethods.LeafChild.vtable
-  (struct.new_with_rtt $bridgemethods.LeafChild.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.LeafChild)
-   (ref.func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
-   (ref.func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild)
-   (rtt.canon $bridgemethods.LeafChild.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.LeafChild [itable.init]
- (global.set $bridgemethods.LeafChild.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.BridgeMethodDefault [vtable.init]
- (global.set $bridgemethods.BridgeMethodDefault.vtable
-  (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault)
-   (rtt.canon $bridgemethods.BridgeMethodDefault.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.BridgeMethodDefault [itable.init]
- (global.set $bridgemethods.BridgeMethodDefault.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.BridgeMethodDefault.A [vtable.init]
- (global.set $bridgemethods.BridgeMethodDefault.A.vtable
-  (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.A.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.A)
-   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
-   (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A)
-   (rtt.canon $bridgemethods.BridgeMethodDefault.A.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.BridgeMethodDefault.A [itable.init]
- (global.set $bridgemethods.BridgeMethodDefault.A.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.A.itable) (i32.const 1)
- (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.II.vtable
-  (ref.func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A)
-  (rtt.canon $bridgemethods.BridgeMethodDefault.II.vtable)
- ))
- (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.A.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.I.vtable
-  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A)
-  (rtt.canon $bridgemethods.BridgeMethodDefault.I.vtable)
- ))
-
- ;;; Code for bridgemethods.BridgeMethodDefault.B [vtable.init]
- (global.set $bridgemethods.BridgeMethodDefault.B.vtable
-  (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.B.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.B)
-   (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
-   (rtt.canon $bridgemethods.BridgeMethodDefault.B.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.BridgeMethodDefault.B [itable.init]
- (global.set $bridgemethods.BridgeMethodDefault.B.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.B.itable) (i32.const 1)
- (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.JJ.vtable
-  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
-  (rtt.canon $bridgemethods.BridgeMethodDefault.JJ.vtable)
- ))
- (array.set $itable (global.get $bridgemethods.BridgeMethodDefault.B.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.BridgeMethodDefault.I.vtable
-  (ref.func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B)
-  (rtt.canon $bridgemethods.BridgeMethodDefault.I.vtable)
- ))
-
- ;;; Code for bridgemethods.BridgeMethodShadowedSignature [vtable.init]
- (global.set $bridgemethods.BridgeMethodShadowedSignature.vtable
-  (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature)
-   (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.BridgeMethodShadowedSignature [itable.init]
- (global.set $bridgemethods.BridgeMethodShadowedSignature.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [vtable.init]
- (global.set $bridgemethods.BridgeMethodShadowedSignature.C.vtable
-  (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.C.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.C)
-   (ref.func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
-   (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
-   (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.C.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.BridgeMethodShadowedSignature.C [itable.init]
- (global.set $bridgemethods.BridgeMethodShadowedSignature.C.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.BridgeMethodShadowedSignature.C.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.BridgeMethodShadowedSignature.I.vtable
-  (ref.func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C)
-  (rtt.canon $bridgemethods.BridgeMethodShadowedSignature.I.vtable)
- ))
-
- ;;; Code for bridgemethods.AbstractMap [vtable.init]
- (global.set $bridgemethods.AbstractMap.vtable
-  (struct.new_with_rtt $bridgemethods.AbstractMap.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.AbstractMap)
-   (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap)
-   (rtt.canon $bridgemethods.AbstractMap.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.AbstractMap [itable.init]
- (global.set $bridgemethods.AbstractMap.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.AbstractMap.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.Map.vtable
-  (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap)
-  (rtt.canon $bridgemethods.Map.vtable)
- ))
-
- ;;; Code for bridgemethods.EnumMap [vtable.init]
- (global.set $bridgemethods.EnumMap.vtable
-  (struct.new_with_rtt $bridgemethods.EnumMap.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgemethods.EnumMap)
-   (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
-   (ref.func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
-   (rtt.canon $bridgemethods.EnumMap.vtable)
-  )
- )
-
- ;;; Code for bridgemethods.EnumMap [itable.init]
- (global.set $bridgemethods.EnumMap.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgemethods.EnumMap.itable) (i32.const 0)
- (struct.new_with_rtt $bridgemethods.Map.vtable
-  (ref.func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap)
-  (rtt.canon $bridgemethods.Map.vtable)
- ))

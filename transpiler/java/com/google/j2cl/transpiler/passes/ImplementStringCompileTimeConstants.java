@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.passes;
 import com.google.common.base.Ascii;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Multiset;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
@@ -117,7 +116,10 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
                 .build();
           }
         });
-    Iterables.getLast(library.getCompilationUnits()).addType(stringHolderType);
+    // Add the StringPool type at the beginning of the library so that it does not accidentally
+    // inherit an unrelated source position.
+    // In the wasm output, code with no source position will inherit the last seen source position.
+    library.getCompilationUnits().get(0).addType(/* position= */ 0, stringHolderType);
   }
 
   private static TypeDeclaration getStringHolderDeclaration() {

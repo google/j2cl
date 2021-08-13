@@ -10,6 +10,25 @@
 ;;; Code for jstype.SomeJsType.Wildcard [static fields]
 (global $f_$initialized__jstype_SomeJsType_Wildcard (mut i32) (i32.const 0))
 
+ ;;; Code for jstype.SomeJsType [vtable.init]
+ (global.set $jstype.SomeJsType.vtable
+  (struct.new_with_rtt $jstype.SomeJsType.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jstype.SomeJsType)
+   (ref.func $m_publicMethod__void@jstype.SomeJsType)
+   (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
+   (ref.func $m_protectedMethod__void@jstype.SomeJsType)
+   (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
+   (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
+   (rtt.canon $jstype.SomeJsType.vtable)
+  )
+ )
+
+ ;;; Code for jstype.SomeJsType [itable.init]
+ (global.set $jstype.SomeJsType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for jstype.SomeJsType [CLASS]
 (type $jstype.SomeJsType (struct
  (field $vtable (ref $jstype.SomeJsType.vtable)) (field $itable (ref $itable))
@@ -253,22 +272,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Wildcard)
-
- ;;; Code for jstype.SomeJsType [vtable.init]
- (global.set $jstype.SomeJsType.vtable
-  (struct.new_with_rtt $jstype.SomeJsType.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jstype.SomeJsType)
-   (ref.func $m_publicMethod__void@jstype.SomeJsType)
-   (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
-   (ref.func $m_protectedMethod__void@jstype.SomeJsType)
-   (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
-   (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
-   (rtt.canon $jstype.SomeJsType.vtable)
-  )
- )
-
- ;;; Code for jstype.SomeJsType [itable.init]
- (global.set $jstype.SomeJsType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

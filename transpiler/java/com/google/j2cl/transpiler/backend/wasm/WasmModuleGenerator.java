@@ -84,10 +84,12 @@ public class WasmModuleGenerator {
     emitRttHierarchy(library);
     emitGlobals(library);
     emitDynamicDispatchMethodTypes(library);
-    emitTypes(library);
     emitItableSupportTypes();
     emitRuntimeInitialization(library);
     emitNativeArrayTypes(library);
+    // Emit the types and methods at the very end so that the synthetic code generated above does
+    // not inherit an incorrect source position.
+    emitTypes(library);
     builder.newLine();
     builder.append(")");
     output.write("module.wat", builder.build());

@@ -11,6 +11,34 @@
 (global $$ordinal_BLUE__jstypeenum_Color i32 (i32.const 2))
 (global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
 
+ ;;; Code for jstypeenum.Color [vtable.init]
+ (global.set $jstypeenum.Color.vtable
+  (struct.new_with_rtt $jstypeenum.Color.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Enum)
+   (ref.func $m_getClass__java_lang_Class@jstypeenum.Color)
+   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+   (ref.func $m_name__java_lang_String@java.lang.Enum)
+   (ref.func $m_ordinal__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
+   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+   (rtt.canon $jstypeenum.Color.vtable)
+  )
+ )
+
+ ;;; Code for jstypeenum.Color [itable.init]
+ (global.set $jstypeenum.Color.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
+ (array.set $itable (global.get $jstypeenum.Color.itable) (i32.const 1)
+ (struct.new_with_rtt $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+  (rtt.canon $java.lang.Comparable.vtable)
+ ))
+ (array.set $itable (global.get $jstypeenum.Color.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))
+
 ;;; Code for jstypeenum.Color [ENUM]
 (type $jstypeenum.Color (struct
  (field $vtable (ref $jstypeenum.Color.vtable)) (field $itable (ref $itable))
@@ -174,31 +202,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstypeenum.Color)
-
- ;;; Code for jstypeenum.Color [vtable.init]
- (global.set $jstypeenum.Color.vtable
-  (struct.new_with_rtt $jstypeenum.Color.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Enum)
-   (ref.func $m_getClass__java_lang_Class@jstypeenum.Color)
-   (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
-   (ref.func $m_name__java_lang_String@java.lang.Enum)
-   (ref.func $m_ordinal__int@java.lang.Enum)
-   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
-   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-   (rtt.canon $jstypeenum.Color.vtable)
-  )
- )
-
- ;;; Code for jstypeenum.Color [itable.init]
- (global.set $jstypeenum.Color.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $jstypeenum.Color.itable) (i32.const 1)
- (struct.new_with_rtt $java.lang.Comparable.vtable
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-  (rtt.canon $java.lang.Comparable.vtable)
- ))
- (array.set $itable (global.get $jstypeenum.Color.itable) (i32.const 0)
- (struct.new_with_rtt $java.io.Serializable.vtable
-  (rtt.canon $java.io.Serializable.vtable)
- ))

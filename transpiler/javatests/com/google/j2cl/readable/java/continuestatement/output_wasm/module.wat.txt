@@ -4,6 +4,21 @@
 ;;; Code for continuestatement.ContinueStatement [static fields]
 (global $f_$initialized__continuestatement_ContinueStatement (mut i32) (i32.const 0))
 
+ ;;; Code for continuestatement.ContinueStatement [vtable.init]
+ (global.set $continuestatement.ContinueStatement.vtable
+  (struct.new_with_rtt $continuestatement.ContinueStatement.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@continuestatement.ContinueStatement)
+   (ref.func $m_test__void@continuestatement.ContinueStatement)
+   (rtt.canon $continuestatement.ContinueStatement.vtable)
+  )
+ )
+
+ ;;; Code for continuestatement.ContinueStatement [itable.init]
+ (global.set $continuestatement.ContinueStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for continuestatement.ContinueStatement [CLASS]
 (type $continuestatement.ContinueStatement (struct
  (field $vtable (ref $continuestatement.ContinueStatement.vtable)) (field $itable (ref $itable))
@@ -100,18 +115,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@continuestatement.ContinueStatement)
-
- ;;; Code for continuestatement.ContinueStatement [vtable.init]
- (global.set $continuestatement.ContinueStatement.vtable
-  (struct.new_with_rtt $continuestatement.ContinueStatement.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@continuestatement.ContinueStatement)
-   (ref.func $m_test__void@continuestatement.ContinueStatement)
-   (rtt.canon $continuestatement.ContinueStatement.vtable)
-  )
- )
-
- ;;; Code for continuestatement.ContinueStatement [itable.init]
- (global.set $continuestatement.ContinueStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

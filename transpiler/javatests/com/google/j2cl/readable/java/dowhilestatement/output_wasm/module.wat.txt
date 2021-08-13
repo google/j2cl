@@ -4,6 +4,21 @@
 ;;; Code for dowhilestatement.DoWhileStatement [static fields]
 (global $f_$initialized__dowhilestatement_DoWhileStatement (mut i32) (i32.const 0))
 
+ ;;; Code for dowhilestatement.DoWhileStatement [vtable.init]
+ (global.set $dowhilestatement.DoWhileStatement.vtable
+  (struct.new_with_rtt $dowhilestatement.DoWhileStatement.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@dowhilestatement.DoWhileStatement)
+   (ref.func $m_test__void@dowhilestatement.DoWhileStatement)
+   (rtt.canon $dowhilestatement.DoWhileStatement.vtable)
+  )
+ )
+
+ ;;; Code for dowhilestatement.DoWhileStatement [itable.init]
+ (global.set $dowhilestatement.DoWhileStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for dowhilestatement.DoWhileStatement [CLASS]
 (type $dowhilestatement.DoWhileStatement (struct
  (field $vtable (ref $dowhilestatement.DoWhileStatement.vtable)) (field $itable (ref $itable))
@@ -104,18 +119,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@dowhilestatement.DoWhileStatement)
-
- ;;; Code for dowhilestatement.DoWhileStatement [vtable.init]
- (global.set $dowhilestatement.DoWhileStatement.vtable
-  (struct.new_with_rtt $dowhilestatement.DoWhileStatement.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@dowhilestatement.DoWhileStatement)
-   (ref.func $m_test__void@dowhilestatement.DoWhileStatement)
-   (rtt.canon $dowhilestatement.DoWhileStatement.vtable)
-  )
- )
-
- ;;; Code for dowhilestatement.DoWhileStatement [itable.init]
- (global.set $dowhilestatement.DoWhileStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -4,6 +4,24 @@
 ;;; Code for importsfullyqualified.ImportsFullyQualified [static fields]
 (global $f_$initialized__importsfullyqualified_ImportsFullyQualified (mut i32) (i32.const 0))
 
+ ;;; Code for importsfullyqualified.ImportsFullyQualified [vtable.init]
+ (global.set $importsfullyqualified.ImportsFullyQualified.vtable
+  (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
+   (rtt.canon $importsfullyqualified.ImportsFullyQualified.vtable)
+  )
+ )
+
+ ;;; Code for importsfullyqualified.ImportsFullyQualified [itable.init]
+ (global.set $importsfullyqualified.ImportsFullyQualified.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $importsfullyqualified.ImportsFullyQualified.itable) (i32.const 0)
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (rtt.canon $java.io.Serializable.vtable)
+ ))
+
 ;;; Code for importsfullyqualified.ImportsFullyQualified [CLASS]
 (type $importsfullyqualified.ImportsFullyQualified (struct
  (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)) (field $itable (ref $itable))
@@ -72,21 +90,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
-
- ;;; Code for importsfullyqualified.ImportsFullyQualified [vtable.init]
- (global.set $importsfullyqualified.ImportsFullyQualified.vtable
-  (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@importsfullyqualified.ImportsFullyQualified)
-   (rtt.canon $importsfullyqualified.ImportsFullyQualified.vtable)
-  )
- )
-
- ;;; Code for importsfullyqualified.ImportsFullyQualified [itable.init]
- (global.set $importsfullyqualified.ImportsFullyQualified.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $importsfullyqualified.ImportsFullyQualified.itable) (i32.const 0)
- (struct.new_with_rtt $java.io.Serializable.vtable
-  (rtt.canon $java.io.Serializable.vtable)
- ))

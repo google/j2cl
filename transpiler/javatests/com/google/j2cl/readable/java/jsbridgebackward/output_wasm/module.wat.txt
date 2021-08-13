@@ -13,6 +13,41 @@
 ;;; Code for jsbridgebackward.InterfaceImpl [static fields]
 (global $f_$initialized__jsbridgebackward_InterfaceImpl (mut i32) (i32.const 0))
 
+ ;;; Code for jsbridgebackward.A [vtable.init]
+ (global.set $jsbridgebackward.A.vtable
+  (struct.new_with_rtt $jsbridgebackward.A.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsbridgebackward.A)
+   (ref.func $m_foo__int__int@jsbridgebackward.A)
+   (rtt.canon $jsbridgebackward.A.vtable)
+  )
+ )
+
+ ;;; Code for jsbridgebackward.A [itable.init]
+ (global.set $jsbridgebackward.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for jsbridgebackward.InterfaceImpl [vtable.init]
+ (global.set $jsbridgebackward.InterfaceImpl.vtable
+  (struct.new_with_rtt $jsbridgebackward.InterfaceImpl.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl)
+   (ref.func $m_foo__int__int@jsbridgebackward.A)
+   (rtt.canon $jsbridgebackward.InterfaceImpl.vtable)
+  )
+ )
+
+ ;;; Code for jsbridgebackward.InterfaceImpl [itable.init]
+ (global.set $jsbridgebackward.InterfaceImpl.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $jsbridgebackward.InterfaceImpl.itable) (i32.const 0)
+ (struct.new_with_rtt $jsbridgebackward.MyJsInterface.vtable
+  (ref.func $m_foo__int__int@jsbridgebackward.A)
+  (rtt.canon $jsbridgebackward.MyJsInterface.vtable)
+ ))
+
 ;;; Code for jsbridgebackward.MyJsInterface [INTERFACE]
 (type $jsbridgebackward.MyJsInterface.vtable (struct
  (field $m_foo__int__int (mut (ref $function.$int__$int)))
@@ -204,38 +239,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl)
-
- ;;; Code for jsbridgebackward.A [vtable.init]
- (global.set $jsbridgebackward.A.vtable
-  (struct.new_with_rtt $jsbridgebackward.A.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsbridgebackward.A)
-   (ref.func $m_foo__int__int@jsbridgebackward.A)
-   (rtt.canon $jsbridgebackward.A.vtable)
-  )
- )
-
- ;;; Code for jsbridgebackward.A [itable.init]
- (global.set $jsbridgebackward.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for jsbridgebackward.InterfaceImpl [vtable.init]
- (global.set $jsbridgebackward.InterfaceImpl.vtable
-  (struct.new_with_rtt $jsbridgebackward.InterfaceImpl.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl)
-   (ref.func $m_foo__int__int@jsbridgebackward.A)
-   (rtt.canon $jsbridgebackward.InterfaceImpl.vtable)
-  )
- )
-
- ;;; Code for jsbridgebackward.InterfaceImpl [itable.init]
- (global.set $jsbridgebackward.InterfaceImpl.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsbridgebackward.InterfaceImpl.itable) (i32.const 0)
- (struct.new_with_rtt $jsbridgebackward.MyJsInterface.vtable
-  (ref.func $m_foo__int__int@jsbridgebackward.A)
-  (rtt.canon $jsbridgebackward.MyJsInterface.vtable)
- ))

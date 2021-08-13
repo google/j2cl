@@ -25,6 +25,77 @@
 ;;; Code for instancejsmethods.Main [static fields]
 (global $f_$initialized__instancejsmethods_Main (mut i32) (i32.const 0))
 
+ ;;; Code for instancejsmethods.SuperParent [vtable.init]
+ (global.set $instancejsmethods.SuperParent.vtable
+  (struct.new_with_rtt $instancejsmethods.SuperParent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@instancejsmethods.SuperParent)
+   (ref.func $m_fun__int__int__int@instancejsmethods.SuperParent)
+   (ref.func $m_bar__int__int__int@instancejsmethods.SuperParent)
+   (rtt.canon $instancejsmethods.SuperParent.vtable)
+  )
+ )
+
+ ;;; Code for instancejsmethods.SuperParent [itable.init]
+ (global.set $instancejsmethods.SuperParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for instancejsmethods.Parent [vtable.init]
+ (global.set $instancejsmethods.Parent.vtable
+  (struct.new_with_rtt $instancejsmethods.Parent.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@instancejsmethods.Parent)
+   (ref.func $m_fun__int__int__int@instancejsmethods.Parent)
+   (ref.func $m_bar__int__int__int@instancejsmethods.Parent)
+   (ref.func $m_foo__int__int@instancejsmethods.Parent)
+   (rtt.canon $instancejsmethods.Parent.vtable)
+  )
+ )
+
+ ;;; Code for instancejsmethods.Parent [itable.init]
+ (global.set $instancejsmethods.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for instancejsmethods.Child [vtable.init]
+ (global.set $instancejsmethods.Child.vtable
+  (struct.new_with_rtt $instancejsmethods.Child.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@instancejsmethods.Child)
+   (ref.func $m_fun__int__int__int@instancejsmethods.Child)
+   (ref.func $m_bar__int__int__int@instancejsmethods.Child)
+   (ref.func $m_foo__int__int@instancejsmethods.Child)
+   (ref.func $m_intfFoo__int@instancejsmethods.Child)
+   (rtt.canon $instancejsmethods.Child.vtable)
+  )
+ )
+
+ ;;; Code for instancejsmethods.Child [itable.init]
+ (global.set $instancejsmethods.Child.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $instancejsmethods.Child.itable) (i32.const 0)
+ (struct.new_with_rtt $instancejsmethods.MyInterface.vtable
+  (ref.func $m_intfFoo__int@instancejsmethods.Child)
+  (rtt.canon $instancejsmethods.MyInterface.vtable)
+ ))
+
+ ;;; Code for instancejsmethods.Main [vtable.init]
+ (global.set $instancejsmethods.Main.vtable
+  (struct.new_with_rtt $instancejsmethods.Main.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@instancejsmethods.Main)
+   (ref.func $m_testCallBySuperParent__void@instancejsmethods.Main)
+   (rtt.canon $instancejsmethods.Main.vtable)
+  )
+ )
+
+ ;;; Code for instancejsmethods.Main [itable.init]
+ (global.set $instancejsmethods.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for instancejsmethods.MyInterface [INTERFACE]
 (type $instancejsmethods.MyInterface.vtable (struct
  (field $m_intfFoo__int (mut (ref $function.__$int)))
@@ -615,74 +686,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instancejsmethods.Main)
-
- ;;; Code for instancejsmethods.SuperParent [vtable.init]
- (global.set $instancejsmethods.SuperParent.vtable
-  (struct.new_with_rtt $instancejsmethods.SuperParent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@instancejsmethods.SuperParent)
-   (ref.func $m_fun__int__int__int@instancejsmethods.SuperParent)
-   (ref.func $m_bar__int__int__int@instancejsmethods.SuperParent)
-   (rtt.canon $instancejsmethods.SuperParent.vtable)
-  )
- )
-
- ;;; Code for instancejsmethods.SuperParent [itable.init]
- (global.set $instancejsmethods.SuperParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for instancejsmethods.Parent [vtable.init]
- (global.set $instancejsmethods.Parent.vtable
-  (struct.new_with_rtt $instancejsmethods.Parent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@instancejsmethods.Parent)
-   (ref.func $m_fun__int__int__int@instancejsmethods.Parent)
-   (ref.func $m_bar__int__int__int@instancejsmethods.Parent)
-   (ref.func $m_foo__int__int@instancejsmethods.Parent)
-   (rtt.canon $instancejsmethods.Parent.vtable)
-  )
- )
-
- ;;; Code for instancejsmethods.Parent [itable.init]
- (global.set $instancejsmethods.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for instancejsmethods.Child [vtable.init]
- (global.set $instancejsmethods.Child.vtable
-  (struct.new_with_rtt $instancejsmethods.Child.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@instancejsmethods.Child)
-   (ref.func $m_fun__int__int__int@instancejsmethods.Child)
-   (ref.func $m_bar__int__int__int@instancejsmethods.Child)
-   (ref.func $m_foo__int__int@instancejsmethods.Child)
-   (ref.func $m_intfFoo__int@instancejsmethods.Child)
-   (rtt.canon $instancejsmethods.Child.vtable)
-  )
- )
-
- ;;; Code for instancejsmethods.Child [itable.init]
- (global.set $instancejsmethods.Child.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $instancejsmethods.Child.itable) (i32.const 0)
- (struct.new_with_rtt $instancejsmethods.MyInterface.vtable
-  (ref.func $m_intfFoo__int@instancejsmethods.Child)
-  (rtt.canon $instancejsmethods.MyInterface.vtable)
- ))
-
- ;;; Code for instancejsmethods.Main [vtable.init]
- (global.set $instancejsmethods.Main.vtable
-  (struct.new_with_rtt $instancejsmethods.Main.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@instancejsmethods.Main)
-   (ref.func $m_testCallBySuperParent__void@instancejsmethods.Main)
-   (rtt.canon $instancejsmethods.Main.vtable)
-  )
- )
-
- ;;; Code for instancejsmethods.Main [itable.init]
- (global.set $instancejsmethods.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

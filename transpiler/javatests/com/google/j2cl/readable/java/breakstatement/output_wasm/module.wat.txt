@@ -4,6 +4,21 @@
 ;;; Code for breakstatement.BreakStatement [static fields]
 (global $f_$initialized__breakstatement_BreakStatement (mut i32) (i32.const 0))
 
+ ;;; Code for breakstatement.BreakStatement [vtable.init]
+ (global.set $breakstatement.BreakStatement.vtable
+  (struct.new_with_rtt $breakstatement.BreakStatement.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@breakstatement.BreakStatement)
+   (ref.func $m_test__void@breakstatement.BreakStatement)
+   (rtt.canon $breakstatement.BreakStatement.vtable)
+  )
+ )
+
+ ;;; Code for breakstatement.BreakStatement [itable.init]
+ (global.set $breakstatement.BreakStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for breakstatement.BreakStatement [CLASS]
 (type $breakstatement.BreakStatement (struct
  (field $vtable (ref $breakstatement.BreakStatement.vtable)) (field $itable (ref $itable))
@@ -100,18 +115,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@breakstatement.BreakStatement)
-
- ;;; Code for breakstatement.BreakStatement [vtable.init]
- (global.set $breakstatement.BreakStatement.vtable
-  (struct.new_with_rtt $breakstatement.BreakStatement.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@breakstatement.BreakStatement)
-   (ref.func $m_test__void@breakstatement.BreakStatement)
-   (rtt.canon $breakstatement.BreakStatement.vtable)
-  )
- )
-
- ;;; Code for breakstatement.BreakStatement [itable.init]
- (global.set $breakstatement.BreakStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

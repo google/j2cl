@@ -18,6 +18,20 @@
 (global $f_I2__compiletimeconstant_CompileTimeConstant i32 (i32.const 1))
 (global $f_$initialized__compiletimeconstant_CompileTimeConstant (mut i32) (i32.const 0))
 
+ ;;; Code for compiletimeconstant.CompileTimeConstant [vtable.init]
+ (global.set $compiletimeconstant.CompileTimeConstant.vtable
+  (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@compiletimeconstant.CompileTimeConstant)
+   (rtt.canon $compiletimeconstant.CompileTimeConstant.vtable)
+  )
+ )
+
+ ;;; Code for compiletimeconstant.CompileTimeConstant [itable.init]
+ (global.set $compiletimeconstant.CompileTimeConstant.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for compiletimeconstant.CompileTimeConstant [CLASS]
 (type $compiletimeconstant.CompileTimeConstant (struct
  (field $vtable (ref $compiletimeconstant.CompileTimeConstant.vtable)) (field $itable (ref $itable))
@@ -142,17 +156,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@compiletimeconstant.CompileTimeConstant)
-
- ;;; Code for compiletimeconstant.CompileTimeConstant [vtable.init]
- (global.set $compiletimeconstant.CompileTimeConstant.vtable
-  (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@compiletimeconstant.CompileTimeConstant)
-   (rtt.canon $compiletimeconstant.CompileTimeConstant.vtable)
-  )
- )
-
- ;;; Code for compiletimeconstant.CompileTimeConstant [itable.init]
- (global.set $compiletimeconstant.CompileTimeConstant.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

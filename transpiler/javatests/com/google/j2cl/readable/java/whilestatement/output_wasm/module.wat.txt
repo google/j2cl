@@ -4,6 +4,21 @@
 ;;; Code for whilestatement.WhileStatement [static fields]
 (global $f_$initialized__whilestatement_WhileStatement (mut i32) (i32.const 0))
 
+ ;;; Code for whilestatement.WhileStatement [vtable.init]
+ (global.set $whilestatement.WhileStatement.vtable
+  (struct.new_with_rtt $whilestatement.WhileStatement.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@whilestatement.WhileStatement)
+   (ref.func $m_test__void@whilestatement.WhileStatement)
+   (rtt.canon $whilestatement.WhileStatement.vtable)
+  )
+ )
+
+ ;;; Code for whilestatement.WhileStatement [itable.init]
+ (global.set $whilestatement.WhileStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for whilestatement.WhileStatement [CLASS]
 (type $whilestatement.WhileStatement (struct
  (field $vtable (ref $whilestatement.WhileStatement.vtable)) (field $itable (ref $itable))
@@ -105,18 +120,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@whilestatement.WhileStatement)
-
- ;;; Code for whilestatement.WhileStatement [vtable.init]
- (global.set $whilestatement.WhileStatement.vtable
-  (struct.new_with_rtt $whilestatement.WhileStatement.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@whilestatement.WhileStatement)
-   (ref.func $m_test__void@whilestatement.WhileStatement)
-   (rtt.canon $whilestatement.WhileStatement.vtable)
-  )
- )
-
- ;;; Code for whilestatement.WhileStatement [itable.init]
- (global.set $whilestatement.WhileStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

@@ -22,6 +22,50 @@
 ;;; Code for importglobaljstypes.Number.MyLiteralType [static fields]
 (global $f_$initialized__importglobaljstypes_Number_MyLiteralType (mut i32) (i32.const 0))
 
+ ;;; Code for importglobaljstypes.Date [vtable.init]
+ (global.set $importglobaljstypes.Date.vtable
+  (struct.new_with_rtt $importglobaljstypes.Date.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date)
+   (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date)
+   (rtt.canon $importglobaljstypes.Date.vtable)
+  )
+ )
+
+ ;;; Code for importglobaljstypes.Date [itable.init]
+ (global.set $importglobaljstypes.Date.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for importglobaljstypes.Date.NativeDate [vtable.init]
+ (global.set $importglobaljstypes.Date.NativeDate.vtable
+  (struct.new_with_rtt $importglobaljstypes.Date.NativeDate.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate)
+   (rtt.canon $importglobaljstypes.Date.NativeDate.vtable)
+  )
+ )
+
+ ;;; Code for importglobaljstypes.Date.NativeDate [itable.init]
+ (global.set $importglobaljstypes.Date.NativeDate.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for importglobaljstypes.Number [vtable.init]
+ (global.set $importglobaljstypes.Number.vtable
+  (struct.new_with_rtt $importglobaljstypes.Number.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Number)
+   (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number)
+   (rtt.canon $importglobaljstypes.Number.vtable)
+  )
+ )
+
+ ;;; Code for importglobaljstypes.Number [itable.init]
+ (global.set $importglobaljstypes.Number.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for importglobaljstypes.Date [CLASS]
 (type $importglobaljstypes.Date (struct
  (field $vtable (ref $importglobaljstypes.Date.vtable)) (field $itable (ref $itable))
@@ -398,47 +442,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number.MyLiteralType)
-
- ;;; Code for importglobaljstypes.Date [vtable.init]
- (global.set $importglobaljstypes.Date.vtable
-  (struct.new_with_rtt $importglobaljstypes.Date.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date)
-   (ref.func $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date)
-   (rtt.canon $importglobaljstypes.Date.vtable)
-  )
- )
-
- ;;; Code for importglobaljstypes.Date [itable.init]
- (global.set $importglobaljstypes.Date.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for importglobaljstypes.Date.NativeDate [vtable.init]
- (global.set $importglobaljstypes.Date.NativeDate.vtable
-  (struct.new_with_rtt $importglobaljstypes.Date.NativeDate.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate)
-   (rtt.canon $importglobaljstypes.Date.NativeDate.vtable)
-  )
- )
-
- ;;; Code for importglobaljstypes.Date.NativeDate [itable.init]
- (global.set $importglobaljstypes.Date.NativeDate.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for importglobaljstypes.Number [vtable.init]
- (global.set $importglobaljstypes.Number.vtable
-  (struct.new_with_rtt $importglobaljstypes.Number.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@importglobaljstypes.Number)
-   (ref.func $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType@importglobaljstypes.Number)
-   (rtt.canon $importglobaljstypes.Number.vtable)
-  )
- )
-
- ;;; Code for importglobaljstypes.Number [itable.init]
- (global.set $importglobaljstypes.Number.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))

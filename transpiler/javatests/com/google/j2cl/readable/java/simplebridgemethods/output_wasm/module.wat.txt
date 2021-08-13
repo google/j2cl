@@ -37,6 +37,107 @@
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [static fields]
 (global $f_$initialized__simplebridgemethods_SimpleBridgeMethods (mut i32) (i32.const 0))
 
+ ;;; Code for simplebridgemethods.Superclass [vtable.init]
+ (global.set $simplebridgemethods.Superclass.vtable
+  (struct.new_with_rtt $simplebridgemethods.Superclass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Superclass)
+   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
+   (rtt.canon $simplebridgemethods.Superclass.vtable)
+  )
+ )
+
+ ;;; Code for simplebridgemethods.Superclass [itable.init]
+ (global.set $simplebridgemethods.Superclass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for simplebridgemethods.Subclass [vtable.init]
+ (global.set $simplebridgemethods.Subclass.vtable
+  (struct.new_with_rtt $simplebridgemethods.Subclass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Subclass)
+   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
+   (ref.func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass)
+   (rtt.canon $simplebridgemethods.Subclass.vtable)
+  )
+ )
+
+ ;;; Code for simplebridgemethods.Subclass [itable.init]
+ (global.set $simplebridgemethods.Subclass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for simplebridgemethods.AnotherSubclass [vtable.init]
+ (global.set $simplebridgemethods.AnotherSubclass.vtable
+  (struct.new_with_rtt $simplebridgemethods.AnotherSubclass.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.AnotherSubclass)
+   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
+   (rtt.canon $simplebridgemethods.AnotherSubclass.vtable)
+  )
+ )
+
+ ;;; Code for simplebridgemethods.AnotherSubclass [itable.init]
+ (global.set $simplebridgemethods.AnotherSubclass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
+ ;;; Code for simplebridgemethods.Task [vtable.init]
+ (global.set $simplebridgemethods.Task.vtable
+  (struct.new_with_rtt $simplebridgemethods.Task.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Task)
+   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
+   (rtt.canon $simplebridgemethods.Task.vtable)
+  )
+ )
+
+ ;;; Code for simplebridgemethods.Task [itable.init]
+ (global.set $simplebridgemethods.Task.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $simplebridgemethods.Task.itable) (i32.const 0)
+ (struct.new_with_rtt $simplebridgemethods.Callable.vtable
+  (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
+  (rtt.canon $simplebridgemethods.Callable.vtable)
+ ))
+
+ ;;; Code for simplebridgemethods.AnotherTask [vtable.init]
+ (global.set $simplebridgemethods.AnotherTask.vtable
+  (struct.new_with_rtt $simplebridgemethods.AnotherTask.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.AnotherTask)
+   (ref.func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask)
+   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
+   (rtt.canon $simplebridgemethods.AnotherTask.vtable)
+  )
+ )
+
+ ;;; Code for simplebridgemethods.AnotherTask [itable.init]
+ (global.set $simplebridgemethods.AnotherTask.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
+ (array.set $itable (global.get $simplebridgemethods.AnotherTask.itable) (i32.const 0)
+ (struct.new_with_rtt $simplebridgemethods.Callable.vtable
+  (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
+  (rtt.canon $simplebridgemethods.Callable.vtable)
+ ))
+
+ ;;; Code for simplebridgemethods.SimpleBridgeMethods [vtable.init]
+ (global.set $simplebridgemethods.SimpleBridgeMethods.vtable
+  (struct.new_with_rtt $simplebridgemethods.SimpleBridgeMethods.vtable
+   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+   (ref.func $m_hashCode__int@java.lang.Object)
+   (ref.func $m_toString__java_lang_String@java.lang.Object)
+   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.SimpleBridgeMethods)
+   (rtt.canon $simplebridgemethods.SimpleBridgeMethods.vtable)
+  )
+ )
+
+ ;;; Code for simplebridgemethods.SimpleBridgeMethods [itable.init]
+ (global.set $simplebridgemethods.SimpleBridgeMethods.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+
 ;;; Code for simplebridgemethods.Superclass [CLASS]
 (type $simplebridgemethods.Superclass (struct
  (field $vtable (ref $simplebridgemethods.Superclass.vtable)) (field $itable (ref $itable))
@@ -576,104 +677,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@simplebridgemethods.SimpleBridgeMethods)
-
- ;;; Code for simplebridgemethods.Superclass [vtable.init]
- (global.set $simplebridgemethods.Superclass.vtable
-  (struct.new_with_rtt $simplebridgemethods.Superclass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Superclass)
-   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
-   (rtt.canon $simplebridgemethods.Superclass.vtable)
-  )
- )
-
- ;;; Code for simplebridgemethods.Superclass [itable.init]
- (global.set $simplebridgemethods.Superclass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for simplebridgemethods.Subclass [vtable.init]
- (global.set $simplebridgemethods.Subclass.vtable
-  (struct.new_with_rtt $simplebridgemethods.Subclass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Subclass)
-   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
-   (ref.func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass)
-   (rtt.canon $simplebridgemethods.Subclass.vtable)
-  )
- )
-
- ;;; Code for simplebridgemethods.Subclass [itable.init]
- (global.set $simplebridgemethods.Subclass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for simplebridgemethods.AnotherSubclass [vtable.init]
- (global.set $simplebridgemethods.AnotherSubclass.vtable
-  (struct.new_with_rtt $simplebridgemethods.AnotherSubclass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.AnotherSubclass)
-   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
-   (rtt.canon $simplebridgemethods.AnotherSubclass.vtable)
-  )
- )
-
- ;;; Code for simplebridgemethods.AnotherSubclass [itable.init]
- (global.set $simplebridgemethods.AnotherSubclass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for simplebridgemethods.Task [vtable.init]
- (global.set $simplebridgemethods.Task.vtable
-  (struct.new_with_rtt $simplebridgemethods.Task.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Task)
-   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
-   (rtt.canon $simplebridgemethods.Task.vtable)
-  )
- )
-
- ;;; Code for simplebridgemethods.Task [itable.init]
- (global.set $simplebridgemethods.Task.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $simplebridgemethods.Task.itable) (i32.const 0)
- (struct.new_with_rtt $simplebridgemethods.Callable.vtable
-  (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
-  (rtt.canon $simplebridgemethods.Callable.vtable)
- ))
-
- ;;; Code for simplebridgemethods.AnotherTask [vtable.init]
- (global.set $simplebridgemethods.AnotherTask.vtable
-  (struct.new_with_rtt $simplebridgemethods.AnotherTask.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.AnotherTask)
-   (ref.func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask)
-   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
-   (rtt.canon $simplebridgemethods.AnotherTask.vtable)
-  )
- )
-
- ;;; Code for simplebridgemethods.AnotherTask [itable.init]
- (global.set $simplebridgemethods.AnotherTask.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $simplebridgemethods.AnotherTask.itable) (i32.const 0)
- (struct.new_with_rtt $simplebridgemethods.Callable.vtable
-  (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
-  (rtt.canon $simplebridgemethods.Callable.vtable)
- ))
-
- ;;; Code for simplebridgemethods.SimpleBridgeMethods [vtable.init]
- (global.set $simplebridgemethods.SimpleBridgeMethods.vtable
-  (struct.new_with_rtt $simplebridgemethods.SimpleBridgeMethods.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.SimpleBridgeMethods)
-   (rtt.canon $simplebridgemethods.SimpleBridgeMethods.vtable)
-  )
- )
-
- ;;; Code for simplebridgemethods.SimpleBridgeMethods [itable.init]
- (global.set $simplebridgemethods.SimpleBridgeMethods.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
