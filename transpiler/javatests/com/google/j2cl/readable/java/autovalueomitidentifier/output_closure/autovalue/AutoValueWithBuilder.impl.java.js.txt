@@ -1,0 +1,73 @@
+goog.module('autovalue.AutoValueWithBuilder$impl');
+
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Builder = goog.forwardDeclare('autovalue.AutoValueWithBuilder.Builder$impl');
+
+class AutoValueWithBuilder extends ValueType {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ = false;
+  /**@type {?number}*/
+  this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_;
+  /**@type {number}*/
+  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_ = 0;
+ }
+ /** @return {AutoValueWithBuilder} */
+ static m_create__() {
+  AutoValueWithBuilder.$clinit();
+  return Builder.$create__().m_setBooleanField__boolean(true).m_build__();
+ }
+ /** @return {!AutoValueWithBuilder} */
+ static $create__boolean__java_lang_Double__int(/** boolean */ booleanField, /** ?number */ nullableField, /** number */ intField) {
+  AutoValueWithBuilder.$clinit();
+  let $instance = new AutoValueWithBuilder();
+  $instance.$ctor__autovalue_AutoValueWithBuilder__boolean__java_lang_Double__int(booleanField, nullableField, intField);
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValueWithBuilder__boolean__java_lang_Double__int(/** boolean */ booleanField, /** ?number */ nullableField, /** number */ intField) {
+  this.$ctor__java_lang_Object__();
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_ = booleanField;
+  this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_ = nullableField;
+  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_ = intField;
+ }
+ /** @return {boolean} */
+ m_getBooleanField__() {
+  return this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_;
+ }
+ /** @return {?number} */
+ m_getNullableField__() {
+  return this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_;
+ }
+ /** @return {number} */
+ m_getIntField__() {
+  return this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_;
+ }
+ /** @return {Builder} */
+ m_toBuilder__() {
+  return Builder.$create__autovalue_AutoValueWithBuilder(this);
+ }
+ 
+ static $clinit() {
+  AutoValueWithBuilder.$clinit = () =>{};
+  AutoValueWithBuilder.$loadModules();
+  ValueType.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueWithBuilder;
+ }
+ 
+ static $loadModules() {
+  Builder = goog.module.get('autovalue.AutoValueWithBuilder.Builder$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValueWithBuilder, 'autovalue.AutoValueWithBuilder');
+
+exports = AutoValueWithBuilder;
+
+//# sourceMappingURL=AutoValueWithBuilder.js.map
