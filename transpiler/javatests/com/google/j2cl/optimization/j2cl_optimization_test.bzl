@@ -20,7 +20,6 @@ def j2cl_optimization_test(name, defs = [], javacopts = []):
             "--define=jre.checkedMode=DISABLED",
         ] + defs,
         deps_mgmt = "closure",
-        externs_list = ["//javascript/externs:common"],
         deps = [
             ":shared",
             "//third_party:junit-j2cl",
