@@ -1,0 +1,65 @@
+goog.module('autovalue.AutoValueWithOverrides$impl');
+
+const BaseClass = goog.require('autovalue.BaseClass$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class AutoValueWithOverrides extends BaseClass {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = 0;
+  /**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = false;
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ o) {
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  return 1;
+ }
+ /** @override @return {?string} */
+ toString() {
+  return 'x';
+ }
+ /** @return {!AutoValueWithOverrides} */
+ static $create__int__boolean(/** number */ baseField, /** boolean */ booleanField) {
+  AutoValueWithOverrides.$clinit();
+  let $instance = new AutoValueWithOverrides();
+  $instance.$ctor__autovalue_AutoValueWithOverrides__int__boolean(baseField, booleanField);
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValueWithOverrides__int__boolean(/** number */ baseField, /** boolean */ booleanField) {
+  this.$ctor__autovalue_BaseClass__();
+  this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_ = baseField;
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_ = booleanField;
+ }
+ /** @override @return {number} */
+ m_getBaseField__() {
+  return this.f_baseField__autovalue_AutoValue_AutoValueWithOverrides_;
+ }
+ /** @return {boolean} */
+ m_getBooleanField__() {
+  return this.f_booleanField__autovalue_AutoValue_AutoValueWithOverrides_;
+ }
+ 
+ static $clinit() {
+  AutoValueWithOverrides.$clinit = () =>{};
+  AutoValueWithOverrides.$loadModules();
+  BaseClass.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueWithOverrides;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValueWithOverrides, 'autovalue.AutoValueWithOverrides');
+
+exports = AutoValueWithOverrides;
+
+//# sourceMappingURL=AutoValueWithOverrides.js.map

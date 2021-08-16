@@ -319,6 +319,11 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         .forEach(
             autoValue -> {
               int mask = removeJavaLangObjectMethods(autoValue);
+              if (mask == 0) {
+                // No method removed/needs optimization. Leave the type alone.
+                return;
+              }
+
               if (TypeDescriptors.isJavaLangObject(autoValue.getSuperTypeDescriptor())) {
                 // Change the parent type of AutoValue class to ValueType.
                 autoValue.setSuperTypeDescriptor(TypeDescriptors.get().javaemulInternalValueType);
