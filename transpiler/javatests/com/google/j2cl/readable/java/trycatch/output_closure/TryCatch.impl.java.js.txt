@@ -142,6 +142,34 @@ class TryCatch extends j_l_Object {
   }
  }
  
+ m_testTryWithResouceOnStaticField__() {
+  try {
+   let /** Throwable */ $primaryExc;
+   let /** ClosableThing */ $resource;
+   try {
+    $resource = TryCatch.f_closableThing__trycatch_TryCatch_;
+    throw $Exceptions.toJs(Exception.$create__());
+   } catch (__$exc) {
+    __$exc = $Exceptions.toJava(__$exc);
+    {
+     let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);
+     $primaryExc = $exceptionFromTry;
+     throw $Exceptions.toJs($exceptionFromTry);
+    }
+   } finally {
+    $primaryExc = $Exceptions.safeClose($resource, $primaryExc);
+    if (!$Equality.$same($primaryExc, null)) {
+     throw $Exceptions.toJs($primaryExc);
+    }
+   }
+  } catch (__$exc_1) {
+   __$exc_1 = $Exceptions.toJava(__$exc_1);
+   if (Exception.$isInstance(__$exc_1)) {} else {
+    throw $Exceptions.toJs(__$exc_1);
+   }
+  }
+ }
+ 
  m_testNestedTryCatch__() {
   try {
    throw $Exceptions.toJs(Exception.$create__());
@@ -183,6 +211,7 @@ class TryCatch extends j_l_Object {
   TryCatch.$clinit = () =>{};
   TryCatch.$loadModules();
   j_l_Object.$clinit();
+  TryCatch.f_closableThing__trycatch_TryCatch_ = ClosableThing.$create__();
  }
  /** @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -201,6 +230,8 @@ class TryCatch extends j_l_Object {
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }
 }
+/**@type {ClosableThing}*/
+TryCatch.f_closableThing__trycatch_TryCatch_;
 $Util.$setClassMetadata(TryCatch, 'trycatch.TryCatch');
 
 exports = TryCatch;

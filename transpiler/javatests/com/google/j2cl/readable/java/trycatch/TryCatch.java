@@ -82,6 +82,16 @@ public class TryCatch {
     }
   }
 
+  private static final ClosableThing closableThing = new ClosableThing();
+
+  public void testTryWithResouceOnStaticField() {
+    try (closableThing) {
+      throw new Exception();
+    } catch (Exception e) {
+      // expected empty body
+    }
+  }
+
   public void testNestedTryCatch() {
     try {
       throw new Exception();

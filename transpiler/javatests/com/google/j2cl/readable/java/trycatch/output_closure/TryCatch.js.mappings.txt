@@ -260,6 +260,75 @@
 [{
       // expected empty body.
     }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testTryWithResourceJava9"
+[testTryWithResouceOnStaticField] => [m_testTryWithResouceOnStaticField__]
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [try {
+   let /** Throwable */ $primaryExc;
+...   }
+  }] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [let /** Throwable */ $primaryExc;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [let /** ClosableThing */ $resource;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [try {
+    $resource = TryCatch.f_closableThing__trycatch_TryCatch_;
+...    }
+   }] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [$resource = TryCatch.f_closableThing__trycatch_TryCatch_;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[throw new Exception();] => [throw $Exceptions.toJs(Exception.$create__());] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [__$exc = $Exceptions.toJava(__$exc);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [let $exceptionFromTry = /**@type {Throwable}*/ (__$exc);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [$primaryExc = $exceptionFromTry;] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [throw $Exceptions.toJs($exceptionFromTry);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [$primaryExc = $Exceptions.safeClose($resource, $primaryExc);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [if (!$Equality.$same($primaryExc, null)) {
+     throw $Exceptions.toJs($primaryExc);
+    }] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[try (closableThing) {
+      throw new Exception();
+...      // expected empty body
+    }] => [throw $Exceptions.toJs($primaryExc);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[{
+      // expected empty body
+    }] => [__$exc_1 = $Exceptions.toJava(__$exc_1);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[{
+      // expected empty body
+    }] => [if (Exception.$isInstance(__$exc_1)) {} else {
+    throw $Exceptions.toJs(__$exc_1);
+   }] "trycatch.TryCatch.testTryWithResouceOnStaticField"
+[{
+      // expected empty body
+    }] => [throw $Exceptions.toJs(__$exc_1);] "trycatch.TryCatch.testTryWithResouceOnStaticField"
 [testNestedTryCatch] => [m_testNestedTryCatch__]
 [try {
       throw new Exception();
@@ -321,4 +390,8 @@
 [TryCatch] => [TryCatch.$clinit = () =>{};] "trycatch.TryCatch.<clinit>"
 [TryCatch] => [TryCatch.$loadModules();] "trycatch.TryCatch.<clinit>"
 [TryCatch] => [j_l_Object.$clinit();] "trycatch.TryCatch.<clinit>"
+[private static final ClosableThing closableThing = new ClosableThing();] => [TryCatch.f_closableThing__trycatch_TryCatch_ = ClosableThing.$create__();] "trycatch.TryCatch.<clinit>"
+[TryCatch] => [/**@type {ClosableThing}*/
+TryCatch.f_closableThing__trycatch_TryCatch_;]
+[closableThing] => [f_closableThing__trycatch_TryCatch_]
 
