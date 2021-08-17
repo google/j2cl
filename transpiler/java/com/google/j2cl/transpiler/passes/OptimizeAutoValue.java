@@ -23,6 +23,7 @@ import static com.google.j2cl.transpiler.ast.TypeDescriptor.replaceTypeDescripto
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -388,6 +389,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 new JavaScriptConstructorReference(type.getDeclaration()),
                 NumberLiteral.fromInt(mask))
             .build();
-    type.addLoadTimeStatement(mixinCall.makeStatement(type.getSourcePosition()));
+    type.addLoadTimeStatement(mixinCall.makeStatement(SourcePosition.NONE));
   }
 }
