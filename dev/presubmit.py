@@ -28,7 +28,7 @@ def main(argv):
   make_size_report.main(argv)
 
   print_header("Running all integration tests")
-  test_all.run_for_presubmit()
+  test_all.run_for_presubmit(argv)
 
   print(
       "\n\nRemember to check for changes in the readable examples and size_report."

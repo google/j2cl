@@ -34,6 +34,6 @@ def add_arguments(parser):
       help="test root(s). e.g. transpiler jre")
 
 
-def run_for_presubmit():
-  argv = argparse.Namespace(test_pattern=[])
+def run_for_presubmit(argv):
+  argv = argparse.Namespace(test_pattern=[], platforms=argv.platforms)
   main(argv)
