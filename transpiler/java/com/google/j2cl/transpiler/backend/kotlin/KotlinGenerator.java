@@ -67,6 +67,9 @@ public class KotlinGenerator {
   }
 
   private void renderClassBody() {
+    if (!type.getDeclaration().isFinal()) {
+      sourceBuilder.append("open ");
+    }
     sourceBuilder.append("class ");
     sourceBuilder.append(type.getDeclaration().getSimpleSourceName());
     // TODO(dpo): add support for class hierarchies
@@ -87,7 +90,7 @@ public class KotlinGenerator {
       return "";
     }
     String superTypeName = superTypeDescriptor.getQualifiedSourceName();
-    return String.format("extends %s ", superTypeName);
+    return String.format("extends %s", superTypeName);
   }
 
   private void renderTypeMethods() {

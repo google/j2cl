@@ -118,7 +118,7 @@ public class StatementTranspiler {
         renderExpression(ifStatement.getConditionExpression());
         builder.append(") ");
         render(ifStatement.getThenStatement());
-        if (ifStatement.getElseStatement() == null) {
+        if (ifStatement.getElseStatement() != null) {
           builder.append(" else ");
           render(ifStatement.getElseStatement());
         }
