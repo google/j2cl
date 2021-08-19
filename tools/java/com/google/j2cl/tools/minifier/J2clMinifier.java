@@ -374,6 +374,11 @@ public class J2clMinifier {
     startNewIdentifier(buffer, c);
   }
 
+  private static void writeQuoteAndStartNewIdentifier(Buffer buffer, char c) {
+    writeChar(buffer, '\'');
+    buffer.recordStartOfNewIdentifier();
+  }
+
   private static String extractFileKey(String fullPath) {
     if (fullPath == null) {
       return null;
@@ -441,7 +446,8 @@ public class J2clMinifier {
     transFn[S_NON_IDENTIFIER][S_IDENTIFIER] = J2clMinifier::startNewIdentifier;
     transFn[S_NON_IDENTIFIER][S_NON_IDENTIFIER] = J2clMinifier::writeNonIdentifierCharOrReplace;
     transFn[S_NON_IDENTIFIER][S_MAYBE_COMMENT_START] = J2clMinifier::skipChar;
-    transFn[S_NON_IDENTIFIER][S_SINGLE_QUOTED_STRING] = J2clMinifier::writeChar;
+    transFn[S_NON_IDENTIFIER][S_SINGLE_QUOTED_STRING] =
+        J2clMinifier::writeQuoteAndStartNewIdentifier;
     transFn[S_NON_IDENTIFIER][S_DOUBLE_QUOTED_STRING] = J2clMinifier::writeChar;
     transFn[S_NON_IDENTIFIER][S_END_STATE] = J2clMinifier::writeNonIdentifierCharOrReplace;
 
@@ -457,6 +463,9 @@ public class J2clMinifier {
     transFn[S_MAYBE_COMMENT_START][S_LINE_COMMENT] = J2clMinifier::skipChar;
     transFn[S_MAYBE_COMMENT_START][S_BLOCK_COMMENT] = J2clMinifier::skipChar;
     transFn[S_MAYBE_COMMENT_START][S_NON_IDENTIFIER] = J2clMinifier::writeSlashAndChar;
+    // Note that this is potential String start and we might choose to handle identifiers here.
+    // However it is not worthwhile and keeping String identifier replacement conservative is good
+    // idea for our very limited use cases.
     transFn[S_MAYBE_COMMENT_START][S_SINGLE_QUOTED_STRING] = J2clMinifier::writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_DOUBLE_QUOTED_STRING] = J2clMinifier::writeSlashAndChar;
     transFn[S_MAYBE_COMMENT_START][S_END_STATE] = J2clMinifier::writeSlash;
@@ -481,7 +490,8 @@ public class J2clMinifier {
 
     transFn[S_SINGLE_QUOTED_STRING][S_SINGLE_QUOTED_STRING] = J2clMinifier::writeChar;
     transFn[S_SINGLE_QUOTED_STRING][S_SINGLE_QUOTED_STRING_ESCAPE] = J2clMinifier::writeChar;
-    transFn[S_SINGLE_QUOTED_STRING][S_NON_IDENTIFIER] = J2clMinifier::writeChar;
+    transFn[S_SINGLE_QUOTED_STRING][S_NON_IDENTIFIER] =
+        this::maybeReplaceIdentifierAndWriteNonIdentifier;
     transFn[S_SINGLE_QUOTED_STRING][S_END_STATE] = J2clMinifier::skipChar;
 
     transFn[S_DOUBLE_QUOTED_STRING][S_DOUBLE_QUOTED_STRING] = J2clMinifier::writeChar;

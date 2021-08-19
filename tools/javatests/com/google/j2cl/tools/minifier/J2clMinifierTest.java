@@ -241,6 +241,11 @@ public class J2clMinifierTest extends TestCase {
     assertNoChange("'this.m_foo__();'");
     assertChange("'' + this.m_foo__(); + ''", "'' + this.foo_$1(); + ''");
     assertNoChange("'this.m_foo__();'");
+    assertChange("'m_foo__'", "'foo_$1'");
+    assertNoChange("'This is \\'m_foo__'");
+    // We don't handle string identifiers in complicated scenarios. See related comment in minifier.
+    assertNoChange("1/'m_foo__'.length()");
+
     assertNoChange("'\\'/* */\\''");
 
     // Double quoted
@@ -249,6 +254,8 @@ public class J2clMinifierTest extends TestCase {
     assertChange("\"\" + this.m_foo__(); + \"\"", "\"\" + this.foo_$1(); + \"\"");
     assertNoChange("\"this.m_foo__();\"");
     assertNoChange("\"\\\"/* */\\\"'");
+    // Identifiers in double quotes are not replaced. J2CL only generates single quote.
+    assertNoChange("\"m_foo__\"");
 
     // Mixed
     assertNoChange("\"'/* */'\"");
