@@ -57,11 +57,12 @@ def blaze_clean():
   repo_util.run_cmd(["blaze", "clean", "--expunge"])
 
 
-def blaze_build(js_readable_dirs, wasm_readable_dirs):
+def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
   """Blaze build everything in 1-go, for speed."""
 
   build_targets = [d + "/readable.js.zip" for d in js_readable_dirs]
   build_targets += [d + "/readable_wasm.wat" for d in wasm_readable_dirs]
+  build_targets += [d + "/readable_kt" for d in kt_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
@@ -199,6 +200,35 @@ def gather_closure_warnings(build_log):
         build_log_file.write(build_log)
 
 
+def replace_transpiled_kt(readable_dirs):
+  """Copy and reformat and replace with Blaze built kt."""
+  for readable_dir in readable_dirs:
+    with tempfile.TemporaryDirectory() as tmpdirname:
+      output = readable_dir + "/output_kt"
+
+      # Clean the output directory from the result of last run.
+      repo_util.run_cmd(["rm", "-Rf", output])
+      repo_util.run_cmd(["mkdir", output])
+
+      # Move files to temp dir.  Removing any attributes (eg. executable bit).
+      repo_util.run_cmd(["cp -rf --no-preserve=mode " + "blaze-bin/" +
+                         readable_dir + "/readable_kt.kt/* " +
+                         tmpdirname], shell=True)
+
+      # Normalize the path relative to output directory.
+      repo_util.run_cmd([
+          "mv " + tmpdirname + "/" + os.path.relpath(readable_dir, JAVA_DIR) +
+          "/* " + tmpdirname
+      ], shell=True)
+
+      # Move all files to => {file}.txt
+      repo_util.run_cmd(
+          ["find", "-type", "f", "-exec", "mv", "{}", "{}.txt", ";"],
+          cwd=tmpdirname)
+
+      # Move all the files to readable directory.
+      repo_util.run_cmd(["mv " + tmpdirname + "/* " + output], shell=True)
+
 args = None
 
 
@@ -214,6 +244,8 @@ def main(argv):
       readable_pattern) if "CLOSURE" in args.platforms else []
   wasm_readable_dirs = get_readable_dirs(
       readable_pattern, "_wasm") if "WASM" in args.platforms else []
+  kt_readable_dirs = get_readable_dirs(
+      readable_pattern, "_kt") if "KT" in args.platforms else []
 
   if not js_readable_dirs and not wasm_readable_dirs:
     print("No matching readables!")
@@ -231,8 +263,11 @@ def main(argv):
     print("\n".join(["    " + d for d in js_readable_dirs or ["No matches"]]))
     print("  Blaze building WASM:")
     print("\n".join(["    " + d for d in wasm_readable_dirs or ["No matches"]]))
+    print("  Blaze building KT:")
+    print("\n".join(["    " + d for d in kt_readable_dirs or ["No matches"]]))
 
-  build_log = blaze_build(js_readable_dirs, wasm_readable_dirs)
+  build_log = blaze_build(
+      js_readable_dirs, wasm_readable_dirs, kt_readable_dirs)
 
   if js_readable_dirs:
     if args.nologs:
@@ -246,6 +281,10 @@ def main(argv):
   if wasm_readable_dirs:
     print("  Copying and reformatting transpiled WASM")
     replace_transpiled_wasm(wasm_readable_dirs)
+
+  if kt_readable_dirs:
+    print("  Copying and reformatting transpiled KT")
+    replace_transpiled_kt(kt_readable_dirs)
 
   print("Check for changes in the readable examples")
 

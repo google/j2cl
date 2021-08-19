@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 
@@ -73,7 +74,7 @@ public class KotlinGenerator {
     sourceBuilder.append("class ");
     sourceBuilder.append(type.getDeclaration().getSimpleSourceName());
     // TODO(dpo): add support for class hierarchies
-    sourceBuilder.append(" " + getExtendsClause(type));
+    sourceBuilder.append(getExtendsClause(type));
     // TODO(dpo): add support for field declarations
     if (!type.getMethods().isEmpty()) {
       sourceBuilder.append(" ");
@@ -86,11 +87,11 @@ public class KotlinGenerator {
 
   private static String getExtendsClause(Type type) {
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (superTypeDescriptor == null || superTypeDescriptor.isStarOrUnknown()) {
+    if (superTypeDescriptor == null || TypeDescriptors.isJavaLangObject(superTypeDescriptor)) {
       return "";
     }
     String superTypeName = superTypeDescriptor.getQualifiedSourceName();
-    return String.format("extends %s", superTypeName);
+    return String.format(" extends %s", superTypeName);
   }
 
   private void renderTypeMethods() {

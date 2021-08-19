@@ -34,7 +34,7 @@ def _add_cmd(subparsers, name, handler, descr):
   parser.set_defaults(func=handler.main)
 
 
-_PLATFORMS = ["CLOSURE", "WASM", "JVM"]
+_PLATFORMS = ["CLOSURE", "WASM", "JVM", "KT"]
 
 if __name__ == "__main__":
   base_parser = argparse.ArgumentParser(description="j2 dev script.")
