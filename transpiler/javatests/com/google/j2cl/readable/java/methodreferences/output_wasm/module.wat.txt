@@ -833,17 +833,12 @@
   ;; java.lang.Object.$clinit();
   ;;@ methodreferences/MethodReferences.java:20:13
   (call $$clinit__void@java.lang.Object )
-  (block
-   ;; methodreferences.MethodReferences.$clinit();
-   ;;@ methodreferences/MethodReferences.java:76:2
-   (call $$clinit__void@methodreferences.MethodReferences )
-   ;; (methodreferences.MethodReferences.staticStringProducer = (Object $$q = methodreferences.MethodReferences.m(),new $LambdaImplementor$1.<init>($$q)));
-   ;;@ methodreferences/MethodReferences.java:76:2
-   (global.set $f_staticStringProducer__methodreferences_MethodReferences (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
-    (local.set $$$q (call $m_m__java_lang_Object@methodreferences.MethodReferences ))
-    (call $m_<init>__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$1 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.rtt))(local.get $$$q))
-   ))
-  )
+  ;; (methodreferences.MethodReferences.staticStringProducer = (Object $$q = methodreferences.MethodReferences.m(),new $LambdaImplementor$1.<init>($$q)));
+  ;;@ methodreferences/MethodReferences.java:76:2
+  (global.set $f_staticStringProducer__methodreferences_MethodReferences (block (result (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
+   (local.set $$$q (call $m_m__java_lang_Object@methodreferences.MethodReferences ))
+   (call $m_<init>__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1 (struct.new_with_rtt $methodreferences.MethodReferences.$LambdaImplementor$1 (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $methodreferences.MethodReferences.$LambdaImplementor$1.rtt))(local.get $$$q))
+  ))
  )
 )
 

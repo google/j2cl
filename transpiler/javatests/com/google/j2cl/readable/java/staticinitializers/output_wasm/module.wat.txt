@@ -74,33 +74,15 @@
   ;; java.lang.Object.$clinit();
   ;;@ staticinitializers/StaticInitializers.java:18:13
   (call $$clinit__void@java.lang.Object )
-  (block
-   ;; staticinitializers.StaticInitializers.$clinit();
-   ;;@ staticinitializers/StaticInitializers.java:19:2
-   (call $$clinit__void@staticinitializers.StaticInitializers )
-   ;; (staticinitializers.StaticInitializers.a = 5);
-   ;;@ staticinitializers/StaticInitializers.java:19:2
-   (global.set $f_a__staticinitializers_StaticInitializers (i32.const 5))
-  )
-  (block
-   ;; staticinitializers.StaticInitializers.$clinit();
-   ;;@ staticinitializers/StaticInitializers.java:21:2
-   (call $$clinit__void@staticinitializers.StaticInitializers )
-   ;; (staticinitializers.StaticInitializers.b = ((staticinitializers.StaticInitializers.$clinit(),staticinitializers.StaticInitializers.a) * 2));
-   ;;@ staticinitializers/StaticInitializers.java:21:2
-   (global.set $f_b__staticinitializers_StaticInitializers (i32.mul (block (result i32)
-    (call $$clinit__void@staticinitializers.StaticInitializers )
-    (global.get $f_a__staticinitializers_StaticInitializers)
-   ) (i32.const 2)))
-  )
-  (block
-   ;; staticinitializers.StaticInitializers.$clinit();
-   ;;@ staticinitializers/StaticInitializers.java:24:4
-   (call $$clinit__void@staticinitializers.StaticInitializers )
-   ;; (staticinitializers.StaticInitializers.a = 10);
-   ;;@ staticinitializers/StaticInitializers.java:24:4
-   (global.set $f_a__staticinitializers_StaticInitializers (i32.const 10))
-  )
+  ;; (staticinitializers.StaticInitializers.a = 5);
+  ;;@ staticinitializers/StaticInitializers.java:19:2
+  (global.set $f_a__staticinitializers_StaticInitializers (i32.const 5))
+  ;; (staticinitializers.StaticInitializers.b = (staticinitializers.StaticInitializers.a * 2));
+  ;;@ staticinitializers/StaticInitializers.java:21:2
+  (global.set $f_b__staticinitializers_StaticInitializers (i32.mul (global.get $f_a__staticinitializers_StaticInitializers) (i32.const 2)))
+  ;; (staticinitializers.StaticInitializers.a = 10);
+  ;;@ staticinitializers/StaticInitializers.java:24:4
+  (global.set $f_a__staticinitializers_StaticInitializers (i32.const 10))
   ;; int duplicated = 0;
   ;;@ staticinitializers/StaticInitializers.java:25:4
   (local.set $duplicated (i32.const 0))

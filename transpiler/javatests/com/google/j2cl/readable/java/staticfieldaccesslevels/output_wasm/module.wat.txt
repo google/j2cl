@@ -66,15 +66,9 @@
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
  (block
-  ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? ((staticfieldaccesslevels.StaticFieldAccessLevels.$clinit(),staticfieldaccesslevels.StaticFieldAccessLevels.a)) : ((staticfieldaccesslevels.StaticFieldAccessLevels.$clinit(),staticfieldaccesslevels.StaticFieldAccessLevels.d));
+  ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? (staticfieldaccesslevels.StaticFieldAccessLevels.a) : (staticfieldaccesslevels.StaticFieldAccessLevels.d);
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:25:4
-  (return (if (result i32) (global.get $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_) (then (block (result i32)
-   (call $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels )
-   (global.get $f_a__staticfieldaccesslevels_StaticFieldAccessLevels)
-  )) (else (block (result i32)
-   (call $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels )
-   (global.get $f_d__staticfieldaccesslevels_StaticFieldAccessLevels)
-  ))))
+  (return (if (result i32) (global.get $f_b__staticfieldaccesslevels_StaticFieldAccessLevels_) (then (global.get $f_a__staticfieldaccesslevels_StaticFieldAccessLevels)) (else (global.get $f_d__staticfieldaccesslevels_StaticFieldAccessLevels))))
  )
 )
 (elem declare func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels)

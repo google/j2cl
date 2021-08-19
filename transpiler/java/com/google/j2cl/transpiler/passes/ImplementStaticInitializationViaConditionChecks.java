@@ -60,6 +60,12 @@ public class ImplementStaticInitializationViaConditionChecks
           @Override
           public Expression rewriteFieldAccess(FieldAccess fieldAccess) {
             FieldDescriptor target = fieldAccess.getTarget();
+            if (target.isMemberOf(type.getDeclaration())) {
+              // No need to call clinit when accessing the field from members in the enclosing
+              // type.
+              return fieldAccess;
+            }
+
             if (triggersClinit(target)) {
               // TODO(b/181086258): Move the condition check to the field access to avoid clinit
               // function calls after the class is initialized (also potentially do the same
@@ -69,6 +75,7 @@ public class ImplementStaticInitializationViaConditionChecks
                       createClinitCallExpression(target.getEnclosingTypeDescriptor()), fieldAccess)
                   .build();
             }
+
             return fieldAccess;
           }
         });

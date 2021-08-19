@@ -124,22 +124,12 @@
   ;; java.lang.Object.$clinit();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$clinit__void@java.lang.Object )
-  (block
-   ;; compiletimeconstant.CompileTimeConstant.$clinit();
-   ;;@ compiletimeconstant/CompileTimeConstant.java:19:2
-   (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-   ;; (compiletimeconstant.CompileTimeConstant.OBJ = null);
-   ;;@ compiletimeconstant/CompileTimeConstant.java:19:2
-   (global.set $f_OBJ__compiletimeconstant_CompileTimeConstant (ref.null $java.lang.Object))
-  )
-  (block
-   ;; compiletimeconstant.CompileTimeConstant.$clinit();
-   ;;@ compiletimeconstant/CompileTimeConstant.java:29:2
-   (call $$clinit__void@compiletimeconstant.CompileTimeConstant )
-   ;; (compiletimeconstant.CompileTimeConstant.K = null);
-   ;;@ compiletimeconstant/CompileTimeConstant.java:29:2
-   (global.set $f_K__compiletimeconstant_CompileTimeConstant (ref.null $java.lang.String))
-  )
+  ;; (compiletimeconstant.CompileTimeConstant.OBJ = null);
+  ;;@ compiletimeconstant/CompileTimeConstant.java:19:2
+  (global.set $f_OBJ__compiletimeconstant_CompileTimeConstant (ref.null $java.lang.Object))
+  ;; (compiletimeconstant.CompileTimeConstant.K = null);
+  ;;@ compiletimeconstant/CompileTimeConstant.java:29:2
+  (global.set $f_K__compiletimeconstant_CompileTimeConstant (ref.null $java.lang.String))
  )
 )
 

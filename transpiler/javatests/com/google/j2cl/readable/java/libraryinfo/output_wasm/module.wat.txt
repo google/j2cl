@@ -320,14 +320,9 @@
   ;; java.lang.Object.$clinit();
   ;;@ libraryinfo/Main.java:25:13
   (call $$clinit__void@java.lang.Object )
-  (block
-   ;; libraryinfo.Main.$clinit();
-   ;;@ libraryinfo/Main.java:27:2
-   (call $$clinit__void@libraryinfo.Main )
-   ;; (libraryinfo.Main.STATIC_FIELD = javaemul.internal.StringPool.$getString_|STATIC_FIELD|());
-   ;;@ libraryinfo/Main.java:27:2
-   (global.set $f_STATIC_FIELD__libraryinfo_Main (call $$getString_|STATIC_FIELD|__java_lang_String@javaemul.internal.StringPool ))
-  )
+  ;; (libraryinfo.Main.STATIC_FIELD = javaemul.internal.StringPool.$getString_|STATIC_FIELD|());
+  ;;@ libraryinfo/Main.java:27:2
+  (global.set $f_STATIC_FIELD__libraryinfo_Main (call $$getString_|STATIC_FIELD|__java_lang_String@javaemul.internal.StringPool ))
  )
 )
 
@@ -649,22 +644,13 @@
   ;; libraryinfo.Main.MyEnum.$clinit();
   ;;@ libraryinfo/Main.java:59:7
   (call $$clinit__void@libraryinfo.Main.MyEnum )
-  ;; return (MyEnum[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.A)),($array_literal.elements[1] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.B)),($array_literal.elements[2] = (libraryinfo.Main.MyEnum.$clinit(),libraryinfo.Main.MyEnum.C)),$array_literal);
+  ;; return (MyEnum[] $array_literal = new OfObject.<init>(3),($array_literal.elements[0] = libraryinfo.Main.MyEnum.A),($array_literal.elements[1] = libraryinfo.Main.MyEnum.B),($array_literal.elements[2] = libraryinfo.Main.MyEnum.C),$array_literal);
   ;;@ libraryinfo/Main.java:59:7
   (return (block (result (ref null $javaemul.internal.WasmArray.OfObject))
    (local.set $$array_literal (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 3)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (block (result (ref null $libraryinfo.Main.MyEnum))
-    (call $$clinit__void@libraryinfo.Main.MyEnum )
-    (global.get $f_A__libraryinfo_Main_MyEnum)
-   ))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (block (result (ref null $libraryinfo.Main.MyEnum))
-    (call $$clinit__void@libraryinfo.Main.MyEnum )
-    (global.get $f_B__libraryinfo_Main_MyEnum)
-   ))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 2) (block (result (ref null $libraryinfo.Main.MyEnum))
-    (call $$clinit__void@libraryinfo.Main.MyEnum )
-    (global.get $f_C__libraryinfo_Main_MyEnum)
-   ))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (global.get $f_A__libraryinfo_Main_MyEnum))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (global.get $f_B__libraryinfo_Main_MyEnum))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 2) (global.get $f_C__libraryinfo_Main_MyEnum))
    (local.get $$array_literal)
   ))
  )
@@ -689,30 +675,15 @@
   ;; java.lang.Enum.$clinit();
   ;;@ libraryinfo/Main.java:59:7
   (call $$clinit__void@java.lang.Enum )
-  (block
-   ;; libraryinfo.Main.MyEnum.$clinit();
-   ;;@ libraryinfo/Main.java:60:4
-   (call $$clinit__void@libraryinfo.Main.MyEnum )
-   ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|A|(),libraryinfo.Main.MyEnum.A));
-   ;;@ libraryinfo/Main.java:60:4
-   (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|A|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
-  )
-  (block
-   ;; libraryinfo.Main.MyEnum.$clinit();
-   ;;@ libraryinfo/Main.java:61:4
-   (call $$clinit__void@libraryinfo.Main.MyEnum )
-   ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|B|(),libraryinfo.Main.MyEnum.B));
-   ;;@ libraryinfo/Main.java:61:4
-   (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|B|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
-  )
-  (block
-   ;; libraryinfo.Main.MyEnum.$clinit();
-   ;;@ libraryinfo/Main.java:62:4
-   (call $$clinit__void@libraryinfo.Main.MyEnum )
-   ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|C|(),libraryinfo.Main.MyEnum.C));
-   ;;@ libraryinfo/Main.java:62:4
-   (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|C|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
-  )
+  ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|A|(),libraryinfo.Main.MyEnum.A));
+  ;;@ libraryinfo/Main.java:60:4
+  (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|A|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_A__libraryinfo_Main_MyEnum)))
+  ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|B|(),libraryinfo.Main.MyEnum.B));
+  ;;@ libraryinfo/Main.java:61:4
+  (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|B|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_B__libraryinfo_Main_MyEnum)))
+  ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|C|(),libraryinfo.Main.MyEnum.C));
+  ;;@ libraryinfo/Main.java:62:4
+  (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|C|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_C__libraryinfo_Main_MyEnum)))
   ;; (libraryinfo.Main.MyEnum.namesToValuesMap = null);
   ;;@ libraryinfo/Main.java:59:7
   (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (ref.null $java.lang.Object))

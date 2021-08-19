@@ -93,30 +93,15 @@
   ;; java.lang.Object.$clinit();
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (call $$clinit__void@java.lang.Object )
-  (block
-   ;; jsignore.JsIgnoreExample.$clinit();
-   ;;@ jsignore/JsIgnoreExample.java:29:2
-   (call $$clinit__void@jsignore.JsIgnoreExample )
-   ;; (jsignore.JsIgnoreExample.exportedField = 10);
-   ;;@ jsignore/JsIgnoreExample.java:29:2
-   (global.set $f_exportedField__jsignore_JsIgnoreExample (i32.const 10))
-  )
-  (block
-   ;; jsignore.JsIgnoreExample.$clinit();
-   ;;@ jsignore/JsIgnoreExample.java:31:2
-   (call $$clinit__void@jsignore.JsIgnoreExample )
-   ;; (jsignore.JsIgnoreExample.notExportedField = 20);
-   ;;@ jsignore/JsIgnoreExample.java:31:2
-   (global.set $f_notExportedField__jsignore_JsIgnoreExample (i32.const 20))
-  )
-  (block
-   ;; jsignore.JsIgnoreExample.$clinit();
-   ;;@ jsignore/JsIgnoreExample.java:34:2
-   (call $$clinit__void@jsignore.JsIgnoreExample )
-   ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
-   ;;@ jsignore/JsIgnoreExample.java:34:2
-   (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
-  )
+  ;; (jsignore.JsIgnoreExample.exportedField = 10);
+  ;;@ jsignore/JsIgnoreExample.java:29:2
+  (global.set $f_exportedField__jsignore_JsIgnoreExample (i32.const 10))
+  ;; (jsignore.JsIgnoreExample.notExportedField = 20);
+  ;;@ jsignore/JsIgnoreExample.java:31:2
+  (global.set $f_notExportedField__jsignore_JsIgnoreExample (i32.const 20))
+  ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
+  ;;@ jsignore/JsIgnoreExample.java:34:2
+  (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
  )
 )
 

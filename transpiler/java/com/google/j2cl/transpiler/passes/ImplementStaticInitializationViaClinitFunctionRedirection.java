@@ -123,14 +123,19 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
           public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
             FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
             if (!triggersClinit(fieldDescriptor)) {
+              // The field is not rewritten as a getter, hence perform the regular field access on
+              // the actual property.
               return fieldAccess;
             }
 
-            if (!fieldDescriptor.isMemberOf(type.getDeclaration())) {
-              return fieldAccess;
+            if (fieldDescriptor.isMemberOf(type.getDeclaration())) {
+              // Accesses to the field directly trigger clinit, but that is not necessary
+              // within the enclosing type, so access the actual backing field and skip
+              // the redundant clinit call.
+              return FieldAccess.Builder.from(getBackingFieldDescriptor(fieldDescriptor)).build();
             }
 
-            return FieldAccess.Builder.from(getBackingFieldDescriptor(fieldDescriptor)).build();
+            return fieldAccess;
           }
         });
   }

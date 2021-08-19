@@ -345,14 +345,9 @@
   ;; (anonymousclass.SomeInterface.$initialized = true);
   ;;@ anonymousclass/AnonymousClass.java:38:10
   (global.set $f_$initialized__anonymousclass_SomeInterface (i32.const 1))
-  (block
-   ;; anonymousclass.SomeInterface.$clinit();
-   ;;@ anonymousclass/AnonymousClass.java:39:2
-   (call $$clinit__void@anonymousclass.SomeInterface )
-   ;; (anonymousclass.SomeInterface.implicitlyStatic = new $1.<init>(1));
-   ;;@ anonymousclass/AnonymousClass.java:39:2
-   (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $m_<init>__int@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.itable)) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
-  )
+  ;; (anonymousclass.SomeInterface.implicitlyStatic = new $1.<init>(1));
+  ;;@ anonymousclass/AnonymousClass.java:39:2
+  (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $m_<init>__int@anonymousclass.SomeInterface.1 (struct.new_with_rtt $anonymousclass.SomeInterface.1 (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.vtable)) (ref.as_non_null (global.get $anonymousclass.SomeInterface.1.itable)) (i32.const 0) (global.get $anonymousclass.SomeInterface.1.rtt))(i32.const 1)))
  )
 )
 

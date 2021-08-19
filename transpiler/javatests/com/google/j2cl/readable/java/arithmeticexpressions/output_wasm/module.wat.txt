@@ -682,18 +682,11 @@
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
  (local $$value i64)
  (block
-  ;; (ArithmeticExpressions.this.bar = (long $value = (arithmeticexpressions.ArithmeticExpressions.$clinit(),arithmeticexpressions.ArithmeticExpressions.foo),arithmeticexpressions.ArithmeticExpressions.$clinit(),(arithmeticexpressions.ArithmeticExpressions.foo = ((arithmeticexpressions.ArithmeticExpressions.$clinit(),arithmeticexpressions.ArithmeticExpressions.foo) + 1)),$value));
+  ;; (ArithmeticExpressions.this.bar = (long $value = arithmeticexpressions.ArithmeticExpressions.foo,(arithmeticexpressions.ArithmeticExpressions.foo = (arithmeticexpressions.ArithmeticExpressions.foo + 1)),$value));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:71:2
   (struct.set $arithmeticexpressions.ArithmeticExpressions $f_bar__arithmeticexpressions_ArithmeticExpressions(local.get $this) (block (result i64)
-   (local.set $$value (block (result i64)
-    (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-    (global.get $f_foo__arithmeticexpressions_ArithmeticExpressions)
-   ))
-   (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-   (global.set $f_foo__arithmeticexpressions_ArithmeticExpressions (i64.add (block (result i64)
-    (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-    (global.get $f_foo__arithmeticexpressions_ArithmeticExpressions)
-   ) (i64.const 1)))
+   (local.set $$value (global.get $f_foo__arithmeticexpressions_ArithmeticExpressions))
+   (global.set $f_foo__arithmeticexpressions_ArithmeticExpressions (i64.add (global.get $f_foo__arithmeticexpressions_ArithmeticExpressions) (i64.const 1)))
    (local.get $$value)
   ))
  )
@@ -719,33 +712,16 @@
   ;; java.lang.Object.$clinit();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
   (call $$clinit__void@java.lang.Object )
-  (block
-   ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
-   ;;@ arithmeticexpressions/ArithmeticExpressions.java:69:2
-   (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-   ;; (arithmeticexpressions.ArithmeticExpressions.one = 1);
-   ;;@ arithmeticexpressions/ArithmeticExpressions.java:69:2
-   (global.set $f_one__arithmeticexpressions_ArithmeticExpressions (i64.const 1))
-  )
-  (block
-   ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
-   ;;@ arithmeticexpressions/ArithmeticExpressions.java:70:2
-   (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-   ;; (arithmeticexpressions.ArithmeticExpressions.foo = (long $value = (arithmeticexpressions.ArithmeticExpressions.$clinit(),arithmeticexpressions.ArithmeticExpressions.one),arithmeticexpressions.ArithmeticExpressions.$clinit(),(arithmeticexpressions.ArithmeticExpressions.one = ((arithmeticexpressions.ArithmeticExpressions.$clinit(),arithmeticexpressions.ArithmeticExpressions.one) + 1)),$value));
-   ;;@ arithmeticexpressions/ArithmeticExpressions.java:70:2
-   (global.set $f_foo__arithmeticexpressions_ArithmeticExpressions (block (result i64)
-    (local.set $$value (block (result i64)
-     (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-     (global.get $f_one__arithmeticexpressions_ArithmeticExpressions)
-    ))
-    (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-    (global.set $f_one__arithmeticexpressions_ArithmeticExpressions (i64.add (block (result i64)
-     (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-     (global.get $f_one__arithmeticexpressions_ArithmeticExpressions)
-    ) (i64.const 1)))
-    (local.get $$value)
-   ))
-  )
+  ;; (arithmeticexpressions.ArithmeticExpressions.one = 1);
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:69:2
+  (global.set $f_one__arithmeticexpressions_ArithmeticExpressions (i64.const 1))
+  ;; (arithmeticexpressions.ArithmeticExpressions.foo = (long $value = arithmeticexpressions.ArithmeticExpressions.one,(arithmeticexpressions.ArithmeticExpressions.one = (arithmeticexpressions.ArithmeticExpressions.one + 1)),$value));
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:70:2
+  (global.set $f_foo__arithmeticexpressions_ArithmeticExpressions (block (result i64)
+   (local.set $$value (global.get $f_one__arithmeticexpressions_ArithmeticExpressions))
+   (global.set $f_one__arithmeticexpressions_ArithmeticExpressions (i64.add (global.get $f_one__arithmeticexpressions_ArithmeticExpressions) (i64.const 1)))
+   (local.get $$value)
+  ))
   ;; (arithmeticexpressions.ArithmeticExpressions.counter = 0);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:184:2
   (global.set $f_counter__arithmeticexpressions_ArithmeticExpressions_ (i64.const 0))

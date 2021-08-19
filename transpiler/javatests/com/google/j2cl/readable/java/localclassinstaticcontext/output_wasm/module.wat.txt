@@ -232,14 +232,9 @@
   ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (call $$clinit__void@java.lang.Object )
-  (block
-   ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
-   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:2
-   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
-   ;; (localclassinstaticcontext.LocalClassInStaticContext.f = new $1.<init>());
-   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:2
-   (global.set $f_f__localclassinstaticcontext_LocalClassInStaticContext (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.rtt))))
-  )
+  ;; (localclassinstaticcontext.LocalClassInStaticContext.f = new $1.<init>());
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:2
+  (global.set $f_f__localclassinstaticcontext_LocalClassInStaticContext (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.rtt))))
   ;; new $1B.<init>();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:38:4
   (drop (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1B (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.rtt))))
