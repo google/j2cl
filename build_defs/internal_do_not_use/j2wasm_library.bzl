@@ -27,7 +27,7 @@ J2WASM_LIB_ATTRS.update({
 })
 
 def _impl_j2wasm_library_rule(ctx):
-    plugin_provider = getattr(native, "JavaPluginInfo") if hasattr(native, "JavaPluginInfo") else JavaInfo
+    plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
     default_j2cl_javac_opts = [
         # Avoid log site injection which introduces calls to unsupported APIs
         "-XDinjectLogSites=false",
