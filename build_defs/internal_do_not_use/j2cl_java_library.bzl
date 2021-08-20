@@ -44,7 +44,7 @@ def _java_providers_of(deps):
     return [d[JavaInfo] for d in deps]
 
 def _javaplugin_providers_of(deps):
-    plugin_provider = getattr(native, "JavaPluginInfo") if hasattr(native, "JavaPluginInfo") else JavaInfo
+    plugin_provider = getattr(java_common, "JavaPluginInfo") if hasattr(java_common, "JavaPluginInfo") else JavaInfo
     return [d[plugin_provider] for d in deps]
 
 def _collect_runfiles(ctx, files, deps):
