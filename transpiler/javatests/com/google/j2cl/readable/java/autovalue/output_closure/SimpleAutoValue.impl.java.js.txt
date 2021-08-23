@@ -3,10 +3,8 @@ goog.module('autovalue.SimpleAutoValue$impl');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
-let NullPointerException = goog.forwardDeclare('java.lang.NullPointerException$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
-let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
 let $$int = goog.forwardDeclare('vmbootstrap.primitives.$int$impl');
 
 class SimpleAutoValue extends ValueType {
@@ -54,18 +52,12 @@ class SimpleAutoValue extends ValueType {
   this.$ctor__java_lang_Object__();
   this.f_intField__autovalue_AutoValue_SimpleAutoValue_ = intField;
   this.f_booleanField__autovalue_AutoValue_SimpleAutoValue_ = booleanField;
-  if ($Equality.$same(stringField, null)) {
-   throw $Exceptions.toJs(NullPointerException.$create__java_lang_String('Null stringField'));
-  }
+  $Objects.m_getClass__java_lang_Object(/**@type {*}*/ (stringField));
   this.f_stringField__autovalue_AutoValue_SimpleAutoValue_ = stringField;
-  if ($Equality.$same(doubleField, null)) {
-   throw $Exceptions.toJs(NullPointerException.$create__java_lang_String('Null doubleField'));
-  }
+  $Objects.m_getClass__java_lang_Object(/**@type {*}*/ (doubleField));
   this.f_doubleField__autovalue_AutoValue_SimpleAutoValue_ = doubleField;
   this.f_nullableField__autovalue_AutoValue_SimpleAutoValue_ = nullableField;
-  if ($Equality.$same(arrayField, null)) {
-   throw $Exceptions.toJs(NullPointerException.$create__java_lang_String('Null arrayField'));
-  }
+  $Objects.m_getClass__java_lang_Object(/**@type {*}*/ (arrayField));
   this.f_arrayField__autovalue_AutoValue_SimpleAutoValue_ = arrayField;
  }
  /** @return {number} */
@@ -104,10 +96,8 @@ class SimpleAutoValue extends ValueType {
  }
  
  static $loadModules() {
-  NullPointerException = goog.module.get('java.lang.NullPointerException$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
-  $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  $Objects = goog.module.get('vmbootstrap.Objects$impl');
   $$int = goog.module.get('vmbootstrap.primitives.$int$impl');
  }
 }

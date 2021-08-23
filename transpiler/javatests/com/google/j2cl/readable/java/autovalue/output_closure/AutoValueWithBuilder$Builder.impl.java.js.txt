@@ -6,7 +6,6 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 let AutoValueWithBuilder = goog.forwardDeclare('autovalue.AutoValueWithBuilder$impl');
 let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
-let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
 
@@ -56,8 +55,7 @@ class Builder extends j_l_Object {
  /** @return {!AutoValueWithBuilder} */
  m_build__() {
   if ($Equality.$same(this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_, null)) {
-   let missing = ' booleanField';
-   throw $Exceptions.toJs(IllegalStateException.$create__java_lang_String('Missing required properties:' + j_l_String.m_valueOf__java_lang_Object(missing)));
+   throw $Exceptions.toJs(IllegalStateException.$create__());
   }
   return AutoValueWithBuilder.$create__boolean__java_lang_Double(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_), this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_);
  }
@@ -76,7 +74,6 @@ class Builder extends j_l_Object {
   AutoValueWithBuilder = goog.module.get('autovalue.AutoValueWithBuilder$impl');
   Boolean = goog.module.get('java.lang.Boolean$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
-  j_l_String = goog.module.get('java.lang.String$impl');
   $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
  }

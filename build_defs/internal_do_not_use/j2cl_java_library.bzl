@@ -4,6 +4,10 @@ load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "J2clInfo", "j2cl_common")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 def _impl_j2cl_library(ctx):
+    extra_javacopts = []
+    if ctx.attr.experimental_optimize_autovalue:
+        extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
+
     j2cl_provider = j2cl_common.compile(
         ctx,
         srcs = ctx.files.srcs,
@@ -12,7 +16,7 @@ def _impl_j2cl_library(ctx):
         plugins = _javaplugin_providers_of(ctx.attr.plugins),
         exported_plugins = _javaplugin_providers_of(ctx.attr.exported_plugins),
         output_jar = ctx.outputs.jar,
-        javac_opts = ctx.attr.javacopts,
+        javac_opts = extra_javacopts + ctx.attr.javacopts,
         internal_transpiler_flags = {
             k: getattr(ctx.attr, k)
             for k in _J2CL_INTERNAL_LIB_ATTRS.keys()
