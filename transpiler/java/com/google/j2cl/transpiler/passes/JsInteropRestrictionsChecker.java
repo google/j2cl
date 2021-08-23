@@ -176,7 +176,7 @@ public class JsInteropRestrictionsChecker {
 
   private boolean checkJSpecifyUsage(TypeDeclaration typeDeclaration) {
     if (typeDeclaration.isNullMarked()) {
-      problems.warning("@NullMarked annotation is not supported.");
+      problems.error("@NullMarked annotation is not supported.");
       return false;
     }
     return true;

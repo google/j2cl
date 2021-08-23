@@ -3448,8 +3448,8 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
         .addCompilationUnit("org.jspecify.nullness.NullMarked", "public @interface NullMarked {}")
         .addCompilationUnit(
             "test.Buggy", "@org.jspecify.nullness.NullMarked", "class NullMarkedType {", "}")
-        .assertTranspileSucceeds()
-        .assertWarningsWithoutSourcePosition("@NullMarked annotation is not supported.");
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition("@NullMarked annotation is not supported.");
   }
 
   public void testCorrectLineNumbers() {
