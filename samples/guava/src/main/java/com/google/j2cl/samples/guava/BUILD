@@ -5,7 +5,7 @@ package(
 )
 
 j2cl_library(
-    name = "app",
+    name = "helloguavalib",
     srcs = glob([
         "*.java",
         "*.js",
@@ -19,5 +19,5 @@ j2cl_library(
 j2cl_application(
     name = "guava",
     entry_points = ["j2cl.samples.app"],
-    deps = [":app"],
+    deps = [":helloguavalib"],
 )
