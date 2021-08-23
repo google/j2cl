@@ -97,10 +97,9 @@ public class Main {
     assertEquals(o1, o2);
     assertEquals(o1.hashCode(), o2.hashCode());
 
-    // TODO(b/160369891): Fix the equals behavior with extra fields.
-    // o1.bar = 2;
-    // assertEquals(o1, o2);
-    // assertEquals(o1.hashCode(), o2.hashCode());
+    o1.bar = 2;
+    assertEquals(o1, o2);
+    assertEquals(o1.hashCode(), o2.hashCode());
   }
 
   @AutoValue
@@ -119,10 +118,9 @@ public class Main {
     assertEquals(o1, o2);
     assertEquals(o1.hashCode(), o2.hashCode());
 
-    // TODO(b/160369891): Fix the equals behavior for extension values.
-    // assertEquals(22, o2.memoized());
-    // assertEquals(o1, o2);
-    // assertEquals(o1.hashCode(), o2.hashCode());
+    assertEquals(22, o2.memoized());
+    assertEquals(o1, o2);
+    assertEquals(o1.hashCode(), o2.hashCode());
   }
 
   @AutoValue

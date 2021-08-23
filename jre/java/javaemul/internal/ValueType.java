@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 
 /**
  * A base type that provides 'value' type semantics for equals/hashcode/toString via reflection.
@@ -56,13 +55,13 @@ public abstract class ValueType {
 
     ValueType thatObject = JsUtils.uncheckedCast(o);
 
-    String[] thisKeys = keys(thisObject);
+    String[] thisKeys = filteredkeys(thisObject);
 
     // Number of properties should match. This might not be true for a generic object comparator;
     // (e.g. property set to 'null' or 'undefined' might be considered as non-existent for
     // comparison) however based on our code generation, the properties will be always set for value
     // type hence this should never happen.
-    if (thisKeys.length != keys(thatObject).length) {
+    if (thisKeys.length != filteredkeys(thatObject).length) {
       return false;
     }
 
@@ -79,15 +78,16 @@ public abstract class ValueType {
   // Package private to ensure clinit is run when called from types that use this class as a mixin.
   static int hashCode(ValueType thisObject) {
     int hashCode = 1;
-    for (Object e : values(thisObject)) {
-      if (e == null) {
+    for (String key : filteredkeys(thisObject)) {
+      Object value = JsUtils.getProperty(thisObject, key);
+      if (value == null) {
         continue;
       }
       // AutoValue supports primitives arrays, that needs special handling for hashCode.
       int h =
-          ArrayHelper.isArray(e)
-              ? Arrays.hashCode(JsUtils.<Object[]>uncheckedCast(e))
-              : e.hashCode();
+          ArrayHelper.isArray(value)
+              ? Arrays.hashCode(JsUtils.<Object[]>uncheckedCast(value))
+              : value.hashCode();
       hashCode = 31 * hashCode + h;
     }
     return hashCode;
@@ -96,7 +96,7 @@ public abstract class ValueType {
   // Package private to ensure clinit is run when called from types that use this class as a mixin.
   static String toString(ValueType thisObject) {
     StringJoiner joiner = new StringJoiner(",", thisObject.getClass().getSimpleName() + "{", "}");
-    for (String p : keys(thisObject)) {
+    for (String p : filteredkeys(thisObject)) {
       Object value = JsUtils.getProperty(thisObject, p);
       if (ArrayHelper.isArray(value)) {
         value = Arrays.toString(JsUtils.<Object[]>uncheckedCast(value));
@@ -106,9 +106,12 @@ public abstract class ValueType {
     return joiner.toString();
   }
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "Object.keys")
-  private static native String[] keys(Object a);
+  @JsMethod
+  private static native String[] filteredkeys(ValueType type);
 
-  @JsMethod(namespace = JsPackage.GLOBAL, name = "Object.values")
-  private static native Object[] values(Object a);
+  @JsMethod
+  private static native void mixin(Object ctor, int mask, String... excludes);
+
+  @JsMethod(namespace = "goog.reflect")
+  static native String[] objectProperty(String name, Object type);
 }

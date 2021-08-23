@@ -1,0 +1,51 @@
+goog.module('autovalue.AutoValueWithFields$impl');
+
+const Parent = goog.require('autovalue.Parent$impl');
+const reflect = goog.require('goog.reflect');
+const ValueType = goog.require('javaemul.internal.ValueType$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @abstract
+ */
+class AutoValueWithFields extends Parent {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_userField2__autovalue_AutoValueWithFields = 0;
+  /**@type {number}*/
+  this.f_intField__autovalue_$AutoValue_AutoValueWithFields_ = 0;
+ }
+ /** @return {number} */
+ m_getMemoizedNative___$pp_autovalue() {
+  return Math.imul(this.m_getIntField__(), 2);
+ }
+ 
+ $ctor__autovalue_AutoValueWithFields__int(/** number */ intField) {
+  this.$ctor__autovalue_Parent__();
+  this.f_intField__autovalue_$AutoValue_AutoValueWithFields_ = intField;
+ }
+ /** @return {number} */
+ m_getIntField__() {
+  return this.f_intField__autovalue_$AutoValue_AutoValueWithFields_;
+ }
+ 
+ static $clinit() {
+  AutoValueWithFields.$clinit = () =>{};
+  AutoValueWithFields.$loadModules();
+  Parent.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValueWithFields;
+ }
+ 
+ static $loadModules() {}
+}
+ValueType.mixin(AutoValueWithFields, 7, reflect.objectProperty('f_userField2__autovalue_AutoValueWithFields', AutoValueWithFields), reflect.objectProperty('f_userField1__autovalue_Parent', AutoValueWithFields), reflect.objectProperty('f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_', AutoValueWithFields), reflect.objectProperty('f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_', AutoValueWithFields));
+$Util.$setClassMetadata(AutoValueWithFields, 'autovalue.AutoValueWithFields');
+
+exports = AutoValueWithFields;
+
+//# sourceMappingURL=AutoValueWithFields.js.map

@@ -1,0 +1,56 @@
+goog.module('autovalue.AutoValue_AutoValueWithFields$impl');
+
+const AutoValueWithFields = goog.require('autovalue.AutoValueWithFields$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class AutoValue__AutoValueWithFields extends AutoValueWithFields {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_ = 0;
+  /**@type {boolean}*/
+  this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_ = false;
+ }
+ /** @return {!AutoValue__AutoValueWithFields} */
+ static $create__int(/** number */ intField$) {
+  AutoValue__AutoValueWithFields.$clinit();
+  let $instance = new AutoValue__AutoValueWithFields();
+  $instance.$ctor__autovalue_AutoValue_AutoValueWithFields__int(intField$);
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValue_AutoValueWithFields__int(/** number */ intField$) {
+  this.$ctor__autovalue_AutoValueWithFields__int(intField$);
+ }
+ /** @override @return {number} */
+ m_getMemoizedNative___$pp_autovalue() {
+  if (!this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_) {
+   {
+    $Util.$synchronized(this);
+    if (!this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_) {
+     this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_ = super.m_getMemoizedNative___$pp_autovalue();
+     this.f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithFields_ = true;
+    }
+   }
+  }
+  return this.f_getMemoizedNative__autovalue_AutoValue_AutoValueWithFields_;
+ }
+ 
+ static $clinit() {
+  AutoValue__AutoValueWithFields.$clinit = () =>{};
+  AutoValue__AutoValueWithFields.$loadModules();
+  AutoValueWithFields.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__AutoValueWithFields;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(AutoValue__AutoValueWithFields, 'autovalue.AutoValue_AutoValueWithFields');
+
+exports = AutoValue__AutoValueWithFields;
+
+//# sourceMappingURL=AutoValue_AutoValueWithFields.js.map

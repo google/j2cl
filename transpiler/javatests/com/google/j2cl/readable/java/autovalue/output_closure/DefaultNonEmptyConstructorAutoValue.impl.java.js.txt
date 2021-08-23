@@ -1,5 +1,6 @@
 goog.module('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
 
+const reflect = goog.require('goog.reflect');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -61,6 +62,7 @@ class DefaultNonEmptyConstructorAutoValue extends ValueType {
   Builder = goog.module.get('autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder$impl');
  }
 }
+DefaultNonEmptyConstructorAutoValue.prototype.$excluded_fields = [reflect.objectProperty('f_field__autovalue_DefaultNonEmptyConstructorAutoValue_', DefaultNonEmptyConstructorAutoValue)];
 $Util.$setClassMetadata(DefaultNonEmptyConstructorAutoValue, 'autovalue.DefaultNonEmptyConstructorAutoValue');
 
 exports = DefaultNonEmptyConstructorAutoValue;

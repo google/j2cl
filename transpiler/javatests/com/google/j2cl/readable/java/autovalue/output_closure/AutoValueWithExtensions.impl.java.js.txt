@@ -1,5 +1,6 @@
 goog.module('autovalue.AutoValueWithExtensions$impl');
 
+const reflect = goog.require('goog.reflect');
 const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
@@ -60,6 +61,7 @@ class AutoValueWithExtensions extends ValueType {
   $Objects = goog.module.get('vmbootstrap.Objects$impl');
  }
 }
+AutoValueWithExtensions.prototype.$excluded_fields = [reflect.objectProperty('f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_', AutoValueWithExtensions), reflect.objectProperty('f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_', AutoValueWithExtensions)];
 $Util.$setClassMetadata(AutoValueWithExtensions, 'autovalue.AutoValueWithExtensions');
 
 exports = AutoValueWithExtensions;

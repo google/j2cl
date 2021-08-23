@@ -21,13 +21,19 @@ import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.transpiler.ast.TypeDescriptor.replaceTypeDescriptors;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
+import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
+import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Invocation;
@@ -39,8 +45,8 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -48,6 +54,7 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor.TypeReplacer;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -68,20 +75,23 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
       return;
     }
 
-    inlineImplementationTypes(library);
-    optimizeAsValueTypes(library);
-  }
-
-  private static void inlineImplementationTypes(Library library) {
-    Set<TypeDeclaration> optimizableTypes =
+    Set<TypeDeclaration> inlinableTypes =
         library
             .streamTypes()
             .filter(t -> canBeInlinedTo(t))
             .map(Type::getDeclaration)
             .collect(toImmutableSet());
-    if (optimizableTypes.isEmpty()) {
+    if (inlinableTypes.isEmpty()) {
+      // This also means there are not AutoValue types, so there is nothing to optimize here.
       return;
     }
+
+    inlineImplementationTypes(library, inlinableTypes);
+    optimizeAsValueTypes(library);
+  }
+
+  private static void inlineImplementationTypes(
+      Library library, Set<TypeDeclaration> optimizableTypes) {
 
     Map<TypeDeclaration, Type> superTypeToInlinedType =
         library
@@ -314,6 +324,27 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   }
 
   private void optimizeAsValueTypes(Library library) {
+    // Note that AutoValue classes can have multiple subtypes due the way AutoValue extensions work.
+    Multimap<TypeDeclaration, Type> autoValueToSubTypes = ArrayListMultimap.create();
+    library
+        .streamTypes()
+        .forEach(
+            t -> {
+              TypeDeclaration autoValue =
+                  getAutoValueParent(t.getDeclaration().getSuperTypeDeclaration());
+              if (autoValue != null) {
+                autoValueToSubTypes.put(autoValue, t);
+              }
+            });
+
+    Multimap<TypeDeclaration, FieldDescriptor> autoValueToExcludedFields =
+        library
+            .streamTypes()
+            .map(Type::getDeclaration)
+            .filter(TypeDeclaration::isAnnotatedWithAutoValue)
+            .map(t -> getAutoValueExcludedFields(t, autoValueToSubTypes.get(t)))
+            .collect(ArrayListMultimap::create, Multimap::putAll, Multimap::putAll);
+
     library
         .streamTypes()
         .filter(t -> t.getDeclaration().isAnnotatedWithAutoValue())
@@ -325,14 +356,54 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 return;
               }
 
+              Collection<FieldDescriptor> excludedFields =
+                  autoValueToExcludedFields.get(autoValue.getDeclaration());
+
               if (TypeDescriptors.isJavaLangObject(autoValue.getSuperTypeDescriptor())) {
                 // Change the parent type of AutoValue class to ValueType.
                 autoValue.setSuperTypeDescriptor(TypeDescriptors.get().javaemulInternalValueType);
+                // Recorded excluded fields if there are any.
+                if (!excludedFields.isEmpty()) {
+                  addExcludedFieldsDeclaration(autoValue, excludedFields);
+                }
               } else {
                 // Add mixin that will provide the implementation for java.lang.Object.
-                addValueTypeMixin(autoValue, mask);
+                addValueTypeMixin(autoValue, mask, excludedFields);
               }
             });
+  }
+
+  private static TypeDeclaration getAutoValueParent(TypeDeclaration type) {
+    return type == null
+        ? null
+        : type.isAnnotatedWithAutoValue()
+            ? type
+            : getAutoValueParent(type.getSuperTypeDeclaration());
+  }
+
+  private static Multimap<TypeDeclaration, FieldDescriptor> getAutoValueExcludedFields(
+      TypeDeclaration type, Collection<Type> subtypes) {
+    ArrayListMultimap<TypeDeclaration, FieldDescriptor> excludedFields = ArrayListMultimap.create();
+
+    // None of the user declared fields in AutoValue and its parents are included in AutoValue
+    // generated equals/hashCode/toString.
+    if (type.isAnnotatedWithAutoValue()) {
+      for (TypeDeclaration t = type;
+          !TypeDescriptors.isJavaLangObject(t.toRawTypeDescriptor());
+          t = t.getSuperTypeDeclaration()) {
+        excludedFields.putAll(type, t.getDeclaredFieldDescriptors());
+      }
+    }
+
+    // Fields declared in subclasses of AutoValue impl (i.e. code generated by extensions) are also
+    // not included in calculations.
+    subtypes.stream()
+        .map(Type::getDeclaration)
+        // Skip the AutoValue impl.
+        .filter(t -> !t.getSuperTypeDeclaration().isAnnotatedWithAutoValue())
+        .forEach(t -> excludedFields.putAll(type, t.getDeclaredFieldDescriptors()));
+
+    return excludedFields;
   }
 
   /** @return mask summarizes the removed methods. */
@@ -374,21 +445,68 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     return mask;
   }
 
-  private static void addValueTypeMixin(Type type, int mask) {
+  private static void addValueTypeMixin(
+      Type autoValue, int mask, Collection<FieldDescriptor> excludedFields) {
     MethodDescriptor mixinMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setJsInfo(JsInfo.RAW)
-            .setStatic(true)
-            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaemulInternalValueType)
-            .setName("mixin")
-            .setParameterTypeDescriptors(TypeDescriptors.get().nativeFunction, PrimitiveTypes.INT)
-            .build();
+        TypeDescriptors.get().javaemulInternalValueType.getMethodDescriptorByName("mixin");
+
     MethodCall mixinCall =
         MethodCall.Builder.from(mixinMethodDescriptor)
             .setArguments(
-                new JavaScriptConstructorReference(type.getDeclaration()),
-                NumberLiteral.fromInt(mask))
+                new JavaScriptConstructorReference(autoValue.getDeclaration()),
+                NumberLiteral.fromInt(mask),
+                getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
             .build();
-    type.addLoadTimeStatement(mixinCall.makeStatement(SourcePosition.NONE));
+    autoValue.addLoadTimeStatement(mixinCall.makeStatement(SourcePosition.NONE));
+  }
+
+  private static void addExcludedFieldsDeclaration(
+      Type autoValue, Collection<FieldDescriptor> excludedFields) {
+    FieldDescriptor excludedFieldDescriptor =
+        FieldDescriptor.newBuilder()
+            .setJsInfo(JsInfo.RAW_FIELD)
+            .setEnclosingTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
+            .setName("$excluded_fields")
+            .build();
+    FieldAccess excludedFieldAccess =
+        FieldAccess.Builder.from(excludedFieldDescriptor)
+            .setQualifier(
+                new JavaScriptConstructorReference(autoValue.getDeclaration())
+                    .getPrototypeFieldAccess())
+            .build();
+    // Adds load time statement MyFoo.prototype.$excluded_fields = [ ... ]
+    autoValue.addLoadTimeStatement(
+        BinaryExpression.Builder.asAssignmentTo(excludedFieldAccess)
+            .setRightOperand(getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
+            .build()
+            .makeStatement(SourcePosition.NONE));
+  }
+
+  private static ArrayLiteral getProperyNameExpressions(
+      TypeDeclaration type, Collection<FieldDescriptor> fields) {
+    // Note that ValueType.objectProperty is just a native proxy for goog.reflect.objectProperty.
+    MethodCall.Builder objectPropertyCallBuilder =
+        MethodCall.Builder.from(
+            TypeDescriptors.get()
+                .javaemulInternalValueType
+                .getMethodDescriptorByName("objectProperty"));
+    // Generates an array literal in the form of:
+    // [
+    //   ValueType.objectProperty("<property1>", MyType),
+    //   ValueType.objectProperty("<property2>", MyType),
+    //   ...
+    // ]
+    return new ArrayLiteral(
+        TypeDescriptors.get().javaLangObjectArray,
+        fields.stream()
+            .map(FieldDescriptor::getMangledName)
+            .map(StringLiteral::new)
+            .map(
+                name ->
+                    objectPropertyCallBuilder
+                        .setArguments(name, new JavaScriptConstructorReference(type))
+                        .build())
+            .toArray(Expression[]::new));
   }
 }
