@@ -60,9 +60,9 @@ def blaze_clean():
 def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
   """Blaze build everything in 1-go, for speed."""
 
-  build_targets = [d + "/readable.js.zip" for d in js_readable_dirs]
-  build_targets += [d + "/readable_wasm.wat" for d in wasm_readable_dirs]
-  build_targets += [d + "/readable_kt" for d in kt_readable_dirs]
+  build_targets = [d + ":readable.js" for d in js_readable_dirs]
+  build_targets += [d + ":readable_wasm.wat" for d in wasm_readable_dirs]
+  build_targets += [d + ":readable_kt" for d in kt_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
@@ -71,7 +71,7 @@ def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
 
 
 def replace_transpiled_wasm(readable_dirs):
-  """Copy and reformat and replace with Blaze built WASM."""
+  """Copy and replace with Blaze built WASM."""
 
   for readable_dir in readable_dirs:
     file_path = "blaze-bin/%s/readable_wasm.wat" % readable_dir
@@ -79,9 +79,7 @@ def replace_transpiled_wasm(readable_dirs):
     output_file_path = output + "/module.wat.txt"
 
     repo_util.run_cmd(["mkdir", "-p", output])
-    repo_util.run_cmd(["cp", file_path, output_file_path])
-    # Temporary to keep readables unchanged.
-    repo_util.run_cmd(["chmod", "-x", output_file_path])
+    repo_util.run_cmd(["cp", "--no-preserve=mode", file_path, output_file_path])
 
     java_package = os.path.relpath(readable_dir, JAVA_DIR).replace("/", ".")
     _filter_wat_file(output_file_path, java_package)
@@ -115,36 +113,8 @@ def _filter_wat_file(wat_file_path, java_package):
 
 
 def replace_transpiled_js(readable_dirs):
-  """Copy and reformat and replace with Blaze built JS."""
-
-  for readable_dir in readable_dirs:
-    with tempfile.TemporaryDirectory() as tmpdirname:
-      zip_file_path = "blaze-bin/%s/readable.js.zip" % readable_dir
-      output = readable_dir + "/output_closure"
-
-      # Clean the output directory from the result of last run.
-      repo_util.run_cmd(["rm", "-Rf", output])
-      repo_util.run_cmd(["mkdir", output])
-
-      # Update the tmp directory with result of the new run.
-      repo_util.run_cmd([
-          "unzip", "-o", "-d", tmpdirname, zip_file_path, "-x", "*.java", "-x",
-          "*.map"
-      ])
-
-      # Normalize the path relative to output directory.
-      repo_util.run_cmd([
-          "mv " + tmpdirname + "/" + os.path.relpath(readable_dir, JAVA_DIR) +
-          "/* " + tmpdirname
-      ], shell=True)
-
-      # Move all files to => {file}.txt
-      repo_util.run_cmd(
-          ["find", "-type", "f", "-exec", "mv", "{}", "{}.txt", ";"],
-          cwd=tmpdirname)
-
-      # Move all the files to readable directory.
-      repo_util.run_cmd(["mv " + tmpdirname + "/* " + output], shell=True)
+  """Copy and replace with Blaze built JS."""
+  _replace_readable_outputs(readable_dirs, "readable.js", "output_closure")
 
 
 def is_spam(line):
@@ -201,19 +171,29 @@ def gather_closure_warnings(build_log):
 
 
 def replace_transpiled_kt(readable_dirs):
-  """Copy and reformat and replace with Blaze built kt."""
+  """Copy and replace with Blaze built kt."""
+  _replace_readable_outputs(readable_dirs, "readable_kt.kt", "output_kt")
+
+
+def _replace_readable_outputs(readable_dirs, tree_artifact_dir, output_dir):
+  """Copy and replace readable directories with output from Blaze."""
   for readable_dir in readable_dirs:
     with tempfile.TemporaryDirectory() as tmpdirname:
-      output = readable_dir + "/output_kt"
+      transpiler_output = "blaze-bin/%s/%s" % (readable_dir, tree_artifact_dir)
+      output = "%s/%s" % (readable_dir, output_dir)
 
-      # Clean the output directory from the result of last run.
-      repo_util.run_cmd(["rm", "-Rf", output])
-      repo_util.run_cmd(["mkdir", output])
+      # copy all files to a tmp directory to avoid file operations on piper
+      # directory
+      repo_util.run_cmd(
+          "cp -rf --no-preserve=mode %s/* %s" % (transpiler_output, tmpdirname),
+          shell=True)
 
-      # Move files to temp dir.  Removing any attributes (eg. executable bit).
-      repo_util.run_cmd(["cp -rf --no-preserve=mode " + "blaze-bin/" +
-                         readable_dir + "/readable_kt.kt/* " +
-                         tmpdirname], shell=True)
+      # We don't want to copy .java and .map files to the final output.
+      repo_util.run_cmd([
+          "find", "(", "-name", "*.java", "-o", "-name", "*.map", ")", "-exec",
+          "rm", "{}", ";"
+      ],
+                        cwd=tmpdirname)
 
       # Normalize the path relative to output directory.
       repo_util.run_cmd([
@@ -221,13 +201,18 @@ def replace_transpiled_kt(readable_dirs):
           "/* " + tmpdirname
       ], shell=True)
 
-      # Move all files to => {file}.txt
+      # Rename all files to => {file}.txt
       repo_util.run_cmd(
           ["find", "-type", "f", "-exec", "mv", "{}", "{}.txt", ";"],
           cwd=tmpdirname)
 
-      # Move all the files to readable directory.
+      # Clean the output directory from the result of last run.
+      repo_util.run_cmd(["rm", "-Rf", output])
+      repo_util.run_cmd(["mkdir", output])
+
+      # Move all the files to the output directory.
       repo_util.run_cmd(["mv " + tmpdirname + "/* " + output], shell=True)
+
 
 args = None
 
@@ -247,7 +232,7 @@ def main(argv):
   kt_readable_dirs = get_readable_dirs(
       readable_pattern, "_kt") if "KT" in args.platforms else []
 
-  if not js_readable_dirs and not wasm_readable_dirs:
+  if not js_readable_dirs and not wasm_readable_dirs and not kt_readable_dirs:
     print("No matching readables!")
     return -1
 

@@ -29,6 +29,7 @@ load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2cl_library_build_test.bzl", "build_test")
+load(":j2cl_common.bzl", "J2clInfo")
 
 _J2WASM_PACKAGES = [
     "java/com/google/apps/framework/types",
@@ -52,6 +53,14 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/jsr330_inject",
     "third_party/java_src/re2j",
 ]
+
+def _tree_artifact_proxy_impl(ctx):
+    return DefaultInfo(files = depset([ctx.attr.j2cl_library[J2clInfo]._private_.output_js]))
+
+_tree_artifact_proxy = rule(
+    implementation = _tree_artifact_proxy_impl,
+    attrs = {"j2cl_library": attr.label()},
+)
 
 def j2cl_library(
         name,
@@ -77,6 +86,15 @@ def j2cl_library(
     j2cl_library_rule(
         name = name,
         **args
+    )
+
+    # TODO(b/36549068): remove this workaround when tree artifacts can be
+    # declared as the rule output.
+    _tree_artifact_proxy(
+        name = name + ".js",
+        j2cl_library = ":" + name,
+        visibility = ["//visibility:private"],
+        tags = ["manual", "notap", "no-ide"],
     )
 
     if args.get("srcs") and (generate_build_test == None or generate_build_test):
