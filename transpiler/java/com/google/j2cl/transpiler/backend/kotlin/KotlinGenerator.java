@@ -17,10 +17,12 @@ package com.google.j2cl.transpiler.backend.kotlin;
 
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.Problems;
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
+import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
@@ -79,7 +81,6 @@ public class KotlinGenerator {
     if (!type.getMethods().isEmpty()) {
       sourceBuilder.append(" ");
       sourceBuilder.openBrace();
-      sourceBuilder.newLine();
       renderTypeMethods();
       sourceBuilder.closeBrace();
     }
@@ -95,11 +96,34 @@ public class KotlinGenerator {
   }
 
   private void renderTypeMethods() {
+    // TODO(dpo): Remove short term hack to pull static methods into companion object.
+    boolean hasStaticMethods = false;
     for (Method method : type.getMethods()) {
+      if (method.isStatic()) {
+        hasStaticMethods = true;
+        continue;
+      }
+      sourceBuilder.newLine();
       emitMethodHeader(method);
       statementTranspiler.renderStatement(method.getBody());
-      sourceBuilder.newLine();
     }
+
+    if (!hasStaticMethods) {
+      return;
+    }
+
+    sourceBuilder.newLine();
+    sourceBuilder.append("companion object ");
+    sourceBuilder.openBrace();
+    for (Method method : type.getMethods()) {
+      if (!method.isStatic()) {
+        continue;
+      }
+      sourceBuilder.newLine();
+      emitMethodHeader(method);
+      statementTranspiler.renderStatement(method.getBody());
+    }
+    sourceBuilder.closeBrace();
   }
 
   private void emitMethodHeader(Method method) {
@@ -112,11 +136,29 @@ public class KotlinGenerator {
       sourceBuilder.append(separator);
       sourceBuilder.append(var.getName());
       sourceBuilder.append(": ");
-      sourceBuilder.append(var.getTypeDescriptor().getReadableDescription());
+      emitType(var.getTypeDescriptor());
       separator = ", ";
     }
     sourceBuilder.append(") ");
-    sourceBuilder.append(method.getDescriptor().getReturnTypeDescriptor().getUniqueId());
-    sourceBuilder.append(" ");
+    if (!TypeDescriptors.isPrimitiveVoid(method.getDescriptor().getReturnTypeDescriptor())) {
+      emitType(method.getDescriptor().getReturnTypeDescriptor());
+      sourceBuilder.append(" ");
+    }
+  }
+
+  /**
+   * Emits the proper fully rendered type for the give type descriptor at the current location.
+   * TODO(dpo): Move this to a better long term place (this logic is likely to get pretty complex).
+   */
+  private void emitType(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isArray()) {
+      ArrayTypeDescriptor arrayType = (ArrayTypeDescriptor) typeDescriptor;
+      sourceBuilder.append("Array<");
+      emitType(arrayType.getComponentTypeDescriptor());
+      sourceBuilder.append(">");
+    } else {
+      // TODO(dpo): Other type descriptor logic.
+      sourceBuilder.append(typeDescriptor.getReadableDescription());
+    }
   }
 }
