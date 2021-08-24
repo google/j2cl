@@ -88,7 +88,7 @@ public abstract class ValueType {
           ArrayHelper.isArray(value)
               ? Arrays.hashCode(JsUtils.<Object[]>uncheckedCast(value))
               : value.hashCode();
-      hashCode = 31 * hashCode + h;
+      hashCode = (1000003 * hashCode) ^ h;
     }
     return hashCode;
   }
