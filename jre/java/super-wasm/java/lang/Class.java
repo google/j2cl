@@ -15,7 +15,6 @@ package java.lang;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
-import javaemul.internal.Constructor;
 
 /**
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the official Java API
@@ -172,10 +171,5 @@ public final class Class<T> implements Type, Serializable {
 
   static Class<?> createForInterface(String name) {
     return new Class(false, true, false, 0, name, null, null, null);
-  }
-
-  // Called by java.lang.Object.getClass() which is not used in WASM.
-  public static Class<?> $get(Constructor ctor) {
-    throw new UnsupportedOperationException();
   }
 }

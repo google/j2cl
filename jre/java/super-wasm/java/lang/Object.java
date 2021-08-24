@@ -13,9 +13,7 @@
  */
 package java.lang;
 
-import javaemul.internal.Constructor;
 import javaemul.internal.HashCodes;
-import jsinterop.annotations.JsMethod;
 
 /**
  * See <a
@@ -24,27 +22,22 @@ import jsinterop.annotations.JsMethod;
  */
 public class Object {
 
-  @JsMethod
+  public int $systemIdentityHashCode; // only used in wasm to store identity hash code.
+
   public boolean equals(Object that) {
     return this == that;
   }
 
-  @JsMethod
   public int hashCode() {
     return HashCodes.getObjectIdentityHashCode(this);
   }
 
-  @JsMethod
   public String toString() {
     return getClass().getName() + "@" + Integer.toHexString(hashCode());
   }
 
+  // Stub method. Replaced by the compiler.
   public final Class<?> getClass() {
-    return Class.$get(Constructor.of(this));
-  }
-
-  @JsMethod
-  private static boolean $isInstance(Object instance) {
-    return instance != null;
+    return null;
   }
 }

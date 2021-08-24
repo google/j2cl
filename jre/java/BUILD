@@ -78,6 +78,7 @@ package_sources(
     excludes = [
         "java/util/InternalHashCodeMap.java",  # J2WASM AbstractHashMap doesn't need it.
         "java/util/InternalStringMap.java",  # J2WASM AbstractHashMap doesn't need it.
+        "Casts.java",  # J2WASM doesn't need it.
     ],
     super_srcs = select({
         ":experimental_java11_support": glob(
