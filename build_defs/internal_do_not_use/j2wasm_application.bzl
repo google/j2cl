@@ -181,7 +181,7 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     _j2wasm_application(
         name = name,
-        binaryen_args = ["-O3"],
+        binaryen_args = ["-O3", "--traps-never-happen"],
         transpiler_args = ["-experimentalWasmRemoveAssertStatement"],
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
         **kwargs
