@@ -25,7 +25,6 @@ let HashCodes = goog.forwardDeclare('javaemul.internal.HashCodes$impl');
 let JavaLangObject = goog.forwardDeclare('java.lang.Object$impl');
 let JavaScriptFunction = goog.forwardDeclare('vmbootstrap.JavaScriptFunction$impl');
 let JavaScriptObject = goog.forwardDeclare('vmbootstrap.JavaScriptObject$impl');
-const Long = goog.require('nativebootstrap.Long$impl');
 let String = goog.forwardDeclare('java.lang.String$impl');
 
 /**
@@ -67,14 +66,6 @@ class Objects {
     // Objects: use the custom 'hashCode' if it exists.
     if (obj.hashCode) {
       return obj.hashCode();
-    }
-
-    // Handle primitive long since goog.math.long doesn't provide hashCode.
-    // Primivite long ends up here due to ValueTypes but it also enables removal
-    // of boxing from long in the future (b/73413440);
-    if (obj instanceof Long) {
-      const long = /** {Long} */ (obj);
-      return long.getLowBits() ^ long.getHighBits();
     }
 
     // Boxed Types: overrides 'hashCode'  but doesn't need special casing as
