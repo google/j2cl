@@ -85,6 +85,8 @@ def _impl_j2wasm_application(ctx):
         outputs = outputs,
         mnemonic = "J2wasm",
         progress_message = "Compiling to WASM",
+        # Binaryen can leverage 4 cores with some amount of parallelism.
+        execution_requirements = {"cpu:4": ""},
     )
 
     # Make the debugging data available in runfiles.
