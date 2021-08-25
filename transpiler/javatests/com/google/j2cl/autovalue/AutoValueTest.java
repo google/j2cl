@@ -57,7 +57,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import javax.annotation.Nullable;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,12 +64,6 @@ import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
 public class AutoValueTest {
-  private static boolean omitIdentifiers;
-
-  @BeforeClass
-  public static void initOmitIdentifiers() {
-    omitIdentifiers = System.getProperty("OmitIdentifiers") != null;
-  }
 
   @AutoValue
   abstract static class Simple {
@@ -94,11 +87,11 @@ public class AutoValueTest {
     assertEquals(23, instance1a.protectedInt());
     assertEquals(ImmutableMap.of("twenty-three", 23L), instance1a.packageMap());
     MoreObjects.ToStringHelper toStringHelper = MoreObjects.toStringHelper(Simple.class);
-    toStringHelper.add("publicString", "example");
     toStringHelper.add("protectedInt", 23);
+    // J2CL specific: optimization result in order change of fields (JS iteration order).
+    toStringHelper.add("publicString", "example");
     toStringHelper.add("packageMap", ImmutableMap.of("twenty-three", 23L));
-    String expectedString =
-        omitIdentifiers ? "{example, 23, {twenty-three=23}}" : toStringHelper.toString();
+    String expectedString = toStringHelper.toString();
     assertThat(instance1a.toString()).isEqualTo(expectedString);
     new EqualsTester()
         .addEqualityGroup(instance1a, instance1b)
@@ -116,7 +109,7 @@ public class AutoValueTest {
   @Test
   public void testEmpty() throws Exception {
     Empty instance = Empty.create();
-    String expectedString = omitIdentifiers ? "{}" : "Empty{}";
+    String expectedString = "Empty{}";
     assertThat(instance.toString()).isEqualTo(expectedString);
     assertEquals(instance, instance);
     assertEquals(instance, Empty.create());
@@ -145,11 +138,10 @@ public class AutoValueTest {
   @Test
   public void testGetters() {
     SimpleWithGetters instance = SimpleWithGetters.create(23, true, false, "foo", "bar", "<html>");
+    // J2CL specific: some fields names are in accurate when they are not a valid identifier.
     String expectedString =
-        omitIdentifiers
-            ? "{23, true, false, foo, bar, <html>}"
-            : "SimpleWithGetters{"
-                + "foo=23, bar=true, otherBar=false, package=foo, package0=bar, HTMLPage=<html>}";
+        "SimpleWithGetters{"
+            + "foo=23, bar=true, otherBar=false, package1=foo, package0=bar, HTMLPage=<html>}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -167,7 +159,7 @@ public class AutoValueTest {
   @Test
   public void testNotGetters() {
     NotAllGetters instance = NotAllGetters.create(23, true);
-    String expectedString = omitIdentifiers ? "{23, true}" : "NotAllGetters{getFoo=23, bar=true}";
+    String expectedString = "NotAllGetters{getFoo=23, bar=true}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -191,7 +183,8 @@ public class AutoValueTest {
   @Test
   public void testStrangeGetters() {
     StrangeGetters instance = StrangeGetters.builder().set1st(17).set_1st(23).build();
-    String expectedString = omitIdentifiers ? "{17, 23}" : "StrangeGetters{1st=17, _1st=23}";
+    // J2CL specific: some fields names are inaccurate when they are not a valid identifier.
+    String expectedString = "StrangeGetters{_1st0=17, _1st=23}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -215,8 +208,7 @@ public class AutoValueTest {
   public void testGettersAndConcreteNonGetters() {
     GettersAndConcreteNonGetters instance = GettersAndConcreteNonGetters.create(23, new byte[] {1});
     assertFalse(instance.hasNoBytes());
-    String expectedString =
-        omitIdentifiers ? "{23, [1]}" : "GettersAndConcreteNonGetters{foo=23, bytes=[1]}";
+    String expectedString = "GettersAndConcreteNonGetters{foo=23, bytes=[1]}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -525,8 +517,7 @@ public class AutoValueTest {
     NullableProperties instance = NullableProperties.create(null, 23);
     assertNull(instance.nullableString());
     assertThat(instance.randomInt()).isEqualTo(23);
-    String expectedString =
-        omitIdentifiers ? "{null, 23}" : "NullableProperties{nullableString=null, randomInt=23}";
+    String expectedString = "NullableProperties{randomInt=23, nullableString=null}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -549,10 +540,7 @@ public class AutoValueTest {
     AlternativeNullableProperties instance = AlternativeNullableProperties.create(null, 23);
     assertNull(instance.nullableString());
     assertThat(instance.randomInt()).isEqualTo(23);
-    String expectedString =
-        omitIdentifiers
-            ? "{null, 23}"
-            : "AlternativeNullableProperties{nullableString=null, randomInt=23}";
+    String expectedString = "AlternativeNullableProperties{randomInt=23, nullableString=null}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -660,8 +648,7 @@ public class AutoValueTest {
     Nested.Doubly instance = Nested.Doubly.create(null, 23);
     assertNull(instance.nullableString());
     assertThat(instance.randomInt()).isEqualTo(23);
-    String expectedString =
-        omitIdentifiers ? "{null, 23}" : "Doubly{nullableString=null, randomInt=23}";
+    String expectedString = "Doubly{randomInt=23, nullableString=null}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -936,7 +923,7 @@ public class AutoValueTest {
   @Test
   public void testAbstractToString() throws Exception {
     AbstractToString instance = AbstractToString.create("foo");
-    String expectedString = omitIdentifiers ? "{foo}" : "AbstractToString{string=foo}";
+    String expectedString = "AbstractToString{string=foo}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -958,7 +945,7 @@ public class AutoValueTest {
   @Test
   public void testInheritedAbstractToString() throws Exception {
     SubAbstractToString instance = SubAbstractToString.create("foo");
-    String expectedString = omitIdentifiers ? "{foo}" : "SubAbstractToString{string=foo}";
+    String expectedString = "SubAbstractToString{string=foo}";
     assertThat(instance.toString()).isEqualTo(expectedString);
   }
 
@@ -1049,14 +1036,12 @@ public class AutoValueTest {
     // default Object.hashCode() will fail.
 
     String expectedString =
-        omitIdentifiers
-            ? ("{" + Arrays.toString(booleans) + ", " + Arrays.toString(ints) + "}")
-            : ("PrimitiveArrays{booleans="
-                + Arrays.toString(booleans)
-                + ", "
-                + "ints="
-                + Arrays.toString(ints)
-                + "}");
+        "PrimitiveArrays{booleans="
+            + Arrays.toString(booleans)
+            + ", "
+            + "ints="
+            + Arrays.toString(ints)
+            + "}";
     assertThat(object1.toString()).isEqualTo(expectedString);
     assertThat(object1.ints()).isSameInstanceAs(object1.ints());
   }
@@ -1072,9 +1057,7 @@ public class AutoValueTest {
     new EqualsTester().addEqualityGroup(object1, object2).addEqualityGroup(object0).testEquals();
 
     String expectedString =
-        omitIdentifiers
-            ? ("{" + Arrays.toString(booleans) + ", null}")
-            : ("PrimitiveArrays{booleans=" + Arrays.toString(booleans) + ", " + "ints=null}");
+        "PrimitiveArrays{booleans=" + Arrays.toString(booleans) + ", " + "ints=null}";
     assertThat(object1.toString()).isEqualTo(expectedString);
 
     assertThat(object1.booleans()).isSameInstanceAs(object1.booleans());
@@ -1089,11 +1072,8 @@ public class AutoValueTest {
       PrimitiveArrays.create(null, new int[0]);
       fail("Construction with null value for non-@Nullable array should have failed");
     } catch (NullPointerException e) {
-      if (omitIdentifiers) {
-        assertThat(e).hasMessageThat().isNull();
-      } else {
-        assertThat(e).hasMessageThat().contains("booleans");
-      }
+      // J2CL specific: <null-ref>.getClass in getClass has a msg.
+      assertThat(e).hasMessageThat().contains("null.getClass");
     }
   }
 
@@ -1408,11 +1388,7 @@ public class AutoValueTest {
       BasicWithBuilder.builder().build();
       fail("Expected exception for missing property");
     } catch (IllegalStateException e) {
-      if (omitIdentifiers) {
-        assertThat(e).hasMessageThat().isNull();
-      } else {
-        assertThat(e).hasMessageThat().contains("foo");
-      }
+      assertThat(e).hasMessageThat().isNull();
     }
   }
 
@@ -1521,11 +1497,7 @@ public class AutoValueTest {
       NullablePropertyWithBuilder.builder().build();
       fail("Expected IllegalStateException for unset non-@Nullable property");
     } catch (IllegalStateException e) {
-      if (omitIdentifiers) {
-        assertThat(e).hasMessageThat().isNull();
-      } else {
-        assertThat(e).hasMessageThat().contains("notNullable");
-      }
+      assertThat(e).hasMessageThat().isNull();
     }
   }
 
@@ -1956,21 +1928,13 @@ public class AutoValueTest {
       builder.list();
       fail("Attempt to retrieve unset list property should have failed");
     } catch (IllegalStateException e) {
-      if (omitIdentifiers) {
-        assertThat(e).hasMessageThat().isNull();
-      } else {
-        assertThat(e).hasMessageThat().isEqualTo("Property \"list\" has not been set");
-      }
+      assertThat(e).hasMessageThat().isNull();
     }
     try {
       builder.ints();
       fail("Attempt to retrieve unset ints property should have failed");
     } catch (IllegalStateException e) {
-      if (omitIdentifiers) {
-        assertThat(e).hasMessageThat().isNull();
-      } else {
-        assertThat(e).hasMessageThat().isEqualTo("Property \"ints\" has not been set");
-      }
+      assertThat(e).hasMessageThat().isNull();
     }
 
     builder.setList(names);
@@ -2047,11 +2011,7 @@ public class AutoValueTest {
       builder.getList();
       fail("Attempt to retrieve unset list property should have failed");
     } catch (IllegalStateException e) {
-      if (omitIdentifiers) {
-        assertThat(e).hasMessageThat().isNull();
-      } else {
-        assertThat(e).hasMessageThat().isEqualTo("Property \"list\" has not been set");
-      }
+      assertThat(e).hasMessageThat().isNull();
     }
 
     builder.setList(names);
@@ -2439,11 +2399,7 @@ public class AutoValueTest {
       builder.setThings(ImmutableList.of(1729));
       fail("Setting list after retrieving builder should provoke an exception");
     } catch (IllegalStateException e) {
-      if (omitIdentifiers) {
-        assertThat(e).hasMessageThat().isNull();
-      } else {
-        assertThat(e).hasMessageThat().isEqualTo("Cannot set things after calling thingsBuilder()");
-      }
+      assertThat(e).hasMessageThat().isNull();
     }
   }
 
@@ -2546,10 +2502,8 @@ public class AutoValueTest {
   @Test
   public void testOneTwoThreeFour() {
     OneTwoThreeFour x = OneTwoThreeFourImpl.create("one", "two", false, 4);
-    String expectedString =
-        omitIdentifiers
-            ? "{one, two, false, 4}"
-            : "OneTwoThreeFourImpl{one=one, two=two, three=false, four=4}";
+    // J2CL specific: optimization result in order change of fields (JS iteration order).
+    String expectedString = "OneTwoThreeFourImpl{three=false, four=4, one=one, two=two}";
     assertThat(x.toString()).isEqualTo(expectedString);
   }
 
@@ -2602,19 +2556,13 @@ public class AutoValueTest {
             .inner(InnerWithBuilder.builder().setBar(23).build())
             .foo("yes")
             .build();
-    String expectedStringX =
-        omitIdentifiers
-            ? "{yes, {23}}"
-            : "OuterWithBuilder{foo=yes, inner=InnerWithBuilder{bar=23}}";
+    String expectedStringX = "OuterWithBuilder{foo=yes, inner=InnerWithBuilder{bar=23}}";
     assertThat(x.toString()).isEqualTo(expectedStringX);
 
     OuterWithBuilder.Builder xBuilder = x.toBuilder();
     xBuilder.innerBuilder().setBar(17);
     OuterWithBuilder y = xBuilder.build();
-    String expectedStringY =
-        omitIdentifiers
-            ? "{yes, {17}}"
-            : "OuterWithBuilder{foo=yes, inner=InnerWithBuilder{bar=17}}";
+    String expectedStringY = "OuterWithBuilder{foo=yes, inner=InnerWithBuilder{bar=17}}";
     assertThat(y.toString()).isEqualTo(expectedStringY);
   }
 

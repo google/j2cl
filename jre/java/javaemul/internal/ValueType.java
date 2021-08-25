@@ -95,15 +95,38 @@ public abstract class ValueType {
 
   // Package private to ensure clinit is run when called from types that use this class as a mixin.
   static String toString(ValueType thisObject) {
-    StringJoiner joiner = new StringJoiner(",", thisObject.getClass().getSimpleName() + "{", "}");
+    String className = thisObject.getClass().getSimpleName();
+    // Remove AutoValue_ prefix used by the APT if it exists.
+    className = className.substring(className.lastIndexOf("AutoValue_") + 1);
+    StringJoiner joiner = new StringJoiner(", ", className + "{", "}");
     for (String p : filteredkeys(thisObject)) {
       Object value = JsUtils.getProperty(thisObject, p);
       if (ArrayHelper.isArray(value)) {
         value = Arrays.toString(JsUtils.<Object[]>uncheckedCast(value));
       }
+      // Best effort to strip down of mangled names.
+      p = cleanMangledPropertyName(p);
       joiner.add(p + "=" + value);
     }
     return joiner.toString();
+  }
+
+  private static boolean COMPILED = "true".equals(System.getProperty("COMPILED", "false"));
+
+  private static String cleanMangledPropertyName(String name) {
+    if (COMPILED) {
+      // There is no point in the trying to clean up for compiled mode add to the code size since
+      // names are usually obfuscated.
+      return name;
+    }
+    // In the absense of minification, propery name is followed by __
+    int index = name.startsWith("f_") ? name.indexOf("__", 2) : -1;
+    if (index != -1) {
+      return name.substring(2, index);
+    }
+    // In the case of minification, the propery name will follow with _$<counter>
+    index = name.lastIndexOf("_$");
+    return index == -1 ? name : name.substring(0, index);
   }
 
   @JsMethod

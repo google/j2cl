@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 12 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2043252 to 2043452 bytes (100%->100.0%) and from
-  722742 to 722845 bytes (100%->100.0%) gzipped.
+  2043204 to 2043438 bytes (100%->100.0%) and from
+  722719 to 722741 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
@@ -14,10 +14,10 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
         old      new
-       2818     2827 numberobjectcalls.esnext (0.3%)
-       3550     3559 interfacedevirtualize (0.3%)
-       3245     3253 interfacedevirtualize.esnext (0.2%)
-       3381     3388 autovalue (0.2%)
+       3232     3242 autovalue_inc.esnext (0.3%)
+       3607     3615 autovalue_inc (0.2%)
+       3388     3391 autovalue (0.1%)
+       3024     3025 autovalue.esnext (0.0%)
 
 
 Incremental size reports (non-gzip):
@@ -30,12 +30,12 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4018039  4018436 box2d_default (0.0%)
-    2189334  2189509 box2d_default.minified (0.0%)
-    1163111  1163286 box2d_default.rta (0.0%)
-    2414775  2415172 emptyclass (0.0%)
-    1447773  1447948 emptyclass.minified (0.0%)
-     696269   696444 emptyclass.rta (0.0%)
+    4018770  4018770 box2d_default (unchanged)
+    2189625  2189625 box2d_default.minified (unchanged)
+    1163402  1163402 box2d_default.rta (unchanged)
+    2415506  2415506 emptyclass (unchanged)
+    1448064  1448064 emptyclass.minified (unchanged)
+     696277   696277 emptyclass.rta (unchanged)
 
 
 All reports:
@@ -75,10 +75,10 @@ All reports:
        2628     2628 assertsimple.esnext (unchanged)
        5747     5747 autoboxing (unchanged)
        5396     5396 autoboxing.esnext (unchanged)
-       3381     3388 autovalue (0.2%)
-       3018     3024 autovalue.esnext (0.2%)
-       3602     3607 autovalue_inc (0.1%)
-       3226     3232 autovalue_inc.esnext (0.2%)
+       3388     3391 autovalue (0.1%)
+       3024     3025 autovalue.esnext (0.0%)
+       3607     3615 autovalue_inc (0.2%)
+       3232     3242 autovalue_inc.esnext (0.3%)
        2702     2702 autovalue_ref (unchanged)
        2459     2459 autovalue_ref.esnext (unchanged)
         998      998 backwardbridgemethod (unchanged)
@@ -88,12 +88,12 @@ All reports:
         914      914 blockscoping (unchanged)
         579      579 blockscoping.esnext (unchanged)
       27082    27082 box2d_default (unchanged)
-      25662    25662 box2d_default.esnext (unchanged)
-      25466    25466 box2d_noclassmetadata (unchanged)
-      23972    23972 box2d_noclassmetadata.esnext (unchanged)
-      23882    23882 box2d_noclassmetadata_checksmin (unchanged)
-      22352    22352 box2d_noclassmetadata_checksmin.esnext (unchanged)
-      25320    25320 box2d_noclassmetadata_checksopt (unchanged)
+      25661    25661 box2d_default.esnext (unchanged)
+      25465    25465 box2d_noclassmetadata (unchanged)
+      23971    23971 box2d_noclassmetadata.esnext (unchanged)
+      23811    23811 box2d_noclassmetadata_checksmin (unchanged)
+      22359    22359 box2d_noclassmetadata_checksmin.esnext (unchanged)
+      25321    25321 box2d_noclassmetadata_checksopt (unchanged)
       23834    23834 box2d_noclassmetadata_checksopt.esnext (unchanged)
         966      966 breakstatement (unchanged)
         634      634 breakstatement.esnext (unchanged)
@@ -205,8 +205,8 @@ All reports:
         792      792 instancequalifieronstaticfield.esnext (unchanged)
          22       22 interfaceabstractimpl (unchanged)
          22       22 interfaceabstractimpl.esnext (unchanged)
-       3550     3559 interfacedevirtualize (0.3%)
-       3245     3253 interfacedevirtualize.esnext (0.2%)
+       3559     3559 interfacedevirtualize (unchanged)
+       3253     3253 interfacedevirtualize.esnext (unchanged)
          22       22 interfacejsbridge (unchanged)
          22       22 interfacejsbridge.esnext (unchanged)
        1492     1492 interfaces (unchanged)
@@ -241,8 +241,8 @@ All reports:
        1432     1432 jsfunctiontypeannotation.esnext (unchanged)
         976      976 jsinnerclass (unchanged)
         630      630 jsinnerclass.esnext (unchanged)
-      13981    13998 jsinteroptests (0.1%)
-      12747    12757 jsinteroptests.esnext (0.1%)
+      13998    13998 jsinteroptests (unchanged)
+      12757    12757 jsinteroptests.esnext (unchanged)
         982      982 jsmethodoverride (unchanged)
         635      635 jsmethodoverride.esnext (unchanged)
        1172     1172 jsoverlay (unchanged)
@@ -311,8 +311,8 @@ All reports:
        1891     1891 numberchilddevirtualcalls.esnext (unchanged)
        2883     2883 numberdevirtualcalls (unchanged)
        2494     2494 numberdevirtualcalls.esnext (unchanged)
-       3148     3154 numberobjectcalls (0.2%)
-       2818     2827 numberobjectcalls.esnext (0.3%)
+       3154     3154 numberobjectcalls (unchanged)
+       2827     2827 numberobjectcalls.esnext (unchanged)
        1554     1554 objectchilddevirtualcalls (unchanged)
        1293     1293 objectchilddevirtualcalls.esnext (unchanged)
        1393     1393 objectdevirtualcalls (unchanged)
@@ -413,8 +413,8 @@ All reports:
        3348     3348 varargs.esnext (unchanged)
        1005     1005 variables (unchanged)
         669      669 variables.esnext (unchanged)
-      13010    13021 wasm (0.1%)
-      12465    12474 wasm.esnext (0.1%)
+      12990    12990 wasm (unchanged)
+      12445    12445 wasm.esnext (unchanged)
         923      923 whilestatement (unchanged)
         588      588 whilestatement.esnext (unchanged)
        1964     1964 wideningfloatconversion (unchanged)
