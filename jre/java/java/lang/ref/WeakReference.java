@@ -21,7 +21,7 @@ public class WeakReference<T> {
   }
 
   public T get() {
-    return referent.deref();
+    return referent != null ? referent.deref() : null;
   }
 
   public void clear() {
