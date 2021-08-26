@@ -53,6 +53,8 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Transforms expressions into WASM code.
@@ -343,10 +345,16 @@ final class ExpressionTranspiler {
           // Non polymorphic methods are called directly, regardless of whether they are
           // instance methods or not.
 
-          String wasmInfo = methodCall.getTarget().getWasmInfo();
+          String wasmInfo = target.getWasmInfo();
           if (wasmInfo == null) {
             sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
           } else {
+            Matcher m = Pattern.compile("typeof\\((\\d+)\\)").matcher(wasmInfo);
+            while (m.find()) {
+              TypeDescriptor type =
+                  methodCall.getArguments().get(Integer.parseInt(m.group(1))).getTypeDescriptor();
+              wasmInfo = wasmInfo.replace(m.group(), environment.getWasmTypeName(type));
+            }
             sourceBuilder.append("(" + wasmInfo + " ");
           }
 

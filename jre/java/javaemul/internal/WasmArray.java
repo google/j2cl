@@ -16,6 +16,8 @@
 package javaemul.internal;
 
 import java.io.Serializable;
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsMethod;
 
 /** A common base abstraction for the arrays in Wasm. */
 abstract class WasmArray implements Serializable, Cloneable {
@@ -129,7 +131,7 @@ abstract class WasmArray implements Serializable, Cloneable {
         // Not enough capacity, increase it.
         Object[] original = elements;
         elements = new Object[getNewCapacity(length, newLength)];
-        copy(original, 0, elements, 0, original.length);
+        copy(elements, 0, original, 0, original.length);
       }
     }
 
@@ -141,16 +143,16 @@ abstract class WasmArray implements Serializable, Cloneable {
       if (newLength > elements.length) {
         elements = new Object[getNewCapacity(elements.length, newLength)];
         // Copy only up to index since the other will be moved anyway.
-        copy(original, 0, this.elements, 0, insertIndex);
+        copy(this.elements, 0, original, 0, insertIndex);
       }
 
       // Make room for the values that will be inserted by moving the existing elements to the
       // end so that they are not overwritten.
       int insertEndIndex = insertIndex + values.length;
-      copy(original, insertIndex, this.elements, insertEndIndex, newLength - insertEndIndex);
+      copy(this.elements, insertEndIndex, original, insertIndex, newLength - insertEndIndex);
 
       // Copy new values into the insert location.
-      copy(values.elements, 0, this.elements, insertIndex, values.length);
+      copy(this.elements, insertIndex, values.elements, 0, values.length);
 
       // Adjust the final size to cover all copied items
       length = newLength;
@@ -158,21 +160,7 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     @Override
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
-      copy(((WasmArray.OfObject) values).elements, valueOffset, elements, offset, len);
-    }
-
-    private static void copy(Object[] src, int srcOfs, Object[] dest, int destOfs, int len) {
-      if (src == dest && srcOfs < destOfs) {
-        // Reverse copy to handle overlap that would destroy values otherwise.
-        srcOfs += len;
-        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
-          dest[--destEnd] = src[--srcOfs];
-        }
-      } else {
-        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
-          dest[destOfs++] = src[srcOfs++];
-        }
-      }
+      copy(elements, offset, ((WasmArray.OfObject) values).elements, valueOffset, len);
     }
   }
 
@@ -197,21 +185,7 @@ abstract class WasmArray implements Serializable, Cloneable {
         // Not enough capacity, increase it.
         byte[] original = elements;
         elements = new byte[getNewCapacity(length, newLength)];
-        copy(original, 0, elements, 0, original.length);
-      }
-    }
-
-    private static void copy(byte[] src, int srcOfs, byte[] dest, int destOfs, int len) {
-      if (src == dest && srcOfs < destOfs) {
-        // Reverse copy to handle overlap that would destroy values otherwise.
-        srcOfs += len;
-        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
-          dest[--destEnd] = src[--srcOfs];
-        }
-      } else {
-        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
-          dest[destOfs++] = src[srcOfs++];
-        }
+        copy(elements, 0, original, 0, original.length);
       }
     }
   }
@@ -237,21 +211,7 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     @Override
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
-      copy(((WasmArray.OfChar) values).elements, valueOffset, elements, offset, len);
-    }
-
-    private static void copy(char[] src, int srcOfs, char[] dest, int destOfs, int len) {
-      if (src == dest && srcOfs < destOfs) {
-        // Reverse copy to handle overlap that would destroy values otherwise.
-        srcOfs += len;
-        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
-          dest[--destEnd] = src[--srcOfs];
-        }
-      } else {
-        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
-          dest[destOfs++] = src[srcOfs++];
-        }
-      }
+      copy(elements, offset, ((WasmArray.OfChar) values).elements, valueOffset, len);
     }
   }
 
@@ -266,21 +226,7 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     @Override
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
-      copy(((WasmArray.OfInt) values).elements, valueOffset, elements, offset, len);
-    }
-
-    private static void copy(int[] src, int srcOfs, int[] dest, int destOfs, int len) {
-      if (src == dest && srcOfs < destOfs) {
-        // Reverse copy to handle overlap that would destroy values otherwise.
-        srcOfs += len;
-        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
-          dest[--destEnd] = src[--srcOfs];
-        }
-      } else {
-        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
-          dest[destOfs++] = src[srcOfs++];
-        }
-      }
+      copy(elements, offset, ((WasmArray.OfInt) values).elements, valueOffset, len);
     }
   }
 
@@ -295,21 +241,7 @@ abstract class WasmArray implements Serializable, Cloneable {
 
     @Override
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
-      copy(((WasmArray.OfLong) values).elements, valueOffset, elements, offset, len);
-    }
-
-    private static void copy(long[] src, int srcOfs, long[] dest, int destOfs, int len) {
-      if (src == dest && srcOfs < destOfs) {
-        // Reverse copy to handle overlap that would destroy values otherwise.
-        srcOfs += len;
-        for (int destEnd = destOfs + len; destEnd > destOfs; ) {
-          dest[--destEnd] = src[--srcOfs];
-        }
-      } else {
-        for (int destEnd = destOfs + len; destOfs < destEnd; ) {
-          dest[destOfs++] = src[srcOfs++];
-        }
-      }
+      copy(elements, offset, ((WasmArray.OfLong) values).elements, valueOffset, len);
     }
   }
 
@@ -348,4 +280,8 @@ abstract class WasmArray implements Serializable, Cloneable {
     int minCapacity = originalCapacity + (originalCapacity >> 1) + 1;
     return Math.max(minCapacity, requestedCapacity);
   }
+
+  @JsMethod // Keep JsInteropRestrictionsChecker happy.
+  @Wasm("array.copy typeof(0) typeof(2)")
+  private static native void copy(Object dest, int destOfs, Object src, int srcOfs, int len);
 }
