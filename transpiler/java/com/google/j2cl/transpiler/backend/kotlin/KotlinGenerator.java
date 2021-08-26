@@ -120,6 +120,7 @@ public class KotlinGenerator {
         continue;
       }
       sourceBuilder.newLine();
+      sourceBuilder.appendln("@JvmStatic");
       emitMethodHeader(method);
       statementTranspiler.renderStatement(method.getBody());
     }
