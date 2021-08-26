@@ -93,7 +93,8 @@ class J2clTranspiler {
         library,
         problems,
         /* enableWasm= */ options.getBackend() == Backend.WASM,
-        /* isNullMarkedSupported= */ options.isNullMarkedSupported());
+        /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
+        /* optimizeAutoValue= */ options.getExperimentalOptimizeAutovalue());
     problems.abortIfHasErrors();
   }
 

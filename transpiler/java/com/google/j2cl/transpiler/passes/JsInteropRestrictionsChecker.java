@@ -82,21 +82,30 @@ import java.util.Set;
 public class JsInteropRestrictionsChecker {
 
   public static void check(
-      Library library, Problems problems, boolean enableWasm, boolean isNullMarkedSupported) {
-    new JsInteropRestrictionsChecker(problems, enableWasm, isNullMarkedSupported)
+      Library library,
+      Problems problems,
+      boolean enableWasm,
+      boolean isNullMarkedSupported,
+      boolean optimizeAutoValue) {
+    new JsInteropRestrictionsChecker(problems, enableWasm, isNullMarkedSupported, optimizeAutoValue)
         .checkLibrary(library);
   }
 
   private final Problems problems;
   private final boolean enableWasm;
   private final boolean isNullMarkedSupported;
+  private final boolean optimizeAutoValue;
   private boolean wasUnusableByJsWarningReported = false;
 
   private JsInteropRestrictionsChecker(
-      Problems problems, boolean enableWasm, boolean isNullMarkedSupported) {
+      Problems problems,
+      boolean enableWasm,
+      boolean isNullMarkedSupported,
+      boolean optimizeAutoValue) {
     this.problems = problems;
     this.enableWasm = enableWasm;
     this.isNullMarkedSupported = isNullMarkedSupported;
+    this.optimizeAutoValue = optimizeAutoValue;
   }
 
   private static final boolean ENFORCE_WASM_CHECKS = Boolean.getBoolean("j2cl.enable_wasm_checks");
@@ -129,6 +138,12 @@ public class JsInteropRestrictionsChecker {
 
     if (!enableWasm && !isNullMarkedSupported) {
       if (!checkJSpecifyUsage(typeDeclaration)) {
+        return;
+      }
+    }
+
+    if (!enableWasm && optimizeAutoValue) {
+      if (!checkAutoValue(typeDeclaration)) {
         return;
       }
     }
@@ -180,6 +195,33 @@ public class JsInteropRestrictionsChecker {
       return false;
     }
     return true;
+  }
+
+  private boolean checkAutoValue(TypeDeclaration typeDeclaration) {
+    TypeDeclaration superType = typeDeclaration.getSuperTypeDeclaration();
+    if (superType == null) {
+      return true;
+    }
+
+    if ((!superType.isAnnotatedWithAutoValue() || checkAutoValueTypeName(typeDeclaration))
+        && (!superType.isAnnotatedWithAutoValueBuilder()
+            || checkAutoValueTypeName(typeDeclaration.getEnclosingTypeDeclaration()))) {
+      return true;
+    }
+
+    problems.error(
+        "Extending @AutoValue with %s is not supported when AutoValue optimization is enabled."
+            + " (Also see https://errorprone.info/bugpattern/ExtendsAutoValue)",
+        typeDeclaration.getReadableDescription());
+
+    return false;
+  }
+
+  private boolean checkAutoValueTypeName(TypeDeclaration typeDeclaration) {
+    // TODO(goktug): Replace with checking the generator name passed via @Generated when J2CL starts
+    // modeling annotations in the AST.
+    return typeDeclaration != null
+        && typeDeclaration.getSimpleSourceName().matches("\\$*AutoValue_.+");
   }
 
   private void checkSystemProperties(Type type) {

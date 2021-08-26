@@ -3442,7 +3442,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
     //      + "usable by but exposed to JavaScript.");
   }
 
-  public void testNullMarkedWarns() {
+  public void testNullMarkedFails() {
     newTesterWithDefaults()
         // Define the annotation here since we don't have it as a dependency.
         .addCompilationUnit("org.jspecify.nullness.NullMarked", "public @interface NullMarked {}")
@@ -3450,6 +3450,42 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "test.Buggy", "@org.jspecify.nullness.NullMarked", "class NullMarkedType {", "}")
         .assertTranspileFails()
         .assertErrorsWithoutSourcePosition("@NullMarked annotation is not supported.");
+  }
+
+  public void testAutoValueExtendsFails() {
+    newTesterWithDefaults()
+        .addArgs("-optimizeautovalue")
+        // Define the annotation here since we don't have it as a dependency.
+        .addCompilationUnit(
+            "com.google.auto.value.AutoValue",
+            "public @interface AutoValue {",
+            "public @interface Builder{}",
+            "}")
+        .addCompilationUnit(
+            "test.Buggy",
+            "@com.google.auto.value.AutoValue",
+            "class Foo {",
+            "  @com.google.auto.value.AutoValue.Builder",
+            "  static class Builder {}",
+            "}",
+            "class CustomFoo extends Foo {",
+            "  static class CustomFooBuilder extends Foo.Builder {}",
+            "}",
+            "class CustomFooBuilder extends Foo.Builder {}",
+            // Following are allowed since that's what AutoValue generates.
+            "class AutoValue_Foo extends Foo {",
+            "  static class Builder extends Foo.Builder {}",
+            "}",
+            "class $$AutoValue_Foo extends Foo {",
+            "  static class Builder extends Foo.Builder {}",
+            "}")
+        .assertTranspileFails()
+        .assertErrorsWithoutSourcePosition(
+            "Extending @AutoValue with CustomFoo is not supported when AutoValue optimization is"
+                + " enabled. (Also see https://errorprone.info/bugpattern/ExtendsAutoValue)",
+            "Extending @AutoValue with CustomFooBuilder is not supported when AutoValue"
+                + " optimization is enabled. (Also see"
+                + " https://errorprone.info/bugpattern/ExtendsAutoValue)");
   }
 
   public void testCorrectLineNumbers() {
