@@ -57,6 +57,9 @@ public final class J2clCommandLineRunner extends CommandLineTool {
       usage = "Directory or zip into which to place compiled output.")
   Path output = Paths.get(".");
 
+  @Option(name = "-optimizeautovalue", usage = "Enables optimizations of AutoValue types.")
+  boolean optimizeAutovalue = false;
+
   @Option(
       name = "-readablesourcemaps",
       usage = "Coerces generated source maps to human readable form.",
@@ -110,6 +113,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
         .setOutput(output)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setEmitReadableLibraryInfo(false)
+        .setExperimentalOptimizeAutovalue(this.optimizeAutovalue)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setFrontend(this.frontEnd)
         .setBackend(Backend.CLOSURE)
