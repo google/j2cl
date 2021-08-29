@@ -19,10 +19,10 @@ def setup_j2cl_workspace(**kwargs):
 
     jvm_maven_import_external(
         name = "com_google_auto_common",
-        artifact = "com.google.auto:auto-common:0.9",
+        artifact = "com.google.auto:auto-common:1.1.2",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
-        artifact_sha256 = "d65d7e7b45ac92317eae8a55481ca25e5fba908a2fd24b66684854d9dec2fcfd",
+        artifact_sha256 = "bfe85e517250fc208afd2b031a2ba80f26529c92536484841b4a60661ca1e3f5",
     )
 
     jvm_maven_import_external(
