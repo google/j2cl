@@ -19,10 +19,10 @@ def setup_j2cl_workspace(**kwargs):
 
     jvm_maven_import_external(
         name = "com_google_auto_common",
-        artifact = "com.google.auto:auto-common:0.9",
+        artifact = "com.google.auto:auto-common:1.1.2",
         server_urls = _MAVEN_CENTRAL_URLS,
         licenses = ["notice"],
-        artifact_sha256 = "d65d7e7b45ac92317eae8a55481ca25e5fba908a2fd24b66684854d9dec2fcfd",
+        artifact_sha256 = "bfe85e517250fc208afd2b031a2ba80f26529c92536484841b4a60661ca1e3f5",
     )
 
     jvm_maven_import_external(
@@ -211,7 +211,7 @@ def setup_j2cl_workspace(**kwargs):
         sha256 = "088e5fc0f56c75f82c289c4721d9faf46a309e258d3ee647799622ef82e60303",
         patches = ["//transpiler/javatests/com/google/j2cl/integration/box2d:jbox2d.patch"],
         build_file_content = '''
-load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_library")
+load("//build_defs:rules.bzl", "j2cl_library")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -224,7 +224,7 @@ java_library(
     srcs = glob(["**/*.java"]),
     javacopts = _JAVACOPTS,
     deps = [
-        "@com_google_j2cl//:jsinterop-annotations",
+        "//:jsinterop-annotations",
     ],
 )
 j2cl_library(
@@ -242,7 +242,7 @@ j2cl_library(
     ),
     javacopts = _JAVACOPTS,
     deps = [
-        "@com_google_j2cl//:jsinterop-annotations-j2cl",
+        "//:jsinterop-annotations-j2cl",
     ],
 )
 ''',
