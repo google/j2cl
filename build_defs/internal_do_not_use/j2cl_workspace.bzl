@@ -211,7 +211,7 @@ def setup_j2cl_workspace(**kwargs):
         sha256 = "088e5fc0f56c75f82c289c4721d9faf46a309e258d3ee647799622ef82e60303",
         patches = ["//transpiler/javatests/com/google/j2cl/integration/box2d:jbox2d.patch"],
         build_file_content = '''
-load("//build_defs:rules.bzl", "j2cl_library")
+load("@com_google_j2cl//build_defs:rules.bzl", "j2cl_library")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -224,7 +224,7 @@ java_library(
     srcs = glob(["**/*.java"]),
     javacopts = _JAVACOPTS,
     deps = [
-        "//:jsinterop-annotations",
+        "@com_google_j2cl//:jsinterop-annotations",
     ],
 )
 j2cl_library(
@@ -242,7 +242,7 @@ j2cl_library(
     ),
     javacopts = _JAVACOPTS,
     deps = [
-        "//:jsinterop-annotations-j2cl",
+        "@com_google_j2cl//:jsinterop-annotations-j2cl",
     ],
 )
 ''',
