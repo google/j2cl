@@ -1,16 +1,11 @@
-load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kt_jvm_library")
-
 package(
     default_visibility = ["//transpiler:__subpackages__"],
     licenses = ["notice"],  # Apache 2.0
 )
 
-kt_jvm_library(
+java_library(
     name = "kotlin",
-    srcs = glob([
-        "*.java",
-        "*.kt",
-    ]),
+    srcs = glob(["*.java"]),
     deps = [
         "//third_party:gson",
         "//third_party:guava",
