@@ -56,32 +56,44 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-sign-ext")
     args.add("--enable-nontrapping-float-to-int")
 
-    # TODO(b/191258766): Switch to nominal typing when binaryen and Chrome supports it.
-    # args.add("--nominal")
     args.add("--debuginfo")
     args.add_all(ctx.attr.binaryen_args)
 
-    args.add("-o", ctx.outputs.wasm)
-    outputs.append(ctx.outputs.wasm)
-    runfiles.append(ctx.outputs.wasm)
+    # TODO(b/198219246): remove intermediate invocation to binaryen once Chrome handles nominal wasm types.
+    intermediate_wasm_output = ctx.actions.declare_file(ctx.label.name + "_intermediate_wasm_output")
+    intermediate_source_map = ctx.actions.declare_file(ctx.label.name + " _intermediate_source_map")
+
+    ctx.actions.run(
+        executable = ctx.executable._binaryen,
+        arguments = [args] + ["--nominal", "-o", intermediate_wasm_output.path, "--output-source-map", intermediate_source_map.path, ctx.outputs.wat.path],
+        inputs = [ctx.outputs.wat],
+        outputs = [intermediate_source_map, intermediate_wasm_output],
+        mnemonic = "J2wasm",
+        progress_message = "Compiling to WASM (nominal)",
+        # Binaryen can leverage 4 cores with some amount of parallelism.
+        execution_requirements = {"cpu:4": ""},
+    )
+
+    debug_dir_name = ctx.label.name + "_debug"
 
     symbolmap = ctx.actions.declare_file(ctx.label.name + ".map")
     args.add("--symbolmap=" + symbolmap.path)
     outputs.append(symbolmap)
 
-    debug_dir_name = ctx.label.name + "_debug"
+    args.add("-o", ctx.outputs.wasm)
+    outputs.append(ctx.outputs.wasm)
+    runfiles.append(ctx.outputs.wasm)
+
     source_map_name = ctx.label.name + "_source.map"
     source_map = ctx.actions.declare_file(source_map_name)
     args.add("--output-source-map", source_map)
     outputs.append(source_map)
     args.add("--output-source-map-url", debug_dir_name + "/" + source_map_name)
 
-    args.add(ctx.outputs.wat)
-
     ctx.actions.run(
         executable = ctx.executable._binaryen,
-        arguments = [args],
-        inputs = [ctx.outputs.wat],
+        arguments = [args] + ["--input-source-map", intermediate_source_map.path, intermediate_wasm_output.path],
+        inputs = [intermediate_wasm_output, intermediate_source_map],
         outputs = outputs,
         mnemonic = "J2wasm",
         progress_message = "Compiling to WASM",
