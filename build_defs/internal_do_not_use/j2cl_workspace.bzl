@@ -2,8 +2,10 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_jar")
 load("@io_bazel_rules_closure//closure:repositories.bzl", "rules_closure_dependencies")
+load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories", "kt_register_toolchains")
 load("@bazel_skylib//lib:versions.bzl", "versions")
 load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
+
 
 _MAVEN_CENTRAL_URLS = ["https://repo1.maven.org/maven2/"]
 
@@ -247,6 +249,9 @@ j2cl_library(
 )
 ''',
     )
+
+    kotlin_repositories()
+    kt_register_toolchains()
 
     # Required by protobuf_java_util
     native.bind(
