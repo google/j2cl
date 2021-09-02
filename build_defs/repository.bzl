@@ -17,6 +17,13 @@ def load_j2cl_repo_deps():
         sha256 = "64ad2728ccdd2044216e4cec7815918b7bb3bb28c95b7e9d951f9d4eccb07625",
     )
 
+    _github_repo(
+        name = "io_bazel_rules_kotlin",
+        repo = "bazelbuild/rules_kotlin",
+        tag = "legacy-1.3.0-rc3",
+        sha256 = "54678552125753d9fc0a37736d140f1d2e69778d3e52cf454df41a913b964ede"
+    )
+
     # Add other closure repo deps that need to loaded beforehand.
     # A differnt alternative would be to let rules_closure load them but then
     # we would need to take setup_j2cl_workspace out of rules.bzl and go with a
