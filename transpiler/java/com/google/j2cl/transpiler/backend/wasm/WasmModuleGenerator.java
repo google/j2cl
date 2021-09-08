@@ -436,7 +436,7 @@ public class WasmModuleGenerator {
           "(field "
               + environment.getFieldName(field)
               + " (mut "
-              + environment.getWasmType(field.getDescriptor().getTypeDescriptor())
+              + environment.getWasmFieldType(field.getDescriptor().getTypeDescriptor())
               + "))");
     }
   }
@@ -681,7 +681,7 @@ public class WasmModuleGenerator {
         format(
             "(type %s (array (mut %s)))",
             environment.getWasmTypeName(arrayTypeDescriptor),
-            environment.getWasmType(arrayTypeDescriptor.getComponentTypeDescriptor())));
+            environment.getWasmFieldType(arrayTypeDescriptor.getComponentTypeDescriptor())));
     builder.newLine();
   }
 

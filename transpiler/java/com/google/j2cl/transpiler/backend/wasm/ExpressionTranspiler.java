@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid;
+import static com.google.j2cl.transpiler.backend.wasm.GenerationEnvironment.getGetterInstruction;
 import static java.lang.String.format;
 
 import com.google.common.collect.Iterables;
@@ -109,19 +110,19 @@ final class ExpressionTranspiler {
 
       private boolean renderAssignment(Expression left, Expression right) {
         sourceBuilder.append("(");
-        renderAccessExpression(left, "set");
+        renderAccessExpression(left, /*setter=*/ true);
         sourceBuilder.append(" ");
         renderTypedExpression(left.getTypeDescriptor(), right);
         sourceBuilder.append(")");
         return false;
       }
 
-      private void renderAccessExpression(Expression expression, String instruction) {
+      private void renderAccessExpression(Expression expression, boolean setter) {
         if (expression instanceof VariableReference) {
           sourceBuilder.append(
               format(
                   "local.%s %s",
-                  instruction,
+                  setter ? "set" : "get",
                   environment.getDeclarationName(((VariableReference) expression).getTarget())));
 
         } else if (expression instanceof FieldAccess) {
@@ -129,12 +130,14 @@ final class ExpressionTranspiler {
           Expression qualifier = ((FieldAccess) expression).getQualifier();
           if (fieldDescriptor.isStatic()) {
             sourceBuilder.append(
-                format("global.%s %s", instruction, environment.getFieldName(fieldDescriptor)));
+                format(
+                    "global.%s %s",
+                    setter ? "set" : "get", environment.getFieldName(fieldDescriptor)));
           } else {
             sourceBuilder.append(
                 format(
                     "struct.%s %s %s",
-                    instruction,
+                    setter ? "set" : getGetterInstruction(fieldDescriptor.getTypeDescriptor()),
                     environment.getWasmTypeName(fieldDescriptor.getEnclosingTypeDescriptor()),
                     environment.getFieldName(fieldDescriptor)));
             render(qualifier);
@@ -147,7 +150,8 @@ final class ExpressionTranspiler {
           sourceBuilder.append(
               format(
                   "array.%s %s ",
-                  instruction, environment.getWasmTypeName(arrayExpression.getTypeDescriptor())));
+                  setter ? "set" : getGetterInstruction(arrayAccess.getTypeDescriptor()),
+                  environment.getWasmTypeName(arrayExpression.getTypeDescriptor())));
           render(arrayExpression);
           sourceBuilder.append(" ");
           render(arrayAccess.getIndexExpression());
@@ -157,7 +161,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterArrayAccess(ArrayAccess arrayAccess) {
         sourceBuilder.append("(");
-        renderAccessExpression(arrayAccess, "get");
+        renderAccessExpression(arrayAccess, /*setter=*/ false);
         sourceBuilder.append(")");
         return false;
       }
@@ -221,7 +225,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterFieldAccess(FieldAccess fieldAccess) {
         sourceBuilder.append("(");
-        renderAccessExpression(fieldAccess, "get");
+        renderAccessExpression(fieldAccess, /*setter=*/ false);
         sourceBuilder.append(")");
         return false;
       }
@@ -523,7 +527,7 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterVariableReference(VariableReference variableReference) {
         sourceBuilder.append("(");
-        renderAccessExpression(variableReference, "get");
+        renderAccessExpression(variableReference, /*setter=*/ false);
         sourceBuilder.append(")");
         return false;
       }

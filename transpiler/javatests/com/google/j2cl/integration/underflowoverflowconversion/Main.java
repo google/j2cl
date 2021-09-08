@@ -206,11 +206,11 @@ public class Main {
   private static void testByteOverflow() {
     // Perform Byte.MAX_VALUE / (Byte.MAX_VALUE + Byte.MAX_VALUE) all in byte precision first ...
     byte m = Byte.MAX_VALUE;
-    assertEquals(-63, (byte) (m / (byte) (m + m)));
+    assertEquals((byte) -63, (byte) (m / (byte) (m + m)));
 
     // and note that it is different than writing it as a single expression because it will be
     // performed in integer precision an no overflow occurs.
-    assertEquals(0, (byte) (m / (m + m)));
+    assertEquals((byte) 0, (byte) (m / (m + m)));
   }
 
   private static void testNestedOperationsOverflow() {

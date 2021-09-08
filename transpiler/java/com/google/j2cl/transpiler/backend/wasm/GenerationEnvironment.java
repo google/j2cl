@@ -67,6 +67,36 @@ class GenerationEnvironment {
     return WASM_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
   }
 
+  private static final ImmutableMap<PrimitiveTypeDescriptor, String>
+      WASM_PACKED_TYPES_BY_PRIMITIVE_TYPES =
+          ImmutableMap.<PrimitiveTypeDescriptor, String>builder()
+              .put(PrimitiveTypes.BOOLEAN, "i8")
+              .put(PrimitiveTypes.BYTE, "i8")
+              .put(PrimitiveTypes.CHAR, "i16")
+              .put(PrimitiveTypes.SHORT, "i16")
+              .put(PrimitiveTypes.INT, "i32")
+              .put(PrimitiveTypes.LONG, "i64")
+              .put(PrimitiveTypes.FLOAT, "f32")
+              .put(PrimitiveTypes.DOUBLE, "f64")
+              .build();
+
+  static String getWasmPackedTypeForPrimitive(TypeDescriptor typeDescriptor) {
+    checkArgument(typeDescriptor.isPrimitive() && !TypeDescriptors.isPrimitiveVoid(typeDescriptor));
+    return WASM_PACKED_TYPES_BY_PRIMITIVE_TYPES.get(typeDescriptor);
+  }
+
+  static String getGetterInstruction(TypeDescriptor typeDescriptor) {
+    if (TypeDescriptors.isPrimitiveChar(typeDescriptor)) {
+      return "get_u";
+    }
+    if (typeDescriptor.isPrimitive()
+        && !getWasmTypeForPrimitive(typeDescriptor)
+            .equals(getWasmPackedTypeForPrimitive(typeDescriptor))) {
+      return "get_s";
+    }
+    return "get";
+  }
+
   /** Maps Java type declarations to the corresponding wasm type layout objects. */
   private final Map<TypeDeclaration, WasmTypeLayout> wasmTypeLayoutByTypeDeclaration;
 
@@ -84,6 +114,17 @@ class GenerationEnvironment {
       return getWasmTypeForPrimitive(typeDescriptor);
     }
     return "(ref null " + getWasmTypeName(typeDescriptor) + ")";
+  }
+
+  /**
+   * Returns the type to be used in a context of Struct or Array which can be potentially a packed
+   * type. (WasmGC supports packed types only in limited contexts)
+   */
+  String getWasmFieldType(TypeDescriptor typeDescriptor) {
+    if (typeDescriptor.isPrimitive()) {
+      return getWasmPackedTypeForPrimitive(typeDescriptor);
+    }
+    return getWasmType(typeDescriptor);
   }
 
   String getWasmTypeName(TypeDeclaration typeDeclaration) {

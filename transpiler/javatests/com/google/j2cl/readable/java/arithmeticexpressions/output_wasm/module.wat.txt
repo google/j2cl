@@ -383,7 +383,7 @@
   (local.set $booleans (ref.null $javaemul.internal.WasmArray.OfBoolean))
   ;; (booleans.elements[0] = (booleans.elements[0] | true));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:100:4
-  (array.set $boolean.array (struct.get $javaemul.internal.WasmArray.OfBoolean $f_elements__javaemul_internal_WasmArray_OfBoolean_(local.get $booleans)) (i32.const 0) (i32.or (array.get $boolean.array (struct.get $javaemul.internal.WasmArray.OfBoolean $f_elements__javaemul_internal_WasmArray_OfBoolean_(local.get $booleans)) (i32.const 0)) (i32.const 1)))
+  (array.set $boolean.array (struct.get $javaemul.internal.WasmArray.OfBoolean $f_elements__javaemul_internal_WasmArray_OfBoolean_(local.get $booleans)) (i32.const 0) (i32.or (array.get_s $boolean.array (struct.get $javaemul.internal.WasmArray.OfBoolean $f_elements__javaemul_internal_WasmArray_OfBoolean_(local.get $booleans)) (i32.const 0)) (i32.const 1)))
   ;; String[] strings = null;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:102:4
   (local.set $strings (ref.null $javaemul.internal.WasmArray.OfObject))
@@ -403,7 +403,7 @@
   (local.set $b (i32.eq (block (result i32)
    (local.set $$array_4 (local.get $shorts))
    (local.set $$index_4 (i32.const 0))
-   (local.set $$value_2 (i32.extend16_s (i32.add (array.get $short.array (struct.get $javaemul.internal.WasmArray.OfShort $f_elements__javaemul_internal_WasmArray_OfShort_(local.get $shorts)) (i32.const 0)) (i32.const 1))))
+   (local.set $$value_2 (i32.extend16_s (i32.add (array.get_s $short.array (struct.get $javaemul.internal.WasmArray.OfShort $f_elements__javaemul_internal_WasmArray_OfShort_(local.get $shorts)) (i32.const 0)) (i32.const 1))))
    (array.set $short.array (struct.get $javaemul.internal.WasmArray.OfShort $f_elements__javaemul_internal_WasmArray_OfShort_(local.get $$array_4)) (local.get $$index_4) (local.get $$value_2))
    (local.get $$value_2)
   ) (i32.const 10)))

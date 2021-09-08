@@ -555,13 +555,13 @@ public class Main {
   }
 
   private static void testParse() {
-    assertEquals(123, Byte.parseByte("123"));
-    assertEquals(123, Byte.parseByte("+123"));
-    assertEquals(-123, Byte.parseByte("-123"));
-    assertEquals(0, Byte.parseByte("0"));
-    assertEquals(Byte.MAX_VALUE, Integer.parseInt(String.valueOf(Byte.MAX_VALUE)));
-    assertEquals(Byte.MIN_VALUE, Integer.parseInt(String.valueOf(Byte.MIN_VALUE)));
-    assertEquals(51, Byte.parseByte("123", 6));
+    assertEquals((byte) 123, Byte.parseByte("123"));
+    assertEquals((byte) 123, Byte.parseByte("+123"));
+    assertEquals((byte) -123, Byte.parseByte("-123"));
+    assertEquals((byte) 0, Byte.parseByte("0"));
+    assertEquals((byte) Byte.MAX_VALUE, Byte.parseByte(String.valueOf(Byte.MAX_VALUE)));
+    assertEquals((byte) Byte.MIN_VALUE, Byte.parseByte(String.valueOf(Byte.MIN_VALUE)));
+    assertEquals((byte) 51, Byte.parseByte("123", 6));
 
     assertEquals(12345, Integer.parseInt("12345"));
     assertEquals(12345, Integer.parseInt("+12345"));
