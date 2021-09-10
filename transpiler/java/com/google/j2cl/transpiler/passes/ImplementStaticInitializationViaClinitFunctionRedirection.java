@@ -190,6 +190,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
         fieldDescriptor.isStatic()
             && fieldDescriptor.getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD);
     return FieldDescriptor.Builder.from(fieldDescriptor)
+        .setEnumConstant(false)
         .setJsInfo(JsInfo.NONE)
         .setOrigin(FieldOrigin.SYNTHETIC_BACKING_FIELD)
         .build();

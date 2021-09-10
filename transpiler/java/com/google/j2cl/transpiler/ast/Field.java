@@ -32,19 +32,21 @@ public class Field extends Member {
   // TODO(b/112150736): generalize concept of the source position for names to members.
   private final SourcePosition nameSourcePosition;
   // Only valid for enum fields, where it is >= 0.
-  private int enumOrdinal = -1;
+  private int enumOrdinal;
 
   private Field(
       SourcePosition sourcePosition,
       FieldDescriptor fieldDescriptor,
       Expression initializer,
       Variable capturedVariable,
+      int enumOrdinal,
       SourcePosition nameSourcePosition) {
     super(sourcePosition);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
     this.capturedVariable = capturedVariable;
     this.nameSourcePosition = checkNotNull(nameSourcePosition);
+    this.enumOrdinal = enumOrdinal;
   }
 
   @Override
@@ -105,6 +107,7 @@ public class Field extends Member {
     private Variable capturedVariable;
     private SourcePosition sourcePosition;
     private SourcePosition nameSourcePosition = SourcePosition.NONE;
+    private int enumOrdinal = -1;
 
     public static Builder from(Field field) {
       Builder builder = new Builder();
@@ -113,6 +116,7 @@ public class Field extends Member {
       builder.capturedVariable = field.getCapturedVariable();
       builder.sourcePosition = field.getSourcePosition();
       builder.nameSourcePosition = field.getNameSourcePosition();
+      builder.enumOrdinal = field.enumOrdinal;
       return builder;
     }
 
@@ -155,7 +159,12 @@ public class Field extends Member {
 
     public Field build() {
       return new Field(
-          sourcePosition, fieldDescriptor, initializer, capturedVariable, nameSourcePosition);
+          sourcePosition,
+          fieldDescriptor,
+          initializer,
+          capturedVariable,
+          enumOrdinal,
+          nameSourcePosition);
     }
   }
 }

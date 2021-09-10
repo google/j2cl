@@ -1023,6 +1023,7 @@ public class AstUtils {
       FieldDescriptor fieldDescriptor) {
     checkArgument(fieldDescriptor.isStatic());
     return FieldDescriptor.Builder.from(fieldDescriptor)
+        .setEnumConstant(false)
         .setCompileTimeConstant(true)
         .setSynthetic(true)
         .setTypeDescriptor(PrimitiveTypes.INT)
