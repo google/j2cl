@@ -6,9 +6,6 @@
 (global $f_GREEN__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (global $f_BLUE__jstypeenum_Color (mut (ref null $jstypeenum.Color)) (ref.null $jstypeenum.Color))
 (global $f_namesToValuesMap__jstypeenum_Color_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $$ordinal_RED__jstypeenum_Color i32 (i32.const 0))
-(global $$ordinal_GREEN__jstypeenum_Color i32 (i32.const 1))
-(global $$ordinal_BLUE__jstypeenum_Color i32 (i32.const 2))
 (global $f_$initialized__jstypeenum_Color (mut i32) (i32.const 0))
 
  ;;; Code for jstypeenum.Color [vtable.init]
@@ -150,15 +147,15 @@
   ;; java.lang.Enum.$clinit();
   ;;@ jstypeenum/Color.java:21:12
   (call $$clinit__void@java.lang.Enum )
-  ;; (jstypeenum.Color.RED = new Color.<init>(javaemul.internal.StringPool.$getString_|RED|(),jstypeenum.Color.RED));
+  ;; (jstypeenum.Color.RED = new Color.<init>(javaemul.internal.StringPool.$getString_|RED|(),0));
   ;;@ jstypeenum/Color.java:22:2
-  (global.set $f_RED__jstypeenum_Color (call $m_<init>__java_lang_String__int@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))(call $$getString_|RED|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_RED__jstypeenum_Color)))
-  ;; (jstypeenum.Color.GREEN = new Color.<init>(javaemul.internal.StringPool.$getString_|GREEN|(),jstypeenum.Color.GREEN));
+  (global.set $f_RED__jstypeenum_Color (call $m_<init>__java_lang_String__int@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))(call $$getString_|RED|__java_lang_String@javaemul.internal.StringPool )(i32.const 0)))
+  ;; (jstypeenum.Color.GREEN = new Color.<init>(javaemul.internal.StringPool.$getString_|GREEN|(),1));
   ;;@ jstypeenum/Color.java:23:2
-  (global.set $f_GREEN__jstypeenum_Color (call $m_<init>__java_lang_String__int@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))(call $$getString_|GREEN|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_GREEN__jstypeenum_Color)))
-  ;; (jstypeenum.Color.BLUE = new Color.<init>(javaemul.internal.StringPool.$getString_|BLUE|(),jstypeenum.Color.BLUE));
+  (global.set $f_GREEN__jstypeenum_Color (call $m_<init>__java_lang_String__int@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))(call $$getString_|GREEN|__java_lang_String@javaemul.internal.StringPool )(i32.const 1)))
+  ;; (jstypeenum.Color.BLUE = new Color.<init>(javaemul.internal.StringPool.$getString_|BLUE|(),2));
   ;;@ jstypeenum/Color.java:24:2
-  (global.set $f_BLUE__jstypeenum_Color (call $m_<init>__java_lang_String__int@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))(call $$getString_|BLUE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_BLUE__jstypeenum_Color)))
+  (global.set $f_BLUE__jstypeenum_Color (call $m_<init>__java_lang_String__int@jstypeenum.Color (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt))(call $$getString_|BLUE|__java_lang_String@javaemul.internal.StringPool )(i32.const 2)))
   ;; (jstypeenum.Color.namesToValuesMap = null);
   ;;@ jstypeenum/Color.java:21:12
   (global.set $f_namesToValuesMap__jstypeenum_Color_ (ref.null $java.lang.Object))

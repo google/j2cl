@@ -53,7 +53,7 @@ public class NormalizeSwitchStatements extends NormalizationPass {
               return convertEnumSwitchStatement(switchStatement);
             }
 
-            checkArgument(expressionTypeDescriptor.isPrimitive());
+            checkArgument(TypeDescriptors.isBoxedOrPrimitiveType(expressionTypeDescriptor));
             // Switch on primitives do not require conversions.
             return switchStatement;
           }

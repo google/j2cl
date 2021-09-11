@@ -24,14 +24,10 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Kind;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.Type;
@@ -48,55 +44,7 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
 
   @Override
   public void applyTo(Library library) {
-    Map<FieldDescriptor, StringLiteral> stringLiteralsByField =
-        removeStringCompileTimeConstantFields(library);
-    rewriteStringCompileTimeConstantFieldReferences(library, stringLiteralsByField);
     rewriteStringLiterals(library);
-  }
-
-  /** Removes all string compile constant fields and returns their values indexed by them. */
-  private Map<FieldDescriptor, StringLiteral> removeStringCompileTimeConstantFields(
-      Library library) {
-    Map<FieldDescriptor, StringLiteral> stringLiteralsByField = new LinkedHashMap<>();
-    library.accept(
-        new AbstractRewriter() {
-          @Override
-          public Field rewriteField(Field field) {
-            if (isCompileTimeConstantStringField(field.getDescriptor())) {
-              // We expect compile time constant to resolved at this stage so we can assume
-              // initializer is a StringLiteral.
-              stringLiteralsByField.put(
-                  field.getDescriptor(), (StringLiteral) field.getInitializer());
-              return null;
-            }
-            return field;
-          }
-        });
-    return stringLiteralsByField;
-  }
-
-  /**
-   * Replaces references to compile time constant fields of type String with a call to the
-   * corresponding literal getter.
-   */
-  private void rewriteStringCompileTimeConstantFieldReferences(
-      Library library, Map<FieldDescriptor, StringLiteral> initializersByField) {
-    library.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-            FieldDescriptor target = fieldAccess.getTarget();
-            return isCompileTimeConstantStringField(target)
-                ? initializersByField.get(target.getDeclarationDescriptor())
-                : fieldAccess;
-          }
-        });
-  }
-
-  private static boolean isCompileTimeConstantStringField(FieldDescriptor fieldDescriptor) {
-    return fieldDescriptor.isStatic()
-        && fieldDescriptor.isCompileTimeConstant()
-        && TypeDescriptors.isJavaLangString(fieldDescriptor.getTypeDescriptor());
   }
 
   /**

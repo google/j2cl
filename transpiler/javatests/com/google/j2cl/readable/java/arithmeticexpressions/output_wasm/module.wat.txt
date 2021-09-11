@@ -5,9 +5,6 @@
 (global $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (mut (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) (ref.null $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [static fields]
-(global $f_FLOAT_CONSTANT__arithmeticexpressions_ArithmeticExpressions_ f32 (f32.const 1.100000023841858))
-(global $f_DOUBLE_CONSTANT__arithmeticexpressions_ArithmeticExpressions_ f64 (f64.const 1.100000023841858))
-(global $f_DOUBLE_CONSTANT_WITH_ARITHMETIC__arithmeticexpressions_ArithmeticExpressions_ f64 (f64.const 2.200000047683716))
 (global $f_one__arithmeticexpressions_ArithmeticExpressions (mut i64) (i64.const 0))
 (global $f_foo__arithmeticexpressions_ArithmeticExpressions (mut i64) (i64.const 0))
 (global $f_counter__arithmeticexpressions_ArithmeticExpressions_ (mut i64) (i64.const 0))
@@ -200,11 +197,11 @@
   (local.set $i (i32.sub (i32.add (i32.add (i32.const 1) (i32.const 1)) (i32.const 2)) (i32.const 5)))
   (local.set $j (i32.mul (i32.add (i32.const 1) (i32.const 2)) (i32.add (i32.const 3) (i32.const 4))))
   (local.set $p (i32.rem_s (i32.mul (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (i32.const 1)(i32.const 2)) (i32.const 3)) (i32.const 4)))
-  ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (javaemul.internal.Primitives.widenLongToDouble(java.lang.Long.MAX_VALUE) != 9.223372036854778E18);
+  ;; boolean k = !(((1 + 2) + 3) == 4),boolean l = ((1 + 2) != 4),boolean m = (9.223372036854776E18 != 9.223372036854778E18);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:50:4
   (local.set $k (i32.eqz (i32.eq (i32.add (i32.add (i32.const 1) (i32.const 2)) (i32.const 3)) (i32.const 4))))
   (local.set $l (i32.ne (i32.add (i32.const 1) (i32.const 2)) (i32.const 4)))
-  (local.set $m (f64.ne (f64.convert_i64_s (global.get $f_MAX_VALUE__java_lang_Long)) (f64.const 9.223372036854778E18)))
+  (local.set $m (f64.ne (f64.const 9.223372036854776E18) (f64.const 9.223372036854778E18)))
   ;; double o = (javaemul.internal.Primitives.widenIntToDouble(javaemul.internal.Primitives.safeDivision((5 + 1),2)) - 0.0);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:51:4
   (local.set $o (f64.sub (f64.convert_i32_s (call $m_safeDivision__int__int__int@javaemul.internal.Primitives (i32.add (i32.const 5) (i32.const 1))(i32.const 2))) (f64.const 0.0)))
@@ -220,9 +217,9 @@
   ;; (a = javaemul.internal.Primitives.narrowLongToInt(javaemul.internal.Primitives.safeDivision(javaemul.internal.Primitives.widenIntToLong(a),1)));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:56:4
   (local.set $a (i32.wrap_i64 (call $m_safeDivision__long__long__long@javaemul.internal.Primitives (i64.extend_i32_s (local.get $a))(i64.const 1))))
-  ;; (a = javaemul.internal.Primitives.narrowDoubleToInt((javaemul.internal.Primitives.widenIntToDouble(a) + java.lang.Double.MAX_VALUE)));
+  ;; (a = javaemul.internal.Primitives.narrowDoubleToInt((javaemul.internal.Primitives.widenIntToDouble(a) + 1.7976931348623157E308)));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:57:4
-  (local.set $a (i32.trunc_sat_f64_s (f64.add (f64.convert_i32_s (local.get $a)) (global.get $f_MAX_VALUE__java_lang_Double))))
+  (local.set $a (i32.trunc_sat_f64_s (f64.add (f64.convert_i32_s (local.get $a)) (f64.const 1.7976931348623157E308))))
   ;; (k = (k | true));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:59:4
   (local.set $k (i32.or (local.get $k) (i32.const 1)))

@@ -56,5 +56,8 @@ public class Strings {
     (new StringHolder()).s += s4;
     (new StringHolder()).s += c1;
     (new StringHolder()).s += "o";
+
+    s1 = 1 + 2 + "s";
+    s1 = "s" + 1 + 2;
   }
 }

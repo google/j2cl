@@ -3,19 +3,7 @@
 
 ;;; Code for compiletimeconstant.CompileTimeConstant [static fields]
 (global $f_OBJ__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $f_A__compiletimeconstant_CompileTimeConstant i32 (i32.const 10))
-(global $f_B__compiletimeconstant_CompileTimeConstant i32 (i32.const 20))
-(global $f_C__compiletimeconstant_CompileTimeConstant i32 (i32.const 200))
 (global $f_K__compiletimeconstant_CompileTimeConstant (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
-(global $f_G__compiletimeconstant_CompileTimeConstant i64 (i64.const 10000))
-(global $f_H__compiletimeconstant_CompileTimeConstant i32 (i32.const 65))
-(global $f_I__compiletimeconstant_CompileTimeConstant i32 (i32.const 1))
-(global $f_A2__compiletimeconstant_CompileTimeConstant i32 (i32.const 10))
-(global $f_B2__compiletimeconstant_CompileTimeConstant i32 (i32.const 20))
-(global $f_C2__compiletimeconstant_CompileTimeConstant i32 (i32.const 200))
-(global $f_G2__compiletimeconstant_CompileTimeConstant i64 (i64.const 10000))
-(global $f_H2__compiletimeconstant_CompileTimeConstant i32 (i32.const 65))
-(global $f_I2__compiletimeconstant_CompileTimeConstant i32 (i32.const 1))
 (global $f_$initialized__compiletimeconstant_CompileTimeConstant (mut i32) (i32.const 0))
 
  ;;; Code for compiletimeconstant.CompileTimeConstant [vtable.init]
@@ -74,25 +62,19 @@
  ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
  (local $b i32)
  (local $s (ref null $java.lang.String))
- (local $$stringBuilder (ref null $java.lang.StringBuilder))
  (local $l (ref null $java.lang.String))
  (local $m (ref null $java.lang.String))
  (local $n (ref null $java.lang.String))
  (block
-  ;; boolean b = (CompileTimeConstant.this,compiletimeconstant.CompileTimeConstant.I2);
+  ;; boolean b = (CompileTimeConstant.this,true);
   ;;@ compiletimeconstant/CompileTimeConstant.java:51:4
   (local.set $b (block (result i32)
    (drop (local.get $this))
-   (global.get $f_I2__compiletimeconstant_CompileTimeConstant)
+   (i32.const 1)
   ))
-  ;; String s = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(compiletimeconstant.CompileTimeConstant.G),$stringBuilder.append(javaemul.internal.StringPool.$getString_|Tur_tleDo_ve|()),$stringBuilder.toString());
+  ;; String s = javaemul.internal.StringPool.$getString_|10000Tur_tle...|();
   ;;@ compiletimeconstant/CompileTimeConstant.java:52:4
-  (local.set $s (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $m_<init>__@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
-   (drop (call_ref (local.get $$stringBuilder)(global.get $f_G__compiletimeconstant_CompileTimeConstant)(struct.get $java.lang.StringBuilder.vtable $m_append__long__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref (local.get $$stringBuilder)(call $$getString_|Tur_tleDo_ve|__java_lang_String@javaemul.internal.StringPool )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
-  ))
+  (local.set $s (call $$getString_|10000Tur_tle...|__java_lang_String@javaemul.internal.StringPool ))
   ;; String l = javaemul.internal.StringPool.$getString_|ThisIsALongS...|();
   ;;@ compiletimeconstant/CompileTimeConstant.java:53:4
   (local.set $l (call $$getString_|ThisIsALongS...|__java_lang_String@javaemul.internal.StringPool ))

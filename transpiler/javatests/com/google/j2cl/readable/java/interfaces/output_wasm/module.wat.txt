@@ -11,8 +11,6 @@
 (global $f_$initialized__interfaces_Main (mut i32) (i32.const 0))
 
 ;;; Code for interfaces.Main.Interface [static fields]
-(global $f_a__interfaces_Main_Interface i32 (i32.const 1))
-(global $f_b__interfaces_Main_Interface i32 (i32.const 2))
 (global $f_$initialized__interfaces_Main_Interface (mut i32) (i32.const 0))
 
 ;;; Code for interfaces.Main.SubInterface [static fields]
@@ -123,12 +121,12 @@
   ;; interfaces.Main.Interface.staticInterfaceMethod();
   ;;@ interfaces/Main.java:53:4
   (call $m_staticInterfaceMethod__void@interfaces.Main.Interface )
-  ;; int x = ((new Implementor.<init>(Main.this),interfaces.Main.Interface.a) + interfaces.Main.Interface.b);
+  ;; int x = ((new Implementor.<init>(Main.this),1) + 2);
   ;;@ interfaces/Main.java:54:4
   (local.set $x (i32.add (block (result i32)
    (drop (call $m_<init>__interfaces_Main@interfaces.Main.Implementor (struct.new_with_rtt $interfaces.Main.Implementor (ref.as_non_null (global.get $interfaces.Main.Implementor.vtable)) (ref.as_non_null (global.get $interfaces.Main.Implementor.itable)) (i32.const 0) (ref.null $interfaces.Main) (global.get $interfaces.Main.Implementor.rtt))(local.get $this)))
-   (global.get $f_a__interfaces_Main_Interface)
-  ) (global.get $f_b__interfaces_Main_Interface)))
+   (i32.const 1)
+  ) (i32.const 2)))
  )
 )
 (elem declare func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main)

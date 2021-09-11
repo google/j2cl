@@ -100,6 +100,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
+import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
@@ -108,6 +109,7 @@ import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
 import com.google.j2cl.transpiler.passes.RewriteUnaryExpressions;
+import com.google.j2cl.transpiler.passes.StaticallyEvaluateStringConcatenation;
 import com.google.j2cl.transpiler.passes.VerifyNormalizedUnits;
 import com.google.j2cl.transpiler.passes.VerifyParamAndArgCounts;
 import com.google.j2cl.transpiler.passes.VerifyReferenceScoping;
@@ -297,6 +299,11 @@ public enum Backend {
           // Rewrite 'a != b' to '!(a == b)'
           RewriteReferenceEqualityOperations::new,
           RewriteUnaryExpressions::new,
+          NormalizeSwitchStatements::new,
+          // Propagate constants needs to run after NormalizeSwitchStatements since it introduces
+          // field references to constant fields.
+          PropagateConstants::new,
+          StaticallyEvaluateStringConcatenation::new,
           ImplementStringConcatenation::new,
           InsertNarrowingReferenceConversions::new,
           () -> new InsertUnboxingConversions(/* areBooleanAndDoubleBoxed */ true),
@@ -305,7 +312,6 @@ public enum Backend {
           () -> new InsertWideningPrimitiveConversions(/* needFloatOrDoubleWidening */ true),
           ImplementDivisionOperations::new,
           ImplementFloatingPointRemainderOperation::new,
-          NormalizeSwitchStatements::new,
           // Rewrite 'a || b' into 'a ? true : b' and 'a && b' into 'a ? b : false'
           RewriteShortcutOperators::new,
           NormalizeFieldInitialization::new,

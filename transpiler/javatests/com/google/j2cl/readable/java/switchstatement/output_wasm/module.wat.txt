@@ -8,8 +8,6 @@
 (global $f_ONE__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $f_TWO__switchstatement_Numbers (mut (ref null $switchstatement.Numbers)) (ref.null $switchstatement.Numbers))
 (global $f_namesToValuesMap__switchstatement_Numbers_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
-(global $$ordinal_ONE__switchstatement_Numbers i32 (i32.const 0))
-(global $$ordinal_TWO__switchstatement_Numbers i32 (i32.const 1))
 (global $f_$initialized__switchstatement_Numbers (mut i32) (i32.const 0))
 
 ;;; Code for switchstatement.SwitchStatement [static fields]
@@ -168,12 +166,12 @@
   ;; java.lang.Enum.$clinit();
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@java.lang.Enum )
-  ;; (switchstatement.Numbers.ONE = new Numbers.<init>(javaemul.internal.StringPool.$getString_|ONE|(),switchstatement.Numbers.ONE));
+  ;; (switchstatement.Numbers.ONE = new Numbers.<init>(javaemul.internal.StringPool.$getString_|ONE|(),0));
   ;;@ switchstatement/SwitchStatement.java:19:2
-  (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_ONE__switchstatement_Numbers)))
-  ;; (switchstatement.Numbers.TWO = new Numbers.<init>(javaemul.internal.StringPool.$getString_|TWO|(),switchstatement.Numbers.TWO));
+  (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool )(i32.const 0)))
+  ;; (switchstatement.Numbers.TWO = new Numbers.<init>(javaemul.internal.StringPool.$getString_|TWO|(),1));
   ;;@ switchstatement/SwitchStatement.java:20:2
-  (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool )(global.get $$ordinal_TWO__switchstatement_Numbers)))
+  (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool )(i32.const 1)))
   ;; (switchstatement.Numbers.namesToValuesMap = null);
   ;;@ switchstatement/SwitchStatement.java:18:5
   (global.set $f_namesToValuesMap__switchstatement_Numbers_ (ref.null $java.lang.Object))
@@ -341,13 +339,13 @@
      (block
       (block
        (block ;; evaluate expression and jump
-        (br_if 0 (i32.eq (local.get $$expression_1) (global.get $$ordinal_ONE__switchstatement_Numbers)))
-        (br_if 1 (i32.eq (local.get $$expression_1) (global.get $$ordinal_TWO__switchstatement_Numbers)))
+        (br_if 0 (i32.eq (local.get $$expression_1) (i32.const 0)))
+        (br_if 1 (i32.eq (local.get $$expression_1) (i32.const 1)))
         (br 2)
        )
-       ;; case switchstatement.Numbers.ONE:
+       ;; case 0:
       )
-      ;; case switchstatement.Numbers.TWO:
+      ;; case 1:
       ;; break SWITCH;
       ;;@ switchstatement/SwitchStatement.java:56:8
       (br $SWITCH_3.BREAK)
