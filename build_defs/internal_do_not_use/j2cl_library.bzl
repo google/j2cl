@@ -26,10 +26,14 @@ j2cl_library(
 """
 
 load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
+load(":j2kt_common.bzl", "j2kt_common")
+load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_library")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2cl_library_build_test.bzl", "build_test")
 load(":j2cl_common.bzl", "J2clInfo")
+
+_J2KT_PACKAGES = []
 
 _J2WASM_PACKAGES = [
     "java/com/google/apps/framework/types",
@@ -65,6 +69,7 @@ _tree_artifact_proxy = rule(
 def j2cl_library(
         name,
         generate_build_test = None,
+        generate_j2kt_library = None,
         generate_j2wasm_library = None,
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
@@ -112,8 +117,8 @@ def j2cl_library(
     if generate_j2wasm_library:
         j2wasm_args = _filter_j2wasm_attrs(dict(kwargs))
 
-        _to_j2wasm_targets("deps", j2wasm_args)
-        _to_j2wasm_targets("exports", j2wasm_args)
+        _to_parallel_targets("deps", j2wasm_args, j2wasm_common.to_j2wasm_name)
+        _to_parallel_targets("exports", j2wasm_args, j2wasm_common.to_j2wasm_name)
         j2wasm_args["tags"] = (j2wasm_args.get("tags") or []) + ["manual", "notap", "j2wasm", "no-ide"]
 
         j2wasm_library(
@@ -121,24 +126,49 @@ def j2cl_library(
             **j2wasm_args
         )
 
-_ALLOWED_ATTRS = [key for key in J2WASM_LIB_ATTRS] + ["tags", "visibility"]
+    j2kt_library_name = j2kt_common.to_j2kt_name(name)
+
+    if generate_j2kt_library == None:
+        # By default refer back to allow list for implicit j2kt target generation.
+        generate_j2kt_library = (
+            not native.existing_rule(j2kt_library_name) and
+            any([p for p in _J2KT_PACKAGES if native.package_name().startswith(p)])
+        )
+
+    if generate_j2kt_library:
+        j2kt_args = _filter_j2kt_attrs(dict(kwargs))
+
+        _to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_name)
+        _to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_name)
+
+        j2kt_library(
+            name = j2kt_library_name,
+            **j2kt_args
+        )
+
+_ALLOWED_ATTRS_KT = [key for key in J2KT_LIB_ATTRS] + ["tags", "visibility"]
+
+def _filter_j2kt_attrs(args):
+    return {key: args[key] for key in _ALLOWED_ATTRS_KT if key in args}
+
+_ALLOWED_ATTRS_WASM = [key for key in J2WASM_LIB_ATTRS] + ["tags", "visibility"]
 
 def _filter_j2wasm_attrs(args):
-    return {key: args[key] for key in _ALLOWED_ATTRS if key in args}
+    return {key: args[key] for key in _ALLOWED_ATTRS_WASM if key in args}
 
-def _to_j2wasm_targets(key, args):
+def _to_parallel_targets(key, args, name_fun):
     labels = args.get(key)
     if not labels:
         return
 
-    args[key] = [_to_j2wasm_target(label) for label in labels]
+    args[key] = [_to_parallel_target(label, name_fun) for label in labels]
 
-def _to_j2wasm_target(label):
+def _to_parallel_target(label, name_fun):
     if type(label) == "string":
-        return j2wasm_common.to_j2wasm_name(_absolute_label(label))
+        return name_fun(_absolute_label(label))
 
     # Label Object
-    return label.relative(":%s" % j2wasm_common.to_j2wasm_name(label.name))
+    return label.relative(":%s" % name_fun(label.name))
 
 def _absolute_label(label):
     if label.startswith("//") or label.startswith("@"):

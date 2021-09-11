@@ -1,10 +1,19 @@
 # Description:
 #   Utilites for tests.
 
-load("//build_defs:rules.bzl", "j2cl_library", "j2wasm_library")
+load("//build_defs:rules.bzl", "j2cl_library", "j2kt_library", "j2wasm_library")
 
 package(
     licenses = ["notice"],
+)
+
+j2kt_library(
+    name = "testing-j2kt",
+    srcs = [
+        "super-kt/Asserts.java",
+    ],
+    visibility = ["//transpiler/javatests/com/google/j2cl/integration:__subpackages__"],
+    #TODO(jparachoniak): Get j2kt to a point where it will transpile the assert classes.
 )
 
 j2wasm_library(
