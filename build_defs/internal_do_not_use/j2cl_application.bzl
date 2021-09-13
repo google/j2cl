@@ -24,6 +24,12 @@ def j2cl_application(
     The devserver could be provided by extra resources. A custom host page can
     also be supplied as a resource where the development resources could be
     loaded by <link rel="import" href="<your_target_dev.html">.
+
+    If you need to setup a custom development server, you can load
+    <name>_dev_config.js and <name>_dev.js in your host page (in that order).
+    However please note that <name>_dev_config.js is not a documented output and
+    may get renamed or disappear in future releases.
+
     TODO(goktug): Document what needs to be done by apps with custom development
     server.
 

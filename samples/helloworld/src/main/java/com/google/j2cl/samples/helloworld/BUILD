@@ -14,9 +14,10 @@ closure_js_library(
 # This is the bazel target that compiles and optimizes whole JavaScript / J2CL app.
 # It provides couple of convenient targets:
 #  :helloworld produces the helloworld.js that could be used for production.
-#  :helloworld_dev produces the helloworld_dev.js that could be used for development.
-#  :helloworld_dev_server serves helloworld_dev.js with couple of extras which you can
-#    use as a simple development server.
+#  :helloworld_dev_server serves development version which you can use as a simple
+#    development server. (See j2cl_application documentation for more info including
+#    custom dev server setup.)
+#
 #
 # Give it a try:
 #   $ bazel run samples/helloworld/java/com/google/j2cl/samples/helloworld:helloworld_dev_server
