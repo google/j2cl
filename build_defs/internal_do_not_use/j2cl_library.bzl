@@ -86,7 +86,7 @@ def j2cl_library(
     target_name = "//" + native.package_name() + ":" + name
     if args.get("srcs") and target_name != "//jre/java:jre":
         jre = Label("//:jre", relative_to_caller_repository = False)
-        args["deps"] = (args.get("deps") or []) + [jre]
+        args["deps"] = args.get("deps", []) + [jre]
 
     j2cl_library_rule(
         name = name,
@@ -100,6 +100,7 @@ def j2cl_library(
         j2cl_library = ":" + name,
         visibility = ["//visibility:private"],
         tags = ["manual", "notap", "no-ide"],
+        testonly = args.get("testonly", 0),
     )
 
     if args.get("srcs") and (generate_build_test == None or generate_build_test):
@@ -119,7 +120,7 @@ def j2cl_library(
 
         _to_parallel_targets("deps", j2wasm_args, j2wasm_common.to_j2wasm_name)
         _to_parallel_targets("exports", j2wasm_args, j2wasm_common.to_j2wasm_name)
-        j2wasm_args["tags"] = (j2wasm_args.get("tags") or []) + ["manual", "notap", "j2wasm", "no-ide"]
+        j2wasm_args["tags"] = j2wasm_args.get("tags", []) + ["manual", "notap", "j2wasm", "no-ide"]
 
         j2wasm_library(
             name = j2wasm_library_name,
