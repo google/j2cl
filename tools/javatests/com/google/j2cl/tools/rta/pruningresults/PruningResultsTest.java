@@ -18,17 +18,13 @@ package com.google.j2cl.tools.rta.pruningresults;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.collect.ImmutableList;
-import com.google.common.io.CharStreams;
 import com.google.j2cl.tools.minifier.J2clMinifier;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,10 +34,10 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class PruningResultsTest {
   private static class J2clFileInfo {
-    private final String path;
+    private final Path path;
     private final String content;
 
-    private J2clFileInfo(String path, String content) {
+    private J2clFileInfo(Path path, String content) {
       this.path = path;
       this.content = content;
     }
@@ -50,44 +46,30 @@ public class PruningResultsTest {
   private static final String FILE_DIRECTORY = "com/google/j2cl/tools/rta/pruningresults/";
 
   private static J2clMinifier j2clMinifier;
-  private static String j2clZipfilePath;
+  private static String j2clOutputDirectory;
   private static J2clFileInfo fooFile;
   private static J2clFileInfo barFile;
 
   @BeforeClass
   public static void setUp() throws Exception {
     j2clMinifier = new J2clMinifier();
-    readFilesFromZipFile();
+    readJ2clFiles();
   }
 
-  private static void readFilesFromZipFile() throws IOException {
-    j2clZipfilePath = checkNotNull(System.getProperty("j2cl_zip_file"));
-    ZipFile j2clZipFile = new ZipFile(j2clZipfilePath);
-
-    fooFile = readFileFromZipFile(j2clZipFile, "Foo.impl.java.js");
-    barFile = readFileFromZipFile(j2clZipFile, "Bar.impl.java.js");
+  private static void readJ2clFiles() throws IOException {
+    j2clOutputDirectory = checkNotNull(System.getProperty("j2cl_output_directory"));
+    fooFile = readFile("Foo.impl.java.js");
+    barFile = readFile("Bar.impl.java.js");
   }
 
-  private static J2clFileInfo readFileFromZipFile(ZipFile zipFile, String fileName) {
-    return zipFile.stream()
-        .filter(ze -> ze.getName().endsWith(fileName))
-        .findAny()
-        .map(entry -> readZipEntry(entry, zipFile))
-        .get();
-  }
-
-  private static J2clFileInfo readZipEntry(ZipEntry entry, ZipFile zipFile) {
-    String path = createAbsoluteZipEntryPath(entry.getName());
-    String content;
-
-    try (BufferedReader reader =
-        new BufferedReader(new InputStreamReader(zipFile.getInputStream(entry), UTF_8))) {
-      content = CharStreams.toString(reader);
+  private static J2clFileInfo readFile(String fileName) {
+    try {
+      Path path = createAbsolutePath(fileName);
+      String content = Files.readString(path);
+      return new J2clFileInfo(path, content);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
-    return new J2clFileInfo(path, content);
   }
 
   @Test
@@ -116,7 +98,7 @@ public class PruningResultsTest {
         line -> assertWithMessage("Input file is incorrect:").that(fooFile.content).contains(line));
 
     // assert that only the correct lines are removed
-    String contentAfterLineRemoval = j2clMinifier.minify(fooFile.path, fooFile.content);
+    String contentAfterLineRemoval = j2clMinifier.minify(fooFile.path.toString(), fooFile.content);
     removedLinesRegexs.forEach(
         regex -> assertThat(contentAfterLineRemoval).doesNotContainMatch(regex));
     notRemovedLinesChecks.forEach(line -> assertThat(contentAfterLineRemoval).contains(line));
@@ -133,8 +115,8 @@ public class PruningResultsTest {
 
   @Test
   public void testUnusedTypeFilesArePruned() {
-    assertFileIsPruned(createAbsoluteZipEntryPath(FILE_DIRECTORY + "UnusedType.impl.java.js"));
-    assertFileIsPruned(createAbsoluteZipEntryPath(FILE_DIRECTORY + "UnusedType.java.js"));
+    assertFileIsPruned(createAbsolutePath("UnusedType.impl.java.js"));
+    assertFileIsPruned(createAbsolutePath("UnusedType.java.js"));
   }
 
   @Test
@@ -145,21 +127,19 @@ public class PruningResultsTest {
     // Otherwise it will success as expected.
     String fakeContent = "fake";
 
-    assertFileContentIsNotPruned(
-        createAbsoluteZipEntryPath(FILE_DIRECTORY + "Foo.java.js"), fakeContent);
-    assertFileContentIsNotPruned(
-        createAbsoluteZipEntryPath(FILE_DIRECTORY + "Bar.java.js"), fakeContent);
+    assertFileContentIsNotPruned(createAbsolutePath("Foo.java.js"), fakeContent);
+    assertFileContentIsNotPruned(createAbsolutePath("Bar.java.js"), fakeContent);
   }
 
-  private void assertFileIsPruned(String filePath) {
+  private void assertFileIsPruned(Path filePath) {
     String content = "Fake file content";
     assertWithMessage("Unused file [%s] has not been pruned.", filePath)
-        .that(j2clMinifier.minify(filePath, content))
+        .that(j2clMinifier.minify(filePath.toString(), content))
         .isEmpty();
   }
 
-  private void assertFileContentIsNotPruned(String filePath, String fileContent) {
-    String minifiedAndPruned = j2clMinifier.minify(filePath, fileContent);
+  private void assertFileContentIsNotPruned(Path filePath, String fileContent) {
+    String minifiedAndPruned = j2clMinifier.minify(filePath.toString(), fileContent);
     String onlyMinified = j2clMinifier.minify(fileContent);
 
     assertWithMessage("File [%s] has been pruned.", filePath)
@@ -167,8 +147,8 @@ public class PruningResultsTest {
         .isEqualTo(onlyMinified);
   }
 
-  private static String createAbsoluteZipEntryPath(String entryName) {
-    return j2clZipfilePath + "!/" + entryName;
+  private static Path createAbsolutePath(String fileName) {
+    return Path.of(j2clOutputDirectory, FILE_DIRECTORY, fileName);
   }
 
   private static int numberOfLinesOf(String content) {

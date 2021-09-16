@@ -39,12 +39,12 @@ java_library(
 java_test(
     name = "pruning_results",
     data = [
-        ":test_input.js.zip",
+        ":test_input.js",
         ":test_input_rta_removal_code_info",
     ],
     jvm_flags = [
         "-Dj2cl_rta_removal_code_info_file=$(location :test_input_rta_removal_code_info)",
-        "-Dj2cl_zip_file=$(location :test_input.js.zip)",
+        "-Dj2cl_output_directory=$(location :test_input.js)",
     ],
     test_class = "com.google.j2cl.tools.rta.pruningresults.PruningResultsTest",
     runtime_deps = [
