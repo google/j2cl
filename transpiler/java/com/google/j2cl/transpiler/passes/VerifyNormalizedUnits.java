@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
+import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
@@ -39,6 +40,7 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.StringLiteral;
+import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.TypeLiteral;
@@ -205,6 +207,18 @@ public class VerifyNormalizedUnits extends NormalizationPass {
           @Override
           public void exitForEachStatement(ForEachStatement continueStatement) {
             throw new IllegalStateException();
+          }
+
+          @Override
+          public void exitSwitchCase(SwitchCase switchCase) {
+            if (verifyForWasm) {
+              // The only expressions allowed in a switch case are strings and number literals.
+              Expression caseExpression = switchCase.getCaseExpression();
+              checkState(
+                  switchCase.isDefault()
+                      || TypeDescriptors.isJavaLangString(caseExpression.getTypeDescriptor())
+                      || caseExpression instanceof NumberLiteral);
+            }
           }
 
           @Override

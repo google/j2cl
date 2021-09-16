@@ -15,7 +15,10 @@
  */
 package com.google.j2cl.transpiler.backend.wasm;
 
+import static com.google.common.base.Predicates.not;
+
 import com.google.common.collect.Iterables;
+import com.google.common.math.Stats;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.Block;
@@ -31,6 +34,7 @@ import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
+import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
@@ -41,6 +45,7 @@ import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.WhileStatement;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import java.util.Arrays;
 import java.util.List;
 
 /** Transforms Statements into WASM code. */
@@ -203,21 +208,144 @@ class StatementTranspiler {
       }
 
       private void renderSwitchDispatchTable(SwitchStatement switchStatement) {
+        if (switchStatement.getSwitchExpression().getTypeDescriptor().isPrimitive()) {
+          Stats stats =
+              Stats.of(
+                  switchStatement.getCases().stream()
+                      .filter(not(SwitchCase::isDefault))
+                      .mapToInt(StatementTranspiler::getSwitchCaseAsIntValue));
+          if (isDense(stats)) {
+            renderDenseSwitchDispatchTable(switchStatement, stats);
+            return;
+          }
+        }
+        renderNonDenseSwitchDispatchTable(switchStatement);
+      }
+
+      /**
+       * The minimum ratio between used case slots and total case slots to consider a switch dense.
+       * Emitting br_table with a quarter of the slots empty is still shorter than emitting a nest
+       * of br_ifs. This could be tuned to allow sparser or denser tables.
+       */
+      private static final double MINIMUM_CASE_DENSITY = 0.25;
+
+      private boolean isDense(Stats caseStats) {
+        return caseStats.count() > 0
+            && caseStats.count() / (caseStats.max() - caseStats.min()) > MINIMUM_CASE_DENSITY;
+      }
+
+      private void renderDenseSwitchDispatchTable(
+          SwitchStatement switchStatement, Stats caseStats) {
+        // br_table allows to specify a table of jump target locations that is indexed by a
+        // zero-based i32 value.
+        // e.g.:
+        // (br_table  $l1 $l2 $l3 (expr)) would jump to $l1 if expr == 0, to $l2 if expr == 1, and
+        // to $l3 otherwise.
+        //
+        // In real life, switch cases are not necessarily dense nor start from a zero index.
+        // In order to efficiently utilize this instruction, we need to shift indices and also
+        // handle gaps.
+        // e.g.
+        //
+        //   int i = ...;
+        //   switch (i) {
+        //     case 2:
+        //       ......
+        //     case 7:
+        //       ......
+        //     case 5:
+        //       ......
+        //     default:
+        //       ......
+        //     }
+        //
+        // is emitted as
+        //
+        // (block $LDefault
+        //   (block $L5
+        //     (block $L7
+        //       (block $L2
+        //         (br_table
+        //           $L2
+        //           $LDefault   // hole for value 3
+        //           $LDefault   // hole for value 4
+        //           $L5
+        //           $LDefault   // hole for value 5
+        //           $L7
+        //           $LDefault   // values > 5 and < 2
+        //           (i32.sub (local.get $i - (i32.const 2))))
+        //         )
+        //       )
+        //       ; code in case 2:
+        //     )
+        //     ; code in case 7:
+        //   )
+        //   ; code in case 5:
+        // )
+        // ; code in default case
+        //
+        // Here the first label will correspond to the minimum case value ($L2), $LDefault would be
+        // the block that handles the default case. Also note that the expression needs to be
+        // adjusted to handle the offset, which is the minimum case value (i.e. expr - 2).
+        List<SwitchCase> switchCases = switchStatement.getCases();
+
+        // The number of labels that are needed are one for each integer from the minimum value to
+        // the maximum value (inclusive) plus an extra slot for the default.
+        int[] slots = new int[(int) (caseStats.max() - caseStats.min() + 2)];
+
+        int defaultCasePosition = switchStatement.getDefaultCasePosition();
+        if (defaultCasePosition == -1) {
+          // If there is no default using the number of cases will jump out of the switch all
+          // together.
+          defaultCasePosition = switchCases.size();
+        }
+
+        Arrays.fill(slots, defaultCasePosition);
+
+        int offset = (int) caseStats.min();
+        for (int casePosition = 0; casePosition < switchCases.size(); casePosition++) {
+          SwitchCase switchCase = switchCases.get(casePosition);
+          if (switchCase.isDefault()) {
+            continue;
+          }
+          slots[getSwitchCaseAsIntValue(switchCase) - offset] = casePosition;
+        }
+
+        builder.newLine();
+        builder.openParens("block ;; evaluate expression and jump");
+
+        builder.newLine();
+        builder.append("(br_table ");
+        Arrays.stream(slots).forEach(slot -> builder.append(slot + " "));
+        emitBranchIndexExpression(switchStatement.getSwitchExpression(), offset);
+        builder.append(")");
+        builder.closeParens();
+      }
+
+      private void emitBranchIndexExpression(Expression expression, int offset) {
+        if (offset == 0) {
+          renderExpression(expression);
+        } else {
+          builder.append("(i32.sub ");
+          renderExpression(expression);
+          builder.append(" (i32.const " + offset + "))");
+        }
+      }
+
+      private void renderNonDenseSwitchDispatchTable(SwitchStatement switchStatement) {
         // Evaluate the switch expression and jump to the right case.
         builder.newLine();
         builder.openParens("block ;; evaluate expression and jump");
 
-        // TODO(b/179956682): emit more efficient code for int enums using br_table
-        // or binary search.
-
-        int defaultCaseNumber = -1;
-        for (int caseNumber = 0; caseNumber < switchStatement.getCases().size(); caseNumber++) {
+        for (int casePosition = 0;
+            casePosition < switchStatement.getCases().size();
+            casePosition++) {
           // Emit conditions for each case.
-          SwitchCase switchCase = switchStatement.getCases().get(caseNumber);
+          SwitchCase switchCase = switchStatement.getCases().get(casePosition);
           if (switchCase.isDefault()) {
             // Skip the default case, since all the other conditions need to be evaluated before,
-            // but record where the default handling is done (which is not necessarily the last).
-            defaultCaseNumber = caseNumber;
+            // and the default case is handled by an unconditional branch after all other conditions
+            // are checked.
             continue;
           }
           // If the condition for this case is met, jump to the start of the case, i.e. jump out
@@ -225,12 +353,13 @@ class StatementTranspiler {
           renderConditionalBranch(
               switchStatement.getSourcePosition(),
               switchStatement.getSwitchExpression().infixEquals(switchCase.getCaseExpression()),
-              caseNumber);
+              casePosition);
         }
 
         // When no other condition was met, jump to the default case if exists.
+        int defaultCasePosition = switchStatement.getDefaultCasePosition();
         renderUnconditionalBranch(
-            defaultCaseNumber != -1 ? defaultCaseNumber : switchStatement.getCases().size());
+            defaultCasePosition != -1 ? defaultCasePosition : switchStatement.getCases().size());
         builder.closeParens();
       }
 
@@ -462,5 +591,10 @@ class StatementTranspiler {
     builder.newLine();
     builder.append(";; ");
     builder.append(parts[0]);
+  }
+
+  private static int getSwitchCaseAsIntValue(SwitchCase switchCase) {
+    NumberLiteral caseExpression = (NumberLiteral) switchCase.getCaseExpression();
+    return caseExpression.getValue().intValue();
   }
 }

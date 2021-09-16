@@ -1233,11 +1233,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
           argumentExpressions.stream()
               .map(
                   expression ->
-                      foldConstants && expression.resolveConstantExpressionValue() != null
-                          ? convertConstantToLiteral(
-                              expression.resolveConstantExpressionValue(),
-                              JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
-                          : convert(expression))
+                      foldConstants ? convertAndFoldExpression(expression) : convert(expression))
               .collect(toList());
       return AstUtils.maybePackageVarargs(methodDescriptor, arguments);
     }
@@ -1379,7 +1375,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private SwitchCase.Builder convert(org.eclipse.jdt.core.dom.SwitchCase statement) {
       return statement.isDefault()
           ? SwitchCase.newBuilder()
-          : SwitchCase.newBuilder().setCaseExpression(convert(statement.getExpression()));
+          : SwitchCase.newBuilder()
+              // Fold the constant in the switch case to avoid complex expressions. Otherwise JDT
+              // would represent negative values as unary expressions, e.g - <constant>. The WASM
+              // backend relies on switch case constant for switch on integral values to be
+              // literals.
+              .setCaseExpression(convertAndFoldExpression(statement.getExpression()));
     }
 
     private SynchronizedStatement convert(
@@ -1488,6 +1489,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               fragments.stream().map(this::convert).collect(toImmutableList()))
           .build()
           .makeStatement(getSourcePosition(statement));
+    }
+
+    private Expression convertAndFoldExpression(org.eclipse.jdt.core.dom.Expression expression) {
+      Object constantValue = expression.resolveConstantExpressionValue();
+      return constantValue != null
+          ? convertConstantToLiteral(
+              constantValue, JdtUtils.createTypeDescriptor(expression.resolveTypeBinding()))
+          : convert(expression);
     }
 
     private Type createType(ITypeBinding typeBinding, ASTNode sourcePositionNode) {

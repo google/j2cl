@@ -277,9 +277,7 @@
     (block
      (block
       (block ;; evaluate expression and jump
-       (br_if 0 (i32.eq (i32.const 49) (i32.const 49)))
-       (br_if 1 (i32.eq (i32.const 49) (i32.const 50)))
-       (br 2)
+       (br_table 0 1 2 (i32.sub (i32.const 49) (i32.const 49)))
       )
       ;; case 49:
      )
@@ -302,30 +300,31 @@
    (block
     (block
      (block
-      (block ;; evaluate expression and jump
-       (br_if 0 (i32.eq (i32.const 1) (i32.const 1)))
-       (br_if 1 (i32.eq (i32.const 1) (i32.const 2)))
-       (br 2)
+      (block
+       (block ;; evaluate expression and jump
+        (br_table 0 3 3 1 2 3 (i32.sub (i32.const 1) (i32.const -2)))
+       )
+       ;; case -2:
       )
       ;; case 1:
      )
      ;; case 2:
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:47:8
+     ;;@ switchstatement/SwitchStatement.java:48:8
      (br $SWITCH_2.BREAK)
     )
     ;; default:
     ;; return;
-    ;;@ switchstatement/SwitchStatement.java:49:8
+    ;;@ switchstatement/SwitchStatement.java:50:8
     (return )
    )
   )
   ;; SWITCH: {
-  ;;@ switchstatement/SwitchStatement.java:53:4
+  ;;@ switchstatement/SwitchStatement.java:54:4
   (block $SWITCH_3.BREAK
    (block
     ;; int $expression = (Numbers $qualifier = (switchstatement.Numbers.$clinit(),switchstatement.Numbers.ONE),$qualifier.ordinal());
-    ;;@ switchstatement/SwitchStatement.java:53:4
+    ;;@ switchstatement/SwitchStatement.java:54:4
     (local.set $$expression_1 (block (result i32)
      (local.set $$qualifier (block (result (ref null $switchstatement.Numbers))
       (call $$clinit__void@switchstatement.Numbers )
@@ -334,25 +333,23 @@
      (call_ref (local.get $$qualifier)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $$qualifier))))
     ))
     ;; switch ($expression) {
-    ;;@ switchstatement/SwitchStatement.java:53:4
+    ;;@ switchstatement/SwitchStatement.java:54:4
     (block
      (block
       (block
        (block ;; evaluate expression and jump
-        (br_if 0 (i32.eq (local.get $$expression_1) (i32.const 0)))
-        (br_if 1 (i32.eq (local.get $$expression_1) (i32.const 1)))
-        (br 2)
+        (br_table 0 1 2 (local.get $$expression_1))
        )
        ;; case 0:
       )
       ;; case 1:
       ;; break SWITCH;
-      ;;@ switchstatement/SwitchStatement.java:56:8
+      ;;@ switchstatement/SwitchStatement.java:57:8
       (br $SWITCH_3.BREAK)
      )
      ;; default:
      ;; return;
-     ;;@ switchstatement/SwitchStatement.java:58:8
+     ;;@ switchstatement/SwitchStatement.java:59:8
      (return )
     )
    )
@@ -363,7 +360,7 @@
 
 ;;; void SwitchStatement.testSwitchVariableDeclarations()
 (func $m_testSwitchVariableDeclarations__void@switchstatement.SwitchStatement
- ;;@ switchstatement/SwitchStatement.java:63:22
+ ;;@ switchstatement/SwitchStatement.java:64:22
  (local $unassigned i32)
  (local $unassigned2 i32)
  (local $i i32)
@@ -372,57 +369,54 @@
  (local $i_1 i32)
  (block
   ;; SWITCH: switch (3) {
-  ;;@ switchstatement/SwitchStatement.java:64:4
+  ;;@ switchstatement/SwitchStatement.java:65:4
   (block $SWITCH.BREAK
    ;; switch (3) {
-   ;;@ switchstatement/SwitchStatement.java:64:4
+   ;;@ switchstatement/SwitchStatement.java:65:4
    (block
     (block
      (block ;; evaluate expression and jump
-      (br_if 0 (i32.eq (i32.const 3) (i32.const 1)))
-      (br_if 1 (i32.eq (i32.const 3) (i32.const 3)))
-      (br 2)
+      (br_table 0 2 1 2 (i32.sub (i32.const 3) (i32.const 1)))
      )
      ;; case 1:
      ;; int unassigned,int unassigned2;
-     ;;@ switchstatement/SwitchStatement.java:66:8
+     ;;@ switchstatement/SwitchStatement.java:67:8
      
      ;; int i = 0;
-     ;;@ switchstatement/SwitchStatement.java:67:8
+     ;;@ switchstatement/SwitchStatement.java:68:8
      (local.set $i (i32.const 0))
      ;; int j = 2,int b = (j + 1);
-     ;;@ switchstatement/SwitchStatement.java:68:8
+     ;;@ switchstatement/SwitchStatement.java:69:8
      (local.set $j (i32.const 2))
      (local.set $b (i32.add (local.get $j) (i32.const 1)))
      ;; break SWITCH;
-     ;;@ switchstatement/SwitchStatement.java:69:8
+     ;;@ switchstatement/SwitchStatement.java:70:8
      (br $SWITCH.BREAK)
     )
     ;; case 3:
     ;; (i = 3);
-    ;;@ switchstatement/SwitchStatement.java:71:8
+    ;;@ switchstatement/SwitchStatement.java:72:8
     (local.set $i (i32.const 3))
     ;; return;
-    ;;@ switchstatement/SwitchStatement.java:73:8
+    ;;@ switchstatement/SwitchStatement.java:74:8
     (return )
    )
   )
   ;; SWITCH: switch (5) {
-  ;;@ switchstatement/SwitchStatement.java:76:4
+  ;;@ switchstatement/SwitchStatement.java:77:4
   (block $SWITCH_1.BREAK
    ;; switch (5) {
-   ;;@ switchstatement/SwitchStatement.java:76:4
+   ;;@ switchstatement/SwitchStatement.java:77:4
    (block
     (block ;; evaluate expression and jump
-     (br_if 0 (i32.eq (i32.const 5) (i32.const 5)))
-     (br 1)
+     (br_table 0 1 (i32.sub (i32.const 5) (i32.const 5)))
     )
     ;; case 5:
     ;; int i = 1;
-    ;;@ switchstatement/SwitchStatement.java:78:8
+    ;;@ switchstatement/SwitchStatement.java:79:8
     (local.set $i_1 (i32.const 1))
     ;; break SWITCH;
-    ;;@ switchstatement/SwitchStatement.java:79:8
+    ;;@ switchstatement/SwitchStatement.java:80:8
     (br $SWITCH_1.BREAK)
    )
   )
