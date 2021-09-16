@@ -59,7 +59,8 @@ _J2WASM_PACKAGES = [
 ]
 
 def _tree_artifact_proxy_impl(ctx):
-    return DefaultInfo(files = depset([ctx.attr.j2cl_library[J2clInfo]._private_.output_js]))
+    js_files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
+    return DefaultInfo(files = depset([js_files]), runfiles = ctx.runfiles([js_files]))
 
 _tree_artifact_proxy = rule(
     implementation = _tree_artifact_proxy_impl,
