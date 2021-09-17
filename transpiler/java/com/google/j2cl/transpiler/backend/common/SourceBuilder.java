@@ -184,6 +184,12 @@ public class SourceBuilder {
     append("}");
   }
 
+  public void inBraces(Runnable runnable) {
+    openBrace();
+    runnable.run();
+    closeBrace();
+  }
+
   public void openParens(String text) {
     append("(" + text);
     indent();
@@ -195,6 +201,24 @@ public class SourceBuilder {
       newLine();
     }
     append(")");
+  }
+
+  public void inParens(Runnable runnable) {
+    openParens("");
+    runnable.run();
+    closeParens();
+  }
+
+  public <V> void separatedWith(Iterable<V> values, String separator, Consumer<V> consumer) {
+    boolean first = true;
+    for (V value : values) {
+      if (first) {
+        first = false;
+      } else {
+        append(separator);
+      }
+      consumer.accept(value);
+    }
   }
 
   private FilePosition getCurrentPosition() {

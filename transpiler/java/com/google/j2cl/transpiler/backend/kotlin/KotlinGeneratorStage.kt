@@ -17,8 +17,9 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.OutputUtils
 import com.google.j2cl.common.Problems
+import com.google.j2cl.transpiler.ast.CompilationUnit
 import com.google.j2cl.transpiler.ast.Library
-import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the Kotlin output for
@@ -26,21 +27,15 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
  */
 class KotlinGeneratorStage(private val output: OutputUtils.Output, private val problems: Problems) {
   fun generateOutputs(library: Library) {
-    for (compilationUnit in library.compilationUnits) {
-      for (type in compilationUnit.types) {
-        val ktGenerator = KotlinGenerator(problems, type)
-        val typeRelativePath = getPackageRelativePath(type.declaration)
-        val kotlinSource = ktGenerator.renderOutput()
-        val relativePath = typeRelativePath + ktGenerator.suffix
-        output.write(relativePath, kotlinSource)
-      }
-    }
+    library.compilationUnits.forEach(this::generateOutputs)
   }
-}
-/** Returns the relative output path for a given type. */
-private fun getPackageRelativePath(typeDeclaration: TypeDeclaration): String {
-  return OutputUtils.getPackageRelativePath(
-    typeDeclaration.packageName,
-    typeDeclaration.simpleBinaryName
-  )
+
+  private fun generateOutputs(compilationUnit: CompilationUnit) {
+    val sourceBuilder = SourceBuilder()
+    val kotlinGenerator = KotlinGenerator(sourceBuilder, problems)
+    kotlinGenerator.renderCompilationUnit(compilationUnit)
+    val kotlinSource = sourceBuilder.build()
+    val kotlinPath = compilationUnit.packageRelativePath.replace(".java", ".kt")
+    output.write(kotlinPath, kotlinSource)
+  }
 }
