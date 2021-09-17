@@ -459,10 +459,10 @@
   (local.set $b (call $m_<init>__@bridgejsmethod.Main.B (struct.new_with_rtt $bridgejsmethod.Main.B (ref.as_non_null (global.get $bridgejsmethod.Main.B.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.B.itable)) (i32.const 0) (global.get $bridgejsmethod.Main.B.rtt))))
   ;; b.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:167:4
-  (drop (call_ref (local.get $b)(call $$getString_|abc|__java_lang_String@javaemul.internal.StringPool )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
+  (drop (call_ref (local.get $b)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
   ;; b.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:168:4
-  (call_ref (local.get $b)(call $$getString_|abc|__java_lang_String@javaemul.internal.StringPool )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
+  (call_ref (local.get $b)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
   ;; C c = new C.<init>();
   ;;@ bridgejsmethod/Main.java:169:4
   (local.set $c (call $m_<init>__@bridgejsmethod.Main.C (struct.new_with_rtt $bridgejsmethod.Main.C (ref.as_non_null (global.get $bridgejsmethod.Main.C.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.C.itable)) (i32.const 0) (global.get $bridgejsmethod.Main.C.rtt))))
@@ -486,10 +486,10 @@
   (local.set $e (call $m_<init>__@bridgejsmethod.Main.E (struct.new_with_rtt $bridgejsmethod.Main.E (ref.as_non_null (global.get $bridgejsmethod.Main.E.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.E.itable)) (i32.const 0) (global.get $bridgejsmethod.Main.E.rtt))))
   ;; e.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:176:4
-  (drop (call_ref (local.get $e)(call $$getString_|abc|__java_lang_String@javaemul.internal.StringPool )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
+  (drop (call_ref (local.get $e)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
   ;; e.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:177:4
-  (call_ref (local.get $e)(call $$getString_|abc|__java_lang_String@javaemul.internal.StringPool )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
+  (call_ref (local.get $e)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
   ;; H<Integer> h = new H.<init>();
   ;;@ bridgejsmethod/Main.java:178:4
   (local.set $h (call $m_<init>__@bridgejsmethod.Main.H (struct.new_with_rtt $bridgejsmethod.Main.H (ref.as_non_null (global.get $bridgejsmethod.Main.H.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.H.itable)) (i32.const 0) (global.get $bridgejsmethod.Main.H.rtt))))
@@ -501,7 +501,7 @@
   (local.set $l (call $m_<init>__@bridgejsmethod.Main.L (struct.new_with_rtt $bridgejsmethod.Main.L (ref.as_non_null (global.get $bridgejsmethod.Main.L.vtable)) (ref.as_non_null (global.get $bridgejsmethod.Main.L.itable)) (i32.const 0) (global.get $bridgejsmethod.Main.L.rtt))))
   ;; l.fun(javaemul.internal.StringPool.$getString_|foo|(),java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:181:4
-  (call_ref (local.get $l)(call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
+  (call_ref (local.get $l)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
  )
 )
 
@@ -536,7 +536,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main();
-  (return (call $$getBridgejsmethod.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main)
@@ -637,7 +637,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.A.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.A();
-  (return (call $$getBridgejsmethod.Main.A__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.A)
@@ -672,7 +672,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.I();
-  (return (call $$getBridgejsmethod.Main.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.I)
@@ -707,7 +707,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.J();
-  (return (call $$getBridgejsmethod.Main.J__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.J__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.J)
@@ -843,7 +843,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.B.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.B();
-  (return (call $$getBridgejsmethod.Main.B__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.B)
@@ -949,7 +949,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.C.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.C();
-  (return (call $$getBridgejsmethod.Main.C__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.C)
@@ -1073,7 +1073,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.D.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.D();
-  (return (call $$getBridgejsmethod.Main.D__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.D__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.D)
@@ -1146,7 +1146,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.E.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.E();
-  (return (call $$getBridgejsmethod.Main.E__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.E__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.E)
@@ -1270,7 +1270,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.F.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.F();
-  (return (call $$getBridgejsmethod.Main.F__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.F__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.F)
@@ -1305,7 +1305,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.G();
-  (return (call $$getBridgejsmethod.Main.G__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.G__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.G)
@@ -1392,7 +1392,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.H.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.H();
-  (return (call $$getBridgejsmethod.Main.H__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.H__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.H)
@@ -1476,7 +1476,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.K.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.K();
-  (return (call $$getBridgejsmethod.Main.K__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.K__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.K)
@@ -1578,7 +1578,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.L.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.L();
-  (return (call $$getBridgejsmethod.Main.L__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.L__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.L)
@@ -1613,7 +1613,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.M();
-  (return (call $$getBridgejsmethod.Main.M__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.M__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.M)
@@ -1767,7 +1767,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.O.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.O();
-  (return (call $$getBridgejsmethod.Main.O__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.O__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.O)
@@ -1802,7 +1802,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.P();
-  (return (call $$getBridgejsmethod.Main.P__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.P__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.P)
@@ -2018,7 +2018,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.S.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.S();
-  (return (call $$getBridgejsmethod.Main.S__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.S__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.S)
@@ -2120,7 +2120,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.GrandParent.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.GrandParent();
-  (return (call $$getBridgejsmethod.Main.GrandParent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.GrandParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.GrandParent)
@@ -2257,7 +2257,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.Parent.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.Parent();
-  (return (call $$getBridgejsmethod.Main.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.Parent)
@@ -2337,7 +2337,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $bridgejsmethod.Main.Child.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.Child();
-  (return (call $$getBridgejsmethod.Main.Child__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child)

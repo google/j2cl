@@ -351,7 +351,7 @@
   ;;@ genericmethod/GenericMethod.java:68:4
   (drop (call_ref (local.get $g)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
    (local.set $$array_literal (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (call $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool ))
+   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool) ))
    (local.get $$array_literal)
   )(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
   ;; String s = ((String) GenericMethod.this.checked());
@@ -561,7 +561,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod();
-  (return (call $$getGenericmethod.GenericMethod__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod)
@@ -672,7 +672,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.1.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1();
-  (return (call $$getGenericmethod.GenericMethod.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1)
@@ -783,7 +783,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.1LocalClass.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1LocalClass();
-  (return (call $$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1LocalClass)
@@ -869,7 +869,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.SuperContainer.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.SuperContainer();
-  (return (call $$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.SuperContainer)
@@ -955,7 +955,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.Container.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Container();
-  (return (call $$getGenericmethod.GenericMethod.Container__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.Container__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Container)
@@ -1041,7 +1041,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.Content.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Content();
-  (return (call $$getGenericmethod.GenericMethod.Content__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.Content__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Content)

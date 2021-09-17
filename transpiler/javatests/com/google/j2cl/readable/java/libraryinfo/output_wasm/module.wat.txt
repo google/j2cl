@@ -235,7 +235,7 @@
   (local.set $jsFunction (call $m_<init>__@libraryinfo.Main.$LambdaImplementor$1 (struct.new_with_rtt $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt))))
   ;; jsFunction.apply(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ libraryinfo/Main.java:80:4
-  (call_ref (local.get $jsFunction)(call $$getString_|foo|__java_lang_String@javaemul.internal.StringPool )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0)) (rtt.canon $libraryinfo.Main.Function.vtable)) ))
+  (call_ref (local.get $jsFunction)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(struct.get $libraryinfo.Main.Function.vtable $m_apply__java_lang_String__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $jsFunction)) (i32.const 0)) (rtt.canon $libraryinfo.Main.Function.vtable)) ))
   ;; new MyJsType.<init>();
   ;;@ libraryinfo/Main.java:82:4
   (drop (call $m_<init>__@libraryinfo.Main.MyJsType (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt))))
@@ -252,7 +252,7 @@
  (block
   ;; libraryinfo.Main.log(javaemul.internal.StringPool.$getString_|Foo|());
   ;;@ libraryinfo/Main.java:91:4
-  (call $m_log__java_lang_Object__void@libraryinfo.Main (call $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool ))
+  (call $m_log__java_lang_Object__void@libraryinfo.Main (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 
@@ -294,7 +294,7 @@
   (call_ref (local.get $foo)(struct.get $libraryinfo.Main.Foo.vtable $m_instanceMethod__void_$pp_libraryinfo (struct.get $libraryinfo.Main.Foo $vtable(local.get $foo))))
   ;; Class<?> clazz = javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
   ;;@ libraryinfo/Main.java:111:4
-  (local.set $clazz (call $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (local.set $clazz (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 
@@ -319,7 +319,7 @@
   (call $$clinit__void@java.lang.Object )
   ;; (libraryinfo.Main.STATIC_FIELD = javaemul.internal.StringPool.$getString_|STATIC_FIELD|());
   ;;@ libraryinfo/Main.java:27:2
-  (global.set $f_STATIC_FIELD__libraryinfo_Main (call $$getString_|STATIC_FIELD|__java_lang_String@javaemul.internal.StringPool ))
+  (global.set $f_STATIC_FIELD__libraryinfo_Main (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|STATIC_FIELD|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 
@@ -332,7 +332,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main();
-  (return (call $$getLibraryinfo.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main)
@@ -368,7 +368,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.JsTypeInterface();
-  (return (call $$getLibraryinfo.Main.JsTypeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.JsTypeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.JsTypeInterface)
@@ -403,7 +403,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.FunctionnalInterface();
-  (return (call $$getLibraryinfo.Main.FunctionnalInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.FunctionnalInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionnalInterface)
@@ -438,7 +438,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.JsAccessibleFunctionnalInterface();
-  (return (call $$getLibraryinfo.Main.JsAccessibleFunctionnalInterface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.JsAccessibleFunctionnalInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.JsAccessibleFunctionnalInterface)
@@ -473,7 +473,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Function();
-  (return (call $$getLibraryinfo.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Function)
@@ -556,7 +556,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.FunctionImpl();
-  (return (call $$getLibraryinfo.Main.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.FunctionImpl)
@@ -674,13 +674,13 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (libraryinfo.Main.MyEnum.A = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|A|(),0));
   ;;@ libraryinfo/Main.java:60:4
-  (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|A|__java_lang_String@javaemul.internal.StringPool )(i32.const 0)))
+  (global.set $f_A__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|A|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (libraryinfo.Main.MyEnum.B = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|B|(),1));
   ;;@ libraryinfo/Main.java:61:4
-  (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|B|__java_lang_String@javaemul.internal.StringPool )(i32.const 1)))
+  (global.set $f_B__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|B|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
   ;; (libraryinfo.Main.MyEnum.C = new MyEnum.<init>(javaemul.internal.StringPool.$getString_|C|(),2));
   ;;@ libraryinfo/Main.java:62:4
-  (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $$getString_|C|__java_lang_String@javaemul.internal.StringPool )(i32.const 2)))
+  (global.set $f_C__libraryinfo_Main_MyEnum (call $m_<init>__java_lang_String__int@libraryinfo.Main.MyEnum (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt))(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|C|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
   ;; (libraryinfo.Main.MyEnum.namesToValuesMap = null);
   ;;@ libraryinfo/Main.java:59:7
   (global.set $f_namesToValuesMap__libraryinfo_Main_MyEnum_ (ref.null $java.lang.Object))
@@ -696,7 +696,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.MyEnum.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyEnum();
-  (return (call $$getLibraryinfo.Main.MyEnum__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.MyEnum__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyEnum)
@@ -769,7 +769,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.MyJsType.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyJsType();
-  (return (call $$getLibraryinfo.Main.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType)
@@ -851,7 +851,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.1.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.1();
-  (return (call $$getLibraryinfo.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.1)
@@ -938,7 +938,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.Foo.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
-  (return (call $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)
@@ -1024,7 +1024,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.$LambdaImplementor$1();
-  (return (call $$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)

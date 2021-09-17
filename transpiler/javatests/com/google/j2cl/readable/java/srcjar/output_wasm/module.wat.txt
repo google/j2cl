@@ -102,7 +102,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $srcjar.Foo.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Foo();
-  (return (call $$getSrcjar.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSrcjar.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@srcjar.Foo)
@@ -185,7 +185,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $srcjar.Srcjar.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Srcjar();
-  (return (call $$getSrcjar.Srcjar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSrcjar.Srcjar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@srcjar.Srcjar)

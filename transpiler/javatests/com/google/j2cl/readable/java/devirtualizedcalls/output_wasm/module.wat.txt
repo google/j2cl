@@ -200,7 +200,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.ArrayCalls();
-  (return (call $$getDevirtualizedcalls.ArrayCalls__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.ArrayCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.ArrayCalls)
@@ -267,7 +267,7 @@
  (block
   ;; String s = javaemul.internal.StringPool.$getString_|s|();
   ;;@ devirtualizedcalls/CharSequenceCalls.java:24:4
-  (local.set $s (call $$getString_|s|__java_lang_String@javaemul.internal.StringPool ))
+  (local.set $s (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|s|__java_lang_String@javaemul.internal.StringPool) ))
   ;; CharSequenceCalls.this.test(s);
   ;;@ devirtualizedcalls/CharSequenceCalls.java:25:4
   (call_ref (local.get $this)(local.get $s)(struct.get $devirtualizedcalls.CharSequenceCalls.vtable $m_test__java_lang_CharSequence__void (struct.get $devirtualizedcalls.CharSequenceCalls $vtable(local.get $this))))
@@ -306,7 +306,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.CharSequenceCalls();
-  (return (call $$getDevirtualizedcalls.CharSequenceCalls__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.CharSequenceCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.CharSequenceCalls)
@@ -666,7 +666,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.NumberCalls.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.NumberCalls();
-  (return (call $$getDevirtualizedcalls.NumberCalls__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.NumberCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.NumberCalls)
@@ -817,7 +817,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.ObjectCalls();
-  (return (call $$getDevirtualizedcalls.ObjectCalls__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.ObjectCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.ObjectCalls)
@@ -871,7 +871,7 @@
  (block
   ;; String literal = javaemul.internal.StringPool.$getString_|String|();
   ;;@ devirtualizedcalls/StringCalls.java:23:4
-  (local.set $literal (call $$getString_|String|__java_lang_String@javaemul.internal.StringPool ))
+  (local.set $literal (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|String|__java_lang_String@javaemul.internal.StringPool) ))
   ;; String sub = literal.substring(1);
   ;;@ devirtualizedcalls/StringCalls.java:24:4
   (local.set $sub (call_ref (local.get $literal)(i32.const 1)(struct.get $java.lang.String.vtable $m_substring__int__java_lang_String (struct.get $java.lang.String $vtable(local.get $literal)))))
@@ -919,7 +919,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.StringCalls.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.StringCalls();
-  (return (call $$getDevirtualizedcalls.StringCalls__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.StringCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedcalls.StringCalls)

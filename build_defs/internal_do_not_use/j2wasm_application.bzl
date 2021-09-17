@@ -65,7 +65,16 @@ def _impl_j2wasm_application(ctx):
 
     ctx.actions.run(
         executable = ctx.executable._binaryen,
-        arguments = [args] + ["--nominal", "-o", intermediate_wasm_output.path, "--output-source-map", intermediate_source_map.path, ctx.outputs.wat.path],
+        arguments = [args] + [
+            "--nominal",
+            "--intrinsic-lowering",
+            "--remove-unused-module-elements",
+            "-o",
+            intermediate_wasm_output.path,
+            "--output-source-map",
+            intermediate_source_map.path,
+            ctx.outputs.wat.path,
+        ],
         inputs = [ctx.outputs.wat],
         outputs = [intermediate_source_map, intermediate_wasm_output],
         mnemonic = "J2wasm",
@@ -92,7 +101,11 @@ def _impl_j2wasm_application(ctx):
 
     ctx.actions.run(
         executable = ctx.executable._binaryen,
-        arguments = [args] + ["--input-source-map", intermediate_source_map.path, intermediate_wasm_output.path],
+        arguments = [args] + [
+            "--input-source-map",
+            intermediate_source_map.path,
+            intermediate_wasm_output.path,
+        ],
         inputs = [intermediate_wasm_output, intermediate_source_map],
         outputs = outputs,
         mnemonic = "J2wasm",

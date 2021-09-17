@@ -250,8 +250,16 @@ class GenerationEnvironment {
    * types needs to be declared.
    */
   String getFunctionTypeName(MethodDescriptor methodDescriptor) {
+    return generateFunctionTypeName("$function", methodDescriptor);
+  }
+
+  String getNoSideEffectWrapperFunctionName(MethodDescriptor methodDescriptor) {
+    return generateFunctionTypeName("$function.no.side.effects", methodDescriptor);
+  }
+
+  private String generateFunctionTypeName(String prefix, MethodDescriptor methodDescriptor) {
     return String.format(
-        "$function.%s__%s",
+        prefix + ".%s__%s",
         methodDescriptor.getDispatchParameterTypeDescriptors().stream()
             .map(TypeDescriptor::toRawTypeDescriptor)
             .map(this::getWasmTypeName)

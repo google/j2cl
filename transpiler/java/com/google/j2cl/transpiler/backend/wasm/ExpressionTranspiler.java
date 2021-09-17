@@ -351,7 +351,12 @@ final class ExpressionTranspiler {
 
           String wasmInfo = target.getWasmInfo();
           if (wasmInfo == null) {
-            sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
+            sourceBuilder.append(
+                String.format(
+                    "(call %s ",
+                    methodCall.hasSideEffects()
+                        ? environment.getMethodImplementationName(target)
+                        : environment.getNoSideEffectWrapperFunctionName(target)));
           } else {
             Matcher m = Pattern.compile("typeof\\((\\d+)\\)").matcher(wasmInfo);
             while (m.find()) {
@@ -362,13 +367,19 @@ final class ExpressionTranspiler {
             sourceBuilder.append("(" + wasmInfo + " ");
           }
 
-          if (target.isStatic()) {
-            renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
-          } else {
+          if (!target.isStatic()) {
             // Constructors, non static private methods and super method calls receive the qualifier
             // as the first parameter, then the corresponding arguments.
             render(methodCall.getQualifier());
-            renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+          }
+          // Render the parameters.
+          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+
+          // The binaryen intrinsic that implements calls without side effect needs the function
+          // reference to the function to be called as the last parameter.
+          if (!methodCall.hasSideEffects()) {
+            sourceBuilder.append(
+                String.format("(ref.func %s) ", environment.getMethodImplementationName(target)));
           }
 
           sourceBuilder.append(")");

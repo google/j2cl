@@ -109,7 +109,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main();
-  (return (call $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main)
@@ -144,7 +144,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Foo();
-  (return (call $$getAnnotation.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Foo)
@@ -178,7 +178,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Zoo();
-  (return (call $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Zoo)
@@ -276,7 +276,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.Bar.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Bar();
-  (return (call $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Bar)

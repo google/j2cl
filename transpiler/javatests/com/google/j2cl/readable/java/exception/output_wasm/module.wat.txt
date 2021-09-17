@@ -175,7 +175,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $exception.MyException.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getException.MyException();
-  (return (call $$getException.MyException__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getException.MyException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@exception.MyException)
@@ -283,7 +283,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $exception.MyJsException.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getException.MyJsException();
-  (return (call $$getException.MyJsException__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getException.MyJsException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@exception.MyJsException)

@@ -188,7 +188,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $transitivejsoverlayimport.Immediate.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTransitivejsoverlayimport.Immediate();
-  (return (call $$getTransitivejsoverlayimport.Immediate__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTransitivejsoverlayimport.Immediate__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.Immediate)
@@ -270,7 +270,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $transitivejsoverlayimport.NonNativeUpper.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTransitivejsoverlayimport.NonNativeUpper();
-  (return (call $$getTransitivejsoverlayimport.NonNativeUpper__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTransitivejsoverlayimport.NonNativeUpper__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.NonNativeUpper)
@@ -356,7 +356,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $transitivejsoverlayimport.NonNativeLower.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTransitivejsoverlayimport.NonNativeLower();
-  (return (call $$getTransitivejsoverlayimport.NonNativeLower__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTransitivejsoverlayimport.NonNativeLower__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.NonNativeLower)
@@ -454,7 +454,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $transitivejsoverlayimport.Transitive.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTransitivejsoverlayimport.Transitive();
-  (return (call $$getTransitivejsoverlayimport.Transitive__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTransitivejsoverlayimport.Transitive__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.Transitive)
@@ -510,7 +510,7 @@
    (local.set $transitive (ref.null $transitivejsoverlayimport.Transitive))
    ;; transitive.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:60:6
-   (call_ref (local.get $transitive)(call $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive))))
+   (call_ref (local.get $transitive)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive))))
    ;; transitive.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:61:6
    (drop (call_ref (local.get $transitive)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $transitive)))))
@@ -521,7 +521,7 @@
    (local.set $immediate (ref.null $transitivejsoverlayimport.Immediate))
    ;; immediate.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:66:6
-   (call_ref (local.get $immediate)(call $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate))))
+   (call_ref (local.get $immediate)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate))))
    ;; immediate.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:67:6
    (drop (call_ref (local.get $immediate)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $immediate)))))
@@ -535,7 +535,7 @@
    (local.set $nonNativeUpper (ref.null $transitivejsoverlayimport.NonNativeUpper))
    ;; nonNativeUpper.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:73:6
-   (call_ref (local.get $nonNativeUpper)(call $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper))))
+   (call_ref (local.get $nonNativeUpper)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper))))
    ;; nonNativeUpper.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:74:6
    (drop (call_ref (local.get $nonNativeUpper)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeUpper)))))
@@ -552,7 +552,7 @@
    (local.set $nonNativeLower (ref.null $transitivejsoverlayimport.NonNativeLower))
    ;; nonNativeLower.doTransitiveInstanceMethod(javaemul.internal.StringPool.$getString_|arg1|());
    ;;@ transitivejsoverlayimport/Main.java:81:6
-   (call_ref (local.get $nonNativeLower)(call $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower))))
+   (call_ref (local.get $nonNativeLower)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|arg1|__java_lang_String@javaemul.internal.StringPool) )(struct.get $transitivejsoverlayimport.Transitive.vtable $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower))))
    ;; nonNativeLower.getJsProperty();
    ;;@ transitivejsoverlayimport/Main.java:82:6
    (drop (call_ref (local.get $nonNativeLower)(struct.get $transitivejsoverlayimport.Transitive.vtable $m_getJsProperty__int_$pp_transitivejsoverlayimport (struct.get $transitivejsoverlayimport.Transitive $vtable(local.get $nonNativeLower)))))
@@ -600,7 +600,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $transitivejsoverlayimport.Main.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTransitivejsoverlayimport.Main();
-  (return (call $$getTransitivejsoverlayimport.Main__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTransitivejsoverlayimport.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.Main)

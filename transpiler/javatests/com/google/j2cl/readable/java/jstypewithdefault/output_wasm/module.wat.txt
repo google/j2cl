@@ -110,7 +110,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypewithdefault.SomeJsType.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.SomeJsType();
-  (return (call $$getJstypewithdefault.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypewithdefault.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType)
@@ -154,7 +154,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.Interface();
-  (return (call $$getJstypewithdefault.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypewithdefault.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstypewithdefault.Interface)

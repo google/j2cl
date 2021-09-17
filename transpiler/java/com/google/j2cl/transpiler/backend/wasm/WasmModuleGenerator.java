@@ -22,7 +22,6 @@ import static java.util.Comparator.naturalOrder;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Streams;
 import com.google.j2cl.common.OutputUtils.Output;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
@@ -32,6 +31,7 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -41,9 +41,9 @@ import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 /** Generates a WASM module containing all the code for the application. */
 public class WasmModuleGenerator {
@@ -84,6 +84,7 @@ public class WasmModuleGenerator {
     emitRttHierarchy(library);
     emitGlobals(library);
     emitDynamicDispatchMethodTypes(library);
+    emitImportsForBinaryenIntrinsics(library);
     emitItableSupportTypes();
     emitRuntimeInitialization(library);
     emitNativeArrayTypes(library);
@@ -97,7 +98,7 @@ public class WasmModuleGenerator {
       problems.error("Static entry points %s not found.", pendingEntryPoints);
     }
   }
-
+  
   private void emitItableSupportTypes() {
     builder.newLine();
     // The itable is an array of interface vtables. However since there is no common super type
@@ -128,17 +129,78 @@ public class WasmModuleGenerator {
     }
     builder.newLine();
     builder.append(String.format("(type %s (func", typeName));
-    Streams.concat(
-            // Add the implicit parameter
-            Stream.of(TypeDescriptors.get().javaLangObject),
-            m.getDispatchParameterTypeDescriptors().stream())
-        .forEach(t -> builder.append(String.format(" (param %s)", environment.getWasmType(t))));
+    emitFunctionParameterTypes(m);
+    emitFunctionResultType(m);
+    builder.append("))");
+  }
 
-    TypeDescriptor returnTypeDescriptor = m.getDispatchReturnTypeDescriptor();
+  /**
+   * Emit the necessary import of binaryen intrinsics.
+   *
+   * <p>In order to communicate information to binaryen, binaryen provides intrinsic methods that
+   * need to be imported.
+   */
+  private void emitImportsForBinaryenIntrinsics(Library library) {
+
+    // Emit the intrinsic for calls with no side effects. The intrinsic method exported name is
+    // "call.without.effects" and can be used to convey to binaryen that a certain function call
+    // does not have side effects.
+    // Since the mechanism itself is a call, it needs to be correctly typed. As a result for each
+    // different function type that appears in the AST as part of no-side-effect call, an import
+    // with the right function type definition needs to be created.
+    Set<String> emittedIntrinsicImports = new LinkedHashSet<>();
+    collectSideEffectFreeTargets(library)
+        .forEach(
+            m -> {
+              String importFunctionName = environment.getNoSideEffectWrapperFunctionName(m);
+              if (!emittedIntrinsicImports.add(importFunctionName)) {
+                return;
+              }
+
+              builder.newLine();
+              builder.append(
+                  String.format(
+                      "(import \"binaryen-intrinsics\" \"call.without.effects\" " + "(func %s ",
+                      importFunctionName));
+              emitFunctionParameterTypes(m);
+              builder.append(" (param funcref)");
+              emitFunctionResultType(m);
+              builder.append("))");
+            });
+  }
+
+  /** Collects the methods that are in a no-side-effect call. */
+  private Set<MethodDescriptor> collectSideEffectFreeTargets(Library library) {
+    Set<MethodDescriptor> methodDescriptors = new LinkedHashSet<>();
+    library.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitMethodCall(MethodCall methodCall) {
+            if (!methodCall.hasSideEffects()) {
+              methodDescriptors.add(methodCall.getTarget());
+            }
+          }
+        });
+    return methodDescriptors;
+  }
+
+  private void emitFunctionParameterTypes(MethodDescriptor methodDescriptor) {
+    if (!methodDescriptor.isStatic()) {
+      // Add the implicit parameter
+      builder.append(
+          String.format(
+              " (param %s)", environment.getWasmType(TypeDescriptors.get().javaLangObject)));
+    }
+    methodDescriptor
+        .getDispatchParameterTypeDescriptors()
+        .forEach(t -> builder.append(String.format(" (param %s)", environment.getWasmType(t))));
+  }
+
+  private void emitFunctionResultType(MethodDescriptor methodDescriptor) {
+    TypeDescriptor returnTypeDescriptor = methodDescriptor.getDispatchReturnTypeDescriptor();
     if (!TypeDescriptors.isPrimitiveVoid(returnTypeDescriptor)) {
       builder.append(String.format(" (result %s)", environment.getWasmType(returnTypeDescriptor)));
     }
-    builder.append("))");
   }
 
   private void emitTypes(Library library) {

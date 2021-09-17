@@ -168,10 +168,10 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (switchstatement.Numbers.ONE = new Numbers.<init>(javaemul.internal.StringPool.$getString_|ONE|(),0));
   ;;@ switchstatement/SwitchStatement.java:19:2
-  (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool )(i32.const 0)))
+  (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (switchstatement.Numbers.TWO = new Numbers.<init>(javaemul.internal.StringPool.$getString_|TWO|(),1));
   ;;@ switchstatement/SwitchStatement.java:20:2
-  (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool )(i32.const 1)))
+  (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
   ;; (switchstatement.Numbers.namesToValuesMap = null);
   ;;@ switchstatement/SwitchStatement.java:18:5
   (global.set $f_namesToValuesMap__switchstatement_Numbers_ (ref.null $java.lang.Object))
@@ -187,7 +187,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $switchstatement.Numbers.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.Numbers();
-  (return (call $$getSwitchstatement.Numbers__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSwitchstatement.Numbers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@switchstatement.Numbers)
@@ -243,15 +243,15 @@
    (block
     ;; T $expression = javaemul.internal.InternalPreconditions.checkNotNull(javaemul.internal.StringPool.$getString_|one|());
     ;;@ switchstatement/SwitchStatement.java:26:4
-    (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $$getString_|one|__java_lang_String@javaemul.internal.StringPool )))
+    (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
     ;; switch ($expression) {
     ;;@ switchstatement/SwitchStatement.java:26:4
     (block
      (block
       (block
        (block ;; evaluate expression and jump
-        (br_if 0 (ref.eq (local.get $$expression) (call $$getString_|one|__java_lang_String@javaemul.internal.StringPool )))
-        (br_if 1 (ref.eq (local.get $$expression) (call $$getString_|two|__java_lang_String@javaemul.internal.StringPool )))
+        (br_if 0 (ref.eq (local.get $$expression) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
+        (br_if 1 (ref.eq (local.get $$expression) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|two|__java_lang_String@javaemul.internal.StringPool) )))
         (br 2)
        )
        ;; case javaemul.internal.StringPool.$getString_|one|():
@@ -454,7 +454,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.SwitchStatement();
-  (return (call $$getSwitchstatement.SwitchStatement__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSwitchstatement.SwitchStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@switchstatement.SwitchStatement)

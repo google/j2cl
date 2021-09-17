@@ -102,7 +102,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratordep.Dummy.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Dummy();
-  (return (call $$getAptgeneratordep.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratordep.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@aptgeneratordep.Dummy)
@@ -153,7 +153,7 @@
   ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Dummy(),$qualifier.getSimpleName());
   ;;@ aptgeneratordep/Foo.java:23:4
   (return (block (result (ref null $java.lang.String))
-   (local.set $$qualifier (call $$getAptgeneratordep.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (local.set $$qualifier (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratordep.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
    (call_ref (local.get $$qualifier)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
   ))
  )
@@ -191,7 +191,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratordep.Foo.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Foo();
-  (return (call $$getAptgeneratordep.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratordep.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@aptgeneratordep.Foo)

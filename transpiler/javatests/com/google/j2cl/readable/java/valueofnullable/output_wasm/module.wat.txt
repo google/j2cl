@@ -65,7 +65,7 @@
  (block
   ;; (ValueOfNullable.this.nullableString = javaemul.internal.StringPool.$getString_|b|());
   ;;@ valueofnullable/ValueOfNullable.java:19:2
-  (struct.set $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this) (call $$getString_|b|__java_lang_String@javaemul.internal.StringPool ))
+  (struct.set $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|b|__java_lang_String@javaemul.internal.StringPool) ))
   ;; (ValueOfNullable.this.someChar = 97);
   ;;@ valueofnullable/ValueOfNullable.java:20:2
   (struct.set $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this) (i32.const 97))
@@ -111,7 +111,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $valueofnullable.ValueOfNullable.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getValueofnullable.ValueOfNullable();
-  (return (call $$getValueofnullable.ValueOfNullable__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getValueofnullable.ValueOfNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@valueofnullable.ValueOfNullable)

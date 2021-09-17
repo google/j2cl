@@ -65,11 +65,11 @@
  (block
   ;; Object o = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
   ;;@ classliteral/ClassLiteral.java:21:4
-  (local.set $o (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (local.set $o (call $function.no.side.effects.__$java.lang.Class (ref.func $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
   ;; (o = (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral(),$qualifier.getArrayType(2)));
   ;;@ classliteral/ClassLiteral.java:22:4
   (local.set $o (block (result (ref null $java.lang.Class))
-   (local.set $$qualifier (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+   (local.set $$qualifier (call $function.no.side.effects.__$java.lang.Class (ref.func $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
    (call_ref (local.get $$qualifier)(i32.const 2)(struct.get $java.lang.Class.vtable $m_getArrayType__int__java_lang_Class_$pp_java_lang (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
   ))
  )
@@ -107,7 +107,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $classliteral.ClassLiteral.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
-  (return (call $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@classliteral.ClassLiteral)

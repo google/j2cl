@@ -104,7 +104,7 @@
   (call $$clinit__void@jsmethod.JsMethodExample )
   ;; jsmethod.JsMethodExample.log(javaemul.internal.StringPool.$getString_|test|());
   ;;@ jsmethod/JsMethodExample.java:30:4
-  (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (call $$getString_|test|__java_lang_String@javaemul.internal.StringPool ))
+  (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|test|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 
@@ -153,7 +153,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample();
-  (return (call $$getJsmethod.JsMethodExample__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample)
@@ -257,7 +257,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample.I();
-  (return (call $$getJsmethod.JsMethodExample.I__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.I)
@@ -357,7 +357,7 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample.Sub();
-  (return (call $$getJsmethod.JsMethodExample.Sub__java_lang_Class@javaemul.internal.ClassLiteralPool ))
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample.Sub__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub)
