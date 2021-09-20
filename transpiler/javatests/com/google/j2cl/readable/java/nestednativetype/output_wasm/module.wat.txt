@@ -1,43 +1,39 @@
-;;; Code for nestednativetype.NativeArray [vtable]
-(global $nestednativetype.NativeArray.vtable (mut (ref null $nestednativetype.NativeArray.vtable)) (ref.null $nestednativetype.NativeArray.vtable))
-
-;;; Code for nestednativetype.NativeArray.1 [vtable]
-(global $nestednativetype.NativeArray.1.vtable (mut (ref null $nestednativetype.NativeArray.1.vtable)) (ref.null $nestednativetype.NativeArray.1.vtable))
-
 ;;; Code for nestednativetype.NativeArray [static fields]
 (global $f_$initialized__nestednativetype_NativeArray (mut i32) (i32.const 0))
 
 ;;; Code for nestednativetype.NativeArray.1 [static fields]
 (global $f_$initialized__nestednativetype_NativeArray_1 (mut i32) (i32.const 0))
 
- ;;; Code for nestednativetype.NativeArray [vtable.init]
- (global.set $nestednativetype.NativeArray.vtable
-  (struct.new_with_rtt $nestednativetype.NativeArray.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray)
-   (ref.func $m_a__java_lang_Object@nestednativetype.NativeArray)
-   (rtt.canon $nestednativetype.NativeArray.vtable)
-  )
+;;; Code for nestednativetype.NativeArray [vtable.init]
+(global $nestednativetype.NativeArray.vtable (ref $nestednativetype.NativeArray.vtable) 
+ (struct.new_with_rtt $nestednativetype.NativeArray.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray)
+  (ref.func $m_a__java_lang_Object@nestednativetype.NativeArray)
+  (rtt.canon $nestednativetype.NativeArray.vtable)
  )
+)
 
- ;;; Code for nestednativetype.NativeArray [itable.init]
- (global.set $nestednativetype.NativeArray.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestednativetype.NativeArray [itable.init]
+(global $nestednativetype.NativeArray.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestednativetype.NativeArray.1 [vtable.init]
- (global.set $nestednativetype.NativeArray.1.vtable
-  (struct.new_with_rtt $nestednativetype.NativeArray.1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)
-   (rtt.canon $nestednativetype.NativeArray.1.vtable)
-  )
+;;; Code for nestednativetype.NativeArray.1 [vtable.init]
+(global $nestednativetype.NativeArray.1.vtable (ref $nestednativetype.NativeArray.1.vtable) 
+ (struct.new_with_rtt $nestednativetype.NativeArray.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestednativetype.NativeArray.1)
+  (rtt.canon $nestednativetype.NativeArray.1.vtable)
  )
+)
 
- ;;; Code for nestednativetype.NativeArray.1 [itable.init]
- (global.set $nestednativetype.NativeArray.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestednativetype.NativeArray.1 [itable.init]
+(global $nestednativetype.NativeArray.1.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for nestednativetype.NativeArray [CLASS]
 (type $nestednativetype.NativeArray (struct
@@ -46,13 +42,13 @@
  (extends $java.lang.Object)
 )
 (type $nestednativetype.NativeArray.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_a__java_lang_Object (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_a__java_lang_Object (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; NativeArray()
@@ -133,12 +129,12 @@
  (extends $java.lang.Object)
 )
 (type $nestednativetype.NativeArray.1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; <anonymous> extends Object(NativeArray $outer_this)

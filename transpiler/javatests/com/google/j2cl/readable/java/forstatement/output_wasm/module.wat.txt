@@ -1,23 +1,21 @@
-;;; Code for forstatement.ForStatement [vtable]
-(global $forstatement.ForStatement.vtable (mut (ref null $forstatement.ForStatement.vtable)) (ref.null $forstatement.ForStatement.vtable))
-
 ;;; Code for forstatement.ForStatement [static fields]
 (global $f_$initialized__forstatement_ForStatement (mut i32) (i32.const 0))
 
- ;;; Code for forstatement.ForStatement [vtable.init]
- (global.set $forstatement.ForStatement.vtable
-  (struct.new_with_rtt $forstatement.ForStatement.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@forstatement.ForStatement)
-   (ref.func $m_test__void@forstatement.ForStatement)
-   (rtt.canon $forstatement.ForStatement.vtable)
-  )
+;;; Code for forstatement.ForStatement [vtable.init]
+(global $forstatement.ForStatement.vtable (ref $forstatement.ForStatement.vtable) 
+ (struct.new_with_rtt $forstatement.ForStatement.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@forstatement.ForStatement)
+  (ref.func $m_test__void@forstatement.ForStatement)
+  (rtt.canon $forstatement.ForStatement.vtable)
  )
+)
 
- ;;; Code for forstatement.ForStatement [itable.init]
- (global.set $forstatement.ForStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for forstatement.ForStatement [itable.init]
+(global $forstatement.ForStatement.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for forstatement.ForStatement [CLASS]
 (type $forstatement.ForStatement (struct
@@ -26,13 +24,13 @@
  (extends $java.lang.Object)
 )
 (type $forstatement.ForStatement.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_test__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; ForStatement()

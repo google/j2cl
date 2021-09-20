@@ -1,30 +1,3 @@
-;;; Code for nestedgenericclass.NestedGenericClass [vtable]
-(global $nestedgenericclass.NestedGenericClass.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.A [vtable]
-(global $nestedgenericclass.NestedGenericClass.A.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.A.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.A.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.A.B [vtable]
-(global $nestedgenericclass.NestedGenericClass.A.B.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.A.B.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.A.B.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.C [vtable]
-(global $nestedgenericclass.NestedGenericClass.C.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.C.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.C.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.C.D [vtable]
-(global $nestedgenericclass.NestedGenericClass.C.D.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.C.D.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.C.D.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.1E [vtable]
-(global $nestedgenericclass.NestedGenericClass.1E.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1E.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1E.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.1F [vtable]
-(global $nestedgenericclass.NestedGenericClass.1F.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1F.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1F.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.1G [vtable]
-(global $nestedgenericclass.NestedGenericClass.1G.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1G.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1G.vtable))
-
-;;; Code for nestedgenericclass.NestedGenericClass.1G.1H [vtable]
-(global $nestedgenericclass.NestedGenericClass.1G.1H.vtable (mut (ref null $nestedgenericclass.NestedGenericClass.1G.1H.vtable)) (ref.null $nestedgenericclass.NestedGenericClass.1G.1H.vtable))
-
 ;;; Code for nestedgenericclass.NestedGenericClass [static fields]
 (global $f_$initialized__nestedgenericclass_NestedGenericClass (mut i32) (i32.const 0))
 
@@ -52,135 +25,144 @@
 ;;; Code for nestedgenericclass.NestedGenericClass.1G.1H [static fields]
 (global $f_$initialized__nestedgenericclass_NestedGenericClass_1G_1H (mut i32) (i32.const 0))
 
- ;;; Code for nestedgenericclass.NestedGenericClass [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass)
-   (ref.func $m_fun__java_lang_Object__void@nestedgenericclass.NestedGenericClass)
-   (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass)
-   (ref.func $m_test__void@nestedgenericclass.NestedGenericClass)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.vtable (ref $nestedgenericclass.NestedGenericClass.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass)
+  (ref.func $m_fun__java_lang_Object__void@nestedgenericclass.NestedGenericClass)
+  (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass)
+  (ref.func $m_test__void@nestedgenericclass.NestedGenericClass)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass [itable.init]
+(global $nestedgenericclass.NestedGenericClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.A [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.A.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.A.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.A [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.A.vtable (ref $nestedgenericclass.NestedGenericClass.A.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.A.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.A [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.A [itable.init]
+(global $nestedgenericclass.NestedGenericClass.A.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.A.B [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.A.B.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A.B)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.A.B.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.A.B [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.A.B.vtable (ref $nestedgenericclass.NestedGenericClass.A.B.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.A.B.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A.B)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.A.B.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.A.B [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.A.B.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.A.B [itable.init]
+(global $nestedgenericclass.NestedGenericClass.A.B.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.C [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.C.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.C.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.C [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.C.vtable (ref $nestedgenericclass.NestedGenericClass.C.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.C.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.C [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.C.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.C [itable.init]
+(global $nestedgenericclass.NestedGenericClass.C.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.C.D [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.C.D.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C.D)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.C.D.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.C.D [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.C.D.vtable (ref $nestedgenericclass.NestedGenericClass.C.D.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.C.D.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C.D)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.C.D.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.C.D [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.C.D.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.C.D [itable.init]
+(global $nestedgenericclass.NestedGenericClass.C.D.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1E [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1E.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1E)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.1E.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.1E [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.1E.vtable (ref $nestedgenericclass.NestedGenericClass.1E.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1E.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1E)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.1E.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1E [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1E.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1E [itable.init]
+(global $nestedgenericclass.NestedGenericClass.1E.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1F [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1F.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1F)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.1F.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.1F [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.1F.vtable (ref $nestedgenericclass.NestedGenericClass.1F.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1F.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1F)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.1F.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1F [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1F.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1F [itable.init]
+(global $nestedgenericclass.NestedGenericClass.1F.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1G [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1G.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G)
-   (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass.1G)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.1G.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.1G [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.1G.vtable (ref $nestedgenericclass.NestedGenericClass.1G.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G)
+  (ref.func $m_bar__void@nestedgenericclass.NestedGenericClass.1G)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.1G.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1G [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1G.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1G [itable.init]
+(global $nestedgenericclass.NestedGenericClass.1G.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1G.1H [vtable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1G.1H.vtable
-  (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G.1H)
-   (rtt.canon $nestedgenericclass.NestedGenericClass.1G.1H.vtable)
-  )
+;;; Code for nestedgenericclass.NestedGenericClass.1G.1H [vtable.init]
+(global $nestedgenericclass.NestedGenericClass.1G.1H.vtable (ref $nestedgenericclass.NestedGenericClass.1G.1H.vtable) 
+ (struct.new_with_rtt $nestedgenericclass.NestedGenericClass.1G.1H.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G.1H)
+  (rtt.canon $nestedgenericclass.NestedGenericClass.1G.1H.vtable)
  )
+)
 
- ;;; Code for nestedgenericclass.NestedGenericClass.1G.1H [itable.init]
- (global.set $nestedgenericclass.NestedGenericClass.1G.1H.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedgenericclass.NestedGenericClass.1G.1H [itable.init]
+(global $nestedgenericclass.NestedGenericClass.1G.1H.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for nestedgenericclass.NestedGenericClass [CLASS]
 (type $nestedgenericclass.NestedGenericClass (struct
@@ -189,15 +171,15 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_bar__void (mut (ref $function.__$void)))
- (field $m_test__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_bar__void (ref $function.__$void))
+ (field $m_test__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; NestedGenericClass()
@@ -332,12 +314,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.A.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; A(NestedGenericClass<T> $outer_this)
@@ -406,12 +388,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.A.B.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; B(A<T, T> $outer_this)
@@ -504,12 +486,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.C.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; C(NestedGenericClass<T> $outer_this)
@@ -579,12 +561,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.C.D.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; D(C<T> $outer_this)
@@ -653,12 +635,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1E.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; E(NestedGenericClass<T> $outer_this)
@@ -728,12 +710,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1F.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; F(NestedGenericClass<T> $outer_this)
@@ -802,13 +784,13 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1G.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_bar__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_bar__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; G(NestedGenericClass<T> $outer_this)
@@ -892,12 +874,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1G.1H.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; H(G<T, T, T> $outer_this)

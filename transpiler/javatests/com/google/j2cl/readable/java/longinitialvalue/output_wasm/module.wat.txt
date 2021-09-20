@@ -1,6 +1,3 @@
-;;; Code for longinitialvalue.LongInitialValue [vtable]
-(global $longinitialvalue.LongInitialValue.vtable (mut (ref null $longinitialvalue.LongInitialValue.vtable)) (ref.null $longinitialvalue.LongInitialValue.vtable))
-
 ;;; Code for longinitialvalue.LongInitialValue [static fields]
 (global $f_LONG_VALUE__longinitialvalue_LongInitialValue (mut i64) (i64.const 0))
 (global $f_$initialized__longinitialvalue_LongInitialValue (mut i32) (i32.const 0))
@@ -12,12 +9,12 @@
  (extends $java.lang.Object)
 )
 (type $longinitialvalue.LongInitialValue.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; LongInitialValue()

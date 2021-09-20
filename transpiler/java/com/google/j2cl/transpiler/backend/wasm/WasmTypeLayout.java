@@ -59,6 +59,13 @@ abstract class WasmTypeLayout {
     return getAllPolymorphicMethodsByMangledName().values();
   }
 
+  /** Returns the descriptor for the method implementing {@code methodDescriptor} in this type. */
+  MethodDescriptor getImplementationMethod(MethodDescriptor methodDescriptor) {
+    return getAllPolymorphicMethodsByMangledName()
+        .get(methodDescriptor.getMangledName())
+        .getDescriptor();
+  }
+
   /**
    * All the polymorphic methods that need to be in the vtable for the class.
    *

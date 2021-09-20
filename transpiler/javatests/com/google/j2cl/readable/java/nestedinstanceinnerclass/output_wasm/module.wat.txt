@@ -1,12 +1,3 @@
-;;; Code for nestedinstanceinnerclass.OuterClass [vtable]
-(global $nestedinstanceinnerclass.OuterClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.vtable))
-
-;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [vtable]
-(global $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass.vtable))
-
-;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [vtable]
-(global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (mut (ref null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)) (ref.null $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable))
-
 ;;; Code for nestedinstanceinnerclass.OuterClass [static fields]
 (global $f_$initialized__nestedinstanceinnerclass_OuterClass (mut i32) (i32.const 0))
 
@@ -16,48 +7,51 @@
 ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [static fields]
 (global $f_$initialized__nestedinstanceinnerclass_OuterClass_InnerClass_InnerInnerClass (mut i32) (i32.const 0))
 
- ;;; Code for nestedinstanceinnerclass.OuterClass [vtable.init]
- (global.set $nestedinstanceinnerclass.OuterClass.vtable
-  (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass)
-   (ref.func $m_test__void@nestedinstanceinnerclass.OuterClass)
-   (rtt.canon $nestedinstanceinnerclass.OuterClass.vtable)
-  )
+;;; Code for nestedinstanceinnerclass.OuterClass [vtable.init]
+(global $nestedinstanceinnerclass.OuterClass.vtable (ref $nestedinstanceinnerclass.OuterClass.vtable) 
+ (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass)
+  (ref.func $m_test__void@nestedinstanceinnerclass.OuterClass)
+  (rtt.canon $nestedinstanceinnerclass.OuterClass.vtable)
  )
+)
 
- ;;; Code for nestedinstanceinnerclass.OuterClass [itable.init]
- (global.set $nestedinstanceinnerclass.OuterClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedinstanceinnerclass.OuterClass [itable.init]
+(global $nestedinstanceinnerclass.OuterClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [vtable.init]
- (global.set $nestedinstanceinnerclass.OuterClass.InnerClass.vtable
-  (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
-   (rtt.canon $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)
-  )
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [vtable.init]
+(global $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.vtable) 
+ (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass)
+  (rtt.canon $nestedinstanceinnerclass.OuterClass.InnerClass.vtable)
  )
+)
 
- ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [itable.init]
- (global.set $nestedinstanceinnerclass.OuterClass.InnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass [itable.init]
+(global $nestedinstanceinnerclass.OuterClass.InnerClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [vtable.init]
- (global.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable
-  (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
-   (rtt.canon $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)
-  )
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [vtable.init]
+(global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (ref $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable) 
+ (struct.new_with_rtt $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass)
+  (rtt.canon $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable)
  )
+)
 
- ;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [itable.init]
- (global.set $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass [itable.init]
+(global $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for nestedinstanceinnerclass.OuterClass [CLASS]
 (type $nestedinstanceinnerclass.OuterClass (struct
@@ -66,13 +60,13 @@
  (extends $java.lang.Object)
 )
 (type $nestedinstanceinnerclass.OuterClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_test__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; OuterClass()
@@ -152,12 +146,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedinstanceinnerclass.OuterClass.InnerClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InnerClass(OuterClass $outer_this)
@@ -228,12 +222,12 @@
  (extends $java.lang.Object)
 )
 (type $nestedinstanceinnerclass.OuterClass.InnerClass.InnerInnerClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InnerInnerClass(InnerClass $outer_this)

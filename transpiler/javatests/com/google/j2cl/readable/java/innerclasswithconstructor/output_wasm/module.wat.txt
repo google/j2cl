@@ -1,42 +1,38 @@
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable]
-(global $innerclasswithconstructor.InnerClassWithConstructor.vtable (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor.vtable)) (ref.null $innerclasswithconstructor.InnerClassWithConstructor.vtable))
-
-;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable]
-(global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable))
-
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [static fields]
 (global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor (mut i32) (i32.const 0))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [static fields]
 (global $f_$initialized__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32) (i32.const 0))
 
- ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable.init]
- (global.set $innerclasswithconstructor.InnerClassWithConstructor.vtable
-  (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
-   (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.vtable)
-  )
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor [vtable.init]
+(global $innerclasswithconstructor.InnerClassWithConstructor.vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable) 
+ (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
+  (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.vtable)
  )
+)
 
- ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [itable.init]
- (global.set $innerclasswithconstructor.InnerClassWithConstructor.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor [itable.init]
+(global $innerclasswithconstructor.InnerClassWithConstructor.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable.init]
- (global.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable
-  (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
-   (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)
-  )
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [vtable.init]
+(global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable) 
+ (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor.InnerClass)
+  (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)
  )
+)
 
- ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [itable.init]
- (global.set $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [itable.init]
+(global $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [CLASS]
 (type $innerclasswithconstructor.InnerClassWithConstructor (struct
@@ -46,12 +42,12 @@
  (extends $java.lang.Object)
 )
 (type $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InnerClassWithConstructor()
@@ -117,12 +113,12 @@
  (extends $java.lang.Object)
 )
 (type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InnerClass(InnerClassWithConstructor $outer_this, int b)

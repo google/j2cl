@@ -1,57 +1,3 @@
-;;; Code for bridgejsmethod.Main [vtable]
-(global $bridgejsmethod.Main.vtable (mut (ref null $bridgejsmethod.Main.vtable)) (ref.null $bridgejsmethod.Main.vtable))
-
-;;; Code for bridgejsmethod.Main.A [vtable]
-(global $bridgejsmethod.Main.A.vtable (mut (ref null $bridgejsmethod.Main.A.vtable)) (ref.null $bridgejsmethod.Main.A.vtable))
-
-;;; Code for bridgejsmethod.Main.B [vtable]
-(global $bridgejsmethod.Main.B.vtable (mut (ref null $bridgejsmethod.Main.B.vtable)) (ref.null $bridgejsmethod.Main.B.vtable))
-
-;;; Code for bridgejsmethod.Main.C [vtable]
-(global $bridgejsmethod.Main.C.vtable (mut (ref null $bridgejsmethod.Main.C.vtable)) (ref.null $bridgejsmethod.Main.C.vtable))
-
-;;; Code for bridgejsmethod.Main.D [vtable]
-(global $bridgejsmethod.Main.D.vtable (mut (ref null $bridgejsmethod.Main.D.vtable)) (ref.null $bridgejsmethod.Main.D.vtable))
-
-;;; Code for bridgejsmethod.Main.E [vtable]
-(global $bridgejsmethod.Main.E.vtable (mut (ref null $bridgejsmethod.Main.E.vtable)) (ref.null $bridgejsmethod.Main.E.vtable))
-
-;;; Code for bridgejsmethod.Main.F [vtable]
-(global $bridgejsmethod.Main.F.vtable (mut (ref null $bridgejsmethod.Main.F.vtable)) (ref.null $bridgejsmethod.Main.F.vtable))
-
-;;; Code for bridgejsmethod.Main.H [vtable]
-(global $bridgejsmethod.Main.H.vtable (mut (ref null $bridgejsmethod.Main.H.vtable)) (ref.null $bridgejsmethod.Main.H.vtable))
-
-;;; Code for bridgejsmethod.Main.K [vtable]
-(global $bridgejsmethod.Main.K.vtable (mut (ref null $bridgejsmethod.Main.K.vtable)) (ref.null $bridgejsmethod.Main.K.vtable))
-
-;;; Code for bridgejsmethod.Main.L [vtable]
-(global $bridgejsmethod.Main.L.vtable (mut (ref null $bridgejsmethod.Main.L.vtable)) (ref.null $bridgejsmethod.Main.L.vtable))
-
-;;; Code for bridgejsmethod.Main.N [vtable]
-(global $bridgejsmethod.Main.N.vtable (mut (ref null $bridgejsmethod.Main.N.vtable)) (ref.null $bridgejsmethod.Main.N.vtable))
-
-;;; Code for bridgejsmethod.Main.O [vtable]
-(global $bridgejsmethod.Main.O.vtable (mut (ref null $bridgejsmethod.Main.O.vtable)) (ref.null $bridgejsmethod.Main.O.vtable))
-
-;;; Code for bridgejsmethod.Main.Q [vtable]
-(global $bridgejsmethod.Main.Q.vtable (mut (ref null $bridgejsmethod.Main.Q.vtable)) (ref.null $bridgejsmethod.Main.Q.vtable))
-
-;;; Code for bridgejsmethod.Main.R [vtable]
-(global $bridgejsmethod.Main.R.vtable (mut (ref null $bridgejsmethod.Main.R.vtable)) (ref.null $bridgejsmethod.Main.R.vtable))
-
-;;; Code for bridgejsmethod.Main.S [vtable]
-(global $bridgejsmethod.Main.S.vtable (mut (ref null $bridgejsmethod.Main.S.vtable)) (ref.null $bridgejsmethod.Main.S.vtable))
-
-;;; Code for bridgejsmethod.Main.GrandParent [vtable]
-(global $bridgejsmethod.Main.GrandParent.vtable (mut (ref null $bridgejsmethod.Main.GrandParent.vtable)) (ref.null $bridgejsmethod.Main.GrandParent.vtable))
-
-;;; Code for bridgejsmethod.Main.Parent [vtable]
-(global $bridgejsmethod.Main.Parent.vtable (mut (ref null $bridgejsmethod.Main.Parent.vtable)) (ref.null $bridgejsmethod.Main.Parent.vtable))
-
-;;; Code for bridgejsmethod.Main.Child [vtable]
-(global $bridgejsmethod.Main.Child.vtable (mut (ref null $bridgejsmethod.Main.Child.vtable)) (ref.null $bridgejsmethod.Main.Child.vtable))
-
 ;;; Code for bridgejsmethod.Main [static fields]
 (global $f_$initialized__bridgejsmethod_Main (mut i32) (i32.const 0))
 
@@ -121,282 +67,291 @@
 ;;; Code for bridgejsmethod.Main.Child [static fields]
 (global $f_$initialized__bridgejsmethod_Main_Child (mut i32) (i32.const 0))
 
- ;;; Code for bridgejsmethod.Main [vtable.init]
- (global.set $bridgejsmethod.Main.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main)
-   (rtt.canon $bridgejsmethod.Main.vtable)
-  )
+;;; Code for bridgejsmethod.Main [vtable.init]
+(global $bridgejsmethod.Main.vtable (ref $bridgejsmethod.Main.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main)
+  (rtt.canon $bridgejsmethod.Main.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main [itable.init]
- (global.set $bridgejsmethod.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for bridgejsmethod.Main [itable.init]
+(global $bridgejsmethod.Main.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.A [vtable.init]
- (global.set $bridgejsmethod.Main.A.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.A.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.A)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A)
-   (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
-   (rtt.canon $bridgejsmethod.Main.A.vtable)
-  )
+;;; Code for bridgejsmethod.Main.A [vtable.init]
+(global $bridgejsmethod.Main.A.vtable (ref $bridgejsmethod.Main.A.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.A.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.A)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A)
+  (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
+  (rtt.canon $bridgejsmethod.Main.A.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.A [itable.init]
- (global.set $bridgejsmethod.Main.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for bridgejsmethod.Main.A [itable.init]
+(global $bridgejsmethod.Main.A.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.B [vtable.init]
- (global.set $bridgejsmethod.Main.B.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.B.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.B)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B)
-   (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
-   (ref.func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B)
-   (ref.func $m_bar__java_lang_String__void@bridgejsmethod.Main.B)
-   (rtt.canon $bridgejsmethod.Main.B.vtable)
-  )
+;;; Code for bridgejsmethod.Main.B [vtable.init]
+(global $bridgejsmethod.Main.B.vtable (ref $bridgejsmethod.Main.B.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.B.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.B)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B)
+  (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
+  (ref.func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B)
+  (ref.func $m_bar__java_lang_String__void@bridgejsmethod.Main.B)
+  (rtt.canon $bridgejsmethod.Main.B.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.B [itable.init]
- (global.set $bridgejsmethod.Main.B.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for bridgejsmethod.Main.B [itable.init]
+(global $bridgejsmethod.Main.B.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.C [vtable.init]
- (global.set $bridgejsmethod.Main.C.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.C.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.C)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C)
-   (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
-   (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.C)
-   (rtt.canon $bridgejsmethod.Main.C.vtable)
-  )
+;;; Code for bridgejsmethod.Main.C [vtable.init]
+(global $bridgejsmethod.Main.C.vtable (ref $bridgejsmethod.Main.C.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.C.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.C)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C)
+  (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
+  (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.C)
+  (rtt.canon $bridgejsmethod.Main.C.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.C [itable.init]
- (global.set $bridgejsmethod.Main.C.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for bridgejsmethod.Main.C [itable.init]
+(global $bridgejsmethod.Main.C.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.D [vtable.init]
- (global.set $bridgejsmethod.Main.D.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.D.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.D)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D)
-   (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
-   (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.D)
-   (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D)
-   (rtt.canon $bridgejsmethod.Main.D.vtable)
-  )
+;;; Code for bridgejsmethod.Main.D [vtable.init]
+(global $bridgejsmethod.Main.D.vtable (ref $bridgejsmethod.Main.D.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.D.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.D)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D)
+  (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
+  (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.D)
+  (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D)
+  (rtt.canon $bridgejsmethod.Main.D.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.D [itable.init]
- (global.set $bridgejsmethod.Main.D.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgejsmethod.Main.D.itable) (i32.const 0)
+;;; Code for bridgejsmethod.Main.D [itable.init]
+(global $bridgejsmethod.Main.D.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $bridgejsmethod.Main.I.vtable
   (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D)
   (rtt.canon $bridgejsmethod.Main.I.vtable)
- ))
-
- ;;; Code for bridgejsmethod.Main.E [vtable.init]
- (global.set $bridgejsmethod.Main.E.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.E.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.E)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B)
-   (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
-   (ref.func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B)
-   (ref.func $m_bar__java_lang_String__void@bridgejsmethod.Main.B)
-   (rtt.canon $bridgejsmethod.Main.E.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.E [itable.init]
- (global.set $bridgejsmethod.Main.E.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgejsmethod.Main.E.itable) (i32.const 0)
+;;; Code for bridgejsmethod.Main.E [vtable.init]
+(global $bridgejsmethod.Main.E.vtable (ref $bridgejsmethod.Main.E.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.E.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.E)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B)
+  (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
+  (ref.func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B)
+  (ref.func $m_bar__java_lang_String__void@bridgejsmethod.Main.B)
+  (rtt.canon $bridgejsmethod.Main.E.vtable)
+ )
+)
+
+;;; Code for bridgejsmethod.Main.E [itable.init]
+(global $bridgejsmethod.Main.E.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $bridgejsmethod.Main.J.vtable
   (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B)
   (rtt.canon $bridgejsmethod.Main.J.vtable)
- ))
-
- ;;; Code for bridgejsmethod.Main.F [vtable.init]
- (global.set $bridgejsmethod.Main.F.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.F.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.F)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F)
-   (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
-   (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F)
-   (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.F)
-   (rtt.canon $bridgejsmethod.Main.F.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.F [itable.init]
- (global.set $bridgejsmethod.Main.F.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgejsmethod.Main.F.itable) (i32.const 0)
+;;; Code for bridgejsmethod.Main.F [vtable.init]
+(global $bridgejsmethod.Main.F.vtable (ref $bridgejsmethod.Main.F.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.F.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.F)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F)
+  (ref.func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A)
+  (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F)
+  (ref.func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.F)
+  (rtt.canon $bridgejsmethod.Main.F.vtable)
+ )
+)
+
+;;; Code for bridgejsmethod.Main.F [itable.init]
+(global $bridgejsmethod.Main.F.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $bridgejsmethod.Main.I.vtable
   (ref.func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F)
   (rtt.canon $bridgejsmethod.Main.I.vtable)
- ))
-
- ;;; Code for bridgejsmethod.Main.H [vtable.init]
- (global.set $bridgejsmethod.Main.H.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.H.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.H)
-   (ref.func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H)
-   (rtt.canon $bridgejsmethod.Main.H.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.H [itable.init]
- (global.set $bridgejsmethod.Main.H.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgejsmethod.Main.H.itable) (i32.const 0)
+;;; Code for bridgejsmethod.Main.H [vtable.init]
+(global $bridgejsmethod.Main.H.vtable (ref $bridgejsmethod.Main.H.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.H.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.H)
+  (ref.func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H)
+  (rtt.canon $bridgejsmethod.Main.H.vtable)
+ )
+)
+
+;;; Code for bridgejsmethod.Main.H [itable.init]
+(global $bridgejsmethod.Main.H.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $bridgejsmethod.Main.G.vtable
   (ref.func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H)
   (rtt.canon $bridgejsmethod.Main.G.vtable)
- ))
-
- ;;; Code for bridgejsmethod.Main.K [vtable.init]
- (global.set $bridgejsmethod.Main.K.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.K.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.K)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.K)
-   (rtt.canon $bridgejsmethod.Main.K.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.K [itable.init]
- (global.set $bridgejsmethod.Main.K.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgejsmethod.Main.L [vtable.init]
- (global.set $bridgejsmethod.Main.L.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.L.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.L)
-   (ref.func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L)
-   (ref.func $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L)
-   (rtt.canon $bridgejsmethod.Main.L.vtable)
-  )
+;;; Code for bridgejsmethod.Main.K [vtable.init]
+(global $bridgejsmethod.Main.K.vtable (ref $bridgejsmethod.Main.K.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.K.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.K)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.K)
+  (rtt.canon $bridgejsmethod.Main.K.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.L [itable.init]
- (global.set $bridgejsmethod.Main.L.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for bridgejsmethod.Main.K [itable.init]
+(global $bridgejsmethod.Main.K.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.O [vtable.init]
- (global.set $bridgejsmethod.Main.O.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.O.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.O)
-   (ref.func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O)
-   (rtt.canon $bridgejsmethod.Main.O.vtable)
-  )
+;;; Code for bridgejsmethod.Main.L [vtable.init]
+(global $bridgejsmethod.Main.L.vtable (ref $bridgejsmethod.Main.L.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.L.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.L)
+  (ref.func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L)
+  (ref.func $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L)
+  (rtt.canon $bridgejsmethod.Main.L.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.O [itable.init]
- (global.set $bridgejsmethod.Main.O.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgejsmethod.Main.O.itable) (i32.const 0)
+;;; Code for bridgejsmethod.Main.L [itable.init]
+(global $bridgejsmethod.Main.L.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
+
+;;; Code for bridgejsmethod.Main.O [vtable.init]
+(global $bridgejsmethod.Main.O.vtable (ref $bridgejsmethod.Main.O.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.O.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.O)
+  (ref.func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O)
+  (rtt.canon $bridgejsmethod.Main.O.vtable)
+ )
+)
+
+;;; Code for bridgejsmethod.Main.O [itable.init]
+(global $bridgejsmethod.Main.O.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $bridgejsmethod.Main.M.vtable
   (ref.func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O)
   (rtt.canon $bridgejsmethod.Main.M.vtable)
- ))
-
- ;;; Code for bridgejsmethod.Main.S [vtable.init]
- (global.set $bridgejsmethod.Main.S.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.S.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.S)
-   (ref.func $m_getKey__java_lang_String@bridgejsmethod.Main.R)
-   (rtt.canon $bridgejsmethod.Main.S.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.S [itable.init]
- (global.set $bridgejsmethod.Main.S.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $bridgejsmethod.Main.S.itable) (i32.const 0)
+;;; Code for bridgejsmethod.Main.S [vtable.init]
+(global $bridgejsmethod.Main.S.vtable (ref $bridgejsmethod.Main.S.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.S.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.S)
+  (ref.func $m_getKey__java_lang_String@bridgejsmethod.Main.R)
+  (rtt.canon $bridgejsmethod.Main.S.vtable)
+ )
+)
+
+;;; Code for bridgejsmethod.Main.S [itable.init]
+(global $bridgejsmethod.Main.S.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $bridgejsmethod.Main.P.vtable
   (ref.func $m_getKey__java_lang_String@bridgejsmethod.Main.R)
   (rtt.canon $bridgejsmethod.Main.P.vtable)
- ))
-
- ;;; Code for bridgejsmethod.Main.GrandParent [vtable.init]
- (global.set $bridgejsmethod.Main.GrandParent.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.GrandParent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.GrandParent)
-   (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.GrandParent)
-   (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.GrandParent)
-   (rtt.canon $bridgejsmethod.Main.GrandParent.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.GrandParent [itable.init]
- (global.set $bridgejsmethod.Main.GrandParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for bridgejsmethod.Main.Parent [vtable.init]
- (global.set $bridgejsmethod.Main.Parent.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.Parent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.Parent)
-   (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
-   (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)
-   (ref.func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
-   (ref.func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
-   (rtt.canon $bridgejsmethod.Main.Parent.vtable)
-  )
+;;; Code for bridgejsmethod.Main.GrandParent [vtable.init]
+(global $bridgejsmethod.Main.GrandParent.vtable (ref $bridgejsmethod.Main.GrandParent.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.GrandParent.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.GrandParent)
+  (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.GrandParent)
+  (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.GrandParent)
+  (rtt.canon $bridgejsmethod.Main.GrandParent.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.Parent [itable.init]
- (global.set $bridgejsmethod.Main.Parent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for bridgejsmethod.Main.GrandParent [itable.init]
+(global $bridgejsmethod.Main.GrandParent.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for bridgejsmethod.Main.Child [vtable.init]
- (global.set $bridgejsmethod.Main.Child.vtable
-  (struct.new_with_rtt $bridgejsmethod.Main.Child.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child)
-   (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
-   (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)
-   (ref.func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
-   (ref.func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
-   (rtt.canon $bridgejsmethod.Main.Child.vtable)
-  )
+;;; Code for bridgejsmethod.Main.Parent [vtable.init]
+(global $bridgejsmethod.Main.Parent.vtable (ref $bridgejsmethod.Main.Parent.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.Parent.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.Parent)
+  (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
+  (rtt.canon $bridgejsmethod.Main.Parent.vtable)
  )
+)
 
- ;;; Code for bridgejsmethod.Main.Child [itable.init]
- (global.set $bridgejsmethod.Main.Child.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for bridgejsmethod.Main.Parent [itable.init]
+(global $bridgejsmethod.Main.Parent.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
+
+;;; Code for bridgejsmethod.Main.Child [vtable.init]
+(global $bridgejsmethod.Main.Child.vtable (ref $bridgejsmethod.Main.Child.vtable) 
+ (struct.new_with_rtt $bridgejsmethod.Main.Child.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child)
+  (ref.func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
+  (ref.func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent)
+  (rtt.canon $bridgejsmethod.Main.Child.vtable)
+ )
+)
+
+;;; Code for bridgejsmethod.Main.Child [itable.init]
+(global $bridgejsmethod.Main.Child.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for bridgejsmethod.Main [CLASS]
 (type $bridgejsmethod.Main (struct
@@ -405,12 +360,12 @@
  (extends $java.lang.Object)
 )
 (type $bridgejsmethod.Main.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Main()
@@ -548,14 +503,14 @@
  (extends $java.lang.Object)
 )
 (type $bridgejsmethod.Main.A.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_bar__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; A()
@@ -644,8 +599,9 @@
 
 ;;; Code for bridgejsmethod.Main.I [INTERFACE]
 (type $bridgejsmethod.Main.I.vtable (struct
- (field $m_fun__java_lang_Number__java_lang_Number (mut (ref $function.$java.lang.Number__$java.lang.Number)))
-))
+ (field $m_fun__java_lang_Number__java_lang_Number (ref $function.$java.lang.Number__$java.lang.Number))
+ )
+)
 
 ;;; void I.$clinit()
 (func $$clinit__void@bridgejsmethod.Main.I
@@ -679,8 +635,9 @@
 
 ;;; Code for bridgejsmethod.Main.J [INTERFACE]
 (type $bridgejsmethod.Main.J.vtable (struct
- (field $m_bar__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
-))
+ (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ )
+)
 
 ;;; void J.$clinit()
 (func $$clinit__void@bridgejsmethod.Main.J
@@ -719,16 +676,16 @@
  (extends $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.B.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_bar__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_fun__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
- (field $m_bar__java_lang_String__void (mut (ref $function.$java.lang.String__$void))))
- (extends $bridgejsmethod.Main.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_fun__java_lang_String__java_lang_String (ref $function.$java.lang.String__$java.lang.String))
+ (field $m_bar__java_lang_String__void (ref $function.$java.lang.String__$void))
+ )
+  (extends $bridgejsmethod.Main.A.vtable)
 )
 
 ;;; B()
@@ -855,15 +812,15 @@
  (extends $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.C.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_bar__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_fun__java_lang_Integer__java_lang_Integer (mut (ref $function.$java.lang.Integer__$java.lang.Integer))))
- (extends $bridgejsmethod.Main.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.$java.lang.Integer__$java.lang.Integer))
+ )
+  (extends $bridgejsmethod.Main.A.vtable)
 )
 
 ;;; C()
@@ -961,16 +918,16 @@
  (extends $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.D.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_bar__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_fun__java_lang_Integer__java_lang_Integer (mut (ref $function.$java.lang.Integer__$java.lang.Integer)))
- (field $m_fun__java_lang_Number__java_lang_Number (mut (ref $function.$java.lang.Number__$java.lang.Number))))
- (extends $bridgejsmethod.Main.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.$java.lang.Integer__$java.lang.Integer))
+ (field $m_fun__java_lang_Number__java_lang_Number (ref $function.$java.lang.Number__$java.lang.Number))
+ )
+  (extends $bridgejsmethod.Main.A.vtable)
 )
 
 ;;; D()
@@ -1085,16 +1042,16 @@
  (extends $bridgejsmethod.Main.B)
 )
 (type $bridgejsmethod.Main.E.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_bar__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_fun__java_lang_String__java_lang_String (mut (ref $function.$java.lang.String__$java.lang.String)))
- (field $m_bar__java_lang_String__void (mut (ref $function.$java.lang.String__$void))))
- (extends $bridgejsmethod.Main.B.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_fun__java_lang_String__java_lang_String (ref $function.$java.lang.String__$java.lang.String))
+ (field $m_bar__java_lang_String__void (ref $function.$java.lang.String__$void))
+ )
+  (extends $bridgejsmethod.Main.B.vtable)
 )
 
 ;;; E()
@@ -1158,16 +1115,16 @@
  (extends $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.F.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_bar__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_fun__java_lang_Number__java_lang_Number (mut (ref $function.$java.lang.Number__$java.lang.Number)))
- (field $m_fun__java_lang_Integer__java_lang_Integer (mut (ref $function.$java.lang.Integer__$java.lang.Integer))))
- (extends $bridgejsmethod.Main.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_fun__java_lang_Number__java_lang_Number (ref $function.$java.lang.Number__$java.lang.Number))
+ (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.$java.lang.Integer__$java.lang.Integer))
+ )
+  (extends $bridgejsmethod.Main.A.vtable)
 )
 
 ;;; F()
@@ -1277,8 +1234,9 @@
 
 ;;; Code for bridgejsmethod.Main.G [INTERFACE]
 (type $bridgejsmethod.Main.G.vtable (struct
- (field $m_enclose__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ )
+)
 
 ;;; void G.$clinit()
 (func $$clinit__void@bridgejsmethod.Main.G
@@ -1317,13 +1275,13 @@
  (extends $java.lang.Object)
 )
 (type $bridgejsmethod.Main.H.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_enclose__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; H()
@@ -1404,13 +1362,13 @@
  (extends $java.lang.Object)
 )
 (type $bridgejsmethod.Main.K.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (mut (ref $function.$java.lang.Object__$java.lang.Object__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; K()
@@ -1488,14 +1446,14 @@
  (extends $bridgejsmethod.Main.K)
 )
 (type $bridgejsmethod.Main.L.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (mut (ref $function.$java.lang.Object__$java.lang.Object__$void)))
- (field $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (mut (ref $function.$java.lang.String__$java.lang.Object__$void))))
- (extends $bridgejsmethod.Main.K.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref $function.$java.lang.String__$java.lang.Object__$void))
+ )
+  (extends $bridgejsmethod.Main.K.vtable)
 )
 
 ;;; L()
@@ -1585,8 +1543,9 @@
 
 ;;; Code for bridgejsmethod.Main.M [INTERFACE]
 (type $bridgejsmethod.Main.M.vtable (struct
- (field $m_getB__bridgejsmethod_Main_B (mut (ref $function.__$bridgejsmethod.Main.B)))
-))
+ (field $m_getB__bridgejsmethod_Main_B (ref $function.__$bridgejsmethod.Main.B))
+ )
+)
 
 ;;; void M.$clinit()
 (func $$clinit__void@bridgejsmethod.Main.M
@@ -1626,13 +1585,13 @@
  (extends $java.lang.Object)
 )
 (type $bridgejsmethod.Main.N.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getB__bridgejsmethod_Main_B (mut (ref $function.__$bridgejsmethod.Main.B))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getB__bridgejsmethod_Main_B (ref $function.__$bridgejsmethod.Main.B))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; N(Main $outer_this)
@@ -1689,13 +1648,13 @@
  (extends $bridgejsmethod.Main.N)
 )
 (type $bridgejsmethod.Main.O.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getB__bridgejsmethod_Main_B (mut (ref $function.__$bridgejsmethod.Main.B))))
- (extends $bridgejsmethod.Main.N.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getB__bridgejsmethod_Main_B (ref $function.__$bridgejsmethod.Main.B))
+ )
+  (extends $bridgejsmethod.Main.N.vtable)
 )
 
 ;;; O(Main $outer_this)
@@ -1774,8 +1733,9 @@
 
 ;;; Code for bridgejsmethod.Main.P [INTERFACE]
 (type $bridgejsmethod.Main.P.vtable (struct
- (field $m_getKey__java_lang_String (mut (ref $function.__$java.lang.String)))
-))
+ (field $m_getKey__java_lang_String (ref $function.__$java.lang.String))
+ )
+)
 
 ;;; void P.$clinit()
 (func $$clinit__void@bridgejsmethod.Main.P
@@ -1815,13 +1775,13 @@
  (extends $java.lang.Object)
 )
 (type $bridgejsmethod.Main.Q.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getKey__java_lang_String (mut (ref $function.__$java.lang.String))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getKey__java_lang_String (ref $function.__$java.lang.String))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Q(Main $outer_this)
@@ -1877,13 +1837,13 @@
  (extends $bridgejsmethod.Main.Q)
 )
 (type $bridgejsmethod.Main.R.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getKey__java_lang_String (mut (ref $function.__$java.lang.String))))
- (extends $bridgejsmethod.Main.Q.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getKey__java_lang_String (ref $function.__$java.lang.String))
+ )
+  (extends $bridgejsmethod.Main.Q.vtable)
 )
 
 ;;; R(Main $outer_this)
@@ -1956,13 +1916,13 @@
  (extends $bridgejsmethod.Main.R)
 )
 (type $bridgejsmethod.Main.S.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getKey__java_lang_String (mut (ref $function.__$java.lang.String))))
- (extends $bridgejsmethod.Main.R.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getKey__java_lang_String (ref $function.__$java.lang.String))
+ )
+  (extends $bridgejsmethod.Main.R.vtable)
 )
 
 ;;; S(Main $outer_this)
@@ -2031,14 +1991,14 @@
  (extends $java.lang.Object)
 )
 (type $bridgejsmethod.Main.GrandParent.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_jsMethod__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_method__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_jsMethod__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_method__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; GrandParent(Main $outer_this)
@@ -2134,16 +2094,16 @@
  (extends $bridgejsmethod.Main.GrandParent)
 )
 (type $bridgejsmethod.Main.Parent.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_jsMethod__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_method__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_jsMethod__bridgejsmethod_Main_Parent__void (mut (ref $function.$bridgejsmethod.Main.Parent__$void)))
- (field $m_method__bridgejsmethod_Main_Parent__void (mut (ref $function.$bridgejsmethod.Main.Parent__$void))))
- (extends $bridgejsmethod.Main.GrandParent.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_jsMethod__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_method__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.$bridgejsmethod.Main.Parent__$void))
+ (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.$bridgejsmethod.Main.Parent__$void))
+ )
+  (extends $bridgejsmethod.Main.GrandParent.vtable)
 )
 
 ;;; Parent(Main $outer_this)
@@ -2272,16 +2232,16 @@
  (extends $bridgejsmethod.Main.Parent)
 )
 (type $bridgejsmethod.Main.Child.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_jsMethod__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_method__java_lang_Object__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_jsMethod__bridgejsmethod_Main_Parent__void (mut (ref $function.$bridgejsmethod.Main.Parent__$void)))
- (field $m_method__bridgejsmethod_Main_Parent__void (mut (ref $function.$bridgejsmethod.Main.Parent__$void))))
- (extends $bridgejsmethod.Main.Parent.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_jsMethod__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_method__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.$bridgejsmethod.Main.Parent__$void))
+ (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.$bridgejsmethod.Main.Parent__$void))
+ )
+  (extends $bridgejsmethod.Main.Parent.vtable)
 )
 
 ;;; Child(Main $outer_this)

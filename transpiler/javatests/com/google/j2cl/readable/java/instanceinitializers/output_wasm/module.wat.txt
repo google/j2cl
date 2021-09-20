@@ -1,22 +1,20 @@
-;;; Code for instanceinitializers.InstanceInitializers [vtable]
-(global $instanceinitializers.InstanceInitializers.vtable (mut (ref null $instanceinitializers.InstanceInitializers.vtable)) (ref.null $instanceinitializers.InstanceInitializers.vtable))
-
 ;;; Code for instanceinitializers.InstanceInitializers [static fields]
 (global $f_$initialized__instanceinitializers_InstanceInitializers (mut i32) (i32.const 0))
 
- ;;; Code for instanceinitializers.InstanceInitializers [vtable.init]
- (global.set $instanceinitializers.InstanceInitializers.vtable
-  (struct.new_with_rtt $instanceinitializers.InstanceInitializers.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@instanceinitializers.InstanceInitializers)
-   (rtt.canon $instanceinitializers.InstanceInitializers.vtable)
-  )
+;;; Code for instanceinitializers.InstanceInitializers [vtable.init]
+(global $instanceinitializers.InstanceInitializers.vtable (ref $instanceinitializers.InstanceInitializers.vtable) 
+ (struct.new_with_rtt $instanceinitializers.InstanceInitializers.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@instanceinitializers.InstanceInitializers)
+  (rtt.canon $instanceinitializers.InstanceInitializers.vtable)
  )
+)
 
- ;;; Code for instanceinitializers.InstanceInitializers [itable.init]
- (global.set $instanceinitializers.InstanceInitializers.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for instanceinitializers.InstanceInitializers [itable.init]
+(global $instanceinitializers.InstanceInitializers.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for instanceinitializers.InstanceInitializers [CLASS]
 (type $instanceinitializers.InstanceInitializers (struct
@@ -26,12 +24,12 @@
  (extends $java.lang.Object)
 )
 (type $instanceinitializers.InstanceInitializers.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InstanceInitializers()

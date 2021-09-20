@@ -1,12 +1,3 @@
-;;; Code for packageinfosubpackage.Foo [vtable]
-(global $packageinfosubpackage.Foo.vtable (mut (ref null $packageinfosubpackage.Foo.vtable)) (ref.null $packageinfosubpackage.Foo.vtable))
-
-;;; Code for packageinfosubpackage.Foo.NativeBar [vtable]
-(global $packageinfosubpackage.Foo.NativeBar.vtable (mut (ref null $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.null $packageinfosubpackage.Foo.NativeBar.vtable))
-
-;;; Code for packageinfosubpackage.subpackage.Bar [vtable]
-(global $packageinfosubpackage.subpackage.Bar.vtable (mut (ref null $packageinfosubpackage.subpackage.Bar.vtable)) (ref.null $packageinfosubpackage.subpackage.Bar.vtable))
-
 ;;; Code for packageinfosubpackage.Foo [static fields]
 (global $f_$initialized__packageinfosubpackage_Foo (mut i32) (i32.const 0))
 
@@ -16,47 +7,50 @@
 ;;; Code for packageinfosubpackage.subpackage.Bar [static fields]
 (global $f_$initialized__packageinfosubpackage_subpackage_Bar (mut i32) (i32.const 0))
 
- ;;; Code for packageinfosubpackage.Foo [vtable.init]
- (global.set $packageinfosubpackage.Foo.vtable
-  (struct.new_with_rtt $packageinfosubpackage.Foo.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
-   (rtt.canon $packageinfosubpackage.Foo.vtable)
-  )
+;;; Code for packageinfosubpackage.Foo [vtable.init]
+(global $packageinfosubpackage.Foo.vtable (ref $packageinfosubpackage.Foo.vtable) 
+ (struct.new_with_rtt $packageinfosubpackage.Foo.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
+  (rtt.canon $packageinfosubpackage.Foo.vtable)
  )
+)
 
- ;;; Code for packageinfosubpackage.Foo [itable.init]
- (global.set $packageinfosubpackage.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for packageinfosubpackage.Foo [itable.init]
+(global $packageinfosubpackage.Foo.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for packageinfosubpackage.Foo.NativeBar [vtable.init]
- (global.set $packageinfosubpackage.Foo.NativeBar.vtable
-  (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar)
-   (rtt.canon $packageinfosubpackage.Foo.NativeBar.vtable)
-  )
+;;; Code for packageinfosubpackage.Foo.NativeBar [vtable.init]
+(global $packageinfosubpackage.Foo.NativeBar.vtable (ref $packageinfosubpackage.Foo.NativeBar.vtable) 
+ (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar)
+  (rtt.canon $packageinfosubpackage.Foo.NativeBar.vtable)
  )
+)
 
- ;;; Code for packageinfosubpackage.Foo.NativeBar [itable.init]
- (global.set $packageinfosubpackage.Foo.NativeBar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for packageinfosubpackage.Foo.NativeBar [itable.init]
+(global $packageinfosubpackage.Foo.NativeBar.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for packageinfosubpackage.subpackage.Bar [vtable.init]
- (global.set $packageinfosubpackage.subpackage.Bar.vtable
-  (struct.new_with_rtt $packageinfosubpackage.subpackage.Bar.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar)
-   (rtt.canon $packageinfosubpackage.subpackage.Bar.vtable)
-  )
+;;; Code for packageinfosubpackage.subpackage.Bar [vtable.init]
+(global $packageinfosubpackage.subpackage.Bar.vtable (ref $packageinfosubpackage.subpackage.Bar.vtable) 
+ (struct.new_with_rtt $packageinfosubpackage.subpackage.Bar.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@packageinfosubpackage.subpackage.Bar)
+  (rtt.canon $packageinfosubpackage.subpackage.Bar.vtable)
  )
+)
 
- ;;; Code for packageinfosubpackage.subpackage.Bar [itable.init]
- (global.set $packageinfosubpackage.subpackage.Bar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for packageinfosubpackage.subpackage.Bar [itable.init]
+(global $packageinfosubpackage.subpackage.Bar.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for packageinfosubpackage.Foo [CLASS]
 (type $packageinfosubpackage.Foo (struct
@@ -66,12 +60,12 @@
  (extends $java.lang.Object)
 )
 (type $packageinfosubpackage.Foo.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Foo()
@@ -149,12 +143,12 @@
  (extends $java.lang.Object)
 )
 (type $packageinfosubpackage.Foo.NativeBar.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; NativeBar()
@@ -218,12 +212,12 @@
  (extends $java.lang.Object)
 )
 (type $packageinfosubpackage.subpackage.Bar.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Bar()

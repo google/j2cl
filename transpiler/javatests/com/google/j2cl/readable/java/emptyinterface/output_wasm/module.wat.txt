@@ -2,8 +2,9 @@
 (global $f_$initialized__emptyinterface_EmptyInterface (mut i32) (i32.const 0))
 
 ;;; Code for emptyinterface.EmptyInterface [INTERFACE]
-(type $emptyinterface.EmptyInterface.vtable (struct
-))
+(type $emptyinterface.EmptyInterface.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void EmptyInterface.$clinit()
 (func $$clinit__void@emptyinterface.EmptyInterface

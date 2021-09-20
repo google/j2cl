@@ -1,42 +1,38 @@
-;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [vtable]
-(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable (mut (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)) (ref.null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable))
-
-;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [vtable]
-(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable (mut (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)) (ref.null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable))
-
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [static fields]
 (global $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace (mut i32) (i32.const 0))
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [static fields]
 (global $f_$initialized__jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass (mut i32) (i32.const 0))
 
- ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [vtable.init]
- (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable
-  (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)
-   (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)
-  )
+;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [vtable.init]
+(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable) 
+ (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)
+  (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)
  )
+)
 
- ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [itable.init]
- (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [itable.init]
+(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [vtable.init]
- (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable
-  (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)
-   (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)
-  )
+;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [vtable.init]
+(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable (ref $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable) 
+ (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)
+  (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)
  )
+)
 
- ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [itable.init]
- (global.set $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass [itable.init]
+(global $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace [CLASS]
 (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (struct
@@ -45,12 +41,12 @@
  (extends $java.lang.Object)
 )
 (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; JsTypeInnerClassWithNamespace()
@@ -114,12 +110,12 @@
  (extends $java.lang.Object)
 )
 (type $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InnerClass()

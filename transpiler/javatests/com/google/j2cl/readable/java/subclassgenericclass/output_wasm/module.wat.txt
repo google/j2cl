@@ -1,12 +1,3 @@
-;;; Code for subclassgenericclass.GenericClass [vtable]
-(global $subclassgenericclass.GenericClass.vtable (mut (ref null $subclassgenericclass.GenericClass.vtable)) (ref.null $subclassgenericclass.GenericClass.vtable))
-
-;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable]
-(global $subclassgenericclass.GenericSubclassGenericClass.vtable (mut (ref null $subclassgenericclass.GenericSubclassGenericClass.vtable)) (ref.null $subclassgenericclass.GenericSubclassGenericClass.vtable))
-
-;;; Code for subclassgenericclass.SubclassGenericClass [vtable]
-(global $subclassgenericclass.SubclassGenericClass.vtable (mut (ref null $subclassgenericclass.SubclassGenericClass.vtable)) (ref.null $subclassgenericclass.SubclassGenericClass.vtable))
-
 ;;; Code for subclassgenericclass.GenericClass [static fields]
 (global $f_$initialized__subclassgenericclass_GenericClass (mut i32) (i32.const 0))
 
@@ -16,47 +7,50 @@
 ;;; Code for subclassgenericclass.SubclassGenericClass [static fields]
 (global $f_$initialized__subclassgenericclass_SubclassGenericClass (mut i32) (i32.const 0))
 
- ;;; Code for subclassgenericclass.GenericClass [vtable.init]
- (global.set $subclassgenericclass.GenericClass.vtable
-  (struct.new_with_rtt $subclassgenericclass.GenericClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass)
-   (rtt.canon $subclassgenericclass.GenericClass.vtable)
-  )
+;;; Code for subclassgenericclass.GenericClass [vtable.init]
+(global $subclassgenericclass.GenericClass.vtable (ref $subclassgenericclass.GenericClass.vtable) 
+ (struct.new_with_rtt $subclassgenericclass.GenericClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@subclassgenericclass.GenericClass)
+  (rtt.canon $subclassgenericclass.GenericClass.vtable)
  )
+)
 
- ;;; Code for subclassgenericclass.GenericClass [itable.init]
- (global.set $subclassgenericclass.GenericClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for subclassgenericclass.GenericClass [itable.init]
+(global $subclassgenericclass.GenericClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
- (global.set $subclassgenericclass.GenericSubclassGenericClass.vtable
-  (struct.new_with_rtt $subclassgenericclass.GenericSubclassGenericClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
-   (rtt.canon $subclassgenericclass.GenericSubclassGenericClass.vtable)
-  )
+;;; Code for subclassgenericclass.GenericSubclassGenericClass [vtable.init]
+(global $subclassgenericclass.GenericSubclassGenericClass.vtable (ref $subclassgenericclass.GenericSubclassGenericClass.vtable) 
+ (struct.new_with_rtt $subclassgenericclass.GenericSubclassGenericClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@subclassgenericclass.GenericSubclassGenericClass)
+  (rtt.canon $subclassgenericclass.GenericSubclassGenericClass.vtable)
  )
+)
 
- ;;; Code for subclassgenericclass.GenericSubclassGenericClass [itable.init]
- (global.set $subclassgenericclass.GenericSubclassGenericClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for subclassgenericclass.GenericSubclassGenericClass [itable.init]
+(global $subclassgenericclass.GenericSubclassGenericClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for subclassgenericclass.SubclassGenericClass [vtable.init]
- (global.set $subclassgenericclass.SubclassGenericClass.vtable
-  (struct.new_with_rtt $subclassgenericclass.SubclassGenericClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass)
-   (rtt.canon $subclassgenericclass.SubclassGenericClass.vtable)
-  )
+;;; Code for subclassgenericclass.SubclassGenericClass [vtable.init]
+(global $subclassgenericclass.SubclassGenericClass.vtable (ref $subclassgenericclass.SubclassGenericClass.vtable) 
+ (struct.new_with_rtt $subclassgenericclass.SubclassGenericClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@subclassgenericclass.SubclassGenericClass)
+  (rtt.canon $subclassgenericclass.SubclassGenericClass.vtable)
  )
+)
 
- ;;; Code for subclassgenericclass.SubclassGenericClass [itable.init]
- (global.set $subclassgenericclass.SubclassGenericClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for subclassgenericclass.SubclassGenericClass [itable.init]
+(global $subclassgenericclass.SubclassGenericClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for subclassgenericclass.GenericClass [CLASS]
 (type $subclassgenericclass.GenericClass (struct
@@ -65,12 +59,12 @@
  (extends $java.lang.Object)
 )
 (type $subclassgenericclass.GenericClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; GenericClass()
@@ -134,12 +128,12 @@
  (extends $subclassgenericclass.GenericClass)
 )
 (type $subclassgenericclass.GenericSubclassGenericClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $subclassgenericclass.GenericClass.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $subclassgenericclass.GenericClass.vtable)
 )
 
 ;;; GenericSubclassGenericClass()
@@ -203,12 +197,12 @@
  (extends $subclassgenericclass.GenericClass)
 )
 (type $subclassgenericclass.SubclassGenericClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $subclassgenericclass.GenericClass.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $subclassgenericclass.GenericClass.vtable)
 )
 
 ;;; SubclassGenericClass()

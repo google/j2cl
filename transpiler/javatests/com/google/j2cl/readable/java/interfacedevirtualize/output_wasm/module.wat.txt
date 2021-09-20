@@ -1,30 +1,28 @@
-;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable]
-(global $interfacedevirtualize.InterfaceDevirtualize.vtable (mut (ref null $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.null $interfacedevirtualize.InterfaceDevirtualize.vtable))
-
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [static fields]
 (global $f_$initialized__interfacedevirtualize_InterfaceDevirtualize (mut i32) (i32.const 0))
 
- ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
- (global.set $interfacedevirtualize.InterfaceDevirtualize.vtable
-  (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
-   (ref.func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
-   (rtt.canon $interfacedevirtualize.InterfaceDevirtualize.vtable)
-  )
+;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
+(global $interfacedevirtualize.InterfaceDevirtualize.vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable) 
+ (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare3__java_lang_Double__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
+  (ref.func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
+  (rtt.canon $interfacedevirtualize.InterfaceDevirtualize.vtable)
  )
+)
 
- ;;; Code for interfacedevirtualize.InterfaceDevirtualize [itable.init]
- (global.set $interfacedevirtualize.InterfaceDevirtualize.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for interfacedevirtualize.InterfaceDevirtualize [itable.init]
+(global $interfacedevirtualize.InterfaceDevirtualize.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [CLASS]
 (type $interfacedevirtualize.InterfaceDevirtualize (struct
@@ -33,20 +31,20 @@
  (extends $java.lang.Object)
 )
 (type $interfacedevirtualize.InterfaceDevirtualize.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_compare0__java_lang_Comparable__java_lang_Object__int (mut (ref $function.$java.lang.Object__$java.lang.Object__$int)))
- (field $m_compare1__java_lang_Comparable__java_lang_Object__int (mut (ref $function.$java.lang.Object__$java.lang.Object__$int)))
- (field $m_compare2__java_lang_Comparable__java_lang_Double__int (mut (ref $function.$java.lang.Object__$java.lang.Double__$int)))
- (field $m_compare3__java_lang_Double__java_lang_Double__int (mut (ref $function.$java.lang.Double__$java.lang.Double__$int)))
- (field $m_compare2__java_lang_Comparable__java_lang_Boolean__int (mut (ref $function.$java.lang.Object__$java.lang.Boolean__$int)))
- (field $m_compare3__java_lang_Boolean__java_lang_Boolean__int (mut (ref $function.$java.lang.Boolean__$java.lang.Boolean__$int)))
- (field $m_compare2__java_lang_Comparable__java_lang_Integer__int (mut (ref $function.$java.lang.Object__$java.lang.Integer__$int)))
- (field $m_compare3__java_lang_Integer__java_lang_Integer__int (mut (ref $function.$java.lang.Integer__$java.lang.Integer__$int))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_compare0__java_lang_Comparable__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
+ (field $m_compare1__java_lang_Comparable__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
+ (field $m_compare2__java_lang_Comparable__java_lang_Double__int (ref $function.$java.lang.Object__$java.lang.Double__$int))
+ (field $m_compare3__java_lang_Double__java_lang_Double__int (ref $function.$java.lang.Double__$java.lang.Double__$int))
+ (field $m_compare2__java_lang_Comparable__java_lang_Boolean__int (ref $function.$java.lang.Object__$java.lang.Boolean__$int))
+ (field $m_compare3__java_lang_Boolean__java_lang_Boolean__int (ref $function.$java.lang.Boolean__$java.lang.Boolean__$int))
+ (field $m_compare2__java_lang_Comparable__java_lang_Integer__int (ref $function.$java.lang.Object__$java.lang.Integer__$int))
+ (field $m_compare3__java_lang_Integer__java_lang_Integer__int (ref $function.$java.lang.Integer__$java.lang.Integer__$int))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InterfaceDevirtualize()

@@ -1,27 +1,3 @@
-;;; Code for typewildcards.GenericType [vtable]
-(global $typewildcards.GenericType.vtable (mut (ref null $typewildcards.GenericType.vtable)) (ref.null $typewildcards.GenericType.vtable))
-
-;;; Code for typewildcards.TypeWildCards [vtable]
-(global $typewildcards.TypeWildCards.vtable (mut (ref null $typewildcards.TypeWildCards.vtable)) (ref.null $typewildcards.TypeWildCards.vtable))
-
-;;; Code for typewildcards.TypeWildCards.A [vtable]
-(global $typewildcards.TypeWildCards.A.vtable (mut (ref null $typewildcards.TypeWildCards.A.vtable)) (ref.null $typewildcards.TypeWildCards.A.vtable))
-
-;;; Code for typewildcards.TypeWildCards.Element [vtable]
-(global $typewildcards.TypeWildCards.Element.vtable (mut (ref null $typewildcards.TypeWildCards.Element.vtable)) (ref.null $typewildcards.TypeWildCards.Element.vtable))
-
-;;; Code for typewildcards.TypeWildCards.OtherElement [vtable]
-(global $typewildcards.TypeWildCards.OtherElement.vtable (mut (ref null $typewildcards.TypeWildCards.OtherElement.vtable)) (ref.null $typewildcards.TypeWildCards.OtherElement.vtable))
-
-;;; Code for typewildcards.TypeWildCards.SubOtherElement [vtable]
-(global $typewildcards.TypeWildCards.SubOtherElement.vtable (mut (ref null $typewildcards.TypeWildCards.SubOtherElement.vtable)) (ref.null $typewildcards.TypeWildCards.SubOtherElement.vtable))
-
-;;; Code for typewildcards.TypeWildCards.Foo [vtable]
-(global $typewildcards.TypeWildCards.Foo.vtable (mut (ref null $typewildcards.TypeWildCards.Foo.vtable)) (ref.null $typewildcards.TypeWildCards.Foo.vtable))
-
-;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [vtable]
-(global $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (mut (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.null $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable))
-
 ;;; Code for typewildcards.GenericType [static fields]
 (global $f_$initialized__typewildcards_GenericType (mut i32) (i32.const 0))
 
@@ -58,97 +34,100 @@
 ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (mut i32) (i32.const 0))
 
- ;;; Code for typewildcards.GenericType [vtable.init]
- (global.set $typewildcards.GenericType.vtable
-  (struct.new_with_rtt $typewildcards.GenericType.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@typewildcards.GenericType)
-   (rtt.canon $typewildcards.GenericType.vtable)
-  )
+;;; Code for typewildcards.GenericType [vtable.init]
+(global $typewildcards.GenericType.vtable (ref $typewildcards.GenericType.vtable) 
+ (struct.new_with_rtt $typewildcards.GenericType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@typewildcards.GenericType)
+  (rtt.canon $typewildcards.GenericType.vtable)
  )
+)
 
- ;;; Code for typewildcards.GenericType [itable.init]
- (global.set $typewildcards.GenericType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for typewildcards.GenericType [itable.init]
+(global $typewildcards.GenericType.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for typewildcards.TypeWildCards [vtable.init]
- (global.set $typewildcards.TypeWildCards.vtable
-  (struct.new_with_rtt $typewildcards.TypeWildCards.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards)
-   (ref.func $m_unbounded__typewildcards_GenericType__void@typewildcards.TypeWildCards)
-   (ref.func $m_upperBound__typewildcards_GenericType__void@typewildcards.TypeWildCards)
-   (ref.func $m_lowerBound__typewildcards_GenericType__void@typewildcards.TypeWildCards)
-   (ref.func $m_test__void@typewildcards.TypeWildCards)
-   (ref.func $m_testInferredGenericIntersection__void@typewildcards.TypeWildCards)
-   (ref.func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards)
-   (rtt.canon $typewildcards.TypeWildCards.vtable)
-  )
+;;; Code for typewildcards.TypeWildCards [vtable.init]
+(global $typewildcards.TypeWildCards.vtable (ref $typewildcards.TypeWildCards.vtable) 
+ (struct.new_with_rtt $typewildcards.TypeWildCards.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards)
+  (ref.func $m_unbounded__typewildcards_GenericType__void@typewildcards.TypeWildCards)
+  (ref.func $m_upperBound__typewildcards_GenericType__void@typewildcards.TypeWildCards)
+  (ref.func $m_lowerBound__typewildcards_GenericType__void@typewildcards.TypeWildCards)
+  (ref.func $m_test__void@typewildcards.TypeWildCards)
+  (ref.func $m_testInferredGenericIntersection__void@typewildcards.TypeWildCards)
+  (ref.func $m_testRecursiveGeneric__void@typewildcards.TypeWildCards)
+  (rtt.canon $typewildcards.TypeWildCards.vtable)
  )
+)
 
- ;;; Code for typewildcards.TypeWildCards [itable.init]
- (global.set $typewildcards.TypeWildCards.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for typewildcards.TypeWildCards [itable.init]
+(global $typewildcards.TypeWildCards.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for typewildcards.TypeWildCards.A [vtable.init]
- (global.set $typewildcards.TypeWildCards.A.vtable
-  (struct.new_with_rtt $typewildcards.TypeWildCards.A.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.A)
-   (ref.func $m_m__void@typewildcards.TypeWildCards.A)
-   (rtt.canon $typewildcards.TypeWildCards.A.vtable)
-  )
+;;; Code for typewildcards.TypeWildCards.A [vtable.init]
+(global $typewildcards.TypeWildCards.A.vtable (ref $typewildcards.TypeWildCards.A.vtable) 
+ (struct.new_with_rtt $typewildcards.TypeWildCards.A.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.A)
+  (ref.func $m_m__void@typewildcards.TypeWildCards.A)
+  (rtt.canon $typewildcards.TypeWildCards.A.vtable)
  )
+)
 
- ;;; Code for typewildcards.TypeWildCards.A [itable.init]
- (global.set $typewildcards.TypeWildCards.A.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $typewildcards.TypeWildCards.A.itable) (i32.const 0)
+;;; Code for typewildcards.TypeWildCards.A [itable.init]
+(global $typewildcards.TypeWildCards.A.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $typewildcards.TypeWildCards.X.vtable
   (ref.func $m_m__void@typewildcards.TypeWildCards.A)
   (rtt.canon $typewildcards.TypeWildCards.X.vtable)
- ))
-
- ;;; Code for typewildcards.TypeWildCards.Foo [vtable.init]
- (global.set $typewildcards.TypeWildCards.Foo.vtable
-  (struct.new_with_rtt $typewildcards.TypeWildCards.Foo.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo)
-   (rtt.canon $typewildcards.TypeWildCards.Foo.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for typewildcards.TypeWildCards.Foo [itable.init]
- (global.set $typewildcards.TypeWildCards.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [vtable.init]
- (global.set $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable
-  (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)
-   (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
-   (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
-   (ref.func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
-   (rtt.canon $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)
-  )
+;;; Code for typewildcards.TypeWildCards.Foo [vtable.init]
+(global $typewildcards.TypeWildCards.Foo.vtable (ref $typewildcards.TypeWildCards.Foo.vtable) 
+ (struct.new_with_rtt $typewildcards.TypeWildCards.Foo.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo)
+  (rtt.canon $typewildcards.TypeWildCards.Foo.vtable)
  )
+)
 
- ;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [itable.init]
- (global.set $typewildcards.TypeWildCards.$LambdaImplementor$1.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable) (i32.const 0)
+;;; Code for typewildcards.TypeWildCards.Foo [itable.init]
+(global $typewildcards.TypeWildCards.Foo.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
+
+;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [vtable.init]
+(global $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable) 
+ (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (rtt.canon $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)
+ )
+)
+
+;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [itable.init]
+(global $typewildcards.TypeWildCards.$LambdaImplementor$1.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $java.util.function.Function.vtable
   (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
   (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
   (ref.func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
   (rtt.canon $java.util.function.Function.vtable)
- ))
+ )
+ (rtt.canon $itable)))
 
 ;;; Code for typewildcards.GenericType [CLASS]
 (type $typewildcards.GenericType (struct
@@ -157,12 +136,12 @@
  (extends $java.lang.Object)
 )
 (type $typewildcards.GenericType.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; GenericType()
@@ -226,18 +205,18 @@
  (extends $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_unbounded__typewildcards_GenericType__void (mut (ref $function.$typewildcards.GenericType__$void)))
- (field $m_upperBound__typewildcards_GenericType__void (mut (ref $function.$typewildcards.GenericType__$void)))
- (field $m_lowerBound__typewildcards_GenericType__void (mut (ref $function.$typewildcards.GenericType__$void)))
- (field $m_test__void (mut (ref $function.__$void)))
- (field $m_testInferredGenericIntersection__void (mut (ref $function.__$void)))
- (field $m_testRecursiveGeneric__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_unbounded__typewildcards_GenericType__void (ref $function.$typewildcards.GenericType__$void))
+ (field $m_upperBound__typewildcards_GenericType__void (ref $function.$typewildcards.GenericType__$void))
+ (field $m_lowerBound__typewildcards_GenericType__void (ref $function.$typewildcards.GenericType__$void))
+ (field $m_test__void (ref $function.__$void))
+ (field $m_testInferredGenericIntersection__void (ref $function.__$void))
+ (field $m_testRecursiveGeneric__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; TypeWildCards()
@@ -474,8 +453,9 @@
 
 ;;; Code for typewildcards.TypeWildCards.X [INTERFACE]
 (type $typewildcards.TypeWildCards.X.vtable (struct
- (field $m_m__void (mut (ref $function.__$void)))
-))
+ (field $m_m__void (ref $function.__$void))
+ )
+)
 
 ;;; void X.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.X
@@ -509,8 +489,9 @@
 
 ;;; Code for typewildcards.TypeWildCards.Y [INTERFACE]
 (type $typewildcards.TypeWildCards.Y.vtable (struct
- (field $m_n__void (mut (ref $function.__$void)))
-))
+ (field $m_n__void (ref $function.__$void))
+ )
+)
 
 ;;; void Y.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.Y
@@ -550,13 +531,13 @@
  (extends $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.A.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_m__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_m__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; A()
@@ -624,8 +605,9 @@
 
 ;;; Code for typewildcards.TypeWildCards.IntegerSupplier [INTERFACE]
 (type $typewildcards.TypeWildCards.IntegerSupplier.vtable (struct
- (field $m_get__java_lang_Integer (mut (ref $function.__$java.lang.Integer)))
-))
+ (field $m_get__java_lang_Integer (ref $function.__$java.lang.Integer))
+ )
+)
 
 ;;; void IntegerSupplier.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.IntegerSupplier
@@ -659,8 +641,9 @@
 
 ;;; Code for typewildcards.TypeWildCards.HasKey [INTERFACE]
 (type $typewildcards.TypeWildCards.HasKey.vtable (struct
- (field $m_getKey__java_lang_String (mut (ref $function.__$java.lang.String)))
-))
+ (field $m_getKey__java_lang_String (ref $function.__$java.lang.String))
+ )
+)
 
 ;;; void HasKey.$clinit()
 (func $$clinit__void@typewildcards.TypeWildCards.HasKey
@@ -700,12 +683,12 @@
  (extends $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.Element.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Element(TypeWildCards $outer_this)
@@ -760,12 +743,12 @@
  (extends $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.OtherElement.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; OtherElement(TypeWildCards $outer_this)
@@ -821,12 +804,12 @@
  (extends $typewildcards.TypeWildCards.OtherElement)
 )
 (type $typewildcards.TypeWildCards.SubOtherElement.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $typewildcards.TypeWildCards.OtherElement.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $typewildcards.TypeWildCards.OtherElement.vtable)
 )
 
 ;;; SubOtherElement(TypeWildCards $outer_this)
@@ -881,12 +864,12 @@
  (extends $typewildcards.GenericType)
 )
 (type $typewildcards.TypeWildCards.Foo.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $typewildcards.GenericType.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $typewildcards.GenericType.vtable)
 )
 
 ;;; Foo(TypeWildCards $outer_this)
@@ -954,15 +937,15 @@
  (extends $java.lang.Object)
 )
 (type $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_apply__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_andThen__java_util_function_Function__java_util_function_Function (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_compose__java_util_function_Function__java_util_function_Function (mut (ref $function.$java.lang.Object__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_andThen__java_util_function_Function__java_util_function_Function (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.$java.lang.Object__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; $LambdaImplementor$1()

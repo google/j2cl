@@ -1,22 +1,20 @@
-;;; Code for valueofnullable.ValueOfNullable [vtable]
-(global $valueofnullable.ValueOfNullable.vtable (mut (ref null $valueofnullable.ValueOfNullable.vtable)) (ref.null $valueofnullable.ValueOfNullable.vtable))
-
 ;;; Code for valueofnullable.ValueOfNullable [static fields]
 (global $f_$initialized__valueofnullable_ValueOfNullable (mut i32) (i32.const 0))
 
- ;;; Code for valueofnullable.ValueOfNullable [vtable.init]
- (global.set $valueofnullable.ValueOfNullable.vtable
-  (struct.new_with_rtt $valueofnullable.ValueOfNullable.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@valueofnullable.ValueOfNullable)
-   (rtt.canon $valueofnullable.ValueOfNullable.vtable)
-  )
+;;; Code for valueofnullable.ValueOfNullable [vtable.init]
+(global $valueofnullable.ValueOfNullable.vtable (ref $valueofnullable.ValueOfNullable.vtable) 
+ (struct.new_with_rtt $valueofnullable.ValueOfNullable.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@valueofnullable.ValueOfNullable)
+  (rtt.canon $valueofnullable.ValueOfNullable.vtable)
  )
+)
 
- ;;; Code for valueofnullable.ValueOfNullable [itable.init]
- (global.set $valueofnullable.ValueOfNullable.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for valueofnullable.ValueOfNullable [itable.init]
+(global $valueofnullable.ValueOfNullable.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for valueofnullable.ValueOfNullable [CLASS]
 (type $valueofnullable.ValueOfNullable (struct
@@ -28,12 +26,12 @@
  (extends $java.lang.Object)
 )
 (type $valueofnullable.ValueOfNullable.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; ValueOfNullable()

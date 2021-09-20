@@ -1,15 +1,3 @@
-;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [vtable]
-(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable))
-
-;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.A [vtable]
-(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable))
-
-;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.B [vtable]
-(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable))
-
-;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [vtable]
-(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable (mut (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (ref.null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable))
-
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault (mut i32) (i32.const 0))
 
@@ -28,41 +16,42 @@
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [static fields]
 (global $f_$initialized__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C (mut i32) (i32.const 0))
 
- ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [vtable.init]
- (global.set $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable
-  (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
-   (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)
-  )
+;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [vtable.init]
+(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable) 
+ (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault)
+  (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)
  )
+)
 
- ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [itable.init]
- (global.set $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [itable.init]
+(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [vtable.init]
- (global.set $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable
-  (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
-   (ref.func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
-   (ref.func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
-   (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)
-  )
+;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [vtable.init]
+(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable (ref $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable) 
+ (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
+  (ref.func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
+  (ref.func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
+  (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)
  )
+)
 
- ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [itable.init]
- (global.set $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable) (i32.const 0)
+;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.C [itable.init]
+(global $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.vtable
   (ref.func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
   (ref.func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)
   (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.vtable)
- ))
+ )
+ (rtt.canon $itable)))
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault [CLASS]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault (struct
@@ -71,12 +60,12 @@
  (extends $java.lang.Object)
 )
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; AbstractMethodOverrideDefault()
@@ -135,9 +124,10 @@
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.I [INTERFACE]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.I.vtable (struct
- (field $m_bar__void (mut (ref $function.__$void)))
- (field $m_foo__void (mut (ref $function.__$void)))
-))
+ (field $m_bar__void (ref $function.__$void))
+ (field $m_foo__void (ref $function.__$void))
+ )
+)
 
 ;;; void I.bar()
 (func $m_bar__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.I
@@ -180,9 +170,10 @@
 
 ;;; Code for abstractmethodoverridedefault.AbstractMethodOverrideDefault.J [INTERFACE]
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.J.vtable (struct
- (field $m_bar__void (mut (ref $function.__$void)))
- (field $m_foo__void (mut (ref $function.__$void)))
-))
+ (field $m_bar__void (ref $function.__$void))
+ (field $m_foo__void (ref $function.__$void))
+ )
+)
 
 ;;; void J.foo()
 (func $m_foo__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.J
@@ -230,14 +221,14 @@
  (extends $java.lang.Object)
 )
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__void (mut (ref $function.__$void)))
- (field $m_bar__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_foo__void (ref $function.__$void))
+ (field $m_bar__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; A()
@@ -305,14 +296,14 @@
  (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
 )
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__void (mut (ref $function.__$void)))
- (field $m_bar__void (mut (ref $function.__$void))))
- (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_foo__void (ref $function.__$void))
+ (field $m_bar__void (ref $function.__$void))
+ )
+  (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
 )
 
 ;;; B()
@@ -388,14 +379,14 @@
  (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)
 )
 (type $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__void (mut (ref $function.__$void)))
- (field $m_bar__void (mut (ref $function.__$void))))
- (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_foo__void (ref $function.__$void))
+ (field $m_bar__void (ref $function.__$void))
+ )
+  (extends $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
 )
 
 ;;; C()

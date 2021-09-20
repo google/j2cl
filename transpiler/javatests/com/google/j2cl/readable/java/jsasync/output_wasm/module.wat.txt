@@ -1,24 +1,3 @@
-;;; Code for jsasync.Main [vtable]
-(global $jsasync.Main.vtable (mut (ref null $jsasync.Main.vtable)) (ref.null $jsasync.Main.vtable))
-
-;;; Code for jsasync.Main.1 [vtable]
-(global $jsasync.Main.1.vtable (mut (ref null $jsasync.Main.1.vtable)) (ref.null $jsasync.Main.1.vtable))
-
-;;; Code for jsasync.Main.2 [vtable]
-(global $jsasync.Main.2.vtable (mut (ref null $jsasync.Main.2.vtable)) (ref.null $jsasync.Main.2.vtable))
-
-;;; Code for jsasync.Main.3 [vtable]
-(global $jsasync.Main.3.vtable (mut (ref null $jsasync.Main.3.vtable)) (ref.null $jsasync.Main.3.vtable))
-
-;;; Code for jsasync.Main.Promise [vtable]
-(global $jsasync.Main.Promise.vtable (mut (ref null $jsasync.Main.Promise.vtable)) (ref.null $jsasync.Main.Promise.vtable))
-
-;;; Code for jsasync.Main.$LambdaImplementor$1 [vtable]
-(global $jsasync.Main.$LambdaImplementor$1.vtable (mut (ref null $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.null $jsasync.Main.$LambdaImplementor$1.vtable))
-
-;;; Code for jsasync.Main.$LambdaImplementor$2 [vtable]
-(global $jsasync.Main.$LambdaImplementor$2.vtable (mut (ref null $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.null $jsasync.Main.$LambdaImplementor$2.vtable))
-
 ;;; Code for jsasync.Main [static fields]
 (global $f_$initialized__jsasync_Main (mut i32) (i32.const 0))
 
@@ -58,146 +37,147 @@
 ;;; Code for jsasync.Main.$LambdaImplementor$2 [static fields]
 (global $f_$initialized__jsasync_Main_$LambdaImplementor$2 (mut i32) (i32.const 0))
 
- ;;; Code for jsasync.Main [vtable.init]
- (global.set $jsasync.Main.vtable
-  (struct.new_with_rtt $jsasync.Main.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsasync.Main)
-   (ref.func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
-   (ref.func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
-   (ref.func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
-   (ref.func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main)
-   (rtt.canon $jsasync.Main.vtable)
-  )
+;;; Code for jsasync.Main [vtable.init]
+(global $jsasync.Main.vtable (ref $jsasync.Main.vtable) 
+ (struct.new_with_rtt $jsasync.Main.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main)
+  (ref.func $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
+  (ref.func $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
+  (ref.func $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync@jsasync.Main)
+  (ref.func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main)
+  (rtt.canon $jsasync.Main.vtable)
  )
+)
 
- ;;; Code for jsasync.Main [itable.init]
- (global.set $jsasync.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsasync.Main [itable.init]
+(global $jsasync.Main.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsasync.Main.1 [vtable.init]
- (global.set $jsasync.Main.1.vtable
-  (struct.new_with_rtt $jsasync.Main.1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsasync.Main.1)
-   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
-   (rtt.canon $jsasync.Main.1.vtable)
-  )
+;;; Code for jsasync.Main.1 [vtable.init]
+(global $jsasync.Main.1.vtable (ref $jsasync.Main.1.vtable) 
+ (struct.new_with_rtt $jsasync.Main.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.1)
+  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
+  (rtt.canon $jsasync.Main.1.vtable)
  )
+)
 
- ;;; Code for jsasync.Main.1 [itable.init]
- (global.set $jsasync.Main.1.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsasync.Main.1.itable) (i32.const 0)
+;;; Code for jsasync.Main.1 [itable.init]
+(global $jsasync.Main.1.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsasync.Main.BaseInterface.vtable
   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
   (rtt.canon $jsasync.Main.BaseInterface.vtable)
- ))
-
- ;;; Code for jsasync.Main.2 [vtable.init]
- (global.set $jsasync.Main.2.vtable
-  (struct.new_with_rtt $jsasync.Main.2.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsasync.Main.2)
-   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2)
-   (rtt.canon $jsasync.Main.2.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for jsasync.Main.2 [itable.init]
- (global.set $jsasync.Main.2.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsasync.Main.2.itable) (i32.const 0)
+;;; Code for jsasync.Main.2 [vtable.init]
+(global $jsasync.Main.2.vtable (ref $jsasync.Main.2.vtable) 
+ (struct.new_with_rtt $jsasync.Main.2.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.2)
+  (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2)
+  (rtt.canon $jsasync.Main.2.vtable)
+ )
+)
+
+;;; Code for jsasync.Main.2 [itable.init]
+(global $jsasync.Main.2.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsasync.Main.JsFunctionInterface.vtable
   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.2)
   (rtt.canon $jsasync.Main.JsFunctionInterface.vtable)
- ))
-
- ;;; Code for jsasync.Main.3 [vtable.init]
- (global.set $jsasync.Main.3.vtable
-  (struct.new_with_rtt $jsasync.Main.3.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsasync.Main.3)
-   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3)
-   (rtt.canon $jsasync.Main.3.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for jsasync.Main.3 [itable.init]
- (global.set $jsasync.Main.3.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsasync.Main.3.itable) (i32.const 0)
+;;; Code for jsasync.Main.3 [vtable.init]
+(global $jsasync.Main.3.vtable (ref $jsasync.Main.3.vtable) 
+ (struct.new_with_rtt $jsasync.Main.3.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.3)
+  (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3)
+  (rtt.canon $jsasync.Main.3.vtable)
+ )
+)
+
+;;; Code for jsasync.Main.3 [itable.init]
+(global $jsasync.Main.3.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsasync.Main.JsFunctionInterface.vtable
   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3)
   (rtt.canon $jsasync.Main.JsFunctionInterface.vtable)
- ))
-
- ;;; Code for jsasync.Main.Promise [vtable.init]
- (global.set $jsasync.Main.Promise.vtable
-  (struct.new_with_rtt $jsasync.Main.Promise.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsasync.Main.Promise)
-   (rtt.canon $jsasync.Main.Promise.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for jsasync.Main.Promise [itable.init]
- (global.set $jsasync.Main.Promise.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsasync.Main.Promise.itable) (i32.const 0)
+;;; Code for jsasync.Main.Promise [vtable.init]
+(global $jsasync.Main.Promise.vtable (ref $jsasync.Main.Promise.vtable) 
+ (struct.new_with_rtt $jsasync.Main.Promise.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.Promise)
+  (rtt.canon $jsasync.Main.Promise.vtable)
+ )
+)
+
+;;; Code for jsasync.Main.Promise [itable.init]
+(global $jsasync.Main.Promise.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsasync.Main.IThenable.vtable
+  (ref.null data)
   (rtt.canon $jsasync.Main.IThenable.vtable)
- ))
-
- ;;; Code for jsasync.Main.$LambdaImplementor$1 [vtable.init]
- (global.set $jsasync.Main.$LambdaImplementor$1.vtable
-  (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1)
-   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
-   (rtt.canon $jsasync.Main.$LambdaImplementor$1.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for jsasync.Main.$LambdaImplementor$1 [itable.init]
- (global.set $jsasync.Main.$LambdaImplementor$1.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $jsasync.Main.$LambdaImplementor$1.itable) (i32.const 1)
- (struct.new_with_rtt $jsasync.Main.AsyncInterface.vtable
+;;; Code for jsasync.Main.$LambdaImplementor$1 [vtable.init]
+(global $jsasync.Main.$LambdaImplementor$1.vtable (ref $jsasync.Main.$LambdaImplementor$1.vtable) 
+ (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1)
   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
-  (rtt.canon $jsasync.Main.AsyncInterface.vtable)
- ))
- (array.set $itable (global.get $jsasync.Main.$LambdaImplementor$1.itable) (i32.const 0)
+  (rtt.canon $jsasync.Main.$LambdaImplementor$1.vtable)
+ )
+)
+
+;;; Code for jsasync.Main.$LambdaImplementor$1 [itable.init]
+(global $jsasync.Main.$LambdaImplementor$1.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsasync.Main.BaseInterface.vtable
   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
   (rtt.canon $jsasync.Main.BaseInterface.vtable)
- ))
-
- ;;; Code for jsasync.Main.$LambdaImplementor$2 [vtable.init]
- (global.set $jsasync.Main.$LambdaImplementor$2.vtable
-  (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2)
-   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
-   (rtt.canon $jsasync.Main.$LambdaImplementor$2.vtable)
-  )
  )
+ (struct.new_with_rtt $jsasync.Main.AsyncInterface.vtable
+  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
+  (rtt.canon $jsasync.Main.AsyncInterface.vtable)
+ )
+ (rtt.canon $itable)))
 
- ;;; Code for jsasync.Main.$LambdaImplementor$2 [itable.init]
- (global.set $jsasync.Main.$LambdaImplementor$2.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsasync.Main.$LambdaImplementor$2.itable) (i32.const 0)
+;;; Code for jsasync.Main.$LambdaImplementor$2 [vtable.init]
+(global $jsasync.Main.$LambdaImplementor$2.vtable (ref $jsasync.Main.$LambdaImplementor$2.vtable) 
+ (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2)
+  (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
+  (rtt.canon $jsasync.Main.$LambdaImplementor$2.vtable)
+ )
+)
+
+;;; Code for jsasync.Main.$LambdaImplementor$2 [itable.init]
+(global $jsasync.Main.$LambdaImplementor$2.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsasync.Main.AsyncJsFunctionInterface.vtable
   (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
   (rtt.canon $jsasync.Main.AsyncJsFunctionInterface.vtable)
- ))
+ )
+ (rtt.canon $itable)))
 
 ;;; Code for jsasync.Main [CLASS]
 (type $jsasync.Main (struct
@@ -207,16 +187,16 @@
  (extends $java.lang.Object)
 )
 (type $jsasync.Main.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync (mut (ref $function.__$java.lang.Object)))
- (field $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync (mut (ref $function.__$java.lang.Object)))
- (field $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (mut (ref $function.$java.lang.Object__$java.lang.Object)))
- (field $m_testAsyncLambdas__void_$pp_jsasync (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_emptyAsyncMethod__jsasync_Main_IThenable_$pp_jsasync (ref $function.__$java.lang.Object))
+ (field $m_asyncMethod__jsasync_Main_IThenable_$pp_jsasync (ref $function.__$java.lang.Object))
+ (field $m_parametricAsyncMethod__java_lang_Object__jsasync_Main_IThenable_$pp_jsasync (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_testAsyncLambdas__void_$pp_jsasync (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Main()
@@ -404,13 +384,13 @@
  (extends $java.lang.Object)
 )
 (type $jsasync.Main.1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_asyncCall__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_asyncCall__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; <anonymous> implements BaseInterface(Main $outer_this)
@@ -495,13 +475,13 @@
  (extends $java.lang.Object)
 )
 (type $jsasync.Main.2.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_doSomething__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
@@ -586,13 +566,13 @@
  (extends $java.lang.Object)
 )
 (type $jsasync.Main.3.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_doSomething__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
@@ -675,8 +655,9 @@
 
 ;;; Code for jsasync.Main.BaseInterface [INTERFACE]
 (type $jsasync.Main.BaseInterface.vtable (struct
- (field $m_asyncCall__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_asyncCall__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+)
 
 ;;; void BaseInterface.$clinit()
 (func $$clinit__void@jsasync.Main.BaseInterface
@@ -710,8 +691,9 @@
 
 ;;; Code for jsasync.Main.AsyncInterface [INTERFACE]
 (type $jsasync.Main.AsyncInterface.vtable (struct
- (field $m_asyncCall__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_asyncCall__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+)
 
 ;;; void AsyncInterface.$clinit()
 (func $$clinit__void@jsasync.Main.AsyncInterface
@@ -745,8 +727,9 @@
 
 ;;; Code for jsasync.Main.InterfaceWithAsyncDefaultMethod [INTERFACE]
 (type $jsasync.Main.InterfaceWithAsyncDefaultMethod.vtable (struct
- (field $m_asyncCall__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_asyncCall__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+)
 
 ;;; IThenable<Integer> InterfaceWithAsyncDefaultMethod.asyncCall()
 (func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod
@@ -793,8 +776,9 @@
 
 ;;; Code for jsasync.Main.JsFunctionInterface [INTERFACE]
 (type $jsasync.Main.JsFunctionInterface.vtable (struct
- (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_doSomething__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+)
 
 ;;; void JsFunctionInterface.$clinit()
 (func $$clinit__void@jsasync.Main.JsFunctionInterface
@@ -828,8 +812,9 @@
 
 ;;; Code for jsasync.Main.AsyncJsFunctionInterface [INTERFACE]
 (type $jsasync.Main.AsyncJsFunctionInterface.vtable (struct
- (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object)))
-))
+ (field $m_doSomething__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+)
 
 ;;; void AsyncJsFunctionInterface.$clinit()
 (func $$clinit__void@jsasync.Main.AsyncJsFunctionInterface
@@ -862,8 +847,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsasync.Main.AsyncJsFunctionInterface)
 
 ;;; Code for jsasync.Main.IThenable [INTERFACE]
-(type $jsasync.Main.IThenable.vtable (struct
-))
+(type $jsasync.Main.IThenable.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void IThenable.$clinit()
 (func $$clinit__void@jsasync.Main.IThenable
@@ -902,12 +888,12 @@
  (extends $java.lang.Object)
 )
 (type $jsasync.Main.Promise.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Promise()
@@ -977,13 +963,13 @@
  (extends $java.lang.Object)
 )
 (type $jsasync.Main.$LambdaImplementor$1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_asyncCall__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_asyncCall__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; $LambdaImplementor$1()
@@ -1063,13 +1049,13 @@
  (extends $java.lang.Object)
 )
 (type $jsasync.Main.$LambdaImplementor$2.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_doSomething__jsasync_Main_IThenable (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_doSomething__jsasync_Main_IThenable (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; $LambdaImplementor$2()

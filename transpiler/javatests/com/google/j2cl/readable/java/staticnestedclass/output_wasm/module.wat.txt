@@ -1,42 +1,38 @@
-;;; Code for staticnestedclass.StaticNestedClassParent [vtable]
-(global $staticnestedclass.StaticNestedClassParent.vtable (mut (ref null $staticnestedclass.StaticNestedClassParent.vtable)) (ref.null $staticnestedclass.StaticNestedClassParent.vtable))
-
-;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [vtable]
-(global $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (mut (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.null $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable))
-
 ;;; Code for staticnestedclass.StaticNestedClassParent [static fields]
 (global $f_$initialized__staticnestedclass_StaticNestedClassParent (mut i32) (i32.const 0))
 
 ;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [static fields]
 (global $f_$initialized__staticnestedclass_StaticNestedClassParent_StaticNestedClass (mut i32) (i32.const 0))
 
- ;;; Code for staticnestedclass.StaticNestedClassParent [vtable.init]
- (global.set $staticnestedclass.StaticNestedClassParent.vtable
-  (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent)
-   (rtt.canon $staticnestedclass.StaticNestedClassParent.vtable)
-  )
+;;; Code for staticnestedclass.StaticNestedClassParent [vtable.init]
+(global $staticnestedclass.StaticNestedClassParent.vtable (ref $staticnestedclass.StaticNestedClassParent.vtable) 
+ (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent)
+  (rtt.canon $staticnestedclass.StaticNestedClassParent.vtable)
  )
+)
 
- ;;; Code for staticnestedclass.StaticNestedClassParent [itable.init]
- (global.set $staticnestedclass.StaticNestedClassParent.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for staticnestedclass.StaticNestedClassParent [itable.init]
+(global $staticnestedclass.StaticNestedClassParent.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [vtable.init]
- (global.set $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable
-  (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
-   (rtt.canon $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)
-  )
+;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [vtable.init]
+(global $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable) 
+ (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent.StaticNestedClass)
+  (rtt.canon $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)
  )
+)
 
- ;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [itable.init]
- (global.set $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [itable.init]
+(global $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for staticnestedclass.StaticNestedClassParent [CLASS]
 (type $staticnestedclass.StaticNestedClassParent (struct
@@ -45,12 +41,12 @@
  (extends $java.lang.Object)
 )
 (type $staticnestedclass.StaticNestedClassParent.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; StaticNestedClassParent()
@@ -114,12 +110,12 @@
  (extends $java.lang.Object)
 )
 (type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; StaticNestedClass()

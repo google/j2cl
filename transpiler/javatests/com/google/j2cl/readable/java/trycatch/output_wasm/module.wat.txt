@@ -1,9 +1,3 @@
-;;; Code for trycatch.TryCatch [vtable]
-(global $trycatch.TryCatch.vtable (mut (ref null $trycatch.TryCatch.vtable)) (ref.null $trycatch.TryCatch.vtable))
-
-;;; Code for trycatch.TryCatch.ClosableThing [vtable]
-(global $trycatch.TryCatch.ClosableThing.vtable (mut (ref null $trycatch.TryCatch.ClosableThing.vtable)) (ref.null $trycatch.TryCatch.ClosableThing.vtable))
-
 ;;; Code for trycatch.TryCatch [static fields]
 (global $f_closableThing__trycatch_TryCatch_ (mut (ref null $trycatch.TryCatch.ClosableThing)) (ref.null $trycatch.TryCatch.ClosableThing))
 (global $f_$initialized__trycatch_TryCatch (mut i32) (i32.const 0))
@@ -11,49 +5,50 @@
 ;;; Code for trycatch.TryCatch.ClosableThing [static fields]
 (global $f_$initialized__trycatch_TryCatch_ClosableThing (mut i32) (i32.const 0))
 
- ;;; Code for trycatch.TryCatch [vtable.init]
- (global.set $trycatch.TryCatch.vtable
-  (struct.new_with_rtt $trycatch.TryCatch.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@trycatch.TryCatch)
-   (ref.func $m_testMultiCatch__void@trycatch.TryCatch)
-   (ref.func $m_testEmptyThrowableCatch__void@trycatch.TryCatch)
-   (ref.func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch)
-   (ref.func $m_testFinally__void@trycatch.TryCatch)
-   (ref.func $m_testTryWithResource__void@trycatch.TryCatch)
-   (ref.func $m_testTryWithResourceJava9__void@trycatch.TryCatch)
-   (ref.func $m_testTryWithResouceOnStaticField__void@trycatch.TryCatch)
-   (ref.func $m_testNestedTryCatch__void@trycatch.TryCatch)
-   (ref.func $m_testThrowGenerics__void@trycatch.TryCatch)
-   (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
-   (rtt.canon $trycatch.TryCatch.vtable)
-  )
+;;; Code for trycatch.TryCatch [vtable.init]
+(global $trycatch.TryCatch.vtable (ref $trycatch.TryCatch.vtable) 
+ (struct.new_with_rtt $trycatch.TryCatch.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@trycatch.TryCatch)
+  (ref.func $m_testMultiCatch__void@trycatch.TryCatch)
+  (ref.func $m_testEmptyThrowableCatch__void@trycatch.TryCatch)
+  (ref.func $m_testEmptyThrowableRethrow__void@trycatch.TryCatch)
+  (ref.func $m_testFinally__void@trycatch.TryCatch)
+  (ref.func $m_testTryWithResource__void@trycatch.TryCatch)
+  (ref.func $m_testTryWithResourceJava9__void@trycatch.TryCatch)
+  (ref.func $m_testTryWithResouceOnStaticField__void@trycatch.TryCatch)
+  (ref.func $m_testNestedTryCatch__void@trycatch.TryCatch)
+  (ref.func $m_testThrowGenerics__void@trycatch.TryCatch)
+  (ref.func $m_testThrowBoundGenerics__void@trycatch.TryCatch)
+  (rtt.canon $trycatch.TryCatch.vtable)
  )
+)
 
- ;;; Code for trycatch.TryCatch [itable.init]
- (global.set $trycatch.TryCatch.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for trycatch.TryCatch [itable.init]
+(global $trycatch.TryCatch.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for trycatch.TryCatch.ClosableThing [vtable.init]
- (global.set $trycatch.TryCatch.ClosableThing.vtable
-  (struct.new_with_rtt $trycatch.TryCatch.ClosableThing.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@trycatch.TryCatch.ClosableThing)
-   (ref.func $m_close__void@trycatch.TryCatch.ClosableThing)
-   (rtt.canon $trycatch.TryCatch.ClosableThing.vtable)
-  )
+;;; Code for trycatch.TryCatch.ClosableThing [vtable.init]
+(global $trycatch.TryCatch.ClosableThing.vtable (ref $trycatch.TryCatch.ClosableThing.vtable) 
+ (struct.new_with_rtt $trycatch.TryCatch.ClosableThing.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@trycatch.TryCatch.ClosableThing)
+  (ref.func $m_close__void@trycatch.TryCatch.ClosableThing)
+  (rtt.canon $trycatch.TryCatch.ClosableThing.vtable)
  )
+)
 
- ;;; Code for trycatch.TryCatch.ClosableThing [itable.init]
- (global.set $trycatch.TryCatch.ClosableThing.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $trycatch.TryCatch.ClosableThing.itable) (i32.const 0)
+;;; Code for trycatch.TryCatch.ClosableThing [itable.init]
+(global $trycatch.TryCatch.ClosableThing.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $java.lang.AutoCloseable.vtable
   (ref.func $m_close__void@trycatch.TryCatch.ClosableThing)
   (rtt.canon $java.lang.AutoCloseable.vtable)
- ))
+ )
+ (rtt.canon $itable)))
 
 ;;; Code for trycatch.TryCatch [CLASS]
 (type $trycatch.TryCatch (struct
@@ -62,22 +57,22 @@
  (extends $java.lang.Object)
 )
 (type $trycatch.TryCatch.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_testMultiCatch__void (mut (ref $function.__$void)))
- (field $m_testEmptyThrowableCatch__void (mut (ref $function.__$void)))
- (field $m_testEmptyThrowableRethrow__void (mut (ref $function.__$void)))
- (field $m_testFinally__void (mut (ref $function.__$void)))
- (field $m_testTryWithResource__void (mut (ref $function.__$void)))
- (field $m_testTryWithResourceJava9__void (mut (ref $function.__$void)))
- (field $m_testTryWithResouceOnStaticField__void (mut (ref $function.__$void)))
- (field $m_testNestedTryCatch__void (mut (ref $function.__$void)))
- (field $m_testThrowGenerics__void (mut (ref $function.__$void)))
- (field $m_testThrowBoundGenerics__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_testMultiCatch__void (ref $function.__$void))
+ (field $m_testEmptyThrowableCatch__void (ref $function.__$void))
+ (field $m_testEmptyThrowableRethrow__void (ref $function.__$void))
+ (field $m_testFinally__void (ref $function.__$void))
+ (field $m_testTryWithResource__void (ref $function.__$void))
+ (field $m_testTryWithResourceJava9__void (ref $function.__$void))
+ (field $m_testTryWithResouceOnStaticField__void (ref $function.__$void))
+ (field $m_testNestedTryCatch__void (ref $function.__$void))
+ (field $m_testThrowGenerics__void (ref $function.__$void))
+ (field $m_testThrowBoundGenerics__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; TryCatch()
@@ -745,13 +740,13 @@
  (extends $java.lang.Object)
 )
 (type $trycatch.TryCatch.ClosableThing.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_close__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_close__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; ClosableThing()

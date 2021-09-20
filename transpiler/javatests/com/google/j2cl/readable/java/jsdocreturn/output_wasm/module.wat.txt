@@ -1,24 +1,22 @@
-;;; Code for jsdocreturn.JsDocReturn [vtable]
-(global $jsdocreturn.JsDocReturn.vtable (mut (ref null $jsdocreturn.JsDocReturn.vtable)) (ref.null $jsdocreturn.JsDocReturn.vtable))
-
 ;;; Code for jsdocreturn.JsDocReturn [static fields]
 (global $f_$initialized__jsdocreturn_JsDocReturn (mut i32) (i32.const 0))
 
- ;;; Code for jsdocreturn.JsDocReturn [vtable.init]
- (global.set $jsdocreturn.JsDocReturn.vtable
-  (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn)
-   (ref.func $m_test1__void@jsdocreturn.JsDocReturn)
-   (ref.func $m_test2__int@jsdocreturn.JsDocReturn)
-   (rtt.canon $jsdocreturn.JsDocReturn.vtable)
-  )
+;;; Code for jsdocreturn.JsDocReturn [vtable.init]
+(global $jsdocreturn.JsDocReturn.vtable (ref $jsdocreturn.JsDocReturn.vtable) 
+ (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn)
+  (ref.func $m_test1__void@jsdocreturn.JsDocReturn)
+  (ref.func $m_test2__int@jsdocreturn.JsDocReturn)
+  (rtt.canon $jsdocreturn.JsDocReturn.vtable)
  )
+)
 
- ;;; Code for jsdocreturn.JsDocReturn [itable.init]
- (global.set $jsdocreturn.JsDocReturn.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsdocreturn.JsDocReturn [itable.init]
+(global $jsdocreturn.JsDocReturn.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for jsdocreturn.JsDocReturn [CLASS]
 (type $jsdocreturn.JsDocReturn (struct
@@ -27,14 +25,14 @@
  (extends $java.lang.Object)
 )
 (type $jsdocreturn.JsDocReturn.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test1__void (mut (ref $function.__$void)))
- (field $m_test2__int (mut (ref $function.__$int))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_test1__void (ref $function.__$void))
+ (field $m_test2__int (ref $function.__$int))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; JsDocReturn()

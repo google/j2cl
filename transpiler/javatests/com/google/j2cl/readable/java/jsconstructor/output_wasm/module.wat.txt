@@ -1,45 +1,3 @@
-;;; Code for jsconstructor.JsConstructorClass [vtable]
-(global $jsconstructor.JsConstructorClass.vtable (mut (ref null $jsconstructor.JsConstructorClass.vtable)) (ref.null $jsconstructor.JsConstructorClass.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.A [vtable]
-(global $jsconstructor.JsConstructorClass.A.vtable (mut (ref null $jsconstructor.JsConstructorClass.A.vtable)) (ref.null $jsconstructor.JsConstructorClass.A.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.B [vtable]
-(global $jsconstructor.JsConstructorClass.B.vtable (mut (ref null $jsconstructor.JsConstructorClass.B.vtable)) (ref.null $jsconstructor.JsConstructorClass.B.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.C [vtable]
-(global $jsconstructor.JsConstructorClass.C.vtable (mut (ref null $jsconstructor.JsConstructorClass.C.vtable)) (ref.null $jsconstructor.JsConstructorClass.C.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.D [vtable]
-(global $jsconstructor.JsConstructorClass.D.vtable (mut (ref null $jsconstructor.JsConstructorClass.D.vtable)) (ref.null $jsconstructor.JsConstructorClass.D.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.E [vtable]
-(global $jsconstructor.JsConstructorClass.E.vtable (mut (ref null $jsconstructor.JsConstructorClass.E.vtable)) (ref.null $jsconstructor.JsConstructorClass.E.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.F [vtable]
-(global $jsconstructor.JsConstructorClass.F.vtable (mut (ref null $jsconstructor.JsConstructorClass.F.vtable)) (ref.null $jsconstructor.JsConstructorClass.F.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.G [vtable]
-(global $jsconstructor.JsConstructorClass.G.vtable (mut (ref null $jsconstructor.JsConstructorClass.G.vtable)) (ref.null $jsconstructor.JsConstructorClass.G.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.H [vtable]
-(global $jsconstructor.JsConstructorClass.H.vtable (mut (ref null $jsconstructor.JsConstructorClass.H.vtable)) (ref.null $jsconstructor.JsConstructorClass.H.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.Varargs [vtable]
-(global $jsconstructor.JsConstructorClass.Varargs.vtable (mut (ref null $jsconstructor.JsConstructorClass.Varargs.vtable)) (ref.null $jsconstructor.JsConstructorClass.Varargs.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.SubVarargs [vtable]
-(global $jsconstructor.JsConstructorClass.SubVarargs.vtable (mut (ref null $jsconstructor.JsConstructorClass.SubVarargs.vtable)) (ref.null $jsconstructor.JsConstructorClass.SubVarargs.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.InstanceVarargs [vtable]
-(global $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (mut (ref null $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)) (ref.null $jsconstructor.JsConstructorClass.InstanceVarargs.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.RegularType [vtable]
-(global $jsconstructor.JsConstructorClass.RegularType.vtable (mut (ref null $jsconstructor.JsConstructorClass.RegularType.vtable)) (ref.null $jsconstructor.JsConstructorClass.RegularType.vtable))
-
-;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [vtable]
-(global $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable (mut (ref null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)) (ref.null $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable))
-
 ;;; Code for jsconstructor.JsConstructorClass [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass (mut i32) (i32.const 0))
 
@@ -82,201 +40,215 @@
 ;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [static fields]
 (global $f_$initialized__jsconstructor_JsConstructorClass_JsConstructorSubtypeOfRegularType (mut i32) (i32.const 0))
 
- ;;; Code for jsconstructor.JsConstructorClass [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass)
-   (rtt.canon $jsconstructor.JsConstructorClass.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass [vtable.init]
+(global $jsconstructor.JsConstructorClass.vtable (ref $jsconstructor.JsConstructorClass.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass)
+  (rtt.canon $jsconstructor.JsConstructorClass.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass [itable.init]
- (global.set $jsconstructor.JsConstructorClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass [itable.init]
+(global $jsconstructor.JsConstructorClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.A [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.A.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.A.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.A)
-   (rtt.canon $jsconstructor.JsConstructorClass.A.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.A [vtable.init]
+(global $jsconstructor.JsConstructorClass.A.vtable (ref $jsconstructor.JsConstructorClass.A.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.A.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.A)
+  (rtt.canon $jsconstructor.JsConstructorClass.A.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.A [itable.init]
- (global.set $jsconstructor.JsConstructorClass.A.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.A [itable.init]
+(global $jsconstructor.JsConstructorClass.A.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.B [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.B.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.B.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.B)
-   (rtt.canon $jsconstructor.JsConstructorClass.B.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.B [vtable.init]
+(global $jsconstructor.JsConstructorClass.B.vtable (ref $jsconstructor.JsConstructorClass.B.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.B.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.B)
+  (rtt.canon $jsconstructor.JsConstructorClass.B.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.B [itable.init]
- (global.set $jsconstructor.JsConstructorClass.B.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.B [itable.init]
+(global $jsconstructor.JsConstructorClass.B.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.C [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.C.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.C.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.C)
-   (rtt.canon $jsconstructor.JsConstructorClass.C.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.C [vtable.init]
+(global $jsconstructor.JsConstructorClass.C.vtable (ref $jsconstructor.JsConstructorClass.C.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.C.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.C)
+  (rtt.canon $jsconstructor.JsConstructorClass.C.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.C [itable.init]
- (global.set $jsconstructor.JsConstructorClass.C.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.C [itable.init]
+(global $jsconstructor.JsConstructorClass.C.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.D [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.D.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.D.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.D)
-   (rtt.canon $jsconstructor.JsConstructorClass.D.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.D [vtable.init]
+(global $jsconstructor.JsConstructorClass.D.vtable (ref $jsconstructor.JsConstructorClass.D.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.D.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.D)
+  (rtt.canon $jsconstructor.JsConstructorClass.D.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.D [itable.init]
- (global.set $jsconstructor.JsConstructorClass.D.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.D [itable.init]
+(global $jsconstructor.JsConstructorClass.D.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.E [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.E.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.E.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.E)
-   (rtt.canon $jsconstructor.JsConstructorClass.E.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.E [vtable.init]
+(global $jsconstructor.JsConstructorClass.E.vtable (ref $jsconstructor.JsConstructorClass.E.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.E.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.E)
+  (rtt.canon $jsconstructor.JsConstructorClass.E.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.E [itable.init]
- (global.set $jsconstructor.JsConstructorClass.E.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.E [itable.init]
+(global $jsconstructor.JsConstructorClass.E.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.F [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.F.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.F.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.F)
-   (rtt.canon $jsconstructor.JsConstructorClass.F.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.F [vtable.init]
+(global $jsconstructor.JsConstructorClass.F.vtable (ref $jsconstructor.JsConstructorClass.F.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.F.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.F)
+  (rtt.canon $jsconstructor.JsConstructorClass.F.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.F [itable.init]
- (global.set $jsconstructor.JsConstructorClass.F.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.F [itable.init]
+(global $jsconstructor.JsConstructorClass.F.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.G [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.G.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.G.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.G)
-   (rtt.canon $jsconstructor.JsConstructorClass.G.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.G [vtable.init]
+(global $jsconstructor.JsConstructorClass.G.vtable (ref $jsconstructor.JsConstructorClass.G.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.G.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.G)
+  (rtt.canon $jsconstructor.JsConstructorClass.G.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.G [itable.init]
- (global.set $jsconstructor.JsConstructorClass.G.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.G [itable.init]
+(global $jsconstructor.JsConstructorClass.G.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.H [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.H.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.H.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.H)
-   (rtt.canon $jsconstructor.JsConstructorClass.H.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.H [vtable.init]
+(global $jsconstructor.JsConstructorClass.H.vtable (ref $jsconstructor.JsConstructorClass.H.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.H.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.H)
+  (rtt.canon $jsconstructor.JsConstructorClass.H.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.H [itable.init]
- (global.set $jsconstructor.JsConstructorClass.H.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.H [itable.init]
+(global $jsconstructor.JsConstructorClass.H.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.Varargs [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.Varargs.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.Varargs.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.Varargs)
-   (rtt.canon $jsconstructor.JsConstructorClass.Varargs.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.Varargs [vtable.init]
+(global $jsconstructor.JsConstructorClass.Varargs.vtable (ref $jsconstructor.JsConstructorClass.Varargs.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.Varargs.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.Varargs)
+  (rtt.canon $jsconstructor.JsConstructorClass.Varargs.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.Varargs [itable.init]
- (global.set $jsconstructor.JsConstructorClass.Varargs.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.Varargs [itable.init]
+(global $jsconstructor.JsConstructorClass.Varargs.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.SubVarargs [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.SubVarargs.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs)
-   (rtt.canon $jsconstructor.JsConstructorClass.SubVarargs.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.SubVarargs [vtable.init]
+(global $jsconstructor.JsConstructorClass.SubVarargs.vtable (ref $jsconstructor.JsConstructorClass.SubVarargs.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.SubVarargs.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.SubVarargs)
+  (rtt.canon $jsconstructor.JsConstructorClass.SubVarargs.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.SubVarargs [itable.init]
- (global.set $jsconstructor.JsConstructorClass.SubVarargs.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.SubVarargs [itable.init]
+(global $jsconstructor.JsConstructorClass.SubVarargs.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.InstanceVarargs [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.InstanceVarargs.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.InstanceVarargs.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs)
-   (rtt.canon $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.InstanceVarargs [vtable.init]
+(global $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (ref $jsconstructor.JsConstructorClass.InstanceVarargs.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.InstanceVarargs.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.InstanceVarargs)
+  (rtt.canon $jsconstructor.JsConstructorClass.InstanceVarargs.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.InstanceVarargs [itable.init]
- (global.set $jsconstructor.JsConstructorClass.InstanceVarargs.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.InstanceVarargs [itable.init]
+(global $jsconstructor.JsConstructorClass.InstanceVarargs.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.RegularType [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.RegularType.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.RegularType.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.RegularType)
-   (rtt.canon $jsconstructor.JsConstructorClass.RegularType.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.RegularType [vtable.init]
+(global $jsconstructor.JsConstructorClass.RegularType.vtable (ref $jsconstructor.JsConstructorClass.RegularType.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.RegularType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.RegularType)
+  (rtt.canon $jsconstructor.JsConstructorClass.RegularType.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.RegularType [itable.init]
- (global.set $jsconstructor.JsConstructorClass.RegularType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.RegularType [itable.init]
+(global $jsconstructor.JsConstructorClass.RegularType.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [vtable.init]
- (global.set $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable
-  (struct.new_with_rtt $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType)
-   (rtt.canon $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)
-  )
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [vtable.init]
+(global $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable (ref $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable) 
+ (struct.new_with_rtt $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType)
+  (rtt.canon $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable)
  )
+)
 
- ;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [itable.init]
- (global.set $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType [itable.init]
+(global $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for jsconstructor.JsConstructorClass [CLASS]
 (type $jsconstructor.JsConstructorClass (struct
@@ -285,12 +257,12 @@
  (extends $java.lang.Object)
 )
 (type $jsconstructor.JsConstructorClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; JsConstructorClass()
@@ -355,12 +327,12 @@
  (extends $java.lang.Object)
 )
 (type $jsconstructor.JsConstructorClass.A.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; A(int x)
@@ -465,12 +437,12 @@
  (extends $jsconstructor.JsConstructorClass.A)
 )
 (type $jsconstructor.JsConstructorClass.B.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.A.vtable)
 )
 
 ;;; B(int x)
@@ -599,12 +571,12 @@
  (extends $jsconstructor.JsConstructorClass.B)
 )
 (type $jsconstructor.JsConstructorClass.C.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.B.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.B.vtable)
 )
 
 ;;; C(int x)
@@ -712,12 +684,12 @@
  (extends $jsconstructor.JsConstructorClass.B)
 )
 (type $jsconstructor.JsConstructorClass.D.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.B.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.B.vtable)
 )
 
 ;;; D()
@@ -824,12 +796,12 @@
  (extends $jsconstructor.JsConstructorClass.C)
 )
 (type $jsconstructor.JsConstructorClass.E.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.C.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.C.vtable)
 )
 
 ;;; E()
@@ -914,12 +886,12 @@
  (extends $jsconstructor.JsConstructorClass.C)
 )
 (type $jsconstructor.JsConstructorClass.F.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.C.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.C.vtable)
 )
 
 ;;; F(int x)
@@ -1001,12 +973,12 @@
  (extends $java.lang.Object)
 )
 (type $jsconstructor.JsConstructorClass.G.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; G()
@@ -1070,12 +1042,12 @@
  (extends $jsconstructor.JsConstructorClass.G)
 )
 (type $jsconstructor.JsConstructorClass.H.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.G.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.G.vtable)
 )
 
 ;;; H()
@@ -1140,12 +1112,12 @@
  (extends $jsconstructor.JsConstructorClass.A)
 )
 (type $jsconstructor.JsConstructorClass.Varargs.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.A.vtable)
 )
 
 ;;; Varargs(int... args)
@@ -1211,12 +1183,12 @@
  (extends $jsconstructor.JsConstructorClass.Varargs)
 )
 (type $jsconstructor.JsConstructorClass.SubVarargs.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.Varargs.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.Varargs.vtable)
 )
 
 ;;; SubVarargs(Object i, int... args)
@@ -1333,12 +1305,12 @@
  (extends $jsconstructor.JsConstructorClass.A)
 )
 (type $jsconstructor.JsConstructorClass.InstanceVarargs.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.A.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.A.vtable)
 )
 
 ;;; InstanceVarargs(JsConstructorClass $outer_this, int... args)
@@ -1407,12 +1379,12 @@
  (extends $java.lang.Object)
 )
 (type $jsconstructor.JsConstructorClass.RegularType.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; RegularType(Object b)
@@ -1477,12 +1449,12 @@
  (extends $jsconstructor.JsConstructorClass.RegularType)
 )
 (type $jsconstructor.JsConstructorClass.JsConstructorSubtypeOfRegularType.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsconstructor.JsConstructorClass.RegularType.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsconstructor.JsConstructorClass.RegularType.vtable)
 )
 
 ;;; JsConstructorSubtypeOfRegularType(Object object)

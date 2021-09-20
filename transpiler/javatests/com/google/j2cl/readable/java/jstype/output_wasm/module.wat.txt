@@ -1,6 +1,3 @@
-;;; Code for jstype.SomeJsType [vtable]
-(global $jstype.SomeJsType.vtable (mut (ref null $jstype.SomeJsType.vtable)) (ref.null $jstype.SomeJsType.vtable))
-
 ;;; Code for jstype.SomeJsType [static fields]
 (global $f_$initialized__jstype_SomeJsType (mut i32) (i32.const 0))
 
@@ -10,24 +7,25 @@
 ;;; Code for jstype.SomeJsType.Wildcard [static fields]
 (global $f_$initialized__jstype_SomeJsType_Wildcard (mut i32) (i32.const 0))
 
- ;;; Code for jstype.SomeJsType [vtable.init]
- (global.set $jstype.SomeJsType.vtable
-  (struct.new_with_rtt $jstype.SomeJsType.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jstype.SomeJsType)
-   (ref.func $m_publicMethod__void@jstype.SomeJsType)
-   (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
-   (ref.func $m_protectedMethod__void@jstype.SomeJsType)
-   (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
-   (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
-   (rtt.canon $jstype.SomeJsType.vtable)
-  )
+;;; Code for jstype.SomeJsType [vtable.init]
+(global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable) 
+ (struct.new_with_rtt $jstype.SomeJsType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jstype.SomeJsType)
+  (ref.func $m_publicMethod__void@jstype.SomeJsType)
+  (ref.func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType)
+  (ref.func $m_protectedMethod__void@jstype.SomeJsType)
+  (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
+  (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
+  (rtt.canon $jstype.SomeJsType.vtable)
  )
+)
 
- ;;; Code for jstype.SomeJsType [itable.init]
- (global.set $jstype.SomeJsType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jstype.SomeJsType [itable.init]
+(global $jstype.SomeJsType.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for jstype.SomeJsType [CLASS]
 (type $jstype.SomeJsType (struct
@@ -40,17 +38,17 @@
  (extends $java.lang.Object)
 )
 (type $jstype.SomeJsType.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_publicMethod__void (mut (ref $function.__$void)))
- (field $m_packageMethod__void_$pp_jstype (mut (ref $function.__$void)))
- (field $m_protectedMethod__void (mut (ref $function.__$void)))
- (field $m_useFieldsAndMethods__void (mut (ref $function.__$void)))
- (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (mut (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_publicMethod__void (ref $function.__$void))
+ (field $m_packageMethod__void_$pp_jstype (ref $function.__$void))
+ (field $m_protectedMethod__void (ref $function.__$void))
+ (field $m_useFieldsAndMethods__void (ref $function.__$void))
+ (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; SomeJsType()
@@ -206,8 +204,9 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType)
 
 ;;; Code for jstype.SomeJsType.Star [INTERFACE]
-(type $jstype.SomeJsType.Star.vtable (struct
-))
+(type $jstype.SomeJsType.Star.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void Star.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Star
@@ -240,8 +239,9 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Star)
 
 ;;; Code for jstype.SomeJsType.Wildcard [INTERFACE]
-(type $jstype.SomeJsType.Wildcard.vtable (struct
-))
+(type $jstype.SomeJsType.Wildcard.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void Wildcard.$clinit()
 (func $$clinit__void@jstype.SomeJsType.Wildcard

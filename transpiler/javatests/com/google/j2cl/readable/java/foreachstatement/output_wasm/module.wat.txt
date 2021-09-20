@@ -1,15 +1,3 @@
-;;; Code for foreachstatement.ForEachStatement [vtable]
-(global $foreachstatement.ForEachStatement.vtable (mut (ref null $foreachstatement.ForEachStatement.vtable)) (ref.null $foreachstatement.ForEachStatement.vtable))
-
-;;; Code for foreachstatement.ForEachStatement.Exception1 [vtable]
-(global $foreachstatement.ForEachStatement.Exception1.vtable (mut (ref null $foreachstatement.ForEachStatement.Exception1.vtable)) (ref.null $foreachstatement.ForEachStatement.Exception1.vtable))
-
-;;; Code for foreachstatement.ForEachStatement.Exception2 [vtable]
-(global $foreachstatement.ForEachStatement.Exception2.vtable (mut (ref null $foreachstatement.ForEachStatement.Exception2.vtable)) (ref.null $foreachstatement.ForEachStatement.Exception2.vtable))
-
-;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [vtable]
-(global $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable (mut (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)) (ref.null $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable))
-
 ;;; Code for foreachstatement.ForEachStatement [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement (mut i32) (i32.const 0))
 
@@ -22,126 +10,127 @@
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [static fields]
 (global $f_$initialized__foreachstatement_ForEachStatement_IterableReturningTypeVariable (mut i32) (i32.const 0))
 
- ;;; Code for foreachstatement.ForEachStatement [vtable.init]
- (global.set $foreachstatement.ForEachStatement.vtable
-  (struct.new_with_rtt $foreachstatement.ForEachStatement.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement)
-   (ref.func $m_test__java_lang_Iterable__void@foreachstatement.ForEachStatement)
-   (rtt.canon $foreachstatement.ForEachStatement.vtable)
-  )
+;;; Code for foreachstatement.ForEachStatement [vtable.init]
+(global $foreachstatement.ForEachStatement.vtable (ref $foreachstatement.ForEachStatement.vtable) 
+ (struct.new_with_rtt $foreachstatement.ForEachStatement.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement)
+  (ref.func $m_test__java_lang_Iterable__void@foreachstatement.ForEachStatement)
+  (rtt.canon $foreachstatement.ForEachStatement.vtable)
  )
+)
 
- ;;; Code for foreachstatement.ForEachStatement [itable.init]
- (global.set $foreachstatement.ForEachStatement.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for foreachstatement.ForEachStatement [itable.init]
+(global $foreachstatement.ForEachStatement.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for foreachstatement.ForEachStatement.Exception1 [vtable.init]
- (global.set $foreachstatement.ForEachStatement.Exception1.vtable
-  (struct.new_with_rtt $foreachstatement.ForEachStatement.Exception1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Throwable)
-   (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception1)
-   (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
-   (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
-   (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
-   (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
-   (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
-   (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
-   (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_printStackTrace__void@java.lang.Throwable)
-   (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
-   (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
-   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception1)
-   (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception1)
-   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception1)
-   (rtt.canon $foreachstatement.ForEachStatement.Exception1.vtable)
-  )
+;;; Code for foreachstatement.ForEachStatement.Exception1 [vtable.init]
+(global $foreachstatement.ForEachStatement.Exception1.vtable (ref $foreachstatement.ForEachStatement.Exception1.vtable) 
+ (struct.new_with_rtt $foreachstatement.ForEachStatement.Exception1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception1)
+  (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
+  (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
+  (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
+  (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+  (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_printStackTrace__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+  (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+  (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception1)
+  (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception1)
+  (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception1)
+  (rtt.canon $foreachstatement.ForEachStatement.Exception1.vtable)
  )
+)
 
- ;;; Code for foreachstatement.ForEachStatement.Exception1 [itable.init]
- (global.set $foreachstatement.ForEachStatement.Exception1.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $foreachstatement.ForEachStatement.Exception1.itable) (i32.const 1)
+;;; Code for foreachstatement.ForEachStatement.Exception1 [itable.init]
+(global $foreachstatement.ForEachStatement.Exception1.itable (ref $itable) (array.init $itable 
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (ref.null data)
+  (rtt.canon $java.io.Serializable.vtable)
+ )
  (struct.new_with_rtt $java.lang.Iterable.vtable
   (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception1)
   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception1)
   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception1)
   (rtt.canon $java.lang.Iterable.vtable)
- ))
- (array.set $itable (global.get $foreachstatement.ForEachStatement.Exception1.itable) (i32.const 0)
- (struct.new_with_rtt $java.io.Serializable.vtable
-  (rtt.canon $java.io.Serializable.vtable)
- ))
-
- ;;; Code for foreachstatement.ForEachStatement.Exception2 [vtable.init]
- (global.set $foreachstatement.ForEachStatement.Exception2.vtable
-  (struct.new_with_rtt $foreachstatement.ForEachStatement.Exception2.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Throwable)
-   (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception2)
-   (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
-   (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
-   (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
-   (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
-   (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
-   (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
-   (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
-   (ref.func $m_printStackTrace__void@java.lang.Throwable)
-   (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
-   (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
-   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception2)
-   (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception2)
-   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception2)
-   (rtt.canon $foreachstatement.ForEachStatement.Exception2.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for foreachstatement.ForEachStatement.Exception2 [itable.init]
- (global.set $foreachstatement.ForEachStatement.Exception2.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $foreachstatement.ForEachStatement.Exception2.itable) (i32.const 1)
+;;; Code for foreachstatement.ForEachStatement.Exception2 [vtable.init]
+(global $foreachstatement.ForEachStatement.Exception2.vtable (ref $foreachstatement.ForEachStatement.Exception2.vtable) 
+ (struct.new_with_rtt $foreachstatement.ForEachStatement.Exception2.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception2)
+  (ref.func $m_privateInitError__java_lang_Object__void_$pp_java_lang@java.lang.Throwable)
+  (ref.func $m_getBackingJsObject__java_lang_Object@java.lang.Throwable)
+  (ref.func $m_addSuppressed__java_lang_Throwable__void@java.lang.Throwable)
+  (ref.func $m_fillInStackTrace__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getCause__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_getLocalizedMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getMessage__java_lang_String@java.lang.Throwable)
+  (ref.func $m_getStackTrace__arrayOf_java_lang_StackTraceElement@java.lang.Throwable)
+  (ref.func $m_getSuppressed__arrayOf_java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_initCause__java_lang_Throwable__java_lang_Throwable@java.lang.Throwable)
+  (ref.func $m_printStackTrace__void@java.lang.Throwable)
+  (ref.func $m_printStackTrace__java_io_PrintStream__void@java.lang.Throwable)
+  (ref.func $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void@java.lang.Throwable)
+  (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception2)
+  (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception2)
+  (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception2)
+  (rtt.canon $foreachstatement.ForEachStatement.Exception2.vtable)
+ )
+)
+
+;;; Code for foreachstatement.ForEachStatement.Exception2 [itable.init]
+(global $foreachstatement.ForEachStatement.Exception2.itable (ref $itable) (array.init $itable 
+ (struct.new_with_rtt $java.io.Serializable.vtable
+  (ref.null data)
+  (rtt.canon $java.io.Serializable.vtable)
+ )
  (struct.new_with_rtt $java.lang.Iterable.vtable
   (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception2)
   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception2)
   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception2)
   (rtt.canon $java.lang.Iterable.vtable)
- ))
- (array.set $itable (global.get $foreachstatement.ForEachStatement.Exception2.itable) (i32.const 0)
- (struct.new_with_rtt $java.io.Serializable.vtable
-  (rtt.canon $java.io.Serializable.vtable)
- ))
-
- ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [vtable.init]
- (global.set $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable
-  (struct.new_with_rtt $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
-   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
-   (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
-   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
-   (rtt.canon $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [itable.init]
- (global.set $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable (array.new_default_with_rtt $itable (i32.const 2) (rtt.canon $itable)))
- (array.set $itable (global.get $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable) (i32.const 1)
+;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [vtable.init]
+(global $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable (ref $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable) 
+ (struct.new_with_rtt $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
+  (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
+  (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
+  (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
+  (rtt.canon $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)
+ )
+)
+
+;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [itable.init]
+(global $foreachstatement.ForEachStatement.IterableReturningTypeVariable.itable (ref $itable) (array.init $itable  (ref.null data)
  (struct.new_with_rtt $java.lang.Iterable.vtable
   (ref.func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
   (ref.func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
   (ref.func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable)
   (rtt.canon $java.lang.Iterable.vtable)
- ))
+ )
+ (rtt.canon $itable)))
 
 ;;; Code for foreachstatement.ForEachStatement [CLASS]
 (type $foreachstatement.ForEachStatement (struct
@@ -150,13 +139,13 @@
  (extends $java.lang.Object)
 )
 (type $foreachstatement.ForEachStatement.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__java_lang_Iterable__void (mut (ref $function.$java.lang.Object__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_test__java_lang_Iterable__void (ref $function.$java.lang.Object__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; ForEachStatement()
@@ -423,28 +412,28 @@
  (extends $java.lang.Exception)
 )
 (type $foreachstatement.ForEachStatement.Exception1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (mut (ref $function.$java.lang.Object__$void)))
- (field $m_getBackingJsObject__java_lang_Object (mut (ref $function.__$java.lang.Object)))
- (field $m_addSuppressed__java_lang_Throwable__void (mut (ref $function.$java.lang.Throwable__$void)))
- (field $m_fillInStackTrace__java_lang_Throwable (mut (ref $function.__$java.lang.Throwable)))
- (field $m_getCause__java_lang_Throwable (mut (ref $function.__$java.lang.Throwable)))
- (field $m_getLocalizedMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
- (field $m_getSuppressed__arrayOf_java_lang_Throwable (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
- (field $m_initCause__java_lang_Throwable__java_lang_Throwable (mut (ref $function.$java.lang.Throwable__$java.lang.Throwable)))
- (field $m_printStackTrace__void (mut (ref $function.__$void)))
- (field $m_printStackTrace__java_io_PrintStream__void (mut (ref $function.$java.io.PrintStream__$void)))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
- (field $m_iterator__java_util_Iterator (mut (ref $function.__$java.lang.Object)))
- (field $m_forEach__java_util_function_Consumer__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_spliterator__java_util_Spliterator (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Exception.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.$java.lang.Object__$void))
+ (field $m_getBackingJsObject__java_lang_Object (ref $function.__$java.lang.Object))
+ (field $m_addSuppressed__java_lang_Throwable__void (ref $function.$java.lang.Throwable__$void))
+ (field $m_fillInStackTrace__java_lang_Throwable (ref $function.__$java.lang.Throwable))
+ (field $m_getCause__java_lang_Throwable (ref $function.__$java.lang.Throwable))
+ (field $m_getLocalizedMessage__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getMessage__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.__$javaemul.internal.WasmArray.OfObject))
+ (field $m_getSuppressed__arrayOf_java_lang_Throwable (ref $function.__$javaemul.internal.WasmArray.OfObject))
+ (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.$java.lang.Throwable__$java.lang.Throwable))
+ (field $m_printStackTrace__void (ref $function.__$void))
+ (field $m_printStackTrace__java_io_PrintStream__void (ref $function.$java.io.PrintStream__$void))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_iterator__java_util_Iterator (ref $function.__$java.lang.Object))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$void))
+ (field $m_spliterator__java_util_Spliterator (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Exception.vtable)
 )
 
 ;;; Exception1()
@@ -566,28 +555,28 @@
  (extends $java.lang.Exception)
 )
 (type $foreachstatement.ForEachStatement.Exception2.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (mut (ref $function.$java.lang.Object__$void)))
- (field $m_getBackingJsObject__java_lang_Object (mut (ref $function.__$java.lang.Object)))
- (field $m_addSuppressed__java_lang_Throwable__void (mut (ref $function.$java.lang.Throwable__$void)))
- (field $m_fillInStackTrace__java_lang_Throwable (mut (ref $function.__$java.lang.Throwable)))
- (field $m_getCause__java_lang_Throwable (mut (ref $function.__$java.lang.Throwable)))
- (field $m_getLocalizedMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getMessage__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
- (field $m_getSuppressed__arrayOf_java_lang_Throwable (mut (ref $function.__$javaemul.internal.WasmArray.OfObject)))
- (field $m_initCause__java_lang_Throwable__java_lang_Throwable (mut (ref $function.$java.lang.Throwable__$java.lang.Throwable)))
- (field $m_printStackTrace__void (mut (ref $function.__$void)))
- (field $m_printStackTrace__java_io_PrintStream__void (mut (ref $function.$java.io.PrintStream__$void)))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
- (field $m_iterator__java_util_Iterator (mut (ref $function.__$java.lang.Object)))
- (field $m_forEach__java_util_function_Consumer__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_spliterator__java_util_Spliterator (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Exception.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.$java.lang.Object__$void))
+ (field $m_getBackingJsObject__java_lang_Object (ref $function.__$java.lang.Object))
+ (field $m_addSuppressed__java_lang_Throwable__void (ref $function.$java.lang.Throwable__$void))
+ (field $m_fillInStackTrace__java_lang_Throwable (ref $function.__$java.lang.Throwable))
+ (field $m_getCause__java_lang_Throwable (ref $function.__$java.lang.Throwable))
+ (field $m_getLocalizedMessage__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getMessage__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.__$javaemul.internal.WasmArray.OfObject))
+ (field $m_getSuppressed__arrayOf_java_lang_Throwable (ref $function.__$javaemul.internal.WasmArray.OfObject))
+ (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.$java.lang.Throwable__$java.lang.Throwable))
+ (field $m_printStackTrace__void (ref $function.__$void))
+ (field $m_printStackTrace__java_io_PrintStream__void (ref $function.$java.io.PrintStream__$void))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_iterator__java_util_Iterator (ref $function.__$java.lang.Object))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$void))
+ (field $m_spliterator__java_util_Spliterator (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Exception.vtable)
 )
 
 ;;; Exception2()
@@ -702,15 +691,15 @@
  (extends $java.lang.Object)
 )
 (type $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_iterator__java_util_Iterator (mut (ref $function.__$java.lang.Object)))
- (field $m_forEach__java_util_function_Consumer__void (mut (ref $function.$java.lang.Object__$void)))
- (field $m_spliterator__java_util_Spliterator (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_iterator__java_util_Iterator (ref $function.__$java.lang.Object))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$void))
+ (field $m_spliterator__java_util_Spliterator (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; IterableReturningTypeVariable()

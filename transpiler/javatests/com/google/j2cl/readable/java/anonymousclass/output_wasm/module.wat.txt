@@ -1,15 +1,3 @@
-;;; Code for anonymousclass.SomeClass [vtable]
-(global $anonymousclass.SomeClass.vtable (mut (ref null $anonymousclass.SomeClass.vtable)) (ref.null $anonymousclass.SomeClass.vtable))
-
-;;; Code for anonymousclass.AnonymousClass [vtable]
-(global $anonymousclass.AnonymousClass.vtable (mut (ref null $anonymousclass.AnonymousClass.vtable)) (ref.null $anonymousclass.AnonymousClass.vtable))
-
-;;; Code for anonymousclass.AnonymousClass.1 [vtable]
-(global $anonymousclass.AnonymousClass.1.vtable (mut (ref null $anonymousclass.AnonymousClass.1.vtable)) (ref.null $anonymousclass.AnonymousClass.1.vtable))
-
-;;; Code for anonymousclass.SomeInterface.1 [vtable]
-(global $anonymousclass.SomeInterface.1.vtable (mut (ref null $anonymousclass.SomeInterface.1.vtable)) (ref.null $anonymousclass.SomeInterface.1.vtable))
-
 ;;; Code for anonymousclass.SomeClass [static fields]
 (global $f_$initialized__anonymousclass_SomeClass (mut i32) (i32.const 0))
 
@@ -26,50 +14,53 @@
 ;;; Code for anonymousclass.SomeInterface.1 [static fields]
 (global $f_$initialized__anonymousclass_SomeInterface_1 (mut i32) (i32.const 0))
 
- ;;; Code for anonymousclass.AnonymousClass [vtable.init]
- (global.set $anonymousclass.AnonymousClass.vtable
-  (struct.new_with_rtt $anonymousclass.AnonymousClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass)
-   (ref.func $m_main__void@anonymousclass.AnonymousClass)
-   (rtt.canon $anonymousclass.AnonymousClass.vtable)
-  )
+;;; Code for anonymousclass.AnonymousClass [vtable.init]
+(global $anonymousclass.AnonymousClass.vtable (ref $anonymousclass.AnonymousClass.vtable) 
+ (struct.new_with_rtt $anonymousclass.AnonymousClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass)
+  (ref.func $m_main__void@anonymousclass.AnonymousClass)
+  (rtt.canon $anonymousclass.AnonymousClass.vtable)
  )
+)
 
- ;;; Code for anonymousclass.AnonymousClass [itable.init]
- (global.set $anonymousclass.AnonymousClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for anonymousclass.AnonymousClass [itable.init]
+(global $anonymousclass.AnonymousClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for anonymousclass.AnonymousClass.1 [vtable.init]
- (global.set $anonymousclass.AnonymousClass.1.vtable
-  (struct.new_with_rtt $anonymousclass.AnonymousClass.1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1)
-   (ref.func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1)
-   (rtt.canon $anonymousclass.AnonymousClass.1.vtable)
-  )
+;;; Code for anonymousclass.AnonymousClass.1 [vtable.init]
+(global $anonymousclass.AnonymousClass.1.vtable (ref $anonymousclass.AnonymousClass.1.vtable) 
+ (struct.new_with_rtt $anonymousclass.AnonymousClass.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1)
+  (ref.func $m_foo__java_lang_String@anonymousclass.AnonymousClass.1)
+  (rtt.canon $anonymousclass.AnonymousClass.1.vtable)
  )
+)
 
- ;;; Code for anonymousclass.AnonymousClass.1 [itable.init]
- (global.set $anonymousclass.AnonymousClass.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for anonymousclass.AnonymousClass.1 [itable.init]
+(global $anonymousclass.AnonymousClass.1.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for anonymousclass.SomeInterface.1 [vtable.init]
- (global.set $anonymousclass.SomeInterface.1.vtable
-  (struct.new_with_rtt $anonymousclass.SomeInterface.1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@anonymousclass.SomeInterface.1)
-   (ref.func $m_foo__java_lang_String@anonymousclass.SomeInterface.1)
-   (rtt.canon $anonymousclass.SomeInterface.1.vtable)
-  )
+;;; Code for anonymousclass.SomeInterface.1 [vtable.init]
+(global $anonymousclass.SomeInterface.1.vtable (ref $anonymousclass.SomeInterface.1.vtable) 
+ (struct.new_with_rtt $anonymousclass.SomeInterface.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@anonymousclass.SomeInterface.1)
+  (ref.func $m_foo__java_lang_String@anonymousclass.SomeInterface.1)
+  (rtt.canon $anonymousclass.SomeInterface.1.vtable)
  )
+)
 
- ;;; Code for anonymousclass.SomeInterface.1 [itable.init]
- (global.set $anonymousclass.SomeInterface.1.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for anonymousclass.SomeInterface.1 [itable.init]
+(global $anonymousclass.SomeInterface.1.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for anonymousclass.SomeClass [CLASS]
 (type $anonymousclass.SomeClass (struct
@@ -78,13 +69,13 @@
  (extends $java.lang.Object)
 )
 (type $anonymousclass.SomeClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_foo__java_lang_String (ref $function.__$java.lang.String))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; SomeClass(int i)
@@ -135,13 +126,13 @@
  (extends $java.lang.Object)
 )
 (type $anonymousclass.AnonymousClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_main__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_main__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; AnonymousClass()
@@ -224,13 +215,13 @@
  (extends $anonymousclass.SomeClass)
 )
 (type $anonymousclass.AnonymousClass.1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String))))
- (extends $anonymousclass.SomeClass.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_foo__java_lang_String (ref $function.__$java.lang.String))
+ )
+  (extends $anonymousclass.SomeClass.vtable)
 )
 
 ;;; <anonymous> extends SomeClass(AnonymousClass $outer_this, int $_0)
@@ -326,8 +317,9 @@
 (elem declare func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1)
 
 ;;; Code for anonymousclass.SomeInterface [INTERFACE]
-(type $anonymousclass.SomeInterface.vtable (struct
-))
+(type $anonymousclass.SomeInterface.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void SomeInterface.$clinit()
 (func $$clinit__void@anonymousclass.SomeInterface
@@ -369,13 +361,13 @@
  (extends $anonymousclass.SomeClass)
 )
 (type $anonymousclass.SomeInterface.1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_foo__java_lang_String (mut (ref $function.__$java.lang.String))))
- (extends $anonymousclass.SomeClass.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_foo__java_lang_String (ref $function.__$java.lang.String))
+ )
+  (extends $anonymousclass.SomeClass.vtable)
 )
 
 ;;; <anonymous> extends SomeClass(int $_0)

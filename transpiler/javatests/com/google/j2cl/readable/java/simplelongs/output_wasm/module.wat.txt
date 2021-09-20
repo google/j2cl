@@ -1,25 +1,23 @@
-;;; Code for simplelongs.SimpleLongs [vtable]
-(global $simplelongs.SimpleLongs.vtable (mut (ref null $simplelongs.SimpleLongs.vtable)) (ref.null $simplelongs.SimpleLongs.vtable))
-
 ;;; Code for simplelongs.SimpleLongs [static fields]
 (global $f_$initialized__simplelongs_SimpleLongs (mut i32) (i32.const 0))
 
- ;;; Code for simplelongs.SimpleLongs [vtable.init]
- (global.set $simplelongs.SimpleLongs.vtable
-  (struct.new_with_rtt $simplelongs.SimpleLongs.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@simplelongs.SimpleLongs)
-   (ref.func $m_getBar__long@simplelongs.SimpleLongs)
-   (ref.func $m_getWithSideEffect__simplelongs_SimpleLongs@simplelongs.SimpleLongs)
-   (ref.func $m_main__void@simplelongs.SimpleLongs)
-   (rtt.canon $simplelongs.SimpleLongs.vtable)
-  )
+;;; Code for simplelongs.SimpleLongs [vtable.init]
+(global $simplelongs.SimpleLongs.vtable (ref $simplelongs.SimpleLongs.vtable) 
+ (struct.new_with_rtt $simplelongs.SimpleLongs.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@simplelongs.SimpleLongs)
+  (ref.func $m_getBar__long@simplelongs.SimpleLongs)
+  (ref.func $m_getWithSideEffect__simplelongs_SimpleLongs@simplelongs.SimpleLongs)
+  (ref.func $m_main__void@simplelongs.SimpleLongs)
+  (rtt.canon $simplelongs.SimpleLongs.vtable)
  )
+)
 
- ;;; Code for simplelongs.SimpleLongs [itable.init]
- (global.set $simplelongs.SimpleLongs.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for simplelongs.SimpleLongs [itable.init]
+(global $simplelongs.SimpleLongs.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for simplelongs.SimpleLongs [CLASS]
 (type $simplelongs.SimpleLongs (struct
@@ -30,15 +28,15 @@
  (extends $java.lang.Object)
 )
 (type $simplelongs.SimpleLongs.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getBar__long (mut (ref $function.__$long)))
- (field $m_getWithSideEffect__simplelongs_SimpleLongs (mut (ref $function.__$simplelongs.SimpleLongs)))
- (field $m_main__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getBar__long (ref $function.__$long))
+ (field $m_getWithSideEffect__simplelongs_SimpleLongs (ref $function.__$simplelongs.SimpleLongs))
+ (field $m_main__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; SimpleLongs()

@@ -1,15 +1,3 @@
-;;; Code for jsproperties.Foo [vtable]
-(global $jsproperties.Foo.vtable (mut (ref null $jsproperties.Foo.vtable)) (ref.null $jsproperties.Foo.vtable))
-
-;;; Code for jsproperties.Bar [vtable]
-(global $jsproperties.Bar.vtable (mut (ref null $jsproperties.Bar.vtable)) (ref.null $jsproperties.Bar.vtable))
-
-;;; Code for jsproperties.NativeFoo [vtable]
-(global $jsproperties.NativeFoo.vtable (mut (ref null $jsproperties.NativeFoo.vtable)) (ref.null $jsproperties.NativeFoo.vtable))
-
-;;; Code for jsproperties.Main [vtable]
-(global $jsproperties.Main.vtable (mut (ref null $jsproperties.Main.vtable)) (ref.null $jsproperties.Main.vtable))
-
 ;;; Code for jsproperties.Foo [static fields]
 (global $f_f__jsproperties_Foo_ (mut i32) (i32.const 0))
 (global $f_$initialized__jsproperties_Foo (mut i32) (i32.const 0))
@@ -23,69 +11,73 @@
 ;;; Code for jsproperties.Main [static fields]
 (global $f_$initialized__jsproperties_Main (mut i32) (i32.const 0))
 
- ;;; Code for jsproperties.Foo [vtable.init]
- (global.set $jsproperties.Foo.vtable
-  (struct.new_with_rtt $jsproperties.Foo.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsproperties.Foo)
-   (rtt.canon $jsproperties.Foo.vtable)
-  )
+;;; Code for jsproperties.Foo [vtable.init]
+(global $jsproperties.Foo.vtable (ref $jsproperties.Foo.vtable) 
+ (struct.new_with_rtt $jsproperties.Foo.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsproperties.Foo)
+  (rtt.canon $jsproperties.Foo.vtable)
  )
+)
 
- ;;; Code for jsproperties.Foo [itable.init]
- (global.set $jsproperties.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsproperties.Foo [itable.init]
+(global $jsproperties.Foo.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsproperties.Bar [vtable.init]
- (global.set $jsproperties.Bar.vtable
-  (struct.new_with_rtt $jsproperties.Bar.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsproperties.Bar)
-   (ref.func $m_getA__int@jsproperties.Bar)
-   (ref.func $m_setA__int__void@jsproperties.Bar)
-   (ref.func $m_getB__int@jsproperties.Bar)
-   (ref.func $m_setB__int__void@jsproperties.Bar)
-   (rtt.canon $jsproperties.Bar.vtable)
-  )
+;;; Code for jsproperties.Bar [vtable.init]
+(global $jsproperties.Bar.vtable (ref $jsproperties.Bar.vtable) 
+ (struct.new_with_rtt $jsproperties.Bar.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsproperties.Bar)
+  (ref.func $m_getA__int@jsproperties.Bar)
+  (ref.func $m_setA__int__void@jsproperties.Bar)
+  (ref.func $m_getB__int@jsproperties.Bar)
+  (ref.func $m_setB__int__void@jsproperties.Bar)
+  (rtt.canon $jsproperties.Bar.vtable)
  )
+)
 
- ;;; Code for jsproperties.Bar [itable.init]
- (global.set $jsproperties.Bar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsproperties.Bar [itable.init]
+(global $jsproperties.Bar.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsproperties.NativeFoo [vtable.init]
- (global.set $jsproperties.NativeFoo.vtable
-  (struct.new_with_rtt $jsproperties.NativeFoo.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsproperties.NativeFoo)
-   (ref.func $m_getA__java_lang_Object@jsproperties.NativeFoo)
-   (rtt.canon $jsproperties.NativeFoo.vtable)
-  )
+;;; Code for jsproperties.NativeFoo [vtable.init]
+(global $jsproperties.NativeFoo.vtable (ref $jsproperties.NativeFoo.vtable) 
+ (struct.new_with_rtt $jsproperties.NativeFoo.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsproperties.NativeFoo)
+  (ref.func $m_getA__java_lang_Object@jsproperties.NativeFoo)
+  (rtt.canon $jsproperties.NativeFoo.vtable)
  )
+)
 
- ;;; Code for jsproperties.NativeFoo [itable.init]
- (global.set $jsproperties.NativeFoo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsproperties.NativeFoo [itable.init]
+(global $jsproperties.NativeFoo.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsproperties.Main [vtable.init]
- (global.set $jsproperties.Main.vtable
-  (struct.new_with_rtt $jsproperties.Main.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsproperties.Main)
-   (ref.func $m_testNativeJsProperty__void@jsproperties.Main)
-   (ref.func $m_testStaticJsProperty__void@jsproperties.Main)
-   (ref.func $m_testInstanceJsProperty__void@jsproperties.Main)
-   (rtt.canon $jsproperties.Main.vtable)
-  )
+;;; Code for jsproperties.Main [vtable.init]
+(global $jsproperties.Main.vtable (ref $jsproperties.Main.vtable) 
+ (struct.new_with_rtt $jsproperties.Main.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsproperties.Main)
+  (ref.func $m_testNativeJsProperty__void@jsproperties.Main)
+  (ref.func $m_testStaticJsProperty__void@jsproperties.Main)
+  (ref.func $m_testInstanceJsProperty__void@jsproperties.Main)
+  (rtt.canon $jsproperties.Main.vtable)
  )
+)
 
- ;;; Code for jsproperties.Main [itable.init]
- (global.set $jsproperties.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsproperties.Main [itable.init]
+(global $jsproperties.Main.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for jsproperties.Foo [CLASS]
 (type $jsproperties.Foo (struct
@@ -94,12 +86,12 @@
  (extends $java.lang.Object)
 )
 (type $jsproperties.Foo.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Foo()
@@ -220,16 +212,16 @@
  (extends $java.lang.Object)
 )
 (type $jsproperties.Bar.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getA__int (mut (ref $function.__$int)))
- (field $m_setA__int__void (mut (ref $function.$int__$void)))
- (field $m_getB__int (mut (ref $function.__$int)))
- (field $m_setB__int__void (mut (ref $function.$int__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getA__int (ref $function.__$int))
+ (field $m_setA__int__void (ref $function.$int__$void))
+ (field $m_getB__int (ref $function.__$int))
+ (field $m_setB__int__void (ref $function.$int__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Bar()
@@ -357,13 +349,13 @@
  (extends $java.lang.Object)
 )
 (type $jsproperties.NativeFoo.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_getA__java_lang_Object (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_getA__java_lang_Object (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; NativeFoo()
@@ -446,15 +438,15 @@
  (extends $java.lang.Object)
 )
 (type $jsproperties.Main.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_testNativeJsProperty__void (mut (ref $function.__$void)))
- (field $m_testStaticJsProperty__void (mut (ref $function.__$void)))
- (field $m_testInstanceJsProperty__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_testNativeJsProperty__void (ref $function.__$void))
+ (field $m_testStaticJsProperty__void (ref $function.__$void))
+ (field $m_testInstanceJsProperty__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Main()

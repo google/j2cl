@@ -1,30 +1,3 @@
-;;; Code for jsvarargs.Main [vtable]
-(global $jsvarargs.Main.vtable (mut (ref null $jsvarargs.Main.vtable)) (ref.null $jsvarargs.Main.vtable))
-
-;;; Code for jsvarargs.Main.NativeObject [vtable]
-(global $jsvarargs.Main.NativeObject.vtable (mut (ref null $jsvarargs.Main.NativeObject.vtable)) (ref.null $jsvarargs.Main.NativeObject.vtable))
-
-;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable]
-(global $jsvarargs.Main.SubVarargsConstructorClass.vtable (mut (ref null $jsvarargs.Main.SubVarargsConstructorClass.vtable)) (ref.null $jsvarargs.Main.SubVarargsConstructorClass.vtable))
-
-;;; Code for jsvarargs.Main.AbstractMethodWithVarargs [vtable]
-(global $jsvarargs.Main.AbstractMethodWithVarargs.vtable (mut (ref null $jsvarargs.Main.AbstractMethodWithVarargs.vtable)) (ref.null $jsvarargs.Main.AbstractMethodWithVarargs.vtable))
-
-;;; Code for jsvarargs.Main.AFunction [vtable]
-(global $jsvarargs.Main.AFunction.vtable (mut (ref null $jsvarargs.Main.AFunction.vtable)) (ref.null $jsvarargs.Main.AFunction.vtable))
-
-;;; Code for jsvarargs.Main.SubMain [vtable]
-(global $jsvarargs.Main.SubMain.vtable (mut (ref null $jsvarargs.Main.SubMain.vtable)) (ref.null $jsvarargs.Main.SubMain.vtable))
-
-;;; Code for jsvarargs.Main.$LambdaImplementor$1 [vtable]
-(global $jsvarargs.Main.$LambdaImplementor$1.vtable (mut (ref null $jsvarargs.Main.$LambdaImplementor$1.vtable)) (ref.null $jsvarargs.Main.$LambdaImplementor$1.vtable))
-
-;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable]
-(global $jsvarargs.QualifiedSuperMethodCall.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.vtable))
-
-;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable]
-(global $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (mut (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)) (ref.null $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable))
-
 ;;; Code for jsvarargs.Main [static fields]
 (global $f_$initialized__jsvarargs_Main (mut i32) (i32.const 0))
 
@@ -61,160 +34,166 @@
 ;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [static fields]
 (global $f_$initialized__jsvarargs_QualifiedSuperMethodCall_InnerClass (mut i32) (i32.const 0))
 
- ;;; Code for jsvarargs.Main [vtable.init]
- (global.set $jsvarargs.Main.vtable
-  (struct.new_with_rtt $jsvarargs.Main.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.Main)
-   (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main)
-   (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main)
-   (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
-   (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main)
-   (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
-   (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main)
-   (ref.func $m_testJsFunction__void@jsvarargs.Main)
-   (ref.func $m_testSideEffect__void@jsvarargs.Main)
-   (ref.func $m_testNullJsVarargs__void@jsvarargs.Main)
-   (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
-   (rtt.canon $jsvarargs.Main.vtable)
-  )
+;;; Code for jsvarargs.Main [vtable.init]
+(global $jsvarargs.Main.vtable (ref $jsvarargs.Main.vtable) 
+ (struct.new_with_rtt $jsvarargs.Main.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.Main)
+  (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main)
+  (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main)
+  (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
+  (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main)
+  (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
+  (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main)
+  (ref.func $m_testJsFunction__void@jsvarargs.Main)
+  (ref.func $m_testSideEffect__void@jsvarargs.Main)
+  (ref.func $m_testNullJsVarargs__void@jsvarargs.Main)
+  (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
+  (rtt.canon $jsvarargs.Main.vtable)
  )
+)
 
- ;;; Code for jsvarargs.Main [itable.init]
- (global.set $jsvarargs.Main.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsvarargs.Main [itable.init]
+(global $jsvarargs.Main.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsvarargs.Main.NativeObject [vtable.init]
- (global.set $jsvarargs.Main.NativeObject.vtable
-  (struct.new_with_rtt $jsvarargs.Main.NativeObject.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.NativeObject)
-   (rtt.canon $jsvarargs.Main.NativeObject.vtable)
-  )
+;;; Code for jsvarargs.Main.NativeObject [vtable.init]
+(global $jsvarargs.Main.NativeObject.vtable (ref $jsvarargs.Main.NativeObject.vtable) 
+ (struct.new_with_rtt $jsvarargs.Main.NativeObject.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.NativeObject)
+  (rtt.canon $jsvarargs.Main.NativeObject.vtable)
  )
+)
 
- ;;; Code for jsvarargs.Main.NativeObject [itable.init]
- (global.set $jsvarargs.Main.NativeObject.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsvarargs.Main.NativeObject [itable.init]
+(global $jsvarargs.Main.NativeObject.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable.init]
- (global.set $jsvarargs.Main.SubVarargsConstructorClass.vtable
-  (struct.new_with_rtt $jsvarargs.Main.SubVarargsConstructorClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.SubVarargsConstructorClass)
-   (rtt.canon $jsvarargs.Main.SubVarargsConstructorClass.vtable)
-  )
+;;; Code for jsvarargs.Main.SubVarargsConstructorClass [vtable.init]
+(global $jsvarargs.Main.SubVarargsConstructorClass.vtable (ref $jsvarargs.Main.SubVarargsConstructorClass.vtable) 
+ (struct.new_with_rtt $jsvarargs.Main.SubVarargsConstructorClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.SubVarargsConstructorClass)
+  (rtt.canon $jsvarargs.Main.SubVarargsConstructorClass.vtable)
  )
+)
 
- ;;; Code for jsvarargs.Main.SubVarargsConstructorClass [itable.init]
- (global.set $jsvarargs.Main.SubVarargsConstructorClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsvarargs.Main.SubVarargsConstructorClass [itable.init]
+(global $jsvarargs.Main.SubVarargsConstructorClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsvarargs.Main.AFunction [vtable.init]
- (global.set $jsvarargs.Main.AFunction.vtable
-  (struct.new_with_rtt $jsvarargs.Main.AFunction.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.AFunction)
-   (ref.func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction)
-   (rtt.canon $jsvarargs.Main.AFunction.vtable)
-  )
+;;; Code for jsvarargs.Main.AFunction [vtable.init]
+(global $jsvarargs.Main.AFunction.vtable (ref $jsvarargs.Main.AFunction.vtable) 
+ (struct.new_with_rtt $jsvarargs.Main.AFunction.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.AFunction)
+  (ref.func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction)
+  (rtt.canon $jsvarargs.Main.AFunction.vtable)
  )
+)
 
- ;;; Code for jsvarargs.Main.AFunction [itable.init]
- (global.set $jsvarargs.Main.AFunction.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsvarargs.Main.AFunction.itable) (i32.const 0)
+;;; Code for jsvarargs.Main.AFunction [itable.init]
+(global $jsvarargs.Main.AFunction.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsvarargs.Main.Function.vtable
   (ref.func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction)
   (rtt.canon $jsvarargs.Main.Function.vtable)
- ))
-
- ;;; Code for jsvarargs.Main.SubMain [vtable.init]
- (global.set $jsvarargs.Main.SubMain.vtable
-  (struct.new_with_rtt $jsvarargs.Main.SubMain.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.SubMain)
-   (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain)
-   (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main)
-   (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
-   (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main)
-   (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
-   (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main)
-   (ref.func $m_testJsFunction__void@jsvarargs.Main)
-   (ref.func $m_testSideEffect__void@jsvarargs.Main)
-   (ref.func $m_testNullJsVarargs__void@jsvarargs.Main)
-   (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
-   (rtt.canon $jsvarargs.Main.SubMain.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for jsvarargs.Main.SubMain [itable.init]
- (global.set $jsvarargs.Main.SubMain.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for jsvarargs.Main.$LambdaImplementor$1 [vtable.init]
- (global.set $jsvarargs.Main.$LambdaImplementor$1.vtable
-  (struct.new_with_rtt $jsvarargs.Main.$LambdaImplementor$1.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1)
-   (ref.func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1)
-   (rtt.canon $jsvarargs.Main.$LambdaImplementor$1.vtable)
-  )
+;;; Code for jsvarargs.Main.SubMain [vtable.init]
+(global $jsvarargs.Main.SubMain.vtable (ref $jsvarargs.Main.SubMain.vtable) 
+ (struct.new_with_rtt $jsvarargs.Main.SubMain.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.SubMain)
+  (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain)
+  (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main)
+  (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
+  (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main)
+  (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
+  (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main)
+  (ref.func $m_testJsFunction__void@jsvarargs.Main)
+  (ref.func $m_testSideEffect__void@jsvarargs.Main)
+  (ref.func $m_testNullJsVarargs__void@jsvarargs.Main)
+  (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
+  (rtt.canon $jsvarargs.Main.SubMain.vtable)
  )
+)
 
- ;;; Code for jsvarargs.Main.$LambdaImplementor$1 [itable.init]
- (global.set $jsvarargs.Main.$LambdaImplementor$1.itable (array.new_default_with_rtt $itable (i32.const 1) (rtt.canon $itable)))
- (array.set $itable (global.get $jsvarargs.Main.$LambdaImplementor$1.itable) (i32.const 0)
+;;; Code for jsvarargs.Main.SubMain [itable.init]
+(global $jsvarargs.Main.SubMain.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
+
+;;; Code for jsvarargs.Main.$LambdaImplementor$1 [vtable.init]
+(global $jsvarargs.Main.$LambdaImplementor$1.vtable (ref $jsvarargs.Main.$LambdaImplementor$1.vtable) 
+ (struct.new_with_rtt $jsvarargs.Main.$LambdaImplementor$1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1)
+  (ref.func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1)
+  (rtt.canon $jsvarargs.Main.$LambdaImplementor$1.vtable)
+ )
+)
+
+;;; Code for jsvarargs.Main.$LambdaImplementor$1 [itable.init]
+(global $jsvarargs.Main.$LambdaImplementor$1.itable (ref $itable) (array.init $itable 
  (struct.new_with_rtt $jsvarargs.Main.GenericFunction.vtable
   (ref.func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1)
   (rtt.canon $jsvarargs.Main.GenericFunction.vtable)
- ))
-
- ;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable.init]
- (global.set $jsvarargs.QualifiedSuperMethodCall.vtable
-  (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall)
-   (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main)
-   (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main)
-   (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
-   (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main)
-   (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
-   (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main)
-   (ref.func $m_testJsFunction__void@jsvarargs.Main)
-   (ref.func $m_testSideEffect__void@jsvarargs.Main)
-   (ref.func $m_testNullJsVarargs__void@jsvarargs.Main)
-   (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
-   (rtt.canon $jsvarargs.QualifiedSuperMethodCall.vtable)
-  )
  )
+ (rtt.canon $itable)))
 
- ;;; Code for jsvarargs.QualifiedSuperMethodCall [itable.init]
- (global.set $jsvarargs.QualifiedSuperMethodCall.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
-
- ;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable.init]
- (global.set $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable
-  (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall.InnerClass)
-   (ref.func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass)
-   (rtt.canon $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)
-  )
+;;; Code for jsvarargs.QualifiedSuperMethodCall [vtable.init]
+(global $jsvarargs.QualifiedSuperMethodCall.vtable (ref $jsvarargs.QualifiedSuperMethodCall.vtable) 
+ (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall)
+  (ref.func $m_f3__int__arrayOf_int__int@jsvarargs.Main)
+  (ref.func $m_f4__arrayOf_int__int@jsvarargs.Main)
+  (ref.func $m_testStaticMethodNotFirst__void@jsvarargs.Main)
+  (ref.func $m_testStaticMethodFirst__void@jsvarargs.Main)
+  (ref.func $m_testInstanceMethodNotFirst__void@jsvarargs.Main)
+  (ref.func $m_testInstanceMethodFirst__void@jsvarargs.Main)
+  (ref.func $m_testJsFunction__void@jsvarargs.Main)
+  (ref.func $m_testSideEffect__void@jsvarargs.Main)
+  (ref.func $m_testNullJsVarargs__void@jsvarargs.Main)
+  (ref.func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main)
+  (rtt.canon $jsvarargs.QualifiedSuperMethodCall.vtable)
  )
+)
 
- ;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [itable.init]
- (global.set $jsvarargs.QualifiedSuperMethodCall.InnerClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsvarargs.QualifiedSuperMethodCall [itable.init]
+(global $jsvarargs.QualifiedSuperMethodCall.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
+
+;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [vtable.init]
+(global $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (ref $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable) 
+ (struct.new_with_rtt $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall.InnerClass)
+  (ref.func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass)
+  (rtt.canon $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable)
+ )
+)
+
+;;; Code for jsvarargs.QualifiedSuperMethodCall.InnerClass [itable.init]
+(global $jsvarargs.QualifiedSuperMethodCall.InnerClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for jsvarargs.Main [CLASS]
 (type $jsvarargs.Main (struct
@@ -224,22 +203,22 @@
  (extends $java.lang.Object)
 )
 (type $jsvarargs.Main.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_f3__int__arrayOf_int__int (mut (ref $function.$int__$javaemul.internal.WasmArray.OfInt__$int)))
- (field $m_f4__arrayOf_int__int (mut (ref $function.$javaemul.internal.WasmArray.OfInt__$int)))
- (field $m_testStaticMethodNotFirst__void (mut (ref $function.__$void)))
- (field $m_testStaticMethodFirst__void (mut (ref $function.__$void)))
- (field $m_testInstanceMethodNotFirst__void (mut (ref $function.__$void)))
- (field $m_testInstanceMethodFirst__void (mut (ref $function.__$void)))
- (field $m_testJsFunction__void (mut (ref $function.__$void)))
- (field $m_testSideEffect__void (mut (ref $function.__$void)))
- (field $m_testNullJsVarargs__void (mut (ref $function.__$void)))
- (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_f3__int__arrayOf_int__int (ref $function.$int__$javaemul.internal.WasmArray.OfInt__$int))
+ (field $m_f4__arrayOf_int__int (ref $function.$javaemul.internal.WasmArray.OfInt__$int))
+ (field $m_testStaticMethodNotFirst__void (ref $function.__$void))
+ (field $m_testStaticMethodFirst__void (ref $function.__$void))
+ (field $m_testInstanceMethodNotFirst__void (ref $function.__$void))
+ (field $m_testInstanceMethodFirst__void (ref $function.__$void))
+ (field $m_testJsFunction__void (ref $function.__$void))
+ (field $m_testSideEffect__void (ref $function.__$void))
+ (field $m_testNullJsVarargs__void (ref $function.__$void))
+ (field $m_testGenericJsFunctionWithVarags__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Main(int f)
@@ -969,12 +948,12 @@
  (extends $java.lang.Object)
 )
 (type $jsvarargs.Main.NativeObject.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; NativeObject(Object... pars)
@@ -1039,12 +1018,12 @@
  (extends $jsvarargs.Main.NativeObject)
 )
 (type $jsvarargs.Main.SubVarargsConstructorClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $jsvarargs.Main.NativeObject.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $jsvarargs.Main.NativeObject.vtable)
 )
 
 ;;; SubVarargsConstructorClass(int i, Object... args)
@@ -1102,8 +1081,9 @@
 
 ;;; Code for jsvarargs.Main.Function [INTERFACE]
 (type $jsvarargs.Main.Function.vtable (struct
- (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$java.lang.Object)))
-))
+ (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ )
+)
 
 ;;; void Function.$clinit()
 (func $$clinit__void@jsvarargs.Main.Function
@@ -1142,13 +1122,13 @@
  (extends $java.lang.Object)
 )
 (type $jsvarargs.Main.AbstractMethodWithVarargs.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_abstractMethod__arrayOf_int__void (mut (ref $function.$javaemul.internal.WasmArray.OfInt__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_abstractMethod__arrayOf_int__void (ref $function.$javaemul.internal.WasmArray.OfInt__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; AbstractMethodWithVarargs()
@@ -1192,8 +1172,9 @@
 )
 
 ;;; Code for jsvarargs.Main.StaticInterfaceMethodWithVarargs [INTERFACE]
-(type $jsvarargs.Main.StaticInterfaceMethodWithVarargs.vtable (struct
-))
+(type $jsvarargs.Main.StaticInterfaceMethodWithVarargs.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void StaticInterfaceMethodWithVarargs.staticMethod(int... args)
 (func $m_staticMethod__arrayOf_int__void@jsvarargs.Main.StaticInterfaceMethodWithVarargs
@@ -1243,13 +1224,13 @@
  (extends $java.lang.Object)
 )
 (type $jsvarargs.Main.AFunction.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; AFunction()
@@ -1332,22 +1313,22 @@
  (extends $jsvarargs.Main)
 )
 (type $jsvarargs.Main.SubMain.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_f3__int__arrayOf_int__int (mut (ref $function.$int__$javaemul.internal.WasmArray.OfInt__$int)))
- (field $m_f4__arrayOf_int__int (mut (ref $function.$javaemul.internal.WasmArray.OfInt__$int)))
- (field $m_testStaticMethodNotFirst__void (mut (ref $function.__$void)))
- (field $m_testStaticMethodFirst__void (mut (ref $function.__$void)))
- (field $m_testInstanceMethodNotFirst__void (mut (ref $function.__$void)))
- (field $m_testInstanceMethodFirst__void (mut (ref $function.__$void)))
- (field $m_testJsFunction__void (mut (ref $function.__$void)))
- (field $m_testSideEffect__void (mut (ref $function.__$void)))
- (field $m_testNullJsVarargs__void (mut (ref $function.__$void)))
- (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void))))
- (extends $jsvarargs.Main.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_f3__int__arrayOf_int__int (ref $function.$int__$javaemul.internal.WasmArray.OfInt__$int))
+ (field $m_f4__arrayOf_int__int (ref $function.$javaemul.internal.WasmArray.OfInt__$int))
+ (field $m_testStaticMethodNotFirst__void (ref $function.__$void))
+ (field $m_testStaticMethodFirst__void (ref $function.__$void))
+ (field $m_testInstanceMethodNotFirst__void (ref $function.__$void))
+ (field $m_testInstanceMethodFirst__void (ref $function.__$void))
+ (field $m_testJsFunction__void (ref $function.__$void))
+ (field $m_testSideEffect__void (ref $function.__$void))
+ (field $m_testNullJsVarargs__void (ref $function.__$void))
+ (field $m_testGenericJsFunctionWithVarags__void (ref $function.__$void))
+ )
+  (extends $jsvarargs.Main.vtable)
 )
 
 ;;; SubMain()
@@ -1470,8 +1451,9 @@
 
 ;;; Code for jsvarargs.Main.GenericFunction [INTERFACE]
 (type $jsvarargs.Main.GenericFunction.vtable (struct
- (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object)))
-))
+ (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ )
+)
 
 ;;; void GenericFunction.$clinit()
 (func $$clinit__void@jsvarargs.Main.GenericFunction
@@ -1510,13 +1492,13 @@
  (extends $java.lang.Object)
 )
 (type $jsvarargs.Main.$LambdaImplementor$1.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; $LambdaImplementor$1()
@@ -1607,22 +1589,22 @@
  (extends $jsvarargs.Main)
 )
 (type $jsvarargs.QualifiedSuperMethodCall.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_f3__int__arrayOf_int__int (mut (ref $function.$int__$javaemul.internal.WasmArray.OfInt__$int)))
- (field $m_f4__arrayOf_int__int (mut (ref $function.$javaemul.internal.WasmArray.OfInt__$int)))
- (field $m_testStaticMethodNotFirst__void (mut (ref $function.__$void)))
- (field $m_testStaticMethodFirst__void (mut (ref $function.__$void)))
- (field $m_testInstanceMethodNotFirst__void (mut (ref $function.__$void)))
- (field $m_testInstanceMethodFirst__void (mut (ref $function.__$void)))
- (field $m_testJsFunction__void (mut (ref $function.__$void)))
- (field $m_testSideEffect__void (mut (ref $function.__$void)))
- (field $m_testNullJsVarargs__void (mut (ref $function.__$void)))
- (field $m_testGenericJsFunctionWithVarags__void (mut (ref $function.__$void))))
- (extends $jsvarargs.Main.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_f3__int__arrayOf_int__int (ref $function.$int__$javaemul.internal.WasmArray.OfInt__$int))
+ (field $m_f4__arrayOf_int__int (ref $function.$javaemul.internal.WasmArray.OfInt__$int))
+ (field $m_testStaticMethodNotFirst__void (ref $function.__$void))
+ (field $m_testStaticMethodFirst__void (ref $function.__$void))
+ (field $m_testInstanceMethodNotFirst__void (ref $function.__$void))
+ (field $m_testInstanceMethodFirst__void (ref $function.__$void))
+ (field $m_testJsFunction__void (ref $function.__$void))
+ (field $m_testSideEffect__void (ref $function.__$void))
+ (field $m_testNullJsVarargs__void (ref $function.__$void))
+ (field $m_testGenericJsFunctionWithVarags__void (ref $function.__$void))
+ )
+  (extends $jsvarargs.Main.vtable)
 )
 
 ;;; QualifiedSuperMethodCall()
@@ -1687,13 +1669,13 @@
  (extends $java.lang.Object)
 )
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_test__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_test__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InnerClass(QualifiedSuperMethodCall $outer_this)

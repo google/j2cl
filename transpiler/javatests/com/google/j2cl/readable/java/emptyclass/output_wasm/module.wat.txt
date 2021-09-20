@@ -1,22 +1,20 @@
-;;; Code for emptyclass.EmptyClass [vtable]
-(global $emptyclass.EmptyClass.vtable (mut (ref null $emptyclass.EmptyClass.vtable)) (ref.null $emptyclass.EmptyClass.vtable))
-
 ;;; Code for emptyclass.EmptyClass [static fields]
 (global $f_$initialized__emptyclass_EmptyClass (mut i32) (i32.const 0))
 
- ;;; Code for emptyclass.EmptyClass [vtable.init]
- (global.set $emptyclass.EmptyClass.vtable
-  (struct.new_with_rtt $emptyclass.EmptyClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@emptyclass.EmptyClass)
-   (rtt.canon $emptyclass.EmptyClass.vtable)
-  )
+;;; Code for emptyclass.EmptyClass [vtable.init]
+(global $emptyclass.EmptyClass.vtable (ref $emptyclass.EmptyClass.vtable) 
+ (struct.new_with_rtt $emptyclass.EmptyClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@emptyclass.EmptyClass)
+  (rtt.canon $emptyclass.EmptyClass.vtable)
  )
+)
 
- ;;; Code for emptyclass.EmptyClass [itable.init]
- (global.set $emptyclass.EmptyClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for emptyclass.EmptyClass [itable.init]
+(global $emptyclass.EmptyClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for emptyclass.EmptyClass [CLASS]
 (type $emptyclass.EmptyClass (struct
@@ -25,12 +23,12 @@
  (extends $java.lang.Object)
 )
 (type $emptyclass.EmptyClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; EmptyClass()

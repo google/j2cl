@@ -1,6 +1,3 @@
-;;; Code for genericinterfaceabstractimpl.AbstractImpl [vtable]
-(global $genericinterfaceabstractimpl.AbstractImpl.vtable (mut (ref null $genericinterfaceabstractimpl.AbstractImpl.vtable)) (ref.null $genericinterfaceabstractimpl.AbstractImpl.vtable))
-
 ;;; Code for genericinterfaceabstractimpl.MyInterface [static fields]
 (global $f_$initialized__genericinterfaceabstractimpl_MyInterface (mut i32) (i32.const 0))
 
@@ -9,8 +6,9 @@
 
 ;;; Code for genericinterfaceabstractimpl.MyInterface [INTERFACE]
 (type $genericinterfaceabstractimpl.MyInterface.vtable (struct
- (field $m_fun__java_lang_Object__java_lang_Object (mut (ref $function.$java.lang.Object__$java.lang.Object)))
-))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ )
+)
 
 ;;; void MyInterface.$clinit()
 (func $$clinit__void@genericinterfaceabstractimpl.MyInterface
@@ -49,12 +47,12 @@
  (extends $java.lang.Object)
 )
 (type $genericinterfaceabstractimpl.AbstractImpl.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; AbstractImpl()

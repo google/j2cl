@@ -1,15 +1,3 @@
-;;; Code for autoboxing.AutoBoxing [vtable]
-(global $autoboxing.AutoBoxing.vtable (mut (ref null $autoboxing.AutoBoxing.vtable)) (ref.null $autoboxing.AutoBoxing.vtable))
-
-;;; Code for autoboxing.AutoBoxing.1Local [vtable]
-(global $autoboxing.AutoBoxing.1Local.vtable (mut (ref null $autoboxing.AutoBoxing.1Local.vtable)) (ref.null $autoboxing.AutoBoxing.1Local.vtable))
-
-;;; Code for autoboxing.AutoBoxing.2Local [vtable]
-(global $autoboxing.AutoBoxing.2Local.vtable (mut (ref null $autoboxing.AutoBoxing.2Local.vtable)) (ref.null $autoboxing.AutoBoxing.2Local.vtable))
-
-;;; Code for autoboxing.AutoBoxing.1Supplier [vtable]
-(global $autoboxing.AutoBoxing.1Supplier.vtable (mut (ref null $autoboxing.AutoBoxing.1Supplier.vtable)) (ref.null $autoboxing.AutoBoxing.1Supplier.vtable))
-
 ;;; Code for autoboxing.AutoBoxing [static fields]
 (global $f_$initialized__autoboxing_AutoBoxing (mut i32) (i32.const 0))
 
@@ -22,92 +10,96 @@
 ;;; Code for autoboxing.AutoBoxing.1Supplier [static fields]
 (global $f_$initialized__autoboxing_AutoBoxing_1Supplier (mut i32) (i32.const 0))
 
- ;;; Code for autoboxing.AutoBoxing [vtable.init]
- (global.set $autoboxing.AutoBoxing.vtable
-  (struct.new_with_rtt $autoboxing.AutoBoxing.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing)
-   (ref.func $m_box__boolean__java_lang_Boolean@autoboxing.AutoBoxing)
-   (ref.func $m_box__double__java_lang_Double@autoboxing.AutoBoxing)
-   (ref.func $m_box__byte__java_lang_Byte@autoboxing.AutoBoxing)
-   (ref.func $m_box__float__java_lang_Float@autoboxing.AutoBoxing)
-   (ref.func $m_box__int__java_lang_Integer@autoboxing.AutoBoxing)
-   (ref.func $m_box__long__java_lang_Long@autoboxing.AutoBoxing)
-   (ref.func $m_box__short__java_lang_Short@autoboxing.AutoBoxing)
-   (ref.func $m_box__char__java_lang_Character@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Boolean__boolean@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Double__double@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Byte__byte@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Float__float@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Integer__int@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Long__long@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Short__short@autoboxing.AutoBoxing)
-   (ref.func $m_unbox__java_lang_Character__char@autoboxing.AutoBoxing)
-   (ref.func $m_takesAndReturnsPrimitiveDouble__double__double@autoboxing.AutoBoxing)
-   (ref.func $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void@autoboxing.AutoBoxing)
-   (ref.func $m_takesFloatVarArgs__arrayOf_java_lang_Float__void@autoboxing.AutoBoxing)
-   (ref.func $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double@autoboxing.AutoBoxing)
-   (ref.func $m_sumWithoutBoxing__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing)
-   (ref.func $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing)
-   (ref.func $m_testBoxing__void@autoboxing.AutoBoxing)
-   (ref.func $m_testUnboxing__void@autoboxing.AutoBoxing)
-   (ref.func $m_testUnboxingBoolean__void@autoboxing.AutoBoxing)
-   (ref.func $m_testUnboxingEquality__void@autoboxing.AutoBoxing)
-   (ref.func $m_testAssertStatement__void@autoboxing.AutoBoxing)
-   (ref.func $m_testUnbox_withCast__void@autoboxing.AutoBoxing)
-   (rtt.canon $autoboxing.AutoBoxing.vtable)
-  )
+;;; Code for autoboxing.AutoBoxing [vtable.init]
+(global $autoboxing.AutoBoxing.vtable (ref $autoboxing.AutoBoxing.vtable) 
+ (struct.new_with_rtt $autoboxing.AutoBoxing.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing)
+  (ref.func $m_box__boolean__java_lang_Boolean@autoboxing.AutoBoxing)
+  (ref.func $m_box__double__java_lang_Double@autoboxing.AutoBoxing)
+  (ref.func $m_box__byte__java_lang_Byte@autoboxing.AutoBoxing)
+  (ref.func $m_box__float__java_lang_Float@autoboxing.AutoBoxing)
+  (ref.func $m_box__int__java_lang_Integer@autoboxing.AutoBoxing)
+  (ref.func $m_box__long__java_lang_Long@autoboxing.AutoBoxing)
+  (ref.func $m_box__short__java_lang_Short@autoboxing.AutoBoxing)
+  (ref.func $m_box__char__java_lang_Character@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Boolean__boolean@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Double__double@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Byte__byte@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Float__float@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Integer__int@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Long__long@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Short__short@autoboxing.AutoBoxing)
+  (ref.func $m_unbox__java_lang_Character__char@autoboxing.AutoBoxing)
+  (ref.func $m_takesAndReturnsPrimitiveDouble__double__double@autoboxing.AutoBoxing)
+  (ref.func $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void@autoboxing.AutoBoxing)
+  (ref.func $m_takesFloatVarArgs__arrayOf_java_lang_Float__void@autoboxing.AutoBoxing)
+  (ref.func $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double@autoboxing.AutoBoxing)
+  (ref.func $m_sumWithoutBoxing__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing)
+  (ref.func $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double@autoboxing.AutoBoxing)
+  (ref.func $m_testBoxing__void@autoboxing.AutoBoxing)
+  (ref.func $m_testUnboxing__void@autoboxing.AutoBoxing)
+  (ref.func $m_testUnboxingBoolean__void@autoboxing.AutoBoxing)
+  (ref.func $m_testUnboxingEquality__void@autoboxing.AutoBoxing)
+  (ref.func $m_testAssertStatement__void@autoboxing.AutoBoxing)
+  (ref.func $m_testUnbox_withCast__void@autoboxing.AutoBoxing)
+  (rtt.canon $autoboxing.AutoBoxing.vtable)
  )
+)
 
- ;;; Code for autoboxing.AutoBoxing [itable.init]
- (global.set $autoboxing.AutoBoxing.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for autoboxing.AutoBoxing [itable.init]
+(global $autoboxing.AutoBoxing.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for autoboxing.AutoBoxing.1Local [vtable.init]
- (global.set $autoboxing.AutoBoxing.1Local.vtable
-  (struct.new_with_rtt $autoboxing.AutoBoxing.1Local.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local)
-   (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.1Local)
-   (rtt.canon $autoboxing.AutoBoxing.1Local.vtable)
-  )
+;;; Code for autoboxing.AutoBoxing.1Local [vtable.init]
+(global $autoboxing.AutoBoxing.1Local.vtable (ref $autoboxing.AutoBoxing.1Local.vtable) 
+ (struct.new_with_rtt $autoboxing.AutoBoxing.1Local.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local)
+  (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.1Local)
+  (rtt.canon $autoboxing.AutoBoxing.1Local.vtable)
  )
+)
 
- ;;; Code for autoboxing.AutoBoxing.1Local [itable.init]
- (global.set $autoboxing.AutoBoxing.1Local.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for autoboxing.AutoBoxing.1Local [itable.init]
+(global $autoboxing.AutoBoxing.1Local.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for autoboxing.AutoBoxing.2Local [vtable.init]
- (global.set $autoboxing.AutoBoxing.2Local.vtable
-  (struct.new_with_rtt $autoboxing.AutoBoxing.2Local.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
-   (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.2Local)
-   (rtt.canon $autoboxing.AutoBoxing.2Local.vtable)
-  )
+;;; Code for autoboxing.AutoBoxing.2Local [vtable.init]
+(global $autoboxing.AutoBoxing.2Local.vtable (ref $autoboxing.AutoBoxing.2Local.vtable) 
+ (struct.new_with_rtt $autoboxing.AutoBoxing.2Local.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
+  (ref.func $m_toLong__java_lang_Long__long_$pp_autoboxing@autoboxing.AutoBoxing.2Local)
+  (rtt.canon $autoboxing.AutoBoxing.2Local.vtable)
  )
+)
 
- ;;; Code for autoboxing.AutoBoxing.2Local [itable.init]
- (global.set $autoboxing.AutoBoxing.2Local.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for autoboxing.AutoBoxing.2Local [itable.init]
+(global $autoboxing.AutoBoxing.2Local.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for autoboxing.AutoBoxing.1Supplier [vtable.init]
- (global.set $autoboxing.AutoBoxing.1Supplier.vtable
-  (struct.new_with_rtt $autoboxing.AutoBoxing.1Supplier.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier)
-   (ref.func $m_get__java_lang_Object_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier)
-   (rtt.canon $autoboxing.AutoBoxing.1Supplier.vtable)
-  )
+;;; Code for autoboxing.AutoBoxing.1Supplier [vtable.init]
+(global $autoboxing.AutoBoxing.1Supplier.vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable) 
+ (struct.new_with_rtt $autoboxing.AutoBoxing.1Supplier.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Supplier)
+  (ref.func $m_get__java_lang_Object_$pp_autoboxing@autoboxing.AutoBoxing.1Supplier)
+  (rtt.canon $autoboxing.AutoBoxing.1Supplier.vtable)
  )
+)
 
- ;;; Code for autoboxing.AutoBoxing.1Supplier [itable.init]
- (global.set $autoboxing.AutoBoxing.1Supplier.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for autoboxing.AutoBoxing.1Supplier [itable.init]
+(global $autoboxing.AutoBoxing.1Supplier.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for autoboxing.AutoBoxing [CLASS]
 (type $autoboxing.AutoBoxing (struct
@@ -116,40 +108,40 @@
  (extends $java.lang.Object)
 )
 (type $autoboxing.AutoBoxing.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_box__boolean__java_lang_Boolean (mut (ref $function.$boolean__$java.lang.Boolean)))
- (field $m_box__double__java_lang_Double (mut (ref $function.$double__$java.lang.Double)))
- (field $m_box__byte__java_lang_Byte (mut (ref $function.$byte__$java.lang.Byte)))
- (field $m_box__float__java_lang_Float (mut (ref $function.$float__$java.lang.Float)))
- (field $m_box__int__java_lang_Integer (mut (ref $function.$int__$java.lang.Integer)))
- (field $m_box__long__java_lang_Long (mut (ref $function.$long__$java.lang.Long)))
- (field $m_box__short__java_lang_Short (mut (ref $function.$short__$java.lang.Short)))
- (field $m_box__char__java_lang_Character (mut (ref $function.$char__$java.lang.Character)))
- (field $m_unbox__java_lang_Boolean__boolean (mut (ref $function.$java.lang.Boolean__$boolean)))
- (field $m_unbox__java_lang_Double__double (mut (ref $function.$java.lang.Double__$double)))
- (field $m_unbox__java_lang_Byte__byte (mut (ref $function.$java.lang.Byte__$byte)))
- (field $m_unbox__java_lang_Float__float (mut (ref $function.$java.lang.Float__$float)))
- (field $m_unbox__java_lang_Integer__int (mut (ref $function.$java.lang.Integer__$int)))
- (field $m_unbox__java_lang_Long__long (mut (ref $function.$java.lang.Long__$long)))
- (field $m_unbox__java_lang_Short__short (mut (ref $function.$java.lang.Short__$short)))
- (field $m_unbox__java_lang_Character__char (mut (ref $function.$java.lang.Character__$char)))
- (field $m_takesAndReturnsPrimitiveDouble__double__double (mut (ref $function.$double__$double)))
- (field $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void (mut (ref $function.$java.lang.Void__$java.lang.Void)))
- (field $m_takesFloatVarArgs__arrayOf_java_lang_Float__void (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$void)))
- (field $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double (mut (ref $function.$java.lang.Object__$double)))
- (field $m_sumWithoutBoxing__arrayOf_java_lang_Object__double (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$double)))
- (field $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double (mut (ref $function.$javaemul.internal.WasmArray.OfObject__$double)))
- (field $m_testBoxing__void (mut (ref $function.__$void)))
- (field $m_testUnboxing__void (mut (ref $function.__$void)))
- (field $m_testUnboxingBoolean__void (mut (ref $function.__$void)))
- (field $m_testUnboxingEquality__void (mut (ref $function.__$void)))
- (field $m_testAssertStatement__void (mut (ref $function.__$void)))
- (field $m_testUnbox_withCast__void (mut (ref $function.__$void))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_box__boolean__java_lang_Boolean (ref $function.$boolean__$java.lang.Boolean))
+ (field $m_box__double__java_lang_Double (ref $function.$double__$java.lang.Double))
+ (field $m_box__byte__java_lang_Byte (ref $function.$byte__$java.lang.Byte))
+ (field $m_box__float__java_lang_Float (ref $function.$float__$java.lang.Float))
+ (field $m_box__int__java_lang_Integer (ref $function.$int__$java.lang.Integer))
+ (field $m_box__long__java_lang_Long (ref $function.$long__$java.lang.Long))
+ (field $m_box__short__java_lang_Short (ref $function.$short__$java.lang.Short))
+ (field $m_box__char__java_lang_Character (ref $function.$char__$java.lang.Character))
+ (field $m_unbox__java_lang_Boolean__boolean (ref $function.$java.lang.Boolean__$boolean))
+ (field $m_unbox__java_lang_Double__double (ref $function.$java.lang.Double__$double))
+ (field $m_unbox__java_lang_Byte__byte (ref $function.$java.lang.Byte__$byte))
+ (field $m_unbox__java_lang_Float__float (ref $function.$java.lang.Float__$float))
+ (field $m_unbox__java_lang_Integer__int (ref $function.$java.lang.Integer__$int))
+ (field $m_unbox__java_lang_Long__long (ref $function.$java.lang.Long__$long))
+ (field $m_unbox__java_lang_Short__short (ref $function.$java.lang.Short__$short))
+ (field $m_unbox__java_lang_Character__char (ref $function.$java.lang.Character__$char))
+ (field $m_takesAndReturnsPrimitiveDouble__double__double (ref $function.$double__$double))
+ (field $m_takesAndReturnsVoid__java_lang_Void__java_lang_Void (ref $function.$java.lang.Void__$java.lang.Void))
+ (field $m_takesFloatVarArgs__arrayOf_java_lang_Float__void (ref $function.$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double (ref $function.$java.lang.Object__$double))
+ (field $m_sumWithoutBoxing__arrayOf_java_lang_Object__double (ref $function.$javaemul.internal.WasmArray.OfObject__$double))
+ (field $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double (ref $function.$javaemul.internal.WasmArray.OfObject__$double))
+ (field $m_testBoxing__void (ref $function.__$void))
+ (field $m_testUnboxing__void (ref $function.__$void))
+ (field $m_testUnboxingBoolean__void (ref $function.__$void))
+ (field $m_testUnboxingEquality__void (ref $function.__$void))
+ (field $m_testAssertStatement__void (ref $function.__$void))
+ (field $m_testUnbox_withCast__void (ref $function.__$void))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; AutoBoxing()
@@ -1414,13 +1406,13 @@
  (extends $java.lang.Object)
 )
 (type $autoboxing.AutoBoxing.1Local.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_toLong__java_lang_Long__long_$pp_autoboxing (mut (ref $function.$java.lang.Long__$long))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.$java.lang.Long__$long))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Local()
@@ -1501,13 +1493,13 @@
  (extends $java.lang.Object)
 )
 (type $autoboxing.AutoBoxing.2Local.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_toLong__java_lang_Long__long_$pp_autoboxing (mut (ref $function.$java.lang.Long__$long))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.$java.lang.Long__$long))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Local()
@@ -1589,13 +1581,13 @@
  (extends $java.lang.Object)
 )
 (type $autoboxing.AutoBoxing.1Supplier.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_get__java_lang_Object_$pp_autoboxing (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_get__java_lang_Object_$pp_autoboxing (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Supplier(AutoBoxing $outer_this)

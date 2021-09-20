@@ -1,22 +1,20 @@
-;;; Code for instancefieldinitializer.InstanceFieldInitializer [vtable]
-(global $instancefieldinitializer.InstanceFieldInitializer.vtable (mut (ref null $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.null $instancefieldinitializer.InstanceFieldInitializer.vtable))
-
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [static fields]
 (global $f_$initialized__instancefieldinitializer_InstanceFieldInitializer (mut i32) (i32.const 0))
 
- ;;; Code for instancefieldinitializer.InstanceFieldInitializer [vtable.init]
- (global.set $instancefieldinitializer.InstanceFieldInitializer.vtable
-  (struct.new_with_rtt $instancefieldinitializer.InstanceFieldInitializer.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer)
-   (rtt.canon $instancefieldinitializer.InstanceFieldInitializer.vtable)
-  )
+;;; Code for instancefieldinitializer.InstanceFieldInitializer [vtable.init]
+(global $instancefieldinitializer.InstanceFieldInitializer.vtable (ref $instancefieldinitializer.InstanceFieldInitializer.vtable) 
+ (struct.new_with_rtt $instancefieldinitializer.InstanceFieldInitializer.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@instancefieldinitializer.InstanceFieldInitializer)
+  (rtt.canon $instancefieldinitializer.InstanceFieldInitializer.vtable)
  )
+)
 
- ;;; Code for instancefieldinitializer.InstanceFieldInitializer [itable.init]
- (global.set $instancefieldinitializer.InstanceFieldInitializer.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for instancefieldinitializer.InstanceFieldInitializer [itable.init]
+(global $instancefieldinitializer.InstanceFieldInitializer.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for instancefieldinitializer.InstanceFieldInitializer [CLASS]
 (type $instancefieldinitializer.InstanceFieldInitializer (struct
@@ -27,12 +25,12 @@
  (extends $java.lang.Object)
 )
 (type $instancefieldinitializer.InstanceFieldInitializer.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; InstanceFieldInitializer()

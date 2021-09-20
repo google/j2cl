@@ -1,42 +1,38 @@
-;;; Code for srcjar.Foo [vtable]
-(global $srcjar.Foo.vtable (mut (ref null $srcjar.Foo.vtable)) (ref.null $srcjar.Foo.vtable))
-
-;;; Code for srcjar.Srcjar [vtable]
-(global $srcjar.Srcjar.vtable (mut (ref null $srcjar.Srcjar.vtable)) (ref.null $srcjar.Srcjar.vtable))
-
 ;;; Code for srcjar.Foo [static fields]
 (global $f_$initialized__srcjar_Foo (mut i32) (i32.const 0))
 
 ;;; Code for srcjar.Srcjar [static fields]
 (global $f_$initialized__srcjar_Srcjar (mut i32) (i32.const 0))
 
- ;;; Code for srcjar.Foo [vtable.init]
- (global.set $srcjar.Foo.vtable
-  (struct.new_with_rtt $srcjar.Foo.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@srcjar.Foo)
-   (rtt.canon $srcjar.Foo.vtable)
-  )
+;;; Code for srcjar.Foo [vtable.init]
+(global $srcjar.Foo.vtable (ref $srcjar.Foo.vtable) 
+ (struct.new_with_rtt $srcjar.Foo.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@srcjar.Foo)
+  (rtt.canon $srcjar.Foo.vtable)
  )
+)
 
- ;;; Code for srcjar.Foo [itable.init]
- (global.set $srcjar.Foo.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for srcjar.Foo [itable.init]
+(global $srcjar.Foo.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for srcjar.Srcjar [vtable.init]
- (global.set $srcjar.Srcjar.vtable
-  (struct.new_with_rtt $srcjar.Srcjar.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@srcjar.Srcjar)
-   (rtt.canon $srcjar.Srcjar.vtable)
-  )
+;;; Code for srcjar.Srcjar [vtable.init]
+(global $srcjar.Srcjar.vtable (ref $srcjar.Srcjar.vtable) 
+ (struct.new_with_rtt $srcjar.Srcjar.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@srcjar.Srcjar)
+  (rtt.canon $srcjar.Srcjar.vtable)
  )
+)
 
- ;;; Code for srcjar.Srcjar [itable.init]
- (global.set $srcjar.Srcjar.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for srcjar.Srcjar [itable.init]
+(global $srcjar.Srcjar.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for srcjar.Foo [CLASS]
 (type $srcjar.Foo (struct
@@ -45,12 +41,12 @@
  (extends $java.lang.Object)
 )
 (type $srcjar.Foo.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Foo()
@@ -114,12 +110,12 @@
  (extends $java.lang.Object)
 )
 (type $srcjar.Srcjar.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; Srcjar()

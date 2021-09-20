@@ -1,12 +1,3 @@
-;;; Code for jsdoctypemappings.JsDocTypeMappings [vtable]
-(global $jsdoctypemappings.JsDocTypeMappings.vtable (mut (ref null $jsdoctypemappings.JsDocTypeMappings.vtable)) (ref.null $jsdoctypemappings.JsDocTypeMappings.vtable))
-
-;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [vtable]
-(global $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable (mut (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)) (ref.null $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable))
-
-;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [vtable]
-(global $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (mut (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.null $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable))
-
 ;;; Code for jsdoctypemappings.JsDocTypeMappings [static fields]
 (global $f_$initialized__jsdoctypemappings_JsDocTypeMappings (mut i32) (i32.const 0))
 
@@ -43,80 +34,83 @@
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeWildcard [static fields]
 (global $f_$initialized__jsdoctypemappings_JsDocTypeMappings_NativeWildcard (mut i32) (i32.const 0))
 
- ;;; Code for jsdoctypemappings.JsDocTypeMappings [vtable.init]
- (global.set $jsdoctypemappings.JsDocTypeMappings.vtable
-  (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnComparatorWildcard__java_util_Comparator_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnComparable__java_lang_Comparable_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangString__java_lang_String_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangObject__java_lang_Object_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangByte__java_lang_Byte_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangShort__java_lang_Short_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangInteger__java_lang_Integer_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangLong__java_lang_Long_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangFloat__java_lang_Float_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangDouble__java_lang_Double_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangCharacter__java_lang_Character_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnJavaLangBoolean__java_lang_Boolean_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnByte__byte_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnShort__short_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnInt__int_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnLong__long_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnFloat__float_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnDouble__double_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnChar__char_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnBoolean__boolean_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnVoid__void_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeFunction__jsdoctypemappings_JsDocTypeMappings_NativeFunction_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeType__jsdoctypemappings_JsDocTypeMappings_NativeType_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnExportedType__jsdoctypemappings_JsDocTypeMappings_ExportedType_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnMethodTypeParameter__java_lang_Object_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeNumber__jsdoctypemappings_JsDocTypeMappings_NativeNumber_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeBoolean__jsdoctypemappings_JsDocTypeMappings_NativeBoolean_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeString__jsdoctypemappings_JsDocTypeMappings_NativeString_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeNull__jsdoctypemappings_JsDocTypeMappings_NativeNull_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeUndefined__jsdoctypemappings_JsDocTypeMappings_NativeUndefined_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeVoid__jsdoctypemappings_JsDocTypeMappings_NativeVoid_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnStar__jsdoctypemappings_JsDocTypeMappings_NativeStar_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (ref.func $m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-   (rtt.canon $jsdoctypemappings.JsDocTypeMappings.vtable)
-  )
+;;; Code for jsdoctypemappings.JsDocTypeMappings [vtable.init]
+(global $jsdoctypemappings.JsDocTypeMappings.vtable (ref $jsdoctypemappings.JsDocTypeMappings.vtable) 
+ (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnComparatorWildcard__java_util_Comparator_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnComparable__java_lang_Comparable_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangString__java_lang_String_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangObject__java_lang_Object_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangByte__java_lang_Byte_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangShort__java_lang_Short_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangInteger__java_lang_Integer_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangLong__java_lang_Long_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangFloat__java_lang_Float_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangDouble__java_lang_Double_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangCharacter__java_lang_Character_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnJavaLangBoolean__java_lang_Boolean_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnByte__byte_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnShort__short_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnInt__int_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnLong__long_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnFloat__float_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnDouble__double_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnChar__char_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnBoolean__boolean_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnVoid__void_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeFunction__jsdoctypemappings_JsDocTypeMappings_NativeFunction_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeType__jsdoctypemappings_JsDocTypeMappings_NativeType_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnExportedType__jsdoctypemappings_JsDocTypeMappings_ExportedType_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnMethodTypeParameter__java_lang_Object_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeNumber__jsdoctypemappings_JsDocTypeMappings_NativeNumber_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeBoolean__jsdoctypemappings_JsDocTypeMappings_NativeBoolean_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeString__jsdoctypemappings_JsDocTypeMappings_NativeString_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeNull__jsdoctypemappings_JsDocTypeMappings_NativeNull_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeUndefined__jsdoctypemappings_JsDocTypeMappings_NativeUndefined_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeVoid__jsdoctypemappings_JsDocTypeMappings_NativeVoid_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnStar__jsdoctypemappings_JsDocTypeMappings_NativeStar_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (ref.func $m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
+  (rtt.canon $jsdoctypemappings.JsDocTypeMappings.vtable)
  )
+)
 
- ;;; Code for jsdoctypemappings.JsDocTypeMappings [itable.init]
- (global.set $jsdoctypemappings.JsDocTypeMappings.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsdoctypemappings.JsDocTypeMappings [itable.init]
+(global $jsdoctypemappings.JsDocTypeMappings.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [vtable.init]
- (global.set $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable
-  (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType)
-   (rtt.canon $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)
-  )
+;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [vtable.init]
+(global $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable (ref $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable) 
+ (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType)
+  (rtt.canon $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)
  )
+)
 
- ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [itable.init]
- (global.set $jsdoctypemappings.JsDocTypeMappings.NativeType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [itable.init]
+(global $jsdoctypemappings.JsDocTypeMappings.NativeType.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [vtable.init]
- (global.set $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable
-  (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
-   (rtt.canon $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)
-  )
+;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [vtable.init]
+(global $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (ref $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable) 
+ (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
+  (rtt.canon $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)
  )
+)
 
- ;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [itable.init]
- (global.set $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [itable.init]
+(global $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings [CLASS]
 (type $jsdoctypemappings.JsDocTypeMappings (struct
@@ -125,45 +119,45 @@
  (extends $java.lang.Object)
 )
 (type $jsdoctypemappings.JsDocTypeMappings.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class)))
- (field $m_returnComparatorWildcard__java_util_Comparator_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnComparable__java_lang_Comparable_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnJavaLangString__java_lang_String_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.String)))
- (field $m_returnJavaLangObject__java_lang_Object_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnJavaLangByte__java_lang_Byte_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Byte)))
- (field $m_returnJavaLangShort__java_lang_Short_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Short)))
- (field $m_returnJavaLangInteger__java_lang_Integer_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Integer)))
- (field $m_returnJavaLangLong__java_lang_Long_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Long)))
- (field $m_returnJavaLangFloat__java_lang_Float_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Float)))
- (field $m_returnJavaLangDouble__java_lang_Double_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Double)))
- (field $m_returnJavaLangCharacter__java_lang_Character_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Character)))
- (field $m_returnJavaLangBoolean__java_lang_Boolean_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Boolean)))
- (field $m_returnByte__byte_$pp_jsdoctypemappings (mut (ref $function.__$byte)))
- (field $m_returnShort__short_$pp_jsdoctypemappings (mut (ref $function.__$short)))
- (field $m_returnInt__int_$pp_jsdoctypemappings (mut (ref $function.__$int)))
- (field $m_returnLong__long_$pp_jsdoctypemappings (mut (ref $function.__$long)))
- (field $m_returnFloat__float_$pp_jsdoctypemappings (mut (ref $function.__$float)))
- (field $m_returnDouble__double_$pp_jsdoctypemappings (mut (ref $function.__$double)))
- (field $m_returnChar__char_$pp_jsdoctypemappings (mut (ref $function.__$char)))
- (field $m_returnBoolean__boolean_$pp_jsdoctypemappings (mut (ref $function.__$boolean)))
- (field $m_returnVoid__void_$pp_jsdoctypemappings (mut (ref $function.__$void)))
- (field $m_returnNativeFunction__jsdoctypemappings_JsDocTypeMappings_NativeFunction_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeType__jsdoctypemappings_JsDocTypeMappings_NativeType_$pp_jsdoctypemappings (mut (ref $function.__$jsdoctypemappings.JsDocTypeMappings.NativeType)))
- (field $m_returnExportedType__jsdoctypemappings_JsDocTypeMappings_ExportedType_$pp_jsdoctypemappings (mut (ref $function.__$jsdoctypemappings.JsDocTypeMappings.ExportedType)))
- (field $m_returnMethodTypeParameter__java_lang_Object_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeNumber__jsdoctypemappings_JsDocTypeMappings_NativeNumber_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeBoolean__jsdoctypemappings_JsDocTypeMappings_NativeBoolean_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeString__jsdoctypemappings_JsDocTypeMappings_NativeString_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeNull__jsdoctypemappings_JsDocTypeMappings_NativeNull_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeUndefined__jsdoctypemappings_JsDocTypeMappings_NativeUndefined_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeVoid__jsdoctypemappings_JsDocTypeMappings_NativeVoid_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnStar__jsdoctypemappings_JsDocTypeMappings_NativeStar_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object)))
- (field $m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings (mut (ref $function.__$java.lang.Object))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_returnComparatorWildcard__java_util_Comparator_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnComparable__java_lang_Comparable_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnJavaLangString__java_lang_String_$pp_jsdoctypemappings (ref $function.__$java.lang.String))
+ (field $m_returnJavaLangObject__java_lang_Object_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnJavaLangByte__java_lang_Byte_$pp_jsdoctypemappings (ref $function.__$java.lang.Byte))
+ (field $m_returnJavaLangShort__java_lang_Short_$pp_jsdoctypemappings (ref $function.__$java.lang.Short))
+ (field $m_returnJavaLangInteger__java_lang_Integer_$pp_jsdoctypemappings (ref $function.__$java.lang.Integer))
+ (field $m_returnJavaLangLong__java_lang_Long_$pp_jsdoctypemappings (ref $function.__$java.lang.Long))
+ (field $m_returnJavaLangFloat__java_lang_Float_$pp_jsdoctypemappings (ref $function.__$java.lang.Float))
+ (field $m_returnJavaLangDouble__java_lang_Double_$pp_jsdoctypemappings (ref $function.__$java.lang.Double))
+ (field $m_returnJavaLangCharacter__java_lang_Character_$pp_jsdoctypemappings (ref $function.__$java.lang.Character))
+ (field $m_returnJavaLangBoolean__java_lang_Boolean_$pp_jsdoctypemappings (ref $function.__$java.lang.Boolean))
+ (field $m_returnByte__byte_$pp_jsdoctypemappings (ref $function.__$byte))
+ (field $m_returnShort__short_$pp_jsdoctypemappings (ref $function.__$short))
+ (field $m_returnInt__int_$pp_jsdoctypemappings (ref $function.__$int))
+ (field $m_returnLong__long_$pp_jsdoctypemappings (ref $function.__$long))
+ (field $m_returnFloat__float_$pp_jsdoctypemappings (ref $function.__$float))
+ (field $m_returnDouble__double_$pp_jsdoctypemappings (ref $function.__$double))
+ (field $m_returnChar__char_$pp_jsdoctypemappings (ref $function.__$char))
+ (field $m_returnBoolean__boolean_$pp_jsdoctypemappings (ref $function.__$boolean))
+ (field $m_returnVoid__void_$pp_jsdoctypemappings (ref $function.__$void))
+ (field $m_returnNativeFunction__jsdoctypemappings_JsDocTypeMappings_NativeFunction_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeType__jsdoctypemappings_JsDocTypeMappings_NativeType_$pp_jsdoctypemappings (ref $function.__$jsdoctypemappings.JsDocTypeMappings.NativeType))
+ (field $m_returnExportedType__jsdoctypemappings_JsDocTypeMappings_ExportedType_$pp_jsdoctypemappings (ref $function.__$jsdoctypemappings.JsDocTypeMappings.ExportedType))
+ (field $m_returnMethodTypeParameter__java_lang_Object_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeNumber__jsdoctypemappings_JsDocTypeMappings_NativeNumber_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeBoolean__jsdoctypemappings_JsDocTypeMappings_NativeBoolean_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeString__jsdoctypemappings_JsDocTypeMappings_NativeString_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeNull__jsdoctypemappings_JsDocTypeMappings_NativeNull_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeUndefined__jsdoctypemappings_JsDocTypeMappings_NativeUndefined_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeVoid__jsdoctypemappings_JsDocTypeMappings_NativeVoid_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnStar__jsdoctypemappings_JsDocTypeMappings_NativeStar_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ (field $m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings (ref $function.__$java.lang.Object))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; JsDocTypeMappings()
@@ -746,8 +740,9 @@
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeFunction [INTERFACE]
 (type $jsdoctypemappings.JsDocTypeMappings.NativeFunction.vtable (struct
- (field $m_f__void (mut (ref $function.__$void)))
-))
+ (field $m_f__void (ref $function.__$void))
+ )
+)
 
 ;;; void NativeFunction.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeFunction
@@ -786,12 +781,12 @@
  (extends $java.lang.Object)
 )
 (type $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; NativeType()
@@ -856,12 +851,12 @@
  (extends $java.lang.Object)
 )
 (type $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; ExportedType(JsDocTypeMappings $outer_this)
@@ -923,8 +918,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeNumber [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeNumber.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeNumber.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeNumber.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeNumber
@@ -957,8 +953,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeNumber)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeBoolean [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeBoolean.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeBoolean.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeBoolean.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeBoolean
@@ -991,8 +988,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeBoolean)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeString [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeString.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeString.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeString.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeString
@@ -1025,8 +1023,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeString)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeNull [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeNull.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeNull.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeNull.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeNull
@@ -1059,8 +1058,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeNull)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeUndefined [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeUndefined.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeUndefined.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeUndefined.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeUndefined
@@ -1093,8 +1093,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeUndefined)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeVoid [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeVoid.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeVoid.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeVoid.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeVoid
@@ -1127,8 +1128,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeVoid)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeStar [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeStar.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeStar.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeStar.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeStar
@@ -1161,8 +1163,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeStar)
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeWildcard [INTERFACE]
-(type $jsdoctypemappings.JsDocTypeMappings.NativeWildcard.vtable (struct
-))
+(type $jsdoctypemappings.JsDocTypeMappings.NativeWildcard.vtable (struct(field $unused (ref null data))
+ )
+)
 
 ;;; void NativeWildcard.$clinit()
 (func $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeWildcard

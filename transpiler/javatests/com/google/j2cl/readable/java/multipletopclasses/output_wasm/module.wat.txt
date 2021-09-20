@@ -1,42 +1,38 @@
-;;; Code for multipletopclasses.AnotherClass [vtable]
-(global $multipletopclasses.AnotherClass.vtable (mut (ref null $multipletopclasses.AnotherClass.vtable)) (ref.null $multipletopclasses.AnotherClass.vtable))
-
-;;; Code for multipletopclasses.MultipleTopClasses [vtable]
-(global $multipletopclasses.MultipleTopClasses.vtable (mut (ref null $multipletopclasses.MultipleTopClasses.vtable)) (ref.null $multipletopclasses.MultipleTopClasses.vtable))
-
 ;;; Code for multipletopclasses.AnotherClass [static fields]
 (global $f_$initialized__multipletopclasses_AnotherClass (mut i32) (i32.const 0))
 
 ;;; Code for multipletopclasses.MultipleTopClasses [static fields]
 (global $f_$initialized__multipletopclasses_MultipleTopClasses (mut i32) (i32.const 0))
 
- ;;; Code for multipletopclasses.AnotherClass [vtable.init]
- (global.set $multipletopclasses.AnotherClass.vtable
-  (struct.new_with_rtt $multipletopclasses.AnotherClass.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass)
-   (rtt.canon $multipletopclasses.AnotherClass.vtable)
-  )
+;;; Code for multipletopclasses.AnotherClass [vtable.init]
+(global $multipletopclasses.AnotherClass.vtable (ref $multipletopclasses.AnotherClass.vtable) 
+ (struct.new_with_rtt $multipletopclasses.AnotherClass.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass)
+  (rtt.canon $multipletopclasses.AnotherClass.vtable)
  )
+)
 
- ;;; Code for multipletopclasses.AnotherClass [itable.init]
- (global.set $multipletopclasses.AnotherClass.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for multipletopclasses.AnotherClass [itable.init]
+(global $multipletopclasses.AnotherClass.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
- ;;; Code for multipletopclasses.MultipleTopClasses [vtable.init]
- (global.set $multipletopclasses.MultipleTopClasses.vtable
-  (struct.new_with_rtt $multipletopclasses.MultipleTopClasses.vtable
-   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-   (ref.func $m_hashCode__int@java.lang.Object)
-   (ref.func $m_toString__java_lang_String@java.lang.Object)
-   (ref.func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses)
-   (rtt.canon $multipletopclasses.MultipleTopClasses.vtable)
-  )
+;;; Code for multipletopclasses.MultipleTopClasses [vtable.init]
+(global $multipletopclasses.MultipleTopClasses.vtable (ref $multipletopclasses.MultipleTopClasses.vtable) 
+ (struct.new_with_rtt $multipletopclasses.MultipleTopClasses.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses)
+  (rtt.canon $multipletopclasses.MultipleTopClasses.vtable)
  )
+)
 
- ;;; Code for multipletopclasses.MultipleTopClasses [itable.init]
- (global.set $multipletopclasses.MultipleTopClasses.itable (array.new_default_with_rtt $itable (i32.const 0) (rtt.canon $itable)))
+;;; Code for multipletopclasses.MultipleTopClasses [itable.init]
+(global $multipletopclasses.MultipleTopClasses.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
 
 ;;; Code for multipletopclasses.AnotherClass [CLASS]
 (type $multipletopclasses.AnotherClass (struct
@@ -45,12 +41,12 @@
  (extends $java.lang.Object)
 )
 (type $multipletopclasses.AnotherClass.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $java.lang.Object.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $java.lang.Object.vtable)
 )
 
 ;;; AnotherClass()
@@ -114,12 +110,12 @@
  (extends $multipletopclasses.AnotherClass)
 )
 (type $multipletopclasses.MultipleTopClasses.vtable (struct
- 
- (field $m_equals__java_lang_Object__boolean (mut (ref $function.$java.lang.Object__$boolean)))
- (field $m_hashCode__int (mut (ref $function.__$int)))
- (field $m_toString__java_lang_String (mut (ref $function.__$java.lang.String)))
- (field $m_getClass__java_lang_Class (mut (ref $function.__$java.lang.Class))))
- (extends $multipletopclasses.AnotherClass.vtable)
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.__$int))
+ (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ )
+  (extends $multipletopclasses.AnotherClass.vtable)
 )
 
 ;;; MultipleTopClasses()
