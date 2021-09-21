@@ -86,7 +86,7 @@ def j2cl_library(
     # If this is JRE itself, don't synthesize the JRE dep.
     target_name = "//" + native.package_name() + ":" + name
     if args.get("srcs") and target_name != "//jre/java:jre":
-        jre = Label("//:jre", relative_to_caller_repository = False)
+        jre = Label("//:jre")
         args["deps"] = args.get("deps", []) + [jre]
 
     j2cl_library_rule(
