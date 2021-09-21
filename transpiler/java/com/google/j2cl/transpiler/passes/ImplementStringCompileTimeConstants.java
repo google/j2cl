@@ -61,7 +61,6 @@ public class ImplementStringCompileTimeConstants extends LibraryNormalizationPas
           public Expression rewriteStringLiteral(StringLiteral stringLiteral) {
             return MethodCall.Builder.from(
                     getOrCreateLiteralMethod(stringHolderType, stringLiteral))
-                .setHasSideEffects(false)
                 .build();
           }
         });

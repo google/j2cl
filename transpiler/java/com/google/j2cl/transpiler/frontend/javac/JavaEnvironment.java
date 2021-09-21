@@ -865,7 +865,7 @@ class JavaEnvironment {
       jsInfo = JsInfo.Builder.from(jsInfo).setJsMemberType(JsMemberType.CONSTRUCTOR).build();
     }
 
-    boolean hasUncheckedCast = hasUncheckedCastAnnotation((MethodSymbol) declarationMethodElement);
+    boolean hasUncheckedCast = hasUncheckedCastAnnotation(declarationMethodElement);
     return MethodDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setName(isConstructor ? null : methodName)
@@ -884,6 +884,7 @@ class JavaEnvironment {
         .setAbstract(isAbstract(declarationMethodElement))
         .setSynthetic(isSynthetic(declarationMethodElement))
         .setEnumSyntheticMethod(isEnumSyntheticMethod(declarationMethodElement))
+        .setSideEffectFree(isAnnotatedWithHasNoSideEffects(declarationMethodElement))
         .setUnusableByJsSuppressed(
             JsInteropAnnotationUtils.isUnusableByJsSuppressed(declarationMethodElement))
         .setDeprecated(isDeprecated(declarationMethodElement))
@@ -891,9 +892,14 @@ class JavaEnvironment {
         .build();
   }
 
-  /** Returns true if the symbol is annotated with @UncheckedCast. */
-  private static boolean hasUncheckedCastAnnotation(MethodSymbol symbol) {
-    return AnnotationUtils.hasAnnotation(symbol, "javaemul.internal.annotations.UncheckedCast");
+  /** Returns true if the element is annotated with @UncheckedCast. */
+  private static boolean hasUncheckedCastAnnotation(Element element) {
+    return AnnotationUtils.hasAnnotation(element, "javaemul.internal.annotations.UncheckedCast");
+  }
+
+  /** Returns true if the element is annotated with @HasNoSideEffects. */
+  private static boolean isAnnotatedWithHasNoSideEffects(Element element) {
+    return AnnotationUtils.hasAnnotation(element, "javaemul.internal.annotations.HasNoSideEffects");
   }
 
   /** Checks overriding chain to compute JsInfo. */

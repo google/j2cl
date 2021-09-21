@@ -281,6 +281,9 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   /** Returns {@code true} if the method is annotated with {@code UncheckedCast}. */
   public abstract boolean isUncheckedCast();
 
+  /** Returns {@code true} if the method is annotated with {@code HasNoSideEffect}. */
+  public abstract boolean isSideEffectFree();
+
   /** Returns true if the bridge was build with {@code candidateTarget} as its target. */
   boolean isBridgeTarget(MethodDescriptor candidateTarget) {
     MethodDescriptor method = getBridgeTarget();
@@ -677,6 +680,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setUnusableByJsSuppressed(false)
         .setDeprecated(false)
         .setUncheckedCast(false)
+        .setSideEffectFree(false)
         .setOrigin(MethodOrigin.SOURCE)
         .setParameterDescriptors(Collections.emptyList())
         .setTypeParameterTypeDescriptors(Collections.emptyList());
@@ -920,6 +924,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     public abstract Builder setDeprecated(boolean isDeprecated);
 
     public abstract Builder setUncheckedCast(boolean isUncheckedCast);
+
+    public abstract Builder setSideEffectFree(boolean isSideEffectFree);
 
     public abstract Builder setEnclosingTypeDescriptor(
         DeclaredTypeDescriptor enclosingTypeDescriptor);

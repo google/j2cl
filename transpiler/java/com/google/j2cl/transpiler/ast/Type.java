@@ -390,6 +390,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
         .setStatic(true)
         .setSynthetic(true)
+        .setSideEffectFree(true)
         .build();
   }
 }

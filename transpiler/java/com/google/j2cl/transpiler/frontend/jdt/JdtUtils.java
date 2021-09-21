@@ -731,6 +731,7 @@ class JdtUtils {
         .setSynthetic(methodBinding.isSynthetic())
         .setEnumSyntheticMethod(isEnumSyntheticMethod(methodBinding))
         .setUnusableByJsSuppressed(JsInteropAnnotationUtils.isUnusableByJsSuppressed(methodBinding))
+        .setSideEffectFree(isAnnotatedWithHasNoSideEffects(methodBinding))
         .setDeprecated(isDeprecated(methodBinding))
         .setUncheckedCast(hasUncheckedCast)
         .build();
@@ -1169,6 +1170,11 @@ class JdtUtils {
 
   private static boolean isAnnotatedWithAutoValueBuilder(ITypeBinding typeBinding) {
     return JdtAnnotationUtils.hasAnnotation(typeBinding, "com.google.auto.value.AutoValue.Builder");
+  }
+
+  private static boolean isAnnotatedWithHasNoSideEffects(IMethodBinding methodBinding) {
+    return JdtAnnotationUtils.hasAnnotation(
+        methodBinding, "javaemul.internal.annotations.HasNoSideEffects");
   }
 
   private JdtUtils() {}

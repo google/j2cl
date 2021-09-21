@@ -158,7 +158,6 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
 
   private Expression getClassLiteralMethodCall(TypeDescriptor typeDescriptor) {
     return MethodCall.Builder.from(getOrCreateClassLiteralMethod(typeDescriptor))
-        .setHasSideEffects(false)
         .build();
   }
 

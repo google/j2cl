@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
@@ -37,26 +36,17 @@ public class MethodCall extends Invocation {
   /** If an instance call should be dispatched statically, e.g. A.super.method() invocation. */
   private boolean isStaticDispatch;
 
-  /** Whether the method calls has side effects or not. */
-  boolean hasSideEffects;
-
   private MethodCall(
       SourcePosition sourcePosition,
       Expression qualifier,
       MethodDescriptor targetMethodDescriptor,
       List<Expression> arguments,
-      boolean isStaticDispatch,
-      boolean hasSideEffects) {
+      boolean isStaticDispatch) {
     this.targetMethodDescriptor = checkNotNull(targetMethodDescriptor);
     this.qualifier = checkNotNull(AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor));
     this.arguments.addAll(checkNotNull(arguments));
     this.isStaticDispatch = isStaticDispatch;
-    this.hasSideEffects = hasSideEffects;
     this.sourcePosition = checkNotNull(sourcePosition);
-    // At the time being only calls to static methods can be marked as side-effect free.
-    checkState(
-        (targetMethodDescriptor.isStatic() && targetMethodDescriptor.getWasmInfo() == null)
-            || hasSideEffects);
   }
 
   @Override
@@ -91,7 +81,7 @@ public class MethodCall extends Invocation {
 
   @Override
   public boolean hasSideEffects() {
-    return hasSideEffects;
+    return !getTarget().isSideEffectFree();
   }
 
   @Override
@@ -115,8 +105,7 @@ public class MethodCall extends Invocation {
         qualifier.clone(),
         targetMethodDescriptor,
         AstUtils.clone(arguments),
-        isStaticDispatch,
-        hasSideEffects);
+        isStaticDispatch);
   }
 
   @Override
@@ -137,7 +126,6 @@ public class MethodCall extends Invocation {
    */
   public static class Builder extends Invocation.Builder<Builder, MethodCall> {
     private boolean isStaticDispatch;
-    private boolean hasSideEffects = true;
     private SourcePosition sourcePosition;
 
     public static Builder from(MethodCall methodCall) {
@@ -155,11 +143,6 @@ public class MethodCall extends Invocation {
       return this;
     }
 
-    public final Builder setHasSideEffects(boolean hasSideEffects) {
-      this.hasSideEffects = hasSideEffects;
-      return this;
-    }
-
     public final Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
@@ -171,18 +154,12 @@ public class MethodCall extends Invocation {
         MethodDescriptor methodDescriptor,
         List<Expression> arguments) {
       return new MethodCall(
-          sourcePosition,
-          qualifierExpression,
-          methodDescriptor,
-          arguments,
-          isStaticDispatch,
-          hasSideEffects);
+          sourcePosition, qualifierExpression, methodDescriptor, arguments, isStaticDispatch);
     }
 
     private Builder(MethodCall methodCall) {
       super(methodCall);
       this.isStaticDispatch = methodCall.isStaticDispatch;
-      this.hasSideEffects = methodCall.hasSideEffects;
       this.sourcePosition = methodCall.sourcePosition;
     }
 
