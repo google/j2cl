@@ -52,8 +52,6 @@ def _compile(
         generate_kythe_action = generate_kythe_action,
     )
 
-    generate_tree_artifact = ctx.var.get("J2CL_TREE_ARTIFACTS", None) == "1"
-
     # A note about the zip file: It will be created if:
     #  - tree artifacts are not enabled. In this case the zip file will be part
     #    of the default outputs of the rule and passed to js provider, or
@@ -63,11 +61,8 @@ def _compile(
     output_jszip = ctx.actions.declare_file("%s.js.zip" % name)
 
     if java_srcs:
-        if generate_tree_artifact:
-            output_js = ctx.actions.declare_directory("%s.js" % name)
-            _zip_output(ctx, output_js, output_jszip)
-        else:
-            output_js = output_jszip
+        output_js = ctx.actions.declare_directory("%s.js" % name)
+        _zip_output(ctx, output_js, output_jszip)
 
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
