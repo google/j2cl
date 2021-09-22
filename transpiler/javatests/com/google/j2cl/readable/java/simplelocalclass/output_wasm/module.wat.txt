@@ -117,13 +117,13 @@
  (extends $java.lang.Object)
 )
 (type $simplelocalclass.SimpleLocalClass.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_test__int__void (ref $function.$int__$void))
- (field $m_fun__void (ref $function.__$void))
- (field $m_foo__void (ref $function.__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_test__int__void (ref $function.$java.lang.Object__$int__$void))
+ (field $m_fun__void (ref $function.$java.lang.Object__$void))
+ (field $m_foo__void (ref $function.$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -148,7 +148,7 @@
 
 ;;; void SimpleLocalClass.test(int p)
 (func $m_test__int__void@simplelocalclass.SimpleLocalClass
- (type $function.$int__$void)
+ (type $function.$java.lang.Object__$int__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $p i32)
  ;;@ simplelocalclass/SimpleLocalClass.java:19:14
@@ -177,7 +177,7 @@
 
 ;;; void SimpleLocalClass.fun()
 (func $m_fun__void@simplelocalclass.SimpleLocalClass
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ simplelocalclass/SimpleLocalClass.java:34:14
  (local $localVar i32)
@@ -193,7 +193,7 @@
 
 ;;; void SimpleLocalClass.foo()
 (func $m_foo__void@simplelocalclass.SimpleLocalClass
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ simplelocalclass/SimpleLocalClass.java:42:14
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
@@ -227,7 +227,7 @@
 
 ;;; Class<?> SimpleLocalClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
@@ -249,11 +249,11 @@
  (extends $java.lang.Object)
 )
 (type $simplelocalclass.SimpleLocalClass.1InnerClass.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_fun__int (ref $function.__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_fun__int (ref $function.$java.lang.Object__$int))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -290,7 +290,7 @@
 
 ;;; int InnerClass.fun()
 (func $m_fun__int@simplelocalclass.SimpleLocalClass.1InnerClass
- (type $function.__$int)
+ (type $function.$java.lang.Object__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ simplelocalclass/SimpleLocalClass.java:22:17
@@ -328,7 +328,7 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClass
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
@@ -348,10 +348,10 @@
  (extends $java.lang.Object)
 )
 (type $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -402,7 +402,7 @@
 
 ;;; Class<?> InnerClassWithoutCaptures.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
@@ -424,10 +424,10 @@
  (extends $java.lang.Object)
 )
 (type $simplelocalclass.SimpleLocalClass.2InnerClass.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -496,7 +496,7 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.2InnerClass
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
@@ -516,10 +516,10 @@
  (extends $java.lang.Object)
 )
 (type $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -570,7 +570,7 @@
 
 ;;; Class<?> Abc$InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1Abc$InnerClass
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
@@ -590,10 +590,10 @@
  (extends $java.lang.Object)
 )
 (type $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -644,7 +644,7 @@
 
 ;;; Class<?> Klm$InnerClass.getClass()
 (func $m_getClass__java_lang_Class@simplelocalclass.SimpleLocalClass.1Klm$InnerClass
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))

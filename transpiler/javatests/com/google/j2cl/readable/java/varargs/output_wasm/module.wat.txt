@@ -49,14 +49,14 @@
  (extends $java.lang.Object)
 )
 (type $varargs.Varargs.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_main__void (ref $function.__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_main__void (ref $function.$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -105,7 +105,7 @@
 
 ;;; void Varargs.test(int a, Object... args)
 (func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs
- (type $function.$int__$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
@@ -119,7 +119,7 @@
 
 ;;; void Varargs.testCloneable(Cloneable... args)
 (func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs
- (type $function.$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:29:14
@@ -132,7 +132,7 @@
 
 ;;; void Varargs.testSerializable(Serializable... args)
 (func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs
- (type $function.$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:31:14
@@ -177,7 +177,7 @@
 
 ;;; void Varargs.main()
 (func $m_main__void@varargs.Varargs
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ varargs/Varargs.java:39:14
  (local $v (ref null $varargs.Varargs))
@@ -284,7 +284,7 @@
 
 ;;; Class<?> Varargs.getClass()
 (func $m_getClass__java_lang_Class@varargs.Varargs
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Varargs))
@@ -303,14 +303,14 @@
  (extends $varargs.Varargs)
 )
 (type $varargs.Child.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.$int__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_main__void (ref $function.__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_main__void (ref $function.$java.lang.Object__$void))
  )
   (extends $varargs.Varargs.vtable)
 )
@@ -362,7 +362,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@varargs.Child
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Child))

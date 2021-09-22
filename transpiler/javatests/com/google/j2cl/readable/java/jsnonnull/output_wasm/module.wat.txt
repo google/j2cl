@@ -163,14 +163,14 @@
  (extends $java.lang.Object)
 )
 (type $jsnonnull.Main.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.$java.lang.String__$java.lang.Object__$java.lang.String__$java.lang.String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String))
- (field $m_m4__jsnonnull_Main_MyFunction__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String__$java.lang.String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
+ (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String))
+ (field $m_m4__jsnonnull_Main_MyFunction__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -199,7 +199,7 @@
 
 ;;; String Main.m1(String a, List<Double> b, String c)
 (func $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String@jsnonnull.Main
- (type $function.$java.lang.String__$java.lang.Object__$java.lang.String__$java.lang.String)
+ (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -218,7 +218,7 @@
 
 ;;; String Main.m2(String a, List<Double> b)
 (func $m_m2__java_lang_String__java_util_List__java_lang_String@jsnonnull.Main
- (type $function.$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -236,7 +236,7 @@
 
 ;;; String Main.m3(String a, String... args)
 (func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@jsnonnull.Main
- (type $function.$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String)
+ (type $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
@@ -254,7 +254,7 @@
 
 ;;; void Main.m4(MyFunction f)
 (func $m_m4__jsnonnull_Main_MyFunction__void@jsnonnull.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:58:14
@@ -339,7 +339,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsnonnull.Main
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main))
@@ -353,7 +353,7 @@
 
 ;;; Code for jsnonnull.Main.MyFunction [INTERFACE]
 (type $jsnonnull.Main.MyFunction.vtable (struct
- (field $m_x__java_lang_String__java_lang_String (ref $function.$java.lang.String__$java.lang.String))
+ (field $m_x__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
  )
 )
 
@@ -394,19 +394,19 @@
  (extends $java.lang.Object)
 )
 (type $jsnonnull.Main.StringComparator.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.String__$java.lang.String__$int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- (field $m_reversed__java_util_Comparator (ref $function.__$java.lang.Object))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int))
+ (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int))
+ (field $m_reversed__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -431,7 +431,7 @@
 
 ;;; int StringComparator.compare(String a, String b)
 (func $m_compare__java_lang_String__java_lang_String__int@jsnonnull.Main.StringComparator
- (type $function.$java.lang.String__$java.lang.String__$int)
+ (type $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -449,7 +449,7 @@
 
 ;;; int StringComparator.compare(Object arg0, Object arg1)
 (func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$int)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -467,7 +467,7 @@
 
 ;;; Comparator<String> StringComparator.reversed()
 (func $m_reversed__java_util_Comparator@jsnonnull.Main.StringComparator
- (type $function.__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
@@ -483,7 +483,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparing(Comparator<? super String> arg0)
 (func $m_thenComparing__java_util_Comparator__java_util_Comparator@jsnonnull.Main.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -500,7 +500,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@jsnonnull.Main.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -518,7 +518,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator@jsnonnull.Main.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -535,7 +535,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
 (func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@jsnonnull.Main.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -552,7 +552,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
 (func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@jsnonnull.Main.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -569,7 +569,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
 (func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -611,7 +611,7 @@
 
 ;;; Class<?> StringComparator.getClass()
 (func $m_getClass__java_lang_Class@jsnonnull.Main.StringComparator
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main.StringComparator))
@@ -630,19 +630,19 @@
  (extends $java.lang.Object)
 )
 (type $jsnonnull.Main.NullableStringComparator.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.String__$java.lang.String__$int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- (field $m_reversed__java_util_Comparator (ref $function.__$java.lang.Object))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int))
+ (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int))
+ (field $m_reversed__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -667,7 +667,7 @@
 
 ;;; int NullableStringComparator.compare(String a, String b)
 (func $m_compare__java_lang_String__java_lang_String__int@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.String__$java.lang.String__$int)
+ (type $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -685,7 +685,7 @@
 
 ;;; int NullableStringComparator.compare(Object arg0, Object arg1)
 (func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$int)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -703,7 +703,7 @@
 
 ;;; Comparator<String> NullableStringComparator.reversed()
 (func $m_reversed__java_util_Comparator@jsnonnull.Main.NullableStringComparator
- (type $function.__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
@@ -719,7 +719,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparing(Comparator<? super String> arg0)
 (func $m_thenComparing__java_util_Comparator__java_util_Comparator@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -736,7 +736,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -754,7 +754,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -771,7 +771,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
 (func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -788,7 +788,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
 (func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -805,7 +805,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
 (func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@jsnonnull.Main.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -847,7 +847,7 @@
 
 ;;; Class<?> NullableStringComparator.getClass()
 (func $m_getClass__java_lang_Class@jsnonnull.Main.NullableStringComparator
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
@@ -866,19 +866,19 @@
  (extends $jsnonnull.Main.NullableStringComparator)
 )
 (type $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.String__$java.lang.String__$int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- (field $m_reversed__java_util_Comparator (ref $function.__$java.lang.Object))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int))
+ (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int))
+ (field $m_reversed__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  )
   (extends $jsnonnull.Main.NullableStringComparator.vtable)
 )
@@ -903,7 +903,7 @@
 
 ;;; int NonNullableStringSubNullableComparator.compare(String a, String b)
 (func $m_compare__java_lang_String__java_lang_String__int@jsnonnull.Main.NonNullableStringSubNullableComparator
- (type $function.$java.lang.String__$java.lang.String__$int)
+ (type $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -943,7 +943,7 @@
 
 ;;; Class<?> NonNullableStringSubNullableComparator.getClass()
 (func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableStringSubNullableComparator
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
@@ -957,8 +957,8 @@
 
 ;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [INTERFACE]
 (type $jsnonnull.Main.NonNullableTemplatedReturn.vtable (struct
- (field $m_get__java_lang_Object (ref $function.__$java.lang.Object))
- (field $m_getArray__arrayOf_java_lang_Object (ref $function.__$javaemul.internal.WasmArray.OfObject))
+ (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_getArray__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
  )
 )
 
@@ -994,8 +994,8 @@
 
 ;;; Code for jsnonnull.Main.NonNullableTemplate [INTERFACE]
 (type $jsnonnull.Main.NonNullableTemplate.vtable (struct
- (field $m_get__java_lang_Object (ref $function.__$java.lang.Object))
- (field $m_getArray__arrayOf_java_lang_Object (ref $function.__$javaemul.internal.WasmArray.OfObject))
+ (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_getArray__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
  )
 )
 

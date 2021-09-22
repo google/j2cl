@@ -76,11 +76,11 @@
  (extends $java.lang.Object)
 )
 (type $accidentaloverride.Parent.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Error__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -105,7 +105,7 @@
 
 ;;; void Parent.foo(T e)
 (func $m_foo__java_lang_Error__void@accidentaloverride.Parent
- (type $function.$java.lang.Error__$void)
+ (type $function.$java.lang.Object__$java.lang.Error__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $e (ref null $java.lang.Error))
  ;;@ accidentaloverride/AccidentalOverride.java:20:14
@@ -140,7 +140,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@accidentaloverride.Parent
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.Parent))
@@ -154,7 +154,7 @@
 
 ;;; Code for accidentaloverride.SuperInterface [INTERFACE]
 (type $accidentaloverride.SuperInterface.vtable (struct
- (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  )
 )
 
@@ -195,13 +195,13 @@
  (extends $accidentaloverride.Parent)
 )
 (type $accidentaloverride.AnotherAccidentalOverride.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Error__$void))
- (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$void))
- (field $m_foo__java_lang_AssertionError__void (ref $function.$java.lang.AssertionError__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
+ (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_foo__java_lang_AssertionError__void (ref $function.$java.lang.Object__$java.lang.AssertionError__$void))
  )
   (extends $accidentaloverride.Parent.vtable)
 )
@@ -226,7 +226,7 @@
 
 ;;; void AnotherAccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AnotherAccidentalOverride
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ accidentaloverride/AccidentalOverride.java:31:6
@@ -242,7 +242,7 @@
 
 ;;; void AnotherAccidentalOverride.foo(Error arg0)
 (func $m_foo__java_lang_Error__void@accidentaloverride.AnotherAccidentalOverride
- (type $function.$java.lang.Error__$void)
+ (type $function.$java.lang.Object__$java.lang.Error__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Error))
  ;;@ accidentaloverride/AccidentalOverride.java:31:6
@@ -258,7 +258,7 @@
 
 ;;; void AnotherAccidentalOverride.foo(AssertionError arg0)
 (func $m_foo__java_lang_AssertionError__void@accidentaloverride.AnotherAccidentalOverride
- (type $function.$java.lang.AssertionError__$void)
+ (type $function.$java.lang.Object__$java.lang.AssertionError__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.AssertionError))
  ;;@ accidentaloverride/AccidentalOverride.java:31:6
@@ -296,7 +296,7 @@
 
 ;;; Class<?> AnotherAccidentalOverride.getClass()
 (func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AnotherAccidentalOverride))
@@ -315,12 +315,12 @@
  (extends $accidentaloverride.Parent)
 )
 (type $accidentaloverride.AccidentalOverride.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Error__$void))
- (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
+ (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  )
   (extends $accidentaloverride.Parent.vtable)
 )
@@ -345,7 +345,7 @@
 
 ;;; void AccidentalOverride.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@accidentaloverride.AccidentalOverride
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ accidentaloverride/AccidentalOverride.java:41:13
@@ -383,7 +383,7 @@
 
 ;;; Class<?> AccidentalOverride.getClass()
 (func $m_getClass__java_lang_Class@accidentaloverride.AccidentalOverride
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $accidentaloverride.AccidentalOverride))

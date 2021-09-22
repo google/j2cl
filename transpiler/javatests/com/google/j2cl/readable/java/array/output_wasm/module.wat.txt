@@ -88,21 +88,21 @@
  (extends $java.lang.Object)
 )
 (type $array.Arrays.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_testObjectArray__void (ref $function.__$void))
- (field $m_testJavaTypeArray__void (ref $function.__$void))
- (field $m_testIntArrays__void_$pp_array (ref $function.__$void))
- (field $m_testLongArrays__void_$pp_array (ref $function.__$void))
- (field $m_testDevirtualizedTypeArrays__void_$pp_array (ref $function.__$void))
- (field $m_testStringArrays__void_$pp_array (ref $function.__$void))
- (field $m_testNativeArray__void (ref $function.__$void))
- (field $m_testErasureCastsOnArrayAccess__void (ref $function.__$void))
- (field $m_testArraysSupertypeClosureTypes__void (ref $function.__$void))
- (field $m_consumesCloneable__java_lang_Cloneable__void (ref $function.$java.lang.Object__$void))
- (field $m_consumesSerializable__java_io_Serializable__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_testObjectArray__void (ref $function.$java.lang.Object__$void))
+ (field $m_testJavaTypeArray__void (ref $function.$java.lang.Object__$void))
+ (field $m_testIntArrays__void_$pp_array (ref $function.$java.lang.Object__$void))
+ (field $m_testLongArrays__void_$pp_array (ref $function.$java.lang.Object__$void))
+ (field $m_testDevirtualizedTypeArrays__void_$pp_array (ref $function.$java.lang.Object__$void))
+ (field $m_testStringArrays__void_$pp_array (ref $function.$java.lang.Object__$void))
+ (field $m_testNativeArray__void (ref $function.$java.lang.Object__$void))
+ (field $m_testErasureCastsOnArrayAccess__void (ref $function.$java.lang.Object__$void))
+ (field $m_testArraysSupertypeClosureTypes__void (ref $function.$java.lang.Object__$void))
+ (field $m_consumesCloneable__java_lang_Cloneable__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_consumesSerializable__java_io_Serializable__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -127,7 +127,7 @@
 
 ;;; void Arrays.testObjectArray()
 (func $m_testObjectArray__void@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:23:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
@@ -208,7 +208,7 @@
 
 ;;; void Arrays.testJavaTypeArray()
 (func $m_testJavaTypeArray__void@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:43:14
  (local $objects (ref null $javaemul.internal.WasmArray.OfObject))
@@ -289,7 +289,7 @@
 
 ;;; void Arrays.testIntArrays()
 (func $m_testIntArrays__void_$pp_array@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:61:7
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
@@ -370,7 +370,7 @@
 
 ;;; void Arrays.testLongArrays()
 (func $m_testLongArrays__void_$pp_array@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:79:7
  (local $longs (ref null $javaemul.internal.WasmArray.OfLong))
@@ -451,7 +451,7 @@
 
 ;;; void Arrays.testDevirtualizedTypeArrays()
 (func $m_testDevirtualizedTypeArrays__void_$pp_array@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:98:7
  (local $booleans (ref null $javaemul.internal.WasmArray.OfObject))
@@ -540,7 +540,7 @@
 
 ;;; void Arrays.testStringArrays()
 (func $m_testStringArrays__void_$pp_array@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:116:7
  (local $strings (ref null $javaemul.internal.WasmArray.OfObject))
@@ -621,7 +621,7 @@
 
 ;;; void Arrays.testNativeArray()
 (func $m_testNativeArray__void@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:137:14
  (local $nativeObjects (ref null $javaemul.internal.WasmArray.OfObject))
@@ -702,7 +702,7 @@
 
 ;;; void Arrays.testErasureCastsOnArrayAccess()
 (func $m_testErasureCastsOnArrayAccess__void@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:155:14
  (local $container (ref null $array.Arrays.ArrayContainer))
@@ -722,7 +722,7 @@
 
 ;;; void Arrays.testArraysSupertypeClosureTypes()
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ array/Arrays.java:164:14
  (local $this (ref null $array.Arrays))
@@ -740,7 +740,7 @@
 
 ;;; void Arrays.consumesCloneable(Cloneable cloneable)
 (func $m_consumesCloneable__java_lang_Cloneable__void@array.Arrays
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
  ;;@ array/Arrays.java:169:14
@@ -753,7 +753,7 @@
 
 ;;; void Arrays.consumesSerializable(Serializable serializable)
 (func $m_consumesSerializable__java_io_Serializable__void@array.Arrays
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
  ;;@ array/Arrays.java:171:14
@@ -788,7 +788,7 @@
 
 ;;; Class<?> Arrays.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays))
@@ -808,10 +808,10 @@
  (extends $java.lang.Object)
 )
 (type $array.Arrays.SomeObject.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -859,7 +859,7 @@
 
 ;;; Class<?> SomeObject.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.SomeObject
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.SomeObject))
@@ -878,10 +878,10 @@
  (extends $java.lang.Object)
 )
 (type $array.Arrays.NativeType.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -928,7 +928,7 @@
 
 ;;; Class<?> NativeType.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.NativeType
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.NativeType))
@@ -948,10 +948,10 @@
  (extends $java.lang.Object)
 )
 (type $array.Arrays.ArrayContainer.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -995,7 +995,7 @@
 
 ;;; Class<?> ArrayContainer.getClass()
 (func $m_getClass__java_lang_Class@array.Arrays.ArrayContainer
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $array.Arrays.ArrayContainer))

@@ -89,7 +89,7 @@
 
 ;;; Code for instancejsmethods.MyInterface [INTERFACE]
 (type $instancejsmethods.MyInterface.vtable (struct
- (field $m_intfFoo__int (ref $function.__$int))
+ (field $m_intfFoo__int (ref $function.$java.lang.Object__$int))
  )
 )
 
@@ -130,12 +130,12 @@
  (extends $java.lang.Object)
 )
 (type $instancejsmethods.SuperParent.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_fun__int__int__int (ref $function.$int__$int__$int))
- (field $m_bar__int__int__int (ref $function.$int__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_fun__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
+ (field $m_bar__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -160,7 +160,7 @@
 
 ;;; int SuperParent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.SuperParent
- (type $function.$int__$int__$int)
+ (type $function.$java.lang.Object__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -178,7 +178,7 @@
 
 ;;; int SuperParent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.SuperParent
- (type $function.$int__$int__$int)
+ (type $function.$java.lang.Object__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -218,7 +218,7 @@
 
 ;;; Class<?> SuperParent.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.SuperParent
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.SuperParent))
@@ -237,13 +237,13 @@
  (extends $instancejsmethods.SuperParent)
 )
 (type $instancejsmethods.Parent.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_fun__int__int__int (ref $function.$int__$int__$int))
- (field $m_bar__int__int__int (ref $function.$int__$int__$int))
- (field $m_foo__int__int (ref $function.$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_fun__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
+ (field $m_bar__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
+ (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
  )
   (extends $instancejsmethods.SuperParent.vtable)
 )
@@ -268,7 +268,7 @@
 
 ;;; int Parent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Parent
- (type $function.$int__$int__$int)
+ (type $function.$java.lang.Object__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -286,7 +286,7 @@
 
 ;;; int Parent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Parent
- (type $function.$int__$int__$int)
+ (type $function.$java.lang.Object__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -304,7 +304,7 @@
 
 ;;; int Parent.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Parent
- (type $function.$int__$int)
+ (type $function.$java.lang.Object__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -343,7 +343,7 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Parent
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Parent))
@@ -362,14 +362,14 @@
  (extends $instancejsmethods.Parent)
 )
 (type $instancejsmethods.Child.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_fun__int__int__int (ref $function.$int__$int__$int))
- (field $m_bar__int__int__int (ref $function.$int__$int__$int))
- (field $m_foo__int__int (ref $function.$int__$int))
- (field $m_intfFoo__int (ref $function.__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_fun__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
+ (field $m_bar__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
+ (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_intfFoo__int (ref $function.$java.lang.Object__$int))
  )
   (extends $instancejsmethods.Parent.vtable)
 )
@@ -394,7 +394,7 @@
 
 ;;; int Child.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Child
- (type $function.$int__$int__$int)
+ (type $function.$java.lang.Object__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -412,7 +412,7 @@
 
 ;;; int Child.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Child
- (type $function.$int__$int__$int)
+ (type $function.$java.lang.Object__$int__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -430,7 +430,7 @@
 
 ;;; int Child.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Child
- (type $function.$int__$int)
+ (type $function.$java.lang.Object__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -447,7 +447,7 @@
 
 ;;; int Child.intfFoo()
 (func $m_intfFoo__int@instancejsmethods.Child
- (type $function.__$int)
+ (type $function.$java.lang.Object__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ instancejsmethods/Main.java:109:13
@@ -485,7 +485,7 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Child
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Child))
@@ -504,11 +504,11 @@
  (extends $java.lang.Object)
 )
 (type $instancejsmethods.Main.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_testCallBySuperParent__void (ref $function.__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_testCallBySuperParent__void (ref $function.$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -533,7 +533,7 @@
 
 ;;; void Main.testCallBySuperParent()
 (func $m_testCallBySuperParent__void@instancejsmethods.Main
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ instancejsmethods/Main.java:115:14
  (local $sp (ref null $instancejsmethods.SuperParent))
@@ -667,7 +667,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Main
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Main))

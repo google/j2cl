@@ -66,11 +66,11 @@
  (extends $java.lang.Object)
 )
 (type $functiontype.FunctionImpl.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_test__functiontype_Function__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_test__functiontype_Function__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -95,7 +95,7 @@
 
 ;;; void FunctionImpl.test(Function f)
 (func $m_test__functiontype_Function__void@functiontype.FunctionImpl
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  ;;@ functiontype/FunctionImpl.java:21:14
@@ -130,7 +130,7 @@
 
 ;;; Class<?> FunctionImpl.getClass()
 (func $m_getClass__java_lang_Class@functiontype.FunctionImpl
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $functiontype.FunctionImpl))

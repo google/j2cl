@@ -85,11 +85,11 @@
  (extends $java.lang.Object)
 )
 (type $jsbridgeaccidentaloverride.Main.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_test__void (ref $function.__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_test__void (ref $function.$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -114,7 +114,7 @@
 
 ;;; void Main.test()
 (func $m_test__void@jsbridgeaccidentaloverride.Main
- (type $function.__$void)
+ (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsbridgeaccidentaloverride/Main.java:19:14
  (local $a (ref null $jsbridgeaccidentaloverride.MyJsType))
@@ -191,7 +191,7 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.Main
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.Main))
@@ -205,7 +205,7 @@
 
 ;;; Code for jsbridgeaccidentaloverride.OtherInterface [INTERFACE]
 (type $jsbridgeaccidentaloverride.OtherInterface.vtable (struct
- (field $m_fun__int__int (ref $function.$int__$int))
+ (field $m_fun__int__int (ref $function.$java.lang.Object__$int__$int))
  )
 )
 
@@ -246,13 +246,13 @@
  (extends $java.lang.Object)
 )
 (type $jsbridgeaccidentaloverride.MyJsType.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_foo__int__int (ref $function.$int__$int))
- (field $m_bar__int__int (ref $function.$int__$int))
- (field $m_fun__int__int (ref $function.$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_bar__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_fun__int__int (ref $function.$java.lang.Object__$int__$int))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -277,7 +277,7 @@
 
 ;;; int MyJsType.foo(int a)
 (func $m_foo__int__int@jsbridgeaccidentaloverride.MyJsType
- (type $function.$int__$int)
+ (type $function.$java.lang.Object__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -294,7 +294,7 @@
 
 ;;; int MyJsType.bar(int a)
 (func $m_bar__int__int@jsbridgeaccidentaloverride.MyJsType
- (type $function.$int__$int)
+ (type $function.$java.lang.Object__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -311,7 +311,7 @@
 
 ;;; int MyJsType.fun(int a)
 (func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType
- (type $function.$int__$int)
+ (type $function.$java.lang.Object__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -350,7 +350,7 @@
 
 ;;; Class<?> MyJsType.getClass()
 (func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.MyJsType
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
@@ -364,8 +364,8 @@
 
 ;;; Code for jsbridgeaccidentaloverride.MyInterface [INTERFACE]
 (type $jsbridgeaccidentaloverride.MyInterface.vtable (struct
- (field $m_bar__int__int (ref $function.$int__$int))
- (field $m_foo__int__int (ref $function.$int__$int))
+ (field $m_bar__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
  )
 )
 
@@ -406,13 +406,13 @@
  (extends $jsbridgeaccidentaloverride.MyJsType)
 )
 (type $jsbridgeaccidentaloverride.SubJsType.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_foo__int__int (ref $function.$int__$int))
- (field $m_bar__int__int (ref $function.$int__$int))
- (field $m_fun__int__int (ref $function.$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_bar__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_fun__int__int (ref $function.$java.lang.Object__$int__$int))
  )
   (extends $jsbridgeaccidentaloverride.MyJsType.vtable)
 )
@@ -437,7 +437,7 @@
 
 ;;; int SubJsType.bar(int a)
 (func $m_bar__int__int@jsbridgeaccidentaloverride.SubJsType
- (type $function.$int__$int)
+ (type $function.$java.lang.Object__$int__$int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -476,7 +476,7 @@
 
 ;;; Class<?> SubJsType.getClass()
 (func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.SubJsType
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.SubJsType))

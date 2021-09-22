@@ -54,11 +54,11 @@
  (extends $java.lang.Object)
 )
 (type $jsmethod.JsMethodExample.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_testMethod__java_util_ArrayList (ref $function.__$java.util.ArrayList))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_testMethod__java_util_ArrayList (ref $function.$java.lang.Object__$java.util.ArrayList))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -102,7 +102,7 @@
 
 ;;; T JsMethodExample.testMethod()
 (func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample
- (type $function.__$java.util.ArrayList)
+ (type $function.$java.lang.Object__$java.util.ArrayList)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  ;;@ jsmethod/JsMethodExample.java:41:48
@@ -138,7 +138,7 @@
 
 ;;; Class<?> JsMethodExample.getClass()
 (func $m_getClass__java_lang_Class@jsmethod.JsMethodExample
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethod.JsMethodExample))
@@ -157,11 +157,11 @@
  (extends $java.lang.Object)
 )
 (type $jsmethod.JsMethodExample.Base.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -186,7 +186,7 @@
 
 ;;; void Base.m(T t)
 (func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ jsmethod/JsMethodExample.java:45:16
@@ -221,7 +221,7 @@
 
 ;;; Code for jsmethod.JsMethodExample.I [INTERFACE]
 (type $jsmethod.JsMethodExample.I.vtable (struct
- (field $m_m__java_lang_String__void (ref $function.$java.lang.String__$void))
+ (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
  )
 )
 
@@ -262,12 +262,12 @@
  (extends $jsmethod.JsMethodExample.Base)
 )
 (type $jsmethod.JsMethodExample.Sub.vtable (struct
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.__$int))
- (field $m_toString__java_lang_String (ref $function.__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.__$java.lang.Class))
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$void))
- (field $m_m__java_lang_String__void (ref $function.$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
  )
   (extends $jsmethod.JsMethodExample.Base.vtable)
 )
@@ -292,7 +292,7 @@
 
 ;;; void Sub.m(String s)
 (func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub
- (type $function.$java.lang.String__$void)
+ (type $function.$java.lang.Object__$java.lang.String__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  ;;@ jsmethod/JsMethodExample.java:55:16
@@ -305,7 +305,7 @@
 
 ;;; void Sub.m(Object arg0)
 (func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub
- (type $function.$java.lang.Object__$void)
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ jsmethod/JsMethodExample.java:54:15
@@ -343,7 +343,7 @@
 
 ;;; Class<?> Sub.getClass()
 (func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub
- (type $function.__$java.lang.Class)
+ (type $function.$java.lang.Object__$java.lang.Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
