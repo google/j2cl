@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Removes unneeded JsDocAnnotations that arise from transformations. */
 public final class RemoveUnneededJsDocCasts extends NormalizationPass {
@@ -79,7 +80,11 @@ public final class RemoveUnneededJsDocCasts extends NormalizationPass {
           }
 
           @Override
-          public Node rewriteJsDocCastExpression(final JsDocCastExpression expression) {
+          public Node rewriteJsDocCastExpression(JsDocCastExpression expression) {
+            if (TypeDescriptors.isJavaLangObject(expression.getTypeDescriptor())) {
+              // Casting to any type doesn't have value so remove the cast.
+              return expression.getExpression();
+            }
             // Nested JsDoc cast annotations don't provide any extra information to JS type
             // checkers. Remove the extras.
             Expression innerExpressionWithoutTypeAnnotation =
