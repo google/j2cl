@@ -28,4 +28,65 @@ class Renderer(
 
   /** Rendering problems. */
   val problems: Problems
-)
+) {
+  fun renderNewLine() {
+    sourceBuilder.newLine()
+  }
+
+  fun render(string: String) {
+    sourceBuilder.append(string)
+  }
+
+  fun renderIndented(renderFn: () -> Unit) {
+    sourceBuilder.indent()
+    renderFn()
+    sourceBuilder.unindent()
+  }
+
+  fun renderInCurlyBrackets(renderFn: () -> Unit) {
+    sourceBuilder.openBrace()
+    renderFn()
+    sourceBuilder.closeBrace()
+  }
+
+  fun renderInParentheses(renderFn: () -> Unit) {
+    render("(")
+    renderFn()
+    render(")")
+  }
+
+  fun renderInSquareBrackets(renderFn: () -> Unit) {
+    render("[")
+    renderFn()
+    render("]")
+  }
+
+  fun renderInAngleBrackets(renderFn: () -> Unit) {
+    render("<")
+    renderFn()
+    render(">")
+  }
+
+  fun <V> renderSeparatedWith(values: Iterable<V>, separator: String, renderFn: (V) -> Unit) {
+    var first = true
+    for (value in values) {
+      if (first) {
+        first = false
+      } else {
+        render(separator)
+      }
+      renderFn(value)
+    }
+  }
+
+  fun <V> renderCommaSeparated(values: Iterable<V>, renderFn: (V) -> Unit) {
+    renderSeparatedWith(values, ", ", renderFn)
+  }
+
+  fun <V> renderStartingWithNewLines(values: Iterable<V>, renderFn: (V) -> Unit) {
+    for (value in values) {
+      renderNewLine()
+      renderFn(value)
+    }
+  }
+}

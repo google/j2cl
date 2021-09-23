@@ -15,7 +15,9 @@ kt_jvm_library(
     deps = [
         "//third_party/java/junit",
         "//third_party/kotlin/kotlin:kotlin_test",
+        "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler/ast",
+        "//transpiler/java/com/google/j2cl/transpiler/backend/common",
         "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin",
     ],
 )
