@@ -145,7 +145,7 @@ public class ExpressionTranspiler {
       @Override
       public boolean enterLiteral(Literal literal) {
         if (literal instanceof TypeLiteral) {
-           throw new IllegalArgumentException(literal + " not currently supported.");
+          throw new IllegalArgumentException(literal + " not currently supported.");
         }
         // Assumes source literals have been translated to Kotlin format.
         sourceBuilder.append(literal.getSourceText());
