@@ -31,11 +31,12 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
   }
 
   private fun generateOutputs(compilationUnit: CompilationUnit) {
+    val environment = Environment()
     val sourceBuilder = SourceBuilder()
-    val kotlinGenerator = KotlinGenerator(sourceBuilder, problems)
-    kotlinGenerator.renderCompilationUnit(compilationUnit)
-    val kotlinSource = sourceBuilder.build()
-    val kotlinPath = compilationUnit.packageRelativePath.replace(".java", ".kt")
-    output.write(kotlinPath, kotlinSource)
+    val renderer = Renderer(environment, sourceBuilder, problems)
+    renderer.renderCompilationUnit(compilationUnit)
+    val source = sourceBuilder.build()
+    val path = compilationUnit.packageRelativePath.replace(".java", ".kt")
+    output.write(path, source)
   }
 }

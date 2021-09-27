@@ -15,8 +15,26 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 
+/**
+ * Emits the proper fully rendered type for the give type descriptor at the current location.
+ * TODO(dpo): Move this to a better long term place (this logic is likely to get pretty complex).
+ */
 fun Renderer.renderTypeDescriptor(typeDescriptor: TypeDescriptor) {
-  TODO()
+  when (typeDescriptor) {
+    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
+    // TODO(dpo): Other type descriptor logic.
+    else -> renderTypeDescriptorDescription(typeDescriptor)
+  }
+}
+
+private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDescriptor) {
+  render("Array")
+  renderInAngleBrackets { renderTypeDescriptor(arrayTypeDescriptor.componentTypeDescriptor!!) }
+}
+
+private fun Renderer.renderTypeDescriptorDescription(typeDescriptor: TypeDescriptor) {
+  render(typeDescriptor.readableDescription)
 }

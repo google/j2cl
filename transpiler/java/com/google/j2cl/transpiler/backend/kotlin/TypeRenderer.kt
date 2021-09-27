@@ -16,7 +16,36 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Type
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 
 fun Renderer.renderType(type: Type) {
-  TODO()
+  if (!type.declaration.isFinal) render("open ")
+  render("class ${type.declaration.simpleSourceName}")
+
+  // TODO(dpo): add support for class hierarchies
+  renderTypeExtendsClause(type)
+
+  render(" ")
+  renderInCurlyBrackets { renderTypeBody(type) }
+}
+
+private fun Renderer.renderTypeExtendsClause(type: Type) {
+  val superTypeDescriptor = type.superTypeDescriptor
+  if (superTypeDescriptor != null && !TypeDescriptors.isJavaLangObject(superTypeDescriptor)) {
+    render(" extends ${superTypeDescriptor.qualifiedSourceName}")
+  }
+}
+
+private fun Renderer.renderTypeBody(type: Type) {
+  // TODO(dpo): add support for field declarations
+  // TODO(dpo): Remove short term hack to pull static methods into companion object.
+  val (staticMethods, instanceMethods) = type.methods.partition { it.isStatic }
+
+  instanceMethods.forEach { renderMethod(it) }
+
+  if (staticMethods.isNotEmpty()) {
+    renderNewLine()
+    render("companion object ")
+    renderInCurlyBrackets { type.methods.forEach { renderMethod(it) } }
+  }
 }

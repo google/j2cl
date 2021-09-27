@@ -18,5 +18,15 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.CompilationUnit
 
 fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
-  TODO()
+  renderPackageDeclaration(compilationUnit.packageName)
+  compilationUnit.types.forEach { renderType(it) }
+}
+
+private fun Renderer.renderPackageDeclaration(packageName: String) {
+  if (packageName.isNotEmpty()) {
+    // TODO(micapolos): Render each package component as identifier, with potential backticks
+    render("package $packageName")
+    renderNewLine()
+    renderNewLine()
+  }
 }

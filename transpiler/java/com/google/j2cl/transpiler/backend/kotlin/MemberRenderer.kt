@@ -15,8 +15,33 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.Member
+import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors
 
-fun Renderer.renderMember(member: Member) {
-  TODO()
+fun Renderer.renderMethod(method: Method) {
+  renderNewLine()
+  renderMethodHeader(method)
+  renderStatement(method.body)
+}
+
+private fun Renderer.renderMethodHeader(method: Method) {
+  if (method.isStatic) render("@JvmStatic")
+  renderNewLine()
+  val methodDescriptor = method.descriptor
+  render("fun ${methodDescriptor.name!!}")
+  renderMethodParameters(method)
+  renderMethodDescriptorReturnType(methodDescriptor)
+  render(" ")
+}
+
+private fun Renderer.renderMethodParameters(method: Method) {
+  renderInParentheses { renderCommaSeparated(method.parameters) { renderVariable(it) } }
+}
+
+private fun Renderer.renderMethodDescriptorReturnType(methodDescriptor: MethodDescriptor) {
+  if (!TypeDescriptors.isPrimitiveVoid(methodDescriptor.returnTypeDescriptor)) {
+    render(": ")
+    renderTypeDescriptor(methodDescriptor.returnTypeDescriptor)
+  }
 }
