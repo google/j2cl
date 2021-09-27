@@ -18,7 +18,8 @@ package java.util;
 
 import java.io.Serializable;
 
-abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Serializable {
+/** Wasm specific {@code HashMap} implementation based on Android. */
+public class HashMap<K, V> extends AbstractMap<K, V> implements Cloneable, Serializable {
 
   /**
    * Min capacity (other than zero) for a HashMap. Must be a power of two greater than 1 (and less
@@ -76,12 +77,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
   private transient Collection<V> values;
 
   @SuppressWarnings("unchecked")
-  public AbstractHashMap() {
+  public HashMap() {
     table = (HashMapEntry<K, V>[]) EMPTY_TABLE;
     threshold = -1; // Forces first put invocation to replace EMPTY_TABLE
   }
 
-  public AbstractHashMap(int capacity) {
+  public HashMap(int capacity) {
     if (capacity < 0) {
       throw new IllegalArgumentException("Capacity: " + capacity);
     }
@@ -102,7 +103,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     makeTable(capacity);
   }
 
-  public AbstractHashMap(int capacity, float loadFactor) {
+  public HashMap(int capacity, float loadFactor) {
     this(capacity);
     if (loadFactor <= 0 || Float.isNaN(loadFactor)) {
       throw new IllegalArgumentException("Load factor: " + loadFactor);
@@ -114,7 +115,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
      */
   }
 
-  public AbstractHashMap(Map<? extends K, ? extends V> map) {
+  public HashMap(Map<? extends K, ? extends V> map) {
     this(capacityForInitSize(map.size()));
     constructorPutAll(map);
   }
@@ -129,10 +130,6 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     i |= i >>> 16;
     return i + 1;
   }
-
-  abstract int getHashCode(Object key);
-
-  abstract boolean equals(Object value1, Object value2);
 
   static int secondaryHash(int h) {
     // Spread bits to regularize both segment and index locations,
@@ -184,11 +181,11 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
       HashMapEntry<K, V> e = entryForNullKey;
       return e == null ? null : e.value;
     }
-    int hash = secondaryHash(getHashCode(key));
+    int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     for (HashMapEntry<K, V> e = tab[hash & (tab.length - 1)]; e != null; e = e.next) {
       K eKey = e.key;
-      if (eKey == key || (e.hash == hash && equals(key, eKey))) {
+      if (eKey == key || (e.hash == hash && key.equals(eKey))) {
         return e.value;
       }
     }
@@ -200,11 +197,11 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     if (key == null) {
       return entryForNullKey != null;
     }
-    int hash = secondaryHash(getHashCode(key));
+    int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     for (HashMapEntry<K, V> e = tab[hash & (tab.length - 1)]; e != null; e = e.next) {
       K eKey = e.key;
-      if (eKey == key || (e.hash == hash && equals(key, eKey))) {
+      if (eKey == key || (e.hash == hash && key.equals(eKey))) {
         return true;
       }
     }
@@ -228,12 +225,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     // value is non-null
     for (int i = 0; i < len; i++) {
       for (HashMapEntry e = tab[i]; e != null; e = e.next) {
-        if (equals(value, e.value)) {
+        if (value.equals(e.value)) {
           return true;
         }
       }
     }
-    return entryForNullKey != null && equals(value, entryForNullKey.value);
+    return entryForNullKey != null && value.equals(entryForNullKey.value);
   }
 
   @Override
@@ -241,11 +238,11 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     if (key == null) {
       return putValueForNullKey(value);
     }
-    int hash = secondaryHash(getHashCode(key));
+    int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
-      if (e.hash == hash && equals(key, e.key)) {
+      if (e.hash == hash && key.equals(e.key)) {
         preModify(e);
         V oldValue = e.value;
         e.value = value;
@@ -295,12 +292,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
       }
       return;
     }
-    int hash = secondaryHash(getHashCode(key));
+    int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     HashMapEntry<K, V> first = tab[index];
     for (HashMapEntry<K, V> e = first; e != null; e = e.next) {
-      if (e.hash == hash && equals(key, e.key)) {
+      if (e.hash == hash && key.equals(e.key)) {
         e.value = value;
         return;
       }
@@ -443,11 +440,11 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     if (key == null) {
       return removeNullKey();
     }
-    int hash = secondaryHash(getHashCode(key));
+    int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index], prev = null; e != null; prev = e, e = e.next) {
-      if (e.hash == hash && equals(key, e.key)) {
+      if (e.hash == hash && key.equals(e.key)) {
         if (prev == null) {
           tab[index] = e.next;
         } else {
@@ -502,6 +499,10 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
   public Set<Entry<K, V>> entrySet() {
     Set<Entry<K, V>> es = entrySet;
     return (es != null) ? es : (entrySet = new EntrySet());
+  }
+
+  public Object clone() {
+    return new HashMap<K, V>(this);
   }
 
   static class HashMapEntry<K, V> implements Entry<K, V> {
@@ -596,7 +597,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
       if (modCount != expectedModCount) {
         throw new ConcurrentModificationException();
       }
-      AbstractHashMap.this.remove(lastEntryReturned.key);
+      HashMap.this.remove(lastEntryReturned.key);
       lastEntryReturned = null;
       expectedModCount = modCount;
     }
@@ -624,14 +625,14 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
   private boolean containsMapping(Object key, Object value) {
     if (key == null) {
       HashMapEntry<K, V> e = entryForNullKey;
-      return e != null && equals(value, e.value);
+      return e != null && value.equals(e.value);
     }
-    int hash = secondaryHash(getHashCode(key));
+    int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index]; e != null; e = e.next) {
-      if (e.hash == hash && equals(key, e.key)) {
-        return equals(value, e.value);
+      if (e.hash == hash && key.equals(e.key)) {
+        return value.equals(e.value);
       }
     }
     return false; // No entry for key
@@ -644,7 +645,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
   private boolean removeMapping(Object key, Object value) {
     if (key == null) {
       HashMapEntry<K, V> e = entryForNullKey;
-      if (e == null || !equals(value, e.value)) {
+      if (e == null || !value.equals(e.value)) {
         return false;
       }
       entryForNullKey = null;
@@ -653,12 +654,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
       postRemove(e);
       return true;
     }
-    int hash = secondaryHash(getHashCode(key));
+    int hash = secondaryHash(key.hashCode());
     HashMapEntry<K, V>[] tab = table;
     int index = hash & (tab.length - 1);
     for (HashMapEntry<K, V> e = tab[index], prev = null; e != null; prev = e, e = e.next) {
-      if (e.hash == hash && equals(key, e.key)) {
-        if (!equals(value, e.value)) {
+      if (e.hash == hash && key.equals(e.key)) {
+        if (!value.equals(e.value)) {
           return false; // Map has wrong value for key
         }
         if (prev == null) {
@@ -707,12 +708,12 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
 
     public boolean remove(Object o) {
       int oldSize = size;
-      AbstractHashMap.this.remove(o);
+      HashMap.this.remove(o);
       return size != oldSize;
     }
 
     public void clear() {
-      AbstractHashMap.this.clear();
+      HashMap.this.clear();
     }
   }
 
@@ -734,7 +735,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     }
 
     public void clear() {
-      AbstractHashMap.this.clear();
+      HashMap.this.clear();
     }
   }
 
@@ -768,7 +769,7 @@ abstract class AbstractHashMap<K, V> extends AbstractMap<K, V> implements Clonea
     }
 
     public void clear() {
-      AbstractHashMap.this.clear();
+      HashMap.this.clear();
     }
   }
 }

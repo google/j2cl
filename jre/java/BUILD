@@ -76,8 +76,9 @@ package_sources(
         "//third_party:gwt_java_emul_internal",
     ],
     excludes = [
-        "java/util/InternalHashCodeMap.java",  # J2WASM AbstractHashMap doesn't need it.
-        "java/util/InternalStringMap.java",  # J2WASM AbstractHashMap doesn't need it.
+        "java/util/InternalHashCodeMap.java",  # J2WASM HashMap doesn't need it.
+        "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
+        "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
         "Casts.java",  # J2WASM doesn't need it.
     ],
     super_srcs = select({
