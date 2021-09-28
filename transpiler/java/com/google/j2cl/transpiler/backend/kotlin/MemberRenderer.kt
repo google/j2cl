@@ -17,7 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 
 fun Renderer.renderMethod(method: Method) {
   renderNewLine()
@@ -40,8 +40,7 @@ private fun Renderer.renderMethodParameters(method: Method) {
 }
 
 private fun Renderer.renderMethodDescriptorReturnType(methodDescriptor: MethodDescriptor) {
-  if (!TypeDescriptors.isPrimitiveVoid(methodDescriptor.returnTypeDescriptor)) {
-    render(": ")
-    renderTypeDescriptor(methodDescriptor.returnTypeDescriptor)
+  if (!isPrimitiveVoid(methodDescriptor.returnTypeDescriptor)) {
+    render(": ${methodDescriptor.returnTypeDescriptor.sourceString}")
   }
 }

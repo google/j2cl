@@ -95,8 +95,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
 
 private fun Renderer.renderCastExpression(expression: CastExpression) {
   renderExpression(expression.expression)
-  render(" as ")
-  renderTypeDescriptor(expression.castTypeDescriptor)
+  render(" as ${expression.castTypeDescriptor.sourceString}")
 }
 
 private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
@@ -158,8 +157,8 @@ private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
 
 private fun Renderer.renderNewInstance(expression: NewInstance) {
   require(expression.qualifier == null)
-  val targetTypeDescriptor = expression.target.enclosingTypeDescriptor.toRawTypeDescriptor()
-  render("new $targetTypeDescriptor")
+  val targetTypeDescriptor = expression.target.enclosingTypeDescriptor.toRawTypeDescriptor()!!
+  render("new ${targetTypeDescriptor.sourceString}")
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }
 
@@ -190,8 +189,7 @@ private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclara
 }
 
 fun Renderer.renderVariable(variable: Variable) {
-  render("${variable.name}: ")
-  renderTypeDescriptor(variable.typeDescriptor)
+  render("${variable.name}: ${variable.typeDescriptor.sourceString}")
 }
 
 private fun Renderer.renderLeftSubExpression(expression: Expression, operand: Expression) {

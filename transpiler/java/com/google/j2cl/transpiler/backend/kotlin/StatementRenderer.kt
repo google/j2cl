@@ -88,7 +88,7 @@ private fun Renderer.renderIfStatement(ifStatement: IfStatement) {
 
 private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarationStatement) {
   var fieldDescriptor = declaration.fieldDescriptor
-  render("var ${fieldDescriptor.name}: ${fieldDescriptor.typeDescriptor.readableDescription} = ")
+  render("var ${fieldDescriptor.name}: ${fieldDescriptor.typeDescriptor.sourceString} = ")
   renderExpression(declaration.expression)
 }
 
