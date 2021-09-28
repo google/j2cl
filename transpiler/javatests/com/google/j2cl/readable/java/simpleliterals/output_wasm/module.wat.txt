@@ -56,33 +56,53 @@
  (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ simpleliterals/SimpleLiterals.java:20:14
- (local $a i32)
+ (local $bool i32)
+ (local $ch i32)
  (local $b i32)
- (local $c (ref null $java.lang.Object))
- (local $d i32)
- (local $e (ref null $java.lang.String))
- (local $f (ref null $java.lang.Class))
+ (local $s i32)
+ (local $i i32)
+ (local $l i64)
+ (local $f f32)
+ (local $d f64)
+ (local $o (ref null $java.lang.Object))
+ (local $str (ref null $java.lang.String))
+ (local $c (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
  (block
-  ;; boolean a = false;
+  ;; boolean bool = false;
   ;;@ simpleliterals/SimpleLiterals.java:21:4
-  (local.set $a (i32.const 0))
-  ;; char b = 97;
+  (local.set $bool (i32.const 0))
+  ;; char ch = 97;
   ;;@ simpleliterals/SimpleLiterals.java:22:4
-  (local.set $b (i32.const 97))
-  ;; Object c = null;
+  (local.set $ch (i32.const 97))
+  ;; byte b = 101;
   ;;@ simpleliterals/SimpleLiterals.java:23:4
-  (local.set $c (ref.null $java.lang.Object))
-  ;; int d = 101;
+  (local.set $b (i32.const 101))
+  ;; short s = 101;
   ;;@ simpleliterals/SimpleLiterals.java:24:4
-  (local.set $d (i32.const 101))
-  ;; String e = javaemul.internal.StringPool.$getString_|foo|();
+  (local.set $s (i32.const 101))
+  ;; int i = 101;
   ;;@ simpleliterals/SimpleLiterals.java:25:4
-  (local.set $e (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
-  ;; Class<?> f = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
+  (local.set $i (i32.const 101))
+  ;; long l = 101;
   ;;@ simpleliterals/SimpleLiterals.java:26:4
-  (local.set $f (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (local.set $l (i64.const 101))
+  ;; float f = 101.0;
+  ;;@ simpleliterals/SimpleLiterals.java:27:4
+  (local.set $f (f32.const 101.0))
+  ;; double d = 101.0;
+  ;;@ simpleliterals/SimpleLiterals.java:28:4
+  (local.set $d (f64.const 101.0))
+  ;; Object o = null;
+  ;;@ simpleliterals/SimpleLiterals.java:29:4
+  (local.set $o (ref.null $java.lang.Object))
+  ;; String str = javaemul.internal.StringPool.$getString_|foo|();
+  ;;@ simpleliterals/SimpleLiterals.java:30:4
+  (local.set $str (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
+  ;; Class<?> c = javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
+  ;;@ simpleliterals/SimpleLiterals.java:31:4
+  (local.set $c (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_main__void@simpleliterals.SimpleLiterals)

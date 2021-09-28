@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.NullLiteral
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.StringLiteral
+import com.google.j2cl.transpiler.ast.TypeLiteral
 
 /** Returns Kotlin source string representation of this literal. */
 val Literal.sourceString: String
@@ -30,11 +31,10 @@ val Literal.sourceString: String
       is NullLiteral -> "null"
       is BooleanLiteral -> "$value"
       is StringLiteral -> "\"${value.escapedString}\""
+      is TypeLiteral -> "${referencedTypeDescriptor.toNonNullable().sourceString}::class.java"
       is NumberLiteral ->
         when (typeDescriptor.toUnboxedType()) {
           PrimitiveTypes.CHAR -> "'${value.toChar().escapedString}'"
-          PrimitiveTypes.BYTE -> "${value.toByte()}"
-          PrimitiveTypes.SHORT -> "${value.toShort()}"
           PrimitiveTypes.INT -> "${value.toInt()}"
           PrimitiveTypes.LONG -> "${value.toLong()}L"
           PrimitiveTypes.FLOAT -> "${value.toFloat()}f"

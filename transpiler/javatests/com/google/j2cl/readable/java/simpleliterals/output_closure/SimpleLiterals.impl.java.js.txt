@@ -4,6 +4,7 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Class = goog.forwardDeclare('java.lang.Class$impl');
+let $Long = goog.forwardDeclare('nativebootstrap.Long$impl');
 
 class SimpleLiterals extends j_l_Object {
  /** @protected */
@@ -23,12 +24,17 @@ class SimpleLiterals extends j_l_Object {
  }
  
  m_main__() {
-  let a = false;
-  let b = 97 /* 'a' */;
-  let c = null;
+  let bool = false;
+  let ch = 97 /* 'a' */;
+  let b = 101;
+  let s = 101;
+  let i = 101;
+  let l = $Long.fromInt(101);
+  let f = 101;
   let d = 101;
-  let e = 'foo';
-  let f = Class.$get(SimpleLiterals);
+  let o = null;
+  let str = 'foo';
+  let c = Class.$get(SimpleLiterals);
  }
  
  static $clinit() {
@@ -43,6 +49,7 @@ class SimpleLiterals extends j_l_Object {
  
  static $loadModules() {
   Class = goog.module.get('java.lang.Class$impl');
+  $Long = goog.module.get('nativebootstrap.Long$impl');
  }
 }
 $Util.$setClassMetadata(SimpleLiterals, 'simpleliterals.SimpleLiterals');

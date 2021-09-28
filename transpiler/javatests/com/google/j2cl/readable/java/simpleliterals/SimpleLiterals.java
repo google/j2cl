@@ -18,11 +18,16 @@ package simpleliterals;
 public class SimpleLiterals {
   @SuppressWarnings("unused")
   public void main() {
-    boolean a = false;
-    char b = 'a';
-    Object c = null;
-    int d = 101;
-    String e = "foo";
-    Class<?> f = SimpleLiterals.class;
+    boolean bool = false;
+    char ch = 'a';
+    byte b = 101;
+    short s = 101;
+    int i = 101;
+    long l = 101L;
+    float f = 101.0f;
+    double d = 101.0;
+    Object o = null;
+    String str = "foo";
+    Class<?> c = SimpleLiterals.class;
   }
 }

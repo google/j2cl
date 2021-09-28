@@ -36,7 +36,6 @@ import com.google.j2cl.transpiler.ast.PostfixExpression
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
-import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
@@ -163,7 +162,6 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
 }
 
 private fun Renderer.renderPostfixExpression(expression: PostfixExpression) {
-  require(!TypeDescriptors.isPrimitiveLong(expression.typeDescriptor))
   renderLeftSubExpression(expression, expression.operand)
   render(expression.operator.symbol)
 }

@@ -1,0 +1,33 @@
+package simplelongs
+
+open class SimpleLongs {
+
+ fun getBar(): Long {
+  return 0
+ }
+
+ fun getWithSideEffect(): simplelongs.SimpleLongs? {
+  this.sideEffect++
+  return this
+ }
+
+ fun main() {
+  var a: Long = 0L
+  a = -100000L
+  a = 100000L
+  var b: Long = -2147483648L
+  b = 2147483648L
+  b = -9223372036854775808L
+  b = 9223372036854775807L
+  var c: Long = a + b
+  c = a / b
+  var e: Long = ++a
+  e = ++this.foo
+  e = ++this.getWithSideEffect().foo
+  var f: Long = a++
+  f = this.foo++
+  f = this.getWithSideEffect().foo++
+  var g: Long = this.foo
+  g = this.getBar()
+ }
+}
