@@ -24,9 +24,6 @@ import jsinterop.annotations.JsPackage;
 /** Abstract base class for numeric wrapper classes. */
 public abstract class Number implements Serializable {
 
-  /** Stores a regular expression object to verify the format of float values. */
-  private static NativeRegExp floatRegex;
-
   // CHECKSTYLE_OFF: A special need to use unusual identifiers to avoid
   // introducing name collisions.
 
