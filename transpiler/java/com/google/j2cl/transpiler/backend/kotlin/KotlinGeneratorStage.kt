@@ -35,8 +35,10 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
     val sourceBuilder = SourceBuilder()
     val renderer = Renderer(environment, sourceBuilder, problems)
     renderer.renderCompilationUnit(compilationUnit)
-    val source = sourceBuilder.build()
+    val source = sourceBuilder.build().trimTrailingWhitespaces()
     val path = compilationUnit.packageRelativePath.replace(".java", ".kt")
     output.write(path, source)
   }
 }
+
+private fun String.trimTrailingWhitespaces() = lines().joinToString("\n") { it.trimEnd() }
