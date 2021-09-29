@@ -46,6 +46,6 @@ private fun Renderer.renderTypeBody(type: Type) {
   if (staticMethods.isNotEmpty()) {
     renderNewLine()
     render("companion object ")
-    renderInCurlyBrackets { type.methods.forEach { renderMethod(it) } }
+    renderInCurlyBrackets { staticMethods.forEach { renderMethod(it) } }
   }
 }
