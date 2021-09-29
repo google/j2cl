@@ -29,31 +29,32 @@ class BooleanOperations extends j_l_Object {
   let ls = true;
   let rs = true;
   let r = true;
+  let t = !!!true;
   r = ls == rs;
   r = ls != rs;
-  r = !!(+ls ^ +rs);
-  r = !!(+ls & +rs);
-  r = !!(+ls | +rs);
+  r = !!(+ ls ^ + rs);
+  r = !!(+ ls & + rs);
+  r = !!(+ ls | + rs);
   r = ls && rs;
   r = ls || rs;
   r = ls = rs;
-  r = !!(+r ^ +rs);
-  r = !!(+r & +rs);
-  r = !!(+r | +rs);
+  r = !!(+ r ^ + rs);
+  r = !!(+ r & + rs);
+  r = !!(+ r | + rs);
   BooleanOperations.m_acceptBoolean__boolean(ls == rs);
   BooleanOperations.m_acceptBoolean__boolean(ls != rs);
-  BooleanOperations.m_acceptBoolean__boolean(!!(+ls ^ +rs));
-  BooleanOperations.m_acceptBoolean__boolean(!!(+ls & +rs));
-  BooleanOperations.m_acceptBoolean__boolean(!!(+ls | +rs));
+  BooleanOperations.m_acceptBoolean__boolean(!!(+ ls ^ + rs));
+  BooleanOperations.m_acceptBoolean__boolean(!!(+ ls & + rs));
+  BooleanOperations.m_acceptBoolean__boolean(!!(+ ls | + rs));
   BooleanOperations.m_acceptBoolean__boolean(ls && rs);
   BooleanOperations.m_acceptBoolean__boolean(ls || rs);
   BooleanOperations.m_acceptBoolean__boolean(ls = rs);
   let /** ?boolean */ br;
   br = /**@type {?boolean}*/ (ls == rs);
   br = /**@type {?boolean}*/ (ls != rs);
-  br = /**@type {?boolean}*/ (!!(+ls ^ +rs));
-  br = /**@type {?boolean}*/ (!!(+ls & +rs));
-  br = /**@type {?boolean}*/ (!!(+ls | +rs));
+  br = /**@type {?boolean}*/ (!!(+ ls ^ + rs));
+  br = /**@type {?boolean}*/ (!!(+ ls & + rs));
+  br = /**@type {?boolean}*/ (!!(+ ls | + rs));
   br = /**@type {?boolean}*/ (ls && rs);
   br = /**@type {?boolean}*/ (ls || rs);
   br = /**@type {?boolean}*/ (ls = rs);
@@ -63,13 +64,13 @@ class BooleanOperations extends j_l_Object {
   if (ls != rs) {
    r = true;
   }
-  if (!!(+ls ^ +rs)) {
+  if (!!(+ ls ^ + rs)) {
    r = true;
   }
-  if (!!(+ls & +rs)) {
+  if (!!(+ ls & + rs)) {
    r = true;
   }
-  if (!!(+ls | +rs)) {
+  if (!!(+ ls | + rs)) {
    r = true;
   }
   if (ls && rs) {
@@ -79,9 +80,9 @@ class BooleanOperations extends j_l_Object {
    r = true;
   }
   let finalOuter = $1Outer.$create__booleanoperations_BooleanOperations(this);
-  finalOuter.f_b__booleanoperations_BooleanOperations_1Outer = !!(+finalOuter.f_b__booleanoperations_BooleanOperations_1Outer | +true);
+  finalOuter.f_b__booleanoperations_BooleanOperations_1Outer = !!(+ finalOuter.f_b__booleanoperations_BooleanOperations_1Outer | + true);
   let outer = $1Outer.$create__booleanoperations_BooleanOperations(this);
-  outer.f_b__booleanoperations_BooleanOperations_1Outer = !!(+outer.f_b__booleanoperations_BooleanOperations_1Outer | +$Equality.$same(outer = null, null));
+  outer.f_b__booleanoperations_BooleanOperations_1Outer = !!(+ outer.f_b__booleanoperations_BooleanOperations_1Outer | + $Equality.$same(outer = null, null));
  }
  
  static $clinit() {

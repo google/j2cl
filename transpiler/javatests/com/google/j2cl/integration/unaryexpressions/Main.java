@@ -80,5 +80,8 @@ public class Main {
     // incorrectly expanded to "s = s + 1 == 11", which would have resulted in "s" having "true" as
     // its value.
     assertTrue(shorts[1] == 3);
+
+    double l = -0x80000000; // -Integer.MIN_VALUE
+    assertTrue(l == Integer.MIN_VALUE);
   }
 }

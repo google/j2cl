@@ -27,7 +27,7 @@
 [count++;] => [count_1 = $LongUtils.plus(count_1, $Long.fromInt(1));] "forstatement.ForStatement.test"
 [boolean a = false;] => [let a = false;] "forstatement.ForStatement.test"
 [a] => [a] "a"
-[for (; a |= true; ) {}] => [for (; a = !!(+a | +true); ) {}] "forstatement.ForStatement.test"
+[for (; a |= true; ) {}] => [for (; a = !!(+ a | + true); ) {}] "forstatement.ForStatement.test"
 [boolean b = false;] => [let b = false;] "forstatement.ForStatement.test"
 [b] => [b] "b"
 [for (; b = a; ) {}] => [for (; b = a; ) {}] "forstatement.ForStatement.test"

@@ -54,7 +54,7 @@ class ArithmeticExpressions extends j_l_Object {
  
  m_testPrimitives__() {
   let /** number */ $value, /** number */ $value_1;
-  let a = 10, b = ($value = a, a = a + 1 | 0, $value), c = ($value_1 = a, a = a - 1 | 0, $value_1), d = a = a + 1 | 0, e = a = a - 1 | 0, f = -a | 0, g = +a, h = ~a, i = 1 + 1 + 2 - 5 | 0, j = Math.imul(1 + 2, 3 + 4), p = $Primitives.coerceDivision(Math.imul($Primitives.coerceDivision(1 / 2), 3) % 4);
+  let a = 10, b = ($value = a, a = a + 1 | 0, $value), c = ($value_1 = a, a = a - 1 | 0, $value_1), d = a = a + 1 | 0, e = a = a - 1 | 0, f = - a | 0, g = + a, h = ~a, i = 1 + 1 + 2 - 5 | 0, j = Math.imul(1 + 2, 3 + 4), p = $Primitives.coerceDivision(Math.imul($Primitives.coerceDivision(1 / 2), 3) % 4), r = - -2147483648 | 0, t = - (- (- 1 | 0) | 0) | 0, u = + + + 1, v = - + (- 1 | 0) | 0, w = 5 - - 4 | 0;
   let k = !((1 + 2 + 3 | 0) == 4), l = (1 + 2 | 0) != 4, m = $Primitives.widenLongToDouble(Long.f_MAX_VALUE__java_lang_Long) != 9.223372036854778E18;
   let o = $Primitives.coerceDivision((5 + 1 | 0) / 2) - 0;
   a = a << 31;
@@ -62,7 +62,7 @@ class ArithmeticExpressions extends j_l_Object {
   a = $Primitives.narrowLongToInt($LongUtils.plus($Primitives.widenIntToLong(a), $Long.fromInt(1)));
   a = $Primitives.narrowLongToInt($LongUtils.divide($Primitives.widenIntToLong(a), $Long.fromInt(1)));
   a = $Primitives.narrowDoubleToInt(a + Double.f_MAX_VALUE__java_lang_Double);
-  k = !!(+k | +true);
+  k = !!(+ k | + true);
   let s = 10;
   k = (s = $Primitives.narrowIntToShort(s + 1 | 0)) == 10;
   let q = 3 >> 2;
@@ -108,7 +108,7 @@ class ArithmeticExpressions extends j_l_Object {
    $Arrays.$set($array_3, $index_3, $LongUtils.plus($array_3[$index_3], $Long.fromInt(1)));
   }
   let booleans = null;
-  $Arrays.$set(booleans, 0, !!(+booleans[0] | +true));
+  $Arrays.$set(booleans, 0, !!(+ booleans[0] | + true));
   let strings = null;
   $Arrays.$set(strings, 0, j_l_String.m_valueOf__java_lang_Object(strings[0]) + j_l_String.m_valueOf__java_lang_Object(null));
   let shorts = null;

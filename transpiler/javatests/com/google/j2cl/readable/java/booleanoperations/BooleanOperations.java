@@ -26,6 +26,7 @@ public class BooleanOperations {
     boolean ls = true;
     boolean rs = true;
     boolean r = true;
+    boolean t = !!!true;
 
     // Assignment.
     r = ls == rs;

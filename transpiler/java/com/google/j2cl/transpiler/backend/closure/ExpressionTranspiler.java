@@ -50,6 +50,7 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
+import com.google.j2cl.transpiler.ast.PrefixOperator;
 import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -400,7 +401,12 @@ public class ExpressionTranspiler {
 
       @Override
       public boolean enterPrefixExpression(PrefixExpression expression) {
-        sourceBuilder.append(expression.getOperator().toString());
+        PrefixOperator operator = expression.getOperator();
+        sourceBuilder.append(operator.toString());
+        if (operator == PrefixOperator.PLUS || operator == PrefixOperator.MINUS) {
+          // Emit a space after + and minus to avoid emitting + + as ++ and - -  and --.
+          sourceBuilder.append(" ");
+        }
         processRightSubExpression(expression, expression.getOperand());
         return false;
       }
