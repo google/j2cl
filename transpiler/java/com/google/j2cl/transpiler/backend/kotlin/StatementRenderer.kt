@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.Block
 import com.google.j2cl.transpiler.ast.BreakStatement
 import com.google.j2cl.transpiler.ast.ContinueStatement
@@ -45,8 +44,7 @@ fun Renderer.renderStatement(statement: Statement) {
     is SwitchStatement -> renderSwitchStatement(statement)
     is WhileStatement -> renderWhileStatement(statement)
     is ThrowStatement -> renderThrowStatement(statement)
-    // TODO(micapolos): Handle remaining statement types.
-    else -> throw InternalCompilerError("Unhandled ${statement::class}.")
+    else -> renderTodo(statement::class.java.simpleName)
   }
 }
 

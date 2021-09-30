@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayAccess
 import com.google.j2cl.transpiler.ast.ArrayLength
 import com.google.j2cl.transpiler.ast.ArrayLiteral
@@ -49,10 +48,10 @@ fun Renderer.renderExpression(expression: Expression) {
     is ArrayLiteral -> renderArrayLiteral(expression)
     is BinaryExpression -> renderBinaryExpression(expression)
     is CastExpression -> renderCastExpression(expression)
+    is ConditionalExpression -> renderConditionalExpression(expression)
     is ExpressionWithComment -> renderExpressionWithComment(expression)
     is FieldAccess -> renderFieldAccess(expression)
     is FunctionExpression -> renderFunctionExpression(expression)
-    is ConditionalExpression -> renderConditionalExpression(expression)
     is Literal -> render(expression.sourceString)
     is MethodCall -> renderMethodCall(expression)
     is MultiExpression -> renderMultiExpression(expression)
@@ -63,8 +62,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is ThisReference -> render("this")
     is VariableDeclarationExpression -> renderVariableDeclarationExpression(expression)
     is VariableReference -> render(expression.target.name)
-    // TODO(micapolos): Handle all expression types
-    else -> throw InternalCompilerError("Unhandled ${expression::class}")
+    else -> renderTodo(expression::class.java.simpleName)
   }
 }
 

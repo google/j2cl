@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.Problems
+import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
 /** Renderer of the Kotlin source code. */
@@ -93,4 +94,6 @@ class Renderer(
   fun <V> renderSeparatedWithEmptyLine(values: Iterable<V>, renderFn: (V) -> Unit) {
     renderSeparatedWith(values, "\n\n", renderFn)
   }
+
+  fun renderTodo(string: String) = render("TODO(${StringLiteral(string).sourceString})")
 }
