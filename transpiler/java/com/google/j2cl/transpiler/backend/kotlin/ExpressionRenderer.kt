@@ -158,8 +158,7 @@ private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
 private fun Renderer.renderNewInstance(expression: NewInstance) {
   require(expression.qualifier == null)
   val targetTypeDescriptor = expression.target.enclosingTypeDescriptor.toRawTypeDescriptor()!!
-  // TODO(b/201585239): Call to toNonNullable should not be needed here.
-  render("${targetTypeDescriptor.toNonNullable().sourceString}")
+  render("${targetTypeDescriptor.sourceString}")
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }
 
