@@ -28,6 +28,7 @@ import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.SwitchCase
 import com.google.j2cl.transpiler.ast.SwitchStatement
+import com.google.j2cl.transpiler.ast.ThrowStatement
 import com.google.j2cl.transpiler.ast.WhileStatement
 
 fun Renderer.renderStatement(statement: Statement) {
@@ -43,6 +44,7 @@ fun Renderer.renderStatement(statement: Statement) {
     is ReturnStatement -> renderReturnStatement(statement)
     is SwitchStatement -> renderSwitchStatement(statement)
     is WhileStatement -> renderWhileStatement(statement)
+    is ThrowStatement -> renderThrowStatement(statement)
     // TODO(micapolos): Handle remaining statement types.
     else -> throw InternalCompilerError("Unhandled ${statement::class}.")
   }
@@ -124,4 +126,9 @@ private fun Renderer.renderWhileStatement(whileStatement: WhileStatement) {
   render("while ")
   renderInParentheses { renderExpression(whileStatement.conditionExpression) }
   renderStatement(whileStatement.body)
+}
+
+private fun Renderer.renderThrowStatement(throwStatement: ThrowStatement) {
+  render("throw ")
+  renderExpression(throwStatement.expression)
 }
