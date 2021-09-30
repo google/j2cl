@@ -41,11 +41,18 @@ private fun Renderer.renderTypeBody(type: Type) {
   // TODO(dpo): Remove short term hack to pull static methods into companion object.
   val (staticMethods, instanceMethods) = type.methods.partition { it.isStatic }
 
-  instanceMethods.forEach { renderMethod(it) }
+  if (instanceMethods.isNotEmpty()) {
+    renderNewLine()
+    renderSeparatedWithEmptyLine(instanceMethods) { renderMethod(it) }
+  }
 
   if (staticMethods.isNotEmpty()) {
     renderNewLine()
+    if (instanceMethods.isNotEmpty()) renderNewLine() // Empty line after last method.
     render("companion object ")
-    renderInCurlyBrackets { staticMethods.forEach { renderMethod(it) } }
+    renderInCurlyBrackets {
+      renderNewLine()
+      renderSeparatedWithEmptyLine(staticMethods) { renderMethod(it) }
+    }
   }
 }

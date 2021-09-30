@@ -89,4 +89,8 @@ class Renderer(
       renderFn(value)
     }
   }
+
+  fun <V> renderSeparatedWithEmptyLine(values: Iterable<V>, renderFn: (V) -> Unit) {
+    renderSeparatedWith(values, "\n\n", renderFn)
+  }
 }

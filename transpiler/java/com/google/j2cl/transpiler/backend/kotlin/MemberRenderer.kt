@@ -20,14 +20,15 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 
 fun Renderer.renderMethod(method: Method) {
-  renderNewLine()
   renderMethodHeader(method)
   renderStatement(method.body)
 }
 
 private fun Renderer.renderMethodHeader(method: Method) {
-  if (method.isStatic) render("@JvmStatic")
-  renderNewLine()
+  if (method.isStatic) {
+    render("@JvmStatic")
+    renderNewLine()
+  }
   val methodDescriptor = method.descriptor
   render("fun ${methodDescriptor.name!!}")
   renderMethodParameters(method)

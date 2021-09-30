@@ -19,7 +19,7 @@ import com.google.j2cl.transpiler.ast.CompilationUnit
 
 fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
   renderPackageDeclaration(compilationUnit.packageName)
-  compilationUnit.types.forEach { renderType(it) }
+  renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
 }
 
 private fun Renderer.renderPackageDeclaration(packageName: String) {
