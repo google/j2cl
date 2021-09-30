@@ -83,5 +83,15 @@ public class Main {
 
     double l = -0x80000000; // -Integer.MIN_VALUE
     assertTrue(l == Integer.MIN_VALUE);
+
+    // Test space after - and + unary operators, so they don't behave like -- and ++.
+    assertTrue(-(-1) == 1);
+    assertTrue(-(-(1)) == 1);
+    assertTrue(+(+1) == 1);
+    assertTrue(+(+(1)) == 1);
+    assertTrue(-(-1.0) == 1.0);
+    assertTrue(-(-(1.0)) == 1.0);
+    assertTrue(+(+1.0) == 1.0);
+    assertTrue(+(+(1.0)) == 1.0);
   }
 }

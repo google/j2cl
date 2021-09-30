@@ -34,6 +34,7 @@ import com.google.j2cl.transpiler.ast.MultiExpression
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.PostfixExpression
 import com.google.j2cl.transpiler.ast.PrefixExpression
+import com.google.j2cl.transpiler.ast.PrefixOperator
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.Variable
@@ -168,7 +169,11 @@ private fun Renderer.renderPostfixExpression(expression: PostfixExpression) {
 }
 
 private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
-  render(expression.operator.symbol)
+  expression.operator.let {
+    render(it.symbol)
+    // Emit a space after + and minus to avoid emitting + + as ++ and - -  and --.
+    if (it == PrefixOperator.PLUS || it == PrefixOperator.MINUS) sourceBuilder.append(" ")
+  }
   renderRightSubExpression(expression, expression.operand)
 }
 
