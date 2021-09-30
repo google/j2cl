@@ -47,16 +47,21 @@
 [m] => [m] "m"
 [String n = N;] => [let n = CompileTimeConstant.f_N__compiletimeconstant_CompileTimeConstant;] "compiletimeconstant.CompileTimeConstant.<init>"
 [n] => [n] "n"
+[Class<?> c = classLiteral;] => [let c = CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant;] "compiletimeconstant.CompileTimeConstant.<init>"
+[c] => [c] "c"
 [public static final Object OBJ = null;] => [get f_OBJ__compiletimeconstant_CompileTimeConstant]
 [public static final Object OBJ = null;] => [return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_OBJ__compiletimeconstant_CompileTimeConstant);] "compiletimeconstant.CompileTimeConstant.<synthetic: getter>"
 [public static final String K = null;] => [get f_K__compiletimeconstant_CompileTimeConstant]
 [public static final String K = null;] => [return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_K__compiletimeconstant_CompileTimeConstant);] "compiletimeconstant.CompileTimeConstant.<synthetic: getter>"
+[public static final Class<?> classLiteral = CompileTimeConstant.class;] => [get f_classLiteral__compiletimeconstant_CompileTimeConstant]
+[public static final Class<?> classLiteral = CompileTimeConstant.class;] => [return (CompileTimeConstant.$clinit(), CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant);] "compiletimeconstant.CompileTimeConstant.<synthetic: getter>"
 [CompileTimeConstant] => [$clinit]
 [CompileTimeConstant] => [CompileTimeConstant.$clinit = () =>{};] "compiletimeconstant.CompileTimeConstant.<clinit>"
 [CompileTimeConstant] => [CompileTimeConstant.$loadModules();] "compiletimeconstant.CompileTimeConstant.<clinit>"
 [CompileTimeConstant] => [j_l_Object.$clinit();] "compiletimeconstant.CompileTimeConstant.<clinit>"
 [public static final Object OBJ = null;] => [CompileTimeConstant.$static_OBJ__compiletimeconstant_CompileTimeConstant = null;] "compiletimeconstant.CompileTimeConstant.<clinit>"
 [public static final String K = null;] => [CompileTimeConstant.$static_K__compiletimeconstant_CompileTimeConstant = null;] "compiletimeconstant.CompileTimeConstant.<clinit>"
+[public static final Class<?> classLiteral = CompileTimeConstant.class;] => [CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant = Class.$get(CompileTimeConstant);] "compiletimeconstant.CompileTimeConstant.<clinit>"
 [CompileTimeConstant] => [/**@private {*}*/
 CompileTimeConstant.$static_OBJ__compiletimeconstant_CompileTimeConstant;]
 [public static final int A = 10;] => [/**@const {number}*/
@@ -100,4 +105,6 @@ CompileTimeConstant.f_H__compiletimeconstant_CompileTimeConstant = 65 /* 'A' */;
 [public static final boolean I = G > 100;] => [/**@const {boolean}*/
 CompileTimeConstant.f_I__compiletimeconstant_CompileTimeConstant = true;]
 [I] => [f_I__compiletimeconstant_CompileTimeConstant]
+[CompileTimeConstant] => [/**@private {Class<?>}*/
+CompileTimeConstant.$static_classLiteral__compiletimeconstant_CompileTimeConstant;]
 

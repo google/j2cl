@@ -63,25 +63,29 @@
  (local $l (ref null $java.lang.String))
  (local $m (ref null $java.lang.String))
  (local $n (ref null $java.lang.String))
+ (local $c (ref null $java.lang.Class))
  (block
   ;; boolean b = (CompileTimeConstant.this,true);
-  ;;@ compiletimeconstant/CompileTimeConstant.java:51:4
+  ;;@ compiletimeconstant/CompileTimeConstant.java:53:4
   (local.set $b (block (result i32)
    (drop (local.get $this))
    (i32.const 1)
   ))
   ;; String s = javaemul.internal.StringPool.$getString_|10000Tur_tle...|();
-  ;;@ compiletimeconstant/CompileTimeConstant.java:52:4
+  ;;@ compiletimeconstant/CompileTimeConstant.java:54:4
   (local.set $s (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|10000Tur_tle...|__java_lang_String@javaemul.internal.StringPool) ))
   ;; String l = javaemul.internal.StringPool.$getString_|ThisIsALongS...|();
-  ;;@ compiletimeconstant/CompileTimeConstant.java:53:4
+  ;;@ compiletimeconstant/CompileTimeConstant.java:55:4
   (local.set $l (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|ThisIsALongS...|__java_lang_String@javaemul.internal.StringPool) ))
   ;; String m = javaemul.internal.StringPool.$getString_|ThisIsALongS...|_1();
-  ;;@ compiletimeconstant/CompileTimeConstant.java:54:4
+  ;;@ compiletimeconstant/CompileTimeConstant.java:56:4
   (local.set $m (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|ThisIsALongS...|_1__java_lang_String@javaemul.internal.StringPool) ))
   ;; String n = javaemul.internal.StringPool.$getString_|ThisIsALongS...|_2();
-  ;;@ compiletimeconstant/CompileTimeConstant.java:55:4
+  ;;@ compiletimeconstant/CompileTimeConstant.java:57:4
   (local.set $n (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|ThisIsALongS...|_2__java_lang_String@javaemul.internal.StringPool) ))
+  ;; Class<?> c = javaemul.internal.ClassLiteralPool.$getCompiletimeconstant.CompileTimeConstant();
+  ;;@ compiletimeconstant/CompileTimeConstant.java:58:4
+  (local.set $c (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCompiletimeconstant.CompileTimeConstant__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 

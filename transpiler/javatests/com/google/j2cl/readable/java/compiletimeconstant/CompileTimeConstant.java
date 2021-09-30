@@ -35,6 +35,9 @@ public class CompileTimeConstant {
   public static final char H = 'A';
   public static final boolean I = G > 100;
 
+  // Note that currently this only compile time constant for WASM purposes, not per JLS.
+  public static final Class<?> classLiteral = CompileTimeConstant.class;
+
   public final int A2 = 10;
   public final int B2 = 20;
   public final int C2 = A * B;
@@ -53,5 +56,6 @@ public class CompileTimeConstant {
     String l = L;
     String m = M;
     String n = N;
+    Class<?> c = classLiteral;
   }
 }
