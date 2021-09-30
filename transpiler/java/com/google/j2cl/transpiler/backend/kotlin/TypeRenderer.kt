@@ -15,30 +15,43 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.Kind
 import com.google.j2cl.transpiler.ast.Type
-import com.google.j2cl.transpiler.ast.TypeDescriptors
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import java.util.stream.Collectors
 
 fun Renderer.renderType(type: Type) {
-  if (!type.declaration.isFinal) render("open ")
-  render("class ${type.declaration.simpleSourceName}")
+  if (type.isClass && !type.declaration.isFinal) {
+    if (type.declaration.isAbstract) render("abstract ") else render("open ")
+  }
+  render(
+    when (type.kind) {
+      Kind.CLASS -> "class "
+      Kind.ENUM -> "enum class "
+      Kind.INTERFACE -> "interface "
+    }
+  )
+  render("${type.declaration.simpleSourceName}")
 
-  // TODO(dpo): add support for class hierarchies
-  renderTypeExtendsClause(type)
+  renderSuperTypes(type)
 
   render(" ")
   renderInCurlyBrackets { renderTypeBody(type) }
 }
 
-private fun Renderer.renderTypeExtendsClause(type: Type) {
-  val superTypeDescriptor = type.superTypeDescriptor
-  if (superTypeDescriptor != null && !TypeDescriptors.isJavaLangObject(superTypeDescriptor)) {
-    render(" extends ${superTypeDescriptor.qualifiedSourceName}")
-  }
+private fun Renderer.renderSuperTypes(type: Type) {
+  type
+    .superTypesStream
+    .filter { !isJavaLangObject(it) }
+    .map { it.toNonNullable().sourceString }
+    .collect(Collectors.joining(", "))
+    .let { if (it.isNotEmpty()) render(": $it") }
 }
 
 private fun Renderer.renderTypeBody(type: Type) {
-  // TODO(dpo): add support for field declarations
-  // TODO(dpo): Remove short term hack to pull static methods into companion object.
+  // TODO(b/399455906): add support for field declarations
+  // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
+  // TODO(b/399455906): Render enum values.
   val (staticMethods, instanceMethods) = type.methods.partition { it.isStatic }
 
   if (instanceMethods.isNotEmpty()) {

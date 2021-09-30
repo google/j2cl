@@ -21,7 +21,10 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
 
 fun Renderer.renderMethod(method: Method) {
   renderMethodHeader(method)
-  renderStatement(method.body)
+  if (!method.isAbstract) {
+    render(" ")
+    renderStatement(method.body)
+  }
 }
 
 private fun Renderer.renderMethodHeader(method: Method) {
@@ -33,7 +36,6 @@ private fun Renderer.renderMethodHeader(method: Method) {
   render("fun ${methodDescriptor.name!!}")
   renderMethodParameters(method)
   renderMethodDescriptorReturnType(methodDescriptor)
-  render(" ")
 }
 
 private fun Renderer.renderMethodParameters(method: Method) {
