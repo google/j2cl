@@ -80,11 +80,11 @@ public class NormalizeConstructors extends NormalizationPass {
    *
    * <ul>
    *   <li>1) Normal Java classes where the Javascript constructor simply defines the class fields.
-   *   <li>2) @JsConstructor classes that subclass a regular constructor. Thes classes expose 'real'
-   *       Javascript constructors that can be used to make an instance of the class. However, to
-   *       call super we cannot call the es6 super(args) since the super class is a regular Java
-   *       class, it is expected that the $ctor_super(args) is called. Hence the constructors look
-   *       like this:
+   *   <li>2) @JsConstructor classes that subclass a regular constructor. These classes expose
+   *       'real' Javascript constructors that can be used to make an instance of the class.
+   *       However, to call super we cannot call the es6 super(args) since the super class is a
+   *       regular Java class, it is expected that the $ctor_super(args) is called. Hence the
+   *       constructors look like this:
    *       <pre>{@code
    * class JsConstructorClass extends RegularClass
    *   constructor(args) {
@@ -137,8 +137,8 @@ public class NormalizeConstructors extends NormalizationPass {
             : synthesizePrivateConstructor(type);
 
     insertFactoryMethods(type);
-    // Since JsConstructors include ctor logic as part of ES6 constructor and will be implcitly
-    // executed when the ES6 constructor is executed, we should remove eplicit calls to the ctor
+    // Since JsConstructors include ctor logic as part of ES6 constructor and will be implicitly
+    // executed when the ES6 constructor is executed, we should remove explicit calls to the ctor
     // functions via 'super()' and 'this()'.
     removeUnneededCtorCalls(type);
     rewriteConstructorsAsCtorMethods(type);
@@ -351,7 +351,7 @@ public class NormalizeConstructors extends NormalizationPass {
    * <pre>{@code
    * static $create(args)
    *   let $this;
-   *   <devirt instructions with assignement to this>
+   *   <devirt instructions with assignment to this>
    *   return $this;
    * }</pre>
    */
