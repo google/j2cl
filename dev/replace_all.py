@@ -62,7 +62,7 @@ def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
 
   build_targets = [d + ":readable.js" for d in js_readable_dirs]
   build_targets += [d + ":readable_wasm.wat" for d in wasm_readable_dirs]
-  build_targets += [d + ":readable_kt" for d in kt_readable_dirs]
+  build_targets += [d + ":readable_kt.kt" for d in kt_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
