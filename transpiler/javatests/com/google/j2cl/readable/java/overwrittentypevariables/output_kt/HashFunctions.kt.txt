@@ -1,0 +1,41 @@
+package overwrittentypevariables
+
+interface MyFunction {
+ fun apply(input: F): T
+}
+
+interface HashFunction: overwrittentypevariables.MyFunction<T, String?> {}
+
+open class HashFunctions {
+ companion object {
+  @JvmStatic
+  fun hashFunction(): overwrittentypevariables.HashFunction<T>? {
+   return overwrittentypevariables.HashFunctions.1?()
+  }
+
+  @JvmStatic
+  fun enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
+   return overwrittentypevariables.HashFunctions.2?()
+  }
+ }
+}
+
+open class $1: overwrittentypevariables.HashFunction<T> {
+ fun <init>(): overwrittentypevariables.HashFunctions.1<T> {
+  super()
+ }
+
+ fun apply(input: T): String? {
+  return ""
+ }
+}
+
+open class $2: overwrittentypevariables.HashFunction<T> {
+ fun <init>(): overwrittentypevariables.HashFunctions.2<T> {
+  super()
+ }
+
+ fun apply(input: T): String? {
+  return "" + input.ordinal()
+ }
+}

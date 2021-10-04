@@ -1,0 +1,42 @@
+package inferreturn
+
+open class InferReturn {
+ companion object {
+  @JvmStatic
+  fun inferGeneric(foo: T): inferreturn.InferReturn<T>? {
+   return inferreturn.InferReturn?()
+  }
+
+  @JvmStatic
+  fun tightenType(foo: inferreturn.InferReturn<String?>?): inferreturn.InferReturn<inferreturn.InferReturn<String?>?>? {
+   if (foo != null) {
+    return TODO("JavaScriptConstructorReference").inferGeneric(foo)
+   }
+   return null
+  }
+
+  @JvmStatic
+  fun main() {
+   var list: java.util.ArrayList<Any?>? = TODO("JavaScriptConstructorReference").newArrayList("foo")
+   TODO("JavaScriptConstructorReference").acceptsArrayListOfObject(list)
+   var array: Array<Any?>? = TODO("JavaScriptConstructorReference").newArray("foo")
+   TODO("JavaScriptConstructorReference").acceptsArrayOfObject(array)
+  }
+
+  @JvmStatic
+  fun newArrayList(foo: V): java.util.ArrayList<V>? {
+   return java.util.ArrayList?()
+  }
+
+  @JvmStatic
+  fun newArray(foo: V): Array<V>? {
+   return TODO("NewArray") as Array<V>?
+  }
+
+  @JvmStatic
+  fun acceptsArrayListOfObject(foo: java.util.ArrayList<Any?>?) {}
+
+  @JvmStatic
+  fun acceptsArrayOfObject(foo: Array<Any?>?) {}
+ }
+}

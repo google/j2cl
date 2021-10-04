@@ -1,0 +1,13 @@
+package innerclasswithconstructor
+
+open class InnerClassWithConstructor {}
+
+open class InnerClass {
+ fun <init>(b: Int): innerclasswithconstructor.InnerClassWithConstructor.InnerClass {
+  this.b = this.this.a + b
+ }
+
+ fun <init>(): innerclasswithconstructor.InnerClassWithConstructor.InnerClass {
+  super(this.this.a)
+ }
+}

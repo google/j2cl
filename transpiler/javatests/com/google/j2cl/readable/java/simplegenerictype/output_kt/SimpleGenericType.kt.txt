@@ -1,0 +1,12 @@
+package simplegenerictype
+
+open class SimpleGenericType {
+ fun <init>(t: T, s: S): simplegenerictype.SimpleGenericType<T, S> {
+  this.first = t
+  this.second = s
+ }
+
+ fun test() {
+  var g: simplegenerictype.SimpleGenericType<Any?, java.lang.Error?>? = simplegenerictype.SimpleGenericType?(Any?(), java.lang.Error?())
+ }
+}

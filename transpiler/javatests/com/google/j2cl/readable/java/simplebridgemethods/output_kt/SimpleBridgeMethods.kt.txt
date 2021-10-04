@@ -1,0 +1,25 @@
+package simplebridgemethods
+
+open class Superclass {
+ fun m1(t: T) {}
+}
+
+open class Subclass: simplebridgemethods.Superclass<java.lang.AssertionError?> {
+ fun m1(a: java.lang.AssertionError?) {}
+}
+
+open class AnotherSubclass: simplebridgemethods.Superclass<java.lang.AssertionError?> {}
+
+interface Callable {
+ fun call(v: V)
+}
+
+open class Task: simplebridgemethods.Callable<T> {
+ fun call(t: T) {}
+}
+
+open class AnotherTask: simplebridgemethods.Callable<simplebridgemethods.Superclass<T>?> {
+ fun call(t: simplebridgemethods.Superclass<T>?) {}
+}
+
+open class SimpleBridgeMethods {}

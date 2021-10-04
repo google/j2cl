@@ -1,0 +1,27 @@
+package devirtualizedcalls
+
+open class ObjectCalls {
+ fun main() {
+  var object: Any? = Any?()
+  object.equals(object)
+  object.hashCode()
+  object.toString()
+  object.getClass()
+  var objectCalls: Array<devirtualizedcalls.ObjectCalls?>? = TODO("NewArray")
+  objectCalls.equals(objectCalls)
+  objectCalls.hashCode()
+  objectCalls.toString()
+  objectCalls.getClass()
+ }
+
+ fun test() {
+  this.equals(Any?())
+  this.hashCode()
+  this.toString()
+  this.getClass()
+  this.equals(Any?())
+  this.hashCode()
+  this.toString()
+  this.getClass()
+ }
+}

@@ -1,0 +1,17 @@
+package annotation
+
+open class Main {}
+
+interface Foo: java.lang.annotation.Annotation {
+ fun bar(): Int
+}
+
+interface Zoo: java.lang.annotation.Annotation {}
+
+open class Bar {
+ fun baz(): Int {
+  var foo: annotation.Main.Foo? = null
+  foo.bar()
+  return TODO("JavaScriptConstructorReference").CONSTANT
+ }
+}

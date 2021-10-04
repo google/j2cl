@@ -10,6 +10,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    generate_kt_readables = False,
     deps = [
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",

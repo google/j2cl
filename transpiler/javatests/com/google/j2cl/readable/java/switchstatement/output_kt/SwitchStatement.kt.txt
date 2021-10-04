@@ -1,0 +1,60 @@
+package switchstatement
+
+enum class Numbers: java.lang.Enum<switchstatement.Numbers?> {}
+
+open class SwitchStatement {
+ fun main() {
+  when ("one"){
+   "one" ->
+   "two" ->
+    break
+   else ->
+    return Unit
+  }
+  when ('1'){
+   '1' ->
+   '2' ->
+    break
+   else ->
+    return Unit
+  }
+  when (1){
+   -2 ->
+   1 ->
+   2 ->
+    break
+   else ->
+    return Unit
+  }
+  when (TODO("JavaScriptConstructorReference").ONE){
+   TODO("JavaScriptConstructorReference").ONE ->
+   TODO("JavaScriptConstructorReference").TWO ->
+    break
+   else ->
+    return Unit
+  }
+ }
+
+ companion object {
+  @JvmStatic
+  fun testSwitchVariableDeclarations() {
+   when (3){
+    1 ->
+     var unassigned: Int, unassigned2: Int
+     var i: Int = 0
+     var j: Int = 2, b: Int = j + 1
+     break
+    3 ->
+     i = 3
+     TODO("AssertStatement")
+     return Unit
+   }
+   when (5){
+    5 ->
+     var i: Int = 1
+     break
+   }
+   TODO("AssertStatement")
+  }
+ }
+}

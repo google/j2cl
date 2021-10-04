@@ -11,6 +11,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = ["Foo.java"],
+    generate_kt_readables = False,
     deps = [":dummy-processor-export-j2cl"],
 )
 

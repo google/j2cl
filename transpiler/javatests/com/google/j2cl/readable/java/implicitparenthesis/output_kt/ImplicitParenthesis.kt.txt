@@ -1,0 +1,71 @@
+package implicitparenthesis
+
+open class ImplicitParenthesis {
+ fun test() {
+  TODO("JavaScriptConstructorReference").examples()
+  TODO("JavaScriptConstructorReference").nonExamples()
+ }
+
+ companion object {
+  @JvmStatic
+  fun examples() {
+   var primitiveInt: Int
+   var boxedInt: java.lang.Integer?
+   {
+    primitiveInt = 5
+    boxedInt = java.lang.Integer?(10)
+    primitiveInt = if (primitiveInt == 5) java.lang.Integer?(15) else java.lang.Integer?(30)
+    TODO("AssertStatement")
+   }
+   {
+    primitiveInt = 5
+    boxedInt = java.lang.Integer?(10)
+    primitiveInt = boxedInt += primitiveInt
+    TODO("AssertStatement")
+   }
+   {
+    primitiveInt = 5
+    boxedInt = java.lang.Integer?(10)
+    primitiveInt = boxedInt = primitiveInt
+    TODO("AssertStatement")
+   }
+   {
+    primitiveInt = 5
+    boxedInt = java.lang.Integer?(10)
+    primitiveInt = boxedInt++
+    TODO("AssertStatement")
+   }
+   {
+    primitiveInt = 5
+    boxedInt = java.lang.Integer?(10)
+    primitiveInt = ++boxedInt
+    TODO("AssertStatement")
+   }
+  }
+
+  @JvmStatic
+  fun nonExamples() {
+   var primitiveInt: Int
+   var boxedInt: java.lang.Integer?
+   var boxedBoolean: java.lang.Boolean?
+   {
+    primitiveInt = 5
+    boxedInt = java.lang.Integer?(10)
+    primitiveInt = boxedInt - primitiveInt
+    TODO("AssertStatement")
+   }
+   {
+    primitiveInt = 5
+    boxedInt = java.lang.Integer?(10)
+    boxedBoolean = true
+    boxedBoolean = boxedInt == primitiveInt
+    TODO("AssertStatement")
+   }
+  }
+
+  @JvmStatic
+  fun parenthesisRemoval() {
+   java.lang.Integer?(1 + 2)
+  }
+ }
+}

@@ -1,0 +1,15 @@
+package overridingmethods
+
+interface SomeInterface {
+ fun bar()
+}
+
+open class Parent {
+ fun fun() {}
+}
+
+open class Child: overridingmethods.SomeInterface, overridingmethods.Parent {
+ fun fun() {}
+
+ fun bar() {}
+}

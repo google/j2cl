@@ -1,0 +1,13 @@
+package supercallnondefault
+
+open class Parent {
+ fun <init>(f: Int): supercallnondefault.Parent {
+  this.field = f
+ }
+}
+
+open class Child: supercallnondefault.Parent {
+ fun <init>(a: Int): supercallnondefault.Child {
+  super(a)
+ }
+}

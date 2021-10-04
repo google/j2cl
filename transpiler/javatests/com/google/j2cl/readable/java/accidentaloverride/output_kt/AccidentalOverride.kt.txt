@@ -1,0 +1,13 @@
+package accidentaloverride
+
+open class Parent {
+ fun foo(e: T) {}
+}
+
+interface SuperInterface {
+ fun foo(t: T)
+}
+
+open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<java.lang.AssertionError?>, accidentaloverride.Parent<java.lang.AssertionError?> {}
+
+open class AccidentalOverride: accidentaloverride.SuperInterface<java.lang.Error?>, accidentaloverride.Parent<java.lang.Error?> {}

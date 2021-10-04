@@ -1,0 +1,38 @@
+package devirtualizedsupermethodcall
+
+open class SubNumber: java.lang.Number {
+ fun intValue(): Int {
+  return 0
+ }
+
+ fun longValue(): Long {
+  return 0 as Long
+ }
+
+ fun floatValue(): Float {
+  return 0
+ }
+
+ fun doubleValue(): Double {
+  return 0
+ }
+}
+
+open class FooCallsSuperObjectMethod {
+ fun hashCode(): Int {
+  return super.hashCode()
+ }
+}
+
+open class Main {
+ fun main() {
+  var fooCallsSuperObjectMethods: devirtualizedsupermethodcall.FooCallsSuperObjectMethod? = devirtualizedsupermethodcall.FooCallsSuperObjectMethod?()
+  fooCallsSuperObjectMethods.hashCode()
+  var sn: devirtualizedsupermethodcall.SubNumber? = devirtualizedsupermethodcall.SubNumber?()
+  sn.byteValue()
+  sn.doubleValue()
+  sn.floatValue()
+  sn.intValue()
+  sn.shortValue()
+ }
+}

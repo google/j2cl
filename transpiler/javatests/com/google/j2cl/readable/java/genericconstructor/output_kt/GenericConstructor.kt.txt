@@ -1,0 +1,12 @@
+package genericconstructor
+
+open class GenericConstructor {
+ fun <init>(s: S, t: T): genericconstructor.GenericConstructor<T> {}
+
+ fun <init>(t: T): genericconstructor.GenericConstructor<T> {}
+
+ fun test() {
+  genericconstructor.GenericConstructor?(java.lang.Exception?(), java.lang.Error?())
+  genericconstructor.GenericConstructor?(java.lang.Exception?())
+ }
+}

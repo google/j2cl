@@ -1,0 +1,34 @@
+package enums
+
+enum class Enum1: java.lang.Enum<enums.Enum1?> {}
+
+enum class Enum2: java.lang.Enum<enums.Enum2?> {
+ fun <init>(foo: Int): enums.Enum2 {
+  this.foo = foo
+ }
+
+ fun <init>(foo: java.lang.Enum?): enums.Enum2 {
+  super(foo.ordinal())
+ }
+
+ fun <init>(somePars: Array<Any?>?): enums.Enum2 {
+  super(somePars.size)
+ }
+
+ companion object {
+  @JvmStatic
+  fun f(o: Any?): enums.Enum2? {
+   return null
+  }
+ }
+}
+
+open class $1: enums.Enum2 {
+ fun <init>($_0: Int): enums.Enum2.1 {
+  super($_0)
+ }
+}
+
+enum class Enum3: java.lang.Enum<enums.Enum3?> {
+ fun <init>(function: java.util.function.Function<java.lang.Integer?, java.lang.Integer?>?): enums.Enum3 {}
+}

@@ -1,0 +1,18 @@
+package multipleconstructors
+
+open class MultipleConstructors {
+ fun <init>(id: Int): multipleconstructors.MultipleConstructors {
+  this.id = id
+  this.flag = id == 0
+ }
+
+ fun <init>(flag: Boolean): multipleconstructors.MultipleConstructors {
+  this.id = - 1
+  this.flag = flag
+ }
+
+ fun <init>(id: Int, flag: Boolean): multipleconstructors.MultipleConstructors {
+  this.id = id
+  this.flag = flag
+ }
+}

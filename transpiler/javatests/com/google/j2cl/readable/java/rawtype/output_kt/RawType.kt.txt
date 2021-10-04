@@ -1,0 +1,11 @@
+package rawtype
+
+open class RawType {}
+
+interface I {
+ fun f(t: T) {}
+}
+
+open class RawSubclass: rawtype.RawType.I {
+ fun f(t: rawtype.RawType?) {}
+}

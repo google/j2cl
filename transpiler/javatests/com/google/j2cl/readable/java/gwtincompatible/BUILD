@@ -26,6 +26,7 @@ readable_example(
     srcs = [
         "Implementor.java",
     ],
+    generate_kt_readables = False,
     deps = [
         ":annotation",
         ":interface",

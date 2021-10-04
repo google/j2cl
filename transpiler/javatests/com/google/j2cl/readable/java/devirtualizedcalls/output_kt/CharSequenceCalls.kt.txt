@@ -1,0 +1,12 @@
+package devirtualizedcalls
+
+open class CharSequenceCalls {
+ fun test(cs: java.lang.CharSequence?) {
+  cs.charAt(0)
+ }
+
+ fun main() {
+  var s: String? = "s"
+  this.test(s)
+ }
+}

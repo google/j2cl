@@ -1,0 +1,23 @@
+package genericequals
+
+open class GenericEquals {
+ fun <init>(value: T): genericequals.GenericEquals<T> {
+  this.value = value
+  this.value2 = null
+ }
+
+ fun foo(other: genericequals.GenericEquals<*>?): Any? {
+  return other.value2.value
+ }
+
+ fun equals(obj: Any?): Boolean {
+  if (obj == this) {
+   return true
+  }
+  if (!(TODO("InstanceOfExpression"))) {
+   return false
+  }
+  var other: genericequals.GenericEquals<*>? = obj as genericequals.GenericEquals<*>?
+  return this.value.equals(other.value)
+ }
+}

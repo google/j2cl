@@ -11,6 +11,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = ["TypeAnnotations.java"],
+    generate_kt_readables = False,
     deps = [
         ":parametric-type",
         "//third_party:gwt-jsinterop-annotations-j2cl",

@@ -13,5 +13,6 @@ readable_example(
         "*.java",
         "*.native.js",
     ]),
+    generate_kt_readables = False,
     generate_wasm_readables = False,
 )

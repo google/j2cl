@@ -11,6 +11,7 @@ package(
 readable_example(
     srcs = glob(["*.java"]),
     experimental_optimize_autovalue = True,
+    generate_kt_readables = False,
     generate_wasm_readables = False,
     javacopts = ["-Acom.google.auto.value.OmitIdentifiers"],
     deps = [

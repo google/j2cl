@@ -1,0 +1,48 @@
+package multipleabstractparents
+
+open class MultipleAbstractParents {
+ companion object {
+  @JvmStatic
+  fun main(args: Array<String?>?) {
+   TODO("AssertStatement")
+   TODO("AssertStatement")
+   TODO("AssertStatement")
+  }
+ }
+}
+
+interface List {
+ fun getFoo(t: T): String?
+}
+
+interface Collection {
+ fun getFoo(t: T): String?
+}
+
+abstract class AbstractListCollection: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.Collection<T> {}
+
+abstract class AbstractCollection {
+ fun getFoo(t: T): String? {
+  return "AbstractCollection"
+ }
+}
+
+abstract class AbstractList: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.AbstractCollection<T> {}
+
+abstract class AbstractList2: multipleabstractparents.MultipleAbstractParents.List<T> {}
+
+open class ArrayList: multipleabstractparents.MultipleAbstractParents.AbstractList<T> {}
+
+interface IStringList: multipleabstractparents.MultipleAbstractParents.List<String?> {
+ fun getFoo(string: String?): String?
+}
+
+abstract class AbstractStringList: multipleabstractparents.MultipleAbstractParents.IStringList, multipleabstractparents.MultipleAbstractParents.AbstractList<String?> {}
+
+abstract class AbstractStringList2: multipleabstractparents.MultipleAbstractParents.IStringList, multipleabstractparents.MultipleAbstractParents.AbstractList2<String?> {}
+
+abstract class AbstractStringList3: multipleabstractparents.MultipleAbstractParents.AbstractList2<String?> {}
+
+open class StringList: multipleabstractparents.MultipleAbstractParents.AbstractStringList {}
+
+open class StringListChild: multipleabstractparents.MultipleAbstractParents.StringList {}

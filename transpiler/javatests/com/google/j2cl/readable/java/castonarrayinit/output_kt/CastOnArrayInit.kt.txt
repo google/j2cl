@@ -1,0 +1,17 @@
+package castonarrayinit
+
+open class CastOnArrayInit {
+ companion object {
+  @JvmStatic
+  fun fun(args: Array<castonarrayinit.CastOnArrayInit.Foo<E>?>?) {}
+
+  @JvmStatic
+  fun test() {
+   var f1: castonarrayinit.CastOnArrayInit.Foo<E>? = castonarrayinit.CastOnArrayInit.Foo?()
+   var f2: castonarrayinit.CastOnArrayInit.Foo<E>? = castonarrayinit.CastOnArrayInit.Foo?()
+   TODO("JavaScriptConstructorReference").fun(arrayOf(f1, f2))
+  }
+ }
+}
+
+open class Foo {}

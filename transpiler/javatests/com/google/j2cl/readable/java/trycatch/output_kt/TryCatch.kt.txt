@@ -1,0 +1,58 @@
+package trycatch
+
+open class TryCatch {
+ fun testMultiCatch() {
+  TODO("TryStatement")
+ }
+
+ fun testEmptyThrowableCatch() {
+  TODO("TryStatement")
+  TODO("TryStatement")
+ }
+
+ fun testEmptyThrowableRethrow() {
+  TODO("TryStatement")
+ }
+
+ fun testFinally() {
+  TODO("TryStatement")
+ }
+
+ fun testTryWithResource() {
+  TODO("TryStatement")
+ }
+
+ fun testTryWithResourceJava9() {
+  var thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing?()
+  var thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing?()
+  TODO("TryStatement")
+ }
+
+ fun testTryWithResouceOnStaticField() {
+  TODO("TryStatement")
+ }
+
+ fun testNestedTryCatch() {
+  TODO("TryStatement")
+ }
+
+ fun testThrowGenerics() {
+  throw this.getT(java.lang.Exception?())
+ }
+
+ fun getT(t: T): T {
+  return t
+ }
+
+ fun testThrowBoundGenerics() {
+  throw this.getThrowable()
+ }
+
+ fun getThrowable(): T {
+  return null
+ }
+}
+
+open class ClosableThing: java.lang.AutoCloseable {
+ fun close() {}
+}

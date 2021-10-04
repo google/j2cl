@@ -1,0 +1,9 @@
+package implementsgenericinterface
+
+interface GenericInterface {}
+
+interface GenericSubInterface: implementsgenericinterface.GenericInterface<T> {}
+
+open class GenericInterfaceGenericImpl: implementsgenericinterface.GenericInterface<T> {}
+
+open class GenericInterfaceImpl: implementsgenericinterface.GenericInterface<java.lang.Number?> {}

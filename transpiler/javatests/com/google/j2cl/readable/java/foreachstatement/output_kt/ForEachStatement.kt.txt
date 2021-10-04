@@ -1,0 +1,37 @@
+package foreachstatement
+
+open class ForEachStatement {
+ fun test(iterable: java.lang.Iterable<java.lang.Throwable?>?) {
+  TODO("ForStatement")
+  TODO("ForStatement")
+ }
+
+ fun testMulticatch() {
+  TODO("TryStatement")
+ }
+
+ fun testTypeVariable() {
+  var iterable: U = null
+  TODO("ForStatement")
+  var anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
+  TODO("ForStatement")
+ }
+}
+
+open class Exception1: java.lang.Iterable<String?>, java.lang.Exception {
+ fun iterator(): java.util.Iterator<String?>? {
+  return null
+ }
+}
+
+open class Exception2: java.lang.Iterable<Any?>, java.lang.Exception {
+ fun iterator(): java.util.Iterator<Any?>? {
+  return null
+ }
+}
+
+open class IterableReturningTypeVariable: java.lang.Iterable<java.lang.Integer?> {
+ fun iterator(): T {
+  return null
+ }
+}

@@ -1,0 +1,18 @@
+package unimplementedbridgemethod
+
+interface I {
+ fun foo(t: T): Int
+
+ companion object {
+  @JvmStatic
+  fun staticFoo(): Int {
+   return 0
+  }
+ }
+}
+
+interface J: unimplementedbridgemethod.I<String?> {}
+
+abstract class Bar: unimplementedbridgemethod.J {}
+
+abstract class Foo: unimplementedbridgemethod.I<String?> {}

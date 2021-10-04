@@ -1,0 +1,42 @@
+package varargs
+
+open class Varargs {
+ fun <init>(args: IntArray?): varargs.Varargs {}
+
+ fun <init>(): varargs.Varargs {
+  super(arrayOf(1))
+ }
+
+ fun test(a: Int, args: Array<Any?>?) {}
+
+ fun testCloneable(args: Array<java.lang.Cloneable?>?) {}
+
+ fun testSerializable(args: Array<java.io.Serializable?>?) {}
+
+ fun main() {
+  var v: varargs.Varargs? = varargs.Varargs?()
+  v.test(1, arrayOf())
+  v.test(1, arrayOf(Any?()))
+  v.test(1, TODO("NewArray"))
+  v.test(1, TODO("NewArray"))
+  v.test(1, TODO("NewArray"))
+  v.testCloneable(TODO("NewArray"))
+  v.testSerializable(TODO("NewArray"))
+ }
+
+ companion object {
+  @JvmStatic
+  fun fun(elements: Array<T>?) {}
+
+  @JvmStatic
+  fun bar(a: E, b: E) {
+   TODO("JavaScriptConstructorReference").fun(arrayOf(a, b))
+  }
+ }
+}
+
+open class Child: varargs.Varargs {
+ fun <init>(): varargs.Child {
+  super(arrayOf(1))
+ }
+}

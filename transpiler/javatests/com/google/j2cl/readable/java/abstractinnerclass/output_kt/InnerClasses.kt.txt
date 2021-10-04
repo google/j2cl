@@ -1,0 +1,19 @@
+package abstractinnerclass
+
+open class InnerClasses {}
+
+interface A {
+ fun foo()
+}
+
+abstract class B: abstractinnerclass.InnerClasses.A {
+ fun bar() {
+  this.foo()
+ }
+}
+
+abstract class C: abstractinnerclass.InnerClasses.A {
+ fun bar() {
+  this.foo()
+ }
+}

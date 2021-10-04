@@ -39,7 +39,7 @@ def readable_example(
         javacopts = [],
         generate_wasm_readables = True,
         wasm_entry_points = [],
-        generate_kt_readables = False,
+        generate_kt_readables = True,
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 

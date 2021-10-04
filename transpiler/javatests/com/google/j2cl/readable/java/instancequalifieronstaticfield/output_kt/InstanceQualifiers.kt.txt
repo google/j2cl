@@ -1,0 +1,40 @@
+package instancequalifieronstaticfield
+
+open class InstanceQualifiers {
+ companion object {
+  @JvmStatic
+  fun getStaticValue(): Int {
+   return TODO("JavaScriptConstructorReference").staticField
+  }
+
+  @JvmStatic
+  fun getStaticInstanceQualifiers(): instancequalifieronstaticfield.InstanceQualifiers? {
+   return null
+  }
+
+  @JvmStatic
+  fun main(args: Array<String?>?) {
+   var main: instancequalifieronstaticfield.InstanceQualifiers? = instancequalifieronstaticfield.InstanceQualifiers?()
+   var i: Int = 0
+   {
+    TODO("JavaScriptConstructorReference").staticField = 100
+   }
+   {
+    main.staticField = 100
+    main.getStaticInstanceQualifiers().staticField = 300
+   }
+   {
+    i = main.staticField
+    i = main.getStaticValue()
+    i = main.getStaticInstanceQualifiers().staticField
+   }
+   {
+    main.staticField += 100
+    main.getStaticInstanceQualifiers().staticField += 100
+   }
+   {
+    main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField += main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue()
+   }
+  }
+ }
+}
