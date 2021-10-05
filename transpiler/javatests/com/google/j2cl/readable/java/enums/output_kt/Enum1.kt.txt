@@ -1,13 +1,13 @@
 package enums
 
-enum class Enum1: java.lang.Enum<enums.Enum1?> {}
+enum class Enum1: Enum<enums.Enum1?> {}
 
-enum class Enum2: java.lang.Enum<enums.Enum2?> {
+enum class Enum2: Enum<enums.Enum2?> {
  fun <init>(foo: Int): enums.Enum2 {
   this.foo = foo
  }
 
- fun <init>(foo: java.lang.Enum?): enums.Enum2 {
+ fun <init>(foo: Enum?): enums.Enum2 {
   super(foo.ordinal())
  }
 
@@ -29,6 +29,6 @@ open class $1: enums.Enum2 {
  }
 }
 
-enum class Enum3: java.lang.Enum<enums.Enum3?> {
- fun <init>(function: java.util.function.Function<java.lang.Integer?, java.lang.Integer?>?): enums.Enum3 {}
+enum class Enum3: Enum<enums.Enum3?> {
+ fun <init>(function: java.util.function.Function<Int?, Int?>?): enums.Enum3 {}
 }

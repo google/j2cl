@@ -10,34 +10,34 @@ open class ImplicitParenthesis {
   @JvmStatic
   fun examples() {
    var primitiveInt: Int
-   var boxedInt: java.lang.Integer?
+   var boxedInt: Int?
    {
     primitiveInt = 5
-    boxedInt = java.lang.Integer?(10)
-    primitiveInt = if (primitiveInt == 5) java.lang.Integer?(15) else java.lang.Integer?(30)
+    boxedInt = Int?(10)
+    primitiveInt = if (primitiveInt == 5) Int?(15) else Int?(30)
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = java.lang.Integer?(10)
+    boxedInt = Int?(10)
     primitiveInt = boxedInt += primitiveInt
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = java.lang.Integer?(10)
+    boxedInt = Int?(10)
     primitiveInt = boxedInt = primitiveInt
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = java.lang.Integer?(10)
+    boxedInt = Int?(10)
     primitiveInt = boxedInt++
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = java.lang.Integer?(10)
+    boxedInt = Int?(10)
     primitiveInt = ++boxedInt
     TODO("AssertStatement")
    }
@@ -46,17 +46,17 @@ open class ImplicitParenthesis {
   @JvmStatic
   fun nonExamples() {
    var primitiveInt: Int
-   var boxedInt: java.lang.Integer?
-   var boxedBoolean: java.lang.Boolean?
+   var boxedInt: Int?
+   var boxedBoolean: Boolean?
    {
     primitiveInt = 5
-    boxedInt = java.lang.Integer?(10)
+    boxedInt = Int?(10)
     primitiveInt = boxedInt - primitiveInt
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = java.lang.Integer?(10)
+    boxedInt = Int?(10)
     boxedBoolean = true
     boxedBoolean = boxedInt == primitiveInt
     TODO("AssertStatement")
@@ -65,7 +65,7 @@ open class ImplicitParenthesis {
 
   @JvmStatic
   fun parenthesisRemoval() {
-   java.lang.Integer?(1 + 2)
+   Int?(1 + 2)
   }
  }
 }
