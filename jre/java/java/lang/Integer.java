@@ -15,6 +15,8 @@
  */
 package java.lang;
 
+import javaemul.internal.annotations.HasNoSideEffects;
+
 /** Wraps a primitive <code>int</code> as an object. */
 public final class Integer extends Number implements Comparable<Integer> {
 
@@ -28,6 +30,16 @@ public final class Integer extends Number implements Comparable<Integer> {
   private static class BoxedValues {
     // Box values according to JLS - between -128 and 127
     private static Integer[] boxedValues = new Integer[256];
+
+    @HasNoSideEffects
+    private static Integer get(int i) {
+      int rebase = i + 128;
+      Integer result = boxedValues[rebase];
+      if (result == null) {
+        result = boxedValues[rebase] = new Integer(i);
+      }
+      return result;
+    }
   }
 
   /** Use nested class to avoid clinit on outer. */
@@ -227,12 +239,7 @@ public final class Integer extends Number implements Comparable<Integer> {
 
   public static Integer valueOf(int i) {
     if (i > -129 && i < 128) {
-      int rebase = i + 128;
-      Integer result = BoxedValues.boxedValues[rebase];
-      if (result == null) {
-        result = BoxedValues.boxedValues[rebase] = new Integer(i);
-      }
-      return result;
+      return BoxedValues.get(i);
     }
     return new Integer(i);
   }
