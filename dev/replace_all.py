@@ -18,6 +18,7 @@ import os
 import re
 import tempfile
 import repo_util
+import wat_util
 
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/"
 READABLE_TARGET_PATTERN = JAVA_DIR + "..."
@@ -82,34 +83,7 @@ def replace_transpiled_wasm(readable_dirs):
     repo_util.run_cmd(["cp", "--no-preserve=mode", file_path, output_file_path])
 
     java_package = os.path.relpath(readable_dir, JAVA_DIR).replace("/", ".")
-    _filter_wat_file(output_file_path, java_package)
-
-
-def _filter_wat_file(wat_file_path, java_package):
-  """Keep lines of code related to the readable examples."""
-
-  filtered_lines = []
-  # skip lines until we find a compilation unit from the example
-  skip_line = True
-
-  with open(wat_file_path, "r") as wat_file:
-    for line in wat_file:
-      trimmed_line = line.lstrip()
-      if trimmed_line.startswith(";;; Code for %s" % java_package):
-        # Add a new line before the comment to clearly see sections in the
-        # readable
-        if filtered_lines:
-          filtered_lines.append("\n")
-        skip_line = False
-      elif trimmed_line.startswith(";;; Code for ") or trimmed_line.startswith(
-          ";;; End of "):
-        skip_line = True
-
-      if not skip_line:
-        filtered_lines.append(line)
-
-  with open(wat_file_path, "w") as wat_file:
-    wat_file.writelines(filtered_lines)
+    wat_util.filter_wat_file(output_file_path, output_file_path, java_package)
 
 
 def replace_transpiled_js(readable_dirs):

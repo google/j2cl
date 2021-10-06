@@ -21,6 +21,8 @@ load(
     "j2wasm_application",
 )
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
+load(":readable_diff_test.bzl", "make_diff_test")
+load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package", "get_java_path")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -88,6 +90,15 @@ def readable_example(
         tags = ["j2cl"],
     )
 
+    make_diff_test(
+        name = "readable_test",
+        base_targets = native.glob(["output_closure/**/*.txt"]),
+        base = native.package_name() + "/output_closure/",
+        test_input_targets = [":readable.js"],
+        test_input = "$(location :readable.js)",
+        test_base_path = get_java_path(native.package_name()),
+    )
+
     if generate_wasm_readables:
         j2wasm_application(
             name = "readable_wasm",
@@ -101,6 +112,22 @@ def readable_example(
             tags = ["j2wasm"],
         )
 
+        native.genrule(
+            name = "readable_wasm_filter",
+            srcs = [":readable_wasm.wat"],
+            outs = ["readable_wasm.filtered.wat"],
+            cmd = "$(location //transpiler/javatests/com/google/j2cl/readable/minion:filter_wat_file.par) $(SRCS) $(OUTS) " + get_java_package(native.package_name()),
+            tools = ["//transpiler/javatests/com/google/j2cl/readable/minion:filter_wat_file.par"],
+        )
+
+        make_diff_test(
+            name = "readable_wasm_test",
+            base_targets = ["output_wasm/module.wat.txt"],
+            base = native.package_name() + "/output_wasm/module.wat.txt",
+            test_input_targets = [":readable_wasm.filtered.wat"],
+            test_input = "$(location :readable_wasm.filtered.wat)",
+        )
+
     if generate_kt_readables:
         j2kt_library(
             name = "readable_kt",
@@ -108,4 +135,13 @@ def readable_example(
             deps = kt_deps,
             plugins = plugins,
             **kwargs
+        )
+
+        make_diff_test(
+            name = "readable_kt_test",
+            base_targets = native.glob(["output_kt/**/*.txt"]),
+            base = native.package_name() + "/output_kt/",
+            test_input_targets = [":readable_kt.kt"],
+            test_input = "$(location :readable_kt.kt)",
+            test_base_path = get_java_path(native.package_name()),
         )
