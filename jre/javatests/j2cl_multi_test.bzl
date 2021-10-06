@@ -28,7 +28,6 @@ def j2cl_multi_test(name, test_class, **kwargs):
         test_class = test_class,
         compile = 1,
         generate_build_test = False,
-        externs_list = ["//javascript/externs:svg"],
         runtime_deps = deps,
         browsers = [
             "//testing/web/browsers:chrome-linux",
