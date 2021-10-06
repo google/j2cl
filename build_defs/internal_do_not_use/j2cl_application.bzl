@@ -74,6 +74,22 @@ def j2cl_application(
     define_prod.update(closure_defines)
     define_prod_defs = ["--define=%s=%s" % (k, v) for (k, v) in define_prod.items()]
 
+    config_name = "%s_readable_output_config" % name
+    native.config_setting(
+        name = config_name,
+        values = {
+            "define": "J2CL_APP_STYLE=PRETTY",
+        },
+    )
+    extra_production_args = select({
+        ":" + config_name: extra_production_args + [
+            "--variable_renaming=OFF",
+            "--property_renaming=OFF",
+            "--pretty_print",
+        ],
+        "//conditions:default": extra_production_args,
+    })
+
     js_binary(
         name = name,
         defs = J2CL_OPTIMIZED_DEFS + entry_point_defs + define_prod_defs + [
