@@ -15,6 +15,7 @@ package java.lang;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
+import javaemul.internal.annotations.HasNoSideEffects;
 
 /**
  * See <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/Class.html">the official Java API
@@ -88,6 +89,7 @@ public final class Class<T> implements Type, Serializable {
     return leafType.getArrayType(dimensionCount - 1);
   }
 
+  @HasNoSideEffects
   Class<?> getArrayType(int dimensions) {
     if (arrayTypes == null || arrayTypes.length < dimensions) {
       Class<?>[] newArray = new Class<?>[dimensions];

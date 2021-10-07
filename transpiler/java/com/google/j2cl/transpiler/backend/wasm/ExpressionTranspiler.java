@@ -298,7 +298,12 @@ final class ExpressionTranspiler {
         DeclaredTypeDescriptor enclosingTypeDescriptor = target.getEnclosingTypeDescriptor();
 
         if (methodCall.isPolymorphic()) {
-          sourceBuilder.append("(call_ref ");
+          if (methodCall.hasSideEffects()) {
+            sourceBuilder.append("(call_ref ");
+          } else {
+            sourceBuilder.append(
+                format("(call %s ", environment.getNoSideEffectWrapperFunctionName(target)));
+          }
 
           // Pass the implicit parameter.
           Expression implicitParameter = methodCall.getQualifier();
@@ -423,7 +428,13 @@ final class ExpressionTranspiler {
       @Override
       public boolean enterNewInstance(NewInstance newInstance) {
         MethodDescriptor target = newInstance.getTarget();
-        sourceBuilder.append("(call " + environment.getMethodImplementationName(target) + " ");
+        sourceBuilder.append(
+            String.format(
+                "(call %s ",
+                newInstance.hasSideEffects()
+                    ? environment.getMethodImplementationName(target)
+                    : environment.getNoSideEffectWrapperFunctionName(target)));
+
         sourceBuilder.append(
             format(
                 "(struct.new_with_rtt %s "
@@ -454,6 +465,10 @@ final class ExpressionTranspiler {
                 environment.getRttGlobalName(
                     newInstance.getTypeDescriptor().getTypeDeclaration())));
         renderTypedExpressions(target.getParameterTypeDescriptors(), newInstance.getArguments());
+        if (!newInstance.hasSideEffects()) {
+          sourceBuilder.append(
+              String.format("(ref.func %s) ", environment.getMethodImplementationName(target)));
+        }
         sourceBuilder.append(")");
         return false;
       }

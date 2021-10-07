@@ -43,6 +43,11 @@ public abstract class Invocation extends Expression implements MemberReference {
     return Precedence.MEMBER_ACCESS;
   }
 
+  @Override
+  public boolean hasSideEffects() {
+    return !getTarget().isSideEffectFree();
+  }
+
   abstract Builder<?, ?> createBuilder();
 
   @Override

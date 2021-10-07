@@ -30,7 +30,6 @@ import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Method;
-import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
@@ -42,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -136,7 +134,7 @@ public class WasmModuleGenerator {
   }
 
   /**
-   * Emit the necessary import of binaryen intrinsics.
+   * Emit the necessary imports of binaryen intrinsics.
    *
    * <p>In order to communicate information to binaryen, binaryen provides intrinsic methods that
    * need to be imported.
@@ -149,40 +147,29 @@ public class WasmModuleGenerator {
     // Since the mechanism itself is a call, it needs to be correctly typed. As a result for each
     // different function type that appears in the AST as part of no-side-effect call, an import
     // with the right function type definition needs to be created.
-    Set<String> emittedIntrinsicImports = new LinkedHashSet<>();
-    collectSideEffectFreeTargets(library)
-        .forEach(
-            m -> {
-              String importFunctionName = environment.getNoSideEffectWrapperFunctionName(m);
-              if (!emittedIntrinsicImports.add(importFunctionName)) {
-                return;
-              }
-
-              builder.newLine();
-              builder.append(
-                  String.format(
-                      "(import \"binaryen-intrinsics\" \"call.without.effects\" " + "(func %s ",
-                      importFunctionName));
-              emitFunctionParameterTypes(m);
-              builder.append(" (param funcref)");
-              emitFunctionResultType(m);
-              builder.append("))");
-            });
+    Set<String> emittedFunctionTypeNames = new HashSet<>();
+    library
+        .streamTypes()
+        .flatMap(t -> t.getMethods().stream())
+        .map(Method::getDescriptor)
+        .filter(MethodDescriptor::isSideEffectFree)
+        .forEach(m -> emitBinaryenIntrinsicImport(emittedFunctionTypeNames, m));
   }
 
-  /** Collects the methods that are in a no-side-effect call. */
-  private Set<MethodDescriptor> collectSideEffectFreeTargets(Library library) {
-    Set<MethodDescriptor> methodDescriptors = new LinkedHashSet<>();
-    library.accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitMethodCall(MethodCall methodCall) {
-            if (!methodCall.hasSideEffects()) {
-              methodDescriptors.add(methodCall.getTarget());
-            }
-          }
-        });
-    return methodDescriptors;
+  private void emitBinaryenIntrinsicImport(
+      Set<String> emittedFunctionTypeNames, MethodDescriptor m) {
+    String typeName = environment.getNoSideEffectWrapperFunctionName(m);
+    if (!emittedFunctionTypeNames.add(typeName)) {
+      return;
+    }
+    builder.newLine();
+    builder.append(
+        String.format(
+            "(import \"binaryen-intrinsics\" \"call.without.effects\" " + "(func %s ", typeName));
+    emitFunctionParameterTypes(m);
+    builder.append(" (param funcref)");
+    emitFunctionResultType(m);
+    builder.append("))");
   }
 
   private void emitFunctionParameterTypes(MethodDescriptor methodDescriptor) {

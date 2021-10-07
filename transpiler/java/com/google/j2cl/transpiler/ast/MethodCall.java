@@ -80,11 +80,6 @@ public class MethodCall extends Invocation {
   }
 
   @Override
-  public boolean hasSideEffects() {
-    return !getTarget().isSideEffectFree();
-  }
-
-  @Override
   public TypeDescriptor getTypeDescriptor() {
     return targetMethodDescriptor.getReturnTypeDescriptor();
   }
