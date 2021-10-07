@@ -1046,7 +1046,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         // The default return type for constructors is their enclosing type and void for everything
         // else.
         setReturnTypeDescriptor(
-            isConstructor() ? getEnclosingTypeDescriptor() : PrimitiveTypes.VOID);
+            isConstructor() ? getEnclosingTypeDescriptor().toNonNullable() : PrimitiveTypes.VOID);
       }
 
       checkState(getName().isPresent());
