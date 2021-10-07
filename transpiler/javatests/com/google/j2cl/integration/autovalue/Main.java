@@ -16,6 +16,7 @@
 package com.google.j2cl.integration.autovalue;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
 
 import com.google.auto.value.AutoValue;
@@ -72,9 +73,8 @@ public class Main {
   }
 
   private static void testUnreadValue() {
-    // TODO(b/155944756): Fix the equals behavior for unread values.
-    // assertNotEquals(
-    //     new AutoValue_Main_TypeWithUnreadField(5), new AutoValue_Main_TypeWithUnreadField(6));
+    assertNotEquals(
+        new AutoValue_Main_TypeWithUnreadField(5), new AutoValue_Main_TypeWithUnreadField(6));
   }
 
   private static class BaseClass {

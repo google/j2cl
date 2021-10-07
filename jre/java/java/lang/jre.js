@@ -51,3 +51,8 @@ jre.logging.logLevel =
 /** @define {string} */
 jre.logging.simpleConsoleHandler =
     goog.define('jre.logging.simpleConsoleHandler', 'ENABLED');
+
+// Provide a stub for field preserver to make things work without compilation.
+if (!COMPILED) {
+  goog.global.$J2CL_PRESERVE$ = function(/** ...* */ e) {};
+}

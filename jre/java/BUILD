@@ -100,10 +100,21 @@ filegroup(
     name = "jre_native_files",
     srcs = glob(
         ["**/*.js"],
-        exclude = ["super-wasm/**/*"],
+        exclude = [
+            "super-wasm/**/*",
+            # TODO(b/202311596): Stop excluding externs.js when infra correctly handles them.
+            "**/externs.js",
+        ],
     ) + [
         "//jre/java/javaemul/internal/vmbootstrap/primitives",
     ],
+)
+
+closure_js_library(
+    name = "jre_externs",
+    srcs = glob(
+        ["**/externs.js"],
+    ),
 )
 
 j2wasm_library(
@@ -137,6 +148,7 @@ j2cl_library(
         "//transpiler/javatests:__subpackages__",
     ],
     deps = [
+        ":jre_externs",
         "//third_party:closure_math_long",
         "//third_party:closure_reflect",
         "//third_party:gwt-javaemul-internal-annotations-j2cl",
