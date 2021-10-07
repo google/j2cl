@@ -23,8 +23,8 @@ open class TryCatch {
  }
 
  fun testTryWithResourceJava9() {
-  val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing?()
-  val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing?()
+  val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
   TODO("TryStatement")
  }
 
@@ -37,7 +37,7 @@ open class TryCatch {
  }
 
  fun testThrowGenerics() {
-  throw this.getT(Exception?())
+  throw this.getT(Exception())
  }
 
  fun getT(t: T): T {

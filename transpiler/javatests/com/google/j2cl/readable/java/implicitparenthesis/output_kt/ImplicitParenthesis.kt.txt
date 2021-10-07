@@ -13,31 +13,31 @@ open class ImplicitParenthesis {
    var boxedInt: Int?
    {
     primitiveInt = 5
-    boxedInt = Int?(10)
-    primitiveInt = if (primitiveInt == 5) Int?(15) else Int?(30)
+    boxedInt = Int(10)
+    primitiveInt = if (primitiveInt == 5) Int(15) else Int(30)
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = Int?(10)
+    boxedInt = Int(10)
     primitiveInt = boxedInt += primitiveInt
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = Int?(10)
+    boxedInt = Int(10)
     primitiveInt = boxedInt = primitiveInt
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = Int?(10)
+    boxedInt = Int(10)
     primitiveInt = boxedInt++
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = Int?(10)
+    boxedInt = Int(10)
     primitiveInt = ++boxedInt
     TODO("AssertStatement")
    }
@@ -50,13 +50,13 @@ open class ImplicitParenthesis {
    var boxedBoolean: Boolean?
    {
     primitiveInt = 5
-    boxedInt = Int?(10)
+    boxedInt = Int(10)
     primitiveInt = boxedInt - primitiveInt
     TODO("AssertStatement")
    }
    {
     primitiveInt = 5
-    boxedInt = Int?(10)
+    boxedInt = Int(10)
     boxedBoolean = true
     boxedBoolean = boxedInt == primitiveInt
     TODO("AssertStatement")
@@ -65,7 +65,7 @@ open class ImplicitParenthesis {
 
   @JvmStatic
   fun parenthesisRemoval() {
-   Int?(1 + 2)
+   Int(1 + 2)
   }
  }
 }

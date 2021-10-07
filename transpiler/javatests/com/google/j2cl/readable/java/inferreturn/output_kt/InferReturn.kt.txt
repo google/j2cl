@@ -4,7 +4,7 @@ open class InferReturn {
  companion object {
   @JvmStatic
   fun inferGeneric(foo: T): inferreturn.InferReturn<T>? {
-   return inferreturn.InferReturn?()
+   return inferreturn.InferReturn<T>()
   }
 
   @JvmStatic
@@ -25,7 +25,7 @@ open class InferReturn {
 
   @JvmStatic
   fun newArrayList(foo: V): java.util.ArrayList<V>? {
-   return java.util.ArrayList?()
+   return java.util.ArrayList<V>()
   }
 
   @JvmStatic

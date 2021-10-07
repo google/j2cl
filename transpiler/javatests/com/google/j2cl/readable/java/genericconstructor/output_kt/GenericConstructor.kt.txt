@@ -6,7 +6,7 @@ open class GenericConstructor {
  fun <init>(t: T): genericconstructor.GenericConstructor<T> {}
 
  fun test() {
-  genericconstructor.GenericConstructor?(Exception?(), Error?())
-  genericconstructor.GenericConstructor?(Exception?())
+  genericconstructor.GenericConstructor<Error?>(Exception(), Error())
+  genericconstructor.GenericConstructor<Error?>(Exception())
  }
 }

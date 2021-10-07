@@ -2,7 +2,7 @@ package devirtualizedcalls
 
 open class ObjectCalls {
  fun main() {
-  val object: Any? = Any?()
+  val object: Any? = Any()
   object.equals(object)
   object.hashCode()
   object.toString()
@@ -15,11 +15,11 @@ open class ObjectCalls {
  }
 
  fun test() {
-  this.equals(Any?())
+  this.equals(Any())
   this.hashCode()
   this.toString()
   this.getClass()
-  this.equals(Any?())
+  this.equals(Any())
   this.hashCode()
   this.toString()
   this.getClass()

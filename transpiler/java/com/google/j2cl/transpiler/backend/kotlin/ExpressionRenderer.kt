@@ -154,9 +154,11 @@ private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
 }
 
 private fun Renderer.renderNewInstance(expression: NewInstance) {
-  require(expression.qualifier == null)
-  val targetTypeDescriptor = expression.target.enclosingTypeDescriptor.toRawTypeDescriptor()!!
-  render("${targetTypeDescriptor.sourceString}")
+  if (expression.qualifier != null) {
+    render("TODO(expression.qualify needs rendering: ${expression.qualifier})")
+    return
+  }
+  render(expression.typeDescriptor.sourceString)
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }
 
