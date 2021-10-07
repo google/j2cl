@@ -57,7 +57,6 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-nontrapping-float-to-int")
 
     args.add("--debuginfo")
-    args.add_all(ctx.attr.binaryen_args)
 
     # TODO(b/198219246): remove intermediate invocation to binaryen once Chrome handles nominal wasm types.
     intermediate_wasm_output = ctx.actions.declare_file(ctx.label.name + "_intermediate_wasm_output")
@@ -65,9 +64,7 @@ def _impl_j2wasm_application(ctx):
 
     ctx.actions.run(
         executable = ctx.executable._binaryen,
-        arguments = [args] + [
-            "--nominal",
-            "--intrinsic-lowering",
+        arguments = [args] + ctx.attr.binaryen_stage1_args + [
             "--remove-unused-module-elements",
             "-o",
             intermediate_wasm_output.path,
@@ -101,7 +98,7 @@ def _impl_j2wasm_application(ctx):
 
     ctx.actions.run(
         executable = ctx.executable._binaryen,
-        arguments = [args] + [
+        arguments = [args] + ctx.attr.binaryen_stage2_args + [
             "--input-source-map",
             intermediate_source_map.path,
             intermediate_wasm_output.path,
@@ -153,7 +150,8 @@ _j2wasm_application = rule(
     attrs = {
         "deps": attr.label_list(providers = [J2wasmInfo]),
         "entry_points": attr.string_list(),
-        "binaryen_args": attr.string_list(),
+        "binaryen_stage1_args": attr.string_list(),
+        "binaryen_stage2_args": attr.string_list(),
         "transpiler_args": attr.string_list(),
         "binaryen": attr.label(
             cfg = "host",
@@ -206,13 +204,23 @@ def j2wasm_application(name, defines = dict(), **kwargs):
 
     _j2wasm_application(
         name = name,
-        binaryen_args = ["-O3", "--traps-never-happen"],
+        binaryen_stage1_args = [
+            # Optimization flags (affecting passes in general) included at top.
+            "--traps-never-happen",
+            "--nominal",
+            # Specific list of passes: The order and count of these flags does
+            # matter.
+            "-O3",
+            "--intrinsic-lowering",
+        ],
+        binaryen_stage2_args = ["--traps-never-happen", "-O3"],
         transpiler_args = ["-experimentalWasmRemoveAssertStatement"],
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
         **kwargs
     )
     _j2wasm_application(
         name = name + "_dev",
+        binaryen_stage1_args = ["--nominal", "--intrinsic-lowering"],
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
         **kwargs
     )
