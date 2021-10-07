@@ -249,13 +249,20 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
     NONE
   }
 
-  /** Precedence and associativity of expressions. */
+  /**
+   * Precedence and associativity of expressions.
+   *
+   * <p>Details of Java precednce can be found in <a
+   * href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.7">JLS 15.7 -
+   * 15.26</a>
+   */
   public enum Precedence {
     HIGHEST(21, Associativity.NONE),
     MEMBER_ACCESS(20, Expression.Associativity.LEFT),
     FUNCTION(19, Expression.Associativity.RIGHT),
     POSTFIX(18, Expression.Associativity.NONE),
     PREFIX(17, Expression.Associativity.RIGHT),
+    CAST(16, Expression.Associativity.RIGHT),
     MULTIPLICATIVE(15, Expression.Associativity.LEFT),
     ADDITIVE(14, Expression.Associativity.LEFT),
     SHIFT_OPERATOR(13, Expression.Associativity.LEFT),

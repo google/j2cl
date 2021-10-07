@@ -1,0 +1,95 @@
+package cast
+
+open class Casts {
+ fun testCastToClass() {
+  val o: Any? = Any()
+  val c: cast.Casts? = o as cast.Casts?
+ }
+
+ fun testCasToInterface() {
+  val o: Any? = Any()
+  val s: java.io.Serializable? = o as java.io.Serializable?
+ }
+
+ fun testCastToBoxedType() {
+  val o: Any? = Int(1)
+  val b: Byte? = o as Byte?
+  val d: Double? = o as Double?
+  val f: Float? = o as Float?
+  val i: Int? = o as Int?
+  val l: Long? = o as Long?
+  val s: Short? = o as Short?
+  val n: Number? = o as Number?
+  val c: java.lang.Character? = o as java.lang.Character?
+  val bool: Boolean? = o as Boolean?
+ }
+
+ fun testCastToArray() {
+  val foo: Any? = null as Array<Any?>?
+  val bar: Any? = null as Array<Array<Any?>?>?
+ }
+
+ fun functionForInstanceofTest() {}
+
+ fun testCastObjectAfterInstanceOf() {
+  var o: Any? = Any()
+  if (TODO("InstanceOfExpression")) {
+   val c: cast.Casts? = o as cast.Casts?
+  }
+  if (TODO("InstanceOfExpression")) {
+   val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
+   o = Any()
+   val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
+  }
+  if (TODO("InstanceOfExpression")) {
+   val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
+   o = TODO(expression.qualify needs rendering: Casts.this)
+   val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
+  }
+  if (TODO("InstanceOfExpression")) {
+   val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
+   o = Any()
+   val cAvoidCastsTo: cast.Casts? = o as cast.Casts?
+  }
+  if (TODO("InstanceOfExpression")) {
+   val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
+   this.functionForInstanceofTest()
+   val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
+  }
+ }
+
+ fun testCastFieldAfterInstanceOf() {
+  var foo: cast.Casts.Foo? = TODO(expression.qualify needs rendering: Casts.this)
+  if (TODO("InstanceOfExpression")) {
+   val c: cast.Casts? = foo.field as cast.Casts?
+  }
+  if (TODO("InstanceOfExpression")) {
+   val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
+   foo.field = Any()
+   val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
+  }
+  if (TODO("InstanceOfExpression")) {
+   val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
+   foo = TODO(expression.qualify needs rendering: Casts.this)
+   val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
+  }
+  if (TODO("InstanceOfExpression")) {
+   val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
+   this.functionForInstanceofTest()
+   val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
+  }
+ }
+
+ fun testCaseMethodAfterInstanceOf() {
+  val foo: cast.Casts.Foo? = TODO(expression.qualify needs rendering: Casts.this)
+  if (TODO("InstanceOfExpression")) {
+   val cNotAvoidCastsTo: cast.Casts? = foo.method() as cast.Casts?
+  }
+ }
+}
+
+open class Foo {
+ fun method(): Any? {
+  return Any()
+ }
+}

@@ -1,0 +1,116 @@
+package cast
+
+open class CastGenerics {
+ fun method(): T {
+  return null
+ }
+
+ fun testCastToTypeVariable() {
+  val o: Any? = Int(1)
+  val e: E = o as E
+  val t: T = o as T
+  val es: Array<E>? = o as Array<E>?
+  val ts: Array<T>? = o as Array<T>?
+ }
+
+ fun testCastToMethodTypeVariable() {
+  val o: Any? = Int(1)
+  val s: S = o as S
+  var c: Any? = o as cast.CastGenerics<S, Number?>?
+  c = o as Array<S>?
+  c = o as V
+ }
+
+ fun outerGenericMethod() {}
+
+ fun method(o: Any?): EE {
+  if (TODO("InstanceOfExpression")) {
+   return o as EE
+  }
+  return null
+ }
+
+ companion object {
+  @JvmStatic
+  fun testErasureCast() {
+   var str: String? = cast.CastGenerics<String?, Number?>().field
+   str = cast.CastGenerics<String?, Number?>().method()
+   val containerT: cast.CastGenerics.Container<T>? = null
+   containerT.get().mA()
+   containerT.get().mB()
+   val containerU: cast.CastGenerics.Container<U>? = null
+   containerU.get().mA()
+   containerU.get().mB()
+   val containerArrT: cast.CastGenerics.Container<Array<T>?>? = null
+   val arrT: Array<T>? = containerArrT.get()
+   arrT[0].mA()
+   arrT[0].mB()
+   var arrA: Array<cast.CastGenerics.A?>? = containerArrT.get()
+   var arrB: Array<cast.CastGenerics.B?>? = containerArrT.get()
+   val containerArrU: cast.CastGenerics.Container<Array<U>?>? = null
+   val arrU: Array<U>? = containerArrU.get()
+   arrU[0].mA()
+   arrU[0].mB()
+   arrA = containerArrU.get()
+   arrB = containerArrU.get()
+   val containerBase: cast.CastGenerics.Container<cast.CastGenerics.BaseImplementor?>? = null
+   containerBase.get().mA()
+   containerBase.get().mB()
+   val containerImplementor: cast.CastGenerics.Container<cast.CastGenerics.Implementor?>? = null
+   containerImplementor.get().mA()
+   containerImplementor.get().mB()
+  }
+
+  @JvmStatic
+  fun testCastToParamterizedType() {
+   val o: Any? = Int(1)
+   var cc: cast.CastGenerics<Error?, Number?>? = o as cast.CastGenerics<Error?, Number?>?
+   cc = o as cast.CastGenerics?
+  }
+
+  @JvmStatic
+  fun doSomething(): cast.CastGenerics.Foo<T>? {
+   return cast.CastGenerics.1<T>()
+  }
+ }
+}
+
+interface A {
+ fun mA()
+}
+
+interface B {
+ fun mB()
+}
+
+abstract class BaseImplementor: cast.CastGenerics.A, cast.CastGenerics.B {}
+
+open class Implementor: cast.CastGenerics.BaseImplementor {
+ fun mA() {}
+
+ fun mB() {}
+}
+
+open class Container {
+ fun get(): T {
+  return null
+ }
+}
+
+open class $1Nested {
+ fun nestedGenericMethod(o: Any?) {
+  val t: TT = o as TT
+ }
+}
+
+interface Empty1 {}
+
+interface Empty2 {}
+
+open class $1: cast.CastGenerics.Foo<T> {
+ fun <init>(): cast.CastGenerics.1<T> {
+  super()
+ }
+}
+
+open class Foo {}

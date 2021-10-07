@@ -1,0 +1,182 @@
+package cast
+
+open class CastPrimitives {
+ fun testPrimitiveCasts() {
+  var b: Byte = 1
+  var c: Char = 1
+  var s: Short = 1
+  var i: Int = 1
+  var l: Long = 1L
+  var f: Float = 1.1f
+  var d: Double = 1.1
+  b = b as Byte
+  c = b as Char
+  s = b as Short
+  i = b as Int
+  l = b as Long
+  f = b as Float
+  d = b as Double
+  b = c as Byte
+  c = c as Char
+  s = c as Short
+  i = c as Int
+  l = c as Long
+  f = c as Float
+  d = c as Double
+  b = s as Byte
+  c = s as Char
+  s = s as Short
+  i = s as Int
+  l = s as Long
+  f = s as Float
+  d = s as Double
+  b = i as Byte
+  c = i as Char
+  s = i as Short
+  i = i as Int
+  l = i as Long
+  f = i as Float
+  d = i as Double
+  b = l as Byte
+  c = l as Char
+  s = l as Short
+  i = l as Int
+  l = l as Long
+  f = l as Float
+  d = l as Double
+  b = f as Byte
+  c = f as Char
+  s = f as Short
+  i = f as Int
+  l = f as Long
+  f = f as Float
+  d = f as Double
+  b = d as Byte
+  c = d as Char
+  s = d as Short
+  i = d as Int
+  l = d as Long
+  f = d as Float
+  d = d as Double
+ }
+
+ fun testReferenceToPrimitive() {
+  val o: Any? = Any()
+  val bool: Boolean = o as Boolean
+  val b: Byte = o as Byte
+  val c: Char = o as Char
+  val s: Short = o as Short
+  val i: Int = o as Int
+  val l: Long = o as Long
+  val f: Float = o as Float
+  val d: Double = o as Double
+ }
+
+ fun testUnboxAndWiden() {
+  val boxedByte: Byte? = TODO("JavaScriptConstructorReference").valueOf(0 as Byte)
+  val s: Short = boxedByte as Short
+  val i: Int = boxedByte as Int
+  val l: Long = boxedByte as Long
+  val f: Float = boxedByte as Float
+  val d: Double = boxedByte as Double
+ }
+
+ fun testImplicitArgumentCasts() {
+  var b: Byte = 127
+  var c: Char = 65535
+  var s: Short = 32767
+  var i: Int = 2147483647
+  var l: Long = 9223372036854775807L
+  var f: Float = 3.4028235E38f
+  var d: Double = 1.7976931348623157E308
+  TODO("JavaScriptConstructorReference").getShort(b)
+  TODO("JavaScriptConstructorReference").getInt(b)
+  TODO("JavaScriptConstructorReference").getLong(b)
+  TODO("JavaScriptConstructorReference").getFloat(b)
+  TODO("JavaScriptConstructorReference").getDouble(b)
+  TODO("JavaScriptConstructorReference").getFloat(l)
+  TODO("JavaScriptConstructorReference").getDouble(l)
+  TODO("JavaScriptConstructorReference").getDouble(f)
+  cast.CastPrimitives.IntValueHolder(b)
+  cast.CastPrimitives.IntValueHolder(c)
+  cast.CastPrimitives.IntValueHolder(s)
+  cast.CastPrimitives.LongValueHolder(b)
+  cast.CastPrimitives.LongValueHolder(c)
+  cast.CastPrimitives.LongValueHolder(i)
+ }
+
+ fun testImplicitLongAssignmentCasts() {
+  val fbyte: Byte = 11
+  val fchar: Char = 12
+  val fshort: Short = 13
+  val fint: Int = 14
+  val flong: Long = 15
+  val ffloat: Float = 16
+  val fdouble: Double = 17
+  var tlong: Long = 0
+  {
+   tlong = fbyte
+   tlong = flong
+  }
+  {
+   tlong = fint
+   tlong += fint
+   tlong <<= fint
+  }
+  {
+   tlong += fchar
+   tlong += flong
+   tlong += ffloat
+  }
+  {
+   tlong = flong * fint
+   tlong = flong >> fint
+  }
+  {
+   tlong = flong + fshort
+   tlong = flong + flong
+  }
+  {
+   tlong = flong << tlong
+   tlong <<= flong
+  }
+  {
+   tlong = 0 + 1 + 2L
+  }
+ }
+
+ companion object {
+  @JvmStatic
+  fun getShort(value: Short): Short {
+   return value
+  }
+
+  @JvmStatic
+  fun getInt(value: Int): Int {
+   return value
+  }
+
+  @JvmStatic
+  fun getLong(value: Long): Long {
+   return value
+  }
+
+  @JvmStatic
+  fun getFloat(value: Float): Float {
+   return value
+  }
+
+  @JvmStatic
+  fun getDouble(value: Double): Double {
+   return value
+  }
+ }
+}
+
+open class IntValueHolder {
+ fun <init>(value: Int): cast.CastPrimitives.IntValueHolder {}
+}
+
+open class LongValueHolder {
+ fun <init>(value: Long): cast.CastPrimitives.LongValueHolder {}
+}

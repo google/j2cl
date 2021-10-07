@@ -46,8 +46,7 @@ public class CastExpression extends Expression {
 
   @Override
   public Precedence getPrecedence() {
-    // Casts never reach the backend as CastExpression but rather as method calls.
-    throw new UnsupportedOperationException();
+    return Precedence.CAST;
   }
 
   @Override
