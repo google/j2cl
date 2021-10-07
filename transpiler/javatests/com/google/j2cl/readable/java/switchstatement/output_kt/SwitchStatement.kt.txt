@@ -40,9 +40,9 @@ open class SwitchStatement {
   fun testSwitchVariableDeclarations() {
    when (3){
     1 ->
-     var unassigned: Int, unassigned2: Int
-     var i: Int = 0
-     var j: Int = 2, b: Int = j + 1
+     val unassigned: Int; val unassigned2: Int
+     val i: Int = 0
+     val j: Int = 2; val b: Int = j + 1
      break
     3 ->
      i = 3
@@ -51,7 +51,7 @@ open class SwitchStatement {
    }
    when (5){
     5 ->
-     var i: Int = 1
+     val i: Int = 1
      break
    }
    TODO("AssertStatement")

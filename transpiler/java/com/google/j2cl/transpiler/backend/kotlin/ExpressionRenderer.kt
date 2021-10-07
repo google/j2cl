@@ -177,8 +177,10 @@ private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
 private fun Renderer.renderVariableDeclarationExpression(
   expression: VariableDeclarationExpression
 ) {
-  render("var ")
-  renderCommaSeparated(expression.fragments) { renderVariableDeclarationFragment(it) }
+  renderSeparatedWith(expression.fragments, "; ") {
+    render(if (it.variable.isFinal) "val " else "var ")
+    renderVariableDeclarationFragment(it)
+  }
 }
 
 private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclarationFragment) {

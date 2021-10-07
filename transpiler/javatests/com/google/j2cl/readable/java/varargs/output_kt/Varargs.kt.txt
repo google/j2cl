@@ -14,7 +14,7 @@ open class Varargs {
  fun testSerializable(args: Array<java.io.Serializable?>?) {}
 
  fun main() {
-  var v: varargs.Varargs? = varargs.Varargs?()
+  val v: varargs.Varargs? = varargs.Varargs?()
   v.test(1, arrayOf())
   v.test(1, arrayOf(Any?()))
   v.test(1, TODO("NewArray"))
