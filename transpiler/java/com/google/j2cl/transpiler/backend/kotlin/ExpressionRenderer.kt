@@ -155,7 +155,7 @@ private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
 
 private fun Renderer.renderNewInstance(expression: NewInstance) {
   if (expression.qualifier != null) {
-    render("TODO(expression.qualify needs rendering: ${expression.qualifier})")
+    renderTodo("expression.qualify needs rendering: ${expression.qualifier})")
     return
   }
   render(expression.typeDescriptor.sourceString)

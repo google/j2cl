@@ -43,7 +43,7 @@ open class Casts {
   }
   if (TODO("InstanceOfExpression")) {
    val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
-   o = TODO(expression.qualify needs rendering: Casts.this)
+   o = TODO("expression.qualify needs rendering: Casts.this)")
    val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
   if (TODO("InstanceOfExpression")) {
@@ -59,7 +59,7 @@ open class Casts {
  }
 
  fun testCastFieldAfterInstanceOf() {
-  var foo: cast.Casts.Foo? = TODO(expression.qualify needs rendering: Casts.this)
+  var foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
   if (TODO("InstanceOfExpression")) {
    val c: cast.Casts? = foo.field as cast.Casts?
   }
@@ -70,7 +70,7 @@ open class Casts {
   }
   if (TODO("InstanceOfExpression")) {
    val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
-   foo = TODO(expression.qualify needs rendering: Casts.this)
+   foo = TODO("expression.qualify needs rendering: Casts.this)")
    val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
   }
   if (TODO("InstanceOfExpression")) {
@@ -81,7 +81,7 @@ open class Casts {
  }
 
  fun testCaseMethodAfterInstanceOf() {
-  val foo: cast.Casts.Foo? = TODO(expression.qualify needs rendering: Casts.this)
+  val foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
   if (TODO("InstanceOfExpression")) {
    val cNotAvoidCastsTo: cast.Casts? = foo.method() as cast.Casts?
   }
