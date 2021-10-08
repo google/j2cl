@@ -12,6 +12,7 @@ kt_jvm_library(
         "*.kt",
         "*.java",
     ]),
+    friend = "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin",
     deps = [
         "//third_party/java/junit",
         "//third_party/java/truth",
@@ -19,7 +20,6 @@ kt_jvm_library(
         "//transpiler/java/com/google/j2cl/common",
         "//transpiler/java/com/google/j2cl/transpiler/ast",
         "//transpiler/java/com/google/j2cl/transpiler/backend/common",
-        "//transpiler/java/com/google/j2cl/transpiler/backend/kotlin",
     ],
 )
 

@@ -61,7 +61,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is SuperReference -> render("super")
     is ThisReference -> render("this")
     is VariableDeclarationExpression -> renderVariableDeclarationExpression(expression)
-    is VariableReference -> render(expression.target.name)
+    is VariableReference -> render(expression.target.name.identifierSourceString)
     else -> renderTodo(expression::class.java.simpleName)
   }
 }
@@ -138,9 +138,9 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }
 
-private fun Renderer.renderQualifiedName(enclosingExpression: Expression, propertyName: String) {
-  renderLeftSubExpression(enclosingExpression, (enclosingExpression as MemberReference).qualifier)
-  render(".$propertyName")
+private fun Renderer.renderQualifiedName(expression: Expression, name: String) {
+  renderLeftSubExpression(expression, (expression as MemberReference).qualifier)
+  render(".${name.identifierSourceString}")
 }
 
 private fun Renderer.renderMethodCallHeader(expression: MethodCall) {
@@ -194,7 +194,7 @@ private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclara
 }
 
 fun Renderer.renderVariable(variable: Variable) {
-  render("${variable.name}: ${variable.typeDescriptor.sourceString}")
+  render("${variable.name.identifierSourceString}: ${variable.typeDescriptor.sourceString}")
 }
 
 private fun Renderer.renderLeftSubExpression(expression: Expression, operand: Expression) {

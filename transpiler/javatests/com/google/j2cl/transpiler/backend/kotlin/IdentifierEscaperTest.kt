@@ -15,11 +15,25 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.common.truth.Truth.assertThat
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
-fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
-  render("package ${compilationUnit.packageName.packageNameSourceString}")
-  renderNewLine()
-  renderNewLine()
-  renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
+@RunWith(JUnit4::class)
+class IdentifierEscaperTest {
+  @Test
+  fun identifierSourceString_simple() {
+    assertThat("foo".identifierSourceString).isEqualTo("foo")
+  }
+
+  @Test
+  fun identifierSourceString_hardKeyword() {
+    assertThat("is".identifierSourceString).isEqualTo("`is`")
+  }
+
+  @Test
+  fun packageNameSourceString() {
+    assertThat("foo.is.bar".packageNameSourceString).isEqualTo("foo.`is`.bar")
+  }
 }

@@ -25,7 +25,7 @@ import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.TypeLiteral
 
 /** Returns Kotlin source string representation of this literal. */
-val Literal.sourceString: String
+internal val Literal.sourceString: String
   get() =
     when (this) {
       is NullLiteral -> "null"

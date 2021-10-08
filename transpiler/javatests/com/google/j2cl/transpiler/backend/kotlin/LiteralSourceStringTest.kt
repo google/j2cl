@@ -15,16 +15,11 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.common.SourcePosition
+import com.google.common.truth.Truth.assertThat
 import com.google.j2cl.transpiler.ast.BooleanLiteral
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
-import com.google.j2cl.transpiler.ast.Kind
 import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.StringLiteral
-import com.google.j2cl.transpiler.ast.TypeDeclaration
-import com.google.j2cl.transpiler.ast.TypeLiteral
-import kotlin.test.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -32,32 +27,38 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class LiteralSourceStringTest {
   @Test
-  fun literalSourceString() {
-    assertEquals("false", BooleanLiteral.get(false).sourceString)
-    assertEquals("true", BooleanLiteral.get(true).sourceString)
+  fun booleanLiteral() {
+    assertThat(BooleanLiteral.get(false).sourceString).isEqualTo("false")
+    assertThat(BooleanLiteral.get(true).sourceString).isEqualTo("true")
+  }
 
-    assertEquals("0", NumberLiteral(PrimitiveTypes.INT, 0).sourceString)
-    assertEquals("0L", NumberLiteral(PrimitiveTypes.LONG, 0L).sourceString)
-    assertEquals("0.0f", NumberLiteral(PrimitiveTypes.FLOAT, 0.0f).sourceString)
-    assertEquals("0.0", NumberLiteral(PrimitiveTypes.DOUBLE, 0.0).sourceString)
+  @Test
+  fun intLiteral() {
+    assertThat(NumberLiteral(PrimitiveTypes.INT, 123).sourceString).isEqualTo("123")
+  }
 
-    assertEquals("'a'", NumberLiteral(PrimitiveTypes.CHAR, 'a'.code).sourceString)
+  @Test
+  fun longLiteral() {
+    assertThat(NumberLiteral(PrimitiveTypes.LONG, 123L).sourceString).isEqualTo("123L")
+  }
 
-    assertEquals("\"Hello, world!\"", StringLiteral("Hello, world!").sourceString)
-    assertEquals(
-      "Foo::class.java",
-      TypeLiteral(
-          SourcePosition.NONE,
-          DeclaredTypeDescriptor.newBuilder()
-            .setTypeDeclaration(
-              TypeDeclaration.newBuilder()
-                .setKind(Kind.CLASS)
-                .setClassComponents(listOf("Foo"))
-                .build()
-            )
-            .build()
-        )
-        .sourceString
-    )
+  @Test
+  fun floatLiteral() {
+    assertThat(NumberLiteral(PrimitiveTypes.FLOAT, 1.23f).sourceString).isEqualTo("1.23f")
+  }
+
+  @Test
+  fun doubleLiteral() {
+    assertThat(NumberLiteral(PrimitiveTypes.DOUBLE, 1.23).sourceString).isEqualTo("1.23")
+  }
+
+  @Test
+  fun charLiteral() {
+    assertThat(NumberLiteral(PrimitiveTypes.CHAR, 'a'.code).sourceString).isEqualTo("'a'")
+  }
+
+  @Test
+  fun stringLiteral() {
+    assertThat(StringLiteral("Hello, world!").sourceString).isEqualTo("\"Hello, world!\"")
   }
 }

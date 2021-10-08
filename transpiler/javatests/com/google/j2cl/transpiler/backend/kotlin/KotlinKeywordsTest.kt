@@ -15,11 +15,21 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.CompilationUnit
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.JUnit4
 
-fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
-  render("package ${compilationUnit.packageName.packageNameSourceString}")
-  renderNewLine()
-  renderNewLine()
-  renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
+@RunWith(JUnit4::class)
+class KotlinKeywordsTest {
+  @Test
+  fun isHardKeyword_trueCase() {
+    assertTrue(KotlinKeywords.isHardKeyword("is"))
+  }
+
+  @Test
+  fun isHardKeyword_falseCase() {
+    assertFalse(KotlinKeywords.isHardKeyword("foo"))
+  }
 }

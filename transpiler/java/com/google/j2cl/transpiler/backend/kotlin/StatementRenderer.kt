@@ -54,13 +54,15 @@ private fun Renderer.renderBlock(block: Block) {
 
 private fun Renderer.renderBreakStatement(breakStatement: BreakStatement) {
   render("break")
-  breakStatement.labelReference?.let { render(" @${breakStatement.labelReference.target.name}") }
+  breakStatement.labelReference?.let {
+    render(" @${breakStatement.labelReference.target.name.identifierSourceString}")
+  }
 }
 
 private fun Renderer.renderContinueStatement(continueStatement: ContinueStatement) {
   render("continue")
   continueStatement.labelReference?.let {
-    render(" @${continueStatement.labelReference.target.name}")
+    render(" @${continueStatement.labelReference.target.name.identifierSourceString}")
   }
 }
 
@@ -88,12 +90,13 @@ private fun Renderer.renderIfStatement(ifStatement: IfStatement) {
 
 private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarationStatement) {
   var fieldDescriptor = declaration.fieldDescriptor
-  render("var ${fieldDescriptor.name}: ${fieldDescriptor.typeDescriptor.sourceString} = ")
+  render("var ${fieldDescriptor.name!!.identifierSourceString}")
+  render(": ${fieldDescriptor.typeDescriptor.sourceString} = ")
   renderExpression(declaration.expression)
 }
 
 private fun Renderer.renderLabeledStatement(labelStatement: LabeledStatement) {
-  render("${labelStatement.label.name}@ ")
+  render("${labelStatement.label.name.identifierSourceString}@ ")
   val innerStatement = labelStatement.statement
   if (innerStatement is LabeledStatement) renderInCurlyBrackets { renderStatement(innerStatement) }
   else renderStatement(innerStatement)

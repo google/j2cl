@@ -15,11 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.CompilationUnit
+internal val String.identifierSourceString
+  get() = if (KotlinKeywords.isHardKeyword(this)) "`$this`" else this
 
-fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
-  render("package ${compilationUnit.packageName.packageNameSourceString}")
-  renderNewLine()
-  renderNewLine()
-  renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
-}
+internal val String.packageNameSourceString
+  get() = split('.').joinToString(".") { it.identifierSourceString }
