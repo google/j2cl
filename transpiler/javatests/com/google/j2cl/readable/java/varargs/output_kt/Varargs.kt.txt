@@ -4,7 +4,7 @@ open class Varargs {
  fun <init>(args: IntArray?): varargs.Varargs {}
 
  fun <init>(): varargs.Varargs {
-  super(arrayOf(1))
+  super(intArrayOf(1))
  }
 
  fun test(a: Int, args: Array<Any?>?) {}
@@ -15,13 +15,13 @@ open class Varargs {
 
  fun main() {
   val v: varargs.Varargs? = varargs.Varargs()
-  v.test(1, arrayOf())
-  v.test(1, arrayOf(Any()))
-  v.test(1, TODO("NewArray"))
-  v.test(1, TODO("NewArray"))
-  v.test(1, TODO("NewArray"))
-  v.testCloneable(TODO("NewArray"))
-  v.testSerializable(TODO("NewArray"))
+  v.test(1, arrayOf<Any?>())
+  v.test(1, arrayOf<Any?>(Any()))
+  v.test(1, arrayOf<Any?>(Any()))
+  v.test(1, arrayOf<Any?>())
+  v.test(1, arrayOf<Array<Any?>?>())
+  v.testCloneable(arrayOf<Array<Any?>?>())
+  v.testSerializable(arrayOf<Array<Any?>?>())
  }
 
  companion object {
@@ -30,13 +30,13 @@ open class Varargs {
 
   @JvmStatic
   fun bar(a: E, b: E) {
-   TODO("JavaScriptConstructorReference").`fun`(arrayOf(a, b))
+   TODO("JavaScriptConstructorReference").`fun`(arrayOf<E>(a, b))
   }
  }
 }
 
 open class Child: varargs.Varargs {
  fun <init>(): varargs.Child {
-  super(arrayOf(1))
+  super(intArrayOf(1))
  }
 }

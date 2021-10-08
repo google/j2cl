@@ -30,12 +30,15 @@ import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
 import com.google.j2cl.transpiler.ast.MultiExpression
+import com.google.j2cl.transpiler.ast.NewArray
 import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.PostfixExpression
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
@@ -55,6 +58,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is Literal -> render(expression.sourceString)
     is MethodCall -> renderMethodCall(expression)
     is MultiExpression -> renderMultiExpression(expression)
+    is NewArray -> renderNewArray(expression)
     is NewInstance -> renderNewInstance(expression)
     is PostfixExpression -> renderPostfixExpression(expression)
     is PrefixExpression -> renderPrefixExpression(expression)
@@ -77,7 +81,16 @@ private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
 }
 
 private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
-  render("arrayOf")
+  val componentTypeDescriptor = arrayLiteral.typeDescriptor.componentTypeDescriptor!!
+  render(
+    if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
+      // Render as byteArrayOf(...), intArrayOf(...) and so on.
+      "${componentTypeDescriptor.sourceString.toLowerCase()}ArrayOf"
+    } else {
+      // Render as arrayOf(...).
+      "arrayOf<${componentTypeDescriptor.sourceString}>"
+    }
+  )
   renderInParentheses {
     renderCommaSeparated(arrayLiteral.valueExpressions) { renderExpression(it) }
   }
@@ -151,6 +164,32 @@ private fun Renderer.renderMethodCallHeader(expression: MethodCall) {
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
   renderInParentheses { renderCommaSeparated(multiExpression.expressions) { renderExpression(it) } }
+}
+
+private fun Renderer.renderNewArray(newArray: NewArray) {
+  val literalOrNull = newArray.arrayLiteral
+  if (literalOrNull != null) {
+    renderArrayLiteral(literalOrNull)
+  } else {
+    renderNewArrayOfSize(
+      newArray.typeDescriptor.componentTypeDescriptor!!,
+      newArray.dimensionExpressions.first()
+    )
+  }
+}
+
+private fun Renderer.renderNewArrayOfSize(
+  componentTypeDescriptor: TypeDescriptor,
+  sizeExpression: Expression
+) {
+  render(
+    if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
+      "${componentTypeDescriptor.sourceString}Array"
+    } else {
+      "arrayOfNulls<${componentTypeDescriptor.sourceString}>"
+    }
+  )
+  renderInParentheses { renderExpression(sizeExpression) }
 }
 
 private fun Renderer.renderNewInstance(expression: NewInstance) {
