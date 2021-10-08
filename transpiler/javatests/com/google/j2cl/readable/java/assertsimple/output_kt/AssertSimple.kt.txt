@@ -4,7 +4,10 @@ open class AssertSimple {
  companion object {
   @JvmStatic
   fun main(args: Array<String?>?) {
-   TODO("AssertStatement")
+   assert(1 + 2 == 3)
+   assert(1 + 2 == 3) {
+    "Error!"
+   }
   }
  }
 }

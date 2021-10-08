@@ -12,8 +12,10 @@
 [args] => [args] "args"
 [{
     assert 1 + 2 == 3;
+    assert 1 + 2 == 3 : "Error!";
   }] => [AssertSimple.$clinit();] "assertsimple.AssertSimple.main"
 [assert 1 + 2 == 3;] => [$Asserts.$assert((1 + 2 | 0) == 3);] "assertsimple.AssertSimple.main"
+[assert 1 + 2 == 3 : "Error!";] => [$Asserts.$assertWithMessage((1 + 2 | 0) == 3, 'Error!');] "assertsimple.AssertSimple.main"
 [AssertSimple] => [$clinit]
 [AssertSimple] => [AssertSimple.$clinit = () =>{};] "assertsimple.AssertSimple.<clinit>"
 [AssertSimple] => [AssertSimple.$loadModules();] "assertsimple.AssertSimple.<clinit>"

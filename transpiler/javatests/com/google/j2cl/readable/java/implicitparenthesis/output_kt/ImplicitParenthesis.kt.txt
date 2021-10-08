@@ -15,31 +15,31 @@ open class ImplicitParenthesis {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = if (primitiveInt == 5) Int(15) else Int(30)
-    TODO("AssertStatement")
+    assert(primitiveInt == 15)
    }
    {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt += primitiveInt
-    TODO("AssertStatement")
+    assert(primitiveInt == 15)
    }
    {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt = primitiveInt
-    TODO("AssertStatement")
+    assert(primitiveInt == 5)
    }
    {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt++
-    TODO("AssertStatement")
+    assert(primitiveInt == 10)
    }
    {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = ++boxedInt
-    TODO("AssertStatement")
+    assert(primitiveInt == 11)
    }
   }
 
@@ -52,14 +52,14 @@ open class ImplicitParenthesis {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt - primitiveInt
-    TODO("AssertStatement")
+    assert(primitiveInt == 5)
    }
    {
     primitiveInt = 5
     boxedInt = Int(10)
     boxedBoolean = true
     boxedBoolean = boxedInt == primitiveInt
-    TODO("AssertStatement")
+    assert(boxedBoolean == false)
    }
   }
 

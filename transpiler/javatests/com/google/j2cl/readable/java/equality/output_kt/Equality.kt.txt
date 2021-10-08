@@ -3,21 +3,21 @@ package equality
 open class Equality {
  fun test() {
   {
-   TODO("AssertStatement")
-   TODO("AssertStatement")
+   assert(false == false)
+   assert(0 != 1)
   }
   {
-   TODO("AssertStatement")
+   assert(Any() != Any())
   }
   {
-   TODO("AssertStatement")
+   assert(0.0 as Double? == 0.0 as Double?)
   }
   {
-   TODO("AssertStatement")
+   assert(0.0f as Float? == 0.0f as Float?)
   }
   {
-   TODO("AssertStatement")
-   TODO("AssertStatement")
+   assert(null != Any())
+   assert(Any() != null)
   }
  }
 }

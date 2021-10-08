@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.AssertStatement
 import com.google.j2cl.transpiler.ast.Block
 import com.google.j2cl.transpiler.ast.BreakStatement
 import com.google.j2cl.transpiler.ast.ContinueStatement
@@ -34,6 +35,7 @@ import com.google.j2cl.transpiler.ast.WhileStatement
 
 fun Renderer.renderStatement(statement: Statement) {
   when (statement) {
+    is AssertStatement -> renderAssertStatement(statement)
     is Block -> renderBlock(statement)
     is BreakStatement -> renderBreakStatement(statement)
     is ContinueStatement -> renderContinueStatement(statement)
@@ -48,6 +50,18 @@ fun Renderer.renderStatement(statement: Statement) {
     is ThrowStatement -> renderThrowStatement(statement)
     is TryStatement -> renderTryStatement(statement)
     else -> renderTodo(statement::class.java.simpleName)
+  }
+}
+
+private fun Renderer.renderAssertStatement(assertStatement: AssertStatement) {
+  render("assert")
+  renderInParentheses { renderExpression(assertStatement.expression) }
+  assertStatement.message?.let {
+    render(" ")
+    renderInCurlyBrackets {
+      renderNewLine()
+      renderExpression(it)
+    }
   }
 }
 
