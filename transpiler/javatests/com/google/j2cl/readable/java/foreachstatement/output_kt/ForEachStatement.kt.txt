@@ -7,7 +7,13 @@ open class ForEachStatement {
  }
 
  fun testMulticatch() {
-  TODO("TryStatement")
+  try {
+   throw Exception()
+  } catch (e: foreachstatement.ForEachStatement.Exception1) {
+   TODO("ForStatement")
+  } catch (e: foreachstatement.ForEachStatement.Exception2) {
+   TODO("ForStatement")
+  }
  }
 
  fun testTypeVariable() {

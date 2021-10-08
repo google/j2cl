@@ -28,6 +28,8 @@ import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.SwitchCase
 import com.google.j2cl.transpiler.ast.SwitchStatement
 import com.google.j2cl.transpiler.ast.ThrowStatement
+import com.google.j2cl.transpiler.ast.TryStatement
+import com.google.j2cl.transpiler.ast.UnionTypeDescriptor
 import com.google.j2cl.transpiler.ast.WhileStatement
 
 fun Renderer.renderStatement(statement: Statement) {
@@ -44,6 +46,7 @@ fun Renderer.renderStatement(statement: Statement) {
     is SwitchStatement -> renderSwitchStatement(statement)
     is WhileStatement -> renderWhileStatement(statement)
     is ThrowStatement -> renderThrowStatement(statement)
+    is TryStatement -> renderTryStatement(statement)
     else -> renderTodo(statement::class.java.simpleName)
   }
 }
@@ -132,4 +135,31 @@ private fun Renderer.renderWhileStatement(whileStatement: WhileStatement) {
 private fun Renderer.renderThrowStatement(throwStatement: ThrowStatement) {
   render("throw ")
   renderExpression(throwStatement.expression)
+}
+
+private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
+  // TODO(b/202119991): Handle tryStatement.resourceDeclarations
+  render("try ")
+  renderStatement(tryStatement.body)
+  tryStatement.catchClauses.forEach { catchClause ->
+    val catchVariable = catchClause.exceptionVariable
+    val catchVariableName = catchVariable.name
+    // Duplicate catch block for each type in the union, which are not available in Kotlin.
+    val catchTypeDescriptors =
+      catchVariable.typeDescriptor.let {
+        if (it is UnionTypeDescriptor) it.unionTypeDescriptors else listOf(it)
+      }
+    catchTypeDescriptors.forEach { catchType ->
+      render(" catch ")
+      renderInParentheses {
+        render("$catchVariableName: ${catchType.toNonNullable().sourceString}")
+      }
+      render(" ")
+      renderStatement(catchClause.body)
+    }
+  }
+  tryStatement.finallyBlock?.let {
+    render(" finally ")
+    renderStatement(it)
+  }
 }

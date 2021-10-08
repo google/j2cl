@@ -2,38 +2,68 @@ package trycatch
 
 open class TryCatch {
  fun testMultiCatch() {
-  TODO("TryStatement")
+  try {
+   throw java.lang.ClassCastException()
+  } catch (e: java.lang.NullPointerException) {
+   throw e
+  } catch (e: java.lang.ClassCastException) {
+   throw e
+  } catch (r: java.lang.RuntimeException) {
+   r = null
+  }
  }
 
  fun testEmptyThrowableCatch() {
-  TODO("TryStatement")
-  TODO("TryStatement")
+  try {
+   throw java.lang.ClassCastException()
+  } catch (e: Throwable) {}
+  try {
+   throw java.lang.ClassCastException()
+  } catch (e: Exception) {} catch (e: Throwable) {}
  }
 
  fun testEmptyThrowableRethrow() {
-  TODO("TryStatement")
+  try {
+   throw java.lang.ClassCastException()
+  } catch (e: Throwable) {
+   throw e
+  }
  }
 
  fun testFinally() {
-  TODO("TryStatement")
+  try {
+   TODO("AssertStatement")
+  } finally {}
  }
 
  fun testTryWithResource() {
-  TODO("TryStatement")
+  try {
+   throw Exception()
+  } catch (e: Exception) {}
  }
 
  fun testTryWithResourceJava9() {
   val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
   val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
-  TODO("TryStatement")
+  try {
+   throw Exception()
+  } catch (e: Exception) {}
  }
 
  fun testTryWithResouceOnStaticField() {
-  TODO("TryStatement")
+  try {
+   throw Exception()
+  } catch (e: Exception) {}
  }
 
  fun testNestedTryCatch() {
-  TODO("TryStatement")
+  try {
+   throw Exception()
+  } catch (ae: Exception) {
+   try {
+    throw Exception()
+   } catch (ie: Exception) {}
+  }
  }
 
  fun testThrowGenerics() {
