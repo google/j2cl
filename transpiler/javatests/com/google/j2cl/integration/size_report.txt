@@ -1,41 +1,45 @@
 Integration tests size report:
 **************************************
-There are 4 optimized size changes.
+There are 33 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2045602 to 2046445 bytes (100%->100.0%) and from
-  723910 to 724171 bytes (100%->100.0%) gzipped.
+  2045485 to 2045602 bytes (100%->100.0%) and from
+  723950 to 723910 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       2637     2622 assertsimple.esnext (-0.6%)
+       3002     2988 assertsimple (-0.5%)
+       1605     1599 strictequality (-0.4%)
+       3991     3977 casttoprimitives (-0.4%)
 
 
 Expansion report highlights:
 **************************************
         old      new
-       3616     3689 autovalue_inc (2.0%)
-       3023     3084 autovalue.esnext (2.0%)
-       3239     3303 autovalue_inc.esnext (2.0%)
-       3391     3454 autovalue (1.9%)
+       1548     1562 enums.esnext (0.9%)
+       1925     1938 enums (0.7%)
+       2047     2054 bridgejsmethod (0.3%)
+       3347     3358 varargs.esnext (0.3%)
 
 
 Incremental size reports (non-gzip):
 **************************************
         old      new
-        783      787 autovalue (0.5%)
-        872      879 autovalue.esnext (0.8%)
+        783      783 autovalue (unchanged)
+        872      872 autovalue.esnext (unchanged)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-    4018250  4018409 box2d_default (0.0%)
-    2189920  2190079 box2d_default.minified (0.0%)
-    1163637  1163796 box2d_default.rta (0.0%)
-    2414730  2414889 emptyclass (0.0%)
-    1448103  1448262 emptyclass.minified (0.0%)
-     696359   696518 emptyclass.rta (0.0%)
+    4019385  4018250 box2d_default (-0.0%)
+    2190416  2189920 box2d_default.minified (-0.0%)
+    1163990  1163637 box2d_default.rta (-0.0%)
+    2415865  2414730 emptyclass (-0.0%)
+    1448599  1448103 emptyclass.minified (-0.0%)
+     696712   696359 emptyclass.rta (-0.1%)
 
 
 All reports:
@@ -71,16 +75,16 @@ All reports:
        3510     3510 arrayreadwrite.esnext (unchanged)
          22       22 assertremoved (unchanged)
          22       22 assertremoved.esnext (unchanged)
-       2988     2988 assertsimple (unchanged)
-       2622     2622 assertsimple.esnext (unchanged)
-       5762     5762 autoboxing (unchanged)
-       5395     5395 autoboxing.esnext (unchanged)
-       3391     3454 autovalue (1.9%)
-       3023     3084 autovalue.esnext (2.0%)
-       3616     3689 autovalue_inc (2.0%)
-       3239     3303 autovalue_inc.esnext (2.0%)
-       2692     2692 autovalue_ref (unchanged)
-       2437     2437 autovalue_ref.esnext (unchanged)
+       3002     2988 assertsimple (-0.5%)
+       2637     2622 assertsimple.esnext (-0.6%)
+       5771     5762 autoboxing (-0.2%)
+       5404     5395 autoboxing.esnext (-0.2%)
+       3391     3391 autovalue (unchanged)
+       3023     3023 autovalue.esnext (unchanged)
+       3616     3616 autovalue_inc (unchanged)
+       3239     3239 autovalue_inc.esnext (unchanged)
+       2693     2692 autovalue_ref (-0.0%)
+       2434     2437 autovalue_ref.esnext (0.1%)
         998      998 backwardbridgemethod (unchanged)
         648      648 backwardbridgemethod.esnext (unchanged)
        2740     2740 binaryexpressions (unchanged)
@@ -97,10 +101,10 @@ All reports:
       23967    23967 box2d_noclassmetadata_checksopt.esnext (unchanged)
         971      971 breakstatement (unchanged)
         647      647 breakstatement.esnext (unchanged)
-       2054     2054 bridgejsmethod (unchanged)
-       1672     1672 bridgejsmethod.esnext (unchanged)
-       2069     2069 bridgemethods (unchanged)
-       1673     1673 bridgemethods.esnext (unchanged)
+       2047     2054 bridgejsmethod (0.3%)
+       1671     1672 bridgejsmethod.esnext (0.1%)
+       2068     2069 bridgemethods (0.0%)
+       1674     1673 bridgemethods.esnext (-0.1%)
        1917     1917 captures (unchanged)
        1514     1514 captures.esnext (unchanged)
         943      943 cascadedstaticinit (unchanged)
@@ -111,8 +115,8 @@ All reports:
          22       22 castsdisabled.esnext (unchanged)
        1495     1495 castsenabled (unchanged)
        1233     1233 castsenabled.esnext (unchanged)
-       3977     3977 casttoprimitives (unchanged)
-       3587     3587 casttoprimitives.esnext (unchanged)
+       3991     3977 casttoprimitives (-0.4%)
+       3594     3587 casttoprimitives.esnext (-0.2%)
         936      936 circularcompiletimeconstant (unchanged)
         600      600 circularcompiletimeconstant.esnext (unchanged)
        3142     3142 classliteral (unchanged)
@@ -149,8 +153,8 @@ All reports:
         756      756 enummethods.esnext (unchanged)
        1742     1742 enumobfuscation (unchanged)
        1342     1342 enumobfuscation.esnext (unchanged)
-       1938     1938 enums (unchanged)
-       1562     1562 enums.esnext (unchanged)
+       1925     1938 enums (0.7%)
+       1548     1562 enums.esnext (0.9%)
        1791     1791 enumspecialfunctions (unchanged)
        1474     1474 enumspecialfunctions.esnext (unchanged)
        1167     1167 exceptionnotcaught (unchanged)
@@ -177,7 +181,7 @@ All reports:
         607      607 ifstatement.esnext (unchanged)
        1015     1015 implementsgenericinterface (unchanged)
         662      662 implementsgenericinterface.esnext (unchanged)
-       1302     1302 implicitparenthesis (unchanged)
+       1303     1302 implicitparenthesis (-0.1%)
         975      975 implicitparenthesis.esnext (unchanged)
        1051     1051 importglobaljstypes (unchanged)
         731      731 importglobaljstypes.esnext (unchanged)
@@ -206,7 +210,7 @@ All reports:
          22       22 interfaceabstractimpl (unchanged)
          22       22 interfaceabstractimpl.esnext (unchanged)
        3563     3563 interfacedevirtualize (unchanged)
-       3248     3248 interfacedevirtualize.esnext (unchanged)
+       3246     3248 interfacedevirtualize.esnext (0.1%)
          22       22 interfacejsbridge (unchanged)
          22       22 interfacejsbridge.esnext (unchanged)
        1492     1492 interfaces (unchanged)
@@ -215,8 +219,8 @@ All reports:
        1156     1156 intersectiontype.esnext (unchanged)
        1238     1238 iteratormethodresolution (unchanged)
         886      886 iteratormethodresolution.esnext (unchanged)
-       2280     2280 jsasync (unchanged)
-       1032     1032 jsasync.esnext (unchanged)
+       2279     2280 jsasync (0.0%)
+       1033     1032 jsasync.esnext (-0.1%)
          22       22 jsbridgebackward (unchanged)
          22       22 jsbridgebackward.esnext (unchanged)
        1005     1005 jsbridgemethodaccidentaloverride (unchanged)
@@ -231,18 +235,18 @@ All reports:
         769      769 jsconstructorfieldinitorder.esnext (unchanged)
        1017     1017 jsconstructornested (unchanged)
         675      675 jsconstructornested.esnext (unchanged)
-       6203     6203 jsenum (unchanged)
-       5657     5657 jsenum.esnext (unchanged)
+       6204     6203 jsenum (-0.0%)
+       5658     5657 jsenum.esnext (-0.0%)
        1187     1187 jsfunction (unchanged)
         829      829 jsfunction.esnext (unchanged)
        1381     1381 jsfunctionbridge (unchanged)
        1011     1011 jsfunctionbridge.esnext (unchanged)
-       1776     1776 jsfunctiontypeannotation (unchanged)
-       1429     1429 jsfunctiontypeannotation.esnext (unchanged)
+       1774     1776 jsfunctiontypeannotation (0.1%)
+       1430     1429 jsfunctiontypeannotation.esnext (-0.1%)
         977      977 jsinnerclass (unchanged)
         625      625 jsinnerclass.esnext (unchanged)
       13976    13976 jsinteroptests (unchanged)
-      12754    12754 jsinteroptests.esnext (unchanged)
+      12757    12754 jsinteroptests.esnext (-0.0%)
         982      982 jsmethodoverride (unchanged)
         635      635 jsmethodoverride.esnext (unchanged)
        1179     1179 jsoverlay (unchanged)
@@ -253,8 +257,8 @@ All reports:
          22       22 jsoverlaywithjsfunction.esnext (unchanged)
        1342     1342 jsproperties (unchanged)
         871      871 jsproperties.esnext (unchanged)
-       2627     2627 jstypevarargs (unchanged)
-       2051     2051 jstypevarargs.esnext (unchanged)
+       2629     2627 jstypevarargs (-0.1%)
+       2053     2051 jstypevarargs.esnext (-0.1%)
         984      984 labeledstatement (unchanged)
         646      646 labeledstatement.esnext (unchanged)
        2210     2210 lambdas (unchanged)
@@ -270,7 +274,7 @@ All reports:
        2554     2554 longoperationsinglesideeffect (unchanged)
        2244     2244 longoperationsinglesideeffect.esnext (unchanged)
        3073     3073 methodreferences (unchanged)
-       2768     2768 methodreferences.esnext (unchanged)
+       2771     2768 methodreferences.esnext (-0.1%)
        2825     2825 morebridgemethods (unchanged)
        2228     2228 morebridgemethods.esnext (unchanged)
        1067     1067 multipleabstractparents (unchanged)
@@ -373,8 +377,8 @@ All reports:
         569      569 staticjsmethods.esnext (unchanged)
         995      995 staticnestedclass (unchanged)
         654      654 staticnestedclass.esnext (unchanged)
-       1599     1599 strictequality (unchanged)
-       1234     1234 strictequality.esnext (unchanged)
+       1605     1599 strictequality (-0.4%)
+       1238     1234 strictequality.esnext (-0.3%)
        2687     2687 stringconversion (unchanged)
        2341     2341 stringconversion.esnext (unchanged)
        1406     1406 stringdevirtualcalls (unchanged)
@@ -405,16 +409,16 @@ All reports:
         705      705 typewildcards.esnext (unchanged)
        1155     1155 unaryexpressions (unchanged)
         835      835 unaryexpressions.esnext (unchanged)
-       3559     3559 underflowoverflowconversion (unchanged)
-       3220     3220 underflowoverflowconversion.esnext (unchanged)
+       3561     3559 underflowoverflowconversion (-0.1%)
+       3223     3220 underflowoverflowconversion.esnext (-0.1%)
         179      179 unusedmultiexpressionreturn (unchanged)
         183      183 unusedmultiexpressionreturn.esnext (unchanged)
-       3741     3741 varargs (unchanged)
-       3358     3358 varargs.esnext (unchanged)
+       3735     3741 varargs (0.2%)
+       3347     3358 varargs.esnext (0.3%)
        1007     1007 variables (unchanged)
         669      669 variables.esnext (unchanged)
       13004    13004 wasm (unchanged)
-      12458    12458 wasm.esnext (unchanged)
+      12459    12458 wasm.esnext (-0.0%)
         924      924 whilestatement (unchanged)
         589      589 whilestatement.esnext (unchanged)
        1982     1982 wideningfloatconversion (unchanged)

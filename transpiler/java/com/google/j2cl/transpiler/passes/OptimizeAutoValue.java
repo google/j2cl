@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.collect.ImmutableMap.toImmutableMap;
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.j2cl.transpiler.ast.TypeDescriptor.replaceTypeDescriptors;
@@ -29,7 +28,6 @@ import com.google.common.collect.Multimap;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayLiteral;
-import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
@@ -58,7 +56,6 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
@@ -376,12 +373,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                 // Add mixin that will provide the implementation for java.lang.Object.
                 addValueTypeMixin(autoValue, mask, excludedFields);
               }
-
-              // Prevent JsCompiler from optimizing the fields to not break the semantics.
-              // If we don't take any special precautions, if a field is never read explicitly (even
-              // it is set), JsCompiler can optimize them away. As a result they won't be seen
-              // reflectively and they won't contribute to equals/hashcode/toString.
-              preserveFields(autoValue, excludedFields);
             });
   }
 
@@ -472,27 +463,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
     autoValue.addLoadTimeStatement(mixinCall.makeStatement(SourcePosition.NONE));
   }
 
-  private static void preserveFields(Type type, Collection<FieldDescriptor> excludedFields) {
-    MethodDescriptor preserveFn =
-        TypeDescriptors.get().javaemulInternalValueType.getMethodDescriptorByName("preserve");
-
-    List<Expression> fieldReferences =
-        type.getFields().stream()
-            .map(Field::getDescriptor)
-            .filter(f -> !excludedFields.contains(f))
-            .map(f -> createPrototypeFieldAccess(type, f))
-            .collect(toImmutableList());
-
-    // This special call will make JsCompiler think that all these fields are used. There is a
-    // special pass in JsCompiler that later removes this call itself so they won't exist in the
-    // final output.
-    type.addLoadTimeStatement(
-        MethodCall.Builder.from(preserveFn)
-            .setArguments(AstUtils.maybePackageVarargs(preserveFn, fieldReferences))
-            .build()
-            .makeStatement(SourcePosition.NONE));
-  }
-
   private static void addExcludedFieldsDeclaration(
       Type autoValue, Collection<FieldDescriptor> excludedFields) {
     FieldDescriptor excludedFieldDescriptor =
@@ -502,7 +472,12 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             .setTypeDescriptor(TypeDescriptors.get().javaLangObject)
             .setName("$excluded_fields")
             .build();
-    Expression excludedFieldAccess = createPrototypeFieldAccess(autoValue, excludedFieldDescriptor);
+    FieldAccess excludedFieldAccess =
+        FieldAccess.Builder.from(excludedFieldDescriptor)
+            .setQualifier(
+                new JavaScriptConstructorReference(autoValue.getDeclaration())
+                    .getPrototypeFieldAccess())
+            .build();
     // Adds load time statement MyFoo.prototype.$excluded_fields = [ ... ]
     autoValue.addLoadTimeStatement(
         BinaryExpression.Builder.asAssignmentTo(excludedFieldAccess)
@@ -536,12 +511,5 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
                         .setArguments(name, new JavaScriptConstructorReference(type))
                         .build())
             .toArray(Expression[]::new));
-  }
-
-  private static Expression createPrototypeFieldAccess(Type type, FieldDescriptor field) {
-    return FieldAccess.Builder.from(field)
-        .setQualifier(
-            new JavaScriptConstructorReference(type.getDeclaration()).getPrototypeFieldAccess())
-        .build();
   }
 }

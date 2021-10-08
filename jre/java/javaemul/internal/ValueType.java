@@ -18,9 +18,7 @@ package javaemul.internal;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
-import javaemul.internal.annotations.DoNotAutobox;
 import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
 
 /**
  * A base type that provides 'value' type semantics for equals/hashcode/toString via reflection.
@@ -138,8 +136,5 @@ public abstract class ValueType {
   private static native void mixin(Object ctor, int mask, String... excludes);
 
   @JsMethod(namespace = "goog.reflect")
-  static native String objectProperty(String name, Object type);
-
-  @JsMethod(name = "$J2CL_PRESERVE$", namespace = JsPackage.GLOBAL)
-  static native void preserve(@DoNotAutobox Object... type);
+  static native String[] objectProperty(String name, Object type);
 }
