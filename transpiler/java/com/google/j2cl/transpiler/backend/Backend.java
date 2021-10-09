@@ -87,10 +87,12 @@ import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeJsEnums;
 import com.google.j2cl.transpiler.passes.NormalizeJsFunctionPropertyInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
+import com.google.j2cl.transpiler.passes.NormalizeLabeledStatements;
 import com.google.j2cl.transpiler.passes.NormalizeLabels;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
+import com.google.j2cl.transpiler.passes.NormalizeNestedBlocks;
 import com.google.j2cl.transpiler.passes.NormalizeNestedClassConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
@@ -364,7 +366,14 @@ public enum Backend {
     public ImmutableList<Supplier<NormalizationPass>> getPassFactories(BackendOptions options) {
       return ImmutableList.of(
           // Pre-verifications
-          VerifySingleAstReference::new, VerifyParamAndArgCounts::new, VerifyReferenceScoping::new);
+          VerifySingleAstReference::new,
+          VerifyParamAndArgCounts::new,
+          VerifyReferenceScoping::new,
+
+          // Normalizations
+          NormalizeLabels::new,
+          NormalizeLabeledStatements::new,
+          NormalizeNestedBlocks::new);
     }
   };
 

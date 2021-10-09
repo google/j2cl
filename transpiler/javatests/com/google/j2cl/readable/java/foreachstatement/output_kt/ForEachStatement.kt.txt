@@ -2,25 +2,25 @@ package foreachstatement
 
 open class ForEachStatement {
  fun test(iterable: Iterable<Throwable?>?) {
-  TODO("ForStatement")
-  TODO("ForStatement")
+  LOOP@ TODO("ForStatement")
+  LOOP@ TODO("ForStatement")
  }
 
  fun testMulticatch() {
   try {
    throw Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
-   TODO("ForStatement")
+   LOOP@ TODO("ForStatement")
   } catch (e: foreachstatement.ForEachStatement.Exception2) {
-   TODO("ForStatement")
+   LOOP@ TODO("ForStatement")
   }
  }
 
  fun testTypeVariable() {
   val iterable: U = null
-  TODO("ForStatement")
+  LOOP@ TODO("ForStatement")
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
-  TODO("ForStatement")
+  LOOP@ TODO("ForStatement")
  }
 }
 

@@ -8,31 +8,78 @@
 [LabeledStatement] => [return $instance;] "labelstatement.LabeledStatement.<synthetic: ctor_create>"
 [LabeledStatement] => [$ctor__labelstatement_LabeledStatement__]
 [LabeledStatement] => [this.$ctor__java_lang_Object__();] "labelstatement.LabeledStatement.<init>"
-[test] => [m_test__]
+[loopStatements] => [m_loopStatements__]
 [LABEL:
     for (; ; ) {
       break LABEL;
     }] => [LABEL: for (; true; ) {
    break LABEL;
-  }] "labelstatement.LabeledStatement.test"
+  }] "labelstatement.LabeledStatement.loopStatements"
 [for (; ; ) {
       break LABEL;
     }] => [for (; true; ) {
    break LABEL;
-  }] "labelstatement.LabeledStatement.test"
-[break LABEL;] => [break LABEL;] "labelstatement.LabeledStatement.test"
-[LABEL1:
-    for (; ; ) {
-      continue LABEL1;
-    }] => [LABEL1: for (; true; ) {
-   continue LABEL1;
-  }] "labelstatement.LabeledStatement.test"
-[for (; ; ) {
-      continue LABEL1;
-    }] => [for (; true; ) {
-   continue LABEL1;
-  }] "labelstatement.LabeledStatement.test"
-[continue LABEL1;] => [continue LABEL1;] "labelstatement.LabeledStatement.test"
+  }] "labelstatement.LabeledStatement.loopStatements"
+[break LABEL;] => [break LABEL;] "labelstatement.LabeledStatement.loopStatements"
+[simpleStatement] => [m_simpleStatement__]
+[LABEL:
+    foo();] => [LABEL: this.m_foo___$p_labelstatement_LabeledStatement();] "labelstatement.LabeledStatement.simpleStatement"
+[foo();] => [this.m_foo___$p_labelstatement_LabeledStatement();] "labelstatement.LabeledStatement.simpleStatement"
+[do {
+      LABEL:
+      continue;
+    } while (false);] => [do {
+   LABEL: continue;
+  }while (false);] "labelstatement.LabeledStatement.simpleStatement"
+[LABEL:
+      continue;] => [LABEL: continue;] "labelstatement.LabeledStatement.simpleStatement"
+[continue;] => [continue;] "labelstatement.LabeledStatement.simpleStatement"
+[LABEL:
+    return;] => [LABEL: return;] "labelstatement.LabeledStatement.simpleStatement"
+[return;] => [return;] "labelstatement.LabeledStatement.simpleStatement"
+[block] => [m_block__]
+[LABEL:
+    {
+      break LABEL;
+    }] => [LABEL: {
+   break LABEL;
+  }] "labelstatement.LabeledStatement.block"
+[break LABEL;] => [break LABEL;] "labelstatement.LabeledStatement.block"
+[ifStatement] => [m_ifStatement__]
+[LABEL:
+    if (true) {
+      break LABEL;
+    }] => [LABEL: if (true) {
+   break LABEL;
+  }] "labelstatement.LabeledStatement.ifStatement"
+[if (true) {
+      break LABEL;
+    }] => [if (true) {
+   break LABEL;
+  }] "labelstatement.LabeledStatement.ifStatement"
+[break LABEL;] => [break LABEL;] "labelstatement.LabeledStatement.ifStatement"
+[switchStatement] => [m_switchStatement__]
+[LABEL:
+    switch (0) {
+...        }
+    }] => [LABEL: switch (0) {
+   case 0:
+...    }
+  }] "labelstatement.LabeledStatement.switchStatement"
+[switch (0) {
+      case 0:
+...        }
+    }] => [switch (0) {
+   case 0:
+...    }
+  }] "labelstatement.LabeledStatement.switchStatement"
+[if (true) {
+          break;
+        }] => [if (true) {
+     break;
+    }] "labelstatement.LabeledStatement.switchStatement"
+[break;] => [break;] "labelstatement.LabeledStatement.switchStatement"
+[foo] => [m_foo___$p_labelstatement_LabeledStatement]
 [LabeledStatement] => [$clinit]
 [LabeledStatement] => [LabeledStatement.$clinit = () =>{};] "labelstatement.LabeledStatement.<clinit>"
 [LabeledStatement] => [LabeledStatement.$loadModules();] "labelstatement.LabeledStatement.<clinit>"

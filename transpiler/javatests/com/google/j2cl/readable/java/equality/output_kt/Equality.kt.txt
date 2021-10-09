@@ -2,20 +2,20 @@ package equality
 
 open class Equality {
  fun test() {
-  {
+  if (true) {
    assert(false == false)
    assert(0 != 1)
   }
-  {
+  if (true) {
    assert(Any() != Any())
   }
-  {
+  if (true) {
    assert(0.0 as Double? == 0.0 as Double?)
   }
-  {
+  if (true) {
    assert(0.0f as Float? == 0.0f as Float?)
   }
-  {
+  if (true) {
    assert(null != Any())
    assert(Any() != null)
   }

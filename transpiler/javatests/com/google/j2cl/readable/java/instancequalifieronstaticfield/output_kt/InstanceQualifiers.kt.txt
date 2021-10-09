@@ -16,23 +16,23 @@ open class InstanceQualifiers {
   fun main(args: Array<String?>?) {
    val main: instancequalifieronstaticfield.InstanceQualifiers? = instancequalifieronstaticfield.InstanceQualifiers()
    var i: Int = 0
-   {
+   if (true) {
     TODO("JavaScriptConstructorReference").staticField = 100
    }
-   {
+   if (true) {
     main.staticField = 100
     main.getStaticInstanceQualifiers().staticField = 300
    }
-   {
+   if (true) {
     i = main.staticField
     i = main.getStaticValue()
     i = main.getStaticInstanceQualifiers().staticField
    }
-   {
+   if (true) {
     main.staticField += 100
     main.getStaticInstanceQualifiers().staticField += 100
    }
-   {
+   if (true) {
     main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField += main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue()
    }
   }

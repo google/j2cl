@@ -114,33 +114,33 @@ open class CastPrimitives {
   val ffloat: Float = 16
   val fdouble: Double = 17
   var tlong: Long = 0
-  {
+  if (true) {
    tlong = fbyte
    tlong = flong
   }
-  {
+  if (true) {
    tlong = fint
    tlong += fint
    tlong <<= fint
   }
-  {
+  if (true) {
    tlong += fchar
    tlong += flong
    tlong += ffloat
   }
-  {
+  if (true) {
    tlong = flong * fint
    tlong = flong >> fint
   }
-  {
+  if (true) {
    tlong = flong + fshort
    tlong = flong + flong
   }
-  {
+  if (true) {
    tlong = flong << tlong
    tlong <<= flong
   }
-  {
+  if (true) {
    tlong = 0 + 1 + 2L
   }
  }

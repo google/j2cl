@@ -20,14 +20,42 @@ class LabeledStatement extends j_l_Object {
   this.$ctor__java_lang_Object__();
  }
  
- m_test__() {
+ m_loopStatements__() {
   LABEL: for (; true; ) {
    break LABEL;
   }
-  LABEL1: for (; true; ) {
-   continue LABEL1;
+ }
+ 
+ m_simpleStatement__() {
+  LABEL: this.m_foo___$p_labelstatement_LabeledStatement();
+  do {
+   LABEL: continue;
+  }while (false);
+  LABEL: return;
+ }
+ 
+ m_block__() {
+  LABEL: {
+   break LABEL;
   }
  }
+ 
+ m_ifStatement__() {
+  LABEL: if (true) {
+   break LABEL;
+  }
+ }
+ 
+ m_switchStatement__() {
+  LABEL: switch (0) {
+   case 0: 
+    if (true) {
+     break;
+    }
+  }
+ }
+ 
+ m_foo___$p_labelstatement_LabeledStatement() {}
  
  static $clinit() {
   LabeledStatement.$clinit = () =>{};

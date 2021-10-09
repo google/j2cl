@@ -1,8 +1,38 @@
 package labelstatement
 
 open class LabeledStatement {
- fun test() {
+ fun loopStatements() {
   LABEL@ TODO("ForStatement")
-  LABEL1@ TODO("ForStatement")
  }
+
+ fun simpleStatement() {
+  LABEL@ do this.foo() while (false)
+  LOOP@ do {
+   LABEL@ do continue@LOOP while (false)
+  } while (false)
+  LABEL@ do return Unit while (false)
+ }
+
+ fun block() {
+  LABEL@ do {
+   break@LABEL
+  } while (false)
+ }
+
+ fun ifStatement() {
+  LABEL@ do if (true) {
+   break@LABEL
+  } while (false)
+ }
+
+ fun switchStatement() {
+  LABEL@ do when (0) {
+   0 ->
+    if (true) {
+     break@LABEL
+    }
+  } while (false)
+ }
+
+ fun foo() {}
 }

@@ -11,31 +11,31 @@ open class ImplicitParenthesis {
   fun examples() {
    var primitiveInt: Int
    var boxedInt: Int?
-   {
+   if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = if (primitiveInt == 5) Int(15) else Int(30)
     assert(primitiveInt == 15)
    }
-   {
+   if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt += primitiveInt
     assert(primitiveInt == 15)
    }
-   {
+   if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt = primitiveInt
     assert(primitiveInt == 5)
    }
-   {
+   if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt++
     assert(primitiveInt == 10)
    }
-   {
+   if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = ++boxedInt
@@ -48,13 +48,13 @@ open class ImplicitParenthesis {
    var primitiveInt: Int
    var boxedInt: Int?
    var boxedBoolean: Boolean?
-   {
+   if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = boxedInt - primitiveInt
     assert(primitiveInt == 5)
    }
-   {
+   if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     boxedBoolean = true

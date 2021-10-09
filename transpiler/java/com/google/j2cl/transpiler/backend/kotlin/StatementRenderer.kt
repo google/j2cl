@@ -23,6 +23,8 @@ import com.google.j2cl.transpiler.ast.DoWhileStatement
 import com.google.j2cl.transpiler.ast.ExpressionStatement
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement
 import com.google.j2cl.transpiler.ast.IfStatement
+import com.google.j2cl.transpiler.ast.Label
+import com.google.j2cl.transpiler.ast.LabelReference
 import com.google.j2cl.transpiler.ast.LabeledStatement
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
@@ -71,22 +73,23 @@ private fun Renderer.renderBlock(block: Block) {
 
 private fun Renderer.renderBreakStatement(breakStatement: BreakStatement) {
   render("break")
-  breakStatement.labelReference?.let {
-    render(" @${breakStatement.labelReference.target.name.identifierSourceString}")
-  }
+  breakStatement.labelReference?.let { renderLabelReference(it) }
 }
 
 private fun Renderer.renderContinueStatement(continueStatement: ContinueStatement) {
   render("continue")
-  continueStatement.labelReference?.let {
-    render(" @${continueStatement.labelReference.target.name.identifierSourceString}")
-  }
+  continueStatement.labelReference?.let { renderLabelReference(it) }
+}
+
+private fun Renderer.renderLabelReference(labelReference: LabelReference) {
+  render("@")
+  renderLabelName(labelReference.target)
 }
 
 private fun Renderer.renderDoWhileStatement(doWhileStatement: DoWhileStatement) {
   render("do ")
   renderStatement(doWhileStatement.body)
-  render("while ")
+  render(" while ")
   renderInParentheses { renderExpression(doWhileStatement.conditionExpression) }
 }
 
@@ -113,10 +116,15 @@ private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarati
 }
 
 private fun Renderer.renderLabeledStatement(labelStatement: LabeledStatement) {
-  render("${labelStatement.label.name.identifierSourceString}@ ")
+  renderLabelName(labelStatement.label)
+  render("@ ")
   val innerStatement = labelStatement.statement
   if (innerStatement is LabeledStatement) renderInCurlyBrackets { renderStatement(innerStatement) }
   else renderStatement(innerStatement)
+}
+
+private fun Renderer.renderLabelName(label: Label) {
+  render(label.name.identifierSourceString)
 }
 
 private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
@@ -135,6 +143,7 @@ private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {
   // When-statements.
   render("when ")
   renderInParentheses { renderExpression(switchStatement.switchExpression) }
+  render(" ")
   renderInCurlyBrackets {
     renderStartingWithNewLines(switchStatement.cases) { renderSwitchCase(it) }
   }
@@ -143,6 +152,7 @@ private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {
 private fun Renderer.renderWhileStatement(whileStatement: WhileStatement) {
   render("while ")
   renderInParentheses { renderExpression(whileStatement.conditionExpression) }
+  render(" ")
   renderStatement(whileStatement.body)
 }
 

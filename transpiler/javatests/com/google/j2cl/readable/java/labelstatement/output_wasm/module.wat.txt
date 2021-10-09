@@ -8,7 +8,11 @@
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@labelstatement.LabeledStatement)
-  (ref.func $m_test__void@labelstatement.LabeledStatement)
+  (ref.func $m_loopStatements__void@labelstatement.LabeledStatement)
+  (ref.func $m_simpleStatement__void@labelstatement.LabeledStatement)
+  (ref.func $m_block__void@labelstatement.LabeledStatement)
+  (ref.func $m_ifStatement__void@labelstatement.LabeledStatement)
+  (ref.func $m_switchStatement__void@labelstatement.LabeledStatement)
   (rtt.canon $labelstatement.LabeledStatement.vtable)
  )
 )
@@ -28,7 +32,11 @@
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_loopStatements__void (ref $function.$java.lang.Object__$void))
+ (field $m_simpleStatement__void (ref $function.$java.lang.Object__$void))
+ (field $m_block__void (ref $function.$java.lang.Object__$void))
+ (field $m_ifStatement__void (ref $function.$java.lang.Object__$void))
+ (field $m_switchStatement__void (ref $function.$java.lang.Object__$void))
  )
   (extends $java.lang.Object.vtable)
 )
@@ -51,8 +59,8 @@
  )
 )
 
-;;; void LabeledStatement.test()
-(func $m_test__void@labelstatement.LabeledStatement
+;;; void LabeledStatement.loopStatements()
+(func $m_loopStatements__void@labelstatement.LabeledStatement
  (type $function.$java.lang.Object__$void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:19:14
@@ -74,24 +82,144 @@
     
    )
   )
-  ;; LABEL1: for (;true;) {
-  ;;@ labelstatement/LabeledStatement.java:25:4
-  (block $LABEL1.BREAK
+ )
+)
+(elem declare func $m_loopStatements__void@labelstatement.LabeledStatement)
+
+;;; void LabeledStatement.simpleStatement()
+(func $m_simpleStatement__void@labelstatement.LabeledStatement
+ (type $function.$java.lang.Object__$void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ labelstatement/LabeledStatement.java:26:14
+ (local $this (ref null $labelstatement.LabeledStatement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (block
+  ;; LABEL: LabeledStatement.this.foo();
+  ;;@ labelstatement/LabeledStatement.java:27:4
+  (block $LABEL.BREAK
+   ;; LabeledStatement.this.foo();
+   ;;@ labelstatement/LabeledStatement.java:28:4
+   (call $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (local.get $this))
+  )
+  ;; LOOP: do {
+  ;;@ labelstatement/LabeledStatement.java:33:4
+  (block $LOOP.BREAK
    (loop
-    (block $LABEL1.CONTINUE
+    (block $LOOP.CONTINUE
      (block
-      ;; continue LABEL1;
-      ;;@ labelstatement/LabeledStatement.java:27:6
-      (br $LABEL1.CONTINUE)
+      ;; LABEL: continue LOOP;
+      ;;@ labelstatement/LabeledStatement.java:34:6
+      (block $LABEL_1.BREAK
+       ;; continue LOOP;
+       ;;@ labelstatement/LabeledStatement.java:35:6
+       (br $LOOP.CONTINUE)
+      )
      )
     )
-    (br 0)
     
+   )
+  )
+  ;; LABEL: return;
+  ;;@ labelstatement/LabeledStatement.java:38:4
+  (block $LABEL_2.BREAK
+   ;; return;
+   ;;@ labelstatement/LabeledStatement.java:39:4
+   (return )
+  )
+ )
+)
+(elem declare func $m_simpleStatement__void@labelstatement.LabeledStatement)
+
+;;; void LabeledStatement.block()
+(func $m_block__void@labelstatement.LabeledStatement
+ (type $function.$java.lang.Object__$void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ labelstatement/LabeledStatement.java:42:14
+ (local $this (ref null $labelstatement.LabeledStatement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (block
+  ;; LABEL: {
+  ;;@ labelstatement/LabeledStatement.java:43:4
+  (block $LABEL.BREAK
+   (block
+    ;; break LABEL;
+    ;;@ labelstatement/LabeledStatement.java:45:6
+    (br $LABEL.BREAK)
    )
   )
  )
 )
-(elem declare func $m_test__void@labelstatement.LabeledStatement)
+(elem declare func $m_block__void@labelstatement.LabeledStatement)
+
+;;; void LabeledStatement.ifStatement()
+(func $m_ifStatement__void@labelstatement.LabeledStatement
+ (type $function.$java.lang.Object__$void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ labelstatement/LabeledStatement.java:49:14
+ (local $this (ref null $labelstatement.LabeledStatement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (block
+  ;; LABEL: if (true) {
+  ;;@ labelstatement/LabeledStatement.java:50:4
+  (block $LABEL.BREAK
+   ;; if (true) {
+   ;;@ labelstatement/LabeledStatement.java:51:4
+   (if (i32.const 1)
+    (then
+     (block
+      ;; break LABEL;
+      ;;@ labelstatement/LabeledStatement.java:52:6
+      (br $LABEL.BREAK)
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_ifStatement__void@labelstatement.LabeledStatement)
+
+;;; void LabeledStatement.switchStatement()
+(func $m_switchStatement__void@labelstatement.LabeledStatement
+ (type $function.$java.lang.Object__$void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ labelstatement/LabeledStatement.java:56:14
+ (local $this (ref null $labelstatement.LabeledStatement))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (block
+  ;; LABEL: switch (0) {
+  ;;@ labelstatement/LabeledStatement.java:57:4
+  (block $LABEL.BREAK
+   ;; switch (0) {
+   ;;@ labelstatement/LabeledStatement.java:58:4
+   (block
+    (block ;; evaluate expression and jump
+     (br_table 0 1 (i32.const 0))
+    )
+    ;; case 0:
+    ;; if (true) {
+    ;;@ labelstatement/LabeledStatement.java:60:8
+    (if (i32.const 1)
+     (then
+      (block
+       ;; break LABEL;
+       ;;@ labelstatement/LabeledStatement.java:61:10
+       (br $LABEL.BREAK)
+      )
+     )
+    )
+   )
+  )
+ )
+)
+(elem declare func $m_switchStatement__void@labelstatement.LabeledStatement)
+
+;;; void LabeledStatement.foo()
+(func $m_foo__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement
+ (param $this (ref null $labelstatement.LabeledStatement))
+ ;;@ labelstatement/LabeledStatement.java:66:15
+ (block
+ )
+)
 
 ;;; void LabeledStatement.$clinit()
 (func $$clinit__void@labelstatement.LabeledStatement

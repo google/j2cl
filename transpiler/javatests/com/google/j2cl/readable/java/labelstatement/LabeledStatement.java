@@ -16,15 +16,52 @@
 package labelstatement;
 
 public class LabeledStatement {
-  public void test() {
+  public void loopStatements() {
     LABEL:
     for (; ; ) {
       break LABEL;
     }
+  }
 
-    LABEL1:
-    for (; ; ) {
-      continue LABEL1;
+  public void simpleStatement() {
+    LABEL:
+    foo();
+
+    // TODO(b/202500423): Enable when the jscompiler bug is fixed.
+    // LABEL: break LABEL
+
+    do {
+      LABEL:
+      continue;
+    } while (false);
+
+    LABEL:
+    return;
+  }
+
+  public void block() {
+    LABEL:
+    {
+      break LABEL;
     }
   }
+
+  public void ifStatement() {
+    LABEL:
+    if (true) {
+      break LABEL;
+    }
+  }
+
+  public void switchStatement() {
+    LABEL:
+    switch (0) {
+      case 0:
+        if (true) {
+          break;
+        }
+    }
+  }
+
+  private void foo() {}
 }
