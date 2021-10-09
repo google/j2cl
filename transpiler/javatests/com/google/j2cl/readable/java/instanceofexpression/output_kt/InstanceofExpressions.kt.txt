@@ -4,33 +4,33 @@ open class InstanceofExpressions {
  fun testInstanceofClass() {
   val `object`: Any? = instanceofexpression.InstanceofExpressions()
   var b: Boolean
-  b = TODO("InstanceOfExpression")
-  b = TODO("InstanceOfExpression")
-  b = TODO("InstanceOfExpression")
+  b = `object` is Any
+  b = `object` is instanceofexpression.InstanceofExpressions
+  b = `object` is String
  }
 
  fun testInstanceofInterface() {
   val o: Any? = Any()
   var b: Boolean
-  b = TODO("InstanceOfExpression")
-  b = TODO("InstanceOfExpression")
+  b = o is java.io.Serializable
+  b = TODO("expression.qualify needs rendering: InstanceofExpressions.this)") is java.io.Serializable
  }
 
  fun testInstanceofBoxedType() {
   val b: Any? = Int(1)
-  var a: Boolean = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
+  var a: Boolean = b is Byte
+  a = b is Double
+  a = b is Float
+  a = b is Int
+  a = b is Long
+  a = b is Short
+  a = b is Number
+  a = b is java.lang.Character
+  a = b is Boolean
   val d: Double? = null
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
+  a = d is Any
+  a = d is Number
+  a = d is Double
  }
 
  fun testInstanceOfArray() {
@@ -39,19 +39,19 @@ open class InstanceofExpressions {
   val objectDoubleArray: Array<Array<Any?>?>? = arrayOfNulls<Array<Any?>?>(0)
   val stringArray: Array<String?>? = arrayOfNulls<String?>(0)
   var a: Boolean
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
-  a = TODO("InstanceOfExpression")
+  a = `object` is Array<Any?>
+  a = `object` is Array<Array<String?>?>
+  a = `object` is Array<Any?>
+  a = `object` is Array<Array<String?>?>
+  a = objectArray is Array<Any?>
+  a = objectArray is Array<String?>
+  a = objectArray is Array<Array<Any?>?>
+  a = objectArray is Array<Array<String?>?>
+  a = objectDoubleArray is Array<Any?>
+  a = objectDoubleArray is Array<Array<Any?>?>
+  a = objectDoubleArray is Array<Array<String?>?>
+  a = stringArray is Array<Any?>
+  a = stringArray is Array<String?>
  }
 }
 

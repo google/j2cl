@@ -33,25 +33,25 @@ open class Casts {
 
  fun testCastObjectAfterInstanceOf() {
   var o: Any? = Any()
-  if (TODO("InstanceOfExpression")) {
+  if (o is cast.Casts) {
    val c: cast.Casts? = o as cast.Casts?
   }
-  if (TODO("InstanceOfExpression")) {
+  if (o is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
    o = Any()
    val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
-  if (TODO("InstanceOfExpression")) {
+  if (o is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
    o = TODO("expression.qualify needs rendering: Casts.this)")
    val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
-  if (TODO("InstanceOfExpression")) {
+  if (o is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
    o = Any()
    val cAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
-  if (TODO("InstanceOfExpression")) {
+  if (o is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
    this.functionForInstanceofTest()
    val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
@@ -60,20 +60,20 @@ open class Casts {
 
  fun testCastFieldAfterInstanceOf() {
   var foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
-  if (TODO("InstanceOfExpression")) {
+  if (foo.field is cast.Casts) {
    val c: cast.Casts? = foo.field as cast.Casts?
   }
-  if (TODO("InstanceOfExpression")) {
+  if (foo.field is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
    foo.field = Any()
    val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
   }
-  if (TODO("InstanceOfExpression")) {
+  if (foo.field is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
    foo = TODO("expression.qualify needs rendering: Casts.this)")
    val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
   }
-  if (TODO("InstanceOfExpression")) {
+  if (foo.field is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
    this.functionForInstanceofTest()
    val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
@@ -82,7 +82,7 @@ open class Casts {
 
  fun testCaseMethodAfterInstanceOf() {
   val foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
-  if (TODO("InstanceOfExpression")) {
+  if (foo.method() is cast.Casts) {
    val cNotAvoidCastsTo: cast.Casts? = foo.method() as cast.Casts?
   }
  }

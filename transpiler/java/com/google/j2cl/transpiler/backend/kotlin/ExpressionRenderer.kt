@@ -26,6 +26,7 @@ import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
 import com.google.j2cl.transpiler.ast.FunctionExpression
+import com.google.j2cl.transpiler.ast.InstanceOfExpression
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -55,6 +56,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is ExpressionWithComment -> renderExpressionWithComment(expression)
     is FieldAccess -> renderFieldAccess(expression)
     is FunctionExpression -> renderFunctionExpression(expression)
+    is InstanceOfExpression -> renderInstanceOfExpression(expression)
     is Literal -> render(expression.sourceString)
     is MethodCall -> renderMethodCall(expression)
     is MultiExpression -> renderMultiExpression(expression)
@@ -130,6 +132,12 @@ private fun Renderer.renderFunctionExpression(expression: FunctionExpression) {
     render(" -> ")
     renderStatement(expression.body)
   }
+}
+
+private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOfExpression) {
+  renderExpression(instanceOfExpression.expression)
+  render(" is ")
+  render(instanceOfExpression.testTypeDescriptor.toNonNullable().sourceString)
 }
 
 private fun Renderer.renderConditionalExpression(conditionalExpression: ConditionalExpression) {

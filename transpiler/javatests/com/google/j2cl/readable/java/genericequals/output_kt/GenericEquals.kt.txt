@@ -14,7 +14,7 @@ open class GenericEquals {
   if (obj == this) {
    return true
   }
-  if (!(TODO("InstanceOfExpression"))) {
+  if (!(obj is genericequals.GenericEquals)) {
    return false
   }
   val other: genericequals.GenericEquals<*>? = obj as genericequals.GenericEquals<*>?

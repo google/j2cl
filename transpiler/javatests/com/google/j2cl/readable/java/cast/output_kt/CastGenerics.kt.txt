@@ -24,7 +24,7 @@ open class CastGenerics {
  fun outerGenericMethod() {}
 
  fun method(o: Any?): EE {
-  if (TODO("InstanceOfExpression")) {
+  if (o is cast.CastGenerics.Empty1) {
    return o as EE
   }
   return null

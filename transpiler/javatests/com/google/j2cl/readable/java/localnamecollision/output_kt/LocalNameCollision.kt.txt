@@ -11,15 +11,15 @@ open class LocalNameCollision {
   val com_google_j2cl_readable_localnamecollision_package1_A: Int = 1
   val com_google_j2cl_readable_localnamecollision_package2_A: Int = 1
   val A: Int = 1
-  LocalNameCollision = TODO("InstanceOfExpression") || TODO("InstanceOfExpression") || TODO("InstanceOfExpression") || TODO("InstanceOfExpression") || TODO("InstanceOfExpression")
+  LocalNameCollision = RuntimeException is localnamecollision.LocalNameCollision || RuntimeException is java.lang.RuntimeException || RuntimeException is localnamecollision.package1.A || RuntimeException is localnamecollision.package2.A || RuntimeException is localnamecollision.Class
   assert(localnamecollision.Asserts().n() == 5)
  }
 
  fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, $Asserts: Any?, l_Asserts: Int, A: Int): Boolean {
-  return LocalNameCollision && TODO("InstanceOfExpression") && TODO("InstanceOfExpression") && l_Asserts == A
+  return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && $Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 
  fun <init>(LocalNameCollision: Boolean, Asserts: Any?, $Asserts: Any?, l_Asserts: Int, A: Int): localnamecollision.LocalNameCollision {
-  val result: Boolean = LocalNameCollision && TODO("InstanceOfExpression") && TODO("InstanceOfExpression") && l_Asserts == A
+  val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && $Asserts is localnamecollision.Asserts && l_Asserts == A
  }
 }
