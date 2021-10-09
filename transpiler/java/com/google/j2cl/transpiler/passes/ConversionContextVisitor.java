@@ -36,6 +36,7 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
@@ -381,6 +382,16 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return LoopStatement.Builder.from(loopStatement)
         .setConditionExpression(
             contextRewriter.rewriteBooleanConversionContext(loopStatement.getConditionExpression()))
+        .build();
+  }
+
+  @Override
+  public ForEachStatement rewriteForEachStatement(ForEachStatement forEachStatement) {
+    Expression expression = forEachStatement.getIterableExpression();
+    return ForEachStatement.Builder.from(forEachStatement)
+        .setIterableExpression(
+            contextRewriter.rewriteTypeConversionContext(
+                expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression))
         .build();
   }
 

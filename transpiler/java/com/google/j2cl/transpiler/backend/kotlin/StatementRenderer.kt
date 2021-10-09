@@ -22,6 +22,7 @@ import com.google.j2cl.transpiler.ast.ContinueStatement
 import com.google.j2cl.transpiler.ast.DoWhileStatement
 import com.google.j2cl.transpiler.ast.ExpressionStatement
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement
+import com.google.j2cl.transpiler.ast.ForEachStatement
 import com.google.j2cl.transpiler.ast.IfStatement
 import com.google.j2cl.transpiler.ast.Label
 import com.google.j2cl.transpiler.ast.LabelReference
@@ -44,6 +45,7 @@ fun Renderer.renderStatement(statement: Statement) {
     is DoWhileStatement -> renderDoWhileStatement(statement)
     is ExpressionStatement -> renderExpressionStatement(statement)
     is FieldDeclarationStatement -> renderFieldDeclarationStatement(statement)
+    is ForEachStatement -> renderForEachStatement(statement)
     is IfStatement -> renderIfStatement(statement)
     is LabeledStatement -> renderLabeledStatement(statement)
     is ReturnStatement -> renderReturnStatement(statement)
@@ -95,6 +97,17 @@ private fun Renderer.renderDoWhileStatement(doWhileStatement: DoWhileStatement) 
 
 private fun Renderer.renderExpressionStatement(expressionStatement: ExpressionStatement) {
   renderExpression(expressionStatement.expression)
+}
+
+private fun Renderer.renderForEachStatement(forEachStatement: ForEachStatement) {
+  render("for ")
+  renderInParentheses {
+    render(forEachStatement.loopVariable.name)
+    render(" in ")
+    renderExpression(forEachStatement.iterableExpression)
+  }
+  render(" ")
+  renderStatement(forEachStatement.body)
 }
 
 private fun Renderer.renderIfStatement(ifStatement: IfStatement) {

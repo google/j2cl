@@ -358,8 +358,7 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
-      return ImmutableList.of(
-          () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
+      return ImmutableList.of();
     }
 
     @Override
