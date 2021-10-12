@@ -1,22 +1,11 @@
 package java.util.regex;
 
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
-
 import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public final class Pattern {
-
-  @JsType(isNative = true, name = "RegExp", namespace = JsPackage.GLOBAL)
-  private static class NativeRegExp {
-    public NativeRegExp(String regEx) {}
-
-    public native String[] exec(String s);
-  }
-
   public static Pattern compile(String pattern) {
     return compile(pattern, 0);
   }
@@ -57,7 +46,7 @@ public final class Pattern {
   }
 
   public Matcher matcher(CharSequence string) {
-    return new Matcher(this, string, nativeRegExp.exec(string.toString()));
+    return new Matcher(this, string);
   }
 
   public int flags() {
@@ -80,4 +69,11 @@ public final class Pattern {
     return Arrays.stream(split(string));
   }
 
+  public boolean matches(CharSequence string) {
+    return nativeRegExp.test(string.toString());
+  }
+
+  String[] exec(CharSequence string) {
+    return nativeRegExp.exec(string.toString());
+  }
 }

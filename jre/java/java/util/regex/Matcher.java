@@ -10,12 +10,14 @@ public final class Matcher implements MatcherResult {
 
   private final CharSequence input;
 
-  private final String[] matchResult;
+  private String[] matchResult;
 
-  Matcher(Pattern pattern, CharSequence input, String[] matchResult) {
+  private int offset = 0;
+
+  Matcher(Pattern pattern, CharSequence input) {
     this.pattern = pattern;
     this.input = input;
-    this.matchResult = matchResult;
+    this.matchResult = pattern.exec(input.toString());
   }
 
   public Pattern pattern() {
@@ -76,15 +78,21 @@ public final class Matcher implements MatcherResult {
   }
 
   public boolean matches() {
-    return matchResult != null;
+    return this.pattern.matches(this.input);
   }
 
   public boolean find() {
-    return null != matchResult;
+    return this.find(this.offset);
   }
 
   public boolean find(int offset) {
-    throw new UnsupportedOperationException();
+    CharSequence targetSequence = this.input.subSequence(offset, this.input.length());
+    this.matchResult = this.pattern.exec(targetSequence);
+    boolean isNotDone = null != matchResult;
+    if (isNotDone) {
+      this.offset = end();
+    }
+    return isNotDone;
   }
 
   public boolean lookingAt() {
