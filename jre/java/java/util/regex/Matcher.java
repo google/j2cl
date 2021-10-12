@@ -1,5 +1,8 @@
 package java.util.regex;
 
+import javaemul.internal.NativeRegExp;
+
+
 public final class Matcher implements MatcherResult {
 
   public static String quoteReplacement(String s) {
@@ -10,14 +13,16 @@ public final class Matcher implements MatcherResult {
 
   private final CharSequence input;
 
-  private String[] matchResult;
+  private NativeRegExp.Match matchResult;
 
-  private int offset = 0;
+  private int prevOffset;
+
+  private int offset;
 
   Matcher(Pattern pattern, CharSequence input) {
     this.pattern = pattern;
     this.input = input;
-    this.matchResult = pattern.exec(input.toString());
+    this.matchResult = exec(input.toString());
   }
 
   public Pattern pattern() {
@@ -43,8 +48,10 @@ public final class Matcher implements MatcherResult {
 
   @Override
   public int start(int group) {
+    String wholeGroup = group();
     String groupMatch = group(group);
-    return input.toString().indexOf(groupMatch);
+    int matchIndex = wholeGroup.indexOf(groupMatch);
+    return prevOffset + matchResult.getIndex() + matchIndex;
   }
 
   @Override
@@ -54,9 +61,10 @@ public final class Matcher implements MatcherResult {
 
   @Override
   public int end(int group) {
+    String wholeGroup = group();
     String groupMatch = group(group);
-    int startIndex = input.toString().indexOf(groupMatch);
-    return startIndex + groupMatch.length();
+    int matchEndIndex = wholeGroup.indexOf(groupMatch) + groupMatch.length();
+    return prevOffset + matchResult.getIndex() + matchEndIndex;
   }
 
   @Override
@@ -66,7 +74,7 @@ public final class Matcher implements MatcherResult {
 
   @Override
   public String group(int group) {
-    return matchResult[group];
+    return matchResult.asArray()[group];
   }
 
   public String group(String name) {
@@ -74,25 +82,33 @@ public final class Matcher implements MatcherResult {
   }
 
   public int groupCount() {
-    return null == matchResult ? 0 : matchResult.length - 1;
+    return null == matchResult ? 0 : matchResult.asArray().length - 1;
   }
 
   public boolean matches() {
-    return this.pattern.matches(this.input);
+    return pattern.nativeRegExp.test(input.toString());
   }
 
   public boolean find() {
-    return this.find(this.offset);
+    if (null == matchResult) {
+      return false;
+    }
+
+    CharSequence targetSequence = input.subSequence(offset, input.length());
+
+    this.prevOffset = offset;
+    this.offset += matchResult.getIndex() + group().length();
+
+    this.matchResult = exec(targetSequence);
+    return null != matchResult;
   }
 
   public boolean find(int offset) {
-    CharSequence targetSequence = this.input.subSequence(offset, this.input.length());
-    this.matchResult = this.pattern.exec(targetSequence);
-    boolean isNotDone = null != matchResult;
-    if (isNotDone) {
-      this.offset = end();
-    }
-    return isNotDone;
+    throw new UnsupportedOperationException();
+  }
+
+  private NativeRegExp.Match exec(CharSequence sequence) {
+    return pattern.nativeRegExp.exec(sequence.toString());
   }
 
   public boolean lookingAt() {

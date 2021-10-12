@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+import javaemul.internal.NativeRegExp;
 
 public final class Pattern {
   public static Pattern compile(String pattern) {
@@ -26,7 +27,7 @@ public final class Pattern {
 
   private final int flags;
 
-  private final NativeRegExp nativeRegExp;
+  final NativeRegExp nativeRegExp;
 
   private Pattern(String pattern, int flags) {
     this.pattern = pattern;
@@ -67,13 +68,5 @@ public final class Pattern {
 
   public Stream<String> splitAsStream(CharSequence string) {
     return Arrays.stream(split(string));
-  }
-
-  public boolean matches(CharSequence string) {
-    return nativeRegExp.test(string.toString());
-  }
-
-  String[] exec(CharSequence string) {
-    return nativeRegExp.exec(string.toString());
   }
 }
