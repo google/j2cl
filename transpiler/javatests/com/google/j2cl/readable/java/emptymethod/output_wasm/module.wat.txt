@@ -17,18 +17,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for emptymethod.EmptyMethod [CLASS]
-(type $emptymethod.EmptyMethod (struct
- (field $vtable (ref $emptymethod.EmptyMethod.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $emptymethod.EmptyMethod (struct_subtype 
+ (field $vtable (ref $emptymethod.EmptyMethod.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $emptymethod.EmptyMethod.vtable (struct
+(type $emptymethod.EmptyMethod.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; EmptyMethod()

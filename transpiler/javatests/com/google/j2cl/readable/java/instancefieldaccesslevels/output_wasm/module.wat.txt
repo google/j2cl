@@ -17,22 +17,22 @@
  (rtt.canon $itable)))
 
 ;;; Code for instancefieldaccesslevels.InstanceFieldAccessLevels [CLASS]
-(type $instancefieldaccesslevels.InstanceFieldAccessLevels (struct
- (field $vtable (ref $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)) (field $itable (ref $itable))
+(type $instancefieldaccesslevels.InstanceFieldAccessLevels (struct_subtype 
+ (field $vtable (ref $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_a__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32))
  (field $f_b__instancefieldaccesslevels_InstanceFieldAccessLevels_ (mut i8))
  (field $f_c__instancefieldaccesslevels_InstanceFieldAccessLevels (mut (ref null $java.lang.Object)))
- (field $f_d__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32)))
- (extends $java.lang.Object)
+ (field $f_d__instancefieldaccesslevels_InstanceFieldAccessLevels (mut i32))
+  $java.lang.Object)
 )
-(type $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (struct
+(type $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InstanceFieldAccessLevels()

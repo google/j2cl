@@ -54,19 +54,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for booleanoperations.BooleanOperations [CLASS]
-(type $booleanoperations.BooleanOperations (struct
- (field $vtable (ref $booleanoperations.BooleanOperations.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $booleanoperations.BooleanOperations (struct_subtype 
+ (field $vtable (ref $booleanoperations.BooleanOperations.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $booleanoperations.BooleanOperations.vtable (struct
+(type $booleanoperations.BooleanOperations.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; BooleanOperations()
@@ -348,20 +348,20 @@
 (elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations)
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer [CLASS]
-(type $booleanoperations.BooleanOperations.1Outer (struct
- (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.vtable)) (field $itable (ref $itable))
+(type $booleanoperations.BooleanOperations.1Outer (struct_subtype 
+ (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__booleanoperations_BooleanOperations_1Outer (mut (ref null $booleanoperations.BooleanOperations)))
- (field $f_b__booleanoperations_BooleanOperations_1Outer (mut i8)))
- (extends $java.lang.Object)
+ (field $f_b__booleanoperations_BooleanOperations_1Outer (mut i8))
+  $java.lang.Object)
 )
-(type $booleanoperations.BooleanOperations.1Outer.vtable (struct
+(type $booleanoperations.BooleanOperations.1Outer.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Outer(BooleanOperations $outer_this)
@@ -423,19 +423,19 @@
 (elem declare func $m_getClass__java_lang_Class@booleanoperations.BooleanOperations.1Outer)
 
 ;;; Code for booleanoperations.BooleanOperations.1Outer.Inner [CLASS]
-(type $booleanoperations.BooleanOperations.1Outer.Inner (struct
- (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) (field $itable (ref $itable))
+(type $booleanoperations.BooleanOperations.1Outer.Inner (struct_subtype 
+ (field $vtable (ref $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner (mut (ref null $booleanoperations.BooleanOperations.1Outer))))
- (extends $java.lang.Object)
+ (field $$outer_this__booleanoperations_BooleanOperations_1Outer_Inner (mut (ref null $booleanoperations.BooleanOperations.1Outer)))
+  $java.lang.Object)
 )
-(type $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct
+(type $booleanoperations.BooleanOperations.1Outer.Inner.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Inner(Outer $outer_this)

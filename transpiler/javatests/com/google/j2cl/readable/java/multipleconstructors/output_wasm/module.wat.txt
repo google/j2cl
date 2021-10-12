@@ -17,20 +17,20 @@
  (rtt.canon $itable)))
 
 ;;; Code for multipleconstructors.MultipleConstructors [CLASS]
-(type $multipleconstructors.MultipleConstructors (struct
- (field $vtable (ref $multipleconstructors.MultipleConstructors.vtable)) (field $itable (ref $itable))
+(type $multipleconstructors.MultipleConstructors (struct_subtype 
+ (field $vtable (ref $multipleconstructors.MultipleConstructors.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_id__multipleconstructors_MultipleConstructors_ (mut i32))
- (field $f_flag__multipleconstructors_MultipleConstructors_ (mut i8)))
- (extends $java.lang.Object)
+ (field $f_flag__multipleconstructors_MultipleConstructors_ (mut i8))
+  $java.lang.Object)
 )
-(type $multipleconstructors.MultipleConstructors.vtable (struct
+(type $multipleconstructors.MultipleConstructors.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; MultipleConstructors(int id)

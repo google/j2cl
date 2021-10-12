@@ -63,19 +63,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for anonymousclass.SomeClass [CLASS]
-(type $anonymousclass.SomeClass (struct
- (field $vtable (ref $anonymousclass.SomeClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $anonymousclass.SomeClass (struct_subtype 
+ (field $vtable (ref $anonymousclass.SomeClass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $anonymousclass.SomeClass.vtable (struct
+(type $anonymousclass.SomeClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; SomeClass(int i)
@@ -120,19 +120,19 @@
 )
 
 ;;; Code for anonymousclass.AnonymousClass [CLASS]
-(type $anonymousclass.AnonymousClass (struct
- (field $vtable (ref $anonymousclass.AnonymousClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $anonymousclass.AnonymousClass (struct_subtype 
+ (field $vtable (ref $anonymousclass.AnonymousClass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $anonymousclass.AnonymousClass.vtable (struct
+(type $anonymousclass.AnonymousClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; AnonymousClass()
@@ -206,22 +206,22 @@
 (elem declare func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass)
 
 ;;; Code for anonymousclass.AnonymousClass.1 [CLASS]
-(type $anonymousclass.AnonymousClass.1 (struct
- (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable)) (field $itable (ref $itable))
+(type $anonymousclass.AnonymousClass.1 (struct_subtype 
+ (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__anonymousclass_AnonymousClass_1 (mut (ref null $anonymousclass.AnonymousClass)))
  (field $f_object__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
- (field $f_outer__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object))))
- (extends $anonymousclass.SomeClass)
+ (field $f_outer__anonymousclass_AnonymousClass_1 (mut (ref null $java.lang.Object)))
+  $anonymousclass.SomeClass)
 )
-(type $anonymousclass.AnonymousClass.1.vtable (struct
+(type $anonymousclass.AnonymousClass.1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- )
-  (extends $anonymousclass.SomeClass.vtable)
+  $anonymousclass.SomeClass.vtable)
 )
 
 ;;; <anonymous> extends SomeClass(AnonymousClass $outer_this, int $_0)
@@ -317,8 +317,8 @@
 (elem declare func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1)
 
 ;;; Code for anonymousclass.SomeInterface [INTERFACE]
-(type $anonymousclass.SomeInterface.vtable (struct(field $unused (ref null data))
- )
+(type $anonymousclass.SomeInterface.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void SomeInterface.$clinit()
@@ -355,19 +355,19 @@
 (elem declare func $m_getClass__java_lang_Class@anonymousclass.SomeInterface)
 
 ;;; Code for anonymousclass.SomeInterface.1 [CLASS]
-(type $anonymousclass.SomeInterface.1 (struct
- (field $vtable (ref $anonymousclass.SomeInterface.1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $anonymousclass.SomeClass)
+(type $anonymousclass.SomeInterface.1 (struct_subtype 
+ (field $vtable (ref $anonymousclass.SomeInterface.1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $anonymousclass.SomeClass)
 )
-(type $anonymousclass.SomeInterface.1.vtable (struct
+(type $anonymousclass.SomeInterface.1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- )
-  (extends $anonymousclass.SomeClass.vtable)
+  $anonymousclass.SomeClass.vtable)
 )
 
 ;;; <anonymous> extends SomeClass(int $_0)

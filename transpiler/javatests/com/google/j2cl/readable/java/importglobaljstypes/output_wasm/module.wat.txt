@@ -61,19 +61,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for importglobaljstypes.Date [CLASS]
-(type $importglobaljstypes.Date (struct
- (field $vtable (ref $importglobaljstypes.Date.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $importglobaljstypes.Date (struct_subtype 
+ (field $vtable (ref $importglobaljstypes.Date.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $importglobaljstypes.Date.vtable (struct
+(type $importglobaljstypes.Date.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_copy__importglobaljstypes_Date_NativeDate__importglobaljstypes_Date_NativeDate (ref $function.$java.lang.Object__$importglobaljstypes.Date.NativeDate__$importglobaljstypes.Date.NativeDate))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Date()
@@ -163,18 +163,18 @@
 (elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Date)
 
 ;;; Code for importglobaljstypes.Date.NativeDate [CLASS]
-(type $importglobaljstypes.Date.NativeDate (struct
- (field $vtable (ref $importglobaljstypes.Date.NativeDate.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $importglobaljstypes.Date.NativeDate (struct_subtype 
+ (field $vtable (ref $importglobaljstypes.Date.NativeDate.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $importglobaljstypes.Date.NativeDate.vtable (struct
+(type $importglobaljstypes.Date.NativeDate.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NativeDate()
@@ -237,19 +237,19 @@
 (elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Date.NativeDate)
 
 ;;; Code for importglobaljstypes.Number [CLASS]
-(type $importglobaljstypes.Number (struct
- (field $vtable (ref $importglobaljstypes.Number.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $importglobaljstypes.Number (struct_subtype 
+ (field $vtable (ref $importglobaljstypes.Number.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $importglobaljstypes.Number.vtable (struct
+(type $importglobaljstypes.Number.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_testJsDocForLiteralType__importglobaljstypes_Number_MyLiteralType__importglobaljstypes_Number_MyLiteralType (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Number()
@@ -369,9 +369,9 @@
 (elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number)
 
 ;;; Code for importglobaljstypes.Number.NativeFunction [INTERFACE]
-(type $importglobaljstypes.Number.NativeFunction.vtable (struct
+(type $importglobaljstypes.Number.NativeFunction.vtable (struct_subtype 
  (field $m_apply__java_lang_Object__arrayOf_int__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$javaemul.internal.WasmArray.OfInt__$java.lang.Object))
- )
+  data)
 )
 
 ;;; void NativeFunction.$clinit()
@@ -405,8 +405,8 @@
 (elem declare func $m_getClass__java_lang_Class@importglobaljstypes.Number.NativeFunction)
 
 ;;; Code for importglobaljstypes.Number.MyLiteralType [INTERFACE]
-(type $importglobaljstypes.Number.MyLiteralType.vtable (struct(field $unused (ref null data))
- )
+(type $importglobaljstypes.Number.MyLiteralType.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void MyLiteralType.$clinit()

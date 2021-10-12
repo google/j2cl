@@ -320,8 +320,9 @@
  (rtt.canon $itable)))
 
 ;;; Code for nullability.Nullability [CLASS]
-(type $nullability.Nullability (struct
- (field $vtable (ref $nullability.Nullability.vtable)) (field $itable (ref $itable))
+(type $nullability.Nullability (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f1__nullability_Nullability_ (mut (ref null $java.lang.String)))
  (field $f_f2__nullability_Nullability_ (mut (ref null $java.lang.String)))
@@ -333,10 +334,10 @@
  (field $f_f8__nullability_Nullability_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f9__nullability_Nullability_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f10__nullability_Nullability_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f12__nullability_Nullability_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_f12__nullability_Nullability_ (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $nullability.Nullability.vtable (struct
+(type $nullability.Nullability.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -345,8 +346,7 @@
  (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String))
  (field $m_m4__nullability_Nullability_MyFunction__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Nullability(String a)
@@ -529,20 +529,20 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability)
 
 ;;; Code for nullability.Nullability.Foo [CLASS]
-(type $nullability.Nullability.Foo (struct
- (field $vtable (ref $nullability.Nullability.Foo.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $nullability.Nullability.Foo (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.Foo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $nullability.Nullability.Foo.vtable (struct
+(type $nullability.Nullability.Foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_bar__java_lang_Object__void_$pp_nullability (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_baz__java_lang_Object_$pp_nullability (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Foo()
@@ -645,9 +645,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.Foo)
 
 ;;; Code for nullability.Nullability.MyFunction [INTERFACE]
-(type $nullability.Nullability.MyFunction.vtable (struct
+(type $nullability.Nullability.MyFunction.vtable (struct_subtype 
  (field $m_x__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
- )
+  data)
 )
 
 ;;; void MyFunction.$clinit()
@@ -681,15 +681,16 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.MyFunction)
 
 ;;; Code for nullability.Nullability.StringList [CLASS]
-(type $nullability.Nullability.StringList (struct
- (field $vtable (ref $nullability.Nullability.StringList.vtable)) (field $itable (ref $itable))
+(type $nullability.Nullability.StringList (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.StringList.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_modCount__java_util_AbstractList (mut i32))
  (field $f_array__java_util_ArrayList_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_exposeElement__java_util_ArrayList_ (mut (ref null $java.lang.Object))))
- (extends $java.util.ArrayList)
+ (field $f_exposeElement__java_util_ArrayList_ (mut (ref null $java.lang.Object)))
+  $java.util.ArrayList)
 )
-(type $nullability.Nullability.StringList.vtable (struct
+(type $nullability.Nullability.StringList.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -731,8 +732,7 @@
  (field $m_indexOf__java_lang_Object__int__int_$pp_java_util (ref $function.$java.lang.Object__$java.lang.Object__$int__$int))
  (field $m_lastIndexOf__java_lang_Object__int__int_$pp_java_util (ref $function.$java.lang.Object__$java.lang.Object__$int__$int))
  (field $m_setSize__int__void_$pp_java_util (ref $function.$java.lang.Object__$int__$void))
- )
-  (extends $java.util.ArrayList.vtable)
+  $java.util.ArrayList.vtable)
 )
 
 ;;; StringList()
@@ -790,12 +790,13 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.StringList)
 
 ;;; Code for nullability.Nullability.StringComparator [CLASS]
-(type $nullability.Nullability.StringComparator (struct
- (field $vtable (ref $nullability.Nullability.StringComparator.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $nullability.Nullability.StringComparator (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.StringComparator.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $nullability.Nullability.StringComparator.vtable (struct
+(type $nullability.Nullability.StringComparator.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -809,8 +810,7 @@
  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; StringComparator()
@@ -1026,12 +1026,13 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.StringComparator)
 
 ;;; Code for nullability.Nullability.NullableStringComparator [CLASS]
-(type $nullability.Nullability.NullableStringComparator (struct
- (field $vtable (ref $nullability.Nullability.NullableStringComparator.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $nullability.Nullability.NullableStringComparator (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.NullableStringComparator.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $nullability.Nullability.NullableStringComparator.vtable (struct
+(type $nullability.Nullability.NullableStringComparator.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -1045,8 +1046,7 @@
  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NullableStringComparator()
@@ -1262,9 +1262,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.NullableStringComparator)
 
 ;;; Code for nullability.Nullability.NullableTemplatedReturn [INTERFACE]
-(type $nullability.Nullability.NullableTemplatedReturn.vtable (struct
+(type $nullability.Nullability.NullableTemplatedReturn.vtable (struct_subtype 
  (field $m_foo__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- )
+  data)
 )
 
 ;;; void NullableTemplatedReturn.$clinit()
@@ -1298,20 +1298,20 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.NullableTemplatedReturn)
 
 ;;; Code for nullability.Nullability.NullableTemplatedReturnOverride [CLASS]
-(type $nullability.Nullability.NullableTemplatedReturnOverride (struct
- (field $vtable (ref $nullability.Nullability.NullableTemplatedReturnOverride.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $nullability.Nullability.NullableTemplatedReturnOverride (struct_subtype 
+ (field $vtable (ref $nullability.Nullability.NullableTemplatedReturnOverride.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $nullability.Nullability.NullableTemplatedReturnOverride.vtable (struct
+(type $nullability.Nullability.NullableTemplatedReturnOverride.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_foo__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NullableTemplatedReturnOverride()
@@ -1401,8 +1401,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.NullableTemplatedReturnOverride)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [CLASS]
-(type $nullability.defaultnotnullable.DefaultNotNullable (struct
- (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (field $itable (ref $itable))
+(type $nullability.defaultnotnullable.DefaultNotNullable (struct_subtype 
+ (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f1__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.String)))
  (field $f_f2__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.String)))
@@ -1415,10 +1416,10 @@
  (field $f_f9__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f10__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f11__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Void)))
- (field $f_f12__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_f12__nullability_defaultnotnullable_DefaultNotNullable_ (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $nullability.defaultnotnullable.DefaultNotNullable.vtable (struct
+(type $nullability.defaultnotnullable.DefaultNotNullable.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -1426,8 +1427,7 @@
  (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m3__arrayOf_java_lang_String__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; DefaultNotNullable()
@@ -1593,8 +1593,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [CLASS]
-(type $nullability.defaultnullable.DefaultNullable (struct
- (field $vtable (ref $nullability.defaultnullable.DefaultNullable.vtable)) (field $itable (ref $itable))
+(type $nullability.defaultnullable.DefaultNullable (struct_subtype 
+ (field $vtable (ref $nullability.defaultnullable.DefaultNullable.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f1__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
  (field $f_f2__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.String)))
@@ -1607,10 +1608,10 @@
  (field $f_f9__nullability_defaultnullable_DefaultNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f10__nullability_defaultnullable_DefaultNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f11__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Void)))
- (field $f_f12__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_f12__nullability_defaultnullable_DefaultNullable_ (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $nullability.defaultnullable.DefaultNullable.vtable (struct
+(type $nullability.defaultnullable.DefaultNullable.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -1618,8 +1619,7 @@
  (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m3__arrayOf_java_lang_String__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; DefaultNullable()
@@ -1785,8 +1785,9 @@
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable)
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [CLASS]
-(type $nullability.explicitnotnullable.ExplicitNotNullable (struct
- (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (field $itable (ref $itable))
+(type $nullability.explicitnotnullable.ExplicitNotNullable (struct_subtype 
+ (field $vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f1__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.String)))
  (field $f_f2__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.String)))
@@ -1799,10 +1800,10 @@
  (field $f_f9__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f10__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f11__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Void)))
- (field $f_f12__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_f12__nullability_explicitnotnullable_ExplicitNotNullable_ (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $nullability.explicitnotnullable.ExplicitNotNullable.vtable (struct
+(type $nullability.explicitnotnullable.ExplicitNotNullable.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -1810,8 +1811,7 @@
  (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m3__arrayOf_java_lang_String__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ExplicitNotNullable()

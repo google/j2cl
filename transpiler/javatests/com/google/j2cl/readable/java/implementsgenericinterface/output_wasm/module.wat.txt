@@ -49,8 +49,8 @@
  (rtt.canon $itable)))
 
 ;;; Code for implementsgenericinterface.GenericInterface [INTERFACE]
-(type $implementsgenericinterface.GenericInterface.vtable (struct(field $unused (ref null data))
- )
+(type $implementsgenericinterface.GenericInterface.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void GenericInterface.$clinit()
@@ -84,8 +84,8 @@
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterface)
 
 ;;; Code for implementsgenericinterface.GenericSubInterface [INTERFACE]
-(type $implementsgenericinterface.GenericSubInterface.vtable (struct(field $unused (ref null data))
- )
+(type $implementsgenericinterface.GenericSubInterface.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void GenericSubInterface.$clinit()
@@ -119,18 +119,18 @@
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericSubInterface)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceGenericImpl [CLASS]
-(type $implementsgenericinterface.GenericInterfaceGenericImpl (struct
- (field $vtable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $implementsgenericinterface.GenericInterfaceGenericImpl (struct_subtype 
+ (field $vtable (ref $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct
+(type $implementsgenericinterface.GenericInterfaceGenericImpl.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; GenericInterfaceGenericImpl()
@@ -188,18 +188,18 @@
 (elem declare func $m_getClass__java_lang_Class@implementsgenericinterface.GenericInterfaceGenericImpl)
 
 ;;; Code for implementsgenericinterface.GenericInterfaceImpl [CLASS]
-(type $implementsgenericinterface.GenericInterfaceImpl (struct
- (field $vtable (ref $implementsgenericinterface.GenericInterfaceImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $implementsgenericinterface.GenericInterfaceImpl (struct_subtype 
+ (field $vtable (ref $implementsgenericinterface.GenericInterfaceImpl.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $implementsgenericinterface.GenericInterfaceImpl.vtable (struct
+(type $implementsgenericinterface.GenericInterfaceImpl.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; GenericInterfaceImpl()

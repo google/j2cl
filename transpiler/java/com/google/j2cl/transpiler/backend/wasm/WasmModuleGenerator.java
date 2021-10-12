@@ -43,6 +43,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /** Generates a WASM module containing all the code for the application. */
@@ -283,37 +284,23 @@ public class WasmModuleGenerator {
   }
 
   private void renderVtableStruct(Type type, Collection<MethodDescriptor> methods) {
-    builder.newLine();
-    builder.append(
-        String.format(
-            "(type %s (struct", environment.getWasmVtableTypeName(type.getTypeDescriptor())));
-    builder.indent();
+    emitWasmStruct(type, environment::getWasmVtableTypeName, () -> renderVtableEntries(methods));
+  }
 
+  private void renderVtableEntries(Collection<MethodDescriptor> methodDescriptors) {
     // TODO(b/200341175): Binaryen turns new_with_rtt into new_default_with_rtt for structs with
     // no fields (since they are equivalent) and Chrome does not yet support new_default_with_rtt
     // in globals.
-    if (methods.isEmpty()) {
+    if (methodDescriptors.isEmpty()) {
       builder.append("(field $unused (ref null data))");
     }
-
-    for (MethodDescriptor methodDescriptor : methods) {
-      String functionTypeName = environment.getFunctionTypeName(methodDescriptor);
-      builder.newLine();
-      builder.append(
-          String.format(
-              "(field $%s (ref %s))", methodDescriptor.getMangledName(), functionTypeName));
-    }
-    builder.newLine();
-    builder.append(")");
-    if (type.getSuperTypeDescriptor() != null) {
-      builder.newLine();
-      builder.append(
-          " (extends " + environment.getWasmVtableTypeName(type.getSuperTypeDescriptor()) + ")");
-    }
-
-    builder.unindent();
-    builder.newLine();
-    builder.append(")");
+    methodDescriptors.forEach(
+        m -> {
+          builder.newLine();
+          builder.append(
+              String.format(
+                  "(field $%s (ref %s))", m.getMangledName(), environment.getFunctionTypeName(m)));
+        });
   }
 
   private void emitStaticFieldGlobals(Library library) {
@@ -481,29 +468,18 @@ public class WasmModuleGenerator {
   }
 
   private void renderTypeStruct(Type type) {
-    builder.newLine();
-    builder.append("(type " + environment.getWasmTypeName(type.getTypeDescriptor()) + " (struct");
-    builder.indent();
-    renderTypeFields(type);
-    builder.append(")");
-    if (type.getSuperTypeDescriptor() != null) {
-      builder.newLine();
-      builder.append(
-          "(extends " + environment.getWasmTypeName(type.getSuperTypeDescriptor()) + ")");
-    }
-    builder.unindent();
-    builder.newLine();
-    builder.append(")");
+    emitWasmStruct(type, environment::getWasmTypeName, () -> renderTypeFields(type));
   }
 
   private void renderTypeFields(Type type) {
-    builder.newLine();
     // The first field is always the vtable for class dynamic dispatch.
+    builder.newLine();
     builder.append(
         String.format(
             "(field $vtable (ref %s)) ",
             environment.getWasmVtableTypeName(type.getTypeDescriptor())));
     // The second field is always the itable for interface method dispatch.
+    builder.newLine();
     builder.append("(field $itable (ref $itable))");
 
     WasmTypeLayout wasmType = environment.getWasmTypeLayout(type.getDeclaration());
@@ -675,6 +651,27 @@ public class WasmModuleGenerator {
         });
 
     emitEndCodeComment("Native Array types");
+  }
+
+  /** Emits a WASM struct using nominal inheritance. */
+  private void emitWasmStruct(
+      Type type, Function<DeclaredTypeDescriptor, String> structNamer, Runnable fieldsRenderer) {
+    builder.newLine();
+    builder.append(
+        String.format("(type %s (struct_subtype ", structNamer.apply(type.getTypeDescriptor())));
+    builder.indent();
+    fieldsRenderer.run();
+
+    String wasmStructSuperType =
+        type.getSuperTypeDescriptor() == null
+            ? "data"
+            : structNamer.apply(type.getSuperTypeDescriptor());
+    builder.newLine();
+    builder.append(String.format(" %s", wasmStructSuperType));
+    builder.append(")");
+    builder.unindent();
+    builder.newLine();
+    builder.append(")");
   }
 
   private void emitNativeArrayType(ArrayTypeDescriptor arrayTypeDescriptor) {

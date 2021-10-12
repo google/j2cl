@@ -8,10 +8,10 @@
 (global $f_$initialized__equalsandhashcodeininterface_ViaJsMethodInInterface (mut i32) (i32.const 0))
 
 ;;; Code for equalsandhashcodeininterface.BothInInterface [INTERFACE]
-(type $equalsandhashcodeininterface.BothInInterface.vtable (struct
+(type $equalsandhashcodeininterface.BothInInterface.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- )
+  data)
 )
 
 ;;; void BothInInterface.$clinit()
@@ -45,8 +45,8 @@
 (elem declare func $m_getClass__java_lang_Class@equalsandhashcodeininterface.BothInInterface)
 
 ;;; Code for equalsandhashcodeininterface.NeitherInInterface [INTERFACE]
-(type $equalsandhashcodeininterface.NeitherInInterface.vtable (struct(field $unused (ref null data))
- )
+(type $equalsandhashcodeininterface.NeitherInInterface.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void NeitherInInterface.$clinit()
@@ -80,10 +80,10 @@
 (elem declare func $m_getClass__java_lang_Class@equalsandhashcodeininterface.NeitherInInterface)
 
 ;;; Code for equalsandhashcodeininterface.ViaJsMethodInInterface [INTERFACE]
-(type $equalsandhashcodeininterface.ViaJsMethodInInterface.vtable (struct
+(type $equalsandhashcodeininterface.ViaJsMethodInInterface.vtable (struct_subtype 
  (field $m_notEquals__void (ref $function.$java.lang.Object__$void))
  (field $m_notHashCode__void (ref $function.$java.lang.Object__$void))
- )
+  data)
 )
 
 ;;; void ViaJsMethodInInterface.$clinit()

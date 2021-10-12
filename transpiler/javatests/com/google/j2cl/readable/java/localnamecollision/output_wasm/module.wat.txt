@@ -95,19 +95,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for localnamecollision.Asserts [CLASS]
-(type $localnamecollision.Asserts (struct
- (field $vtable (ref $localnamecollision.Asserts.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $localnamecollision.Asserts (struct_subtype 
+ (field $vtable (ref $localnamecollision.Asserts.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $localnamecollision.Asserts.vtable (struct
+(type $localnamecollision.Asserts.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_n__int_$pp_localnamecollision (ref $function.$java.lang.Object__$int))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Asserts()
@@ -181,19 +181,19 @@
 (elem declare func $m_getClass__java_lang_Class@localnamecollision.Asserts)
 
 ;;; Code for localnamecollision.Class [CLASS]
-(type $localnamecollision.Class (struct
- (field $vtable (ref $localnamecollision.Class.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $localnamecollision.Class (struct_subtype 
+ (field $vtable (ref $localnamecollision.Class.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $localnamecollision.Class.vtable (struct
+(type $localnamecollision.Class.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Class()
@@ -272,20 +272,20 @@
 (elem declare func $m_getClass__java_lang_Class@localnamecollision.Class)
 
 ;;; Code for localnamecollision.LocalNameCollision [CLASS]
-(type $localnamecollision.LocalNameCollision (struct
- (field $vtable (ref $localnamecollision.LocalNameCollision.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $localnamecollision.LocalNameCollision (struct_subtype 
+ (field $vtable (ref $localnamecollision.LocalNameCollision.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $localnamecollision.LocalNameCollision.vtable (struct
+(type $localnamecollision.LocalNameCollision.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_testClassLocalVarCollision__void (ref $function.$java.lang.Object__$void))
  (field $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean (ref $function.$java.lang.Object__$boolean__$java.lang.Object__$java.lang.Object__$int__$int__$boolean))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; void LocalNameCollision.testClassLocalVarCollision()
@@ -424,19 +424,19 @@
 (elem declare func $m_getClass__java_lang_Class@localnamecollision.LocalNameCollision)
 
 ;;; Code for localnamecollision.package1.A [CLASS]
-(type $localnamecollision.package1.A (struct
- (field $vtable (ref $localnamecollision.package1.A.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $localnamecollision.package1.A (struct_subtype 
+ (field $vtable (ref $localnamecollision.package1.A.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $localnamecollision.package1.A.vtable (struct
+(type $localnamecollision.package1.A.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__int (ref $function.$java.lang.Object__$int))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; A()
@@ -510,19 +510,19 @@
 (elem declare func $m_getClass__java_lang_Class@localnamecollision.package1.A)
 
 ;;; Code for localnamecollision.package2.A [CLASS]
-(type $localnamecollision.package2.A (struct
- (field $vtable (ref $localnamecollision.package2.A.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $localnamecollision.package2.A (struct_subtype 
+ (field $vtable (ref $localnamecollision.package2.A.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $localnamecollision.package2.A.vtable (struct
+(type $localnamecollision.package2.A.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__int (ref $function.$java.lang.Object__$int))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; A()

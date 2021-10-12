@@ -56,19 +56,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for qualifiedsupercall.Parent [CLASS]
-(type $qualifiedsupercall.Parent (struct
- (field $vtable (ref $qualifiedsupercall.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $qualifiedsupercall.Parent (struct_subtype 
+ (field $vtable (ref $qualifiedsupercall.Parent.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $qualifiedsupercall.Parent.vtable (struct
+(type $qualifiedsupercall.Parent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_fun__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Parent()
@@ -138,19 +138,19 @@
 (elem declare func $m_getClass__java_lang_Class@qualifiedsupercall.Parent)
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [CLASS]
-(type $qualifiedsupercall.QualifiedSuperCall (struct
- (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $qualifiedsupercall.Parent)
+(type $qualifiedsupercall.QualifiedSuperCall (struct_subtype 
+ (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $qualifiedsupercall.Parent)
 )
-(type $qualifiedsupercall.QualifiedSuperCall.vtable (struct
+(type $qualifiedsupercall.QualifiedSuperCall.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_fun__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $qualifiedsupercall.Parent.vtable)
+  $qualifiedsupercall.Parent.vtable)
 )
 
 ;;; QualifiedSuperCall()
@@ -208,20 +208,20 @@
 (elem declare func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall)
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [CLASS]
-(type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct
- (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (field $itable (ref $itable))
+(type $qualifiedsupercall.QualifiedSuperCall.InnerClass (struct_subtype 
+ (field $vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall))))
- (extends $java.lang.Object)
+ (field $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass (mut (ref null $qualifiedsupercall.QualifiedSuperCall)))
+  $java.lang.Object)
 )
-(type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct
+(type $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InnerClass(QualifiedSuperCall $outer_this)

@@ -11,9 +11,9 @@
 (global $f_$initialized__unimplementedbridgemethod_Foo (mut i32) (i32.const 0))
 
 ;;; Code for unimplementedbridgemethod.I [INTERFACE]
-(type $unimplementedbridgemethod.I.vtable (struct
+(type $unimplementedbridgemethod.I.vtable (struct_subtype 
  (field $m_foo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- )
+  data)
 )
 
 ;;; int I.staticFoo()
@@ -61,8 +61,8 @@
 (elem declare func $m_getClass__java_lang_Class@unimplementedbridgemethod.I)
 
 ;;; Code for unimplementedbridgemethod.J [INTERFACE]
-(type $unimplementedbridgemethod.J.vtable (struct(field $unused (ref null data))
- )
+(type $unimplementedbridgemethod.J.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void J.$clinit()
@@ -96,18 +96,18 @@
 (elem declare func $m_getClass__java_lang_Class@unimplementedbridgemethod.J)
 
 ;;; Code for unimplementedbridgemethod.Bar [CLASS]
-(type $unimplementedbridgemethod.Bar (struct
- (field $vtable (ref $unimplementedbridgemethod.Bar.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $unimplementedbridgemethod.Bar (struct_subtype 
+ (field $vtable (ref $unimplementedbridgemethod.Bar.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $unimplementedbridgemethod.Bar.vtable (struct
+(type $unimplementedbridgemethod.Bar.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Bar()
@@ -151,18 +151,18 @@
 )
 
 ;;; Code for unimplementedbridgemethod.Foo [CLASS]
-(type $unimplementedbridgemethod.Foo (struct
- (field $vtable (ref $unimplementedbridgemethod.Foo.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $unimplementedbridgemethod.Foo (struct_subtype 
+ (field $vtable (ref $unimplementedbridgemethod.Foo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $unimplementedbridgemethod.Foo.vtable (struct
+(type $unimplementedbridgemethod.Foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Foo()

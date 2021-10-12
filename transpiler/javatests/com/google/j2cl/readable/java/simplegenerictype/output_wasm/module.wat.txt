@@ -18,21 +18,21 @@
  (rtt.canon $itable)))
 
 ;;; Code for simplegenerictype.SimpleGenericType [CLASS]
-(type $simplegenerictype.SimpleGenericType (struct
- (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable)) (field $itable (ref $itable))
+(type $simplegenerictype.SimpleGenericType (struct_subtype 
+ (field $vtable (ref $simplegenerictype.SimpleGenericType.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_first__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Object)))
- (field $f_second__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_second__simplegenerictype_SimpleGenericType (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $simplegenerictype.SimpleGenericType.vtable (struct
+(type $simplegenerictype.SimpleGenericType.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; SimpleGenericType(T t, S s)

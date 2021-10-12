@@ -43,12 +43,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for varargs.Varargs [CLASS]
-(type $varargs.Varargs (struct
- (field $vtable (ref $varargs.Varargs.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $varargs.Varargs (struct_subtype 
+ (field $vtable (ref $varargs.Varargs.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $varargs.Varargs.vtable (struct
+(type $varargs.Varargs.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -57,8 +58,7 @@
  (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
  (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Varargs(int... args)
@@ -297,12 +297,13 @@
 (elem declare func $m_getClass__java_lang_Class@varargs.Varargs)
 
 ;;; Code for varargs.Child [CLASS]
-(type $varargs.Child (struct
- (field $vtable (ref $varargs.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $varargs.Varargs)
+(type $varargs.Child (struct_subtype 
+ (field $vtable (ref $varargs.Child.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $varargs.Varargs)
 )
-(type $varargs.Child.vtable (struct
+(type $varargs.Child.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -311,8 +312,7 @@
  (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
  (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $varargs.Varargs.vtable)
+  $varargs.Varargs.vtable)
 )
 
 ;;; Child()

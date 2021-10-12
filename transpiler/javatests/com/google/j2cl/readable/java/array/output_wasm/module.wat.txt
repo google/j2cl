@@ -82,12 +82,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for array.Arrays [CLASS]
-(type $array.Arrays (struct
- (field $vtable (ref $array.Arrays.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $array.Arrays (struct_subtype 
+ (field $vtable (ref $array.Arrays.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $array.Arrays.vtable (struct
+(type $array.Arrays.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -103,8 +104,7 @@
  (field $m_testArraysSupertypeClosureTypes__void (ref $function.$java.lang.Object__$void))
  (field $m_consumesCloneable__java_lang_Cloneable__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_consumesSerializable__java_io_Serializable__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Arrays()
@@ -801,19 +801,19 @@
 (elem declare func $m_getClass__java_lang_Class@array.Arrays)
 
 ;;; Code for array.Arrays.SomeObject [CLASS]
-(type $array.Arrays.SomeObject (struct
- (field $vtable (ref $array.Arrays.SomeObject.vtable)) (field $itable (ref $itable))
+(type $array.Arrays.SomeObject (struct_subtype 
+ (field $vtable (ref $array.Arrays.SomeObject.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__array_Arrays_SomeObject (mut (ref null $array.Arrays))))
- (extends $java.lang.Object)
+ (field $$outer_this__array_Arrays_SomeObject (mut (ref null $array.Arrays)))
+  $java.lang.Object)
 )
-(type $array.Arrays.SomeObject.vtable (struct
+(type $array.Arrays.SomeObject.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; SomeObject(Arrays $outer_this)
@@ -872,18 +872,18 @@
 (elem declare func $m_getClass__java_lang_Class@array.Arrays.SomeObject)
 
 ;;; Code for array.Arrays.NativeType [CLASS]
-(type $array.Arrays.NativeType (struct
- (field $vtable (ref $array.Arrays.NativeType.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $array.Arrays.NativeType (struct_subtype 
+ (field $vtable (ref $array.Arrays.NativeType.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $array.Arrays.NativeType.vtable (struct
+(type $array.Arrays.NativeType.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NativeType()
@@ -941,19 +941,19 @@
 (elem declare func $m_getClass__java_lang_Class@array.Arrays.NativeType)
 
 ;;; Code for array.Arrays.ArrayContainer [CLASS]
-(type $array.Arrays.ArrayContainer (struct
- (field $vtable (ref $array.Arrays.ArrayContainer.vtable)) (field $itable (ref $itable))
+(type $array.Arrays.ArrayContainer (struct_subtype 
+ (field $vtable (ref $array.Arrays.ArrayContainer.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject))))
- (extends $java.lang.Object)
+ (field $f_data__array_Arrays_ArrayContainer (mut (ref null $javaemul.internal.WasmArray.OfObject)))
+  $java.lang.Object)
 )
-(type $array.Arrays.ArrayContainer.vtable (struct
+(type $array.Arrays.ArrayContainer.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ArrayContainer()

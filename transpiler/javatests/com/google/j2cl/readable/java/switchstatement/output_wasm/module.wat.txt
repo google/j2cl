@@ -52,14 +52,15 @@
  (rtt.canon $itable)))
 
 ;;; Code for switchstatement.Numbers [ENUM]
-(type $switchstatement.Numbers (struct
- (field $vtable (ref $switchstatement.Numbers.vtable)) (field $itable (ref $itable))
+(type $switchstatement.Numbers (struct_subtype 
+ (field $vtable (ref $switchstatement.Numbers.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32)))
- (extends $java.lang.Enum)
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
+  $java.lang.Enum)
 )
-(type $switchstatement.Numbers.vtable (struct
+(type $switchstatement.Numbers.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -69,8 +70,7 @@
  (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
  (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
  (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- )
-  (extends $java.lang.Enum.vtable)
+  $java.lang.Enum.vtable)
 )
 
 ;;; Numbers(String $name, int $ordinal)
@@ -188,19 +188,19 @@
 (elem declare func $m_getClass__java_lang_Class@switchstatement.Numbers)
 
 ;;; Code for switchstatement.SwitchStatement [CLASS]
-(type $switchstatement.SwitchStatement (struct
- (field $vtable (ref $switchstatement.SwitchStatement.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $switchstatement.SwitchStatement (struct_subtype 
+ (field $vtable (ref $switchstatement.SwitchStatement.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $switchstatement.SwitchStatement.vtable (struct
+(type $switchstatement.SwitchStatement.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; SwitchStatement()

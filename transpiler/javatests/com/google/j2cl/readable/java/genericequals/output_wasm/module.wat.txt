@@ -18,21 +18,21 @@
  (rtt.canon $itable)))
 
 ;;; Code for genericequals.GenericEquals [CLASS]
-(type $genericequals.GenericEquals (struct
- (field $vtable (ref $genericequals.GenericEquals.vtable)) (field $itable (ref $itable))
+(type $genericequals.GenericEquals (struct_subtype 
+ (field $vtable (ref $genericequals.GenericEquals.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_value__genericequals_GenericEquals_ (mut (ref null $java.lang.Object)))
- (field $f_value2__genericequals_GenericEquals_ (mut (ref null $genericequals.GenericEquals))))
- (extends $java.lang.Object)
+ (field $f_value2__genericequals_GenericEquals_ (mut (ref null $genericequals.GenericEquals)))
+  $java.lang.Object)
 )
-(type $genericequals.GenericEquals.vtable (struct
+(type $genericequals.GenericEquals.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__genericequals_GenericEquals__java_lang_Object (ref $function.$java.lang.Object__$genericequals.GenericEquals__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; GenericEquals(T value)

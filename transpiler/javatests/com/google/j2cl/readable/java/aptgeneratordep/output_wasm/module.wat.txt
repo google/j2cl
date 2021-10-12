@@ -35,18 +35,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for aptgeneratordep.Dummy [CLASS]
-(type $aptgeneratordep.Dummy (struct
- (field $vtable (ref $aptgeneratordep.Dummy.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $aptgeneratordep.Dummy (struct_subtype 
+ (field $vtable (ref $aptgeneratordep.Dummy.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $aptgeneratordep.Dummy.vtable (struct
+(type $aptgeneratordep.Dummy.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Dummy()
@@ -104,18 +104,18 @@
 (elem declare func $m_getClass__java_lang_Class@aptgeneratordep.Dummy)
 
 ;;; Code for aptgeneratordep.Foo [CLASS]
-(type $aptgeneratordep.Foo (struct
- (field $vtable (ref $aptgeneratordep.Foo.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $aptgeneratordep.Foo (struct_subtype 
+ (field $vtable (ref $aptgeneratordep.Foo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $aptgeneratordep.Foo.vtable (struct
+(type $aptgeneratordep.Foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Foo()

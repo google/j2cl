@@ -72,18 +72,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter [CLASS]
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter (struct
- (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter (struct_subtype 
+ (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable (struct
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NewInnerClassWithSameOuter()
@@ -141,20 +141,20 @@
 (elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter)
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.A [CLASS]
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (struct
- (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable)) (field $itable (ref $itable))
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (struct_subtype 
+ (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))))
- (extends $java.lang.Object)
+ (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
+  $java.lang.Object)
 )
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable (struct
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; A(NewInnerClassWithSameOuter $outer_this)
@@ -234,19 +234,19 @@
 (elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.B [CLASS]
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct
- (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)) (field $itable (ref $itable))
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct_subtype 
+ (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))))
- (extends $java.lang.Object)
+ (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
+  $java.lang.Object)
 )
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable (struct
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; B(NewInnerClassWithSameOuter $outer_this)
@@ -308,19 +308,19 @@
 (elem declare func $m_getClass__java_lang_Class@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B)
 
 ;;; Code for newinnerclasswithsameouter.NewInnerClassWithSameOuter.C [CLASS]
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct
- (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)) (field $itable (ref $itable))
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct_subtype 
+ (field $vtable (ref $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))))
- (extends $java.lang.Object)
+ (field $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C (mut (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter)))
+  $java.lang.Object)
 )
-(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable (struct
+(type $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; C(NewInnerClassWithSameOuter $outer_this)

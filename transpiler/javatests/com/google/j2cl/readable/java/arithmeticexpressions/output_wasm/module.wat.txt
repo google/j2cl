@@ -43,14 +43,15 @@
  (rtt.canon $itable)))
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions [CLASS]
-(type $arithmeticexpressions.ArithmeticExpressions (struct
- (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.vtable)) (field $itable (ref $itable))
+(type $arithmeticexpressions.ArithmeticExpressions (struct_subtype 
+ (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_bar__arithmeticexpressions_ArithmeticExpressions (mut i64))
- (field $f_intField__arithmeticexpressions_ArithmeticExpressions (mut i64)))
- (extends $java.lang.Object)
+ (field $f_intField__arithmeticexpressions_ArithmeticExpressions (mut i64))
+  $java.lang.Object)
 )
-(type $arithmeticexpressions.ArithmeticExpressions.vtable (struct
+(type $arithmeticexpressions.ArithmeticExpressions.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -60,8 +61,7 @@
  (field $m_testCompoundArray__void (ref $function.$java.lang.Object__$void))
  (field $m_testCompoundBoxedTypes__void (ref $function.$java.lang.Object__$void))
  (field $m_testExtendedOperands__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ArithmeticExpressions()
@@ -746,20 +746,20 @@
 (elem declare func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
 
 ;;; Code for arithmeticexpressions.ArithmeticExpressions.1Ref [CLASS]
-(type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct
- (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) (field $itable (ref $itable))
+(type $arithmeticexpressions.ArithmeticExpressions.1Ref (struct_subtype 
+ (field $vtable (ref $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $arithmeticexpressions.ArithmeticExpressions)))
- (field $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_field__arithmeticexpressions_ArithmeticExpressions_1Ref (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (struct
+(type $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Ref(ArithmeticExpressions $outer_this)

@@ -21,18 +21,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for importsfullyqualified.ImportsFullyQualified [CLASS]
-(type $importsfullyqualified.ImportsFullyQualified (struct
- (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $importsfullyqualified.ImportsFullyQualified (struct_subtype 
+ (field $vtable (ref $importsfullyqualified.ImportsFullyQualified.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $importsfullyqualified.ImportsFullyQualified.vtable (struct
+(type $importsfullyqualified.ImportsFullyQualified.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ImportsFullyQualified()

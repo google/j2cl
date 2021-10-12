@@ -133,19 +133,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for foreachstatement.ForEachStatement [CLASS]
-(type $foreachstatement.ForEachStatement (struct
- (field $vtable (ref $foreachstatement.ForEachStatement.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $foreachstatement.ForEachStatement (struct_subtype 
+ (field $vtable (ref $foreachstatement.ForEachStatement.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $foreachstatement.ForEachStatement.vtable (struct
+(type $foreachstatement.ForEachStatement.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__java_lang_Iterable__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ForEachStatement()
@@ -399,8 +399,9 @@
 (elem declare func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement)
 
 ;;; Code for foreachstatement.ForEachStatement.Exception1 [CLASS]
-(type $foreachstatement.ForEachStatement.Exception1 (struct
- (field $vtable (ref $foreachstatement.ForEachStatement.Exception1.vtable)) (field $itable (ref $itable))
+(type $foreachstatement.ForEachStatement.Exception1 (struct_subtype 
+ (field $vtable (ref $foreachstatement.ForEachStatement.Exception1.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -408,10 +409,10 @@
  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
- (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Exception)
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
+  $java.lang.Exception)
 )
-(type $foreachstatement.ForEachStatement.Exception1.vtable (struct
+(type $foreachstatement.ForEachStatement.Exception1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -432,8 +433,7 @@
  (field $m_iterator__java_util_Iterator (ref $function.$java.lang.Object__$java.lang.Object))
  (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_spliterator__java_util_Spliterator (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Exception.vtable)
+  $java.lang.Exception.vtable)
 )
 
 ;;; Exception1()
@@ -542,8 +542,9 @@
 (elem declare func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception1)
 
 ;;; Code for foreachstatement.ForEachStatement.Exception2 [CLASS]
-(type $foreachstatement.ForEachStatement.Exception2 (struct
- (field $vtable (ref $foreachstatement.ForEachStatement.Exception2.vtable)) (field $itable (ref $itable))
+(type $foreachstatement.ForEachStatement.Exception2 (struct_subtype 
+ (field $vtable (ref $foreachstatement.ForEachStatement.Exception2.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -551,10 +552,10 @@
  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
- (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Exception)
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
+  $java.lang.Exception)
 )
-(type $foreachstatement.ForEachStatement.Exception2.vtable (struct
+(type $foreachstatement.ForEachStatement.Exception2.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -575,8 +576,7 @@
  (field $m_iterator__java_util_Iterator (ref $function.$java.lang.Object__$java.lang.Object))
  (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_spliterator__java_util_Spliterator (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Exception.vtable)
+  $java.lang.Exception.vtable)
 )
 
 ;;; Exception2()
@@ -685,12 +685,13 @@
 (elem declare func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception2)
 
 ;;; Code for foreachstatement.ForEachStatement.IterableReturningTypeVariable [CLASS]
-(type $foreachstatement.ForEachStatement.IterableReturningTypeVariable (struct
- (field $vtable (ref $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $foreachstatement.ForEachStatement.IterableReturningTypeVariable (struct_subtype 
+ (field $vtable (ref $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable (struct
+(type $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -698,8 +699,7 @@
  (field $m_iterator__java_util_Iterator (ref $function.$java.lang.Object__$java.lang.Object))
  (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_spliterator__java_util_Spliterator (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; IterableReturningTypeVariable()

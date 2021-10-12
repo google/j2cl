@@ -35,19 +35,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for supercallnondefault.Parent [CLASS]
-(type $supercallnondefault.Parent (struct
- (field $vtable (ref $supercallnondefault.Parent.vtable)) (field $itable (ref $itable))
+(type $supercallnondefault.Parent (struct_subtype 
+ (field $vtable (ref $supercallnondefault.Parent.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__supercallnondefault_Parent (mut i32)))
- (extends $java.lang.Object)
+ (field $f_field__supercallnondefault_Parent (mut i32))
+  $java.lang.Object)
 )
-(type $supercallnondefault.Parent.vtable (struct
+(type $supercallnondefault.Parent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Parent(int f)
@@ -109,19 +109,19 @@
 (elem declare func $m_getClass__java_lang_Class@supercallnondefault.Parent)
 
 ;;; Code for supercallnondefault.Child [CLASS]
-(type $supercallnondefault.Child (struct
- (field $vtable (ref $supercallnondefault.Child.vtable)) (field $itable (ref $itable))
+(type $supercallnondefault.Child (struct_subtype 
+ (field $vtable (ref $supercallnondefault.Child.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__supercallnondefault_Parent (mut i32)))
- (extends $supercallnondefault.Parent)
+ (field $f_field__supercallnondefault_Parent (mut i32))
+  $supercallnondefault.Parent)
 )
-(type $supercallnondefault.Child.vtable (struct
+(type $supercallnondefault.Child.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $supercallnondefault.Parent.vtable)
+  $supercallnondefault.Parent.vtable)
 )
 
 ;;; Child(int a)

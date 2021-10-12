@@ -20,14 +20,15 @@
  (rtt.canon $itable)))
 
 ;;; Code for simplelongs.SimpleLongs [CLASS]
-(type $simplelongs.SimpleLongs (struct
- (field $vtable (ref $simplelongs.SimpleLongs.vtable)) (field $itable (ref $itable))
+(type $simplelongs.SimpleLongs (struct_subtype 
+ (field $vtable (ref $simplelongs.SimpleLongs.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_foo__simplelongs_SimpleLongs (mut i64))
- (field $f_sideEffect__simplelongs_SimpleLongs_ (mut i32)))
- (extends $java.lang.Object)
+ (field $f_sideEffect__simplelongs_SimpleLongs_ (mut i32))
+  $java.lang.Object)
 )
-(type $simplelongs.SimpleLongs.vtable (struct
+(type $simplelongs.SimpleLongs.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -35,8 +36,7 @@
  (field $m_getBar__long (ref $function.$java.lang.Object__$long))
  (field $m_getWithSideEffect__simplelongs_SimpleLongs (ref $function.$java.lang.Object__$simplelongs.SimpleLongs))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; SimpleLongs()

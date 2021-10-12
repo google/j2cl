@@ -180,20 +180,20 @@
  (rtt.canon $itable)))
 
 ;;; Code for innerclassinheritance.ParentOuter [CLASS]
-(type $innerclassinheritance.ParentOuter (struct
- (field $vtable (ref $innerclassinheritance.ParentOuter.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.ParentOuter (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.ParentOuter.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_fieldInParentOuter__innerclassinheritance_ParentOuter (mut i32)))
- (extends $java.lang.Object)
+ (field $f_fieldInParentOuter__innerclassinheritance_ParentOuter (mut i32))
+  $java.lang.Object)
 )
-(type $innerclassinheritance.ParentOuter.vtable (struct
+(type $innerclassinheritance.ParentOuter.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_funInParentOuter__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ParentOuter()
@@ -263,20 +263,20 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.ParentOuter)
 
 ;;; Code for innerclassinheritance.ParentInner [CLASS]
-(type $innerclassinheritance.ParentInner (struct
- (field $vtable (ref $innerclassinheritance.ParentInner.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.ParentInner (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.ParentInner.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_fieldInParentInner__innerclassinheritance_ParentInner (mut i32)))
- (extends $java.lang.Object)
+ (field $f_fieldInParentInner__innerclassinheritance_ParentInner (mut i32))
+  $java.lang.Object)
 )
-(type $innerclassinheritance.ParentInner.vtable (struct
+(type $innerclassinheritance.ParentInner.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_funInParentInner__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ParentInner()
@@ -346,14 +346,15 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.ParentInner)
 
 ;;; Code for innerclassinheritance.ChildClass [CLASS]
-(type $innerclassinheritance.ChildClass (struct
- (field $vtable (ref $innerclassinheritance.ChildClass.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.ChildClass (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.ChildClass.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fieldInParentOuter__innerclassinheritance_ParentOuter (mut i32))
- (field $f_fieldInOuter__innerclassinheritance_ChildClass (mut i32)))
- (extends $innerclassinheritance.ParentOuter)
+ (field $f_fieldInOuter__innerclassinheritance_ChildClass (mut i32))
+  $innerclassinheritance.ParentOuter)
 )
-(type $innerclassinheritance.ChildClass.vtable (struct
+(type $innerclassinheritance.ChildClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -361,8 +362,7 @@
  (field $m_funInParentOuter__void (ref $function.$java.lang.Object__$void))
  (field $m_funInOuter__void (ref $function.$java.lang.Object__$void))
  (field $m_testLocalClass__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $innerclassinheritance.ParentOuter.vtable)
+  $innerclassinheritance.ParentOuter.vtable)
 )
 
 ;;; ChildClass()
@@ -453,15 +453,16 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.ChildClass)
 
 ;;; Code for innerclassinheritance.ChildClass.InnerClass [CLASS]
-(type $innerclassinheritance.ChildClass.InnerClass (struct
- (field $vtable (ref $innerclassinheritance.ChildClass.InnerClass.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.ChildClass.InnerClass (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.ChildClass.InnerClass.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fieldInParentInner__innerclassinheritance_ParentInner (mut i32))
  (field $$outer_this__innerclassinheritance_ChildClass_InnerClass (mut (ref null $innerclassinheritance.ChildClass)))
- (field $f_fieldInInner__innerclassinheritance_ChildClass_InnerClass (mut i32)))
- (extends $innerclassinheritance.ParentInner)
+ (field $f_fieldInInner__innerclassinheritance_ChildClass_InnerClass (mut i32))
+  $innerclassinheritance.ParentInner)
 )
-(type $innerclassinheritance.ChildClass.InnerClass.vtable (struct
+(type $innerclassinheritance.ChildClass.InnerClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -469,8 +470,7 @@
  (field $m_funInParentInner__void (ref $function.$java.lang.Object__$void))
  (field $m_funInInner__void (ref $function.$java.lang.Object__$void))
  (field $m_testInnerClass__int (ref $function.$java.lang.Object__$int))
- )
-  (extends $innerclassinheritance.ParentInner.vtable)
+  $innerclassinheritance.ParentInner.vtable)
 )
 
 ;;; InnerClass(ChildClass $outer_this)
@@ -609,16 +609,17 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.ChildClass.InnerClass)
 
 ;;; Code for innerclassinheritance.ChildClass.1LocalClass [CLASS]
-(type $innerclassinheritance.ChildClass.1LocalClass (struct
- (field $vtable (ref $innerclassinheritance.ChildClass.1LocalClass.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.ChildClass.1LocalClass (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.ChildClass.1LocalClass.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_fieldInParentOuter__innerclassinheritance_ParentOuter (mut i32))
  (field $f_fieldInOuter__innerclassinheritance_ChildClass (mut i32))
  (field $$outer_this__innerclassinheritance_ChildClass_1LocalClass (mut (ref null $innerclassinheritance.ChildClass)))
- (field $f_object__innerclassinheritance_ChildClass_1LocalClass (mut (ref null $java.lang.Object))))
- (extends $innerclassinheritance.ChildClass)
+ (field $f_object__innerclassinheritance_ChildClass_1LocalClass (mut (ref null $java.lang.Object)))
+  $innerclassinheritance.ChildClass)
 )
-(type $innerclassinheritance.ChildClass.1LocalClass.vtable (struct
+(type $innerclassinheritance.ChildClass.1LocalClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -627,8 +628,7 @@
  (field $m_funInOuter__void (ref $function.$java.lang.Object__$void))
  (field $m_testLocalClass__void (ref $function.$java.lang.Object__$void))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $innerclassinheritance.ChildClass.vtable)
+  $innerclassinheritance.ChildClass.vtable)
 )
 
 ;;; LocalClass(ChildClass $outer_this)
@@ -743,19 +743,19 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.ChildClass.1LocalClass)
 
 ;;; Code for innerclassinheritance.MultipleNestings [CLASS]
-(type $innerclassinheritance.MultipleNestings (struct
- (field $vtable (ref $innerclassinheritance.MultipleNestings.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $innerclassinheritance.MultipleNestings (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.MultipleNestings.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $innerclassinheritance.MultipleNestings.vtable (struct
+(type $innerclassinheritance.MultipleNestings.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_funInM__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; MultipleNestings()
@@ -825,20 +825,20 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings)
 
 ;;; Code for innerclassinheritance.MultipleNestings.Parent [CLASS]
-(type $innerclassinheritance.MultipleNestings.Parent (struct
- (field $vtable (ref $innerclassinheritance.MultipleNestings.Parent.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.MultipleNestings.Parent (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.MultipleNestings.Parent.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings))))
- (extends $java.lang.Object)
+ (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
+  $java.lang.Object)
 )
-(type $innerclassinheritance.MultipleNestings.Parent.vtable (struct
+(type $innerclassinheritance.MultipleNestings.Parent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_fun__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Parent(MultipleNestings $outer_this)
@@ -912,22 +912,22 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.Parent)
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [CLASS]
-(type $innerclassinheritance.MultipleNestings.InnerClass1 (struct
- (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.MultipleNestings.InnerClass1 (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
- (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1 (mut (ref null $innerclassinheritance.MultipleNestings))))
- (extends $innerclassinheritance.MultipleNestings.Parent)
+ (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1 (mut (ref null $innerclassinheritance.MultipleNestings)))
+  $innerclassinheritance.MultipleNestings.Parent)
 )
-(type $innerclassinheritance.MultipleNestings.InnerClass1.vtable (struct
+(type $innerclassinheritance.MultipleNestings.InnerClass1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_fun__void (ref $function.$java.lang.Object__$void))
  (field $m_funInI1__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $innerclassinheritance.MultipleNestings.Parent.vtable)
+  $innerclassinheritance.MultipleNestings.Parent.vtable)
 )
 
 ;;; InnerClass1(MultipleNestings $outer_this)
@@ -1001,14 +1001,15 @@
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1)
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [CLASS]
-(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct
- (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (field $itable (ref $itable))
+(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
- (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1))))
- (extends $innerclassinheritance.MultipleNestings.Parent)
+ (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1)))
+  $innerclassinheritance.MultipleNestings.Parent)
 )
-(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (struct
+(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -1016,8 +1017,7 @@
  (field $m_fun__void (ref $function.$java.lang.Object__$void))
  (field $m_funInI2__void (ref $function.$java.lang.Object__$void))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $innerclassinheritance.MultipleNestings.Parent.vtable)
+  $innerclassinheritance.MultipleNestings.Parent.vtable)
 )
 
 ;;; InnerClass2(InnerClass1 $outer_this)

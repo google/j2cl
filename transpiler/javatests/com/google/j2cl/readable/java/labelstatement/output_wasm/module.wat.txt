@@ -22,12 +22,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for labelstatement.LabeledStatement [CLASS]
-(type $labelstatement.LabeledStatement (struct
- (field $vtable (ref $labelstatement.LabeledStatement.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $labelstatement.LabeledStatement (struct_subtype 
+ (field $vtable (ref $labelstatement.LabeledStatement.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $labelstatement.LabeledStatement.vtable (struct
+(type $labelstatement.LabeledStatement.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -37,8 +38,7 @@
  (field $m_block__void (ref $function.$java.lang.Object__$void))
  (field $m_ifStatement__void (ref $function.$java.lang.Object__$void))
  (field $m_switchStatement__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; LabeledStatement()

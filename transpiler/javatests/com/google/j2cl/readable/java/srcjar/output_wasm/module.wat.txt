@@ -35,18 +35,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for srcjar.Foo [CLASS]
-(type $srcjar.Foo (struct
- (field $vtable (ref $srcjar.Foo.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $srcjar.Foo (struct_subtype 
+ (field $vtable (ref $srcjar.Foo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $srcjar.Foo.vtable (struct
+(type $srcjar.Foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Foo()
@@ -104,18 +104,18 @@
 (elem declare func $m_getClass__java_lang_Class@srcjar.Foo)
 
 ;;; Code for srcjar.Srcjar [CLASS]
-(type $srcjar.Srcjar (struct
- (field $vtable (ref $srcjar.Srcjar.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $srcjar.Srcjar (struct_subtype 
+ (field $vtable (ref $srcjar.Srcjar.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $srcjar.Srcjar.vtable (struct
+(type $srcjar.Srcjar.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Srcjar()

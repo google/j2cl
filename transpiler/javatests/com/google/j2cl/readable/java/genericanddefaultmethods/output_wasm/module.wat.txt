@@ -45,9 +45,9 @@
  (rtt.canon $itable)))
 
 ;;; Code for genericanddefaultmethods.InterfaceWithDefault [INTERFACE]
-(type $genericanddefaultmethods.InterfaceWithDefault.vtable (struct
+(type $genericanddefaultmethods.InterfaceWithDefault.vtable (struct_subtype 
  (field $m_foo__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
- )
+  data)
 )
 
 ;;; void InterfaceWithDefault.foo(String value)
@@ -103,19 +103,19 @@
 (elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.InterfaceWithDefault)
 
 ;;; Code for genericanddefaultmethods.GenericClass [CLASS]
-(type $genericanddefaultmethods.GenericClass (struct
- (field $vtable (ref $genericanddefaultmethods.GenericClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $genericanddefaultmethods.GenericClass (struct_subtype 
+ (field $vtable (ref $genericanddefaultmethods.GenericClass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $genericanddefaultmethods.GenericClass.vtable (struct
+(type $genericanddefaultmethods.GenericClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; GenericClass()
@@ -198,20 +198,20 @@
 (elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass)
 
 ;;; Code for genericanddefaultmethods.ConcreteClass [CLASS]
-(type $genericanddefaultmethods.ConcreteClass (struct
- (field $vtable (ref $genericanddefaultmethods.ConcreteClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $genericanddefaultmethods.GenericClass)
+(type $genericanddefaultmethods.ConcreteClass (struct_subtype 
+ (field $vtable (ref $genericanddefaultmethods.ConcreteClass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $genericanddefaultmethods.GenericClass)
 )
-(type $genericanddefaultmethods.ConcreteClass.vtable (struct
+(type $genericanddefaultmethods.ConcreteClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_foo__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
- )
-  (extends $genericanddefaultmethods.GenericClass.vtable)
+  $genericanddefaultmethods.GenericClass.vtable)
 )
 
 ;;; ConcreteClass()

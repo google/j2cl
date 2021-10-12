@@ -110,18 +110,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for collisions.goog [CLASS]
-(type $collisions.goog (struct
- (field $vtable (ref $collisions.goog.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $collisions.goog (struct_subtype 
+ (field $vtable (ref $collisions.goog.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $collisions.goog.vtable (struct
+(type $collisions.goog.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; goog()
@@ -179,18 +179,18 @@
 (elem declare func $m_getClass__java_lang_Class@collisions.goog)
 
 ;;; Code for collisions.Blah [CLASS]
-(type $collisions.Blah (struct
- (field $vtable (ref $collisions.Blah.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $collisions.Blah (struct_subtype 
+ (field $vtable (ref $collisions.Blah.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $collisions.Blah.vtable (struct
+(type $collisions.Blah.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Blah()
@@ -257,18 +257,18 @@
 (elem declare func $m_getClass__java_lang_Class@collisions.Blah)
 
 ;;; Code for collisions.foo [CLASS]
-(type $collisions.foo (struct
- (field $vtable (ref $collisions.foo.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $collisions.foo (struct_subtype 
+ (field $vtable (ref $collisions.foo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $collisions.foo.vtable (struct
+(type $collisions.foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; foo()
@@ -326,18 +326,18 @@
 (elem declare func $m_getClass__java_lang_Class@collisions.foo)
 
 ;;; Code for collisions.bar [CLASS]
-(type $collisions.bar (struct
- (field $vtable (ref $collisions.bar.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $collisions.bar (struct_subtype 
+ (field $vtable (ref $collisions.bar.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $collisions.bar.vtable (struct
+(type $collisions.bar.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; bar()
@@ -437,19 +437,19 @@
 (elem declare func $m_getClass__java_lang_Class@collisions.bar)
 
 ;;; Code for collisions.Other [CLASS]
-(type $collisions.Other (struct
- (field $vtable (ref $collisions.Other.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $collisions.Other (struct_subtype 
+ (field $vtable (ref $collisions.Other.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $collisions.Other.vtable (struct
+(type $collisions.Other.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__java_lang_Object_$pp_collisions (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Other()
@@ -550,20 +550,20 @@
 (elem declare func $m_getClass__java_lang_Class@collisions.Other)
 
 ;;; Code for collisions.T [CLASS]
-(type $collisions.T (struct
- (field $vtable (ref $collisions.T.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $collisions.T (struct_subtype 
+ (field $vtable (ref $collisions.T.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $collisions.T.vtable (struct
+(type $collisions.T.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__java_lang_Number_$pp_collisions (ref $function.$java.lang.Object__$java.lang.Number))
  (field $m_n__java_lang_Number_$pp_collisions (ref $function.$java.lang.Object__$java.lang.Number))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; T()

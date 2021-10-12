@@ -161,14 +161,15 @@
  (rtt.canon $itable)))
 
 ;;; Code for enums.Enum1 [ENUM]
-(type $enums.Enum1 (struct
- (field $vtable (ref $enums.Enum1.vtable)) (field $itable (ref $itable))
+(type $enums.Enum1 (struct_subtype 
+ (field $vtable (ref $enums.Enum1.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32)))
- (extends $java.lang.Enum)
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
+  $java.lang.Enum)
 )
-(type $enums.Enum1.vtable (struct
+(type $enums.Enum1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -178,8 +179,7 @@
  (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
  (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
  (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- )
-  (extends $java.lang.Enum.vtable)
+  $java.lang.Enum.vtable)
 )
 
 ;;; Enum1(String $name, int $ordinal)
@@ -297,15 +297,16 @@
 (elem declare func $m_getClass__java_lang_Class@enums.Enum1)
 
 ;;; Code for enums.Enum2 [ENUM]
-(type $enums.Enum2 (struct
- (field $vtable (ref $enums.Enum2.vtable)) (field $itable (ref $itable))
+(type $enums.Enum2 (struct_subtype 
+ (field $vtable (ref $enums.Enum2.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
- (field $f_foo__enums_Enum2 (mut i32)))
- (extends $java.lang.Enum)
+ (field $f_foo__enums_Enum2 (mut i32))
+  $java.lang.Enum)
 )
-(type $enums.Enum2.vtable (struct
+(type $enums.Enum2.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -315,8 +316,7 @@
  (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
  (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
  (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- )
-  (extends $java.lang.Enum.vtable)
+  $java.lang.Enum.vtable)
 )
 
 ;;; Enum2(String $name, int $ordinal, int foo)
@@ -543,15 +543,16 @@
 (elem declare func $m_getClass__java_lang_Class@enums.Enum2)
 
 ;;; Code for enums.Enum2.1 [CLASS]
-(type $enums.Enum2.1 (struct
- (field $vtable (ref $enums.Enum2.1.vtable)) (field $itable (ref $itable))
+(type $enums.Enum2.1 (struct_subtype 
+ (field $vtable (ref $enums.Enum2.1.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
  (field $f_ordinal__java_lang_Enum_ (mut i32))
- (field $f_foo__enums_Enum2 (mut i32)))
- (extends $enums.Enum2)
+ (field $f_foo__enums_Enum2 (mut i32))
+  $enums.Enum2)
 )
-(type $enums.Enum2.1.vtable (struct
+(type $enums.Enum2.1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -561,8 +562,7 @@
  (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
  (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
  (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- )
-  (extends $enums.Enum2.vtable)
+  $enums.Enum2.vtable)
 )
 
 ;;; <anonymous> extends Enum2(String $name, int $ordinal, int $_0)
@@ -623,14 +623,15 @@
 (elem declare func $m_getClass__java_lang_Class@enums.Enum2.1)
 
 ;;; Code for enums.Enum3 [ENUM]
-(type $enums.Enum3 (struct
- (field $vtable (ref $enums.Enum3.vtable)) (field $itable (ref $itable))
+(type $enums.Enum3 (struct_subtype 
+ (field $vtable (ref $enums.Enum3.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32)))
- (extends $java.lang.Enum)
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
+  $java.lang.Enum)
 )
-(type $enums.Enum3.vtable (struct
+(type $enums.Enum3.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -640,8 +641,7 @@
  (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
  (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
  (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- )
-  (extends $java.lang.Enum.vtable)
+  $java.lang.Enum.vtable)
 )
 
 ;;; Enum3(String $name, int $ordinal, Function<Integer, Integer> function)
@@ -756,12 +756,13 @@
 (elem declare func $m_getClass__java_lang_Class@enums.Enum3)
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [CLASS]
-(type $enums.Enum3.$LambdaImplementor$1 (struct
- (field $vtable (ref $enums.Enum3.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $enums.Enum3.$LambdaImplementor$1 (struct_subtype 
+ (field $vtable (ref $enums.Enum3.$LambdaImplementor$1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $enums.Enum3.$LambdaImplementor$1.vtable (struct
+(type $enums.Enum3.$LambdaImplementor$1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -769,8 +770,7 @@
  (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_andThen__java_util_function_Function__java_util_function_Function (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; $LambdaImplementor$1()

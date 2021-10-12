@@ -25,8 +25,8 @@
  (rtt.canon $itable)))
 
 ;;; Code for functiontype.Function [INTERFACE]
-(type $functiontype.Function.vtable (struct(field $unused (ref null data))
- )
+(type $functiontype.Function.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void Function.$clinit()
@@ -60,19 +60,19 @@
 (elem declare func $m_getClass__java_lang_Class@functiontype.Function)
 
 ;;; Code for functiontype.FunctionImpl [CLASS]
-(type $functiontype.FunctionImpl (struct
- (field $vtable (ref $functiontype.FunctionImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $functiontype.FunctionImpl (struct_subtype 
+ (field $vtable (ref $functiontype.FunctionImpl.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $functiontype.FunctionImpl.vtable (struct
+(type $functiontype.FunctionImpl.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__functiontype_Function__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; FunctionImpl()

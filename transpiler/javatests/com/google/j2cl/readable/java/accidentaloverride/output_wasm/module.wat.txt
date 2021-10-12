@@ -70,19 +70,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for accidentaloverride.Parent [CLASS]
-(type $accidentaloverride.Parent (struct
- (field $vtable (ref $accidentaloverride.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $accidentaloverride.Parent (struct_subtype 
+ (field $vtable (ref $accidentaloverride.Parent.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $accidentaloverride.Parent.vtable (struct
+(type $accidentaloverride.Parent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Parent()
@@ -153,9 +153,9 @@
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.Parent)
 
 ;;; Code for accidentaloverride.SuperInterface [INTERFACE]
-(type $accidentaloverride.SuperInterface.vtable (struct
+(type $accidentaloverride.SuperInterface.vtable (struct_subtype 
  (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
+  data)
 )
 
 ;;; void SuperInterface.$clinit()
@@ -189,12 +189,13 @@
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.SuperInterface)
 
 ;;; Code for accidentaloverride.AnotherAccidentalOverride [CLASS]
-(type $accidentaloverride.AnotherAccidentalOverride (struct
- (field $vtable (ref $accidentaloverride.AnotherAccidentalOverride.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $accidentaloverride.Parent)
+(type $accidentaloverride.AnotherAccidentalOverride (struct_subtype 
+ (field $vtable (ref $accidentaloverride.AnotherAccidentalOverride.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $accidentaloverride.Parent)
 )
-(type $accidentaloverride.AnotherAccidentalOverride.vtable (struct
+(type $accidentaloverride.AnotherAccidentalOverride.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -202,8 +203,7 @@
  (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
  (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_foo__java_lang_AssertionError__void (ref $function.$java.lang.Object__$java.lang.AssertionError__$void))
- )
-  (extends $accidentaloverride.Parent.vtable)
+  $accidentaloverride.Parent.vtable)
 )
 
 ;;; AnotherAccidentalOverride()
@@ -309,20 +309,20 @@
 (elem declare func $m_getClass__java_lang_Class@accidentaloverride.AnotherAccidentalOverride)
 
 ;;; Code for accidentaloverride.AccidentalOverride [CLASS]
-(type $accidentaloverride.AccidentalOverride (struct
- (field $vtable (ref $accidentaloverride.AccidentalOverride.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $accidentaloverride.Parent)
+(type $accidentaloverride.AccidentalOverride (struct_subtype 
+ (field $vtable (ref $accidentaloverride.AccidentalOverride.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $accidentaloverride.Parent)
 )
-(type $accidentaloverride.AccidentalOverride.vtable (struct
+(type $accidentaloverride.AccidentalOverride.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
  (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $accidentaloverride.Parent.vtable)
+  $accidentaloverride.Parent.vtable)
 )
 
 ;;; AccidentalOverride()

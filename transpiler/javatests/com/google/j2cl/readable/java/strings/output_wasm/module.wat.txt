@@ -36,22 +36,22 @@
  (rtt.canon $itable)))
 
 ;;; Code for strings.Strings [CLASS]
-(type $strings.Strings (struct
- (field $vtable (ref $strings.Strings.vtable)) (field $itable (ref $itable))
+(type $strings.Strings (struct_subtype 
+ (field $vtable (ref $strings.Strings.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_someString__strings_Strings_ (mut (ref null $java.lang.String)))
  (field $f_nonBmpChar__strings_Strings_ (mut (ref null $java.lang.String)))
- (field $f_wideColon__strings_Strings_ (mut (ref null $java.lang.String))))
- (extends $java.lang.Object)
+ (field $f_wideColon__strings_Strings_ (mut (ref null $java.lang.String)))
+  $java.lang.Object)
 )
-(type $strings.Strings.vtable (struct
+(type $strings.Strings.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Strings()
@@ -342,19 +342,19 @@
 (elem declare func $m_getClass__java_lang_Class@strings.Strings)
 
 ;;; Code for strings.Strings.StringHolder [CLASS]
-(type $strings.Strings.StringHolder (struct
- (field $vtable (ref $strings.Strings.StringHolder.vtable)) (field $itable (ref $itable))
+(type $strings.Strings.StringHolder (struct_subtype 
+ (field $vtable (ref $strings.Strings.StringHolder.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String))))
- (extends $java.lang.Object)
+ (field $f_s__strings_Strings_StringHolder (mut (ref null $java.lang.String)))
+  $java.lang.Object)
 )
-(type $strings.Strings.StringHolder.vtable (struct
+(type $strings.Strings.StringHolder.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; StringHolder()

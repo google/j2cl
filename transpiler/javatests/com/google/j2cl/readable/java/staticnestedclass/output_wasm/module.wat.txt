@@ -35,18 +35,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for staticnestedclass.StaticNestedClassParent [CLASS]
-(type $staticnestedclass.StaticNestedClassParent (struct
- (field $vtable (ref $staticnestedclass.StaticNestedClassParent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $staticnestedclass.StaticNestedClassParent (struct_subtype 
+ (field $vtable (ref $staticnestedclass.StaticNestedClassParent.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $staticnestedclass.StaticNestedClassParent.vtable (struct
+(type $staticnestedclass.StaticNestedClassParent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; StaticNestedClassParent()
@@ -104,18 +104,18 @@
 (elem declare func $m_getClass__java_lang_Class@staticnestedclass.StaticNestedClassParent)
 
 ;;; Code for staticnestedclass.StaticNestedClassParent.StaticNestedClass [CLASS]
-(type $staticnestedclass.StaticNestedClassParent.StaticNestedClass (struct
- (field $vtable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $staticnestedclass.StaticNestedClassParent.StaticNestedClass (struct_subtype 
+ (field $vtable (ref $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (struct
+(type $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; StaticNestedClass()

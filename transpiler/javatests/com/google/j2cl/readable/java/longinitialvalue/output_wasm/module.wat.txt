@@ -3,18 +3,18 @@
 (global $f_$initialized__longinitialvalue_LongInitialValue (mut i32) (i32.const 0))
 
 ;;; Code for longinitialvalue.LongInitialValue [CLASS]
-(type $longinitialvalue.LongInitialValue (struct
- (field $vtable (ref $longinitialvalue.LongInitialValue.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $longinitialvalue.LongInitialValue (struct_subtype 
+ (field $vtable (ref $longinitialvalue.LongInitialValue.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $longinitialvalue.LongInitialValue.vtable (struct
+(type $longinitialvalue.LongInitialValue.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; LongInitialValue()

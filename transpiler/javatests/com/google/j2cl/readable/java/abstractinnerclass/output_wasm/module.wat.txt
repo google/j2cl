@@ -26,18 +26,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for abstractinnerclass.InnerClasses [CLASS]
-(type $abstractinnerclass.InnerClasses (struct
- (field $vtable (ref $abstractinnerclass.InnerClasses.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $abstractinnerclass.InnerClasses (struct_subtype 
+ (field $vtable (ref $abstractinnerclass.InnerClasses.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $abstractinnerclass.InnerClasses.vtable (struct
+(type $abstractinnerclass.InnerClasses.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InnerClasses()
@@ -95,9 +95,9 @@
 (elem declare func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses)
 
 ;;; Code for abstractinnerclass.InnerClasses.A [INTERFACE]
-(type $abstractinnerclass.InnerClasses.A.vtable (struct
+(type $abstractinnerclass.InnerClasses.A.vtable (struct_subtype 
  (field $m_foo__void (ref $function.$java.lang.Object__$void))
- )
+  data)
 )
 
 ;;; void A.$clinit()
@@ -131,19 +131,19 @@
 (elem declare func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses.A)
 
 ;;; Code for abstractinnerclass.InnerClasses.B [CLASS]
-(type $abstractinnerclass.InnerClasses.B (struct
- (field $vtable (ref $abstractinnerclass.InnerClasses.B.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $abstractinnerclass.InnerClasses.B (struct_subtype 
+ (field $vtable (ref $abstractinnerclass.InnerClasses.B.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $abstractinnerclass.InnerClasses.B.vtable (struct
+(type $abstractinnerclass.InnerClasses.B.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_bar__void_$pp_abstractinnerclass (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; B()
@@ -202,20 +202,20 @@
 )
 
 ;;; Code for abstractinnerclass.InnerClasses.C [CLASS]
-(type $abstractinnerclass.InnerClasses.C (struct
- (field $vtable (ref $abstractinnerclass.InnerClasses.C.vtable)) (field $itable (ref $itable))
+(type $abstractinnerclass.InnerClasses.C (struct_subtype 
+ (field $vtable (ref $abstractinnerclass.InnerClasses.C.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__abstractinnerclass_InnerClasses_C (mut (ref null $abstractinnerclass.InnerClasses))))
- (extends $java.lang.Object)
+ (field $$outer_this__abstractinnerclass_InnerClasses_C (mut (ref null $abstractinnerclass.InnerClasses)))
+  $java.lang.Object)
 )
-(type $abstractinnerclass.InnerClasses.C.vtable (struct
+(type $abstractinnerclass.InnerClasses.C.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_bar__void_$pp_abstractinnerclass (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; C(InnerClasses $outer_this)

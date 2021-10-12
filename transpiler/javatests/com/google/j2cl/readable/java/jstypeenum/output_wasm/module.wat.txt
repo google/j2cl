@@ -34,14 +34,15 @@
  (rtt.canon $itable)))
 
 ;;; Code for jstypeenum.Color [ENUM]
-(type $jstypeenum.Color (struct
- (field $vtable (ref $jstypeenum.Color.vtable)) (field $itable (ref $itable))
+(type $jstypeenum.Color (struct_subtype 
+ (field $vtable (ref $jstypeenum.Color.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32)))
- (extends $java.lang.Enum)
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
+  $java.lang.Enum)
 )
-(type $jstypeenum.Color.vtable (struct
+(type $jstypeenum.Color.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -51,8 +52,7 @@
  (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
  (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
  (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- )
-  (extends $java.lang.Enum.vtable)
+  $java.lang.Enum.vtable)
 )
 
 ;;; Color(String $name, int $ordinal)

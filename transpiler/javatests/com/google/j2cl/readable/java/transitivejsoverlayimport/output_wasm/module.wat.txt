@@ -103,12 +103,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for transitivejsoverlayimport.Immediate [CLASS]
-(type $transitivejsoverlayimport.Immediate (struct
- (field $vtable (ref $transitivejsoverlayimport.Immediate.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $transitivejsoverlayimport.Transitive)
+(type $transitivejsoverlayimport.Immediate (struct_subtype 
+ (field $vtable (ref $transitivejsoverlayimport.Immediate.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $transitivejsoverlayimport.Transitive)
 )
-(type $transitivejsoverlayimport.Immediate.vtable (struct
+(type $transitivejsoverlayimport.Immediate.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -116,8 +117,7 @@
  (field $m_getJsProperty__int_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$int))
  (field $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$java.lang.String__$void))
  (field $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$void))
- )
-  (extends $transitivejsoverlayimport.Transitive.vtable)
+  $transitivejsoverlayimport.Transitive.vtable)
 )
 
 ;;; Immediate()
@@ -184,12 +184,13 @@
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.Immediate)
 
 ;;; Code for transitivejsoverlayimport.NonNativeUpper [CLASS]
-(type $transitivejsoverlayimport.NonNativeUpper (struct
- (field $vtable (ref $transitivejsoverlayimport.NonNativeUpper.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $transitivejsoverlayimport.Immediate)
+(type $transitivejsoverlayimport.NonNativeUpper (struct_subtype 
+ (field $vtable (ref $transitivejsoverlayimport.NonNativeUpper.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $transitivejsoverlayimport.Immediate)
 )
-(type $transitivejsoverlayimport.NonNativeUpper.vtable (struct
+(type $transitivejsoverlayimport.NonNativeUpper.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -198,8 +199,7 @@
  (field $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$java.lang.String__$void))
  (field $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$void))
  (field $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$void))
- )
-  (extends $transitivejsoverlayimport.Immediate.vtable)
+  $transitivejsoverlayimport.Immediate.vtable)
 )
 
 ;;; NonNativeUpper()
@@ -266,12 +266,13 @@
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.NonNativeUpper)
 
 ;;; Code for transitivejsoverlayimport.NonNativeLower [CLASS]
-(type $transitivejsoverlayimport.NonNativeLower (struct
- (field $vtable (ref $transitivejsoverlayimport.NonNativeLower.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $transitivejsoverlayimport.NonNativeUpper)
+(type $transitivejsoverlayimport.NonNativeLower (struct_subtype 
+ (field $vtable (ref $transitivejsoverlayimport.NonNativeLower.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $transitivejsoverlayimport.NonNativeUpper)
 )
-(type $transitivejsoverlayimport.NonNativeLower.vtable (struct
+(type $transitivejsoverlayimport.NonNativeLower.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -281,8 +282,7 @@
  (field $m_doImmediateInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$void))
  (field $m_doNonNativeUpperInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$void))
  (field $m_doNonNativeLowerInstanceMethod__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$void))
- )
-  (extends $transitivejsoverlayimport.NonNativeUpper.vtable)
+  $transitivejsoverlayimport.NonNativeUpper.vtable)
 )
 
 ;;; NonNativeLower()
@@ -352,20 +352,20 @@
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.NonNativeLower)
 
 ;;; Code for transitivejsoverlayimport.Transitive [CLASS]
-(type $transitivejsoverlayimport.Transitive (struct
- (field $vtable (ref $transitivejsoverlayimport.Transitive.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $transitivejsoverlayimport.Transitive (struct_subtype 
+ (field $vtable (ref $transitivejsoverlayimport.Transitive.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $transitivejsoverlayimport.Transitive.vtable (struct
+(type $transitivejsoverlayimport.Transitive.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_getJsProperty__int_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$int))
  (field $m_doTransitiveInstanceMethod__java_lang_String__void_$pp_transitivejsoverlayimport (ref $function.$java.lang.Object__$java.lang.String__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Transitive()
@@ -450,18 +450,18 @@
 (elem declare func $m_getClass__java_lang_Class@transitivejsoverlayimport.Transitive)
 
 ;;; Code for transitivejsoverlayimport.Main [CLASS]
-(type $transitivejsoverlayimport.Main (struct
- (field $vtable (ref $transitivejsoverlayimport.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $transitivejsoverlayimport.Main (struct_subtype 
+ (field $vtable (ref $transitivejsoverlayimport.Main.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $transitivejsoverlayimport.Main.vtable (struct
+(type $transitivejsoverlayimport.Main.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Main()

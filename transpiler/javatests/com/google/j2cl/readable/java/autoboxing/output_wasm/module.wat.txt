@@ -102,12 +102,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for autoboxing.AutoBoxing [CLASS]
-(type $autoboxing.AutoBoxing (struct
- (field $vtable (ref $autoboxing.AutoBoxing.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $autoboxing.AutoBoxing (struct_subtype 
+ (field $vtable (ref $autoboxing.AutoBoxing.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $autoboxing.AutoBoxing.vtable (struct
+(type $autoboxing.AutoBoxing.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -140,8 +141,7 @@
  (field $m_testUnboxingEquality__void (ref $function.$java.lang.Object__$void))
  (field $m_testAssertStatement__void (ref $function.$java.lang.Object__$void))
  (field $m_testUnbox_withCast__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; AutoBoxing()
@@ -1400,19 +1400,19 @@
 (elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing)
 
 ;;; Code for autoboxing.AutoBoxing.1Local [CLASS]
-(type $autoboxing.AutoBoxing.1Local (struct
- (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $autoboxing.AutoBoxing.1Local (struct_subtype 
+ (field $vtable (ref $autoboxing.AutoBoxing.1Local.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $autoboxing.AutoBoxing.1Local.vtable (struct
+(type $autoboxing.AutoBoxing.1Local.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.$java.lang.Object__$java.lang.Long__$long))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Local()
@@ -1487,19 +1487,19 @@
 (elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.1Local)
 
 ;;; Code for autoboxing.AutoBoxing.2Local [CLASS]
-(type $autoboxing.AutoBoxing.2Local (struct
- (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $autoboxing.AutoBoxing.2Local (struct_subtype 
+ (field $vtable (ref $autoboxing.AutoBoxing.2Local.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $autoboxing.AutoBoxing.2Local.vtable (struct
+(type $autoboxing.AutoBoxing.2Local.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_toLong__java_lang_Long__long_$pp_autoboxing (ref $function.$java.lang.Object__$java.lang.Long__$long))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Local()
@@ -1574,20 +1574,20 @@
 (elem declare func $m_getClass__java_lang_Class@autoboxing.AutoBoxing.2Local)
 
 ;;; Code for autoboxing.AutoBoxing.1Supplier [CLASS]
-(type $autoboxing.AutoBoxing.1Supplier (struct
- (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable)) (field $itable (ref $itable))
+(type $autoboxing.AutoBoxing.1Supplier (struct_subtype 
+ (field $vtable (ref $autoboxing.AutoBoxing.1Supplier.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__autoboxing_AutoBoxing_1Supplier (mut (ref null $autoboxing.AutoBoxing))))
- (extends $java.lang.Object)
+ (field $$outer_this__autoboxing_AutoBoxing_1Supplier (mut (ref null $autoboxing.AutoBoxing)))
+  $java.lang.Object)
 )
-(type $autoboxing.AutoBoxing.1Supplier.vtable (struct
+(type $autoboxing.AutoBoxing.1Supplier.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_get__java_lang_Object_$pp_autoboxing (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Supplier(AutoBoxing $outer_this)

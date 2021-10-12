@@ -145,13 +145,14 @@
  (rtt.canon $itable)))
 
 ;;; Code for jsoptional.Main [CLASS]
-(type $jsoptional.Main (struct
- (field $vtable (ref $jsoptional.Main.vtable)) (field $itable (ref $itable))
+(type $jsoptional.Main (struct_subtype 
+ (field $vtable (ref $jsoptional.Main.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f__jsoptional_Main (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_f__jsoptional_Main (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $jsoptional.Main.vtable (struct
+(type $jsoptional.Main.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -160,8 +161,7 @@
  (field $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Double__$javaemul.internal.WasmArray.OfObject__$void))
  (field $m_testFunction__jsoptional_Main_Function__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_testOptionalFunction__jsoptional_Main_Function__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; void Main.method1(int i1, Double d, Integer i)
@@ -290,9 +290,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main)
 
 ;;; Code for jsoptional.Main.Function [INTERFACE]
-(type $jsoptional.Main.Function.vtable (struct
+(type $jsoptional.Main.Function.vtable (struct_subtype 
  (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
- )
+  data)
 )
 
 ;;; void Function.$clinit()
@@ -326,19 +326,19 @@
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.Function)
 
 ;;; Code for jsoptional.Main.AFunction [CLASS]
-(type $jsoptional.Main.AFunction (struct
- (field $vtable (ref $jsoptional.Main.AFunction.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsoptional.Main.AFunction (struct_subtype 
+ (field $vtable (ref $jsoptional.Main.AFunction.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsoptional.Main.AFunction.vtable (struct
+(type $jsoptional.Main.AFunction.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; AFunction()
@@ -414,9 +414,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.AFunction)
 
 ;;; Code for jsoptional.Main.I [INTERFACE]
-(type $jsoptional.Main.I.vtable (struct
+(type $jsoptional.Main.I.vtable (struct_subtype 
  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- )
+  data)
 )
 
 ;;; void I.$clinit()
@@ -450,20 +450,20 @@
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.I)
 
 ;;; Code for jsoptional.Main.TemplatedSubtype [CLASS]
-(type $jsoptional.Main.TemplatedSubtype (struct
- (field $vtable (ref $jsoptional.Main.TemplatedSubtype.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsoptional.Main.TemplatedSubtype (struct_subtype 
+ (field $vtable (ref $jsoptional.Main.TemplatedSubtype.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsoptional.Main.TemplatedSubtype.vtable (struct
+(type $jsoptional.Main.TemplatedSubtype.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__java_lang_String__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$void))
  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; TemplatedSubtype()
@@ -552,21 +552,21 @@
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.TemplatedSubtype)
 
 ;;; Code for jsoptional.Main.SpecializedSubtype [CLASS]
-(type $jsoptional.Main.SpecializedSubtype (struct
- (field $vtable (ref $jsoptional.Main.SpecializedSubtype.vtable)) (field $itable (ref $itable))
+(type $jsoptional.Main.SpecializedSubtype (struct_subtype 
+ (field $vtable (ref $jsoptional.Main.SpecializedSubtype.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__jsoptional_Main_SpecializedSubtype (mut (ref null $jsoptional.Main))))
- (extends $java.lang.Object)
+ (field $$outer_this__jsoptional_Main_SpecializedSubtype (mut (ref null $jsoptional.Main)))
+  $java.lang.Object)
 )
-(type $jsoptional.Main.SpecializedSubtype.vtable (struct
+(type $jsoptional.Main.SpecializedSubtype.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__java_lang_String__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$void))
  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; SpecializedSubtype(Main $outer_this, Object a)
@@ -660,20 +660,20 @@
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.SpecializedSubtype)
 
 ;;; Code for jsoptional.Main.NonJsTypeSubtype [CLASS]
-(type $jsoptional.Main.NonJsTypeSubtype (struct
- (field $vtable (ref $jsoptional.Main.NonJsTypeSubtype.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsoptional.Main.NonJsTypeSubtype (struct_subtype 
+ (field $vtable (ref $jsoptional.Main.NonJsTypeSubtype.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsoptional.Main.NonJsTypeSubtype.vtable (struct
+(type $jsoptional.Main.NonJsTypeSubtype.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__java_lang_String__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$void))
  (field $m_m__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NonJsTypeSubtype()
@@ -762,19 +762,19 @@
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.NonJsTypeSubtype)
 
 ;;; Code for jsoptional.Main.$LambdaImplementor$1 [CLASS]
-(type $jsoptional.Main.$LambdaImplementor$1 (struct
- (field $vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsoptional.Main.$LambdaImplementor$1 (struct_subtype 
+ (field $vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsoptional.Main.$LambdaImplementor$1.vtable (struct
+(type $jsoptional.Main.$LambdaImplementor$1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; $LambdaImplementor$1()

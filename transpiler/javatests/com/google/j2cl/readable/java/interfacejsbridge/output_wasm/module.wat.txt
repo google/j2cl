@@ -58,9 +58,9 @@
  (rtt.canon $itable)))
 
 ;;; Code for interfacejsbridge.MyJsInterface [INTERFACE]
-(type $interfacejsbridge.MyJsInterface.vtable (struct
+(type $interfacejsbridge.MyJsInterface.vtable (struct_subtype 
  (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
- )
+  data)
 )
 
 ;;; void MyJsInterface.$clinit()
@@ -94,9 +94,9 @@
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.MyJsInterface)
 
 ;;; Code for interfacejsbridge.MyInterface [INTERFACE]
-(type $interfacejsbridge.MyInterface.vtable (struct
+(type $interfacejsbridge.MyInterface.vtable (struct_subtype 
  (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
- )
+  data)
 )
 
 ;;; void MyInterface.$clinit()
@@ -130,9 +130,9 @@
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.MyInterface)
 
 ;;; Code for interfacejsbridge.SubInterface [INTERFACE]
-(type $interfacejsbridge.SubInterface.vtable (struct
+(type $interfacejsbridge.SubInterface.vtable (struct_subtype 
  (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
- )
+  data)
 )
 
 ;;; void SubInterface.$clinit()
@@ -166,19 +166,19 @@
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.SubInterface)
 
 ;;; Code for interfacejsbridge.InterfaceImpl [CLASS]
-(type $interfacejsbridge.InterfaceImpl (struct
- (field $vtable (ref $interfacejsbridge.InterfaceImpl.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $interfacejsbridge.InterfaceImpl (struct_subtype 
+ (field $vtable (ref $interfacejsbridge.InterfaceImpl.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $interfacejsbridge.InterfaceImpl.vtable (struct
+(type $interfacejsbridge.InterfaceImpl.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InterfaceImpl()
@@ -253,19 +253,19 @@
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl)
 
 ;;; Code for interfacejsbridge.Main [CLASS]
-(type $interfacejsbridge.Main (struct
- (field $vtable (ref $interfacejsbridge.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $interfacejsbridge.Main (struct_subtype 
+ (field $vtable (ref $interfacejsbridge.Main.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $interfacejsbridge.Main.vtable (struct
+(type $interfacejsbridge.Main.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Main()

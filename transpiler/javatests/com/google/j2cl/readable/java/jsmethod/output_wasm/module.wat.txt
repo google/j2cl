@@ -48,19 +48,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for jsmethod.JsMethodExample [CLASS]
-(type $jsmethod.JsMethodExample (struct
- (field $vtable (ref $jsmethod.JsMethodExample.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsmethod.JsMethodExample (struct_subtype 
+ (field $vtable (ref $jsmethod.JsMethodExample.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsmethod.JsMethodExample.vtable (struct
+(type $jsmethod.JsMethodExample.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_testMethod__java_util_ArrayList (ref $function.$java.lang.Object__$java.util.ArrayList))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; JsMethodExample()
@@ -151,19 +151,19 @@
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample)
 
 ;;; Code for jsmethod.JsMethodExample.Base [CLASS]
-(type $jsmethod.JsMethodExample.Base (struct
- (field $vtable (ref $jsmethod.JsMethodExample.Base.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsmethod.JsMethodExample.Base (struct_subtype 
+ (field $vtable (ref $jsmethod.JsMethodExample.Base.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsmethod.JsMethodExample.Base.vtable (struct
+(type $jsmethod.JsMethodExample.Base.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Base()
@@ -220,9 +220,9 @@
 )
 
 ;;; Code for jsmethod.JsMethodExample.I [INTERFACE]
-(type $jsmethod.JsMethodExample.I.vtable (struct
+(type $jsmethod.JsMethodExample.I.vtable (struct_subtype 
  (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
- )
+  data)
 )
 
 ;;; void I.$clinit()
@@ -256,20 +256,20 @@
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.I)
 
 ;;; Code for jsmethod.JsMethodExample.Sub [CLASS]
-(type $jsmethod.JsMethodExample.Sub (struct
- (field $vtable (ref $jsmethod.JsMethodExample.Sub.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $jsmethod.JsMethodExample.Base)
+(type $jsmethod.JsMethodExample.Sub (struct_subtype 
+ (field $vtable (ref $jsmethod.JsMethodExample.Sub.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $jsmethod.JsMethodExample.Base)
 )
-(type $jsmethod.JsMethodExample.Sub.vtable (struct
+(type $jsmethod.JsMethodExample.Sub.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
  (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
- )
-  (extends $jsmethod.JsMethodExample.Base.vtable)
+  $jsmethod.JsMethodExample.Base.vtable)
 )
 
 ;;; Sub()

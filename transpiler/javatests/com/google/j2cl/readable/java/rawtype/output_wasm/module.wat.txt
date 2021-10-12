@@ -43,19 +43,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for rawtype.RawType [CLASS]
-(type $rawtype.RawType (struct
- (field $vtable (ref $rawtype.RawType.vtable)) (field $itable (ref $itable))
+(type $rawtype.RawType (struct_subtype 
+ (field $vtable (ref $rawtype.RawType.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_c__rawtype_RawType (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_c__rawtype_RawType (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $rawtype.RawType.vtable (struct
+(type $rawtype.RawType.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; RawType()
@@ -113,9 +113,9 @@
 (elem declare func $m_getClass__java_lang_Class@rawtype.RawType)
 
 ;;; Code for rawtype.RawType.I [INTERFACE]
-(type $rawtype.RawType.I.vtable (struct
+(type $rawtype.RawType.I.vtable (struct_subtype 
  (field $m_f__rawtype_RawType__void (ref $function.$java.lang.Object__$rawtype.RawType__$void))
- )
+  data)
 )
 
 ;;; void I.f(T t)
@@ -159,19 +159,19 @@
 (elem declare func $m_getClass__java_lang_Class@rawtype.RawType.I)
 
 ;;; Code for rawtype.RawType.RawSubclass [CLASS]
-(type $rawtype.RawType.RawSubclass (struct
- (field $vtable (ref $rawtype.RawType.RawSubclass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $rawtype.RawType.RawSubclass (struct_subtype 
+ (field $vtable (ref $rawtype.RawType.RawSubclass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $rawtype.RawType.RawSubclass.vtable (struct
+(type $rawtype.RawType.RawSubclass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_f__rawtype_RawType__void (ref $function.$java.lang.Object__$rawtype.RawType__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; RawSubclass()

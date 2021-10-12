@@ -28,16 +28,17 @@
  (rtt.canon $itable)))
 
 ;;; Code for jstype.SomeJsType [CLASS]
-(type $jstype.SomeJsType (struct
- (field $vtable (ref $jstype.SomeJsType.vtable)) (field $itable (ref $itable))
+(type $jstype.SomeJsType (struct_subtype 
+ (field $vtable (ref $jstype.SomeJsType.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_publicField__jstype_SomeJsType (mut i32))
  (field $f_privateField__jstype_SomeJsType_ (mut i32))
  (field $f_packageField__jstype_SomeJsType (mut i32))
- (field $f_protectedField__jstype_SomeJsType (mut i32)))
- (extends $java.lang.Object)
+ (field $f_protectedField__jstype_SomeJsType (mut i32))
+  $java.lang.Object)
 )
-(type $jstype.SomeJsType.vtable (struct
+(type $jstype.SomeJsType.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -47,8 +48,7 @@
  (field $m_protectedMethod__void (ref $function.$java.lang.Object__$void))
  (field $m_useFieldsAndMethods__void (ref $function.$java.lang.Object__$void))
  (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; SomeJsType()
@@ -204,8 +204,8 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType)
 
 ;;; Code for jstype.SomeJsType.Star [INTERFACE]
-(type $jstype.SomeJsType.Star.vtable (struct(field $unused (ref null data))
- )
+(type $jstype.SomeJsType.Star.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void Star.$clinit()
@@ -239,8 +239,8 @@
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Star)
 
 ;;; Code for jstype.SomeJsType.Wildcard [INTERFACE]
-(type $jstype.SomeJsType.Wildcard.vtable (struct(field $unused (ref null data))
- )
+(type $jstype.SomeJsType.Wildcard.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void Wildcard.$clinit()

@@ -80,18 +80,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for jsproperties.Foo [CLASS]
-(type $jsproperties.Foo (struct
- (field $vtable (ref $jsproperties.Foo.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsproperties.Foo (struct_subtype 
+ (field $vtable (ref $jsproperties.Foo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsproperties.Foo.vtable (struct
+(type $jsproperties.Foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Foo()
@@ -205,13 +205,14 @@
 (elem declare func $m_getClass__java_lang_Class@jsproperties.Foo)
 
 ;;; Code for jsproperties.Bar [CLASS]
-(type $jsproperties.Bar (struct
- (field $vtable (ref $jsproperties.Bar.vtable)) (field $itable (ref $itable))
+(type $jsproperties.Bar (struct_subtype 
+ (field $vtable (ref $jsproperties.Bar.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_f__jsproperties_Bar_ (mut i32)))
- (extends $java.lang.Object)
+ (field $f_f__jsproperties_Bar_ (mut i32))
+  $java.lang.Object)
 )
-(type $jsproperties.Bar.vtable (struct
+(type $jsproperties.Bar.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -220,8 +221,7 @@
  (field $m_setA__int__void (ref $function.$java.lang.Object__$int__$void))
  (field $m_getB__int (ref $function.$java.lang.Object__$int))
  (field $m_setB__int__void (ref $function.$java.lang.Object__$int__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Bar()
@@ -343,19 +343,19 @@
 (elem declare func $m_getClass__java_lang_Class@jsproperties.Bar)
 
 ;;; Code for jsproperties.NativeFoo [CLASS]
-(type $jsproperties.NativeFoo (struct
- (field $vtable (ref $jsproperties.NativeFoo.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsproperties.NativeFoo (struct_subtype 
+ (field $vtable (ref $jsproperties.NativeFoo.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsproperties.NativeFoo.vtable (struct
+(type $jsproperties.NativeFoo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_getA__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NativeFoo()
@@ -432,12 +432,13 @@
 (elem declare func $m_getClass__java_lang_Class@jsproperties.NativeFoo)
 
 ;;; Code for jsproperties.Main [CLASS]
-(type $jsproperties.Main (struct
- (field $vtable (ref $jsproperties.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsproperties.Main (struct_subtype 
+ (field $vtable (ref $jsproperties.Main.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsproperties.Main.vtable (struct
+(type $jsproperties.Main.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -445,8 +446,7 @@
  (field $m_testNativeJsProperty__void (ref $function.$java.lang.Object__$void))
  (field $m_testStaticJsProperty__void (ref $function.$java.lang.Object__$void))
  (field $m_testInstanceJsProperty__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Main()

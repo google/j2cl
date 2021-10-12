@@ -35,19 +35,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor [CLASS]
-(type $innerclasswithconstructor.InnerClassWithConstructor (struct
- (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable)) (field $itable (ref $itable))
+(type $innerclasswithconstructor.InnerClassWithConstructor (struct_subtype 
+ (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_a__innerclasswithconstructor_InnerClassWithConstructor (mut i32)))
- (extends $java.lang.Object)
+ (field $f_a__innerclasswithconstructor_InnerClassWithConstructor (mut i32))
+  $java.lang.Object)
 )
-(type $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct
+(type $innerclasswithconstructor.InnerClassWithConstructor.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InnerClassWithConstructor()
@@ -105,20 +105,20 @@
 (elem declare func $m_getClass__java_lang_Class@innerclasswithconstructor.InnerClassWithConstructor)
 
 ;;; Code for innerclasswithconstructor.InnerClassWithConstructor.InnerClass [CLASS]
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (struct
- (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (field $itable (ref $itable))
+(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (struct_subtype 
+ (field $vtable (ref $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut (ref null $innerclasswithconstructor.InnerClassWithConstructor)))
- (field $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32)))
- (extends $java.lang.Object)
+ (field $f_b__innerclasswithconstructor_InnerClassWithConstructor_InnerClass (mut i32))
+  $java.lang.Object)
 )
-(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct
+(type $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InnerClass(InnerClassWithConstructor $outer_this, int b)

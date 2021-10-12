@@ -122,19 +122,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses [CLASS]
-(type $nestedlocalclasses.NestedLocalClasses (struct
- (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $nestedlocalclasses.NestedLocalClasses (struct_subtype 
+ (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $nestedlocalclasses.NestedLocalClasses.vtable (struct
+(type $nestedlocalclasses.NestedLocalClasses.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__int__void (ref $function.$java.lang.Object__$int__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NestedLocalClasses()
@@ -209,21 +209,21 @@
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass [CLASS]
-(type $nestedlocalclasses.NestedLocalClasses.1InnerClass (struct
- (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable)) (field $itable (ref $itable))
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass (struct_subtype 
+ (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestedlocalclasses_NestedLocalClasses_1InnerClass (mut (ref null $nestedlocalclasses.NestedLocalClasses)))
- (field $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass (mut i32)))
- (extends $java.lang.Object)
+ (field $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass (mut i32))
+  $java.lang.Object)
 )
-(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable (struct
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_fun__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InnerClass(NestedLocalClasses $outer_this, int $captured_localVar)
@@ -308,22 +308,22 @@
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass [CLASS]
-(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct
- (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) (field $itable (ref $itable))
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (struct_subtype 
+ (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
  (field $f_fieldInInnerInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut i32))
  (field $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut i32))
- (field $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut i32)))
- (extends $java.lang.Object)
+ (field $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1InnerInnerClass (mut i32))
+  $java.lang.Object)
 )
-(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable (struct
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InnerInnerClass(InnerClass $outer_this, int $captured_localVar, int $captured_localVarInInnerClass)
@@ -407,21 +407,21 @@
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal [CLASS]
-(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (struct
- (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable)) (field $itable (ref $itable))
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (struct_subtype 
+ (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (mut (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass)))
  (field $$captured_localVar__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (mut i32))
- (field $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (mut i32)))
- (extends $java.lang.Object)
+ (field $$captured_localVarInInnerClass__nestedlocalclasses_NestedLocalClasses_1InnerClass_1ClassIndirectlyCapturingLocal (mut i32))
+  $java.lang.Object)
 )
-(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable (struct
+(type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ClassIndirectlyCapturingLocal(InnerClass $outer_this, int $captured_localVar, int $captured_localVarInInnerClass)
@@ -505,9 +505,9 @@
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference [INTERFACE]
-(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.vtable (struct
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.vtable (struct_subtype 
  (field $m_foo__void (ref $function.$java.lang.Object__$void))
- )
+  data)
 )
 
 ;;; void InterfaceWithThisReference.foo()
@@ -553,20 +553,20 @@
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super [CLASS]
-(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (struct
- (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)) (field $itable (ref $itable))
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (struct_subtype 
+ (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable (struct
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Super(InterfaceWithThisReference $outer_this)
@@ -646,21 +646,21 @@
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 [CLASS]
-(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct
- (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)) (field $itable (ref $itable))
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (struct_subtype 
+ (field $vtable (ref $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1Super (mut (ref null $java.lang.Object)))
- (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (mut (ref null $java.lang.Object))))
- (extends $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
+ (field $$outer_this__nestedlocalclasses_NestedLocalClasses_InterfaceWithThisReference_1 (mut (ref null $java.lang.Object)))
+  $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
 )
-(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable (struct
+(type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)
+  $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)
 )
 
 ;;; <anonymous> extends Super(InterfaceWithThisReference $outer_this)

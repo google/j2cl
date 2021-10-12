@@ -37,19 +37,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for jsmethodoverride.Parent [CLASS]
-(type $jsmethodoverride.Parent (struct
- (field $vtable (ref $jsmethodoverride.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsmethodoverride.Parent (struct_subtype 
+ (field $vtable (ref $jsmethodoverride.Parent.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsmethodoverride.Parent.vtable (struct
+(type $jsmethodoverride.Parent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Parent()
@@ -119,19 +119,19 @@
 (elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Parent)
 
 ;;; Code for jsmethodoverride.Child [CLASS]
-(type $jsmethodoverride.Child (struct
- (field $vtable (ref $jsmethodoverride.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $jsmethodoverride.Parent)
+(type $jsmethodoverride.Child (struct_subtype 
+ (field $vtable (ref $jsmethodoverride.Child.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $jsmethodoverride.Parent)
 )
-(type $jsmethodoverride.Child.vtable (struct
+(type $jsmethodoverride.Child.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_foo__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $jsmethodoverride.Parent.vtable)
+  $jsmethodoverride.Parent.vtable)
 )
 
 ;;; Child()

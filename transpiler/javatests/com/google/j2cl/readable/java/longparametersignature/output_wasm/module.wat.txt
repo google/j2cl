@@ -18,19 +18,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for longparametersignature.LongParameterSignature [CLASS]
-(type $longparametersignature.LongParameterSignature (struct
- (field $vtable (ref $longparametersignature.LongParameterSignature.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $longparametersignature.LongParameterSignature (struct_subtype 
+ (field $vtable (ref $longparametersignature.LongParameterSignature.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $longparametersignature.LongParameterSignature.vtable (struct
+(type $longparametersignature.LongParameterSignature.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_main__long__void (ref $function.$java.lang.Object__$long__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; LongParameterSignature()

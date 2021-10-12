@@ -17,19 +17,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for instanceinitializers.InstanceInitializers [CLASS]
-(type $instanceinitializers.InstanceInitializers (struct
- (field $vtable (ref $instanceinitializers.InstanceInitializers.vtable)) (field $itable (ref $itable))
+(type $instanceinitializers.InstanceInitializers (struct_subtype 
+ (field $vtable (ref $instanceinitializers.InstanceInitializers.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_field__instanceinitializers_InstanceInitializers (mut i32)))
- (extends $java.lang.Object)
+ (field $f_field__instanceinitializers_InstanceInitializers (mut i32))
+  $java.lang.Object)
 )
-(type $instanceinitializers.InstanceInitializers.vtable (struct
+(type $instanceinitializers.InstanceInitializers.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; InstanceInitializers()

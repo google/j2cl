@@ -51,12 +51,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for trycatch.TryCatch [CLASS]
-(type $trycatch.TryCatch (struct
- (field $vtable (ref $trycatch.TryCatch.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $trycatch.TryCatch (struct_subtype 
+ (field $vtable (ref $trycatch.TryCatch.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $trycatch.TryCatch.vtable (struct
+(type $trycatch.TryCatch.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -71,8 +72,7 @@
  (field $m_testNestedTryCatch__void (ref $function.$java.lang.Object__$void))
  (field $m_testThrowGenerics__void (ref $function.$java.lang.Object__$void))
  (field $m_testThrowBoundGenerics__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; TryCatch()
@@ -734,19 +734,19 @@
 (elem declare func $m_getClass__java_lang_Class@trycatch.TryCatch)
 
 ;;; Code for trycatch.TryCatch.ClosableThing [CLASS]
-(type $trycatch.TryCatch.ClosableThing (struct
- (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $trycatch.TryCatch.ClosableThing (struct_subtype 
+ (field $vtable (ref $trycatch.TryCatch.ClosableThing.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $trycatch.TryCatch.ClosableThing.vtable (struct
+(type $trycatch.TryCatch.ClosableThing.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_close__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; ClosableThing()

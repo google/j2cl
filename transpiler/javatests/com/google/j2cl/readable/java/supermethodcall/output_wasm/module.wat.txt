@@ -70,12 +70,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for supermethodcall.GrandParent [CLASS]
-(type $supermethodcall.GrandParent (struct
- (field $vtable (ref $supermethodcall.GrandParent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $supermethodcall.GrandParent (struct_subtype 
+ (field $vtable (ref $supermethodcall.GrandParent.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $supermethodcall.GrandParent.vtable (struct
+(type $supermethodcall.GrandParent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -83,8 +84,7 @@
  (field $m_grandParentSimplest__void (ref $function.$java.lang.Object__$void))
  (field $m_grandParentWithParams__int__void (ref $function.$java.lang.Object__$int__$void))
  (field $m_grandParentWithChangingReturn__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; GrandParent()
@@ -183,12 +183,13 @@
 (elem declare func $m_getClass__java_lang_Class@supermethodcall.GrandParent)
 
 ;;; Code for supermethodcall.Parent [CLASS]
-(type $supermethodcall.Parent (struct
- (field $vtable (ref $supermethodcall.Parent.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $supermethodcall.GrandParent)
+(type $supermethodcall.Parent (struct_subtype 
+ (field $vtable (ref $supermethodcall.Parent.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $supermethodcall.GrandParent)
 )
-(type $supermethodcall.Parent.vtable (struct
+(type $supermethodcall.Parent.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -199,8 +200,7 @@
  (field $m_parentSimplest__void (ref $function.$java.lang.Object__$void))
  (field $m_parentWithParams__int__void (ref $function.$java.lang.Object__$int__$void))
  (field $m_parentWithChangingReturn__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- )
-  (extends $supermethodcall.GrandParent.vtable)
+  $supermethodcall.GrandParent.vtable)
 )
 
 ;;; Parent()
@@ -299,12 +299,13 @@
 (elem declare func $m_getClass__java_lang_Class@supermethodcall.Parent)
 
 ;;; Code for supermethodcall.Child [CLASS]
-(type $supermethodcall.Child (struct
- (field $vtable (ref $supermethodcall.Child.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $supermethodcall.Parent)
+(type $supermethodcall.Child (struct_subtype 
+ (field $vtable (ref $supermethodcall.Child.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $supermethodcall.Parent)
 )
-(type $supermethodcall.Child.vtable (struct
+(type $supermethodcall.Child.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -317,8 +318,7 @@
  (field $m_parentWithChangingReturn__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
  (field $m_parentWithChangingReturn__supermethodcall_Child (ref $function.$java.lang.Object__$supermethodcall.Child))
  (field $m_grandParentWithChangingReturn__supermethodcall_Child (ref $function.$java.lang.Object__$supermethodcall.Child))
- )
-  (extends $supermethodcall.Parent.vtable)
+  $supermethodcall.Parent.vtable)
 )
 
 ;;; Child()

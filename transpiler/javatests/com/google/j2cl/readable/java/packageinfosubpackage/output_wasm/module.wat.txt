@@ -53,19 +53,19 @@
  (rtt.canon $itable)))
 
 ;;; Code for packageinfosubpackage.Foo [CLASS]
-(type $packageinfosubpackage.Foo (struct
- (field $vtable (ref $packageinfosubpackage.Foo.vtable)) (field $itable (ref $itable))
+(type $packageinfosubpackage.Foo (struct_subtype 
+ (field $vtable (ref $packageinfosubpackage.Foo.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null $packageinfosubpackage.Foo.NativeBar))))
- (extends $java.lang.Object)
+ (field $f_nativeBar__packageinfosubpackage_Foo_ (mut (ref null $packageinfosubpackage.Foo.NativeBar)))
+  $java.lang.Object)
 )
-(type $packageinfosubpackage.Foo.vtable (struct
+(type $packageinfosubpackage.Foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Foo()
@@ -137,18 +137,18 @@
 (elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo)
 
 ;;; Code for packageinfosubpackage.Foo.NativeBar [CLASS]
-(type $packageinfosubpackage.Foo.NativeBar (struct
- (field $vtable (ref $packageinfosubpackage.Foo.NativeBar.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $packageinfosubpackage.Foo.NativeBar (struct_subtype 
+ (field $vtable (ref $packageinfosubpackage.Foo.NativeBar.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $packageinfosubpackage.Foo.NativeBar.vtable (struct
+(type $packageinfosubpackage.Foo.NativeBar.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NativeBar()
@@ -206,18 +206,18 @@
 (elem declare func $m_getClass__java_lang_Class@packageinfosubpackage.Foo.NativeBar)
 
 ;;; Code for packageinfosubpackage.subpackage.Bar [CLASS]
-(type $packageinfosubpackage.subpackage.Bar (struct
- (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $packageinfosubpackage.subpackage.Bar (struct_subtype 
+ (field $vtable (ref $packageinfosubpackage.subpackage.Bar.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $packageinfosubpackage.subpackage.Bar.vtable (struct
+(type $packageinfosubpackage.subpackage.Bar.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Bar()

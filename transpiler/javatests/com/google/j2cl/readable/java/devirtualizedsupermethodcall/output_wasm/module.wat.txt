@@ -64,12 +64,13 @@
  (rtt.canon $itable)))
 
 ;;; Code for devirtualizedsupermethodcall.SubNumber [CLASS]
-(type $devirtualizedsupermethodcall.SubNumber (struct
- (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Number)
+(type $devirtualizedsupermethodcall.SubNumber (struct_subtype 
+ (field $vtable (ref $devirtualizedsupermethodcall.SubNumber.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Number)
 )
-(type $devirtualizedsupermethodcall.SubNumber.vtable (struct
+(type $devirtualizedsupermethodcall.SubNumber.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -80,8 +81,7 @@
  (field $m_intValue__int (ref $function.$java.lang.Object__$int))
  (field $m_longValue__long (ref $function.$java.lang.Object__$long))
  (field $m_shortValue__short (ref $function.$java.lang.Object__$short))
- )
-  (extends $java.lang.Number.vtable)
+  $java.lang.Number.vtable)
 )
 
 ;;; SubNumber()
@@ -203,18 +203,18 @@
 (elem declare func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.SubNumber)
 
 ;;; Code for devirtualizedsupermethodcall.FooCallsSuperObjectMethod [CLASS]
-(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct
- (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (struct_subtype 
+ (field $vtable (ref $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct
+(type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; FooCallsSuperObjectMethod()
@@ -288,19 +288,19 @@
 (elem declare func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
 
 ;;; Code for devirtualizedsupermethodcall.Main [CLASS]
-(type $devirtualizedsupermethodcall.Main (struct
- (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $devirtualizedsupermethodcall.Main (struct_subtype 
+ (field $vtable (ref $devirtualizedsupermethodcall.Main.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $devirtualizedsupermethodcall.Main.vtable (struct
+(type $devirtualizedsupermethodcall.Main.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Main()

@@ -69,8 +69,9 @@
  (rtt.canon $itable)))
 
 ;;; Code for exception.MyException [CLASS]
-(type $exception.MyException (struct
- (field $vtable (ref $exception.MyException.vtable)) (field $itable (ref $itable))
+(type $exception.MyException (struct_subtype 
+ (field $vtable (ref $exception.MyException.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -78,10 +79,10 @@
  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
- (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Exception)
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
+  $java.lang.Exception)
 )
-(type $exception.MyException.vtable (struct
+(type $exception.MyException.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -99,8 +100,7 @@
  (field $m_printStackTrace__void (ref $function.$java.lang.Object__$void))
  (field $m_printStackTrace__java_io_PrintStream__void (ref $function.$java.lang.Object__$java.io.PrintStream__$void))
  (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- )
-  (extends $java.lang.Exception.vtable)
+  $java.lang.Exception.vtable)
 )
 
 ;;; MyException()
@@ -177,8 +177,9 @@
 (elem declare func $m_getClass__java_lang_Class@exception.MyException)
 
 ;;; Code for exception.MyJsException [CLASS]
-(type $exception.MyJsException (struct
- (field $vtable (ref $exception.MyJsException.vtable)) (field $itable (ref $itable))
+(type $exception.MyJsException (struct_subtype 
+ (field $vtable (ref $exception.MyJsException.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_detailMessage__java_lang_Throwable_ (mut (ref null $java.lang.String)))
  (field $f_cause__java_lang_Throwable_ (mut (ref null $java.lang.Throwable)))
@@ -186,10 +187,10 @@
  (field $f_stackTrace__java_lang_Throwable_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_disableSuppression__java_lang_Throwable_ (mut i8))
  (field $f_disableStackTrace__java_lang_Throwable_ (mut i8))
- (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Exception)
+ (field $f_backingJsObject__java_lang_Throwable_ (mut (ref null $java.lang.Object)))
+  $java.lang.Exception)
 )
-(type $exception.MyJsException.vtable (struct
+(type $exception.MyJsException.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -207,8 +208,7 @@
  (field $m_printStackTrace__void (ref $function.$java.lang.Object__$void))
  (field $m_printStackTrace__java_io_PrintStream__void (ref $function.$java.lang.Object__$java.io.PrintStream__$void))
  (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- )
-  (extends $java.lang.Exception.vtable)
+  $java.lang.Exception.vtable)
 )
 
 ;;; MyJsException()

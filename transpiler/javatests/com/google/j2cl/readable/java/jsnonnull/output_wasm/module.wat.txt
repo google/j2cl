@@ -147,8 +147,9 @@
  (rtt.canon $itable)))
 
 ;;; Code for jsnonnull.Main [CLASS]
-(type $jsnonnull.Main (struct
- (field $vtable (ref $jsnonnull.Main.vtable)) (field $itable (ref $itable))
+(type $jsnonnull.Main (struct_subtype 
+ (field $vtable (ref $jsnonnull.Main.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_f1__jsnonnull_Main_ (mut (ref null $java.lang.String)))
  (field $f_f2__jsnonnull_Main_ (mut (ref null $java.lang.String)))
@@ -159,10 +160,10 @@
  (field $f_f8__jsnonnull_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f9__jsnonnull_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
  (field $f_f10__jsnonnull_Main_ (mut (ref null $javaemul.internal.WasmArray.OfObject)))
- (field $f_f12__jsnonnull_Main_ (mut (ref null $java.lang.Object))))
- (extends $java.lang.Object)
+ (field $f_f12__jsnonnull_Main_ (mut (ref null $java.lang.Object)))
+  $java.lang.Object)
 )
-(type $jsnonnull.Main.vtable (struct
+(type $jsnonnull.Main.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -171,8 +172,7 @@
  (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
  (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String))
  (field $m_m4__jsnonnull_Main_MyFunction__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Main(String a)
@@ -352,9 +352,9 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main)
 
 ;;; Code for jsnonnull.Main.MyFunction [INTERFACE]
-(type $jsnonnull.Main.MyFunction.vtable (struct
+(type $jsnonnull.Main.MyFunction.vtable (struct_subtype 
  (field $m_x__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
- )
+  data)
 )
 
 ;;; void MyFunction.$clinit()
@@ -388,12 +388,13 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.MyFunction)
 
 ;;; Code for jsnonnull.Main.StringComparator [CLASS]
-(type $jsnonnull.Main.StringComparator (struct
- (field $vtable (ref $jsnonnull.Main.StringComparator.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsnonnull.Main.StringComparator (struct_subtype 
+ (field $vtable (ref $jsnonnull.Main.StringComparator.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsnonnull.Main.StringComparator.vtable (struct
+(type $jsnonnull.Main.StringComparator.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -407,8 +408,7 @@
  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; StringComparator()
@@ -624,12 +624,13 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.StringComparator)
 
 ;;; Code for jsnonnull.Main.NullableStringComparator [CLASS]
-(type $jsnonnull.Main.NullableStringComparator (struct
- (field $vtable (ref $jsnonnull.Main.NullableStringComparator.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $jsnonnull.Main.NullableStringComparator (struct_subtype 
+ (field $vtable (ref $jsnonnull.Main.NullableStringComparator.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $jsnonnull.Main.NullableStringComparator.vtable (struct
+(type $jsnonnull.Main.NullableStringComparator.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -643,8 +644,7 @@
  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; NullableStringComparator()
@@ -860,12 +860,13 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NullableStringComparator)
 
 ;;; Code for jsnonnull.Main.NonNullableStringSubNullableComparator [CLASS]
-(type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct
- (field $vtable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $jsnonnull.Main.NullableStringComparator)
+(type $jsnonnull.Main.NonNullableStringSubNullableComparator (struct_subtype 
+ (field $vtable (ref $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $jsnonnull.Main.NullableStringComparator)
 )
-(type $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable (struct
+(type $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
@@ -879,8 +880,7 @@
  (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
  (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- )
-  (extends $jsnonnull.Main.NullableStringComparator.vtable)
+  $jsnonnull.Main.NullableStringComparator.vtable)
 )
 
 ;;; NonNullableStringSubNullableComparator()
@@ -956,10 +956,10 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableStringSubNullableComparator)
 
 ;;; Code for jsnonnull.Main.NonNullableTemplatedReturn [INTERFACE]
-(type $jsnonnull.Main.NonNullableTemplatedReturn.vtable (struct
+(type $jsnonnull.Main.NonNullableTemplatedReturn.vtable (struct_subtype 
  (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
  (field $m_getArray__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
- )
+  data)
 )
 
 ;;; void NonNullableTemplatedReturn.$clinit()
@@ -993,10 +993,10 @@
 (elem declare func $m_getClass__java_lang_Class@jsnonnull.Main.NonNullableTemplatedReturn)
 
 ;;; Code for jsnonnull.Main.NonNullableTemplate [INTERFACE]
-(type $jsnonnull.Main.NonNullableTemplate.vtable (struct
+(type $jsnonnull.Main.NonNullableTemplate.vtable (struct_subtype 
  (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
  (field $m_getArray__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
- )
+  data)
 )
 
 ;;; void NonNullableTemplate.$clinit()

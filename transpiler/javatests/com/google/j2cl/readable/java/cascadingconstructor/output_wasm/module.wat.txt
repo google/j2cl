@@ -17,20 +17,20 @@
  (rtt.canon $itable)))
 
 ;;; Code for cascadingconstructor.CascadingConstructor [CLASS]
-(type $cascadingconstructor.CascadingConstructor (struct
- (field $vtable (ref $cascadingconstructor.CascadingConstructor.vtable)) (field $itable (ref $itable))
+(type $cascadingconstructor.CascadingConstructor (struct_subtype 
+ (field $vtable (ref $cascadingconstructor.CascadingConstructor.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
  (field $f_a__cascadingconstructor_CascadingConstructor_ (mut i32))
- (field $f_b__cascadingconstructor_CascadingConstructor_ (mut i32)))
- (extends $java.lang.Object)
+ (field $f_b__cascadingconstructor_CascadingConstructor_ (mut i32))
+  $java.lang.Object)
 )
-(type $cascadingconstructor.CascadingConstructor.vtable (struct
+(type $cascadingconstructor.CascadingConstructor.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; CascadingConstructor(int a, int b)

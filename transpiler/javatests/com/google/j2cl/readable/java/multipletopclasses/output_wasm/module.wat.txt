@@ -35,18 +35,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for multipletopclasses.AnotherClass [CLASS]
-(type $multipletopclasses.AnotherClass (struct
- (field $vtable (ref $multipletopclasses.AnotherClass.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $multipletopclasses.AnotherClass (struct_subtype 
+ (field $vtable (ref $multipletopclasses.AnotherClass.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $multipletopclasses.AnotherClass.vtable (struct
+(type $multipletopclasses.AnotherClass.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; AnotherClass()
@@ -104,18 +104,18 @@
 (elem declare func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass)
 
 ;;; Code for multipletopclasses.MultipleTopClasses [CLASS]
-(type $multipletopclasses.MultipleTopClasses (struct
- (field $vtable (ref $multipletopclasses.MultipleTopClasses.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $multipletopclasses.AnotherClass)
+(type $multipletopclasses.MultipleTopClasses (struct_subtype 
+ (field $vtable (ref $multipletopclasses.MultipleTopClasses.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $multipletopclasses.AnotherClass)
 )
-(type $multipletopclasses.MultipleTopClasses.vtable (struct
+(type $multipletopclasses.MultipleTopClasses.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $multipletopclasses.AnotherClass.vtable)
+  $multipletopclasses.AnotherClass.vtable)
 )
 
 ;;; MultipleTopClasses()

@@ -53,18 +53,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for packageinfo.Outer [CLASS]
-(type $packageinfo.Outer (struct
- (field $vtable (ref $packageinfo.Outer.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $packageinfo.Outer (struct_subtype 
+ (field $vtable (ref $packageinfo.Outer.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $packageinfo.Outer.vtable (struct
+(type $packageinfo.Outer.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Outer()
@@ -122,19 +122,19 @@
 (elem declare func $m_getClass__java_lang_Class@packageinfo.Outer)
 
 ;;; Code for packageinfo.Outer.Inner [CLASS]
-(type $packageinfo.Outer.Inner (struct
- (field $vtable (ref $packageinfo.Outer.Inner.vtable)) (field $itable (ref $itable))
+(type $packageinfo.Outer.Inner (struct_subtype 
+ (field $vtable (ref $packageinfo.Outer.Inner.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__packageinfo_Outer_Inner (mut (ref null $packageinfo.Outer))))
- (extends $java.lang.Object)
+ (field $$outer_this__packageinfo_Outer_Inner (mut (ref null $packageinfo.Outer)))
+  $java.lang.Object)
 )
-(type $packageinfo.Outer.Inner.vtable (struct
+(type $packageinfo.Outer.Inner.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Inner(Outer $outer_this)
@@ -196,19 +196,19 @@
 (elem declare func $m_getClass__java_lang_Class@packageinfo.Outer.Inner)
 
 ;;; Code for packageinfo.subpackage.Foo [CLASS]
-(type $packageinfo.subpackage.Foo (struct
- (field $vtable (ref $packageinfo.subpackage.Foo.vtable)) (field $itable (ref $itable))
+(type $packageinfo.subpackage.Foo (struct_subtype 
+ (field $vtable (ref $packageinfo.subpackage.Foo.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer))))
- (extends $java.lang.Object)
+ (field $f_outer__packageinfo_subpackage_Foo (mut (ref null $packageinfo.Outer)))
+  $java.lang.Object)
 )
-(type $packageinfo.subpackage.Foo.vtable (struct
+(type $packageinfo.subpackage.Foo.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Foo()

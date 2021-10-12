@@ -42,18 +42,18 @@
  (rtt.canon $itable)))
 
 ;;; Code for annotation.Main [CLASS]
-(type $annotation.Main (struct
- (field $vtable (ref $annotation.Main.vtable)) (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32)))
- (extends $java.lang.Object)
+(type $annotation.Main (struct_subtype 
+ (field $vtable (ref $annotation.Main.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
 )
-(type $annotation.Main.vtable (struct
+(type $annotation.Main.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Main()
@@ -111,9 +111,9 @@
 (elem declare func $m_getClass__java_lang_Class@annotation.Main)
 
 ;;; Code for annotation.Main.Foo [INTERFACE]
-(type $annotation.Main.Foo.vtable (struct
+(type $annotation.Main.Foo.vtable (struct_subtype 
  (field $m_bar__int (ref $function.$java.lang.Object__$int))
- )
+  data)
 )
 
 ;;; void Foo.$clinit()
@@ -147,8 +147,8 @@
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Foo)
 
 ;;; Code for annotation.Main.Zoo [INTERFACE]
-(type $annotation.Main.Zoo.vtable (struct(field $unused (ref null data))
- )
+(type $annotation.Main.Zoo.vtable (struct_subtype (field $unused (ref null data))
+  data)
 )
 
 ;;; void Zoo.$clinit()
@@ -182,20 +182,20 @@
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Zoo)
 
 ;;; Code for annotation.Main.Bar [CLASS]
-(type $annotation.Main.Bar (struct
- (field $vtable (ref $annotation.Main.Bar.vtable)) (field $itable (ref $itable))
+(type $annotation.Main.Bar (struct_subtype 
+ (field $vtable (ref $annotation.Main.Bar.vtable)) 
+ (field $itable (ref $itable))
  (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__annotation_Main_Bar (mut (ref null $annotation.Main))))
- (extends $java.lang.Object)
+ (field $$outer_this__annotation_Main_Bar (mut (ref null $annotation.Main)))
+  $java.lang.Object)
 )
-(type $annotation.Main.Bar.vtable (struct
+(type $annotation.Main.Bar.vtable (struct_subtype 
  (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
  (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_baz__int_$pp_annotation (ref $function.$java.lang.Object__$int))
- )
-  (extends $java.lang.Object.vtable)
+  $java.lang.Object.vtable)
 )
 
 ;;; Bar(Main $outer_this)
