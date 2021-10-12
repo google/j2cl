@@ -58,6 +58,12 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/re2j",
 ]
 
+# AutoValue optimization is experimental and limited to the following packages.
+_AUTOVALUE_OPT_IN_PACKAGES = [
+    "java/com/google/apps/dynamite/v1/shared",
+    "javatests/com/google/apps/dynamite/v1/shared",
+]
+
 def _tree_artifact_proxy_impl(ctx):
     js_files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
     return DefaultInfo(files = depset([js_files]), runfiles = ctx.runfiles([js_files]))
@@ -72,6 +78,7 @@ def j2cl_library(
         generate_build_test = None,
         generate_j2kt_library = None,
         generate_j2wasm_library = None,
+        optimize_autovalue = None,
         **kwargs):
     """Translates Java source into JS source in a js_common.provider target.
 
@@ -88,6 +95,13 @@ def j2cl_library(
     if args.get("srcs") and target_name != "//jre/java:jre":
         jre = Label("//:jre")
         args["deps"] = args.get("deps", []) + [jre]
+
+    if optimize_autovalue == None:
+        # Get the default from the opt-in list.
+        optimize_autovalue = any(
+            [p for p in _AUTOVALUE_OPT_IN_PACKAGES if native.package_name().startswith(p)],
+        )
+    args["experimental_optimize_autovalue"] = optimize_autovalue
 
     j2cl_library_rule(
         name = name,

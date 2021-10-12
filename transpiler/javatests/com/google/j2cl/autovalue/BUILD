@@ -5,7 +5,7 @@ package(licenses = ["notice"])
 j2cl_test(
     name = "AutoValueTest",
     srcs = ["AutoValueTest.java"],
-    experimental_optimize_autovalue = True,
+    optimize_autovalue = True,
     deps = [
         "//third_party:auto_value-j2cl",
         "//third_party:guava-j2cl",

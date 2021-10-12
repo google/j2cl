@@ -15,7 +15,7 @@ integration_test(
     name = "autovalue",
     srcs = glob(["*.java"]),
     closure_defines = {"jre.classMetadata": "'STRIPPED'"},
-    experimental_optimize_autovalue = True,
+    optimize_autovalue = True,
     deps = [
         "//third_party:auto_value-j2cl",
         "//transpiler/javatests/com/google/j2cl/integration/autovalue",

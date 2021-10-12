@@ -10,9 +10,9 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    experimental_optimize_autovalue = True,
     generate_kt_readables = False,
     javacopts = ["-Acom.google.auto.value.OmitIdentifiers"],
+    optimize_autovalue = True,
     deps = [
         "//third_party:auto_value-j2cl",
         "//third_party:jsr305_annotations-j2cl",
