@@ -11,6 +11,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = ["Foo.java"],
+    # TODO(b/202448759): Enable plugin support for J2KT.
     generate_kt_readables = False,
     plugins = [":dummy-processor"],
 )

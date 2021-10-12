@@ -1,0 +1,135 @@
+package arithmeticexpressions
+
+open class ArithmeticExpressions {
+ fun testCoercions() {
+  var b: Byte = 1L as Byte
+  var c: Char = 1L as Char
+  var s: Short = 1L as Short
+  var i: Int = 1L as Int
+  var f: Float = 1L as Float
+  var d: Double = 1L as Double
+  b = 9223372036854775807L as Byte
+  c = 9223372036854775807L as Char
+  s = 9223372036854775807L as Short
+  i = 9223372036854775807L as Int
+  f = 9223372036854775807L as Float
+  d = 9223372036854775807L as Double
+ }
+
+ fun testPrimitives() {
+  var a: Int = 10; val b: Int = a++; val c: Int = a--; val d: Int = ++a; val e: Int = --a; val f: Int = - a; val g: Int = + a; val h: Int = ~a; val i: Int = 1 + 1 + 2 - 5; val j: Int = (1 + 2) * (3 + 4); val p: Int = 1 / 2 * 3 % 4; val r: Int = - -2147483648; val t: Int = - - - 1; val u: Int = + + + 1; val v: Int = - + - 1; val w: Int = 5 - - 4
+  var k: Boolean = !(1 + 2 + 3 == 4); val l: Boolean = 1 + 2 != 4; val m: Boolean = TODO("JavaScriptConstructorReference").MAX_VALUE != 9.223372036854778E18
+  val o: Double = (5 + 1) / 2 - 0.0
+  a = a << 31L
+  a <<= 1L
+  a += 1L
+  a /= 1L
+  a += TODO("JavaScriptConstructorReference").MAX_VALUE
+  k |= true
+  var s: Short = 10
+  k = ++s == 10
+  var q: Int = 3 >> 2
+  q = 3 >>> 2
+ }
+
+ fun testCompoundArray() {
+  val ints: IntArray? = null
+  ints[0] += 1
+  ints[0] -= 1
+  ints[0] *= 1
+  ints[0] /= 1
+  ints[0] &= 1
+  ints[0] ^= 1
+  ints[0] |= 1
+  ints[0] %= 1
+  ints[0] <<= 1
+  ints[0] >>= 1
+  ints[0] >>>= 1
+  ints[0]++
+  ++ints[0]
+  var i: Int = 0
+  ints[i++]++
+  ++ints[++i]
+  ints[i++] /= 1
+  val longs: LongArray? = null
+  longs[0] += 1
+  longs[0]--
+  --longs[0]
+  TODO("JavaScriptConstructorReference").getLongArray()[0]++
+  val booleans: BooleanArray? = null
+  booleans[0] |= true
+  val strings: Array<String?>? = null
+  strings[0] += null
+  val shorts: ShortArray? = null
+  val b: Boolean = ++shorts[0] == 10
+ }
+
+ fun testCompoundBoxedTypes() {
+  var c: Int? = 1000
+  var d: Int? = 10000
+  d += c
+  var i: Int = 43
+  d += i
+  d <<= i
+  i += c
+  var e: Int? = ++c
+  e = ++c
+  var e2: Double? = 100.0
+  ++e2
+  var f: Int? = c++
+  f = c++
+  var b: Byte? = 0
+  b++
+  var ch: java.lang.Character? = 'c'
+  ch++
+  (++f).intValue()
+  (f--).intValue()
+  val ref: arithmeticexpressions.ArithmeticExpressions.1Ref<Int?>? = null
+  ref.field++
+  val n: Int = 1 + ref.field
+ }
+
+ fun testExtendedOperands() {
+  var boxedInteger: Int? = 3
+  var i: Int
+  var l: Long
+  var d: Double
+  l = 2 - boxedInteger - 2L
+  l = 2 | boxedInteger | 2L
+  l = 1000000L * l * 60 * 60 * 24
+  l = 24 * 60 * 60 * l * 1000000L
+  d = l = i = 20
+  l = boxedInteger = i = 20
+  l = i + boxedInteger + l + 20
+  d = 20 + l + d
+ }
+
+ companion object {
+  @JvmStatic
+  fun getLongArray(): LongArray? {
+   return null
+  }
+
+  @JvmStatic
+  fun getInteger(): Int? {
+   return null
+  }
+
+  @JvmStatic
+  fun testSideEffect() {
+   TODO("JavaScriptConstructorReference").getWithSideEffect().intField += 5
+  }
+
+  @JvmStatic
+  fun getWithSideEffect(): arithmeticexpressions.ArithmeticExpressions? {
+   return null
+  }
+
+  @JvmStatic
+  fun incrementCounter(): Long {
+   return ++TODO("JavaScriptConstructorReference").counter
+  }
+ }
+}
+
+open class $1Ref {}

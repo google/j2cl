@@ -1,0 +1,29 @@
+package simplelocalclass
+
+open class SimpleLocalClass {
+ fun test(p: Int) {
+  var localVar: Int = 1
+  TODO("expression.qualify needs rendering: SimpleLocalClass.this)").`fun`()
+  TODO("expression.qualify needs rendering: SimpleLocalClass.this)")
+ }
+
+ fun fun() {
+  var localVar: Int = 1
+ }
+
+ fun foo() {}
+}
+
+open class $1InnerClass {
+ fun fun(): Int {
+  return this.localVar + this.p
+ }
+}
+
+open class $1InnerClassWithoutCaptures {}
+
+open class $2InnerClass {}
+
+open class $1Abc$InnerClass {}
+
+open class $1Klm$InnerClass {}

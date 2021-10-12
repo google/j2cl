@@ -204,7 +204,7 @@ def main(argv):
   wasm_readable_dirs = get_readable_dirs(
       readable_pattern, "_wasm") if "WASM" in args.platforms else []
   kt_readable_dirs = get_readable_dirs(
-      readable_pattern, "_kt") if "KT" in args.platforms else []
+      readable_pattern, "_kt") if "J2KT" in args.platforms else []
 
   if not js_readable_dirs and not wasm_readable_dirs and not kt_readable_dirs:
     print("No matching readables!")
@@ -222,7 +222,7 @@ def main(argv):
     print("\n".join(["    " + d for d in js_readable_dirs or ["No matches"]]))
     print("  Blaze building WASM:")
     print("\n".join(["    " + d for d in wasm_readable_dirs or ["No matches"]]))
-    print("  Blaze building KT:")
+    print("  Blaze building J2KT:")
     print("\n".join(["    " + d for d in kt_readable_dirs or ["No matches"]]))
 
   build_log = blaze_build(

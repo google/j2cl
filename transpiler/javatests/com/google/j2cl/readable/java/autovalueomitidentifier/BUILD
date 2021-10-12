@@ -10,6 +10,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202513859): Add support for experimental_optimize_autovalue in J2KT.
     generate_kt_readables = False,
     javacopts = ["-Acom.google.auto.value.OmitIdentifiers"],
     optimize_autovalue = True,

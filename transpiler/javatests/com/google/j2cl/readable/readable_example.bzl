@@ -42,6 +42,7 @@ def readable_example(
         generate_wasm_readables = True,
         wasm_entry_points = [],
         generate_kt_readables = True,
+        build_kt_readables = True,
         **kwargs):
     """Macro that confirms the JS compilability of some transpiled Java.
 
@@ -133,9 +134,18 @@ def readable_example(
             name = "readable_kt",
             srcs = srcs,
             deps = kt_deps,
+            # TODO(b/202767120): Allow separate flags for JavaOpts and Kotlin opts.
+            javacopts = JAVAC_FLAGS + javacopts,
             plugins = plugins,
             **kwargs
         )
+
+        if build_kt_readables:
+            build_test(
+                name = "readable_kt_build_test",
+                targets = [":libreadable_kt.kt.jar"],
+                tags = ["j2kt"],
+            )
 
         make_diff_test(
             name = "readable_kt_test",

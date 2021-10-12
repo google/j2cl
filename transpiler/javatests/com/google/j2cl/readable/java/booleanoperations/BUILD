@@ -10,5 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = False,
+    # TODO(b/201574151): Constructor Support.
+    build_kt_readables = False,
 )

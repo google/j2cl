@@ -10,5 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202509555): Support interface methods.
     generate_kt_readables = False,
 )

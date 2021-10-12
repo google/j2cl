@@ -1,0 +1,31 @@
+package strings
+
+open class Strings {
+ fun test() {
+  var s1: String? = null
+  var s2: String? = null
+  var s3: String? = s1 + s2
+  s2 += s2
+  s1 += "a"
+  s3 = s1 + s1 + s2 + null + "a"
+  s3 = "a" + s1 + s1 + s2 + null
+  var s4: String?
+  val c1: Char = 'F'
+  val c2: Char = 'o'
+  s4 = c1 + c2 + "o"
+  s4 += 1L + ""
+  s4 += 1L
+  s4 += 'C'
+  s4 += 1
+  s4 += 1.0
+  s4 += 1.0f
+  s4 += 1 as Short
+  strings.Strings.StringHolder().s += s4
+  strings.Strings.StringHolder().s += c1
+  strings.Strings.StringHolder().s += "o"
+  s1 = 1 + 2 + "s"
+  s1 = "s" + 1 + 2
+ }
+}
+
+open class StringHolder {}

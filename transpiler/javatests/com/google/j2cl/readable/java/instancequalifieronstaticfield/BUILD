@@ -10,4 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202431157): Support Static fields.
+    build_kt_readables = False,
 )

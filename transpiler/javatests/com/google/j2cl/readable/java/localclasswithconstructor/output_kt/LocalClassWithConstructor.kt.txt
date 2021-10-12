@@ -1,0 +1,19 @@
+package localclasswithconstructor
+
+open class LocalClassWithConstructor {
+ fun test(p: Int) {
+  var localVar: Int = 1
+  TODO("expression.qualify needs rendering: LocalClassWithConstructor.this)")
+ }
+}
+
+open class $1LocalClass {
+ fun <init>(a: Int, b: Int): localclasswithconstructor.LocalClassWithConstructor.1LocalClass {
+  this.field = this.localVar + a + b
+ }
+
+ fun <init>(a: Int): localclasswithconstructor.LocalClassWithConstructor.1LocalClass {
+  super(a, this.p)
+  this.field = this.localVar
+ }
+}

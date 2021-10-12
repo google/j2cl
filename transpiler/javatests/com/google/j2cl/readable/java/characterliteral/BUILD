@@ -10,5 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = True,
+    # TODO(b/202429268): Support explicit type coercion.
+    build_kt_readables = False,
 )

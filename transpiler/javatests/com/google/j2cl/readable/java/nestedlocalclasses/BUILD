@@ -10,5 +10,5 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = False,
+    build_kt_readables = False,
 )

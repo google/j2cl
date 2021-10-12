@@ -1,0 +1,72 @@
+package booleanoperations
+
+open class BooleanOperations {
+ fun test() {
+  var ls: Boolean = true
+  val rs: Boolean = true
+  var r: Boolean = true
+  val t: Boolean = !!!true
+  r = ls == rs
+  r = ls != rs
+  r = ls ^ rs
+  r = ls & rs
+  r = ls | rs
+  r = ls && rs
+  r = ls || rs
+  r = ls = rs
+  r ^= rs
+  r &= rs
+  r |= rs
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls == rs)
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls != rs)
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls ^ rs)
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls & rs)
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls | rs)
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls && rs)
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls || rs)
+  TODO("JavaScriptConstructorReference").acceptBoolean(ls = rs)
+  var br: Boolean?
+  br = ls == rs as Boolean?
+  br = ls != rs as Boolean?
+  br = ls ^ rs as Boolean?
+  br = ls & rs as Boolean?
+  br = ls | rs as Boolean?
+  br = ls && rs as Boolean?
+  br = ls || rs as Boolean?
+  br = ls = rs as Boolean?
+  if (ls == rs) {
+   r = true
+  }
+  if (ls != rs) {
+   r = true
+  }
+  if (ls ^ rs) {
+   r = true
+  }
+  if (ls & rs) {
+   r = true
+  }
+  if (ls | rs) {
+   r = true
+  }
+  if (ls && rs) {
+   r = true
+  }
+  if (ls || rs) {
+   r = true
+  }
+  var finalOuter: booleanoperations.BooleanOperations.1Outer? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
+  finalOuter.b |= true
+  var outer: booleanoperations.BooleanOperations.1Outer? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
+  outer.b |= (outer = null) == null
+ }
+
+ companion object {
+  @JvmStatic
+  fun acceptBoolean(b: Boolean) {}
+ }
+}
+
+open class $1Outer {}
+
+open class Inner {}

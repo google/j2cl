@@ -1,0 +1,16 @@
+package instanceinnerclass
+
+open class InstanceInnerClass {
+ fun funOuter() {}
+
+ fun test() {
+  TODO("expression.qualify needs rendering: new InstanceInnerClass.<init>())")
+ }
+}
+
+open class InnerClass {
+ fun funInner() {
+  this.`this`.funOuter()
+  this.`this`.funOuter()
+ }
+}

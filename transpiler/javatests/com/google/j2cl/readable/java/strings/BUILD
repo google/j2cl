@@ -10,5 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    generate_kt_readables = False,
+    # TODO(b/202520039): Support binary operations on Strings in J2KT.
+    build_kt_readables = False,
 )

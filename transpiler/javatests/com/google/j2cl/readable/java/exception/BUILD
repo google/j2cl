@@ -9,6 +9,7 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202449098): Add support to import JsType.
     generate_kt_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

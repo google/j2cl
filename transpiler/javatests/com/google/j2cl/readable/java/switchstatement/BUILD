@@ -10,4 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202433560): Support Switch statements.
+    build_kt_readables = False,
 )

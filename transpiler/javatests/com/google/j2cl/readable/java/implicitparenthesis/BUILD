@@ -10,4 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202430789): Support boxing/unboxing of primitive conversions in J2KT.
+    build_kt_readables = False,
 )

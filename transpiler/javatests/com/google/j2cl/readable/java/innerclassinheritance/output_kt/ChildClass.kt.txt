@@ -1,0 +1,53 @@
+package innerclassinheritance
+
+open class ParentOuter {
+ fun funInParentOuter() {}
+}
+
+open class ParentInner {
+ fun funInParentInner() {}
+}
+
+open class ChildClass: innerclassinheritance.ParentOuter {
+ fun funInOuter() {}
+
+ fun testLocalClass() {
+  TODO("expression.qualify needs rendering: ChildClass.this)").test()
+ }
+}
+
+open class InnerClass: innerclassinheritance.ParentInner {
+ fun funInInner() {}
+
+ fun testInnerClass(): Int {
+  this.`this`.funInParentOuter()
+  this.`this`.funInParentOuter()
+  this.`this`.funInOuter()
+  this.`this`.funInOuter()
+  this.funInParentInner()
+  this.funInParentInner()
+  this.funInInner()
+  this.funInInner()
+  var a: Int = this.`this`.fieldInParentOuter
+  a = this.`this`.fieldInParentOuter
+  a = this.`this`.fieldInOuter
+  a = this.`this`.fieldInOuter
+  a = this.fieldInParentInner
+  a = this.fieldInParentInner
+  a = this.fieldInInner
+  a = this.fieldInInner
+  return a
+ }
+}
+
+open class $1LocalClass: innerclassinheritance.ChildClass {
+ fun funInParentOuter() {}
+
+ fun test() {
+  this.funInOuter()
+  this.`this`.funInOuter()
+  this.funInParentOuter()
+  this.funInParentOuter()
+  this.`this`.funInParentOuter()
+ }
+}

@@ -99,8 +99,8 @@ def create_test_filter(platforms):
     tags += ["-j2wasm"]
   if "JVM" not in platforms:
     tags += ["-jvm"]
-  if "KT" not in platforms:
-    tags += ["-kt"]
+  if "J2KT" not in platforms:
+    tags += ["-j2kt"]
 
   return ["--build_tests_only"
          ] + (["--test_tag_filters=" + ",".join(tags)] if tags else [])

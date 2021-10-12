@@ -1,0 +1,35 @@
+package anonymousclass
+
+abstract class SomeClass {
+ fun foo(): String?
+
+ fun <init>(i: Int): anonymousclass.SomeClass {}
+}
+
+open class AnonymousClass {
+ fun main() {
+  val instance: anonymousclass.SomeClass? = TODO("expression.qualify needs rendering: AnonymousClass.this)")
+ }
+}
+
+open class $1: anonymousclass.SomeClass {
+ fun <init>($_0: Int): anonymousclass.AnonymousClass.1 {
+  super($_0)
+ }
+
+ fun foo(): String? {
+  return "a"
+ }
+}
+
+interface SomeInterface {}
+
+open class $1: anonymousclass.SomeClass {
+ fun <init>($_0: Int): anonymousclass.SomeInterface.1 {
+  super($_0)
+ }
+
+ fun foo(): String? {
+  return "a"
+ }
+}

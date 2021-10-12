@@ -10,4 +10,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202427872): Support inner classes and interfaces in J2KT.
+    # TODO(b/202429123): Support escaping Kotlin Keywords.
+    build_kt_readables = False,
 )

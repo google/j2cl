@@ -1,0 +1,44 @@
+package nestedgenericclass
+
+open class NestedGenericClass {
+ fun fun(t: S) {
+  TODO("expression.qualify needs rendering: NestedGenericClass.this)")
+  TODO("expression.qualify needs rendering: NestedGenericClass.this)")
+ }
+
+ fun bar() {
+  TODO("expression.qualify needs rendering: NestedGenericClass.this)").bar()
+ }
+
+ fun test() {
+  val n: nestedgenericclass.NestedGenericClass<Number?>? = nestedgenericclass.NestedGenericClass<Number?>()
+  val a: nestedgenericclass.NestedGenericClass.A<Error?, Number?>? = TODO("expression.qualify needs rendering: n)")
+  val b: nestedgenericclass.NestedGenericClass.A.B<Exception?, Error?, Number?>? = TODO("expression.qualify needs rendering: a)")
+  TODO("expression.qualify needs rendering: n)")
+  TODO("expression.qualify needs rendering: n.new C.<init>())")
+ }
+}
+
+open class A {}
+
+open class B {
+ fun <init>(): nestedgenericclass.NestedGenericClass.A.B<T, T, T> {}
+
+ fun <init>(u: U): nestedgenericclass.NestedGenericClass.A.B<T, T, T> {}
+}
+
+open class C {}
+
+open class D {}
+
+open class $1E {}
+
+open class $1F {}
+
+open class $1G {
+ fun bar() {
+  TODO("expression.qualify needs rendering: \$1G.this)")
+ }
+}
+
+open class $1H {}

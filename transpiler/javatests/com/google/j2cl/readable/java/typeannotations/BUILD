@@ -11,6 +11,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = ["TypeAnnotations.java"],
+    # TODO(b/202449098): Add support for deps in readables.
     generate_kt_readables = False,
     deps = [
         ":parametric-type",
