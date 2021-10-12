@@ -41,7 +41,7 @@ public interface BackendOptions {
 
   boolean getWasmRemoveAssertStatement();
 
-  boolean getExperimentalOptimizeAutovalue();
+  boolean getOptimizeAutoValue();
 
   boolean getEmitReadableLibraryInfo();
 

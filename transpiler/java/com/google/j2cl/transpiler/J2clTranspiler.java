@@ -94,7 +94,7 @@ class J2clTranspiler {
         problems,
         /* enableWasm= */ options.getBackend() == Backend.WASM,
         /* isNullMarkedSupported= */ options.isNullMarkedSupported(),
-        /* optimizeAutoValue= */ options.getExperimentalOptimizeAutovalue());
+        /* optimizeAutoValue= */ options.getOptimizeAutoValue());
     problems.abortIfHasErrors();
   }
 

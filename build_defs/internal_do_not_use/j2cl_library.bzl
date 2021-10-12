@@ -101,7 +101,7 @@ def j2cl_library(
         optimize_autovalue = any(
             [p for p in _AUTOVALUE_OPT_IN_PACKAGES if native.package_name().startswith(p)],
         )
-    args["experimental_optimize_autovalue"] = optimize_autovalue
+    args["optimize_autovalue"] = optimize_autovalue
 
     j2cl_library_rule(
         name = name,

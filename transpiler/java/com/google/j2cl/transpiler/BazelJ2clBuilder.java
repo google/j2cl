@@ -82,10 +82,10 @@ final class BazelJ2clBuilder extends BazelWorker {
   protected boolean generateKytheIndexingMetadata = false;
 
   @Option(
-      name = "-experimentaloptimizeautovalue",
+      name = "-optimizeautovalue",
       usage = "Enables experimental optimizations for AutoValue. Not production ready.",
       hidden = true)
-  protected boolean experimentalOptimizeAutovalue = false;
+  protected boolean optimizeAutoValue = false;
 
   @Option(
       name =
@@ -167,7 +167,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setEmitReadableLibraryInfo(readableLibraryInfo)
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
-        .setExperimentalOptimizeAutovalue(this.experimentalOptimizeAutovalue)
+        .setOptimizeAutoValue(this.optimizeAutoValue)
         .setFrontend(FRONTEND)
         .setBackend(this.backend)
         .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))

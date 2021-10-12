@@ -150,7 +150,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Class structure normalizations.
-          () -> new OptimizeAutoValue(options.getExperimentalOptimizeAutovalue()),
+          () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
           ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
           NormalizeFunctionExpressions::new,

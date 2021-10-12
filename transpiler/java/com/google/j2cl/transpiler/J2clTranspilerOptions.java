@@ -40,7 +40,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
   public static Builder newBuilder() {
     return new AutoValue_J2clTranspilerOptions.Builder()
-        .setExperimentalOptimizeAutovalue(false)
+        .setOptimizeAutoValue(false)
         .setWasmRemoveAssertStatement(false)
         .setNullMarkedSupported(false);
   }
@@ -65,7 +65,7 @@ public abstract class J2clTranspilerOptions implements FrontendOptions, BackendO
 
     public abstract Builder setGenerateKytheIndexingMetadata(boolean b);
 
-    public abstract Builder setExperimentalOptimizeAutovalue(boolean b);
+    public abstract Builder setOptimizeAutoValue(boolean b);
 
     public abstract Builder setFrontend(Frontend frontend);
 

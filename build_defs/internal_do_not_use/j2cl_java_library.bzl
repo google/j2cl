@@ -5,7 +5,7 @@ load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provid
 
 def _impl_j2cl_library(ctx):
     extra_javacopts = []
-    if ctx.attr.experimental_optimize_autovalue:
+    if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
     j2cl_provider = j2cl_common.compile(
@@ -61,7 +61,7 @@ def _collect_runfiles(ctx, files, deps):
 _J2CL_INTERNAL_LIB_ATTRS = {
     "readable_source_maps": attr.bool(default = False),
     "readable_library_info": attr.bool(default = False),
-    "experimental_optimize_autovalue": attr.bool(default = False),
+    "optimize_autovalue": attr.bool(default = False),
     "experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage": attr.bool(default = False),
 }
 
