@@ -54,15 +54,13 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
             }
             // Only inserts explicit super() call to a constructor that does not have
             // super() or this() call (provided that the type has a superclass).
-            synthesizeSuperCall(method);
+            synthesizeSuperCall(method, getCurrentType());
           }
         });
   }
 
-  private static void synthesizeSuperCall(Method constructor) {
-    DeclaredTypeDescriptor typeDescriptor =
-        constructor.getDescriptor().getEnclosingTypeDescriptor();
-    MethodDescriptor superConstructor = getDefaultSuperConstructorTarget(typeDescriptor);
+  private static void synthesizeSuperCall(Method constructor, Type type) {
+    MethodDescriptor superConstructor = getDefaultSuperConstructorTarget(type);
 
     constructor
         .getBody()
@@ -91,10 +89,9 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
    * <p>So far this is the only place where J2CL explicitly resolves the target overloaded method,
    * all other cases are resolved by the frontend.
    */
-  private static MethodDescriptor getDefaultSuperConstructorTarget(
-      DeclaredTypeDescriptor typeDescriptor) {
-    DeclaredTypeDescriptor superTypeDescriptor = typeDescriptor.getSuperTypeDescriptor();
-    if (typeDescriptor.isEnum()) {
+  private static MethodDescriptor getDefaultSuperConstructorTarget(Type type) {
+    DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
+    if (type.isEnum()) {
       // Enum is special, in subclasses the constructors have two implicit parameters
       // (name and ordinal) which are omitted. But when looking at the methods in the Enum class,
       // those parameters are explicit.
@@ -113,7 +110,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     Optional<MethodDescriptor> superContructor =
         superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isConstructor)
-            .filter(m -> m.isVisibleFrom(typeDescriptor))
+            .filter(m -> m.isVisibleFrom(type.getTypeDescriptor()))
             .filter(m -> m.getParameterDescriptors().isEmpty())
             .collect(MoreCollectors.toOptional());
 
@@ -129,7 +126,7 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
     superContructor =
         superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isConstructor)
-            .filter(m -> m.isVisibleFrom(typeDescriptor))
+            .filter(m -> m.isVisibleFrom(type.getTypeDescriptor()))
             .filter(m -> m.getParameterDescriptors().size() == 1)
             .filter(m -> Iterables.getOnlyElement(m.getParameterDescriptors()).isVarargs())
             .min(InsertExplicitSuperCalls::getParameterSpecificityComparator);
