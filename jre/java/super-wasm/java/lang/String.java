@@ -29,6 +29,7 @@ import java.util.Comparator;
 import java.util.Locale;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.WasmExtern;
+import javaemul.internal.annotations.HasNoSideEffects;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 
@@ -49,15 +50,6 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   }
 
   public static final Comparator<String> CASE_INSENSITIVE_ORDER = new CaseInsensitiveComparator();
-
-  private static final char[] ASCII;
-
-  static {
-    ASCII = new char[128];
-    for (int i = 0; i < ASCII.length; ++i) {
-      ASCII[i] = (char) i;
-    }
-  }
 
   private final char[] value;
   private final int offset;
@@ -748,12 +740,26 @@ public final class String implements Serializable, Comparable<String>, CharSeque
   public static String valueOf(char value) {
     String s;
     if (value < 128) {
-      s = new String(value, 1, ASCII);
+      s = new String(value, 1, getSmallCharValuesArray());
     } else {
       s = new String(0, 1, new char[] {value});
     }
     s.hashCode = value;
     return s;
+  }
+
+  // Do not initialize inline to avoid clinit.
+  private static char[] smallCharValues;
+
+  @HasNoSideEffects
+  private static char[] getSmallCharValuesArray() {
+    if (smallCharValues == null) {
+      smallCharValues = new char[128];
+      for (int i = 0; i < smallCharValues.length; ++i) {
+        smallCharValues[i] = (char) i;
+      }
+    }
+    return smallCharValues;
   }
 
   public static String valueOf(double value) {
