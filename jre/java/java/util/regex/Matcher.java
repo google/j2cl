@@ -22,7 +22,6 @@ public final class Matcher implements MatcherResult {
   Matcher(Pattern pattern, CharSequence input) {
     this.pattern = pattern;
     this.input = input;
-    this.matchResult = exec(input.toString());
   }
 
   public Pattern pattern() {
@@ -85,22 +84,22 @@ public final class Matcher implements MatcherResult {
     return null == matchResult ? 0 : matchResult.asArray().length - 1;
   }
 
+  // set match result, but do not advance offsets
   public boolean matches() {
-    return pattern.nativeRegExp.test(input.toString());
+    matchResult = exec(input);
+    return matchResult != null;
   }
 
   public boolean find() {
-    if (null == matchResult) {
-      return false;
-    }
-
     CharSequence targetSequence = input.subSequence(offset, input.length());
+    matchResult = exec(targetSequence);
 
-    this.prevOffset = offset;
-    this.offset += matchResult.getIndex() + group().length();
-
-    this.matchResult = exec(targetSequence);
-    return null != matchResult;
+    boolean isNotDone = matchResult != null;
+    if (isNotDone) {
+      prevOffset = offset;
+      offset += matchResult.getIndex() + group().length();
+    }
+    return isNotDone;
   }
 
   public boolean find(int offset) {
