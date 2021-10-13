@@ -167,6 +167,7 @@ def _java_compile(
     if hasattr(java_common, "JavaToolchainInfo"):
         java_toolchain = ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
         host_javabase = ctx.attr._host_javabase[java_common.JavaRuntimeInfo]
+
     else:
         java_toolchain = ctx.attr._java_toolchain
         host_javabase = ctx.attr._host_javabase
