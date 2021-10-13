@@ -49,4 +49,13 @@ public class DefaultNotNullable {
   @JsMethod
   public void m3(String... args) {
   }
+
+  interface ParameterizedInterface<T> {
+    void add(T t);
+  }
+
+  class ImplementsParameterizedInterface implements ParameterizedInterface<String> {
+    @Override
+    public void add(String s) {}
+  }
 }

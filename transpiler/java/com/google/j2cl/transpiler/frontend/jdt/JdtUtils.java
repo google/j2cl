@@ -983,7 +983,9 @@ class JdtUtils {
             .setInterfaceTypeDescriptorsFactory(
                 () ->
                     createTypeDescriptors(
-                        typeBinding.getInterfaces(), DeclaredTypeDescriptor.class))
+                        typeBinding.getInterfaces(),
+                        inNullMarkedScope,
+                        DeclaredTypeDescriptor.class))
             .setSingleAbstractMethodDescriptorFactory(
                 () -> createMethodDescriptor(typeBinding.getFunctionalInterfaceMethod()))
             .setJsFunctionMethodDescriptorFactory(() -> getJsFunctionMethodDescriptor(typeBinding))
@@ -1108,7 +1110,9 @@ class JdtUtils {
         .setClassComponents(getClassComponents(typeBinding))
         .setEnclosingTypeDeclaration(createDeclarationForType(typeBinding.getDeclaringClass()))
         .setInterfaceTypeDescriptorsFactory(
-            () -> createTypeDescriptors(typeBinding.getInterfaces(), DeclaredTypeDescriptor.class))
+            () ->
+                createTypeDescriptors(
+                    typeBinding.getInterfaces(), isNullMarked, DeclaredTypeDescriptor.class))
         .setUnparameterizedTypeDescriptorFactory(() -> createDeclaredTypeDescriptor(typeBinding))
         .setHasAbstractModifier(isAbstract)
         .setKind(getKindFromTypeBinding(typeBinding))
@@ -1130,7 +1134,7 @@ class JdtUtils {
         .setNullMarked(isNullMarked)
         .setPackageName(packageName)
         .setSuperTypeDescriptorFactory(
-            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass()))
+            () -> createDeclaredTypeDescriptor(typeBinding.getSuperclass(), isNullMarked))
         .setTypeParameterDescriptors(
             getTypeArgumentTypeDescriptors(
                 typeBinding, /* inNullMarkedScope= */ false, TypeVariable.class))

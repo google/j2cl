@@ -25,6 +25,12 @@
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [static fields]
 (global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable (mut i32) (i32.const 0))
 
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedInterface (mut i32) (i32.const 0))
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [static fields]
+(global $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface (mut i32) (i32.const 0))
+
 ;;; Code for nullability.defaultnullable.DefaultNullable [static fields]
 (global $f_$initialized__nullability_defaultnullable_DefaultNullable (mut i32) (i32.const 0))
 
@@ -281,6 +287,27 @@
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [itable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.itable (ref $itable) (array.init $itable 
+ (rtt.canon $itable)))
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [vtable.init]
+(global $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable) 
+ (struct.new_with_rtt $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
+  (ref.func $m_add__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
+  (ref.func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
+  (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)
+ )
+)
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [itable.init]
+(global $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable (ref $itable) (array.init $itable 
+ (struct.new_with_rtt $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable
+  (ref.func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
+  (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable)
+ )
  (rtt.canon $itable)))
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [vtable.init]
@@ -1591,6 +1618,147 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable)
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface [INTERFACE]
+(type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable (struct_subtype 
+ (field $m_add__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+  data)
+)
+
+;;; void ParameterizedInterface.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:53:12
+ (block
+  ;; if (nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.$initialized) return;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:53:12
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedInterface)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:53:12
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.$initialized = true);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:53:12
+  (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ParameterizedInterface (i32.const 1))
+ )
+)
+
+;;; Class<?> ParameterizedInterface.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface();
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface)
+
+;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [CLASS]
+(type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (struct_subtype 
+ (field $vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface (mut (ref null $nullability.defaultnotnullable.DefaultNotNullable)))
+  $java.lang.Object)
+)
+(type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
+ (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_add__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_add__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+  $java.lang.Object.vtable)
+)
+
+;;; ImplementsParameterizedInterface(DefaultNotNullable $outer_this)
+(func $m_<init>__nullability_defaultnotnullable_DefaultNotNullable@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
+ (param $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
+ (param $$outer_this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
+ (result (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+ (block
+  ;; nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (call $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface )
+  ;; (ImplementsParameterizedInterface.this.this = $outer_this);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (struct.set $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $$outer_this__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface(local.get $this) (local.get $$outer_this))
+  ;; Object.this.Object.<init>();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  ;; return ImplementsParameterizedInterface.this;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (return (local.get $this))
+ )
+)
+
+;;; void ImplementsParameterizedInterface.add(String s)
+(func $m_add__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
+ (type $function.$java.lang.Object__$java.lang.String__$void)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:59:16
+ (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.rtt)))
+ (block
+ )
+)
+(elem declare func $m_add__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
+
+;;; void ImplementsParameterizedInterface.add(Object arg0)
+(func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
+ (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+ (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.rtt)))
+ (block
+  ;; ImplementsParameterizedInterface.this.add(((String) arg0));
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable $m_add__java_lang_String__void (struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
+
+;;; void ImplementsParameterizedInterface.$clinit()
+(func $$clinit__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
+ ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+ (block
+  ;; if (nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.$initialized) return;
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (if (global.get $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface)
+   (then
+    ;; return;
+    ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+    (return )
+   )
+  )
+  ;; (nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.$initialized = true);
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (global.set $f_$initialized__nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> ImplementsParameterizedInterface.getClass()
+(func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
+ (type $function.$java.lang.Object__$java.lang.Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
+ (local.set $this (ref.cast (local.get $this.untyped) (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.rtt)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface();
+  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [CLASS]
 (type $nullability.defaultnullable.DefaultNullable (struct_subtype 

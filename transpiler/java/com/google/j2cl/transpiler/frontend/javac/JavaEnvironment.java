@@ -989,14 +989,17 @@ class JavaEnvironment {
   }
 
   public <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
-      List<? extends TypeMirror> typeMirrors, Class<T> clazz, Element declarationElement) {
+      List<? extends TypeMirror> typeMirrors,
+      boolean inNullMarkedScope,
+      Class<T> clazz,
+      Element declarationElement) {
     ImmutableList.Builder<T> typeDescriptorsBuilder = ImmutableList.builder();
     for (int i = 0; i < typeMirrors.size(); i++) {
       final int index = i;
       typeDescriptorsBuilder.add(
           clazz.cast(
               applyNullabilityAnnotations(
-                  createTypeDescriptor(typeMirrors.get(i), clazz),
+                  createTypeDescriptor(typeMirrors.get(i), inNullMarkedScope, clazz),
                   declarationElement,
                   position ->
                       position.type == TargetType.CLASS_EXTENDS && position.type_index == index)));
@@ -1005,9 +1008,9 @@ class JavaEnvironment {
   }
 
   public <T extends TypeDescriptor> ImmutableList<T> createTypeDescriptors(
-      List<? extends TypeMirror> typeMirrors, Class<T> clazz) {
+      List<? extends TypeMirror> typeMirrors, boolean inNullMarkedScope, Class<T> clazz) {
     return typeMirrors.stream()
-        .map(typeMirror -> createTypeDescriptor(typeMirror, clazz))
+        .map(typeMirror -> createTypeDescriptor(typeMirror, inNullMarkedScope, clazz))
         .collect(toImmutableList());
   }
 
@@ -1046,7 +1049,10 @@ class JavaEnvironment {
 
   private TypeDescriptor createIntersectionType(IntersectionClassType intersectionType) {
     List<DeclaredTypeDescriptor> intersectedTypeDescriptors =
-        createTypeDescriptors(intersectionType.getBounds(), DeclaredTypeDescriptor.class);
+        createTypeDescriptors(
+            intersectionType.getBounds(),
+            /* inNullMarkedScope= */ false,
+            DeclaredTypeDescriptor.class);
     return IntersectionTypeDescriptor.newBuilder()
         .setIntersectionTypeDescriptors(intersectedTypeDescriptors)
         .build();
@@ -1103,13 +1109,15 @@ class JavaEnvironment {
                         javacTypes.directSupertypes(classType).stream()
                             .filter(Predicates.not(Type::isInterface))
                             .findFirst()
-                            .orElse(null)))
+                            .orElse(null),
+                        inNullMarkedScope))
             .setInterfaceTypeDescriptorsFactory(
                 td ->
                     createTypeDescriptors(
                         javacTypes.directSupertypes(classType).stream()
                             .filter(Type::isInterface)
                             .collect(toImmutableList()),
+                        inNullMarkedScope,
                         DeclaredTypeDescriptor.class))
             .setSingleAbstractMethodDescriptorFactory(
                 td -> {
@@ -1308,13 +1316,17 @@ class JavaEnvironment {
 
     List<TypeParameterElement> typeParameterElements = getTypeParameters(typeElement);
 
+    boolean isNullMarked = isNullMarked(typeElement, packageInfoCache);
     return TypeDeclaration.newBuilder()
         .setClassComponents(getClassComponents(typeElement))
         .setEnclosingTypeDeclaration(createDeclarationForType(getEnclosingType(typeElement)))
         .setInterfaceTypeDescriptorsFactory(
             () ->
                 createTypeDescriptors(
-                    typeElement.getInterfaces(), DeclaredTypeDescriptor.class, typeElement))
+                    typeElement.getInterfaces(),
+                    isNullMarked,
+                    DeclaredTypeDescriptor.class,
+                    typeElement))
         .setUnparameterizedTypeDescriptorFactory(
             () -> createDeclaredTypeDescriptor(typeElement.asType()))
         .setHasAbstractModifier(isAbstract)
@@ -1330,13 +1342,13 @@ class JavaEnvironment {
         .setLocal(isLocal(typeElement))
         .setSimpleJsName(getJsName(typeElement))
         .setCustomizedJsNamespace(getJsNamespace(typeElement, packageInfoCache))
-        .setNullMarked(isNullMarked(typeElement, packageInfoCache))
+        .setNullMarked(isNullMarked)
         .setPackageName(packageName)
         .setSuperTypeDescriptorFactory(
             () ->
                 (DeclaredTypeDescriptor)
                     applyNullabilityAnnotations(
-                        createDeclaredTypeDescriptor(typeElement.getSuperclass()),
+                        createDeclaredTypeDescriptor(typeElement.getSuperclass(), isNullMarked),
                         typeElement,
                         position ->
                             position.type == TargetType.CLASS_EXTENDS && position.type_index == -1))
