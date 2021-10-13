@@ -94,12 +94,12 @@ public final class Matcher implements MatcherResult {
     CharSequence targetSequence = input.subSequence(offset, input.length());
     matchResult = exec(targetSequence);
 
-    boolean isNotDone = matchResult != null;
-    if (isNotDone) {
+    boolean isDone = matchResult == null;
+    if (!isDone) {
       prevOffset = offset;
       offset += matchResult.getIndex() + group().length();
     }
-    return isNotDone;
+    return !isDone;
   }
 
   public boolean find(int offset) {
