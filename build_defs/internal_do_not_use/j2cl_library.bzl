@@ -62,6 +62,7 @@ _J2WASM_PACKAGES = [
 _AUTOVALUE_OPT_IN_PACKAGES = [
     "java/com/google/apps/dynamite/v1/shared",
     "javatests/com/google/apps/dynamite/v1/shared",
+    "third_party/java_src/xplatmath",
 ]
 
 def _tree_artifact_proxy_impl(ctx):
