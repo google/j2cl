@@ -260,125 +260,16 @@ public final class Math {
     return r;
   }
 
-  private static final int FLOAT_SIGN_MASK = 0x80000000;
-  private static final long DOUBLE_SIGN_MASK = 0x8000000000000000L;
-  private static final int DOUBLE_EXPONENT_BIAS = 1023;
-  private static final int DOUBLE_EXPONENT_BITS = 12;
-  private static final int DOUBLE_MANTISSA_BITS = 52;
-  private static final int DOUBLE_NON_MANTISSA_BITS = 12;
-  private static final long DOUBLE_EXPONENT_MASK = 0x7ff0000000000000L;
-  private static final long DOUBLE_MANTISSA_MASK = 0x000fffffffffffffL;
-  private static final int DOUBLE_MAX_EXPONENT = 1023;
-
   public static double scalb(double d, int scaleFactor) {
-    // Ported from AOSP.
-
-    if (Double.isNaN(d) || Double.isInfinite(d) || d == 0) {
+    if (scaleFactor >= 31 || scaleFactor <= -31) {
+      return d * pow(2, scaleFactor);
+    } else if (scaleFactor > 0) {
+      return d * (1 << scaleFactor);
+    } else if (scaleFactor == 0) {
       return d;
-    }
-    // change double to long for calculation
-    long bits = Double.doubleToLongBits(d);
-    // the sign of the results must be the same of given d
-    long sign = bits & DOUBLE_SIGN_MASK;
-    // calculates the factor of the result
-    long factor =
-        ((bits & DOUBLE_EXPONENT_MASK) >> DOUBLE_MANTISSA_BITS)
-            - DOUBLE_EXPONENT_BIAS
-            + scaleFactor;
-
-    // calculates the factor of sub-normal values
-    int subNormalFactor =
-        Long.numberOfLeadingZeros(bits & ~DOUBLE_SIGN_MASK) - DOUBLE_NON_MANTISSA_BITS;
-    if (subNormalFactor < 0) {
-      // not sub-normal values
-      subNormalFactor = 0;
     } else {
-      factor = factor - subNormalFactor;
+      return d / (1 << -scaleFactor);
     }
-    if (factor > DOUBLE_MAX_EXPONENT) {
-      return (d > 0 ? Double.POSITIVE_INFINITY : Double.NEGATIVE_INFINITY);
-    }
-
-    long result;
-    // if result is a sub-normal
-    if (factor <= -DOUBLE_EXPONENT_BIAS) {
-      // the number of digits that shifts
-      long digits = factor + DOUBLE_EXPONENT_BIAS + subNormalFactor;
-      if (Math.abs(d) < Double.MIN_NORMAL) {
-        // origin d is already sub-normal
-        result = shiftLongBits(bits & DOUBLE_MANTISSA_MASK, digits);
-      } else {
-        // origin d is not sub-normal, change mantissa to sub-normal
-        result = shiftLongBits(bits & DOUBLE_MANTISSA_MASK | 0x0010000000000000L, digits - 1);
-      }
-    } else {
-      if (Math.abs(d) >= Double.MIN_NORMAL) {
-        // common situation
-        result =
-            ((factor + DOUBLE_EXPONENT_BIAS) << DOUBLE_MANTISSA_BITS)
-                | (bits & DOUBLE_MANTISSA_MASK);
-      } else {
-        // origin d is sub-normal, change mantissa to normal style
-        result =
-            ((factor + DOUBLE_EXPONENT_BIAS) << DOUBLE_MANTISSA_BITS)
-                | ((bits << (subNormalFactor + 1)) & DOUBLE_MANTISSA_MASK);
-      }
-    }
-    return Double.longBitsToDouble(result | sign);
-  }
-
-  // Shifts integer bits as float, if the digits is positive, left-shift; if
-  // not, shift to right and calculate its carry.
-  private static int shiftIntBits(int bits, int digits) {
-    if (digits > 0) {
-      return bits << digits;
-    }
-    // change it to positive
-    int absdigits = -digits;
-    if (!(Integer.numberOfLeadingZeros(bits & ~FLOAT_SIGN_MASK) <= (32 - absdigits))) {
-      return 0;
-    }
-    int ret = bits >> absdigits;
-    boolean halfbit = ((bits >> (absdigits - 1)) & 0x1) == 1;
-    if (halfbit) {
-      if (Integer.numberOfTrailingZeros(bits) < (absdigits - 1)) {
-        ret = ret + 1;
-      }
-      if (Integer.numberOfTrailingZeros(bits) == (absdigits - 1)) {
-        if ((ret & 0x1) == 1) {
-          ret = ret + 1;
-        }
-      }
-    }
-    return ret;
-  }
-
-  // Shifts long bits as double, if the digits is positive, left-shift; if
-  // not, shift to right and calculate its carry.
-  private static long shiftLongBits(long bits, long digits) {
-    if (digits > 0) {
-      return bits << digits;
-    }
-    // change it to positive
-    long absdigits = -digits;
-    if (!(Long.numberOfLeadingZeros(bits & ~DOUBLE_SIGN_MASK) <= (64 - absdigits))) {
-      return 0;
-    }
-    long ret = bits >> absdigits;
-    boolean halfbit = ((bits >> (absdigits - 1)) & 0x1) == 1;
-    if (halfbit) {
-      // some bits will remain after shifting, calculates its carry
-      // subnormal
-      if (Long.numberOfTrailingZeros(bits) < (absdigits - 1)) {
-        ret = ret + 1;
-      }
-      if (Long.numberOfTrailingZeros(bits) == (absdigits - 1)) {
-        if ((ret & 0x1) == 1) {
-          ret = ret + 1;
-        }
-      }
-    }
-    return ret;
   }
 
   public static float scalb(float f, int scaleFactor) {
