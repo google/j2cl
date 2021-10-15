@@ -111,7 +111,7 @@ private val TypeDeclaration.declaredSourceString
   get() = "$packagePrefixSourceString$classComponentsSourceString"
 
 private val TypeDeclaration.packagePrefixSourceString
-  get() = packageName?.let { "$it." } ?: ""
+  get() = packageName?.let { "${it.packageNameSourceString}." } ?: ""
 
 private val TypeDeclaration.classComponentsSourceString
-  get() = classComponents.joinToString(".")
+  get() = classComponents.joinToString(".") { it.identifierSourceString }

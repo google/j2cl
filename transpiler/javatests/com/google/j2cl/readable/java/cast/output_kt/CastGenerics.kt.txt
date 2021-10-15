@@ -70,7 +70,7 @@ open class CastGenerics {
 
   @JvmStatic
   fun doSomething(): cast.CastGenerics.Foo<T>? {
-   return cast.CastGenerics.1<T>()
+   return cast.CastGenerics.`1`<T>()
   }
  }
 }
@@ -97,7 +97,7 @@ open class Container {
  }
 }
 
-open class $1Nested {
+open class `1Nested` {
  fun nestedGenericMethod(o: Any?) {
   val t: TT = o as TT
  }
@@ -107,8 +107,8 @@ interface Empty1 {}
 
 interface Empty2 {}
 
-open class $1: cast.CastGenerics.Foo<T> {
- fun <init>(): cast.CastGenerics.1<T> {
+open class `1`: cast.CastGenerics.Foo<T> {
+ fun <init>(): cast.CastGenerics.`1`<T> {
   super()
  }
 }

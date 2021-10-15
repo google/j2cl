@@ -16,7 +16,16 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 internal val String.identifierSourceString
-  get() = if (KotlinKeywords.isHardKeyword(this)) "`$this`" else this
+  get() = if (KotlinKeywords.isHardKeyword(this) || !isValidIdentifier) "`$this`" else this
 
 internal val String.packageNameSourceString
   get() = split('.').joinToString(".") { it.identifierSourceString }
+
+private val String.isValidIdentifier
+  get() = first().isValidIdentifierFirstChar && all { it.isValidIdentifierChar }
+
+private val Char.isValidIdentifierChar
+  get() = isLetterOrDigit() || this == '_'
+
+private val Char.isValidIdentifierFirstChar
+  get() = isValidIdentifierChar && !isDigit()

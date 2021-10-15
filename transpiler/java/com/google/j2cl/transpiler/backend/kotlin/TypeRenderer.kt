@@ -31,7 +31,7 @@ fun Renderer.renderType(type: Type) {
       Kind.INTERFACE -> "interface "
     }
   )
-  render("${type.declaration.simpleSourceName}")
+  render(type.declaration.classComponents.last().identifierSourceString)
 
   renderSuperTypes(type)
 

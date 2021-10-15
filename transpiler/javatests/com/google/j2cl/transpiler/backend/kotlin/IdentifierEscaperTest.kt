@@ -33,6 +33,16 @@ class IdentifierEscaperTest {
   }
 
   @Test
+  fun identifierSourceString_withInvalidChar() {
+    assertThat("foo\$bar".identifierSourceString).isEqualTo("`foo\$bar`")
+  }
+
+  @Test
+  fun identifierSourceString_startingWithDigit() {
+    assertThat("1foo".identifierSourceString).isEqualTo("`1foo`")
+  }
+
+  @Test
   fun packageNameSourceString() {
     assertThat("foo.is.bar".packageNameSourceString).isEqualTo("foo.`is`.bar")
   }

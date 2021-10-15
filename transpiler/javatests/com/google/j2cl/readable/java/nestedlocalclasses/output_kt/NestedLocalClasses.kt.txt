@@ -6,16 +6,16 @@ open class NestedLocalClasses {
  }
 }
 
-open class $1InnerClass {
+open class `1InnerClass` {
  fun fun() {
   var localVarInInnerClass: Int = 1
   TODO("expression.qualify needs rendering: \$1InnerClass.this)")
  }
 }
 
-open class $1InnerInnerClass {}
+open class `1InnerInnerClass` {}
 
-open class $1ClassIndirectlyCapturingLocal {}
+open class `1ClassIndirectlyCapturingLocal` {}
 
 interface InterfaceWithThisReference {
  fun foo() {
@@ -23,10 +23,10 @@ interface InterfaceWithThisReference {
  }
 }
 
-open class $1Super: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {}
+open class `1Super`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {}
 
-open class $1: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super {
- fun <init>(): nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 {
+open class `1`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.`1Super` {
+ fun <init>(): nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.`1` {
   super()
  }
 }
