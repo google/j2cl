@@ -113,12 +113,20 @@ def readable_example(
             tags = ["j2wasm"],
         )
 
+        java_package = get_java_package(native.package_name())
         native.genrule(
-            name = "readable_wasm_filter",
+            name = "readable_wasm_filtered",
             srcs = [":readable_wasm.wat"],
             outs = ["readable_wasm.filtered.wat"],
-            cmd = "$(location //transpiler/javatests/com/google/j2cl/readable/minion:filter_wat_file.par) $(SRCS) $(OUTS) " + get_java_package(native.package_name()),
-            tools = ["//transpiler/javatests/com/google/j2cl/readable/minion:filter_wat_file.par"],
+            cmd = ("awk 'BEGIN {firstMatch=1} {" +
+                   " if (match($$0, /\\s*;;; Code for %s/)) {" % java_package +
+                   "  if (firstMatch) { firstMatch=0 } else { printf \"\\n\" }" +
+                   "  inPackage=1;" +
+                   " };" +
+                   " if (match($$0, /\\s*;;; End of /)) {inPackage=0};" +
+                   " if (inPackage) {print $$0}" +
+                   "}' < $(SRCS) > $(OUTS)"),
+            output_to_bindir = 1,
         )
 
         make_diff_test(

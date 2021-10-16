@@ -18,7 +18,6 @@ import os
 import re
 import tempfile
 import repo_util
-import wat_util
 
 JAVA_DIR = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/"
 READABLE_TARGET_PATTERN = JAVA_DIR + "..."
@@ -62,7 +61,7 @@ def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
   """Blaze build everything in 1-go, for speed."""
 
   build_targets = [d + ":readable.js" for d in js_readable_dirs]
-  build_targets += [d + ":readable_wasm.wat" for d in wasm_readable_dirs]
+  build_targets += [d + ":readable_wasm_filtered" for d in wasm_readable_dirs]
   build_targets += [d + ":readable_kt.kt" for d in kt_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
@@ -75,15 +74,13 @@ def replace_transpiled_wasm(readable_dirs):
   """Copy and replace with Blaze built WASM."""
 
   for readable_dir in readable_dirs:
-    file_path = "blaze-bin/%s/readable_wasm.wat" % readable_dir
     output = readable_dir + "/output_wasm"
-    output_file_path = output + "/module.wat.txt"
-
     repo_util.run_cmd(["mkdir", "-p", output])
-    repo_util.run_cmd(["cp", "--no-preserve=mode", file_path, output_file_path])
-
-    java_package = os.path.relpath(readable_dir, JAVA_DIR).replace("/", ".")
-    wat_util.filter_wat_file(output_file_path, output_file_path, java_package)
+    repo_util.run_cmd([
+        "cp", "--no-preserve=mode",
+        "blaze-bin/%s/readable_wasm.filtered.wat" % readable_dir,
+        output + "/module.wat.txt"
+    ])
 
 
 def replace_transpiled_js(readable_dirs):
