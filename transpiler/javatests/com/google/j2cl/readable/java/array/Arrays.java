@@ -28,6 +28,7 @@ public class Arrays {
     Object[][] objects2d = new Object[5][10];
     objects2d = new Object[][] {{null, null}, null};
     objects2d = new Object[20][];
+    Object[][] arrayLiteral2d = {{null, null}, null};
 
     // Access
     Object object = objects[0];

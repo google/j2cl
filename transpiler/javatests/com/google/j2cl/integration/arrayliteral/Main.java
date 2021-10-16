@@ -27,6 +27,7 @@ public class Main {
     testTwoDimensionalLiteral();
     testTwoDimensionalLiteral_partial();
     testTwoDimensionalLiteral_unbalanced();
+    testTwoDimensionalLiteral_implicitInstantiation();
   }
 
   private static void testOneDimensionalLiteral() {
@@ -108,5 +109,14 @@ public class Main {
     assertTrue(unbalanced2D[0].length == 2);
     // The second branch less so.
     assertTrue(unbalanced2D[1] == null);
+  }
+
+  private static void testTwoDimensionalLiteral_implicitInstantiation() {
+    int[][] arrayLiteral2D = {{1, 2}, null};
+    assertTrue(arrayLiteral2D.length == 2);
+
+    assertTrue(arrayLiteral2D[0][0] == 1);
+    assertTrue(arrayLiteral2D[0].length == 2);
+    assertTrue(arrayLiteral2D[1] == null);
   }
 }
