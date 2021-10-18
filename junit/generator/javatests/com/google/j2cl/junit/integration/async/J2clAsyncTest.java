@@ -219,12 +219,11 @@ public class J2clAsyncTest extends IntegrationTestBase {
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testName)
-            .addTestFailure(
-                "initializationError", ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
-            .addTestFailure(
-                "initializationError", ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
-            .addTestFailure(
-                "initializationError", ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
+            .addTestFailure("initializationError")
+            // There should be exactly three of these errors.
+            .addLogLineContains("1. " + ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
+            .addLogLineContains("2. " + ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
+            .addLogLineContains("3. " + ErrorMessage.NO_THEN_METHOD.format("java.lang.Object"))
             .build();
 
     List<String> logLines = runTest(testName);
@@ -385,24 +384,19 @@ public class J2clAsyncTest extends IntegrationTestBase {
     TestResult testResult =
         newTestResultBuilder()
             .testClassName(testName)
-            .addTestFailure(
-                "initializationError",
+            .addTestFailure("initializationError")
+            .addLogLineContains(
                 AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("beforeThenable"))
-            .addTestFailure(
-                "initializationError",
+            .addLogLineContains(
                 AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("beforeFuture"))
-            .addTestFailure(
-                "initializationError",
+            .addLogLineContains(
                 AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("afterThenable"))
-            .addTestFailure(
-                "initializationError",
+            .addLogLineContains(
                 AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format("afterFuture"))
-            .addTestFailure(
-                "initializationError",
+            .addLogLineContains(
                 AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format(
                     "thenableDoesNotHaveTimeout"))
-            .addTestFailure(
-                "initializationError",
+            .addLogLineContains(
                 AsyncTestRunner.ErrorMessage.ASYNC_HAS_NO_TIMEOUT.format(
                     "futureDoesNotHaveTimeout"))
             .build();
