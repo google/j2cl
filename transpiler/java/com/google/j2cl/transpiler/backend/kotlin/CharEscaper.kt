@@ -39,7 +39,7 @@ private val Char.identifierEscapedStringOrNull: String?
 
 /** Returns true if this char should be escaped using Unicode escaping. */
 private val Char.needsUnicodeEscaping: Boolean
-  get() = toInt().let { it < 0x20 || it > 0x7f }
+  get() = toInt().let { it < 0x20 || it >= 0x7f }
 
 /**
  * Returns escaped string using Unicode escaping, or null if it does not need to be escaped

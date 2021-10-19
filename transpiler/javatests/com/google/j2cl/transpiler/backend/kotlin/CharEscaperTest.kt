@@ -39,6 +39,7 @@ class CharEscaperTest {
     assertEquals("\\\'", '\''.escapedString)
     assertEquals("\\\"", '"'.escapedString)
 
+    assertEquals("\\u007F", '\u007F'.escapedString)
     assertEquals("\\u0080", '\u0080'.escapedString)
   }
 
