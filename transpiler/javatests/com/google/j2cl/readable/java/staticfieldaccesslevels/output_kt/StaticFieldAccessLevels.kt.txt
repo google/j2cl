@@ -1,7 +1,17 @@
 package staticfieldaccesslevels
 
 open class StaticFieldAccessLevels {
- fun test(): Int {
-  return if (TODO("JavaScriptConstructorReference").b) TODO("JavaScriptConstructorReference").a else TODO("JavaScriptConstructorReference").d
+ open fun test(): Int {
+  return if (staticfieldaccesslevels.StaticFieldAccessLevels.b) staticfieldaccesslevels.StaticFieldAccessLevels.a else staticfieldaccesslevels.StaticFieldAccessLevels.d
+ }
+
+ companion object {
+  @JvmStatic var a: Int
+
+  @JvmStatic private var b: Boolean
+
+  @JvmStatic protected var c: Any?
+
+  @JvmStatic internal var d: Int
  }
 }

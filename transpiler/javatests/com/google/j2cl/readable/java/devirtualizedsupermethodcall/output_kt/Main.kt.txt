@@ -1,31 +1,31 @@
 package devirtualizedsupermethodcall
 
-open class SubNumber: Number {
- fun intValue(): Int {
+open class SubNumber: Number() {
+ open fun intValue(): Int {
   return 0
  }
 
- fun longValue(): Long {
+ open fun longValue(): Long {
   return 0 as Long
  }
 
- fun floatValue(): Float {
+ open fun floatValue(): Float {
   return 0
  }
 
- fun doubleValue(): Double {
+ open fun doubleValue(): Double {
   return 0
  }
 }
 
 open class FooCallsSuperObjectMethod {
- fun hashCode(): Int {
+ open fun hashCode(): Int {
   return super.hashCode()
  }
 }
 
 open class Main {
- fun main() {
+ open fun main() {
   val fooCallsSuperObjectMethods: devirtualizedsupermethodcall.FooCallsSuperObjectMethod? = devirtualizedsupermethodcall.FooCallsSuperObjectMethod()
   fooCallsSuperObjectMethods.hashCode()
   val sn: devirtualizedsupermethodcall.SubNumber? = devirtualizedsupermethodcall.SubNumber()

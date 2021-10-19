@@ -10,17 +10,17 @@ open class InferReturn {
   @JvmStatic
   fun tightenType(foo: inferreturn.InferReturn<String?>?): inferreturn.InferReturn<inferreturn.InferReturn<String?>?>? {
    if (foo != null) {
-    return TODO("JavaScriptConstructorReference").inferGeneric(foo)
+    return inferreturn.InferReturn.inferGeneric(foo)
    }
    return null
   }
 
   @JvmStatic
   fun main() {
-   val list: java.util.ArrayList<Any?>? = TODO("JavaScriptConstructorReference").newArrayList("foo")
-   TODO("JavaScriptConstructorReference").acceptsArrayListOfObject(list)
-   val array: Array<Any?>? = TODO("JavaScriptConstructorReference").newArray("foo")
-   TODO("JavaScriptConstructorReference").acceptsArrayOfObject(array)
+   val list: java.util.ArrayList<Any?>? = inferreturn.InferReturn.newArrayList("foo")
+   inferreturn.InferReturn.acceptsArrayListOfObject(list)
+   val array: Array<Any?>? = inferreturn.InferReturn.newArray("foo")
+   inferreturn.InferReturn.acceptsArrayOfObject(array)
   }
 
   @JvmStatic

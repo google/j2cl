@@ -1,15 +1,23 @@
 package instanceinnerclass
 
 open class InstanceInnerClass {
- fun funOuter() {}
+ var instanceField: Int
 
- fun test() {
+ open fun funOuter() {}
+
+ open fun test() {
   TODO("expression.qualify needs rendering: new InstanceInnerClass.<init>())")
  }
 }
 
 open class InnerClass {
- fun funInner() {
+ val `this`: instanceinnerclass.InstanceInnerClass?
+
+ var field: Int = this.`this`.instanceField + this.`this`.instanceField
+
+ var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this.`this`
+
+ open fun funInner() {
   this.`this`.funOuter()
   this.`this`.funOuter()
  }

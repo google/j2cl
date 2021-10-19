@@ -1,7 +1,7 @@
 package arithmeticexpressions
 
 open class ArithmeticExpressions {
- fun testCoercions() {
+ open fun testCoercions() {
   var b: Byte = 1L as Byte
   var c: Char = 1L as Char
   var s: Short = 1L as Short
@@ -16,15 +16,15 @@ open class ArithmeticExpressions {
   d = 9223372036854775807L as Double
  }
 
- fun testPrimitives() {
+ open fun testPrimitives() {
   var a: Int = 10; val b: Int = a++; val c: Int = a--; val d: Int = ++a; val e: Int = --a; val f: Int = - a; val g: Int = + a; val h: Int = ~a; val i: Int = 1 + 1 + 2 - 5; val j: Int = (1 + 2) * (3 + 4); val p: Int = 1 / 2 * 3 % 4; val r: Int = - -2147483648; val t: Int = - - - 1; val u: Int = + + + 1; val v: Int = - + - 1; val w: Int = 5 - - 4
-  var k: Boolean = !(1 + 2 + 3 == 4); val l: Boolean = 1 + 2 != 4; val m: Boolean = TODO("JavaScriptConstructorReference").MAX_VALUE != 9.223372036854778E18
+  var k: Boolean = !(1 + 2 + 3 == 4); val l: Boolean = 1 + 2 != 4; val m: Boolean = java.lang.Long.MAX_VALUE != 9.223372036854778E18
   val o: Double = (5 + 1) / 2 - 0.0
   a = a << 31L
   a <<= 1L
   a += 1L
   a /= 1L
-  a += TODO("JavaScriptConstructorReference").MAX_VALUE
+  a += java.lang.Double.MAX_VALUE
   k |= true
   var s: Short = 10
   k = ++s == 10
@@ -32,7 +32,9 @@ open class ArithmeticExpressions {
   q = 3 >>> 2
  }
 
- fun testCompoundArray() {
+ var bar: Long = arithmeticexpressions.ArithmeticExpressions.foo++
+
+ open fun testCompoundArray() {
   val ints: IntArray? = null
   ints[0] += 1
   ints[0] -= 1
@@ -55,7 +57,7 @@ open class ArithmeticExpressions {
   longs[0] += 1
   longs[0]--
   --longs[0]
-  TODO("JavaScriptConstructorReference").getLongArray()[0]++
+  arithmeticexpressions.ArithmeticExpressions.getLongArray()[0]++
   val booleans: BooleanArray? = null
   booleans[0] |= true
   val strings: Array<String?>? = null
@@ -64,7 +66,7 @@ open class ArithmeticExpressions {
   val b: Boolean = ++shorts[0] == 10
  }
 
- fun testCompoundBoxedTypes() {
+ open fun testCompoundBoxedTypes() {
   var c: Int? = 1000
   var d: Int? = 10000
   d += c
@@ -89,7 +91,9 @@ open class ArithmeticExpressions {
   val n: Int = 1 + ref.field
  }
 
- fun testExtendedOperands() {
+ internal var intField: Long
+
+ open fun testExtendedOperands() {
   var boxedInteger: Int? = 3
   var i: Int
   var l: Long
@@ -105,31 +109,47 @@ open class ArithmeticExpressions {
  }
 
  companion object {
+  @JvmStatic private val FLOAT_CONSTANT: Float = 1.1f
+
+  @JvmStatic private val DOUBLE_CONSTANT: Double = 1.100000023841858
+
+  @JvmStatic private val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
+
+  @JvmStatic var one: Long = 1
+
+  @JvmStatic var foo: Long = arithmeticexpressions.ArithmeticExpressions.one++
+
   @JvmStatic
-  fun getLongArray(): LongArray? {
+  private fun getLongArray(): LongArray? {
    return null
   }
 
   @JvmStatic
-  fun getInteger(): Int? {
+  private fun getInteger(): Int? {
    return null
   }
 
   @JvmStatic
-  fun testSideEffect() {
-   TODO("JavaScriptConstructorReference").getWithSideEffect().intField += 5
+  private fun testSideEffect() {
+   arithmeticexpressions.ArithmeticExpressions.getWithSideEffect().intField += 5
   }
 
   @JvmStatic
-  fun getWithSideEffect(): arithmeticexpressions.ArithmeticExpressions? {
+  private fun getWithSideEffect(): arithmeticexpressions.ArithmeticExpressions? {
    return null
   }
 
+  @JvmStatic private var counter: Long = 0
+
   @JvmStatic
-  fun incrementCounter(): Long {
-   return ++TODO("JavaScriptConstructorReference").counter
+  private fun incrementCounter(): Long {
+   return ++arithmeticexpressions.ArithmeticExpressions.counter
   }
  }
 }
 
-open class `1Ref` {}
+open class `1Ref` {
+ val `this`: arithmeticexpressions.ArithmeticExpressions?
+
+ internal var field: T
+}

@@ -3,25 +3,27 @@ package boundedtypesupercall
 open class Main {}
 
 abstract class Foo {
- fun <init>(foo: T): boundedtypesupercall.Main.Foo<T> {}
+ constructor(foo: T) {}
 
- fun foo()
+ abstract open fun foo()
 }
 
 open class Bar {
- fun getSomething(): T {
+ open fun getSomething(): T {
   return null
  }
 
- fun doSomething(): boundedtypesupercall.Main.Foo<T>? {
+ open fun doSomething(): boundedtypesupercall.Main.Foo<T>? {
   return TODO("expression.qualify needs rendering: Bar.this)")
  }
 }
 
 open class `1`: boundedtypesupercall.Main.Foo<T> {
- fun <init>(`$_0`: T): boundedtypesupercall.Main.Bar.`1`<T> {
+ internal constructor(`$_0`: T) {
   super(`$_0`)
  }
 
- fun foo() {}
+ val `this`: boundedtypesupercall.Main.Bar<T>?
+
+ open fun foo() {}
 }

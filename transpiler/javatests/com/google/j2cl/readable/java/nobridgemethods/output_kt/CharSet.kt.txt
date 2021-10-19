@@ -3,11 +3,11 @@ package nobridgemethods
 interface Entry {}
 
 abstract class Map {
- fun getCeilingEntry(key: K): nobridgemethods.Entry<K>?
+ abstract open fun getCeilingEntry(key: K): nobridgemethods.Entry<K>?
 }
 
-open class TreeMap: nobridgemethods.Map<K> {
- fun getCeilingEntry(key: K): nobridgemethods.TreeMap.InnerEntry<K>? {
+open class TreeMap: nobridgemethods.Map<K>() {
+ open fun getCeilingEntry(key: K): nobridgemethods.TreeMap.InnerEntry<K>? {
   return nobridgemethods.TreeMap.InnerEntry<K>()
  }
 }
@@ -17,14 +17,14 @@ open class InnerEntry: nobridgemethods.Entry<K> {}
 open class CharSet {
  companion object {
   @JvmStatic
-  fun main(args: Array<String?>?) {
+  fun main(vararg args: String?) {
    val treeMap: nobridgemethods.TreeMap<String?>? = nobridgemethods.CharSet.`1`()
   }
  }
 }
 
 open class `1`: nobridgemethods.TreeMap<String?> {
- fun <init>(): nobridgemethods.CharSet.`1` {
+ internal constructor() {
   super()
  }
 }

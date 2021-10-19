@@ -1,11 +1,13 @@
 package initmethoddispatch
 
 open class InitMethodDispatch {
- fun <init>(): initmethoddispatch.InitMethodDispatch<T> {
+ internal var value: Int
+
+ internal constructor() {
   super(1)
  }
 
- fun <init>(i: Int): initmethoddispatch.InitMethodDispatch<T> {
+ internal constructor(i: Int) {
   this.value = i
  }
 }

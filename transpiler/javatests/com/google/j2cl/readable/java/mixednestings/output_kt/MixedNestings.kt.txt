@@ -1,40 +1,46 @@
 package mixednestings
 
 interface MyInterface {
- fun fun(a: Int): Int
+ fun `fun`(a: Int): Int
 }
 
 open class MixedNestings {
- fun mm() {}
+ open fun mm() {}
 
- fun test() {
+ open fun test() {
   TODO("expression.qualify needs rendering: MixedNestings.this)").a()
  }
 }
 
 open class A {
- fun aa() {}
+ val `this`: mixednestings.MixedNestings?
 
- fun a() {
+ open fun aa() {}
+
+ open fun a() {
   TODO("expression.qualify needs rendering: A.this)").b()
  }
 }
 
 open class `1B` {
- fun bb() {}
+ val `this`: mixednestings.MixedNestings.A?
 
- fun b(): Int {
+ open fun bb() {}
+
+ open fun b(): Int {
   val i: mixednestings.MyInterface? = TODO("expression.qualify needs rendering: \$1B.this)")
   return i.`fun`(400)
  }
 }
 
 open class `1`: mixednestings.MyInterface {
- fun <init>(): mixednestings.MixedNestings.A.`1B`.`1` {
+ internal constructor() {
   super()
  }
 
- fun fun(a: Int): Int {
+ val `this`: mixednestings.MixedNestings.A.`1B`?
+
+ open fun `fun`(a: Int): Int {
   val ii: mixednestings.MyInterface? = {n: Int -> {
     this.`this`.`this`.`this`.mm()
     this.`this`.`this`.aa()
@@ -54,11 +60,13 @@ open class `1`: mixednestings.MyInterface {
 }
 
 open class `1`: mixednestings.MyInterface {
- fun <init>(): mixednestings.MixedNestings.A.`1B`.`1`.`1` {
+ internal constructor() {
   super()
  }
 
- fun fun(b: Int): Int {
+ val `this`: mixednestings.MixedNestings.A.`1B`.`1`?
+
+ open fun `fun`(b: Int): Int {
   return b
  }
 }

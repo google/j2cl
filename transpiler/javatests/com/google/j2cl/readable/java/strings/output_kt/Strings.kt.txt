@@ -1,7 +1,13 @@
 package strings
 
 open class Strings {
- fun test() {
+ private var someString: String? = "This is a string literal"
+
+ private var nonBmpChar: String? = "\uD800\uDF46"
+
+ private var wideColon: String? = "\uFF1A"
+
+ open fun test() {
   var s1: String? = null
   var s2: String? = null
   var s3: String? = s1 + s2
@@ -26,6 +32,14 @@ open class Strings {
   s1 = 1 + 2 + "s"
   s1 = "s" + 1 + 2
  }
+
+ companion object {
+  @JvmStatic private val ESCAPE_CODES: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+
+  @JvmStatic private val ESCAPE_CODES_COPY: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+ }
 }
 
-open class StringHolder {}
+open class StringHolder {
+ internal var s: String? = "A"
+}

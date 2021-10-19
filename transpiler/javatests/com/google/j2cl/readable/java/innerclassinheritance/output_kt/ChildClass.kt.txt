@@ -1,25 +1,35 @@
 package innerclassinheritance
 
 open class ParentOuter {
- fun funInParentOuter() {}
+ var fieldInParentOuter: Int
+
+ open fun funInParentOuter() {}
 }
 
 open class ParentInner {
- fun funInParentInner() {}
+ var fieldInParentInner: Int
+
+ open fun funInParentInner() {}
 }
 
-open class ChildClass: innerclassinheritance.ParentOuter {
- fun funInOuter() {}
+open class ChildClass: innerclassinheritance.ParentOuter() {
+ var fieldInOuter: Int
 
- fun testLocalClass() {
+ open fun funInOuter() {}
+
+ open fun testLocalClass() {
   TODO("expression.qualify needs rendering: ChildClass.this)").test()
  }
 }
 
-open class InnerClass: innerclassinheritance.ParentInner {
- fun funInInner() {}
+open class InnerClass: innerclassinheritance.ParentInner() {
+ val `this`: innerclassinheritance.ChildClass?
 
- fun testInnerClass(): Int {
+ var fieldInInner: Int
+
+ open fun funInInner() {}
+
+ open fun testInnerClass(): Int {
   this.`this`.funInParentOuter()
   this.`this`.funInParentOuter()
   this.`this`.funInOuter()
@@ -40,10 +50,14 @@ open class InnerClass: innerclassinheritance.ParentInner {
  }
 }
 
-open class `1LocalClass`: innerclassinheritance.ChildClass {
- fun funInParentOuter() {}
+open class `1LocalClass`: innerclassinheritance.ChildClass() {
+ val `this`: innerclassinheritance.ChildClass?
 
- fun test() {
+ internal var `object`: Any? = this
+
+ open fun funInParentOuter() {}
+
+ open fun test() {
   this.funInOuter()
   this.`this`.funInOuter()
   this.funInParentOuter()

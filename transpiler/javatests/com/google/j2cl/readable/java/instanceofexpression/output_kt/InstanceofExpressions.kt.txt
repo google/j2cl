@@ -1,7 +1,7 @@
 package instanceofexpression
 
 open class InstanceofExpressions {
- fun testInstanceofClass() {
+ open fun testInstanceofClass() {
   val `object`: Any? = instanceofexpression.InstanceofExpressions()
   var b: Boolean
   b = `object` is Any
@@ -9,14 +9,14 @@ open class InstanceofExpressions {
   b = `object` is String
  }
 
- fun testInstanceofInterface() {
+ open fun testInstanceofInterface() {
   val o: Any? = Any()
   var b: Boolean
   b = o is java.io.Serializable
   b = TODO("expression.qualify needs rendering: InstanceofExpressions.this)") is java.io.Serializable
  }
 
- fun testInstanceofBoxedType() {
+ open fun testInstanceofBoxedType() {
   val b: Any? = Int(1)
   var a: Boolean = b is Byte
   a = b is Double
@@ -33,7 +33,7 @@ open class InstanceofExpressions {
   a = d is Double
  }
 
- fun testInstanceOfArray() {
+ open fun testInstanceOfArray() {
   val `object`: Any? = Any()
   val objectArray: Array<Any?>? = arrayOfNulls<Any?>(0)
   val objectDoubleArray: Array<Array<Any?>?>? = arrayOfNulls<Array<Any?>?>(0)
@@ -56,7 +56,9 @@ open class InstanceofExpressions {
 }
 
 open class `1`: java.io.Serializable {
- fun <init>(): instanceofexpression.InstanceofExpressions.`1` {
+ internal constructor() {
   super()
  }
+
+ val `this`: instanceofexpression.InstanceofExpressions?
 }

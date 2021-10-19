@@ -1,29 +1,47 @@
 package simplelocalclass
 
 open class SimpleLocalClass {
- fun test(p: Int) {
+ open fun test(p: Int) {
   var localVar: Int = 1
   TODO("expression.qualify needs rendering: SimpleLocalClass.this)").`fun`()
   TODO("expression.qualify needs rendering: SimpleLocalClass.this)")
  }
 
- fun fun() {
+ open fun `fun`() {
   var localVar: Int = 1
  }
 
- fun foo() {}
+ open fun foo() {}
 }
 
 open class `1InnerClass` {
- fun fun(): Int {
+ val `this`: simplelocalclass.SimpleLocalClass?
+
+ open fun `fun`(): Int {
   return this.localVar + this.p
  }
+
+ val localVar: Int
+
+ val p: Int
 }
 
-open class `1InnerClassWithoutCaptures` {}
+open class `1InnerClassWithoutCaptures` {
+ val `this`: simplelocalclass.SimpleLocalClass?
+}
 
-open class `2InnerClass` {}
+open class `2InnerClass` {
+ val `this`: simplelocalclass.SimpleLocalClass?
 
-open class `1Abc$InnerClass` {}
+ internal var field: Int = this.localVar
 
-open class `1Klm$InnerClass` {}
+ val localVar: Int
+}
+
+open class `1Abc$InnerClass` {
+ val `this`: simplelocalclass.SimpleLocalClass?
+}
+
+open class `1Klm$InnerClass` {
+ val `this`: simplelocalclass.SimpleLocalClass?
+}

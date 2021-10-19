@@ -1,13 +1,15 @@
 package supercallnondefault
 
 open class Parent {
- fun <init>(f: Int): supercallnondefault.Parent {
+ var field: Int
+
+ constructor(f: Int) {
   this.field = f
  }
 }
 
 open class Child: supercallnondefault.Parent {
- fun <init>(a: Int): supercallnondefault.Child {
+ constructor(a: Int) {
   super(a)
  }
 }

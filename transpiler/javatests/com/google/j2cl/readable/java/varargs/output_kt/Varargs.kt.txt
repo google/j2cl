@@ -1,19 +1,19 @@
 package varargs
 
 open class Varargs {
- fun <init>(args: IntArray?): varargs.Varargs {}
+ constructor(vararg args: Int) {}
 
- fun <init>(): varargs.Varargs {
+ constructor() {
   super(intArrayOf(1))
  }
 
- fun test(a: Int, args: Array<Any?>?) {}
+ open fun test(a: Int, vararg args: Any?) {}
 
- fun testCloneable(args: Array<Cloneable?>?) {}
+ open fun testCloneable(vararg args: Cloneable?) {}
 
- fun testSerializable(args: Array<java.io.Serializable?>?) {}
+ open fun testSerializable(vararg args: java.io.Serializable?) {}
 
- fun main() {
+ open fun main() {
   val v: varargs.Varargs? = varargs.Varargs()
   v.test(1, arrayOf<Any?>())
   v.test(1, arrayOf<Any?>(Any()))
@@ -26,17 +26,17 @@ open class Varargs {
 
  companion object {
   @JvmStatic
-  fun fun(elements: Array<T>?) {}
+  fun `fun`(vararg elements: T) {}
 
   @JvmStatic
   fun bar(a: E, b: E) {
-   TODO("JavaScriptConstructorReference").`fun`(arrayOf<E>(a, b))
+   varargs.Varargs.`fun`(arrayOf<E>(a, b))
   }
  }
 }
 
 open class Child: varargs.Varargs {
- fun <init>(): varargs.Child {
+ constructor() {
   super(intArrayOf(1))
  }
 }

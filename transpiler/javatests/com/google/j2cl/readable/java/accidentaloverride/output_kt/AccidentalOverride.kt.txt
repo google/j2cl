@@ -1,13 +1,13 @@
 package accidentaloverride
 
 open class Parent {
- fun foo(e: T) {}
+ open fun foo(e: T) {}
 }
 
 interface SuperInterface {
  fun foo(t: T)
 }
 
-open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<java.lang.AssertionError?>, accidentaloverride.Parent<java.lang.AssertionError?> {}
+open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<java.lang.AssertionError?>, accidentaloverride.Parent<java.lang.AssertionError?>() {}
 
-open class AccidentalOverride: accidentaloverride.SuperInterface<Error?>, accidentaloverride.Parent<Error?> {}
+open class AccidentalOverride: accidentaloverride.SuperInterface<Error?>, accidentaloverride.Parent<Error?>() {}

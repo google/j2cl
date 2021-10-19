@@ -1,17 +1,17 @@
 package cast
 
 open class Casts {
- fun testCastToClass() {
+ open fun testCastToClass() {
   val o: Any? = Any()
   val c: cast.Casts? = o as cast.Casts?
  }
 
- fun testCasToInterface() {
+ open fun testCasToInterface() {
   val o: Any? = Any()
   val s: java.io.Serializable? = o as java.io.Serializable?
  }
 
- fun testCastToBoxedType() {
+ open fun testCastToBoxedType() {
   val o: Any? = Int(1)
   val b: Byte? = o as Byte?
   val d: Double? = o as Double?
@@ -24,14 +24,14 @@ open class Casts {
   val bool: Boolean? = o as Boolean?
  }
 
- fun testCastToArray() {
+ open fun testCastToArray() {
   val foo: Any? = null as Array<Any?>?
   val bar: Any? = null as Array<Array<Any?>?>?
  }
 
- fun functionForInstanceofTest() {}
+ private fun functionForInstanceofTest() {}
 
- fun testCastObjectAfterInstanceOf() {
+ open fun testCastObjectAfterInstanceOf() {
   var o: Any? = Any()
   if (o is cast.Casts) {
    val c: cast.Casts? = o as cast.Casts?
@@ -58,7 +58,7 @@ open class Casts {
   }
  }
 
- fun testCastFieldAfterInstanceOf() {
+ open fun testCastFieldAfterInstanceOf() {
   var foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
   if (foo.field is cast.Casts) {
    val c: cast.Casts? = foo.field as cast.Casts?
@@ -80,7 +80,7 @@ open class Casts {
   }
  }
 
- fun testCaseMethodAfterInstanceOf() {
+ open fun testCaseMethodAfterInstanceOf() {
   val foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
   if (foo.method() is cast.Casts) {
    val cNotAvoidCastsTo: cast.Casts? = foo.method() as cast.Casts?
@@ -89,7 +89,11 @@ open class Casts {
 }
 
 open class Foo {
- fun method(): Any? {
+ val `this`: cast.Casts?
+
+ var field: Any? = Any()
+
+ open fun method(): Any? {
   return Any()
  }
 }

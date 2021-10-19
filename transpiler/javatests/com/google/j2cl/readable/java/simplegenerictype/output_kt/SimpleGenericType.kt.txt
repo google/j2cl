@@ -1,12 +1,16 @@
 package simplegenerictype
 
 open class SimpleGenericType {
- fun <init>(t: T, s: S): simplegenerictype.SimpleGenericType<T, S> {
+ var first: T
+
+ var second: S
+
+ constructor(t: T, s: S) {
   this.first = t
   this.second = s
  }
 
- fun test() {
+ open fun test() {
   val g: simplegenerictype.SimpleGenericType<Any?, Error?>? = simplegenerictype.SimpleGenericType<Any?, Error?>(Any(), Error())
  }
 }

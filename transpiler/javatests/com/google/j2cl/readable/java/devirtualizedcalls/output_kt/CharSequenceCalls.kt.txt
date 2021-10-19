@@ -1,11 +1,11 @@
 package devirtualizedcalls
 
 open class CharSequenceCalls {
- fun test(cs: CharSequence?) {
+ open fun test(cs: CharSequence?) {
   cs.charAt(0)
  }
 
- fun main() {
+ open fun main() {
   val s: String? = "s"
   this.test(s)
  }

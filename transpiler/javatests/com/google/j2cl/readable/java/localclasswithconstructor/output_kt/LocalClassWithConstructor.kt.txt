@@ -1,19 +1,27 @@
 package localclasswithconstructor
 
 open class LocalClassWithConstructor {
- fun test(p: Int) {
+ open fun test(p: Int) {
   var localVar: Int = 1
   TODO("expression.qualify needs rendering: LocalClassWithConstructor.this)")
  }
 }
 
 open class `1LocalClass` {
- fun <init>(a: Int, b: Int): localclasswithconstructor.LocalClassWithConstructor.`1LocalClass` {
+ val `this`: localclasswithconstructor.LocalClassWithConstructor?
+
+ var field: Int
+
+ constructor(a: Int, b: Int) {
   this.field = this.localVar + a + b
  }
 
- fun <init>(a: Int): localclasswithconstructor.LocalClassWithConstructor.`1LocalClass` {
+ constructor(a: Int) {
   super(a, this.p)
   this.field = this.localVar
  }
+
+ val localVar: Int
+
+ val p: Int
 }

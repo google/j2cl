@@ -2,9 +2,13 @@ package instancequalifieronstaticfield
 
 open class InstanceQualifiers {
  companion object {
+  @JvmStatic var staticField: Int = 100
+
+  @JvmStatic var sideEffectCount: Int = 0
+
   @JvmStatic
   fun getStaticValue(): Int {
-   return TODO("JavaScriptConstructorReference").staticField
+   return instancequalifieronstaticfield.InstanceQualifiers.staticField
   }
 
   @JvmStatic
@@ -13,11 +17,11 @@ open class InstanceQualifiers {
   }
 
   @JvmStatic
-  fun main(args: Array<String?>?) {
+  fun main(vararg args: String?) {
    val main: instancequalifieronstaticfield.InstanceQualifiers? = instancequalifieronstaticfield.InstanceQualifiers()
    var i: Int = 0
    if (true) {
-    TODO("JavaScriptConstructorReference").staticField = 100
+    instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
    }
    if (true) {
     main.staticField = 100

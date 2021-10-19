@@ -1,35 +1,45 @@
 package anonymousclass
 
 abstract class SomeClass {
- fun foo(): String?
+ abstract open fun foo(): String?
 
- fun <init>(i: Int): anonymousclass.SomeClass {}
+ internal constructor(i: Int) {}
 }
 
 open class AnonymousClass {
- fun main() {
+ open fun main() {
   val instance: anonymousclass.SomeClass? = TODO("expression.qualify needs rendering: AnonymousClass.this)")
  }
 }
 
 open class `1`: anonymousclass.SomeClass {
- fun <init>(`$_0`: Int): anonymousclass.AnonymousClass.`1` {
+ internal constructor(`$_0`: Int) {
   super(`$_0`)
  }
 
- fun foo(): String? {
+ val `this`: anonymousclass.AnonymousClass?
+
+ internal var `object`: Any? = this
+
+ internal var outer: Any? = this.`this`
+
+ open fun foo(): String? {
   return "a"
  }
 }
 
-interface SomeInterface {}
+interface SomeInterface {
+ companion object {
+  @JvmStatic val implicitlyStatic: anonymousclass.SomeClass? = anonymousclass.SomeInterface.`1`(1)
+ }
+}
 
 open class `1`: anonymousclass.SomeClass {
- fun <init>(`$_0`: Int): anonymousclass.SomeInterface.`1` {
+ internal constructor(`$_0`: Int) {
   super(`$_0`)
  }
 
- fun foo(): String? {
+ open fun foo(): String? {
   return "a"
  }
 }

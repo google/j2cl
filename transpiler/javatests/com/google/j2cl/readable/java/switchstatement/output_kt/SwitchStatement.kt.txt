@@ -1,9 +1,15 @@
 package switchstatement
 
-enum class Numbers: Enum<switchstatement.Numbers?> {}
+enum class Numbers: Enum<switchstatement.Numbers?>() {
+ companion object {
+  @JvmStatic val ONE: switchstatement.Numbers = switchstatement.Numbers()
+
+  @JvmStatic val TWO: switchstatement.Numbers = switchstatement.Numbers()
+ }
+}
 
 open class SwitchStatement {
- fun main() {
+ open fun main() {
   SWITCH@ do when ("one") {
    "one" ->
    "two" ->
@@ -26,9 +32,9 @@ open class SwitchStatement {
    else ->
     return Unit
   } while (false)
-  SWITCH@ do when (TODO("JavaScriptConstructorReference").ONE) {
-   TODO("JavaScriptConstructorReference").ONE ->
-   TODO("JavaScriptConstructorReference").TWO ->
+  SWITCH@ do when (switchstatement.Numbers.ONE) {
+   switchstatement.Numbers.ONE ->
+   switchstatement.Numbers.TWO ->
     break@SWITCH
    else ->
     return Unit
@@ -37,7 +43,7 @@ open class SwitchStatement {
 
  companion object {
   @JvmStatic
-  fun testSwitchVariableDeclarations() {
+  private fun testSwitchVariableDeclarations() {
    SWITCH@ do when (3) {
     1 ->
      val unassigned: Int; val unassigned2: Int

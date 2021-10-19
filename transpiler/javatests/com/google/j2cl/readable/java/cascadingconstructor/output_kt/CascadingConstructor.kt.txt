@@ -1,12 +1,16 @@
 package cascadingconstructor
 
 open class CascadingConstructor {
- fun <init>(a: Int, b: Int): cascadingconstructor.CascadingConstructor {
+ private var a: Int
+
+ private var b: Int
+
+ private constructor(a: Int, b: Int) {
   this.a = a
   this.b = b
  }
 
- fun <init>(a: Int): cascadingconstructor.CascadingConstructor {
+ constructor(a: Int) {
   super(a, a * 2)
  }
 }

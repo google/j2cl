@@ -40,32 +40,33 @@ fun Renderer.renderType(type: Type) {
 }
 
 private fun Renderer.renderSuperTypes(type: Type) {
+  val hasConstructors = type.constructors.isNotEmpty()
   type
     .superTypesStream
     .filter { !isJavaLangObject(it) }
-    .map { it.toNonNullable().sourceString }
+    .map { it.toNonNullable().sourceString.plus(if (it.isClass && !hasConstructors) "()" else "") }
     .collect(Collectors.joining(", "))
     .let { if (it.isNotEmpty()) render(": $it") }
 }
 
 private fun Renderer.renderTypeBody(type: Type) {
-  // TODO(b/399455906): add support for field declarations
   // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
   // TODO(b/399455906): Render enum values.
-  val (staticMethods, instanceMethods) = type.methods.partition { it.isStatic }
+  val (staticMembers, instanceMembers) = type.members.partition { it.isStatic }
 
-  if (instanceMethods.isNotEmpty()) {
+  val renderInstanceMembers = instanceMembers.isNotEmpty()
+  if (renderInstanceMembers) {
     renderNewLine()
-    renderSeparatedWithEmptyLine(instanceMethods) { renderMethod(it) }
+    renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it, type.kind) }
   }
 
-  if (staticMethods.isNotEmpty()) {
+  if (staticMembers.isNotEmpty()) {
     renderNewLine()
-    if (instanceMethods.isNotEmpty()) renderNewLine() // Empty line after last method.
+    if (renderInstanceMembers) renderNewLine() // Empty line after last instance member.
     render("companion object ")
     renderInCurlyBrackets {
       renderNewLine()
-      renderSeparatedWithEmptyLine(staticMethods) { renderMethod(it) }
+      renderSeparatedWithEmptyLine(staticMembers) { renderMember(it, type.kind) }
     }
   }
 }

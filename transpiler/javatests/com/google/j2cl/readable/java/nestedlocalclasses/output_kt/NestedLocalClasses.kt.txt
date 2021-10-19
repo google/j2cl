@@ -1,21 +1,43 @@
 package nestedlocalclasses
 
 open class NestedLocalClasses {
- fun test(p: Int) {
+ open fun test(p: Int) {
   var localVar: Int = 1
  }
 }
 
 open class `1InnerClass` {
- fun fun() {
+ val `this`: nestedlocalclasses.NestedLocalClasses?
+
+ open fun `fun`() {
   var localVarInInnerClass: Int = 1
   TODO("expression.qualify needs rendering: \$1InnerClass.this)")
  }
+
+ val localVar: Int
 }
 
-open class `1InnerInnerClass` {}
+open class `1InnerInnerClass` {
+ val `this`: nestedlocalclasses.NestedLocalClasses.`1InnerClass`?
 
-open class `1ClassIndirectlyCapturingLocal` {}
+ var fieldInInnerInnerClass: Int = this.localVar + this.localVarInInnerClass
+
+ val localVar: Int
+
+ val localVarInInnerClass: Int
+}
+
+open class `1ClassIndirectlyCapturingLocal` {
+ val `this`: nestedlocalclasses.NestedLocalClasses.`1InnerClass`?
+
+ init {
+  TODO("expression.qualify needs rendering: \$1ClassIndirectlyCapturingLocal.this.this)")
+ }
+
+ val localVar: Int
+
+ val localVarInInnerClass: Int
+}
 
 interface InterfaceWithThisReference {
  fun foo() {
@@ -23,10 +45,14 @@ interface InterfaceWithThisReference {
  }
 }
 
-open class `1Super`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {}
+open class `1Super`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {
+ val `this`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference?
+}
 
 open class `1`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.`1Super` {
- fun <init>(): nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.`1` {
+ internal constructor() {
   super()
  }
+
+ val `this`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference?
 }

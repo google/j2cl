@@ -1,7 +1,7 @@
 package booleanoperations
 
 open class BooleanOperations {
- fun test() {
+ open fun test() {
   var ls: Boolean = true
   val rs: Boolean = true
   var r: Boolean = true
@@ -17,14 +17,14 @@ open class BooleanOperations {
   r ^= rs
   r &= rs
   r |= rs
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls == rs)
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls != rs)
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls ^ rs)
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls & rs)
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls | rs)
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls && rs)
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls || rs)
-  TODO("JavaScriptConstructorReference").acceptBoolean(ls = rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls == rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls != rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls ^ rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls & rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls | rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls && rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls || rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls = rs)
   var br: Boolean?
   br = ls == rs as Boolean?
   br = ls != rs as Boolean?
@@ -63,10 +63,20 @@ open class BooleanOperations {
 
  companion object {
   @JvmStatic
-  fun acceptBoolean(b: Boolean) {}
+  private fun acceptBoolean(b: Boolean) {}
  }
 }
 
-open class `1Outer` {}
+open class `1Outer` {
+ val `this`: booleanoperations.BooleanOperations?
 
-open class Inner {}
+ internal var b: Boolean
+}
+
+open class Inner {
+ val `this`: booleanoperations.BooleanOperations.`1Outer`?
+
+ init {
+  this.`this`.b |= true
+ }
+}

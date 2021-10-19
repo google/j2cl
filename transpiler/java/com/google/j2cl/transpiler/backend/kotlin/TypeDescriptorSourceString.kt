@@ -24,7 +24,7 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 
-val TypeDescriptor.sourceString: String
+internal val TypeDescriptor.sourceString: String
   get() =
     when (this) {
       is ArrayTypeDescriptor -> typeDescriptorSourceString
@@ -107,7 +107,7 @@ private val TypeDeclaration.mappedSourceStringOrNull
       else -> null
     }
 
-private val TypeDeclaration.declaredSourceString
+internal val TypeDeclaration.declaredSourceString
   get() = "$packagePrefixSourceString$classComponentsSourceString"
 
 private val TypeDeclaration.packagePrefixSourceString

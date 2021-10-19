@@ -1,7 +1,7 @@
 package foreachstatement
 
 open class ForEachStatement {
- fun test(iterable: Iterable<Throwable?>?) {
+ open fun test(iterable: Iterable<Throwable?>?) {
   for (t in iterable) {
    t.toString()
   }
@@ -10,7 +10,7 @@ open class ForEachStatement {
   }
  }
 
- fun testMulticatch() {
+ private fun testMulticatch() {
   try {
    throw Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
@@ -20,7 +20,7 @@ open class ForEachStatement {
   }
  }
 
- fun testTypeVariable() {
+ private fun testTypeVariable() {
   val iterable: U = null
   for (s in iterable) {}
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
@@ -28,20 +28,20 @@ open class ForEachStatement {
  }
 }
 
-open class Exception1: Iterable<String?>, Exception {
- fun iterator(): java.util.Iterator<String?>? {
+open class Exception1: Iterable<String?>, Exception() {
+ open fun iterator(): java.util.Iterator<String?>? {
   return null
  }
 }
 
-open class Exception2: Iterable<Any?>, Exception {
- fun iterator(): java.util.Iterator<Any?>? {
+open class Exception2: Iterable<Any?>, Exception() {
+ open fun iterator(): java.util.Iterator<Any?>? {
   return null
  }
 }
 
 open class IterableReturningTypeVariable: Iterable<Int?> {
- fun iterator(): T {
+ open fun iterator(): T {
   return null
  }
 }

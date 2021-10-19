@@ -1,11 +1,19 @@
 package nestedinstanceinnerclass
 
 open class OuterClass {
- fun test() {
+ open fun test() {
   TODO("expression.qualify needs rendering: new OuterClass.<init>().new InnerClass.<init>())")
  }
 }
 
-open class InnerClass {}
+open class InnerClass {
+ val `this`: nestedinstanceinnerclass.OuterClass?
+}
 
-open class InnerInnerClass {}
+open class InnerInnerClass {
+ val `this`: nestedinstanceinnerclass.OuterClass.InnerClass?
+
+ var x: nestedinstanceinnerclass.OuterClass.InnerClass? = this.`this`
+
+ var y: nestedinstanceinnerclass.OuterClass? = this.`this`.`this`
+}

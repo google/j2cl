@@ -1,14 +1,14 @@
 package implicitparenthesis
 
 open class ImplicitParenthesis {
- fun test() {
-  TODO("JavaScriptConstructorReference").examples()
-  TODO("JavaScriptConstructorReference").nonExamples()
+ open fun test() {
+  implicitparenthesis.ImplicitParenthesis.examples()
+  implicitparenthesis.ImplicitParenthesis.nonExamples()
  }
 
  companion object {
   @JvmStatic
-  fun examples() {
+  private fun examples() {
    var primitiveInt: Int
    var boxedInt: Int?
    if (true) {
@@ -44,7 +44,7 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  fun nonExamples() {
+  private fun nonExamples() {
    var primitiveInt: Int
    var boxedInt: Int?
    var boxedBoolean: Boolean?
@@ -64,7 +64,7 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  fun parenthesisRemoval() {
+  private fun parenthesisRemoval() {
    Int(1 + 2)
   }
  }

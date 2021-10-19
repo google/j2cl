@@ -1,16 +1,20 @@
 package simplelongs
 
 open class SimpleLongs {
- fun getBar(): Long {
+ var foo: Long = 0
+
+ open fun getBar(): Long {
   return 0
  }
 
- fun getWithSideEffect(): simplelongs.SimpleLongs? {
+ private var sideEffect: Int
+
+ open fun getWithSideEffect(): simplelongs.SimpleLongs? {
   this.sideEffect++
   return this
  }
 
- fun main() {
+ open fun main() {
   var a: Long = 0L
   a = - 100000L
   a = 100000L

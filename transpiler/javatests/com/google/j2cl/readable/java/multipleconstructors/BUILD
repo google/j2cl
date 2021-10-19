@@ -10,6 +10,4 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/201574151): Properly support calling super constructors.
-    build_kt_readables = False,
 )

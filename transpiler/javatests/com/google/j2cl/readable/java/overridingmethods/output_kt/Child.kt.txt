@@ -5,11 +5,11 @@ interface SomeInterface {
 }
 
 open class Parent {
- fun fun() {}
+ open fun `fun`() {}
 }
 
-open class Child: overridingmethods.SomeInterface, overridingmethods.Parent {
- fun fun() {}
+open class Child: overridingmethods.SomeInterface, overridingmethods.Parent() {
+ open fun `fun`() {}
 
- fun bar() {}
+ open fun bar() {}
 }

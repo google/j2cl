@@ -7,13 +7,15 @@ interface A {
 }
 
 abstract class B: abstractinnerclass.InnerClasses.A {
- fun bar() {
+ internal open fun bar() {
   this.foo()
  }
 }
 
 abstract class C: abstractinnerclass.InnerClasses.A {
- fun bar() {
+ val `this`: abstractinnerclass.InnerClasses?
+
+ internal open fun bar() {
   this.foo()
  }
 }

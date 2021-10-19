@@ -1,11 +1,11 @@
 package genericconstructor
 
 open class GenericConstructor {
- fun <init>(s: S, t: T): genericconstructor.GenericConstructor<T> {}
+ constructor(s: S, t: T) {}
 
- fun <init>(t: T): genericconstructor.GenericConstructor<T> {}
+ constructor(t: T) {}
 
- fun test() {
+ open fun test() {
   genericconstructor.GenericConstructor<Error?>(Exception(), Error())
   genericconstructor.GenericConstructor<Error?>(Exception())
  }

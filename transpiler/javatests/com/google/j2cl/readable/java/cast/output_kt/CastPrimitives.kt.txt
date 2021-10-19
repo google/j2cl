@@ -1,7 +1,7 @@
 package cast
 
 open class CastPrimitives {
- fun testPrimitiveCasts() {
+ open fun testPrimitiveCasts() {
   var b: Byte = 1
   var c: Char = 1
   var s: Short = 1
@@ -60,7 +60,7 @@ open class CastPrimitives {
   d = d as Double
  }
 
- fun testReferenceToPrimitive() {
+ open fun testReferenceToPrimitive() {
   val o: Any? = Any()
   val bool: Boolean = o as Boolean
   val b: Byte = o as Byte
@@ -72,8 +72,8 @@ open class CastPrimitives {
   val d: Double = o as Double
  }
 
- fun testUnboxAndWiden() {
-  val boxedByte: Byte? = TODO("JavaScriptConstructorReference").valueOf(0 as Byte)
+ open fun testUnboxAndWiden() {
+  val boxedByte: Byte? = java.lang.Byte.valueOf(0 as Byte)
   val s: Short = boxedByte as Short
   val i: Int = boxedByte as Int
   val l: Long = boxedByte as Long
@@ -81,7 +81,7 @@ open class CastPrimitives {
   val d: Double = boxedByte as Double
  }
 
- fun testImplicitArgumentCasts() {
+ open fun testImplicitArgumentCasts() {
   var b: Byte = 127
   var c: Char = 65535
   var s: Short = 32767
@@ -89,14 +89,14 @@ open class CastPrimitives {
   var l: Long = 9223372036854775807L
   var f: Float = 3.4028235E38f
   var d: Double = 1.7976931348623157E308
-  TODO("JavaScriptConstructorReference").getShort(b)
-  TODO("JavaScriptConstructorReference").getInt(b)
-  TODO("JavaScriptConstructorReference").getLong(b)
-  TODO("JavaScriptConstructorReference").getFloat(b)
-  TODO("JavaScriptConstructorReference").getDouble(b)
-  TODO("JavaScriptConstructorReference").getFloat(l)
-  TODO("JavaScriptConstructorReference").getDouble(l)
-  TODO("JavaScriptConstructorReference").getDouble(f)
+  cast.CastPrimitives.getShort(b)
+  cast.CastPrimitives.getInt(b)
+  cast.CastPrimitives.getLong(b)
+  cast.CastPrimitives.getFloat(b)
+  cast.CastPrimitives.getDouble(b)
+  cast.CastPrimitives.getFloat(l)
+  cast.CastPrimitives.getDouble(l)
+  cast.CastPrimitives.getDouble(f)
   cast.CastPrimitives.IntValueHolder(b)
   cast.CastPrimitives.IntValueHolder(c)
   cast.CastPrimitives.IntValueHolder(s)
@@ -105,7 +105,7 @@ open class CastPrimitives {
   cast.CastPrimitives.LongValueHolder(i)
  }
 
- fun testImplicitLongAssignmentCasts() {
+ open fun testImplicitLongAssignmentCasts() {
   val fbyte: Byte = 11
   val fchar: Char = 12
   val fshort: Short = 13
@@ -147,36 +147,36 @@ open class CastPrimitives {
 
  companion object {
   @JvmStatic
-  fun getShort(value: Short): Short {
+  private fun getShort(value: Short): Short {
    return value
   }
 
   @JvmStatic
-  fun getInt(value: Int): Int {
+  private fun getInt(value: Int): Int {
    return value
   }
 
   @JvmStatic
-  fun getLong(value: Long): Long {
+  private fun getLong(value: Long): Long {
    return value
   }
 
   @JvmStatic
-  fun getFloat(value: Float): Float {
+  private fun getFloat(value: Float): Float {
    return value
   }
 
   @JvmStatic
-  fun getDouble(value: Double): Double {
+  private fun getDouble(value: Double): Double {
    return value
   }
  }
 }
 
 open class IntValueHolder {
- fun <init>(value: Int): cast.CastPrimitives.IntValueHolder {}
+ internal constructor(value: Int) {}
 }
 
 open class LongValueHolder {
- fun <init>(value: Long): cast.CastPrimitives.LongValueHolder {}
+ internal constructor(value: Long) {}
 }

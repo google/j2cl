@@ -1,13 +1,19 @@
 package innerclasswithconstructor
 
-open class InnerClassWithConstructor {}
+open class InnerClassWithConstructor {
+ var a: Int
+}
 
 open class InnerClass {
- fun <init>(b: Int): innerclasswithconstructor.InnerClassWithConstructor.InnerClass {
+ val `this`: innerclasswithconstructor.InnerClassWithConstructor?
+
+ var b: Int
+
+ constructor(b: Int) {
   this.b = this.`this`.a + b
  }
 
- fun <init>(): innerclasswithconstructor.InnerClassWithConstructor.InnerClass {
+ constructor() {
   super(this.`this`.a)
  }
 }

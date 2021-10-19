@@ -3,12 +3,18 @@ package newinnerclasswithsameouter
 open class NewInnerClassWithSameOuter {}
 
 open class A {
- fun test() {
+ val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+
+ open fun test() {
   TODO("expression.qualify needs rendering: A.this.this)")
   TODO("expression.qualify needs rendering: A.this.this)")
  }
 }
 
-open class B {}
+open class B {
+ val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+}
 
-open class C {}
+open class C {
+ val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+}

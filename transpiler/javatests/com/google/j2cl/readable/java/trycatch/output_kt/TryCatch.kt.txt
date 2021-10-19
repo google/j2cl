@@ -1,7 +1,7 @@
 package trycatch
 
 open class TryCatch {
- fun testMultiCatch() {
+ open fun testMultiCatch() {
   try {
    throw java.lang.ClassCastException()
   } catch (e: java.lang.NullPointerException) {
@@ -13,7 +13,7 @@ open class TryCatch {
   }
  }
 
- fun testEmptyThrowableCatch() {
+ open fun testEmptyThrowableCatch() {
   try {
    throw java.lang.ClassCastException()
   } catch (e: Throwable) {}
@@ -22,7 +22,7 @@ open class TryCatch {
   } catch (e: Exception) {} catch (e: Throwable) {}
  }
 
- fun testEmptyThrowableRethrow() {
+ open fun testEmptyThrowableRethrow() {
   try {
    throw java.lang.ClassCastException()
   } catch (e: Throwable) {
@@ -30,19 +30,19 @@ open class TryCatch {
   }
  }
 
- fun testFinally() {
+ open fun testFinally() {
   try {
    assert(true)
   } finally {}
  }
 
- fun testTryWithResource() {
+ open fun testTryWithResource() {
   try {
    throw Exception()
   } catch (e: Exception) {}
  }
 
- fun testTryWithResourceJava9() {
+ open fun testTryWithResourceJava9() {
   val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
   val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
   try {
@@ -50,13 +50,13 @@ open class TryCatch {
   } catch (e: Exception) {}
  }
 
- fun testTryWithResouceOnStaticField() {
+ open fun testTryWithResouceOnStaticField() {
   try {
    throw Exception()
   } catch (e: Exception) {}
  }
 
- fun testNestedTryCatch() {
+ open fun testNestedTryCatch() {
   try {
    throw Exception()
   } catch (ae: Exception) {
@@ -66,23 +66,27 @@ open class TryCatch {
   }
  }
 
- fun testThrowGenerics() {
+ open fun testThrowGenerics() {
   throw this.getT(Exception())
  }
 
- fun getT(t: T): T {
+ private fun getT(t: T): T {
   return t
  }
 
- fun testThrowBoundGenerics() {
+ open fun testThrowBoundGenerics() {
   throw this.getThrowable()
  }
 
- fun getThrowable(): T {
+ private fun getThrowable(): T {
   return null
+ }
+
+ companion object {
+  @JvmStatic private val closableThing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
  }
 }
 
 open class ClosableThing: java.lang.AutoCloseable {
- fun close() {}
+ open fun close() {}
 }

@@ -1,11 +1,13 @@
 package rawtype
 
-open class RawType {}
+open class RawType {
+ internal var c: Comparable?
+}
 
 interface I {
  fun f(t: T) {}
 }
 
 open class RawSubclass: rawtype.RawType.I {
- fun f(t: rawtype.RawType?) {}
+ open fun f(t: rawtype.RawType?) {}
 }

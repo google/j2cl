@@ -1,15 +1,15 @@
 package packageprivatemethods.package1
 
 open class SuperParent {
- fun foo(a: Int): Int {
+ internal open fun foo(a: Int): Int {
   return a - 1
  }
 
- fun fun(a: Int, b: Int): Int {
+ internal open fun `fun`(a: Int, b: Int): Int {
   return a + b
  }
 
- fun bar(a: Int, b: Int, c: Int): Int {
+ internal open fun bar(a: Int, b: Int, c: Int): Int {
   return a + b + c
  }
 }

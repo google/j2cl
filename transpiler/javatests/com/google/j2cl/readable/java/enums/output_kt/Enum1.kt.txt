@@ -1,34 +1,59 @@
 package enums
 
-enum class Enum1: Enum<enums.Enum1?> {}
+enum class Enum1: Enum<enums.Enum1?>() {
+ companion object {
+  @JvmStatic val V1: enums.Enum1 = enums.Enum1()
+
+  @JvmStatic val V2: enums.Enum1 = enums.Enum1()
+ }
+}
 
 enum class Enum2: Enum<enums.Enum2?> {
- fun <init>(foo: Int): enums.Enum2 {
+ internal var foo: Int = enums.Enum1.V1.ordinal()
+
+ private constructor(foo: Int) {
   this.foo = foo
  }
 
- fun <init>(foo: Enum?): enums.Enum2 {
+ private constructor(foo: Enum?) {
   super(foo.ordinal())
  }
 
- fun <init>(somePars: Array<Any?>?): enums.Enum2 {
+ private constructor(vararg somePars: Any?) {
   super(somePars.size)
  }
 
  companion object {
+  @JvmStatic val VALUE1: enums.Enum2 = enums.Enum2(2)
+
+  @JvmStatic val VALUE2: enums.Enum2 = enums.Enum2(enums.Enum1.V1)
+
+  @JvmStatic val VALUE3: enums.Enum2 = enums.Enum2(arrayOf<Any?>())
+
+  @JvmStatic val VALUE4: enums.Enum2 = enums.Enum2.`1`(5)
+
   @JvmStatic
-  fun f(o: Any?): enums.Enum2? {
+  internal fun f(o: Any?): enums.Enum2? {
    return null
   }
+
+  @JvmStatic internal var C: enums.Enum2? = enums.Enum2.f(Any())
  }
 }
 
 open class `1`: enums.Enum2 {
- fun <init>(`$_0`: Int): enums.Enum2.`1` {
+ internal constructor(`$_0`: Int) {
   super(`$_0`)
  }
 }
 
 enum class Enum3: Enum<enums.Enum3?> {
- fun <init>(function: java.util.function.Function<Int?, Int?>?): enums.Enum3 {}
+ private constructor(function: java.util.function.Function<Int?, Int?>?) {}
+
+ companion object {
+  @JvmStatic val VALUE1: enums.Enum3 = enums.Enum3({v: Int? -> {
+    return 1 + v
+   }
+  })
+ }
 }

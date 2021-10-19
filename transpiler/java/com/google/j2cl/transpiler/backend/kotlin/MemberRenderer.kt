@@ -15,35 +15,109 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.common.InternalCompilerError
+import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
+import com.google.j2cl.transpiler.ast.Field
+import com.google.j2cl.transpiler.ast.InitializerBlock
+import com.google.j2cl.transpiler.ast.Kind
+import com.google.j2cl.transpiler.ast.Member
 import com.google.j2cl.transpiler.ast.Method
 import com.google.j2cl.transpiler.ast.MethodDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveVoid
+import com.google.j2cl.transpiler.ast.PrimitiveTypes
+import com.google.j2cl.transpiler.ast.Variable
+import com.google.j2cl.transpiler.ast.Visibility
 
-fun Renderer.renderMethod(method: Method) {
-  renderMethodHeader(method)
+internal fun Renderer.renderMember(member: Member, kind: Kind) {
+  when (member) {
+    is Method -> renderMethod(member, kind)
+    is Field -> renderField(member)
+    is InitializerBlock -> renderInitializerBlock(member)
+    else -> throw InternalCompilerError("Unhandled ${member::class}")
+  }
+}
+
+private fun Renderer.renderMethod(method: Method, kind: Kind) {
+  renderMethodHeader(method, kind)
   if (!method.isAbstract) {
     render(" ")
     renderStatement(method.body)
   }
 }
 
-private fun Renderer.renderMethodHeader(method: Method) {
+private fun Renderer.renderField(field: Field) {
+  val isFinal = field.descriptor.isFinal
+  val typeDescriptor = field.descriptor.typeDescriptor
+
+  if (field.isStatic) render("@JvmStatic ")
+  renderVisibility(field.descriptor.visibility)
+  render(if (isFinal) "val " else "var ")
+  render("${field.descriptor.name!!.identifierSourceString}: ${typeDescriptor.sourceString}")
+  field.initializer?.let { initializer ->
+    render(" = ")
+    renderExpression(initializer)
+  }
+}
+
+private fun Renderer.renderInitializerBlock(initializerBlock: InitializerBlock) {
+  render("init ")
+  renderStatement(initializerBlock.block)
+}
+
+private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
   if (method.isStatic) {
     render("@JvmStatic")
     renderNewLine()
   }
   val methodDescriptor = method.descriptor
-  render("fun ${methodDescriptor.name!!}")
+  renderMethodModifiers(methodDescriptor, kind)
+  if (methodDescriptor.isConstructor) render("constructor")
+  else render("fun ${methodDescriptor.name!!.identifierSourceString}")
   renderMethodParameters(method)
-  renderMethodDescriptorReturnType(methodDescriptor)
+  renderMethodReturnType(methodDescriptor)
+  // TODO(b/202527616): Render this() and super() constructor calls after ":".
+}
+
+private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, kind: Kind) {
+  renderVisibility(methodDescriptor.visibility)
+  if (kind != Kind.INTERFACE) {
+    if (methodDescriptor.isAbstract) render("abstract ")
+    if (!methodDescriptor.isFinal &&
+        !methodDescriptor.isConstructor &&
+        !methodDescriptor.isStatic &&
+        !methodDescriptor.visibility.isPrivate
+    ) {
+      render("open ")
+    }
+  }
 }
 
 private fun Renderer.renderMethodParameters(method: Method) {
-  renderInParentheses { renderCommaSeparated(method.parameters) { renderVariable(it) } }
+  val parameters = method.parameters
+  val varargParameterIndex = if (method.descriptor.isVarargs) parameters.size.dec() else -1
+  renderInParentheses {
+    renderCommaSeparated(parameters.mapIndexed(::IndexedValue)) {
+      renderParameter(it.value, isVararg = it.index == varargParameterIndex)
+    }
+  }
 }
 
-private fun Renderer.renderMethodDescriptorReturnType(methodDescriptor: MethodDescriptor) {
-  if (!isPrimitiveVoid(methodDescriptor.returnTypeDescriptor)) {
-    render(": ${methodDescriptor.returnTypeDescriptor.sourceString}")
+private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
+  val variableTypeDescriptor = variable.typeDescriptor
+  val renderedTypeDescriptor =
+    if (!isVararg) variableTypeDescriptor
+    else (variableTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
+  if (isVararg) render("vararg ")
+  render("${variable.name.identifierSourceString}: ${renderedTypeDescriptor.sourceString}")
+}
+
+private fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {
+  if (!methodDescriptor.isConstructor) {
+    methodDescriptor.returnTypeDescriptor.takeIf { it != PrimitiveTypes.VOID }?.let {
+      render(": ${it.sourceString}")
+    }
   }
+}
+
+private fun Renderer.renderVisibility(visibility: Visibility) {
+  visibility.sourceStringOrNull?.let { render("$it ") }
 }

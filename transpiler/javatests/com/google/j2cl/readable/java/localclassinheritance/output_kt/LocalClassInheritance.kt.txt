@@ -1,19 +1,27 @@
 package localclassinheritance
 
 open class LocalClassInheritance {
- fun test() {
+ open fun test() {
   var f: Int = 1
  }
 }
 
 open class `1Parent` {
- fun n() {
+ val `this`: localclassinheritance.LocalClassInheritance?
+
+ open fun n() {
   val i: Int = this.f
  }
+
+ val f: Int
 }
 
-open class `1Child`: localclassinheritance.LocalClassInheritance.`1Parent` {
- fun n() {
+open class `1Child`: localclassinheritance.LocalClassInheritance.`1Parent`() {
+ val `this`: localclassinheritance.LocalClassInheritance?
+
+ open fun n() {
   val i: Int = this.f
  }
+
+ val f: Int
 }

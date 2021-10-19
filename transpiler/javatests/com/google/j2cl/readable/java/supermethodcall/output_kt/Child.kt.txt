@@ -1,48 +1,48 @@
 package supermethodcall
 
 open class GrandParent {
- fun grandParentSimplest() {}
+ open fun grandParentSimplest() {}
 
- fun grandParentWithParams(foo: Int) {}
+ open fun grandParentWithParams(foo: Int) {}
 
- fun grandParentWithChangingReturn(): Any? {
+ open fun grandParentWithChangingReturn(): Any? {
   return null
  }
 }
 
-open class Parent: supermethodcall.GrandParent {
- fun parentSimplest() {}
+open class Parent: supermethodcall.GrandParent() {
+ open fun parentSimplest() {}
 
- fun parentWithParams(foo: Int) {}
+ open fun parentWithParams(foo: Int) {}
 
- fun parentWithChangingReturn(): Any? {
+ open fun parentWithChangingReturn(): Any? {
   return null
  }
 }
 
-open class Child: supermethodcall.Parent {
- fun parentSimplest() {
+open class Child: supermethodcall.Parent() {
+ open fun parentSimplest() {
   super.parentSimplest()
  }
 
- fun parentWithParams(foo: Int) {
+ open fun parentWithParams(foo: Int) {
   super.parentWithParams(foo)
  }
 
- fun parentWithChangingReturn(): supermethodcall.Child? {
+ open fun parentWithChangingReturn(): supermethodcall.Child? {
   super.parentWithChangingReturn()
   return this
  }
 
- fun grandParentSimplest() {
+ open fun grandParentSimplest() {
   super.grandParentSimplest()
  }
 
- fun grandParentWithParams(foo: Int) {
+ open fun grandParentWithParams(foo: Int) {
   super.grandParentWithParams(foo)
  }
 
- fun grandParentWithChangingReturn(): supermethodcall.Child? {
+ open fun grandParentWithChangingReturn(): supermethodcall.Child? {
   super.grandParentWithChangingReturn()
   return this
  }

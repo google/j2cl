@@ -1,17 +1,30 @@
 package unreachableclass
 
-open class Main {}
+open class Main {
+ init {
+  try {} catch (e: java.lang.RuntimeException) {
+   TODO("expression.qualify needs rendering: Main.this)").m()
+   TODO("expression.qualify needs rendering: Main.this)")
+  }
+ }
+}
 
 open class `1A` {
- fun m() {}
+ val `this`: unreachableclass.Main?
+
+ internal open fun m() {}
 }
 
 open class `1B` {
- fun n() {}
+ val `this`: unreachableclass.Main.`1A`?
+
+ private fun n() {}
 }
 
 open class `1` {
- fun <init>(): unreachableclass.Main.`1` {
+ internal constructor() {
   super()
  }
+
+ val `this`: unreachableclass.Main?
 }

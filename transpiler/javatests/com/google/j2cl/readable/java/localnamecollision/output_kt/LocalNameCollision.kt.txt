@@ -1,7 +1,7 @@
 package localnamecollision
 
 open class LocalNameCollision {
- fun testClassLocalVarCollision() {
+ open fun testClassLocalVarCollision() {
   var LocalNameCollision: Boolean = false
   val RuntimeException: Any? = null
   val Asserts: Int = 1
@@ -15,11 +15,11 @@ open class LocalNameCollision {
   assert(localnamecollision.Asserts().n() == 5)
  }
 
- fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, `$Asserts`: Any?, l_Asserts: Int, A: Int): Boolean {
+ open fun testClassParameterCollision(LocalNameCollision: Boolean, Asserts: Any?, `$Asserts`: Any?, l_Asserts: Int, A: Int): Boolean {
   return LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && `$Asserts` is localnamecollision.Asserts && l_Asserts == A
  }
 
- fun <init>(LocalNameCollision: Boolean, Asserts: Any?, `$Asserts`: Any?, l_Asserts: Int, A: Int): localnamecollision.LocalNameCollision {
+ constructor(LocalNameCollision: Boolean, Asserts: Any?, `$Asserts`: Any?, l_Asserts: Int, A: Int) {
   val result: Boolean = LocalNameCollision && Asserts is localnamecollision.LocalNameCollision && `$Asserts` is localnamecollision.Asserts && l_Asserts == A
  }
 }

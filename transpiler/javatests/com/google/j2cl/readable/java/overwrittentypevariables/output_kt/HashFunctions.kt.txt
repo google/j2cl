@@ -21,21 +21,21 @@ open class HashFunctions {
 }
 
 open class `1`: overwrittentypevariables.HashFunction<T> {
- fun <init>(): overwrittentypevariables.HashFunctions.`1`<T> {
+ internal constructor() {
   super()
  }
 
- fun apply(input: T): String? {
+ open fun apply(input: T): String? {
   return ""
  }
 }
 
 open class `2`: overwrittentypevariables.HashFunction<T> {
- fun <init>(): overwrittentypevariables.HashFunctions.`2`<T> {
+ internal constructor() {
   super()
  }
 
- fun apply(input: T): String? {
+ open fun apply(input: T): String? {
   return "" + input.ordinal()
  }
 }

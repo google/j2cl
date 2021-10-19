@@ -1,9 +1,9 @@
 package packageprivatemethods.package1
 
-abstract class Parent: packageprivatemethods.package1.SuperParent {
- fun foo(a: Int): Int {
+abstract class Parent: packageprivatemethods.package1.SuperParent() {
+ internal open fun foo(a: Int): Int {
   return a
  }
 
- fun bar(a: Int, b: Int, c: Int): Int
+ abstract open fun bar(a: Int, b: Int, c: Int): Int
 }

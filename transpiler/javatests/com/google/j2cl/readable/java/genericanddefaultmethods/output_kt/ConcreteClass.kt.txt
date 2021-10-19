@@ -2,14 +2,14 @@ package genericanddefaultmethods
 
 interface InterfaceWithDefault {
  fun foo(value: String?) {
-  TODO("JavaScriptConstructorReference").out.println("in InterfaceWithDefault")
+  java.lang.System.out.println("in InterfaceWithDefault")
  }
 }
 
 open class GenericClass {
- fun foo(value: T) {
-  TODO("JavaScriptConstructorReference").out.println("in GenericClass")
+ open fun foo(value: T) {
+  java.lang.System.out.println("in GenericClass")
  }
 }
 
-open class ConcreteClass: genericanddefaultmethods.InterfaceWithDefault, genericanddefaultmethods.GenericClass<String?> {}
+open class ConcreteClass: genericanddefaultmethods.InterfaceWithDefault, genericanddefaultmethods.GenericClass<String?>() {}

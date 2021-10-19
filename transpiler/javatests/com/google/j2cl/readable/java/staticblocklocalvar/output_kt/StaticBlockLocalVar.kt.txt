@@ -1,3 +1,10 @@
 package staticblocklocalvar
 
-open class StaticBlockLocalVar {}
+open class StaticBlockLocalVar {
+ companion object {
+  init {
+   var i: Int = 10
+   i += 20
+  }
+ }
+}

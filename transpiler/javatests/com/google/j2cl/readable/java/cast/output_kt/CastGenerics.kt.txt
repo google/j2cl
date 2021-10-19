@@ -1,11 +1,13 @@
 package cast
 
 open class CastGenerics {
- fun method(): T {
+ internal var field: T
+
+ internal open fun method(): T {
   return null
  }
 
- fun testCastToTypeVariable() {
+ open fun testCastToTypeVariable() {
   val o: Any? = Int(1)
   val e: E = o as E
   val t: T = o as T
@@ -13,7 +15,7 @@ open class CastGenerics {
   val ts: Array<T>? = o as Array<T>?
  }
 
- fun testCastToMethodTypeVariable() {
+ open fun testCastToMethodTypeVariable() {
   val o: Any? = Int(1)
   val s: S = o as S
   var c: Any? = o as cast.CastGenerics<S, Number?>?
@@ -21,9 +23,9 @@ open class CastGenerics {
   c = o as V
  }
 
- fun outerGenericMethod() {}
+ open fun outerGenericMethod() {}
 
- fun method(o: Any?): EE {
+ open fun method(o: Any?): EE {
   if (o is cast.CastGenerics.Empty1) {
    return o as EE
   }
@@ -85,20 +87,22 @@ interface B {
 
 abstract class BaseImplementor: cast.CastGenerics.A, cast.CastGenerics.B {}
 
-open class Implementor: cast.CastGenerics.BaseImplementor {
- fun mA() {}
+open class Implementor: cast.CastGenerics.BaseImplementor() {
+ open fun mA() {}
 
- fun mB() {}
+ open fun mB() {}
 }
 
 open class Container {
- fun get(): T {
+ internal open fun get(): T {
   return null
  }
 }
 
 open class `1Nested` {
- fun nestedGenericMethod(o: Any?) {
+ val `this`: cast.CastGenerics<T, E>?
+
+ private fun nestedGenericMethod(o: Any?) {
   val t: TT = o as TT
  }
 }
@@ -108,7 +112,7 @@ interface Empty1 {}
 interface Empty2 {}
 
 open class `1`: cast.CastGenerics.Foo<T> {
- fun <init>(): cast.CastGenerics.`1`<T> {
+ internal constructor() {
   super()
  }
 }

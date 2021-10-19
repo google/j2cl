@@ -1,21 +1,27 @@
 package innerclassinheritance
 
 open class MultipleNestings {
- fun funInM() {}
+ open fun funInM() {}
 }
 
 open class Parent {
- fun fun() {}
+ val `this`: innerclassinheritance.MultipleNestings?
+
+ open fun `fun`() {}
 }
 
-open class InnerClass1: innerclassinheritance.MultipleNestings.Parent {
- fun funInI1() {}
+open class InnerClass1: innerclassinheritance.MultipleNestings.Parent() {
+ val `this`: innerclassinheritance.MultipleNestings?
+
+ open fun funInI1() {}
 }
 
-open class InnerClass2: innerclassinheritance.MultipleNestings.Parent {
- fun funInI2() {}
+open class InnerClass2: innerclassinheritance.MultipleNestings.Parent() {
+ val `this`: innerclassinheritance.MultipleNestings.InnerClass1?
 
- fun test() {
+ open fun funInI2() {}
+
+ open fun test() {
   this.`fun`()
   this.`fun`()
   this.`this`.`fun`()

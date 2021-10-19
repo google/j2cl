@@ -1,3 +1,18 @@
 package staticinitializers
 
-open class StaticInitializers {}
+open class StaticInitializers {
+ companion object {
+  @JvmStatic var a: Int = 5
+
+  @JvmStatic var b: Int = staticinitializers.StaticInitializers.a * 2
+
+  init {
+   staticinitializers.StaticInitializers.a = 10
+   val duplicated: Int = 0
+  }
+
+  init {
+   val duplicated: Int = 1
+  }
+ }
+}

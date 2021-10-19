@@ -2,6 +2,6 @@ package subclassgenericclass
 
 open class GenericClass {}
 
-open class GenericSubclassGenericClass: subclassgenericclass.GenericClass<T> {}
+open class GenericSubclassGenericClass: subclassgenericclass.GenericClass<T>() {}
 
-open class SubclassGenericClass: subclassgenericclass.GenericClass<subclassgenericclass.SubclassGenericClass?> {}
+open class SubclassGenericClass: subclassgenericclass.GenericClass<subclassgenericclass.SubclassGenericClass?>() {}

@@ -2,10 +2,12 @@ package anonymousinnerclass
 
 open class A {}
 
-open class B {}
+open class B {
+ val `this`: anonymousinnerclass.A?
+}
 
 open class AnonymousInnerClass {
- fun test(arg: Int) {
+ open fun test(arg: Int) {
   val ic: anonymousinnerclass.AnonymousInnerClass.InnerClass? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
   val a: anonymousinnerclass.A? = anonymousinnerclass.A()
   val b: anonymousinnerclass.A.B? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
@@ -13,24 +15,40 @@ open class AnonymousInnerClass {
  }
 }
 
-open class InnerClass {}
+open class InnerClass {
+ val `this`: anonymousinnerclass.AnonymousInnerClass?
+}
 
 open class `1`: anonymousinnerclass.AnonymousInnerClass.InnerClass {
- fun <init>(): anonymousinnerclass.AnonymousInnerClass.`1` {
+ internal constructor() {
   super()
  }
+
+ val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
 open class `2`: anonymousinnerclass.A.B {
- fun <init>(`$super_outer_this`: anonymousinnerclass.A?): anonymousinnerclass.AnonymousInnerClass.`2` {
+ internal constructor(`$super_outer_this`: anonymousinnerclass.A?) {
   super()
  }
+
+ val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
-open class `1C` {}
+open class `1C` {
+ val `this`: anonymousinnerclass.AnonymousInnerClass?
+
+ var fInC: Int = this.arg
+
+ val arg: Int
+}
 
 open class `3`: anonymousinnerclass.AnonymousInnerClass.`1C` {
- fun <init>(): anonymousinnerclass.AnonymousInnerClass.`3` {
+ internal constructor() {
   super()
  }
+
+ val `this`: anonymousinnerclass.AnonymousInnerClass?
+
+ val arg: Int
 }

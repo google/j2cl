@@ -1,3 +1,64 @@
 package compiletimeconstant
 
-open class CompileTimeConstant {}
+open class CompileTimeConstant {
+ val A2: Int = 10
+
+ val B2: Int = 20
+
+ val C2: Int = 200
+
+ val D2: String? = "Tur\"tle"
+
+ val E2: String? = "Do\"ve"
+
+ val F2: String? = "Tur\"tleDo\"ve"
+
+ val G2: Long = 10000L
+
+ val H2: Char = 'A'
+
+ val I2: Boolean = true
+
+ init {
+  val b: Boolean = this.I2
+  val s: String? = compiletimeconstant.CompileTimeConstant.G + compiletimeconstant.CompileTimeConstant.F
+  val l: String? = compiletimeconstant.CompileTimeConstant.L
+  val m: String? = compiletimeconstant.CompileTimeConstant.M
+  val n: String? = compiletimeconstant.CompileTimeConstant.N
+  val c: java.lang.Class<*>? = compiletimeconstant.CompileTimeConstant.classLiteral
+ }
+
+ companion object {
+  @JvmStatic val OBJ: Any? = null
+
+  @JvmStatic val A: Int = 10
+
+  @JvmStatic val B: Int = 20
+
+  @JvmStatic val C: Int = 200
+
+  @JvmStatic val D: String? = "Tur\"tle"
+
+  @JvmStatic val E: String? = "Do\'ve"
+
+  @JvmStatic val F: String? = "Tur\"tleDo\'ve"
+
+  @JvmStatic val J: String? = "Tur\"tleDo\'veTur\"tleDo\'ve"
+
+  @JvmStatic val K: String? = null
+
+  @JvmStatic val L: String? = "ThisIsALongString"
+
+  @JvmStatic val M: String? = "ThisIsALongStringAlso"
+
+  @JvmStatic val N: String? = "ThisIsALongStringAlsoButLonger"
+
+  @JvmStatic val G: Long = 10000L
+
+  @JvmStatic val H: Char = 'A'
+
+  @JvmStatic val I: Boolean = true
+
+  @JvmStatic val classLiteral: java.lang.Class<*>? = compiletimeconstant.CompileTimeConstant::class.java
+ }
+}

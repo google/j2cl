@@ -27,6 +27,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
+import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -58,6 +59,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is FunctionExpression -> renderFunctionExpression(expression)
     is InstanceOfExpression -> renderInstanceOfExpression(expression)
     is Literal -> render(expression.sourceString)
+    is JavaScriptConstructorReference -> renderJavaScriptConstructorReference(expression)
     is MethodCall -> renderMethodCall(expression)
     is MultiExpression -> renderMultiExpression(expression)
     is NewArray -> renderNewArray(expression)
@@ -151,6 +153,12 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
   renderExpression(conditionalExpression.trueExpression)
   render(" else ")
   renderExpression(conditionalExpression.falseExpression)
+}
+
+private fun Renderer.renderJavaScriptConstructorReference(
+  javaScriptConstructorReference: JavaScriptConstructorReference
+) {
+  render(javaScriptConstructorReference.referencedTypeDeclaration.declaredSourceString)
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
