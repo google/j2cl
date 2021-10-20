@@ -86,7 +86,6 @@ j2cl_library = rule(
     outputs = {
         "jar": "lib%{name}.jar",
         "srcjar": "lib%{name}-src.jar",
-        "jszip": "%{name}.js.zip",
     },
 )
 

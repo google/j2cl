@@ -52,18 +52,8 @@ def _compile(
         generate_kythe_action = generate_kythe_action,
     )
 
-    # A note about the zip file: It will be created if:
-    #  - tree artifacts are not enabled. In this case the zip file will be part
-    #    of the default outputs of the rule and passed to js provider, or
-    #  - a downstream rule depends directly on the zip file. When the zip
-    #    file is requested, the action that creates the zip file will be triggered.
-    # TODO(b/178020117): Remove zip artifact.
-    output_jszip = ctx.actions.declare_file("%s.js.zip" % name)
-
     if java_srcs:
         output_js = ctx.actions.declare_directory("%s.js" % name)
-        _zip_output(ctx, output_js, output_jszip)
-
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
             ctx,
@@ -76,7 +66,6 @@ def _compile(
         library_info = [output_library_info]
     else:
         output_js = None
-        _create_empty_zip(ctx, output_jszip)
         library_info = []
 
     # Don't pass anything to the js provider if we didn't transpile anything.
@@ -99,21 +88,6 @@ def _compile(
         _is_j2cl_provider = 1,
     )
 
-def _zip_output(ctx, input_dir, output_file):
-    ctx.actions.run_shell(
-        progress_message = "Generating J2CL zip file",
-        inputs = [input_dir],
-        outputs = [output_file],
-        # We use mkdir -p command in order to ensure srcs_dir exists on filesystem
-        # since it may not have been produced by previous actions.
-        command = (
-            "mkdir -p %s && " % input_dir.path +
-            "%s cfM %s -C %s ." % (ctx.executable._jar.path, output_file.path, input_dir.path)
-        ),
-        tools = [ctx.executable._jar],
-        mnemonic = "J2clZip",
-    )
-
 def _split_deps(deps):
     """ Split the provider deps into Java and JS groups. """
     java_deps = []
@@ -130,15 +104,6 @@ def _split_deps(deps):
             js_deps.append(d)
 
     return (java_deps, js_deps)
-
-_empty_zip_contents = "\\x50\\x4b\\x05\\x06" + "\\x00" * 18
-
-def _create_empty_zip(ctx, output_js_zip):
-    ctx.actions.run_shell(
-        outputs = [output_js_zip],
-        command = "echo -ne  '%s' > '%s'" % (_empty_zip_contents, output_js_zip.path),
-        mnemonic = "J2clZip",
-    )
 
 def _java_compile(
         ctx,
