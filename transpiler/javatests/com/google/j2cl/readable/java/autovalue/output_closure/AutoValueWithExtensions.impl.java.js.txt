@@ -5,7 +5,7 @@ const ValueType = goog.require('javaemul.internal.ValueType$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AutoValue__AutoValueWithExtensions = goog.forwardDeclare('autovalue.AutoValue_AutoValueWithExtensions$impl');
-let $Objects = goog.forwardDeclare('vmbootstrap.Objects$impl');
+let Objects = goog.forwardDeclare('java.util.Objects$impl');
 
 /**
  * @abstract
@@ -34,7 +34,7 @@ class AutoValueWithExtensions extends ValueType {
  $ctor__autovalue_AutoValueWithExtensions__int__java_lang_String(/** number */ intField, /** ?string */ stringField) {
   this.$ctor__javaemul_internal_ValueType__();
   this.f_intField__autovalue_$$AutoValue_AutoValueWithExtensions_ = intField;
-  $Objects.m_getClass__java_lang_Object(stringField);
+  Objects.m_requireNonNull__java_lang_Object(stringField);
   this.f_stringField__autovalue_$$AutoValue_AutoValueWithExtensions_ = stringField;
  }
  /** @return {number} */
@@ -58,7 +58,7 @@ class AutoValueWithExtensions extends ValueType {
  
  static $loadModules() {
   AutoValue__AutoValueWithExtensions = goog.module.get('autovalue.AutoValue_AutoValueWithExtensions$impl');
-  $Objects = goog.module.get('vmbootstrap.Objects$impl');
+  Objects = goog.module.get('java.util.Objects$impl');
  }
 }
 AutoValueWithExtensions.prototype.$excluded_fields = [reflect.objectProperty('f_getMemoizedNative__autovalue_AutoValue_AutoValueWithExtensions_', AutoValueWithExtensions), reflect.objectProperty('f_getMemoizedNative$Memoized__autovalue_AutoValue_AutoValueWithExtensions_', AutoValueWithExtensions)];

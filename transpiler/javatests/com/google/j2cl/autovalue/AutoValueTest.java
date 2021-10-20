@@ -1071,9 +1071,7 @@ public class AutoValueTest {
     try {
       PrimitiveArrays.create(null, new int[0]);
       fail("Construction with null value for non-@Nullable array should have failed");
-    } catch (NullPointerException e) {
-      // J2CL specific: <null-ref>.getClass in getClass has a msg.
-      assertThat(e).hasMessageThat().contains("null.getClass");
+    } catch (NullPointerException expected) {
     }
   }
 
