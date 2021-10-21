@@ -61,21 +61,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; InstanceofExpressions()
-(func $m_<init>__@instanceofexpression.InstanceofExpressions
- (param $this (ref null $instanceofexpression.InstanceofExpressions))
+;;; InstanceofExpressions InstanceofExpressions.$create()
+(func $$create__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions
  (result (ref null $instanceofexpression.InstanceofExpressions))
+ ;;@ instanceofexpression/InstanceofExpressions.java:20:13
+ (local $$instance (ref null $instanceofexpression.InstanceofExpressions))
+ (block
+  ;; InstanceofExpressions $instance = new InstanceofExpressions.<init>();
+  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
+  (local.set $$instance (struct.new_with_rtt $instanceofexpression.InstanceofExpressions (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.itable)) (i32.const 0) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
+  (call $$ctor__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions (local.get $$instance))
+  ;; return $instance;
+  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InstanceofExpressions.$ctor()
+(func $$ctor__void_$p_instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions
+ (param $this (ref null $instanceofexpression.InstanceofExpressions))
  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
  (block
   ;; instanceofexpression.InstanceofExpressions.$clinit();
   ;;@ instanceofexpression/InstanceofExpressions.java:20:13
   (call $$clinit__void@instanceofexpression.InstanceofExpressions )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ instanceofexpression/InstanceofExpressions.java:20:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InstanceofExpressions.this;
-  ;;@ instanceofexpression/InstanceofExpressions.java:20:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -89,9 +103,9 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block
-  ;; Object object = new InstanceofExpressions.<init>();
+  ;; Object object = instanceofexpression.InstanceofExpressions.$create();
   ;;@ instanceofexpression/InstanceofExpressions.java:23:4
-  (local.set $object (call $m_<init>__@instanceofexpression.InstanceofExpressions (struct.new_with_rtt $instanceofexpression.InstanceofExpressions (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.itable)) (i32.const 0) (global.get $instanceofexpression.InstanceofExpressions.rtt))))
+  (local.set $object (call $$create__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions ))
   ;; boolean b;
   ;;@ instanceofexpression/InstanceofExpressions.java:24:4
   
@@ -118,9 +132,9 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block
-  ;; Object o = new Object.<init>();
+  ;; Object o = java.lang.Object.$create();
   ;;@ instanceofexpression/InstanceofExpressions.java:31:4
-  (local.set $o (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  (local.set $o (call $$create__java_lang_Object@java.lang.Object ))
   ;; boolean b;
   ;;@ instanceofexpression/InstanceofExpressions.java:32:4
   
@@ -131,12 +145,12 @@
    (then (i32.const 0))
    (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (local.get $o) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
   ))
-  ;; (b = new $1.<init>(InstanceofExpressions.this) instanceof Serializable);
+  ;; (b = instanceofexpression.InstanceofExpressions.1.$create(InstanceofExpressions.this) instanceof Serializable);
   ;;@ instanceofexpression/InstanceofExpressions.java:34:4
   (local.set $b (if (result i32) 
-   (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (call $m_<init>__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1 (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1 (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.itable)) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions) (global.get $instanceofexpression.InstanceofExpressions.1.rtt))(local.get $this))))) 
+   (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $this))))) 
    (then (i32.const 0))
-   (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (call $m_<init>__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1 (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1 (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.itable)) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions) (global.get $instanceofexpression.InstanceofExpressions.1.rtt))(local.get $this)) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
+   (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $this)) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
   ))
  )
 )
@@ -153,9 +167,9 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block
-  ;; Object b = new Integer.<init>(1);
+  ;; Object b = java.lang.Integer.$create(1);
   ;;@ instanceofexpression/InstanceofExpressions.java:38:4
-  (local.set $b (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+  (local.set $b (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
   ;; boolean a = b instanceof Byte;
   ;;@ instanceofexpression/InstanceofExpressions.java:40:4
   (local.set $a (ref.test (local.get $b) (global.get $java.lang.Byte.rtt)))
@@ -213,23 +227,23 @@
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instanceofexpression.InstanceofExpressions.rtt)))
  (block
-  ;; Object object = new Object.<init>();
+  ;; Object object = java.lang.Object.$create();
   ;;@ instanceofexpression/InstanceofExpressions.java:57:4
-  (local.set $object (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
-  ;; Object[] objectArray = new OfObject.<init>(0);
+  (local.set $object (call $$create__java_lang_Object@java.lang.Object ))
+  ;; Object[] objectArray = javaemul.internal.WasmArray.OfObject.$create(0);
   ;;@ instanceofexpression/InstanceofExpressions.java:58:4
-  (local.set $objectArray (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
-  ;; Object[][] objectDoubleArray = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 0),($array_literal.elements[1] = -1),$array_literal),-1);
+  (local.set $objectArray (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
+  ;; Object[][] objectDoubleArray = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = javaemul.internal.WasmArray.OfInt.$create(2),($array_literal.elements[0] = 0),($array_literal.elements[1] = -1),$array_literal),-1);
   ;;@ instanceofexpression/InstanceofExpressions.java:59:4
   (local.set $objectDoubleArray (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-   (local.set $$array_literal (call $m_<init>__int@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 2)))
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 0))
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const -1))
    (local.get $$array_literal)
   )(i32.const -1)))
-  ;; String[] stringArray = new OfObject.<init>(0);
+  ;; String[] stringArray = javaemul.internal.WasmArray.OfObject.$create(0);
   ;;@ instanceofexpression/InstanceofExpressions.java:60:4
-  (local.set $stringArray (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)))
+  (local.set $stringArray (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
   ;; boolean a;
   ;;@ instanceofexpression/InstanceofExpressions.java:62:4
   
@@ -328,11 +342,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements Serializable(InstanceofExpressions $outer_this)
-(func $m_<init>__instanceofexpression_InstanceofExpressions@instanceofexpression.InstanceofExpressions.1
- (param $this (ref null $instanceofexpression.InstanceofExpressions.1))
+;;; <anonymous> implements Serializable <anonymous> implements Serializable.$create(InstanceofExpressions $outer_this)
+(func $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1
  (param $$outer_this (ref null $instanceofexpression.InstanceofExpressions))
  (result (ref null $instanceofexpression.InstanceofExpressions.1))
+ ;;@ instanceofexpression/InstanceofExpressions.java:34:27
+ (local $$instance (ref null $instanceofexpression.InstanceofExpressions.1))
+ (block
+  ;; <anonymous> implements Serializable $instance = new $1.<init>($outer_this);
+  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
+  (local.set $$instance (struct.new_with_rtt $instanceofexpression.InstanceofExpressions.1 (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.vtable)) (ref.as_non_null (global.get $instanceofexpression.InstanceofExpressions.1.itable)) (i32.const 0) (ref.null $instanceofexpression.InstanceofExpressions) (global.get $instanceofexpression.InstanceofExpressions.1.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
+  (call $$ctor__instanceofexpression_InstanceofExpressions__void_$p_instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Serializable.$ctor(InstanceofExpressions $outer_this)
+(func $$ctor__instanceofexpression_InstanceofExpressions__void_$p_instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1
+ (param $this (ref null $instanceofexpression.InstanceofExpressions.1))
+ (param $$outer_this (ref null $instanceofexpression.InstanceofExpressions))
  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
  (block
   ;; instanceofexpression.InstanceofExpressions.1.$clinit();
@@ -341,12 +373,9 @@
   ;; ($1.this.this = $outer_this);
   ;;@ instanceofexpression/InstanceofExpressions.java:34:27
   (struct.set $instanceofexpression.InstanceofExpressions.1 $$outer_this__instanceofexpression_InstanceofExpressions_1(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ instanceofexpression/InstanceofExpressions.java:34:27
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1.this;
-  ;;@ instanceofexpression/InstanceofExpressions.java:34:27
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

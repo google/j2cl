@@ -41,21 +41,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; LabeledStatement()
-(func $m_<init>__@labelstatement.LabeledStatement
- (param $this (ref null $labelstatement.LabeledStatement))
+;;; LabeledStatement LabeledStatement.$create()
+(func $$create__labelstatement_LabeledStatement@labelstatement.LabeledStatement
  (result (ref null $labelstatement.LabeledStatement))
+ ;;@ labelstatement/LabeledStatement.java:18:13
+ (local $$instance (ref null $labelstatement.LabeledStatement))
+ (block
+  ;; LabeledStatement $instance = new LabeledStatement.<init>();
+  ;;@ labelstatement/LabeledStatement.java:18:13
+  (local.set $$instance (struct.new_with_rtt $labelstatement.LabeledStatement (ref.as_non_null (global.get $labelstatement.LabeledStatement.vtable)) (ref.as_non_null (global.get $labelstatement.LabeledStatement.itable)) (i32.const 0) (global.get $labelstatement.LabeledStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ labelstatement/LabeledStatement.java:18:13
+  (call $$ctor__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ labelstatement/LabeledStatement.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LabeledStatement.$ctor()
+(func $$ctor__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement
+ (param $this (ref null $labelstatement.LabeledStatement))
  ;;@ labelstatement/LabeledStatement.java:18:13
  (block
   ;; labelstatement.LabeledStatement.$clinit();
   ;;@ labelstatement/LabeledStatement.java:18:13
   (call $$clinit__void@labelstatement.LabeledStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ labelstatement/LabeledStatement.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return LabeledStatement.this;
-  ;;@ labelstatement/LabeledStatement.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -69,21 +69,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; LocalClassWithOuterGenerics()
-(func $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics
- (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
+;;; LocalClassWithOuterGenerics<A> LocalClassWithOuterGenerics.$create()
+(func $$create__localclasswithoutergenerics_LocalClassWithOuterGenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
+ ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
+ (local $$instance (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
+ (block
+  ;; LocalClassWithOuterGenerics<A> $instance = new LocalClassWithOuterGenerics.<init>();
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
+  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
+  (call $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LocalClassWithOuterGenerics.$ctor()
+(func $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics
+ (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
  (block
   ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.$clinit();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
   (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return LocalClassWithOuterGenerics.this;
-  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -96,12 +110,12 @@
   ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.$clinit();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:20:31
   (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics )
-  ;; Bar<T> bar = new $1Bar.<init>();
+  ;; Bar<T> bar = localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$create();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:24:4
-  (local.set $bar (call $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt))))
-  ;; Baz<Object, T> baz = new $1Baz.<init>();
+  (local.set $bar (call $$create__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar ))
+  ;; Baz<Object, T> baz = localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$create();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:29:4
-  (local.set $baz (call $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt))))
+  (local.set $baz (call $$create__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz ))
  )
 )
 
@@ -157,21 +171,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Bar()
-(func $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
- (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
+;;; Bar<T> Bar.$create()
+(func $$create__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
+ ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
+ (local $$instance (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
+ (block
+  ;; Bar<T> $instance = new $1Bar.<init>();
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
+  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
+  (call $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Bar.$ctor()
+(func $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar
+ (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
  (block
   ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.$clinit();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
   (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1Bar.this;
-  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -240,21 +268,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Baz()
-(func $m_<init>__@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
- (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
+;;; Baz<S, T> Baz.$create()
+(func $$create__localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
  (result (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
+ ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
+ (local $$instance (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
+ (block
+  ;; Baz<S, T> $instance = new $1Baz.<init>();
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
+  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
+  (call $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Baz.$ctor()
+(func $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz
+ (param $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
  (block
   ;; localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.$clinit();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
   (call $$clinit__void@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1Baz.this;
-  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

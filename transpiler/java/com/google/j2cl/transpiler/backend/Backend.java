@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.backend.closure.OutputGeneratorStage;
 import com.google.j2cl.transpiler.backend.kotlin.KotlinGeneratorStage;
 import com.google.j2cl.transpiler.backend.wasm.WasmModuleGenerator;
-import com.google.j2cl.transpiler.passes.AddExplicitConstructorReturnValues;
 import com.google.j2cl.transpiler.passes.ArrayAccessNormalizer;
 import com.google.j2cl.transpiler.passes.BridgeMethodsCreator;
 import com.google.j2cl.transpiler.passes.ControlStatementFormatter;
@@ -81,6 +80,7 @@ import com.google.j2cl.transpiler.passes.NormalizeForEachStatement;
 import com.google.j2cl.transpiler.passes.NormalizeFunctionExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceOfs;
+import com.google.j2cl.transpiler.passes.NormalizeInstantiationThroughFactoryMethods;
 import com.google.j2cl.transpiler.passes.NormalizeInterfaceMethods;
 import com.google.j2cl.transpiler.passes.NormalizeJsAwaitMethodInvocations;
 import com.google.j2cl.transpiler.passes.NormalizeJsDocCastExpressions;
@@ -339,9 +339,7 @@ public enum Backend {
           RewriteAssignmentExpressions::new,
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
-          // Run after all passes that rely on correct typing since this pass introduces a
-          // disagreement between a constructor's descriptor and the return statements.
-          AddExplicitConstructorReturnValues::new,
+          NormalizeInstantiationThroughFactoryMethods::new,
 
           // Post-verifications
           VerifySingleAstReference::new,

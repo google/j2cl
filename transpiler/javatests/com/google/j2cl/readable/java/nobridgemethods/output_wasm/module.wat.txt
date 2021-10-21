@@ -135,21 +135,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; Map()
-(func $m_<init>__@nobridgemethods.Map
+;;; void Map.$ctor()
+(func $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map
  (param $this (ref null $nobridgemethods.Map))
- (result (ref null $nobridgemethods.Map))
  ;;@ nobridgemethods/CharSet.java:20:15
  (block
   ;; nobridgemethods.Map.$clinit();
   ;;@ nobridgemethods/CharSet.java:20:15
   (call $$clinit__void@nobridgemethods.Map )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:20:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Map.this;
-  ;;@ nobridgemethods/CharSet.java:20:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -192,21 +188,35 @@
   $nobridgemethods.Map.vtable)
 )
 
-;;; TreeMap()
-(func $m_<init>__@nobridgemethods.TreeMap
- (param $this (ref null $nobridgemethods.TreeMap))
+;;; TreeMap<K> TreeMap.$create()
+(func $$create__nobridgemethods_TreeMap@nobridgemethods.TreeMap
  (result (ref null $nobridgemethods.TreeMap))
+ ;;@ nobridgemethods/CharSet.java:24:6
+ (local $$instance (ref null $nobridgemethods.TreeMap))
+ (block
+  ;; TreeMap<K> $instance = new TreeMap.<init>();
+  ;;@ nobridgemethods/CharSet.java:24:6
+  (local.set $$instance (struct.new_with_rtt $nobridgemethods.TreeMap (ref.as_non_null (global.get $nobridgemethods.TreeMap.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.itable)) (i32.const 0) (global.get $nobridgemethods.TreeMap.rtt)))
+  ;; $instance.$ctor();
+  ;;@ nobridgemethods/CharSet.java:24:6
+  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (local.get $$instance))
+  ;; return $instance;
+  ;;@ nobridgemethods/CharSet.java:24:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TreeMap.$ctor()
+(func $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap
+ (param $this (ref null $nobridgemethods.TreeMap))
  ;;@ nobridgemethods/CharSet.java:24:6
  (block
   ;; nobridgemethods.TreeMap.$clinit();
   ;;@ nobridgemethods/CharSet.java:24:6
   (call $$clinit__void@nobridgemethods.TreeMap )
-  ;; Map.this.Map.<init>();
+  ;; Map.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:24:6
-  (drop (call $m_<init>__@nobridgemethods.Map (local.get $this)))
-  ;; return TreeMap.this;
-  ;;@ nobridgemethods/CharSet.java:24:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_nobridgemethods_Map@nobridgemethods.Map (local.get $this))
  )
 )
 
@@ -220,9 +230,9 @@
  (local $this (ref null $nobridgemethods.TreeMap))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $nobridgemethods.TreeMap.rtt)))
  (block
-  ;; return new InnerEntry.<init>();
+  ;; return nobridgemethods.TreeMap.InnerEntry.$create();
   ;;@ nobridgemethods/CharSet.java:29:4
-  (return (call $m_<init>__@nobridgemethods.TreeMap.InnerEntry (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.itable)) (i32.const 0) (global.get $nobridgemethods.TreeMap.InnerEntry.rtt))))
+  (return (call $$create__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry ))
  )
 )
 (elem declare func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
@@ -295,21 +305,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; InnerEntry()
-(func $m_<init>__@nobridgemethods.TreeMap.InnerEntry
- (param $this (ref null $nobridgemethods.TreeMap.InnerEntry))
+;;; InnerEntry<K> InnerEntry.$create()
+(func $$create__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry
  (result (ref null $nobridgemethods.TreeMap.InnerEntry))
+ ;;@ nobridgemethods/CharSet.java:25:15
+ (local $$instance (ref null $nobridgemethods.TreeMap.InnerEntry))
+ (block
+  ;; InnerEntry<K> $instance = new InnerEntry.<init>();
+  ;;@ nobridgemethods/CharSet.java:25:15
+  (local.set $$instance (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.itable)) (i32.const 0) (global.get $nobridgemethods.TreeMap.InnerEntry.rtt)))
+  ;; $instance.$ctor();
+  ;;@ nobridgemethods/CharSet.java:25:15
+  (call $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry (local.get $$instance))
+  ;; return $instance;
+  ;;@ nobridgemethods/CharSet.java:25:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerEntry.$ctor()
+(func $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry
+ (param $this (ref null $nobridgemethods.TreeMap.InnerEntry))
  ;;@ nobridgemethods/CharSet.java:25:15
  (block
   ;; nobridgemethods.TreeMap.InnerEntry.$clinit();
   ;;@ nobridgemethods/CharSet.java:25:15
   (call $$clinit__void@nobridgemethods.TreeMap.InnerEntry )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:25:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InnerEntry.this;
-  ;;@ nobridgemethods/CharSet.java:25:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -364,21 +388,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; CharSet()
-(func $m_<init>__@nobridgemethods.CharSet
- (param $this (ref null $nobridgemethods.CharSet))
+;;; CharSet CharSet.$create()
+(func $$create__nobridgemethods_CharSet@nobridgemethods.CharSet
  (result (ref null $nobridgemethods.CharSet))
+ ;;@ nobridgemethods/CharSet.java:33:13
+ (local $$instance (ref null $nobridgemethods.CharSet))
+ (block
+  ;; CharSet $instance = new CharSet.<init>();
+  ;;@ nobridgemethods/CharSet.java:33:13
+  (local.set $$instance (struct.new_with_rtt $nobridgemethods.CharSet (ref.as_non_null (global.get $nobridgemethods.CharSet.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.itable)) (i32.const 0) (global.get $nobridgemethods.CharSet.rtt)))
+  ;; $instance.$ctor();
+  ;;@ nobridgemethods/CharSet.java:33:13
+  (call $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet (local.get $$instance))
+  ;; return $instance;
+  ;;@ nobridgemethods/CharSet.java:33:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void CharSet.$ctor()
+(func $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet
+ (param $this (ref null $nobridgemethods.CharSet))
  ;;@ nobridgemethods/CharSet.java:33:13
  (block
   ;; nobridgemethods.CharSet.$clinit();
   ;;@ nobridgemethods/CharSet.java:33:13
   (call $$clinit__void@nobridgemethods.CharSet )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:33:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return CharSet.this;
-  ;;@ nobridgemethods/CharSet.java:33:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -391,9 +429,9 @@
   ;; nobridgemethods.CharSet.$clinit();
   ;;@ nobridgemethods/CharSet.java:35:42
   (call $$clinit__void@nobridgemethods.CharSet )
-  ;; TreeMap<String> treeMap = new $1.<init>();
+  ;; TreeMap<String> treeMap = nobridgemethods.CharSet.1.$create();
   ;;@ nobridgemethods/CharSet.java:36:4
-  (local.set $treeMap (call $m_<init>__@nobridgemethods.CharSet.1 (struct.new_with_rtt $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0) (global.get $nobridgemethods.CharSet.1.rtt))))
+  (local.set $treeMap (call $$create__nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 ))
  )
 )
 
@@ -450,21 +488,35 @@
   $nobridgemethods.TreeMap.vtable)
 )
 
-;;; <anonymous> extends TreeMap<String>()
-(func $m_<init>__@nobridgemethods.CharSet.1
- (param $this (ref null $nobridgemethods.CharSet.1))
+;;; <anonymous> extends TreeMap<String> <anonymous> extends TreeMap<String>.$create()
+(func $$create__nobridgemethods_CharSet_1@nobridgemethods.CharSet.1
  (result (ref null $nobridgemethods.CharSet.1))
+ ;;@ nobridgemethods/CharSet.java:36:52
+ (local $$instance (ref null $nobridgemethods.CharSet.1))
+ (block
+  ;; <anonymous> extends TreeMap<String> $instance = new $1.<init>();
+  ;;@ nobridgemethods/CharSet.java:36:52
+  (local.set $$instance (struct.new_with_rtt $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0) (global.get $nobridgemethods.CharSet.1.rtt)))
+  ;; $instance.$ctor();
+  ;;@ nobridgemethods/CharSet.java:36:52
+  (call $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ nobridgemethods/CharSet.java:36:52
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends TreeMap<String>.$ctor()
+(func $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1
+ (param $this (ref null $nobridgemethods.CharSet.1))
  ;;@ nobridgemethods/CharSet.java:36:52
  (block
   ;; nobridgemethods.CharSet.1.$clinit();
   ;;@ nobridgemethods/CharSet.java:36:52
   (call $$clinit__void@nobridgemethods.CharSet.1 )
-  ;; TreeMap.this.TreeMap.<init>();
+  ;; TreeMap.this.$ctor();
   ;;@ nobridgemethods/CharSet.java:36:52
-  (drop (call $m_<init>__@nobridgemethods.TreeMap (local.get $this)))
-  ;; return $1.this;
-  ;;@ nobridgemethods/CharSet.java:36:52
-  (return (local.get $this))
+  (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (local.get $this))
  )
 )
 

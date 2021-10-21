@@ -64,24 +64,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; ArithmeticExpressions()
-(func $m_<init>__@arithmeticexpressions.ArithmeticExpressions
- (param $this (ref null $arithmeticexpressions.ArithmeticExpressions))
+;;; ArithmeticExpressions ArithmeticExpressions.$create()
+(func $$create__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
  (result (ref null $arithmeticexpressions.ArithmeticExpressions))
+ ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
+ (local $$instance (ref null $arithmeticexpressions.ArithmeticExpressions))
+ (block
+  ;; ArithmeticExpressions $instance = new ArithmeticExpressions.<init>();
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
+  (local.set $$instance (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions (ref.as_non_null (global.get $arithmeticexpressions.ArithmeticExpressions.vtable)) (ref.as_non_null (global.get $arithmeticexpressions.ArithmeticExpressions.itable)) (i32.const 0) (i64.const 0) (i64.const 0) (global.get $arithmeticexpressions.ArithmeticExpressions.rtt)))
+  ;; $instance.$ctor();
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
+  (call $$ctor__void_$p_arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions (local.get $$instance))
+  ;; return $instance;
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ArithmeticExpressions.$ctor()
+(func $$ctor__void_$p_arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions
+ (param $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
  (block
   ;; arithmeticexpressions.ArithmeticExpressions.$clinit();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
   (call $$clinit__void@arithmeticexpressions.ArithmeticExpressions )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ArithmeticExpressions.this.$init();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
   (call $$init__void_$p_arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions (local.get $this))
-  ;; return ArithmeticExpressions.this;
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:18:13
-  (return (local.get $this))
  )
 )
 
@@ -390,10 +404,10 @@
   ;; String[] strings = null;
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:107:4
   (local.set $strings (ref.null $javaemul.internal.WasmArray.OfObject))
-  ;; (strings.elements[0] = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(((String) strings.elements[0])),$stringBuilder.append(null),$stringBuilder.toString()));
+  ;; (strings.elements[0] = (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(((String) strings.elements[0])),$stringBuilder.append(null),$stringBuilder.toString()));
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:108:4
   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0) (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $m_<init>__@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+   (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
    (drop (call_ref (local.get $$stringBuilder)(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $strings)) (i32.const 0)) (global.get $java.lang.String.rtt))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(ref.null $java.lang.Object)(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
@@ -762,11 +776,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; Ref(ArithmeticExpressions $outer_this)
-(func $m_<init>__arithmeticexpressions_ArithmeticExpressions@arithmeticexpressions.ArithmeticExpressions.1Ref
- (param $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+;;; Ref<T> Ref.$create(ArithmeticExpressions $outer_this)
+(func $$create__arithmeticexpressions_ArithmeticExpressions__arithmeticexpressions_ArithmeticExpressions_1Ref@arithmeticexpressions.ArithmeticExpressions.1Ref
  (param $$outer_this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (result (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+ ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
+ (local $$instance (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+ (block
+  ;; Ref<T> $instance = new $1Ref.<init>($outer_this);
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
+  (local.set $$instance (struct.new_with_rtt $arithmeticexpressions.ArithmeticExpressions.1Ref (ref.as_non_null (global.get $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable)) (ref.as_non_null (global.get $arithmeticexpressions.ArithmeticExpressions.1Ref.itable)) (i32.const 0) (ref.null $arithmeticexpressions.ArithmeticExpressions) (ref.null $java.lang.Object) (global.get $arithmeticexpressions.ArithmeticExpressions.1Ref.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
+  (call $$ctor__arithmeticexpressions_ArithmeticExpressions__void_$p_arithmeticexpressions_ArithmeticExpressions_1Ref@arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Ref.$ctor(ArithmeticExpressions $outer_this)
+(func $$ctor__arithmeticexpressions_ArithmeticExpressions__void_$p_arithmeticexpressions_ArithmeticExpressions_1Ref@arithmeticexpressions.ArithmeticExpressions.1Ref
+ (param $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
+ (param $$outer_this (ref null $arithmeticexpressions.ArithmeticExpressions))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
  (block
   ;; arithmeticexpressions.ArithmeticExpressions.1Ref.$clinit();
@@ -775,12 +807,9 @@
   ;; ($1Ref.this.this = $outer_this);
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
   (struct.set $arithmeticexpressions.ArithmeticExpressions.1Ref $$outer_this__arithmeticexpressions_ArithmeticExpressions_1Ref(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1Ref.this;
-  ;;@ arithmeticexpressions/ArithmeticExpressions.java:148:10
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

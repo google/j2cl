@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; DoWhileStatement()
-(func $m_<init>__@dowhilestatement.DoWhileStatement
- (param $this (ref null $dowhilestatement.DoWhileStatement))
+;;; DoWhileStatement DoWhileStatement.$create()
+(func $$create__dowhilestatement_DoWhileStatement@dowhilestatement.DoWhileStatement
  (result (ref null $dowhilestatement.DoWhileStatement))
+ ;;@ dowhilestatement/DoWhileStatement.java:18:13
+ (local $$instance (ref null $dowhilestatement.DoWhileStatement))
+ (block
+  ;; DoWhileStatement $instance = new DoWhileStatement.<init>();
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
+  (local.set $$instance (struct.new_with_rtt $dowhilestatement.DoWhileStatement (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.vtable)) (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.itable)) (i32.const 0) (global.get $dowhilestatement.DoWhileStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
+  (call $$ctor__void_$p_dowhilestatement_DoWhileStatement@dowhilestatement.DoWhileStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ dowhilestatement/DoWhileStatement.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void DoWhileStatement.$ctor()
+(func $$ctor__void_$p_dowhilestatement_DoWhileStatement@dowhilestatement.DoWhileStatement
+ (param $this (ref null $dowhilestatement.DoWhileStatement))
  ;;@ dowhilestatement/DoWhileStatement.java:18:13
  (block
   ;; dowhilestatement.DoWhileStatement.$clinit();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (call $$clinit__void@dowhilestatement.DoWhileStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return DoWhileStatement.this;
-  ;;@ dowhilestatement/DoWhileStatement.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

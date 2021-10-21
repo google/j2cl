@@ -96,21 +96,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Parent()
-(func $m_<init>__@overridingmethods.Parent
- (param $this (ref null $overridingmethods.Parent))
+;;; Parent Parent.$create()
+(func $$create__overridingmethods_Parent@overridingmethods.Parent
  (result (ref null $overridingmethods.Parent))
+ ;;@ overridingmethods/Child.java:22:6
+ (local $$instance (ref null $overridingmethods.Parent))
+ (block
+  ;; Parent $instance = new Parent.<init>();
+  ;;@ overridingmethods/Child.java:22:6
+  (local.set $$instance (struct.new_with_rtt $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $overridingmethods.Parent.itable)) (i32.const 0) (global.get $overridingmethods.Parent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ overridingmethods/Child.java:22:6
+  (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (local.get $$instance))
+  ;; return $instance;
+  ;;@ overridingmethods/Child.java:22:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent
+ (param $this (ref null $overridingmethods.Parent))
  ;;@ overridingmethods/Child.java:22:6
  (block
   ;; overridingmethods.Parent.$clinit();
   ;;@ overridingmethods/Child.java:22:6
   (call $$clinit__void@overridingmethods.Parent )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ overridingmethods/Child.java:22:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Parent.this;
-  ;;@ overridingmethods/Child.java:22:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -179,21 +193,35 @@
   $overridingmethods.Parent.vtable)
 )
 
-;;; Child()
-(func $m_<init>__@overridingmethods.Child
- (param $this (ref null $overridingmethods.Child))
+;;; Child Child.$create()
+(func $$create__overridingmethods_Child@overridingmethods.Child
  (result (ref null $overridingmethods.Child))
+ ;;@ overridingmethods/Child.java:26:13
+ (local $$instance (ref null $overridingmethods.Child))
+ (block
+  ;; Child $instance = new Child.<init>();
+  ;;@ overridingmethods/Child.java:26:13
+  (local.set $$instance (struct.new_with_rtt $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0) (global.get $overridingmethods.Child.rtt)))
+  ;; $instance.$ctor();
+  ;;@ overridingmethods/Child.java:26:13
+  (call $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child (local.get $$instance))
+  ;; return $instance;
+  ;;@ overridingmethods/Child.java:26:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child
+ (param $this (ref null $overridingmethods.Child))
  ;;@ overridingmethods/Child.java:26:13
  (block
   ;; overridingmethods.Child.$clinit();
   ;;@ overridingmethods/Child.java:26:13
   (call $$clinit__void@overridingmethods.Child )
-  ;; Parent.this.Parent.<init>();
+  ;; Parent.this.$ctor();
   ;;@ overridingmethods/Child.java:26:13
-  (drop (call $m_<init>__@overridingmethods.Parent (local.get $this)))
-  ;; return Child.this;
-  ;;@ overridingmethods/Child.java:26:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (local.get $this))
  )
 )
 

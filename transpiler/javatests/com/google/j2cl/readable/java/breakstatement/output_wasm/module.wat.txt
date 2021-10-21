@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; BreakStatement()
-(func $m_<init>__@breakstatement.BreakStatement
- (param $this (ref null $breakstatement.BreakStatement))
+;;; BreakStatement BreakStatement.$create()
+(func $$create__breakstatement_BreakStatement@breakstatement.BreakStatement
  (result (ref null $breakstatement.BreakStatement))
+ ;;@ breakstatement/BreakStatement.java:18:13
+ (local $$instance (ref null $breakstatement.BreakStatement))
+ (block
+  ;; BreakStatement $instance = new BreakStatement.<init>();
+  ;;@ breakstatement/BreakStatement.java:18:13
+  (local.set $$instance (struct.new_with_rtt $breakstatement.BreakStatement (ref.as_non_null (global.get $breakstatement.BreakStatement.vtable)) (ref.as_non_null (global.get $breakstatement.BreakStatement.itable)) (i32.const 0) (global.get $breakstatement.BreakStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ breakstatement/BreakStatement.java:18:13
+  (call $$ctor__void_$p_breakstatement_BreakStatement@breakstatement.BreakStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ breakstatement/BreakStatement.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void BreakStatement.$ctor()
+(func $$ctor__void_$p_breakstatement_BreakStatement@breakstatement.BreakStatement
+ (param $this (ref null $breakstatement.BreakStatement))
  ;;@ breakstatement/BreakStatement.java:18:13
  (block
   ;; breakstatement.BreakStatement.$clinit();
   ;;@ breakstatement/BreakStatement.java:18:13
   (call $$clinit__void@breakstatement.BreakStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ breakstatement/BreakStatement.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return BreakStatement.this;
-  ;;@ breakstatement/BreakStatement.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

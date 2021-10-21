@@ -35,29 +35,45 @@
   $java.lang.Object.vtable)
 )
 
-;;; SimpleGenericType(T t, S s)
-(func $m_<init>__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType
- (param $this (ref null $simplegenerictype.SimpleGenericType))
+;;; SimpleGenericType<T, S> SimpleGenericType.$create(T t, S s)
+(func $$create__java_lang_Object__java_lang_Object__simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType
  (param $t (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (result (ref null $simplegenerictype.SimpleGenericType))
+ ;;@ simplegenerictype/SimpleGenericType.java:22:9
+ (local $$instance (ref null $simplegenerictype.SimpleGenericType))
+ (block
+  ;; SimpleGenericType<T, S> $instance = new SimpleGenericType.<init>(t,s);
+  ;;@ simplegenerictype/SimpleGenericType.java:22:9
+  (local.set $$instance (struct.new_with_rtt $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $simplegenerictype.SimpleGenericType.rtt)))
+  ;; $instance.$ctor(t,s);
+  ;;@ simplegenerictype/SimpleGenericType.java:22:9
+  (call $$ctor__java_lang_Object__java_lang_Object__void_$p_simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType (local.get $$instance)(local.get $t)(local.get $s))
+  ;; return $instance;
+  ;;@ simplegenerictype/SimpleGenericType.java:22:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SimpleGenericType.$ctor(T t, S s)
+(func $$ctor__java_lang_Object__java_lang_Object__void_$p_simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType
+ (param $this (ref null $simplegenerictype.SimpleGenericType))
+ (param $t (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.Object))
  ;;@ simplegenerictype/SimpleGenericType.java:22:9
  (block
   ;; simplegenerictype.SimpleGenericType.$clinit();
   ;;@ simplegenerictype/SimpleGenericType.java:22:37
   (call $$clinit__void@simplegenerictype.SimpleGenericType )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ simplegenerictype/SimpleGenericType.java:22:37
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; (SimpleGenericType.this.first = t);
   ;;@ simplegenerictype/SimpleGenericType.java:23:4
   (struct.set $simplegenerictype.SimpleGenericType $f_first__simplegenerictype_SimpleGenericType(local.get $this) (local.get $t))
   ;; (SimpleGenericType.this.second = s);
   ;;@ simplegenerictype/SimpleGenericType.java:24:4
   (struct.set $simplegenerictype.SimpleGenericType $f_second__simplegenerictype_SimpleGenericType(local.get $this) (local.get $s))
-  ;; return SimpleGenericType.this;
-  ;;@ simplegenerictype/SimpleGenericType.java:22:9
-  (return (local.get $this))
  )
 )
 
@@ -70,9 +86,9 @@
  (local $this (ref null $simplegenerictype.SimpleGenericType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplegenerictype.SimpleGenericType.rtt)))
  (block
-  ;; SimpleGenericType<Object, Error> g = new SimpleGenericType.<init>(new Object.<init>(),new Error.<init>());
+  ;; SimpleGenericType<Object, Error> g = simplegenerictype.SimpleGenericType.$create(java.lang.Object.$create(),java.lang.Error.$create());
   ;;@ simplegenerictype/SimpleGenericType.java:28:4
-  (local.set $g (call $m_<init>__java_lang_Object__java_lang_Object@simplegenerictype.SimpleGenericType (struct.new_with_rtt $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $simplegenerictype.SimpleGenericType.rtt))(call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))(call $m_<init>__@java.lang.Error (struct.new_with_rtt $java.lang.Error (ref.as_non_null (global.get $java.lang.Error.vtable)) (ref.as_non_null (global.get $java.lang.Error.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))))
+  (local.set $g (call $$create__java_lang_Object__java_lang_Object__simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType (call $$create__java_lang_Object@java.lang.Object )(call $$create__java_lang_Error@java.lang.Error )))
  )
 )
 (elem declare func $m_test__void@simplegenerictype.SimpleGenericType)

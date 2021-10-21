@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; BoundedTypeVariable()
-(func $m_<init>__@boundedtypevariable.BoundedTypeVariable
- (param $this (ref null $boundedtypevariable.BoundedTypeVariable))
+;;; BoundedTypeVariable<T> BoundedTypeVariable.$create()
+(func $$create__boundedtypevariable_BoundedTypeVariable@boundedtypevariable.BoundedTypeVariable
  (result (ref null $boundedtypevariable.BoundedTypeVariable))
+ ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+ (local $$instance (ref null $boundedtypevariable.BoundedTypeVariable))
+ (block
+  ;; BoundedTypeVariable<T> $instance = new BoundedTypeVariable.<init>();
+  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+  (local.set $$instance (struct.new_with_rtt $boundedtypevariable.BoundedTypeVariable (ref.as_non_null (global.get $boundedtypevariable.BoundedTypeVariable.vtable)) (ref.as_non_null (global.get $boundedtypevariable.BoundedTypeVariable.itable)) (i32.const 0) (global.get $boundedtypevariable.BoundedTypeVariable.rtt)))
+  ;; $instance.$ctor();
+  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+  (call $$ctor__void_$p_boundedtypevariable_BoundedTypeVariable@boundedtypevariable.BoundedTypeVariable (local.get $$instance))
+  ;; return $instance;
+  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void BoundedTypeVariable.$ctor()
+(func $$ctor__void_$p_boundedtypevariable_BoundedTypeVariable@boundedtypevariable.BoundedTypeVariable
+ (param $this (ref null $boundedtypevariable.BoundedTypeVariable))
  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
  (block
   ;; boundedtypevariable.BoundedTypeVariable.$clinit();
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
   (call $$clinit__void@boundedtypevariable.BoundedTypeVariable )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return BoundedTypeVariable.this;
-  ;;@ boundedtypevariable/BoundedTypeVariable.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

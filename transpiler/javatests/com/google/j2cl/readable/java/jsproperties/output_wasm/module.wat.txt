@@ -94,21 +94,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Foo()
-(func $m_<init>__@jsproperties.Foo
- (param $this (ref null $jsproperties.Foo))
+;;; Foo Foo.$create()
+(func $$create__jsproperties_Foo@jsproperties.Foo
  (result (ref null $jsproperties.Foo))
+ ;;@ jsproperties/Main.java:22:6
+ (local $$instance (ref null $jsproperties.Foo))
+ (block
+  ;; Foo $instance = new Foo.<init>();
+  ;;@ jsproperties/Main.java:22:6
+  (local.set $$instance (struct.new_with_rtt $jsproperties.Foo (ref.as_non_null (global.get $jsproperties.Foo.vtable)) (ref.as_non_null (global.get $jsproperties.Foo.itable)) (i32.const 0) (global.get $jsproperties.Foo.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsproperties/Main.java:22:6
+  (call $$ctor__void_$p_jsproperties_Foo@jsproperties.Foo (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsproperties/Main.java:22:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_jsproperties_Foo@jsproperties.Foo
+ (param $this (ref null $jsproperties.Foo))
  ;;@ jsproperties/Main.java:22:6
  (block
   ;; jsproperties.Foo.$clinit();
   ;;@ jsproperties/Main.java:22:6
   (call $$clinit__void@jsproperties.Foo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:22:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Foo.this;
-  ;;@ jsproperties/Main.java:22:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -224,21 +238,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Bar()
-(func $m_<init>__@jsproperties.Bar
- (param $this (ref null $jsproperties.Bar))
+;;; Bar Bar.$create()
+(func $$create__jsproperties_Bar@jsproperties.Bar
  (result (ref null $jsproperties.Bar))
+ ;;@ jsproperties/Main.java:47:6
+ (local $$instance (ref null $jsproperties.Bar))
+ (block
+  ;; Bar $instance = new Bar.<init>();
+  ;;@ jsproperties/Main.java:47:6
+  (local.set $$instance (struct.new_with_rtt $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsproperties/Main.java:47:6
+  (call $$ctor__void_$p_jsproperties_Bar@jsproperties.Bar (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsproperties/Main.java:47:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Bar.$ctor()
+(func $$ctor__void_$p_jsproperties_Bar@jsproperties.Bar
+ (param $this (ref null $jsproperties.Bar))
  ;;@ jsproperties/Main.java:47:6
  (block
   ;; jsproperties.Bar.$clinit();
   ;;@ jsproperties/Main.java:47:6
   (call $$clinit__void@jsproperties.Bar )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:47:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Bar.this;
-  ;;@ jsproperties/Main.java:47:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -358,21 +386,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; NativeFoo()
-(func $m_<init>__@jsproperties.NativeFoo
- (param $this (ref null $jsproperties.NativeFoo))
+;;; NativeFoo NativeFoo.$create()
+(func $$create__jsproperties_NativeFoo@jsproperties.NativeFoo
  (result (ref null $jsproperties.NativeFoo))
+ ;;@ jsproperties/Main.java:72:6
+ (local $$instance (ref null $jsproperties.NativeFoo))
+ (block
+  ;; NativeFoo $instance = new NativeFoo.<init>();
+  ;;@ jsproperties/Main.java:72:6
+  (local.set $$instance (struct.new_with_rtt $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsproperties/Main.java:72:6
+  (call $$ctor__void_$p_jsproperties_NativeFoo@jsproperties.NativeFoo (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsproperties/Main.java:72:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NativeFoo.$ctor()
+(func $$ctor__void_$p_jsproperties_NativeFoo@jsproperties.NativeFoo
+ (param $this (ref null $jsproperties.NativeFoo))
  ;;@ jsproperties/Main.java:72:6
  (block
   ;; jsproperties.NativeFoo.$clinit();
   ;;@ jsproperties/Main.java:72:6
   (call $$clinit__void@jsproperties.NativeFoo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:72:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return NativeFoo.this;
-  ;;@ jsproperties/Main.java:72:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -449,21 +491,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Main()
-(func $m_<init>__@jsproperties.Main
- (param $this (ref null $jsproperties.Main))
+;;; Main Main.$create()
+(func $$create__jsproperties_Main@jsproperties.Main
  (result (ref null $jsproperties.Main))
+ ;;@ jsproperties/Main.java:80:13
+ (local $$instance (ref null $jsproperties.Main))
+ (block
+  ;; Main $instance = new Main.<init>();
+  ;;@ jsproperties/Main.java:80:13
+  (local.set $$instance (struct.new_with_rtt $jsproperties.Main (ref.as_non_null (global.get $jsproperties.Main.vtable)) (ref.as_non_null (global.get $jsproperties.Main.itable)) (i32.const 0) (global.get $jsproperties.Main.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsproperties/Main.java:80:13
+  (call $$ctor__void_$p_jsproperties_Main@jsproperties.Main (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsproperties/Main.java:80:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_jsproperties_Main@jsproperties.Main
+ (param $this (ref null $jsproperties.Main))
  ;;@ jsproperties/Main.java:80:13
  (block
   ;; jsproperties.Main.$clinit();
   ;;@ jsproperties/Main.java:80:13
   (call $$clinit__void@jsproperties.Main )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsproperties/Main.java:80:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Main.this;
-  ;;@ jsproperties/Main.java:80:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -477,9 +533,9 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
  (block
   (block
-   ;; NativeFoo $qualifier = new NativeFoo.<init>();
+   ;; NativeFoo $qualifier = jsproperties.NativeFoo.$create();
    ;;@ jsproperties/Main.java:82:4
-   (local.set $$qualifier (call $m_<init>__@jsproperties.NativeFoo (struct.new_with_rtt $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0) (global.get $jsproperties.NativeFoo.rtt))))
+   (local.set $$qualifier (call $$create__jsproperties_NativeFoo@jsproperties.NativeFoo ))
    ;; $qualifier.getA();
    ;;@ jsproperties/Main.java:82:4
    (drop (call_ref (local.get $$qualifier)(struct.get $jsproperties.NativeFoo.vtable $m_getA__java_lang_Object (struct.get $jsproperties.NativeFoo $vtable(local.get $$qualifier)))))
@@ -524,9 +580,9 @@
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsproperties.Main.rtt)))
  (block
-  ;; Bar bar = new Bar.<init>();
+  ;; Bar bar = jsproperties.Bar.$create();
   ;;@ jsproperties/Main.java:94:4
-  (local.set $bar (call $m_<init>__@jsproperties.Bar (struct.new_with_rtt $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0) (global.get $jsproperties.Bar.rtt))))
+  (local.set $bar (call $$create__jsproperties_Bar@jsproperties.Bar ))
   ;; bar.getA();
   ;;@ jsproperties/Main.java:95:4
   (drop (call_ref (local.get $bar)(struct.get $jsproperties.Bar.vtable $m_getA__int (struct.get $jsproperties.Bar $vtable(local.get $bar)))))

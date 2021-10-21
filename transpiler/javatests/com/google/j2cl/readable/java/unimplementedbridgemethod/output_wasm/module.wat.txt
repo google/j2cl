@@ -110,21 +110,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; Bar()
-(func $m_<init>__@unimplementedbridgemethod.Bar
+;;; void Bar.$ctor()
+(func $$ctor__void_$p_unimplementedbridgemethod_Bar@unimplementedbridgemethod.Bar
  (param $this (ref null $unimplementedbridgemethod.Bar))
- (result (ref null $unimplementedbridgemethod.Bar))
  ;;@ unimplementedbridgemethod/Foo.java:33:15
  (block
   ;; unimplementedbridgemethod.Bar.$clinit();
   ;;@ unimplementedbridgemethod/Foo.java:33:15
   (call $$clinit__void@unimplementedbridgemethod.Bar )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Bar.this;
-  ;;@ unimplementedbridgemethod/Foo.java:33:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -165,21 +161,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; Foo()
-(func $m_<init>__@unimplementedbridgemethod.Foo
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_unimplementedbridgemethod_Foo@unimplementedbridgemethod.Foo
  (param $this (ref null $unimplementedbridgemethod.Foo))
- (result (ref null $unimplementedbridgemethod.Foo))
  ;;@ unimplementedbridgemethod/Foo.java:41:22
  (block
   ;; unimplementedbridgemethod.Foo.$clinit();
   ;;@ unimplementedbridgemethod/Foo.java:41:22
   (call $$clinit__void@unimplementedbridgemethod.Foo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ unimplementedbridgemethod/Foo.java:41:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Foo.this;
-  ;;@ unimplementedbridgemethod/Foo.java:41:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

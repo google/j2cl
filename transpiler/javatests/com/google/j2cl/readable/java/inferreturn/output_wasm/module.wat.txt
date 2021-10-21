@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; InferReturn()
-(func $m_<init>__@inferreturn.InferReturn
- (param $this (ref null $inferreturn.InferReturn))
+;;; InferReturn<T> InferReturn.$create()
+(func $$create__inferreturn_InferReturn@inferreturn.InferReturn
  (result (ref null $inferreturn.InferReturn))
+ ;;@ inferreturn/InferReturn.java:21:13
+ (local $$instance (ref null $inferreturn.InferReturn))
+ (block
+  ;; InferReturn<T> $instance = new InferReturn.<init>();
+  ;;@ inferreturn/InferReturn.java:21:13
+  (local.set $$instance (struct.new_with_rtt $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0) (global.get $inferreturn.InferReturn.rtt)))
+  ;; $instance.$ctor();
+  ;;@ inferreturn/InferReturn.java:21:13
+  (call $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn (local.get $$instance))
+  ;; return $instance;
+  ;;@ inferreturn/InferReturn.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InferReturn.$ctor()
+(func $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn
+ (param $this (ref null $inferreturn.InferReturn))
  ;;@ inferreturn/InferReturn.java:21:13
  (block
   ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ inferreturn/InferReturn.java:21:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InferReturn.this;
-  ;;@ inferreturn/InferReturn.java:21:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -58,9 +72,9 @@
   ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:23:55
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; return new InferReturn.<init>();
+  ;; return inferreturn.InferReturn.$create();
   ;;@ inferreturn/InferReturn.java:24:4
-  (return (call $m_<init>__@inferreturn.InferReturn (struct.new_with_rtt $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0) (global.get $inferreturn.InferReturn.rtt))))
+  (return (call $$create__inferreturn_InferReturn@inferreturn.InferReturn ))
  )
 )
 
@@ -123,9 +137,9 @@
   ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:46:53
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; return new ArrayList.<init>();
+  ;; return java.util.ArrayList.$create();
   ;;@ inferreturn/InferReturn.java:47:4
-  (return (call $m_<init>__@java.util.ArrayList (struct.new_with_rtt $java.util.ArrayList (ref.as_non_null (global.get $java.util.ArrayList.vtable)) (ref.as_non_null (global.get $java.util.ArrayList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $java.util.ArrayList.rtt))))
+  (return (call $$create__java_util_ArrayList@java.util.ArrayList ))
  )
 )
 
@@ -138,9 +152,9 @@
   ;; inferreturn.InferReturn.$clinit();
   ;;@ inferreturn/InferReturn.java:50:40
   (call $$clinit__void@inferreturn.InferReturn )
-  ;; return ((V[]) new OfObject.<init>(0));
+  ;; return ((V[]) javaemul.internal.WasmArray.OfObject.$create(0));
   ;;@ inferreturn/InferReturn.java:51:4
-  (return (ref.cast (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
+  (return (ref.cast (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
  )
 )
 

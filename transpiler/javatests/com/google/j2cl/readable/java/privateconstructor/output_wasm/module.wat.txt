@@ -31,18 +31,32 @@
   $java.lang.Object.vtable)
 )
 
-;;; PrivateConstructor()
-(func $m_<init>__@privateconstructor.PrivateConstructor
- (param $this (ref null $privateconstructor.PrivateConstructor))
+;;; PrivateConstructor PrivateConstructor.$create()
+(func $$create__privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor
  (result (ref null $privateconstructor.PrivateConstructor))
  ;;@ privateconstructor/PrivateConstructor.java:19:10
+ (local $$instance (ref null $privateconstructor.PrivateConstructor))
  (block
-  ;; Object.this.Object.<init>();
-  ;;@ privateconstructor/PrivateConstructor.java:19:31
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return PrivateConstructor.this;
+  ;; PrivateConstructor $instance = new PrivateConstructor.<init>();
   ;;@ privateconstructor/PrivateConstructor.java:19:10
-  (return (local.get $this))
+  (local.set $$instance (struct.new_with_rtt $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.itable)) (i32.const 0) (global.get $privateconstructor.PrivateConstructor.rtt)))
+  ;; $instance.$ctor();
+  ;;@ privateconstructor/PrivateConstructor.java:19:10
+  (call $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor (local.get $$instance))
+  ;; return $instance;
+  ;;@ privateconstructor/PrivateConstructor.java:19:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PrivateConstructor.$ctor()
+(func $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor
+ (param $this (ref null $privateconstructor.PrivateConstructor))
+ ;;@ privateconstructor/PrivateConstructor.java:19:10
+ (block
+  ;; Object.this.$ctor();
+  ;;@ privateconstructor/PrivateConstructor.java:19:31
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

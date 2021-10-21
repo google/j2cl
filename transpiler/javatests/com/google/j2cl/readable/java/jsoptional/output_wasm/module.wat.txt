@@ -194,25 +194,40 @@
 )
 (elem declare func $m_method2__java_lang_String__java_lang_Double__arrayOf_java_lang_Boolean__void@jsoptional.Main)
 
-;;; Main(String a)
-(func $m_<init>__java_lang_String@jsoptional.Main
- (param $this (ref null $jsoptional.Main))
+;;; Main Main.$create(String a)
+(func $$create__java_lang_String__jsoptional_Main@jsoptional.Main
  (param $a (ref null $java.lang.String))
  (result (ref null $jsoptional.Main))
+ ;;@ jsoptional/Main.java:39:9
+ (local $$instance (ref null $jsoptional.Main))
+ (block
+  ;; Main $instance = new Main.<init>(a);
+  ;;@ jsoptional/Main.java:39:9
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main (ref.as_non_null (global.get $jsoptional.Main.vtable)) (ref.as_non_null (global.get $jsoptional.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $jsoptional.Main.rtt)))
+  ;; $instance.$ctor(a);
+  ;;@ jsoptional/Main.java:39:9
+  (call $$ctor__java_lang_String__void_$p_jsoptional_Main@jsoptional.Main (local.get $$instance)(local.get $a))
+  ;; return $instance;
+  ;;@ jsoptional/Main.java:39:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor(String a)
+(func $$ctor__java_lang_String__void_$p_jsoptional_Main@jsoptional.Main
+ (param $this (ref null $jsoptional.Main))
+ (param $a (ref null $java.lang.String))
  ;;@ jsoptional/Main.java:39:9
  (block
   ;; jsoptional.Main.$clinit();
   ;;@ jsoptional/Main.java:39:36
   (call $$clinit__void@jsoptional.Main )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsoptional/Main.java:39:36
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; Main.this.$init();
   ;;@ jsoptional/Main.java:39:36
   (call $$init__void_$p_jsoptional_Main@jsoptional.Main (local.get $this))
-  ;; return Main.this;
-  ;;@ jsoptional/Main.java:39:9
-  (return (local.get $this))
  )
 )
 
@@ -247,9 +262,9 @@
  (param $this (ref null $jsoptional.Main))
  ;;@ jsoptional/Main.java:24:13
  (block
-  ;; (Main.this.f = new $LambdaImplementor$1.<init>());
+  ;; (Main.this.f = jsoptional.Main.$LambdaImplementor$1.$create());
   ;;@ jsoptional/Main.java:36:2
-  (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (call $m_<init>__@jsoptional.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt))))
+  (struct.set $jsoptional.Main $f_f__jsoptional_Main(local.get $this) (call $$create__jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1 ))
  )
 )
 
@@ -341,21 +356,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; AFunction()
-(func $m_<init>__@jsoptional.Main.AFunction
- (param $this (ref null $jsoptional.Main.AFunction))
+;;; AFunction AFunction.$create()
+(func $$create__jsoptional_Main_AFunction@jsoptional.Main.AFunction
  (result (ref null $jsoptional.Main.AFunction))
+ ;;@ jsoptional/Main.java:41:21
+ (local $$instance (ref null $jsoptional.Main.AFunction))
+ (block
+  ;; AFunction $instance = new AFunction.<init>();
+  ;;@ jsoptional/Main.java:41:21
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.AFunction (ref.as_non_null (global.get $jsoptional.Main.AFunction.vtable)) (ref.as_non_null (global.get $jsoptional.Main.AFunction.itable)) (i32.const 0) (global.get $jsoptional.Main.AFunction.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsoptional/Main.java:41:21
+  (call $$ctor__void_$p_jsoptional_Main_AFunction@jsoptional.Main.AFunction (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsoptional/Main.java:41:21
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AFunction.$ctor()
+(func $$ctor__void_$p_jsoptional_Main_AFunction@jsoptional.Main.AFunction
+ (param $this (ref null $jsoptional.Main.AFunction))
  ;;@ jsoptional/Main.java:41:21
  (block
   ;; jsoptional.Main.AFunction.$clinit();
   ;;@ jsoptional/Main.java:41:21
   (call $$clinit__void@jsoptional.Main.AFunction )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsoptional/Main.java:41:21
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AFunction.this;
-  ;;@ jsoptional/Main.java:41:21
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -466,21 +495,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; TemplatedSubtype()
-(func $m_<init>__@jsoptional.Main.TemplatedSubtype
- (param $this (ref null $jsoptional.Main.TemplatedSubtype))
+;;; TemplatedSubtype<T> TemplatedSubtype.$create()
+(func $$create__jsoptional_Main_TemplatedSubtype@jsoptional.Main.TemplatedSubtype
  (result (ref null $jsoptional.Main.TemplatedSubtype))
+ ;;@ jsoptional/Main.java:59:15
+ (local $$instance (ref null $jsoptional.Main.TemplatedSubtype))
+ (block
+  ;; TemplatedSubtype<T> $instance = new TemplatedSubtype.<init>();
+  ;;@ jsoptional/Main.java:59:15
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.TemplatedSubtype (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.itable)) (i32.const 0) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsoptional/Main.java:59:15
+  (call $$ctor__void_$p_jsoptional_Main_TemplatedSubtype@jsoptional.Main.TemplatedSubtype (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsoptional/Main.java:59:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void TemplatedSubtype.$ctor()
+(func $$ctor__void_$p_jsoptional_Main_TemplatedSubtype@jsoptional.Main.TemplatedSubtype
+ (param $this (ref null $jsoptional.Main.TemplatedSubtype))
  ;;@ jsoptional/Main.java:59:15
  (block
   ;; jsoptional.Main.TemplatedSubtype.$clinit();
   ;;@ jsoptional/Main.java:59:15
   (call $$clinit__void@jsoptional.Main.TemplatedSubtype )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsoptional/Main.java:59:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return TemplatedSubtype.this;
-  ;;@ jsoptional/Main.java:59:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -569,12 +612,31 @@
   $java.lang.Object.vtable)
 )
 
-;;; SpecializedSubtype(Main $outer_this, Object a)
-(func $m_<init>__jsoptional_Main__java_lang_Object@jsoptional.Main.SpecializedSubtype
- (param $this (ref null $jsoptional.Main.SpecializedSubtype))
+;;; SpecializedSubtype SpecializedSubtype.$create(Main $outer_this, Object a)
+(func $$create__jsoptional_Main__java_lang_Object__jsoptional_Main_SpecializedSubtype@jsoptional.Main.SpecializedSubtype
  (param $$outer_this (ref null $jsoptional.Main))
  (param $a (ref null $java.lang.Object))
  (result (ref null $jsoptional.Main.SpecializedSubtype))
+ ;;@ jsoptional/Main.java:68:11
+ (local $$instance (ref null $jsoptional.Main.SpecializedSubtype))
+ (block
+  ;; SpecializedSubtype $instance = new SpecializedSubtype.<init>($outer_this,a);
+  ;;@ jsoptional/Main.java:68:11
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.SpecializedSubtype (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.itable)) (i32.const 0) (ref.null $jsoptional.Main) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
+  ;; $instance.$ctor($outer_this,a);
+  ;;@ jsoptional/Main.java:68:11
+  (call $$ctor__jsoptional_Main__java_lang_Object__void_$p_jsoptional_Main_SpecializedSubtype@jsoptional.Main.SpecializedSubtype (local.get $$instance)(local.get $$outer_this)(local.get $a))
+  ;; return $instance;
+  ;;@ jsoptional/Main.java:68:11
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SpecializedSubtype.$ctor(Main $outer_this, Object a)
+(func $$ctor__jsoptional_Main__java_lang_Object__void_$p_jsoptional_Main_SpecializedSubtype@jsoptional.Main.SpecializedSubtype
+ (param $this (ref null $jsoptional.Main.SpecializedSubtype))
+ (param $$outer_this (ref null $jsoptional.Main))
+ (param $a (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:68:11
  (block
   ;; jsoptional.Main.SpecializedSubtype.$clinit();
@@ -583,12 +645,9 @@
   ;; (SpecializedSubtype.this.this = $outer_this);
   ;;@ jsoptional/Main.java:68:11
   (struct.set $jsoptional.Main.SpecializedSubtype $$outer_this__jsoptional_Main_SpecializedSubtype(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsoptional/Main.java:68:52
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SpecializedSubtype.this;
-  ;;@ jsoptional/Main.java:68:11
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -676,21 +735,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; NonJsTypeSubtype()
-(func $m_<init>__@jsoptional.Main.NonJsTypeSubtype
- (param $this (ref null $jsoptional.Main.NonJsTypeSubtype))
+;;; NonJsTypeSubtype NonJsTypeSubtype.$create()
+(func $$create__jsoptional_Main_NonJsTypeSubtype@jsoptional.Main.NonJsTypeSubtype
  (result (ref null $jsoptional.Main.NonJsTypeSubtype))
+ ;;@ jsoptional/Main.java:74:15
+ (local $$instance (ref null $jsoptional.Main.NonJsTypeSubtype))
+ (block
+  ;; NonJsTypeSubtype $instance = new NonJsTypeSubtype.<init>();
+  ;;@ jsoptional/Main.java:74:15
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.NonJsTypeSubtype (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.itable)) (i32.const 0) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsoptional/Main.java:74:15
+  (call $$ctor__void_$p_jsoptional_Main_NonJsTypeSubtype@jsoptional.Main.NonJsTypeSubtype (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsoptional/Main.java:74:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NonJsTypeSubtype.$ctor()
+(func $$ctor__void_$p_jsoptional_Main_NonJsTypeSubtype@jsoptional.Main.NonJsTypeSubtype
+ (param $this (ref null $jsoptional.Main.NonJsTypeSubtype))
  ;;@ jsoptional/Main.java:74:15
  (block
   ;; jsoptional.Main.NonJsTypeSubtype.$clinit();
   ;;@ jsoptional/Main.java:74:15
   (call $$clinit__void@jsoptional.Main.NonJsTypeSubtype )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsoptional/Main.java:74:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return NonJsTypeSubtype.this;
-  ;;@ jsoptional/Main.java:74:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -777,21 +850,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$1()
-(func $m_<init>__@jsoptional.Main.$LambdaImplementor$1
- (param $this (ref null $jsoptional.Main.$LambdaImplementor$1))
+;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
+(func $$create__jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1
  (result (ref null $jsoptional.Main.$LambdaImplementor$1))
+ ;;@ jsoptional/Main.java:36:15
+ (local $$instance (ref null $jsoptional.Main.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;;@ jsoptional/Main.java:36:15
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsoptional/Main.java:36:15
+  (call $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsoptional/Main.java:36:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1
+ (param $this (ref null $jsoptional.Main.$LambdaImplementor$1))
  ;;@ jsoptional/Main.java:36:15
  (block
   ;; jsoptional.Main.$LambdaImplementor$1.$clinit();
   ;;@ jsoptional/Main.java:36:15
   (call $$clinit__void@jsoptional.Main.$LambdaImplementor$1 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsoptional/Main.java:36:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$1.this;
-  ;;@ jsoptional/Main.java:36:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

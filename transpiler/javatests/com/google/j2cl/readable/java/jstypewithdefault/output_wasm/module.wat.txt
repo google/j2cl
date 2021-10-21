@@ -40,21 +40,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; SomeJsType()
-(func $m_<init>__@jstypewithdefault.SomeJsType
- (param $this (ref null $jstypewithdefault.SomeJsType))
+;;; SomeJsType SomeJsType.$create()
+(func $$create__jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType
  (result (ref null $jstypewithdefault.SomeJsType))
+ ;;@ jstypewithdefault/SomeJsType.java:20:13
+ (local $$instance (ref null $jstypewithdefault.SomeJsType))
+ (block
+  ;; SomeJsType $instance = new SomeJsType.<init>();
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (local.set $$instance (struct.new_with_rtt $jstypewithdefault.SomeJsType (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.vtable)) (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.itable)) (i32.const 0) (global.get $jstypewithdefault.SomeJsType.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (call $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType (local.get $$instance))
+  ;; return $instance;
+  ;;@ jstypewithdefault/SomeJsType.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SomeJsType.$ctor()
+(func $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType
+ (param $this (ref null $jstypewithdefault.SomeJsType))
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (block
   ;; jstypewithdefault.SomeJsType.$clinit();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $$clinit__void@jstypewithdefault.SomeJsType )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SomeJsType.this;
-  ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

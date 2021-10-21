@@ -47,21 +47,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; InterfaceDevirtualize()
-(func $m_<init>__@interfacedevirtualize.InterfaceDevirtualize
- (param $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
+;;; InterfaceDevirtualize InterfaceDevirtualize.$create()
+(func $$create__interfacedevirtualize_InterfaceDevirtualize@interfacedevirtualize.InterfaceDevirtualize
  (result (ref null $interfacedevirtualize.InterfaceDevirtualize))
+ ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
+ (local $$instance (ref null $interfacedevirtualize.InterfaceDevirtualize))
+ (block
+  ;; InterfaceDevirtualize $instance = new InterfaceDevirtualize.<init>();
+  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
+  (local.set $$instance (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.itable)) (i32.const 0) (global.get $interfacedevirtualize.InterfaceDevirtualize.rtt)))
+  ;; $instance.$ctor();
+  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
+  (call $$ctor__void_$p_interfacedevirtualize_InterfaceDevirtualize@interfacedevirtualize.InterfaceDevirtualize (local.get $$instance))
+  ;; return $instance;
+  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InterfaceDevirtualize.$ctor()
+(func $$ctor__void_$p_interfacedevirtualize_InterfaceDevirtualize@interfacedevirtualize.InterfaceDevirtualize
+ (param $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
  (block
   ;; interfacedevirtualize.InterfaceDevirtualize.$clinit();
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
   (call $$clinit__void@interfacedevirtualize.InterfaceDevirtualize )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InterfaceDevirtualize.this;
-  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

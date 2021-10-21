@@ -86,21 +86,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; NewInnerClassWithSameOuter()
-(func $m_<init>__@newinnerclasswithsameouter.NewInnerClassWithSameOuter
- (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+;;; NewInnerClassWithSameOuter NewInnerClassWithSameOuter.$create()
+(func $$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter
  (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+ ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
+ (local $$instance (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
+ (block
+  ;; NewInnerClassWithSameOuter $instance = new NewInnerClassWithSameOuter.<init>();
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
+  (local.set $$instance (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.vtable)) (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.itable)) (i32.const 0) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.rtt)))
+  ;; $instance.$ctor();
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
+  (call $$ctor__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter (local.get $$instance))
+  ;; return $instance;
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NewInnerClassWithSameOuter.$ctor()
+(func $$ctor__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
  (block
   ;; newinnerclasswithsameouter.NewInnerClassWithSameOuter.$clinit();
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
   (call $$clinit__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return NewInnerClassWithSameOuter.this;
-  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -157,11 +171,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; A(NewInnerClassWithSameOuter $outer_this)
-(func $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
- (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+;;; A A.$create(NewInnerClassWithSameOuter $outer_this)
+(func $$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
  (param $$outer_this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+ ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
+ (local $$instance (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+ (block
+  ;; A $instance = new A.<init>($outer_this);
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
+  (local.set $$instance (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.vtable)) (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.itable)) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
+  (call $$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void A.$ctor(NewInnerClassWithSameOuter $outer_this)
+(func $$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_A@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
+ (param $$outer_this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
  (block
   ;; newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.$clinit();
@@ -170,12 +202,9 @@
   ;; (A.this.this = $outer_this);
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
   (struct.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return A.this;
-  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:19:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -187,12 +216,12 @@
  (local $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A.rtt)))
  (block
-  ;; new B.<init>(A.this.this);
+  ;; newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.$create(A.this.this);
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:22:6
-  (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)) (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.itable)) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
-  ;; new C.<init>(A.this.this);
+  (drop (call $$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
+  ;; newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.$create(A.this.this);
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:23:6
-  (drop (call $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)) (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.itable)) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.rtt))(struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
+  (drop (call $$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (struct.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.A $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_A(local.get $this))))
  )
 )
 (elem declare func $m_test__void@newinnerclasswithsameouter.NewInnerClassWithSameOuter.A)
@@ -249,11 +278,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; B(NewInnerClassWithSameOuter $outer_this)
-(func $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
- (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+;;; B B.$create(NewInnerClassWithSameOuter $outer_this)
+(func $$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
  (param $$outer_this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+ ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
+ (local $$instance (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+ (block
+  ;; B $instance = new B.<init>($outer_this);
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
+  (local.set $$instance (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.vtable)) (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.itable)) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
+  (call $$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void B.$ctor(NewInnerClassWithSameOuter $outer_this)
+(func $$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_B@newinnerclasswithsameouter.NewInnerClassWithSameOuter.B
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B))
+ (param $$outer_this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
  (block
   ;; newinnerclasswithsameouter.NewInnerClassWithSameOuter.B.$clinit();
@@ -262,12 +309,9 @@
   ;; (B.this.this = $outer_this);
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
   (struct.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.B $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_B(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return B.this;
-  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:27:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -323,11 +367,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; C(NewInnerClassWithSameOuter $outer_this)
-(func $m_<init>__newinnerclasswithsameouter_NewInnerClassWithSameOuter@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
- (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+;;; C C.$create(NewInnerClassWithSameOuter $outer_this)
+(func $$create__newinnerclasswithsameouter_NewInnerClassWithSameOuter__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
  (param $$outer_this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  (result (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+ ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
+ (local $$instance (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+ (block
+  ;; C $instance = new C.<init>($outer_this);
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
+  (local.set $$instance (struct.new_with_rtt $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.vtable)) (ref.as_non_null (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.itable)) (i32.const 0) (ref.null $newinnerclasswithsameouter.NewInnerClassWithSameOuter) (global.get $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
+  (call $$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
+  (return (local.get $$instance))
+ )
+)
+
+;;; void C.$ctor(NewInnerClassWithSameOuter $outer_this)
+(func $$ctor__newinnerclasswithsameouter_NewInnerClassWithSameOuter__void_$p_newinnerclasswithsameouter_NewInnerClassWithSameOuter_C@newinnerclasswithsameouter.NewInnerClassWithSameOuter.C
+ (param $this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C))
+ (param $$outer_this (ref null $newinnerclasswithsameouter.NewInnerClassWithSameOuter))
  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
  (block
   ;; newinnerclasswithsameouter.NewInnerClassWithSameOuter.C.$clinit();
@@ -336,12 +398,9 @@
   ;; (C.this.this = $outer_this);
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
   (struct.set $newinnerclasswithsameouter.NewInnerClassWithSameOuter.C $$outer_this__newinnerclasswithsameouter_NewInnerClassWithSameOuter_C(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return C.this;
-  ;;@ newinnerclasswithsameouter/NewInnerClassWithSameOuter.java:29:16
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

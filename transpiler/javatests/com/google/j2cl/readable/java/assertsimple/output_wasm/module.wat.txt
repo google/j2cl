@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; AssertSimple()
-(func $m_<init>__@assertsimple.AssertSimple
- (param $this (ref null $assertsimple.AssertSimple))
+;;; AssertSimple AssertSimple.$create()
+(func $$create__assertsimple_AssertSimple@assertsimple.AssertSimple
  (result (ref null $assertsimple.AssertSimple))
+ ;;@ assertsimple/AssertSimple.java:18:13
+ (local $$instance (ref null $assertsimple.AssertSimple))
+ (block
+  ;; AssertSimple $instance = new AssertSimple.<init>();
+  ;;@ assertsimple/AssertSimple.java:18:13
+  (local.set $$instance (struct.new_with_rtt $assertsimple.AssertSimple (ref.as_non_null (global.get $assertsimple.AssertSimple.vtable)) (ref.as_non_null (global.get $assertsimple.AssertSimple.itable)) (i32.const 0) (global.get $assertsimple.AssertSimple.rtt)))
+  ;; $instance.$ctor();
+  ;;@ assertsimple/AssertSimple.java:18:13
+  (call $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple (local.get $$instance))
+  ;; return $instance;
+  ;;@ assertsimple/AssertSimple.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AssertSimple.$ctor()
+(func $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple
+ (param $this (ref null $assertsimple.AssertSimple))
  ;;@ assertsimple/AssertSimple.java:18:13
  (block
   ;; assertsimple.AssertSimple.$clinit();
   ;;@ assertsimple/AssertSimple.java:18:13
   (call $$clinit__void@assertsimple.AssertSimple )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ assertsimple/AssertSimple.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AssertSimple.this;
-  ;;@ assertsimple/AssertSimple.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

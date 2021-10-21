@@ -32,43 +32,72 @@
   $java.lang.Object.vtable)
 )
 
-;;; InitMethodDispatch()
-(func $m_<init>__@initmethoddispatch.InitMethodDispatch
- (param $this (ref null $initmethoddispatch.InitMethodDispatch))
+;;; InitMethodDispatch<T> InitMethodDispatch.$create()
+(func $$create__initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch
  (result (ref null $initmethoddispatch.InitMethodDispatch))
+ ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
+ (local $$instance (ref null $initmethoddispatch.InitMethodDispatch))
+ (block
+  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>();
+  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
+  (local.set $$instance (struct.new_with_rtt $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (i32.const 0) (global.get $initmethoddispatch.InitMethodDispatch.rtt)))
+  ;; $instance.$ctor();
+  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
+  (call $$ctor__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (local.get $$instance))
+  ;; return $instance;
+  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InitMethodDispatch.$ctor()
+(func $$ctor__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch
+ (param $this (ref null $initmethoddispatch.InitMethodDispatch))
  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
  (block
   ;; initmethoddispatch.InitMethodDispatch.$clinit();
   ;;@ initmethoddispatch/InitMethodDispatch.java:21:23
   (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
-  ;; InitMethodDispatch.this.InitMethodDispatch.<init>(1);
+  ;; InitMethodDispatch.this.$ctor(1);
   ;;@ initmethoddispatch/InitMethodDispatch.java:22:4
-  (drop (call $m_<init>__int@initmethoddispatch.InitMethodDispatch (local.get $this)(i32.const 1)))
-  ;; return InitMethodDispatch.this;
-  ;;@ initmethoddispatch/InitMethodDispatch.java:21:2
-  (return (local.get $this))
+  (call $$ctor__int__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (local.get $this)(i32.const 1))
  )
 )
 
-;;; InitMethodDispatch(int i)
-(func $m_<init>__int@initmethoddispatch.InitMethodDispatch
- (param $this (ref null $initmethoddispatch.InitMethodDispatch))
+;;; InitMethodDispatch<T> InitMethodDispatch.$create(int i)
+(func $$create__int__initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch
  (param $i i32)
  (result (ref null $initmethoddispatch.InitMethodDispatch))
+ ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
+ (local $$instance (ref null $initmethoddispatch.InitMethodDispatch))
+ (block
+  ;; InitMethodDispatch<T> $instance = new InitMethodDispatch.<init>(i);
+  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
+  (local.set $$instance (struct.new_with_rtt $initmethoddispatch.InitMethodDispatch (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.vtable)) (ref.as_non_null (global.get $initmethoddispatch.InitMethodDispatch.itable)) (i32.const 0) (i32.const 0) (global.get $initmethoddispatch.InitMethodDispatch.rtt)))
+  ;; $instance.$ctor(i);
+  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
+  (call $$ctor__int__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch (local.get $$instance)(local.get $i))
+  ;; return $instance;
+  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InitMethodDispatch.$ctor(int i)
+(func $$ctor__int__void_$p_initmethoddispatch_InitMethodDispatch@initmethoddispatch.InitMethodDispatch
+ (param $this (ref null $initmethoddispatch.InitMethodDispatch))
+ (param $i i32)
  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
  (block
   ;; initmethoddispatch.InitMethodDispatch.$clinit();
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:28
   (call $$clinit__void@initmethoddispatch.InitMethodDispatch )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ initmethoddispatch/InitMethodDispatch.java:27:28
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; (InitMethodDispatch.this.value = i);
   ;;@ initmethoddispatch/InitMethodDispatch.java:28:4
   (struct.set $initmethoddispatch.InitMethodDispatch $f_value__initmethoddispatch_InitMethodDispatch(local.get $this) (local.get $i))
-  ;; return InitMethodDispatch.this;
-  ;;@ initmethoddispatch/InitMethodDispatch.java:27:2
-  (return (local.get $this))
  )
 )
 

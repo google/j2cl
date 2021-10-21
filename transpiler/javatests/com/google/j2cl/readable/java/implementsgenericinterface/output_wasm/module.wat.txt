@@ -133,21 +133,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; GenericInterfaceGenericImpl()
-(func $m_<init>__@implementsgenericinterface.GenericInterfaceGenericImpl
- (param $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
+;;; GenericInterfaceGenericImpl<T> GenericInterfaceGenericImpl.$create()
+(func $$create__implementsgenericinterface_GenericInterfaceGenericImpl@implementsgenericinterface.GenericInterfaceGenericImpl
  (result (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+ (local $$instance (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
+ (block
+  ;; GenericInterfaceGenericImpl<T> $instance = new GenericInterfaceGenericImpl.<init>();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+  (local.set $$instance (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.itable)) (i32.const 0) (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.rtt)))
+  ;; $instance.$ctor();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+  (call $$ctor__void_$p_implementsgenericinterface_GenericInterfaceGenericImpl@implementsgenericinterface.GenericInterfaceGenericImpl (local.get $$instance))
+  ;; return $instance;
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericInterfaceGenericImpl.$ctor()
+(func $$ctor__void_$p_implementsgenericinterface_GenericInterfaceGenericImpl@implementsgenericinterface.GenericInterfaceGenericImpl
+ (param $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
  (block
   ;; implementsgenericinterface.GenericInterfaceGenericImpl.$clinit();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (call $$clinit__void@implementsgenericinterface.GenericInterfaceGenericImpl )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return GenericInterfaceGenericImpl.this;
-  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -202,21 +216,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; GenericInterfaceImpl()
-(func $m_<init>__@implementsgenericinterface.GenericInterfaceImpl
- (param $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
+;;; GenericInterfaceImpl GenericInterfaceImpl.$create()
+(func $$create__implementsgenericinterface_GenericInterfaceImpl@implementsgenericinterface.GenericInterfaceImpl
  (result (ref null $implementsgenericinterface.GenericInterfaceImpl))
+ ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+ (local $$instance (ref null $implementsgenericinterface.GenericInterfaceImpl))
+ (block
+  ;; GenericInterfaceImpl $instance = new GenericInterfaceImpl.<init>();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+  (local.set $$instance (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.itable)) (i32.const 0) (global.get $implementsgenericinterface.GenericInterfaceImpl.rtt)))
+  ;; $instance.$ctor();
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+  (call $$ctor__void_$p_implementsgenericinterface_GenericInterfaceImpl@implementsgenericinterface.GenericInterfaceImpl (local.get $$instance))
+  ;; return $instance;
+  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericInterfaceImpl.$ctor()
+(func $$ctor__void_$p_implementsgenericinterface_GenericInterfaceImpl@implementsgenericinterface.GenericInterfaceImpl
+ (param $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
  (block
   ;; implementsgenericinterface.GenericInterfaceImpl.$clinit();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (call $$clinit__void@implementsgenericinterface.GenericInterfaceImpl )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return GenericInterfaceImpl.this;
-  ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ObjectMap()
-(func $m_<init>__@objectmap.ObjectMap
- (param $this (ref null $objectmap.ObjectMap))
+;;; ObjectMap<T> ObjectMap.$create()
+(func $$create__objectmap_ObjectMap@objectmap.ObjectMap
  (result (ref null $objectmap.ObjectMap))
+ ;;@ objectmap/ObjectMap.java:23:13
+ (local $$instance (ref null $objectmap.ObjectMap))
+ (block
+  ;; ObjectMap<T> $instance = new ObjectMap.<init>();
+  ;;@ objectmap/ObjectMap.java:23:13
+  (local.set $$instance (struct.new_with_rtt $objectmap.ObjectMap (ref.as_non_null (global.get $objectmap.ObjectMap.vtable)) (ref.as_non_null (global.get $objectmap.ObjectMap.itable)) (i32.const 0) (global.get $objectmap.ObjectMap.rtt)))
+  ;; $instance.$ctor();
+  ;;@ objectmap/ObjectMap.java:23:13
+  (call $$ctor__void_$p_objectmap_ObjectMap@objectmap.ObjectMap (local.get $$instance))
+  ;; return $instance;
+  ;;@ objectmap/ObjectMap.java:23:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ObjectMap.$ctor()
+(func $$ctor__void_$p_objectmap_ObjectMap@objectmap.ObjectMap
+ (param $this (ref null $objectmap.ObjectMap))
  ;;@ objectmap/ObjectMap.java:23:13
  (block
   ;; objectmap.ObjectMap.$clinit();
   ;;@ objectmap/ObjectMap.java:23:13
   (call $$clinit__void@objectmap.ObjectMap )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ objectmap/ObjectMap.java:23:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ObjectMap.this;
-  ;;@ objectmap/ObjectMap.java:23:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

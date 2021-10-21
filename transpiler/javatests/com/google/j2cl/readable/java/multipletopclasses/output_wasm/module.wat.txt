@@ -49,21 +49,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; AnotherClass()
-(func $m_<init>__@multipletopclasses.AnotherClass
- (param $this (ref null $multipletopclasses.AnotherClass))
+;;; AnotherClass AnotherClass.$create()
+(func $$create__multipletopclasses_AnotherClass@multipletopclasses.AnotherClass
  (result (ref null $multipletopclasses.AnotherClass))
+ ;;@ multipletopclasses/MultipleTopClasses.java:18:6
+ (local $$instance (ref null $multipletopclasses.AnotherClass))
+ (block
+  ;; AnotherClass $instance = new AnotherClass.<init>();
+  ;;@ multipletopclasses/MultipleTopClasses.java:18:6
+  (local.set $$instance (struct.new_with_rtt $multipletopclasses.AnotherClass (ref.as_non_null (global.get $multipletopclasses.AnotherClass.vtable)) (ref.as_non_null (global.get $multipletopclasses.AnotherClass.itable)) (i32.const 0) (global.get $multipletopclasses.AnotherClass.rtt)))
+  ;; $instance.$ctor();
+  ;;@ multipletopclasses/MultipleTopClasses.java:18:6
+  (call $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass (local.get $$instance))
+  ;; return $instance;
+  ;;@ multipletopclasses/MultipleTopClasses.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AnotherClass.$ctor()
+(func $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass
+ (param $this (ref null $multipletopclasses.AnotherClass))
  ;;@ multipletopclasses/MultipleTopClasses.java:18:6
  (block
   ;; multipletopclasses.AnotherClass.$clinit();
   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
   (call $$clinit__void@multipletopclasses.AnotherClass )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AnotherClass.this;
-  ;;@ multipletopclasses/MultipleTopClasses.java:18:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -118,21 +132,35 @@
   $multipletopclasses.AnotherClass.vtable)
 )
 
-;;; MultipleTopClasses()
-(func $m_<init>__@multipletopclasses.MultipleTopClasses
- (param $this (ref null $multipletopclasses.MultipleTopClasses))
+;;; MultipleTopClasses MultipleTopClasses.$create()
+(func $$create__multipletopclasses_MultipleTopClasses@multipletopclasses.MultipleTopClasses
  (result (ref null $multipletopclasses.MultipleTopClasses))
+ ;;@ multipletopclasses/MultipleTopClasses.java:20:13
+ (local $$instance (ref null $multipletopclasses.MultipleTopClasses))
+ (block
+  ;; MultipleTopClasses $instance = new MultipleTopClasses.<init>();
+  ;;@ multipletopclasses/MultipleTopClasses.java:20:13
+  (local.set $$instance (struct.new_with_rtt $multipletopclasses.MultipleTopClasses (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.vtable)) (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.itable)) (i32.const 0) (global.get $multipletopclasses.MultipleTopClasses.rtt)))
+  ;; $instance.$ctor();
+  ;;@ multipletopclasses/MultipleTopClasses.java:20:13
+  (call $$ctor__void_$p_multipletopclasses_MultipleTopClasses@multipletopclasses.MultipleTopClasses (local.get $$instance))
+  ;; return $instance;
+  ;;@ multipletopclasses/MultipleTopClasses.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MultipleTopClasses.$ctor()
+(func $$ctor__void_$p_multipletopclasses_MultipleTopClasses@multipletopclasses.MultipleTopClasses
+ (param $this (ref null $multipletopclasses.MultipleTopClasses))
  ;;@ multipletopclasses/MultipleTopClasses.java:20:13
  (block
   ;; multipletopclasses.MultipleTopClasses.$clinit();
   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
   (call $$clinit__void@multipletopclasses.MultipleTopClasses )
-  ;; AnotherClass.this.AnotherClass.<init>();
+  ;; AnotherClass.this.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
-  (drop (call $m_<init>__@multipletopclasses.AnotherClass (local.get $this)))
-  ;; return MultipleTopClasses.this;
-  ;;@ multipletopclasses/MultipleTopClasses.java:20:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass (local.get $this))
  )
 )
 

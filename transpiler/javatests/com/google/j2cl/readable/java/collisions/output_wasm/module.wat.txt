@@ -124,21 +124,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; goog()
-(func $m_<init>__@collisions.goog
- (param $this (ref null $collisions.goog))
+;;; goog goog.$create()
+(func $$create__collisions_goog@collisions.goog
  (result (ref null $collisions.goog))
+ ;;@ collisions/goog.java:23:13
+ (local $$instance (ref null $collisions.goog))
+ (block
+  ;; goog $instance = new goog.<init>();
+  ;;@ collisions/goog.java:23:13
+  (local.set $$instance (struct.new_with_rtt $collisions.goog (ref.as_non_null (global.get $collisions.goog.vtable)) (ref.as_non_null (global.get $collisions.goog.itable)) (i32.const 0) (global.get $collisions.goog.rtt)))
+  ;; $instance.$ctor();
+  ;;@ collisions/goog.java:23:13
+  (call $$ctor__void_$p_collisions_goog@collisions.goog (local.get $$instance))
+  ;; return $instance;
+  ;;@ collisions/goog.java:23:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void goog.$ctor()
+(func $$ctor__void_$p_collisions_goog@collisions.goog
+ (param $this (ref null $collisions.goog))
  ;;@ collisions/goog.java:23:13
  (block
   ;; collisions.goog.$clinit();
   ;;@ collisions/goog.java:23:13
   (call $$clinit__void@collisions.goog )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:23:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return goog.this;
-  ;;@ collisions/goog.java:23:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -193,21 +207,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Blah()
-(func $m_<init>__@collisions.Blah
- (param $this (ref null $collisions.Blah))
+;;; Blah Blah.$create()
+(func $$create__collisions_Blah@collisions.Blah
  (result (ref null $collisions.Blah))
+ ;;@ collisions/goog.java:26:6
+ (local $$instance (ref null $collisions.Blah))
+ (block
+  ;; Blah $instance = new Blah.<init>();
+  ;;@ collisions/goog.java:26:6
+  (local.set $$instance (struct.new_with_rtt $collisions.Blah (ref.as_non_null (global.get $collisions.Blah.vtable)) (ref.as_non_null (global.get $collisions.Blah.itable)) (i32.const 0) (global.get $collisions.Blah.rtt)))
+  ;; $instance.$ctor();
+  ;;@ collisions/goog.java:26:6
+  (call $$ctor__void_$p_collisions_Blah@collisions.Blah (local.get $$instance))
+  ;; return $instance;
+  ;;@ collisions/goog.java:26:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Blah.$ctor()
+(func $$ctor__void_$p_collisions_Blah@collisions.Blah
+ (param $this (ref null $collisions.Blah))
  ;;@ collisions/goog.java:26:6
  (block
   ;; collisions.Blah.$clinit();
   ;;@ collisions/goog.java:26:6
   (call $$clinit__void@collisions.Blah )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:26:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Blah.this;
-  ;;@ collisions/goog.java:26:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -271,21 +299,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; foo()
-(func $m_<init>__@collisions.foo
- (param $this (ref null $collisions.foo))
+;;; foo foo.$create()
+(func $$create__collisions_foo@collisions.foo
  (result (ref null $collisions.foo))
+ ;;@ collisions/goog.java:34:6
+ (local $$instance (ref null $collisions.foo))
+ (block
+  ;; foo $instance = new foo.<init>();
+  ;;@ collisions/goog.java:34:6
+  (local.set $$instance (struct.new_with_rtt $collisions.foo (ref.as_non_null (global.get $collisions.foo.vtable)) (ref.as_non_null (global.get $collisions.foo.itable)) (i32.const 0) (global.get $collisions.foo.rtt)))
+  ;; $instance.$ctor();
+  ;;@ collisions/goog.java:34:6
+  (call $$ctor__void_$p_collisions_foo@collisions.foo (local.get $$instance))
+  ;; return $instance;
+  ;;@ collisions/goog.java:34:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void foo.$ctor()
+(func $$ctor__void_$p_collisions_foo@collisions.foo
+ (param $this (ref null $collisions.foo))
  ;;@ collisions/goog.java:34:6
  (block
   ;; collisions.foo.$clinit();
   ;;@ collisions/goog.java:34:6
   (call $$clinit__void@collisions.foo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:34:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return foo.this;
-  ;;@ collisions/goog.java:34:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -340,24 +382,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; bar()
-(func $m_<init>__@collisions.bar
- (param $this (ref null $collisions.bar))
+;;; bar bar.$create()
+(func $$create__collisions_bar@collisions.bar
  (result (ref null $collisions.bar))
+ ;;@ collisions/goog.java:36:6
+ (local $$instance (ref null $collisions.bar))
+ (block
+  ;; bar $instance = new bar.<init>();
+  ;;@ collisions/goog.java:36:6
+  (local.set $$instance (struct.new_with_rtt $collisions.bar (ref.as_non_null (global.get $collisions.bar.vtable)) (ref.as_non_null (global.get $collisions.bar.itable)) (i32.const 0) (global.get $collisions.bar.rtt)))
+  ;; $instance.$ctor();
+  ;;@ collisions/goog.java:36:6
+  (call $$ctor__void_$p_collisions_bar@collisions.bar (local.get $$instance))
+  ;; return $instance;
+  ;;@ collisions/goog.java:36:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void bar.$ctor()
+(func $$ctor__void_$p_collisions_bar@collisions.bar
+ (param $this (ref null $collisions.bar))
  ;;@ collisions/goog.java:36:6
  (block
   ;; collisions.bar.$clinit();
   ;;@ collisions/goog.java:36:6
   (call $$clinit__void@collisions.bar )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:36:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; bar.this.$init();
   ;;@ collisions/goog.java:36:6
   (call $$init__void_$p_collisions_bar@collisions.bar (local.get $this))
-  ;; return bar.this;
-  ;;@ collisions/goog.java:36:6
-  (return (local.get $this))
  )
 )
 
@@ -382,15 +438,15 @@
   ;; collisions.Blah.getN();
   ;;@ collisions/goog.java:40:4
   (drop (call $m_getN__double@collisions.Blah ))
-  ;; new Blah.<init>();
+  ;; collisions.Blah.$create();
   ;;@ collisions/goog.java:41:4
-  (drop (call $m_<init>__@collisions.Blah (struct.new_with_rtt $collisions.Blah (ref.as_non_null (global.get $collisions.Blah.vtable)) (ref.as_non_null (global.get $collisions.Blah.itable)) (i32.const 0) (global.get $collisions.Blah.rtt))))
-  ;; new goog.<init>();
+  (drop (call $$create__collisions_Blah@collisions.Blah ))
+  ;; collisions.goog.$create();
   ;;@ collisions/goog.java:42:4
-  (drop (call $m_<init>__@collisions.goog (struct.new_with_rtt $collisions.goog (ref.as_non_null (global.get $collisions.goog.vtable)) (ref.as_non_null (global.get $collisions.goog.itable)) (i32.const 0) (global.get $collisions.goog.rtt))))
-  ;; new foo.<init>();
+  (drop (call $$create__collisions_goog@collisions.goog ))
+  ;; collisions.foo.$create();
   ;;@ collisions/goog.java:43:4
-  (drop (call $m_<init>__@collisions.foo (struct.new_with_rtt $collisions.foo (ref.as_non_null (global.get $collisions.foo.vtable)) (ref.as_non_null (global.get $collisions.foo.itable)) (i32.const 0) (global.get $collisions.foo.rtt))))
+  (drop (call $$create__collisions_foo@collisions.foo ))
   ;; int delete = 1;
   ;;@ collisions/goog.java:46:4
   (local.set $delete (i32.const 1))
@@ -452,24 +508,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; Other()
-(func $m_<init>__@collisions.Other
- (param $this (ref null $collisions.Other))
+;;; Other<T> Other.$create()
+(func $$create__collisions_Other@collisions.Other
  (result (ref null $collisions.Other))
+ ;;@ collisions/goog.java:51:6
+ (local $$instance (ref null $collisions.Other))
+ (block
+  ;; Other<T> $instance = new Other.<init>();
+  ;;@ collisions/goog.java:51:6
+  (local.set $$instance (struct.new_with_rtt $collisions.Other (ref.as_non_null (global.get $collisions.Other.vtable)) (ref.as_non_null (global.get $collisions.Other.itable)) (i32.const 0) (global.get $collisions.Other.rtt)))
+  ;; $instance.$ctor();
+  ;;@ collisions/goog.java:51:6
+  (call $$ctor__void_$p_collisions_Other@collisions.Other (local.get $$instance))
+  ;; return $instance;
+  ;;@ collisions/goog.java:51:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Other.$ctor()
+(func $$ctor__void_$p_collisions_Other@collisions.Other
+ (param $this (ref null $collisions.Other))
  ;;@ collisions/goog.java:51:6
  (block
   ;; collisions.Other.$clinit();
   ;;@ collisions/goog.java:51:6
   (call $$clinit__void@collisions.Other )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:51:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; Other.this.$init();
   ;;@ collisions/goog.java:51:6
   (call $$init__void_$p_collisions_Other@collisions.Other (local.get $this))
-  ;; return Other.this;
-  ;;@ collisions/goog.java:51:6
-  (return (local.get $this))
  )
 )
 
@@ -566,21 +636,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; T()
-(func $m_<init>__@collisions.T
- (param $this (ref null $collisions.T))
+;;; T<T> T.$create()
+(func $$create__collisions_T@collisions.T
  (result (ref null $collisions.T))
+ ;;@ collisions/goog.java:64:6
+ (local $$instance (ref null $collisions.T))
+ (block
+  ;; T<T> $instance = new T.<init>();
+  ;;@ collisions/goog.java:64:6
+  (local.set $$instance (struct.new_with_rtt $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $collisions.T.itable)) (i32.const 0) (global.get $collisions.T.rtt)))
+  ;; $instance.$ctor();
+  ;;@ collisions/goog.java:64:6
+  (call $$ctor__void_$p_collisions_T@collisions.T (local.get $$instance))
+  ;; return $instance;
+  ;;@ collisions/goog.java:64:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void T.$ctor()
+(func $$ctor__void_$p_collisions_T@collisions.T
+ (param $this (ref null $collisions.T))
  ;;@ collisions/goog.java:64:6
  (block
   ;; collisions.T.$clinit();
   ;;@ collisions/goog.java:64:6
   (call $$clinit__void@collisions.T )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ collisions/goog.java:64:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return T.this;
-  ;;@ collisions/goog.java:64:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -611,10 +695,10 @@
  (local $this (ref null $collisions.T))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $collisions.T.rtt)))
  (block
-  ;; T t = (T<T> $qualifier = new T.<init>(),$qualifier.m());
+  ;; T t = (T<T> $qualifier = collisions.T.$create(),$qualifier.m());
   ;;@ collisions/goog.java:70:4
   (local.set $t (block (result (ref null $java.lang.Number))
-   (local.set $$qualifier (call $m_<init>__@collisions.T (struct.new_with_rtt $collisions.T (ref.as_non_null (global.get $collisions.T.vtable)) (ref.as_non_null (global.get $collisions.T.itable)) (i32.const 0) (global.get $collisions.T.rtt))))
+   (local.set $$qualifier (call $$create__collisions_T@collisions.T ))
    (call_ref (local.get $$qualifier)(struct.get $collisions.T.vtable $m_m__java_lang_Number_$pp_collisions (struct.get $collisions.T $vtable(local.get $$qualifier))))
   ))
   ;; t.byteValue();

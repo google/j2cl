@@ -37,21 +37,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; StaticFieldAccessLevels()
-(func $m_<init>__@staticfieldaccesslevels.StaticFieldAccessLevels
- (param $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
+;;; StaticFieldAccessLevels StaticFieldAccessLevels.$create()
+(func $$create__staticfieldaccesslevels_StaticFieldAccessLevels@staticfieldaccesslevels.StaticFieldAccessLevels
  (result (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
+ ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
+ (local $$instance (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
+ (block
+  ;; StaticFieldAccessLevels $instance = new StaticFieldAccessLevels.<init>();
+  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
+  (local.set $$instance (struct.new_with_rtt $staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.itable)) (i32.const 0) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
+  ;; $instance.$ctor();
+  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
+  (call $$ctor__void_$p_staticfieldaccesslevels_StaticFieldAccessLevels@staticfieldaccesslevels.StaticFieldAccessLevels (local.get $$instance))
+  ;; return $instance;
+  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StaticFieldAccessLevels.$ctor()
+(func $$ctor__void_$p_staticfieldaccesslevels_StaticFieldAccessLevels@staticfieldaccesslevels.StaticFieldAccessLevels
+ (param $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
  (block
   ;; staticfieldaccesslevels.StaticFieldAccessLevels.$clinit();
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
   (call $$clinit__void@staticfieldaccesslevels.StaticFieldAccessLevels )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return StaticFieldAccessLevels.this;
-  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

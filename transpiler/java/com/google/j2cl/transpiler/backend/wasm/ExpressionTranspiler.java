@@ -427,14 +427,6 @@ final class ExpressionTranspiler {
 
       @Override
       public boolean enterNewInstance(NewInstance newInstance) {
-        MethodDescriptor target = newInstance.getTarget();
-        sourceBuilder.append(
-            String.format(
-                "(call %s ",
-                newInstance.hasSideEffects()
-                    ? environment.getMethodImplementationName(target)
-                    : environment.getNoSideEffectWrapperFunctionName(target)));
-
         sourceBuilder.append(
             format(
                 "(struct.new_with_rtt %s "
@@ -464,12 +456,6 @@ final class ExpressionTranspiler {
                 " (global.get %s))",
                 environment.getRttGlobalName(
                     newInstance.getTypeDescriptor().getTypeDeclaration())));
-        renderTypedExpressions(target.getParameterTypeDescriptors(), newInstance.getArguments());
-        if (!newInstance.hasSideEffects()) {
-          sourceBuilder.append(
-              String.format("(ref.func %s) ", environment.getMethodImplementationName(target)));
-        }
-        sourceBuilder.append(")");
         return false;
       }
 

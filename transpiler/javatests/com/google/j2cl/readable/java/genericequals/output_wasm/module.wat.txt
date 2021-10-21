@@ -35,28 +35,43 @@
   $java.lang.Object.vtable)
 )
 
-;;; GenericEquals(T value)
-(func $m_<init>__java_lang_Object@genericequals.GenericEquals
- (param $this (ref null $genericequals.GenericEquals))
+;;; GenericEquals<T> GenericEquals.$create(T value)
+(func $$create__java_lang_Object__genericequals_GenericEquals@genericequals.GenericEquals
  (param $value (ref null $java.lang.Object))
  (result (ref null $genericequals.GenericEquals))
+ ;;@ genericequals/GenericEquals.java:23:9
+ (local $$instance (ref null $genericequals.GenericEquals))
+ (block
+  ;; GenericEquals<T> $instance = new GenericEquals.<init>(value);
+  ;;@ genericequals/GenericEquals.java:23:9
+  (local.set $$instance (struct.new_with_rtt $genericequals.GenericEquals (ref.as_non_null (global.get $genericequals.GenericEquals.vtable)) (ref.as_non_null (global.get $genericequals.GenericEquals.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $genericequals.GenericEquals) (global.get $genericequals.GenericEquals.rtt)))
+  ;; $instance.$ctor(value);
+  ;;@ genericequals/GenericEquals.java:23:9
+  (call $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals (local.get $$instance)(local.get $value))
+  ;; return $instance;
+  ;;@ genericequals/GenericEquals.java:23:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericEquals.$ctor(T value)
+(func $$ctor__java_lang_Object__void_$p_genericequals_GenericEquals@genericequals.GenericEquals
+ (param $this (ref null $genericequals.GenericEquals))
+ (param $value (ref null $java.lang.Object))
  ;;@ genericequals/GenericEquals.java:23:9
  (block
   ;; genericequals.GenericEquals.$clinit();
   ;;@ genericequals/GenericEquals.java:23:32
   (call $$clinit__void@genericequals.GenericEquals )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ genericequals/GenericEquals.java:23:32
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; (GenericEquals.this.value = value);
   ;;@ genericequals/GenericEquals.java:24:4
   (struct.set $genericequals.GenericEquals $f_value__genericequals_GenericEquals_(local.get $this) (local.get $value))
   ;; (GenericEquals.this.value2 = null);
   ;;@ genericequals/GenericEquals.java:25:4
   (struct.set $genericequals.GenericEquals $f_value2__genericequals_GenericEquals_(local.get $this) (ref.null $genericequals.GenericEquals))
-  ;; return GenericEquals.this;
-  ;;@ genericequals/GenericEquals.java:23:9
-  (return (local.get $this))
  )
 )
 

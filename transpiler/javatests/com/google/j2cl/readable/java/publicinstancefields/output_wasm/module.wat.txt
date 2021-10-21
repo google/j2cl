@@ -33,24 +33,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; PublicInstanceFields()
-(func $m_<init>__@publicinstancefields.PublicInstanceFields
- (param $this (ref null $publicinstancefields.PublicInstanceFields))
+;;; PublicInstanceFields PublicInstanceFields.$create()
+(func $$create__publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields
  (result (ref null $publicinstancefields.PublicInstanceFields))
+ ;;@ publicinstancefields/PublicInstanceFields.java:18:13
+ (local $$instance (ref null $publicinstancefields.PublicInstanceFields))
+ (block
+  ;; PublicInstanceFields $instance = new PublicInstanceFields.<init>();
+  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
+  (local.set $$instance (struct.new_with_rtt $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $publicinstancefields.PublicInstanceFields.rtt)))
+  ;; $instance.$ctor();
+  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
+  (call $$ctor__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields (local.get $$instance))
+  ;; return $instance;
+  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PublicInstanceFields.$ctor()
+(func $$ctor__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields
+ (param $this (ref null $publicinstancefields.PublicInstanceFields))
  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
  (block
   ;; publicinstancefields.PublicInstanceFields.$clinit();
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$clinit__void@publicinstancefields.PublicInstanceFields )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; PublicInstanceFields.this.$init();
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$init__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields (local.get $this))
-  ;; return PublicInstanceFields.this;
-  ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (return (local.get $this))
  )
 )
 

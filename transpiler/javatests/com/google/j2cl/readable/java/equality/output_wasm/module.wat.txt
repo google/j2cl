@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Equality()
-(func $m_<init>__@equality.Equality
- (param $this (ref null $equality.Equality))
+;;; Equality Equality.$create()
+(func $$create__equality_Equality@equality.Equality
  (result (ref null $equality.Equality))
+ ;;@ equality/Equality.java:18:13
+ (local $$instance (ref null $equality.Equality))
+ (block
+  ;; Equality $instance = new Equality.<init>();
+  ;;@ equality/Equality.java:18:13
+  (local.set $$instance (struct.new_with_rtt $equality.Equality (ref.as_non_null (global.get $equality.Equality.vtable)) (ref.as_non_null (global.get $equality.Equality.itable)) (i32.const 0) (global.get $equality.Equality.rtt)))
+  ;; $instance.$ctor();
+  ;;@ equality/Equality.java:18:13
+  (call $$ctor__void_$p_equality_Equality@equality.Equality (local.get $$instance))
+  ;; return $instance;
+  ;;@ equality/Equality.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Equality.$ctor()
+(func $$ctor__void_$p_equality_Equality@equality.Equality
+ (param $this (ref null $equality.Equality))
  ;;@ equality/Equality.java:18:13
  (block
   ;; equality.Equality.$clinit();
   ;;@ equality/Equality.java:18:13
   (call $$clinit__void@equality.Equality )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ equality/Equality.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Equality.this;
-  ;;@ equality/Equality.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

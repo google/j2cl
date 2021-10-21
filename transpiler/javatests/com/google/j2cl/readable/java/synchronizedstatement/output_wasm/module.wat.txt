@@ -35,21 +35,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; SynchronizedStatement()
-(func $m_<init>__@synchronizedstatement.SynchronizedStatement
- (param $this (ref null $synchronizedstatement.SynchronizedStatement))
+;;; SynchronizedStatement SynchronizedStatement.$create()
+(func $$create__synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement
  (result (ref null $synchronizedstatement.SynchronizedStatement))
+ ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+ (local $$instance (ref null $synchronizedstatement.SynchronizedStatement))
+ (block
+  ;; SynchronizedStatement $instance = new SynchronizedStatement.<init>();
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (local.set $$instance (struct.new_with_rtt $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $synchronizedstatement.SynchronizedStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SynchronizedStatement.$ctor()
+(func $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement
+ (param $this (ref null $synchronizedstatement.SynchronizedStatement))
  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
  (block
   ;; synchronizedstatement.SynchronizedStatement.$clinit();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
   (call $$clinit__void@synchronizedstatement.SynchronizedStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SynchronizedStatement.this;
-  ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -49,21 +49,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Dummy()
-(func $m_<init>__@aptgeneratorplugin.Dummy
- (param $this (ref null $aptgeneratorplugin.Dummy))
+;;; Dummy Dummy.$create()
+(func $$create__aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy
  (result (ref null $aptgeneratorplugin.Dummy))
+ ;;@ aptgeneratorplugin/Dummy.java:3:13
+ (local $$instance (ref null $aptgeneratorplugin.Dummy))
+ (block
+  ;; Dummy $instance = new Dummy.<init>();
+  ;;@ aptgeneratorplugin/Dummy.java:3:13
+  (local.set $$instance (struct.new_with_rtt $aptgeneratorplugin.Dummy (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.itable)) (i32.const 0) (global.get $aptgeneratorplugin.Dummy.rtt)))
+  ;; $instance.$ctor();
+  ;;@ aptgeneratorplugin/Dummy.java:3:13
+  (call $$ctor__void_$p_aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy (local.get $$instance))
+  ;; return $instance;
+  ;;@ aptgeneratorplugin/Dummy.java:3:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Dummy.$ctor()
+(func $$ctor__void_$p_aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy
+ (param $this (ref null $aptgeneratorplugin.Dummy))
  ;;@ aptgeneratorplugin/Dummy.java:3:13
  (block
   ;; aptgeneratorplugin.Dummy.$clinit();
   ;;@ aptgeneratorplugin/Dummy.java:3:13
   (call $$clinit__void@aptgeneratorplugin.Dummy )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Dummy.this;
-  ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -118,21 +132,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Foo()
-(func $m_<init>__@aptgeneratorplugin.Foo
- (param $this (ref null $aptgeneratorplugin.Foo))
+;;; Foo Foo.$create()
+(func $$create__aptgeneratorplugin_Foo@aptgeneratorplugin.Foo
  (result (ref null $aptgeneratorplugin.Foo))
+ ;;@ aptgeneratorplugin/Foo.java:18:13
+ (local $$instance (ref null $aptgeneratorplugin.Foo))
+ (block
+  ;; Foo $instance = new Foo.<init>();
+  ;;@ aptgeneratorplugin/Foo.java:18:13
+  (local.set $$instance (struct.new_with_rtt $aptgeneratorplugin.Foo (ref.as_non_null (global.get $aptgeneratorplugin.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Foo.itable)) (i32.const 0) (global.get $aptgeneratorplugin.Foo.rtt)))
+  ;; $instance.$ctor();
+  ;;@ aptgeneratorplugin/Foo.java:18:13
+  (call $$ctor__void_$p_aptgeneratorplugin_Foo@aptgeneratorplugin.Foo (local.get $$instance))
+  ;; return $instance;
+  ;;@ aptgeneratorplugin/Foo.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_aptgeneratorplugin_Foo@aptgeneratorplugin.Foo
+ (param $this (ref null $aptgeneratorplugin.Foo))
  ;;@ aptgeneratorplugin/Foo.java:18:13
  (block
   ;; aptgeneratorplugin.Foo.$clinit();
   ;;@ aptgeneratorplugin/Foo.java:18:13
   (call $$clinit__void@aptgeneratorplugin.Foo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ aptgeneratorplugin/Foo.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Foo.this;
-  ;;@ aptgeneratorplugin/Foo.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

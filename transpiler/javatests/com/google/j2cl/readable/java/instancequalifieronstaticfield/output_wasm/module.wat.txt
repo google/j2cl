@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; InstanceQualifiers()
-(func $m_<init>__@instancequalifieronstaticfield.InstanceQualifiers
- (param $this (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+;;; InstanceQualifiers InstanceQualifiers.$create()
+(func $$create__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers
  (result (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
+ (local $$instance (ref null $instancequalifieronstaticfield.InstanceQualifiers))
+ (block
+  ;; InstanceQualifiers $instance = new InstanceQualifiers.<init>();
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
+  (local.set $$instance (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable)) (i32.const 0) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
+  (call $$ctor__void_$p_instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers (local.get $$instance))
+  ;; return $instance;
+  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InstanceQualifiers.$ctor()
+(func $$ctor__void_$p_instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers
+ (param $this (ref null $instancequalifieronstaticfield.InstanceQualifiers))
  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
  (block
   ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
   (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InstanceQualifiers.this;
-  ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -89,9 +103,9 @@
   ;; instancequalifieronstaticfield.InstanceQualifiers.$clinit();
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:30:42
   (call $$clinit__void@instancequalifieronstaticfield.InstanceQualifiers )
-  ;; InstanceQualifiers main = new InstanceQualifiers.<init>();
+  ;; InstanceQualifiers main = instancequalifieronstaticfield.InstanceQualifiers.$create();
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:31:4
-  (local.set $main (call $m_<init>__@instancequalifieronstaticfield.InstanceQualifiers (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable)) (i32.const 0) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt))))
+  (local.set $main (call $$create__instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers ))
   ;; int i = 0;
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:32:4
   (local.set $i (i32.const 0))

@@ -87,21 +87,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; GrandParent()
-(func $m_<init>__@supermethodcall.GrandParent
- (param $this (ref null $supermethodcall.GrandParent))
+;;; GrandParent GrandParent.$create()
+(func $$create__supermethodcall_GrandParent@supermethodcall.GrandParent
  (result (ref null $supermethodcall.GrandParent))
+ ;;@ supermethodcall/Child.java:18:6
+ (local $$instance (ref null $supermethodcall.GrandParent))
+ (block
+  ;; GrandParent $instance = new GrandParent.<init>();
+  ;;@ supermethodcall/Child.java:18:6
+  (local.set $$instance (struct.new_with_rtt $supermethodcall.GrandParent (ref.as_non_null (global.get $supermethodcall.GrandParent.vtable)) (ref.as_non_null (global.get $supermethodcall.GrandParent.itable)) (i32.const 0) (global.get $supermethodcall.GrandParent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ supermethodcall/Child.java:18:6
+  (call $$ctor__void_$p_supermethodcall_GrandParent@supermethodcall.GrandParent (local.get $$instance))
+  ;; return $instance;
+  ;;@ supermethodcall/Child.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GrandParent.$ctor()
+(func $$ctor__void_$p_supermethodcall_GrandParent@supermethodcall.GrandParent
+ (param $this (ref null $supermethodcall.GrandParent))
  ;;@ supermethodcall/Child.java:18:6
  (block
   ;; supermethodcall.GrandParent.$clinit();
   ;;@ supermethodcall/Child.java:18:6
   (call $$clinit__void@supermethodcall.GrandParent )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ supermethodcall/Child.java:18:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return GrandParent.this;
-  ;;@ supermethodcall/Child.java:18:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -203,21 +217,35 @@
   $supermethodcall.GrandParent.vtable)
 )
 
-;;; Parent()
-(func $m_<init>__@supermethodcall.Parent
- (param $this (ref null $supermethodcall.Parent))
+;;; Parent Parent.$create()
+(func $$create__supermethodcall_Parent@supermethodcall.Parent
  (result (ref null $supermethodcall.Parent))
+ ;;@ supermethodcall/Child.java:29:6
+ (local $$instance (ref null $supermethodcall.Parent))
+ (block
+  ;; Parent $instance = new Parent.<init>();
+  ;;@ supermethodcall/Child.java:29:6
+  (local.set $$instance (struct.new_with_rtt $supermethodcall.Parent (ref.as_non_null (global.get $supermethodcall.Parent.vtable)) (ref.as_non_null (global.get $supermethodcall.Parent.itable)) (i32.const 0) (global.get $supermethodcall.Parent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ supermethodcall/Child.java:29:6
+  (call $$ctor__void_$p_supermethodcall_Parent@supermethodcall.Parent (local.get $$instance))
+  ;; return $instance;
+  ;;@ supermethodcall/Child.java:29:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_supermethodcall_Parent@supermethodcall.Parent
+ (param $this (ref null $supermethodcall.Parent))
  ;;@ supermethodcall/Child.java:29:6
  (block
   ;; supermethodcall.Parent.$clinit();
   ;;@ supermethodcall/Child.java:29:6
   (call $$clinit__void@supermethodcall.Parent )
-  ;; GrandParent.this.GrandParent.<init>();
+  ;; GrandParent.this.$ctor();
   ;;@ supermethodcall/Child.java:29:6
-  (drop (call $m_<init>__@supermethodcall.GrandParent (local.get $this)))
-  ;; return Parent.this;
-  ;;@ supermethodcall/Child.java:29:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_supermethodcall_GrandParent@supermethodcall.GrandParent (local.get $this))
  )
 )
 
@@ -321,21 +349,35 @@
   $supermethodcall.Parent.vtable)
 )
 
-;;; Child()
-(func $m_<init>__@supermethodcall.Child
- (param $this (ref null $supermethodcall.Child))
+;;; Child Child.$create()
+(func $$create__supermethodcall_Child@supermethodcall.Child
  (result (ref null $supermethodcall.Child))
+ ;;@ supermethodcall/Child.java:40:13
+ (local $$instance (ref null $supermethodcall.Child))
+ (block
+  ;; Child $instance = new Child.<init>();
+  ;;@ supermethodcall/Child.java:40:13
+  (local.set $$instance (struct.new_with_rtt $supermethodcall.Child (ref.as_non_null (global.get $supermethodcall.Child.vtable)) (ref.as_non_null (global.get $supermethodcall.Child.itable)) (i32.const 0) (global.get $supermethodcall.Child.rtt)))
+  ;; $instance.$ctor();
+  ;;@ supermethodcall/Child.java:40:13
+  (call $$ctor__void_$p_supermethodcall_Child@supermethodcall.Child (local.get $$instance))
+  ;; return $instance;
+  ;;@ supermethodcall/Child.java:40:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_supermethodcall_Child@supermethodcall.Child
+ (param $this (ref null $supermethodcall.Child))
  ;;@ supermethodcall/Child.java:40:13
  (block
   ;; supermethodcall.Child.$clinit();
   ;;@ supermethodcall/Child.java:40:13
   (call $$clinit__void@supermethodcall.Child )
-  ;; Parent.this.Parent.<init>();
+  ;; Parent.this.$ctor();
   ;;@ supermethodcall/Child.java:40:13
-  (drop (call $m_<init>__@supermethodcall.Parent (local.get $this)))
-  ;; return Child.this;
-  ;;@ supermethodcall/Child.java:40:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_supermethodcall_Parent@supermethodcall.Parent (local.get $this))
  )
 )
 

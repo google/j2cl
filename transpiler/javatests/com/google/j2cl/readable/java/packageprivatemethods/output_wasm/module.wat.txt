@@ -94,21 +94,35 @@
   $packageprivatemethods.package1.Parent.vtable)
 )
 
-;;; Child()
-(func $m_<init>__@packageprivatemethods.package1.Child
- (param $this (ref null $packageprivatemethods.package1.Child))
+;;; Child Child.$create()
+(func $$create__packageprivatemethods_package1_Child@packageprivatemethods.package1.Child
  (result (ref null $packageprivatemethods.package1.Child))
+ ;;@ packageprivatemethods/package1/Child.java:18:13
+ (local $$instance (ref null $packageprivatemethods.package1.Child))
+ (block
+  ;; Child $instance = new Child.<init>();
+  ;;@ packageprivatemethods/package1/Child.java:18:13
+  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0) (global.get $packageprivatemethods.package1.Child.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageprivatemethods/package1/Child.java:18:13
+  (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageprivatemethods/package1/Child.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child
+ (param $this (ref null $packageprivatemethods.package1.Child))
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (block
   ;; packageprivatemethods.package1.Child.$clinit();
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (call $$clinit__void@packageprivatemethods.package1.Child )
-  ;; Parent.this.Parent.<init>();
+  ;; Parent.this.$ctor();
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (drop (call $m_<init>__@packageprivatemethods.package1.Parent (local.get $this)))
-  ;; return Child.this;
-  ;;@ packageprivatemethods/package1/Child.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (local.get $this))
  )
 )
 
@@ -256,21 +270,17 @@
   $packageprivatemethods.package1.SuperParent.vtable)
 )
 
-;;; Parent()
-(func $m_<init>__@packageprivatemethods.package1.Parent
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent
  (param $this (ref null $packageprivatemethods.package1.Parent))
- (result (ref null $packageprivatemethods.package1.Parent))
  ;;@ packageprivatemethods/package1/Parent.java:18:22
  (block
   ;; packageprivatemethods.package1.Parent.$clinit();
   ;;@ packageprivatemethods/package1/Parent.java:18:22
   (call $$clinit__void@packageprivatemethods.package1.Parent )
-  ;; SuperParent.this.SuperParent.<init>();
+  ;; SuperParent.this.$ctor();
   ;;@ packageprivatemethods/package1/Parent.java:18:22
-  (drop (call $m_<init>__@packageprivatemethods.package1.SuperParent (local.get $this)))
-  ;; return Parent.this;
-  ;;@ packageprivatemethods/package1/Parent.java:18:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (local.get $this))
  )
 )
 
@@ -350,21 +360,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; SuperParent()
-(func $m_<init>__@packageprivatemethods.package1.SuperParent
- (param $this (ref null $packageprivatemethods.package1.SuperParent))
+;;; SuperParent SuperParent.$create()
+(func $$create__packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent
  (result (ref null $packageprivatemethods.package1.SuperParent))
+ ;;@ packageprivatemethods/package1/SuperParent.java:18:13
+ (local $$instance (ref null $packageprivatemethods.package1.SuperParent))
+ (block
+  ;; SuperParent $instance = new SuperParent.<init>();
+  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
+  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.itable)) (i32.const 0) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
+  (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SuperParent.$ctor()
+(func $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent
+ (param $this (ref null $packageprivatemethods.package1.SuperParent))
  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
  (block
   ;; packageprivatemethods.package1.SuperParent.$clinit();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (call $$clinit__void@packageprivatemethods.package1.SuperParent )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SuperParent.this;
-  ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -479,21 +503,35 @@
   $packageprivatemethods.package1.Child.vtable)
 )
 
-;;; SubChild()
-(func $m_<init>__@packageprivatemethods.package2.SubChild
- (param $this (ref null $packageprivatemethods.package2.SubChild))
+;;; SubChild SubChild.$create()
+(func $$create__packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild
  (result (ref null $packageprivatemethods.package2.SubChild))
+ ;;@ packageprivatemethods/package2/SubChild.java:20:13
+ (local $$instance (ref null $packageprivatemethods.package2.SubChild))
+ (block
+  ;; SubChild $instance = new SubChild.<init>();
+  ;;@ packageprivatemethods/package2/SubChild.java:20:13
+  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0) (global.get $packageprivatemethods.package2.SubChild.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageprivatemethods/package2/SubChild.java:20:13
+  (call $$ctor__void_$p_packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageprivatemethods/package2/SubChild.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SubChild.$ctor()
+(func $$ctor__void_$p_packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild
+ (param $this (ref null $packageprivatemethods.package2.SubChild))
  ;;@ packageprivatemethods/package2/SubChild.java:20:13
  (block
   ;; packageprivatemethods.package2.SubChild.$clinit();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (call $$clinit__void@packageprivatemethods.package2.SubChild )
-  ;; Child.this.Child.<init>();
+  ;; Child.this.$ctor();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
-  (drop (call $m_<init>__@packageprivatemethods.package1.Child (local.get $this)))
-  ;; return SubChild.this;
-  ;;@ packageprivatemethods/package2/SubChild.java:20:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (local.get $this))
  )
 )
 
@@ -570,21 +608,17 @@
   $packageprivatemethods.package1.Parent.vtable)
 )
 
-;;; SubParent()
-(func $m_<init>__@packageprivatemethods.package2.SubParent
+;;; void SubParent.$ctor()
+(func $$ctor__void_$p_packageprivatemethods_package2_SubParent@packageprivatemethods.package2.SubParent
  (param $this (ref null $packageprivatemethods.package2.SubParent))
- (result (ref null $packageprivatemethods.package2.SubParent))
  ;;@ packageprivatemethods/package2/SubParent.java:20:22
  (block
   ;; packageprivatemethods.package2.SubParent.$clinit();
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
   (call $$clinit__void@packageprivatemethods.package2.SubParent )
-  ;; Parent.this.Parent.<init>();
+  ;; Parent.this.$ctor();
   ;;@ packageprivatemethods/package2/SubParent.java:20:22
-  (drop (call $m_<init>__@packageprivatemethods.package1.Parent (local.get $this)))
-  ;; return SubParent.this;
-  ;;@ packageprivatemethods/package2/SubParent.java:20:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_packageprivatemethods_package1_Parent@packageprivatemethods.package1.Parent (local.get $this))
  )
 )
 

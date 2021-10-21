@@ -51,21 +51,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; SomeJsType()
-(func $m_<init>__@jstype.SomeJsType
- (param $this (ref null $jstype.SomeJsType))
+;;; SomeJsType<T> SomeJsType.$create()
+(func $$create__jstype_SomeJsType@jstype.SomeJsType
  (result (ref null $jstype.SomeJsType))
+ ;;@ jstype/SomeJsType.java:22:13
+ (local $$instance (ref null $jstype.SomeJsType))
+ (block
+  ;; SomeJsType<T> $instance = new SomeJsType.<init>();
+  ;;@ jstype/SomeJsType.java:22:13
+  (local.set $$instance (struct.new_with_rtt $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $jstype.SomeJsType.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $jstype.SomeJsType.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jstype/SomeJsType.java:22:13
+  (call $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType (local.get $$instance))
+  ;; return $instance;
+  ;;@ jstype/SomeJsType.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SomeJsType.$ctor()
+(func $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType
+ (param $this (ref null $jstype.SomeJsType))
  ;;@ jstype/SomeJsType.java:22:13
  (block
   ;; jstype.SomeJsType.$clinit();
   ;;@ jstype/SomeJsType.java:22:13
   (call $$clinit__void@jstype.SomeJsType )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jstype/SomeJsType.java:22:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SomeJsType.this;
-  ;;@ jstype/SomeJsType.java:22:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -154,9 +168,9 @@
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
  (block
-  ;; Object object = new Object.<init>();
+  ;; Object object = java.lang.Object.$create();
   ;;@ jstype/SomeJsType.java:52:4
-  (local.set $object (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  (local.set $object (call $$create__java_lang_Object@java.lang.Object ))
   ;; Star star = ((Star) java.lang.Double.valueOf(3.0));
   ;;@ jstype/SomeJsType.java:54:4
   (local.set $star (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 3.0)))

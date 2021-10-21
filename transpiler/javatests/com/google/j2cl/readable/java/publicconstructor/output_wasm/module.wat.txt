@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; PublicConstructor()
-(func $m_<init>__@publicconstructor.PublicConstructor
- (param $this (ref null $publicconstructor.PublicConstructor))
+;;; PublicConstructor PublicConstructor.$create()
+(func $$create__publicconstructor_PublicConstructor@publicconstructor.PublicConstructor
  (result (ref null $publicconstructor.PublicConstructor))
+ ;;@ publicconstructor/PublicConstructor.java:19:9
+ (local $$instance (ref null $publicconstructor.PublicConstructor))
+ (block
+  ;; PublicConstructor $instance = new PublicConstructor.<init>();
+  ;;@ publicconstructor/PublicConstructor.java:19:9
+  (local.set $$instance (struct.new_with_rtt $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0) (global.get $publicconstructor.PublicConstructor.rtt)))
+  ;; $instance.$ctor();
+  ;;@ publicconstructor/PublicConstructor.java:19:9
+  (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (local.get $$instance))
+  ;; return $instance;
+  ;;@ publicconstructor/PublicConstructor.java:19:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void PublicConstructor.$ctor()
+(func $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor
+ (param $this (ref null $publicconstructor.PublicConstructor))
  ;;@ publicconstructor/PublicConstructor.java:19:9
  (block
   ;; publicconstructor.PublicConstructor.$clinit();
   ;;@ publicconstructor/PublicConstructor.java:19:29
   (call $$clinit__void@publicconstructor.PublicConstructor )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ publicconstructor/PublicConstructor.java:19:29
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return PublicConstructor.this;
-  ;;@ publicconstructor/PublicConstructor.java:19:9
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

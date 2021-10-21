@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; LongParameterSignature()
-(func $m_<init>__@longparametersignature.LongParameterSignature
- (param $this (ref null $longparametersignature.LongParameterSignature))
+;;; LongParameterSignature LongParameterSignature.$create()
+(func $$create__longparametersignature_LongParameterSignature@longparametersignature.LongParameterSignature
  (result (ref null $longparametersignature.LongParameterSignature))
+ ;;@ longparametersignature/LongParameterSignature.java:18:13
+ (local $$instance (ref null $longparametersignature.LongParameterSignature))
+ (block
+  ;; LongParameterSignature $instance = new LongParameterSignature.<init>();
+  ;;@ longparametersignature/LongParameterSignature.java:18:13
+  (local.set $$instance (struct.new_with_rtt $longparametersignature.LongParameterSignature (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.vtable)) (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.itable)) (i32.const 0) (global.get $longparametersignature.LongParameterSignature.rtt)))
+  ;; $instance.$ctor();
+  ;;@ longparametersignature/LongParameterSignature.java:18:13
+  (call $$ctor__void_$p_longparametersignature_LongParameterSignature@longparametersignature.LongParameterSignature (local.get $$instance))
+  ;; return $instance;
+  ;;@ longparametersignature/LongParameterSignature.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LongParameterSignature.$ctor()
+(func $$ctor__void_$p_longparametersignature_LongParameterSignature@longparametersignature.LongParameterSignature
+ (param $this (ref null $longparametersignature.LongParameterSignature))
  ;;@ longparametersignature/LongParameterSignature.java:18:13
  (block
   ;; longparametersignature.LongParameterSignature.$clinit();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (call $$clinit__void@longparametersignature.LongParameterSignature )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return LongParameterSignature.this;
-  ;;@ longparametersignature/LongParameterSignature.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

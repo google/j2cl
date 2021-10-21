@@ -34,24 +34,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; ValueOfNullable()
-(func $m_<init>__@valueofnullable.ValueOfNullable
- (param $this (ref null $valueofnullable.ValueOfNullable))
+;;; ValueOfNullable ValueOfNullable.$create()
+(func $$create__valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable
  (result (ref null $valueofnullable.ValueOfNullable))
+ ;;@ valueofnullable/ValueOfNullable.java:18:13
+ (local $$instance (ref null $valueofnullable.ValueOfNullable))
+ (block
+  ;; ValueOfNullable $instance = new ValueOfNullable.<init>();
+  ;;@ valueofnullable/ValueOfNullable.java:18:13
+  (local.set $$instance (struct.new_with_rtt $valueofnullable.ValueOfNullable (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.vtable)) (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (ref.null $java.lang.String) (global.get $valueofnullable.ValueOfNullable.rtt)))
+  ;; $instance.$ctor();
+  ;;@ valueofnullable/ValueOfNullable.java:18:13
+  (call $$ctor__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable (local.get $$instance))
+  ;; return $instance;
+  ;;@ valueofnullable/ValueOfNullable.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ValueOfNullable.$ctor()
+(func $$ctor__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable
+ (param $this (ref null $valueofnullable.ValueOfNullable))
  ;;@ valueofnullable/ValueOfNullable.java:18:13
  (block
   ;; valueofnullable.ValueOfNullable.$clinit();
   ;;@ valueofnullable/ValueOfNullable.java:18:13
   (call $$clinit__void@valueofnullable.ValueOfNullable )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ valueofnullable/ValueOfNullable.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ValueOfNullable.this.$init();
   ;;@ valueofnullable/ValueOfNullable.java:18:13
   (call $$init__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable (local.get $this))
-  ;; return ValueOfNullable.this;
-  ;;@ valueofnullable/ValueOfNullable.java:18:13
-  (return (local.get $this))
  )
 )
 
@@ -67,10 +81,10 @@
   ;; (ValueOfNullable.this.someChar = 97);
   ;;@ valueofnullable/ValueOfNullable.java:20:2
   (struct.set $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this) (i32.const 97))
-  ;; (ValueOfNullable.this.result = (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(ValueOfNullable.this.someChar),$stringBuilder.append(ValueOfNullable.this.nullableString),$stringBuilder.toString()));
+  ;; (ValueOfNullable.this.result = (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(ValueOfNullable.this.someChar),$stringBuilder.append(ValueOfNullable.this.nullableString),$stringBuilder.toString()));
   ;;@ valueofnullable/ValueOfNullable.java:21:2
   (struct.set $valueofnullable.ValueOfNullable $f_result__valueofnullable_ValueOfNullable(local.get $this) (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $m_<init>__@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+   (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
    (drop (call_ref (local.get $$stringBuilder)(struct.get_u $valueofnullable.ValueOfNullable $f_someChar__valueofnullable_ValueOfNullable(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__char__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(struct.get $valueofnullable.ValueOfNullable $f_nullableString__valueofnullable_ValueOfNullable(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))

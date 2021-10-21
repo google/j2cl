@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ClassLiteral()
-(func $m_<init>__@classliteral.ClassLiteral
- (param $this (ref null $classliteral.ClassLiteral))
+;;; ClassLiteral ClassLiteral.$create()
+(func $$create__classliteral_ClassLiteral@classliteral.ClassLiteral
  (result (ref null $classliteral.ClassLiteral))
+ ;;@ classliteral/ClassLiteral.java:18:13
+ (local $$instance (ref null $classliteral.ClassLiteral))
+ (block
+  ;; ClassLiteral $instance = new ClassLiteral.<init>();
+  ;;@ classliteral/ClassLiteral.java:18:13
+  (local.set $$instance (struct.new_with_rtt $classliteral.ClassLiteral (ref.as_non_null (global.get $classliteral.ClassLiteral.vtable)) (ref.as_non_null (global.get $classliteral.ClassLiteral.itable)) (i32.const 0) (global.get $classliteral.ClassLiteral.rtt)))
+  ;; $instance.$ctor();
+  ;;@ classliteral/ClassLiteral.java:18:13
+  (call $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral (local.get $$instance))
+  ;; return $instance;
+  ;;@ classliteral/ClassLiteral.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ClassLiteral.$ctor()
+(func $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral
+ (param $this (ref null $classliteral.ClassLiteral))
  ;;@ classliteral/ClassLiteral.java:18:13
  (block
   ;; classliteral.ClassLiteral.$clinit();
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$clinit__void@classliteral.ClassLiteral )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ classliteral/ClassLiteral.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ClassLiteral.this;
-  ;;@ classliteral/ClassLiteral.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; IfStatement()
-(func $m_<init>__@ifstatement.IfStatement
- (param $this (ref null $ifstatement.IfStatement))
+;;; IfStatement IfStatement.$create()
+(func $$create__ifstatement_IfStatement@ifstatement.IfStatement
  (result (ref null $ifstatement.IfStatement))
+ ;;@ ifstatement/IfStatement.java:18:13
+ (local $$instance (ref null $ifstatement.IfStatement))
+ (block
+  ;; IfStatement $instance = new IfStatement.<init>();
+  ;;@ ifstatement/IfStatement.java:18:13
+  (local.set $$instance (struct.new_with_rtt $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $ifstatement.IfStatement.itable)) (i32.const 0) (global.get $ifstatement.IfStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ ifstatement/IfStatement.java:18:13
+  (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ ifstatement/IfStatement.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void IfStatement.$ctor()
+(func $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement
+ (param $this (ref null $ifstatement.IfStatement))
  ;;@ ifstatement/IfStatement.java:18:13
  (block
   ;; ifstatement.IfStatement.$clinit();
   ;;@ ifstatement/IfStatement.java:18:13
   (call $$clinit__void@ifstatement.IfStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ ifstatement/IfStatement.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return IfStatement.this;
-  ;;@ ifstatement/IfStatement.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

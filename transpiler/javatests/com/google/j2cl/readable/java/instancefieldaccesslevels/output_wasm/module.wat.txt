@@ -35,21 +35,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; InstanceFieldAccessLevels()
-(func $m_<init>__@instancefieldaccesslevels.InstanceFieldAccessLevels
- (param $this (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
+;;; InstanceFieldAccessLevels InstanceFieldAccessLevels.$create()
+(func $$create__instancefieldaccesslevels_InstanceFieldAccessLevels@instancefieldaccesslevels.InstanceFieldAccessLevels
  (result (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
+ ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
+ (local $$instance (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
+ (block
+  ;; InstanceFieldAccessLevels $instance = new InstanceFieldAccessLevels.<init>();
+  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
+  (local.set $$instance (struct.new_with_rtt $instancefieldaccesslevels.InstanceFieldAccessLevels (ref.as_non_null (global.get $instancefieldaccesslevels.InstanceFieldAccessLevels.vtable)) (ref.as_non_null (global.get $instancefieldaccesslevels.InstanceFieldAccessLevels.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (i32.const 0) (global.get $instancefieldaccesslevels.InstanceFieldAccessLevels.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
+  (call $$ctor__void_$p_instancefieldaccesslevels_InstanceFieldAccessLevels@instancefieldaccesslevels.InstanceFieldAccessLevels (local.get $$instance))
+  ;; return $instance;
+  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InstanceFieldAccessLevels.$ctor()
+(func $$ctor__void_$p_instancefieldaccesslevels_InstanceFieldAccessLevels@instancefieldaccesslevels.InstanceFieldAccessLevels
+ (param $this (ref null $instancefieldaccesslevels.InstanceFieldAccessLevels))
  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
  (block
   ;; instancefieldaccesslevels.InstanceFieldAccessLevels.$clinit();
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
   (call $$clinit__void@instancefieldaccesslevels.InstanceFieldAccessLevels )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InstanceFieldAccessLevels.this;
-  ;;@ instancefieldaccesslevels/InstanceFieldAccessLevels.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

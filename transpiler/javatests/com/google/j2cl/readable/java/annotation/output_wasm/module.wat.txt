@@ -56,21 +56,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Main()
-(func $m_<init>__@annotation.Main
- (param $this (ref null $annotation.Main))
+;;; Main Main.$create()
+(func $$create__annotation_Main@annotation.Main
  (result (ref null $annotation.Main))
+ ;;@ annotation/Main.java:18:13
+ (local $$instance (ref null $annotation.Main))
+ (block
+  ;; Main $instance = new Main.<init>();
+  ;;@ annotation/Main.java:18:13
+  (local.set $$instance (struct.new_with_rtt $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $annotation.Main.itable)) (i32.const 0) (global.get $annotation.Main.rtt)))
+  ;; $instance.$ctor();
+  ;;@ annotation/Main.java:18:13
+  (call $$ctor__void_$p_annotation_Main@annotation.Main (local.get $$instance))
+  ;; return $instance;
+  ;;@ annotation/Main.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_annotation_Main@annotation.Main
+ (param $this (ref null $annotation.Main))
  ;;@ annotation/Main.java:18:13
  (block
   ;; annotation.Main.$clinit();
   ;;@ annotation/Main.java:18:13
   (call $$clinit__void@annotation.Main )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ annotation/Main.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Main.this;
-  ;;@ annotation/Main.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -198,11 +212,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; Bar(Main $outer_this)
-(func $m_<init>__annotation_Main@annotation.Main.Bar
- (param $this (ref null $annotation.Main.Bar))
+;;; Bar Bar.$create(Main $outer_this)
+(func $$create__annotation_Main__annotation_Main_Bar@annotation.Main.Bar
  (param $$outer_this (ref null $annotation.Main))
  (result (ref null $annotation.Main.Bar))
+ ;;@ annotation/Main.java:30:8
+ (local $$instance (ref null $annotation.Main.Bar))
+ (block
+  ;; Bar $instance = new Bar.<init>($outer_this);
+  ;;@ annotation/Main.java:30:8
+  (local.set $$instance (struct.new_with_rtt $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $annotation.Main.Bar.itable)) (i32.const 0) (ref.null $annotation.Main) (global.get $annotation.Main.Bar.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ annotation/Main.java:30:8
+  (call $$ctor__annotation_Main__void_$p_annotation_Main_Bar@annotation.Main.Bar (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ annotation/Main.java:30:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Bar.$ctor(Main $outer_this)
+(func $$ctor__annotation_Main__void_$p_annotation_Main_Bar@annotation.Main.Bar
+ (param $this (ref null $annotation.Main.Bar))
+ (param $$outer_this (ref null $annotation.Main))
  ;;@ annotation/Main.java:30:8
  (block
   ;; annotation.Main.Bar.$clinit();
@@ -211,12 +243,9 @@
   ;; (Bar.this.this = $outer_this);
   ;;@ annotation/Main.java:30:8
   (struct.set $annotation.Main.Bar $$outer_this__annotation_Main_Bar(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ annotation/Main.java:30:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Bar.this;
-  ;;@ annotation/Main.java:30:8
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

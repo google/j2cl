@@ -49,21 +49,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; CastOnArrayInit()
-(func $m_<init>__@castonarrayinit.CastOnArrayInit
- (param $this (ref null $castonarrayinit.CastOnArrayInit))
+;;; CastOnArrayInit CastOnArrayInit.$create()
+(func $$create__castonarrayinit_CastOnArrayInit@castonarrayinit.CastOnArrayInit
  (result (ref null $castonarrayinit.CastOnArrayInit))
+ ;;@ castonarrayinit/CastOnArrayInit.java:18:13
+ (local $$instance (ref null $castonarrayinit.CastOnArrayInit))
+ (block
+  ;; CastOnArrayInit $instance = new CastOnArrayInit.<init>();
+  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
+  (local.set $$instance (struct.new_with_rtt $castonarrayinit.CastOnArrayInit (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.itable)) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.rtt)))
+  ;; $instance.$ctor();
+  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
+  (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit@castonarrayinit.CastOnArrayInit (local.get $$instance))
+  ;; return $instance;
+  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void CastOnArrayInit.$ctor()
+(func $$ctor__void_$p_castonarrayinit_CastOnArrayInit@castonarrayinit.CastOnArrayInit
+ (param $this (ref null $castonarrayinit.CastOnArrayInit))
  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
  (block
   ;; castonarrayinit.CastOnArrayInit.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$clinit__void@castonarrayinit.CastOnArrayInit )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return CastOnArrayInit.this;
-  ;;@ castonarrayinit/CastOnArrayInit.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -88,16 +102,16 @@
   ;; castonarrayinit.CastOnArrayInit.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:23:32
   (call $$clinit__void@castonarrayinit.CastOnArrayInit )
-  ;; Foo<E> f1 = new Foo.<init>();
+  ;; Foo<E> f1 = castonarrayinit.CastOnArrayInit.Foo.$create();
   ;;@ castonarrayinit/CastOnArrayInit.java:24:4
-  (local.set $f1 (call $m_<init>__@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
-  ;; Foo<E> f2 = new Foo.<init>();
+  (local.set $f1 (call $$create__castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo ))
+  ;; Foo<E> f2 = castonarrayinit.CastOnArrayInit.Foo.$create();
   ;;@ castonarrayinit/CastOnArrayInit.java:25:4
-  (local.set $f2 (call $m_<init>__@castonarrayinit.CastOnArrayInit.Foo (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt))))
-  ;; castonarrayinit.CastOnArrayInit.fun((Foo<E>[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = f1),($array_literal.elements[1] = f2),$array_literal));
+  (local.set $f2 (call $$create__castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo ))
+  ;; castonarrayinit.CastOnArrayInit.fun((Foo<E>[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(2),($array_literal.elements[0] = f1),($array_literal.elements[1] = f2),$array_literal));
   ;;@ castonarrayinit/CastOnArrayInit.java:26:4
   (call $m_fun__arrayOf_castonarrayinit_CastOnArrayInit_Foo__void@castonarrayinit.CastOnArrayInit (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (local.get $f1))
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (local.get $f2))
    (local.get $$array_literal)
@@ -156,21 +170,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Foo()
-(func $m_<init>__@castonarrayinit.CastOnArrayInit.Foo
- (param $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
+;;; Foo<T> Foo.$create()
+(func $$create__castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo
  (result (ref null $castonarrayinit.CastOnArrayInit.Foo))
+ ;;@ castonarrayinit/CastOnArrayInit.java:19:22
+ (local $$instance (ref null $castonarrayinit.CastOnArrayInit.Foo))
+ (block
+  ;; Foo<T> $instance = new Foo.<init>();
+  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
+  (local.set $$instance (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)))
+  ;; $instance.$ctor();
+  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
+  (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo (local.get $$instance))
+  ;; return $instance;
+  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo
+ (param $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
  (block
   ;; castonarrayinit.CastOnArrayInit.Foo.$clinit();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$clinit__void@castonarrayinit.CastOnArrayInit.Foo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Foo.this;
-  ;;@ castonarrayinit/CastOnArrayInit.java:19:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

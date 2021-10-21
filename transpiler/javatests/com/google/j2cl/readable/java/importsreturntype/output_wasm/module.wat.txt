@@ -69,21 +69,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ImportsReturnType()
-(func $m_<init>__@importsreturntype.ImportsReturnType
- (param $this (ref null $importsreturntype.ImportsReturnType))
+;;; ImportsReturnType ImportsReturnType.$create()
+(func $$create__importsreturntype_ImportsReturnType@importsreturntype.ImportsReturnType
  (result (ref null $importsreturntype.ImportsReturnType))
+ ;;@ importsreturntype/ImportsReturnType.java:18:13
+ (local $$instance (ref null $importsreturntype.ImportsReturnType))
+ (block
+  ;; ImportsReturnType $instance = new ImportsReturnType.<init>();
+  ;;@ importsreturntype/ImportsReturnType.java:18:13
+  (local.set $$instance (struct.new_with_rtt $importsreturntype.ImportsReturnType (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.itable)) (i32.const 0) (global.get $importsreturntype.ImportsReturnType.rtt)))
+  ;; $instance.$ctor();
+  ;;@ importsreturntype/ImportsReturnType.java:18:13
+  (call $$ctor__void_$p_importsreturntype_ImportsReturnType@importsreturntype.ImportsReturnType (local.get $$instance))
+  ;; return $instance;
+  ;;@ importsreturntype/ImportsReturnType.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ImportsReturnType.$ctor()
+(func $$ctor__void_$p_importsreturntype_ImportsReturnType@importsreturntype.ImportsReturnType
+ (param $this (ref null $importsreturntype.ImportsReturnType))
  ;;@ importsreturntype/ImportsReturnType.java:18:13
  (block
   ;; importsreturntype.ImportsReturnType.$clinit();
   ;;@ importsreturntype/ImportsReturnType.java:18:13
   (call $$clinit__void@importsreturntype.ImportsReturnType )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ImportsReturnType.this;
-  ;;@ importsreturntype/ImportsReturnType.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -154,21 +168,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Entry()
-(func $m_<init>__@importsreturntype.ImportsReturnType.Entry
- (param $this (ref null $importsreturntype.ImportsReturnType.Entry))
+;;; Entry Entry.$create()
+(func $$create__importsreturntype_ImportsReturnType_Entry@importsreturntype.ImportsReturnType.Entry
  (result (ref null $importsreturntype.ImportsReturnType.Entry))
+ ;;@ importsreturntype/ImportsReturnType.java:19:22
+ (local $$instance (ref null $importsreturntype.ImportsReturnType.Entry))
+ (block
+  ;; Entry $instance = new Entry.<init>();
+  ;;@ importsreturntype/ImportsReturnType.java:19:22
+  (local.set $$instance (struct.new_with_rtt $importsreturntype.ImportsReturnType.Entry (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.itable)) (i32.const 0) (global.get $importsreturntype.ImportsReturnType.Entry.rtt)))
+  ;; $instance.$ctor();
+  ;;@ importsreturntype/ImportsReturnType.java:19:22
+  (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Entry@importsreturntype.ImportsReturnType.Entry (local.get $$instance))
+  ;; return $instance;
+  ;;@ importsreturntype/ImportsReturnType.java:19:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Entry.$ctor()
+(func $$ctor__void_$p_importsreturntype_ImportsReturnType_Entry@importsreturntype.ImportsReturnType.Entry
+ (param $this (ref null $importsreturntype.ImportsReturnType.Entry))
  ;;@ importsreturntype/ImportsReturnType.java:19:22
  (block
   ;; importsreturntype.ImportsReturnType.Entry.$clinit();
   ;;@ importsreturntype/ImportsReturnType.java:19:22
   (call $$clinit__void@importsreturntype.ImportsReturnType.Entry )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:19:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Entry.this;
-  ;;@ importsreturntype/ImportsReturnType.java:19:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -223,21 +251,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Set()
-(func $m_<init>__@importsreturntype.ImportsReturnType.Set
- (param $this (ref null $importsreturntype.ImportsReturnType.Set))
+;;; Set<S> Set.$create()
+(func $$create__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType.Set
  (result (ref null $importsreturntype.ImportsReturnType.Set))
+ ;;@ importsreturntype/ImportsReturnType.java:21:22
+ (local $$instance (ref null $importsreturntype.ImportsReturnType.Set))
+ (block
+  ;; Set<S> $instance = new Set.<init>();
+  ;;@ importsreturntype/ImportsReturnType.java:21:22
+  (local.set $$instance (struct.new_with_rtt $importsreturntype.ImportsReturnType.Set (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.itable)) (i32.const 0) (global.get $importsreturntype.ImportsReturnType.Set.rtt)))
+  ;; $instance.$ctor();
+  ;;@ importsreturntype/ImportsReturnType.java:21:22
+  (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType.Set (local.get $$instance))
+  ;; return $instance;
+  ;;@ importsreturntype/ImportsReturnType.java:21:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Set.$ctor()
+(func $$ctor__void_$p_importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType.Set
+ (param $this (ref null $importsreturntype.ImportsReturnType.Set))
  ;;@ importsreturntype/ImportsReturnType.java:21:22
  (block
   ;; importsreturntype.ImportsReturnType.Set.$clinit();
   ;;@ importsreturntype/ImportsReturnType.java:21:22
   (call $$clinit__void@importsreturntype.ImportsReturnType.Set )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:21:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Set.this;
-  ;;@ importsreturntype/ImportsReturnType.java:21:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -35,21 +35,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; JsDocReturn()
-(func $m_<init>__@jsdocreturn.JsDocReturn
- (param $this (ref null $jsdocreturn.JsDocReturn))
+;;; JsDocReturn JsDocReturn.$create()
+(func $$create__jsdocreturn_JsDocReturn@jsdocreturn.JsDocReturn
  (result (ref null $jsdocreturn.JsDocReturn))
+ ;;@ jsdocreturn/JsDocReturn.java:18:13
+ (local $$instance (ref null $jsdocreturn.JsDocReturn))
+ (block
+  ;; JsDocReturn $instance = new JsDocReturn.<init>();
+  ;;@ jsdocreturn/JsDocReturn.java:18:13
+  (local.set $$instance (struct.new_with_rtt $jsdocreturn.JsDocReturn (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.vtable)) (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.itable)) (i32.const 0) (global.get $jsdocreturn.JsDocReturn.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsdocreturn/JsDocReturn.java:18:13
+  (call $$ctor__void_$p_jsdocreturn_JsDocReturn@jsdocreturn.JsDocReturn (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsdocreturn/JsDocReturn.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsDocReturn.$ctor()
+(func $$ctor__void_$p_jsdocreturn_JsDocReturn@jsdocreturn.JsDocReturn
+ (param $this (ref null $jsdocreturn.JsDocReturn))
  ;;@ jsdocreturn/JsDocReturn.java:18:13
  (block
   ;; jsdocreturn.JsDocReturn.$clinit();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
   (call $$clinit__void@jsdocreturn.JsDocReturn )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return JsDocReturn.this;
-  ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

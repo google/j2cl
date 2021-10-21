@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; JSKeyWords()
-(func $m_<init>__@javascriptkeywords.JSKeyWords
- (param $this (ref null $javascriptkeywords.JSKeyWords))
+;;; JSKeyWords JSKeyWords.$create()
+(func $$create__javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords
  (result (ref null $javascriptkeywords.JSKeyWords))
+ ;;@ javascriptkeywords/JSKeyWords.java:18:13
+ (local $$instance (ref null $javascriptkeywords.JSKeyWords))
+ (block
+  ;; JSKeyWords $instance = new JSKeyWords.<init>();
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (local.set $$instance (struct.new_with_rtt $javascriptkeywords.JSKeyWords (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.vtable)) (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.itable)) (i32.const 0) (global.get $javascriptkeywords.JSKeyWords.rtt)))
+  ;; $instance.$ctor();
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (call $$ctor__void_$p_javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords (local.get $$instance))
+  ;; return $instance;
+  ;;@ javascriptkeywords/JSKeyWords.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JSKeyWords.$ctor()
+(func $$ctor__void_$p_javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords
+ (param $this (ref null $javascriptkeywords.JSKeyWords))
  ;;@ javascriptkeywords/JSKeyWords.java:18:13
  (block
   ;; javascriptkeywords.JSKeyWords.$clinit();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$clinit__void@javascriptkeywords.JSKeyWords )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return JSKeyWords.this;
-  ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

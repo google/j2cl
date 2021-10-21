@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; StaticConstant()
-(func $m_<init>__@staticconstant.StaticConstant
- (param $this (ref null $staticconstant.StaticConstant))
+;;; StaticConstant StaticConstant.$create()
+(func $$create__staticconstant_StaticConstant@staticconstant.StaticConstant
  (result (ref null $staticconstant.StaticConstant))
+ ;;@ staticconstant/StaticConstant.java:18:13
+ (local $$instance (ref null $staticconstant.StaticConstant))
+ (block
+  ;; StaticConstant $instance = new StaticConstant.<init>();
+  ;;@ staticconstant/StaticConstant.java:18:13
+  (local.set $$instance (struct.new_with_rtt $staticconstant.StaticConstant (ref.as_non_null (global.get $staticconstant.StaticConstant.vtable)) (ref.as_non_null (global.get $staticconstant.StaticConstant.itable)) (i32.const 0) (global.get $staticconstant.StaticConstant.rtt)))
+  ;; $instance.$ctor();
+  ;;@ staticconstant/StaticConstant.java:18:13
+  (call $$ctor__void_$p_staticconstant_StaticConstant@staticconstant.StaticConstant (local.get $$instance))
+  ;; return $instance;
+  ;;@ staticconstant/StaticConstant.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StaticConstant.$ctor()
+(func $$ctor__void_$p_staticconstant_StaticConstant@staticconstant.StaticConstant
+ (param $this (ref null $staticconstant.StaticConstant))
  ;;@ staticconstant/StaticConstant.java:18:13
  (block
   ;; staticconstant.StaticConstant.$clinit();
   ;;@ staticconstant/StaticConstant.java:18:13
   (call $$clinit__void@staticconstant.StaticConstant )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ staticconstant/StaticConstant.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return StaticConstant.this;
-  ;;@ staticconstant/StaticConstant.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

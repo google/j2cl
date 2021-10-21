@@ -160,21 +160,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; JsDocTypeMappings()
-(func $m_<init>__@jsdoctypemappings.JsDocTypeMappings
- (param $this (ref null $jsdoctypemappings.JsDocTypeMappings))
+;;; JsDocTypeMappings JsDocTypeMappings.$create()
+(func $$create__jsdoctypemappings_JsDocTypeMappings@jsdoctypemappings.JsDocTypeMappings
  (result (ref null $jsdoctypemappings.JsDocTypeMappings))
+ ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
+ (local $$instance (ref null $jsdoctypemappings.JsDocTypeMappings))
+ (block
+  ;; JsDocTypeMappings $instance = new JsDocTypeMappings.<init>();
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
+  (local.set $$instance (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.itable)) (i32.const 0) (global.get $jsdoctypemappings.JsDocTypeMappings.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
+  (call $$ctor__void_$p_jsdoctypemappings_JsDocTypeMappings@jsdoctypemappings.JsDocTypeMappings (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsDocTypeMappings.$ctor()
+(func $$ctor__void_$p_jsdoctypemappings_JsDocTypeMappings@jsdoctypemappings.JsDocTypeMappings
+ (param $this (ref null $jsdoctypemappings.JsDocTypeMappings))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
  (block
   ;; jsdoctypemappings.JsDocTypeMappings.$clinit();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
   (call $$clinit__void@jsdoctypemappings.JsDocTypeMappings )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return JsDocTypeMappings.this;
-  ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -789,21 +803,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; NativeType()
-(func $m_<init>__@jsdoctypemappings.JsDocTypeMappings.NativeType
- (param $this (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType))
+;;; NativeType NativeType.$create()
+(func $$create__jsdoctypemappings_JsDocTypeMappings_NativeType@jsdoctypemappings.JsDocTypeMappings.NativeType
  (result (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType))
+ ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
+ (local $$instance (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType))
+ (block
+  ;; NativeType $instance = new NativeType.<init>();
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
+  (local.set $$instance (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.NativeType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.itable)) (i32.const 0) (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
+  (call $$ctor__void_$p_jsdoctypemappings_JsDocTypeMappings_NativeType@jsdoctypemappings.JsDocTypeMappings.NativeType (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NativeType.$ctor()
+(func $$ctor__void_$p_jsdoctypemappings_JsDocTypeMappings_NativeType@jsdoctypemappings.JsDocTypeMappings.NativeType
+ (param $this (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
  (block
   ;; jsdoctypemappings.JsDocTypeMappings.NativeType.$clinit();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
   (call $$clinit__void@jsdoctypemappings.JsDocTypeMappings.NativeType )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return NativeType.this;
-  ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -859,11 +887,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; ExportedType(JsDocTypeMappings $outer_this)
-(func $m_<init>__jsdoctypemappings_JsDocTypeMappings@jsdoctypemappings.JsDocTypeMappings.ExportedType
- (param $this (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
+;;; ExportedType ExportedType.$create(JsDocTypeMappings $outer_this)
+(func $$create__jsdoctypemappings_JsDocTypeMappings__jsdoctypemappings_JsDocTypeMappings_ExportedType@jsdoctypemappings.JsDocTypeMappings.ExportedType
  (param $$outer_this (ref null $jsdoctypemappings.JsDocTypeMappings))
  (result (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
+ ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
+ (local $$instance (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
+ (block
+  ;; ExportedType $instance = new ExportedType.<init>($outer_this);
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
+  (local.set $$instance (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.ExportedType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable)) (i32.const 0) (ref.null $jsdoctypemappings.JsDocTypeMappings) (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
+  (call $$ctor__jsdoctypemappings_JsDocTypeMappings__void_$p_jsdoctypemappings_JsDocTypeMappings_ExportedType@jsdoctypemappings.JsDocTypeMappings.ExportedType (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ExportedType.$ctor(JsDocTypeMappings $outer_this)
+(func $$ctor__jsdoctypemappings_JsDocTypeMappings__void_$p_jsdoctypemappings_JsDocTypeMappings_ExportedType@jsdoctypemappings.JsDocTypeMappings.ExportedType
+ (param $this (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
+ (param $$outer_this (ref null $jsdoctypemappings.JsDocTypeMappings))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
  (block
   ;; jsdoctypemappings.JsDocTypeMappings.ExportedType.$clinit();
@@ -872,12 +918,9 @@
   ;; (ExportedType.this.this = $outer_this);
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
   (struct.set $jsdoctypemappings.JsDocTypeMappings.ExportedType $$outer_this__jsdoctypemappings_JsDocTypeMappings_ExportedType(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ExportedType.this;
-  ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -140,21 +140,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; SuperParent()
-(func $m_<init>__@instancejsmethods.SuperParent
- (param $this (ref null $instancejsmethods.SuperParent))
+;;; SuperParent SuperParent.$create()
+(func $$create__instancejsmethods_SuperParent@instancejsmethods.SuperParent
  (result (ref null $instancejsmethods.SuperParent))
+ ;;@ instancejsmethods/Main.java:24:6
+ (local $$instance (ref null $instancejsmethods.SuperParent))
+ (block
+  ;; SuperParent $instance = new SuperParent.<init>();
+  ;;@ instancejsmethods/Main.java:24:6
+  (local.set $$instance (struct.new_with_rtt $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $instancejsmethods.SuperParent.itable)) (i32.const 0) (global.get $instancejsmethods.SuperParent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instancejsmethods/Main.java:24:6
+  (call $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent (local.get $$instance))
+  ;; return $instance;
+  ;;@ instancejsmethods/Main.java:24:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SuperParent.$ctor()
+(func $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent
+ (param $this (ref null $instancejsmethods.SuperParent))
  ;;@ instancejsmethods/Main.java:24:6
  (block
   ;; instancejsmethods.SuperParent.$clinit();
   ;;@ instancejsmethods/Main.java:24:6
   (call $$clinit__void@instancejsmethods.SuperParent )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ instancejsmethods/Main.java:24:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SuperParent.this;
-  ;;@ instancejsmethods/Main.java:24:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -248,21 +262,35 @@
   $instancejsmethods.SuperParent.vtable)
 )
 
-;;; Parent()
-(func $m_<init>__@instancejsmethods.Parent
- (param $this (ref null $instancejsmethods.Parent))
+;;; Parent Parent.$create()
+(func $$create__instancejsmethods_Parent@instancejsmethods.Parent
  (result (ref null $instancejsmethods.Parent))
+ ;;@ instancejsmethods/Main.java:34:6
+ (local $$instance (ref null $instancejsmethods.Parent))
+ (block
+  ;; Parent $instance = new Parent.<init>();
+  ;;@ instancejsmethods/Main.java:34:6
+  (local.set $$instance (struct.new_with_rtt $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0) (global.get $instancejsmethods.Parent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instancejsmethods/Main.java:34:6
+  (call $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent (local.get $$instance))
+  ;; return $instance;
+  ;;@ instancejsmethods/Main.java:34:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent
+ (param $this (ref null $instancejsmethods.Parent))
  ;;@ instancejsmethods/Main.java:34:6
  (block
   ;; instancejsmethods.Parent.$clinit();
   ;;@ instancejsmethods/Main.java:34:6
   (call $$clinit__void@instancejsmethods.Parent )
-  ;; SuperParent.this.SuperParent.<init>();
+  ;; SuperParent.this.$ctor();
   ;;@ instancejsmethods/Main.java:34:6
-  (drop (call $m_<init>__@instancejsmethods.SuperParent (local.get $this)))
-  ;; return Parent.this;
-  ;;@ instancejsmethods/Main.java:34:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent (local.get $this))
  )
 )
 
@@ -374,21 +402,35 @@
   $instancejsmethods.Parent.vtable)
 )
 
-;;; Child()
-(func $m_<init>__@instancejsmethods.Child
- (param $this (ref null $instancejsmethods.Child))
+;;; Child Child.$create()
+(func $$create__instancejsmethods_Child@instancejsmethods.Child
  (result (ref null $instancejsmethods.Child))
+ ;;@ instancejsmethods/Main.java:68:6
+ (local $$instance (ref null $instancejsmethods.Child))
+ (block
+  ;; Child $instance = new Child.<init>();
+  ;;@ instancejsmethods/Main.java:68:6
+  (local.set $$instance (struct.new_with_rtt $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0) (global.get $instancejsmethods.Child.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instancejsmethods/Main.java:68:6
+  (call $$ctor__void_$p_instancejsmethods_Child@instancejsmethods.Child (local.get $$instance))
+  ;; return $instance;
+  ;;@ instancejsmethods/Main.java:68:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_instancejsmethods_Child@instancejsmethods.Child
+ (param $this (ref null $instancejsmethods.Child))
  ;;@ instancejsmethods/Main.java:68:6
  (block
   ;; instancejsmethods.Child.$clinit();
   ;;@ instancejsmethods/Main.java:68:6
   (call $$clinit__void@instancejsmethods.Child )
-  ;; Parent.this.Parent.<init>();
+  ;; Parent.this.$ctor();
   ;;@ instancejsmethods/Main.java:68:6
-  (drop (call $m_<init>__@instancejsmethods.Parent (local.get $this)))
-  ;; return Child.this;
-  ;;@ instancejsmethods/Main.java:68:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent (local.get $this))
  )
 )
 
@@ -513,21 +555,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Main()
-(func $m_<init>__@instancejsmethods.Main
- (param $this (ref null $instancejsmethods.Main))
+;;; Main Main.$create()
+(func $$create__instancejsmethods_Main@instancejsmethods.Main
  (result (ref null $instancejsmethods.Main))
+ ;;@ instancejsmethods/Main.java:114:13
+ (local $$instance (ref null $instancejsmethods.Main))
+ (block
+  ;; Main $instance = new Main.<init>();
+  ;;@ instancejsmethods/Main.java:114:13
+  (local.set $$instance (struct.new_with_rtt $instancejsmethods.Main (ref.as_non_null (global.get $instancejsmethods.Main.vtable)) (ref.as_non_null (global.get $instancejsmethods.Main.itable)) (i32.const 0) (global.get $instancejsmethods.Main.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instancejsmethods/Main.java:114:13
+  (call $$ctor__void_$p_instancejsmethods_Main@instancejsmethods.Main (local.get $$instance))
+  ;; return $instance;
+  ;;@ instancejsmethods/Main.java:114:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_instancejsmethods_Main@instancejsmethods.Main
+ (param $this (ref null $instancejsmethods.Main))
  ;;@ instancejsmethods/Main.java:114:13
  (block
   ;; instancejsmethods.Main.$clinit();
   ;;@ instancejsmethods/Main.java:114:13
   (call $$clinit__void@instancejsmethods.Main )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ instancejsmethods/Main.java:114:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Main.this;
-  ;;@ instancejsmethods/Main.java:114:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -545,24 +601,24 @@
  (local $this (ref null $instancejsmethods.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancejsmethods.Main.rtt)))
  (block
-  ;; SuperParent sp = new SuperParent.<init>();
+  ;; SuperParent sp = instancejsmethods.SuperParent.$create();
   ;;@ instancejsmethods/Main.java:116:4
-  (local.set $sp (call $m_<init>__@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $instancejsmethods.SuperParent.itable)) (i32.const 0) (global.get $instancejsmethods.SuperParent.rtt))))
-  ;; SuperParent p = new Parent.<init>();
+  (local.set $sp (call $$create__instancejsmethods_SuperParent@instancejsmethods.SuperParent ))
+  ;; SuperParent p = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:117:4
-  (local.set $p (call $m_<init>__@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0) (global.get $instancejsmethods.Parent.rtt))))
-  ;; SuperParent c = new Child.<init>();
+  (local.set $p (call $$create__instancejsmethods_Parent@instancejsmethods.Parent ))
+  ;; SuperParent c = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:118:4
-  (local.set $c (call $m_<init>__@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
-  ;; Parent pp = new Parent.<init>();
+  (local.set $c (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
+  ;; Parent pp = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:119:4
-  (local.set $pp (call $m_<init>__@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0) (global.get $instancejsmethods.Parent.rtt))))
-  ;; Parent cc = new Child.<init>();
+  (local.set $pp (call $$create__instancejsmethods_Parent@instancejsmethods.Parent ))
+  ;; Parent cc = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:120:4
-  (local.set $cc (call $m_<init>__@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
-  ;; MyInterface intf = new Child.<init>();
+  (local.set $cc (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
+  ;; MyInterface intf = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:121:4
-  (local.set $intf (call $m_<init>__@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
+  (local.set $intf (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
   ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:123:4
   (drop (call_ref (local.get $sp)(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))
@@ -604,15 +660,15 @@
   ;; instancejsmethods.Main.$clinit();
   ;;@ instancejsmethods/Main.java:134:46
   (call $$clinit__void@instancejsmethods.Main )
-  ;; SuperParent sp = new SuperParent.<init>();
+  ;; SuperParent sp = instancejsmethods.SuperParent.$create();
   ;;@ instancejsmethods/Main.java:135:4
-  (local.set $sp (call $m_<init>__@instancejsmethods.SuperParent (struct.new_with_rtt $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $instancejsmethods.SuperParent.itable)) (i32.const 0) (global.get $instancejsmethods.SuperParent.rtt))))
-  ;; Parent p = new Parent.<init>();
+  (local.set $sp (call $$create__instancejsmethods_SuperParent@instancejsmethods.SuperParent ))
+  ;; Parent p = instancejsmethods.Parent.$create();
   ;;@ instancejsmethods/Main.java:136:4
-  (local.set $p (call $m_<init>__@instancejsmethods.Parent (struct.new_with_rtt $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0) (global.get $instancejsmethods.Parent.rtt))))
-  ;; Child c = new Child.<init>();
+  (local.set $p (call $$create__instancejsmethods_Parent@instancejsmethods.Parent ))
+  ;; Child c = instancejsmethods.Child.$create();
   ;;@ instancejsmethods/Main.java:137:4
-  (local.set $c (call $m_<init>__@instancejsmethods.Child (struct.new_with_rtt $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0) (global.get $instancejsmethods.Child.rtt))))
+  (local.set $c (call $$create__instancejsmethods_Child@instancejsmethods.Child ))
   ;; sp.fun(12,35);
   ;;@ instancejsmethods/Main.java:139:4
   (drop (call_ref (local.get $sp)(i32.const 12)(i32.const 35)(struct.get $instancejsmethods.SuperParent.vtable $m_fun__int__int__int (struct.get $instancejsmethods.SuperParent $vtable(local.get $sp)))))

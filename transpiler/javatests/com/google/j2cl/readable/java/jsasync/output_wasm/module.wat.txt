@@ -199,24 +199,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; Main()
-(func $m_<init>__@jsasync.Main
- (param $this (ref null $jsasync.Main))
+;;; Main Main.$create()
+(func $$create__jsasync_Main@jsasync.Main
  (result (ref null $jsasync.Main))
+ ;;@ jsasync/Main.java:24:13
+ (local $$instance (ref null $jsasync.Main))
+ (block
+  ;; Main $instance = new Main.<init>();
+  ;;@ jsasync/Main.java:24:13
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main (ref.as_non_null (global.get $jsasync.Main.vtable)) (ref.as_non_null (global.get $jsasync.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $jsasync.Main.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsasync/Main.java:24:13
+  (call $$ctor__void_$p_jsasync_Main@jsasync.Main (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:24:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Main.$ctor()
+(func $$ctor__void_$p_jsasync_Main@jsasync.Main
+ (param $this (ref null $jsasync.Main))
  ;;@ jsasync/Main.java:24:13
  (block
   ;; jsasync.Main.$clinit();
   ;;@ jsasync/Main.java:24:13
   (call $$clinit__void@jsasync.Main )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:24:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; Main.this.$init();
   ;;@ jsasync/Main.java:24:13
   (call $$init__void_$p_jsasync_Main@jsasync.Main (local.get $this))
-  ;; return Main.this;
-  ;;@ jsasync/Main.java:24:13
-  (return (local.get $this))
  )
 )
 
@@ -304,21 +318,21 @@
  (local $this (ref null $jsasync.Main))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
  (block
-  ;; AsyncInterface i = new $LambdaImplementor$1.<init>();
+  ;; AsyncInterface i = jsasync.Main.$LambdaImplementor$1.$create();
   ;;@ jsasync/Main.java:51:4
-  (local.set $i (call $m_<init>__@jsasync.Main.$LambdaImplementor$1 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$1.rtt))))
-  ;; BaseInterface o = new $1.<init>(Main.this);
+  (local.set $i (call $$create__jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1 ))
+  ;; BaseInterface o = jsasync.Main.1.$create(Main.this);
   ;;@ jsasync/Main.java:53:4
-  (local.set $o (call $m_<init>__jsasync_Main@jsasync.Main.1 (struct.new_with_rtt $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt))(local.get $this)))
-  ;; AsyncJsFunctionInterface j = new $LambdaImplementor$2.<init>();
+  (local.set $o (call $$create__jsasync_Main__jsasync_Main_1@jsasync.Main.1 (local.get $this)))
+  ;; AsyncJsFunctionInterface j = jsasync.Main.$LambdaImplementor$2.$create();
   ;;@ jsasync/Main.java:62:4
-  (local.set $j (call $m_<init>__@jsasync.Main.$LambdaImplementor$2 (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$2.rtt))))
-  ;; JsFunctionInterface optimizableJsFunction = new $2.<init>(Main.this);
+  (local.set $j (call $$create__jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2 ))
+  ;; JsFunctionInterface optimizableJsFunction = jsasync.Main.2.$create(Main.this);
   ;;@ jsasync/Main.java:64:4
-  (local.set $optimizableJsFunction (call $m_<init>__jsasync_Main@jsasync.Main.2 (struct.new_with_rtt $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt))(local.get $this)))
-  ;; JsFunctionInterface unoptimizableJsFunction = new $3.<init>(Main.this);
+  (local.set $optimizableJsFunction (call $$create__jsasync_Main__jsasync_Main_2@jsasync.Main.2 (local.get $this)))
+  ;; JsFunctionInterface unoptimizableJsFunction = jsasync.Main.3.$create(Main.this);
   ;;@ jsasync/Main.java:75:4
-  (local.set $unoptimizableJsFunction (call $m_<init>__jsasync_Main@jsasync.Main.3 (struct.new_with_rtt $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt))(local.get $this)))
+  (local.set $unoptimizableJsFunction (call $$create__jsasync_Main__jsasync_Main_3@jsasync.Main.3 (local.get $this)))
  )
 )
 (elem declare func $m_testAsyncLambdas__void_$pp_jsasync@jsasync.Main)
@@ -393,11 +407,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements BaseInterface(Main $outer_this)
-(func $m_<init>__jsasync_Main@jsasync.Main.1
- (param $this (ref null $jsasync.Main.1))
+;;; <anonymous> implements BaseInterface <anonymous> implements BaseInterface.$create(Main $outer_this)
+(func $$create__jsasync_Main__jsasync_Main_1@jsasync.Main.1
  (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.1))
+ ;;@ jsasync/Main.java:54:28
+ (local $$instance (ref null $jsasync.Main.1))
+ (block
+  ;; <anonymous> implements BaseInterface $instance = new $1.<init>($outer_this);
+  ;;@ jsasync/Main.java:54:28
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ jsasync/Main.java:54:28
+  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_1@jsasync.Main.1 (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:54:28
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements BaseInterface.$ctor(Main $outer_this)
+(func $$ctor__jsasync_Main__void_$p_jsasync_Main_1@jsasync.Main.1
+ (param $this (ref null $jsasync.Main.1))
+ (param $$outer_this (ref null $jsasync.Main))
  ;;@ jsasync/Main.java:54:28
  (block
   ;; jsasync.Main.1.$clinit();
@@ -406,12 +438,9 @@
   ;; ($1.this.this = $outer_this);
   ;;@ jsasync/Main.java:54:28
   (struct.set $jsasync.Main.1 $$outer_this__jsasync_Main_1(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:54:28
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1.this;
-  ;;@ jsasync/Main.java:54:28
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -484,11 +513,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
-(func $m_<init>__jsasync_Main@jsasync.Main.2
- (param $this (ref null $jsasync.Main.2))
+;;; <anonymous> implements JsFunctionInterface <anonymous> implements JsFunctionInterface.$create(Main $outer_this)
+(func $$create__jsasync_Main__jsasync_Main_2@jsasync.Main.2
  (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.2))
+ ;;@ jsasync/Main.java:65:34
+ (local $$instance (ref null $jsasync.Main.2))
+ (block
+  ;; <anonymous> implements JsFunctionInterface $instance = new $2.<init>($outer_this);
+  ;;@ jsasync/Main.java:65:34
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ jsasync/Main.java:65:34
+  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_2@jsasync.Main.2 (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:65:34
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements JsFunctionInterface.$ctor(Main $outer_this)
+(func $$ctor__jsasync_Main__void_$p_jsasync_Main_2@jsasync.Main.2
+ (param $this (ref null $jsasync.Main.2))
+ (param $$outer_this (ref null $jsasync.Main))
  ;;@ jsasync/Main.java:65:34
  (block
   ;; jsasync.Main.2.$clinit();
@@ -497,12 +544,9 @@
   ;; ($2.this.this = $outer_this);
   ;;@ jsasync/Main.java:65:34
   (struct.set $jsasync.Main.2 $$outer_this__jsasync_Main_2(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:65:34
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $2.this;
-  ;;@ jsasync/Main.java:65:34
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -575,11 +619,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements JsFunctionInterface(Main $outer_this)
-(func $m_<init>__jsasync_Main@jsasync.Main.3
- (param $this (ref null $jsasync.Main.3))
+;;; <anonymous> implements JsFunctionInterface <anonymous> implements JsFunctionInterface.$create(Main $outer_this)
+(func $$create__jsasync_Main__jsasync_Main_3@jsasync.Main.3
  (param $$outer_this (ref null $jsasync.Main))
  (result (ref null $jsasync.Main.3))
+ ;;@ jsasync/Main.java:76:34
+ (local $$instance (ref null $jsasync.Main.3))
+ (block
+  ;; <anonymous> implements JsFunctionInterface $instance = new $3.<init>($outer_this);
+  ;;@ jsasync/Main.java:76:34
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ jsasync/Main.java:76:34
+  (call $$ctor__jsasync_Main__void_$p_jsasync_Main_3@jsasync.Main.3 (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:76:34
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements JsFunctionInterface.$ctor(Main $outer_this)
+(func $$ctor__jsasync_Main__void_$p_jsasync_Main_3@jsasync.Main.3
+ (param $this (ref null $jsasync.Main.3))
+ (param $$outer_this (ref null $jsasync.Main))
  ;;@ jsasync/Main.java:76:34
  (block
   ;; jsasync.Main.3.$clinit();
@@ -588,12 +650,9 @@
   ;; ($3.this.this = $outer_this);
   ;;@ jsasync/Main.java:76:34
   (struct.set $jsasync.Main.3 $$outer_this__jsasync_Main_3(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:76:34
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $3.this;
-  ;;@ jsasync/Main.java:76:34
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -896,21 +955,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Promise()
-(func $m_<init>__@jsasync.Main.Promise
- (param $this (ref null $jsasync.Main.Promise))
+;;; Promise<T> Promise.$create()
+(func $$create__jsasync_Main_Promise@jsasync.Main.Promise
  (result (ref null $jsasync.Main.Promise))
+ ;;@ jsasync/Main.java:119:23
+ (local $$instance (ref null $jsasync.Main.Promise))
+ (block
+  ;; Promise<T> $instance = new Promise.<init>();
+  ;;@ jsasync/Main.java:119:23
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.Promise (ref.as_non_null (global.get $jsasync.Main.Promise.vtable)) (ref.as_non_null (global.get $jsasync.Main.Promise.itable)) (i32.const 0) (global.get $jsasync.Main.Promise.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsasync/Main.java:119:23
+  (call $$ctor__void_$p_jsasync_Main_Promise@jsasync.Main.Promise (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:119:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Promise.$ctor()
+(func $$ctor__void_$p_jsasync_Main_Promise@jsasync.Main.Promise
+ (param $this (ref null $jsasync.Main.Promise))
  ;;@ jsasync/Main.java:119:23
  (block
   ;; jsasync.Main.Promise.$clinit();
   ;;@ jsasync/Main.java:119:23
   (call $$clinit__void@jsasync.Main.Promise )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:119:23
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Promise.this;
-  ;;@ jsasync/Main.java:119:23
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -972,21 +1045,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$1()
-(func $m_<init>__@jsasync.Main.$LambdaImplementor$1
- (param $this (ref null $jsasync.Main.$LambdaImplementor$1))
+;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
+(func $$create__jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1
  (result (ref null $jsasync.Main.$LambdaImplementor$1))
+ ;;@ jsasync/Main.java:51:23
+ (local $$instance (ref null $jsasync.Main.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;;@ jsasync/Main.java:51:23
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$1.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsasync/Main.java:51:23
+  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:51:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1
+ (param $this (ref null $jsasync.Main.$LambdaImplementor$1))
  ;;@ jsasync/Main.java:51:23
  (block
   ;; jsasync.Main.$LambdaImplementor$1.$clinit();
   ;;@ jsasync/Main.java:51:23
   (call $$clinit__void@jsasync.Main.$LambdaImplementor$1 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:51:23
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$1.this;
-  ;;@ jsasync/Main.java:51:23
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -1058,21 +1145,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$2()
-(func $m_<init>__@jsasync.Main.$LambdaImplementor$2
- (param $this (ref null $jsasync.Main.$LambdaImplementor$2))
+;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
+(func $$create__jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2
  (result (ref null $jsasync.Main.$LambdaImplementor$2))
+ ;;@ jsasync/Main.java:62:33
+ (local $$instance (ref null $jsasync.Main.$LambdaImplementor$2))
+ (block
+  ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>();
+  ;;@ jsasync/Main.java:62:33
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$2.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsasync/Main.java:62:33
+  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2 (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:62:33
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$2.$ctor()
+(func $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2
+ (param $this (ref null $jsasync.Main.$LambdaImplementor$2))
  ;;@ jsasync/Main.java:62:33
  (block
   ;; jsasync.Main.$LambdaImplementor$2.$clinit();
   ;;@ jsasync/Main.java:62:33
   (call $$clinit__void@jsasync.Main.$LambdaImplementor$2 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsasync/Main.java:62:33
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$2.this;
-  ;;@ jsasync/Main.java:62:33
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

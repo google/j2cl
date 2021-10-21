@@ -67,21 +67,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; GenericClass()
-(func $m_<init>__@subclassgenericclass.GenericClass
- (param $this (ref null $subclassgenericclass.GenericClass))
+;;; GenericClass<T> GenericClass.$create()
+(func $$create__subclassgenericclass_GenericClass@subclassgenericclass.GenericClass
  (result (ref null $subclassgenericclass.GenericClass))
+ ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+ (local $$instance (ref null $subclassgenericclass.GenericClass))
+ (block
+  ;; GenericClass<T> $instance = new GenericClass.<init>();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.GenericClass (ref.as_non_null (global.get $subclassgenericclass.GenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.GenericClass.itable)) (i32.const 0) (global.get $subclassgenericclass.GenericClass.rtt)))
+  ;; $instance.$ctor();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+  (call $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass (local.get $$instance))
+  ;; return $instance;
+  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericClass.$ctor()
+(func $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass
+ (param $this (ref null $subclassgenericclass.GenericClass))
  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
  (block
   ;; subclassgenericclass.GenericClass.$clinit();
   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
   (call $$clinit__void@subclassgenericclass.GenericClass )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return GenericClass.this;
-  ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -136,21 +150,35 @@
   $subclassgenericclass.GenericClass.vtable)
 )
 
-;;; GenericSubclassGenericClass()
-(func $m_<init>__@subclassgenericclass.GenericSubclassGenericClass
- (param $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
+;;; GenericSubclassGenericClass<T> GenericSubclassGenericClass.$create()
+(func $$create__subclassgenericclass_GenericSubclassGenericClass@subclassgenericclass.GenericSubclassGenericClass
  (result (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+ (local $$instance (ref null $subclassgenericclass.GenericSubclassGenericClass))
+ (block
+  ;; GenericSubclassGenericClass<T> $instance = new GenericSubclassGenericClass.<init>();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.GenericSubclassGenericClass (ref.as_non_null (global.get $subclassgenericclass.GenericSubclassGenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.GenericSubclassGenericClass.itable)) (i32.const 0) (global.get $subclassgenericclass.GenericSubclassGenericClass.rtt)))
+  ;; $instance.$ctor();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+  (call $$ctor__void_$p_subclassgenericclass_GenericSubclassGenericClass@subclassgenericclass.GenericSubclassGenericClass (local.get $$instance))
+  ;; return $instance;
+  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericSubclassGenericClass.$ctor()
+(func $$ctor__void_$p_subclassgenericclass_GenericSubclassGenericClass@subclassgenericclass.GenericSubclassGenericClass
+ (param $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
  (block
   ;; subclassgenericclass.GenericSubclassGenericClass.$clinit();
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
   (call $$clinit__void@subclassgenericclass.GenericSubclassGenericClass )
-  ;; GenericClass.this.GenericClass.<init>();
+  ;; GenericClass.this.$ctor();
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-  (drop (call $m_<init>__@subclassgenericclass.GenericClass (local.get $this)))
-  ;; return GenericSubclassGenericClass.this;
-  ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass (local.get $this))
  )
 )
 
@@ -205,21 +233,35 @@
   $subclassgenericclass.GenericClass.vtable)
 )
 
-;;; SubclassGenericClass()
-(func $m_<init>__@subclassgenericclass.SubclassGenericClass
- (param $this (ref null $subclassgenericclass.SubclassGenericClass))
+;;; SubclassGenericClass SubclassGenericClass.$create()
+(func $$create__subclassgenericclass_SubclassGenericClass@subclassgenericclass.SubclassGenericClass
  (result (ref null $subclassgenericclass.SubclassGenericClass))
+ ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+ (local $$instance (ref null $subclassgenericclass.SubclassGenericClass))
+ (block
+  ;; SubclassGenericClass $instance = new SubclassGenericClass.<init>();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.SubclassGenericClass (ref.as_non_null (global.get $subclassgenericclass.SubclassGenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.SubclassGenericClass.itable)) (i32.const 0) (global.get $subclassgenericclass.SubclassGenericClass.rtt)))
+  ;; $instance.$ctor();
+  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+  (call $$ctor__void_$p_subclassgenericclass_SubclassGenericClass@subclassgenericclass.SubclassGenericClass (local.get $$instance))
+  ;; return $instance;
+  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SubclassGenericClass.$ctor()
+(func $$ctor__void_$p_subclassgenericclass_SubclassGenericClass@subclassgenericclass.SubclassGenericClass
+ (param $this (ref null $subclassgenericclass.SubclassGenericClass))
  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
  (block
   ;; subclassgenericclass.SubclassGenericClass.$clinit();
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
   (call $$clinit__void@subclassgenericclass.SubclassGenericClass )
-  ;; GenericClass.this.GenericClass.<init>();
+  ;; GenericClass.this.$ctor();
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-  (drop (call $m_<init>__@subclassgenericclass.GenericClass (local.get $this)))
-  ;; return SubclassGenericClass.this;
-  ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass (local.get $this))
  )
 )
 

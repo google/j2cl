@@ -886,24 +886,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; Lambdas()
-(func $m_<init>__@lambdas.Lambdas
- (param $this (ref null $lambdas.Lambdas))
+;;; Lambdas Lambdas.$create()
+(func $$create__lambdas_Lambdas@lambdas.Lambdas
  (result (ref null $lambdas.Lambdas))
+ ;;@ lambdas/Lambdas.java:24:13
+ (local $$instance (ref null $lambdas.Lambdas))
+ (block
+  ;; Lambdas $instance = new Lambdas.<init>();
+  ;;@ lambdas/Lambdas.java:24:13
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas (ref.as_non_null (global.get $lambdas.Lambdas.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.itable)) (i32.const 0) (i32.const 0) (global.get $lambdas.Lambdas.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:24:13
+  (call $$ctor__void_$p_lambdas_Lambdas@lambdas.Lambdas (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:24:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Lambdas.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas@lambdas.Lambdas
+ (param $this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:24:13
  (block
   ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:24:13
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:24:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; Lambdas.this.$init();
   ;;@ lambdas/Lambdas.java:24:13
   (call $$init__void_$p_lambdas_Lambdas@lambdas.Lambdas (local.get $this))
-  ;; return Lambdas.this;
-  ;;@ lambdas/Lambdas.java:24:13
-  (return (local.get $this))
  )
 )
 
@@ -933,9 +947,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; Lambdas.this.call(new $LambdaImplementor$1.<init>(),10);
+  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$1.$create(),10);
   ;;@ lambdas/Lambdas.java:36:4
-  (drop (call_ref (local.get $this)(call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$1 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$1 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$1.rtt)))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas_$LambdaImplementor$1@lambdas.Lambdas.$LambdaImplementor$1 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaExpressionStyle__void@lambdas.Lambdas)
@@ -948,9 +962,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; Lambdas.this.call(new $LambdaImplementor$2.<init>(),10);
+  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$2.$create(),10);
   ;;@ lambdas/Lambdas.java:40:4
-  (drop (call_ref (local.get $this)(call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$2 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$2 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$2.rtt)))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas_$LambdaImplementor$2@lambdas.Lambdas.$LambdaImplementor$2 )(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaBlockStyle__void@lambdas.Lambdas)
@@ -963,9 +977,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; Lambdas.this.call(new $LambdaImplementor$3.<init>(Lambdas.this),10);
+  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$3.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:48:4
-  (drop (call_ref (local.get $this)(call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$3 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$3 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$3.rtt))(local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$3@lambdas.Lambdas.$LambdaImplementor$3 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCaptureField__void@lambdas.Lambdas)
@@ -982,9 +996,9 @@
   ;; int x = 1;
   ;;@ lambdas/Lambdas.java:52:4
   (local.set $x (i32.const 1))
-  ;; Lambdas.this.call(new $LambdaImplementor$4.<init>(x),10);
+  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$4.$create(x),10);
   ;;@ lambdas/Lambdas.java:53:4
-  (drop (call_ref (local.get $this)(call $m_<init>__int@lambdas.Lambdas.$LambdaImplementor$4 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$4 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.itable)) (i32.const 0) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$4.rtt))(local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__int__lambdas_Lambdas_$LambdaImplementor$4@lambdas.Lambdas.$LambdaImplementor$4 (local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCaptureLocal__void@lambdas.Lambdas)
@@ -1001,9 +1015,9 @@
   ;; int x = 1;
   ;;@ lambdas/Lambdas.java:57:4
   (local.set $x (i32.const 1))
-  ;; Lambdas.this.call(new $LambdaImplementor$5.<init>(Lambdas.this,x),10);
+  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$5.$create(Lambdas.this,x),10);
   ;;@ lambdas/Lambdas.java:58:4
-  (drop (call_ref (local.get $this)(call $m_<init>__lambdas_Lambdas__int@lambdas.Lambdas.$LambdaImplementor$5 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$5 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$5.rtt))(local.get $this)(local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas__int__lambdas_Lambdas_$LambdaImplementor$5@lambdas.Lambdas.$LambdaImplementor$5 (local.get $this)(local.get $x))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCaptureFieldAndLocal__void@lambdas.Lambdas)
@@ -1028,9 +1042,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; Lambdas.this.call(new $LambdaImplementor$6.<init>(Lambdas.this),10);
+  ;; Lambdas.this.call(lambdas.Lambdas.$LambdaImplementor$6.$create(Lambdas.this),10);
   ;;@ lambdas/Lambdas.java:69:4
-  (drop (call_ref (local.get $this)(call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$6 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$6 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$6.rtt))(local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$6@lambdas.Lambdas.$LambdaImplementor$6 (local.get $this))(i32.const 10)(struct.get $lambdas.Lambdas.vtable $m_call__lambdas_Lambdas_FunctionalInterface__int__int (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_testLambdaCallOuterFunction__void@lambdas.Lambdas)
@@ -1043,9 +1057,9 @@
   ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:79:49
   (call $$clinit__void@lambdas.Lambdas )
-  ;; FunctionalInterface f = new $LambdaImplementor$7.<init>();
+  ;; FunctionalInterface f = lambdas.Lambdas.$LambdaImplementor$7.$create();
   ;;@ lambdas/Lambdas.java:80:4
-  (local.set $f (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$7 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$7 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$7.rtt))))
+  (local.set $f (call $$create__lambdas_Lambdas_$LambdaImplementor$7@lambdas.Lambdas.$LambdaImplementor$7 ))
  )
 )
 
@@ -1058,9 +1072,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; Functional<T> wrapped = new $LambdaImplementor$8.<init>(Lambdas.this);
+  ;; Functional<T> wrapped = lambdas.Lambdas.$LambdaImplementor$8.$create(Lambdas.this);
   ;;@ lambdas/Lambdas.java:89:4
-  (local.set $wrapped (call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$8 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$8 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$8.rtt))(local.get $this)))
+  (local.set $wrapped (call $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$8@lambdas.Lambdas.$LambdaImplementor$8 (local.get $this)))
  )
 )
 (elem declare func $m_testInstanceMethodTypeVariableThroughLambda__void@lambdas.Lambdas)
@@ -1073,9 +1087,9 @@
   ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:100:69
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Functional<T> wrapped = new $LambdaImplementor$9.<init>();
+  ;; Functional<T> wrapped = lambdas.Lambdas.$LambdaImplementor$9.$create();
   ;;@ lambdas/Lambdas.java:101:4
-  (local.set $wrapped (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$9 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$9 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$9.rtt))))
+  (local.set $wrapped (call $$create__lambdas_Lambdas_$LambdaImplementor$9@lambdas.Lambdas.$LambdaImplementor$9 ))
  )
 )
 
@@ -1157,21 +1171,21 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; Lambdas.this.callWithTypeVariable(new $LambdaImplementor$10.<init>(),new Error.<init>());
+  ;; Lambdas.this.callWithTypeVariable(lambdas.Lambdas.$LambdaImplementor$10.$create(),java.lang.Error.$create());
   ;;@ lambdas/Lambdas.java:150:4
-  (drop (call_ref (local.get $this)(call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$10 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$10 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$10.rtt)))(call $m_<init>__@java.lang.Error (struct.new_with_rtt $java.lang.Error (ref.as_non_null (global.get $java.lang.Error.vtable)) (ref.as_non_null (global.get $java.lang.Error.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
-  ;; Lambdas.this.callParameterized(new $LambdaImplementor$11.<init>(),new Error.<init>());
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas_$LambdaImplementor$10@lambdas.Lambdas.$LambdaImplementor$10 )(call $$create__java_lang_Error@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callWithTypeVariable__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Object__java_lang_Object (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  ;; Lambdas.this.callParameterized(lambdas.Lambdas.$LambdaImplementor$11.$create(),java.lang.Error.$create());
   ;;@ lambdas/Lambdas.java:151:4
-  (drop (call_ref (local.get $this)(call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$11 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$11 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$11.rtt)))(call $m_<init>__@java.lang.Error (struct.new_with_rtt $java.lang.Error (ref.as_non_null (global.get $java.lang.Error.vtable)) (ref.as_non_null (global.get $java.lang.Error.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.Error.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
-  ;; lambdas.Lambdas.callTypeVariableWithBounds(new $LambdaImplementor$12.<init>(),((Enum<T>) null));
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas_$LambdaImplementor$11@lambdas.Lambdas.$LambdaImplementor$11 )(call $$create__java_lang_Error@java.lang.Error )(struct.get $lambdas.Lambdas.vtable $m_callParameterized__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Error__java_lang_Error (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  ;; lambdas.Lambdas.callTypeVariableWithBounds(lambdas.Lambdas.$LambdaImplementor$12.$create(),((Enum<T>) null));
   ;;@ lambdas/Lambdas.java:152:4
-  (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$12 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$12 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$12.rtt)))(ref.cast (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt))))
-  ;; Lambdas.this.callWithBiFunction(new $LambdaImplementor$13.<init>());
+  (drop (call $m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum__java_lang_Enum@lambdas.Lambdas (call $$create__lambdas_Lambdas_$LambdaImplementor$12@lambdas.Lambdas.$LambdaImplementor$12 )(ref.cast (ref.null $java.lang.Object) (global.get $java.lang.Enum.rtt))))
+  ;; Lambdas.this.callWithBiFunction(lambdas.Lambdas.$LambdaImplementor$13.$create());
   ;;@ lambdas/Lambdas.java:153:4
-  (drop (call_ref (local.get $this)(call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$13 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$13 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$13.rtt)))(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
-  ;; Function<? super T, ?> f = new $LambdaImplementor$14.<init>();
+  (drop (call_ref (local.get $this)(call $$create__lambdas_Lambdas_$LambdaImplementor$13@lambdas.Lambdas.$LambdaImplementor$13 )(struct.get $lambdas.Lambdas.vtable $m_callWithBiFunction__lambdas_Lambdas_BiFunction__lambdas_Lambdas_GenericFunctionalInterface_$pp_lambdas (struct.get $lambdas.Lambdas $vtable(local.get $this)))))
+  ;; Function<? super T, ?> f = lambdas.Lambdas.$LambdaImplementor$14.$create();
   ;;@ lambdas/Lambdas.java:157:4
-  (local.set $f (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$14 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$14 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$14.rtt))))
+  (local.set $f (call $$create__lambdas_Lambdas_$LambdaImplementor$14@lambdas.Lambdas.$LambdaImplementor$14 ))
  )
 )
 (elem declare func $m_testLambdaWithGenerics__void@lambdas.Lambdas)
@@ -1198,9 +1212,9 @@
   ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:164:53
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Function<Object, ?> f = new $LambdaImplementor$15.<init>();
+  ;; Function<Object, ?> f = lambdas.Lambdas.$LambdaImplementor$15.$create();
   ;;@ lambdas/Lambdas.java:165:4
-  (local.set $f (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$15 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$15.rtt))))
+  (local.set $f (call $$create__lambdas_Lambdas_$LambdaImplementor$15@lambdas.Lambdas.$LambdaImplementor$15 ))
  )
 )
 
@@ -1213,9 +1227,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; FunctionalInterfaceWithMethodReturningVoid runner = new $LambdaImplementor$16.<init>();
+  ;; FunctionalInterfaceWithMethodReturningVoid runner = lambdas.Lambdas.$LambdaImplementor$16.$create();
   ;;@ lambdas/Lambdas.java:173:4
-  (local.set $runner (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$16 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$16.rtt))))
+  (local.set $runner (call $$create__lambdas_Lambdas_$LambdaImplementor$16@lambdas.Lambdas.$LambdaImplementor$16 ))
  )
 )
 (elem declare func $m_testLambdaReturningVoidAsExpression__void@lambdas.Lambdas)
@@ -1229,9 +1243,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; FunctionalInterfaceWithMethodReturningVoid runner = new $LambdaImplementor$17.<init>(Lambdas.this);
+  ;; FunctionalInterfaceWithMethodReturningVoid runner = lambdas.Lambdas.$LambdaImplementor$17.$create(Lambdas.this);
   ;;@ lambdas/Lambdas.java:177:4
-  (local.set $runner (call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$17 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$17.rtt))(local.get $this)))
+  (local.set $runner (call $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$17@lambdas.Lambdas.$LambdaImplementor$17 (local.get $this)))
  )
 )
 (elem declare func $m_testAnonymousInsideLambda__void@lambdas.Lambdas)
@@ -1249,9 +1263,9 @@
   (if (ref.is_null (global.get $f_identityFunction__lambdas_Lambdas_))
    (then
     (block
-     ;; (lambdas.Lambdas.identityFunction = new IdentityFunction.<init>());
+     ;; (lambdas.Lambdas.identityFunction = lambdas.Lambdas.IdentityFunction.$create());
      ;;@ lambdas/Lambdas.java:228:6
-     (global.set $f_identityFunction__lambdas_Lambdas_ (call $m_<init>__@lambdas.Lambdas.IdentityFunction (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.itable)) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt))))
+     (global.set $f_identityFunction__lambdas_Lambdas_ (call $$create__lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction ))
     )
    )
   )
@@ -1272,15 +1286,15 @@
   ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:253:44
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Thenable<String> thenable = new $LambdaImplementor$18.<init>();
+  ;; Thenable<String> thenable = lambdas.Lambdas.$LambdaImplementor$18.$create();
   ;;@ lambdas/Lambdas.java:254:4
-  (local.set $thenable (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$18 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$18.rtt))))
-  ;; AnotherThenable<String> otherThenable = new $LambdaImplementor$19.<init>();
+  (local.set $thenable (call $$create__lambdas_Lambdas_$LambdaImplementor$18@lambdas.Lambdas.$LambdaImplementor$18 ))
+  ;; AnotherThenable<String> otherThenable = lambdas.Lambdas.$LambdaImplementor$19.$create();
   ;;@ lambdas/Lambdas.java:255:4
-  (local.set $otherThenable (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$19 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$19.rtt))))
-  ;; JsSupplier<Integer> stringJsSupplier = new $LambdaImplementor$20.<init>();
+  (local.set $otherThenable (call $$create__lambdas_Lambdas_$LambdaImplementor$19@lambdas.Lambdas.$LambdaImplementor$19 ))
+  ;; JsSupplier<Integer> stringJsSupplier = lambdas.Lambdas.$LambdaImplementor$20.$create();
   ;;@ lambdas/Lambdas.java:256:4
-  (local.set $stringJsSupplier (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$20 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$20.rtt))))
+  (local.set $stringJsSupplier (call $$create__lambdas_Lambdas_$LambdaImplementor$20@lambdas.Lambdas.$LambdaImplementor$20 ))
   ;; stringJsSupplier.get();
   ;;@ lambdas/Lambdas.java:257:4
   (drop (call_ref (local.get $stringJsSupplier)(struct.get $lambdas.Lambdas.JsSupplier.vtable $m_get__java_lang_Number (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $stringJsSupplier)) (i32.const 0)) (rtt.canon $lambdas.Lambdas.JsSupplier.vtable)) )))
@@ -1304,15 +1318,15 @@
   ;; lambdas.Lambdas.$clinit();
   ;;@ lambdas/Lambdas.java:272:53
   (call $$clinit__void@lambdas.Lambdas )
-  ;; Object o = (((GenericFunctionalInterface<String>&JustADefaultT<Number>)) new $LambdaImplementor$21.<init>());
+  ;; Object o = (((GenericFunctionalInterface<String>&JustADefaultT<Number>)) lambdas.Lambdas.$LambdaImplementor$21.$create());
   ;;@ lambdas/Lambdas.java:275:4
-  (local.set $o (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$21 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$21.rtt))))
-  ;; (o = (((GenericFunctionalInterface<String>&JustADefaultS<Number>)) new $LambdaImplementor$22.<init>()));
+  (local.set $o (call $$create__lambdas_Lambdas_$LambdaImplementor$21@lambdas.Lambdas.$LambdaImplementor$21 ))
+  ;; (o = (((GenericFunctionalInterface<String>&JustADefaultS<Number>)) lambdas.Lambdas.$LambdaImplementor$22.$create()));
   ;;@ lambdas/Lambdas.java:278:4
-  (local.set $o (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$22 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$22 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$22.rtt))))
-  ;; (o = (((GenericFunctionalInterface<U>&JustADefaultS<V>)) new $LambdaImplementor$23.<init>()));
+  (local.set $o (call $$create__lambdas_Lambdas_$LambdaImplementor$22@lambdas.Lambdas.$LambdaImplementor$22 ))
+  ;; (o = (((GenericFunctionalInterface<U>&JustADefaultS<V>)) lambdas.Lambdas.$LambdaImplementor$23.$create()));
   ;;@ lambdas/Lambdas.java:282:4
-  (local.set $o (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$23 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$23 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$23.rtt))))
+  (local.set $o (call $$create__lambdas_Lambdas_$LambdaImplementor$23@lambdas.Lambdas.$LambdaImplementor$23 ))
  )
 )
 
@@ -1325,9 +1339,9 @@
  (local $this (ref null $lambdas.Lambdas))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.rtt)))
  (block
-  ;; Object o = (((BiFunction<String, String, String>&MarkerWithDefaultMethod)) new $LambdaImplementor$24.<init>());
+  ;; Object o = (((BiFunction<String, String, String>&MarkerWithDefaultMethod)) lambdas.Lambdas.$LambdaImplementor$24.$create());
   ;;@ lambdas/Lambdas.java:291:4
-  (local.set $o (call $m_<init>__@lambdas.Lambdas.$LambdaImplementor$24 (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$24 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$24.rtt))))
+  (local.set $o (call $$create__lambdas_Lambdas_$LambdaImplementor$24@lambdas.Lambdas.$LambdaImplementor$24 ))
  )
 )
 (elem declare func $m_testDefaultMethodsInIntersectionAdaptor__void@lambdas.Lambdas)
@@ -1471,11 +1485,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements Functional<T>(Lambdas $outer_this)
-(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.1
- (param $this (ref null $lambdas.Lambdas.1))
+;;; <anonymous> implements Functional<T><T> <anonymous> implements Functional<T>.$create(Lambdas $outer_this)
+(func $$create__lambdas_Lambdas__lambdas_Lambdas_1@lambdas.Lambdas.1
  (param $$outer_this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.1))
+ ;;@ lambdas/Lambdas.java:91:32
+ (local $$instance (ref null $lambdas.Lambdas.1))
+ (block
+  ;; <anonymous> implements Functional<T><T> $instance = new $1.<init>($outer_this);
+  ;;@ lambdas/Lambdas.java:91:32
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.1 (ref.as_non_null (global.get $lambdas.Lambdas.1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.1.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.1.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ lambdas/Lambdas.java:91:32
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_1@lambdas.Lambdas.1 (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:91:32
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Functional<T>.$ctor(Lambdas $outer_this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_1@lambdas.Lambdas.1
+ (param $this (ref null $lambdas.Lambdas.1))
+ (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:91:32
  (block
   ;; lambdas.Lambdas.1.$clinit();
@@ -1484,12 +1516,9 @@
   ;; ($1.this.this = $outer_this);
   ;;@ lambdas/Lambdas.java:91:32
   (struct.set $lambdas.Lambdas.1 $$outer_this__lambdas_Lambdas_1(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:91:32
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1.this;
-  ;;@ lambdas/Lambdas.java:91:32
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -1562,21 +1591,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements Functional<T>()
-(func $m_<init>__@lambdas.Lambdas.2
- (param $this (ref null $lambdas.Lambdas.2))
+;;; <anonymous> implements Functional<T><T> <anonymous> implements Functional<T>.$create()
+(func $$create__lambdas_Lambdas_2@lambdas.Lambdas.2
  (result (ref null $lambdas.Lambdas.2))
+ ;;@ lambdas/Lambdas.java:103:32
+ (local $$instance (ref null $lambdas.Lambdas.2))
+ (block
+  ;; <anonymous> implements Functional<T><T> $instance = new $2.<init>();
+  ;;@ lambdas/Lambdas.java:103:32
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.2 (ref.as_non_null (global.get $lambdas.Lambdas.2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.2.itable)) (i32.const 0) (global.get $lambdas.Lambdas.2.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:103:32
+  (call $$ctor__void_$p_lambdas_Lambdas_2@lambdas.Lambdas.2 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:103:32
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements Functional<T>.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_2@lambdas.Lambdas.2
+ (param $this (ref null $lambdas.Lambdas.2))
  ;;@ lambdas/Lambdas.java:103:32
  (block
   ;; lambdas.Lambdas.2.$clinit();
   ;;@ lambdas/Lambdas.java:103:32
   (call $$clinit__void@lambdas.Lambdas.2 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:103:32
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $2.this;
-  ;;@ lambdas/Lambdas.java:103:32
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -1683,9 +1726,9 @@
  (result (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:136:36
  (block
-  ;; return new $LambdaImplementor$25.<init>(BiFunction.this,after);
+  ;; return lambdas.Lambdas.BiFunction.$LambdaImplementor$25.$create(BiFunction.this,after);
   ;;@ lambdas/Lambdas.java:137:6
-  (return (call $m_<init>__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function@lambdas.Lambdas.BiFunction.$LambdaImplementor$25 (struct.new_with_rtt $lambdas.Lambdas.BiFunction.$LambdaImplementor$25 (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$25.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$25.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$25.rtt))(local.get $this)(local.get $after)))
+  (return (call $$create__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction_$LambdaImplementor$25@lambdas.Lambdas.BiFunction.$LambdaImplementor$25 (local.get $this)(local.get $after)))
  )
 )
 (elem declare func $m_andThen__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction@lambdas.Lambdas.BiFunction)
@@ -1734,9 +1777,9 @@
   ;; lambdas.Lambdas.Function.$clinit();
   ;;@ lambdas/Lambdas.java:142:41
   (call $$clinit__void@lambdas.Lambdas.Function )
-  ;; return new $LambdaImplementor$26.<init>();
+  ;; return lambdas.Lambdas.Function.$LambdaImplementor$26.$create();
   ;;@ lambdas/Lambdas.java:143:6
-  (return (call $m_<init>__@lambdas.Lambdas.Function.$LambdaImplementor$26 (struct.new_with_rtt $lambdas.Lambdas.Function.$LambdaImplementor$26 (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$26.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$26.itable)) (i32.const 0) (global.get $lambdas.Lambdas.Function.$LambdaImplementor$26.rtt))))
+  (return (call $$create__lambdas_Lambdas_Function_$LambdaImplementor$26@lambdas.Lambdas.Function.$LambdaImplementor$26 ))
  )
 )
 
@@ -1822,11 +1865,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> extends Object(Lambdas $outer_this)
-(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.3
- (param $this (ref null $lambdas.Lambdas.3))
+;;; <anonymous> extends Object <anonymous> extends Object.$create(Lambdas $outer_this)
+(func $$create__lambdas_Lambdas__lambdas_Lambdas_3@lambdas.Lambdas.3
  (param $$outer_this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.3))
+ ;;@ lambdas/Lambdas.java:177:75
+ (local $$instance (ref null $lambdas.Lambdas.3))
+ (block
+  ;; <anonymous> extends Object $instance = new $3.<init>($outer_this);
+  ;;@ lambdas/Lambdas.java:177:75
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.3 (ref.as_non_null (global.get $lambdas.Lambdas.3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.3.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.3.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ lambdas/Lambdas.java:177:75
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_3@lambdas.Lambdas.3 (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:177:75
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor(Lambdas $outer_this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_3@lambdas.Lambdas.3
+ (param $this (ref null $lambdas.Lambdas.3))
+ (param $$outer_this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:177:75
  (block
   ;; lambdas.Lambdas.3.$clinit();
@@ -1835,12 +1896,9 @@
   ;; ($3.this.this = $outer_this);
   ;;@ lambdas/Lambdas.java:177:75
   (struct.set $lambdas.Lambdas.3 $$outer_this__lambdas_Lambdas_3(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:177:75
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $3.this;
-  ;;@ lambdas/Lambdas.java:177:75
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -1897,21 +1955,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Parent()
-(func $m_<init>__@lambdas.Lambdas.Parent
- (param $this (ref null $lambdas.Lambdas.Parent))
+;;; Parent Parent.$create()
+(func $$create__lambdas_Lambdas_Parent@lambdas.Lambdas.Parent
  (result (ref null $lambdas.Lambdas.Parent))
+ ;;@ lambdas/Lambdas.java:180:23
+ (local $$instance (ref null $lambdas.Lambdas.Parent))
+ (block
+  ;; Parent $instance = new Parent.<init>();
+  ;;@ lambdas/Lambdas.java:180:23
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.Parent (ref.as_non_null (global.get $lambdas.Lambdas.Parent.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Parent.itable)) (i32.const 0) (i32.const 0) (global.get $lambdas.Lambdas.Parent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:180:23
+  (call $$ctor__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:180:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent
+ (param $this (ref null $lambdas.Lambdas.Parent))
  ;;@ lambdas/Lambdas.java:180:23
  (block
   ;; lambdas.Lambdas.Parent.$clinit();
   ;;@ lambdas/Lambdas.java:180:23
   (call $$clinit__void@lambdas.Lambdas.Parent )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:180:23
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Parent.this;
-  ;;@ lambdas/Lambdas.java:180:23
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -1981,18 +2053,32 @@
   $lambdas.Lambdas.Parent.vtable)
 )
 
-;;; LambdaInSubClass()
-(func $m_<init>__@lambdas.Lambdas.LambdaInSubClass
- (param $this (ref null $lambdas.Lambdas.LambdaInSubClass))
+;;; LambdaInSubClass LambdaInSubClass.$create()
+(func $$create__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass
  (result (ref null $lambdas.Lambdas.LambdaInSubClass))
  ;;@ lambdas/Lambdas.java:186:23
+ (local $$instance (ref null $lambdas.Lambdas.LambdaInSubClass))
  (block
-  ;; Parent.this.Parent.<init>();
+  ;; LambdaInSubClass $instance = new LambdaInSubClass.<init>();
   ;;@ lambdas/Lambdas.java:186:23
-  (drop (call $m_<init>__@lambdas.Lambdas.Parent (local.get $this)))
-  ;; return LambdaInSubClass.this;
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.LambdaInSubClass (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.itable)) (i32.const 0) (i32.const 0) (global.get $lambdas.Lambdas.LambdaInSubClass.rtt)))
+  ;; $instance.$ctor();
   ;;@ lambdas/Lambdas.java:186:23
-  (return (local.get $this))
+  (call $$ctor__void_$p_lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:186:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LambdaInSubClass.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass
+ (param $this (ref null $lambdas.Lambdas.LambdaInSubClass))
+ ;;@ lambdas/Lambdas.java:186:23
+ (block
+  ;; Parent.this.$ctor();
+  ;;@ lambdas/Lambdas.java:186:23
+  (call $$ctor__void_$p_lambdas_Lambdas_Parent@lambdas.Lambdas.Parent (local.get $this))
  )
 )
 
@@ -2005,9 +2091,9 @@
  (local $this (ref null $lambdas.Lambdas.LambdaInSubClass))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.LambdaInSubClass.rtt)))
  (block
-  ;; FunctionalInterface l = new $LambdaImplementor$27.<init>(LambdaInSubClass.this);
+  ;; FunctionalInterface l = lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.$create(LambdaInSubClass.this);
   ;;@ lambdas/Lambdas.java:188:6
-  (local.set $l (call $m_<init>__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27 (struct.new_with_rtt $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27 (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.itable)) (i32.const 0) (ref.null $lambdas.Lambdas.LambdaInSubClass) (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.rtt))(local.get $this)))
+  (local.set $l (call $$create__lambdas_Lambdas_LambdaInSubClass__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$27@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27 (local.get $this)))
  )
 )
 (elem declare func $m_testLambdaInSubclass__void@lambdas.Lambdas.LambdaInSubClass)
@@ -2172,21 +2258,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; IdentityFunction()
-(func $m_<init>__@lambdas.Lambdas.IdentityFunction
- (param $this (ref null $lambdas.Lambdas.IdentityFunction))
+;;; IdentityFunction IdentityFunction.$create()
+(func $$create__lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction
  (result (ref null $lambdas.Lambdas.IdentityFunction))
+ ;;@ lambdas/Lambdas.java:233:29
+ (local $$instance (ref null $lambdas.Lambdas.IdentityFunction))
+ (block
+  ;; IdentityFunction $instance = new IdentityFunction.<init>();
+  ;;@ lambdas/Lambdas.java:233:29
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.IdentityFunction (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.IdentityFunction.itable)) (i32.const 0) (global.get $lambdas.Lambdas.IdentityFunction.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:233:29
+  (call $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:233:29
+  (return (local.get $$instance))
+ )
+)
+
+;;; void IdentityFunction.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_IdentityFunction@lambdas.Lambdas.IdentityFunction
+ (param $this (ref null $lambdas.Lambdas.IdentityFunction))
  ;;@ lambdas/Lambdas.java:233:29
  (block
   ;; lambdas.Lambdas.IdentityFunction.$clinit();
   ;;@ lambdas/Lambdas.java:233:29
   (call $$clinit__void@lambdas.Lambdas.IdentityFunction )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:233:29
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return IdentityFunction.this;
-  ;;@ lambdas/Lambdas.java:233:29
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -2485,21 +2585,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$1()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$1
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$1))
+;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$1@lambdas.Lambdas.$LambdaImplementor$1
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$1))
+ ;;@ lambdas/Lambdas.java:36:9
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;;@ lambdas/Lambdas.java:36:9
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$1 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$1.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:36:9
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$1@lambdas.Lambdas.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:36:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$1@lambdas.Lambdas.$LambdaImplementor$1
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$1))
  ;;@ lambdas/Lambdas.java:36:9
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$1.$clinit();
   ;;@ lambdas/Lambdas.java:36:9
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$1 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:36:9
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$1.this;
-  ;;@ lambdas/Lambdas.java:36:9
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -2572,21 +2686,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$2()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$2
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$2))
+;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$2@lambdas.Lambdas.$LambdaImplementor$2
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$2))
+ ;;@ lambdas/Lambdas.java:41:8
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$2))
+ (block
+  ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>();
+  ;;@ lambdas/Lambdas.java:41:8
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$2 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$2.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:41:8
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$2@lambdas.Lambdas.$LambdaImplementor$2 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:41:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$2.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$2@lambdas.Lambdas.$LambdaImplementor$2
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$2))
  ;;@ lambdas/Lambdas.java:41:8
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$2.$clinit();
   ;;@ lambdas/Lambdas.java:41:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$2 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:41:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$2.this;
-  ;;@ lambdas/Lambdas.java:41:8
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -2660,25 +2788,40 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$3(Lambdas $captured.this)
-(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$3
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$3))
+;;; $LambdaImplementor$3 $LambdaImplementor$3.$create(Lambdas $captured.this)
+(func $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$3@lambdas.Lambdas.$LambdaImplementor$3
  (param $$captured.this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$3))
+ ;;@ lambdas/Lambdas.java:48:9
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$3))
+ (block
+  ;; $LambdaImplementor$3 $instance = new $LambdaImplementor$3.<init>($captured.this);
+  ;;@ lambdas/Lambdas.java:48:9
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$3 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$3.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$3.rtt)))
+  ;; $instance.$ctor($captured.this);
+  ;;@ lambdas/Lambdas.java:48:9
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$3@lambdas.Lambdas.$LambdaImplementor$3 (local.get $$instance)(local.get $$captured.this))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:48:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$3.$ctor(Lambdas $captured.this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$3@lambdas.Lambdas.$LambdaImplementor$3
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$3))
+ (param $$captured.this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:48:9
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$3.$clinit();
   ;;@ lambdas/Lambdas.java:48:9
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$3 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:48:9
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$3.this.$captured.this = $captured.this);
   ;;@ lambdas/Lambdas.java:48:9
   (struct.set $lambdas.Lambdas.$LambdaImplementor$3 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$3_(local.get $this) (local.get $$captured.this))
-  ;; return $LambdaImplementor$3.this;
-  ;;@ lambdas/Lambdas.java:48:9
-  (return (local.get $this))
  )
 )
 
@@ -2752,25 +2895,40 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$4(int x)
-(func $m_<init>__int@lambdas.Lambdas.$LambdaImplementor$4
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$4))
+;;; $LambdaImplementor$4 $LambdaImplementor$4.$create(int x)
+(func $$create__int__lambdas_Lambdas_$LambdaImplementor$4@lambdas.Lambdas.$LambdaImplementor$4
  (param $x i32)
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$4))
+ ;;@ lambdas/Lambdas.java:53:9
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$4))
+ (block
+  ;; $LambdaImplementor$4 $instance = new $LambdaImplementor$4.<init>(x);
+  ;;@ lambdas/Lambdas.java:53:9
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$4 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$4.itable)) (i32.const 0) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$4.rtt)))
+  ;; $instance.$ctor(x);
+  ;;@ lambdas/Lambdas.java:53:9
+  (call $$ctor__int__void_$p_lambdas_Lambdas_$LambdaImplementor$4@lambdas.Lambdas.$LambdaImplementor$4 (local.get $$instance)(local.get $x))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:53:9
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$4.$ctor(int x)
+(func $$ctor__int__void_$p_lambdas_Lambdas_$LambdaImplementor$4@lambdas.Lambdas.$LambdaImplementor$4
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$4))
+ (param $x i32)
  ;;@ lambdas/Lambdas.java:53:9
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$4.$clinit();
   ;;@ lambdas/Lambdas.java:53:9
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$4 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:53:9
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$4.this.x = x);
   ;;@ lambdas/Lambdas.java:53:9
   (struct.set $lambdas.Lambdas.$LambdaImplementor$4 $f_x__lambdas_Lambdas_$LambdaImplementor$4_(local.get $this) (local.get $x))
-  ;; return $LambdaImplementor$4.this;
-  ;;@ lambdas/Lambdas.java:53:9
-  (return (local.get $this))
  )
 )
 
@@ -2845,29 +3003,45 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$5(Lambdas $captured.this, int x)
-(func $m_<init>__lambdas_Lambdas__int@lambdas.Lambdas.$LambdaImplementor$5
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$5))
+;;; $LambdaImplementor$5 $LambdaImplementor$5.$create(Lambdas $captured.this, int x)
+(func $$create__lambdas_Lambdas__int__lambdas_Lambdas_$LambdaImplementor$5@lambdas.Lambdas.$LambdaImplementor$5
  (param $$captured.this (ref null $lambdas.Lambdas))
  (param $x i32)
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$5))
+ ;;@ lambdas/Lambdas.java:59:8
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$5))
+ (block
+  ;; $LambdaImplementor$5 $instance = new $LambdaImplementor$5.<init>($captured.this,x);
+  ;;@ lambdas/Lambdas.java:59:8
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$5 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$5.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$5.rtt)))
+  ;; $instance.$ctor($captured.this,x);
+  ;;@ lambdas/Lambdas.java:59:8
+  (call $$ctor__lambdas_Lambdas__int__void_$p_lambdas_Lambdas_$LambdaImplementor$5@lambdas.Lambdas.$LambdaImplementor$5 (local.get $$instance)(local.get $$captured.this)(local.get $x))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:59:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$5.$ctor(Lambdas $captured.this, int x)
+(func $$ctor__lambdas_Lambdas__int__void_$p_lambdas_Lambdas_$LambdaImplementor$5@lambdas.Lambdas.$LambdaImplementor$5
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$5))
+ (param $$captured.this (ref null $lambdas.Lambdas))
+ (param $x i32)
  ;;@ lambdas/Lambdas.java:59:8
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$5.$clinit();
   ;;@ lambdas/Lambdas.java:59:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$5 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:59:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$5.this.$captured.this = $captured.this);
   ;;@ lambdas/Lambdas.java:59:8
   (struct.set $lambdas.Lambdas.$LambdaImplementor$5 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$5_(local.get $this) (local.get $$captured.this))
   ;; ($LambdaImplementor$5.this.x = x);
   ;;@ lambdas/Lambdas.java:59:8
   (struct.set $lambdas.Lambdas.$LambdaImplementor$5 $f_x__lambdas_Lambdas_$LambdaImplementor$5_(local.get $this) (local.get $x))
-  ;; return $LambdaImplementor$5.this;
-  ;;@ lambdas/Lambdas.java:59:8
-  (return (local.get $this))
  )
 )
 
@@ -2945,25 +3119,40 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$6(Lambdas $captured.this)
-(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$6
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$6))
+;;; $LambdaImplementor$6 $LambdaImplementor$6.$create(Lambdas $captured.this)
+(func $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$6@lambdas.Lambdas.$LambdaImplementor$6
  (param $$captured.this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$6))
+ ;;@ lambdas/Lambdas.java:70:8
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$6))
+ (block
+  ;; $LambdaImplementor$6 $instance = new $LambdaImplementor$6.<init>($captured.this);
+  ;;@ lambdas/Lambdas.java:70:8
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$6 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$6.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$6.rtt)))
+  ;; $instance.$ctor($captured.this);
+  ;;@ lambdas/Lambdas.java:70:8
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$6@lambdas.Lambdas.$LambdaImplementor$6 (local.get $$instance)(local.get $$captured.this))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:70:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$6.$ctor(Lambdas $captured.this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$6@lambdas.Lambdas.$LambdaImplementor$6
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$6))
+ (param $$captured.this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:70:8
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$6.$clinit();
   ;;@ lambdas/Lambdas.java:70:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$6 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:70:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$6.this.$captured.this = $captured.this);
   ;;@ lambdas/Lambdas.java:70:8
   (struct.set $lambdas.Lambdas.$LambdaImplementor$6 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$6_(local.get $this) (local.get $$captured.this))
-  ;; return $LambdaImplementor$6.this;
-  ;;@ lambdas/Lambdas.java:70:8
-  (return (local.get $this))
  )
 )
 
@@ -3045,21 +3234,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$7()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$7
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$7))
+;;; $LambdaImplementor$7 $LambdaImplementor$7.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$7@lambdas.Lambdas.$LambdaImplementor$7
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$7))
+ ;;@ lambdas/Lambdas.java:80:28
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$7))
+ (block
+  ;; $LambdaImplementor$7 $instance = new $LambdaImplementor$7.<init>();
+  ;;@ lambdas/Lambdas.java:80:28
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$7 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$7.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$7.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:80:28
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$7@lambdas.Lambdas.$LambdaImplementor$7 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:80:28
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$7.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$7@lambdas.Lambdas.$LambdaImplementor$7
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$7))
  ;;@ lambdas/Lambdas.java:80:28
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$7.$clinit();
   ;;@ lambdas/Lambdas.java:80:28
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$7 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:80:28
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$7.this;
-  ;;@ lambdas/Lambdas.java:80:28
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3133,25 +3336,40 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$8(Lambdas $captured.this)
-(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$8
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$8))
+;;; $LambdaImplementor$8<T> $LambdaImplementor$8.$create(Lambdas $captured.this)
+(func $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$8@lambdas.Lambdas.$LambdaImplementor$8
  (param $$captured.this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$8))
+ ;;@ lambdas/Lambdas.java:90:8
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$8))
+ (block
+  ;; $LambdaImplementor$8<T> $instance = new $LambdaImplementor$8.<init>($captured.this);
+  ;;@ lambdas/Lambdas.java:90:8
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$8 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$8.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$8.rtt)))
+  ;; $instance.$ctor($captured.this);
+  ;;@ lambdas/Lambdas.java:90:8
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$8@lambdas.Lambdas.$LambdaImplementor$8 (local.get $$instance)(local.get $$captured.this))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:90:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$8.$ctor(Lambdas $captured.this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$8@lambdas.Lambdas.$LambdaImplementor$8
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$8))
+ (param $$captured.this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:90:8
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$8.$clinit();
   ;;@ lambdas/Lambdas.java:90:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$8 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:90:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$8.this.$captured.this = $captured.this);
   ;;@ lambdas/Lambdas.java:90:8
   (struct.set $lambdas.Lambdas.$LambdaImplementor$8 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$8_(local.get $this) (local.get $$captured.this))
-  ;; return $LambdaImplementor$8.this;
-  ;;@ lambdas/Lambdas.java:90:8
-  (return (local.get $this))
  )
 )
 
@@ -3165,9 +3383,9 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$8))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.$LambdaImplementor$8.rtt)))
  (block
-  ;; return new $1.<init>($LambdaImplementor$8.this.$captured.this);
+  ;; return lambdas.Lambdas.1.$create($LambdaImplementor$8.this.$captured.this);
   ;;@ lambdas/Lambdas.java:91:12
-  (return (call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.1 (struct.new_with_rtt $lambdas.Lambdas.1 (ref.as_non_null (global.get $lambdas.Lambdas.1.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.1.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.1.rtt))(struct.get $lambdas.Lambdas.$LambdaImplementor$8 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$8_(local.get $this))))
+  (return (call $$create__lambdas_Lambdas__lambdas_Lambdas_1@lambdas.Lambdas.1 (struct.get $lambdas.Lambdas.$LambdaImplementor$8 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$8_(local.get $this))))
  )
 )
 (elem declare func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.$LambdaImplementor$8)
@@ -3224,21 +3442,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$9()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$9
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$9))
+;;; $LambdaImplementor$9<T> $LambdaImplementor$9.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$9@lambdas.Lambdas.$LambdaImplementor$9
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$9))
+ ;;@ lambdas/Lambdas.java:102:8
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$9))
+ (block
+  ;; $LambdaImplementor$9<T> $instance = new $LambdaImplementor$9.<init>();
+  ;;@ lambdas/Lambdas.java:102:8
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$9 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$9.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$9.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:102:8
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$9@lambdas.Lambdas.$LambdaImplementor$9 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:102:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$9.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$9@lambdas.Lambdas.$LambdaImplementor$9
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$9))
  ;;@ lambdas/Lambdas.java:102:8
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$9.$clinit();
   ;;@ lambdas/Lambdas.java:102:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$9 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:102:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$9.this;
-  ;;@ lambdas/Lambdas.java:102:8
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3252,9 +3484,9 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$9))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.$LambdaImplementor$9.rtt)))
  (block
-  ;; return new $2.<init>();
+  ;; return lambdas.Lambdas.2.$create();
   ;;@ lambdas/Lambdas.java:103:12
-  (return (call $m_<init>__@lambdas.Lambdas.2 (struct.new_with_rtt $lambdas.Lambdas.2 (ref.as_non_null (global.get $lambdas.Lambdas.2.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.2.itable)) (i32.const 0) (global.get $lambdas.Lambdas.2.rtt))))
+  (return (call $$create__lambdas_Lambdas_2@lambdas.Lambdas.2 ))
  )
 )
 (elem declare func $m_wrap__lambdas_Lambdas_Functional__lambdas_Lambdas_Functional@lambdas.Lambdas.$LambdaImplementor$9)
@@ -3311,21 +3543,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$10()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$10
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$10))
+;;; $LambdaImplementor$10<T> $LambdaImplementor$10.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$10@lambdas.Lambdas.$LambdaImplementor$10
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$10))
+ ;;@ lambdas/Lambdas.java:150:25
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$10))
+ (block
+  ;; $LambdaImplementor$10<T> $instance = new $LambdaImplementor$10.<init>();
+  ;;@ lambdas/Lambdas.java:150:25
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$10 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$10.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$10.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:150:25
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$10@lambdas.Lambdas.$LambdaImplementor$10 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:150:25
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$10.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$10@lambdas.Lambdas.$LambdaImplementor$10
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$10))
  ;;@ lambdas/Lambdas.java:150:25
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$10.$clinit();
   ;;@ lambdas/Lambdas.java:150:25
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$10 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:150:25
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$10.this;
-  ;;@ lambdas/Lambdas.java:150:25
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3402,21 +3648,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$11()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$11
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$11))
+;;; $LambdaImplementor$11<T> $LambdaImplementor$11.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$11@lambdas.Lambdas.$LambdaImplementor$11
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$11))
+ ;;@ lambdas/Lambdas.java:151:22
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$11))
+ (block
+  ;; $LambdaImplementor$11<T> $instance = new $LambdaImplementor$11.<init>();
+  ;;@ lambdas/Lambdas.java:151:22
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$11 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$11.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$11.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:151:22
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$11@lambdas.Lambdas.$LambdaImplementor$11 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:151:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$11.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$11@lambdas.Lambdas.$LambdaImplementor$11
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$11))
  ;;@ lambdas/Lambdas.java:151:22
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$11.$clinit();
   ;;@ lambdas/Lambdas.java:151:22
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$11 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:151:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$11.this;
-  ;;@ lambdas/Lambdas.java:151:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3493,21 +3753,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$12()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$12
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$12))
+;;; $LambdaImplementor$12<T> $LambdaImplementor$12.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$12@lambdas.Lambdas.$LambdaImplementor$12
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$12))
+ ;;@ lambdas/Lambdas.java:152:31
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$12))
+ (block
+  ;; $LambdaImplementor$12<T> $instance = new $LambdaImplementor$12.<init>();
+  ;;@ lambdas/Lambdas.java:152:31
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$12 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$12.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$12.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:152:31
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$12@lambdas.Lambdas.$LambdaImplementor$12 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:152:31
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$12.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$12@lambdas.Lambdas.$LambdaImplementor$12
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$12))
  ;;@ lambdas/Lambdas.java:152:31
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$12.$clinit();
   ;;@ lambdas/Lambdas.java:152:31
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$12 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:152:31
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$12.this;
-  ;;@ lambdas/Lambdas.java:152:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3585,21 +3859,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$13()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$13
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$13))
+;;; $LambdaImplementor$13<T, U, R> $LambdaImplementor$13.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$13@lambdas.Lambdas.$LambdaImplementor$13
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$13))
+ ;;@ lambdas/Lambdas.java:154:8
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$13))
+ (block
+  ;; $LambdaImplementor$13<T, U, R> $instance = new $LambdaImplementor$13.<init>();
+  ;;@ lambdas/Lambdas.java:154:8
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$13 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$13.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$13.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:154:8
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$13@lambdas.Lambdas.$LambdaImplementor$13 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:154:8
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$13.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$13@lambdas.Lambdas.$LambdaImplementor$13
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$13))
  ;;@ lambdas/Lambdas.java:154:8
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$13.$clinit();
   ;;@ lambdas/Lambdas.java:154:8
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$13 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:154:8
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$13.this;
-  ;;@ lambdas/Lambdas.java:154:8
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3622,9 +3910,9 @@
   ;; String y = ((String) ((U) y));
   ;;@ lambdas/Lambdas.java:154:8
   (local.set $y_1 (ref.cast (ref.cast (local.get $y) (global.get $java.lang.Object.rtt)) (global.get $java.lang.String.rtt)))
-  ;; throw new RuntimeException.<init>();
+  ;; throw java.lang.RuntimeException.$create();
   ;;@ lambdas/Lambdas.java:155:10
-  (throw $exception.event (call $m_<init>__@java.lang.RuntimeException (struct.new_with_rtt $java.lang.RuntimeException (ref.as_non_null (global.get $java.lang.RuntimeException.vtable)) (ref.as_non_null (global.get $java.lang.RuntimeException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $java.lang.RuntimeException.rtt))))
+  (throw $exception.event (call $$create__java_lang_RuntimeException@java.lang.RuntimeException ))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@lambdas.Lambdas.$LambdaImplementor$13)
@@ -3701,21 +3989,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$14()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$14
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$14))
+;;; $LambdaImplementor$14<T, R> $LambdaImplementor$14.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$14@lambdas.Lambdas.$LambdaImplementor$14
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$14))
+ ;;@ lambdas/Lambdas.java:157:31
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$14))
+ (block
+  ;; $LambdaImplementor$14<T, R> $instance = new $LambdaImplementor$14.<init>();
+  ;;@ lambdas/Lambdas.java:157:31
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$14 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$14.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$14.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:157:31
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$14@lambdas.Lambdas.$LambdaImplementor$14 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:157:31
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$14.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$14@lambdas.Lambdas.$LambdaImplementor$14
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$14))
  ;;@ lambdas/Lambdas.java:157:31
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$14.$clinit();
   ;;@ lambdas/Lambdas.java:157:31
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$14 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:157:31
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$14.this;
-  ;;@ lambdas/Lambdas.java:157:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3792,21 +4094,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$15()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$15
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$15))
+;;; $LambdaImplementor$15<T, R> $LambdaImplementor$15.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$15@lambdas.Lambdas.$LambdaImplementor$15
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$15))
+ ;;@ lambdas/Lambdas.java:165:28
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$15))
+ (block
+  ;; $LambdaImplementor$15<T, R> $instance = new $LambdaImplementor$15.<init>();
+  ;;@ lambdas/Lambdas.java:165:28
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$15 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$15.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$15.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:165:28
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$15@lambdas.Lambdas.$LambdaImplementor$15 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:165:28
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$15.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$15@lambdas.Lambdas.$LambdaImplementor$15
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$15))
  ;;@ lambdas/Lambdas.java:165:28
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$15.$clinit();
   ;;@ lambdas/Lambdas.java:165:28
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$15 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:165:28
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$15.this;
-  ;;@ lambdas/Lambdas.java:165:28
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3883,21 +4199,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$16()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$16
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
+;;; $LambdaImplementor$16 $LambdaImplementor$16.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$16@lambdas.Lambdas.$LambdaImplementor$16
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$16))
+ ;;@ lambdas/Lambdas.java:173:56
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$16))
+ (block
+  ;; $LambdaImplementor$16 $instance = new $LambdaImplementor$16.<init>();
+  ;;@ lambdas/Lambdas.java:173:56
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$16 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$16.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$16.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:173:56
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$16@lambdas.Lambdas.$LambdaImplementor$16 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:173:56
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$16.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$16@lambdas.Lambdas.$LambdaImplementor$16
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  ;;@ lambdas/Lambdas.java:173:56
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$16.$clinit();
   ;;@ lambdas/Lambdas.java:173:56
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$16 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:173:56
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$16.this;
-  ;;@ lambdas/Lambdas.java:173:56
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -3909,9 +4239,9 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$16))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.$LambdaImplementor$16.rtt)))
  (block
-  ;; new Object.<init>();
+  ;; java.lang.Object.$create();
   ;;@ lambdas/Lambdas.java:173:62
-  (drop (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  (drop (call $$create__java_lang_Object@java.lang.Object ))
  )
 )
 (elem declare func $m_run__void@lambdas.Lambdas.$LambdaImplementor$16)
@@ -3969,25 +4299,40 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$17(Lambdas $captured.this)
-(func $m_<init>__lambdas_Lambdas@lambdas.Lambdas.$LambdaImplementor$17
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
+;;; $LambdaImplementor$17 $LambdaImplementor$17.$create(Lambdas $captured.this)
+(func $$create__lambdas_Lambdas__lambdas_Lambdas_$LambdaImplementor$17@lambdas.Lambdas.$LambdaImplementor$17
  (param $$captured.this (ref null $lambdas.Lambdas))
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$17))
+ ;;@ lambdas/Lambdas.java:177:56
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$17))
+ (block
+  ;; $LambdaImplementor$17 $instance = new $LambdaImplementor$17.<init>($captured.this);
+  ;;@ lambdas/Lambdas.java:177:56
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$17 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$17.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.$LambdaImplementor$17.rtt)))
+  ;; $instance.$ctor($captured.this);
+  ;;@ lambdas/Lambdas.java:177:56
+  (call $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$17@lambdas.Lambdas.$LambdaImplementor$17 (local.get $$instance)(local.get $$captured.this))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:177:56
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$17.$ctor(Lambdas $captured.this)
+(func $$ctor__lambdas_Lambdas__void_$p_lambdas_Lambdas_$LambdaImplementor$17@lambdas.Lambdas.$LambdaImplementor$17
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
+ (param $$captured.this (ref null $lambdas.Lambdas))
  ;;@ lambdas/Lambdas.java:177:56
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$17.$clinit();
   ;;@ lambdas/Lambdas.java:177:56
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$17 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:177:56
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$17.this.$captured.this = $captured.this);
   ;;@ lambdas/Lambdas.java:177:56
   (struct.set $lambdas.Lambdas.$LambdaImplementor$17 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$17_(local.get $this) (local.get $$captured.this))
-  ;; return $LambdaImplementor$17.this;
-  ;;@ lambdas/Lambdas.java:177:56
-  (return (local.get $this))
  )
 )
 
@@ -3999,9 +4344,9 @@
  (local $this (ref null $lambdas.Lambdas.$LambdaImplementor$17))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $lambdas.Lambdas.$LambdaImplementor$17.rtt)))
  (block
-  ;; new $3.<init>($LambdaImplementor$17.this.$captured.this);
+  ;; lambdas.Lambdas.3.$create($LambdaImplementor$17.this.$captured.this);
   ;;@ lambdas/Lambdas.java:177:62
-  (drop (call $m_<init>__lambdas_Lambdas@lambdas.Lambdas.3 (struct.new_with_rtt $lambdas.Lambdas.3 (ref.as_non_null (global.get $lambdas.Lambdas.3.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.3.itable)) (i32.const 0) (ref.null $lambdas.Lambdas) (global.get $lambdas.Lambdas.3.rtt))(struct.get $lambdas.Lambdas.$LambdaImplementor$17 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$17_(local.get $this))))
+  (drop (call $$create__lambdas_Lambdas__lambdas_Lambdas_3@lambdas.Lambdas.3 (struct.get $lambdas.Lambdas.$LambdaImplementor$17 $f_$captured.this__lambdas_Lambdas_$LambdaImplementor$17_(local.get $this))))
  )
 )
 (elem declare func $m_run__void@lambdas.Lambdas.$LambdaImplementor$17)
@@ -4058,21 +4403,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$18()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$18
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
+;;; $LambdaImplementor$18<T> $LambdaImplementor$18.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$18@lambdas.Lambdas.$LambdaImplementor$18
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$18))
+ ;;@ lambdas/Lambdas.java:254:32
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$18))
+ (block
+  ;; $LambdaImplementor$18<T> $instance = new $LambdaImplementor$18.<init>();
+  ;;@ lambdas/Lambdas.java:254:32
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$18 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$18.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$18.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:254:32
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$18@lambdas.Lambdas.$LambdaImplementor$18 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:254:32
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$18.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$18@lambdas.Lambdas.$LambdaImplementor$18
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$18))
  ;;@ lambdas/Lambdas.java:254:32
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$18.$clinit();
   ;;@ lambdas/Lambdas.java:254:32
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$18 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:254:32
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$18.this;
-  ;;@ lambdas/Lambdas.java:254:32
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -4145,21 +4504,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$19()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$19
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
+;;; $LambdaImplementor$19<T> $LambdaImplementor$19.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$19@lambdas.Lambdas.$LambdaImplementor$19
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$19))
+ ;;@ lambdas/Lambdas.java:255:44
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$19))
+ (block
+  ;; $LambdaImplementor$19<T> $instance = new $LambdaImplementor$19.<init>();
+  ;;@ lambdas/Lambdas.java:255:44
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$19 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$19.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$19.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:255:44
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$19@lambdas.Lambdas.$LambdaImplementor$19 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:255:44
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$19.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$19@lambdas.Lambdas.$LambdaImplementor$19
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$19))
  ;;@ lambdas/Lambdas.java:255:44
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$19.$clinit();
   ;;@ lambdas/Lambdas.java:255:44
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$19 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:255:44
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$19.this;
-  ;;@ lambdas/Lambdas.java:255:44
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -4233,21 +4606,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$20()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$20
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$20))
+;;; $LambdaImplementor$20<T> $LambdaImplementor$20.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$20@lambdas.Lambdas.$LambdaImplementor$20
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$20))
+ ;;@ lambdas/Lambdas.java:256:43
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$20))
+ (block
+  ;; $LambdaImplementor$20<T> $instance = new $LambdaImplementor$20.<init>();
+  ;;@ lambdas/Lambdas.java:256:43
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$20 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$20.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$20.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:256:43
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$20@lambdas.Lambdas.$LambdaImplementor$20 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:256:43
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$20.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$20@lambdas.Lambdas.$LambdaImplementor$20
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$20))
  ;;@ lambdas/Lambdas.java:256:43
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$20.$clinit();
   ;;@ lambdas/Lambdas.java:256:43
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$20 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:256:43
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$20.this;
-  ;;@ lambdas/Lambdas.java:256:43
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -4339,21 +4726,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$21()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$21
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$21))
+;;; $LambdaImplementor$21<T, T> $LambdaImplementor$21.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$21@lambdas.Lambdas.$LambdaImplementor$21
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$21))
+ ;;@ lambdas/Lambdas.java:275:76
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$21))
+ (block
+  ;; $LambdaImplementor$21<T, T> $instance = new $LambdaImplementor$21.<init>();
+  ;;@ lambdas/Lambdas.java:275:76
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$21 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$21.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$21.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:275:76
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$21@lambdas.Lambdas.$LambdaImplementor$21 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:275:76
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$21.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$21@lambdas.Lambdas.$LambdaImplementor$21
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$21))
  ;;@ lambdas/Lambdas.java:275:76
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$21.$clinit();
   ;;@ lambdas/Lambdas.java:275:76
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$21 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:275:76
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$21.this;
-  ;;@ lambdas/Lambdas.java:275:76
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -4450,21 +4851,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$22()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$22
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$22))
+;;; $LambdaImplementor$22<T, S> $LambdaImplementor$22.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$22@lambdas.Lambdas.$LambdaImplementor$22
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$22))
+ ;;@ lambdas/Lambdas.java:278:69
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$22))
+ (block
+  ;; $LambdaImplementor$22<T, S> $instance = new $LambdaImplementor$22.<init>();
+  ;;@ lambdas/Lambdas.java:278:69
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$22 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$22.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$22.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:278:69
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$22@lambdas.Lambdas.$LambdaImplementor$22 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:278:69
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$22.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$22@lambdas.Lambdas.$LambdaImplementor$22
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$22))
  ;;@ lambdas/Lambdas.java:278:69
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$22.$clinit();
   ;;@ lambdas/Lambdas.java:278:69
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$22 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:278:69
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$22.this;
-  ;;@ lambdas/Lambdas.java:278:69
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -4561,21 +4976,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$23()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$23
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$23))
+;;; $LambdaImplementor$23<T, S> $LambdaImplementor$23.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$23@lambdas.Lambdas.$LambdaImplementor$23
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$23))
+ ;;@ lambdas/Lambdas.java:282:59
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$23))
+ (block
+  ;; $LambdaImplementor$23<T, S> $instance = new $LambdaImplementor$23.<init>();
+  ;;@ lambdas/Lambdas.java:282:59
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$23 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$23.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$23.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:282:59
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$23@lambdas.Lambdas.$LambdaImplementor$23 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:282:59
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$23.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$23@lambdas.Lambdas.$LambdaImplementor$23
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$23))
  ;;@ lambdas/Lambdas.java:282:59
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$23.$clinit();
   ;;@ lambdas/Lambdas.java:282:59
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$23 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:282:59
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$23.this;
-  ;;@ lambdas/Lambdas.java:282:59
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -4673,21 +5102,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$24()
-(func $m_<init>__@lambdas.Lambdas.$LambdaImplementor$24
- (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$24))
+;;; $LambdaImplementor$24<T, U, R> $LambdaImplementor$24.$create()
+(func $$create__lambdas_Lambdas_$LambdaImplementor$24@lambdas.Lambdas.$LambdaImplementor$24
  (result (ref null $lambdas.Lambdas.$LambdaImplementor$24))
+ ;;@ lambdas/Lambdas.java:291:78
+ (local $$instance (ref null $lambdas.Lambdas.$LambdaImplementor$24))
+ (block
+  ;; $LambdaImplementor$24<T, U, R> $instance = new $LambdaImplementor$24.<init>();
+  ;;@ lambdas/Lambdas.java:291:78
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.$LambdaImplementor$24 (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.$LambdaImplementor$24.itable)) (i32.const 0) (global.get $lambdas.Lambdas.$LambdaImplementor$24.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:291:78
+  (call $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$24@lambdas.Lambdas.$LambdaImplementor$24 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:291:78
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$24.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_$LambdaImplementor$24@lambdas.Lambdas.$LambdaImplementor$24
+ (param $this (ref null $lambdas.Lambdas.$LambdaImplementor$24))
  ;;@ lambdas/Lambdas.java:291:78
  (block
   ;; lambdas.Lambdas.$LambdaImplementor$24.$clinit();
   ;;@ lambdas/Lambdas.java:291:78
   (call $$clinit__void@lambdas.Lambdas.$LambdaImplementor$24 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:291:78
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$24.this;
-  ;;@ lambdas/Lambdas.java:291:78
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -4810,29 +5253,45 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$25(BiFunction<T, U, R> $captured.this, Function<? super R, ? extends V> after)
-(func $m_<init>__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function@lambdas.Lambdas.BiFunction.$LambdaImplementor$25
- (param $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$25))
+;;; $LambdaImplementor$25<T, U, R> $LambdaImplementor$25.$create(BiFunction<T, U, R> $captured.this, Function<? super R, ? extends V> after)
+(func $$create__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__lambdas_Lambdas_BiFunction_$LambdaImplementor$25@lambdas.Lambdas.BiFunction.$LambdaImplementor$25
  (param $$captured.this (ref null $java.lang.Object))
  (param $after (ref null $java.lang.Object))
  (result (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$25))
+ ;;@ lambdas/Lambdas.java:137:13
+ (local $$instance (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$25))
+ (block
+  ;; $LambdaImplementor$25<T, U, R> $instance = new $LambdaImplementor$25.<init>($captured.this,after);
+  ;;@ lambdas/Lambdas.java:137:13
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.BiFunction.$LambdaImplementor$25 (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$25.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$25.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $lambdas.Lambdas.BiFunction.$LambdaImplementor$25.rtt)))
+  ;; $instance.$ctor($captured.this,after);
+  ;;@ lambdas/Lambdas.java:137:13
+  (call $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$25@lambdas.Lambdas.BiFunction.$LambdaImplementor$25 (local.get $$instance)(local.get $$captured.this)(local.get $after))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:137:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$25.$ctor(BiFunction<T, U, R> $captured.this, Function<? super R, ? extends V> after)
+(func $$ctor__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function__void_$p_lambdas_Lambdas_BiFunction_$LambdaImplementor$25@lambdas.Lambdas.BiFunction.$LambdaImplementor$25
+ (param $this (ref null $lambdas.Lambdas.BiFunction.$LambdaImplementor$25))
+ (param $$captured.this (ref null $java.lang.Object))
+ (param $after (ref null $java.lang.Object))
  ;;@ lambdas/Lambdas.java:137:13
  (block
   ;; lambdas.Lambdas.BiFunction.$LambdaImplementor$25.$clinit();
   ;;@ lambdas/Lambdas.java:137:13
   (call $$clinit__void@lambdas.Lambdas.BiFunction.$LambdaImplementor$25 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:137:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$25.this.$captured.this = $captured.this);
   ;;@ lambdas/Lambdas.java:137:13
   (struct.set $lambdas.Lambdas.BiFunction.$LambdaImplementor$25 $f_$captured.this__lambdas_Lambdas_BiFunction_$LambdaImplementor$25_(local.get $this) (local.get $$captured.this))
   ;; ($LambdaImplementor$25.this.after = after);
   ;;@ lambdas/Lambdas.java:137:13
   (struct.set $lambdas.Lambdas.BiFunction.$LambdaImplementor$25 $f_after__lambdas_Lambdas_BiFunction_$LambdaImplementor$25_(local.get $this) (local.get $after))
-  ;; return $LambdaImplementor$25.this;
-  ;;@ lambdas/Lambdas.java:137:13
-  (return (local.get $this))
  )
 )
 
@@ -4926,21 +5385,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$26()
-(func $m_<init>__@lambdas.Lambdas.Function.$LambdaImplementor$26
- (param $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$26))
+;;; $LambdaImplementor$26<T, R> $LambdaImplementor$26.$create()
+(func $$create__lambdas_Lambdas_Function_$LambdaImplementor$26@lambdas.Lambdas.Function.$LambdaImplementor$26
  (result (ref null $lambdas.Lambdas.Function.$LambdaImplementor$26))
+ ;;@ lambdas/Lambdas.java:143:13
+ (local $$instance (ref null $lambdas.Lambdas.Function.$LambdaImplementor$26))
+ (block
+  ;; $LambdaImplementor$26<T, R> $instance = new $LambdaImplementor$26.<init>();
+  ;;@ lambdas/Lambdas.java:143:13
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.Function.$LambdaImplementor$26 (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$26.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.Function.$LambdaImplementor$26.itable)) (i32.const 0) (global.get $lambdas.Lambdas.Function.$LambdaImplementor$26.rtt)))
+  ;; $instance.$ctor();
+  ;;@ lambdas/Lambdas.java:143:13
+  (call $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$26@lambdas.Lambdas.Function.$LambdaImplementor$26 (local.get $$instance))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:143:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$26.$ctor()
+(func $$ctor__void_$p_lambdas_Lambdas_Function_$LambdaImplementor$26@lambdas.Lambdas.Function.$LambdaImplementor$26
+ (param $this (ref null $lambdas.Lambdas.Function.$LambdaImplementor$26))
  ;;@ lambdas/Lambdas.java:143:13
  (block
   ;; lambdas.Lambdas.Function.$LambdaImplementor$26.$clinit();
   ;;@ lambdas/Lambdas.java:143:13
   (call $$clinit__void@lambdas.Lambdas.Function.$LambdaImplementor$26 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:143:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $LambdaImplementor$26.this;
-  ;;@ lambdas/Lambdas.java:143:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -5018,25 +5491,40 @@
   $java.lang.Object.vtable)
 )
 
-;;; $LambdaImplementor$27(LambdaInSubClass $captured.this)
-(func $m_<init>__lambdas_Lambdas_LambdaInSubClass@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27
- (param $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27))
+;;; $LambdaImplementor$27 $LambdaImplementor$27.$create(LambdaInSubClass $captured.this)
+(func $$create__lambdas_Lambdas_LambdaInSubClass__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$27@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27
  (param $$captured.this (ref null $lambdas.Lambdas.LambdaInSubClass))
  (result (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27))
+ ;;@ lambdas/Lambdas.java:189:11
+ (local $$instance (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27))
+ (block
+  ;; $LambdaImplementor$27 $instance = new $LambdaImplementor$27.<init>($captured.this);
+  ;;@ lambdas/Lambdas.java:189:11
+  (local.set $$instance (struct.new_with_rtt $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27 (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.vtable)) (ref.as_non_null (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.itable)) (i32.const 0) (ref.null $lambdas.Lambdas.LambdaInSubClass) (global.get $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.rtt)))
+  ;; $instance.$ctor($captured.this);
+  ;;@ lambdas/Lambdas.java:189:11
+  (call $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$27@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27 (local.get $$instance)(local.get $$captured.this))
+  ;; return $instance;
+  ;;@ lambdas/Lambdas.java:189:11
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$27.$ctor(LambdaInSubClass $captured.this)
+(func $$ctor__lambdas_Lambdas_LambdaInSubClass__void_$p_lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$27@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27
+ (param $this (ref null $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27))
+ (param $$captured.this (ref null $lambdas.Lambdas.LambdaInSubClass))
  ;;@ lambdas/Lambdas.java:189:11
  (block
   ;; lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27.$clinit();
   ;;@ lambdas/Lambdas.java:189:11
   (call $$clinit__void@lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ lambdas/Lambdas.java:189:11
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; ($LambdaImplementor$27.this.$captured.this = $captured.this);
   ;;@ lambdas/Lambdas.java:189:11
   (struct.set $lambdas.Lambdas.LambdaInSubClass.$LambdaImplementor$27 $f_$captured.this__lambdas_Lambdas_LambdaInSubClass_$LambdaImplementor$27_(local.get $this) (local.get $$captured.this))
-  ;; return $LambdaImplementor$27.this;
-  ;;@ lambdas/Lambdas.java:189:11
-  (return (local.get $this))
  )
 )
 

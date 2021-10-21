@@ -34,21 +34,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; JsIgnoreExample()
-(func $m_<init>__@jsignore.JsIgnoreExample
- (param $this (ref null $jsignore.JsIgnoreExample))
+;;; JsIgnoreExample JsIgnoreExample.$create()
+(func $$create__jsignore_JsIgnoreExample@jsignore.JsIgnoreExample
  (result (ref null $jsignore.JsIgnoreExample))
+ ;;@ jsignore/JsIgnoreExample.java:22:13
+ (local $$instance (ref null $jsignore.JsIgnoreExample))
+ (block
+  ;; JsIgnoreExample $instance = new JsIgnoreExample.<init>();
+  ;;@ jsignore/JsIgnoreExample.java:22:13
+  (local.set $$instance (struct.new_with_rtt $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $jsignore.JsIgnoreExample.itable)) (i32.const 0) (global.get $jsignore.JsIgnoreExample.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsignore/JsIgnoreExample.java:22:13
+  (call $$ctor__void_$p_jsignore_JsIgnoreExample@jsignore.JsIgnoreExample (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsignore/JsIgnoreExample.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsIgnoreExample.$ctor()
+(func $$ctor__void_$p_jsignore_JsIgnoreExample@jsignore.JsIgnoreExample
+ (param $this (ref null $jsignore.JsIgnoreExample))
  ;;@ jsignore/JsIgnoreExample.java:22:13
  (block
   ;; jsignore.JsIgnoreExample.$clinit();
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (call $$clinit__void@jsignore.JsIgnoreExample )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsignore/JsIgnoreExample.java:22:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return JsIgnoreExample.this;
-  ;;@ jsignore/JsIgnoreExample.java:22:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -97,9 +111,9 @@
   ;; (jsignore.JsIgnoreExample.notExportedField = 20);
   ;;@ jsignore/JsIgnoreExample.java:31:2
   (global.set $f_notExportedField__jsignore_JsIgnoreExample (i32.const 20))
-  ;; (jsignore.JsIgnoreExample.CONSTNAME = new Object.<init>());
+  ;; (jsignore.JsIgnoreExample.CONSTNAME = java.lang.Object.$create());
   ;;@ jsignore/JsIgnoreExample.java:34:2
-  (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  (global.set $f_CONSTNAME__jsignore_JsIgnoreExample (call $$create__java_lang_Object@java.lang.Object ))
  )
 )
 

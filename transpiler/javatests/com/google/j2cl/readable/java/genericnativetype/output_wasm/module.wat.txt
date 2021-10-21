@@ -49,22 +49,37 @@
   $java.lang.Object.vtable)
 )
 
-;;; BoundedJsArray(int size)
-(func $m_<init>__int@genericnativetype.BoundedJsArray
- (param $this (ref null $genericnativetype.BoundedJsArray))
+;;; BoundedJsArray<V> BoundedJsArray.$create(int size)
+(func $$create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
  (param $size i32)
  (result (ref null $genericnativetype.BoundedJsArray))
+ ;;@ genericnativetype/BoundedJsArray.java:24:10
+ (local $$instance (ref null $genericnativetype.BoundedJsArray))
+ (block
+  ;; BoundedJsArray<V> $instance = new BoundedJsArray.<init>(size);
+  ;;@ genericnativetype/BoundedJsArray.java:24:10
+  (local.set $$instance (struct.new_with_rtt $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt)))
+  ;; $instance.$ctor(size);
+  ;;@ genericnativetype/BoundedJsArray.java:24:10
+  (call $$ctor__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (local.get $$instance)(local.get $size))
+  ;; return $instance;
+  ;;@ genericnativetype/BoundedJsArray.java:24:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void BoundedJsArray.$ctor(int size)
+(func $$ctor__int__void_$p_genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray
+ (param $this (ref null $genericnativetype.BoundedJsArray))
+ (param $size i32)
  ;;@ genericnativetype/BoundedJsArray.java:24:10
  (block
   ;; genericnativetype.BoundedJsArray.$clinit();
   ;;@ genericnativetype/BoundedJsArray.java:24:35
   (call $$clinit__void@genericnativetype.BoundedJsArray )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ genericnativetype/BoundedJsArray.java:24:35
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return BoundedJsArray.this;
-  ;;@ genericnativetype/BoundedJsArray.java:24:10
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -96,9 +111,9 @@
   ;; genericnativetype.BoundedJsArray.$clinit();
   ;;@ genericnativetype/BoundedJsArray.java:39:55
   (call $$clinit__void@genericnativetype.BoundedJsArray )
-  ;; BoundedJsArray<V> array = new BoundedJsArray.<init>(size);
+  ;; BoundedJsArray<V> array = genericnativetype.BoundedJsArray.$create(size);
   ;;@ genericnativetype/BoundedJsArray.java:40:4
-  (local.set $array (call $m_<init>__int@genericnativetype.BoundedJsArray (struct.new_with_rtt $genericnativetype.BoundedJsArray (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArray.itable)) (i32.const 0) (global.get $genericnativetype.BoundedJsArray.rtt))(local.get $size)))
+  (local.set $array (call $$create__int__genericnativetype_BoundedJsArray@genericnativetype.BoundedJsArray (local.get $size)))
   ;; return array;
   ;;@ genericnativetype/BoundedJsArray.java:41:4
   (return (local.get $array))
@@ -156,18 +171,32 @@
   $java.lang.Object.vtable)
 )
 
-;;; BoundedJsArrays()
-(func $m_<init>__@genericnativetype.BoundedJsArrays
- (param $this (ref null $genericnativetype.BoundedJsArrays))
+;;; BoundedJsArrays BoundedJsArrays.$create()
+(func $$create__genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays
  (result (ref null $genericnativetype.BoundedJsArrays))
  ;;@ genericnativetype/BoundedJsArrays.java:19:10
+ (local $$instance (ref null $genericnativetype.BoundedJsArrays))
  (block
-  ;; Object.this.Object.<init>();
-  ;;@ genericnativetype/BoundedJsArrays.java:19:28
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return BoundedJsArrays.this;
+  ;; BoundedJsArrays $instance = new BoundedJsArrays.<init>();
   ;;@ genericnativetype/BoundedJsArrays.java:19:10
-  (return (local.get $this))
+  (local.set $$instance (struct.new_with_rtt $genericnativetype.BoundedJsArrays (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.vtable)) (ref.as_non_null (global.get $genericnativetype.BoundedJsArrays.itable)) (i32.const 0) (global.get $genericnativetype.BoundedJsArrays.rtt)))
+  ;; $instance.$ctor();
+  ;;@ genericnativetype/BoundedJsArrays.java:19:10
+  (call $$ctor__void_$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays (local.get $$instance))
+  ;; return $instance;
+  ;;@ genericnativetype/BoundedJsArrays.java:19:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void BoundedJsArrays.$ctor()
+(func $$ctor__void_$p_genericnativetype_BoundedJsArrays@genericnativetype.BoundedJsArrays
+ (param $this (ref null $genericnativetype.BoundedJsArrays))
+ ;;@ genericnativetype/BoundedJsArrays.java:19:10
+ (block
+  ;; Object.this.$ctor();
+  ;;@ genericnativetype/BoundedJsArrays.java:19:28
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

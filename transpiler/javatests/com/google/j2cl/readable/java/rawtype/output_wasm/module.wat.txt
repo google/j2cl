@@ -58,21 +58,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; RawType()
-(func $m_<init>__@rawtype.RawType
- (param $this (ref null $rawtype.RawType))
+;;; RawType RawType.$create()
+(func $$create__rawtype_RawType@rawtype.RawType
  (result (ref null $rawtype.RawType))
+ ;;@ rawtype/RawType.java:19:6
+ (local $$instance (ref null $rawtype.RawType))
+ (block
+  ;; RawType $instance = new RawType.<init>();
+  ;;@ rawtype/RawType.java:19:6
+  (local.set $$instance (struct.new_with_rtt $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $rawtype.RawType.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $rawtype.RawType.rtt)))
+  ;; $instance.$ctor();
+  ;;@ rawtype/RawType.java:19:6
+  (call $$ctor__void_$p_rawtype_RawType@rawtype.RawType (local.get $$instance))
+  ;; return $instance;
+  ;;@ rawtype/RawType.java:19:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RawType.$ctor()
+(func $$ctor__void_$p_rawtype_RawType@rawtype.RawType
+ (param $this (ref null $rawtype.RawType))
  ;;@ rawtype/RawType.java:19:6
  (block
   ;; rawtype.RawType.$clinit();
   ;;@ rawtype/RawType.java:19:6
   (call $$clinit__void@rawtype.RawType )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ rawtype/RawType.java:19:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return RawType.this;
-  ;;@ rawtype/RawType.java:19:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -174,21 +188,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; RawSubclass()
-(func $m_<init>__@rawtype.RawType.RawSubclass
- (param $this (ref null $rawtype.RawType.RawSubclass))
+;;; RawSubclass RawSubclass.$create()
+(func $$create__rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass
  (result (ref null $rawtype.RawType.RawSubclass))
+ ;;@ rawtype/RawType.java:26:15
+ (local $$instance (ref null $rawtype.RawType.RawSubclass))
+ (block
+  ;; RawSubclass $instance = new RawSubclass.<init>();
+  ;;@ rawtype/RawType.java:26:15
+  (local.set $$instance (struct.new_with_rtt $rawtype.RawType.RawSubclass (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.vtable)) (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.itable)) (i32.const 0) (global.get $rawtype.RawType.RawSubclass.rtt)))
+  ;; $instance.$ctor();
+  ;;@ rawtype/RawType.java:26:15
+  (call $$ctor__void_$p_rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass (local.get $$instance))
+  ;; return $instance;
+  ;;@ rawtype/RawType.java:26:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void RawSubclass.$ctor()
+(func $$ctor__void_$p_rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass
+ (param $this (ref null $rawtype.RawType.RawSubclass))
  ;;@ rawtype/RawType.java:26:15
  (block
   ;; rawtype.RawType.RawSubclass.$clinit();
   ;;@ rawtype/RawType.java:26:15
   (call $$clinit__void@rawtype.RawType.RawSubclass )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ rawtype/RawType.java:26:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return RawSubclass.this;
-  ;;@ rawtype/RawType.java:26:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -140,21 +140,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; MultipleAbstractParents()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents
- (param $this (ref null $multipleabstractparents.MultipleAbstractParents))
+;;; MultipleAbstractParents MultipleAbstractParents.$create()
+(func $$create__multipleabstractparents_MultipleAbstractParents@multipleabstractparents.MultipleAbstractParents
  (result (ref null $multipleabstractparents.MultipleAbstractParents))
+ ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
+ (local $$instance (ref null $multipleabstractparents.MultipleAbstractParents))
+ (block
+  ;; MultipleAbstractParents $instance = new MultipleAbstractParents.<init>();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
+  (local.set $$instance (struct.new_with_rtt $multipleabstractparents.MultipleAbstractParents (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.vtable)) (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.itable)) (i32.const 0) (global.get $multipleabstractparents.MultipleAbstractParents.rtt)))
+  ;; $instance.$ctor();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents@multipleabstractparents.MultipleAbstractParents (local.get $$instance))
+  ;; return $instance;
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void MultipleAbstractParents.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents@multipleabstractparents.MultipleAbstractParents
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
  (block
   ;; multipleabstractparents.MultipleAbstractParents.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return MultipleAbstractParents.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -292,21 +306,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; AbstractListCollection()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
+;;; void AbstractListCollection.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractListCollection@multipleabstractparents.MultipleAbstractParents.AbstractListCollection
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection))
- (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractListCollection))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:27:31
  (block
   ;; multipleabstractparents.MultipleAbstractParents.AbstractListCollection.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:27:31
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractListCollection )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:27:31
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AbstractListCollection.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:27:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -348,21 +358,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; AbstractCollection()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractCollection
+;;; void AbstractCollection.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractCollection@multipleabstractparents.MultipleAbstractParents.AbstractCollection
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
- (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractCollection))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:29:31
  (block
   ;; multipleabstractparents.MultipleAbstractParents.AbstractCollection.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:29:31
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractCollection )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:29:31
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AbstractCollection.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:29:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -421,21 +427,17 @@
   $multipleabstractparents.MultipleAbstractParents.AbstractCollection.vtable)
 )
 
-;;; AbstractList()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractList
+;;; void AbstractList.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList@multipleabstractparents.MultipleAbstractParents.AbstractList
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList))
- (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:36:31
  (block
   ;; multipleabstractparents.MultipleAbstractParents.AbstractList.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:36:31
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractList )
-  ;; AbstractCollection.this.AbstractCollection.<init>();
+  ;; AbstractCollection.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:36:31
-  (drop (call $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractCollection (local.get $this)))
-  ;; return AbstractList.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:36:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractCollection@multipleabstractparents.MultipleAbstractParents.AbstractCollection (local.get $this))
  )
 )
 
@@ -476,21 +478,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; AbstractList2()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractList2
+;;; void AbstractList2.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList2@multipleabstractparents.MultipleAbstractParents.AbstractList2
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2))
- (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractList2))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:38:31
  (block
   ;; multipleabstractparents.MultipleAbstractParents.AbstractList2.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:38:31
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractList2 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:38:31
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AbstractList2.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:38:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -532,21 +530,35 @@
   $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable)
 )
 
-;;; ArrayList()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.ArrayList
- (param $this (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
+;;; ArrayList<T> ArrayList.$create()
+(func $$create__multipleabstractparents_MultipleAbstractParents_ArrayList@multipleabstractparents.MultipleAbstractParents.ArrayList
  (result (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
+ ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
+ (local $$instance (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
+ (block
+  ;; ArrayList<T> $instance = new ArrayList.<init>();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
+  (local.set $$instance (struct.new_with_rtt $multipleabstractparents.MultipleAbstractParents.ArrayList (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.ArrayList.vtable)) (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.ArrayList.itable)) (i32.const 0) (global.get $multipleabstractparents.MultipleAbstractParents.ArrayList.rtt)))
+  ;; $instance.$ctor();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_ArrayList@multipleabstractparents.MultipleAbstractParents.ArrayList (local.get $$instance))
+  ;; return $instance;
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ArrayList.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_ArrayList@multipleabstractparents.MultipleAbstractParents.ArrayList
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.ArrayList))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
  (block
   ;; multipleabstractparents.MultipleAbstractParents.ArrayList.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.ArrayList )
-  ;; AbstractList.this.AbstractList.<init>();
+  ;; AbstractList.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
-  (drop (call $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractList (local.get $this)))
-  ;; return ArrayList.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:40:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList@multipleabstractparents.MultipleAbstractParents.AbstractList (local.get $this))
  )
 )
 
@@ -639,21 +651,17 @@
   $multipleabstractparents.MultipleAbstractParents.AbstractList.vtable)
 )
 
-;;; AbstractStringList()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractStringList
+;;; void AbstractStringList.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractStringList@multipleabstractparents.MultipleAbstractParents.AbstractStringList
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
- (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:47:31
  (block
   ;; multipleabstractparents.MultipleAbstractParents.AbstractStringList.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:47:31
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList )
-  ;; AbstractList.this.AbstractList.<init>();
+  ;; AbstractList.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:47:31
-  (drop (call $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractList (local.get $this)))
-  ;; return AbstractStringList.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:47:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList@multipleabstractparents.MultipleAbstractParents.AbstractList (local.get $this))
  )
 )
 
@@ -729,21 +737,17 @@
   $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable)
 )
 
-;;; AbstractStringList2()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
+;;; void AbstractStringList2.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractStringList2@multipleabstractparents.MultipleAbstractParents.AbstractStringList2
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
- (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList2))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:50:31
  (block
   ;; multipleabstractparents.MultipleAbstractParents.AbstractStringList2.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:50:31
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList2 )
-  ;; AbstractList2.this.AbstractList2.<init>();
+  ;; AbstractList2.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:50:31
-  (drop (call $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractList2 (local.get $this)))
-  ;; return AbstractStringList2.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:50:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList2@multipleabstractparents.MultipleAbstractParents.AbstractList2 (local.get $this))
  )
 )
 
@@ -801,21 +805,17 @@
   $multipleabstractparents.MultipleAbstractParents.AbstractList2.vtable)
 )
 
-;;; AbstractStringList3()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
+;;; void AbstractStringList3.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractStringList3@multipleabstractparents.MultipleAbstractParents.AbstractStringList3
  (param $this (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3))
- (result (ref null $multipleabstractparents.MultipleAbstractParents.AbstractStringList3))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:53:31
  (block
   ;; multipleabstractparents.MultipleAbstractParents.AbstractStringList3.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:53:31
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.AbstractStringList3 )
-  ;; AbstractList2.this.AbstractList2.<init>();
+  ;; AbstractList2.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:53:31
-  (drop (call $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractList2 (local.get $this)))
-  ;; return AbstractStringList3.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:53:31
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractList2@multipleabstractparents.MultipleAbstractParents.AbstractList2 (local.get $this))
  )
 )
 
@@ -858,21 +858,35 @@
   $multipleabstractparents.MultipleAbstractParents.AbstractStringList.vtable)
 )
 
-;;; StringList()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.StringList
- (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
+;;; StringList StringList.$create()
+(func $$create__multipleabstractparents_MultipleAbstractParents_StringList@multipleabstractparents.MultipleAbstractParents.StringList
  (result (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
+ ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
+ (local $$instance (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
+ (block
+  ;; StringList $instance = new StringList.<init>();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
+  (local.set $$instance (struct.new_with_rtt $multipleabstractparents.MultipleAbstractParents.StringList (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.StringList.vtable)) (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.StringList.itable)) (i32.const 0) (global.get $multipleabstractparents.MultipleAbstractParents.StringList.rtt)))
+  ;; $instance.$ctor();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_StringList@multipleabstractparents.MultipleAbstractParents.StringList (local.get $$instance))
+  ;; return $instance;
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StringList.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_StringList@multipleabstractparents.MultipleAbstractParents.StringList
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringList))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
  (block
   ;; multipleabstractparents.MultipleAbstractParents.StringList.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.StringList )
-  ;; AbstractStringList.this.AbstractStringList.<init>();
+  ;; AbstractStringList.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
-  (drop (call $m_<init>__@multipleabstractparents.MultipleAbstractParents.AbstractStringList (local.get $this)))
-  ;; return StringList.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:55:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_AbstractStringList@multipleabstractparents.MultipleAbstractParents.AbstractStringList (local.get $this))
  )
 )
 
@@ -929,21 +943,35 @@
   $multipleabstractparents.MultipleAbstractParents.StringList.vtable)
 )
 
-;;; StringListChild()
-(func $m_<init>__@multipleabstractparents.MultipleAbstractParents.StringListChild
- (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
+;;; StringListChild StringListChild.$create()
+(func $$create__multipleabstractparents_MultipleAbstractParents_StringListChild@multipleabstractparents.MultipleAbstractParents.StringListChild
  (result (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
+ ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
+ (local $$instance (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
+ (block
+  ;; StringListChild $instance = new StringListChild.<init>();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
+  (local.set $$instance (struct.new_with_rtt $multipleabstractparents.MultipleAbstractParents.StringListChild (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.StringListChild.vtable)) (ref.as_non_null (global.get $multipleabstractparents.MultipleAbstractParents.StringListChild.itable)) (i32.const 0) (global.get $multipleabstractparents.MultipleAbstractParents.StringListChild.rtt)))
+  ;; $instance.$ctor();
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_StringListChild@multipleabstractparents.MultipleAbstractParents.StringListChild (local.get $$instance))
+  ;; return $instance;
+  ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StringListChild.$ctor()
+(func $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_StringListChild@multipleabstractparents.MultipleAbstractParents.StringListChild
+ (param $this (ref null $multipleabstractparents.MultipleAbstractParents.StringListChild))
  ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
  (block
   ;; multipleabstractparents.MultipleAbstractParents.StringListChild.$clinit();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
   (call $$clinit__void@multipleabstractparents.MultipleAbstractParents.StringListChild )
-  ;; StringList.this.StringList.<init>();
+  ;; StringList.this.$ctor();
   ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
-  (drop (call $m_<init>__@multipleabstractparents.MultipleAbstractParents.StringList (local.get $this)))
-  ;; return StringListChild.this;
-  ;;@ multipleabstractparents/MultipleAbstractParents.java:57:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_multipleabstractparents_MultipleAbstractParents_StringList@multipleabstractparents.MultipleAbstractParents.StringList (local.get $this))
  )
 )
 

@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; SimpleLiterals()
-(func $m_<init>__@simpleliterals.SimpleLiterals
- (param $this (ref null $simpleliterals.SimpleLiterals))
+;;; SimpleLiterals SimpleLiterals.$create()
+(func $$create__simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals
  (result (ref null $simpleliterals.SimpleLiterals))
+ ;;@ simpleliterals/SimpleLiterals.java:18:13
+ (local $$instance (ref null $simpleliterals.SimpleLiterals))
+ (block
+  ;; SimpleLiterals $instance = new SimpleLiterals.<init>();
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (local.set $$instance (struct.new_with_rtt $simpleliterals.SimpleLiterals (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.vtable)) (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.itable)) (i32.const 0) (global.get $simpleliterals.SimpleLiterals.rtt)))
+  ;; $instance.$ctor();
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (call $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals (local.get $$instance))
+  ;; return $instance;
+  ;;@ simpleliterals/SimpleLiterals.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SimpleLiterals.$ctor()
+(func $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals
+ (param $this (ref null $simpleliterals.SimpleLiterals))
  ;;@ simpleliterals/SimpleLiterals.java:18:13
  (block
   ;; simpleliterals.SimpleLiterals.$clinit();
   ;;@ simpleliterals/SimpleLiterals.java:18:13
   (call $$clinit__void@simpleliterals.SimpleLiterals )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SimpleLiterals.this;
-  ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

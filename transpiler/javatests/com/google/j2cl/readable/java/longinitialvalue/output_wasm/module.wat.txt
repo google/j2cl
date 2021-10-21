@@ -17,21 +17,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; LongInitialValue()
-(func $m_<init>__@longinitialvalue.LongInitialValue
+;;; void LongInitialValue.$ctor()
+(func $$ctor__void_$p_longinitialvalue_LongInitialValue@longinitialvalue.LongInitialValue
  (param $this (ref null $longinitialvalue.LongInitialValue))
- (result (ref null $longinitialvalue.LongInitialValue))
  ;;@ longinitialvalue/LongInitialValue.java:18:22
  (block
   ;; longinitialvalue.LongInitialValue.$clinit();
   ;;@ longinitialvalue/LongInitialValue.java:18:22
   (call $$clinit__void@longinitialvalue.LongInitialValue )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ longinitialvalue/LongInitialValue.java:18:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return LongInitialValue.this;
-  ;;@ longinitialvalue/LongInitialValue.java:18:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

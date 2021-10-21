@@ -52,21 +52,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Parent()
-(func $m_<init>__@jsmethodoverride.Parent
- (param $this (ref null $jsmethodoverride.Parent))
+;;; Parent Parent.$create()
+(func $$create__jsmethodoverride_Parent@jsmethodoverride.Parent
  (result (ref null $jsmethodoverride.Parent))
+ ;;@ jsmethodoverride/Child.java:21:6
+ (local $$instance (ref null $jsmethodoverride.Parent))
+ (block
+  ;; Parent $instance = new Parent.<init>();
+  ;;@ jsmethodoverride/Child.java:21:6
+  (local.set $$instance (struct.new_with_rtt $jsmethodoverride.Parent (ref.as_non_null (global.get $jsmethodoverride.Parent.vtable)) (ref.as_non_null (global.get $jsmethodoverride.Parent.itable)) (i32.const 0) (global.get $jsmethodoverride.Parent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsmethodoverride/Child.java:21:6
+  (call $$ctor__void_$p_jsmethodoverride_Parent@jsmethodoverride.Parent (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsmethodoverride/Child.java:21:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_jsmethodoverride_Parent@jsmethodoverride.Parent
+ (param $this (ref null $jsmethodoverride.Parent))
  ;;@ jsmethodoverride/Child.java:21:6
  (block
   ;; jsmethodoverride.Parent.$clinit();
   ;;@ jsmethodoverride/Child.java:21:6
   (call $$clinit__void@jsmethodoverride.Parent )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsmethodoverride/Child.java:21:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Parent.this;
-  ;;@ jsmethodoverride/Child.java:21:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -134,21 +148,35 @@
   $jsmethodoverride.Parent.vtable)
 )
 
-;;; Child()
-(func $m_<init>__@jsmethodoverride.Child
- (param $this (ref null $jsmethodoverride.Child))
+;;; Child Child.$create()
+(func $$create__jsmethodoverride_Child@jsmethodoverride.Child
  (result (ref null $jsmethodoverride.Child))
+ ;;@ jsmethodoverride/Child.java:27:13
+ (local $$instance (ref null $jsmethodoverride.Child))
+ (block
+  ;; Child $instance = new Child.<init>();
+  ;;@ jsmethodoverride/Child.java:27:13
+  (local.set $$instance (struct.new_with_rtt $jsmethodoverride.Child (ref.as_non_null (global.get $jsmethodoverride.Child.vtable)) (ref.as_non_null (global.get $jsmethodoverride.Child.itable)) (i32.const 0) (global.get $jsmethodoverride.Child.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsmethodoverride/Child.java:27:13
+  (call $$ctor__void_$p_jsmethodoverride_Child@jsmethodoverride.Child (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsmethodoverride/Child.java:27:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Child.$ctor()
+(func $$ctor__void_$p_jsmethodoverride_Child@jsmethodoverride.Child
+ (param $this (ref null $jsmethodoverride.Child))
  ;;@ jsmethodoverride/Child.java:27:13
  (block
   ;; jsmethodoverride.Child.$clinit();
   ;;@ jsmethodoverride/Child.java:27:13
   (call $$clinit__void@jsmethodoverride.Child )
-  ;; Parent.this.Parent.<init>();
+  ;; Parent.this.$ctor();
   ;;@ jsmethodoverride/Child.java:27:13
-  (drop (call $m_<init>__@jsmethodoverride.Parent (local.get $this)))
-  ;; return Child.this;
-  ;;@ jsmethodoverride/Child.java:27:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_jsmethodoverride_Parent@jsmethodoverride.Parent (local.get $this))
  )
 )
 

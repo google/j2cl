@@ -161,21 +161,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; LocalClassInStaticContext()
-(func $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext))
+;;; LocalClassInStaticContext LocalClassInStaticContext.$create()
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext@localclassinstaticcontext.LocalClassInStaticContext
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext))
+ (block
+  ;; LocalClassInStaticContext $instance = new LocalClassInStaticContext.<init>();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
+  (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext@localclassinstaticcontext.LocalClassInStaticContext (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void LocalClassInStaticContext.$ctor()
+(func $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext@localclassinstaticcontext.LocalClassInStaticContext
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return LocalClassInStaticContext.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -187,12 +201,12 @@
   ;; localclassinstaticcontext.LocalClassInStaticContext.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:21:28
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext )
-  ;; new $1A.<init>();
+  ;; localclassinstaticcontext.LocalClassInStaticContext.1A.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:24:4
-  (drop (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
-  ;; Object a = new $3.<init>();
+  (drop (call $$create__localclassinstaticcontext_LocalClassInStaticContext_1A@localclassinstaticcontext.LocalClassInStaticContext.1A ))
+  ;; Object a = localclassinstaticcontext.LocalClassInStaticContext.3.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:25:4
-  (local.set $a (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.3 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt))))
+  (local.set $a (call $$create__localclassinstaticcontext_LocalClassInStaticContext_3@localclassinstaticcontext.LocalClassInStaticContext.3 ))
  )
 )
 
@@ -216,15 +230,15 @@
   ;; java.lang.Object.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:18:13
   (call $$clinit__void@java.lang.Object )
-  ;; (localclassinstaticcontext.LocalClassInStaticContext.f = new $1.<init>());
+  ;; (localclassinstaticcontext.LocalClassInStaticContext.f = localclassinstaticcontext.LocalClassInStaticContext.1.$create());
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:2
-  (global.set $f_f__localclassinstaticcontext_LocalClassInStaticContext (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.rtt))))
-  ;; new $1B.<init>();
+  (global.set $f_f__localclassinstaticcontext_LocalClassInStaticContext (call $$create__localclassinstaticcontext_LocalClassInStaticContext_1@localclassinstaticcontext.LocalClassInStaticContext.1 ))
+  ;; localclassinstaticcontext.LocalClassInStaticContext.1B.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:38:4
-  (drop (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1B (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.rtt))))
-  ;; Object b = new $2.<init>();
+  (drop (call $$create__localclassinstaticcontext_LocalClassInStaticContext_1B@localclassinstaticcontext.LocalClassInStaticContext.1B ))
+  ;; Object b = localclassinstaticcontext.LocalClassInStaticContext.2.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:4
-  (local.set $b (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.2 (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.2 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.rtt))))
+  (local.set $b (call $$create__localclassinstaticcontext_LocalClassInStaticContext_2@localclassinstaticcontext.LocalClassInStaticContext.2 ))
  )
 )
 
@@ -257,21 +271,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> extends Object()
-(func $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
+;;; <anonymous> extends Object <anonymous> extends Object.$create()
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext_1@localclassinstaticcontext.LocalClassInStaticContext.1
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
+ (block
+  ;; <anonymous> extends Object $instance = new $1.<init>();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
+  (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1@localclassinstaticcontext.LocalClassInStaticContext.1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor()
+(func $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1@localclassinstaticcontext.LocalClassInStaticContext.1
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.1.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:19:40
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -326,21 +354,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; A()
-(func $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1A
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
+;;; A A.$create()
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext_1A@localclassinstaticcontext.LocalClassInStaticContext.1A
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
+ (block
+  ;; A $instance = new $1A.<init>();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
+  (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1A@localclassinstaticcontext.LocalClassInStaticContext.1A (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void A.$ctor()
+(func $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1A@localclassinstaticcontext.LocalClassInStaticContext.1A
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1A))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.1A.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1A )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1A.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:23:10
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -396,21 +438,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> extends Object()
-(func $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.3
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
+;;; <anonymous> extends Object <anonymous> extends Object.$create()
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext_3@localclassinstaticcontext.LocalClassInStaticContext.3
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
+ (block
+  ;; <anonymous> extends Object $instance = new $3.<init>();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.3 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
+  (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_3@localclassinstaticcontext.LocalClassInStaticContext.3 (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor()
+(func $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_3@localclassinstaticcontext.LocalClassInStaticContext.3
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.3.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.3 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $3.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:26:21
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -422,9 +478,9 @@
  (local $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.3))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinstaticcontext.LocalClassInStaticContext.3.rtt)))
  (block
-  ;; new $1A.<init>();
+  ;; localclassinstaticcontext.LocalClassInStaticContext.1A.$create();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:30:12
-  (drop (call $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1A (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1A (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1A.rtt))))
+  (drop (call $$create__localclassinstaticcontext_LocalClassInStaticContext_1A@localclassinstaticcontext.LocalClassInStaticContext.1A ))
  )
 )
 (elem declare func $m_m__void_$pp_localclassinstaticcontext@localclassinstaticcontext.LocalClassInStaticContext.3)
@@ -480,21 +536,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; B()
-(func $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.1B
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
+;;; B B.$create()
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext_1B@localclassinstaticcontext.LocalClassInStaticContext.1B
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
+ (block
+  ;; B $instance = new $1B.<init>();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.1B (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.1B.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
+  (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1B@localclassinstaticcontext.LocalClassInStaticContext.1B (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void B.$ctor()
+(func $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_1B@localclassinstaticcontext.LocalClassInStaticContext.1B
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.1B))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.1B.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.1B )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1B.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:37:10
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -549,21 +619,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> extends Object()
-(func $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.2
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
+;;; <anonymous> extends Object <anonymous> extends Object.$create()
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext_2@localclassinstaticcontext.LocalClassInStaticContext.2
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
+ (block
+  ;; <anonymous> extends Object $instance = new $2.<init>();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.2 (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.itable)) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.2.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
+  (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_2@localclassinstaticcontext.LocalClassInStaticContext.2 (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor()
+(func $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_2@localclassinstaticcontext.LocalClassInStaticContext.2
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.2))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.2.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.2 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $2.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:39:28
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -620,24 +704,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; C()
-(func $m_<init>__@localclassinstaticcontext.LocalClassInStaticContext.C
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+;;; C C.$create()
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
+ (block
+  ;; C $instance = new C.<init>();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.itable)) (i32.const 0) (i32.const 0) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.rtt)))
+  ;; $instance.$ctor();
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
+  (call $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C (local.get $$instance))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void C.$ctor()
+(func $$ctor__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.C.$clinit();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$clinit__void@localclassinstaticcontext.LocalClassInStaticContext.C )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; C.this.$init();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
   (call $$init__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C (local.get $this))
-  ;; return C.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:42:22
-  (return (local.get $this))
  )
 )
 
@@ -651,9 +749,9 @@
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.rtt)))
  (block
   (block
-   ;; D $qualifier = new $1D.<init>(C.this);
+   ;; D $qualifier = localclassinstaticcontext.LocalClassInStaticContext.C.1D.$create(C.this);
    ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:52:6
-   (local.set $$qualifier (call $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C.1D (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.itable)) (i32.const 0) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt))(local.get $this)))
+   (local.set $$qualifier (call $$create__localclassinstaticcontext_LocalClassInStaticContext_C__localclassinstaticcontext_LocalClassInStaticContext_C_1D@localclassinstaticcontext.LocalClassInStaticContext.C.1D (local.get $this)))
    ;; $qualifier.fun();
    ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:52:6
    (drop (call_ref (local.get $$qualifier)(struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable $m_fun__int (struct.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D $vtable(local.get $$qualifier)))))
@@ -726,11 +824,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; D(C $outer_this)
-(func $m_<init>__localclassinstaticcontext_LocalClassInStaticContext_C@localclassinstaticcontext.LocalClassInStaticContext.C.1D
- (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
+;;; D D.$create(C $outer_this)
+(func $$create__localclassinstaticcontext_LocalClassInStaticContext_C__localclassinstaticcontext_LocalClassInStaticContext_C_1D@localclassinstaticcontext.LocalClassInStaticContext.C.1D
  (param $$outer_this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  (result (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
+ ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
+ (local $$instance (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
+ (block
+  ;; D $instance = new $1D.<init>($outer_this);
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
+  (local.set $$instance (struct.new_with_rtt $localclassinstaticcontext.LocalClassInStaticContext.C.1D (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.vtable)) (ref.as_non_null (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.itable)) (i32.const 0) (ref.null $localclassinstaticcontext.LocalClassInStaticContext.C) (global.get $localclassinstaticcontext.LocalClassInStaticContext.C.1D.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
+  (call $$ctor__localclassinstaticcontext_LocalClassInStaticContext_C__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C_1D@localclassinstaticcontext.LocalClassInStaticContext.C.1D (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void D.$ctor(C $outer_this)
+(func $$ctor__localclassinstaticcontext_LocalClassInStaticContext_C__void_$p_localclassinstaticcontext_LocalClassInStaticContext_C_1D@localclassinstaticcontext.LocalClassInStaticContext.C.1D
+ (param $this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C.1D))
+ (param $$outer_this (ref null $localclassinstaticcontext.LocalClassInStaticContext.C))
  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
  (block
   ;; localclassinstaticcontext.LocalClassInStaticContext.C.1D.$clinit();
@@ -739,12 +855,9 @@
   ;; ($1D.this.this = $outer_this);
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
   (struct.set $localclassinstaticcontext.LocalClassInStaticContext.C.1D $$outer_this__localclassinstaticcontext_LocalClassInStaticContext_C_1D(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1D.this;
-  ;;@ localclassinstaticcontext/LocalClassInStaticContext.java:47:12
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

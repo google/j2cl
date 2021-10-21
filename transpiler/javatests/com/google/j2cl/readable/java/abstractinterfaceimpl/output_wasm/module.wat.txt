@@ -55,21 +55,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; AbstractInterfaceImpl()
-(func $m_<init>__@abstractinterfaceimpl.AbstractInterfaceImpl
+;;; void AbstractInterfaceImpl.$ctor()
+(func $$ctor__void_$p_abstractinterfaceimpl_AbstractInterfaceImpl@abstractinterfaceimpl.AbstractInterfaceImpl
  (param $this (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
- (result (ref null $abstractinterfaceimpl.AbstractInterfaceImpl))
  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
  (block
   ;; abstractinterfaceimpl.AbstractInterfaceImpl.$clinit();
   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
   (call $$clinit__void@abstractinterfaceimpl.AbstractInterfaceImpl )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AbstractInterfaceImpl.this;
-  ;;@ abstractinterfaceimpl/AbstractInterfaceImpl.java:22:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

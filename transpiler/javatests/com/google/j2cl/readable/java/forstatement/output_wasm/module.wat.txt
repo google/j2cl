@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ForStatement()
-(func $m_<init>__@forstatement.ForStatement
- (param $this (ref null $forstatement.ForStatement))
+;;; ForStatement ForStatement.$create()
+(func $$create__forstatement_ForStatement@forstatement.ForStatement
  (result (ref null $forstatement.ForStatement))
+ ;;@ forstatement/ForStatement.java:18:13
+ (local $$instance (ref null $forstatement.ForStatement))
+ (block
+  ;; ForStatement $instance = new ForStatement.<init>();
+  ;;@ forstatement/ForStatement.java:18:13
+  (local.set $$instance (struct.new_with_rtt $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $forstatement.ForStatement.itable)) (i32.const 0) (global.get $forstatement.ForStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ forstatement/ForStatement.java:18:13
+  (call $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ forstatement/ForStatement.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ForStatement.$ctor()
+(func $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement
+ (param $this (ref null $forstatement.ForStatement))
  ;;@ forstatement/ForStatement.java:18:13
  (block
   ;; forstatement.ForStatement.$clinit();
   ;;@ forstatement/ForStatement.java:18:13
   (call $$clinit__void@forstatement.ForStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ forstatement/ForStatement.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ForStatement.this;
-  ;;@ forstatement/ForStatement.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -95,21 +95,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; A()
-(func $m_<init>__@jsbridgebackward.A
- (param $this (ref null $jsbridgebackward.A))
+;;; A A.$create()
+(func $$create__jsbridgebackward_A@jsbridgebackward.A
  (result (ref null $jsbridgebackward.A))
+ ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+ (local $$instance (ref null $jsbridgebackward.A))
+ (block
+  ;; A $instance = new A.<init>();
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  (local.set $$instance (struct.new_with_rtt $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $jsbridgebackward.A.itable)) (i32.const 0) (global.get $jsbridgebackward.A.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void A.$ctor()
+(func $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A
+ (param $this (ref null $jsbridgebackward.A))
  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
  (block
   ;; jsbridgebackward.A.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (call $$clinit__void@jsbridgebackward.A )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return A.this;
-  ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -182,21 +196,35 @@
   $jsbridgebackward.A.vtable)
 )
 
-;;; InterfaceImpl()
-(func $m_<init>__@jsbridgebackward.InterfaceImpl
- (param $this (ref null $jsbridgebackward.InterfaceImpl))
+;;; InterfaceImpl InterfaceImpl.$create()
+(func $$create__jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl
  (result (ref null $jsbridgebackward.InterfaceImpl))
+ ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+ (local $$instance (ref null $jsbridgebackward.InterfaceImpl))
+ (block
+  ;; InterfaceImpl $instance = new InterfaceImpl.<init>();
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  (local.set $$instance (struct.new_with_rtt $jsbridgebackward.InterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.itable)) (i32.const 0) (global.get $jsbridgebackward.InterfaceImpl.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InterfaceImpl.$ctor()
+(func $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl
+ (param $this (ref null $jsbridgebackward.InterfaceImpl))
  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
  (block
   ;; jsbridgebackward.InterfaceImpl.$clinit();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (call $$clinit__void@jsbridgebackward.InterfaceImpl )
-  ;; A.this.A.<init>();
+  ;; A.this.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-  (drop (call $m_<init>__@jsbridgebackward.A (local.get $this)))
-  ;; return InterfaceImpl.this;
-  ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (local.get $this))
  )
 )
 

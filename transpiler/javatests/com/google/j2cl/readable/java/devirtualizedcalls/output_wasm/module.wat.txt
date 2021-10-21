@@ -111,21 +111,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ArrayCalls()
-(func $m_<init>__@devirtualizedcalls.ArrayCalls
- (param $this (ref null $devirtualizedcalls.ArrayCalls))
+;;; ArrayCalls ArrayCalls.$create()
+(func $$create__devirtualizedcalls_ArrayCalls@devirtualizedcalls.ArrayCalls
  (result (ref null $devirtualizedcalls.ArrayCalls))
+ ;;@ devirtualizedcalls/ArrayCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.ArrayCalls))
+ (block
+  ;; ArrayCalls $instance = new ArrayCalls.<init>();
+  ;;@ devirtualizedcalls/ArrayCalls.java:18:13
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.ArrayCalls (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
+  ;; $instance.$ctor();
+  ;;@ devirtualizedcalls/ArrayCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_ArrayCalls@devirtualizedcalls.ArrayCalls (local.get $$instance))
+  ;; return $instance;
+  ;;@ devirtualizedcalls/ArrayCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ArrayCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_ArrayCalls@devirtualizedcalls.ArrayCalls
+ (param $this (ref null $devirtualizedcalls.ArrayCalls))
  ;;@ devirtualizedcalls/ArrayCalls.java:18:13
  (block
   ;; devirtualizedcalls.ArrayCalls.$clinit();
   ;;@ devirtualizedcalls/ArrayCalls.java:18:13
   (call $$clinit__void@devirtualizedcalls.ArrayCalls )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ devirtualizedcalls/ArrayCalls.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ArrayCalls.this;
-  ;;@ devirtualizedcalls/ArrayCalls.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -141,10 +155,10 @@
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
  (block
-  ;; Object[][] array2d = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = new OfInt.<init>(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 1),$array_literal),-1);
+  ;; Object[][] array2d = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = javaemul.internal.WasmArray.OfInt.$create(2),($array_literal.elements[0] = 1),($array_literal.elements[1] = 1),$array_literal),-1);
   ;;@ devirtualizedcalls/ArrayCalls.java:20:4
   (local.set $array2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-   (local.set $$array_literal (call $m_<init>__int@javaemul.internal.WasmArray.OfInt (struct.new_with_rtt $javaemul.internal.WasmArray.OfInt (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfInt.itable)) (i32.const 0) (i32.const 0) (ref.null $int.array) (global.get $javaemul.internal.WasmArray.OfInt.rtt))(i32.const 2)))
+   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 2)))
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
    (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 1))
    (local.get $$array_literal)
@@ -212,21 +226,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; CharSequenceCalls()
-(func $m_<init>__@devirtualizedcalls.CharSequenceCalls
- (param $this (ref null $devirtualizedcalls.CharSequenceCalls))
+;;; CharSequenceCalls CharSequenceCalls.$create()
+(func $$create__devirtualizedcalls_CharSequenceCalls@devirtualizedcalls.CharSequenceCalls
  (result (ref null $devirtualizedcalls.CharSequenceCalls))
+ ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.CharSequenceCalls))
+ (block
+  ;; CharSequenceCalls $instance = new CharSequenceCalls.<init>();
+  ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.CharSequenceCalls (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
+  ;; $instance.$ctor();
+  ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_CharSequenceCalls@devirtualizedcalls.CharSequenceCalls (local.get $$instance))
+  ;; return $instance;
+  ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void CharSequenceCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_CharSequenceCalls@devirtualizedcalls.CharSequenceCalls
+ (param $this (ref null $devirtualizedcalls.CharSequenceCalls))
  ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
  (block
   ;; devirtualizedcalls.CharSequenceCalls.$clinit();
   ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
   (call $$clinit__void@devirtualizedcalls.CharSequenceCalls )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return CharSequenceCalls.this;
-  ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -317,21 +345,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; NumberCalls()
-(func $m_<init>__@devirtualizedcalls.NumberCalls
- (param $this (ref null $devirtualizedcalls.NumberCalls))
+;;; NumberCalls NumberCalls.$create()
+(func $$create__devirtualizedcalls_NumberCalls@devirtualizedcalls.NumberCalls
  (result (ref null $devirtualizedcalls.NumberCalls))
+ ;;@ devirtualizedcalls/NumberCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.NumberCalls))
+ (block
+  ;; NumberCalls $instance = new NumberCalls.<init>();
+  ;;@ devirtualizedcalls/NumberCalls.java:18:13
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.NumberCalls (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.NumberCalls.rtt)))
+  ;; $instance.$ctor();
+  ;;@ devirtualizedcalls/NumberCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_NumberCalls@devirtualizedcalls.NumberCalls (local.get $$instance))
+  ;; return $instance;
+  ;;@ devirtualizedcalls/NumberCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NumberCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_NumberCalls@devirtualizedcalls.NumberCalls
+ (param $this (ref null $devirtualizedcalls.NumberCalls))
  ;;@ devirtualizedcalls/NumberCalls.java:18:13
  (block
   ;; devirtualizedcalls.NumberCalls.$clinit();
   ;;@ devirtualizedcalls/NumberCalls.java:18:13
   (call $$clinit__void@devirtualizedcalls.NumberCalls )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ devirtualizedcalls/NumberCalls.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return NumberCalls.this;
-  ;;@ devirtualizedcalls/NumberCalls.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -357,9 +399,9 @@
  (local $this (ref null $devirtualizedcalls.NumberCalls))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.NumberCalls.rtt)))
  (block
-  ;; Number i = new Integer.<init>(1);
+  ;; Number i = java.lang.Integer.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:20:4
-  (local.set $i (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+  (local.set $i (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
   ;; i.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:21:4
   (drop (call_ref (local.get $i)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $i)))))
@@ -378,9 +420,9 @@
   ;; i.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:26:4
   (drop (call_ref (local.get $i)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $i)))))
-  ;; Integer ii = new Integer.<init>(1);
+  ;; Integer ii = java.lang.Integer.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:28:4
-  (local.set $ii (call $m_<init>__int@java.lang.Integer (struct.new_with_rtt $java.lang.Integer (ref.as_non_null (global.get $java.lang.Integer.vtable)) (ref.as_non_null (global.get $java.lang.Integer.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Integer.rtt))(i32.const 1)))
+  (local.set $ii (call $$create__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
   ;; ii.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:29:4
   (drop (call_ref (local.get $ii)(struct.get $java.lang.Integer.vtable $m_byteValue__byte (struct.get $java.lang.Integer $vtable(local.get $ii)))))
@@ -399,9 +441,9 @@
   ;; ii.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:34:4
   (drop (call_ref (local.get $ii)(struct.get $java.lang.Integer.vtable $m_shortValue__short (struct.get $java.lang.Integer $vtable(local.get $ii)))))
-  ;; Number d = new Double.<init>(1.1);
+  ;; Number d = java.lang.Double.$create(1.1);
   ;;@ devirtualizedcalls/NumberCalls.java:36:4
-  (local.set $d (call $m_<init>__double@java.lang.Double (struct.new_with_rtt $java.lang.Double (ref.as_non_null (global.get $java.lang.Double.vtable)) (ref.as_non_null (global.get $java.lang.Double.itable)) (i32.const 0) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
+  (local.set $d (call $$create__double__java_lang_Double@java.lang.Double (f64.const 1.1)))
   ;; d.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:37:4
   (drop (call_ref (local.get $d)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $d)))))
@@ -420,9 +462,9 @@
   ;; d.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:42:4
   (drop (call_ref (local.get $d)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $d)))))
-  ;; Double dd = new Double.<init>(1.1);
+  ;; Double dd = java.lang.Double.$create(1.1);
   ;;@ devirtualizedcalls/NumberCalls.java:44:4
-  (local.set $dd (call $m_<init>__double@java.lang.Double (struct.new_with_rtt $java.lang.Double (ref.as_non_null (global.get $java.lang.Double.vtable)) (ref.as_non_null (global.get $java.lang.Double.itable)) (i32.const 0) (f64.const 0.0) (global.get $java.lang.Double.rtt))(f64.const 1.1)))
+  (local.set $dd (call $$create__double__java_lang_Double@java.lang.Double (f64.const 1.1)))
   ;; dd.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:45:4
   (drop (call_ref (local.get $dd)(struct.get $java.lang.Double.vtable $m_byteValue__byte (struct.get $java.lang.Double $vtable(local.get $dd)))))
@@ -441,9 +483,9 @@
   ;; dd.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:50:4
   (drop (call_ref (local.get $dd)(struct.get $java.lang.Double.vtable $m_shortValue__short (struct.get $java.lang.Double $vtable(local.get $dd)))))
-  ;; Number s = new Short.<init>(1);
+  ;; Number s = java.lang.Short.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:52:4
-  (local.set $s (call $m_<init>__short@java.lang.Short (struct.new_with_rtt $java.lang.Short (ref.as_non_null (global.get $java.lang.Short.vtable)) (ref.as_non_null (global.get $java.lang.Short.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 1)))
+  (local.set $s (call $$create__short__java_lang_Short@java.lang.Short (i32.const 1)))
   ;; s.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:53:4
   (drop (call_ref (local.get $s)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $s)))))
@@ -462,9 +504,9 @@
   ;; s.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:58:4
   (drop (call_ref (local.get $s)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $s)))))
-  ;; Short ss = new Short.<init>(1);
+  ;; Short ss = java.lang.Short.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:60:4
-  (local.set $ss (call $m_<init>__short@java.lang.Short (struct.new_with_rtt $java.lang.Short (ref.as_non_null (global.get $java.lang.Short.vtable)) (ref.as_non_null (global.get $java.lang.Short.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Short.rtt))(i32.const 1)))
+  (local.set $ss (call $$create__short__java_lang_Short@java.lang.Short (i32.const 1)))
   ;; ss.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:61:4
   (drop (call_ref (local.get $ss)(struct.get $java.lang.Short.vtable $m_byteValue__byte (struct.get $java.lang.Short $vtable(local.get $ss)))))
@@ -483,9 +525,9 @@
   ;; ss.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:66:4
   (drop (call_ref (local.get $ss)(struct.get $java.lang.Short.vtable $m_shortValue__short (struct.get $java.lang.Short $vtable(local.get $ss)))))
-  ;; Number b = new Byte.<init>(1);
+  ;; Number b = java.lang.Byte.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:68:4
-  (local.set $b (call $m_<init>__byte@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (ref.as_non_null (global.get $java.lang.Byte.vtable)) (ref.as_non_null (global.get $java.lang.Byte.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 1)))
+  (local.set $b (call $$create__byte__java_lang_Byte@java.lang.Byte (i32.const 1)))
   ;; b.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:69:4
   (drop (call_ref (local.get $b)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $b)))))
@@ -504,9 +546,9 @@
   ;; b.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:74:4
   (drop (call_ref (local.get $b)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $b)))))
-  ;; Byte bb = new Byte.<init>(1);
+  ;; Byte bb = java.lang.Byte.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:76:4
-  (local.set $bb (call $m_<init>__byte@java.lang.Byte (struct.new_with_rtt $java.lang.Byte (ref.as_non_null (global.get $java.lang.Byte.vtable)) (ref.as_non_null (global.get $java.lang.Byte.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Byte.rtt))(i32.const 1)))
+  (local.set $bb (call $$create__byte__java_lang_Byte@java.lang.Byte (i32.const 1)))
   ;; bb.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:77:4
   (drop (call_ref (local.get $bb)(struct.get $java.lang.Byte.vtable $m_byteValue__byte (struct.get $java.lang.Byte $vtable(local.get $bb)))))
@@ -525,9 +567,9 @@
   ;; bb.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:82:4
   (drop (call_ref (local.get $bb)(struct.get $java.lang.Byte.vtable $m_shortValue__short (struct.get $java.lang.Byte $vtable(local.get $bb)))))
-  ;; Number f = new Float.<init>(1.100000023841858);
+  ;; Number f = java.lang.Float.$create(1.100000023841858);
   ;;@ devirtualizedcalls/NumberCalls.java:84:4
-  (local.set $f (call $m_<init>__float@java.lang.Float (struct.new_with_rtt $java.lang.Float (ref.as_non_null (global.get $java.lang.Float.vtable)) (ref.as_non_null (global.get $java.lang.Float.itable)) (i32.const 0) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
+  (local.set $f (call $$create__float__java_lang_Float@java.lang.Float (f32.const 1.100000023841858)))
   ;; f.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:85:4
   (drop (call_ref (local.get $f)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $f)))))
@@ -546,9 +588,9 @@
   ;; f.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:90:4
   (drop (call_ref (local.get $f)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $f)))))
-  ;; Float ff = new Float.<init>(1.100000023841858);
+  ;; Float ff = java.lang.Float.$create(1.100000023841858);
   ;;@ devirtualizedcalls/NumberCalls.java:92:4
-  (local.set $ff (call $m_<init>__float@java.lang.Float (struct.new_with_rtt $java.lang.Float (ref.as_non_null (global.get $java.lang.Float.vtable)) (ref.as_non_null (global.get $java.lang.Float.itable)) (i32.const 0) (f32.const 0.0) (global.get $java.lang.Float.rtt))(f32.const 1.100000023841858)))
+  (local.set $ff (call $$create__float__java_lang_Float@java.lang.Float (f32.const 1.100000023841858)))
   ;; ff.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:93:4
   (drop (call_ref (local.get $ff)(struct.get $java.lang.Float.vtable $m_byteValue__byte (struct.get $java.lang.Float $vtable(local.get $ff)))))
@@ -567,9 +609,9 @@
   ;; ff.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:98:4
   (drop (call_ref (local.get $ff)(struct.get $java.lang.Float.vtable $m_shortValue__short (struct.get $java.lang.Float $vtable(local.get $ff)))))
-  ;; Number l = new Long.<init>(1);
+  ;; Number l = java.lang.Long.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:100:4
-  (local.set $l (call $m_<init>__long@java.lang.Long (struct.new_with_rtt $java.lang.Long (ref.as_non_null (global.get $java.lang.Long.vtable)) (ref.as_non_null (global.get $java.lang.Long.itable)) (i32.const 0) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
+  (local.set $l (call $$create__long__java_lang_Long@java.lang.Long (i64.const 1)))
   ;; l.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:101:4
   (drop (call_ref (local.get $l)(struct.get $java.lang.Number.vtable $m_byteValue__byte (struct.get $java.lang.Number $vtable(local.get $l)))))
@@ -588,9 +630,9 @@
   ;; l.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:106:4
   (drop (call_ref (local.get $l)(struct.get $java.lang.Number.vtable $m_shortValue__short (struct.get $java.lang.Number $vtable(local.get $l)))))
-  ;; Long ll = new Long.<init>(1);
+  ;; Long ll = java.lang.Long.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:108:4
-  (local.set $ll (call $m_<init>__long@java.lang.Long (struct.new_with_rtt $java.lang.Long (ref.as_non_null (global.get $java.lang.Long.vtable)) (ref.as_non_null (global.get $java.lang.Long.itable)) (i32.const 0) (i64.const 0) (global.get $java.lang.Long.rtt))(i64.const 1)))
+  (local.set $ll (call $$create__long__java_lang_Long@java.lang.Long (i64.const 1)))
   ;; ll.byteValue();
   ;;@ devirtualizedcalls/NumberCalls.java:109:4
   (drop (call_ref (local.get $ll)(struct.get $java.lang.Long.vtable $m_byteValue__byte (struct.get $java.lang.Long $vtable(local.get $ll)))))
@@ -609,15 +651,15 @@
   ;; ll.shortValue();
   ;;@ devirtualizedcalls/NumberCalls.java:114:4
   (drop (call_ref (local.get $ll)(struct.get $java.lang.Long.vtable $m_shortValue__short (struct.get $java.lang.Long $vtable(local.get $ll)))))
-  ;; Character c = new Character.<init>(97);
+  ;; Character c = java.lang.Character.$create(97);
   ;;@ devirtualizedcalls/NumberCalls.java:116:4
-  (local.set $c (call $m_<init>__char@java.lang.Character (struct.new_with_rtt $java.lang.Character (ref.as_non_null (global.get $java.lang.Character.vtable)) (ref.as_non_null (global.get $java.lang.Character.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Character.rtt))(i32.const 97)))
+  (local.set $c (call $$create__char__java_lang_Character@java.lang.Character (i32.const 97)))
   ;; c.charValue();
   ;;@ devirtualizedcalls/NumberCalls.java:117:4
   (drop (call_ref (local.get $c)(struct.get $java.lang.Character.vtable $m_charValue__char (struct.get $java.lang.Character $vtable(local.get $c)))))
-  ;; Boolean bool = new Boolean.<init>(true);
+  ;; Boolean bool = java.lang.Boolean.$create(true);
   ;;@ devirtualizedcalls/NumberCalls.java:119:4
-  (local.set $bool (call $m_<init>__boolean@java.lang.Boolean (struct.new_with_rtt $java.lang.Boolean (ref.as_non_null (global.get $java.lang.Boolean.vtable)) (ref.as_non_null (global.get $java.lang.Boolean.itable)) (i32.const 0) (i32.const 0) (global.get $java.lang.Boolean.rtt))(i32.const 1)))
+  (local.set $bool (call $$create__boolean__java_lang_Boolean@java.lang.Boolean (i32.const 1)))
   ;; bool.booleanValue();
   ;;@ devirtualizedcalls/NumberCalls.java:120:4
   (drop (call_ref (local.get $bool)(struct.get $java.lang.Boolean.vtable $m_booleanValue__boolean (struct.get $java.lang.Boolean $vtable(local.get $bool)))))
@@ -678,21 +720,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ObjectCalls()
-(func $m_<init>__@devirtualizedcalls.ObjectCalls
- (param $this (ref null $devirtualizedcalls.ObjectCalls))
+;;; ObjectCalls ObjectCalls.$create()
+(func $$create__devirtualizedcalls_ObjectCalls@devirtualizedcalls.ObjectCalls
  (result (ref null $devirtualizedcalls.ObjectCalls))
+ ;;@ devirtualizedcalls/ObjectCalls.java:18:13
+ (local $$instance (ref null $devirtualizedcalls.ObjectCalls))
+ (block
+  ;; ObjectCalls $instance = new ObjectCalls.<init>();
+  ;;@ devirtualizedcalls/ObjectCalls.java:18:13
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.ObjectCalls (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
+  ;; $instance.$ctor();
+  ;;@ devirtualizedcalls/ObjectCalls.java:18:13
+  (call $$ctor__void_$p_devirtualizedcalls_ObjectCalls@devirtualizedcalls.ObjectCalls (local.get $$instance))
+  ;; return $instance;
+  ;;@ devirtualizedcalls/ObjectCalls.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ObjectCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_ObjectCalls@devirtualizedcalls.ObjectCalls
+ (param $this (ref null $devirtualizedcalls.ObjectCalls))
  ;;@ devirtualizedcalls/ObjectCalls.java:18:13
  (block
   ;; devirtualizedcalls.ObjectCalls.$clinit();
   ;;@ devirtualizedcalls/ObjectCalls.java:18:13
   (call $$clinit__void@devirtualizedcalls.ObjectCalls )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ devirtualizedcalls/ObjectCalls.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ObjectCalls.this;
-  ;;@ devirtualizedcalls/ObjectCalls.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -706,9 +762,9 @@
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
  (block
-  ;; Object object = new Object.<init>();
+  ;; Object object = java.lang.Object.$create();
   ;;@ devirtualizedcalls/ObjectCalls.java:21:4
-  (local.set $object (call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt))))
+  (local.set $object (call $$create__java_lang_Object@java.lang.Object ))
   ;; object.equals(object);
   ;;@ devirtualizedcalls/ObjectCalls.java:23:4
   (drop (call_ref (local.get $object)(local.get $object)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $object)))))
@@ -721,9 +777,9 @@
   ;; object.getClass();
   ;;@ devirtualizedcalls/ObjectCalls.java:26:4
   (drop (call_ref (local.get $object)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $object)))))
-  ;; ObjectCalls[] objectCalls = new OfObject.<init>(1);
+  ;; ObjectCalls[] objectCalls = javaemul.internal.WasmArray.OfObject.$create(1);
   ;;@ devirtualizedcalls/ObjectCalls.java:28:4
-  (local.set $objectCalls (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 1)))
+  (local.set $objectCalls (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 1)))
   ;; objectCalls.equals(objectCalls);
   ;;@ devirtualizedcalls/ObjectCalls.java:29:4
   (drop (call_ref (local.get $objectCalls)(local.get $objectCalls)(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $objectCalls)))))
@@ -748,9 +804,9 @@
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
  (block
-  ;; ObjectCalls.this.equals(new Object.<init>());
+  ;; ObjectCalls.this.equals(java.lang.Object.$create());
   ;;@ devirtualizedcalls/ObjectCalls.java:37:4
-  (drop (call_ref (local.get $this)(call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__java_lang_Object@java.lang.Object )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
   ;; ObjectCalls.this.hashCode();
   ;;@ devirtualizedcalls/ObjectCalls.java:38:4
   (drop (call_ref (local.get $this)(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $this)))))
@@ -760,9 +816,9 @@
   ;; ObjectCalls.this.getClass();
   ;;@ devirtualizedcalls/ObjectCalls.java:40:4
   (drop (call_ref (local.get $this)(struct.get $java.lang.Object.vtable $m_getClass__java_lang_Class (struct.get $java.lang.Object $vtable(local.get $this)))))
-  ;; ObjectCalls.this.equals(new Object.<init>());
+  ;; ObjectCalls.this.equals(java.lang.Object.$create());
   ;;@ devirtualizedcalls/ObjectCalls.java:42:4
-  (drop (call_ref (local.get $this)(call $m_<init>__@java.lang.Object (struct.new_with_rtt $java.lang.Object (ref.as_non_null (global.get $java.lang.Object.vtable)) (ref.as_non_null (global.get $java.lang.Object.itable)) (i32.const 0) (global.get $java.lang.Object.rtt)))(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
+  (drop (call_ref (local.get $this)(call $$create__java_lang_Object@java.lang.Object )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this)))))
   ;; ObjectCalls.this.hashCode();
   ;;@ devirtualizedcalls/ObjectCalls.java:43:4
   (drop (call_ref (local.get $this)(struct.get $java.lang.Object.vtable $m_hashCode__int (struct.get $java.lang.Object $vtable(local.get $this)))))
@@ -828,21 +884,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; StringCalls()
-(func $m_<init>__@devirtualizedcalls.StringCalls
- (param $this (ref null $devirtualizedcalls.StringCalls))
+;;; StringCalls StringCalls.$create()
+(func $$create__devirtualizedcalls_StringCalls@devirtualizedcalls.StringCalls
  (result (ref null $devirtualizedcalls.StringCalls))
+ ;;@ devirtualizedcalls/StringCalls.java:21:13
+ (local $$instance (ref null $devirtualizedcalls.StringCalls))
+ (block
+  ;; StringCalls $instance = new StringCalls.<init>();
+  ;;@ devirtualizedcalls/StringCalls.java:21:13
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.StringCalls (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.StringCalls.rtt)))
+  ;; $instance.$ctor();
+  ;;@ devirtualizedcalls/StringCalls.java:21:13
+  (call $$ctor__void_$p_devirtualizedcalls_StringCalls@devirtualizedcalls.StringCalls (local.get $$instance))
+  ;; return $instance;
+  ;;@ devirtualizedcalls/StringCalls.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void StringCalls.$ctor()
+(func $$ctor__void_$p_devirtualizedcalls_StringCalls@devirtualizedcalls.StringCalls
+ (param $this (ref null $devirtualizedcalls.StringCalls))
  ;;@ devirtualizedcalls/StringCalls.java:21:13
  (block
   ;; devirtualizedcalls.StringCalls.$clinit();
   ;;@ devirtualizedcalls/StringCalls.java:21:13
   (call $$clinit__void@devirtualizedcalls.StringCalls )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ devirtualizedcalls/StringCalls.java:21:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return StringCalls.this;
-  ;;@ devirtualizedcalls/StringCalls.java:21:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

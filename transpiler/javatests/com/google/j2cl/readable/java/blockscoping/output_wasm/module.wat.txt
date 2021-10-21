@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; BlockScoping()
-(func $m_<init>__@blockscoping.BlockScoping
- (param $this (ref null $blockscoping.BlockScoping))
+;;; BlockScoping BlockScoping.$create()
+(func $$create__blockscoping_BlockScoping@blockscoping.BlockScoping
  (result (ref null $blockscoping.BlockScoping))
+ ;;@ blockscoping/BlockScoping.java:18:13
+ (local $$instance (ref null $blockscoping.BlockScoping))
+ (block
+  ;; BlockScoping $instance = new BlockScoping.<init>();
+  ;;@ blockscoping/BlockScoping.java:18:13
+  (local.set $$instance (struct.new_with_rtt $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $blockscoping.BlockScoping.itable)) (i32.const 0) (global.get $blockscoping.BlockScoping.rtt)))
+  ;; $instance.$ctor();
+  ;;@ blockscoping/BlockScoping.java:18:13
+  (call $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping (local.get $$instance))
+  ;; return $instance;
+  ;;@ blockscoping/BlockScoping.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void BlockScoping.$ctor()
+(func $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping
+ (param $this (ref null $blockscoping.BlockScoping))
  ;;@ blockscoping/BlockScoping.java:18:13
  (block
   ;; blockscoping.BlockScoping.$clinit();
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$clinit__void@blockscoping.BlockScoping )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ blockscoping/BlockScoping.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return BlockScoping.this;
-  ;;@ blockscoping/BlockScoping.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

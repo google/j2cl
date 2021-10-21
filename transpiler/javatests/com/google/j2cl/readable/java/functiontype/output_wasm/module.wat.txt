@@ -75,21 +75,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; FunctionImpl()
-(func $m_<init>__@functiontype.FunctionImpl
- (param $this (ref null $functiontype.FunctionImpl))
+;;; FunctionImpl FunctionImpl.$create()
+(func $$create__functiontype_FunctionImpl@functiontype.FunctionImpl
  (result (ref null $functiontype.FunctionImpl))
+ ;;@ functiontype/FunctionImpl.java:20:13
+ (local $$instance (ref null $functiontype.FunctionImpl))
+ (block
+  ;; FunctionImpl $instance = new FunctionImpl.<init>();
+  ;;@ functiontype/FunctionImpl.java:20:13
+  (local.set $$instance (struct.new_with_rtt $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0) (global.get $functiontype.FunctionImpl.rtt)))
+  ;; $instance.$ctor();
+  ;;@ functiontype/FunctionImpl.java:20:13
+  (call $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl (local.get $$instance))
+  ;; return $instance;
+  ;;@ functiontype/FunctionImpl.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void FunctionImpl.$ctor()
+(func $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl
+ (param $this (ref null $functiontype.FunctionImpl))
  ;;@ functiontype/FunctionImpl.java:20:13
  (block
   ;; functiontype.FunctionImpl.$clinit();
   ;;@ functiontype/FunctionImpl.java:20:13
   (call $$clinit__void@functiontype.FunctionImpl )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ functiontype/FunctionImpl.java:20:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return FunctionImpl.this;
-  ;;@ functiontype/FunctionImpl.java:20:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

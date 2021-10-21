@@ -71,21 +71,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Parent()
-(func $m_<init>__@qualifiedsupercall.Parent
- (param $this (ref null $qualifiedsupercall.Parent))
+;;; Parent Parent.$create()
+(func $$create__qualifiedsupercall_Parent@qualifiedsupercall.Parent
  (result (ref null $qualifiedsupercall.Parent))
+ ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
+ (local $$instance (ref null $qualifiedsupercall.Parent))
+ (block
+  ;; Parent $instance = new Parent.<init>();
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (local.set $$instance (struct.new_with_rtt $qualifiedsupercall.Parent (ref.as_non_null (global.get $qualifiedsupercall.Parent.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.Parent.itable)) (i32.const 0) (global.get $qualifiedsupercall.Parent.rtt)))
+  ;; $instance.$ctor();
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (call $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent (local.get $$instance))
+  ;; return $instance;
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Parent.$ctor()
+(func $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent
+ (param $this (ref null $qualifiedsupercall.Parent))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
  (block
   ;; qualifiedsupercall.Parent.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (call $$clinit__void@qualifiedsupercall.Parent )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Parent.this;
-  ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -153,21 +167,35 @@
   $qualifiedsupercall.Parent.vtable)
 )
 
-;;; QualifiedSuperCall()
-(func $m_<init>__@qualifiedsupercall.QualifiedSuperCall
- (param $this (ref null $qualifiedsupercall.QualifiedSuperCall))
+;;; QualifiedSuperCall QualifiedSuperCall.$create()
+(func $$create__qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall
  (result (ref null $qualifiedsupercall.QualifiedSuperCall))
+ ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
+ (local $$instance (ref null $qualifiedsupercall.QualifiedSuperCall))
+ (block
+  ;; QualifiedSuperCall $instance = new QualifiedSuperCall.<init>();
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (local.set $$instance (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.itable)) (i32.const 0) (global.get $qualifiedsupercall.QualifiedSuperCall.rtt)))
+  ;; $instance.$ctor();
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (call $$ctor__void_$p_qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall (local.get $$instance))
+  ;; return $instance;
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void QualifiedSuperCall.$ctor()
+(func $$ctor__void_$p_qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall
+ (param $this (ref null $qualifiedsupercall.QualifiedSuperCall))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
  (block
   ;; qualifiedsupercall.QualifiedSuperCall.$clinit();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (call $$clinit__void@qualifiedsupercall.QualifiedSuperCall )
-  ;; Parent.this.Parent.<init>();
+  ;; Parent.this.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
-  (drop (call $m_<init>__@qualifiedsupercall.Parent (local.get $this)))
-  ;; return QualifiedSuperCall.this;
-  ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent (local.get $this))
  )
 )
 
@@ -224,11 +252,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; InnerClass(QualifiedSuperCall $outer_this)
-(func $m_<init>__qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall.InnerClass
- (param $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+;;; InnerClass InnerClass.$create(QualifiedSuperCall $outer_this)
+(func $$create__qualifiedsupercall_QualifiedSuperCall__qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass
  (param $$outer_this (ref null $qualifiedsupercall.QualifiedSuperCall))
  (result (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
+ (local $$instance (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (block
+  ;; InnerClass $instance = new InnerClass.<init>($outer_this);
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (local.set $$instance (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable)) (i32.const 0) (ref.null $qualifiedsupercall.QualifiedSuperCall) (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (call $$ctor__qualifiedsupercall_QualifiedSuperCall__void_$p_qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerClass.$ctor(QualifiedSuperCall $outer_this)
+(func $$ctor__qualifiedsupercall_QualifiedSuperCall__void_$p_qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass
+ (param $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
+ (param $$outer_this (ref null $qualifiedsupercall.QualifiedSuperCall))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
  (block
   ;; qualifiedsupercall.QualifiedSuperCall.InnerClass.$clinit();
@@ -237,12 +283,9 @@
   ;; (InnerClass.this.this = $outer_this);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (struct.set $qualifiedsupercall.QualifiedSuperCall.InnerClass $$outer_this__qualifiedsupercall_QualifiedSuperCall_InnerClass(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InnerClass.this;
-  ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

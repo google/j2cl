@@ -39,24 +39,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; SimpleLongs()
-(func $m_<init>__@simplelongs.SimpleLongs
- (param $this (ref null $simplelongs.SimpleLongs))
+;;; SimpleLongs SimpleLongs.$create()
+(func $$create__simplelongs_SimpleLongs@simplelongs.SimpleLongs
  (result (ref null $simplelongs.SimpleLongs))
+ ;;@ simplelongs/SimpleLongs.java:18:13
+ (local $$instance (ref null $simplelongs.SimpleLongs))
+ (block
+  ;; SimpleLongs $instance = new SimpleLongs.<init>();
+  ;;@ simplelongs/SimpleLongs.java:18:13
+  (local.set $$instance (struct.new_with_rtt $simplelongs.SimpleLongs (ref.as_non_null (global.get $simplelongs.SimpleLongs.vtable)) (ref.as_non_null (global.get $simplelongs.SimpleLongs.itable)) (i32.const 0) (i64.const 0) (i32.const 0) (global.get $simplelongs.SimpleLongs.rtt)))
+  ;; $instance.$ctor();
+  ;;@ simplelongs/SimpleLongs.java:18:13
+  (call $$ctor__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (local.get $$instance))
+  ;; return $instance;
+  ;;@ simplelongs/SimpleLongs.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SimpleLongs.$ctor()
+(func $$ctor__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs
+ (param $this (ref null $simplelongs.SimpleLongs))
  ;;@ simplelongs/SimpleLongs.java:18:13
  (block
   ;; simplelongs.SimpleLongs.$clinit();
   ;;@ simplelongs/SimpleLongs.java:18:13
   (call $$clinit__void@simplelongs.SimpleLongs )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ simplelongs/SimpleLongs.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; SimpleLongs.this.$init();
   ;;@ simplelongs/SimpleLongs.java:18:13
   (call $$init__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (local.get $this))
-  ;; return SimpleLongs.this;
-  ;;@ simplelongs/SimpleLongs.java:18:13
-  (return (local.get $this))
  )
 )
 

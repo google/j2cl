@@ -33,21 +33,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ContinueStatement()
-(func $m_<init>__@continuestatement.ContinueStatement
- (param $this (ref null $continuestatement.ContinueStatement))
+;;; ContinueStatement ContinueStatement.$create()
+(func $$create__continuestatement_ContinueStatement@continuestatement.ContinueStatement
  (result (ref null $continuestatement.ContinueStatement))
+ ;;@ continuestatement/ContinueStatement.java:18:13
+ (local $$instance (ref null $continuestatement.ContinueStatement))
+ (block
+  ;; ContinueStatement $instance = new ContinueStatement.<init>();
+  ;;@ continuestatement/ContinueStatement.java:18:13
+  (local.set $$instance (struct.new_with_rtt $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $continuestatement.ContinueStatement.itable)) (i32.const 0) (global.get $continuestatement.ContinueStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ continuestatement/ContinueStatement.java:18:13
+  (call $$ctor__void_$p_continuestatement_ContinueStatement@continuestatement.ContinueStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ continuestatement/ContinueStatement.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ContinueStatement.$ctor()
+(func $$ctor__void_$p_continuestatement_ContinueStatement@continuestatement.ContinueStatement
+ (param $this (ref null $continuestatement.ContinueStatement))
  ;;@ continuestatement/ContinueStatement.java:18:13
  (block
   ;; continuestatement.ContinueStatement.$clinit();
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$clinit__void@continuestatement.ContinueStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ continuestatement/ContinueStatement.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ContinueStatement.this;
-  ;;@ continuestatement/ContinueStatement.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

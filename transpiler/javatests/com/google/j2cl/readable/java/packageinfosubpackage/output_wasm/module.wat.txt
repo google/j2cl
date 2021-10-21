@@ -68,24 +68,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; Foo()
-(func $m_<init>__@packageinfosubpackage.Foo
- (param $this (ref null $packageinfosubpackage.Foo))
+;;; Foo Foo.$create()
+(func $$create__packageinfosubpackage_Foo@packageinfosubpackage.Foo
  (result (ref null $packageinfosubpackage.Foo))
+ ;;@ packageinfosubpackage/Foo.java:20:13
+ (local $$instance (ref null $packageinfosubpackage.Foo))
+ (block
+  ;; Foo $instance = new Foo.<init>();
+  ;;@ packageinfosubpackage/Foo.java:20:13
+  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfosubpackage.Foo.NativeBar) (global.get $packageinfosubpackage.Foo.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageinfosubpackage/Foo.java:20:13
+  (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageinfosubpackage/Foo.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo
+ (param $this (ref null $packageinfosubpackage.Foo))
  ;;@ packageinfosubpackage/Foo.java:20:13
  (block
   ;; packageinfosubpackage.Foo.$clinit();
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$clinit__void@packageinfosubpackage.Foo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; Foo.this.$init();
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$init__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $this))
-  ;; return Foo.this;
-  ;;@ packageinfosubpackage/Foo.java:20:13
-  (return (local.get $this))
  )
 )
 
@@ -94,9 +108,9 @@
  (param $this (ref null $packageinfosubpackage.Foo))
  ;;@ packageinfosubpackage/Foo.java:20:13
  (block
-  ;; (Foo.this.nativeBar = new NativeBar.<init>());
+  ;; (Foo.this.nativeBar = packageinfosubpackage.Foo.NativeBar.$create());
   ;;@ packageinfosubpackage/Foo.java:25:2
-  (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $m_<init>__@packageinfosubpackage.Foo.NativeBar (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt))))
+  (struct.set $packageinfosubpackage.Foo $f_nativeBar__packageinfosubpackage_Foo_(local.get $this) (call $$create__packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar ))
  )
 )
 
@@ -151,21 +165,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; NativeBar()
-(func $m_<init>__@packageinfosubpackage.Foo.NativeBar
- (param $this (ref null $packageinfosubpackage.Foo.NativeBar))
+;;; NativeBar NativeBar.$create()
+(func $$create__packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar
  (result (ref null $packageinfosubpackage.Foo.NativeBar))
+ ;;@ packageinfosubpackage/Foo.java:23:23
+ (local $$instance (ref null $packageinfosubpackage.Foo.NativeBar))
+ (block
+  ;; NativeBar $instance = new NativeBar.<init>();
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (call $$ctor__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageinfosubpackage/Foo.java:23:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NativeBar.$ctor()
+(func $$ctor__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar
+ (param $this (ref null $packageinfosubpackage.Foo.NativeBar))
  ;;@ packageinfosubpackage/Foo.java:23:23
  (block
   ;; packageinfosubpackage.Foo.NativeBar.$clinit();
   ;;@ packageinfosubpackage/Foo.java:23:23
   (call $$clinit__void@packageinfosubpackage.Foo.NativeBar )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ packageinfosubpackage/Foo.java:23:23
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return NativeBar.this;
-  ;;@ packageinfosubpackage/Foo.java:23:23
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -220,21 +248,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Bar()
-(func $m_<init>__@packageinfosubpackage.subpackage.Bar
- (param $this (ref null $packageinfosubpackage.subpackage.Bar))
+;;; Bar Bar.$create()
+(func $$create__packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar
  (result (ref null $packageinfosubpackage.subpackage.Bar))
+ ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+ (local $$instance (ref null $packageinfosubpackage.subpackage.Bar))
+ (block
+  ;; Bar $instance = new Bar.<init>();
+  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.itable)) (i32.const 0) (global.get $packageinfosubpackage.subpackage.Bar.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Bar.$ctor()
+(func $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar
+ (param $this (ref null $packageinfosubpackage.subpackage.Bar))
  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
  (block
   ;; packageinfosubpackage.subpackage.Bar.$clinit();
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$clinit__void@packageinfosubpackage.subpackage.Bar )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Bar.this;
-  ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

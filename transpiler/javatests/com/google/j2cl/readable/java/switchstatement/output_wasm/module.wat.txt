@@ -73,12 +73,31 @@
   $java.lang.Enum.vtable)
 )
 
-;;; Numbers(String $name, int $ordinal)
-(func $m_<init>__java_lang_String__int@switchstatement.Numbers
- (param $this (ref null $switchstatement.Numbers))
+;;; Numbers Numbers.$create(String $name, int $ordinal)
+(func $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers
  (param $$name (ref null $java.lang.String))
  (param $$ordinal i32)
  (result (ref null $switchstatement.Numbers))
+ ;;@ switchstatement/SwitchStatement.java:18:5
+ (local $$instance (ref null $switchstatement.Numbers))
+ (block
+  ;; Numbers $instance = new Numbers.<init>($name,$ordinal);
+  ;;@ switchstatement/SwitchStatement.java:18:5
+  (local.set $$instance (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt)))
+  ;; $instance.$ctor($name,$ordinal);
+  ;;@ switchstatement/SwitchStatement.java:18:5
+  (call $$ctor__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers (local.get $$instance)(local.get $$name)(local.get $$ordinal))
+  ;; return $instance;
+  ;;@ switchstatement/SwitchStatement.java:18:5
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Numbers.$ctor(String $name, int $ordinal)
+(func $$ctor__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers
+ (param $this (ref null $switchstatement.Numbers))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
  ;;@ switchstatement/SwitchStatement.java:18:5
  (block
   ;; (Enum.this.name = $name);
@@ -87,12 +106,9 @@
   ;; (Enum.this.ordinal = $ordinal);
   ;;@ switchstatement/SwitchStatement.java:18:5
   (struct.set $java.lang.Enum $f_ordinal__java_lang_Enum_(local.get $this) (local.get $$ordinal))
-  ;; Enum.this.Enum.<init>($name,$ordinal);
+  ;; Enum.this.$ctor($name,$ordinal);
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (drop (call $m_<init>__java_lang_String__int@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal)))
-  ;; return Numbers.this;
-  ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (local.get $this))
+  (call $$ctor__java_lang_String__int__void_$p_java_lang_Enum@java.lang.Enum (local.get $this)(local.get $$name)(local.get $$ordinal))
  )
 )
 
@@ -131,10 +147,10 @@
   ;; switchstatement.Numbers.$clinit();
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@switchstatement.Numbers )
-  ;; return (Numbers[] $array_literal = new OfObject.<init>(2),($array_literal.elements[0] = switchstatement.Numbers.ONE),($array_literal.elements[1] = switchstatement.Numbers.TWO),$array_literal);
+  ;; return (Numbers[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(2),($array_literal.elements[0] = switchstatement.Numbers.ONE),($array_literal.elements[1] = switchstatement.Numbers.TWO),$array_literal);
   ;;@ switchstatement/SwitchStatement.java:18:5
   (return (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal (call $m_<init>__int@javaemul.internal.WasmArray.OfObject (struct.new_with_rtt $javaemul.internal.WasmArray.OfObject (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.vtable)) (ref.as_non_null (global.get $javaemul.internal.WasmArray.OfObject.itable)) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object.array) (global.get $javaemul.internal.WasmArray.OfObject.rtt))(i32.const 2)))
+   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (global.get $f_ONE__switchstatement_Numbers))
    (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (global.get $f_TWO__switchstatement_Numbers))
    (local.get $$array_literal)
@@ -161,12 +177,12 @@
   ;; java.lang.Enum.$clinit();
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@java.lang.Enum )
-  ;; (switchstatement.Numbers.ONE = new Numbers.<init>(javaemul.internal.StringPool.$getString_|ONE|(),0));
+  ;; (switchstatement.Numbers.ONE = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|ONE|(),0));
   ;;@ switchstatement/SwitchStatement.java:19:2
-  (global.set $f_ONE__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
-  ;; (switchstatement.Numbers.TWO = new Numbers.<init>(javaemul.internal.StringPool.$getString_|TWO|(),1));
+  (global.set $f_ONE__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  ;; (switchstatement.Numbers.TWO = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|TWO|(),1));
   ;;@ switchstatement/SwitchStatement.java:20:2
-  (global.set $f_TWO__switchstatement_Numbers (call $m_<init>__java_lang_String__int@switchstatement.Numbers (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt))(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_TWO__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
   ;; (switchstatement.Numbers.namesToValuesMap = null);
   ;;@ switchstatement/SwitchStatement.java:18:5
   (global.set $f_namesToValuesMap__switchstatement_Numbers_ (ref.null $java.lang.Object))
@@ -203,21 +219,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; SwitchStatement()
-(func $m_<init>__@switchstatement.SwitchStatement
- (param $this (ref null $switchstatement.SwitchStatement))
+;;; SwitchStatement SwitchStatement.$create()
+(func $$create__switchstatement_SwitchStatement@switchstatement.SwitchStatement
  (result (ref null $switchstatement.SwitchStatement))
+ ;;@ switchstatement/SwitchStatement.java:23:13
+ (local $$instance (ref null $switchstatement.SwitchStatement))
+ (block
+  ;; SwitchStatement $instance = new SwitchStatement.<init>();
+  ;;@ switchstatement/SwitchStatement.java:23:13
+  (local.set $$instance (struct.new_with_rtt $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $switchstatement.SwitchStatement.itable)) (i32.const 0) (global.get $switchstatement.SwitchStatement.rtt)))
+  ;; $instance.$ctor();
+  ;;@ switchstatement/SwitchStatement.java:23:13
+  (call $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (local.get $$instance))
+  ;; return $instance;
+  ;;@ switchstatement/SwitchStatement.java:23:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void SwitchStatement.$ctor()
+(func $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement
+ (param $this (ref null $switchstatement.SwitchStatement))
  ;;@ switchstatement/SwitchStatement.java:23:13
  (block
   ;; switchstatement.SwitchStatement.$clinit();
   ;;@ switchstatement/SwitchStatement.java:23:13
   (call $$clinit__void@switchstatement.SwitchStatement )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ switchstatement/SwitchStatement.java:23:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return SwitchStatement.this;
-  ;;@ switchstatement/SwitchStatement.java:23:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

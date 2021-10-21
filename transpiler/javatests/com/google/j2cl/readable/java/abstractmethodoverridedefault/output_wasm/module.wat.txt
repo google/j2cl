@@ -68,21 +68,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; AbstractMethodOverrideDefault()
-(func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault
- (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
+;;; AbstractMethodOverrideDefault AbstractMethodOverrideDefault.$create()
+(func $$create__abstractmethodoverridedefault_AbstractMethodOverrideDefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+ (local $$instance (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
+ (block
+  ;; AbstractMethodOverrideDefault $instance = new AbstractMethodOverrideDefault.<init>();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+  (local.set $$instance (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable)) (i32.const 0) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.rtt)))
+  ;; $instance.$ctor();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault (local.get $$instance))
+  ;; return $instance;
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AbstractMethodOverrideDefault.$ctor()
+(func $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault
+ (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
  (block
   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return AbstractMethodOverrideDefault.this;
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -231,21 +245,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; A()
-(func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
+;;; void A.$ctor()
+(func $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
- (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
  (block
   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return A.this;
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -306,21 +316,17 @@
   $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
 )
 
-;;; B()
-(func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
+;;; void B.$ctor()
+(func $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_B@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B
  (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
- (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
  (block
   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.B )
-  ;; A.this.A.<init>();
+  ;; A.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-  (drop (call $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
-  ;; return B.this;
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:36:24
-  (return (local.get $this))
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this))
  )
 )
 
@@ -389,21 +395,35 @@
   $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.vtable)
 )
 
-;;; C()
-(func $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
- (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
+;;; C C.$create()
+(func $$create__abstractmethodoverridedefault_AbstractMethodOverrideDefault_C@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
  (result (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
+ ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+ (local $$instance (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
+ (block
+  ;; C $instance = new C.<init>();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+  (local.set $$instance (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable)) (i32.const 0) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
+  ;; $instance.$ctor();
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (local.get $$instance))
+  ;; return $instance;
+  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void C.$ctor()
+(func $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C
+ (param $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
  (block
   ;; abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.$clinit();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
   (call $$clinit__void@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C )
-  ;; A.this.A.<init>();
+  ;; A.this.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-  (drop (call $m_<init>__@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this)))
-  ;; return C.this;
-  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_A@abstractmethodoverridedefault.AbstractMethodOverrideDefault.A (local.get $this))
  )
 )
 

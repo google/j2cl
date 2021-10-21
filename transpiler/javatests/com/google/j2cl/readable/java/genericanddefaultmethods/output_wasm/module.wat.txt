@@ -118,21 +118,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; GenericClass()
-(func $m_<init>__@genericanddefaultmethods.GenericClass
- (param $this (ref null $genericanddefaultmethods.GenericClass))
+;;; GenericClass<T> GenericClass.$create()
+(func $$create__genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass
  (result (ref null $genericanddefaultmethods.GenericClass))
+ ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
+ (local $$instance (ref null $genericanddefaultmethods.GenericClass))
+ (block
+  ;; GenericClass<T> $instance = new GenericClass.<init>();
+  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
+  (local.set $$instance (struct.new_with_rtt $genericanddefaultmethods.GenericClass (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.GenericClass.itable)) (i32.const 0) (global.get $genericanddefaultmethods.GenericClass.rtt)))
+  ;; $instance.$ctor();
+  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
+  (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (local.get $$instance))
+  ;; return $instance;
+  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
+  (return (local.get $$instance))
+ )
+)
+
+;;; void GenericClass.$ctor()
+(func $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass
+ (param $this (ref null $genericanddefaultmethods.GenericClass))
  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
  (block
   ;; genericanddefaultmethods.GenericClass.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
   (call $$clinit__void@genericanddefaultmethods.GenericClass )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return GenericClass.this;
-  ;;@ genericanddefaultmethods/ConcreteClass.java:24:6
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -214,21 +228,35 @@
   $genericanddefaultmethods.GenericClass.vtable)
 )
 
-;;; ConcreteClass()
-(func $m_<init>__@genericanddefaultmethods.ConcreteClass
- (param $this (ref null $genericanddefaultmethods.ConcreteClass))
+;;; ConcreteClass ConcreteClass.$create()
+(func $$create__genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass
  (result (ref null $genericanddefaultmethods.ConcreteClass))
+ ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
+ (local $$instance (ref null $genericanddefaultmethods.ConcreteClass))
+ (block
+  ;; ConcreteClass $instance = new ConcreteClass.<init>();
+  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
+  (local.set $$instance (struct.new_with_rtt $genericanddefaultmethods.ConcreteClass (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.vtable)) (ref.as_non_null (global.get $genericanddefaultmethods.ConcreteClass.itable)) (i32.const 0) (global.get $genericanddefaultmethods.ConcreteClass.rtt)))
+  ;; $instance.$ctor();
+  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
+  (call $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass (local.get $$instance))
+  ;; return $instance;
+  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ConcreteClass.$ctor()
+(func $$ctor__void_$p_genericanddefaultmethods_ConcreteClass@genericanddefaultmethods.ConcreteClass
+ (param $this (ref null $genericanddefaultmethods.ConcreteClass))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
  (block
   ;; genericanddefaultmethods.ConcreteClass.$clinit();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
   (call $$clinit__void@genericanddefaultmethods.ConcreteClass )
-  ;; GenericClass.this.GenericClass.<init>();
+  ;; GenericClass.this.$ctor();
   ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (drop (call $m_<init>__@genericanddefaultmethods.GenericClass (local.get $this)))
-  ;; return ConcreteClass.this;
-  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_genericanddefaultmethods_GenericClass@genericanddefaultmethods.GenericClass (local.get $this))
  )
 )
 

@@ -76,21 +76,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Date()
-(func $m_<init>__@importglobaljstypes.Date
- (param $this (ref null $importglobaljstypes.Date))
+;;; Date Date.$create()
+(func $$create__importglobaljstypes_Date@importglobaljstypes.Date
  (result (ref null $importglobaljstypes.Date))
+ ;;@ importglobaljstypes/Date.java:27:13
+ (local $$instance (ref null $importglobaljstypes.Date))
+ (block
+  ;; Date $instance = new Date.<init>();
+  ;;@ importglobaljstypes/Date.java:27:13
+  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Date (ref.as_non_null (global.get $importglobaljstypes.Date.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.itable)) (i32.const 0) (global.get $importglobaljstypes.Date.rtt)))
+  ;; $instance.$ctor();
+  ;;@ importglobaljstypes/Date.java:27:13
+  (call $$ctor__void_$p_importglobaljstypes_Date@importglobaljstypes.Date (local.get $$instance))
+  ;; return $instance;
+  ;;@ importglobaljstypes/Date.java:27:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Date.$ctor()
+(func $$ctor__void_$p_importglobaljstypes_Date@importglobaljstypes.Date
+ (param $this (ref null $importglobaljstypes.Date))
  ;;@ importglobaljstypes/Date.java:27:13
  (block
   ;; importglobaljstypes.Date.$clinit();
   ;;@ importglobaljstypes/Date.java:27:13
   (call $$clinit__void@importglobaljstypes.Date )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ importglobaljstypes/Date.java:27:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Date.this;
-  ;;@ importglobaljstypes/Date.java:27:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -177,21 +191,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; NativeDate()
-(func $m_<init>__@importglobaljstypes.Date.NativeDate
- (param $this (ref null $importglobaljstypes.Date.NativeDate))
+;;; NativeDate NativeDate.$create()
+(func $$create__importglobaljstypes_Date_NativeDate@importglobaljstypes.Date.NativeDate
  (result (ref null $importglobaljstypes.Date.NativeDate))
+ ;;@ importglobaljstypes/Date.java:38:22
+ (local $$instance (ref null $importglobaljstypes.Date.NativeDate))
+ (block
+  ;; NativeDate $instance = new NativeDate.<init>();
+  ;;@ importglobaljstypes/Date.java:38:22
+  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Date.NativeDate (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.itable)) (i32.const 0) (global.get $importglobaljstypes.Date.NativeDate.rtt)))
+  ;; $instance.$ctor();
+  ;;@ importglobaljstypes/Date.java:38:22
+  (call $$ctor__void_$p_importglobaljstypes_Date_NativeDate@importglobaljstypes.Date.NativeDate (local.get $$instance))
+  ;; return $instance;
+  ;;@ importglobaljstypes/Date.java:38:22
+  (return (local.get $$instance))
+ )
+)
+
+;;; void NativeDate.$ctor()
+(func $$ctor__void_$p_importglobaljstypes_Date_NativeDate@importglobaljstypes.Date.NativeDate
+ (param $this (ref null $importglobaljstypes.Date.NativeDate))
  ;;@ importglobaljstypes/Date.java:38:22
  (block
   ;; importglobaljstypes.Date.NativeDate.$clinit();
   ;;@ importglobaljstypes/Date.java:38:22
   (call $$clinit__void@importglobaljstypes.Date.NativeDate )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ importglobaljstypes/Date.java:38:22
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return NativeDate.this;
-  ;;@ importglobaljstypes/Date.java:38:22
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -252,21 +280,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Number()
-(func $m_<init>__@importglobaljstypes.Number
- (param $this (ref null $importglobaljstypes.Number))
+;;; Number Number.$create()
+(func $$create__importglobaljstypes_Number@importglobaljstypes.Number
  (result (ref null $importglobaljstypes.Number))
+ ;;@ importglobaljstypes/Number.java:27:13
+ (local $$instance (ref null $importglobaljstypes.Number))
+ (block
+  ;; Number $instance = new Number.<init>();
+  ;;@ importglobaljstypes/Number.java:27:13
+  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Number (ref.as_non_null (global.get $importglobaljstypes.Number.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Number.itable)) (i32.const 0) (global.get $importglobaljstypes.Number.rtt)))
+  ;; $instance.$ctor();
+  ;;@ importglobaljstypes/Number.java:27:13
+  (call $$ctor__void_$p_importglobaljstypes_Number@importglobaljstypes.Number (local.get $$instance))
+  ;; return $instance;
+  ;;@ importglobaljstypes/Number.java:27:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Number.$ctor()
+(func $$ctor__void_$p_importglobaljstypes_Number@importglobaljstypes.Number
+ (param $this (ref null $importglobaljstypes.Number))
  ;;@ importglobaljstypes/Number.java:27:13
  (block
   ;; importglobaljstypes.Number.$clinit();
   ;;@ importglobaljstypes/Number.java:27:13
   (call $$clinit__void@importglobaljstypes.Number )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ importglobaljstypes/Number.java:27:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Number.this;
-  ;;@ importglobaljstypes/Number.java:27:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

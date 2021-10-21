@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; JsTypeWithNamespace()
-(func $m_<init>__@jstypewithnamespace.JsTypeWithNamespace
- (param $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
+;;; JsTypeWithNamespace JsTypeWithNamespace.$create()
+(func $$create__jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace
  (result (ref null $jstypewithnamespace.JsTypeWithNamespace))
+ ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
+ (local $$instance (ref null $jstypewithnamespace.JsTypeWithNamespace))
+ (block
+  ;; JsTypeWithNamespace $instance = new JsTypeWithNamespace.<init>();
+  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (local.set $$instance (struct.new_with_rtt $jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.itable)) (i32.const 0) (global.get $jstypewithnamespace.JsTypeWithNamespace.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (call $$ctor__void_$p_jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace (local.get $$instance))
+  ;; return $instance;
+  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsTypeWithNamespace.$ctor()
+(func $$ctor__void_$p_jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace
+ (param $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
  (block
   ;; jstypewithnamespace.JsTypeWithNamespace.$clinit();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$clinit__void@jstypewithnamespace.JsTypeWithNamespace )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return JsTypeWithNamespace.this;
-  ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

@@ -164,21 +164,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; HashFunctions()
-(func $m_<init>__@overwrittentypevariables.HashFunctions
- (param $this (ref null $overwrittentypevariables.HashFunctions))
+;;; HashFunctions HashFunctions.$create()
+(func $$create__overwrittentypevariables_HashFunctions@overwrittentypevariables.HashFunctions
  (result (ref null $overwrittentypevariables.HashFunctions))
+ ;;@ overwrittentypevariables/HashFunctions.java:24:13
+ (local $$instance (ref null $overwrittentypevariables.HashFunctions))
+ (block
+  ;; HashFunctions $instance = new HashFunctions.<init>();
+  ;;@ overwrittentypevariables/HashFunctions.java:24:13
+  (local.set $$instance (struct.new_with_rtt $overwrittentypevariables.HashFunctions (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.itable)) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.rtt)))
+  ;; $instance.$ctor();
+  ;;@ overwrittentypevariables/HashFunctions.java:24:13
+  (call $$ctor__void_$p_overwrittentypevariables_HashFunctions@overwrittentypevariables.HashFunctions (local.get $$instance))
+  ;; return $instance;
+  ;;@ overwrittentypevariables/HashFunctions.java:24:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void HashFunctions.$ctor()
+(func $$ctor__void_$p_overwrittentypevariables_HashFunctions@overwrittentypevariables.HashFunctions
+ (param $this (ref null $overwrittentypevariables.HashFunctions))
  ;;@ overwrittentypevariables/HashFunctions.java:24:13
  (block
   ;; overwrittentypevariables.HashFunctions.$clinit();
   ;;@ overwrittentypevariables/HashFunctions.java:24:13
   (call $$clinit__void@overwrittentypevariables.HashFunctions )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ overwrittentypevariables/HashFunctions.java:24:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return HashFunctions.this;
-  ;;@ overwrittentypevariables/HashFunctions.java:24:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -190,9 +204,9 @@
   ;; overwrittentypevariables.HashFunctions.$clinit();
   ;;@ overwrittentypevariables/HashFunctions.java:25:57
   (call $$clinit__void@overwrittentypevariables.HashFunctions )
-  ;; return new $1.<init>();
+  ;; return overwrittentypevariables.HashFunctions.1.$create();
   ;;@ overwrittentypevariables/HashFunctions.java:26:4
-  (return (call $m_<init>__@overwrittentypevariables.HashFunctions.1 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1 (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.1.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.1.itable)) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.1.rtt))))
+  (return (call $$create__overwrittentypevariables_HashFunctions_1@overwrittentypevariables.HashFunctions.1 ))
  )
 )
 
@@ -204,9 +218,9 @@
   ;; overwrittentypevariables.HashFunctions.$clinit();
   ;;@ overwrittentypevariables/HashFunctions.java:34:77
   (call $$clinit__void@overwrittentypevariables.HashFunctions )
-  ;; return new $2.<init>();
+  ;; return overwrittentypevariables.HashFunctions.2.$create();
   ;;@ overwrittentypevariables/HashFunctions.java:35:4
-  (return (call $m_<init>__@overwrittentypevariables.HashFunctions.2 (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2 (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.2.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.2.itable)) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.2.rtt))))
+  (return (call $$create__overwrittentypevariables_HashFunctions_2@overwrittentypevariables.HashFunctions.2 ))
  )
 )
 
@@ -263,21 +277,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements HashFunction<T>()
-(func $m_<init>__@overwrittentypevariables.HashFunctions.1
- (param $this (ref null $overwrittentypevariables.HashFunctions.1))
+;;; <anonymous> implements HashFunction<T><T> <anonymous> implements HashFunction<T>.$create()
+(func $$create__overwrittentypevariables_HashFunctions_1@overwrittentypevariables.HashFunctions.1
  (result (ref null $overwrittentypevariables.HashFunctions.1))
+ ;;@ overwrittentypevariables/HashFunctions.java:26:33
+ (local $$instance (ref null $overwrittentypevariables.HashFunctions.1))
+ (block
+  ;; <anonymous> implements HashFunction<T><T> $instance = new $1.<init>();
+  ;;@ overwrittentypevariables/HashFunctions.java:26:33
+  (local.set $$instance (struct.new_with_rtt $overwrittentypevariables.HashFunctions.1 (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.1.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.1.itable)) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.1.rtt)))
+  ;; $instance.$ctor();
+  ;;@ overwrittentypevariables/HashFunctions.java:26:33
+  (call $$ctor__void_$p_overwrittentypevariables_HashFunctions_1@overwrittentypevariables.HashFunctions.1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ overwrittentypevariables/HashFunctions.java:26:33
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements HashFunction<T>.$ctor()
+(func $$ctor__void_$p_overwrittentypevariables_HashFunctions_1@overwrittentypevariables.HashFunctions.1
+ (param $this (ref null $overwrittentypevariables.HashFunctions.1))
  ;;@ overwrittentypevariables/HashFunctions.java:26:33
  (block
   ;; overwrittentypevariables.HashFunctions.1.$clinit();
   ;;@ overwrittentypevariables/HashFunctions.java:26:33
   (call $$clinit__void@overwrittentypevariables.HashFunctions.1 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ overwrittentypevariables/HashFunctions.java:26:33
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $1.this;
-  ;;@ overwrittentypevariables/HashFunctions.java:26:33
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -368,21 +396,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; <anonymous> implements HashFunction<T>()
-(func $m_<init>__@overwrittentypevariables.HashFunctions.2
- (param $this (ref null $overwrittentypevariables.HashFunctions.2))
+;;; <anonymous> implements HashFunction<T><T> <anonymous> implements HashFunction<T>.$create()
+(func $$create__overwrittentypevariables_HashFunctions_2@overwrittentypevariables.HashFunctions.2
  (result (ref null $overwrittentypevariables.HashFunctions.2))
+ ;;@ overwrittentypevariables/HashFunctions.java:35:33
+ (local $$instance (ref null $overwrittentypevariables.HashFunctions.2))
+ (block
+  ;; <anonymous> implements HashFunction<T><T> $instance = new $2.<init>();
+  ;;@ overwrittentypevariables/HashFunctions.java:35:33
+  (local.set $$instance (struct.new_with_rtt $overwrittentypevariables.HashFunctions.2 (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.2.vtable)) (ref.as_non_null (global.get $overwrittentypevariables.HashFunctions.2.itable)) (i32.const 0) (global.get $overwrittentypevariables.HashFunctions.2.rtt)))
+  ;; $instance.$ctor();
+  ;;@ overwrittentypevariables/HashFunctions.java:35:33
+  (call $$ctor__void_$p_overwrittentypevariables_HashFunctions_2@overwrittentypevariables.HashFunctions.2 (local.get $$instance))
+  ;; return $instance;
+  ;;@ overwrittentypevariables/HashFunctions.java:35:33
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> implements HashFunction<T>.$ctor()
+(func $$ctor__void_$p_overwrittentypevariables_HashFunctions_2@overwrittentypevariables.HashFunctions.2
+ (param $this (ref null $overwrittentypevariables.HashFunctions.2))
  ;;@ overwrittentypevariables/HashFunctions.java:35:33
  (block
   ;; overwrittentypevariables.HashFunctions.2.$clinit();
   ;;@ overwrittentypevariables/HashFunctions.java:35:33
   (call $$clinit__void@overwrittentypevariables.HashFunctions.2 )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ overwrittentypevariables/HashFunctions.java:35:33
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return $2.this;
-  ;;@ overwrittentypevariables/HashFunctions.java:35:33
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -397,10 +439,10 @@
  (local $this (ref null $overwrittentypevariables.HashFunctions.2))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $overwrittentypevariables.HashFunctions.2.rtt)))
  (block
-  ;; return (StringBuilder $stringBuilder = new StringBuilder.<init>(),$stringBuilder.append(javaemul.internal.StringPool.$getString_||()),$stringBuilder.append(input.ordinal()),$stringBuilder.toString());
+  ;; return (StringBuilder $stringBuilder = java.lang.StringBuilder.$create(),$stringBuilder.append(javaemul.internal.StringPool.$getString_||()),$stringBuilder.append(input.ordinal()),$stringBuilder.toString());
   ;;@ overwrittentypevariables/HashFunctions.java:38:8
   (return (block (result (ref null $java.lang.String))
-   (local.set $$stringBuilder (call $m_<init>__@java.lang.StringBuilder (struct.new_with_rtt $java.lang.StringBuilder (ref.as_non_null (global.get $java.lang.StringBuilder.vtable)) (ref.as_non_null (global.get $java.lang.StringBuilder.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfChar) (i32.const 0) (i32.const 0) (global.get $java.lang.StringBuilder.rtt))))
+   (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
    (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(call_ref (local.get $input)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))

@@ -63,21 +63,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; JsMethodExample()
-(func $m_<init>__@jsmethod.JsMethodExample
- (param $this (ref null $jsmethod.JsMethodExample))
+;;; JsMethodExample JsMethodExample.$create()
+(func $$create__jsmethod_JsMethodExample@jsmethod.JsMethodExample
  (result (ref null $jsmethod.JsMethodExample))
+ ;;@ jsmethod/JsMethodExample.java:25:13
+ (local $$instance (ref null $jsmethod.JsMethodExample))
+ (block
+  ;; JsMethodExample $instance = new JsMethodExample.<init>();
+  ;;@ jsmethod/JsMethodExample.java:25:13
+  (local.set $$instance (struct.new_with_rtt $jsmethod.JsMethodExample (ref.as_non_null (global.get $jsmethod.JsMethodExample.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.itable)) (i32.const 0) (global.get $jsmethod.JsMethodExample.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsmethod/JsMethodExample.java:25:13
+  (call $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsmethod/JsMethodExample.java:25:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void JsMethodExample.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample
+ (param $this (ref null $jsmethod.JsMethodExample))
  ;;@ jsmethod/JsMethodExample.java:25:13
  (block
   ;; jsmethod.JsMethodExample.$clinit();
   ;;@ jsmethod/JsMethodExample.java:25:13
   (call $$clinit__void@jsmethod.JsMethodExample )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsmethod/JsMethodExample.java:25:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return JsMethodExample.this;
-  ;;@ jsmethod/JsMethodExample.java:25:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -166,21 +180,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; Base()
-(func $m_<init>__@jsmethod.JsMethodExample.Base
+;;; void Base.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base
  (param $this (ref null $jsmethod.JsMethodExample.Base))
- (result (ref null $jsmethod.JsMethodExample.Base))
  ;;@ jsmethod/JsMethodExample.java:43:24
  (block
   ;; jsmethod.JsMethodExample.Base.$clinit();
   ;;@ jsmethod/JsMethodExample.java:43:24
   (call $$clinit__void@jsmethod.JsMethodExample.Base )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ jsmethod/JsMethodExample.java:43:24
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Base.this;
-  ;;@ jsmethod/JsMethodExample.java:43:24
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -272,21 +282,35 @@
   $jsmethod.JsMethodExample.Base.vtable)
 )
 
-;;; Sub()
-(func $m_<init>__@jsmethod.JsMethodExample.Sub
- (param $this (ref null $jsmethod.JsMethodExample.Sub))
+;;; Sub Sub.$create()
+(func $$create__jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub
  (result (ref null $jsmethod.JsMethodExample.Sub))
+ ;;@ jsmethod/JsMethodExample.java:54:15
+ (local $$instance (ref null $jsmethod.JsMethodExample.Sub))
+ (block
+  ;; Sub $instance = new Sub.<init>();
+  ;;@ jsmethod/JsMethodExample.java:54:15
+  (local.set $$instance (struct.new_with_rtt $jsmethod.JsMethodExample.Sub (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.itable)) (i32.const 0) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
+  ;; $instance.$ctor();
+  ;;@ jsmethod/JsMethodExample.java:54:15
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsmethod/JsMethodExample.java:54:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Sub.$ctor()
+(func $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub
+ (param $this (ref null $jsmethod.JsMethodExample.Sub))
  ;;@ jsmethod/JsMethodExample.java:54:15
  (block
   ;; jsmethod.JsMethodExample.Sub.$clinit();
   ;;@ jsmethod/JsMethodExample.java:54:15
   (call $$clinit__void@jsmethod.JsMethodExample.Sub )
-  ;; Base.this.Base.<init>();
+  ;; Base.this.$ctor();
   ;;@ jsmethod/JsMethodExample.java:54:15
-  (drop (call $m_<init>__@jsmethod.JsMethodExample.Base (local.get $this)))
-  ;; return Sub.this;
-  ;;@ jsmethod/JsMethodExample.java:54:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_jsmethod_JsMethodExample_Base@jsmethod.JsMethodExample.Base (local.get $this))
  )
 )
 

@@ -67,21 +67,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; Outer()
-(func $m_<init>__@packageinfo.Outer
- (param $this (ref null $packageinfo.Outer))
+;;; Outer Outer.$create()
+(func $$create__packageinfo_Outer@packageinfo.Outer
  (result (ref null $packageinfo.Outer))
+ ;;@ packageinfo/Outer.java:21:13
+ (local $$instance (ref null $packageinfo.Outer))
+ (block
+  ;; Outer $instance = new Outer.<init>();
+  ;;@ packageinfo/Outer.java:21:13
+  (local.set $$instance (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageinfo/Outer.java:21:13
+  (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageinfo/Outer.java:21:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Outer.$ctor()
+(func $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer
+ (param $this (ref null $packageinfo.Outer))
  ;;@ packageinfo/Outer.java:21:13
  (block
   ;; packageinfo.Outer.$clinit();
   ;;@ packageinfo/Outer.java:21:13
   (call $$clinit__void@packageinfo.Outer )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ packageinfo/Outer.java:21:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Outer.this;
-  ;;@ packageinfo/Outer.java:21:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -137,11 +151,29 @@
   $java.lang.Object.vtable)
 )
 
-;;; Inner(Outer $outer_this)
-(func $m_<init>__packageinfo_Outer@packageinfo.Outer.Inner
- (param $this (ref null $packageinfo.Outer.Inner))
+;;; Inner Inner.$create(Outer $outer_this)
+(func $$create__packageinfo_Outer__packageinfo_Outer_Inner@packageinfo.Outer.Inner
  (param $$outer_this (ref null $packageinfo.Outer))
  (result (ref null $packageinfo.Outer.Inner))
+ ;;@ packageinfo/Outer.java:24:15
+ (local $$instance (ref null $packageinfo.Outer.Inner))
+ (block
+  ;; Inner $instance = new Inner.<init>($outer_this);
+  ;;@ packageinfo/Outer.java:24:15
+  (local.set $$instance (struct.new_with_rtt $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.Inner.itable)) (i32.const 0) (ref.null $packageinfo.Outer) (global.get $packageinfo.Outer.Inner.rtt)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ packageinfo/Outer.java:24:15
+  (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ packageinfo/Outer.java:24:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Inner.$ctor(Outer $outer_this)
+(func $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner
+ (param $this (ref null $packageinfo.Outer.Inner))
+ (param $$outer_this (ref null $packageinfo.Outer))
  ;;@ packageinfo/Outer.java:24:15
  (block
   ;; packageinfo.Outer.Inner.$clinit();
@@ -150,12 +182,9 @@
   ;; (Inner.this.this = $outer_this);
   ;;@ packageinfo/Outer.java:24:15
   (struct.set $packageinfo.Outer.Inner $$outer_this__packageinfo_Outer_Inner(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ packageinfo/Outer.java:24:15
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return Inner.this;
-  ;;@ packageinfo/Outer.java:24:15
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -211,24 +240,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; Foo()
-(func $m_<init>__@packageinfo.subpackage.Foo
- (param $this (ref null $packageinfo.subpackage.Foo))
+;;; Foo Foo.$create()
+(func $$create__packageinfo_subpackage_Foo@packageinfo.subpackage.Foo
  (result (ref null $packageinfo.subpackage.Foo))
+ ;;@ packageinfo/subpackage/Foo.java:20:13
+ (local $$instance (ref null $packageinfo.subpackage.Foo))
+ (block
+  ;; Foo $instance = new Foo.<init>();
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (local.set $$instance (struct.new_with_rtt $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfo.subpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfo.Outer) (global.get $packageinfo.subpackage.Foo.rtt)))
+  ;; $instance.$ctor();
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (call $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $$instance))
+  ;; return $instance;
+  ;;@ packageinfo/subpackage/Foo.java:20:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Foo.$ctor()
+(func $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo
+ (param $this (ref null $packageinfo.subpackage.Foo))
  ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
   ;; packageinfo.subpackage.Foo.$clinit();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$clinit__void@packageinfo.subpackage.Foo )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; Foo.this.$init();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$init__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $this))
-  ;; return Foo.this;
-  ;;@ packageinfo/subpackage/Foo.java:20:13
-  (return (local.get $this))
  )
 )
 
@@ -237,9 +280,9 @@
  (param $this (ref null $packageinfo.subpackage.Foo))
  ;;@ packageinfo/subpackage/Foo.java:20:13
  (block
-  ;; (Foo.this.outer = new Outer.<init>());
+  ;; (Foo.this.outer = packageinfo.Outer.$create());
   ;;@ packageinfo/subpackage/Foo.java:22:2
-  (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $m_<init>__@packageinfo.Outer (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt))))
+  (struct.set $packageinfo.subpackage.Foo $f_outer__packageinfo_subpackage_Foo(local.get $this) (call $$create__packageinfo_Outer@packageinfo.Outer ))
  )
 )
 

@@ -40,21 +40,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; InnerClasses()
-(func $m_<init>__@abstractinnerclass.InnerClasses
- (param $this (ref null $abstractinnerclass.InnerClasses))
+;;; InnerClasses InnerClasses.$create()
+(func $$create__abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses
  (result (ref null $abstractinnerclass.InnerClasses))
+ ;;@ abstractinnerclass/InnerClasses.java:18:13
+ (local $$instance (ref null $abstractinnerclass.InnerClasses))
+ (block
+  ;; InnerClasses $instance = new InnerClasses.<init>();
+  ;;@ abstractinnerclass/InnerClasses.java:18:13
+  (local.set $$instance (struct.new_with_rtt $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0) (global.get $abstractinnerclass.InnerClasses.rtt)))
+  ;; $instance.$ctor();
+  ;;@ abstractinnerclass/InnerClasses.java:18:13
+  (call $$ctor__void_$p_abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses (local.get $$instance))
+  ;; return $instance;
+  ;;@ abstractinnerclass/InnerClasses.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerClasses.$ctor()
+(func $$ctor__void_$p_abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses
+ (param $this (ref null $abstractinnerclass.InnerClasses))
  ;;@ abstractinnerclass/InnerClasses.java:18:13
  (block
   ;; abstractinnerclass.InnerClasses.$clinit();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
   (call $$clinit__void@abstractinnerclass.InnerClasses )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return InnerClasses.this;
-  ;;@ abstractinnerclass/InnerClasses.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -146,21 +160,17 @@
   $java.lang.Object.vtable)
 )
 
-;;; B()
-(func $m_<init>__@abstractinnerclass.InnerClasses.B
+;;; void B.$ctor()
+(func $$ctor__void_$p_abstractinnerclass_InnerClasses_B@abstractinnerclass.InnerClasses.B
  (param $this (ref null $abstractinnerclass.InnerClasses.B))
- (result (ref null $abstractinnerclass.InnerClasses.B))
  ;;@ abstractinnerclass/InnerClasses.java:23:24
  (block
   ;; abstractinnerclass.InnerClasses.B.$clinit();
   ;;@ abstractinnerclass/InnerClasses.java:23:24
   (call $$clinit__void@abstractinnerclass.InnerClasses.B )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:23:24
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return B.this;
-  ;;@ abstractinnerclass/InnerClasses.java:23:24
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
@@ -218,11 +228,10 @@
   $java.lang.Object.vtable)
 )
 
-;;; C(InnerClasses $outer_this)
-(func $m_<init>__abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses.C
+;;; void C.$ctor(InnerClasses $outer_this)
+(func $$ctor__abstractinnerclass_InnerClasses__void_$p_abstractinnerclass_InnerClasses_C@abstractinnerclass.InnerClasses.C
  (param $this (ref null $abstractinnerclass.InnerClasses.C))
  (param $$outer_this (ref null $abstractinnerclass.InnerClasses))
- (result (ref null $abstractinnerclass.InnerClasses.C))
  ;;@ abstractinnerclass/InnerClasses.java:29:17
  (block
   ;; abstractinnerclass.InnerClasses.C.$clinit();
@@ -231,12 +240,9 @@
   ;; (C.this.this = $outer_this);
   ;;@ abstractinnerclass/InnerClasses.java:29:17
   (struct.set $abstractinnerclass.InnerClasses.C $$outer_this__abstractinnerclass_InnerClasses_C(local.get $this) (local.get $$outer_this))
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:29:17
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return C.this;
-  ;;@ abstractinnerclass/InnerClasses.java:29:17
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

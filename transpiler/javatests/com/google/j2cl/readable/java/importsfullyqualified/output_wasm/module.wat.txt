@@ -35,21 +35,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; ImportsFullyQualified()
-(func $m_<init>__@importsfullyqualified.ImportsFullyQualified
- (param $this (ref null $importsfullyqualified.ImportsFullyQualified))
+;;; ImportsFullyQualified ImportsFullyQualified.$create()
+(func $$create__importsfullyqualified_ImportsFullyQualified@importsfullyqualified.ImportsFullyQualified
  (result (ref null $importsfullyqualified.ImportsFullyQualified))
+ ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+ (local $$instance (ref null $importsfullyqualified.ImportsFullyQualified))
+ (block
+  ;; ImportsFullyQualified $instance = new ImportsFullyQualified.<init>();
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+  (local.set $$instance (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.vtable)) (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.itable)) (i32.const 0) (global.get $importsfullyqualified.ImportsFullyQualified.rtt)))
+  ;; $instance.$ctor();
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+  (call $$ctor__void_$p_importsfullyqualified_ImportsFullyQualified@importsfullyqualified.ImportsFullyQualified (local.get $$instance))
+  ;; return $instance;
+  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void ImportsFullyQualified.$ctor()
+(func $$ctor__void_$p_importsfullyqualified_ImportsFullyQualified@importsfullyqualified.ImportsFullyQualified
+ (param $this (ref null $importsfullyqualified.ImportsFullyQualified))
  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
  (block
   ;; importsfullyqualified.ImportsFullyQualified.$clinit();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (call $$clinit__void@importsfullyqualified.ImportsFullyQualified )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return ImportsFullyQualified.this;
-  ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 

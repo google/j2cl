@@ -33,24 +33,38 @@
   $java.lang.Object.vtable)
 )
 
-;;; InstanceFieldInitializer()
-(func $m_<init>__@instancefieldinitializer.InstanceFieldInitializer
- (param $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
+;;; InstanceFieldInitializer InstanceFieldInitializer.$create()
+(func $$create__instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer
  (result (ref null $instancefieldinitializer.InstanceFieldInitializer))
+ ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
+ (local $$instance (ref null $instancefieldinitializer.InstanceFieldInitializer))
+ (block
+  ;; InstanceFieldInitializer $instance = new InstanceFieldInitializer.<init>();
+  ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
+  (local.set $$instance (struct.new_with_rtt $instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $instancefieldinitializer.InstanceFieldInitializer.rtt)))
+  ;; $instance.$ctor();
+  ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
+  (call $$ctor__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (local.get $$instance))
+  ;; return $instance;
+  ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InstanceFieldInitializer.$ctor()
+(func $$ctor__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer
+ (param $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
  ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
  (block
   ;; instancefieldinitializer.InstanceFieldInitializer.$clinit();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
   (call $$clinit__void@instancefieldinitializer.InstanceFieldInitializer )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; InstanceFieldInitializer.this.$init();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
   (call $$init__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (local.get $this))
-  ;; return InstanceFieldInitializer.this;
-  ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (return (local.get $this))
  )
 )
 

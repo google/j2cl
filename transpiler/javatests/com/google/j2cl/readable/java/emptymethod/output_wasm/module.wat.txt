@@ -31,21 +31,35 @@
   $java.lang.Object.vtable)
 )
 
-;;; EmptyMethod()
-(func $m_<init>__@emptymethod.EmptyMethod
- (param $this (ref null $emptymethod.EmptyMethod))
+;;; EmptyMethod EmptyMethod.$create()
+(func $$create__emptymethod_EmptyMethod@emptymethod.EmptyMethod
  (result (ref null $emptymethod.EmptyMethod))
+ ;;@ emptymethod/EmptyMethod.java:18:13
+ (local $$instance (ref null $emptymethod.EmptyMethod))
+ (block
+  ;; EmptyMethod $instance = new EmptyMethod.<init>();
+  ;;@ emptymethod/EmptyMethod.java:18:13
+  (local.set $$instance (struct.new_with_rtt $emptymethod.EmptyMethod (ref.as_non_null (global.get $emptymethod.EmptyMethod.vtable)) (ref.as_non_null (global.get $emptymethod.EmptyMethod.itable)) (i32.const 0) (global.get $emptymethod.EmptyMethod.rtt)))
+  ;; $instance.$ctor();
+  ;;@ emptymethod/EmptyMethod.java:18:13
+  (call $$ctor__void_$p_emptymethod_EmptyMethod@emptymethod.EmptyMethod (local.get $$instance))
+  ;; return $instance;
+  ;;@ emptymethod/EmptyMethod.java:18:13
+  (return (local.get $$instance))
+ )
+)
+
+;;; void EmptyMethod.$ctor()
+(func $$ctor__void_$p_emptymethod_EmptyMethod@emptymethod.EmptyMethod
+ (param $this (ref null $emptymethod.EmptyMethod))
  ;;@ emptymethod/EmptyMethod.java:18:13
  (block
   ;; emptymethod.EmptyMethod.$clinit();
   ;;@ emptymethod/EmptyMethod.java:18:13
   (call $$clinit__void@emptymethod.EmptyMethod )
-  ;; Object.this.Object.<init>();
+  ;; Object.this.$ctor();
   ;;@ emptymethod/EmptyMethod.java:18:13
-  (drop (call $m_<init>__@java.lang.Object (local.get $this)))
-  ;; return EmptyMethod.this;
-  ;;@ emptymethod/EmptyMethod.java:18:13
-  (return (local.get $this))
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
