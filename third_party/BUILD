@@ -65,6 +65,11 @@ alias(
     actual = "@com_sun_tools_javac//jar",
 )
 
+sh_binary(
+    name = "binaryen",
+    srcs = ["binaryen.sh"],
+)
+
 alias(
     name = "auto_value",
     actual = "@com_google_auto_value",

@@ -153,10 +153,6 @@ _j2wasm_application = rule(
         "binaryen_stage1_args": attr.string_list(),
         "binaryen_stage2_args": attr.string_list(),
         "transpiler_args": attr.string_list(),
-        "binaryen": attr.label(
-            cfg = "host",
-            executable = True,
-        ),
         "defines": attr.string_list(),
         "_jre": attr.label(default = Label("//build_defs/internal_do_not_use:j2wasm_jre")),
         "_j2cl_transpiler": attr.label(
@@ -169,7 +165,7 @@ _j2wasm_application = rule(
         "_binaryen": attr.label(
             cfg = "host",
             executable = True,
-            default = Label("//third_party/binaryen:wasm-opt"),
+            default = Label("//third_party:binaryen"),
         ),
     },
     outputs = {
