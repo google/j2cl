@@ -165,7 +165,9 @@ _j2wasm_application = rule(
         "_binaryen": attr.label(
             cfg = "host",
             executable = True,
-            default = Label("//third_party:binaryen"),
+            default = Label(
+                "//build_defs/internal_do_not_use:binaryen",
+            ),
         ),
     },
     outputs = {

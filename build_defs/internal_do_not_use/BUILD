@@ -74,3 +74,10 @@ alias(
     name = "J2clRta",
     actual = "//tools/java/com/google/j2cl/tools/rta:J2clRta_worker",
 )
+
+alias(
+    name = "binaryen",
+    actual = "//third_party:binaryen",
+)
+
+# bzl_librarys
