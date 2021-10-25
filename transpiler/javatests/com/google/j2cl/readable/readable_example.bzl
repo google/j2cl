@@ -71,6 +71,11 @@ def readable_example(
         **kwargs
     )
 
+    _golden_output(
+        name = "readable_golden",
+        target = ":readable.js",
+    )
+
     # Verify compilability of generated JS.
     js_binary(
         name = "readable_binary",
@@ -148,6 +153,11 @@ def readable_example(
             **kwargs
         )
 
+        _golden_output(
+            name = "readable_kt_golden",
+            target = ":readable_kt.kt",
+        )
+
         if build_kt_readables:
             build_test(
                 name = "readable_kt_build_test",
@@ -163,3 +173,31 @@ def readable_example(
             test_input = "$(location :readable_kt.kt)",
             test_base_path = get_java_path(native.package_name()),
         )
+
+def _golden_output_impl(ctx):
+    input = ctx.file.target
+    output = ctx.actions.declare_directory(ctx.label.name)
+    readable_name = ctx.label.package.rsplit("/", 1)[1]
+    ctx.actions.run_shell(
+        inputs = [input],
+        outputs = [output],
+        command = "\n".join([
+            "set -e",
+            "INPUT=%s" % input.path,
+            "OUTPUT=%s" % output.path,
+            "cp -L -rf ${INPUT}/* ${OUTPUT}",
+            "cd ${OUTPUT}",
+            # We don't want to copy .java and .map files to the final output.
+            "find \\( -name *.java -o -name *.map \\) -exec rm {} \\;",
+            # Rename all files to => {file}.txt
+            "find -type f -exec mv {} {}.txt \\;",
+            # Normalize the path relative to readable_name to avoid extra dirs.
+            "mv ./%s/* ./" % readable_name,
+        ]),
+    )
+    return DefaultInfo(files = depset([output]))
+
+_golden_output = rule(
+    implementation = _golden_output_impl,
+    attrs = {"target": attr.label(allow_single_file = True)},
+)
