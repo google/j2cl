@@ -207,11 +207,22 @@ def j2wasm_application(name, defines = dict(), **kwargs):
             "--traps-never-happen",
             "--nominal",
             # Specific list of passes: The order and count of these flags does
-            # matter.
+            # matter. First -O3 will be the slowest, so we isolate it in a
+            # stage1 invocation (due to go/forge-limits for time).
+            "-O3",
+        ],
+        binaryen_stage2_args = [
+            "--traps-never-happen",
+            # Get several rounds of -O3 before intrinsic lowering.
+            "-O3",
+            "-O3",
             "-O3",
             "--intrinsic-lowering",
+            # Get several rounds of -O3 after intrinsic lowering.
+            "-O3",
+            "-O3",
+            "-O3",
         ],
-        binaryen_stage2_args = ["--traps-never-happen", "-O3"],
         transpiler_args = ["-experimentalWasmRemoveAssertStatement"],
         defines = ["%s=%s" % (k, v) for (k, v) in optimized_defines.items()],
         **kwargs
