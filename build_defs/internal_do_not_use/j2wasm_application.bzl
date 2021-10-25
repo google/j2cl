@@ -213,6 +213,8 @@ def j2wasm_application(name, defines = dict(), **kwargs):
         ],
         binaryen_stage2_args = [
             "--traps-never-happen",
+            "--partial-inlining-ifs=4",
+            "-fimfs=50",
             # Get several rounds of -O3 before intrinsic lowering.
             "-O3",
             "-O3",
