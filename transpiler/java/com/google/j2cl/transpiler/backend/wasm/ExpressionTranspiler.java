@@ -256,7 +256,15 @@ final class ExpressionTranspiler {
             sourceBuilder.append("(i32.const 0)");
             return false;
           }
-          sourceBuilder.append("(if (result i32) ");
+          sourceBuilder.append("(if (result i32) (ref.is_null ");
+          render(instanceOfExpression.getExpression());
+          sourceBuilder.append(")");
+          sourceBuilder.indent();
+          sourceBuilder.newLine();
+          // Reference is null, return false.
+          sourceBuilder.append("(then (i32.const 0))");
+          sourceBuilder.newLine();
+          sourceBuilder.append("(else (if (result i32)");
           // Classes have itables that are large enough to contain the highest slot of its
           // implemented interfaces. For example a class that does not implement any interface will
           // have an itable of size 0. So given an interface slot, we first need to see if the slot
@@ -285,6 +293,9 @@ final class ExpressionTranspiler {
               String.format(
                   " ) (i32.const %d)) (rtt.canon %s)))",
                   interfaceSlot, environment.getWasmVtableTypeName(targetTypeDescriptor)));
+          sourceBuilder.unindent();
+          sourceBuilder.newLine();
+          sourceBuilder.append("))");
           sourceBuilder.unindent();
           sourceBuilder.newLine();
           sourceBuilder.append(")");

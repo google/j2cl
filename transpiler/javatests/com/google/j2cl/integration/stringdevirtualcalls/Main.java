@@ -17,8 +17,6 @@ package com.google.j2cl.integration.stringdevirtualcalls;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
-
 /**
  * Verifies that String methods on the String class execute properly. It is effectively a test that
  * String method devirtualization is occurring and that the implementation being routed to is
@@ -98,8 +96,6 @@ public class Main {
     assertTrue(string1.subSequence(0, 2).equals("st"));
   }
 
-  // TODO(B/170691638): Enable when String.concat is implemented.
-  @Wasm("nop")
   private static void testStringMethods() {
     String string1 = "string1";
 

@@ -140,17 +140,23 @@
   
   ;; (b = o instanceof Serializable);
   ;;@ instanceofexpression/InstanceofExpressions.java:33:4
-  (local.set $b (if (result i32) 
-   (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (local.get $o)))) 
+  (local.set $b (if (result i32) (ref.is_null (local.get $o))
    (then (i32.const 0))
-   (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (local.get $o) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
+   (else (if (result i32)
+    (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (local.get $o)))) 
+    (then (i32.const 0))
+    (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (local.get $o) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
+   ))
   ))
   ;; (b = instanceofexpression.InstanceofExpressions.1.$create(InstanceofExpressions.this) instanceof Serializable);
   ;;@ instanceofexpression/InstanceofExpressions.java:34:4
-  (local.set $b (if (result i32) 
-   (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $this))))) 
+  (local.set $b (if (result i32) (ref.is_null (call $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $this)))
    (then (i32.const 0))
-   (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $this)) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
+   (else (if (result i32)
+    (i32.ge_u (i32.const 0) (array.len $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $this))))) 
+    (then (i32.const 0))
+    (else (ref.test (array.get $itable (struct.get $java.lang.Object $itable (call $$create__instanceofexpression_InstanceofExpressions__instanceofexpression_InstanceofExpressions_1@instanceofexpression.InstanceofExpressions.1 (local.get $this)) ) (i32.const 0)) (rtt.canon $java.io.Serializable.vtable)))
+   ))
   ))
  )
 )

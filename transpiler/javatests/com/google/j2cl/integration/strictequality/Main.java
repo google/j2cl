@@ -26,7 +26,7 @@ public class Main {
     testBoxedAndDevirtualizedTypes();
   }
 
-  @Wasm("nop")
+  @Wasm("nop") // These tests are JavaScript specific.
   private static void testBoxedAndDevirtualizedTypes() {
     assertTrue(new Character((char) 1) != new Character((char) 1));
     assertTrue(Character.valueOf((char) 1) == Character.valueOf((char) 1));

@@ -55,17 +55,19 @@ def _impl_j2wasm_application(ctx):
     args.add("--enable-reference-types")
     args.add("--enable-sign-ext")
     args.add("--enable-nontrapping-float-to-int")
+    args.add("--nominal")
+    args.add("--traps-never-happen")
 
     args.add("--debuginfo")
 
-    # TODO(b/198219246): remove intermediate invocation to binaryen once Chrome handles nominal wasm types.
+    # TODO(b/204138842): Only use one stage when compiling dev.
+
     intermediate_wasm_output = ctx.actions.declare_file(ctx.label.name + "_intermediate_wasm_output")
     intermediate_source_map = ctx.actions.declare_file(ctx.label.name + " _intermediate_source_map")
 
     ctx.actions.run(
         executable = ctx.executable._binaryen,
         arguments = [args] + ctx.attr.binaryen_stage1_args + [
-            "--remove-unused-module-elements",
             "-o",
             intermediate_wasm_output.path,
             "--output-source-map",
@@ -75,7 +77,7 @@ def _impl_j2wasm_application(ctx):
         inputs = [ctx.outputs.wat],
         outputs = [intermediate_source_map, intermediate_wasm_output],
         mnemonic = "J2wasm",
-        progress_message = "Compiling to WASM (nominal)",
+        progress_message = "Compiling to WASM (stage 1)",
         # Binaryen can leverage 4 cores with some amount of parallelism.
         execution_requirements = {"cpu:4": ""},
     )
@@ -106,7 +108,7 @@ def _impl_j2wasm_application(ctx):
         inputs = [intermediate_wasm_output, intermediate_source_map],
         outputs = outputs,
         mnemonic = "J2wasm",
-        progress_message = "Compiling to WASM",
+        progress_message = "Compiling to WASM (stage 2)",
         # Binaryen can leverage 4 cores with some amount of parallelism.
         execution_requirements = {"cpu:4": ""},
     )
@@ -203,18 +205,16 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     _j2wasm_application(
         name = name,
         binaryen_stage1_args = [
-            # Optimization flags (affecting passes in general) included at top.
-            "--traps-never-happen",
-            "--nominal",
             # Specific list of passes: The order and count of these flags does
             # matter. First -O3 will be the slowest, so we isolate it in a
             # stage1 invocation (due to go/forge-limits for time).
             "-O3",
         ],
         binaryen_stage2_args = [
-            "--traps-never-happen",
+            # Optimization flags (affecting passes in general) included at top.
             "--partial-inlining-ifs=4",
             "-fimfs=50",
+            # Specific list of passes:
             # Get several rounds of -O3 before intrinsic lowering.
             "-O3",
             "-O3",
@@ -231,7 +231,11 @@ def j2wasm_application(name, defines = dict(), **kwargs):
     )
     _j2wasm_application(
         name = name + "_dev",
-        binaryen_stage1_args = ["--nominal", "--intrinsic-lowering"],
+        binaryen_stage1_args = [
+            "--intrinsic-lowering",
+            # Remove the intrinsic import declarations which are not removed by lowering itself.
+            "--remove-unused-module-elements",
+        ],
         defines = ["%s=%s" % (k, v) for (k, v) in dev_defines.items()],
         **kwargs
     )

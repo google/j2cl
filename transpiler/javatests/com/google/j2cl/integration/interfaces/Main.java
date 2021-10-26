@@ -18,8 +18,6 @@ package com.google.j2cl.integration.interfaces;
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
-
 /** Test basic interface functionality. */
 @SuppressWarnings("StaticQualifiedUsingExpression")
 public class Main {
@@ -136,8 +134,6 @@ public class Main {
     }
   }
 
-  // TODO(b/170691636): remove wasm nop when interface instance of is implemented.
-  @Wasm("nop")
   private static void testDefaultMethods() {
     assertTrue(new ACollection<Object>().add(null) == COLLECTION_ADD);
     assertTrue(new AConcreteList<Object>().add(null) == ABSTRACT_COLLECTION_ADD);

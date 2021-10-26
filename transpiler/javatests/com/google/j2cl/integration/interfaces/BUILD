@@ -15,7 +15,4 @@ integration_test(
     name = "interfaces",
     srcs = glob(["*.java"]),
     j2cl_library_tags = ["manual"],
-    deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
-    ],
 )

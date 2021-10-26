@@ -17,5 +17,7 @@ integration_test(
         # Turn on asserts since it is what this test is testing.
         "--remove_j2cl_asserts=false",
     ],
+    # TODO(b/203692803): Enable once the bug is fixed.
+    enable_wasm = False,
     tags = ["manual"],
 )

@@ -18,8 +18,6 @@ package com.google.j2cl.integration.numberobjectcalls;
 import static com.google.j2cl.integration.testing.Asserts.assertFalse;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import javaemul.internal.annotations.Wasm;
-
 public class Main {
   @SuppressWarnings("cast")
   public static void main(String... args) {
@@ -39,9 +37,6 @@ public class Main {
   private static final Character C = new Character('a');
   private static final Boolean BOOL = new Boolean(true);
 
-  // TODO(b/186523011): Equals uses instanceof which is broken due to canonicalization, that makes
-  // code like new Long(1L).equals(new Integer(1)) to succeed.
-  @Wasm("nop")
   private static void testEquals() {
     // equals
     assertTrue(B.equals(B));
