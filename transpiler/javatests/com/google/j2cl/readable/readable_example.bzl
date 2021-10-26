@@ -21,7 +21,6 @@ load(
     "j2wasm_application",
 )
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
-load(":readable_diff_test.bzl", "make_diff_test")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -70,9 +69,11 @@ def readable_example(
         **kwargs
     )
 
-    _golden_output(
+    _readable_diff_test(
         name = "readable_golden",
         target = ":readable.js",
+        dir_out = "output_closure",
+        tags = ["j2cl"],
     )
 
     # Verify compilability of generated JS.
@@ -95,14 +96,6 @@ def readable_example(
         tags = ["j2cl"],
     )
 
-    make_diff_test(
-        name = "readable_test",
-        base_targets = native.glob(["output_closure/**/*.txt"]),
-        base = native.package_name() + "/output_closure/",
-        test_input_targets = [":readable_golden"],
-        test_input = "$(location :readable_golden)",
-    )
-
     if generate_wasm_readables:
         j2wasm_application(
             name = "readable_wasm",
@@ -110,23 +103,17 @@ def readable_example(
             entry_points = wasm_entry_points,
         )
 
+        _readable_diff_test(
+            name = "readable_wasm_golden",
+            target = ":readable_wasm.wat",
+            dir_out = "output_wasm",
+            tags = ["j2wasm"],
+        )
+
         build_test(
             name = "readable_wasm_build_test",
             targets = ["readable_wasm"],
             tags = ["j2wasm"],
-        )
-
-        _golden_output(
-            name = "readable_wasm_golden",
-            target = ":readable_wasm.wat",
-        )
-
-        make_diff_test(
-            name = "readable_wasm_test",
-            base_targets = ["output_wasm/module.wat.txt"],
-            base = native.package_name() + "/output_wasm/",
-            test_input_targets = [":readable_wasm_golden"],
-            test_input = "$(location :readable_wasm_golden)",
         )
 
     if generate_kt_readables:
@@ -140,9 +127,11 @@ def readable_example(
             **kwargs
         )
 
-        _golden_output(
+        _readable_diff_test(
             name = "readable_kt_golden",
             target = ":readable_kt.kt",
+            dir_out = "output_kt",
+            tags = ["j2kt"],
         )
 
         if build_kt_readables:
@@ -152,13 +141,13 @@ def readable_example(
                 tags = ["j2kt"],
             )
 
-        make_diff_test(
-            name = "readable_kt_test",
-            base_targets = native.glob(["output_kt/**/*.txt"]),
-            base = native.package_name() + "/output_kt/",
-            test_input_targets = [":readable_kt_golden"],
-            test_input = "$(location :readable_kt_golden)",
-        )
+def _readable_diff_test(name, target, dir_out, tags):
+    _golden_output(
+        name = name,
+        target = target,
+    )
+
+    # TODO: add open source diff test
 
 def _golden_output_impl(ctx):
     input = ctx.file.target
