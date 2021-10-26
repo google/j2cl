@@ -22,7 +22,6 @@ load(
 )
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load(":readable_diff_test.bzl", "make_diff_test")
-load("//build_defs/internal_do_not_use:j2cl_util.bzl", "get_java_package", "get_java_path")
 
 JAVAC_FLAGS = [
     "-XepDisableAllChecks",
@@ -100,9 +99,8 @@ def readable_example(
         name = "readable_test",
         base_targets = native.glob(["output_closure/**/*.txt"]),
         base = native.package_name() + "/output_closure/",
-        test_input_targets = [":readable.js"],
-        test_input = "$(location :readable.js)",
-        test_base_path = get_java_path(native.package_name()),
+        test_input_targets = [":readable_golden"],
+        test_input = "$(location :readable_golden)",
     )
 
     if generate_wasm_readables:
@@ -118,28 +116,17 @@ def readable_example(
             tags = ["j2wasm"],
         )
 
-        java_package = get_java_package(native.package_name())
-        native.genrule(
-            name = "readable_wasm_filtered",
-            srcs = [":readable_wasm.wat"],
-            outs = ["readable_wasm.filtered.wat"],
-            cmd = ("awk 'BEGIN {firstMatch=1} {" +
-                   " if (match($$0, /\\s*;;; Code for %s/)) {" % java_package +
-                   "  if (firstMatch) { firstMatch=0 } else { printf \"\\n\" }" +
-                   "  inPackage=1;" +
-                   " };" +
-                   " if (match($$0, /\\s*;;; End of /)) {inPackage=0};" +
-                   " if (inPackage) {print $$0}" +
-                   "}' < $(SRCS) > $(OUTS)"),
-            output_to_bindir = 1,
+        _golden_output(
+            name = "readable_wasm_golden",
+            target = ":readable_wasm.wat",
         )
 
         make_diff_test(
             name = "readable_wasm_test",
             base_targets = ["output_wasm/module.wat.txt"],
-            base = native.package_name() + "/output_wasm/module.wat.txt",
-            test_input_targets = [":readable_wasm.filtered.wat"],
-            test_input = "$(location :readable_wasm.filtered.wat)",
+            base = native.package_name() + "/output_wasm/",
+            test_input_targets = [":readable_wasm_golden"],
+            test_input = "$(location :readable_wasm_golden)",
         )
 
     if generate_kt_readables:
@@ -169,33 +156,50 @@ def readable_example(
             name = "readable_kt_test",
             base_targets = native.glob(["output_kt/**/*.txt"]),
             base = native.package_name() + "/output_kt/",
-            test_input_targets = [":readable_kt.kt"],
-            test_input = "$(location :readable_kt.kt)",
-            test_base_path = get_java_path(native.package_name()),
+            test_input_targets = [":readable_kt_golden"],
+            test_input = "$(location :readable_kt_golden)",
         )
 
 def _golden_output_impl(ctx):
     input = ctx.file.target
     output = ctx.actions.declare_directory(ctx.label.name)
     readable_name = ctx.label.package.rsplit("/", 1)[1]
-    ctx.actions.run_shell(
-        inputs = [input],
-        outputs = [output],
-        command = "\n".join([
-            "set -e",
-            "INPUT=%s" % input.path,
-            "OUTPUT=%s" % output.path,
-            "cp -L -rf ${INPUT}/* ${OUTPUT}",
-            "cd ${OUTPUT}",
-            # We don't want to copy .java and .map files to the final output.
-            "find \\( -name *.java -o -name *.map \\) -exec rm {} \\;",
-            # Rename all files to => {file}.txt
-            "find -type f -exec mv {} {}.txt \\;",
-            # Normalize the path relative to readable_name to avoid extra dirs.
-            "mv ./%s/* ./" % readable_name,
-        ]),
-    )
-    return DefaultInfo(files = depset([output]))
+
+    if input.path.endswith(".wat"):
+        ctx.actions.run_shell(
+            inputs = [input],
+            outputs = [output],
+            command = "".join([
+                "awk 'BEGIN {firstMatch=1} {",
+                " if (match($$0, /\\s*;;; Code for %s/)) {" % readable_name,
+                "  if (firstMatch) { firstMatch=0 } else { printf \"\\n\" }",
+                "  inPackage=1;",
+                " };",
+                " if (match($$0, /\\s*;;; End of /)) {inPackage=0};",
+                " if (inPackage) {print $$0}",
+                "}' < %s > %s/module.wat.txt" % (input.path, output.path),
+            ]),
+        )
+    else:
+        ctx.actions.run_shell(
+            inputs = [input],
+            outputs = [output],
+            command = "\n".join([
+                "set -e",
+                "INPUT=%s" % input.path,
+                "OUTPUT=%s" % output.path,
+                "cp -L -rf ${INPUT}/* ${OUTPUT}",
+                "cd ${OUTPUT}",
+                # We don't want to copy .java and .map files to the final output.
+                "find \\( -name *.java -o -name *.map \\) -exec rm {} \\;",
+                # Rename all files to => {file}.txt
+                "find -type f -exec mv {} {}.txt \\;",
+                # Normalize the path relative to readable_name to avoid extra dirs.
+                "mv ./%s/* ./" % readable_name,
+            ]),
+        )
+
+    return DefaultInfo(files = depset([output]), runfiles = ctx.runfiles([output]))
 
 _golden_output = rule(
     implementation = _golden_output_impl,

@@ -56,7 +56,7 @@ def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
   """Blaze build everything in 1-go, for speed."""
 
   build_targets = [d + ":readable_golden" for d in js_readable_dirs]
-  build_targets += [d + ":readable_wasm_filtered" for d in wasm_readable_dirs]
+  build_targets += [d + ":readable_wasm_golden" for d in wasm_readable_dirs]
   build_targets += [d + ":readable_kt_golden" for d in kt_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
@@ -67,15 +67,8 @@ def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
 
 def replace_transpiled_wasm(readable_dirs):
   """Copy and replace with Blaze built WASM."""
-
-  for readable_dir in readable_dirs:
-    output = readable_dir + "/output_wasm"
-    repo_util.run_cmd(["mkdir", "-p", output])
-    repo_util.run_cmd([
-        "cp", "--no-preserve=mode",
-        "blaze-bin/%s/readable_wasm.filtered.wat" % readable_dir,
-        output + "/module.wat.txt"
-    ])
+  _replace_readable_outputs(readable_dirs, "readable_wasm_golden",
+                            "output_wasm")
 
 
 def replace_transpiled_js(readable_dirs):

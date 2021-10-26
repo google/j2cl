@@ -6,6 +6,5 @@ def make_diff_test(
         base_targets,
         base,
         test_input_targets,
-        test_input,
-        test_base_path = ""):
+        test_input):
     pass
