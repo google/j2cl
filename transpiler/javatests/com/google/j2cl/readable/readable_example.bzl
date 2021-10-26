@@ -147,7 +147,16 @@ def _readable_diff_test(name, target, dir_out, tags):
         target = target,
     )
 
-    # TODO: add open source diff test
+    native.sh_test(
+        name = name + "_test",
+        srcs = ["//transpiler/javatests/com/google/j2cl/readable:diff_check"],
+        data = native.glob(["%s/**" % dir_out]) + [name],
+        args = [
+            '"%s/%s"' % (native.package_name(), dir_out),
+            '"$(location %s)"' % name,
+        ],
+        tags = tags,
+    )
 
 def _golden_output_impl(ctx):
     input = ctx.file.target
