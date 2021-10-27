@@ -19,7 +19,13 @@ import java.io.Serializable;
 import javaemul.internal.annotations.Wasm;
 import jsinterop.annotations.JsMethod;
 
-/** A common base abstraction for the arrays in Wasm. */
+/**
+ * A common base abstraction for the arrays in Wasm.
+ *
+ * <p>NOTE: All arrays declared as fields, parameters, etc in the subclasses of WasmArray will be
+ * considered native WASM arrays, whereas all arrays declared in the WasmArray class itself will be
+ * rewritten to be instances of one of the subclasses.
+ */
 abstract class WasmArray implements Serializable, Cloneable {
 
   int length;
@@ -102,6 +108,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       this.elements = new Object[length];
     }
 
+    OfObject(Object[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
+    }
+
     @Override
     Object newArray(int length) {
       return new WasmArray.OfObject(length);
@@ -173,6 +184,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       elements = new byte[length];
     }
 
+    OfByte(byte[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
+    }
+
     public void push(byte o) {
       int newLength = length + 1;
       ensureCapacity(newLength);
@@ -198,6 +214,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       super(length);
       elements = new short[length];
     }
+
+    OfShort(short[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
+    }
   }
 
   static class OfChar extends WasmArray {
@@ -207,6 +228,11 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfChar(int length) {
       super(length);
       elements = new char[length];
+    }
+
+    OfChar(char[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
     }
 
     @Override
@@ -224,6 +250,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       elements = new int[length];
     }
 
+    OfInt(int[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
+    }
+
     @Override
     void copyFrom(int offset, WasmArray values, int valueOffset, int len) {
       copy(elements, offset, ((WasmArray.OfInt) values).elements, valueOffset, len);
@@ -237,6 +268,11 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfLong(int length) {
       super(length);
       elements = new long[length];
+    }
+
+    OfLong(long[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
     }
 
     @Override
@@ -253,6 +289,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       super(length);
       elements = new float[length];
     }
+
+    OfFloat(float[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
+    }
   }
 
   static class OfDouble extends WasmArray {
@@ -263,6 +304,11 @@ abstract class WasmArray implements Serializable, Cloneable {
       super(length);
       elements = new double[length];
     }
+
+    OfDouble(double[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
+    }
   }
 
   static class OfBoolean extends WasmArray {
@@ -272,6 +318,11 @@ abstract class WasmArray implements Serializable, Cloneable {
     OfBoolean(int length) {
       super(length);
       elements = new boolean[length];
+    }
+
+    OfBoolean(boolean[] initialValues) {
+      super(initialValues.length);
+      this.elements = initialValues;
     }
   }
 

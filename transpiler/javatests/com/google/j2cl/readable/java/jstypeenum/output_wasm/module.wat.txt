@@ -124,20 +124,13 @@
 (func $m_values__arrayOf_jstypeenum_Color@jstypeenum.Color
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ jstypeenum/Color.java:21:12
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   ;; jstypeenum.Color.$clinit();
   ;;@ jstypeenum/Color.java:21:12
   (call $$clinit__void@jstypeenum.Color )
-  ;; return (Color[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(3),($array_literal.elements[0] = jstypeenum.Color.RED),($array_literal.elements[1] = jstypeenum.Color.GREEN),($array_literal.elements[2] = jstypeenum.Color.BLUE),$array_literal);
+  ;; return javaemul.internal.WasmArray.OfObject.$create([jstypeenum.Color.RED,jstypeenum.Color.GREEN,jstypeenum.Color.BLUE]);
   ;;@ jstypeenum/Color.java:21:12
-  (return (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 3)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (global.get $f_RED__jstypeenum_Color))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (global.get $f_GREEN__jstypeenum_Color))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 2) (global.get $f_BLUE__jstypeenum_Color))
-   (local.get $$array_literal)
-  ))
+  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array (global.get $f_RED__jstypeenum_Color)(global.get $f_GREEN__jstypeenum_Color)(global.get $f_BLUE__jstypeenum_Color) (rtt.canon $java.lang.Object.array))))
  )
 )
 

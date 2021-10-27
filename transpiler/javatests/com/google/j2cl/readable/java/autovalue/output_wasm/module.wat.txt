@@ -4202,18 +4202,13 @@
 (func $m_create__autovalue_SimpleAutoValue@autovalue.SimpleAutoValue
  (result (ref null $autovalue.SimpleAutoValue))
  ;;@ autovalue/SimpleAutoValue.java:42:25
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block
   ;; autovalue.SimpleAutoValue.$clinit();
   ;;@ autovalue/SimpleAutoValue.java:42:34
   (call $$clinit__void@autovalue.SimpleAutoValue )
-  ;; return autovalue.AutoValue_SimpleAutoValue.$create(42,true,javaemul.internal.StringPool.$getString_|text|(),java.lang.Double.valueOf(43.0),java.lang.Double.valueOf(44.0),(int[] $array_literal = javaemul.internal.WasmArray.OfInt.$create(1),($array_literal.elements[0] = 45),$array_literal));
+  ;; return autovalue.AutoValue_SimpleAutoValue.$create(42,true,javaemul.internal.StringPool.$getString_|text|(),java.lang.Double.valueOf(43.0),java.lang.Double.valueOf(44.0),javaemul.internal.WasmArray.OfInt.$create([45]));
   ;;@ autovalue/SimpleAutoValue.java:43:4
-  (return (call $$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__autovalue_AutoValue_SimpleAutoValue@autovalue.AutoValue_SimpleAutoValue (i32.const 42)(i32.const 1)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|text|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 43.0))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 44.0))(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 1)))
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 45))
-   (local.get $$array_literal)
-  )))
+  (return (call $$create__int__boolean__java_lang_String__java_lang_Double__java_lang_Double__arrayOf_int__autovalue_AutoValue_SimpleAutoValue@autovalue.AutoValue_SimpleAutoValue (i32.const 42)(i32.const 1)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|text|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 43.0))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 44.0))(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init $int.array (i32.const 45) (rtt.canon $int.array)))))
  )
 )
 

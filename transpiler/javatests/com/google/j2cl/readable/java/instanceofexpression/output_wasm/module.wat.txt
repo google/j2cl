@@ -227,7 +227,6 @@
  (local $object (ref null $java.lang.Object))
  (local $objectArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $objectDoubleArray (ref null $javaemul.internal.WasmArray.OfObject))
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (local $stringArray (ref null $javaemul.internal.WasmArray.OfObject))
  (local $a i32)
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
@@ -239,14 +238,9 @@
   ;; Object[] objectArray = javaemul.internal.WasmArray.OfObject.$create(0);
   ;;@ instanceofexpression/InstanceofExpressions.java:58:4
   (local.set $objectArray (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))
-  ;; Object[][] objectDoubleArray = javaemul.internal.WasmArray.createMultiDimensional((int[] $array_literal = javaemul.internal.WasmArray.OfInt.$create(2),($array_literal.elements[0] = 0),($array_literal.elements[1] = -1),$array_literal),-1);
+  ;; Object[][] objectDoubleArray = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([0,-1]),-1);
   ;;@ instanceofexpression/InstanceofExpressions.java:59:4
-  (local.set $objectDoubleArray (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (block (result (ref null $javaemul.internal.WasmArray.OfInt))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 2)))
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 0))
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const -1))
-   (local.get $$array_literal)
-  )(i32.const -1)))
+  (local.set $objectDoubleArray (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init $int.array (i32.const 0)(i32.const -1) (rtt.canon $int.array)))(i32.const -1)))
   ;; String[] stringArray = javaemul.internal.WasmArray.OfObject.$create(0);
   ;;@ instanceofexpression/InstanceofExpressions.java:60:4
   (local.set $stringArray (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)))

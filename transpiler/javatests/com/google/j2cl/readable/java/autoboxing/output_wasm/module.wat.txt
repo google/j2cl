@@ -642,9 +642,6 @@
  (local $boxS (ref null $java.lang.Short))
  (local $boxC (ref null $java.lang.Character))
  (local $unusedDouble f64)
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
- (local $$array_literal_1 (ref null $javaemul.internal.WasmArray.OfObject))
- (local $$array_literal_2 (ref null $javaemul.internal.WasmArray.OfObject))
  (local $o (ref null $java.lang.Object))
  (local $this (ref null $autoboxing.AutoBoxing))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $autoboxing.AutoBoxing.rtt)))
@@ -751,37 +748,15 @@
   ;; double unusedDouble = AutoBoxing.this.takesObjectAndReturnsPrimitiveDouble(java.lang.Integer.valueOf(4));
   ;;@ autoboxing/AutoBoxing.java:166:4
   (local.set $unusedDouble (call_ref (local.get $this)(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 4))(struct.get $autoboxing.AutoBoxing.vtable $m_takesObjectAndReturnsPrimitiveDouble__java_lang_Object__double (struct.get $autoboxing.AutoBoxing $vtable(local.get $this)))))
-  ;; (unusedDouble = AutoBoxing.this.sumWithoutBoxing((Object[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(5),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Double.valueOf(2.2)),($array_literal.elements[2] = java.lang.Byte.valueOf(1)),($array_literal.elements[3] = java.lang.Short.valueOf(1)),($array_literal.elements[4] = java.lang.Float.valueOf(2.2)),$array_literal)));
+  ;; (unusedDouble = AutoBoxing.this.sumWithoutBoxing(javaemul.internal.WasmArray.OfObject.$create([java.lang.Integer.valueOf(1),java.lang.Double.valueOf(2.2),java.lang.Byte.valueOf(1),java.lang.Short.valueOf(1),java.lang.Float.valueOf(2.2)])));
   ;;@ autoboxing/AutoBoxing.java:167:4
-  (local.set $unusedDouble (call_ref (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 5)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 2.2)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 2) (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 3) (call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 4) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 2.2)))
-   (local.get $$array_literal)
-  )(struct.get $autoboxing.AutoBoxing.vtable $m_sumWithoutBoxing__arrayOf_java_lang_Object__double (struct.get $autoboxing.AutoBoxing $vtable(local.get $this)))))
-  ;; (unusedDouble = AutoBoxing.this.sumWithoutBoxingJsVarargs((Object[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(5),($array_literal.elements[0] = java.lang.Integer.valueOf(1)),($array_literal.elements[1] = java.lang.Double.valueOf(2.2)),($array_literal.elements[2] = java.lang.Byte.valueOf(1)),($array_literal.elements[3] = java.lang.Short.valueOf(1)),($array_literal.elements[4] = java.lang.Float.valueOf(2.2)),$array_literal)));
+  (local.set $unusedDouble (call_ref (local.get $this)(call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 2.2))(call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 1))(call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.const 1))(call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 2.2)) (rtt.canon $java.lang.Object.array)))(struct.get $autoboxing.AutoBoxing.vtable $m_sumWithoutBoxing__arrayOf_java_lang_Object__double (struct.get $autoboxing.AutoBoxing $vtable(local.get $this)))))
+  ;; (unusedDouble = AutoBoxing.this.sumWithoutBoxingJsVarargs(javaemul.internal.WasmArray.OfObject.$create([java.lang.Integer.valueOf(1),java.lang.Double.valueOf(2.2),java.lang.Byte.valueOf(1),java.lang.Short.valueOf(1),java.lang.Float.valueOf(2.2)])));
   ;;@ autoboxing/AutoBoxing.java:168:4
-  (local.set $unusedDouble (call_ref (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal_1 (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 5)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 0) (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 1) (call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 2.2)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 2) (call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 3) (call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_1)) (i32.const 4) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 2.2)))
-   (local.get $$array_literal_1)
-  )(struct.get $autoboxing.AutoBoxing.vtable $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double (struct.get $autoboxing.AutoBoxing $vtable(local.get $this)))))
-  ;; AutoBoxing.this.takesFloatVarArgs((Float[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(3),($array_literal.elements[0] = java.lang.Float.valueOf(1.100000023841858)),($array_literal.elements[1] = java.lang.Float.valueOf(97.0)),($array_literal.elements[2] = java.lang.Float.valueOf(2.2)),$array_literal));
+  (local.set $unusedDouble (call_ref (local.get $this)(call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(call $m_valueOf__double__java_lang_Double@java.lang.Double (f64.const 2.2))(call $m_valueOf__byte__java_lang_Byte@java.lang.Byte (i32.const 1))(call $m_valueOf__short__java_lang_Short@java.lang.Short (i32.const 1))(call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 2.2)) (rtt.canon $java.lang.Object.array)))(struct.get $autoboxing.AutoBoxing.vtable $m_sumWithoutBoxingJsVarargs__arrayOf_java_lang_Object__double (struct.get $autoboxing.AutoBoxing $vtable(local.get $this)))))
+  ;; AutoBoxing.this.takesFloatVarArgs(javaemul.internal.WasmArray.OfObject.$create([java.lang.Float.valueOf(1.100000023841858),java.lang.Float.valueOf(97.0),java.lang.Float.valueOf(2.2)]));
   ;;@ autoboxing/AutoBoxing.java:169:4
-  (call_ref (local.get $this)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal_2 (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 3)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 0) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 1.100000023841858)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 1) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 97.0)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal_2)) (i32.const 2) (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 2.2)))
-   (local.get $$array_literal_2)
-  )(struct.get $autoboxing.AutoBoxing.vtable $m_takesFloatVarArgs__arrayOf_java_lang_Float__void (struct.get $autoboxing.AutoBoxing $vtable(local.get $this))))
+  (call_ref (local.get $this)(call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array (call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 1.100000023841858))(call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 97.0))(call $m_valueOf__float__java_lang_Float@java.lang.Float (f32.const 2.2)) (rtt.canon $java.lang.Object.array)))(struct.get $autoboxing.AutoBoxing.vtable $m_takesFloatVarArgs__arrayOf_java_lang_Float__void (struct.get $autoboxing.AutoBoxing $vtable(local.get $this))))
   ;; Object o;
   ;;@ autoboxing/AutoBoxing.java:172:4
   

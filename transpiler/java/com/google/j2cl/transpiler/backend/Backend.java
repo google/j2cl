@@ -323,7 +323,6 @@ public enum Backend {
           ImplementStaticInitializationViaConditionChecks::new,
           ImplementClassMetadataViaGetters::new,
           ImplementStringCompileTimeConstants::new,
-          NormalizeArrayLiterals::new,
           NormalizeArrayCreationsWasm::new,
           InsertCastOnArrayAccess::new,
           ExtractNonIdempotentExpressions::new,

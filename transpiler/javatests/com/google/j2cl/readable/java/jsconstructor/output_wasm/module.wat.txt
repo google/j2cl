@@ -1471,18 +1471,13 @@
  (param $this (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (param $j i32)
  ;;@ jsconstructor/JsConstructorClass.java:165:11
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block
   ;; jsconstructor.JsConstructorClass.SubVarargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:165:29
   (call $$clinit__void@jsconstructor.JsConstructorClass.SubVarargs )
-  ;; SubVarargs.this.$ctor(java.lang.Object.$create(),(int[] $array_literal = javaemul.internal.WasmArray.OfInt.$create(1),($array_literal.elements[0] = j),$array_literal));
+  ;; SubVarargs.this.$ctor(java.lang.Object.$create(),javaemul.internal.WasmArray.OfInt.$create([j]));
   ;;@ jsconstructor/JsConstructorClass.java:166:6
-  (call $$ctor__java_lang_Object__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (local.get $this)(call $$create__java_lang_Object@java.lang.Object )(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 1)))
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (local.get $j))
-   (local.get $$array_literal)
-  ))
+  (call $$ctor__java_lang_Object__arrayOf_int__void_$p_jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (local.get $this)(call $$create__java_lang_Object@java.lang.Object )(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init $int.array (local.get $j) (rtt.canon $int.array))))
  )
 )
 
@@ -1491,7 +1486,6 @@
  ;;@ jsconstructor/JsConstructorClass.java:169:16
  (local $unusedS1 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
  (local $unusedS2 (ref null $jsconstructor.JsConstructorClass.SubVarargs))
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfInt))
  (block
   ;; jsconstructor.JsConstructorClass.SubVarargs.$clinit();
   ;;@ jsconstructor/JsConstructorClass.java:169:38
@@ -1499,15 +1493,9 @@
   ;; SubVarargs unusedS1 = jsconstructor.JsConstructorClass.SubVarargs.$create(2);
   ;;@ jsconstructor/JsConstructorClass.java:170:6
   (local.set $unusedS1 (call $$create__int__jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (i32.const 2)))
-  ;; SubVarargs unusedS2 = jsconstructor.JsConstructorClass.SubVarargs.$create(java.lang.Object.$create(),(int[] $array_literal = javaemul.internal.WasmArray.OfInt.$create(3),($array_literal.elements[0] = 1),($array_literal.elements[1] = 2),($array_literal.elements[2] = 3),$array_literal));
+  ;; SubVarargs unusedS2 = jsconstructor.JsConstructorClass.SubVarargs.$create(java.lang.Object.$create(),javaemul.internal.WasmArray.OfInt.$create([1,2,3]));
   ;;@ jsconstructor/JsConstructorClass.java:171:6
-  (local.set $unusedS2 (call $$create__java_lang_Object__arrayOf_int__jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (call $$create__java_lang_Object@java.lang.Object )(block (result (ref null $javaemul.internal.WasmArray.OfInt))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (i32.const 3)))
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 0) (i32.const 1))
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 1) (i32.const 2))
-   (array.set $int.array (struct.get $javaemul.internal.WasmArray.OfInt $f_elements__javaemul_internal_WasmArray_OfInt_(local.get $$array_literal)) (i32.const 2) (i32.const 3))
-   (local.get $$array_literal)
-  )))
+  (local.set $unusedS2 (call $$create__java_lang_Object__arrayOf_int__jsconstructor_JsConstructorClass_SubVarargs@jsconstructor.JsConstructorClass.SubVarargs (call $$create__java_lang_Object@java.lang.Object )(call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init $int.array (i32.const 1)(i32.const 2)(i32.const 3) (rtt.canon $int.array)))))
  )
 )
 

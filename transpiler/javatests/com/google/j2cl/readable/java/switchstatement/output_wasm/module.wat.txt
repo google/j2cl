@@ -142,19 +142,13 @@
 (func $m_values__arrayOf_switchstatement_Numbers@switchstatement.Numbers
  (result (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ switchstatement/SwitchStatement.java:18:5
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (block
   ;; switchstatement.Numbers.$clinit();
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$clinit__void@switchstatement.Numbers )
-  ;; return (Numbers[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(2),($array_literal.elements[0] = switchstatement.Numbers.ONE),($array_literal.elements[1] = switchstatement.Numbers.TWO),$array_literal);
+  ;; return javaemul.internal.WasmArray.OfObject.$create([switchstatement.Numbers.ONE,switchstatement.Numbers.TWO]);
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 2)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (global.get $f_ONE__switchstatement_Numbers))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 1) (global.get $f_TWO__switchstatement_Numbers))
-   (local.get $$array_literal)
-  ))
+  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array (global.get $f_ONE__switchstatement_Numbers)(global.get $f_TWO__switchstatement_Numbers) (rtt.canon $java.lang.Object.array))))
  )
 )
 

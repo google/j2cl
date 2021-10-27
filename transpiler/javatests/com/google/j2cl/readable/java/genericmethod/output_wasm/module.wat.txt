@@ -326,7 +326,6 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ genericmethod/GenericMethod.java:60:14
  (local $g (ref null $genericmethod.GenericMethod))
- (local $$array_literal (ref null $javaemul.internal.WasmArray.OfObject))
  (local $s (ref null $java.lang.String))
  (local $this (ref null $genericmethod.GenericMethod))
  (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericmethod.GenericMethod.rtt)))
@@ -349,13 +348,9 @@
   ;; g.fun(java.lang.Error.$create());
   ;;@ genericmethod/GenericMethod.java:67:4
   (call_ref (local.get $g)(call $$create__java_lang_Error@java.lang.Error )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
-  ;; g.fun((String[] $array_literal = javaemul.internal.WasmArray.OfObject.$create(1),($array_literal.elements[0] = javaemul.internal.StringPool.$getString_|asdf|()),$array_literal));
+  ;; g.fun(javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.StringPool.$getString_|asdf|()]));
   ;;@ genericmethod/GenericMethod.java:68:4
-  (drop (call_ref (local.get $g)(block (result (ref null $javaemul.internal.WasmArray.OfObject))
-   (local.set $$array_literal (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 1)))
-   (array.set $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $$array_literal)) (i32.const 0) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool) ))
-   (local.get $$array_literal)
-  )(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
+  (drop (call_ref (local.get $g)(call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool) ) (rtt.canon $java.lang.Object.array)))(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
   ;; String s = ((String) GenericMethod.this.checked());
   ;;@ genericmethod/GenericMethod.java:70:4
   (local.set $s (ref.cast (call_ref (local.get $this)(struct.get $genericmethod.GenericMethod.vtable $m_checked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this)))) (global.get $java.lang.String.rtt)))

@@ -168,6 +168,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     }
   }
 
+  public static final String CONSTRUCTOR_METHOD_NAME = "<init>";
   public static final String INIT_METHOD_NAME = "$init";
   public static final String CTOR_METHOD_PREFIX = "$ctor";
   public static final String CLINIT_METHOD_NAME = "$clinit";
@@ -1028,8 +1029,6 @@ public abstract class MethodDescriptor extends MemberDescriptor {
     abstract Optional<TypeDescriptor> getReturnTypeDescriptor();
 
     abstract MethodDescriptor autoBuild();
-
-    private static final String CONSTRUCTOR_METHOD_NAME = "<init>";
 
     public MethodDescriptor build() {
       if (isConstructor()) {

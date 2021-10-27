@@ -25,6 +25,7 @@ import com.google.common.collect.Iterables;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
@@ -53,6 +54,7 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -420,6 +422,22 @@ final class ExpressionTranspiler {
               }
             });
         sourceBuilder.closeParens();
+        return false;
+      }
+
+      @Override
+      public boolean enterArrayLiteral(ArrayLiteral arrayLiteral) {
+        checkArgument(arrayLiteral.getTypeDescriptor().isNativeWasmArray());
+
+        String arrayType = environment.getWasmTypeName(arrayLiteral.getTypeDescriptor());
+
+        sourceBuilder.append(format("(array.init %s ", arrayType));
+        renderTypedExpressions(
+            Collections.nCopies(
+                arrayLiteral.getValueExpressions().size(),
+                arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor()),
+            arrayLiteral.getValueExpressions());
+        sourceBuilder.append(format(" (rtt.canon %s))", arrayType));
         return false;
       }
 

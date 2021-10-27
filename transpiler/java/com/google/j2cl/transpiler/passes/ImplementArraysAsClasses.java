@@ -20,12 +20,14 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayAccess;
 import com.google.j2cl.transpiler.ast.ArrayLength;
+import com.google.j2cl.transpiler.ast.ArrayLiteral;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
@@ -44,9 +46,19 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   public void applyTo(CompilationUnit compilationUnit) {
     markNativeWasmArrayTypes(compilationUnit);
     normalizeArrayAccesses(compilationUnit);
-    normalizeArrayCreations(compilationUnit);
+    replaceArrayCreationsWithWasmArrayInstantiations(compilationUnit);
   }
 
+  /**
+   * Goes over all the array types declared in the Java array abstraction classes and marks them as
+   * native wasm arrays, since in those classes all arrays that appear in the code are meant to be
+   * the underlying native wasm array.
+   *
+   * <p>Note that arrays declared in the WasmArray class are not native arrays.
+   *
+   * <p>TODO(b/203307171): Introduce a way to mark wasm types as native to remove this special
+   * handling that makes it confusing when reasoning what gets rewritten and what does not.
+   */
   private void markNativeWasmArrayTypes(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
@@ -104,11 +116,22 @@ public class ImplementArraysAsClasses extends NormalizationPass {
                 .setTypeDescriptor(markArrayTypeDescriptorAsNative(newArray.getTypeDescriptor()))
                 .build();
           }
+
+          @Override
+          public Expression rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
+            return new ArrayLiteral(
+                markArrayTypeDescriptorAsNative(arrayLiteral.getTypeDescriptor()),
+                arrayLiteral.getValueExpressions());
+          }
         });
   }
 
   /**
-   * Rewrites array accesses to use the wasm array field from the corresponding WasmArray subclass.
+   * Rewrites array operations to go throught the appropriate Java array abstraction type.
+   *
+   * <p>For array length, accesses the field {@code WasmArray.length}. For accesses to an array
+   * element, it accesses the element through the native array field of the abstraction class, e.g.
+   * {@code WasmArray.OfShort.elements[i]}
    */
   private static void normalizeArrayAccesses(CompilationUnit compilationUnit) {
     compilationUnit.accept(
@@ -143,14 +166,15 @@ public class ImplementArraysAsClasses extends NormalizationPass {
   }
 
   /**
-   * Rewrite non native NewArray node to NewInstance of the corresponding WasmArray class.
+   * Converts all array instatiations (NewArray and ArrayLiteral) to a call to the corresponding
+   * WasmArray class constructor to create the Java array abstraction of the proper type.
    *
-   * <p>This rewriting needs to happen after all rewriting ArrayAccess/ArrayLength. Otherwise it
-   * will break the AST invariant that ArrayAccess/ArrayLength operates on ArrayExpression. E.g.
-   * {@code (new Object[1])[0]} may become {@code new WasmArray.OfObject(1)[0]} where {@code new
-   * WasmArray.OfObject(1)} is not an ArrayExpression.
+   * <p>At this point all arrays initialized with more than one explicit dimension have been already
+   * normalized into method calls to the runtime that return the initialized array. The code
+   * initializes such arrays via array creations that will be then converted by this pass as well.
    */
-  private static void normalizeArrayCreations(CompilationUnit compilationUnit) {
+  private static void replaceArrayCreationsWithWasmArrayInstantiations(
+      CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
@@ -163,8 +187,30 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
             return NewInstance.Builder.from(
                     TypeDescriptors.getWasmArrayType(newArray.getTypeDescriptor())
-                        .getMethodDescriptor("<init>", PrimitiveTypes.INT))
+                        .getMethodDescriptor(
+                            MethodDescriptor.CONSTRUCTOR_METHOD_NAME, PrimitiveTypes.INT))
                 .setArguments(newArray.getDimensionExpressions().get(0))
+                .build();
+          }
+
+          @Override
+          public Expression rewriteArrayLiteral(ArrayLiteral arrayLiteral) {
+            ArrayTypeDescriptor arrayTypeDescriptor = arrayLiteral.getTypeDescriptor();
+            if (arrayTypeDescriptor.isNativeWasmArray()) {
+              return arrayLiteral;
+            }
+
+            ArrayTypeDescriptor nativeArrayTypeDescriptor =
+                markArrayTypeDescriptorAsNative(
+                    arrayTypeDescriptor.getComponentTypeDescriptor().isPrimitive()
+                        ? arrayTypeDescriptor
+                        : TypeDescriptors.get().javaLangObjectArray);
+            return NewInstance.Builder.from(
+                    TypeDescriptors.getWasmArrayType(arrayTypeDescriptor)
+                        .getMethodDescriptor(
+                            MethodDescriptor.CONSTRUCTOR_METHOD_NAME, nativeArrayTypeDescriptor))
+                .setArguments(
+                    new ArrayLiteral(nativeArrayTypeDescriptor, arrayLiteral.getValueExpressions()))
                 .build();
           }
         });
