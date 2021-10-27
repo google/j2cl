@@ -36,16 +36,6 @@ load(":j2cl_common.bzl", "J2clInfo")
 _J2KT_PACKAGES = []
 
 _J2WASM_PACKAGES = [
-    "java/com/google/apps/framework/types",
-    "java/com/google/async/threadsafety",
-    "java/com/google/common",
-    "java/com/google/devtools/staticanalysis/errorprone",
-    "java/com/google/graphics/color",
-    "java/com/google/gwt/corp/emul",
-    "java/com/google/gwt/corp/serialization",
-    "java/com/google/i18n/identifiers",
-    "java/com/google/thirdparty/publicsuffix",
-    "java/com/google/visualization/bigpicture/insights",
     "third_party/java/auto",
     "third_party/java/jbox2d",
     "third_party/java_src/jbox2d/jbox2dlibrary/src/main/java",
@@ -58,11 +48,7 @@ _J2WASM_PACKAGES = [
     "third_party/java_src/re2j",
 ]
 
-# AutoValue optimization is experimental and limited to the following packages.
 _AUTOVALUE_OPT_IN_PACKAGES = [
-    "java/com/google/apps/dynamite/v1/shared",
-    "javatests/com/google/apps/dynamite/v1/shared",
-    "third_party/java_src/xplatmath",
 ]
 
 def _tree_artifact_proxy_impl(ctx):
