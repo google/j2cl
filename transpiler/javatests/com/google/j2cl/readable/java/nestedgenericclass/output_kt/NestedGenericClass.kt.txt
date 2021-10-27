@@ -1,12 +1,12 @@
 package nestedgenericclass
 
-open class NestedGenericClass {
- open fun `fun`(t: S) {
+open class NestedGenericClass<T> {
+ open fun <S> `fun`(t: S) {
   TODO("expression.qualify needs rendering: NestedGenericClass.this)")
   TODO("expression.qualify needs rendering: NestedGenericClass.this)")
  }
 
- open fun bar() {
+ open fun <T> bar() {
   TODO("expression.qualify needs rendering: NestedGenericClass.this)").bar()
  }
 
@@ -19,11 +19,11 @@ open class NestedGenericClass {
  }
 }
 
-open class A {
+open class A<T, T> {
  val `this`: nestedgenericclass.NestedGenericClass<T>?
 }
 
-open class B {
+open class B<T, T, T> {
  val `this`: nestedgenericclass.NestedGenericClass.A<T, T>?
 
  internal constructor() {}
@@ -31,36 +31,36 @@ open class B {
  internal constructor(u: U) {}
 }
 
-open class C {
+open class C<T> {
  val `this`: nestedgenericclass.NestedGenericClass<T>?
 
  var c: T
 }
 
-open class D {
+open class D<T> {
  val `this`: nestedgenericclass.NestedGenericClass.C<T>?
 
  var d: T
 }
 
-open class `1E` {
+open class `1E`<S, S, T> {
  val `this`: nestedgenericclass.NestedGenericClass<T>?
 }
 
-open class `1F` {
+open class `1F`<S, T> {
  val `this`: nestedgenericclass.NestedGenericClass<T>?
 
  var f: S
 }
 
-open class `1G` {
+open class `1G`<T, T, T> {
  val `this`: nestedgenericclass.NestedGenericClass<T>?
 
- open fun bar() {
+ open fun <T> bar() {
   TODO("expression.qualify needs rendering: \$1G.this)")
  }
 }
 
-open class `1H` {
+open class `1H`<T, T, T, T, T> {
  val `this`: nestedgenericclass.NestedGenericClass.`1G`<T, T, T>?
 }

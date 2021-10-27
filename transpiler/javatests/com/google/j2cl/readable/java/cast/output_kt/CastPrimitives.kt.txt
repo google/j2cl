@@ -73,7 +73,7 @@ open class CastPrimitives {
  }
 
  open fun testUnboxAndWiden() {
-  val boxedByte: Byte? = java.lang.Byte.valueOf(0 as Byte)
+  val boxedByte: Byte? = Byte.valueOf(0 as Byte)
   val s: Short = boxedByte as Short
   val i: Int = boxedByte as Int
   val l: Long = boxedByte as Long

@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Kind
 import com.google.j2cl.transpiler.ast.Type
+import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import java.util.stream.Collectors
 
@@ -31,12 +32,23 @@ fun Renderer.renderType(type: Type) {
       Kind.INTERFACE -> "interface "
     }
   )
-  render(type.declaration.classComponents.last().identifierSourceString)
+  renderTypeDeclaration(type.declaration)
 
   renderSuperTypes(type)
 
   render(" ")
   renderInCurlyBrackets { renderTypeBody(type) }
+}
+
+fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
+  render(declaration.classComponents.last().identifierSourceString)
+  declaration.typeParameterDescriptors.takeIf { it.isNotEmpty() }?.let { typeVariables ->
+    renderInAngleBrackets {
+      renderCommaSeparated(typeVariables) { typeVariable ->
+        render(typeVariable.declarationSourceString)
+      }
+    }
+  }
 }
 
 private fun Renderer.renderSuperTypes(type: Type) {

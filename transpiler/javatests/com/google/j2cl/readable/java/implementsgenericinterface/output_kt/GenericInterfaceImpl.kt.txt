@@ -1,9 +1,9 @@
 package implementsgenericinterface
 
-interface GenericInterface {}
+interface GenericInterface<T> {}
 
-interface GenericSubInterface: implementsgenericinterface.GenericInterface<T> {}
+interface GenericSubInterface<T>: implementsgenericinterface.GenericInterface<T> {}
 
-open class GenericInterfaceGenericImpl: implementsgenericinterface.GenericInterface<T> {}
+open class GenericInterfaceGenericImpl<T>: implementsgenericinterface.GenericInterface<T> {}
 
 open class GenericInterfaceImpl: implementsgenericinterface.GenericInterface<Number?> {}

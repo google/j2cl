@@ -1,6 +1,6 @@
 package cast
 
-open class CastGenerics {
+open class CastGenerics<T, E: Number?> {
  internal var field: T
 
  internal open fun method(): T {
@@ -15,7 +15,7 @@ open class CastGenerics {
   val ts: Array<T>? = o as Array<T>?
  }
 
- open fun testCastToMethodTypeVariable() {
+ open fun <S, V: Enum<V>?> testCastToMethodTypeVariable() {
   val o: Any? = Int(1)
   val s: S = o as S
   var c: Any? = o as cast.CastGenerics<S, Number?>?
@@ -23,9 +23,9 @@ open class CastGenerics {
   c = o as V
  }
 
- open fun outerGenericMethod() {}
+ open fun <TT: Enum?> outerGenericMethod() {}
 
- open fun method(o: Any?): EE {
+ open fun <EE: cast.CastGenerics.Empty1?> method(o: Any?): EE {
   if (o is cast.CastGenerics.Empty1) {
    return o as EE
   }
@@ -34,7 +34,7 @@ open class CastGenerics {
 
  companion object {
   @JvmStatic
-  fun testErasureCast() {
+  fun <T: cast.CastGenerics.A?, U: T> testErasureCast() {
    var str: String? = cast.CastGenerics<String?, Number?>().field
    str = cast.CastGenerics<String?, Number?>().method()
    val containerT: cast.CastGenerics.Container<T>? = null
@@ -71,7 +71,7 @@ open class CastGenerics {
   }
 
   @JvmStatic
-  fun doSomething(): cast.CastGenerics.Foo<T>? {
+  fun <T> doSomething(): cast.CastGenerics.Foo<T>? {
    return cast.CastGenerics.`1`<T>()
   }
  }
@@ -93,13 +93,13 @@ open class Implementor: cast.CastGenerics.BaseImplementor() {
  open fun mB() {}
 }
 
-open class Container {
+open class Container<T> {
  internal open fun get(): T {
   return null
  }
 }
 
-open class `1Nested` {
+open class `1Nested`<SS, TT: Enum?, T, E: Number?> {
  val `this`: cast.CastGenerics<T, E>?
 
  private fun nestedGenericMethod(o: Any?) {
@@ -109,12 +109,12 @@ open class `1Nested` {
 
 interface Empty1 {}
 
-interface Empty2 {}
+interface Empty2<TT> {}
 
-open class `1`: cast.CastGenerics.Foo<T> {
+open class `1`<T>: cast.CastGenerics.Foo<T> {
  internal constructor() {
   super()
  }
 }
 
-open class Foo {}
+open class Foo<V> {}

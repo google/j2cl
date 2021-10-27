@@ -158,7 +158,7 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 private fun Renderer.renderJavaScriptConstructorReference(
   javaScriptConstructorReference: JavaScriptConstructorReference
 ) {
-  render(javaScriptConstructorReference.referencedTypeDeclaration.declaredSourceString)
+  render(javaScriptConstructorReference.referencedTypeDeclaration.sourceString)
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {

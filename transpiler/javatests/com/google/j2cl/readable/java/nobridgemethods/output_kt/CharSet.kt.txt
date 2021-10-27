@@ -1,18 +1,18 @@
 package nobridgemethods
 
-interface Entry {}
+interface Entry<K> {}
 
-abstract class Map {
+abstract class Map<K> {
  abstract open fun getCeilingEntry(key: K): nobridgemethods.Entry<K>?
 }
 
-open class TreeMap: nobridgemethods.Map<K>() {
+open class TreeMap<K>: nobridgemethods.Map<K>() {
  open fun getCeilingEntry(key: K): nobridgemethods.TreeMap.InnerEntry<K>? {
   return nobridgemethods.TreeMap.InnerEntry<K>()
  }
 }
 
-open class InnerEntry: nobridgemethods.Entry<K> {}
+open class InnerEntry<K>: nobridgemethods.Entry<K> {}
 
 open class CharSet {
  companion object {

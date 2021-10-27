@@ -70,8 +70,13 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
   }
   val methodDescriptor = method.descriptor
   renderMethodModifiers(methodDescriptor, kind)
-  if (methodDescriptor.isConstructor) render("constructor")
-  else render("fun ${methodDescriptor.name!!.identifierSourceString}")
+  if (methodDescriptor.isConstructor) {
+    render("constructor")
+  } else {
+    render("fun ")
+    renderMethodDescriptorTypeParameters(methodDescriptor)
+    render(methodDescriptor.name!!.identifierSourceString)
+  }
   renderMethodParameters(method)
   renderMethodReturnType(methodDescriptor)
   // TODO(b/202527616): Render this() and super() constructor calls after ":".
@@ -108,6 +113,16 @@ private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
     else (variableTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (isVararg) render("vararg ")
   render("${variable.name.identifierSourceString}: ${renderedTypeDescriptor.sourceString}")
+}
+
+private fun Renderer.renderMethodDescriptorTypeParameters(methodDescriptor: MethodDescriptor) {
+  methodDescriptor.typeParameterTypeDescriptors.takeIf { it.isNotEmpty() }?.let {
+    typeParameterTypeDescriptors ->
+    renderInAngleBrackets {
+      renderCommaSeparated(typeParameterTypeDescriptors) { render(it.declarationSourceString) }
+    }
+    render(" ")
+  }
 }
 
 private fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {

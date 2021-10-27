@@ -20,7 +20,7 @@ open class ForEachStatement {
   }
  }
 
- private fun testTypeVariable() {
+ private fun <T: Any?, U: T> testTypeVariable() {
   val iterable: U = null
   for (s in iterable) {}
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
@@ -40,7 +40,7 @@ open class Exception2: Iterable<Any?>, Exception() {
  }
 }
 
-open class IterableReturningTypeVariable: Iterable<Int?> {
+open class IterableReturningTypeVariable<T: java.util.Iterator<Int?>?>: Iterable<Int?> {
  open fun iterator(): T {
   return null
  }

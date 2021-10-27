@@ -3,10 +3,10 @@ package castonarrayinit
 open class CastOnArrayInit {
  companion object {
   @JvmStatic
-  fun `fun`(vararg args: castonarrayinit.CastOnArrayInit.Foo<E>?) {}
+  fun <E> `fun`(vararg args: castonarrayinit.CastOnArrayInit.Foo<E>?) {}
 
   @JvmStatic
-  fun test() {
+  fun <E> test() {
    val f1: castonarrayinit.CastOnArrayInit.Foo<E>? = castonarrayinit.CastOnArrayInit.Foo<E>()
    val f2: castonarrayinit.CastOnArrayInit.Foo<E>? = castonarrayinit.CastOnArrayInit.Foo<E>()
    castonarrayinit.CastOnArrayInit.`fun`(arrayOf<castonarrayinit.CastOnArrayInit.Foo<E>?>(f1, f2))
@@ -14,4 +14,4 @@ open class CastOnArrayInit {
  }
 }
 
-open class Foo {}
+open class Foo<T> {}

@@ -18,23 +18,29 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 
 internal val TypeDescriptor.sourceString: String
   get() =
     when (this) {
-      is ArrayTypeDescriptor -> typeDescriptorSourceString
-      is DeclaredTypeDescriptor -> typeDescriptorSourceString
-      is PrimitiveTypeDescriptor -> typeDescriptorSourceString
-      is TypeVariable -> typeDescriptorSourceString
+      is ArrayTypeDescriptor -> arraySourceString
+      is DeclaredTypeDescriptor -> declaredSourceString
+      is PrimitiveTypeDescriptor -> primitiveSourceString
+      is TypeVariable -> variableSourceString(isDeclaration = false)
+      is IntersectionTypeDescriptor -> intersectionSourceString
       else -> throw InternalCompilerError("Unhandled $this")
     }
 
-private val ArrayTypeDescriptor.typeDescriptorSourceString
+private val TypeDescriptor.nullableSuffix
+  get() = if (isNullable) "?" else ""
+
+private val ArrayTypeDescriptor.arraySourceString: String
   get() =
     componentTypeDescriptor!!.let { typeDescriptor ->
       if (typeDescriptor is PrimitiveTypeDescriptor) {
@@ -44,13 +50,10 @@ private val ArrayTypeDescriptor.typeDescriptorSourceString
       }
     }
 
-private val TypeDescriptor.nullableSuffix
-  get() = if (isNullable) "?" else ""
-
-private val DeclaredTypeDescriptor.typeDescriptorSourceString
+private val DeclaredTypeDescriptor.declaredSourceString: String
   get() = "${typeDeclaration.sourceString}$argumentsSourceString$nullableSuffix"
 
-private val DeclaredTypeDescriptor.argumentsSourceString
+private val DeclaredTypeDescriptor.argumentsSourceString: String
   get() =
     typeArgumentDescriptors
       .takeIf { it.isNotEmpty() }
@@ -58,7 +61,7 @@ private val DeclaredTypeDescriptor.argumentsSourceString
       ?.let { "<$it>" }
       ?: ""
 
-private val PrimitiveTypeDescriptor.typeDescriptorSourceString
+private val PrimitiveTypeDescriptor.primitiveSourceString
   get() =
     when (this) {
       PrimitiveTypes.VOID -> "Unit"
@@ -73,10 +76,25 @@ private val PrimitiveTypeDescriptor.typeDescriptorSourceString
       else -> throw InternalCompilerError("Unhandled $this")
     }
 
-private val TypeVariable.typeDescriptorSourceString
-  get() = if (isWildcardOrCapture) "*" else name
+internal val TypeVariable.declarationSourceString: String
+  get() = variableSourceString(isDeclaration = true)
 
-private val TypeDeclaration.sourceString
+private fun TypeVariable.variableSourceString(isDeclaration: Boolean): String {
+  val nameSourceString = if (isWildcardOrCapture) "*" else name.identifierSourceString
+  val boundTypeDescriptor = this.boundTypeDescriptor
+  return if (isDeclaration && !isJavaLangObject(boundTypeDescriptor)) {
+    "$nameSourceString: ${boundTypeDescriptor.sourceString}"
+  } else {
+    nameSourceString
+  }
+}
+
+private val IntersectionTypeDescriptor.intersectionSourceString: String
+  get() =
+    // Multiple type descriptors will be rendered separately using "where" clause.
+    intersectionTypeDescriptors.first().sourceString
+
+internal val TypeDeclaration.sourceString
   get() = mappedSourceStringOrNull ?: declaredSourceString
 
 private val TypeDeclaration.mappedSourceStringOrNull
@@ -107,7 +125,7 @@ private val TypeDeclaration.mappedSourceStringOrNull
       else -> null
     }
 
-internal val TypeDeclaration.declaredSourceString
+private val TypeDeclaration.declaredSourceString
   get() = "$packagePrefixSourceString$classComponentsSourceString"
 
 private val TypeDeclaration.packagePrefixSourceString

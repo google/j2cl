@@ -1,10 +1,10 @@
 package accidentaloverride
 
-open class Parent {
+open class Parent<T: Error?> {
  open fun foo(e: T) {}
 }
 
-interface SuperInterface {
+interface SuperInterface<T> {
  fun foo(t: T)
 }
 

@@ -1,26 +1,26 @@
 package overwrittentypevariables
 
-interface MyFunction {
+interface MyFunction<F, T> {
  fun apply(input: F): T
 }
 
-interface HashFunction: overwrittentypevariables.MyFunction<T, String?> {}
+interface HashFunction<T>: overwrittentypevariables.MyFunction<T, String?> {}
 
 open class HashFunctions {
  companion object {
   @JvmStatic
-  fun hashFunction(): overwrittentypevariables.HashFunction<T>? {
+  fun <T> hashFunction(): overwrittentypevariables.HashFunction<T>? {
    return overwrittentypevariables.HashFunctions.`1`<T>()
   }
 
   @JvmStatic
-  fun enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
+  fun <T: Enum<T>?> enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
    return overwrittentypevariables.HashFunctions.`2`<T>()
   }
  }
 }
 
-open class `1`: overwrittentypevariables.HashFunction<T> {
+open class `1`<T>: overwrittentypevariables.HashFunction<T> {
  internal constructor() {
   super()
  }
@@ -30,7 +30,7 @@ open class `1`: overwrittentypevariables.HashFunction<T> {
  }
 }
 
-open class `2`: overwrittentypevariables.HashFunction<T> {
+open class `2`<T: Enum<T>?>: overwrittentypevariables.HashFunction<T> {
  internal constructor() {
   super()
  }

@@ -70,7 +70,7 @@ open class TryCatch {
   throw this.getT(Exception())
  }
 
- private fun getT(t: T): T {
+ private fun <T> getT(t: T): T {
   return t
  }
 
@@ -78,7 +78,7 @@ open class TryCatch {
   throw this.getThrowable()
  }
 
- private fun getThrowable(): T {
+ private fun <T: Throwable?> getThrowable(): T {
   return null
  }
 

@@ -4,7 +4,7 @@ open class RawType {
  internal var c: Comparable?
 }
 
-interface I {
+interface I<T: rawtype.RawType?> {
  fun f(t: T) {}
 }
 

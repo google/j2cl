@@ -11,27 +11,27 @@ open class MultipleAbstractParents {
  }
 }
 
-interface List {
+interface List<T> {
  fun getFoo(t: T): String?
 }
 
-interface Collection {
+interface Collection<T> {
  fun getFoo(t: T): String?
 }
 
-abstract class AbstractListCollection: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.Collection<T> {}
+abstract class AbstractListCollection<T>: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.Collection<T> {}
 
-abstract class AbstractCollection {
+abstract class AbstractCollection<T> {
  open fun getFoo(t: T): String? {
   return "AbstractCollection"
  }
 }
 
-abstract class AbstractList: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.AbstractCollection<T>() {}
+abstract class AbstractList<T>: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.AbstractCollection<T>() {}
 
-abstract class AbstractList2: multipleabstractparents.MultipleAbstractParents.List<T> {}
+abstract class AbstractList2<T>: multipleabstractparents.MultipleAbstractParents.List<T> {}
 
-open class ArrayList: multipleabstractparents.MultipleAbstractParents.AbstractList<T>() {}
+open class ArrayList<T>: multipleabstractparents.MultipleAbstractParents.AbstractList<T>() {}
 
 interface IStringList: multipleabstractparents.MultipleAbstractParents.List<String?> {
  fun getFoo(string: String?): String?
