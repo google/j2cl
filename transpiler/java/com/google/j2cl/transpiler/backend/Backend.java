@@ -90,6 +90,7 @@ import com.google.j2cl.transpiler.passes.NormalizeJsVarargs;
 import com.google.j2cl.transpiler.passes.NormalizeLabeledStatements;
 import com.google.j2cl.transpiler.passes.NormalizeLabels;
 import com.google.j2cl.transpiler.passes.NormalizeLiterals;
+import com.google.j2cl.transpiler.passes.NormalizeLiteralsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNestedBlocks;
@@ -367,6 +368,7 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          NormalizeLiteralsKotlin::new,
           NormalizeLabels::new,
           NormalizeLabeledStatements::new,
           NormalizeNestedBlocks::new);

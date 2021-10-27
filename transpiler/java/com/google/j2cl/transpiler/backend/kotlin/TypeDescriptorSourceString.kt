@@ -97,6 +97,7 @@ private val IntersectionTypeDescriptor.intersectionSourceString: String
 internal val TypeDeclaration.sourceString
   get() = mappedSourceStringOrNull ?: declaredSourceString
 
+// TODO(b/204287086): Move out of renderer.
 private val TypeDeclaration.mappedSourceStringOrNull
   get() =
     when (qualifiedSourceName) {
