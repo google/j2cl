@@ -89,20 +89,20 @@ open class CastPrimitives {
   var l: Long = 9223372036854775807L
   var f: Float = 3.4028235E38f
   var d: Double = 1.7976931348623157E308
-  cast.CastPrimitives.getShort(b)
-  cast.CastPrimitives.getInt(b)
-  cast.CastPrimitives.getLong(b)
-  cast.CastPrimitives.getFloat(b)
-  cast.CastPrimitives.getDouble(b)
-  cast.CastPrimitives.getFloat(l)
-  cast.CastPrimitives.getDouble(l)
-  cast.CastPrimitives.getDouble(f)
-  cast.CastPrimitives.IntValueHolder(b)
-  cast.CastPrimitives.IntValueHolder(c)
-  cast.CastPrimitives.IntValueHolder(s)
-  cast.CastPrimitives.LongValueHolder(b)
-  cast.CastPrimitives.LongValueHolder(c)
-  cast.CastPrimitives.LongValueHolder(i)
+  cast.CastPrimitives.getShort(b as Short)
+  cast.CastPrimitives.getInt(b as Int)
+  cast.CastPrimitives.getLong(b as Long)
+  cast.CastPrimitives.getFloat(b as Float)
+  cast.CastPrimitives.getDouble(b as Double)
+  cast.CastPrimitives.getFloat(l as Float)
+  cast.CastPrimitives.getDouble(l as Double)
+  cast.CastPrimitives.getDouble(f as Double)
+  cast.CastPrimitives.IntValueHolder(b as Int)
+  cast.CastPrimitives.IntValueHolder(c as Int)
+  cast.CastPrimitives.IntValueHolder(s as Int)
+  cast.CastPrimitives.LongValueHolder(b as Long)
+  cast.CastPrimitives.LongValueHolder(c as Long)
+  cast.CastPrimitives.LongValueHolder(i as Long)
  }
 
  open fun testImplicitLongAssignmentCasts() {
@@ -110,16 +110,16 @@ open class CastPrimitives {
   val fchar: Char = 12
   val fshort: Short = 13
   val fint: Int = 14
-  val flong: Long = 15
-  val ffloat: Float = 16
-  val fdouble: Double = 17
-  var tlong: Long = 0
+  val flong: Long = 15L
+  val ffloat: Float = 16.0f
+  val fdouble: Double = 17.0
+  var tlong: Long = 0L
   if (true) {
-   tlong = fbyte
+   tlong = fbyte as Long
    tlong = flong
   }
   if (true) {
-   tlong = fint
+   tlong = fint as Long
    tlong += fint
    tlong <<= fint
   }

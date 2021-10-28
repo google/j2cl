@@ -65,6 +65,7 @@ import com.google.j2cl.transpiler.passes.InsertStringConversions;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
+import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
@@ -371,7 +372,8 @@ public enum Backend {
           NormalizeLiteralsKotlin::new,
           NormalizeLabels::new,
           NormalizeLabeledStatements::new,
-          NormalizeNestedBlocks::new);
+          NormalizeNestedBlocks::new,
+          InsertWideningPrimitiveConversionsKotlin::new);
     }
   };
 
