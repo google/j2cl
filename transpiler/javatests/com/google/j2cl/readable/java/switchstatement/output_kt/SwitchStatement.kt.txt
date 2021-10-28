@@ -17,25 +17,25 @@ open class SwitchStatement {
    else ->
     return Unit
   } while (false)
-  SWITCH@ do when ('1') {
+  SWITCH_1@ do when ('1') {
    '1' ->
    '2' ->
-    break@SWITCH
+    break@SWITCH_1
    else ->
     return Unit
   } while (false)
-  SWITCH@ do when (1) {
+  SWITCH_2@ do when (1) {
    -2 ->
    1 ->
    2 ->
-    break@SWITCH
+    break@SWITCH_2
    else ->
     return Unit
   } while (false)
-  SWITCH@ do when (switchstatement.Numbers.ONE) {
+  SWITCH_3@ do when (switchstatement.Numbers.ONE) {
    switchstatement.Numbers.ONE ->
    switchstatement.Numbers.TWO ->
-    break@SWITCH
+    break@SWITCH_3
    else ->
     return Unit
   } while (false)
@@ -55,10 +55,10 @@ open class SwitchStatement {
      assert(i == 3)
      return Unit
    } while (false)
-   SWITCH@ do when (5) {
+   SWITCH_1@ do when (5) {
     5 ->
      val i: Int = 1
-     break@SWITCH
+     break@SWITCH_1
    } while (false)
    assert(false)
   }

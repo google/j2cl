@@ -112,7 +112,8 @@ private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
     if (!isVararg) variableTypeDescriptor
     else (variableTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (isVararg) render("vararg ")
-  render("${variable.name.identifierSourceString}: ${renderedTypeDescriptor.sourceString}")
+  renderName(variable)
+  render(": ${renderedTypeDescriptor.sourceString}")
 }
 
 private fun Renderer.renderMethodDescriptorTypeParameters(methodDescriptor: MethodDescriptor) {

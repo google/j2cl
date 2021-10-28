@@ -79,6 +79,8 @@ private val PrimitiveTypeDescriptor.primitiveSourceString
 internal val TypeVariable.declarationSourceString: String
   get() = variableSourceString(isDeclaration = true)
 
+// TODO(b/203676284): Resolve unique name through Environment. Refactor all methods in this file
+// to extension functions on Environment.
 private fun TypeVariable.variableSourceString(isDeclaration: Boolean): String {
   val nameSourceString = if (isWildcardOrCapture) "*" else name.identifierSourceString
   val boundTypeDescriptor = this.boundTypeDescriptor

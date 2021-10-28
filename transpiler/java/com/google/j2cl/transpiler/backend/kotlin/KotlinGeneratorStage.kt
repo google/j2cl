@@ -18,8 +18,10 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.OutputUtils
 import com.google.j2cl.common.Problems
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.Library
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
+import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver.computeUniqueNames
 
 /**
  * The OutputGeneratorStage contains all necessary information for generating the Kotlin output for
@@ -27,11 +29,11 @@ import com.google.j2cl.transpiler.backend.common.SourceBuilder
  */
 class KotlinGeneratorStage(private val output: OutputUtils.Output, private val problems: Problems) {
   fun generateOutputs(library: Library) {
-    library.compilationUnits.forEach(this::generateOutputs)
+    val environment = Environment(library.nameToIdentifierMap)
+    library.compilationUnits.forEach { generateOutputs(environment, it) }
   }
 
-  private fun generateOutputs(compilationUnit: CompilationUnit) {
-    val environment = Environment()
+  private fun generateOutputs(environment: Environment, compilationUnit: CompilationUnit) {
     val sourceBuilder = SourceBuilder()
     val renderer = Renderer(environment, sourceBuilder, problems)
     renderer.renderCompilationUnit(compilationUnit)
@@ -42,3 +44,11 @@ class KotlinGeneratorStage(private val output: OutputUtils.Output, private val p
 }
 
 private fun String.trimTrailingWhitespaces() = lines().joinToString("\n") { it.trimEnd() }
+
+private val Library.nameToIdentifierMap
+  get() =
+    buildMap<HasName, String> {
+      compilationUnits.asSequence().flatMap { it.types.asSequence() }.forEach { type ->
+        putAll(computeUniqueNames(emptySet(), type))
+      }
+    }

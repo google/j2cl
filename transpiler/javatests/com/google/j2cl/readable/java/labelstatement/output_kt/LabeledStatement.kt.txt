@@ -8,9 +8,9 @@ open class LabeledStatement {
  open fun simpleStatement() {
   LABEL@ do this.foo() while (false)
   LOOP@ do {
-   LABEL@ do continue@LOOP while (false)
+   LABEL_1@ do continue@LOOP while (false)
   } while (false)
-  LABEL@ do return Unit while (false)
+  LABEL_2@ do return Unit while (false)
  }
 
  open fun block() {

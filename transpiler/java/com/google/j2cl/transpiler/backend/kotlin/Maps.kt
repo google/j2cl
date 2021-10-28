@@ -15,13 +15,6 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.j2cl.transpiler.ast.HasName
-
-/** Code generation environment. */
-data class Environment(
-  /** Name to identifier mapping. */
-  private val nameToIdentifierMap: Map<HasName, String> = emptyMap()
-) {
-  /** Returns identifier for the given name */
-  fun identifier(hasName: HasName): String = nameToIdentifierMap[hasName]!!
-}
+// TODO(b/204366308): Remove when the corresponding function in Kotlin stdlib is standarized.
+internal fun <K, V> buildMap(fn: MutableMap<K, V>.() -> Unit): Map<K, V> =
+  mutableMapOf<K, V>().apply(fn).toMap()

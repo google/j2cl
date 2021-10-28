@@ -24,7 +24,6 @@ import com.google.j2cl.transpiler.ast.ExpressionStatement
 import com.google.j2cl.transpiler.ast.FieldDeclarationStatement
 import com.google.j2cl.transpiler.ast.ForEachStatement
 import com.google.j2cl.transpiler.ast.IfStatement
-import com.google.j2cl.transpiler.ast.Label
 import com.google.j2cl.transpiler.ast.LabelReference
 import com.google.j2cl.transpiler.ast.LabeledStatement
 import com.google.j2cl.transpiler.ast.ReturnStatement
@@ -85,7 +84,7 @@ private fun Renderer.renderContinueStatement(continueStatement: ContinueStatemen
 
 private fun Renderer.renderLabelReference(labelReference: LabelReference) {
   render("@")
-  renderLabelName(labelReference.target)
+  renderName(labelReference.target)
 }
 
 private fun Renderer.renderDoWhileStatement(doWhileStatement: DoWhileStatement) {
@@ -102,7 +101,7 @@ private fun Renderer.renderExpressionStatement(expressionStatement: ExpressionSt
 private fun Renderer.renderForEachStatement(forEachStatement: ForEachStatement) {
   render("for ")
   renderInParentheses {
-    render(forEachStatement.loopVariable.name)
+    renderName(forEachStatement.loopVariable)
     render(" in ")
     renderExpression(forEachStatement.iterableExpression)
   }
@@ -129,15 +128,11 @@ private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarati
 }
 
 private fun Renderer.renderLabeledStatement(labelStatement: LabeledStatement) {
-  renderLabelName(labelStatement.label)
+  renderName(labelStatement.label)
   render("@ ")
   val innerStatement = labelStatement.statement
   if (innerStatement is LabeledStatement) renderInCurlyBrackets { renderStatement(innerStatement) }
   else renderStatement(innerStatement)
-}
-
-private fun Renderer.renderLabelName(label: Label) {
-  render(label.name.identifierSourceString)
 }
 
 private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
@@ -180,7 +175,6 @@ private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
   renderStatement(tryStatement.body)
   tryStatement.catchClauses.forEach { catchClause ->
     val catchVariable = catchClause.exceptionVariable
-    val catchVariableName = catchVariable.name
     // Duplicate catch block for each type in the union, which are not available in Kotlin.
     val catchTypeDescriptors =
       catchVariable.typeDescriptor.let {
@@ -189,7 +183,8 @@ private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
     catchTypeDescriptors.forEach { catchType ->
       render(" catch ")
       renderInParentheses {
-        render("$catchVariableName: ${catchType.toNonNullable().sourceString}")
+        renderName(catchVariable)
+        render(": ${catchType.toNonNullable().sourceString}")
       }
       render(" ")
       renderStatement(catchClause.body)

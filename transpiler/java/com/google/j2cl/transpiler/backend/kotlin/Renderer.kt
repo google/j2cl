@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.Problems
+import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.backend.common.SourceBuilder
 
@@ -36,6 +37,10 @@ class Renderer(
 
   fun render(string: String) {
     sourceBuilder.append(string)
+  }
+
+  fun renderName(hasName: HasName) {
+    render(environment.identifier(hasName).identifierSourceString)
   }
 
   fun renderIndented(renderFn: () -> Unit) {
