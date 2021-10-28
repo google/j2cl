@@ -99,12 +99,12 @@ public class WasmModuleGenerator {
       problems.error("Static entry points %s not found.", pendingEntryPoints);
     }
   }
-  
+
   private void emitItableSupportTypes() {
     builder.newLine();
     // The itable is an array of interface vtables. However since there is no common super type
     // for all vtables, the array is defined as array of 'data' which is the top type for structs.
-    builder.append("(type $itable (array (mut (ref null data))))");
+    builder.append("(type $itable (array (ref null data)))");
   }
 
   private void emitGlobals(Library library) {
