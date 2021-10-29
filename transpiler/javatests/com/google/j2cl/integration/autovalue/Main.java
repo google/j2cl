@@ -154,7 +154,6 @@ public class Main {
   private static void testJsCollection() {
     UsesJsCollection o1 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
     UsesJsCollection o2 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
-    // TODO(goktug): Fix these two object to be not equal.
-    assertEquals(o1, o2);
+    assertNotEquals(o1, o2);
   }
 }

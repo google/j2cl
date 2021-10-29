@@ -206,6 +206,15 @@ class Arrays {
   }
 
   /**
+   * @param {!*} array
+   * @return {boolean}
+   * @public
+   */
+  static $isStamped(array) {
+    return !!array.$$arrayMetadata;
+  }
+
+  /**
    * Sets the given value into the given index in the given array.
    *
    * @template T

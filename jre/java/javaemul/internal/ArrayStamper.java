@@ -28,4 +28,7 @@ public class ArrayStamper {
 
   @JsMethod(namespace = "vmbootstrap.Arrays")
   public static native <T> void $copyType(T[] array, T[] referenceType);
+
+  @JsMethod(namespace = "vmbootstrap.Arrays", name = "$isStamped")
+  public static native boolean isStamped(Object array);
 }
