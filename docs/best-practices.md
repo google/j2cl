@@ -239,8 +239,12 @@ you may want to be more conservative in pulling in non-critical J2CL
 dependencies than in regular Java projects. Remember that you are writing code
 that runs in a web browser!
 
-Additionally, APT based code generation such as [Dagger](https://dagger.dev/) or
-[AutoValue](https://github.com/google/auto/tree/master/value) can have
-surprising impact on compile time and code size if used without awareness of the
-implications. Generated code is rarely inspected which can lead to hidden code
-verbosity. These APTs are designed for convenience, without code size in mind.
+Additionally, in general APT based code generation such as
+[Dagger](https://dagger.dev/) can have surprising impact on compile time and
+code size if used without awareness of the implications. Generated code is
+rarely inspected which can lead to hidden code verbosity. These APTs are
+designed for convenience, without code size in mind.
+
+Note: An exception to this is
+[AutoValue](https://github.com/google/auto/tree/master/value) which specifically
+understood and optimized by J2CL to generate very efficient code.
