@@ -21,6 +21,9 @@ import static com.google.j2cl.integration.testing.Asserts.assertNotNull;
 
 import com.google.auto.value.AutoValue;
 import com.google.auto.value.extension.memoized.Memoized;
+import javaemul.internal.annotations.Wasm;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsType;
 
 public class Main {
 
@@ -30,6 +33,7 @@ public class Main {
     testExtending();
     testMemoized();
     testAbstractEquals();
+    testJsCollection();
   }
 
   private static void testComposite() {
@@ -57,14 +61,14 @@ public class Main {
     assertEquals(43d, componentB.getDoubleField());
     assertEquals("hello", componentB.getStringField());
     assertEquals(6, componentB.getArrayField()[1]);
-    CompositeB parent = new AutoValue_CompositeB(11, true, "world", 101d, componentB);
-    assertEquals(11, parent.getIntField());
-    assertEquals(true, parent.getBooleanField());
-    assertEquals("world", parent.getStringField());
-    assertEquals(101d, parent.getDoubleField());
-    assertEquals(componentB, parent.getComponentField());
-    assertEquals(componentB.hashCode(), parent.getComponentField().hashCode());
-    assertNotNull(parent.toString());
+    CompositeB compositeB = new AutoValue_CompositeB(11, true, "world", 101d, componentB);
+    assertEquals(11, compositeB.getIntField());
+    assertEquals(true, compositeB.getBooleanField());
+    assertEquals("world", compositeB.getStringField());
+    assertEquals(101d, compositeB.getDoubleField());
+    assertEquals(componentB, compositeB.getComponentField());
+    assertEquals(componentB.hashCode(), compositeB.getComponentField().hashCode());
+    assertNotNull(compositeB.toString());
   }
 
   @AutoValue
@@ -134,6 +138,23 @@ public class Main {
   private static void testAbstractEquals() {
     AbstractEquals o1 = new AutoValue_Main_AbstractEquals("a");
     AbstractEquals o2 = new AutoValue_Main_AbstractEquals("a");
+    assertEquals(o1, o2);
+  }
+
+  @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
+  interface JsArray {}
+
+  @AutoValue
+  abstract static class UsesJsCollection {
+    abstract JsArray jsArray();
+  }
+
+  // Uses JsInterop behavior.
+  @Wasm("nop")
+  private static void testJsCollection() {
+    UsesJsCollection o1 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
+    UsesJsCollection o2 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
+    // TODO(goktug): Fix these two object to be not equal.
     assertEquals(o1, o2);
   }
 }

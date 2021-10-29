@@ -19,5 +19,7 @@ integration_test(
     optimize_autovalue = True,
     deps = [
         "//third_party:auto_value-j2cl",
+        "//third_party:gwt-javaemul-internal-annotations-j2cl",
+        "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
