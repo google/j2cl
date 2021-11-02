@@ -48,7 +48,7 @@ private fun Renderer.renderField(field: Field) {
   val isFinal = field.descriptor.isFinal
   val typeDescriptor = field.descriptor.typeDescriptor
 
-  if (field.isStatic) render("@JvmStatic ")
+  if (!field.descriptor.visibility.isPrivate) render("@JvmField ")
   renderVisibility(field.descriptor.visibility)
   render(if (isFinal) "val " else "var ")
   render("${field.descriptor.name!!.identifierSourceString}: ${typeDescriptor.sourceString}")

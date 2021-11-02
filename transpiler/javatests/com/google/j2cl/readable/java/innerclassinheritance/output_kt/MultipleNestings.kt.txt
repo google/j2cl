@@ -5,19 +5,19 @@ open class MultipleNestings {
 }
 
 open class Parent {
- val `this`: innerclassinheritance.MultipleNestings?
+ @JvmField val `this`: innerclassinheritance.MultipleNestings?
 
  open fun `fun`() {}
 }
 
 open class InnerClass1: innerclassinheritance.MultipleNestings.Parent() {
- val `this`: innerclassinheritance.MultipleNestings?
+ @JvmField val `this`: innerclassinheritance.MultipleNestings?
 
  open fun funInI1() {}
 }
 
 open class InnerClass2: innerclassinheritance.MultipleNestings.Parent() {
- val `this`: innerclassinheritance.MultipleNestings.InnerClass1?
+ @JvmField val `this`: innerclassinheritance.MultipleNestings.InnerClass1?
 
  open fun funInI2() {}
 

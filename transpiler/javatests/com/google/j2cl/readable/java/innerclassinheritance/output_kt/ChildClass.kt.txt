@@ -1,19 +1,19 @@
 package innerclassinheritance
 
 open class ParentOuter {
- var fieldInParentOuter: Int
+ @JvmField var fieldInParentOuter: Int
 
  open fun funInParentOuter() {}
 }
 
 open class ParentInner {
- var fieldInParentInner: Int
+ @JvmField var fieldInParentInner: Int
 
  open fun funInParentInner() {}
 }
 
 open class ChildClass: innerclassinheritance.ParentOuter() {
- var fieldInOuter: Int
+ @JvmField var fieldInOuter: Int
 
  open fun funInOuter() {}
 
@@ -23,9 +23,9 @@ open class ChildClass: innerclassinheritance.ParentOuter() {
 }
 
 open class InnerClass: innerclassinheritance.ParentInner() {
- val `this`: innerclassinheritance.ChildClass?
+ @JvmField val `this`: innerclassinheritance.ChildClass?
 
- var fieldInInner: Int
+ @JvmField var fieldInInner: Int
 
  open fun funInInner() {}
 
@@ -51,9 +51,9 @@ open class InnerClass: innerclassinheritance.ParentInner() {
 }
 
 open class `1LocalClass`: innerclassinheritance.ChildClass() {
- val `this`: innerclassinheritance.ChildClass?
+ @JvmField val `this`: innerclassinheritance.ChildClass?
 
- internal var `object`: Any? = this
+ @JvmField internal var `object`: Any? = this
 
  open fun funInParentOuter() {}
 

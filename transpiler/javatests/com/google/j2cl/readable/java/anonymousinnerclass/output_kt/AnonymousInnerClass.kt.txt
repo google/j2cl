@@ -3,7 +3,7 @@ package anonymousinnerclass
 open class A {}
 
 open class B {
- val `this`: anonymousinnerclass.A?
+ @JvmField val `this`: anonymousinnerclass.A?
 }
 
 open class AnonymousInnerClass {
@@ -16,7 +16,7 @@ open class AnonymousInnerClass {
 }
 
 open class InnerClass {
- val `this`: anonymousinnerclass.AnonymousInnerClass?
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
 open class `1`: anonymousinnerclass.AnonymousInnerClass.InnerClass {
@@ -24,7 +24,7 @@ open class `1`: anonymousinnerclass.AnonymousInnerClass.InnerClass {
   super()
  }
 
- val `this`: anonymousinnerclass.AnonymousInnerClass?
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
 open class `2`: anonymousinnerclass.A.B {
@@ -32,15 +32,15 @@ open class `2`: anonymousinnerclass.A.B {
   super()
  }
 
- val `this`: anonymousinnerclass.AnonymousInnerClass?
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
 open class `1C` {
- val `this`: anonymousinnerclass.AnonymousInnerClass?
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 
- var fInC: Int = this.arg
+ @JvmField var fInC: Int = this.arg
 
- val arg: Int
+ @JvmField val arg: Int
 }
 
 open class `3`: anonymousinnerclass.AnonymousInnerClass.`1C` {
@@ -48,7 +48,7 @@ open class `3`: anonymousinnerclass.AnonymousInnerClass.`1C` {
   super()
  }
 
- val `this`: anonymousinnerclass.AnonymousInnerClass?
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 
- val arg: Int
+ @JvmField val arg: Int
 }

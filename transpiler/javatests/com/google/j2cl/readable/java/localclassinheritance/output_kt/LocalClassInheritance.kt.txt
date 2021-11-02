@@ -7,21 +7,21 @@ open class LocalClassInheritance {
 }
 
 open class `1Parent` {
- val `this`: localclassinheritance.LocalClassInheritance?
+ @JvmField val `this`: localclassinheritance.LocalClassInheritance?
 
  open fun n() {
   val i: Int = this.f
  }
 
- val f: Int
+ @JvmField val f: Int
 }
 
 open class `1Child`: localclassinheritance.LocalClassInheritance.`1Parent`() {
- val `this`: localclassinheritance.LocalClassInheritance?
+ @JvmField val `this`: localclassinheritance.LocalClassInheritance?
 
  open fun n() {
   val i: Int = this.f
  }
 
- val f: Int
+ @JvmField val f: Int
 }

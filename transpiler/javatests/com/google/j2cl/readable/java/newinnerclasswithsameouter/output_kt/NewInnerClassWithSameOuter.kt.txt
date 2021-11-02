@@ -3,7 +3,7 @@ package newinnerclasswithsameouter
 open class NewInnerClassWithSameOuter {}
 
 open class A {
- val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+ @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 
  open fun test() {
   TODO("expression.qualify needs rendering: A.this.this)")
@@ -12,9 +12,9 @@ open class A {
 }
 
 open class B {
- val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+ @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 }
 
 open class C {
- val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+ @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 }

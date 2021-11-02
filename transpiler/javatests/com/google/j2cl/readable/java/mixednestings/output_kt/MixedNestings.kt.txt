@@ -13,7 +13,7 @@ open class MixedNestings {
 }
 
 open class A {
- val `this`: mixednestings.MixedNestings?
+ @JvmField val `this`: mixednestings.MixedNestings?
 
  open fun aa() {}
 
@@ -23,7 +23,7 @@ open class A {
 }
 
 open class `1B` {
- val `this`: mixednestings.MixedNestings.A?
+ @JvmField val `this`: mixednestings.MixedNestings.A?
 
  open fun bb() {}
 
@@ -38,7 +38,7 @@ open class `1`: mixednestings.MyInterface {
   super()
  }
 
- val `this`: mixednestings.MixedNestings.A.`1B`?
+ @JvmField val `this`: mixednestings.MixedNestings.A.`1B`?
 
  open fun `fun`(a: Int): Int {
   val ii: mixednestings.MyInterface? = {n: Int -> {
@@ -64,7 +64,7 @@ open class `1`: mixednestings.MyInterface {
   super()
  }
 
- val `this`: mixednestings.MixedNestings.A.`1B`.`1`?
+ @JvmField val `this`: mixednestings.MixedNestings.A.`1B`.`1`?
 
  open fun `fun`(b: Int): Int {
   return b

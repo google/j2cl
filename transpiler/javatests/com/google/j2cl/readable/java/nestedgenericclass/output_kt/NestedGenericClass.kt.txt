@@ -20,11 +20,11 @@ open class NestedGenericClass<T> {
 }
 
 open class A<T, T> {
- val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 }
 
 open class B<T, T, T> {
- val `this`: nestedgenericclass.NestedGenericClass.A<T, T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass.A<T, T>?
 
  internal constructor() {}
 
@@ -32,29 +32,29 @@ open class B<T, T, T> {
 }
 
 open class C<T> {
- val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
- var c: T
+ @JvmField var c: T
 }
 
 open class D<T> {
- val `this`: nestedgenericclass.NestedGenericClass.C<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass.C<T>?
 
- var d: T
+ @JvmField var d: T
 }
 
 open class `1E`<S, S, T> {
- val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 }
 
 open class `1F`<S, T> {
- val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
- var f: S
+ @JvmField var f: S
 }
 
 open class `1G`<T, T, T> {
- val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
  open fun <T> bar() {
   TODO("expression.qualify needs rendering: \$1G.this)")
@@ -62,5 +62,5 @@ open class `1G`<T, T, T> {
 }
 
 open class `1H`<T, T, T, T, T> {
- val `this`: nestedgenericclass.NestedGenericClass.`1G`<T, T, T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass.`1G`<T, T, T>?
 }

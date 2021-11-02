@@ -2,9 +2,9 @@ package staticinitializers
 
 open class StaticInitializers {
  companion object {
-  @JvmStatic var a: Int = 5
+  @JvmField var a: Int = 5
 
-  @JvmStatic var b: Int = staticinitializers.StaticInitializers.a * 2
+  @JvmField var b: Int = staticinitializers.StaticInitializers.a * 2
 
   init {
    staticinitializers.StaticInitializers.a = 10

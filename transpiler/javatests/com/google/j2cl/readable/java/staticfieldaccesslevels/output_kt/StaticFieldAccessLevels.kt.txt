@@ -6,12 +6,12 @@ open class StaticFieldAccessLevels {
  }
 
  companion object {
-  @JvmStatic var a: Int
+  @JvmField var a: Int
 
-  @JvmStatic private var b: Boolean
+  private var b: Boolean
 
-  @JvmStatic protected var c: Any?
+  @JvmField protected var c: Any?
 
-  @JvmStatic internal var d: Int
+  @JvmField internal var d: Int
  }
 }

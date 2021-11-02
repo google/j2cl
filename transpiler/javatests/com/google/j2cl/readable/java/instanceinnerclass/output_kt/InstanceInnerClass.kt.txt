@@ -1,7 +1,7 @@
 package instanceinnerclass
 
 open class InstanceInnerClass {
- var instanceField: Int
+ @JvmField var instanceField: Int
 
  open fun funOuter() {}
 
@@ -11,11 +11,11 @@ open class InstanceInnerClass {
 }
 
 open class InnerClass {
- val `this`: instanceinnerclass.InstanceInnerClass?
+ @JvmField val `this`: instanceinnerclass.InstanceInnerClass?
 
- var field: Int = this.`this`.instanceField + this.`this`.instanceField
+ @JvmField var field: Int = this.`this`.instanceField + this.`this`.instanceField
 
- var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this.`this`
+ @JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this.`this`
 
  open fun funInner() {
   this.`this`.funOuter()

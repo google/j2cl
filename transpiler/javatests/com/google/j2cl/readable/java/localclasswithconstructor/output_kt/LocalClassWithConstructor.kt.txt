@@ -8,9 +8,9 @@ open class LocalClassWithConstructor {
 }
 
 open class `1LocalClass` {
- val `this`: localclasswithconstructor.LocalClassWithConstructor?
+ @JvmField val `this`: localclasswithconstructor.LocalClassWithConstructor?
 
- var field: Int
+ @JvmField var field: Int
 
  constructor(a: Int, b: Int) {
   this.field = this.localVar + a + b
@@ -21,7 +21,7 @@ open class `1LocalClass` {
   this.field = this.localVar
  }
 
- val localVar: Int
+ @JvmField val localVar: Int
 
- val p: Int
+ @JvmField val p: Int
 }

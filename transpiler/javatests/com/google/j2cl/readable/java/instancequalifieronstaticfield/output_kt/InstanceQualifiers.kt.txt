@@ -2,9 +2,9 @@ package instancequalifieronstaticfield
 
 open class InstanceQualifiers {
  companion object {
-  @JvmStatic var staticField: Int = 100
+  @JvmField var staticField: Int = 100
 
-  @JvmStatic var sideEffectCount: Int = 0
+  @JvmField var sideEffectCount: Int = 0
 
   @JvmStatic
   fun getStaticValue(): Int {

@@ -32,7 +32,7 @@ open class ArithmeticExpressions {
   q = 3 >>> 2
  }
 
- var bar: Long = arithmeticexpressions.ArithmeticExpressions.foo++
+ @JvmField var bar: Long = arithmeticexpressions.ArithmeticExpressions.foo++
 
  open fun testCompoundArray() {
   val ints: IntArray? = null
@@ -91,7 +91,7 @@ open class ArithmeticExpressions {
   val n: Int = 1 + ref.field
  }
 
- internal var intField: Long
+ @JvmField internal var intField: Long
 
  open fun testExtendedOperands() {
   var boxedInteger: Int? = 3
@@ -109,15 +109,15 @@ open class ArithmeticExpressions {
  }
 
  companion object {
-  @JvmStatic private val FLOAT_CONSTANT: Float = 1.1f
+  private val FLOAT_CONSTANT: Float = 1.1f
 
-  @JvmStatic private val DOUBLE_CONSTANT: Double = 1.100000023841858
+  private val DOUBLE_CONSTANT: Double = 1.100000023841858
 
-  @JvmStatic private val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
+  private val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
 
-  @JvmStatic var one: Long = 1L
+  @JvmField var one: Long = 1L
 
-  @JvmStatic var foo: Long = arithmeticexpressions.ArithmeticExpressions.one++
+  @JvmField var foo: Long = arithmeticexpressions.ArithmeticExpressions.one++
 
   @JvmStatic
   private fun getLongArray(): LongArray? {
@@ -139,7 +139,7 @@ open class ArithmeticExpressions {
    return null
   }
 
-  @JvmStatic private var counter: Long = 0L
+  private var counter: Long = 0L
 
   @JvmStatic
   private fun incrementCounter(): Long {
@@ -149,7 +149,7 @@ open class ArithmeticExpressions {
 }
 
 open class `1Ref`<T> {
- val `this`: arithmeticexpressions.ArithmeticExpressions?
+ @JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
 
- internal var field: T
+ @JvmField internal var field: T
 }

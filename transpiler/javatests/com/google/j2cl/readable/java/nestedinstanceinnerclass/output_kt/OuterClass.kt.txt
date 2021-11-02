@@ -7,13 +7,13 @@ open class OuterClass {
 }
 
 open class InnerClass {
- val `this`: nestedinstanceinnerclass.OuterClass?
+ @JvmField val `this`: nestedinstanceinnerclass.OuterClass?
 }
 
 open class InnerInnerClass {
- val `this`: nestedinstanceinnerclass.OuterClass.InnerClass?
+ @JvmField val `this`: nestedinstanceinnerclass.OuterClass.InnerClass?
 
- var x: nestedinstanceinnerclass.OuterClass.InnerClass? = this.`this`
+ @JvmField var x: nestedinstanceinnerclass.OuterClass.InnerClass? = this.`this`
 
- var y: nestedinstanceinnerclass.OuterClass? = this.`this`.`this`
+ @JvmField var y: nestedinstanceinnerclass.OuterClass? = this.`this`.`this`
 }

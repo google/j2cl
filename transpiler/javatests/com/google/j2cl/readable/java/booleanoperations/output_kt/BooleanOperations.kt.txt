@@ -68,13 +68,13 @@ open class BooleanOperations {
 }
 
 open class `1Outer` {
- val `this`: booleanoperations.BooleanOperations?
+ @JvmField val `this`: booleanoperations.BooleanOperations?
 
- internal var b: Boolean
+ @JvmField internal var b: Boolean
 }
 
 open class Inner {
- val `this`: booleanoperations.BooleanOperations.`1Outer`?
+ @JvmField val `this`: booleanoperations.BooleanOperations.`1Outer`?
 
  init {
   this.`this`.b |= true

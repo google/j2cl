@@ -1,13 +1,13 @@
 package innerclasswithconstructor
 
 open class InnerClassWithConstructor {
- var a: Int
+ @JvmField var a: Int
 }
 
 open class InnerClass {
- val `this`: innerclasswithconstructor.InnerClassWithConstructor?
+ @JvmField val `this`: innerclasswithconstructor.InnerClassWithConstructor?
 
- var b: Int
+ @JvmField var b: Int
 
  constructor(b: Int) {
   this.b = this.`this`.a + b

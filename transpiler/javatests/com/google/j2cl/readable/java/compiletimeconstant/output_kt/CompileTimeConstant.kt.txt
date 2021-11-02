@@ -1,23 +1,23 @@
 package compiletimeconstant
 
 open class CompileTimeConstant {
- val A2: Int = 10
+ @JvmField val A2: Int = 10
 
- val B2: Int = 20
+ @JvmField val B2: Int = 20
 
- val C2: Int = 200
+ @JvmField val C2: Int = 200
 
- val D2: String? = "Tur\"tle"
+ @JvmField val D2: String? = "Tur\"tle"
 
- val E2: String? = "Do\"ve"
+ @JvmField val E2: String? = "Do\"ve"
 
- val F2: String? = "Tur\"tleDo\"ve"
+ @JvmField val F2: String? = "Tur\"tleDo\"ve"
 
- val G2: Long = 10000L
+ @JvmField val G2: Long = 10000L
 
- val H2: Char = 'A'
+ @JvmField val H2: Char = 'A'
 
- val I2: Boolean = true
+ @JvmField val I2: Boolean = true
 
  init {
   val b: Boolean = this.I2
@@ -29,36 +29,36 @@ open class CompileTimeConstant {
  }
 
  companion object {
-  @JvmStatic val OBJ: Any? = null
+  @JvmField val OBJ: Any? = null
 
-  @JvmStatic val A: Int = 10
+  @JvmField val A: Int = 10
 
-  @JvmStatic val B: Int = 20
+  @JvmField val B: Int = 20
 
-  @JvmStatic val C: Int = 200
+  @JvmField val C: Int = 200
 
-  @JvmStatic val D: String? = "Tur\"tle"
+  @JvmField val D: String? = "Tur\"tle"
 
-  @JvmStatic val E: String? = "Do\'ve"
+  @JvmField val E: String? = "Do\'ve"
 
-  @JvmStatic val F: String? = "Tur\"tleDo\'ve"
+  @JvmField val F: String? = "Tur\"tleDo\'ve"
 
-  @JvmStatic val J: String? = "Tur\"tleDo\'veTur\"tleDo\'ve"
+  @JvmField val J: String? = "Tur\"tleDo\'veTur\"tleDo\'ve"
 
-  @JvmStatic val K: String? = null
+  @JvmField val K: String? = null
 
-  @JvmStatic val L: String? = "ThisIsALongString"
+  @JvmField val L: String? = "ThisIsALongString"
 
-  @JvmStatic val M: String? = "ThisIsALongStringAlso"
+  @JvmField val M: String? = "ThisIsALongStringAlso"
 
-  @JvmStatic val N: String? = "ThisIsALongStringAlsoButLonger"
+  @JvmField val N: String? = "ThisIsALongStringAlsoButLonger"
 
-  @JvmStatic val G: Long = 10000L
+  @JvmField val G: Long = 10000L
 
-  @JvmStatic val H: Char = 'A'
+  @JvmField val H: Char = 'A'
 
-  @JvmStatic val I: Boolean = true
+  @JvmField val I: Boolean = true
 
-  @JvmStatic val classLiteral: java.lang.Class<*>? = compiletimeconstant.CompileTimeConstant::class.java
+  @JvmField val classLiteral: java.lang.Class<*>? = compiletimeconstant.CompileTimeConstant::class.java
  }
 }

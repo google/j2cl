@@ -2,7 +2,7 @@ package localclassinstaticcontext
 
 open class LocalClassInStaticContext {
  companion object {
-  @JvmStatic var f: Any? = localclassinstaticcontext.LocalClassInStaticContext.`1`()
+  @JvmField var f: Any? = localclassinstaticcontext.LocalClassInStaticContext.`1`()
 
   @JvmStatic
   fun test() {
@@ -44,7 +44,7 @@ open class `2` {
 }
 
 open class C {
- var f: Int = 1
+ @JvmField var f: Int = 1
 
  open fun test() {
   TODO("expression.qualify needs rendering: C.this)").`fun`()
@@ -52,7 +52,7 @@ open class C {
 }
 
 open class `1D` {
- val `this`: localclassinstaticcontext.LocalClassInStaticContext.C?
+ @JvmField val `this`: localclassinstaticcontext.LocalClassInStaticContext.C?
 
  open fun `fun`(): Int {
   return this.`this`.f

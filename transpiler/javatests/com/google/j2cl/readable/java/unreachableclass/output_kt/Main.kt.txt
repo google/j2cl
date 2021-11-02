@@ -10,13 +10,13 @@ open class Main {
 }
 
 open class `1A` {
- val `this`: unreachableclass.Main?
+ @JvmField val `this`: unreachableclass.Main?
 
  internal open fun m() {}
 }
 
 open class `1B` {
- val `this`: unreachableclass.Main.`1A`?
+ @JvmField val `this`: unreachableclass.Main.`1A`?
 
  private fun n() {}
 }
@@ -26,5 +26,5 @@ open class `1` {
   super()
  }
 
- val `this`: unreachableclass.Main?
+ @JvmField val `this`: unreachableclass.Main?
 }

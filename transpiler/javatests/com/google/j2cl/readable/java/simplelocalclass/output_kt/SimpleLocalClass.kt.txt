@@ -15,33 +15,33 @@ open class SimpleLocalClass {
 }
 
 open class `1InnerClass` {
- val `this`: simplelocalclass.SimpleLocalClass?
+ @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 
  open fun `fun`(): Int {
   return this.localVar + this.p
  }
 
- val localVar: Int
+ @JvmField val localVar: Int
 
- val p: Int
+ @JvmField val p: Int
 }
 
 open class `1InnerClassWithoutCaptures` {
- val `this`: simplelocalclass.SimpleLocalClass?
+ @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 }
 
 open class `2InnerClass` {
- val `this`: simplelocalclass.SimpleLocalClass?
+ @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 
- internal var field: Int = this.localVar
+ @JvmField internal var field: Int = this.localVar
 
- val localVar: Int
+ @JvmField val localVar: Int
 }
 
 open class `1Abc$InnerClass` {
- val `this`: simplelocalclass.SimpleLocalClass?
+ @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 }
 
 open class `1Klm$InnerClass` {
- val `this`: simplelocalclass.SimpleLocalClass?
+ @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 }

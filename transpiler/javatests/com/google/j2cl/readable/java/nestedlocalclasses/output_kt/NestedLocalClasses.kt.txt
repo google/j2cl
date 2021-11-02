@@ -7,36 +7,36 @@ open class NestedLocalClasses {
 }
 
 open class `1InnerClass` {
- val `this`: nestedlocalclasses.NestedLocalClasses?
+ @JvmField val `this`: nestedlocalclasses.NestedLocalClasses?
 
  open fun `fun`() {
   var localVarInInnerClass: Int = 1
   TODO("expression.qualify needs rendering: \$1InnerClass.this)")
  }
 
- val localVar: Int
+ @JvmField val localVar: Int
 }
 
 open class `1InnerInnerClass` {
- val `this`: nestedlocalclasses.NestedLocalClasses.`1InnerClass`?
+ @JvmField val `this`: nestedlocalclasses.NestedLocalClasses.`1InnerClass`?
 
- var fieldInInnerInnerClass: Int = this.localVar + this.localVarInInnerClass
+ @JvmField var fieldInInnerInnerClass: Int = this.localVar + this.localVarInInnerClass
 
- val localVar: Int
+ @JvmField val localVar: Int
 
- val localVarInInnerClass: Int
+ @JvmField val localVarInInnerClass: Int
 }
 
 open class `1ClassIndirectlyCapturingLocal` {
- val `this`: nestedlocalclasses.NestedLocalClasses.`1InnerClass`?
+ @JvmField val `this`: nestedlocalclasses.NestedLocalClasses.`1InnerClass`?
 
  init {
   TODO("expression.qualify needs rendering: \$1ClassIndirectlyCapturingLocal.this.this)")
  }
 
- val localVar: Int
+ @JvmField val localVar: Int
 
- val localVarInInnerClass: Int
+ @JvmField val localVarInInnerClass: Int
 }
 
 interface InterfaceWithThisReference {
@@ -46,7 +46,7 @@ interface InterfaceWithThisReference {
 }
 
 open class `1Super`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {
- val `this`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference?
+ @JvmField val `this`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference?
 }
 
 open class `1`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.`1Super` {
@@ -54,5 +54,5 @@ open class `1`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference
   super()
  }
 
- val `this`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference?
+ @JvmField val `this`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference?
 }

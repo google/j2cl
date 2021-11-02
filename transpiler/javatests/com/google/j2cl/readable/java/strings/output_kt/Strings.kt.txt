@@ -34,12 +34,12 @@ open class Strings {
  }
 
  companion object {
-  @JvmStatic private val ESCAPE_CODES: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  private val ESCAPE_CODES: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
 
-  @JvmStatic private val ESCAPE_CODES_COPY: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  private val ESCAPE_CODES_COPY: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 }
 
 open class StringHolder {
- internal var s: String? = "A"
+ @JvmField internal var s: String? = "A"
 }
