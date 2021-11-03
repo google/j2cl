@@ -25,7 +25,7 @@ open class CastGenerics<T, E: Number?> {
 
  open fun <TT: Enum?> outerGenericMethod() {}
 
- open fun <EE: cast.CastGenerics.Empty1?> method(o: Any?): EE {
+ open fun <EE> method(o: Any?): EE where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
   if (o is cast.CastGenerics.Empty1) {
    return o as EE
   }
@@ -34,7 +34,7 @@ open class CastGenerics<T, E: Number?> {
 
  companion object {
   @JvmStatic
-  fun <T: cast.CastGenerics.A?, U: T> testErasureCast() {
+  fun <T, U: T> testErasureCast() where T: cast.CastGenerics.A?, T: cast.CastGenerics.B? {
    var str: String? = cast.CastGenerics<String?, Number?>().field
    str = cast.CastGenerics<String?, Number?>().method()
    val containerT: cast.CastGenerics.Container<T>? = null

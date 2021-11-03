@@ -74,11 +74,12 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
     render("constructor")
   } else {
     render("fun ")
-    renderMethodDescriptorTypeParameters(methodDescriptor)
+    renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors, trailingSpace = true)
     render(methodDescriptor.name!!.identifierSourceString)
   }
   renderMethodParameters(method)
   renderMethodReturnType(methodDescriptor)
+  renderWhereClause(methodDescriptor.typeParameterTypeDescriptors)
   // TODO(b/202527616): Render this() and super() constructor calls after ":".
 }
 
@@ -114,16 +115,6 @@ private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
   if (isVararg) render("vararg ")
   renderName(variable)
   render(": ${renderedTypeDescriptor.sourceString}")
-}
-
-private fun Renderer.renderMethodDescriptorTypeParameters(methodDescriptor: MethodDescriptor) {
-  methodDescriptor.typeParameterTypeDescriptors.takeIf { it.isNotEmpty() }?.let {
-    typeParameterTypeDescriptors ->
-    renderInAngleBrackets {
-      renderCommaSeparated(typeParameterTypeDescriptors) { render(it.declarationSourceString) }
-    }
-    render(" ")
-  }
 }
 
 private fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {

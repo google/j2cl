@@ -18,12 +18,10 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
-import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
-import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 
 internal val TypeDescriptor.sourceString: String
@@ -32,9 +30,8 @@ internal val TypeDescriptor.sourceString: String
       is ArrayTypeDescriptor -> arraySourceString
       is DeclaredTypeDescriptor -> declaredSourceString
       is PrimitiveTypeDescriptor -> primitiveSourceString
-      is TypeVariable -> variableSourceString(isDeclaration = false)
-      is IntersectionTypeDescriptor -> intersectionSourceString
-      else -> throw InternalCompilerError("Unhandled $this")
+      is TypeVariable -> variableSourceString
+      else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
     }
 
 private val TypeDescriptor.nullableSuffix
@@ -76,25 +73,10 @@ private val PrimitiveTypeDescriptor.primitiveSourceString
       else -> throw InternalCompilerError("Unhandled $this")
     }
 
-internal val TypeVariable.declarationSourceString: String
-  get() = variableSourceString(isDeclaration = true)
-
 // TODO(b/203676284): Resolve unique name through Environment. Refactor all methods in this file
 // to extension functions on Environment.
-private fun TypeVariable.variableSourceString(isDeclaration: Boolean): String {
-  val nameSourceString = if (isWildcardOrCapture) "*" else name.identifierSourceString
-  val boundTypeDescriptor = this.boundTypeDescriptor
-  return if (isDeclaration && !isJavaLangObject(boundTypeDescriptor)) {
-    "$nameSourceString: ${boundTypeDescriptor.sourceString}"
-  } else {
-    nameSourceString
-  }
-}
-
-private val IntersectionTypeDescriptor.intersectionSourceString: String
-  get() =
-    // Multiple type descriptors will be rendered separately using "where" clause.
-    intersectionTypeDescriptors.first().sourceString
+private val TypeVariable.variableSourceString: String
+  get() = if (isWildcardOrCapture) "*" else name.identifierSourceString
 
 internal val TypeDeclaration.sourceString
   get() = mappedSourceStringOrNull ?: declaredSourceString

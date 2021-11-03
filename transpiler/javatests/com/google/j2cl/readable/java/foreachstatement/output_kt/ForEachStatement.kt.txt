@@ -20,7 +20,7 @@ open class ForEachStatement {
   }
  }
 
- private fun <T: Any?, U: T> testTypeVariable() {
+ private fun <T, U: T> testTypeVariable() where T: Any?, T: Iterable<String?>? {
   val iterable: U = null
   for (s in iterable) {}
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null

@@ -35,6 +35,7 @@ fun Renderer.renderType(type: Type) {
   renderTypeDeclaration(type.declaration)
 
   renderSuperTypes(type)
+  renderWhereClause(type.declaration.typeParameterDescriptors)
 
   render(" ")
   renderInCurlyBrackets { renderTypeBody(type) }
@@ -42,13 +43,7 @@ fun Renderer.renderType(type: Type) {
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
   render(declaration.classComponents.last().identifierSourceString)
-  declaration.typeParameterDescriptors.takeIf { it.isNotEmpty() }?.let { typeVariables ->
-    renderInAngleBrackets {
-      renderCommaSeparated(typeVariables) { typeVariable ->
-        render(typeVariable.declarationSourceString)
-      }
-    }
-  }
+  renderTypeParameters(declaration.typeParameterDescriptors)
 }
 
 private fun Renderer.renderSuperTypes(type: Type) {
