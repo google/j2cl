@@ -50,3 +50,35 @@ def _find(segments, s):
             return i
 
     return -1
+
+def to_parallel_targets(key, args, name_fun):
+    labels = args.get(key)
+    if not labels:
+        return
+
+    args[key] = [to_parallel_target(label, name_fun) for label in labels]
+
+def to_parallel_target(label, name_fun):
+    if type(label) == "string":
+        return name_fun(_absolute_label(label))
+
+    # Label Object
+    return label.relative(":%s" % name_fun(label.name))
+
+def _absolute_label(label):
+    if label.startswith("//") or label.startswith("@"):
+        if ":" in label:
+            return label
+        elif "/" in label:
+            return "%s:%s" % (label, label.rsplit("/", 1)[-1])
+        if not label.startswith("@"):
+            fail("Unexpected label format: %s" % label)
+        return "%s//:%s" % (label, label[1:])
+
+    package_name = native.package_name()
+
+    if label.startswith(":"):
+        return "//%s%s" % (package_name, label)
+    if ":" in label:
+        return "//%s/%s" % (package_name, label)
+    return "//%s:%s" % (package_name, label)

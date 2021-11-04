@@ -25,13 +25,14 @@ j2cl_library(
 
 """
 
-load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
-load(":j2kt_common.bzl", "j2kt_common")
-load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_library")
-load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
-load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2cl_library_build_test.bzl", "build_test")
 load(":j2cl_common.bzl", "J2clInfo")
+load(":j2cl_java_library.bzl", j2cl_library_rule = "j2cl_library")
+load(":j2cl_util.bzl", "to_parallel_targets")
+load(":j2kt_common.bzl", "j2kt_common")
+load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_library")
+load(":j2wasm_common.bzl", "j2wasm_common")
+load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 
 _J2KT_PACKAGES = []
 
@@ -120,8 +121,8 @@ def j2cl_library(
     if generate_j2wasm_library:
         j2wasm_args = _filter_j2wasm_attrs(dict(kwargs))
 
-        _to_parallel_targets("deps", j2wasm_args, j2wasm_common.to_j2wasm_name)
-        _to_parallel_targets("exports", j2wasm_args, j2wasm_common.to_j2wasm_name)
+        to_parallel_targets("deps", j2wasm_args, j2wasm_common.to_j2wasm_name)
+        to_parallel_targets("exports", j2wasm_args, j2wasm_common.to_j2wasm_name)
         j2wasm_args["tags"] = j2wasm_args.get("tags", []) + ["manual", "notap", "j2wasm", "no-ide"]
 
         j2wasm_library(
@@ -141,8 +142,8 @@ def j2cl_library(
     if generate_j2kt_library:
         j2kt_args = _filter_j2kt_attrs(dict(kwargs))
 
-        _to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_name)
-        _to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_name)
+        to_parallel_targets("deps", j2kt_args, j2kt_common.to_j2kt_name)
+        to_parallel_targets("exports", j2kt_args, j2kt_common.to_j2kt_name)
 
         j2kt_library(
             name = j2kt_library_name,
@@ -158,35 +159,3 @@ _ALLOWED_ATTRS_WASM = [key for key in J2WASM_LIB_ATTRS] + ["tags", "visibility"]
 
 def _filter_j2wasm_attrs(args):
     return {key: args[key] for key in _ALLOWED_ATTRS_WASM if key in args}
-
-def _to_parallel_targets(key, args, name_fun):
-    labels = args.get(key)
-    if not labels:
-        return
-
-    args[key] = [_to_parallel_target(label, name_fun) for label in labels]
-
-def _to_parallel_target(label, name_fun):
-    if type(label) == "string":
-        return name_fun(_absolute_label(label))
-
-    # Label Object
-    return label.relative(":%s" % name_fun(label.name))
-
-def _absolute_label(label):
-    if label.startswith("//") or label.startswith("@"):
-        if ":" in label:
-            return label
-        elif "/" in label:
-            return "%s:%s" % (label, label.rsplit("/", 1)[-1])
-        if not label.startswith("@"):
-            fail("Unexpected label format: %s" % label)
-        return "%s//:%s" % (label, label[1:])
-
-    package_name = native.package_name()
-
-    if label.startswith(":"):
-        return "//%s%s" % (package_name, label)
-    if ":" in label:
-        return "//%s/%s" % (package_name, label)
-    return "//%s:%s" % (package_name, label)
