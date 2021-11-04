@@ -1,0 +1,19 @@
+package staticjsmethodswithclassnamespace
+
+open class StaticJsMethodsWithClassNamespace {
+ open fun test() {
+  staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
+  staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
+ }
+
+ companion object {
+  @JvmStatic
+  fun originalName() {}
+ }
+}
+
+open class ExternalCaller {
+ open fun test() {
+  staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
+ }
+}

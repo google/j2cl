@@ -11,8 +11,8 @@ package(
 # Creates verification target
 readable_example(
     srcs = ["TypeAnnotations.java"],
-    # TODO(b/202449098): Add support for deps in readables.
-    generate_kt_readables = False,
+    # TODO(b/202428351): Add support for generics.
+    build_kt_readables = False,
     deps = [
         ":parametric-type",
         "//third_party:gwt-jsinterop-annotations-j2cl",

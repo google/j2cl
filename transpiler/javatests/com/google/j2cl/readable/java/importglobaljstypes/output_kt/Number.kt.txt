@@ -1,0 +1,31 @@
+package importglobaljstypes
+
+open class Number {
+ open fun testJsDocForLiteralType(a: importglobaljstypes.Number.MyLiteralType?): importglobaljstypes.Number.MyLiteralType? {
+  return a
+ }
+
+ companion object {
+  @JvmStatic
+  fun `fun`(x: Double): Boolean {}
+
+  @JvmStatic
+  fun test(x: Double): Boolean {
+   return importglobaljstypes.Number.`fun`(x)
+  }
+
+  @JvmStatic
+  private fun getFromCharCodeFunction(): importglobaljstypes.Number.NativeFunction<String?>? {}
+
+  @JvmStatic
+  fun fromCharCode(array: IntArray?): String? {
+   return importglobaljstypes.Number.getFromCharCodeFunction().apply(null, array)
+  }
+ }
+}
+
+interface NativeFunction<T> {
+ fun apply(thisContext: Any?, argsArray: IntArray?): T
+}
+
+interface MyLiteralType {}

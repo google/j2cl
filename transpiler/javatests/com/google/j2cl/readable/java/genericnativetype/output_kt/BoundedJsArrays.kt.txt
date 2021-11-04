@@ -1,0 +1,17 @@
+package genericnativetype
+
+open class BoundedJsArrays {
+ private constructor() {}
+
+ companion object {
+  @JvmStatic
+  fun <V> create(): genericnativetype.BoundedJsArray<V>? {
+   return genericnativetype.BoundedJsArray.create()
+  }
+
+  @JvmStatic
+  fun <V> createWithSize(size: Int): genericnativetype.BoundedJsArray<V>? {
+   return genericnativetype.BoundedJsArray.create(size)
+  }
+ }
+}

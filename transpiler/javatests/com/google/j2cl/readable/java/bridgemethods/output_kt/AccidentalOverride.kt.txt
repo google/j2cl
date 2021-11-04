@@ -1,0 +1,29 @@
+package bridgemethods
+
+interface I<T, S> {
+ fun `fun`(s: S): T
+}
+
+open class A<T, S> {
+ open fun `fun`(s: S): T {
+  return null
+ }
+
+ open fun get(): T {
+  return null
+ }
+}
+
+open class B: bridgemethods.I<Int?, String?>, bridgemethods.A<Number?, String?>() {
+ open fun `fun`(s: String?): Int? {
+  return Int(1)
+ }
+}
+
+interface SpecializedInterface {
+ fun `fun`(s: String?): String?
+
+ fun get(): String?
+}
+
+open class AccidentalOverride: bridgemethods.SpecializedInterface, bridgemethods.A<String?, String?>() {}

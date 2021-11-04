@@ -1,0 +1,119 @@
+package array
+
+open class Arrays {
+ open fun testObjectArray() {
+  var objects: Array<Any?>? = arrayOfNulls<Any?>(100)
+  objects = arrayOfNulls<Any?>(0)
+  objects = arrayOf<Any?>(null, null)
+  var objects2d: Array<Array<Any?>?>? = arrayOfNulls<Array<Any?>?>(5)
+  objects2d = arrayOf<Array<Any?>?>(arrayOf<Any?>(null, null), null)
+  objects2d = arrayOfNulls<Array<Any?>?>(20)
+  val arrayLiteral2d: Array<Array<Any?>?>? = arrayOf<Array<Any?>?>(arrayOf<Any?>(null, null), null)
+  var `object`: Any? = objects[0]
+  `object` = objects2d[0][1]
+  objects[0] = null
+  objects2d[0][1] = null
+ }
+
+ open fun testJavaTypeArray() {
+  var objects: Array<array.Arrays.SomeObject?>? = arrayOfNulls<array.Arrays.SomeObject?>(100)
+  objects = arrayOfNulls<array.Arrays.SomeObject?>(0)
+  objects = arrayOf<array.Arrays.SomeObject?>(null, null)
+  var objects2d: Array<Array<array.Arrays.SomeObject?>?>? = arrayOfNulls<Array<array.Arrays.SomeObject?>?>(5)
+  objects2d = arrayOf<Array<array.Arrays.SomeObject?>?>(arrayOf<array.Arrays.SomeObject?>(null, null), null)
+  objects2d = arrayOfNulls<Array<array.Arrays.SomeObject?>?>(20)
+  var someObject: array.Arrays.SomeObject? = objects[0]
+  someObject = objects2d[0][1]
+  objects[0] = null
+  objects2d[0][1] = null
+ }
+
+ internal open fun testIntArrays() {
+  var ints: IntArray? = IntArray(100)
+  ints = IntArray(0)
+  ints = intArrayOf(0, 1)
+  var ints2d: Array<IntArray?>? = arrayOfNulls<IntArray?>(5)
+  ints2d = arrayOf<IntArray?>(intArrayOf(1, 2), null)
+  ints2d = arrayOfNulls<IntArray?>(20)
+  var n: Int = ints[0]
+  n = ints2d[0][1]
+  ints[0] = 1
+  ints2d[0][1] = 1
+ }
+
+ internal open fun testLongArrays() {
+  var longs: LongArray? = LongArray(100)
+  longs = LongArray(0)
+  longs = longArrayOf(0L, 1L)
+  var longs2d: Array<LongArray?>? = arrayOfNulls<LongArray?>(5)
+  longs2d = arrayOf<LongArray?>(longArrayOf(1L, 2L), null)
+  longs2d = arrayOfNulls<LongArray?>(20)
+  var n: Long = longs[0]
+  n = longs2d[0][1]
+  longs[0] = 1L
+  longs2d[0][1] = 1L
+ }
+
+ internal open fun testDevirtualizedTypeArrays() {
+  var booleans: Array<Boolean?>? = arrayOfNulls<Boolean?>(100)
+  booleans = arrayOfNulls<Boolean?>(0)
+  booleans = arrayOf<Boolean?>(true, false)
+  var booleans2d: Array<Array<Boolean?>?>? = arrayOfNulls<Array<Boolean?>?>(5)
+  booleans2d = arrayOf<Array<Boolean?>?>(arrayOf<Boolean?>(true, false), null)
+  booleans2d = arrayOfNulls<Array<Boolean?>?>(20)
+  var b: Boolean = booleans[0]
+  b = booleans2d[0][1]
+  booleans[0] = true
+  booleans2d[0][1] = false
+ }
+
+ internal open fun testStringArrays() {
+  var strings: Array<String?>? = arrayOfNulls<String?>(100)
+  strings = arrayOfNulls<String?>(0)
+  strings = arrayOf<String?>(null, null)
+  var strings2d: Array<Array<String?>?>? = arrayOfNulls<Array<String?>?>(5)
+  strings2d = arrayOf<Array<String?>?>(arrayOf<String?>(null, null), null)
+  strings2d = arrayOfNulls<Array<String?>?>(20)
+  var b: String? = strings[0]
+  b = strings2d[0][1]
+  strings[0] = null
+  strings2d[0][1] = null
+ }
+
+ open fun testNativeArray() {
+  var nativeObjects: Array<array.Arrays.NativeType?>? = arrayOfNulls<array.Arrays.NativeType?>(100)
+  nativeObjects = arrayOfNulls<array.Arrays.NativeType?>(0)
+  nativeObjects = arrayOf<array.Arrays.NativeType?>(null, null)
+  var nativeObjects2d: Array<Array<array.Arrays.NativeType?>?>? = arrayOfNulls<Array<array.Arrays.NativeType?>?>(5)
+  nativeObjects2d = arrayOf<Array<array.Arrays.NativeType?>?>(arrayOf<array.Arrays.NativeType?>(null, null), null)
+  nativeObjects2d = arrayOfNulls<Array<array.Arrays.NativeType?>?>(20)
+  var nativeObject: array.Arrays.NativeType? = nativeObjects[0]
+  nativeObject = nativeObjects2d[0][1]
+  nativeObjects[0] = null
+  nativeObjects2d[0][1] = null
+ }
+
+ open fun testErasureCastsOnArrayAccess() {
+  val container: array.Arrays.ArrayContainer<String?>? = null
+  val s: String? = container.data[0]
+ }
+
+ open fun testArraysSupertypeClosureTypes() {
+  this.consumesCloneable(arrayOfNulls<Any?>(10))
+  this.consumesSerializable(arrayOfNulls<Any?>(10))
+ }
+
+ open fun consumesCloneable(cloneable: Cloneable?) {}
+
+ open fun consumesSerializable(serializable: java.io.Serializable?) {}
+}
+
+open class SomeObject {
+ @JvmField val `this`: array.Arrays?
+}
+
+open class NativeType {}
+
+open class ArrayContainer<T> {
+ @JvmField internal var data: Array<T>?
+}

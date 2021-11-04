@@ -1,0 +1,17 @@
+package jsignore
+
+open class JsIgnoreExample {
+ companion object {
+  @JvmStatic
+  fun exportedFunction() {}
+
+  @JvmStatic
+  fun notExportedFunction() {}
+
+  @JvmField var exportedField: Int = 10
+
+  @JvmField var notExportedField: Int = 20
+
+  @JvmField val CONSTNAME: Any? = Any()
+ }
+}

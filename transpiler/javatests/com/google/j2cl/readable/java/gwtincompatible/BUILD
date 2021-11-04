@@ -26,8 +26,8 @@ readable_example(
     srcs = [
         "Implementor.java",
     ],
-    # TODO(b/202449098): Add support to import JsType.
-    generate_kt_readables = False,
+    # TODO(b/201574151): Constructor Support
+    build_kt_readables = False,
     deps = [
         ":annotation",
         ":interface",

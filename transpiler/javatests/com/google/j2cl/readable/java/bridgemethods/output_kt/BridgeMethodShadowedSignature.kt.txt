@@ -1,0 +1,15 @@
+package bridgemethods
+
+open class BridgeMethodShadowedSignature {}
+
+interface I<I1> {
+ fun get(consumer: java.util.function.Consumer<*>?): String?
+}
+
+abstract class B<B1, B2>: bridgemethods.BridgeMethodShadowedSignature.I<B1> {
+ open fun get(consumer: B2): String? {
+  return "B get B2"
+ }
+}
+
+open class C<C1>: bridgemethods.BridgeMethodShadowedSignature.I<C1>, bridgemethods.BridgeMethodShadowedSignature.B<C1, java.util.function.Consumer<*>?>() {}

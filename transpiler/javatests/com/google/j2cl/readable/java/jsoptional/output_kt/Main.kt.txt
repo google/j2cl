@@ -1,0 +1,48 @@
+package jsoptional
+
+open class Main {
+ open fun method1(i1: Int, d: Double?, i: Int?) {}
+
+ open fun method2(s1: String?, d: Double?, vararg i: Boolean?) {}
+
+ @JvmField internal var f: jsoptional.Main.Function? = {s: String?, varargs: Array<Any?>? -> {
+   return s
+  }
+ }
+
+ constructor(a: String?) {}
+
+ open fun testFunction(f: jsoptional.Main.Function?) {}
+
+ open fun testOptionalFunction(f: jsoptional.Main.Function?) {}
+}
+
+interface Function {
+ fun f1(s: String?, vararg args: Any?): Any?
+}
+
+class AFunction: jsoptional.Main.Function {
+ open fun f1(i: String?, vararg args: Any?): Any? {
+  return args[0]
+ }
+}
+
+interface I<T> {
+ fun m(t: T, o: Any?)
+}
+
+open class TemplatedSubtype<T: String?>: jsoptional.Main.I<T> {
+ open fun m(t: T, o: Any?) {}
+}
+
+open class SpecializedSubtype: jsoptional.Main.I<String?> {
+ @JvmField val `this`: jsoptional.Main?
+
+ constructor(a: Any?) {}
+
+ open fun m(t: String?, o: Any?) {}
+}
+
+open class NonJsTypeSubtype: jsoptional.Main.I<String?> {
+ open fun m(t: String?, o: Any?) {}
+}

@@ -34,7 +34,9 @@ load(":j2kt_library.bzl", "J2KT_LIB_ATTRS", "j2kt_library")
 load(":j2wasm_common.bzl", "j2wasm_common")
 load(":j2wasm_library.bzl", "J2WASM_LIB_ATTRS", "j2wasm_library")
 
-_J2KT_PACKAGES = []
+_J2KT_PACKAGES = [
+    "transpiler/javatests/com/google/j2cl/readable/java",
+]
 
 _J2WASM_PACKAGES = [
     "third_party/java/auto",

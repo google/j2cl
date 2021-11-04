@@ -1,0 +1,73 @@
+package jsnonnull
+
+open class Main {
+ private var f1: String = "Hello"
+
+ private var f2: String? = null
+
+ private var f4: java.util.List<String> = java.util.ArrayList<String>()
+
+ private var f5: java.util.List<String>? = java.util.ArrayList<String>()
+
+ private var f6: java.util.List<String?> = java.util.ArrayList<String?>()
+
+ private var f7: java.util.List<String?>? = null
+
+ private var f8: Array<String> = arrayOf<String>()
+
+ private var f9: Array<String?> = arrayOf<String?>()
+
+ private var f10: Array<String>? = arrayOf<String>()
+
+ private var f12: java.util.List<String?>? = java.util.ArrayList<String?>()
+
+ constructor(a: String) {}
+
+ open fun m1(a: String, b: java.util.List<Double>, c: String?): String {
+  return ""
+ }
+
+ open fun m2(a: String?, b: java.util.List<Double>): String? {
+  return ""
+ }
+
+ open fun m3(a: String, vararg args: String): String? {
+  return null
+ }
+
+ open fun m4(f: jsnonnull.Main.MyFunction) {}
+}
+
+interface MyFunction {
+ fun x(a: String): String
+}
+
+open class StringComparator: java.util.Comparator<String> {
+ open fun compare(a: String, b: String): Int {
+  return 0
+ }
+}
+
+open class NullableStringComparator: java.util.Comparator<String?> {
+ open fun compare(a: String?, b: String?): Int {
+  return 0
+ }
+}
+
+open class NonNullableStringSubNullableComparator: jsnonnull.Main.NullableStringComparator() {
+ open fun compare(a: String, b: String): Int {
+  return 0
+ }
+}
+
+interface NonNullableTemplatedReturn<T> {
+ fun get(): T
+
+ fun getArray(): Array<T>?
+}
+
+interface NonNullableTemplate<T> {
+ fun get(): T
+
+ fun getArray(): Array<T>?
+}

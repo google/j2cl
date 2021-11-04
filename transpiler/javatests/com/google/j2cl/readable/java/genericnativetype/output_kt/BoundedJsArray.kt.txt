@@ -1,0 +1,19 @@
+package genericnativetype
+
+open class BoundedJsArray<V> {
+ private constructor(size: Int) {}
+
+ companion object {
+  @JvmStatic
+  fun <V> create(): genericnativetype.BoundedJsArray<V>? {
+   val array: genericnativetype.BoundedJsArray<V>? = null
+   return array
+  }
+
+  @JvmStatic
+  fun <V> create(size: Int): genericnativetype.BoundedJsArray<V>? {
+   val array: genericnativetype.BoundedJsArray<V>? = genericnativetype.BoundedJsArray<V>(size)
+   return array
+  }
+ }
+}

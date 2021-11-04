@@ -1,0 +1,37 @@
+package jstype
+
+open class SomeJsType<T> {
+ @JvmField var publicField: Int
+
+ private var privateField: Int
+
+ @JvmField internal var packageField: Int
+
+ @JvmField protected var protectedField: Int
+
+ open fun publicMethod() {}
+
+ private fun privateMethod() {}
+
+ internal open fun packageMethod() {}
+
+ protected open fun protectedMethod() {}
+
+ open fun useFieldsAndMethods() {
+  val value: Int = this.publicField + this.privateField + this.packageField + this.protectedField
+  this.publicMethod()
+  this.privateMethod()
+  this.packageMethod()
+  this.protectedMethod()
+ }
+
+ open fun testStarAndWildCard(s: jstype.SomeJsType.Star?, w: jstype.SomeJsType.Wildcard?): jstype.SomeJsType.Wildcard? {
+  val `object`: Any? = Any()
+  val star: jstype.SomeJsType.Star? = 3.0 as Any? as jstype.SomeJsType.Star?
+  return star as jstype.SomeJsType.Wildcard?
+ }
+}
+
+interface Star {}
+
+interface Wildcard {}

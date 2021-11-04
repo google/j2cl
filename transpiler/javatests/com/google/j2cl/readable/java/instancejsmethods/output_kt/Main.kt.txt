@@ -1,0 +1,85 @@
+package instancejsmethods
+
+interface MyInterface {
+ fun intfFoo(): Int
+}
+
+open class SuperParent {
+ open fun `fun`(a: Int, b: Int): Int {
+  return a + b + 111
+ }
+
+ open fun bar(a: Int, b: Int): Int {
+  return a * b + 222
+ }
+}
+
+open class Parent: instancejsmethods.SuperParent() {
+ open fun `fun`(a: Int, b: Int): Int {
+  return a + b
+ }
+
+ open fun bar(a: Int, b: Int): Int {
+  return a * b
+ }
+
+ open fun foo(a: Int): Int {
+  return a
+ }
+}
+
+open class Child: instancejsmethods.MyInterface, instancejsmethods.Parent() {
+ open fun `fun`(a: Int, b: Int): Int {
+  return a + b + 1
+ }
+
+ open fun bar(a: Int, b: Int): Int {
+  return a * b + 1
+ }
+
+ open fun foo(a: Int): Int {
+  return a
+ }
+
+ open fun intfFoo(): Int {
+  return 1
+ }
+}
+
+open class Main {
+ open fun testCallBySuperParent() {
+  val sp: instancejsmethods.SuperParent? = instancejsmethods.SuperParent()
+  val p: instancejsmethods.SuperParent? = instancejsmethods.Parent()
+  val c: instancejsmethods.SuperParent? = instancejsmethods.Child()
+  val pp: instancejsmethods.Parent? = instancejsmethods.Parent()
+  val cc: instancejsmethods.Parent? = instancejsmethods.Child()
+  val intf: instancejsmethods.MyInterface? = instancejsmethods.Child()
+  sp.`fun`(12, 35)
+  sp.bar(6, 7)
+  p.`fun`(12, 35)
+  p.bar(6, 7)
+  c.`fun`(12, 35)
+  c.bar(6, 7)
+  pp.foo(1)
+  cc.foo(1)
+  intf.intfFoo()
+ }
+
+ companion object {
+  @JvmStatic
+  fun testCallByConcreteType() {
+   val sp: instancejsmethods.SuperParent? = instancejsmethods.SuperParent()
+   val p: instancejsmethods.Parent? = instancejsmethods.Parent()
+   val c: instancejsmethods.Child? = instancejsmethods.Child()
+   sp.`fun`(12, 35)
+   sp.bar(6, 7)
+   p.`fun`(12, 35)
+   p.bar(6, 7)
+   p.foo(1)
+   c.`fun`(12, 35)
+   c.bar(6, 7)
+   c.foo(1)
+   c.intfFoo()
+  }
+ }
+}

@@ -1,0 +1,130 @@
+package jsconstructor
+
+open class JsConstructorClass {}
+
+open class A {
+ @JvmField var fA: Int = 1
+
+ constructor(x: Int) {
+  this.fA = x
+ }
+
+ constructor() {}
+}
+
+open class B: jsconstructor.JsConstructorClass.A {
+ @JvmField var fB: Int = 2
+
+ constructor(x: Int) {
+  super(x + 1)
+  this.fB = 3
+ }
+
+ constructor() {
+  super(10)
+  this.fB = 4
+ }
+
+ constructor(x: Int, y: Int) {
+  super(x + y)
+  this.fB = x * y
+ }
+}
+
+open class C: jsconstructor.JsConstructorClass.B {
+ @JvmField var fC: Int = 1
+
+ constructor(x: Int) {
+  super(x * 2)
+  this.fC = 6
+ }
+
+ constructor(x: Int, y: Int) {
+  super(x + y)
+  this.fC = 7
+ }
+}
+
+open class D: jsconstructor.JsConstructorClass.B {
+ @JvmField var fD: Int = 8
+
+ constructor() {
+  super(9)
+  this.fD = 10
+ }
+
+ constructor(x: Int) {
+  super()
+  this.fD = x
+ }
+}
+
+open class E: jsconstructor.JsConstructorClass.C {
+ @JvmField var fE: Int = 11
+
+ constructor() {
+  super(10)
+  this.fE = 12
+ }
+}
+
+open class F: jsconstructor.JsConstructorClass.C {
+ @JvmField var fF: Int = 13
+
+ constructor(x: Int) {
+  super(x + 2)
+  this.fF = x + 3
+ }
+}
+
+open class G {}
+
+open class H: jsconstructor.JsConstructorClass.G {
+ constructor() {}
+}
+
+open class Varargs: jsconstructor.JsConstructorClass.A {
+ constructor(vararg args: Int) {
+  super(args[1])
+ }
+}
+
+open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
+ constructor(i: Any?, vararg args: Int) {
+  super(args)
+ }
+
+ constructor(j: Int) {
+  super(Any(), intArrayOf(j))
+ }
+
+ companion object {
+  @JvmStatic
+  internal fun subNativeInvocation() {
+   val unusedS1: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(2)
+   val unusedS2: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(Any(), intArrayOf(1, 2, 3))
+  }
+ }
+}
+
+open class InstanceVarargs: jsconstructor.JsConstructorClass.A {
+ @JvmField val `this`: jsconstructor.JsConstructorClass?
+
+ constructor(vararg args: Int) {
+  super(args[1])
+ }
+}
+
+open class RegularType {
+ constructor(b: Any?) {}
+}
+
+open class JsConstructorSubtypeOfRegularType: jsconstructor.JsConstructorClass.RegularType {
+ constructor(`object`: Any?) {
+  super(`object`)
+ }
+
+ constructor() {
+  super(Any())
+ }
+}

@@ -1,0 +1,33 @@
+package jsbridgeaccidentaloverride
+
+interface OtherInterface {
+ fun `fun`(a: Int): Int
+}
+
+open class MyJsType: jsbridgeaccidentaloverride.OtherInterface {
+ internal constructor() {}
+
+ open fun foo(a: Int): Int {
+  return a
+ }
+
+ open fun bar(a: Int): Int {
+  return a + 1
+ }
+
+ open fun `fun`(a: Int): Int {
+  return a - 1
+ }
+}
+
+interface MyInterface {
+ fun foo(a: Int): Int
+
+ fun bar(a: Int): Int
+}
+
+open class SubJsType: jsbridgeaccidentaloverride.MyInterface, jsbridgeaccidentaloverride.MyJsType() {
+ open fun bar(a: Int): Int {
+  return a + 2
+ }
+}

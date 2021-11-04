@@ -1,0 +1,9 @@
+package jsmethodoverride
+
+open class Parent {
+ open fun foo() {}
+}
+
+open class Child: jsmethodoverride.Parent() {
+ open fun foo() {}
+}

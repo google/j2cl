@@ -1,0 +1,110 @@
+package jsasync
+
+open class Main {
+ private val x: jsasync.Main.IThenable<Int?>? = jsasync.Main.Promise.resolve(10)
+
+ internal open fun emptyAsyncMethod(): jsasync.Main.IThenable<java.lang.Void?>? {
+  return null
+ }
+
+ internal open fun asyncMethod(): jsasync.Main.IThenable<Int?>? {
+  val result: Int = jsasync.Main.await(jsasync.Main.Promise.resolve(7))
+  return this.parametricAsyncMethod(result)
+ }
+
+ internal open fun <T> parametricAsyncMethod(value: T): jsasync.Main.IThenable<T>? {
+  return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(value)))
+ }
+
+ internal open fun testAsyncLambdas() {
+  val i: jsasync.Main.AsyncInterface? = { -> {
+    return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(5)))
+   }
+  }
+  val o: jsasync.Main.BaseInterface? = TODO("expression.qualify needs rendering: Main.this)")
+  val j: jsasync.Main.AsyncJsFunctionInterface? = { -> {
+    return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(5)))
+   }
+  }
+  val optimizableJsFunction: jsasync.Main.JsFunctionInterface? = TODO("expression.qualify needs rendering: Main.this)")
+  val unoptimizableJsFunction: jsasync.Main.JsFunctionInterface? = TODO("expression.qualify needs rendering: Main.this)")
+ }
+
+ companion object {
+  @JvmStatic
+  internal fun staticAsyncMethod(): jsasync.Main.IThenable<java.lang.Void?>? {
+   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(null as java.lang.Void?)))
+  }
+
+  @JvmStatic
+  private fun <T> await(thenable: jsasync.Main.IThenable<T>?): T {}
+ }
+}
+
+open class `1`: jsasync.Main.BaseInterface {
+ internal constructor() {
+  super()
+ }
+
+ @JvmField val `this`: jsasync.Main?
+
+ open fun asyncCall(): jsasync.Main.IThenable<Int?>? {
+  return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`.x))
+ }
+}
+
+open class `2`: jsasync.Main.JsFunctionInterface {
+ internal constructor() {
+  super()
+ }
+
+ @JvmField val `this`: jsasync.Main?
+
+ open fun doSomething(): jsasync.Main.IThenable<Int?>? {
+  return jsasync.Main.Promise.resolve(5)
+ }
+}
+
+open class `3`: jsasync.Main.JsFunctionInterface {
+ internal constructor() {
+  super()
+ }
+
+ @JvmField val `this`: jsasync.Main?
+
+ open fun doSomething(): jsasync.Main.IThenable<Int?>? {
+  val tmp: jsasync.Main.JsFunctionInterface? = this
+  return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`.x))
+ }
+}
+
+interface BaseInterface {
+ fun asyncCall(): jsasync.Main.IThenable<Int?>?
+}
+
+interface AsyncInterface: jsasync.Main.BaseInterface {
+ fun asyncCall(): jsasync.Main.IThenable<Int?>?
+}
+
+interface InterfaceWithAsyncDefaultMethod {
+ fun asyncCall(): jsasync.Main.IThenable<Int?>? {
+  return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(5)))
+ }
+}
+
+interface JsFunctionInterface {
+ fun doSomething(): jsasync.Main.IThenable<Int?>?
+}
+
+interface AsyncJsFunctionInterface {
+ fun doSomething(): jsasync.Main.IThenable<Int?>?
+}
+
+interface IThenable<T> {}
+
+open class Promise<T>: jsasync.Main.IThenable<T> {
+ companion object {
+  @JvmStatic
+  fun <T> resolve(value: T): jsasync.Main.Promise<T>? {}
+ }
+}

@@ -1,0 +1,78 @@
+package jsproperties
+
+open class Foo {
+ companion object {
+  private var f: Int
+
+  @JvmStatic
+  fun getA(): Int {
+   return jsproperties.Foo.f + 1
+  }
+
+  @JvmStatic
+  fun setA(x: Int) {
+   jsproperties.Foo.f = x + 2
+  }
+
+  @JvmStatic
+  fun getB(): Int {
+   return jsproperties.Foo.f + 3
+  }
+
+  @JvmStatic
+  fun setB(x: Int) {
+   jsproperties.Foo.f = x + 4
+  }
+ }
+}
+
+open class Bar {
+ private var f: Int
+
+ open fun getA(): Int {
+  return this.f + 1
+ }
+
+ open fun setA(x: Int) {
+  this.f = x + 2
+ }
+
+ open fun getB(): Int {
+  return this.f + 3
+ }
+
+ open fun setB(x: Int) {
+  this.f = x + 4
+ }
+}
+
+open class NativeFoo {
+ open fun getA(): Any? {}
+
+ companion object {
+  @JvmStatic
+  fun getB(): Double {}
+ }
+}
+
+open class Main {
+ open fun testNativeJsProperty() {
+  jsproperties.NativeFoo().getA()
+  jsproperties.NativeFoo.getB()
+ }
+
+ open fun testStaticJsProperty() {
+  jsproperties.Foo.getA()
+  jsproperties.Foo.setA(10)
+  jsproperties.Foo.getB()
+  jsproperties.Foo.setB(10)
+ }
+
+ open fun testInstanceJsProperty() {
+  val bar: jsproperties.Bar? = jsproperties.Bar()
+  bar.getA()
+  bar.setA(10)
+  bar.getB()
+  bar.setB(10)
+ }
+}

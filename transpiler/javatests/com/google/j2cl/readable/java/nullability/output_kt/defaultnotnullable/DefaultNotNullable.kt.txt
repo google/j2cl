@@ -1,0 +1,47 @@
+package nullability.defaultnotnullable
+
+open class DefaultNotNullable {
+ private var f1: String = "Hello"
+
+ private var f2: String? = null
+
+ private var f3: String? = null
+
+ private var f4: java.util.List<String> = java.util.ArrayList<String?>()
+
+ private var f5: java.util.List<String>? = java.util.ArrayList<String?>()
+
+ private var f6: java.util.List<String?> = java.util.ArrayList<String?>()
+
+ private var f7: java.util.List<String?>? = null
+
+ private var f8: Array<String> = arrayOf<String?>()
+
+ private var f9: Array<String?> = arrayOf<String?>()
+
+ private var f10: Array<String>? = arrayOf<String?>()
+
+ private var f11: java.lang.Void? = null
+
+ private var f12: Any = Any()
+
+ open fun m1(a: String?, b: java.util.List<Double?>?): String {
+  return ""
+ }
+
+ open fun m2(a: String?, b: java.util.List<Double?>?): String? {
+  return null
+ }
+
+ open fun m3(vararg args: String?) {}
+}
+
+interface ParameterizedInterface<T> {
+ fun add(t: T)
+}
+
+open class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<String> {
+ @JvmField val `this`: nullability.defaultnotnullable.DefaultNotNullable?
+
+ open fun add(s: String?) {}
+}

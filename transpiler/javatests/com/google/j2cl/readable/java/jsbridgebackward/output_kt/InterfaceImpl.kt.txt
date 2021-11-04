@@ -1,0 +1,13 @@
+package jsbridgebackward
+
+interface MyJsInterface {
+ fun foo(a: Int): Int
+}
+
+open class A {
+ open fun foo(a: Int): Int {
+  return a
+ }
+}
+
+open class InterfaceImpl: jsbridgebackward.MyJsInterface, jsbridgebackward.A() {}

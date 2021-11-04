@@ -1,0 +1,32 @@
+package jsinnerclass
+
+open class Main {
+ companion object {
+  @JvmStatic
+  fun main(vararg args: String?) {
+   assert(jsinnerclass.Main.Outer().method() == 5)
+  }
+ }
+}
+
+open class Outer {
+ @JvmField internal var a: Int = 2
+
+ open fun method(): Int {
+  return TODO("expression.qualify needs rendering: Outer.this)").getB() + this.a
+ }
+}
+
+open class Inner {
+ @JvmField val `this`: jsinnerclass.Main.Outer?
+
+ private var b: Int
+
+ constructor() {
+  this.b = this.`this`.a + 1
+ }
+
+ open fun getB(): Int {
+  return this.b
+ }
+}

@@ -1,0 +1,345 @@
+package autoboxing
+
+open class AutoBoxing {
+ open fun box(b: Boolean): Boolean? {
+  return b
+ }
+
+ open fun box(d: Double): Double? {
+  return d
+ }
+
+ open fun box(b: Byte): Byte? {
+  return b
+ }
+
+ open fun box(f: Float): Float? {
+  return f
+ }
+
+ open fun box(i: Int): Int? {
+  return i
+ }
+
+ open fun box(l: Long): Long? {
+  return l
+ }
+
+ open fun box(s: Short): Short? {
+  return s
+ }
+
+ open fun box(c: Char): java.lang.Character? {
+  return c
+ }
+
+ open fun unbox(b: Boolean?): Boolean {
+  return b
+ }
+
+ open fun unbox(d: Double?): Double {
+  return d
+ }
+
+ open fun unbox(b: Byte?): Byte {
+  return b
+ }
+
+ open fun unbox(f: Float?): Float {
+  return f
+ }
+
+ open fun unbox(i: Int?): Int {
+  return i
+ }
+
+ open fun unbox(l: Long?): Long {
+  return l
+ }
+
+ open fun unbox(s: Short?): Short {
+  return s
+ }
+
+ open fun unbox(c: java.lang.Character?): Char {
+  return c
+ }
+
+ open fun takesAndReturnsPrimitiveDouble(d: Double): Double {
+  return d
+ }
+
+ open fun takesAndReturnsVoid(v: java.lang.Void?): java.lang.Void? {
+  return null
+ }
+
+ open fun takesFloatVarArgs(vararg elements: Float?) {}
+
+ open fun takesObjectAndReturnsPrimitiveDouble(o: Any?): Double {
+  return o as Double
+ }
+
+ open fun sumWithoutBoxing(vararg numbers: Any?): Double {
+  var sum: Double = 0.0
+  for (number in numbers) {
+   sum += number as Double?
+  }
+  return sum
+ }
+
+ open fun sumWithoutBoxingJsVarargs(vararg numbers: Any?): Double {
+  var sum: Double = 0.0
+  for (number in numbers) {
+   sum += number as Double?
+  }
+  return sum
+ }
+
+ open fun testBoxing() {
+  var bool: Boolean = true
+  var d: Double = 2.2
+  var b: Byte = 1 as Byte
+  var f: Float = 1.1f
+  var i: Int = 1
+  var l: Long = 2L
+  var s: Short = 1 as Short
+  var c: Char = 'a'
+  var boxBool: Boolean? = bool
+  var boxD: Double? = d
+  var boxB: Byte? = b
+  var boxF: Float? = f
+  var boxI: Int? = i
+  var boxL: Long? = l
+  var boxS: Short? = s
+  var boxC: java.lang.Character? = c
+  boxBool = true
+  boxD = 2.2
+  boxB = 1
+  boxF = 1.1f
+  boxI = 1
+  boxL = 2L
+  boxS = 1
+  boxC = 1
+  boxC = 'a'
+  bool = this.unbox(bool)
+  d = this.unbox(d)
+  b = this.unbox(b)
+  f = this.unbox(f)
+  i = this.unbox(i)
+  l = this.unbox(l)
+  s = this.unbox(s)
+  c = this.unbox(c)
+  var unusedDouble: Double = this.takesObjectAndReturnsPrimitiveDouble(4)
+  unusedDouble = this.sumWithoutBoxing(arrayOf<Any?>(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression")))
+  unusedDouble = this.sumWithoutBoxingJsVarargs(arrayOf<Any?>(TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression"), TODO("JsDocCastExpression")))
+  this.takesFloatVarArgs(arrayOf<Float?>(1.1f, 97.0f, 2.2 as Float))
+  var o: Any?
+  o = 2.2
+  o = 1.1f
+  o = 1
+  o = 'a'
+  boxBool = boxBool && boxBool
+  boxD = boxD + boxD
+  boxI = boxI / boxI
+  boxL = boxL / boxL
+  boxBool = !boxBool
+  boxI = + boxI
+  boxI = - boxI
+  boxI <<= boxI
+  boxI <<= boxL
+  boxL <<= boxI
+  boxL <<= boxL
+  o = 15 as Int?
+ }
+
+ open fun testUnboxing() {
+  var boxBool: Boolean? = Boolean(true)
+  var boxD: Double? = Double(2.2)
+  var boxB: Byte? = Byte(1 as Byte)
+  var boxF: Float? = Float(1.1f)
+  var boxI: Int? = Int(1)
+  var boxL: Long? = Long(1L)
+  var boxS: Short? = Short(1 as Short)
+  var boxC: java.lang.Character? = java.lang.Character('a')
+  var bool: Boolean = boxBool
+  var d: Double = boxD
+  val b: Byte = boxB
+  var f: Float = boxF
+  var i: Int = boxI
+  var l: Long = boxL
+  val s: Short = boxS
+  val c: Char = boxC
+  boxBool = this.box(boxBool)
+  boxD = this.box(boxD)
+  boxB = this.box(boxB)
+  boxF = this.box(boxF)
+  boxI = this.box(boxI)
+  boxL = this.box(boxL)
+  boxS = this.box(boxS)
+  boxC = this.box(boxC)
+  d = boxB
+  d = boxF
+  d = boxI
+  d = boxL
+  d = boxS
+  d = boxC
+  this.takesAndReturnsPrimitiveDouble(boxB)
+  this.takesAndReturnsPrimitiveDouble(boxF)
+  this.takesAndReturnsPrimitiveDouble(boxI)
+  this.takesAndReturnsPrimitiveDouble(boxL)
+  this.takesAndReturnsPrimitiveDouble(boxS)
+  this.takesAndReturnsPrimitiveDouble(boxC)
+  val v: java.lang.Void? = this.takesAndReturnsVoid(this.takesAndReturnsVoid(null))
+  bool = boxBool && boxBool
+  d = boxD + boxD
+  f = boxF - boxF
+  i = boxI * boxI
+  l = boxL / boxL
+  bool = !boxBool
+  i = + boxI
+  i = - boxI
+  i = ~boxI
+  boxD = - boxD
+  boxI = - boxI
+  SWITCH@ do when (boxI) {
+   else ->
+  } while (false)
+  i += boxI += i += boxI
+  i <<= boxI
+  i <<= boxL
+  l <<= boxI
+  l <<= boxL
+ }
+
+ open fun testUnboxingBoolean() {
+  var boxB1: Boolean? = Boolean(true)
+  val boxB2: Boolean? = Boolean(false)
+  var br: Boolean
+  var boxr: Boolean
+  boxr = boxB1 == boxB2
+  br = boxB1 == boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 != boxB2
+  br = boxB1 != boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 ^ boxB2
+  br = boxB1 ^ boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 & boxB2
+  br = boxB1 & boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 | boxB2
+  br = boxB1 | boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 && boxB2
+  br = boxB1 && boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 || boxB2
+  br = boxB1 || boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 = boxB2
+  br = boxB1 = boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 &= boxB2
+  br = boxB1 &= boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 |= boxB2
+  br = boxB1 |= boxB2
+  assert(boxr)
+  assert(br)
+  boxr = boxB1 ^= boxB2
+  br = boxB1 ^= boxB2
+  assert(boxr)
+  assert(br)
+  var boxB: Boolean? = null
+  boxB = !boxB
+  boxB = boxB && boxB
+  boxB = if (boxB) boxB else boxB
+  if (boxB) {}
+  var b: Boolean = false
+  b |= boxB |= b |= boxB
+ }
+
+ open fun testUnboxingEquality() {
+  val boxB: Boolean? = Boolean(true)
+  val b: Boolean = false
+  assert(boxB == boxB)
+  assert(boxB == b)
+  assert(b != b)
+  assert(b != boxB)
+  val boxI: Int? = Int(1)
+  val i: Int = 1
+  assert(boxI == boxI)
+  assert(boxI == i)
+  assert(i != i)
+  assert(i != boxI)
+ }
+
+ open fun testAssertStatement() {
+  val boxB: Boolean? = Boolean(true)
+  val b: Boolean = true
+  assert(boxB)
+  assert(b)
+ }
+
+ open fun testUnbox_withCast() {
+  val supplier: autoboxing.AutoBoxing.`1Supplier`<Int?>? = TODO("expression.qualify needs rendering: AutoBoxing.this)")
+  val i: Int = supplier.get() as Int
+ }
+
+ companion object {
+  @JvmStatic val COMPILE_TIME_CONSTANT: Float = 1.1f
+
+  @JvmStatic
+  fun <T: Long?> testUnboxingFromTypeVariable() {
+   var n: T = 10L as Long? as T
+   var l: Long = n
+   assert(l == 10L)
+   n++
+   l = autoboxing.AutoBoxing.`1Local`<Long?, T>().toLong(11L)
+   assert(l == 11L)
+  }
+
+  @JvmStatic
+  fun <T: Long?> testUnboxingFromIntersectionType() {
+   var n: T = 10L as Long? as T
+   var l: Long = n
+   assert(l == 10L)
+   n++
+   l = autoboxing.AutoBoxing.`2Local`<Long?, T>().toLong(11L)
+   assert(l == 11L)
+   val i: Int = 10 as Int?
+  }
+ }
+}
+
+open class `1Local`<T: Long?, T: Long?> {
+ internal open fun toLong(l: T): Long {
+  assert(l.equals(11L))
+  return l
+ }
+}
+
+open class `2Local`<T: Long?, T: Long?> {
+ internal open fun toLong(l: T): Long {
+  assert(l.equals(11L))
+  return l
+ }
+}
+
+open class `1Supplier`<T> {
+ val `this`: autoboxing.AutoBoxing?
+
+ internal open fun get(): T {
+  return null
+ }
+}

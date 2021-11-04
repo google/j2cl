@@ -1,0 +1,21 @@
+package importglobaljstypes
+
+open class Date {
+ open fun copy(d: importglobaljstypes.Date.NativeDate?): importglobaljstypes.Date.NativeDate? {
+  return d
+ }
+
+ companion object {
+  @JvmStatic
+  fun now(x: Double): Double {
+   return importglobaljstypes.Date.NativeDate.now()
+  }
+ }
+}
+
+open class NativeDate {
+ companion object {
+  @JvmStatic
+  fun now(): Double {}
+ }
+}

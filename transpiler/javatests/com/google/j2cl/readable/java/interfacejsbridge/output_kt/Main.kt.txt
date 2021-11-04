@@ -1,0 +1,14 @@
+package interfacejsbridge
+
+open class Main {
+ open fun test() {
+  val a: interfacejsbridge.MyJsInterface? = interfacejsbridge.InterfaceImpl()
+  val b: interfacejsbridge.MyInterface? = interfacejsbridge.InterfaceImpl()
+  val c: interfacejsbridge.SubInterface? = interfacejsbridge.InterfaceImpl()
+  val d: interfacejsbridge.InterfaceImpl? = interfacejsbridge.InterfaceImpl()
+  a.foo(1)
+  b.foo(1)
+  c.foo(1)
+  d.foo(1)
+ }
+}

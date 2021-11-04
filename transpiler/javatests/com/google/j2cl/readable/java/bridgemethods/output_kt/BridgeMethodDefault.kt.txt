@@ -1,0 +1,19 @@
+package bridgemethods
+
+open class BridgeMethodDefault {}
+
+interface I<T> {
+ fun m(t: T)
+}
+
+interface II: bridgemethods.BridgeMethodDefault.I<String?> {
+ fun m(s: String?) {}
+}
+
+open class A: bridgemethods.BridgeMethodDefault.II {}
+
+interface JJ: bridgemethods.BridgeMethodDefault.I<Any?> {
+ fun m(o: Any?) {}
+}
+
+open class B: bridgemethods.BridgeMethodDefault.JJ {}

@@ -1,0 +1,19 @@
+package interfacejsbridge
+
+interface MyJsInterface {
+ fun foo(a: Int): Int
+}
+
+interface MyInterface {
+ fun foo(a: Int): Int
+}
+
+interface SubInterface: interfacejsbridge.MyJsInterface, interfacejsbridge.MyInterface {
+ fun foo(a: Int): Int
+}
+
+open class InterfaceImpl: interfacejsbridge.SubInterface {
+ open fun foo(a: Int): Int {
+  return 0
+ }
+}

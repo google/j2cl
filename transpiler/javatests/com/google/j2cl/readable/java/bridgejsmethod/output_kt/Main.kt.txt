@@ -1,0 +1,150 @@
+package bridgejsmethod
+
+open class Main {
+ companion object {
+  @JvmStatic
+  fun test() {
+   val a: bridgejsmethod.Main.A? = bridgejsmethod.Main.A<Int?>()
+   a.`fun`(1)
+   a.bar(1)
+   val b: bridgejsmethod.Main.B? = bridgejsmethod.Main.B()
+   b.`fun`("abc")
+   b.bar("abc")
+   val c: bridgejsmethod.Main.C? = bridgejsmethod.Main.C()
+   c.`fun`(1)
+   c.bar(1)
+   val d: bridgejsmethod.Main.D? = bridgejsmethod.Main.D()
+   d.`fun`(1)
+   d.bar(1)
+   val e: bridgejsmethod.Main.E? = bridgejsmethod.Main.E()
+   e.`fun`("abc")
+   e.bar("abc")
+   val h: bridgejsmethod.Main.H<Int?>? = bridgejsmethod.Main.H<Int?>()
+   h.enclose(1)
+   val l: bridgejsmethod.Main.L<Int?>? = bridgejsmethod.Main.L<Int?>()
+   l.`fun`("foo", 1)
+  }
+ }
+}
+
+open class A<T> {
+ open fun `fun`(t: T): T {
+  return t
+ }
+
+ open fun bar(t: T) {}
+}
+
+interface I<T: Number?> {
+ fun `fun`(t: T): T
+}
+
+interface J<T> {
+ fun bar(t: T)
+}
+
+open class B: bridgejsmethod.Main.A<String?>() {
+ open fun `fun`(s: String?): String? {
+  return s
+ }
+
+ open fun bar(s: String?) {}
+}
+
+open class C: bridgejsmethod.Main.A<Int?>() {
+ open fun `fun`(i: Int?): Int? {
+  return i
+ }
+}
+
+open class D: bridgejsmethod.Main.I<Int?>, bridgejsmethod.Main.A<Int?>() {
+ open fun `fun`(i: Int?): Int? {
+  return i
+ }
+}
+
+open class E: bridgejsmethod.Main.J<String?>, bridgejsmethod.Main.B() {}
+
+open class F: bridgejsmethod.Main.I<Int?>, bridgejsmethod.Main.A<Int?>() {}
+
+interface G<V> {
+ fun enclose(value: V): V
+}
+
+open class H<V>: bridgejsmethod.Main.G<V> {
+ open fun enclose(value: V): V {
+  return null
+ }
+}
+
+open class K<K1, K2> {
+ internal open fun `fun`(k1: K1, k2: K2) {}
+}
+
+open class L<L1>: bridgejsmethod.Main.K<String?, L1>() {
+ internal open fun `fun`(string: String?, l1: L1) {}
+}
+
+interface M {
+ fun getB(): bridgejsmethod.Main.B?
+}
+
+abstract class N: bridgejsmethod.Main.M {
+ @JvmField val `this`: bridgejsmethod.Main?
+
+ internal constructor() {}
+
+ abstract open fun getB(): bridgejsmethod.Main.B?
+}
+
+open class O: bridgejsmethod.Main.N() {
+ @JvmField val `this`: bridgejsmethod.Main?
+
+ private var b: bridgejsmethod.Main.B?
+
+ open fun getB(): bridgejsmethod.Main.B? {
+  return this.b
+ }
+}
+
+interface P {
+ fun getKey(): String?
+}
+
+abstract class Q: bridgejsmethod.Main.P {
+ @JvmField val `this`: bridgejsmethod.Main?
+
+ abstract open fun getKey(): String?
+}
+
+abstract class R: bridgejsmethod.Main.Q() {
+ @JvmField val `this`: bridgejsmethod.Main?
+
+ open fun getKey(): String? {
+  return null
+ }
+}
+
+open class S: bridgejsmethod.Main.R() {
+ @JvmField val `this`: bridgejsmethod.Main?
+}
+
+open class GrandParent<T> {
+ @JvmField val `this`: bridgejsmethod.Main?
+
+ open fun jsMethod(t: T) {}
+
+ open fun method(t: T) {}
+}
+
+open class Parent<T: bridgejsmethod.Main.Parent<T>?>: bridgejsmethod.Main.GrandParent<T>() {
+ @JvmField val `this`: bridgejsmethod.Main?
+
+ open fun jsMethod(t: T) {}
+
+ open fun method(t: T) {}
+}
+
+open class Child: bridgejsmethod.Main.Parent<bridgejsmethod.Main.Child?>() {
+ @JvmField val `this`: bridgejsmethod.Main?
+}

@@ -10,7 +10,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/202449098): Add support to import JsType.
-    generate_kt_readables = False,
+    # TODO(b/204794299): Add enum support to J2KT
+    build_kt_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

@@ -1,0 +1,27 @@
+package jsmethod
+
+open class JsMethodExample {
+ open fun <T: java.util.ArrayList<String?>?> testMethod(): T {}
+
+ companion object {
+  @JvmStatic
+  fun log(message: String?) {}
+
+  @JvmStatic
+  fun main(vararg args: String?) {
+   jsmethod.JsMethodExample.log("test")
+  }
+ }
+}
+
+abstract class Base<T> {
+ open fun m(t: T) {}
+}
+
+interface I {
+ fun m(s: String?)
+}
+
+open class Sub: jsmethod.JsMethodExample.I, jsmethod.JsMethodExample.Base<String?>() {
+ open fun m(s: String?) {}
+}

@@ -17,7 +17,6 @@ load(
     "//build_defs:rules.bzl",
     "J2CL_OPTIMIZED_DEFS",
     "j2cl_library",
-    "j2kt_library",
     "j2wasm_application",
 )
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
@@ -26,12 +25,9 @@ JAVAC_FLAGS = [
     "-XepDisableAllChecks",
 ]
 
-# TODO(dpo): instead of getting explicit kt_deps, we normally would auto generate them via a naming
-# convention (e.g. replace foo-j2cl with foo-j2kt)
 def readable_example(
         srcs,
         deps = [],
-        kt_deps = [],
         plugins = [],
         defs = [],
         generate_library_info = False,
@@ -66,6 +62,7 @@ def readable_example(
         tags = j2cl_library_tags,
         readable_source_maps = True,
         readable_library_info = generate_library_info,
+        generate_j2kt_library = generate_kt_readables,
         **kwargs
     )
 
@@ -117,27 +114,17 @@ def readable_example(
         )
 
     if generate_kt_readables:
-        j2kt_library(
-            name = "readable_kt",
-            srcs = srcs,
-            deps = kt_deps,
-            # TODO(b/202767120): Allow separate flags for JavaOpts and Kotlin opts.
-            javacopts = JAVAC_FLAGS + javacopts,
-            plugins = plugins,
-            **kwargs
-        )
-
         _readable_diff_test(
-            name = "readable_kt_golden",
-            target = ":readable_kt.kt",
+            name = "readable_j2kt_golden",
+            target = ":readable-j2kt.kt",
             dir_out = "output_kt",
             tags = ["j2kt"],
         )
 
         if build_kt_readables:
             build_test(
-                name = "readable_kt_build_test",
-                targets = [":libreadable_kt.kt.jar"],
+                name = "readable_j2kt_build_test",
+                targets = [":libreadable-j2kt.kt.jar"],
                 tags = ["j2kt"],
             )
 

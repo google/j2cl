@@ -57,7 +57,7 @@ def blaze_build(js_readable_dirs, wasm_readable_dirs, kt_readable_dirs):
 
   build_targets = [d + ":readable_golden" for d in js_readable_dirs]
   build_targets += [d + ":readable_wasm_golden" for d in wasm_readable_dirs]
-  build_targets += [d + ":readable_kt_golden" for d in kt_readable_dirs]
+  build_targets += [d + ":readable_j2kt_golden" for d in kt_readable_dirs]
   if not args.nologs:
     build_targets += [d + ":readable_binary" for d in js_readable_dirs]
 
@@ -129,9 +129,9 @@ def gather_closure_warnings(build_log):
         build_log_file.write(build_log)
 
 
-def replace_transpiled_kt(readable_dirs):
+def replace_transpiled_j2kt(readable_dirs):
   """Copy and replace with Blaze built kt."""
-  _replace_readable_outputs(readable_dirs, "readable_kt_golden", "output_kt")
+  _replace_readable_outputs(readable_dirs, "readable_j2kt_golden", "output_kt")
 
 
 def _replace_readable_outputs(readable_dirs, tree_artifact_dir, output_dir):
@@ -162,7 +162,7 @@ def main(argv):
   wasm_readable_dirs = get_readable_dirs(
       readable_pattern, "_wasm") if "WASM" in args.platforms else []
   kt_readable_dirs = get_readable_dirs(
-      readable_pattern, "_kt") if "J2KT" in args.platforms else []
+      readable_pattern, "-j2kt") if "J2KT" in args.platforms else []
 
   if not js_readable_dirs and not wasm_readable_dirs and not kt_readable_dirs:
     print("No matching readables!")
@@ -201,7 +201,7 @@ def main(argv):
 
   if kt_readable_dirs:
     print("  Copying and reformatting transpiled KT")
-    replace_transpiled_kt(kt_readable_dirs)
+    replace_transpiled_j2kt(kt_readable_dirs)
 
   print("Check for changes in the readable examples")
 
