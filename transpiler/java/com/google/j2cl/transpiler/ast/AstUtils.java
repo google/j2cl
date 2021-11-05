@@ -261,6 +261,7 @@ public class AstUtils {
             .setQualifier(qualifier)
             .setArguments(maybePackageVarargs(toMethodDescriptor, arguments))
             .setStaticDispatch(isStaticDispatch)
+            .setSourcePosition(sourcePosition)
             .build();
 
     return createReturnOrExpressionStatement(

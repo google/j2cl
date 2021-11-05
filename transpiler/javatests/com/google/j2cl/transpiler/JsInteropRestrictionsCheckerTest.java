@@ -1787,6 +1787,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
   public void testJsEnumFails() {
     assertTranspileFails(
             "test.MyJsEnum",
+            "import java.util.function.*;",
             "import jsinterop.annotations.*;",
             "@JsEnum",
             "public enum MyJsEnum {",
@@ -1797,7 +1798,7 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "  MyJsEnum( ) { }",
             "  MyJsEnum(int x) { }",
             "  static void main() {",
-            "    A.name();",
+            "    Supplier<String> s = A::name;",
             "    MyJsEnum.values();",
             "    MyJsEnum.valueOf(null);",
             // TODO(b/132736149): make sure the following statement is rejected.
