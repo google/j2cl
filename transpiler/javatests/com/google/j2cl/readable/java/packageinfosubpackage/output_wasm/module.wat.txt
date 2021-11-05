@@ -76,7 +76,7 @@
  (block
   ;; Foo $instance = new Foo.<init>();
   ;;@ packageinfosubpackage/Foo.java:20:13
-  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfosubpackage.Foo.NativeBar) (global.get $packageinfosubpackage.Foo.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.Foo (ref.as_non_null (global.get $packageinfosubpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfosubpackage.Foo.NativeBar) (rtt.canon $packageinfosubpackage.Foo)))
   ;; $instance.$ctor();
   ;;@ packageinfosubpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfosubpackage_Foo@packageinfosubpackage.Foo (local.get $$instance))
@@ -142,7 +142,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfosubpackage.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageinfosubpackage.Foo)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageinfosubpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -173,7 +173,7 @@
  (block
   ;; NativeBar $instance = new NativeBar.<init>();
   ;;@ packageinfosubpackage/Foo.java:23:23
-  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0) (global.get $packageinfosubpackage.Foo.NativeBar.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.Foo.NativeBar (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.Foo.NativeBar.itable)) (i32.const 0) (rtt.canon $packageinfosubpackage.Foo.NativeBar)))
   ;; $instance.$ctor();
   ;;@ packageinfosubpackage/Foo.java:23:23
   (call $$ctor__void_$p_packageinfosubpackage_Foo_NativeBar@packageinfosubpackage.Foo.NativeBar (local.get $$instance))
@@ -225,7 +225,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.Foo.NativeBar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfosubpackage.Foo.NativeBar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageinfosubpackage.Foo.NativeBar)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.Foo.NativeBar();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageinfosubpackage.Foo.NativeBar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -256,7 +256,7 @@
  (block
   ;; Bar $instance = new Bar.<init>();
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
-  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.itable)) (i32.const 0) (global.get $packageinfosubpackage.subpackage.Bar.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageinfosubpackage.subpackage.Bar (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.vtable)) (ref.as_non_null (global.get $packageinfosubpackage.subpackage.Bar.itable)) (i32.const 0) (rtt.canon $packageinfosubpackage.subpackage.Bar)))
   ;; $instance.$ctor();
   ;;@ packageinfosubpackage/subpackage/Bar.java:21:13
   (call $$ctor__void_$p_packageinfosubpackage_subpackage_Bar@packageinfosubpackage.subpackage.Bar (local.get $$instance))
@@ -308,7 +308,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfosubpackage.subpackage.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfosubpackage.subpackage.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageinfosubpackage.subpackage.Bar)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfosubpackage.subpackage.Bar();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageinfosubpackage.subpackage.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

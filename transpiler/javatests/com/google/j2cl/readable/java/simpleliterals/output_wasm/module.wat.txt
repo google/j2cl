@@ -41,7 +41,7 @@
  (block
   ;; SimpleLiterals $instance = new SimpleLiterals.<init>();
   ;;@ simpleliterals/SimpleLiterals.java:18:13
-  (local.set $$instance (struct.new_with_rtt $simpleliterals.SimpleLiterals (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.vtable)) (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.itable)) (i32.const 0) (global.get $simpleliterals.SimpleLiterals.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simpleliterals.SimpleLiterals (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.vtable)) (ref.as_non_null (global.get $simpleliterals.SimpleLiterals.itable)) (i32.const 0) (rtt.canon $simpleliterals.SimpleLiterals)))
   ;; $instance.$ctor();
   ;;@ simpleliterals/SimpleLiterals.java:18:13
   (call $$ctor__void_$p_simpleliterals_SimpleLiterals@simpleliterals.SimpleLiterals (local.get $$instance))
@@ -82,7 +82,7 @@
  (local $str (ref null $java.lang.String))
  (local $c (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simpleliterals.SimpleLiterals)))
  (block
   ;; boolean bool = false;
   ;;@ simpleliterals/SimpleLiterals.java:21:4
@@ -149,7 +149,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simpleliterals.SimpleLiterals))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simpleliterals.SimpleLiterals.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simpleliterals.SimpleLiterals)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimpleliterals.SimpleLiterals();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimpleliterals.SimpleLiterals__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

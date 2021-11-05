@@ -334,7 +334,7 @@
  (block
   ;; IntersectionTypeTest<U> $instance = new IntersectionTypeTest.<init>();
   ;;@ intersectiontype/IntersectionTypeTest.java:37:13
-  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.itable)) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.rtt)))
+  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.itable)) (i32.const 0) (rtt.canon $intersectiontype.IntersectionTypeTest)))
   ;; $instance.$ctor();
   ;;@ intersectiontype/IntersectionTypeTest.java:37:13
   (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest@intersectiontype.IntersectionTypeTest (local.get $$instance))
@@ -445,7 +445,7 @@
  (result (ref null $java.lang.Object))
  ;;@ intersectiontype/IntersectionTypeTest.java:66:16
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest)))
  (block
   ;; return s;
   ;;@ intersectiontype/IntersectionTypeTest.java:67:4
@@ -495,13 +495,13 @@
   (call $$clinit__void@intersectiontype.IntersectionTypeTest )
   ;; A e = (((A&EmptyA&EmptyB)) o);
   ;;@ intersectiontype/IntersectionTypeTest.java:86:4
-  (local.set $e (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+  (local.set $e (ref.cast (local.get $o) (rtt.canon $intersectiontype.IntersectionTypeTest.A)))
   ;; EmptyA g = ((EmptyA) (((A&EmptyA&EmptyB)) o));
   ;;@ intersectiontype/IntersectionTypeTest.java:87:4
-  (local.set $g (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+  (local.set $g (ref.cast (local.get $o) (rtt.canon $intersectiontype.IntersectionTypeTest.A)))
   ;; EmptyB s = ((EmptyB) (((A&EmptyA&EmptyB)) o));
   ;;@ intersectiontype/IntersectionTypeTest.java:88:4
-  (local.set $s (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+  (local.set $s (ref.cast (local.get $o) (rtt.canon $intersectiontype.IntersectionTypeTest.A)))
  )
 )
 
@@ -524,7 +524,7 @@
  (block
   ;; return ((T) intersectiontype.IntersectionTypeTest.get(java.lang.Object.$create()));
   ;;@ intersectiontype/IntersectionTypeTest.java:96:4
-  (return (ref.cast (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $$create__java_lang_Object@java.lang.Object )) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+  (return (ref.cast (call $m_get__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest (call $$create__java_lang_Object@java.lang.Object )) (rtt.canon $intersectiontype.IntersectionTypeTest.A)))
  )
 )
 
@@ -555,14 +555,14 @@
  (local $o (ref null $java.lang.Object))
  (local $g (ref null $java.lang.Object))
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest)))
  (block
   ;; Object o = intersectiontype.IntersectionTypeTest.m();
   ;;@ intersectiontype/IntersectionTypeTest.java:106:4
   (local.set $o (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
   ;; intersectiontype.IntersectionTypeTest.set((((A&EmptyA)) o));
   ;;@ intersectiontype/IntersectionTypeTest.java:107:4
-  (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.cast (local.get $o) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+  (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (ref.cast (local.get $o) (rtt.canon $intersectiontype.IntersectionTypeTest.A)))
   ;; intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m());
   ;;@ intersectiontype/IntersectionTypeTest.java:108:4
   (call $m_set__intersectiontype_IntersectionTypeTest_A__void@intersectiontype.IntersectionTypeTest (call $m_m__intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest ))
@@ -601,7 +601,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -635,7 +635,7 @@
  (block
   ;; MapEntry<U> $instance = new MapEntry.<init>($outer_this);
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
-  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.MapEntry (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.itable)) (i32.const 0) (ref.null $intersectiontype.IntersectionTypeTest) (global.get $intersectiontype.IntersectionTypeTest.MapEntry.rtt)))
+  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.MapEntry (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.MapEntry.itable)) (i32.const 0) (ref.null $intersectiontype.IntersectionTypeTest) (rtt.canon $intersectiontype.IntersectionTypeTest.MapEntry)))
   ;; $instance.$ctor($outer_this);
   ;;@ intersectiontype/IntersectionTypeTest.java:43:8
   (call $$ctor__intersectiontype_IntersectionTypeTest__void_$p_intersectiontype_IntersectionTypeTest_MapEntry@intersectiontype.IntersectionTypeTest.MapEntry (local.get $$instance)(local.get $$outer_this))
@@ -671,7 +671,7 @@
  (result (ref null $java.lang.Object))
  ;;@ intersectiontype/IntersectionTypeTest.java:44:26
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.MapEntry.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest.MapEntry)))
  (block
   ;; return (((Getable<T>&Setable)) o);
   ;;@ intersectiontype/IntersectionTypeTest.java:45:6
@@ -708,7 +708,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.MapEntry.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest.MapEntry)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.MapEntry();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.MapEntry__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -739,7 +739,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ intersectiontype/IntersectionTypeTest.java:79:23
-  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.A (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.A.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.A.itable)) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.A (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.A.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.A.itable)) (i32.const 0) (rtt.canon $intersectiontype.IntersectionTypeTest.A)))
   ;; $instance.$ctor();
   ;;@ intersectiontype/IntersectionTypeTest.java:79:23
   (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_A@intersectiontype.IntersectionTypeTest.A (local.get $$instance))
@@ -788,7 +788,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest.A)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -890,7 +890,7 @@
  (block
   ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
   ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable)) (i32.const 0) (rtt.canon $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)))
   ;; $instance.$ctor();
   ;;@ intersectiontype/IntersectionTypeTest.java:71:26
   (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$1@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $$instance))
@@ -921,7 +921,7 @@
  (result i32)
  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)))
  (block
   ;; return 1;
   ;;@ intersectiontype/IntersectionTypeTest.java:71:32
@@ -958,7 +958,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -990,7 +990,7 @@
  (block
   ;; $LambdaImplementor$2<T> $instance = new $LambdaImplementor$2.<init>();
   ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.rtt)))
+  (local.set $$instance (struct.new_with_rtt $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable)) (i32.const 0) (rtt.canon $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)))
   ;; $instance.$ctor();
   ;;@ intersectiontype/IntersectionTypeTest.java:76:27
   (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$2@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $$instance))
@@ -1022,7 +1022,7 @@
  (result i32)
  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)))
  (block
   ;; return 1;
   ;;@ intersectiontype/IntersectionTypeTest.java:76:34
@@ -1059,7 +1059,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

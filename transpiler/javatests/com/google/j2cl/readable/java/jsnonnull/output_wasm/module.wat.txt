@@ -184,7 +184,7 @@
  (block
   ;; Main $instance = new Main.<init>(a);
   ;;@ jsnonnull/Main.java:42:9
-  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main (ref.as_non_null (global.get $jsnonnull.Main.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (global.get $jsnonnull.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main (ref.as_non_null (global.get $jsnonnull.Main.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (rtt.canon $jsnonnull.Main)))
   ;; $instance.$ctor(a);
   ;;@ jsnonnull/Main.java:42:9
   (call $$ctor__java_lang_String__void_$p_jsnonnull_Main@jsnonnull.Main (local.get $$instance)(local.get $a))
@@ -222,7 +222,7 @@
  (result (ref null $java.lang.String))
  ;;@ jsnonnull/Main.java:45:16
  (local $this (ref null $jsnonnull.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main)))
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ jsnonnull/Main.java:46:4
@@ -240,7 +240,7 @@
  (result (ref null $java.lang.String))
  ;;@ jsnonnull/Main.java:49:16
  (local $this (ref null $jsnonnull.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main)))
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ jsnonnull/Main.java:50:4
@@ -258,7 +258,7 @@
  (result (ref null $java.lang.String))
  ;;@ jsnonnull/Main.java:54:16
  (local $this (ref null $jsnonnull.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main)))
  (block
   ;; return null;
   ;;@ jsnonnull/Main.java:55:4
@@ -274,7 +274,7 @@
  (param $f (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:58:14
  (local $this (ref null $jsnonnull.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main)))
  (block
  )
 )
@@ -346,7 +346,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsnonnull.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsnonnull.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -422,7 +422,7 @@
  (block
   ;; StringComparator $instance = new StringComparator.<init>();
   ;;@ jsnonnull/Main.java:66:22
-  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main.StringComparator (ref.as_non_null (global.get $jsnonnull.Main.StringComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.StringComparator.itable)) (i32.const 0) (global.get $jsnonnull.Main.StringComparator.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main.StringComparator (ref.as_non_null (global.get $jsnonnull.Main.StringComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.StringComparator.itable)) (i32.const 0) (rtt.canon $jsnonnull.Main.StringComparator)))
   ;; $instance.$ctor();
   ;;@ jsnonnull/Main.java:66:22
   (call $$ctor__void_$p_jsnonnull_Main_StringComparator@jsnonnull.Main.StringComparator (local.get $$instance))
@@ -455,7 +455,7 @@
  (result i32)
  ;;@ jsnonnull/Main.java:68:15
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return 0;
   ;;@ jsnonnull/Main.java:69:6
@@ -473,11 +473,11 @@
  (result i32)
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return StringComparator.this.compare(((String) arg0),((String) arg1));
   ;;@ jsnonnull/Main.java:66:22
-  (return (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $jsnonnull.Main.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.StringComparator $vtable(local.get $this)))))
+  (return (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(ref.cast (local.get $arg1) (rtt.canon $java.lang.String))(struct.get $jsnonnull.Main.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.StringComparator $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.StringComparator)
@@ -489,7 +489,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return Comparator.this.reversed();
   ;;@ jsnonnull/Main.java:66:22
@@ -506,7 +506,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ jsnonnull/Main.java:66:22
@@ -524,7 +524,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return Comparator.this.thenComparing(arg0,arg1);
   ;;@ jsnonnull/Main.java:66:22
@@ -541,7 +541,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ jsnonnull/Main.java:66:22
@@ -558,7 +558,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return Comparator.this.thenComparingDouble(arg0);
   ;;@ jsnonnull/Main.java:66:22
@@ -575,7 +575,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return Comparator.this.thenComparingInt(arg0);
   ;;@ jsnonnull/Main.java:66:22
@@ -592,7 +592,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:66:22
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return Comparator.this.thenComparingLong(arg0);
   ;;@ jsnonnull/Main.java:66:22
@@ -632,7 +632,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.StringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.StringComparator)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsnonnull.Main.StringComparator();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsnonnull.Main.StringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -672,7 +672,7 @@
  (block
   ;; NullableStringComparator $instance = new NullableStringComparator.<init>();
   ;;@ jsnonnull/Main.java:74:22
-  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main.NullableStringComparator (ref.as_non_null (global.get $jsnonnull.Main.NullableStringComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.NullableStringComparator.itable)) (i32.const 0) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main.NullableStringComparator (ref.as_non_null (global.get $jsnonnull.Main.NullableStringComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.NullableStringComparator.itable)) (i32.const 0) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
   ;; $instance.$ctor();
   ;;@ jsnonnull/Main.java:74:22
   (call $$ctor__void_$p_jsnonnull_Main_NullableStringComparator@jsnonnull.Main.NullableStringComparator (local.get $$instance))
@@ -705,7 +705,7 @@
  (result i32)
  ;;@ jsnonnull/Main.java:76:15
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return 0;
   ;;@ jsnonnull/Main.java:77:6
@@ -723,11 +723,11 @@
  (result i32)
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return NullableStringComparator.this.compare(((String) arg0),((String) arg1));
   ;;@ jsnonnull/Main.java:74:22
-  (return (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(ref.cast (local.get $arg1) (global.get $java.lang.String.rtt))(struct.get $jsnonnull.Main.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.NullableStringComparator $vtable(local.get $this)))))
+  (return (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(ref.cast (local.get $arg1) (rtt.canon $java.lang.String))(struct.get $jsnonnull.Main.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $jsnonnull.Main.NullableStringComparator $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_compare__java_lang_Object__java_lang_Object__int@jsnonnull.Main.NullableStringComparator)
@@ -739,7 +739,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return Comparator.this.reversed();
   ;;@ jsnonnull/Main.java:74:22
@@ -756,7 +756,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ jsnonnull/Main.java:74:22
@@ -774,7 +774,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return Comparator.this.thenComparing(arg0,arg1);
   ;;@ jsnonnull/Main.java:74:22
@@ -791,7 +791,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ jsnonnull/Main.java:74:22
@@ -808,7 +808,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return Comparator.this.thenComparingDouble(arg0);
   ;;@ jsnonnull/Main.java:74:22
@@ -825,7 +825,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return Comparator.this.thenComparingInt(arg0);
   ;;@ jsnonnull/Main.java:74:22
@@ -842,7 +842,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsnonnull/Main.java:74:22
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return Comparator.this.thenComparingLong(arg0);
   ;;@ jsnonnull/Main.java:74:22
@@ -882,7 +882,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NullableStringComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NullableStringComparator)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsnonnull.Main.NullableStringComparator();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsnonnull.Main.NullableStringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -922,7 +922,7 @@
  (block
   ;; NonNullableStringSubNullableComparator $instance = new NonNullableStringSubNullableComparator.<init>();
   ;;@ jsnonnull/Main.java:81:22
-  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main.NonNullableStringSubNullableComparator (ref.as_non_null (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.itable)) (i32.const 0) (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsnonnull.Main.NonNullableStringSubNullableComparator (ref.as_non_null (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.vtable)) (ref.as_non_null (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.itable)) (i32.const 0) (rtt.canon $jsnonnull.Main.NonNullableStringSubNullableComparator)))
   ;; $instance.$ctor();
   ;;@ jsnonnull/Main.java:81:22
   (call $$ctor__void_$p_jsnonnull_Main_NonNullableStringSubNullableComparator@jsnonnull.Main.NonNullableStringSubNullableComparator (local.get $$instance))
@@ -955,7 +955,7 @@
  (result i32)
  ;;@ jsnonnull/Main.java:85:15
  (local $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NonNullableStringSubNullableComparator)))
  (block
   ;; return 0;
   ;;@ jsnonnull/Main.java:86:6
@@ -992,7 +992,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsnonnull.Main.NonNullableStringSubNullableComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsnonnull.Main.NonNullableStringSubNullableComparator.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsnonnull.Main.NonNullableStringSubNullableComparator)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsnonnull.Main.NonNullableStringSubNullableComparator();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsnonnull.Main.NonNullableStringSubNullableComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

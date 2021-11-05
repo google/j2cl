@@ -83,7 +83,7 @@
  (block
   ;; Numbers $instance = new Numbers.<init>($name,$ordinal);
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (local.set $$instance (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $switchstatement.Numbers.rtt)))
+  (local.set $$instance (struct.new_with_rtt $switchstatement.Numbers (ref.as_non_null (global.get $switchstatement.Numbers.vtable)) (ref.as_non_null (global.get $switchstatement.Numbers.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (rtt.canon $switchstatement.Numbers)))
   ;; $instance.$ctor($name,$ordinal);
   ;;@ switchstatement/SwitchStatement.java:18:5
   (call $$ctor__java_lang_String__int__void_$p_switchstatement_Numbers@switchstatement.Numbers (local.get $$instance)(local.get $$name)(local.get $$ordinal))
@@ -134,7 +134,7 @@
   )
   ;; return ((Numbers) javaemul.internal.Enums.getValueFromNameAndMap(name,switchstatement.Numbers.namesToValuesMap));
   ;;@ switchstatement/SwitchStatement.java:18:5
-  (return (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_)) (global.get $switchstatement.Numbers.rtt)))
+  (return (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__switchstatement_Numbers_)) (rtt.canon $switchstatement.Numbers)))
  )
 )
 
@@ -189,7 +189,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.Numbers))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $switchstatement.Numbers.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $switchstatement.Numbers)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.Numbers();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSwitchstatement.Numbers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -221,7 +221,7 @@
  (block
   ;; SwitchStatement $instance = new SwitchStatement.<init>();
   ;;@ switchstatement/SwitchStatement.java:23:13
-  (local.set $$instance (struct.new_with_rtt $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $switchstatement.SwitchStatement.itable)) (i32.const 0) (global.get $switchstatement.SwitchStatement.rtt)))
+  (local.set $$instance (struct.new_with_rtt $switchstatement.SwitchStatement (ref.as_non_null (global.get $switchstatement.SwitchStatement.vtable)) (ref.as_non_null (global.get $switchstatement.SwitchStatement.itable)) (i32.const 0) (rtt.canon $switchstatement.SwitchStatement)))
   ;; $instance.$ctor();
   ;;@ switchstatement/SwitchStatement.java:23:13
   (call $$ctor__void_$p_switchstatement_SwitchStatement@switchstatement.SwitchStatement (local.get $$instance))
@@ -254,7 +254,7 @@
  (local $$expression_1 i32)
  (local $$qualifier (ref null $switchstatement.Numbers))
  (local $this (ref null $switchstatement.SwitchStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $switchstatement.SwitchStatement)))
  (block
   ;; SWITCH: {
   ;;@ switchstatement/SwitchStatement.java:26:4
@@ -470,7 +470,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.SwitchStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $switchstatement.SwitchStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $switchstatement.SwitchStatement)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.SwitchStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSwitchstatement.SwitchStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

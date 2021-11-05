@@ -49,7 +49,7 @@
  (block
   ;; LabeledStatement $instance = new LabeledStatement.<init>();
   ;;@ labelstatement/LabeledStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $labelstatement.LabeledStatement (ref.as_non_null (global.get $labelstatement.LabeledStatement.vtable)) (ref.as_non_null (global.get $labelstatement.LabeledStatement.itable)) (i32.const 0) (global.get $labelstatement.LabeledStatement.rtt)))
+  (local.set $$instance (struct.new_with_rtt $labelstatement.LabeledStatement (ref.as_non_null (global.get $labelstatement.LabeledStatement.vtable)) (ref.as_non_null (global.get $labelstatement.LabeledStatement.itable)) (i32.const 0) (rtt.canon $labelstatement.LabeledStatement)))
   ;; $instance.$ctor();
   ;;@ labelstatement/LabeledStatement.java:18:13
   (call $$ctor__void_$p_labelstatement_LabeledStatement@labelstatement.LabeledStatement (local.get $$instance))
@@ -79,7 +79,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:19:14
  (local $this (ref null $labelstatement.LabeledStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $labelstatement.LabeledStatement)))
  (block
   ;; LABEL: for (;true;) {
   ;;@ labelstatement/LabeledStatement.java:20:4
@@ -106,7 +106,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:26:14
  (local $this (ref null $labelstatement.LabeledStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $labelstatement.LabeledStatement)))
  (block
   ;; LABEL: LabeledStatement.this.foo();
   ;;@ labelstatement/LabeledStatement.java:27:4
@@ -150,7 +150,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:42:14
  (local $this (ref null $labelstatement.LabeledStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $labelstatement.LabeledStatement)))
  (block
   ;; LABEL: {
   ;;@ labelstatement/LabeledStatement.java:43:4
@@ -171,7 +171,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:49:14
  (local $this (ref null $labelstatement.LabeledStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $labelstatement.LabeledStatement)))
  (block
   ;; LABEL: if (true) {
   ;;@ labelstatement/LabeledStatement.java:50:4
@@ -198,7 +198,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ labelstatement/LabeledStatement.java:56:14
  (local $this (ref null $labelstatement.LabeledStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $labelstatement.LabeledStatement)))
  (block
   ;; LABEL: switch (0) {
   ;;@ labelstatement/LabeledStatement.java:57:4
@@ -263,7 +263,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $labelstatement.LabeledStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $labelstatement.LabeledStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $labelstatement.LabeledStatement)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLabelstatement.LabeledStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLabelstatement.LabeledStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

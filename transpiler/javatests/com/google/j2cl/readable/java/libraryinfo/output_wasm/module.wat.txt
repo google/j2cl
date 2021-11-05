@@ -189,7 +189,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ libraryinfo/Main.java:25:13
-  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.itable)) (i32.const 0) (global.get $libraryinfo.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main (ref.as_non_null (global.get $libraryinfo.Main.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.itable)) (i32.const 0) (rtt.canon $libraryinfo.Main)))
   ;; $instance.$ctor();
   ;;@ libraryinfo/Main.java:25:13
   (call $$ctor__void_$p_libraryinfo_Main@libraryinfo.Main (local.get $$instance))
@@ -260,7 +260,7 @@
  (result (ref null $java.lang.String))
  ;;@ libraryinfo/Main.java:95:16
  (local $this (ref null $libraryinfo.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main)))
  (block
   ;; return super.toString();
   ;;@ libraryinfo/Main.java:96:4
@@ -326,7 +326,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $libraryinfo.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -503,7 +503,7 @@
  (block
   ;; FunctionImpl $instance = new FunctionImpl.<init>();
   ;;@ libraryinfo/Main.java:54:29
-  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.itable)) (i32.const 0) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
+  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.FunctionImpl (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.FunctionImpl.itable)) (i32.const 0) (rtt.canon $libraryinfo.Main.FunctionImpl)))
   ;; $instance.$ctor();
   ;;@ libraryinfo/Main.java:54:29
   (call $$ctor__void_$p_libraryinfo_Main_FunctionImpl@libraryinfo.Main.FunctionImpl (local.get $$instance))
@@ -534,7 +534,7 @@
  (param $s (ref null $java.lang.String))
  ;;@ libraryinfo/Main.java:55:16
  (local $this (ref null $libraryinfo.Main.FunctionImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.FunctionImpl)))
  (block
  )
 )
@@ -568,7 +568,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $libraryinfo.Main.FunctionImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.FunctionImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.FunctionImpl)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.FunctionImpl();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -608,7 +608,7 @@
  (block
   ;; MyEnum $instance = new MyEnum.<init>($name,$ordinal);
   ;;@ libraryinfo/Main.java:59:7
-  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $libraryinfo.Main.MyEnum.rtt)))
+  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.MyEnum (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyEnum.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (rtt.canon $libraryinfo.Main.MyEnum)))
   ;; $instance.$ctor($name,$ordinal);
   ;;@ libraryinfo/Main.java:59:7
   (call $$ctor__java_lang_String__int__void_$p_libraryinfo_Main_MyEnum@libraryinfo.Main.MyEnum (local.get $$instance)(local.get $$name)(local.get $$ordinal))
@@ -659,7 +659,7 @@
   )
   ;; return ((MyEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,libraryinfo.Main.MyEnum.namesToValuesMap));
   ;;@ libraryinfo/Main.java:59:7
-  (return (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_)) (global.get $libraryinfo.Main.MyEnum.rtt)))
+  (return (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__libraryinfo_Main_MyEnum_)) (rtt.canon $libraryinfo.Main.MyEnum)))
  )
 )
 
@@ -717,7 +717,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $libraryinfo.Main.MyEnum))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.MyEnum.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.MyEnum)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyEnum();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.MyEnum__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -749,7 +749,7 @@
  (block
   ;; MyJsType $instance = new MyJsType.<init>();
   ;;@ libraryinfo/Main.java:69:11
-  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $libraryinfo.Main.MyJsType.rtt)))
+  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.MyJsType (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.MyJsType.itable)) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $libraryinfo.Main.MyJsType)))
   ;; $instance.$ctor();
   ;;@ libraryinfo/Main.java:69:11
   (call $$ctor__void_$p_libraryinfo_Main_MyJsType@libraryinfo.Main.MyJsType (local.get $$instance))
@@ -804,7 +804,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $libraryinfo.Main.MyJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.MyJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.MyJsType)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.MyJsType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -836,7 +836,7 @@
  (block
   ;; <anonymous> extends Object $instance = new $1.<init>();
   ;;@ libraryinfo/Main.java:84:17
-  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.1.itable)) (i32.const 0) (global.get $libraryinfo.Main.1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.1.itable)) (i32.const 0) (rtt.canon $libraryinfo.Main.1)))
   ;; $instance.$ctor();
   ;;@ libraryinfo/Main.java:84:17
   (call $$ctor__void_$p_libraryinfo_Main_1@libraryinfo.Main.1 (local.get $$instance))
@@ -866,7 +866,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ libraryinfo/Main.java:86:11
  (local $this (ref null $libraryinfo.Main.1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.1)))
  (block
  )
 )
@@ -900,7 +900,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $libraryinfo.Main.1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -934,7 +934,7 @@
  (block
   ;; Foo $instance = new Foo.<init>($outer_this);
   ;;@ libraryinfo/Main.java:102:15
-  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.Foo.itable)) (i32.const 0) (ref.null $libraryinfo.Main) (global.get $libraryinfo.Main.Foo.rtt)))
+  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.Foo (ref.as_non_null (global.get $libraryinfo.Main.Foo.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.Foo.itable)) (i32.const 0) (ref.null $libraryinfo.Main) (rtt.canon $libraryinfo.Main.Foo)))
   ;; $instance.$ctor($outer_this);
   ;;@ libraryinfo/Main.java:102:15
   (call $$ctor__libraryinfo_Main__void_$p_libraryinfo_Main_Foo@libraryinfo.Main.Foo (local.get $$instance)(local.get $$outer_this))
@@ -968,7 +968,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ libraryinfo/Main.java:103:9
  (local $this (ref null $libraryinfo.Main.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.Foo)))
  (block
  )
 )
@@ -1002,7 +1002,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $libraryinfo.Main.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.Foo)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1034,7 +1034,7 @@
  (block
   ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
   ;;@ libraryinfo/Main.java:79:17
-  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0) (rtt.canon $libraryinfo.Main.$LambdaImplementor$1)))
   ;; $instance.$ctor();
   ;;@ libraryinfo/Main.java:79:17
   (call $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1 (local.get $$instance))
@@ -1065,7 +1065,7 @@
  (param $s (ref null $java.lang.String))
  ;;@ libraryinfo/Main.java:79:17
  (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.$LambdaImplementor$1)))
  (block
   ;; libraryinfo.Main.log(s);
   ;;@ libraryinfo/Main.java:79:22
@@ -1102,7 +1102,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $libraryinfo.Main.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $libraryinfo.Main.$LambdaImplementor$1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.$LambdaImplementor$1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

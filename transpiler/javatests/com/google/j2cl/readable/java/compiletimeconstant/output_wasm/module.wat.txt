@@ -41,7 +41,7 @@
  (block
   ;; CompileTimeConstant $instance = new CompileTimeConstant.<init>();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
-  (local.set $$instance (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.vtable)) (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.itable)) (i32.const 0) (global.get $compiletimeconstant.CompileTimeConstant.rtt)))
+  (local.set $$instance (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.vtable)) (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.itable)) (i32.const 0) (rtt.canon $compiletimeconstant.CompileTimeConstant)))
   ;; $instance.$ctor();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$ctor__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant (local.get $$instance))
@@ -137,7 +137,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $compiletimeconstant.CompileTimeConstant))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $compiletimeconstant.CompileTimeConstant.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $compiletimeconstant.CompileTimeConstant)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCompiletimeconstant.CompileTimeConstant();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCompiletimeconstant.CompileTimeConstant__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

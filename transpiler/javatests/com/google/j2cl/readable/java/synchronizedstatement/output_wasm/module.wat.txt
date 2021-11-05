@@ -43,7 +43,7 @@
  (block
   ;; SynchronizedStatement $instance = new SynchronizedStatement.<init>();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $synchronizedstatement.SynchronizedStatement.rtt)))
+  (local.set $$instance (struct.new_with_rtt $synchronizedstatement.SynchronizedStatement (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.vtable)) (ref.as_non_null (global.get $synchronizedstatement.SynchronizedStatement.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (rtt.canon $synchronizedstatement.SynchronizedStatement)))
   ;; $instance.$ctor();
   ;;@ synchronizedstatement/SynchronizedStatement.java:18:13
   (call $$ctor__void_$p_synchronizedstatement_SynchronizedStatement@synchronizedstatement.SynchronizedStatement (local.get $$instance))
@@ -73,7 +73,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ synchronizedstatement/SynchronizedStatement.java:22:14
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $synchronizedstatement.SynchronizedStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $synchronizedstatement.SynchronizedStatement)))
  (block
   ;; synchronized (SynchronizedStatement.this);{
   ;;@ synchronizedstatement/SynchronizedStatement.java:23:4
@@ -120,7 +120,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $synchronizedstatement.SynchronizedStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $synchronizedstatement.SynchronizedStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $synchronizedstatement.SynchronizedStatement)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSynchronizedstatement.SynchronizedStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSynchronizedstatement.SynchronizedStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

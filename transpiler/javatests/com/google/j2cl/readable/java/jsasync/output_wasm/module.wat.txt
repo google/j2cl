@@ -207,7 +207,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ jsasync/Main.java:24:13
-  (local.set $$instance (struct.new_with_rtt $jsasync.Main (ref.as_non_null (global.get $jsasync.Main.vtable)) (ref.as_non_null (global.get $jsasync.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $jsasync.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main (ref.as_non_null (global.get $jsasync.Main.vtable)) (ref.as_non_null (global.get $jsasync.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $jsasync.Main)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:24:13
   (call $$ctor__void_$p_jsasync_Main@jsasync.Main (local.get $$instance))
@@ -241,7 +241,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:29:18
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main)))
  (block
   ;; return null;
   ;;@ jsasync/Main.java:30:4
@@ -259,12 +259,12 @@
  (local $result i32)
  (local $$qualifier (ref null $java.lang.Integer))
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main)))
  (block
   ;; int result = (Integer $qualifier = ((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(7)))),$qualifier.intValue());
   ;;@ jsasync/Main.java:35:4
   (local.set $result (block (result i32)
-   (local.set $$qualifier (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 7)))) (global.get $java.lang.Integer.rtt)))
+   (local.set $$qualifier (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 7)))) (rtt.canon $java.lang.Integer)))
    (call_ref (local.get $$qualifier)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier))))
   ))
   ;; return Main.this.parametricAsyncMethod(java.lang.Integer.valueOf(result));
@@ -282,7 +282,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:40:19
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main)))
  (block
   ;; return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(value)));
   ;;@ jsasync/Main.java:41:4
@@ -301,7 +301,7 @@
   (call $$clinit__void@jsasync.Main )
   ;; return jsasync.Main.Promise.resolve(((Void) jsasync.Main.await(jsasync.Main.Promise.resolve(((Void) null)))));
   ;;@ jsasync/Main.java:46:4
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (ref.null $java.lang.Object) (global.get $java.lang.Void.rtt)))) (global.get $java.lang.Void.rtt))))
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (ref.null $java.lang.Object) (rtt.canon $java.lang.Void)))) (rtt.canon $java.lang.Void))))
  )
 )
 
@@ -316,7 +316,7 @@
  (local $optimizableJsFunction (ref null $java.lang.Object))
  (local $unoptimizableJsFunction (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main)))
  (block
   ;; AsyncInterface i = jsasync.Main.$LambdaImplementor$1.$create();
   ;;@ jsasync/Main.java:51:4
@@ -382,7 +382,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsasync.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -416,7 +416,7 @@
  (block
   ;; <anonymous> implements BaseInterface $instance = new $1.<init>($outer_this);
   ;;@ jsasync/Main.java:54:28
-  (local.set $$instance (struct.new_with_rtt $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.1 (ref.as_non_null (global.get $jsasync.Main.1.vtable)) (ref.as_non_null (global.get $jsasync.Main.1.itable)) (i32.const 0) (ref.null $jsasync.Main) (rtt.canon $jsasync.Main.1)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:54:28
   (call $$ctor__jsasync_Main__void_$p_jsasync_Main_1@jsasync.Main.1 (local.get $$instance)(local.get $$outer_this))
@@ -451,11 +451,11 @@
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:57:36
  (local $this (ref null $jsasync.Main.1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.1)))
  (block
   ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($1.this.this.x)));
   ;;@ jsasync/Main.java:58:12
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.1 $$outer_this__jsasync_Main_1(local.get $this)))) (global.get $java.lang.Integer.rtt))))
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.1 $$outer_this__jsasync_Main_1(local.get $this)))) (rtt.canon $java.lang.Integer))))
  )
 )
 (elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
@@ -488,7 +488,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsasync.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -522,7 +522,7 @@
  (block
   ;; <anonymous> implements JsFunctionInterface $instance = new $2.<init>($outer_this);
   ;;@ jsasync/Main.java:65:34
-  (local.set $$instance (struct.new_with_rtt $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.2.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.2 (ref.as_non_null (global.get $jsasync.Main.2.vtable)) (ref.as_non_null (global.get $jsasync.Main.2.itable)) (i32.const 0) (ref.null $jsasync.Main) (rtt.canon $jsasync.Main.2)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:65:34
   (call $$ctor__jsasync_Main__void_$p_jsasync_Main_2@jsasync.Main.2 (local.get $$instance)(local.get $$outer_this))
@@ -557,7 +557,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:68:36
  (local $this (ref null $jsasync.Main.2))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.2)))
  (block
   ;; return jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5));
   ;;@ jsasync/Main.java:71:12
@@ -594,7 +594,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.2))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.2)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.2();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsasync.Main.2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -628,7 +628,7 @@
  (block
   ;; <anonymous> implements JsFunctionInterface $instance = new $3.<init>($outer_this);
   ;;@ jsasync/Main.java:76:34
-  (local.set $$instance (struct.new_with_rtt $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (ref.null $jsasync.Main) (global.get $jsasync.Main.3.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.3 (ref.as_non_null (global.get $jsasync.Main.3.vtable)) (ref.as_non_null (global.get $jsasync.Main.3.itable)) (i32.const 0) (ref.null $jsasync.Main) (rtt.canon $jsasync.Main.3)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsasync/Main.java:76:34
   (call $$ctor__jsasync_Main__void_$p_jsasync_Main_3@jsasync.Main.3 (local.get $$instance)(local.get $$outer_this))
@@ -664,14 +664,14 @@
  ;;@ jsasync/Main.java:79:36
  (local $tmp (ref null $java.lang.Object))
  (local $this (ref null $jsasync.Main.3))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.3.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.3)))
  (block
   ;; JsFunctionInterface tmp = $3.this;
   ;;@ jsasync/Main.java:80:12
   (local.set $tmp (local.get $this))
   ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await($3.this.this.x)));
   ;;@ jsasync/Main.java:82:12
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.3 $$outer_this__jsasync_Main_3(local.get $this)))) (global.get $java.lang.Integer.rtt))))
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (struct.get $jsasync.Main $f_x__jsasync_Main_(struct.get $jsasync.Main.3 $$outer_this__jsasync_Main_3(local.get $this)))) (rtt.canon $java.lang.Integer))))
  )
 )
 (elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.3)
@@ -704,7 +704,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.3))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.3.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.3)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.3();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsasync.Main.3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -798,7 +798,7 @@
  (block
   ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
   ;;@ jsasync/Main.java:100:6
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (global.get $java.lang.Integer.rtt))))
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (rtt.canon $java.lang.Integer))))
  )
 )
 (elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.InterfaceWithAsyncDefaultMethod)
@@ -963,7 +963,7 @@
  (block
   ;; Promise<T> $instance = new Promise.<init>();
   ;;@ jsasync/Main.java:119:23
-  (local.set $$instance (struct.new_with_rtt $jsasync.Main.Promise (ref.as_non_null (global.get $jsasync.Main.Promise.vtable)) (ref.as_non_null (global.get $jsasync.Main.Promise.itable)) (i32.const 0) (global.get $jsasync.Main.Promise.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.Promise (ref.as_non_null (global.get $jsasync.Main.Promise.vtable)) (ref.as_non_null (global.get $jsasync.Main.Promise.itable)) (i32.const 0) (rtt.canon $jsasync.Main.Promise)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:119:23
   (call $$ctor__void_$p_jsasync_Main_Promise@jsasync.Main.Promise (local.get $$instance))
@@ -1021,7 +1021,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.Promise))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.Promise.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.Promise)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.Promise();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsasync.Main.Promise__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1053,7 +1053,7 @@
  (block
   ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
   ;;@ jsasync/Main.java:51:23
-  (local.set $$instance (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0) (rtt.canon $jsasync.Main.$LambdaImplementor$1)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:51:23
   (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1 (local.get $$instance))
@@ -1084,11 +1084,11 @@
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:51:23
  (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.$LambdaImplementor$1)))
  (block
   ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
   ;;@ jsasync/Main.java:51:29
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (global.get $java.lang.Integer.rtt))))
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (rtt.canon $java.lang.Integer))))
  )
 )
 (elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
@@ -1121,7 +1121,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.$LambdaImplementor$1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.$LambdaImplementor$1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsasync.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1153,7 +1153,7 @@
  (block
   ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>();
   ;;@ jsasync/Main.java:62:33
-  (local.set $$instance (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0) (global.get $jsasync.Main.$LambdaImplementor$2.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0) (rtt.canon $jsasync.Main.$LambdaImplementor$2)))
   ;; $instance.$ctor();
   ;;@ jsasync/Main.java:62:33
   (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2 (local.get $$instance))
@@ -1184,11 +1184,11 @@
  (result (ref null $java.lang.Object))
  ;;@ jsasync/Main.java:62:33
  (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.$LambdaImplementor$2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.$LambdaImplementor$2)))
  (block
   ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
   ;;@ jsasync/Main.java:62:39
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (global.get $java.lang.Integer.rtt))))
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))) (rtt.canon $java.lang.Integer))))
  )
 )
 (elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
@@ -1221,7 +1221,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsasync.Main.$LambdaImplementor$2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsasync.Main.$LambdaImplementor$2)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.$LambdaImplementor$2();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsasync.Main.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

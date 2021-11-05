@@ -39,7 +39,7 @@
  (block
   ;; InferReturn<T> $instance = new InferReturn.<init>();
   ;;@ inferreturn/InferReturn.java:21:13
-  (local.set $$instance (struct.new_with_rtt $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0) (global.get $inferreturn.InferReturn.rtt)))
+  (local.set $$instance (struct.new_with_rtt $inferreturn.InferReturn (ref.as_non_null (global.get $inferreturn.InferReturn.vtable)) (ref.as_non_null (global.get $inferreturn.InferReturn.itable)) (i32.const 0) (rtt.canon $inferreturn.InferReturn)))
   ;; $instance.$ctor();
   ;;@ inferreturn/InferReturn.java:21:13
   (call $$ctor__void_$p_inferreturn_InferReturn@inferreturn.InferReturn (local.get $$instance))
@@ -154,7 +154,7 @@
   (call $$clinit__void@inferreturn.InferReturn )
   ;; return ((V[]) javaemul.internal.WasmArray.OfObject.$create(0));
   ;;@ inferreturn/InferReturn.java:51:4
-  (return (ref.cast (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt)))
+  (return (ref.cast (call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 0)) (rtt.canon $javaemul.internal.WasmArray.OfObject)))
  )
 )
 
@@ -208,7 +208,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $inferreturn.InferReturn))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $inferreturn.InferReturn.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $inferreturn.InferReturn)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInferreturn.InferReturn();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInferreturn.InferReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

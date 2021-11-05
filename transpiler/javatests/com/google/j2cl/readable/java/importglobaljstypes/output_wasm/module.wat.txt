@@ -84,7 +84,7 @@
  (block
   ;; Date $instance = new Date.<init>();
   ;;@ importglobaljstypes/Date.java:27:13
-  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Date (ref.as_non_null (global.get $importglobaljstypes.Date.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.itable)) (i32.const 0) (global.get $importglobaljstypes.Date.rtt)))
+  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Date (ref.as_non_null (global.get $importglobaljstypes.Date.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.itable)) (i32.const 0) (rtt.canon $importglobaljstypes.Date)))
   ;; $instance.$ctor();
   ;;@ importglobaljstypes/Date.java:27:13
   (call $$ctor__void_$p_importglobaljstypes_Date@importglobaljstypes.Date (local.get $$instance))
@@ -131,7 +131,7 @@
  (result (ref null $importglobaljstypes.Date.NativeDate))
  ;;@ importglobaljstypes/Date.java:33:20
  (local $this (ref null $importglobaljstypes.Date))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Date.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importglobaljstypes.Date)))
  (block
   ;; return d;
   ;;@ importglobaljstypes/Date.java:34:4
@@ -168,7 +168,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Date.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importglobaljstypes.Date)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Date();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImportglobaljstypes.Date__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -199,7 +199,7 @@
  (block
   ;; NativeDate $instance = new NativeDate.<init>();
   ;;@ importglobaljstypes/Date.java:38:22
-  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Date.NativeDate (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.itable)) (i32.const 0) (global.get $importglobaljstypes.Date.NativeDate.rtt)))
+  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Date.NativeDate (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Date.NativeDate.itable)) (i32.const 0) (rtt.canon $importglobaljstypes.Date.NativeDate)))
   ;; $instance.$ctor();
   ;;@ importglobaljstypes/Date.java:38:22
   (call $$ctor__void_$p_importglobaljstypes_Date_NativeDate@importglobaljstypes.Date.NativeDate (local.get $$instance))
@@ -256,7 +256,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Date.NativeDate))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Date.NativeDate.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importglobaljstypes.Date.NativeDate)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Date.NativeDate();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImportglobaljstypes.Date.NativeDate__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -288,7 +288,7 @@
  (block
   ;; Number $instance = new Number.<init>();
   ;;@ importglobaljstypes/Number.java:27:13
-  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Number (ref.as_non_null (global.get $importglobaljstypes.Number.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Number.itable)) (i32.const 0) (global.get $importglobaljstypes.Number.rtt)))
+  (local.set $$instance (struct.new_with_rtt $importglobaljstypes.Number (ref.as_non_null (global.get $importglobaljstypes.Number.vtable)) (ref.as_non_null (global.get $importglobaljstypes.Number.itable)) (i32.const 0) (rtt.canon $importglobaljstypes.Number)))
   ;; $instance.$ctor();
   ;;@ importglobaljstypes/Number.java:27:13
   (call $$ctor__void_$p_importglobaljstypes_Number@importglobaljstypes.Number (local.get $$instance))
@@ -353,7 +353,7 @@
   (return (ref.cast (block (result (ref null $java.lang.Object))
    (local.set $$qualifier (call $m_getFromCharCodeFunction__importglobaljstypes_Number_NativeFunction@importglobaljstypes.Number ))
    (call_ref (local.get $$qualifier)(ref.null $java.lang.Object)(local.get $array)(struct.get $importglobaljstypes.Number.NativeFunction.vtable $m_apply__java_lang_Object__arrayOf_int__java_lang_Object (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1)) (rtt.canon $importglobaljstypes.Number.NativeFunction.vtable)) ))
-  ) (global.get $java.lang.String.rtt)))
+  ) (rtt.canon $java.lang.String)))
  )
 )
 
@@ -365,7 +365,7 @@
  (result (ref null $java.lang.Object))
  ;;@ importglobaljstypes/Number.java:54:23
  (local $this (ref null $importglobaljstypes.Number))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Number.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importglobaljstypes.Number)))
  (block
   ;; return a;
   ;;@ importglobaljstypes/Number.java:55:4
@@ -402,7 +402,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importglobaljstypes.Number))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $importglobaljstypes.Number.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importglobaljstypes.Number)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImportglobaljstypes.Number();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImportglobaljstypes.Number__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

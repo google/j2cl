@@ -75,7 +75,7 @@
  (block
   ;; GenericClass<T> $instance = new GenericClass.<init>();
   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
-  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.GenericClass (ref.as_non_null (global.get $subclassgenericclass.GenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.GenericClass.itable)) (i32.const 0) (global.get $subclassgenericclass.GenericClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.GenericClass (ref.as_non_null (global.get $subclassgenericclass.GenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.GenericClass.itable)) (i32.const 0) (rtt.canon $subclassgenericclass.GenericClass)))
   ;; $instance.$ctor();
   ;;@ subclassgenericclass/SubclassGenericClass.java:18:6
   (call $$ctor__void_$p_subclassgenericclass_GenericClass@subclassgenericclass.GenericClass (local.get $$instance))
@@ -127,7 +127,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.GenericClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.GenericClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $subclassgenericclass.GenericClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSubclassgenericclass.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -158,7 +158,7 @@
  (block
   ;; GenericSubclassGenericClass<T> $instance = new GenericSubclassGenericClass.<init>();
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
-  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.GenericSubclassGenericClass (ref.as_non_null (global.get $subclassgenericclass.GenericSubclassGenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.GenericSubclassGenericClass.itable)) (i32.const 0) (global.get $subclassgenericclass.GenericSubclassGenericClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.GenericSubclassGenericClass (ref.as_non_null (global.get $subclassgenericclass.GenericSubclassGenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.GenericSubclassGenericClass.itable)) (i32.const 0) (rtt.canon $subclassgenericclass.GenericSubclassGenericClass)))
   ;; $instance.$ctor();
   ;;@ subclassgenericclass/SubclassGenericClass.java:20:6
   (call $$ctor__void_$p_subclassgenericclass_GenericSubclassGenericClass@subclassgenericclass.GenericSubclassGenericClass (local.get $$instance))
@@ -210,7 +210,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.GenericSubclassGenericClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.GenericSubclassGenericClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $subclassgenericclass.GenericSubclassGenericClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.GenericSubclassGenericClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSubclassgenericclass.GenericSubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -241,7 +241,7 @@
  (block
   ;; SubclassGenericClass $instance = new SubclassGenericClass.<init>();
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
-  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.SubclassGenericClass (ref.as_non_null (global.get $subclassgenericclass.SubclassGenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.SubclassGenericClass.itable)) (i32.const 0) (global.get $subclassgenericclass.SubclassGenericClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $subclassgenericclass.SubclassGenericClass (ref.as_non_null (global.get $subclassgenericclass.SubclassGenericClass.vtable)) (ref.as_non_null (global.get $subclassgenericclass.SubclassGenericClass.itable)) (i32.const 0) (rtt.canon $subclassgenericclass.SubclassGenericClass)))
   ;; $instance.$ctor();
   ;;@ subclassgenericclass/SubclassGenericClass.java:22:13
   (call $$ctor__void_$p_subclassgenericclass_SubclassGenericClass@subclassgenericclass.SubclassGenericClass (local.get $$instance))
@@ -293,7 +293,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $subclassgenericclass.SubclassGenericClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $subclassgenericclass.SubclassGenericClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $subclassgenericclass.SubclassGenericClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSubclassgenericclass.SubclassGenericClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSubclassgenericclass.SubclassGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

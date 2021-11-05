@@ -168,18 +168,6 @@ class GenerationEnvironment {
     throw new AssertionError("Unexpected type: " + typeDescriptor.getReadableDescription());
   }
 
-  /** Returns the name of the global containing the rtt for a Java type. */
-  String getRttGlobalName(TypeDeclaration typeDeclaration) {
-    return getRttGlobalName(typeDeclaration.toUnparameterizedTypeDescriptor());
-  }
-
-  /** Returns the name of the global containing the rtt for a Java type. */
-  String getRttGlobalName(TypeDescriptor typeDescriptor) {
-    typeDescriptor = typeDescriptor.toUnparameterizedTypeDescriptor();
-    checkArgument(typeDescriptor.isClass() || typeDescriptor.isEnum() || typeDescriptor.isArray());
-    return getWasmTypeName(typeDescriptor) + ".rtt";
-  }
-
   /** Returns the name of the global that stores the itable for a Java type. */
   public String getWasmItableGlobalName(DeclaredTypeDescriptor typeDescriptor) {
     return "$" + getTypeSignature(typeDescriptor) + ".itable";

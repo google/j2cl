@@ -77,7 +77,7 @@
  (block
   ;; BooleanOperations $instance = new BooleanOperations.<init>();
   ;;@ booleanoperations/BooleanOperations.java:18:13
-  (local.set $$instance (struct.new_with_rtt $booleanoperations.BooleanOperations (ref.as_non_null (global.get $booleanoperations.BooleanOperations.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.itable)) (i32.const 0) (global.get $booleanoperations.BooleanOperations.rtt)))
+  (local.set $$instance (struct.new_with_rtt $booleanoperations.BooleanOperations (ref.as_non_null (global.get $booleanoperations.BooleanOperations.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.itable)) (i32.const 0) (rtt.canon $booleanoperations.BooleanOperations)))
   ;; $instance.$ctor();
   ;;@ booleanoperations/BooleanOperations.java:18:13
   (call $$ctor__void_$p_booleanoperations_BooleanOperations@booleanoperations.BooleanOperations (local.get $$instance))
@@ -122,7 +122,7 @@
  (local $finalOuter (ref null $booleanoperations.BooleanOperations.1Outer))
  (local $outer (ref null $booleanoperations.BooleanOperations.1Outer))
  (local $this (ref null $booleanoperations.BooleanOperations))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $booleanoperations.BooleanOperations.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $booleanoperations.BooleanOperations)))
  (block
   ;; boolean ls = true;
   ;;@ booleanoperations/BooleanOperations.java:26:4
@@ -353,7 +353,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $booleanoperations.BooleanOperations))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $booleanoperations.BooleanOperations.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $booleanoperations.BooleanOperations)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBooleanoperations.BooleanOperations__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -387,7 +387,7 @@
  (block
   ;; Outer $instance = new $1Outer.<init>($outer_this);
   ;;@ booleanoperations/BooleanOperations.java:91:10
-  (local.set $$instance (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (global.get $booleanoperations.BooleanOperations.1Outer.rtt)))
+  (local.set $$instance (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations) (i32.const 0) (rtt.canon $booleanoperations.BooleanOperations.1Outer)))
   ;; $instance.$ctor($outer_this);
   ;;@ booleanoperations/BooleanOperations.java:91:10
   (call $$ctor__booleanoperations_BooleanOperations__void_$p_booleanoperations_BooleanOperations_1Outer@booleanoperations.BooleanOperations.1Outer (local.get $$instance)(local.get $$outer_this))
@@ -443,7 +443,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $booleanoperations.BooleanOperations.1Outer))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $booleanoperations.BooleanOperations.1Outer.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $booleanoperations.BooleanOperations.1Outer)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations.1Outer();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBooleanoperations.BooleanOperations.1Outer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -476,7 +476,7 @@
  (block
   ;; Inner $instance = new Inner.<init>($outer_this);
   ;;@ booleanoperations/BooleanOperations.java:94:12
-  (local.set $$instance (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations.1Outer) (global.get $booleanoperations.BooleanOperations.1Outer.Inner.rtt)))
+  (local.set $$instance (struct.new_with_rtt $booleanoperations.BooleanOperations.1Outer.Inner (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.vtable)) (ref.as_non_null (global.get $booleanoperations.BooleanOperations.1Outer.Inner.itable)) (i32.const 0) (ref.null $booleanoperations.BooleanOperations.1Outer) (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner)))
   ;; $instance.$ctor($outer_this);
   ;;@ booleanoperations/BooleanOperations.java:94:12
   (call $$ctor__booleanoperations_BooleanOperations_1Outer__void_$p_booleanoperations_BooleanOperations_1Outer_Inner@booleanoperations.BooleanOperations.1Outer.Inner (local.get $$instance)(local.get $$outer_this))
@@ -546,7 +546,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $booleanoperations.BooleanOperations.1Outer.Inner))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $booleanoperations.BooleanOperations.1Outer.Inner.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $booleanoperations.BooleanOperations.1Outer.Inner)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBooleanoperations.BooleanOperations.1Outer.Inner();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBooleanoperations.BooleanOperations.1Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

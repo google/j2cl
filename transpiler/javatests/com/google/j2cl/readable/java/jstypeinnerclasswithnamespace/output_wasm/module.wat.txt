@@ -57,7 +57,7 @@
  (block
   ;; JsTypeInnerClassWithNamespace $instance = new JsTypeInnerClassWithNamespace.<init>();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
-  (local.set $$instance (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)) (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable)) (i32.const 0) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.vtable)) (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.itable)) (i32.const 0) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)))
   ;; $instance.$ctor();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:20:13
   (call $$ctor__void_$p_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace (local.get $$instance))
@@ -109,7 +109,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -140,7 +140,7 @@
  (block
   ;; InnerClass $instance = new InnerClass.<init>();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
-  (local.set $$instance (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)) (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable)) (i32.const 0) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.vtable)) (ref.as_non_null (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.itable)) (i32.const 0) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)))
   ;; $instance.$ctor();
   ;;@ jstypeinnerclasswithnamespace/JsTypeInnerClassWithNamespace.java:23:15
   (call $$ctor__void_$p_jstypeinnerclasswithnamespace_JsTypeInnerClassWithNamespace_InnerClass@jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass (local.get $$instance))
@@ -192,7 +192,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypeinnerclasswithnamespace.JsTypeInnerClassWithNamespace.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -41,7 +41,7 @@
  (block
   ;; IfStatement $instance = new IfStatement.<init>();
   ;;@ ifstatement/IfStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $ifstatement.IfStatement.itable)) (i32.const 0) (global.get $ifstatement.IfStatement.rtt)))
+  (local.set $$instance (struct.new_with_rtt $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $ifstatement.IfStatement.itable)) (i32.const 0) (rtt.canon $ifstatement.IfStatement)))
   ;; $instance.$ctor();
   ;;@ ifstatement/IfStatement.java:18:13
   (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (local.get $$instance))
@@ -74,7 +74,7 @@
  (local $b i32)
  (local $number i32)
  (local $this (ref null $ifstatement.IfStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $ifstatement.IfStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $ifstatement.IfStatement)))
  (block
   ;; boolean a = true,boolean b = true;
   ;;@ ifstatement/IfStatement.java:20:4
@@ -157,7 +157,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $ifstatement.IfStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $ifstatement.IfStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $ifstatement.IfStatement)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIfstatement.IfStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIfstatement.IfStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

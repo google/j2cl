@@ -41,7 +41,7 @@
  (block
   ;; PublicInstanceFields $instance = new PublicInstanceFields.<init>();
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
-  (local.set $$instance (struct.new_with_rtt $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $publicinstancefields.PublicInstanceFields.rtt)))
+  (local.set $$instance (struct.new_with_rtt $publicinstancefields.PublicInstanceFields (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.vtable)) (ref.as_non_null (global.get $publicinstancefields.PublicInstanceFields.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (rtt.canon $publicinstancefields.PublicInstanceFields)))
   ;; $instance.$ctor();
   ;;@ publicinstancefields/PublicInstanceFields.java:18:13
   (call $$ctor__void_$p_publicinstancefields_PublicInstanceFields@publicinstancefields.PublicInstanceFields (local.get $$instance))
@@ -107,7 +107,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $publicinstancefields.PublicInstanceFields))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $publicinstancefields.PublicInstanceFields.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $publicinstancefields.PublicInstanceFields)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPublicinstancefields.PublicInstanceFields();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPublicinstancefields.PublicInstanceFields__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

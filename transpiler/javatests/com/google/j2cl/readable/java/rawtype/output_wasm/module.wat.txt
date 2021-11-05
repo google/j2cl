@@ -66,7 +66,7 @@
  (block
   ;; RawType $instance = new RawType.<init>();
   ;;@ rawtype/RawType.java:19:6
-  (local.set $$instance (struct.new_with_rtt $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $rawtype.RawType.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $rawtype.RawType.rtt)))
+  (local.set $$instance (struct.new_with_rtt $rawtype.RawType (ref.as_non_null (global.get $rawtype.RawType.vtable)) (ref.as_non_null (global.get $rawtype.RawType.itable)) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $rawtype.RawType)))
   ;; $instance.$ctor();
   ;;@ rawtype/RawType.java:19:6
   (call $$ctor__void_$p_rawtype_RawType@rawtype.RawType (local.get $$instance))
@@ -118,7 +118,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $rawtype.RawType)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getRawtype.RawType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -196,7 +196,7 @@
  (block
   ;; RawSubclass $instance = new RawSubclass.<init>();
   ;;@ rawtype/RawType.java:26:15
-  (local.set $$instance (struct.new_with_rtt $rawtype.RawType.RawSubclass (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.vtable)) (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.itable)) (i32.const 0) (global.get $rawtype.RawType.RawSubclass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $rawtype.RawType.RawSubclass (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.vtable)) (ref.as_non_null (global.get $rawtype.RawType.RawSubclass.itable)) (i32.const 0) (rtt.canon $rawtype.RawType.RawSubclass)))
   ;; $instance.$ctor();
   ;;@ rawtype/RawType.java:26:15
   (call $$ctor__void_$p_rawtype_RawType_RawSubclass@rawtype.RawType.RawSubclass (local.get $$instance))
@@ -227,7 +227,7 @@
  (param $t (ref null $rawtype.RawType))
  ;;@ rawtype/RawType.java:28:16
  (local $this (ref null $rawtype.RawType.RawSubclass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.RawSubclass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $rawtype.RawType.RawSubclass)))
  (block
  )
 )
@@ -264,7 +264,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $rawtype.RawType.RawSubclass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $rawtype.RawType.RawSubclass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $rawtype.RawType.RawSubclass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getRawtype.RawType.RawSubclass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getRawtype.RawType.RawSubclass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

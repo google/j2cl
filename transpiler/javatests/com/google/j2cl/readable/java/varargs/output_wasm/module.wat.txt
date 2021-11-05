@@ -70,7 +70,7 @@
  (block
   ;; Varargs $instance = new Varargs.<init>(args);
   ;;@ varargs/Varargs.java:21:9
-  (local.set $$instance (struct.new_with_rtt $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $varargs.Varargs.itable)) (i32.const 0) (global.get $varargs.Varargs.rtt)))
+  (local.set $$instance (struct.new_with_rtt $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $varargs.Varargs.itable)) (i32.const 0) (rtt.canon $varargs.Varargs)))
   ;; $instance.$ctor(args);
   ;;@ varargs/Varargs.java:21:9
   (call $$ctor__arrayOf_int__void_$p_varargs_Varargs@varargs.Varargs (local.get $$instance)(local.get $args))
@@ -103,7 +103,7 @@
  (block
   ;; Varargs $instance = new Varargs.<init>();
   ;;@ varargs/Varargs.java:23:9
-  (local.set $$instance (struct.new_with_rtt $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $varargs.Varargs.itable)) (i32.const 0) (global.get $varargs.Varargs.rtt)))
+  (local.set $$instance (struct.new_with_rtt $varargs.Varargs (ref.as_non_null (global.get $varargs.Varargs.vtable)) (ref.as_non_null (global.get $varargs.Varargs.itable)) (i32.const 0) (rtt.canon $varargs.Varargs)))
   ;; $instance.$ctor();
   ;;@ varargs/Varargs.java:23:9
   (call $$ctor__void_$p_varargs_Varargs@varargs.Varargs (local.get $$instance))
@@ -135,7 +135,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:27:14
  (local $this (ref null $varargs.Varargs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $varargs.Varargs)))
  (block
  )
 )
@@ -148,7 +148,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:29:14
  (local $this (ref null $varargs.Varargs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $varargs.Varargs)))
  (block
  )
 )
@@ -161,7 +161,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:31:14
  (local $this (ref null $varargs.Varargs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $varargs.Varargs)))
  (block
  )
 )
@@ -200,7 +200,7 @@
  ;;@ varargs/Varargs.java:39:14
  (local $v (ref null $varargs.Varargs))
  (local $this (ref null $varargs.Varargs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $varargs.Varargs)))
  (block
   ;; Varargs v = varargs.Varargs.$create();
   ;;@ varargs/Varargs.java:40:4
@@ -258,7 +258,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Varargs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Varargs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $varargs.Varargs)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Varargs();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getVarargs.Varargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -293,7 +293,7 @@
  (block
   ;; Child $instance = new Child.<init>();
   ;;@ varargs/Varargs.java:52:9
-  (local.set $$instance (struct.new_with_rtt $varargs.Child (ref.as_non_null (global.get $varargs.Child.vtable)) (ref.as_non_null (global.get $varargs.Child.itable)) (i32.const 0) (global.get $varargs.Child.rtt)))
+  (local.set $$instance (struct.new_with_rtt $varargs.Child (ref.as_non_null (global.get $varargs.Child.vtable)) (ref.as_non_null (global.get $varargs.Child.itable)) (i32.const 0) (rtt.canon $varargs.Child)))
   ;; $instance.$ctor();
   ;;@ varargs/Varargs.java:52:9
   (call $$ctor__void_$p_varargs_Child@varargs.Child (local.get $$instance))
@@ -345,7 +345,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $varargs.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $varargs.Child)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Child();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getVarargs.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

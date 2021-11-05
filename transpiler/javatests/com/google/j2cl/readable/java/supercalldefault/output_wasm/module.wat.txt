@@ -39,7 +39,7 @@
  (block
   ;; SuperCallDefault $instance = new SuperCallDefault.<init>();
   ;;@ supercalldefault/SuperCallDefault.java:19:9
-  (local.set $$instance (struct.new_with_rtt $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.itable)) (i32.const 0) (global.get $supercalldefault.SuperCallDefault.rtt)))
+  (local.set $$instance (struct.new_with_rtt $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.itable)) (i32.const 0) (rtt.canon $supercalldefault.SuperCallDefault)))
   ;; $instance.$ctor();
   ;;@ supercalldefault/SuperCallDefault.java:19:9
   (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (local.get $$instance))
@@ -91,7 +91,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supercalldefault.SuperCallDefault))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $supercalldefault.SuperCallDefault.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $supercalldefault.SuperCallDefault)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSupercalldefault.SuperCallDefault();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSupercalldefault.SuperCallDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

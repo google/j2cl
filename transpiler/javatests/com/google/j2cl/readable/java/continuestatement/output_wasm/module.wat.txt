@@ -41,7 +41,7 @@
  (block
   ;; ContinueStatement $instance = new ContinueStatement.<init>();
   ;;@ continuestatement/ContinueStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $continuestatement.ContinueStatement.itable)) (i32.const 0) (global.get $continuestatement.ContinueStatement.rtt)))
+  (local.set $$instance (struct.new_with_rtt $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $continuestatement.ContinueStatement.itable)) (i32.const 0) (rtt.canon $continuestatement.ContinueStatement)))
   ;; $instance.$ctor();
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$ctor__void_$p_continuestatement_ContinueStatement@continuestatement.ContinueStatement (local.get $$instance))
@@ -71,7 +71,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ continuestatement/ContinueStatement.java:19:14
  (local $this (ref null $continuestatement.ContinueStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $continuestatement.ContinueStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $continuestatement.ContinueStatement)))
  (block
   ;; LOOP: for (;true;) {
   ;;@ continuestatement/ContinueStatement.java:20:4
@@ -120,7 +120,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $continuestatement.ContinueStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $continuestatement.ContinueStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $continuestatement.ContinueStatement)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getContinuestatement.ContinueStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getContinuestatement.ContinueStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -71,7 +71,7 @@
  (block
   ;; JsMethodExample $instance = new JsMethodExample.<init>();
   ;;@ jsmethod/JsMethodExample.java:25:13
-  (local.set $$instance (struct.new_with_rtt $jsmethod.JsMethodExample (ref.as_non_null (global.get $jsmethod.JsMethodExample.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.itable)) (i32.const 0) (global.get $jsmethod.JsMethodExample.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsmethod.JsMethodExample (ref.as_non_null (global.get $jsmethod.JsMethodExample.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.itable)) (i32.const 0) (rtt.canon $jsmethod.JsMethodExample)))
   ;; $instance.$ctor();
   ;;@ jsmethod/JsMethodExample.java:25:13
   (call $$ctor__void_$p_jsmethod_JsMethodExample@jsmethod.JsMethodExample (local.get $$instance))
@@ -121,7 +121,7 @@
  (result (ref null $java.util.ArrayList))
  ;;@ jsmethod/JsMethodExample.java:41:48
  (local $this (ref null $jsmethod.JsMethodExample))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethod.JsMethodExample)))
  (block
  )
  (unreachable)
@@ -156,7 +156,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethod.JsMethodExample))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethod.JsMethodExample)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -201,7 +201,7 @@
  (param $t (ref null $java.lang.Object))
  ;;@ jsmethod/JsMethodExample.java:45:16
  (local $this (ref null $jsmethod.JsMethodExample.Base))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Base.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethod.JsMethodExample.Base)))
  (block
  )
 )
@@ -290,7 +290,7 @@
  (block
   ;; Sub $instance = new Sub.<init>();
   ;;@ jsmethod/JsMethodExample.java:54:15
-  (local.set $$instance (struct.new_with_rtt $jsmethod.JsMethodExample.Sub (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.itable)) (i32.const 0) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsmethod.JsMethodExample.Sub (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.vtable)) (ref.as_non_null (global.get $jsmethod.JsMethodExample.Sub.itable)) (i32.const 0) (rtt.canon $jsmethod.JsMethodExample.Sub)))
   ;; $instance.$ctor();
   ;;@ jsmethod/JsMethodExample.java:54:15
   (call $$ctor__void_$p_jsmethod_JsMethodExample_Sub@jsmethod.JsMethodExample.Sub (local.get $$instance))
@@ -321,7 +321,7 @@
  (param $s (ref null $java.lang.String))
  ;;@ jsmethod/JsMethodExample.java:55:16
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethod.JsMethodExample.Sub)))
  (block
  )
 )
@@ -334,11 +334,11 @@
  (param $arg0 (ref null $java.lang.Object))
  ;;@ jsmethod/JsMethodExample.java:54:15
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethod.JsMethodExample.Sub)))
  (block
   ;; Sub.this.m(((String) arg0));
   ;;@ jsmethod/JsMethodExample.java:54:15
-  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(struct.get $jsmethod.JsMethodExample.Sub.vtable $m_m__java_lang_String__void (struct.get $jsmethod.JsMethodExample.Sub $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub)
@@ -371,7 +371,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethod.JsMethodExample.Sub.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethod.JsMethodExample.Sub)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample.Sub();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample.Sub__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

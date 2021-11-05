@@ -119,7 +119,7 @@
  (block
   ;; ArrayCalls $instance = new ArrayCalls.<init>();
   ;;@ devirtualizedcalls/ArrayCalls.java:18:13
-  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.ArrayCalls (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.ArrayCalls (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ArrayCalls.itable)) (i32.const 0) (rtt.canon $devirtualizedcalls.ArrayCalls)))
   ;; $instance.$ctor();
   ;;@ devirtualizedcalls/ArrayCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_ArrayCalls@devirtualizedcalls.ArrayCalls (local.get $$instance))
@@ -152,14 +152,14 @@
  (local $length1 i32)
  (local $length2 i32)
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.ArrayCalls)))
  (block
   ;; Object[][] array2d = javaemul.internal.WasmArray.createMultiDimensional(javaemul.internal.WasmArray.OfInt.$create([1,1]),-1);
   ;;@ devirtualizedcalls/ArrayCalls.java:20:4
   (local.set $array2d (call $m_createMultiDimensional__arrayOf_int__int__arrayOf_java_lang_Object@javaemul.internal.WasmArray (call $$create__arrayOf_int__javaemul_internal_WasmArray_OfInt@javaemul.internal.WasmArray.OfInt (array.init $int.array (i32.const 1)(i32.const 1) (rtt.canon $int.array)))(i32.const -1)))
   ;; int length1 = ((Object[]) array2d.elements[0]).length;
   ;;@ devirtualizedcalls/ArrayCalls.java:22:4
-  (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $array2d)) (i32.const 0)) (global.get $javaemul.internal.WasmArray.OfObject.rtt))))
+  (local.set $length1 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $array2d)) (i32.const 0)) (rtt.canon $javaemul.internal.WasmArray.OfObject))))
   ;; int length2 = array2d.length;
   ;;@ devirtualizedcalls/ArrayCalls.java:23:4
   (local.set $length2 (struct.get $javaemul.internal.WasmArray $f_length__javaemul_internal_WasmArray(local.get $array2d)))
@@ -195,7 +195,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.ArrayCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ArrayCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.ArrayCalls)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.ArrayCalls();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.ArrayCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -228,7 +228,7 @@
  (block
   ;; CharSequenceCalls $instance = new CharSequenceCalls.<init>();
   ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
-  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.CharSequenceCalls (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.CharSequenceCalls (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.CharSequenceCalls.itable)) (i32.const 0) (rtt.canon $devirtualizedcalls.CharSequenceCalls)))
   ;; $instance.$ctor();
   ;;@ devirtualizedcalls/CharSequenceCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_CharSequenceCalls@devirtualizedcalls.CharSequenceCalls (local.get $$instance))
@@ -259,7 +259,7 @@
  (param $cs (ref null $java.lang.Object))
  ;;@ devirtualizedcalls/CharSequenceCalls.java:19:14
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.CharSequenceCalls)))
  (block
   ;; cs.charAt(0);
   ;;@ devirtualizedcalls/CharSequenceCalls.java:20:4
@@ -275,7 +275,7 @@
  ;;@ devirtualizedcalls/CharSequenceCalls.java:23:14
  (local $s (ref null $java.lang.String))
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.CharSequenceCalls)))
  (block
   ;; String s = javaemul.internal.StringPool.$getString_|s|();
   ;;@ devirtualizedcalls/CharSequenceCalls.java:24:4
@@ -315,7 +315,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.CharSequenceCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.CharSequenceCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.CharSequenceCalls)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.CharSequenceCalls();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.CharSequenceCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -347,7 +347,7 @@
  (block
   ;; NumberCalls $instance = new NumberCalls.<init>();
   ;;@ devirtualizedcalls/NumberCalls.java:18:13
-  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.NumberCalls (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.NumberCalls.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.NumberCalls (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.NumberCalls.itable)) (i32.const 0) (rtt.canon $devirtualizedcalls.NumberCalls)))
   ;; $instance.$ctor();
   ;;@ devirtualizedcalls/NumberCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_NumberCalls@devirtualizedcalls.NumberCalls (local.get $$instance))
@@ -391,7 +391,7 @@
  (local $c (ref null $java.lang.Character))
  (local $bool (ref null $java.lang.Boolean))
  (local $this (ref null $devirtualizedcalls.NumberCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.NumberCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.NumberCalls)))
  (block
   ;; Number i = java.lang.Integer.$create(1);
   ;;@ devirtualizedcalls/NumberCalls.java:20:4
@@ -689,7 +689,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.NumberCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.NumberCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.NumberCalls)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.NumberCalls();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.NumberCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -722,7 +722,7 @@
  (block
   ;; ObjectCalls $instance = new ObjectCalls.<init>();
   ;;@ devirtualizedcalls/ObjectCalls.java:18:13
-  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.ObjectCalls (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.ObjectCalls (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.ObjectCalls.itable)) (i32.const 0) (rtt.canon $devirtualizedcalls.ObjectCalls)))
   ;; $instance.$ctor();
   ;;@ devirtualizedcalls/ObjectCalls.java:18:13
   (call $$ctor__void_$p_devirtualizedcalls_ObjectCalls@devirtualizedcalls.ObjectCalls (local.get $$instance))
@@ -754,7 +754,7 @@
  (local $object (ref null $java.lang.Object))
  (local $objectCalls (ref null $javaemul.internal.WasmArray.OfObject))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.ObjectCalls)))
  (block
   ;; Object object = java.lang.Object.$create();
   ;;@ devirtualizedcalls/ObjectCalls.java:21:4
@@ -796,7 +796,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ devirtualizedcalls/ObjectCalls.java:36:14
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.ObjectCalls)))
  (block
   ;; ObjectCalls.this.equals(java.lang.Object.$create());
   ;;@ devirtualizedcalls/ObjectCalls.java:37:4
@@ -854,7 +854,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.ObjectCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.ObjectCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.ObjectCalls)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.ObjectCalls();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.ObjectCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -886,7 +886,7 @@
  (block
   ;; StringCalls $instance = new StringCalls.<init>();
   ;;@ devirtualizedcalls/StringCalls.java:21:13
-  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.StringCalls (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.itable)) (i32.const 0) (global.get $devirtualizedcalls.StringCalls.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedcalls.StringCalls (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.vtable)) (ref.as_non_null (global.get $devirtualizedcalls.StringCalls.itable)) (i32.const 0) (rtt.canon $devirtualizedcalls.StringCalls)))
   ;; $instance.$ctor();
   ;;@ devirtualizedcalls/StringCalls.java:21:13
   (call $$ctor__void_$p_devirtualizedcalls_StringCalls@devirtualizedcalls.StringCalls (local.get $$instance))
@@ -921,7 +921,7 @@
  (local $trimmed (ref null $java.lang.String))
  (local $newString (ref null $java.lang.String))
  (local $this (ref null $devirtualizedcalls.StringCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.StringCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.StringCalls)))
  (block
   ;; String literal = javaemul.internal.StringPool.$getString_|String|();
   ;;@ devirtualizedcalls/StringCalls.java:23:4
@@ -970,7 +970,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedcalls.StringCalls))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedcalls.StringCalls.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedcalls.StringCalls)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedcalls.StringCalls();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedcalls.StringCalls__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -47,7 +47,7 @@
  (block
   ;; SimpleLongs $instance = new SimpleLongs.<init>();
   ;;@ simplelongs/SimpleLongs.java:18:13
-  (local.set $$instance (struct.new_with_rtt $simplelongs.SimpleLongs (ref.as_non_null (global.get $simplelongs.SimpleLongs.vtable)) (ref.as_non_null (global.get $simplelongs.SimpleLongs.itable)) (i32.const 0) (i64.const 0) (i32.const 0) (global.get $simplelongs.SimpleLongs.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplelongs.SimpleLongs (ref.as_non_null (global.get $simplelongs.SimpleLongs.vtable)) (ref.as_non_null (global.get $simplelongs.SimpleLongs.itable)) (i32.const 0) (i64.const 0) (i32.const 0) (rtt.canon $simplelongs.SimpleLongs)))
   ;; $instance.$ctor();
   ;;@ simplelongs/SimpleLongs.java:18:13
   (call $$ctor__void_$p_simplelongs_SimpleLongs@simplelongs.SimpleLongs (local.get $$instance))
@@ -81,7 +81,7 @@
  (result i64)
  ;;@ simplelongs/SimpleLongs.java:21:14
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelongs.SimpleLongs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelongs.SimpleLongs)))
  (block
   ;; return 0;
   ;;@ simplelongs/SimpleLongs.java:22:4
@@ -97,7 +97,7 @@
  (result (ref null $simplelongs.SimpleLongs))
  ;;@ simplelongs/SimpleLongs.java:28:21
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelongs.SimpleLongs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelongs.SimpleLongs)))
  (block
   ;; (SimpleLongs.this.sideEffect = (SimpleLongs.this.sideEffect + 1));
   ;;@ simplelongs/SimpleLongs.java:29:4
@@ -130,7 +130,7 @@
  (local $$value_4 i64)
  (local $g i64)
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelongs.SimpleLongs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelongs.SimpleLongs)))
  (block
   ;; long a = 0;
   ;;@ simplelongs/SimpleLongs.java:36:4
@@ -255,7 +255,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelongs.SimpleLongs))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelongs.SimpleLongs.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelongs.SimpleLongs)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplelongs.SimpleLongs();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplelongs.SimpleLongs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

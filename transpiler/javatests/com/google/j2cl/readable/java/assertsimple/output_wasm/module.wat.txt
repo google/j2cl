@@ -39,7 +39,7 @@
  (block
   ;; AssertSimple $instance = new AssertSimple.<init>();
   ;;@ assertsimple/AssertSimple.java:18:13
-  (local.set $$instance (struct.new_with_rtt $assertsimple.AssertSimple (ref.as_non_null (global.get $assertsimple.AssertSimple.vtable)) (ref.as_non_null (global.get $assertsimple.AssertSimple.itable)) (i32.const 0) (global.get $assertsimple.AssertSimple.rtt)))
+  (local.set $$instance (struct.new_with_rtt $assertsimple.AssertSimple (ref.as_non_null (global.get $assertsimple.AssertSimple.vtable)) (ref.as_non_null (global.get $assertsimple.AssertSimple.itable)) (i32.const 0) (rtt.canon $assertsimple.AssertSimple)))
   ;; $instance.$ctor();
   ;;@ assertsimple/AssertSimple.java:18:13
   (call $$ctor__void_$p_assertsimple_AssertSimple@assertsimple.AssertSimple (local.get $$instance))
@@ -102,7 +102,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $assertsimple.AssertSimple))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $assertsimple.AssertSimple.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $assertsimple.AssertSimple)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAssertsimple.AssertSimple();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAssertsimple.AssertSimple__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

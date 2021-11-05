@@ -39,7 +39,7 @@
  (block
   ;; StaticConstant $instance = new StaticConstant.<init>();
   ;;@ staticconstant/StaticConstant.java:18:13
-  (local.set $$instance (struct.new_with_rtt $staticconstant.StaticConstant (ref.as_non_null (global.get $staticconstant.StaticConstant.vtable)) (ref.as_non_null (global.get $staticconstant.StaticConstant.itable)) (i32.const 0) (global.get $staticconstant.StaticConstant.rtt)))
+  (local.set $$instance (struct.new_with_rtt $staticconstant.StaticConstant (ref.as_non_null (global.get $staticconstant.StaticConstant.vtable)) (ref.as_non_null (global.get $staticconstant.StaticConstant.itable)) (i32.const 0) (rtt.canon $staticconstant.StaticConstant)))
   ;; $instance.$ctor();
   ;;@ staticconstant/StaticConstant.java:18:13
   (call $$ctor__void_$p_staticconstant_StaticConstant@staticconstant.StaticConstant (local.get $$instance))
@@ -91,7 +91,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticconstant.StaticConstant))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticconstant.StaticConstant.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticconstant.StaticConstant)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticconstant.StaticConstant();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticconstant.StaticConstant__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

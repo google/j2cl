@@ -39,7 +39,7 @@
  (block
   ;; EmptyClass $instance = new EmptyClass.<init>();
   ;;@ emptyclass/EmptyClass.java:18:13
-  (local.set $$instance (struct.new_with_rtt $emptyclass.EmptyClass (ref.as_non_null (global.get $emptyclass.EmptyClass.vtable)) (ref.as_non_null (global.get $emptyclass.EmptyClass.itable)) (i32.const 0) (global.get $emptyclass.EmptyClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $emptyclass.EmptyClass (ref.as_non_null (global.get $emptyclass.EmptyClass.vtable)) (ref.as_non_null (global.get $emptyclass.EmptyClass.itable)) (i32.const 0) (rtt.canon $emptyclass.EmptyClass)))
   ;; $instance.$ctor();
   ;;@ emptyclass/EmptyClass.java:18:13
   (call $$ctor__void_$p_emptyclass_EmptyClass@emptyclass.EmptyClass (local.get $$instance))
@@ -91,7 +91,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $emptyclass.EmptyClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $emptyclass.EmptyClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $emptyclass.EmptyClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getEmptyclass.EmptyClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getEmptyclass.EmptyClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -82,7 +82,6 @@ public class WasmModuleGenerator {
     // with the type $java.lang.Throwable.
     builder.newLine();
     builder.append("(tag $exception.event (param (ref null $java.lang.Throwable)))");
-    emitRttHierarchy(library);
     emitGlobals(library);
     emitDynamicDispatchMethodTypes(library);
     emitImportsForBinaryenIntrinsics(library);
@@ -203,44 +202,6 @@ public class WasmModuleGenerator {
         emitEndCodeComment(type, type.getKind().name());
       }
     }
-  }
-
-  /** Emits the rtt hierarchy by assigning a global to each rtt. */
-  private void emitRttHierarchy(Library library) {
-    // TODO(b/174715079): Consider tagging or emitting together with the rest of the type
-    // to make the rtts show in the readables.
-    Set<TypeDeclaration> emittedRtts = new HashSet<>();
-    library
-        .streamTypes()
-        .filter(not(Type::isInterface)) // Interfaces do not have rtts.
-        .forEach(t -> emitRttGlobal(t.getDeclaration(), emittedRtts));
-  }
-
-  private void emitRttGlobal(TypeDeclaration typeDeclaration, Set<TypeDeclaration> emittedRtts) {
-    if (!emittedRtts.add(typeDeclaration)) {
-      return;
-    }
-    DeclaredTypeDescriptor superTypeDescriptor = typeDeclaration.getSuperTypeDescriptor();
-    if (superTypeDescriptor != null) {
-      // Supertype rtt needs to be emitted before the subtype since globals can only refer to
-      // globals that are initialized before.
-      emitRttGlobal(superTypeDescriptor.getTypeDeclaration(), emittedRtts);
-    }
-    // rtt starts at 0
-    int depth = typeDeclaration.getClassHierarchyDepth() - 1;
-    String wasmTypeName = environment.getWasmTypeName(typeDeclaration) + "";
-    String superTypeRtt =
-        superTypeDescriptor == null
-            ? "(rtt.canon " + wasmTypeName + ")"
-            : format(
-                "(rtt.sub %s (global.get %s))",
-                wasmTypeName,
-                environment.getRttGlobalName(superTypeDescriptor.getTypeDeclaration()) + "");
-    builder.newLine();
-    builder.append(
-        format(
-            "(global %s (rtt %d %s) %s)",
-            environment.getRttGlobalName(typeDeclaration) + "", depth, wasmTypeName, superTypeRtt));
   }
 
   private void renderType(Type type) {
@@ -428,8 +389,8 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append(
           String.format(
-              "(local.set $this (ref.cast (local.get $this.untyped) (global.get %s)))",
-              environment.getRttGlobalName(enclosingTypeDescriptor)));
+              "(local.set $this (ref.cast (local.get $this.untyped) (rtt.canon %s)))",
+              environment.getWasmTypeName(enclosingTypeDescriptor)));
     }
 
     StatementTranspiler.render(method.getBody(), builder, environment);

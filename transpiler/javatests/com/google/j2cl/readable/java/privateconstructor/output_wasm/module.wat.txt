@@ -39,7 +39,7 @@
  (block
   ;; PrivateConstructor $instance = new PrivateConstructor.<init>();
   ;;@ privateconstructor/PrivateConstructor.java:19:10
-  (local.set $$instance (struct.new_with_rtt $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.itable)) (i32.const 0) (global.get $privateconstructor.PrivateConstructor.rtt)))
+  (local.set $$instance (struct.new_with_rtt $privateconstructor.PrivateConstructor (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.vtable)) (ref.as_non_null (global.get $privateconstructor.PrivateConstructor.itable)) (i32.const 0) (rtt.canon $privateconstructor.PrivateConstructor)))
   ;; $instance.$ctor();
   ;;@ privateconstructor/PrivateConstructor.java:19:10
   (call $$ctor__void_$p_privateconstructor_PrivateConstructor@privateconstructor.PrivateConstructor (local.get $$instance))
@@ -88,7 +88,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $privateconstructor.PrivateConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $privateconstructor.PrivateConstructor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $privateconstructor.PrivateConstructor)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPrivateconstructor.PrivateConstructor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPrivateconstructor.PrivateConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

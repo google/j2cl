@@ -43,7 +43,7 @@
  (block
   ;; ImportsFullyQualified $instance = new ImportsFullyQualified.<init>();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
-  (local.set $$instance (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.vtable)) (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.itable)) (i32.const 0) (global.get $importsfullyqualified.ImportsFullyQualified.rtt)))
+  (local.set $$instance (struct.new_with_rtt $importsfullyqualified.ImportsFullyQualified (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.vtable)) (ref.as_non_null (global.get $importsfullyqualified.ImportsFullyQualified.itable)) (i32.const 0) (rtt.canon $importsfullyqualified.ImportsFullyQualified)))
   ;; $instance.$ctor();
   ;;@ importsfullyqualified/ImportsFullyQualified.java:18:13
   (call $$ctor__void_$p_importsfullyqualified_ImportsFullyQualified@importsfullyqualified.ImportsFullyQualified (local.get $$instance))
@@ -95,7 +95,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsfullyqualified.ImportsFullyQualified))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $importsfullyqualified.ImportsFullyQualified.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importsfullyqualified.ImportsFullyQualified)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImportsfullyqualified.ImportsFullyQualified();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImportsfullyqualified.ImportsFullyQualified__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

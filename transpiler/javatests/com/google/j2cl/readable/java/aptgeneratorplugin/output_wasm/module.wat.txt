@@ -57,7 +57,7 @@
  (block
   ;; Dummy $instance = new Dummy.<init>();
   ;;@ aptgeneratorplugin/Dummy.java:3:13
-  (local.set $$instance (struct.new_with_rtt $aptgeneratorplugin.Dummy (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.itable)) (i32.const 0) (global.get $aptgeneratorplugin.Dummy.rtt)))
+  (local.set $$instance (struct.new_with_rtt $aptgeneratorplugin.Dummy (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Dummy.itable)) (i32.const 0) (rtt.canon $aptgeneratorplugin.Dummy)))
   ;; $instance.$ctor();
   ;;@ aptgeneratorplugin/Dummy.java:3:13
   (call $$ctor__void_$p_aptgeneratorplugin_Dummy@aptgeneratorplugin.Dummy (local.get $$instance))
@@ -109,7 +109,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Dummy))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Dummy.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $aptgeneratorplugin.Dummy)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -140,7 +140,7 @@
  (block
   ;; Foo $instance = new Foo.<init>();
   ;;@ aptgeneratorplugin/Foo.java:18:13
-  (local.set $$instance (struct.new_with_rtt $aptgeneratorplugin.Foo (ref.as_non_null (global.get $aptgeneratorplugin.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Foo.itable)) (i32.const 0) (global.get $aptgeneratorplugin.Foo.rtt)))
+  (local.set $$instance (struct.new_with_rtt $aptgeneratorplugin.Foo (ref.as_non_null (global.get $aptgeneratorplugin.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratorplugin.Foo.itable)) (i32.const 0) (rtt.canon $aptgeneratorplugin.Foo)))
   ;; $instance.$ctor();
   ;;@ aptgeneratorplugin/Foo.java:18:13
   (call $$ctor__void_$p_aptgeneratorplugin_Foo@aptgeneratorplugin.Foo (local.get $$instance))
@@ -172,7 +172,7 @@
  ;;@ aptgeneratorplugin/Foo.java:21:16
  (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $aptgeneratorplugin.Foo)))
  (block
   ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy(),$qualifier.getSimpleName());
   ;;@ aptgeneratorplugin/Foo.java:23:4
@@ -212,7 +212,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $aptgeneratorplugin.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $aptgeneratorplugin.Foo)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratorplugin.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

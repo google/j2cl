@@ -48,7 +48,7 @@
  (block
   ;; InnerClasses $instance = new InnerClasses.<init>();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
-  (local.set $$instance (struct.new_with_rtt $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0) (global.get $abstractinnerclass.InnerClasses.rtt)))
+  (local.set $$instance (struct.new_with_rtt $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0) (rtt.canon $abstractinnerclass.InnerClasses)))
   ;; $instance.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
   (call $$ctor__void_$p_abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses (local.get $$instance))
@@ -100,7 +100,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractinnerclass.InnerClasses))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractinnerclass.InnerClasses)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinnerclass.InnerClasses();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAbstractinnerclass.InnerClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -180,7 +180,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:24:9
  (local $this (ref null $abstractinnerclass.InnerClasses.B))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.B.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractinnerclass.InnerClasses.B)))
  (block
   ;; B.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:25:6
@@ -252,7 +252,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:30:9
  (local $this (ref null $abstractinnerclass.InnerClasses.C))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractinnerclass.InnerClasses.C.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractinnerclass.InnerClasses.C)))
  (block
   ;; C.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:31:6

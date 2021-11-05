@@ -173,7 +173,7 @@
  (param $i (ref null $java.lang.Integer))
  ;;@ jsoptional/Main.java:26:14
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main)))
  (block
  )
 )
@@ -188,7 +188,7 @@
  (param $i (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ jsoptional/Main.java:29:14
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main)))
  (block
  )
 )
@@ -203,7 +203,7 @@
  (block
   ;; Main $instance = new Main.<init>(a);
   ;;@ jsoptional/Main.java:39:9
-  (local.set $$instance (struct.new_with_rtt $jsoptional.Main (ref.as_non_null (global.get $jsoptional.Main.vtable)) (ref.as_non_null (global.get $jsoptional.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (global.get $jsoptional.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main (ref.as_non_null (global.get $jsoptional.Main.vtable)) (ref.as_non_null (global.get $jsoptional.Main.itable)) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $jsoptional.Main)))
   ;; $instance.$ctor(a);
   ;;@ jsoptional/Main.java:39:9
   (call $$ctor__java_lang_String__void_$p_jsoptional_Main@jsoptional.Main (local.get $$instance)(local.get $a))
@@ -238,7 +238,7 @@
  (param $f (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:48:14
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main)))
  (block
  )
 )
@@ -251,7 +251,7 @@
  (param $f (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:51:14
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main)))
  (block
  )
 )
@@ -296,7 +296,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoptional.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsoptional.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -364,7 +364,7 @@
  (block
   ;; AFunction $instance = new AFunction.<init>();
   ;;@ jsoptional/Main.java:41:21
-  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.AFunction (ref.as_non_null (global.get $jsoptional.Main.AFunction.vtable)) (ref.as_non_null (global.get $jsoptional.Main.AFunction.itable)) (i32.const 0) (global.get $jsoptional.Main.AFunction.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.AFunction (ref.as_non_null (global.get $jsoptional.Main.AFunction.vtable)) (ref.as_non_null (global.get $jsoptional.Main.AFunction.itable)) (i32.const 0) (rtt.canon $jsoptional.Main.AFunction)))
   ;; $instance.$ctor();
   ;;@ jsoptional/Main.java:41:21
   (call $$ctor__void_$p_jsoptional_Main_AFunction@jsoptional.Main.AFunction (local.get $$instance))
@@ -397,11 +397,11 @@
  (result (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:43:18
  (local $this (ref null $jsoptional.Main.AFunction))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.AFunction)))
  (block
   ;; return ((Object) args.elements[0]);
   ;;@ jsoptional/Main.java:44:6
-  (return (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (i32.const 0)) (global.get $java.lang.Object.rtt)))
+  (return (ref.cast (array.get $java.lang.Object.array (struct.get $javaemul.internal.WasmArray.OfObject $f_elements__javaemul_internal_WasmArray_OfObject(local.get $args)) (i32.const 0)) (rtt.canon $java.lang.Object)))
  )
 )
 (elem declare func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.AFunction)
@@ -434,7 +434,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoptional.Main.AFunction))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.AFunction.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.AFunction)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.AFunction();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsoptional.Main.AFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -503,7 +503,7 @@
  (block
   ;; TemplatedSubtype<T> $instance = new TemplatedSubtype.<init>();
   ;;@ jsoptional/Main.java:59:15
-  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.TemplatedSubtype (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.itable)) (i32.const 0) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.TemplatedSubtype (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.TemplatedSubtype.itable)) (i32.const 0) (rtt.canon $jsoptional.Main.TemplatedSubtype)))
   ;; $instance.$ctor();
   ;;@ jsoptional/Main.java:59:15
   (call $$ctor__void_$p_jsoptional_Main_TemplatedSubtype@jsoptional.Main.TemplatedSubtype (local.get $$instance))
@@ -535,7 +535,7 @@
  (param $o (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:61:16
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.TemplatedSubtype)))
  (block
  )
 )
@@ -549,11 +549,11 @@
  (param $arg1 (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:59:15
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.TemplatedSubtype)))
  (block
   ;; TemplatedSubtype.this.m(((T) arg0),arg1);
   ;;@ jsoptional/Main.java:59:15
-  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.TemplatedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.TemplatedSubtype $vtable(local.get $this))))
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(local.get $arg1)(struct.get $jsoptional.Main.TemplatedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.TemplatedSubtype $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.TemplatedSubtype)
@@ -586,7 +586,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoptional.Main.TemplatedSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.TemplatedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.TemplatedSubtype)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.TemplatedSubtype();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsoptional.Main.TemplatedSubtype__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -622,7 +622,7 @@
  (block
   ;; SpecializedSubtype $instance = new SpecializedSubtype.<init>($outer_this,a);
   ;;@ jsoptional/Main.java:68:11
-  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.SpecializedSubtype (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.itable)) (i32.const 0) (ref.null $jsoptional.Main) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.SpecializedSubtype (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.SpecializedSubtype.itable)) (i32.const 0) (ref.null $jsoptional.Main) (rtt.canon $jsoptional.Main.SpecializedSubtype)))
   ;; $instance.$ctor($outer_this,a);
   ;;@ jsoptional/Main.java:68:11
   (call $$ctor__jsoptional_Main__java_lang_Object__void_$p_jsoptional_Main_SpecializedSubtype@jsoptional.Main.SpecializedSubtype (local.get $$instance)(local.get $$outer_this)(local.get $a))
@@ -659,7 +659,7 @@
  (param $o (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:71:16
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.SpecializedSubtype)))
  (block
  )
 )
@@ -673,11 +673,11 @@
  (param $arg1 (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:66:8
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.SpecializedSubtype)))
  (block
   ;; SpecializedSubtype.this.m(((String) arg0),arg1);
   ;;@ jsoptional/Main.java:66:8
-  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.SpecializedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.SpecializedSubtype $vtable(local.get $this))))
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(local.get $arg1)(struct.get $jsoptional.Main.SpecializedSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.SpecializedSubtype $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.SpecializedSubtype)
@@ -710,7 +710,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoptional.Main.SpecializedSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.SpecializedSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.SpecializedSubtype)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.SpecializedSubtype();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsoptional.Main.SpecializedSubtype__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -743,7 +743,7 @@
  (block
   ;; NonJsTypeSubtype $instance = new NonJsTypeSubtype.<init>();
   ;;@ jsoptional/Main.java:74:15
-  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.NonJsTypeSubtype (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.itable)) (i32.const 0) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.NonJsTypeSubtype (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.vtable)) (ref.as_non_null (global.get $jsoptional.Main.NonJsTypeSubtype.itable)) (i32.const 0) (rtt.canon $jsoptional.Main.NonJsTypeSubtype)))
   ;; $instance.$ctor();
   ;;@ jsoptional/Main.java:74:15
   (call $$ctor__void_$p_jsoptional_Main_NonJsTypeSubtype@jsoptional.Main.NonJsTypeSubtype (local.get $$instance))
@@ -775,7 +775,7 @@
  (param $o (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:76:16
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.NonJsTypeSubtype)))
  (block
  )
 )
@@ -789,11 +789,11 @@
  (param $arg1 (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:74:15
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.NonJsTypeSubtype)))
  (block
   ;; NonJsTypeSubtype.this.m(((String) arg0),arg1);
   ;;@ jsoptional/Main.java:74:15
-  (call_ref (local.get $this)(ref.cast (local.get $arg0) (global.get $java.lang.String.rtt))(local.get $arg1)(struct.get $jsoptional.Main.NonJsTypeSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.NonJsTypeSubtype $vtable(local.get $this))))
+  (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(local.get $arg1)(struct.get $jsoptional.Main.NonJsTypeSubtype.vtable $m_m__java_lang_String__java_lang_Object__void (struct.get $jsoptional.Main.NonJsTypeSubtype $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype)
@@ -826,7 +826,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoptional.Main.NonJsTypeSubtype))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.NonJsTypeSubtype.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.NonJsTypeSubtype)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.NonJsTypeSubtype();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsoptional.Main.NonJsTypeSubtype__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -858,7 +858,7 @@
  (block
   ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
   ;;@ jsoptional/Main.java:36:15
-  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0) (rtt.canon $jsoptional.Main.$LambdaImplementor$1)))
   ;; $instance.$ctor();
   ;;@ jsoptional/Main.java:36:15
   (call $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1 (local.get $$instance))
@@ -891,7 +891,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsoptional/Main.java:36:15
  (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.$LambdaImplementor$1)))
  (block
   ;; return s;
   ;;@ jsoptional/Main.java:36:31
@@ -928,7 +928,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsoptional.Main.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsoptional.Main.$LambdaImplementor$1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.$LambdaImplementor$1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsoptional.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

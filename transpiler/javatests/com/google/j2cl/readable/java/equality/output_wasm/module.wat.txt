@@ -41,7 +41,7 @@
  (block
   ;; Equality $instance = new Equality.<init>();
   ;;@ equality/Equality.java:18:13
-  (local.set $$instance (struct.new_with_rtt $equality.Equality (ref.as_non_null (global.get $equality.Equality.vtable)) (ref.as_non_null (global.get $equality.Equality.itable)) (i32.const 0) (global.get $equality.Equality.rtt)))
+  (local.set $$instance (struct.new_with_rtt $equality.Equality (ref.as_non_null (global.get $equality.Equality.vtable)) (ref.as_non_null (global.get $equality.Equality.itable)) (i32.const 0) (rtt.canon $equality.Equality)))
   ;; $instance.$ctor();
   ;;@ equality/Equality.java:18:13
   (call $$ctor__void_$p_equality_Equality@equality.Equality (local.get $$instance))
@@ -71,7 +71,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ equality/Equality.java:19:14
  (local $this (ref null $equality.Equality))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $equality.Equality.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $equality.Equality)))
  (block
   (block
   )
@@ -115,7 +115,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $equality.Equality))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $equality.Equality.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $equality.Equality)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getEquality.Equality();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getEquality.Equality__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

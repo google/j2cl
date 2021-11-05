@@ -118,7 +118,7 @@
  (block
   ;; Asserts $instance = new Asserts.<init>();
   ;;@ localnamecollision/Asserts.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.Asserts (ref.as_non_null (global.get $localnamecollision.Asserts.vtable)) (ref.as_non_null (global.get $localnamecollision.Asserts.itable)) (i32.const 0) (global.get $localnamecollision.Asserts.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localnamecollision.Asserts (ref.as_non_null (global.get $localnamecollision.Asserts.vtable)) (ref.as_non_null (global.get $localnamecollision.Asserts.itable)) (i32.const 0) (rtt.canon $localnamecollision.Asserts)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/Asserts.java:18:13
   (call $$ctor__void_$p_localnamecollision_Asserts@localnamecollision.Asserts (local.get $$instance))
@@ -149,7 +149,7 @@
  (result i32)
  ;;@ localnamecollision/Asserts.java:19:6
  (local $this (ref null $localnamecollision.Asserts))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Asserts.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Asserts)))
  (block
   ;; return 5;
   ;;@ localnamecollision/Asserts.java:21:4
@@ -186,7 +186,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.Asserts))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Asserts.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Asserts)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.Asserts();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.Asserts__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -218,7 +218,7 @@
  (block
   ;; Class $instance = new Class.<init>();
   ;;@ localnamecollision/Class.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0) (global.get $localnamecollision.Class.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0) (rtt.canon $localnamecollision.Class)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/Class.java:18:13
   (call $$ctor__void_$p_localnamecollision_Class@localnamecollision.Class (local.get $$instance))
@@ -249,7 +249,7 @@
  ;;@ localnamecollision/Class.java:19:14
  (local $$qualifier (ref null $localnamecollision.Class))
  (local $this (ref null $localnamecollision.Class))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Class.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Class)))
  (block
   (block
    ;; Class $qualifier = localnamecollision.Class.$create();
@@ -291,7 +291,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.Class))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.Class.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Class)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.Class();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.Class__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -331,7 +331,7 @@
  (local $com_google_j2cl_readable_localnamecollision_package2_A i32)
  (local $A i32)
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.LocalNameCollision)))
  (block
   ;; boolean LocalNameCollision = false;
   ;;@ localnamecollision/LocalNameCollision.java:21:4
@@ -362,7 +362,7 @@
   (local.set $A (i32.const 1))
   ;; (LocalNameCollision = ((((RuntimeException instanceof LocalNameCollision) ? (true) : (RuntimeException instanceof RuntimeException)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof Class));
   ;;@ localnamecollision/LocalNameCollision.java:30:4
-  (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (local.get $RuntimeException) (global.get $localnamecollision.LocalNameCollision.rtt)) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $java.lang.RuntimeException.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package1.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.package2.A.rtt)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (global.get $localnamecollision.Class.rtt)))))
+  (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.LocalNameCollision)) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $java.lang.RuntimeException)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.package1.A)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.package2.A)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.Class)))))
  )
 )
 (elem declare func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision)
@@ -379,11 +379,11 @@
  (result i32)
  ;;@ localnamecollision/LocalNameCollision.java:39:17
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.LocalNameCollision)))
  (block
   ;; return (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
   ;;@ localnamecollision/LocalNameCollision.java:41:4
-  (return (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+  (return (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (rtt.canon $localnamecollision.LocalNameCollision))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (rtt.canon $localnamecollision.Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
  )
 )
 (elem declare func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision)
@@ -401,7 +401,7 @@
  (block
   ;; LocalNameCollision $instance = new LocalNameCollision.<init>(LocalNameCollision,Asserts,$Asserts,l_Asserts,A);
   ;;@ localnamecollision/LocalNameCollision.java:49:9
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.LocalNameCollision (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.vtable)) (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.itable)) (i32.const 0) (global.get $localnamecollision.LocalNameCollision.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localnamecollision.LocalNameCollision (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.vtable)) (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.itable)) (i32.const 0) (rtt.canon $localnamecollision.LocalNameCollision)))
   ;; $instance.$ctor(LocalNameCollision,Asserts,$Asserts,l_Asserts,A);
   ;;@ localnamecollision/LocalNameCollision.java:49:9
   (call $$ctor__boolean__java_lang_Object__java_lang_Object__int__int__void_$p_localnamecollision_LocalNameCollision@localnamecollision.LocalNameCollision (local.get $$instance)(local.get $LocalNameCollision)(local.get $Asserts)(local.get $$Asserts)(local.get $l_Asserts)(local.get $A))
@@ -430,7 +430,7 @@
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; boolean result = (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
   ;;@ localnamecollision/LocalNameCollision.java:51:4
-  (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (global.get $localnamecollision.LocalNameCollision.rtt))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (global.get $localnamecollision.Asserts.rtt))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+  (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (rtt.canon $localnamecollision.LocalNameCollision))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (rtt.canon $localnamecollision.Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
  )
 )
 
@@ -462,7 +462,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.LocalNameCollision.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.LocalNameCollision)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.LocalNameCollision();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.LocalNameCollision__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -494,7 +494,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ localnamecollision/package1/A.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.package1.A (ref.as_non_null (global.get $localnamecollision.package1.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package1.A.itable)) (i32.const 0) (global.get $localnamecollision.package1.A.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localnamecollision.package1.A (ref.as_non_null (global.get $localnamecollision.package1.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package1.A.itable)) (i32.const 0) (rtt.canon $localnamecollision.package1.A)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/package1/A.java:18:13
   (call $$ctor__void_$p_localnamecollision_package1_A@localnamecollision.package1.A (local.get $$instance))
@@ -525,7 +525,7 @@
  (result i32)
  ;;@ localnamecollision/package1/A.java:19:13
  (local $this (ref null $localnamecollision.package1.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package1.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package1.A)))
  (block
   ;; return 1;
   ;;@ localnamecollision/package1/A.java:20:4
@@ -562,7 +562,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.package1.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package1.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package1.A)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.package1.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.package1.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -594,7 +594,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ localnamecollision/package2/A.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.package2.A (ref.as_non_null (global.get $localnamecollision.package2.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package2.A.itable)) (i32.const 0) (global.get $localnamecollision.package2.A.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localnamecollision.package2.A (ref.as_non_null (global.get $localnamecollision.package2.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package2.A.itable)) (i32.const 0) (rtt.canon $localnamecollision.package2.A)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/package2/A.java:18:13
   (call $$ctor__void_$p_localnamecollision_package2_A@localnamecollision.package2.A (local.get $$instance))
@@ -625,7 +625,7 @@
  (result i32)
  ;;@ localnamecollision/package2/A.java:19:13
  (local $this (ref null $localnamecollision.package2.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package2.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package2.A)))
  (block
   ;; return 2;
   ;;@ localnamecollision/package2/A.java:20:4
@@ -662,7 +662,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.package2.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localnamecollision.package2.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package2.A)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.package2.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.package2.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

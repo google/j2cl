@@ -60,7 +60,7 @@
  (block
   ;; Parent $instance = new Parent.<init>();
   ;;@ jsmethodoverride/Child.java:21:6
-  (local.set $$instance (struct.new_with_rtt $jsmethodoverride.Parent (ref.as_non_null (global.get $jsmethodoverride.Parent.vtable)) (ref.as_non_null (global.get $jsmethodoverride.Parent.itable)) (i32.const 0) (global.get $jsmethodoverride.Parent.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsmethodoverride.Parent (ref.as_non_null (global.get $jsmethodoverride.Parent.vtable)) (ref.as_non_null (global.get $jsmethodoverride.Parent.itable)) (i32.const 0) (rtt.canon $jsmethodoverride.Parent)))
   ;; $instance.$ctor();
   ;;@ jsmethodoverride/Child.java:21:6
   (call $$ctor__void_$p_jsmethodoverride_Parent@jsmethodoverride.Parent (local.get $$instance))
@@ -90,7 +90,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsmethodoverride/Child.java:23:14
  (local $this (ref null $jsmethodoverride.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethodoverride.Parent)))
  (block
  )
 )
@@ -124,7 +124,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethodoverride.Parent)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Parent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethodoverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -156,7 +156,7 @@
  (block
   ;; Child $instance = new Child.<init>();
   ;;@ jsmethodoverride/Child.java:27:13
-  (local.set $$instance (struct.new_with_rtt $jsmethodoverride.Child (ref.as_non_null (global.get $jsmethodoverride.Child.vtable)) (ref.as_non_null (global.get $jsmethodoverride.Child.itable)) (i32.const 0) (global.get $jsmethodoverride.Child.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsmethodoverride.Child (ref.as_non_null (global.get $jsmethodoverride.Child.vtable)) (ref.as_non_null (global.get $jsmethodoverride.Child.itable)) (i32.const 0) (rtt.canon $jsmethodoverride.Child)))
   ;; $instance.$ctor();
   ;;@ jsmethodoverride/Child.java:27:13
   (call $$ctor__void_$p_jsmethodoverride_Child@jsmethodoverride.Child (local.get $$instance))
@@ -186,7 +186,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsmethodoverride/Child.java:29:14
  (local $this (ref null $jsmethodoverride.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethodoverride.Child)))
  (block
  )
 )
@@ -220,7 +220,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsmethodoverride.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsmethodoverride.Child)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Child();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethodoverride.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

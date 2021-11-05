@@ -59,7 +59,7 @@
  (block
   ;; SomeJsType<T> $instance = new SomeJsType.<init>();
   ;;@ jstype/SomeJsType.java:22:13
-  (local.set $$instance (struct.new_with_rtt $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $jstype.SomeJsType.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $jstype.SomeJsType.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $jstype.SomeJsType.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (rtt.canon $jstype.SomeJsType)))
   ;; $instance.$ctor();
   ;;@ jstype/SomeJsType.java:22:13
   (call $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType (local.get $$instance))
@@ -89,7 +89,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:28:14
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
  (block
  )
 )
@@ -109,7 +109,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:32:7
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
  (block
  )
 )
@@ -121,7 +121,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:34:17
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
  (block
  )
 )
@@ -134,7 +134,7 @@
  ;;@ jstype/SomeJsType.java:36:14
  (local $value i32)
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
  (block
   ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
   ;;@ jstype/SomeJsType.java:37:4
@@ -166,7 +166,7 @@
  (local $object (ref null $java.lang.Object))
  (local $star (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
  (block
   ;; Object object = java.lang.Object.$create();
   ;;@ jstype/SomeJsType.java:52:4
@@ -209,7 +209,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstype.SomeJsType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstype.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

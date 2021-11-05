@@ -94,7 +94,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ unreachableclass/Main.java:18:13
-  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main (ref.as_non_null (global.get $unreachableclass.Main.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.itable)) (i32.const 0) (global.get $unreachableclass.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main (ref.as_non_null (global.get $unreachableclass.Main.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.itable)) (i32.const 0) (rtt.canon $unreachableclass.Main)))
   ;; $instance.$ctor();
   ;;@ unreachableclass/Main.java:18:13
   (call $$ctor__void_$p_unreachableclass_Main@unreachableclass.Main (local.get $$instance))
@@ -140,12 +140,12 @@
    (block
     ;; if (__$exc instanceof RuntimeException) {
     ;;@ unreachableclass/Main.java:21:33
-    (if (ref.test (local.get $__$exc) (global.get $java.lang.RuntimeException.rtt))
+    (if (ref.test (local.get $__$exc) (rtt.canon $java.lang.RuntimeException))
      (then
       (block
        ;; RuntimeException e = /** @type {RuntimeException} */ (__$exc);
        ;;@ unreachableclass/Main.java:21:33
-       (local.set $e (ref.cast (local.get $__$exc) (global.get $java.lang.RuntimeException.rtt)))
+       (local.set $e (ref.cast (local.get $__$exc) (rtt.canon $java.lang.RuntimeException)))
        (block
         ;; A $qualifier = unreachableclass.Main.1A.$create(Main.this);
         ;;@ unreachableclass/Main.java:29:6
@@ -199,7 +199,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $unreachableclass.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getUnreachableclass.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -233,7 +233,7 @@
  (block
   ;; A $instance = new $1A.<init>($outer_this);
   ;;@ unreachableclass/Main.java:22:12
-  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.itable)) (i32.const 0) (ref.null $unreachableclass.Main) (global.get $unreachableclass.Main.1A.rtt)))
+  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main.1A (ref.as_non_null (global.get $unreachableclass.Main.1A.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.itable)) (i32.const 0) (ref.null $unreachableclass.Main) (rtt.canon $unreachableclass.Main.1A)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:22:12
   (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1A@unreachableclass.Main.1A (local.get $$instance)(local.get $$outer_this))
@@ -267,7 +267,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ unreachableclass/Main.java:23:13
  (local $this (ref null $unreachableclass.Main.1A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $unreachableclass.Main.1A)))
  (block
  )
 )
@@ -301,7 +301,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $unreachableclass.Main.1A)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getUnreachableclass.Main.1A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -334,7 +334,7 @@
  (block
   ;; B $instance = new $1B.<init>($outer_this);
   ;;@ unreachableclass/Main.java:24:16
-  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main.1A.1B (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.itable)) (i32.const 0) (ref.null $unreachableclass.Main.1A) (global.get $unreachableclass.Main.1A.1B.rtt)))
+  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main.1A.1B (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1A.1B.itable)) (i32.const 0) (ref.null $unreachableclass.Main.1A) (rtt.canon $unreachableclass.Main.1A.1B)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:24:16
   (call $$ctor__unreachableclass_Main_1A__void_$p_unreachableclass_Main_1A_1B@unreachableclass.Main.1A.1B (local.get $$instance)(local.get $$outer_this))
@@ -398,7 +398,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1A.1B))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1A.1B.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $unreachableclass.Main.1A.1B)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1A.1B();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getUnreachableclass.Main.1A.1B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -431,7 +431,7 @@
  (block
   ;; <anonymous> extends Object $instance = new $1.<init>($outer_this);
   ;;@ unreachableclass/Main.java:30:19
-  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1.itable)) (i32.const 0) (ref.null $unreachableclass.Main) (global.get $unreachableclass.Main.1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $unreachableclass.Main.1 (ref.as_non_null (global.get $unreachableclass.Main.1.vtable)) (ref.as_non_null (global.get $unreachableclass.Main.1.itable)) (i32.const 0) (ref.null $unreachableclass.Main) (rtt.canon $unreachableclass.Main.1)))
   ;; $instance.$ctor($outer_this);
   ;;@ unreachableclass/Main.java:30:19
   (call $$ctor__unreachableclass_Main__void_$p_unreachableclass_Main_1@unreachableclass.Main.1 (local.get $$instance)(local.get $$outer_this))
@@ -487,7 +487,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $unreachableclass.Main.1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $unreachableclass.Main.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $unreachableclass.Main.1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getUnreachableclass.Main.1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getUnreachableclass.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -111,7 +111,7 @@
  (block
   ;; MyException $instance = new MyException.<init>();
   ;;@ exception/MyException.java:19:2
-  (local.set $$instance (struct.new_with_rtt $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $exception.MyException.rtt)))
+  (local.set $$instance (struct.new_with_rtt $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $exception.MyException)))
   ;; $instance.$ctor();
   ;;@ exception/MyException.java:19:2
   (call $$ctor__void_$p_exception_MyException@exception.MyException (local.get $$instance))
@@ -144,7 +144,7 @@
  (block
   ;; MyException $instance = new MyException.<init>(cause);
   ;;@ exception/MyException.java:21:2
-  (local.set $$instance (struct.new_with_rtt $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $exception.MyException.rtt)))
+  (local.set $$instance (struct.new_with_rtt $exception.MyException (ref.as_non_null (global.get $exception.MyException.vtable)) (ref.as_non_null (global.get $exception.MyException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $exception.MyException)))
   ;; $instance.$ctor(cause);
   ;;@ exception/MyException.java:21:2
   (call $$ctor__java_lang_Throwable__void_$p_exception_MyException@exception.MyException (local.get $$instance)(local.get $cause))
@@ -197,7 +197,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $exception.MyException))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $exception.MyException.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $exception.MyException)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getException.MyException();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getException.MyException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -248,7 +248,7 @@
  (block
   ;; MyJsException $instance = new MyJsException.<init>();
   ;;@ exception/MyJsException.java:23:9
-  (local.set $$instance (struct.new_with_rtt $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $exception.MyJsException.rtt)))
+  (local.set $$instance (struct.new_with_rtt $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $exception.MyJsException)))
   ;; $instance.$ctor();
   ;;@ exception/MyJsException.java:23:9
   (call $$ctor__void_$p_exception_MyJsException@exception.MyJsException (local.get $$instance))
@@ -281,7 +281,7 @@
  (block
   ;; MyJsException $instance = new MyJsException.<init>(cause);
   ;;@ exception/MyJsException.java:26:9
-  (local.set $$instance (struct.new_with_rtt $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (global.get $exception.MyJsException.rtt)))
+  (local.set $$instance (struct.new_with_rtt $exception.MyJsException (ref.as_non_null (global.get $exception.MyJsException.vtable)) (ref.as_non_null (global.get $exception.MyJsException.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.Throwable) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (i32.const 0) (i32.const 0) (ref.null $java.lang.Object) (rtt.canon $exception.MyJsException)))
   ;; $instance.$ctor(cause);
   ;;@ exception/MyJsException.java:26:9
   (call $$ctor__java_lang_Throwable__void_$p_exception_MyJsException@exception.MyJsException (local.get $$instance)(local.get $cause))
@@ -334,7 +334,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $exception.MyJsException))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $exception.MyJsException.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $exception.MyJsException)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getException.MyJsException();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getException.MyJsException__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

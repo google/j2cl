@@ -78,7 +78,7 @@
  (block
   ;; Left $instance = new Left.<init>();
   ;;@ circularimportuse/Left.java:18:13
-  (local.set $$instance (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (global.get $circularimportuse.Left.rtt)))
+  (local.set $$instance (struct.new_with_rtt $circularimportuse.Left (ref.as_non_null (global.get $circularimportuse.Left.vtable)) (ref.as_non_null (global.get $circularimportuse.Left.itable)) (i32.const 0) (rtt.canon $circularimportuse.Left)))
   ;; $instance.$ctor();
   ;;@ circularimportuse/Left.java:18:13
   (call $$ctor__void_$p_circularimportuse_Left@circularimportuse.Left (local.get $$instance))
@@ -109,7 +109,7 @@
  (result (ref null $circularimportuse.Right))
  ;;@ circularimportuse/Left.java:19:8
  (local $this (ref null $circularimportuse.Left))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Left.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $circularimportuse.Left)))
  (block
   ;; return circularimportuse.Right.$create();
   ;;@ circularimportuse/Left.java:20:4
@@ -146,7 +146,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Left))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Left.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $circularimportuse.Left)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Left();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCircularimportuse.Left__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -177,7 +177,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ circularimportuse/Main.java:18:13
-  (local.set $$instance (struct.new_with_rtt $circularimportuse.Main (ref.as_non_null (global.get $circularimportuse.Main.vtable)) (ref.as_non_null (global.get $circularimportuse.Main.itable)) (i32.const 0) (global.get $circularimportuse.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $circularimportuse.Main (ref.as_non_null (global.get $circularimportuse.Main.vtable)) (ref.as_non_null (global.get $circularimportuse.Main.itable)) (i32.const 0) (rtt.canon $circularimportuse.Main)))
   ;; $instance.$ctor();
   ;;@ circularimportuse/Main.java:18:13
   (call $$ctor__void_$p_circularimportuse_Main@circularimportuse.Main (local.get $$instance))
@@ -248,7 +248,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $circularimportuse.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCircularimportuse.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -280,7 +280,7 @@
  (block
   ;; Right $instance = new Right.<init>();
   ;;@ circularimportuse/Right.java:18:13
-  (local.set $$instance (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (global.get $circularimportuse.Right.rtt)))
+  (local.set $$instance (struct.new_with_rtt $circularimportuse.Right (ref.as_non_null (global.get $circularimportuse.Right.vtable)) (ref.as_non_null (global.get $circularimportuse.Right.itable)) (i32.const 0) (rtt.canon $circularimportuse.Right)))
   ;; $instance.$ctor();
   ;;@ circularimportuse/Right.java:18:13
   (call $$ctor__void_$p_circularimportuse_Right@circularimportuse.Right (local.get $$instance))
@@ -311,7 +311,7 @@
  (result (ref null $circularimportuse.Left))
  ;;@ circularimportuse/Right.java:19:7
  (local $this (ref null $circularimportuse.Right))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Right.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $circularimportuse.Right)))
  (block
   ;; return circularimportuse.Left.$create();
   ;;@ circularimportuse/Right.java:20:4
@@ -348,7 +348,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $circularimportuse.Right))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $circularimportuse.Right.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $circularimportuse.Right)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCircularimportuse.Right();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCircularimportuse.Right__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -77,7 +77,7 @@
  (block
   ;; LocalClassWithOuterGenerics<A> $instance = new LocalClassWithOuterGenerics.<init>();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.itable)) (i32.const 0) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics)))
   ;; $instance.$ctor();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:18:13
   (call $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics@localclasswithoutergenerics.LocalClassWithOuterGenerics (local.get $$instance))
@@ -147,7 +147,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -179,7 +179,7 @@
  (block
   ;; Bar<T> $instance = new $1Bar.<init>();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
-  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.itable)) (i32.const 0) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)))
   ;; $instance.$ctor();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:21:10
   (call $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Bar@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar (local.get $$instance))
@@ -210,7 +210,7 @@
  (param $other (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:22:11
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)))
  (block
  )
 )
@@ -244,7 +244,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -276,7 +276,7 @@
  (block
   ;; Baz<S, T> $instance = new $1Baz.<init>();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
-  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.vtable)) (ref.as_non_null (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.itable)) (i32.const 0) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)))
   ;; $instance.$ctor();
   ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:26:10
   (call $$ctor__void_$p_localclasswithoutergenerics_LocalClassWithOuterGenerics_1Baz@localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz (local.get $$instance))
@@ -309,7 +309,7 @@
  (param $baz (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
  ;;@ localclasswithoutergenerics/LocalClassWithOuterGenerics.java:27:11
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)))
  (block
  )
 )
@@ -343,7 +343,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclasswithoutergenerics.LocalClassWithOuterGenerics.1Baz__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

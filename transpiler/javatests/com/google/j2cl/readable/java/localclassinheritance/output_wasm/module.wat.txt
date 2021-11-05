@@ -79,7 +79,7 @@
  (block
   ;; LocalClassInheritance $instance = new LocalClassInheritance.<init>();
   ;;@ localclassinheritance/LocalClassInheritance.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localclassinheritance.LocalClassInheritance (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.vtable)) (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.itable)) (i32.const 0) (global.get $localclassinheritance.LocalClassInheritance.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localclassinheritance.LocalClassInheritance (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.vtable)) (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.itable)) (i32.const 0) (rtt.canon $localclassinheritance.LocalClassInheritance)))
   ;; $instance.$ctor();
   ;;@ localclassinheritance/LocalClassInheritance.java:18:13
   (call $$ctor__void_$p_localclassinheritance_LocalClassInheritance@localclassinheritance.LocalClassInheritance (local.get $$instance))
@@ -110,7 +110,7 @@
  ;;@ localclassinheritance/LocalClassInheritance.java:19:14
  (local $f i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclassinheritance.LocalClassInheritance)))
  (block
   ;; int f = 1;
   ;;@ localclassinheritance/LocalClassInheritance.java:20:4
@@ -147,7 +147,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclassinheritance.LocalClassInheritance)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclassinheritance.LocalClassInheritance__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -183,7 +183,7 @@
  (block
   ;; Parent $instance = new $1Parent.<init>($outer_this,$captured_f);
   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
-  (local.set $$instance (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Parent (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Parent.vtable)) (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Parent.itable)) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (global.get $localclassinheritance.LocalClassInheritance.1Parent.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Parent (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Parent.vtable)) (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Parent.itable)) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (rtt.canon $localclassinheritance.LocalClassInheritance.1Parent)))
   ;; $instance.$ctor($outer_this,$captured_f);
   ;;@ localclassinheritance/LocalClassInheritance.java:21:10
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_1Parent@localclassinheritance.LocalClassInheritance.1Parent (local.get $$instance)(local.get $$outer_this)(local.get $$captured_f))
@@ -222,7 +222,7 @@
  ;;@ localclassinheritance/LocalClassInheritance.java:22:18
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclassinheritance.LocalClassInheritance.1Parent)))
  (block
   ;; int i = $1Parent.this.f;
   ;;@ localclassinheritance/LocalClassInheritance.java:23:8
@@ -259,7 +259,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclassinheritance.LocalClassInheritance.1Parent)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Parent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -297,7 +297,7 @@
  (block
   ;; Child $instance = new $1Child.<init>($outer_this,$captured_f);
   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
-  (local.set $$instance (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Child (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Child.vtable)) (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Child.itable)) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (global.get $localclassinheritance.LocalClassInheritance.1Child.rtt)))
+  (local.set $$instance (struct.new_with_rtt $localclassinheritance.LocalClassInheritance.1Child (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Child.vtable)) (ref.as_non_null (global.get $localclassinheritance.LocalClassInheritance.1Child.itable)) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (ref.null $localclassinheritance.LocalClassInheritance) (i32.const 0) (rtt.canon $localclassinheritance.LocalClassInheritance.1Child)))
   ;; $instance.$ctor($outer_this,$captured_f);
   ;;@ localclassinheritance/LocalClassInheritance.java:26:10
   (call $$ctor__localclassinheritance_LocalClassInheritance__int__void_$p_localclassinheritance_LocalClassInheritance_1Child@localclassinheritance.LocalClassInheritance.1Child (local.get $$instance)(local.get $$outer_this)(local.get $$captured_f))
@@ -336,7 +336,7 @@
  ;;@ localclassinheritance/LocalClassInheritance.java:27:18
  (local $i i32)
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclassinheritance.LocalClassInheritance.1Child)))
  (block
   ;; int i = $1Child.this.f;
   ;;@ localclassinheritance/LocalClassInheritance.java:28:8
@@ -373,7 +373,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $localclassinheritance.LocalClassInheritance.1Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localclassinheritance.LocalClassInheritance.1Child)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Child();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

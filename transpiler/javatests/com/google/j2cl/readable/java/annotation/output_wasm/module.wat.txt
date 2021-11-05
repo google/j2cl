@@ -64,7 +64,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ annotation/Main.java:18:13
-  (local.set $$instance (struct.new_with_rtt $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $annotation.Main.itable)) (i32.const 0) (global.get $annotation.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $annotation.Main (ref.as_non_null (global.get $annotation.Main.vtable)) (ref.as_non_null (global.get $annotation.Main.itable)) (i32.const 0) (rtt.canon $annotation.Main)))
   ;; $instance.$ctor();
   ;;@ annotation/Main.java:18:13
   (call $$ctor__void_$p_annotation_Main@annotation.Main (local.get $$instance))
@@ -116,7 +116,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $annotation.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -221,7 +221,7 @@
  (block
   ;; Bar $instance = new Bar.<init>($outer_this);
   ;;@ annotation/Main.java:30:8
-  (local.set $$instance (struct.new_with_rtt $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $annotation.Main.Bar.itable)) (i32.const 0) (ref.null $annotation.Main) (global.get $annotation.Main.Bar.rtt)))
+  (local.set $$instance (struct.new_with_rtt $annotation.Main.Bar (ref.as_non_null (global.get $annotation.Main.Bar.vtable)) (ref.as_non_null (global.get $annotation.Main.Bar.itable)) (i32.const 0) (ref.null $annotation.Main) (rtt.canon $annotation.Main.Bar)))
   ;; $instance.$ctor($outer_this);
   ;;@ annotation/Main.java:30:8
   (call $$ctor__annotation_Main__void_$p_annotation_Main_Bar@annotation.Main.Bar (local.get $$instance)(local.get $$outer_this))
@@ -257,7 +257,7 @@
  ;;@ annotation/Main.java:32:8
  (local $foo (ref null $java.lang.Object))
  (local $this (ref null $annotation.Main.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $annotation.Main.Bar)))
  (block
   ;; Foo foo = null;
   ;;@ annotation/Main.java:33:6
@@ -300,7 +300,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $annotation.Main.Bar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $annotation.Main.Bar)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Bar();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -196,7 +196,7 @@ final class ExpressionTranspiler {
         sourceBuilder.append("(ref.cast ");
         render(castExpression.getExpression());
         sourceBuilder.append(
-            format(" (global.get %s))", environment.getRttGlobalName(castTypeDescriptor)));
+            format(" (rtt.canon %s))", environment.getWasmTypeName(castTypeDescriptor)));
         return false;
       }
 
@@ -248,7 +248,7 @@ final class ExpressionTranspiler {
           sourceBuilder.append("(ref.test ");
           render(instanceOfExpression.getExpression());
           sourceBuilder.append(
-              format(" (global.get %s))", environment.getRttGlobalName(testTypeDescriptor)));
+              format(" (rtt.canon %s))", environment.getWasmTypeName(testTypeDescriptor)));
         } else {
           DeclaredTypeDescriptor targetTypeDescriptor = (DeclaredTypeDescriptor) testTypeDescriptor;
           int interfaceSlot =
@@ -482,9 +482,8 @@ final class ExpressionTranspiler {
 
         sourceBuilder.append(
             format(
-                " (global.get %s))",
-                environment.getRttGlobalName(
-                    newInstance.getTypeDescriptor().getTypeDeclaration())));
+                " (rtt.canon %s))",
+                environment.getWasmTypeName(newInstance.getTypeDescriptor().getTypeDeclaration())));
         return false;
       }
 

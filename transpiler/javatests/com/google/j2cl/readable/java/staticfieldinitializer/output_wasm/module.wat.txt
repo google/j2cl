@@ -41,7 +41,7 @@
  (block
   ;; StaticFieldInitializer $instance = new StaticFieldInitializer.<init>();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
-  (local.set $$instance (struct.new_with_rtt $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.itable)) (i32.const 0) (global.get $staticfieldinitializer.StaticFieldInitializer.rtt)))
+  (local.set $$instance (struct.new_with_rtt $staticfieldinitializer.StaticFieldInitializer (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.vtable)) (ref.as_non_null (global.get $staticfieldinitializer.StaticFieldInitializer.itable)) (i32.const 0) (rtt.canon $staticfieldinitializer.StaticFieldInitializer)))
   ;; $instance.$ctor();
   ;;@ staticfieldinitializer/StaticFieldInitializer.java:18:13
   (call $$ctor__void_$p_staticfieldinitializer_StaticFieldInitializer@staticfieldinitializer.StaticFieldInitializer (local.get $$instance))
@@ -99,7 +99,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticfieldinitializer.StaticFieldInitializer))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticfieldinitializer.StaticFieldInitializer.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticfieldinitializer.StaticFieldInitializer)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticfieldinitializer.StaticFieldInitializer();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticfieldinitializer.StaticFieldInitializer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

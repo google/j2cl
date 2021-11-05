@@ -92,7 +92,7 @@
  (block
   ;; SubNumber $instance = new SubNumber.<init>();
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
-  (local.set $$instance (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.itable)) (i32.const 0) (global.get $devirtualizedsupermethodcall.SubNumber.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedsupermethodcall.SubNumber (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.SubNumber.itable)) (i32.const 0) (rtt.canon $devirtualizedsupermethodcall.SubNumber)))
   ;; $instance.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:18:6
   (call $$ctor__void_$p_devirtualizedsupermethodcall_SubNumber@devirtualizedsupermethodcall.SubNumber (local.get $$instance))
@@ -123,7 +123,7 @@
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:20:13
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.SubNumber.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.SubNumber)))
  (block
   ;; return 0;
   ;;@ devirtualizedsupermethodcall/Main.java:21:4
@@ -139,7 +139,7 @@
  (result i64)
  ;;@ devirtualizedsupermethodcall/Main.java:25:14
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.SubNumber.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.SubNumber)))
  (block
   ;; return 0;
   ;;@ devirtualizedsupermethodcall/Main.java:26:4
@@ -155,7 +155,7 @@
  (result f32)
  ;;@ devirtualizedsupermethodcall/Main.java:30:15
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.SubNumber.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.SubNumber)))
  (block
   ;; return 0.0;
   ;;@ devirtualizedsupermethodcall/Main.java:31:4
@@ -171,7 +171,7 @@
  (result f64)
  ;;@ devirtualizedsupermethodcall/Main.java:35:16
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.SubNumber.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.SubNumber)))
  (block
   ;; return 0.0;
   ;;@ devirtualizedsupermethodcall/Main.java:36:4
@@ -208,7 +208,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.SubNumber.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.SubNumber)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.SubNumber();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedsupermethodcall.SubNumber__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -239,7 +239,7 @@
  (block
   ;; FooCallsSuperObjectMethod $instance = new FooCallsSuperObjectMethod.<init>();
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
-  (local.set $$instance (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable)) (i32.const 0) (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.itable)) (i32.const 0) (rtt.canon $devirtualizedsupermethodcall.FooCallsSuperObjectMethod)))
   ;; $instance.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:40:6
   (call $$ctor__void_$p_devirtualizedsupermethodcall_FooCallsSuperObjectMethod@devirtualizedsupermethodcall.FooCallsSuperObjectMethod (local.get $$instance))
@@ -270,7 +270,7 @@
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:42:13
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.FooCallsSuperObjectMethod)))
  (block
   ;; return super.hashCode();
   ;;@ devirtualizedsupermethodcall/Main.java:43:4
@@ -307,7 +307,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.FooCallsSuperObjectMethod)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -339,7 +339,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
-  (local.set $$instance (struct.new_with_rtt $devirtualizedsupermethodcall.Main (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.itable)) (i32.const 0) (global.get $devirtualizedsupermethodcall.Main.rtt)))
+  (local.set $$instance (struct.new_with_rtt $devirtualizedsupermethodcall.Main (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.vtable)) (ref.as_non_null (global.get $devirtualizedsupermethodcall.Main.itable)) (i32.const 0) (rtt.canon $devirtualizedsupermethodcall.Main)))
   ;; $instance.$ctor();
   ;;@ devirtualizedsupermethodcall/Main.java:47:13
   (call $$ctor__void_$p_devirtualizedsupermethodcall_Main@devirtualizedsupermethodcall.Main (local.get $$instance))
@@ -371,7 +371,7 @@
  (local $fooCallsSuperObjectMethods (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (local $sn (ref null $devirtualizedsupermethodcall.SubNumber))
  (local $this (ref null $devirtualizedsupermethodcall.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.Main)))
  (block
   ;; FooCallsSuperObjectMethod fooCallsSuperObjectMethods = devirtualizedsupermethodcall.FooCallsSuperObjectMethod.$create();
   ;;@ devirtualizedsupermethodcall/Main.java:49:4
@@ -429,7 +429,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $devirtualizedsupermethodcall.Main.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $devirtualizedsupermethodcall.Main)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedsupermethodcall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

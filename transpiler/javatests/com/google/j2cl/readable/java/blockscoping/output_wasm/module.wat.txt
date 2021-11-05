@@ -41,7 +41,7 @@
  (block
   ;; BlockScoping $instance = new BlockScoping.<init>();
   ;;@ blockscoping/BlockScoping.java:18:13
-  (local.set $$instance (struct.new_with_rtt $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $blockscoping.BlockScoping.itable)) (i32.const 0) (global.get $blockscoping.BlockScoping.rtt)))
+  (local.set $$instance (struct.new_with_rtt $blockscoping.BlockScoping (ref.as_non_null (global.get $blockscoping.BlockScoping.vtable)) (ref.as_non_null (global.get $blockscoping.BlockScoping.itable)) (i32.const 0) (rtt.canon $blockscoping.BlockScoping)))
   ;; $instance.$ctor();
   ;;@ blockscoping/BlockScoping.java:18:13
   (call $$ctor__void_$p_blockscoping_BlockScoping@blockscoping.BlockScoping (local.get $$instance))
@@ -73,7 +73,7 @@
  (local $i i32)
  (local $i_1 i32)
  (local $this (ref null $blockscoping.BlockScoping))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $blockscoping.BlockScoping.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $blockscoping.BlockScoping)))
  (block
   (block
    ;; int i = 0;
@@ -117,7 +117,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $blockscoping.BlockScoping))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $blockscoping.BlockScoping.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $blockscoping.BlockScoping)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBlockscoping.BlockScoping();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBlockscoping.BlockScoping__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

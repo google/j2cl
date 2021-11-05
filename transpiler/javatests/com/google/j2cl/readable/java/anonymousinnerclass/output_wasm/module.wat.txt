@@ -166,7 +166,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.A (ref.as_non_null (global.get $anonymousinnerclass.A.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.itable)) (i32.const 0) (global.get $anonymousinnerclass.A.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.A (ref.as_non_null (global.get $anonymousinnerclass.A.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.itable)) (i32.const 0) (rtt.canon $anonymousinnerclass.A)))
   ;; $instance.$ctor();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:18:6
   (call $$ctor__void_$p_anonymousinnerclass_A@anonymousinnerclass.A (local.get $$instance))
@@ -218,7 +218,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.A)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -251,7 +251,7 @@
  (block
   ;; B $instance = new B.<init>($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.A.B (ref.as_non_null (global.get $anonymousinnerclass.A.B.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.B.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A) (global.get $anonymousinnerclass.A.B.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.A.B (ref.as_non_null (global.get $anonymousinnerclass.A.B.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.A.B.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A) (rtt.canon $anonymousinnerclass.A.B)))
   ;; $instance.$ctor($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:19:8
   (call $$ctor__anonymousinnerclass_A__void_$p_anonymousinnerclass_A_B@anonymousinnerclass.A.B (local.get $$instance)(local.get $$outer_this))
@@ -307,7 +307,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.A.B))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.A.B.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.A.B)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.A.B();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.A.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -339,7 +339,7 @@
  (block
   ;; AnonymousInnerClass $instance = new AnonymousInnerClass.<init>();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.itable)) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.itable)) (i32.const 0) (rtt.canon $anonymousinnerclass.AnonymousInnerClass)))
   ;; $instance.$ctor();
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:23:13
   (call $$ctor__void_$p_anonymousinnerclass_AnonymousInnerClass@anonymousinnerclass.AnonymousInnerClass (local.get $$instance))
@@ -374,7 +374,7 @@
  (local $b (ref null $anonymousinnerclass.A.B))
  (local $c (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.AnonymousInnerClass)))
  (block
   ;; InnerClass ic = anonymousinnerclass.AnonymousInnerClass.1.$create(AnonymousInnerClass.this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:4
@@ -420,7 +420,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.AnonymousInnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -453,7 +453,7 @@
  (block
   ;; InnerClass $instance = new InnerClass.<init>($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.InnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.InnerClass (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.InnerClass)))
   ;; $instance.$ctor($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:24:15
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__void_$p_anonymousinnerclass_AnonymousInnerClass_InnerClass@anonymousinnerclass.AnonymousInnerClass.InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -509,7 +509,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.InnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -543,7 +543,7 @@
  (block
   ;; <anonymous> extends InnerClass $instance = new $1.<init>($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (ref.null $anonymousinnerclass.AnonymousInnerClass) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1)))
   ;; $instance.$ctor($outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:27:37
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__void_$p_anonymousinnerclass_AnonymousInnerClass_1@anonymousinnerclass.AnonymousInnerClass.1 (local.get $$instance)(local.get $$outer_this))
@@ -599,7 +599,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -634,7 +634,7 @@
  (block
   ;; <anonymous> extends B $instance = new $2.<init>($outer_this,$super_outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.2 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.2.itable)) (i32.const 0) (ref.null $anonymousinnerclass.A) (ref.null $anonymousinnerclass.AnonymousInnerClass) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.2)))
   ;; $instance.$ctor($outer_this,$super_outer_this);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:29:21
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__anonymousinnerclass_A__void_$p_anonymousinnerclass_AnonymousInnerClass_2@anonymousinnerclass.AnonymousInnerClass.2 (local.get $$instance)(local.get $$outer_this)(local.get $$super_outer_this))
@@ -691,7 +691,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.2))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.2.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.2)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.2();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -727,7 +727,7 @@
  (block
   ;; C $instance = new $1C.<init>($outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1C (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.1C.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.1C (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.1C.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1C)))
   ;; $instance.$ctor($outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:30:10
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__int__void_$p_anonymousinnerclass_AnonymousInnerClass_1C@anonymousinnerclass.AnonymousInnerClass.1C (local.get $$instance)(local.get $$outer_this)(local.get $$captured_arg))
@@ -801,7 +801,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.1C))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.1C.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.1C)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.1C();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.1C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -839,7 +839,7 @@
  (block
   ;; <anonymous> extends C $instance = new $3.<init>($outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
-  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt)))
+  (local.set $$instance (struct.new_with_rtt $anonymousinnerclass.AnonymousInnerClass.3 (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.vtable)) (ref.as_non_null (global.get $anonymousinnerclass.AnonymousInnerClass.3.itable)) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (i32.const 0) (ref.null $anonymousinnerclass.AnonymousInnerClass) (i32.const 0) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.3)))
   ;; $instance.$ctor($outer_this,$captured_arg);
   ;;@ anonymousinnerclass/AnonymousInnerClass.java:33:18
   (call $$ctor__anonymousinnerclass_AnonymousInnerClass__int__void_$p_anonymousinnerclass_AnonymousInnerClass_3@anonymousinnerclass.AnonymousInnerClass.3 (local.get $$instance)(local.get $$outer_this)(local.get $$captured_arg))
@@ -899,7 +899,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $anonymousinnerclass.AnonymousInnerClass.3))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $anonymousinnerclass.AnonymousInnerClass.3.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $anonymousinnerclass.AnonymousInnerClass.3)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnonymousinnerclass.AnonymousInnerClass.3();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnonymousinnerclass.AnonymousInnerClass.3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -75,7 +75,7 @@
  (block
   ;; Outer $instance = new Outer.<init>();
   ;;@ packageinfo/Outer.java:21:13
-  (local.set $$instance (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (global.get $packageinfo.Outer.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageinfo.Outer (ref.as_non_null (global.get $packageinfo.Outer.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.itable)) (i32.const 0) (rtt.canon $packageinfo.Outer)))
   ;; $instance.$ctor();
   ;;@ packageinfo/Outer.java:21:13
   (call $$ctor__void_$p_packageinfo_Outer@packageinfo.Outer (local.get $$instance))
@@ -127,7 +127,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.Outer.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageinfo.Outer)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageinfo.Outer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -160,7 +160,7 @@
  (block
   ;; Inner $instance = new Inner.<init>($outer_this);
   ;;@ packageinfo/Outer.java:24:15
-  (local.set $$instance (struct.new_with_rtt $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.Inner.itable)) (i32.const 0) (ref.null $packageinfo.Outer) (global.get $packageinfo.Outer.Inner.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageinfo.Outer.Inner (ref.as_non_null (global.get $packageinfo.Outer.Inner.vtable)) (ref.as_non_null (global.get $packageinfo.Outer.Inner.itable)) (i32.const 0) (ref.null $packageinfo.Outer) (rtt.canon $packageinfo.Outer.Inner)))
   ;; $instance.$ctor($outer_this);
   ;;@ packageinfo/Outer.java:24:15
   (call $$ctor__packageinfo_Outer__void_$p_packageinfo_Outer_Inner@packageinfo.Outer.Inner (local.get $$instance)(local.get $$outer_this))
@@ -216,7 +216,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.Outer.Inner))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.Outer.Inner.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageinfo.Outer.Inner)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.Outer.Inner();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageinfo.Outer.Inner__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -248,7 +248,7 @@
  (block
   ;; Foo $instance = new Foo.<init>();
   ;;@ packageinfo/subpackage/Foo.java:20:13
-  (local.set $$instance (struct.new_with_rtt $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfo.subpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfo.Outer) (global.get $packageinfo.subpackage.Foo.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageinfo.subpackage.Foo (ref.as_non_null (global.get $packageinfo.subpackage.Foo.vtable)) (ref.as_non_null (global.get $packageinfo.subpackage.Foo.itable)) (i32.const 0) (ref.null $packageinfo.Outer) (rtt.canon $packageinfo.subpackage.Foo)))
   ;; $instance.$ctor();
   ;;@ packageinfo/subpackage/Foo.java:20:13
   (call $$ctor__void_$p_packageinfo_subpackage_Foo@packageinfo.subpackage.Foo (local.get $$instance))
@@ -314,7 +314,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageinfo.subpackage.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageinfo.subpackage.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageinfo.subpackage.Foo)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageinfo.subpackage.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageinfo.subpackage.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -45,7 +45,7 @@
  (block
   ;; StaticFieldAccessLevels $instance = new StaticFieldAccessLevels.<init>();
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
-  (local.set $$instance (struct.new_with_rtt $staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.itable)) (i32.const 0) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
+  (local.set $$instance (struct.new_with_rtt $staticfieldaccesslevels.StaticFieldAccessLevels (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.vtable)) (ref.as_non_null (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.itable)) (i32.const 0) (rtt.canon $staticfieldaccesslevels.StaticFieldAccessLevels)))
   ;; $instance.$ctor();
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:18:13
   (call $$ctor__void_$p_staticfieldaccesslevels_StaticFieldAccessLevels@staticfieldaccesslevels.StaticFieldAccessLevels (local.get $$instance))
@@ -76,7 +76,7 @@
  (result i32)
  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:24:13
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticfieldaccesslevels.StaticFieldAccessLevels)))
  (block
   ;; return (staticfieldaccesslevels.StaticFieldAccessLevels.b) ? (staticfieldaccesslevels.StaticFieldAccessLevels.a) : (staticfieldaccesslevels.StaticFieldAccessLevels.d);
   ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:25:4
@@ -113,7 +113,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticfieldaccesslevels.StaticFieldAccessLevels.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticfieldaccesslevels.StaticFieldAccessLevels)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticfieldaccesslevels.StaticFieldAccessLevels();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticfieldaccesslevels.StaticFieldAccessLevels__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

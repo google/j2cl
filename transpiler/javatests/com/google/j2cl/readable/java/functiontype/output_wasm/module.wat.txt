@@ -83,7 +83,7 @@
  (block
   ;; FunctionImpl $instance = new FunctionImpl.<init>();
   ;;@ functiontype/FunctionImpl.java:20:13
-  (local.set $$instance (struct.new_with_rtt $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0) (global.get $functiontype.FunctionImpl.rtt)))
+  (local.set $$instance (struct.new_with_rtt $functiontype.FunctionImpl (ref.as_non_null (global.get $functiontype.FunctionImpl.vtable)) (ref.as_non_null (global.get $functiontype.FunctionImpl.itable)) (i32.const 0) (rtt.canon $functiontype.FunctionImpl)))
   ;; $instance.$ctor();
   ;;@ functiontype/FunctionImpl.java:20:13
   (call $$ctor__void_$p_functiontype_FunctionImpl@functiontype.FunctionImpl (local.get $$instance))
@@ -114,7 +114,7 @@
  (param $f (ref null $java.lang.Object))
  ;;@ functiontype/FunctionImpl.java:21:14
  (local $this (ref null $functiontype.FunctionImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $functiontype.FunctionImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $functiontype.FunctionImpl)))
  (block
  )
 )
@@ -148,7 +148,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $functiontype.FunctionImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $functiontype.FunctionImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $functiontype.FunctionImpl)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getFunctiontype.FunctionImpl();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getFunctiontype.FunctionImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

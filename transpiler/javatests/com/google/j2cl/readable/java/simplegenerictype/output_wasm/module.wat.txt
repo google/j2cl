@@ -45,7 +45,7 @@
  (block
   ;; SimpleGenericType<T, S> $instance = new SimpleGenericType.<init>(t,s);
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
-  (local.set $$instance (struct.new_with_rtt $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (global.get $simplegenerictype.SimpleGenericType.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplegenerictype.SimpleGenericType (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.vtable)) (ref.as_non_null (global.get $simplegenerictype.SimpleGenericType.itable)) (i32.const 0) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (rtt.canon $simplegenerictype.SimpleGenericType)))
   ;; $instance.$ctor(t,s);
   ;;@ simplegenerictype/SimpleGenericType.java:22:9
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_simplegenerictype_SimpleGenericType@simplegenerictype.SimpleGenericType (local.get $$instance)(local.get $t)(local.get $s))
@@ -84,7 +84,7 @@
  ;;@ simplegenerictype/SimpleGenericType.java:27:14
  (local $g (ref null $simplegenerictype.SimpleGenericType))
  (local $this (ref null $simplegenerictype.SimpleGenericType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplegenerictype.SimpleGenericType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplegenerictype.SimpleGenericType)))
  (block
   ;; SimpleGenericType<Object, Error> g = simplegenerictype.SimpleGenericType.$create(java.lang.Object.$create(),java.lang.Error.$create());
   ;;@ simplegenerictype/SimpleGenericType.java:28:4
@@ -121,7 +121,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplegenerictype.SimpleGenericType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplegenerictype.SimpleGenericType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplegenerictype.SimpleGenericType)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplegenerictype.SimpleGenericType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplegenerictype.SimpleGenericType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

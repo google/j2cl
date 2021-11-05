@@ -57,7 +57,7 @@
  (block
   ;; CastOnArrayInit $instance = new CastOnArrayInit.<init>();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
-  (local.set $$instance (struct.new_with_rtt $castonarrayinit.CastOnArrayInit (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.itable)) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.rtt)))
+  (local.set $$instance (struct.new_with_rtt $castonarrayinit.CastOnArrayInit (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.itable)) (i32.const 0) (rtt.canon $castonarrayinit.CastOnArrayInit)))
   ;; $instance.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:18:13
   (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit@castonarrayinit.CastOnArrayInit (local.get $$instance))
@@ -141,7 +141,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $castonarrayinit.CastOnArrayInit))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $castonarrayinit.CastOnArrayInit.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $castonarrayinit.CastOnArrayInit)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCastonarrayinit.CastOnArrayInit();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCastonarrayinit.CastOnArrayInit__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -172,7 +172,7 @@
  (block
   ;; Foo<T> $instance = new Foo.<init>();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
-  (local.set $$instance (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)))
+  (local.set $$instance (struct.new_with_rtt $castonarrayinit.CastOnArrayInit.Foo (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.vtable)) (ref.as_non_null (global.get $castonarrayinit.CastOnArrayInit.Foo.itable)) (i32.const 0) (rtt.canon $castonarrayinit.CastOnArrayInit.Foo)))
   ;; $instance.$ctor();
   ;;@ castonarrayinit/CastOnArrayInit.java:19:22
   (call $$ctor__void_$p_castonarrayinit_CastOnArrayInit_Foo@castonarrayinit.CastOnArrayInit.Foo (local.get $$instance))
@@ -224,7 +224,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $castonarrayinit.CastOnArrayInit.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $castonarrayinit.CastOnArrayInit.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $castonarrayinit.CastOnArrayInit.Foo)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCastonarrayinit.CastOnArrayInit.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCastonarrayinit.CastOnArrayInit.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -102,7 +102,7 @@
  (block
   ;; Child $instance = new Child.<init>();
   ;;@ packageprivatemethods/package1/Child.java:18:13
-  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0) (global.get $packageprivatemethods.package1.Child.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package1.Child (ref.as_non_null (global.get $packageprivatemethods.package1.Child.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.Child.itable)) (i32.const 0) (rtt.canon $packageprivatemethods.package1.Child)))
   ;; $instance.$ctor();
   ;;@ packageprivatemethods/package1/Child.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_Child@packageprivatemethods.package1.Child (local.get $$instance))
@@ -134,7 +134,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:21:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Child)))
  (block
   ;; return (a + 1);
   ;;@ packageprivatemethods/package1/Child.java:22:4
@@ -152,7 +152,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:27:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Child)))
  (block
   ;; return ((a + b) + 1);
   ;;@ packageprivatemethods/package1/Child.java:28:4
@@ -171,7 +171,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:33:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Child)))
  (block
   ;; return (((a + b) + c) + 2);
   ;;@ packageprivatemethods/package1/Child.java:34:4
@@ -188,7 +188,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Child)))
  (block
   ;; return Child.this.foo(arg0);
   ;;@ packageprivatemethods/package1/Child.java:18:13
@@ -206,7 +206,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Child.java:18:13
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Child)))
  (block
   ;; return Child.this.fun(arg0,arg1);
   ;;@ packageprivatemethods/package1/Child.java:18:13
@@ -243,7 +243,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Child.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Child)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageprivatemethods.package1.Child();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageprivatemethods.package1.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -292,7 +292,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Parent.java:21:6
  (local $this (ref null $packageprivatemethods.package1.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Parent)))
  (block
   ;; return a;
   ;;@ packageprivatemethods/package1/Parent.java:22:4
@@ -311,7 +311,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/Parent.java:18:22
  (local $this (ref null $packageprivatemethods.package1.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.Parent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.Parent)))
  (block
   ;; return Parent.this.bar(arg0,arg1,arg2);
   ;;@ packageprivatemethods/package1/Parent.java:18:22
@@ -368,7 +368,7 @@
  (block
   ;; SuperParent $instance = new SuperParent.<init>();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
-  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.itable)) (i32.const 0) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package1.SuperParent (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package1.SuperParent.itable)) (i32.const 0) (rtt.canon $packageprivatemethods.package1.SuperParent)))
   ;; $instance.$ctor();
   ;;@ packageprivatemethods/package1/SuperParent.java:18:13
   (call $$ctor__void_$p_packageprivatemethods_package1_SuperParent@packageprivatemethods.package1.SuperParent (local.get $$instance))
@@ -400,7 +400,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:20:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.SuperParent)))
  (block
   ;; return (a - 1);
   ;;@ packageprivatemethods/package1/SuperParent.java:21:4
@@ -418,7 +418,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:25:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.SuperParent)))
  (block
   ;; return (a + b);
   ;;@ packageprivatemethods/package1/SuperParent.java:26:4
@@ -437,7 +437,7 @@
  (result i32)
  ;;@ packageprivatemethods/package1/SuperParent.java:30:6
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.SuperParent)))
  (block
   ;; return ((a + b) + c);
   ;;@ packageprivatemethods/package1/SuperParent.java:31:4
@@ -474,7 +474,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package1.SuperParent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package1.SuperParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package1.SuperParent)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageprivatemethods.package1.SuperParent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageprivatemethods.package1.SuperParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -511,7 +511,7 @@
  (block
   ;; SubChild $instance = new SubChild.<init>();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
-  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0) (global.get $packageprivatemethods.package2.SubChild.rtt)))
+  (local.set $$instance (struct.new_with_rtt $packageprivatemethods.package2.SubChild (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.vtable)) (ref.as_non_null (global.get $packageprivatemethods.package2.SubChild.itable)) (i32.const 0) (rtt.canon $packageprivatemethods.package2.SubChild)))
   ;; $instance.$ctor();
   ;;@ packageprivatemethods/package2/SubChild.java:20:13
   (call $$ctor__void_$p_packageprivatemethods_package2_SubChild@packageprivatemethods.package2.SubChild (local.get $$instance))
@@ -543,7 +543,7 @@
  (result i32)
  ;;@ packageprivatemethods/package2/SubChild.java:22:13
  (local $this (ref null $packageprivatemethods.package2.SubChild))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package2.SubChild.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package2.SubChild)))
  (block
   ;; return (a + 3);
   ;;@ packageprivatemethods/package2/SubChild.java:23:4
@@ -580,7 +580,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $packageprivatemethods.package2.SubChild))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package2.SubChild.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package2.SubChild)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPackageprivatemethods.package2.SubChild();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPackageprivatemethods.package2.SubChild__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -630,7 +630,7 @@
  (result i32)
  ;;@ packageprivatemethods/package2/SubParent.java:21:6
  (local $this (ref null $packageprivatemethods.package2.SubParent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $packageprivatemethods.package2.SubParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $packageprivatemethods.package2.SubParent)))
  (block
   ;; return a;
   ;;@ packageprivatemethods/package2/SubParent.java:22:4

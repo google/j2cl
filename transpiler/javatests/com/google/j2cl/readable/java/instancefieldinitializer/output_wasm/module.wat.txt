@@ -41,7 +41,7 @@
  (block
   ;; InstanceFieldInitializer $instance = new InstanceFieldInitializer.<init>();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
-  (local.set $$instance (struct.new_with_rtt $instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (global.get $instancefieldinitializer.InstanceFieldInitializer.rtt)))
+  (local.set $$instance (struct.new_with_rtt $instancefieldinitializer.InstanceFieldInitializer (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.vtable)) (ref.as_non_null (global.get $instancefieldinitializer.InstanceFieldInitializer.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (rtt.canon $instancefieldinitializer.InstanceFieldInitializer)))
   ;; $instance.$ctor();
   ;;@ instancefieldinitializer/InstanceFieldInitializer.java:18:13
   (call $$ctor__void_$p_instancefieldinitializer_InstanceFieldInitializer@instancefieldinitializer.InstanceFieldInitializer (local.get $$instance))
@@ -110,7 +110,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancefieldinitializer.InstanceFieldInitializer))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancefieldinitializer.InstanceFieldInitializer.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancefieldinitializer.InstanceFieldInitializer)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancefieldinitializer.InstanceFieldInitializer();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancefieldinitializer.InstanceFieldInitializer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -41,7 +41,7 @@
  (block
   ;; InstanceQualifiers $instance = new InstanceQualifiers.<init>();
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
-  (local.set $$instance (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable)) (i32.const 0) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt)))
+  (local.set $$instance (struct.new_with_rtt $instancequalifieronstaticfield.InstanceQualifiers (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.vtable)) (ref.as_non_null (global.get $instancequalifieronstaticfield.InstanceQualifiers.itable)) (i32.const 0) (rtt.canon $instancequalifieronstaticfield.InstanceQualifiers)))
   ;; $instance.$ctor();
   ;;@ instancequalifieronstaticfield/InstanceQualifiers.java:18:13
   (call $$ctor__void_$p_instancequalifieronstaticfield_InstanceQualifiers@instancequalifieronstaticfield.InstanceQualifiers (local.get $$instance))
@@ -216,7 +216,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancequalifieronstaticfield.InstanceQualifiers))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $instancequalifieronstaticfield.InstanceQualifiers.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancequalifieronstaticfield.InstanceQualifiers)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancequalifieronstaticfield.InstanceQualifiers();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancequalifieronstaticfield.InstanceQualifiers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

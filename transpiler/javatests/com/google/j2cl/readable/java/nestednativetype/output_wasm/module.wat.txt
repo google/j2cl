@@ -59,7 +59,7 @@
  (block
   ;; NativeArray $instance = new NativeArray.<init>();
   ;;@ nestednativetype/NativeArray.java:23:19
-  (local.set $$instance (struct.new_with_rtt $nestednativetype.NativeArray (ref.as_non_null (global.get $nestednativetype.NativeArray.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.itable)) (i32.const 0) (global.get $nestednativetype.NativeArray.rtt)))
+  (local.set $$instance (struct.new_with_rtt $nestednativetype.NativeArray (ref.as_non_null (global.get $nestednativetype.NativeArray.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.itable)) (i32.const 0) (rtt.canon $nestednativetype.NativeArray)))
   ;; $instance.$ctor();
   ;;@ nestednativetype/NativeArray.java:23:19
   (call $$ctor__void_$p_nestednativetype_NativeArray@nestednativetype.NativeArray (local.get $$instance))
@@ -90,7 +90,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nestednativetype/NativeArray.java:25:22
  (local $this (ref null $nestednativetype.NativeArray))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestednativetype.NativeArray.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nestednativetype.NativeArray)))
  (block
   ;; return nestednativetype.NativeArray.1.$create(NativeArray.this);
   ;;@ nestednativetype/NativeArray.java:26:4
@@ -127,7 +127,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestednativetype.NativeArray))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestednativetype.NativeArray.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nestednativetype.NativeArray)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestednativetype.NativeArray();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestednativetype.NativeArray__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -160,7 +160,7 @@
  (block
   ;; <anonymous> extends Object $instance = new $1.<init>($outer_this);
   ;;@ nestednativetype/NativeArray.java:26:24
-  (local.set $$instance (struct.new_with_rtt $nestednativetype.NativeArray.1 (ref.as_non_null (global.get $nestednativetype.NativeArray.1.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.1.itable)) (i32.const 0) (ref.null $nestednativetype.NativeArray) (global.get $nestednativetype.NativeArray.1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $nestednativetype.NativeArray.1 (ref.as_non_null (global.get $nestednativetype.NativeArray.1.vtable)) (ref.as_non_null (global.get $nestednativetype.NativeArray.1.itable)) (i32.const 0) (ref.null $nestednativetype.NativeArray) (rtt.canon $nestednativetype.NativeArray.1)))
   ;; $instance.$ctor($outer_this);
   ;;@ nestednativetype/NativeArray.java:26:24
   (call $$ctor__nestednativetype_NativeArray__void_$p_nestednativetype_NativeArray_1@nestednativetype.NativeArray.1 (local.get $$instance)(local.get $$outer_this))
@@ -216,7 +216,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestednativetype.NativeArray.1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $nestednativetype.NativeArray.1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nestednativetype.NativeArray.1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestednativetype.NativeArray.1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestednativetype.NativeArray.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -39,7 +39,7 @@
  (block
   ;; ObjectMap<T> $instance = new ObjectMap.<init>();
   ;;@ objectmap/ObjectMap.java:23:13
-  (local.set $$instance (struct.new_with_rtt $objectmap.ObjectMap (ref.as_non_null (global.get $objectmap.ObjectMap.vtable)) (ref.as_non_null (global.get $objectmap.ObjectMap.itable)) (i32.const 0) (global.get $objectmap.ObjectMap.rtt)))
+  (local.set $$instance (struct.new_with_rtt $objectmap.ObjectMap (ref.as_non_null (global.get $objectmap.ObjectMap.vtable)) (ref.as_non_null (global.get $objectmap.ObjectMap.itable)) (i32.const 0) (rtt.canon $objectmap.ObjectMap)))
   ;; $instance.$ctor();
   ;;@ objectmap/ObjectMap.java:23:13
   (call $$ctor__void_$p_objectmap_ObjectMap@objectmap.ObjectMap (local.get $$instance))
@@ -119,7 +119,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $objectmap.ObjectMap))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $objectmap.ObjectMap.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $objectmap.ObjectMap)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getObjectmap.ObjectMap();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getObjectmap.ObjectMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

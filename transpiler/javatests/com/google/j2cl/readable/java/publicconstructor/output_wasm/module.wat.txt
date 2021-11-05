@@ -39,7 +39,7 @@
  (block
   ;; PublicConstructor $instance = new PublicConstructor.<init>();
   ;;@ publicconstructor/PublicConstructor.java:19:9
-  (local.set $$instance (struct.new_with_rtt $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0) (global.get $publicconstructor.PublicConstructor.rtt)))
+  (local.set $$instance (struct.new_with_rtt $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0) (rtt.canon $publicconstructor.PublicConstructor)))
   ;; $instance.$ctor();
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (local.get $$instance))
@@ -91,7 +91,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $publicconstructor.PublicConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $publicconstructor.PublicConstructor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $publicconstructor.PublicConstructor)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPublicconstructor.PublicConstructor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPublicconstructor.PublicConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

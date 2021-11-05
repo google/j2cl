@@ -39,7 +39,7 @@
  (block
   ;; NewInstanceExpr $instance = new NewInstanceExpr.<init>();
   ;;@ newinstance/NewInstanceExpr.java:18:13
-  (local.set $$instance (struct.new_with_rtt $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0) (global.get $newinstance.NewInstanceExpr.rtt)))
+  (local.set $$instance (struct.new_with_rtt $newinstance.NewInstanceExpr (ref.as_non_null (global.get $newinstance.NewInstanceExpr.vtable)) (ref.as_non_null (global.get $newinstance.NewInstanceExpr.itable)) (i32.const 0) (rtt.canon $newinstance.NewInstanceExpr)))
   ;; $instance.$ctor();
   ;;@ newinstance/NewInstanceExpr.java:18:13
   (call $$ctor__void_$p_newinstance_NewInstanceExpr@newinstance.NewInstanceExpr (local.get $$instance))
@@ -106,7 +106,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $newinstance.NewInstanceExpr))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $newinstance.NewInstanceExpr.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $newinstance.NewInstanceExpr)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNewinstance.NewInstanceExpr();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNewinstance.NewInstanceExpr__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

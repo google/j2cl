@@ -39,7 +39,7 @@
  (block
   ;; JsTypeWithNamespace $instance = new JsTypeWithNamespace.<init>();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
-  (local.set $$instance (struct.new_with_rtt $jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.itable)) (i32.const 0) (global.get $jstypewithnamespace.JsTypeWithNamespace.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.itable)) (i32.const 0) (rtt.canon $jstypewithnamespace.JsTypeWithNamespace)))
   ;; $instance.$ctor();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$ctor__void_$p_jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace (local.get $$instance))
@@ -91,7 +91,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypewithnamespace.JsTypeWithNamespace.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypewithnamespace.JsTypeWithNamespace)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithnamespace.JsTypeWithNamespace();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypewithnamespace.JsTypeWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

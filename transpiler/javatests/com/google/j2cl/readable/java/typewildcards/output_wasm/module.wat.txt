@@ -152,7 +152,7 @@
  (block
   ;; GenericType<T> $instance = new GenericType.<init>();
   ;;@ typewildcards/TypeWildCards.java:21:6
-  (local.set $$instance (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (global.get $typewildcards.GenericType.rtt)))
+  (local.set $$instance (struct.new_with_rtt $typewildcards.GenericType (ref.as_non_null (global.get $typewildcards.GenericType.vtable)) (ref.as_non_null (global.get $typewildcards.GenericType.itable)) (i32.const 0) (rtt.canon $typewildcards.GenericType)))
   ;; $instance.$ctor();
   ;;@ typewildcards/TypeWildCards.java:21:6
   (call $$ctor__void_$p_typewildcards_GenericType@typewildcards.GenericType (local.get $$instance))
@@ -204,7 +204,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.GenericType))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.GenericType.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.GenericType)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.GenericType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTypewildcards.GenericType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -241,7 +241,7 @@
  (block
   ;; TypeWildCards $instance = new TypeWildCards.<init>();
   ;;@ typewildcards/TypeWildCards.java:23:13
-  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards (ref.as_non_null (global.get $typewildcards.TypeWildCards.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.itable)) (i32.const 0) (global.get $typewildcards.TypeWildCards.rtt)))
+  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards (ref.as_non_null (global.get $typewildcards.TypeWildCards.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.itable)) (i32.const 0) (rtt.canon $typewildcards.TypeWildCards)))
   ;; $instance.$ctor();
   ;;@ typewildcards/TypeWildCards.java:23:13
   (call $$ctor__void_$p_typewildcards_TypeWildCards@typewildcards.TypeWildCards (local.get $$instance))
@@ -272,7 +272,7 @@
  (param $g (ref null $typewildcards.GenericType))
  ;;@ typewildcards/TypeWildCards.java:24:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards)))
  (block
  )
 )
@@ -285,7 +285,7 @@
  (param $g (ref null $typewildcards.GenericType))
  ;;@ typewildcards/TypeWildCards.java:26:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards)))
  (block
  )
 )
@@ -298,7 +298,7 @@
  (param $g (ref null $typewildcards.GenericType))
  ;;@ typewildcards/TypeWildCards.java:28:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards)))
  (block
  )
 )
@@ -310,7 +310,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:30:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards)))
  (block
   ;; TypeWildCards.this.unbounded(typewildcards.GenericType.$create());
   ;;@ typewildcards/TypeWildCards.java:31:4
@@ -405,7 +405,7 @@
  (local $otherElements (ref null $java.lang.Object))
  (local $integers (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards)))
  (block
   ;; List<Element> elements = null;
   ;;@ typewildcards/TypeWildCards.java:85:4
@@ -434,7 +434,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:102:14
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards)))
  (block
   ;; typewildcards.TypeWildCards.takesRecursiveGeneric(typewildcards.TypeWildCards.Foo.$create(TypeWildCards.this));
   ;;@ typewildcards/TypeWildCards.java:103:4
@@ -471,7 +471,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTypewildcards.TypeWildCards__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -576,7 +576,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ typewildcards/TypeWildCards.java:44:23
-  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards.A (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.itable)) (i32.const 0) (i32.const 0) (global.get $typewildcards.TypeWildCards.A.rtt)))
+  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards.A (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.A.itable)) (i32.const 0) (i32.const 0) (rtt.canon $typewildcards.TypeWildCards.A)))
   ;; $instance.$ctor();
   ;;@ typewildcards/TypeWildCards.java:44:23
   (call $$ctor__void_$p_typewildcards_TypeWildCards_A@typewildcards.TypeWildCards.A (local.get $$instance))
@@ -603,7 +603,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:48:16
  (local $this (ref null $typewildcards.TypeWildCards.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards.A)))
  (block
  )
 )
@@ -637,7 +637,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards.A)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTypewildcards.TypeWildCards.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -911,7 +911,7 @@
  (block
   ;; Foo $instance = new Foo.<init>($outer_this);
   ;;@ typewildcards/TypeWildCards.java:98:8
-  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (global.get $typewildcards.TypeWildCards.Foo.rtt)))
+  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards.Foo (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.Foo.itable)) (i32.const 0) (ref.null $typewildcards.TypeWildCards) (rtt.canon $typewildcards.TypeWildCards.Foo)))
   ;; $instance.$ctor($outer_this);
   ;;@ typewildcards/TypeWildCards.java:98:8
   (call $$ctor__typewildcards_TypeWildCards__void_$p_typewildcards_TypeWildCards_Foo@typewildcards.TypeWildCards.Foo (local.get $$instance)(local.get $$outer_this))
@@ -967,7 +967,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards.Foo)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTypewildcards.TypeWildCards.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1001,7 +1001,7 @@
  (block
   ;; $LambdaImplementor$1<T, R> $instance = new $LambdaImplementor$1.<init>();
   ;;@ typewildcards/TypeWildCards.java:92:12
-  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
+  (local.set $$instance (struct.new_with_rtt $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0) (rtt.canon $typewildcards.TypeWildCards.$LambdaImplementor$1)))
   ;; $instance.$ctor();
   ;;@ typewildcards/TypeWildCards.java:92:12
   (call $$ctor__void_$p_typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $$instance))
@@ -1036,11 +1036,11 @@
  (local $$qualifier (ref null $java.lang.Object))
  (local $$qualifier_1 (ref null $java.lang.Object))
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards.$LambdaImplementor$1)))
  (block
   ;; (Object&HasKey&IntegerSupplier) a = ((T) a);
   ;;@ typewildcards/TypeWildCards.java:92:12
-  (local.set $a_1 (ref.cast (local.get $a) (global.get $java.lang.Object.rtt)))
+  (local.set $a_1 (ref.cast (local.get $a) (rtt.canon $java.lang.Object)))
   (block
    ;; HasKey $qualifier = ((HasKey) a);
    ;;@ typewildcards/TypeWildCards.java:93:14
@@ -1067,7 +1067,7 @@
  (result (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:92:12
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards.$LambdaImplementor$1)))
  (block
   ;; return Function.this.andThen(arg0);
   ;;@ typewildcards/TypeWildCards.java:92:12
@@ -1084,7 +1084,7 @@
  (result (ref null $java.lang.Object))
  ;;@ typewildcards/TypeWildCards.java:92:12
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards.$LambdaImplementor$1)))
  (block
   ;; return Function.this.compose(arg0);
   ;;@ typewildcards/TypeWildCards.java:92:12
@@ -1124,7 +1124,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $typewildcards.TypeWildCards.$LambdaImplementor$1)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.$LambdaImplementor$1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTypewildcards.TypeWildCards.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

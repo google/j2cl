@@ -57,7 +57,7 @@
  (block
   ;; Foo $instance = new Foo.<init>();
   ;;@ srcjar/Foo.java:21:13
-  (local.set $$instance (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (global.get $srcjar.Foo.rtt)))
+  (local.set $$instance (struct.new_with_rtt $srcjar.Foo (ref.as_non_null (global.get $srcjar.Foo.vtable)) (ref.as_non_null (global.get $srcjar.Foo.itable)) (i32.const 0) (rtt.canon $srcjar.Foo)))
   ;; $instance.$ctor();
   ;;@ srcjar/Foo.java:21:13
   (call $$ctor__void_$p_srcjar_Foo@srcjar.Foo (local.get $$instance))
@@ -109,7 +109,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $srcjar.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $srcjar.Foo.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $srcjar.Foo)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSrcjar.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -140,7 +140,7 @@
  (block
   ;; Srcjar $instance = new Srcjar.<init>();
   ;;@ srcjar/Srcjar.java:18:13
-  (local.set $$instance (struct.new_with_rtt $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $srcjar.Srcjar.itable)) (i32.const 0) (global.get $srcjar.Srcjar.rtt)))
+  (local.set $$instance (struct.new_with_rtt $srcjar.Srcjar (ref.as_non_null (global.get $srcjar.Srcjar.vtable)) (ref.as_non_null (global.get $srcjar.Srcjar.itable)) (i32.const 0) (rtt.canon $srcjar.Srcjar)))
   ;; $instance.$ctor();
   ;;@ srcjar/Srcjar.java:18:13
   (call $$ctor__void_$p_srcjar_Srcjar@srcjar.Srcjar (local.get $$instance))
@@ -206,7 +206,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $srcjar.Srcjar))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $srcjar.Srcjar.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $srcjar.Srcjar)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSrcjar.Srcjar();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSrcjar.Srcjar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

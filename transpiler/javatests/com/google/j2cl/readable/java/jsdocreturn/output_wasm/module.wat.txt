@@ -43,7 +43,7 @@
  (block
   ;; JsDocReturn $instance = new JsDocReturn.<init>();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (local.set $$instance (struct.new_with_rtt $jsdocreturn.JsDocReturn (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.vtable)) (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.itable)) (i32.const 0) (global.get $jsdocreturn.JsDocReturn.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsdocreturn.JsDocReturn (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.vtable)) (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.itable)) (i32.const 0) (rtt.canon $jsdocreturn.JsDocReturn)))
   ;; $instance.$ctor();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
   (call $$ctor__void_$p_jsdocreturn_JsDocReturn@jsdocreturn.JsDocReturn (local.get $$instance))
@@ -73,7 +73,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsdocreturn/JsDocReturn.java:19:14
  (local $this (ref null $jsdocreturn.JsDocReturn))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdocreturn.JsDocReturn)))
  (block
  )
 )
@@ -86,7 +86,7 @@
  (result i32)
  ;;@ jsdocreturn/JsDocReturn.java:21:13
  (local $this (ref null $jsdocreturn.JsDocReturn))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdocreturn.JsDocReturn)))
  (block
   ;; return 1;
   ;;@ jsdocreturn/JsDocReturn.java:22:4
@@ -123,7 +123,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdocreturn.JsDocReturn))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsdocreturn.JsDocReturn.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdocreturn.JsDocReturn)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsdocreturn.JsDocReturn();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsdocreturn.JsDocReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

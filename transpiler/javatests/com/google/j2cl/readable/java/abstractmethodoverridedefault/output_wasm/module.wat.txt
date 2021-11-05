@@ -76,7 +76,7 @@
  (block
   ;; AbstractMethodOverrideDefault $instance = new AbstractMethodOverrideDefault.<init>();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
-  (local.set $$instance (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable)) (i32.const 0) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.rtt)))
+  (local.set $$instance (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.itable)) (i32.const 0) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault)))
   ;; $instance.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:18:13
   (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault@abstractmethodoverridedefault.AbstractMethodOverrideDefault (local.get $$instance))
@@ -128,7 +128,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -265,7 +265,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.A)))
  (block
   ;; I.this.bar();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:31:24
@@ -336,7 +336,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:39:16
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.B)))
  (block
   ;; if (false) {
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:40:6
@@ -403,7 +403,7 @@
  (block
   ;; C $instance = new C.<init>();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
-  (local.set $$instance (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable)) (i32.const 0) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
+  (local.set $$instance (struct.new_with_rtt $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.vtable)) (ref.as_non_null (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.itable)) (i32.const 0) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)))
   ;; $instance.$ctor();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:46:15
   (call $$ctor__void_$p_abstractmethodoverridedefault_AbstractMethodOverrideDefault_C@abstractmethodoverridedefault.AbstractMethodOverrideDefault.C (local.get $$instance))
@@ -433,7 +433,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:47:16
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)))
  (block
  )
 )
@@ -445,7 +445,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:49:16
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)))
  (block
   ;; I.this.bar();
   ;;@ abstractmethodoverridedefault/AbstractMethodOverrideDefault.java:50:6
@@ -482,7 +482,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractmethodoverridedefault.AbstractMethodOverrideDefault.C)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAbstractmethodoverridedefault.AbstractMethodOverrideDefault.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

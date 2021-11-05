@@ -65,7 +65,7 @@
  (block
   ;; Color $instance = new Color.<init>($name,$ordinal);
   ;;@ jstypeenum/Color.java:21:12
-  (local.set $$instance (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (global.get $jstypeenum.Color.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jstypeenum.Color (ref.as_non_null (global.get $jstypeenum.Color.vtable)) (ref.as_non_null (global.get $jstypeenum.Color.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (rtt.canon $jstypeenum.Color)))
   ;; $instance.$ctor($name,$ordinal);
   ;;@ jstypeenum/Color.java:21:12
   (call $$ctor__java_lang_String__int__void_$p_jstypeenum_Color@jstypeenum.Color (local.get $$instance)(local.get $$name)(local.get $$ordinal))
@@ -116,7 +116,7 @@
   )
   ;; return ((Color) javaemul.internal.Enums.getValueFromNameAndMap(name,jstypeenum.Color.namesToValuesMap));
   ;;@ jstypeenum/Color.java:21:12
-  (return (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__jstypeenum_Color_)) (global.get $jstypeenum.Color.rtt)))
+  (return (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__jstypeenum_Color_)) (rtt.canon $jstypeenum.Color)))
  )
 )
 
@@ -174,7 +174,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeenum.Color))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jstypeenum.Color.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypeenum.Color)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypeenum.Color();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypeenum.Color__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

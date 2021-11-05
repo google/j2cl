@@ -141,7 +141,7 @@
  (block
   ;; GenericInterfaceGenericImpl<T> $instance = new GenericInterfaceGenericImpl.<init>();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
-  (local.set $$instance (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.itable)) (i32.const 0) (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.rtt)))
+  (local.set $$instance (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceGenericImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.itable)) (i32.const 0) (rtt.canon $implementsgenericinterface.GenericInterfaceGenericImpl)))
   ;; $instance.$ctor();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:22:6
   (call $$ctor__void_$p_implementsgenericinterface_GenericInterfaceGenericImpl@implementsgenericinterface.GenericInterfaceGenericImpl (local.get $$instance))
@@ -193,7 +193,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceGenericImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $implementsgenericinterface.GenericInterfaceGenericImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $implementsgenericinterface.GenericInterfaceGenericImpl)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceGenericImpl();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImplementsgenericinterface.GenericInterfaceGenericImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -224,7 +224,7 @@
  (block
   ;; GenericInterfaceImpl $instance = new GenericInterfaceImpl.<init>();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
-  (local.set $$instance (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.itable)) (i32.const 0) (global.get $implementsgenericinterface.GenericInterfaceImpl.rtt)))
+  (local.set $$instance (struct.new_with_rtt $implementsgenericinterface.GenericInterfaceImpl (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.vtable)) (ref.as_non_null (global.get $implementsgenericinterface.GenericInterfaceImpl.itable)) (i32.const 0) (rtt.canon $implementsgenericinterface.GenericInterfaceImpl)))
   ;; $instance.$ctor();
   ;;@ implementsgenericinterface/GenericInterfaceImpl.java:24:13
   (call $$ctor__void_$p_implementsgenericinterface_GenericInterfaceImpl@implementsgenericinterface.GenericInterfaceImpl (local.get $$instance))
@@ -276,7 +276,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implementsgenericinterface.GenericInterfaceImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $implementsgenericinterface.GenericInterfaceImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $implementsgenericinterface.GenericInterfaceImpl)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImplementsgenericinterface.GenericInterfaceImpl();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImplementsgenericinterface.GenericInterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

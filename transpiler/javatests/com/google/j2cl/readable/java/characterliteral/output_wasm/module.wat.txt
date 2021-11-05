@@ -41,7 +41,7 @@
  (block
   ;; CharacterLiteral $instance = new CharacterLiteral.<init>();
   ;;@ characterliteral/CharacterLiteral.java:18:13
-  (local.set $$instance (struct.new_with_rtt $characterliteral.CharacterLiteral (ref.as_non_null (global.get $characterliteral.CharacterLiteral.vtable)) (ref.as_non_null (global.get $characterliteral.CharacterLiteral.itable)) (i32.const 0) (global.get $characterliteral.CharacterLiteral.rtt)))
+  (local.set $$instance (struct.new_with_rtt $characterliteral.CharacterLiteral (ref.as_non_null (global.get $characterliteral.CharacterLiteral.vtable)) (ref.as_non_null (global.get $characterliteral.CharacterLiteral.itable)) (i32.const 0) (rtt.canon $characterliteral.CharacterLiteral)))
   ;; $instance.$ctor();
   ;;@ characterliteral/CharacterLiteral.java:18:13
   (call $$ctor__void_$p_characterliteral_CharacterLiteral@characterliteral.CharacterLiteral (local.get $$instance))
@@ -72,7 +72,7 @@
  ;;@ characterliteral/CharacterLiteral.java:20:14
  (local $a i32)
  (local $this (ref null $characterliteral.CharacterLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $characterliteral.CharacterLiteral.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $characterliteral.CharacterLiteral)))
  (block
   ;; char a = 32;
   ;;@ characterliteral/CharacterLiteral.java:21:4
@@ -466,7 +466,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $characterliteral.CharacterLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $characterliteral.CharacterLiteral.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $characterliteral.CharacterLiteral)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCharacterliteral.CharacterLiteral();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCharacterliteral.CharacterLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

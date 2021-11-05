@@ -41,7 +41,7 @@
  (block
   ;; LongParameterSignature $instance = new LongParameterSignature.<init>();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
-  (local.set $$instance (struct.new_with_rtt $longparametersignature.LongParameterSignature (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.vtable)) (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.itable)) (i32.const 0) (global.get $longparametersignature.LongParameterSignature.rtt)))
+  (local.set $$instance (struct.new_with_rtt $longparametersignature.LongParameterSignature (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.vtable)) (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.itable)) (i32.const 0) (rtt.canon $longparametersignature.LongParameterSignature)))
   ;; $instance.$ctor();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (call $$ctor__void_$p_longparametersignature_LongParameterSignature@longparametersignature.LongParameterSignature (local.get $$instance))
@@ -72,7 +72,7 @@
  (param $foo i64)
  ;;@ longparametersignature/LongParameterSignature.java:19:14
  (local $this (ref null $longparametersignature.LongParameterSignature))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $longparametersignature.LongParameterSignature.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $longparametersignature.LongParameterSignature)))
  (block
  )
 )
@@ -106,7 +106,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $longparametersignature.LongParameterSignature))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $longparametersignature.LongParameterSignature.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $longparametersignature.LongParameterSignature)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLongparametersignature.LongParameterSignature();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLongparametersignature.LongParameterSignature__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

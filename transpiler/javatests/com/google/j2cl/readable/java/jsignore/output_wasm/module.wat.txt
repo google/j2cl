@@ -42,7 +42,7 @@
  (block
   ;; JsIgnoreExample $instance = new JsIgnoreExample.<init>();
   ;;@ jsignore/JsIgnoreExample.java:22:13
-  (local.set $$instance (struct.new_with_rtt $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $jsignore.JsIgnoreExample.itable)) (i32.const 0) (global.get $jsignore.JsIgnoreExample.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $jsignore.JsIgnoreExample.itable)) (i32.const 0) (rtt.canon $jsignore.JsIgnoreExample)))
   ;; $instance.$ctor();
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (call $$ctor__void_$p_jsignore_JsIgnoreExample@jsignore.JsIgnoreExample (local.get $$instance))
@@ -123,7 +123,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsignore.JsIgnoreExample))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsignore.JsIgnoreExample.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsignore.JsIgnoreExample)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsignore.JsIgnoreExample();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsignore.JsIgnoreExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

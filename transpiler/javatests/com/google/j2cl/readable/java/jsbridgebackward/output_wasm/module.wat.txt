@@ -103,7 +103,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
-  (local.set $$instance (struct.new_with_rtt $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $jsbridgebackward.A.itable)) (i32.const 0) (global.get $jsbridgebackward.A.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsbridgebackward.A (ref.as_non_null (global.get $jsbridgebackward.A.vtable)) (ref.as_non_null (global.get $jsbridgebackward.A.itable)) (i32.const 0) (rtt.canon $jsbridgebackward.A)))
   ;; $instance.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:25:6
   (call $$ctor__void_$p_jsbridgebackward_A@jsbridgebackward.A (local.get $$instance))
@@ -135,7 +135,7 @@
  (result i32)
  ;;@ jsbridgebackward/InterfaceImpl.java:26:13
  (local $this (ref null $jsbridgebackward.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsbridgebackward.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsbridgebackward.A)))
  (block
   ;; return a;
   ;;@ jsbridgebackward/InterfaceImpl.java:27:4
@@ -172,7 +172,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.A))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsbridgebackward.A.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsbridgebackward.A)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgebackward.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -204,7 +204,7 @@
  (block
   ;; InterfaceImpl $instance = new InterfaceImpl.<init>();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
-  (local.set $$instance (struct.new_with_rtt $jsbridgebackward.InterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.itable)) (i32.const 0) (global.get $jsbridgebackward.InterfaceImpl.rtt)))
+  (local.set $$instance (struct.new_with_rtt $jsbridgebackward.InterfaceImpl (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.vtable)) (ref.as_non_null (global.get $jsbridgebackward.InterfaceImpl.itable)) (i32.const 0) (rtt.canon $jsbridgebackward.InterfaceImpl)))
   ;; $instance.$ctor();
   ;;@ jsbridgebackward/InterfaceImpl.java:31:13
   (call $$ctor__void_$p_jsbridgebackward_InterfaceImpl@jsbridgebackward.InterfaceImpl (local.get $$instance))
@@ -256,7 +256,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.InterfaceImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $jsbridgebackward.InterfaceImpl.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsbridgebackward.InterfaceImpl)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.InterfaceImpl();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgebackward.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

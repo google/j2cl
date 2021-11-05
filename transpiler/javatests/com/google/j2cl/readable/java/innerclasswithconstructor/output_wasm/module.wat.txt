@@ -58,7 +58,7 @@
  (block
   ;; InnerClassWithConstructor $instance = new InnerClassWithConstructor.<init>();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
-  (local.set $$instance (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.itable)) (i32.const 0) (i32.const 0) (global.get $innerclasswithconstructor.InnerClassWithConstructor.rtt)))
+  (local.set $$instance (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.itable)) (i32.const 0) (i32.const 0) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor)))
   ;; $instance.$ctor();
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:18:13
   (call $$ctor__void_$p_innerclasswithconstructor_InnerClassWithConstructor@innerclasswithconstructor.InnerClassWithConstructor (local.get $$instance))
@@ -110,7 +110,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclasswithconstructor.InnerClassWithConstructor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -145,7 +145,7 @@
  (block
   ;; InnerClass $instance = new InnerClass.<init>($outer_this,b);
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
-  (local.set $$instance (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable)) (i32.const 0) (ref.null $innerclasswithconstructor.InnerClassWithConstructor) (i32.const 0) (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable)) (i32.const 0) (ref.null $innerclasswithconstructor.InnerClassWithConstructor) (i32.const 0) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass)))
   ;; $instance.$ctor($outer_this,b);
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:24:11
   (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__int__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $$instance)(local.get $$outer_this)(local.get $b))
@@ -186,7 +186,7 @@
  (block
   ;; InnerClass $instance = new InnerClass.<init>($outer_this);
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
-  (local.set $$instance (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable)) (i32.const 0) (ref.null $innerclasswithconstructor.InnerClassWithConstructor) (i32.const 0) (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $innerclasswithconstructor.InnerClassWithConstructor.InnerClass (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.vtable)) (ref.as_non_null (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.itable)) (i32.const 0) (ref.null $innerclasswithconstructor.InnerClassWithConstructor) (i32.const 0) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass)))
   ;; $instance.$ctor($outer_this);
   ;;@ innerclasswithconstructor/InnerClassWithConstructor.java:28:11
   (call $$ctor__innerclasswithconstructor_InnerClassWithConstructor__void_$p_innerclasswithconstructor_InnerClassWithConstructor_InnerClass@innerclasswithconstructor.InnerClassWithConstructor.InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -239,7 +239,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $innerclasswithconstructor.InnerClassWithConstructor.InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $innerclasswithconstructor.InnerClassWithConstructor.InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $innerclasswithconstructor.InnerClassWithConstructor.InnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInnerclasswithconstructor.InnerClassWithConstructor.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -41,7 +41,7 @@
  (block
   ;; ImplicitParenthesis $instance = new ImplicitParenthesis.<init>();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
-  (local.set $$instance (struct.new_with_rtt $implicitparenthesis.ImplicitParenthesis (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.itable)) (i32.const 0) (global.get $implicitparenthesis.ImplicitParenthesis.rtt)))
+  (local.set $$instance (struct.new_with_rtt $implicitparenthesis.ImplicitParenthesis (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.itable)) (i32.const 0) (rtt.canon $implicitparenthesis.ImplicitParenthesis)))
   ;; $instance.$ctor();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
   (call $$ctor__void_$p_implicitparenthesis_ImplicitParenthesis@implicitparenthesis.ImplicitParenthesis (local.get $$instance))
@@ -71,7 +71,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ implicitparenthesis/ImplicitParenthesis.java:23:14
  (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $implicitparenthesis.ImplicitParenthesis.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $implicitparenthesis.ImplicitParenthesis)))
  (block
   ;; implicitparenthesis.ImplicitParenthesis.examples();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:24:4
@@ -269,7 +269,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $implicitparenthesis.ImplicitParenthesis.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $implicitparenthesis.ImplicitParenthesis)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImplicitparenthesis.ImplicitParenthesis();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImplicitparenthesis.ImplicitParenthesis__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

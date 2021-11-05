@@ -41,7 +41,7 @@
  (block
   ;; ClassLiteral $instance = new ClassLiteral.<init>();
   ;;@ classliteral/ClassLiteral.java:18:13
-  (local.set $$instance (struct.new_with_rtt $classliteral.ClassLiteral (ref.as_non_null (global.get $classliteral.ClassLiteral.vtable)) (ref.as_non_null (global.get $classliteral.ClassLiteral.itable)) (i32.const 0) (global.get $classliteral.ClassLiteral.rtt)))
+  (local.set $$instance (struct.new_with_rtt $classliteral.ClassLiteral (ref.as_non_null (global.get $classliteral.ClassLiteral.vtable)) (ref.as_non_null (global.get $classliteral.ClassLiteral.itable)) (i32.const 0) (rtt.canon $classliteral.ClassLiteral)))
   ;; $instance.$ctor();
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral (local.get $$instance))
@@ -73,7 +73,7 @@
  (local $o (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $classliteral.ClassLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $classliteral.ClassLiteral.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $classliteral.ClassLiteral)))
  (block
   ;; Object o = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
   ;;@ classliteral/ClassLiteral.java:21:4
@@ -116,7 +116,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $classliteral.ClassLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $classliteral.ClassLiteral.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $classliteral.ClassLiteral)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -42,7 +42,7 @@
  (block
   ;; ValueOfNullable $instance = new ValueOfNullable.<init>();
   ;;@ valueofnullable/ValueOfNullable.java:18:13
-  (local.set $$instance (struct.new_with_rtt $valueofnullable.ValueOfNullable (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.vtable)) (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (ref.null $java.lang.String) (global.get $valueofnullable.ValueOfNullable.rtt)))
+  (local.set $$instance (struct.new_with_rtt $valueofnullable.ValueOfNullable (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.vtable)) (ref.as_non_null (global.get $valueofnullable.ValueOfNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (ref.null $java.lang.String) (rtt.canon $valueofnullable.ValueOfNullable)))
   ;; $instance.$ctor();
   ;;@ valueofnullable/ValueOfNullable.java:18:13
   (call $$ctor__void_$p_valueofnullable_ValueOfNullable@valueofnullable.ValueOfNullable (local.get $$instance))
@@ -120,7 +120,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $valueofnullable.ValueOfNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $valueofnullable.ValueOfNullable.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $valueofnullable.ValueOfNullable)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getValueofnullable.ValueOfNullable();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getValueofnullable.ValueOfNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

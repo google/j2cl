@@ -136,7 +136,7 @@
  (block
   ;; SimpleLocalClass $instance = new SimpleLocalClass.<init>();
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
-  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.itable)) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.itable)) (i32.const 0) (rtt.canon $simplelocalclass.SimpleLocalClass)))
   ;; $instance.$ctor();
   ;;@ simplelocalclass/SimpleLocalClass.java:18:13
   (call $$ctor__void_$p_simplelocalclass_SimpleLocalClass@simplelocalclass.SimpleLocalClass (local.get $$instance))
@@ -169,7 +169,7 @@
  (local $localVar i32)
  (local $$qualifier (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass)))
  (block
   ;; int localVar = 1;
   ;;@ simplelocalclass/SimpleLocalClass.java:20:4
@@ -196,7 +196,7 @@
  ;;@ simplelocalclass/SimpleLocalClass.java:34:14
  (local $localVar i32)
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass)))
  (block
   ;; int localVar = 1;
   ;;@ simplelocalclass/SimpleLocalClass.java:35:4
@@ -211,7 +211,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ simplelocalclass/SimpleLocalClass.java:42:14
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass)))
  (block
  )
 )
@@ -245,7 +245,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplelocalclass.SimpleLocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -283,7 +283,7 @@
  (block
   ;; InnerClass $instance = new $1InnerClass.<init>($outer_this,$captured_localVar,$captured_p);
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
-  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (rtt.canon $simplelocalclass.SimpleLocalClass.1InnerClass)))
   ;; $instance.$ctor($outer_this,$captured_localVar,$captured_p);
   ;;@ simplelocalclass/SimpleLocalClass.java:21:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__int__int__void_$p_simplelocalclass_SimpleLocalClass_1InnerClass@simplelocalclass.SimpleLocalClass.1InnerClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar)(local.get $$captured_p))
@@ -326,7 +326,7 @@
  (result i32)
  ;;@ simplelocalclass/SimpleLocalClass.java:22:17
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass.1InnerClass)))
  (block
   ;; return ($1InnerClass.this.localVar + $1InnerClass.this.p);
   ;;@ simplelocalclass/SimpleLocalClass.java:23:8
@@ -363,7 +363,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass.1InnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -396,7 +396,7 @@
  (block
   ;; InnerClassWithoutCaptures $instance = new $1InnerClassWithoutCaptures.<init>($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
-  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (rtt.canon $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures)))
   ;; $instance.$ctor($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:29:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1InnerClassWithoutCaptures@simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures (local.get $$instance)(local.get $$outer_this))
@@ -452,7 +452,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1InnerClassWithoutCaptures__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -488,7 +488,7 @@
  (block
   ;; InnerClass $instance = new $2InnerClass.<init>($outer_this,$captured_localVar);
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
-  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.2InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (i32.const 0) (i32.const 0) (rtt.canon $simplelocalclass.SimpleLocalClass.2InnerClass)))
   ;; $instance.$ctor($outer_this,$captured_localVar);
   ;;@ simplelocalclass/SimpleLocalClass.java:36:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__int__void_$p_simplelocalclass_SimpleLocalClass_2InnerClass@simplelocalclass.SimpleLocalClass.2InnerClass (local.get $$instance)(local.get $$outer_this)(local.get $$captured_localVar))
@@ -562,7 +562,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.2InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.2InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass.2InnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.2InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplelocalclass.SimpleLocalClass.2InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -595,7 +595,7 @@
  (block
   ;; Abc$InnerClass $instance = new $1Abc$InnerClass.<init>($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
-  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1Abc$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (rtt.canon $simplelocalclass.SimpleLocalClass.1Abc$InnerClass)))
   ;; $instance.$ctor($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:43:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Abc$InnerClass@simplelocalclass.SimpleLocalClass.1Abc$InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -651,7 +651,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Abc$InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1Abc$InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass.1Abc$InnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1Abc$InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1Abc$InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -684,7 +684,7 @@
  (block
   ;; Klm$InnerClass $instance = new $1Klm$InnerClass.<init>($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
-  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $simplelocalclass.SimpleLocalClass.1Klm$InnerClass (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.vtable)) (ref.as_non_null (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.itable)) (i32.const 0) (ref.null $simplelocalclass.SimpleLocalClass) (rtt.canon $simplelocalclass.SimpleLocalClass.1Klm$InnerClass)))
   ;; $instance.$ctor($outer_this);
   ;;@ simplelocalclass/SimpleLocalClass.java:44:10
   (call $$ctor__simplelocalclass_SimpleLocalClass__void_$p_simplelocalclass_SimpleLocalClass_1Klm$InnerClass@simplelocalclass.SimpleLocalClass.1Klm$InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -740,7 +740,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplelocalclass.SimpleLocalClass.1Klm$InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $simplelocalclass.SimpleLocalClass.1Klm$InnerClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplelocalclass.SimpleLocalClass.1Klm$InnerClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplelocalclass.SimpleLocalClass.1Klm$InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplelocalclass.SimpleLocalClass.1Klm$InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

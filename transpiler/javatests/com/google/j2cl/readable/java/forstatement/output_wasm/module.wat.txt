@@ -41,7 +41,7 @@
  (block
   ;; ForStatement $instance = new ForStatement.<init>();
   ;;@ forstatement/ForStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $forstatement.ForStatement.itable)) (i32.const 0) (global.get $forstatement.ForStatement.rtt)))
+  (local.set $$instance (struct.new_with_rtt $forstatement.ForStatement (ref.as_non_null (global.get $forstatement.ForStatement.vtable)) (ref.as_non_null (global.get $forstatement.ForStatement.itable)) (i32.const 0) (rtt.canon $forstatement.ForStatement)))
   ;; $instance.$ctor();
   ;;@ forstatement/ForStatement.java:18:13
   (call $$ctor__void_$p_forstatement_ForStatement@forstatement.ForStatement (local.get $$instance))
@@ -77,7 +77,7 @@
  (local $a i32)
  (local $b i32)
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $forstatement.ForStatement)))
  (block
   ;; LOOP: for (int i = 0,int count = 0;(i < 100);(i = (i + 1))) {
   ;;@ forstatement/ForStatement.java:20:4
@@ -213,7 +213,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $forstatement.ForStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $forstatement.ForStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $forstatement.ForStatement)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getForstatement.ForStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getForstatement.ForStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -43,7 +43,7 @@
  (block
   ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(s,t);
   ;;@ genericconstructor/GenericConstructor.java:20:13
-  (local.set $$instance (struct.new_with_rtt $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0) (global.get $genericconstructor.GenericConstructor.rtt)))
+  (local.set $$instance (struct.new_with_rtt $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0) (rtt.canon $genericconstructor.GenericConstructor)))
   ;; $instance.$ctor(s,t);
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (local.get $$instance)(local.get $s)(local.get $t))
@@ -78,7 +78,7 @@
  (block
   ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(t);
   ;;@ genericconstructor/GenericConstructor.java:23:13
-  (local.set $$instance (struct.new_with_rtt $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0) (global.get $genericconstructor.GenericConstructor.rtt)))
+  (local.set $$instance (struct.new_with_rtt $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0) (rtt.canon $genericconstructor.GenericConstructor)))
   ;; $instance.$ctor(t);
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (call $$ctor__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (local.get $$instance)(local.get $t))
@@ -109,7 +109,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ genericconstructor/GenericConstructor.java:25:14
  (local $this (ref null $genericconstructor.GenericConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericconstructor.GenericConstructor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $genericconstructor.GenericConstructor)))
  (block
   ;; genericconstructor.GenericConstructor.$create(java.lang.Exception.$create(),java.lang.Error.$create());
   ;;@ genericconstructor/GenericConstructor.java:26:4
@@ -149,7 +149,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericconstructor.GenericConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $genericconstructor.GenericConstructor.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $genericconstructor.GenericConstructor)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericconstructor.GenericConstructor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericconstructor.GenericConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

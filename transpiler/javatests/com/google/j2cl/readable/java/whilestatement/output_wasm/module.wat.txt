@@ -41,7 +41,7 @@
  (block
   ;; WhileStatement $instance = new WhileStatement.<init>();
   ;;@ whilestatement/WhileStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $whilestatement.WhileStatement (ref.as_non_null (global.get $whilestatement.WhileStatement.vtable)) (ref.as_non_null (global.get $whilestatement.WhileStatement.itable)) (i32.const 0) (global.get $whilestatement.WhileStatement.rtt)))
+  (local.set $$instance (struct.new_with_rtt $whilestatement.WhileStatement (ref.as_non_null (global.get $whilestatement.WhileStatement.vtable)) (ref.as_non_null (global.get $whilestatement.WhileStatement.itable)) (i32.const 0) (rtt.canon $whilestatement.WhileStatement)))
   ;; $instance.$ctor();
   ;;@ whilestatement/WhileStatement.java:18:13
   (call $$ctor__void_$p_whilestatement_WhileStatement@whilestatement.WhileStatement (local.get $$instance))
@@ -72,7 +72,7 @@
  ;;@ whilestatement/WhileStatement.java:19:14
  (local $count i32)
  (local $this (ref null $whilestatement.WhileStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $whilestatement.WhileStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $whilestatement.WhileStatement)))
  (block
   ;; int count = 0;
   ;;@ whilestatement/WhileStatement.java:20:4
@@ -125,7 +125,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $whilestatement.WhileStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $whilestatement.WhileStatement.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $whilestatement.WhileStatement)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getWhilestatement.WhileStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getWhilestatement.WhileStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

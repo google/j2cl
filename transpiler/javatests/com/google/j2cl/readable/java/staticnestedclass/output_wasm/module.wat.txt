@@ -57,7 +57,7 @@
  (block
   ;; StaticNestedClassParent $instance = new StaticNestedClassParent.<init>();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
-  (local.set $$instance (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.itable)) (i32.const 0) (global.get $staticnestedclass.StaticNestedClassParent.rtt)))
+  (local.set $$instance (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.itable)) (i32.const 0) (rtt.canon $staticnestedclass.StaticNestedClassParent)))
   ;; $instance.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:18:13
   (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent@staticnestedclass.StaticNestedClassParent (local.get $$instance))
@@ -109,7 +109,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticnestedclass.StaticNestedClassParent))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticnestedclass.StaticNestedClassParent.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticnestedclass.StaticNestedClassParent)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticnestedclass.StaticNestedClassParent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticnestedclass.StaticNestedClassParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -140,7 +140,7 @@
  (block
   ;; StaticNestedClass $instance = new StaticNestedClass.<init>();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
-  (local.set $$instance (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable)) (i32.const 0) (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.rtt)))
+  (local.set $$instance (struct.new_with_rtt $staticnestedclass.StaticNestedClassParent.StaticNestedClass (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.vtable)) (ref.as_non_null (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.itable)) (i32.const 0) (rtt.canon $staticnestedclass.StaticNestedClassParent.StaticNestedClass)))
   ;; $instance.$ctor();
   ;;@ staticnestedclass/StaticNestedClassParent.java:19:22
   (call $$ctor__void_$p_staticnestedclass_StaticNestedClassParent_StaticNestedClass@staticnestedclass.StaticNestedClassParent.StaticNestedClass (local.get $$instance))
@@ -192,7 +192,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticnestedclass.StaticNestedClassParent.StaticNestedClass))
- (local.set $this (ref.cast (local.get $this.untyped) (global.get $staticnestedclass.StaticNestedClassParent.StaticNestedClass.rtt)))
+ (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticnestedclass.StaticNestedClassParent.StaticNestedClass)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticnestedclass.StaticNestedClassParent.StaticNestedClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticnestedclass.StaticNestedClassParent.StaticNestedClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
