@@ -46,9 +46,11 @@ open class SwitchStatement {
   private fun testSwitchVariableDeclarations() {
    SWITCH@ do when (3) {
     1 ->
-     val unassigned: Int; val unassigned2: Int
+     val unassigned: Int
+     val unassigned2: Int
      val i: Int = 0
-     val j: Int = 2; val b: Int = j + 1
+     val j: Int = 2
+     val b: Int = j + 1
      break@SWITCH
     3 ->
      i = 3

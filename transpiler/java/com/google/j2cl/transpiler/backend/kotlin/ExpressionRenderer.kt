@@ -234,7 +234,7 @@ private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
 private fun Renderer.renderVariableDeclarationExpression(
   expression: VariableDeclarationExpression
 ) {
-  renderSeparatedWith(expression.fragments, "; ") {
+  renderSeparatedWith(expression.fragments, "\n") {
     render(if (it.variable.isFinal) "val " else "var ")
     renderVariableDeclarationFragment(it)
   }
