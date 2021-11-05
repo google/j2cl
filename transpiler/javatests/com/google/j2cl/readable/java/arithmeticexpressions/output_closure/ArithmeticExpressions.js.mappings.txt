@@ -34,10 +34,13 @@
 [i = (int) 9223372036854775807L;] => [i = -1;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [f = (float) 9223372036854775807L;] => [f = 9.223372036854776E18;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [d = (double) 9223372036854775807L;] => [d = 9.223372036854776E18;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
+[Object o = c;] => [let o = Character.m_valueOf__char(c);] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
+[o] => [o] "o"
+[s = (short) (char) o;] => [s = $Primitives.narrowCharToShort(/**@type {Character}*/ ($Casts.$to(o, Character)).m_charValue__());] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [testPrimitives] => [m_testPrimitives__]
 [{
     int a = 10,
-...    q = 3 >>> 2;
+...    byte x = (byte) (((short) a + (byte) (short) b) * (short) (byte) c);
   }] => [let /** number */ $value, /** number */ $value_1;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [int a = 10,
         b = a++,
@@ -77,6 +80,8 @@
 [int q = 3 >> 2;] => [let q = 3 >> 2;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [q] => [q] "q"
 [q = 3 >>> 2;] => [q = 3 >>> 2 | 0;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[byte x = (byte) (((short) a + (byte) (short) b) * (short) (byte) c);] => [let x = $Primitives.narrowIntToByte(Math.imul($Primitives.narrowIntToShort(a) + $Primitives.narrowIntToByte($Primitives.narrowIntToShort(b)), $Primitives.narrowIntToShort($Primitives.narrowIntToByte(c))));] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[x] => [x] "x"
 [testCompoundArray] => [m_testCompoundArray__]
 [int[] ints = null;] => [let ints = null;] "arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"

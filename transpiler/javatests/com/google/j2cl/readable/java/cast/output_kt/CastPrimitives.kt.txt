@@ -9,55 +9,55 @@ open class CastPrimitives {
   var l: Long = 1L
   var f: Float = 1.1f
   var d: Double = 1.1
-  b = b as Byte
-  c = b as Char
-  s = b as Short
-  i = b as Int
-  l = b as Long
-  f = b as Float
-  d = b as Double
-  b = c as Byte
-  c = c as Char
-  s = c as Short
-  i = c as Int
-  l = c as Long
-  f = c as Float
-  d = c as Double
-  b = s as Byte
-  c = s as Char
-  s = s as Short
-  i = s as Int
-  l = s as Long
-  f = s as Float
-  d = s as Double
-  b = i as Byte
-  c = i as Char
-  s = i as Short
-  i = i as Int
-  l = i as Long
-  f = i as Float
-  d = i as Double
-  b = l as Byte
-  c = l as Char
-  s = l as Short
-  i = l as Int
-  l = l as Long
-  f = l as Float
-  d = l as Double
-  b = f as Byte
-  c = f as Char
-  s = f as Short
-  i = f as Int
-  l = f as Long
-  f = f as Float
-  d = f as Double
-  b = d as Byte
-  c = d as Char
-  s = d as Short
-  i = d as Int
-  l = d as Long
-  f = d as Float
-  d = d as Double
+  b = b.toByte()
+  c = b.toChar()
+  s = b.toShort()
+  i = b.toInt()
+  l = b.toLong()
+  f = b.toFloat()
+  d = b.toDouble()
+  b = c.code.toByte()
+  c = c.code.toChar()
+  s = c.code.toShort()
+  i = c.code
+  l = c.code.toLong()
+  f = c.code.toFloat()
+  d = c.code.toDouble()
+  b = s.toByte()
+  c = s.toChar()
+  s = s.toShort()
+  i = s.toInt()
+  l = s.toLong()
+  f = s.toFloat()
+  d = s.toDouble()
+  b = i.toByte()
+  c = i.toChar()
+  s = i.toShort()
+  i = i.toInt()
+  l = i.toLong()
+  f = i.toFloat()
+  d = i.toDouble()
+  b = l.toByte()
+  c = l.toChar()
+  s = l.toShort()
+  i = l.toInt()
+  l = l.toLong()
+  f = l.toFloat()
+  d = l.toDouble()
+  b = f.toByte()
+  c = f.toChar()
+  s = f.toShort()
+  i = f.toInt()
+  l = f.toLong()
+  f = f.toFloat()
+  d = f.toDouble()
+  b = d.toByte()
+  c = d.toChar()
+  s = d.toShort()
+  i = d.toInt()
+  l = d.toLong()
+  f = d.toFloat()
+  d = d.toDouble()
  }
 
  open fun testReferenceToPrimitive() {
@@ -73,12 +73,12 @@ open class CastPrimitives {
  }
 
  open fun testUnboxAndWiden() {
-  val boxedByte: Byte? = Byte.valueOf(0 as Byte)
-  val s: Short = boxedByte as Short
-  val i: Int = boxedByte as Int
-  val l: Long = boxedByte as Long
-  val f: Float = boxedByte as Float
-  val d: Double = boxedByte as Double
+  val boxedByte: Byte? = Byte.valueOf(0.toByte())
+  val s: Short = boxedByte.toShort()
+  val i: Int = boxedByte.toInt()
+  val l: Long = boxedByte.toLong()
+  val f: Float = boxedByte.toFloat()
+  val d: Double = boxedByte.toDouble()
  }
 
  open fun testImplicitArgumentCasts() {
@@ -89,20 +89,20 @@ open class CastPrimitives {
   var l: Long = 9223372036854775807L
   var f: Float = 3.4028235E38f
   var d: Double = 1.7976931348623157E308
-  cast.CastPrimitives.getShort(b as Short)
-  cast.CastPrimitives.getInt(b as Int)
-  cast.CastPrimitives.getLong(b as Long)
-  cast.CastPrimitives.getFloat(b as Float)
-  cast.CastPrimitives.getDouble(b as Double)
-  cast.CastPrimitives.getFloat(l as Float)
-  cast.CastPrimitives.getDouble(l as Double)
-  cast.CastPrimitives.getDouble(f as Double)
-  cast.CastPrimitives.IntValueHolder(b as Int)
-  cast.CastPrimitives.IntValueHolder(c as Int)
-  cast.CastPrimitives.IntValueHolder(s as Int)
-  cast.CastPrimitives.LongValueHolder(b as Long)
-  cast.CastPrimitives.LongValueHolder(c as Long)
-  cast.CastPrimitives.LongValueHolder(i as Long)
+  cast.CastPrimitives.getShort(b.toShort())
+  cast.CastPrimitives.getInt(b.toInt())
+  cast.CastPrimitives.getLong(b.toLong())
+  cast.CastPrimitives.getFloat(b.toFloat())
+  cast.CastPrimitives.getDouble(b.toDouble())
+  cast.CastPrimitives.getFloat(l.toFloat())
+  cast.CastPrimitives.getDouble(l.toDouble())
+  cast.CastPrimitives.getDouble(f.toDouble())
+  cast.CastPrimitives.IntValueHolder(b.toInt())
+  cast.CastPrimitives.IntValueHolder(c.code)
+  cast.CastPrimitives.IntValueHolder(s.toInt())
+  cast.CastPrimitives.LongValueHolder(b.toLong())
+  cast.CastPrimitives.LongValueHolder(c.code.toLong())
+  cast.CastPrimitives.LongValueHolder(i.toLong())
  }
 
  open fun testImplicitLongAssignmentCasts() {
@@ -115,11 +115,11 @@ open class CastPrimitives {
   val fdouble: Double = 17.0
   var tlong: Long = 0L
   if (true) {
-   tlong = fbyte as Long
+   tlong = fbyte.toLong()
    tlong = flong
   }
   if (true) {
-   tlong = fint as Long
+   tlong = fint.toLong()
    tlong += fint
    tlong <<= fint
   }

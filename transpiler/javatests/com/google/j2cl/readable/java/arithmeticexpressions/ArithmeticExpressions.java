@@ -33,6 +33,8 @@ public class ArithmeticExpressions {
     i = (int) 9223372036854775807L; // -1
     f = (float) 9223372036854775807L; //  9.223372036854776E18
     d = (double) 9223372036854775807L; //  9.223372036854776E18
+    Object o = c;
+    s = (short) (char) o;
   }
 
   public void testPrimitives() {
@@ -68,6 +70,8 @@ public class ArithmeticExpressions {
 
     int q = 3 >> 2;
     q = 3 >>> 2;
+
+    byte x = (byte) (((short) a + (byte) (short) b) * (short) (byte) c);
   }
 
   // Compount assignments in static fields

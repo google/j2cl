@@ -71,6 +71,7 @@ import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreationsWasm;
 import com.google.j2cl.transpiler.passes.NormalizeArrayLiterals;
+import com.google.j2cl.transpiler.passes.NormalizeBasicCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCasts;
 import com.google.j2cl.transpiler.passes.NormalizeCatchClauses;
 import com.google.j2cl.transpiler.passes.NormalizeConstructors;
@@ -373,7 +374,8 @@ public enum Backend {
           NormalizeLabels::new,
           NormalizeLabeledStatements::new,
           NormalizeNestedBlocks::new,
-          InsertWideningPrimitiveConversionsKotlin::new);
+          InsertWideningPrimitiveConversionsKotlin::new,
+          NormalizeBasicCasts::new);
     }
   };
 

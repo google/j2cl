@@ -50,6 +50,8 @@ class ArithmeticExpressions extends j_l_Object {
   i = -1;
   f = 9.223372036854776E18;
   d = 9.223372036854776E18;
+  let o = Character.m_valueOf__char(c);
+  s = $Primitives.narrowCharToShort(/**@type {Character}*/ ($Casts.$to(o, Character)).m_charValue__());
  }
  
  m_testPrimitives__() {
@@ -67,6 +69,7 @@ class ArithmeticExpressions extends j_l_Object {
   k = (s = $Primitives.narrowIntToShort(s + 1 | 0)) == 10;
   let q = 3 >> 2;
   q = 3 >>> 2 | 0;
+  let x = $Primitives.narrowIntToByte(Math.imul($Primitives.narrowIntToShort(a) + $Primitives.narrowIntToByte($Primitives.narrowIntToShort(b)), $Primitives.narrowIntToShort($Primitives.narrowIntToByte(c))));
  }
  
  m_testCompoundArray__() {

@@ -2,18 +2,20 @@ package arithmeticexpressions
 
 open class ArithmeticExpressions {
  open fun testCoercions() {
-  var b: Byte = 1L as Byte
-  var c: Char = 1L as Char
-  var s: Short = 1L as Short
-  var i: Int = 1L as Int
+  var b: Byte = 1L.toByte()
+  var c: Char = 1L.toChar()
+  var s: Short = 1L.toShort()
+  var i: Int = 1L.toInt()
   var f: Float = 1.0f
   var d: Double = 1.0
-  b = 9223372036854775807L as Byte
-  c = 9223372036854775807L as Char
-  s = 9223372036854775807L as Short
-  i = 9223372036854775807L as Int
+  b = 9223372036854775807L.toByte()
+  c = 9223372036854775807L.toChar()
+  s = 9223372036854775807L.toShort()
+  i = 9223372036854775807L.toInt()
   f = 9.223372E18f
   d = 9.223372036854776E18
+  val o: Any? = c
+  s = (o as Char).code.toShort()
  }
 
  open fun testPrimitives() {
@@ -47,6 +49,7 @@ open class ArithmeticExpressions {
   k = ++s == 10
   var q: Int = 3 >> 2
   q = 3 >>> 2
+  val x: Byte = ((a.toShort() + b.toShort().toByte()) * c.toByte().toShort()).toByte()
  }
 
  @JvmField var bar: Long = arithmeticexpressions.ArithmeticExpressions.foo++
@@ -119,7 +122,7 @@ open class ArithmeticExpressions {
   l = 2 | boxedInteger | 2L
   l = 1000000L * l * 60 * 60 * 24
   l = 24 * 60 * 60 * l * 1000000L
-  d = l = i = 20 as Long as Double
+  d = (l = (i = 20).toLong()).toDouble()
   l = boxedInteger = i = 20
   l = i + boxedInteger + l + 20
   d = 20 + l + d
