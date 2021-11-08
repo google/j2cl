@@ -17,14 +17,12 @@ open class Main {
  }
 
  internal open fun testAsyncLambdas() {
-  val i: jsasync.Main.AsyncInterface? = { -> {
-    return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(5)))
-   }
+  val i: jsasync.Main.AsyncInterface? = {
+   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(5)))
   }
   val o: jsasync.Main.BaseInterface? = TODO("expression.qualify needs rendering: Main.this)")
-  val j: jsasync.Main.AsyncJsFunctionInterface? = { -> {
-    return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(5)))
-   }
+  val j: jsasync.Main.AsyncJsFunctionInterface? = {
+   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(5)))
   }
   val optimizableJsFunction: jsasync.Main.JsFunctionInterface? = TODO("expression.qualify needs rendering: Main.this)")
   val unoptimizableJsFunction: jsasync.Main.JsFunctionInterface? = TODO("expression.qualify needs rendering: Main.this)")

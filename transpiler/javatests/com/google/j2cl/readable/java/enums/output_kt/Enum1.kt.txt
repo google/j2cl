@@ -51,9 +51,8 @@ enum class Enum3: Enum<enums.Enum3?> {
  private constructor(function: java.util.function.Function<Int?, Int?>?) {}
 
  companion object {
-  @JvmField val VALUE1: enums.Enum3 = enums.Enum3({v: Int? -> {
-    return 1 + v
-   }
+  @JvmField val VALUE1: enums.Enum3 = enums.Enum3({ v: Int? ->
+   return 1 + v
   })
  }
 }

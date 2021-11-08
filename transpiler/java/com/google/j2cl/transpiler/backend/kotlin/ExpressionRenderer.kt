@@ -128,11 +128,14 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
   renderQualifiedName(fieldAccess, fieldAccess.target.name!!)
 }
 
-private fun Renderer.renderFunctionExpression(expression: FunctionExpression) {
+private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   renderInCurlyBrackets {
-    renderCommaSeparated(expression.parameters) { renderVariable(it) }
-    render(" -> ")
-    renderStatement(expression.body)
+    functionExpression.parameters.takeIf { it.isNotEmpty() }?.let { parameters ->
+      render(" ")
+      renderCommaSeparated(parameters) { renderVariable(it) }
+      render(" ->")
+    }
+    renderStartingWithNewLines(functionExpression.body.statements) { renderStatement(it) }
   }
 }
 

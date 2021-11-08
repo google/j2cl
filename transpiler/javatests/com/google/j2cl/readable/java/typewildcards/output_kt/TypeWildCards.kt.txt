@@ -1,0 +1,97 @@
+package typewildcards
+
+open class GenericType<T> {}
+
+open class TypeWildCards {
+ open fun unbounded(g: typewildcards.GenericType<*>?) {}
+
+ open fun upperBound(g: typewildcards.GenericType<*>?) {}
+
+ open fun lowerBound(g: typewildcards.GenericType<*>?) {}
+
+ open fun test() {
+  this.unbounded(typewildcards.GenericType<typewildcards.TypeWildCards?>())
+  this.upperBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
+  this.lowerBound(typewildcards.GenericType<typewildcards.TypeWildCards?>())
+ }
+
+ open fun testInferredGenericIntersection() {
+  val elements: java.util.List<typewildcards.TypeWildCards.Element?>? = null
+  val otherElements: java.util.List<typewildcards.TypeWildCards.SubOtherElement?>? = null
+  val integers: java.util.List<Int?>? = typewildcards.TypeWildCards.transform(typewildcards.TypeWildCards.concat(elements, otherElements), {a: Any? /* & typewildcards.TypeWildCards.HasKey?, & typewildcards.TypeWildCards.IntegerSupplier? */ -> {
+    a.getKey()
+    return a.get()
+   }
+  })
+ }
+
+ open fun testRecursiveGeneric() {
+  typewildcards.TypeWildCards.takesRecursiveGeneric(TODO("expression.qualify needs rendering: TypeWildCards.this)"))
+ }
+
+ companion object {
+  @JvmStatic
+  fun <T: typewildcards.TypeWildCards.A?> testBoundedTypeMemberAccess(t: T) {
+   val i: Int = t.f
+   t.m()
+  }
+
+  @JvmStatic
+  fun <T> testIntersectionBoundedTypeMemberAccess(t: T) where T: typewildcards.TypeWildCards.A?, T: typewildcards.TypeWildCards.Y? {
+   val i: Int = t.f
+   t.m()
+   t.n()
+  }
+
+  @JvmStatic
+  private fun <F, V> transform(from: java.util.List<F>?, function: java.util.function.Function<*, *>?): java.util.List<V>? {
+   return null
+  }
+
+  @JvmStatic
+  private fun <E> concat(a: java.util.List<*>?, b: java.util.List<*>?): java.util.List<E>? {
+   return null
+  }
+
+  @JvmStatic
+  private fun takesRecursiveGeneric(foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>?) {}
+ }
+}
+
+interface X {
+ fun m()
+}
+
+interface Y {
+ fun n()
+}
+
+open class A: typewildcards.TypeWildCards.X {
+ @JvmField internal var f: Int
+
+ open fun m() {}
+}
+
+interface IntegerSupplier {
+ fun get(): Int?
+}
+
+interface HasKey {
+ fun getKey(): String?
+}
+
+abstract class Element: typewildcards.TypeWildCards.HasKey, typewildcards.TypeWildCards.IntegerSupplier {
+ @JvmField val `this`: typewildcards.TypeWildCards?
+}
+
+abstract class OtherElement: typewildcards.TypeWildCards.IntegerSupplier, typewildcards.TypeWildCards.HasKey {
+ @JvmField val `this`: typewildcards.TypeWildCards?
+}
+
+abstract class SubOtherElement: typewildcards.TypeWildCards.HasKey, typewildcards.TypeWildCards.OtherElement() {
+ @JvmField val `this`: typewildcards.TypeWildCards?
+}
+
+open class Foo: typewildcards.GenericType<typewildcards.TypeWildCards.Foo?>() {
+ @JvmField val `this`: typewildcards.TypeWildCards?
+}
