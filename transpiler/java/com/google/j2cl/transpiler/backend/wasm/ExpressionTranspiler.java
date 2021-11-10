@@ -193,10 +193,10 @@ final class ExpressionTranspiler {
 
         // TODO(b/184675805): implement array cast expressions beyond this nominal
         // implementation.
-        sourceBuilder.append("(ref.cast ");
-        render(castExpression.getExpression());
         sourceBuilder.append(
-            format(" (rtt.canon %s))", environment.getWasmTypeName(castTypeDescriptor)));
+            format("(ref.cast_static %s ", environment.getWasmTypeName(castTypeDescriptor)));
+        render(castExpression.getExpression());
+        sourceBuilder.append(")");
         return false;
       }
 
@@ -245,10 +245,10 @@ final class ExpressionTranspiler {
         // TODO(b/184675805): implement array instanceof expressions beyond this nominal
         // implementation.
         if (!testTypeDescriptor.isInterface()) {
-          sourceBuilder.append("(ref.test ");
-          render(instanceOfExpression.getExpression());
           sourceBuilder.append(
-              format(" (rtt.canon %s))", environment.getWasmTypeName(testTypeDescriptor)));
+              format("(ref.test_static %s ", environment.getWasmTypeName(testTypeDescriptor)));
+          render(instanceOfExpression.getExpression());
+          sourceBuilder.append(")");
         } else {
           DeclaredTypeDescriptor targetTypeDescriptor = (DeclaredTypeDescriptor) testTypeDescriptor;
           int interfaceSlot =
@@ -289,12 +289,12 @@ final class ExpressionTranspiler {
           // that slots are shared and a class that does not implement this interface might
           // implement a different interface that shares the same slot.
           sourceBuilder.append(
-              "(else (ref.test (array.get $itable (struct.get $java.lang.Object $itable ");
+              format(
+                  "(else (ref.test_static %s (array.get $itable (struct.get $java.lang.Object"
+                      + " $itable ",
+                  environment.getWasmVtableTypeName(targetTypeDescriptor)));
           render(instanceOfExpression.getExpression());
-          sourceBuilder.append(
-              String.format(
-                  " ) (i32.const %d)) (rtt.canon %s)))",
-                  interfaceSlot, environment.getWasmVtableTypeName(targetTypeDescriptor)));
+          sourceBuilder.append(String.format(" ) (i32.const %d))))", interfaceSlot));
           sourceBuilder.unindent();
           sourceBuilder.newLine();
           sourceBuilder.append("))");
@@ -349,16 +349,15 @@ final class ExpressionTranspiler {
             // Retrieve the interface vtable...
             sourceBuilder.append(
                 String.format(
-                    "(ref.cast (array.get $itable (struct.get %s $itable ",
+                    "(ref.cast_static %s (array.get $itable (struct.get %s $itable ",
+                    environment.getWasmVtableTypeName(enclosingTypeDescriptor),
                     environment.getWasmTypeName(enclosingTypeDescriptor)));
             renderTypedExpression(enclosingTypeDescriptor, methodCall.getQualifier());
-            // ... from the assigned $table array slot and cast to the particular interface vtable
-            // type using its canonical rtt.
+            // ... from the assigned $table array slot and cast to the particular interface vtable.
             sourceBuilder.append(
                 String.format(
-                    ") (i32.const %d)) (rtt.canon %s)) ",
-                    environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration()),
-                    environment.getWasmVtableTypeName(enclosingTypeDescriptor)));
+                    ") (i32.const %d))) ",
+                    environment.getInterfaceSlot(enclosingTypeDescriptor.getTypeDeclaration())));
           }
 
           sourceBuilder.append("))");
@@ -431,13 +430,13 @@ final class ExpressionTranspiler {
 
         String arrayType = environment.getWasmTypeName(arrayLiteral.getTypeDescriptor());
 
-        sourceBuilder.append(format("(array.init %s ", arrayType));
+        sourceBuilder.append(format("(array.init_static %s ", arrayType));
         renderTypedExpressions(
             Collections.nCopies(
                 arrayLiteral.getValueExpressions().size(),
                 arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor()),
             arrayLiteral.getValueExpressions());
-        sourceBuilder.append(format(" (rtt.canon %s))", arrayType));
+        sourceBuilder.append(")");
         return false;
       }
 
@@ -448,9 +447,9 @@ final class ExpressionTranspiler {
         Expression dimensionExpression = newArray.getDimensionExpressions().get(0);
         String arrayType = environment.getWasmTypeName(newArray.getTypeDescriptor());
 
-        sourceBuilder.append(format("(array.new_default_with_rtt %s ", arrayType));
+        sourceBuilder.append(format("(array.new_default %s ", arrayType));
         renderTypedExpression(dimensionExpression.getTypeDescriptor(), dimensionExpression);
-        sourceBuilder.append(format(" (rtt.canon %s))", arrayType));
+        sourceBuilder.append(")");
         return false;
       }
 
@@ -458,7 +457,7 @@ final class ExpressionTranspiler {
       public boolean enterNewInstance(NewInstance newInstance) {
         sourceBuilder.append(
             format(
-                "(struct.new_with_rtt %s "
+                "(struct.new %s "
                     + "(ref.as_non_null (global.get %s)) (ref.as_non_null (global.get %s))",
                 environment.getWasmTypeName(newInstance.getTypeDescriptor()),
                 environment.getWasmVtableGlobalName(newInstance.getTypeDescriptor()),
@@ -480,10 +479,7 @@ final class ExpressionTranspiler {
                   render(f.getDescriptor().getTypeDescriptor().getDefaultValue());
                 });
 
-        sourceBuilder.append(
-            format(
-                " (rtt.canon %s))",
-                environment.getWasmTypeName(newInstance.getTypeDescriptor().getTypeDeclaration())));
+        sourceBuilder.append(")");
         return false;
       }
 

@@ -3,19 +3,18 @@
 
 ;;; Code for dowhilestatement.DoWhileStatement [vtable.init]
 (global $dowhilestatement.DoWhileStatement.vtable (ref $dowhilestatement.DoWhileStatement.vtable) 
- (struct.new_with_rtt $dowhilestatement.DoWhileStatement.vtable
+ (struct.new $dowhilestatement.DoWhileStatement.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@dowhilestatement.DoWhileStatement)
   (ref.func $m_test__void@dowhilestatement.DoWhileStatement)
-  (rtt.canon $dowhilestatement.DoWhileStatement.vtable)
  )
 )
 
 ;;; Code for dowhilestatement.DoWhileStatement [itable.init]
-(global $dowhilestatement.DoWhileStatement.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $dowhilestatement.DoWhileStatement.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for dowhilestatement.DoWhileStatement [CLASS]
 (type $dowhilestatement.DoWhileStatement (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; DoWhileStatement $instance = new DoWhileStatement.<init>();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $dowhilestatement.DoWhileStatement (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.vtable)) (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.itable)) (i32.const 0) (rtt.canon $dowhilestatement.DoWhileStatement)))
+  (local.set $$instance (struct.new $dowhilestatement.DoWhileStatement (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.vtable)) (ref.as_non_null (global.get $dowhilestatement.DoWhileStatement.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ dowhilestatement/DoWhileStatement.java:18:13
   (call $$ctor__void_$p_dowhilestatement_DoWhileStatement@dowhilestatement.DoWhileStatement (local.get $$instance))
@@ -72,7 +71,7 @@
  ;;@ dowhilestatement/DoWhileStatement.java:19:14
  (local $count i32)
  (local $this (ref null $dowhilestatement.DoWhileStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $dowhilestatement.DoWhileStatement)))
+ (local.set $this (ref.cast_static $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
  (block
   ;; int count = 0;
   ;;@ dowhilestatement/DoWhileStatement.java:20:4
@@ -124,7 +123,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $dowhilestatement.DoWhileStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $dowhilestatement.DoWhileStatement)))
+ (local.set $this (ref.cast_static $dowhilestatement.DoWhileStatement (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDowhilestatement.DoWhileStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDowhilestatement.DoWhileStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

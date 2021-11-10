@@ -3,19 +3,18 @@
 
 ;;; Code for ternaryexpression.TernaryExpression [vtable.init]
 (global $ternaryexpression.TernaryExpression.vtable (ref $ternaryexpression.TernaryExpression.vtable) 
- (struct.new_with_rtt $ternaryexpression.TernaryExpression.vtable
+ (struct.new $ternaryexpression.TernaryExpression.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@ternaryexpression.TernaryExpression)
   (ref.func $m_test__void@ternaryexpression.TernaryExpression)
-  (rtt.canon $ternaryexpression.TernaryExpression.vtable)
  )
 )
 
 ;;; Code for ternaryexpression.TernaryExpression [itable.init]
-(global $ternaryexpression.TernaryExpression.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $ternaryexpression.TernaryExpression.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for ternaryexpression.TernaryExpression [CLASS]
 (type $ternaryexpression.TernaryExpression (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; TernaryExpression $instance = new TernaryExpression.<init>();
   ;;@ ternaryexpression/TernaryExpression.java:18:13
-  (local.set $$instance (struct.new_with_rtt $ternaryexpression.TernaryExpression (ref.as_non_null (global.get $ternaryexpression.TernaryExpression.vtable)) (ref.as_non_null (global.get $ternaryexpression.TernaryExpression.itable)) (i32.const 0) (rtt.canon $ternaryexpression.TernaryExpression)))
+  (local.set $$instance (struct.new $ternaryexpression.TernaryExpression (ref.as_non_null (global.get $ternaryexpression.TernaryExpression.vtable)) (ref.as_non_null (global.get $ternaryexpression.TernaryExpression.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ ternaryexpression/TernaryExpression.java:18:13
   (call $$ctor__void_$p_ternaryexpression_TernaryExpression@ternaryexpression.TernaryExpression (local.get $$instance))
@@ -76,7 +75,7 @@
  (local $value i32)
  (local $$qualifier (ref null $java.lang.Integer))
  (local $this (ref null $ternaryexpression.TernaryExpression))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $ternaryexpression.TernaryExpression)))
+ (local.set $this (ref.cast_static $ternaryexpression.TernaryExpression (local.get $this.untyped)))
  (block
   ;; boolean a = true;
   ;;@ ternaryexpression/TernaryExpression.java:21:4
@@ -125,7 +124,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $ternaryexpression.TernaryExpression))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $ternaryexpression.TernaryExpression)))
+ (local.set $this (ref.cast_static $ternaryexpression.TernaryExpression (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getTernaryexpression.TernaryExpression();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getTernaryexpression.TernaryExpression__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

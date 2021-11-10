@@ -3,19 +3,18 @@
 
 ;;; Code for continuestatement.ContinueStatement [vtable.init]
 (global $continuestatement.ContinueStatement.vtable (ref $continuestatement.ContinueStatement.vtable) 
- (struct.new_with_rtt $continuestatement.ContinueStatement.vtable
+ (struct.new $continuestatement.ContinueStatement.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@continuestatement.ContinueStatement)
   (ref.func $m_test__void@continuestatement.ContinueStatement)
-  (rtt.canon $continuestatement.ContinueStatement.vtable)
  )
 )
 
 ;;; Code for continuestatement.ContinueStatement [itable.init]
-(global $continuestatement.ContinueStatement.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $continuestatement.ContinueStatement.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for continuestatement.ContinueStatement [CLASS]
 (type $continuestatement.ContinueStatement (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; ContinueStatement $instance = new ContinueStatement.<init>();
   ;;@ continuestatement/ContinueStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $continuestatement.ContinueStatement.itable)) (i32.const 0) (rtt.canon $continuestatement.ContinueStatement)))
+  (local.set $$instance (struct.new $continuestatement.ContinueStatement (ref.as_non_null (global.get $continuestatement.ContinueStatement.vtable)) (ref.as_non_null (global.get $continuestatement.ContinueStatement.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ continuestatement/ContinueStatement.java:18:13
   (call $$ctor__void_$p_continuestatement_ContinueStatement@continuestatement.ContinueStatement (local.get $$instance))
@@ -71,7 +70,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ continuestatement/ContinueStatement.java:19:14
  (local $this (ref null $continuestatement.ContinueStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $continuestatement.ContinueStatement)))
+ (local.set $this (ref.cast_static $continuestatement.ContinueStatement (local.get $this.untyped)))
  (block
   ;; LOOP: for (;true;) {
   ;;@ continuestatement/ContinueStatement.java:20:4
@@ -120,7 +119,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $continuestatement.ContinueStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $continuestatement.ContinueStatement)))
+ (local.set $this (ref.cast_static $continuestatement.ContinueStatement (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getContinuestatement.ContinueStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getContinuestatement.ContinueStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

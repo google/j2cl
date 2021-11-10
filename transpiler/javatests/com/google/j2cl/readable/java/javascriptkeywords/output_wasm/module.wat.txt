@@ -3,19 +3,18 @@
 
 ;;; Code for javascriptkeywords.JSKeyWords [vtable.init]
 (global $javascriptkeywords.JSKeyWords.vtable (ref $javascriptkeywords.JSKeyWords.vtable) 
- (struct.new_with_rtt $javascriptkeywords.JSKeyWords.vtable
+ (struct.new $javascriptkeywords.JSKeyWords.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@javascriptkeywords.JSKeyWords)
   (ref.func $m_test__int__int@javascriptkeywords.JSKeyWords)
-  (rtt.canon $javascriptkeywords.JSKeyWords.vtable)
  )
 )
 
 ;;; Code for javascriptkeywords.JSKeyWords [itable.init]
-(global $javascriptkeywords.JSKeyWords.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $javascriptkeywords.JSKeyWords.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for javascriptkeywords.JSKeyWords [CLASS]
 (type $javascriptkeywords.JSKeyWords (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; JSKeyWords $instance = new JSKeyWords.<init>();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
-  (local.set $$instance (struct.new_with_rtt $javascriptkeywords.JSKeyWords (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.vtable)) (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.itable)) (i32.const 0) (rtt.canon $javascriptkeywords.JSKeyWords)))
+  (local.set $$instance (struct.new $javascriptkeywords.JSKeyWords (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.vtable)) (ref.as_non_null (global.get $javascriptkeywords.JSKeyWords.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ javascriptkeywords/JSKeyWords.java:18:13
   (call $$ctor__void_$p_javascriptkeywords_JSKeyWords@javascriptkeywords.JSKeyWords (local.get $$instance))
@@ -74,7 +73,7 @@
  ;;@ javascriptkeywords/JSKeyWords.java:19:13
  (local $let i32)
  (local $this (ref null $javascriptkeywords.JSKeyWords))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $javascriptkeywords.JSKeyWords)))
+ (local.set $this (ref.cast_static $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
  (block
   ;; int let = 0;
   ;;@ javascriptkeywords/JSKeyWords.java:20:4
@@ -114,7 +113,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $javascriptkeywords.JSKeyWords))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $javascriptkeywords.JSKeyWords)))
+ (local.set $this (ref.cast_static $javascriptkeywords.JSKeyWords (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJavascriptkeywords.JSKeyWords();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJavascriptkeywords.JSKeyWords__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

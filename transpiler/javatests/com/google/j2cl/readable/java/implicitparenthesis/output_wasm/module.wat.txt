@@ -3,19 +3,18 @@
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [vtable.init]
 (global $implicitparenthesis.ImplicitParenthesis.vtable (ref $implicitparenthesis.ImplicitParenthesis.vtable) 
- (struct.new_with_rtt $implicitparenthesis.ImplicitParenthesis.vtable
+ (struct.new $implicitparenthesis.ImplicitParenthesis.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@implicitparenthesis.ImplicitParenthesis)
   (ref.func $m_test__void@implicitparenthesis.ImplicitParenthesis)
-  (rtt.canon $implicitparenthesis.ImplicitParenthesis.vtable)
  )
 )
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [itable.init]
-(global $implicitparenthesis.ImplicitParenthesis.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $implicitparenthesis.ImplicitParenthesis.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for implicitparenthesis.ImplicitParenthesis [CLASS]
 (type $implicitparenthesis.ImplicitParenthesis (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; ImplicitParenthesis $instance = new ImplicitParenthesis.<init>();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
-  (local.set $$instance (struct.new_with_rtt $implicitparenthesis.ImplicitParenthesis (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.itable)) (i32.const 0) (rtt.canon $implicitparenthesis.ImplicitParenthesis)))
+  (local.set $$instance (struct.new $implicitparenthesis.ImplicitParenthesis (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.vtable)) (ref.as_non_null (global.get $implicitparenthesis.ImplicitParenthesis.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:21:13
   (call $$ctor__void_$p_implicitparenthesis_ImplicitParenthesis@implicitparenthesis.ImplicitParenthesis (local.get $$instance))
@@ -71,7 +70,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ implicitparenthesis/ImplicitParenthesis.java:23:14
  (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $implicitparenthesis.ImplicitParenthesis)))
+ (local.set $this (ref.cast_static $implicitparenthesis.ImplicitParenthesis (local.get $this.untyped)))
  (block
   ;; implicitparenthesis.ImplicitParenthesis.examples();
   ;;@ implicitparenthesis/ImplicitParenthesis.java:24:4
@@ -269,7 +268,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $implicitparenthesis.ImplicitParenthesis))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $implicitparenthesis.ImplicitParenthesis)))
+ (local.set $this (ref.cast_static $implicitparenthesis.ImplicitParenthesis (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImplicitparenthesis.ImplicitParenthesis();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImplicitparenthesis.ImplicitParenthesis__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

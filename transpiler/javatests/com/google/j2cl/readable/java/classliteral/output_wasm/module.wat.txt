@@ -3,19 +3,18 @@
 
 ;;; Code for classliteral.ClassLiteral [vtable.init]
 (global $classliteral.ClassLiteral.vtable (ref $classliteral.ClassLiteral.vtable) 
- (struct.new_with_rtt $classliteral.ClassLiteral.vtable
+ (struct.new $classliteral.ClassLiteral.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@classliteral.ClassLiteral)
   (ref.func $m_main__void@classliteral.ClassLiteral)
-  (rtt.canon $classliteral.ClassLiteral.vtable)
  )
 )
 
 ;;; Code for classliteral.ClassLiteral [itable.init]
-(global $classliteral.ClassLiteral.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $classliteral.ClassLiteral.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for classliteral.ClassLiteral [CLASS]
 (type $classliteral.ClassLiteral (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; ClassLiteral $instance = new ClassLiteral.<init>();
   ;;@ classliteral/ClassLiteral.java:18:13
-  (local.set $$instance (struct.new_with_rtt $classliteral.ClassLiteral (ref.as_non_null (global.get $classliteral.ClassLiteral.vtable)) (ref.as_non_null (global.get $classliteral.ClassLiteral.itable)) (i32.const 0) (rtt.canon $classliteral.ClassLiteral)))
+  (local.set $$instance (struct.new $classliteral.ClassLiteral (ref.as_non_null (global.get $classliteral.ClassLiteral.vtable)) (ref.as_non_null (global.get $classliteral.ClassLiteral.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ classliteral/ClassLiteral.java:18:13
   (call $$ctor__void_$p_classliteral_ClassLiteral@classliteral.ClassLiteral (local.get $$instance))
@@ -73,7 +72,7 @@
  (local $o (ref null $java.lang.Object))
  (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $classliteral.ClassLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $classliteral.ClassLiteral)))
+ (local.set $this (ref.cast_static $classliteral.ClassLiteral (local.get $this.untyped)))
  (block
   ;; Object o = javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
   ;;@ classliteral/ClassLiteral.java:21:4
@@ -116,7 +115,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $classliteral.ClassLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $classliteral.ClassLiteral)))
+ (local.set $this (ref.cast_static $classliteral.ClassLiteral (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getClassliteral.ClassLiteral();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getClassliteral.ClassLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

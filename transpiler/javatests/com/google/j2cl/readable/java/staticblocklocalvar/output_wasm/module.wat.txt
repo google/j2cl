@@ -3,18 +3,17 @@
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [vtable.init]
 (global $staticblocklocalvar.StaticBlockLocalVar.vtable (ref $staticblocklocalvar.StaticBlockLocalVar.vtable) 
- (struct.new_with_rtt $staticblocklocalvar.StaticBlockLocalVar.vtable
+ (struct.new $staticblocklocalvar.StaticBlockLocalVar.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@staticblocklocalvar.StaticBlockLocalVar)
-  (rtt.canon $staticblocklocalvar.StaticBlockLocalVar.vtable)
  )
 )
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [itable.init]
-(global $staticblocklocalvar.StaticBlockLocalVar.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $staticblocklocalvar.StaticBlockLocalVar.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for staticblocklocalvar.StaticBlockLocalVar [CLASS]
 (type $staticblocklocalvar.StaticBlockLocalVar (struct_subtype 
@@ -39,7 +38,7 @@
  (block
   ;; StaticBlockLocalVar $instance = new StaticBlockLocalVar.<init>();
   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
-  (local.set $$instance (struct.new_with_rtt $staticblocklocalvar.StaticBlockLocalVar (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.vtable)) (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.itable)) (i32.const 0) (rtt.canon $staticblocklocalvar.StaticBlockLocalVar)))
+  (local.set $$instance (struct.new $staticblocklocalvar.StaticBlockLocalVar (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.vtable)) (ref.as_non_null (global.get $staticblocklocalvar.StaticBlockLocalVar.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticblocklocalvar/StaticBlockLocalVar.java:19:13
   (call $$ctor__void_$p_staticblocklocalvar_StaticBlockLocalVar@staticblocklocalvar.StaticBlockLocalVar (local.get $$instance))
@@ -98,7 +97,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticblocklocalvar.StaticBlockLocalVar))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticblocklocalvar.StaticBlockLocalVar)))
+ (local.set $this (ref.cast_static $staticblocklocalvar.StaticBlockLocalVar (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticblocklocalvar.StaticBlockLocalVar();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticblocklocalvar.StaticBlockLocalVar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

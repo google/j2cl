@@ -3,18 +3,17 @@
 
 ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [vtable.init]
 (global $jstypeswithconstructor.JsTypesWithConstructor.vtable (ref $jstypeswithconstructor.JsTypesWithConstructor.vtable) 
- (struct.new_with_rtt $jstypeswithconstructor.JsTypesWithConstructor.vtable
+ (struct.new $jstypeswithconstructor.JsTypesWithConstructor.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jstypeswithconstructor.JsTypesWithConstructor)
-  (rtt.canon $jstypeswithconstructor.JsTypesWithConstructor.vtable)
  )
 )
 
 ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [itable.init]
-(global $jstypeswithconstructor.JsTypesWithConstructor.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jstypeswithconstructor.JsTypesWithConstructor.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jstypeswithconstructor.JsTypesWithConstructor [CLASS]
 (type $jstypeswithconstructor.JsTypesWithConstructor (struct_subtype 
@@ -39,7 +38,7 @@
  (block
   ;; JsTypesWithConstructor $instance = new JsTypesWithConstructor.<init>();
   ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:9
-  (local.set $$instance (struct.new_with_rtt $jstypeswithconstructor.JsTypesWithConstructor (ref.as_non_null (global.get $jstypeswithconstructor.JsTypesWithConstructor.vtable)) (ref.as_non_null (global.get $jstypeswithconstructor.JsTypesWithConstructor.itable)) (i32.const 0) (rtt.canon $jstypeswithconstructor.JsTypesWithConstructor)))
+  (local.set $$instance (struct.new $jstypeswithconstructor.JsTypesWithConstructor (ref.as_non_null (global.get $jstypeswithconstructor.JsTypesWithConstructor.vtable)) (ref.as_non_null (global.get $jstypeswithconstructor.JsTypesWithConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jstypeswithconstructor/JsTypesWithConstructor.java:27:9
   (call $$ctor__void_$p_jstypeswithconstructor_JsTypesWithConstructor@jstypeswithconstructor.JsTypesWithConstructor (local.get $$instance))
@@ -91,7 +90,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeswithconstructor.JsTypesWithConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypeswithconstructor.JsTypesWithConstructor)))
+ (local.set $this (ref.cast_static $jstypeswithconstructor.JsTypesWithConstructor (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypeswithconstructor.JsTypesWithConstructor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypeswithconstructor.JsTypesWithConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

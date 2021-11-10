@@ -15,24 +15,23 @@
 
 ;;; Code for instancejsmethods.SuperParent [vtable.init]
 (global $instancejsmethods.SuperParent.vtable (ref $instancejsmethods.SuperParent.vtable) 
- (struct.new_with_rtt $instancejsmethods.SuperParent.vtable
+ (struct.new $instancejsmethods.SuperParent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@instancejsmethods.SuperParent)
   (ref.func $m_fun__int__int__int@instancejsmethods.SuperParent)
   (ref.func $m_bar__int__int__int@instancejsmethods.SuperParent)
-  (rtt.canon $instancejsmethods.SuperParent.vtable)
  )
 )
 
 ;;; Code for instancejsmethods.SuperParent [itable.init]
-(global $instancejsmethods.SuperParent.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $instancejsmethods.SuperParent.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for instancejsmethods.Parent [vtable.init]
 (global $instancejsmethods.Parent.vtable (ref $instancejsmethods.Parent.vtable) 
- (struct.new_with_rtt $instancejsmethods.Parent.vtable
+ (struct.new $instancejsmethods.Parent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -40,17 +39,16 @@
   (ref.func $m_fun__int__int__int@instancejsmethods.Parent)
   (ref.func $m_bar__int__int__int@instancejsmethods.Parent)
   (ref.func $m_foo__int__int@instancejsmethods.Parent)
-  (rtt.canon $instancejsmethods.Parent.vtable)
  )
 )
 
 ;;; Code for instancejsmethods.Parent [itable.init]
-(global $instancejsmethods.Parent.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $instancejsmethods.Parent.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for instancejsmethods.Child [vtable.init]
 (global $instancejsmethods.Child.vtable (ref $instancejsmethods.Child.vtable) 
- (struct.new_with_rtt $instancejsmethods.Child.vtable
+ (struct.new $instancejsmethods.Child.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -59,33 +57,30 @@
   (ref.func $m_bar__int__int__int@instancejsmethods.Child)
   (ref.func $m_foo__int__int@instancejsmethods.Child)
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
-  (rtt.canon $instancejsmethods.Child.vtable)
  )
 )
 
 ;;; Code for instancejsmethods.Child [itable.init]
-(global $instancejsmethods.Child.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $instancejsmethods.MyInterface.vtable
+(global $instancejsmethods.Child.itable (ref $itable) (array.init_static $itable 
+ (struct.new $instancejsmethods.MyInterface.vtable
   (ref.func $m_intfFoo__int@instancejsmethods.Child)
-  (rtt.canon $instancejsmethods.MyInterface.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for instancejsmethods.Main [vtable.init]
 (global $instancejsmethods.Main.vtable (ref $instancejsmethods.Main.vtable) 
- (struct.new_with_rtt $instancejsmethods.Main.vtable
+ (struct.new $instancejsmethods.Main.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@instancejsmethods.Main)
   (ref.func $m_testCallBySuperParent__void@instancejsmethods.Main)
-  (rtt.canon $instancejsmethods.Main.vtable)
  )
 )
 
 ;;; Code for instancejsmethods.Main [itable.init]
-(global $instancejsmethods.Main.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $instancejsmethods.Main.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for instancejsmethods.MyInterface [INTERFACE]
 (type $instancejsmethods.MyInterface.vtable (struct_subtype 
@@ -148,7 +143,7 @@
  (block
   ;; SuperParent $instance = new SuperParent.<init>();
   ;;@ instancejsmethods/Main.java:24:6
-  (local.set $$instance (struct.new_with_rtt $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $instancejsmethods.SuperParent.itable)) (i32.const 0) (rtt.canon $instancejsmethods.SuperParent)))
+  (local.set $$instance (struct.new $instancejsmethods.SuperParent (ref.as_non_null (global.get $instancejsmethods.SuperParent.vtable)) (ref.as_non_null (global.get $instancejsmethods.SuperParent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:24:6
   (call $$ctor__void_$p_instancejsmethods_SuperParent@instancejsmethods.SuperParent (local.get $$instance))
@@ -181,7 +176,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:25:13
  (local $this (ref null $instancejsmethods.SuperParent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.SuperParent)))
+ (local.set $this (ref.cast_static $instancejsmethods.SuperParent (local.get $this.untyped)))
  (block
   ;; return ((a + b) + 111);
   ;;@ instancejsmethods/Main.java:26:4
@@ -199,7 +194,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:29:13
  (local $this (ref null $instancejsmethods.SuperParent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.SuperParent)))
+ (local.set $this (ref.cast_static $instancejsmethods.SuperParent (local.get $this.untyped)))
  (block
   ;; return ((a * b) + 222);
   ;;@ instancejsmethods/Main.java:30:4
@@ -236,7 +231,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.SuperParent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.SuperParent)))
+ (local.set $this (ref.cast_static $instancejsmethods.SuperParent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.SuperParent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.SuperParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -270,7 +265,7 @@
  (block
   ;; Parent $instance = new Parent.<init>();
   ;;@ instancejsmethods/Main.java:34:6
-  (local.set $$instance (struct.new_with_rtt $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0) (rtt.canon $instancejsmethods.Parent)))
+  (local.set $$instance (struct.new $instancejsmethods.Parent (ref.as_non_null (global.get $instancejsmethods.Parent.vtable)) (ref.as_non_null (global.get $instancejsmethods.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:34:6
   (call $$ctor__void_$p_instancejsmethods_Parent@instancejsmethods.Parent (local.get $$instance))
@@ -303,7 +298,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:42:13
  (local $this (ref null $instancejsmethods.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Parent)))
+ (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
   ;; return (a + b);
   ;;@ instancejsmethods/Main.java:43:4
@@ -321,7 +316,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:53:13
  (local $this (ref null $instancejsmethods.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Parent)))
+ (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
   ;; return (a * b);
   ;;@ instancejsmethods/Main.java:54:4
@@ -338,7 +333,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:63:13
  (local $this (ref null $instancejsmethods.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Parent)))
+ (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
   ;; return a;
   ;;@ instancejsmethods/Main.java:64:4
@@ -375,7 +370,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Parent)))
+ (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.Parent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -410,7 +405,7 @@
  (block
   ;; Child $instance = new Child.<init>();
   ;;@ instancejsmethods/Main.java:68:6
-  (local.set $$instance (struct.new_with_rtt $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0) (rtt.canon $instancejsmethods.Child)))
+  (local.set $$instance (struct.new $instancejsmethods.Child (ref.as_non_null (global.get $instancejsmethods.Child.vtable)) (ref.as_non_null (global.get $instancejsmethods.Child.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:68:6
   (call $$ctor__void_$p_instancejsmethods_Child@instancejsmethods.Child (local.get $$instance))
@@ -443,7 +438,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:76:13
  (local $this (ref null $instancejsmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Child)))
+ (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
   ;; return ((a + b) + 1);
   ;;@ instancejsmethods/Main.java:77:4
@@ -461,7 +456,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:87:13
  (local $this (ref null $instancejsmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Child)))
+ (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
   ;; return ((a * b) + 1);
   ;;@ instancejsmethods/Main.java:88:4
@@ -478,7 +473,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:98:13
  (local $this (ref null $instancejsmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Child)))
+ (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
   ;; return a;
   ;;@ instancejsmethods/Main.java:99:4
@@ -494,7 +489,7 @@
  (result i32)
  ;;@ instancejsmethods/Main.java:109:13
  (local $this (ref null $instancejsmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Child)))
+ (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
   ;; return 1;
   ;;@ instancejsmethods/Main.java:110:4
@@ -531,7 +526,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Child)))
+ (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.Child();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -563,7 +558,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ instancejsmethods/Main.java:114:13
-  (local.set $$instance (struct.new_with_rtt $instancejsmethods.Main (ref.as_non_null (global.get $instancejsmethods.Main.vtable)) (ref.as_non_null (global.get $instancejsmethods.Main.itable)) (i32.const 0) (rtt.canon $instancejsmethods.Main)))
+  (local.set $$instance (struct.new $instancejsmethods.Main (ref.as_non_null (global.get $instancejsmethods.Main.vtable)) (ref.as_non_null (global.get $instancejsmethods.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ instancejsmethods/Main.java:114:13
   (call $$ctor__void_$p_instancejsmethods_Main@instancejsmethods.Main (local.get $$instance))
@@ -599,7 +594,7 @@
  (local $cc (ref null $instancejsmethods.Parent))
  (local $intf (ref null $java.lang.Object))
  (local $this (ref null $instancejsmethods.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Main)))
+ (local.set $this (ref.cast_static $instancejsmethods.Main (local.get $this.untyped)))
  (block
   ;; SuperParent sp = instancejsmethods.SuperParent.$create();
   ;;@ instancejsmethods/Main.java:116:4
@@ -645,7 +640,7 @@
   (drop (call_ref (local.get $cc)(i32.const 1)(struct.get $instancejsmethods.Parent.vtable $m_foo__int__int (struct.get $instancejsmethods.Parent $vtable(local.get $cc)))))
   ;; intf.intfFoo();
   ;;@ instancejsmethods/Main.java:131:4
-  (drop (call_ref (local.get $intf)(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0)) (rtt.canon $instancejsmethods.MyInterface.vtable)) )))
+  (drop (call_ref (local.get $intf)(struct.get $instancejsmethods.MyInterface.vtable $m_intfFoo__int (ref.cast_static $instancejsmethods.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $intf)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_testCallBySuperParent__void@instancejsmethods.Main)
@@ -727,7 +722,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $instancejsmethods.Main)))
+ (local.set $this (ref.cast_static $instancejsmethods.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

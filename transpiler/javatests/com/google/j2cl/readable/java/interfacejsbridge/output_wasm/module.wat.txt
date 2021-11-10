@@ -15,47 +15,42 @@
 
 ;;; Code for interfacejsbridge.InterfaceImpl [vtable.init]
 (global $interfacejsbridge.InterfaceImpl.vtable (ref $interfacejsbridge.InterfaceImpl.vtable) 
- (struct.new_with_rtt $interfacejsbridge.InterfaceImpl.vtable
+ (struct.new $interfacejsbridge.InterfaceImpl.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl)
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
-  (rtt.canon $interfacejsbridge.InterfaceImpl.vtable)
  )
 )
 
 ;;; Code for interfacejsbridge.InterfaceImpl [itable.init]
-(global $interfacejsbridge.InterfaceImpl.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $interfacejsbridge.SubInterface.vtable
+(global $interfacejsbridge.InterfaceImpl.itable (ref $itable) (array.init_static $itable 
+ (struct.new $interfacejsbridge.SubInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
-  (rtt.canon $interfacejsbridge.SubInterface.vtable)
  )
- (struct.new_with_rtt $interfacejsbridge.MyJsInterface.vtable
+ (struct.new $interfacejsbridge.MyJsInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
-  (rtt.canon $interfacejsbridge.MyJsInterface.vtable)
  )
- (struct.new_with_rtt $interfacejsbridge.MyInterface.vtable
+ (struct.new $interfacejsbridge.MyInterface.vtable
   (ref.func $m_foo__int__int@interfacejsbridge.InterfaceImpl)
-  (rtt.canon $interfacejsbridge.MyInterface.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for interfacejsbridge.Main [vtable.init]
 (global $interfacejsbridge.Main.vtable (ref $interfacejsbridge.Main.vtable) 
- (struct.new_with_rtt $interfacejsbridge.Main.vtable
+ (struct.new $interfacejsbridge.Main.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@interfacejsbridge.Main)
   (ref.func $m_test__void@interfacejsbridge.Main)
-  (rtt.canon $interfacejsbridge.Main.vtable)
  )
 )
 
 ;;; Code for interfacejsbridge.Main [itable.init]
-(global $interfacejsbridge.Main.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $interfacejsbridge.Main.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for interfacejsbridge.MyJsInterface [INTERFACE]
 (type $interfacejsbridge.MyJsInterface.vtable (struct_subtype 
@@ -189,7 +184,7 @@
  (block
   ;; InterfaceImpl $instance = new InterfaceImpl.<init>();
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
-  (local.set $$instance (struct.new_with_rtt $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0) (rtt.canon $interfacejsbridge.InterfaceImpl)))
+  (local.set $$instance (struct.new $interfacejsbridge.InterfaceImpl (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.vtable)) (ref.as_non_null (global.get $interfacejsbridge.InterfaceImpl.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ interfacejsbridge/InterfaceImpl.java:34:13
   (call $$ctor__void_$p_interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl (local.get $$instance))
@@ -221,7 +216,7 @@
  (result i32)
  ;;@ interfacejsbridge/InterfaceImpl.java:36:13
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacejsbridge.InterfaceImpl)))
+ (local.set $this (ref.cast_static $interfacejsbridge.InterfaceImpl (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ interfacejsbridge/InterfaceImpl.java:37:4
@@ -258,7 +253,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacejsbridge.InterfaceImpl)))
+ (local.set $this (ref.cast_static $interfacejsbridge.InterfaceImpl (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.InterfaceImpl();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacejsbridge.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -290,7 +285,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ interfacejsbridge/Main.java:18:13
-  (local.set $$instance (struct.new_with_rtt $interfacejsbridge.Main (ref.as_non_null (global.get $interfacejsbridge.Main.vtable)) (ref.as_non_null (global.get $interfacejsbridge.Main.itable)) (i32.const 0) (rtt.canon $interfacejsbridge.Main)))
+  (local.set $$instance (struct.new $interfacejsbridge.Main (ref.as_non_null (global.get $interfacejsbridge.Main.vtable)) (ref.as_non_null (global.get $interfacejsbridge.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ interfacejsbridge/Main.java:18:13
   (call $$ctor__void_$p_interfacejsbridge_Main@interfacejsbridge.Main (local.get $$instance))
@@ -324,7 +319,7 @@
  (local $c (ref null $java.lang.Object))
  (local $d (ref null $interfacejsbridge.InterfaceImpl))
  (local $this (ref null $interfacejsbridge.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacejsbridge.Main)))
+ (local.set $this (ref.cast_static $interfacejsbridge.Main (local.get $this.untyped)))
  (block
   ;; MyJsInterface a = interfacejsbridge.InterfaceImpl.$create();
   ;;@ interfacejsbridge/Main.java:20:4
@@ -340,13 +335,13 @@
   (local.set $d (call $$create__interfacejsbridge_InterfaceImpl@interfacejsbridge.InterfaceImpl ))
   ;; a.foo(1);
   ;;@ interfacejsbridge/Main.java:24:4
-  (drop (call_ref (local.get $a)(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $a)) (i32.const 1)) (rtt.canon $interfacejsbridge.MyJsInterface.vtable)) )))
+  (drop (call_ref (local.get $a)(i32.const 1)(struct.get $interfacejsbridge.MyJsInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.MyJsInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $a)) (i32.const 1))) )))
   ;; b.foo(1);
   ;;@ interfacejsbridge/Main.java:25:4
-  (drop (call_ref (local.get $b)(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $b)) (i32.const 2)) (rtt.canon $interfacejsbridge.MyInterface.vtable)) )))
+  (drop (call_ref (local.get $b)(i32.const 1)(struct.get $interfacejsbridge.MyInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.MyInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $b)) (i32.const 2))) )))
   ;; c.foo(1);
   ;;@ interfacejsbridge/Main.java:26:4
-  (drop (call_ref (local.get $c)(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 0)) (rtt.canon $interfacejsbridge.SubInterface.vtable)) )))
+  (drop (call_ref (local.get $c)(i32.const 1)(struct.get $interfacejsbridge.SubInterface.vtable $m_foo__int__int (ref.cast_static $interfacejsbridge.SubInterface.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 0))) )))
   ;; d.foo(1);
   ;;@ interfacejsbridge/Main.java:27:4
   (drop (call_ref (local.get $d)(i32.const 1)(struct.get $interfacejsbridge.InterfaceImpl.vtable $m_foo__int__int (struct.get $interfacejsbridge.InterfaceImpl $vtable(local.get $d)))))
@@ -382,7 +377,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacejsbridge.Main)))
+ (local.set $this (ref.cast_static $interfacejsbridge.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacejsbridge.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

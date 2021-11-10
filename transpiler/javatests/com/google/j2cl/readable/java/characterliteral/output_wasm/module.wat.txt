@@ -3,19 +3,18 @@
 
 ;;; Code for characterliteral.CharacterLiteral [vtable.init]
 (global $characterliteral.CharacterLiteral.vtable (ref $characterliteral.CharacterLiteral.vtable) 
- (struct.new_with_rtt $characterliteral.CharacterLiteral.vtable
+ (struct.new $characterliteral.CharacterLiteral.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@characterliteral.CharacterLiteral)
   (ref.func $m_main__void@characterliteral.CharacterLiteral)
-  (rtt.canon $characterliteral.CharacterLiteral.vtable)
  )
 )
 
 ;;; Code for characterliteral.CharacterLiteral [itable.init]
-(global $characterliteral.CharacterLiteral.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $characterliteral.CharacterLiteral.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for characterliteral.CharacterLiteral [CLASS]
 (type $characterliteral.CharacterLiteral (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; CharacterLiteral $instance = new CharacterLiteral.<init>();
   ;;@ characterliteral/CharacterLiteral.java:18:13
-  (local.set $$instance (struct.new_with_rtt $characterliteral.CharacterLiteral (ref.as_non_null (global.get $characterliteral.CharacterLiteral.vtable)) (ref.as_non_null (global.get $characterliteral.CharacterLiteral.itable)) (i32.const 0) (rtt.canon $characterliteral.CharacterLiteral)))
+  (local.set $$instance (struct.new $characterliteral.CharacterLiteral (ref.as_non_null (global.get $characterliteral.CharacterLiteral.vtable)) (ref.as_non_null (global.get $characterliteral.CharacterLiteral.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ characterliteral/CharacterLiteral.java:18:13
   (call $$ctor__void_$p_characterliteral_CharacterLiteral@characterliteral.CharacterLiteral (local.get $$instance))
@@ -72,7 +71,7 @@
  ;;@ characterliteral/CharacterLiteral.java:20:14
  (local $a i32)
  (local $this (ref null $characterliteral.CharacterLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $characterliteral.CharacterLiteral)))
+ (local.set $this (ref.cast_static $characterliteral.CharacterLiteral (local.get $this.untyped)))
  (block
   ;; char a = 32;
   ;;@ characterliteral/CharacterLiteral.java:21:4
@@ -466,7 +465,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $characterliteral.CharacterLiteral))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $characterliteral.CharacterLiteral)))
+ (local.set $this (ref.cast_static $characterliteral.CharacterLiteral (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCharacterliteral.CharacterLiteral();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCharacterliteral.CharacterLiteral__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

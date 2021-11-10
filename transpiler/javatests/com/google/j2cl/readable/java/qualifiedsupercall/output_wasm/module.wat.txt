@@ -9,51 +9,48 @@
 
 ;;; Code for qualifiedsupercall.Parent [vtable.init]
 (global $qualifiedsupercall.Parent.vtable (ref $qualifiedsupercall.Parent.vtable) 
- (struct.new_with_rtt $qualifiedsupercall.Parent.vtable
+ (struct.new $qualifiedsupercall.Parent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@qualifiedsupercall.Parent)
   (ref.func $m_fun__void@qualifiedsupercall.Parent)
-  (rtt.canon $qualifiedsupercall.Parent.vtable)
  )
 )
 
 ;;; Code for qualifiedsupercall.Parent [itable.init]
-(global $qualifiedsupercall.Parent.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $qualifiedsupercall.Parent.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [vtable.init]
 (global $qualifiedsupercall.QualifiedSuperCall.vtable (ref $qualifiedsupercall.QualifiedSuperCall.vtable) 
- (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.vtable
+ (struct.new $qualifiedsupercall.QualifiedSuperCall.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall)
   (ref.func $m_fun__void@qualifiedsupercall.Parent)
-  (rtt.canon $qualifiedsupercall.QualifiedSuperCall.vtable)
  )
 )
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall [itable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $qualifiedsupercall.QualifiedSuperCall.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [vtable.init]
 (global $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable (ref $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable) 
- (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable
+ (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@qualifiedsupercall.QualifiedSuperCall.InnerClass)
   (ref.func $m_test__void@qualifiedsupercall.QualifiedSuperCall.InnerClass)
-  (rtt.canon $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)
  )
 )
 
 ;;; Code for qualifiedsupercall.QualifiedSuperCall.InnerClass [itable.init]
-(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for qualifiedsupercall.Parent [CLASS]
 (type $qualifiedsupercall.Parent (struct_subtype 
@@ -79,7 +76,7 @@
  (block
   ;; Parent $instance = new Parent.<init>();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
-  (local.set $$instance (struct.new_with_rtt $qualifiedsupercall.Parent (ref.as_non_null (global.get $qualifiedsupercall.Parent.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.Parent.itable)) (i32.const 0) (rtt.canon $qualifiedsupercall.Parent)))
+  (local.set $$instance (struct.new $qualifiedsupercall.Parent (ref.as_non_null (global.get $qualifiedsupercall.Parent.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:18:6
   (call $$ctor__void_$p_qualifiedsupercall_Parent@qualifiedsupercall.Parent (local.get $$instance))
@@ -109,7 +106,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:19:14
  (local $this (ref null $qualifiedsupercall.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $qualifiedsupercall.Parent)))
+ (local.set $this (ref.cast_static $qualifiedsupercall.Parent (local.get $this.untyped)))
  (block
  )
 )
@@ -143,7 +140,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $qualifiedsupercall.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $qualifiedsupercall.Parent)))
+ (local.set $this (ref.cast_static $qualifiedsupercall.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getQualifiedsupercall.Parent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getQualifiedsupercall.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -175,7 +172,7 @@
  (block
   ;; QualifiedSuperCall $instance = new QualifiedSuperCall.<init>();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
-  (local.set $$instance (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.itable)) (i32.const 0) (rtt.canon $qualifiedsupercall.QualifiedSuperCall)))
+  (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:22:13
   (call $$ctor__void_$p_qualifiedsupercall_QualifiedSuperCall@qualifiedsupercall.QualifiedSuperCall (local.get $$instance))
@@ -227,7 +224,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $qualifiedsupercall.QualifiedSuperCall)))
+ (local.set $this (ref.cast_static $qualifiedsupercall.QualifiedSuperCall (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getQualifiedsupercall.QualifiedSuperCall();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getQualifiedsupercall.QualifiedSuperCall__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -261,7 +258,7 @@
  (block
   ;; InnerClass $instance = new InnerClass.<init>($outer_this);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
-  (local.set $$instance (struct.new_with_rtt $qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable)) (i32.const 0) (ref.null $qualifiedsupercall.QualifiedSuperCall) (rtt.canon $qualifiedsupercall.QualifiedSuperCall.InnerClass)))
+  (local.set $$instance (struct.new $qualifiedsupercall.QualifiedSuperCall.InnerClass (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.vtable)) (ref.as_non_null (global.get $qualifiedsupercall.QualifiedSuperCall.InnerClass.itable)) (i32.const 0) (ref.null $qualifiedsupercall.QualifiedSuperCall)))
   ;; $instance.$ctor($outer_this);
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:23:15
   (call $$ctor__qualifiedsupercall_QualifiedSuperCall__void_$p_qualifiedsupercall_QualifiedSuperCall_InnerClass@qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $$instance)(local.get $$outer_this))
@@ -295,7 +292,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ qualifiedsupercall/QualifiedSuperCall.java:24:16
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $qualifiedsupercall.QualifiedSuperCall.InnerClass)))
+ (local.set $this (ref.cast_static $qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $this.untyped)))
  (block
   ;; InnerClass.this.this.fun();
   ;;@ qualifiedsupercall/QualifiedSuperCall.java:25:6
@@ -332,7 +329,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $qualifiedsupercall.QualifiedSuperCall.InnerClass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $qualifiedsupercall.QualifiedSuperCall.InnerClass)))
+ (local.set $this (ref.cast_static $qualifiedsupercall.QualifiedSuperCall.InnerClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getQualifiedsupercall.QualifiedSuperCall.InnerClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getQualifiedsupercall.QualifiedSuperCall.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

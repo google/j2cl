@@ -9,40 +9,37 @@
 
 ;;; Code for overridingmethods.Parent [vtable.init]
 (global $overridingmethods.Parent.vtable (ref $overridingmethods.Parent.vtable) 
- (struct.new_with_rtt $overridingmethods.Parent.vtable
+ (struct.new $overridingmethods.Parent.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@overridingmethods.Parent)
   (ref.func $m_fun__void@overridingmethods.Parent)
-  (rtt.canon $overridingmethods.Parent.vtable)
  )
 )
 
 ;;; Code for overridingmethods.Parent [itable.init]
-(global $overridingmethods.Parent.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $overridingmethods.Parent.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for overridingmethods.Child [vtable.init]
 (global $overridingmethods.Child.vtable (ref $overridingmethods.Child.vtable) 
- (struct.new_with_rtt $overridingmethods.Child.vtable
+ (struct.new $overridingmethods.Child.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@overridingmethods.Child)
   (ref.func $m_fun__void@overridingmethods.Child)
   (ref.func $m_bar__void@overridingmethods.Child)
-  (rtt.canon $overridingmethods.Child.vtable)
  )
 )
 
 ;;; Code for overridingmethods.Child [itable.init]
-(global $overridingmethods.Child.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $overridingmethods.SomeInterface.vtable
+(global $overridingmethods.Child.itable (ref $itable) (array.init_static $itable 
+ (struct.new $overridingmethods.SomeInterface.vtable
   (ref.func $m_bar__void@overridingmethods.Child)
-  (rtt.canon $overridingmethods.SomeInterface.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for overridingmethods.SomeInterface [INTERFACE]
 (type $overridingmethods.SomeInterface.vtable (struct_subtype 
@@ -104,7 +101,7 @@
  (block
   ;; Parent $instance = new Parent.<init>();
   ;;@ overridingmethods/Child.java:22:6
-  (local.set $$instance (struct.new_with_rtt $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $overridingmethods.Parent.itable)) (i32.const 0) (rtt.canon $overridingmethods.Parent)))
+  (local.set $$instance (struct.new $overridingmethods.Parent (ref.as_non_null (global.get $overridingmethods.Parent.vtable)) (ref.as_non_null (global.get $overridingmethods.Parent.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ overridingmethods/Child.java:22:6
   (call $$ctor__void_$p_overridingmethods_Parent@overridingmethods.Parent (local.get $$instance))
@@ -134,7 +131,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ overridingmethods/Child.java:23:14
  (local $this (ref null $overridingmethods.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $overridingmethods.Parent)))
+ (local.set $this (ref.cast_static $overridingmethods.Parent (local.get $this.untyped)))
  (block
  )
 )
@@ -168,7 +165,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Parent))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $overridingmethods.Parent)))
+ (local.set $this (ref.cast_static $overridingmethods.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Parent();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverridingmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -201,7 +198,7 @@
  (block
   ;; Child $instance = new Child.<init>();
   ;;@ overridingmethods/Child.java:26:13
-  (local.set $$instance (struct.new_with_rtt $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0) (rtt.canon $overridingmethods.Child)))
+  (local.set $$instance (struct.new $overridingmethods.Child (ref.as_non_null (global.get $overridingmethods.Child.vtable)) (ref.as_non_null (global.get $overridingmethods.Child.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ overridingmethods/Child.java:26:13
   (call $$ctor__void_$p_overridingmethods_Child@overridingmethods.Child (local.get $$instance))
@@ -231,7 +228,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ overridingmethods/Child.java:28:14
  (local $this (ref null $overridingmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $overridingmethods.Child)))
+ (local.set $this (ref.cast_static $overridingmethods.Child (local.get $this.untyped)))
  (block
  )
 )
@@ -243,7 +240,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ overridingmethods/Child.java:31:14
  (local $this (ref null $overridingmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $overridingmethods.Child)))
+ (local.set $this (ref.cast_static $overridingmethods.Child (local.get $this.untyped)))
  (block
  )
 )
@@ -277,7 +274,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Child))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $overridingmethods.Child)))
+ (local.set $this (ref.cast_static $overridingmethods.Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Child();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverridingmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -3,19 +3,18 @@
 
 ;;; Code for longparametersignature.LongParameterSignature [vtable.init]
 (global $longparametersignature.LongParameterSignature.vtable (ref $longparametersignature.LongParameterSignature.vtable) 
- (struct.new_with_rtt $longparametersignature.LongParameterSignature.vtable
+ (struct.new $longparametersignature.LongParameterSignature.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@longparametersignature.LongParameterSignature)
   (ref.func $m_main__long__void@longparametersignature.LongParameterSignature)
-  (rtt.canon $longparametersignature.LongParameterSignature.vtable)
  )
 )
 
 ;;; Code for longparametersignature.LongParameterSignature [itable.init]
-(global $longparametersignature.LongParameterSignature.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $longparametersignature.LongParameterSignature.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for longparametersignature.LongParameterSignature [CLASS]
 (type $longparametersignature.LongParameterSignature (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; LongParameterSignature $instance = new LongParameterSignature.<init>();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
-  (local.set $$instance (struct.new_with_rtt $longparametersignature.LongParameterSignature (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.vtable)) (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.itable)) (i32.const 0) (rtt.canon $longparametersignature.LongParameterSignature)))
+  (local.set $$instance (struct.new $longparametersignature.LongParameterSignature (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.vtable)) (ref.as_non_null (global.get $longparametersignature.LongParameterSignature.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ longparametersignature/LongParameterSignature.java:18:13
   (call $$ctor__void_$p_longparametersignature_LongParameterSignature@longparametersignature.LongParameterSignature (local.get $$instance))
@@ -72,7 +71,7 @@
  (param $foo i64)
  ;;@ longparametersignature/LongParameterSignature.java:19:14
  (local $this (ref null $longparametersignature.LongParameterSignature))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $longparametersignature.LongParameterSignature)))
+ (local.set $this (ref.cast_static $longparametersignature.LongParameterSignature (local.get $this.untyped)))
  (block
  )
 )
@@ -106,7 +105,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $longparametersignature.LongParameterSignature))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $longparametersignature.LongParameterSignature)))
+ (local.set $this (ref.cast_static $longparametersignature.LongParameterSignature (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLongparametersignature.LongParameterSignature();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLongparametersignature.LongParameterSignature__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

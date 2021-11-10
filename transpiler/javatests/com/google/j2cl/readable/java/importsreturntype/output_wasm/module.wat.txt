@@ -9,49 +9,46 @@
 
 ;;; Code for importsreturntype.ImportsReturnType [vtable.init]
 (global $importsreturntype.ImportsReturnType.vtable (ref $importsreturntype.ImportsReturnType.vtable) 
- (struct.new_with_rtt $importsreturntype.ImportsReturnType.vtable
+ (struct.new $importsreturntype.ImportsReturnType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType)
   (ref.func $m_get__importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType)
-  (rtt.canon $importsreturntype.ImportsReturnType.vtable)
  )
 )
 
 ;;; Code for importsreturntype.ImportsReturnType [itable.init]
-(global $importsreturntype.ImportsReturnType.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $importsreturntype.ImportsReturnType.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for importsreturntype.ImportsReturnType.Entry [vtable.init]
 (global $importsreturntype.ImportsReturnType.Entry.vtable (ref $importsreturntype.ImportsReturnType.Entry.vtable) 
- (struct.new_with_rtt $importsreturntype.ImportsReturnType.Entry.vtable
+ (struct.new $importsreturntype.ImportsReturnType.Entry.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Entry)
-  (rtt.canon $importsreturntype.ImportsReturnType.Entry.vtable)
  )
 )
 
 ;;; Code for importsreturntype.ImportsReturnType.Entry [itable.init]
-(global $importsreturntype.ImportsReturnType.Entry.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $importsreturntype.ImportsReturnType.Entry.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for importsreturntype.ImportsReturnType.Set [vtable.init]
 (global $importsreturntype.ImportsReturnType.Set.vtable (ref $importsreturntype.ImportsReturnType.Set.vtable) 
- (struct.new_with_rtt $importsreturntype.ImportsReturnType.Set.vtable
+ (struct.new $importsreturntype.ImportsReturnType.Set.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@importsreturntype.ImportsReturnType.Set)
-  (rtt.canon $importsreturntype.ImportsReturnType.Set.vtable)
  )
 )
 
 ;;; Code for importsreturntype.ImportsReturnType.Set [itable.init]
-(global $importsreturntype.ImportsReturnType.Set.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $importsreturntype.ImportsReturnType.Set.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for importsreturntype.ImportsReturnType [CLASS]
 (type $importsreturntype.ImportsReturnType (struct_subtype 
@@ -77,7 +74,7 @@
  (block
   ;; ImportsReturnType $instance = new ImportsReturnType.<init>();
   ;;@ importsreturntype/ImportsReturnType.java:18:13
-  (local.set $$instance (struct.new_with_rtt $importsreturntype.ImportsReturnType (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.itable)) (i32.const 0) (rtt.canon $importsreturntype.ImportsReturnType)))
+  (local.set $$instance (struct.new $importsreturntype.ImportsReturnType (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:18:13
   (call $$ctor__void_$p_importsreturntype_ImportsReturnType@importsreturntype.ImportsReturnType (local.get $$instance))
@@ -108,7 +105,7 @@
  (result (ref null $importsreturntype.ImportsReturnType.Set))
  ;;@ importsreturntype/ImportsReturnType.java:23:20
  (local $this (ref null $importsreturntype.ImportsReturnType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importsreturntype.ImportsReturnType)))
+ (local.set $this (ref.cast_static $importsreturntype.ImportsReturnType (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ importsreturntype/ImportsReturnType.java:24:4
@@ -145,7 +142,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importsreturntype.ImportsReturnType)))
+ (local.set $this (ref.cast_static $importsreturntype.ImportsReturnType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImportsreturntype.ImportsReturnType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -176,7 +173,7 @@
  (block
   ;; Entry $instance = new Entry.<init>();
   ;;@ importsreturntype/ImportsReturnType.java:19:22
-  (local.set $$instance (struct.new_with_rtt $importsreturntype.ImportsReturnType.Entry (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.itable)) (i32.const 0) (rtt.canon $importsreturntype.ImportsReturnType.Entry)))
+  (local.set $$instance (struct.new $importsreturntype.ImportsReturnType.Entry (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Entry.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:19:22
   (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Entry@importsreturntype.ImportsReturnType.Entry (local.get $$instance))
@@ -228,7 +225,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Entry))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importsreturntype.ImportsReturnType.Entry)))
+ (local.set $this (ref.cast_static $importsreturntype.ImportsReturnType.Entry (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType.Entry();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImportsreturntype.ImportsReturnType.Entry__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -259,7 +256,7 @@
  (block
   ;; Set<S> $instance = new Set.<init>();
   ;;@ importsreturntype/ImportsReturnType.java:21:22
-  (local.set $$instance (struct.new_with_rtt $importsreturntype.ImportsReturnType.Set (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.itable)) (i32.const 0) (rtt.canon $importsreturntype.ImportsReturnType.Set)))
+  (local.set $$instance (struct.new $importsreturntype.ImportsReturnType.Set (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.vtable)) (ref.as_non_null (global.get $importsreturntype.ImportsReturnType.Set.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ importsreturntype/ImportsReturnType.java:21:22
   (call $$ctor__void_$p_importsreturntype_ImportsReturnType_Set@importsreturntype.ImportsReturnType.Set (local.get $$instance))
@@ -311,7 +308,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $importsreturntype.ImportsReturnType.Set))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $importsreturntype.ImportsReturnType.Set)))
+ (local.set $this (ref.cast_static $importsreturntype.ImportsReturnType.Set (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getImportsreturntype.ImportsReturnType.Set();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getImportsreturntype.ImportsReturnType.Set__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

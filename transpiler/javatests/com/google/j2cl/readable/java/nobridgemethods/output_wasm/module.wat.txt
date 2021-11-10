@@ -18,71 +18,66 @@
 
 ;;; Code for nobridgemethods.TreeMap [vtable.init]
 (global $nobridgemethods.TreeMap.vtable (ref $nobridgemethods.TreeMap.vtable) 
- (struct.new_with_rtt $nobridgemethods.TreeMap.vtable
+ (struct.new $nobridgemethods.TreeMap.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
-  (rtt.canon $nobridgemethods.TreeMap.vtable)
  )
 )
 
 ;;; Code for nobridgemethods.TreeMap [itable.init]
-(global $nobridgemethods.TreeMap.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nobridgemethods.TreeMap.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [vtable.init]
 (global $nobridgemethods.TreeMap.InnerEntry.vtable (ref $nobridgemethods.TreeMap.InnerEntry.vtable) 
- (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry.vtable
+ (struct.new $nobridgemethods.TreeMap.InnerEntry.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nobridgemethods.TreeMap.InnerEntry)
-  (rtt.canon $nobridgemethods.TreeMap.InnerEntry.vtable)
  )
 )
 
 ;;; Code for nobridgemethods.TreeMap.InnerEntry [itable.init]
-(global $nobridgemethods.TreeMap.InnerEntry.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $nobridgemethods.Entry.vtable
+(global $nobridgemethods.TreeMap.InnerEntry.itable (ref $itable) (array.init_static $itable 
+ (struct.new $nobridgemethods.Entry.vtable
   (ref.null data)
-  (rtt.canon $nobridgemethods.Entry.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for nobridgemethods.CharSet [vtable.init]
 (global $nobridgemethods.CharSet.vtable (ref $nobridgemethods.CharSet.vtable) 
- (struct.new_with_rtt $nobridgemethods.CharSet.vtable
+ (struct.new $nobridgemethods.CharSet.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet)
-  (rtt.canon $nobridgemethods.CharSet.vtable)
  )
 )
 
 ;;; Code for nobridgemethods.CharSet [itable.init]
-(global $nobridgemethods.CharSet.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nobridgemethods.CharSet.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nobridgemethods.CharSet.1 [vtable.init]
 (global $nobridgemethods.CharSet.1.vtable (ref $nobridgemethods.CharSet.1.vtable) 
- (struct.new_with_rtt $nobridgemethods.CharSet.1.vtable
+ (struct.new $nobridgemethods.CharSet.1.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nobridgemethods.CharSet.1)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_Entry@nobridgemethods.TreeMap)
   (ref.func $m_getCeilingEntry__java_lang_Object__nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap)
-  (rtt.canon $nobridgemethods.CharSet.1.vtable)
  )
 )
 
 ;;; Code for nobridgemethods.CharSet.1 [itable.init]
-(global $nobridgemethods.CharSet.1.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nobridgemethods.CharSet.1.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nobridgemethods.Entry [INTERFACE]
 (type $nobridgemethods.Entry.vtable (struct_subtype (field $unused (ref null data))
@@ -196,7 +191,7 @@
  (block
   ;; TreeMap<K> $instance = new TreeMap.<init>();
   ;;@ nobridgemethods/CharSet.java:24:6
-  (local.set $$instance (struct.new_with_rtt $nobridgemethods.TreeMap (ref.as_non_null (global.get $nobridgemethods.TreeMap.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.itable)) (i32.const 0) (rtt.canon $nobridgemethods.TreeMap)))
+  (local.set $$instance (struct.new $nobridgemethods.TreeMap (ref.as_non_null (global.get $nobridgemethods.TreeMap.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:24:6
   (call $$ctor__void_$p_nobridgemethods_TreeMap@nobridgemethods.TreeMap (local.get $$instance))
@@ -228,7 +223,7 @@
  (result (ref null $nobridgemethods.TreeMap.InnerEntry))
  ;;@ nobridgemethods/CharSet.java:28:23
  (local $this (ref null $nobridgemethods.TreeMap))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nobridgemethods.TreeMap)))
+ (local.set $this (ref.cast_static $nobridgemethods.TreeMap (local.get $this.untyped)))
  (block
   ;; return nobridgemethods.TreeMap.InnerEntry.$create();
   ;;@ nobridgemethods/CharSet.java:29:4
@@ -245,7 +240,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nobridgemethods/CharSet.java:24:6
  (local $this (ref null $nobridgemethods.TreeMap))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nobridgemethods.TreeMap)))
+ (local.set $this (ref.cast_static $nobridgemethods.TreeMap (local.get $this.untyped)))
  (block
   ;; return TreeMap.this.getCeilingEntry(arg0);
   ;;@ nobridgemethods/CharSet.java:24:6
@@ -282,7 +277,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nobridgemethods.TreeMap)))
+ (local.set $this (ref.cast_static $nobridgemethods.TreeMap (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNobridgemethods.TreeMap();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNobridgemethods.TreeMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -313,7 +308,7 @@
  (block
   ;; InnerEntry<K> $instance = new InnerEntry.<init>();
   ;;@ nobridgemethods/CharSet.java:25:15
-  (local.set $$instance (struct.new_with_rtt $nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.itable)) (i32.const 0) (rtt.canon $nobridgemethods.TreeMap.InnerEntry)))
+  (local.set $$instance (struct.new $nobridgemethods.TreeMap.InnerEntry (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.vtable)) (ref.as_non_null (global.get $nobridgemethods.TreeMap.InnerEntry.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:25:15
   (call $$ctor__void_$p_nobridgemethods_TreeMap_InnerEntry@nobridgemethods.TreeMap.InnerEntry (local.get $$instance))
@@ -365,7 +360,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.TreeMap.InnerEntry))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nobridgemethods.TreeMap.InnerEntry)))
+ (local.set $this (ref.cast_static $nobridgemethods.TreeMap.InnerEntry (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNobridgemethods.TreeMap.InnerEntry();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNobridgemethods.TreeMap.InnerEntry__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -396,7 +391,7 @@
  (block
   ;; CharSet $instance = new CharSet.<init>();
   ;;@ nobridgemethods/CharSet.java:33:13
-  (local.set $$instance (struct.new_with_rtt $nobridgemethods.CharSet (ref.as_non_null (global.get $nobridgemethods.CharSet.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.itable)) (i32.const 0) (rtt.canon $nobridgemethods.CharSet)))
+  (local.set $$instance (struct.new $nobridgemethods.CharSet (ref.as_non_null (global.get $nobridgemethods.CharSet.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:33:13
   (call $$ctor__void_$p_nobridgemethods_CharSet@nobridgemethods.CharSet (local.get $$instance))
@@ -463,7 +458,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nobridgemethods.CharSet)))
+ (local.set $this (ref.cast_static $nobridgemethods.CharSet (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNobridgemethods.CharSet();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNobridgemethods.CharSet__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -496,7 +491,7 @@
  (block
   ;; <anonymous> extends TreeMap<String> $instance = new $1.<init>();
   ;;@ nobridgemethods/CharSet.java:36:52
-  (local.set $$instance (struct.new_with_rtt $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0) (rtt.canon $nobridgemethods.CharSet.1)))
+  (local.set $$instance (struct.new $nobridgemethods.CharSet.1 (ref.as_non_null (global.get $nobridgemethods.CharSet.1.vtable)) (ref.as_non_null (global.get $nobridgemethods.CharSet.1.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nobridgemethods/CharSet.java:36:52
   (call $$ctor__void_$p_nobridgemethods_CharSet_1@nobridgemethods.CharSet.1 (local.get $$instance))
@@ -548,7 +543,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nobridgemethods.CharSet.1))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nobridgemethods.CharSet.1)))
+ (local.set $this (ref.cast_static $nobridgemethods.CharSet.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNobridgemethods.CharSet.1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNobridgemethods.CharSet.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

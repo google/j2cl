@@ -3,18 +3,17 @@
 
 ;;; Code for publicconstructor.PublicConstructor [vtable.init]
 (global $publicconstructor.PublicConstructor.vtable (ref $publicconstructor.PublicConstructor.vtable) 
- (struct.new_with_rtt $publicconstructor.PublicConstructor.vtable
+ (struct.new $publicconstructor.PublicConstructor.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@publicconstructor.PublicConstructor)
-  (rtt.canon $publicconstructor.PublicConstructor.vtable)
  )
 )
 
 ;;; Code for publicconstructor.PublicConstructor [itable.init]
-(global $publicconstructor.PublicConstructor.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $publicconstructor.PublicConstructor.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for publicconstructor.PublicConstructor [CLASS]
 (type $publicconstructor.PublicConstructor (struct_subtype 
@@ -39,7 +38,7 @@
  (block
   ;; PublicConstructor $instance = new PublicConstructor.<init>();
   ;;@ publicconstructor/PublicConstructor.java:19:9
-  (local.set $$instance (struct.new_with_rtt $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0) (rtt.canon $publicconstructor.PublicConstructor)))
+  (local.set $$instance (struct.new $publicconstructor.PublicConstructor (ref.as_non_null (global.get $publicconstructor.PublicConstructor.vtable)) (ref.as_non_null (global.get $publicconstructor.PublicConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ publicconstructor/PublicConstructor.java:19:9
   (call $$ctor__void_$p_publicconstructor_PublicConstructor@publicconstructor.PublicConstructor (local.get $$instance))
@@ -91,7 +90,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $publicconstructor.PublicConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $publicconstructor.PublicConstructor)))
+ (local.set $this (ref.cast_static $publicconstructor.PublicConstructor (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getPublicconstructor.PublicConstructor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getPublicconstructor.PublicConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

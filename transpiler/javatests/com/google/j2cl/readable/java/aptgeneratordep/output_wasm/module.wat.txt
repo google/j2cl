@@ -6,33 +6,31 @@
 
 ;;; Code for aptgeneratordep.Dummy [vtable.init]
 (global $aptgeneratordep.Dummy.vtable (ref $aptgeneratordep.Dummy.vtable) 
- (struct.new_with_rtt $aptgeneratordep.Dummy.vtable
+ (struct.new $aptgeneratordep.Dummy.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@aptgeneratordep.Dummy)
-  (rtt.canon $aptgeneratordep.Dummy.vtable)
  )
 )
 
 ;;; Code for aptgeneratordep.Dummy [itable.init]
-(global $aptgeneratordep.Dummy.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $aptgeneratordep.Dummy.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for aptgeneratordep.Foo [vtable.init]
 (global $aptgeneratordep.Foo.vtable (ref $aptgeneratordep.Foo.vtable) 
- (struct.new_with_rtt $aptgeneratordep.Foo.vtable
+ (struct.new $aptgeneratordep.Foo.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@aptgeneratordep.Foo)
   (ref.func $m_getClass__java_lang_Class@aptgeneratordep.Foo)
-  (rtt.canon $aptgeneratordep.Foo.vtable)
  )
 )
 
 ;;; Code for aptgeneratordep.Foo [itable.init]
-(global $aptgeneratordep.Foo.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $aptgeneratordep.Foo.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for aptgeneratordep.Dummy [CLASS]
 (type $aptgeneratordep.Dummy (struct_subtype 
@@ -57,7 +55,7 @@
  (block
   ;; Dummy $instance = new Dummy.<init>();
   ;;@ aptgeneratordep/Dummy.java:3:13
-  (local.set $$instance (struct.new_with_rtt $aptgeneratordep.Dummy (ref.as_non_null (global.get $aptgeneratordep.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Dummy.itable)) (i32.const 0) (rtt.canon $aptgeneratordep.Dummy)))
+  (local.set $$instance (struct.new $aptgeneratordep.Dummy (ref.as_non_null (global.get $aptgeneratordep.Dummy.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Dummy.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ aptgeneratordep/Dummy.java:3:13
   (call $$ctor__void_$p_aptgeneratordep_Dummy@aptgeneratordep.Dummy (local.get $$instance))
@@ -109,7 +107,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratordep.Dummy))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $aptgeneratordep.Dummy)))
+ (local.set $this (ref.cast_static $aptgeneratordep.Dummy (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Dummy();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratordep.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -140,7 +138,7 @@
  (block
   ;; Foo $instance = new Foo.<init>();
   ;;@ aptgeneratordep/Foo.java:18:13
-  (local.set $$instance (struct.new_with_rtt $aptgeneratordep.Foo (ref.as_non_null (global.get $aptgeneratordep.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Foo.itable)) (i32.const 0) (rtt.canon $aptgeneratordep.Foo)))
+  (local.set $$instance (struct.new $aptgeneratordep.Foo (ref.as_non_null (global.get $aptgeneratordep.Foo.vtable)) (ref.as_non_null (global.get $aptgeneratordep.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ aptgeneratordep/Foo.java:18:13
   (call $$ctor__void_$p_aptgeneratordep_Foo@aptgeneratordep.Foo (local.get $$instance))
@@ -172,7 +170,7 @@
  ;;@ aptgeneratordep/Foo.java:21:16
  (local $$qualifier (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratordep.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $aptgeneratordep.Foo)))
+ (local.set $this (ref.cast_static $aptgeneratordep.Foo (local.get $this.untyped)))
  (block
   ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Dummy(),$qualifier.getSimpleName());
   ;;@ aptgeneratordep/Foo.java:23:4
@@ -212,7 +210,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratordep.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $aptgeneratordep.Foo)))
+ (local.set $this (ref.cast_static $aptgeneratordep.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratordep.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratordep.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

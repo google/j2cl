@@ -389,7 +389,7 @@ public class WasmModuleGenerator {
       builder.newLine();
       builder.append(
           String.format(
-              "(local.set $this (ref.cast (local.get $this.untyped) (rtt.canon %s)))",
+              "(local.set $this (ref.cast_static %s (local.get $this.untyped)))",
               environment.getWasmTypeName(enclosingTypeDescriptor)));
     }
 
@@ -524,13 +524,13 @@ public class WasmModuleGenerator {
     builder.newLine();
     builder.append(
         String.format(
-            "(global %s (ref $itable) (array.init $itable ",
+            "(global %s (ref $itable) (array.init_static $itable ",
             environment.getWasmItableGlobalName(typeDeclaration)));
     builder.indent();
     WasmTypeLayout wasmTypeLayout = environment.getWasmTypeLayout(typeDeclaration);
     Arrays.stream(itableSlots).forEach(i -> initializeInterfaceVtable(wasmTypeLayout, i));
     builder.newLine();
-    builder.append("(rtt.canon $itable)))");
+    builder.append("))");
     builder.unindent();
     emitEndCodeComment(typeDeclaration, "itable.init");
   }
@@ -563,8 +563,7 @@ public class WasmModuleGenerator {
     // Create an instance of the vtable for the type initializing it with the methods that are
     // passed in methodDescriptors.
     builder.append(
-        String.format(
-            "(struct.new_with_rtt %s", environment.getWasmVtableTypeName(implementedType)));
+        String.format("(struct.new %s", environment.getWasmVtableTypeName(implementedType)));
 
     // TODO(b/200341175): Binaryen turns new_with_rtt into new_default_with_rtt for structs with
     // no fields (since they are equivalent) and Chrome does not yet support new_default_with_rtt
@@ -580,13 +579,6 @@ public class WasmModuleGenerator {
           builder.append(
               String.format("(ref.func %s)", environment.getMethodImplementationName(m)));
         });
-    builder.newLine();
-    // Always use a canonical rtt for vtables.
-    // Vtables corresponding the the class dynamic dispatch never require casting; their assignments
-    // are always statically sound. On the other hand interface dispatch vtables require a cast
-    // but they are only cast to their specific type.
-    builder.append(
-        String.format("(rtt.canon %s)", environment.getWasmVtableTypeName(implementedType)));
     builder.unindent();
     builder.newLine();
     builder.append(")");

@@ -6,18 +6,17 @@
 
 ;;; Code for jsignore.JsIgnoreExample [vtable.init]
 (global $jsignore.JsIgnoreExample.vtable (ref $jsignore.JsIgnoreExample.vtable) 
- (struct.new_with_rtt $jsignore.JsIgnoreExample.vtable
+ (struct.new $jsignore.JsIgnoreExample.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jsignore.JsIgnoreExample)
-  (rtt.canon $jsignore.JsIgnoreExample.vtable)
  )
 )
 
 ;;; Code for jsignore.JsIgnoreExample [itable.init]
-(global $jsignore.JsIgnoreExample.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsignore.JsIgnoreExample.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsignore.JsIgnoreExample [CLASS]
 (type $jsignore.JsIgnoreExample (struct_subtype 
@@ -42,7 +41,7 @@
  (block
   ;; JsIgnoreExample $instance = new JsIgnoreExample.<init>();
   ;;@ jsignore/JsIgnoreExample.java:22:13
-  (local.set $$instance (struct.new_with_rtt $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $jsignore.JsIgnoreExample.itable)) (i32.const 0) (rtt.canon $jsignore.JsIgnoreExample)))
+  (local.set $$instance (struct.new $jsignore.JsIgnoreExample (ref.as_non_null (global.get $jsignore.JsIgnoreExample.vtable)) (ref.as_non_null (global.get $jsignore.JsIgnoreExample.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsignore/JsIgnoreExample.java:22:13
   (call $$ctor__void_$p_jsignore_JsIgnoreExample@jsignore.JsIgnoreExample (local.get $$instance))
@@ -123,7 +122,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsignore.JsIgnoreExample))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsignore.JsIgnoreExample)))
+ (local.set $this (ref.cast_static $jsignore.JsIgnoreExample (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsignore.JsIgnoreExample();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsignore.JsIgnoreExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -3,20 +3,19 @@
 
 ;;; Code for jsdocreturn.JsDocReturn [vtable.init]
 (global $jsdocreturn.JsDocReturn.vtable (ref $jsdocreturn.JsDocReturn.vtable) 
- (struct.new_with_rtt $jsdocreturn.JsDocReturn.vtable
+ (struct.new $jsdocreturn.JsDocReturn.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jsdocreturn.JsDocReturn)
   (ref.func $m_test1__void@jsdocreturn.JsDocReturn)
   (ref.func $m_test2__int@jsdocreturn.JsDocReturn)
-  (rtt.canon $jsdocreturn.JsDocReturn.vtable)
  )
 )
 
 ;;; Code for jsdocreturn.JsDocReturn [itable.init]
-(global $jsdocreturn.JsDocReturn.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsdocreturn.JsDocReturn.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsdocreturn.JsDocReturn [CLASS]
 (type $jsdocreturn.JsDocReturn (struct_subtype 
@@ -43,7 +42,7 @@
  (block
   ;; JsDocReturn $instance = new JsDocReturn.<init>();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
-  (local.set $$instance (struct.new_with_rtt $jsdocreturn.JsDocReturn (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.vtable)) (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.itable)) (i32.const 0) (rtt.canon $jsdocreturn.JsDocReturn)))
+  (local.set $$instance (struct.new $jsdocreturn.JsDocReturn (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.vtable)) (ref.as_non_null (global.get $jsdocreturn.JsDocReturn.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsdocreturn/JsDocReturn.java:18:13
   (call $$ctor__void_$p_jsdocreturn_JsDocReturn@jsdocreturn.JsDocReturn (local.get $$instance))
@@ -73,7 +72,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsdocreturn/JsDocReturn.java:19:14
  (local $this (ref null $jsdocreturn.JsDocReturn))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdocreturn.JsDocReturn)))
+ (local.set $this (ref.cast_static $jsdocreturn.JsDocReturn (local.get $this.untyped)))
  (block
  )
 )
@@ -86,7 +85,7 @@
  (result i32)
  ;;@ jsdocreturn/JsDocReturn.java:21:13
  (local $this (ref null $jsdocreturn.JsDocReturn))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdocreturn.JsDocReturn)))
+ (local.set $this (ref.cast_static $jsdocreturn.JsDocReturn (local.get $this.untyped)))
  (block
   ;; return 1;
   ;;@ jsdocreturn/JsDocReturn.java:22:4
@@ -123,7 +122,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdocreturn.JsDocReturn))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdocreturn.JsDocReturn)))
+ (local.set $this (ref.cast_static $jsdocreturn.JsDocReturn (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsdocreturn.JsDocReturn();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsdocreturn.JsDocReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

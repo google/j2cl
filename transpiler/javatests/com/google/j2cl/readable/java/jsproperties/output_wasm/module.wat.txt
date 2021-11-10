@@ -13,22 +13,21 @@
 
 ;;; Code for jsproperties.Foo [vtable.init]
 (global $jsproperties.Foo.vtable (ref $jsproperties.Foo.vtable) 
- (struct.new_with_rtt $jsproperties.Foo.vtable
+ (struct.new $jsproperties.Foo.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jsproperties.Foo)
-  (rtt.canon $jsproperties.Foo.vtable)
  )
 )
 
 ;;; Code for jsproperties.Foo [itable.init]
-(global $jsproperties.Foo.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsproperties.Foo.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsproperties.Bar [vtable.init]
 (global $jsproperties.Bar.vtable (ref $jsproperties.Bar.vtable) 
- (struct.new_with_rtt $jsproperties.Bar.vtable
+ (struct.new $jsproperties.Bar.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -37,33 +36,31 @@
   (ref.func $m_setA__int__void@jsproperties.Bar)
   (ref.func $m_getB__int@jsproperties.Bar)
   (ref.func $m_setB__int__void@jsproperties.Bar)
-  (rtt.canon $jsproperties.Bar.vtable)
  )
 )
 
 ;;; Code for jsproperties.Bar [itable.init]
-(global $jsproperties.Bar.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsproperties.Bar.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsproperties.NativeFoo [vtable.init]
 (global $jsproperties.NativeFoo.vtable (ref $jsproperties.NativeFoo.vtable) 
- (struct.new_with_rtt $jsproperties.NativeFoo.vtable
+ (struct.new $jsproperties.NativeFoo.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jsproperties.NativeFoo)
   (ref.func $m_getA__java_lang_Object@jsproperties.NativeFoo)
-  (rtt.canon $jsproperties.NativeFoo.vtable)
  )
 )
 
 ;;; Code for jsproperties.NativeFoo [itable.init]
-(global $jsproperties.NativeFoo.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsproperties.NativeFoo.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsproperties.Main [vtable.init]
 (global $jsproperties.Main.vtable (ref $jsproperties.Main.vtable) 
- (struct.new_with_rtt $jsproperties.Main.vtable
+ (struct.new $jsproperties.Main.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -71,13 +68,12 @@
   (ref.func $m_testNativeJsProperty__void@jsproperties.Main)
   (ref.func $m_testStaticJsProperty__void@jsproperties.Main)
   (ref.func $m_testInstanceJsProperty__void@jsproperties.Main)
-  (rtt.canon $jsproperties.Main.vtable)
  )
 )
 
 ;;; Code for jsproperties.Main [itable.init]
-(global $jsproperties.Main.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsproperties.Main.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsproperties.Foo [CLASS]
 (type $jsproperties.Foo (struct_subtype 
@@ -102,7 +98,7 @@
  (block
   ;; Foo $instance = new Foo.<init>();
   ;;@ jsproperties/Main.java:22:6
-  (local.set $$instance (struct.new_with_rtt $jsproperties.Foo (ref.as_non_null (global.get $jsproperties.Foo.vtable)) (ref.as_non_null (global.get $jsproperties.Foo.itable)) (i32.const 0) (rtt.canon $jsproperties.Foo)))
+  (local.set $$instance (struct.new $jsproperties.Foo (ref.as_non_null (global.get $jsproperties.Foo.vtable)) (ref.as_non_null (global.get $jsproperties.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:22:6
   (call $$ctor__void_$p_jsproperties_Foo@jsproperties.Foo (local.get $$instance))
@@ -210,7 +206,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Foo)))
+ (local.set $this (ref.cast_static $jsproperties.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -246,7 +242,7 @@
  (block
   ;; Bar $instance = new Bar.<init>();
   ;;@ jsproperties/Main.java:47:6
-  (local.set $$instance (struct.new_with_rtt $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0) (rtt.canon $jsproperties.Bar)))
+  (local.set $$instance (struct.new $jsproperties.Bar (ref.as_non_null (global.get $jsproperties.Bar.vtable)) (ref.as_non_null (global.get $jsproperties.Bar.itable)) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:47:6
   (call $$ctor__void_$p_jsproperties_Bar@jsproperties.Bar (local.get $$instance))
@@ -277,7 +273,7 @@
  (result i32)
  ;;@ jsproperties/Main.java:51:13
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Bar)))
+ (local.set $this (ref.cast_static $jsproperties.Bar (local.get $this.untyped)))
  (block
   ;; return (Bar.this.f + 1);
   ;;@ jsproperties/Main.java:52:4
@@ -293,7 +289,7 @@
  (param $x i32)
  ;;@ jsproperties/Main.java:56:14
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Bar)))
+ (local.set $this (ref.cast_static $jsproperties.Bar (local.get $this.untyped)))
  (block
   ;; (Bar.this.f = (x + 2));
   ;;@ jsproperties/Main.java:57:4
@@ -309,7 +305,7 @@
  (result i32)
  ;;@ jsproperties/Main.java:61:13
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Bar)))
+ (local.set $this (ref.cast_static $jsproperties.Bar (local.get $this.untyped)))
  (block
   ;; return (Bar.this.f + 3);
   ;;@ jsproperties/Main.java:62:4
@@ -325,7 +321,7 @@
  (param $x i32)
  ;;@ jsproperties/Main.java:66:14
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Bar)))
+ (local.set $this (ref.cast_static $jsproperties.Bar (local.get $this.untyped)))
  (block
   ;; (Bar.this.f = (x + 4));
   ;;@ jsproperties/Main.java:67:4
@@ -362,7 +358,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Bar))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Bar)))
+ (local.set $this (ref.cast_static $jsproperties.Bar (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.Bar();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -394,7 +390,7 @@
  (block
   ;; NativeFoo $instance = new NativeFoo.<init>();
   ;;@ jsproperties/Main.java:72:6
-  (local.set $$instance (struct.new_with_rtt $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0) (rtt.canon $jsproperties.NativeFoo)))
+  (local.set $$instance (struct.new $jsproperties.NativeFoo (ref.as_non_null (global.get $jsproperties.NativeFoo.vtable)) (ref.as_non_null (global.get $jsproperties.NativeFoo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:72:6
   (call $$ctor__void_$p_jsproperties_NativeFoo@jsproperties.NativeFoo (local.get $$instance))
@@ -425,7 +421,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsproperties/Main.java:74:23
  (local $this (ref null $jsproperties.NativeFoo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.NativeFoo)))
+ (local.set $this (ref.cast_static $jsproperties.NativeFoo (local.get $this.untyped)))
  (block
  )
  (unreachable)
@@ -465,7 +461,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.NativeFoo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.NativeFoo)))
+ (local.set $this (ref.cast_static $jsproperties.NativeFoo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.NativeFoo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.NativeFoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -499,7 +495,7 @@
  (block
   ;; Main $instance = new Main.<init>();
   ;;@ jsproperties/Main.java:80:13
-  (local.set $$instance (struct.new_with_rtt $jsproperties.Main (ref.as_non_null (global.get $jsproperties.Main.vtable)) (ref.as_non_null (global.get $jsproperties.Main.itable)) (i32.const 0) (rtt.canon $jsproperties.Main)))
+  (local.set $$instance (struct.new $jsproperties.Main (ref.as_non_null (global.get $jsproperties.Main.vtable)) (ref.as_non_null (global.get $jsproperties.Main.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsproperties/Main.java:80:13
   (call $$ctor__void_$p_jsproperties_Main@jsproperties.Main (local.get $$instance))
@@ -530,7 +526,7 @@
  ;;@ jsproperties/Main.java:81:14
  (local $$qualifier (ref null $jsproperties.NativeFoo))
  (local $this (ref null $jsproperties.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Main)))
+ (local.set $this (ref.cast_static $jsproperties.Main (local.get $this.untyped)))
  (block
   (block
    ;; NativeFoo $qualifier = jsproperties.NativeFoo.$create();
@@ -553,7 +549,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsproperties/Main.java:86:14
  (local $this (ref null $jsproperties.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Main)))
+ (local.set $this (ref.cast_static $jsproperties.Main (local.get $this.untyped)))
  (block
   ;; jsproperties.Foo.getA();
   ;;@ jsproperties/Main.java:87:4
@@ -578,7 +574,7 @@
  ;;@ jsproperties/Main.java:93:14
  (local $bar (ref null $jsproperties.Bar))
  (local $this (ref null $jsproperties.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Main)))
+ (local.set $this (ref.cast_static $jsproperties.Main (local.get $this.untyped)))
  (block
   ;; Bar bar = jsproperties.Bar.$create();
   ;;@ jsproperties/Main.java:94:4
@@ -627,7 +623,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Main))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsproperties.Main)))
+ (local.set $this (ref.cast_static $jsproperties.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.Main();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

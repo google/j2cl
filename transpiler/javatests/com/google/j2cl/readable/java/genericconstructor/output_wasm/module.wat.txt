@@ -3,19 +3,18 @@
 
 ;;; Code for genericconstructor.GenericConstructor [vtable.init]
 (global $genericconstructor.GenericConstructor.vtable (ref $genericconstructor.GenericConstructor.vtable) 
- (struct.new_with_rtt $genericconstructor.GenericConstructor.vtable
+ (struct.new $genericconstructor.GenericConstructor.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@genericconstructor.GenericConstructor)
   (ref.func $m_test__void@genericconstructor.GenericConstructor)
-  (rtt.canon $genericconstructor.GenericConstructor.vtable)
  )
 )
 
 ;;; Code for genericconstructor.GenericConstructor [itable.init]
-(global $genericconstructor.GenericConstructor.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $genericconstructor.GenericConstructor.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for genericconstructor.GenericConstructor [CLASS]
 (type $genericconstructor.GenericConstructor (struct_subtype 
@@ -43,7 +42,7 @@
  (block
   ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(s,t);
   ;;@ genericconstructor/GenericConstructor.java:20:13
-  (local.set $$instance (struct.new_with_rtt $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0) (rtt.canon $genericconstructor.GenericConstructor)))
+  (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor(s,t);
   ;;@ genericconstructor/GenericConstructor.java:20:13
   (call $$ctor__java_lang_Object__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (local.get $$instance)(local.get $s)(local.get $t))
@@ -78,7 +77,7 @@
  (block
   ;; GenericConstructor<T> $instance = new GenericConstructor.<init>(t);
   ;;@ genericconstructor/GenericConstructor.java:23:13
-  (local.set $$instance (struct.new_with_rtt $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0) (rtt.canon $genericconstructor.GenericConstructor)))
+  (local.set $$instance (struct.new $genericconstructor.GenericConstructor (ref.as_non_null (global.get $genericconstructor.GenericConstructor.vtable)) (ref.as_non_null (global.get $genericconstructor.GenericConstructor.itable)) (i32.const 0)))
   ;; $instance.$ctor(t);
   ;;@ genericconstructor/GenericConstructor.java:23:13
   (call $$ctor__java_lang_Object__void_$p_genericconstructor_GenericConstructor@genericconstructor.GenericConstructor (local.get $$instance)(local.get $t))
@@ -109,7 +108,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ genericconstructor/GenericConstructor.java:25:14
  (local $this (ref null $genericconstructor.GenericConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $genericconstructor.GenericConstructor)))
+ (local.set $this (ref.cast_static $genericconstructor.GenericConstructor (local.get $this.untyped)))
  (block
   ;; genericconstructor.GenericConstructor.$create(java.lang.Exception.$create(),java.lang.Error.$create());
   ;;@ genericconstructor/GenericConstructor.java:26:4
@@ -149,7 +148,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericconstructor.GenericConstructor))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $genericconstructor.GenericConstructor)))
+ (local.set $this (ref.cast_static $genericconstructor.GenericConstructor (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericconstructor.GenericConstructor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericconstructor.GenericConstructor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

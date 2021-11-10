@@ -3,7 +3,7 @@
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [vtable.init]
 (global $interfacedevirtualize.InterfaceDevirtualize.vtable (ref $interfacedevirtualize.InterfaceDevirtualize.vtable) 
- (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize.vtable
+ (struct.new $interfacedevirtualize.InterfaceDevirtualize.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -16,13 +16,12 @@
   (ref.func $m_compare3__java_lang_Boolean__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
   (ref.func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
   (ref.func $m_compare3__java_lang_Integer__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
-  (rtt.canon $interfacedevirtualize.InterfaceDevirtualize.vtable)
  )
 )
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [itable.init]
-(global $interfacedevirtualize.InterfaceDevirtualize.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $interfacedevirtualize.InterfaceDevirtualize.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for interfacedevirtualize.InterfaceDevirtualize [CLASS]
 (type $interfacedevirtualize.InterfaceDevirtualize (struct_subtype 
@@ -55,7 +54,7 @@
  (block
   ;; InterfaceDevirtualize $instance = new InterfaceDevirtualize.<init>();
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
-  (local.set $$instance (struct.new_with_rtt $interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.itable)) (i32.const 0) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+  (local.set $$instance (struct.new $interfacedevirtualize.InterfaceDevirtualize (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.vtable)) (ref.as_non_null (global.get $interfacedevirtualize.InterfaceDevirtualize.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:18:13
   (call $$ctor__void_$p_interfacedevirtualize_InterfaceDevirtualize@interfacedevirtualize.InterfaceDevirtualize (local.get $$instance))
@@ -88,11 +87,11 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:19:17
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return c.compareTo(t);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:20:4
-  (return (call_ref (local.get $c)(local.get $t)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1)) (rtt.canon $java.lang.Comparable.vtable)) )))
+  (return (call_ref (local.get $c)(local.get $t)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare0__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -106,11 +105,11 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:24:13
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return c.compareTo(o);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:25:4
-  (return (call_ref (local.get $c)(local.get $o)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1)) (rtt.canon $java.lang.Comparable.vtable)) )))
+  (return (call_ref (local.get $c)(local.get $o)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare1__java_lang_Comparable__java_lang_Object__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -124,11 +123,11 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:28:13
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return c.compareTo(d);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:29:4
-  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1)) (rtt.canon $java.lang.Comparable.vtable)) )))
+  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare2__java_lang_Comparable__java_lang_Double__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -142,7 +141,7 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:32:13
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return d1.compareTo(d2);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:33:4
@@ -160,11 +159,11 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:36:13
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return c.compareTo(d);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:37:4
-  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1)) (rtt.canon $java.lang.Comparable.vtable)) )))
+  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare2__java_lang_Comparable__java_lang_Boolean__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -178,7 +177,7 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:40:13
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return d1.compareTo(d2);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:41:4
@@ -196,11 +195,11 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:44:13
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return c.compareTo(d);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:45:4
-  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1)) (rtt.canon $java.lang.Comparable.vtable)) )))
+  (return (call_ref (local.get $c)(local.get $d)(struct.get $java.lang.Comparable.vtable $m_compareTo__java_lang_Object__int (ref.cast_static $java.lang.Comparable.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $c)) (i32.const 1))) )))
  )
 )
 (elem declare func $m_compare2__java_lang_Comparable__java_lang_Integer__int@interfacedevirtualize.InterfaceDevirtualize)
@@ -214,7 +213,7 @@
  (result i32)
  ;;@ interfacedevirtualize/InterfaceDevirtualize.java:48:13
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return d1.compareTo(d2);
   ;;@ interfacedevirtualize/InterfaceDevirtualize.java:49:4
@@ -251,7 +250,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacedevirtualize.InterfaceDevirtualize))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $interfacedevirtualize.InterfaceDevirtualize)))
+ (local.set $this (ref.cast_static $interfacedevirtualize.InterfaceDevirtualize (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacedevirtualize.InterfaceDevirtualize();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacedevirtualize.InterfaceDevirtualize__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -6,35 +6,33 @@
 
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [vtable.init]
 (global $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable (ref $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable) 
- (struct.new_with_rtt $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable
+ (struct.new $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
   (ref.func $m_test__void@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)
-  (rtt.canon $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)
  )
 )
 
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [itable.init]
-(global $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [vtable.init]
 (global $staticjsmethodswithclassnamespace.ExternalCaller.vtable (ref $staticjsmethodswithclassnamespace.ExternalCaller.vtable) 
- (struct.new_with_rtt $staticjsmethodswithclassnamespace.ExternalCaller.vtable
+ (struct.new $staticjsmethodswithclassnamespace.ExternalCaller.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@staticjsmethodswithclassnamespace.ExternalCaller)
   (ref.func $m_test__void@staticjsmethodswithclassnamespace.ExternalCaller)
-  (rtt.canon $staticjsmethodswithclassnamespace.ExternalCaller.vtable)
  )
 )
 
 ;;; Code for staticjsmethodswithclassnamespace.ExternalCaller [itable.init]
-(global $staticjsmethodswithclassnamespace.ExternalCaller.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $staticjsmethodswithclassnamespace.ExternalCaller.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace [CLASS]
 (type $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (struct_subtype 
@@ -60,7 +58,7 @@
  (block
   ;; StaticJsMethodsWithClassNamespace $instance = new StaticJsMethodsWithClassNamespace.<init>();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
-  (local.set $$instance (struct.new_with_rtt $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable)) (i32.const 0) (rtt.canon $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)))
+  (local.set $$instance (struct.new $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.vtable)) (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:22:13
   (call $$ctor__void_$p_staticjsmethodswithclassnamespace_StaticJsMethodsWithClassNamespace@staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (local.get $$instance))
@@ -100,7 +98,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:26:14
  (local $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)))
+ (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (local.get $this.untyped)))
  (block
   ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:27:4
@@ -140,7 +138,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace)))
+ (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -172,7 +170,7 @@
  (block
   ;; ExternalCaller $instance = new ExternalCaller.<init>();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
-  (local.set $$instance (struct.new_with_rtt $staticjsmethodswithclassnamespace.ExternalCaller (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.ExternalCaller.itable)) (i32.const 0) (rtt.canon $staticjsmethodswithclassnamespace.ExternalCaller)))
+  (local.set $$instance (struct.new $staticjsmethodswithclassnamespace.ExternalCaller (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.ExternalCaller.vtable)) (ref.as_non_null (global.get $staticjsmethodswithclassnamespace.ExternalCaller.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:32:6
   (call $$ctor__void_$p_staticjsmethodswithclassnamespace_ExternalCaller@staticjsmethodswithclassnamespace.ExternalCaller (local.get $$instance))
@@ -202,7 +200,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:33:14
  (local $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticjsmethodswithclassnamespace.ExternalCaller)))
+ (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.ExternalCaller (local.get $this.untyped)))
  (block
   ;; staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName();
   ;;@ staticjsmethodswithclassnamespace/StaticJsMethodsWithClassNamespace.java:34:4
@@ -239,7 +237,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticjsmethodswithclassnamespace.ExternalCaller))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $staticjsmethodswithclassnamespace.ExternalCaller)))
+ (local.set $this (ref.cast_static $staticjsmethodswithclassnamespace.ExternalCaller (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticjsmethodswithclassnamespace.ExternalCaller();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticjsmethodswithclassnamespace.ExternalCaller__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

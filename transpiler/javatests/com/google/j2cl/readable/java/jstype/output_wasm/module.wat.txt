@@ -9,7 +9,7 @@
 
 ;;; Code for jstype.SomeJsType [vtable.init]
 (global $jstype.SomeJsType.vtable (ref $jstype.SomeJsType.vtable) 
- (struct.new_with_rtt $jstype.SomeJsType.vtable
+ (struct.new $jstype.SomeJsType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -19,13 +19,12 @@
   (ref.func $m_protectedMethod__void@jstype.SomeJsType)
   (ref.func $m_useFieldsAndMethods__void@jstype.SomeJsType)
   (ref.func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType)
-  (rtt.canon $jstype.SomeJsType.vtable)
  )
 )
 
 ;;; Code for jstype.SomeJsType [itable.init]
-(global $jstype.SomeJsType.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jstype.SomeJsType.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jstype.SomeJsType [CLASS]
 (type $jstype.SomeJsType (struct_subtype 
@@ -59,7 +58,7 @@
  (block
   ;; SomeJsType<T> $instance = new SomeJsType.<init>();
   ;;@ jstype/SomeJsType.java:22:13
-  (local.set $$instance (struct.new_with_rtt $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $jstype.SomeJsType.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (rtt.canon $jstype.SomeJsType)))
+  (local.set $$instance (struct.new $jstype.SomeJsType (ref.as_non_null (global.get $jstype.SomeJsType.vtable)) (ref.as_non_null (global.get $jstype.SomeJsType.itable)) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jstype/SomeJsType.java:22:13
   (call $$ctor__void_$p_jstype_SomeJsType@jstype.SomeJsType (local.get $$instance))
@@ -89,7 +88,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:28:14
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
+ (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
  )
 )
@@ -109,7 +108,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:32:7
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
+ (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
  )
 )
@@ -121,7 +120,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:34:17
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
+ (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
  )
 )
@@ -134,7 +133,7 @@
  ;;@ jstype/SomeJsType.java:36:14
  (local $value i32)
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
+ (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
   ;; int value = (((SomeJsType.this.publicField + SomeJsType.this.privateField) + SomeJsType.this.packageField) + SomeJsType.this.protectedField);
   ;;@ jstype/SomeJsType.java:37:4
@@ -166,7 +165,7 @@
  (local $object (ref null $java.lang.Object))
  (local $star (ref null $java.lang.Object))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
+ (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
   ;; Object object = java.lang.Object.$create();
   ;;@ jstype/SomeJsType.java:52:4
@@ -209,7 +208,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstype.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstype.SomeJsType)))
+ (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstype.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

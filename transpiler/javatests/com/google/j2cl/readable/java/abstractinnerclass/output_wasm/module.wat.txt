@@ -12,18 +12,17 @@
 
 ;;; Code for abstractinnerclass.InnerClasses [vtable.init]
 (global $abstractinnerclass.InnerClasses.vtable (ref $abstractinnerclass.InnerClasses.vtable) 
- (struct.new_with_rtt $abstractinnerclass.InnerClasses.vtable
+ (struct.new $abstractinnerclass.InnerClasses.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses)
-  (rtt.canon $abstractinnerclass.InnerClasses.vtable)
  )
 )
 
 ;;; Code for abstractinnerclass.InnerClasses [itable.init]
-(global $abstractinnerclass.InnerClasses.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $abstractinnerclass.InnerClasses.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for abstractinnerclass.InnerClasses [CLASS]
 (type $abstractinnerclass.InnerClasses (struct_subtype 
@@ -48,7 +47,7 @@
  (block
   ;; InnerClasses $instance = new InnerClasses.<init>();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
-  (local.set $$instance (struct.new_with_rtt $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0) (rtt.canon $abstractinnerclass.InnerClasses)))
+  (local.set $$instance (struct.new $abstractinnerclass.InnerClasses (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.vtable)) (ref.as_non_null (global.get $abstractinnerclass.InnerClasses.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ abstractinnerclass/InnerClasses.java:18:13
   (call $$ctor__void_$p_abstractinnerclass_InnerClasses@abstractinnerclass.InnerClasses (local.get $$instance))
@@ -100,7 +99,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractinnerclass.InnerClasses))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractinnerclass.InnerClasses)))
+ (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinnerclass.InnerClasses();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAbstractinnerclass.InnerClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -180,11 +179,11 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:24:9
  (local $this (ref null $abstractinnerclass.InnerClasses.B))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractinnerclass.InnerClasses.B)))
+ (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses.B (local.get $this.untyped)))
  (block
   ;; B.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:25:6
-  (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1)) (rtt.canon $abstractinnerclass.InnerClasses.A.vtable)) ))
+  (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast_static $abstractinnerclass.InnerClasses.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1))) ))
  )
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B)
@@ -252,11 +251,11 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:30:9
  (local $this (ref null $abstractinnerclass.InnerClasses.C))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $abstractinnerclass.InnerClasses.C)))
+ (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses.C (local.get $this.untyped)))
  (block
   ;; C.this.foo();
   ;;@ abstractinnerclass/InnerClasses.java:31:6
-  (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1)) (rtt.canon $abstractinnerclass.InnerClasses.A.vtable)) ))
+  (call_ref (local.get $this)(struct.get $abstractinnerclass.InnerClasses.A.vtable $m_foo__void (ref.cast_static $abstractinnerclass.InnerClasses.A.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $this)) (i32.const -1))) ))
  )
 )
 (elem declare func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C)

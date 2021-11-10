@@ -3,18 +3,17 @@
 
 ;;; Code for supercalldefault.SuperCallDefault [vtable.init]
 (global $supercalldefault.SuperCallDefault.vtable (ref $supercalldefault.SuperCallDefault.vtable) 
- (struct.new_with_rtt $supercalldefault.SuperCallDefault.vtable
+ (struct.new $supercalldefault.SuperCallDefault.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@supercalldefault.SuperCallDefault)
-  (rtt.canon $supercalldefault.SuperCallDefault.vtable)
  )
 )
 
 ;;; Code for supercalldefault.SuperCallDefault [itable.init]
-(global $supercalldefault.SuperCallDefault.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $supercalldefault.SuperCallDefault.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for supercalldefault.SuperCallDefault [CLASS]
 (type $supercalldefault.SuperCallDefault (struct_subtype 
@@ -39,7 +38,7 @@
  (block
   ;; SuperCallDefault $instance = new SuperCallDefault.<init>();
   ;;@ supercalldefault/SuperCallDefault.java:19:9
-  (local.set $$instance (struct.new_with_rtt $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.itable)) (i32.const 0) (rtt.canon $supercalldefault.SuperCallDefault)))
+  (local.set $$instance (struct.new $supercalldefault.SuperCallDefault (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.vtable)) (ref.as_non_null (global.get $supercalldefault.SuperCallDefault.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ supercalldefault/SuperCallDefault.java:19:9
   (call $$ctor__void_$p_supercalldefault_SuperCallDefault@supercalldefault.SuperCallDefault (local.get $$instance))
@@ -91,7 +90,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $supercalldefault.SuperCallDefault))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $supercalldefault.SuperCallDefault)))
+ (local.set $this (ref.cast_static $supercalldefault.SuperCallDefault (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSupercalldefault.SuperCallDefault();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSupercalldefault.SuperCallDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -6,33 +6,31 @@
 
 ;;; Code for multipletopclasses.AnotherClass [vtable.init]
 (global $multipletopclasses.AnotherClass.vtable (ref $multipletopclasses.AnotherClass.vtable) 
- (struct.new_with_rtt $multipletopclasses.AnotherClass.vtable
+ (struct.new $multipletopclasses.AnotherClass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass)
-  (rtt.canon $multipletopclasses.AnotherClass.vtable)
  )
 )
 
 ;;; Code for multipletopclasses.AnotherClass [itable.init]
-(global $multipletopclasses.AnotherClass.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $multipletopclasses.AnotherClass.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for multipletopclasses.MultipleTopClasses [vtable.init]
 (global $multipletopclasses.MultipleTopClasses.vtable (ref $multipletopclasses.MultipleTopClasses.vtable) 
- (struct.new_with_rtt $multipletopclasses.MultipleTopClasses.vtable
+ (struct.new $multipletopclasses.MultipleTopClasses.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses)
-  (rtt.canon $multipletopclasses.MultipleTopClasses.vtable)
  )
 )
 
 ;;; Code for multipletopclasses.MultipleTopClasses [itable.init]
-(global $multipletopclasses.MultipleTopClasses.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $multipletopclasses.MultipleTopClasses.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for multipletopclasses.AnotherClass [CLASS]
 (type $multipletopclasses.AnotherClass (struct_subtype 
@@ -57,7 +55,7 @@
  (block
   ;; AnotherClass $instance = new AnotherClass.<init>();
   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
-  (local.set $$instance (struct.new_with_rtt $multipletopclasses.AnotherClass (ref.as_non_null (global.get $multipletopclasses.AnotherClass.vtable)) (ref.as_non_null (global.get $multipletopclasses.AnotherClass.itable)) (i32.const 0) (rtt.canon $multipletopclasses.AnotherClass)))
+  (local.set $$instance (struct.new $multipletopclasses.AnotherClass (ref.as_non_null (global.get $multipletopclasses.AnotherClass.vtable)) (ref.as_non_null (global.get $multipletopclasses.AnotherClass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:18:6
   (call $$ctor__void_$p_multipletopclasses_AnotherClass@multipletopclasses.AnotherClass (local.get $$instance))
@@ -109,7 +107,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.AnotherClass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $multipletopclasses.AnotherClass)))
+ (local.set $this (ref.cast_static $multipletopclasses.AnotherClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMultipletopclasses.AnotherClass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMultipletopclasses.AnotherClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -140,7 +138,7 @@
  (block
   ;; MultipleTopClasses $instance = new MultipleTopClasses.<init>();
   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
-  (local.set $$instance (struct.new_with_rtt $multipletopclasses.MultipleTopClasses (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.vtable)) (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.itable)) (i32.const 0) (rtt.canon $multipletopclasses.MultipleTopClasses)))
+  (local.set $$instance (struct.new $multipletopclasses.MultipleTopClasses (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.vtable)) (ref.as_non_null (global.get $multipletopclasses.MultipleTopClasses.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ multipletopclasses/MultipleTopClasses.java:20:13
   (call $$ctor__void_$p_multipletopclasses_MultipleTopClasses@multipletopclasses.MultipleTopClasses (local.get $$instance))
@@ -192,7 +190,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.MultipleTopClasses))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $multipletopclasses.MultipleTopClasses)))
+ (local.set $this (ref.cast_static $multipletopclasses.MultipleTopClasses (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMultipletopclasses.MultipleTopClasses();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMultipletopclasses.MultipleTopClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

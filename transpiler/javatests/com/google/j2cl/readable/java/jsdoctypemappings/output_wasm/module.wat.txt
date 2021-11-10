@@ -36,7 +36,7 @@
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings [vtable.init]
 (global $jsdoctypemappings.JsDocTypeMappings.vtable (ref $jsdoctypemappings.JsDocTypeMappings.vtable) 
- (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.vtable
+ (struct.new $jsdoctypemappings.JsDocTypeMappings.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -74,43 +74,40 @@
   (ref.func $m_returnNativeVoid__jsdoctypemappings_JsDocTypeMappings_NativeVoid_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
   (ref.func $m_returnStar__jsdoctypemappings_JsDocTypeMappings_NativeStar_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
   (ref.func $m_returnNativeWildcard__jsdoctypemappings_JsDocTypeMappings_NativeWildcard_$pp_jsdoctypemappings@jsdoctypemappings.JsDocTypeMappings)
-  (rtt.canon $jsdoctypemappings.JsDocTypeMappings.vtable)
  )
 )
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings [itable.init]
-(global $jsdoctypemappings.JsDocTypeMappings.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsdoctypemappings.JsDocTypeMappings.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [vtable.init]
 (global $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable (ref $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable) 
- (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable
+ (struct.new $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.NativeType)
-  (rtt.canon $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)
  )
 )
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.NativeType [itable.init]
-(global $jsdoctypemappings.JsDocTypeMappings.NativeType.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsdoctypemappings.JsDocTypeMappings.NativeType.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [vtable.init]
 (global $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable (ref $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable) 
- (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable
+ (struct.new $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jsdoctypemappings.JsDocTypeMappings.ExportedType)
-  (rtt.canon $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)
  )
 )
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings.ExportedType [itable.init]
-(global $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jsdoctypemappings.JsDocTypeMappings [CLASS]
 (type $jsdoctypemappings.JsDocTypeMappings (struct_subtype 
@@ -168,7 +165,7 @@
  (block
   ;; JsDocTypeMappings $instance = new JsDocTypeMappings.<init>();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
-  (local.set $$instance (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.itable)) (i32.const 0) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+  (local.set $$instance (struct.new $jsdoctypemappings.JsDocTypeMappings (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:23:13
   (call $$ctor__void_$p_jsdoctypemappings_JsDocTypeMappings@jsdoctypemappings.JsDocTypeMappings (local.get $$instance))
@@ -199,7 +196,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:36:16
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:37:4
@@ -215,7 +212,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:41:13
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:42:4
@@ -231,7 +228,7 @@
  (result (ref null $java.lang.String))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:45:19
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:46:4
@@ -247,7 +244,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:49:19
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:50:4
@@ -263,7 +260,7 @@
  (result (ref null $java.lang.Byte))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:53:17
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:54:4
@@ -279,7 +276,7 @@
  (result (ref null $java.lang.Short))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:57:18
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:58:4
@@ -295,7 +292,7 @@
  (result (ref null $java.lang.Integer))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:61:20
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:62:4
@@ -311,7 +308,7 @@
  (result (ref null $java.lang.Long))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:65:17
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:66:4
@@ -327,7 +324,7 @@
  (result (ref null $java.lang.Float))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:69:18
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:70:4
@@ -343,7 +340,7 @@
  (result (ref null $java.lang.Double))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:73:19
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:74:4
@@ -359,7 +356,7 @@
  (result (ref null $java.lang.Character))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:77:22
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:78:4
@@ -375,7 +372,7 @@
  (result (ref null $java.lang.Boolean))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:81:20
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:82:4
@@ -391,7 +388,7 @@
  (result i32)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:85:7
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:86:4
@@ -407,7 +404,7 @@
  (result i32)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:89:8
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:90:4
@@ -423,7 +420,7 @@
  (result i32)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:93:6
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:94:4
@@ -439,7 +436,7 @@
  (result i64)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:97:7
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:98:4
@@ -455,7 +452,7 @@
  (result f32)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:101:8
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return 0.0;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:102:4
@@ -471,7 +468,7 @@
  (result f64)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:105:9
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return 0.0;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:106:4
@@ -487,7 +484,7 @@
  (result i32)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:109:7
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:110:4
@@ -503,7 +500,7 @@
  (result i32)
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:113:10
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return false;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:114:4
@@ -518,7 +515,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:117:7
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
  )
 )
@@ -531,7 +528,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:119:17
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:120:4
@@ -547,7 +544,7 @@
  (result (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:123:13
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:124:4
@@ -563,7 +560,7 @@
  (result (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:127:15
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:128:4
@@ -579,7 +576,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:131:44
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:132:4
@@ -595,7 +592,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:138:15
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:139:4
@@ -611,7 +608,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:145:16
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:146:4
@@ -627,7 +624,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:152:15
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:153:4
@@ -643,7 +640,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:159:13
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:160:4
@@ -659,7 +656,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:166:18
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:167:4
@@ -675,7 +672,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:173:13
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:174:4
@@ -691,7 +688,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:180:13
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:181:4
@@ -707,7 +704,7 @@
  (result (ref null $java.lang.Object))
  ;;@ jsdoctypemappings/JsDocTypeMappings.java:187:17
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:188:4
@@ -744,7 +741,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsdoctypemappings.JsDocTypeMappings();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsdoctypemappings.JsDocTypeMappings__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -811,7 +808,7 @@
  (block
   ;; NativeType $instance = new NativeType.<init>();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
-  (local.set $$instance (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.NativeType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.itable)) (i32.const 0) (rtt.canon $jsdoctypemappings.JsDocTypeMappings.NativeType)))
+  (local.set $$instance (struct.new $jsdoctypemappings.JsDocTypeMappings.NativeType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.NativeType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:31:23
   (call $$ctor__void_$p_jsdoctypemappings_JsDocTypeMappings_NativeType@jsdoctypemappings.JsDocTypeMappings.NativeType (local.get $$instance))
@@ -863,7 +860,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings.NativeType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings.NativeType)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings.NativeType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsdoctypemappings.JsDocTypeMappings.NativeType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsdoctypemappings.JsDocTypeMappings.NativeType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -896,7 +893,7 @@
  (block
   ;; ExportedType $instance = new ExportedType.<init>($outer_this);
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
-  (local.set $$instance (struct.new_with_rtt $jsdoctypemappings.JsDocTypeMappings.ExportedType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable)) (i32.const 0) (ref.null $jsdoctypemappings.JsDocTypeMappings) (rtt.canon $jsdoctypemappings.JsDocTypeMappings.ExportedType)))
+  (local.set $$instance (struct.new $jsdoctypemappings.JsDocTypeMappings.ExportedType (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.vtable)) (ref.as_non_null (global.get $jsdoctypemappings.JsDocTypeMappings.ExportedType.itable)) (i32.const 0) (ref.null $jsdoctypemappings.JsDocTypeMappings)))
   ;; $instance.$ctor($outer_this);
   ;;@ jsdoctypemappings/JsDocTypeMappings.java:34:8
   (call $$ctor__jsdoctypemappings_JsDocTypeMappings__void_$p_jsdoctypemappings_JsDocTypeMappings_ExportedType@jsdoctypemappings.JsDocTypeMappings.ExportedType (local.get $$instance)(local.get $$outer_this))
@@ -952,7 +949,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsdoctypemappings.JsDocTypeMappings.ExportedType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jsdoctypemappings.JsDocTypeMappings.ExportedType)))
+ (local.set $this (ref.cast_static $jsdoctypemappings.JsDocTypeMappings.ExportedType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsdoctypemappings.JsDocTypeMappings.ExportedType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsdoctypemappings.JsDocTypeMappings.ExportedType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

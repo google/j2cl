@@ -15,84 +15,79 @@
 
 ;;; Code for localnamecollision.Asserts [vtable.init]
 (global $localnamecollision.Asserts.vtable (ref $localnamecollision.Asserts.vtable) 
- (struct.new_with_rtt $localnamecollision.Asserts.vtable
+ (struct.new $localnamecollision.Asserts.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@localnamecollision.Asserts)
   (ref.func $m_n__int_$pp_localnamecollision@localnamecollision.Asserts)
-  (rtt.canon $localnamecollision.Asserts.vtable)
  )
 )
 
 ;;; Code for localnamecollision.Asserts [itable.init]
-(global $localnamecollision.Asserts.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $localnamecollision.Asserts.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for localnamecollision.Class [vtable.init]
 (global $localnamecollision.Class.vtable (ref $localnamecollision.Class.vtable) 
- (struct.new_with_rtt $localnamecollision.Class.vtable
+ (struct.new $localnamecollision.Class.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@localnamecollision.Class)
   (ref.func $m_main__void@localnamecollision.Class)
-  (rtt.canon $localnamecollision.Class.vtable)
  )
 )
 
 ;;; Code for localnamecollision.Class [itable.init]
-(global $localnamecollision.Class.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $localnamecollision.Class.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for localnamecollision.LocalNameCollision [vtable.init]
 (global $localnamecollision.LocalNameCollision.vtable (ref $localnamecollision.LocalNameCollision.vtable) 
- (struct.new_with_rtt $localnamecollision.LocalNameCollision.vtable
+ (struct.new $localnamecollision.LocalNameCollision.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@localnamecollision.LocalNameCollision)
   (ref.func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision)
   (ref.func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision)
-  (rtt.canon $localnamecollision.LocalNameCollision.vtable)
  )
 )
 
 ;;; Code for localnamecollision.LocalNameCollision [itable.init]
-(global $localnamecollision.LocalNameCollision.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $localnamecollision.LocalNameCollision.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for localnamecollision.package1.A [vtable.init]
 (global $localnamecollision.package1.A.vtable (ref $localnamecollision.package1.A.vtable) 
- (struct.new_with_rtt $localnamecollision.package1.A.vtable
+ (struct.new $localnamecollision.package1.A.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@localnamecollision.package1.A)
   (ref.func $m_m__int@localnamecollision.package1.A)
-  (rtt.canon $localnamecollision.package1.A.vtable)
  )
 )
 
 ;;; Code for localnamecollision.package1.A [itable.init]
-(global $localnamecollision.package1.A.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $localnamecollision.package1.A.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for localnamecollision.package2.A [vtable.init]
 (global $localnamecollision.package2.A.vtable (ref $localnamecollision.package2.A.vtable) 
- (struct.new_with_rtt $localnamecollision.package2.A.vtable
+ (struct.new $localnamecollision.package2.A.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@localnamecollision.package2.A)
   (ref.func $m_m__int@localnamecollision.package2.A)
-  (rtt.canon $localnamecollision.package2.A.vtable)
  )
 )
 
 ;;; Code for localnamecollision.package2.A [itable.init]
-(global $localnamecollision.package2.A.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $localnamecollision.package2.A.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for localnamecollision.Asserts [CLASS]
 (type $localnamecollision.Asserts (struct_subtype 
@@ -118,7 +113,7 @@
  (block
   ;; Asserts $instance = new Asserts.<init>();
   ;;@ localnamecollision/Asserts.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.Asserts (ref.as_non_null (global.get $localnamecollision.Asserts.vtable)) (ref.as_non_null (global.get $localnamecollision.Asserts.itable)) (i32.const 0) (rtt.canon $localnamecollision.Asserts)))
+  (local.set $$instance (struct.new $localnamecollision.Asserts (ref.as_non_null (global.get $localnamecollision.Asserts.vtable)) (ref.as_non_null (global.get $localnamecollision.Asserts.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/Asserts.java:18:13
   (call $$ctor__void_$p_localnamecollision_Asserts@localnamecollision.Asserts (local.get $$instance))
@@ -149,7 +144,7 @@
  (result i32)
  ;;@ localnamecollision/Asserts.java:19:6
  (local $this (ref null $localnamecollision.Asserts))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Asserts)))
+ (local.set $this (ref.cast_static $localnamecollision.Asserts (local.get $this.untyped)))
  (block
   ;; return 5;
   ;;@ localnamecollision/Asserts.java:21:4
@@ -186,7 +181,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.Asserts))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Asserts)))
+ (local.set $this (ref.cast_static $localnamecollision.Asserts (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.Asserts();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.Asserts__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -218,7 +213,7 @@
  (block
   ;; Class $instance = new Class.<init>();
   ;;@ localnamecollision/Class.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0) (rtt.canon $localnamecollision.Class)))
+  (local.set $$instance (struct.new $localnamecollision.Class (ref.as_non_null (global.get $localnamecollision.Class.vtable)) (ref.as_non_null (global.get $localnamecollision.Class.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/Class.java:18:13
   (call $$ctor__void_$p_localnamecollision_Class@localnamecollision.Class (local.get $$instance))
@@ -249,7 +244,7 @@
  ;;@ localnamecollision/Class.java:19:14
  (local $$qualifier (ref null $localnamecollision.Class))
  (local $this (ref null $localnamecollision.Class))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Class)))
+ (local.set $this (ref.cast_static $localnamecollision.Class (local.get $this.untyped)))
  (block
   (block
    ;; Class $qualifier = localnamecollision.Class.$create();
@@ -291,7 +286,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.Class))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.Class)))
+ (local.set $this (ref.cast_static $localnamecollision.Class (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.Class();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.Class__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -331,7 +326,7 @@
  (local $com_google_j2cl_readable_localnamecollision_package2_A i32)
  (local $A i32)
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.LocalNameCollision)))
+ (local.set $this (ref.cast_static $localnamecollision.LocalNameCollision (local.get $this.untyped)))
  (block
   ;; boolean LocalNameCollision = false;
   ;;@ localnamecollision/LocalNameCollision.java:21:4
@@ -362,7 +357,7 @@
   (local.set $A (i32.const 1))
   ;; (LocalNameCollision = ((((RuntimeException instanceof LocalNameCollision) ? (true) : (RuntimeException instanceof RuntimeException)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof A)) ? (true) : (RuntimeException instanceof Class));
   ;;@ localnamecollision/LocalNameCollision.java:30:4
-  (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.LocalNameCollision)) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $java.lang.RuntimeException)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.package1.A)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.package2.A)))) (then (i32.const 1)) (else (ref.test (local.get $RuntimeException) (rtt.canon $localnamecollision.Class)))))
+  (local.set $LocalNameCollision (if (result i32) (if (result i32) (if (result i32) (if (result i32) (ref.test_static $localnamecollision.LocalNameCollision (local.get $RuntimeException)) (then (i32.const 1)) (else (ref.test_static $java.lang.RuntimeException (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test_static $localnamecollision.package1.A (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test_static $localnamecollision.package2.A (local.get $RuntimeException)))) (then (i32.const 1)) (else (ref.test_static $localnamecollision.Class (local.get $RuntimeException)))))
  )
 )
 (elem declare func $m_testClassLocalVarCollision__void@localnamecollision.LocalNameCollision)
@@ -379,11 +374,11 @@
  (result i32)
  ;;@ localnamecollision/LocalNameCollision.java:39:17
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.LocalNameCollision)))
+ (local.set $this (ref.cast_static $localnamecollision.LocalNameCollision (local.get $this.untyped)))
  (block
   ;; return (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
   ;;@ localnamecollision/LocalNameCollision.java:41:4
-  (return (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (rtt.canon $localnamecollision.LocalNameCollision))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (rtt.canon $localnamecollision.Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+  (return (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test_static $localnamecollision.LocalNameCollision (local.get $Asserts))) (else (i32.const 0))) (then (ref.test_static $localnamecollision.Asserts (local.get $$Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
  )
 )
 (elem declare func $m_testClassParameterCollision__boolean__java_lang_Object__java_lang_Object__int__int__boolean@localnamecollision.LocalNameCollision)
@@ -401,7 +396,7 @@
  (block
   ;; LocalNameCollision $instance = new LocalNameCollision.<init>(LocalNameCollision,Asserts,$Asserts,l_Asserts,A);
   ;;@ localnamecollision/LocalNameCollision.java:49:9
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.LocalNameCollision (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.vtable)) (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.itable)) (i32.const 0) (rtt.canon $localnamecollision.LocalNameCollision)))
+  (local.set $$instance (struct.new $localnamecollision.LocalNameCollision (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.vtable)) (ref.as_non_null (global.get $localnamecollision.LocalNameCollision.itable)) (i32.const 0)))
   ;; $instance.$ctor(LocalNameCollision,Asserts,$Asserts,l_Asserts,A);
   ;;@ localnamecollision/LocalNameCollision.java:49:9
   (call $$ctor__boolean__java_lang_Object__java_lang_Object__int__int__void_$p_localnamecollision_LocalNameCollision@localnamecollision.LocalNameCollision (local.get $$instance)(local.get $LocalNameCollision)(local.get $Asserts)(local.get $$Asserts)(local.get $l_Asserts)(local.get $A))
@@ -430,7 +425,7 @@
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
   ;; boolean result = (((LocalNameCollision) ? (Asserts instanceof LocalNameCollision) : (false)) ? ($Asserts instanceof Asserts) : (false)) ? ((l_Asserts == A)) : (false);
   ;;@ localnamecollision/LocalNameCollision.java:51:4
-  (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test (local.get $Asserts) (rtt.canon $localnamecollision.LocalNameCollision))) (else (i32.const 0))) (then (ref.test (local.get $$Asserts) (rtt.canon $localnamecollision.Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
+  (local.set $result (if (result i32) (if (result i32) (if (result i32) (local.get $LocalNameCollision) (then (ref.test_static $localnamecollision.LocalNameCollision (local.get $Asserts))) (else (i32.const 0))) (then (ref.test_static $localnamecollision.Asserts (local.get $$Asserts))) (else (i32.const 0))) (then (i32.eq (local.get $l_Asserts) (local.get $A))) (else (i32.const 0))))
  )
 )
 
@@ -462,7 +457,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.LocalNameCollision))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.LocalNameCollision)))
+ (local.set $this (ref.cast_static $localnamecollision.LocalNameCollision (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.LocalNameCollision();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.LocalNameCollision__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -494,7 +489,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ localnamecollision/package1/A.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.package1.A (ref.as_non_null (global.get $localnamecollision.package1.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package1.A.itable)) (i32.const 0) (rtt.canon $localnamecollision.package1.A)))
+  (local.set $$instance (struct.new $localnamecollision.package1.A (ref.as_non_null (global.get $localnamecollision.package1.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package1.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/package1/A.java:18:13
   (call $$ctor__void_$p_localnamecollision_package1_A@localnamecollision.package1.A (local.get $$instance))
@@ -525,7 +520,7 @@
  (result i32)
  ;;@ localnamecollision/package1/A.java:19:13
  (local $this (ref null $localnamecollision.package1.A))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package1.A)))
+ (local.set $this (ref.cast_static $localnamecollision.package1.A (local.get $this.untyped)))
  (block
   ;; return 1;
   ;;@ localnamecollision/package1/A.java:20:4
@@ -562,7 +557,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.package1.A))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package1.A)))
+ (local.set $this (ref.cast_static $localnamecollision.package1.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.package1.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.package1.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -594,7 +589,7 @@
  (block
   ;; A $instance = new A.<init>();
   ;;@ localnamecollision/package2/A.java:18:13
-  (local.set $$instance (struct.new_with_rtt $localnamecollision.package2.A (ref.as_non_null (global.get $localnamecollision.package2.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package2.A.itable)) (i32.const 0) (rtt.canon $localnamecollision.package2.A)))
+  (local.set $$instance (struct.new $localnamecollision.package2.A (ref.as_non_null (global.get $localnamecollision.package2.A.vtable)) (ref.as_non_null (global.get $localnamecollision.package2.A.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ localnamecollision/package2/A.java:18:13
   (call $$ctor__void_$p_localnamecollision_package2_A@localnamecollision.package2.A (local.get $$instance))
@@ -625,7 +620,7 @@
  (result i32)
  ;;@ localnamecollision/package2/A.java:19:13
  (local $this (ref null $localnamecollision.package2.A))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package2.A)))
+ (local.set $this (ref.cast_static $localnamecollision.package2.A (local.get $this.untyped)))
  (block
   ;; return 2;
   ;;@ localnamecollision/package2/A.java:20:4
@@ -662,7 +657,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localnamecollision.package2.A))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $localnamecollision.package2.A)))
+ (local.set $this (ref.cast_static $localnamecollision.package2.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalnamecollision.package2.A();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalnamecollision.package2.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

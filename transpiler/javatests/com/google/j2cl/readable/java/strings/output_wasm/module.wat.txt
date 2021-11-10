@@ -6,34 +6,32 @@
 
 ;;; Code for strings.Strings [vtable.init]
 (global $strings.Strings.vtable (ref $strings.Strings.vtable) 
- (struct.new_with_rtt $strings.Strings.vtable
+ (struct.new $strings.Strings.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@strings.Strings)
   (ref.func $m_test__void@strings.Strings)
-  (rtt.canon $strings.Strings.vtable)
  )
 )
 
 ;;; Code for strings.Strings [itable.init]
-(global $strings.Strings.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $strings.Strings.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for strings.Strings.StringHolder [vtable.init]
 (global $strings.Strings.StringHolder.vtable (ref $strings.Strings.StringHolder.vtable) 
- (struct.new_with_rtt $strings.Strings.StringHolder.vtable
+ (struct.new $strings.Strings.StringHolder.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@strings.Strings.StringHolder)
-  (rtt.canon $strings.Strings.StringHolder.vtable)
  )
 )
 
 ;;; Code for strings.Strings.StringHolder [itable.init]
-(global $strings.Strings.StringHolder.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $strings.Strings.StringHolder.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for strings.Strings [CLASS]
 (type $strings.Strings (struct_subtype 
@@ -62,7 +60,7 @@
  (block
   ;; Strings $instance = new Strings.<init>();
   ;;@ strings/Strings.java:18:13
-  (local.set $$instance (struct.new_with_rtt $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $strings.Strings.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (rtt.canon $strings.Strings)))
+  (local.set $$instance (struct.new $strings.Strings (ref.as_non_null (global.get $strings.Strings.vtable)) (ref.as_non_null (global.get $strings.Strings.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String)))
   ;; $instance.$ctor();
   ;;@ strings/Strings.java:18:13
   (call $$ctor__void_$p_strings_Strings@strings.Strings (local.get $$instance))
@@ -121,7 +119,7 @@
  (local $$stringBuilder_15 (ref null $java.lang.StringBuilder))
  (local $$stringBuilder_16 (ref null $java.lang.StringBuilder))
  (local $this (ref null $strings.Strings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $strings.Strings)))
+ (local.set $this (ref.cast_static $strings.Strings (local.get $this.untyped)))
  (block
   ;; String s1 = null;
   ;;@ strings/Strings.java:31:4
@@ -347,7 +345,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $strings.Strings)))
+ (local.set $this (ref.cast_static $strings.Strings (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStrings.Strings();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStrings.Strings__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -379,7 +377,7 @@
  (block
   ;; StringHolder $instance = new StringHolder.<init>();
   ;;@ strings/Strings.java:25:23
-  (local.set $$instance (struct.new_with_rtt $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String) (rtt.canon $strings.Strings.StringHolder)))
+  (local.set $$instance (struct.new $strings.Strings.StringHolder (ref.as_non_null (global.get $strings.Strings.StringHolder.vtable)) (ref.as_non_null (global.get $strings.Strings.StringHolder.itable)) (i32.const 0) (ref.null $java.lang.String)))
   ;; $instance.$ctor();
   ;;@ strings/Strings.java:25:23
   (call $$ctor__void_$p_strings_Strings_StringHolder@strings.Strings.StringHolder (local.get $$instance))
@@ -445,7 +443,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $strings.Strings.StringHolder))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $strings.Strings.StringHolder)))
+ (local.set $this (ref.cast_static $strings.Strings.StringHolder (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStrings.Strings.StringHolder();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStrings.Strings.StringHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

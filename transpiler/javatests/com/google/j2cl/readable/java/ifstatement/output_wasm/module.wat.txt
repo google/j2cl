@@ -3,19 +3,18 @@
 
 ;;; Code for ifstatement.IfStatement [vtable.init]
 (global $ifstatement.IfStatement.vtable (ref $ifstatement.IfStatement.vtable) 
- (struct.new_with_rtt $ifstatement.IfStatement.vtable
+ (struct.new $ifstatement.IfStatement.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@ifstatement.IfStatement)
   (ref.func $m_test__void@ifstatement.IfStatement)
-  (rtt.canon $ifstatement.IfStatement.vtable)
  )
 )
 
 ;;; Code for ifstatement.IfStatement [itable.init]
-(global $ifstatement.IfStatement.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $ifstatement.IfStatement.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for ifstatement.IfStatement [CLASS]
 (type $ifstatement.IfStatement (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; IfStatement $instance = new IfStatement.<init>();
   ;;@ ifstatement/IfStatement.java:18:13
-  (local.set $$instance (struct.new_with_rtt $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $ifstatement.IfStatement.itable)) (i32.const 0) (rtt.canon $ifstatement.IfStatement)))
+  (local.set $$instance (struct.new $ifstatement.IfStatement (ref.as_non_null (global.get $ifstatement.IfStatement.vtable)) (ref.as_non_null (global.get $ifstatement.IfStatement.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ ifstatement/IfStatement.java:18:13
   (call $$ctor__void_$p_ifstatement_IfStatement@ifstatement.IfStatement (local.get $$instance))
@@ -74,7 +73,7 @@
  (local $b i32)
  (local $number i32)
  (local $this (ref null $ifstatement.IfStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $ifstatement.IfStatement)))
+ (local.set $this (ref.cast_static $ifstatement.IfStatement (local.get $this.untyped)))
  (block
   ;; boolean a = true,boolean b = true;
   ;;@ ifstatement/IfStatement.java:20:4
@@ -157,7 +156,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $ifstatement.IfStatement))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $ifstatement.IfStatement)))
+ (local.set $this (ref.cast_static $ifstatement.IfStatement (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIfstatement.IfStatement();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIfstatement.IfStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

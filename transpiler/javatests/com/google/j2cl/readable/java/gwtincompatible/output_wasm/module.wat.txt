@@ -23,31 +23,28 @@
 
 ;;; Code for gwtincompatible.Implementor [vtable.init]
 (global $gwtincompatible.Implementor.vtable (ref $gwtincompatible.Implementor.vtable) 
- (struct.new_with_rtt $gwtincompatible.Implementor.vtable
+ (struct.new $gwtincompatible.Implementor.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@gwtincompatible.Implementor)
   (ref.func $m_compatibleMethod__void@gwtincompatible.Implementor)
-  (rtt.canon $gwtincompatible.Implementor.vtable)
  )
 )
 
 ;;; Code for gwtincompatible.Implementor [itable.init]
-(global $gwtincompatible.Implementor.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $gwtincompatible.Interface.vtable
+(global $gwtincompatible.Implementor.itable (ref $itable) (array.init_static $itable 
+ (struct.new $gwtincompatible.Interface.vtable
   (ref.null data)
-  (rtt.canon $gwtincompatible.Interface.vtable)
  )
- (struct.new_with_rtt $gwtincompatible.Interface.NestedInterface.vtable
+ (struct.new $gwtincompatible.Interface.NestedInterface.vtable
   (ref.null data)
-  (rtt.canon $gwtincompatible.Interface.NestedInterface.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [vtable.init]
 (global $gwtincompatible.Implementor.SomeEnum.1.vtable (ref $gwtincompatible.Implementor.SomeEnum.1.vtable) 
- (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1.vtable
+ (struct.new $gwtincompatible.Implementor.SomeEnum.1.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Enum)
@@ -58,21 +55,18 @@
   (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
   (ref.func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1)
-  (rtt.canon $gwtincompatible.Implementor.SomeEnum.1.vtable)
  )
 )
 
 ;;; Code for gwtincompatible.Implementor.SomeEnum.1 [itable.init]
-(global $gwtincompatible.Implementor.SomeEnum.1.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $java.io.Serializable.vtable
+(global $gwtincompatible.Implementor.SomeEnum.1.itable (ref $itable) (array.init_static $itable 
+ (struct.new $java.io.Serializable.vtable
   (ref.null data)
-  (rtt.canon $java.io.Serializable.vtable)
  )
- (struct.new_with_rtt $java.lang.Comparable.vtable
+ (struct.new $java.lang.Comparable.vtable
   (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
-  (rtt.canon $java.lang.Comparable.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for gwtincompatible.GwtIncompatible [INTERFACE]
 (type $gwtincompatible.GwtIncompatible.vtable (struct_subtype (field $unused (ref null data))
@@ -133,7 +127,7 @@
  (block
   ;; Implementor $instance = new Implementor.<init>();
   ;;@ gwtincompatible/Implementor.java:20:13
-  (local.set $$instance (struct.new_with_rtt $gwtincompatible.Implementor (ref.as_non_null (global.get $gwtincompatible.Implementor.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.itable)) (i32.const 0) (rtt.canon $gwtincompatible.Implementor)))
+  (local.set $$instance (struct.new $gwtincompatible.Implementor (ref.as_non_null (global.get $gwtincompatible.Implementor.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ gwtincompatible/Implementor.java:20:13
   (call $$ctor__void_$p_gwtincompatible_Implementor@gwtincompatible.Implementor (local.get $$instance))
@@ -164,7 +158,7 @@
  ;;@ gwtincompatible/Implementor.java:34:14
  (local $a i32)
  (local $this (ref null $gwtincompatible.Implementor))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $gwtincompatible.Implementor)))
+ (local.set $this (ref.cast_static $gwtincompatible.Implementor (local.get $this.untyped)))
  (block
   ;; int a = 4;
   ;;@ gwtincompatible/Implementor.java:35:4
@@ -201,7 +195,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $gwtincompatible.Implementor)))
+ (local.set $this (ref.cast_static $gwtincompatible.Implementor (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Implementor();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGwtincompatible.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -276,7 +270,7 @@
   )
   ;; return ((SomeEnum) javaemul.internal.Enums.getValueFromNameAndMap(name,gwtincompatible.Implementor.SomeEnum.namesToValuesMap));
   ;;@ gwtincompatible/Implementor.java:38:7
-  (return (ref.cast (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_)) (rtt.canon $gwtincompatible.Implementor.SomeEnum)))
+  (return (ref.cast_static $gwtincompatible.Implementor.SomeEnum (call $m_getValueFromNameAndMap__java_lang_String__java_util_Map__java_lang_Object@javaemul.internal.Enums (local.get $name)(global.get $f_namesToValuesMap__gwtincompatible_Implementor_SomeEnum_))))
  )
 )
 
@@ -290,7 +284,7 @@
   (call $$clinit__void@gwtincompatible.Implementor.SomeEnum )
   ;; return javaemul.internal.WasmArray.OfObject.$create([gwtincompatible.Implementor.SomeEnum.COMPATIBLE]);
   ;;@ gwtincompatible/Implementor.java:38:7
-  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array (global.get $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum) (rtt.canon $java.lang.Object.array))))
+  (return (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (global.get $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum))))
  )
 )
 
@@ -355,7 +349,7 @@
  (block
   ;; <anonymous> extends SomeEnum $instance = new $1.<init>($name,$ordinal);
   ;;@ gwtincompatible/Implementor.java:39:15
-  (local.set $$instance (struct.new_with_rtt $gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (rtt.canon $gwtincompatible.Implementor.SomeEnum.1)))
+  (local.set $$instance (struct.new $gwtincompatible.Implementor.SomeEnum.1 (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.vtable)) (ref.as_non_null (global.get $gwtincompatible.Implementor.SomeEnum.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0)))
   ;; $instance.$ctor($name,$ordinal);
   ;;@ gwtincompatible/Implementor.java:39:15
   (call $$ctor__java_lang_String__int__void_$p_gwtincompatible_Implementor_SomeEnum_1@gwtincompatible.Implementor.SomeEnum.1 (local.get $$instance)(local.get $$name)(local.get $$ordinal))
@@ -387,7 +381,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ gwtincompatible/Implementor.java:41:11
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $gwtincompatible.Implementor.SomeEnum.1)))
+ (local.set $this (ref.cast_static $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped)))
  (block
  )
 )
@@ -421,7 +415,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $gwtincompatible.Implementor.SomeEnum.1)))
+ (local.set $this (ref.cast_static $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Implementor.SomeEnum.1();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGwtincompatible.Implementor.SomeEnum.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -21,108 +21,100 @@
 
 ;;; Code for simplebridgemethods.Superclass [vtable.init]
 (global $simplebridgemethods.Superclass.vtable (ref $simplebridgemethods.Superclass.vtable) 
- (struct.new_with_rtt $simplebridgemethods.Superclass.vtable
+ (struct.new $simplebridgemethods.Superclass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Superclass)
   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
-  (rtt.canon $simplebridgemethods.Superclass.vtable)
  )
 )
 
 ;;; Code for simplebridgemethods.Superclass [itable.init]
-(global $simplebridgemethods.Superclass.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $simplebridgemethods.Superclass.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for simplebridgemethods.Subclass [vtable.init]
 (global $simplebridgemethods.Subclass.vtable (ref $simplebridgemethods.Subclass.vtable) 
- (struct.new_with_rtt $simplebridgemethods.Subclass.vtable
+ (struct.new $simplebridgemethods.Subclass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Subclass)
   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
   (ref.func $m_m1__java_lang_AssertionError__void@simplebridgemethods.Subclass)
-  (rtt.canon $simplebridgemethods.Subclass.vtable)
  )
 )
 
 ;;; Code for simplebridgemethods.Subclass [itable.init]
-(global $simplebridgemethods.Subclass.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $simplebridgemethods.Subclass.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for simplebridgemethods.AnotherSubclass [vtable.init]
 (global $simplebridgemethods.AnotherSubclass.vtable (ref $simplebridgemethods.AnotherSubclass.vtable) 
- (struct.new_with_rtt $simplebridgemethods.AnotherSubclass.vtable
+ (struct.new $simplebridgemethods.AnotherSubclass.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.AnotherSubclass)
   (ref.func $m_m1__java_lang_Error__void@simplebridgemethods.Superclass)
-  (rtt.canon $simplebridgemethods.AnotherSubclass.vtable)
  )
 )
 
 ;;; Code for simplebridgemethods.AnotherSubclass [itable.init]
-(global $simplebridgemethods.AnotherSubclass.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $simplebridgemethods.AnotherSubclass.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for simplebridgemethods.Task [vtable.init]
 (global $simplebridgemethods.Task.vtable (ref $simplebridgemethods.Task.vtable) 
- (struct.new_with_rtt $simplebridgemethods.Task.vtable
+ (struct.new $simplebridgemethods.Task.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.Task)
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
-  (rtt.canon $simplebridgemethods.Task.vtable)
  )
 )
 
 ;;; Code for simplebridgemethods.Task [itable.init]
-(global $simplebridgemethods.Task.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $simplebridgemethods.Callable.vtable
+(global $simplebridgemethods.Task.itable (ref $itable) (array.init_static $itable 
+ (struct.new $simplebridgemethods.Callable.vtable
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.Task)
-  (rtt.canon $simplebridgemethods.Callable.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for simplebridgemethods.AnotherTask [vtable.init]
 (global $simplebridgemethods.AnotherTask.vtable (ref $simplebridgemethods.AnotherTask.vtable) 
- (struct.new_with_rtt $simplebridgemethods.AnotherTask.vtable
+ (struct.new $simplebridgemethods.AnotherTask.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.AnotherTask)
   (ref.func $m_call__simplebridgemethods_Superclass__void@simplebridgemethods.AnotherTask)
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
-  (rtt.canon $simplebridgemethods.AnotherTask.vtable)
  )
 )
 
 ;;; Code for simplebridgemethods.AnotherTask [itable.init]
-(global $simplebridgemethods.AnotherTask.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $simplebridgemethods.Callable.vtable
+(global $simplebridgemethods.AnotherTask.itable (ref $itable) (array.init_static $itable 
+ (struct.new $simplebridgemethods.Callable.vtable
   (ref.func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
-  (rtt.canon $simplebridgemethods.Callable.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [vtable.init]
 (global $simplebridgemethods.SimpleBridgeMethods.vtable (ref $simplebridgemethods.SimpleBridgeMethods.vtable) 
- (struct.new_with_rtt $simplebridgemethods.SimpleBridgeMethods.vtable
+ (struct.new $simplebridgemethods.SimpleBridgeMethods.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@simplebridgemethods.SimpleBridgeMethods)
-  (rtt.canon $simplebridgemethods.SimpleBridgeMethods.vtable)
  )
 )
 
 ;;; Code for simplebridgemethods.SimpleBridgeMethods [itable.init]
-(global $simplebridgemethods.SimpleBridgeMethods.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $simplebridgemethods.SimpleBridgeMethods.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for simplebridgemethods.Superclass [CLASS]
 (type $simplebridgemethods.Superclass (struct_subtype 
@@ -148,7 +140,7 @@
  (block
   ;; Superclass<T> $instance = new Superclass.<init>();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
-  (local.set $$instance (struct.new_with_rtt $simplebridgemethods.Superclass (ref.as_non_null (global.get $simplebridgemethods.Superclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Superclass.itable)) (i32.const 0) (rtt.canon $simplebridgemethods.Superclass)))
+  (local.set $$instance (struct.new $simplebridgemethods.Superclass (ref.as_non_null (global.get $simplebridgemethods.Superclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Superclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:18:6
   (call $$ctor__void_$p_simplebridgemethods_Superclass@simplebridgemethods.Superclass (local.get $$instance))
@@ -179,7 +171,7 @@
  (param $t (ref null $java.lang.Error))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:19:14
  (local $this (ref null $simplebridgemethods.Superclass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.Superclass)))
+ (local.set $this (ref.cast_static $simplebridgemethods.Superclass (local.get $this.untyped)))
  (block
  )
 )
@@ -213,7 +205,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Superclass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.Superclass)))
+ (local.set $this (ref.cast_static $simplebridgemethods.Superclass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Superclass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplebridgemethods.Superclass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -246,7 +238,7 @@
  (block
   ;; Subclass $instance = new Subclass.<init>();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (local.set $$instance (struct.new_with_rtt $simplebridgemethods.Subclass (ref.as_non_null (global.get $simplebridgemethods.Subclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Subclass.itable)) (i32.const 0) (rtt.canon $simplebridgemethods.Subclass)))
+  (local.set $$instance (struct.new $simplebridgemethods.Subclass (ref.as_non_null (global.get $simplebridgemethods.Subclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Subclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
   (call $$ctor__void_$p_simplebridgemethods_Subclass@simplebridgemethods.Subclass (local.get $$instance))
@@ -277,7 +269,7 @@
  (param $a (ref null $java.lang.AssertionError))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:26:14
  (local $this (ref null $simplebridgemethods.Subclass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.Subclass)))
+ (local.set $this (ref.cast_static $simplebridgemethods.Subclass (local.get $this.untyped)))
  (block
  )
 )
@@ -290,11 +282,11 @@
  (param $arg0 (ref null $java.lang.Error))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
  (local $this (ref null $simplebridgemethods.Subclass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.Subclass)))
+ (local.set $this (ref.cast_static $simplebridgemethods.Subclass (local.get $this.untyped)))
  (block
   ;; Subclass.this.m1(((AssertionError) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:23:6
-  (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.AssertionError))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
+  (call_ref (local.get $this)(ref.cast_static $java.lang.AssertionError (local.get $arg0))(struct.get $simplebridgemethods.Subclass.vtable $m_m1__java_lang_AssertionError__void (struct.get $simplebridgemethods.Subclass $vtable(local.get $this))))
  )
 )
 (elem declare func $m_m1__java_lang_Error__void@simplebridgemethods.Subclass)
@@ -327,7 +319,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Subclass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.Subclass)))
+ (local.set $this (ref.cast_static $simplebridgemethods.Subclass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Subclass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplebridgemethods.Subclass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -359,7 +351,7 @@
  (block
   ;; AnotherSubclass $instance = new AnotherSubclass.<init>();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
-  (local.set $$instance (struct.new_with_rtt $simplebridgemethods.AnotherSubclass (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.itable)) (i32.const 0) (rtt.canon $simplebridgemethods.AnotherSubclass)))
+  (local.set $$instance (struct.new $simplebridgemethods.AnotherSubclass (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherSubclass.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:30:6
   (call $$ctor__void_$p_simplebridgemethods_AnotherSubclass@simplebridgemethods.AnotherSubclass (local.get $$instance))
@@ -411,7 +403,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherSubclass))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.AnotherSubclass)))
+ (local.set $this (ref.cast_static $simplebridgemethods.AnotherSubclass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.AnotherSubclass();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplebridgemethods.AnotherSubclass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -479,7 +471,7 @@
  (block
   ;; Task<T> $instance = new Task.<init>();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
-  (local.set $$instance (struct.new_with_rtt $simplebridgemethods.Task (ref.as_non_null (global.get $simplebridgemethods.Task.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Task.itable)) (i32.const 0) (rtt.canon $simplebridgemethods.Task)))
+  (local.set $$instance (struct.new $simplebridgemethods.Task (ref.as_non_null (global.get $simplebridgemethods.Task.vtable)) (ref.as_non_null (global.get $simplebridgemethods.Task.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:39:6
   (call $$ctor__void_$p_simplebridgemethods_Task@simplebridgemethods.Task (local.get $$instance))
@@ -510,7 +502,7 @@
  (param $t (ref null $java.lang.Object))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:42:14
  (local $this (ref null $simplebridgemethods.Task))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.Task)))
+ (local.set $this (ref.cast_static $simplebridgemethods.Task (local.get $this.untyped)))
  (block
  )
 )
@@ -544,7 +536,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.Task))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.Task)))
+ (local.set $this (ref.cast_static $simplebridgemethods.Task (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.Task();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplebridgemethods.Task__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -577,7 +569,7 @@
  (block
   ;; AnotherTask<T> $instance = new AnotherTask.<init>();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (local.set $$instance (struct.new_with_rtt $simplebridgemethods.AnotherTask (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.itable)) (i32.const 0) (rtt.canon $simplebridgemethods.AnotherTask)))
+  (local.set $$instance (struct.new $simplebridgemethods.AnotherTask (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.vtable)) (ref.as_non_null (global.get $simplebridgemethods.AnotherTask.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
   (call $$ctor__void_$p_simplebridgemethods_AnotherTask@simplebridgemethods.AnotherTask (local.get $$instance))
@@ -608,7 +600,7 @@
  (param $t (ref null $simplebridgemethods.Superclass))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:50:14
  (local $this (ref null $simplebridgemethods.AnotherTask))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.AnotherTask)))
+ (local.set $this (ref.cast_static $simplebridgemethods.AnotherTask (local.get $this.untyped)))
  (block
  )
 )
@@ -621,11 +613,11 @@
  (param $arg0 (ref null $java.lang.Object))
  ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
  (local $this (ref null $simplebridgemethods.AnotherTask))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.AnotherTask)))
+ (local.set $this (ref.cast_static $simplebridgemethods.AnotherTask (local.get $this.untyped)))
  (block
   ;; AnotherTask.this.call(((Superclass<T>) arg0));
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:46:6
-  (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $simplebridgemethods.Superclass))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
+  (call_ref (local.get $this)(ref.cast_static $simplebridgemethods.Superclass (local.get $arg0))(struct.get $simplebridgemethods.AnotherTask.vtable $m_call__simplebridgemethods_Superclass__void (struct.get $simplebridgemethods.AnotherTask $vtable(local.get $this))))
  )
 )
 (elem declare func $m_call__java_lang_Object__void@simplebridgemethods.AnotherTask)
@@ -658,7 +650,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.AnotherTask))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.AnotherTask)))
+ (local.set $this (ref.cast_static $simplebridgemethods.AnotherTask (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.AnotherTask();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplebridgemethods.AnotherTask__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -689,7 +681,7 @@
  (block
   ;; SimpleBridgeMethods $instance = new SimpleBridgeMethods.<init>();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
-  (local.set $$instance (struct.new_with_rtt $simplebridgemethods.SimpleBridgeMethods (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.vtable)) (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.itable)) (i32.const 0) (rtt.canon $simplebridgemethods.SimpleBridgeMethods)))
+  (local.set $$instance (struct.new $simplebridgemethods.SimpleBridgeMethods (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.vtable)) (ref.as_non_null (global.get $simplebridgemethods.SimpleBridgeMethods.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ simplebridgemethods/SimpleBridgeMethods.java:53:13
   (call $$ctor__void_$p_simplebridgemethods_SimpleBridgeMethods@simplebridgemethods.SimpleBridgeMethods (local.get $$instance))
@@ -741,7 +733,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplebridgemethods.SimpleBridgeMethods))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $simplebridgemethods.SimpleBridgeMethods)))
+ (local.set $this (ref.cast_static $simplebridgemethods.SimpleBridgeMethods (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplebridgemethods.SimpleBridgeMethods();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplebridgemethods.SimpleBridgeMethods__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

@@ -39,7 +39,7 @@
 
 ;;; Code for nullability.Nullability [vtable.init]
 (global $nullability.Nullability.vtable (ref $nullability.Nullability.vtable) 
- (struct.new_with_rtt $nullability.Nullability.vtable
+ (struct.new $nullability.Nullability.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -48,34 +48,32 @@
   (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.Nullability)
   (ref.func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@nullability.Nullability)
   (ref.func $m_m4__nullability_Nullability_MyFunction__void@nullability.Nullability)
-  (rtt.canon $nullability.Nullability.vtable)
  )
 )
 
 ;;; Code for nullability.Nullability [itable.init]
-(global $nullability.Nullability.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nullability.Nullability.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nullability.Nullability.Foo [vtable.init]
 (global $nullability.Nullability.Foo.vtable (ref $nullability.Nullability.Foo.vtable) 
- (struct.new_with_rtt $nullability.Nullability.Foo.vtable
+ (struct.new $nullability.Nullability.Foo.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@nullability.Nullability.Foo)
   (ref.func $m_getClass__java_lang_Class@nullability.Nullability.Foo)
   (ref.func $m_bar__java_lang_Object__void_$pp_nullability@nullability.Nullability.Foo)
   (ref.func $m_baz__java_lang_Object_$pp_nullability@nullability.Nullability.Foo)
-  (rtt.canon $nullability.Nullability.Foo.vtable)
  )
 )
 
 ;;; Code for nullability.Nullability.Foo [itable.init]
-(global $nullability.Nullability.Foo.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nullability.Nullability.Foo.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nullability.Nullability.StringList [vtable.init]
 (global $nullability.Nullability.StringList.vtable (ref $nullability.Nullability.StringList.vtable) 
- (struct.new_with_rtt $nullability.Nullability.StringList.vtable
+ (struct.new $nullability.Nullability.StringList.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.util.AbstractList)
   (ref.func $m_hashCode__int@java.util.AbstractList)
   (ref.func $m_toString__java_lang_String@java.util.AbstractCollection)
@@ -117,17 +115,15 @@
   (ref.func $m_indexOf__java_lang_Object__int__int_$pp_java_util@java.util.ArrayList)
   (ref.func $m_lastIndexOf__java_lang_Object__int__int_$pp_java_util@java.util.ArrayList)
   (ref.func $m_setSize__int__void_$pp_java_util@java.util.ArrayList)
-  (rtt.canon $nullability.Nullability.StringList.vtable)
  )
 )
 
 ;;; Code for nullability.Nullability.StringList [itable.init]
-(global $nullability.Nullability.StringList.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $java.io.Serializable.vtable
+(global $nullability.Nullability.StringList.itable (ref $itable) (array.init_static $itable 
+ (struct.new $java.io.Serializable.vtable
   (ref.null data)
-  (rtt.canon $java.io.Serializable.vtable)
  )
- (struct.new_with_rtt $java.util.Collection.vtable
+ (struct.new $java.util.Collection.vtable
   (ref.func $m_add__java_lang_Object__boolean@java.util.ArrayList)
   (ref.func $m_addAll__java_util_Collection__boolean@java.util.ArrayList)
   (ref.func $m_clear__void@java.util.ArrayList)
@@ -144,19 +140,16 @@
   (ref.func $m_stream__java_util_stream_Stream@java.util.AbstractCollection)
   (ref.func $m_toArray__arrayOf_java_lang_Object@java.util.ArrayList)
   (ref.func $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object@java.util.ArrayList)
-  (rtt.canon $java.util.Collection.vtable)
  )
- (struct.new_with_rtt $java.lang.Iterable.vtable
+ (struct.new $java.lang.Iterable.vtable
   (ref.func $m_forEach__java_util_function_Consumer__void@java.util.ArrayList)
   (ref.func $m_iterator__java_util_Iterator@java.util.ArrayList)
   (ref.func $m_spliterator__java_util_Spliterator@java.util.AbstractList)
-  (rtt.canon $java.lang.Iterable.vtable)
  )
- (struct.new_with_rtt $java.lang.Cloneable.vtable
+ (struct.new $java.lang.Cloneable.vtable
   (ref.null data)
-  (rtt.canon $java.lang.Cloneable.vtable)
  )
- (struct.new_with_rtt $java.util.List.vtable
+ (struct.new $java.util.List.vtable
   (ref.func $m_add__int__java_lang_Object__void@java.util.ArrayList)
   (ref.func $m_addAll__int__java_util_Collection__boolean@java.util.ArrayList)
   (ref.func $m_get__int__java_lang_Object@java.util.ArrayList)
@@ -170,17 +163,15 @@
   (ref.func $m_sort__java_util_Comparator__void@java.util.ArrayList)
   (ref.func $m_spliterator__java_util_Spliterator@java.util.AbstractList)
   (ref.func $m_subList__int__int__java_util_List@java.util.AbstractList)
-  (rtt.canon $java.util.List.vtable)
  )
- (struct.new_with_rtt $java.util.RandomAccess.vtable
+ (struct.new $java.util.RandomAccess.vtable
   (ref.null data)
-  (rtt.canon $java.util.RandomAccess.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for nullability.Nullability.StringComparator [vtable.init]
 (global $nullability.Nullability.StringComparator.vtable (ref $nullability.Nullability.StringComparator.vtable) 
- (struct.new_with_rtt $nullability.Nullability.StringComparator.vtable
+ (struct.new $nullability.Nullability.StringComparator.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -194,13 +185,12 @@
   (ref.func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator)
   (ref.func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.StringComparator)
   (ref.func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.StringComparator)
-  (rtt.canon $nullability.Nullability.StringComparator.vtable)
  )
 )
 
 ;;; Code for nullability.Nullability.StringComparator [itable.init]
-(global $nullability.Nullability.StringComparator.itable (ref $itable) (array.init $itable  (ref.null data)
- (struct.new_with_rtt $java.util.Comparator.vtable
+(global $nullability.Nullability.StringComparator.itable (ref $itable) (array.init_static $itable  (ref.null data)
+ (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.StringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_reversed__java_util_Comparator@nullability.Nullability.StringComparator)
@@ -210,13 +200,12 @@
   (ref.func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator)
   (ref.func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.StringComparator)
   (ref.func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.StringComparator)
-  (rtt.canon $java.util.Comparator.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for nullability.Nullability.NullableStringComparator [vtable.init]
 (global $nullability.Nullability.NullableStringComparator.vtable (ref $nullability.Nullability.NullableStringComparator.vtable) 
- (struct.new_with_rtt $nullability.Nullability.NullableStringComparator.vtable
+ (struct.new $nullability.Nullability.NullableStringComparator.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -230,13 +219,12 @@
   (ref.func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
   (ref.func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
   (ref.func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
-  (rtt.canon $nullability.Nullability.NullableStringComparator.vtable)
  )
 )
 
 ;;; Code for nullability.Nullability.NullableStringComparator [itable.init]
-(global $nullability.Nullability.NullableStringComparator.itable (ref $itable) (array.init $itable  (ref.null data)
- (struct.new_with_rtt $java.util.Comparator.vtable
+(global $nullability.Nullability.NullableStringComparator.itable (ref $itable) (array.init_static $itable  (ref.null data)
+ (struct.new $java.util.Comparator.vtable
   (ref.func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.NullableStringComparator)
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_reversed__java_util_Comparator@nullability.Nullability.NullableStringComparator)
@@ -246,34 +234,31 @@
   (ref.func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
   (ref.func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
   (ref.func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator)
-  (rtt.canon $java.util.Comparator.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for nullability.Nullability.NullableTemplatedReturnOverride [vtable.init]
 (global $nullability.Nullability.NullableTemplatedReturnOverride.vtable (ref $nullability.Nullability.NullableTemplatedReturnOverride.vtable) 
- (struct.new_with_rtt $nullability.Nullability.NullableTemplatedReturnOverride.vtable
+ (struct.new $nullability.Nullability.NullableTemplatedReturnOverride.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nullability.Nullability.NullableTemplatedReturnOverride)
   (ref.func $m_foo__java_lang_String@nullability.Nullability.NullableTemplatedReturnOverride)
   (ref.func $m_foo__java_lang_Object@nullability.Nullability.NullableTemplatedReturnOverride)
-  (rtt.canon $nullability.Nullability.NullableTemplatedReturnOverride.vtable)
  )
 )
 
 ;;; Code for nullability.Nullability.NullableTemplatedReturnOverride [itable.init]
-(global $nullability.Nullability.NullableTemplatedReturnOverride.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $nullability.Nullability.NullableTemplatedReturn.vtable
+(global $nullability.Nullability.NullableTemplatedReturnOverride.itable (ref $itable) (array.init_static $itable 
+ (struct.new $nullability.Nullability.NullableTemplatedReturn.vtable
   (ref.func $m_foo__java_lang_Object@nullability.Nullability.NullableTemplatedReturnOverride)
-  (rtt.canon $nullability.Nullability.NullableTemplatedReturn.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [vtable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.vtable) 
- (struct.new_with_rtt $nullability.defaultnotnullable.DefaultNotNullable.vtable
+ (struct.new $nullability.defaultnotnullable.DefaultNotNullable.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -281,38 +266,35 @@
   (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.defaultnotnullable.DefaultNotNullable)
   (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.defaultnotnullable.DefaultNotNullable)
   (ref.func $m_m3__arrayOf_java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable)
-  (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.vtable)
  )
 )
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable [itable.init]
-(global $nullability.defaultnotnullable.DefaultNotNullable.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nullability.defaultnotnullable.DefaultNotNullable.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [vtable.init]
 (global $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable (ref $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable) 
- (struct.new_with_rtt $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable
+ (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
   (ref.func $m_add__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
   (ref.func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
-  (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)
  )
 )
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface [itable.init]
-(global $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable
+(global $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable (ref $itable) (array.init_static $itable 
+ (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable
   (ref.func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
-  (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [vtable.init]
 (global $nullability.defaultnullable.DefaultNullable.vtable (ref $nullability.defaultnullable.DefaultNullable.vtable) 
- (struct.new_with_rtt $nullability.defaultnullable.DefaultNullable.vtable
+ (struct.new $nullability.defaultnullable.DefaultNullable.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -320,17 +302,16 @@
   (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.defaultnullable.DefaultNullable)
   (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.defaultnullable.DefaultNullable)
   (ref.func $m_m3__arrayOf_java_lang_String__void@nullability.defaultnullable.DefaultNullable)
-  (rtt.canon $nullability.defaultnullable.DefaultNullable.vtable)
  )
 )
 
 ;;; Code for nullability.defaultnullable.DefaultNullable [itable.init]
-(global $nullability.defaultnullable.DefaultNullable.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nullability.defaultnullable.DefaultNullable.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [vtable.init]
 (global $nullability.explicitnotnullable.ExplicitNotNullable.vtable (ref $nullability.explicitnotnullable.ExplicitNotNullable.vtable) 
- (struct.new_with_rtt $nullability.explicitnotnullable.ExplicitNotNullable.vtable
+ (struct.new $nullability.explicitnotnullable.ExplicitNotNullable.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
@@ -338,13 +319,12 @@
   (ref.func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable)
   (ref.func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable)
   (ref.func $m_m3__arrayOf_java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable)
-  (rtt.canon $nullability.explicitnotnullable.ExplicitNotNullable.vtable)
  )
 )
 
 ;;; Code for nullability.explicitnotnullable.ExplicitNotNullable [itable.init]
-(global $nullability.explicitnotnullable.ExplicitNotNullable.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $nullability.explicitnotnullable.ExplicitNotNullable.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for nullability.Nullability [CLASS]
 (type $nullability.Nullability (struct_subtype 
@@ -385,7 +365,7 @@
  (block
   ;; Nullability $instance = new Nullability.<init>(a);
   ;;@ nullability/Nullability.java:46:9
-  (local.set $$instance (struct.new_with_rtt $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $nullability.Nullability.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (rtt.canon $nullability.Nullability)))
+  (local.set $$instance (struct.new $nullability.Nullability (ref.as_non_null (global.get $nullability.Nullability.vtable)) (ref.as_non_null (global.get $nullability.Nullability.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object)))
   ;; $instance.$ctor(a);
   ;;@ nullability/Nullability.java:46:9
   (call $$ctor__java_lang_String__void_$p_nullability_Nullability@nullability.Nullability (local.get $$instance)(local.get $a))
@@ -423,7 +403,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/Nullability.java:49:16
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability)))
+ (local.set $this (ref.cast_static $nullability.Nullability (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/Nullability.java:50:4
@@ -441,7 +421,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/Nullability.java:53:16
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability)))
+ (local.set $this (ref.cast_static $nullability.Nullability (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/Nullability.java:54:4
@@ -459,7 +439,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/Nullability.java:58:16
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability)))
+ (local.set $this (ref.cast_static $nullability.Nullability (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ nullability/Nullability.java:59:4
@@ -475,7 +455,7 @@
  (param $f (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:62:14
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability)))
+ (local.set $this (ref.cast_static $nullability.Nullability (local.get $this.untyped)))
  (block
  )
 )
@@ -509,13 +489,13 @@
   (struct.set $nullability.Nullability $f_f7__nullability_Nullability_(local.get $this) (ref.null $java.lang.Object))
   ;; (Nullability.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/Nullability.java:37:2
-  (struct.set $nullability.Nullability $f_f8__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.Nullability $f_f8__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (Nullability.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/Nullability.java:39:2
-  (struct.set $nullability.Nullability $f_f9__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.Nullability $f_f9__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (Nullability.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/Nullability.java:41:2
-  (struct.set $nullability.Nullability $f_f10__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.Nullability $f_f10__nullability_Nullability_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (Nullability.this.f12 = java.util.ArrayList.$create());
   ;;@ nullability/Nullability.java:43:2
   (struct.set $nullability.Nullability $f_f12__nullability_Nullability_(local.get $this) (call $$create__java_util_ArrayList@java.util.ArrayList ))
@@ -550,7 +530,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability)))
+ (local.set $this (ref.cast_static $nullability.Nullability (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -583,7 +563,7 @@
  (block
   ;; Foo<T> $instance = new Foo.<init>();
   ;;@ nullability/Nullability.java:64:15
-  (local.set $$instance (struct.new_with_rtt $nullability.Nullability.Foo (ref.as_non_null (global.get $nullability.Nullability.Foo.vtable)) (ref.as_non_null (global.get $nullability.Nullability.Foo.itable)) (i32.const 0) (rtt.canon $nullability.Nullability.Foo)))
+  (local.set $$instance (struct.new $nullability.Nullability.Foo (ref.as_non_null (global.get $nullability.Nullability.Foo.vtable)) (ref.as_non_null (global.get $nullability.Nullability.Foo.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nullability/Nullability.java:64:15
   (call $$ctor__void_$p_nullability_Nullability_Foo@nullability.Nullability.Foo (local.get $$instance))
@@ -614,7 +594,7 @@
  (param $t (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:65:9
  (local $this (ref null $nullability.Nullability.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.Foo)))
+ (local.set $this (ref.cast_static $nullability.Nullability.Foo (local.get $this.untyped)))
  (block
  )
 )
@@ -627,7 +607,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:68:6
  (local $this (ref null $nullability.Nullability.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.Foo)))
+ (local.set $this (ref.cast_static $nullability.Nullability.Foo (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ nullability/Nullability.java:69:6
@@ -643,7 +623,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/Nullability.java:73:18
  (local $this (ref null $nullability.Nullability.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.Foo)))
+ (local.set $this (ref.cast_static $nullability.Nullability.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_|Foo|();
   ;;@ nullability/Nullability.java:74:6
@@ -680,7 +660,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.Foo))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.Foo)))
+ (local.set $this (ref.cast_static $nullability.Nullability.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.Foo();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -787,7 +767,7 @@
  (block
   ;; StringList $instance = new StringList.<init>();
   ;;@ nullability/Nullability.java:84:22
-  (local.set $$instance (struct.new_with_rtt $nullability.Nullability.StringList (ref.as_non_null (global.get $nullability.Nullability.StringList.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object) (rtt.canon $nullability.Nullability.StringList)))
+  (local.set $$instance (struct.new $nullability.Nullability.StringList (ref.as_non_null (global.get $nullability.Nullability.StringList.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringList.itable)) (i32.const 0) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/Nullability.java:84:22
   (call $$ctor__void_$p_nullability_Nullability_StringList@nullability.Nullability.StringList (local.get $$instance))
@@ -839,7 +819,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.StringList))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringList)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringList (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.StringList();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.StringList__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -879,7 +859,7 @@
  (block
   ;; StringComparator $instance = new StringComparator.<init>();
   ;;@ nullability/Nullability.java:87:22
-  (local.set $$instance (struct.new_with_rtt $nullability.Nullability.StringComparator (ref.as_non_null (global.get $nullability.Nullability.StringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringComparator.itable)) (i32.const 0) (rtt.canon $nullability.Nullability.StringComparator)))
+  (local.set $$instance (struct.new $nullability.Nullability.StringComparator (ref.as_non_null (global.get $nullability.Nullability.StringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.StringComparator.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nullability/Nullability.java:87:22
   (call $$ctor__void_$p_nullability_Nullability_StringComparator@nullability.Nullability.StringComparator (local.get $$instance))
@@ -912,7 +892,7 @@
  (result i32)
  ;;@ nullability/Nullability.java:89:15
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ nullability/Nullability.java:90:6
@@ -930,11 +910,11 @@
  (result i32)
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return StringComparator.this.compare(((String) arg0),((String) arg1));
   ;;@ nullability/Nullability.java:87:22
-  (return (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(ref.cast (local.get $arg1) (rtt.canon $java.lang.String))(struct.get $nullability.Nullability.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.StringComparator $vtable(local.get $this)))))
+  (return (call_ref (local.get $this)(ref.cast_static $java.lang.String (local.get $arg0))(ref.cast_static $java.lang.String (local.get $arg1))(struct.get $nullability.Nullability.StringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.StringComparator $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.StringComparator)
@@ -946,7 +926,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.reversed();
   ;;@ nullability/Nullability.java:87:22
@@ -963,7 +943,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ nullability/Nullability.java:87:22
@@ -981,7 +961,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparing(arg0,arg1);
   ;;@ nullability/Nullability.java:87:22
@@ -998,7 +978,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ nullability/Nullability.java:87:22
@@ -1015,7 +995,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparingDouble(arg0);
   ;;@ nullability/Nullability.java:87:22
@@ -1032,7 +1012,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparingInt(arg0);
   ;;@ nullability/Nullability.java:87:22
@@ -1049,7 +1029,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparingLong(arg0);
   ;;@ nullability/Nullability.java:87:22
@@ -1089,7 +1069,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.StringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.StringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.StringComparator();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.StringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1129,7 +1109,7 @@
  (block
   ;; NullableStringComparator $instance = new NullableStringComparator.<init>();
   ;;@ nullability/Nullability.java:95:22
-  (local.set $$instance (struct.new_with_rtt $nullability.Nullability.NullableStringComparator (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.itable)) (i32.const 0) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+  (local.set $$instance (struct.new $nullability.Nullability.NullableStringComparator (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableStringComparator.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nullability/Nullability.java:95:22
   (call $$ctor__void_$p_nullability_Nullability_NullableStringComparator@nullability.Nullability.NullableStringComparator (local.get $$instance))
@@ -1162,7 +1142,7 @@
  (result i32)
  ;;@ nullability/Nullability.java:97:15
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return 0;
   ;;@ nullability/Nullability.java:98:6
@@ -1180,11 +1160,11 @@
  (result i32)
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return NullableStringComparator.this.compare(((String) arg0),((String) arg1));
   ;;@ nullability/Nullability.java:95:22
-  (return (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(ref.cast (local.get $arg1) (rtt.canon $java.lang.String))(struct.get $nullability.Nullability.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.NullableStringComparator $vtable(local.get $this)))))
+  (return (call_ref (local.get $this)(ref.cast_static $java.lang.String (local.get $arg0))(ref.cast_static $java.lang.String (local.get $arg1))(struct.get $nullability.Nullability.NullableStringComparator.vtable $m_compare__java_lang_String__java_lang_String__int (struct.get $nullability.Nullability.NullableStringComparator $vtable(local.get $this)))))
  )
 )
 (elem declare func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.NullableStringComparator)
@@ -1196,7 +1176,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.reversed();
   ;;@ nullability/Nullability.java:95:22
@@ -1213,7 +1193,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ nullability/Nullability.java:95:22
@@ -1231,7 +1211,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparing(arg0,arg1);
   ;;@ nullability/Nullability.java:95:22
@@ -1248,7 +1228,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparing(arg0);
   ;;@ nullability/Nullability.java:95:22
@@ -1265,7 +1245,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparingDouble(arg0);
   ;;@ nullability/Nullability.java:95:22
@@ -1282,7 +1262,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparingInt(arg0);
   ;;@ nullability/Nullability.java:95:22
@@ -1299,7 +1279,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return Comparator.this.thenComparingLong(arg0);
   ;;@ nullability/Nullability.java:95:22
@@ -1339,7 +1319,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableStringComparator)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.NullableStringComparator();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.NullableStringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1408,7 +1388,7 @@
  (block
   ;; NullableTemplatedReturnOverride $instance = new NullableTemplatedReturnOverride.<init>();
   ;;@ nullability/Nullability.java:107:22
-  (local.set $$instance (struct.new_with_rtt $nullability.Nullability.NullableTemplatedReturnOverride (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.itable)) (i32.const 0) (rtt.canon $nullability.Nullability.NullableTemplatedReturnOverride)))
+  (local.set $$instance (struct.new $nullability.Nullability.NullableTemplatedReturnOverride (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.vtable)) (ref.as_non_null (global.get $nullability.Nullability.NullableTemplatedReturnOverride.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ nullability/Nullability.java:107:22
   (call $$ctor__void_$p_nullability_Nullability_NullableTemplatedReturnOverride@nullability.Nullability.NullableTemplatedReturnOverride (local.get $$instance))
@@ -1439,7 +1419,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/Nullability.java:110:18
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableTemplatedReturnOverride)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableTemplatedReturnOverride (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_|foo|();
   ;;@ nullability/Nullability.java:111:6
@@ -1455,7 +1435,7 @@
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:107:22
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableTemplatedReturnOverride)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableTemplatedReturnOverride (local.get $this.untyped)))
  (block
   ;; return NullableTemplatedReturnOverride.this.foo();
   ;;@ nullability/Nullability.java:107:22
@@ -1492,7 +1472,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.Nullability.NullableTemplatedReturnOverride)))
+ (local.set $this (ref.cast_static $nullability.Nullability.NullableTemplatedReturnOverride (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.NullableTemplatedReturnOverride();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.NullableTemplatedReturnOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1538,7 +1518,7 @@
  (block
   ;; DefaultNotNullable $instance = new DefaultNotNullable.<init>();
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:25:13
-  (local.set $$instance (struct.new_with_rtt $nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:25:13
   (call $$ctor__void_$p_nullability_defaultnotnullable_DefaultNotNullable@nullability.defaultnotnullable.DefaultNotNullable (local.get $$instance))
@@ -1574,7 +1554,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:40:16
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:41:4
@@ -1592,7 +1572,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:45:16
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:46:4
@@ -1608,7 +1588,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:50:14
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable (local.get $this.untyped)))
  (block
  )
 )
@@ -1642,13 +1622,13 @@
   (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f7__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (ref.null $java.lang.Object))
   ;; (DefaultNotNullable.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:33:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f8__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f8__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (DefaultNotNullable.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:35:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f9__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f9__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (DefaultNotNullable.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:37:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f10__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f10__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (DefaultNotNullable.this.f11 = null);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:38:2
   (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f11__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (ref.null $java.lang.Void))
@@ -1686,7 +1666,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1757,7 +1737,7 @@
  (block
   ;; ImplementsParameterizedInterface $instance = new ImplementsParameterizedInterface.<init>($outer_this);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
-  (local.set $$instance (struct.new_with_rtt $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable)) (i32.const 0) (ref.null $nullability.defaultnotnullable.DefaultNotNullable) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)))
+  (local.set $$instance (struct.new $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable)) (ref.as_non_null (global.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.itable)) (i32.const 0) (ref.null $nullability.defaultnotnullable.DefaultNotNullable)))
   ;; $instance.$ctor($outer_this);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
   (call $$ctor__nullability_defaultnotnullable_DefaultNotNullable__void_$p_nullability_defaultnotnullable_DefaultNotNullable_ImplementsParameterizedInterface@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (local.get $$instance)(local.get $$outer_this))
@@ -1792,7 +1772,7 @@
  (param $s (ref null $java.lang.String))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:59:16
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (local.get $this.untyped)))
  (block
  )
 )
@@ -1805,11 +1785,11 @@
  (param $arg0 (ref null $java.lang.Object))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (local.get $this.untyped)))
  (block
   ;; ImplementsParameterizedInterface.this.add(((String) arg0));
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
-  (call_ref (local.get $this)(ref.cast (local.get $arg0) (rtt.canon $java.lang.String))(struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable $m_add__java_lang_String__void (struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $vtable(local.get $this))))
+  (call_ref (local.get $this)(ref.cast_static $java.lang.String (local.get $arg0))(struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable $m_add__java_lang_String__void (struct.get $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface $vtable(local.get $this))))
  )
 )
 (elem declare func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
@@ -1842,7 +1822,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)))
+ (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -1888,7 +1868,7 @@
  (block
   ;; DefaultNullable $instance = new DefaultNullable.<init>();
   ;;@ nullability/defaultnullable/DefaultNullable.java:25:13
-  (local.set $$instance (struct.new_with_rtt $nullability.defaultnullable.DefaultNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (rtt.canon $nullability.defaultnullable.DefaultNullable)))
+  (local.set $$instance (struct.new $nullability.defaultnullable.DefaultNullable (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.vtable)) (ref.as_non_null (global.get $nullability.defaultnullable.DefaultNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/defaultnullable/DefaultNullable.java:25:13
   (call $$ctor__void_$p_nullability_defaultnullable_DefaultNullable@nullability.defaultnullable.DefaultNullable (local.get $$instance))
@@ -1924,7 +1904,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/defaultnullable/DefaultNullable.java:40:16
  (local $this (ref null $nullability.defaultnullable.DefaultNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnullable.DefaultNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/defaultnullable/DefaultNullable.java:41:4
@@ -1942,7 +1922,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/defaultnullable/DefaultNullable.java:45:16
  (local $this (ref null $nullability.defaultnullable.DefaultNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnullable.DefaultNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ nullability/defaultnullable/DefaultNullable.java:46:4
@@ -1958,7 +1938,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ nullability/defaultnullable/DefaultNullable.java:50:14
  (local $this (ref null $nullability.defaultnullable.DefaultNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnullable.DefaultNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable (local.get $this.untyped)))
  (block
  )
 )
@@ -1992,13 +1972,13 @@
   (struct.set $nullability.defaultnullable.DefaultNullable $f_f7__nullability_defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Object))
   ;; (DefaultNullable.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/defaultnullable/DefaultNullable.java:33:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f8__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.defaultnullable.DefaultNullable $f_f8__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (DefaultNullable.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/defaultnullable/DefaultNullable.java:35:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f9__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.defaultnullable.DefaultNullable $f_f9__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (DefaultNullable.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/defaultnullable/DefaultNullable.java:37:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f10__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.defaultnullable.DefaultNullable $f_f10__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (DefaultNullable.this.f11 = null);
   ;;@ nullability/defaultnullable/DefaultNullable.java:38:2
   (struct.set $nullability.defaultnullable.DefaultNullable $f_f11__nullability_defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.Void))
@@ -2036,7 +2016,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.defaultnullable.DefaultNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.defaultnullable.DefaultNullable)))
+ (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnullable.DefaultNullable();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnullable.DefaultNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
@@ -2082,7 +2062,7 @@
  (block
   ;; ExplicitNotNullable $instance = new ExplicitNotNullable.<init>();
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:27:13
-  (local.set $$instance (struct.new_with_rtt $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object) (rtt.canon $nullability.explicitnotnullable.ExplicitNotNullable)))
+  (local.set $$instance (struct.new $nullability.explicitnotnullable.ExplicitNotNullable (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.vtable)) (ref.as_non_null (global.get $nullability.explicitnotnullable.ExplicitNotNullable.itable)) (i32.const 0) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.String) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $java.lang.Object) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $javaemul.internal.WasmArray.OfObject) (ref.null $java.lang.Void) (ref.null $java.lang.Object)))
   ;; $instance.$ctor();
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:27:13
   (call $$ctor__void_$p_nullability_explicitnotnullable_ExplicitNotNullable@nullability.explicitnotnullable.ExplicitNotNullable (local.get $$instance))
@@ -2118,7 +2098,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:42:16
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.explicitnotnullable.ExplicitNotNullable)))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:43:4
@@ -2136,7 +2116,7 @@
  (result (ref null $java.lang.String))
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:47:16
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.explicitnotnullable.ExplicitNotNullable)))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable (local.get $this.untyped)))
  (block
   ;; return null;
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:48:4
@@ -2152,7 +2132,7 @@
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:52:14
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.explicitnotnullable.ExplicitNotNullable)))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable (local.get $this.untyped)))
  (block
  )
 )
@@ -2186,13 +2166,13 @@
   (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f7__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (ref.null $java.lang.Object))
   ;; (ExplicitNotNullable.this.f8 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:35:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f8__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f8__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (ExplicitNotNullable.this.f9 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:37:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f9__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f9__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (ExplicitNotNullable.this.f10 = javaemul.internal.WasmArray.OfObject.$create([]));
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:39:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f10__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init $java.lang.Object.array  (rtt.canon $java.lang.Object.array))))
+  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f10__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array )))
   ;; (ExplicitNotNullable.this.f11 = null);
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:40:2
   (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f11__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (ref.null $java.lang.Void))
@@ -2230,7 +2210,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $nullability.explicitnotnullable.ExplicitNotNullable)))
+ (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.explicitnotnullable.ExplicitNotNullable();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

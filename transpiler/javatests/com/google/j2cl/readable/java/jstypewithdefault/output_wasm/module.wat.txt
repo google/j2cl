@@ -6,23 +6,21 @@
 
 ;;; Code for jstypewithdefault.SomeJsType [vtable.init]
 (global $jstypewithdefault.SomeJsType.vtable (ref $jstypewithdefault.SomeJsType.vtable) 
- (struct.new_with_rtt $jstypewithdefault.SomeJsType.vtable
+ (struct.new $jstypewithdefault.SomeJsType.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jstypewithdefault.SomeJsType)
   (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
-  (rtt.canon $jstypewithdefault.SomeJsType.vtable)
  )
 )
 
 ;;; Code for jstypewithdefault.SomeJsType [itable.init]
-(global $jstypewithdefault.SomeJsType.itable (ref $itable) (array.init $itable 
- (struct.new_with_rtt $jstypewithdefault.Interface.vtable
+(global $jstypewithdefault.SomeJsType.itable (ref $itable) (array.init_static $itable 
+ (struct.new $jstypewithdefault.Interface.vtable
   (ref.func $m_defaultMethod__void@jstypewithdefault.SomeJsType)
-  (rtt.canon $jstypewithdefault.Interface.vtable)
  )
- (rtt.canon $itable)))
+ ))
 
 ;;; Code for jstypewithdefault.SomeJsType [CLASS]
 (type $jstypewithdefault.SomeJsType (struct_subtype 
@@ -48,7 +46,7 @@
  (block
   ;; SomeJsType $instance = new SomeJsType.<init>();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
-  (local.set $$instance (struct.new_with_rtt $jstypewithdefault.SomeJsType (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.vtable)) (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.itable)) (i32.const 0) (rtt.canon $jstypewithdefault.SomeJsType)))
+  (local.set $$instance (struct.new $jstypewithdefault.SomeJsType (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.vtable)) (ref.as_non_null (global.get $jstypewithdefault.SomeJsType.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
   (call $$ctor__void_$p_jstypewithdefault_SomeJsType@jstypewithdefault.SomeJsType (local.get $$instance))
@@ -78,7 +76,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstypewithdefault/SomeJsType.java:20:13
  (local $this (ref null $jstypewithdefault.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypewithdefault.SomeJsType)))
+ (local.set $this (ref.cast_static $jstypewithdefault.SomeJsType (local.get $this.untyped)))
  (block
   ;; Interface.this.defaultMethod();
   ;;@ jstypewithdefault/SomeJsType.java:20:13
@@ -118,7 +116,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypewithdefault.SomeJsType))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypewithdefault.SomeJsType)))
+ (local.set $this (ref.cast_static $jstypewithdefault.SomeJsType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithdefault.SomeJsType();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypewithdefault.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

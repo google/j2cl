@@ -5,18 +5,17 @@
 
 ;;; Code for compiletimeconstant.CompileTimeConstant [vtable.init]
 (global $compiletimeconstant.CompileTimeConstant.vtable (ref $compiletimeconstant.CompileTimeConstant.vtable) 
- (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant.vtable
+ (struct.new $compiletimeconstant.CompileTimeConstant.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@compiletimeconstant.CompileTimeConstant)
-  (rtt.canon $compiletimeconstant.CompileTimeConstant.vtable)
  )
 )
 
 ;;; Code for compiletimeconstant.CompileTimeConstant [itable.init]
-(global $compiletimeconstant.CompileTimeConstant.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $compiletimeconstant.CompileTimeConstant.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for compiletimeconstant.CompileTimeConstant [CLASS]
 (type $compiletimeconstant.CompileTimeConstant (struct_subtype 
@@ -41,7 +40,7 @@
  (block
   ;; CompileTimeConstant $instance = new CompileTimeConstant.<init>();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
-  (local.set $$instance (struct.new_with_rtt $compiletimeconstant.CompileTimeConstant (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.vtable)) (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.itable)) (i32.const 0) (rtt.canon $compiletimeconstant.CompileTimeConstant)))
+  (local.set $$instance (struct.new $compiletimeconstant.CompileTimeConstant (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.vtable)) (ref.as_non_null (global.get $compiletimeconstant.CompileTimeConstant.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ compiletimeconstant/CompileTimeConstant.java:18:13
   (call $$ctor__void_$p_compiletimeconstant_CompileTimeConstant@compiletimeconstant.CompileTimeConstant (local.get $$instance))
@@ -137,7 +136,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $compiletimeconstant.CompileTimeConstant))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $compiletimeconstant.CompileTimeConstant)))
+ (local.set $this (ref.cast_static $compiletimeconstant.CompileTimeConstant (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCompiletimeconstant.CompileTimeConstant();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCompiletimeconstant.CompileTimeConstant__java_lang_Class@javaemul.internal.ClassLiteralPool) ))

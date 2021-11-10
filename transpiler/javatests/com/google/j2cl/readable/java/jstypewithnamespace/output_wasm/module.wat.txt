@@ -3,18 +3,17 @@
 
 ;;; Code for jstypewithnamespace.JsTypeWithNamespace [vtable.init]
 (global $jstypewithnamespace.JsTypeWithNamespace.vtable (ref $jstypewithnamespace.JsTypeWithNamespace.vtable) 
- (struct.new_with_rtt $jstypewithnamespace.JsTypeWithNamespace.vtable
+ (struct.new $jstypewithnamespace.JsTypeWithNamespace.vtable
   (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
   (ref.func $m_hashCode__int@java.lang.Object)
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@jstypewithnamespace.JsTypeWithNamespace)
-  (rtt.canon $jstypewithnamespace.JsTypeWithNamespace.vtable)
  )
 )
 
 ;;; Code for jstypewithnamespace.JsTypeWithNamespace [itable.init]
-(global $jstypewithnamespace.JsTypeWithNamespace.itable (ref $itable) (array.init $itable 
- (rtt.canon $itable)))
+(global $jstypewithnamespace.JsTypeWithNamespace.itable (ref $itable) (array.init_static $itable 
+ ))
 
 ;;; Code for jstypewithnamespace.JsTypeWithNamespace [CLASS]
 (type $jstypewithnamespace.JsTypeWithNamespace (struct_subtype 
@@ -39,7 +38,7 @@
  (block
   ;; JsTypeWithNamespace $instance = new JsTypeWithNamespace.<init>();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
-  (local.set $$instance (struct.new_with_rtt $jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.itable)) (i32.const 0) (rtt.canon $jstypewithnamespace.JsTypeWithNamespace)))
+  (local.set $$instance (struct.new $jstypewithnamespace.JsTypeWithNamespace (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.vtable)) (ref.as_non_null (global.get $jstypewithnamespace.JsTypeWithNamespace.itable)) (i32.const 0)))
   ;; $instance.$ctor();
   ;;@ jstypewithnamespace/JsTypeWithNamespace.java:21:13
   (call $$ctor__void_$p_jstypewithnamespace_JsTypeWithNamespace@jstypewithnamespace.JsTypeWithNamespace (local.get $$instance))
@@ -91,7 +90,7 @@
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypewithnamespace.JsTypeWithNamespace))
- (local.set $this (ref.cast (local.get $this.untyped) (rtt.canon $jstypewithnamespace.JsTypeWithNamespace)))
+ (local.set $this (ref.cast_static $jstypewithnamespace.JsTypeWithNamespace (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypewithnamespace.JsTypeWithNamespace();
   (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypewithnamespace.JsTypeWithNamespace__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
