@@ -105,7 +105,6 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Option(
       name = "-experimentalBackend",
-      metaVar = "(CLOSURE | WASM | KOTLIN)",
       usage =
           "Select the backend to use: CLOSURE (default), WASM (experimental), KOTLIN"
               + " (experimental).",
