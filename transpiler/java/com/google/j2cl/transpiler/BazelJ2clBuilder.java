@@ -15,7 +15,6 @@ package com.google.j2cl.transpiler;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
-import com.google.common.base.Ascii;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -99,9 +98,11 @@ final class BazelJ2clBuilder extends BazelWorker {
       hidden = true)
   protected boolean enableJSpecifySupport = false;
 
-  /** Temporary flag to select the frontend during the transition to javac. */
-  private static final Frontend FRONTEND =
-      Frontend.valueOf(Ascii.toUpperCase(System.getProperty("j2cl.frontend", "jdt")));
+  @Option(
+      name = "-experimentalFrontend",
+      usage = "Select the frontend to use: JDT (default), JAVAC (experimental).",
+      hidden = true)
+  protected Frontend frontend = Frontend.JDT;
 
   @Option(
       name = "-experimentalBackend",
@@ -167,7 +168,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setOptimizeAutoValue(this.optimizeAutoValue)
-        .setFrontend(FRONTEND)
+        .setFrontend(frontend)
         .setBackend(this.backend)
         .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))

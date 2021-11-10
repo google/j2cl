@@ -2,6 +2,7 @@
 
 load(":j2cl_js_common.bzl", "J2CL_JS_TOOLCHAIN_ATTRS", "create_js_lib_struct", "j2cl_js_provider")
 load("//build_defs/internal_do_not_use:provider.bzl", _J2clInfo = "J2clInfo")
+load("@bazel_skylib//rules:common_settings.bzl", "BuildSettingInfo")
 
 # TODO(b/183965899): Update references to skip this re-export and remove it.
 J2clInfo = _J2clInfo
@@ -213,6 +214,7 @@ def _j2cl_transpile(
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
+    args.add("-experimentalFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)
     for flag, value in internal_transpiler_flags.items():
         if value:
             args.add("-" + flag.replace("_", ""))
@@ -260,6 +262,9 @@ J2CL_TOOLCHAIN_ATTRS = {
         cfg = "host",
         executable = True,
         default = Label("@bazel_tools//tools/jdk:jar"),
+    ),
+    "_java_frontend": attr.label(
+        default = Label("//:experimental_java_frontend"),
     ),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)

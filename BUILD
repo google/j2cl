@@ -2,7 +2,7 @@
 #  Public targets available externally. Also see build_defs/rules.bzl for the provided rules.
 
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
-load("@bazel_skylib//rules:common_settings.bzl", "bool_flag")
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag", "string_flag")
 
 package(
     default_visibility = ["//visibility:public"],
@@ -63,4 +63,15 @@ alias(
 bool_flag(
     name = "enable_experimental_java11_support",
     build_setting_default = False,
+)
+
+# TODO(b/135123615): Temporary support for selecting frontend. Once javac becomes the frontend for
+# J2CL this will be removed.
+string_flag(
+    name = "experimental_java_frontend",
+    build_setting_default = "jdt",
+    values = [
+        "jdt",
+        "javac",
+    ],
 )
