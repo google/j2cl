@@ -120,20 +120,20 @@ open class CastPrimitives {
   }
   if (true) {
    tlong = fint.toLong()
-   tlong += fint
+   tlong += fint.toLong()
    tlong <<= fint
   }
   if (true) {
-   tlong += fchar
+   tlong += fchar.code.toLong()
    tlong += flong
    tlong += ffloat
   }
   if (true) {
-   tlong = flong * fint
+   tlong = flong * fint.toLong()
    tlong = flong >> fint
   }
   if (true) {
-   tlong = flong + fshort
+   tlong = flong + fshort.toLong()
    tlong = flong + flong
   }
   if (true) {
@@ -141,7 +141,7 @@ open class CastPrimitives {
    tlong <<= flong
   }
   if (true) {
-   tlong = 0 + 1 + 2L
+   tlong = (0 + 1).toLong() + 2L
   }
  }
 

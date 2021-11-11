@@ -40,7 +40,7 @@
 [testPrimitives] => [m_testPrimitives__]
 [{
     int a = 10,
-...    byte x = (byte) (((short) a + (byte) (short) b) * (short) (byte) c);
+...    k = y == z;
   }] => [let /** number */ $value, /** number */ $value_1;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [int a = 10,
         b = a++,
@@ -82,6 +82,11 @@
 [q = 3 >>> 2;] => [q = 3 >>> 2 | 0;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [byte x = (byte) (((short) a + (byte) (short) b) * (short) (byte) c);] => [let x = $Primitives.narrowIntToByte(Math.imul($Primitives.narrowIntToShort(a) + $Primitives.narrowIntToByte($Primitives.narrowIntToShort(b)), $Primitives.narrowIntToShort($Primitives.narrowIntToByte(c))));] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [x] => [x] "x"
+[char y = 'y';] => [let y = 121 /* 'y' */;] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[y] => [y] "y"
+[Long z = 121L;] => [let z = Long.m_valueOf__long($Long.fromInt(121));] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
+[z] => [z] "z"
+[k = y == z;] => [k = $LongUtils.equals($Primitives.widenCharToLong(y), z.m_longValue__());] "arithmeticexpressions.ArithmeticExpressions.testPrimitives"
 [testCompoundArray] => [m_testCompoundArray__]
 [int[] ints = null;] => [let ints = null;] "arithmeticexpressions.ArithmeticExpressions.testCompoundArray"
 [ints] => [ints] "ints"

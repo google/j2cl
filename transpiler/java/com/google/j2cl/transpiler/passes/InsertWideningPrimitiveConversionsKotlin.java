@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
@@ -22,7 +23,6 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import javax.annotation.Nullable;
 
 /**
  * Inserts a widening operation when a smaller primitive type is being put into a large primitive
@@ -44,23 +44,39 @@ public class InsertWideningPrimitiveConversionsKotlin extends NormalizationPass 
           TypeDescriptor toTypeDescriptor,
           TypeDescriptor declaredTypeDescriptor,
           Expression expression) {
-        Expression widened = widenTo(toTypeDescriptor, expression);
-        if (widened == null) {
-          return expression;
+        return shouldWiden(toTypeDescriptor, expression)
+            ? widenTo(toTypeDescriptor, expression)
+            : expression;
+      }
+
+      @Override
+      public Expression rewriteBinaryNumericPromotionContext(
+          TypeDescriptor otherOperandTypeDescriptor, Expression operand) {
+        if (!isBasicNumericType(operand.getTypeDescriptor())
+            || !isBasicNumericType(otherOperandTypeDescriptor)) {
+          return operand;
         }
-        return widened;
+        TypeDescriptor widenedTypeDescriptor =
+            AstUtils.getNumericBinaryExpressionTypeDescriptor(
+                operand.getTypeDescriptor().toUnboxedType(),
+                otherOperandTypeDescriptor.toUnboxedType());
+        return shouldWiden(widenedTypeDescriptor, operand)
+            ? widenTo(widenedTypeDescriptor, operand)
+            : operand;
       }
 
       @Override
       public Expression rewriteCastContext(CastExpression castExpression) {
-        Expression widened =
-            widenTo(castExpression.getCastTypeDescriptor(), castExpression.getExpression());
-        if (widened == null) {
-          return castExpression;
-        }
-        return widened;
+        return shouldWiden(castExpression.getCastTypeDescriptor(), castExpression.getExpression())
+            ? widenTo(castExpression.getCastTypeDescriptor(), castExpression.getExpression())
+            : castExpression;
       }
     };
+  }
+
+  private static boolean isBasicNumericType(TypeDescriptor type) {
+    return (type.isPrimitive() || TypeDescriptors.isBoxedType(type))
+        && TypeDescriptors.isNumericPrimitive(type.toUnboxedType());
   }
 
   private static boolean shouldWiden(TypeDescriptor toTypeDescriptor, Expression expression) {
@@ -74,11 +90,7 @@ public class InsertWideningPrimitiveConversionsKotlin extends NormalizationPass 
         .isWiderThan((PrimitiveTypeDescriptor) fromTypeDescriptor);
   }
 
-  @Nullable
   private Expression widenTo(TypeDescriptor toTypeDescriptor, Expression expression) {
-    if (!shouldWiden(toTypeDescriptor, expression)) {
-      return null;
-    }
     // Widen literals at compile time.
     if (expression instanceof NumberLiteral) {
       PrimitiveTypeDescriptor literalTypeDescriptor = (PrimitiveTypeDescriptor) toTypeDescriptor;

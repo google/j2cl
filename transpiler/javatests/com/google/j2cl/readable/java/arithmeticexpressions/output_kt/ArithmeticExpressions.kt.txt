@@ -37,8 +37,8 @@ open class ArithmeticExpressions {
   val w: Int = 5 - - 4
   var k: Boolean = !(1 + 2 + 3 == 4)
   val l: Boolean = 1 + 2 != 4
-  val m: Boolean = Long.MAX_VALUE != 9.223372036854778E18
-  val o: Double = (5 + 1) / 2 - 0.0
+  val m: Boolean = Long.MAX_VALUE.toDouble() != 9.223372036854778E18
+  val o: Double = ((5 + 1) / 2).toDouble() - 0.0
   a = a << 31L
   a <<= 1L
   a += 1L
@@ -46,10 +46,13 @@ open class ArithmeticExpressions {
   a += Double.MAX_VALUE
   k |= true
   var s: Short = 10
-  k = ++s == 10
+  k = (++s).toInt() == 10
   var q: Int = 3 >> 2
   q = 3 >>> 2
-  val x: Byte = ((a.toShort() + b.toShort().toByte()) * c.toByte().toShort()).toByte()
+  val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
+  val y: Char = 'y'
+  val z: Long? = 121L
+  k = y.code.toLong() == z
  }
 
  @JvmField var bar: Long = arithmeticexpressions.ArithmeticExpressions.foo++
@@ -74,7 +77,7 @@ open class ArithmeticExpressions {
   ++ints[++i]
   ints[i++] /= 1
   val longs: LongArray? = null
-  longs[0] += 1
+  longs[0] += 1L
   longs[0]--
   --longs[0]
   arithmeticexpressions.ArithmeticExpressions.getLongArray()[0]++
@@ -83,7 +86,7 @@ open class ArithmeticExpressions {
   val strings: Array<String?>? = null
   strings[0] += null
   val shorts: ShortArray? = null
-  val b: Boolean = ++shorts[0] == 10
+  val b: Boolean = (++shorts[0]).toInt() == 10
  }
 
  open fun testCompoundBoxedTypes() {
@@ -118,14 +121,14 @@ open class ArithmeticExpressions {
   var i: Int
   var l: Long
   var d: Double
-  l = 2 - boxedInteger - 2L
-  l = 2 | boxedInteger | 2L
-  l = 1000000L * l * 60 * 60 * 24
-  l = 24 * 60 * 60 * l * 1000000L
+  l = (2 - boxedInteger).toLong() - 2L
+  l = (2 | boxedInteger).toLong() | 2L
+  l = 1000000L * l * 60L * 60L * 24L
+  l = (24 * 60 * 60).toLong() * l * 1000000L
   d = (l = (i = 20).toLong()).toDouble()
   l = boxedInteger = i = 20
-  l = i + boxedInteger + l + 20
-  d = 20 + l + d
+  l = (i + boxedInteger).toLong() + l + 20L
+  d = (20L + l).toDouble() + d
  }
 
  companion object {
@@ -151,7 +154,7 @@ open class ArithmeticExpressions {
 
   @JvmStatic
   private fun testSideEffect() {
-   arithmeticexpressions.ArithmeticExpressions.getWithSideEffect().intField += 5
+   arithmeticexpressions.ArithmeticExpressions.getWithSideEffect().intField += 5L
   }
 
   @JvmStatic

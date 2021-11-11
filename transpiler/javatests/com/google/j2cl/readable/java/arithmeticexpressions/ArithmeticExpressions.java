@@ -72,6 +72,10 @@ public class ArithmeticExpressions {
     q = 3 >>> 2;
 
     byte x = (byte) (((short) a + (byte) (short) b) * (short) (byte) c);
+
+    char y = 'y';
+    Long z = 121L;
+    k = y == z;
   }
 
   // Compount assignments in static fields
