@@ -72,10 +72,10 @@
 [s] => [s] "s"
 [IterableReturningTypeVariable<?> anotherIterable = null;] => [let anotherIterable = null;] "foreachstatement.ForEachStatement.testTypeVariable"
 [anotherIterable] => [anotherIterable] "anotherIterable"
-[for (int s : anotherIterable) {}] => [for (let $iterator_1 = /**@type {Iterator<Integer>}*/ (anotherIterable.m_iterator__()); /**@type {Iterator}*/ ($iterator_1).m_hasNext__(); ) {
-   let s_1 = /**@type {Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__(), Integer)).m_intValue__();
+[for (int s : anotherIterable) {}] => [for (let $iterator_1 = /**@type {Iterator<!Integer>}*/ (anotherIterable.m_iterator__()); /**@type {Iterator}*/ ($iterator_1).m_hasNext__(); ) {
+   let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__(), Integer)).m_intValue__();
   }] "foreachstatement.ForEachStatement.testTypeVariable"
-[for (int s : anotherIterable) {}] => [let s_1 = /**@type {Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__(), Integer)).m_intValue__();] "foreachstatement.ForEachStatement.testTypeVariable"
+[for (int s : anotherIterable) {}] => [let s_1 = /**@type {!Integer}*/ ($Casts.$to(/**@type {Iterator}*/ ($iterator_1).m_next__(), Integer)).m_intValue__();] "foreachstatement.ForEachStatement.testTypeVariable"
 [s] => [s_1] "s"
 [ForEachStatement] => [$clinit]
 [ForEachStatement] => [ForEachStatement.$clinit = () =>{};] "foreachstatement.ForEachStatement.<clinit>"

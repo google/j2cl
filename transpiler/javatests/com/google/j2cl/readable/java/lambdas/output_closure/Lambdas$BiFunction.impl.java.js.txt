@@ -22,7 +22,7 @@ class BiFunction {
  /** @template V, T, U, R @return {BiFunction<T, U, V>} */
  static m_andThen__$default__lambdas_Lambdas_BiFunction__lambdas_Lambdas_Function(/** !BiFunction<T, U, R> */ $thisArg, /** Lambdas_Function<?, ?> */ after) {
   BiFunction.$clinit();
-  return /**@type {BiFunction<T, U, V>}*/ (BiFunction.$adapt((/** T */ t, /** U */ u) =>{
+  return /**@type {!BiFunction<T, U, V>}*/ (BiFunction.$adapt((/** T */ t, /** U */ u) =>{
    return after.m_apply__java_lang_Object($thisArg.m_apply__java_lang_Object__java_lang_Object(t, u));
   }));
  }

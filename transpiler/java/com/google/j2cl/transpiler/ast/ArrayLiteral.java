@@ -40,7 +40,7 @@ public class ArrayLiteral extends Expression {
       ArrayTypeDescriptor typeDescriptor, List<? extends Expression> valueExpressions) {
     checkState(typeDescriptor.isArray());
 
-    this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.typeDescriptor = typeDescriptor.toNonNullable();
     this.valueExpressions.addAll(checkNotNull(valueExpressions));
   }
 

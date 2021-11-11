@@ -39,7 +39,7 @@ public class TypeLiteral extends Literal implements HasSourcePosition {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().javaLangClass;
+    return TypeDescriptors.get().javaLangClass.toNonNullable();
   }
 
   @Override

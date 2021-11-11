@@ -167,7 +167,7 @@ public abstract class ArrayTypeDescriptor extends TypeDescriptor {
   }
 
   @Override
-  public TypeDescriptor toNonNullable() {
+  public ArrayTypeDescriptor toNonNullable() {
     if (!isNullable()) {
       return this;
     }

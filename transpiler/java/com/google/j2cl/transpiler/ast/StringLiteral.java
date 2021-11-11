@@ -57,7 +57,7 @@ public class StringLiteral extends Literal {
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().javaLangString;
+    return TypeDescriptors.get().javaLangString.toNonNullable();
   }
 
   @Override

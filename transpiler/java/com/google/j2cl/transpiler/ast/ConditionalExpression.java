@@ -33,7 +33,11 @@ public class ConditionalExpression extends Expression {
       Expression conditionExpression,
       Expression trueExpression,
       Expression falseExpression) {
-    this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.typeDescriptor =
+        (!trueExpression.getTypeDescriptor().isNullable()
+                && !falseExpression.getTypeDescriptor().isNullable())
+            ? typeDescriptor.toNonNullable()
+            : checkNotNull(typeDescriptor);
     this.conditionExpression = checkNotNull(conditionExpression);
     this.trueExpression = checkNotNull(trueExpression);
     this.falseExpression = checkNotNull(falseExpression);

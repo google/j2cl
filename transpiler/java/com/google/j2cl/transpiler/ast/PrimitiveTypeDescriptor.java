@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import java.util.Set;
@@ -115,7 +114,7 @@ public class PrimitiveTypeDescriptor extends TypeDescriptor {
 
   @Override
   public DeclaredTypeDescriptor toBoxedType() {
-    return checkNotNull(TypeDescriptors.getBoxTypeFromPrimitiveType(this));
+    return TypeDescriptors.getBoxTypeFromPrimitiveType(this).toNonNullable();
   }
 
   /**

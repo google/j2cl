@@ -108,14 +108,14 @@ class Lambdas extends j_l_Object {
  }
  /** @template T */
  m_testInstanceMethodTypeVariableThroughLambda__() {
-  let wrapped = /**@type {Functional<T>}*/ (Functional.$adapt((/** Functional<T> */ f) =>{
+  let wrapped = /**@type {!Functional<T>}*/ (Functional.$adapt((/** Functional<T> */ f) =>{
    return /**@type {!$1<T>}*/ ($1.$create__lambdas_Lambdas(this));
   }));
  }
  /** @template T */
  static m_testStaticMethodTypeVariableThroughLambda__() {
   Lambdas.$clinit();
-  let wrapped = /**@type {Functional<T>}*/ (Functional.$adapt((/** Functional<T> */ f) =>{
+  let wrapped = /**@type {!Functional<T>}*/ (Functional.$adapt((/** Functional<T> */ f) =>{
    return /**@type {!$2<T>}*/ ($2.$create__());
   }));
  }
@@ -146,7 +146,7 @@ class Lambdas extends j_l_Object {
    let i_3 = /**@type {Error}*/ ($Casts.$to(i_2, Error));
    return i_3;
   }), Error.$create__());
-  Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(/**@type {GenericFunctionalInterface<Enum<T>>}*/ (GenericFunctionalInterface.$adapt((i_4) =>{
+  Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(/**@type {!GenericFunctionalInterface<Enum<T>>}*/ (GenericFunctionalInterface.$adapt((i_4) =>{
    let i_5 = /**@type {Enum}*/ ($Casts.$to(i_4, Enum));
    return i_5;
   })), /**@type {Enum<T>}*/ (null));

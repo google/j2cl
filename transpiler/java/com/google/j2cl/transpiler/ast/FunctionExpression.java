@@ -45,7 +45,7 @@ public class FunctionExpression extends Expression implements MethodLike {
       Block body) {
     this.parameters = checkNotNull(parameters);
     this.body = checkNotNull(body);
-    this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.typeDescriptor = typeDescriptor.toNonNullable();
     this.sourcePosition = checkNotNull(sourcePosition);
     checkNotNull(typeDescriptor.getFunctionalInterface());
   }

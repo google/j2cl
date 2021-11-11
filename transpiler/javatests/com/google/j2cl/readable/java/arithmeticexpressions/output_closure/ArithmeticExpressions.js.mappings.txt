@@ -36,7 +36,7 @@
 [d = (double) 9223372036854775807L;] => [d = 9.223372036854776E18;] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [Object o = c;] => [let o = Character.m_valueOf__char(c);] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [o] => [o] "o"
-[s = (short) (char) o;] => [s = $Primitives.narrowCharToShort(/**@type {Character}*/ ($Casts.$to(o, Character)).m_charValue__());] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
+[s = (short) (char) o;] => [s = $Primitives.narrowCharToShort(/**@type {!Character}*/ ($Casts.$to(o, Character)).m_charValue__());] "arithmeticexpressions.ArithmeticExpressions.testCoercions"
 [testPrimitives] => [m_testPrimitives__]
 [{
     int a = 10,

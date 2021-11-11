@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -28,7 +27,7 @@ public class SuperReference extends Expression {
   private final DeclaredTypeDescriptor typeDescriptor;
 
   public SuperReference(DeclaredTypeDescriptor typeDescriptor) {
-    this.typeDescriptor = checkNotNull(typeDescriptor);
+    this.typeDescriptor = typeDescriptor.toNonNullable();
   }
 
   @Override

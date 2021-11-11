@@ -31,7 +31,7 @@ public class JavaScriptConstructorReference extends Expression {
 
   @Override
   public DeclaredTypeDescriptor getTypeDescriptor() {
-    return TypeDescriptors.get().nativeFunction;
+    return TypeDescriptors.get().nativeFunction.toNonNullable();
   }
 
   @Override
