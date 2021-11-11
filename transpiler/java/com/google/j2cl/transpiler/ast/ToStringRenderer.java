@@ -525,6 +525,18 @@ class ToStringRenderer {
         unIndent();
         newLine();
         print("}");
+
+        if (!type.getLoadTimeStatements().isEmpty()) {
+          newLine();
+          print("// load-time statements");
+          newLine();
+          type.getLoadTimeStatements()
+              .forEach(
+                  s -> {
+                    newLine();
+                    accept(s);
+                  });
+        }
         return false;
       }
 
