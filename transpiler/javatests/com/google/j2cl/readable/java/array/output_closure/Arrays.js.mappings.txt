@@ -111,7 +111,7 @@
 [testErasureCastsOnArrayAccess] => [m_testErasureCastsOnArrayAccess__]
 [ArrayContainer<String> container = null;] => [let container = null;] "array.Arrays.testErasureCastsOnArrayAccess"
 [container] => [container] "container"
-[String s = container.data[0];] => [let s = /**@type {Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];] "array.Arrays.testErasureCastsOnArrayAccess"
+[String s = container.data[0];] => [let s = /**@type {!Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];] "array.Arrays.testErasureCastsOnArrayAccess"
 [s] => [s] "s"
 [testArraysSupertypeClosureTypes] => [m_testArraysSupertypeClosureTypes__]
 [consumesCloneable(new Object[10]);] => [this.m_consumesCloneable__java_lang_Cloneable(new Array(10));] "array.Arrays.testArraysSupertypeClosureTypes"

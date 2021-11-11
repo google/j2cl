@@ -36,7 +36,7 @@
 [int i = t.f;] => [let i = /**@type {A}*/ (t).f_f__typewildcards_TypeWildCards_A;] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [i] => [i] "i"
 [t.m();] => [/**@type {A}*/ (t).m_m__();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
-[t.n();] => [/**@type {Y}*/ ($Casts.$to(t, Y)).m_n__();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
+[t.n();] => [/**@type {!Y}*/ ($Casts.$to(t, Y)).m_n__();] "typewildcards.TypeWildCards.testIntersectionBoundedTypeMemberAccess"
 [transform] => [m_transform__java_util_List__java_util_function_Function]
 [from] => [from] "from"
 [function] => [function_1] "function"
@@ -54,13 +54,13 @@
         transform(
 ...              return a.get();
             });] => [let integers = /**@type {List<Integer>}*/ (TypeWildCards.m_transform__java_util_List__java_util_function_Function(/**@type {List<*>}*/ (TypeWildCards.m_concat__java_util_List__java_util_List(elements, otherElements)), j_u_function_Function.$adapt((/** * */ a) =>{
-   /**@type {HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();
-   return /**@type {IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();
+   /**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();
+   return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();
   })));] "typewildcards.TypeWildCards.testInferredGenericIntersection"
 [integers] => [integers] "integers"
 [a] => [a] "a"
-[a.getKey();] => [/**@type {HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
-[return a.get();] => [return /**@type {IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
+[a.getKey();] => [/**@type {!HasKey}*/ ($Casts.$to(a, HasKey)).m_getKey__();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
+[return a.get();] => [return /**@type {!IntegerSupplier}*/ ($Casts.$to(a, IntegerSupplier)).m_get__();] "typewildcards.TypeWildCards.<lambda in testInferredGenericIntersection>"
 [takesRecursiveGeneric] => [m_takesRecursiveGeneric__typewildcards_GenericType]
 [foo] => [foo] "foo"
 [testRecursiveGeneric] => [m_testRecursiveGeneric__]

@@ -192,7 +192,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return ArrayAccess.newBuilder()
         .setArrayExpression(
             rewriteTypeConversionContextWithoutDeclaration(
-                expression.getTypeDescriptor(), expression))
+                expression.getTypeDescriptor().toNonNullable(), expression))
         .setIndexExpression(
             // The index is always int so gets rewritten with unary numeric promotion context
             contextRewriter.rewriteUnaryNumericPromotionContext(arrayAccess.getIndexExpression()))
@@ -206,7 +206,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return ArrayLength.Builder.from(arrayLength)
         .setArrayExpression(
             rewriteTypeConversionContextWithoutDeclaration(
-                expression.getTypeDescriptor(), expression))
+                expression.getTypeDescriptor().toNonNullable(), expression))
         .build();
   }
 
@@ -372,8 +372,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     }
 
     return contextRewriter.rewriteMemberQualifierContext(
-        memberDescriptor.getEnclosingTypeDescriptor(),
-        memberDescriptor.getDeclarationDescriptor().getEnclosingTypeDescriptor(),
+        memberDescriptor.getEnclosingTypeDescriptor().toNonNullable(),
+        memberDescriptor.getDeclarationDescriptor().getEnclosingTypeDescriptor().toNonNullable(),
         qualifier);
   }
 
@@ -391,7 +391,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     return ForEachStatement.Builder.from(forEachStatement)
         .setIterableExpression(
             contextRewriter.rewriteTypeConversionContext(
-                expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression))
+                expression.getTypeDescriptor().toNonNullable(),
+                expression.getDeclaredTypeDescriptor().toNonNullable(),
+                expression))
         .build();
   }
 
@@ -549,8 +551,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || statement instanceof BreakStatement
         || statement instanceof ContinueStatement
         || statement instanceof TryStatement
-        || statement instanceof LabeledStatement
-        || statement instanceof SynchronizedStatement) {
+        || statement instanceof LabeledStatement) {
       // These statements do not need rewriting.
       return statement;
     }
@@ -570,12 +571,26 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
+  public SynchronizedStatement rewriteSynchronizedStatement(
+      SynchronizedStatement synchronizedStatement) {
+    // unary numeric promotion
+    return new SynchronizedStatement(
+        synchronizedStatement.getSourcePosition(),
+        rewriteTypeConversionContextWithoutDeclaration(
+            TypeDescriptors.get().javaLangObject.toNonNullable(),
+            synchronizedStatement.getExpression()),
+        synchronizedStatement.getBody());
+  }
+
+  @Override
   public ThrowStatement rewriteThrowStatement(ThrowStatement throwStatement) {
     Expression expression = throwStatement.getExpression();
     return new ThrowStatement(
         throwStatement.getSourcePosition(),
         contextRewriter.rewriteTypeConversionContext(
-            expression.getTypeDescriptor(), expression.getDeclaredTypeDescriptor(), expression));
+            expression.getTypeDescriptor().toNonNullable(),
+            expression.getDeclaredTypeDescriptor().toNonNullable(),
+            expression));
   }
 
   @Override
