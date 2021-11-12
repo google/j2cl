@@ -165,7 +165,8 @@ private fun Renderer.renderJavaScriptConstructorReference(
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
-  require(!expression.isStaticDispatch) { "$expression not currently supported." }
+  // Constructor calls are rendered after constructor parameters declaration.
+  if (expression.target.isConstructor) return
   renderMethodCallHeader(expression)
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }
@@ -176,9 +177,7 @@ private fun Renderer.renderQualifiedName(expression: Expression, name: String) {
 }
 
 private fun Renderer.renderMethodCallHeader(expression: MethodCall) {
-  require(!expression.isStaticDispatch)
-  val target = expression.target
-  if (target.isConstructor) render("super") else renderQualifiedName(expression, target.name!!)
+  renderQualifiedName(expression, expression.target.name!!)
 }
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {

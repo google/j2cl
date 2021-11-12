@@ -10,7 +10,7 @@ open class CascadingConstructor {
   this.b = b
  }
 
- constructor(a: Int) {
-  super(a, a * 2)
+ constructor(a: Int): this(a, a * 2) {
+
  }
 }

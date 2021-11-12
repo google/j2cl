@@ -9,7 +9,5 @@ package(
 
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/201574151): Constructor Support
-    build_kt_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

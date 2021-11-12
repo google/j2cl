@@ -1,0 +1,129 @@
+package methodreferences
+
+open class MethodReferences<T> {
+ open fun isA(): Boolean? {
+  return true
+ }
+
+ internal open fun self(): Any? {
+  return this
+ }
+
+ internal open fun sameAs(n: Number?): Boolean? {
+  return false
+ }
+
+ internal open fun main() {
+  var objectFactory: methodreferences.MethodReferences.Producer<Any?>? = {
+   return Any()
+  }
+  objectFactory = {
+   return methodreferences.MethodReferences.m()
+  }
+  objectFactory = (val `$$q`: methodreferences.MethodReferences<T> = methodreferences.MethodReferences<T>(), {
+   return `$$q`.isA()
+  })
+  val biFunction: methodreferences.MethodReferences.BiFunction<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
+   return arg0.sameAs(arg1)
+  }
+  val functionWithParameters: methodreferences.MethodReferences.Function<Number?, Boolean?>? = { arg0: Number? ->
+   return this.sameAs(arg0)
+  }
+  val objectPredicate: methodreferences.MethodReferences.Predicate<methodreferences.MethodReferences<T>?>? = { arg0: methodreferences.MethodReferences<T>? ->
+   return arg0.isA()
+  }
+  val objectCapturingOuterProducer: methodreferences.MethodReferences.Producer<methodreferences.MethodReferences.ObjectCapturingOuter<T>?>? = {
+   return TODO("expression.qualify needs rendering: MethodReferences.this)")
+  }
+  val arrayProducer: methodreferences.MethodReferences.ArrayProducer<Any?>? = { arg0: Int ->
+   return arrayOfNulls<Double?>(arg0)
+  }
+  objectFactory = (val `$$q`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>(), {
+   return `$$q`.self()
+  })
+  val function: methodreferences.MethodReferences.Function<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
+   return arg0.self()
+  }
+  val arrayFactory: methodreferences.MethodReferences.Function<Int?, Array<Any?>?>? = { arg0: Int? ->
+   return arrayOfNulls<Any?>(arg0)
+  }
+  val superToStringProducer: methodreferences.MethodReferences.Producer<String?>? = {
+   return this.toString()
+  }
+  var jsobjectFactory: methodreferences.MethodReferences.JsProducer<Any?>? = {
+   return Any()
+  }
+  jsobjectFactory = {
+   return methodreferences.MethodReferences.m()
+  }
+  jsobjectFactory = (val `$$q`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>(), {
+   return `$$q`.self()
+  })
+  val jsfunction: methodreferences.MethodReferences.JsFunctionInterface<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
+   return arg0.self()
+  }
+  val jsarrayFactory: methodreferences.MethodReferences.JsFunctionInterface<Int?, Array<Any?>?>? = { arg0: Int? ->
+   return arrayOfNulls<Any?>(arg0)
+  }
+  val jsSuperToStringProducer: methodreferences.MethodReferences.JsProducer<String?>? = {
+   return this.toString()
+  }
+  val jsbiFunction: methodreferences.MethodReferences.JsBiFunction<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
+   return arg0.sameAs(arg1)
+  }
+  val jsFunctionWithParameters: methodreferences.MethodReferences.JsFunctionInterface<Number?, Boolean?>? = { arg0: Number? ->
+   return this.sameAs(arg0)
+  }
+ }
+
+ companion object {
+  @JvmStatic
+  internal fun m(): Any? {
+   return Any()
+  }
+
+  @JvmField internal var staticStringProducer: methodreferences.MethodReferences.Producer<String?>? = (val `$$q`: Any? = methodreferences.MethodReferences.m(), {
+   return `$$q`.toString()
+  })
+ }
+}
+
+interface Producer<T> {
+ fun produce(): T
+}
+
+interface Predicate<T> {
+ fun apply(parameter: T): Boolean
+}
+
+interface ArrayProducer<T> {
+ fun produce(size: Int): Array<T>?
+}
+
+open class ObjectCapturingOuter<T> {
+ @JvmField val `this`: methodreferences.MethodReferences<T>?
+
+ internal open fun getMain(): methodreferences.MethodReferences<T>? {
+  return this.`this`
+ }
+}
+
+interface Function<T, U> {
+ fun apply(t: T): U
+}
+
+interface BiFunction<T, U, V> {
+ fun apply(t: T, u: U): V
+}
+
+interface JsProducer<T> {
+ fun produce(): T
+}
+
+interface JsFunctionInterface<T, U> {
+ fun apply(t: T): U
+}
+
+interface JsBiFunction<T, U, V> {
+ fun apply(t: T, u: U): V
+}

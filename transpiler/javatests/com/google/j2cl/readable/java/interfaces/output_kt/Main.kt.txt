@@ -1,0 +1,46 @@
+package interfaces
+
+open class Main {
+ internal open fun testInterfaceMembers() {
+  val i: interfaces.Main.Interface? = TODO("expression.qualify needs rendering: Main.this)")
+  i.interfaceMethod()
+  i.defaultMethod(null)
+  interfaces.Main.Interface.staticInterfaceMethod()
+  val x: Int = TODO("expression.qualify needs rendering: Main.this)").a + interfaces.Main.Interface.b
+ }
+}
+
+interface Interface<T> {
+ fun interfaceMethod()
+
+ fun defaultMethod(t: T) {
+  this.privateMethod(t)
+ }
+
+ private fun privateMethod(t: T) {}
+
+ companion object {
+  @JvmField val a: Int = 1
+
+  @JvmField val b: Int = 2
+
+  @JvmStatic
+  fun staticInterfaceMethod() {}
+ }
+}
+
+interface SubInterface: interfaces.Main.Interface<String?> {
+ fun defaultMethod(s: String?) {
+  this.defaultMethod(s)
+ }
+}
+
+open class Implementor: interfaces.Main.SubInterface, interfaces.Main.Interface<String?> {
+ @JvmField val `this`: interfaces.Main?
+
+ open fun interfaceMethod() {}
+}
+
+abstract class AbstractImplementor: interfaces.Main.SubInterface {
+ @JvmField val `this`: interfaces.Main?
+}

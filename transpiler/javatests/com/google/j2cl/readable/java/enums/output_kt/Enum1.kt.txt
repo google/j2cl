@@ -15,12 +15,12 @@ enum class Enum2: Enum<enums.Enum2?> {
   this.foo = foo
  }
 
- private constructor(foo: Enum?) {
-  super(foo.ordinal())
+ private constructor(foo: Enum?): this(foo.ordinal()) {
+
  }
 
- private constructor(vararg somePars: Any?) {
-  super(somePars.size)
+ private constructor(vararg somePars: Any?): this(somePars.size) {
+
  }
 
  companion object {
@@ -42,8 +42,8 @@ enum class Enum2: Enum<enums.Enum2?> {
 }
 
 open class `1`: enums.Enum2 {
- internal constructor(`$_0`: Int) {
-  super(`$_0`)
+ internal constructor(`$_0`: Int): super(`$_0`) {
+
  }
 }
 

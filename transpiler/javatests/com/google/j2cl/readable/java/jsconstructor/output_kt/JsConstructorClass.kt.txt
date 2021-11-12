@@ -15,18 +15,18 @@ open class A {
 open class B: jsconstructor.JsConstructorClass.A {
  @JvmField var fB: Int = 2
 
- constructor(x: Int) {
-  super(x + 1)
+ constructor(x: Int): super(x + 1) {
+
   this.fB = 3
  }
 
- constructor() {
-  super(10)
+ constructor(): this(10) {
+
   this.fB = 4
  }
 
- constructor(x: Int, y: Int) {
-  super(x + y)
+ constructor(x: Int, y: Int): this(x + y) {
+
   this.fB = x * y
  }
 }
@@ -34,13 +34,13 @@ open class B: jsconstructor.JsConstructorClass.A {
 open class C: jsconstructor.JsConstructorClass.B {
  @JvmField var fC: Int = 1
 
- constructor(x: Int) {
-  super(x * 2)
+ constructor(x: Int): super(x * 2) {
+
   this.fC = 6
  }
 
- constructor(x: Int, y: Int) {
-  super(x + y)
+ constructor(x: Int, y: Int): this(x + y) {
+
   this.fC = 7
  }
 }
@@ -48,13 +48,13 @@ open class C: jsconstructor.JsConstructorClass.B {
 open class D: jsconstructor.JsConstructorClass.B {
  @JvmField var fD: Int = 8
 
- constructor() {
-  super(9)
+ constructor(): super(9) {
+
   this.fD = 10
  }
 
- constructor(x: Int) {
-  super()
+ constructor(x: Int): this() {
+
   this.fD = x
  }
 }
@@ -62,8 +62,8 @@ open class D: jsconstructor.JsConstructorClass.B {
 open class E: jsconstructor.JsConstructorClass.C {
  @JvmField var fE: Int = 11
 
- constructor() {
-  super(10)
+ constructor(): super(10) {
+
   this.fE = 12
  }
 }
@@ -71,8 +71,8 @@ open class E: jsconstructor.JsConstructorClass.C {
 open class F: jsconstructor.JsConstructorClass.C {
  @JvmField var fF: Int = 13
 
- constructor(x: Int) {
-  super(x + 2)
+ constructor(x: Int): super(x + 2) {
+
   this.fF = x + 3
  }
 }
@@ -84,18 +84,18 @@ open class H: jsconstructor.JsConstructorClass.G {
 }
 
 open class Varargs: jsconstructor.JsConstructorClass.A {
- constructor(vararg args: Int) {
-  super(args[1])
+ constructor(vararg args: Int): super(args[1]) {
+
  }
 }
 
 open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
- constructor(i: Any?, vararg args: Int) {
-  super(args)
+ constructor(i: Any?, vararg args: Int): super(args) {
+
  }
 
- constructor(j: Int) {
-  super(Any(), intArrayOf(j))
+ constructor(j: Int): this(Any(), intArrayOf(j)) {
+
  }
 
  companion object {
@@ -110,8 +110,8 @@ open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
 open class InstanceVarargs: jsconstructor.JsConstructorClass.A {
  @JvmField val `this`: jsconstructor.JsConstructorClass?
 
- constructor(vararg args: Int) {
-  super(args[1])
+ constructor(vararg args: Int): super(args[1]) {
+
  }
 }
 
@@ -120,11 +120,11 @@ open class RegularType {
 }
 
 open class JsConstructorSubtypeOfRegularType: jsconstructor.JsConstructorClass.RegularType {
- constructor(`object`: Any?) {
-  super(`object`)
+ constructor(`object`: Any?): super(`object`) {
+
  }
 
- constructor() {
-  super(Any())
+ constructor(): this(Any()) {
+
  }
 }

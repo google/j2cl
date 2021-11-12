@@ -3,8 +3,8 @@ package varargs
 open class Varargs {
  constructor(vararg args: Int) {}
 
- constructor() {
-  super(intArrayOf(1))
+ constructor(): this(intArrayOf(1)) {
+
  }
 
  open fun test(a: Int, vararg args: Any?) {}
@@ -36,7 +36,7 @@ open class Varargs {
 }
 
 open class Child: varargs.Varargs {
- constructor() {
-  super(intArrayOf(1))
+ constructor(): super(intArrayOf(1)) {
+
  }
 }

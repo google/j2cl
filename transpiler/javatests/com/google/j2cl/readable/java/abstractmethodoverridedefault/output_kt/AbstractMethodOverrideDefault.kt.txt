@@ -1,0 +1,35 @@
+package abstractmethodoverridedefault
+
+open class AbstractMethodOverrideDefault {}
+
+interface I {
+ fun foo()
+
+ fun bar() {}
+}
+
+interface J {
+ fun foo() {}
+
+ fun bar()
+}
+
+abstract class A: abstractmethodoverridedefault.AbstractMethodOverrideDefault.I {
+ abstract open fun foo()
+}
+
+abstract class B: abstractmethodoverridedefault.AbstractMethodOverrideDefault.J, abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
+ open fun bar() {
+  if (false) {
+   this.bar()
+  }
+ }
+}
+
+open class C: abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
+ open fun foo() {}
+
+ open fun bar() {
+  this.bar()
+ }
+}

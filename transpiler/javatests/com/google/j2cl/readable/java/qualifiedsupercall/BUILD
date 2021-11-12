@@ -11,5 +11,5 @@ package(
 readable_example(
     srcs = glob(["*.java"]),
     # TODO(b/202448577): Missing Method call implementation.
-    generate_kt_readables = False,
+    build_kt_readables = False,
 )

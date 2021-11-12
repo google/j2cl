@@ -16,8 +16,8 @@ open class `1LocalClass` {
   this.field = this.localVar + a + b
  }
 
- constructor(a: Int) {
-  super(a, this.p)
+ constructor(a: Int): this(a, this.p) {
+
   this.field = this.localVar
  }
 

@@ -13,7 +13,7 @@ open class InnerClass {
   this.b = this.`this`.a + b
  }
 
- constructor() {
-  super(this.`this`.a)
+ constructor(): this(this.`this`.a) {
+
  }
 }

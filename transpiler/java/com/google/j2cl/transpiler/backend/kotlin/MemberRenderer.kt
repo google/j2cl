@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
+import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Kind
@@ -78,7 +79,11 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
     render(methodDescriptor.name!!.identifierSourceString)
   }
   renderMethodParameters(method)
-  renderMethodReturnType(methodDescriptor)
+  if (methodDescriptor.isConstructor) {
+    renderConstructorInvocation(method)
+  } else {
+    renderMethodReturnType(methodDescriptor)
+  }
   renderWhereClause(methodDescriptor.typeParameterTypeDescriptors)
   // TODO(b/202527616): Render this() and super() constructor calls after ":".
 }
@@ -118,9 +123,17 @@ private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
 }
 
 private fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {
-  if (!methodDescriptor.isConstructor) {
-    methodDescriptor.returnTypeDescriptor.takeIf { it != PrimitiveTypes.VOID }?.let {
-      render(": ${it.sourceString}")
+  methodDescriptor.returnTypeDescriptor.takeIf { it != PrimitiveTypes.VOID }?.let {
+    render(": ${it.sourceString}")
+  }
+}
+
+private fun Renderer.renderConstructorInvocation(method: Method) {
+  getConstructorInvocation(method)?.let { constructorInvocation ->
+    render(": ")
+    render(if (constructorInvocation.target.inSameTypeAs(method.descriptor)) "this" else "super")
+    renderInParentheses {
+      renderCommaSeparated(constructorInvocation.arguments) { renderExpression(it) }
     }
   }
 }

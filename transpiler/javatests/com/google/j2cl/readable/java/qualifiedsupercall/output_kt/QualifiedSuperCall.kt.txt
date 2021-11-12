@@ -1,0 +1,15 @@
+package qualifiedsupercall
+
+open class Parent {
+ open fun `fun`() {}
+}
+
+open class QualifiedSuperCall: qualifiedsupercall.Parent() {}
+
+open class InnerClass {
+ @JvmField val `this`: qualifiedsupercall.QualifiedSuperCall?
+
+ open fun test() {
+  this.`this`.`fun`()
+ }
+}
