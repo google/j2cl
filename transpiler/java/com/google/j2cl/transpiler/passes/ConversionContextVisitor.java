@@ -587,10 +587,8 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     Expression expression = throwStatement.getExpression();
     return new ThrowStatement(
         throwStatement.getSourcePosition(),
-        contextRewriter.rewriteTypeConversionContext(
-            expression.getTypeDescriptor().toNonNullable(),
-            expression.getDeclaredTypeDescriptor().toNonNullable(),
-            expression));
+        rewriteTypeConversionContextWithoutDeclaration(
+            TypeDescriptors.get().javaLangThrowable.toNonNullable(), expression));
   }
 
   @Override
