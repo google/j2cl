@@ -31,7 +31,7 @@ interface Interface<T> {
 
 interface SubInterface: interfaces.Main.Interface<String?> {
  fun defaultMethod(s: String?) {
-  this.defaultMethod(s)
+  super.defaultMethod(s)
  }
 }
 

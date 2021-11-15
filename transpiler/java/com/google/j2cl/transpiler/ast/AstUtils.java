@@ -811,10 +811,8 @@ public class AstUtils {
             .setFinal(true)
             .build();
 
-    // Replace all 'this' references in the method with a reference to the newly introduced
-    // parameter. There should not be any super references in devirtualized methods; but if there
-    // were they should also be replaced with the parameter reference but more importantly, the
-    // method call or field access they are the qualifier of needs to be resolved statically.
+    // Replace all 'this' and 'super' references in the method with a reference to the newly
+    // introduced parameter.
     method.accept(
         new AbstractRewriter() {
           @Override
@@ -824,8 +822,7 @@ public class AstUtils {
 
           @Override
           public Node rewriteSuperReference(SuperReference superReference) {
-            checkState(false, "super should not appear in devirtualized methods.");
-            return superReference;
+            return thisArg.createReference();
           }
         });
 
@@ -871,11 +868,20 @@ public class AstUtils {
         devirtualizeMethodDescriptor(
             methodCall.getTarget(), targetTypeDescriptor, Optional.ofNullable(postfix));
 
+    Expression qualifier = checkNotNull(methodCall.getQualifier());
+    if (qualifier instanceof SuperReference) {
+      // A 'super' qualifier is used to resolve to the correct method to dispatch, once the method
+      // is devirutalized and receives the qualifier as its first parameter, 'super' must be turned
+      // into 'this' since both evaluate to the implicit instance parameter but 'super'is not
+      // valid as a general expression.
+      SuperReference superReference = (SuperReference) qualifier;
+      qualifier = new ThisReference(superReference.getTypeDescriptor());
+    }
     // Call the method like Objects.foo(instance, ...)
     List<Expression> arguments =
         ImmutableList.<Expression>builder()
-            // Turn the instance into now a first parameter to the devirtualized method.
-            .add(checkNotNull(methodCall.getQualifier()))
+            // Turn the instance into the first parameter to the devirtualized method.
+            .add(qualifier)
             .addAll(methodCall.getArguments())
             .build();
     return MethodCall.Builder.from(devirtualizedMethodDescriptor).setArguments(arguments).build();

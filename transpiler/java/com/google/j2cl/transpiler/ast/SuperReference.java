@@ -31,7 +31,7 @@ public class SuperReference extends Expression {
   }
 
   @Override
-  public TypeDescriptor getTypeDescriptor() {
+  public DeclaredTypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
   }
 

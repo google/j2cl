@@ -1000,9 +1000,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       }
       FieldDescriptor fieldDescriptor =
           environment.createFieldDescriptor((VariableElement) fieldAccess.sym, fieldAccess.type);
-      if (qualifier instanceof SuperReference) {
-        qualifier = new ThisReference((DeclaredTypeDescriptor) qualifier.getTypeDescriptor());
-      }
       return FieldAccess.newBuilder()
           .setQualifier(qualifier)
           .setTargetFieldDescriptor(fieldDescriptor)
@@ -1130,7 +1127,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     if (hasSuperQualifier
         && (qualifier.getTypeDescriptor().isInterface() || methodDescriptor.isDefaultMethod())) {
       // This is a default method call through super.
-      qualifier = new ThisReference(methodDescriptor.getEnclosingTypeDescriptor());
       isStaticDispatch = true;
     } else if (hasSuperQualifier
         && !qualifier.getTypeDescriptor().isSameBaseType(getCurrentType().getTypeDescriptor())) {

@@ -135,7 +135,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     private final Map<IVariableBinding, Variable> variableByJdtBinding = new HashMap<>();
     private final Map<String, Label> labelsInScope = new HashMap<>();
 
-    @SuppressWarnings({"cast"})
     private CompilationUnit convert(
         String sourceFilePath,
         org.eclipse.jdt.core.dom.CompilationUnit jdtCompilationUnit,
@@ -1188,7 +1187,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       if (methodDescriptor.isDefaultMethod()) {
         // This super method call targets the default method in the interface.
         return MethodCall.Builder.from(methodDescriptor)
-            .setQualifier(new ThisReference(methodDescriptor.getEnclosingTypeDescriptor()))
+            .setQualifier(new SuperReference(methodDescriptor.getEnclosingTypeDescriptor()))
             .setArguments(arguments)
             .setStaticDispatch(true)
             .setSourcePosition(getSourcePosition(expression))
