@@ -34,6 +34,7 @@ public class Main {
     testMemoized();
     testAbstractEquals();
     testJsCollection();
+    testUnusedType();
   }
 
   private static void testComposite() {
@@ -69,6 +70,21 @@ public class Main {
     assertEquals(componentB, compositeB.getComponentField());
     assertEquals(componentB.hashCode(), compositeB.getComponentField().hashCode());
     assertNotNull(compositeB.toString());
+  }
+
+  @AutoValue
+  protected abstract static class Unused {
+    public abstract int getIntField();
+
+    public abstract boolean getBooleanField();
+
+    public abstract String getStringField();
+
+    public abstract Double getDoubleField();
+  }
+
+  private static void testUnusedType() {
+    boolean resultUnused = (new Object()) instanceof AutoValue_Main_Unused;
   }
 
   @AutoValue
