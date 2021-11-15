@@ -20,25 +20,38 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
-    primitiveInt = boxedInt += primitiveInt
+    primitiveInt = run {
+     boxedInt = boxedInt + primitiveInt
+     boxedInt
+    }
     assert(primitiveInt == 15)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
-    primitiveInt = boxedInt = primitiveInt
+    primitiveInt = run {
+     boxedInt = primitiveInt
+     boxedInt
+    }
     assert(primitiveInt == 5)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
-    primitiveInt = boxedInt++
+    primitiveInt = run {
+     val `$value`: Int? = boxedInt
+     boxedInt = boxedInt + 1
+     `$value`
+    }
     assert(primitiveInt == 10)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
-    primitiveInt = ++boxedInt
+    primitiveInt = run {
+     boxedInt = boxedInt + 1
+     boxedInt
+    }
     assert(primitiveInt == 11)
    }
   }

@@ -181,7 +181,12 @@ private fun Renderer.renderMethodCallHeader(expression: MethodCall) {
 }
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
-  renderInParentheses { renderCommaSeparated(multiExpression.expressions) { renderExpression(it) } }
+  render("run ")
+  renderInCurlyBrackets {
+    renderStartingWithNewLines(multiExpression.expressions) { expression ->
+      renderExpression(expression)
+    }
+  }
 }
 
 private fun Renderer.renderNewArray(newArray: NewArray) {

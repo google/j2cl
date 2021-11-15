@@ -24,20 +24,45 @@ open class InstanceQualifiers {
     instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
    }
    if (true) {
-    main.staticField = 100
-    main.getStaticInstanceQualifiers().staticField = 300
+    instancequalifieronstaticfield.InstanceQualifiers.staticField = 100
+    if (true) {
+     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+     instancequalifieronstaticfield.InstanceQualifiers.staticField = 300
+    }
    }
    if (true) {
-    i = main.staticField
-    i = main.getStaticValue()
-    i = main.getStaticInstanceQualifiers().staticField
+    i = run {
+     main
+     instancequalifieronstaticfield.InstanceQualifiers.staticField
+    }
+    i = run {
+     main
+     instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
+    }
+    i = run {
+     main
+     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+     instancequalifieronstaticfield.InstanceQualifiers.staticField
+    }
    }
    if (true) {
-    main.staticField += 100
-    main.getStaticInstanceQualifiers().staticField += 100
+    instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
+    if (true) {
+     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+     instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + 100
+    }
    }
    if (true) {
-    main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().staticField += main.getStaticInstanceQualifiers().getStaticInstanceQualifiers().getStaticValue()
+    if (true) {
+     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+     instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+     instancequalifieronstaticfield.InstanceQualifiers.staticField = instancequalifieronstaticfield.InstanceQualifiers.staticField + run {
+      main
+      instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+      instancequalifieronstaticfield.InstanceQualifiers.getStaticInstanceQualifiers()
+      instancequalifieronstaticfield.InstanceQualifiers.getStaticValue()
+     }
+    }
    }
   }
  }

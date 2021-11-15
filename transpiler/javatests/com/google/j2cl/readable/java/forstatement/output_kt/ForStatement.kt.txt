@@ -7,9 +7,9 @@ open class ForStatement {
    var count: Int = 0
    LOOP@ while (i < 100) {
     LOOP_CONTINUE@ do {
-     count++
+     count = count + 1
     } while (false)
-    i++
+    i = i + 1
    }
   }
   if (true) {
@@ -17,21 +17,27 @@ open class ForStatement {
    var count: Long = 0L
    LOOP_1@ while (l < 100L) {
     LOOP_CONTINUE_1@ do {
-     count++
+     count = count + 1L
     } while (false)
-    l++
-    l++
+    l = l + 1L
+    l = l + 1L
    }
   }
   var a: Boolean = false
   if (true) {
-   LOOP_2@ while (a |= true) {
+   LOOP_2@ while (run {
+    a = a | true
+    a
+   }) {
     LOOP_CONTINUE_2@ do {} while (false)
    }
   }
   var b: Boolean = false
   if (true) {
-   LOOP_3@ while (b = a) {
+   LOOP_3@ while (run {
+    b = a
+    b
+   }) {
     LOOP_CONTINUE_3@ do {} while (false)
    }
   }
@@ -62,13 +68,13 @@ open class ForStatement {
          break@LABEL_CONTINUE
         }
        } while (false)
-       k++
-       l++
+       k = k + 1
+       l = l + 1
       }
      }
     } while (false)
-    i++
-    j++
+    i = i + 1
+    j = j + 1
    }
   }
  }

@@ -20,9 +20,12 @@ open class MethodReferences<T> {
   objectFactory = {
    return methodreferences.MethodReferences.m()
   }
-  objectFactory = (val `$$q`: methodreferences.MethodReferences<T> = methodreferences.MethodReferences<T>(), {
-   return `$$q`.isA()
-  })
+  objectFactory = run {
+   val `$$q`: methodreferences.MethodReferences<T> = methodreferences.MethodReferences<T>()
+   {
+    return `$$q`.isA()
+   }
+  }
   val biFunction: methodreferences.MethodReferences.BiFunction<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
    return arg0.sameAs(arg1)
   }
@@ -38,9 +41,12 @@ open class MethodReferences<T> {
   val arrayProducer: methodreferences.MethodReferences.ArrayProducer<Any?>? = { arg0: Int ->
    return arrayOfNulls<Double?>(arg0)
   }
-  objectFactory = (val `$$q`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>(), {
-   return `$$q`.self()
-  })
+  objectFactory = run {
+   val `$$q`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>()
+   {
+    return `$$q`.self()
+   }
+  }
   val function: methodreferences.MethodReferences.Function<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
    return arg0.self()
   }
@@ -56,9 +62,12 @@ open class MethodReferences<T> {
   jsobjectFactory = {
    return methodreferences.MethodReferences.m()
   }
-  jsobjectFactory = (val `$$q`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>(), {
-   return `$$q`.self()
-  })
+  jsobjectFactory = run {
+   val `$$q`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>()
+   {
+    return `$$q`.self()
+   }
+  }
   val jsfunction: methodreferences.MethodReferences.JsFunctionInterface<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
    return arg0.self()
   }
@@ -82,9 +91,12 @@ open class MethodReferences<T> {
    return Any()
   }
 
-  @JvmField internal var staticStringProducer: methodreferences.MethodReferences.Producer<String?>? = (val `$$q`: Any? = methodreferences.MethodReferences.m(), {
-   return `$$q`.toString()
-  })
+  @JvmField internal var staticStringProducer: methodreferences.MethodReferences.Producer<String?>? = run {
+   val `$$q`: Any? = methodreferences.MethodReferences.m()
+   {
+    return `$$q`.toString()
+   }
+  }
  }
 }
 

@@ -13,10 +13,13 @@ open class BooleanOperations {
   r = ls | rs
   r = ls && rs
   r = ls || rs
-  r = ls = rs
-  r ^= rs
-  r &= rs
-  r |= rs
+  r = run {
+   ls = rs
+   ls
+  }
+  r = r ^ rs
+  r = r & rs
+  r = r | rs
   booleanoperations.BooleanOperations.acceptBoolean(ls == rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls != rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls ^ rs)
@@ -24,7 +27,10 @@ open class BooleanOperations {
   booleanoperations.BooleanOperations.acceptBoolean(ls | rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls && rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls || rs)
-  booleanoperations.BooleanOperations.acceptBoolean(ls = rs)
+  booleanoperations.BooleanOperations.acceptBoolean(run {
+   ls = rs
+   ls
+  })
   var br: Boolean?
   br = ls == rs
   br = ls != rs
@@ -33,7 +39,10 @@ open class BooleanOperations {
   br = ls | rs
   br = ls && rs
   br = ls || rs
-  br = ls = rs
+  br = run {
+   ls = rs
+   ls
+  }
   if (ls == rs) {
    r = true
   }
@@ -56,9 +65,12 @@ open class BooleanOperations {
    r = true
   }
   var finalOuter: booleanoperations.BooleanOperations.`1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
-  finalOuter.b |= true
+  finalOuter.b = finalOuter.b | true
   var outer: booleanoperations.BooleanOperations.`1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
-  outer.b |= (outer = null) == null
+  outer.b = outer.b | run {
+   outer = null
+   outer
+  } == null
  }
 
  companion object {
@@ -77,6 +89,6 @@ open class Inner {
  @JvmField val `this`: booleanoperations.BooleanOperations.`1Outer`?
 
  init {
-  this.`this`.b |= true
+  this.`this`.b = this.`this`.b | true
  }
 }

@@ -10,7 +10,7 @@ open class SimpleLongs {
  private var sideEffect: Int
 
  open fun getWithSideEffect(): simplelongs.SimpleLongs? {
-  this.sideEffect++
+  this.sideEffect = this.sideEffect + 1
   return this
  }
 
@@ -24,12 +24,41 @@ open class SimpleLongs {
   b = 9223372036854775807L
   var c: Long = a + b
   c = a / b
-  var e: Long = ++a
-  e = ++this.foo
-  e = ++this.getWithSideEffect().foo
-  var f: Long = a++
-  f = this.foo++
-  f = this.getWithSideEffect().foo++
+  var e: Long = run {
+   a = a + 1L
+   a
+  }
+  e = run {
+   val `$qualifier`: simplelongs.SimpleLongs = this
+   val `$value`: Long = this.foo + 1L
+   `$qualifier`.foo = `$value`
+   `$value`
+  }
+  e = run {
+   val `$qualifier`: simplelongs.SimpleLongs? = this.getWithSideEffect()
+   run {
+    val `$qualifier`: simplelongs.SimpleLongs? = `$qualifier`
+    val `$value`: Long = `$qualifier`.foo + 1L
+    `$qualifier`.foo = `$value`
+    `$value`
+   }
+  }
+  var f: Long = run {
+   val `$value`: Long = a
+   a = a + 1L
+   `$value`
+  }
+  f = run {
+   val `$value`: Long = this.foo
+   this.foo = this.foo + 1L
+   `$value`
+  }
+  f = run {
+   val `$qualifier`: simplelongs.SimpleLongs? = this.getWithSideEffect()
+   val `$value`: Long = `$qualifier`.foo
+   `$qualifier`.foo = `$qualifier`.foo + 1L
+   `$value`
+  }
   var g: Long = this.foo
   g = this.getBar()
  }

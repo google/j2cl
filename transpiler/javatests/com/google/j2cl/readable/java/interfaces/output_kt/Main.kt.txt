@@ -6,7 +6,10 @@ open class Main {
   i.interfaceMethod()
   i.defaultMethod(null)
   interfaces.Main.Interface.staticInterfaceMethod()
-  val x: Int = TODO("expression.qualify needs rendering: Main.this)").a + interfaces.Main.Interface.b
+  val x: Int = run {
+   TODO("expression.qualify needs rendering: Main.this)")
+   interfaces.Main.Interface.a
+  } + interfaces.Main.Interface.b
  }
 }
 

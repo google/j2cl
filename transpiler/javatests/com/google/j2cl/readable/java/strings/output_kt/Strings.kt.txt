@@ -11,24 +11,48 @@ open class Strings {
   var s1: String? = null
   var s2: String? = null
   var s3: String? = s1 + s2
-  s2 += s2
-  s1 += "a"
+  s2 = s2 + s2
+  s1 = s1 + "a"
   s3 = s1 + s1 + s2 + null + "a"
   s3 = "a" + s1 + s1 + s2 + null
   var s4: String?
   val c1: Char = 'F'
   val c2: Char = 'o'
   s4 = c1.code + c2.code + "o"
-  s4 += 1L + ""
-  s4 += 1L
-  s4 += 'C'
-  s4 += 1
-  s4 += 1.0
-  s4 += 1.0f
-  s4 += 1.toShort()
-  strings.Strings.StringHolder().s += s4
-  strings.Strings.StringHolder().s += c1
-  strings.Strings.StringHolder().s += "o"
+  s4 = s4 + (1L + "")
+  s4 = s4 + 1L
+  s4 = s4 + 'C'
+  s4 = s4 + 1
+  s4 = s4 + 1.0
+  s4 = s4 + 1.0f
+  s4 = s4 + 1.toShort()
+  run {
+   val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
+   run {
+    val `$qualifier`: strings.Strings.StringHolder = `$qualifier`
+    val `$value`: String? = `$qualifier`.s + s4
+    `$qualifier`.s = `$value`
+    `$value`
+   }
+  }
+  run {
+   val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
+   run {
+    val `$qualifier`: strings.Strings.StringHolder = `$qualifier`
+    val `$value`: String? = `$qualifier`.s + c1
+    `$qualifier`.s = `$value`
+    `$value`
+   }
+  }
+  run {
+   val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
+   run {
+    val `$qualifier`: strings.Strings.StringHolder = `$qualifier`
+    val `$value`: String? = `$qualifier`.s + "o"
+    `$qualifier`.s = `$value`
+    `$value`
+   }
+  }
   s1 = 1 + 2 + "s"
   s1 = "s" + 1 + 2
  }

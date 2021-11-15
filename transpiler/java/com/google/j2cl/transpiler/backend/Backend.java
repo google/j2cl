@@ -371,6 +371,10 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          NormalizeStaticMemberQualifiers::new,
+          NormalizeMultiExpressions::new,
+          () -> new ExpandCompoundAssignments(/* expandAll= */ true),
+          RewriteAssignmentExpressions::new,
           NormalizeLiteralsKotlin::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,

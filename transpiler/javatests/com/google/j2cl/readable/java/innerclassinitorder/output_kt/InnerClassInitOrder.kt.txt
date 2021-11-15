@@ -54,7 +54,7 @@ open class InnerClassInitOrder {
      val ap: innerclassinitorder.InnerClassInitOrder.`1AddNumber`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this)")
      results[i] = ap
     } while (false)
-    i++
+    i = i + 1
    }
   }
   FOR_EACH@ for (theAp in results) {
@@ -152,7 +152,7 @@ open class `1` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall?
 
  open fun toString(): String? {
-  this.`this`.`this`.number += 100
+  this.`this`.`this`.number = this.`this`.`this`.number + 100
   return ""
  }
 }
@@ -177,7 +177,7 @@ open class `1` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall?
 
  open fun toString(): String? {
-  this.`this`.`this`.number += 1000
+  this.`this`.`this`.number = this.`this`.`this`.number + 1000
   return ""
  }
 }
@@ -190,7 +190,7 @@ open class InnerClass {
  }
 
  internal open fun callInner() {
-  this.`this`.number += 1
+  this.`this`.number = this.`this`.number + 1
   TODO("expression.qualify needs rendering: InnerClass.this)")
  }
 }
@@ -203,7 +203,7 @@ open class `1ReallyInnerClass` {
  }
 
  internal open fun callReallyInner() {
-  this.`this`.`this`.number += 10
+  this.`this`.`this`.number = this.`this`.`this`.number + 10
  }
 }
 
@@ -323,7 +323,7 @@ open class `1`: innerclassinitorder.InnerClassInitOrder.`1AddNumber` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
 
  open fun act() {
-  this.`this`.number += this.num
+  this.`this`.number = this.`this`.number + this.num
  }
 }
 
