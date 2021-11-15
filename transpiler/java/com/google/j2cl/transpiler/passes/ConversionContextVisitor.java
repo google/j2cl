@@ -259,6 +259,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
     // binary numeric promotion context
     if (AstUtils.matchesBinaryNumericPromotionContext(binaryExpression)) {
+      // TODO(b/206415539): Perform the appropriate rewriting of the lhs for compound assignments.
       if (!binaryExpression.getOperator().isCompoundAssignment()) {
         leftOperand =
             contextRewriter.rewriteBinaryNumericPromotionContext(
@@ -494,13 +495,14 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   @Override
   public UnaryExpression rewritePostfixExpression(PostfixExpression postfixExpression) {
     // unary numeric promotion context
-    if (AstUtils.matchesUnaryNumericPromotionContext(postfixExpression.getTypeDescriptor())) {
+    if (AstUtils.matchesUnaryNumericPromotionContext(postfixExpression)) {
       return PostfixExpression.newBuilder()
           .setOperand(
               contextRewriter.rewriteUnaryNumericPromotionContext(postfixExpression.getOperand()))
           .setOperator(postfixExpression.getOperator())
           .build();
     }
+    // TODO(b/206415539): Perform the appropriate rewriting for compound assignments.
     return postfixExpression;
   }
 
@@ -523,6 +525,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
           .setOperator(prefixExpression.getOperator())
           .build();
     }
+    // TODO(b/206415539): Perform the appropriate rewriting for compound assignments.
     return prefixExpression;
   }
 

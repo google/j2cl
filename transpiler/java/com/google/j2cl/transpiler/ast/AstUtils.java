@@ -323,8 +323,9 @@ public class AstUtils {
   }
 
   /** See JLS 5.6.1. */
-  public static boolean matchesUnaryNumericPromotionContext(TypeDescriptor returnTypeDescriptor) {
-    return TypeDescriptors.isBoxedOrPrimitiveType(returnTypeDescriptor);
+  public static boolean matchesUnaryNumericPromotionContext(PostfixExpression postfixExpression) {
+    // There are no postfix expressions that match a unary numeric promotion context.
+    return false;
   }
 
   /** See JLS 5.6.2. */
