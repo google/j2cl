@@ -34,6 +34,20 @@ public class ForStatement {
     for (returnsValue(); ; returnsValue()) {}
   }
 
+  public void testContinue() {
+    LABEL:
+    for (int i = 0, j = 0; i < 10; i++, j++) {
+      if (i == 5) {
+        continue;
+      }
+      for (int k = 0, l = 0; k < 10; k++, l++) {
+        if (j == 5) {
+          continue LABEL;
+        }
+      }
+    }
+  }
+
   private static int returnsValue() {
     return 1;
   }

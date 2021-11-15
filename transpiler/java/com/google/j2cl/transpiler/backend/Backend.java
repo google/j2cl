@@ -79,6 +79,7 @@ import com.google.j2cl.transpiler.passes.NormalizeEnumClasses;
 import com.google.j2cl.transpiler.passes.NormalizeEquality;
 import com.google.j2cl.transpiler.passes.NormalizeFieldInitialization;
 import com.google.j2cl.transpiler.passes.NormalizeForEachStatement;
+import com.google.j2cl.transpiler.passes.NormalizeForStatements;
 import com.google.j2cl.transpiler.passes.NormalizeFunctionExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceCompileTimeConstants;
 import com.google.j2cl.transpiler.passes.NormalizeInstanceOfs;
@@ -372,10 +373,15 @@ public enum Backend {
           // Normalizations
           NormalizeLiteralsKotlin::new,
           NormalizeLabels::new,
+          NormalizeForStatements::new,
           NormalizeLabeledStatements::new,
           NormalizeNestedBlocks::new,
           InsertWideningPrimitiveConversionsKotlin::new,
-          NormalizeBasicCasts::new);
+          NormalizeBasicCasts::new,
+
+          // Verification
+          VerifySingleAstReference::new,
+          VerifyReferenceScoping::new);
     }
   };
 

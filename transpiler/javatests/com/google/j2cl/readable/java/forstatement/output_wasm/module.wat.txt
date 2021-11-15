@@ -9,6 +9,7 @@
   (ref.func $m_toString__java_lang_String@java.lang.Object)
   (ref.func $m_getClass__java_lang_Class@forstatement.ForStatement)
   (ref.func $m_test__void@forstatement.ForStatement)
+  (ref.func $m_testContinue__void@forstatement.ForStatement)
  )
 )
 
@@ -29,6 +30,7 @@
  (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_testContinue__void (ref $function.$java.lang.Object__$void))
   $java.lang.Object.vtable)
 )
 
@@ -173,13 +175,85 @@
 )
 (elem declare func $m_test__void@forstatement.ForStatement)
 
+;;; void ForStatement.testContinue()
+(func $m_testContinue__void@forstatement.ForStatement
+ (type $function.$java.lang.Object__$void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ forstatement/ForStatement.java:37:14
+ (local $i i32)
+ (local $j i32)
+ (local $k i32)
+ (local $l i32)
+ (local $this (ref null $forstatement.ForStatement))
+ (local.set $this (ref.cast_static $forstatement.ForStatement (local.get $this.untyped)))
+ (block
+  ;; LABEL: for (int i = 0,int j = 0;(i < 10);(i = (i + 1)),(j = (j + 1))) {
+  ;;@ forstatement/ForStatement.java:38:4
+  (local.set $i (i32.const 0))
+  (local.set $j (i32.const 0))
+  (block $LABEL.BREAK
+   (loop
+    (br_if 1 (i32.eqz (i32.lt_s (local.get $i) (i32.const 10))))
+    (block $LABEL.CONTINUE
+     (block
+      ;; if ((i == 5)) {
+      ;;@ forstatement/ForStatement.java:40:6
+      (if (i32.eq (local.get $i) (i32.const 5))
+       (then
+        (block
+         ;; continue LABEL;
+         ;;@ forstatement/ForStatement.java:41:8
+         (br $LABEL.CONTINUE)
+        )
+       )
+      )
+      ;; LOOP: for (int k = 0,int l = 0;(k < 10);(k = (k + 1)),(l = (l + 1))) {
+      ;;@ forstatement/ForStatement.java:43:6
+      (local.set $k (i32.const 0))
+      (local.set $l (i32.const 0))
+      (block $LOOP.BREAK
+       (loop
+        (br_if 1 (i32.eqz (i32.lt_s (local.get $k) (i32.const 10))))
+        (block $LOOP.CONTINUE
+         (block
+          ;; if ((j == 5)) {
+          ;;@ forstatement/ForStatement.java:44:8
+          (if (i32.eq (local.get $j) (i32.const 5))
+           (then
+            (block
+             ;; continue LABEL;
+             ;;@ forstatement/ForStatement.java:45:10
+             (br $LABEL.CONTINUE)
+            )
+           )
+          )
+         )
+        )
+        (local.set $k (i32.add (local.get $k) (i32.const 1)))
+        (local.set $l (i32.add (local.get $l) (i32.const 1)))
+        (br 0)
+        
+       )
+      )
+     )
+    )
+    (local.set $i (i32.add (local.get $i) (i32.const 1)))
+    (local.set $j (i32.add (local.get $j) (i32.const 1)))
+    (br 0)
+    
+   )
+  )
+ )
+)
+(elem declare func $m_testContinue__void@forstatement.ForStatement)
+
 ;;; int ForStatement.returnsValue()
 (func $m_returnsValue__int@forstatement.ForStatement
  (result i32)
- ;;@ forstatement/ForStatement.java:37:21
+ ;;@ forstatement/ForStatement.java:51:21
  (block
   ;; return 1;
-  ;;@ forstatement/ForStatement.java:38:4
+  ;;@ forstatement/ForStatement.java:52:4
   (return (i32.const 1))
  )
 )

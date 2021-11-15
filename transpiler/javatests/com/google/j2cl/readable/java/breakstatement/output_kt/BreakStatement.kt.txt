@@ -2,6 +2,12 @@ package breakstatement
 
 open class BreakStatement {
  open fun test() {
-  LOOP@ TODO("ForStatement")
+  if (true) {
+   LOOP@ while (true) {
+    LOOP_CONTINUE@ do {
+     break@LOOP
+    } while (false)
+   }
+  }
  }
 }

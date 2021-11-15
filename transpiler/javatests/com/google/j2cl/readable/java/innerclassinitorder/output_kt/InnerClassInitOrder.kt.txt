@@ -47,8 +47,17 @@ open class InnerClassInitOrder {
 
  open fun testInnerClassLoop() {
   val results: Array<innerclassinitorder.InnerClassInitOrder.`1AddNumber`?>? = arrayOfNulls<innerclassinitorder.InnerClassInitOrder.`1AddNumber`?>(10)
-  LOOP@ TODO("ForStatement")
-  for (theAp in results) {
+  if (true) {
+   var i: Int = 0
+   LOOP@ while (i < 10) {
+    LOOP_CONTINUE@ do {
+     val ap: innerclassinitorder.InnerClassInitOrder.`1AddNumber`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this)")
+     results[i] = ap
+    } while (false)
+    i++
+   }
+  }
+  FOR_EACH@ for (theAp in results) {
    theAp.act()
   }
   assert(this.number == 1156)

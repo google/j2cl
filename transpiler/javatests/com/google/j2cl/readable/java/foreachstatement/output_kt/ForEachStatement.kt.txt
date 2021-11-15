@@ -2,10 +2,10 @@ package foreachstatement
 
 open class ForEachStatement {
  open fun test(iterable: Iterable<Throwable?>?) {
-  for (t in iterable) {
+  FOR_EACH@ for (t in iterable) {
    t.toString()
   }
-  for (t_1 in arrayOfNulls<Throwable?>(10)) {
+  FOR_EACH_1@ for (t_1 in arrayOfNulls<Throwable?>(10)) {
    t.toString()
   }
  }
@@ -14,17 +14,17 @@ open class ForEachStatement {
   try {
    throw Exception()
   } catch (e: foreachstatement.ForEachStatement.Exception1) {
-   for (o in e) {}
+   FOR_EACH@ for (o in e) {}
   } catch (e: foreachstatement.ForEachStatement.Exception2) {
-   for (o in e) {}
+   FOR_EACH@ for (o in e) {}
   }
  }
 
  private fun <T, U: T> testTypeVariable() where T: Any?, T: Iterable<String?>? {
   val iterable: U = null
-  for (s in iterable) {}
+  FOR_EACH@ for (s in iterable) {}
   val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
-  for (s_1 in anotherIterable) {}
+  FOR_EACH_1@ for (s_1 in anotherIterable) {}
  }
 }
 

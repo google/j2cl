@@ -2,13 +2,75 @@ package forstatement
 
 open class ForStatement {
  open fun test() {
-  LOOP@ TODO("ForStatement")
-  LOOP_1@ TODO("ForStatement")
+  if (true) {
+   var i: Int = 0
+   var count: Int = 0
+   LOOP@ while (i < 100) {
+    LOOP_CONTINUE@ do {
+     count++
+    } while (false)
+    i++
+   }
+  }
+  if (true) {
+   var l: Long = 0L
+   var count: Long = 0L
+   LOOP_1@ while (l < 100L) {
+    LOOP_CONTINUE_1@ do {
+     count++
+    } while (false)
+    l++
+    l++
+   }
+  }
   var a: Boolean = false
-  LOOP_2@ TODO("ForStatement")
+  if (true) {
+   LOOP_2@ while (a |= true) {
+    LOOP_CONTINUE_2@ do {} while (false)
+   }
+  }
   var b: Boolean = false
-  LOOP_3@ TODO("ForStatement")
-  LOOP_4@ TODO("ForStatement")
+  if (true) {
+   LOOP_3@ while (b = a) {
+    LOOP_CONTINUE_3@ do {} while (false)
+   }
+  }
+  if (true) {
+   forstatement.ForStatement.returnsValue()
+   LOOP_4@ while (true) {
+    LOOP_CONTINUE_4@ do {} while (false)
+    forstatement.ForStatement.returnsValue()
+   }
+  }
+ }
+
+ open fun testContinue() {
+  if (true) {
+   var i: Int = 0
+   var j: Int = 0
+   LABEL@ while (i < 10) {
+    LABEL_CONTINUE@ do {
+     if (i == 5) {
+      break@LABEL_CONTINUE
+     }
+     if (true) {
+      var k: Int = 0
+      var l: Int = 0
+      LOOP@ while (k < 10) {
+       LOOP_CONTINUE@ do {
+        if (j == 5) {
+         break@LABEL_CONTINUE
+        }
+       } while (false)
+       k++
+       l++
+      }
+     }
+    } while (false)
+    i++
+    j++
+   }
+  }
  }
 
  companion object {

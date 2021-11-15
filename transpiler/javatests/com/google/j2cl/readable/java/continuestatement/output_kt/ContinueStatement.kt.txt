@@ -2,6 +2,12 @@ package continuestatement
 
 open class ContinueStatement {
  open fun test() {
-  LOOP@ TODO("ForStatement")
+  if (true) {
+   LOOP@ while (true) {
+    LOOP_CONTINUE@ do {
+     break@LOOP_CONTINUE
+    } while (false)
+   }
+  }
  }
 }

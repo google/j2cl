@@ -19,6 +19,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.BreakStatement;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
+import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.Label;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.LoopStatement;
@@ -32,7 +33,6 @@ import java.util.Deque;
  * Assigns a label to each loop and switch that does not already have one, and makes all breaks and
  * continues explicitly target a label. After this pass is ran all breaks and continues will have an
  * explicit target.
- *
  */
 public class NormalizeLabels extends NormalizationPass {
 
@@ -46,6 +46,14 @@ public class NormalizeLabels extends NormalizationPass {
           @Override
           public boolean shouldProcessLoopStatement(LoopStatement loopStatement) {
             Label enclosingLabel = getEnclosingLabel("LOOP");
+            enclosingBreakLabels.push(enclosingLabel);
+            enclosingContinueLabels.push(enclosingLabel);
+            return true;
+          }
+
+          @Override
+          public boolean shouldProcessForEachStatement(ForEachStatement forEachStatement) {
+            Label enclosingLabel = getEnclosingLabel("FOR_EACH");
             enclosingBreakLabels.push(enclosingLabel);
             enclosingContinueLabels.push(enclosingLabel);
             return true;
@@ -68,6 +76,12 @@ public class NormalizeLabels extends NormalizationPass {
           public Statement rewriteLoopStatement(LoopStatement loopStatement) {
             enclosingContinueLabels.pop();
             return ensureLabeled(loopStatement);
+          }
+
+          @Override
+          public Node rewriteForEachStatement(ForEachStatement forEachStatement) {
+            enclosingContinueLabels.pop();
+            return ensureLabeled(forEachStatement);
           }
 
           @Override
