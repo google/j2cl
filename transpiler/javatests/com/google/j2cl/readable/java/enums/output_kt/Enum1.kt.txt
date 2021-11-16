@@ -30,7 +30,7 @@ enum class Enum2: Enum<enums.Enum2?> {
 
   @JvmField val VALUE3: enums.Enum2 = enums.Enum2(arrayOf<Any?>())
 
-  @JvmField val VALUE4: enums.Enum2 = enums.Enum2.`1`(5)
+  @JvmField val VALUE4: enums.Enum2 = enums.`Enum2$1`(5)
 
   @JvmStatic
   internal fun f(o: Any?): enums.Enum2? {
@@ -41,7 +41,7 @@ enum class Enum2: Enum<enums.Enum2?> {
  }
 }
 
-open class `1`: enums.Enum2 {
+open class `Enum2$1`: enums.Enum2 {
  internal constructor(`$_0`: Int): super(`$_0`) {
 
  }

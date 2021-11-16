@@ -35,38 +35,38 @@ open class Main {
   return null
  }
 
- open fun m4(f: jsnonnull.Main.MyFunction) {}
+ open fun m4(f: jsnonnull.`Main$MyFunction`) {}
 }
 
-interface MyFunction {
+interface `Main$MyFunction` {
  fun x(a: String): String
 }
 
-open class StringComparator: java.util.Comparator<String> {
+open class `Main$StringComparator`: java.util.Comparator<String> {
  open override fun compare(a: String, b: String): Int {
   return 0
  }
 }
 
-open class NullableStringComparator: java.util.Comparator<String?> {
+open class `Main$NullableStringComparator`: java.util.Comparator<String?> {
  open override fun compare(a: String?, b: String?): Int {
   return 0
  }
 }
 
-open class NonNullableStringSubNullableComparator: jsnonnull.Main.NullableStringComparator() {
+open class `Main$NonNullableStringSubNullableComparator`: jsnonnull.`Main$NullableStringComparator`() {
  open override fun compare(a: String, b: String): Int {
   return 0
  }
 }
 
-interface NonNullableTemplatedReturn<T> {
+interface `Main$NonNullableTemplatedReturn`<T> {
  fun get(): T?
 
  fun getArray(): Array<T>?
 }
 
-interface NonNullableTemplate<T> {
+interface `Main$NonNullableTemplate`<T> {
  fun get(): T?
 
  fun getArray(): Array<T>?

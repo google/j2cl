@@ -12,7 +12,7 @@ open class MixedNestings {
  }
 }
 
-open class A {
+open class `MixedNestings$A` {
  @JvmField val `this`: mixednestings.MixedNestings?
 
  open fun aa() {}
@@ -22,8 +22,8 @@ open class A {
  }
 }
 
-open class `1B` {
- @JvmField val `this`: mixednestings.MixedNestings.A?
+open class `MixedNestings$A$1B` {
+ @JvmField val `this`: mixednestings.`MixedNestings$A`?
 
  open fun bb() {}
 
@@ -33,12 +33,12 @@ open class `1B` {
  }
 }
 
-open class `1`: mixednestings.MyInterface {
+open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
  internal constructor(): super() {
 
  }
 
- @JvmField val `this`: mixednestings.MixedNestings.A.`1B`?
+ @JvmField val `this`: mixednestings.`MixedNestings$A$1B`?
 
  open override fun `fun`(a: Int): Int {
   val ii: mixednestings.MyInterface? = { n: Int ->
@@ -57,12 +57,12 @@ open class `1`: mixednestings.MyInterface {
  }
 }
 
-open class `1`: mixednestings.MyInterface {
+open class `MixedNestings$A$1B$1$1`: mixednestings.MyInterface {
  internal constructor(): super() {
 
  }
 
- @JvmField val `this`: mixednestings.MixedNestings.A.`1B`.`1`?
+ @JvmField val `this`: mixednestings.`MixedNestings$A$1B$1`?
 
  open override fun `fun`(b: Int): Int {
   return b

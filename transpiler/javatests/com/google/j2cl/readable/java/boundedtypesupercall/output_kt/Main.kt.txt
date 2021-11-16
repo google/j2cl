@@ -2,28 +2,28 @@ package boundedtypesupercall
 
 open class Main {}
 
-abstract class Foo<T> {
+abstract class `Main$Foo`<T> {
  constructor(foo: T?) {}
 
  abstract open fun foo()
 }
 
-open class Bar<T: Comparable?> {
+open class `Main$Bar`<T: Comparable?> {
  open fun getSomething(): T? {
   return null
  }
 
- open fun doSomething(): boundedtypesupercall.Main.Foo<T>? {
+ open fun doSomething(): boundedtypesupercall.`Main$Foo`<T>? {
   return TODO("expression.qualify needs rendering: Bar.this)")
  }
 }
 
-open class `1`<T: Comparable?>: boundedtypesupercall.Main.Foo<T> {
+open class `Main$Bar$1`<T: Comparable?>: boundedtypesupercall.`Main$Foo`<T> {
  internal constructor(`$_0`: T?): super(`$_0`) {
 
  }
 
- @JvmField val `this`: boundedtypesupercall.Main.Bar<T>?
+ @JvmField val `this`: boundedtypesupercall.`Main$Bar`<T>?
 
  open override fun foo() {}
 }

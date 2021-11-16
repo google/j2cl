@@ -2,18 +2,18 @@ package interfaces
 
 open class Main {
  internal open fun testInterfaceMembers() {
-  val i: interfaces.Main.Interface? = TODO("expression.qualify needs rendering: Main.this)")
+  val i: interfaces.`Main$Interface`? = TODO("expression.qualify needs rendering: Main.this)")
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
-  interfaces.Main.Interface.staticInterfaceMethod()
+  interfaces.`Main$Interface`.staticInterfaceMethod()
   val x: Int = run {
    TODO("expression.qualify needs rendering: Main.this)")
-   interfaces.Main.Interface.a
-  } + interfaces.Main.Interface.b
+   interfaces.`Main$Interface`.a
+  } + interfaces.`Main$Interface`.b
  }
 }
 
-interface Interface<T> {
+interface `Main$Interface`<T> {
  fun interfaceMethod()
 
  fun defaultMethod(t: T?) {
@@ -32,18 +32,18 @@ interface Interface<T> {
  }
 }
 
-interface SubInterface: interfaces.Main.Interface<String?> {
+interface `Main$SubInterface`: interfaces.`Main$Interface`<String?> {
  override fun defaultMethod(s: String?) {
   super.defaultMethod(s)
  }
 }
 
-open class Implementor: interfaces.Main.SubInterface, interfaces.Main.Interface<String?> {
+open class `Main$Implementor`: interfaces.`Main$SubInterface`, interfaces.`Main$Interface`<String?> {
  @JvmField val `this`: interfaces.Main?
 
  open override fun interfaceMethod() {}
 }
 
-abstract class AbstractImplementor: interfaces.Main.SubInterface {
+abstract class `Main$AbstractImplementor`: interfaces.`Main$SubInterface` {
  @JvmField val `this`: interfaces.Main?
 }

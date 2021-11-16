@@ -97,12 +97,12 @@ open class CastPrimitives {
   cast.CastPrimitives.getFloat(l.toFloat())
   cast.CastPrimitives.getDouble(l.toDouble())
   cast.CastPrimitives.getDouble(f.toDouble())
-  cast.CastPrimitives.IntValueHolder(b.toInt())
-  cast.CastPrimitives.IntValueHolder(c.code)
-  cast.CastPrimitives.IntValueHolder(s.toInt())
-  cast.CastPrimitives.LongValueHolder(b.toLong())
-  cast.CastPrimitives.LongValueHolder(c.code.toLong())
-  cast.CastPrimitives.LongValueHolder(i.toLong())
+  cast.`CastPrimitives$IntValueHolder`(b.toInt())
+  cast.`CastPrimitives$IntValueHolder`(c.code)
+  cast.`CastPrimitives$IntValueHolder`(s.toInt())
+  cast.`CastPrimitives$LongValueHolder`(b.toLong())
+  cast.`CastPrimitives$LongValueHolder`(c.code.toLong())
+  cast.`CastPrimitives$LongValueHolder`(i.toLong())
  }
 
  open fun testImplicitLongAssignmentCasts() {
@@ -173,10 +173,10 @@ open class CastPrimitives {
  }
 }
 
-open class IntValueHolder {
+open class `CastPrimitives$IntValueHolder` {
  internal constructor(value: Int) {}
 }
 
-open class LongValueHolder {
+open class `CastPrimitives$LongValueHolder` {
  internal constructor(value: Long) {}
 }

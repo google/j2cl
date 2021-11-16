@@ -14,14 +14,14 @@ open class JsMethodExample {
  }
 }
 
-abstract class Base<T> {
+abstract class `JsMethodExample$Base`<T> {
  open fun m(t: T?) {}
 }
 
-interface I {
+interface `JsMethodExample$I` {
  fun m(s: String?)
 }
 
-open class Sub: jsmethod.JsMethodExample.I, jsmethod.JsMethodExample.Base<String?>() {
+open class `JsMethodExample$Sub`: jsmethod.`JsMethodExample$I`, jsmethod.`JsMethodExample$Base`<String?>() {
  open override fun m(s: String?) {}
 }

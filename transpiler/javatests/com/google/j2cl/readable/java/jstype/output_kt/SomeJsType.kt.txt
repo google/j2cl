@@ -25,13 +25,13 @@ open class SomeJsType<T> {
   this.protectedMethod()
  }
 
- open fun testStarAndWildCard(s: jstype.SomeJsType.Star?, w: jstype.SomeJsType.Wildcard?): jstype.SomeJsType.Wildcard? {
+ open fun testStarAndWildCard(s: jstype.`SomeJsType$Star`?, w: jstype.`SomeJsType$Wildcard`?): jstype.`SomeJsType$Wildcard`? {
   val `object`: Any? = Any()
-  val star: jstype.SomeJsType.Star? = 3.0 as Any? as jstype.SomeJsType.Star?
-  return star as jstype.SomeJsType.Wildcard?
+  val star: jstype.`SomeJsType$Star`? = 3.0 as Any? as jstype.`SomeJsType$Star`?
+  return star as jstype.`SomeJsType$Wildcard`?
  }
 }
 
-interface Star {}
+interface `SomeJsType$Star` {}
 
-interface Wildcard {}
+interface `SomeJsType$Wildcard` {}

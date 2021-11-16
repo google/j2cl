@@ -4,12 +4,12 @@ open class Main {
  companion object {
   @JvmStatic
   fun main(vararg args: String?) {
-   assert(jsinnerclass.Main.Outer().method() == 5)
+   assert(jsinnerclass.`Main$Outer`().method() == 5)
   }
  }
 }
 
-open class Outer {
+open class `Main$Outer` {
  @JvmField internal var a: Int = 2
 
  open fun method(): Int {
@@ -17,8 +17,8 @@ open class Outer {
  }
 }
 
-open class Inner {
- @JvmField val `this`: jsinnerclass.Main.Outer?
+open class `Main$Outer$Inner` {
+ @JvmField val `this`: jsinnerclass.`Main$Outer`?
 
  private var b: Int = 0
 

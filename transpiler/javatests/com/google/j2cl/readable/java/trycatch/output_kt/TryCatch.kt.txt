@@ -43,8 +43,8 @@ open class TryCatch {
  }
 
  open fun testTryWithResourceJava9() {
-  val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
-  val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  val thing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
+  val thing2: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
   try {
    throw Exception()
   } catch (e: Exception) {}
@@ -83,10 +83,10 @@ open class TryCatch {
  }
 
  companion object {
-  private val closableThing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  private val closableThing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
  }
 }
 
-open class ClosableThing: java.lang.AutoCloseable {
+open class `TryCatch$ClosableThing`: java.lang.AutoCloseable {
  open override fun close() {}
 }

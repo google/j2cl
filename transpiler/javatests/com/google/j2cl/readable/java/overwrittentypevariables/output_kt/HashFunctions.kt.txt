@@ -10,17 +10,17 @@ open class HashFunctions {
  companion object {
   @JvmStatic
   fun <T> hashFunction(): overwrittentypevariables.HashFunction<T>? {
-   return overwrittentypevariables.HashFunctions.`1`<T>()
+   return overwrittentypevariables.`HashFunctions$1`<T>()
   }
 
   @JvmStatic
   fun <T: Enum<T>?> enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
-   return overwrittentypevariables.HashFunctions.`2`<T>()
+   return overwrittentypevariables.`HashFunctions$2`<T>()
   }
  }
 }
 
-open class `1`<T>: overwrittentypevariables.HashFunction<T> {
+open class `HashFunctions$1`<T>: overwrittentypevariables.HashFunction<T> {
  internal constructor(): super() {
 
  }
@@ -30,7 +30,7 @@ open class `1`<T>: overwrittentypevariables.HashFunction<T> {
  }
 }
 
-open class `2`<T: Enum<T>?>: overwrittentypevariables.HashFunction<T> {
+open class `HashFunctions$2`<T: Enum<T>?>: overwrittentypevariables.HashFunction<T> {
  internal constructor(): super() {
 
  }

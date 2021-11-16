@@ -2,24 +2,24 @@ package anonymousinnerclass
 
 open class A {}
 
-open class B {
+open class `A$B` {
  @JvmField val `this`: anonymousinnerclass.A?
 }
 
 open class AnonymousInnerClass {
  open fun test(arg: Int) {
-  val ic: anonymousinnerclass.AnonymousInnerClass.InnerClass? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
+  val ic: anonymousinnerclass.`AnonymousInnerClass$InnerClass`? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
   val a: anonymousinnerclass.A? = anonymousinnerclass.A()
-  val b: anonymousinnerclass.A.B? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
-  val c: anonymousinnerclass.AnonymousInnerClass.`1C`? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
+  val b: anonymousinnerclass.`A$B`? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
+  val c: anonymousinnerclass.`AnonymousInnerClass$1C`? = TODO("expression.qualify needs rendering: AnonymousInnerClass.this)")
  }
 }
 
-open class InnerClass {
+open class `AnonymousInnerClass$InnerClass` {
  @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
-open class `1`: anonymousinnerclass.AnonymousInnerClass.InnerClass {
+open class `AnonymousInnerClass$1`: anonymousinnerclass.`AnonymousInnerClass$InnerClass` {
  internal constructor(): super() {
 
  }
@@ -27,7 +27,7 @@ open class `1`: anonymousinnerclass.AnonymousInnerClass.InnerClass {
  @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
-open class `2`: anonymousinnerclass.A.B {
+open class `AnonymousInnerClass$2`: anonymousinnerclass.`A$B` {
  internal constructor(`$super_outer_this`: anonymousinnerclass.A?): super() {
 
  }
@@ -35,7 +35,7 @@ open class `2`: anonymousinnerclass.A.B {
  @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
-open class `1C` {
+open class `AnonymousInnerClass$1C` {
  @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 
  @JvmField var fInC: Int = this.arg
@@ -43,7 +43,7 @@ open class `1C` {
  @JvmField val arg: Int
 }
 
-open class `3`: anonymousinnerclass.AnonymousInnerClass.`1C` {
+open class `AnonymousInnerClass$3`: anonymousinnerclass.`AnonymousInnerClass$1C` {
  internal constructor(): super() {
 
  }

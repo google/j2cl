@@ -64,9 +64,9 @@ open class BooleanOperations {
   if (ls || rs) {
    r = true
   }
-  var finalOuter: booleanoperations.BooleanOperations.`1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
+  var finalOuter: booleanoperations.`BooleanOperations$1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
   finalOuter!!.b = finalOuter!!.b | true
-  var outer: booleanoperations.BooleanOperations.`1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
+  var outer: booleanoperations.`BooleanOperations$1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
   outer!!.b = outer!!.b | run {
    outer = null
    outer
@@ -79,14 +79,14 @@ open class BooleanOperations {
  }
 }
 
-open class `1Outer` {
+open class `BooleanOperations$1Outer` {
  @JvmField val `this`: booleanoperations.BooleanOperations?
 
  @JvmField internal var b: Boolean = false
 }
 
-open class Inner {
- @JvmField val `this`: booleanoperations.BooleanOperations.`1Outer`?
+open class `BooleanOperations$1Outer$Inner` {
+ @JvmField val `this`: booleanoperations.`BooleanOperations$1Outer`?
 
  init {
   this.`this`!!.b = this.`this`!!.b | true

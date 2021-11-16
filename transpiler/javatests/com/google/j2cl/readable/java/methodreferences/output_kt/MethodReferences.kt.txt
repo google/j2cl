@@ -14,7 +14,7 @@ open class MethodReferences<T> {
  }
 
  internal open fun main() {
-  var objectFactory: methodreferences.MethodReferences.Producer<Any?>? = {
+  var objectFactory: methodreferences.`MethodReferences$Producer`<Any?>? = {
    return Any()
   }
   objectFactory = {
@@ -26,19 +26,19 @@ open class MethodReferences<T> {
     return `$$q`.isA()
    }
   }
-  val biFunction: methodreferences.MethodReferences.BiFunction<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
+  val biFunction: methodreferences.`MethodReferences$BiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
    return arg0!!.sameAs(arg1)
   }
-  val functionWithParameters: methodreferences.MethodReferences.Function<Number?, Boolean?>? = { arg0: Number? ->
+  val functionWithParameters: methodreferences.`MethodReferences$Function`<Number?, Boolean?>? = { arg0: Number? ->
    return this.sameAs(arg0)
   }
-  val objectPredicate: methodreferences.MethodReferences.Predicate<methodreferences.MethodReferences<T>?>? = { arg0: methodreferences.MethodReferences<T>? ->
+  val objectPredicate: methodreferences.`MethodReferences$Predicate`<methodreferences.MethodReferences<T>?>? = { arg0: methodreferences.MethodReferences<T>? ->
    return arg0!!.isA()!!
   }
-  val objectCapturingOuterProducer: methodreferences.MethodReferences.Producer<methodreferences.MethodReferences.ObjectCapturingOuter<T>?>? = {
+  val objectCapturingOuterProducer: methodreferences.`MethodReferences$Producer`<methodreferences.`MethodReferences$ObjectCapturingOuter`<T>?>? = {
    return TODO("expression.qualify needs rendering: MethodReferences.this)")
   }
-  val arrayProducer: methodreferences.MethodReferences.ArrayProducer<Any?>? = { arg0: Int ->
+  val arrayProducer: methodreferences.`MethodReferences$ArrayProducer`<Any?>? = { arg0: Int ->
    return arrayOfNulls<Double?>(arg0)
   }
   objectFactory = run {
@@ -47,16 +47,16 @@ open class MethodReferences<T> {
     return `$$q`.self()
    }
   }
-  val function: methodreferences.MethodReferences.Function<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
+  val function: methodreferences.`MethodReferences$Function`<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
    return arg0!!.self()
   }
-  val arrayFactory: methodreferences.MethodReferences.Function<Int?, Array<Any?>?>? = { arg0: Int? ->
+  val arrayFactory: methodreferences.`MethodReferences$Function`<Int?, Array<Any?>?>? = { arg0: Int? ->
    return arrayOfNulls<Any?>(arg0!!)
   }
-  val superToStringProducer: methodreferences.MethodReferences.Producer<String?>? = {
+  val superToStringProducer: methodreferences.`MethodReferences$Producer`<String?>? = {
    return this.toString()
   }
-  var jsobjectFactory: methodreferences.MethodReferences.JsProducer<Any?>? = {
+  var jsobjectFactory: methodreferences.`MethodReferences$JsProducer`<Any?>? = {
    return Any()
   }
   jsobjectFactory = {
@@ -68,19 +68,19 @@ open class MethodReferences<T> {
     return `$$q`.self()
    }
   }
-  val jsfunction: methodreferences.MethodReferences.JsFunctionInterface<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
+  val jsfunction: methodreferences.`MethodReferences$JsFunctionInterface`<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
    return arg0!!.self()
   }
-  val jsarrayFactory: methodreferences.MethodReferences.JsFunctionInterface<Int?, Array<Any?>?>? = { arg0: Int? ->
+  val jsarrayFactory: methodreferences.`MethodReferences$JsFunctionInterface`<Int?, Array<Any?>?>? = { arg0: Int? ->
    return arrayOfNulls<Any?>(arg0!!)
   }
-  val jsSuperToStringProducer: methodreferences.MethodReferences.JsProducer<String?>? = {
+  val jsSuperToStringProducer: methodreferences.`MethodReferences$JsProducer`<String?>? = {
    return this.toString()
   }
-  val jsbiFunction: methodreferences.MethodReferences.JsBiFunction<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
+  val jsbiFunction: methodreferences.`MethodReferences$JsBiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
    return arg0!!.sameAs(arg1)
   }
-  val jsFunctionWithParameters: methodreferences.MethodReferences.JsFunctionInterface<Number?, Boolean?>? = { arg0: Number? ->
+  val jsFunctionWithParameters: methodreferences.`MethodReferences$JsFunctionInterface`<Number?, Boolean?>? = { arg0: Number? ->
    return this.sameAs(arg0)
   }
  }
@@ -91,7 +91,7 @@ open class MethodReferences<T> {
    return Any()
   }
 
-  @JvmField internal var staticStringProducer: methodreferences.MethodReferences.Producer<String?>? = run {
+  @JvmField internal var staticStringProducer: methodreferences.`MethodReferences$Producer`<String?>? = run {
    val `$$q`: Any? = methodreferences.MethodReferences.m()
    {
     return `$$q`!!.toString()
@@ -100,19 +100,19 @@ open class MethodReferences<T> {
  }
 }
 
-interface Producer<T> {
+interface `MethodReferences$Producer`<T> {
  fun produce(): T?
 }
 
-interface Predicate<T> {
+interface `MethodReferences$Predicate`<T> {
  fun apply(parameter: T?): Boolean
 }
 
-interface ArrayProducer<T> {
+interface `MethodReferences$ArrayProducer`<T> {
  fun produce(size: Int): Array<T>?
 }
 
-open class ObjectCapturingOuter<T> {
+open class `MethodReferences$ObjectCapturingOuter`<T> {
  @JvmField val `this`: methodreferences.MethodReferences<T>?
 
  internal open fun getMain(): methodreferences.MethodReferences<T>? {
@@ -120,22 +120,22 @@ open class ObjectCapturingOuter<T> {
  }
 }
 
-interface Function<T, U> {
+interface `MethodReferences$Function`<T, U> {
  fun apply(t: T?): U?
 }
 
-interface BiFunction<T, U, V> {
+interface `MethodReferences$BiFunction`<T, U, V> {
  fun apply(t: T?, u: U?): V?
 }
 
-interface JsProducer<T> {
+interface `MethodReferences$JsProducer`<T> {
  fun produce(): T?
 }
 
-interface JsFunctionInterface<T, U> {
+interface `MethodReferences$JsFunctionInterface`<T, U> {
  fun apply(t: T?): U?
 }
 
-interface JsBiFunction<T, U, V> {
+interface `MethodReferences$JsBiFunction`<T, U, V> {
  fun apply(t: T?, u: U?): V?
 }

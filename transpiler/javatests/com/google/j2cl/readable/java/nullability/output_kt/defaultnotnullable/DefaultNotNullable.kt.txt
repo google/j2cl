@@ -36,11 +36,11 @@ open class DefaultNotNullable {
  open fun m3(vararg args: String?) {}
 }
 
-interface ParameterizedInterface<T> {
+interface `DefaultNotNullable$ParameterizedInterface`<T> {
  fun add(t: T?)
 }
 
-open class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<String> {
+open class `DefaultNotNullable$ImplementsParameterizedInterface`: nullability.defaultnotnullable.`DefaultNotNullable$ParameterizedInterface`<String> {
  @JvmField val `this`: nullability.defaultnotnullable.DefaultNotNullable?
 
  open override fun add(s: String?) {}

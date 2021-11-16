@@ -2,23 +2,23 @@ package abstractmethodoverridedefault
 
 open class AbstractMethodOverrideDefault {}
 
-interface I {
+interface `AbstractMethodOverrideDefault$I` {
  fun foo()
 
  fun bar() {}
 }
 
-interface J {
+interface `AbstractMethodOverrideDefault$J` {
  fun foo() {}
 
  fun bar()
 }
 
-abstract class A: abstractmethodoverridedefault.AbstractMethodOverrideDefault.I {
+abstract class `AbstractMethodOverrideDefault$A`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$I` {
  abstract open override fun foo()
 }
 
-abstract class B: abstractmethodoverridedefault.AbstractMethodOverrideDefault.J, abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
+abstract class `AbstractMethodOverrideDefault$B`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$J`, abstractmethodoverridedefault.`AbstractMethodOverrideDefault$A`() {
  open override fun bar() {
   if (false) {
    this.bar()
@@ -26,7 +26,7 @@ abstract class B: abstractmethodoverridedefault.AbstractMethodOverrideDefault.J,
  }
 }
 
-open class C: abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
+open class `AbstractMethodOverrideDefault$C`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$A`() {
  open override fun foo() {}
 
  open override fun bar() {

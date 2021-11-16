@@ -59,7 +59,7 @@ open class Casts {
  }
 
  open fun testCastFieldAfterInstanceOf() {
-  var foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
+  var foo: cast.`Casts$Foo`? = TODO("expression.qualify needs rendering: Casts.this)")
   if (foo!!.field is cast.Casts) {
    val c: cast.Casts? = foo!!.field as cast.Casts?
   }
@@ -81,14 +81,14 @@ open class Casts {
  }
 
  open fun testCaseMethodAfterInstanceOf() {
-  val foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
+  val foo: cast.`Casts$Foo`? = TODO("expression.qualify needs rendering: Casts.this)")
   if (foo!!.method() is cast.Casts) {
    val cNotAvoidCastsTo: cast.Casts? = foo!!.method() as cast.Casts?
   }
  }
 }
 
-open class Foo {
+open class `Casts$Foo` {
  @JvmField val `this`: cast.Casts?
 
  @JvmField var field: Any? = Any()

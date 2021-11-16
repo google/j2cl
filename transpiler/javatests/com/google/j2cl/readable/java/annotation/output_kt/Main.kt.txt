@@ -2,7 +2,7 @@ package annotation
 
 open class Main {}
 
-interface Foo: java.lang.annotation.Annotation {
+interface `Main$Foo`: java.lang.annotation.Annotation {
  fun bar(): Int
 
  companion object {
@@ -10,14 +10,14 @@ interface Foo: java.lang.annotation.Annotation {
  }
 }
 
-interface Zoo: java.lang.annotation.Annotation {}
+interface `Main$Zoo`: java.lang.annotation.Annotation {}
 
-open class Bar {
+open class `Main$Bar` {
  @JvmField val `this`: annotation.Main?
 
  internal open fun baz(): Int {
-  val foo: annotation.Main.Foo? = null
+  val foo: annotation.`Main$Foo`? = null
   foo!!.bar()
-  return annotation.Main.Foo.CONSTANT
+  return annotation.`Main$Foo`.CONSTANT
  }
 }

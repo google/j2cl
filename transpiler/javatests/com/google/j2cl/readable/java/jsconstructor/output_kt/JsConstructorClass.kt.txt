@@ -2,7 +2,7 @@ package jsconstructor
 
 open class JsConstructorClass {}
 
-open class A {
+open class `JsConstructorClass$A` {
  @JvmField var fA: Int = 1
 
  constructor(x: Int) {
@@ -12,7 +12,7 @@ open class A {
  constructor() {}
 }
 
-open class B: jsconstructor.JsConstructorClass.A {
+open class `JsConstructorClass$B`: jsconstructor.`JsConstructorClass$A` {
  @JvmField var fB: Int = 2
 
  constructor(x: Int): super(x + 1) {
@@ -31,7 +31,7 @@ open class B: jsconstructor.JsConstructorClass.A {
  }
 }
 
-open class C: jsconstructor.JsConstructorClass.B {
+open class `JsConstructorClass$C`: jsconstructor.`JsConstructorClass$B` {
  @JvmField var fC: Int = 1
 
  constructor(x: Int): super(x * 2) {
@@ -45,7 +45,7 @@ open class C: jsconstructor.JsConstructorClass.B {
  }
 }
 
-open class D: jsconstructor.JsConstructorClass.B {
+open class `JsConstructorClass$D`: jsconstructor.`JsConstructorClass$B` {
  @JvmField var fD: Int = 8
 
  constructor(): super(9) {
@@ -59,7 +59,7 @@ open class D: jsconstructor.JsConstructorClass.B {
  }
 }
 
-open class E: jsconstructor.JsConstructorClass.C {
+open class `JsConstructorClass$E`: jsconstructor.`JsConstructorClass$C` {
  @JvmField var fE: Int = 11
 
  constructor(): super(10) {
@@ -68,7 +68,7 @@ open class E: jsconstructor.JsConstructorClass.C {
  }
 }
 
-open class F: jsconstructor.JsConstructorClass.C {
+open class `JsConstructorClass$F`: jsconstructor.`JsConstructorClass$C` {
  @JvmField var fF: Int = 13
 
  constructor(x: Int): super(x + 2) {
@@ -77,19 +77,19 @@ open class F: jsconstructor.JsConstructorClass.C {
  }
 }
 
-open class G {}
+open class `JsConstructorClass$G` {}
 
-open class H: jsconstructor.JsConstructorClass.G {
+open class `JsConstructorClass$H`: jsconstructor.`JsConstructorClass$G` {
  constructor() {}
 }
 
-open class Varargs: jsconstructor.JsConstructorClass.A {
+open class `JsConstructorClass$Varargs`: jsconstructor.`JsConstructorClass$A` {
  constructor(vararg args: Int): super(args!![1]) {
 
  }
 }
 
-open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
+open class `JsConstructorClass$SubVarargs`: jsconstructor.`JsConstructorClass$Varargs` {
  constructor(i: Any?, vararg args: Int): super(args) {
 
  }
@@ -101,13 +101,13 @@ open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
  companion object {
   @JvmStatic
   internal fun subNativeInvocation() {
-   val unusedS1: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(2)
-   val unusedS2: jsconstructor.JsConstructorClass.SubVarargs? = jsconstructor.JsConstructorClass.SubVarargs(Any(), intArrayOf(1, 2, 3))
+   val unusedS1: jsconstructor.`JsConstructorClass$SubVarargs`? = jsconstructor.`JsConstructorClass$SubVarargs`(2)
+   val unusedS2: jsconstructor.`JsConstructorClass$SubVarargs`? = jsconstructor.`JsConstructorClass$SubVarargs`(Any(), intArrayOf(1, 2, 3))
   }
  }
 }
 
-open class InstanceVarargs: jsconstructor.JsConstructorClass.A {
+open class `JsConstructorClass$InstanceVarargs`: jsconstructor.`JsConstructorClass$A` {
  @JvmField val `this`: jsconstructor.JsConstructorClass?
 
  constructor(vararg args: Int): super(args!![1]) {
@@ -115,11 +115,11 @@ open class InstanceVarargs: jsconstructor.JsConstructorClass.A {
  }
 }
 
-open class RegularType {
+open class `JsConstructorClass$RegularType` {
  constructor(b: Any?) {}
 }
 
-open class JsConstructorSubtypeOfRegularType: jsconstructor.JsConstructorClass.RegularType {
+open class `JsConstructorClass$JsConstructorSubtypeOfRegularType`: jsconstructor.`JsConstructorClass$RegularType` {
  constructor(`object`: Any?): super(`object`) {
 
  }

@@ -6,14 +6,14 @@ open class OuterClass {
  }
 }
 
-open class InnerClass {
+open class `OuterClass$InnerClass` {
  @JvmField val `this`: nestedinstanceinnerclass.OuterClass?
 }
 
-open class InnerInnerClass {
- @JvmField val `this`: nestedinstanceinnerclass.OuterClass.InnerClass?
+open class `OuterClass$InnerClass$InnerInnerClass` {
+ @JvmField val `this`: nestedinstanceinnerclass.`OuterClass$InnerClass`?
 
- @JvmField var x: nestedinstanceinnerclass.OuterClass.InnerClass? = this.`this`
+ @JvmField var x: nestedinstanceinnerclass.`OuterClass$InnerClass`? = this.`this`
 
  @JvmField var y: nestedinstanceinnerclass.OuterClass? = this.`this`!!.`this`
 }

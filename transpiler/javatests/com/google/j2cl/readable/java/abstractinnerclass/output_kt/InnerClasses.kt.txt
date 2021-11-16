@@ -2,17 +2,17 @@ package abstractinnerclass
 
 open class InnerClasses {}
 
-interface A {
+interface `InnerClasses$A` {
  fun foo()
 }
 
-abstract class B: abstractinnerclass.InnerClasses.A {
+abstract class `InnerClasses$B`: abstractinnerclass.`InnerClasses$A` {
  internal open fun bar() {
   this.foo()
  }
 }
 
-abstract class C: abstractinnerclass.InnerClasses.A {
+abstract class `InnerClasses$C`: abstractinnerclass.`InnerClasses$A` {
  @JvmField val `this`: abstractinnerclass.InnerClasses?
 
  internal open fun bar() {

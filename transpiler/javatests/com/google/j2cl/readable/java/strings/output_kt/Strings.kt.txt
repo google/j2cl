@@ -27,27 +27,27 @@ open class Strings {
   s4 = s4 + 1.0f
   s4 = s4 + 1.toShort()
   run {
-   val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
+   val `$qualifier`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
    run {
-    val `$qualifier`: strings.Strings.StringHolder = `$qualifier`
+    val `$qualifier`: strings.`Strings$StringHolder` = `$qualifier`
     val `$value`: String? = `$qualifier`.s + s4
     `$qualifier`.s = `$value`
     `$value`
    }
   }
   run {
-   val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
+   val `$qualifier`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
    run {
-    val `$qualifier`: strings.Strings.StringHolder = `$qualifier`
+    val `$qualifier`: strings.`Strings$StringHolder` = `$qualifier`
     val `$value`: String? = `$qualifier`.s + c1
     `$qualifier`.s = `$value`
     `$value`
    }
   }
   run {
-   val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
+   val `$qualifier`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
    run {
-    val `$qualifier`: strings.Strings.StringHolder = `$qualifier`
+    val `$qualifier`: strings.`Strings$StringHolder` = `$qualifier`
     val `$value`: String? = `$qualifier`.s + "o"
     `$qualifier`.s = `$value`
     `$value`
@@ -64,6 +64,6 @@ open class Strings {
  }
 }
 
-open class StringHolder {
+open class `Strings$StringHolder` {
  @JvmField internal var s: String? = "A"
 }

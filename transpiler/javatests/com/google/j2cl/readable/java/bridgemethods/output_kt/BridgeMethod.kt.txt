@@ -63,39 +63,39 @@ open class AccidentalOverrideBridge: bridgemethods.Getter, bridgemethods.ClassWi
 
 open class TestCase10036 {}
 
-interface BI3 {
+interface `TestCase10036$BI3` {
  fun get(value: String?): String? {
   return "BI3 get String"
  }
 }
 
-interface BI2 {
+interface `TestCase10036$BI2` {
  fun get(value: String?): String?
 }
 
-interface BI1: bridgemethods.TestCase10036.BI3 {
+interface `TestCase10036$BI1`: bridgemethods.`TestCase10036$BI3` {
  override fun get(value: String?): String?
 }
 
-abstract class B<B1: Comparable?>: bridgemethods.TestCase10036.BI1, bridgemethods.TestCase10036.BI2 {
+abstract class `TestCase10036$B`<B1: Comparable?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
  abstract open fun get(value: B1?): String?
 }
 
 open class TestCase102 {}
 
-interface BI2 {
+interface `TestCase102$BI2` {
  fun set(value: String?)
 }
 
-interface BI1 {
+interface `TestCase102$BI1` {
  fun set(value: String?)
 }
 
-abstract class B<B1>: bridgemethods.TestCase102.BI1, bridgemethods.TestCase102.BI2 {
+abstract class `TestCase102$B`<B1>: bridgemethods.`TestCase102$BI1`, bridgemethods.`TestCase102$BI2` {
  abstract open fun set(value: B1?)
 }
 
-open class C<B1>: bridgemethods.TestCase102.B<B1>() {
+open class `TestCase102$C`<B1>: bridgemethods.`TestCase102$B`<B1>() {
  @JvmField val `this`: bridgemethods.TestCase102?
 
  open override fun set(value: String?) {}

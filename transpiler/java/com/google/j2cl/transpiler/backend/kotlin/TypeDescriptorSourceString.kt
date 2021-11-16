@@ -130,10 +130,7 @@ private val TypeDeclaration.mappedSourceStringOrNull
     }
 
 private val TypeDeclaration.declaredSourceString
-  get() = "$packagePrefixSourceString$classComponentsSourceString"
+  get() = "$packagePrefixSourceString${simpleBinaryName.identifierSourceString}"
 
 private val TypeDeclaration.packagePrefixSourceString
   get() = packageName?.let { "${it.packageNameSourceString}." } ?: ""
-
-private val TypeDeclaration.classComponentsSourceString
-  get() = classComponents.joinToString(".") { it.identifierSourceString }

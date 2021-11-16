@@ -37,10 +37,10 @@ open class Nullability {
   return null
  }
 
- open fun m4(f: nullability.Nullability.MyFunction) {}
+ open fun m4(f: nullability.`Nullability$MyFunction`) {}
 }
 
-open class Foo<T> {
+open class `Nullability$Foo`<T> {
  internal open fun bar(t: T?) {}
 
  internal open fun baz(): T? {
@@ -52,29 +52,29 @@ open class Foo<T> {
  }
 }
 
-interface MyFunction {
+interface `Nullability$MyFunction` {
  fun x(a: String): String
 }
 
-open class StringList: java.util.ArrayList<String?>() {}
+open class `Nullability$StringList`: java.util.ArrayList<String?>() {}
 
-open class StringComparator: java.util.Comparator<String> {
+open class `Nullability$StringComparator`: java.util.Comparator<String> {
  open override fun compare(a: String, b: String): Int {
   return 0
  }
 }
 
-open class NullableStringComparator: java.util.Comparator<String?> {
+open class `Nullability$NullableStringComparator`: java.util.Comparator<String?> {
  open override fun compare(a: String?, b: String?): Int {
   return 0
  }
 }
 
-interface NullableTemplatedReturn<T> {
+interface `Nullability$NullableTemplatedReturn`<T> {
  fun foo(): T?
 }
 
-open class NullableTemplatedReturnOverride: nullability.Nullability.NullableTemplatedReturn<String?> {
+open class `Nullability$NullableTemplatedReturnOverride`: nullability.`Nullability$NullableTemplatedReturn`<String?> {
  open override fun foo(): String? {
   return "foo"
  }

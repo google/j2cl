@@ -25,8 +25,8 @@ open class CastGenerics<T, E: Number?> {
 
  open fun <TT: Enum?> outerGenericMethod() {}
 
- open fun <EE> method(o: Any?): EE? where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
-  if (o is cast.CastGenerics.Empty1) {
+ open fun <EE> method(o: Any?): EE? where EE: cast.`CastGenerics$Empty1`?, EE: cast.`CastGenerics$Empty2`<EE>? {
+  if (o is cast.`CastGenerics$Empty1`) {
    return o as EE?
   }
   return null
@@ -34,31 +34,31 @@ open class CastGenerics<T, E: Number?> {
 
  companion object {
   @JvmStatic
-  fun <T, U: T> testErasureCast() where T: cast.CastGenerics.A?, T: cast.CastGenerics.B? {
+  fun <T, U: T> testErasureCast() where T: cast.`CastGenerics$A`?, T: cast.`CastGenerics$B`? {
    var str: String? = cast.CastGenerics<String?, Number?>().field
    str = cast.CastGenerics<String?, Number?>().method()
-   val containerT: cast.CastGenerics.Container<T>? = null
+   val containerT: cast.`CastGenerics$Container`<T>? = null
    containerT!!.get()!!.mA()
    containerT!!.get()!!.mB()
-   val containerU: cast.CastGenerics.Container<U>? = null
+   val containerU: cast.`CastGenerics$Container`<U>? = null
    containerU!!.get()!!.mA()
    containerU!!.get()!!.mB()
-   val containerArrT: cast.CastGenerics.Container<Array<T>?>? = null
+   val containerArrT: cast.`CastGenerics$Container`<Array<T>?>? = null
    val arrT: Array<T>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
-   var arrA: Array<cast.CastGenerics.A?>? = containerArrT!!.get()
-   var arrB: Array<cast.CastGenerics.B?>? = containerArrT!!.get()
-   val containerArrU: cast.CastGenerics.Container<Array<U>?>? = null
+   var arrA: Array<cast.`CastGenerics$A`?>? = containerArrT!!.get()
+   var arrB: Array<cast.`CastGenerics$B`?>? = containerArrT!!.get()
+   val containerArrU: cast.`CastGenerics$Container`<Array<U>?>? = null
    val arrU: Array<U>? = containerArrU!!.get()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
    arrA = containerArrU!!.get()
    arrB = containerArrU!!.get()
-   val containerBase: cast.CastGenerics.Container<cast.CastGenerics.BaseImplementor?>? = null
+   val containerBase: cast.`CastGenerics$Container`<cast.`CastGenerics$BaseImplementor`?>? = null
    containerBase!!.get()!!.mA()
    containerBase!!.get()!!.mB()
-   val containerImplementor: cast.CastGenerics.Container<cast.CastGenerics.Implementor?>? = null
+   val containerImplementor: cast.`CastGenerics$Container`<cast.`CastGenerics$Implementor`?>? = null
    containerImplementor!!.get()!!.mA()
    containerImplementor!!.get()!!.mB()
   }
@@ -71,35 +71,35 @@ open class CastGenerics<T, E: Number?> {
   }
 
   @JvmStatic
-  fun <T> doSomething(): cast.CastGenerics.Foo<T>? {
-   return cast.CastGenerics.`1`<T>()
+  fun <T> doSomething(): cast.`CastGenerics$Foo`<T>? {
+   return cast.`CastGenerics$1`<T>()
   }
  }
 }
 
-interface A {
+interface `CastGenerics$A` {
  fun mA()
 }
 
-interface B {
+interface `CastGenerics$B` {
  fun mB()
 }
 
-abstract class BaseImplementor: cast.CastGenerics.A, cast.CastGenerics.B {}
+abstract class `CastGenerics$BaseImplementor`: cast.`CastGenerics$A`, cast.`CastGenerics$B` {}
 
-open class Implementor: cast.CastGenerics.BaseImplementor() {
+open class `CastGenerics$Implementor`: cast.`CastGenerics$BaseImplementor`() {
  open override fun mA() {}
 
  open override fun mB() {}
 }
 
-open class Container<T> {
+open class `CastGenerics$Container`<T> {
  internal open fun get(): T? {
   return null
  }
 }
 
-open class `1Nested`<SS, TT: Enum?, T, E: Number?> {
+open class `CastGenerics$1Nested`<SS, TT: Enum?, T, E: Number?> {
  @JvmField val `this`: cast.CastGenerics<T, E>?
 
  private fun nestedGenericMethod(o: Any?) {
@@ -107,14 +107,14 @@ open class `1Nested`<SS, TT: Enum?, T, E: Number?> {
  }
 }
 
-interface Empty1 {}
+interface `CastGenerics$Empty1` {}
 
-interface Empty2<TT> {}
+interface `CastGenerics$Empty2`<TT> {}
 
-open class `1`<T>: cast.CastGenerics.Foo<T> {
+open class `CastGenerics$1`<T>: cast.`CastGenerics$Foo`<T> {
  internal constructor(): super() {
 
  }
 }
 
-open class Foo<V> {}
+open class `CastGenerics$Foo`<V> {}

@@ -16,13 +16,13 @@ open class Arrays {
  }
 
  open fun testJavaTypeArray() {
-  var objects: Array<array.Arrays.SomeObject?>? = arrayOfNulls<array.Arrays.SomeObject?>(100)
-  objects = arrayOfNulls<array.Arrays.SomeObject?>(0)
-  objects = arrayOf<array.Arrays.SomeObject?>(null, null)
-  var objects2d: Array<Array<array.Arrays.SomeObject?>?>? = arrayOfNulls<Array<array.Arrays.SomeObject?>?>(5)
-  objects2d = arrayOf<Array<array.Arrays.SomeObject?>?>(arrayOf<array.Arrays.SomeObject?>(null, null), null)
-  objects2d = arrayOfNulls<Array<array.Arrays.SomeObject?>?>(20)
-  var someObject: array.Arrays.SomeObject? = objects!![0]
+  var objects: Array<array.`Arrays$SomeObject`?>? = arrayOfNulls<array.`Arrays$SomeObject`?>(100)
+  objects = arrayOfNulls<array.`Arrays$SomeObject`?>(0)
+  objects = arrayOf<array.`Arrays$SomeObject`?>(null, null)
+  var objects2d: Array<Array<array.`Arrays$SomeObject`?>?>? = arrayOfNulls<Array<array.`Arrays$SomeObject`?>?>(5)
+  objects2d = arrayOf<Array<array.`Arrays$SomeObject`?>?>(arrayOf<array.`Arrays$SomeObject`?>(null, null), null)
+  objects2d = arrayOfNulls<Array<array.`Arrays$SomeObject`?>?>(20)
+  var someObject: array.`Arrays$SomeObject`? = objects!![0]
   someObject = objects2d!![0]!![1]
   objects!![0] = null
   objects2d!![0]!![1] = null
@@ -81,20 +81,20 @@ open class Arrays {
  }
 
  open fun testNativeArray() {
-  var nativeObjects: Array<array.Arrays.NativeType?>? = arrayOfNulls<array.Arrays.NativeType?>(100)
-  nativeObjects = arrayOfNulls<array.Arrays.NativeType?>(0)
-  nativeObjects = arrayOf<array.Arrays.NativeType?>(null, null)
-  var nativeObjects2d: Array<Array<array.Arrays.NativeType?>?>? = arrayOfNulls<Array<array.Arrays.NativeType?>?>(5)
-  nativeObjects2d = arrayOf<Array<array.Arrays.NativeType?>?>(arrayOf<array.Arrays.NativeType?>(null, null), null)
-  nativeObjects2d = arrayOfNulls<Array<array.Arrays.NativeType?>?>(20)
-  var nativeObject: array.Arrays.NativeType? = nativeObjects!![0]
+  var nativeObjects: Array<array.`Arrays$NativeType`?>? = arrayOfNulls<array.`Arrays$NativeType`?>(100)
+  nativeObjects = arrayOfNulls<array.`Arrays$NativeType`?>(0)
+  nativeObjects = arrayOf<array.`Arrays$NativeType`?>(null, null)
+  var nativeObjects2d: Array<Array<array.`Arrays$NativeType`?>?>? = arrayOfNulls<Array<array.`Arrays$NativeType`?>?>(5)
+  nativeObjects2d = arrayOf<Array<array.`Arrays$NativeType`?>?>(arrayOf<array.`Arrays$NativeType`?>(null, null), null)
+  nativeObjects2d = arrayOfNulls<Array<array.`Arrays$NativeType`?>?>(20)
+  var nativeObject: array.`Arrays$NativeType`? = nativeObjects!![0]
   nativeObject = nativeObjects2d!![0]!![1]
   nativeObjects!![0] = null
   nativeObjects2d!![0]!![1] = null
  }
 
  open fun testErasureCastsOnArrayAccess() {
-  val container: array.Arrays.ArrayContainer<String?>? = null
+  val container: array.`Arrays$ArrayContainer`<String?>? = null
   val s: String? = container!!.data!![0]
  }
 
@@ -108,12 +108,12 @@ open class Arrays {
  open fun consumesSerializable(serializable: java.io.Serializable?) {}
 }
 
-open class SomeObject {
+open class `Arrays$SomeObject` {
  @JvmField val `this`: array.Arrays?
 }
 
-open class NativeType {}
+open class `Arrays$NativeType` {}
 
-open class ArrayContainer<T> {
+open class `Arrays$ArrayContainer`<T> {
  @JvmField internal var data: Array<T>? = null
 }

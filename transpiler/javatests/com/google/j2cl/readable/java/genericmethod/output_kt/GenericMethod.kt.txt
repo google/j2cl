@@ -42,46 +42,46 @@ open class GenericMethod<T> {
 
  companion object {
   @JvmStatic
-  fun acceptsContent(content: genericmethod.GenericMethod.Content?) {}
+  fun acceptsContent(content: genericmethod.`GenericMethod$Content`?) {}
 
   @JvmStatic
   fun acceptsString(string: String?) {}
 
   @JvmStatic
   fun testErasureCast_wildcard() {
-   val list: java.util.List<genericmethod.GenericMethod.Container<*>?>? = null
-   val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
+   val list: java.util.List<genericmethod.`GenericMethod$Container`<*>?>? = null
+   val content: genericmethod.`GenericMethod$Content`? = list!!.get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
-   val nestedWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<*>?>? = null
-   val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get()!!.get()
+   val nestedWildcardList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<*>?>? = null
+   val nestedContent: genericmethod.`GenericMethod$Content`? = nestedWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
-   val deepWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<*>?>?>? = null
-   val deepContent: genericmethod.GenericMethod.Content? = deepWildcardList!!.get(0)!!.get()!!.get()
+   val deepWildcardList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<*>?>?>? = null
+   val deepContent: genericmethod.`GenericMethod$Content`? = deepWildcardList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
 
   @JvmStatic
-  fun <CT: genericmethod.GenericMethod.Container<C>?, C: genericmethod.GenericMethod.Content?> testErasureCast_typeVariable() {
-   val list: java.util.List<genericmethod.GenericMethod.Container<C>?>? = null
-   val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
+  fun <CT: genericmethod.`GenericMethod$Container`<C>?, C: genericmethod.`GenericMethod$Content`?> testErasureCast_typeVariable() {
+   val list: java.util.List<genericmethod.`GenericMethod$Container`<C>?>? = null
+   val content: genericmethod.`GenericMethod$Content`? = list!!.get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
-   val nestedTypeVariableList: java.util.List<genericmethod.GenericMethod.SuperContainer<CT>?>? = null
-   val nestedContent: genericmethod.GenericMethod.Content? = nestedTypeVariableList!!.get(0)!!.get()!!.get()
+   val nestedTypeVariableList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<CT>?>? = null
+   val nestedContent: genericmethod.`GenericMethod$Content`? = nestedTypeVariableList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
-   val deepTypeVariableList: java.util.List<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<C>?>?>? = null
-   val deepContent: genericmethod.GenericMethod.Content? = deepTypeVariableList!!.get(0)!!.get()!!.get()
+   val deepTypeVariableList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<C>?>?>? = null
+   val deepContent: genericmethod.`GenericMethod$Content`? = deepTypeVariableList!!.get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
  }
 }
 
-open class `1`<T: Error?, T>: genericmethod.GenericMethod<T> {
+open class `GenericMethod$1`<T: Error?, T>: genericmethod.GenericMethod<T> {
  internal constructor(): super() {
 
  }
@@ -93,7 +93,7 @@ open class `1`<T: Error?, T>: genericmethod.GenericMethod<T> {
  open fun <T> fun2(t: T?) {}
 }
 
-open class `1LocalClass`<T, T: Error?, T>: genericmethod.GenericMethod<T>() {
+open class `GenericMethod$1LocalClass`<T, T: Error?, T>: genericmethod.GenericMethod<T>() {
  @JvmField val `this`: genericmethod.GenericMethod<T>?
 
  open fun fun2(t: T?) {}
@@ -101,19 +101,19 @@ open class `1LocalClass`<T, T: Error?, T>: genericmethod.GenericMethod<T>() {
  open fun <T: Number?> fun2(t: T?) {}
 }
 
-open class SuperContainer<C: genericmethod.GenericMethod.Container<*>?> {
+open class `GenericMethod$SuperContainer`<C: genericmethod.`GenericMethod$Container`<*>?> {
  internal open fun get(): C? {
   return null
  }
 }
 
-open class Container<CT: genericmethod.GenericMethod.Content?> {
+open class `GenericMethod$Container`<CT: genericmethod.`GenericMethod$Content`?> {
  internal open fun get(): CT? {
   return null
  }
 }
 
-open class Content {
+open class `GenericMethod$Content` {
  internal open fun getProp(): String? {
   return null
  }

@@ -4,16 +4,16 @@ open class LocalClassWithOuterGenerics<A> {
  companion object {
   @JvmStatic
   fun <T> foo() {
-   val bar: localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Bar`<T>? = localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Bar`<T>()
-   val baz: localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Baz`<Any?, T>? = localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Baz`<Any?, T>()
+   val bar: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Bar`<T>? = localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Bar`<T>()
+   val baz: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<Any?, T>? = localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<Any?, T>()
   }
  }
 }
 
-open class `1Bar`<T> {
- internal open fun baz(other: localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Bar`<T>?) {}
+open class `LocalClassWithOuterGenerics$1Bar`<T> {
+ internal open fun baz(other: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Bar`<T>?) {}
 }
 
-open class `1Baz`<S, T> {
- internal open fun qux(foo: localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Baz`<S, T>?, bar: localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Baz`<T, T>?, baz: localclasswithoutergenerics.LocalClassWithOuterGenerics.`1Baz`<String?, T>?) {}
+open class `LocalClassWithOuterGenerics$1Baz`<S, T> {
+ internal open fun qux(foo: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<S, T>?, bar: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<T, T>?, baz: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<String?, T>?) {}
 }

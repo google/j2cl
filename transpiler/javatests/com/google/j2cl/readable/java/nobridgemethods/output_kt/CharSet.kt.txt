@@ -7,23 +7,23 @@ abstract class Map<K> {
 }
 
 open class TreeMap<K>: nobridgemethods.Map<K>() {
- open override fun getCeilingEntry(key: K?): nobridgemethods.TreeMap.InnerEntry<K>? {
-  return nobridgemethods.TreeMap.InnerEntry<K>()
+ open override fun getCeilingEntry(key: K?): nobridgemethods.`TreeMap$InnerEntry`<K>? {
+  return nobridgemethods.`TreeMap$InnerEntry`<K>()
  }
 }
 
-open class InnerEntry<K>: nobridgemethods.Entry<K> {}
+open class `TreeMap$InnerEntry`<K>: nobridgemethods.Entry<K> {}
 
 open class CharSet {
  companion object {
   @JvmStatic
   fun main(vararg args: String?) {
-   val treeMap: nobridgemethods.TreeMap<String?>? = nobridgemethods.CharSet.`1`()
+   val treeMap: nobridgemethods.TreeMap<String?>? = nobridgemethods.`CharSet$1`()
   }
  }
 }
 
-open class `1`: nobridgemethods.TreeMap<String?> {
+open class `CharSet$1`: nobridgemethods.TreeMap<String?> {
  internal constructor(): super() {
 
  }

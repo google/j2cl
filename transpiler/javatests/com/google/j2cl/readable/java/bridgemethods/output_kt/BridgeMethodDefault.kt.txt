@@ -2,18 +2,18 @@ package bridgemethods
 
 open class BridgeMethodDefault {}
 
-interface I<T> {
+interface `BridgeMethodDefault$I`<T> {
  fun m(t: T?)
 }
 
-interface II: bridgemethods.BridgeMethodDefault.I<String?> {
+interface `BridgeMethodDefault$II`: bridgemethods.`BridgeMethodDefault$I`<String?> {
  override fun m(s: String?) {}
 }
 
-open class A: bridgemethods.BridgeMethodDefault.II {}
+open class `BridgeMethodDefault$A`: bridgemethods.`BridgeMethodDefault$II` {}
 
-interface JJ: bridgemethods.BridgeMethodDefault.I<Any?> {
+interface `BridgeMethodDefault$JJ`: bridgemethods.`BridgeMethodDefault$I`<Any?> {
  override fun m(o: Any?) {}
 }
 
-open class B: bridgemethods.BridgeMethodDefault.JJ {}
+open class `BridgeMethodDefault$B`: bridgemethods.`BridgeMethodDefault$JJ` {}

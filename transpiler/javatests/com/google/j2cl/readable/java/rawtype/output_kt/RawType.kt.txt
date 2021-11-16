@@ -4,10 +4,10 @@ open class RawType {
  @JvmField internal var c: Comparable? = null
 }
 
-interface I<T: rawtype.RawType?> {
+interface `RawType$I`<T: rawtype.RawType?> {
  fun f(t: T?) {}
 }
 
-open class RawSubclass: rawtype.RawType.I {
+open class `RawType$RawSubclass`: rawtype.`RawType$I` {
  open override fun f(t: rawtype.RawType?) {}
 }
