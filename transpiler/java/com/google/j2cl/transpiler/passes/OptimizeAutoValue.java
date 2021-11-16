@@ -48,6 +48,7 @@ import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
@@ -480,17 +481,22 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         type.getFields().stream()
             .map(Field::getDescriptor)
             .filter(f -> !excludedFields.contains(f))
-            .map(f -> createPrototypeFieldAccess(type, f))
+            .map(
+                f ->
+                    FieldAccess.Builder.from(f)
+                        .setQualifier(new ThisReference(type.getTypeDescriptor()))
+                        .build())
             .collect(toImmutableList());
 
     // This special call will make JsCompiler think that all these fields are used. There is a
     // special pass in JsCompiler that later removes this call itself so they won't exist in the
     // final output.
-    type.addLoadTimeStatement(
+    Statement preserveCall =
         MethodCall.Builder.from(preserveFn)
             .setArguments(AstUtils.maybePackageVarargs(preserveFn, fieldReferences))
             .build()
-            .makeStatement(SourcePosition.NONE));
+            .makeStatement(SourcePosition.NONE);
+    type.getConstructors().get(0).getBody().getStatements().add(preserveCall);
   }
 
   private static void addExcludedFieldsDeclaration(
