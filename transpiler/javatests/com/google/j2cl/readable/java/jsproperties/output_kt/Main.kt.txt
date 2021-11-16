@@ -2,7 +2,7 @@ package jsproperties
 
 open class Foo {
  companion object {
-  private var f: Int
+  private var f: Int = 0
 
   @JvmStatic
   fun getA(): Int {
@@ -27,7 +27,7 @@ open class Foo {
 }
 
 open class Bar {
- private var f: Int
+ private var f: Int = 0
 
  open fun getA(): Int {
   return this.f + 1

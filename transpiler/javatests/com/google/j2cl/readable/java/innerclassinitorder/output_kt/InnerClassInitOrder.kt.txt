@@ -252,7 +252,7 @@ open class ESOuter {
 open class ESInner {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.ESOuter?
 
- @JvmField var value: Int
+ @JvmField var value: Int = 0
 
  constructor() {
   this.value = 1
@@ -282,7 +282,7 @@ open class ESWGOuter<T> {
 open class ESWGInner<T> {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.ESWGOuter<T>?
 
- @JvmField var value: Int
+ @JvmField var value: Int = 0
 
  constructor() {
   this.value = 1
@@ -306,7 +306,7 @@ open class ESWGInnerSubclass: innerclassinitorder.InnerClassInitOrder.ESWGOuter.
 abstract class `1AddNumber` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
 
- @JvmField internal var num: Int
+ @JvmField internal var num: Int = 0
 
  constructor(i: Int) {
   this.num = i

@@ -74,7 +74,7 @@ enum class ComparableJsEnum {
 }
 
 enum class IntJsEnum {
- private var value: Int
+ private var value: Int = 0
 
  open fun getValue(): Int {
   return this.value
@@ -94,7 +94,7 @@ enum class IntJsEnum {
 }
 
 enum class StringJsEnum {
- private var value: String?
+ private var value: String? = null
 
  open fun getValue(): String? {
   return this.value
@@ -112,7 +112,7 @@ enum class StringJsEnum {
 }
 
 enum class NonNullableStringJsEnum {
- private var value: String
+ private var value: String = null
 
  open fun getValue(): String? {
   return this.value
@@ -138,7 +138,7 @@ enum class NativeStringEnum {
 }
 
 open class TemplatedField<T> {
- @JvmField internal var value: T?
+ @JvmField internal var value: T? = null
 
  internal constructor(value: T?) {
   this.value = value

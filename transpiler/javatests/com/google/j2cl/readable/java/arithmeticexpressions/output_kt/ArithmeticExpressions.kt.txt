@@ -213,7 +213,7 @@ open class ArithmeticExpressions {
   val n: Int = 1 + ref!!.field!!
  }
 
- @JvmField internal var intField: Long
+ @JvmField internal var intField: Long = 0L
 
  open fun testExtendedOperands() {
   var boxedInteger: Int? = 3
@@ -301,5 +301,5 @@ open class ArithmeticExpressions {
 open class `1Ref`<T> {
  @JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
 
- @JvmField internal var field: T?
+ @JvmField internal var field: T? = null
 }
