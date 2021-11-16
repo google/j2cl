@@ -53,13 +53,15 @@ private val TypeVariable.typeParameterSourceString: String
     name.identifierSourceString.let { nameSourceString ->
       boundTypeDescriptors.singleOrNull().let { boundTypeDescriptorOrNull ->
         if (boundTypeDescriptorOrNull == null) nameSourceString
-        else "$nameSourceString: ${boundTypeDescriptorOrNull.sourceString}"
+        else "$nameSourceString: ${boundTypeDescriptorOrNull.argumentSourceString}"
       }
     }
 
 private val TypeVariable.whereClauseSourceStrings: List<String>
   get() =
     name.identifierSourceString.let { nameSourceString ->
-      boundTypeDescriptors.takeIf { it.size > 1 }?.map { "$nameSourceString: ${it.sourceString}" }
+      boundTypeDescriptors.takeIf { it.size > 1 }?.map {
+        "$nameSourceString: ${it.argumentSourceString}"
+      }
         ?: listOf()
     }

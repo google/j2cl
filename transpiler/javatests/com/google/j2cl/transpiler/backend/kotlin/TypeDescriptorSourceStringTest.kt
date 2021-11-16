@@ -139,7 +139,7 @@ class TypeDescriptorSourceStringTest {
           .build()
           .sourceString
       )
-      .isEqualTo("T")
+      .isEqualTo("T?")
   }
 
   @Test

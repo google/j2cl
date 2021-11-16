@@ -53,7 +53,7 @@ open class Main {
   }
 
   @JvmStatic
-  private fun <T> boxingPassthrough(t: T): T {
+  private fun <T> boxingPassthrough(t: T?): T? {
    return t
   }
  }
@@ -138,13 +138,13 @@ enum class NativeStringEnum {
 }
 
 open class TemplatedField<T> {
- @JvmField internal var value: T
+ @JvmField internal var value: T?
 
- internal constructor(value: T) {
+ internal constructor(value: T?) {
   this.value = value
  }
 
- internal open fun getValue(): T {
+ internal open fun getValue(): T? {
   return this.value
  }
 }

@@ -1,15 +1,15 @@
 package bridgemethods
 
 interface I<T, S> {
- fun `fun`(s: S): T
+ fun `fun`(s: S?): T?
 }
 
 open class A<T, S> {
- open fun `fun`(s: S): T {
+ open fun `fun`(s: S?): T? {
   return null
  }
 
- open fun get(): T {
+ open fun get(): T? {
   return null
  }
 }

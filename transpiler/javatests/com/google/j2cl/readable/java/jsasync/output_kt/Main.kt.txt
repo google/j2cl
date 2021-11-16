@@ -12,7 +12,7 @@ open class Main {
   return this.parametricAsyncMethod(result)
  }
 
- internal open fun <T> parametricAsyncMethod(value: T): jsasync.Main.IThenable<T>? {
+ internal open fun <T> parametricAsyncMethod(value: T?): jsasync.Main.IThenable<T>? {
   return jsasync.Main.Promise.resolve(jsasync.Main.await(jsasync.Main.Promise.resolve(value)))
  }
 
@@ -35,7 +35,7 @@ open class Main {
   }
 
   @JvmStatic
-  private fun <T> await(thenable: jsasync.Main.IThenable<T>?): T {}
+  private fun <T> await(thenable: jsasync.Main.IThenable<T>?): T? {}
  }
 }
 
@@ -103,6 +103,6 @@ interface IThenable<T> {}
 open class Promise<T>: jsasync.Main.IThenable<T> {
  companion object {
   @JvmStatic
-  fun <T> resolve(value: T): jsasync.Main.Promise<T>? {}
+  fun <T> resolve(value: T?): jsasync.Main.Promise<T>? {}
  }
 }

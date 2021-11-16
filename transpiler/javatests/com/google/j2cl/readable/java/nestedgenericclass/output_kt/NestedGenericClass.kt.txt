@@ -1,7 +1,7 @@
 package nestedgenericclass
 
 open class NestedGenericClass<T> {
- open fun <S> `fun`(t: S) {
+ open fun <S> `fun`(t: S?) {
   TODO("expression.qualify needs rendering: NestedGenericClass.this)")
   TODO("expression.qualify needs rendering: NestedGenericClass.this)")
  }
@@ -28,19 +28,19 @@ open class B<T, T, T> {
 
  internal constructor() {}
 
- internal constructor(u: U) {}
+ internal constructor(u: U?) {}
 }
 
 open class C<T> {
  @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
- @JvmField var c: T
+ @JvmField var c: T?
 }
 
 open class D<T> {
  @JvmField val `this`: nestedgenericclass.NestedGenericClass.C<T>?
 
- @JvmField var d: T
+ @JvmField var d: T?
 }
 
 open class `1E`<S, S, T> {
@@ -50,7 +50,7 @@ open class `1E`<S, S, T> {
 open class `1F`<S, T> {
  @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
- @JvmField var f: S
+ @JvmField var f: S?
 }
 
 open class `1G`<T, T, T> {

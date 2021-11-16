@@ -3,7 +3,7 @@ package inferreturn
 open class InferReturn<T> {
  companion object {
   @JvmStatic
-  fun <T> inferGeneric(foo: T): inferreturn.InferReturn<T>? {
+  fun <T> inferGeneric(foo: T?): inferreturn.InferReturn<T>? {
    return inferreturn.InferReturn<T>()
   }
 
@@ -24,12 +24,12 @@ open class InferReturn<T> {
   }
 
   @JvmStatic
-  fun <V> newArrayList(foo: V): java.util.ArrayList<V>? {
+  fun <V> newArrayList(foo: V?): java.util.ArrayList<V>? {
    return java.util.ArrayList<V>()
   }
 
   @JvmStatic
-  fun <V> newArray(foo: V): Array<V>? {
+  fun <V> newArray(foo: V?): Array<V>? {
    return arrayOfNulls<Any?>(0) as Array<V>?
   }
 

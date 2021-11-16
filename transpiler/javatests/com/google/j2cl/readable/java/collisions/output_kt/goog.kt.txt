@@ -37,7 +37,7 @@ open class Other<T> {
   val o: collisions.Other<T>? = null as collisions.Other<T>?
  }
 
- internal open fun <T> m(): T {
+ internal open fun <T> m(): T? {
   val T: Int = 5
   val o: collisions.Other<T>? = null as collisions.Other<T>?
   return null
@@ -45,12 +45,12 @@ open class Other<T> {
 }
 
 open class T<T: Number?> {
- internal open fun m(): T {
+ internal open fun m(): T? {
   return null
  }
 
- internal open fun n(): T {
-  val t: T = collisions.T<T>().m()
+ internal open fun n(): T? {
+  val t: T? = collisions.T<T>().m()
   t!!.byteValue()
   return t
  }

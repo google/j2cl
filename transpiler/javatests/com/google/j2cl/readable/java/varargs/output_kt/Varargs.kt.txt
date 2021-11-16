@@ -26,11 +26,11 @@ open class Varargs {
 
  companion object {
   @JvmStatic
-  fun <T> `fun`(vararg elements: T) {}
+  fun <T> `fun`(vararg elements: T?) {}
 
   @JvmStatic
-  fun <E> bar(a: E, b: E) {
-   varargs.Varargs.`fun`(arrayOf<E>(a, b))
+  fun <E> bar(a: E?, b: E?) {
+   varargs.Varargs.`fun`(arrayOf<E?>(a, b))
   }
  }
 }

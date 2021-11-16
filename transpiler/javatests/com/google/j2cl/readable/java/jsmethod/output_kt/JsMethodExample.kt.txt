@@ -1,7 +1,7 @@
 package jsmethod
 
 open class JsMethodExample {
- open fun <T: java.util.ArrayList<String?>?> testMethod(): T {}
+ open fun <T: java.util.ArrayList<String?>?> testMethod(): T? {}
 
  companion object {
   @JvmStatic
@@ -15,7 +15,7 @@ open class JsMethodExample {
 }
 
 abstract class Base<T> {
- open fun m(t: T) {}
+ open fun m(t: T?) {}
 }
 
 interface I {

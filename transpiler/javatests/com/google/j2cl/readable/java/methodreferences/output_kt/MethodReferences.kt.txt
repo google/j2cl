@@ -101,11 +101,11 @@ open class MethodReferences<T> {
 }
 
 interface Producer<T> {
- fun produce(): T
+ fun produce(): T?
 }
 
 interface Predicate<T> {
- fun apply(parameter: T): Boolean
+ fun apply(parameter: T?): Boolean
 }
 
 interface ArrayProducer<T> {
@@ -121,21 +121,21 @@ open class ObjectCapturingOuter<T> {
 }
 
 interface Function<T, U> {
- fun apply(t: T): U
+ fun apply(t: T?): U?
 }
 
 interface BiFunction<T, U, V> {
- fun apply(t: T, u: U): V
+ fun apply(t: T?, u: U?): V?
 }
 
 interface JsProducer<T> {
- fun produce(): T
+ fun produce(): T?
 }
 
 interface JsFunctionInterface<T, U> {
- fun apply(t: T): U
+ fun apply(t: T?): U?
 }
 
 interface JsBiFunction<T, U, V> {
- fun apply(t: T, u: U): V
+ fun apply(t: T?, u: U?): V?
 }

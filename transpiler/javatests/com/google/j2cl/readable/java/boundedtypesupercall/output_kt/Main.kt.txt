@@ -3,13 +3,13 @@ package boundedtypesupercall
 open class Main {}
 
 abstract class Foo<T> {
- constructor(foo: T) {}
+ constructor(foo: T?) {}
 
  abstract open fun foo()
 }
 
 open class Bar<T: Comparable?> {
- open fun getSomething(): T {
+ open fun getSomething(): T? {
   return null
  }
 
@@ -19,7 +19,7 @@ open class Bar<T: Comparable?> {
 }
 
 open class `1`<T: Comparable?>: boundedtypesupercall.Main.Foo<T> {
- internal constructor(`$_0`: T): super(`$_0`) {
+ internal constructor(`$_0`: T?): super(`$_0`) {
 
  }
 

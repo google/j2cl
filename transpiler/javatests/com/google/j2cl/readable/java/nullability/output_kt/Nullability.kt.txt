@@ -41,9 +41,9 @@ open class Nullability {
 }
 
 open class Foo<T> {
- internal open fun bar(t: T) {}
+ internal open fun bar(t: T?) {}
 
- internal open fun baz(): T {
+ internal open fun baz(): T? {
   return null
  }
 
@@ -71,7 +71,7 @@ open class NullableStringComparator: java.util.Comparator<String?> {
 }
 
 interface NullableTemplatedReturn<T> {
- fun foo(): T
+ fun foo(): T?
 }
 
 open class NullableTemplatedReturnOverride: nullability.Nullability.NullableTemplatedReturn<String?> {

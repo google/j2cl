@@ -28,19 +28,19 @@ open class Main {
 }
 
 open class A<T> {
- open fun `fun`(t: T): T {
+ open fun `fun`(t: T?): T? {
   return t
  }
 
- open fun bar(t: T) {}
+ open fun bar(t: T?) {}
 }
 
 interface I<T: Number?> {
- fun `fun`(t: T): T
+ fun `fun`(t: T?): T?
 }
 
 interface J<T> {
- fun bar(t: T)
+ fun bar(t: T?)
 }
 
 open class B: bridgejsmethod.Main.A<String?>() {
@@ -68,21 +68,21 @@ open class E: bridgejsmethod.Main.J<String?>, bridgejsmethod.Main.B() {}
 open class F: bridgejsmethod.Main.I<Int?>, bridgejsmethod.Main.A<Int?>() {}
 
 interface G<V> {
- fun enclose(value: V): V
+ fun enclose(value: V?): V?
 }
 
 open class H<V>: bridgejsmethod.Main.G<V> {
- open fun enclose(value: V): V {
+ open fun enclose(value: V?): V? {
   return null
  }
 }
 
 open class K<K1, K2> {
- internal open fun `fun`(k1: K1, k2: K2) {}
+ internal open fun `fun`(k1: K1?, k2: K2?) {}
 }
 
 open class L<L1>: bridgejsmethod.Main.K<String?, L1>() {
- internal open fun `fun`(string: String?, l1: L1) {}
+ internal open fun `fun`(string: String?, l1: L1?) {}
 }
 
 interface M {
@@ -132,17 +132,17 @@ open class S: bridgejsmethod.Main.R() {
 open class GrandParent<T> {
  @JvmField val `this`: bridgejsmethod.Main?
 
- open fun jsMethod(t: T) {}
+ open fun jsMethod(t: T?) {}
 
- open fun method(t: T) {}
+ open fun method(t: T?) {}
 }
 
 open class Parent<T: bridgejsmethod.Main.Parent<T>?>: bridgejsmethod.Main.GrandParent<T>() {
  @JvmField val `this`: bridgejsmethod.Main?
 
- open fun jsMethod(t: T) {}
+ open fun jsMethod(t: T?) {}
 
- open fun method(t: T) {}
+ open fun method(t: T?) {}
 }
 
 open class Child: bridgejsmethod.Main.Parent<bridgejsmethod.Main.Child?>() {

@@ -12,17 +12,17 @@ open class MultipleAbstractParents {
 }
 
 interface List<T> {
- fun getFoo(t: T): String?
+ fun getFoo(t: T?): String?
 }
 
 interface Collection<T> {
- fun getFoo(t: T): String?
+ fun getFoo(t: T?): String?
 }
 
 abstract class AbstractListCollection<T>: multipleabstractparents.MultipleAbstractParents.List<T>, multipleabstractparents.MultipleAbstractParents.Collection<T> {}
 
 abstract class AbstractCollection<T> {
- open fun getFoo(t: T): String? {
+ open fun getFoo(t: T?): String? {
   return "AbstractCollection"
  }
 }

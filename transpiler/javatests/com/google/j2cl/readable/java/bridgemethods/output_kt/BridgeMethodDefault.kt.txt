@@ -3,7 +3,7 @@ package bridgemethods
 open class BridgeMethodDefault {}
 
 interface I<T> {
- fun m(t: T)
+ fun m(t: T?)
 }
 
 interface II: bridgemethods.BridgeMethodDefault.I<String?> {

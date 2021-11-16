@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
@@ -25,40 +26,47 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 
 internal val TypeDescriptor.sourceString: String
-  get() =
-    when (this) {
-      is ArrayTypeDescriptor -> arraySourceString
-      is DeclaredTypeDescriptor -> declaredSourceString
-      is PrimitiveTypeDescriptor -> primitiveSourceString
-      is TypeVariable -> variableSourceString
-      else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
-    }
+  get() = sourceString(isArgument = false)
+
+internal val TypeDescriptor.argumentSourceString: String
+  get() = sourceString(isArgument = true)
+
+// TODO(b/206611912): Remove the argument once TypeVariables can have different nullabilities.
+private fun TypeDescriptor.sourceString(isArgument: Boolean): String =
+  when (this) {
+    is ArrayTypeDescriptor -> sourceString
+    is DeclaredTypeDescriptor -> sourceString
+    is PrimitiveTypeDescriptor -> sourceString
+    is TypeVariable -> sourceString(isArgument)
+    is IntersectionTypeDescriptor -> sourceString
+    else -> throw InternalCompilerError("Unexpected ${this::class.java.simpleName}")
+  }
 
 private val TypeDescriptor.nullableSuffix
   get() = if (isNullable) "?" else ""
 
-private val ArrayTypeDescriptor.arraySourceString: String
+private val ArrayTypeDescriptor.sourceString: String
   get() =
     componentTypeDescriptor!!.let { typeDescriptor ->
       if (typeDescriptor is PrimitiveTypeDescriptor) {
         "${typeDescriptor.sourceString}Array$nullableSuffix"
       } else {
-        "Array<${typeDescriptor.sourceString}>$nullableSuffix"
+        "Array<${typeDescriptor.argumentSourceString}>$nullableSuffix"
       }
     }
 
-private val DeclaredTypeDescriptor.declaredSourceString: String
+private val DeclaredTypeDescriptor.sourceString: String
   get() = "${typeDeclaration.sourceString}$argumentsSourceString$nullableSuffix"
 
 private val DeclaredTypeDescriptor.argumentsSourceString: String
   get() =
     typeArgumentDescriptors
       .takeIf { it.isNotEmpty() }
-      ?.joinToString(", ") { it.sourceString }
+      ?.joinToString(", ") { it.argumentSourceString }
       ?.let { "<$it>" }
       ?: ""
 
-private val PrimitiveTypeDescriptor.primitiveSourceString
+private val PrimitiveTypeDescriptor.sourceString
   get() =
     when (this) {
       PrimitiveTypes.VOID -> "Unit"
@@ -75,8 +83,19 @@ private val PrimitiveTypeDescriptor.primitiveSourceString
 
 // TODO(b/203676284): Resolve unique name through Environment. Refactor all methods in this file
 // to extension functions on Environment.
-private val TypeVariable.variableSourceString: String
-  get() = if (isWildcardOrCapture) "*" else name.identifierSourceString
+private fun TypeVariable.sourceString(isArgument: Boolean): String =
+  if (isWildcardOrCapture) "*"
+  else name.identifierSourceString.run { if (isArgument) this else plus(nullableSuffix) }
+
+private val IntersectionTypeDescriptor.sourceString: String
+  get() {
+    // Render only the first type from the intersection and comment out others, as they are not
+    // supported in Kotlin.
+    // TODO(b/205367162): Support intersection types.
+    val first = intersectionTypeDescriptors.first().sourceString
+    val remaining = intersectionTypeDescriptors.drop(1).joinToString(" & ") { it.sourceString }
+    return "$first /* & $remaining */"
+  }
 
 internal val TypeDeclaration.sourceString
   get() = mappedSourceStringOrNull ?: declaredSourceString

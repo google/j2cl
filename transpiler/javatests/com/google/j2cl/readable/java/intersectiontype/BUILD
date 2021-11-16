@@ -11,5 +11,5 @@ package(
 readable_example(
     srcs = glob(["*.java"]),
     # TODO(b/202428351): Support Generics in J2KT.
-    generate_kt_readables = False,
+    build_kt_readables = False,
 )

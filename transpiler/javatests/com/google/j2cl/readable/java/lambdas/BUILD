@@ -10,7 +10,7 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/205162246): AutoValue Unboxing breaks J2KT
-    generate_kt_readables = False,
+    # TODO(b/204594816): Render explicit labels in return from lambdas.
+    build_kt_readables = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

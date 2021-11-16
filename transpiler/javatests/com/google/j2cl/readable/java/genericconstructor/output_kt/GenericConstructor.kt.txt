@@ -1,9 +1,9 @@
 package genericconstructor
 
 open class GenericConstructor<T> {
- constructor(s: S, t: T) {}
+ constructor(s: S?, t: T?) {}
 
- constructor(t: T) {}
+ constructor(t: T?) {}
 
  open fun test() {
   genericconstructor.GenericConstructor<Error?>(Exception(), Error())

@@ -7,7 +7,7 @@ interface I<I1> {
 }
 
 abstract class B<B1, B2>: bridgemethods.BridgeMethodShadowedSignature.I<B1> {
- open fun get(consumer: B2): String? {
+ open fun get(consumer: B2?): String? {
   return "B get B2"
  }
 }

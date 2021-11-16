@@ -1,33 +1,33 @@
 package cast
 
 open class CastGenerics<T, E: Number?> {
- @JvmField internal var field: T
+ @JvmField internal var field: T?
 
- internal open fun method(): T {
+ internal open fun method(): T? {
   return null
  }
 
  open fun testCastToTypeVariable() {
   val o: Any? = Int(1)
-  val e: E = o as E
-  val t: T = o as T
+  val e: E? = o as E?
+  val t: T? = o as T?
   val es: Array<E>? = o as Array<E>?
   val ts: Array<T>? = o as Array<T>?
  }
 
  open fun <S, V: Enum<V>?> testCastToMethodTypeVariable() {
   val o: Any? = Int(1)
-  val s: S = o as S
+  val s: S? = o as S?
   var c: Any? = o as cast.CastGenerics<S, Number?>?
   c = o as Array<S>?
-  c = o as V
+  c = o as V?
  }
 
  open fun <TT: Enum?> outerGenericMethod() {}
 
- open fun <EE> method(o: Any?): EE where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
+ open fun <EE> method(o: Any?): EE? where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
   if (o is cast.CastGenerics.Empty1) {
-   return o as EE
+   return o as EE?
   }
   return null
  }
@@ -94,7 +94,7 @@ open class Implementor: cast.CastGenerics.BaseImplementor() {
 }
 
 open class Container<T> {
- internal open fun get(): T {
+ internal open fun get(): T? {
   return null
  }
 }
@@ -103,7 +103,7 @@ open class `1Nested`<SS, TT: Enum?, T, E: Number?> {
  @JvmField val `this`: cast.CastGenerics<T, E>?
 
  private fun nestedGenericMethod(o: Any?) {
-  val t: TT = o as TT
+  val t: TT? = o as TT?
  }
 }
 

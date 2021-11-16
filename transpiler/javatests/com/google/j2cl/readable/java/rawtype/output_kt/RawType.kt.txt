@@ -5,7 +5,7 @@ open class RawType {
 }
 
 interface I<T: rawtype.RawType?> {
- fun f(t: T) {}
+ fun f(t: T?) {}
 }
 
 open class RawSubclass: rawtype.RawType.I {

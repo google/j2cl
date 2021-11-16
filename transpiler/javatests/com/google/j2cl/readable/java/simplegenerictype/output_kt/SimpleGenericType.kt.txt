@@ -1,11 +1,11 @@
 package simplegenerictype
 
 open class SimpleGenericType<T, S> {
- @JvmField var first: T
+ @JvmField var first: T?
 
- @JvmField var second: S
+ @JvmField var second: S?
 
- constructor(t: T, s: S) {
+ constructor(t: T?, s: S?) {
   this.first = t
   this.second = s
  }

@@ -37,7 +37,7 @@ open class DefaultNotNullable {
 }
 
 interface ParameterizedInterface<T> {
- fun add(t: T)
+ fun add(t: T?)
 }
 
 open class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<String> {

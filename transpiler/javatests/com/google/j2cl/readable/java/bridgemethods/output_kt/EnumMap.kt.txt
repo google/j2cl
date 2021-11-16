@@ -1,17 +1,17 @@
 package bridgemethods
 
 interface Map<K, V> {
- fun put(key: K, value: V): V
+ fun put(key: K?, value: V?): V?
 }
 
 open class AbstractMap<K, V>: bridgemethods.Map<K, V> {
- open fun put(key: K, value: V): V {
+ open fun put(key: K?, value: V?): V? {
   return value
  }
 }
 
 open class EnumMap<K: Enum<K>?, V>: bridgemethods.AbstractMap<K, V>() {
- open fun put(key: K, value: V): V {
+ open fun put(key: K?, value: V?): V? {
   return value
  }
 }

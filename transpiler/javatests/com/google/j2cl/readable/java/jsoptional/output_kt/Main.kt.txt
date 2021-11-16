@@ -27,11 +27,11 @@ class AFunction: jsoptional.Main.Function {
 }
 
 interface I<T> {
- fun m(t: T, o: Any?)
+ fun m(t: T?, o: Any?)
 }
 
 open class TemplatedSubtype<T: String?>: jsoptional.Main.I<T> {
- open fun m(t: T, o: Any?) {}
+ open fun m(t: T?, o: Any?) {}
 }
 
 open class SpecializedSubtype: jsoptional.Main.I<String?> {

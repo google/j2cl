@@ -1,7 +1,7 @@
 package overwrittentypevariables
 
 interface MyFunction<F, T> {
- fun apply(input: F): T
+ fun apply(input: F?): T?
 }
 
 interface HashFunction<T>: overwrittentypevariables.MyFunction<T, String?> {}
@@ -25,7 +25,7 @@ open class `1`<T>: overwrittentypevariables.HashFunction<T> {
 
  }
 
- open fun apply(input: T): String? {
+ open fun apply(input: T?): String? {
   return ""
  }
 }
@@ -35,7 +35,7 @@ open class `2`<T: Enum<T>?>: overwrittentypevariables.HashFunction<T> {
 
  }
 
- open fun apply(input: T): String? {
+ open fun apply(input: T?): String? {
   return "" + input!!.ordinal()
  }
 }
