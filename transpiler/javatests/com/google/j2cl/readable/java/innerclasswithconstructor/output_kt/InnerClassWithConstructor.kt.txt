@@ -10,10 +10,10 @@ open class InnerClass {
  @JvmField var b: Int
 
  constructor(b: Int) {
-  this.b = this.`this`.a + b
+  this.b = this.`this`!!.a + b
  }
 
- constructor(): this(this.`this`.a) {
+ constructor(): this(this.`this`!!.a) {
 
  }
 }

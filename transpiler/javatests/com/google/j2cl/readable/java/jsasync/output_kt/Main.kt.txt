@@ -8,7 +8,7 @@ open class Main {
  }
 
  internal open fun asyncMethod(): jsasync.Main.IThenable<Int?>? {
-  val result: Int = jsasync.Main.await(jsasync.Main.Promise.resolve(7))
+  val result: Int = jsasync.Main.await(jsasync.Main.Promise.resolve(7))!!
   return this.parametricAsyncMethod(result)
  }
 
@@ -47,7 +47,7 @@ open class `1`: jsasync.Main.BaseInterface {
  @JvmField val `this`: jsasync.Main?
 
  open fun asyncCall(): jsasync.Main.IThenable<Int?>? {
-  return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`.x))
+  return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`!!.x))
  }
 }
 
@@ -72,7 +72,7 @@ open class `3`: jsasync.Main.JsFunctionInterface {
 
  open fun doSomething(): jsasync.Main.IThenable<Int?>? {
   val tmp: jsasync.Main.JsFunctionInterface? = this
-  return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`.x))
+  return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`!!.x))
  }
 }
 

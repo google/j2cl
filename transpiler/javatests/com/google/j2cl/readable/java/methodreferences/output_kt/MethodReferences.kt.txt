@@ -27,13 +27,13 @@ open class MethodReferences<T> {
    }
   }
   val biFunction: methodreferences.MethodReferences.BiFunction<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
-   return arg0.sameAs(arg1)
+   return arg0!!.sameAs(arg1)
   }
   val functionWithParameters: methodreferences.MethodReferences.Function<Number?, Boolean?>? = { arg0: Number? ->
    return this.sameAs(arg0)
   }
   val objectPredicate: methodreferences.MethodReferences.Predicate<methodreferences.MethodReferences<T>?>? = { arg0: methodreferences.MethodReferences<T>? ->
-   return arg0.isA()
+   return arg0!!.isA()!!
   }
   val objectCapturingOuterProducer: methodreferences.MethodReferences.Producer<methodreferences.MethodReferences.ObjectCapturingOuter<T>?>? = {
    return TODO("expression.qualify needs rendering: MethodReferences.this)")
@@ -48,10 +48,10 @@ open class MethodReferences<T> {
    }
   }
   val function: methodreferences.MethodReferences.Function<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
-   return arg0.self()
+   return arg0!!.self()
   }
   val arrayFactory: methodreferences.MethodReferences.Function<Int?, Array<Any?>?>? = { arg0: Int? ->
-   return arrayOfNulls<Any?>(arg0)
+   return arrayOfNulls<Any?>(arg0!!)
   }
   val superToStringProducer: methodreferences.MethodReferences.Producer<String?>? = {
    return this.toString()
@@ -69,16 +69,16 @@ open class MethodReferences<T> {
    }
   }
   val jsfunction: methodreferences.MethodReferences.JsFunctionInterface<methodreferences.MethodReferences<T>?, Any?>? = { arg0: methodreferences.MethodReferences<T>? ->
-   return arg0.self()
+   return arg0!!.self()
   }
   val jsarrayFactory: methodreferences.MethodReferences.JsFunctionInterface<Int?, Array<Any?>?>? = { arg0: Int? ->
-   return arrayOfNulls<Any?>(arg0)
+   return arrayOfNulls<Any?>(arg0!!)
   }
   val jsSuperToStringProducer: methodreferences.MethodReferences.JsProducer<String?>? = {
    return this.toString()
   }
   val jsbiFunction: methodreferences.MethodReferences.JsBiFunction<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
-   return arg0.sameAs(arg1)
+   return arg0!!.sameAs(arg1)
   }
   val jsFunctionWithParameters: methodreferences.MethodReferences.JsFunctionInterface<Number?, Boolean?>? = { arg0: Number? ->
    return this.sameAs(arg0)
@@ -94,7 +94,7 @@ open class MethodReferences<T> {
   @JvmField internal var staticStringProducer: methodreferences.MethodReferences.Producer<String?>? = run {
    val `$$q`: Any? = methodreferences.MethodReferences.m()
    {
-    return `$$q`.toString()
+    return `$$q`!!.toString()
    }
   }
  }

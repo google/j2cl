@@ -17,7 +17,7 @@ open class Bar {
 
  internal open fun baz(): Int {
   val foo: annotation.Main.Foo? = null
-  foo.bar()
+  foo!!.bar()
   return annotation.Main.Foo.CONSTANT
  }
 }

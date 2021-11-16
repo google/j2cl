@@ -74,11 +74,11 @@ open class CastPrimitives {
 
  open fun testUnboxAndWiden() {
   val boxedByte: Byte? = Byte.valueOf(0.toByte())
-  val s: Short = boxedByte.toShort()
-  val i: Int = boxedByte.toInt()
-  val l: Long = boxedByte.toLong()
-  val f: Float = boxedByte.toFloat()
-  val d: Double = boxedByte.toDouble()
+  val s: Short = boxedByte!!.toShort()
+  val i: Int = boxedByte!!.toInt()
+  val l: Long = boxedByte!!.toLong()
+  val f: Float = boxedByte!!.toFloat()
+  val d: Double = boxedByte!!.toDouble()
  }
 
  open fun testImplicitArgumentCasts() {

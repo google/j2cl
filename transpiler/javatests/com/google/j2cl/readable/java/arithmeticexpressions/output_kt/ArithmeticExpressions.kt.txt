@@ -69,7 +69,7 @@ open class ArithmeticExpressions {
   val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: Char = 'y'
   val z: Long? = 121L
-  k = y.code.toLong() == z
+  k = y.code.toLong() == z!!
  }
 
  @JvmField var bar: Long = run {
@@ -80,19 +80,19 @@ open class ArithmeticExpressions {
 
  open fun testCompoundArray() {
   val ints: IntArray? = null
-  ints[0] = ints[0] + 1
-  ints[0] = ints[0] - 1
-  ints[0] = ints[0] * 1
-  ints[0] = ints[0] / 1
-  ints[0] = ints[0] & 1
-  ints[0] = ints[0] ^ 1
-  ints[0] = ints[0] | 1
-  ints[0] = ints[0] % 1
-  ints[0] = ints[0] << 1
-  ints[0] = ints[0] >> 1
-  ints[0] = ints[0] >>> 1
-  ints[0] = ints[0] + 1
-  ints[0] = ints[0] + 1
+  ints!![0] = ints!![0] + 1
+  ints!![0] = ints!![0] - 1
+  ints!![0] = ints!![0] * 1
+  ints!![0] = ints!![0] / 1
+  ints!![0] = ints!![0] & 1
+  ints!![0] = ints!![0] ^ 1
+  ints!![0] = ints!![0] | 1
+  ints!![0] = ints!![0] % 1
+  ints!![0] = ints!![0] << 1
+  ints!![0] = ints!![0] >> 1
+  ints!![0] = ints!![0] >>> 1
+  ints!![0] = ints!![0] + 1
+  ints!![0] = ints!![0] + 1
   var i: Int = 0
   run {
    val `$array`: IntArray? = ints
@@ -104,8 +104,8 @@ open class ArithmeticExpressions {
    run {
     val `$array`: IntArray? = `$array`
     val `$index`: Int = `$index`
-    val `$value`: Int = `$array`[`$index`] + 1
-    `$array`[`$index`] = `$value`
+    val `$value`: Int = `$array`!![`$index`] + 1
+    `$array`!![`$index`] = `$value`
     `$value`
    }
   }
@@ -118,8 +118,8 @@ open class ArithmeticExpressions {
    run {
     val `$array`: IntArray? = `$array`
     val `$index`: Int = `$index`
-    val `$value`: Int = `$array`[`$index`] + 1
-    `$array`[`$index`] = `$value`
+    val `$value`: Int = `$array`!![`$index`] + 1
+    `$array`!![`$index`] = `$value`
     `$value`
    }
   }
@@ -133,36 +133,36 @@ open class ArithmeticExpressions {
    run {
     val `$array`: IntArray? = `$array`
     val `$index`: Int = `$index`
-    val `$value`: Int = `$array`[`$index`] / 1
-    `$array`[`$index`] = `$value`
+    val `$value`: Int = `$array`!![`$index`] / 1
+    `$array`!![`$index`] = `$value`
     `$value`
    }
   }
   val longs: LongArray? = null
-  longs[0] = longs[0] + 1L
-  longs[0] = longs[0] - 1L
-  longs[0] = longs[0] - 1L
+  longs!![0] = longs!![0] + 1L
+  longs!![0] = longs!![0] - 1L
+  longs!![0] = longs!![0] - 1L
   run {
    val `$array`: LongArray? = arithmeticexpressions.ArithmeticExpressions.getLongArray()
    val `$index`: Int = 0
    run {
     val `$array`: LongArray? = `$array`
     val `$index`: Int = `$index`
-    val `$value`: Long = `$array`[`$index`] + 1L
-    `$array`[`$index`] = `$value`
+    val `$value`: Long = `$array`!![`$index`] + 1L
+    `$array`!![`$index`] = `$value`
     `$value`
    }
   }
   val booleans: BooleanArray? = null
-  booleans[0] = booleans[0] | true
+  booleans!![0] = booleans!![0] | true
   val strings: Array<String?>? = null
-  strings[0] = strings[0] + null
+  strings!![0] = strings!![0] + null
   val shorts: ShortArray? = null
   val b: Boolean = run {
    val `$array`: ShortArray? = shorts
    val `$index`: Int = 0
-   val `$value`: Short = (shorts[0].toInt() + 1).toShort()
-   `$array`[`$index`] = `$value`
+   val `$value`: Short = (shorts!![0].toInt() + 1).toShort()
+   `$array`!![`$index`] = `$value`
    `$value`
   }.toInt() == 10
  }
@@ -170,47 +170,47 @@ open class ArithmeticExpressions {
  open fun testCompoundBoxedTypes() {
   var c: Int? = 1000
   var d: Int? = 10000
-  d = d + c
+  d = d!! + c!!
   var i: Int = 43
-  d = d + i
-  d = d << i
-  i = i + c
+  d = d!! + i
+  d = d!! << i
+  i = i + c!!
   var e: Int? = run {
-   c = c + 1
+   c = c!! + 1
    c
   }
   e = run {
-   c = c + 1
+   c = c!! + 1
    c
   }
   var e2: Double? = 100.0
-  e2 = e2 + 1.0
+  e2 = e2!! + 1.0
   var f: Int? = run {
    val `$value`: Int? = c
-   c = c + 1
+   c = c!! + 1
    `$value`
   }
   f = run {
    val `$value`: Int? = c
-   c = c + 1
+   c = c!! + 1
    `$value`
   }
   var b: Byte? = 0
-  b = (b + 1).toByte()
+  b = (b!! + 1).toByte()
   var ch: java.lang.Character? = 'c'
-  ch = (ch + 1).toChar()
+  ch = (ch!! + 1).toChar()
   run {
-   f = f + 1
+   f = f!! + 1
    f
-  }.intValue()
+  }!!.intValue()
   run {
    val `$value`: Int? = f
-   f = f - 1
+   f = f!! - 1
    `$value`
-  }.intValue()
+  }!!.intValue()
   val ref: arithmeticexpressions.ArithmeticExpressions.`1Ref`<Int?>? = null
-  ref.field = ref.field + 1
-  val n: Int = 1 + ref.field
+  ref!!.field = ref!!.field!! + 1
+  val n: Int = 1 + ref!!.field!!
  }
 
  @JvmField internal var intField: Long
@@ -220,8 +220,8 @@ open class ArithmeticExpressions {
   var i: Int
   var l: Long
   var d: Double
-  l = (2 - boxedInteger).toLong() - 2L
-  l = (2 | boxedInteger).toLong() | 2L
+  l = (2 - boxedInteger!!).toLong() - 2L
+  l = (2 | boxedInteger!!).toLong() | 2L
   l = 1000000L * l * 60L * 60L * 24L
   l = (24 * 60 * 60).toLong() * l * 1000000L
   d = run {
@@ -237,8 +237,8 @@ open class ArithmeticExpressions {
     i
    }
    boxedInteger
-  }
-  l = (i + boxedInteger).toLong() + l + 20L
+  }!!
+  l = (i + boxedInteger!!).toLong() + l + 20L
   d = (20L + l).toDouble() + d
  }
 
@@ -273,8 +273,8 @@ open class ArithmeticExpressions {
     val `$qualifier`: arithmeticexpressions.ArithmeticExpressions? = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect()
     run {
      val `$qualifier`: arithmeticexpressions.ArithmeticExpressions? = `$qualifier`
-     val `$value`: Long = `$qualifier`.intField + 5L
-     `$qualifier`.intField = `$value`
+     val `$value`: Long = `$qualifier`!!.intField + 5L
+     `$qualifier`!!.intField = `$value`
      `$value`
     }
    }

@@ -2,13 +2,13 @@ package genericanddefaultmethods
 
 interface InterfaceWithDefault {
  fun foo(value: String?) {
-  java.lang.System.out.println("in InterfaceWithDefault")
+  java.lang.System.out!!.println("in InterfaceWithDefault")
  }
 }
 
 open class GenericClass<T> {
  open fun foo(value: T) {
-  java.lang.System.out.println("in GenericClass")
+  java.lang.System.out!!.println("in GenericClass")
  }
 }
 

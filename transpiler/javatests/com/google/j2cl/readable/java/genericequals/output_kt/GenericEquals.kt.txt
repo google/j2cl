@@ -11,7 +11,7 @@ open class GenericEquals<T> {
  }
 
  open fun foo(other: genericequals.GenericEquals<*>?): Any? {
-  return other.value2.value
+  return other!!.value2!!.value
  }
 
  open fun equals(obj: Any?): Boolean {
@@ -22,6 +22,6 @@ open class GenericEquals<T> {
    return false
   }
   val other: genericequals.GenericEquals<*>? = obj as genericequals.GenericEquals<*>?
-  return this.value.equals(other.value)
+  return this.value!!.equals(other!!.value)
  }
 }

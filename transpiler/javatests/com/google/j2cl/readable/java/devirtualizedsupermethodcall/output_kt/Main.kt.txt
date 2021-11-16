@@ -27,12 +27,12 @@ open class FooCallsSuperObjectMethod {
 open class Main {
  open fun main() {
   val fooCallsSuperObjectMethods: devirtualizedsupermethodcall.FooCallsSuperObjectMethod? = devirtualizedsupermethodcall.FooCallsSuperObjectMethod()
-  fooCallsSuperObjectMethods.hashCode()
+  fooCallsSuperObjectMethods!!.hashCode()
   val sn: devirtualizedsupermethodcall.SubNumber? = devirtualizedsupermethodcall.SubNumber()
-  sn.byteValue()
-  sn.doubleValue()
-  sn.floatValue()
-  sn.intValue()
-  sn.shortValue()
+  sn!!.byteValue()
+  sn!!.doubleValue()
+  sn!!.floatValue()
+  sn!!.intValue()
+  sn!!.shortValue()
  }
 }

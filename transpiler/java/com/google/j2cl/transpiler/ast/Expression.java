@@ -258,6 +258,7 @@ public abstract class Expression extends Node implements Cloneable<Expression> {
    */
   public enum Precedence {
     HIGHEST(21, Associativity.NONE),
+    NOT_NULL_ASSERTION(20, Expression.Associativity.LEFT),
     MEMBER_ACCESS(20, Expression.Associativity.LEFT),
     FUNCTION(19, Expression.Associativity.RIGHT),
     POSTFIX(18, Expression.Associativity.NONE),

@@ -16,20 +16,32 @@
 package com.google.j2cl.transpiler.ast;
 
 import com.google.j2cl.common.InternalCompilerError;
+import com.google.j2cl.transpiler.ast.Expression.Precedence;
 
 /**
  * Class for postfix operator.
  */
 public enum PostfixOperator implements Operator {
-  INCREMENT("++", BinaryOperator.PLUS),
-  DECREMENT("--", BinaryOperator.MINUS);
+  INCREMENT(Precedence.POSTFIX, "++", BinaryOperator.PLUS),
+  DECREMENT(Precedence.POSTFIX, "--", BinaryOperator.MINUS),
+  NOT_NULL_ASSERTION(Precedence.NOT_NULL_ASSERTION, "!!");
 
+  private final Precedence precedence;
   private final String symbol;
   private final BinaryOperator underlyingBinaryOperator;
 
-  PostfixOperator(String symbol, BinaryOperator underlyingBinaryOperator) {
+  PostfixOperator(Precedence precedence, String symbol, BinaryOperator underlyingBinaryOperator) {
+    this.precedence = precedence;
     this.symbol = symbol;
     this.underlyingBinaryOperator = underlyingBinaryOperator;
+  }
+
+  PostfixOperator(Precedence precedence, String symbol) {
+    this(precedence, symbol, null);
+  }
+
+  public Precedence getPrecedence() {
+    return precedence;
   }
 
   @Override
@@ -39,7 +51,7 @@ public enum PostfixOperator implements Operator {
 
   @Override
   public boolean hasSideEffect() {
-    return true;
+    return underlyingBinaryOperator != null;
   }
 
   @Override
@@ -59,7 +71,8 @@ public enum PostfixOperator implements Operator {
         return PrefixOperator.DECREMENT;
       case INCREMENT:
         return PrefixOperator.INCREMENT;
+      default:
+        throw new InternalCompilerError("Unexpected prefix operator: %s.", this);
     }
-    throw new InternalCompilerError("Unexpected prefix operator: %s.", this);
   }
 }

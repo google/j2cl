@@ -15,11 +15,11 @@ enum class Enum2: Enum<enums.Enum2?> {
   this.foo = foo
  }
 
- private constructor(foo: Enum?): this(foo.ordinal()) {
+ private constructor(foo: Enum?): this(foo!!.ordinal()) {
 
  }
 
- private constructor(vararg somePars: Any?): this(somePars.size) {
+ private constructor(vararg somePars: Any?): this(somePars!!.size) {
 
  }
 
@@ -52,7 +52,7 @@ enum class Enum3: Enum<enums.Enum3?> {
 
  companion object {
   @JvmField val VALUE1: enums.Enum3 = enums.Enum3({ v: Int? ->
-   return 1 + v
+   return 1 + v!!
   })
  }
 }

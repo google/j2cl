@@ -38,29 +38,29 @@ open class CastGenerics<T, E: Number?> {
    var str: String? = cast.CastGenerics<String?, Number?>().field
    str = cast.CastGenerics<String?, Number?>().method()
    val containerT: cast.CastGenerics.Container<T>? = null
-   containerT.get().mA()
-   containerT.get().mB()
+   containerT!!.get()!!.mA()
+   containerT!!.get()!!.mB()
    val containerU: cast.CastGenerics.Container<U>? = null
-   containerU.get().mA()
-   containerU.get().mB()
+   containerU!!.get()!!.mA()
+   containerU!!.get()!!.mB()
    val containerArrT: cast.CastGenerics.Container<Array<T>?>? = null
-   val arrT: Array<T>? = containerArrT.get()
-   arrT[0].mA()
-   arrT[0].mB()
-   var arrA: Array<cast.CastGenerics.A?>? = containerArrT.get()
-   var arrB: Array<cast.CastGenerics.B?>? = containerArrT.get()
+   val arrT: Array<T>? = containerArrT!!.get()
+   arrT!![0]!!.mA()
+   arrT!![0]!!.mB()
+   var arrA: Array<cast.CastGenerics.A?>? = containerArrT!!.get()
+   var arrB: Array<cast.CastGenerics.B?>? = containerArrT!!.get()
    val containerArrU: cast.CastGenerics.Container<Array<U>?>? = null
-   val arrU: Array<U>? = containerArrU.get()
-   arrU[0].mA()
-   arrU[0].mB()
-   arrA = containerArrU.get()
-   arrB = containerArrU.get()
+   val arrU: Array<U>? = containerArrU!!.get()
+   arrU!![0]!!.mA()
+   arrU!![0]!!.mB()
+   arrA = containerArrU!!.get()
+   arrB = containerArrU!!.get()
    val containerBase: cast.CastGenerics.Container<cast.CastGenerics.BaseImplementor?>? = null
-   containerBase.get().mA()
-   containerBase.get().mB()
+   containerBase!!.get()!!.mA()
+   containerBase!!.get()!!.mB()
    val containerImplementor: cast.CastGenerics.Container<cast.CastGenerics.Implementor?>? = null
-   containerImplementor.get().mA()
-   containerImplementor.get().mB()
+   containerImplementor!!.get()!!.mA()
+   containerImplementor!!.get()!!.mB()
   }
 
   @JvmStatic

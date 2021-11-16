@@ -13,12 +13,12 @@ open class InstanceInnerClass {
 open class InnerClass {
  @JvmField val `this`: instanceinnerclass.InstanceInnerClass?
 
- @JvmField var field: Int = this.`this`.instanceField + this.`this`.instanceField
+ @JvmField var field: Int = this.`this`!!.instanceField + this.`this`!!.instanceField
 
  @JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this.`this`
 
  open fun funInner() {
-  this.`this`.funOuter()
-  this.`this`.funOuter()
+  this.`this`!!.funOuter()
+  this.`this`!!.funOuter()
  }
 }

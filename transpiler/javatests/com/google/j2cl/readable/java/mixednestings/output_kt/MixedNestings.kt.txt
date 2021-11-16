@@ -29,7 +29,7 @@ open class `1B` {
 
  open fun b(): Int {
   val i: mixednestings.MyInterface? = TODO("expression.qualify needs rendering: \$1B.this)")
-  return i.`fun`(400)
+  return i!!.`fun`(400)
  }
 }
 
@@ -42,18 +42,18 @@ open class `1`: mixednestings.MyInterface {
 
  open fun `fun`(a: Int): Int {
   val ii: mixednestings.MyInterface? = { n: Int ->
-   this.`this`.`this`.`this`.mm()
-   this.`this`.`this`.aa()
-   this.`this`.bb()
+   this.`this`!!.`this`!!.`this`!!.mm()
+   this.`this`!!.`this`!!.aa()
+   this.`this`!!.bb()
    val iii: mixednestings.MyInterface? = { m: Int ->
-    this.`this`.`this`.`this`.mm()
-    this.`this`.`this`.aa()
-    this.`this`.bb()
+    this.`this`!!.`this`!!.`this`!!.mm()
+    this.`this`!!.`this`!!.aa()
+    this.`this`!!.bb()
     return TODO("expression.qualify needs rendering: \$1.this)").`fun`(100)
    }
-   return iii.`fun`(200)
+   return iii!!.`fun`(200)
   }
-  return ii.`fun`(300)
+  return ii!!.`fun`(300)
  }
 }
 

@@ -57,7 +57,7 @@ open class ClassWithParameterizedGet<T> {
 open class AccidentalOverrideBridge: bridgemethods.Getter, bridgemethods.ClassWithParameterizedGet<String?>() {
  open fun test() {
   val g: bridgemethods.Getter? = bridgemethods.AccidentalOverrideBridge()
-  g.get("")
+  g!!.get("")
  }
 }
 

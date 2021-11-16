@@ -3,15 +3,15 @@ package devirtualizedcalls
 open class ObjectCalls {
  open fun main() {
   val `object`: Any? = Any()
-  `object`.equals(`object`)
-  `object`.hashCode()
-  `object`.toString()
-  `object`.getClass()
+  `object`!!.equals(`object`)
+  `object`!!.hashCode()
+  `object`!!.toString()
+  `object`!!.getClass()
   val objectCalls: Array<devirtualizedcalls.ObjectCalls?>? = arrayOfNulls<devirtualizedcalls.ObjectCalls?>(1)
-  objectCalls.equals(objectCalls)
-  objectCalls.hashCode()
-  objectCalls.toString()
-  objectCalls.getClass()
+  objectCalls!!.equals(objectCalls)
+  objectCalls!!.hashCode()
+  objectCalls!!.toString()
+  objectCalls!!.getClass()
  }
 
  open fun test() {

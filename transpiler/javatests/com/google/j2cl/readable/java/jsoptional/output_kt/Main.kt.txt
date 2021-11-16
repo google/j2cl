@@ -22,7 +22,7 @@ interface Function {
 
 class AFunction: jsoptional.Main.Function {
  open fun f1(i: String?, vararg args: Any?): Any? {
-  return args[0]
+  return args!![0]
  }
 }
 

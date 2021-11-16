@@ -4,9 +4,9 @@ open class MultipleAbstractParents {
  companion object {
   @JvmStatic
   fun main(vararg args: String?) {
-   assert(multipleabstractparents.MultipleAbstractParents.ArrayList<String?>().getFoo(null).equals("AbstractCollection"))
-   assert(multipleabstractparents.MultipleAbstractParents.StringList().getFoo(null).equals("AbstractCollection"))
-   assert((multipleabstractparents.MultipleAbstractParents.StringList() as multipleabstractparents.MultipleAbstractParents.IStringList?).getFoo(null).equals("AbstractCollection"))
+   assert(multipleabstractparents.MultipleAbstractParents.ArrayList<String?>().getFoo(null)!!.equals("AbstractCollection"))
+   assert(multipleabstractparents.MultipleAbstractParents.StringList().getFoo(null)!!.equals("AbstractCollection"))
+   assert((multipleabstractparents.MultipleAbstractParents.StringList() as multipleabstractparents.MultipleAbstractParents.IStringList?)!!.getFoo(null)!!.equals("AbstractCollection"))
   }
  }
 }

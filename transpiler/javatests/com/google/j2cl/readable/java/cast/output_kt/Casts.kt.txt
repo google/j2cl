@@ -60,30 +60,30 @@ open class Casts {
 
  open fun testCastFieldAfterInstanceOf() {
   var foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
-  if (foo.field is cast.Casts) {
-   val c: cast.Casts? = foo.field as cast.Casts?
+  if (foo!!.field is cast.Casts) {
+   val c: cast.Casts? = foo!!.field as cast.Casts?
   }
-  if (foo.field is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
-   foo.field = Any()
-   val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
+  if (foo!!.field is cast.Casts) {
+   val cAvoidsCastsTo: cast.Casts? = foo!!.field as cast.Casts?
+   foo!!.field = Any()
+   val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
   }
-  if (foo.field is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
+  if (foo!!.field is cast.Casts) {
+   val cAvoidsCastsTo: cast.Casts? = foo!!.field as cast.Casts?
    foo = TODO("expression.qualify needs rendering: Casts.this)")
-   val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
+   val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
   }
-  if (foo.field is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = foo.field as cast.Casts?
+  if (foo!!.field is cast.Casts) {
+   val cAvoidsCastsTo: cast.Casts? = foo!!.field as cast.Casts?
    this.functionForInstanceofTest()
-   val cNotAvoidCastsTo: cast.Casts? = foo.field as cast.Casts?
+   val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
   }
  }
 
  open fun testCaseMethodAfterInstanceOf() {
   val foo: cast.Casts.Foo? = TODO("expression.qualify needs rendering: Casts.this)")
-  if (foo.method() is cast.Casts) {
-   val cNotAvoidCastsTo: cast.Casts? = foo.method() as cast.Casts?
+  if (foo!!.method() is cast.Casts) {
+   val cNotAvoidCastsTo: cast.Casts? = foo!!.method() as cast.Casts?
   }
  }
 }

@@ -19,7 +19,7 @@ open class Number {
 
   @JvmStatic
   fun fromCharCode(array: IntArray?): String? {
-   return importglobaljstypes.Number.getFromCharCodeFunction().apply(null, array)
+   return importglobaljstypes.Number.getFromCharCodeFunction()!!.apply(null, array)
   }
  }
 }

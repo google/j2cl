@@ -36,6 +36,6 @@ open class `2`<T: Enum<T>?>: overwrittentypevariables.HashFunction<T> {
  }
 
  open fun apply(input: T): String? {
-  return "" + input.ordinal()
+  return "" + input!!.ordinal()
  }
 }

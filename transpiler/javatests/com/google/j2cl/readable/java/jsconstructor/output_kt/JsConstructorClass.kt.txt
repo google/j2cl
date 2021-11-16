@@ -84,7 +84,7 @@ open class H: jsconstructor.JsConstructorClass.G {
 }
 
 open class Varargs: jsconstructor.JsConstructorClass.A {
- constructor(vararg args: Int): super(args[1]) {
+ constructor(vararg args: Int): super(args!![1]) {
 
  }
 }
@@ -110,7 +110,7 @@ open class SubVarargs: jsconstructor.JsConstructorClass.Varargs {
 open class InstanceVarargs: jsconstructor.JsConstructorClass.A {
  @JvmField val `this`: jsconstructor.JsConstructorClass?
 
- constructor(vararg args: Int): super(args[1]) {
+ constructor(vararg args: Int): super(args!![1]) {
 
  }
 }

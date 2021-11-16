@@ -31,10 +31,10 @@ open class InnerClassInitOrder {
 
  open fun testInnerClassCtors() {
   val p1: innerclassinitorder.InnerClassInitOrder.P1<*>? = innerclassinitorder.InnerClassInitOrder.P1<Any?>()
-  assert(1 == p1.value)
+  assert(1 == p1!!.value)
   assert(2 == innerclassinitorder.InnerClassInitOrder.P1<Any?>(2).value)
   val p2: innerclassinitorder.InnerClassInitOrder.P1.P2<*, *>? = TODO("expression.qualify needs rendering: p1)")
-  assert(1 == p2.value)
+  assert(1 == p2!!.value)
   assert(2 == TODO("expression.qualify needs rendering: p1)").value)
   assert(1 == TODO("expression.qualify needs rendering: p2)").value)
   assert(2 == TODO("expression.qualify needs rendering: p2)").value)
@@ -52,13 +52,13 @@ open class InnerClassInitOrder {
    LOOP@ while (i < 10) {
     LOOP_CONTINUE@ do {
      val ap: innerclassinitorder.InnerClassInitOrder.`1AddNumber`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this)")
-     results[i] = ap
+     results!![i] = ap
     } while (false)
     i = i + 1
    }
   }
-  FOR_EACH@ for (theAp in results) {
-   theAp.act()
+  FOR_EACH@ for (theAp in results!!) {
+   theAp!!.act()
   }
   assert(this.number == 1156)
  }
@@ -69,70 +69,70 @@ open class InnerClassInitOrder {
 
  open fun testOuterIsNotSuper() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outerIsSuper)")
-  assert(2 == x.getValue())
+  assert(2 == x!!.getValue())
  }
 
  open fun testOuterIsNotSuperAnon() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this)")
-  assert(2 == x.getValue())
+  assert(2 == x!!.getValue())
  }
 
  open fun testQualifiedSuperCall() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall? = innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall()
-  assert(2 == x.getValue())
+  assert(2 == x!!.getValue())
  }
 
  open fun testQualifiedSuperCallAnon() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestQualifiedSuperCall? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this)")
-  assert(2 == x.getValue())
+  assert(2 == x!!.getValue())
  }
 
  open fun testSuperDispatch() {
-  assert(1 == this.outerIsSuper.checkDispatchFromSub1())
-  assert(1 == this.outerIsSuper.checkDispatchFromSub2())
+  assert(1 == this.outerIsSuper!!.checkDispatchFromSub1())
+  assert(1 == this.outerIsSuper!!.checkDispatchFromSub2())
  }
 
  open fun testUnqualifiedAlloc() {
-  val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper.unqualifiedAlloc()
-  assert(2 == x.getValue())
+  val x: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsNotSuper? = this.outerIsSuper!!.unqualifiedAlloc()
+  assert(2 == x!!.getValue())
  }
 
  open fun testUnqualifiedSuperCall() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outerIsSuper)")
-  assert(2 == x.getValue())
+  assert(2 == x!!.getValue())
  }
 
  open fun testUnqualifiedSuperCallAnon() {
   val x: innerclassinitorder.InnerClassInitOrder.Outer.TestUnqualifiedSuperCall? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this)")
-  assert(2 == x.getValue())
+  assert(2 == x!!.getValue())
  }
 
  companion object {
   @JvmStatic
   fun main(vararg args: String?) {
    val m: innerclassinitorder.InnerClassInitOrder? = innerclassinitorder.InnerClassInitOrder()
-   m.testOuterThisFromSuperCall()
-   m.testOuterThisFromThisCall()
-   m.testExtendsNested()
-   m.testExtendsNestedWithGenerics()
-   m.testInnerClassCtors()
-   m.testInnerClassInitialization()
-   m.testInnerClassLoop()
-   m.testOuterIsNotSuper()
-   m.testOuterIsNotSuperAnon()
-   m.testQualifiedSuperCall()
-   m.testQualifiedSuperCallAnon()
-   m.testSuperDispatch()
-   m.testUnqualifiedAlloc()
-   m.testUnqualifiedSuperCall()
-   m.testUnqualifiedSuperCallAnon()
+   m!!.testOuterThisFromSuperCall()
+   m!!.testOuterThisFromThisCall()
+   m!!.testExtendsNested()
+   m!!.testExtendsNestedWithGenerics()
+   m!!.testInnerClassCtors()
+   m!!.testInnerClassInitialization()
+   m!!.testInnerClassLoop()
+   m!!.testOuterIsNotSuper()
+   m!!.testOuterIsNotSuperAnon()
+   m!!.testQualifiedSuperCall()
+   m!!.testQualifiedSuperCallAnon()
+   m!!.testSuperDispatch()
+   m!!.testUnqualifiedAlloc()
+   m!!.testUnqualifiedSuperCall()
+   m!!.testUnqualifiedSuperCallAnon()
   }
  }
 }
 
 open class OuterRefFromSuperCtorBase {
  internal constructor(o: Any?) {
-  o.toString()
+  o!!.toString()
  }
 }
 
@@ -152,7 +152,7 @@ open class `1` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall?
 
  open fun toString(): String? {
-  this.`this`.`this`.number = this.`this`.`this`.number + 100
+  this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 100
   return ""
  }
 }
@@ -177,7 +177,7 @@ open class `1` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall?
 
  open fun toString(): String? {
-  this.`this`.`this`.number = this.`this`.`this`.number + 1000
+  this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 1000
   return ""
  }
 }
@@ -190,7 +190,7 @@ open class InnerClass {
  }
 
  internal open fun callInner() {
-  this.`this`.number = this.`this`.number + 1
+  this.`this`!!.number = this.`this`!!.number + 1
   TODO("expression.qualify needs rendering: InnerClass.this)")
  }
 }
@@ -203,7 +203,7 @@ open class `1ReallyInnerClass` {
  }
 
  internal open fun callReallyInner() {
-  this.`this`.`this`.number = this.`this`.`this`.number + 10
+  this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 10
  }
 }
 
@@ -323,7 +323,7 @@ open class `1`: innerclassinitorder.InnerClassInitOrder.`1AddNumber` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
 
  open fun act() {
-  this.`this`.number = this.`this`.number + this.num
+  this.`this`!!.number = this.`this`!!.number + this.num
  }
 }
 
@@ -343,7 +343,7 @@ open class OuterIsNotSuper {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.Outer?
 
  open fun getValue(): Int {
-  return this.`this`.value
+  return this.`this`!!.value
  }
 }
 
@@ -379,7 +379,7 @@ open class `1`: innerclassinitorder.InnerClassInitOrder.Outer {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper?
 
  open fun go(): Int {
-  return this.`this`.checkDispatch()
+  return this.`this`!!.checkDispatch()
  }
 }
 

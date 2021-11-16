@@ -28,29 +28,29 @@ open class Main {
   fun main(vararg args: String?) {
    if (true) {
     val transitive: transitivejsoverlayimport.Transitive? = null
-    transitive.doTransitiveInstanceMethod("arg1")
-    transitive.getJsProperty()
+    transitive!!.doTransitiveInstanceMethod("arg1")
+    transitive!!.getJsProperty()
    }
    if (true) {
     val immediate: transitivejsoverlayimport.Immediate? = null
-    immediate.doTransitiveInstanceMethod("arg1")
-    immediate.getJsProperty()
-    immediate.doImmediateInstanceMethod()
+    immediate!!.doTransitiveInstanceMethod("arg1")
+    immediate!!.getJsProperty()
+    immediate!!.doImmediateInstanceMethod()
    }
    if (true) {
     val nonNativeUpper: transitivejsoverlayimport.NonNativeUpper? = null
-    nonNativeUpper.doTransitiveInstanceMethod("arg1")
-    nonNativeUpper.getJsProperty()
-    nonNativeUpper.doImmediateInstanceMethod()
-    nonNativeUpper.doNonNativeUpperInstanceMethod()
+    nonNativeUpper!!.doTransitiveInstanceMethod("arg1")
+    nonNativeUpper!!.getJsProperty()
+    nonNativeUpper!!.doImmediateInstanceMethod()
+    nonNativeUpper!!.doNonNativeUpperInstanceMethod()
    }
    if (true) {
     val nonNativeLower: transitivejsoverlayimport.NonNativeLower? = null
-    nonNativeLower.doTransitiveInstanceMethod("arg1")
-    nonNativeLower.getJsProperty()
-    nonNativeLower.doImmediateInstanceMethod()
-    nonNativeLower.doNonNativeUpperInstanceMethod()
-    nonNativeLower.doNonNativeLowerInstanceMethod()
+    nonNativeLower!!.doTransitiveInstanceMethod("arg1")
+    nonNativeLower!!.getJsProperty()
+    nonNativeLower!!.doImmediateInstanceMethod()
+    nonNativeLower!!.doNonNativeUpperInstanceMethod()
+    nonNativeLower!!.doNonNativeLowerInstanceMethod()
    }
   }
  }

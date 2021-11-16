@@ -24,11 +24,11 @@ open class InnerClass2: innerclassinheritance.MultipleNestings.Parent() {
  open fun test() {
   this.`fun`()
   this.`fun`()
-  this.`this`.`fun`()
-  this.`this`.`this`.funInM()
-  this.`this`.`this`.funInM()
-  this.`this`.funInI1()
-  this.`this`.funInI1()
+  this.`this`!!.`fun`()
+  this.`this`!!.`this`!!.funInM()
+  this.`this`!!.`this`!!.funInM()
+  this.`this`!!.funInI1()
+  this.`this`!!.funInI1()
   this.funInI2()
  }
 }

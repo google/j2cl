@@ -70,9 +70,9 @@ open class Main {
 
  open fun testInstanceJsProperty() {
   val bar: jsproperties.Bar? = jsproperties.Bar()
-  bar.getA()
-  bar.setA(10)
-  bar.getB()
-  bar.setB(10)
+  bar!!.getA()
+  bar!!.setA(10)
+  bar!!.getB()
+  bar!!.setB(10)
  }
 }

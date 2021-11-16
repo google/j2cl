@@ -41,7 +41,14 @@ public class PostfixExpression extends UnaryExpression {
 
   @Override
   public Precedence getPrecedence() {
-    return Precedence.POSTFIX;
+    return operator.getPrecedence();
+  }
+
+  @Override
+  public TypeDescriptor getTypeDescriptor() {
+    return operator == PostfixOperator.NOT_NULL_ASSERTION
+        ? operand.getTypeDescriptor().toNonNullable()
+        : super.getTypeDescriptor();
   }
 
   @Override

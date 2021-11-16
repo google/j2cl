@@ -30,12 +30,12 @@ open class GenericMethod<T> {
 
  open fun test() {
   val g: genericmethod.GenericMethod<Number?>? = genericmethod.GenericMethod<Number?>()
-  g.foo(g, g)
-  g.foo(Error(), Exception())
-  g.`fun`(Any())
-  g.`fun`(Exception())
-  g.`fun`(Error())
-  g.`fun`(arrayOf<String?>("asdf"))
+  g!!.foo(g, g)
+  g!!.foo(Error(), Exception())
+  g!!.`fun`(Any())
+  g!!.`fun`(Exception())
+  g!!.`fun`(Error())
+  g!!.`fun`(arrayOf<String?>("asdf"))
   var s: String? = this.checked()
   s = this.unchecked()
  }
@@ -50,32 +50,32 @@ open class GenericMethod<T> {
   @JvmStatic
   fun testErasureCast_wildcard() {
    val list: java.util.List<genericmethod.GenericMethod.Container<*>?>? = null
-   val content: genericmethod.GenericMethod.Content? = list.get(0).get()
-   genericmethod.GenericMethod.acceptsString(content.getProp())
+   val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
+   genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
    val nestedWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<*>?>? = null
-   val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList.get(0).get().get()
-   genericmethod.GenericMethod.acceptsString(nestedContent.getProp())
+   val nestedContent: genericmethod.GenericMethod.Content? = nestedWildcardList!!.get(0)!!.get()!!.get()
+   genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
    val deepWildcardList: java.util.List<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<*>?>?>? = null
-   val deepContent: genericmethod.GenericMethod.Content? = deepWildcardList.get(0).get().get()
-   genericmethod.GenericMethod.acceptsString(deepContent.getProp())
+   val deepContent: genericmethod.GenericMethod.Content? = deepWildcardList!!.get(0)!!.get()!!.get()
+   genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
 
   @JvmStatic
   fun <CT: genericmethod.GenericMethod.Container<C>?, C: genericmethod.GenericMethod.Content?> testErasureCast_typeVariable() {
    val list: java.util.List<genericmethod.GenericMethod.Container<C>?>? = null
-   val content: genericmethod.GenericMethod.Content? = list.get(0).get()
-   genericmethod.GenericMethod.acceptsString(content.getProp())
+   val content: genericmethod.GenericMethod.Content? = list!!.get(0)!!.get()
+   genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
    val nestedTypeVariableList: java.util.List<genericmethod.GenericMethod.SuperContainer<CT>?>? = null
-   val nestedContent: genericmethod.GenericMethod.Content? = nestedTypeVariableList.get(0).get().get()
-   genericmethod.GenericMethod.acceptsString(nestedContent.getProp())
+   val nestedContent: genericmethod.GenericMethod.Content? = nestedTypeVariableList!!.get(0)!!.get()!!.get()
+   genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
    val deepTypeVariableList: java.util.List<genericmethod.GenericMethod.SuperContainer<genericmethod.GenericMethod.Container<C>?>?>? = null
-   val deepContent: genericmethod.GenericMethod.Content? = deepTypeVariableList.get(0).get().get()
-   genericmethod.GenericMethod.acceptsString(deepContent.getProp())
+   val deepContent: genericmethod.GenericMethod.Content? = deepTypeVariableList!!.get(0)!!.get()!!.get()
+   genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
  }

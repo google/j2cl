@@ -21,9 +21,9 @@ open class ImplicitParenthesis {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = run {
-     boxedInt = boxedInt + primitiveInt
+     boxedInt = boxedInt!! + primitiveInt
      boxedInt
-    }
+    }!!
     assert(primitiveInt == 15)
    }
    if (true) {
@@ -32,7 +32,7 @@ open class ImplicitParenthesis {
     primitiveInt = run {
      boxedInt = primitiveInt
      boxedInt
-    }
+    }!!
     assert(primitiveInt == 5)
    }
    if (true) {
@@ -40,18 +40,18 @@ open class ImplicitParenthesis {
     boxedInt = Int(10)
     primitiveInt = run {
      val `$value`: Int? = boxedInt
-     boxedInt = boxedInt + 1
+     boxedInt = boxedInt!! + 1
      `$value`
-    }
+    }!!
     assert(primitiveInt == 10)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     primitiveInt = run {
-     boxedInt = boxedInt + 1
+     boxedInt = boxedInt!! + 1
      boxedInt
-    }
+    }!!
     assert(primitiveInt == 11)
    }
   }
@@ -64,15 +64,15 @@ open class ImplicitParenthesis {
    if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
-    primitiveInt = boxedInt - primitiveInt
+    primitiveInt = boxedInt!! - primitiveInt
     assert(primitiveInt == 5)
    }
    if (true) {
     primitiveInt = 5
     boxedInt = Int(10)
     boxedBoolean = true
-    boxedBoolean = boxedInt == primitiveInt
-    assert(boxedBoolean == false)
+    boxedBoolean = boxedInt!! == primitiveInt
+    assert(boxedBoolean!! == false)
    }
   }
 

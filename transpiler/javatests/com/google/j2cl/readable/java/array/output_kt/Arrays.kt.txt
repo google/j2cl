@@ -9,10 +9,10 @@ open class Arrays {
   objects2d = arrayOf<Array<Any?>?>(arrayOf<Any?>(null, null), null)
   objects2d = arrayOfNulls<Array<Any?>?>(20)
   val arrayLiteral2d: Array<Array<Any?>?>? = arrayOf<Array<Any?>?>(arrayOf<Any?>(null, null), null)
-  var `object`: Any? = objects[0]
-  `object` = objects2d[0][1]
-  objects[0] = null
-  objects2d[0][1] = null
+  var `object`: Any? = objects!![0]
+  `object` = objects2d!![0]!![1]
+  objects!![0] = null
+  objects2d!![0]!![1] = null
  }
 
  open fun testJavaTypeArray() {
@@ -22,10 +22,10 @@ open class Arrays {
   var objects2d: Array<Array<array.Arrays.SomeObject?>?>? = arrayOfNulls<Array<array.Arrays.SomeObject?>?>(5)
   objects2d = arrayOf<Array<array.Arrays.SomeObject?>?>(arrayOf<array.Arrays.SomeObject?>(null, null), null)
   objects2d = arrayOfNulls<Array<array.Arrays.SomeObject?>?>(20)
-  var someObject: array.Arrays.SomeObject? = objects[0]
-  someObject = objects2d[0][1]
-  objects[0] = null
-  objects2d[0][1] = null
+  var someObject: array.Arrays.SomeObject? = objects!![0]
+  someObject = objects2d!![0]!![1]
+  objects!![0] = null
+  objects2d!![0]!![1] = null
  }
 
  internal open fun testIntArrays() {
@@ -35,10 +35,10 @@ open class Arrays {
   var ints2d: Array<IntArray?>? = arrayOfNulls<IntArray?>(5)
   ints2d = arrayOf<IntArray?>(intArrayOf(1, 2), null)
   ints2d = arrayOfNulls<IntArray?>(20)
-  var n: Int = ints[0]
-  n = ints2d[0][1]
-  ints[0] = 1
-  ints2d[0][1] = 1
+  var n: Int = ints!![0]
+  n = ints2d!![0]!![1]
+  ints!![0] = 1
+  ints2d!![0]!![1] = 1
  }
 
  internal open fun testLongArrays() {
@@ -48,10 +48,10 @@ open class Arrays {
   var longs2d: Array<LongArray?>? = arrayOfNulls<LongArray?>(5)
   longs2d = arrayOf<LongArray?>(longArrayOf(1L, 2L), null)
   longs2d = arrayOfNulls<LongArray?>(20)
-  var n: Long = longs[0]
-  n = longs2d[0][1]
-  longs[0] = 1L
-  longs2d[0][1] = 1L
+  var n: Long = longs!![0]
+  n = longs2d!![0]!![1]
+  longs!![0] = 1L
+  longs2d!![0]!![1] = 1L
  }
 
  internal open fun testDevirtualizedTypeArrays() {
@@ -61,10 +61,10 @@ open class Arrays {
   var booleans2d: Array<Array<Boolean?>?>? = arrayOfNulls<Array<Boolean?>?>(5)
   booleans2d = arrayOf<Array<Boolean?>?>(arrayOf<Boolean?>(true, false), null)
   booleans2d = arrayOfNulls<Array<Boolean?>?>(20)
-  var b: Boolean = booleans[0]
-  b = booleans2d[0][1]
-  booleans[0] = true
-  booleans2d[0][1] = false
+  var b: Boolean = booleans!![0]!!
+  b = booleans2d!![0]!![1]!!
+  booleans!![0] = true
+  booleans2d!![0]!![1] = false
  }
 
  internal open fun testStringArrays() {
@@ -74,10 +74,10 @@ open class Arrays {
   var strings2d: Array<Array<String?>?>? = arrayOfNulls<Array<String?>?>(5)
   strings2d = arrayOf<Array<String?>?>(arrayOf<String?>(null, null), null)
   strings2d = arrayOfNulls<Array<String?>?>(20)
-  var b: String? = strings[0]
-  b = strings2d[0][1]
-  strings[0] = null
-  strings2d[0][1] = null
+  var b: String? = strings!![0]
+  b = strings2d!![0]!![1]
+  strings!![0] = null
+  strings2d!![0]!![1] = null
  }
 
  open fun testNativeArray() {
@@ -87,15 +87,15 @@ open class Arrays {
   var nativeObjects2d: Array<Array<array.Arrays.NativeType?>?>? = arrayOfNulls<Array<array.Arrays.NativeType?>?>(5)
   nativeObjects2d = arrayOf<Array<array.Arrays.NativeType?>?>(arrayOf<array.Arrays.NativeType?>(null, null), null)
   nativeObjects2d = arrayOfNulls<Array<array.Arrays.NativeType?>?>(20)
-  var nativeObject: array.Arrays.NativeType? = nativeObjects[0]
-  nativeObject = nativeObjects2d[0][1]
-  nativeObjects[0] = null
-  nativeObjects2d[0][1] = null
+  var nativeObject: array.Arrays.NativeType? = nativeObjects!![0]
+  nativeObject = nativeObjects2d!![0]!![1]
+  nativeObjects!![0] = null
+  nativeObjects2d!![0]!![1] = null
  }
 
  open fun testErasureCastsOnArrayAccess() {
   val container: array.Arrays.ArrayContainer<String?>? = null
-  val s: String? = container.data[0]
+  val s: String? = container!!.data!![0]
  }
 
  open fun testArraysSupertypeClosureTypes() {

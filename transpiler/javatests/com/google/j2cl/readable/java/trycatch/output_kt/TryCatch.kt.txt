@@ -5,9 +5,9 @@ open class TryCatch {
   try {
    throw java.lang.ClassCastException()
   } catch (e: java.lang.NullPointerException) {
-   throw e
+   throw e!!
   } catch (e: java.lang.ClassCastException) {
-   throw e
+   throw e!!
   } catch (r: java.lang.RuntimeException) {
    r = null
   }
@@ -26,7 +26,7 @@ open class TryCatch {
   try {
    throw java.lang.ClassCastException()
   } catch (e: Throwable) {
-   throw e
+   throw e!!
   }
  }
 
@@ -67,7 +67,7 @@ open class TryCatch {
  }
 
  open fun testThrowGenerics() {
-  throw this.getT(Exception())
+  throw this.getT(Exception())!!
  }
 
  private fun <T> getT(t: T): T {
@@ -75,7 +75,7 @@ open class TryCatch {
  }
 
  open fun testThrowBoundGenerics() {
-  throw this.getThrowable()
+  throw this.getThrowable()!!
  }
 
  private fun <T: Throwable?> getThrowable(): T {

@@ -30,18 +30,18 @@ open class InnerClass: innerclassinheritance.ParentInner() {
  open fun funInInner() {}
 
  open fun testInnerClass(): Int {
-  this.`this`.funInParentOuter()
-  this.`this`.funInParentOuter()
-  this.`this`.funInOuter()
-  this.`this`.funInOuter()
+  this.`this`!!.funInParentOuter()
+  this.`this`!!.funInParentOuter()
+  this.`this`!!.funInOuter()
+  this.`this`!!.funInOuter()
   this.funInParentInner()
   this.funInParentInner()
   this.funInInner()
   this.funInInner()
-  var a: Int = this.`this`.fieldInParentOuter
-  a = this.`this`.fieldInParentOuter
-  a = this.`this`.fieldInOuter
-  a = this.`this`.fieldInOuter
+  var a: Int = this.`this`!!.fieldInParentOuter
+  a = this.`this`!!.fieldInParentOuter
+  a = this.`this`!!.fieldInOuter
+  a = this.`this`!!.fieldInOuter
   a = this.fieldInParentInner
   a = this.fieldInParentInner
   a = this.fieldInInner
@@ -59,9 +59,9 @@ open class `1LocalClass`: innerclassinheritance.ChildClass() {
 
  open fun test() {
   this.funInOuter()
-  this.`this`.funInOuter()
+  this.`this`!!.funInOuter()
   this.funInParentOuter()
   this.funInParentOuter()
-  this.`this`.funInParentOuter()
+  this.`this`!!.funInParentOuter()
  }
 }

@@ -3,8 +3,8 @@ package interfaces
 open class Main {
  internal open fun testInterfaceMembers() {
   val i: interfaces.Main.Interface? = TODO("expression.qualify needs rendering: Main.this)")
-  i.interfaceMethod()
-  i.defaultMethod(null)
+  i!!.interfaceMethod()
+  i!!.defaultMethod(null)
   interfaces.Main.Interface.staticInterfaceMethod()
   val x: Int = run {
    TODO("expression.qualify needs rendering: Main.this)")

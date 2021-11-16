@@ -5,7 +5,7 @@ open class Main {
   @JvmStatic
   fun testJsEnumSwitch() {
    var comparableJsEnum: jsenum.Main.ComparableJsEnum? = if (jsenum.Main.ComparableJsEnum.ONE.getValue() == 1) jsenum.Main.ComparableJsEnum.TWO else null
-   SWITCH@ do when (comparableJsEnum) {
+   SWITCH@ do when (comparableJsEnum!!) {
     jsenum.Main.ComparableJsEnum.TWO ->
      break@SWITCH
     else ->
@@ -13,7 +13,7 @@ open class Main {
    val comparable: Comparable? = comparableJsEnum
    comparableJsEnum = comparable as jsenum.Main.ComparableJsEnum?
    var intJsEnum: jsenum.Main.IntJsEnum? = if (jsenum.Main.IntJsEnum.ELEVEN.getValue() == 10) jsenum.Main.IntJsEnum.ELEVEN else null
-   SWITCH_1@ do when (intJsEnum) {
+   SWITCH_1@ do when (intJsEnum!!) {
     jsenum.Main.IntJsEnum.TWENTY ->
      break@SWITCH_1
     else ->
@@ -24,7 +24,7 @@ open class Main {
    var isInstance: Boolean = intJsEnum is jsenum.Main.IntJsEnum
    isInstance = intJsEnum is Comparable
    val stringJsEnum: jsenum.Main.StringJsEnum? = if (jsenum.Main.StringJsEnum.ONE.getValue() == "10") jsenum.Main.StringJsEnum.THREE else null
-   SWITCH_2@ do when (stringJsEnum) {
+   SWITCH_2@ do when (stringJsEnum!!) {
     jsenum.Main.StringJsEnum.ONE ->
      break@SWITCH_2
     else ->
@@ -37,18 +37,18 @@ open class Main {
     return jsenum.Main.ComparableJsEnum.ONE
    }
    val consummer: java.util.function.Consumer<jsenum.Main.ComparableJsEnum?>? = { e: jsenum.Main.ComparableJsEnum? ->
-    e.ordinal()
+    e!!.ordinal()
    }
   }
 
   @JvmStatic
   private fun testBoxUnboxWithTypeInference() {
    val templatedField: jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>? = jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
-   var unboxed: jsenum.Main.ComparableJsEnum? = templatedField.getValue()
-   unboxed = templatedField.value
-   templatedField.value = jsenum.Main.ComparableJsEnum.ONE
+   var unboxed: jsenum.Main.ComparableJsEnum? = templatedField!!.getValue()
+   unboxed = templatedField!!.value
+   templatedField!!.value = jsenum.Main.ComparableJsEnum.ONE
    java.util.Arrays.asList(arrayOf<Any?>(jsenum.Main.ComparableJsEnum.ONE))
-   templatedField.getValue().ordinal()
+   templatedField!!.getValue()!!.ordinal()
    val b: Boolean = jsenum.Main.ComparableJsEnum.ONE == jsenum.Main.boxingPassthrough(jsenum.Main.ComparableJsEnum.ONE)
   }
 
@@ -119,7 +119,7 @@ enum class NonNullableStringJsEnum {
  }
 
  private constructor(value: String?) {
-  this.value = value
+  this.value = value!!
  }
 
  companion object {
