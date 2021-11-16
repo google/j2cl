@@ -43,5 +43,5 @@ interface ParameterizedInterface<T> {
 open class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<String> {
  @JvmField val `this`: nullability.defaultnotnullable.DefaultNotNullable?
 
- open fun add(s: String?) {}
+ open override fun add(s: String?) {}
 }

@@ -46,7 +46,7 @@ open class `1`: jsasync.Main.BaseInterface {
 
  @JvmField val `this`: jsasync.Main?
 
- open fun asyncCall(): jsasync.Main.IThenable<Int?>? {
+ open override fun asyncCall(): jsasync.Main.IThenable<Int?>? {
   return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`!!.x))
  }
 }
@@ -58,7 +58,7 @@ open class `2`: jsasync.Main.JsFunctionInterface {
 
  @JvmField val `this`: jsasync.Main?
 
- open fun doSomething(): jsasync.Main.IThenable<Int?>? {
+ open override fun doSomething(): jsasync.Main.IThenable<Int?>? {
   return jsasync.Main.Promise.resolve(5)
  }
 }
@@ -70,7 +70,7 @@ open class `3`: jsasync.Main.JsFunctionInterface {
 
  @JvmField val `this`: jsasync.Main?
 
- open fun doSomething(): jsasync.Main.IThenable<Int?>? {
+ open override fun doSomething(): jsasync.Main.IThenable<Int?>? {
   val tmp: jsasync.Main.JsFunctionInterface? = this
   return jsasync.Main.Promise.resolve(jsasync.Main.await(this.`this`!!.x))
  }
@@ -81,7 +81,7 @@ interface BaseInterface {
 }
 
 interface AsyncInterface: jsasync.Main.BaseInterface {
- fun asyncCall(): jsasync.Main.IThenable<Int?>?
+ override fun asyncCall(): jsasync.Main.IThenable<Int?>?
 }
 
 interface InterfaceWithAsyncDefaultMethod {

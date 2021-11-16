@@ -11,7 +11,7 @@ open class SuperParent<T, S> {
 }
 
 open class Parent<T: Error?>: bridgemethods.SuperParent<T, Number?>() {
- open fun foo(t: T?, s: Number?) {}
+ open override fun foo(t: T?, s: Number?) {}
 
  open fun <T: Number?> bar(t: T?) {}
 
@@ -19,9 +19,9 @@ open class Parent<T: Error?>: bridgemethods.SuperParent<T, Number?>() {
 }
 
 open class BridgeMethod: bridgemethods.SomeInterface<java.lang.AssertionError?, Number?>, bridgemethods.Parent<java.lang.AssertionError?>() {
- open fun foo(a: java.lang.AssertionError?, n: Number?) {}
+ open override fun foo(a: java.lang.AssertionError?, n: Number?) {}
 
- open fun bar(t: Number?) {}
+ open override fun bar(t: Number?) {}
 
  open fun `fun`(t: Number?) {}
 }
@@ -31,9 +31,9 @@ interface SomeOtherFooInterface<T> {
 }
 
 open class DualUnrelatedBridges: bridgemethods.SomeInterface<String?, Double?>, bridgemethods.SomeOtherFooInterface<String?> {
- open fun foo(s: String?, n: Double?) {}
+ open override fun foo(s: String?, n: Double?) {}
 
- open fun foo(s: String?, n: Number?) {}
+ open override fun foo(s: String?, n: Number?) {}
 }
 
 open class SuperDualUnrelatedAccidentalBridges {
@@ -74,7 +74,7 @@ interface BI2 {
 }
 
 interface BI1: bridgemethods.TestCase10036.BI3 {
- fun get(value: String?): String?
+ override fun get(value: String?): String?
 }
 
 abstract class B<B1: Comparable?>: bridgemethods.TestCase10036.BI1, bridgemethods.TestCase10036.BI2 {
@@ -98,9 +98,9 @@ abstract class B<B1>: bridgemethods.TestCase102.BI1, bridgemethods.TestCase102.B
 open class C<B1>: bridgemethods.TestCase102.B<B1>() {
  @JvmField val `this`: bridgemethods.TestCase102?
 
- open fun set(value: String?) {}
+ open override fun set(value: String?) {}
 
- open fun set(value: B1?) {}
+ open override fun set(value: B1?) {}
 }
 
 open class ParameterizedParent<T: bridgemethods.ParameterizedParent<T>?> {

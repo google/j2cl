@@ -44,21 +44,21 @@ interface J<T> {
 }
 
 open class B: bridgejsmethod.Main.A<String?>() {
- open fun `fun`(s: String?): String? {
+ open override fun `fun`(s: String?): String? {
   return s
  }
 
- open fun bar(s: String?) {}
+ open override fun bar(s: String?) {}
 }
 
 open class C: bridgejsmethod.Main.A<Int?>() {
- open fun `fun`(i: Int?): Int? {
+ open override fun `fun`(i: Int?): Int? {
   return i
  }
 }
 
 open class D: bridgejsmethod.Main.I<Int?>, bridgejsmethod.Main.A<Int?>() {
- open fun `fun`(i: Int?): Int? {
+ open override fun `fun`(i: Int?): Int? {
   return i
  }
 }
@@ -72,7 +72,7 @@ interface G<V> {
 }
 
 open class H<V>: bridgejsmethod.Main.G<V> {
- open fun enclose(value: V?): V? {
+ open override fun enclose(value: V?): V? {
   return null
  }
 }
@@ -82,7 +82,7 @@ open class K<K1, K2> {
 }
 
 open class L<L1>: bridgejsmethod.Main.K<String?, L1>() {
- internal open fun `fun`(string: String?, l1: L1?) {}
+ internal open override fun `fun`(string: String?, l1: L1?) {}
 }
 
 interface M {
@@ -94,7 +94,7 @@ abstract class N: bridgejsmethod.Main.M {
 
  internal constructor() {}
 
- abstract open fun getB(): bridgejsmethod.Main.B?
+ abstract open override fun getB(): bridgejsmethod.Main.B?
 }
 
 open class O: bridgejsmethod.Main.N() {
@@ -102,7 +102,7 @@ open class O: bridgejsmethod.Main.N() {
 
  private var b: bridgejsmethod.Main.B? = null
 
- open fun getB(): bridgejsmethod.Main.B? {
+ open override fun getB(): bridgejsmethod.Main.B? {
   return this.b
  }
 }
@@ -114,13 +114,13 @@ interface P {
 abstract class Q: bridgejsmethod.Main.P {
  @JvmField val `this`: bridgejsmethod.Main?
 
- abstract open fun getKey(): String?
+ abstract open override fun getKey(): String?
 }
 
 abstract class R: bridgejsmethod.Main.Q() {
  @JvmField val `this`: bridgejsmethod.Main?
 
- open fun getKey(): String? {
+ open override fun getKey(): String? {
   return null
  }
 }
@@ -140,9 +140,9 @@ open class GrandParent<T> {
 open class Parent<T: bridgejsmethod.Main.Parent<T>?>: bridgejsmethod.Main.GrandParent<T>() {
  @JvmField val `this`: bridgejsmethod.Main?
 
- open fun jsMethod(t: T?) {}
+ open override fun jsMethod(t: T?) {}
 
- open fun method(t: T?) {}
+ open override fun method(t: T?) {}
 }
 
 open class Child: bridgejsmethod.Main.Parent<bridgejsmethod.Main.Child?>() {

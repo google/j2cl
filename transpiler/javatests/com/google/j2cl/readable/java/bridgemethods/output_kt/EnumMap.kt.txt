@@ -5,13 +5,13 @@ interface Map<K, V> {
 }
 
 open class AbstractMap<K, V>: bridgemethods.Map<K, V> {
- open fun put(key: K?, value: V?): V? {
+ open override fun put(key: K?, value: V?): V? {
   return value
  }
 }
 
 open class EnumMap<K: Enum<K>?, V>: bridgemethods.AbstractMap<K, V>() {
- open fun put(key: K?, value: V?): V? {
+ open override fun put(key: K?, value: V?): V? {
   return value
  }
 }

@@ -7,7 +7,7 @@ abstract class Map<K> {
 }
 
 open class TreeMap<K>: nobridgemethods.Map<K>() {
- open fun getCeilingEntry(key: K?): nobridgemethods.TreeMap.InnerEntry<K>? {
+ open override fun getCeilingEntry(key: K?): nobridgemethods.TreeMap.InnerEntry<K>? {
   return nobridgemethods.TreeMap.InnerEntry<K>()
  }
 }

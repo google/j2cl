@@ -734,6 +734,14 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   }
 
   /**
+   * Returns whether this method descriptor overrides other method descriptor from the Java semantic
+   * perspective.
+   */
+  public boolean isJavaOverride() {
+    return !getJavaOverriddenMethodDescriptors().isEmpty();
+  }
+
+  /**
    * Returns a set of the method descriptors that are overridden by {@code methodDescriptor} from
    * the JavaScript perspective.
    */

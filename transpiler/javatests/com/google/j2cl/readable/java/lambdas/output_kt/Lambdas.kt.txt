@@ -194,7 +194,7 @@ open class `1`<T>: lambdas.Lambdas.Functional<T> {
 
  @JvmField val `this`: lambdas.Lambdas?
 
- open fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
+ open override fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
   return null
  }
 }
@@ -204,7 +204,7 @@ open class `2`<T>: lambdas.Lambdas.Functional<T> {
 
  }
 
- open fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
+ open override fun wrap(f: lambdas.Lambdas.Functional<T>?): lambdas.Lambdas.Functional<T>? {
   return null
  }
 }
@@ -281,7 +281,7 @@ interface AnotherThenable<T> {
 }
 
 class IdentityFunction: lambdas.Lambdas.GenericJsFunction<Any?, Any?> {
- open fun apply(o: Any?): Any? {
+ open override fun apply(o: Any?): Any? {
   return o
  }
 }
@@ -295,7 +295,7 @@ interface Equals<T> {
 }
 
 interface JsSupplier<T: Number?>: lambdas.Lambdas.Equals<T> {
- fun get(): T?
+ override fun get(): T?
 }
 
 interface JustADefaultT<T> {

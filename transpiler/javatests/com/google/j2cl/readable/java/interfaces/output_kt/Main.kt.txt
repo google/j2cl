@@ -33,7 +33,7 @@ interface Interface<T> {
 }
 
 interface SubInterface: interfaces.Main.Interface<String?> {
- fun defaultMethod(s: String?) {
+ override fun defaultMethod(s: String?) {
   super.defaultMethod(s)
  }
 }
@@ -41,7 +41,7 @@ interface SubInterface: interfaces.Main.Interface<String?> {
 open class Implementor: interfaces.Main.SubInterface, interfaces.Main.Interface<String?> {
  @JvmField val `this`: interfaces.Main?
 
- open fun interfaceMethod() {}
+ open override fun interfaceMethod() {}
 }
 
 abstract class AbstractImplementor: interfaces.Main.SubInterface {

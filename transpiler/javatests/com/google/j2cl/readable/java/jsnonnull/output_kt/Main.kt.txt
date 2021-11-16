@@ -43,19 +43,19 @@ interface MyFunction {
 }
 
 open class StringComparator: java.util.Comparator<String> {
- open fun compare(a: String, b: String): Int {
+ open override fun compare(a: String, b: String): Int {
   return 0
  }
 }
 
 open class NullableStringComparator: java.util.Comparator<String?> {
- open fun compare(a: String?, b: String?): Int {
+ open override fun compare(a: String?, b: String?): Int {
   return 0
  }
 }
 
 open class NonNullableStringSubNullableComparator: jsnonnull.Main.NullableStringComparator() {
- open fun compare(a: String, b: String): Int {
+ open override fun compare(a: String, b: String): Int {
   return 0
  }
 }

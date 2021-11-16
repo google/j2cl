@@ -15,7 +15,7 @@ open class MyJsType: jsbridgeaccidentaloverride.OtherInterface {
   return a + 1
  }
 
- open fun `fun`(a: Int): Int {
+ open override fun `fun`(a: Int): Int {
   return a - 1
  }
 }
@@ -27,7 +27,7 @@ interface MyInterface {
 }
 
 open class SubJsType: jsbridgeaccidentaloverride.MyInterface, jsbridgeaccidentaloverride.MyJsType() {
- open fun bar(a: Int): Int {
+ open override fun bar(a: Int): Int {
   return a + 2
  }
 }

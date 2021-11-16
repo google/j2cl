@@ -29,19 +29,19 @@ open class ForEachStatement {
 }
 
 open class Exception1: Iterable<String?>, Exception() {
- open fun iterator(): java.util.Iterator<String?>? {
+ open override fun iterator(): java.util.Iterator<String?>? {
   return null
  }
 }
 
 open class Exception2: Iterable<Any?>, Exception() {
- open fun iterator(): java.util.Iterator<Any?>? {
+ open override fun iterator(): java.util.Iterator<Any?>? {
   return null
  }
 }
 
 open class IterableReturningTypeVariable<T: java.util.Iterator<Int?>?>: Iterable<Int?> {
- open fun iterator(): T? {
+ open override fun iterator(): T? {
   return null
  }
 }

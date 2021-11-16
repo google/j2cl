@@ -9,11 +9,11 @@ interface MyInterface {
 }
 
 interface SubInterface: interfacejsbridge.MyJsInterface, interfacejsbridge.MyInterface {
- fun foo(a: Int): Int
+ override fun foo(a: Int): Int
 }
 
 open class InterfaceImpl: interfacejsbridge.SubInterface {
- open fun foo(a: Int): Int {
+ open override fun foo(a: Int): Int {
   return 0
  }
 }

@@ -1,25 +1,25 @@
 package devirtualizedsupermethodcall
 
 open class SubNumber: Number() {
- open fun intValue(): Int {
+ open override fun intValue(): Int {
   return 0
  }
 
- open fun longValue(): Long {
+ open override fun longValue(): Long {
   return 0L
  }
 
- open fun floatValue(): Float {
+ open override fun floatValue(): Float {
   return 0.0f
  }
 
- open fun doubleValue(): Double {
+ open override fun doubleValue(): Double {
   return 0.0
  }
 }
 
 open class FooCallsSuperObjectMethod {
- open fun hashCode(): Int {
+ open override fun hashCode(): Int {
   return super.hashCode()
  }
 }

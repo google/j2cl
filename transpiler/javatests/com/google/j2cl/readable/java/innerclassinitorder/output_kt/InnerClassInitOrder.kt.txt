@@ -151,7 +151,7 @@ open class `1` {
 
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.OuterRefFromSuperCtorCall?
 
- open fun toString(): String? {
+ open override fun toString(): String? {
   this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 100
   return ""
  }
@@ -176,7 +176,7 @@ open class `1` {
 
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder.OuterRefFromThisCtorCall?
 
- open fun toString(): String? {
+ open override fun toString(): String? {
   this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 1000
   return ""
  }
@@ -322,7 +322,7 @@ open class `1`: innerclassinitorder.InnerClassInitOrder.`1AddNumber` {
 
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
 
- open fun act() {
+ open override fun act() {
   this.`this`!!.number = this.`this`!!.number + this.num
  }
 }
@@ -354,7 +354,7 @@ open class OuterIsSuper: innerclassinitorder.InnerClassInitOrder.Outer {
 
  }
 
- open fun checkDispatch(): Int {
+ open override fun checkDispatch(): Int {
   return 2
  }
 

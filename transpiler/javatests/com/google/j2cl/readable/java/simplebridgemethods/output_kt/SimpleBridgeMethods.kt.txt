@@ -5,7 +5,7 @@ open class Superclass<T: Error?> {
 }
 
 open class Subclass: simplebridgemethods.Superclass<java.lang.AssertionError?>() {
- open fun m1(a: java.lang.AssertionError?) {}
+ open override fun m1(a: java.lang.AssertionError?) {}
 }
 
 open class AnotherSubclass: simplebridgemethods.Superclass<java.lang.AssertionError?>() {}
@@ -15,11 +15,11 @@ interface Callable<V> {
 }
 
 open class Task<T>: simplebridgemethods.Callable<T> {
- open fun call(t: T?) {}
+ open override fun call(t: T?) {}
 }
 
 open class AnotherTask<T: java.lang.AssertionError?>: simplebridgemethods.Callable<simplebridgemethods.Superclass<T>?> {
- open fun call(t: simplebridgemethods.Superclass<T>?) {}
+ open override fun call(t: simplebridgemethods.Superclass<T>?) {}
 }
 
 open class SimpleBridgeMethods {}

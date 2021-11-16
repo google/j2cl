@@ -21,28 +21,28 @@ open class Parent: supermethodcall.GrandParent() {
 }
 
 open class Child: supermethodcall.Parent() {
- open fun parentSimplest() {
+ open override fun parentSimplest() {
   super.parentSimplest()
  }
 
- open fun parentWithParams(foo: Int) {
+ open override fun parentWithParams(foo: Int) {
   super.parentWithParams(foo)
  }
 
- open fun parentWithChangingReturn(): supermethodcall.Child? {
+ open override fun parentWithChangingReturn(): supermethodcall.Child? {
   super.parentWithChangingReturn()
   return this
  }
 
- open fun grandParentSimplest() {
+ open override fun grandParentSimplest() {
   super.grandParentSimplest()
  }
 
- open fun grandParentWithParams(foo: Int) {
+ open override fun grandParentWithParams(foo: Int) {
   super.grandParentWithParams(foo)
  }
 
- open fun grandParentWithChangingReturn(): supermethodcall.Child? {
+ open override fun grandParentWithChangingReturn(): supermethodcall.Child? {
   super.grandParentWithChangingReturn()
   return this
  }

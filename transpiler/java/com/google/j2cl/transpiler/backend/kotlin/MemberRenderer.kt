@@ -100,6 +100,9 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, k
       render("open ")
     }
   }
+  if (methodDescriptor.isJavaOverride) {
+    render("override ")
+  }
 }
 
 private fun Renderer.renderMethodParameters(method: Method) {

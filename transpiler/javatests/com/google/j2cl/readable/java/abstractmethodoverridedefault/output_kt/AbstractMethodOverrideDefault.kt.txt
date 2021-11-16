@@ -15,11 +15,11 @@ interface J {
 }
 
 abstract class A: abstractmethodoverridedefault.AbstractMethodOverrideDefault.I {
- abstract open fun foo()
+ abstract open override fun foo()
 }
 
 abstract class B: abstractmethodoverridedefault.AbstractMethodOverrideDefault.J, abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
- open fun bar() {
+ open override fun bar() {
   if (false) {
    this.bar()
   }
@@ -27,9 +27,9 @@ abstract class B: abstractmethodoverridedefault.AbstractMethodOverrideDefault.J,
 }
 
 open class C: abstractmethodoverridedefault.AbstractMethodOverrideDefault.A() {
- open fun foo() {}
+ open override fun foo() {}
 
- open fun bar() {
+ open override fun bar() {
   super.bar()
  }
 }

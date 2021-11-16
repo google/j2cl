@@ -7,13 +7,13 @@ interface I<T> {
 }
 
 interface II: bridgemethods.BridgeMethodDefault.I<String?> {
- fun m(s: String?) {}
+ override fun m(s: String?) {}
 }
 
 open class A: bridgemethods.BridgeMethodDefault.II {}
 
 interface JJ: bridgemethods.BridgeMethodDefault.I<Any?> {
- fun m(o: Any?) {}
+ override fun m(o: Any?) {}
 }
 
 open class B: bridgemethods.BridgeMethodDefault.JJ {}

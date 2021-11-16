@@ -47,7 +47,7 @@ open class Foo<T> {
   return null
  }
 
- open fun toString(): String? {
+ open override fun toString(): String? {
   return "Foo"
  }
 }
@@ -59,13 +59,13 @@ interface MyFunction {
 open class StringList: java.util.ArrayList<String?>() {}
 
 open class StringComparator: java.util.Comparator<String> {
- open fun compare(a: String, b: String): Int {
+ open override fun compare(a: String, b: String): Int {
   return 0
  }
 }
 
 open class NullableStringComparator: java.util.Comparator<String?> {
- open fun compare(a: String?, b: String?): Int {
+ open override fun compare(a: String?, b: String?): Int {
   return 0
  }
 }
@@ -75,7 +75,7 @@ interface NullableTemplatedReturn<T> {
 }
 
 open class NullableTemplatedReturnOverride: nullability.Nullability.NullableTemplatedReturn<String?> {
- open fun foo(): String? {
+ open override fun foo(): String? {
   return "foo"
  }
 }

@@ -88,9 +88,9 @@ interface B {
 abstract class BaseImplementor: cast.CastGenerics.A, cast.CastGenerics.B {}
 
 open class Implementor: cast.CastGenerics.BaseImplementor() {
- open fun mA() {}
+ open override fun mA() {}
 
- open fun mB() {}
+ open override fun mB() {}
 }
 
 open class Container<T> {

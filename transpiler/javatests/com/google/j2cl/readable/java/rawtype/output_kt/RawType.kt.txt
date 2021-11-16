@@ -9,5 +9,5 @@ interface I<T: rawtype.RawType?> {
 }
 
 open class RawSubclass: rawtype.RawType.I {
- open fun f(t: rawtype.RawType?) {}
+ open override fun f(t: rawtype.RawType?) {}
 }

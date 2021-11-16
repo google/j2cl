@@ -15,11 +15,11 @@ open class SuperParent {
 }
 
 open class Parent: instancejsmethods.SuperParent() {
- open fun `fun`(a: Int, b: Int): Int {
+ open override fun `fun`(a: Int, b: Int): Int {
   return a + b
  }
 
- open fun bar(a: Int, b: Int): Int {
+ open override fun bar(a: Int, b: Int): Int {
   return a * b
  }
 
@@ -29,19 +29,19 @@ open class Parent: instancejsmethods.SuperParent() {
 }
 
 open class Child: instancejsmethods.MyInterface, instancejsmethods.Parent() {
- open fun `fun`(a: Int, b: Int): Int {
+ open override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }
 
- open fun bar(a: Int, b: Int): Int {
+ open override fun bar(a: Int, b: Int): Int {
   return a * b + 1
  }
 
- open fun foo(a: Int): Int {
+ open override fun foo(a: Int): Int {
   return a
  }
 
- open fun intfFoo(): Int {
+ open override fun intfFoo(): Int {
   return 1
  }
 }

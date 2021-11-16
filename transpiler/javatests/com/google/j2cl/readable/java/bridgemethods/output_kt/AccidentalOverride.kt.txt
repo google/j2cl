@@ -15,7 +15,7 @@ open class A<T, S> {
 }
 
 open class B: bridgemethods.I<Int?, String?>, bridgemethods.A<Number?, String?>() {
- open fun `fun`(s: String?): Int? {
+ open override fun `fun`(s: String?): Int? {
   return Int(1)
  }
 }

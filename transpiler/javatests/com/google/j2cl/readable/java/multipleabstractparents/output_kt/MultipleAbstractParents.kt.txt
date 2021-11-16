@@ -34,7 +34,7 @@ abstract class AbstractList2<T>: multipleabstractparents.MultipleAbstractParents
 open class ArrayList<T>: multipleabstractparents.MultipleAbstractParents.AbstractList<T>() {}
 
 interface IStringList: multipleabstractparents.MultipleAbstractParents.List<String?> {
- fun getFoo(string: String?): String?
+ override fun getFoo(string: String?): String?
 }
 
 abstract class AbstractStringList: multipleabstractparents.MultipleAbstractParents.IStringList, multipleabstractparents.MultipleAbstractParents.AbstractList<String?>() {}
