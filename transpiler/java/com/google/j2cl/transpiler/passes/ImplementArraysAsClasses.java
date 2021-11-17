@@ -86,7 +86,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
               return fieldAccess;
             }
             return FieldAccess.Builder.from(fieldAccess)
-                .setTargetFieldDescriptor(markFieldTypeDescriptorAsNative(fieldAccess.getTarget()))
+                .setTarget(markFieldTypeDescriptorAsNative(fieldAccess.getTarget()))
                 .build();
           }
 
@@ -239,7 +239,7 @@ public class ImplementArraysAsClasses extends NormalizationPass {
 
     return FieldAccess.newBuilder()
         .setQualifier(arrayExpression)
-        .setTargetFieldDescriptor(
+        .setTarget(
             markFieldTypeDescriptorAsNative(
                 TypeDescriptors.getWasmArrayType(
                         (ArrayTypeDescriptor) arrayExpression.getTypeDescriptor())

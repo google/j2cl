@@ -15,58 +15,32 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Nullable;
 
 /**
  * Class for new instance expression.
  */
 @Visitable
 public class NewInstance extends Invocation {
-  @Visitable @Nullable Expression qualifier;
-  private final MethodDescriptor constructorMethodDescriptor;
-  @Visitable List<Expression> arguments = new ArrayList<>();
 
   private NewInstance(
       Expression qualifier,
       MethodDescriptor constructorMethodDescriptor,
       List<Expression> arguments) {
-    this.constructorMethodDescriptor = checkNotNull(constructorMethodDescriptor);
-    this.qualifier = qualifier;
-    this.arguments.addAll(checkNotNull(arguments));
-  }
-
-  @Override
-  public Expression getQualifier() {
-    return qualifier;
-  }
-
-  @Override
-  public MethodDescriptor getTarget() {
-    return constructorMethodDescriptor;
-  }
-
-  @Override
-  public List<Expression> getArguments() {
-    return arguments;
+    super(qualifier, constructorMethodDescriptor, arguments);
   }
 
   @Override
   public DeclaredTypeDescriptor getTypeDescriptor() {
-    return (DeclaredTypeDescriptor) constructorMethodDescriptor.getReturnTypeDescriptor();
+    return (DeclaredTypeDescriptor) getTarget().getReturnTypeDescriptor();
   }
 
   @Override
   public NewInstance clone() {
-    return new NewInstance(
-        qualifier != null ? qualifier.clone() : null,
-        constructorMethodDescriptor,
-        AstUtils.clone(arguments));
+    return new NewInstance(AstUtils.clone(qualifier), getTarget(), AstUtils.clone(arguments));
   }
 
   @Override
@@ -96,15 +70,13 @@ public class NewInstance extends Invocation {
 
     public static Builder from(MethodDescriptor constructorDescriptor) {
       Builder builder = new Builder();
-      builder.setMethodDescriptor(constructorDescriptor);
+      builder.setTarget(constructorDescriptor);
       return builder;
     }
 
-    protected NewInstance doCreateInvocation(
-        Expression qualifierExpression,
-        MethodDescriptor methodDescriptor,
-        List<Expression> arguments) {
-      return new NewInstance(qualifierExpression, methodDescriptor, arguments);
+    @Override
+    public NewInstance build() {
+      return new NewInstance(getQualifier(), getTarget(), getArguments());
     }
     
     private Builder(NewInstance newInstance) {

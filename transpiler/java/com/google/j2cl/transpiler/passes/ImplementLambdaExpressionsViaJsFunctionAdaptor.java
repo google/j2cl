@@ -105,7 +105,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
 
               // new A$$LambdaAdaptor( (...) -> {...} )
               return NewInstance.newBuilder()
-                  .setMethodDescriptor(adaptorTypeDescriptor.getSingleConstructor())
+                  .setTarget(adaptorTypeDescriptor.getSingleConstructor())
                   .setArguments(
                       FunctionExpression.Builder.from(functionExpression)
                           // Change the function expression type from the functional interface to
@@ -192,7 +192,7 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
                 ReturnStatement.newBuilder()
                     .setExpression(
                         NewInstance.newBuilder()
-                            .setMethodDescriptor(adaptorConstructor)
+                            .setTarget(adaptorConstructor)
                             .setArguments(jsFunctionParameter.createReference())
                             .build())
                     .setTypeDescriptor(adaptorConstructor.getReturnTypeDescriptor())

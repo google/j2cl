@@ -35,7 +35,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
 import com.google.j2cl.transpiler.ast.ExpressionWithComment;
 import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.ForEachStatement;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.IfStatement;
@@ -47,11 +46,10 @@ import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
-import com.google.j2cl.transpiler.ast.MethodCall;
+import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
-import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
 import com.google.j2cl.transpiler.ast.PrefixExpression;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
@@ -359,16 +357,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .build();
   }
 
-  @Override
-  public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
-    return FieldAccess.Builder.from(fieldAccess)
-        .setQualifier(rewriteInstanceQualifier(fieldAccess.getQualifier(), fieldAccess.getTarget()))
-        .build();
-  }
-
   private Expression rewriteInstanceQualifier(
       Expression qualifier, MemberDescriptor memberDescriptor) {
-    if (memberDescriptor.isStatic()) {
+    if (memberDescriptor.isStatic() || qualifier == null) {
       return qualifier;
     }
 
@@ -441,6 +432,22 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
+  public MemberReference rewriteInvocation(Invocation invocation) {
+    return rewriteMemberReference(
+        Invocation.Builder.from(invocation)
+            .setArguments(rewriteMethodInvocationContextArguments(invocation))
+            .build());
+  }
+
+  @Override
+  public MemberReference rewriteMemberReference(MemberReference memberReference) {
+    return MemberReference.Builder.from(memberReference)
+        .setQualifier(
+            rewriteInstanceQualifier(memberReference.getQualifier(), memberReference.getTarget()))
+        .build();
+  }
+
+  @Override
   public InstanceOfExpression rewriteInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
 
@@ -460,15 +467,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
   }
 
   @Override
-  public MethodCall rewriteMethodCall(MethodCall methodCall) {
-    // method invocation context
-    return MethodCall.Builder.from(methodCall)
-        .setQualifier(rewriteInstanceQualifier(methodCall.getQualifier(), methodCall.getTarget()))
-        .setArguments(rewriteMethodInvocationContextArguments(methodCall))
-        .build();
-  }
-
-  @Override
   public NewArray rewriteNewArray(NewArray newArray) {
     // unary numeric promotion context
     List<Expression> dimensionExpressions =
@@ -481,14 +479,6 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .setTypeDescriptor(newArray.getTypeDescriptor())
         .setDimensionExpressions(dimensionExpressions)
         .setArrayLiteral(newArray.getArrayLiteral())
-        .build();
-  }
-
-  @Override
-  public NewInstance rewriteNewInstance(NewInstance newInstance) {
-    // method invocation context
-    return NewInstance.Builder.from(newInstance)
-        .setArguments(rewriteMethodInvocationContextArguments(newInstance))
         .build();
   }
 

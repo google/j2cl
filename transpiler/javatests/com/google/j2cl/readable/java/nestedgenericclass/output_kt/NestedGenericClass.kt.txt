@@ -12,10 +12,10 @@ open class NestedGenericClass<T> {
 
  open fun test() {
   val n: nestedgenericclass.NestedGenericClass<Number?>? = nestedgenericclass.NestedGenericClass<Number?>()
-  val a: nestedgenericclass.`NestedGenericClass$A`<Error?, Number?>? = TODO("expression.qualify needs rendering: n)")
-  val b: nestedgenericclass.`NestedGenericClass$A$B`<Exception?, Error?, Number?>? = TODO("expression.qualify needs rendering: a)")
-  TODO("expression.qualify needs rendering: n)")
-  TODO("expression.qualify needs rendering: n.new C.<init>())")
+  val a: nestedgenericclass.`NestedGenericClass$A`<Error?, Number?>? = TODO("expression.qualify needs rendering: n!!)")
+  val b: nestedgenericclass.`NestedGenericClass$A$B`<Exception?, Error?, Number?>? = TODO("expression.qualify needs rendering: a!!)")
+  TODO("expression.qualify needs rendering: n!!)")
+  TODO("expression.qualify needs rendering: n!!.new C.<init>())")
  }
 }
 

@@ -42,7 +42,7 @@ public class NormalizeInstanceCompileTimeConstants extends NormalizationPass {
           public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
             if (isInstanceCompileTimeConstant(fieldAccess.getTarget())) {
               return FieldAccess.Builder.from(fieldAccess)
-                  .setTargetFieldDescriptor(toStatic(fieldAccess.getTarget()))
+                  .setTarget(toStatic(fieldAccess.getTarget()))
                   .build();
             }
             return fieldAccess;

@@ -51,6 +51,7 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
@@ -319,7 +320,7 @@ public class J2clAstProcessor extends AbstractProcessor {
                 })
             .collect(toImmutableList());
 
-    if (!hasAcceptMethod(typeElement)) {
+    if (!hasAcceptMethod(typeElement) && !typeElement.getModifiers().contains(Modifier.ABSTRACT)) {
       abortWithError(
           typeElement.getQualifiedName()
               + " does not implement \""

@@ -112,9 +112,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
                               .getJsFunctionMethodDescriptor()
                               .getEnclosingTypeDescriptor())
                       .build();
-              return MethodCall.Builder.from(methodCall)
-                  .setMethodDescriptor(methodDescriptor)
-                  .build();
+              return MethodCall.Builder.from(methodCall).setTarget(methodDescriptor).build();
             }
             return methodCall;
           }

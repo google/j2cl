@@ -19,28 +19,29 @@ import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.Lists;
-import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import com.google.j2cl.transpiler.ast.Expression.Precedence;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Abstracts invocations, i.e. method calls and new instances.
- */
+/** Abstracts invocations, i.e. method calls and new instances. */
 @Visitable
-public abstract class Invocation extends Expression implements MemberReference {
+public abstract class Invocation extends MemberReference {
+  @Visitable List<Expression> arguments = new ArrayList<>();
+
+  Invocation(Expression qualifier, MethodDescriptor target, List<Expression> arguments) {
+    super(qualifier, target);
+    this.arguments.addAll(arguments);
+  }
+
+  public final List<Expression> getArguments() {
+    return arguments;
+  }
 
   @Override
-  public abstract MethodDescriptor getTarget();
-
-  public abstract List<Expression> getArguments();
-
-  @Override
-  public Precedence getPrecedence() {
-    return Precedence.MEMBER_ACCESS;
+  public MethodDescriptor getTarget() {
+    return (MethodDescriptor) super.getTarget();
   }
 
   @Override
@@ -50,18 +51,15 @@ public abstract class Invocation extends Expression implements MemberReference {
 
   abstract Builder<?, ?> createBuilder();
 
-  @Override
-  public abstract Node accept(Processor processor);
   /**
    * Common logic for a builder to create method calls and new instances.
    *
    * <p>Takes care of the busy work of keeping argument list and method descriptor parameter types
    * list in sync.
    */
-  public abstract static class Builder<T extends Builder<T, I>, I extends Invocation> {
+  public abstract static class Builder<T extends Builder<T, I>, I extends Invocation>
+      extends MemberReference.Builder<T, I, MethodDescriptor> {
 
-    private Expression qualifierExpression;
-    private MethodDescriptor methodDescriptor;
     private List<Expression> arguments = new ArrayList<>();
 
     public static Builder<?, ?> from(Invocation invocation) {
@@ -87,16 +85,14 @@ public abstract class Invocation extends Expression implements MemberReference {
       arguments.addAll(index, argumentExpressions);
       // Add the provided parameters to the proper index position of the existing parameters list.
 
-      methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
+      return setTarget(
+          MethodDescriptor.Builder.from(getTarget())
               .addParameterTypeDescriptors(
                   index,
-                  argumentExpressions
-                      .stream()
+                  argumentExpressions.stream()
                       .map(Expression::getTypeDescriptor)
                       .collect(toImmutableList()))
-              .build();
-      return getThis();
+              .build());
     }
 
     public final T addArgumentAndUpdateDescriptor(
@@ -104,11 +100,10 @@ public abstract class Invocation extends Expression implements MemberReference {
       arguments.add(index, argumentExpression);
       // Add the provided parameters to the proper index position of the existing parameters list.
 
-      methodDescriptor =
-          MethodDescriptor.Builder.from(methodDescriptor)
+      return setTarget(
+          MethodDescriptor.Builder.from(getTarget())
               .addParameterTypeDescriptors(index, parameterTypeDescriptor)
-              .build();
-      return getThis();
+              .build());
     }
 
     public final T replaceVarargsArgument(Expression... replacementArguments) {
@@ -116,44 +111,22 @@ public abstract class Invocation extends Expression implements MemberReference {
     }
 
     public final T replaceVarargsArgument(List<Expression> replacementArguments) {
-      checkState(methodDescriptor.isJsMethodVarargs());
+      checkState(getTarget().isJsMethodVarargs());
       int lastArgumentPosition = arguments.size() - 1;
       arguments.remove(lastArgumentPosition);
       arguments.addAll(replacementArguments);
       return getThis();
     }
 
-    public final T setQualifier(Expression qualifierExpression) {
-      this.qualifierExpression = qualifierExpression;
-      return getThis();
+    protected final List<Expression> getArguments() {
+      return arguments;
     }
 
-    public final T setMethodDescriptor(MethodDescriptor methodDescriptor) {
-      this.methodDescriptor = methodDescriptor;
-      return getThis();
-    }
-
-    @SuppressWarnings("unchecked")
-    private T getThis() {
-      return (T) this;
-    }
-
-    public final I build() {
-      return doCreateInvocation(qualifierExpression, methodDescriptor, arguments);
-    }
-
-    protected abstract I doCreateInvocation(
-        Expression qualifierExpression,
-        MethodDescriptor finalMethodDescriptor,
-        List<Expression> finalArguments);
-
-    protected Builder(Invocation invocation) {
-      this.qualifierExpression = invocation.getQualifier();
-      this.methodDescriptor = invocation.getTarget();
+    Builder(Invocation invocation) {
+      super(invocation);
       this.arguments = Lists.newArrayList(invocation.getArguments());
     }
 
-    protected Builder() {
-    }
+    Builder() {}
   }
 }

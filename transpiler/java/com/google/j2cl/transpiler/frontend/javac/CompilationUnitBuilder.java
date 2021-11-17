@@ -1000,10 +1000,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       }
       FieldDescriptor fieldDescriptor =
           environment.createFieldDescriptor((VariableElement) fieldAccess.sym, fieldAccess.type);
-      return FieldAccess.newBuilder()
-          .setQualifier(qualifier)
-          .setTargetFieldDescriptor(fieldDescriptor)
-          .build();
+      return FieldAccess.newBuilder().setQualifier(qualifier).setTarget(fieldDescriptor).build();
     }
     return null;
   }
@@ -1205,10 +1202,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         fieldDescriptor.isStatic()
             ? null
             : resolveOuterClassReference(fieldDescriptor.getEnclosingTypeDescriptor(), false);
-    return FieldAccess.newBuilder()
-        .setQualifier(qualifier)
-        .setTargetFieldDescriptor(fieldDescriptor)
-        .build();
+    return FieldAccess.newBuilder().setQualifier(qualifier).setTarget(fieldDescriptor).build();
   }
 
   private static boolean isSuperConstructorCall(JCMethodInvocation methodInvocation) {

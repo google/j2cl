@@ -20,7 +20,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,44 +27,20 @@ import java.util.List;
  */
 @Visitable
 public class MethodCall extends Invocation {
-  @Visitable Expression qualifier;
-  private final MethodDescriptor targetMethodDescriptor;
-  @Visitable List<Expression> arguments = new ArrayList<>();
   private final SourcePosition sourcePosition;
 
   /** If an instance call should be dispatched statically, e.g. A.super.method() invocation. */
-  private boolean isStaticDispatch;
+  private final boolean isStaticDispatch;
 
   private MethodCall(
       SourcePosition sourcePosition,
       Expression qualifier,
-      MethodDescriptor targetMethodDescriptor,
+      MethodDescriptor target,
       List<Expression> arguments,
       boolean isStaticDispatch) {
-    this.targetMethodDescriptor = checkNotNull(targetMethodDescriptor);
-    this.qualifier = checkNotNull(AstUtils.getExplicitQualifier(qualifier, targetMethodDescriptor));
-    this.arguments.addAll(checkNotNull(arguments));
+    super(checkNotNull(AstUtils.getExplicitQualifier(qualifier, target)), target, arguments);
     this.isStaticDispatch = isStaticDispatch;
     this.sourcePosition = checkNotNull(sourcePosition);
-  }
-
-  @Override
-  public Expression getQualifier() {
-    return this.qualifier;
-  }
-
-  /**
-   * Would normally be named getTargetMethodDescriptor() but in this situation it was more important
-   * to implement the MemberReference interface.
-   */
-  @Override
-  public MethodDescriptor getTarget() {
-    return this.targetMethodDescriptor;
-  }
-
-  @Override
-  public List<Expression> getArguments() {
-    return this.arguments;
   }
 
   public boolean isStaticDispatch() {
@@ -74,19 +49,19 @@ public class MethodCall extends Invocation {
 
   /** Returns true if the call needs dynamic dispatch. */
   public boolean isPolymorphic() {
-    return targetMethodDescriptor.isPolymorphic()
+    return getTarget().isPolymorphic()
         && !isStaticDispatch
         && !(qualifier instanceof SuperReference);
   }
 
   @Override
   public TypeDescriptor getTypeDescriptor() {
-    return targetMethodDescriptor.getReturnTypeDescriptor();
+    return getTarget().getReturnTypeDescriptor();
   }
 
   @Override
   public TypeDescriptor getDeclaredTypeDescriptor() {
-    return targetMethodDescriptor.getDeclarationDescriptor().getReturnTypeDescriptor();
+    return getTarget().getDeclarationDescriptor().getReturnTypeDescriptor();
   }
 
   public SourcePosition getSourcePosition() {
@@ -97,8 +72,8 @@ public class MethodCall extends Invocation {
   public MethodCall clone() {
     return new MethodCall(
         sourcePosition,
-        qualifier.clone(),
-        targetMethodDescriptor,
+        AstUtils.clone(qualifier),
+        getTarget(),
         AstUtils.clone(arguments),
         isStaticDispatch);
   }
@@ -129,7 +104,7 @@ public class MethodCall extends Invocation {
 
     public static Builder from(MethodDescriptor methodDescriptor) {
       Builder builder = new Builder();
-      builder.setMethodDescriptor(methodDescriptor).setSourcePosition(SourcePosition.NONE);
+      builder.setTarget(methodDescriptor).setSourcePosition(SourcePosition.NONE);
       return builder;
     }
 
@@ -144,12 +119,9 @@ public class MethodCall extends Invocation {
     }
 
     @Override
-    protected MethodCall doCreateInvocation(
-        Expression qualifierExpression,
-        MethodDescriptor methodDescriptor,
-        List<Expression> arguments) {
+    public MethodCall build() {
       return new MethodCall(
-          sourcePosition, qualifierExpression, methodDescriptor, arguments, isStaticDispatch);
+          sourcePosition, getQualifier(), getTarget(), getArguments(), isStaticDispatch);
     }
 
     private Builder(MethodCall methodCall) {

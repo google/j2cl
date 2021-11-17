@@ -530,7 +530,7 @@ public class AstUtils {
 
     Expression declarationExpression =
         FieldAccess.newBuilder()
-            .setTargetFieldDescriptor(field.getDescriptor())
+            .setTarget(field.getDescriptor())
             .setSourcePosition(field.getNameSourcePosition())
             .build();
 

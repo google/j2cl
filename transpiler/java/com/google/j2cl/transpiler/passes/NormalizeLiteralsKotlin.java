@@ -42,7 +42,7 @@ public class NormalizeLiteralsKotlin extends NormalizationPass {
                 ? numberLiteral
                 : FieldAccess.newBuilder()
                     .setSourcePosition(SourcePosition.NONE)
-                    .setTargetFieldDescriptor(longType.getFieldDescriptor("MIN_VALUE"))
+                    .setTarget(longType.getFieldDescriptor("MIN_VALUE"))
                     .build();
           }
         });

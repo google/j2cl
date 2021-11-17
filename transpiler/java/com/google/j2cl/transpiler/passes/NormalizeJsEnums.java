@@ -168,7 +168,7 @@ public class NormalizeJsEnums extends NormalizationPass {
             }
 
             return MethodCall.Builder.from(methodCall)
-                .setMethodDescriptor(fixEnumMethodDescriptor(methodDescriptor))
+                .setTarget(fixEnumMethodDescriptor(methodDescriptor))
                 .build();
           }
 

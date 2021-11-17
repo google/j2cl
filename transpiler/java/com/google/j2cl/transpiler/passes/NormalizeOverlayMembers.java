@@ -160,7 +160,7 @@ public class NormalizeOverlayMembers extends NormalizationPass {
               .build();
 
       return MethodCall.Builder.from(methodCall)
-          .setMethodDescriptor(methodDescriptor)
+          .setTarget(methodDescriptor)
           .setQualifier(null)
           .build();
     }

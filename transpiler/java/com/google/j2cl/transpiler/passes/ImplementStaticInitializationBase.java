@@ -24,9 +24,8 @@ import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
+import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.Statement;
@@ -64,13 +63,8 @@ public abstract class ImplementStaticInitializationBase extends NormalizationPas
     compilationUnit.accept(
         new AbstractVisitor() {
           @Override
-          public void exitInvocation(Invocation invocation) {
-            recordMemberReference(getCurrentType().getDeclaration(), invocation.getTarget());
-          }
-
-          @Override
-          public void exitFieldAccess(FieldAccess fieldAccess) {
-            recordMemberReference(getCurrentType().getDeclaration(), fieldAccess.getTarget());
+          public void exitMemberReference(MemberReference memberReference) {
+            recordMemberReference(getCurrentType().getDeclaration(), memberReference.getTarget());
           }
         });
   }

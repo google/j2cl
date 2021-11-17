@@ -261,7 +261,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             MethodDescriptor descriptor = expr.getTarget();
             MethodDescriptor newDescriptor = rewriteMethodDescriptor(descriptor);
             if (descriptor != newDescriptor) {
-              return Invocation.Builder.from(expr).setMethodDescriptor(newDescriptor).build();
+              return Invocation.Builder.from(expr).setTarget(newDescriptor).build();
             }
             return expr;
           }

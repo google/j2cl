@@ -21,44 +21,30 @@ import static com.google.common.base.Preconditions.checkState;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
-import com.google.j2cl.transpiler.ast.Expression.Precedence;
 
 /** Class for field access. */
 @Visitable
-public class FieldAccess extends Expression implements MemberReference {
-  @Visitable Expression qualifier;
-  private final FieldDescriptor targetFieldDescriptor;
+public class FieldAccess extends MemberReference {
   private final SourcePosition sourcePosition;
 
-  private FieldAccess(
-      Expression qualifier, FieldDescriptor targetFieldDescriptor, SourcePosition sourcePosition) {
-    this.targetFieldDescriptor = checkNotNull(targetFieldDescriptor);
-    this.qualifier = checkNotNull(qualifier);
+  private FieldAccess(Expression qualifier, FieldDescriptor target, SourcePosition sourcePosition) {
+    super(checkNotNull(AstUtils.getExplicitQualifier(qualifier, target)), target);
     this.sourcePosition = checkNotNull(sourcePosition);
   }
 
   @Override
-  public Expression getQualifier() {
-    return qualifier;
-  }
-
-  /**
-   * Would normally be named getTargetFieldDescriptor() but in this situation it was more important
-   * to implement the MemberReference interface.
-   */
-  @Override
-  public FieldDescriptor getTarget() {
-    return targetFieldDescriptor;
-  }
-
-  @Override
   public TypeDescriptor getTypeDescriptor() {
-    return targetFieldDescriptor.getTypeDescriptor();
+    return getTarget().getTypeDescriptor();
   }
 
   @Override
   public TypeDescriptor getDeclaredTypeDescriptor() {
-    return targetFieldDescriptor.getDeclarationDescriptor().getTypeDescriptor();
+    return getTarget().getDeclarationDescriptor().getTypeDescriptor();
+  }
+
+  @Override
+  public FieldDescriptor getTarget() {
+    return (FieldDescriptor) super.getTarget();
   }
 
   public SourcePosition getSourcePosition() {
@@ -97,13 +83,8 @@ public class FieldAccess extends Expression implements MemberReference {
   }
 
   @Override
-  public Precedence getPrecedence() {
-    return Precedence.MEMBER_ACCESS;
-  }
-
-  @Override
   public FieldAccess clone() {
-    return new FieldAccess(qualifier.clone(), targetFieldDescriptor, sourcePosition);
+    return new FieldAccess(AstUtils.clone(qualifier), getTarget(), sourcePosition);
   }
 
   @Override
@@ -111,19 +92,22 @@ public class FieldAccess extends Expression implements MemberReference {
     return Visitor_FieldAccess.visit(processor, this);
   }
 
+  @Override
+  Builder createBuilder() {
+    return new Builder(this);
+  }
+
   public static Builder newBuilder() {
     return new Builder();
   }
 
   /** Builder for FieldAccess. */
-  public static class Builder {
-
-    private FieldDescriptor targetFieldDescriptor;
-    private Expression qualifier;
+  public static class Builder
+      extends MemberReference.Builder<Builder, FieldAccess, FieldDescriptor> {
     private SourcePosition sourcePosition = SourcePosition.NONE;
 
     public static Builder from(FieldDescriptor targetFieldDescriptor) {
-      return newBuilder().setTargetFieldDescriptor(targetFieldDescriptor);
+      return newBuilder().setTarget(targetFieldDescriptor);
     }
 
     public static Builder from(Field targetField) {
@@ -132,19 +116,9 @@ public class FieldAccess extends Expression implements MemberReference {
 
     public static Builder from(FieldAccess fieldAccess) {
       return newBuilder()
-          .setTargetFieldDescriptor(fieldAccess.getTarget())
+          .setTarget(fieldAccess.getTarget())
           .setQualifier(fieldAccess.getQualifier())
           .setSourcePosition(fieldAccess.getSourcePosition());
-    }
-
-    public Builder setTargetFieldDescriptor(FieldDescriptor targetFieldDescriptor) {
-      this.targetFieldDescriptor = targetFieldDescriptor;
-      return this;
-    }
-
-    public Builder setQualifier(Expression qualifier) {
-      this.qualifier = qualifier;
-      return this;
     }
 
     public Builder setSourcePosition(SourcePosition sourcePosition) {
@@ -153,10 +127,14 @@ public class FieldAccess extends Expression implements MemberReference {
     }
 
     public FieldAccess build() {
-      return new FieldAccess(
-          AstUtils.getExplicitQualifier(qualifier, targetFieldDescriptor),
-          targetFieldDescriptor,
-          sourcePosition);
+      return new FieldAccess(getQualifier(), getTarget(), sourcePosition);
     }
+
+    private Builder(FieldAccess fieldAccess) {
+      super(fieldAccess);
+      this.sourcePosition = fieldAccess.getSourcePosition();
+    }
+
+    private Builder() {}
   }
 }

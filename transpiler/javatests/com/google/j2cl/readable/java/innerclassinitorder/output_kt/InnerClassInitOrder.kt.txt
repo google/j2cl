@@ -15,16 +15,16 @@ open class InnerClassInitOrder {
 
  open fun testExtendsNested() {
   val o: innerclassinitorder.`InnerClassInitOrder$ESOuter`? = innerclassinitorder.`InnerClassInitOrder$ESOuter`()
-  assert(1 == TODO("expression.qualify needs rendering: o)").value)
-  assert(2 == TODO("expression.qualify needs rendering: o)").value)
+  assert(1 == TODO("expression.qualify needs rendering: o!!)").value)
+  assert(2 == TODO("expression.qualify needs rendering: o!!)").value)
   assert(1 == innerclassinitorder.`InnerClassInitOrder$ESInnerSubclass`(o).value)
   assert(2 == innerclassinitorder.`InnerClassInitOrder$ESInnerSubclass`(2, o).value)
  }
 
  open fun testExtendsNestedWithGenerics() {
   val o: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<String?>? = innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<String?>()
-  assert(1 == TODO("expression.qualify needs rendering: o)").value)
-  assert(2 == TODO("expression.qualify needs rendering: o)").value)
+  assert(1 == TODO("expression.qualify needs rendering: o!!)").value)
+  assert(2 == TODO("expression.qualify needs rendering: o!!)").value)
   assert(1 == innerclassinitorder.`InnerClassInitOrder$ESWGInnerSubclass`(o).value)
   assert(2 == innerclassinitorder.`InnerClassInitOrder$ESWGInnerSubclass`(2, o).value)
  }
@@ -33,11 +33,11 @@ open class InnerClassInitOrder {
   val p1: innerclassinitorder.`InnerClassInitOrder$P1`<*>? = innerclassinitorder.`InnerClassInitOrder$P1`<Any?>()
   assert(1 == p1!!.value)
   assert(2 == innerclassinitorder.`InnerClassInitOrder$P1`<Any?>(2).value)
-  val p2: innerclassinitorder.`InnerClassInitOrder$P1$P2`<*, *>? = TODO("expression.qualify needs rendering: p1)")
+  val p2: innerclassinitorder.`InnerClassInitOrder$P1$P2`<*, *>? = TODO("expression.qualify needs rendering: p1!!)")
   assert(1 == p2!!.value)
-  assert(2 == TODO("expression.qualify needs rendering: p1)").value)
-  assert(1 == TODO("expression.qualify needs rendering: p2)").value)
-  assert(2 == TODO("expression.qualify needs rendering: p2)").value)
+  assert(2 == TODO("expression.qualify needs rendering: p1!!)").value)
+  assert(1 == TODO("expression.qualify needs rendering: p2!!)").value)
+  assert(2 == TODO("expression.qualify needs rendering: p2!!)").value)
  }
 
  open fun testInnerClassInitialization() {
@@ -65,10 +65,10 @@ open class InnerClassInitOrder {
 
  private val outer: innerclassinitorder.`InnerClassInitOrder$Outer`? = innerclassinitorder.`InnerClassInitOrder$Outer`(1)
 
- private val outerIsSuper: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outer)")
+ private val outerIsSuper: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outer!!)")
 
  open fun testOuterIsNotSuper() {
-  val x: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsNotSuper`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outerIsSuper)")
+  val x: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsNotSuper`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outerIsSuper!!)")
   assert(2 == x!!.getValue())
  }
 
@@ -98,7 +98,7 @@ open class InnerClassInitOrder {
  }
 
  open fun testUnqualifiedSuperCall() {
-  val x: innerclassinitorder.`InnerClassInitOrder$Outer$TestUnqualifiedSuperCall`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outerIsSuper)")
+  val x: innerclassinitorder.`InnerClassInitOrder$Outer$TestUnqualifiedSuperCall`? = TODO("expression.qualify needs rendering: InnerClassInitOrder.this.outerIsSuper!!)")
   assert(2 == x!!.getValue())
  }
 

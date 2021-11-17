@@ -92,7 +92,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
 
             // new A$$LambdaImplementor( captures... )
             return NewInstance.newBuilder()
-                .setMethodDescriptor(
+                .setTarget(
                     getLambdaImplementorConstructorDescriptor(
                         implementorTypeDescriptor,
                         argumentsBuilder.build().stream()
@@ -361,7 +361,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
 
           private FieldAccess createCaptureFieldAccess(Field captureField) {
             return FieldAccess.newBuilder()
-                .setTargetFieldDescriptor(captureField.getDescriptor())
+                .setTarget(captureField.getDescriptor())
                 .setQualifier(new ThisReference(implementorTypeDescriptor))
                 .setSourcePosition(sourcePosition)
                 .build();

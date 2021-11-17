@@ -15,14 +15,81 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-/**
- * Abstracts class member reference (i.e. field access and method call).
- */
-public interface MemberReference {
+import static com.google.common.base.Preconditions.checkNotNull;
 
-  MemberDescriptor getTarget();
+import com.google.j2cl.common.visitor.Visitable;
+import javax.annotation.Nullable;
 
-  Expression getQualifier();
+/** Abstracts class member reference (i.e. field accesses, method calls and new instances). */
+@Visitable
+public abstract class MemberReference extends Expression {
+  @Visitable @Nullable Expression qualifier;
+  private final MemberDescriptor target;
 
-  TypeDescriptor getTypeDescriptor();
+  MemberReference(Expression qualifier, MemberDescriptor target) {
+    this.qualifier = qualifier;
+    this.target = checkNotNull(target);
+  }
+
+  public MemberDescriptor getTarget() {
+    return target;
+  }
+
+  public final Expression getQualifier() {
+    return qualifier;
+  }
+
+  @Override
+  public Precedence getPrecedence() {
+    return Precedence.MEMBER_ACCESS;
+  }
+
+  abstract Builder<?, ?, ?> createBuilder();
+
+  /** Common logic for a builder to create method calls, new instances and field accesses. */
+  public abstract static class Builder<
+      T extends MemberReference.Builder<T, R, D>,
+      R extends MemberReference,
+      D extends MemberDescriptor> {
+
+    private Expression qualifier;
+    private D target;
+
+    public static MemberReference.Builder<?, ?, ?> from(MemberReference memberReference) {
+      return memberReference.createBuilder();
+    }
+
+    public final T setQualifier(Expression qualifier) {
+      this.qualifier = qualifier;
+      return getThis();
+    }
+
+    public final T setTarget(D target) {
+      this.target = target;
+      return getThis();
+    }
+
+    public abstract R build();
+
+    @SuppressWarnings("unchecked")
+    protected final T getThis() {
+      return (T) this;
+    }
+
+    protected final Expression getQualifier() {
+      return qualifier;
+    }
+
+    protected final D getTarget() {
+      return target;
+    }
+
+    @SuppressWarnings("unchekded")
+    Builder(MemberReference memberReference) {
+      this.qualifier = memberReference.getQualifier();
+      this.target = (D) memberReference.getTarget();
+    }
+
+    Builder() {}
+  }
 }
