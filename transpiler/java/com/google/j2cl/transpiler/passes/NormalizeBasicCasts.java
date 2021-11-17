@@ -28,7 +28,6 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
-import com.google.j2cl.transpiler.ast.TypeDescriptors.BootstrapType;
 
 /** Replaces cast expression on primitive &amp; boxed types with corresponding cast method call. */
 public class NormalizeBasicCasts extends NormalizationPass {
@@ -92,7 +91,7 @@ public class NormalizeBasicCasts extends NormalizationPass {
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
+            .setEnclosingTypeDescriptor(expression.getTypeDescriptor().toBoxedType())
             .setName(method)
             .setReturnTypeDescriptor(castTypeDescriptor)
             .build();
@@ -106,7 +105,7 @@ public class NormalizeBasicCasts extends NormalizationPass {
 
     FieldDescriptor castToFieldDescriptor =
         FieldDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(BootstrapType.CASTS.getDescriptor())
+            .setEnclosingTypeDescriptor(expression.getTypeDescriptor().toBoxedType())
             .setName(field)
             .setTypeDescriptor(castTypeDescriptor)
             .build();
