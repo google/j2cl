@@ -278,6 +278,8 @@ OPTIMIZED_JS_LIST = [
     "//transpiler/javatests/com/google/j2cl/integration/objectchilddevirtualcalls:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/objectdevirtualcalls:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/objectdevirtualcalls:optimized_js.esnext",
+    "//transpiler/javatests/com/google/j2cl/integration/optimizedenums:optimized_js",
+    "//transpiler/javatests/com/google/j2cl/integration/optimizedenums:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/overloadedmethods:optimized_js",
     "//transpiler/javatests/com/google/j2cl/integration/overloadedmethods:optimized_js.esnext",
     "//transpiler/javatests/com/google/j2cl/integration/overridingclassmethods:optimized_js",

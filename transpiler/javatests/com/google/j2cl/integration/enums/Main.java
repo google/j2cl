@@ -19,6 +19,7 @@ import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import java.util.function.Function;
 
+/** Contains test for enums that cannot be optimized according to go/j2cl-enums-optimization. */
 public class Main {
   public static void main(String[] args) {
     testOrdinal();
@@ -26,17 +27,17 @@ public class Main {
     testInstanceMethod();
     testStaticFields();
     testEnumInitializedWithLambdas();
+    testEnumWithConstructors();
   }
 
   private static void testOrdinal() {
     assertTrue(Foo.FOO.ordinal() == 0);
     assertTrue(Foo.FOZ.ordinal() == 1);
 
-    assertTrue(Bar.BAR.ordinal() == 0);
-    assertTrue(Bar.BAZ.ordinal() == 1);
-    assertTrue(Bar.BANG.ordinal() == 2);
-
-    assertTrue(Blah.BLAH.ordinal() == 0);
+    assertTrue(Bar.FOO.ordinal() == 0);
+    assertTrue(Bar.BAR.ordinal() == 1);
+    assertTrue(Bar.BAZ.ordinal() == 2);
+    assertTrue(Bar.BANG.ordinal() == 3);
   }
 
   private static void testName() {
@@ -46,11 +47,10 @@ public class Main {
     assertTrue(Bar.BAR.name().equals("BAR"));
     assertTrue(Bar.BAZ.name().equals("BAZ"));
     assertTrue(Bar.BANG.name().equals("BANG"));
-
-    assertTrue(Blah.BLAH.name().equals("BLAH"));
   }
 
   private static void testInstanceMethod() {
+    assertTrue(Bar.FOO.getF() == -1);
     assertTrue(Bar.BAR.getF() == 1);
     assertTrue(Bar.BAZ.getF() == 0);
     assertTrue(Bar.BANG.getF() == 7);
@@ -63,7 +63,14 @@ public class Main {
       assertTrue(b != null);
     }
 
-    assertTrue(Baz.field == null);
+    assertTrue(Bar.staticField == null);
+  }
+
+  private static void testEnumWithConstructors() {
+    assertTrue(Bar.FOO.f == -1);
+    assertTrue(Bar.BAR.f == 1);
+    assertTrue(Bar.BAZ.f == 0);
+    assertTrue(Bar.BANG.f == 5);
   }
 
   enum Foo {
@@ -74,6 +81,7 @@ public class Main {
   }
 
   enum Bar {
+    FOO,
     BAR(1),
     BAZ(Foo.FOO),
     BANG(5) {
@@ -83,9 +91,18 @@ public class Main {
       }
     };
 
+    static Bar sf(Object o) {
+      return null;
+    }
+
     static Bar[] ENUM_SET = {Bar.BAR, Bar.BAZ, Bar.BANG};
+    static Bar staticField = sf(null);
 
     int f;
+
+    Bar() {
+      this(-1);
+    }
 
     Bar(int i) {
       f = i;
@@ -98,21 +115,6 @@ public class Main {
     int getF() {
       return f;
     }
-  }
-
-  enum Baz {
-    A;
-
-    static Baz f(Object o) {
-      return null;
-    }
-
-    static Baz field = f(new Object());
-  }
-
-  enum Blah {
-    BLAH,
-    UNREFERENCED_VALUE,
   }
 
   private static void testEnumInitializedWithLambdas() {
