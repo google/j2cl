@@ -59,7 +59,9 @@ private fun Renderer.renderField(field: Field) {
   if (!field.descriptor.visibility.isPrivate) render("@JvmField ")
   renderVisibility(field.descriptor.visibility)
   render(if (isFinal) "val " else "var ")
-  render("${field.descriptor.name!!.identifierSourceString}: ${typeDescriptor.sourceString}")
+  render(field.descriptor.name!!.identifierSourceString)
+  render(": ")
+  render(typeDescriptor)
   field.initializer?.let { initializer ->
     render(" = ")
     renderExpression(initializer)
@@ -82,7 +84,10 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
     render("constructor")
   } else {
     render("fun ")
-    renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors, trailingSpace = true)
+    if (methodDescriptor.typeParameterTypeDescriptors.isNotEmpty()) {
+      renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
+      render(" ")
+    }
     render(methodDescriptor.name!!.identifierSourceString)
   }
   renderMethodParameters(method)
@@ -129,12 +134,15 @@ private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
     else (variableTypeDescriptor as ArrayTypeDescriptor).componentTypeDescriptor!!
   if (isVararg) render("vararg ")
   renderName(variable)
-  render(": ${renderedTypeDescriptor.sourceString}")
+  render(": ")
+  render(renderedTypeDescriptor)
 }
 
 private fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {
-  methodDescriptor.returnTypeDescriptor.takeIf { it != PrimitiveTypes.VOID }?.let {
-    render(": ${it.sourceString}")
+  val returnTypeDescriptor = methodDescriptor.returnTypeDescriptor
+  if (returnTypeDescriptor != PrimitiveTypes.VOID) {
+    render(": ")
+    render(returnTypeDescriptor)
   }
 }
 

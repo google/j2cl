@@ -43,17 +43,22 @@ fun Renderer.renderType(type: Type) {
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
   render(declaration.simpleBinaryName.identifierSourceString)
-  renderTypeParameters(declaration.typeParameterDescriptors)
+  if (declaration.typeParameterDescriptors.isNotEmpty()) {
+    renderTypeParameters(declaration.typeParameterDescriptors)
+  }
 }
 
 private fun Renderer.renderSuperTypes(type: Type) {
-  val hasConstructors = type.constructors.isNotEmpty()
-  type
-    .superTypesStream
-    .filter { !isJavaLangObject(it) }
-    .map { it.toNonNullable().sourceString.plus(if (it.isClass && !hasConstructors) "()" else "") }
-    .collect(Collectors.joining(", "))
-    .let { if (it.isNotEmpty()) render(": $it") }
+  val superTypes =
+    type.superTypesStream.filter { !isJavaLangObject(it) }.collect(Collectors.toList())
+  if (superTypes.isNotEmpty()) {
+    val hasConstructors = type.constructors.isNotEmpty()
+    render(": ")
+    renderCommaSeparated(superTypes) { superType ->
+      render(superType.toNonNullable())
+      if (superType.isClass && !hasConstructors) render("()")
+    }
+  }
 }
 
 private fun Renderer.renderTypeBody(type: Type) {

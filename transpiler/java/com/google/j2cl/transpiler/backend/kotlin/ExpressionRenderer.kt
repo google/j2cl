@@ -15,11 +15,13 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayAccess
 import com.google.j2cl.transpiler.ast.ArrayLength
 import com.google.j2cl.transpiler.ast.ArrayLiteral
 import com.google.j2cl.transpiler.ast.BinaryExpression
 import com.google.j2cl.transpiler.ast.BinaryOperator
+import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CastExpression
 import com.google.j2cl.transpiler.ast.ConditionalExpression
 import com.google.j2cl.transpiler.ast.Expression
@@ -34,13 +36,17 @@ import com.google.j2cl.transpiler.ast.MethodCall
 import com.google.j2cl.transpiler.ast.MultiExpression
 import com.google.j2cl.transpiler.ast.NewArray
 import com.google.j2cl.transpiler.ast.NewInstance
+import com.google.j2cl.transpiler.ast.NullLiteral
+import com.google.j2cl.transpiler.ast.NumberLiteral
 import com.google.j2cl.transpiler.ast.PostfixExpression
 import com.google.j2cl.transpiler.ast.PrefixExpression
 import com.google.j2cl.transpiler.ast.PrefixOperator
-import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
+import com.google.j2cl.transpiler.ast.PrimitiveTypes
+import com.google.j2cl.transpiler.ast.StringLiteral
 import com.google.j2cl.transpiler.ast.SuperReference
 import com.google.j2cl.transpiler.ast.ThisReference
 import com.google.j2cl.transpiler.ast.TypeDescriptor
+import com.google.j2cl.transpiler.ast.TypeLiteral
 import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment
@@ -58,7 +64,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is FieldAccess -> renderFieldAccess(expression)
     is FunctionExpression -> renderFunctionExpression(expression)
     is InstanceOfExpression -> renderInstanceOfExpression(expression)
-    is Literal -> render(expression.sourceString)
+    is Literal -> renderLiteral(expression)
     is JavaScriptConstructorReference -> renderJavaScriptConstructorReference(expression)
     is MethodCall -> renderMethodCall(expression)
     is MultiExpression -> renderMultiExpression(expression)
@@ -69,7 +75,7 @@ fun Renderer.renderExpression(expression: Expression) {
     is SuperReference -> render("super")
     is ThisReference -> render("this")
     is VariableDeclarationExpression -> renderVariableDeclarationExpression(expression)
-    is VariableReference -> render(expression.target.name.identifierSourceString)
+    is VariableReference -> renderVariableReference(expression)
     else -> renderTodo(expression::class.java.simpleName)
   }
 }
@@ -85,16 +91,20 @@ private fun Renderer.renderArrayLength(arrayLength: ArrayLength) {
 }
 
 private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
-  val componentTypeDescriptor = arrayLiteral.typeDescriptor.componentTypeDescriptor!!
-  render(
-    if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
-      // Render as byteArrayOf(...), intArrayOf(...) and so on.
-      "${componentTypeDescriptor.sourceString.toLowerCase()}ArrayOf"
-    } else {
-      // Render as arrayOf(...).
-      "arrayOf<${componentTypeDescriptor.sourceString}>"
+  when (val componentTypeDescriptor = arrayLiteral.typeDescriptor.componentTypeDescriptor!!) {
+    PrimitiveTypes.BOOLEAN -> render("booleanArrayOf")
+    PrimitiveTypes.CHAR -> render("charArrayOf")
+    PrimitiveTypes.BYTE -> render("byteArrayOf")
+    PrimitiveTypes.SHORT -> render("shortArrayOf")
+    PrimitiveTypes.INT -> render("intArrayOf")
+    PrimitiveTypes.LONG -> render("longArrayOf")
+    PrimitiveTypes.FLOAT -> render("floatArrayOf")
+    PrimitiveTypes.DOUBLE -> render("doubleArrayOf")
+    else -> {
+      render("arrayOf")
+      renderInAngleBrackets { render(componentTypeDescriptor) }
     }
-  )
+  }
   renderInParentheses {
     renderCommaSeparated(arrayLiteral.valueExpressions) { renderExpression(it) }
   }
@@ -110,7 +120,8 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
 
 private fun Renderer.renderCastExpression(expression: CastExpression) {
   renderExpression(expression.expression)
-  render(" as ${expression.castTypeDescriptor.sourceString}")
+  render(" as ")
+  render(expression.castTypeDescriptor)
 }
 
 private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
@@ -142,7 +153,42 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
 private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOfExpression) {
   renderExpression(instanceOfExpression.expression)
   render(" is ")
-  render(instanceOfExpression.testTypeDescriptor.toNonNullable().sourceString)
+  render(instanceOfExpression.testTypeDescriptor.toNonNullable())
+}
+
+private fun Renderer.renderLiteral(literal: Literal) {
+  when (literal) {
+    is NullLiteral -> render("null")
+    is BooleanLiteral -> renderBooleanLiteral(literal)
+    is StringLiteral -> renderStringLiteral(literal)
+    is TypeLiteral -> renderTypeLiteral(literal)
+    is NumberLiteral -> renderNumberLiteral(literal)
+    else -> throw InternalCompilerError("renderLiteral($literal)")
+  }
+}
+
+private fun Renderer.renderBooleanLiteral(booleanLiteral: BooleanLiteral) {
+  render("${booleanLiteral.value}")
+}
+
+private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
+  render("\"${stringLiteral.value.escapedString}\"")
+}
+
+private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
+  render(typeLiteral.referencedTypeDescriptor.toNonNullable())
+  render("::class.java")
+}
+
+private fun Renderer.renderNumberLiteral(numberLiteral: NumberLiteral) {
+  when (numberLiteral.typeDescriptor.toUnboxedType()) {
+    PrimitiveTypes.CHAR -> render("'${numberLiteral.value.toChar().escapedString}'")
+    PrimitiveTypes.INT -> render("${numberLiteral.value.toInt()}")
+    PrimitiveTypes.LONG -> render("${numberLiteral.value.toLong()}L")
+    PrimitiveTypes.FLOAT -> render("${numberLiteral.value.toFloat()}f")
+    PrimitiveTypes.DOUBLE -> render("${numberLiteral.value.toDouble()}")
+    else -> throw InternalCompilerError("renderNumberLiteral($numberLiteral)")
+  }
 }
 
 private fun Renderer.renderConditionalExpression(conditionalExpression: ConditionalExpression) {
@@ -161,7 +207,7 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 private fun Renderer.renderJavaScriptConstructorReference(
   javaScriptConstructorReference: JavaScriptConstructorReference
 ) {
-  render(javaScriptConstructorReference.referencedTypeDeclaration.sourceString)
+  render(javaScriptConstructorReference.referencedTypeDeclaration)
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
@@ -203,13 +249,20 @@ private fun Renderer.renderNewArrayOfSize(
   componentTypeDescriptor: TypeDescriptor,
   sizeExpression: Expression
 ) {
-  render(
-    if (componentTypeDescriptor is PrimitiveTypeDescriptor) {
-      "${componentTypeDescriptor.sourceString}Array"
-    } else {
-      "arrayOfNulls<${componentTypeDescriptor.sourceString}>"
+  when (componentTypeDescriptor) {
+    PrimitiveTypes.BOOLEAN -> render("BooleanArray")
+    PrimitiveTypes.CHAR -> render("CharArray")
+    PrimitiveTypes.BYTE -> render("ByteArray")
+    PrimitiveTypes.SHORT -> render("ShortArray")
+    PrimitiveTypes.INT -> render("IntArray")
+    PrimitiveTypes.LONG -> render("LongArray")
+    PrimitiveTypes.FLOAT -> render("FloatArray")
+    PrimitiveTypes.DOUBLE -> render("DoubleArray")
+    else -> {
+      render("arrayOfNulls")
+      renderInAngleBrackets { render(componentTypeDescriptor) }
     }
-  )
+  }
   renderInParentheses { renderExpression(sizeExpression) }
 }
 
@@ -218,7 +271,7 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
     renderTodo("expression.qualify needs rendering: ${expression.qualifier})")
     return
   }
-  render(expression.typeDescriptor.sourceString)
+  render(expression.typeDescriptor)
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }
 
@@ -245,6 +298,10 @@ private fun Renderer.renderVariableDeclarationExpression(
   }
 }
 
+private fun Renderer.renderVariableReference(variableReference: VariableReference) {
+  render(variableReference.target.name.identifierSourceString)
+}
+
 private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclarationFragment) {
   renderVariable(fragment.variable)
   fragment.initializer?.let {
@@ -254,7 +311,9 @@ private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclara
 }
 
 fun Renderer.renderVariable(variable: Variable) {
-  render("${variable.name.identifierSourceString}: ${variable.typeDescriptor.sourceString}")
+  render(variable.name.identifierSourceString)
+  render(": ")
+  render(variable.typeDescriptor)
 }
 
 private fun Renderer.renderLeftSubExpression(expression: Expression, operand: Expression) {

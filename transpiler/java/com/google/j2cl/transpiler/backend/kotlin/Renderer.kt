@@ -73,6 +73,12 @@ class Renderer(
     render(">")
   }
 
+  fun renderInCommentBrackets(renderFn: () -> Unit) {
+    render("/* ")
+    renderFn()
+    render(" */")
+  }
+
   fun <V> renderSeparatedWith(values: Iterable<V>, separator: String, renderFn: (V) -> Unit) {
     var first = true
     for (value in values) {
@@ -100,5 +106,8 @@ class Renderer(
     renderSeparatedWith(values, "\n\n", renderFn)
   }
 
-  fun renderTodo(string: String) = render("TODO(${StringLiteral(string).sourceString})")
+  fun renderTodo(string: String) {
+    render("TODO")
+    renderInParentheses { renderExpression(StringLiteral(string)) }
+  }
 }

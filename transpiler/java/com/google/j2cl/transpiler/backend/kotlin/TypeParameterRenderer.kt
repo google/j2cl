@@ -15,28 +15,23 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.j2cl.transpiler.ast.HasName
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeVariable
 
-internal fun Renderer.renderTypeParameters(
-  typeVariables: List<TypeVariable>,
-  trailingSpace: Boolean = false
-) =
-  typeVariables.takeIf { it.isNotEmpty() }?.let { typeVariables ->
-    renderInAngleBrackets {
-      renderCommaSeparated(typeVariables) { render(it.typeParameterSourceString) }
-    }
-    if (trailingSpace) render(" ")
-  }
+internal fun Renderer.renderTypeParameters(typeVariables: List<TypeVariable>) {
+  renderInAngleBrackets { renderCommaSeparated(typeVariables) { renderTypeParameter(it) } }
+}
 
-internal fun Renderer.renderWhereClause(typeVariables: List<TypeVariable>) =
-  typeVariables.map { it.whereClauseSourceStrings }.flatten().takeIf { it.isNotEmpty() }?.let {
-    sourceStrings ->
+internal fun Renderer.renderWhereClause(typeVariables: List<TypeVariable>) {
+  val whereClauseItems = typeVariables.map { it.whereClauseItems }.flatten()
+  if (whereClauseItems.isNotEmpty()) {
     render(" where ")
-    renderCommaSeparated(sourceStrings) { render(it) }
+    renderCommaSeparated(whereClauseItems) { render(it) }
   }
+}
 
 private val TypeVariable.boundTypeDescriptors: List<TypeDescriptor>
   get() =
@@ -48,20 +43,21 @@ private val TypeVariable.boundTypeDescriptors: List<TypeDescriptor>
       }
     }
 
-private val TypeVariable.typeParameterSourceString: String
-  get() =
-    name.identifierSourceString.let { nameSourceString ->
-      boundTypeDescriptors.singleOrNull().let { boundTypeDescriptorOrNull ->
-        if (boundTypeDescriptorOrNull == null) nameSourceString
-        else "$nameSourceString: ${boundTypeDescriptorOrNull.argumentSourceString}"
-      }
-    }
+private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
+  render(typeVariable.name.identifierSourceString)
+  typeVariable.boundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
+    render(": ")
+    renderArgument(boundTypeDescriptor)
+  }
+}
 
-private val TypeVariable.whereClauseSourceStrings: List<String>
-  get() =
-    name.identifierSourceString.let { nameSourceString ->
-      boundTypeDescriptors.takeIf { it.size > 1 }?.map {
-        "$nameSourceString: ${it.argumentSourceString}"
-      }
-        ?: listOf()
-    }
+private data class WhereClauseItem(val hasName: HasName, val boundTypeDescriptor: TypeDescriptor)
+
+private val TypeVariable.whereClauseItems: List<WhereClauseItem>
+  get() = boundTypeDescriptors.takeIf { it.size > 1 }?.map { WhereClauseItem(this, it) } ?: listOf()
+
+private fun Renderer.render(whereClauseItem: WhereClauseItem) {
+  render(whereClauseItem.hasName.name.identifierSourceString)
+  render(": ")
+  renderArgument(whereClauseItem.boundTypeDescriptor)
+}

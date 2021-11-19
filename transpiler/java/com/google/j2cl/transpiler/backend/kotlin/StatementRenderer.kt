@@ -123,7 +123,9 @@ private fun Renderer.renderIfStatement(ifStatement: IfStatement) {
 private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarationStatement) {
   var fieldDescriptor = declaration.fieldDescriptor
   render("var ${fieldDescriptor.name!!.identifierSourceString}")
-  render(": ${fieldDescriptor.typeDescriptor.sourceString} = ")
+  render(": ")
+  render(fieldDescriptor.typeDescriptor)
+  render(" = ")
   renderExpression(declaration.expression)
 }
 
@@ -184,7 +186,8 @@ private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
       render(" catch ")
       renderInParentheses {
         renderName(catchVariable)
-        render(": ${catchType.toNonNullable().sourceString}")
+        render(": ")
+        render(catchType.toNonNullable())
       }
       render(" ")
       renderStatement(catchClause.body)
