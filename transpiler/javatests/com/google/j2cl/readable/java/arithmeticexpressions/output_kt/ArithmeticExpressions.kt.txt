@@ -42,7 +42,7 @@ open class ArithmeticExpressions {
   }
   val f: Int = - a
   val g: Int = + a
-  val h: Int = ~a
+  val h: Int = a.inv()
   val i: Int = 1 + 1 + 2 - 5
   val j: Int = (1 + 2) * (3 + 4)
   val p: Int = 1 / 2 * 3 % 4
@@ -55,19 +55,19 @@ open class ArithmeticExpressions {
   val l: Boolean = 1 + 2 != 4
   val m: Boolean = Long.MAX_VALUE.toDouble() != 9.223372036854778E18
   val o: Double = ((5 + 1) / 2).toDouble() - 0.0
-  a = a << 31L
-  a = a << 1L
+  a = a.shl(31L)
+  a = a.shl(1L)
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
   a = (a.toDouble() + Double.MAX_VALUE).toInt()
-  k = k | true
+  k = k.or(true)
   var s: Short = 10
   k = run {
    s = (s.toInt() + 1).toShort()
    s
   }.toInt() == 10
-  var q: Int = 3 >> 2
-  q = 3 >>> 2
+  var q: Int = 3.shr(2)
+  q = 3.ushr(2)
   val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: Char = 'y'
   val z: Long? = 121L
@@ -86,13 +86,13 @@ open class ArithmeticExpressions {
   ints!![0] = ints!![0] - 1
   ints!![0] = ints!![0] * 1
   ints!![0] = ints!![0] / 1
-  ints!![0] = ints!![0] & 1
-  ints!![0] = ints!![0] ^ 1
-  ints!![0] = ints!![0] | 1
+  ints!![0] = ints!![0].and(1)
+  ints!![0] = ints!![0].xor(1)
+  ints!![0] = ints!![0].or(1)
   ints!![0] = ints!![0] % 1
-  ints!![0] = ints!![0] << 1
-  ints!![0] = ints!![0] >> 1
-  ints!![0] = ints!![0] >>> 1
+  ints!![0] = ints!![0].shl(1)
+  ints!![0] = ints!![0].shr(1)
+  ints!![0] = ints!![0].ushr(1)
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] + 1
   var i: Int = 0
@@ -156,7 +156,7 @@ open class ArithmeticExpressions {
    }
   }
   val booleans: BooleanArray? = null
-  booleans!![0] = booleans!![0] | true
+  booleans!![0] = booleans!![0].or(true)
   val strings: Array<String?>? = null
   strings!![0] = strings!![0] + null
   val shorts: ShortArray? = null
@@ -175,7 +175,7 @@ open class ArithmeticExpressions {
   d = d!! + c!!
   var i: Int = 43
   d = d!! + i
-  d = d!! << i
+  d = d!!.shl(i)
   i = i + c!!
   var e: Int? = run {
    c = c!! + 1
@@ -223,7 +223,7 @@ open class ArithmeticExpressions {
   var l: Long
   var d: Double
   l = (2 - boxedInteger!!).toLong() - 2L
-  l = (2 | boxedInteger!!).toLong() | 2L
+  l = 2.or(boxedInteger).toLong().or(2L)
   l = 1000000L * l * 60L * 60L * 24L
   l = (24 * 60 * 60).toLong() * l * 1000000L
   d = run {

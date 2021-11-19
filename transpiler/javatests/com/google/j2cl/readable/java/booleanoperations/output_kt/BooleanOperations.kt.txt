@@ -10,23 +10,23 @@ open class BooleanOperations {
   val t: Boolean = !!!true
   r = ls == rs
   r = ls != rs
-  r = ls ^ rs
-  r = ls & rs
-  r = ls | rs
+  r = ls.xor(rs)
+  r = ls.and(rs)
+  r = ls.or(rs)
   r = ls && rs
   r = ls || rs
   r = run {
    ls = rs
    ls
   }
-  r = r ^ rs
-  r = r & rs
-  r = r | rs
+  r = r.xor(rs)
+  r = r.and(rs)
+  r = r.or(rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls == rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls != rs)
-  booleanoperations.BooleanOperations.acceptBoolean(ls ^ rs)
-  booleanoperations.BooleanOperations.acceptBoolean(ls & rs)
-  booleanoperations.BooleanOperations.acceptBoolean(ls | rs)
+  booleanoperations.BooleanOperations.acceptBoolean(ls.xor(rs))
+  booleanoperations.BooleanOperations.acceptBoolean(ls.and(rs))
+  booleanoperations.BooleanOperations.acceptBoolean(ls.or(rs))
   booleanoperations.BooleanOperations.acceptBoolean(ls && rs)
   booleanoperations.BooleanOperations.acceptBoolean(ls || rs)
   booleanoperations.BooleanOperations.acceptBoolean(run {
@@ -36,9 +36,9 @@ open class BooleanOperations {
   var br: Boolean?
   br = ls == rs
   br = ls != rs
-  br = ls ^ rs
-  br = ls & rs
-  br = ls | rs
+  br = ls.xor(rs)
+  br = ls.and(rs)
+  br = ls.or(rs)
   br = ls && rs
   br = ls || rs
   br = run {
@@ -51,13 +51,13 @@ open class BooleanOperations {
   if (ls != rs) {
    r = true
   }
-  if (ls ^ rs) {
+  if (ls.xor(rs)) {
    r = true
   }
-  if (ls & rs) {
+  if (ls.and(rs)) {
    r = true
   }
-  if (ls | rs) {
+  if (ls.or(rs)) {
    r = true
   }
   if (ls && rs) {
@@ -67,12 +67,12 @@ open class BooleanOperations {
    r = true
   }
   var finalOuter: booleanoperations.`BooleanOperations$1Outer`? = booleanoperations.`BooleanOperations$1Outer`(this)
-  finalOuter!!.b = finalOuter!!.b | true
+  finalOuter!!.b = finalOuter!!.b.or(true)
   var outer: booleanoperations.`BooleanOperations$1Outer`? = booleanoperations.`BooleanOperations$1Outer`(this)
-  outer!!.b = outer!!.b | run {
+  outer!!.b = outer!!.b.or(run {
    outer = null
    outer
-  } == null
+  } == null)
  }
 
  companion object {
@@ -99,6 +99,6 @@ open class `BooleanOperations$1Outer$Inner` {
  @JvmField val `this`: booleanoperations.`BooleanOperations$1Outer`?
 
  init {
-  this.`this`!!.b = this.`this`!!.b | true
+  this.`this`!!.b = this.`this`!!.b.or(true)
  }
 }

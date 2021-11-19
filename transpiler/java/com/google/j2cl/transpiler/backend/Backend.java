@@ -41,6 +41,7 @@ import com.google.j2cl.transpiler.passes.ImplementFloatingPointRemainderOperatio
 import com.google.j2cl.transpiler.passes.ImplementInstanceInitialization;
 import com.google.j2cl.transpiler.passes.ImplementInstanceOfs;
 import com.google.j2cl.transpiler.passes.ImplementJsFunctionCopyMethod;
+import com.google.j2cl.transpiler.passes.ImplementKotlinBitLevelOperators;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaImplementorClasses;
 import com.google.j2cl.transpiler.passes.ImplementLambdaExpressionsViaJsFunctionAdaptor;
 import com.google.j2cl.transpiler.passes.ImplementStaticInitializationViaClinitFunctionRedirection;
@@ -388,6 +389,7 @@ public enum Backend {
           NormalizeNestedBlocks::new,
           InsertWideningPrimitiveConversionsKotlin::new,
           NormalizeBasicCasts::new,
+          ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
 
           // Verification
