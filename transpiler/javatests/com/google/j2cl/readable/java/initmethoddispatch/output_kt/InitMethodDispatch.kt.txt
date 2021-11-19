@@ -3,11 +3,9 @@ package initmethoddispatch
 open class InitMethodDispatch<T> {
  @JvmField internal var value: Int = 0
 
- internal constructor(): this(1) {
+ internal constructor(): this(1)
 
- }
-
- internal constructor(i: Int) {
+ internal constructor(i: Int): super() {
   this.value = i
  }
 }

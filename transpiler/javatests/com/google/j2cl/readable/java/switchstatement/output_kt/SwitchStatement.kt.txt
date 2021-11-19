@@ -1,6 +1,8 @@
 package switchstatement
 
-enum class Numbers: Enum<switchstatement.Numbers?>() {
+enum class Numbers: Enum<switchstatement.Numbers?> {
+ internal constructor(): super()
+
  companion object {
   @JvmField val ONE: switchstatement.Numbers = switchstatement.Numbers()
 
@@ -9,6 +11,8 @@ enum class Numbers: Enum<switchstatement.Numbers?>() {
 }
 
 open class SwitchStatement {
+ constructor(): super()
+
  open fun main() {
   SWITCH@ do when ("one") {
    "one" ->
@@ -43,7 +47,7 @@ open class SwitchStatement {
 
  companion object {
   @JvmStatic
-  private fun testSwitchVariableDeclarations() {
+  internal fun testSwitchVariableDeclarations() {
    SWITCH@ do when (3) {
     1 ->
      val unassigned: Int

@@ -3,18 +3,20 @@ package anonymousclass
 abstract class SomeClass {
  abstract open fun foo(): String?
 
- internal constructor(i: Int) {}
+ internal constructor(i: Int): super()
 }
 
 open class AnonymousClass {
+ constructor(): super()
+
  open fun main() {
-  val instance: anonymousclass.SomeClass? = TODO("expression.qualify needs rendering: AnonymousClass.this)")
+  val instance: anonymousclass.SomeClass? = anonymousclass.`AnonymousClass$1`(this, 1)
  }
 }
 
 open class `AnonymousClass$1`: anonymousclass.SomeClass {
- internal constructor(`$_0`: Int): super(`$_0`) {
-
+ internal constructor(`$outer_this`: anonymousclass.AnonymousClass?, `$_0`: Int): super(`$_0`) {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: anonymousclass.AnonymousClass?
@@ -35,9 +37,7 @@ interface SomeInterface {
 }
 
 open class `SomeInterface$1`: anonymousclass.SomeClass {
- internal constructor(`$_0`: Int): super(`$_0`) {
-
- }
+ internal constructor(`$_0`: Int): super(`$_0`)
 
  open override fun foo(): String? {
   return "a"

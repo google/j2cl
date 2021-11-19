@@ -4,6 +4,10 @@ interface GenericInterface<T> {}
 
 interface GenericSubInterface<T>: implementsgenericinterface.GenericInterface<T> {}
 
-open class GenericInterfaceGenericImpl<T>: implementsgenericinterface.GenericInterface<T> {}
+open class GenericInterfaceGenericImpl<T>: implementsgenericinterface.GenericInterface<T> {
+ internal constructor(): super()
+}
 
-open class GenericInterfaceImpl: implementsgenericinterface.GenericInterface<Number?> {}
+open class GenericInterfaceImpl: implementsgenericinterface.GenericInterface<Number?> {
+ constructor(): super()
+}

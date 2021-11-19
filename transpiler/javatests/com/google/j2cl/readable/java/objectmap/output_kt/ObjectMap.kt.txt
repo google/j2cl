@@ -1,6 +1,8 @@
 package objectmap
 
 open class ObjectMap<T> {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   internal fun <T> create(): objectmap.ObjectMap<T>? {

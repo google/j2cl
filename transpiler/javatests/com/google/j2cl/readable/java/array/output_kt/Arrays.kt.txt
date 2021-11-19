@@ -1,6 +1,8 @@
 package array
 
 open class Arrays {
+ constructor(): super()
+
  open fun testObjectArray() {
   var objects: Array<Any?>? = arrayOfNulls<Any?>(100)
   objects = arrayOfNulls<Any?>(0)
@@ -109,11 +111,19 @@ open class Arrays {
 }
 
 open class `Arrays$SomeObject` {
+ internal constructor(`$outer_this`: array.Arrays?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: array.Arrays?
 }
 
-open class `Arrays$NativeType` {}
+open class `Arrays$NativeType` {
+ internal constructor(): super()
+}
 
 open class `Arrays$ArrayContainer`<T> {
+ internal constructor(): super()
+
  @JvmField internal var data: Array<T>? = null
 }

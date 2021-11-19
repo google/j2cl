@@ -1,18 +1,26 @@
 package abstractinnerclass
 
-open class InnerClasses {}
+open class InnerClasses {
+ constructor(): super()
+}
 
 interface `InnerClasses$A` {
  fun foo()
 }
 
 abstract class `InnerClasses$B`: abstractinnerclass.`InnerClasses$A` {
+ internal constructor(): super()
+
  internal open fun bar() {
   this.foo()
  }
 }
 
 abstract class `InnerClasses$C`: abstractinnerclass.`InnerClasses$A` {
+ internal constructor(`$outer_this`: abstractinnerclass.InnerClasses?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: abstractinnerclass.InnerClasses?
 
  internal open fun bar() {

@@ -1,29 +1,31 @@
 package nullability.explicitnotnullable
 
 open class ExplicitNotNullable {
- private var f1: String = "Hello"
+ constructor(): super()
 
- private var f2: String? = null
+ internal var f1: String = "Hello"
 
- private var f3: String? = null
+ internal var f2: String? = null
 
- private var f4: java.util.List<String> = java.util.ArrayList<String?>()
+ internal var f3: String? = null
 
- private var f5: java.util.List<String>? = java.util.ArrayList<String?>()
+ internal var f4: java.util.List<String> = java.util.ArrayList<String?>()
 
- private var f6: java.util.List<String?> = java.util.ArrayList<String?>()
+ internal var f5: java.util.List<String>? = java.util.ArrayList<String?>()
 
- private var f7: java.util.List<String?>? = null
+ internal var f6: java.util.List<String?> = java.util.ArrayList<String?>()
 
- private var f8: Array<String> = arrayOf<String?>()
+ internal var f7: java.util.List<String?>? = null
 
- private var f9: Array<String?> = arrayOf<String?>()
+ internal var f8: Array<String> = arrayOf<String?>()
 
- private var f10: Array<String>? = arrayOf<String?>()
+ internal var f9: Array<String?> = arrayOf<String?>()
 
- private var f11: java.lang.Void? = null
+ internal var f10: Array<String>? = arrayOf<String?>()
 
- private var f12: Any = Any()
+ internal var f11: java.lang.Void? = null
+
+ internal var f12: Any = Any()
 
  open fun m1(a: String?, b: java.util.List<Double?>?): String {
   return ""

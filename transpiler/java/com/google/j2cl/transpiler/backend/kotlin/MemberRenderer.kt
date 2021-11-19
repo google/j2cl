@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.AstUtils.getConstructorInvocation
+import com.google.j2cl.transpiler.ast.AstUtils.isConstructorInvocationStatement
 import com.google.j2cl.transpiler.ast.Field
 import com.google.j2cl.transpiler.ast.InitializerBlock
 import com.google.j2cl.transpiler.ast.Kind
@@ -40,8 +41,14 @@ internal fun Renderer.renderMember(member: Member, kind: Kind) {
 private fun Renderer.renderMethod(method: Method, kind: Kind) {
   renderMethodHeader(method, kind)
   if (!method.isAbstract) {
-    render(" ")
-    renderStatement(method.body)
+    // Render all statements except constructor invocation statements.
+    val statements = method.body.statements.filter { !isConstructorInvocationStatement(it) }
+
+    // Constructors with no statements can be rendered without curly braces.
+    if (!method.isConstructor || statements.isNotEmpty()) {
+      render(" ")
+      renderInCurlyBrackets { renderStartingWithNewLines(statements) { renderStatement(it) } }
+    }
   }
 }
 

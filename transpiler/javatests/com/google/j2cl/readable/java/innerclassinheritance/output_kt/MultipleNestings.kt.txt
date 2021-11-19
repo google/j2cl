@@ -1,22 +1,36 @@
 package innerclassinheritance
 
 open class MultipleNestings {
+ constructor(): super()
+
  open fun funInM() {}
 }
 
 open class `MultipleNestings$Parent` {
+ constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: innerclassinheritance.MultipleNestings?
 
  open fun `fun`() {}
 }
 
-open class `MultipleNestings$InnerClass1`: innerclassinheritance.`MultipleNestings$Parent`() {
+open class `MultipleNestings$InnerClass1`: innerclassinheritance.`MultipleNestings$Parent` {
+ constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: innerclassinheritance.MultipleNestings?
 
  open fun funInI1() {}
 }
 
-open class `MultipleNestings$InnerClass1$InnerClass2`: innerclassinheritance.`MultipleNestings$Parent`() {
+open class `MultipleNestings$InnerClass1$InnerClass2`: innerclassinheritance.`MultipleNestings$Parent` {
+ constructor(`$outer_this`: innerclassinheritance.`MultipleNestings$InnerClass1`?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: innerclassinheritance.`MultipleNestings$InnerClass1`?
 
  open fun funInI2() {}

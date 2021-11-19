@@ -1,6 +1,8 @@
 package inferreturn
 
 open class InferReturn<T> {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun <T> inferGeneric(foo: T?): inferreturn.InferReturn<T>? {

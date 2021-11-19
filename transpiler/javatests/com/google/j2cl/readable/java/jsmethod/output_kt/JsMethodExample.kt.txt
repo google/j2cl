@@ -1,6 +1,8 @@
 package jsmethod
 
 open class JsMethodExample {
+ constructor(): super()
+
  open fun <T: java.util.ArrayList<String?>?> testMethod(): T? {}
 
  companion object {
@@ -15,6 +17,8 @@ open class JsMethodExample {
 }
 
 abstract class `JsMethodExample$Base`<T> {
+ internal constructor(): super()
+
  open fun m(t: T?) {}
 }
 
@@ -22,6 +26,8 @@ interface `JsMethodExample$I` {
  fun m(s: String?)
 }
 
-open class `JsMethodExample$Sub`: jsmethod.`JsMethodExample$I`, jsmethod.`JsMethodExample$Base`<String?>() {
+open class `JsMethodExample$Sub`: jsmethod.`JsMethodExample$I`, jsmethod.`JsMethodExample$Base`<String?> {
+ internal constructor(): super()
+
  open override fun m(s: String?) {}
 }

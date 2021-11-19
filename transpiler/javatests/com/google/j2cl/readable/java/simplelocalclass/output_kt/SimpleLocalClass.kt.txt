@@ -1,10 +1,12 @@
 package simplelocalclass
 
 open class SimpleLocalClass {
+ constructor(): super()
+
  open fun test(p: Int) {
   var localVar: Int = 1
-  TODO("expression.qualify needs rendering: SimpleLocalClass.this)").`fun`()
-  TODO("expression.qualify needs rendering: SimpleLocalClass.this)")
+  simplelocalclass.`SimpleLocalClass$1InnerClass`(this, localVar, p).`fun`()
+  simplelocalclass.`SimpleLocalClass$1InnerClassWithoutCaptures`(this)
  }
 
  open fun `fun`() {
@@ -15,6 +17,12 @@ open class SimpleLocalClass {
 }
 
 open class `SimpleLocalClass$1InnerClass` {
+ internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?, `$captured_localVar`: Int, `$captured_p`: Int): super() {
+  this.`this` = `$outer_this`
+  this.localVar = `$captured_localVar`
+  this.p = `$captured_p`
+ }
+
  @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 
  open fun `fun`(): Int {
@@ -27,10 +35,19 @@ open class `SimpleLocalClass$1InnerClass` {
 }
 
 open class `SimpleLocalClass$1InnerClassWithoutCaptures` {
+ internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 }
 
 open class `SimpleLocalClass$2InnerClass` {
+ internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?, `$captured_localVar`: Int): super() {
+  this.`this` = `$outer_this`
+  this.localVar = `$captured_localVar`
+ }
+
  @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 
  @JvmField internal var field: Int = this.localVar
@@ -39,9 +56,17 @@ open class `SimpleLocalClass$2InnerClass` {
 }
 
 open class `SimpleLocalClass$1Abc$InnerClass` {
+ internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 }
 
 open class `SimpleLocalClass$1Klm$InnerClass` {
+ internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: simplelocalclass.SimpleLocalClass?
 }

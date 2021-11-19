@@ -3,13 +3,11 @@ package supercallnondefault
 open class Parent {
  @JvmField var field: Int = 0
 
- constructor(f: Int) {
+ constructor(f: Int): super() {
   this.field = f
  }
 }
 
 open class Child: supercallnondefault.Parent {
- constructor(a: Int): super(a) {
-
- }
+ constructor(a: Int): super(a)
 }

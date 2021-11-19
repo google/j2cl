@@ -23,5 +23,7 @@ internal val Visibility.sourceStringOrNull: String?
       Visibility.PUBLIC -> null
       Visibility.PROTECTED -> "protected"
       Visibility.PACKAGE_PRIVATE -> "internal"
-      Visibility.PRIVATE -> "private"
+      // TODO(b/206898384): For now, render Java "private" as Kotlin "internal", since in Kotlin
+      // private members are not visible from other classes in the same file.
+      Visibility.PRIVATE -> "internal"
     }

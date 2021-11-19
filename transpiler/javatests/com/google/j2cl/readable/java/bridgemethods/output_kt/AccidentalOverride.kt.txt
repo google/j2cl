@@ -5,6 +5,8 @@ interface I<T, S> {
 }
 
 open class A<T, S> {
+ internal constructor(): super()
+
  open fun `fun`(s: S?): T? {
   return null
  }
@@ -14,7 +16,9 @@ open class A<T, S> {
  }
 }
 
-open class B: bridgemethods.I<Int?, String?>, bridgemethods.A<Number?, String?>() {
+open class B: bridgemethods.I<Int?, String?>, bridgemethods.A<Number?, String?> {
+ internal constructor(): super()
+
  open override fun `fun`(s: String?): Int? {
   return Int(1)
  }
@@ -26,4 +30,6 @@ interface SpecializedInterface {
  fun get(): String?
 }
 
-open class AccidentalOverride: bridgemethods.SpecializedInterface, bridgemethods.A<String?, String?>() {}
+open class AccidentalOverride: bridgemethods.SpecializedInterface, bridgemethods.A<String?, String?> {
+ internal constructor(): super()
+}

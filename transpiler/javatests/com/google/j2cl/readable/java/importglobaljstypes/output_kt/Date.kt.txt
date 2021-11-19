@@ -1,6 +1,8 @@
 package importglobaljstypes
 
 open class Date {
+ constructor(): super()
+
  open fun copy(d: importglobaljstypes.`Date$NativeDate`?): importglobaljstypes.`Date$NativeDate`? {
   return d
  }
@@ -14,6 +16,8 @@ open class Date {
 }
 
 open class `Date$NativeDate` {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun now(): Double {}

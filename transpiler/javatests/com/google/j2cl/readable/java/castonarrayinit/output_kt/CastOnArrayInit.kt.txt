@@ -1,6 +1,8 @@
 package castonarrayinit
 
 open class CastOnArrayInit {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun <E> `fun`(vararg args: castonarrayinit.`CastOnArrayInit$Foo`<E>?) {}
@@ -14,4 +16,6 @@ open class CastOnArrayInit {
  }
 }
 
-open class `CastOnArrayInit$Foo`<T> {}
+open class `CastOnArrayInit$Foo`<T> {
+ constructor(): super()
+}

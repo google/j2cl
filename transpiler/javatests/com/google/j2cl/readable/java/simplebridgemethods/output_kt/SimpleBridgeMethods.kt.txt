@@ -1,25 +1,37 @@
 package simplebridgemethods
 
 open class Superclass<T: Error?> {
+ internal constructor(): super()
+
  open fun m1(t: T?) {}
 }
 
-open class Subclass: simplebridgemethods.Superclass<java.lang.AssertionError?>() {
+open class Subclass: simplebridgemethods.Superclass<java.lang.AssertionError?> {
+ internal constructor(): super()
+
  open override fun m1(a: java.lang.AssertionError?) {}
 }
 
-open class AnotherSubclass: simplebridgemethods.Superclass<java.lang.AssertionError?>() {}
+open class AnotherSubclass: simplebridgemethods.Superclass<java.lang.AssertionError?> {
+ internal constructor(): super()
+}
 
 interface Callable<V> {
  fun call(v: V?)
 }
 
 open class Task<T>: simplebridgemethods.Callable<T> {
+ internal constructor(): super()
+
  open override fun call(t: T?) {}
 }
 
 open class AnotherTask<T: java.lang.AssertionError?>: simplebridgemethods.Callable<simplebridgemethods.Superclass<T>?> {
+ internal constructor(): super()
+
  open override fun call(t: simplebridgemethods.Superclass<T>?) {}
 }
 
-open class SimpleBridgeMethods {}
+open class SimpleBridgeMethods {
+ constructor(): super()
+}

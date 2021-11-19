@@ -165,8 +165,6 @@ private fun Renderer.renderJavaScriptConstructorReference(
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
-  // Constructor calls are rendered after constructor parameters declaration.
-  if (expression.target.isConstructor) return
   renderMethodCallHeader(expression)
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }

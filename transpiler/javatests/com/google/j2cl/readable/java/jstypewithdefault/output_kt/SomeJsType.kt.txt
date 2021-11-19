@@ -1,6 +1,8 @@
 package jstypewithdefault
 
-open class SomeJsType: jstypewithdefault.Interface {}
+open class SomeJsType: jstypewithdefault.Interface {
+ constructor(): super()
+}
 
 interface Interface {
  fun defaultMethod() {}

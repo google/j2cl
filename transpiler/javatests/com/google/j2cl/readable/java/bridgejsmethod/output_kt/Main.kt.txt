@@ -1,6 +1,8 @@
 package bridgejsmethod
 
 open class Main {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun test() {
@@ -28,6 +30,8 @@ open class Main {
 }
 
 open class `Main$A`<T> {
+ constructor(): super()
+
  open fun `fun`(t: T?): T? {
   return t
  }
@@ -43,7 +47,9 @@ interface `Main$J`<T> {
  fun bar(t: T?)
 }
 
-open class `Main$B`: bridgejsmethod.`Main$A`<String?>() {
+open class `Main$B`: bridgejsmethod.`Main$A`<String?> {
+ constructor(): super()
+
  open override fun `fun`(s: String?): String? {
   return s
  }
@@ -51,37 +57,51 @@ open class `Main$B`: bridgejsmethod.`Main$A`<String?>() {
  open override fun bar(s: String?) {}
 }
 
-open class `Main$C`: bridgejsmethod.`Main$A`<Int?>() {
+open class `Main$C`: bridgejsmethod.`Main$A`<Int?> {
+ constructor(): super()
+
  open override fun `fun`(i: Int?): Int? {
   return i
  }
 }
 
-open class `Main$D`: bridgejsmethod.`Main$I`<Int?>, bridgejsmethod.`Main$A`<Int?>() {
+open class `Main$D`: bridgejsmethod.`Main$I`<Int?>, bridgejsmethod.`Main$A`<Int?> {
+ constructor(): super()
+
  open override fun `fun`(i: Int?): Int? {
   return i
  }
 }
 
-open class `Main$E`: bridgejsmethod.`Main$J`<String?>, bridgejsmethod.`Main$B`() {}
+open class `Main$E`: bridgejsmethod.`Main$J`<String?>, bridgejsmethod.`Main$B` {
+ constructor(): super()
+}
 
-open class `Main$F`: bridgejsmethod.`Main$I`<Int?>, bridgejsmethod.`Main$A`<Int?>() {}
+open class `Main$F`: bridgejsmethod.`Main$I`<Int?>, bridgejsmethod.`Main$A`<Int?> {
+ constructor(): super()
+}
 
 interface `Main$G`<V> {
  fun enclose(value: V?): V?
 }
 
 open class `Main$H`<V>: bridgejsmethod.`Main$G`<V> {
+ constructor(): super()
+
  open override fun enclose(value: V?): V? {
   return null
  }
 }
 
 open class `Main$K`<K1, K2> {
+ constructor(): super()
+
  internal open fun `fun`(k1: K1?, k2: K2?) {}
 }
 
-open class `Main$L`<L1>: bridgejsmethod.`Main$K`<String?, L1>() {
+open class `Main$L`<L1>: bridgejsmethod.`Main$K`<String?, L1> {
+ constructor(): super()
+
  internal open override fun `fun`(string: String?, l1: L1?) {}
 }
 
@@ -92,15 +112,21 @@ interface `Main$M` {
 abstract class `Main$N`: bridgejsmethod.`Main$M` {
  @JvmField val `this`: bridgejsmethod.Main?
 
- internal constructor() {}
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
 
  abstract open override fun getB(): bridgejsmethod.`Main$B`?
 }
 
-open class `Main$O`: bridgejsmethod.`Main$N`() {
+open class `Main$O`: bridgejsmethod.`Main$N` {
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: bridgejsmethod.Main?
 
- private var b: bridgejsmethod.`Main$B`? = null
+ internal var b: bridgejsmethod.`Main$B`? = null
 
  open override fun getB(): bridgejsmethod.`Main$B`? {
   return this.b
@@ -112,12 +138,20 @@ interface `Main$P` {
 }
 
 abstract class `Main$Q`: bridgejsmethod.`Main$P` {
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: bridgejsmethod.Main?
 
  abstract open override fun getKey(): String?
 }
 
-abstract class `Main$R`: bridgejsmethod.`Main$Q`() {
+abstract class `Main$R`: bridgejsmethod.`Main$Q` {
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: bridgejsmethod.Main?
 
  open override fun getKey(): String? {
@@ -125,11 +159,19 @@ abstract class `Main$R`: bridgejsmethod.`Main$Q`() {
  }
 }
 
-open class `Main$S`: bridgejsmethod.`Main$R`() {
+open class `Main$S`: bridgejsmethod.`Main$R` {
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: bridgejsmethod.Main?
 }
 
 open class `Main$GrandParent`<T> {
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: bridgejsmethod.Main?
 
  open fun jsMethod(t: T?) {}
@@ -137,7 +179,11 @@ open class `Main$GrandParent`<T> {
  open fun method(t: T?) {}
 }
 
-open class `Main$Parent`<T: bridgejsmethod.`Main$Parent`<T>?>: bridgejsmethod.`Main$GrandParent`<T>() {
+open class `Main$Parent`<T: bridgejsmethod.`Main$Parent`<T>?>: bridgejsmethod.`Main$GrandParent`<T> {
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: bridgejsmethod.Main?
 
  open override fun jsMethod(t: T?) {}
@@ -145,6 +191,10 @@ open class `Main$Parent`<T: bridgejsmethod.`Main$Parent`<T>?>: bridgejsmethod.`M
  open override fun method(t: T?) {}
 }
 
-open class `Main$Child`: bridgejsmethod.`Main$Parent`<bridgejsmethod.`Main$Child`?>() {
+open class `Main$Child`: bridgejsmethod.`Main$Parent`<bridgejsmethod.`Main$Child`?> {
+ internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: bridgejsmethod.Main?
 }

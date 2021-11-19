@@ -1,6 +1,8 @@
 package jsdoctypemappings
 
 open class JsDocTypeMappings {
+ constructor(): super()
+
  internal open fun returnComparatorWildcard(): java.util.Comparator<*>? {
   return null
  }
@@ -136,9 +138,15 @@ interface `JsDocTypeMappings$NativeFunction` {
  fun f()
 }
 
-open class `JsDocTypeMappings$NativeType` {}
+open class `JsDocTypeMappings$NativeType` {
+ internal constructor(): super()
+}
 
 open class `JsDocTypeMappings$ExportedType` {
+ internal constructor(`$outer_this`: jsdoctypemappings.JsDocTypeMappings?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: jsdoctypemappings.JsDocTypeMappings?
 }
 

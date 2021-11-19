@@ -1,6 +1,8 @@
 package bridgemethods
 
-open class BridgeMethodDefault {}
+open class BridgeMethodDefault {
+ internal constructor(): super()
+}
 
 interface `BridgeMethodDefault$I`<T> {
  fun m(t: T?)
@@ -10,10 +12,14 @@ interface `BridgeMethodDefault$II`: bridgemethods.`BridgeMethodDefault$I`<String
  override fun m(s: String?) {}
 }
 
-open class `BridgeMethodDefault$A`: bridgemethods.`BridgeMethodDefault$II` {}
+open class `BridgeMethodDefault$A`: bridgemethods.`BridgeMethodDefault$II` {
+ internal constructor(): super()
+}
 
 interface `BridgeMethodDefault$JJ`: bridgemethods.`BridgeMethodDefault$I`<Any?> {
  override fun m(o: Any?) {}
 }
 
-open class `BridgeMethodDefault$B`: bridgemethods.`BridgeMethodDefault$JJ` {}
+open class `BridgeMethodDefault$B`: bridgemethods.`BridgeMethodDefault$JJ` {
+ internal constructor(): super()
+}

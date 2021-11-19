@@ -1,15 +1,21 @@
 package bridgemethods
 
-open class BridgeMethodShadowedSignature {}
+open class BridgeMethodShadowedSignature {
+ constructor(): super()
+}
 
 interface `BridgeMethodShadowedSignature$I`<I1> {
  fun get(consumer: java.util.function.Consumer<*>?): String?
 }
 
 abstract class `BridgeMethodShadowedSignature$B`<B1, B2>: bridgemethods.`BridgeMethodShadowedSignature$I`<B1> {
+ internal constructor(): super()
+
  open fun get(consumer: B2?): String? {
   return "B get B2"
  }
 }
 
-open class `BridgeMethodShadowedSignature$C`<C1>: bridgemethods.`BridgeMethodShadowedSignature$I`<C1>, bridgemethods.`BridgeMethodShadowedSignature$B`<C1, java.util.function.Consumer<*>?>() {}
+open class `BridgeMethodShadowedSignature$C`<C1>: bridgemethods.`BridgeMethodShadowedSignature$I`<C1>, bridgemethods.`BridgeMethodShadowedSignature$B`<C1, java.util.function.Consumer<*>?> {
+ internal constructor(): super()
+}

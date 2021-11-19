@@ -1,11 +1,11 @@
 package genericequals
 
 open class GenericEquals<T> {
- private val value: T?
+ internal val value: T?
 
- private val value2: genericequals.GenericEquals<T>?
+ internal val value2: genericequals.GenericEquals<T>?
 
- constructor(value: T?) {
+ constructor(value: T?): super() {
   this.value = value
   this.value2 = null
  }

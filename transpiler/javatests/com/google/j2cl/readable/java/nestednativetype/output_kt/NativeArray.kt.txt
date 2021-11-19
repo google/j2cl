@@ -1,14 +1,16 @@
 package nestednativetype
 
 class NativeArray {
+ constructor(): super()
+
  fun a(): Any? {
-  return TODO("expression.qualify needs rendering: NativeArray.this)")
+  return nestednativetype.`NativeArray$1`(this)
  }
 }
 
 open class `NativeArray$1` {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: nestednativetype.NativeArray?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: nestednativetype.NativeArray?

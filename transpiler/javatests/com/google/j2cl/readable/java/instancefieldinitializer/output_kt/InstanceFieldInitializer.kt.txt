@@ -1,6 +1,8 @@
 package instancefieldinitializer
 
 open class InstanceFieldInitializer {
+ constructor(): super()
+
  @JvmField var a: Int = 1
 
  @JvmField var b: Int = this.a * 2

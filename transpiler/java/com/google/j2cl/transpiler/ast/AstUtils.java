@@ -87,19 +87,25 @@ public class AstUtils {
    */
   public static ExpressionStatement getConstructorInvocationStatement(Method method) {
     for (Statement statement : method.getBody().getStatements()) {
-      if (!(statement instanceof ExpressionStatement)) {
-        continue;
-      }
-      Expression expression = ((ExpressionStatement) statement).getExpression();
-      if (!(expression instanceof MethodCall)) {
-        continue;
-      }
-      MethodCall methodCall = (MethodCall) expression;
-      if (methodCall.getTarget().isConstructor()) {
+      if (isConstructorInvocationStatement(statement)) {
         return (ExpressionStatement) statement;
       }
     }
     return null;
+  }
+
+  /** Returns true if {@code statement} is a constructor invocation statement. */
+  public static boolean isConstructorInvocationStatement(Statement statement) {
+    if (!(statement instanceof ExpressionStatement)) {
+      return false;
+    }
+    ExpressionStatement expressionStatement = (ExpressionStatement) statement;
+    Expression expression = expressionStatement.getExpression();
+    if (!(expression instanceof MethodCall)) {
+      return false;
+    }
+    MethodCall methodCall = (MethodCall) expression;
+    return methodCall.getTarget().isConstructor();
   }
 
   /**

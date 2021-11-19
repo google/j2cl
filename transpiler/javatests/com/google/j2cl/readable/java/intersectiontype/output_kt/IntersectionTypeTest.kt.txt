@@ -19,6 +19,8 @@ interface Cmp2<T> {
 }
 
 open class IntersectionTypeTest<U> {
+ constructor(): super()
+
  open fun cast3(s: Any?): Any? {
   return s
  }
@@ -77,26 +79,30 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  private fun <T> get(t: T?): T? {
+  internal fun <T> get(t: T?): T? {
    return t
   }
 
   @JvmStatic
-  private fun <T> m(): T? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
+  internal fun <T> m(): T? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
    return intersectiontype.IntersectionTypeTest.get(Any()) as T?
   }
 
   @JvmStatic
-  private fun <T> n(): intersectiontype.Getable<T>? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
+  internal fun <T> n(): intersectiontype.Getable<T>? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
    return null
   }
 
   @JvmStatic
-  private fun <T> set(t: T?) where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {}
+  internal fun <T> set(t: T?) where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {}
  }
 }
 
 open class `IntersectionTypeTest$MapEntry`<U> {
+ internal constructor(`$outer_this`: intersectiontype.IntersectionTypeTest<U>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: intersectiontype.IntersectionTypeTest<U>?
 
  open fun <T> method(o: Any?): intersectiontype.Getable<T>? {
@@ -104,7 +110,9 @@ open class `IntersectionTypeTest$MapEntry`<U> {
  }
 }
 
-open class `IntersectionTypeTest$A` {}
+open class `IntersectionTypeTest$A` {
+ internal constructor(): super()
+}
 
 interface `IntersectionTypeTest$EmptyA` {}
 

@@ -1,12 +1,20 @@
 package qualifiedsupercall
 
 open class Parent {
+ internal constructor(): super()
+
  open fun `fun`() {}
 }
 
-open class QualifiedSuperCall: qualifiedsupercall.Parent() {}
+open class QualifiedSuperCall: qualifiedsupercall.Parent {
+ constructor(): super()
+}
 
 open class `QualifiedSuperCall$InnerClass` {
+ constructor(`$outer_this`: qualifiedsupercall.QualifiedSuperCall?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: qualifiedsupercall.QualifiedSuperCall?
 
  open fun test() {

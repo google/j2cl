@@ -1,6 +1,8 @@
 package trycatch
 
 open class TryCatch {
+ constructor(): super()
+
  open fun testMultiCatch() {
   try {
    throw java.lang.ClassCastException()
@@ -70,7 +72,7 @@ open class TryCatch {
   throw this.getT(Exception())!!
  }
 
- private fun <T> getT(t: T?): T? {
+ internal fun <T> getT(t: T?): T? {
   return t
  }
 
@@ -78,15 +80,17 @@ open class TryCatch {
   throw this.getThrowable()!!
  }
 
- private fun <T: Throwable?> getThrowable(): T? {
+ internal fun <T: Throwable?> getThrowable(): T? {
   return null
  }
 
  companion object {
-  private val closableThing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
+  internal val closableThing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
  }
 }
 
 open class `TryCatch$ClosableThing`: java.lang.AutoCloseable {
+ internal constructor(): super()
+
  open override fun close() {}
 }

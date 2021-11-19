@@ -1,20 +1,34 @@
 package newinnerclasswithsameouter
 
-open class NewInnerClassWithSameOuter {}
+open class NewInnerClassWithSameOuter {
+ constructor(): super()
+}
 
 open class `NewInnerClassWithSameOuter$A` {
+ constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 
  open fun test() {
-  TODO("expression.qualify needs rendering: A.this.this!!)")
-  TODO("expression.qualify needs rendering: A.this.this!!)")
+  newinnerclasswithsameouter.`NewInnerClassWithSameOuter$B`(this.`this`)
+  newinnerclasswithsameouter.`NewInnerClassWithSameOuter$C`(this.`this`)
  }
 }
 
 open class `NewInnerClassWithSameOuter$B` {
+ constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 }
 
 open class `NewInnerClassWithSameOuter$C` {
+ internal constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 }

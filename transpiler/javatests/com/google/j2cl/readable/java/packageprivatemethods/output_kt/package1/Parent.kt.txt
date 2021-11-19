@@ -1,6 +1,8 @@
 package packageprivatemethods.package1
 
-abstract class Parent: packageprivatemethods.package1.SuperParent() {
+abstract class Parent: packageprivatemethods.package1.SuperParent {
+ constructor(): super()
+
  internal open override fun foo(a: Int): Int {
   return a
  }

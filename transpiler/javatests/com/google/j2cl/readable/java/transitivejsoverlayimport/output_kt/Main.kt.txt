@@ -1,28 +1,34 @@
 package transitivejsoverlayimport
 
-open class Immediate: transitivejsoverlayimport.Transitive() {
+open class Immediate: transitivejsoverlayimport.Transitive {
+ internal constructor(): super()
+
  internal fun doImmediateInstanceMethod() {}
 }
 
 open class NonNativeUpper: transitivejsoverlayimport.Immediate {
- constructor() {}
+ constructor(): super()
 
  internal open fun doNonNativeUpperInstanceMethod() {}
 }
 
 open class NonNativeLower: transitivejsoverlayimport.NonNativeUpper {
- constructor() {}
+ constructor(): super()
 
  internal open fun doNonNativeLowerInstanceMethod() {}
 }
 
 open class Transitive {
+ internal constructor(): super()
+
  internal fun getJsProperty(): Int {}
 
  internal fun doTransitiveInstanceMethod(arg1: String?) {}
 }
 
 open class Main {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun main(vararg args: String?) {

@@ -5,10 +5,14 @@ interface SomeInterface {
 }
 
 open class Parent {
+ internal constructor(): super()
+
  open fun `fun`() {}
 }
 
-open class Child: overridingmethods.SomeInterface, overridingmethods.Parent() {
+open class Child: overridingmethods.SomeInterface, overridingmethods.Parent {
+ constructor(): super()
+
  open override fun `fun`() {}
 
  open override fun bar() {}

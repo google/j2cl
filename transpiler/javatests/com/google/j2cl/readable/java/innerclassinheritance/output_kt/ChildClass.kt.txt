@@ -1,28 +1,38 @@
 package innerclassinheritance
 
 open class ParentOuter {
+ internal constructor(): super()
+
  @JvmField var fieldInParentOuter: Int = 0
 
  open fun funInParentOuter() {}
 }
 
 open class ParentInner {
+ internal constructor(): super()
+
  @JvmField var fieldInParentInner: Int = 0
 
  open fun funInParentInner() {}
 }
 
-open class ChildClass: innerclassinheritance.ParentOuter() {
+open class ChildClass: innerclassinheritance.ParentOuter {
+ constructor(): super()
+
  @JvmField var fieldInOuter: Int = 0
 
  open fun funInOuter() {}
 
  open fun testLocalClass() {
-  TODO("expression.qualify needs rendering: ChildClass.this)").test()
+  innerclassinheritance.`ChildClass$1LocalClass`(this).test()
  }
 }
 
-open class `ChildClass$InnerClass`: innerclassinheritance.ParentInner() {
+open class `ChildClass$InnerClass`: innerclassinheritance.ParentInner {
+ internal constructor(`$outer_this`: innerclassinheritance.ChildClass?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: innerclassinheritance.ChildClass?
 
  @JvmField var fieldInInner: Int = 0
@@ -50,7 +60,11 @@ open class `ChildClass$InnerClass`: innerclassinheritance.ParentInner() {
  }
 }
 
-open class `ChildClass$1LocalClass`: innerclassinheritance.ChildClass() {
+open class `ChildClass$1LocalClass`: innerclassinheritance.ChildClass {
+ internal constructor(`$outer_this`: innerclassinheritance.ChildClass?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: innerclassinheritance.ChildClass?
 
  @JvmField internal var `object`: Any? = this

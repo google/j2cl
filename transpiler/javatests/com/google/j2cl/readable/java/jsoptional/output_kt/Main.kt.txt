@@ -9,7 +9,7 @@ open class Main {
   return s
  }
 
- constructor(a: String?) {}
+ constructor(a: String?): super()
 
  open fun testFunction(f: jsoptional.`Main$Function`?) {}
 
@@ -21,6 +21,8 @@ interface `Main$Function` {
 }
 
 class `Main$AFunction`: jsoptional.`Main$Function` {
+ internal constructor(): super()
+
  open override fun f1(i: String?, vararg args: Any?): Any? {
   return args!![0]
  }
@@ -31,17 +33,23 @@ interface `Main$I`<T> {
 }
 
 open class `Main$TemplatedSubtype`<T: String?>: jsoptional.`Main$I`<T> {
+ internal constructor(): super()
+
  open override fun m(t: T?, o: Any?) {}
 }
 
 open class `Main$SpecializedSubtype`: jsoptional.`Main$I`<String?> {
  @JvmField val `this`: jsoptional.Main?
 
- constructor(a: Any?) {}
+ constructor(`$outer_this`: jsoptional.Main?, a: Any?): super() {
+  this.`this` = `$outer_this`
+ }
 
  open override fun m(t: String?, o: Any?) {}
 }
 
 open class `Main$NonJsTypeSubtype`: jsoptional.`Main$I`<String?> {
+ internal constructor(): super()
+
  open override fun m(t: String?, o: Any?) {}
 }

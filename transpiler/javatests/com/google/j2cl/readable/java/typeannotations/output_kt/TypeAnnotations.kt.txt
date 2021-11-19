@@ -1,10 +1,16 @@
 package typeannotations
 
-abstract class AbstractType: typeannotations.ParametricType<typeannotations.AbstractType?> {}
+abstract class AbstractType: typeannotations.ParametricType<typeannotations.AbstractType?> {
+ internal constructor(): super()
+}
 
-abstract class AbstractTypeNonNull: typeannotations.ParametricType<typeannotations.AbstractType> {}
+abstract class AbstractTypeNonNull: typeannotations.ParametricType<typeannotations.AbstractType> {
+ internal constructor(): super()
+}
 
 open class Parent {
+ internal constructor(): super()
+
  open fun m(s: String, c: typeannotations.Parent?): typeannotations.Parent? {
   return c
  }
@@ -14,11 +20,17 @@ open class Parent {
  }
 }
 
-open class ChildWithNullableParent: typeannotations.ParametricType<typeannotations.Parent?>, typeannotations.Parent() {}
+open class ChildWithNullableParent: typeannotations.ParametricType<typeannotations.Parent?>, typeannotations.Parent {
+ internal constructor(): super()
+}
 
-open class ChildWithNonNullableParent: typeannotations.ParametricType<typeannotations.Parent>, typeannotations.Parent() {}
+open class ChildWithNonNullableParent: typeannotations.ParametricType<typeannotations.Parent>, typeannotations.Parent {
+ internal constructor(): super()
+}
 
 open class TypeAnnotations {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun main() {

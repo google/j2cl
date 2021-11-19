@@ -1,6 +1,8 @@
 package packageprivatemethods.package2
 
-abstract class SubParent: packageprivatemethods.package1.Parent() {
+abstract class SubParent: packageprivatemethods.package1.Parent {
+ constructor(): super()
+
  internal open fun foo(a: Int): Int {
   return a
  }

@@ -1,12 +1,16 @@
 package gwtincompatible
 
-open class Implementor: gwtincompatible.Interface, gwtincompatible.`Interface$NestedInterface`, gwtincompatible.`Interface$ClassWithAbstractMethod`() {
+open class Implementor: gwtincompatible.Interface, gwtincompatible.`Interface$NestedInterface`, gwtincompatible.`Interface$ClassWithAbstractMethod` {
+ constructor(): super()
+
  open fun compatibleMethod() {
   val a: Int = 4
  }
 }
 
-enum class `Implementor$SomeEnum`: Enum<gwtincompatible.`Implementor$SomeEnum`?>() {
+enum class `Implementor$SomeEnum`: Enum<gwtincompatible.`Implementor$SomeEnum`?> {
+ internal constructor(): super()
+
  internal abstract open fun method()
 
  companion object {
@@ -15,9 +19,7 @@ enum class `Implementor$SomeEnum`: Enum<gwtincompatible.`Implementor$SomeEnum`?>
 }
 
 open class `Implementor$SomeEnum$1`: gwtincompatible.`Implementor$SomeEnum` {
- internal constructor(): super() {
-
- }
+ internal constructor(): super()
 
  internal open override fun method() {}
 }

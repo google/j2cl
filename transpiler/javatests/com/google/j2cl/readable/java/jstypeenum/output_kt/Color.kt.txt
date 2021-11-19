@@ -1,6 +1,8 @@
 package jstypeenum
 
-enum class Color: Enum<jstypeenum.Color?>() {
+enum class Color: Enum<jstypeenum.Color?> {
+ internal constructor(): super()
+
  companion object {
   @JvmField val RED: jstypeenum.Color = jstypeenum.Color()
 

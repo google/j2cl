@@ -1,6 +1,8 @@
 package abstractmethodoverridedefault
 
-open class AbstractMethodOverrideDefault {}
+open class AbstractMethodOverrideDefault {
+ constructor(): super()
+}
 
 interface `AbstractMethodOverrideDefault$I` {
  fun foo()
@@ -15,10 +17,14 @@ interface `AbstractMethodOverrideDefault$J` {
 }
 
 abstract class `AbstractMethodOverrideDefault$A`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$I` {
+ internal constructor(): super()
+
  abstract open override fun foo()
 }
 
-abstract class `AbstractMethodOverrideDefault$B`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$J`, abstractmethodoverridedefault.`AbstractMethodOverrideDefault$A`() {
+abstract class `AbstractMethodOverrideDefault$B`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$J`, abstractmethodoverridedefault.`AbstractMethodOverrideDefault$A` {
+ internal constructor(): super()
+
  open override fun bar() {
   if (false) {
    this.bar()
@@ -26,7 +32,9 @@ abstract class `AbstractMethodOverrideDefault$B`: abstractmethodoverridedefault.
  }
 }
 
-open class `AbstractMethodOverrideDefault$C`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$A`() {
+open class `AbstractMethodOverrideDefault$C`: abstractmethodoverridedefault.`AbstractMethodOverrideDefault$A` {
+ internal constructor(): super()
+
  open override fun foo() {}
 
  open override fun bar() {

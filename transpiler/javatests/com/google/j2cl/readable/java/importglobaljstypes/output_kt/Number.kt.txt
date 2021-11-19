@@ -1,6 +1,8 @@
 package importglobaljstypes
 
 open class Number {
+ constructor(): super()
+
  open fun testJsDocForLiteralType(a: importglobaljstypes.`Number$MyLiteralType`?): importglobaljstypes.`Number$MyLiteralType`? {
   return a
  }
@@ -15,7 +17,7 @@ open class Number {
   }
 
   @JvmStatic
-  private fun getFromCharCodeFunction(): importglobaljstypes.`Number$NativeFunction`<String?>? {}
+  internal fun getFromCharCodeFunction(): importglobaljstypes.`Number$NativeFunction`<String?>? {}
 
   @JvmStatic
   fun fromCharCode(array: IntArray?): String? {

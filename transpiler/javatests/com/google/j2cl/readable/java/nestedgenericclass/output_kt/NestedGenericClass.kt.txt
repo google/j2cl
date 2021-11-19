@@ -1,66 +1,100 @@
 package nestedgenericclass
 
 open class NestedGenericClass<T> {
+ constructor(): super()
+
  open fun <S> `fun`(t: S?) {
-  TODO("expression.qualify needs rendering: NestedGenericClass.this)")
-  TODO("expression.qualify needs rendering: NestedGenericClass.this)")
+  nestedgenericclass.`NestedGenericClass$1E`<Number?, S, T>(this)
+  nestedgenericclass.`NestedGenericClass$1F`<S, T>(this)
  }
 
  open fun <T> bar() {
-  TODO("expression.qualify needs rendering: NestedGenericClass.this)").bar()
+  nestedgenericclass.`NestedGenericClass$1G`<Error?, T, T>(this).bar()
  }
 
  open fun test() {
   val n: nestedgenericclass.NestedGenericClass<Number?>? = nestedgenericclass.NestedGenericClass<Number?>()
-  val a: nestedgenericclass.`NestedGenericClass$A`<Error?, Number?>? = TODO("expression.qualify needs rendering: n!!)")
-  val b: nestedgenericclass.`NestedGenericClass$A$B`<Exception?, Error?, Number?>? = TODO("expression.qualify needs rendering: a!!)")
-  TODO("expression.qualify needs rendering: n!!)")
-  TODO("expression.qualify needs rendering: n!!.new C.<init>())")
+  val a: nestedgenericclass.`NestedGenericClass$A`<Error?, Number?>? = nestedgenericclass.`NestedGenericClass$A`<Error?, Number?>(n)
+  val b: nestedgenericclass.`NestedGenericClass$A$B`<Exception?, Error?, Number?>? = nestedgenericclass.`NestedGenericClass$A$B`<Exception?, Error?, Number?>(a)
+  nestedgenericclass.`NestedGenericClass$C`<Number?>(n)
+  nestedgenericclass.`NestedGenericClass$C$D`<Number?>(nestedgenericclass.`NestedGenericClass$C`<Number?>(n))
  }
 }
 
 open class `NestedGenericClass$A`<T, T> {
+ constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 }
 
 open class `NestedGenericClass$A$B`<T, T, T> {
  @JvmField val `this`: nestedgenericclass.`NestedGenericClass$A`<T, T>?
 
- internal constructor() {}
+ internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$A`<T, T>?): super() {
+  this.`this` = `$outer_this`
+ }
 
- internal constructor(u: U?) {}
+ internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$A`<T, T>?, u: U?): super() {
+  this.`this` = `$outer_this`
+ }
 }
 
 open class `NestedGenericClass$C`<T> {
+ constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
  @JvmField var c: T? = null
 }
 
 open class `NestedGenericClass$C$D`<T> {
+ constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$C`<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedgenericclass.`NestedGenericClass$C`<T>?
 
  @JvmField var d: T? = null
 }
 
 open class `NestedGenericClass$1E`<S, S, T> {
+ internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 }
 
 open class `NestedGenericClass$1F`<S, T> {
+ internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
  @JvmField var f: S? = null
 }
 
 open class `NestedGenericClass$1G`<T, T, T> {
+ internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
 
  open fun <T> bar() {
-  TODO("expression.qualify needs rendering: \$1G.this)")
+  nestedgenericclass.`NestedGenericClass$1G$1H`<Number?, T, T, T, T>(this)
  }
 }
 
 open class `NestedGenericClass$1G$1H`<T, T, T, T, T> {
+ internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$1G`<T, T, T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedgenericclass.`NestedGenericClass$1G`<T, T, T>?
 }

@@ -1,6 +1,8 @@
 package jsinnerclass
 
 open class Main {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun main(vararg args: String?) {
@@ -10,20 +12,23 @@ open class Main {
 }
 
 open class `Main$Outer` {
+ internal constructor(): super()
+
  @JvmField internal var a: Int = 2
 
  open fun method(): Int {
-  return TODO("expression.qualify needs rendering: Outer.this)").getB() + this.a
+  return jsinnerclass.`Main$Outer$Inner`(this).getB() + this.a
  }
 }
 
 open class `Main$Outer$Inner` {
  @JvmField val `this`: jsinnerclass.`Main$Outer`?
 
- private var b: Int = 0
+ internal var b: Int = 0
 
- constructor() {
-  this.b = this.`this`!!.a + 1
+ constructor(`$outer_this`: jsinnerclass.`Main$Outer`?): super() {
+  this.`this` = `$outer_this`
+  this.b = `$outer_this`!!.a + 1
  }
 
  open fun getB(): Int {

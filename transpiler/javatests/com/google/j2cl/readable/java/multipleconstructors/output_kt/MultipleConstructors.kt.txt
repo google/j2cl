@@ -1,21 +1,21 @@
 package multipleconstructors
 
 open class MultipleConstructors {
- private var id: Int = 0
+ internal var id: Int = 0
 
- private var flag: Boolean = false
+ internal var flag: Boolean = false
 
- constructor(id: Int) {
+ constructor(id: Int): super() {
   this.id = id
   this.flag = id == 0
  }
 
- constructor(flag: Boolean) {
+ constructor(flag: Boolean): super() {
   this.id = - 1
   this.flag = flag
  }
 
- constructor(id: Int, flag: Boolean) {
+ constructor(id: Int, flag: Boolean): super() {
   this.id = id
   this.flag = flag
  }

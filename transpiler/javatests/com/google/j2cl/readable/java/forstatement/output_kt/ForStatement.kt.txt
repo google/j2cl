@@ -1,6 +1,8 @@
 package forstatement
 
 open class ForStatement {
+ constructor(): super()
+
  open fun test() {
   if (true) {
    var i: Int = 0
@@ -81,7 +83,7 @@ open class ForStatement {
 
  companion object {
   @JvmStatic
-  private fun returnsValue(): Int {
+  internal fun returnsValue(): Int {
    return 1
   }
  }

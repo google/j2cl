@@ -1,6 +1,8 @@
 package lambdas
 
 open class Lambdas {
+ constructor(): super()
+
  @JvmField var field: Int = 100
 
  open fun call(intf: lambdas.`Lambdas$FunctionalInterface`?, n: Int): Int {
@@ -53,7 +55,7 @@ open class Lambdas {
 
  open fun <T> testInstanceMethodTypeVariableThroughLambda() {
   val wrapped: lambdas.`Lambdas$Functional`<T>? = { f: lambdas.`Lambdas$Functional`<T>? ->
-   return TODO("expression.qualify needs rendering: Lambdas.this)")
+   return lambdas.`Lambdas$1`<T>(this)
   }
  }
 
@@ -95,7 +97,7 @@ open class Lambdas {
 
  open fun testAnonymousInsideLambda() {
   val runner: lambdas.`Lambdas$FunctionalInterfaceWithMethodReturningVoid`? = {
-   TODO("expression.qualify needs rendering: Lambdas.this)")
+   lambdas.`Lambdas$3`(this)
   }
  }
 
@@ -137,7 +139,7 @@ open class Lambdas {
    }
   }
 
-  private var identityFunction: lambdas.`Lambdas$IdentityFunction`? = null
+  internal var identityFunction: lambdas.`Lambdas$IdentityFunction`? = null
 
   @JvmStatic
   fun <E> identity(): lambdas.`Lambdas$GenericJsFunction`<E, E>? {
@@ -188,8 +190,8 @@ interface `Lambdas$Functional`<T> {
 }
 
 open class `Lambdas$1`<T>: lambdas.`Lambdas$Functional`<T> {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: lambdas.Lambdas?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: lambdas.Lambdas?
@@ -200,9 +202,7 @@ open class `Lambdas$1`<T>: lambdas.`Lambdas$Functional`<T> {
 }
 
 open class `Lambdas$2`<T>: lambdas.`Lambdas$Functional`<T> {
- internal constructor(): super() {
-
- }
+ internal constructor(): super()
 
  open override fun wrap(f: lambdas.`Lambdas$Functional`<T>?): lambdas.`Lambdas$Functional`<T>? {
   return null
@@ -241,20 +241,24 @@ interface `Lambdas$FunctionalInterfaceWithMethodReturningVoid` {
 }
 
 open class `Lambdas$3` {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: lambdas.Lambdas?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: lambdas.Lambdas?
 }
 
 open class `Lambdas$Parent` {
+ internal constructor(): super()
+
  @JvmField var fieldInParent: Int = 0
 
  open fun funInParent() {}
 }
 
-open class `Lambdas$LambdaInSubClass`: lambdas.`Lambdas$Parent`() {
+open class `Lambdas$LambdaInSubClass`: lambdas.`Lambdas$Parent` {
+ internal constructor(): super()
+
  open fun testLambdaInSubclass() {
   val l: lambdas.`Lambdas$FunctionalInterface`? = { i: Int ->
    this.funInParent()
@@ -281,6 +285,8 @@ interface `Lambdas$AnotherThenable`<T> {
 }
 
 class `Lambdas$IdentityFunction`: lambdas.`Lambdas$GenericJsFunction`<Any?, Any?> {
+ internal constructor(): super()
+
  open override fun apply(o: Any?): Any? {
   return o
  }

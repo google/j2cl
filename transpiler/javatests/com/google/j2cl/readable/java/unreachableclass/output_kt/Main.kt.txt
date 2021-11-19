@@ -1,29 +1,39 @@
 package unreachableclass
 
 open class Main {
+ constructor(): super()
+
  init {
   try {} catch (e: java.lang.RuntimeException) {
-   TODO("expression.qualify needs rendering: Main.this)").m()
-   TODO("expression.qualify needs rendering: Main.this)")
+   unreachableclass.`Main$1A`(this).m()
+   unreachableclass.`Main$1`(this)
   }
  }
 }
 
 open class `Main$1A` {
+ internal constructor(`$outer_this`: unreachableclass.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: unreachableclass.Main?
 
  internal open fun m() {}
 }
 
 open class `Main$1A$1B` {
+ internal constructor(`$outer_this`: unreachableclass.`Main$1A`?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: unreachableclass.`Main$1A`?
 
- private fun n() {}
+ internal fun n() {}
 }
 
 open class `Main$1` {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: unreachableclass.Main?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: unreachableclass.Main?

@@ -1,7 +1,9 @@
 package jsasync
 
 open class Main {
- private val x: jsasync.`Main$IThenable`<Int?>? = jsasync.`Main$Promise`.resolve(10)
+ constructor(): super()
+
+ internal val x: jsasync.`Main$IThenable`<Int?>? = jsasync.`Main$Promise`.resolve(10)
 
  internal open fun emptyAsyncMethod(): jsasync.`Main$IThenable`<java.lang.Void?>? {
   return null
@@ -20,12 +22,12 @@ open class Main {
   val i: jsasync.`Main$AsyncInterface`? = {
    return jsasync.`Main$Promise`.resolve(jsasync.Main.await(jsasync.`Main$Promise`.resolve(5)))
   }
-  val o: jsasync.`Main$BaseInterface`? = TODO("expression.qualify needs rendering: Main.this)")
+  val o: jsasync.`Main$BaseInterface`? = jsasync.`Main$1`(this)
   val j: jsasync.`Main$AsyncJsFunctionInterface`? = {
    return jsasync.`Main$Promise`.resolve(jsasync.Main.await(jsasync.`Main$Promise`.resolve(5)))
   }
-  val optimizableJsFunction: jsasync.`Main$JsFunctionInterface`? = TODO("expression.qualify needs rendering: Main.this)")
-  val unoptimizableJsFunction: jsasync.`Main$JsFunctionInterface`? = TODO("expression.qualify needs rendering: Main.this)")
+  val optimizableJsFunction: jsasync.`Main$JsFunctionInterface`? = jsasync.`Main$2`(this)
+  val unoptimizableJsFunction: jsasync.`Main$JsFunctionInterface`? = jsasync.`Main$3`(this)
  }
 
  companion object {
@@ -35,13 +37,13 @@ open class Main {
   }
 
   @JvmStatic
-  private fun <T> await(thenable: jsasync.`Main$IThenable`<T>?): T? {}
+  internal fun <T> await(thenable: jsasync.`Main$IThenable`<T>?): T? {}
  }
 }
 
 open class `Main$1`: jsasync.`Main$BaseInterface` {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: jsasync.Main?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: jsasync.Main?
@@ -52,8 +54,8 @@ open class `Main$1`: jsasync.`Main$BaseInterface` {
 }
 
 open class `Main$2`: jsasync.`Main$JsFunctionInterface` {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: jsasync.Main?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: jsasync.Main?
@@ -64,8 +66,8 @@ open class `Main$2`: jsasync.`Main$JsFunctionInterface` {
 }
 
 open class `Main$3`: jsasync.`Main$JsFunctionInterface` {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: jsasync.Main?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: jsasync.Main?
@@ -101,6 +103,8 @@ interface `Main$AsyncJsFunctionInterface` {
 interface `Main$IThenable`<T> {}
 
 open class `Main$Promise`<T>: jsasync.`Main$IThenable`<T> {
+ internal constructor(): super()
+
  companion object {
   @JvmStatic
   fun <T> resolve(value: T?): jsasync.`Main$Promise`<T>? {}

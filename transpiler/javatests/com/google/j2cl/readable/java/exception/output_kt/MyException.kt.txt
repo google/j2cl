@@ -1,9 +1,7 @@
 package exception
 
 class MyException: Exception {
- internal constructor() {}
+ internal constructor(): super()
 
- internal constructor(cause: Throwable?): super(cause) {
-
- }
+ internal constructor(cause: Throwable?): super(cause)
 }

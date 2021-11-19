@@ -1,8 +1,10 @@
 package jsproperties
 
 open class Foo {
+ internal constructor(): super()
+
  companion object {
-  private var f: Int = 0
+  internal var f: Int = 0
 
   @JvmStatic
   fun getA(): Int {
@@ -27,7 +29,9 @@ open class Foo {
 }
 
 open class Bar {
- private var f: Int = 0
+ internal constructor(): super()
+
+ internal var f: Int = 0
 
  open fun getA(): Int {
   return this.f + 1
@@ -47,6 +51,8 @@ open class Bar {
 }
 
 open class NativeFoo {
+ internal constructor(): super()
+
  open fun getA(): Any? {}
 
  companion object {
@@ -56,6 +62,8 @@ open class NativeFoo {
 }
 
 open class Main {
+ constructor(): super()
+
  open fun testNativeJsProperty() {
   jsproperties.NativeFoo().getA()
   jsproperties.NativeFoo.getB()

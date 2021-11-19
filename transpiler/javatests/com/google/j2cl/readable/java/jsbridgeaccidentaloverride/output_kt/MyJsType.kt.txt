@@ -5,7 +5,7 @@ interface OtherInterface {
 }
 
 open class MyJsType: jsbridgeaccidentaloverride.OtherInterface {
- internal constructor() {}
+ internal constructor(): super()
 
  open fun foo(a: Int): Int {
   return a
@@ -26,7 +26,9 @@ interface MyInterface {
  fun bar(a: Int): Int
 }
 
-open class SubJsType: jsbridgeaccidentaloverride.MyInterface, jsbridgeaccidentaloverride.MyJsType() {
+open class SubJsType: jsbridgeaccidentaloverride.MyInterface, jsbridgeaccidentaloverride.MyJsType {
+ internal constructor(): super()
+
  open override fun bar(a: Int): Int {
   return a + 2
  }

@@ -1,6 +1,8 @@
 package genericmethod
 
 open class GenericMethod<T> {
+ constructor(): super()
+
  open fun <T, S> foo(f: T?, s: S?) {}
 
  open fun `fun`(o: Any?) {}
@@ -8,8 +10,8 @@ open class GenericMethod<T> {
  open fun <T: Exception?> `fun`(t: T?) {}
 
  open fun <T: Error?> `fun`(t: T?) {
-  TODO("expression.qualify needs rendering: GenericMethod.this)")
-  TODO("expression.qualify needs rendering: GenericMethod.this)")
+  genericmethod.`GenericMethod$1`<T, T>(this)
+  genericmethod.`GenericMethod$1LocalClass`<T, T, T>(this)
  }
 
  open fun <T> bar(): genericmethod.GenericMethod<T>? {
@@ -82,8 +84,8 @@ open class GenericMethod<T> {
 }
 
 open class `GenericMethod$1`<T: Error?, T>: genericmethod.GenericMethod<T> {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: genericmethod.GenericMethod<T>?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: genericmethod.GenericMethod<T>?
@@ -93,7 +95,11 @@ open class `GenericMethod$1`<T: Error?, T>: genericmethod.GenericMethod<T> {
  open fun <T> fun2(t: T?) {}
 }
 
-open class `GenericMethod$1LocalClass`<T, T: Error?, T>: genericmethod.GenericMethod<T>() {
+open class `GenericMethod$1LocalClass`<T, T: Error?, T>: genericmethod.GenericMethod<T> {
+ internal constructor(`$outer_this`: genericmethod.GenericMethod<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: genericmethod.GenericMethod<T>?
 
  open fun fun2(t: T?) {}
@@ -102,18 +108,24 @@ open class `GenericMethod$1LocalClass`<T, T: Error?, T>: genericmethod.GenericMe
 }
 
 open class `GenericMethod$SuperContainer`<C: genericmethod.`GenericMethod$Container`<*>?> {
+ internal constructor(): super()
+
  internal open fun get(): C? {
   return null
  }
 }
 
 open class `GenericMethod$Container`<CT: genericmethod.`GenericMethod$Content`?> {
+ internal constructor(): super()
+
  internal open fun get(): CT? {
   return null
  }
 }
 
 open class `GenericMethod$Content` {
+ internal constructor(): super()
+
  internal open fun getProp(): String? {
   return null
  }

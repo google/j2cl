@@ -1,5 +1,9 @@
 package multipletopclasses
 
-open class AnotherClass {}
+open class AnotherClass {
+ internal constructor(): super()
+}
 
-open class MultipleTopClasses: multipletopclasses.AnotherClass() {}
+open class MultipleTopClasses: multipletopclasses.AnotherClass {
+ constructor(): super()
+}

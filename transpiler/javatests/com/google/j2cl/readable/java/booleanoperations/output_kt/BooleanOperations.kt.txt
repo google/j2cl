@@ -1,6 +1,8 @@
 package booleanoperations
 
 open class BooleanOperations {
+ constructor(): super()
+
  open fun test() {
   var ls: Boolean = true
   val rs: Boolean = true
@@ -64,9 +66,9 @@ open class BooleanOperations {
   if (ls || rs) {
    r = true
   }
-  var finalOuter: booleanoperations.`BooleanOperations$1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
+  var finalOuter: booleanoperations.`BooleanOperations$1Outer`? = booleanoperations.`BooleanOperations$1Outer`(this)
   finalOuter!!.b = finalOuter!!.b | true
-  var outer: booleanoperations.`BooleanOperations$1Outer`? = TODO("expression.qualify needs rendering: BooleanOperations.this)")
+  var outer: booleanoperations.`BooleanOperations$1Outer`? = booleanoperations.`BooleanOperations$1Outer`(this)
   outer!!.b = outer!!.b | run {
    outer = null
    outer
@@ -75,17 +77,25 @@ open class BooleanOperations {
 
  companion object {
   @JvmStatic
-  private fun acceptBoolean(b: Boolean) {}
+  internal fun acceptBoolean(b: Boolean) {}
  }
 }
 
 open class `BooleanOperations$1Outer` {
+ internal constructor(`$outer_this`: booleanoperations.BooleanOperations?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: booleanoperations.BooleanOperations?
 
  @JvmField internal var b: Boolean = false
 }
 
 open class `BooleanOperations$1Outer$Inner` {
+ internal constructor(`$outer_this`: booleanoperations.`BooleanOperations$1Outer`?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: booleanoperations.`BooleanOperations$1Outer`?
 
  init {

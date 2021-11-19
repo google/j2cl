@@ -5,37 +5,47 @@ interface MyInterface {
 }
 
 open class MixedNestings {
+ constructor(): super()
+
  open fun mm() {}
 
  open fun test() {
-  TODO("expression.qualify needs rendering: MixedNestings.this)").a()
+  mixednestings.`MixedNestings$A`(this).a()
  }
 }
 
 open class `MixedNestings$A` {
+ internal constructor(`$outer_this`: mixednestings.MixedNestings?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: mixednestings.MixedNestings?
 
  open fun aa() {}
 
  open fun a() {
-  TODO("expression.qualify needs rendering: A.this)").b()
+  mixednestings.`MixedNestings$A$1B`(this).b()
  }
 }
 
 open class `MixedNestings$A$1B` {
+ internal constructor(`$outer_this`: mixednestings.`MixedNestings$A`?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: mixednestings.`MixedNestings$A`?
 
  open fun bb() {}
 
  open fun b(): Int {
-  val i: mixednestings.MyInterface? = TODO("expression.qualify needs rendering: \$1B.this)")
+  val i: mixednestings.MyInterface? = mixednestings.`MixedNestings$A$1B$1`(this)
   return i!!.`fun`(400)
  }
 }
 
 open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: mixednestings.`MixedNestings$A$1B`?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: mixednestings.`MixedNestings$A$1B`?
@@ -49,7 +59,7 @@ open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
     this.`this`!!.`this`!!.`this`!!.mm()
     this.`this`!!.`this`!!.aa()
     this.`this`!!.bb()
-    return TODO("expression.qualify needs rendering: \$1.this)").`fun`(100)
+    return mixednestings.`MixedNestings$A$1B$1$1`(this).`fun`(100)
    }
    return iii!!.`fun`(200)
   }
@@ -58,8 +68,8 @@ open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
 }
 
 open class `MixedNestings$A$1B$1$1`: mixednestings.MyInterface {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: mixednestings.`MixedNestings$A$1B$1`?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: mixednestings.`MixedNestings$A$1B$1`?

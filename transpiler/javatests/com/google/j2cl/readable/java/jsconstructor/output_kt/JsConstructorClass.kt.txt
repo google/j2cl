@@ -1,32 +1,31 @@
 package jsconstructor
 
-open class JsConstructorClass {}
+open class JsConstructorClass {
+ constructor(): super()
+}
 
 open class `JsConstructorClass$A` {
  @JvmField var fA: Int = 1
 
- constructor(x: Int) {
+ constructor(x: Int): super() {
   this.fA = x
  }
 
- constructor() {}
+ constructor(): super()
 }
 
 open class `JsConstructorClass$B`: jsconstructor.`JsConstructorClass$A` {
  @JvmField var fB: Int = 2
 
  constructor(x: Int): super(x + 1) {
-
   this.fB = 3
  }
 
  constructor(): this(10) {
-
   this.fB = 4
  }
 
  constructor(x: Int, y: Int): this(x + y) {
-
   this.fB = x * y
  }
 }
@@ -35,12 +34,10 @@ open class `JsConstructorClass$C`: jsconstructor.`JsConstructorClass$B` {
  @JvmField var fC: Int = 1
 
  constructor(x: Int): super(x * 2) {
-
   this.fC = 6
  }
 
  constructor(x: Int, y: Int): this(x + y) {
-
   this.fC = 7
  }
 }
@@ -49,12 +46,10 @@ open class `JsConstructorClass$D`: jsconstructor.`JsConstructorClass$B` {
  @JvmField var fD: Int = 8
 
  constructor(): super(9) {
-
   this.fD = 10
  }
 
  constructor(x: Int): this() {
-
   this.fD = x
  }
 }
@@ -63,7 +58,6 @@ open class `JsConstructorClass$E`: jsconstructor.`JsConstructorClass$C` {
  @JvmField var fE: Int = 11
 
  constructor(): super(10) {
-
   this.fE = 12
  }
 }
@@ -72,31 +66,26 @@ open class `JsConstructorClass$F`: jsconstructor.`JsConstructorClass$C` {
  @JvmField var fF: Int = 13
 
  constructor(x: Int): super(x + 2) {
-
   this.fF = x + 3
  }
 }
 
-open class `JsConstructorClass$G` {}
+open class `JsConstructorClass$G` {
+ constructor(): super()
+}
 
 open class `JsConstructorClass$H`: jsconstructor.`JsConstructorClass$G` {
- constructor() {}
+ constructor(): super()
 }
 
 open class `JsConstructorClass$Varargs`: jsconstructor.`JsConstructorClass$A` {
- constructor(vararg args: Int): super(args!![1]) {
-
- }
+ constructor(vararg args: Int): super(args!![1])
 }
 
 open class `JsConstructorClass$SubVarargs`: jsconstructor.`JsConstructorClass$Varargs` {
- constructor(i: Any?, vararg args: Int): super(args) {
+ constructor(i: Any?, vararg args: Int): super(args)
 
- }
-
- constructor(j: Int): this(Any(), intArrayOf(j)) {
-
- }
+ constructor(j: Int): this(Any(), intArrayOf(j))
 
  companion object {
   @JvmStatic
@@ -110,21 +99,17 @@ open class `JsConstructorClass$SubVarargs`: jsconstructor.`JsConstructorClass$Va
 open class `JsConstructorClass$InstanceVarargs`: jsconstructor.`JsConstructorClass$A` {
  @JvmField val `this`: jsconstructor.JsConstructorClass?
 
- constructor(vararg args: Int): super(args!![1]) {
-
+ constructor(`$outer_this`: jsconstructor.JsConstructorClass?, vararg args: Int): super(args!![1]) {
+  this.`this` = `$outer_this`
  }
 }
 
 open class `JsConstructorClass$RegularType` {
- constructor(b: Any?) {}
+ constructor(b: Any?): super()
 }
 
 open class `JsConstructorClass$JsConstructorSubtypeOfRegularType`: jsconstructor.`JsConstructorClass$RegularType` {
- constructor(`object`: Any?): super(`object`) {
+ constructor(`object`: Any?): super(`object`)
 
- }
-
- constructor(): this(Any()) {
-
- }
+ constructor(): this(Any())
 }

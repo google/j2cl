@@ -1,6 +1,8 @@
 package implicitparenthesis
 
 open class ImplicitParenthesis {
+ constructor(): super()
+
  open fun test() {
   implicitparenthesis.ImplicitParenthesis.examples()
   implicitparenthesis.ImplicitParenthesis.nonExamples()
@@ -8,7 +10,7 @@ open class ImplicitParenthesis {
 
  companion object {
   @JvmStatic
-  private fun examples() {
+  internal fun examples() {
    var primitiveInt: Int
    var boxedInt: Int?
    if (true) {
@@ -57,7 +59,7 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  private fun nonExamples() {
+  internal fun nonExamples() {
    var primitiveInt: Int
    var boxedInt: Int?
    var boxedBoolean: Boolean?
@@ -77,7 +79,7 @@ open class ImplicitParenthesis {
   }
 
   @JvmStatic
-  private fun parenthesisRemoval() {
+  internal fun parenthesisRemoval() {
    Int(1 + 2)
   }
  }

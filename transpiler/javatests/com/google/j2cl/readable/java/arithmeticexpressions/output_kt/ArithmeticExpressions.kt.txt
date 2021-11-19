@@ -1,6 +1,8 @@
 package arithmeticexpressions
 
 open class ArithmeticExpressions {
+ constructor(): super()
+
  open fun testCoercions() {
   var b: Byte = 1L.toByte()
   var c: Char = 1L.toChar()
@@ -243,11 +245,11 @@ open class ArithmeticExpressions {
  }
 
  companion object {
-  private val FLOAT_CONSTANT: Float = 1.1f
+  internal val FLOAT_CONSTANT: Float = 1.1f
 
-  private val DOUBLE_CONSTANT: Double = 1.100000023841858
+  internal val DOUBLE_CONSTANT: Double = 1.100000023841858
 
-  private val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
+  internal val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
 
   @JvmField var one: Long = 1L
 
@@ -258,17 +260,17 @@ open class ArithmeticExpressions {
   }
 
   @JvmStatic
-  private fun getLongArray(): LongArray? {
+  internal fun getLongArray(): LongArray? {
    return null
   }
 
   @JvmStatic
-  private fun getInteger(): Int? {
+  internal fun getInteger(): Int? {
    return null
   }
 
   @JvmStatic
-  private fun testSideEffect() {
+  internal fun testSideEffect() {
    run {
     val `$qualifier`: arithmeticexpressions.ArithmeticExpressions? = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect()
     run {
@@ -281,14 +283,14 @@ open class ArithmeticExpressions {
   }
 
   @JvmStatic
-  private fun getWithSideEffect(): arithmeticexpressions.ArithmeticExpressions? {
+  internal fun getWithSideEffect(): arithmeticexpressions.ArithmeticExpressions? {
    return null
   }
 
-  private var counter: Long = 0L
+  internal var counter: Long = 0L
 
   @JvmStatic
-  private fun incrementCounter(): Long {
+  internal fun incrementCounter(): Long {
    return run {
     val `$value`: Long = arithmeticexpressions.ArithmeticExpressions.counter + 1L
     arithmeticexpressions.ArithmeticExpressions.counter = `$value`
@@ -299,6 +301,10 @@ open class ArithmeticExpressions {
 }
 
 open class `ArithmeticExpressions$1Ref`<T> {
+ internal constructor(`$outer_this`: arithmeticexpressions.ArithmeticExpressions?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
 
  @JvmField internal var field: T? = null

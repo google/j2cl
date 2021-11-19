@@ -10,7 +10,4 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    # TODO(b/201574151): Properly support calling super constructors.
-    # TODO(b/202427872): Support inner classes and interfaces in J2KT.
-    build_kt_readables = False,
 )

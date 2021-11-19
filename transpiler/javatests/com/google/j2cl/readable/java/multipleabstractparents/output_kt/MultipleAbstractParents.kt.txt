@@ -1,6 +1,8 @@
 package multipleabstractparents
 
 open class MultipleAbstractParents {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun main(vararg args: String?) {
@@ -19,30 +21,50 @@ interface `MultipleAbstractParents$Collection`<T> {
  fun getFoo(t: T?): String?
 }
 
-abstract class `MultipleAbstractParents$AbstractListCollection`<T>: multipleabstractparents.`MultipleAbstractParents$List`<T>, multipleabstractparents.`MultipleAbstractParents$Collection`<T> {}
+abstract class `MultipleAbstractParents$AbstractListCollection`<T>: multipleabstractparents.`MultipleAbstractParents$List`<T>, multipleabstractparents.`MultipleAbstractParents$Collection`<T> {
+ constructor(): super()
+}
 
 abstract class `MultipleAbstractParents$AbstractCollection`<T> {
+ constructor(): super()
+
  open fun getFoo(t: T?): String? {
   return "AbstractCollection"
  }
 }
 
-abstract class `MultipleAbstractParents$AbstractList`<T>: multipleabstractparents.`MultipleAbstractParents$List`<T>, multipleabstractparents.`MultipleAbstractParents$AbstractCollection`<T>() {}
+abstract class `MultipleAbstractParents$AbstractList`<T>: multipleabstractparents.`MultipleAbstractParents$List`<T>, multipleabstractparents.`MultipleAbstractParents$AbstractCollection`<T> {
+ constructor(): super()
+}
 
-abstract class `MultipleAbstractParents$AbstractList2`<T>: multipleabstractparents.`MultipleAbstractParents$List`<T> {}
+abstract class `MultipleAbstractParents$AbstractList2`<T>: multipleabstractparents.`MultipleAbstractParents$List`<T> {
+ constructor(): super()
+}
 
-open class `MultipleAbstractParents$ArrayList`<T>: multipleabstractparents.`MultipleAbstractParents$AbstractList`<T>() {}
+open class `MultipleAbstractParents$ArrayList`<T>: multipleabstractparents.`MultipleAbstractParents$AbstractList`<T> {
+ constructor(): super()
+}
 
 interface `MultipleAbstractParents$IStringList`: multipleabstractparents.`MultipleAbstractParents$List`<String?> {
  override fun getFoo(string: String?): String?
 }
 
-abstract class `MultipleAbstractParents$AbstractStringList`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList`<String?>() {}
+abstract class `MultipleAbstractParents$AbstractStringList`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList`<String?> {
+ constructor(): super()
+}
 
-abstract class `MultipleAbstractParents$AbstractStringList2`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList2`<String?>() {}
+abstract class `MultipleAbstractParents$AbstractStringList2`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList2`<String?> {
+ constructor(): super()
+}
 
-abstract class `MultipleAbstractParents$AbstractStringList3`: multipleabstractparents.`MultipleAbstractParents$AbstractList2`<String?>() {}
+abstract class `MultipleAbstractParents$AbstractStringList3`: multipleabstractparents.`MultipleAbstractParents$AbstractList2`<String?> {
+ constructor(): super()
+}
 
-open class `MultipleAbstractParents$StringList`: multipleabstractparents.`MultipleAbstractParents$AbstractStringList`() {}
+open class `MultipleAbstractParents$StringList`: multipleabstractparents.`MultipleAbstractParents$AbstractStringList` {
+ constructor(): super()
+}
 
-open class `MultipleAbstractParents$StringListChild`: multipleabstractparents.`MultipleAbstractParents$StringList`() {}
+open class `MultipleAbstractParents$StringListChild`: multipleabstractparents.`MultipleAbstractParents$StringList` {
+ constructor(): super()
+}

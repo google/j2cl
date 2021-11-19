@@ -1,11 +1,13 @@
 package strings
 
 open class Strings {
- private var someString: String? = "This is a string literal"
+ constructor(): super()
 
- private var nonBmpChar: String? = "\uD800\uDF46"
+ internal var someString: String? = "This is a string literal"
 
- private var wideColon: String? = "\uFF1A"
+ internal var nonBmpChar: String? = "\uD800\uDF46"
+
+ internal var wideColon: String? = "\uFF1A"
 
  open fun test() {
   var s1: String? = null
@@ -58,12 +60,14 @@ open class Strings {
  }
 
  companion object {
-  private val ESCAPE_CODES: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  internal val ESCAPE_CODES: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
 
-  private val ESCAPE_CODES_COPY: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  internal val ESCAPE_CODES_COPY: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 }
 
 open class `Strings$StringHolder` {
+ internal constructor(): super()
+
  @JvmField internal var s: String? = "A"
 }

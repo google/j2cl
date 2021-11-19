@@ -1,6 +1,8 @@
 package jsenum
 
 open class Main {
+ constructor(): super()
+
  companion object {
   @JvmStatic
   fun testJsEnumSwitch() {
@@ -42,7 +44,7 @@ open class Main {
   }
 
   @JvmStatic
-  private fun testBoxUnboxWithTypeInference() {
+  internal fun testBoxUnboxWithTypeInference() {
    val templatedField: jsenum.`Main$TemplatedField`<jsenum.`Main$ComparableJsEnum`?>? = jsenum.`Main$TemplatedField`<jsenum.`Main$ComparableJsEnum`?>(jsenum.`Main$ComparableJsEnum`.ONE)
    var unboxed: jsenum.`Main$ComparableJsEnum`? = templatedField!!.getValue()
    unboxed = templatedField!!.value
@@ -53,13 +55,15 @@ open class Main {
   }
 
   @JvmStatic
-  private fun <T> boxingPassthrough(t: T?): T? {
+  internal fun <T> boxingPassthrough(t: T?): T? {
    return t
   }
  }
 }
 
 enum class `Main$ComparableJsEnum` {
+ internal constructor(): super()
+
  open fun getValue(): Int {
   return this.ordinal()
  }
@@ -74,13 +78,13 @@ enum class `Main$ComparableJsEnum` {
 }
 
 enum class `Main$IntJsEnum` {
- private var value: Int = 0
+ internal var value: Int = 0
 
  open fun getValue(): Int {
   return this.value
  }
 
- private constructor(value: Int) {
+ internal constructor(value: Int): super() {
   this.value = value
  }
 
@@ -94,13 +98,13 @@ enum class `Main$IntJsEnum` {
 }
 
 enum class `Main$StringJsEnum` {
- private var value: String? = null
+ internal var value: String? = null
 
  open fun getValue(): String? {
   return this.value
  }
 
- private constructor(value: String?) {
+ internal constructor(value: String?): super() {
   this.value = value
  }
 
@@ -112,13 +116,13 @@ enum class `Main$StringJsEnum` {
 }
 
 enum class `Main$NonNullableStringJsEnum` {
- private var value: String = null
+ internal var value: String = null
 
  open fun getValue(): String? {
   return this.value
  }
 
- private constructor(value: String?) {
+ internal constructor(value: String?): super() {
   this.value = value!!
  }
 
@@ -130,6 +134,8 @@ enum class `Main$NonNullableStringJsEnum` {
 }
 
 enum class `Main$NativeStringEnum` {
+ internal constructor(): super()
+
  companion object {
   @JvmField val ONE: jsenum.`Main$NativeStringEnum` = jsenum.`Main$NativeStringEnum`()
 
@@ -140,7 +146,7 @@ enum class `Main$NativeStringEnum` {
 open class `Main$TemplatedField`<T> {
  @JvmField internal var value: T? = null
 
- internal constructor(value: T?) {
+ internal constructor(value: T?): super() {
   this.value = value
  }
 

@@ -1,6 +1,8 @@
 package cast
 
 open class CastPrimitives {
+ constructor(): super()
+
  open fun testPrimitiveCasts() {
   var b: Byte = 1
   var c: Char = 1
@@ -147,36 +149,36 @@ open class CastPrimitives {
 
  companion object {
   @JvmStatic
-  private fun getShort(value: Short): Short {
+  internal fun getShort(value: Short): Short {
    return value
   }
 
   @JvmStatic
-  private fun getInt(value: Int): Int {
+  internal fun getInt(value: Int): Int {
    return value
   }
 
   @JvmStatic
-  private fun getLong(value: Long): Long {
+  internal fun getLong(value: Long): Long {
    return value
   }
 
   @JvmStatic
-  private fun getFloat(value: Float): Float {
+  internal fun getFloat(value: Float): Float {
    return value
   }
 
   @JvmStatic
-  private fun getDouble(value: Double): Double {
+  internal fun getDouble(value: Double): Double {
    return value
   }
  }
 }
 
 open class `CastPrimitives$IntValueHolder` {
- internal constructor(value: Int) {}
+ internal constructor(value: Int): super()
 }
 
 open class `CastPrimitives$LongValueHolder` {
- internal constructor(value: Long) {}
+ internal constructor(value: Long): super()
 }

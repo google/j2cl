@@ -13,6 +13,8 @@ interface SubInterface: interfacejsbridge.MyJsInterface, interfacejsbridge.MyInt
 }
 
 open class InterfaceImpl: interfacejsbridge.SubInterface {
+ constructor(): super()
+
  open override fun foo(a: Int): Int {
   return 0
  }

@@ -13,6 +13,10 @@ interface I<T> {
 
 interface J: unimplementedbridgemethod.I<String?> {}
 
-abstract class Bar: unimplementedbridgemethod.J {}
+abstract class Bar: unimplementedbridgemethod.J {
+ internal constructor(): super()
+}
 
-abstract class Foo: unimplementedbridgemethod.I<String?> {}
+abstract class Foo: unimplementedbridgemethod.I<String?> {
+ constructor(): super()
+}

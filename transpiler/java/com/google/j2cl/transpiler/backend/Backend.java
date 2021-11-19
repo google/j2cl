@@ -373,12 +373,15 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
+          CreateImplicitConstructors::new,
+          InsertExplicitSuperCalls::new,
           NormalizeStaticMemberQualifiers::new,
           NormalizeMultiExpressions::new,
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           RewriteAssignmentExpressions::new,
           NormalizeLiteralsKotlin::new,
           NormalizeFieldInitializationKotlin::new,
+          NormalizeNestedClassConstructors::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,
           NormalizeLabeledStatements::new,

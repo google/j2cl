@@ -1,6 +1,8 @@
 package accidentaloverride
 
 open class Parent<T: Error?> {
+ internal constructor(): super()
+
  open fun foo(e: T?) {}
 }
 
@@ -8,6 +10,10 @@ interface SuperInterface<T> {
  fun foo(t: T?)
 }
 
-open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<java.lang.AssertionError?>, accidentaloverride.Parent<java.lang.AssertionError?>() {}
+open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<java.lang.AssertionError?>, accidentaloverride.Parent<java.lang.AssertionError?> {
+ internal constructor(): super()
+}
 
-open class AccidentalOverride: accidentaloverride.SuperInterface<Error?>, accidentaloverride.Parent<Error?>() {}
+open class AccidentalOverride: accidentaloverride.SuperInterface<Error?>, accidentaloverride.Parent<Error?> {
+ constructor(): super()
+}

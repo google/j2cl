@@ -7,9 +7,13 @@ interface InterfaceWithDefault {
 }
 
 open class GenericClass<T> {
+ internal constructor(): super()
+
  open fun foo(value: T?) {
   java.lang.System.out!!.println("in GenericClass")
  }
 }
 
-open class ConcreteClass: genericanddefaultmethods.InterfaceWithDefault, genericanddefaultmethods.GenericClass<String?>() {}
+open class ConcreteClass: genericanddefaultmethods.InterfaceWithDefault, genericanddefaultmethods.GenericClass<String?> {
+ constructor(): super()
+}

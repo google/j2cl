@@ -1,6 +1,8 @@
 package annotation
 
-open class Main {}
+open class Main {
+ constructor(): super()
+}
 
 interface `Main$Foo`: java.lang.annotation.Annotation {
  fun bar(): Int
@@ -13,6 +15,10 @@ interface `Main$Foo`: java.lang.annotation.Annotation {
 interface `Main$Zoo`: java.lang.annotation.Annotation {}
 
 open class `Main$Bar` {
+ internal constructor(`$outer_this`: annotation.Main?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: annotation.Main?
 
  internal open fun baz(): Int {

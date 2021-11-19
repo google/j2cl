@@ -1,16 +1,14 @@
 package cascadingconstructor
 
 open class CascadingConstructor {
- private var a: Int = 0
+ internal var a: Int = 0
 
- private var b: Int = 0
+ internal var b: Int = 0
 
- private constructor(a: Int, b: Int) {
+ internal constructor(a: Int, b: Int): super() {
   this.a = a
   this.b = b
  }
 
- constructor(a: Int): this(a, a * 2) {
-
- }
+ constructor(a: Int): this(a, a * 2)
 }

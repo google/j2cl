@@ -5,9 +5,13 @@ interface MyJsInterface {
 }
 
 open class A {
+ internal constructor(): super()
+
  open fun foo(a: Int): Int {
   return a
  }
 }
 
-open class InterfaceImpl: jsbridgebackward.MyJsInterface, jsbridgebackward.A() {}
+open class InterfaceImpl: jsbridgebackward.MyJsInterface, jsbridgebackward.A {
+ constructor(): super()
+}

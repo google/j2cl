@@ -1,6 +1,8 @@
 package foreachstatement
 
 open class ForEachStatement {
+ constructor(): super()
+
  open fun test(iterable: Iterable<Throwable?>?) {
   FOR_EACH@ for (t in iterable!!) {
    t!!.toString()
@@ -10,7 +12,7 @@ open class ForEachStatement {
   }
  }
 
- private fun testMulticatch() {
+ internal fun testMulticatch() {
   try {
    throw Exception()
   } catch (e: foreachstatement.`ForEachStatement$Exception1`) {
@@ -20,7 +22,7 @@ open class ForEachStatement {
   }
  }
 
- private fun <T, U: T> testTypeVariable() where T: Any?, T: Iterable<String?>? {
+ internal fun <T, U: T> testTypeVariable() where T: Any?, T: Iterable<String?>? {
   val iterable: U? = null
   FOR_EACH@ for (s in iterable) {}
   val anotherIterable: foreachstatement.`ForEachStatement$IterableReturningTypeVariable`<*>? = null
@@ -28,19 +30,25 @@ open class ForEachStatement {
  }
 }
 
-open class `ForEachStatement$Exception1`: Iterable<String?>, Exception() {
+open class `ForEachStatement$Exception1`: Iterable<String?>, Exception {
+ internal constructor(): super()
+
  open override fun iterator(): java.util.Iterator<String?>? {
   return null
  }
 }
 
-open class `ForEachStatement$Exception2`: Iterable<Any?>, Exception() {
+open class `ForEachStatement$Exception2`: Iterable<Any?>, Exception {
+ internal constructor(): super()
+
  open override fun iterator(): java.util.Iterator<Any?>? {
   return null
  }
 }
 
 open class `ForEachStatement$IterableReturningTypeVariable`<T: java.util.Iterator<Int?>?>: Iterable<Int?> {
+ internal constructor(): super()
+
  open override fun iterator(): T? {
   return null
  }

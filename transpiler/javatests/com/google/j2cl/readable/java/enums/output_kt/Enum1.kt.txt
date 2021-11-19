@@ -1,6 +1,8 @@
 package enums
 
-enum class Enum1: Enum<enums.Enum1?>() {
+enum class Enum1: Enum<enums.Enum1?> {
+ internal constructor(): super()
+
  companion object {
   @JvmField val V1: enums.Enum1 = enums.Enum1()
 
@@ -11,17 +13,13 @@ enum class Enum1: Enum<enums.Enum1?>() {
 enum class Enum2: Enum<enums.Enum2?> {
  @JvmField internal var foo: Int = enums.Enum1.V1.ordinal()
 
- private constructor(foo: Int) {
+ internal constructor(foo: Int): super() {
   this.foo = foo
  }
 
- private constructor(foo: Enum?): this(foo!!.ordinal()) {
+ internal constructor(foo: Enum?): this(foo!!.ordinal())
 
- }
-
- private constructor(vararg somePars: Any?): this(somePars!!.size) {
-
- }
+ internal constructor(vararg somePars: Any?): this(somePars!!.size)
 
  companion object {
   @JvmField val VALUE1: enums.Enum2 = enums.Enum2(2)
@@ -42,13 +40,11 @@ enum class Enum2: Enum<enums.Enum2?> {
 }
 
 open class `Enum2$1`: enums.Enum2 {
- internal constructor(`$_0`: Int): super(`$_0`) {
-
- }
+ internal constructor(`$_0`: Int): super(`$_0`)
 }
 
 enum class Enum3: Enum<enums.Enum3?> {
- private constructor(function: java.util.function.Function<Int?, Int?>?) {}
+ internal constructor(function: java.util.function.Function<Int?, Int?>?): super()
 
  companion object {
   @JvmField val VALUE1: enums.Enum3 = enums.Enum3({ v: Int? ->

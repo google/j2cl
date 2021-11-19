@@ -1,6 +1,8 @@
 package staticfieldaccesslevels
 
 open class StaticFieldAccessLevels {
+ constructor(): super()
+
  open fun test(): Int {
   return if (staticfieldaccesslevels.StaticFieldAccessLevels.b) staticfieldaccesslevels.StaticFieldAccessLevels.a else staticfieldaccesslevels.StaticFieldAccessLevels.d
  }
@@ -8,7 +10,7 @@ open class StaticFieldAccessLevels {
  companion object {
   @JvmField var a: Int = 0
 
-  private var b: Boolean = false
+  internal var b: Boolean = false
 
   @JvmField protected var c: Any? = null
 

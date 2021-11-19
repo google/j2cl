@@ -1,9 +1,11 @@
 package instancefieldaccesslevels
 
 open class InstanceFieldAccessLevels {
+ constructor(): super()
+
  @JvmField var a: Int = 0
 
- private var b: Boolean = false
+ internal var b: Boolean = false
 
  @JvmField protected var c: Any? = null
 

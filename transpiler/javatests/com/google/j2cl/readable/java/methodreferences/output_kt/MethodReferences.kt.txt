@@ -1,6 +1,8 @@
 package methodreferences
 
 open class MethodReferences<T> {
+ constructor(): super()
+
  open fun isA(): Boolean? {
   return true
  }
@@ -36,7 +38,7 @@ open class MethodReferences<T> {
    return arg0!!.isA()!!
   }
   val objectCapturingOuterProducer: methodreferences.`MethodReferences$Producer`<methodreferences.`MethodReferences$ObjectCapturingOuter`<T>?>? = {
-   return TODO("expression.qualify needs rendering: MethodReferences.this)")
+   return methodreferences.`MethodReferences$ObjectCapturingOuter`<T>(this)
   }
   val arrayProducer: methodreferences.`MethodReferences$ArrayProducer`<Any?>? = { arg0: Int ->
    return arrayOfNulls<Double?>(arg0)
@@ -113,6 +115,10 @@ interface `MethodReferences$ArrayProducer`<T> {
 }
 
 open class `MethodReferences$ObjectCapturingOuter`<T> {
+ internal constructor(`$outer_this`: methodreferences.MethodReferences<T>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: methodreferences.MethodReferences<T>?
 
  internal open fun getMain(): methodreferences.MethodReferences<T>? {

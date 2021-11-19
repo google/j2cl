@@ -1,6 +1,8 @@
 package devirtualizedsupermethodcall
 
-open class SubNumber: Number() {
+open class SubNumber: Number {
+ internal constructor(): super()
+
  open override fun intValue(): Int {
   return 0
  }
@@ -19,12 +21,16 @@ open class SubNumber: Number() {
 }
 
 open class FooCallsSuperObjectMethod {
+ internal constructor(): super()
+
  open override fun hashCode(): Int {
   return super.hashCode()
  }
 }
 
 open class Main {
+ constructor(): super()
+
  open fun main() {
   val fooCallsSuperObjectMethods: devirtualizedsupermethodcall.FooCallsSuperObjectMethod? = devirtualizedsupermethodcall.FooCallsSuperObjectMethod()
   fooCallsSuperObjectMethods!!.hashCode()

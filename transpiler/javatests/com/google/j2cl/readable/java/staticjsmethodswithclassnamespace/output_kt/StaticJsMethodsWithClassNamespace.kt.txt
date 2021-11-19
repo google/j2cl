@@ -1,6 +1,8 @@
 package staticjsmethodswithclassnamespace
 
 open class StaticJsMethodsWithClassNamespace {
+ constructor(): super()
+
  open fun test() {
   staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
   staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
@@ -13,6 +15,8 @@ open class StaticJsMethodsWithClassNamespace {
 }
 
 open class ExternalCaller {
+ internal constructor(): super()
+
  open fun test() {
   staticjsmethodswithclassnamespace.StaticJsMethodsWithClassNamespace.originalName()
  }

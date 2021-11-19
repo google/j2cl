@@ -1,23 +1,36 @@
 package nestedlocalclasses
 
 open class NestedLocalClasses {
+ constructor(): super()
+
  open fun test(p: Int) {
   var localVar: Int = 1
  }
 }
 
 open class `NestedLocalClasses$1InnerClass` {
+ internal constructor(`$outer_this`: nestedlocalclasses.NestedLocalClasses?, `$captured_localVar`: Int): super() {
+  this.`this` = `$outer_this`
+  this.localVar = `$captured_localVar`
+ }
+
  @JvmField val `this`: nestedlocalclasses.NestedLocalClasses?
 
  open fun `fun`() {
   var localVarInInnerClass: Int = 1
-  TODO("expression.qualify needs rendering: \$1InnerClass.this)")
+  nestedlocalclasses.`NestedLocalClasses$1InnerClass$1InnerInnerClass`(this, this.localVar, localVarInInnerClass)
  }
 
  @JvmField val localVar: Int
 }
 
 open class `NestedLocalClasses$1InnerClass$1InnerInnerClass` {
+ internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?, `$captured_localVar`: Int, `$captured_localVarInInnerClass`: Int): super() {
+  this.`this` = `$outer_this`
+  this.localVar = `$captured_localVar`
+  this.localVarInInnerClass = `$captured_localVarInInnerClass`
+ }
+
  @JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?
 
  @JvmField var fieldInInnerInnerClass: Int = this.localVar + this.localVarInInnerClass
@@ -28,10 +41,16 @@ open class `NestedLocalClasses$1InnerClass$1InnerInnerClass` {
 }
 
 open class `NestedLocalClasses$1InnerClass$1ClassIndirectlyCapturingLocal` {
+ internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?, `$captured_localVar`: Int, `$captured_localVarInInnerClass`: Int): super() {
+  this.`this` = `$outer_this`
+  this.localVar = `$captured_localVar`
+  this.localVarInInnerClass = `$captured_localVarInInnerClass`
+ }
+
  @JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?
 
  init {
-  TODO("expression.qualify needs rendering: \$1ClassIndirectlyCapturingLocal.this.this!!)")
+  nestedlocalclasses.`NestedLocalClasses$1InnerClass$1InnerInnerClass`(this.`this`, this.localVar, this.localVarInInnerClass)
  }
 
  @JvmField val localVar: Int
@@ -41,17 +60,21 @@ open class `NestedLocalClasses$1InnerClass$1ClassIndirectlyCapturingLocal` {
 
 interface `NestedLocalClasses$InterfaceWithThisReference` {
  fun foo() {
-  TODO("expression.qualify needs rendering: InterfaceWithThisReference.this)")
+  nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference$1`(this)
  }
 }
 
 open class `NestedLocalClasses$InterfaceWithThisReference$1Super`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference` {
+ internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?
 }
 
 open class `NestedLocalClasses$InterfaceWithThisReference$1`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference$1Super` {
- internal constructor(): super() {
-
+ internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?): super() {
+  this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?

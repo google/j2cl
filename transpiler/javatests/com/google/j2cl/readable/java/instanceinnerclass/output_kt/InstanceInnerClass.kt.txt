@@ -1,16 +1,22 @@
 package instanceinnerclass
 
 open class InstanceInnerClass {
+ constructor(): super()
+
  @JvmField var instanceField: Int = 0
 
  open fun funOuter() {}
 
  open fun test() {
-  TODO("expression.qualify needs rendering: new InstanceInnerClass.<init>())")
+  instanceinnerclass.`InstanceInnerClass$InnerClass`(instanceinnerclass.InstanceInnerClass())
  }
 }
 
 open class `InstanceInnerClass$InnerClass` {
+ constructor(`$outer_this`: instanceinnerclass.InstanceInnerClass?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: instanceinnerclass.InstanceInnerClass?
 
  @JvmField var field: Int = this.`this`!!.instanceField + this.`this`!!.instanceField

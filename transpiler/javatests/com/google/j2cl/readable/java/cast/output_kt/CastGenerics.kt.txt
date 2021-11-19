@@ -1,6 +1,8 @@
 package cast
 
 open class CastGenerics<T, E: Number?> {
+ constructor(): super()
+
  @JvmField internal var field: T? = null
 
  internal open fun method(): T? {
@@ -85,24 +87,34 @@ interface `CastGenerics$B` {
  fun mB()
 }
 
-abstract class `CastGenerics$BaseImplementor`: cast.`CastGenerics$A`, cast.`CastGenerics$B` {}
+abstract class `CastGenerics$BaseImplementor`: cast.`CastGenerics$A`, cast.`CastGenerics$B` {
+ internal constructor(): super()
+}
 
-open class `CastGenerics$Implementor`: cast.`CastGenerics$BaseImplementor`() {
+open class `CastGenerics$Implementor`: cast.`CastGenerics$BaseImplementor` {
+ internal constructor(): super()
+
  open override fun mA() {}
 
  open override fun mB() {}
 }
 
 open class `CastGenerics$Container`<T> {
+ internal constructor(): super()
+
  internal open fun get(): T? {
   return null
  }
 }
 
 open class `CastGenerics$1Nested`<SS, TT: Enum?, T, E: Number?> {
+ internal constructor(`$outer_this`: cast.CastGenerics<T, E>?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: cast.CastGenerics<T, E>?
 
- private fun nestedGenericMethod(o: Any?) {
+ internal fun nestedGenericMethod(o: Any?) {
   val t: TT? = o as TT?
  }
 }
@@ -112,9 +124,9 @@ interface `CastGenerics$Empty1` {}
 interface `CastGenerics$Empty2`<TT> {}
 
 open class `CastGenerics$1`<T>: cast.`CastGenerics$Foo`<T> {
- internal constructor(): super() {
-
- }
+ internal constructor(): super()
 }
 
-open class `CastGenerics$Foo`<V> {}
+open class `CastGenerics$Foo`<V> {
+ constructor(): super()
+}

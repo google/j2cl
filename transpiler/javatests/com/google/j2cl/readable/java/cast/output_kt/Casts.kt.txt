@@ -1,6 +1,8 @@
 package cast
 
 open class Casts {
+ constructor(): super()
+
  open fun testCastToClass() {
   val o: Any? = Any()
   val c: cast.Casts? = o as cast.Casts?
@@ -29,7 +31,7 @@ open class Casts {
   val bar: Any? = null as Array<Array<Any?>?>?
  }
 
- private fun functionForInstanceofTest() {}
+ internal fun functionForInstanceofTest() {}
 
  open fun testCastObjectAfterInstanceOf() {
   var o: Any? = Any()
@@ -43,7 +45,7 @@ open class Casts {
   }
   if (o is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
-   o = TODO("expression.qualify needs rendering: Casts.this)")
+   o = cast.`Casts$Foo`(this)
    val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
@@ -59,7 +61,7 @@ open class Casts {
  }
 
  open fun testCastFieldAfterInstanceOf() {
-  var foo: cast.`Casts$Foo`? = TODO("expression.qualify needs rendering: Casts.this)")
+  var foo: cast.`Casts$Foo`? = cast.`Casts$Foo`(this)
   if (foo!!.field is cast.Casts) {
    val c: cast.Casts? = foo!!.field as cast.Casts?
   }
@@ -70,7 +72,7 @@ open class Casts {
   }
   if (foo!!.field is cast.Casts) {
    val cAvoidsCastsTo: cast.Casts? = foo!!.field as cast.Casts?
-   foo = TODO("expression.qualify needs rendering: Casts.this)")
+   foo = cast.`Casts$Foo`(this)
    val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
   }
   if (foo!!.field is cast.Casts) {
@@ -81,7 +83,7 @@ open class Casts {
  }
 
  open fun testCaseMethodAfterInstanceOf() {
-  val foo: cast.`Casts$Foo`? = TODO("expression.qualify needs rendering: Casts.this)")
+  val foo: cast.`Casts$Foo`? = cast.`Casts$Foo`(this)
   if (foo!!.method() is cast.Casts) {
    val cNotAvoidCastsTo: cast.Casts? = foo!!.method() as cast.Casts?
   }
@@ -89,6 +91,10 @@ open class Casts {
 }
 
 open class `Casts$Foo` {
+ internal constructor(`$outer_this`: cast.Casts?): super() {
+  this.`this` = `$outer_this`
+ }
+
  @JvmField val `this`: cast.Casts?
 
  @JvmField var field: Any? = Any()
