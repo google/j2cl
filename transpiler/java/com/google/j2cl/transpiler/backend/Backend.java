@@ -387,6 +387,7 @@ public enum Backend {
           NormalizeForStatements::new,
           NormalizeLabeledStatements::new,
           NormalizeNestedBlocks::new,
+          () -> new NormalizeShifts(/* narrowAllToInt= */ true),
           InsertWideningPrimitiveConversionsKotlin::new,
           NormalizeBasicCasts::new,
           ImplementKotlinBitLevelOperators::new,

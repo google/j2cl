@@ -55,8 +55,8 @@ open class ArithmeticExpressions {
   val l: Boolean = 1 + 2 != 4
   val m: Boolean = Long.MAX_VALUE.toDouble() != 9.223372036854778E18
   val o: Double = ((5 + 1) / 2).toDouble() - 0.0
-  a = a.shl(31L)
-  a = a.shl(1L)
+  a = a.shl(31L.toInt())
+  a = a.shl(1L.toInt())
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
   a = (a.toDouble() + Double.MAX_VALUE).toInt()
@@ -66,8 +66,8 @@ open class ArithmeticExpressions {
    s = (s.toInt() + 1).toShort()
    s
   }.toInt() == 10
-  var q: Int = 3.shr(2)
-  q = 3.ushr(2)
+  var q: Int = 3.shr(2.toInt())
+  q = 3.ushr(2.toInt())
   val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: Char = 'y'
   val z: Long? = 121L
@@ -90,9 +90,9 @@ open class ArithmeticExpressions {
   ints!![0] = ints!![0].xor(1)
   ints!![0] = ints!![0].or(1)
   ints!![0] = ints!![0] % 1
-  ints!![0] = ints!![0].shl(1)
-  ints!![0] = ints!![0].shr(1)
-  ints!![0] = ints!![0].ushr(1)
+  ints!![0] = ints!![0].shl(1.toInt())
+  ints!![0] = ints!![0].shr(1.toInt())
+  ints!![0] = ints!![0].ushr(1.toInt())
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] + 1
   var i: Int = 0
@@ -175,7 +175,7 @@ open class ArithmeticExpressions {
   d = d!! + c!!
   var i: Int = 43
   d = d!! + i
-  d = d!!.shl(i)
+  d = d!!.shl(i.toInt())
   i = i + c!!
   var e: Int? = run {
    c = c!! + 1

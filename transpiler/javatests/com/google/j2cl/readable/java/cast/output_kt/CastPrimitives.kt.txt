@@ -123,7 +123,7 @@ open class CastPrimitives {
   if (true) {
    tlong = fint.toLong()
    tlong = tlong + fint.toLong()
-   tlong = tlong.shl(fint)
+   tlong = tlong.shl(fint.toInt())
   }
   if (true) {
    tlong = tlong + fchar.code.toLong()
@@ -132,15 +132,15 @@ open class CastPrimitives {
   }
   if (true) {
    tlong = flong * fint.toLong()
-   tlong = flong.shr(fint)
+   tlong = flong.shr(fint.toInt())
   }
   if (true) {
    tlong = flong + fshort.toLong()
    tlong = flong + flong
   }
   if (true) {
-   tlong = flong.shl(tlong)
-   tlong = tlong.shl(flong)
+   tlong = flong.shl(tlong.toInt())
+   tlong = tlong.shl(flong.toInt())
   }
   if (true) {
    tlong = (0 + 1).toLong() + 2L
