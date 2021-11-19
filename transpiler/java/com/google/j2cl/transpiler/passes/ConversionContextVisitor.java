@@ -42,6 +42,7 @@ import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.JsDocExpression;
 import com.google.j2cl.transpiler.ast.LabeledStatement;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.LoopStatement;
@@ -408,6 +409,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         || expression instanceof ExpressionWithComment
         || expression instanceof FunctionExpression
         || expression instanceof VariableDeclarationExpression
+        || expression instanceof JsDocExpression
         // jsdoc casts
         || expression instanceof JsDocCastExpression
         // references

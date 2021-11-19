@@ -118,6 +118,13 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterJsDocExpression(JsDocExpression expression) {
+        print(String.format("/** @%s */ ", expression.getAnnotation()));
+        accept(expression.getExpression());
+        return false;
+      }
+
+      @Override
       public boolean enterJsDocCastExpression(JsDocCastExpression castExpression) {
         print(
             String.format(

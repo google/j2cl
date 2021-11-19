@@ -39,6 +39,7 @@ import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
+import com.google.j2cl.transpiler.ast.JsDocExpression;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -121,6 +122,13 @@ public class ExpressionTranspiler {
       public boolean enterCastExpression(CastExpression castExpression) {
         checkArgument(
             false, castExpression + " CastExpression should have been normalized to method call.");
+        return false;
+      }
+
+      @Override
+      public boolean enterJsDocExpression(JsDocExpression jsDocExpression) {
+        sourceBuilder.append(String.format("/**@%s*/ ", jsDocExpression.getAnnotation()));
+        renderNoParens(jsDocExpression.getExpression());
         return false;
       }
 
