@@ -44,7 +44,7 @@ private val TypeVariable.boundTypeDescriptors: List<TypeDescriptor>
     }
 
 private fun Renderer.renderTypeParameter(typeVariable: TypeVariable) {
-  render(typeVariable.name.identifierSourceString)
+  renderName(typeVariable)
   typeVariable.boundTypeDescriptors.singleOrNull()?.let { boundTypeDescriptor ->
     render(": ")
     renderArgument(boundTypeDescriptor)
@@ -57,7 +57,7 @@ private val TypeVariable.whereClauseItems: List<WhereClauseItem>
   get() = boundTypeDescriptors.takeIf { it.size > 1 }?.map { WhereClauseItem(this, it) } ?: listOf()
 
 private fun Renderer.render(whereClauseItem: WhereClauseItem) {
-  render(whereClauseItem.hasName.name.identifierSourceString)
+  renderName(whereClauseItem.hasName)
   render(": ")
   renderArgument(whereClauseItem.boundTypeDescriptor)
 }

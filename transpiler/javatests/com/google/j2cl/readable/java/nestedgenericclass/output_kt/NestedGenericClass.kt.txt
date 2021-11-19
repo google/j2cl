@@ -1,15 +1,15 @@
 package nestedgenericclass
 
-open class NestedGenericClass<T> {
+open class NestedGenericClass<T_4> {
  constructor(): super()
 
  open fun <S> `fun`(t: S?) {
-  nestedgenericclass.`NestedGenericClass$1E`<Number?, S, T>(this)
-  nestedgenericclass.`NestedGenericClass$1F`<S, T>(this)
+  nestedgenericclass.`NestedGenericClass$1E`<Number?, S, T_4>(this)
+  nestedgenericclass.`NestedGenericClass$1F`<S, T_4>(this)
  }
 
- open fun <T> bar() {
-  nestedgenericclass.`NestedGenericClass$1G`<Error?, T, T>(this).bar()
+ open fun <T_3> bar() {
+  nestedgenericclass.`NestedGenericClass$1G`<Error?, T_3, T_4>(this).bar()
  }
 
  open fun test() {
@@ -21,80 +21,80 @@ open class NestedGenericClass<T> {
  }
 }
 
-open class `NestedGenericClass$A`<T, T> {
- constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+open class `NestedGenericClass$A`<T_1, T_4> {
+ constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T_4>?
 }
 
-open class `NestedGenericClass$A$B`<T, T, T> {
- @JvmField val `this`: nestedgenericclass.`NestedGenericClass$A`<T, T>?
+open class `NestedGenericClass$A$B`<T, T_1, T_4> {
+ @JvmField val `this`: nestedgenericclass.`NestedGenericClass$A`<T_1, T_4>?
 
- internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$A`<T, T>?): super() {
+ internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$A`<T_1, T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$A`<T, T>?, u: U?): super() {
+ internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$A`<T_1, T_4>?, u: U?): super() {
   this.`this` = `$outer_this`
  }
 }
 
-open class `NestedGenericClass$C`<T> {
- constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+open class `NestedGenericClass$C`<T_4> {
+ constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T_4>?
 
- @JvmField var c: T? = null
+ @JvmField var c: T_4? = null
 }
 
-open class `NestedGenericClass$C$D`<T> {
- constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$C`<T>?): super() {
+open class `NestedGenericClass$C$D`<T_4> {
+ constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$C`<T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedgenericclass.`NestedGenericClass$C`<T>?
+ @JvmField val `this`: nestedgenericclass.`NestedGenericClass$C`<T_4>?
 
- @JvmField var d: T? = null
+ @JvmField var d: T_4? = null
 }
 
-open class `NestedGenericClass$1E`<S, S, T> {
- internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+open class `NestedGenericClass$1E`<S, S, T_4> {
+ internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T_4>?
 }
 
-open class `NestedGenericClass$1F`<S, T> {
- internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+open class `NestedGenericClass$1F`<S, T_4> {
+ internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T_4>?
 
  @JvmField var f: S? = null
 }
 
-open class `NestedGenericClass$1G`<T, T, T> {
- internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T>?): super() {
+open class `NestedGenericClass$1G`<T_2, T_3, T_4> {
+ internal constructor(`$outer_this`: nestedgenericclass.NestedGenericClass<T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedgenericclass.NestedGenericClass<T>?
+ @JvmField val `this`: nestedgenericclass.NestedGenericClass<T_4>?
 
- open fun <T> bar() {
-  nestedgenericclass.`NestedGenericClass$1G$1H`<Number?, T, T, T, T>(this)
+ open fun <T_1> bar() {
+  nestedgenericclass.`NestedGenericClass$1G$1H`<Number?, T_1, T_2, T_3, T_4>(this)
  }
 }
 
-open class `NestedGenericClass$1G$1H`<T, T, T, T, T> {
- internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$1G`<T, T, T>?): super() {
+open class `NestedGenericClass$1G$1H`<T, T_1, T_2, T_3, T_4> {
+ internal constructor(`$outer_this`: nestedgenericclass.`NestedGenericClass$1G`<T_2, T_3, T_4>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedgenericclass.`NestedGenericClass$1G`<T, T, T>?
+ @JvmField val `this`: nestedgenericclass.`NestedGenericClass$1G`<T_2, T_3, T_4>?
 }

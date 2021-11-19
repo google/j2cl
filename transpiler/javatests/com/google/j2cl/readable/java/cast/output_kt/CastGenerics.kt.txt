@@ -36,17 +36,17 @@ open class CastGenerics<T, E: Number?> {
 
  companion object {
   @JvmStatic
-  fun <T, U: T> testErasureCast() where T: cast.`CastGenerics$A`?, T: cast.`CastGenerics$B`? {
+  fun <T_1, U: T_1> testErasureCast() where T_1: cast.`CastGenerics$A`?, T_1: cast.`CastGenerics$B`? {
    var str: String? = cast.CastGenerics<String?, Number?>().field
    str = cast.CastGenerics<String?, Number?>().method()
-   val containerT: cast.`CastGenerics$Container`<T>? = null
+   val containerT: cast.`CastGenerics$Container`<T_1>? = null
    containerT!!.get()!!.mA()
    containerT!!.get()!!.mB()
    val containerU: cast.`CastGenerics$Container`<U>? = null
    containerU!!.get()!!.mA()
    containerU!!.get()!!.mB()
-   val containerArrT: cast.`CastGenerics$Container`<Array<T>?>? = null
-   val arrT: Array<T>? = containerArrT!!.get()
+   val containerArrT: cast.`CastGenerics$Container`<Array<T_1>?>? = null
+   val arrT: Array<T_1>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
    var arrA: Array<cast.`CastGenerics$A`?>? = containerArrT!!.get()

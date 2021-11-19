@@ -17,9 +17,9 @@ open class Parent<T: Error?>: bridgemethods.SuperParent<T, Number?> {
 
  open override fun foo(t: T?, s: Number?) {}
 
- open fun <T: Number?> bar(t: T?) {}
+ open fun <T_1: Number?> bar(t: T_1?) {}
 
- open fun <T> `fun`(t: T?) {}
+ open fun <T_1> `fun`(t: T_1?) {}
 }
 
 open class BridgeMethod: bridgemethods.SomeInterface<java.lang.AssertionError?, Number?>, bridgemethods.Parent<java.lang.AssertionError?> {

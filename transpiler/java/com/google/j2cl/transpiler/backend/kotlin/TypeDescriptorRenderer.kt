@@ -139,7 +139,7 @@ private fun Renderer.render(typeVariable: TypeVariable, isArgument: Boolean) {
   if (typeVariable.isWildcardOrCapture) {
     render("*")
   } else {
-    render(typeVariable.name.identifierSourceString)
+    renderName(typeVariable)
     if (!isArgument) renderNullableSuffix(typeVariable)
   }
 }

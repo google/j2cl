@@ -75,11 +75,11 @@ open class Lambdas {
   this.callWithTypeVariable({ i: Error? ->
    return i
   }, Error())
-  this.callParameterized({ i: Error? ->
-   return i
+  this.callParameterized({ i_1: Error? ->
+   return i_1
   }, Error())
-  lambdas.Lambdas.callTypeVariableWithBounds({ i: Enum<T>? ->
-   return i
+  lambdas.Lambdas.callTypeVariableWithBounds({ i_2: Enum<T>? ->
+   return i_2
   }, null as Enum<T>?)
   this.callWithBiFunction({ x: Any?, y: String? ->
    throw java.lang.RuntimeException()
@@ -154,8 +154,8 @@ open class Lambdas {
    val thenable: lambdas.`Lambdas$Thenable`<String?>? = { f1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, String?>?, f2: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, Throwable?>? ->
     f1!!.apply(null)
    }
-   val otherThenable: lambdas.`Lambdas$AnotherThenable`<String?>? = { f1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, String?>?, f2: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, Throwable?>? ->
-    f1!!.apply(null)
+   val otherThenable: lambdas.`Lambdas$AnotherThenable`<String?>? = { f1_1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, String?>?, f2_1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, Throwable?>? ->
+    f1_1!!.apply(null)
    }
    val stringJsSupplier: lambdas.`Lambdas$JsSupplier`<Int?>? = {
     return 1
@@ -171,11 +171,11 @@ open class Lambdas {
    var o: Any? = { x: String? ->
     return x
    } as lambdas.`Lambdas$GenericFunctionalInterface`<String?>? /* & lambdas.`Lambdas$JustADefaultT`<Number?>? */
-   o = { x: String? ->
-    return x
+   o = { x_1: String? ->
+    return x_1
    } as lambdas.`Lambdas$GenericFunctionalInterface`<String?>? /* & lambdas.`Lambdas$JustADefaultS`<Number?>? */
-   o = { x: U? ->
-    return x
+   o = { x_2: U? ->
+    return x_2
    } as lambdas.`Lambdas$GenericFunctionalInterface`<U>? /* & lambdas.`Lambdas$JustADefaultS`<V>? */
   }
  }
@@ -228,8 +228,8 @@ interface `Lambdas$Function`<T, R> {
 
  companion object {
   @JvmStatic
-  fun <T> identity(): lambdas.`Lambdas$Function`<T, T>? {
-   return { t: T? ->
+  fun <T_1> identity(): lambdas.`Lambdas$Function`<T_1, T_1>? {
+   return { t: T_1? ->
     return t
    }
   }

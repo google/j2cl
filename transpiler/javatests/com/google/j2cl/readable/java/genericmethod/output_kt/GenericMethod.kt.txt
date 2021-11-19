@@ -1,32 +1,32 @@
 package genericmethod
 
-open class GenericMethod<T> {
+open class GenericMethod<T_2> {
  constructor(): super()
 
- open fun <T, S> foo(f: T?, s: S?) {}
+ open fun <T_1, S> foo(f: T_1?, s: S?) {}
 
  open fun `fun`(o: Any?) {}
 
- open fun <T: Exception?> `fun`(t: T?) {}
+ open fun <T_1: Exception?> `fun`(t: T_1?) {}
 
- open fun <T: Error?> `fun`(t: T?) {
-  genericmethod.`GenericMethod$1`<T, T>(this)
-  genericmethod.`GenericMethod$1LocalClass`<T, T, T>(this)
+ open fun <T_1: Error?> `fun`(t: T_1?) {
+  genericmethod.`GenericMethod$1`<T_1, T_2>(this)
+  genericmethod.`GenericMethod$1LocalClass`<T_1, T_1, T_2>(this)
  }
 
- open fun <T> bar(): genericmethod.GenericMethod<T>? {
+ open fun <T_1> bar(): genericmethod.GenericMethod<T_1>? {
   return null
  }
 
- open fun <T> `fun`(array: Array<T>?): Array<T>? {
+ open fun <T_1> `fun`(array: Array<T_1>?): Array<T_1>? {
   return array
  }
 
- open fun <T> checked(): T? {
+ open fun <T_1> checked(): T_1? {
   return null
  }
 
- open fun <T> unchecked(): T? {
+ open fun <T_1> unchecked(): T_1? {
   return null
  }
 
@@ -83,28 +83,28 @@ open class GenericMethod<T> {
  }
 }
 
-open class `GenericMethod$1`<T: Error?, T>: genericmethod.GenericMethod<T> {
- internal constructor(`$outer_this`: genericmethod.GenericMethod<T>?): super() {
+open class `GenericMethod$1`<T_1: Error?, T_2>: genericmethod.GenericMethod<T_1> {
+ internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: genericmethod.GenericMethod<T>?
+ @JvmField val `this`: genericmethod.GenericMethod<T_2>?
 
- open fun fun2(t: T?) {}
+ open fun fun2(t: T_1?) {}
 
- open fun <T> fun2(t: T?) {}
+ open fun <T_2> fun2(t: T_2?) {}
 }
 
-open class `GenericMethod$1LocalClass`<T, T: Error?, T>: genericmethod.GenericMethod<T> {
- internal constructor(`$outer_this`: genericmethod.GenericMethod<T>?): super() {
+open class `GenericMethod$1LocalClass`<T, T_1: Error?, T_2>: genericmethod.GenericMethod<T> {
+ internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: genericmethod.GenericMethod<T>?
+ @JvmField val `this`: genericmethod.GenericMethod<T_2>?
 
  open fun fun2(t: T?) {}
 
- open fun <T: Number?> fun2(t: T?) {}
+ open fun <T_3: Number?> fun2(t: T_3?) {}
 }
 
 open class `GenericMethod$SuperContainer`<C: genericmethod.`GenericMethod$Container`<*>?> {

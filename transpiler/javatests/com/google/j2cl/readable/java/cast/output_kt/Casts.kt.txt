@@ -44,19 +44,19 @@ open class Casts {
    val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
+   val cAvoidsCastsTo_1: cast.Casts? = o as cast.Casts?
    o = cast.`Casts$Foo`(this)
-   val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
+   val cNotAvoidCastsTo_1: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
+   val cAvoidsCastsTo_2: cast.Casts? = o as cast.Casts?
    o = Any()
    val cAvoidCastsTo: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = o as cast.Casts?
+   val cAvoidsCastsTo_3: cast.Casts? = o as cast.Casts?
    this.functionForInstanceofTest()
-   val cNotAvoidCastsTo: cast.Casts? = o as cast.Casts?
+   val cNotAvoidCastsTo_2: cast.Casts? = o as cast.Casts?
   }
  }
 
@@ -71,14 +71,14 @@ open class Casts {
    val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
   }
   if (foo!!.field is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = foo!!.field as cast.Casts?
+   val cAvoidsCastsTo_1: cast.Casts? = foo!!.field as cast.Casts?
    foo = cast.`Casts$Foo`(this)
-   val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
+   val cNotAvoidCastsTo_1: cast.Casts? = foo!!.field as cast.Casts?
   }
   if (foo!!.field is cast.Casts) {
-   val cAvoidsCastsTo: cast.Casts? = foo!!.field as cast.Casts?
+   val cAvoidsCastsTo_2: cast.Casts? = foo!!.field as cast.Casts?
    this.functionForInstanceofTest()
-   val cNotAvoidCastsTo: cast.Casts? = foo!!.field as cast.Casts?
+   val cNotAvoidCastsTo_2: cast.Casts? = foo!!.field as cast.Casts?
   }
  }
 

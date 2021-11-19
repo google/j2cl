@@ -28,9 +28,9 @@ open class ArithmeticExpressions {
    `$value`
   }
   val c: Int = run {
-   val `$value`: Int = a
+   val `$value_1`: Int = a
    a = a - 1
-   `$value`
+   `$value_1`
   }
   val d: Int = run {
    a = a + 1
@@ -104,40 +104,40 @@ open class ArithmeticExpressions {
     `$value`
    }
    run {
-    val `$array`: IntArray? = `$array`
-    val `$index`: Int = `$index`
-    val `$value`: Int = `$array`!![`$index`] + 1
-    `$array`!![`$index`] = `$value`
-    `$value`
+    val `$array_1`: IntArray? = `$array`
+    val `$index_1`: Int = `$index`
+    val `$value_1`: Int = `$array`!![`$index`] + 1
+    `$array_1`!![`$index_1`] = `$value_1`
+    `$value_1`
    }
   }
   run {
-   val `$array`: IntArray? = ints
-   val `$index`: Int = run {
+   val `$array_2`: IntArray? = ints
+   val `$index_2`: Int = run {
     i = i + 1
     i
    }
    run {
-    val `$array`: IntArray? = `$array`
-    val `$index`: Int = `$index`
-    val `$value`: Int = `$array`!![`$index`] + 1
-    `$array`!![`$index`] = `$value`
-    `$value`
+    val `$array_3`: IntArray? = `$array_2`
+    val `$index_3`: Int = `$index_2`
+    val `$value_2`: Int = `$array_2`!![`$index_2`] + 1
+    `$array_3`!![`$index_3`] = `$value_2`
+    `$value_2`
    }
   }
   run {
-   val `$array`: IntArray? = ints
-   val `$index`: Int = run {
-    val `$value`: Int = i
+   val `$array_4`: IntArray? = ints
+   val `$index_4`: Int = run {
+    val `$value_3`: Int = i
     i = i + 1
-    `$value`
+    `$value_3`
    }
    run {
-    val `$array`: IntArray? = `$array`
-    val `$index`: Int = `$index`
-    val `$value`: Int = `$array`!![`$index`] / 1
-    `$array`!![`$index`] = `$value`
-    `$value`
+    val `$array_5`: IntArray? = `$array_4`
+    val `$index_5`: Int = `$index_4`
+    val `$value_4`: Int = `$array_4`!![`$index_4`] / 1
+    `$array_5`!![`$index_5`] = `$value_4`
+    `$value_4`
    }
   }
   val longs: LongArray? = null
@@ -145,14 +145,14 @@ open class ArithmeticExpressions {
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
   run {
-   val `$array`: LongArray? = arithmeticexpressions.ArithmeticExpressions.getLongArray()
-   val `$index`: Int = 0
+   val `$array_6`: LongArray? = arithmeticexpressions.ArithmeticExpressions.getLongArray()
+   val `$index_6`: Int = 0
    run {
-    val `$array`: LongArray? = `$array`
-    val `$index`: Int = `$index`
-    val `$value`: Long = `$array`!![`$index`] + 1L
-    `$array`!![`$index`] = `$value`
-    `$value`
+    val `$array_7`: LongArray? = `$array_6`
+    val `$index_7`: Int = `$index_6`
+    val `$value_5`: Long = `$array_6`!![`$index_6`] + 1L
+    `$array_7`!![`$index_7`] = `$value_5`
+    `$value_5`
    }
   }
   val booleans: BooleanArray? = null
@@ -161,11 +161,11 @@ open class ArithmeticExpressions {
   strings!![0] = strings!![0] + null
   val shorts: ShortArray? = null
   val b: Boolean = run {
-   val `$array`: ShortArray? = shorts
-   val `$index`: Int = 0
-   val `$value`: Short = (shorts!![0].toInt() + 1).toShort()
-   `$array`!![`$index`] = `$value`
-   `$value`
+   val `$array_8`: ShortArray? = shorts
+   val `$index_8`: Int = 0
+   val `$value_6`: Short = (shorts!![0].toInt() + 1).toShort()
+   `$array_8`!![`$index_8`] = `$value_6`
+   `$value_6`
   }.toInt() == 10
  }
 
@@ -193,9 +193,9 @@ open class ArithmeticExpressions {
    `$value`
   }
   f = run {
-   val `$value`: Int? = c
+   val `$value_1`: Int? = c
    c = c!! + 1
-   `$value`
+   `$value_1`
   }
   var b: Byte? = 0
   b = (b!! + 1).toByte()
@@ -206,9 +206,9 @@ open class ArithmeticExpressions {
    f
   }!!.intValue()
   run {
-   val `$value`: Int? = f
+   val `$value_2`: Int? = f
    f = f!! - 1
-   `$value`
+   `$value_2`
   }!!.intValue()
   val ref: arithmeticexpressions.`ArithmeticExpressions$1Ref`<Int?>? = null
   ref!!.field = ref!!.field!! + 1
@@ -274,9 +274,9 @@ open class ArithmeticExpressions {
    run {
     val `$qualifier`: arithmeticexpressions.ArithmeticExpressions? = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect()
     run {
-     val `$qualifier`: arithmeticexpressions.ArithmeticExpressions? = `$qualifier`
+     val `$qualifier_1`: arithmeticexpressions.ArithmeticExpressions? = `$qualifier`
      val `$value`: Long = `$qualifier`!!.intField + 5L
-     `$qualifier`!!.intField = `$value`
+     `$qualifier_1`!!.intField = `$value`
      `$value`
     }
    }

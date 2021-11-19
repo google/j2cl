@@ -37,29 +37,29 @@ open class SimpleLongs {
    `$value`
   }
   e = run {
-   val `$qualifier`: simplelongs.SimpleLongs? = this.getWithSideEffect()
+   val `$qualifier_1`: simplelongs.SimpleLongs? = this.getWithSideEffect()
    run {
-    val `$qualifier`: simplelongs.SimpleLongs? = `$qualifier`
-    val `$value`: Long = `$qualifier`!!.foo + 1L
-    `$qualifier`!!.foo = `$value`
-    `$value`
+    val `$qualifier_2`: simplelongs.SimpleLongs? = `$qualifier_1`
+    val `$value_1`: Long = `$qualifier_1`!!.foo + 1L
+    `$qualifier_2`!!.foo = `$value_1`
+    `$value_1`
    }
   }
   var f: Long = run {
-   val `$value`: Long = a
+   val `$value_2`: Long = a
    a = a + 1L
-   `$value`
+   `$value_2`
   }
   f = run {
-   val `$value`: Long = this.foo
+   val `$value_3`: Long = this.foo
    this.foo = this.foo + 1L
-   `$value`
+   `$value_3`
   }
   f = run {
-   val `$qualifier`: simplelongs.SimpleLongs? = this.getWithSideEffect()
-   val `$value`: Long = `$qualifier`!!.foo
-   `$qualifier`!!.foo = `$qualifier`!!.foo + 1L
-   `$value`
+   val `$qualifier_3`: simplelongs.SimpleLongs? = this.getWithSideEffect()
+   val `$value_4`: Long = `$qualifier_3`!!.foo
+   `$qualifier_3`!!.foo = `$qualifier_3`!!.foo + 1L
+   `$value_4`
   }
   var g: Long = this.foo
   g = this.getBar()

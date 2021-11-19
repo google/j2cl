@@ -299,7 +299,7 @@ private fun Renderer.renderVariableDeclarationExpression(
 }
 
 private fun Renderer.renderVariableReference(variableReference: VariableReference) {
-  render(variableReference.target.name.identifierSourceString)
+  renderName(variableReference.target)
 }
 
 private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclarationFragment) {
@@ -311,7 +311,7 @@ private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclara
 }
 
 fun Renderer.renderVariable(variable: Variable) {
-  render(variable.name.identifierSourceString)
+  renderName(variable)
   render(": ")
   render(variable.typeDescriptor)
 }
