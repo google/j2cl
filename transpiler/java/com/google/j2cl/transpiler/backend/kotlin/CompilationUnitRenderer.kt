@@ -18,8 +18,11 @@ package com.google.j2cl.transpiler.backend.kotlin
 import com.google.j2cl.transpiler.ast.CompilationUnit
 
 fun Renderer.renderCompilationUnit(compilationUnit: CompilationUnit) {
-  render("package ${compilationUnit.packageName.packageNameSourceString}")
-  renderNewLine()
-  renderNewLine()
+  compilationUnit.packageName.takeIf { it.isNotEmpty() }?.let { packageName ->
+    render("package ")
+    renderPackageName(packageName)
+    renderNewLine()
+    renderNewLine()
+  }
   renderSeparatedWithEmptyLine(compilationUnit.types) { renderType(it) }
 }

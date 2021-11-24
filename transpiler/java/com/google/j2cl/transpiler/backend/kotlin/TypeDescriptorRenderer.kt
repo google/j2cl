@@ -58,9 +58,10 @@ internal fun Renderer.render(typeDeclaration: TypeDeclaration) {
     render(kotlinTypeName)
   } else {
     typeDeclaration.packageName?.let { packageName ->
-      render("${packageName.packageNameSourceString}.")
+      renderPackageName(packageName)
+      render(".")
     }
-    render(typeDeclaration.simpleBinaryName.identifierSourceString)
+    renderIdentifier(typeDeclaration.simpleBinaryName)
   }
 }
 

@@ -42,7 +42,7 @@ fun Renderer.renderType(type: Type) {
 }
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
-  render(declaration.simpleBinaryName.identifierSourceString)
+  renderIdentifier(declaration.simpleBinaryName)
   if (declaration.typeParameterDescriptors.isNotEmpty()) {
     renderTypeParameters(declaration.typeParameterDescriptors)
   }

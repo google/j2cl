@@ -59,7 +59,7 @@ private fun Renderer.renderField(field: Field) {
   if (!field.descriptor.visibility.isPrivate) render("@JvmField ")
   renderVisibility(field.descriptor.visibility)
   render(if (isFinal) "val " else "var ")
-  render(field.descriptor.name!!.identifierSourceString)
+  renderIdentifier(field.descriptor.name!!)
   render(": ")
   render(typeDescriptor)
   field.initializer?.let { initializer ->
@@ -88,7 +88,7 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
       renderTypeParameters(methodDescriptor.typeParameterTypeDescriptors)
       render(" ")
     }
-    render(methodDescriptor.name!!.identifierSourceString)
+    renderIdentifier(methodDescriptor.name!!)
   }
   renderMethodParameters(method)
   if (methodDescriptor.isConstructor) {
@@ -157,5 +157,12 @@ private fun Renderer.renderConstructorInvocation(method: Method) {
 }
 
 private fun Renderer.renderVisibility(visibility: Visibility) {
-  visibility.sourceStringOrNull?.let { render("$it ") }
+  when (visibility) {
+    Visibility.PUBLIC -> {}
+    Visibility.PROTECTED -> render("protected ")
+    Visibility.PACKAGE_PRIVATE -> render("internal ")
+    // TODO(b/206898384): For now, render Java "private" as Kotlin "internal", since in Kotlin
+    // private members are not visible from other classes in the same file.
+    Visibility.PRIVATE -> render("internal ")
+  }
 }

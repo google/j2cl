@@ -217,7 +217,8 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
 
 private fun Renderer.renderQualifiedName(expression: Expression, name: String) {
   renderLeftSubExpression(expression, (expression as MemberReference).qualifier)
-  render(".${name.identifierSourceString}")
+  render(".")
+  renderIdentifier(name)
 }
 
 private fun Renderer.renderMethodCallHeader(expression: MethodCall) {

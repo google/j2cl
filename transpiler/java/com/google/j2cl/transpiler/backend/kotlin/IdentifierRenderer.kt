@@ -15,11 +15,17 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-internal val String.identifierSourceString
-  get() = if (KotlinKeywords.isHardKeyword(this) || !isValidIdentifier) "`$this`" else this
+internal fun Renderer.renderIdentifier(identifier: String) {
+  if (KotlinKeywords.isHardKeyword(identifier) || !identifier.isValidIdentifier) {
+    renderInBackticks { render(identifier) }
+  } else {
+    render(identifier)
+  }
+}
 
-internal val String.packageNameSourceString
-  get() = split('.').joinToString(".") { it.identifierSourceString }
+internal fun Renderer.renderPackageName(packageName: String) {
+  renderDotSeparated(packageName.split('.')) { renderIdentifier(it) }
+}
 
 private val String.isValidIdentifier
   get() = first().isValidIdentifierFirstChar && all { it.isValidIdentifierChar }

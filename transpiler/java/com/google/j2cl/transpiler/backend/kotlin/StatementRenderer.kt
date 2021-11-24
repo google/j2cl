@@ -122,7 +122,8 @@ private fun Renderer.renderIfStatement(ifStatement: IfStatement) {
 
 private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarationStatement) {
   var fieldDescriptor = declaration.fieldDescriptor
-  render("var ${fieldDescriptor.name!!.identifierSourceString}")
+  render("var ")
+  renderIdentifier(fieldDescriptor.name!!)
   render(": ")
   render(fieldDescriptor.typeDescriptor)
   render(" = ")

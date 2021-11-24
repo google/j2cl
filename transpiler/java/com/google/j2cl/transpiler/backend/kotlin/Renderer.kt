@@ -40,7 +40,7 @@ class Renderer(
   }
 
   fun renderName(hasName: HasName) {
-    render(environment.identifier(hasName).identifierSourceString)
+    renderIdentifier(environment.identifier(hasName))
   }
 
   fun renderIndented(renderFn: () -> Unit) {
@@ -79,6 +79,12 @@ class Renderer(
     render(" */")
   }
 
+  fun renderInBackticks(renderFn: () -> Unit) {
+    render("`")
+    renderFn()
+    render("`")
+  }
+
   fun <V> renderSeparatedWith(values: Iterable<V>, separator: String, renderFn: (V) -> Unit) {
     var first = true
     for (value in values) {
@@ -93,6 +99,10 @@ class Renderer(
 
   fun <V> renderCommaSeparated(values: Iterable<V>, renderFn: (V) -> Unit) {
     renderSeparatedWith(values, ", ", renderFn)
+  }
+
+  fun <V> renderDotSeparated(values: Iterable<V>, renderFn: (V) -> Unit) {
+    renderSeparatedWith(values, ".", renderFn)
   }
 
   fun <V> renderStartingWithNewLines(values: Iterable<V>, renderFn: (V) -> Unit) {
