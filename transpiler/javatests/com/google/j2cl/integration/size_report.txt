@@ -1,18 +1,18 @@
 Integration tests size report:
 **************************************
-There are 4 optimized size changes.
+There are 6 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2050162 to 2044785 bytes (100%->99.7%) and from
-  727313 to 725733 bytes (100%->99.8%) gzipped.
+  2044785 to 2044727 bytes (100%->100.0%) and from
+  725733 to 725691 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       3467     3053 autovalue (-11.9%)
-       3058     2698 autovalue.esnext (-11.8%)
-       3738     3310 autovalue_inc (-11.4%)
-       3324     2946 autovalue_inc.esnext (-11.4%)
+       1342     1332 enumobfuscation.esnext (-0.7%)
+       1742     1732 enumobfuscation (-0.6%)
+       1474     1470 enumspecialfunctions.esnext (-0.3%)
+       1791     1787 enumspecialfunctions (-0.2%)
 
 
 Expansion report highlights:
@@ -23,19 +23,19 @@ Expansion report highlights:
 Incremental size reports (non-gzip):
 **************************************
         old      new
-        860      859 autovalue (-0.1%)
+        859      859 autovalue (unchanged)
         948      948 autovalue.esnext (unchanged)
 
 
 Uncompiled bundle reports:
 **************************************
         old      new
-    4017468  4017468 box2d_default (unchanged)
-    2188984  2188984 box2d_default.minified (unchanged)
-    1157963  1154988 box2d_default.rta (-0.3%)
-    2413943  2413943 emptyclass (unchanged)
-    1447167  1447167 emptyclass.minified (unchanged)
-     690685   687710 emptyclass.rta (-0.4%)
+    4017468  4016427 box2d_default (-0.0%)
+    2188984  2188458 box2d_default.minified (-0.0%)
+    1154988  1154716 box2d_default.rta (-0.0%)
+    2413943  2413782 emptyclass (-0.0%)
+    1447167  1447080 emptyclass.minified (-0.0%)
+     687710   687710 emptyclass.rta (unchanged)
 
 
 All reports:
@@ -75,10 +75,10 @@ All reports:
        2622     2622 assertsimple.esnext (unchanged)
        5793     5793 autoboxing (unchanged)
        5395     5395 autoboxing.esnext (unchanged)
-       3467     3053 autovalue (-11.9%)
-       3058     2698 autovalue.esnext (-11.8%)
-       3738     3310 autovalue_inc (-11.4%)
-       3324     2946 autovalue_inc.esnext (-11.4%)
+       3053     3053 autovalue (unchanged)
+       2698     2698 autovalue.esnext (unchanged)
+       3310     3310 autovalue_inc (unchanged)
+       2946     2946 autovalue_inc.esnext (unchanged)
        2692     2692 autovalue_ref (unchanged)
        2437     2437 autovalue_ref.esnext (unchanged)
         998      998 backwardbridgemethod (unchanged)
@@ -147,12 +147,12 @@ All reports:
          22       22 emptyclasswithparent.esnext (unchanged)
        1105     1105 enummethods (unchanged)
         756      756 enummethods.esnext (unchanged)
-       1742     1742 enumobfuscation (unchanged)
-       1342     1342 enumobfuscation.esnext (unchanged)
+       1742     1732 enumobfuscation (-0.6%)
+       1342     1332 enumobfuscation.esnext (-0.7%)
        1924     1924 enums (unchanged)
        1552     1552 enums.esnext (unchanged)
-       1791     1791 enumspecialfunctions (unchanged)
-       1474     1474 enumspecialfunctions.esnext (unchanged)
+       1791     1787 enumspecialfunctions (-0.2%)
+       1474     1470 enumspecialfunctions.esnext (-0.3%)
        1167     1167 exceptionnotcaught (unchanged)
         831      831 exceptionnotcaught.esnext (unchanged)
         953      953 exports (unchanged)
@@ -241,8 +241,8 @@ All reports:
        1429     1429 jsfunctiontypeannotation.esnext (unchanged)
         977      977 jsinnerclass (unchanged)
         625      625 jsinnerclass.esnext (unchanged)
-      13979    13979 jsinteroptests (unchanged)
-      12754    12754 jsinteroptests.esnext (unchanged)
+      13979    13971 jsinteroptests (-0.1%)
+      12754    12748 jsinteroptests.esnext (-0.0%)
         982      982 jsmethodoverride (unchanged)
         635      635 jsmethodoverride.esnext (unchanged)
        1179     1179 jsoverlay (unchanged)
