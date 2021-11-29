@@ -25,7 +25,7 @@ open class CastGenerics<T, E: Number?> {
   c = o as V?
  }
 
- open fun <TT: Enum?> outerGenericMethod() {}
+ open fun <TT: Enum<*>?> outerGenericMethod() {}
 
  open fun <EE> method(o: Any?): EE? where EE: cast.`CastGenerics$Empty1`?, EE: cast.`CastGenerics$Empty2`<EE>? {
   if (o is cast.`CastGenerics$Empty1`) {
@@ -69,7 +69,7 @@ open class CastGenerics<T, E: Number?> {
   fun testCastToParamterizedType() {
    val o: Any? = Int(1)
    var cc: cast.CastGenerics<Error?, Number?>? = o as cast.CastGenerics<Error?, Number?>?
-   cc = o as cast.CastGenerics?
+   cc = o as cast.CastGenerics<*, *>?
   }
 
   @JvmStatic
@@ -107,7 +107,7 @@ open class `CastGenerics$Container`<T> {
  }
 }
 
-open class `CastGenerics$1Nested`<SS, TT: Enum?, T, E: Number?> {
+open class `CastGenerics$1Nested`<SS, TT: Enum<*>?, T, E: Number?> {
  internal constructor(`$outer_this`: cast.CastGenerics<T, E>?): super() {
   this.`this` = `$outer_this`
  }

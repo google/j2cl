@@ -95,7 +95,7 @@ interface `TestCase10036$BI1`: bridgemethods.`TestCase10036$BI3` {
  override fun get(value: String?): String?
 }
 
-abstract class `TestCase10036$B`<B1: Comparable?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
+abstract class `TestCase10036$B`<B1: Comparable<*>?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
  internal constructor(): super()
 
  abstract open fun get(value: B1?): String?

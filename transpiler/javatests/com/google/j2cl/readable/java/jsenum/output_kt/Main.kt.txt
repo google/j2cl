@@ -12,7 +12,7 @@ open class Main {
      break@SWITCH
     else ->
    } while (false)
-   val comparable: Comparable? = comparableJsEnum
+   val comparable: Comparable<*>? = comparableJsEnum
    comparableJsEnum = comparable as jsenum.`Main$ComparableJsEnum`?
    var intJsEnum: jsenum.`Main$IntJsEnum`? = if (jsenum.`Main$IntJsEnum`.ELEVEN.getValue() == 10) jsenum.`Main$IntJsEnum`.ELEVEN else null
    SWITCH_1@ do when (intJsEnum!!) {
@@ -24,7 +24,7 @@ open class Main {
    intJsEnum = o as jsenum.`Main$IntJsEnum`?
    val equal: Boolean = intJsEnum == jsenum.`Main$IntJsEnum`.TWENTY
    var isInstance: Boolean = intJsEnum is jsenum.`Main$IntJsEnum`
-   isInstance = intJsEnum is Comparable
+   isInstance = intJsEnum is Comparable<*>
    val stringJsEnum: jsenum.`Main$StringJsEnum`? = if (jsenum.`Main$StringJsEnum`.ONE.getValue() == "10") jsenum.`Main$StringJsEnum`.THREE else null
    SWITCH_2@ do when (stringJsEnum!!) {
     jsenum.`Main$StringJsEnum`.ONE ->

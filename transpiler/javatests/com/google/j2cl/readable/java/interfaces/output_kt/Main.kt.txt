@@ -4,7 +4,7 @@ open class Main {
  constructor(): super()
 
  internal open fun testInterfaceMembers() {
-  val i: interfaces.`Main$Interface`? = interfaces.`Main$Implementor`(this)
+  val i: interfaces.`Main$Interface`<*>? = interfaces.`Main$Implementor`(this)
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
   interfaces.`Main$Interface`.staticInterfaceMethod()

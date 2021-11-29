@@ -113,9 +113,12 @@ private fun Renderer.render(declaredTypeDescriptor: DeclaredTypeDescriptor) {
 }
 
 private fun Renderer.renderArguments(declaredTypeDescriptor: DeclaredTypeDescriptor) {
+  val parameters = declaredTypeDescriptor.typeDeclaration.typeParameterDescriptors
   val arguments = declaredTypeDescriptor.typeArgumentDescriptors
   if (arguments.isNotEmpty()) {
     renderInAngleBrackets { renderCommaSeparated(arguments) { renderArgument(it) } }
+  } else if (parameters.isNotEmpty()) {
+    renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
   }
 }
 

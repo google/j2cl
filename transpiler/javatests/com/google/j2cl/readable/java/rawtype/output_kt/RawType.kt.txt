@@ -3,14 +3,14 @@ package rawtype
 open class RawType {
  internal constructor(): super()
 
- @JvmField internal var c: Comparable? = null
+ @JvmField internal var c: Comparable<*>? = null
 }
 
 interface `RawType$I`<T: rawtype.RawType?> {
  fun f(t: T?) {}
 }
 
-open class `RawType$RawSubclass`: rawtype.`RawType$I` {
+open class `RawType$RawSubclass`: rawtype.`RawType$I`<*> {
  internal constructor(): super()
 
  open override fun f(t: rawtype.RawType?) {}
