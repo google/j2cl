@@ -1,16 +1,18 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2042103 to 2041921 bytes (100%->100.0%) and from
-  724320 to 724296 bytes (100%->100.0%) gzipped.
+  2050162 to 2044785 bytes (100%->99.7%) and from
+  727313 to 725733 bytes (100%->99.8%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
         old      new
-       1938     1924 enums (-0.7%)
-       1562     1552 enums.esnext (-0.6%)
+       3467     3053 autovalue (-11.9%)
+       3058     2698 autovalue.esnext (-11.8%)
+       3738     3310 autovalue_inc (-11.4%)
+       3324     2946 autovalue_inc.esnext (-11.4%)
 
 
 Expansion report highlights:
@@ -21,7 +23,7 @@ Expansion report highlights:
 Incremental size reports (non-gzip):
 **************************************
         old      new
-        860      860 autovalue (unchanged)
+        860      859 autovalue (-0.1%)
         948      948 autovalue.esnext (unchanged)
 
 
@@ -30,10 +32,10 @@ Uncompiled bundle reports:
         old      new
     4017468  4017468 box2d_default (unchanged)
     2188984  2188984 box2d_default.minified (unchanged)
-    1157963  1157963 box2d_default.rta (unchanged)
+    1157963  1154988 box2d_default.rta (-0.3%)
     2413943  2413943 emptyclass (unchanged)
     1447167  1447167 emptyclass.minified (unchanged)
-     690685   690685 emptyclass.rta (unchanged)
+     690685   687710 emptyclass.rta (-0.4%)
 
 
 All reports:
@@ -73,10 +75,10 @@ All reports:
        2622     2622 assertsimple.esnext (unchanged)
        5793     5793 autoboxing (unchanged)
        5395     5395 autoboxing.esnext (unchanged)
-       3467     3467 autovalue (unchanged)
-       3058     3058 autovalue.esnext (unchanged)
-       3738     3738 autovalue_inc (unchanged)
-       3324     3324 autovalue_inc.esnext (unchanged)
+       3467     3053 autovalue (-11.9%)
+       3058     2698 autovalue.esnext (-11.8%)
+       3738     3310 autovalue_inc (-11.4%)
+       3324     2946 autovalue_inc.esnext (-11.4%)
        2692     2692 autovalue_ref (unchanged)
        2437     2437 autovalue_ref.esnext (unchanged)
         998      998 backwardbridgemethod (unchanged)
@@ -147,8 +149,8 @@ All reports:
         756      756 enummethods.esnext (unchanged)
        1742     1742 enumobfuscation (unchanged)
        1342     1342 enumobfuscation.esnext (unchanged)
-       1938     1924 enums (-0.7%)
-       1562     1552 enums.esnext (-0.6%)
+       1924     1924 enums (unchanged)
+       1552     1552 enums.esnext (unchanged)
        1791     1791 enumspecialfunctions (unchanged)
        1474     1474 enumspecialfunctions.esnext (unchanged)
        1167     1167 exceptionnotcaught (unchanged)
@@ -315,8 +317,8 @@ All reports:
        1294     1294 objectchilddevirtualcalls.esnext (unchanged)
        1395     1395 objectdevirtualcalls (unchanged)
        1146     1146 objectdevirtualcalls.esnext (unchanged)
-         -1     1691 optimizedenums (new)
-         -1     1326 optimizedenums.esnext (new)
+       1691     1691 optimizedenums (unchanged)
+       1326     1326 optimizedenums.esnext (unchanged)
         913      913 overloadedmethods (unchanged)
         573      573 overloadedmethods.esnext (unchanged)
        1017     1017 overridingclassmethods (unchanged)

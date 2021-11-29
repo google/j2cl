@@ -123,7 +123,8 @@ public abstract class ValueType {
     for (String p : filteredkeys(thisObject)) {
       Object value = JsUtils.getProperty(thisObject, p);
       if (ArrayHelper.isArray(value)) {
-        value = Arrays.toString(JsUtils.<Object[]>uncheckedCast(value));
+        // Relying on JS toString behavior avoids pulling in extra deps through Arrays.toString.
+        value = "[" + value + "]";
       }
       // Best effort to strip down of mangled names.
       p = cleanMangledPropertyName(p);

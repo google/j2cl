@@ -63,6 +63,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 @RunWith(JUnit4.class)
+@SuppressWarnings("ArrayToString")
 public class AutoValueTest {
 
   @AutoValue
@@ -1036,12 +1037,7 @@ public class AutoValueTest {
     // default Object.hashCode() will fail.
 
     String expectedString =
-        "PrimitiveArrays{booleans="
-            + Arrays.toString(booleans)
-            + ", "
-            + "ints="
-            + Arrays.toString(ints)
-            + "}";
+        "PrimitiveArrays{booleans=[" + booleans + "], " + "ints=[" + ints + "]}";
     assertThat(object1.toString()).isEqualTo(expectedString);
     assertThat(object1.ints()).isSameInstanceAs(object1.ints());
   }
@@ -1056,8 +1052,7 @@ public class AutoValueTest {
         PrimitiveArrays.create(Arrays.copyOf(booleans, booleans.length), null);
     new EqualsTester().addEqualityGroup(object1, object2).addEqualityGroup(object0).testEquals();
 
-    String expectedString =
-        "PrimitiveArrays{booleans=" + Arrays.toString(booleans) + ", " + "ints=null}";
+    String expectedString = "PrimitiveArrays{booleans=[" + booleans + "], " + "ints=null}";
     assertThat(object1.toString()).isEqualTo(expectedString);
 
     assertThat(object1.booleans()).isSameInstanceAs(object1.booleans());
