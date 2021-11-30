@@ -114,6 +114,7 @@ import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
+import com.google.j2cl.transpiler.passes.ResolveImplicitStaticQualifiers;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
 import com.google.j2cl.transpiler.passes.RewriteShortcutOperators;
@@ -245,13 +246,14 @@ public enum Backend {
           // variable motion.
           NormalizeMultiExpressions::new,
           MoveVariableDeclarationsToEnclosingBlock::new,
-          // Remove redundant JsDocCasts.
           RemoveUnneededJsDocCasts::new,
           NormalizeJsDocCastExpressions::new,
-
-          // Handle await keyword.
           NormalizeJsAwaitMethodInvocations::new,
           RemoveNoopStatements::new,
+
+          // Add qualifiers to static members after all transformations to simplify the handling
+          // in the backend.
+          ResolveImplicitStaticQualifiers::new,
 
           // Enrich source mapping information for better stack deobfuscation.
           FilloutMissingSourceMapInformation::new,

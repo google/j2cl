@@ -270,11 +270,12 @@ public class NormalizeNestedClassConstructors extends NormalizationPass {
         DeclaredTypeDescriptor superTypeDescriptor = target.getEnclosingTypeDescriptor();
         addCapturedVariableArguments(methodCallBuilder, superTypeDescriptor);
 
+        Expression qualifier = methodCall.getQualifier();
         // a.super() => super(a)
-        if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
+        if (qualifier != null) {
           methodCallBuilder
               .addArgumentAndUpdateDescriptor(
-                  0, methodCall.getQualifier(), superTypeDescriptor.getEnclosingTypeDescriptor())
+                  0, qualifier, superTypeDescriptor.getEnclosingTypeDescriptor())
               .setQualifier(null);
         }
       }

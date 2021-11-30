@@ -38,7 +38,8 @@ public class MethodCall extends Invocation {
       MethodDescriptor target,
       List<Expression> arguments,
       boolean isStaticDispatch) {
-    super(checkNotNull(AstUtils.getExplicitQualifier(qualifier, target)), target, arguments);
+    super(qualifier, target, arguments);
+
     this.isStaticDispatch = isStaticDispatch;
     this.sourcePosition = checkNotNull(sourcePosition);
   }

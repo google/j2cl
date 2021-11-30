@@ -28,7 +28,7 @@ public class FieldAccess extends MemberReference {
   private final SourcePosition sourcePosition;
 
   private FieldAccess(Expression qualifier, FieldDescriptor target, SourcePosition sourcePosition) {
-    super(checkNotNull(AstUtils.getExplicitQualifier(qualifier, target)), target);
+    super(qualifier, target);
     this.sourcePosition = checkNotNull(sourcePosition);
   }
 

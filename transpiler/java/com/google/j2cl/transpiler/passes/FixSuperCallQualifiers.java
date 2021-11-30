@@ -71,17 +71,18 @@ public class FixSuperCallQualifiers extends NormalizationPass {
 
           @Override
           public Node rewriteMethodCall(MethodCall methodCall) {
+            if (methodCall.getQualifier() != null) {
+              // has an explicit qualifier.
+              return methodCall;
+            }
+
             MethodDescriptor targetMethod = methodCall.getTarget();
             if (!targetMethod.isConstructor()
                 || AstUtils.isDelegatedConstructorCall(
                     methodCall, getCurrentType().getTypeDescriptor())) {
               return methodCall;
             }
-            // super() call.
-            if (!AstUtils.hasThisReferenceAsQualifier(methodCall)) {
-              // has an explicit qualifier.
-              return methodCall;
-            }
+
             return MethodCall.Builder.from(methodCall)
                 .setQualifier(findSuperCallQualifier(getCurrentType().getTypeDescriptor()))
                 .build();

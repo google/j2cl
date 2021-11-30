@@ -22,7 +22,6 @@ import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.Library;
 import com.google.j2cl.transpiler.ast.Literal;
 import com.google.j2cl.transpiler.ast.Node;
@@ -76,7 +75,7 @@ public class PropagateConstants extends LibraryNormalizationPass {
             }
 
             // Qualifiers for static methods have already been normalized out.
-            checkState(fieldAccess.getQualifier() instanceof JavaScriptConstructorReference);
+            checkState(fieldAccess.getQualifier() == null);
             return literal;
           }
         });

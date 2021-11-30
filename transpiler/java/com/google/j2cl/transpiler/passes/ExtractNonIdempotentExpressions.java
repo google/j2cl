@@ -68,7 +68,7 @@ public class ExtractNonIdempotentExpressions extends NormalizationPass {
           public Expression rewriteMethodCall(MethodCall methodCall) {
             Expression qualifier = methodCall.getQualifier();
 
-            if (!qualifier.isIdempotent() && methodCall.isPolymorphic()) {
+            if (methodCall.isPolymorphic() && !qualifier.isIdempotent()) {
               Variable qualifierVariable =
                   Variable.newBuilder()
                       .setName("$qualifier")

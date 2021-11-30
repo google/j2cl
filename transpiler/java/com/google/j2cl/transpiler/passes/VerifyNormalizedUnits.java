@@ -260,8 +260,13 @@ public class VerifyNormalizedUnits extends NormalizationPass {
   }
 
   private void verifyStaticMemberQualifiers(MemberReference memberReference) {
-    checkState(
-        !memberReference.getTarget().isStatic()
-            || memberReference.getQualifier() instanceof JavaScriptConstructorReference);
+    if (verifyForWasm) {
+      checkState(!memberReference.getTarget().isStatic() || memberReference.getQualifier() == null);
+
+    } else {
+      checkState(
+          !memberReference.getTarget().isStatic()
+              || memberReference.getQualifier() instanceof JavaScriptConstructorReference);
+    }
   }
 }

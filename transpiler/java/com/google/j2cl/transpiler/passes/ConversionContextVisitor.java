@@ -360,7 +360,7 @@ public final class ConversionContextVisitor extends AbstractRewriter {
 
   private Expression rewriteInstanceQualifier(
       Expression qualifier, MemberDescriptor memberDescriptor) {
-    if (memberDescriptor.isStatic() || qualifier == null) {
+    if (qualifier == null) {
       return qualifier;
     }
 

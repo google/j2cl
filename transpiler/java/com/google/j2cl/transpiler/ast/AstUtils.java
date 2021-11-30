@@ -467,20 +467,10 @@ public class AstUtils {
    */
   static Expression getExplicitQualifier(Expression qualifier, MemberDescriptor memberDescriptor) {
     checkNotNull(memberDescriptor);
-    if (qualifier != null) {
+    if (qualifier != null || !memberDescriptor.isInstanceMember()) {
       return qualifier;
     }
-    DeclaredTypeDescriptor enclosingTypeDescriptor = memberDescriptor.getEnclosingTypeDescriptor();
-    return memberDescriptor.isStatic()
-        ? new JavaScriptConstructorReference(enclosingTypeDescriptor.getTypeDeclaration())
-        : new ThisReference(enclosingTypeDescriptor);
-  }
-
-  /** Returns true if the qualifier of the given member reference is 'this' reference. */
-  public static boolean hasThisReferenceAsQualifier(MemberReference memberReference) {
-    Expression qualifier = memberReference.getQualifier();
-    return qualifier instanceof ThisReference
-        && memberReference.getTarget().isMemberOf(((ThisReference) qualifier).getTypeDescriptor());
+    return new ThisReference(memberDescriptor.getEnclosingTypeDescriptor());
   }
 
   /**

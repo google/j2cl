@@ -229,10 +229,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterFieldAccess(FieldAccess fieldAccess) {
-        if (fieldAccess.getQualifier() != null) {
-          accept(fieldAccess.getQualifier());
-          print(".");
-        }
+        printQualifier(fieldAccess);
         print(fieldAccess.getTarget().getName());
         return false;
       }
@@ -335,10 +332,7 @@ class ToStringRenderer {
 
       @Override
       public boolean enterMethodCall(MethodCall methodCall) {
-        if (methodCall.getQualifier() != null) {
-          accept(methodCall.qualifier);
-          print(".");
-        }
+        printQualifier(methodCall);
         printInvocation(methodCall);
         return false;
       }
@@ -634,6 +628,16 @@ class ToStringRenderer {
           print(nextSeparator);
           nextSeparator = separator;
           accept(argument);
+        }
+      }
+
+      private void printQualifier(MemberReference memberReference) {
+        if (memberReference.getQualifier() != null) {
+          accept(memberReference.getQualifier());
+          print(".");
+        } else if (memberReference.getTarget().isStatic()) {
+          print(memberReference.getTarget().getEnclosingTypeDescriptor().getQualifiedSourceName());
+          print(".");
         }
       }
 

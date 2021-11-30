@@ -65,7 +65,6 @@ fun Renderer.renderExpression(expression: Expression) {
     is FunctionExpression -> renderFunctionExpression(expression)
     is InstanceOfExpression -> renderInstanceOfExpression(expression)
     is Literal -> renderLiteral(expression)
-    is JavaScriptConstructorReference -> renderJavaScriptConstructorReference(expression)
     is MethodCall -> renderMethodCall(expression)
     is MultiExpression -> renderMultiExpression(expression)
     is NewArray -> renderNewArray(expression)
@@ -215,12 +214,6 @@ private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
 }
 
-private fun Renderer.renderQualifiedName(expression: Expression, name: String) {
-  renderLeftSubExpression(expression, (expression as MemberReference).qualifier)
-  render(".")
-  renderIdentifier(name)
-}
-
 private fun Renderer.renderMethodCallHeader(expression: MethodCall) {
   renderQualifiedName(expression, expression.target.name!!)
 }
@@ -315,6 +308,18 @@ fun Renderer.renderVariable(variable: Variable) {
   renderName(variable)
   render(": ")
   render(variable.typeDescriptor)
+}
+
+private fun Renderer.renderQualifiedName(expression: MemberReference, name: String) {
+  if (expression.qualifier == null) {
+    // TODO(b/206482966): Move the checks in the backend to a verifier pass.
+    require(expression.target.isStatic) { "Unqualified references must be static" }
+    render(expression.target.enclosingTypeDescriptor.typeDeclaration)
+  } else {
+    renderLeftSubExpression(expression, expression.qualifier)
+  }
+  render(".")
+  renderIdentifier(name)
 }
 
 private fun Renderer.renderLeftSubExpression(expression: Expression, operand: Expression) {

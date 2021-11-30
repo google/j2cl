@@ -19,7 +19,6 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MultiExpression;
@@ -85,7 +84,6 @@ public class NormalizeStaticMemberQualifiers extends NormalizationPass {
       return false;
     }
     MemberReference memberReference = (MemberReference) expression;
-    return memberReference.getTarget().isStatic()
-        && !(memberReference.getQualifier() instanceof JavaScriptConstructorReference);
+    return memberReference.getTarget().isStatic() && memberReference.getQualifier() != null;
   }
 }

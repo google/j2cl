@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.j2cl.transpiler.ast.MethodDescriptor.IS_INSTANCE_METHOD_NAME;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -23,7 +24,6 @@ import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.InstanceOfExpression;
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.JsInfo;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -61,25 +61,20 @@ public class NormalizeInstanceOfs extends NormalizationPass {
   private static Node rewriteRegularInstanceOfExpression(
       InstanceOfExpression instanceOfExpression) {
     TypeDescriptor checkTypeDescriptor = instanceOfExpression.getTestTypeDescriptor();
-    JavaScriptConstructorReference javaScriptConstructorReference =
-        checkTypeDescriptor.getMetadataConstructorReference();
 
     MethodDescriptor isInstanceMethodDescriptor =
         MethodDescriptor.newBuilder()
             .setJsInfo(JsInfo.RAW)
             .setStatic(true)
             .setEnclosingTypeDescriptor(
-                javaScriptConstructorReference
-                    .getReferencedTypeDeclaration()
-                    .toUnparameterizedTypeDescriptor())
-            .setName("$isInstance")
+                checkTypeDescriptor.getMetadataTypeDeclaration().toUnparameterizedTypeDescriptor())
+            .setName(IS_INSTANCE_METHOD_NAME)
             .setParameterTypeDescriptors(TypeDescriptors.get().javaLangObject)
             .setReturnTypeDescriptor(PrimitiveTypes.BOOLEAN)
             .build();
 
     // TypeName.$isInstance(expr);
     return MethodCall.Builder.from(isInstanceMethodDescriptor)
-        .setQualifier(javaScriptConstructorReference)
         .setArguments(instanceOfExpression.getExpression())
         .build();
   }

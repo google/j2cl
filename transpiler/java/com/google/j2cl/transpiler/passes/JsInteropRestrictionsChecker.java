@@ -593,9 +593,9 @@ public class JsInteropRestrictionsChecker {
             MethodDescriptor target = methodCall.getTarget();
 
             TypeDescriptor qualifierTypeDescriptor =
-                target.isStatic()
-                    ? target.getEnclosingTypeDescriptor()
-                    : methodCall.getQualifier().getTypeDescriptor();
+                target.isInstanceMember()
+                    ? methodCall.getQualifier().getTypeDescriptor()
+                    : target.getEnclosingTypeDescriptor();
             if (!qualifierTypeDescriptor.isJsEnum()) {
               // If the actual target of the method is not a JsEnum, nothing to check.
               return;
