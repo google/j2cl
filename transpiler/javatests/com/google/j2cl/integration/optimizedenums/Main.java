@@ -26,6 +26,7 @@ public class Main {
     testStaticFields();
     testEnumWithConstructors();
     testInstanceOf();
+    testDefaultMethod();
   }
 
   private static void testOrdinal() {
@@ -55,8 +56,8 @@ public class Main {
   }
 
   private static void testInstanceMethod() {
-    assertTrue("S0".equals(EnumWithInstanceMethod.FOO.getS()));
-    assertTrue("S1".equals(EnumWithInstanceMethod.BAR.getS()));
+    assertTrue("S0".equals(EnumWithInstanceMethod.FOO.getString()));
+    assertTrue("S1".equals(EnumWithInstanceMethod.BAR.getString()));
   }
 
   private static void testStaticFields() {
@@ -75,10 +76,16 @@ public class Main {
   private static void testEnumWithConstructors() {
     assertTrue(EnumWithCtor.FOO.i == 0);
     assertTrue(EnumWithCtor.FOO.b);
-    assertTrue(EnumWithCtor.FOO.s.equals("default"));
+    assertTrue(EnumWithCtor.FOO.string.equals("default"));
+    assertTrue(EnumWithCtor.FOO.stringConstant.equals("stringConstant"));
     assertTrue(EnumWithCtor.BAR.i == 1);
     assertTrue(!EnumWithCtor.BAR.b);
-    assertTrue(EnumWithCtor.BAR.s.equals("bar"));
+    assertTrue(EnumWithCtor.BAR.string.equals("bar"));
+    assertTrue(EnumWithCtor.BAR.stringConstant.equals("stringConstant"));
+    assertTrue(EnumWithCtor.BAZ.i == 2);
+    assertTrue(!EnumWithCtor.BAZ.b);
+    assertTrue(EnumWithCtor.BAZ.string.equals("baz"));
+    assertTrue(EnumWithCtor.BAZ.stringConstant.equals("stringConstant"));
   }
 
   private static void testInstanceOf() {
@@ -93,7 +100,11 @@ public class Main {
   }
 
   private static void testDefaultMethod() {
-    assertTrue(EnumWithInstanceMethod.FOO == EnumWithInstanceMethod.FOO.getDefaultInstance());
+    assertTrue(
+        EnumWithInstanceMethod.FOO
+            .getDefaultInstance()
+            .getString()
+            .equals("defaultInstanceString"));
   }
 
   enum SimpleEnum {
@@ -124,20 +135,27 @@ public class Main {
 
   enum EnumWithCtor {
     FOO,
-    BAR(1, false, "bar");
+    BAR(1, false, "bar"),
+    BAZ(2, "baz");
 
     private final int i;
     private final boolean b;
-    private final String s;
+    private final String string;
+    private final String stringConstant;
 
     EnumWithCtor() {
       this(0, true, "default");
     }
 
-    EnumWithCtor(int i, boolean b, String s) {
+    EnumWithCtor(int i, String string) {
+      this(i, false, string);
+    }
+
+    EnumWithCtor(int i, boolean b, String string) {
       this.i = i;
       this.b = b;
-      this.s = s;
+      this.string = string;
+      this.stringConstant = "stringConstant";
     }
   }
 
@@ -145,15 +163,20 @@ public class Main {
     FOO,
     BAR;
 
-    public String getS() {
+    public String getString() {
       return "S" + ordinal();
     }
   }
 
   interface MyEnumInterface {
-    MyEnumInterface DEFAULT_INSTANCE = EnumWithInstanceMethod.FOO;
+    MyEnumInterface DEFAULT_INSTANCE =
+        new MyEnumInterface() {
+          public String getString() {
+            return "defaultInstanceString";
+          }
+        };
 
-    String getS();
+    String getString();
 
     default MyEnumInterface getDefaultInstance() {
       return DEFAULT_INSTANCE;
