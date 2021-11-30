@@ -14,11 +14,17 @@ open class LabeledStatement {
  }
 
  open fun simpleStatement() {
-  LABEL@ do this.foo() while (false)
-  LOOP@ do {
-   LABEL_1@ do continue@LOOP while (false)
+  LABEL@ do {
+   this.foo()
   } while (false)
-  LABEL_2@ do return Unit while (false)
+  LOOP@ do {
+   LABEL_1@ do {
+    continue@LOOP
+   } while (false)
+  } while (false)
+  LABEL_2@ do {
+   return
+  } while (false)
  }
 
  open fun block() {
@@ -28,17 +34,21 @@ open class LabeledStatement {
  }
 
  open fun ifStatement() {
-  LABEL@ do if (true) {
-   break@LABEL
+  LABEL@ do {
+   if (true) {
+    break@LABEL
+   }
   } while (false)
  }
 
  open fun switchStatement() {
-  LABEL@ do when (0) {
-   0 ->
-    if (true) {
-     break@LABEL
-    }
+  LABEL@ do {
+   when (0) {
+    0 ->
+     if (true) {
+      break@LABEL
+     }
+   }
   } while (false)
  }
 

@@ -14,57 +14,69 @@ open class SwitchStatement {
  constructor(): super()
 
  open fun main() {
-  SWITCH@ do when ("one") {
-   "one" ->
-   "two" ->
-    break@SWITCH
-   else ->
-    return Unit
+  SWITCH@ do {
+   when ("one") {
+    "one" ->
+    "two" ->
+     break@SWITCH
+    else ->
+     return
+   }
   } while (false)
-  SWITCH_1@ do when ('1') {
-   '1' ->
-   '2' ->
-    break@SWITCH_1
-   else ->
-    return Unit
+  SWITCH_1@ do {
+   when ('1') {
+    '1' ->
+    '2' ->
+     break@SWITCH_1
+    else ->
+     return
+   }
   } while (false)
-  SWITCH_2@ do when (1) {
-   -2 ->
-   1 ->
-   2 ->
-    break@SWITCH_2
-   else ->
-    return Unit
+  SWITCH_2@ do {
+   when (1) {
+    -2 ->
+    1 ->
+    2 ->
+     break@SWITCH_2
+    else ->
+     return
+   }
   } while (false)
-  SWITCH_3@ do when (switchstatement.Numbers.ONE) {
-   switchstatement.Numbers.ONE ->
-   switchstatement.Numbers.TWO ->
-    break@SWITCH_3
-   else ->
-    return Unit
+  SWITCH_3@ do {
+   when (switchstatement.Numbers.ONE) {
+    switchstatement.Numbers.ONE ->
+    switchstatement.Numbers.TWO ->
+     break@SWITCH_3
+    else ->
+     return
+   }
   } while (false)
  }
 
  companion object {
   @JvmStatic
   internal fun testSwitchVariableDeclarations() {
-   SWITCH@ do when (3) {
-    1 ->
-     val unassigned: Int
-     val unassigned2: Int
-     val i: Int = 0
-     val j: Int = 2
-     val b: Int = j + 1
-     break@SWITCH
-    3 ->
-     i = 3
-     assert(i == 3)
-     return Unit
+   SWITCH@ do {
+    when (3) {
+     1 ->
+      val unassigned: Int
+      val unassigned2: Int
+      val i: Int = 0
+      val j: Int = 2
+      val b: Int = j + 1
+      break@SWITCH
+     3 ->
+      i = 3
+      assert(i == 3)
+      return
+    }
    } while (false)
-   SWITCH_1@ do when (5) {
-    5 ->
-     val i_1: Int = 1
-     break@SWITCH_1
+   SWITCH_1@ do {
+    when (5) {
+     5 ->
+      val i_1: Int = 1
+      break@SWITCH_1
+    }
    } while (false)
    assert(false)
   }

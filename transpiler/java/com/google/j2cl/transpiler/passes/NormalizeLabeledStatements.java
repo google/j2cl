@@ -16,6 +16,7 @@
 package com.google.j2cl.transpiler.passes;
 
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.Block;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
@@ -41,7 +42,13 @@ public class NormalizeLabeledStatements extends NormalizationPass {
                         DoWhileStatement.newBuilder()
                             .setSourcePosition(statement.getSourcePosition())
                             .setConditionExpression(BooleanLiteral.get(false))
-                            .setBody(statement)
+                            .setBody(
+                                statement instanceof Block
+                                    ? statement
+                                    : Block.newBuilder()
+                                        .setSourcePosition(labeledStatement.getSourcePosition())
+                                        .setStatements(statement)
+                                        .build())
                             .build())
                     .build();
           }

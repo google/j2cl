@@ -139,8 +139,11 @@ private fun Renderer.renderLabeledStatement(labelStatement: LabeledStatement) {
 }
 
 private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
-  render("return ")
-  returnStatement.expression.let { if (it != null) renderExpression(it) else render("Unit") }
+  render("return")
+  returnStatement.expression?.let {
+    render(" ")
+    renderExpression(it)
+  }
 }
 
 private fun Renderer.renderSwitchCase(switchCase: SwitchCase) {
