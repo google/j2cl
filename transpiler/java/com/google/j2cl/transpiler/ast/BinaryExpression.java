@@ -138,7 +138,7 @@ public class BinaryExpression extends Expression {
     }
 
     if (isStringConcatenation(operator, leftOperandType, rightOperandType)) {
-      return TypeDescriptors.get().javaLangString;
+      return TypeDescriptors.get().javaLangString.toNonNullable();
     }
 
     if (operator.isRelationalOperator()) {

@@ -64,6 +64,7 @@ import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
 import com.google.j2cl.transpiler.passes.InsertNotNullAssertions;
 import com.google.j2cl.transpiler.passes.InsertStringConversions;
+import com.google.j2cl.transpiler.passes.InsertStringConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnTypes;
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
@@ -394,6 +395,9 @@ public enum Backend {
           NormalizeBasicCasts::new,
           ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
+
+          // Needs to run after non-null assertions are inserted.
+          InsertStringConversionsKotlin::new,
 
           // Verification
           VerifySingleAstReference::new,
