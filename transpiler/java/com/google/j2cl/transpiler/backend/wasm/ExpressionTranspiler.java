@@ -54,7 +54,6 @@ import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import com.google.j2cl.transpiler.ast.VariableDeclarationFragment;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.backend.common.SourceBuilder;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -114,7 +113,7 @@ final class ExpressionTranspiler {
         sourceBuilder.append("(");
         renderAccessExpression(left, /*setter=*/ true);
         sourceBuilder.append(" ");
-        renderTypedExpression(left.getTypeDescriptor(), right);
+        render(right);
         sourceBuilder.append(")");
         return false;
       }
@@ -217,9 +216,9 @@ final class ExpressionTranspiler {
         sourceBuilder.append("(if (result " + environment.getWasmType(typeDescriptor) + ") ");
         render(conditionalExpression.getConditionExpression());
         sourceBuilder.append(" (then ");
-        renderTypedExpression(typeDescriptor, conditionalExpression.getTrueExpression());
+        render(conditionalExpression.getTrueExpression());
         sourceBuilder.append(") (else ");
-        renderTypedExpression(typeDescriptor, conditionalExpression.getFalseExpression());
+        render(conditionalExpression.getFalseExpression());
         sourceBuilder.append("))");
         return false;
       }
@@ -323,7 +322,7 @@ final class ExpressionTranspiler {
           render(implicitParameter);
 
           // Pass the rest of the parameters.
-          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+          methodCall.getArguments().forEach(this::render);
 
           // Retrieve the method reference from the appropriate vtable to provide it to call_ref.
           sourceBuilder.append(
@@ -340,7 +339,7 @@ final class ExpressionTranspiler {
                 format(
                     "(struct.get %s $vtable",
                     environment.getWasmTypeName(enclosingTypeDescriptor)));
-            renderTypedExpression(enclosingTypeDescriptor, methodCall.getQualifier());
+            render(methodCall.getQualifier());
             sourceBuilder.append(")");
           } else {
             // For a an interface dynamic dispatch the vtable resides in the $itable array field of
@@ -352,7 +351,7 @@ final class ExpressionTranspiler {
                     "(ref.cast_static %s (array.get $itable (struct.get %s $itable ",
                     environment.getWasmVtableTypeName(enclosingTypeDescriptor),
                     environment.getWasmTypeName(enclosingTypeDescriptor)));
-            renderTypedExpression(enclosingTypeDescriptor, methodCall.getQualifier());
+            render(methodCall.getQualifier());
             // ... from the assigned $table array slot and cast to the particular interface vtable.
             sourceBuilder.append(
                 String.format(
@@ -390,7 +389,7 @@ final class ExpressionTranspiler {
             render(methodCall.getQualifier());
           }
           // Render the parameters.
-          renderTypedExpressions(target.getParameterTypeDescriptors(), methodCall.getArguments());
+          methodCall.getArguments().forEach(this::render);
 
           // The binaryen intrinsic that implements calls without side effect needs the function
           // reference to the function to be called as the last parameter.
@@ -431,11 +430,7 @@ final class ExpressionTranspiler {
         String arrayType = environment.getWasmTypeName(arrayLiteral.getTypeDescriptor());
 
         sourceBuilder.append(format("(array.init_static %s ", arrayType));
-        renderTypedExpressions(
-            Collections.nCopies(
-                arrayLiteral.getValueExpressions().size(),
-                arrayLiteral.getTypeDescriptor().getComponentTypeDescriptor()),
-            arrayLiteral.getValueExpressions());
+        arrayLiteral.getValueExpressions().forEach(this::render);
         sourceBuilder.append(")");
         return false;
       }
@@ -448,7 +443,7 @@ final class ExpressionTranspiler {
         String arrayType = environment.getWasmTypeName(newArray.getTypeDescriptor());
 
         sourceBuilder.append(format("(array.new_default %s ", arrayType));
-        renderTypedExpression(dimensionExpression.getTypeDescriptor(), dimensionExpression);
+        render(dimensionExpression);
         sourceBuilder.append(")");
         return false;
       }
@@ -546,20 +541,6 @@ final class ExpressionTranspiler {
         return false;
       }
 
-      // TODO(b/182436577): remove this method when NullLiterals have the correct type.
-      private void renderTypedExpression(TypeDescriptor typeDescriptor, Expression expression) {
-        ExpressionTranspiler.renderTypedExpression(
-            typeDescriptor, expression, sourceBuilder, environment);
-      }
-
-      private void renderTypedExpressions(
-          List<TypeDescriptor> typeDescriptors, List<Expression> expressions) {
-        checkArgument(typeDescriptors.size() == expressions.size());
-        for (int i = 0; i < typeDescriptors.size(); i++) {
-          renderTypedExpression(typeDescriptors.get(i), expressions.get(i));
-        }
-      }
-
       @Override
       public boolean enterVariableReference(VariableReference variableReference) {
         sourceBuilder.append("(");
@@ -592,20 +573,6 @@ final class ExpressionTranspiler {
         expression instanceof BinaryExpression
             && ((BinaryExpression) expression).getOperator() == BinaryOperator.ASSIGN;
     return isPrimitiveVoid(expression.getTypeDescriptor()) || isAssignmentExpression;
-  }
-
-  // TODO(b/182436577): remove this method when NullLiterals have the correct type.
-  public static void renderTypedExpression(
-      TypeDescriptor typeDescriptor,
-      Expression expression,
-      SourceBuilder sourceBuilder,
-      GenerationEnvironment environment) {
-
-    if (expression instanceof NullLiteral) {
-      render(typeDescriptor.getDefaultValue(), sourceBuilder, environment);
-    } else {
-      render(expression, sourceBuilder, environment);
-    }
   }
 
   private ExpressionTranspiler() {}

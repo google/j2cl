@@ -102,6 +102,7 @@ import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNestedBlocks;
 import com.google.j2cl.transpiler.passes.NormalizeNestedClassConstructors;
+import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
@@ -349,6 +350,7 @@ public enum Backend {
           // Needs to run at the end as the types in the ast will be invalid after the pass.
           ImplementArraysAsClasses::new,
           NormalizeInstantiationThroughFactoryMethods::new,
+          NormalizeNullLiterals::new,
 
           // Post-verifications
           VerifySingleAstReference::new,

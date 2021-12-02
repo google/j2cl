@@ -143,13 +143,7 @@ class StatementTranspiler {
               builder.newLine();
               builder.append("(return ");
               if (returnStatement.getExpression() != null) {
-                // TODO(b/182436577): Replace with renderExpression once renderTypedExpression
-                // is removed.
-                ExpressionTranspiler.renderTypedExpression(
-                    returnStatement.getTypeDescriptor(),
-                    returnStatement.getExpression(),
-                    builder,
-                    environment);
+                ExpressionTranspiler.render(returnStatement.getExpression(), builder, environment);
               }
               builder.append(")");
             });
