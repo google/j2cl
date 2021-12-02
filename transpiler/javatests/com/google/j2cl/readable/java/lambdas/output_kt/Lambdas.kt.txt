@@ -143,7 +143,7 @@ open class Lambdas {
 
   @JvmStatic
   fun <E> identity(): lambdas.`Lambdas$GenericJsFunction`<E, E>? {
-   if (lambdas.Lambdas.identityFunction == null) {
+   if (lambdas.Lambdas.identityFunction === null) {
     lambdas.Lambdas.identityFunction = lambdas.`Lambdas$IdentityFunction`()
    }
    return lambdas.Lambdas.identityFunction as lambdas.`Lambdas$GenericJsFunction`<E, E>?

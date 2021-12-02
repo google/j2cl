@@ -9,7 +9,7 @@ open class Equality {
    assert(0 != 1)
   }
   if (true) {
-   assert(Any() != Any())
+   assert(Any() !== Any())
   }
   if (true) {
    assert(0.0.toDouble() == 0.0.toDouble())
@@ -18,8 +18,8 @@ open class Equality {
    assert(0.0f.toFloat() == 0.0f.toFloat())
   }
   if (true) {
-   assert(null != Any())
-   assert(Any() != null)
+   assert(null !== Any())
+   assert(Any() !== null)
   }
  }
 }

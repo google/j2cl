@@ -68,6 +68,7 @@
   (ref.func $m_getClass__java_lang_Class@devirtualizedcalls.ObjectCalls)
   (ref.func $m_main__void@devirtualizedcalls.ObjectCalls)
   (ref.func $m_test__void@devirtualizedcalls.ObjectCalls)
+  (ref.func $m_testNotEquals__boolean@devirtualizedcalls.ObjectCalls)
  )
 )
 
@@ -706,6 +707,7 @@
  (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
  (field $m_main__void (ref $function.$java.lang.Object__$void))
  (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_testNotEquals__boolean (ref $function.$java.lang.Object__$boolean))
   $java.lang.Object.vtable)
 )
 
@@ -820,6 +822,22 @@
  )
 )
 (elem declare func $m_test__void@devirtualizedcalls.ObjectCalls)
+
+;;; boolean ObjectCalls.testNotEquals()
+(func $m_testNotEquals__boolean@devirtualizedcalls.ObjectCalls
+ (type $function.$java.lang.Object__$boolean)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result i32)
+ ;;@ devirtualizedcalls/ObjectCalls.java:48:17
+ (local $this (ref null $devirtualizedcalls.ObjectCalls))
+ (local.set $this (ref.cast_static $devirtualizedcalls.ObjectCalls (local.get $this.untyped)))
+ (block
+  ;; return !ObjectCalls.this.equals(java.lang.Object.$create());
+  ;;@ devirtualizedcalls/ObjectCalls.java:49:4
+  (return (i32.eqz (call_ref (local.get $this)(call $$create__java_lang_Object@java.lang.Object )(struct.get $java.lang.Object.vtable $m_equals__java_lang_Object__boolean (struct.get $java.lang.Object $vtable(local.get $this))))))
+ )
+)
+(elem declare func $m_testNotEquals__boolean@devirtualizedcalls.ObjectCalls)
 
 ;;; void ObjectCalls.$clinit()
 (func $$clinit__void@devirtualizedcalls.ObjectCalls

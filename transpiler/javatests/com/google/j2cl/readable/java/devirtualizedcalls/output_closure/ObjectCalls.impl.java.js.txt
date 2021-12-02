@@ -46,6 +46,10 @@ class ObjectCalls extends j_l_Object {
   this.toString();
   this.m_getClass__();
  }
+ /** @return {boolean} */
+ m_testNotEquals__() {
+  return !this.equals(j_l_Object.$create__());
+ }
  
  static $clinit() {
   ObjectCalls.$clinit = () =>{};

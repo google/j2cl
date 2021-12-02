@@ -41,7 +41,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun <T> cast(o: Any?): intersectiontype.Getable<T>? {
-   if (o == null) {
+   if (o === null) {
     return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
    }
    return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */

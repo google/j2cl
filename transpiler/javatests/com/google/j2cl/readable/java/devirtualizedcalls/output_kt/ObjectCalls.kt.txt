@@ -5,25 +5,29 @@ open class ObjectCalls {
 
  open fun main() {
   val `object`: Any? = Any()
-  `object`!!.equals(`object`)
+  `object`!! == `object`
   `object`!!.hashCode()
   `object`!!.toString()
   `object`!!.getClass()
   val objectCalls: Array<devirtualizedcalls.ObjectCalls?>? = arrayOfNulls<devirtualizedcalls.ObjectCalls?>(1)
-  objectCalls!!.equals(objectCalls)
+  objectCalls!! == objectCalls
   objectCalls!!.hashCode()
   objectCalls!!.toString()
   objectCalls!!.getClass()
  }
 
  open fun test() {
-  this.equals(Any())
+  this == Any()
   this.hashCode()
   this.toString()
   this.getClass()
-  this.equals(Any())
+  this == Any()
   this.hashCode()
   this.toString()
   this.getClass()
+ }
+
+ open fun testNotEquals(): Boolean {
+  return this != Any()
  }
 }

@@ -26,10 +26,10 @@ open class Main {
    } while (false)
    val o: Any? = intJsEnum
    intJsEnum = o as jsenum.`Main$IntJsEnum`?
-   val equal: Boolean = intJsEnum == jsenum.`Main$IntJsEnum`.TWENTY
+   val equal: Boolean = intJsEnum === jsenum.`Main$IntJsEnum`.TWENTY
    var isInstance: Boolean = intJsEnum is jsenum.`Main$IntJsEnum`
    isInstance = intJsEnum is Comparable<*>
-   val stringJsEnum: jsenum.`Main$StringJsEnum`? = if (jsenum.`Main$StringJsEnum`.ONE.getValue() == "10") jsenum.`Main$StringJsEnum`.THREE else null
+   val stringJsEnum: jsenum.`Main$StringJsEnum`? = if (jsenum.`Main$StringJsEnum`.ONE.getValue() === "10") jsenum.`Main$StringJsEnum`.THREE else null
    SWITCH_2@ do {
     when (stringJsEnum!!) {
      jsenum.`Main$StringJsEnum`.ONE ->
@@ -38,9 +38,9 @@ open class Main {
     }
    } while (false)
    jsenum.`Main$NativeStringEnum`.ONE.compareTo(jsenum.`Main$NativeStringEnum`.THREE)
-   jsenum.`Main$NativeStringEnum`.ONE.equals(jsenum.`Main$NativeStringEnum`.THREE)
+   jsenum.`Main$NativeStringEnum`.ONE == jsenum.`Main$NativeStringEnum`.THREE
    jsenum.`Main$ComparableJsEnum`.ONE.compareTo(jsenum.`Main$ComparableJsEnum`.ZERO)
-   jsenum.`Main$ComparableJsEnum`.ONE.equals(jsenum.`Main$ComparableJsEnum`.ZERO)
+   jsenum.`Main$ComparableJsEnum`.ONE == jsenum.`Main$ComparableJsEnum`.ZERO
    val supplier: java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?>? = {
     return jsenum.`Main$ComparableJsEnum`.ONE
    }
@@ -57,7 +57,7 @@ open class Main {
    templatedField!!.value = jsenum.`Main$ComparableJsEnum`.ONE
    java.util.Arrays.asList(arrayOf<Any?>(jsenum.`Main$ComparableJsEnum`.ONE))
    templatedField!!.getValue()!!.ordinal()
-   val b: Boolean = jsenum.`Main$ComparableJsEnum`.ONE == jsenum.Main.boxingPassthrough(jsenum.`Main$ComparableJsEnum`.ONE)
+   val b: Boolean = jsenum.`Main$ComparableJsEnum`.ONE === jsenum.Main.boxingPassthrough(jsenum.`Main$ComparableJsEnum`.ONE)
   }
 
   @JvmStatic

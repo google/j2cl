@@ -44,4 +44,8 @@ public class ObjectCalls {
     this.toString();
     this.getClass();
   }
+
+  public boolean testNotEquals() {
+    return !equals(new Object());
+  }
 }
