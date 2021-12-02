@@ -4,7 +4,7 @@ load(":j2cl_common.bzl", "J2CL_TOOLCHAIN_ATTRS", "J2clInfo", "j2cl_common")
 load(":j2cl_js_common.bzl", "J2CL_JS_ATTRS", "JS_PROVIDER_NAME", "j2cl_js_provider")
 
 def _impl_j2cl_library(ctx):
-    extra_javacopts = []
+    extra_javacopts = ["-Adagger.fastInit=enabled"]
     if ctx.attr.optimize_autovalue:
         extra_javacopts.append("-Acom.google.auto.value.OmitIdentifiers")
 
