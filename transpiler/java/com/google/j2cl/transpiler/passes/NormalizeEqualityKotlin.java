@@ -108,15 +108,4 @@ public class NormalizeEqualityKotlin extends NormalizationPass {
           }
         });
   }
-
-  private static BinaryOperator rewriteToSameOperator(BinaryOperator binaryOperator) {
-    switch (binaryOperator) {
-      case EQUALS:
-        return BinaryOperator.SAME;
-      case NOT_EQUALS:
-        return BinaryOperator.NOT_SAME;
-      default:
-        return null;
-    }
-  }
 }
