@@ -17,6 +17,7 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.collect.ImmutableList;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
@@ -53,10 +54,17 @@ public class ForEachStatement extends Statement {
 
   @Override
   public ForEachStatement clone() {
+    Variable loopVariable = getLoopVariable();
+    Variable clonedLoopVariable = loopVariable.clone();
+    Statement clonedBody =
+        AstUtils.replaceDeclarations(
+            ImmutableList.of(loopVariable),
+            ImmutableList.of(clonedLoopVariable),
+            getBody().clone());
     return ForEachStatement.newBuilder()
-        .setLoopVariable(loopVariable)
+        .setLoopVariable(clonedLoopVariable)
         .setIterableExpression(iterableExpression.clone())
-        .setBody(body.clone())
+        .setBody(clonedBody)
         .setSourcePosition(getSourcePosition())
         .build();
   }
