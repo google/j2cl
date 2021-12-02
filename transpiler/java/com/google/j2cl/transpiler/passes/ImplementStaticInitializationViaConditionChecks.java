@@ -66,7 +66,7 @@ public class ImplementStaticInitializationViaConditionChecks
               return fieldAccess;
             }
 
-            if (triggersClinit(target)) {
+            if (triggersClinit(target, type)) {
               // TODO(b/181086258): Move the condition check to the field access to avoid clinit
               // function calls after the class is initialized (also potentially do the same
               // for method calls).

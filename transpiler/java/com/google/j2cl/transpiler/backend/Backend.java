@@ -111,6 +111,7 @@ import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
+import com.google.j2cl.transpiler.passes.OptimizeEnums;
 import com.google.j2cl.transpiler.passes.PropagateConstants;
 import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
@@ -168,6 +169,7 @@ public enum Backend {
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
           BridgeMethodsCreator::new,
+          OptimizeEnums::new,
           EnumMethodsCreator::new,
           DevirtualizeBoxedTypesAndJsFunctionImplementations::new,
           NormalizeTryWithResources::new,

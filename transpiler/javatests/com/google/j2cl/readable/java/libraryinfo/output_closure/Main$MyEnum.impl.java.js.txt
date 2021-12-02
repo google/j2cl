@@ -1,12 +1,72 @@
 goog.module('libraryinfo.Main.MyEnum$impl');
 
-/** @enum {number} */
-const MyEnum = {
- A : 0,
- B : 1,
- C : 2,
+const Enum = goog.require('java.lang.Enum$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+let $Arrays = goog.forwardDeclare('vmbootstrap.Arrays$impl');
+let $Enums = goog.forwardDeclare('vmbootstrap.Enums$impl');
+
+/**
+ * @extends {Enum<MyEnum>}
+ */
+class MyEnum extends Enum {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!MyEnum} */
+ static $create__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  let $instance = new MyEnum();
+  $instance.$ctor__libraryinfo_Main_MyEnum__java_lang_String__int($name, $ordinal);
+  return $instance;
+ }
  
-};
+ $ctor__libraryinfo_Main_MyEnum__java_lang_String__int(/** ?string */ $name, /** number */ $ordinal) {
+  this.f_name__java_lang_Enum_ = $name;
+  this.f_ordinal__java_lang_Enum_ = $ordinal;
+ }
+ /** @return {!MyEnum} */
+ static m_valueOf__java_lang_String(/** string */ name) {
+  MyEnum.$clinit();
+  if ($Equality.$same(MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_, null)) {
+   MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_ = /**@type {Map<?string, !MyEnum>}*/ ($Enums.createMapFromValues(MyEnum.m_values__()));
+  }
+  return /**@type {MyEnum}*/ ($Enums.getValueFromNameAndMap(name, MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_));
+ }
+ /** @return {!Array<!MyEnum>} */
+ static m_values__() {
+  MyEnum.$clinit();
+  return /**@type {!Array<MyEnum>}*/ ($Arrays.$init([MyEnum.f_FOO__libraryinfo_Main_MyEnum, MyEnum.f_BAR__libraryinfo_Main_MyEnum], MyEnum));
+ }
+ 
+ static $clinit() {
+  MyEnum.$clinit = () =>{};
+  MyEnum.$loadModules();
+  Enum.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof MyEnum;
+ }
+ 
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+  $Arrays = goog.module.get('vmbootstrap.Arrays$impl');
+  $Enums = goog.module.get('vmbootstrap.Enums$impl');
+ }
+}
+/**@const {number}*/
+MyEnum.$ordinal_FOO__libraryinfo_Main_MyEnum = 0;
+/**@const {number}*/
+MyEnum.$ordinal_BAR__libraryinfo_Main_MyEnum = 1;
+/**@const {!MyEnum}*/
+MyEnum.f_FOO__libraryinfo_Main_MyEnum = /**@pureOrBreakMyCode*/ MyEnum.$create__java_lang_String__int($Util.$makeEnumName('FOO'), MyEnum.$ordinal_FOO__libraryinfo_Main_MyEnum);
+/**@const {!MyEnum}*/
+MyEnum.f_BAR__libraryinfo_Main_MyEnum = /**@pureOrBreakMyCode*/ MyEnum.$create__java_lang_String__int($Util.$makeEnumName('BAR'), MyEnum.$ordinal_BAR__libraryinfo_Main_MyEnum);
+/**@type {Map<?string, !MyEnum>}*/
+MyEnum.f_namesToValuesMap__libraryinfo_Main_MyEnum_;
+$Util.$setClassMetadataForEnum(MyEnum, 'libraryinfo.Main$MyEnum');
 
 exports = MyEnum;
 

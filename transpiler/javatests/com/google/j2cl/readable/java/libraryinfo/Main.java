@@ -56,10 +56,15 @@ public class Main {
   }
 
   @JsEnum
-  enum MyEnum {
+  enum MyJsEnum {
     A,
     B,
     C
+  }
+
+  enum MyEnum {
+    FOO,
+    BAR;
   }
 
   @JsType
