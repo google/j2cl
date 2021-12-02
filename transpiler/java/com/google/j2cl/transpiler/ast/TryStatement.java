@@ -98,8 +98,9 @@ public class TryStatement extends Statement {
     public static Builder from(TryStatement tryStatement) {
       return newBuilder()
           .setResourceDeclarations(tryStatement.getResourceDeclarations())
-          .setCatchClauses(tryStatement.getCatchClauses())
           .setBody(tryStatement.getBody())
+          .setCatchClauses(tryStatement.getCatchClauses())
+          .setFinallyBlock(tryStatement.getFinallyBlock())
           .setSourcePosition(tryStatement.getSourcePosition());
     }
 
