@@ -606,8 +606,9 @@ public class AstUtils {
             new AbstractRewriter() {
               @Override
               public NameDeclaration rewriteNameDeclaration(NameDeclaration nameDeclaration) {
-                Label toLabel = (Label) toDeclarationByFromDeclaration.get(nameDeclaration);
-                return toLabel == null ? nameDeclaration : toLabel;
+                NameDeclaration toNameDeclaration =
+                    toDeclarationByFromDeclaration.get(nameDeclaration);
+                return toNameDeclaration == null ? nameDeclaration : toNameDeclaration;
               }
 
               @Override
