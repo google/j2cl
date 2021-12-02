@@ -174,7 +174,6 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
     Statement returnStatement =
         ReturnStatement.newBuilder()
             .setExpression(newInstance.createReference())
-            .setTypeDescriptor(enclosingType)
             .setSourcePosition(constructorSourcePosition)
             .build();
     statements.add(returnStatement);

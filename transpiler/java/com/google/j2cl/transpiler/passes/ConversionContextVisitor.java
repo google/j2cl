@@ -49,6 +49,7 @@ import com.google.j2cl.transpiler.ast.LoopStatement;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
 import com.google.j2cl.transpiler.ast.MemberReference;
 import com.google.j2cl.transpiler.ast.MethodDescriptor.ParameterDescriptor;
+import com.google.j2cl.transpiler.ast.MethodLike;
 import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.NewArray;
 import com.google.j2cl.transpiler.ast.PostfixExpression;
@@ -531,9 +532,13 @@ public final class ConversionContextVisitor extends AbstractRewriter {
     // assignment context
     return ReturnStatement.newBuilder()
         .setExpression(
-            rewriteTypeConversionContextWithoutDeclaration(
-                returnStatement.getTypeDescriptor(), returnStatement.getExpression()))
-        .setTypeDescriptor(returnStatement.getTypeDescriptor())
+            contextRewriter.rewriteTypeConversionContext(
+                getEnclosingMethodLike().getDescriptor().getReturnTypeDescriptor(),
+                getEnclosingMethodLike()
+                    .getDescriptor()
+                    .getDeclarationDescriptor()
+                    .getReturnTypeDescriptor(),
+                returnStatement.getExpression()))
         .setSourcePosition(returnStatement.getSourcePosition())
         .build();
   }
@@ -604,6 +609,9 @@ public final class ConversionContextVisitor extends AbstractRewriter {
         .build();
   }
 
+  private MethodLike getEnclosingMethodLike() {
+    return (MethodLike) getParent(MethodLike.class::isInstance);
+  }
 
   private Expression rewriteTypeConversionContextWithoutDeclaration(
       TypeDescriptor toTypeDescriptor, Expression expression) {

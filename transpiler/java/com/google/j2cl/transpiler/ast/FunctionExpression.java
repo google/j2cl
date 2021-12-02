@@ -52,7 +52,14 @@ public class FunctionExpression extends Expression implements MethodLike {
 
   @Override
   public MethodDescriptor getDescriptor() {
-    return typeDescriptor.getFunctionalInterface().getJsFunctionMethodDescriptor();
+    // TODO(b/208830469): When a function expression is a JsFunction we use the
+    // JsFunctionMethodDescriptor that might differ slightly from the single abstract method
+    // from the interface. When there is a difference it is because the interface method has
+    // type parameters, which are not expressible in Closure, and are removed from the
+    // JsFunction method descriptor.
+    return typeDescriptor.isJsFunctionInterface()
+        ? typeDescriptor.getFunctionalInterface().getJsFunctionMethodDescriptor()
+        : typeDescriptor.getFunctionalInterface().getSingleAbstractMethodDescriptor();
   }
 
   @Override

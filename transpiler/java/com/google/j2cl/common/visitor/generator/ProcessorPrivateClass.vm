@@ -3,6 +3,7 @@ package ${packageName};
 import com.google.j2cl.common.visitor.Processor;
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.function.Predicate;
 
 abstract class ProcessorPrivate implements Processor {
 
@@ -34,6 +35,10 @@ abstract class ProcessorPrivate implements Processor {
 
   public Object getParent() {
     return stackOfParent.peek();
+  }
+
+  public Object getParent(Predicate<Object> predicate) {
+    return stackOfParent.stream().filter(predicate).findFirst().orElse(null);
   }
 
   final void pushParent(Object p) {

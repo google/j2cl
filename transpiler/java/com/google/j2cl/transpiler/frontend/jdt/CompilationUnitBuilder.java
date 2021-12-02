@@ -392,7 +392,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       Block body =
           methodDeclaration.getBody() == null
               ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
-              : processEnclosedBy(methodDescriptor, () -> convert(methodDeclaration.getBody()));
+              : convert(methodDeclaration.getBody());
 
       return newMethodBuilder(methodDescriptor)
           .setBodySourcePosition(body.getSourcePosition())
@@ -880,15 +880,15 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
                   .map(this::convert)
                   .collect(toImmutableList()))
           .setStatements(
-              processEnclosedBy(
-                  functionalMethodDescriptor,
-                  () -> convertLambdaBody(expression.getBody()).getStatements()))
+              convertLambdaBody(
+                      expression.getBody(), functionalMethodDescriptor.getReturnTypeDescriptor())
+                  .getStatements())
           .setSourcePosition(getSourcePosition(expression))
           .build();
     }
 
     // Lambda expression bodies can be either an Expression or a Statement
-    private Block convertLambdaBody(ASTNode lambdaBody) {
+    private Block convertLambdaBody(ASTNode lambdaBody, TypeDescriptor returnTypeDescriptor) {
       Block body;
       if (lambdaBody.getNodeType() == ASTNode.BLOCK) {
         body = convert((org.eclipse.jdt.core.dom.Block) lambdaBody);
@@ -897,9 +897,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         Expression lambdaMethodBody = convert((org.eclipse.jdt.core.dom.Expression) lambdaBody);
         Statement statement =
             AstUtils.createReturnOrExpressionStatement(
-                getSourcePosition(lambdaBody),
-                lambdaMethodBody,
-                getEnclosingFunctional().getReturnTypeDescriptor());
+                getSourcePosition(lambdaBody), lambdaMethodBody, returnTypeDescriptor);
         body =
             Block.newBuilder()
                 .setSourcePosition(getSourcePosition(lambdaBody))
@@ -1287,7 +1285,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
       return ReturnStatement.newBuilder()
           .setExpression(convertOrNull(statement.getExpression()))
-          .setTypeDescriptor(getEnclosingFunctional().getReturnTypeDescriptor())
           .setSourcePosition(getSourcePosition(statement))
           .build();
     }

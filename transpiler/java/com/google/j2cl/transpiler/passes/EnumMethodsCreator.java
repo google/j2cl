@@ -121,7 +121,6 @@ public class EnumMethodsCreator extends NormalizationPass {
                     typeDescriptor,
                     nameParameter.createReference(),
                     FieldAccess.Builder.from(namesToValuesMapFieldDescriptor).build()))
-            .setTypeDescriptor(typeDescriptor)
             .setSourcePosition(sourcePosition)
             .build();
 
@@ -205,7 +204,6 @@ public class EnumMethodsCreator extends NormalizationPass {
             .addStatements(
                 ReturnStatement.newBuilder()
                     .setExpression(new ArrayLiteral(arrayTypeDescriptor, values))
-                    .setTypeDescriptor(arrayTypeDescriptor)
                     .setSourcePosition(sourcePosition)
                     .build())
             .setSourcePosition(sourcePosition)

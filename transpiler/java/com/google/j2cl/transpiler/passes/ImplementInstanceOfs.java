@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.RuntimeMethods;
 import com.google.j2cl.transpiler.ast.Type;
@@ -135,7 +134,6 @@ public class ImplementInstanceOfs extends NormalizationPass {
             .addStatements(
                 ReturnStatement.newBuilder()
                     .setExpression(synthesizeIsInstanceExpression(instanceParameter, type))
-                    .setTypeDescriptor(PrimitiveTypes.BOOLEAN)
                     .setSourcePosition(SourcePosition.NONE)
                     .build())
             .setSourcePosition(SourcePosition.NONE)

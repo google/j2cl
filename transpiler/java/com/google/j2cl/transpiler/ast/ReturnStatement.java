@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.common.visitor.Processor;
@@ -28,20 +27,10 @@ import javax.annotation.Nullable;
 @Visitable
 public class ReturnStatement extends Statement {
   @Visitable @Nullable Expression expression;
-  private final TypeDescriptor returnTypeDescriptor;
 
-  private ReturnStatement(
-      SourcePosition sourcePosition, Expression expression, TypeDescriptor returnTypeDescriptor) {
+  private ReturnStatement(SourcePosition sourcePosition, Expression expression) {
     super(sourcePosition);
     this.expression = expression;
-    this.returnTypeDescriptor = checkNotNull(returnTypeDescriptor);
-  }
-
-  /**
-   * Returns the type descriptor of the type expected to be returned by this statement.
-   */
-  public TypeDescriptor getTypeDescriptor() {
-    return returnTypeDescriptor;
   }
 
   public Expression getExpression() {
@@ -52,7 +41,6 @@ public class ReturnStatement extends Statement {
   public ReturnStatement clone() {
     return ReturnStatement.newBuilder()
         .setExpression(AstUtils.clone(expression))
-        .setTypeDescriptor(returnTypeDescriptor)
         .setSourcePosition(getSourcePosition())
         .build();
   }
@@ -69,12 +57,10 @@ public class ReturnStatement extends Statement {
   /** Builder for ReturnStatement. */
   public static class Builder {
     private Expression expression;
-    private TypeDescriptor typeDescriptor;
     private SourcePosition sourcePosition;
 
     public static Builder from(ReturnStatement returnStatement) {
       return newBuilder()
-          .setTypeDescriptor(returnStatement.getTypeDescriptor())
           .setExpression(returnStatement.getExpression())
           .setSourcePosition(returnStatement.getSourcePosition());
     }
@@ -84,18 +70,13 @@ public class ReturnStatement extends Statement {
       return this;
     }
 
-    public Builder setTypeDescriptor(TypeDescriptor typeDescriptor) {
-      this.typeDescriptor = typeDescriptor;
-      return this;
-    }
-
     public Builder setSourcePosition(SourcePosition sourcePosition) {
       this.sourcePosition = sourcePosition;
       return this;
     }
 
     public ReturnStatement build() {
-      return new ReturnStatement(sourcePosition, expression, typeDescriptor);
+      return new ReturnStatement(sourcePosition, expression);
     }
   }
 }

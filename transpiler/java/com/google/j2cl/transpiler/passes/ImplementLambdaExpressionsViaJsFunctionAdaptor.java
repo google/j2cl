@@ -195,7 +195,6 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
                             .setTarget(adaptorConstructor)
                             .setArguments(jsFunctionParameter.createReference())
                             .build())
-                    .setTypeDescriptor(adaptorConstructor.getReturnTypeDescriptor())
                     .setSourcePosition(functionalInterfaceType.getSourcePosition())
                     .build())
             .setSourcePosition(functionalInterfaceType.getSourcePosition())

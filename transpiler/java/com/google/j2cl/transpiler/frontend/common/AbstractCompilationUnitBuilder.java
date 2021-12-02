@@ -50,10 +50,8 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,9 +66,6 @@ public abstract class AbstractCompilationUnitBuilder {
 
   /** Type stack to keep track of the lexically enclosing types as they are being created. */
   private final List<Type> typeStack = new ArrayList<>();
-
-  /** MethodDescriptor stack to keep track of lexical enclosing method scopes. */
-  private final Deque<MethodDescriptor> enclosingFunctionalElementStack = new ArrayDeque<>();
 
   private String currentSourceFile;
   private CompilationUnit currentCompilationUnit;
@@ -109,22 +104,9 @@ public abstract class AbstractCompilationUnitBuilder {
     return converted;
   }
 
-  /** Invoke {@code supplier} with {@code methodDescriptor} in the functional stack. */
-  protected <T> T processEnclosedBy(MethodDescriptor methodDescriptor, Supplier<T> supplier) {
-    enclosingFunctionalElementStack.push(methodDescriptor);
-    T converted = supplier.get();
-    enclosingFunctionalElementStack.pop();
-    return converted;
-  }
-
   /** Returns the current type. */
   protected Type getCurrentType() {
     return Iterables.getLast(typeStack, null);
-  }
-
-  /** Returns the current enclosing functional element. */
-  protected MethodDescriptor getEnclosingFunctional() {
-    return enclosingFunctionalElementStack.peek();
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -268,7 +250,6 @@ public abstract class AbstractCompilationUnitBuilder {
         .setStatements(
             ReturnStatement.newBuilder()
                 .setExpression(instantiation)
-                .setTypeDescriptor(functionalMethodDescriptor.getReturnTypeDescriptor())
                 .setSourcePosition(sourcePosition)
                 .build())
         .setSourcePosition(sourcePosition)
@@ -343,7 +324,6 @@ public abstract class AbstractCompilationUnitBuilder {
                         .setTypeDescriptor(arrayType)
                         .setDimensionExpressions(dimensionExpressions)
                         .build())
-                .setTypeDescriptor(targetFunctionalMethodDescriptor.getReturnTypeDescriptor())
                 .setSourcePosition(sourcePosition)
                 .build())
         .setSourcePosition(sourcePosition)

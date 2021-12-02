@@ -47,7 +47,6 @@ import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NumberLiteral;
-import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
 import com.google.j2cl.transpiler.ast.ThisReference;
@@ -264,18 +263,6 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
               return Invocation.Builder.from(expr).setTarget(newDescriptor).build();
             }
             return expr;
-          }
-
-          @Override
-          public ReturnStatement rewriteReturnStatement(ReturnStatement statement) {
-            TypeDescriptor descriptor = statement.getTypeDescriptor();
-            TypeDescriptor newDescriptor = replaceTypeDescriptors(descriptor, fn);
-            if (descriptor != newDescriptor) {
-              return ReturnStatement.Builder.from(statement)
-                  .setTypeDescriptor(newDescriptor)
-                  .build();
-            }
-            return statement;
           }
 
           @Override

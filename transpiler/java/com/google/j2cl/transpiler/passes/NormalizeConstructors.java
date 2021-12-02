@@ -377,7 +377,6 @@ public class NormalizeConstructors extends NormalizationPass {
     factoryStatements.addAll(constructor.getBody().getStatements());
     factoryStatements.add(
         ReturnStatement.newBuilder()
-            .setTypeDescriptor(type.getTypeDescriptor())
             .setExpression(thisArg.createReference())
             .setSourcePosition(constructor.getSourcePosition())
             .build());
@@ -488,7 +487,6 @@ public class NormalizeConstructors extends NormalizationPass {
                 enclosingType.isJsFunctionImplementation()
                     ? AstUtils.createLambdaInstance(enclosingType, newInstance.createReference())
                     : newInstance.createReference())
-            .setTypeDescriptor(enclosingType)
             .setSourcePosition(constructorSourcePosition)
             .build();
     statements.add(returnStatement);

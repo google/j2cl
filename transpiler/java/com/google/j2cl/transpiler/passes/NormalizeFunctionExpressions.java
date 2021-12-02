@@ -21,7 +21,6 @@ import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
-import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeVariable;
@@ -46,7 +45,7 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
           @Override
           public FunctionExpression rewriteFunctionExpression(
               FunctionExpression functionExpression) {
-            return rewriteReturns(rewriteParameters(functionExpression));
+            return rewriteParameters(functionExpression);
           }
         });
   }
@@ -104,37 +103,5 @@ public class NormalizeFunctionExpressions extends NormalizationPass {
                 .addAll(functionExpression.getBody().getStatements())
                 .build())
         .build();
-  }
-
-  /**
-   * Rewrites return statements in {@code functionExpression} to be of the declared return type
-   * instead of the type inferred.
-   */
-  private FunctionExpression rewriteReturns(FunctionExpression functionExpression) {
-    TypeDescriptor declaredReturnType =
-        functionExpression.getDescriptor().getDeclarationDescriptor().getReturnTypeDescriptor();
-
-    functionExpression
-        .getBody()
-        .accept(
-            new AbstractRewriter() {
-              @Override
-              public boolean shouldProcessFunctionExpression(
-                  FunctionExpression functionalExpression) {
-                // Do not recurse into enclosed function expressions.
-                return false;
-              }
-
-              @Override
-              public ReturnStatement rewriteReturnStatement(ReturnStatement returnStatement) {
-                if (!declaredReturnType.isAssignableTo(returnStatement.getTypeDescriptor())) {
-                  return ReturnStatement.Builder.from(returnStatement)
-                      .setTypeDescriptor(declaredReturnType.toRawTypeDescriptor())
-                      .build();
-                }
-                return returnStatement;
-              }
-            });
-    return functionExpression;
   }
 }

@@ -708,7 +708,6 @@ public class AstUtils {
 
     return ReturnStatement.newBuilder()
         .setExpression(expression)
-        .setTypeDescriptor(methodReturnTypeDescriptor)
         .setSourcePosition(sourcePosition)
         .build();
   }

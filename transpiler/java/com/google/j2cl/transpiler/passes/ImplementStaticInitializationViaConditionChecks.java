@@ -31,7 +31,6 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,7 +96,6 @@ public class ImplementStaticInitializationViaConditionChecks
             .setConditionExpression(FieldAccess.Builder.from(isInitializedFieldDescriptor).build())
             .setThenStatement(
                 ReturnStatement.newBuilder()
-                    .setTypeDescriptor(TypeDescriptors.get().javaLangVoid)
                     .setSourcePosition(sourcePosition)
                     .build())
             .setSourcePosition(sourcePosition)

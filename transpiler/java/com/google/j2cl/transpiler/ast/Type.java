@@ -369,7 +369,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
                     .build(),
                 ReturnStatement.newBuilder()
                     .setExpression(FieldAccess.Builder.from(holderFieldDescriptor).build())
-                    .setTypeDescriptor(initializationExpression.getTypeDescriptor())
                     .setSourcePosition(SourcePosition.NONE)
                     .build())
             .setSourcePosition(SourcePosition.NONE)

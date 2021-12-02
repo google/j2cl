@@ -295,32 +295,24 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Method convertMethodDeclaration(JCMethodDecl methodDeclaration) {
-    MethodDescriptor methodDescriptor =
-        environment.createDeclarationMethodDescriptor(methodDeclaration.sym);
+    // If a method has no body, initialize the body with an empty list of statements.
+    List<Variable> parameters = new ArrayList<>();
+    for (JCVariableDecl parameter : methodDeclaration.getParameters()) {
+      parameters.add(createVariable(parameter, true));
+    }
 
-    return processEnclosedBy(
-        methodDescriptor,
-        () -> {
-          List<Variable> parameters = new ArrayList<>();
-          for (JCVariableDecl parameter : methodDeclaration.getParameters()) {
-            parameters.add(createVariable(parameter, true));
-          }
+    // If a method has no body, initialize the body with an empty list of statements.
+    Block body =
+        methodDeclaration.getBody() == null
+            ? Block.newBuilder().setSourcePosition(getSourcePosition(methodDeclaration)).build()
+            : convertBlock(methodDeclaration.getBody());
 
-          // If a method has no body, initialize the body with an empty list of statements.
-          Block body =
-              methodDeclaration.getBody() == null
-                  ? Block.newBuilder()
-                      .setSourcePosition(getSourcePosition(methodDeclaration))
-                      .build()
-                  : convertBlock(methodDeclaration.getBody());
-
-          return newMethodBuilder(methodDeclaration.sym)
-              .setBodySourcePosition(body.getSourcePosition())
-              .setSourcePosition(getNamePosition(methodDeclaration))
-              .setParameters(parameters)
-              .addStatements(body.getStatements())
-              .build();
-        });
+    return newMethodBuilder(methodDeclaration.sym)
+        .setBodySourcePosition(body.getSourcePosition())
+        .setSourcePosition(getNamePosition(methodDeclaration))
+        .setParameters(parameters)
+        .addStatements(body.getStatements())
+        .build();
   }
 
   private Block convertBlock(JCBlock block) {
@@ -573,7 +565,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     // Grab the type of the return statement from the method declaration, not from the expression.
     return ReturnStatement.newBuilder()
         .setExpression(convertExpressionOrNull(statement.getExpression()))
-        .setTypeDescriptor(getEnclosingFunctional().getReturnTypeDescriptor())
         .setSourcePosition(getSourcePosition(statement))
         .build();
   }
@@ -827,22 +818,18 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodDescriptor functionalMethodDescriptor =
         environment.getJsFunctionMethodDescriptor(expression.type);
 
-    return processEnclosedBy(
-        functionalMethodDescriptor,
-        () ->
-            FunctionExpression.newBuilder()
-                .setTypeDescriptor(getTargetType(expression))
-                .setParameters(
-                    expression.getParameters().stream()
-                        .map(variable -> createVariable((JCVariableDecl) variable, true))
-                        .collect(toImmutableList()))
-                .setStatements(
-                    convertLambdaBody(
-                            expression.getBody(),
-                            functionalMethodDescriptor.getReturnTypeDescriptor())
-                        .getStatements())
-                .setSourcePosition(getSourcePosition(expression))
-                .build());
+    return FunctionExpression.newBuilder()
+        .setTypeDescriptor(getTargetType(expression))
+        .setParameters(
+            expression.getParameters().stream()
+                .map(variable -> createVariable((JCVariableDecl) variable, true))
+                .collect(toImmutableList()))
+        .setStatements(
+            convertLambdaBody(
+                    expression.getBody(), functionalMethodDescriptor.getReturnTypeDescriptor())
+                .getStatements())
+        .setSourcePosition(getSourcePosition(expression))
+        .build();
   }
 
   private TypeDescriptor getTargetType(JCFunctionalExpression expression) {

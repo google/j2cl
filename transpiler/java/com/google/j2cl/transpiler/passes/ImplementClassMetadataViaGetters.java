@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.passes;
 import static com.google.common.base.Predicates.not;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
@@ -85,7 +84,6 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
                           ReturnStatement.newBuilder()
                               .setExpression(
                                   getTypeLiteral(t.getSourcePosition(), t.getTypeDescriptor()))
-                              .setTypeDescriptor(specializeJavaLangClass(t.getTypeDescriptor()))
                               .setSourcePosition(SourcePosition.NONE)
                               .build())
                       .setSourcePosition(SourcePosition.NONE)
@@ -116,18 +114,6 @@ public class ImplementClassMetadataViaGetters extends LibraryNormalizationPass {
     }
 
     return new TypeLiteral(sourcePosition, typeDescriptor);
-  }
-
-  private static DeclaredTypeDescriptor specializeJavaLangClass(TypeDescriptor typeArgument) {
-    if (typeArgument.isPrimitive()) {
-      typeArgument = typeArgument.toBoxedType();
-    }
-    DeclaredTypeDescriptor javaLangClass = TypeDescriptors.get().javaLangClass;
-    return (DeclaredTypeDescriptor)
-        javaLangClass.specializeTypeVariables(
-            ImmutableMap.of(
-                javaLangClass.getTypeDeclaration().getTypeParameterDescriptors().get(0),
-                typeArgument));
   }
 
   /** Replaces type literals in the AST for the corresponding call to the synthetic lazy getter. */
