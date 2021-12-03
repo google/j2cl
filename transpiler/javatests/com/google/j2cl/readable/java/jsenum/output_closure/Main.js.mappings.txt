@@ -86,6 +86,11 @@
 [boxingPassthrough] => [m_boxingPassthrough__java_lang_Object]
 [t] => [t] "t"
 [return t;] => [return t;] "jsenum.Main.boxingPassthrough"
+[boxingWithGenerics] => [m_boxingWithGenerics__]
+[{
+    new Foo<>(Optional.of(IntJsEnum.MINUSONE));
+  }] => [Main.$clinit();] "jsenum.Main.boxingWithGenerics"
+[new Foo<>(Optional.of(IntJsEnum.MINUSONE));] => [Foo.$create__java_util_Optional(Optional.m_of__java_lang_Object(/**@type {$Enums_BoxedLightEnum<*>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay))));] "jsenum.Main.boxingWithGenerics"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "jsenum.Main.<clinit>"
 [Main] => [Main.$loadModules();] "jsenum.Main.<clinit>"

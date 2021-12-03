@@ -16,6 +16,7 @@
 package jsenum;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import jsinterop.annotations.JsEnum;
@@ -159,5 +160,13 @@ public class Main {
 
   private static <T> T boxingPassthrough(T t) {
     return t;
+  }
+
+  static void boxingWithGenerics() {
+    new Foo<>(Optional.of(IntJsEnum.MINUSONE));
+  }
+
+  static class Foo<T> {
+    Foo(Optional<IntJsEnum> c) {}
   }
 }

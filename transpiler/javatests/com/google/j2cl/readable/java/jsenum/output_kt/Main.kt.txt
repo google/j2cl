@@ -64,6 +64,11 @@ open class Main {
   internal fun <T> boxingPassthrough(t: T?): T? {
    return t
   }
+
+  @JvmStatic
+  internal fun boxingWithGenerics() {
+   jsenum.`Main$Foo`<Any?>(java.util.Optional.of(jsenum.`Main$IntJsEnum`.MINUSONE))
+  }
  }
 }
 
@@ -159,4 +164,8 @@ open class `Main$TemplatedField`<T> {
  internal open fun getValue(): T? {
   return this.value
  }
+}
+
+open class `Main$Foo`<T> {
+ internal constructor(c: java.util.Optional<jsenum.`Main$IntJsEnum`?>?): super()
 }

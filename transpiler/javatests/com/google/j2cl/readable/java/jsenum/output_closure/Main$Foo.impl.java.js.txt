@@ -1,0 +1,45 @@
+goog.module('jsenum.Main.Foo$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let Optional = goog.forwardDeclare('java.util.Optional$impl');
+let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
+
+/**
+ * @template T
+ */
+class Foo extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!Foo<T>} */
+ static $create__java_util_Optional(/** Optional<*> */ c) {
+  Foo.$clinit();
+  let $instance = new Foo();
+  $instance.$ctor__jsenum_Main_Foo__java_util_Optional(c);
+  return $instance;
+ }
+ 
+ $ctor__jsenum_Main_Foo__java_util_Optional(/** Optional<*> */ c) {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  Foo.$clinit = () =>{};
+  Foo.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Foo;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Foo, 'jsenum.Main$Foo');
+
+exports = Foo;
+
+//# sourceMappingURL=Main$Foo.js.map

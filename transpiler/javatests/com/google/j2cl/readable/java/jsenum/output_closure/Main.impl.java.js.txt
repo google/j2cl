@@ -5,11 +5,13 @@ const $Util = goog.require('nativebootstrap.Util$impl');
 
 let Comparable = goog.forwardDeclare('java.lang.Comparable$impl');
 let Arrays = goog.forwardDeclare('java.util.Arrays$impl');
+let Optional = goog.forwardDeclare('java.util.Optional$impl');
 let Consumer = goog.forwardDeclare('java.util.function.Consumer$impl');
 let Supplier = goog.forwardDeclare('java.util.function.Supplier$impl');
 let InternalPreconditions = goog.forwardDeclare('javaemul.internal.InternalPreconditions$impl');
 let ComparableJsEnum = goog.forwardDeclare('jsenum.Main.ComparableJsEnum$impl');
 let $Overlay = goog.forwardDeclare('jsenum.Main.ComparableJsEnum.$Overlay$impl');
+let Foo = goog.forwardDeclare('jsenum.Main.Foo$impl');
 let IntJsEnum = goog.forwardDeclare('jsenum.Main.IntJsEnum$impl');
 let IntJsEnum_$Overlay = goog.forwardDeclare('jsenum.Main.IntJsEnum.$Overlay$impl');
 let NativeStringEnum = goog.forwardDeclare('jsenum.Main.NonNullableStringJsEnum');
@@ -94,6 +96,11 @@ class Main extends j_l_Object {
   return t;
  }
  
+ static m_boxingWithGenerics__() {
+  Main.$clinit();
+  Foo.$create__java_util_Optional(Optional.m_of__java_lang_Object(/**@type {$Enums_BoxedLightEnum<*>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay))));
+ }
+ 
  static $clinit() {
   Main.$clinit = () =>{};
   Main.$loadModules();
@@ -107,11 +114,13 @@ class Main extends j_l_Object {
  static $loadModules() {
   Comparable = goog.module.get('java.lang.Comparable$impl');
   Arrays = goog.module.get('java.util.Arrays$impl');
+  Optional = goog.module.get('java.util.Optional$impl');
   Consumer = goog.module.get('java.util.function.Consumer$impl');
   Supplier = goog.module.get('java.util.function.Supplier$impl');
   InternalPreconditions = goog.module.get('javaemul.internal.InternalPreconditions$impl');
   ComparableJsEnum = goog.module.get('jsenum.Main.ComparableJsEnum$impl');
   $Overlay = goog.module.get('jsenum.Main.ComparableJsEnum.$Overlay$impl');
+  Foo = goog.module.get('jsenum.Main.Foo$impl');
   IntJsEnum = goog.module.get('jsenum.Main.IntJsEnum$impl');
   IntJsEnum_$Overlay = goog.module.get('jsenum.Main.IntJsEnum.$Overlay$impl');
   NativeStringEnum = goog.module.get('jsenum.Main.NonNullableStringJsEnum');
