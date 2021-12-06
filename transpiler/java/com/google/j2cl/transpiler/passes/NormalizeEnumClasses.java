@@ -35,6 +35,8 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.ast.Visibility;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Make the implicit parameters and super calls in enum constructors explicit. */
 public class NormalizeEnumClasses extends NormalizationPass {
@@ -146,24 +148,21 @@ public class NormalizeEnumClasses extends NormalizationPass {
 
   /** Creates constant static fields to hold the enum ordinal constants. */
   private static void createEnumOrdinalConstants(Type type) {
-    int currentOrdinal = 0;
+    int nextOrdinal = 0;
+    List<Field> ordinalConstantFields = new ArrayList<>();
     for (Field enumField : type.getEnumFields()) {
-      enumField.setEnumOrdinal(currentOrdinal);
+      enumField.setEnumOrdinal(nextOrdinal++);
 
       FieldDescriptor ordinalConstantFieldDescriptor =
           AstUtils.getEnumOrdinalConstantFieldDescriptor(enumField.getDescriptor());
       // Create a constant field to hold the ordinal for the current enum value.
-      type.addMember(
-          // These field need to be defined at the beginning because they can be referenced by enum
-          // constant initializers that are already part of the load time statements.
-          currentOrdinal,
+      ordinalConstantFields.add(
           Field.Builder.from(ordinalConstantFieldDescriptor)
               .setSourcePosition(enumField.getSourcePosition())
               .setInitializer(NumberLiteral.fromInt(enumField.getEnumOrdinal()))
               .build());
-
-      currentOrdinal++;
     }
+    type.addMembers(ordinalConstantFields);
   }
 
   /** Rewrites the initialization of the enum value fields with the right ordinal and name. */

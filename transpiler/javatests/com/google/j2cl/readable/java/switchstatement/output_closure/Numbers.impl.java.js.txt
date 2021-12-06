@@ -37,13 +37,23 @@ class Numbers extends Enum {
  /** @return {!Array<!Numbers>} */
  static m_values__() {
   Numbers.$clinit();
-  return /**@type {!Array<Numbers>}*/ ($Arrays.$init([Numbers.f_ONE__switchstatement_Numbers, Numbers.f_TWO__switchstatement_Numbers], Numbers));
+  return /**@type {!Array<Numbers>}*/ ($Arrays.$init([Numbers.$static_ONE__switchstatement_Numbers, Numbers.$static_TWO__switchstatement_Numbers], Numbers));
+ }
+ /** @return {!Numbers} */
+ static get f_ONE__switchstatement_Numbers() {
+  return (Numbers.$clinit(), Numbers.$static_ONE__switchstatement_Numbers);
+ }
+ /** @return {!Numbers} */
+ static get f_TWO__switchstatement_Numbers() {
+  return (Numbers.$clinit(), Numbers.$static_TWO__switchstatement_Numbers);
  }
  
  static $clinit() {
   Numbers.$clinit = () =>{};
   Numbers.$loadModules();
   Enum.$clinit();
+  Numbers.$static_ONE__switchstatement_Numbers = Numbers.$create__java_lang_String__int($Util.$makeEnumName('ONE'), Numbers.$ordinal_ONE__switchstatement_Numbers);
+  Numbers.$static_TWO__switchstatement_Numbers = Numbers.$create__java_lang_String__int($Util.$makeEnumName('TWO'), Numbers.$ordinal_TWO__switchstatement_Numbers);
  }
  /** @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -56,16 +66,16 @@ class Numbers extends Enum {
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
+/**@private {!Numbers}*/
+Numbers.$static_ONE__switchstatement_Numbers;
+/**@private {!Numbers}*/
+Numbers.$static_TWO__switchstatement_Numbers;
+/**@type {Map<?string, !Numbers>}*/
+Numbers.f_namesToValuesMap__switchstatement_Numbers_;
 /**@const {number}*/
 Numbers.$ordinal_ONE__switchstatement_Numbers = 0;
 /**@const {number}*/
 Numbers.$ordinal_TWO__switchstatement_Numbers = 1;
-/**@const {!Numbers}*/
-Numbers.f_ONE__switchstatement_Numbers = /**@pureOrBreakMyCode*/ Numbers.$create__java_lang_String__int($Util.$makeEnumName('ONE'), Numbers.$ordinal_ONE__switchstatement_Numbers);
-/**@const {!Numbers}*/
-Numbers.f_TWO__switchstatement_Numbers = /**@pureOrBreakMyCode*/ Numbers.$create__java_lang_String__int($Util.$makeEnumName('TWO'), Numbers.$ordinal_TWO__switchstatement_Numbers);
-/**@type {Map<?string, !Numbers>}*/
-Numbers.f_namesToValuesMap__switchstatement_Numbers_;
 $Util.$setClassMetadataForEnum(Numbers, 'switchstatement.Numbers');
 
 exports = Numbers;

@@ -17,7 +17,6 @@ package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.CaseFormat;
@@ -44,7 +43,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private final SourcePosition sourcePosition;
   private boolean isAbstract;
   private DeclaredTypeDescriptor superTypeDescriptor;
-  private boolean isOptimizedEnum;
 
   public Type(
       SourcePosition sourcePosition, Visibility visibility, TypeDeclaration typeDeclaration) {
@@ -101,15 +99,6 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean isEnumOrSubclass() {
     return isEnum() || (getSuperTypeDescriptor() != null && getSuperTypeDescriptor().isEnum());
-  }
-
-  public boolean isOptimizedEnum() {
-    return isOptimizedEnum;
-  }
-
-  public void setOptimizedEnum(boolean optimizedEnum) {
-    checkState(isEnum());
-    isOptimizedEnum = optimizedEnum;
   }
 
   public boolean isInterface() {

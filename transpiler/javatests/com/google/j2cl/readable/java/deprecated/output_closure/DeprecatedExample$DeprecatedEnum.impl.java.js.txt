@@ -38,13 +38,18 @@ class DeprecatedEnum extends Enum {
  /** @return {!Array<!DeprecatedEnum>} */
  static values() {
   DeprecatedEnum.$clinit();
-  return /**@type {!Array<DeprecatedEnum>}*/ ($Arrays.$init([DeprecatedEnum.A_VALUE], DeprecatedEnum));
+  return /**@type {!Array<DeprecatedEnum>}*/ ($Arrays.$init([DeprecatedEnum.$static_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum], DeprecatedEnum));
+ }
+ /** @return {!DeprecatedEnum} @deprecated */
+ static get A_VALUE() {
+  return (DeprecatedEnum.$clinit(), DeprecatedEnum.$static_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum);
  }
  
  static $clinit() {
   DeprecatedEnum.$clinit = () =>{};
   DeprecatedEnum.$loadModules();
   Enum.$clinit();
+  DeprecatedEnum.$static_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum = DeprecatedEnum.$create__java_lang_String__int($Util.$makeEnumName('A_VALUE'), DeprecatedEnum.$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum);
  }
  /** @return {boolean} */
  static $isInstance(/** ? */ instance) {
@@ -57,12 +62,12 @@ class DeprecatedEnum extends Enum {
   $Enums = goog.module.get('vmbootstrap.Enums$impl');
  }
 }
-/**@const {number} @deprecated*/
-DeprecatedEnum.$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum = 0;
-/**@const {!DeprecatedEnum} @deprecated*/
-DeprecatedEnum.A_VALUE = /**@pureOrBreakMyCode*/ DeprecatedEnum.$create__java_lang_String__int($Util.$makeEnumName('A_VALUE'), DeprecatedEnum.$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum);
+/**@private {!DeprecatedEnum} @deprecated*/
+DeprecatedEnum.$static_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum;
 /**@type {Map<?string, !DeprecatedEnum>}*/
 DeprecatedEnum.f_namesToValuesMap__deprecated_DeprecatedExample_DeprecatedEnum_;
+/**@const {number} @deprecated*/
+DeprecatedEnum.$ordinal_A_VALUE__deprecated_DeprecatedExample_DeprecatedEnum = 0;
 $Util.$setClassMetadataForEnum(DeprecatedEnum, 'deprecated.DeprecatedExample$DeprecatedEnum');
 
 exports = DeprecatedEnum;
