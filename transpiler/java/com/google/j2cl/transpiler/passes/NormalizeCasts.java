@@ -239,11 +239,8 @@ public class NormalizeCasts extends NormalizationPass {
       castTypeDescriptor = ((IntersectionTypeDescriptor) castTypeDescriptor).getFirstType();
     }
     if (AstUtils.isNonNativeJsEnum(castTypeDescriptor)) {
-      // Don't emit JsDoc casts when cast to a non native JsEnum. The casts that reach this pass
-      // to JsEnum are casts to boxed JsEnum types which don't have yet a representation in the
-      // transpiler.
-      // TODO(b/118615488): remove once the boxed type is surfaced.
-      return expression;
+      // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
+      castTypeDescriptor = TypeDescriptors.getEnumBoxType(castTypeDescriptor);
     }
     return JsDocCastExpression.newBuilder()
         .setCastType(castTypeDescriptor)

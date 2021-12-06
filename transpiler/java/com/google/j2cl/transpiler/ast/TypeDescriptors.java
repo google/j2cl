@@ -22,6 +22,7 @@ import com.google.common.base.Splitter;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.List;
@@ -74,6 +75,8 @@ public class TypeDescriptors {
   public DeclaredTypeDescriptor javaemulInternalPreconditions;
   public DeclaredTypeDescriptor javaemulInternalPrimitives;
   public DeclaredTypeDescriptor javaemulInternalEnums;
+  public DeclaredTypeDescriptor javaemulInternalBoxedLightEnum;
+  public DeclaredTypeDescriptor javaemulInternalBoxedComparableLightEnum;
   public DeclaredTypeDescriptor javaemulInternalConstructor;
   public DeclaredTypeDescriptor javaemulInternalPlatform;
   public DeclaredTypeDescriptor javaemulInternalExceptions;
@@ -288,6 +291,25 @@ public class TypeDescriptors {
 
   public static boolean isNonBoxedReferenceType(TypeDescriptor typeDescriptor) {
     return !typeDescriptor.isPrimitive() && !isBoxedType(typeDescriptor);
+  }
+
+  public static boolean isBoxedEnum(TypeDescriptor typeDescriptor) {
+    return typeDescriptor.isSameBaseType(TypeDescriptors.get().javaemulInternalBoxedLightEnum)
+        || typeDescriptor.isSameBaseType(
+            TypeDescriptors.get().javaemulInternalBoxedComparableLightEnum);
+  }
+
+  public static TypeDescriptor getEnumBoxType(TypeDescriptor typeDescriptor) {
+    checkState(AstUtils.isNonNativeJsEnum(typeDescriptor));
+    TypeDescriptor boxType =
+        typeDescriptor.getJsEnumInfo().supportsComparable()
+            ? TypeDescriptors.get().javaemulInternalBoxedComparableLightEnum
+            : TypeDescriptors.get().javaemulInternalBoxedLightEnum;
+    TypeDescriptor specializedType =
+        boxType.specializeTypeVariables(
+            ImmutableMap.of(
+                Iterables.getOnlyElement(boxType.getAllTypeVariables()), typeDescriptor));
+    return typeDescriptor.isNullable() ? specializedType : specializedType.toNonNullable();
   }
 
   static Function<TypeVariable, ? extends TypeDescriptor> mappingFunctionFromMap(
@@ -559,6 +581,12 @@ public class TypeDescriptors {
           break;
         case "javaemul.internal.Enums":
           typeDescriptors.javaemulInternalEnums = referenceType;
+          break;
+        case "javaemul.internal.Enums.BoxedLightEnum":
+          typeDescriptors.javaemulInternalBoxedLightEnum = referenceType;
+          break;
+        case "javaemul.internal.Enums.BoxedComparableLightEnum":
+          typeDescriptors.javaemulInternalBoxedComparableLightEnum = referenceType;
           break;
         case "javaemul.internal.Constructor":
           typeDescriptors.javaemulInternalConstructor = referenceType;

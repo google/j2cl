@@ -60,6 +60,8 @@ public class FrontendConstants {
           "javaemul.internal.InternalPreconditions",
           "javaemul.internal.Primitives",
           "javaemul.internal.Enums",
+          "javaemul.internal.Enums$BoxedLightEnum",
+          "javaemul.internal.Enums$BoxedComparableLightEnum",
           "javaemul.internal.Exceptions",
           "javaemul.internal.Constructor",
           "javaemul.internal.Platform",

@@ -291,6 +291,10 @@ class ImportGatherer extends AbstractVisitor {
       collectTypeDescriptorsIntroducedByJsFunction(declaredTypeDescriptor);
     }
 
+    if (AstUtils.isNonNativeJsEnum(typeDescriptor)) {
+      collectForJsDoc(TypeDescriptors.getEnumBoxType(typeDescriptor.toRawTypeDescriptor()));
+    }
+
     if (typeDescriptor.isJsFunctionInterface()) {
       // In contrast to other native classes, JsFunction classes do not exist at all at runtime.
       return;

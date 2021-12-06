@@ -111,34 +111,22 @@ class ClosureTypesGenerator {
       return getClosureTypeForJsFunction(declaredTypeDescriptor);
     }
 
-    return withNullability(
-        getClosureTypeForDeclaration(
-            declaredTypeDescriptor.getTypeDeclaration(),
-            getClosureTypes(
+    // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
+    List<ClosureType> typeArguments =
+        TypeDescriptors.isBoxedEnum(typeDescriptor)
+            // Avoid replacing typeargs in BoxedEnum<SomeJsEnum> to avoid infinite recursion.
+            ? getClosureTypes(declaredTypeDescriptor.getTypeArgumentDescriptors())
+            : getClosureTypes(
                 declaredTypeDescriptor.getTypeArgumentDescriptors().stream()
-                    // TODO(b/118615488): Surface enum boxed types so that this hack is not needed.
-                    // Types parameterized by boxeable JsEnums are not rewritten.
-                    // At this stage if List<MyJsEnum> was emitted directly as such in closure,
-                    // it would result in a type error since the actual type is
-                    // List<BoxedLightEnum<MyJsEnum>>.
-                    // So as a temporary hack it will be emitted as List<*>. This does not affect
-                    // the validity of operations like list.get() since those are instrumented with
-                    // the unboxing code. E.g. the code:
-                    //
-                    //  List<MyJsEnum> l
-                    //   MyJsEnum e = l.get(0);
-                    //
-                    // would be emitted as:
-                    //
-                    //   List<*> l;
-                    //   MyJsEnum e = /** @type {MyJsEnum} */ (Enums.unbox(l.get(0)))
-                    //
                     .map(
                         td ->
                             AstUtils.isNonNativeJsEnum(td)
-                                ? TypeDescriptors.get().javaLangObject
+                                ? TypeDescriptors.getEnumBoxType(td)
                                 : td)
-                    .collect(toImmutableList()))),
+                    .collect(toImmutableList()));
+
+    return withNullability(
+        getClosureTypeForDeclaration(declaredTypeDescriptor.getTypeDeclaration(), typeArguments),
         typeDescriptor.isNullable());
   }
 
