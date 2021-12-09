@@ -16,6 +16,7 @@
 package com.google.j2cl.integration.captures;
 
 import static com.google.j2cl.integration.testing.Asserts.assertEquals;
+import static com.google.j2cl.integration.testing.Asserts.assertNotEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertNull;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
@@ -186,10 +187,17 @@ public class Main {
     assertEquals(outer, outer.new Inner().captured());
   }
 
-  private static int ten = 10;
+  private static int TEN = 10;
+  private static int TWENTY = 20;
 
   private static class Outer {
-    int outerField = ten;
+    int outerField = TEN;
+
+    public Outer() {}
+
+    public Outer(int outherField) {
+      this.outerField = outherField;
+    }
 
     class Intermediate {
       class Inner {
@@ -198,11 +206,27 @@ public class Main {
         }
       }
     }
+
+    // Even though this class extends Intermediate that captures the enclosing class, this class
+    // itself does not capture it.
+    static class IntermediateChild extends Intermediate {
+      public IntermediateChild() {
+        // When extending a class that captures the outer instance, there is always the option to
+        // pass it explicitly as a qualifier of the super call. The subclass (IntermediateChild in
+        // in this case) could be either static, in which case you will be required to pass a
+        // qualifier to the super call, or an inner (non-static) class in which the qualifier
+        // could be inferred.
+        // Note that the subclass could even be an inner class with a totally unrelated enclosing
+        // class in which case, again the qualifier of the super would be required.
+        new Outer(TWENTY).super();
+      }
+    }
   }
 
   private static void testOuterCapture_nested() {
     Outer outer = new Outer();
-    assertEquals(ten, outer.new Intermediate().new Inner().captured());
+    assertEquals(TEN, outer.new Intermediate().new Inner().captured());
+    assertEquals(TWENTY, new Outer.IntermediateChild().new Inner().captured());
   }
 
   private static void testOuterCapture_indirect() {
@@ -218,9 +242,16 @@ public class Main {
           return new ClassCapturingOuter().capturedOuter();
         }
       }
+
+      class ClassNotIndirectlyCapturingOuter {
+        Outer returnIndirectCapture() {
+          return new Outer().new ClassCapturingOuter().capturedOuter();
+        }
+      }
     }
     Outer outer = new Outer();
     assertEquals(outer, outer.new ClassIndirectlyCapturingOuter().returnIndirectCapture());
+    assertNotEquals(outer, outer.new ClassNotIndirectlyCapturingOuter().returnIndirectCapture());
   }
 
   private static void testCaptures_parent() {
