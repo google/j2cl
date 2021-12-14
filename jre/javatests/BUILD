@@ -128,7 +128,7 @@ j2cl_multi_test(
 # A smoke check that verifies es5 transpiled test works
 j2cl_test(
     name = "ConcurrentSuite_es5",
-    browsers = ["//testing/web/browsers:ie11-win7"],
+    browsers = ["//testing/web/browsers:chrome-linux"],
     generate_build_test = False,
     jvm_flags = ["-Djsrunner.net.transpileMode=always"],
     shard_count = 5,
