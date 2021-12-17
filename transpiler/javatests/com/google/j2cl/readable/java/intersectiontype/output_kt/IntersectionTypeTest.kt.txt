@@ -1,20 +1,20 @@
 package intersectiontype
 
-interface Getable<T> {
+fun interface Getable<T> {
  fun get(): T?
 }
 
-interface Setable {
+fun interface Setable {
  fun set(i: Int)
 }
 
 interface Serial {}
 
-interface Cmp {
+fun interface Cmp {
  fun cmp(): Int
 }
 
-interface Cmp2<T> {
+fun interface Cmp2<T> {
  fun cmp(a: Int): Int
 }
 
@@ -59,14 +59,14 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   fun method(): intersectiontype.Cmp? {
-   return {
+   return intersectiontype.Cmp {
     return 1
    } as intersectiontype.Cmp? /* & intersectiontype.Serial? */
   }
 
   @JvmStatic
   fun method2(): intersectiontype.Cmp2<*>? {
-   return { a: Int ->
+   return intersectiontype.Cmp2<*> { a: Int ->
     return 1
    } as intersectiontype.Cmp2<*>? /* & intersectiontype.Serial? */
   }

@@ -47,7 +47,7 @@ enum class Enum3: Enum<enums.Enum3?> {
  internal constructor(function: java.util.function.Function<Int?, Int?>?): super()
 
  companion object {
-  @JvmField val VALUE1: enums.Enum3 = enums.Enum3({ v: Int? ->
+  @JvmField val VALUE1: enums.Enum3 = enums.Enum3(java.util.function.Function<Int?, Int?> { v: Int? ->
    return 1 + v!!
   })
  }

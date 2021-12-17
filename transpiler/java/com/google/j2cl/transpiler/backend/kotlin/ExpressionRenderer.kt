@@ -139,6 +139,8 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
+  render(functionExpression.typeDescriptor.functionalInterface!!.toNonNullable())
+  render(" ")
   renderInCurlyBrackets {
     functionExpression.parameters.takeIf { it.isNotEmpty() }?.let { parameters ->
       render(" ")

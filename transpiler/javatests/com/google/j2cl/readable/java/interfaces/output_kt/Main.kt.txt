@@ -15,7 +15,7 @@ open class Main {
  }
 }
 
-interface `Main$Interface`<T> {
+fun interface `Main$Interface`<T> {
  fun interfaceMethod()
 
  fun defaultMethod(t: T?) {
@@ -34,7 +34,7 @@ interface `Main$Interface`<T> {
  }
 }
 
-interface `Main$SubInterface`: interfaces.`Main$Interface`<String?> {
+fun interface `Main$SubInterface`: interfaces.`Main$Interface`<String?> {
  override fun defaultMethod(s: String?) {
   super.defaultMethod(s)
  }

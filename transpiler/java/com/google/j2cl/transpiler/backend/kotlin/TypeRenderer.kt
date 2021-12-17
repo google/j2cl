@@ -29,7 +29,7 @@ fun Renderer.renderType(type: Type) {
     when (type.kind) {
       Kind.CLASS -> "class "
       Kind.ENUM -> "enum class "
-      Kind.INTERFACE -> "interface "
+      Kind.INTERFACE -> (if (type.declaration.isFunctionalInterface) "fun " else "") + "interface "
     }
   )
   renderTypeDeclaration(type.declaration)

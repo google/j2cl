@@ -19,11 +19,11 @@ open class Main {
  }
 
  internal open fun testAsyncLambdas() {
-  val i: jsasync.`Main$AsyncInterface`? = {
+  val i: jsasync.`Main$AsyncInterface`? = jsasync.`Main$AsyncInterface` {
    return jsasync.`Main$Promise`.resolve(jsasync.Main.await(jsasync.`Main$Promise`.resolve(5)))
   }
   val o: jsasync.`Main$BaseInterface`? = jsasync.`Main$1`(this)
-  val j: jsasync.`Main$AsyncJsFunctionInterface`? = {
+  val j: jsasync.`Main$AsyncJsFunctionInterface`? = jsasync.`Main$AsyncJsFunctionInterface` {
    return jsasync.`Main$Promise`.resolve(jsasync.Main.await(jsasync.`Main$Promise`.resolve(5)))
   }
   val optimizableJsFunction: jsasync.`Main$JsFunctionInterface`? = jsasync.`Main$2`(this)
@@ -78,11 +78,11 @@ open class `Main$3`: jsasync.`Main$JsFunctionInterface` {
  }
 }
 
-interface `Main$BaseInterface` {
+fun interface `Main$BaseInterface` {
  fun asyncCall(): jsasync.`Main$IThenable`<Int?>?
 }
 
-interface `Main$AsyncInterface`: jsasync.`Main$BaseInterface` {
+fun interface `Main$AsyncInterface`: jsasync.`Main$BaseInterface` {
  override fun asyncCall(): jsasync.`Main$IThenable`<Int?>?
 }
 
@@ -92,11 +92,11 @@ interface `Main$InterfaceWithAsyncDefaultMethod` {
  }
 }
 
-interface `Main$JsFunctionInterface` {
+fun interface `Main$JsFunctionInterface` {
  fun doSomething(): jsasync.`Main$IThenable`<Int?>?
 }
 
-interface `Main$AsyncJsFunctionInterface` {
+fun interface `Main$AsyncJsFunctionInterface` {
  fun doSomething(): jsasync.`Main$IThenable`<Int?>?
 }
 

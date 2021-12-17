@@ -16,73 +16,73 @@ open class MethodReferences<T> {
  }
 
  internal open fun main() {
-  var objectFactory: methodreferences.`MethodReferences$Producer`<Any?>? = {
+  var objectFactory: methodreferences.`MethodReferences$Producer`<Any?>? = methodreferences.`MethodReferences$Producer`<Any?> {
    return Any()
   }
-  objectFactory = {
+  objectFactory = methodreferences.`MethodReferences$Producer`<Any?> {
    return methodreferences.MethodReferences.m()
   }
   objectFactory = run {
    val `$$q`: methodreferences.MethodReferences<T> = methodreferences.MethodReferences<T>()
-   {
+   methodreferences.`MethodReferences$Producer`<Any?> {
     return `$$q`.isA()
    }
   }
-  val biFunction: methodreferences.`MethodReferences$BiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
+  val biFunction: methodreferences.`MethodReferences$BiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = methodreferences.`MethodReferences$BiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?> { arg0: methodreferences.MethodReferences<T>?, arg1: Number? ->
    return arg0!!.sameAs(arg1)
   }
-  val functionWithParameters: methodreferences.`MethodReferences$Function`<Number?, Boolean?>? = { arg0_1: Number? ->
+  val functionWithParameters: methodreferences.`MethodReferences$Function`<Number?, Boolean?>? = methodreferences.`MethodReferences$Function`<Number?, Boolean?> { arg0_1: Number? ->
    return this.sameAs(arg0_1)
   }
-  val objectPredicate: methodreferences.`MethodReferences$Predicate`<methodreferences.MethodReferences<T>?>? = { arg0_2: methodreferences.MethodReferences<T>? ->
+  val objectPredicate: methodreferences.`MethodReferences$Predicate`<methodreferences.MethodReferences<T>?>? = methodreferences.`MethodReferences$Predicate`<methodreferences.MethodReferences<T>?> { arg0_2: methodreferences.MethodReferences<T>? ->
    return arg0_2!!.isA()!!
   }
-  val objectCapturingOuterProducer: methodreferences.`MethodReferences$Producer`<methodreferences.`MethodReferences$ObjectCapturingOuter`<T>?>? = {
+  val objectCapturingOuterProducer: methodreferences.`MethodReferences$Producer`<methodreferences.`MethodReferences$ObjectCapturingOuter`<T>?>? = methodreferences.`MethodReferences$Producer`<methodreferences.`MethodReferences$ObjectCapturingOuter`<T>?> {
    return methodreferences.`MethodReferences$ObjectCapturingOuter`<T>(this)
   }
-  val arrayProducer: methodreferences.`MethodReferences$ArrayProducer`<Any?>? = { arg0_3: Int ->
+  val arrayProducer: methodreferences.`MethodReferences$ArrayProducer`<Any?>? = methodreferences.`MethodReferences$ArrayProducer`<Any?> { arg0_3: Int ->
    return arrayOfNulls<Double?>(arg0_3)
   }
   objectFactory = run {
    val `$$q_1`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>()
-   {
+   methodreferences.`MethodReferences$Producer`<Any?> {
     return `$$q_1`.self()
    }
   }
-  val function: methodreferences.`MethodReferences$Function`<methodreferences.MethodReferences<T>?, Any?>? = { arg0_4: methodreferences.MethodReferences<T>? ->
+  val function: methodreferences.`MethodReferences$Function`<methodreferences.MethodReferences<T>?, Any?>? = methodreferences.`MethodReferences$Function`<methodreferences.MethodReferences<T>?, Any?> { arg0_4: methodreferences.MethodReferences<T>? ->
    return arg0_4!!.self()
   }
-  val arrayFactory: methodreferences.`MethodReferences$Function`<Int?, Array<Any?>?>? = { arg0_5: Int? ->
+  val arrayFactory: methodreferences.`MethodReferences$Function`<Int?, Array<Any?>?>? = methodreferences.`MethodReferences$Function`<Int?, Array<Any?>?> { arg0_5: Int? ->
    return arrayOfNulls<Any?>(arg0_5!!)
   }
-  val superToStringProducer: methodreferences.`MethodReferences$Producer`<String?>? = {
+  val superToStringProducer: methodreferences.`MethodReferences$Producer`<String?>? = methodreferences.`MethodReferences$Producer`<String?> {
    return this.toString()
   }
-  var jsobjectFactory: methodreferences.`MethodReferences$JsProducer`<Any?>? = {
+  var jsobjectFactory: methodreferences.`MethodReferences$JsProducer`<Any?>? = methodreferences.`MethodReferences$JsProducer`<Any?> {
    return Any()
   }
-  jsobjectFactory = {
+  jsobjectFactory = methodreferences.`MethodReferences$JsProducer`<Any?> {
    return methodreferences.MethodReferences.m()
   }
   jsobjectFactory = run {
    val `$$q_2`: methodreferences.MethodReferences<Any?> = methodreferences.MethodReferences<Any?>()
-   {
+   methodreferences.`MethodReferences$JsProducer`<Any?> {
     return `$$q_2`.self()
    }
   }
-  val jsfunction: methodreferences.`MethodReferences$JsFunctionInterface`<methodreferences.MethodReferences<T>?, Any?>? = { arg0_6: methodreferences.MethodReferences<T>? ->
+  val jsfunction: methodreferences.`MethodReferences$JsFunctionInterface`<methodreferences.MethodReferences<T>?, Any?>? = methodreferences.`MethodReferences$JsFunctionInterface`<methodreferences.MethodReferences<T>?, Any?> { arg0_6: methodreferences.MethodReferences<T>? ->
    return arg0_6!!.self()
   }
-  val jsarrayFactory: methodreferences.`MethodReferences$JsFunctionInterface`<Int?, Array<Any?>?>? = { arg0_7: Int? ->
+  val jsarrayFactory: methodreferences.`MethodReferences$JsFunctionInterface`<Int?, Array<Any?>?>? = methodreferences.`MethodReferences$JsFunctionInterface`<Int?, Array<Any?>?> { arg0_7: Int? ->
    return arrayOfNulls<Any?>(arg0_7!!)
   }
-  val jsSuperToStringProducer: methodreferences.`MethodReferences$JsProducer`<String?>? = {
+  val jsSuperToStringProducer: methodreferences.`MethodReferences$JsProducer`<String?>? = methodreferences.`MethodReferences$JsProducer`<String?> {
    return this.toString()
   }
-  val jsbiFunction: methodreferences.`MethodReferences$JsBiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = { arg0_8: methodreferences.MethodReferences<T>?, arg1_1: Number? ->
+  val jsbiFunction: methodreferences.`MethodReferences$JsBiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?>? = methodreferences.`MethodReferences$JsBiFunction`<methodreferences.MethodReferences<T>?, Number?, Boolean?> { arg0_8: methodreferences.MethodReferences<T>?, arg1_1: Number? ->
    return arg0_8!!.sameAs(arg1_1)
   }
-  val jsFunctionWithParameters: methodreferences.`MethodReferences$JsFunctionInterface`<Number?, Boolean?>? = { arg0_9: Number? ->
+  val jsFunctionWithParameters: methodreferences.`MethodReferences$JsFunctionInterface`<Number?, Boolean?>? = methodreferences.`MethodReferences$JsFunctionInterface`<Number?, Boolean?> { arg0_9: Number? ->
    return this.sameAs(arg0_9)
   }
  }
@@ -95,22 +95,22 @@ open class MethodReferences<T> {
 
   @JvmField internal var staticStringProducer: methodreferences.`MethodReferences$Producer`<String?>? = run {
    val `$$q`: Any? = methodreferences.MethodReferences.m()
-   {
+   methodreferences.`MethodReferences$Producer`<String?> {
     return `$$q`!!.toString()
    }
   }
  }
 }
 
-interface `MethodReferences$Producer`<T> {
+fun interface `MethodReferences$Producer`<T> {
  fun produce(): T?
 }
 
-interface `MethodReferences$Predicate`<T> {
+fun interface `MethodReferences$Predicate`<T> {
  fun apply(parameter: T?): Boolean
 }
 
-interface `MethodReferences$ArrayProducer`<T> {
+fun interface `MethodReferences$ArrayProducer`<T> {
  fun produce(size: Int): Array<T>?
 }
 
@@ -126,22 +126,22 @@ open class `MethodReferences$ObjectCapturingOuter`<T> {
  }
 }
 
-interface `MethodReferences$Function`<T, U> {
+fun interface `MethodReferences$Function`<T, U> {
  fun apply(t: T?): U?
 }
 
-interface `MethodReferences$BiFunction`<T, U, V> {
+fun interface `MethodReferences$BiFunction`<T, U, V> {
  fun apply(t: T?, u: U?): V?
 }
 
-interface `MethodReferences$JsProducer`<T> {
+fun interface `MethodReferences$JsProducer`<T> {
  fun produce(): T?
 }
 
-interface `MethodReferences$JsFunctionInterface`<T, U> {
+fun interface `MethodReferences$JsFunctionInterface`<T, U> {
  fun apply(t: T?): U?
 }
 
-interface `MethodReferences$JsBiFunction`<T, U, V> {
+fun interface `MethodReferences$JsBiFunction`<T, U, V> {
  fun apply(t: T?, u: U?): V?
 }

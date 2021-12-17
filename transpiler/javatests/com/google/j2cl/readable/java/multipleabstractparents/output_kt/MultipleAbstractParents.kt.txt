@@ -13,11 +13,11 @@ open class MultipleAbstractParents {
  }
 }
 
-interface `MultipleAbstractParents$List`<T> {
+fun interface `MultipleAbstractParents$List`<T> {
  fun getFoo(t: T?): String?
 }
 
-interface `MultipleAbstractParents$Collection`<T> {
+fun interface `MultipleAbstractParents$Collection`<T> {
  fun getFoo(t: T?): String?
 }
 
@@ -45,7 +45,7 @@ open class `MultipleAbstractParents$ArrayList`<T>: multipleabstractparents.`Mult
  constructor(): super()
 }
 
-interface `MultipleAbstractParents$IStringList`: multipleabstractparents.`MultipleAbstractParents$List`<String?> {
+fun interface `MultipleAbstractParents$IStringList`: multipleabstractparents.`MultipleAbstractParents$List`<String?> {
  override fun getFoo(string: String?): String?
 }
 

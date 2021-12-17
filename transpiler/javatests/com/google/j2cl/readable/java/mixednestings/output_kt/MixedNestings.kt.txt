@@ -1,6 +1,6 @@
 package mixednestings
 
-interface MyInterface {
+fun interface MyInterface {
  fun `fun`(a: Int): Int
 }
 
@@ -51,11 +51,11 @@ open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
  @JvmField val `this`: mixednestings.`MixedNestings$A$1B`?
 
  open override fun `fun`(a: Int): Int {
-  val ii: mixednestings.MyInterface? = { n: Int ->
+  val ii: mixednestings.MyInterface? = mixednestings.MyInterface { n: Int ->
    this.`this`!!.`this`!!.`this`!!.mm()
    this.`this`!!.`this`!!.aa()
    this.`this`!!.bb()
-   val iii: mixednestings.MyInterface? = { m: Int ->
+   val iii: mixednestings.MyInterface? = mixednestings.MyInterface { m: Int ->
     this.`this`!!.`this`!!.`this`!!.mm()
     this.`this`!!.`this`!!.aa()
     this.`this`!!.bb()

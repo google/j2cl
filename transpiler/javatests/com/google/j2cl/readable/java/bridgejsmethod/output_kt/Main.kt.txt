@@ -39,11 +39,11 @@ open class `Main$A`<T> {
  open fun bar(t: T?) {}
 }
 
-interface `Main$I`<T: Number?> {
+fun interface `Main$I`<T: Number?> {
  fun `fun`(t: T?): T?
 }
 
-interface `Main$J`<T> {
+fun interface `Main$J`<T> {
  fun bar(t: T?)
 }
 
@@ -81,7 +81,7 @@ open class `Main$F`: bridgejsmethod.`Main$I`<Int?>, bridgejsmethod.`Main$A`<Int?
  constructor(): super()
 }
 
-interface `Main$G`<V> {
+fun interface `Main$G`<V> {
  fun enclose(value: V?): V?
 }
 
@@ -105,7 +105,7 @@ open class `Main$L`<L1>: bridgejsmethod.`Main$K`<String?, L1> {
  internal open override fun `fun`(string: String?, l1: L1?) {}
 }
 
-interface `Main$M` {
+fun interface `Main$M` {
  fun getB(): bridgejsmethod.`Main$B`?
 }
 
@@ -133,7 +133,7 @@ open class `Main$O`: bridgejsmethod.`Main$N` {
  }
 }
 
-interface `Main$P` {
+fun interface `Main$P` {
  fun getKey(): String?
 }
 

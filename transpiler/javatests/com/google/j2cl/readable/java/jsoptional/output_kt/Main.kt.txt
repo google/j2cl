@@ -5,7 +5,7 @@ open class Main {
 
  open fun method2(s1: String?, d: Double?, vararg i: Boolean?) {}
 
- @JvmField internal var f: jsoptional.`Main$Function`? = { s: String?, varargs: Array<Any?>? ->
+ @JvmField internal var f: jsoptional.`Main$Function`? = jsoptional.`Main$Function` { s: String?, varargs: Array<Any?>? ->
   return s
  }
 
@@ -16,7 +16,7 @@ open class Main {
  open fun testOptionalFunction(f: jsoptional.`Main$Function`?) {}
 }
 
-interface `Main$Function` {
+fun interface `Main$Function` {
  fun f1(s: String?, vararg args: Any?): Any?
 }
 
@@ -28,7 +28,7 @@ class `Main$AFunction`: jsoptional.`Main$Function` {
  }
 }
 
-interface `Main$I`<T> {
+fun interface `Main$I`<T> {
  fun m(t: T?, o: Any?)
 }
 

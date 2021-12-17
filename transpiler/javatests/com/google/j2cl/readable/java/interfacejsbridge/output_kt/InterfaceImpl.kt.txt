@@ -1,14 +1,14 @@
 package interfacejsbridge
 
-interface MyJsInterface {
+fun interface MyJsInterface {
  fun foo(a: Int): Int
 }
 
-interface MyInterface {
+fun interface MyInterface {
  fun foo(a: Int): Int
 }
 
-interface SubInterface: interfacejsbridge.MyJsInterface, interfacejsbridge.MyInterface {
+fun interface SubInterface: interfacejsbridge.MyJsInterface, interfacejsbridge.MyInterface {
  override fun foo(a: Int): Int
 }
 

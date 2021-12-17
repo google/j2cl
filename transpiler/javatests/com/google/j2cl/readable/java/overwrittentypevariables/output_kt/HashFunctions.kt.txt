@@ -1,10 +1,10 @@
 package overwrittentypevariables
 
-interface MyFunction<F, T> {
+fun interface MyFunction<F, T> {
  fun apply(input: F?): T?
 }
 
-interface HashFunction<T>: overwrittentypevariables.MyFunction<T, String?> {}
+fun interface HashFunction<T>: overwrittentypevariables.MyFunction<T, String?> {}
 
 open class HashFunctions {
  constructor(): super()

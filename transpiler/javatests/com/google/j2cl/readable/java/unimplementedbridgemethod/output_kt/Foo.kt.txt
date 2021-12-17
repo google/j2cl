@@ -1,6 +1,6 @@
 package unimplementedbridgemethod
 
-interface I<T> {
+fun interface I<T> {
  fun foo(t: T?): Int
 
  companion object {
@@ -11,7 +11,7 @@ interface I<T> {
  }
 }
 
-interface J: unimplementedbridgemethod.I<String?> {}
+fun interface J: unimplementedbridgemethod.I<String?> {}
 
 abstract class Bar: unimplementedbridgemethod.J {
  internal constructor(): super()
