@@ -27,7 +27,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
@@ -45,7 +44,6 @@ import com.google.j2cl.transpiler.backend.common.UniqueNamesResolver;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -276,11 +274,9 @@ class GenerationEnvironment {
   }
 
   GenerationEnvironment(Library library) {
-    List<CompilationUnit> compilationUnits = library.getCompilationUnits();
-
     // Resolve variable names into unique wasm identifiers.
-    compilationUnits.stream()
-        .flatMap(c -> c.getTypes().stream())
+    library
+        .streamTypes()
         .forEach(
             t ->
                 nameByDeclaration.putAll(
@@ -289,8 +285,8 @@ class GenerationEnvironment {
     // Create a representation for Java classes that is useful to lay out the structs and
     // vtables needed in the wasm output.
     wasmTypeLayoutByTypeDeclaration = new LinkedHashMap<>();
-    compilationUnits.stream()
-        .flatMap(c -> c.getTypes().stream())
+    library
+        .streamTypes()
         .filter(Predicates.not(Type::isInterface))
         // Traverse superclasses before subclasses to ensure that the layout for the superclass
         // is already available to build the layout for the subclass.
@@ -307,7 +303,7 @@ class GenerationEnvironment {
                   t.getDeclaration(), WasmTypeLayout.create(t, superTypeLayout));
             });
 
-    assignInterfaceSlots(compilationUnits);
+    assignInterfaceSlots(library);
   }
 
   /**
@@ -324,7 +320,7 @@ class GenerationEnvironment {
    * presented in the paper are for performing "instanceof" checks, they generalize to interface
    * dispatch.
    */
-  private void assignInterfaceSlots(List<CompilationUnit> compilationUnits) {
+  private void assignInterfaceSlots(Library library) {
     SetMultimap<TypeDeclaration, TypeDeclaration> concreteTypesByInterface =
         LinkedHashMultimap.create();
     SetMultimap<Integer, TypeDeclaration> concreteTypesBySlot = LinkedHashMultimap.create();
@@ -334,8 +330,8 @@ class GenerationEnvironment {
     // methods that will be invoked on a specific instance.
     // Since all dynamic dispatch is performed by obtaining the vtables from an instance,  if there
     // are no instances for a type there is no need for instances of vtables it.
-    compilationUnits.stream()
-        .flatMap(c -> c.getTypes().stream())
+    library
+        .streamTypes()
         .filter(Predicates.not(Type::isInterface))
         .filter(Predicates.not(Type::isAbstract))
         .forEach(

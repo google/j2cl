@@ -32,7 +32,6 @@ import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BinaryOperator;
 import com.google.j2cl.transpiler.ast.CastExpression;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
@@ -117,19 +116,12 @@ public class JsInteropRestrictionsChecker {
   }
 
   private void checkLibrary(Library library) {
-    for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
-      checkCompilationUnit(compilationUnit);
-    }
+    library.streamTypes().forEach(this::checkType);
+
     if (wasUnusableByJsWarningReported) {
       problems.info(
           "Suppress \"[unusable-by-js]\" warnings by adding a "
               + "`@SuppressWarnings(\"unusable-by-js\")` annotation to the corresponding member.");
-    }
-  }
-
-  private void checkCompilationUnit(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
-      checkType(type);
     }
   }
 

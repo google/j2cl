@@ -192,16 +192,15 @@ public class WasmModuleGenerator {
   }
 
   private void emitTypes(Library library) {
-    for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
-      for (Type type : compilationUnit.getTypes()) {
-        if (type.getTypeDescriptor().isWasmExtern()) {
-          continue;
-        }
-        emitBeginCodeComment(type, type.getKind().name());
-        renderType(type);
-        emitEndCodeComment(type, type.getKind().name());
-      }
-    }
+    library
+        .streamTypes()
+        .filter(t -> !t.getTypeDescriptor().isWasmExtern())
+        .forEach(
+            type -> {
+              emitBeginCodeComment(type, type.getKind().name());
+              renderType(type);
+              emitEndCodeComment(type, type.getKind().name());
+            });
   }
 
   private void renderType(Type type) {
