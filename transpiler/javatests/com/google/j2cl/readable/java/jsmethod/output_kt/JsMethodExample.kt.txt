@@ -3,14 +3,14 @@ package jsmethod
 open class JsMethodExample {
  constructor(): super()
 
- open fun <T: java.util.ArrayList<String?>?> testMethod(): T? {}
+ open fun <T: java.util.ArrayList<kotlin.String?>?> testMethod(): T? {}
 
  companion object {
   @JvmStatic
-  fun log(message: String?) {}
+  fun log(message: kotlin.String?) {}
 
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg args: kotlin.String?) {
    jsmethod.JsMethodExample.log("test")
   }
  }
@@ -23,11 +23,11 @@ abstract class `JsMethodExample$Base`<T> {
 }
 
 fun interface `JsMethodExample$I` {
- fun m(s: String?)
+ fun m(s: kotlin.String?)
 }
 
-open class `JsMethodExample$Sub`: jsmethod.`JsMethodExample$I`, jsmethod.`JsMethodExample$Base`<String?> {
+open class `JsMethodExample$Sub`: jsmethod.`JsMethodExample$I`, jsmethod.`JsMethodExample$Base`<kotlin.String?> {
  internal constructor(): super()
 
- open override fun m(s: String?) {}
+ open override fun m(s: kotlin.String?) {}
 }

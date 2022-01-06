@@ -63,7 +63,7 @@ open class CastPrimitives {
  }
 
  open fun testReferenceToPrimitive() {
-  val o: Any? = Any()
+  val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
   val bool: Boolean = o as Boolean
   val b: Byte = o as Byte
   val c: Char = o as Char
@@ -75,7 +75,7 @@ open class CastPrimitives {
  }
 
  open fun testUnboxAndWiden() {
-  val boxedByte: Byte? = Byte.valueOf(0.toByte())
+  val boxedByte: kotlin.Byte? = java.lang.Byte.valueOf(0.toByte())
   val s: Short = boxedByte!!.toShort()
   val i: Int = boxedByte!!.toInt()
   val l: Long = boxedByte!!.toLong()

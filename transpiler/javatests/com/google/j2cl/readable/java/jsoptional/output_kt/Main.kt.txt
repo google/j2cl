@@ -1,15 +1,15 @@
 package jsoptional
 
 open class Main {
- open fun method1(i1: Int, d: Double?, i: Int?) {}
+ open fun method1(i1: Int, d: kotlin.Double?, i: kotlin.Int?) {}
 
- open fun method2(s1: String?, d: Double?, vararg i: Boolean?) {}
+ open fun method2(s1: kotlin.String?, d: kotlin.Double?, vararg i: kotlin.Boolean?) {}
 
- @JvmField internal var f: jsoptional.`Main$Function`? = jsoptional.`Main$Function` { s: String?, varargs: Array<Any?>? ->
+ @JvmField internal var f: jsoptional.`Main$Function`? = jsoptional.`Main$Function` { s: kotlin.String?, varargs: Array<kotlin.Any?>? ->
   return s
  }
 
- constructor(a: String?): super()
+ constructor(a: kotlin.String?): super()
 
  open fun testFunction(f: jsoptional.`Main$Function`?) {}
 
@@ -17,39 +17,39 @@ open class Main {
 }
 
 fun interface `Main$Function` {
- fun f1(s: String?, vararg args: Any?): Any?
+ fun f1(s: kotlin.String?, vararg args: kotlin.Any?): kotlin.Any?
 }
 
 class `Main$AFunction`: jsoptional.`Main$Function` {
  internal constructor(): super()
 
- open override fun f1(i: String?, vararg args: Any?): Any? {
+ open override fun f1(i: kotlin.String?, vararg args: kotlin.Any?): kotlin.Any? {
   return args!![0]
  }
 }
 
 fun interface `Main$I`<T> {
- fun m(t: T?, o: Any?)
+ fun m(t: T?, o: kotlin.Any?)
 }
 
-open class `Main$TemplatedSubtype`<T: String?>: jsoptional.`Main$I`<T> {
+open class `Main$TemplatedSubtype`<T: kotlin.String?>: jsoptional.`Main$I`<T> {
  internal constructor(): super()
 
- open override fun m(t: T?, o: Any?) {}
+ open override fun m(t: T?, o: kotlin.Any?) {}
 }
 
-open class `Main$SpecializedSubtype`: jsoptional.`Main$I`<String?> {
+open class `Main$SpecializedSubtype`: jsoptional.`Main$I`<kotlin.String?> {
  @JvmField val `this`: jsoptional.Main?
 
- constructor(`$outer_this`: jsoptional.Main?, a: Any?): super() {
+ constructor(`$outer_this`: jsoptional.Main?, a: kotlin.Any?): super() {
   this.`this` = `$outer_this`
  }
 
- open override fun m(t: String?, o: Any?) {}
+ open override fun m(t: kotlin.String?, o: kotlin.Any?) {}
 }
 
-open class `Main$NonJsTypeSubtype`: jsoptional.`Main$I`<String?> {
+open class `Main$NonJsTypeSubtype`: jsoptional.`Main$I`<kotlin.String?> {
  internal constructor(): super()
 
- open override fun m(t: String?, o: Any?) {}
+ open override fun m(t: kotlin.String?, o: kotlin.Any?) {}
 }

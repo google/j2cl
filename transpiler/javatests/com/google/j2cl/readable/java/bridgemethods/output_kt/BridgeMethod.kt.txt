@@ -3,7 +3,7 @@ package bridgemethods
 interface SomeInterface<T, S> {
  fun foo(t: T?, s: S?)
 
- fun foo(t: T?, n: Number?)
+ fun foo(t: T?, n: kotlin.Number?)
 }
 
 open class SuperParent<T, S> {
@@ -12,52 +12,52 @@ open class SuperParent<T, S> {
  open fun foo(t: T?, s: S?) {}
 }
 
-open class Parent<T: Error?>: bridgemethods.SuperParent<T, Number?> {
+open class Parent<T: java.lang.Error?>: bridgemethods.SuperParent<T, kotlin.Number?> {
  internal constructor(): super()
 
- open override fun foo(t: T?, s: Number?) {}
+ open override fun foo(t: T?, s: kotlin.Number?) {}
 
- open fun <T_1: Number?> bar(t: T_1?) {}
+ open fun <T_1: kotlin.Number?> bar(t: T_1?) {}
 
  open fun <T_1> `fun`(t: T_1?) {}
 }
 
-open class BridgeMethod: bridgemethods.SomeInterface<java.lang.AssertionError?, Number?>, bridgemethods.Parent<java.lang.AssertionError?> {
+open class BridgeMethod: bridgemethods.SomeInterface<java.lang.AssertionError?, kotlin.Number?>, bridgemethods.Parent<java.lang.AssertionError?> {
  constructor(): super()
 
- open override fun foo(a: java.lang.AssertionError?, n: Number?) {}
+ open override fun foo(a: java.lang.AssertionError?, n: kotlin.Number?) {}
 
- open override fun bar(t: Number?) {}
+ open override fun bar(t: kotlin.Number?) {}
 
- open fun `fun`(t: Number?) {}
+ open fun `fun`(t: kotlin.Number?) {}
 }
 
 fun interface SomeOtherFooInterface<T> {
- fun foo(t: T?, s: Double?)
+ fun foo(t: T?, s: kotlin.Double?)
 }
 
-open class DualUnrelatedBridges: bridgemethods.SomeInterface<String?, Double?>, bridgemethods.SomeOtherFooInterface<String?> {
+open class DualUnrelatedBridges: bridgemethods.SomeInterface<kotlin.String?, kotlin.Double?>, bridgemethods.SomeOtherFooInterface<kotlin.String?> {
  internal constructor(): super()
 
- open override fun foo(s: String?, n: Double?) {}
+ open override fun foo(s: kotlin.String?, n: kotlin.Double?) {}
 
- open override fun foo(s: String?, n: Number?) {}
+ open override fun foo(s: kotlin.String?, n: kotlin.Number?) {}
 }
 
 open class SuperDualUnrelatedAccidentalBridges {
  internal constructor(): super()
 
- open fun foo(s: String?, n: Double?) {}
+ open fun foo(s: kotlin.String?, n: kotlin.Double?) {}
 
- open fun foo(s: String?, n: Number?) {}
+ open fun foo(s: kotlin.String?, n: kotlin.Number?) {}
 }
 
-open class DualUnrelatedAccidentalBridges: bridgemethods.SomeInterface<String?, Double?>, bridgemethods.SomeOtherFooInterface<String?>, bridgemethods.SuperDualUnrelatedAccidentalBridges {
+open class DualUnrelatedAccidentalBridges: bridgemethods.SomeInterface<kotlin.String?, kotlin.Double?>, bridgemethods.SomeOtherFooInterface<kotlin.String?>, bridgemethods.SuperDualUnrelatedAccidentalBridges {
  internal constructor(): super()
 }
 
 fun interface Getter {
- fun get(s: String?): String?
+ fun get(s: kotlin.String?): kotlin.String?
 }
 
 open class ClassWithParameterizedGet<T> {
@@ -68,7 +68,7 @@ open class ClassWithParameterizedGet<T> {
  }
 }
 
-open class AccidentalOverrideBridge: bridgemethods.Getter, bridgemethods.ClassWithParameterizedGet<String?> {
+open class AccidentalOverrideBridge: bridgemethods.Getter, bridgemethods.ClassWithParameterizedGet<kotlin.String?> {
  internal constructor(): super()
 
  open fun test() {
@@ -82,23 +82,23 @@ open class TestCase10036 {
 }
 
 interface `TestCase10036$BI3` {
- fun get(value: String?): String? {
+ fun get(value: kotlin.String?): kotlin.String? {
   return "BI3 get String"
  }
 }
 
 fun interface `TestCase10036$BI2` {
- fun get(value: String?): String?
+ fun get(value: kotlin.String?): kotlin.String?
 }
 
 fun interface `TestCase10036$BI1`: bridgemethods.`TestCase10036$BI3` {
- override fun get(value: String?): String?
+ override fun get(value: kotlin.String?): kotlin.String?
 }
 
-abstract class `TestCase10036$B`<B1: Comparable<*>?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
+abstract class `TestCase10036$B`<B1: java.lang.Comparable<*>?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
  internal constructor(): super()
 
- abstract open fun get(value: B1?): String?
+ abstract open fun get(value: B1?): kotlin.String?
 }
 
 open class TestCase102 {
@@ -106,11 +106,11 @@ open class TestCase102 {
 }
 
 fun interface `TestCase102$BI2` {
- fun set(value: String?)
+ fun set(value: kotlin.String?)
 }
 
 fun interface `TestCase102$BI1` {
- fun set(value: String?)
+ fun set(value: kotlin.String?)
 }
 
 abstract class `TestCase102$B`<B1>: bridgemethods.`TestCase102$BI1`, bridgemethods.`TestCase102$BI2` {
@@ -126,7 +126,7 @@ open class `TestCase102$C`<B1>: bridgemethods.`TestCase102$B`<B1> {
 
  @JvmField val `this`: bridgemethods.TestCase102?
 
- open override fun set(value: String?) {}
+ open override fun set(value: kotlin.String?) {}
 
  open override fun set(value: B1?) {}
 }

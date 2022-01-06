@@ -1,7 +1,7 @@
 package genericanddefaultmethods
 
 interface InterfaceWithDefault {
- fun foo(value: String?) {
+ fun foo(value: kotlin.String?) {
   java.lang.System.out!!.println("in InterfaceWithDefault")
  }
 }
@@ -14,6 +14,6 @@ open class GenericClass<T> {
  }
 }
 
-open class ConcreteClass: genericanddefaultmethods.InterfaceWithDefault, genericanddefaultmethods.GenericClass<String?> {
+open class ConcreteClass: genericanddefaultmethods.InterfaceWithDefault, genericanddefaultmethods.GenericClass<kotlin.String?> {
  constructor(): super()
 }

@@ -15,17 +15,21 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.FieldAccess;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
+import com.google.j2cl.transpiler.ast.Kind;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
+import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
@@ -91,7 +95,7 @@ public class NormalizeBasicCasts extends NormalizationPass {
 
     MethodDescriptor castToMethodDescriptor =
         MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(expression.getTypeDescriptor().toBoxedType())
+            .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setName(method)
             .setReturnTypeDescriptor(castTypeDescriptor)
             .build();
@@ -105,7 +109,7 @@ public class NormalizeBasicCasts extends NormalizationPass {
 
     FieldDescriptor castToFieldDescriptor =
         FieldDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(expression.getTypeDescriptor().toBoxedType())
+            .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
             .setName(field)
             .setTypeDescriptor(castTypeDescriptor)
             .build();
@@ -113,4 +117,14 @@ public class NormalizeBasicCasts extends NormalizationPass {
     // expr.code;
     return FieldAccess.Builder.from(castToFieldDescriptor).setQualifier(expression).build();
   }
+
+  private static final DeclaredTypeDescriptor KOTLIN_BASIC_TYPE =
+      DeclaredTypeDescriptor.newBuilder()
+          .setTypeDeclaration(
+              TypeDeclaration.newBuilder()
+                  .setKind(Kind.CLASS)
+                  .setPackageName("j2kt")
+                  .setClassComponents(ImmutableList.of("BasicType"))
+                  .build())
+          .build();
 }

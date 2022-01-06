@@ -1,6 +1,6 @@
 package devirtualizedsupermethodcall
 
-open class SubNumber: Number {
+open class SubNumber: kotlin.Number {
  internal constructor(): super()
 
  open override fun intValue(): Int {
@@ -24,7 +24,7 @@ open class FooCallsSuperObjectMethod {
  internal constructor(): super()
 
  open override fun hashCode(): Int {
-  return super.hashCode()
+  return (super as java.lang.Object).hashCode()
  }
 }
 
@@ -35,10 +35,10 @@ open class Main {
   val fooCallsSuperObjectMethods: devirtualizedsupermethodcall.FooCallsSuperObjectMethod? = devirtualizedsupermethodcall.FooCallsSuperObjectMethod()
   fooCallsSuperObjectMethods!!.hashCode()
   val sn: devirtualizedsupermethodcall.SubNumber? = devirtualizedsupermethodcall.SubNumber()
-  sn!!.byteValue()
+  (sn!! as java.lang.Number).byteValue()
   sn!!.doubleValue()
   sn!!.floatValue()
   sn!!.intValue()
-  sn!!.shortValue()
+  (sn!! as java.lang.Number).shortValue()
  }
 }

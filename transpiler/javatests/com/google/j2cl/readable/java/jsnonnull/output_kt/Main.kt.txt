@@ -1,37 +1,37 @@
 package jsnonnull
 
 open class Main {
- internal var f1: String = "Hello"
+ internal var f1: kotlin.String = "Hello"
 
- internal var f2: String? = null
+ internal var f2: kotlin.String? = null
 
- internal var f4: java.util.List<String> = java.util.ArrayList<String>()
+ internal var f4: java.util.List<kotlin.String> = java.util.ArrayList<kotlin.String>()
 
- internal var f5: java.util.List<String>? = java.util.ArrayList<String>()
+ internal var f5: java.util.List<kotlin.String>? = java.util.ArrayList<kotlin.String>()
 
- internal var f6: java.util.List<String?> = java.util.ArrayList<String?>()
+ internal var f6: java.util.List<kotlin.String?> = java.util.ArrayList<kotlin.String?>()
 
- internal var f7: java.util.List<String?>? = null
+ internal var f7: java.util.List<kotlin.String?>? = null
 
- internal var f8: Array<String> = arrayOf<String>()
+ internal var f8: Array<kotlin.String> = arrayOf<kotlin.String>()
 
- internal var f9: Array<String?> = arrayOf<String?>()
+ internal var f9: Array<kotlin.String?> = arrayOf<kotlin.String?>()
 
- internal var f10: Array<String>? = arrayOf<String>()
+ internal var f10: Array<kotlin.String>? = arrayOf<kotlin.String>()
 
- internal var f12: java.util.List<String?>? = java.util.ArrayList<String?>()
+ internal var f12: java.util.List<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
- constructor(a: String): super()
+ constructor(a: kotlin.String): super()
 
- open fun m1(a: String, b: java.util.List<Double>, c: String?): String {
+ open fun m1(a: kotlin.String, b: java.util.List<kotlin.Double>, c: kotlin.String?): kotlin.String {
   return ""
  }
 
- open fun m2(a: String?, b: java.util.List<Double>): String? {
+ open fun m2(a: kotlin.String?, b: java.util.List<kotlin.Double>): kotlin.String? {
   return ""
  }
 
- open fun m3(a: String, vararg args: String): String? {
+ open fun m3(a: kotlin.String, vararg args: kotlin.String): kotlin.String? {
   return null
  }
 
@@ -39,21 +39,21 @@ open class Main {
 }
 
 fun interface `Main$MyFunction` {
- fun x(a: String): String
+ fun x(a: kotlin.String): kotlin.String
 }
 
-open class `Main$StringComparator`: java.util.Comparator<String> {
+open class `Main$StringComparator`: java.util.Comparator<kotlin.String> {
  constructor(): super()
 
- open override fun compare(a: String, b: String): Int {
+ open override fun compare(a: kotlin.String, b: kotlin.String): Int {
   return 0
  }
 }
 
-open class `Main$NullableStringComparator`: java.util.Comparator<String?> {
+open class `Main$NullableStringComparator`: java.util.Comparator<kotlin.String?> {
  constructor(): super()
 
- open override fun compare(a: String?, b: String?): Int {
+ open override fun compare(a: kotlin.String?, b: kotlin.String?): Int {
   return 0
  }
 }
@@ -61,7 +61,7 @@ open class `Main$NullableStringComparator`: java.util.Comparator<String?> {
 open class `Main$NonNullableStringSubNullableComparator`: jsnonnull.`Main$NullableStringComparator` {
  constructor(): super()
 
- open override fun compare(a: String, b: String): Int {
+ open override fun compare(a: kotlin.String, b: kotlin.String): Int {
   return 0
  }
 }

@@ -10,11 +10,11 @@ open class GenericEquals<T> {
   this.value2 = null
  }
 
- open fun foo(other: genericequals.GenericEquals<*>?): Any? {
+ open fun foo(other: genericequals.GenericEquals<*>?): kotlin.Any? {
   return other!!.value2!!.value
  }
 
- open override fun equals(obj: Any?): Boolean {
+ open override fun equals(obj: kotlin.Any?): Boolean {
   if (obj === this) {
    return true
   }

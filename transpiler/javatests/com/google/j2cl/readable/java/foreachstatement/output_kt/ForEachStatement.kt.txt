@@ -3,18 +3,18 @@ package foreachstatement
 open class ForEachStatement {
  constructor(): super()
 
- open fun test(iterable: Iterable<Throwable?>?) {
+ open fun test(iterable: java.lang.Iterable<kotlin.Throwable?>?) {
   FOR_EACH@ for (t in iterable!!) {
-   t!!.toString()
+   (t!! as java.lang.Throwable).toString()
   }
-  FOR_EACH_1@ for (t_1 in arrayOfNulls<Throwable?>(10)!!) {
-   t_1!!.toString()
+  FOR_EACH_1@ for (t_1 in arrayOfNulls<kotlin.Throwable?>(10)!!) {
+   (t_1!! as java.lang.Throwable).toString()
   }
  }
 
  internal fun testMulticatch() {
   try {
-   throw Exception()
+   throw java.lang.Exception()
   } catch (e: foreachstatement.`ForEachStatement$Exception1`) {
    FOR_EACH@ for (o in e) {}
   } catch (e: foreachstatement.`ForEachStatement$Exception2`) {
@@ -22,7 +22,7 @@ open class ForEachStatement {
   }
  }
 
- internal fun <T, U: T> testTypeVariable() where T: Any?, T: Iterable<String?>? {
+ internal fun <T, U: T> testTypeVariable() where T: kotlin.Any?, T: java.lang.Iterable<kotlin.String?>? {
   val iterable: U? = null
   FOR_EACH@ for (s in iterable) {}
   val anotherIterable: foreachstatement.`ForEachStatement$IterableReturningTypeVariable`<*>? = null
@@ -30,23 +30,23 @@ open class ForEachStatement {
  }
 }
 
-open class `ForEachStatement$Exception1`: Iterable<String?>, Exception {
+open class `ForEachStatement$Exception1`: java.lang.Iterable<kotlin.String?>, java.lang.Exception {
  internal constructor(): super()
 
- open override fun iterator(): java.util.Iterator<String?>? {
+ open override fun iterator(): java.util.Iterator<kotlin.String?>? {
   return null
  }
 }
 
-open class `ForEachStatement$Exception2`: Iterable<Any?>, Exception {
+open class `ForEachStatement$Exception2`: java.lang.Iterable<kotlin.Any?>, java.lang.Exception {
  internal constructor(): super()
 
- open override fun iterator(): java.util.Iterator<Any?>? {
+ open override fun iterator(): java.util.Iterator<kotlin.Any?>? {
   return null
  }
 }
 
-open class `ForEachStatement$IterableReturningTypeVariable`<T: java.util.Iterator<Int?>?>: Iterable<Int?> {
+open class `ForEachStatement$IterableReturningTypeVariable`<T: java.util.Iterator<kotlin.Int?>?>: java.lang.Iterable<kotlin.Int?> {
  internal constructor(): super()
 
  open override fun iterator(): T? {

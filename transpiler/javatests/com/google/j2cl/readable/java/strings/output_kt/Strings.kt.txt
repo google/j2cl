@@ -3,21 +3,21 @@ package strings
 open class Strings {
  constructor(): super()
 
- internal var someString: String? = "This is a string literal"
+ internal var someString: kotlin.String? = "This is a string literal"
 
- internal var nonBmpChar: String? = "\uD800\uDF46"
+ internal var nonBmpChar: kotlin.String? = "\uD800\uDF46"
 
- internal var wideColon: String? = "\uFF1A"
+ internal var wideColon: kotlin.String? = "\uFF1A"
 
  open fun test() {
-  var s1: String? = null
-  var s2: String? = null
-  var s3: String? = "" + s1 + s2
+  var s1: kotlin.String? = null
+  var s2: kotlin.String? = null
+  var s3: kotlin.String? = "" + s1 + s2
   s2 = "" + s2 + s2
   s1 = "" + s1 + "a"
   s3 = "" + s1 + s1 + s2 + null + "a"
   s3 = "a" + s1 + s1 + s2 + null
-  var s4: String?
+  var s4: kotlin.String?
   val c1: Char = 'F'
   val c2: Char = 'o'
   s4 = "" + (c1.code + c2.code) + "o"
@@ -32,7 +32,7 @@ open class Strings {
    val `$qualifier`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
    run {
     val `$qualifier_1`: strings.`Strings$StringHolder` = `$qualifier`
-    val `$value`: String? = "" + `$qualifier`.s + s4
+    val `$value`: kotlin.String? = "" + `$qualifier`.s + s4
     `$qualifier_1`.s = `$value`
     `$value`
    }
@@ -41,7 +41,7 @@ open class Strings {
    val `$qualifier_2`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
    run {
     val `$qualifier_3`: strings.`Strings$StringHolder` = `$qualifier_2`
-    val `$value_1`: String? = "" + `$qualifier_2`.s + c1
+    val `$value_1`: kotlin.String? = "" + `$qualifier_2`.s + c1
     `$qualifier_3`.s = `$value_1`
     `$value_1`
    }
@@ -50,7 +50,7 @@ open class Strings {
    val `$qualifier_4`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
    run {
     val `$qualifier_5`: strings.`Strings$StringHolder` = `$qualifier_4`
-    val `$value_2`: String? = "" + `$qualifier_4`.s + "o"
+    val `$value_2`: kotlin.String? = "" + `$qualifier_4`.s + "o"
     `$qualifier_5`.s = `$value_2`
     `$value_2`
    }
@@ -60,14 +60,14 @@ open class Strings {
  }
 
  companion object {
-  internal val ESCAPE_CODES: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  internal val ESCAPE_CODES: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
 
-  internal val ESCAPE_CODES_COPY: String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
+  internal val ESCAPE_CODES_COPY: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
 }
 
 open class `Strings$StringHolder` {
  internal constructor(): super()
 
- @JvmField internal var s: String? = "A"
+ @JvmField internal var s: kotlin.String? = "A"
 }

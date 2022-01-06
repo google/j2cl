@@ -24,22 +24,22 @@ open class InnerClassInitOrder {
  }
 
  open fun testExtendsNestedWithGenerics() {
-  val o: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<String?>? = innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<String?>()
-  assert(1 == innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<String?>(o).value)
-  assert(2 == innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<String?>(o, 2).value)
+  val o: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<kotlin.String?>? = innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<kotlin.String?>()
+  assert(1 == innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<kotlin.String?>(o).value)
+  assert(2 == innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<kotlin.String?>(o, 2).value)
   assert(1 == innerclassinitorder.`InnerClassInitOrder$ESWGInnerSubclass`(o).value)
   assert(2 == innerclassinitorder.`InnerClassInitOrder$ESWGInnerSubclass`(2, o).value)
  }
 
  open fun testInnerClassCtors() {
-  val p1: innerclassinitorder.`InnerClassInitOrder$P1`<*>? = innerclassinitorder.`InnerClassInitOrder$P1`<Any?>()
+  val p1: innerclassinitorder.`InnerClassInitOrder$P1`<*>? = innerclassinitorder.`InnerClassInitOrder$P1`<kotlin.Any?>()
   assert(1 == p1!!.value)
-  assert(2 == innerclassinitorder.`InnerClassInitOrder$P1`<Any?>(2).value)
-  val p2: innerclassinitorder.`InnerClassInitOrder$P1$P2`<*, *>? = innerclassinitorder.`InnerClassInitOrder$P1$P2`<Any?, *>(p1)
+  assert(2 == innerclassinitorder.`InnerClassInitOrder$P1`<kotlin.Any?>(2).value)
+  val p2: innerclassinitorder.`InnerClassInitOrder$P1$P2`<*, *>? = innerclassinitorder.`InnerClassInitOrder$P1$P2`<kotlin.Any?, *>(p1)
   assert(1 == p2!!.value)
-  assert(2 == innerclassinitorder.`InnerClassInitOrder$P1$P2`<Any?, *>(p1, 2).value)
-  assert(1 == innerclassinitorder.`InnerClassInitOrder$P1$P2$P3`<Any?, *, *>(p2).value)
-  assert(2 == innerclassinitorder.`InnerClassInitOrder$P1$P2$P3`<Any?, *, *>(p2, 2).value)
+  assert(2 == innerclassinitorder.`InnerClassInitOrder$P1$P2`<kotlin.Any?, *>(p1, 2).value)
+  assert(1 == innerclassinitorder.`InnerClassInitOrder$P1$P2$P3`<kotlin.Any?, *, *>(p2).value)
+  assert(2 == innerclassinitorder.`InnerClassInitOrder$P1$P2$P3`<kotlin.Any?, *, *>(p2, 2).value)
  }
 
  open fun testInnerClassInitialization() {
@@ -111,7 +111,7 @@ open class InnerClassInitOrder {
 
  companion object {
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg args: kotlin.String?) {
    val m: innerclassinitorder.InnerClassInitOrder? = innerclassinitorder.InnerClassInitOrder()
    m!!.testOuterThisFromSuperCall()
    m!!.testOuterThisFromThisCall()
@@ -133,8 +133,8 @@ open class InnerClassInitOrder {
 }
 
 open class `InnerClassInitOrder$OuterRefFromSuperCtorBase` {
- internal constructor(o: Any?): super() {
-  o!!.toString()
+ internal constructor(o: kotlin.Any?): super() {
+  (o!! as java.lang.Object).toString()
  }
 }
 
@@ -153,7 +153,7 @@ open class `InnerClassInitOrder$OuterRefFromSuperCtorCall$1` {
 
  @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromSuperCtorCall`?
 
- open override fun toString(): String? {
+ open override fun toString(): kotlin.String? {
   this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 100
   return ""
  }
@@ -162,7 +162,7 @@ open class `InnerClassInitOrder$OuterRefFromSuperCtorCall$1` {
 open class `InnerClassInitOrder$OuterRefFromThisCtorCall`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromSuperCtorBase` {
  @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
 
- constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, `object`: Any?): super(`object`) {
+ constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, `object`: kotlin.Any?): super(`object`) {
   this.`this` = `$outer_this`
  }
 
@@ -176,7 +176,7 @@ open class `InnerClassInitOrder$OuterRefFromThisCtorCall$1` {
 
  @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromThisCtorCall`?
 
- open override fun toString(): String? {
+ open override fun toString(): kotlin.String? {
   this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 1000
   return ""
  }
@@ -299,10 +299,10 @@ open class `InnerClassInitOrder$ESWGOuter$ESWGInner`<T> {
  }
 }
 
-open class `InnerClassInitOrder$ESWGInnerSubclass`: innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<String?> {
- internal constructor(outer: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<String?>?): super(outer)
+open class `InnerClassInitOrder$ESWGInnerSubclass`: innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<kotlin.String?> {
+ internal constructor(outer: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<kotlin.String?>?): super(outer)
 
- internal constructor(value: Int, outer: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<String?>?): super(outer, value)
+ internal constructor(value: Int, outer: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<kotlin.String?>?): super(outer, value)
 }
 
 abstract class `InnerClassInitOrder$1AddNumber` {

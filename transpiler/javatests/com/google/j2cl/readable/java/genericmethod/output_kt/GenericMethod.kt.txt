@@ -5,11 +5,11 @@ open class GenericMethod<T_2> {
 
  open fun <T_1, S> foo(f: T_1?, s: S?) {}
 
- open fun `fun`(o: Any?) {}
+ open fun `fun`(o: kotlin.Any?) {}
 
- open fun <T_1: Exception?> `fun`(t: T_1?) {}
+ open fun <T_1: java.lang.Exception?> `fun`(t: T_1?) {}
 
- open fun <T_1: Error?> `fun`(t: T_1?) {
+ open fun <T_1: java.lang.Error?> `fun`(t: T_1?) {
   genericmethod.`GenericMethod$1`<T_1, T_2>(this)
   genericmethod.`GenericMethod$1LocalClass`<T_1, T_1, T_2>(this)
  }
@@ -31,14 +31,14 @@ open class GenericMethod<T_2> {
  }
 
  open fun test() {
-  val g: genericmethod.GenericMethod<Number?>? = genericmethod.GenericMethod<Number?>()
+  val g: genericmethod.GenericMethod<kotlin.Number?>? = genericmethod.GenericMethod<kotlin.Number?>()
   g!!.foo(g, g)
-  g!!.foo(Error(), Exception())
-  g!!.`fun`(Any())
-  g!!.`fun`(Exception())
-  g!!.`fun`(Error())
-  g!!.`fun`(arrayOf<String?>("asdf"))
-  var s: String? = this.checked()
+  g!!.foo(java.lang.Error(), java.lang.Exception())
+  g!!.`fun`((java.lang.Object() as kotlin.Any))
+  g!!.`fun`(java.lang.Exception())
+  g!!.`fun`(java.lang.Error())
+  g!!.`fun`(arrayOf<kotlin.String?>("asdf"))
+  var s: kotlin.String? = this.checked()
   s = this.unchecked()
  }
 
@@ -47,7 +47,7 @@ open class GenericMethod<T_2> {
   fun acceptsContent(content: genericmethod.`GenericMethod$Content`?) {}
 
   @JvmStatic
-  fun acceptsString(string: String?) {}
+  fun acceptsString(string: kotlin.String?) {}
 
   @JvmStatic
   fun testErasureCast_wildcard() {
@@ -83,7 +83,7 @@ open class GenericMethod<T_2> {
  }
 }
 
-open class `GenericMethod$1`<T_1: Error?, T_2>: genericmethod.GenericMethod<T_1> {
+open class `GenericMethod$1`<T_1: java.lang.Error?, T_2>: genericmethod.GenericMethod<T_1> {
  internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
   this.`this` = `$outer_this`
  }
@@ -95,7 +95,7 @@ open class `GenericMethod$1`<T_1: Error?, T_2>: genericmethod.GenericMethod<T_1>
  open fun <T_2> fun2(t: T_2?) {}
 }
 
-open class `GenericMethod$1LocalClass`<T, T_1: Error?, T_2>: genericmethod.GenericMethod<T> {
+open class `GenericMethod$1LocalClass`<T, T_1: java.lang.Error?, T_2>: genericmethod.GenericMethod<T> {
  internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
   this.`this` = `$outer_this`
  }
@@ -104,7 +104,7 @@ open class `GenericMethod$1LocalClass`<T, T_1: Error?, T_2>: genericmethod.Gener
 
  open fun fun2(t: T?) {}
 
- open fun <T_3: Number?> fun2(t: T_3?) {}
+ open fun <T_3: kotlin.Number?> fun2(t: T_3?) {}
 }
 
 open class `GenericMethod$SuperContainer`<C: genericmethod.`GenericMethod$Container`<*>?> {
@@ -126,7 +126,7 @@ open class `GenericMethod$Container`<CT: genericmethod.`GenericMethod$Content`?>
 open class `GenericMethod$Content` {
  internal constructor(): super()
 
- internal open fun getProp(): String? {
+ internal open fun getProp(): kotlin.String? {
   return null
  }
 }

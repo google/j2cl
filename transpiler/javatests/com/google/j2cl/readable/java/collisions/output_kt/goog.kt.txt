@@ -54,7 +54,7 @@ open class Other<T> {
  }
 }
 
-open class T<T: Number?> {
+open class T<T: kotlin.Number?> {
  internal constructor(): super()
 
  internal open fun m(): T? {
@@ -63,7 +63,7 @@ open class T<T: Number?> {
 
  internal open fun n(): T? {
   val t: T? = collisions.T<T>().m()
-  t!!.byteValue()
+  (t!! as java.lang.Number).byteValue()
   return t
  }
 }

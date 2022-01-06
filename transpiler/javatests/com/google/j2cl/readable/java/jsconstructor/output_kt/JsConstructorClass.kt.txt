@@ -83,15 +83,15 @@ open class `JsConstructorClass$Varargs`: jsconstructor.`JsConstructorClass$A` {
 }
 
 open class `JsConstructorClass$SubVarargs`: jsconstructor.`JsConstructorClass$Varargs` {
- constructor(i: Any?, vararg args: Int): super(args)
+ constructor(i: kotlin.Any?, vararg args: Int): super(args)
 
- constructor(j: Int): this(Any(), intArrayOf(j))
+ constructor(j: Int): this((java.lang.Object() as kotlin.Any), intArrayOf(j))
 
  companion object {
   @JvmStatic
   internal fun subNativeInvocation() {
    val unusedS1: jsconstructor.`JsConstructorClass$SubVarargs`? = jsconstructor.`JsConstructorClass$SubVarargs`(2)
-   val unusedS2: jsconstructor.`JsConstructorClass$SubVarargs`? = jsconstructor.`JsConstructorClass$SubVarargs`(Any(), intArrayOf(1, 2, 3))
+   val unusedS2: jsconstructor.`JsConstructorClass$SubVarargs`? = jsconstructor.`JsConstructorClass$SubVarargs`((java.lang.Object() as kotlin.Any), intArrayOf(1, 2, 3))
   }
  }
 }
@@ -105,11 +105,11 @@ open class `JsConstructorClass$InstanceVarargs`: jsconstructor.`JsConstructorCla
 }
 
 open class `JsConstructorClass$RegularType` {
- constructor(b: Any?): super()
+ constructor(b: kotlin.Any?): super()
 }
 
 open class `JsConstructorClass$JsConstructorSubtypeOfRegularType`: jsconstructor.`JsConstructorClass$RegularType` {
- constructor(`object`: Any?): super(`object`)
+ constructor(`object`: kotlin.Any?): super(`object`)
 
- constructor(): this(Any())
+ constructor(): this((java.lang.Object() as kotlin.Any))
 }

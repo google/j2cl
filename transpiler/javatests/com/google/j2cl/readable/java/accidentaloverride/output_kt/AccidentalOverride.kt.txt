@@ -1,6 +1,6 @@
 package accidentaloverride
 
-open class Parent<T: Error?> {
+open class Parent<T: java.lang.Error?> {
  internal constructor(): super()
 
  open fun foo(e: T?) {}
@@ -14,6 +14,6 @@ open class AnotherAccidentalOverride: accidentaloverride.SuperInterface<java.lan
  internal constructor(): super()
 }
 
-open class AccidentalOverride: accidentaloverride.SuperInterface<Error?>, accidentaloverride.Parent<Error?> {
+open class AccidentalOverride: accidentaloverride.SuperInterface<java.lang.Error?>, accidentaloverride.Parent<java.lang.Error?> {
  constructor(): super()
 }

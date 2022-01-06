@@ -17,17 +17,17 @@ open class Number {
   }
 
   @JvmStatic
-  internal fun getFromCharCodeFunction(): importglobaljstypes.`Number$NativeFunction`<String?>? {}
+  internal fun getFromCharCodeFunction(): importglobaljstypes.`Number$NativeFunction`<kotlin.String?>? {}
 
   @JvmStatic
-  fun fromCharCode(array: IntArray?): String? {
+  fun fromCharCode(array: IntArray?): kotlin.String? {
    return importglobaljstypes.Number.getFromCharCodeFunction()!!.apply(null, array)
   }
  }
 }
 
 fun interface `Number$NativeFunction`<T> {
- fun apply(thisContext: Any?, argsArray: IntArray?): T?
+ fun apply(thisContext: kotlin.Any?, argsArray: IntArray?): T?
 }
 
 interface `Number$MyLiteralType` {}

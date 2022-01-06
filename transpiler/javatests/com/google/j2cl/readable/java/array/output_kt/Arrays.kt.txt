@@ -4,14 +4,14 @@ open class Arrays {
  constructor(): super()
 
  open fun testObjectArray() {
-  var objects: Array<Any?>? = arrayOfNulls<Any?>(100)
-  objects = arrayOfNulls<Any?>(0)
-  objects = arrayOf<Any?>(null, null)
-  var objects2d: Array<Array<Any?>?>? = arrayOfNulls<Array<Any?>?>(5)
-  objects2d = arrayOf<Array<Any?>?>(arrayOf<Any?>(null, null), null)
-  objects2d = arrayOfNulls<Array<Any?>?>(20)
-  val arrayLiteral2d: Array<Array<Any?>?>? = arrayOf<Array<Any?>?>(arrayOf<Any?>(null, null), null)
-  var `object`: Any? = objects!![0]
+  var objects: Array<kotlin.Any?>? = arrayOfNulls<kotlin.Any?>(100)
+  objects = arrayOfNulls<kotlin.Any?>(0)
+  objects = arrayOf<kotlin.Any?>(null, null)
+  var objects2d: Array<Array<kotlin.Any?>?>? = arrayOfNulls<Array<kotlin.Any?>?>(5)
+  objects2d = arrayOf<Array<kotlin.Any?>?>(arrayOf<kotlin.Any?>(null, null), null)
+  objects2d = arrayOfNulls<Array<kotlin.Any?>?>(20)
+  val arrayLiteral2d: Array<Array<kotlin.Any?>?>? = arrayOf<Array<kotlin.Any?>?>(arrayOf<kotlin.Any?>(null, null), null)
+  var `object`: kotlin.Any? = objects!![0]
   `object` = objects2d!![0]!![1]
   objects!![0] = null
   objects2d!![0]!![1] = null
@@ -57,12 +57,12 @@ open class Arrays {
  }
 
  internal open fun testDevirtualizedTypeArrays() {
-  var booleans: Array<Boolean?>? = arrayOfNulls<Boolean?>(100)
-  booleans = arrayOfNulls<Boolean?>(0)
-  booleans = arrayOf<Boolean?>(true, false)
-  var booleans2d: Array<Array<Boolean?>?>? = arrayOfNulls<Array<Boolean?>?>(5)
-  booleans2d = arrayOf<Array<Boolean?>?>(arrayOf<Boolean?>(true, false), null)
-  booleans2d = arrayOfNulls<Array<Boolean?>?>(20)
+  var booleans: Array<kotlin.Boolean?>? = arrayOfNulls<kotlin.Boolean?>(100)
+  booleans = arrayOfNulls<kotlin.Boolean?>(0)
+  booleans = arrayOf<kotlin.Boolean?>(true, false)
+  var booleans2d: Array<Array<kotlin.Boolean?>?>? = arrayOfNulls<Array<kotlin.Boolean?>?>(5)
+  booleans2d = arrayOf<Array<kotlin.Boolean?>?>(arrayOf<kotlin.Boolean?>(true, false), null)
+  booleans2d = arrayOfNulls<Array<kotlin.Boolean?>?>(20)
   var b: Boolean = booleans!![0]!!
   b = booleans2d!![0]!![1]!!
   booleans!![0] = true
@@ -70,13 +70,13 @@ open class Arrays {
  }
 
  internal open fun testStringArrays() {
-  var strings: Array<String?>? = arrayOfNulls<String?>(100)
-  strings = arrayOfNulls<String?>(0)
-  strings = arrayOf<String?>(null, null)
-  var strings2d: Array<Array<String?>?>? = arrayOfNulls<Array<String?>?>(5)
-  strings2d = arrayOf<Array<String?>?>(arrayOf<String?>(null, null), null)
-  strings2d = arrayOfNulls<Array<String?>?>(20)
-  var b: String? = strings!![0]
+  var strings: Array<kotlin.String?>? = arrayOfNulls<kotlin.String?>(100)
+  strings = arrayOfNulls<kotlin.String?>(0)
+  strings = arrayOf<kotlin.String?>(null, null)
+  var strings2d: Array<Array<kotlin.String?>?>? = arrayOfNulls<Array<kotlin.String?>?>(5)
+  strings2d = arrayOf<Array<kotlin.String?>?>(arrayOf<kotlin.String?>(null, null), null)
+  strings2d = arrayOfNulls<Array<kotlin.String?>?>(20)
+  var b: kotlin.String? = strings!![0]
   b = strings2d!![0]!![1]
   strings!![0] = null
   strings2d!![0]!![1] = null
@@ -96,16 +96,16 @@ open class Arrays {
  }
 
  open fun testErasureCastsOnArrayAccess() {
-  val container: array.`Arrays$ArrayContainer`<String?>? = null
-  val s: String? = container!!.data!![0]
+  val container: array.`Arrays$ArrayContainer`<kotlin.String?>? = null
+  val s: kotlin.String? = container!!.data!![0]
  }
 
  open fun testArraysSupertypeClosureTypes() {
-  this.consumesCloneable(arrayOfNulls<Any?>(10))
-  this.consumesSerializable(arrayOfNulls<Any?>(10))
+  this.consumesCloneable(arrayOfNulls<kotlin.Any?>(10))
+  this.consumesSerializable(arrayOfNulls<kotlin.Any?>(10))
  }
 
- open fun consumesCloneable(cloneable: Cloneable?) {}
+ open fun consumesCloneable(cloneable: kotlin.Cloneable?) {}
 
  open fun consumesSerializable(serializable: java.io.Serializable?) {}
 }

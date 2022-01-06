@@ -3,13 +3,13 @@ package jsasync
 open class Main {
  constructor(): super()
 
- internal val x: jsasync.`Main$IThenable`<Int?>? = jsasync.`Main$Promise`.resolve(10)
+ internal val x: jsasync.`Main$IThenable`<kotlin.Int?>? = jsasync.`Main$Promise`.resolve(10)
 
  internal open fun emptyAsyncMethod(): jsasync.`Main$IThenable`<java.lang.Void?>? {
   return null
  }
 
- internal open fun asyncMethod(): jsasync.`Main$IThenable`<Int?>? {
+ internal open fun asyncMethod(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   val result: Int = jsasync.Main.await(jsasync.`Main$Promise`.resolve(7))!!
   return this.parametricAsyncMethod(result)
  }
@@ -48,7 +48,7 @@ open class `Main$1`: jsasync.`Main$BaseInterface` {
 
  @JvmField val `this`: jsasync.Main?
 
- open override fun asyncCall(): jsasync.`Main$IThenable`<Int?>? {
+ open override fun asyncCall(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   return jsasync.`Main$Promise`.resolve(jsasync.Main.await(this.`this`!!.x))
  }
 }
@@ -60,7 +60,7 @@ open class `Main$2`: jsasync.`Main$JsFunctionInterface` {
 
  @JvmField val `this`: jsasync.Main?
 
- open override fun doSomething(): jsasync.`Main$IThenable`<Int?>? {
+ open override fun doSomething(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   return jsasync.`Main$Promise`.resolve(5)
  }
 }
@@ -72,32 +72,32 @@ open class `Main$3`: jsasync.`Main$JsFunctionInterface` {
 
  @JvmField val `this`: jsasync.Main?
 
- open override fun doSomething(): jsasync.`Main$IThenable`<Int?>? {
+ open override fun doSomething(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   val tmp: jsasync.`Main$JsFunctionInterface`? = this
   return jsasync.`Main$Promise`.resolve(jsasync.Main.await(this.`this`!!.x))
  }
 }
 
 fun interface `Main$BaseInterface` {
- fun asyncCall(): jsasync.`Main$IThenable`<Int?>?
+ fun asyncCall(): jsasync.`Main$IThenable`<kotlin.Int?>?
 }
 
 fun interface `Main$AsyncInterface`: jsasync.`Main$BaseInterface` {
- override fun asyncCall(): jsasync.`Main$IThenable`<Int?>?
+ override fun asyncCall(): jsasync.`Main$IThenable`<kotlin.Int?>?
 }
 
 interface `Main$InterfaceWithAsyncDefaultMethod` {
- fun asyncCall(): jsasync.`Main$IThenable`<Int?>? {
+ fun asyncCall(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   return jsasync.`Main$Promise`.resolve(jsasync.Main.await(jsasync.`Main$Promise`.resolve(5)))
  }
 }
 
 fun interface `Main$JsFunctionInterface` {
- fun doSomething(): jsasync.`Main$IThenable`<Int?>?
+ fun doSomething(): jsasync.`Main$IThenable`<kotlin.Int?>?
 }
 
 fun interface `Main$AsyncJsFunctionInterface` {
- fun doSomething(): jsasync.`Main$IThenable`<Int?>?
+ fun doSomething(): jsasync.`Main$IThenable`<kotlin.Int?>?
 }
 
 interface `Main$IThenable`<T> {}

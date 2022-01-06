@@ -14,7 +14,7 @@ open class Main {
      else ->
     }
    } while (false)
-   val comparable: Comparable<*>? = comparableJsEnum
+   val comparable: java.lang.Comparable<*>? = comparableJsEnum
    comparableJsEnum = comparable as jsenum.`Main$ComparableJsEnum`?
    var intJsEnum: jsenum.`Main$IntJsEnum`? = if (jsenum.`Main$IntJsEnum`.ELEVEN.getValue() == 10) jsenum.`Main$IntJsEnum`.ELEVEN else null
    SWITCH_1@ do {
@@ -24,11 +24,11 @@ open class Main {
      else ->
     }
    } while (false)
-   val o: Any? = intJsEnum
+   val o: kotlin.Any? = intJsEnum
    intJsEnum = o as jsenum.`Main$IntJsEnum`?
    val equal: Boolean = intJsEnum === jsenum.`Main$IntJsEnum`.TWENTY
    var isInstance: Boolean = intJsEnum is jsenum.`Main$IntJsEnum`
-   isInstance = intJsEnum is Comparable<*>
+   isInstance = intJsEnum is java.lang.Comparable<*>
    val stringJsEnum: jsenum.`Main$StringJsEnum`? = if (jsenum.`Main$StringJsEnum`.ONE.getValue() === "10") jsenum.`Main$StringJsEnum`.THREE else null
    SWITCH_2@ do {
     when (stringJsEnum!!) {
@@ -37,15 +37,15 @@ open class Main {
      else ->
     }
    } while (false)
-   jsenum.`Main$NativeStringEnum`.ONE.compareTo(jsenum.`Main$NativeStringEnum`.THREE)
+   (jsenum.`Main$NativeStringEnum`.ONE as java.lang.Enum<jsenum.`Main$NativeStringEnum`?>).compareTo(jsenum.`Main$NativeStringEnum`.THREE)
    jsenum.`Main$NativeStringEnum`.ONE == jsenum.`Main$NativeStringEnum`.THREE
-   jsenum.`Main$ComparableJsEnum`.ONE.compareTo(jsenum.`Main$ComparableJsEnum`.ZERO)
+   (jsenum.`Main$ComparableJsEnum`.ONE as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).compareTo(jsenum.`Main$ComparableJsEnum`.ZERO)
    jsenum.`Main$ComparableJsEnum`.ONE == jsenum.`Main$ComparableJsEnum`.ZERO
    val supplier: java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?> {
     return jsenum.`Main$ComparableJsEnum`.ONE
    }
    val consummer: java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?> { e: jsenum.`Main$ComparableJsEnum`? ->
-    e!!.ordinal()
+    (e!! as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
    }
   }
 
@@ -55,8 +55,8 @@ open class Main {
    var unboxed: jsenum.`Main$ComparableJsEnum`? = templatedField!!.getValue()
    unboxed = templatedField!!.value
    templatedField!!.value = jsenum.`Main$ComparableJsEnum`.ONE
-   java.util.Arrays.asList(arrayOf<Any?>(jsenum.`Main$ComparableJsEnum`.ONE))
-   templatedField!!.getValue()!!.ordinal()
+   java.util.Arrays.asList(arrayOf<kotlin.Any?>(jsenum.`Main$ComparableJsEnum`.ONE))
+   (templatedField!!.getValue()!! as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
    val b: Boolean = jsenum.`Main$ComparableJsEnum`.ONE === jsenum.Main.boxingPassthrough(jsenum.`Main$ComparableJsEnum`.ONE)
   }
 
@@ -67,7 +67,7 @@ open class Main {
 
   @JvmStatic
   internal fun boxingWithGenerics() {
-   jsenum.`Main$Foo`<Any?>(java.util.Optional.of(jsenum.`Main$IntJsEnum`.MINUSONE))
+   jsenum.`Main$Foo`<kotlin.Any?>(java.util.Optional.of(jsenum.`Main$IntJsEnum`.MINUSONE))
   }
  }
 }
@@ -76,7 +76,7 @@ enum class `Main$ComparableJsEnum` {
  internal constructor(): super()
 
  open fun getValue(): Int {
-  return this.ordinal()
+  return (this as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
  }
 
  companion object {
@@ -109,13 +109,13 @@ enum class `Main$IntJsEnum` {
 }
 
 enum class `Main$StringJsEnum` {
- internal var value: String? = null
+ internal var value: kotlin.String? = null
 
- open fun getValue(): String? {
+ open fun getValue(): kotlin.String? {
   return this.value
  }
 
- internal constructor(value: String?): super() {
+ internal constructor(value: kotlin.String?): super() {
   this.value = value
  }
 
@@ -127,13 +127,13 @@ enum class `Main$StringJsEnum` {
 }
 
 enum class `Main$NonNullableStringJsEnum` {
- internal var value: String = null
+ internal var value: kotlin.String = null
 
- open fun getValue(): String? {
+ open fun getValue(): kotlin.String? {
   return this.value
  }
 
- internal constructor(value: String?): super() {
+ internal constructor(value: kotlin.String?): super() {
   this.value = value!!
  }
 

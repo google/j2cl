@@ -34,13 +34,13 @@ fun interface `Main$Interface`<T> {
  }
 }
 
-fun interface `Main$SubInterface`: interfaces.`Main$Interface`<String?> {
- override fun defaultMethod(s: String?) {
+fun interface `Main$SubInterface`: interfaces.`Main$Interface`<kotlin.String?> {
+ override fun defaultMethod(s: kotlin.String?) {
   super.defaultMethod(s)
  }
 }
 
-open class `Main$Implementor`: interfaces.`Main$SubInterface`, interfaces.`Main$Interface`<String?> {
+open class `Main$Implementor`: interfaces.`Main$SubInterface`, interfaces.`Main$Interface`<kotlin.String?> {
  internal constructor(`$outer_this`: interfaces.Main?): super() {
   this.`this` = `$outer_this`
  }

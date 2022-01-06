@@ -11,11 +11,11 @@ abstract class AbstractTypeNonNull: typeannotations.ParametricType<typeannotatio
 open class Parent {
  internal constructor(): super()
 
- open fun m(s: String, c: typeannotations.Parent?): typeannotations.Parent? {
+ open fun m(s: kotlin.String, c: typeannotations.Parent?): typeannotations.Parent? {
   return c
  }
 
- open fun m(l: java.util.List<String>?, c: typeannotations.Parent?): java.util.List<typeannotations.Parent>? {
+ open fun m(l: java.util.List<kotlin.String>?, c: typeannotations.Parent?): java.util.List<typeannotations.Parent>? {
   return java.util.ArrayList<typeannotations.Parent>()
  }
 }
@@ -34,7 +34,7 @@ open class TypeAnnotations {
  companion object {
   @JvmStatic
   fun main() {
-   val list: java.util.List<String>? = java.util.ArrayList<String>()
+   val list: java.util.List<kotlin.String>? = java.util.ArrayList<kotlin.String>()
   }
  }
 }

@@ -12,16 +12,16 @@ open class ImplicitParenthesis {
   @JvmStatic
   internal fun examples() {
    var primitiveInt: Int
-   var boxedInt: Int?
+   var boxedInt: kotlin.Int?
    if (true) {
     primitiveInt = 5
-    boxedInt = Int(10)
-    primitiveInt = if (primitiveInt == 5) Int(15) else Int(30)
+    boxedInt = (java.lang.Integer(10) as kotlin.Int)
+    primitiveInt = if (primitiveInt == 5) (java.lang.Integer(15) as kotlin.Int) else (java.lang.Integer(30) as kotlin.Int)
     assert(primitiveInt == 15)
    }
    if (true) {
     primitiveInt = 5
-    boxedInt = Int(10)
+    boxedInt = (java.lang.Integer(10) as kotlin.Int)
     primitiveInt = run {
      boxedInt = boxedInt!! + primitiveInt
      boxedInt
@@ -30,7 +30,7 @@ open class ImplicitParenthesis {
    }
    if (true) {
     primitiveInt = 5
-    boxedInt = Int(10)
+    boxedInt = (java.lang.Integer(10) as kotlin.Int)
     primitiveInt = run {
      boxedInt = primitiveInt
      boxedInt
@@ -39,9 +39,9 @@ open class ImplicitParenthesis {
    }
    if (true) {
     primitiveInt = 5
-    boxedInt = Int(10)
+    boxedInt = (java.lang.Integer(10) as kotlin.Int)
     primitiveInt = run {
-     val `$value`: Int? = boxedInt
+     val `$value`: kotlin.Int? = boxedInt
      boxedInt = boxedInt!! + 1
      `$value`
     }!!
@@ -49,7 +49,7 @@ open class ImplicitParenthesis {
    }
    if (true) {
     primitiveInt = 5
-    boxedInt = Int(10)
+    boxedInt = (java.lang.Integer(10) as kotlin.Int)
     primitiveInt = run {
      boxedInt = boxedInt!! + 1
      boxedInt
@@ -61,17 +61,17 @@ open class ImplicitParenthesis {
   @JvmStatic
   internal fun nonExamples() {
    var primitiveInt: Int
-   var boxedInt: Int?
-   var boxedBoolean: Boolean?
+   var boxedInt: kotlin.Int?
+   var boxedBoolean: kotlin.Boolean?
    if (true) {
     primitiveInt = 5
-    boxedInt = Int(10)
+    boxedInt = (java.lang.Integer(10) as kotlin.Int)
     primitiveInt = boxedInt!! - primitiveInt
     assert(primitiveInt == 5)
    }
    if (true) {
     primitiveInt = 5
-    boxedInt = Int(10)
+    boxedInt = (java.lang.Integer(10) as kotlin.Int)
     boxedBoolean = true
     boxedBoolean = boxedInt!! == primitiveInt
     assert(boxedBoolean!! == false)
@@ -80,7 +80,7 @@ open class ImplicitParenthesis {
 
   @JvmStatic
   internal fun parenthesisRemoval() {
-   Int(1 + 2)
+   (java.lang.Integer(1 + 2) as kotlin.Int)
   }
  }
 }

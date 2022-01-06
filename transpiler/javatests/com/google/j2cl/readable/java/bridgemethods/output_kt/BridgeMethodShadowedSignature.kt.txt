@@ -5,13 +5,13 @@ open class BridgeMethodShadowedSignature {
 }
 
 fun interface `BridgeMethodShadowedSignature$I`<I1> {
- fun get(consumer: java.util.function.Consumer<*>?): String?
+ fun get(consumer: java.util.function.Consumer<*>?): kotlin.String?
 }
 
 abstract class `BridgeMethodShadowedSignature$B`<B1, B2>: bridgemethods.`BridgeMethodShadowedSignature$I`<B1> {
  internal constructor(): super()
 
- open fun get(consumer: B2?): String? {
+ open fun get(consumer: B2?): kotlin.String? {
   return "B get B2"
  }
 }

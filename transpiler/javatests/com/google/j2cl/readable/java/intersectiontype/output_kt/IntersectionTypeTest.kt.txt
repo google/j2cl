@@ -21,12 +21,12 @@ fun interface Cmp2<T> {
 open class IntersectionTypeTest<U> {
  constructor(): super()
 
- open fun cast3(s: Any?): Any? {
+ open fun cast3(s: kotlin.Any?): kotlin.Any? {
   return s
  }
 
  open fun testMethodCall() {
-  val o: Any? = intersectiontype.IntersectionTypeTest.m()
+  val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m()
   intersectiontype.IntersectionTypeTest.set(o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? */)
   intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m())
   val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n()
@@ -40,7 +40,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun <T> cast(o: Any?): intersectiontype.Getable<T>? {
+  fun <T> cast(o: kotlin.Any?): intersectiontype.Getable<T>? {
    if (o === null) {
     return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
    }
@@ -48,13 +48,13 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun <T> cast1(s: Any?): intersectiontype.Getable<Comparable<String?>?>? {
-   return s as intersectiontype.Getable<Comparable<String?>?>? /* & intersectiontype.Setable? */
+  fun <T> cast1(s: kotlin.Any?): intersectiontype.Getable<java.lang.Comparable<kotlin.String?>?>? {
+   return s as intersectiontype.Getable<java.lang.Comparable<kotlin.String?>?>? /* & intersectiontype.Setable? */
   }
 
   @JvmStatic
-  fun <T> cast2(s: Any?): intersectiontype.Getable<Comparable<T>?>? {
-   return s as intersectiontype.Getable<Comparable<T>?>? /* & intersectiontype.Setable? */
+  fun <T> cast2(s: kotlin.Any?): intersectiontype.Getable<java.lang.Comparable<T>?>? {
+   return s as intersectiontype.Getable<java.lang.Comparable<T>?>? /* & intersectiontype.Setable? */
   }
 
   @JvmStatic
@@ -72,7 +72,7 @@ open class IntersectionTypeTest<U> {
   }
 
   @JvmStatic
-  fun testClosureAssignment(o: Any?) {
+  fun testClosureAssignment(o: kotlin.Any?) {
    val e: intersectiontype.`IntersectionTypeTest$A`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
    val g: intersectiontype.`IntersectionTypeTest$EmptyA`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
    val s: intersectiontype.`IntersectionTypeTest$EmptyB`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
@@ -85,7 +85,7 @@ open class IntersectionTypeTest<U> {
 
   @JvmStatic
   internal fun <T> m(): T? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
-   return intersectiontype.IntersectionTypeTest.get(Any()) as T?
+   return intersectiontype.IntersectionTypeTest.get((java.lang.Object() as kotlin.Any)) as T?
   }
 
   @JvmStatic
@@ -105,7 +105,7 @@ open class `IntersectionTypeTest$MapEntry`<U> {
 
  @JvmField val `this`: intersectiontype.IntersectionTypeTest<U>?
 
- open fun <T> method(o: Any?): intersectiontype.Getable<T>? {
+ open fun <T> method(o: kotlin.Any?): intersectiontype.Getable<T>? {
   return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
  }
 }

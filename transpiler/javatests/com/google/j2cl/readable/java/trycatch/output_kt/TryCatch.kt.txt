@@ -18,16 +18,16 @@ open class TryCatch {
  open fun testEmptyThrowableCatch() {
   try {
    throw java.lang.ClassCastException()
-  } catch (e: Throwable) {}
+  } catch (e: kotlin.Throwable) {}
   try {
    throw java.lang.ClassCastException()
-  } catch (e_1: Exception) {} catch (e_2: Throwable) {}
+  } catch (e_1: java.lang.Exception) {} catch (e_2: kotlin.Throwable) {}
  }
 
  open fun testEmptyThrowableRethrow() {
   try {
    throw java.lang.ClassCastException()
-  } catch (e: Throwable) {
+  } catch (e: kotlin.Throwable) {
    throw e!!
   }
  }
@@ -40,36 +40,36 @@ open class TryCatch {
 
  open fun testTryWithResource() {
   try {
-   throw Exception()
-  } catch (e: Exception) {}
+   throw java.lang.Exception()
+  } catch (e: java.lang.Exception) {}
  }
 
  open fun testTryWithResourceJava9() {
   val thing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
   val thing2: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
   try {
-   throw Exception()
-  } catch (e: Exception) {}
+   throw java.lang.Exception()
+  } catch (e: java.lang.Exception) {}
  }
 
  open fun testTryWithResouceOnStaticField() {
   try {
-   throw Exception()
-  } catch (e: Exception) {}
+   throw java.lang.Exception()
+  } catch (e: java.lang.Exception) {}
  }
 
  open fun testNestedTryCatch() {
   try {
-   throw Exception()
-  } catch (ae: Exception) {
+   throw java.lang.Exception()
+  } catch (ae: java.lang.Exception) {
    try {
-    throw Exception()
-   } catch (ie: Exception) {}
+    throw java.lang.Exception()
+   } catch (ie: java.lang.Exception) {}
   }
  }
 
  open fun testThrowGenerics() {
-  throw this.getT(Exception())!!
+  throw this.getT(java.lang.Exception())!!
  }
 
  internal fun <T> getT(t: T?): T? {
@@ -80,7 +80,7 @@ open class TryCatch {
   throw this.getThrowable()!!
  }
 
- internal fun <T: Throwable?> getThrowable(): T? {
+ internal fun <T: kotlin.Throwable?> getThrowable(): T? {
   return null
  }
 

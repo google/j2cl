@@ -26,57 +26,66 @@ import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 
 internal fun Renderer.render(typeDeclaration: TypeDeclaration) {
-  // TODO(b/204287086): Move Kotlin -> Java type translation out of the renderer.
-  val kotlinTypeName =
-    when (typeDeclaration.qualifiedSourceName) {
-      "java.lang.Annotation" -> "Annotation"
-      "java.lang.Boolean" -> "Boolean"
-      "java.lang.Byte" -> "Byte"
-      "java.lang.Char" -> "Char"
-      "java.lang.CharSequence" -> "CharSequence"
-      "java.lang.Cloneable" -> "Cloneable"
-      "java.lang.Comparable" -> "Comparable"
-      "java.lang.Double" -> "Double"
-      "java.lang.Enum" -> "Enum"
-      "java.lang.Error" -> "Error"
-      "java.lang.Exception" -> "Exception"
-      "java.lang.Float" -> "Float"
-      "java.lang.Integer" -> "Int"
-      "java.lang.Iterable" -> "Iterable"
-      "java.lang.Iterator" -> "Iterator"
-      "java.lang.Long" -> "Long"
-      "java.lang.Number" -> "Number"
-      "java.lang.Object" -> "Any"
-      "java.lang.Short" -> "Short"
-      "java.lang.String" -> "String"
-      "java.lang.Throwable" -> "Throwable"
+  render(typeDeclaration, asJavaType = false)
+}
+
+internal fun Renderer.renderAsJavaType(typeDeclaration: TypeDeclaration) {
+  render(typeDeclaration, asJavaType = true)
+}
+
+private fun Renderer.render(typeDeclaration: TypeDeclaration, asJavaType: Boolean) {
+  val javaQualifiedName = typeDeclaration.qualifiedBinaryName
+  val mappedKotlinQualifiedName =
+    javaQualifiedName.takeUnless { asJavaType }?.run { mappedKotlinQualifiedName }
+  renderQualifiedName(mappedKotlinQualifiedName ?: javaQualifiedName)
+}
+
+internal fun Renderer.mapsToKotlin(typeDescriptor: DeclaredTypeDescriptor) =
+  typeDescriptor.typeDeclaration.qualifiedBinaryName.mappedKotlinQualifiedName != null
+
+private val String.mappedKotlinQualifiedName: String?
+  get() =
+    // TODO(b/204287086): Move Kotlin -> Java type translation out of the renderer.
+    when (this) {
+      "java.lang.Boolean" -> "kotlin.Boolean"
+      "java.lang.Byte" -> "kotlin.Byte"
+      "java.lang.Cloneable" -> "kotlin.Cloneable"
+      "java.lang.Char" -> "kotlin.Char"
+      "java.lang.CharSequence" -> "kotlin.CharSequence"
+      "java.lang.Double" -> "kotlin.Double"
+      "java.lang.Enum" -> "kotlin.Enum"
+      "java.lang.Float" -> "kotlin.Float"
+      "java.lang.Integer" -> "kotlin.Int"
+      "java.lang.Long" -> "kotlin.Long"
+      "java.lang.Number" -> "kotlin.Number"
+      "java.lang.Object" -> "kotlin.Any"
+      "java.lang.Short" -> "kotlin.Short"
+      "java.lang.String" -> "kotlin.String"
+      "java.lang.Throwable" -> "kotlin.Throwable"
       // TODO(b/202058120): Handle remaining types.
       else -> null
     }
 
-  if (kotlinTypeName != null) {
-    render(kotlinTypeName)
-  } else {
-    typeDeclaration.packageName?.let { packageName ->
-      renderPackageName(packageName)
-      render(".")
-    }
-    renderIdentifier(typeDeclaration.simpleBinaryName)
-  }
-}
-
 internal fun Renderer.render(typeDescriptor: TypeDescriptor) {
-  render(typeDescriptor, isArgument = false)
+  render(typeDescriptor, isArgument = false, asJavaType = false)
 }
 
 internal fun Renderer.renderArgument(typeDescriptor: TypeDescriptor) {
-  render(typeDescriptor, isArgument = true)
+  render(typeDescriptor, isArgument = true, asJavaType = false)
 }
 
-private fun Renderer.render(typeDescriptor: TypeDescriptor, isArgument: Boolean) {
+internal fun Renderer.renderAsJavaType(typeDescriptor: TypeDescriptor) {
+  render(typeDescriptor, isArgument = false, asJavaType = true)
+}
+
+private fun Renderer.render(
+  typeDescriptor: TypeDescriptor,
+  isArgument: Boolean = false,
+  asJavaType: Boolean = false
+) {
   when (typeDescriptor) {
     is ArrayTypeDescriptor -> render(typeDescriptor)
-    is DeclaredTypeDescriptor -> render(typeDescriptor)
+    is DeclaredTypeDescriptor -> render(typeDescriptor, asJavaType)
     is PrimitiveTypeDescriptor -> render(typeDescriptor)
     is TypeVariable -> render(typeDescriptor, isArgument)
     is IntersectionTypeDescriptor -> render(typeDescriptor)
@@ -106,8 +115,8 @@ private fun Renderer.render(arrayTypeDescriptor: ArrayTypeDescriptor) {
   renderNullableSuffix(arrayTypeDescriptor)
 }
 
-private fun Renderer.render(declaredTypeDescriptor: DeclaredTypeDescriptor) {
-  render(declaredTypeDescriptor.typeDeclaration)
+private fun Renderer.render(declaredTypeDescriptor: DeclaredTypeDescriptor, asJavaType: Boolean) {
+  render(declaredTypeDescriptor.typeDeclaration, asJavaType)
   renderArguments(declaredTypeDescriptor)
   renderNullableSuffix(declaredTypeDescriptor)
 }

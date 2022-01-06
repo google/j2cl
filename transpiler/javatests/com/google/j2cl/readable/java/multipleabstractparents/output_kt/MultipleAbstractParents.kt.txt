@@ -5,8 +5,8 @@ open class MultipleAbstractParents {
 
  companion object {
   @JvmStatic
-  fun main(vararg args: String?) {
-   assert(multipleabstractparents.`MultipleAbstractParents$ArrayList`<String?>().getFoo(null)!! == "AbstractCollection")
+  fun main(vararg args: kotlin.String?) {
+   assert(multipleabstractparents.`MultipleAbstractParents$ArrayList`<kotlin.String?>().getFoo(null)!! == "AbstractCollection")
    assert(multipleabstractparents.`MultipleAbstractParents$StringList`().getFoo(null)!! == "AbstractCollection")
    assert((multipleabstractparents.`MultipleAbstractParents$StringList`() as multipleabstractparents.`MultipleAbstractParents$IStringList`?)!!.getFoo(null)!! == "AbstractCollection")
   }
@@ -14,11 +14,11 @@ open class MultipleAbstractParents {
 }
 
 fun interface `MultipleAbstractParents$List`<T> {
- fun getFoo(t: T?): String?
+ fun getFoo(t: T?): kotlin.String?
 }
 
 fun interface `MultipleAbstractParents$Collection`<T> {
- fun getFoo(t: T?): String?
+ fun getFoo(t: T?): kotlin.String?
 }
 
 abstract class `MultipleAbstractParents$AbstractListCollection`<T>: multipleabstractparents.`MultipleAbstractParents$List`<T>, multipleabstractparents.`MultipleAbstractParents$Collection`<T> {
@@ -28,7 +28,7 @@ abstract class `MultipleAbstractParents$AbstractListCollection`<T>: multipleabst
 abstract class `MultipleAbstractParents$AbstractCollection`<T> {
  constructor(): super()
 
- open fun getFoo(t: T?): String? {
+ open fun getFoo(t: T?): kotlin.String? {
   return "AbstractCollection"
  }
 }
@@ -45,19 +45,19 @@ open class `MultipleAbstractParents$ArrayList`<T>: multipleabstractparents.`Mult
  constructor(): super()
 }
 
-fun interface `MultipleAbstractParents$IStringList`: multipleabstractparents.`MultipleAbstractParents$List`<String?> {
- override fun getFoo(string: String?): String?
+fun interface `MultipleAbstractParents$IStringList`: multipleabstractparents.`MultipleAbstractParents$List`<kotlin.String?> {
+ override fun getFoo(string: kotlin.String?): kotlin.String?
 }
 
-abstract class `MultipleAbstractParents$AbstractStringList`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList`<String?> {
+abstract class `MultipleAbstractParents$AbstractStringList`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList`<kotlin.String?> {
  constructor(): super()
 }
 
-abstract class `MultipleAbstractParents$AbstractStringList2`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList2`<String?> {
+abstract class `MultipleAbstractParents$AbstractStringList2`: multipleabstractparents.`MultipleAbstractParents$IStringList`, multipleabstractparents.`MultipleAbstractParents$AbstractList2`<kotlin.String?> {
  constructor(): super()
 }
 
-abstract class `MultipleAbstractParents$AbstractStringList3`: multipleabstractparents.`MultipleAbstractParents$AbstractList2`<String?> {
+abstract class `MultipleAbstractParents$AbstractStringList3`: multipleabstractparents.`MultipleAbstractParents$AbstractList2`<kotlin.String?> {
  constructor(): super()
 }
 

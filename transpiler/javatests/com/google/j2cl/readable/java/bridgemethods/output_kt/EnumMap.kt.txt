@@ -12,7 +12,7 @@ open class AbstractMap<K, V>: bridgemethods.Map<K, V> {
  }
 }
 
-open class EnumMap<K: Enum<K>?, V>: bridgemethods.AbstractMap<K, V> {
+open class EnumMap<K: kotlin.Enum<K>?, V>: bridgemethods.AbstractMap<K, V> {
  constructor(): super()
 
  open override fun put(key: K?, value: V?): V? {

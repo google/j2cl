@@ -3,37 +3,37 @@ package nullability.defaultnullable
 open class DefaultNullable {
  constructor(): super()
 
- internal var f1: String? = "Hello"
+ internal var f1: kotlin.String? = "Hello"
 
- internal var f2: String? = null
+ internal var f2: kotlin.String? = null
 
- internal var f3: String? = null
+ internal var f3: kotlin.String? = null
 
- internal var f4: java.util.List<String?>? = java.util.ArrayList<String?>()
+ internal var f4: java.util.List<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
- internal var f5: java.util.List<String?>? = java.util.ArrayList<String?>()
+ internal var f5: java.util.List<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
- internal var f6: java.util.List<String?>? = java.util.ArrayList<String?>()
+ internal var f6: java.util.List<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
- internal var f7: java.util.List<String?>? = null
+ internal var f7: java.util.List<kotlin.String?>? = null
 
- internal var f8: Array<String?>? = arrayOf<String?>()
+ internal var f8: Array<kotlin.String?>? = arrayOf<kotlin.String?>()
 
- internal var f9: Array<String?>? = arrayOf<String?>()
+ internal var f9: Array<kotlin.String?>? = arrayOf<kotlin.String?>()
 
- internal var f10: Array<String?>? = arrayOf<String?>()
+ internal var f10: Array<kotlin.String?>? = arrayOf<kotlin.String?>()
 
  internal var f11: java.lang.Void? = null
 
- internal var f12: Any = Any()
+ internal var f12: kotlin.Any = (java.lang.Object() as kotlin.Any)
 
- open fun m1(a: String?, b: java.util.List<Double?>?): String? {
+ open fun m1(a: kotlin.String?, b: java.util.List<kotlin.Double?>?): kotlin.String? {
   return ""
  }
 
- open fun m2(a: String?, b: java.util.List<Double?>?): String? {
+ open fun m2(a: kotlin.String?, b: java.util.List<kotlin.Double?>?): kotlin.String? {
   return null
  }
 
- open fun m3(vararg args: String?) {}
+ open fun m3(vararg args: kotlin.String?) {}
 }

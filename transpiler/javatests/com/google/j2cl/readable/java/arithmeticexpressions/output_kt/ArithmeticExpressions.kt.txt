@@ -16,7 +16,7 @@ open class ArithmeticExpressions {
   i = 9223372036854775807L.toInt()
   f = 9.223372E18f
   d = 9.223372036854776E18
-  val o: Any? = c
+  val o: kotlin.Any? = c
   s = (o as Char).code.toShort()
  }
 
@@ -53,13 +53,13 @@ open class ArithmeticExpressions {
   val w: Int = 5 - - 4
   var k: Boolean = 1 + 2 + 3 != 4
   val l: Boolean = 1 + 2 != 4
-  val m: Boolean = Long.MAX_VALUE.toDouble() != 9.223372036854778E18
+  val m: Boolean = java.lang.Long.MAX_VALUE.toDouble() != 9.223372036854778E18
   val o: Double = ((5 + 1) / 2).toDouble() - 0.0
   a = a.shl(31L.toInt())
   a = a.shl(1L.toInt())
   a = (a.toLong() + 1L).toInt()
   a = (a.toLong() / 1L).toInt()
-  a = (a.toDouble() + Double.MAX_VALUE).toInt()
+  a = (a.toDouble() + java.lang.Double.MAX_VALUE).toInt()
   k = k.or(true)
   var s: Short = 10
   k = run {
@@ -70,7 +70,7 @@ open class ArithmeticExpressions {
   q = 3.ushr(2.toInt())
   val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: Char = 'y'
-  val z: Long? = 121L
+  val z: kotlin.Long? = 121L
   k = y.code.toLong() == z!!
  }
 
@@ -157,7 +157,7 @@ open class ArithmeticExpressions {
   }
   val booleans: BooleanArray? = null
   booleans!![0] = booleans!![0].or(true)
-  val strings: Array<String?>? = null
+  val strings: Array<kotlin.String?>? = null
   strings!![0] = "" + strings!![0] + null
   val shorts: ShortArray? = null
   val b: Boolean = run {
@@ -170,14 +170,14 @@ open class ArithmeticExpressions {
  }
 
  open fun testCompoundBoxedTypes() {
-  var c: Int? = 1000
-  var d: Int? = 10000
+  var c: kotlin.Int? = 1000
+  var d: kotlin.Int? = 10000
   d = d!! + c!!
   var i: Int = 43
   d = d!! + i
   d = d!!.shl(i.toInt())
   i = i + c!!
-  var e: Int? = run {
+  var e: kotlin.Int? = run {
    c = c!! + 1
    c
   }
@@ -185,32 +185,32 @@ open class ArithmeticExpressions {
    c = c!! + 1
    c
   }
-  var e2: Double? = 100.0
+  var e2: kotlin.Double? = 100.0
   e2 = e2!! + 1.0
-  var f: Int? = run {
-   val `$value`: Int? = c
+  var f: kotlin.Int? = run {
+   val `$value`: kotlin.Int? = c
    c = c!! + 1
    `$value`
   }
   f = run {
-   val `$value_1`: Int? = c
+   val `$value_1`: kotlin.Int? = c
    c = c!! + 1
    `$value_1`
   }
-  var b: Byte? = 0
+  var b: kotlin.Byte? = 0
   b = (b!! + 1).toByte()
   var ch: java.lang.Character? = 'c'
   ch = (ch!! + 1).toChar()
-  run {
+  (run {
    f = f!! + 1
    f
-  }!!.intValue()
-  run {
-   val `$value_2`: Int? = f
+  }!! as java.lang.Integer).intValue()
+  (run {
+   val `$value_2`: kotlin.Int? = f
    f = f!! - 1
    `$value_2`
-  }!!.intValue()
-  val ref: arithmeticexpressions.`ArithmeticExpressions$1Ref`<Int?>? = null
+  }!! as java.lang.Integer).intValue()
+  val ref: arithmeticexpressions.`ArithmeticExpressions$1Ref`<kotlin.Int?>? = null
   ref!!.field = ref!!.field!! + 1
   val n: Int = 1 + ref!!.field!!
  }
@@ -218,7 +218,7 @@ open class ArithmeticExpressions {
  @JvmField internal var intField: Long = 0L
 
  open fun testExtendedOperands() {
-  var boxedInteger: Int? = 3
+  var boxedInteger: kotlin.Int? = 3
   var i: Int
   var l: Long
   var d: Double
@@ -265,7 +265,7 @@ open class ArithmeticExpressions {
   }
 
   @JvmStatic
-  internal fun getInteger(): Int? {
+  internal fun getInteger(): kotlin.Int? {
    return null
   }
 

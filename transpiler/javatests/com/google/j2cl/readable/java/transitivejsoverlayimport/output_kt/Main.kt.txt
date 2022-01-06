@@ -23,7 +23,7 @@ open class Transitive {
 
  internal fun getJsProperty(): Int {}
 
- internal fun doTransitiveInstanceMethod(arg1: String?) {}
+ internal fun doTransitiveInstanceMethod(arg1: kotlin.String?) {}
 }
 
 open class Main {
@@ -31,7 +31,7 @@ open class Main {
 
  companion object {
   @JvmStatic
-  fun main(vararg args: String?) {
+  fun main(vararg args: kotlin.String?) {
    if (true) {
     val transitive: transitivejsoverlayimport.Transitive? = null
     transitive!!.doTransitiveInstanceMethod("arg1")

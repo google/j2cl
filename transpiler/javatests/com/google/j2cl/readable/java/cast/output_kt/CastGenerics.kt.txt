@@ -1,6 +1,6 @@
 package cast
 
-open class CastGenerics<T, E: Number?> {
+open class CastGenerics<T, E: kotlin.Number?> {
  constructor(): super()
 
  @JvmField internal var field: T? = null
@@ -10,24 +10,24 @@ open class CastGenerics<T, E: Number?> {
  }
 
  open fun testCastToTypeVariable() {
-  val o: Any? = Int(1)
+  val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
   val e: E? = o as E?
   val t: T? = o as T?
   val es: Array<E>? = o as Array<E>?
   val ts: Array<T>? = o as Array<T>?
  }
 
- open fun <S, V: Enum<V>?> testCastToMethodTypeVariable() {
-  val o: Any? = Int(1)
+ open fun <S, V: kotlin.Enum<V>?> testCastToMethodTypeVariable() {
+  val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
   val s: S? = o as S?
-  var c: Any? = o as cast.CastGenerics<S, Number?>?
+  var c: kotlin.Any? = o as cast.CastGenerics<S, kotlin.Number?>?
   c = o as Array<S>?
   c = o as V?
  }
 
- open fun <TT: Enum<*>?> outerGenericMethod() {}
+ open fun <TT: kotlin.Enum<*>?> outerGenericMethod() {}
 
- open fun <EE> method(o: Any?): EE? where EE: cast.`CastGenerics$Empty1`?, EE: cast.`CastGenerics$Empty2`<EE>? {
+ open fun <EE> method(o: kotlin.Any?): EE? where EE: cast.`CastGenerics$Empty1`?, EE: cast.`CastGenerics$Empty2`<EE>? {
   if (o is cast.`CastGenerics$Empty1`) {
    return o as EE?
   }
@@ -37,8 +37,8 @@ open class CastGenerics<T, E: Number?> {
  companion object {
   @JvmStatic
   fun <T_1, U: T_1> testErasureCast() where T_1: cast.`CastGenerics$A`?, T_1: cast.`CastGenerics$B`? {
-   var str: String? = cast.CastGenerics<String?, Number?>().field
-   str = cast.CastGenerics<String?, Number?>().method()
+   var str: kotlin.String? = cast.CastGenerics<kotlin.String?, kotlin.Number?>().field
+   str = cast.CastGenerics<kotlin.String?, kotlin.Number?>().method()
    val containerT: cast.`CastGenerics$Container`<T_1>? = null
    containerT!!.get()!!.mA()
    containerT!!.get()!!.mB()
@@ -67,8 +67,8 @@ open class CastGenerics<T, E: Number?> {
 
   @JvmStatic
   fun testCastToParamterizedType() {
-   val o: Any? = Int(1)
-   var cc: cast.CastGenerics<Error?, Number?>? = o as cast.CastGenerics<Error?, Number?>?
+   val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
+   var cc: cast.CastGenerics<java.lang.Error?, kotlin.Number?>? = o as cast.CastGenerics<java.lang.Error?, kotlin.Number?>?
    cc = o as cast.CastGenerics<*, *>?
   }
 
@@ -107,14 +107,14 @@ open class `CastGenerics$Container`<T> {
  }
 }
 
-open class `CastGenerics$1Nested`<SS, TT: Enum<*>?, T, E: Number?> {
+open class `CastGenerics$1Nested`<SS, TT: kotlin.Enum<*>?, T, E: kotlin.Number?> {
  internal constructor(`$outer_this`: cast.CastGenerics<T, E>?): super() {
   this.`this` = `$outer_this`
  }
 
  @JvmField val `this`: cast.CastGenerics<T, E>?
 
- internal fun nestedGenericMethod(o: Any?) {
+ internal fun nestedGenericMethod(o: kotlin.Any?) {
   val t: TT? = o as TT?
  }
 }

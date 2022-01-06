@@ -5,21 +5,21 @@ open class Varargs {
 
  constructor(): this(intArrayOf(1))
 
- open fun test(a: Int, vararg args: Any?) {}
+ open fun test(a: Int, vararg args: kotlin.Any?) {}
 
- open fun testCloneable(vararg args: Cloneable?) {}
+ open fun testCloneable(vararg args: kotlin.Cloneable?) {}
 
  open fun testSerializable(vararg args: java.io.Serializable?) {}
 
  open fun main() {
   val v: varargs.Varargs? = varargs.Varargs()
-  v!!.test(1, arrayOf<Any?>())
-  v!!.test(1, arrayOf<Any?>(Any()))
-  v!!.test(1, arrayOf<Any?>(Any()))
-  v!!.test(1, arrayOf<Any?>())
-  v!!.test(1, arrayOf<Array<Any?>?>())
-  v!!.testCloneable(arrayOf<Array<Any?>?>())
-  v!!.testSerializable(arrayOf<Array<Any?>?>())
+  v!!.test(1, arrayOf<kotlin.Any?>())
+  v!!.test(1, arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any)))
+  v!!.test(1, arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any)))
+  v!!.test(1, arrayOf<kotlin.Any?>())
+  v!!.test(1, arrayOf<Array<kotlin.Any?>?>())
+  v!!.testCloneable(arrayOf<Array<kotlin.Any?>?>())
+  v!!.testSerializable(arrayOf<Array<kotlin.Any?>?>())
  }
 
  companion object {

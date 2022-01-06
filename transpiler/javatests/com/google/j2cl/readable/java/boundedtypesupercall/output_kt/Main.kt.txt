@@ -10,7 +10,7 @@ abstract class `Main$Foo`<T> {
  abstract open fun foo()
 }
 
-open class `Main$Bar`<T: Comparable<*>?> {
+open class `Main$Bar`<T: java.lang.Comparable<*>?> {
  constructor(): super()
 
  open fun getSomething(): T? {
@@ -22,7 +22,7 @@ open class `Main$Bar`<T: Comparable<*>?> {
  }
 }
 
-open class `Main$Bar$1`<T: Comparable<*>?>: boundedtypesupercall.`Main$Foo`<T> {
+open class `Main$Bar$1`<T: java.lang.Comparable<*>?>: boundedtypesupercall.`Main$Foo`<T> {
  internal constructor(`$outer_this`: boundedtypesupercall.`Main$Bar`<T>?, `$_0`: T?): super(`$_0`) {
   this.`this` = `$outer_this`
  }

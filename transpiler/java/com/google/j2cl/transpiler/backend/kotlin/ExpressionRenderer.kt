@@ -29,7 +29,6 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
-import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -205,12 +204,6 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
   renderExpression(conditionalExpression.falseExpression)
 }
 
-private fun Renderer.renderJavaScriptConstructorReference(
-  javaScriptConstructorReference: JavaScriptConstructorReference
-) {
-  render(javaScriptConstructorReference.referencedTypeDeclaration)
-}
-
 private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderMethodCallHeader(expression)
   renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
@@ -267,8 +260,18 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
     renderTodo("expression.qualify needs rendering: ${expression.qualifier})")
     return
   }
-  render(expression.typeDescriptor)
-  renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
+  val typeDescriptor = expression.typeDescriptor
+  if (mapsToKotlin(typeDescriptor)) {
+    renderInParentheses {
+      renderAsJavaType(typeDescriptor)
+      renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
+      render(" as ")
+      render(expression.typeDescriptor)
+    }
+  } else {
+    render(expression.typeDescriptor)
+    renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
+  }
 }
 
 private fun Renderer.renderPostfixExpression(expression: PostfixExpression) {
@@ -316,9 +319,17 @@ private fun Renderer.renderQualifiedName(expression: MemberReference, name: Stri
   if (expression.qualifier == null) {
     // TODO(b/206482966): Move the checks in the backend to a verifier pass.
     require(expression.target.isStatic) { "Unqualified references must be static" }
-    render(expression.target.enclosingTypeDescriptor.typeDeclaration)
+    renderAsJavaType(expression.target.enclosingTypeDescriptor.typeDeclaration)
   } else {
-    renderLeftSubExpression(expression, expression.qualifier)
+    if (mapsToKotlin(expression.target.enclosingTypeDescriptor)) {
+      renderInParentheses {
+        renderLeftSubExpression(expression, expression.qualifier)
+        render(" as ")
+        renderAsJavaType(expression.target.enclosingTypeDescriptor.toNonNullable())
+      }
+    } else {
+      renderLeftSubExpression(expression, expression.qualifier)
+    }
   }
   render(".")
   renderIdentifier(name)

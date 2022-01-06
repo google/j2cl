@@ -1,6 +1,6 @@
 package enums
 
-enum class Enum1: Enum<enums.Enum1?> {
+enum class Enum1: kotlin.Enum<enums.Enum1?> {
  internal constructor(): super()
 
  companion object {
@@ -10,32 +10,32 @@ enum class Enum1: Enum<enums.Enum1?> {
  }
 }
 
-enum class Enum2: Enum<enums.Enum2?> {
- @JvmField internal var foo: Int = enums.Enum1.V1.ordinal()
+enum class Enum2: kotlin.Enum<enums.Enum2?> {
+ @JvmField internal var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
 
  internal constructor(foo: Int): super() {
   this.foo = foo
  }
 
- internal constructor(foo: Enum<*>?): this(foo!!.ordinal())
+ internal constructor(foo: kotlin.Enum<*>?): this((foo!! as java.lang.Enum<*>).ordinal())
 
- internal constructor(vararg somePars: Any?): this(somePars!!.size)
+ internal constructor(vararg somePars: kotlin.Any?): this(somePars!!.size)
 
  companion object {
   @JvmField val VALUE1: enums.Enum2 = enums.Enum2(2)
 
   @JvmField val VALUE2: enums.Enum2 = enums.Enum2(enums.Enum1.V1)
 
-  @JvmField val VALUE3: enums.Enum2 = enums.Enum2(arrayOf<Any?>())
+  @JvmField val VALUE3: enums.Enum2 = enums.Enum2(arrayOf<kotlin.Any?>())
 
   @JvmField val VALUE4: enums.Enum2 = enums.`Enum2$1`(5)
 
   @JvmStatic
-  internal fun f(o: Any?): enums.Enum2? {
+  internal fun f(o: kotlin.Any?): enums.Enum2? {
    return null
   }
 
-  @JvmField internal var C: enums.Enum2? = enums.Enum2.f(Any())
+  @JvmField internal var C: enums.Enum2? = enums.Enum2.f((java.lang.Object() as kotlin.Any))
  }
 }
 
@@ -43,11 +43,11 @@ open class `Enum2$1`: enums.Enum2 {
  internal constructor(`$_0`: Int): super(`$_0`)
 }
 
-enum class Enum3: Enum<enums.Enum3?> {
- internal constructor(function: java.util.function.Function<Int?, Int?>?): super()
+enum class Enum3: kotlin.Enum<enums.Enum3?> {
+ internal constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?): super()
 
  companion object {
-  @JvmField val VALUE1: enums.Enum3 = enums.Enum3(java.util.function.Function<Int?, Int?> { v: Int? ->
+  @JvmField val VALUE1: enums.Enum3 = enums.Enum3(java.util.function.Function<kotlin.Int?, kotlin.Int?> { v: kotlin.Int? ->
    return 1 + v!!
   })
  }

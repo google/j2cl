@@ -1,7 +1,7 @@
 package anonymousclass
 
 abstract class SomeClass {
- abstract open fun foo(): String?
+ abstract open fun foo(): kotlin.String?
 
  internal constructor(i: Int): super()
 }
@@ -21,11 +21,11 @@ open class `AnonymousClass$1`: anonymousclass.SomeClass {
 
  @JvmField val `this`: anonymousclass.AnonymousClass?
 
- @JvmField internal var `object`: Any? = this
+ @JvmField internal var `object`: kotlin.Any? = this
 
- @JvmField internal var outer: Any? = this.`this`
+ @JvmField internal var outer: kotlin.Any? = this.`this`
 
- open override fun foo(): String? {
+ open override fun foo(): kotlin.String? {
   return "a"
  }
 }
@@ -39,7 +39,7 @@ interface SomeInterface {
 open class `SomeInterface$1`: anonymousclass.SomeClass {
  internal constructor(`$_0`: Int): super(`$_0`)
 
- open override fun foo(): String? {
+ open override fun foo(): kotlin.String? {
   return "a"
  }
 }

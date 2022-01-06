@@ -4,30 +4,30 @@ open class ObjectCalls {
  constructor(): super()
 
  open fun main() {
-  val `object`: Any? = Any()
+  val `object`: kotlin.Any? = (java.lang.Object() as kotlin.Any)
   `object`!! == `object`
-  `object`!!.hashCode()
-  `object`!!.toString()
-  `object`!!.getClass()
+  (`object`!! as java.lang.Object).hashCode()
+  (`object`!! as java.lang.Object).toString()
+  (`object`!! as java.lang.Object).getClass()
   val objectCalls: Array<devirtualizedcalls.ObjectCalls?>? = arrayOfNulls<devirtualizedcalls.ObjectCalls?>(1)
   objectCalls!! == objectCalls
-  objectCalls!!.hashCode()
-  objectCalls!!.toString()
-  objectCalls!!.getClass()
+  (objectCalls!! as java.lang.Object).hashCode()
+  (objectCalls!! as java.lang.Object).toString()
+  (objectCalls!! as java.lang.Object).getClass()
  }
 
  open fun test() {
-  this == Any()
-  this.hashCode()
-  this.toString()
-  this.getClass()
-  this == Any()
-  this.hashCode()
-  this.toString()
-  this.getClass()
+  this == (java.lang.Object() as kotlin.Any)
+  (this as java.lang.Object).hashCode()
+  (this as java.lang.Object).toString()
+  (this as java.lang.Object).getClass()
+  this == (java.lang.Object() as kotlin.Any)
+  (this as java.lang.Object).hashCode()
+  (this as java.lang.Object).toString()
+  (this as java.lang.Object).getClass()
  }
 
  open fun testNotEquals(): Boolean {
-  return this != Any()
+  return this != (java.lang.Object() as kotlin.Any)
  }
 }

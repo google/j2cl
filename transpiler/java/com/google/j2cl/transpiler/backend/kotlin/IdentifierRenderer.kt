@@ -24,7 +24,15 @@ internal fun Renderer.renderIdentifier(identifier: String) {
 }
 
 internal fun Renderer.renderPackageName(packageName: String) {
-  renderDotSeparated(packageName.split('.')) { renderIdentifier(it) }
+  renderQualifiedIdentifier(packageName)
+}
+
+internal fun Renderer.renderQualifiedName(qualifiedName: String) {
+  renderQualifiedIdentifier(qualifiedName)
+}
+
+private fun Renderer.renderQualifiedIdentifier(identifier: String) {
+  renderDotSeparated(identifier.split('.')) { renderIdentifier(it) }
 }
 
 private val String.isValidIdentifier

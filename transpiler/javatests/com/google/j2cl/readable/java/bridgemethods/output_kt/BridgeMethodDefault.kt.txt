@@ -8,16 +8,16 @@ fun interface `BridgeMethodDefault$I`<T> {
  fun m(t: T?)
 }
 
-interface `BridgeMethodDefault$II`: bridgemethods.`BridgeMethodDefault$I`<String?> {
- override fun m(s: String?) {}
+interface `BridgeMethodDefault$II`: bridgemethods.`BridgeMethodDefault$I`<kotlin.String?> {
+ override fun m(s: kotlin.String?) {}
 }
 
 open class `BridgeMethodDefault$A`: bridgemethods.`BridgeMethodDefault$II` {
  internal constructor(): super()
 }
 
-interface `BridgeMethodDefault$JJ`: bridgemethods.`BridgeMethodDefault$I`<Any?> {
- override fun m(o: Any?) {}
+interface `BridgeMethodDefault$JJ`: bridgemethods.`BridgeMethodDefault$I`<kotlin.Any?> {
+ override fun m(o: kotlin.Any?) {}
 }
 
 open class `BridgeMethodDefault$B`: bridgemethods.`BridgeMethodDefault$JJ` {
