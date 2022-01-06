@@ -13,6 +13,7 @@ package(
 integration_test(
     name = "finallyblock",
     srcs = glob(["*.java"]),
+    enable_kt = True,
     # TODO(b/170691676): Enable when full try/catch/finally semantics are
     # implemented.
     enable_wasm = False,

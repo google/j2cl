@@ -13,4 +13,5 @@ package(
 integration_test(
     name = "arrayobjectcalls",
     srcs = glob(["*.java"]),
+    enable_kt = True,
 )

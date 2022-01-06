@@ -10,10 +10,14 @@ package(
 j2kt_library(
     name = "testing-j2kt",
     srcs = [
-        "super-kt/Asserts.java",
+        "Asserts.java",
+        "AssertsBase.java",
     ],
     visibility = ["//transpiler/javatests/com/google/j2cl/integration:__subpackages__"],
-    #TODO(jparachoniak): Get j2kt to a point where it will transpile the assert classes.
+    deps = [
+        "//third_party:gwt-javaemul-internal-annotations-j2kt",
+        "//third_party:gwt-jsinterop-annotations-j2kt",
+    ],
 )
 
 j2wasm_library(

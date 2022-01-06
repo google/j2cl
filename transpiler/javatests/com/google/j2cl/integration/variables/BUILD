@@ -13,5 +13,6 @@ package(
 integration_test(
     name = "variables",
     srcs = glob(["*.java"]),
+    enable_kt = True,
     j2cl_library_tags = ["manual"],
 )

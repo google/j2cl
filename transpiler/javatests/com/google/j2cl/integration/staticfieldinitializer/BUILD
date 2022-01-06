@@ -13,4 +13,5 @@ package(
 integration_test(
     name = "staticfieldinitializer",
     srcs = glob(["*.java"]),
+    enable_kt = True,
 )

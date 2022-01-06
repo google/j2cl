@@ -16,6 +16,7 @@ integration_test(
     closure_defines = {
         "jre.checks.type": "ENABLED",
     },
+    enable_kt = True,
     # TODO(b/183769034): Enable once the wasm traps vs exceptions is solved.
     enable_wasm = False,
 )
