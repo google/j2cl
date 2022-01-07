@@ -1,9 +1,12 @@
 [Builder] => [Builder]
 [Builder] => [constructor]
 [Builder] => [super();] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<synthetic: ctor_js>"
-[Builder] => [/**@type {?boolean}*/
-  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_;] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<synthetic: ctor_js>"
+[Builder] => [/**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = false;] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<synthetic: ctor_js>"
 [booleanField] => [f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_]
+[Builder] => [/**@type {number}*/
+  this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = 0;] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<synthetic: ctor_js>"
+[set$0] => [f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_]
 [Builder] => [$create__]
 [Builder] => [Builder.$clinit();] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<synthetic: ctor_create>"
 [Builder] => [let $instance = new Builder();] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<synthetic: ctor_create>"
@@ -15,16 +18,17 @@
 [setBooleanField] => [m_setBooleanField__boolean]
 [booleanField] => [booleanField] "booleanField"
 [this.booleanField = booleanField;] => [this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = booleanField;] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.setBooleanField"
+[set$0 |= 1;] => [this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ | 1);] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.setBooleanField"
 [return this;] => [return this;] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.setBooleanField"
 [build] => [m_build__]
-[if (this.booleanField == null) {
+[if (set$0 != 1) {
         throw new IllegalStateException();
-      }] => [if ($Equality.$same(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_, null)) {
+      }] => [if (this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ != 1) {
    throw $Exceptions.toJs(IllegalStateException.$create__());
   }] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.build"
 [throw new IllegalStateException();] => [throw $Exceptions.toJs(IllegalStateException.$create__());] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.build"
 [return new AutoValue_DefaultNonEmptyConstructorAutoValue(
-          this.booleanField);] => [return DefaultNonEmptyConstructorAutoValue.$create__boolean(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_));] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.build"
+          this.booleanField);] => [return DefaultNonEmptyConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_);] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.build"
 [Builder] => [$clinit]
 [Builder] => [Builder.$clinit = () =>{};] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<clinit>"
 [Builder] => [Builder.$loadModules();] "autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder.<clinit>"

@@ -4,17 +4,18 @@ const DefaultNonEmptyConstructorAutoValue_Builder = goog.require('autovalue.Defa
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let DefaultNonEmptyConstructorAutoValue = goog.forwardDeclare('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
-let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  /** @protected */
  constructor() {
   super();
-  /**@type {?boolean}*/
-  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_;
+  /**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = false;
+  /**@type {number}*/
+  this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = 0;
  }
  /** @return {!Builder} */
  static $create__() {
@@ -30,14 +31,15 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  /** @override @return {DefaultNonEmptyConstructorAutoValue_Builder} */
  m_setBooleanField__boolean(/** boolean */ booleanField) {
   this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = booleanField;
+  this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ | 1);
   return this;
  }
  /** @override @return {DefaultNonEmptyConstructorAutoValue} */
  m_build__() {
-  if ($Equality.$same(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_, null)) {
+  if (this.f_set$0__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_ != 1) {
    throw $Exceptions.toJs(IllegalStateException.$create__());
   }
-  return DefaultNonEmptyConstructorAutoValue.$create__boolean(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_));
+  return DefaultNonEmptyConstructorAutoValue.$create__boolean(this.f_booleanField__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder_);
  }
  
  static $clinit() {
@@ -52,10 +54,9 @@ class Builder extends DefaultNonEmptyConstructorAutoValue_Builder {
  
  static $loadModules() {
   DefaultNonEmptyConstructorAutoValue = goog.module.get('autovalue.DefaultNonEmptyConstructorAutoValue$impl');
-  Boolean = goog.module.get('java.lang.Boolean$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(Builder, 'autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue$Builder');

@@ -4,22 +4,22 @@ const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let AutoValueWithBuilder = goog.forwardDeclare('autovalue.AutoValueWithBuilder$impl');
-let Boolean = goog.forwardDeclare('java.lang.Boolean$impl');
 let IllegalStateException = goog.forwardDeclare('java.lang.IllegalStateException$impl');
-let Integer = goog.forwardDeclare('java.lang.Integer$impl');
-let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
 let $Exceptions = goog.forwardDeclare('vmbootstrap.Exceptions$impl');
+let $Primitives = goog.forwardDeclare('vmbootstrap.Primitives$impl');
 
 class Builder extends j_l_Object {
  /** @protected */
  constructor() {
   super();
-  /**@type {?boolean}*/
-  this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_;
+  /**@type {boolean}*/
+  this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = false;
   /**@type {?number}*/
   this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_;
-  /**@type {Integer}*/
-  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_;
+  /**@type {number}*/
+  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = 0;
+  /**@type {number}*/
+  this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = 0;
  }
  /** @return {!Builder} */
  static $create__() {
@@ -44,11 +44,13 @@ class Builder extends j_l_Object {
   this.$ctor__java_lang_Object__();
   this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = source.m_getBooleanField__();
   this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = source.m_getNullableField__();
-  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = Integer.m_valueOf__int(source.m_getIntField__());
+  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = source.m_getIntField__();
+  this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = 3;
  }
  /** @return {Builder} */
  m_setBooleanField__boolean(/** boolean */ booleanField) {
   this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = booleanField;
+  this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ | 1);
   return this;
  }
  /** @return {Builder} */
@@ -58,15 +60,16 @@ class Builder extends j_l_Object {
  }
  /** @return {Builder} */
  m_setIntField__int(/** number */ intField) {
-  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = Integer.m_valueOf__int(intField);
+  this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = intField;
+  this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ = $Primitives.narrowIntToByte(this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ | 2);
   return this;
  }
  /** @return {AutoValueWithBuilder} */
  m_build__() {
-  if ($Equality.$same(this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_, null) || $Equality.$same(this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_, null)) {
+  if (this.f_set$0__autovalue_AutoValue_AutoValueWithBuilder_Builder_ != 3) {
    throw $Exceptions.toJs(IllegalStateException.$create__());
   }
-  return AutoValueWithBuilder.$create__boolean__java_lang_Double__int(Boolean.m_booleanValue__java_lang_Boolean(this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_), this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_, this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_.m_intValue__());
+  return AutoValueWithBuilder.$create__boolean__java_lang_Double__int(this.f_booleanField__autovalue_AutoValue_AutoValueWithBuilder_Builder_, this.f_nullableField__autovalue_AutoValue_AutoValueWithBuilder_Builder_, this.f_intField__autovalue_AutoValue_AutoValueWithBuilder_Builder_);
  }
  
  static $clinit() {
@@ -81,11 +84,9 @@ class Builder extends j_l_Object {
  
  static $loadModules() {
   AutoValueWithBuilder = goog.module.get('autovalue.AutoValueWithBuilder$impl');
-  Boolean = goog.module.get('java.lang.Boolean$impl');
   IllegalStateException = goog.module.get('java.lang.IllegalStateException$impl');
-  Integer = goog.module.get('java.lang.Integer$impl');
-  $Equality = goog.module.get('nativebootstrap.Equality$impl');
   $Exceptions = goog.module.get('vmbootstrap.Exceptions$impl');
+  $Primitives = goog.module.get('vmbootstrap.Primitives$impl');
  }
 }
 $Util.$setClassMetadata(Builder, 'autovalue.AutoValueWithBuilder$Builder');
