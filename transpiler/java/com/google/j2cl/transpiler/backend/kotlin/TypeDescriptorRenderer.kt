@@ -25,18 +25,14 @@ import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 
-internal fun Renderer.render(typeDeclaration: TypeDeclaration) {
-  render(typeDeclaration, asJavaType = false)
+internal fun Renderer.renderJavaTypeDeclarationName(typeDeclaration: TypeDeclaration) {
+  renderTypeDeclarationName(typeDeclaration, asJava = true)
 }
 
-internal fun Renderer.renderAsJavaType(typeDeclaration: TypeDeclaration) {
-  render(typeDeclaration, asJavaType = true)
-}
-
-private fun Renderer.render(typeDeclaration: TypeDeclaration, asJavaType: Boolean) {
+private fun Renderer.renderTypeDeclarationName(typeDeclaration: TypeDeclaration, asJava: Boolean) {
   val javaQualifiedName = typeDeclaration.qualifiedBinaryName
   val mappedKotlinQualifiedName =
-    javaQualifiedName.takeUnless { asJavaType }?.run { mappedKotlinQualifiedName }
+    javaQualifiedName.takeUnless { asJava }?.run { mappedKotlinQualifiedName }
   renderQualifiedName(mappedKotlinQualifiedName ?: javaQualifiedName)
 }
 
@@ -66,29 +62,29 @@ private val String.mappedKotlinQualifiedName: String?
       else -> null
     }
 
-internal fun Renderer.render(typeDescriptor: TypeDescriptor) {
-  render(typeDescriptor, isArgument = false, asJavaType = false)
+internal fun Renderer.renderTypeDescriptor(typeDescriptor: TypeDescriptor) {
+  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = false)
 }
 
-internal fun Renderer.renderArgument(typeDescriptor: TypeDescriptor) {
-  render(typeDescriptor, isArgument = true, asJavaType = false)
+internal fun Renderer.renderTypeDescriptorAsArgument(typeDescriptor: TypeDescriptor) {
+  renderTypeDescriptor(typeDescriptor, isArgument = true, asJava = false)
 }
 
-internal fun Renderer.renderAsJavaType(typeDescriptor: TypeDescriptor) {
-  render(typeDescriptor, isArgument = false, asJavaType = true)
+internal fun Renderer.renderJavaTypeDescriptor(typeDescriptor: TypeDescriptor) {
+  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = true)
 }
 
-private fun Renderer.render(
+private fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
   isArgument: Boolean = false,
-  asJavaType: Boolean = false
+  asJava: Boolean = false
 ) {
   when (typeDescriptor) {
-    is ArrayTypeDescriptor -> render(typeDescriptor)
-    is DeclaredTypeDescriptor -> render(typeDescriptor, asJavaType)
-    is PrimitiveTypeDescriptor -> render(typeDescriptor)
-    is TypeVariable -> render(typeDescriptor, isArgument)
-    is IntersectionTypeDescriptor -> render(typeDescriptor)
+    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
+    is DeclaredTypeDescriptor -> renderDeclaredTypeDescriptor(typeDescriptor, asJava)
+    is PrimitiveTypeDescriptor -> renderPrimitiveTypeDescriptor(typeDescriptor)
+    is TypeVariable -> renderTypeVariable(typeDescriptor, isArgument)
+    is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
     else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
   }
 }
@@ -97,7 +93,7 @@ private fun Renderer.renderNullableSuffix(typeDescriptor: TypeDescriptor) {
   if (typeDescriptor.isNullable) render("?")
 }
 
-private fun Renderer.render(arrayTypeDescriptor: ArrayTypeDescriptor) {
+private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDescriptor) {
   when (val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!) {
     PrimitiveTypes.BOOLEAN -> render("BooleanArray")
     PrimitiveTypes.CHAR -> render("CharArray")
@@ -109,14 +105,17 @@ private fun Renderer.render(arrayTypeDescriptor: ArrayTypeDescriptor) {
     PrimitiveTypes.DOUBLE -> render("DoubleArray")
     else -> {
       render("Array")
-      renderInAngleBrackets { renderArgument(componentTypeDescriptor) }
+      renderInAngleBrackets { renderTypeDescriptorAsArgument(componentTypeDescriptor) }
     }
   }
   renderNullableSuffix(arrayTypeDescriptor)
 }
 
-private fun Renderer.render(declaredTypeDescriptor: DeclaredTypeDescriptor, asJavaType: Boolean) {
-  render(declaredTypeDescriptor.typeDeclaration, asJavaType)
+private fun Renderer.renderDeclaredTypeDescriptor(
+  declaredTypeDescriptor: DeclaredTypeDescriptor,
+  asJava: Boolean
+) {
+  renderTypeDeclarationName(declaredTypeDescriptor.typeDeclaration, asJava)
   renderArguments(declaredTypeDescriptor)
   renderNullableSuffix(declaredTypeDescriptor)
 }
@@ -125,13 +124,15 @@ private fun Renderer.renderArguments(declaredTypeDescriptor: DeclaredTypeDescrip
   val parameters = declaredTypeDescriptor.typeDeclaration.typeParameterDescriptors
   val arguments = declaredTypeDescriptor.typeArgumentDescriptors
   if (arguments.isNotEmpty()) {
-    renderInAngleBrackets { renderCommaSeparated(arguments) { renderArgument(it) } }
+    renderInAngleBrackets { renderCommaSeparated(arguments) { renderTypeDescriptorAsArgument(it) } }
   } else if (parameters.isNotEmpty()) {
     renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
   }
 }
 
-private fun Renderer.render(primitiveTypeDescriptor: PrimitiveTypeDescriptor) {
+private fun Renderer.renderPrimitiveTypeDescriptor(
+  primitiveTypeDescriptor: PrimitiveTypeDescriptor
+) {
   render(
     when (primitiveTypeDescriptor) {
       PrimitiveTypes.VOID -> "Unit"
@@ -148,7 +149,7 @@ private fun Renderer.render(primitiveTypeDescriptor: PrimitiveTypeDescriptor) {
   )
 }
 
-private fun Renderer.render(typeVariable: TypeVariable, isArgument: Boolean) {
+private fun Renderer.renderTypeVariable(typeVariable: TypeVariable, isArgument: Boolean) {
   if (typeVariable.isWildcardOrCapture) {
     render("*")
   } else {
@@ -157,15 +158,17 @@ private fun Renderer.render(typeVariable: TypeVariable, isArgument: Boolean) {
   }
 }
 
-private fun Renderer.render(intersectionTypeDescriptor: IntersectionTypeDescriptor) {
+private fun Renderer.renderIntersectionTypeDescriptor(
+  intersectionTypeDescriptor: IntersectionTypeDescriptor
+) {
   // Render only the first type from the intersection and comment out others, as they are not
   // supported in Kotlin.
   // TODO(b/205367162): Support intersection types.
   val typeDescriptors = intersectionTypeDescriptor.intersectionTypeDescriptors
-  render(typeDescriptors.first())
+  renderTypeDescriptor(typeDescriptors.first())
   render(" ")
   renderInCommentBrackets {
     render("& ")
-    renderSeparatedWith(typeDescriptors.drop(1), " & ") { render(it) }
+    renderSeparatedWith(typeDescriptors.drop(1), " & ") { renderTypeDescriptor(it) }
   }
 }

@@ -125,7 +125,7 @@ private fun Renderer.renderFieldDeclarationStatement(declaration: FieldDeclarati
   render("var ")
   renderIdentifier(fieldDescriptor.name!!)
   render(": ")
-  render(fieldDescriptor.typeDescriptor)
+  renderTypeDescriptor(fieldDescriptor.typeDescriptor)
   render(" = ")
   renderExpression(declaration.expression)
 }
@@ -191,7 +191,7 @@ private fun Renderer.renderTryStatement(tryStatement: TryStatement) {
       renderInParentheses {
         renderName(catchVariable)
         render(": ")
-        render(catchType.toNonNullable())
+        renderTypeDescriptor(catchType.toNonNullable())
       }
       render(" ")
       renderStatement(catchClause.body)

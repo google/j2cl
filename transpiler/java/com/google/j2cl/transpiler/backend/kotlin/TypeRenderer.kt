@@ -55,7 +55,7 @@ private fun Renderer.renderSuperTypes(type: Type) {
     val hasConstructors = type.constructors.isNotEmpty()
     render(": ")
     renderCommaSeparated(superTypes) { superType ->
-      render(superType.toNonNullable())
+      renderTypeDescriptor(superType.toNonNullable())
       if (superType.isClass && !hasConstructors) render("()")
     }
   }

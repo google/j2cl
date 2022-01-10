@@ -100,7 +100,7 @@ private fun Renderer.renderArrayLiteral(arrayLiteral: ArrayLiteral) {
     PrimitiveTypes.DOUBLE -> render("doubleArrayOf")
     else -> {
       render("arrayOf")
-      renderInAngleBrackets { render(componentTypeDescriptor) }
+      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
     }
   }
   renderInParentheses {
@@ -119,7 +119,7 @@ private fun Renderer.renderBinaryExpression(expression: BinaryExpression) {
 private fun Renderer.renderCastExpression(expression: CastExpression) {
   renderExpression(expression.expression)
   render(" as ")
-  render(expression.castTypeDescriptor)
+  renderTypeDescriptor(expression.castTypeDescriptor)
 }
 
 private fun Renderer.renderBinaryOperator(operator: BinaryOperator) {
@@ -138,7 +138,7 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
-  render(functionExpression.typeDescriptor.functionalInterface!!.toNonNullable())
+  renderTypeDescriptor(functionExpression.typeDescriptor.functionalInterface!!.toNonNullable())
   render(" ")
   renderInCurlyBrackets {
     functionExpression.parameters.takeIf { it.isNotEmpty() }?.let { parameters ->
@@ -153,7 +153,7 @@ private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpres
 private fun Renderer.renderInstanceOfExpression(instanceOfExpression: InstanceOfExpression) {
   renderExpression(instanceOfExpression.expression)
   render(" is ")
-  render(instanceOfExpression.testTypeDescriptor.toNonNullable())
+  renderTypeDescriptor(instanceOfExpression.testTypeDescriptor.toNonNullable())
 }
 
 private fun Renderer.renderLiteral(literal: Literal) {
@@ -176,7 +176,7 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  render(typeLiteral.referencedTypeDescriptor.toNonNullable())
+  renderTypeDescriptor(typeLiteral.referencedTypeDescriptor.toNonNullable())
   render("::class.java")
 }
 
@@ -249,7 +249,7 @@ private fun Renderer.renderNewArrayOfSize(
     PrimitiveTypes.DOUBLE -> render("DoubleArray")
     else -> {
       render("arrayOfNulls")
-      renderInAngleBrackets { render(componentTypeDescriptor) }
+      renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor) }
     }
   }
   renderInParentheses { renderExpression(sizeExpression) }
@@ -263,13 +263,13 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   val typeDescriptor = expression.typeDescriptor
   if (mapsToKotlin(typeDescriptor)) {
     renderInParentheses {
-      renderAsJavaType(typeDescriptor)
+      renderJavaTypeDescriptor(typeDescriptor)
       renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
       render(" as ")
-      render(expression.typeDescriptor)
+      renderTypeDescriptor(expression.typeDescriptor)
     }
   } else {
-    render(expression.typeDescriptor)
+    renderTypeDescriptor(expression.typeDescriptor)
     renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
   }
 }
@@ -312,20 +312,20 @@ private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclara
 fun Renderer.renderVariable(variable: Variable) {
   renderName(variable)
   render(": ")
-  render(variable.typeDescriptor)
+  renderTypeDescriptor(variable.typeDescriptor)
 }
 
 private fun Renderer.renderQualifiedName(expression: MemberReference, name: String) {
   if (expression.qualifier == null) {
     // TODO(b/206482966): Move the checks in the backend to a verifier pass.
     require(expression.target.isStatic) { "Unqualified references must be static" }
-    renderAsJavaType(expression.target.enclosingTypeDescriptor.typeDeclaration)
+    renderJavaTypeDeclarationName(expression.target.enclosingTypeDescriptor.typeDeclaration)
   } else {
     if (mapsToKotlin(expression.target.enclosingTypeDescriptor)) {
       renderInParentheses {
         renderLeftSubExpression(expression, expression.qualifier)
         render(" as ")
-        renderAsJavaType(expression.target.enclosingTypeDescriptor.toNonNullable())
+        renderJavaTypeDescriptor(expression.target.enclosingTypeDescriptor.toNonNullable())
       }
     } else {
       renderLeftSubExpression(expression, expression.qualifier)
