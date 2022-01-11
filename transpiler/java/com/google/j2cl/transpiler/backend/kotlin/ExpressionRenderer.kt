@@ -140,13 +140,16 @@ private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
   renderTypeDescriptor(functionExpression.typeDescriptor.functionalInterface!!.toNonNullable())
   render(" ")
-  renderInCurlyBrackets {
-    functionExpression.parameters.takeIf { it.isNotEmpty() }?.let { parameters ->
-      render(" ")
-      renderCommaSeparated(parameters) { renderVariable(it) }
-      render(" ->")
+  renderInParentheses {
+    render("fun")
+    renderInParentheses {
+      renderCommaSeparated(functionExpression.parameters) { renderVariable(it) }
     }
-    renderStartingWithNewLines(functionExpression.body.statements) { renderStatement(it) }
+    renderMethodReturnType(functionExpression.descriptor)
+    render(" ")
+    renderInCurlyBrackets {
+      renderStartingWithNewLines(functionExpression.body.statements) { renderStatement(it) }
+    }
   }
 }
 

@@ -19,13 +19,13 @@ open class Main {
  }
 
  internal open fun testAsyncLambdas() {
-  val i: jsasync.`Main$AsyncInterface`? = jsasync.`Main$AsyncInterface` {
+  val i: jsasync.`Main$AsyncInterface`? = jsasync.`Main$AsyncInterface` (fun(): jsasync.`Main$IThenable`<kotlin.Int?>? {
    return jsasync.`Main$Promise`.resolve(jsasync.Main.await(jsasync.`Main$Promise`.resolve(5)))
-  }
+  })
   val o: jsasync.`Main$BaseInterface`? = jsasync.`Main$1`(this)
-  val j: jsasync.`Main$AsyncJsFunctionInterface`? = jsasync.`Main$AsyncJsFunctionInterface` {
+  val j: jsasync.`Main$AsyncJsFunctionInterface`? = jsasync.`Main$AsyncJsFunctionInterface` (fun(): jsasync.`Main$IThenable`<kotlin.Int?>? {
    return jsasync.`Main$Promise`.resolve(jsasync.Main.await(jsasync.`Main$Promise`.resolve(5)))
-  }
+  })
   val optimizableJsFunction: jsasync.`Main$JsFunctionInterface`? = jsasync.`Main$2`(this)
   val unoptimizableJsFunction: jsasync.`Main$JsFunctionInterface`? = jsasync.`Main$3`(this)
  }

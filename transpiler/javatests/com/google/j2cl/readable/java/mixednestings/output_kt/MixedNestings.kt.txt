@@ -51,18 +51,18 @@ open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
  @JvmField val `this`: mixednestings.`MixedNestings$A$1B`?
 
  open override fun `fun`(a: Int): Int {
-  val ii: mixednestings.MyInterface? = mixednestings.MyInterface { n: Int ->
+  val ii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(n: Int): Int {
    this.`this`!!.`this`!!.`this`!!.mm()
    this.`this`!!.`this`!!.aa()
    this.`this`!!.bb()
-   val iii: mixednestings.MyInterface? = mixednestings.MyInterface { m: Int ->
+   val iii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(m: Int): Int {
     this.`this`!!.`this`!!.`this`!!.mm()
     this.`this`!!.`this`!!.aa()
     this.`this`!!.bb()
     return mixednestings.`MixedNestings$A$1B$1$1`(this).`fun`(100)
-   }
+   })
    return iii!!.`fun`(200)
-  }
+  })
   return ii!!.`fun`(300)
  }
 }

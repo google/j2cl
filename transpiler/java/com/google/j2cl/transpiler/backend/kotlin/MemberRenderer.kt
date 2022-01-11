@@ -138,7 +138,7 @@ private fun Renderer.renderParameter(variable: Variable, isVararg: Boolean) {
   renderTypeDescriptor(renderedTypeDescriptor)
 }
 
-private fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {
+internal fun Renderer.renderMethodReturnType(methodDescriptor: MethodDescriptor) {
   val returnTypeDescriptor = methodDescriptor.returnTypeDescriptor
   if (returnTypeDescriptor != PrimitiveTypes.VOID) {
     render(": ")

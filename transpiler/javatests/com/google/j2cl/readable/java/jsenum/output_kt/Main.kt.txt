@@ -41,12 +41,12 @@ open class Main {
    jsenum.`Main$NativeStringEnum`.ONE == jsenum.`Main$NativeStringEnum`.THREE
    (jsenum.`Main$ComparableJsEnum`.ONE as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).compareTo(jsenum.`Main$ComparableJsEnum`.ZERO)
    jsenum.`Main$ComparableJsEnum`.ONE == jsenum.`Main$ComparableJsEnum`.ZERO
-   val supplier: java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?> {
+   val supplier: java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?> (fun(): jsenum.`Main$ComparableJsEnum`? {
     return jsenum.`Main$ComparableJsEnum`.ONE
-   }
-   val consummer: java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?> { e: jsenum.`Main$ComparableJsEnum`? ->
+   })
+   val consummer: java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?> (fun(e: jsenum.`Main$ComparableJsEnum`?) {
     (e!! as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
-   }
+   })
   }
 
   @JvmStatic
