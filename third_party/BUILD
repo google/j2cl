@@ -217,3 +217,14 @@ alias(
     name = "jbox2d-j2wasm",
     actual = "@org_jbox2d//:jbox2d-j2wasm",
 )
+
+alias(
+    name = "kotlin_compiler_inlineable",
+    actual = "@com_github_jetbrains_kotlin//:kotlin-compiler",
+)
+
+# Reimport the jar file without "neverlink=1" so we can use it as a runtime dependency
+java_import(
+    name = "kotlin_compiler",
+    jars = ["@com_github_jetbrains_kotlin//:lib/kotlin-compiler.jar"],
+)

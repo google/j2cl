@@ -16,6 +16,7 @@ package com.google.j2cl.transpiler;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.base.Splitter;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.j2cl.common.OutputUtils;
@@ -99,10 +100,10 @@ final class BazelJ2clBuilder extends BazelWorker {
   protected boolean enableJSpecifySupport = false;
 
   @Option(
-      name = "-experimentalFrontend",
-      usage = "Select the frontend to use: JDT (default), JAVAC (experimental).",
+      name = "-experimentalJavaFrontend",
+      usage = "Select the java frontend to use: JDT (default), JAVAC (experimental).",
       hidden = true)
-  protected Frontend frontend = Frontend.JDT;
+  protected Frontend javaFrontend = Frontend.JDT;
 
   @Option(
       name = "-experimentalBackend",
@@ -140,15 +141,28 @@ final class BazelJ2clBuilder extends BazelWorker {
       problems.fatal(FatalError.LIBRARY_INFO_OUTPUT_ARG_MISSING);
     }
 
-    List<FileInfo> allSources =
+    if (!javaFrontend.isJavaFrontend()) {
+      problems.fatal(FatalError.INVALID_JAVA_FRONTEND, javaFrontend);
+    }
+
+    ImmutableList<FileInfo> allSources =
         SourceUtils.getAllSources(this.sources, problems).collect(toImmutableList());
 
-    List<FileInfo> allJavaSources =
+    ImmutableList<FileInfo> allJavaSources =
         allSources.stream()
             .filter(p -> p.sourcePath().endsWith(".java"))
             .collect(toImmutableList());
 
-    List<FileInfo> allNativeSources =
+    ImmutableList<FileInfo> allKotlinSources =
+        allSources.stream().filter(p -> p.sourcePath().endsWith(".kt")).collect(toImmutableList());
+
+    // TODO(dramaix): add support for transpiling java and kotlin simultaneously.
+    if (!allJavaSources.isEmpty() && !allKotlinSources.isEmpty()) {
+      throw new AssertionError(
+          "Transpilation of Java and Kotlin files together is not supported yet.");
+    }
+
+    ImmutableList<FileInfo> allNativeSources =
         allSources.stream()
             .filter(p -> p.sourcePath().endsWith(".native.js"))
             .collect(toImmutableList());
@@ -159,7 +173,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .forEach(f -> output.copyFile(f.sourcePath(), f.targetPath()));
 
     return J2clTranspilerOptions.newBuilder()
-        .setSources(allJavaSources)
+        .setSources(allKotlinSources.isEmpty() ? allJavaSources : allKotlinSources)
         .setNativeSources(allNativeSources)
         .setClasspaths(getPathEntries(this.classPath))
         .setOutput(output)
@@ -168,7 +182,7 @@ final class BazelJ2clBuilder extends BazelWorker {
         .setEmitReadableSourceMap(this.readableSourceMaps)
         .setGenerateKytheIndexingMetadata(this.generateKytheIndexingMetadata)
         .setOptimizeAutoValue(this.optimizeAutoValue)
-        .setFrontend(frontend)
+        .setFrontend(allKotlinSources.isEmpty() ? javaFrontend : Frontend.KOTLIN)
         .setBackend(this.backend)
         .setWasmEntryPoints(ImmutableSet.copyOf(wasmEntryPoints))
         .setDefinesForWasm(ImmutableMap.copyOf(definesForWasm))

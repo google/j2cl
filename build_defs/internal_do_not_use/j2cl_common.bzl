@@ -26,39 +26,51 @@ def _compile(
 
     # Categorize the sources.
     js_srcs = []
-    java_srcs = []
+    jvm_srcs = []
     for src in srcs:
-        (js_srcs if src.extension in ["js", "zip"] else java_srcs).append(src)
+        (js_srcs if src.extension in ["js", "zip"] else jvm_srcs).append(src)
 
     # Validate the attributes.
-    if not java_srcs:
+    if not jvm_srcs:
         if deps:
-            fail("deps not allowed without java srcs")
+            fail("deps not allowed without java or kotlin srcs")
         if js_srcs:
-            fail("js sources not allowed without java srcs")
+            fail("js sources not allowed without java or kotlin srcs")
 
-    java_deps, js_deps = _split_deps(deps)
-    java_exports, js_exports = _split_deps(exports)
+    jvm_deps, js_deps = _split_deps(deps)
+    jvm_exports, js_exports = _split_deps(exports)
 
-    java_provider = _java_compile(
-        ctx,
-        name,
-        java_srcs,
-        java_deps,
-        java_exports,
-        plugins,
-        exported_plugins,
-        output_jar,
-        javac_opts,
-        generate_kythe_action = generate_kythe_action,
-    )
+    has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"])
+    if not has_kotlin_srcs:
+        # Avoid Kotlin toolchain for regular targets.
+        jvm_provider = _java_compile(
+            ctx,
+            name,
+            jvm_srcs,
+            jvm_deps,
+            jvm_exports,
+            plugins,
+            exported_plugins,
+            output_jar,
+            javac_opts,
+            generate_kythe_action = generate_kythe_action,
+        )
+    else:
+        jvm_provider = _kt_compile(
+            ctx,
+            name,
+            jvm_srcs,
+            jvm_deps,
+            jvm_exports,
+            output_jar,
+        )
 
-    if java_srcs:
+    if jvm_srcs:
         output_js = ctx.actions.declare_directory("%s.js" % name)
         output_library_info = ctx.actions.declare_file("%s_library_info" % name)
         _j2cl_transpile(
             ctx,
-            java_provider,
+            jvm_provider,
             js_srcs,
             output_js,
             output_library_info,
@@ -71,11 +83,11 @@ def _compile(
 
     # Don't pass anything to the js provider if we didn't transpile anything.
     # This case happens when j2cl_library exports another j2cl_library.
-    js_provider_srcs = [output_js] if java_srcs else []
+    js_provider_srcs = [output_js] if jvm_srcs else []
 
     return J2clInfo(
         _private_ = struct(
-            java_info = java_provider,
+            java_info = jvm_provider,
             library_info = library_info,
             output_js = output_js,
             js_info = j2cl_js_provider(
@@ -90,21 +102,21 @@ def _compile(
     )
 
 def _split_deps(deps):
-    """ Split the provider deps into Java and JS groups. """
-    java_deps = []
+    """ Split the provider deps into Jvm and JS groups. """
+    jvm_deps = []
     js_deps = []
     for d in deps:
         # There is no good way to test if a provider is of a particular type so here we are
         # checking existence of a property that is expected to be inside the provider.
         if hasattr(d, "_is_j2cl_provider"):
             # This is a j2cl provider.
-            java_deps.append(d._private_.java_info)
+            jvm_deps.append(d._private_.java_info)
             js_deps.append(d._private_.js_info)
         else:
             # This is a js provider
             js_deps.append(d)
 
-    return (java_deps, js_deps)
+    return (jvm_deps, js_deps)
 
 def _java_compile(
         ctx,
@@ -169,6 +181,27 @@ def _java_compile(
         javac_opts = default_j2cl_javac_opts + javac_opts,
     )
 
+def _kt_compile(
+        ctx,
+        name,
+        srcs = [],
+        deps = [],
+        exports = [],
+        output_jar = None):
+    # TODO(dramaix): call kotlin toolchain
+    output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
+    ctx.actions.write(output = output_jar, content = "dummy jar file")
+    output_src_jar = ctx.actions.declare_file("lib%s-src.jar" % name)
+    ctx.actions.write(output = output_src_jar, content = "dummy src jar file")
+
+    return struct(
+        source_jars = srcs,
+        compilation_info = struct(
+            boot_classpath = ctx.attr._java_toolchain.java_toolchain.bootclasspath.to_list(),
+            compilation_classpath = depset([j.class_jar for d in deps for j in d.java_outputs]),
+        ),
+    )
+
 def _strip_gwt_incompatible(ctx, name, java_srcs, mnemonic):
     # Paths are matched by Kythe to identify generated J2CL sources.
     output_file = ctx.actions.declare_file(name + "_j2cl_stripped-src.jar")
@@ -194,7 +227,7 @@ def _strip_gwt_incompatible(ctx, name, java_srcs, mnemonic):
 
 def _j2cl_transpile(
         ctx,
-        java_provider,
+        jvm_provider,
         js_srcs,
         output_dir,
         library_info_output,
@@ -202,10 +235,10 @@ def _j2cl_transpile(
     """ Takes Java provider and translates it into Closure style JS in a zip bundle."""
 
     # Using source_jars of the java_library since that includes APT generated src.
-    srcs = java_provider.source_jars + js_srcs
+    srcs = jvm_provider.source_jars + js_srcs
     classpath = depset(
-        java_provider.compilation_info.boot_classpath,
-        transitive = [java_provider.compilation_info.compilation_classpath],
+        jvm_provider.compilation_info.boot_classpath,
+        transitive = [jvm_provider.compilation_info.compilation_classpath],
     )
 
     args = ctx.actions.args()
@@ -214,7 +247,7 @@ def _j2cl_transpile(
     args.add_joined("-classpath", classpath, join_with = ctx.configuration.host_path_separator)
     args.add("-output", output_dir.path)
     args.add("-libraryinfooutput", library_info_output)
-    args.add("-experimentalFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)
+    args.add("-experimentalJavaFrontend", ctx.attr._java_frontend[BuildSettingInfo].value)
     for flag, value in internal_transpiler_flags.items():
         if value:
             args.add("-" + flag.replace("_", ""))

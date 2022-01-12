@@ -52,7 +52,8 @@ public class Problems {
         "@GwtIncompatible annotations found in %s "
             + "Please run this library through the @GwtIncompatible stripper tool.",
         1),
-    LIBRARY_INFO_OUTPUT_ARG_MISSING("-libraryinfooutput option is mandatory", 0);
+    LIBRARY_INFO_OUTPUT_ARG_MISSING("-libraryinfooutput option is mandatory", 0),
+    INVALID_JAVA_FRONTEND("%s is not a valid Java frontend.", 1);
 
     // used for customized message.
     private final String message;

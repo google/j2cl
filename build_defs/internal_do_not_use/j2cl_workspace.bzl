@@ -6,7 +6,6 @@ load("@io_bazel_rules_kotlin//kotlin:kotlin.bzl", "kotlin_repositories", "kt_reg
 load("@bazel_skylib//lib:versions.bzl", "versions")
 load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
 
-
 _MAVEN_CENTRAL_URLS = ["https://repo1.maven.org/maven2/"]
 
 def setup_j2cl_workspace(**kwargs):
@@ -250,7 +249,14 @@ j2cl_library(
 ''',
     )
 
-    kotlin_repositories()
+    kotlin_repositories(
+        compiler_release = {
+            "urls": [
+                "https://github.com/JetBrains/kotlin/releases/download/v1.6.10/kotlin-compiler-1.6.10.zip",
+            ],
+            "sha256": "432267996d0d6b4b17ca8de0f878e44d4a099b7e9f1587a98edc4d27e76c215a",
+        },
+    )
     kt_register_toolchains()
 
     # Required by protobuf_java_util

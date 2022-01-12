@@ -16,7 +16,6 @@
 package com.google.j2cl.transpiler.ast;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.common.OutputUtils;
 import com.google.j2cl.common.visitor.Context;
@@ -32,9 +31,6 @@ import java.util.List;
 @Visitable
 @Context
 public class CompilationUnit extends Node {
-
-  private static final String COMPILATION_UNIT_FILENAME_SUFFIX = ".java";
-
   private final String filePath;
   private final String packageName;
   private final String packageRelativePath;
@@ -44,9 +40,8 @@ public class CompilationUnit extends Node {
   public CompilationUnit(String filePath, String packageName) {
     this.filePath = checkNotNull(filePath);
     this.packageName = checkNotNull(packageName);
-    this.packageRelativePath = OutputUtils.getPackageRelativePath(packageName, getName() + ".java");
-
-    checkState(filePath.endsWith(COMPILATION_UNIT_FILENAME_SUFFIX));
+    this.packageRelativePath =
+        OutputUtils.getPackageRelativePath(packageName, new File(filePath).getName());
   }
 
   public String getFilePath() {
@@ -82,12 +77,6 @@ public class CompilationUnit extends Node {
 
   public List<Type> getTypes() {
     return types;
-  }
-
-  public String getName() {
-    return filePath.substring(
-        filePath.lastIndexOf(File.separatorChar) + 1,
-        filePath.length() - COMPILATION_UNIT_FILENAME_SUFFIX.length());
   }
 
   @Override

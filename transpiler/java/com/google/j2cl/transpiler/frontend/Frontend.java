@@ -23,6 +23,7 @@ import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
+import com.google.j2cl.transpiler.frontend.kotlin.KotlinParser;
 import java.util.List;
 
 /** Drives the frontend to parse, type check and resolve Java source code. */
@@ -38,6 +39,11 @@ public enum Frontend {
       problems.abortIfHasErrors();
       return CompilationUnitBuilder.build(compilationUnitsAndTypeBindings);
     }
+
+    @Override
+    public boolean isJavaFrontend() {
+      return true;
+    }
   },
   JAVAC {
     @Override
@@ -46,6 +52,22 @@ public enum Frontend {
           .parseFiles(
               options.getSources(),
               /* useTargetPath= */ options.getGenerateKytheIndexingMetadata());
+    }
+
+    @Override
+    public boolean isJavaFrontend() {
+      return true;
+    }
+  },
+  KOTLIN {
+    @Override
+    public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
+      return new KotlinParser(options.getClasspaths(), problems).parseFiles(options.getSources());
+    }
+
+    @Override
+    public boolean isJavaFrontend() {
+      return false;
     }
   };
 
@@ -56,4 +78,6 @@ public enum Frontend {
   }
 
   abstract List<CompilationUnit> compile(FrontendOptions options, Problems problems);
+
+  public abstract boolean isJavaFrontend();
 }

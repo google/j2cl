@@ -19,7 +19,7 @@ import re
 import repo_util
 
 
-READABLE_TARGET_PATTERN = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/java/..."
+READABLE_TARGET_PATTERN = "third_party/java_src/j2cl/transpiler/javatests/com/google/j2cl/readable/..."
 
 
 def extract_pattern(pattern_string, from_value):

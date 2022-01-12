@@ -18,5 +18,6 @@ java_library(
         "//transpiler/java/com/google/j2cl/transpiler/frontend/common",
         "//transpiler/java/com/google/j2cl/transpiler/frontend/javac",
         "//transpiler/java/com/google/j2cl/transpiler/frontend/jdt",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin",
     ],
 )

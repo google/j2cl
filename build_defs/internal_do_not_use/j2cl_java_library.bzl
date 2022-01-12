@@ -67,7 +67,7 @@ _J2CL_INTERNAL_LIB_ATTRS = {
 
 _J2CL_LIB_ATTRS = {
     # TODO(goktug): Try to limit this further.
-    "srcs": attr.label_list(allow_files = [".java", ".js", ".srcjar", ".jar", ".zip"]),
+    "srcs": attr.label_list(allow_files = [".java", ".kt", ".js", ".srcjar", ".jar", ".zip"]),
     "deps": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "exports": attr.label_list(providers = [JS_PROVIDER_NAME]),
     "plugins": attr.label_list(allow_rules = ["java_plugin", "java_library"], cfg = "host"),

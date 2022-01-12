@@ -1,0 +1,35 @@
+goog.module('emptyclass.EmptyClass$impl');
+
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class EmptyClass {
+ /** @protected */
+ constructor() {
+  $Util.$assertClinit(this);
+ }
+ /** @return {!EmptyClass} */
+ static $create__() {
+  EmptyClass.$clinit();
+  let $instance = new EmptyClass();
+  $instance.$ctor__emptyclass_EmptyClass__();
+  return $instance;
+ }
+ 
+ $ctor__emptyclass_EmptyClass__() {}
+ 
+ static $clinit() {
+  EmptyClass.$clinit = () =>{};
+  EmptyClass.$loadModules();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EmptyClass;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(EmptyClass, 'emptyclass.EmptyClass');
+
+exports = EmptyClass;
+
+//# sourceMappingURL=EmptyClass.js.map
