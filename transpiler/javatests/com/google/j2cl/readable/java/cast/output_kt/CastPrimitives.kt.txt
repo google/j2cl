@@ -5,7 +5,7 @@ open class CastPrimitives {
 
  open fun testPrimitiveCasts() {
   var b: Byte = 1
-  var c: Char = 1
+  var c: Char = 1.toChar()
   var s: Short = 1
   var i: Int = 1
   var l: Long = 1L
@@ -85,7 +85,7 @@ open class CastPrimitives {
 
  open fun testImplicitArgumentCasts() {
   var b: Byte = 127
-  var c: Char = 65535
+  var c: Char = 65535.toChar()
   var s: Short = 32767
   var i: Int = 2147483647
   var l: Long = 9223372036854775807L
@@ -109,7 +109,7 @@ open class CastPrimitives {
 
  open fun testImplicitLongAssignmentCasts() {
   val fbyte: Byte = 11
-  val fchar: Char = 12
+  val fchar: Char = 12.toChar()
   val fshort: Short = 13
   val fint: Int = 14
   val flong: Long = 15L

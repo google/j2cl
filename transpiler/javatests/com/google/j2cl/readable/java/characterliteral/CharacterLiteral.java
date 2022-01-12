@@ -24,6 +24,9 @@ public class CharacterLiteral {
     a = 127;
     a = 255;
 
+    a = (byte) 0;
+    a = (short) 0;
+
     a = '\b';
     a = 8;
     a = '\t';

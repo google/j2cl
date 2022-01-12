@@ -61,6 +61,7 @@ import com.google.j2cl.transpiler.passes.InsertExplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.InsertIntegerCoercions;
 import com.google.j2cl.transpiler.passes.InsertJsEnumBoxingAndUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversions;
+import com.google.j2cl.transpiler.passes.InsertNarrowingPrimitiveConversionsKotlin;
 import com.google.j2cl.transpiler.passes.InsertNarrowingReferenceConversions;
 import com.google.j2cl.transpiler.passes.InsertNotNullAssertions;
 import com.google.j2cl.transpiler.passes.InsertStringConversions;
@@ -395,6 +396,7 @@ public enum Backend {
           NormalizeNestedBlocks::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
           InsertWideningPrimitiveConversionsKotlin::new,
+          InsertNarrowingPrimitiveConversionsKotlin::new,
           NormalizeBasicCasts::new,
           ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
