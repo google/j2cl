@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.backend.libraryinfo;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
@@ -25,12 +27,15 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.FieldAccess;
+import com.google.j2cl.transpiler.ast.FieldDeclarationStatement;
 import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.Invocation;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.Member;
 import com.google.j2cl.transpiler.ast.MemberDescriptor;
+import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
+import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.protobuf.util.JsonFormat;
@@ -120,6 +125,41 @@ public final class LibraryInfoBuilder {
               m -> createMemberInfo(memberDescriptor, outputSourceInfoByMember));
 
       collectReferencedTypesAndMethodInvocations(member, builder);
+    }
+
+    if (type.isOptimizedEnum()) {
+      // Optimized enums initialize the enum constants at load time. We need to visit the load time
+      // statements for collecting all method invocations used to initialize the enum fields and
+      // associate them with those fields. When RTA will determine that an enum field is used, it
+      // will make the method used to initialize that field live and will traverse it.
+      for (Statement statement : type.getLoadTimeStatements()) {
+        if (!(statement instanceof FieldDeclarationStatement)) {
+          continue;
+        }
+        FieldDeclarationStatement fieldDeclarationStatement = (FieldDeclarationStatement) statement;
+        if (!fieldDeclarationStatement.getFieldDescriptor().isEnumConstant()) {
+          continue;
+        }
+
+        String fieldId = getMemberId(fieldDeclarationStatement.getFieldDescriptor());
+
+        fieldDeclarationStatement.accept(
+            new AbstractVisitor() {
+              @Override
+              public void exitMethodCall(MethodCall methodCall) {
+                if (isJsAccessible(methodCall.getTarget())) {
+                  // We don't record access to js accessible fields since they are never pruned.
+                  return;
+                }
+                // We only expect static Method Invocation at that point.
+                checkState(methodCall.getTarget().isStatic());
+
+                memberInfoBuilders
+                    .get(fieldId)
+                    .addInvokedMethods(createMethodInvocation(methodCall.getTarget()));
+              }
+            });
+      }
     }
 
     if (hasConstantEntryPoint) {
@@ -319,7 +359,8 @@ public final class LibraryInfoBuilder {
   }
 
   private static boolean mayTriggerClinit(MemberDescriptor memberDescriptor) {
-    return memberDescriptor.isStatic() && !memberDescriptor.isCompileTimeConstant();
+    return memberDescriptor.isStatic()
+        && (!memberDescriptor.isCompileTimeConstant() || memberDescriptor.isEnumConstant());
   }
 
   private static boolean isPropertyAccessor(MemberDescriptor memberDescriptor) {

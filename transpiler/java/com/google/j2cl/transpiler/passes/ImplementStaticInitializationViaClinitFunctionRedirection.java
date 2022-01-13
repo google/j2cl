@@ -92,7 +92,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
    */
   private void synthesizeSettersAndGetters(Type type) {
     for (Field staticField : type.getStaticFields()) {
-      if (!triggersClinit(staticField.getDescriptor())) {
+      if (!triggersClinit(staticField.getDescriptor(), type)) {
         continue;
       }
       synthesizePropertyGetter(type, staticField);
@@ -106,7 +106,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
         new AbstractRewriter() {
           @Override
           public Member rewriteField(Field field) {
-            if (!triggersClinit(field.getDescriptor())) {
+            if (!triggersClinit(field.getDescriptor(), type)) {
               return field;
             }
             return Field.Builder.from(getBackingFieldDescriptor(field.getDescriptor()))
@@ -122,7 +122,7 @@ public class ImplementStaticInitializationViaClinitFunctionRedirection
           @Override
           public FieldAccess rewriteFieldAccess(FieldAccess fieldAccess) {
             FieldDescriptor fieldDescriptor = fieldAccess.getTarget();
-            if (!triggersClinit(fieldDescriptor)) {
+            if (!triggersClinit(fieldDescriptor, type)) {
               // The field is not rewritten as a getter, hence perform the regular field access on
               // the actual property.
               return fieldAccess;

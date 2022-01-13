@@ -195,9 +195,21 @@ class Util {
     }
 
     const clinit = instance.constructor['$clinit'];
-    if (clinit && clinit.name == '$clinit' /* i.e. not re-written yet */) {
+    if (clinit && clinit.name == '$clinit' /* i.e. not re-written yet */
+        && !Util.isEnumInstance(instance)) {
       throw new Error(Util.getInitializationError_(instance.constructor));
     }
+  }
+
+  /**
+   * @param {*} instance
+   * @return {boolean}
+   * @private
+   */
+  static isEnumInstance(instance) {
+    let superCtor =
+        Object.getPrototypeOf(instance.constructor.prototype).constructor;
+    return superCtor.name == 'Enum';
   }
 
   static getInitializationError_(ctor) {
