@@ -140,15 +140,7 @@ def _java_compile(
         "-XDstringConcat=inline",
     ]
 
-    # Use find_java_toolchain / find_java_runtime_toolchain after the next Bazel release,
-    # see: https://github.com/bazelbuild/bazel/issues/7186
-    if hasattr(java_common, "JavaToolchainInfo"):
-        java_toolchain = ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
-        host_javabase = ctx.attr._host_javabase[java_common.JavaRuntimeInfo]
-
-    else:
-        java_toolchain = ctx.attr._java_toolchain
-        host_javabase = ctx.attr._host_javabase
+    java_toolchain = ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
 
     if generate_kythe_action and ctx.var.get("GROK_ELLIPSIS_BUILD", None):
         # An unused JAR that is only generated so that we run javac with the non-stripped sources
@@ -164,7 +156,6 @@ def _java_compile(
             exported_plugins = exported_plugins,
             output = indexed_output_jar,
             java_toolchain = java_toolchain,
-            host_javabase = host_javabase,
             javac_opts = default_j2cl_javac_opts + javac_opts,
         )
 
@@ -177,7 +168,6 @@ def _java_compile(
         exported_plugins = exported_plugins,
         output = output_jar,
         java_toolchain = java_toolchain,
-        host_javabase = host_javabase,
         javac_opts = default_j2cl_javac_opts + javac_opts,
     )
 
