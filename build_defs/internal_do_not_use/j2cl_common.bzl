@@ -264,10 +264,6 @@ J2CL_JAVA_TOOLCHAIN_ATTRS = {
     "_java_toolchain": attr.label(
         default = Label("//build_defs/internal_do_not_use:j2cl_java_toolchain"),
     ),
-    "_host_javabase": attr.label(
-        default = Label("@bazel_tools//tools/jdk:current_host_java_runtime"),
-        cfg = "host",
-    ),
     "_j2cl_stripper": attr.label(
         default = Label("//build_defs/internal_do_not_use:GwtIncompatibleStripper"),
         cfg = "host",
