@@ -62,8 +62,8 @@ def _impl_j2wasm_application(ctx):
 
     # TODO(b/204138842): Only use one stage when compiling dev.
 
-    intermediate_wasm_output = ctx.actions.declare_file(ctx.label.name + "_intermediate_wasm_output")
-    intermediate_source_map = ctx.actions.declare_file(ctx.label.name + " _intermediate_source_map")
+    intermediate_wasm_output = ctx.actions.declare_file(ctx.label.name + "_intermediate_wasm_output.wasm")
+    intermediate_source_map = ctx.actions.declare_file(ctx.label.name + "_intermediate_source_map")
 
     ctx.actions.run(
         executable = ctx.executable._binaryen,
