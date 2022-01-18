@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.passes;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.JsDocCastExpression;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -26,60 +25,49 @@ import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 
 /**
- * Inserts a cast for the return type of methods which return generic types. This avoids a potential
- * error in JSCompiler where the combination of type tightening and invariant generics can lead to
- * mismatched types.
- *
- * <p>This should not be necessary when using new type inference in JSCompiler.
+ * Inserts a cast for the return type of methods where Java might have inferred the return type
+ * based on the usage site. This avoids a potential type mistmatch error in JSCompiler due to the
+ * combination of its type inference algoritm and its invariant generics semantics, which are
+ * different from Java.
  */
 public class InsertTypeAnnotationOnGenericReturnTypes extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.accept(new Rewriter());
-  }
+    compilationUnit.accept(
+        new AbstractRewriter() {
+          @Override
+          public Node rewriteMethodCall(MethodCall methodCall) {
+            MethodDescriptor methodDeclaration = methodCall.getTarget().getDeclarationDescriptor();
+            // Type variable should be declared in method to trigger inference.
+            boolean methodDeclaresTypeVariables =
+                !methodDeclaration.getTypeParameterTypeDescriptors().isEmpty();
+            TypeDescriptor returnTypeDescriptor = methodDeclaration.getReturnTypeDescriptor();
+            // Type variable should be used in method return type and return type should a generic
+            // type for inference to matter (as mismatches becomes an issue due to invariant generic
+            // type parameters in OTI).
+            boolean methodReturnHasTypeVariables =
+                !returnTypeDescriptor.getAllTypeVariables().isEmpty();
+            boolean methodReturnIsGenericType =
+                returnTypeDescriptor instanceof DeclaredTypeDescriptor
+                    && ((DeclaredTypeDescriptor) returnTypeDescriptor).hasTypeArguments();
 
-  private static class Rewriter extends AbstractRewriter {
-    @Override
-    public boolean shouldProcessJsDocCastExpression(JsDocCastExpression annotation) {
-      if (annotation.getExpression() instanceof MethodCall) {
-        MethodCall methodCall = (MethodCall) annotation.getExpression();
-        for (Expression expression : methodCall.getArguments()) {
-          // process arguments
-          expression.accept(this);
-        }
-        // Don't rewrite the castExpression nor its sub expressions.
-        return false;
-      }
-      return true;
-    }
-
-    @Override
-    public Node rewriteMethodCall(MethodCall methodCall) {
-      MethodDescriptor methodDeclaration = methodCall.getTarget().getDeclarationDescriptor();
-      // Type variable should be declared in method to trigger inference.
-      boolean methodDeclaresTypeVariables =
-          !methodDeclaration.getTypeParameterTypeDescriptors().isEmpty();
-      TypeDescriptor returnTypeDescriptor = methodDeclaration.getReturnTypeDescriptor();
-      // Type variable should be used in method return type and return type should a generic type
-      // for inference to matter (as mismatches becomes an issue due invariant generic type
-      // parameters in OTI).
-      boolean methodReturnHasTypeVariables = !returnTypeDescriptor.getAllTypeVariables().isEmpty();
-      boolean methodReturnIsGenericType =
-          returnTypeDescriptor instanceof DeclaredTypeDescriptor
-              && ((DeclaredTypeDescriptor) returnTypeDescriptor).hasTypeArguments();
-
-      // In reality, for an inference mismatch to occur, type variable used in return should be
-      // declared by the method. However there is no easy way to check that right now so we are
-      // approximating here since extra casts does only hurt uncompiled size.
-      if (methodDeclaresTypeVariables
-          && methodReturnHasTypeVariables
-          && methodReturnIsGenericType) {
-        return JsDocCastExpression.newBuilder()
-            .setExpression(methodCall)
-            .setCastType(methodCall.getTypeDescriptor())
-            .build();
-      }
-      return methodCall;
-    }
+            // If the return is not inferred and specialized in Java there is nothing to fixup.
+            boolean isReturnSpecialized =
+                !methodDeclaration.getReturnTypeDescriptor().equals(methodCall.getTypeDescriptor());
+            // In reality, for an inference mismatch to occur, type variable used in return should
+            // be declared by the method. However there is no easy way to check that right now so we
+            // are approximating here since extra casts does only hurt uncompiled size.
+            if (methodDeclaresTypeVariables
+                && methodReturnHasTypeVariables
+                && methodReturnIsGenericType
+                && isReturnSpecialized) {
+              return JsDocCastExpression.newBuilder()
+                  .setExpression(methodCall)
+                  .setCastType(methodCall.getTypeDescriptor())
+                  .build();
+            }
+            return methodCall;
+          }
+        });
   }
 }

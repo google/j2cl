@@ -73,7 +73,7 @@
 [e] => [e_1] "e"
 [testBoxUnboxWithTypeInference] => [m_testBoxUnboxWithTypeInference__]
 [TemplatedField<ComparableJsEnum> templatedField =
-        new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);] => [let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay)));] "jsenum.Main.testBoxUnboxWithTypeInference"
+        new TemplatedField<ComparableJsEnum>(ComparableJsEnum.ONE);] => [let templatedField = /**@type {!TemplatedField<$Enums_BoxedComparableLightEnum<?ComparableJsEnum>>}*/ (TemplatedField.$create__java_lang_Object(/**@type {$Enums_BoxedComparableLightEnum<!ComparableJsEnum>}*/ ($Enums.boxComparable(ComparableJsEnum.ONE, $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [templatedField] => [templatedField] "templatedField"
 [ComparableJsEnum unboxed = templatedField.getValue();] => [let unboxed = /**@type {?ComparableJsEnum}*/ ($Enums.unbox(/**@type {$Enums_BoxedComparableLightEnum<?ComparableJsEnum>}*/ ($Casts.$to(templatedField.m_getValue___$pp_jsenum(), $Overlay))));] "jsenum.Main.testBoxUnboxWithTypeInference"
 [unboxed] => [unboxed] "unboxed"
@@ -90,7 +90,7 @@
 [{
     new Foo<>(Optional.of(IntJsEnum.MINUSONE));
   }] => [Main.$clinit();] "jsenum.Main.boxingWithGenerics"
-[new Foo<>(Optional.of(IntJsEnum.MINUSONE));] => [Foo.$create__java_util_Optional(Optional.m_of__java_lang_Object(/**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay))));] "jsenum.Main.boxingWithGenerics"
+[new Foo<>(Optional.of(IntJsEnum.MINUSONE));] => [Foo.$create__java_util_Optional(/**@type {Optional<$Enums_BoxedLightEnum<?IntJsEnum>>}*/ (Optional.m_of__java_lang_Object(/**@type {$Enums_BoxedLightEnum<!IntJsEnum>}*/ ($Enums.box(IntJsEnum.MINUSONE, IntJsEnum_$Overlay)))));] "jsenum.Main.boxingWithGenerics"
 [Main] => [$clinit]
 [Main] => [Main.$clinit = () =>{};] "jsenum.Main.<clinit>"
 [Main] => [Main.$loadModules();] "jsenum.Main.<clinit>"

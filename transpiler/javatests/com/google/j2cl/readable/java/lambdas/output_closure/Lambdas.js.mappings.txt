@@ -87,9 +87,9 @@
 [Functional<T> wrapped =
         (f) ->
 ...              }
-            };] => [let wrapped = /**@type {!Functional<T>}*/ (Functional.$adapt((/** Functional<T> */ f) =>{
+            };] => [let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{
    return /**@type {!$1<T>}*/ ($1.$create__lambdas_Lambdas(this));
-  }));] "lambdas.Lambdas.testInstanceMethodTypeVariableThroughLambda"
+  });] "lambdas.Lambdas.testInstanceMethodTypeVariableThroughLambda"
 [wrapped] => [wrapped] "wrapped"
 [f] => [f] "f"
 [new Functional<T>() {
@@ -104,9 +104,9 @@
 [Functional<T> wrapped =
         (f) ->
 ...              }
-            };] => [let wrapped = /**@type {!Functional<T>}*/ (Functional.$adapt((/** Functional<T> */ f) =>{
+            };] => [let wrapped = Functional.$adapt((/** Functional<T> */ f) =>{
    return /**@type {!$2<T>}*/ ($2.$create__());
-  }));] "lambdas.Lambdas.testStaticMethodTypeVariableThroughLambda"
+  });] "lambdas.Lambdas.testStaticMethodTypeVariableThroughLambda"
 [wrapped] => [wrapped] "wrapped"
 [f] => [f] "f"
 [new Functional<T>() {
@@ -148,10 +148,10 @@
 [i -> i] => [let i_3 = /**@type {Error}*/ ($Casts.$to(i_2, Error));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [i] => [i_3] "i"
 [i] => [return i_3;] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
-[callTypeVariableWithBounds(i -> i, (Enum<T>) null);] => [Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(/**@type {!GenericFunctionalInterface<Enum<T>>}*/ (GenericFunctionalInterface.$adapt((i_4) =>{
+[callTypeVariableWithBounds(i -> i, (Enum<T>) null);] => [Lambdas.m_callTypeVariableWithBounds__lambdas_Lambdas_GenericFunctionalInterface__java_lang_Enum(GenericFunctionalInterface.$adapt((i_4) =>{
    let i_5 = /**@type {Enum}*/ ($Casts.$to(i_4, Enum));
    return i_5;
-  })), /**@type {Enum<T>}*/ (null));] "lambdas.Lambdas.testLambdaWithGenerics"
+  }), /**@type {Enum<T>}*/ (null));] "lambdas.Lambdas.testLambdaWithGenerics"
 [i] => [i_4] "i"
 [i -> i] => [let i_5 = /**@type {Enum}*/ ($Casts.$to(i_4, Enum));] "lambdas.Lambdas.<lambda in testLambdaWithGenerics>"
 [i] => [i_5] "i"
