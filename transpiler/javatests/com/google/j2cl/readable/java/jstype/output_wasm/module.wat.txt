@@ -38,15 +38,15 @@
   $java.lang.Object)
 )
 (type $jstype.SomeJsType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_publicMethod__void (ref $function.$java.lang.Object__$void))
- (field $m_packageMethod__void_$pp_jstype (ref $function.$java.lang.Object__$void))
- (field $m_protectedMethod__void (ref $function.$java.lang.Object__$void))
- (field $m_useFieldsAndMethods__void (ref $function.$java.lang.Object__$void))
- (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_publicMethod__void (ref $function.m_publicMethod__void))
+ (field $m_packageMethod__void_$pp_jstype (ref $function.m_packageMethod__void_$pp_jstype))
+ (field $m_protectedMethod__void (ref $function.m_protectedMethod__void))
+ (field $m_useFieldsAndMethods__void (ref $function.m_useFieldsAndMethods__void))
+ (field $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard (ref $function.m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard))
   $java.lang.Object.vtable)
 )
 
@@ -84,7 +84,7 @@
 
 ;;; void SomeJsType.publicMethod()
 (func $m_publicMethod__void@jstype.SomeJsType
- (type $function.$java.lang.Object__$void)
+ (type $function.m_publicMethod__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:28:14
  (local $this (ref null $jstype.SomeJsType))
@@ -104,7 +104,7 @@
 
 ;;; void SomeJsType.packageMethod()
 (func $m_packageMethod__void_$pp_jstype@jstype.SomeJsType
- (type $function.$java.lang.Object__$void)
+ (type $function.m_packageMethod__void_$pp_jstype)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:32:7
  (local $this (ref null $jstype.SomeJsType))
@@ -116,7 +116,7 @@
 
 ;;; void SomeJsType.protectedMethod()
 (func $m_protectedMethod__void@jstype.SomeJsType
- (type $function.$java.lang.Object__$void)
+ (type $function.m_protectedMethod__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:34:17
  (local $this (ref null $jstype.SomeJsType))
@@ -128,7 +128,7 @@
 
 ;;; void SomeJsType.useFieldsAndMethods()
 (func $m_useFieldsAndMethods__void@jstype.SomeJsType
- (type $function.$java.lang.Object__$void)
+ (type $function.m_useFieldsAndMethods__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jstype/SomeJsType.java:36:14
  (local $value i32)
@@ -156,7 +156,7 @@
 
 ;;; Wildcard SomeJsType.testStarAndWildCard(Star s, Wildcard w)
 (func $m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard@jstype.SomeJsType
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_testStarAndWildCard__jstype_SomeJsType_Star__jstype_SomeJsType_Wildcard__jstype_SomeJsType_Wildcard)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (param $w (ref null $java.lang.Object))
@@ -204,14 +204,14 @@
 
 ;;; Class<?> SomeJsType.getClass()
 (func $m_getClass__java_lang_Class@jstype.SomeJsType
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstype.SomeJsType))
  (local.set $this (ref.cast_static $jstype.SomeJsType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstype.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJstype.SomeJsType__java_lang_Class (ref.func $$getJstype.SomeJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType)
@@ -246,7 +246,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType.Star();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstype.SomeJsType.Star__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJstype.SomeJsType.Star__java_lang_Class (ref.func $$getJstype.SomeJsType.Star__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Star)
@@ -281,7 +281,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstype.SomeJsType.Wildcard();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstype.SomeJsType.Wildcard__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJstype.SomeJsType.Wildcard__java_lang_Class (ref.func $$getJstype.SomeJsType.Wildcard__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstype.SomeJsType.Wildcard)

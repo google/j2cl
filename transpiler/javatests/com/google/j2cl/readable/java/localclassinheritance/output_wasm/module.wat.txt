@@ -60,11 +60,11 @@
   $java.lang.Object)
 )
 (type $localclassinheritance.LocalClassInheritance.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -102,7 +102,7 @@
 
 ;;; void LocalClassInheritance.test()
 (func $m_test__void@localclassinheritance.LocalClassInheritance
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ localclassinheritance/LocalClassInheritance.java:19:14
  (local $f i32)
@@ -140,14 +140,14 @@
 
 ;;; Class<?> LocalClassInheritance.getClass()
 (func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance))
  (local.set $this (ref.cast_static $localclassinheritance.LocalClassInheritance (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclassinheritance.LocalClassInheritance__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance)
@@ -162,11 +162,11 @@
   $java.lang.Object)
 )
 (type $localclassinheritance.LocalClassInheritance.1Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_n__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_n__void (ref $function.m_n__void))
   $java.lang.Object.vtable)
 )
 
@@ -214,7 +214,7 @@
 
 ;;; void Parent.n()
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Parent
- (type $function.$java.lang.Object__$void)
+ (type $function.m_n__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ localclassinheritance/LocalClassInheritance.java:22:18
  (local $i i32)
@@ -252,14 +252,14 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Parent))
  (local.set $this (ref.cast_static $localclassinheritance.LocalClassInheritance.1Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Parent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Parent)
@@ -276,11 +276,11 @@
   $localclassinheritance.LocalClassInheritance.1Parent)
 )
 (type $localclassinheritance.LocalClassInheritance.1Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_n__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_n__void (ref $function.m_n__void))
   $localclassinheritance.LocalClassInheritance.1Parent.vtable)
 )
 
@@ -328,7 +328,7 @@
 
 ;;; void Child.n()
 (func $m_n__void@localclassinheritance.LocalClassInheritance.1Child
- (type $function.$java.lang.Object__$void)
+ (type $function.m_n__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ localclassinheritance/LocalClassInheritance.java:27:18
  (local $i i32)
@@ -366,14 +366,14 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $localclassinheritance.LocalClassInheritance.1Child))
  (local.set $this (ref.cast_static $localclassinheritance.LocalClassInheritance.1Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getLocalclassinheritance.LocalClassInheritance.1Child();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class (ref.func $$getLocalclassinheritance.LocalClassInheritance.1Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@localclassinheritance.LocalClassInheritance.1Child)

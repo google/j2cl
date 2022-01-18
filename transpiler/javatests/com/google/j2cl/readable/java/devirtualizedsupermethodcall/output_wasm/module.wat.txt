@@ -67,16 +67,16 @@
   $java.lang.Number)
 )
 (type $devirtualizedsupermethodcall.SubNumber.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_byteValue__byte (ref $function.$java.lang.Object__$byte))
- (field $m_doubleValue__double (ref $function.$java.lang.Object__$double))
- (field $m_floatValue__float (ref $function.$java.lang.Object__$float))
- (field $m_intValue__int (ref $function.$java.lang.Object__$int))
- (field $m_longValue__long (ref $function.$java.lang.Object__$long))
- (field $m_shortValue__short (ref $function.$java.lang.Object__$short))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_byteValue__byte (ref $function.m_byteValue__byte))
+ (field $m_doubleValue__double (ref $function.m_doubleValue__double))
+ (field $m_floatValue__float (ref $function.m_floatValue__float))
+ (field $m_intValue__int (ref $function.m_intValue__int))
+ (field $m_longValue__long (ref $function.m_longValue__long))
+ (field $m_shortValue__short (ref $function.m_shortValue__short))
   $java.lang.Number.vtable)
 )
 
@@ -114,7 +114,7 @@
 
 ;;; int SubNumber.intValue()
 (func $m_intValue__int@devirtualizedsupermethodcall.SubNumber
- (type $function.$java.lang.Object__$int)
+ (type $function.m_intValue__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:20:13
@@ -130,7 +130,7 @@
 
 ;;; long SubNumber.longValue()
 (func $m_longValue__long@devirtualizedsupermethodcall.SubNumber
- (type $function.$java.lang.Object__$long)
+ (type $function.m_longValue__long)
  (param $this.untyped (ref null $java.lang.Object))
  (result i64)
  ;;@ devirtualizedsupermethodcall/Main.java:25:14
@@ -146,7 +146,7 @@
 
 ;;; float SubNumber.floatValue()
 (func $m_floatValue__float@devirtualizedsupermethodcall.SubNumber
- (type $function.$java.lang.Object__$float)
+ (type $function.m_floatValue__float)
  (param $this.untyped (ref null $java.lang.Object))
  (result f32)
  ;;@ devirtualizedsupermethodcall/Main.java:30:15
@@ -162,7 +162,7 @@
 
 ;;; double SubNumber.doubleValue()
 (func $m_doubleValue__double@devirtualizedsupermethodcall.SubNumber
- (type $function.$java.lang.Object__$double)
+ (type $function.m_doubleValue__double)
  (param $this.untyped (ref null $java.lang.Object))
  (result f64)
  ;;@ devirtualizedsupermethodcall/Main.java:35:16
@@ -200,14 +200,14 @@
 
 ;;; Class<?> SubNumber.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.SubNumber
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.SubNumber))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.SubNumber (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.SubNumber();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedsupermethodcall.SubNumber__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getDevirtualizedsupermethodcall.SubNumber__java_lang_Class (ref.func $$getDevirtualizedsupermethodcall.SubNumber__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.SubNumber)
@@ -220,10 +220,10 @@
   $java.lang.Object)
 )
 (type $devirtualizedsupermethodcall.FooCallsSuperObjectMethod.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -261,7 +261,7 @@
 
 ;;; int FooCallsSuperObjectMethod.hashCode()
 (func $m_hashCode__int@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
- (type $function.$java.lang.Object__$int)
+ (type $function.m_hashCode__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ devirtualizedsupermethodcall/Main.java:42:13
@@ -299,14 +299,14 @@
 
 ;;; Class<?> FooCallsSuperObjectMethod.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.FooCallsSuperObjectMethod (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod__java_lang_Class (ref.func $$getDevirtualizedsupermethodcall.FooCallsSuperObjectMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.FooCallsSuperObjectMethod)
@@ -319,11 +319,11 @@
   $java.lang.Object)
 )
 (type $devirtualizedsupermethodcall.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_main__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
 
@@ -361,7 +361,7 @@
 
 ;;; void Main.main()
 (func $m_main__void@devirtualizedsupermethodcall.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_main__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ devirtualizedsupermethodcall/Main.java:48:14
  (local $fooCallsSuperObjectMethods (ref null $devirtualizedsupermethodcall.FooCallsSuperObjectMethod))
@@ -421,14 +421,14 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $devirtualizedsupermethodcall.Main))
  (local.set $this (ref.cast_static $devirtualizedsupermethodcall.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getDevirtualizedsupermethodcall.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getDevirtualizedsupermethodcall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getDevirtualizedsupermethodcall.Main__java_lang_Class (ref.func $$getDevirtualizedsupermethodcall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@devirtualizedsupermethodcall.Main)

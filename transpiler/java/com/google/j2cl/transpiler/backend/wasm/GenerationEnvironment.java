@@ -18,7 +18,6 @@ package com.google.j2cl.transpiler.backend.wasm;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Comparator.comparingInt;
-import static java.util.stream.Collectors.joining;
 
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableMap;
@@ -255,14 +254,7 @@ class GenerationEnvironment {
       parameterStream =
           Streams.concat(Stream.of(methodDescriptor.getEnclosingTypeDescriptor()), parameterStream);
     }
-
-    return String.format(
-        prefix + ".%s__%s",
-        parameterStream
-            .map(TypeDescriptor::toRawTypeDescriptor)
-            .map(this::getWasmTypeName)
-            .collect(joining("__")),
-        getWasmTypeName(methodDescriptor.getDispatchReturnTypeDescriptor()));
+    return prefix + "." + methodDescriptor.getMangledName();
   }
 
   private final Map<TypeDeclaration, Integer> slotByInterfaceTypeDeclaration =

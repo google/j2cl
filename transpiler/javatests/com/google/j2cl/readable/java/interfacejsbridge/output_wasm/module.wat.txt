@@ -54,7 +54,7 @@
 
 ;;; Code for interfacejsbridge.MyJsInterface [INTERFACE]
 (type $interfacejsbridge.MyJsInterface.vtable (struct_subtype 
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   data)
 )
 
@@ -83,14 +83,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.MyJsInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacejsbridge.MyJsInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfacejsbridge.MyJsInterface__java_lang_Class (ref.func $$getInterfacejsbridge.MyJsInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.MyJsInterface)
 
 ;;; Code for interfacejsbridge.MyInterface [INTERFACE]
 (type $interfacejsbridge.MyInterface.vtable (struct_subtype 
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   data)
 )
 
@@ -119,14 +119,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.MyInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacejsbridge.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfacejsbridge.MyInterface__java_lang_Class (ref.func $$getInterfacejsbridge.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.MyInterface)
 
 ;;; Code for interfacejsbridge.SubInterface [INTERFACE]
 (type $interfacejsbridge.SubInterface.vtable (struct_subtype 
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   data)
 )
 
@@ -155,7 +155,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.SubInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacejsbridge.SubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfacejsbridge.SubInterface__java_lang_Class (ref.func $$getInterfacejsbridge.SubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.SubInterface)
@@ -168,11 +168,11 @@
   $java.lang.Object)
 )
 (type $interfacejsbridge.InterfaceImpl.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   $java.lang.Object.vtable)
 )
 
@@ -210,7 +210,7 @@
 
 ;;; int InterfaceImpl.foo(int a)
 (func $m_foo__int__int@interfacejsbridge.InterfaceImpl
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_foo__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -249,14 +249,14 @@
 
 ;;; Class<?> InterfaceImpl.getClass()
 (func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.InterfaceImpl))
  (local.set $this (ref.cast_static $interfacejsbridge.InterfaceImpl (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.InterfaceImpl();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacejsbridge.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfacejsbridge.InterfaceImpl__java_lang_Class (ref.func $$getInterfacejsbridge.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.InterfaceImpl)
@@ -269,11 +269,11 @@
   $java.lang.Object)
 )
 (type $interfacejsbridge.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -311,7 +311,7 @@
 
 ;;; void Main.test()
 (func $m_test__void@interfacejsbridge.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ interfacejsbridge/Main.java:19:14
  (local $a (ref null $java.lang.Object))
@@ -373,14 +373,14 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@interfacejsbridge.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfacejsbridge.Main))
  (local.set $this (ref.cast_static $interfacejsbridge.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfacejsbridge.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfacejsbridge.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfacejsbridge.Main__java_lang_Class (ref.func $$getInterfacejsbridge.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfacejsbridge.Main)

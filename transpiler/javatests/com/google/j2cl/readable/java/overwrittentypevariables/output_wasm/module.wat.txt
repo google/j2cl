@@ -73,7 +73,7 @@
 
 ;;; Code for overwrittentypevariables.MyFunction [INTERFACE]
 (type $overwrittentypevariables.MyFunction.vtable (struct_subtype 
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -102,7 +102,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverwrittentypevariables.MyFunction();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverwrittentypevariables.MyFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverwrittentypevariables.MyFunction__java_lang_Class (ref.func $$getOverwrittentypevariables.MyFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.MyFunction)
@@ -137,7 +137,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverwrittentypevariables.HashFunction();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverwrittentypevariables.HashFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverwrittentypevariables.HashFunction__java_lang_Class (ref.func $$getOverwrittentypevariables.HashFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunction)
@@ -150,10 +150,10 @@
   $java.lang.Object)
 )
 (type $overwrittentypevariables.HashFunctions.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -241,14 +241,14 @@
 
 ;;; Class<?> HashFunctions.getClass()
 (func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overwrittentypevariables.HashFunctions))
  (local.set $this (ref.cast_static $overwrittentypevariables.HashFunctions (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverwrittentypevariables.HashFunctions();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverwrittentypevariables.HashFunctions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverwrittentypevariables.HashFunctions__java_lang_Class (ref.func $$getOverwrittentypevariables.HashFunctions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions)
@@ -261,12 +261,12 @@
   $java.lang.Object)
 )
 (type $overwrittentypevariables.HashFunctions.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_String (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.String))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_String (ref $function.m_apply__java_lang_Object__java_lang_String))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -304,7 +304,7 @@
 
 ;;; String <anonymous> implements HashFunction<T>.apply(T input)
 (func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.1
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.String)
+ (type $function.m_apply__java_lang_Object__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $input (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
@@ -314,14 +314,14 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ overwrittentypevariables/HashFunctions.java:29:8
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_apply__java_lang_Object__java_lang_String@overwrittentypevariables.HashFunctions.1)
 
 ;;; String <anonymous> implements HashFunction<T>.apply(Object arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.1
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -360,14 +360,14 @@
 
 ;;; Class<?> <anonymous> implements HashFunction<T>.getClass()
 (func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overwrittentypevariables.HashFunctions.1))
  (local.set $this (ref.cast_static $overwrittentypevariables.HashFunctions.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverwrittentypevariables.HashFunctions.1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverwrittentypevariables.HashFunctions.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverwrittentypevariables.HashFunctions.1__java_lang_Class (ref.func $$getOverwrittentypevariables.HashFunctions.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.1)
@@ -380,12 +380,12 @@
   $java.lang.Object)
 )
 (type $overwrittentypevariables.HashFunctions.2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Enum__java_lang_String (ref $function.$java.lang.Object__$java.lang.Enum__$java.lang.String))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Enum__java_lang_String (ref $function.m_apply__java_lang_Enum__java_lang_String))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -423,7 +423,7 @@
 
 ;;; String <anonymous> implements HashFunction<T>.apply(T input)
 (func $m_apply__java_lang_Enum__java_lang_String@overwrittentypevariables.HashFunctions.2
- (type $function.$java.lang.Object__$java.lang.Enum__$java.lang.String)
+ (type $function.m_apply__java_lang_Enum__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $input (ref null $java.lang.Enum))
  (result (ref null $java.lang.String))
@@ -436,7 +436,7 @@
   ;;@ overwrittentypevariables/HashFunctions.java:38:8
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(call_ref (local.get $input)(struct.get $java.lang.Enum.vtable $m_ordinal__int (struct.get $java.lang.Enum $vtable(local.get $input))))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
@@ -446,7 +446,7 @@
 
 ;;; String <anonymous> implements HashFunction<T>.apply(Object arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@overwrittentypevariables.HashFunctions.2
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -485,14 +485,14 @@
 
 ;;; Class<?> <anonymous> implements HashFunction<T>.getClass()
 (func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.2
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overwrittentypevariables.HashFunctions.2))
  (local.set $this (ref.cast_static $overwrittentypevariables.HashFunctions.2 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverwrittentypevariables.HashFunctions.2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverwrittentypevariables.HashFunctions.2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverwrittentypevariables.HashFunctions.2__java_lang_Class (ref.func $$getOverwrittentypevariables.HashFunctions.2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overwrittentypevariables.HashFunctions.2)

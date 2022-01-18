@@ -47,14 +47,14 @@
   $java.lang.Object)
 )
 (type $instanceofexpression.InstanceofExpressions.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testInstanceofClass__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceofInterface__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceofBoxedType__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceOfArray__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testInstanceofClass__void (ref $function.m_testInstanceofClass__void))
+ (field $m_testInstanceofInterface__void (ref $function.m_testInstanceofInterface__void))
+ (field $m_testInstanceofBoxedType__void (ref $function.m_testInstanceofBoxedType__void))
+ (field $m_testInstanceOfArray__void (ref $function.m_testInstanceOfArray__void))
   $java.lang.Object.vtable)
 )
 
@@ -92,7 +92,7 @@
 
 ;;; void InstanceofExpressions.testInstanceofClass()
 (func $m_testInstanceofClass__void@instanceofexpression.InstanceofExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInstanceofClass__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ instanceofexpression/InstanceofExpressions.java:22:14
  (local $object (ref null $java.lang.Object))
@@ -121,7 +121,7 @@
 
 ;;; void InstanceofExpressions.testInstanceofInterface()
 (func $m_testInstanceofInterface__void@instanceofexpression.InstanceofExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInstanceofInterface__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ instanceofexpression/InstanceofExpressions.java:30:14
  (local $o (ref null $java.lang.Object))
@@ -161,7 +161,7 @@
 
 ;;; void InstanceofExpressions.testInstanceofBoxedType()
 (func $m_testInstanceofBoxedType__void@instanceofexpression.InstanceofExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInstanceofBoxedType__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ instanceofexpression/InstanceofExpressions.java:37:14
  (local $b (ref null $java.lang.Object))
@@ -218,7 +218,7 @@
 
 ;;; void InstanceofExpressions.testInstanceOfArray()
 (func $m_testInstanceOfArray__void@instanceofexpression.InstanceofExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInstanceOfArray__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ instanceofexpression/InstanceofExpressions.java:56:14
  (local $object (ref null $java.lang.Object))
@@ -311,14 +311,14 @@
 
 ;;; Class<?> InstanceofExpressions.getClass()
 (func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions))
  (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstanceofexpression.InstanceofExpressions();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstanceofexpression.InstanceofExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstanceofexpression.InstanceofExpressions__java_lang_Class (ref.func $$getInstanceofexpression.InstanceofExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions)
@@ -332,10 +332,10 @@
   $java.lang.Object)
 )
 (type $instanceofexpression.InstanceofExpressions.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -400,14 +400,14 @@
 
 ;;; Class<?> <anonymous> implements Serializable.getClass()
 (func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceofexpression.InstanceofExpressions.1))
  (local.set $this (ref.cast_static $instanceofexpression.InstanceofExpressions.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstanceofexpression.InstanceofExpressions.1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class (ref.func $$getInstanceofexpression.InstanceofExpressions.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instanceofexpression.InstanceofExpressions.1)

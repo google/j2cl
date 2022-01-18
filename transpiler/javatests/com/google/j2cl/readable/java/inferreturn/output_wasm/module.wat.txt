@@ -23,10 +23,10 @@
   $java.lang.Object)
 )
 (type $inferreturn.InferReturn.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -114,13 +114,13 @@
   (call $$clinit__void@inferreturn.InferReturn )
   ;; ArrayList<Object> list = inferreturn.InferReturn.newArrayList(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ inferreturn/InferReturn.java:37:4
-  (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $list (call $m_newArrayList__java_lang_Object__java_util_ArrayList@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; inferreturn.InferReturn.acceptsArrayListOfObject(list);
   ;;@ inferreturn/InferReturn.java:39:4
   (call $m_acceptsArrayListOfObject__java_util_ArrayList__void@inferreturn.InferReturn (local.get $list))
   ;; Object[] array = inferreturn.InferReturn.newArray(javaemul.internal.StringPool.$getString_|foo|());
   ;;@ inferreturn/InferReturn.java:41:4
-  (local.set $array (call $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
+  (local.set $array (call $m_newArray__java_lang_Object__arrayOf_java_lang_Object@inferreturn.InferReturn (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )))
   ;; inferreturn.InferReturn.acceptsArrayOfObject(array);
   ;;@ inferreturn/InferReturn.java:43:4
   (call $m_acceptsArrayOfObject__arrayOf_java_lang_Object__void@inferreturn.InferReturn (local.get $array))
@@ -203,14 +203,14 @@
 
 ;;; Class<?> InferReturn.getClass()
 (func $m_getClass__java_lang_Class@inferreturn.InferReturn
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $inferreturn.InferReturn))
  (local.set $this (ref.cast_static $inferreturn.InferReturn (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInferreturn.InferReturn();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInferreturn.InferReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInferreturn.InferReturn__java_lang_Class (ref.func $$getInferreturn.InferReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@inferreturn.InferReturn)

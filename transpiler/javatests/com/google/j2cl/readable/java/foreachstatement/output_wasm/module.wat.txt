@@ -131,11 +131,11 @@
   $java.lang.Object)
 )
 (type $foreachstatement.ForEachStatement.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__java_lang_Iterable__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__java_lang_Iterable__void (ref $function.m_test__java_lang_Iterable__void))
   $java.lang.Object.vtable)
 )
 
@@ -173,7 +173,7 @@
 
 ;;; void ForEachStatement.test(Iterable<Throwable> iterable)
 (func $m_test__java_lang_Iterable__void@foreachstatement.ForEachStatement
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_test__java_lang_Iterable__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $iterable (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:21:14
@@ -391,14 +391,14 @@
 
 ;;; Class<?> ForEachStatement.getClass()
 (func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $foreachstatement.ForEachStatement))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getForeachstatement.ForEachStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement)
@@ -418,26 +418,26 @@
   $java.lang.Exception)
 )
 (type $foreachstatement.ForEachStatement.Exception1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_getBackingJsObject__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_addSuppressed__java_lang_Throwable__void (ref $function.$java.lang.Object__$java.lang.Throwable__$void))
- (field $m_fillInStackTrace__java_lang_Throwable (ref $function.$java.lang.Object__$java.lang.Throwable))
- (field $m_getCause__java_lang_Throwable (ref $function.$java.lang.Object__$java.lang.Throwable))
- (field $m_getLocalizedMessage__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getMessage__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
- (field $m_getSuppressed__arrayOf_java_lang_Throwable (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
- (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.$java.lang.Object__$java.lang.Throwable__$java.lang.Throwable))
- (field $m_printStackTrace__void (ref $function.$java.lang.Object__$void))
- (field $m_printStackTrace__java_io_PrintStream__void (ref $function.$java.lang.Object__$java.io.PrintStream__$void))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_iterator__java_util_Iterator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_spliterator__java_util_Spliterator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang))
+ (field $m_getBackingJsObject__java_lang_Object (ref $function.m_getBackingJsObject__java_lang_Object))
+ (field $m_addSuppressed__java_lang_Throwable__void (ref $function.m_addSuppressed__java_lang_Throwable__void))
+ (field $m_fillInStackTrace__java_lang_Throwable (ref $function.m_fillInStackTrace__java_lang_Throwable))
+ (field $m_getCause__java_lang_Throwable (ref $function.m_getCause__java_lang_Throwable))
+ (field $m_getLocalizedMessage__java_lang_String (ref $function.m_getLocalizedMessage__java_lang_String))
+ (field $m_getMessage__java_lang_String (ref $function.m_getMessage__java_lang_String))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.m_getStackTrace__arrayOf_java_lang_StackTraceElement))
+ (field $m_getSuppressed__arrayOf_java_lang_Throwable (ref $function.m_getSuppressed__arrayOf_java_lang_Throwable))
+ (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.m_initCause__java_lang_Throwable__java_lang_Throwable))
+ (field $m_printStackTrace__void (ref $function.m_printStackTrace__void))
+ (field $m_printStackTrace__java_io_PrintStream__void (ref $function.m_printStackTrace__java_io_PrintStream__void))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
+ (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
+ (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
   $java.lang.Exception.vtable)
 )
 
@@ -475,7 +475,7 @@
 
 ;;; Iterator<String> Exception1.iterator()
 (func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception1
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_iterator__java_util_Iterator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:32:28
@@ -491,7 +491,7 @@
 
 ;;; void Exception1.forEach(Consumer<? super String> arg0)
 (func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception1
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_forEach__java_util_function_Consumer__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:31:15
@@ -507,7 +507,7 @@
 
 ;;; Spliterator<String> Exception1.spliterator()
 (func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception1
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_spliterator__java_util_Spliterator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:31:15
@@ -548,14 +548,14 @@
 
 ;;; Class<?> Exception1.getClass()
 (func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception1))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement.Exception1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement.Exception1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getForeachstatement.ForEachStatement.Exception1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement.Exception1__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement.Exception1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception1)
@@ -575,26 +575,26 @@
   $java.lang.Exception)
 )
 (type $foreachstatement.ForEachStatement.Exception2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_getBackingJsObject__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_addSuppressed__java_lang_Throwable__void (ref $function.$java.lang.Object__$java.lang.Throwable__$void))
- (field $m_fillInStackTrace__java_lang_Throwable (ref $function.$java.lang.Object__$java.lang.Throwable))
- (field $m_getCause__java_lang_Throwable (ref $function.$java.lang.Object__$java.lang.Throwable))
- (field $m_getLocalizedMessage__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getMessage__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
- (field $m_getSuppressed__arrayOf_java_lang_Throwable (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
- (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.$java.lang.Object__$java.lang.Throwable__$java.lang.Throwable))
- (field $m_printStackTrace__void (ref $function.$java.lang.Object__$void))
- (field $m_printStackTrace__java_io_PrintStream__void (ref $function.$java.lang.Object__$java.io.PrintStream__$void))
- (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_iterator__java_util_Iterator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_spliterator__java_util_Spliterator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_privateInitError__java_lang_Object__void_$pp_java_lang (ref $function.m_privateInitError__java_lang_Object__void_$pp_java_lang))
+ (field $m_getBackingJsObject__java_lang_Object (ref $function.m_getBackingJsObject__java_lang_Object))
+ (field $m_addSuppressed__java_lang_Throwable__void (ref $function.m_addSuppressed__java_lang_Throwable__void))
+ (field $m_fillInStackTrace__java_lang_Throwable (ref $function.m_fillInStackTrace__java_lang_Throwable))
+ (field $m_getCause__java_lang_Throwable (ref $function.m_getCause__java_lang_Throwable))
+ (field $m_getLocalizedMessage__java_lang_String (ref $function.m_getLocalizedMessage__java_lang_String))
+ (field $m_getMessage__java_lang_String (ref $function.m_getMessage__java_lang_String))
+ (field $m_getStackTrace__arrayOf_java_lang_StackTraceElement (ref $function.m_getStackTrace__arrayOf_java_lang_StackTraceElement))
+ (field $m_getSuppressed__arrayOf_java_lang_Throwable (ref $function.m_getSuppressed__arrayOf_java_lang_Throwable))
+ (field $m_initCause__java_lang_Throwable__java_lang_Throwable (ref $function.m_initCause__java_lang_Throwable__java_lang_Throwable))
+ (field $m_printStackTrace__void (ref $function.m_printStackTrace__void))
+ (field $m_printStackTrace__java_io_PrintStream__void (ref $function.m_printStackTrace__java_io_PrintStream__void))
+ (field $m_setStackTrace__arrayOf_java_lang_StackTraceElement__void (ref $function.m_setStackTrace__arrayOf_java_lang_StackTraceElement__void))
+ (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
+ (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
   $java.lang.Exception.vtable)
 )
 
@@ -632,7 +632,7 @@
 
 ;;; Iterator<Object> Exception2.iterator()
 (func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.Exception2
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_iterator__java_util_Iterator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:38:28
@@ -648,7 +648,7 @@
 
 ;;; void Exception2.forEach(Consumer<? super Object> arg0)
 (func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.Exception2
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_forEach__java_util_function_Consumer__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:37:15
@@ -664,7 +664,7 @@
 
 ;;; Spliterator<Object> Exception2.spliterator()
 (func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.Exception2
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_spliterator__java_util_Spliterator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:37:15
@@ -705,14 +705,14 @@
 
 ;;; Class<?> Exception2.getClass()
 (func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception2
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $foreachstatement.ForEachStatement.Exception2))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement.Exception2 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement.Exception2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getForeachstatement.ForEachStatement.Exception2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement.Exception2__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement.Exception2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.Exception2)
@@ -725,13 +725,13 @@
   $java.lang.Object)
 )
 (type $foreachstatement.ForEachStatement.IterableReturningTypeVariable.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_iterator__java_util_Iterator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_spliterator__java_util_Spliterator (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
+ (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
   $java.lang.Object.vtable)
 )
 
@@ -769,7 +769,7 @@
 
 ;;; T IterableReturningTypeVariable.iterator()
 (func $m_iterator__java_util_Iterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_iterator__java_util_Iterator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:53:13
@@ -785,7 +785,7 @@
 
 ;;; void IterableReturningTypeVariable.forEach(Consumer<? super Integer> arg0)
 (func $m_forEach__java_util_function_Consumer__void@foreachstatement.ForEachStatement.IterableReturningTypeVariable
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_forEach__java_util_function_Consumer__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:51:15
@@ -801,7 +801,7 @@
 
 ;;; Spliterator<Integer> IterableReturningTypeVariable.spliterator()
 (func $m_spliterator__java_util_Spliterator@foreachstatement.ForEachStatement.IterableReturningTypeVariable
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_spliterator__java_util_Spliterator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ foreachstatement/ForEachStatement.java:51:15
@@ -842,14 +842,14 @@
 
 ;;; Class<?> IterableReturningTypeVariable.getClass()
 (func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $foreachstatement.ForEachStatement.IterableReturningTypeVariable))
  (local.set $this (ref.cast_static $foreachstatement.ForEachStatement.IterableReturningTypeVariable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getForeachstatement.ForEachStatement.IterableReturningTypeVariable();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getForeachstatement.ForEachStatement.IterableReturningTypeVariable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getForeachstatement.ForEachStatement.IterableReturningTypeVariable__java_lang_Class (ref.func $$getForeachstatement.ForEachStatement.IterableReturningTypeVariable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@foreachstatement.ForEachStatement.IterableReturningTypeVariable)

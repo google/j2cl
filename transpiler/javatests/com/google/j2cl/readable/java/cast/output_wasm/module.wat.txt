@@ -236,15 +236,15 @@
   $java.lang.Object)
 )
 (type $cast.CastGenerics.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_method__java_lang_Object_$pp_cast (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_testCastToTypeVariable__void (ref $function.$java.lang.Object__$void))
- (field $m_testCastToMethodTypeVariable__void (ref $function.$java.lang.Object__$void))
- (field $m_outerGenericMethod__void (ref $function.$java.lang.Object__$void))
- (field $m_method__java_lang_Object__cast_CastGenerics_Empty1 (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_method__java_lang_Object_$pp_cast (ref $function.m_method__java_lang_Object_$pp_cast))
+ (field $m_testCastToTypeVariable__void (ref $function.m_testCastToTypeVariable__void))
+ (field $m_testCastToMethodTypeVariable__void (ref $function.m_testCastToMethodTypeVariable__void))
+ (field $m_outerGenericMethod__void (ref $function.m_outerGenericMethod__void))
+ (field $m_method__java_lang_Object__cast_CastGenerics_Empty1 (ref $function.m_method__java_lang_Object__cast_CastGenerics_Empty1))
   $java.lang.Object.vtable)
 )
 
@@ -282,7 +282,7 @@
 
 ;;; T CastGenerics.method()
 (func $m_method__java_lang_Object_$pp_cast@cast.CastGenerics
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_method__java_lang_Object_$pp_cast)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ cast/CastGenerics.java:21:4
@@ -494,7 +494,7 @@
 
 ;;; void CastGenerics.testCastToTypeVariable()
 (func $m_testCastToTypeVariable__void@cast.CastGenerics
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCastToTypeVariable__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastGenerics.java:90:14
  (local $o (ref null $java.lang.Object))
@@ -526,7 +526,7 @@
 
 ;;; void CastGenerics.testCastToMethodTypeVariable()
 (func $m_testCastToMethodTypeVariable__void@cast.CastGenerics
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCastToMethodTypeVariable__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastGenerics.java:98:37
  (local $o (ref null $java.lang.Object))
@@ -556,7 +556,7 @@
 
 ;;; void CastGenerics.outerGenericMethod()
 (func $m_outerGenericMethod__void@cast.CastGenerics
- (type $function.$java.lang.Object__$void)
+ (type $function.m_outerGenericMethod__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastGenerics.java:110:32
  (local $this (ref null $cast.CastGenerics))
@@ -568,7 +568,7 @@
 
 ;;; EE CastGenerics.method(Object o)
 (func $m_method__java_lang_Object__cast_CastGenerics_Empty1@cast.CastGenerics
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_method__java_lang_Object__cast_CastGenerics_Empty1)
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -632,21 +632,21 @@
 
 ;;; Class<?> CastGenerics.getClass()
 (func $m_getClass__java_lang_Class@cast.CastGenerics
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastGenerics))
  (local.set $this (ref.cast_static $cast.CastGenerics (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics__java_lang_Class (ref.func $$getCast.CastGenerics__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics)
 
 ;;; Code for cast.CastGenerics.A [INTERFACE]
 (type $cast.CastGenerics.A.vtable (struct_subtype 
- (field $m_mA__void (ref $function.$java.lang.Object__$void))
+ (field $m_mA__void (ref $function.m_mA__void))
   data)
 )
 
@@ -675,14 +675,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.A__java_lang_Class (ref.func $$getCast.CastGenerics.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.A)
 
 ;;; Code for cast.CastGenerics.B [INTERFACE]
 (type $cast.CastGenerics.B.vtable (struct_subtype 
- (field $m_mB__void (ref $function.$java.lang.Object__$void))
+ (field $m_mB__void (ref $function.m_mB__void))
   data)
 )
 
@@ -711,7 +711,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.B();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.B__java_lang_Class (ref.func $$getCast.CastGenerics.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.B)
@@ -724,10 +724,10 @@
   $java.lang.Object)
 )
 (type $cast.CastGenerics.BaseImplementor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -775,12 +775,12 @@
   $cast.CastGenerics.BaseImplementor)
 )
 (type $cast.CastGenerics.Implementor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_mA__void (ref $function.$java.lang.Object__$void))
- (field $m_mB__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_mA__void (ref $function.m_mA__void))
+ (field $m_mB__void (ref $function.m_mB__void))
   $cast.CastGenerics.BaseImplementor.vtable)
 )
 
@@ -815,7 +815,7 @@
 
 ;;; void Implementor.mA()
 (func $m_mA__void@cast.CastGenerics.Implementor
- (type $function.$java.lang.Object__$void)
+ (type $function.m_mA__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastGenerics.java:36:16
  (local $this (ref null $cast.CastGenerics.Implementor))
@@ -827,7 +827,7 @@
 
 ;;; void Implementor.mB()
 (func $m_mB__void@cast.CastGenerics.Implementor
- (type $function.$java.lang.Object__$void)
+ (type $function.m_mB__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastGenerics.java:38:16
  (local $this (ref null $cast.CastGenerics.Implementor))
@@ -861,14 +861,14 @@
 
 ;;; Class<?> Implementor.getClass()
 (func $m_getClass__java_lang_Class@cast.CastGenerics.Implementor
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastGenerics.Implementor))
  (local.set $this (ref.cast_static $cast.CastGenerics.Implementor (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Implementor();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.Implementor__java_lang_Class (ref.func $$getCast.CastGenerics.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.Implementor)
@@ -881,11 +881,11 @@
   $java.lang.Object)
 )
 (type $cast.CastGenerics.Container.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__java_lang_Object_$pp_cast (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__java_lang_Object_$pp_cast (ref $function.m_get__java_lang_Object_$pp_cast))
   $java.lang.Object.vtable)
 )
 
@@ -920,7 +920,7 @@
 
 ;;; T Container.get()
 (func $m_get__java_lang_Object_$pp_cast@cast.CastGenerics.Container
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_get__java_lang_Object_$pp_cast)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ cast/CastGenerics.java:42:6
@@ -958,14 +958,14 @@
 
 ;;; Class<?> Container.getClass()
 (func $m_getClass__java_lang_Class@cast.CastGenerics.Container
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastGenerics.Container))
  (local.set $this (ref.cast_static $cast.CastGenerics.Container (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Container();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.Container__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.Container__java_lang_Class (ref.func $$getCast.CastGenerics.Container__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.Container)
@@ -979,10 +979,10 @@
   $java.lang.Object)
 )
 (type $cast.CastGenerics.1Nested.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -1060,14 +1060,14 @@
 
 ;;; Class<?> Nested.getClass()
 (func $m_getClass__java_lang_Class@cast.CastGenerics.1Nested
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastGenerics.1Nested))
  (local.set $this (ref.cast_static $cast.CastGenerics.1Nested (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.1Nested();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.1Nested__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.1Nested__java_lang_Class (ref.func $$getCast.CastGenerics.1Nested__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.1Nested)
@@ -1102,7 +1102,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Empty1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.Empty1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.Empty1__java_lang_Class (ref.func $$getCast.CastGenerics.Empty1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.Empty1)
@@ -1137,7 +1137,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Empty2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.Empty2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.Empty2__java_lang_Class (ref.func $$getCast.CastGenerics.Empty2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.Empty2)
@@ -1150,10 +1150,10 @@
   $cast.CastGenerics.Foo)
 )
 (type $cast.CastGenerics.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $cast.CastGenerics.Foo.vtable)
 )
 
@@ -1213,14 +1213,14 @@
 
 ;;; Class<?> <anonymous> extends Foo<T>.getClass()
 (func $m_getClass__java_lang_Class@cast.CastGenerics.1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastGenerics.1))
  (local.set $this (ref.cast_static $cast.CastGenerics.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.1__java_lang_Class (ref.func $$getCast.CastGenerics.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.1)
@@ -1233,10 +1233,10 @@
   $java.lang.Object)
 )
 (type $cast.CastGenerics.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -1296,14 +1296,14 @@
 
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@cast.CastGenerics.Foo
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastGenerics.Foo))
  (local.set $this (ref.cast_static $cast.CastGenerics.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastGenerics.Foo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastGenerics.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastGenerics.Foo__java_lang_Class (ref.func $$getCast.CastGenerics.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastGenerics.Foo)
@@ -1316,15 +1316,15 @@
   $java.lang.Object)
 )
 (type $cast.CastPrimitives.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testPrimitiveCasts__void (ref $function.$java.lang.Object__$void))
- (field $m_testReferenceToPrimitive__void (ref $function.$java.lang.Object__$void))
- (field $m_testUnboxAndWiden__void (ref $function.$java.lang.Object__$void))
- (field $m_testImplicitArgumentCasts__void (ref $function.$java.lang.Object__$void))
- (field $m_testImplicitLongAssignmentCasts__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testPrimitiveCasts__void (ref $function.m_testPrimitiveCasts__void))
+ (field $m_testReferenceToPrimitive__void (ref $function.m_testReferenceToPrimitive__void))
+ (field $m_testUnboxAndWiden__void (ref $function.m_testUnboxAndWiden__void))
+ (field $m_testImplicitArgumentCasts__void (ref $function.m_testImplicitArgumentCasts__void))
+ (field $m_testImplicitLongAssignmentCasts__void (ref $function.m_testImplicitLongAssignmentCasts__void))
   $java.lang.Object.vtable)
 )
 
@@ -1362,7 +1362,7 @@
 
 ;;; void CastPrimitives.testPrimitiveCasts()
 (func $m_testPrimitiveCasts__void@cast.CastPrimitives
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testPrimitiveCasts__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastPrimitives.java:19:14
  (local $b i32)
@@ -1549,7 +1549,7 @@
 
 ;;; void CastPrimitives.testReferenceToPrimitive()
 (func $m_testReferenceToPrimitive__void@cast.CastPrimitives
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testReferenceToPrimitive__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastPrimitives.java:85:14
  (local $o (ref null $java.lang.Object))
@@ -1629,7 +1629,7 @@
 
 ;;; void CastPrimitives.testUnboxAndWiden()
 (func $m_testUnboxAndWiden__void@cast.CastPrimitives
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testUnboxAndWiden__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastPrimitives.java:97:14
  (local $boxedByte (ref null $java.lang.Byte))
@@ -1665,7 +1665,7 @@
 
 ;;; void CastPrimitives.testImplicitArgumentCasts()
 (func $m_testImplicitArgumentCasts__void@cast.CastPrimitives
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testImplicitArgumentCasts__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastPrimitives.java:108:14
  (local $b i32)
@@ -1807,7 +1807,7 @@
 
 ;;; void CastPrimitives.testImplicitLongAssignmentCasts()
 (func $m_testImplicitLongAssignmentCasts__void@cast.CastPrimitives
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testImplicitLongAssignmentCasts__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/CastPrimitives.java:165:14
  (local $fbyte i32)
@@ -1932,14 +1932,14 @@
 
 ;;; Class<?> CastPrimitives.getClass()
 (func $m_getClass__java_lang_Class@cast.CastPrimitives
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastPrimitives))
  (local.set $this (ref.cast_static $cast.CastPrimitives (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastPrimitives();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastPrimitives__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastPrimitives__java_lang_Class (ref.func $$getCast.CastPrimitives__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastPrimitives)
@@ -1952,10 +1952,10 @@
   $java.lang.Object)
 )
 (type $cast.CastPrimitives.IntValueHolder.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -2017,14 +2017,14 @@
 
 ;;; Class<?> IntValueHolder.getClass()
 (func $m_getClass__java_lang_Class@cast.CastPrimitives.IntValueHolder
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastPrimitives.IntValueHolder))
  (local.set $this (ref.cast_static $cast.CastPrimitives.IntValueHolder (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastPrimitives.IntValueHolder();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastPrimitives.IntValueHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastPrimitives.IntValueHolder__java_lang_Class (ref.func $$getCast.CastPrimitives.IntValueHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastPrimitives.IntValueHolder)
@@ -2037,10 +2037,10 @@
   $java.lang.Object)
 )
 (type $cast.CastPrimitives.LongValueHolder.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -2102,14 +2102,14 @@
 
 ;;; Class<?> LongValueHolder.getClass()
 (func $m_getClass__java_lang_Class@cast.CastPrimitives.LongValueHolder
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.CastPrimitives.LongValueHolder))
  (local.set $this (ref.cast_static $cast.CastPrimitives.LongValueHolder (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.CastPrimitives.LongValueHolder();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.CastPrimitives.LongValueHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.CastPrimitives.LongValueHolder__java_lang_Class (ref.func $$getCast.CastPrimitives.LongValueHolder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.CastPrimitives.LongValueHolder)
@@ -2122,17 +2122,17 @@
   $java.lang.Object)
 )
 (type $cast.Casts.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testCastToClass__void (ref $function.$java.lang.Object__$void))
- (field $m_testCasToInterface__void (ref $function.$java.lang.Object__$void))
- (field $m_testCastToBoxedType__void (ref $function.$java.lang.Object__$void))
- (field $m_testCastToArray__void (ref $function.$java.lang.Object__$void))
- (field $m_testCastObjectAfterInstanceOf__void (ref $function.$java.lang.Object__$void))
- (field $m_testCastFieldAfterInstanceOf__void (ref $function.$java.lang.Object__$void))
- (field $m_testCaseMethodAfterInstanceOf__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testCastToClass__void (ref $function.m_testCastToClass__void))
+ (field $m_testCasToInterface__void (ref $function.m_testCasToInterface__void))
+ (field $m_testCastToBoxedType__void (ref $function.m_testCastToBoxedType__void))
+ (field $m_testCastToArray__void (ref $function.m_testCastToArray__void))
+ (field $m_testCastObjectAfterInstanceOf__void (ref $function.m_testCastObjectAfterInstanceOf__void))
+ (field $m_testCastFieldAfterInstanceOf__void (ref $function.m_testCastFieldAfterInstanceOf__void))
+ (field $m_testCaseMethodAfterInstanceOf__void (ref $function.m_testCaseMethodAfterInstanceOf__void))
   $java.lang.Object.vtable)
 )
 
@@ -2170,7 +2170,7 @@
 
 ;;; void Casts.testCastToClass()
 (func $m_testCastToClass__void@cast.Casts
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCastToClass__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/Casts.java:22:14
  (local $o (ref null $java.lang.Object))
@@ -2190,7 +2190,7 @@
 
 ;;; void Casts.testCasToInterface()
 (func $m_testCasToInterface__void@cast.Casts
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCasToInterface__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/Casts.java:27:14
  (local $o (ref null $java.lang.Object))
@@ -2210,7 +2210,7 @@
 
 ;;; void Casts.testCastToBoxedType()
 (func $m_testCastToBoxedType__void@cast.Casts
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCastToBoxedType__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/Casts.java:32:14
  (local $o (ref null $java.lang.Object))
@@ -2262,7 +2262,7 @@
 
 ;;; void Casts.testCastToArray()
 (func $m_testCastToArray__void@cast.Casts
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCastToArray__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/Casts.java:45:14
  (local $foo (ref null $java.lang.Object))
@@ -2290,7 +2290,7 @@
 
 ;;; void Casts.testCastObjectAfterInstanceOf()
 (func $m_testCastObjectAfterInstanceOf__void@cast.Casts
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCastObjectAfterInstanceOf__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/Casts.java:52:14
  (local $o (ref null $java.lang.Object))
@@ -2394,7 +2394,7 @@
 
 ;;; void Casts.testCastFieldAfterInstanceOf()
 (func $m_testCastFieldAfterInstanceOf__void@cast.Casts
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCastFieldAfterInstanceOf__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/Casts.java:88:14
  (local $foo (ref null $cast.Casts.Foo))
@@ -2479,7 +2479,7 @@
 
 ;;; void Casts.testCaseMethodAfterInstanceOf()
 (func $m_testCaseMethodAfterInstanceOf__void@cast.Casts
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCaseMethodAfterInstanceOf__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ cast/Casts.java:110:14
  (local $foo (ref null $cast.Casts.Foo))
@@ -2529,14 +2529,14 @@
 
 ;;; Class<?> Casts.getClass()
 (func $m_getClass__java_lang_Class@cast.Casts
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.Casts))
  (local.set $this (ref.cast_static $cast.Casts (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.Casts();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.Casts__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.Casts__java_lang_Class (ref.func $$getCast.Casts__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.Casts)
@@ -2551,11 +2551,11 @@
   $java.lang.Object)
 )
 (type $cast.Casts.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_method__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_method__java_lang_Object (ref $function.m_method__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2601,7 +2601,7 @@
 
 ;;; Object Foo.method()
 (func $m_method__java_lang_Object@cast.Casts.Foo
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_method__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ cast/Casts.java:83:18
@@ -2650,14 +2650,14 @@
 
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@cast.Casts.Foo
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $cast.Casts.Foo))
  (local.set $this (ref.cast_static $cast.Casts.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getCast.Casts.Foo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getCast.Casts.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getCast.Casts.Foo__java_lang_Class (ref.func $$getCast.Casts.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@cast.Casts.Foo)

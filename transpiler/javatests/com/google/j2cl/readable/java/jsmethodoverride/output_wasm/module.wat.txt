@@ -42,11 +42,11 @@
   $java.lang.Object)
 )
 (type $jsmethodoverride.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void (ref $function.m_foo__void))
   $java.lang.Object.vtable)
 )
 
@@ -84,7 +84,7 @@
 
 ;;; void Parent.foo()
 (func $m_foo__void@jsmethodoverride.Parent
- (type $function.$java.lang.Object__$void)
+ (type $function.m_foo__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsmethodoverride/Child.java:23:14
  (local $this (ref null $jsmethodoverride.Parent))
@@ -118,14 +118,14 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@jsmethodoverride.Parent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Parent))
  (local.set $this (ref.cast_static $jsmethodoverride.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Parent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethodoverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsmethodoverride.Parent__java_lang_Class (ref.func $$getJsmethodoverride.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Parent)
@@ -138,11 +138,11 @@
   $jsmethodoverride.Parent)
 )
 (type $jsmethodoverride.Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void (ref $function.m_foo__void))
   $jsmethodoverride.Parent.vtable)
 )
 
@@ -180,7 +180,7 @@
 
 ;;; void Child.foo()
 (func $m_foo__void@jsmethodoverride.Child
- (type $function.$java.lang.Object__$void)
+ (type $function.m_foo__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsmethodoverride/Child.java:29:14
  (local $this (ref null $jsmethodoverride.Child))
@@ -214,14 +214,14 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@jsmethodoverride.Child
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethodoverride.Child))
  (local.set $this (ref.cast_static $jsmethodoverride.Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethodoverride.Child();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethodoverride.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsmethodoverride.Child__java_lang_Class (ref.func $$getJsmethodoverride.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethodoverride.Child)

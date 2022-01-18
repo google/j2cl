@@ -6,7 +6,7 @@
 
 ;;; Code for abstractinterfaceimpl.MyInterface [INTERFACE]
 (type $abstractinterfaceimpl.MyInterface.vtable (struct_subtype 
- (field $m_foo__int (ref $function.$java.lang.Object__$int))
+ (field $m_foo__int (ref $function.m_foo__int))
   data)
 )
 
@@ -35,7 +35,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinterfaceimpl.MyInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAbstractinterfaceimpl.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAbstractinterfaceimpl.MyInterface__java_lang_Class (ref.func $$getAbstractinterfaceimpl.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@abstractinterfaceimpl.MyInterface)
@@ -48,10 +48,10 @@
   $java.lang.Object)
 )
 (type $abstractinterfaceimpl.AbstractInterfaceImpl.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 

@@ -40,15 +40,15 @@
   $java.lang.Enum)
 )
 (type $jstypeenum.Color.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_name__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
- (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ (field $m_ordinal__int (ref $function.m_ordinal__int))
+ (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
   $java.lang.Enum.vtable)
 )
 
@@ -152,26 +152,26 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (jstypeenum.Color.RED = jstypeenum.Color.$create(javaemul.internal.StringPool.$getString_|RED|(),0));
   ;;@ jstypeenum/Color.java:22:2
-  (global.set $f_RED__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|RED|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_RED__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.$getString_|RED|__java_lang_String (ref.func $$getString_|RED|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (jstypeenum.Color.GREEN = jstypeenum.Color.$create(javaemul.internal.StringPool.$getString_|GREEN|(),1));
   ;;@ jstypeenum/Color.java:23:2
-  (global.set $f_GREEN__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|GREEN|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_GREEN__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.$getString_|GREEN|__java_lang_String (ref.func $$getString_|GREEN|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
   ;; (jstypeenum.Color.BLUE = jstypeenum.Color.$create(javaemul.internal.StringPool.$getString_|BLUE|(),2));
   ;;@ jstypeenum/Color.java:24:2
-  (global.set $f_BLUE__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|BLUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
+  (global.set $f_BLUE__jstypeenum_Color (call $$create__java_lang_String__int__jstypeenum_Color@jstypeenum.Color (call $function.no.side.effects.$getString_|BLUE|__java_lang_String (ref.func $$getString_|BLUE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 2)))
  )
 )
 
 ;;; Class<?> Color.getClass()
 (func $m_getClass__java_lang_Class@jstypeenum.Color
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jstypeenum.Color))
  (local.set $this (ref.cast_static $jstypeenum.Color (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJstypeenum.Color();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJstypeenum.Color__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJstypeenum.Color__java_lang_Class (ref.func $$getJstypeenum.Color__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jstypeenum.Color)

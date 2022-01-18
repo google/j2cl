@@ -43,7 +43,7 @@
 
 ;;; Code for genericanddefaultmethods.InterfaceWithDefault [INTERFACE]
 (type $genericanddefaultmethods.InterfaceWithDefault.vtable (struct_subtype 
- (field $m_foo__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_foo__java_lang_String__void (ref $function.m_foo__java_lang_String__void))
   data)
 )
 
@@ -63,7 +63,7 @@
    ))
    ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_Interface...|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:20:4
-   (call_ref (local.get $$qualifier)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|in_Interface...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
+   (call_ref (local.get $$qualifier)(call $function.no.side.effects.$getString_|in_Interface...|__java_lang_String (ref.func $$getString_|in_Interface...|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -94,7 +94,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericanddefaultmethods.InterfaceWithDefault();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericanddefaultmethods.InterfaceWithDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericanddefaultmethods.InterfaceWithDefault__java_lang_Class (ref.func $$getGenericanddefaultmethods.InterfaceWithDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.InterfaceWithDefault)
@@ -107,11 +107,11 @@
   $java.lang.Object)
 )
 (type $genericanddefaultmethods.GenericClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -149,7 +149,7 @@
 
 ;;; void GenericClass.foo(T value)
 (func $m_foo__java_lang_Object__void@genericanddefaultmethods.GenericClass
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_foo__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  ;;@ genericanddefaultmethods/ConcreteClass.java:25:14
@@ -166,7 +166,7 @@
    ))
    ;; $qualifier.println(javaemul.internal.StringPool.$getString_|in_GenericClass|());
    ;;@ genericanddefaultmethods/ConcreteClass.java:26:4
-   (call_ref (local.get $$qualifier)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|in_GenericClass|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
+   (call_ref (local.get $$qualifier)(call $function.no.side.effects.$getString_|in_GenericClass|__java_lang_String (ref.func $$getString_|in_GenericClass|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.io.PrintStream.vtable $m_println__java_lang_String__void (struct.get $java.io.PrintStream $vtable(local.get $$qualifier))))
   )
  )
 )
@@ -196,14 +196,14 @@
 
 ;;; Class<?> GenericClass.getClass()
 (func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.GenericClass))
  (local.set $this (ref.cast_static $genericanddefaultmethods.GenericClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericanddefaultmethods.GenericClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericanddefaultmethods.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericanddefaultmethods.GenericClass__java_lang_Class (ref.func $$getGenericanddefaultmethods.GenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.GenericClass)
@@ -216,12 +216,12 @@
   $genericanddefaultmethods.GenericClass)
 )
 (type $genericanddefaultmethods.ConcreteClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_foo__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__void (ref $function.m_foo__java_lang_Object__void))
+ (field $m_foo__java_lang_String__void (ref $function.m_foo__java_lang_String__void))
   $genericanddefaultmethods.GenericClass.vtable)
 )
 
@@ -259,7 +259,7 @@
 
 ;;; void ConcreteClass.foo(String arg0)
 (func $m_foo__java_lang_String__void@genericanddefaultmethods.ConcreteClass
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_foo__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -275,7 +275,7 @@
 
 ;;; void ConcreteClass.foo(Object arg0)
 (func $m_foo__java_lang_Object__void@genericanddefaultmethods.ConcreteClass
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_foo__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ genericanddefaultmethods/ConcreteClass.java:30:13
@@ -316,14 +316,14 @@
 
 ;;; Class<?> ConcreteClass.getClass()
 (func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericanddefaultmethods.ConcreteClass))
  (local.set $this (ref.cast_static $genericanddefaultmethods.ConcreteClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericanddefaultmethods.ConcreteClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericanddefaultmethods.ConcreteClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericanddefaultmethods.ConcreteClass__java_lang_Class (ref.func $$getGenericanddefaultmethods.ConcreteClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericanddefaultmethods.ConcreteClass)

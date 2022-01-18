@@ -121,11 +121,11 @@
   $java.lang.Object)
 )
 (type $nestedlocalclasses.NestedLocalClasses.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__int__void (ref $function.$java.lang.Object__$int__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__int__void (ref $function.m_test__int__void))
   $java.lang.Object.vtable)
 )
 
@@ -163,7 +163,7 @@
 
 ;;; void NestedLocalClasses.test(int p)
 (func $m_test__int__void@nestedlocalclasses.NestedLocalClasses
- (type $function.$java.lang.Object__$int__$void)
+ (type $function.m_test__int__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $p i32)
  ;;@ nestedlocalclasses/NestedLocalClasses.java:19:14
@@ -202,14 +202,14 @@
 
 ;;; Class<?> NestedLocalClasses.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedlocalclasses.NestedLocalClasses();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedlocalclasses.NestedLocalClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedlocalclasses.NestedLocalClasses__java_lang_Class (ref.func $$getNestedlocalclasses.NestedLocalClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses)
@@ -224,11 +224,11 @@
   $java.lang.Object)
 )
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__void (ref $function.m_fun__void))
   $java.lang.Object.vtable)
 )
 
@@ -276,7 +276,7 @@
 
 ;;; void InnerClass.fun()
 (func $m_fun__void@nestedlocalclasses.NestedLocalClasses.1InnerClass
- (type $function.$java.lang.Object__$void)
+ (type $function.m_fun__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ nestedlocalclasses/NestedLocalClasses.java:22:18
  (local $localVarInInnerClass i32)
@@ -317,14 +317,14 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.1InnerClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedlocalclasses.NestedLocalClasses.1InnerClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.1InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedlocalclasses.NestedLocalClasses.1InnerClass__java_lang_Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.1InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass)
@@ -341,10 +341,10 @@
   $java.lang.Object)
 )
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -433,14 +433,14 @@
 
 ;;; Class<?> InnerInnerClass.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass__java_lang_Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1InnerInnerClass)
@@ -456,10 +456,10 @@
   $java.lang.Object)
 )
 (type $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -548,21 +548,21 @@
 
 ;;; Class<?> ClassIndirectlyCapturingLocal.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal__java_lang_Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.1InnerClass.1ClassIndirectlyCapturingLocal)
 
 ;;; Code for nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference [INTERFACE]
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.vtable (struct_subtype 
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_foo__void (ref $function.m_foo__void))
   data)
 )
 
@@ -603,7 +603,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference__java_lang_Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference)
@@ -617,11 +617,11 @@
   $java.lang.Object)
 )
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void (ref $function.m_foo__void))
   $java.lang.Object.vtable)
 )
 
@@ -664,7 +664,7 @@
 
 ;;; void Super.foo()
 (func $m_foo__void@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
- (type $function.$java.lang.Object__$void)
+ (type $function.m_foo__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ nestedlocalclasses/NestedLocalClasses.java:41:12
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
@@ -704,14 +704,14 @@
 
 ;;; Class<?> Super.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super__java_lang_Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
@@ -726,11 +726,11 @@
   $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super)
 )
 (type $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void (ref $function.m_foo__void))
   $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1Super.vtable)
 )
 
@@ -795,14 +795,14 @@
 
 ;;; Class<?> <anonymous> extends Super.getClass()
 (func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1))
  (local.set $this (ref.cast_static $nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1__java_lang_Class (ref.func $$getNestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference.1)

@@ -340,10 +340,10 @@
   $java.lang.Object)
 )
 (type $bridgejsmethod.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -407,10 +407,10 @@
   (local.set $b (call $$create__bridgejsmethod_Main_B@bridgejsmethod.Main.B ))
   ;; b.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:167:4
-  (drop (call_ref (local.get $b)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
+  (drop (call_ref (local.get $b)(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $b)))))
   ;; b.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:168:4
-  (call_ref (local.get $b)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
+  (call_ref (local.get $b)(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $b))))
   ;; C c = bridgejsmethod.Main.C.$create();
   ;;@ bridgejsmethod/Main.java:169:4
   (local.set $c (call $$create__bridgejsmethod_Main_C@bridgejsmethod.Main.C ))
@@ -434,10 +434,10 @@
   (local.set $e (call $$create__bridgejsmethod_Main_E@bridgejsmethod.Main.E ))
   ;; e.fun(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:176:4
-  (drop (call_ref (local.get $e)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
+  (drop (call_ref (local.get $e)(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_fun__java_lang_String__java_lang_String (struct.get $bridgejsmethod.Main.B $vtable(local.get $e)))))
   ;; e.bar(javaemul.internal.StringPool.$getString_|abc|());
   ;;@ bridgejsmethod/Main.java:177:4
-  (call_ref (local.get $e)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
+  (call_ref (local.get $e)(call $function.no.side.effects.$getString_|abc|__java_lang_String (ref.func $$getString_|abc|__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgejsmethod.Main.B.vtable $m_bar__java_lang_String__void (struct.get $bridgejsmethod.Main.B $vtable(local.get $e))))
   ;; H<Integer> h = bridgejsmethod.Main.H.$create();
   ;;@ bridgejsmethod/Main.java:178:4
   (local.set $h (call $$create__bridgejsmethod_Main_H@bridgejsmethod.Main.H ))
@@ -449,7 +449,7 @@
   (local.set $l (call $$create__bridgejsmethod_Main_L@bridgejsmethod.Main.L ))
   ;; l.fun(javaemul.internal.StringPool.$getString_|foo|(),java.lang.Integer.valueOf(1));
   ;;@ bridgejsmethod/Main.java:181:4
-  (call_ref (local.get $l)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
+  (call_ref (local.get $l)(call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) )(call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 1))(struct.get $bridgejsmethod.Main.L.vtable $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (struct.get $bridgejsmethod.Main.L $vtable(local.get $l))))
  )
 )
 
@@ -477,14 +477,14 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main))
  (local.set $this (ref.cast_static $bridgejsmethod.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main__java_lang_Class (ref.func $$getBridgejsmethod.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main)
@@ -497,12 +497,12 @@
   $java.lang.Object)
 )
 (type $bridgejsmethod.Main.A.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -540,7 +540,7 @@
 
 ;;; T A.fun(T t)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.A
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -557,7 +557,7 @@
 
 ;;; void A.bar(T t)
 (func $m_bar__java_lang_Object__void@bridgejsmethod.Main.A
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_bar__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ bridgejsmethod/Main.java:29:16
@@ -592,21 +592,21 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.A
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.A))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.A__java_lang_Class (ref.func $$getBridgejsmethod.Main.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.A)
 
 ;;; Code for bridgejsmethod.Main.I [INTERFACE]
 (type $bridgejsmethod.Main.I.vtable (struct_subtype 
- (field $m_fun__java_lang_Number__java_lang_Number (ref $function.$java.lang.Object__$java.lang.Number__$java.lang.Number))
+ (field $m_fun__java_lang_Number__java_lang_Number (ref $function.m_fun__java_lang_Number__java_lang_Number))
   data)
 )
 
@@ -635,14 +635,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.I();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.I__java_lang_Class (ref.func $$getBridgejsmethod.Main.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.I)
 
 ;;; Code for bridgejsmethod.Main.J [INTERFACE]
 (type $bridgejsmethod.Main.J.vtable (struct_subtype 
- (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
   data)
 )
 
@@ -671,7 +671,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.J();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.J__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.J__java_lang_Class (ref.func $$getBridgejsmethod.Main.J__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.J)
@@ -684,14 +684,14 @@
   $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
- (field $m_bar__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_fun__java_lang_String__java_lang_String (ref $function.m_fun__java_lang_String__java_lang_String))
+ (field $m_bar__java_lang_String__void (ref $function.m_bar__java_lang_String__void))
   $bridgejsmethod.Main.A.vtable)
 )
 
@@ -729,7 +729,7 @@
 
 ;;; String B.fun(String s)
 (func $m_fun__java_lang_String__java_lang_String@bridgejsmethod.Main.B
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.String)
+ (type $function.m_fun__java_lang_String__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -746,7 +746,7 @@
 
 ;;; void B.bar(String s)
 (func $m_bar__java_lang_String__void@bridgejsmethod.Main.B
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_bar__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  ;;@ bridgejsmethod/Main.java:58:16
@@ -759,7 +759,7 @@
 
 ;;; void B.bar(Object arg0)
 (func $m_bar__java_lang_Object__void@bridgejsmethod.Main.B
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_bar__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ bridgejsmethod/Main.java:43:22
@@ -775,7 +775,7 @@
 
 ;;; String B.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.B
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -814,14 +814,14 @@
 
 ;;; Class<?> B.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.B
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.B))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.B (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.B();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.B__java_lang_Class (ref.func $$getBridgejsmethod.Main.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.B)
@@ -834,13 +834,13 @@
   $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.C.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.$java.lang.Object__$java.lang.Integer__$java.lang.Integer))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.m_fun__java_lang_Integer__java_lang_Integer))
   $bridgejsmethod.Main.A.vtable)
 )
 
@@ -878,7 +878,7 @@
 
 ;;; Integer C.fun(Integer i)
 (func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.C
- (type $function.$java.lang.Object__$java.lang.Integer__$java.lang.Integer)
+ (type $function.m_fun__java_lang_Integer__java_lang_Integer)
  (param $this.untyped (ref null $java.lang.Object))
  (param $i (ref null $java.lang.Integer))
  (result (ref null $java.lang.Integer))
@@ -895,7 +895,7 @@
 
 ;;; Integer C.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.C
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -934,14 +934,14 @@
 
 ;;; Class<?> C.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.C
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.C))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.C (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.C();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.C__java_lang_Class (ref.func $$getBridgejsmethod.Main.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.C)
@@ -954,14 +954,14 @@
   $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.D.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.$java.lang.Object__$java.lang.Integer__$java.lang.Integer))
- (field $m_fun__java_lang_Number__java_lang_Number (ref $function.$java.lang.Object__$java.lang.Number__$java.lang.Number))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.m_fun__java_lang_Integer__java_lang_Integer))
+ (field $m_fun__java_lang_Number__java_lang_Number (ref $function.m_fun__java_lang_Number__java_lang_Number))
   $bridgejsmethod.Main.A.vtable)
 )
 
@@ -999,7 +999,7 @@
 
 ;;; Integer D.fun(Integer i)
 (func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.D
- (type $function.$java.lang.Object__$java.lang.Integer__$java.lang.Integer)
+ (type $function.m_fun__java_lang_Integer__java_lang_Integer)
  (param $this.untyped (ref null $java.lang.Object))
  (param $i (ref null $java.lang.Integer))
  (result (ref null $java.lang.Integer))
@@ -1016,7 +1016,7 @@
 
 ;;; Integer D.fun(Number arg0)
 (func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.D
- (type $function.$java.lang.Object__$java.lang.Number__$java.lang.Number)
+ (type $function.m_fun__java_lang_Number__java_lang_Number)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Number))
  (result (ref null $java.lang.Number))
@@ -1033,7 +1033,7 @@
 
 ;;; Integer D.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.D
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1072,14 +1072,14 @@
 
 ;;; Class<?> D.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.D
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.D))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.D (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.D();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.D__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.D__java_lang_Class (ref.func $$getBridgejsmethod.Main.D__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.D)
@@ -1092,14 +1092,14 @@
   $bridgejsmethod.Main.B)
 )
 (type $bridgejsmethod.Main.E.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
- (field $m_bar__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_fun__java_lang_String__java_lang_String (ref $function.m_fun__java_lang_String__java_lang_String))
+ (field $m_bar__java_lang_String__void (ref $function.m_bar__java_lang_String__void))
   $bridgejsmethod.Main.B.vtable)
 )
 
@@ -1159,14 +1159,14 @@
 
 ;;; Class<?> E.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.E
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.E))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.E (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.E();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.E__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.E__java_lang_Class (ref.func $$getBridgejsmethod.Main.E__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.E)
@@ -1179,14 +1179,14 @@
   $bridgejsmethod.Main.A)
 )
 (type $bridgejsmethod.Main.F.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_bar__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Number__java_lang_Number (ref $function.$java.lang.Object__$java.lang.Number__$java.lang.Number))
- (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.$java.lang.Object__$java.lang.Integer__$java.lang.Integer))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_bar__java_lang_Object__void (ref $function.m_bar__java_lang_Object__void))
+ (field $m_fun__java_lang_Number__java_lang_Number (ref $function.m_fun__java_lang_Number__java_lang_Number))
+ (field $m_fun__java_lang_Integer__java_lang_Integer (ref $function.m_fun__java_lang_Integer__java_lang_Integer))
   $bridgejsmethod.Main.A.vtable)
 )
 
@@ -1224,7 +1224,7 @@
 
 ;;; Integer F.fun(Number arg0)
 (func $m_fun__java_lang_Number__java_lang_Number@bridgejsmethod.Main.F
- (type $function.$java.lang.Object__$java.lang.Number__$java.lang.Number)
+ (type $function.m_fun__java_lang_Number__java_lang_Number)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Number))
  (result (ref null $java.lang.Number))
@@ -1241,7 +1241,7 @@
 
 ;;; Integer F.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgejsmethod.Main.F
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1258,7 +1258,7 @@
 
 ;;; Integer F.fun(Integer arg0)
 (func $m_fun__java_lang_Integer__java_lang_Integer@bridgejsmethod.Main.F
- (type $function.$java.lang.Object__$java.lang.Integer__$java.lang.Integer)
+ (type $function.m_fun__java_lang_Integer__java_lang_Integer)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Integer))
  (result (ref null $java.lang.Integer))
@@ -1297,21 +1297,21 @@
 
 ;;; Class<?> F.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.F
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.F))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.F (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.F();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.F__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.F__java_lang_Class (ref.func $$getBridgejsmethod.Main.F__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.F)
 
 ;;; Code for bridgejsmethod.Main.G [INTERFACE]
 (type $bridgejsmethod.Main.G.vtable (struct_subtype 
- (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.m_enclose__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -1340,7 +1340,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.G();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.G__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.G__java_lang_Class (ref.func $$getBridgejsmethod.Main.G__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.G)
@@ -1353,11 +1353,11 @@
   $java.lang.Object)
 )
 (type $bridgejsmethod.Main.H.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_enclose__java_lang_Object__java_lang_Object (ref $function.m_enclose__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1395,7 +1395,7 @@
 
 ;;; V H.enclose(V value)
 (func $m_enclose__java_lang_Object__java_lang_Object@bridgejsmethod.Main.H
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_enclose__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1434,14 +1434,14 @@
 
 ;;; Class<?> H.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.H
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.H))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.H (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.H();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.H__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.H__java_lang_Class (ref.func $$getBridgejsmethod.Main.H__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.H)
@@ -1454,11 +1454,11 @@
   $java.lang.Object)
 )
 (type $bridgejsmethod.Main.K.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod))
   $java.lang.Object.vtable)
 )
 
@@ -1496,7 +1496,7 @@
 
 ;;; void K.fun(K1 k1, K2 k2)
 (func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.K
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod)
  (param $this.untyped (ref null $java.lang.Object))
  (param $k1 (ref null $java.lang.Object))
  (param $k2 (ref null $java.lang.Object))
@@ -1532,14 +1532,14 @@
 
 ;;; Class<?> K.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.K
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.K))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.K (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.K();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.K__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.K__java_lang_Class (ref.func $$getBridgejsmethod.Main.K__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.K)
@@ -1552,12 +1552,12 @@
   $bridgejsmethod.Main.K)
 )
 (type $bridgejsmethod.Main.L.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod (ref $function.m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod))
+ (field $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod (ref $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod))
   $bridgejsmethod.Main.K.vtable)
 )
 
@@ -1595,7 +1595,7 @@
 
 ;;; void L.fun(String string, L1 l1)
 (func $m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$void)
+ (type $function.m_fun__java_lang_String__java_lang_Object__void_$pp_bridgejsmethod)
  (param $this.untyped (ref null $java.lang.Object))
  (param $string (ref null $java.lang.String))
  (param $l1 (ref null $java.lang.Object))
@@ -1609,7 +1609,7 @@
 
 ;;; void L.fun(Object arg0, Object arg1)
 (func $m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod@bridgejsmethod.Main.L
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_fun__java_lang_Object__java_lang_Object__void_$pp_bridgejsmethod)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1648,21 +1648,21 @@
 
 ;;; Class<?> L.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.L
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.L))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.L (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.L();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.L__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.L__java_lang_Class (ref.func $$getBridgejsmethod.Main.L__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.L)
 
 ;;; Code for bridgejsmethod.Main.M [INTERFACE]
 (type $bridgejsmethod.Main.M.vtable (struct_subtype 
- (field $m_getB__bridgejsmethod_Main_B (ref $function.$java.lang.Object__$bridgejsmethod.Main.B))
+ (field $m_getB__bridgejsmethod_Main_B (ref $function.m_getB__bridgejsmethod_Main_B))
   data)
 )
 
@@ -1691,7 +1691,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.M();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.M__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.M__java_lang_Class (ref.func $$getBridgejsmethod.Main.M__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.M)
@@ -1705,11 +1705,11 @@
   $java.lang.Object)
 )
 (type $bridgejsmethod.Main.N.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getB__bridgejsmethod_Main_B (ref $function.$java.lang.Object__$bridgejsmethod.Main.B))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getB__bridgejsmethod_Main_B (ref $function.m_getB__bridgejsmethod_Main_B))
   $java.lang.Object.vtable)
 )
 
@@ -1764,11 +1764,11 @@
   $bridgejsmethod.Main.N)
 )
 (type $bridgejsmethod.Main.O.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getB__bridgejsmethod_Main_B (ref $function.$java.lang.Object__$bridgejsmethod.Main.B))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getB__bridgejsmethod_Main_B (ref $function.m_getB__bridgejsmethod_Main_B))
   $bridgejsmethod.Main.N.vtable)
 )
 
@@ -1811,7 +1811,7 @@
 
 ;;; B O.getB()
 (func $m_getB__bridgejsmethod_Main_B@bridgejsmethod.Main.O
- (type $function.$java.lang.Object__$bridgejsmethod.Main.B)
+ (type $function.m_getB__bridgejsmethod_Main_B)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $bridgejsmethod.Main.B))
  ;;@ bridgejsmethod/Main.java:136:13
@@ -1849,21 +1849,21 @@
 
 ;;; Class<?> O.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.O
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.O))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.O (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.O();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.O__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.O__java_lang_Class (ref.func $$getBridgejsmethod.Main.O__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.O)
 
 ;;; Code for bridgejsmethod.Main.P [INTERFACE]
 (type $bridgejsmethod.Main.P.vtable (struct_subtype 
- (field $m_getKey__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
   data)
 )
 
@@ -1892,7 +1892,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.P();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.P__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.P__java_lang_Class (ref.func $$getBridgejsmethod.Main.P__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.P)
@@ -1906,11 +1906,11 @@
   $java.lang.Object)
 )
 (type $bridgejsmethod.Main.Q.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getKey__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
   $java.lang.Object.vtable)
 )
 
@@ -1964,11 +1964,11 @@
   $bridgejsmethod.Main.Q)
 )
 (type $bridgejsmethod.Main.R.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getKey__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
   $bridgejsmethod.Main.Q.vtable)
 )
 
@@ -1992,7 +1992,7 @@
 
 ;;; String R.getKey()
 (func $m_getKey__java_lang_String@bridgejsmethod.Main.R
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_getKey__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ bridgejsmethod/Main.java:155:18
@@ -2039,11 +2039,11 @@
   $bridgejsmethod.Main.R)
 )
 (type $bridgejsmethod.Main.S.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getKey__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getKey__java_lang_String (ref $function.m_getKey__java_lang_String))
   $bridgejsmethod.Main.R.vtable)
 )
 
@@ -2108,14 +2108,14 @@
 
 ;;; Class<?> S.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.S
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.S))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.S (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.S();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.S__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.S__java_lang_Class (ref.func $$getBridgejsmethod.Main.S__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.S)
@@ -2129,12 +2129,12 @@
   $java.lang.Object)
 )
 (type $bridgejsmethod.Main.GrandParent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_jsMethod__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_method__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_jsMethod__java_lang_Object__void (ref $function.m_jsMethod__java_lang_Object__void))
+ (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -2177,7 +2177,7 @@
 
 ;;; void GrandParent.jsMethod(T t)
 (func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.GrandParent
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_jsMethod__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ bridgejsmethod/Main.java:189:16
@@ -2190,7 +2190,7 @@
 
 ;;; void GrandParent.method(T t)
 (func $m_method__java_lang_Object__void@bridgejsmethod.Main.GrandParent
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_method__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ bridgejsmethod/Main.java:191:16
@@ -2225,14 +2225,14 @@
 
 ;;; Class<?> GrandParent.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.GrandParent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.GrandParent))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.GrandParent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.GrandParent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.GrandParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.GrandParent__java_lang_Class (ref.func $$getBridgejsmethod.Main.GrandParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.GrandParent)
@@ -2247,14 +2247,14 @@
   $bridgejsmethod.Main.GrandParent)
 )
 (type $bridgejsmethod.Main.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_jsMethod__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_method__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.$java.lang.Object__$bridgejsmethod.Main.Parent__$void))
- (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.$java.lang.Object__$bridgejsmethod.Main.Parent__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_jsMethod__java_lang_Object__void (ref $function.m_jsMethod__java_lang_Object__void))
+ (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
+ (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.m_jsMethod__bridgejsmethod_Main_Parent__void))
+ (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.m_method__bridgejsmethod_Main_Parent__void))
   $bridgejsmethod.Main.GrandParent.vtable)
 )
 
@@ -2297,7 +2297,7 @@
 
 ;;; void Parent.jsMethod(T t)
 (func $m_jsMethod__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent
- (type $function.$java.lang.Object__$bridgejsmethod.Main.Parent__$void)
+ (type $function.m_jsMethod__bridgejsmethod_Main_Parent__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $bridgejsmethod.Main.Parent))
  ;;@ bridgejsmethod/Main.java:200:16
@@ -2310,7 +2310,7 @@
 
 ;;; void Parent.method(T t)
 (func $m_method__bridgejsmethod_Main_Parent__void@bridgejsmethod.Main.Parent
- (type $function.$java.lang.Object__$bridgejsmethod.Main.Parent__$void)
+ (type $function.m_method__bridgejsmethod_Main_Parent__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $bridgejsmethod.Main.Parent))
  ;;@ bridgejsmethod/Main.java:203:16
@@ -2323,7 +2323,7 @@
 
 ;;; void Parent.jsMethod(Object arg0)
 (func $m_jsMethod__java_lang_Object__void@bridgejsmethod.Main.Parent
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_jsMethod__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ bridgejsmethod/Main.java:194:8
@@ -2339,7 +2339,7 @@
 
 ;;; void Parent.method(Object arg0)
 (func $m_method__java_lang_Object__void@bridgejsmethod.Main.Parent
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_method__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ bridgejsmethod/Main.java:194:8
@@ -2377,14 +2377,14 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.Parent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.Parent))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.Parent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.Parent__java_lang_Class (ref.func $$getBridgejsmethod.Main.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.Parent)
@@ -2400,14 +2400,14 @@
   $bridgejsmethod.Main.Parent)
 )
 (type $bridgejsmethod.Main.Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_jsMethod__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_method__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.$java.lang.Object__$bridgejsmethod.Main.Parent__$void))
- (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.$java.lang.Object__$bridgejsmethod.Main.Parent__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_jsMethod__java_lang_Object__void (ref $function.m_jsMethod__java_lang_Object__void))
+ (field $m_method__java_lang_Object__void (ref $function.m_method__java_lang_Object__void))
+ (field $m_jsMethod__bridgejsmethod_Main_Parent__void (ref $function.m_jsMethod__bridgejsmethod_Main_Parent__void))
+ (field $m_method__bridgejsmethod_Main_Parent__void (ref $function.m_method__bridgejsmethod_Main_Parent__void))
   $bridgejsmethod.Main.Parent.vtable)
 )
 
@@ -2472,14 +2472,14 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgejsmethod.Main.Child))
  (local.set $this (ref.cast_static $bridgejsmethod.Main.Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgejsmethod.Main.Child();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgejsmethod.Main.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgejsmethod.Main.Child__java_lang_Class (ref.func $$getBridgejsmethod.Main.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgejsmethod.Main.Child)

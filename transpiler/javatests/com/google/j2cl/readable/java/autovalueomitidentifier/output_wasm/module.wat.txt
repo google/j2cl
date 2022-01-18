@@ -38,16 +38,16 @@
   $autovalueomitidentifier.SimpleAutoValue)
 )
 (type $autovalueomitidentifier.AutoValue_SimpleAutoValue.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getIntField__int (ref $function.$java.lang.Object__$int))
- (field $m_getBooleanField__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_getStringField__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getDoubleField__java_lang_Double (ref $function.$java.lang.Object__$java.lang.Double))
- (field $m_getNullableField__java_lang_Double (ref $function.$java.lang.Object__$java.lang.Double))
- (field $m_getArrayField__arrayOf_int (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
+ (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
+ (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
   $autovalueomitidentifier.SimpleAutoValue.vtable)
 )
 
@@ -124,7 +124,7 @@
 
 ;;; int AutoValue_SimpleAutoValue.getIntField()
 (func $m_getIntField__int@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$int)
+ (type $function.m_getIntField__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:41:13
@@ -140,7 +140,7 @@
 
 ;;; boolean AutoValue_SimpleAutoValue.getBooleanField()
 (func $m_getBooleanField__boolean@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$boolean)
+ (type $function.m_getBooleanField__boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:46:17
@@ -156,7 +156,7 @@
 
 ;;; String AutoValue_SimpleAutoValue.getStringField()
 (func $m_getStringField__java_lang_String@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_getStringField__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:51:16
@@ -172,7 +172,7 @@
 
 ;;; Double AutoValue_SimpleAutoValue.getDoubleField()
 (func $m_getDoubleField__java_lang_Double@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$java.lang.Double)
+ (type $function.m_getDoubleField__java_lang_Double)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Double))
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:56:16
@@ -188,7 +188,7 @@
 
 ;;; Double AutoValue_SimpleAutoValue.getNullableField()
 (func $m_getNullableField__java_lang_Double@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$java.lang.Double)
+ (type $function.m_getNullableField__java_lang_Double)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Double))
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:62:16
@@ -204,7 +204,7 @@
 
 ;;; int[] AutoValue_SimpleAutoValue.getArrayField()
 (func $m_getArrayField__arrayOf_int@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt)
+ (type $function.m_getArrayField__arrayOf_int)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $javaemul.internal.WasmArray.OfInt))
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:67:15
@@ -220,7 +220,7 @@
 
 ;;; String AutoValue_SimpleAutoValue.toString()
 (func $m_toString__java_lang_String@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:72:16
@@ -232,19 +232,19 @@
   ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:73:4
   (return (block (result (ref null $java.lang.String))
    (local.set $$stringBuilder (call $$create__java_lang_StringBuilder@java.lang.StringBuilder ))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|_|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_|_|__java_lang_String (ref.func $$getString_|_|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(struct.get $autovalueomitidentifier.AutoValue_SimpleAutoValue $f_intField__autovalueomitidentifier_AutoValue_SimpleAutoValue_(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__int__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(struct.get_s $autovalueomitidentifier.AutoValue_SimpleAutoValue $f_booleanField__autovalueomitidentifier_AutoValue_SimpleAutoValue_(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__boolean__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(struct.get $autovalueomitidentifier.AutoValue_SimpleAutoValue $f_stringField__autovalueomitidentifier_AutoValue_SimpleAutoValue_(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(struct.get $autovalueomitidentifier.AutoValue_SimpleAutoValue $f_doubleField__autovalueomitidentifier_AutoValue_SimpleAutoValue_(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(struct.get $autovalueomitidentifier.AutoValue_SimpleAutoValue $f_nullableField__autovalueomitidentifier_AutoValue_SimpleAutoValue_(local.get $this))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_Object__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_|__|__java_lang_String (ref.func $$getString_|__|__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (drop (call_ref (local.get $$stringBuilder)(call $m_toString__arrayOf_int__java_lang_String@java.util.Arrays (struct.get $autovalueomitidentifier.AutoValue_SimpleAutoValue $f_arrayField__autovalueomitidentifier_AutoValue_SimpleAutoValue_(local.get $this)))(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
-   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|_|_1__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
+   (drop (call_ref (local.get $$stringBuilder)(call $function.no.side.effects.$getString_|_|_1__java_lang_String (ref.func $$getString_|_|_1__java_lang_String@javaemul.internal.StringPool) )(struct.get $java.lang.StringBuilder.vtable $m_append__java_lang_String__java_lang_StringBuilder (struct.get $java.lang.StringBuilder $vtable(local.get $$stringBuilder)))))
    (call_ref (local.get $$stringBuilder)(struct.get $java.lang.AbstractStringBuilder.vtable $m_toString__java_lang_String (struct.get $java.lang.AbstractStringBuilder $vtable(local.get $$stringBuilder))))
   ))
  )
@@ -253,7 +253,7 @@
 
 ;;; boolean AutoValue_SimpleAutoValue.equals(Object o)
 (func $m_equals__java_lang_Object__boolean@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$java.lang.Object__$boolean)
+ (type $function.m_equals__java_lang_Object__boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result i32)
@@ -296,7 +296,7 @@
 
 ;;; int AutoValue_SimpleAutoValue.hashCode()
 (func $m_hashCode__int@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$int)
+ (type $function.m_hashCode__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ autovalueomitidentifier/AutoValue_SimpleAutoValue.java:101:13
@@ -374,14 +374,14 @@
 
 ;;; Class<?> AutoValue_SimpleAutoValue.getClass()
 (func $m_getClass__java_lang_Class@autovalueomitidentifier.AutoValue_SimpleAutoValue
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $autovalueomitidentifier.AutoValue_SimpleAutoValue))
  (local.set $this (ref.cast_static $autovalueomitidentifier.AutoValue_SimpleAutoValue (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAutovalueomitidentifier.AutoValue_SimpleAutoValue();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAutovalueomitidentifier.AutoValue_SimpleAutoValue__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAutovalueomitidentifier.AutoValue_SimpleAutoValue__java_lang_Class (ref.func $$getAutovalueomitidentifier.AutoValue_SimpleAutoValue__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@autovalueomitidentifier.AutoValue_SimpleAutoValue)
@@ -394,16 +394,16 @@
   $java.lang.Object)
 )
 (type $autovalueomitidentifier.SimpleAutoValue.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getIntField__int (ref $function.$java.lang.Object__$int))
- (field $m_getBooleanField__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_getStringField__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getDoubleField__java_lang_Double (ref $function.$java.lang.Object__$java.lang.Double))
- (field $m_getNullableField__java_lang_Double (ref $function.$java.lang.Object__$java.lang.Double))
- (field $m_getArrayField__arrayOf_int (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getIntField__int (ref $function.m_getIntField__int))
+ (field $m_getBooleanField__boolean (ref $function.m_getBooleanField__boolean))
+ (field $m_getStringField__java_lang_String (ref $function.m_getStringField__java_lang_String))
+ (field $m_getDoubleField__java_lang_Double (ref $function.m_getDoubleField__java_lang_Double))
+ (field $m_getNullableField__java_lang_Double (ref $function.m_getNullableField__java_lang_Double))
+ (field $m_getArrayField__arrayOf_int (ref $function.m_getArrayField__arrayOf_int))
   $java.lang.Object.vtable)
 )
 

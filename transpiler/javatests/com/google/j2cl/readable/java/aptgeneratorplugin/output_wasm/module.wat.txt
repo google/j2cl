@@ -40,10 +40,10 @@
   $java.lang.Object)
 )
 (type $aptgeneratorplugin.Dummy.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -103,14 +103,14 @@
 
 ;;; Class<?> Dummy.getClass()
 (func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Dummy))
  (local.set $this (ref.cast_static $aptgeneratorplugin.Dummy (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAptgeneratorplugin.Dummy__java_lang_Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@aptgeneratorplugin.Dummy)
@@ -123,10 +123,10 @@
   $java.lang.Object)
 )
 (type $aptgeneratorplugin.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -164,7 +164,7 @@
 
 ;;; String Foo.toString()
 (func $m_toString__java_lang_String@aptgeneratorplugin.Foo
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ aptgeneratorplugin/Foo.java:21:16
@@ -175,7 +175,7 @@
   ;; return (Class<?> $qualifier = javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Dummy(),$qualifier.getSimpleName());
   ;;@ aptgeneratorplugin/Foo.java:23:4
   (return (block (result (ref null $java.lang.String))
-   (local.set $$qualifier (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+   (local.set $$qualifier (call $function.no.side.effects.$getAptgeneratorplugin.Dummy__java_lang_Class (ref.func $$getAptgeneratorplugin.Dummy__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
    (call_ref (local.get $$qualifier)(struct.get $java.lang.Class.vtable $m_getSimpleName__java_lang_String (struct.get $java.lang.Class $vtable(local.get $$qualifier))))
   ))
  )
@@ -206,14 +206,14 @@
 
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $aptgeneratorplugin.Foo))
  (local.set $this (ref.cast_static $aptgeneratorplugin.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAptgeneratorplugin.Foo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAptgeneratorplugin.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAptgeneratorplugin.Foo__java_lang_Class (ref.func $$getAptgeneratorplugin.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@aptgeneratorplugin.Foo)

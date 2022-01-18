@@ -50,15 +50,15 @@
   $java.lang.Object)
 )
 (type $arithmeticexpressions.ArithmeticExpressions.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testCoercions__void (ref $function.$java.lang.Object__$void))
- (field $m_testPrimitives__void (ref $function.$java.lang.Object__$void))
- (field $m_testCompoundArray__void (ref $function.$java.lang.Object__$void))
- (field $m_testCompoundBoxedTypes__void (ref $function.$java.lang.Object__$void))
- (field $m_testExtendedOperands__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testCoercions__void (ref $function.m_testCoercions__void))
+ (field $m_testPrimitives__void (ref $function.m_testPrimitives__void))
+ (field $m_testCompoundArray__void (ref $function.m_testCompoundArray__void))
+ (field $m_testCompoundBoxedTypes__void (ref $function.m_testCompoundBoxedTypes__void))
+ (field $m_testExtendedOperands__void (ref $function.m_testExtendedOperands__void))
   $java.lang.Object.vtable)
 )
 
@@ -99,7 +99,7 @@
 
 ;;; void ArithmeticExpressions.testCoercions()
 (func $m_testCoercions__void@arithmeticexpressions.ArithmeticExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCoercions__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:23:14
  (local $b i32)
@@ -164,7 +164,7 @@
 
 ;;; void ArithmeticExpressions.testPrimitives()
 (func $m_testPrimitives__void@arithmeticexpressions.ArithmeticExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testPrimitives__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:40:14
  (local $a i32)
@@ -288,7 +288,7 @@
 
 ;;; void ArithmeticExpressions.testCompoundArray()
 (func $m_testCompoundArray__void@arithmeticexpressions.ArithmeticExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCompoundArray__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:86:14
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
@@ -465,7 +465,7 @@
 
 ;;; void ArithmeticExpressions.testCompoundBoxedTypes()
 (func $m_testCompoundBoxedTypes__void@arithmeticexpressions.ArithmeticExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCompoundBoxedTypes__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:126:14
  (local $c (ref null $java.lang.Integer))
@@ -635,7 +635,7 @@
 
 ;;; void ArithmeticExpressions.testExtendedOperands()
 (func $m_testExtendedOperands__void@arithmeticexpressions.ArithmeticExpressions
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testExtendedOperands__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ arithmeticexpressions/ArithmeticExpressions.java:182:14
  (local $boxedInteger (ref null $java.lang.Integer))
@@ -771,14 +771,14 @@
 
 ;;; Class<?> ArithmeticExpressions.getClass()
 (func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions))
  (local.set $this (ref.cast_static $arithmeticexpressions.ArithmeticExpressions (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getArithmeticexpressions.ArithmeticExpressions();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions)
@@ -793,10 +793,10 @@
   $java.lang.Object)
 )
 (type $arithmeticexpressions.ArithmeticExpressions.1Ref.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -861,14 +861,14 @@
 
 ;;; Class<?> Ref.getClass()
 (func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $arithmeticexpressions.ArithmeticExpressions.1Ref))
  (local.set $this (ref.cast_static $arithmeticexpressions.ArithmeticExpressions.1Ref (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getArithmeticexpressions.ArithmeticExpressions.1Ref();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class (ref.func $$getArithmeticexpressions.ArithmeticExpressions.1Ref__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@arithmeticexpressions.ArithmeticExpressions.1Ref)

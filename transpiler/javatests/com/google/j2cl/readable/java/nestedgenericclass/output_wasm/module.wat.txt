@@ -163,13 +163,13 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_bar__void (ref $function.$java.lang.Object__$void))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
+ (field $m_bar__void (ref $function.m_bar__void))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -207,7 +207,7 @@
 
 ;;; void NestedGenericClass.fun(S t)
 (func $m_fun__java_lang_Object__void@nestedgenericclass.NestedGenericClass
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_fun__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ nestedgenericclass/NestedGenericClass.java:39:18
@@ -226,7 +226,7 @@
 
 ;;; void NestedGenericClass.bar()
 (func $m_bar__void@nestedgenericclass.NestedGenericClass
- (type $function.$java.lang.Object__$void)
+ (type $function.m_bar__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ nestedgenericclass/NestedGenericClass.java:49:18
  (local $$qualifier (ref null $nestedgenericclass.NestedGenericClass.1G))
@@ -247,7 +247,7 @@
 
 ;;; void NestedGenericClass.test()
 (func $m_test__void@nestedgenericclass.NestedGenericClass
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ nestedgenericclass/NestedGenericClass.java:59:14
  (local $n (ref null $nestedgenericclass.NestedGenericClass))
@@ -299,14 +299,14 @@
 
 ;;; Class<?> NestedGenericClass.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass)
@@ -320,10 +320,10 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.A.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -388,14 +388,14 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.A))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.A__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A)
@@ -409,10 +409,10 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.A.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -516,14 +516,14 @@
 
 ;;; Class<?> B.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A.B
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.A.B))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.A.B (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.A.B();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.A.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.A.B__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.A.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.A.B)
@@ -538,10 +538,10 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.C.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -606,14 +606,14 @@
 
 ;;; Class<?> C.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.C))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.C (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.C();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.C__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C)
@@ -628,10 +628,10 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.C.D.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -696,14 +696,14 @@
 
 ;;; Class<?> D.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C.D
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.C.D))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.C.D (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.C.D();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.C.D__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.C.D__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.C.D__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.C.D)
@@ -717,10 +717,10 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1E.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -785,14 +785,14 @@
 
 ;;; Class<?> E.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1E
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.1E))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.1E (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.1E();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.1E__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.1E__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.1E__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1E)
@@ -807,10 +807,10 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1F.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -875,14 +875,14 @@
 
 ;;; Class<?> F.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1F
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.1F))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.1F (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.1F();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.1F__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.1F__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.1F__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1F)
@@ -896,11 +896,11 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1G.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_bar__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_bar__void (ref $function.m_bar__void))
   $java.lang.Object.vtable)
 )
 
@@ -943,7 +943,7 @@
 
 ;;; void G.bar()
 (func $m_bar__void@nestedgenericclass.NestedGenericClass.1G
- (type $function.$java.lang.Object__$void)
+ (type $function.m_bar__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ nestedgenericclass/NestedGenericClass.java:51:22
  (local $this (ref null $nestedgenericclass.NestedGenericClass.1G))
@@ -980,14 +980,14 @@
 
 ;;; Class<?> G.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.1G))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.1G (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.1G();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.1G__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.1G__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.1G__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G)
@@ -1001,10 +1001,10 @@
   $java.lang.Object)
 )
 (type $nestedgenericclass.NestedGenericClass.1G.1H.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -1069,14 +1069,14 @@
 
 ;;; Class<?> H.getClass()
 (func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G.1H
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nestedgenericclass.NestedGenericClass.1G.1H))
  (local.set $this (ref.cast_static $nestedgenericclass.NestedGenericClass.1G.1H (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNestedgenericclass.NestedGenericClass.1G.1H();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNestedgenericclass.NestedGenericClass.1G.1H__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNestedgenericclass.NestedGenericClass.1G.1H__java_lang_Class (ref.func $$getNestedgenericclass.NestedGenericClass.1G.1H__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nestedgenericclass.NestedGenericClass.1G.1H)

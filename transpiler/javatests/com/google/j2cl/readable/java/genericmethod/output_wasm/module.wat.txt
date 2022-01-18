@@ -142,19 +142,19 @@
   $java.lang.Object)
 )
 (type $genericmethod.GenericMethod.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Exception__void (ref $function.$java.lang.Object__$java.lang.Exception__$void))
- (field $m_fun__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
- (field $m_bar__genericmethod_GenericMethod (ref $function.$java.lang.Object__$genericmethod.GenericMethod))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject))
- (field $m_checked__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_unchecked__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
+ (field $m_fun__java_lang_Exception__void (ref $function.m_fun__java_lang_Exception__void))
+ (field $m_fun__java_lang_Error__void (ref $function.m_fun__java_lang_Error__void))
+ (field $m_bar__genericmethod_GenericMethod (ref $function.m_bar__genericmethod_GenericMethod))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object))
+ (field $m_checked__java_lang_Object (ref $function.m_checked__java_lang_Object))
+ (field $m_unchecked__java_lang_Object (ref $function.m_unchecked__java_lang_Object))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -192,7 +192,7 @@
 
 ;;; void GenericMethod.foo(T f, S s)
 (func $m_foo__java_lang_Object__java_lang_Object__void@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
@@ -206,7 +206,7 @@
 
 ;;; void GenericMethod.fun(Object o)
 (func $m_fun__java_lang_Object__void@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_fun__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  ;;@ genericmethod/GenericMethod.java:24:14
@@ -219,7 +219,7 @@
 
 ;;; void GenericMethod.fun(T t)
 (func $m_fun__java_lang_Exception__void@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$java.lang.Exception__$void)
+ (type $function.m_fun__java_lang_Exception__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Exception))
  ;;@ genericmethod/GenericMethod.java:26:36
@@ -232,7 +232,7 @@
 
 ;;; void GenericMethod.fun(T t)
 (func $m_fun__java_lang_Error__void@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$java.lang.Error__$void)
+ (type $function.m_fun__java_lang_Error__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  ;;@ genericmethod/GenericMethod.java:28:32
@@ -251,7 +251,7 @@
 
 ;;; GenericMethod<T> GenericMethod.bar()
 (func $m_bar__genericmethod_GenericMethod@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$genericmethod.GenericMethod)
+ (type $function.m_bar__genericmethod_GenericMethod)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $genericmethod.GenericMethod))
  ;;@ genericmethod/GenericMethod.java:43:30
@@ -267,7 +267,7 @@
 
 ;;; T[] GenericMethod.fun(T[] array)
 (func $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject)
+ (type $function.m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $array (ref null $javaemul.internal.WasmArray.OfObject))
  (result (ref null $javaemul.internal.WasmArray.OfObject))
@@ -284,7 +284,7 @@
 
 ;;; T GenericMethod.checked()
 (func $m_checked__java_lang_Object@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_checked__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ genericmethod/GenericMethod.java:51:15
@@ -300,7 +300,7 @@
 
 ;;; T GenericMethod.unchecked()
 (func $m_unchecked__java_lang_Object@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_unchecked__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ genericmethod/GenericMethod.java:56:15
@@ -316,7 +316,7 @@
 
 ;;; void GenericMethod.test()
 (func $m_test__void@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ genericmethod/GenericMethod.java:60:14
  (local $g (ref null $genericmethod.GenericMethod))
@@ -344,7 +344,7 @@
   (call_ref (local.get $g)(call $$create__java_lang_Error@java.lang.Error )(struct.get $genericmethod.GenericMethod.vtable $m_fun__java_lang_Error__void (struct.get $genericmethod.GenericMethod $vtable(local.get $g))))
   ;; g.fun(javaemul.internal.WasmArray.OfObject.$create([javaemul.internal.StringPool.$getString_|asdf|()]));
   ;;@ genericmethod/GenericMethod.java:68:4
-  (drop (call_ref (local.get $g)(call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool) )))(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
+  (drop (call_ref (local.get $g)(call $$create__arrayOf_java_lang_Object__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (array.init_static $java.lang.Object.array (call $function.no.side.effects.$getString_|asdf|__java_lang_String (ref.func $$getString_|asdf|__java_lang_String@javaemul.internal.StringPool) )))(struct.get $genericmethod.GenericMethod.vtable $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $g)))))
   ;; String s = ((String) GenericMethod.this.checked());
   ;;@ genericmethod/GenericMethod.java:70:4
   (local.set $s (ref.cast_static $java.lang.String (call_ref (local.get $this)(struct.get $genericmethod.GenericMethod.vtable $m_checked__java_lang_Object (struct.get $genericmethod.GenericMethod $vtable(local.get $this))))))
@@ -545,14 +545,14 @@
 
 ;;; Class<?> GenericMethod.getClass()
 (func $m_getClass__java_lang_Class@genericmethod.GenericMethod
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericmethod.GenericMethod))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod__java_lang_Class (ref.func $$getGenericmethod.GenericMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod)
@@ -566,21 +566,21 @@
   $genericmethod.GenericMethod)
 )
 (type $genericmethod.GenericMethod.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Exception__void (ref $function.$java.lang.Object__$java.lang.Exception__$void))
- (field $m_fun__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
- (field $m_bar__genericmethod_GenericMethod (ref $function.$java.lang.Object__$genericmethod.GenericMethod))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject))
- (field $m_checked__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_unchecked__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
- (field $m_fun2__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
- (field $m_fun2__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
+ (field $m_fun__java_lang_Exception__void (ref $function.m_fun__java_lang_Exception__void))
+ (field $m_fun__java_lang_Error__void (ref $function.m_fun__java_lang_Error__void))
+ (field $m_bar__genericmethod_GenericMethod (ref $function.m_bar__genericmethod_GenericMethod))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object))
+ (field $m_checked__java_lang_Object (ref $function.m_checked__java_lang_Object))
+ (field $m_unchecked__java_lang_Object (ref $function.m_unchecked__java_lang_Object))
+ (field $m_test__void (ref $function.m_test__void))
+ (field $m_fun2__java_lang_Error__void (ref $function.m_fun2__java_lang_Error__void))
+ (field $m_fun2__java_lang_Object__void (ref $function.m_fun2__java_lang_Object__void))
   $genericmethod.GenericMethod.vtable)
 )
 
@@ -623,7 +623,7 @@
 
 ;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
 (func $m_fun2__java_lang_Error__void@genericmethod.GenericMethod.1
- (type $function.$java.lang.Object__$java.lang.Error__$void)
+ (type $function.m_fun2__java_lang_Error__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  ;;@ genericmethod/GenericMethod.java:30:18
@@ -636,7 +636,7 @@
 
 ;;; void <anonymous> extends GenericMethod<T>.fun2(T t)
 (func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_fun2__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ genericmethod/GenericMethod.java:32:22
@@ -671,14 +671,14 @@
 
 ;;; Class<?> <anonymous> extends GenericMethod<T>.getClass()
 (func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericmethod.GenericMethod.1))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.1__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1)
@@ -692,21 +692,21 @@
   $genericmethod.GenericMethod)
 )
 (type $genericmethod.GenericMethod.1LocalClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun__java_lang_Exception__void (ref $function.$java.lang.Object__$java.lang.Exception__$void))
- (field $m_fun__java_lang_Error__void (ref $function.$java.lang.Object__$java.lang.Error__$void))
- (field $m_bar__genericmethod_GenericMethod (ref $function.$java.lang.Object__$genericmethod.GenericMethod))
- (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject))
- (field $m_checked__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_unchecked__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
- (field $m_fun2__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_fun2__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Number__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
+ (field $m_fun__java_lang_Exception__void (ref $function.m_fun__java_lang_Exception__void))
+ (field $m_fun__java_lang_Error__void (ref $function.m_fun__java_lang_Error__void))
+ (field $m_bar__genericmethod_GenericMethod (ref $function.m_bar__genericmethod_GenericMethod))
+ (field $m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.m_fun__arrayOf_java_lang_Object__arrayOf_java_lang_Object))
+ (field $m_checked__java_lang_Object (ref $function.m_checked__java_lang_Object))
+ (field $m_unchecked__java_lang_Object (ref $function.m_unchecked__java_lang_Object))
+ (field $m_test__void (ref $function.m_test__void))
+ (field $m_fun2__java_lang_Object__void (ref $function.m_fun2__java_lang_Object__void))
+ (field $m_fun2__java_lang_Number__void (ref $function.m_fun2__java_lang_Number__void))
   $genericmethod.GenericMethod.vtable)
 )
 
@@ -749,7 +749,7 @@
 
 ;;; void LocalClass.fun2(T t)
 (func $m_fun2__java_lang_Object__void@genericmethod.GenericMethod.1LocalClass
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_fun2__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ genericmethod/GenericMethod.java:36:18
@@ -762,7 +762,7 @@
 
 ;;; void LocalClass.fun2(T t)
 (func $m_fun2__java_lang_Number__void@genericmethod.GenericMethod.1LocalClass
- (type $function.$java.lang.Object__$java.lang.Number__$void)
+ (type $function.m_fun2__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
  ;;@ genericmethod/GenericMethod.java:38:37
@@ -797,14 +797,14 @@
 
 ;;; Class<?> LocalClass.getClass()
 (func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1LocalClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericmethod.GenericMethod.1LocalClass))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.1LocalClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.1LocalClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.1LocalClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.1LocalClass)
@@ -817,11 +817,11 @@
   $java.lang.Object)
 )
 (type $genericmethod.GenericMethod.SuperContainer.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref $function.$java.lang.Object__$genericmethod.GenericMethod.Container))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod (ref $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod))
   $java.lang.Object.vtable)
 )
 
@@ -859,7 +859,7 @@
 
 ;;; C SuperContainer.get()
 (func $m_get__genericmethod_GenericMethod_Container_$pp_genericmethod@genericmethod.GenericMethod.SuperContainer
- (type $function.$java.lang.Object__$genericmethod.GenericMethod.Container)
+ (type $function.m_get__genericmethod_GenericMethod_Container_$pp_genericmethod)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $genericmethod.GenericMethod.Container))
  ;;@ genericmethod/GenericMethod.java:75:6
@@ -897,14 +897,14 @@
 
 ;;; Class<?> SuperContainer.getClass()
 (func $m_getClass__java_lang_Class@genericmethod.GenericMethod.SuperContainer
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericmethod.GenericMethod.SuperContainer))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.SuperContainer (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.SuperContainer();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.SuperContainer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.SuperContainer)
@@ -917,11 +917,11 @@
   $java.lang.Object)
 )
 (type $genericmethod.GenericMethod.Container.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref $function.$java.lang.Object__$genericmethod.GenericMethod.Content))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod (ref $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod))
   $java.lang.Object.vtable)
 )
 
@@ -959,7 +959,7 @@
 
 ;;; CT Container.get()
 (func $m_get__genericmethod_GenericMethod_Content_$pp_genericmethod@genericmethod.GenericMethod.Container
- (type $function.$java.lang.Object__$genericmethod.GenericMethod.Content)
+ (type $function.m_get__genericmethod_GenericMethod_Content_$pp_genericmethod)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $genericmethod.GenericMethod.Content))
  ;;@ genericmethod/GenericMethod.java:81:7
@@ -997,14 +997,14 @@
 
 ;;; Class<?> Container.getClass()
 (func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Container
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericmethod.GenericMethod.Container))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.Container (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Container();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.Container__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Container__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Container__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Container)
@@ -1017,11 +1017,11 @@
   $java.lang.Object)
 )
 (type $genericmethod.GenericMethod.Content.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getProp__java_lang_String_$pp_genericmethod (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getProp__java_lang_String_$pp_genericmethod (ref $function.m_getProp__java_lang_String_$pp_genericmethod))
   $java.lang.Object.vtable)
 )
 
@@ -1059,7 +1059,7 @@
 
 ;;; String Content.getProp()
 (func $m_getProp__java_lang_String_$pp_genericmethod@genericmethod.GenericMethod.Content
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_getProp__java_lang_String_$pp_genericmethod)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ genericmethod/GenericMethod.java:87:11
@@ -1097,14 +1097,14 @@
 
 ;;; Class<?> Content.getClass()
 (func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Content
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $genericmethod.GenericMethod.Content))
  (local.set $this (ref.cast_static $genericmethod.GenericMethod.Content (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGenericmethod.GenericMethod.Content();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGenericmethod.GenericMethod.Content__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGenericmethod.GenericMethod.Content__java_lang_Class (ref.func $$getGenericmethod.GenericMethod.Content__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@genericmethod.GenericMethod.Content)

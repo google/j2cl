@@ -26,11 +26,11 @@
   $java.lang.Object)
 )
 (type $simplegenerictype.SimpleGenericType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -78,7 +78,7 @@
 
 ;;; void SimpleGenericType.test()
 (func $m_test__void@simplegenerictype.SimpleGenericType
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ simplegenerictype/SimpleGenericType.java:27:14
  (local $g (ref null $simplegenerictype.SimpleGenericType))
@@ -116,14 +116,14 @@
 
 ;;; Class<?> SimpleGenericType.getClass()
 (func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $simplegenerictype.SimpleGenericType))
  (local.set $this (ref.cast_static $simplegenerictype.SimpleGenericType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSimplegenerictype.SimpleGenericType();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSimplegenerictype.SimpleGenericType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getSimplegenerictype.SimpleGenericType__java_lang_Class (ref.func $$getSimplegenerictype.SimpleGenericType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@simplegenerictype.SimpleGenericType)

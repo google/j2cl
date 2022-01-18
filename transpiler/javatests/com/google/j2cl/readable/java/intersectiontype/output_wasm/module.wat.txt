@@ -123,7 +123,7 @@
 
 ;;; Code for intersectiontype.Getable [INTERFACE]
 (type $intersectiontype.Getable.vtable (struct_subtype 
- (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
   data)
 )
 
@@ -152,14 +152,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.Getable();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.Getable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.Getable__java_lang_Class (ref.func $$getIntersectiontype.Getable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.Getable)
 
 ;;; Code for intersectiontype.Setable [INTERFACE]
 (type $intersectiontype.Setable.vtable (struct_subtype 
- (field $m_set__int__void (ref $function.$java.lang.Object__$int__$void))
+ (field $m_set__int__void (ref $function.m_set__int__void))
   data)
 )
 
@@ -188,7 +188,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.Setable();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.Setable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.Setable__java_lang_Class (ref.func $$getIntersectiontype.Setable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.Setable)
@@ -223,14 +223,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.Serial();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.Serial__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.Serial__java_lang_Class (ref.func $$getIntersectiontype.Serial__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.Serial)
 
 ;;; Code for intersectiontype.Cmp [INTERFACE]
 (type $intersectiontype.Cmp.vtable (struct_subtype 
- (field $m_cmp__int (ref $function.$java.lang.Object__$int))
+ (field $m_cmp__int (ref $function.m_cmp__int))
   data)
 )
 
@@ -259,14 +259,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.Cmp();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.Cmp__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.Cmp__java_lang_Class (ref.func $$getIntersectiontype.Cmp__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.Cmp)
 
 ;;; Code for intersectiontype.Cmp2 [INTERFACE]
 (type $intersectiontype.Cmp2.vtable (struct_subtype 
- (field $m_cmp__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_cmp__int__int (ref $function.m_cmp__int__int))
   data)
 )
 
@@ -295,7 +295,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.Cmp2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.Cmp2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.Cmp2__java_lang_Class (ref.func $$getIntersectiontype.Cmp2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.Cmp2)
@@ -308,12 +308,12 @@
   $java.lang.Object)
 )
 (type $intersectiontype.IntersectionTypeTest.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_cast3__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_testMethodCall__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_cast3__java_lang_Object__java_lang_Object (ref $function.m_cast3__java_lang_Object__java_lang_Object))
+ (field $m_testMethodCall__void (ref $function.m_testMethodCall__void))
   $java.lang.Object.vtable)
 )
 
@@ -430,7 +430,7 @@
 
 ;;; Object IntersectionTypeTest.cast3(Object s)
 (func $m_cast3__java_lang_Object__java_lang_Object@intersectiontype.IntersectionTypeTest
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_cast3__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -540,7 +540,7 @@
 
 ;;; void IntersectionTypeTest.testMethodCall()
 (func $m_testMethodCall__void@intersectiontype.IntersectionTypeTest
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testMethodCall__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ intersectiontype/IntersectionTypeTest.java:105:14
  (local $o (ref null $java.lang.Object))
@@ -588,14 +588,14 @@
 
 ;;; Class<?> IntersectionTypeTest.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest)
@@ -609,11 +609,11 @@
   $java.lang.Object)
 )
 (type $intersectiontype.IntersectionTypeTest.MapEntry.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_method__java_lang_Object__intersectiontype_Getable (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_method__java_lang_Object__intersectiontype_Getable (ref $function.m_method__java_lang_Object__intersectiontype_Getable))
   $java.lang.Object.vtable)
 )
 
@@ -656,7 +656,7 @@
 
 ;;; Getable<T> MapEntry.method(Object o)
 (func $m_method__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest.MapEntry
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_method__java_lang_Object__intersectiontype_Getable)
  (param $this.untyped (ref null $java.lang.Object))
  (param $o (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -695,14 +695,14 @@
 
 ;;; Class<?> MapEntry.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.MapEntry))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.MapEntry (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.MapEntry();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.MapEntry__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.MapEntry__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.MapEntry__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry)
@@ -715,10 +715,10 @@
   $java.lang.Object)
 )
 (type $intersectiontype.IntersectionTypeTest.A.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -775,14 +775,14 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.A
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.A))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.A__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.A)
@@ -817,7 +817,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.EmptyA();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.EmptyA__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.EmptyA__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.EmptyA__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyA)
@@ -852,7 +852,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.EmptyB();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.EmptyB__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.EmptyB__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.EmptyB__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyB)
@@ -865,11 +865,11 @@
   $java.lang.Object)
 )
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_cmp__int (ref $function.$java.lang.Object__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_cmp__int (ref $function.m_cmp__int))
   $java.lang.Object.vtable)
 )
 
@@ -907,7 +907,7 @@
 
 ;;; int $LambdaImplementor$1.cmp()
 (func $m_cmp__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
- (type $function.$java.lang.Object__$int)
+ (type $function.m_cmp__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
@@ -945,14 +945,14 @@
 
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
@@ -965,11 +965,11 @@
   $java.lang.Object)
 )
 (type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_cmp__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_cmp__int__int (ref $function.m_cmp__int__int))
   $java.lang.Object.vtable)
 )
 
@@ -1007,7 +1007,7 @@
 
 ;;; int $LambdaImplementor$2.cmp(int a)
 (func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_cmp__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -1046,14 +1046,14 @@
 
 ;;; Class<?> $LambdaImplementor$2.getClass()
 (func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)

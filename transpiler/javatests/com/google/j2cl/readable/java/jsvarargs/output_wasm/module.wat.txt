@@ -194,20 +194,20 @@
   $java.lang.Object)
 )
 (type $jsvarargs.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_f3__int__arrayOf_int__int (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfInt__$int))
- (field $m_f4__arrayOf_int__int (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt__$int))
- (field $m_testStaticMethodNotFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testStaticMethodFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceMethodNotFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceMethodFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testJsFunction__void (ref $function.$java.lang.Object__$void))
- (field $m_testSideEffect__void (ref $function.$java.lang.Object__$void))
- (field $m_testNullJsVarargs__void (ref $function.$java.lang.Object__$void))
- (field $m_testGenericJsFunctionWithVarags__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_f3__int__arrayOf_int__int (ref $function.m_f3__int__arrayOf_int__int))
+ (field $m_f4__arrayOf_int__int (ref $function.m_f4__arrayOf_int__int))
+ (field $m_testStaticMethodNotFirst__void (ref $function.m_testStaticMethodNotFirst__void))
+ (field $m_testStaticMethodFirst__void (ref $function.m_testStaticMethodFirst__void))
+ (field $m_testInstanceMethodNotFirst__void (ref $function.m_testInstanceMethodNotFirst__void))
+ (field $m_testInstanceMethodFirst__void (ref $function.m_testInstanceMethodFirst__void))
+ (field $m_testJsFunction__void (ref $function.m_testJsFunction__void))
+ (field $m_testSideEffect__void (ref $function.m_testSideEffect__void))
+ (field $m_testNullJsVarargs__void (ref $function.m_testNullJsVarargs__void))
+ (field $m_testGenericJsFunctionWithVarags__void (ref $function.m_testGenericJsFunctionWithVarags__void))
   $java.lang.Object.vtable)
 )
 
@@ -281,7 +281,7 @@
 
 ;;; int Main.f3(int m, int... numbers)
 (func $m_f3__int__arrayOf_int__int@jsvarargs.Main
- (type $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfInt__$int)
+ (type $function.m_f3__int__arrayOf_int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $m i32)
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
@@ -299,7 +299,7 @@
 
 ;;; int Main.f4(int... numbers)
 (func $m_f4__arrayOf_int__int@jsvarargs.Main
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt__$int)
+ (type $function.m_f4__arrayOf_int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
  (result i32)
@@ -369,7 +369,7 @@
 
 ;;; void Main.testStaticMethodNotFirst()
 (func $m_testStaticMethodNotFirst__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testStaticMethodNotFirst__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:129:14
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
@@ -418,7 +418,7 @@
 
 ;;; void Main.testStaticMethodFirst()
 (func $m_testStaticMethodFirst__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testStaticMethodFirst__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:149:14
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
@@ -495,7 +495,7 @@
 
 ;;; void Main.testInstanceMethodNotFirst()
 (func $m_testInstanceMethodNotFirst__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInstanceMethodNotFirst__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:178:14
  (local $m (ref null $jsvarargs.Main))
@@ -530,7 +530,7 @@
 
 ;;; void Main.testInstanceMethodFirst()
 (func $m_testInstanceMethodFirst__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInstanceMethodFirst__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:193:14
  (local $m (ref null $jsvarargs.Main))
@@ -565,7 +565,7 @@
 
 ;;; void Main.testJsFunction()
 (func $m_testJsFunction__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testJsFunction__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:208:14
  (local $a (ref null $jsvarargs.Main.AFunction))
@@ -608,7 +608,7 @@
 
 ;;; void Main.testSideEffect()
 (func $m_testSideEffect__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testSideEffect__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:225:14
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
@@ -633,7 +633,7 @@
 
 ;;; void Main.testNullJsVarargs()
 (func $m_testNullJsVarargs__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testNullJsVarargs__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:230:14
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
@@ -652,7 +652,7 @@
 
 ;;; void Main.testGenericJsFunctionWithVarags()
 (func $m_testGenericJsFunctionWithVarags__void@jsvarargs.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testGenericJsFunctionWithVarags__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/Main.java:240:18
  (local $function (ref null $java.lang.Object))
@@ -690,14 +690,14 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main))
  (local.set $this (ref.cast_static $jsvarargs.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main__java_lang_Class (ref.func $$getJsvarargs.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main)
@@ -710,10 +710,10 @@
   $java.lang.Object)
 )
 (type $jsvarargs.Main.NativeObject.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -775,14 +775,14 @@
 
 ;;; Class<?> NativeObject.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.Main.NativeObject
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.NativeObject))
  (local.set $this (ref.cast_static $jsvarargs.Main.NativeObject (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.NativeObject();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.NativeObject__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.NativeObject__java_lang_Class (ref.func $$getJsvarargs.Main.NativeObject__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.NativeObject)
@@ -795,10 +795,10 @@
   $jsvarargs.Main.NativeObject)
 )
 (type $jsvarargs.Main.SubVarargsConstructorClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $jsvarargs.Main.NativeObject.vtable)
 )
 
@@ -859,21 +859,21 @@
 
 ;;; Class<?> SubVarargsConstructorClass.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.Main.SubVarargsConstructorClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.SubVarargsConstructorClass))
  (local.set $this (ref.cast_static $jsvarargs.Main.SubVarargsConstructorClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.SubVarargsConstructorClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.SubVarargsConstructorClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.SubVarargsConstructorClass__java_lang_Class (ref.func $$getJsvarargs.Main.SubVarargsConstructorClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.SubVarargsConstructorClass)
 
 ;;; Code for jsvarargs.Main.Function [INTERFACE]
 (type $jsvarargs.Main.Function.vtable (struct_subtype 
- (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -902,7 +902,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.Function();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.Function__java_lang_Class (ref.func $$getJsvarargs.Main.Function__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.Function)
@@ -915,11 +915,11 @@
   $java.lang.Object)
 )
 (type $jsvarargs.Main.AbstractMethodWithVarargs.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_abstractMethod__arrayOf_int__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_abstractMethod__arrayOf_int__void (ref $function.m_abstractMethod__arrayOf_int__void))
   $java.lang.Object.vtable)
 )
 
@@ -1000,7 +1000,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.StaticInterfaceMethodWithVarargs();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.StaticInterfaceMethodWithVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.StaticInterfaceMethodWithVarargs__java_lang_Class (ref.func $$getJsvarargs.Main.StaticInterfaceMethodWithVarargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.StaticInterfaceMethodWithVarargs)
@@ -1013,11 +1013,11 @@
   $java.lang.Object)
 )
 (type $jsvarargs.Main.AFunction.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_f1__int__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1055,7 +1055,7 @@
 
 ;;; Object AFunction.f1(int i, Object... args)
 (func $m_f1__int__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.AFunction
- (type $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$java.lang.Object)
+ (type $function.m_f1__int__arrayOf_java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $i i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
@@ -1095,14 +1095,14 @@
 
 ;;; Class<?> AFunction.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.Main.AFunction
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.AFunction))
  (local.set $this (ref.cast_static $jsvarargs.Main.AFunction (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.AFunction();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.AFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.AFunction__java_lang_Class (ref.func $$getJsvarargs.Main.AFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.AFunction)
@@ -1116,20 +1116,20 @@
   $jsvarargs.Main)
 )
 (type $jsvarargs.Main.SubMain.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_f3__int__arrayOf_int__int (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfInt__$int))
- (field $m_f4__arrayOf_int__int (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt__$int))
- (field $m_testStaticMethodNotFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testStaticMethodFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceMethodNotFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceMethodFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testJsFunction__void (ref $function.$java.lang.Object__$void))
- (field $m_testSideEffect__void (ref $function.$java.lang.Object__$void))
- (field $m_testNullJsVarargs__void (ref $function.$java.lang.Object__$void))
- (field $m_testGenericJsFunctionWithVarags__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_f3__int__arrayOf_int__int (ref $function.m_f3__int__arrayOf_int__int))
+ (field $m_f4__arrayOf_int__int (ref $function.m_f4__arrayOf_int__int))
+ (field $m_testStaticMethodNotFirst__void (ref $function.m_testStaticMethodNotFirst__void))
+ (field $m_testStaticMethodFirst__void (ref $function.m_testStaticMethodFirst__void))
+ (field $m_testInstanceMethodNotFirst__void (ref $function.m_testInstanceMethodNotFirst__void))
+ (field $m_testInstanceMethodFirst__void (ref $function.m_testInstanceMethodFirst__void))
+ (field $m_testJsFunction__void (ref $function.m_testJsFunction__void))
+ (field $m_testSideEffect__void (ref $function.m_testSideEffect__void))
+ (field $m_testNullJsVarargs__void (ref $function.m_testNullJsVarargs__void))
+ (field $m_testGenericJsFunctionWithVarags__void (ref $function.m_testGenericJsFunctionWithVarags__void))
   $jsvarargs.Main.vtable)
 )
 
@@ -1167,7 +1167,7 @@
 
 ;;; int SubMain.f3(int m, int... numbers)
 (func $m_f3__int__arrayOf_int__int@jsvarargs.Main.SubMain
- (type $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfInt__$int)
+ (type $function.m_f3__int__arrayOf_int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $m i32)
  (param $numbers (ref null $javaemul.internal.WasmArray.OfInt))
@@ -1227,21 +1227,21 @@
 
 ;;; Class<?> SubMain.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.Main.SubMain
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.SubMain))
  (local.set $this (ref.cast_static $jsvarargs.Main.SubMain (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.SubMain();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.SubMain__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.SubMain__java_lang_Class (ref.func $$getJsvarargs.Main.SubMain__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.SubMain)
 
 ;;; Code for jsvarargs.Main.GenericFunction [INTERFACE]
 (type $jsvarargs.Main.GenericFunction.vtable (struct_subtype 
- (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -1270,7 +1270,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.GenericFunction();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.GenericFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.GenericFunction__java_lang_Class (ref.func $$getJsvarargs.Main.GenericFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.GenericFunction)
@@ -1283,11 +1283,11 @@
   $java.lang.Object)
 )
 (type $jsvarargs.Main.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1325,7 +1325,7 @@
 
 ;;; Object $LambdaImplementor$1.m(T n, T... param)
 (func $m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object@jsvarargs.Main.$LambdaImplementor$1
- (type $function.$java.lang.Object__$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$java.lang.Object)
+ (type $function.m_m__java_lang_Object__arrayOf_java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $n (ref null $java.lang.Object))
  (param $param (ref null $javaemul.internal.WasmArray.OfObject))
@@ -1373,14 +1373,14 @@
 
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.Main.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $jsvarargs.Main.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.Main.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.Main.$LambdaImplementor$1__java_lang_Class (ref.func $$getJsvarargs.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.Main.$LambdaImplementor$1)
@@ -1394,20 +1394,20 @@
   $jsvarargs.Main)
 )
 (type $jsvarargs.QualifiedSuperMethodCall.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_f3__int__arrayOf_int__int (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfInt__$int))
- (field $m_f4__arrayOf_int__int (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfInt__$int))
- (field $m_testStaticMethodNotFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testStaticMethodFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceMethodNotFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceMethodFirst__void (ref $function.$java.lang.Object__$void))
- (field $m_testJsFunction__void (ref $function.$java.lang.Object__$void))
- (field $m_testSideEffect__void (ref $function.$java.lang.Object__$void))
- (field $m_testNullJsVarargs__void (ref $function.$java.lang.Object__$void))
- (field $m_testGenericJsFunctionWithVarags__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_f3__int__arrayOf_int__int (ref $function.m_f3__int__arrayOf_int__int))
+ (field $m_f4__arrayOf_int__int (ref $function.m_f4__arrayOf_int__int))
+ (field $m_testStaticMethodNotFirst__void (ref $function.m_testStaticMethodNotFirst__void))
+ (field $m_testStaticMethodFirst__void (ref $function.m_testStaticMethodFirst__void))
+ (field $m_testInstanceMethodNotFirst__void (ref $function.m_testInstanceMethodNotFirst__void))
+ (field $m_testInstanceMethodFirst__void (ref $function.m_testInstanceMethodFirst__void))
+ (field $m_testJsFunction__void (ref $function.m_testJsFunction__void))
+ (field $m_testSideEffect__void (ref $function.m_testSideEffect__void))
+ (field $m_testNullJsVarargs__void (ref $function.m_testNullJsVarargs__void))
+ (field $m_testGenericJsFunctionWithVarags__void (ref $function.m_testGenericJsFunctionWithVarags__void))
   $jsvarargs.Main.vtable)
 )
 
@@ -1467,14 +1467,14 @@
 
 ;;; Class<?> QualifiedSuperMethodCall.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.QualifiedSuperMethodCall))
  (local.set $this (ref.cast_static $jsvarargs.QualifiedSuperMethodCall (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.QualifiedSuperMethodCall();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.QualifiedSuperMethodCall__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.QualifiedSuperMethodCall__java_lang_Class (ref.func $$getJsvarargs.QualifiedSuperMethodCall__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall)
@@ -1488,11 +1488,11 @@
   $java.lang.Object)
 )
 (type $jsvarargs.QualifiedSuperMethodCall.InnerClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -1535,7 +1535,7 @@
 
 ;;; void InnerClass.test()
 (func $m_test__void@jsvarargs.QualifiedSuperMethodCall.InnerClass
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsvarargs/QualifiedSuperMethodCall.java:24:16
  (local $ints (ref null $javaemul.internal.WasmArray.OfInt))
@@ -1588,14 +1588,14 @@
 
 ;;; Class<?> InnerClass.getClass()
 (func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall.InnerClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsvarargs.QualifiedSuperMethodCall.InnerClass))
  (local.set $this (ref.cast_static $jsvarargs.QualifiedSuperMethodCall.InnerClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsvarargs.QualifiedSuperMethodCall.InnerClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsvarargs.QualifiedSuperMethodCall.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsvarargs.QualifiedSuperMethodCall.InnerClass__java_lang_Class (ref.func $$getJsvarargs.QualifiedSuperMethodCall.InnerClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsvarargs.QualifiedSuperMethodCall.InnerClass)

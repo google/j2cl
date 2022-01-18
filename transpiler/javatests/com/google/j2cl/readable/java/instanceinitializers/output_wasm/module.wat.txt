@@ -24,10 +24,10 @@
   $java.lang.Object)
 )
 (type $instanceinitializers.InstanceInitializers.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -104,14 +104,14 @@
 
 ;;; Class<?> InstanceInitializers.getClass()
 (func $m_getClass__java_lang_Class@instanceinitializers.InstanceInitializers
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instanceinitializers.InstanceInitializers))
  (local.set $this (ref.cast_static $instanceinitializers.InstanceInitializers (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstanceinitializers.InstanceInitializers();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstanceinitializers.InstanceInitializers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstanceinitializers.InstanceInitializers__java_lang_Class (ref.func $$getInstanceinitializers.InstanceInitializers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instanceinitializers.InstanceInitializers)

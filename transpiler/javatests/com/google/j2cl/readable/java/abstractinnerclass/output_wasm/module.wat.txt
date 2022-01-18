@@ -32,10 +32,10 @@
   $java.lang.Object)
 )
 (type $abstractinnerclass.InnerClasses.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -95,21 +95,21 @@
 
 ;;; Class<?> InnerClasses.getClass()
 (func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $abstractinnerclass.InnerClasses))
  (local.set $this (ref.cast_static $abstractinnerclass.InnerClasses (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinnerclass.InnerClasses();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAbstractinnerclass.InnerClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAbstractinnerclass.InnerClasses__java_lang_Class (ref.func $$getAbstractinnerclass.InnerClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses)
 
 ;;; Code for abstractinnerclass.InnerClasses.A [INTERFACE]
 (type $abstractinnerclass.InnerClasses.A.vtable (struct_subtype 
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_foo__void (ref $function.m_foo__void))
   data)
 )
 
@@ -138,7 +138,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAbstractinnerclass.InnerClasses.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAbstractinnerclass.InnerClasses.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAbstractinnerclass.InnerClasses.A__java_lang_Class (ref.func $$getAbstractinnerclass.InnerClasses.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@abstractinnerclass.InnerClasses.A)
@@ -151,11 +151,11 @@
   $java.lang.Object)
 )
 (type $abstractinnerclass.InnerClasses.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_bar__void_$pp_abstractinnerclass (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_bar__void_$pp_abstractinnerclass (ref $function.m_bar__void_$pp_abstractinnerclass))
   $java.lang.Object.vtable)
 )
 
@@ -175,7 +175,7 @@
 
 ;;; void B.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.B
- (type $function.$java.lang.Object__$void)
+ (type $function.m_bar__void_$pp_abstractinnerclass)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:24:9
  (local $this (ref null $abstractinnerclass.InnerClasses.B))
@@ -219,11 +219,11 @@
   $java.lang.Object)
 )
 (type $abstractinnerclass.InnerClasses.C.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_bar__void_$pp_abstractinnerclass (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_bar__void_$pp_abstractinnerclass (ref $function.m_bar__void_$pp_abstractinnerclass))
   $java.lang.Object.vtable)
 )
 
@@ -247,7 +247,7 @@
 
 ;;; void C.bar()
 (func $m_bar__void_$pp_abstractinnerclass@abstractinnerclass.InnerClasses.C
- (type $function.$java.lang.Object__$void)
+ (type $function.m_bar__void_$pp_abstractinnerclass)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ abstractinnerclass/InnerClasses.java:30:9
  (local $this (ref null $abstractinnerclass.InnerClasses.C))

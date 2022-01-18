@@ -84,7 +84,7 @@
 
 ;;; Code for instancejsmethods.MyInterface [INTERFACE]
 (type $instancejsmethods.MyInterface.vtable (struct_subtype 
- (field $m_intfFoo__int (ref $function.$java.lang.Object__$int))
+ (field $m_intfFoo__int (ref $function.m_intfFoo__int))
   data)
 )
 
@@ -113,7 +113,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.MyInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstancejsmethods.MyInterface__java_lang_Class (ref.func $$getInstancejsmethods.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instancejsmethods.MyInterface)
@@ -126,12 +126,12 @@
   $java.lang.Object)
 )
 (type $instancejsmethods.SuperParent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
- (field $m_bar__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
+ (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
   $java.lang.Object.vtable)
 )
 
@@ -169,7 +169,7 @@
 
 ;;; int SuperParent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.SuperParent
- (type $function.$java.lang.Object__$int__$int__$int)
+ (type $function.m_fun__int__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -187,7 +187,7 @@
 
 ;;; int SuperParent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.SuperParent
- (type $function.$java.lang.Object__$int__$int__$int)
+ (type $function.m_bar__int__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -227,14 +227,14 @@
 
 ;;; Class<?> SuperParent.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.SuperParent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.SuperParent))
  (local.set $this (ref.cast_static $instancejsmethods.SuperParent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.SuperParent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.SuperParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstancejsmethods.SuperParent__java_lang_Class (ref.func $$getInstancejsmethods.SuperParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instancejsmethods.SuperParent)
@@ -247,13 +247,13 @@
   $instancejsmethods.SuperParent)
 )
 (type $instancejsmethods.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
- (field $m_bar__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
+ (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   $instancejsmethods.SuperParent.vtable)
 )
 
@@ -291,7 +291,7 @@
 
 ;;; int Parent.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Parent
- (type $function.$java.lang.Object__$int__$int__$int)
+ (type $function.m_fun__int__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -309,7 +309,7 @@
 
 ;;; int Parent.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Parent
- (type $function.$java.lang.Object__$int__$int__$int)
+ (type $function.m_bar__int__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -327,7 +327,7 @@
 
 ;;; int Parent.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Parent
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_foo__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -366,14 +366,14 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Parent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Parent))
  (local.set $this (ref.cast_static $instancejsmethods.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.Parent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstancejsmethods.Parent__java_lang_Class (ref.func $$getInstancejsmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instancejsmethods.Parent)
@@ -386,14 +386,14 @@
   $instancejsmethods.Parent)
 )
 (type $instancejsmethods.Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
- (field $m_bar__int__int__int (ref $function.$java.lang.Object__$int__$int__$int))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
- (field $m_intfFoo__int (ref $function.$java.lang.Object__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__int__int__int (ref $function.m_fun__int__int__int))
+ (field $m_bar__int__int__int (ref $function.m_bar__int__int__int))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
+ (field $m_intfFoo__int (ref $function.m_intfFoo__int))
   $instancejsmethods.Parent.vtable)
 )
 
@@ -431,7 +431,7 @@
 
 ;;; int Child.fun(int a, int b)
 (func $m_fun__int__int__int@instancejsmethods.Child
- (type $function.$java.lang.Object__$int__$int__$int)
+ (type $function.m_fun__int__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -449,7 +449,7 @@
 
 ;;; int Child.bar(int a, int b)
 (func $m_bar__int__int__int@instancejsmethods.Child
- (type $function.$java.lang.Object__$int__$int__$int)
+ (type $function.m_bar__int__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $b i32)
@@ -467,7 +467,7 @@
 
 ;;; int Child.foo(int a)
 (func $m_foo__int__int@instancejsmethods.Child
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_foo__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -484,7 +484,7 @@
 
 ;;; int Child.intfFoo()
 (func $m_intfFoo__int@instancejsmethods.Child
- (type $function.$java.lang.Object__$int)
+ (type $function.m_intfFoo__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ instancejsmethods/Main.java:109:13
@@ -522,14 +522,14 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Child
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Child))
  (local.set $this (ref.cast_static $instancejsmethods.Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.Child();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstancejsmethods.Child__java_lang_Class (ref.func $$getInstancejsmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instancejsmethods.Child)
@@ -542,11 +542,11 @@
   $java.lang.Object)
 )
 (type $instancejsmethods.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testCallBySuperParent__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testCallBySuperParent__void (ref $function.m_testCallBySuperParent__void))
   $java.lang.Object.vtable)
 )
 
@@ -584,7 +584,7 @@
 
 ;;; void Main.testCallBySuperParent()
 (func $m_testCallBySuperParent__void@instancejsmethods.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testCallBySuperParent__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ instancejsmethods/Main.java:115:14
  (local $sp (ref null $instancejsmethods.SuperParent))
@@ -718,14 +718,14 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@instancejsmethods.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $instancejsmethods.Main))
  (local.set $this (ref.cast_static $instancejsmethods.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInstancejsmethods.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInstancejsmethods.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInstancejsmethods.Main__java_lang_Class (ref.func $$getInstancejsmethods.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@instancejsmethods.Main)

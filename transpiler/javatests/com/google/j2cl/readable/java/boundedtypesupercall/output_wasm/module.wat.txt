@@ -63,10 +63,10 @@
   $java.lang.Object)
 )
 (type $boundedtypesupercall.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -126,14 +126,14 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@boundedtypesupercall.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypesupercall.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBoundedtypesupercall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBoundedtypesupercall.Main__java_lang_Class (ref.func $$getBoundedtypesupercall.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@boundedtypesupercall.Main)
@@ -146,11 +146,11 @@
   $java.lang.Object)
 )
 (type $boundedtypesupercall.Main.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void (ref $function.m_foo__void))
   $java.lang.Object.vtable)
 )
 
@@ -199,12 +199,12 @@
   $java.lang.Object)
 )
 (type $boundedtypesupercall.Main.Bar.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getSomething__java_lang_Comparable (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_doSomething__boundedtypesupercall_Main_Foo (ref $function.$java.lang.Object__$boundedtypesupercall.Main.Foo))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getSomething__java_lang_Comparable (ref $function.m_getSomething__java_lang_Comparable))
+ (field $m_doSomething__boundedtypesupercall_Main_Foo (ref $function.m_doSomething__boundedtypesupercall_Main_Foo))
   $java.lang.Object.vtable)
 )
 
@@ -242,7 +242,7 @@
 
 ;;; T Bar.getSomething()
 (func $m_getSomething__java_lang_Comparable@boundedtypesupercall.Main.Bar
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_getSomething__java_lang_Comparable)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ boundedtypesupercall/Main.java:27:13
@@ -258,7 +258,7 @@
 
 ;;; Foo<T> Bar.doSomething()
 (func $m_doSomething__boundedtypesupercall_Main_Foo@boundedtypesupercall.Main.Bar
- (type $function.$java.lang.Object__$boundedtypesupercall.Main.Foo)
+ (type $function.m_doSomething__boundedtypesupercall_Main_Foo)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $boundedtypesupercall.Main.Foo))
  ;;@ boundedtypesupercall/Main.java:31:18
@@ -296,14 +296,14 @@
 
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main.Bar))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypesupercall.Main.Bar();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBoundedtypesupercall.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBoundedtypesupercall.Main.Bar__java_lang_Class (ref.func $$getBoundedtypesupercall.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar)
@@ -317,11 +317,11 @@
   $boundedtypesupercall.Main.Foo)
 )
 (type $boundedtypesupercall.Main.Bar.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void (ref $function.m_foo__void))
   $boundedtypesupercall.Main.Foo.vtable)
 )
 
@@ -366,7 +366,7 @@
 
 ;;; void <anonymous> extends Foo<T>.foo()
 (func $m_foo__void@boundedtypesupercall.Main.Bar.1
- (type $function.$java.lang.Object__$void)
+ (type $function.m_foo__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ boundedtypesupercall/Main.java:34:20
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
@@ -400,14 +400,14 @@
 
 ;;; Class<?> <anonymous> extends Foo<T>.getClass()
 (func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $boundedtypesupercall.Main.Bar.1))
  (local.set $this (ref.cast_static $boundedtypesupercall.Main.Bar.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBoundedtypesupercall.Main.Bar.1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBoundedtypesupercall.Main.Bar.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBoundedtypesupercall.Main.Bar.1__java_lang_Class (ref.func $$getBoundedtypesupercall.Main.Bar.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@boundedtypesupercall.Main.Bar.1)

@@ -345,14 +345,14 @@
   $java.lang.Object)
 )
 (type $nullability.Nullability.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String__$java.lang.String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String))
- (field $m_m4__nullability_Nullability_MyFunction__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String (ref $function.m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String))
+ (field $m_m4__nullability_Nullability_MyFunction__void (ref $function.m_m4__nullability_Nullability_MyFunction__void))
   $java.lang.Object.vtable)
 )
 
@@ -395,7 +395,7 @@
 
 ;;; String Nullability.m1(String a, List<Double> b, String c)
 (func $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String@nullability.Nullability
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String__$java.lang.String)
+ (type $function.m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -407,14 +407,14 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/Nullability.java:50:4
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_m1__java_lang_String__java_util_List__java_lang_String__java_lang_String@nullability.Nullability)
 
 ;;; String Nullability.m2(String a, List<Double> b)
 (func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.Nullability
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.m_m2__java_lang_String__java_util_List__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -425,14 +425,14 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/Nullability.java:54:4
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.Nullability)
 
 ;;; String Nullability.m3(String a, String... args)
 (func $m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String@nullability.Nullability
- (type $function.$java.lang.Object__$java.lang.String__$javaemul.internal.WasmArray.OfObject__$java.lang.String)
+ (type $function.m_m3__java_lang_String__arrayOf_java_lang_String__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
@@ -450,7 +450,7 @@
 
 ;;; void Nullability.m4(MyFunction f)
 (func $m_m4__nullability_Nullability_MyFunction__void@nullability.Nullability
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_m4__nullability_Nullability_MyFunction__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $f (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:62:14
@@ -468,7 +468,7 @@
  (block
   ;; (Nullability.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
   ;;@ nullability/Nullability.java:30:2
-  (struct.set $nullability.Nullability $f_f1__nullability_Nullability_(local.get $this) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
+  (struct.set $nullability.Nullability $f_f1__nullability_Nullability_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
   ;; (Nullability.this.f2 = null);
   ;;@ nullability/Nullability.java:31:2
   (struct.set $nullability.Nullability $f_f2__nullability_Nullability_(local.get $this) (ref.null $java.lang.String))
@@ -526,14 +526,14 @@
 
 ;;; Class<?> Nullability.getClass()
 (func $m_getClass__java_lang_Class@nullability.Nullability
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability))
  (local.set $this (ref.cast_static $nullability.Nullability (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability__java_lang_Class (ref.func $$getNullability.Nullability__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability)
@@ -546,12 +546,12 @@
   $java.lang.Object)
 )
 (type $nullability.Nullability.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_bar__java_lang_Object__void_$pp_nullability (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_baz__java_lang_Object_$pp_nullability (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_bar__java_lang_Object__void_$pp_nullability (ref $function.m_bar__java_lang_Object__void_$pp_nullability))
+ (field $m_baz__java_lang_Object_$pp_nullability (ref $function.m_baz__java_lang_Object_$pp_nullability))
   $java.lang.Object.vtable)
 )
 
@@ -589,7 +589,7 @@
 
 ;;; void Foo.bar(T t)
 (func $m_bar__java_lang_Object__void_$pp_nullability@nullability.Nullability.Foo
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_bar__java_lang_Object__void_$pp_nullability)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:65:9
@@ -602,7 +602,7 @@
 
 ;;; T Foo.baz()
 (func $m_baz__java_lang_Object_$pp_nullability@nullability.Nullability.Foo
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_baz__java_lang_Object_$pp_nullability)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:68:6
@@ -618,7 +618,7 @@
 
 ;;; String Foo.toString()
 (func $m_toString__java_lang_String@nullability.Nullability.Foo
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_toString__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ nullability/Nullability.java:73:18
@@ -627,7 +627,7 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_|Foo|();
   ;;@ nullability/Nullability.java:74:6
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|Foo|__java_lang_String (ref.func $$getString_|Foo|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_toString__java_lang_String@nullability.Nullability.Foo)
@@ -656,21 +656,21 @@
 
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@nullability.Nullability.Foo
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.Foo))
  (local.set $this (ref.cast_static $nullability.Nullability.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.Foo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability.Foo__java_lang_Class (ref.func $$getNullability.Nullability.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.Foo)
 
 ;;; Code for nullability.Nullability.MyFunction [INTERFACE]
 (type $nullability.Nullability.MyFunction.vtable (struct_subtype 
- (field $m_x__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
+ (field $m_x__java_lang_String__java_lang_String (ref $function.m_x__java_lang_String__java_lang_String))
   data)
 )
 
@@ -699,7 +699,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.MyFunction();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.MyFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability.MyFunction__java_lang_Class (ref.func $$getNullability.Nullability.MyFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.MyFunction)
@@ -715,47 +715,47 @@
   $java.util.ArrayList)
 )
 (type $nullability.Nullability.StringList.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_add__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_addAll__java_util_Collection__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_clear__void (ref $function.$java.lang.Object__$void))
- (field $m_contains__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_containsAll__java_util_Collection__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_isEmpty__boolean (ref $function.$java.lang.Object__$boolean))
- (field $m_remove__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_removeAll__java_util_Collection__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_retainAll__java_util_Collection__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_toArray__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject))
- (field $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$javaemul.internal.WasmArray.OfObject))
- (field $m_forEach__java_util_function_Consumer__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_spliterator__java_util_Spliterator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_parallelStream__java_util_stream_Stream (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_removeIf__java_util_function_Predicate__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_stream__java_util_stream_Stream (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_add__int__java_lang_Object__void (ref $function.$java.lang.Object__$int__$java.lang.Object__$void))
- (field $m_addAll__int__java_util_Collection__boolean (ref $function.$java.lang.Object__$int__$java.lang.Object__$boolean))
- (field $m_indexOf__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- (field $m_iterator__java_util_Iterator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_lastIndexOf__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- (field $m_listIterator__java_util_ListIterator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_listIterator__int__java_util_ListIterator (ref $function.$java.lang.Object__$int__$java.lang.Object))
- (field $m_remove__int__java_lang_Object (ref $function.$java.lang.Object__$int__$java.lang.Object))
- (field $m_set__int__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$int__$java.lang.Object__$java.lang.Object))
- (field $m_subList__int__int__java_util_List (ref $function.$java.lang.Object__$int__$int__$java.lang.Object))
- (field $m_removeRange__int__int__void (ref $function.$java.lang.Object__$int__$int__$void))
- (field $m_replaceAll__java_util_function_UnaryOperator__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_sort__java_util_Comparator__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_clone__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_ensureCapacity__int__void (ref $function.$java.lang.Object__$int__$void))
- (field $m_get__int__java_lang_Object (ref $function.$java.lang.Object__$int__$java.lang.Object))
- (field $m_size__int (ref $function.$java.lang.Object__$int))
- (field $m_trimToSize__void (ref $function.$java.lang.Object__$void))
- (field $m_indexOf__java_lang_Object__int__int_$pp_java_util (ref $function.$java.lang.Object__$java.lang.Object__$int__$int))
- (field $m_lastIndexOf__java_lang_Object__int__int_$pp_java_util (ref $function.$java.lang.Object__$java.lang.Object__$int__$int))
- (field $m_setSize__int__void_$pp_java_util (ref $function.$java.lang.Object__$int__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_add__java_lang_Object__boolean (ref $function.m_add__java_lang_Object__boolean))
+ (field $m_addAll__java_util_Collection__boolean (ref $function.m_addAll__java_util_Collection__boolean))
+ (field $m_clear__void (ref $function.m_clear__void))
+ (field $m_contains__java_lang_Object__boolean (ref $function.m_contains__java_lang_Object__boolean))
+ (field $m_containsAll__java_util_Collection__boolean (ref $function.m_containsAll__java_util_Collection__boolean))
+ (field $m_isEmpty__boolean (ref $function.m_isEmpty__boolean))
+ (field $m_remove__java_lang_Object__boolean (ref $function.m_remove__java_lang_Object__boolean))
+ (field $m_removeAll__java_util_Collection__boolean (ref $function.m_removeAll__java_util_Collection__boolean))
+ (field $m_retainAll__java_util_Collection__boolean (ref $function.m_retainAll__java_util_Collection__boolean))
+ (field $m_toArray__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object))
+ (field $m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object (ref $function.m_toArray__arrayOf_java_lang_Object__arrayOf_java_lang_Object))
+ (field $m_forEach__java_util_function_Consumer__void (ref $function.m_forEach__java_util_function_Consumer__void))
+ (field $m_spliterator__java_util_Spliterator (ref $function.m_spliterator__java_util_Spliterator))
+ (field $m_parallelStream__java_util_stream_Stream (ref $function.m_parallelStream__java_util_stream_Stream))
+ (field $m_removeIf__java_util_function_Predicate__boolean (ref $function.m_removeIf__java_util_function_Predicate__boolean))
+ (field $m_stream__java_util_stream_Stream (ref $function.m_stream__java_util_stream_Stream))
+ (field $m_add__int__java_lang_Object__void (ref $function.m_add__int__java_lang_Object__void))
+ (field $m_addAll__int__java_util_Collection__boolean (ref $function.m_addAll__int__java_util_Collection__boolean))
+ (field $m_indexOf__java_lang_Object__int (ref $function.m_indexOf__java_lang_Object__int))
+ (field $m_iterator__java_util_Iterator (ref $function.m_iterator__java_util_Iterator))
+ (field $m_lastIndexOf__java_lang_Object__int (ref $function.m_lastIndexOf__java_lang_Object__int))
+ (field $m_listIterator__java_util_ListIterator (ref $function.m_listIterator__java_util_ListIterator))
+ (field $m_listIterator__int__java_util_ListIterator (ref $function.m_listIterator__int__java_util_ListIterator))
+ (field $m_remove__int__java_lang_Object (ref $function.m_remove__int__java_lang_Object))
+ (field $m_set__int__java_lang_Object__java_lang_Object (ref $function.m_set__int__java_lang_Object__java_lang_Object))
+ (field $m_subList__int__int__java_util_List (ref $function.m_subList__int__int__java_util_List))
+ (field $m_removeRange__int__int__void (ref $function.m_removeRange__int__int__void))
+ (field $m_replaceAll__java_util_function_UnaryOperator__void (ref $function.m_replaceAll__java_util_function_UnaryOperator__void))
+ (field $m_sort__java_util_Comparator__void (ref $function.m_sort__java_util_Comparator__void))
+ (field $m_clone__java_lang_Object (ref $function.m_clone__java_lang_Object))
+ (field $m_ensureCapacity__int__void (ref $function.m_ensureCapacity__int__void))
+ (field $m_get__int__java_lang_Object (ref $function.m_get__int__java_lang_Object))
+ (field $m_size__int (ref $function.m_size__int))
+ (field $m_trimToSize__void (ref $function.m_trimToSize__void))
+ (field $m_indexOf__java_lang_Object__int__int_$pp_java_util (ref $function.m_indexOf__java_lang_Object__int__int_$pp_java_util))
+ (field $m_lastIndexOf__java_lang_Object__int__int_$pp_java_util (ref $function.m_lastIndexOf__java_lang_Object__int__int_$pp_java_util))
+ (field $m_setSize__int__void_$pp_java_util (ref $function.m_setSize__int__void_$pp_java_util))
   $java.util.ArrayList.vtable)
 )
 
@@ -815,14 +815,14 @@
 
 ;;; Class<?> StringList.getClass()
 (func $m_getClass__java_lang_Class@nullability.Nullability.StringList
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.StringList))
  (local.set $this (ref.cast_static $nullability.Nullability.StringList (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.StringList();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.StringList__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability.StringList__java_lang_Class (ref.func $$getNullability.Nullability.StringList__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.StringList)
@@ -835,19 +835,19 @@
   $java.lang.Object)
 )
 (type $nullability.Nullability.StringComparator.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int))
- (field $m_reversed__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
+ (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
+ (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
+ (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
+ (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
+ (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
+ (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
   $java.lang.Object.vtable)
 )
 
@@ -885,7 +885,7 @@
 
 ;;; int StringComparator.compare(String a, String b)
 (func $m_compare__java_lang_String__java_lang_String__int@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int)
+ (type $function.m_compare__java_lang_String__java_lang_String__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -903,7 +903,7 @@
 
 ;;; int StringComparator.compare(Object arg0, Object arg1)
 (func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int)
+ (type $function.m_compare__java_lang_Object__java_lang_Object__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -921,7 +921,7 @@
 
 ;;; Comparator<String> StringComparator.reversed()
 (func $m_reversed__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_reversed__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:87:22
@@ -937,7 +937,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparing(Comparator<? super String> arg0)
 (func $m_thenComparing__java_util_Comparator__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparing__java_util_Comparator__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -954,7 +954,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -972,7 +972,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparing(Function<? super String, ? extends U> arg0)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -989,7 +989,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
 (func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1006,7 +1006,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
 (func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1023,7 +1023,7 @@
 
 ;;; Comparator<String> StringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
 (func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1065,14 +1065,14 @@
 
 ;;; Class<?> StringComparator.getClass()
 (func $m_getClass__java_lang_Class@nullability.Nullability.StringComparator
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.StringComparator))
  (local.set $this (ref.cast_static $nullability.Nullability.StringComparator (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.StringComparator();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.StringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability.StringComparator__java_lang_Class (ref.func $$getNullability.Nullability.StringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.StringComparator)
@@ -1085,19 +1085,19 @@
   $java.lang.Object)
 )
 (type $nullability.Nullability.NullableStringComparator.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_compare__java_lang_String__java_lang_String__int (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int))
- (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int))
- (field $m_reversed__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_compare__java_lang_String__java_lang_String__int (ref $function.m_compare__java_lang_String__java_lang_String__int))
+ (field $m_compare__java_lang_Object__java_lang_Object__int (ref $function.m_compare__java_lang_Object__java_lang_Object__int))
+ (field $m_reversed__java_util_Comparator (ref $function.m_reversed__java_util_Comparator))
+ (field $m_thenComparing__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_Comparator__java_util_Comparator))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator))
+ (field $m_thenComparing__java_util_function_Function__java_util_Comparator (ref $function.m_thenComparing__java_util_function_Function__java_util_Comparator))
+ (field $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator (ref $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator))
+ (field $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator (ref $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator))
+ (field $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator (ref $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator))
   $java.lang.Object.vtable)
 )
 
@@ -1135,7 +1135,7 @@
 
 ;;; int NullableStringComparator.compare(String a, String b)
 (func $m_compare__java_lang_String__java_lang_String__int@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.String__$int)
+ (type $function.m_compare__java_lang_String__java_lang_String__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.String))
@@ -1153,7 +1153,7 @@
 
 ;;; int NullableStringComparator.compare(Object arg0, Object arg1)
 (func $m_compare__java_lang_Object__java_lang_Object__int@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$int)
+ (type $function.m_compare__java_lang_Object__java_lang_Object__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1171,7 +1171,7 @@
 
 ;;; Comparator<String> NullableStringComparator.reversed()
 (func $m_reversed__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_reversed__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:95:22
@@ -1187,7 +1187,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparing(Comparator<? super String> arg0)
 (func $m_thenComparing__java_util_Comparator__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparing__java_util_Comparator__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1204,7 +1204,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0, Comparator<? super U> arg1)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1222,7 +1222,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparing(Function<? super String, ? extends U> arg0)
 (func $m_thenComparing__java_util_function_Function__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparing__java_util_function_Function__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1239,7 +1239,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparingDouble(ToDoubleFunction<? super String> arg0)
 (func $m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparingDouble__java_util_function_ToDoubleFunction__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1256,7 +1256,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparingInt(ToIntFunction<? super String> arg0)
 (func $m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparingInt__java_util_function_ToIntFunction__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1273,7 +1273,7 @@
 
 ;;; Comparator<String> NullableStringComparator.thenComparingLong(ToLongFunction<? super String> arg0)
 (func $m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_thenComparingLong__java_util_function_ToLongFunction__java_util_Comparator)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1315,21 +1315,21 @@
 
 ;;; Class<?> NullableStringComparator.getClass()
 (func $m_getClass__java_lang_Class@nullability.Nullability.NullableStringComparator
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.NullableStringComparator))
  (local.set $this (ref.cast_static $nullability.Nullability.NullableStringComparator (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.NullableStringComparator();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.NullableStringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability.NullableStringComparator__java_lang_Class (ref.func $$getNullability.Nullability.NullableStringComparator__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.NullableStringComparator)
 
 ;;; Code for nullability.Nullability.NullableTemplatedReturn [INTERFACE]
 (type $nullability.Nullability.NullableTemplatedReturn.vtable (struct_subtype 
- (field $m_foo__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
   data)
 )
 
@@ -1358,7 +1358,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.NullableTemplatedReturn();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.NullableTemplatedReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability.NullableTemplatedReturn__java_lang_Class (ref.func $$getNullability.Nullability.NullableTemplatedReturn__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.NullableTemplatedReturn)
@@ -1371,12 +1371,12 @@
   $java.lang.Object)
 )
 (type $nullability.Nullability.NullableTemplatedReturnOverride.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_foo__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_String (ref $function.m_foo__java_lang_String))
+ (field $m_foo__java_lang_Object (ref $function.m_foo__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1414,7 +1414,7 @@
 
 ;;; String NullableTemplatedReturnOverride.foo()
 (func $m_foo__java_lang_String@nullability.Nullability.NullableTemplatedReturnOverride
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_foo__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ nullability/Nullability.java:110:18
@@ -1423,14 +1423,14 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_|foo|();
   ;;@ nullability/Nullability.java:111:6
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|foo|__java_lang_String (ref.func $$getString_|foo|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_foo__java_lang_String@nullability.Nullability.NullableTemplatedReturnOverride)
 
 ;;; String NullableTemplatedReturnOverride.foo()
 (func $m_foo__java_lang_Object@nullability.Nullability.NullableTemplatedReturnOverride
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_foo__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ nullability/Nullability.java:107:22
@@ -1468,14 +1468,14 @@
 
 ;;; Class<?> NullableTemplatedReturnOverride.getClass()
 (func $m_getClass__java_lang_Class@nullability.Nullability.NullableTemplatedReturnOverride
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.Nullability.NullableTemplatedReturnOverride))
  (local.set $this (ref.cast_static $nullability.Nullability.NullableTemplatedReturnOverride (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.Nullability.NullableTemplatedReturnOverride();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.Nullability.NullableTemplatedReturnOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.Nullability.NullableTemplatedReturnOverride__java_lang_Class (ref.func $$getNullability.Nullability.NullableTemplatedReturnOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.Nullability.NullableTemplatedReturnOverride)
@@ -1500,13 +1500,13 @@
   $java.lang.Object)
 )
 (type $nullability.defaultnotnullable.DefaultNotNullable.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m3__arrayOf_java_lang_String__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
   $java.lang.Object.vtable)
 )
 
@@ -1547,7 +1547,7 @@
 
 ;;; String DefaultNotNullable.m1(String a, List<Double> b)
 (func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.defaultnotnullable.DefaultNotNullable
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.m_m1__java_lang_String__java_util_List__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -1558,14 +1558,14 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:41:4
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.defaultnotnullable.DefaultNotNullable)
 
 ;;; String DefaultNotNullable.m2(String a, List<Double> b)
 (func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.defaultnotnullable.DefaultNotNullable
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.m_m2__java_lang_String__java_util_List__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -1583,7 +1583,7 @@
 
 ;;; void DefaultNotNullable.m3(String... args)
 (func $m_m3__arrayOf_java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.m_m3__arrayOf_java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:50:14
@@ -1601,7 +1601,7 @@
  (block
   ;; (DefaultNotNullable.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:26:2
-  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f1__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
+  (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f1__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
   ;; (DefaultNotNullable.this.f2 = null);
   ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:27:2
   (struct.set $nullability.defaultnotnullable.DefaultNotNullable $f_f2__nullability_defaultnotnullable_DefaultNotNullable_(local.get $this) (ref.null $java.lang.String))
@@ -1662,21 +1662,21 @@
 
 ;;; Class<?> DefaultNotNullable.getClass()
 (func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable)
 
 ;;; Code for nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface [INTERFACE]
 (type $nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface.vtable (struct_subtype 
- (field $m_add__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_add__java_lang_Object__void (ref $function.m_add__java_lang_Object__void))
   data)
 )
 
@@ -1705,7 +1705,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface)
@@ -1719,12 +1719,12 @@
   $java.lang.Object)
 )
 (type $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_add__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
- (field $m_add__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_add__java_lang_String__void (ref $function.m_add__java_lang_String__void))
+ (field $m_add__java_lang_Object__void (ref $function.m_add__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -1767,7 +1767,7 @@
 
 ;;; void ImplementsParameterizedInterface.add(String s)
 (func $m_add__java_lang_String__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_add__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:59:16
@@ -1780,7 +1780,7 @@
 
 ;;; void ImplementsParameterizedInterface.add(Object arg0)
 (func $m_add__java_lang_Object__void@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_add__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ nullability/defaultnotnullable/DefaultNotNullable.java:57:8
@@ -1818,14 +1818,14 @@
 
 ;;; Class<?> ImplementsParameterizedInterface.getClass()
 (func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface))
  (local.set $this (ref.cast_static $nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface__java_lang_Class (ref.func $$getNullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnotnullable.DefaultNotNullable.ImplementsParameterizedInterface)
@@ -1850,13 +1850,13 @@
   $java.lang.Object)
 )
 (type $nullability.defaultnullable.DefaultNullable.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m3__arrayOf_java_lang_String__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
   $java.lang.Object.vtable)
 )
 
@@ -1897,7 +1897,7 @@
 
 ;;; String DefaultNullable.m1(String a, List<Double> b)
 (func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.defaultnullable.DefaultNullable
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.m_m1__java_lang_String__java_util_List__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -1908,14 +1908,14 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/defaultnullable/DefaultNullable.java:41:4
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.defaultnullable.DefaultNullable)
 
 ;;; String DefaultNullable.m2(String a, List<Double> b)
 (func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.defaultnullable.DefaultNullable
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.m_m2__java_lang_String__java_util_List__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -1933,7 +1933,7 @@
 
 ;;; void DefaultNullable.m3(String... args)
 (func $m_m3__arrayOf_java_lang_String__void@nullability.defaultnullable.DefaultNullable
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.m_m3__arrayOf_java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ nullability/defaultnullable/DefaultNullable.java:50:14
@@ -1951,7 +1951,7 @@
  (block
   ;; (DefaultNullable.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
   ;;@ nullability/defaultnullable/DefaultNullable.java:26:2
-  (struct.set $nullability.defaultnullable.DefaultNullable $f_f1__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
+  (struct.set $nullability.defaultnullable.DefaultNullable $f_f1__nullability_defaultnullable_DefaultNullable_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
   ;; (DefaultNullable.this.f2 = null);
   ;;@ nullability/defaultnullable/DefaultNullable.java:27:2
   (struct.set $nullability.defaultnullable.DefaultNullable $f_f2__nullability_defaultnullable_DefaultNullable_(local.get $this) (ref.null $java.lang.String))
@@ -2012,14 +2012,14 @@
 
 ;;; Class<?> DefaultNullable.getClass()
 (func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.defaultnullable.DefaultNullable))
  (local.set $this (ref.cast_static $nullability.defaultnullable.DefaultNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.defaultnullable.DefaultNullable();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.defaultnullable.DefaultNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.defaultnullable.DefaultNullable__java_lang_Class (ref.func $$getNullability.defaultnullable.DefaultNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.defaultnullable.DefaultNullable)
@@ -2044,13 +2044,13 @@
   $java.lang.Object)
 )
 (type $nullability.explicitnotnullable.ExplicitNotNullable.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String))
- (field $m_m3__arrayOf_java_lang_String__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m1__java_lang_String__java_util_List__java_lang_String (ref $function.m_m1__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m2__java_lang_String__java_util_List__java_lang_String (ref $function.m_m2__java_lang_String__java_util_List__java_lang_String))
+ (field $m_m3__arrayOf_java_lang_String__void (ref $function.m_m3__arrayOf_java_lang_String__void))
   $java.lang.Object.vtable)
 )
 
@@ -2091,7 +2091,7 @@
 
 ;;; String ExplicitNotNullable.m1(String a, List<Double> b)
 (func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.m_m1__java_lang_String__java_util_List__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -2102,14 +2102,14 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_||();
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:43:4
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_m1__java_lang_String__java_util_List__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable)
 
 ;;; String ExplicitNotNullable.m2(String a, List<Double> b)
 (func $m_m2__java_lang_String__java_util_List__java_lang_String@nullability.explicitnotnullable.ExplicitNotNullable
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Object__$java.lang.String)
+ (type $function.m_m2__java_lang_String__java_util_List__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.String))
  (param $b (ref null $java.lang.Object))
@@ -2127,7 +2127,7 @@
 
 ;;; void ExplicitNotNullable.m3(String... args)
 (func $m_m3__arrayOf_java_lang_String__void@nullability.explicitnotnullable.ExplicitNotNullable
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.m_m3__arrayOf_java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:52:14
@@ -2145,7 +2145,7 @@
  (block
   ;; (ExplicitNotNullable.this.f1 = javaemul.internal.StringPool.$getString_|Hello|());
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:28:2
-  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f1__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
+  (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f1__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (call $function.no.side.effects.$getString_|Hello|__java_lang_String (ref.func $$getString_|Hello|__java_lang_String@javaemul.internal.StringPool) ))
   ;; (ExplicitNotNullable.this.f2 = null);
   ;;@ nullability/explicitnotnullable/ExplicitNotNullable.java:29:2
   (struct.set $nullability.explicitnotnullable.ExplicitNotNullable $f_f2__nullability_explicitnotnullable_ExplicitNotNullable_(local.get $this) (ref.null $java.lang.String))
@@ -2206,14 +2206,14 @@
 
 ;;; Class<?> ExplicitNotNullable.getClass()
 (func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $nullability.explicitnotnullable.ExplicitNotNullable))
  (local.set $this (ref.cast_static $nullability.explicitnotnullable.ExplicitNotNullable (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getNullability.explicitnotnullable.ExplicitNotNullable();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getNullability.explicitnotnullable.ExplicitNotNullable__java_lang_Class (ref.func $$getNullability.explicitnotnullable.ExplicitNotNullable__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@nullability.explicitnotnullable.ExplicitNotNullable)

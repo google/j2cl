@@ -47,10 +47,10 @@
   $java.lang.Object)
 )
 (type $annotation.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -110,21 +110,21 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@annotation.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main))
  (local.set $this (ref.cast_static $annotation.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAnnotation.Main__java_lang_Class (ref.func $$getAnnotation.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main)
 
 ;;; Code for annotation.Main.Foo [INTERFACE]
 (type $annotation.Main.Foo.vtable (struct_subtype 
- (field $m_bar__int (ref $function.$java.lang.Object__$int))
+ (field $m_bar__int (ref $function.m_bar__int))
   data)
 )
 
@@ -153,7 +153,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Foo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAnnotation.Main.Foo__java_lang_Class (ref.func $$getAnnotation.Main.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Foo)
@@ -188,7 +188,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Zoo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAnnotation.Main.Zoo__java_lang_Class (ref.func $$getAnnotation.Main.Zoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Zoo)
@@ -202,11 +202,11 @@
   $java.lang.Object)
 )
 (type $annotation.Main.Bar.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_baz__int_$pp_annotation (ref $function.$java.lang.Object__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_baz__int_$pp_annotation (ref $function.m_baz__int_$pp_annotation))
   $java.lang.Object.vtable)
 )
 
@@ -249,7 +249,7 @@
 
 ;;; int Bar.baz()
 (func $m_baz__int_$pp_annotation@annotation.Main.Bar
- (type $function.$java.lang.Object__$int)
+ (type $function.m_baz__int_$pp_annotation)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ annotation/Main.java:32:8
@@ -294,14 +294,14 @@
 
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@annotation.Main.Bar
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $annotation.Main.Bar))
  (local.set $this (ref.cast_static $annotation.Main.Bar (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getAnnotation.Main.Bar();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getAnnotation.Main.Bar__java_lang_Class (ref.func $$getAnnotation.Main.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@annotation.Main.Bar)

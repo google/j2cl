@@ -60,11 +60,11 @@
   $java.lang.Object)
 )
 (type $interfaces.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testInterfaceMembers__void_$pp_interfaces (ref $function.m_testInterfaceMembers__void_$pp_interfaces))
   $java.lang.Object.vtable)
 )
 
@@ -102,7 +102,7 @@
 
 ;;; void Main.testInterfaceMembers()
 (func $m_testInterfaceMembers__void_$pp_interfaces@interfaces.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInterfaceMembers__void_$pp_interfaces)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ interfaces/Main.java:49:7
  (local $i (ref null $java.lang.Object))
@@ -156,22 +156,22 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@interfaces.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main))
  (local.set $this (ref.cast_static $interfaces.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfaces.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfaces.Main__java_lang_Class (ref.func $$getInterfaces.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfaces.Main)
 
 ;;; Code for interfaces.Main.Interface [INTERFACE]
 (type $interfaces.Main.Interface.vtable (struct_subtype 
- (field $m_defaultMethod__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_interfaceMethod__void (ref $function.$java.lang.Object__$void))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
   data)
 )
 
@@ -232,14 +232,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.Interface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfaces.Main.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfaces.Main.Interface__java_lang_Class (ref.func $$getInterfaces.Main.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfaces.Main.Interface)
 
 ;;; Code for interfaces.Main.SubInterface [INTERFACE]
 (type $interfaces.Main.SubInterface.vtable (struct_subtype 
- (field $m_defaultMethod__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
   data)
 )
 
@@ -284,7 +284,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.SubInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfaces.Main.SubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfaces.Main.SubInterface__java_lang_Class (ref.func $$getInterfaces.Main.SubInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfaces.Main.SubInterface)
@@ -298,13 +298,13 @@
   $java.lang.Object)
 )
 (type $interfaces.Main.Implementor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_interfaceMethod__void (ref $function.$java.lang.Object__$void))
- (field $m_defaultMethod__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_defaultMethod__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_interfaceMethod__void (ref $function.m_interfaceMethod__void))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
   $java.lang.Object.vtable)
 )
 
@@ -347,7 +347,7 @@
 
 ;;; void Implementor.interfaceMethod()
 (func $m_interfaceMethod__void@interfaces.Main.Implementor
- (type $function.$java.lang.Object__$void)
+ (type $function.m_interfaceMethod__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ interfaces/Main.java:43:16
  (local $this (ref null $interfaces.Main.Implementor))
@@ -359,7 +359,7 @@
 
 ;;; void Implementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.Implementor
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ interfaces/Main.java:41:8
@@ -375,7 +375,7 @@
 
 ;;; void Implementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.Implementor
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  ;;@ interfaces/Main.java:41:8
@@ -419,14 +419,14 @@
 
 ;;; Class<?> Implementor.getClass()
 (func $m_getClass__java_lang_Class@interfaces.Main.Implementor
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $interfaces.Main.Implementor))
  (local.set $this (ref.cast_static $interfaces.Main.Implementor (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getInterfaces.Main.Implementor();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getInterfaces.Main.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getInterfaces.Main.Implementor__java_lang_Class (ref.func $$getInterfaces.Main.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@interfaces.Main.Implementor)
@@ -440,12 +440,12 @@
   $java.lang.Object)
 )
 (type $interfaces.Main.AbstractImplementor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_defaultMethod__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_defaultMethod__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_defaultMethod__java_lang_Object__void (ref $function.m_defaultMethod__java_lang_Object__void))
+ (field $m_defaultMethod__java_lang_String__void (ref $function.m_defaultMethod__java_lang_String__void))
   $java.lang.Object.vtable)
 )
 
@@ -469,7 +469,7 @@
 
 ;;; void AbstractImplementor.defaultMethod(Object arg0)
 (func $m_defaultMethod__java_lang_Object__void@interfaces.Main.AbstractImplementor
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_defaultMethod__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ interfaces/Main.java:47:17
@@ -485,7 +485,7 @@
 
 ;;; void AbstractImplementor.defaultMethod(String arg0)
 (func $m_defaultMethod__java_lang_String__void@interfaces.Main.AbstractImplementor
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_defaultMethod__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  ;;@ interfaces/Main.java:47:17

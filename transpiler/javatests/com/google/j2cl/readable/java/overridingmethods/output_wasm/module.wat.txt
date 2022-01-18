@@ -43,7 +43,7 @@
 
 ;;; Code for overridingmethods.SomeInterface [INTERFACE]
 (type $overridingmethods.SomeInterface.vtable (struct_subtype 
- (field $m_bar__void (ref $function.$java.lang.Object__$void))
+ (field $m_bar__void (ref $function.m_bar__void))
   data)
 )
 
@@ -72,7 +72,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.SomeInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverridingmethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverridingmethods.SomeInterface__java_lang_Class (ref.func $$getOverridingmethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overridingmethods.SomeInterface)
@@ -85,11 +85,11 @@
   $java.lang.Object)
 )
 (type $overridingmethods.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__void (ref $function.m_fun__void))
   $java.lang.Object.vtable)
 )
 
@@ -127,7 +127,7 @@
 
 ;;; void Parent.fun()
 (func $m_fun__void@overridingmethods.Parent
- (type $function.$java.lang.Object__$void)
+ (type $function.m_fun__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ overridingmethods/Child.java:23:14
  (local $this (ref null $overridingmethods.Parent))
@@ -161,14 +161,14 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@overridingmethods.Parent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Parent))
  (local.set $this (ref.cast_static $overridingmethods.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Parent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverridingmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverridingmethods.Parent__java_lang_Class (ref.func $$getOverridingmethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overridingmethods.Parent)
@@ -181,12 +181,12 @@
   $overridingmethods.Parent)
 )
 (type $overridingmethods.Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__void (ref $function.$java.lang.Object__$void))
- (field $m_bar__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__void (ref $function.m_fun__void))
+ (field $m_bar__void (ref $function.m_bar__void))
   $overridingmethods.Parent.vtable)
 )
 
@@ -224,7 +224,7 @@
 
 ;;; void Child.fun()
 (func $m_fun__void@overridingmethods.Child
- (type $function.$java.lang.Object__$void)
+ (type $function.m_fun__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ overridingmethods/Child.java:28:14
  (local $this (ref null $overridingmethods.Child))
@@ -236,7 +236,7 @@
 
 ;;; void Child.bar()
 (func $m_bar__void@overridingmethods.Child
- (type $function.$java.lang.Object__$void)
+ (type $function.m_bar__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ overridingmethods/Child.java:31:14
  (local $this (ref null $overridingmethods.Child))
@@ -270,14 +270,14 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@overridingmethods.Child
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $overridingmethods.Child))
  (local.set $this (ref.cast_static $overridingmethods.Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getOverridingmethods.Child();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getOverridingmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getOverridingmethods.Child__java_lang_Class (ref.func $$getOverridingmethods.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@overridingmethods.Child)

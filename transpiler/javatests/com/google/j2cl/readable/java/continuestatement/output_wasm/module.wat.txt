@@ -24,11 +24,11 @@
   $java.lang.Object)
 )
 (type $continuestatement.ContinueStatement.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -66,7 +66,7 @@
 
 ;;; void ContinueStatement.test()
 (func $m_test__void@continuestatement.ContinueStatement
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ continuestatement/ContinueStatement.java:19:14
  (local $this (ref null $continuestatement.ContinueStatement))
@@ -115,14 +115,14 @@
 
 ;;; Class<?> ContinueStatement.getClass()
 (func $m_getClass__java_lang_Class@continuestatement.ContinueStatement
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $continuestatement.ContinueStatement))
  (local.set $this (ref.cast_static $continuestatement.ContinueStatement (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getContinuestatement.ContinueStatement();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getContinuestatement.ContinueStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getContinuestatement.ContinueStatement__java_lang_Class (ref.func $$getContinuestatement.ContinueStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@continuestatement.ContinueStatement)

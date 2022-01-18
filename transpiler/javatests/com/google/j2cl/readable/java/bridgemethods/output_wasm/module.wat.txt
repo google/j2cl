@@ -569,7 +569,7 @@
 
 ;;; Code for bridgemethods.I [INTERFACE]
 (type $bridgemethods.I.vtable (struct_subtype 
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -598,7 +598,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.I();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.I__java_lang_Class (ref.func $$getBridgemethods.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.I)
@@ -611,12 +611,12 @@
   $java.lang.Object)
 )
 (type $bridgemethods.A.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -654,7 +654,7 @@
 
 ;;; T A.fun(S s)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.A
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -671,7 +671,7 @@
 
 ;;; T A.get()
 (func $m_get__java_lang_Object@bridgemethods.A
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_get__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ bridgemethods/AccidentalOverride.java:27:11
@@ -709,14 +709,14 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.A
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.A))
  (local.set $this (ref.cast_static $bridgemethods.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.A__java_lang_Class (ref.func $$getBridgemethods.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.A)
@@ -729,13 +729,13 @@
   $bridgemethods.A)
 )
 (type $bridgemethods.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_fun__java_lang_String__java_lang_Integer (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Integer))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ (field $m_fun__java_lang_String__java_lang_Integer (ref $function.m_fun__java_lang_String__java_lang_Integer))
   $bridgemethods.A.vtable)
 )
 
@@ -773,7 +773,7 @@
 
 ;;; Integer B.fun(String s)
 (func $m_fun__java_lang_String__java_lang_Integer@bridgemethods.B
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Integer)
+ (type $function.m_fun__java_lang_String__java_lang_Integer)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (result (ref null $java.lang.Integer))
@@ -790,7 +790,7 @@
 
 ;;; Integer B.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.B
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -829,22 +829,22 @@
 
 ;;; Class<?> B.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.B
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.B))
  (local.set $this (ref.cast_static $bridgemethods.B (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.B();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.B__java_lang_Class (ref.func $$getBridgemethods.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.B)
 
 ;;; Code for bridgemethods.SpecializedInterface [INTERFACE]
 (type $bridgemethods.SpecializedInterface.vtable (struct_subtype 
- (field $m_fun__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
- (field $m_get__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_fun__java_lang_String__java_lang_String (ref $function.m_fun__java_lang_String__java_lang_String))
+ (field $m_get__java_lang_String (ref $function.m_get__java_lang_String))
   data)
 )
 
@@ -873,7 +873,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.SpecializedInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.SpecializedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.SpecializedInterface__java_lang_Class (ref.func $$getBridgemethods.SpecializedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.SpecializedInterface)
@@ -886,14 +886,14 @@
   $bridgemethods.A)
 )
 (type $bridgemethods.AccidentalOverride.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_fun__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_get__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_fun__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
- (field $m_get__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__java_lang_Object__java_lang_Object (ref $function.m_fun__java_lang_Object__java_lang_Object))
+ (field $m_get__java_lang_Object (ref $function.m_get__java_lang_Object))
+ (field $m_fun__java_lang_String__java_lang_String (ref $function.m_fun__java_lang_String__java_lang_String))
+ (field $m_get__java_lang_String (ref $function.m_get__java_lang_String))
   $bridgemethods.A.vtable)
 )
 
@@ -931,7 +931,7 @@
 
 ;;; String AccidentalOverride.fun(String arg0)
 (func $m_fun__java_lang_String__java_lang_String@bridgemethods.AccidentalOverride
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.String)
+ (type $function.m_fun__java_lang_String__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -948,7 +948,7 @@
 
 ;;; String AccidentalOverride.get()
 (func $m_get__java_lang_String@bridgemethods.AccidentalOverride
- (type $function.$java.lang.Object__$java.lang.String)
+ (type $function.m_get__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
  ;;@ bridgemethods/AccidentalOverride.java:48:6
@@ -964,7 +964,7 @@
 
 ;;; String AccidentalOverride.fun(Object arg0)
 (func $m_fun__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverride
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_fun__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1003,22 +1003,22 @@
 
 ;;; Class<?> AccidentalOverride.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverride
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.AccidentalOverride))
  (local.set $this (ref.cast_static $bridgemethods.AccidentalOverride (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.AccidentalOverride();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.AccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.AccidentalOverride__java_lang_Class (ref.func $$getBridgemethods.AccidentalOverride__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverride)
 
 ;;; Code for bridgemethods.SomeInterface [INTERFACE]
 (type $bridgemethods.SomeInterface.vtable (struct_subtype 
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Number__$void))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.m_foo__java_lang_Object__java_lang_Number__void))
   data)
 )
 
@@ -1047,7 +1047,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.SomeInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.SomeInterface__java_lang_Class (ref.func $$getBridgemethods.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.SomeInterface)
@@ -1060,11 +1060,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.SuperParent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -1102,7 +1102,7 @@
 
 ;;; void SuperParent.foo(T t, S s)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.SuperParent
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (param $s (ref null $java.lang.Object))
@@ -1138,14 +1138,14 @@
 
 ;;; Class<?> SuperParent.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.SuperParent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.SuperParent))
  (local.set $this (ref.cast_static $bridgemethods.SuperParent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.SuperParent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.SuperParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.SuperParent__java_lang_Class (ref.func $$getBridgemethods.SuperParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.SuperParent)
@@ -1158,14 +1158,14 @@
   $bridgemethods.SuperParent)
 )
 (type $bridgemethods.Parent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_foo__java_lang_Error__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Error__$java.lang.Number__$void))
- (field $m_bar__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Number__$void))
- (field $m_fun__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_foo__java_lang_Error__java_lang_Number__void (ref $function.m_foo__java_lang_Error__java_lang_Number__void))
+ (field $m_bar__java_lang_Number__void (ref $function.m_bar__java_lang_Number__void))
+ (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
   $bridgemethods.SuperParent.vtable)
 )
 
@@ -1203,7 +1203,7 @@
 
 ;;; void Parent.foo(T t, Number s)
 (func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.Parent
- (type $function.$java.lang.Object__$java.lang.Error__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_Error__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Error))
  (param $s (ref null $java.lang.Number))
@@ -1217,7 +1217,7 @@
 
 ;;; void Parent.bar(T t)
 (func $m_bar__java_lang_Number__void@bridgemethods.Parent
- (type $function.$java.lang.Object__$java.lang.Number__$void)
+ (type $function.m_bar__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
  ;;@ bridgemethods/BridgeMethod.java:37:33
@@ -1230,7 +1230,7 @@
 
 ;;; void Parent.fun(T t)
 (func $m_fun__java_lang_Object__void@bridgemethods.Parent
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_fun__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ bridgemethods/BridgeMethod.java:39:18
@@ -1243,7 +1243,7 @@
 
 ;;; void Parent.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.Parent
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1282,14 +1282,14 @@
 
 ;;; Class<?> Parent.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.Parent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.Parent))
  (local.set $this (ref.cast_static $bridgemethods.Parent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.Parent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.Parent__java_lang_Class (ref.func $$getBridgemethods.Parent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.Parent)
@@ -1302,17 +1302,17 @@
   $bridgemethods.Parent)
 )
 (type $bridgemethods.BridgeMethod.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_foo__java_lang_Error__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Error__$java.lang.Number__$void))
- (field $m_bar__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Number__$void))
- (field $m_fun__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_foo__java_lang_AssertionError__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.AssertionError__$java.lang.Number__$void))
- (field $m_fun__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Number__$void))
- (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Number__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_foo__java_lang_Error__java_lang_Number__void (ref $function.m_foo__java_lang_Error__java_lang_Number__void))
+ (field $m_bar__java_lang_Number__void (ref $function.m_bar__java_lang_Number__void))
+ (field $m_fun__java_lang_Object__void (ref $function.m_fun__java_lang_Object__void))
+ (field $m_foo__java_lang_AssertionError__java_lang_Number__void (ref $function.m_foo__java_lang_AssertionError__java_lang_Number__void))
+ (field $m_fun__java_lang_Number__void (ref $function.m_fun__java_lang_Number__void))
+ (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.m_foo__java_lang_Object__java_lang_Number__void))
   $bridgemethods.Parent.vtable)
 )
 
@@ -1350,7 +1350,7 @@
 
 ;;; void BridgeMethod.foo(AssertionError a, Number n)
 (func $m_foo__java_lang_AssertionError__java_lang_Number__void@bridgemethods.BridgeMethod
- (type $function.$java.lang.Object__$java.lang.AssertionError__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_AssertionError__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a (ref null $java.lang.AssertionError))
  (param $n (ref null $java.lang.Number))
@@ -1364,7 +1364,7 @@
 
 ;;; void BridgeMethod.bar(Number t)
 (func $m_bar__java_lang_Number__void@bridgemethods.BridgeMethod
- (type $function.$java.lang.Object__$java.lang.Number__$void)
+ (type $function.m_bar__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
  ;;@ bridgemethods/BridgeMethod.java:52:14
@@ -1377,7 +1377,7 @@
 
 ;;; void BridgeMethod.fun(Number t)
 (func $m_fun__java_lang_Number__void@bridgemethods.BridgeMethod
- (type $function.$java.lang.Object__$java.lang.Number__$void)
+ (type $function.m_fun__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Number))
  ;;@ bridgemethods/BridgeMethod.java:54:14
@@ -1390,7 +1390,7 @@
 
 ;;; void BridgeMethod.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.BridgeMethod
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
@@ -1407,7 +1407,7 @@
 
 ;;; void BridgeMethod.foo(Error arg0, Number arg1)
 (func $m_foo__java_lang_Error__java_lang_Number__void@bridgemethods.BridgeMethod
- (type $function.$java.lang.Object__$java.lang.Error__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_Error__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Error))
  (param $arg1 (ref null $java.lang.Number))
@@ -1446,21 +1446,21 @@
 
 ;;; Class<?> BridgeMethod.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.BridgeMethod
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.BridgeMethod))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethod (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethod();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethod__java_lang_Class (ref.func $$getBridgemethods.BridgeMethod__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethod)
 
 ;;; Code for bridgemethods.SomeOtherFooInterface [INTERFACE]
 (type $bridgemethods.SomeOtherFooInterface.vtable (struct_subtype 
- (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Double__$void))
+ (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.m_foo__java_lang_Object__java_lang_Double__void))
   data)
 )
 
@@ -1489,7 +1489,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.SomeOtherFooInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.SomeOtherFooInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.SomeOtherFooInterface__java_lang_Class (ref.func $$getBridgemethods.SomeOtherFooInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.SomeOtherFooInterface)
@@ -1502,15 +1502,15 @@
   $java.lang.Object)
 )
 (type $bridgemethods.DualUnrelatedBridges.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_String__java_lang_Double__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Double__$void))
- (field $m_foo__java_lang_String__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Number__$void))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Number__$void))
- (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Double__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_String__java_lang_Double__void (ref $function.m_foo__java_lang_String__java_lang_Double__void))
+ (field $m_foo__java_lang_String__java_lang_Number__void (ref $function.m_foo__java_lang_String__java_lang_Number__void))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.m_foo__java_lang_Object__java_lang_Number__void))
+ (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.m_foo__java_lang_Object__java_lang_Double__void))
   $java.lang.Object.vtable)
 )
 
@@ -1548,7 +1548,7 @@
 
 ;;; void DualUnrelatedBridges.foo(String s, Double n)
 (func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.DualUnrelatedBridges
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Double__$void)
+ (type $function.m_foo__java_lang_String__java_lang_Double__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Double))
@@ -1562,7 +1562,7 @@
 
 ;;; void DualUnrelatedBridges.foo(String s, Number n)
 (func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.DualUnrelatedBridges
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_String__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Number))
@@ -1576,7 +1576,7 @@
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedBridges
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1593,7 +1593,7 @@
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedBridges
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
@@ -1610,7 +1610,7 @@
 
 ;;; void DualUnrelatedBridges.foo(Object arg0, Double arg1)
 (func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedBridges
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Double__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Double__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Double))
@@ -1649,14 +1649,14 @@
 
 ;;; Class<?> DualUnrelatedBridges.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedBridges
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.DualUnrelatedBridges))
  (local.set $this (ref.cast_static $bridgemethods.DualUnrelatedBridges (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.DualUnrelatedBridges();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.DualUnrelatedBridges__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.DualUnrelatedBridges__java_lang_Class (ref.func $$getBridgemethods.DualUnrelatedBridges__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedBridges)
@@ -1669,12 +1669,12 @@
   $java.lang.Object)
 )
 (type $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_String__java_lang_Double__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Double__$void))
- (field $m_foo__java_lang_String__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Number__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_String__java_lang_Double__void (ref $function.m_foo__java_lang_String__java_lang_Double__void))
+ (field $m_foo__java_lang_String__java_lang_Number__void (ref $function.m_foo__java_lang_String__java_lang_Number__void))
   $java.lang.Object.vtable)
 )
 
@@ -1712,7 +1712,7 @@
 
 ;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Double n)
 (func $m_foo__java_lang_String__java_lang_Double__void@bridgemethods.SuperDualUnrelatedAccidentalBridges
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Double__$void)
+ (type $function.m_foo__java_lang_String__java_lang_Double__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Double))
@@ -1726,7 +1726,7 @@
 
 ;;; void SuperDualUnrelatedAccidentalBridges.foo(String s, Number n)
 (func $m_foo__java_lang_String__java_lang_Number__void@bridgemethods.SuperDualUnrelatedAccidentalBridges
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_String__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  (param $n (ref null $java.lang.Number))
@@ -1762,14 +1762,14 @@
 
 ;;; Class<?> SuperDualUnrelatedAccidentalBridges.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.SuperDualUnrelatedAccidentalBridges
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.SuperDualUnrelatedAccidentalBridges))
  (local.set $this (ref.cast_static $bridgemethods.SuperDualUnrelatedAccidentalBridges (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.SuperDualUnrelatedAccidentalBridges();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.SuperDualUnrelatedAccidentalBridges__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.SuperDualUnrelatedAccidentalBridges__java_lang_Class (ref.func $$getBridgemethods.SuperDualUnrelatedAccidentalBridges__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.SuperDualUnrelatedAccidentalBridges)
@@ -1782,15 +1782,15 @@
   $bridgemethods.SuperDualUnrelatedAccidentalBridges)
 )
 (type $bridgemethods.DualUnrelatedAccidentalBridges.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__java_lang_String__java_lang_Double__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Double__$void))
- (field $m_foo__java_lang_String__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.String__$java.lang.Number__$void))
- (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void))
- (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Number__$void))
- (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Double__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__java_lang_String__java_lang_Double__void (ref $function.m_foo__java_lang_String__java_lang_Double__void))
+ (field $m_foo__java_lang_String__java_lang_Number__void (ref $function.m_foo__java_lang_String__java_lang_Number__void))
+ (field $m_foo__java_lang_Object__java_lang_Object__void (ref $function.m_foo__java_lang_Object__java_lang_Object__void))
+ (field $m_foo__java_lang_Object__java_lang_Number__void (ref $function.m_foo__java_lang_Object__java_lang_Number__void))
+ (field $m_foo__java_lang_Object__java_lang_Double__void (ref $function.m_foo__java_lang_Object__java_lang_Double__void))
   $bridgemethods.SuperDualUnrelatedAccidentalBridges.vtable)
 )
 
@@ -1828,7 +1828,7 @@
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Object arg1)
 (func $m_foo__java_lang_Object__java_lang_Object__void@bridgemethods.DualUnrelatedAccidentalBridges
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1845,7 +1845,7 @@
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Number arg1)
 (func $m_foo__java_lang_Object__java_lang_Number__void@bridgemethods.DualUnrelatedAccidentalBridges
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Number__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Number__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Number))
@@ -1862,7 +1862,7 @@
 
 ;;; void DualUnrelatedAccidentalBridges.foo(Object arg0, Double arg1)
 (func $m_foo__java_lang_Object__java_lang_Double__void@bridgemethods.DualUnrelatedAccidentalBridges
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Double__$void)
+ (type $function.m_foo__java_lang_Object__java_lang_Double__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Double))
@@ -1901,21 +1901,21 @@
 
 ;;; Class<?> DualUnrelatedAccidentalBridges.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedAccidentalBridges
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.DualUnrelatedAccidentalBridges))
  (local.set $this (ref.cast_static $bridgemethods.DualUnrelatedAccidentalBridges (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.DualUnrelatedAccidentalBridges();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.DualUnrelatedAccidentalBridges__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.DualUnrelatedAccidentalBridges__java_lang_Class (ref.func $$getBridgemethods.DualUnrelatedAccidentalBridges__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.DualUnrelatedAccidentalBridges)
 
 ;;; Code for bridgemethods.Getter [INTERFACE]
 (type $bridgemethods.Getter.vtable (struct_subtype 
- (field $m_get__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
+ (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
   data)
 )
 
@@ -1944,7 +1944,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.Getter();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.Getter__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.Getter__java_lang_Class (ref.func $$getBridgemethods.Getter__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.Getter)
@@ -1957,11 +1957,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.ClassWithParameterizedGet.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__java_lang_Object__java_lang_Object (ref $function.m_get__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1999,7 +1999,7 @@
 
 ;;; T ClassWithParameterizedGet.get(T t)
 (func $m_get__java_lang_Object__java_lang_Object@bridgemethods.ClassWithParameterizedGet
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_get__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2038,14 +2038,14 @@
 
 ;;; Class<?> ClassWithParameterizedGet.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.ClassWithParameterizedGet
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.ClassWithParameterizedGet))
  (local.set $this (ref.cast_static $bridgemethods.ClassWithParameterizedGet (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.ClassWithParameterizedGet();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.ClassWithParameterizedGet__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.ClassWithParameterizedGet__java_lang_Class (ref.func $$getBridgemethods.ClassWithParameterizedGet__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.ClassWithParameterizedGet)
@@ -2058,13 +2058,13 @@
   $bridgemethods.ClassWithParameterizedGet)
 )
 (type $bridgemethods.AccidentalOverrideBridge.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
- (field $m_get__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__java_lang_Object__java_lang_Object (ref $function.m_get__java_lang_Object__java_lang_Object))
+ (field $m_test__void (ref $function.m_test__void))
+ (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
   $bridgemethods.ClassWithParameterizedGet.vtable)
 )
 
@@ -2102,7 +2102,7 @@
 
 ;;; void AccidentalOverrideBridge.test()
 (func $m_test__void@bridgemethods.AccidentalOverrideBridge
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ bridgemethods/BridgeMethod.java:98:14
  (local $g (ref null $java.lang.Object))
@@ -2114,14 +2114,14 @@
   (local.set $g (call $$create__bridgemethods_AccidentalOverrideBridge@bridgemethods.AccidentalOverrideBridge ))
   ;; g.get(javaemul.internal.StringPool.$getString_||());
   ;;@ bridgemethods/BridgeMethod.java:100:4
-  (drop (call_ref (local.get $g)(call $function.no.side.effects.__$java.lang.String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast_static $bridgemethods.Getter.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $g)) (i32.const 0))) )))
+  (drop (call_ref (local.get $g)(call $function.no.side.effects.$getString_||__java_lang_String (ref.func $$getString_||__java_lang_String@javaemul.internal.StringPool) )(struct.get $bridgemethods.Getter.vtable $m_get__java_lang_String__java_lang_String (ref.cast_static $bridgemethods.Getter.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $g)) (i32.const 0))) )))
  )
 )
 (elem declare func $m_test__void@bridgemethods.AccidentalOverrideBridge)
 
 ;;; String AccidentalOverrideBridge.get(String arg0)
 (func $m_get__java_lang_String__java_lang_String@bridgemethods.AccidentalOverrideBridge
- (type $function.$java.lang.Object__$java.lang.String__$java.lang.String)
+ (type $function.m_get__java_lang_String__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  (result (ref null $java.lang.String))
@@ -2138,7 +2138,7 @@
 
 ;;; String AccidentalOverrideBridge.get(Object arg0)
 (func $m_get__java_lang_Object__java_lang_Object@bridgemethods.AccidentalOverrideBridge
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_get__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2177,14 +2177,14 @@
 
 ;;; Class<?> AccidentalOverrideBridge.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverrideBridge
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.AccidentalOverrideBridge))
  (local.set $this (ref.cast_static $bridgemethods.AccidentalOverrideBridge (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.AccidentalOverrideBridge();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.AccidentalOverrideBridge__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.AccidentalOverrideBridge__java_lang_Class (ref.func $$getBridgemethods.AccidentalOverrideBridge__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.AccidentalOverrideBridge)
@@ -2197,10 +2197,10 @@
   $java.lang.Object)
 )
 (type $bridgemethods.TestCase10036.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -2260,21 +2260,21 @@
 
 ;;; Class<?> TestCase10036.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.TestCase10036
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.TestCase10036))
  (local.set $this (ref.cast_static $bridgemethods.TestCase10036 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase10036();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase10036__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase10036__java_lang_Class (ref.func $$getBridgemethods.TestCase10036__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase10036)
 
 ;;; Code for bridgemethods.TestCase10036.BI3 [INTERFACE]
 (type $bridgemethods.TestCase10036.BI3.vtable (struct_subtype 
- (field $m_get__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
+ (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
   data)
 )
 
@@ -2287,7 +2287,7 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_|BI3_get_String|();
   ;;@ bridgemethods/BridgeMethod.java:108:6
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|BI3_get_String|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|BI3_get_String|__java_lang_String (ref.func $$getString_|BI3_get_String|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_get__java_lang_String__java_lang_String@bridgemethods.TestCase10036.BI3)
@@ -2317,14 +2317,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase10036.BI3();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase10036.BI3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase10036.BI3__java_lang_Class (ref.func $$getBridgemethods.TestCase10036.BI3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase10036.BI3)
 
 ;;; Code for bridgemethods.TestCase10036.BI2 [INTERFACE]
 (type $bridgemethods.TestCase10036.BI2.vtable (struct_subtype 
- (field $m_get__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
+ (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
   data)
 )
 
@@ -2353,14 +2353,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase10036.BI2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase10036.BI2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase10036.BI2__java_lang_Class (ref.func $$getBridgemethods.TestCase10036.BI2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase10036.BI2)
 
 ;;; Code for bridgemethods.TestCase10036.BI1 [INTERFACE]
 (type $bridgemethods.TestCase10036.BI1.vtable (struct_subtype 
- (field $m_get__java_lang_String__java_lang_String (ref $function.$java.lang.Object__$java.lang.String__$java.lang.String))
+ (field $m_get__java_lang_String__java_lang_String (ref $function.m_get__java_lang_String__java_lang_String))
   data)
 )
 
@@ -2392,7 +2392,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase10036.BI1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase10036.BI1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase10036.BI1__java_lang_Class (ref.func $$getBridgemethods.TestCase10036.BI1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase10036.BI1)
@@ -2405,11 +2405,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.TestCase10036.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__java_lang_Comparable__java_lang_String (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__java_lang_Comparable__java_lang_String (ref $function.m_get__java_lang_Comparable__java_lang_String))
   $java.lang.Object.vtable)
 )
 
@@ -2460,10 +2460,10 @@
   $java.lang.Object)
 )
 (type $bridgemethods.TestCase102.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -2523,21 +2523,21 @@
 
 ;;; Class<?> TestCase102.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.TestCase102
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.TestCase102))
  (local.set $this (ref.cast_static $bridgemethods.TestCase102 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase102();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase102__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase102__java_lang_Class (ref.func $$getBridgemethods.TestCase102__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase102)
 
 ;;; Code for bridgemethods.TestCase102.BI2 [INTERFACE]
 (type $bridgemethods.TestCase102.BI2.vtable (struct_subtype 
- (field $m_set__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_set__java_lang_String__void (ref $function.m_set__java_lang_String__void))
   data)
 )
 
@@ -2566,14 +2566,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase102.BI2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase102.BI2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase102.BI2__java_lang_Class (ref.func $$getBridgemethods.TestCase102.BI2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase102.BI2)
 
 ;;; Code for bridgemethods.TestCase102.BI1 [INTERFACE]
 (type $bridgemethods.TestCase102.BI1.vtable (struct_subtype 
- (field $m_set__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_set__java_lang_String__void (ref $function.m_set__java_lang_String__void))
   data)
 )
 
@@ -2602,7 +2602,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase102.BI1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase102.BI1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase102.BI1__java_lang_Class (ref.func $$getBridgemethods.TestCase102.BI1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase102.BI1)
@@ -2615,11 +2615,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.TestCase102.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_set__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_set__java_lang_Object__void (ref $function.m_set__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -2668,12 +2668,12 @@
   $bridgemethods.TestCase102.B)
 )
 (type $bridgemethods.TestCase102.C.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_set__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_set__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_set__java_lang_Object__void (ref $function.m_set__java_lang_Object__void))
+ (field $m_set__java_lang_String__void (ref $function.m_set__java_lang_String__void))
   $bridgemethods.TestCase102.B.vtable)
 )
 
@@ -2716,7 +2716,7 @@
 
 ;;; void C.set(String value)
 (func $m_set__java_lang_String__void@bridgemethods.TestCase102.C
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_set__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.String))
  ;;@ bridgemethods/BridgeMethod.java:146:16
@@ -2729,7 +2729,7 @@
 
 ;;; void C.set(B1 value)
 (func $m_set__java_lang_Object__void@bridgemethods.TestCase102.C
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_set__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
  ;;@ bridgemethods/BridgeMethod.java:149:16
@@ -2764,14 +2764,14 @@
 
 ;;; Class<?> C.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.TestCase102.C
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.TestCase102.C))
  (local.set $this (ref.cast_static $bridgemethods.TestCase102.C (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.TestCase102.C();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.TestCase102.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.TestCase102.C__java_lang_Class (ref.func $$getBridgemethods.TestCase102.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.TestCase102.C)
@@ -2784,11 +2784,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.ParameterizedParent.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (ref $function.$java.lang.Object__$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (ref $function.m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods))
   $java.lang.Object.vtable)
 )
 
@@ -2826,7 +2826,7 @@
 
 ;;; Q ParameterizedParent.m(Q t)
 (func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ParameterizedParent
- (type $function.$java.lang.Object__$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent)
+ (type $function.m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $bridgemethods.ParameterizedParent))
  (result (ref null $bridgemethods.ParameterizedParent))
@@ -2865,14 +2865,14 @@
 
 ;;; Class<?> ParameterizedParent.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.ParameterizedParent
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.ParameterizedParent))
  (local.set $this (ref.cast_static $bridgemethods.ParameterizedParent (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.ParameterizedParent();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.ParameterizedParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.ParameterizedParent__java_lang_Class (ref.func $$getBridgemethods.ParameterizedParent__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.ParameterizedParent)
@@ -2885,12 +2885,12 @@
   $bridgemethods.ParameterizedParent)
 )
 (type $bridgemethods.ReparametrerizedChild.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (ref $function.$java.lang.Object__$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent))
- (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (ref $function.$java.lang.Object__$bridgemethods.ReparametrerizedChild__$bridgemethods.ReparametrerizedChild))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (ref $function.m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods))
+ (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (ref $function.m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods))
   $bridgemethods.ParameterizedParent.vtable)
 )
 
@@ -2928,7 +2928,7 @@
 
 ;;; S ReparametrerizedChild.m(S t)
 (func $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
- (type $function.$java.lang.Object__$bridgemethods.ReparametrerizedChild__$bridgemethods.ReparametrerizedChild)
+ (type $function.m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $bridgemethods.ReparametrerizedChild))
  (result (ref null $bridgemethods.ReparametrerizedChild))
@@ -2945,7 +2945,7 @@
 
 ;;; S ReparametrerizedChild.m(ParameterizedParent arg0)
 (func $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods@bridgemethods.ReparametrerizedChild
- (type $function.$java.lang.Object__$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent)
+ (type $function.m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $bridgemethods.ParameterizedParent))
  (result (ref null $bridgemethods.ParameterizedParent))
@@ -2984,14 +2984,14 @@
 
 ;;; Class<?> ReparametrerizedChild.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.ReparametrerizedChild
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.ReparametrerizedChild))
  (local.set $this (ref.cast_static $bridgemethods.ReparametrerizedChild (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.ReparametrerizedChild();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.ReparametrerizedChild__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.ReparametrerizedChild__java_lang_Class (ref.func $$getBridgemethods.ReparametrerizedChild__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.ReparametrerizedChild)
@@ -3004,12 +3004,12 @@
   $bridgemethods.ReparametrerizedChild)
 )
 (type $bridgemethods.LeafChild.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (ref $function.$java.lang.Object__$bridgemethods.ParameterizedParent__$bridgemethods.ParameterizedParent))
- (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (ref $function.$java.lang.Object__$bridgemethods.ReparametrerizedChild__$bridgemethods.ReparametrerizedChild))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods (ref $function.m_m__bridgemethods_ParameterizedParent__bridgemethods_ParameterizedParent_$pp_bridgemethods))
+ (field $m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods (ref $function.m_m__bridgemethods_ReparametrerizedChild__bridgemethods_ReparametrerizedChild_$pp_bridgemethods))
   $bridgemethods.ReparametrerizedChild.vtable)
 )
 
@@ -3069,14 +3069,14 @@
 
 ;;; Class<?> LeafChild.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.LeafChild
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.LeafChild))
  (local.set $this (ref.cast_static $bridgemethods.LeafChild (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.LeafChild();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.LeafChild__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.LeafChild__java_lang_Class (ref.func $$getBridgemethods.LeafChild__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.LeafChild)
@@ -3089,10 +3089,10 @@
   $java.lang.Object)
 )
 (type $bridgemethods.BridgeMethodDefault.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -3152,21 +3152,21 @@
 
 ;;; Class<?> BridgeMethodDefault.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.BridgeMethodDefault))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethodDefault (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodDefault();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodDefault__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodDefault__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault)
 
 ;;; Code for bridgemethods.BridgeMethodDefault.I [INTERFACE]
 (type $bridgemethods.BridgeMethodDefault.I.vtable (struct_subtype 
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
   data)
 )
 
@@ -3195,14 +3195,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodDefault.I();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodDefault.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodDefault.I__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodDefault.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.I)
 
 ;;; Code for bridgemethods.BridgeMethodDefault.II [INTERFACE]
 (type $bridgemethods.BridgeMethodDefault.II.vtable (struct_subtype 
- (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
   data)
 )
 
@@ -3241,7 +3241,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodDefault.II();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodDefault.II__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodDefault.II__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodDefault.II__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.II)
@@ -3254,12 +3254,12 @@
   $java.lang.Object)
 )
 (type $bridgemethods.BridgeMethodDefault.A.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
+ (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
   $java.lang.Object.vtable)
 )
 
@@ -3297,7 +3297,7 @@
 
 ;;; void A.m(Object arg0)
 (func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.A
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_m__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ bridgemethods/BridgeMethodDefault.java:30:15
@@ -3313,7 +3313,7 @@
 
 ;;; void A.m(String arg0)
 (func $m_m__java_lang_String__void@bridgemethods.BridgeMethodDefault.A
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_m__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.String))
  ;;@ bridgemethods/BridgeMethodDefault.java:30:15
@@ -3354,21 +3354,21 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.A
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.BridgeMethodDefault.A))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethodDefault.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodDefault.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodDefault.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodDefault.A__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodDefault.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.A)
 
 ;;; Code for bridgemethods.BridgeMethodDefault.JJ [INTERFACE]
 (type $bridgemethods.BridgeMethodDefault.JJ.vtable (struct_subtype 
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
   data)
 )
 
@@ -3407,7 +3407,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodDefault.JJ();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodDefault.JJ__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodDefault.JJ__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodDefault.JJ__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.JJ)
@@ -3420,11 +3420,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.BridgeMethodDefault.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -3462,7 +3462,7 @@
 
 ;;; void B.m(Object arg0)
 (func $m_m__java_lang_Object__void@bridgemethods.BridgeMethodDefault.B
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_m__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ bridgemethods/BridgeMethodDefault.java:38:15
@@ -3503,14 +3503,14 @@
 
 ;;; Class<?> B.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.B
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.BridgeMethodDefault.B))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethodDefault.B (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodDefault.B();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodDefault.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodDefault.B__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodDefault.B__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodDefault.B)
@@ -3523,10 +3523,10 @@
   $java.lang.Object)
 )
 (type $bridgemethods.BridgeMethodShadowedSignature.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -3586,21 +3586,21 @@
 
 ;;; Class<?> BridgeMethodShadowedSignature.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.BridgeMethodShadowedSignature))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethodShadowedSignature (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodShadowedSignature();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodShadowedSignature__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodShadowedSignature__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodShadowedSignature__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature)
 
 ;;; Code for bridgemethods.BridgeMethodShadowedSignature.I [INTERFACE]
 (type $bridgemethods.BridgeMethodShadowedSignature.I.vtable (struct_subtype 
- (field $m_get__java_util_function_Consumer__java_lang_String (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.String))
+ (field $m_get__java_util_function_Consumer__java_lang_String (ref $function.m_get__java_util_function_Consumer__java_lang_String))
   data)
 )
 
@@ -3629,7 +3629,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodShadowedSignature.I();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodShadowedSignature.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodShadowedSignature.I__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodShadowedSignature.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.I)
@@ -3642,11 +3642,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.BridgeMethodShadowedSignature.B.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__java_lang_Object__java_lang_String (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__java_lang_Object__java_lang_String (ref $function.m_get__java_lang_Object__java_lang_String))
   $java.lang.Object.vtable)
 )
 
@@ -3666,7 +3666,7 @@
 
 ;;; String B.get(B2 consumer)
 (func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.String)
+ (type $function.m_get__java_lang_Object__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $consumer (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
@@ -3676,7 +3676,7 @@
  (block
   ;; return javaemul.internal.StringPool.$getString_|B_get_B2|();
   ;;@ bridgemethods/BridgeMethodShadowedSignature.java:28:6
-  (return (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|B_get_B2|__java_lang_String@javaemul.internal.StringPool) ))
+  (return (call $function.no.side.effects.$getString_|B_get_B2|__java_lang_String (ref.func $$getString_|B_get_B2|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 (elem declare func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.B)
@@ -3711,12 +3711,12 @@
   $bridgemethods.BridgeMethodShadowedSignature.B)
 )
 (type $bridgemethods.BridgeMethodShadowedSignature.C.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_get__java_lang_Object__java_lang_String (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.String))
- (field $m_get__java_util_function_Consumer__java_lang_String (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.String))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_get__java_lang_Object__java_lang_String (ref $function.m_get__java_lang_Object__java_lang_String))
+ (field $m_get__java_util_function_Consumer__java_lang_String (ref $function.m_get__java_util_function_Consumer__java_lang_String))
   $bridgemethods.BridgeMethodShadowedSignature.B.vtable)
 )
 
@@ -3754,7 +3754,7 @@
 
 ;;; String C.get(Consumer<? super C1> arg0)
 (func $m_get__java_util_function_Consumer__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.String)
+ (type $function.m_get__java_util_function_Consumer__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
@@ -3771,7 +3771,7 @@
 
 ;;; String C.get(Object arg0)
 (func $m_get__java_lang_Object__java_lang_String@bridgemethods.BridgeMethodShadowedSignature.C
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.String)
+ (type $function.m_get__java_lang_Object__java_lang_String)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.String))
@@ -3810,21 +3810,21 @@
 
 ;;; Class<?> C.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.C
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.BridgeMethodShadowedSignature.C))
  (local.set $this (ref.cast_static $bridgemethods.BridgeMethodShadowedSignature.C (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.BridgeMethodShadowedSignature.C();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.BridgeMethodShadowedSignature.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.BridgeMethodShadowedSignature.C__java_lang_Class (ref.func $$getBridgemethods.BridgeMethodShadowedSignature.C__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.BridgeMethodShadowedSignature.C)
 
 ;;; Code for bridgemethods.Map [INTERFACE]
 (type $bridgemethods.Map.vtable (struct_subtype 
- (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_put__java_lang_Object__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -3853,7 +3853,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.Map();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.Map__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.Map__java_lang_Class (ref.func $$getBridgemethods.Map__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.Map)
@@ -3866,11 +3866,11 @@
   $java.lang.Object)
 )
 (type $bridgemethods.AbstractMap.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_put__java_lang_Object__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -3908,7 +3908,7 @@
 
 ;;; V AbstractMap.put(K key, V value)
 (func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.AbstractMap
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_put__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $key (ref null $java.lang.Object))
  (param $value (ref null $java.lang.Object))
@@ -3948,14 +3948,14 @@
 
 ;;; Class<?> AbstractMap.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.AbstractMap
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.AbstractMap))
  (local.set $this (ref.cast_static $bridgemethods.AbstractMap (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.AbstractMap();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.AbstractMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.AbstractMap__java_lang_Class (ref.func $$getBridgemethods.AbstractMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.AbstractMap)
@@ -3968,12 +3968,12 @@
   $bridgemethods.AbstractMap)
 )
 (type $bridgemethods.EnumMap.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
- (field $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Enum__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_put__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_put__java_lang_Object__java_lang_Object__java_lang_Object))
+ (field $m_put__java_lang_Enum__java_lang_Object__java_lang_Object (ref $function.m_put__java_lang_Enum__java_lang_Object__java_lang_Object))
   $bridgemethods.AbstractMap.vtable)
 )
 
@@ -4011,7 +4011,7 @@
 
 ;;; V EnumMap.put(K key, V value)
 (func $m_put__java_lang_Enum__java_lang_Object__java_lang_Object@bridgemethods.EnumMap
- (type $function.$java.lang.Object__$java.lang.Enum__$java.lang.Object__$java.lang.Object)
+ (type $function.m_put__java_lang_Enum__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $key (ref null $java.lang.Enum))
  (param $value (ref null $java.lang.Object))
@@ -4029,7 +4029,7 @@
 
 ;;; V EnumMap.put(Object arg0, Object arg1)
 (func $m_put__java_lang_Object__java_lang_Object__java_lang_Object@bridgemethods.EnumMap
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_put__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -4069,14 +4069,14 @@
 
 ;;; Class<?> EnumMap.getClass()
 (func $m_getClass__java_lang_Class@bridgemethods.EnumMap
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $bridgemethods.EnumMap))
  (local.set $this (ref.cast_static $bridgemethods.EnumMap (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getBridgemethods.EnumMap();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getBridgemethods.EnumMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getBridgemethods.EnumMap__java_lang_Class (ref.func $$getBridgemethods.EnumMap__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@bridgemethods.EnumMap)

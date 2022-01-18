@@ -52,11 +52,11 @@
   $java.lang.Object)
 )
 (type $jsmethod.JsMethodExample.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testMethod__java_util_ArrayList (ref $function.$java.lang.Object__$java.util.ArrayList))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testMethod__java_util_ArrayList (ref $function.m_testMethod__java_util_ArrayList))
   $java.lang.Object.vtable)
 )
 
@@ -107,13 +107,13 @@
   (call $$clinit__void@jsmethod.JsMethodExample )
   ;; jsmethod.JsMethodExample.log(javaemul.internal.StringPool.$getString_|test|());
   ;;@ jsmethod/JsMethodExample.java:30:4
-  (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|test|__java_lang_String@javaemul.internal.StringPool) ))
+  (call $m_log__java_lang_String__void@jsmethod.JsMethodExample (call $function.no.side.effects.$getString_|test|__java_lang_String (ref.func $$getString_|test|__java_lang_String@javaemul.internal.StringPool) ))
  )
 )
 
 ;;; T JsMethodExample.testMethod()
 (func $m_testMethod__java_util_ArrayList@jsmethod.JsMethodExample
- (type $function.$java.lang.Object__$java.util.ArrayList)
+ (type $function.m_testMethod__java_util_ArrayList)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.util.ArrayList))
  ;;@ jsmethod/JsMethodExample.java:41:48
@@ -149,14 +149,14 @@
 
 ;;; Class<?> JsMethodExample.getClass()
 (func $m_getClass__java_lang_Class@jsmethod.JsMethodExample
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethod.JsMethodExample))
  (local.set $this (ref.cast_static $jsmethod.JsMethodExample (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsmethod.JsMethodExample__java_lang_Class (ref.func $$getJsmethod.JsMethodExample__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample)
@@ -169,11 +169,11 @@
   $java.lang.Object)
 )
 (type $jsmethod.JsMethodExample.Base.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
   $java.lang.Object.vtable)
 )
 
@@ -193,7 +193,7 @@
 
 ;;; void Base.m(T t)
 (func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Base
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_m__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $t (ref null $java.lang.Object))
  ;;@ jsmethod/JsMethodExample.java:45:16
@@ -228,7 +228,7 @@
 
 ;;; Code for jsmethod.JsMethodExample.I [INTERFACE]
 (type $jsmethod.JsMethodExample.I.vtable (struct_subtype 
- (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
   data)
 )
 
@@ -257,7 +257,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample.I();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsmethod.JsMethodExample.I__java_lang_Class (ref.func $$getJsmethod.JsMethodExample.I__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.I)
@@ -270,12 +270,12 @@
   $jsmethod.JsMethodExample.Base)
 )
 (type $jsmethod.JsMethodExample.Sub.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_m__java_lang_Object__void (ref $function.$java.lang.Object__$java.lang.Object__$void))
- (field $m_m__java_lang_String__void (ref $function.$java.lang.Object__$java.lang.String__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_m__java_lang_Object__void (ref $function.m_m__java_lang_Object__void))
+ (field $m_m__java_lang_String__void (ref $function.m_m__java_lang_String__void))
   $jsmethod.JsMethodExample.Base.vtable)
 )
 
@@ -313,7 +313,7 @@
 
 ;;; void Sub.m(String s)
 (func $m_m__java_lang_String__void@jsmethod.JsMethodExample.Sub
- (type $function.$java.lang.Object__$java.lang.String__$void)
+ (type $function.m_m__java_lang_String__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $s (ref null $java.lang.String))
  ;;@ jsmethod/JsMethodExample.java:55:16
@@ -326,7 +326,7 @@
 
 ;;; void Sub.m(Object arg0)
 (func $m_m__java_lang_Object__void@jsmethod.JsMethodExample.Sub
- (type $function.$java.lang.Object__$java.lang.Object__$void)
+ (type $function.m_m__java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  ;;@ jsmethod/JsMethodExample.java:54:15
@@ -364,14 +364,14 @@
 
 ;;; Class<?> Sub.getClass()
 (func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsmethod.JsMethodExample.Sub))
  (local.set $this (ref.cast_static $jsmethod.JsMethodExample.Sub (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsmethod.JsMethodExample.Sub();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsmethod.JsMethodExample.Sub__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsmethod.JsMethodExample.Sub__java_lang_Class (ref.func $$getJsmethod.JsMethodExample.Sub__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsmethod.JsMethodExample.Sub)

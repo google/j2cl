@@ -80,11 +80,11 @@
   $java.lang.Object)
 )
 (type $jsbridgeaccidentaloverride.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__void (ref $function.m_test__void))
   $java.lang.Object.vtable)
 )
 
@@ -122,7 +122,7 @@
 
 ;;; void Main.test()
 (func $m_test__void@jsbridgeaccidentaloverride.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_test__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsbridgeaccidentaloverride/Main.java:19:14
  (local $a (ref null $jsbridgeaccidentaloverride.MyJsType))
@@ -199,21 +199,21 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.Main))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgeaccidentaloverride.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgeaccidentaloverride.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.Main__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.Main)
 
 ;;; Code for jsbridgeaccidentaloverride.OtherInterface [INTERFACE]
 (type $jsbridgeaccidentaloverride.OtherInterface.vtable (struct_subtype 
- (field $m_fun__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
   data)
 )
 
@@ -242,7 +242,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgeaccidentaloverride.OtherInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgeaccidentaloverride.OtherInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.OtherInterface__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.OtherInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.OtherInterface)
@@ -255,13 +255,13 @@
   $java.lang.Object)
 )
 (type $jsbridgeaccidentaloverride.MyJsType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
- (field $m_bar__int__int (ref $function.$java.lang.Object__$int__$int))
- (field $m_fun__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
+ (field $m_bar__int__int (ref $function.m_bar__int__int))
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
   $java.lang.Object.vtable)
 )
 
@@ -299,7 +299,7 @@
 
 ;;; int MyJsType.foo(int a)
 (func $m_foo__int__int@jsbridgeaccidentaloverride.MyJsType
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_foo__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -316,7 +316,7 @@
 
 ;;; int MyJsType.bar(int a)
 (func $m_bar__int__int@jsbridgeaccidentaloverride.MyJsType
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_bar__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -333,7 +333,7 @@
 
 ;;; int MyJsType.fun(int a)
 (func $m_fun__int__int@jsbridgeaccidentaloverride.MyJsType
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_fun__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -372,22 +372,22 @@
 
 ;;; Class<?> MyJsType.getClass()
 (func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.MyJsType
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.MyJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.MyJsType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgeaccidentaloverride.MyJsType();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgeaccidentaloverride.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.MyJsType__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.MyJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.MyJsType)
 
 ;;; Code for jsbridgeaccidentaloverride.MyInterface [INTERFACE]
 (type $jsbridgeaccidentaloverride.MyInterface.vtable (struct_subtype 
- (field $m_bar__int__int (ref $function.$java.lang.Object__$int__$int))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_bar__int__int (ref $function.m_bar__int__int))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   data)
 )
 
@@ -416,7 +416,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgeaccidentaloverride.MyInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgeaccidentaloverride.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.MyInterface__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.MyInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.MyInterface)
@@ -429,13 +429,13 @@
   $jsbridgeaccidentaloverride.MyJsType)
 )
 (type $jsbridgeaccidentaloverride.SubJsType.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
- (field $m_bar__int__int (ref $function.$java.lang.Object__$int__$int))
- (field $m_fun__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
+ (field $m_bar__int__int (ref $function.m_bar__int__int))
+ (field $m_fun__int__int (ref $function.m_fun__int__int))
   $jsbridgeaccidentaloverride.MyJsType.vtable)
 )
 
@@ -473,7 +473,7 @@
 
 ;;; int SubJsType.bar(int a)
 (func $m_bar__int__int@jsbridgeaccidentaloverride.SubJsType
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_bar__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -512,14 +512,14 @@
 
 ;;; Class<?> SubJsType.getClass()
 (func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.SubJsType
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgeaccidentaloverride.SubJsType))
  (local.set $this (ref.cast_static $jsbridgeaccidentaloverride.SubJsType (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgeaccidentaloverride.SubJsType();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgeaccidentaloverride.SubJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgeaccidentaloverride.SubJsType__java_lang_Class (ref.func $$getJsbridgeaccidentaloverride.SubJsType__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgeaccidentaloverride.SubJsType)

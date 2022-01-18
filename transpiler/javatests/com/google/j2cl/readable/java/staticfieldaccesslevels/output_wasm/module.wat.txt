@@ -28,11 +28,11 @@
   $java.lang.Object)
 )
 (type $staticfieldaccesslevels.StaticFieldAccessLevels.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__int (ref $function.$java.lang.Object__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__int (ref $function.m_test__int))
   $java.lang.Object.vtable)
 )
 
@@ -70,7 +70,7 @@
 
 ;;; int StaticFieldAccessLevels.test()
 (func $m_test__int@staticfieldaccesslevels.StaticFieldAccessLevels
- (type $function.$java.lang.Object__$int)
+ (type $function.m_test__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ staticfieldaccesslevels/StaticFieldAccessLevels.java:24:13
@@ -108,14 +108,14 @@
 
 ;;; Class<?> StaticFieldAccessLevels.getClass()
 (func $m_getClass__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $staticfieldaccesslevels.StaticFieldAccessLevels))
  (local.set $this (ref.cast_static $staticfieldaccesslevels.StaticFieldAccessLevels (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getStaticfieldaccesslevels.StaticFieldAccessLevels();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getStaticfieldaccesslevels.StaticFieldAccessLevels__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getStaticfieldaccesslevels.StaticFieldAccessLevels__java_lang_Class (ref.func $$getStaticfieldaccesslevels.StaticFieldAccessLevels__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@staticfieldaccesslevels.StaticFieldAccessLevels)

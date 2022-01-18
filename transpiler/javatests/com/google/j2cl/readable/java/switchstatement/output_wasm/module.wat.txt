@@ -57,15 +57,15 @@
   $java.lang.Enum)
 )
 (type $switchstatement.Numbers.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_name__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
- (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ (field $m_ordinal__int (ref $function.m_ordinal__int))
+ (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
   $java.lang.Enum.vtable)
 )
 
@@ -169,23 +169,23 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (switchstatement.Numbers.ONE = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|ONE|(),0));
   ;;@ switchstatement/SwitchStatement.java:19:2
-  (global.set $f_ONE__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_ONE__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.$getString_|ONE|__java_lang_String (ref.func $$getString_|ONE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
   ;; (switchstatement.Numbers.TWO = switchstatement.Numbers.$create(javaemul.internal.StringPool.$getString_|TWO|(),1));
   ;;@ switchstatement/SwitchStatement.java:20:2
-  (global.set $f_TWO__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
+  (global.set $f_TWO__switchstatement_Numbers (call $$create__java_lang_String__int__switchstatement_Numbers@switchstatement.Numbers (call $function.no.side.effects.$getString_|TWO|__java_lang_String (ref.func $$getString_|TWO|__java_lang_String@javaemul.internal.StringPool) )(i32.const 1)))
  )
 )
 
 ;;; Class<?> Numbers.getClass()
 (func $m_getClass__java_lang_Class@switchstatement.Numbers
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.Numbers))
  (local.set $this (ref.cast_static $switchstatement.Numbers (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.Numbers();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSwitchstatement.Numbers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getSwitchstatement.Numbers__java_lang_Class (ref.func $$getSwitchstatement.Numbers__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@switchstatement.Numbers)
@@ -198,11 +198,11 @@
   $java.lang.Object)
 )
 (type $switchstatement.SwitchStatement.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_main__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
 
@@ -240,7 +240,7 @@
 
 ;;; void SwitchStatement.main()
 (func $m_main__void@switchstatement.SwitchStatement
- (type $function.$java.lang.Object__$void)
+ (type $function.m_main__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ switchstatement/SwitchStatement.java:24:14
  (local $$expression (ref null $java.lang.Object))
@@ -255,15 +255,15 @@
    (block
     ;; T $expression = javaemul.internal.InternalPreconditions.checkNotNull(javaemul.internal.StringPool.$getString_|one|());
     ;;@ switchstatement/SwitchStatement.java:26:4
-    (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
+    (local.set $$expression (call $m_checkNotNull__java_lang_Object__java_lang_Object@javaemul.internal.InternalPreconditions (call $function.no.side.effects.$getString_|one|__java_lang_String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
     ;; switch ($expression) {
     ;;@ switchstatement/SwitchStatement.java:26:4
     (block
      (block
       (block
        (block ;; evaluate expression and jump
-        (br_if 0 (ref.eq (local.get $$expression) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
-        (br_if 1 (ref.eq (local.get $$expression) (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|two|__java_lang_String@javaemul.internal.StringPool) )))
+        (br_if 0 (ref.eq (local.get $$expression) (call $function.no.side.effects.$getString_|one|__java_lang_String (ref.func $$getString_|one|__java_lang_String@javaemul.internal.StringPool) )))
+        (br_if 1 (ref.eq (local.get $$expression) (call $function.no.side.effects.$getString_|two|__java_lang_String (ref.func $$getString_|two|__java_lang_String@javaemul.internal.StringPool) )))
         (br 2)
        )
        ;; case javaemul.internal.StringPool.$getString_|one|():
@@ -459,14 +459,14 @@
 
 ;;; Class<?> SwitchStatement.getClass()
 (func $m_getClass__java_lang_Class@switchstatement.SwitchStatement
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $switchstatement.SwitchStatement))
  (local.set $this (ref.cast_static $switchstatement.SwitchStatement (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getSwitchstatement.SwitchStatement();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getSwitchstatement.SwitchStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getSwitchstatement.SwitchStatement__java_lang_Class (ref.func $$getSwitchstatement.SwitchStatement__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@switchstatement.SwitchStatement)

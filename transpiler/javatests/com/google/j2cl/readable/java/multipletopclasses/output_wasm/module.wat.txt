@@ -40,10 +40,10 @@
   $java.lang.Object)
 )
 (type $multipletopclasses.AnotherClass.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -103,14 +103,14 @@
 
 ;;; Class<?> AnotherClass.getClass()
 (func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.AnotherClass))
  (local.set $this (ref.cast_static $multipletopclasses.AnotherClass (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMultipletopclasses.AnotherClass();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMultipletopclasses.AnotherClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMultipletopclasses.AnotherClass__java_lang_Class (ref.func $$getMultipletopclasses.AnotherClass__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@multipletopclasses.AnotherClass)
@@ -123,10 +123,10 @@
   $multipletopclasses.AnotherClass)
 )
 (type $multipletopclasses.MultipleTopClasses.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $multipletopclasses.AnotherClass.vtable)
 )
 
@@ -186,14 +186,14 @@
 
 ;;; Class<?> MultipleTopClasses.getClass()
 (func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $multipletopclasses.MultipleTopClasses))
  (local.set $this (ref.cast_static $multipletopclasses.MultipleTopClasses (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMultipletopclasses.MultipleTopClasses();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMultipletopclasses.MultipleTopClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMultipletopclasses.MultipleTopClasses__java_lang_Class (ref.func $$getMultipletopclasses.MultipleTopClasses__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@multipletopclasses.MultipleTopClasses)

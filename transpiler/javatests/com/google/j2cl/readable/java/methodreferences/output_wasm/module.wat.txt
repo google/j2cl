@@ -511,14 +511,14 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_isA__java_lang_Boolean (ref $function.$java.lang.Object__$java.lang.Boolean))
- (field $m_self__java_lang_Object_$pp_methodreferences (ref $function.$java.lang.Object__$java.lang.Object))
- (field $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref $function.$java.lang.Object__$java.lang.Number__$java.lang.Boolean))
- (field $m_main__void_$pp_methodreferences (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_isA__java_lang_Boolean (ref $function.m_isA__java_lang_Boolean))
+ (field $m_self__java_lang_Object_$pp_methodreferences (ref $function.m_self__java_lang_Object_$pp_methodreferences))
+ (field $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences (ref $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences))
+ (field $m_main__void_$pp_methodreferences (ref $function.m_main__void_$pp_methodreferences))
   $java.lang.Object.vtable)
 )
 
@@ -570,7 +570,7 @@
 
 ;;; Boolean MethodReferences.isA()
 (func $m_isA__java_lang_Boolean@methodreferences.MethodReferences
- (type $function.$java.lang.Object__$java.lang.Boolean)
+ (type $function.m_isA__java_lang_Boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Boolean))
  ;;@ methodreferences/MethodReferences.java:68:17
@@ -586,7 +586,7 @@
 
 ;;; Object MethodReferences.self()
 (func $m_self__java_lang_Object_$pp_methodreferences@methodreferences.MethodReferences
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_self__java_lang_Object_$pp_methodreferences)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:72:9
@@ -602,7 +602,7 @@
 
 ;;; Boolean MethodReferences.sameAs(Number n)
 (func $m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences@methodreferences.MethodReferences
- (type $function.$java.lang.Object__$java.lang.Number__$java.lang.Boolean)
+ (type $function.m_sameAs__java_lang_Number__java_lang_Boolean_$pp_methodreferences)
  (param $this.untyped (ref null $java.lang.Object))
  (param $n (ref null $java.lang.Number))
  (result (ref null $java.lang.Boolean))
@@ -619,7 +619,7 @@
 
 ;;; void MethodReferences.main()
 (func $m_main__void_$pp_methodreferences@methodreferences.MethodReferences
- (type $function.$java.lang.Object__$void)
+ (type $function.m_main__void_$pp_methodreferences)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:82:7
  (local $objectFactory (ref null $java.lang.Object))
@@ -747,21 +747,21 @@
 
 ;;; Class<?> MethodReferences.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences__java_lang_Class (ref.func $$getMethodreferences.MethodReferences__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences)
 
 ;;; Code for methodreferences.MethodReferences.Producer [INTERFACE]
 (type $methodreferences.MethodReferences.Producer.vtable (struct_subtype 
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   data)
 )
 
@@ -790,14 +790,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.Producer();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.Producer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.Producer__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.Producer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.Producer)
 
 ;;; Code for methodreferences.MethodReferences.Predicate [INTERFACE]
 (type $methodreferences.MethodReferences.Predicate.vtable (struct_subtype 
- (field $m_apply__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_apply__java_lang_Object__boolean (ref $function.m_apply__java_lang_Object__boolean))
   data)
 )
 
@@ -826,14 +826,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.Predicate();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.Predicate__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.Predicate__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.Predicate__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.Predicate)
 
 ;;; Code for methodreferences.MethodReferences.ArrayProducer [INTERFACE]
 (type $methodreferences.MethodReferences.ArrayProducer.vtable (struct_subtype 
- (field $m_produce__int__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject))
+ (field $m_produce__int__arrayOf_java_lang_Object (ref $function.m_produce__int__arrayOf_java_lang_Object))
   data)
 )
 
@@ -862,7 +862,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.ArrayProducer();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.ArrayProducer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.ArrayProducer__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.ArrayProducer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.ArrayProducer)
@@ -876,11 +876,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.ObjectCapturingOuter.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (ref $function.$java.lang.Object__$methodreferences.MethodReferences))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getMain__methodreferences_MethodReferences_$pp_methodreferences (ref $function.m_getMain__methodreferences_MethodReferences_$pp_methodreferences))
   $java.lang.Object.vtable)
 )
 
@@ -923,7 +923,7 @@
 
 ;;; MethodReferences<T> ObjectCapturingOuter.getMain()
 (func $m_getMain__methodreferences_MethodReferences_$pp_methodreferences@methodreferences.MethodReferences.ObjectCapturingOuter
- (type $function.$java.lang.Object__$methodreferences.MethodReferences)
+ (type $function.m_getMain__methodreferences_MethodReferences_$pp_methodreferences)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $methodreferences.MethodReferences))
  ;;@ methodreferences/MethodReferences.java:36:24
@@ -961,21 +961,21 @@
 
 ;;; Class<?> ObjectCapturingOuter.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.ObjectCapturingOuter
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.ObjectCapturingOuter))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.ObjectCapturingOuter (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.ObjectCapturingOuter();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.ObjectCapturingOuter__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.ObjectCapturingOuter__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.ObjectCapturingOuter__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.ObjectCapturingOuter)
 
 ;;; Code for methodreferences.MethodReferences.Function [INTERFACE]
 (type $methodreferences.MethodReferences.Function.vtable (struct_subtype 
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -1004,14 +1004,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.Function();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.Function__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.Function__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.Function__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.Function)
 
 ;;; Code for methodreferences.MethodReferences.BiFunction [INTERFACE]
 (type $methodreferences.MethodReferences.BiFunction.vtable (struct_subtype 
- (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -1040,14 +1040,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.BiFunction();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.BiFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.BiFunction__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.BiFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.BiFunction)
 
 ;;; Code for methodreferences.MethodReferences.JsProducer [INTERFACE]
 (type $methodreferences.MethodReferences.JsProducer.vtable (struct_subtype 
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   data)
 )
 
@@ -1076,14 +1076,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.JsProducer();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.JsProducer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.JsProducer__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.JsProducer__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.JsProducer)
 
 ;;; Code for methodreferences.MethodReferences.JsFunctionInterface [INTERFACE]
 (type $methodreferences.MethodReferences.JsFunctionInterface.vtable (struct_subtype 
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -1112,14 +1112,14 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.JsFunctionInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.JsFunctionInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.JsFunctionInterface__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.JsFunctionInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.JsFunctionInterface)
 
 ;;; Code for methodreferences.MethodReferences.JsBiFunction [INTERFACE]
 (type $methodreferences.MethodReferences.JsBiFunction.vtable (struct_subtype 
- (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
   data)
 )
 
@@ -1148,7 +1148,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.JsBiFunction();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.JsBiFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.JsBiFunction__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.JsBiFunction__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.JsBiFunction)
@@ -1162,11 +1162,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1209,7 +1209,7 @@
 
 ;;; T $LambdaImplementor$1.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$1
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:76:49
@@ -1247,14 +1247,14 @@
 
 ;;; Class<?> $LambdaImplementor$1.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$1))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$1__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$1)
@@ -1267,11 +1267,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1309,7 +1309,7 @@
 
 ;;; T $LambdaImplementor$2.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$2
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:83:37
@@ -1347,14 +1347,14 @@
 
 ;;; Class<?> $LambdaImplementor$2.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$2
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$2))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$2 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$2();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$2__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$2)
@@ -1367,11 +1367,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$3.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1409,7 +1409,7 @@
 
 ;;; T $LambdaImplementor$3.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$3
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:85:20
@@ -1447,14 +1447,14 @@
 
 ;;; Class<?> $LambdaImplementor$3.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$3
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$3))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$3 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$3();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$3__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$3__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$3)
@@ -1468,11 +1468,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$4.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1515,7 +1515,7 @@
 
 ;;; T $LambdaImplementor$4.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$4
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:88:20
@@ -1553,14 +1553,14 @@
 
 ;;; Class<?> $LambdaImplementor$4.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$4
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$4))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$4 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$4();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$4__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$4__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$4__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$4)
@@ -1573,11 +1573,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$5.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1615,7 +1615,7 @@
 
 ;;; V $LambdaImplementor$5.apply(T arg0, U arg1)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$5
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -1663,14 +1663,14 @@
 
 ;;; Class<?> $LambdaImplementor$5.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$5
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$5))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$5 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$5();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$5__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$5__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$5__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$5)
@@ -1684,11 +1684,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$6.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1731,7 +1731,7 @@
 
 ;;; U $LambdaImplementor$6.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$6
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -1774,14 +1774,14 @@
 
 ;;; Class<?> $LambdaImplementor$6.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$6
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$6))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$6 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$6();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$6__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$6__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$6__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$6)
@@ -1794,11 +1794,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$7.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__boolean (ref $function.m_apply__java_lang_Object__boolean))
   $java.lang.Object.vtable)
 )
 
@@ -1836,7 +1836,7 @@
 
 ;;; boolean $LambdaImplementor$7.apply(T arg0)
 (func $m_apply__java_lang_Object__boolean@methodreferences.MethodReferences.$LambdaImplementor$7
- (type $function.$java.lang.Object__$java.lang.Object__$boolean)
+ (type $function.m_apply__java_lang_Object__boolean)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result i32)
@@ -1883,14 +1883,14 @@
 
 ;;; Class<?> $LambdaImplementor$7.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$7
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$7))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$7 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$7();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$7__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$7__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$7__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$7)
@@ -1904,11 +1904,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$8.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -1951,7 +1951,7 @@
 
 ;;; T $LambdaImplementor$8.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$8
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:97:66
@@ -1989,14 +1989,14 @@
 
 ;;; Class<?> $LambdaImplementor$8.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$8
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$8))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$8 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$8();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$8__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$8__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$8__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$8)
@@ -2009,11 +2009,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$9.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__int__arrayOf_java_lang_Object (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__int__arrayOf_java_lang_Object (ref $function.m_produce__int__arrayOf_java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2051,7 +2051,7 @@
 
 ;;; T[] $LambdaImplementor$9.produce(int arg0)
 (func $m_produce__int__arrayOf_java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$9
- (type $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject)
+ (type $function.m_produce__int__arrayOf_java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 i32)
  (result (ref null $javaemul.internal.WasmArray.OfObject))
@@ -2090,14 +2090,14 @@
 
 ;;; Class<?> $LambdaImplementor$9.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$9
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$9))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$9 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$9();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$9__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$9__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$9__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$9)
@@ -2111,11 +2111,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$10.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2158,7 +2158,7 @@
 
 ;;; T $LambdaImplementor$10.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$10
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:101:20
@@ -2196,14 +2196,14 @@
 
 ;;; Class<?> $LambdaImplementor$10.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$10
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$10))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$10 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$10();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$10__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$10__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$10__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$10)
@@ -2216,11 +2216,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$11.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2258,7 +2258,7 @@
 
 ;;; U $LambdaImplementor$11.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$11
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2301,14 +2301,14 @@
 
 ;;; Class<?> $LambdaImplementor$11.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$11
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$11))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$11 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$11();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$11__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$11__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$11__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$11)
@@ -2321,11 +2321,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$12.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2363,7 +2363,7 @@
 
 ;;; U $LambdaImplementor$12.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$12
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2406,14 +2406,14 @@
 
 ;;; Class<?> $LambdaImplementor$12.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$12
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$12))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$12 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$12();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$12__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$12__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$12__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$12)
@@ -2427,11 +2427,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$13.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2474,7 +2474,7 @@
 
 ;;; T $LambdaImplementor$13.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$13
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:107:45
@@ -2512,14 +2512,14 @@
 
 ;;; Class<?> $LambdaImplementor$13.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$13
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$13))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$13 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$13();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$13__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$13__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$13__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$13)
@@ -2532,11 +2532,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$14.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2574,7 +2574,7 @@
 
 ;;; T $LambdaImplementor$14.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$14
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:109:41
@@ -2612,14 +2612,14 @@
 
 ;;; Class<?> $LambdaImplementor$14.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$14
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$14))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$14 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$14();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$14__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$14__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$14__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$14)
@@ -2632,11 +2632,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$15.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2674,7 +2674,7 @@
 
 ;;; T $LambdaImplementor$15.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$15
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:110:22
@@ -2712,14 +2712,14 @@
 
 ;;; Class<?> $LambdaImplementor$15.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$15
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$15))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$15 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$15();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$15__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$15__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$15__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$15)
@@ -2733,11 +2733,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$16.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2780,7 +2780,7 @@
 
 ;;; T $LambdaImplementor$16.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$16
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:112:22
@@ -2818,14 +2818,14 @@
 
 ;;; Class<?> $LambdaImplementor$16.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$16
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$16))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$16 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$16();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$16__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$16__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$16__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$16)
@@ -2838,11 +2838,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$17.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2880,7 +2880,7 @@
 
 ;;; U $LambdaImplementor$17.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$17
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -2923,14 +2923,14 @@
 
 ;;; Class<?> $LambdaImplementor$17.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$17
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$17))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$17 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$17();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$17__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$17__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$17__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$17)
@@ -2943,11 +2943,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$18.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -2985,7 +2985,7 @@
 
 ;;; U $LambdaImplementor$18.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$18
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -3028,14 +3028,14 @@
 
 ;;; Class<?> $LambdaImplementor$18.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$18
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$18))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$18 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$18();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$18__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$18__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$18__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$18)
@@ -3049,11 +3049,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$19.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_produce__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_produce__java_lang_Object (ref $function.m_produce__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -3096,7 +3096,7 @@
 
 ;;; T $LambdaImplementor$19.produce()
 (func $m_produce__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$19
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_produce__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ methodreferences/MethodReferences.java:118:49
@@ -3134,14 +3134,14 @@
 
 ;;; Class<?> $LambdaImplementor$19.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$19
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$19))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$19 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$19();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$19__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$19__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$19__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$19)
@@ -3154,11 +3154,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$20.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -3196,7 +3196,7 @@
 
 ;;; V $LambdaImplementor$20.apply(T arg0, U arg1)
 (func $m_apply__java_lang_Object__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$20
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (param $arg1 (ref null $java.lang.Object))
@@ -3244,14 +3244,14 @@
 
 ;;; Class<?> $LambdaImplementor$20.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$20
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$20))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$20 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$20();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$20__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$20__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$20__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$20)
@@ -3265,11 +3265,11 @@
   $java.lang.Object)
 )
 (type $methodreferences.MethodReferences.$LambdaImplementor$21.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -3312,7 +3312,7 @@
 
 ;;; U $LambdaImplementor$21.apply(T arg0)
 (func $m_apply__java_lang_Object__java_lang_Object@methodreferences.MethodReferences.$LambdaImplementor$21
- (type $function.$java.lang.Object__$java.lang.Object__$java.lang.Object)
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (param $arg0 (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
@@ -3355,14 +3355,14 @@
 
 ;;; Class<?> $LambdaImplementor$21.getClass()
 (func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$21
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $methodreferences.MethodReferences.$LambdaImplementor$21))
  (local.set $this (ref.cast_static $methodreferences.MethodReferences.$LambdaImplementor$21 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getMethodreferences.MethodReferences.$LambdaImplementor$21();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$21__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getMethodreferences.MethodReferences.$LambdaImplementor$21__java_lang_Class (ref.func $$getMethodreferences.MethodReferences.$LambdaImplementor$21__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@methodreferences.MethodReferences.$LambdaImplementor$21)

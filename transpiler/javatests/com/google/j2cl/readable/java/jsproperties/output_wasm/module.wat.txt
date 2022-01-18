@@ -83,10 +83,10 @@
   $java.lang.Object)
 )
 (type $jsproperties.Foo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
@@ -202,14 +202,14 @@
 
 ;;; Class<?> Foo.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.Foo
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Foo))
  (local.set $this (ref.cast_static $jsproperties.Foo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.Foo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsproperties.Foo__java_lang_Class (ref.func $$getJsproperties.Foo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsproperties.Foo)
@@ -223,14 +223,14 @@
   $java.lang.Object)
 )
 (type $jsproperties.Bar.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getA__int (ref $function.$java.lang.Object__$int))
- (field $m_setA__int__void (ref $function.$java.lang.Object__$int__$void))
- (field $m_getB__int (ref $function.$java.lang.Object__$int))
- (field $m_setB__int__void (ref $function.$java.lang.Object__$int__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getA__int (ref $function.m_getA__int))
+ (field $m_setA__int__void (ref $function.m_setA__int__void))
+ (field $m_getB__int (ref $function.m_getB__int))
+ (field $m_setB__int__void (ref $function.m_setB__int__void))
   $java.lang.Object.vtable)
 )
 
@@ -268,7 +268,7 @@
 
 ;;; int Bar.getA()
 (func $m_getA__int@jsproperties.Bar
- (type $function.$java.lang.Object__$int)
+ (type $function.m_getA__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ jsproperties/Main.java:51:13
@@ -284,7 +284,7 @@
 
 ;;; void Bar.setA(int x)
 (func $m_setA__int__void@jsproperties.Bar
- (type $function.$java.lang.Object__$int__$void)
+ (type $function.m_setA__int__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $x i32)
  ;;@ jsproperties/Main.java:56:14
@@ -300,7 +300,7 @@
 
 ;;; int Bar.getB()
 (func $m_getB__int@jsproperties.Bar
- (type $function.$java.lang.Object__$int)
+ (type $function.m_getB__int)
  (param $this.untyped (ref null $java.lang.Object))
  (result i32)
  ;;@ jsproperties/Main.java:61:13
@@ -316,7 +316,7 @@
 
 ;;; void Bar.setB(int x)
 (func $m_setB__int__void@jsproperties.Bar
- (type $function.$java.lang.Object__$int__$void)
+ (type $function.m_setB__int__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $x i32)
  ;;@ jsproperties/Main.java:66:14
@@ -354,14 +354,14 @@
 
 ;;; Class<?> Bar.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.Bar
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Bar))
  (local.set $this (ref.cast_static $jsproperties.Bar (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.Bar();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsproperties.Bar__java_lang_Class (ref.func $$getJsproperties.Bar__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsproperties.Bar)
@@ -374,11 +374,11 @@
   $java.lang.Object)
 )
 (type $jsproperties.NativeFoo.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getA__java_lang_Object (ref $function.$java.lang.Object__$java.lang.Object))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getA__java_lang_Object (ref $function.m_getA__java_lang_Object))
   $java.lang.Object.vtable)
 )
 
@@ -416,7 +416,7 @@
 
 ;;; Object NativeFoo.getA()
 (func $m_getA__java_lang_Object@jsproperties.NativeFoo
- (type $function.$java.lang.Object__$java.lang.Object)
+ (type $function.m_getA__java_lang_Object)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Object))
  ;;@ jsproperties/Main.java:74:23
@@ -457,14 +457,14 @@
 
 ;;; Class<?> NativeFoo.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.NativeFoo
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.NativeFoo))
  (local.set $this (ref.cast_static $jsproperties.NativeFoo (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.NativeFoo();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.NativeFoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsproperties.NativeFoo__java_lang_Class (ref.func $$getJsproperties.NativeFoo__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsproperties.NativeFoo)
@@ -477,13 +477,13 @@
   $java.lang.Object)
 )
 (type $jsproperties.Main.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_testNativeJsProperty__void (ref $function.$java.lang.Object__$void))
- (field $m_testStaticJsProperty__void (ref $function.$java.lang.Object__$void))
- (field $m_testInstanceJsProperty__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_testNativeJsProperty__void (ref $function.m_testNativeJsProperty__void))
+ (field $m_testStaticJsProperty__void (ref $function.m_testStaticJsProperty__void))
+ (field $m_testInstanceJsProperty__void (ref $function.m_testInstanceJsProperty__void))
   $java.lang.Object.vtable)
 )
 
@@ -521,7 +521,7 @@
 
 ;;; void Main.testNativeJsProperty()
 (func $m_testNativeJsProperty__void@jsproperties.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testNativeJsProperty__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsproperties/Main.java:81:14
  (local $$qualifier (ref null $jsproperties.NativeFoo))
@@ -545,7 +545,7 @@
 
 ;;; void Main.testStaticJsProperty()
 (func $m_testStaticJsProperty__void@jsproperties.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testStaticJsProperty__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsproperties/Main.java:86:14
  (local $this (ref null $jsproperties.Main))
@@ -569,7 +569,7 @@
 
 ;;; void Main.testInstanceJsProperty()
 (func $m_testInstanceJsProperty__void@jsproperties.Main
- (type $function.$java.lang.Object__$void)
+ (type $function.m_testInstanceJsProperty__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ jsproperties/Main.java:93:14
  (local $bar (ref null $jsproperties.Bar))
@@ -619,14 +619,14 @@
 
 ;;; Class<?> Main.getClass()
 (func $m_getClass__java_lang_Class@jsproperties.Main
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsproperties.Main))
  (local.set $this (ref.cast_static $jsproperties.Main (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsproperties.Main();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsproperties.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsproperties.Main__java_lang_Class (ref.func $$getJsproperties.Main__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsproperties.Main)

@@ -48,14 +48,14 @@
   $java.lang.Object)
 )
 (type $varargs.Varargs.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_main__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.m_test__int__arrayOf_java_lang_Object__void))
+ (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.m_testCloneable__arrayOf_java_lang_Cloneable__void))
+ (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.m_testSerializable__arrayOf_java_io_Serializable__void))
+ (field $m_main__void (ref $function.m_main__void))
   $java.lang.Object.vtable)
 )
 
@@ -127,7 +127,7 @@
 
 ;;; void Varargs.test(int a, Object... args)
 (func $m_test__int__arrayOf_java_lang_Object__void@varargs.Varargs
- (type $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.m_test__int__arrayOf_java_lang_Object__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
@@ -141,7 +141,7 @@
 
 ;;; void Varargs.testCloneable(Cloneable... args)
 (func $m_testCloneable__arrayOf_java_lang_Cloneable__void@varargs.Varargs
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.m_testCloneable__arrayOf_java_lang_Cloneable__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:29:14
@@ -154,7 +154,7 @@
 
 ;;; void Varargs.testSerializable(Serializable... args)
 (func $m_testSerializable__arrayOf_java_io_Serializable__void@varargs.Varargs
- (type $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void)
+ (type $function.m_testSerializable__arrayOf_java_io_Serializable__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $args (ref null $javaemul.internal.WasmArray.OfObject))
  ;;@ varargs/Varargs.java:31:14
@@ -193,7 +193,7 @@
 
 ;;; void Varargs.main()
 (func $m_main__void@varargs.Varargs
- (type $function.$java.lang.Object__$void)
+ (type $function.m_main__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ varargs/Varargs.java:39:14
  (local $v (ref null $varargs.Varargs))
@@ -252,14 +252,14 @@
 
 ;;; Class<?> Varargs.getClass()
 (func $m_getClass__java_lang_Class@varargs.Varargs
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Varargs))
  (local.set $this (ref.cast_static $varargs.Varargs (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Varargs();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getVarargs.Varargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getVarargs.Varargs__java_lang_Class (ref.func $$getVarargs.Varargs__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@varargs.Varargs)
@@ -272,14 +272,14 @@
   $varargs.Varargs)
 )
 (type $varargs.Child.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.$java.lang.Object__$int__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.$java.lang.Object__$javaemul.internal.WasmArray.OfObject__$void))
- (field $m_main__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_test__int__arrayOf_java_lang_Object__void (ref $function.m_test__int__arrayOf_java_lang_Object__void))
+ (field $m_testCloneable__arrayOf_java_lang_Cloneable__void (ref $function.m_testCloneable__arrayOf_java_lang_Cloneable__void))
+ (field $m_testSerializable__arrayOf_java_io_Serializable__void (ref $function.m_testSerializable__arrayOf_java_io_Serializable__void))
+ (field $m_main__void (ref $function.m_main__void))
   $varargs.Varargs.vtable)
 )
 
@@ -339,14 +339,14 @@
 
 ;;; Class<?> Child.getClass()
 (func $m_getClass__java_lang_Class@varargs.Child
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $varargs.Child))
  (local.set $this (ref.cast_static $varargs.Child (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getVarargs.Child();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getVarargs.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getVarargs.Child__java_lang_Class (ref.func $$getVarargs.Child__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@varargs.Child)

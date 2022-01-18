@@ -42,7 +42,7 @@
 
 ;;; Code for jsbridgebackward.MyJsInterface [INTERFACE]
 (type $jsbridgebackward.MyJsInterface.vtable (struct_subtype 
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   data)
 )
 
@@ -71,7 +71,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.MyJsInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgebackward.MyJsInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgebackward.MyJsInterface__java_lang_Class (ref.func $$getJsbridgebackward.MyJsInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgebackward.MyJsInterface)
@@ -84,11 +84,11 @@
   $java.lang.Object)
 )
 (type $jsbridgebackward.A.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   $java.lang.Object.vtable)
 )
 
@@ -126,7 +126,7 @@
 
 ;;; int A.foo(int a)
 (func $m_foo__int__int@jsbridgebackward.A
- (type $function.$java.lang.Object__$int__$int)
+ (type $function.m_foo__int__int)
  (param $this.untyped (ref null $java.lang.Object))
  (param $a i32)
  (result i32)
@@ -165,14 +165,14 @@
 
 ;;; Class<?> A.getClass()
 (func $m_getClass__java_lang_Class@jsbridgebackward.A
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.A))
  (local.set $this (ref.cast_static $jsbridgebackward.A (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.A();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgebackward.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgebackward.A__java_lang_Class (ref.func $$getJsbridgebackward.A__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgebackward.A)
@@ -185,11 +185,11 @@
   $jsbridgebackward.A)
 )
 (type $jsbridgebackward.InterfaceImpl.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_foo__int__int (ref $function.$java.lang.Object__$int__$int))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__int__int (ref $function.m_foo__int__int))
   $jsbridgebackward.A.vtable)
 )
 
@@ -249,14 +249,14 @@
 
 ;;; Class<?> InterfaceImpl.getClass()
 (func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $jsbridgebackward.InterfaceImpl))
  (local.set $this (ref.cast_static $jsbridgebackward.InterfaceImpl (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getJsbridgebackward.InterfaceImpl();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getJsbridgebackward.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getJsbridgebackward.InterfaceImpl__java_lang_Class (ref.func $$getJsbridgebackward.InterfaceImpl__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsbridgebackward.InterfaceImpl)

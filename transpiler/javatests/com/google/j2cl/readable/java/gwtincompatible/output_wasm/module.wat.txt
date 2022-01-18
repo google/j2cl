@@ -98,7 +98,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.GwtIncompatible();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGwtincompatible.GwtIncompatible__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGwtincompatible.GwtIncompatible__java_lang_Class (ref.func $$getGwtincompatible.GwtIncompatible__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@gwtincompatible.GwtIncompatible)
@@ -111,11 +111,11 @@
   $gwtincompatible.Interface.ClassWithAbstractMethod)
 )
 (type $gwtincompatible.Implementor.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_compatibleMethod__void (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_compatibleMethod__void (ref $function.m_compatibleMethod__void))
   $gwtincompatible.Interface.ClassWithAbstractMethod.vtable)
 )
 
@@ -153,7 +153,7 @@
 
 ;;; void Implementor.compatibleMethod()
 (func $m_compatibleMethod__void@gwtincompatible.Implementor
- (type $function.$java.lang.Object__$void)
+ (type $function.m_compatibleMethod__void)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ gwtincompatible/Implementor.java:34:14
  (local $a i32)
@@ -191,14 +191,14 @@
 
 ;;; Class<?> Implementor.getClass()
 (func $m_getClass__java_lang_Class@gwtincompatible.Implementor
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor))
  (local.set $this (ref.cast_static $gwtincompatible.Implementor (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Implementor();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGwtincompatible.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGwtincompatible.Implementor__java_lang_Class (ref.func $$getGwtincompatible.Implementor__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@gwtincompatible.Implementor)
@@ -213,16 +213,16 @@
   $java.lang.Enum)
 )
 (type $gwtincompatible.Implementor.SomeEnum.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_name__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
- (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- (field $m_method__void_$pp_gwtincompatible (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ (field $m_ordinal__int (ref $function.m_ordinal__int))
+ (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+ (field $m_method__void_$pp_gwtincompatible (ref $function.m_method__void_$pp_gwtincompatible))
   $java.lang.Enum.vtable)
 )
 
@@ -309,7 +309,7 @@
   (call $$clinit__void@java.lang.Enum )
   ;; (gwtincompatible.Implementor.SomeEnum.COMPATIBLE = gwtincompatible.Implementor.SomeEnum.1.$create(javaemul.internal.StringPool.$getString_|COMPATIBLE|(),0));
   ;;@ gwtincompatible/Implementor.java:39:4
-  (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $$create__java_lang_String__int__gwtincompatible_Implementor_SomeEnum_1@gwtincompatible.Implementor.SomeEnum.1 (call $function.no.side.effects.__$java.lang.String (ref.func $$getString_|COMPATIBLE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
+  (global.set $f_COMPATIBLE__gwtincompatible_Implementor_SomeEnum (call $$create__java_lang_String__int__gwtincompatible_Implementor_SomeEnum_1@gwtincompatible.Implementor.SomeEnum.1 (call $function.no.side.effects.$getString_|COMPATIBLE|__java_lang_String (ref.func $$getString_|COMPATIBLE|__java_lang_String@javaemul.internal.StringPool) )(i32.const 0)))
  )
 )
 
@@ -323,16 +323,16 @@
   $gwtincompatible.Implementor.SomeEnum)
 )
 (type $gwtincompatible.Implementor.SomeEnum.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
- (field $m_name__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_ordinal__int (ref $function.$java.lang.Object__$int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.$java.lang.Object__$java.lang.Enum__$int))
- (field $m_compareTo__java_lang_Object__int (ref $function.$java.lang.Object__$java.lang.Object__$int))
- (field $m_method__void_$pp_gwtincompatible (ref $function.$java.lang.Object__$void))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ (field $m_ordinal__int (ref $function.m_ordinal__int))
+ (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+ (field $m_method__void_$pp_gwtincompatible (ref $function.m_method__void_$pp_gwtincompatible))
   $gwtincompatible.Implementor.SomeEnum.vtable)
 )
 
@@ -374,7 +374,7 @@
 
 ;;; void <anonymous> extends SomeEnum.method()
 (func $m_method__void_$pp_gwtincompatible@gwtincompatible.Implementor.SomeEnum.1
- (type $function.$java.lang.Object__$void)
+ (type $function.m_method__void_$pp_gwtincompatible)
  (param $this.untyped (ref null $java.lang.Object))
  ;;@ gwtincompatible/Implementor.java:41:11
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
@@ -408,14 +408,14 @@
 
 ;;; Class<?> <anonymous> extends SomeEnum.getClass()
 (func $m_getClass__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1
- (type $function.$java.lang.Object__$java.lang.Class)
+ (type $function.m_getClass__java_lang_Class)
  (param $this.untyped (ref null $java.lang.Object))
  (result (ref null $java.lang.Class))
  (local $this (ref null $gwtincompatible.Implementor.SomeEnum.1))
  (local.set $this (ref.cast_static $gwtincompatible.Implementor.SomeEnum.1 (local.get $this.untyped)))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Implementor.SomeEnum.1();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGwtincompatible.Implementor.SomeEnum.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGwtincompatible.Implementor.SomeEnum.1__java_lang_Class (ref.func $$getGwtincompatible.Implementor.SomeEnum.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@gwtincompatible.Implementor.SomeEnum.1)
@@ -450,7 +450,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Interface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGwtincompatible.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGwtincompatible.Interface__java_lang_Class (ref.func $$getGwtincompatible.Interface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@gwtincompatible.Interface)
@@ -485,7 +485,7 @@
  (result (ref null $java.lang.Class))
  (block
   ;; return javaemul.internal.ClassLiteralPool.$getGwtincompatible.Interface.NestedInterface();
-  (return (call $function.no.side.effects.__$java.lang.Class (ref.func $$getGwtincompatible.Interface.NestedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+  (return (call $function.no.side.effects.$getGwtincompatible.Interface.NestedInterface__java_lang_Class (ref.func $$getGwtincompatible.Interface.NestedInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
  )
 )
 (elem declare func $m_getClass__java_lang_Class@gwtincompatible.Interface.NestedInterface)
@@ -498,10 +498,10 @@
   $java.lang.Object)
 )
 (type $gwtincompatible.Interface.ClassWithAbstractMethod.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.$java.lang.Object__$java.lang.Object__$boolean))
- (field $m_hashCode__int (ref $function.$java.lang.Object__$int))
- (field $m_toString__java_lang_String (ref $function.$java.lang.Object__$java.lang.String))
- (field $m_getClass__java_lang_Class (ref $function.$java.lang.Object__$java.lang.Class))
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
   $java.lang.Object.vtable)
 )
 
