@@ -1,0 +1,41 @@
+goog.module('emptymethod.EmptyMethod$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class EmptyMethod extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!EmptyMethod} */
+ static $create__() {
+  EmptyMethod.$clinit();
+  let $instance = new EmptyMethod();
+  $instance.$ctor__emptymethod_EmptyMethod__();
+  return $instance;
+ }
+ 
+ $ctor__emptymethod_EmptyMethod__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ m_emptyMethod__java_lang_String(/** ?string */ foo) {}
+ 
+ static $clinit() {
+  EmptyMethod.$clinit = () =>{};
+  EmptyMethod.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof EmptyMethod;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(EmptyMethod, 'emptymethod.EmptyMethod');
+
+exports = EmptyMethod;
+
+//# sourceMappingURL=EmptyMethod.js.map

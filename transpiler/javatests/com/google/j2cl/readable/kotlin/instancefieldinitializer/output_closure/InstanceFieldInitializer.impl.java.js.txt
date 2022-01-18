@@ -1,0 +1,43 @@
+goog.module('instancefieldinitializer.InstanceFieldInitializer$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class InstanceFieldInitializer extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+  /**@type {number}*/
+  this.f_a__instancefieldinitializer_InstanceFieldInitializer_ = 0;
+  /**@type {number}*/
+  this.f_b__instancefieldinitializer_InstanceFieldInitializer_ = 0;
+ }
+ /** @return {!InstanceFieldInitializer} */
+ static $create__() {
+  InstanceFieldInitializer.$clinit();
+  let $instance = new InstanceFieldInitializer();
+  $instance.$ctor__instancefieldinitializer_InstanceFieldInitializer__();
+  return $instance;
+ }
+ 
+ $ctor__instancefieldinitializer_InstanceFieldInitializer__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  InstanceFieldInitializer.$clinit = () =>{};
+  InstanceFieldInitializer.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof InstanceFieldInitializer;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(InstanceFieldInitializer, 'instancefieldinitializer.InstanceFieldInitializer');
+
+exports = InstanceFieldInitializer;
+
+//# sourceMappingURL=InstanceFieldInitializer.js.map

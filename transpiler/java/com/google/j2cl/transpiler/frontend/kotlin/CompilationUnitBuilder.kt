@@ -17,20 +17,33 @@ package com.google.j2cl.transpiler.frontend.kotlin
 
 import com.google.j2cl.common.FilePosition
 import com.google.j2cl.common.SourcePosition
+import com.google.j2cl.transpiler.ast.Block
 import com.google.j2cl.transpiler.ast.CompilationUnit
+import com.google.j2cl.transpiler.ast.Field
+import com.google.j2cl.transpiler.ast.Method
+import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.Type
+import com.google.j2cl.transpiler.ast.Variable
 import com.google.j2cl.transpiler.ast.Visibility
 import com.google.j2cl.transpiler.frontend.common.AbstractCompilationUnitBuilder
-import java.util.ArrayList
 import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.fir.backend.Fir2IrResult
 import org.jetbrains.kotlin.ir.IrElement
+import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir.SourceRangeInfo
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
+import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithVisibility
 import org.jetbrains.kotlin.ir.declarations.IrFile
+import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
+import org.jetbrains.kotlin.ir.declarations.IrProperty
+import org.jetbrains.kotlin.ir.declarations.IrValueDeclaration
+import org.jetbrains.kotlin.ir.declarations.IrValueParameter
+import org.jetbrains.kotlin.ir.declarations.IrVariable
+import org.jetbrains.kotlin.ir.expressions.IrBlockBody
+import org.jetbrains.kotlin.ir.expressions.IrBody
 import org.jetbrains.kotlin.ir.util.isClass
 
 internal fun Fir2IrResult.getCompilationUnits(): List<CompilationUnit> =
@@ -71,7 +84,9 @@ class CompilationUnitBuilder(private val environment: KotlinEnvironment) :
   private fun convertDeclaration(irDeclaration: IrDeclaration) {
     when (irDeclaration) {
       is IrClass -> convertClass(irDeclaration)
-      else -> throw RuntimeException("Declaration not yet supported: $irDeclaration")
+      is IrFunction -> convertFunction(irDeclaration)
+      is IrProperty -> convertProperty(irDeclaration)
+      else -> throw NotImplementedError("Declaration not yet supported: $irDeclaration")
     }
   }
 
@@ -85,6 +100,69 @@ class CompilationUnitBuilder(private val environment: KotlinEnvironment) :
         environment.getDeclarationForType(irClass)
       )
     currentCompilationUnit.addType(type)
+
+    processEnclosedBy(type) { irClass.declarations.forEach(::convertDeclaration) }
+  }
+
+  private fun convertFunction(irFunction: IrFunction) {
+    if (irFunction.origin != IrDeclarationOrigin.DEFINED) {
+      // TODO(dramaix): Convert method created and added by kotlinc
+      return
+    }
+
+    val parameters = irFunction.valueParameters.map(this::createVariable)
+    val methodDescriptor = environment.getMethodDescriptor(irFunction)
+    val body =
+      if (irFunction.body == null)
+        Block.newBuilder().setSourcePosition(getSourcePosition(irFunction)).build()
+      else convertBody(irFunction.body!!)
+
+    currentType.addMember(
+      Method.newBuilder()
+        .setMethodDescriptor(methodDescriptor)
+        .setSourcePosition(getSourcePosition(irFunction))
+        .setParameters(parameters)
+        .setBodySourcePosition(body.sourcePosition)
+        .addStatements(body.statements)
+        .build()
+    )
+  }
+
+  private fun convertBody(body: IrBody): Block {
+    val blockBuilder = Block.newBuilder().setSourcePosition(getSourcePosition(body))
+
+    when (body) {
+      is IrBlockBody -> body.statements.forEach { blockBuilder.addStatement(convertStatement(it)) }
+      else -> throw NotImplementedError("Expression body not yet supported")
+    }
+
+    return blockBuilder.build()
+  }
+
+  private fun convertStatement(irStatement: IrStatement): Statement {
+    // TODO(dramaix): convert statements
+    return Statement.createNoopStatement()
+  }
+
+  private fun createVariable(irValueDeclaration: IrValueDeclaration): Variable {
+    return Variable.newBuilder()
+      .setName(irValueDeclaration.name.asString())
+      .setTypeDescriptor(environment.getTypeDescriptor(irValueDeclaration.type))
+      .setParameter(irValueDeclaration is IrValueParameter)
+      .setFinal(irValueDeclaration is IrVariable && !irValueDeclaration.isVar)
+      .setSourcePosition(getSourcePosition(irValueDeclaration))
+      .build()
+  }
+
+  private fun convertProperty(irProperty: IrProperty) {
+    // TODO(dramaix): convert field initializer
+    currentType.addMember(
+      Field.Builder.from(environment.getFieldDescriptor(irProperty))
+        .setSourcePosition(getSourcePosition(irProperty))
+        // TODO(b/214508991): use source position of the name.
+        .setNameSourcePosition(getSourcePosition(irProperty))
+        .build()
+    )
   }
 
   private fun getSourcePosition(element: IrElement): SourcePosition =

@@ -17,31 +17,63 @@ package com.google.j2cl.transpiler.frontend.kotlin
 
 import com.google.common.collect.ImmutableList
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
+import com.google.j2cl.transpiler.ast.FieldDescriptor
 import com.google.j2cl.transpiler.ast.Kind
 import com.google.j2cl.transpiler.ast.MethodDescriptor
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeDescriptors
 import com.google.j2cl.transpiler.ast.TypeDescriptors.SingletonBuilder
 import com.google.j2cl.transpiler.frontend.common.FrontendConstants
+import org.jetbrains.kotlin.backend.wasm.ir2wasm.getSuperClass
 import org.jetbrains.kotlin.fir.backend.Fir2IrComponents
 import org.jetbrains.kotlin.fir.resolve.symbolProvider
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
 import org.jetbrains.kotlin.ir.declarations.IrClass
+import org.jetbrains.kotlin.ir.declarations.IrConstructor
+import org.jetbrains.kotlin.ir.declarations.IrFunction
+import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.defaultType
 import org.jetbrains.kotlin.ir.types.getClass
 import org.jetbrains.kotlin.ir.util.classId
+import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.packageFqName
+import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.name.ClassId
 
 /** Utility functions to interact with the Kotlin compiler internal representations. */
-class KotlinEnvironment(components: Fir2IrComponents) {
+class KotlinEnvironment(private val components: Fir2IrComponents) {
   private val declaredTypeDescriptorByTypeBinding: MutableMap<IrType, DeclaredTypeDescriptor> =
     HashMap()
+  private val primitivesTypeDescriptorByTypeBinding: Map<IrType, PrimitiveTypeDescriptor>
 
   init {
     initWellKnownTypes(components)
+
+    val builtIns = components.irBuiltIns
+
+    // Map known kotlin stdlib types to corresponding java types/primitives.
+    declaredTypeDescriptorByTypeBinding +=
+      mapOf(
+        builtIns.anyType to TypeDescriptors.get().javaLangObject.toNonNullable(),
+        builtIns.anyNType to TypeDescriptors.get().javaLangObject,
+        builtIns.stringType to TypeDescriptors.get().javaLangString
+      )
+    primitivesTypeDescriptorByTypeBinding =
+      mapOf(
+        builtIns.booleanType to PrimitiveTypes.BOOLEAN,
+        builtIns.byteType to PrimitiveTypes.BYTE,
+        builtIns.charType to PrimitiveTypes.CHAR,
+        builtIns.doubleType to PrimitiveTypes.DOUBLE,
+        builtIns.floatType to PrimitiveTypes.FLOAT,
+        builtIns.intType to PrimitiveTypes.INT,
+        builtIns.longType to PrimitiveTypes.LONG,
+        builtIns.shortType to PrimitiveTypes.SHORT,
+        builtIns.unitType to PrimitiveTypes.VOID
+      )
   }
 
   private fun initWellKnownTypes(components: Fir2IrComponents) {
@@ -53,7 +85,7 @@ class KotlinEnvironment(components: Fir2IrComponents) {
     PrimitiveTypes.TYPES.forEach {
       builder.addPrimitiveBoxedTypeDescriptorPair(
         it,
-        getDeclaredType(lookupType(it.boxedClassName, components))
+        getDeclaredTypeDescriptor(lookupType(it.boxedClassName, components))
       )
     }
 
@@ -66,7 +98,7 @@ class KotlinEnvironment(components: Fir2IrComponents) {
     builder.addReferenceType(createJavaLangRunnableDeclaration())
 
     FrontendConstants.REQUIRED_QUALIFIED_BINARY_NAMES.forEach {
-      builder.addReferenceType(getDeclaredType(lookupType(it, components)))
+      builder.addReferenceType(getDeclaredTypeDescriptor(lookupType(it, components)))
     }
 
     builder.buildSingleton()
@@ -100,15 +132,86 @@ class KotlinEnvironment(components: Fir2IrComponents) {
   fun getDeclarationForType(irClass: IrClass?): TypeDeclaration? {
     irClass ?: return null
 
+    val declaredMethods = {
+      ImmutableList.copyOf(
+        irClass.declarations.filterIsInstance<IrFunction>().mapNotNull(::getMethodDescriptor)
+      )
+    }
+    val declaredFields = {
+      ImmutableList.copyOf(
+        irClass.declarations.filterIsInstance<IrProperty>().mapNotNull(::getFieldDescriptor)
+      )
+    }
+    val superClass = irClass.getSuperClass(components.irBuiltIns)
+    val superTypeDescriptor = superClass?.let { getDeclaredTypeDescriptor(it.defaultType) }
+
     return TypeDeclaration.newBuilder()
       .setClassComponents(getClassComponents(irClass))
       .setKind(Kind.CLASS)
       .setPackageName(irClass.packageFqName!!.asString())
       .setVisibility(irClass.getJ2clVisibility())
+      .setDeclaredMethodDescriptorsFactory(declaredMethods)
+      .setDeclaredFieldDescriptorsFactory(declaredFields)
+      .setSuperTypeDescriptorFactory { _ -> superTypeDescriptor }
       .build()
   }
 
-  private fun getDeclaredType(irType: IrType): DeclaredTypeDescriptor {
+  fun getTypeDescriptor(irType: IrType): TypeDescriptor {
+    if (primitivesTypeDescriptorByTypeBinding.containsKey(irType)) {
+      return primitivesTypeDescriptorByTypeBinding[irType]!!
+    }
+    // TODO(dramaix) add support for other TypeDescriptors.
+    return getDeclaredTypeDescriptor(irType)
+  }
+
+  fun getMethodDescriptor(irFunction: IrFunction?): MethodDescriptor? {
+    irFunction ?: return null
+
+    val enclosingType = irFunction.parentClassOrNull?.defaultType
+    enclosingType ?: throw NotImplementedError("Top level functions not supported yet")
+    val enclosingTypeDescriptor = getDeclaredTypeDescriptor(enclosingType)
+    val isConstructor = irFunction is IrConstructor
+    val parameterDescriptors = ImmutableList.builder<MethodDescriptor.ParameterDescriptor>()
+
+    irFunction.valueParameters.forEach {
+      // TODO(dramaix): add support for varargs
+      parameterDescriptors.add(
+        MethodDescriptor.ParameterDescriptor.newBuilder()
+          .setTypeDescriptor(getTypeDescriptor(it.type))
+          .setJsOptional(false)
+          .build()
+      )
+    }
+
+    return MethodDescriptor.newBuilder()
+      .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
+      .setName(if (isConstructor) null else irFunction.name.asString())
+      .setParameterDescriptors(parameterDescriptors.build())
+      .setReturnTypeDescriptor(
+        if (isConstructor) enclosingTypeDescriptor else getTypeDescriptor(irFunction.returnType)
+      )
+      .setVisibility(irFunction.getJ2clVisibility())
+      .setConstructor(isConstructor)
+      .build()
+  }
+
+  fun getFieldDescriptor(irProperty: IrProperty): FieldDescriptor? {
+    val irField = irProperty.backingField ?: return null
+
+    val enclosingType = irField.parentClassOrNull?.defaultType
+    enclosingType ?: throw NotImplementedError("Top level field not supported yet")
+
+    return FieldDescriptor.newBuilder()
+      .setEnclosingTypeDescriptor(getDeclaredTypeDescriptor(enclosingType))
+      .setName(irField.name.asString())
+      .setTypeDescriptor(getTypeDescriptor(irField.type))
+      .setVisibility(irField.getJ2clVisibility())
+      .setFinal(irProperty.isConst)
+      .setStatic(irField.isStatic)
+      .build()
+  }
+
+  private fun getDeclaredTypeDescriptor(irType: IrType): DeclaredTypeDescriptor {
     return declaredTypeDescriptorByTypeBinding.getOrPut(irType) {
       DeclaredTypeDescriptor.newBuilder()
         .setTypeDeclaration(getDeclarationForType(irType.getClass()))

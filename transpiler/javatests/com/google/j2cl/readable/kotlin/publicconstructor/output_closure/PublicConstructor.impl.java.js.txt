@@ -1,0 +1,39 @@
+goog.module('publicconstructor.PublicConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class PublicConstructor extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!PublicConstructor} */
+ static $create__() {
+  PublicConstructor.$clinit();
+  let $instance = new PublicConstructor();
+  $instance.$ctor__publicconstructor_PublicConstructor__();
+  return $instance;
+ }
+ 
+ $ctor__publicconstructor_PublicConstructor__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  PublicConstructor.$clinit = () =>{};
+  PublicConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PublicConstructor;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PublicConstructor, 'publicconstructor.PublicConstructor');
+
+exports = PublicConstructor;
+
+//# sourceMappingURL=PublicConstructor.js.map

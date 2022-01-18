@@ -1,0 +1,38 @@
+goog.module('privateconstructor.PrivateConstructor$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+class PrivateConstructor extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!PrivateConstructor} */
+ static $create__() {
+  let $instance = new PrivateConstructor();
+  $instance.$ctor__privateconstructor_PrivateConstructor__();
+  return $instance;
+ }
+ 
+ $ctor__privateconstructor_PrivateConstructor__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  PrivateConstructor.$clinit = () =>{};
+  PrivateConstructor.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof PrivateConstructor;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(PrivateConstructor, 'privateconstructor.PrivateConstructor');
+
+exports = PrivateConstructor;
+
+//# sourceMappingURL=PrivateConstructor.js.map
