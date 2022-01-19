@@ -21,7 +21,6 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.collections.TestSet;
 
 /** J2CL specific EmumSet test as it doesn't support getEnumConstants (b/30745420). */
 public class EnumSetTest extends TestSet {
