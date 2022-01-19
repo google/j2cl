@@ -39,23 +39,33 @@ open class TryCatch {
  }
 
  open fun testTryWithResource() {
-  try {
-   throw java.lang.Exception()
-  } catch (e: java.lang.Exception) {}
+  (trycatch.`TryCatch$ClosableThing`()).use { thing: trycatch.`TryCatch$ClosableThing`? ->
+   (trycatch.`TryCatch$ClosableThing`()).use { thing2: trycatch.`TryCatch$ClosableThing`? ->
+    try {
+     throw java.lang.Exception()
+    } catch (e: java.lang.Exception) {}
+   }
+  }
  }
 
  open fun testTryWithResourceJava9() {
   val thing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
   val thing2: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
-  try {
-   throw java.lang.Exception()
-  } catch (e: java.lang.Exception) {}
+  (thing).use { `$resource`: trycatch.`TryCatch$ClosableThing`? ->
+   (thing2).use { `$resource_1`: trycatch.`TryCatch$ClosableThing`? ->
+    try {
+     throw java.lang.Exception()
+    } catch (e: java.lang.Exception) {}
+   }
+  }
  }
 
  open fun testTryWithResouceOnStaticField() {
-  try {
-   throw java.lang.Exception()
-  } catch (e: java.lang.Exception) {}
+  (trycatch.TryCatch.closableThing).use { `$resource`: trycatch.`TryCatch$ClosableThing`? ->
+   try {
+    throw java.lang.Exception()
+   } catch (e: java.lang.Exception) {}
+  }
  }
 
  open fun testNestedTryCatch() {
