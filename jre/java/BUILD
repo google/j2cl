@@ -133,8 +133,6 @@ j2wasm_library(
 closure_js_library(
     name = "j2wasm_js",
     srcs = ["super-wasm/j2wasm.js"],
-    # TODO(goktug): Remove after open source closure compiler update.
-    lenient = True,
     visibility = ["//:__pkg__"],
 )
 
