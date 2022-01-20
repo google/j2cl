@@ -16,7 +16,6 @@ integration_test(
     srcs = glob(["*.java"]),
     suppress = ["JSC_TYPE_MISMATCH"],
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

@@ -14,7 +14,4 @@ package(
 integration_test(
     name = "foreachstatement",
     srcs = glob(["*.java"]),
-    deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
-    ],
 )

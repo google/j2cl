@@ -17,7 +17,6 @@ package com.google.j2cl.integration.foreachstatement;
 
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
-import com.google.j2cl.integration.foreachstatement.Main.MyIterable.MyIterator;
 import java.io.Serializable;
 import java.util.Iterator;
 

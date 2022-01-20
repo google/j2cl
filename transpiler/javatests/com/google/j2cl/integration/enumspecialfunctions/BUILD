@@ -13,7 +13,4 @@ package(
 integration_test(
     name = "enumspecialfunctions",
     srcs = glob(["*.java"]),
-    deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
-    ],
 )
