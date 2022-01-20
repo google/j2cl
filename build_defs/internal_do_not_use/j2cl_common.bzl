@@ -40,6 +40,15 @@ def _compile(
     jvm_deps, js_deps = _split_deps(deps)
     jvm_exports, js_exports = _split_deps(exports)
 
+    default_j2cl_javac_opts = [
+        # Avoid log site injection which introduces calls to unsupported APIs.
+        "-XDinjectLogSites=false",
+        # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
+        "-XDstringConcat=inline",
+    ]
+
+    javac_opts = default_j2cl_javac_opts + javac_opts
+
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"])
     if not has_kotlin_srcs:
         # Avoid Kotlin toolchain for regular targets.
@@ -62,7 +71,9 @@ def _compile(
             jvm_srcs,
             jvm_deps,
             jvm_exports,
+            plugins,
             output_jar,
+            javac_opts,
         )
 
     if jvm_srcs:
@@ -133,15 +144,6 @@ def _java_compile(
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
 
-    default_j2cl_javac_opts = [
-        # Avoid log site injection which introduces calls to unsupported APIs.
-        "-XDinjectLogSites=false",
-        # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
-        "-XDstringConcat=inline",
-    ]
-
-    java_toolchain = ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
-
     if generate_kythe_action and ctx.var.get("GROK_ELLIPSIS_BUILD", None):
         # An unused JAR that is only generated so that we run javac with the non-stripped sources
         # that kythe can index. Nothing should depend upon this output as it is not guaranteed
@@ -155,8 +157,8 @@ def _java_compile(
             plugins = plugins,
             exported_plugins = exported_plugins,
             output = indexed_output_jar,
-            java_toolchain = java_toolchain,
-            javac_opts = default_j2cl_javac_opts + javac_opts,
+            java_toolchain = _get_java_toolchain(ctx),
+            javac_opts = javac_opts,
         )
 
     return java_common.compile(
@@ -167,8 +169,8 @@ def _java_compile(
         plugins = plugins,
         exported_plugins = exported_plugins,
         output = output_jar,
-        java_toolchain = java_toolchain,
-        javac_opts = default_j2cl_javac_opts + javac_opts,
+        java_toolchain = _get_java_toolchain(ctx),
+        javac_opts = javac_opts,
     )
 
 def _kt_compile(
@@ -177,20 +179,13 @@ def _kt_compile(
         srcs = [],
         deps = [],
         exports = [],
-        output_jar = None):
-    # TODO(dramaix): call kotlin toolchain
-    output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
-    ctx.actions.write(output = output_jar, content = "dummy jar file")
-    output_src_jar = ctx.actions.declare_file("lib%s-src.jar" % name)
-    ctx.actions.write(output = output_src_jar, content = "dummy src jar file")
+        plugins = [],
+        output_jar = None,
+        javac_opts = []):
+    fail("Kotlin frontend is disabled")
 
-    return struct(
-        source_jars = srcs,
-        compilation_info = struct(
-            boot_classpath = ctx.attr._java_toolchain.java_toolchain.bootclasspath.to_list(),
-            compilation_classpath = depset([j.class_jar for d in deps for j in d.java_outputs]),
-        ),
-    )
+def _get_java_toolchain(ctx):
+    return ctx.attr._java_toolchain[java_common.JavaToolchainInfo]
 
 def _strip_gwt_incompatible(ctx, name, java_srcs, mnemonic):
     # Paths are matched by Kythe to identify generated J2CL sources.
@@ -226,10 +221,26 @@ def _j2cl_transpile(
 
     # Using source_jars of the java_library since that includes APT generated src.
     srcs = jvm_provider.source_jars + js_srcs
-    classpath = depset(
-        jvm_provider.compilation_info.boot_classpath,
-        transitive = [jvm_provider.compilation_info.compilation_classpath],
-    )
+
+    if jvm_provider.compilation_info:
+        classpath = depset(
+            jvm_provider.compilation_info.boot_classpath,
+            transitive = [jvm_provider.compilation_info.compilation_classpath],
+        )
+    else:
+        # TODO(b/214609427): JavaInfo created through Starlark does not have compilation_info set.
+        # We will compute the classpath manually using transitive_compile_time_jars (note that
+        # transitive_compile_time_jars contains current compiled code which should be excluded.)
+        compiled_jars = {jar: True for jar in jvm_provider.compile_jars.to_list()}
+        compilation_classpath = [
+            jar
+            for jar in jvm_provider.transitive_compile_time_jars.to_list()
+            if jar not in compiled_jars
+        ]
+        classpath = depset(
+            _get_java_toolchain(ctx).bootclasspath.to_list(),
+            transitive = [depset(compilation_classpath)],
+        )
 
     args = ctx.actions.args()
     args.use_param_file("@%s", use_always = True)
@@ -287,6 +298,7 @@ J2CL_TOOLCHAIN_ATTRS = {
     ),
 }
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JAVA_TOOLCHAIN_ATTRS)
+
 J2CL_TOOLCHAIN_ATTRS.update(J2CL_JS_TOOLCHAIN_ATTRS)
 
 j2cl_common = struct(
