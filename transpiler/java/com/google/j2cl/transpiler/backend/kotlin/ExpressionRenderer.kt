@@ -29,6 +29,7 @@ import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
 import com.google.j2cl.transpiler.ast.FunctionExpression
 import com.google.j2cl.transpiler.ast.InstanceOfExpression
+import com.google.j2cl.transpiler.ast.Invocation
 import com.google.j2cl.transpiler.ast.Literal
 import com.google.j2cl.transpiler.ast.MemberReference
 import com.google.j2cl.transpiler.ast.MethodCall
@@ -209,7 +210,19 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderMethodCallHeader(expression)
-  renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
+  renderInvocation(expression)
+}
+
+private fun Renderer.renderInvocation(invocation: Invocation) {
+  renderInParentheses {
+    val parameters = invocation.target.parameterDescriptors.zip(invocation.arguments)
+    renderCommaSeparated(parameters) { (parameterDescriptor, argument) ->
+      if (parameterDescriptor.isVarargs) {
+        render("*")
+      }
+      renderExpression(argument)
+    }
+  }
 }
 
 private fun Renderer.renderMethodCallHeader(expression: MethodCall) {
@@ -267,13 +280,13 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   if (mapsToKotlin(typeDescriptor)) {
     renderInParentheses {
       renderJavaTypeDescriptor(typeDescriptor)
-      renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
+      renderInvocation(expression)
       render(" as ")
       renderTypeDescriptor(expression.typeDescriptor)
     }
   } else {
     renderTypeDescriptor(expression.typeDescriptor)
-    renderInParentheses { renderCommaSeparated(expression.arguments) { renderExpression(it) } }
+    renderInvocation(expression)
   }
 }
 
