@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.integration.foreachstatement;
 
+import static com.google.j2cl.integration.testing.Asserts.assertEquals;
 import static com.google.j2cl.integration.testing.Asserts.assertTrue;
 
 import java.io.Serializable;
@@ -24,6 +25,15 @@ import java.util.Iterator;
  * Test for for loops.
  */
 public class Main {
+  public static void main(String... args) {
+    testForEachArray();
+    testForEachArray_nested();
+    testForEachArray_boxed();
+    testForEachArray_unboxed();
+    testForEachIterable();
+    testForEachIterable_intersectionTypes();
+    testForEachIterable_typeVariable();
+  }
 
   static class MyIterable implements Iterable<Integer>, Serializable {
     class MyIterator implements Iterator<Integer> {
@@ -95,7 +105,7 @@ public class Main {
   }
 
   private static <T extends MyIterable & Serializable, S extends T>
-      void testForEachIterable_typeVariablesAndIntersectionTypes() {
+      void testForEachIterable_intersectionTypes() {
     S iterable = (S) new MyIterable();
     Integer lastSeenInteger = new Integer(-1);
     int j = 5;
@@ -108,10 +118,50 @@ public class Main {
         "LastSeen:<" + lastSeenInteger + "> should be zero", lastSeenInteger.intValue() == 1);
   }
 
-  public static void main(String... args) {
-    testForEachArray();
-    testForEachArray_nested();
-    testForEachIterable();
-    testForEachIterable_typeVariablesAndIntersectionTypes();
+  private static <T, C extends Iterable<T>> void testForEachIterable_typeVariable() {
+    C iterable =
+        (C)
+            new Iterable<T>() {
+              private Integer[] elements = new Integer[] {1, 2, 3};
+
+              @Override
+              public Iterator<T> iterator() {
+                return new Iterator<T>() {
+                  int index = 0;
+
+                  @Override
+                  public boolean hasNext() {
+                    return index < elements.length;
+                  }
+
+                  @Override
+                  public T next() {
+                    return (T) elements[index++];
+                  }
+                };
+              }
+            };
+
+    String onetwothree = "";
+    for (T e : iterable) {
+      onetwothree += e.toString();
+    }
+    assertEquals("123", onetwothree);
+  }
+
+  private static void testForEachArray_boxed() {
+    String concatName = "";
+    for (Integer i : new int[] {1, 2, 3}) {
+      concatName += i.getClass().getSimpleName();
+    }
+    assertEquals("IntegerIntegerInteger", concatName);
+  }
+
+  private static void testForEachArray_unboxed() {
+    int sum = 0;
+    for (int i : new Integer[] {1, 2, 3}) {
+      sum += i;
+    }
+    assertEquals(6, sum);
   }
 }

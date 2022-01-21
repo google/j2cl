@@ -179,6 +179,7 @@ public class NormalizeForEachStatement extends NormalizationPass {
    */
   private ForStatement convertForEachIterable(ForEachStatement forEachStatement) {
     Variable loopVariable = forEachStatement.getLoopVariable();
+
     Expression iterableExpression =
         maybeAddCast(
             forEachStatement.getIterableExpression(),
@@ -248,16 +249,20 @@ public class NormalizeForEachStatement extends NormalizationPass {
   private Expression maybeAddCast(
       Expression iterableExpression,
       DeclaredTypeDescriptor castToType,
-      TypeDescriptor typeArgument) {
+      TypeDescriptor loopVariableType) {
     if (iterableExpression.getTypeDescriptor() instanceof DeclaredTypeDescriptor) {
       return iterableExpression;
     }
+
+    // If the loop variable types is a primitive, the iterable element type must be its boxed type.
+    TypeDescriptor iterableElementType =
+        loopVariableType.isPrimitive() ? loopVariableType.toBoxedType() : loopVariableType;
     return CastExpression.newBuilder()
         .setCastTypeDescriptor(
             castToType.specializeTypeVariables(
                 ImmutableMap.of(
                     castToType.getTypeDeclaration().getTypeParameterDescriptors().get(0),
-                    typeArgument.toBoxedType())))
+                    iterableElementType)))
         .setExpression(iterableExpression)
         .build();
   }
