@@ -9,7 +9,7 @@ open class Number {
 
  companion object {
   @JvmStatic
-  fun `fun`(x: Double): Boolean {}
+  external fun `fun`(x: Double): Boolean
 
   @JvmStatic
   fun test(x: Double): Boolean {
@@ -17,7 +17,7 @@ open class Number {
   }
 
   @JvmStatic
-  internal fun getFromCharCodeFunction(): importglobaljstypes.`Number$NativeFunction`<kotlin.String?>? {}
+  external internal fun getFromCharCodeFunction(): importglobaljstypes.`Number$NativeFunction`<kotlin.String?>?
 
   @JvmStatic
   fun fromCharCode(array: IntArray?): kotlin.String? {
@@ -27,7 +27,7 @@ open class Number {
 }
 
 fun interface `Number$NativeFunction`<T> {
- fun apply(thisContext: kotlin.Any?, argsArray: IntArray?): T?
+ external fun apply(thisContext: kotlin.Any?, argsArray: IntArray?): T?
 }
 
 interface `Number$MyLiteralType` {}

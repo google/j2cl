@@ -37,7 +37,7 @@ open class Main {
   }
 
   @JvmStatic
-  internal fun <T> await(thenable: jsasync.`Main$IThenable`<T>?): T? {}
+  external internal fun <T> await(thenable: jsasync.`Main$IThenable`<T>?): T?
  }
 }
 
@@ -107,6 +107,6 @@ open class `Main$Promise`<T>: jsasync.`Main$IThenable`<T> {
 
  companion object {
   @JvmStatic
-  fun <T_1> resolve(value: T_1?): jsasync.`Main$Promise`<T_1>? {}
+  external fun <T_1> resolve(value: T_1?): jsasync.`Main$Promise`<T_1>?
  }
 }

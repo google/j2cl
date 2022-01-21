@@ -40,7 +40,7 @@ internal fun Renderer.renderMember(member: Member, kind: Kind) {
 
 private fun Renderer.renderMethod(method: Method, kind: Kind) {
   renderMethodHeader(method, kind)
-  if (!method.isAbstract) {
+  if (!method.isAbstract && !method.isNative) {
     // Render all statements except constructor invocation statements.
     val statements = method.body.statements.filter { !isConstructorInvocationStatement(it) }
 
@@ -101,6 +101,9 @@ private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
 }
 
 private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, kind: Kind) {
+  if (methodDescriptor.isNative) {
+    render("external ")
+  }
   renderVisibility(methodDescriptor.visibility)
   if (kind != Kind.INTERFACE) {
     if (methodDescriptor.isAbstract) render("abstract ")

@@ -277,11 +277,11 @@ fun interface `Lambdas$GenericJsFunction`<R, T> {
 }
 
 fun interface `Lambdas$Thenable`<T> {
- fun then(f1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, T>?, f2: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, kotlin.Throwable?>?)
+ external fun then(f1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, T>?, f2: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, kotlin.Throwable?>?)
 }
 
 fun interface `Lambdas$AnotherThenable`<T> {
- fun then(f1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, T>?, f2: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, kotlin.Throwable?>?)
+ external fun then(f1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, T>?, f2: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, kotlin.Throwable?>?)
 }
 
 class `Lambdas$IdentityFunction`: lambdas.`Lambdas$GenericJsFunction`<kotlin.Any?, kotlin.Any?> {

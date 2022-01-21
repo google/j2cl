@@ -53,11 +53,11 @@ open class Bar {
 open class NativeFoo {
  internal constructor(): super()
 
- open fun getA(): kotlin.Any? {}
+ external open fun getA(): kotlin.Any?
 
  companion object {
   @JvmStatic
-  fun getB(): Double {}
+  external fun getB(): Double
  }
 }
 
