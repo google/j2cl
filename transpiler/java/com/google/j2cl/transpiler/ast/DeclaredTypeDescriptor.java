@@ -828,15 +828,14 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
         .build();
   }
 
-  /** Returns the default (parameterless) constructor for the type.. */
+  /** Returns the default (parameterless) constructor for the type. */
   @Memoized
   public MethodDescriptor getDefaultConstructorMethodDescriptor() {
-    return getDeclaredMethodDescriptors()
-        .stream()
+    return getDeclaredMethodDescriptors().stream()
         .filter(MethodDescriptor::isConstructor)
         .filter(methodDescriptor -> methodDescriptor.getParameterTypeDescriptors().isEmpty())
         .findFirst()
-        .orElse(null);
+        .get();
   }
 
   /**
