@@ -42,11 +42,11 @@ open class Main {
 }
 
 open class `Main$1`: jsasync.`Main$BaseInterface` {
+ @JvmField val `this`: jsasync.Main?
+
  internal constructor(`$outer_this`: jsasync.Main?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: jsasync.Main?
 
  open override fun asyncCall(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   return jsasync.`Main$Promise`.resolve(jsasync.Main.await(this.`this`!!.x))
@@ -54,11 +54,11 @@ open class `Main$1`: jsasync.`Main$BaseInterface` {
 }
 
 open class `Main$2`: jsasync.`Main$JsFunctionInterface` {
+ @JvmField val `this`: jsasync.Main?
+
  internal constructor(`$outer_this`: jsasync.Main?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: jsasync.Main?
 
  open override fun doSomething(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   return jsasync.`Main$Promise`.resolve(5)
@@ -66,11 +66,11 @@ open class `Main$2`: jsasync.`Main$JsFunctionInterface` {
 }
 
 open class `Main$3`: jsasync.`Main$JsFunctionInterface` {
+ @JvmField val `this`: jsasync.Main?
+
  internal constructor(`$outer_this`: jsasync.Main?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: jsasync.Main?
 
  open override fun doSomething(): jsasync.`Main$IThenable`<kotlin.Int?>? {
   val tmp: jsasync.`Main$JsFunctionInterface`? = this

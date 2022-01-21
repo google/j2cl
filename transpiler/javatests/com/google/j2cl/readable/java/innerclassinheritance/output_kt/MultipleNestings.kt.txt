@@ -7,31 +7,21 @@ open class MultipleNestings {
 }
 
 open class `MultipleNestings$Parent` {
+ @JvmField val `this`: innerclassinheritance.MultipleNestings?
+
  constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: innerclassinheritance.MultipleNestings?
 
  open fun `fun`() {}
 }
 
-open class `MultipleNestings$InnerClass1`: innerclassinheritance.`MultipleNestings$Parent` {
- constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: innerclassinheritance.MultipleNestings?
-
- open fun funInI1() {}
-}
-
 open class `MultipleNestings$InnerClass1$InnerClass2`: innerclassinheritance.`MultipleNestings$Parent` {
- constructor(`$outer_this`: innerclassinheritance.`MultipleNestings$InnerClass1`?): super() {
+ @JvmField val `this`: innerclassinheritance.`MultipleNestings$InnerClass1`?
+
+ constructor(`$outer_this`: innerclassinheritance.`MultipleNestings$InnerClass1`?): super(this.`this`!!.`this`) {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: innerclassinheritance.`MultipleNestings$InnerClass1`?
 
  open fun funInI2() {}
 
@@ -45,4 +35,14 @@ open class `MultipleNestings$InnerClass1$InnerClass2`: innerclassinheritance.`Mu
   this.`this`!!.funInI1()
   this.funInI2()
  }
+}
+
+open class `MultipleNestings$InnerClass1`: innerclassinheritance.`MultipleNestings$Parent` {
+ @JvmField val `this`: innerclassinheritance.MultipleNestings?
+
+ constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super(`$outer_this`) {
+  this.`this` = `$outer_this`
+ }
+
+ open fun funInI1() {}
 }

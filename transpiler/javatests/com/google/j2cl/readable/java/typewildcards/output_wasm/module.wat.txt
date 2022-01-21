@@ -4,6 +4,9 @@
 ;;; Code for typewildcards.TypeWildCards [static fields]
 (global $f_$initialized__typewildcards_TypeWildCards (mut i32) (i32.const 0))
 
+;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
 ;;; Code for typewildcards.TypeWildCards.X [static fields]
 (global $f_$initialized__typewildcards_TypeWildCards_X (mut i32) (i32.const 0))
 
@@ -30,9 +33,6 @@
 
 ;;; Code for typewildcards.TypeWildCards.Foo [static fields]
 (global $f_$initialized__typewildcards_TypeWildCards_Foo (mut i32) (i32.const 0))
-
-;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (mut i32) (i32.const 0))
 
 ;;; Code for typewildcards.GenericType [vtable.init]
 (global $typewildcards.GenericType.vtable (ref $typewildcards.GenericType.vtable) 
@@ -68,6 +68,28 @@
 (global $typewildcards.TypeWildCards.itable (ref $itable) (array.init_static $itable 
  ))
 
+;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [vtable.init]
+(global $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable) 
+ (struct.new $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+ )
+)
+
+;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [itable.init]
+(global $typewildcards.TypeWildCards.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+ (struct.new $java.util.function.Function.vtable
+  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
+  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+ )
+ ))
+
 ;;; Code for typewildcards.TypeWildCards.A [vtable.init]
 (global $typewildcards.TypeWildCards.A.vtable (ref $typewildcards.TypeWildCards.A.vtable) 
  (struct.new $typewildcards.TypeWildCards.A.vtable
@@ -98,28 +120,6 @@
 
 ;;; Code for typewildcards.TypeWildCards.Foo [itable.init]
 (global $typewildcards.TypeWildCards.Foo.itable (ref $itable) (array.init_static $itable 
- ))
-
-;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [vtable.init]
-(global $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable) 
- (struct.new $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)
-  (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
-  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
-  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
- )
-)
-
-;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [itable.init]
-(global $typewildcards.TypeWildCards.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
- (struct.new $java.util.function.Function.vtable
-  (ref.func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
-  (ref.func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
-  (ref.func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
- )
  ))
 
 ;;; Code for typewildcards.GenericType [CLASS]
@@ -471,6 +471,163 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards)
+
+;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [CLASS]
+(type $typewildcards.TypeWildCards.$LambdaImplementor$1 (struct_subtype 
+ (field $vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
+ (field $m_andThen__java_util_function_Function__java_util_function_Function (ref $function.m_andThen__java_util_function_Function__java_util_function_Function))
+ (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.m_compose__java_util_function_Function__java_util_function_Function))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$1<T, R> $LambdaImplementor$1.$create()
+(func $$create__typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (result (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ ;;@ typewildcards/TypeWildCards.java:92:12
+ (local $$instance (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1<T, R> $instance = new $LambdaImplementor$1.<init>();
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (local.set $$instance (struct.new $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (call $$ctor__void_$p_typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (param $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ ;;@ typewildcards/TypeWildCards.java:92:12
+ (block
+  ;; typewildcards.TypeWildCards.$LambdaImplementor$1.$clinit();
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (call $$clinit__void@typewildcards.TypeWildCards.$LambdaImplementor$1 )
+  ;; Object.this.$ctor();
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; R $LambdaImplementor$1.apply(T a)
+(func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $a (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ typewildcards/TypeWildCards.java:92:12
+ (local $a_1 (ref null $java.lang.Object))
+ (local $$qualifier (ref null $java.lang.Object))
+ (local $$qualifier_1 (ref null $java.lang.Object))
+ (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; (Object&HasKey&IntegerSupplier) a = ((T) a);
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (local.set $a_1 (ref.cast_static $java.lang.Object (local.get $a)))
+  (block
+   ;; HasKey $qualifier = ((HasKey) a);
+   ;;@ typewildcards/TypeWildCards.java:93:14
+   (local.set $$qualifier (local.get $a_1))
+   ;; $qualifier.getKey();
+   ;;@ typewildcards/TypeWildCards.java:93:14
+   (drop (call_ref (local.get $$qualifier)(struct.get $typewildcards.TypeWildCards.HasKey.vtable $m_getKey__java_lang_String (ref.cast_static $typewildcards.TypeWildCards.HasKey.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) )))
+  )
+  ;; return (IntegerSupplier $qualifier = ((IntegerSupplier) a),$qualifier.get());
+  ;;@ typewildcards/TypeWildCards.java:94:14
+  (return (block (result (ref null $java.lang.Integer))
+   (local.set $$qualifier_1 (local.get $a_1))
+   (call_ref (local.get $$qualifier_1)(struct.get $typewildcards.TypeWildCards.IntegerSupplier.vtable $m_get__java_lang_Integer (ref.cast_static $typewildcards.TypeWildCards.IntegerSupplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const -1))) ))
+  ))
+ )
+)
+(elem declare func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
+
+;;; Function<T, V> $LambdaImplementor$1.andThen(Function<? super R, ? extends V> arg0)
+(func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.m_andThen__java_util_function_Function__java_util_function_Function)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ typewildcards/TypeWildCards.java:92:12
+ (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return Function.this.andThen(arg0);
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (return (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
+ )
+)
+(elem declare func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+
+;;; Function<V, R> $LambdaImplementor$1.compose(Function<? super V, ? extends T> arg0)
+(func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.m_compose__java_util_function_Function__java_util_function_Function)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $arg0 (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ typewildcards/TypeWildCards.java:92:12
+ (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return Function.this.compose(arg0);
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (return (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
+ )
+)
+(elem declare func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@typewildcards.TypeWildCards.$LambdaImplementor$1
+ ;;@ typewildcards/TypeWildCards.java:92:12
+ (block
+  ;; if (typewildcards.TypeWildCards.$LambdaImplementor$1.$initialized) return;
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (if (global.get $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1)
+   (then
+    ;; return;
+    ;;@ typewildcards/TypeWildCards.java:92:12
+    (return )
+   )
+  )
+  ;; (typewildcards.TypeWildCards.$LambdaImplementor$1.$initialized = true);
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (global.set $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (call $$clinit__void@java.lang.Object )
+  ;; java.util.function.Function.$clinit();
+  ;;@ typewildcards/TypeWildCards.java:92:12
+  (call $$clinit__void@java.util.function.Function )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.$LambdaImplementor$1();
+  (return (call $function.no.side.effects.$getTypewildcards.TypeWildCards.$LambdaImplementor$1__java_lang_Class (ref.func $$getTypewildcards.TypeWildCards.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)
 
 ;;; Code for typewildcards.TypeWildCards.X [INTERFACE]
 (type $typewildcards.TypeWildCards.X.vtable (struct_subtype 
@@ -967,160 +1124,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.Foo)
-
-;;; Code for typewildcards.TypeWildCards.$LambdaImplementor$1 [CLASS]
-(type $typewildcards.TypeWildCards.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_apply__java_lang_Object__java_lang_Object (ref $function.m_apply__java_lang_Object__java_lang_Object))
- (field $m_andThen__java_util_function_Function__java_util_function_Function (ref $function.m_andThen__java_util_function_Function__java_util_function_Function))
- (field $m_compose__java_util_function_Function__java_util_function_Function (ref $function.m_compose__java_util_function_Function__java_util_function_Function))
-  $java.lang.Object.vtable)
-)
-
-;;; $LambdaImplementor$1<T, R> $LambdaImplementor$1.$create()
-(func $$create__typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1
- (result (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- ;;@ typewildcards/TypeWildCards.java:92:12
- (local $$instance (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (block
-  ;; $LambdaImplementor$1<T, R> $instance = new $LambdaImplementor$1.<init>();
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (local.set $$instance (struct.new $typewildcards.TypeWildCards.$LambdaImplementor$1 (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $typewildcards.TypeWildCards.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (call $$ctor__void_$p_typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $$instance))
-  ;; return $instance;
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (return (local.get $$instance))
- )
-)
-
-;;; void $LambdaImplementor$1.$ctor()
-(func $$ctor__void_$p_typewildcards_TypeWildCards_$LambdaImplementor$1@typewildcards.TypeWildCards.$LambdaImplementor$1
- (param $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- ;;@ typewildcards/TypeWildCards.java:92:12
- (block
-  ;; typewildcards.TypeWildCards.$LambdaImplementor$1.$clinit();
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (call $$clinit__void@typewildcards.TypeWildCards.$LambdaImplementor$1 )
-  ;; Object.this.$ctor();
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; R $LambdaImplementor$1.apply(T a)
-(func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1
- (type $function.m_apply__java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
- (param $a (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ typewildcards/TypeWildCards.java:92:12
- (local $a_1 (ref null $java.lang.Object))
- (local $$qualifier (ref null $java.lang.Object))
- (local $$qualifier_1 (ref null $java.lang.Object))
- (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; (Object&HasKey&IntegerSupplier) a = ((T) a);
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (local.set $a_1 (ref.cast_static $java.lang.Object (local.get $a)))
-  (block
-   ;; HasKey $qualifier = ((HasKey) a);
-   ;;@ typewildcards/TypeWildCards.java:93:14
-   (local.set $$qualifier (local.get $a_1))
-   ;; $qualifier.getKey();
-   ;;@ typewildcards/TypeWildCards.java:93:14
-   (drop (call_ref (local.get $$qualifier)(struct.get $typewildcards.TypeWildCards.HasKey.vtable $m_getKey__java_lang_String (ref.cast_static $typewildcards.TypeWildCards.HasKey.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier)) (i32.const -1))) )))
-  )
-  ;; return (IntegerSupplier $qualifier = ((IntegerSupplier) a),$qualifier.get());
-  ;;@ typewildcards/TypeWildCards.java:94:14
-  (return (block (result (ref null $java.lang.Integer))
-   (local.set $$qualifier_1 (local.get $a_1))
-   (call_ref (local.get $$qualifier_1)(struct.get $typewildcards.TypeWildCards.IntegerSupplier.vtable $m_get__java_lang_Integer (ref.cast_static $typewildcards.TypeWildCards.IntegerSupplier.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$qualifier_1)) (i32.const -1))) ))
-  ))
- )
-)
-(elem declare func $m_apply__java_lang_Object__java_lang_Object@typewildcards.TypeWildCards.$LambdaImplementor$1)
-
-;;; Function<T, V> $LambdaImplementor$1.andThen(Function<? super R, ? extends V> arg0)
-(func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1
- (type $function.m_andThen__java_util_function_Function__java_util_function_Function)
- (param $this.untyped (ref null $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ typewildcards/TypeWildCards.java:92:12
- (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return Function.this.andThen(arg0);
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (return (call $m_andThen__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
- )
-)
-(elem declare func $m_andThen__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
-
-;;; Function<V, R> $LambdaImplementor$1.compose(Function<? super V, ? extends T> arg0)
-(func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1
- (type $function.m_compose__java_util_function_Function__java_util_function_Function)
- (param $this.untyped (ref null $java.lang.Object))
- (param $arg0 (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ typewildcards/TypeWildCards.java:92:12
- (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return Function.this.compose(arg0);
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (return (call $m_compose__java_util_function_Function__java_util_function_Function@java.util.function.Function (local.get $this)(local.get $arg0)))
- )
-)
-(elem declare func $m_compose__java_util_function_Function__java_util_function_Function@typewildcards.TypeWildCards.$LambdaImplementor$1)
-
-;;; void $LambdaImplementor$1.$clinit()
-(func $$clinit__void@typewildcards.TypeWildCards.$LambdaImplementor$1
- ;;@ typewildcards/TypeWildCards.java:92:12
- (block
-  ;; if (typewildcards.TypeWildCards.$LambdaImplementor$1.$initialized) return;
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (if (global.get $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1)
-   (then
-    ;; return;
-    ;;@ typewildcards/TypeWildCards.java:92:12
-    (return )
-   )
-  )
-  ;; (typewildcards.TypeWildCards.$LambdaImplementor$1.$initialized = true);
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (global.set $f_$initialized__typewildcards_TypeWildCards_$LambdaImplementor$1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (call $$clinit__void@java.lang.Object )
-  ;; java.util.function.Function.$clinit();
-  ;;@ typewildcards/TypeWildCards.java:92:12
-  (call $$clinit__void@java.util.function.Function )
- )
-)
-
-;;; Class<?> $LambdaImplementor$1.getClass()
-(func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $typewildcards.TypeWildCards.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $typewildcards.TypeWildCards.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getTypewildcards.TypeWildCards.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getTypewildcards.TypeWildCards.$LambdaImplementor$1__java_lang_Class (ref.func $$getTypewildcards.TypeWildCards.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@typewildcards.TypeWildCards.$LambdaImplementor$1)

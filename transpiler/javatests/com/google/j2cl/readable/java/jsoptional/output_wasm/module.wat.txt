@@ -1,6 +1,9 @@
 ;;; Code for jsoptional.Main [static fields]
 (global $f_$initialized__jsoptional_Main (mut i32) (i32.const 0))
 
+;;; Code for jsoptional.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__jsoptional_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
 ;;; Code for jsoptional.Main.Function [static fields]
 (global $f_$initialized__jsoptional_Main_Function (mut i32) (i32.const 0))
 
@@ -19,9 +22,6 @@
 ;;; Code for jsoptional.Main.NonJsTypeSubtype [static fields]
 (global $f_$initialized__jsoptional_Main_NonJsTypeSubtype (mut i32) (i32.const 0))
 
-;;; Code for jsoptional.Main.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__jsoptional_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
-
 ;;; Code for jsoptional.Main [vtable.init]
 (global $jsoptional.Main.vtable (ref $jsoptional.Main.vtable) 
  (struct.new $jsoptional.Main.vtable
@@ -38,6 +38,24 @@
 
 ;;; Code for jsoptional.Main [itable.init]
 (global $jsoptional.Main.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for jsoptional.Main.$LambdaImplementor$1 [vtable.init]
+(global $jsoptional.Main.$LambdaImplementor$1.vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable) 
+ (struct.new $jsoptional.Main.$LambdaImplementor$1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsoptional.Main.$LambdaImplementor$1)
+  (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1)
+ )
+)
+
+;;; Code for jsoptional.Main.$LambdaImplementor$1 [itable.init]
+(global $jsoptional.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+ (struct.new $jsoptional.Main.Function.vtable
+  (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1)
+ )
  ))
 
 ;;; Code for jsoptional.Main.AFunction [vtable.init]
@@ -112,24 +130,6 @@
 (global $jsoptional.Main.NonJsTypeSubtype.itable (ref $itable) (array.init_static $itable 
  (struct.new $jsoptional.Main.I.vtable
   (ref.func $m_m__java_lang_Object__java_lang_Object__void@jsoptional.Main.NonJsTypeSubtype)
- )
- ))
-
-;;; Code for jsoptional.Main.$LambdaImplementor$1 [vtable.init]
-(global $jsoptional.Main.$LambdaImplementor$1.vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable) 
- (struct.new $jsoptional.Main.$LambdaImplementor$1.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsoptional.Main.$LambdaImplementor$1)
-  (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1)
- )
-)
-
-;;; Code for jsoptional.Main.$LambdaImplementor$1 [itable.init]
-(global $jsoptional.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
- (struct.new $jsoptional.Main.Function.vtable
-  (ref.func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1)
  )
  ))
 
@@ -292,6 +292,108 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main)
+
+;;; Code for jsoptional.Main.$LambdaImplementor$1 [CLASS]
+(type $jsoptional.Main.$LambdaImplementor$1 (struct_subtype 
+ (field $vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $jsoptional.Main.$LambdaImplementor$1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
+(func $$create__jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1
+ (result (ref null $jsoptional.Main.$LambdaImplementor$1))
+ ;;@ jsoptional/Main.java:36:15
+ (local $$instance (ref null $jsoptional.Main.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;;@ jsoptional/Main.java:36:15
+  (local.set $$instance (struct.new $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ jsoptional/Main.java:36:15
+  (call $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsoptional/Main.java:36:15
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1
+ (param $this (ref null $jsoptional.Main.$LambdaImplementor$1))
+ ;;@ jsoptional/Main.java:36:15
+ (block
+  ;; jsoptional.Main.$LambdaImplementor$1.$clinit();
+  ;;@ jsoptional/Main.java:36:15
+  (call $$clinit__void@jsoptional.Main.$LambdaImplementor$1 )
+  ;; Object.this.$ctor();
+  ;;@ jsoptional/Main.java:36:15
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; Object $LambdaImplementor$1.f1(String s, Object... varargs)
+(func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1
+ (type $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ (param $varargs (ref null $javaemul.internal.WasmArray.OfObject))
+ (result (ref null $java.lang.Object))
+ ;;@ jsoptional/Main.java:36:15
+ (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $jsoptional.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return s;
+  ;;@ jsoptional/Main.java:36:31
+  (return (local.get $s))
+ )
+)
+(elem declare func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@jsoptional.Main.$LambdaImplementor$1
+ ;;@ jsoptional/Main.java:36:15
+ (block
+  ;; if (jsoptional.Main.$LambdaImplementor$1.$initialized) return;
+  ;;@ jsoptional/Main.java:36:15
+  (if (global.get $f_$initialized__jsoptional_Main_$LambdaImplementor$1)
+   (then
+    ;; return;
+    ;;@ jsoptional/Main.java:36:15
+    (return )
+   )
+  )
+  ;; (jsoptional.Main.$LambdaImplementor$1.$initialized = true);
+  ;;@ jsoptional/Main.java:36:15
+  (global.set $f_$initialized__jsoptional_Main_$LambdaImplementor$1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsoptional/Main.java:36:15
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@jsoptional.Main.$LambdaImplementor$1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $jsoptional.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.$LambdaImplementor$1();
+  (return (call $function.no.side.effects.$getJsoptional.Main.$LambdaImplementor$1__java_lang_Class (ref.func $$getJsoptional.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@jsoptional.Main.$LambdaImplementor$1)
 
 ;;; Code for jsoptional.Main.Function [INTERFACE]
 (type $jsoptional.Main.Function.vtable (struct_subtype 
@@ -632,7 +734,7 @@
   ;;@ jsoptional/Main.java:68:52
   (call $$clinit__void@jsoptional.Main.SpecializedSubtype )
   ;; (SpecializedSubtype.this.this = $outer_this);
-  ;;@ jsoptional/Main.java:68:11
+  ;;@ jsoptional/Main.java:66:8
   (struct.set $jsoptional.Main.SpecializedSubtype $$outer_this__jsoptional_Main_SpecializedSubtype(local.get $this) (local.get $$outer_this))
   ;; Object.this.$ctor();
   ;;@ jsoptional/Main.java:68:52
@@ -822,105 +924,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsoptional.Main.NonJsTypeSubtype)
-
-;;; Code for jsoptional.Main.$LambdaImplementor$1 [CLASS]
-(type $jsoptional.Main.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $jsoptional.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsoptional.Main.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object (ref $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object))
-  $java.lang.Object.vtable)
-)
-
-;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
-(func $$create__jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1
- (result (ref null $jsoptional.Main.$LambdaImplementor$1))
- ;;@ jsoptional/Main.java:36:15
- (local $$instance (ref null $jsoptional.Main.$LambdaImplementor$1))
- (block
-  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
-  ;;@ jsoptional/Main.java:36:15
-  (local.set $$instance (struct.new $jsoptional.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsoptional.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ jsoptional/Main.java:36:15
-  (call $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1 (local.get $$instance))
-  ;; return $instance;
-  ;;@ jsoptional/Main.java:36:15
-  (return (local.get $$instance))
- )
-)
-
-;;; void $LambdaImplementor$1.$ctor()
-(func $$ctor__void_$p_jsoptional_Main_$LambdaImplementor$1@jsoptional.Main.$LambdaImplementor$1
- (param $this (ref null $jsoptional.Main.$LambdaImplementor$1))
- ;;@ jsoptional/Main.java:36:15
- (block
-  ;; jsoptional.Main.$LambdaImplementor$1.$clinit();
-  ;;@ jsoptional/Main.java:36:15
-  (call $$clinit__void@jsoptional.Main.$LambdaImplementor$1 )
-  ;; Object.this.$ctor();
-  ;;@ jsoptional/Main.java:36:15
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; Object $LambdaImplementor$1.f1(String s, Object... varargs)
-(func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1
- (type $function.m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object)
- (param $this.untyped (ref null $java.lang.Object))
- (param $s (ref null $java.lang.String))
- (param $varargs (ref null $javaemul.internal.WasmArray.OfObject))
- (result (ref null $java.lang.Object))
- ;;@ jsoptional/Main.java:36:15
- (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $jsoptional.Main.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return s;
-  ;;@ jsoptional/Main.java:36:31
-  (return (local.get $s))
- )
-)
-(elem declare func $m_f1__java_lang_String__arrayOf_java_lang_Object__java_lang_Object@jsoptional.Main.$LambdaImplementor$1)
-
-;;; void $LambdaImplementor$1.$clinit()
-(func $$clinit__void@jsoptional.Main.$LambdaImplementor$1
- ;;@ jsoptional/Main.java:36:15
- (block
-  ;; if (jsoptional.Main.$LambdaImplementor$1.$initialized) return;
-  ;;@ jsoptional/Main.java:36:15
-  (if (global.get $f_$initialized__jsoptional_Main_$LambdaImplementor$1)
-   (then
-    ;; return;
-    ;;@ jsoptional/Main.java:36:15
-    (return )
-   )
-  )
-  ;; (jsoptional.Main.$LambdaImplementor$1.$initialized = true);
-  ;;@ jsoptional/Main.java:36:15
-  (global.set $f_$initialized__jsoptional_Main_$LambdaImplementor$1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ jsoptional/Main.java:36:15
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> $LambdaImplementor$1.getClass()
-(func $m_getClass__java_lang_Class@jsoptional.Main.$LambdaImplementor$1
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsoptional.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $jsoptional.Main.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsoptional.Main.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getJsoptional.Main.$LambdaImplementor$1__java_lang_Class (ref.func $$getJsoptional.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsoptional.Main.$LambdaImplementor$1)

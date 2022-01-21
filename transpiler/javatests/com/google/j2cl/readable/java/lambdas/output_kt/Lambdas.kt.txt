@@ -181,20 +181,12 @@ open class Lambdas {
  }
 }
 
-fun interface `Lambdas$FunctionalInterface` {
- fun m(i: Int): Int
-}
-
-fun interface `Lambdas$Functional`<T> {
- fun wrap(f: lambdas.`Lambdas$Functional`<T>?): lambdas.`Lambdas$Functional`<T>?
-}
-
 open class `Lambdas$1`<T>: lambdas.`Lambdas$Functional`<T> {
+ @JvmField val `this`: lambdas.Lambdas?
+
  internal constructor(`$outer_this`: lambdas.Lambdas?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: lambdas.Lambdas?
 
  open override fun wrap(f: lambdas.`Lambdas$Functional`<T>?): lambdas.`Lambdas$Functional`<T>? {
   return null
@@ -207,6 +199,22 @@ open class `Lambdas$2`<T>: lambdas.`Lambdas$Functional`<T> {
  open override fun wrap(f: lambdas.`Lambdas$Functional`<T>?): lambdas.`Lambdas$Functional`<T>? {
   return null
  }
+}
+
+open class `Lambdas$3` {
+ @JvmField val `this`: lambdas.Lambdas?
+
+ internal constructor(`$outer_this`: lambdas.Lambdas?): super() {
+  this.`this` = `$outer_this`
+ }
+}
+
+fun interface `Lambdas$FunctionalInterface` {
+ fun m(i: Int): Int
+}
+
+fun interface `Lambdas$Functional`<T> {
+ fun wrap(f: lambdas.`Lambdas$Functional`<T>?): lambdas.`Lambdas$Functional`<T>?
 }
 
 fun interface `Lambdas$GenericFunctionalInterface`<T> {
@@ -238,14 +246,6 @@ fun interface `Lambdas$Function`<T, R> {
 
 fun interface `Lambdas$FunctionalInterfaceWithMethodReturningVoid` {
  fun run()
-}
-
-open class `Lambdas$3` {
- internal constructor(`$outer_this`: lambdas.Lambdas?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: lambdas.Lambdas?
 }
 
 open class `Lambdas$Parent` {

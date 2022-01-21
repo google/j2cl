@@ -14,41 +14,24 @@ open class MixedNestings {
  }
 }
 
-open class `MixedNestings$A` {
- internal constructor(`$outer_this`: mixednestings.MixedNestings?): super() {
+open class `MixedNestings$A$1B$1$1`: mixednestings.MyInterface {
+ @JvmField val `this`: mixednestings.`MixedNestings$A$1B$1`?
+
+ internal constructor(`$outer_this`: mixednestings.`MixedNestings$A$1B$1`?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: mixednestings.MixedNestings?
-
- open fun aa() {}
-
- open fun a() {
-  mixednestings.`MixedNestings$A$1B`(this).b()
- }
-}
-
-open class `MixedNestings$A$1B` {
- internal constructor(`$outer_this`: mixednestings.`MixedNestings$A`?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: mixednestings.`MixedNestings$A`?
-
- open fun bb() {}
-
- open fun b(): Int {
-  val i: mixednestings.MyInterface? = mixednestings.`MixedNestings$A$1B$1`(this)
-  return i!!.`fun`(400)
+ open override fun `fun`(b: Int): Int {
+  return b
  }
 }
 
 open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
+ @JvmField val `this`: mixednestings.`MixedNestings$A$1B`?
+
  internal constructor(`$outer_this`: mixednestings.`MixedNestings$A$1B`?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: mixednestings.`MixedNestings$A$1B`?
 
  open override fun `fun`(a: Int): Int {
   val ii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(n: Int): Int {
@@ -67,14 +50,32 @@ open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
  }
 }
 
-open class `MixedNestings$A$1B$1$1`: mixednestings.MyInterface {
- internal constructor(`$outer_this`: mixednestings.`MixedNestings$A$1B$1`?): super() {
+open class `MixedNestings$A$1B` {
+ @JvmField val `this`: mixednestings.`MixedNestings$A`?
+
+ internal constructor(`$outer_this`: mixednestings.`MixedNestings$A`?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: mixednestings.`MixedNestings$A$1B$1`?
+ open fun bb() {}
 
- open override fun `fun`(b: Int): Int {
-  return b
+ open fun b(): Int {
+  val i: mixednestings.MyInterface? = mixednestings.`MixedNestings$A$1B$1`(this)
+  return i!!.`fun`(400)
+ }
+}
+
+open class `MixedNestings$A` {
+ @JvmField val `this`: mixednestings.MixedNestings?
+
+ internal constructor(`$outer_this`: mixednestings.MixedNestings?): super() {
+  this.`this` = `$outer_this`
+ }
+
+ open fun aa() {}
+
+ open fun a() {
+  if (true) {}
+  mixednestings.`MixedNestings$A$1B`(this).b()
  }
 }

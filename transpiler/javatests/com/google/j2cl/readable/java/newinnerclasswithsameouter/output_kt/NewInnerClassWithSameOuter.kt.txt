@@ -5,11 +5,11 @@ open class NewInnerClassWithSameOuter {
 }
 
 open class `NewInnerClassWithSameOuter$A` {
+ @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+
  constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 
  open fun test() {
   newinnerclasswithsameouter.`NewInnerClassWithSameOuter$B`(this.`this`)
@@ -18,17 +18,17 @@ open class `NewInnerClassWithSameOuter$A` {
 }
 
 open class `NewInnerClassWithSameOuter$B` {
+ @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+
  constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 }
 
 open class `NewInnerClassWithSameOuter$C` {
+ @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
+
  internal constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
 }

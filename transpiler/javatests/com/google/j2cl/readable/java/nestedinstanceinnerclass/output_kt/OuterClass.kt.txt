@@ -8,22 +8,22 @@ open class OuterClass {
  }
 }
 
-open class `OuterClass$InnerClass` {
- constructor(`$outer_this`: nestedinstanceinnerclass.OuterClass?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: nestedinstanceinnerclass.OuterClass?
-}
-
 open class `OuterClass$InnerClass$InnerInnerClass` {
+ @JvmField val `this`: nestedinstanceinnerclass.`OuterClass$InnerClass`?
+
  constructor(`$outer_this`: nestedinstanceinnerclass.`OuterClass$InnerClass`?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: nestedinstanceinnerclass.`OuterClass$InnerClass`?
-
  @JvmField var x: nestedinstanceinnerclass.`OuterClass$InnerClass`? = this.`this`
 
  @JvmField var y: nestedinstanceinnerclass.OuterClass? = this.`this`!!.`this`
+}
+
+open class `OuterClass$InnerClass` {
+ @JvmField val `this`: nestedinstanceinnerclass.OuterClass?
+
+ constructor(`$outer_this`: nestedinstanceinnerclass.OuterClass?): super() {
+  this.`this` = `$outer_this`
+ }
 }

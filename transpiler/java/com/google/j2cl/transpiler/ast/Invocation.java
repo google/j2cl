@@ -82,9 +82,12 @@ public abstract class Invocation extends MemberReference {
 
     public final T addArgumentsAndUpdateDescriptor(
         int index, Collection<Expression> argumentExpressions) {
+      if (argumentExpressions.isEmpty()) {
+        return getThis();
+      }
+
       arguments.addAll(index, argumentExpressions);
       // Add the provided parameters to the proper index position of the existing parameters list.
-
       return setTarget(
           MethodDescriptor.Builder.from(getTarget())
               .addParameterTypeDescriptors(

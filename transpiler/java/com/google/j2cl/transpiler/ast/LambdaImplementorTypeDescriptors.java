@@ -31,6 +31,16 @@ public final class LambdaImplementorTypeDescriptors {
   /** Returns the TypeDescriptor for lambda instances of the functional interface. */
   public static DeclaredTypeDescriptor createLambdaImplementorTypeDescriptor(
       TypeDescriptor typeDescriptor, DeclaredTypeDescriptor enclosingTypeDescriptor, int uniqueId) {
+    return createLambdaImplementorTypeDescriptor(
+        typeDescriptor, enclosingTypeDescriptor, uniqueId, false);
+  }
+
+  /** Returns the TypeDescriptor for lambda instances of the functional interface. */
+  public static DeclaredTypeDescriptor createLambdaImplementorTypeDescriptor(
+      TypeDescriptor typeDescriptor,
+      DeclaredTypeDescriptor enclosingTypeDescriptor,
+      int uniqueId,
+      boolean capturesEnclosingInstance) {
 
     DeclaredTypeDescriptor functionalInterfaceTypeDescriptor =
         typeDescriptor.getFunctionalInterface();
@@ -50,7 +60,8 @@ public final class LambdaImplementorTypeDescriptors {
             typeDescriptor.toUnparameterizedTypeDescriptor(),
             enclosingTypeDescriptor.toUnparameterizedTypeDescriptor(),
             TypeDescriptors.toUnparameterizedTypeDescriptors(interfaceTypeDescriptors),
-            uniqueId);
+            uniqueId,
+            capturesEnclosingInstance);
 
     return DeclaredTypeDescriptor.newBuilder()
         .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
@@ -70,7 +81,8 @@ public final class LambdaImplementorTypeDescriptors {
       TypeDescriptor lambdaTypeDescriptor,
       DeclaredTypeDescriptor enclosingTypeDescriptor,
       List<DeclaredTypeDescriptor> interfaceTypeDescriptors,
-      int uniqueId) {
+      int uniqueId,
+      boolean capturesEnclosingInstance) {
 
     TypeDeclaration enclosingTypeDeclaration = enclosingTypeDescriptor.getTypeDeclaration();
     List<String> classComponents =
@@ -97,6 +109,7 @@ public final class LambdaImplementorTypeDescriptors {
                 createLambdaImplementorTypeDescriptor(
                     lambdaTypeDescriptor, enclosingTypeDescriptor, uniqueId))
         .setVisibility(Visibility.PUBLIC)
+        .setCapturingEnclosingInstance(capturesEnclosingInstance)
         .setKind(Kind.CLASS)
         .build();
   }

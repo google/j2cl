@@ -13,13 +13,13 @@
 (global $f_namesToValuesMap__enums_Enum2_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum2 (mut i32) (i32.const 0))
 
-;;; Code for enums.Enum2.1 [static fields]
-(global $f_$initialized__enums_Enum2_1 (mut i32) (i32.const 0))
-
 ;;; Code for enums.Enum3 [static fields]
 (global $f_VALUE1__enums_Enum3 (mut (ref null $enums.Enum3)) (ref.null $enums.Enum3))
 (global $f_namesToValuesMap__enums_Enum3_ (mut (ref null $java.lang.Object)) (ref.null $java.lang.Object))
 (global $f_$initialized__enums_Enum3 (mut i32) (i32.const 0))
+
+;;; Code for enums.Enum2.1 [static fields]
+(global $f_$initialized__enums_Enum2_1 (mut i32) (i32.const 0))
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [static fields]
 (global $f_$initialized__enums_Enum3_$LambdaImplementor$1 (mut i32) (i32.const 0))
@@ -74,31 +74,6 @@
  )
  ))
 
-;;; Code for enums.Enum2.1 [vtable.init]
-(global $enums.Enum2.1.vtable (ref $enums.Enum2.1.vtable) 
- (struct.new $enums.Enum2.1.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Enum)
-  (ref.func $m_getClass__java_lang_Class@enums.Enum2.1)
-  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
-  (ref.func $m_name__java_lang_String@java.lang.Enum)
-  (ref.func $m_ordinal__int@java.lang.Enum)
-  (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
- )
-)
-
-;;; Code for enums.Enum2.1 [itable.init]
-(global $enums.Enum2.1.itable (ref $itable) (array.init_static $itable 
- (struct.new $java.io.Serializable.vtable
-  (ref.null data)
- )
- (struct.new $java.lang.Comparable.vtable
-  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
- )
- ))
-
 ;;; Code for enums.Enum3 [vtable.init]
 (global $enums.Enum3.vtable (ref $enums.Enum3.vtable) 
  (struct.new $enums.Enum3.vtable
@@ -116,6 +91,31 @@
 
 ;;; Code for enums.Enum3 [itable.init]
 (global $enums.Enum3.itable (ref $itable) (array.init_static $itable 
+ (struct.new $java.io.Serializable.vtable
+  (ref.null data)
+ )
+ (struct.new $java.lang.Comparable.vtable
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+ ))
+
+;;; Code for enums.Enum2.1 [vtable.init]
+(global $enums.Enum2.1.vtable (ref $enums.Enum2.1.vtable) 
+ (struct.new $enums.Enum2.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Enum)
+  (ref.func $m_getClass__java_lang_Class@enums.Enum2.1)
+  (ref.func $m_getDeclaringClass__java_lang_Class@java.lang.Enum)
+  (ref.func $m_name__java_lang_String@java.lang.Enum)
+  (ref.func $m_ordinal__int@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Enum__int@java.lang.Enum)
+  (ref.func $m_compareTo__java_lang_Object__int@java.lang.Enum)
+ )
+)
+
+;;; Code for enums.Enum2.1 [itable.init]
+(global $enums.Enum2.1.itable (ref $itable) (array.init_static $itable 
  (struct.new $java.io.Serializable.vtable
   (ref.null data)
  )
@@ -571,103 +571,6 @@
 )
 (elem declare func $m_getClass__java_lang_Class@enums.Enum2)
 
-;;; Code for enums.Enum2.1 [CLASS]
-(type $enums.Enum2.1 (struct_subtype 
- (field $vtable (ref $enums.Enum2.1.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
- (field $f_ordinal__java_lang_Enum_ (mut i32))
- (field $f_foo__enums_Enum2 (mut i32))
-  $enums.Enum2)
-)
-(type $enums.Enum2.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
- (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
- (field $m_ordinal__int (ref $function.m_ordinal__int))
- (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
- (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
-  $enums.Enum2.vtable)
-)
-
-;;; <anonymous> extends Enum2 <anonymous> extends Enum2.$create(String $name, int $ordinal, int $_0)
-(func $$create__java_lang_String__int__int__enums_Enum2_1@enums.Enum2.1
- (param $$name (ref null $java.lang.String))
- (param $$ordinal i32)
- (param $$_0 i32)
- (result (ref null $enums.Enum2.1))
- ;;@ enums/Enum1.java:29:12
- (local $$instance (ref null $enums.Enum2.1))
- (block
-  ;; <anonymous> extends Enum2 $instance = new $1.<init>($name,$ordinal,$_0);
-  ;;@ enums/Enum1.java:29:12
-  (local.set $$instance (struct.new $enums.Enum2.1 (ref.as_non_null (global.get $enums.Enum2.1.vtable)) (ref.as_non_null (global.get $enums.Enum2.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
-  ;; $instance.$ctor($name,$ordinal,$_0);
-  ;;@ enums/Enum1.java:29:12
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2_1@enums.Enum2.1 (local.get $$instance)(local.get $$name)(local.get $$ordinal)(local.get $$_0))
-  ;; return $instance;
-  ;;@ enums/Enum1.java:29:12
-  (return (local.get $$instance))
- )
-)
-
-;;; void <anonymous> extends Enum2.$ctor(String $name, int $ordinal, int $_0)
-(func $$ctor__java_lang_String__int__int__void_$p_enums_Enum2_1@enums.Enum2.1
- (param $this (ref null $enums.Enum2.1))
- (param $$name (ref null $java.lang.String))
- (param $$ordinal i32)
- (param $$_0 i32)
- ;;@ enums/Enum1.java:29:12
- (block
-  ;; enums.Enum2.1.$clinit();
-  ;;@ enums/Enum1.java:29:12
-  (call $$clinit__void@enums.Enum2.1 )
-  ;; Enum2.this.$ctor($name,$ordinal,$_0);
-  ;;@ enums/Enum1.java:29:12
-  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(local.get $$_0))
- )
-)
-
-;;; void <anonymous> extends Enum2.$clinit()
-(func $$clinit__void@enums.Enum2.1
- ;;@ enums/Enum1.java:29:12
- (block
-  ;; if (enums.Enum2.1.$initialized) return;
-  ;;@ enums/Enum1.java:29:12
-  (if (global.get $f_$initialized__enums_Enum2_1)
-   (then
-    ;; return;
-    ;;@ enums/Enum1.java:29:12
-    (return )
-   )
-  )
-  ;; (enums.Enum2.1.$initialized = true);
-  ;;@ enums/Enum1.java:29:12
-  (global.set $f_$initialized__enums_Enum2_1 (i32.const 1))
-  ;; enums.Enum2.$clinit();
-  ;;@ enums/Enum1.java:29:12
-  (call $$clinit__void@enums.Enum2 )
- )
-)
-
-;;; Class<?> <anonymous> extends Enum2.getClass()
-(func $m_getClass__java_lang_Class@enums.Enum2.1
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $enums.Enum2.1))
- (local.set $this (ref.cast_static $enums.Enum2.1 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum2.1();
-  (return (call $function.no.side.effects.$getEnums.Enum2.1__java_lang_Class (ref.func $$getEnums.Enum2.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@enums.Enum2.1)
-
 ;;; Code for enums.Enum3 [ENUM]
 (type $enums.Enum3 (struct_subtype 
  (field $vtable (ref $enums.Enum3.vtable)) 
@@ -809,6 +712,103 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@enums.Enum3)
+
+;;; Code for enums.Enum2.1 [CLASS]
+(type $enums.Enum2.1 (struct_subtype 
+ (field $vtable (ref $enums.Enum2.1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $f_name__java_lang_Enum_ (mut (ref null $java.lang.String)))
+ (field $f_ordinal__java_lang_Enum_ (mut i32))
+ (field $f_foo__enums_Enum2 (mut i32))
+  $enums.Enum2)
+)
+(type $enums.Enum2.1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_getDeclaringClass__java_lang_Class (ref $function.m_getDeclaringClass__java_lang_Class))
+ (field $m_name__java_lang_String (ref $function.m_name__java_lang_String))
+ (field $m_ordinal__int (ref $function.m_ordinal__int))
+ (field $m_compareTo__java_lang_Enum__int (ref $function.m_compareTo__java_lang_Enum__int))
+ (field $m_compareTo__java_lang_Object__int (ref $function.m_compareTo__java_lang_Object__int))
+  $enums.Enum2.vtable)
+)
+
+;;; <anonymous> extends Enum2 <anonymous> extends Enum2.$create(String $name, int $ordinal, int $_0)
+(func $$create__java_lang_String__int__int__enums_Enum2_1@enums.Enum2.1
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (param $$_0 i32)
+ (result (ref null $enums.Enum2.1))
+ ;;@ enums/Enum1.java:29:12
+ (local $$instance (ref null $enums.Enum2.1))
+ (block
+  ;; <anonymous> extends Enum2 $instance = new $1.<init>($name,$ordinal,$_0);
+  ;;@ enums/Enum1.java:29:12
+  (local.set $$instance (struct.new $enums.Enum2.1 (ref.as_non_null (global.get $enums.Enum2.1.vtable)) (ref.as_non_null (global.get $enums.Enum2.1.itable)) (i32.const 0) (ref.null $java.lang.String) (i32.const 0) (i32.const 0)))
+  ;; $instance.$ctor($name,$ordinal,$_0);
+  ;;@ enums/Enum1.java:29:12
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2_1@enums.Enum2.1 (local.get $$instance)(local.get $$name)(local.get $$ordinal)(local.get $$_0))
+  ;; return $instance;
+  ;;@ enums/Enum1.java:29:12
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Enum2.$ctor(String $name, int $ordinal, int $_0)
+(func $$ctor__java_lang_String__int__int__void_$p_enums_Enum2_1@enums.Enum2.1
+ (param $this (ref null $enums.Enum2.1))
+ (param $$name (ref null $java.lang.String))
+ (param $$ordinal i32)
+ (param $$_0 i32)
+ ;;@ enums/Enum1.java:29:12
+ (block
+  ;; enums.Enum2.1.$clinit();
+  ;;@ enums/Enum1.java:29:12
+  (call $$clinit__void@enums.Enum2.1 )
+  ;; Enum2.this.$ctor($name,$ordinal,$_0);
+  ;;@ enums/Enum1.java:29:12
+  (call $$ctor__java_lang_String__int__int__void_$p_enums_Enum2@enums.Enum2 (local.get $this)(local.get $$name)(local.get $$ordinal)(local.get $$_0))
+ )
+)
+
+;;; void <anonymous> extends Enum2.$clinit()
+(func $$clinit__void@enums.Enum2.1
+ ;;@ enums/Enum1.java:29:12
+ (block
+  ;; if (enums.Enum2.1.$initialized) return;
+  ;;@ enums/Enum1.java:29:12
+  (if (global.get $f_$initialized__enums_Enum2_1)
+   (then
+    ;; return;
+    ;;@ enums/Enum1.java:29:12
+    (return )
+   )
+  )
+  ;; (enums.Enum2.1.$initialized = true);
+  ;;@ enums/Enum1.java:29:12
+  (global.set $f_$initialized__enums_Enum2_1 (i32.const 1))
+  ;; enums.Enum2.$clinit();
+  ;;@ enums/Enum1.java:29:12
+  (call $$clinit__void@enums.Enum2 )
+ )
+)
+
+;;; Class<?> <anonymous> extends Enum2.getClass()
+(func $m_getClass__java_lang_Class@enums.Enum2.1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $enums.Enum2.1))
+ (local.set $this (ref.cast_static $enums.Enum2.1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getEnums.Enum2.1();
+  (return (call $function.no.side.effects.$getEnums.Enum2.1__java_lang_Class (ref.func $$getEnums.Enum2.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@enums.Enum2.1)
 
 ;;; Code for enums.Enum3.$LambdaImplementor$1 [CLASS]
 (type $enums.Enum3.$LambdaImplementor$1 (struct_subtype 

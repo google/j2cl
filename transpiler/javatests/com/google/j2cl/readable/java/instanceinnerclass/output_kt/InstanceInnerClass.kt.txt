@@ -13,11 +13,11 @@ open class InstanceInnerClass {
 }
 
 open class `InstanceInnerClass$InnerClass` {
+ @JvmField val `this`: instanceinnerclass.InstanceInnerClass?
+
  constructor(`$outer_this`: instanceinnerclass.InstanceInnerClass?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: instanceinnerclass.InstanceInnerClass?
 
  @JvmField var field: Int = this.`this`!!.instanceField + this.`this`!!.instanceField
 

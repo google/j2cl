@@ -35,6 +35,7 @@ class DefaultNonEmptyConstructorAutoValue extends ValueType {
  }
  /** @return {!DefaultNonEmptyConstructorAutoValue} */
  static $create__boolean(/** boolean */ booleanField) {
+  DefaultNonEmptyConstructorAutoValue.$clinit();
   let $instance = new DefaultNonEmptyConstructorAutoValue();
   $instance.$ctor__autovalue_DefaultNonEmptyConstructorAutoValue__boolean(booleanField);
   return $instance;

@@ -52,14 +52,31 @@ public class Main {
 
   private static void testVariableCapture_nested() {
     final int variable = 1;
+    final int anotherVariable = 2;
     class Outer {
-      class Inner {
+      public int getField() {
+        return field;
+      }
+
+      // TODO(b/215282471): anonymous class needs to pass the capture anotherVariable to Outer, but
+      // when computing the captures it has not seen that Outer captures anotherVariable yet.
+      // public Outer anonymous() {
+      //    return new Outer() {};
+      // }
+
+      class Inner extends Outer {
         public int variable() {
           return variable;
         }
       }
+
+      // Keep the only reference to the captured variable AFTER the nested classes to test that
+      // the AST traversal in the resolution of captures handles the case.
+      public int field = anotherVariable;
     }
     assertEquals(variable, new Outer().new Inner().variable());
+    assertEquals(anotherVariable, new Outer().new Inner().getField());
+    // assertEquals(anotherVariable, new Outer().anonymous().getField());
   }
 
   private static void testVariableCapture_indirect() {

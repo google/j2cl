@@ -16,10 +16,6 @@ open class TreeMap<K>: nobridgemethods.Map<K> {
  }
 }
 
-open class `TreeMap$InnerEntry`<K>: nobridgemethods.Entry<K> {
- internal constructor(): super()
-}
-
 open class CharSet {
  constructor(): super()
 
@@ -29,6 +25,10 @@ open class CharSet {
    val treeMap: nobridgemethods.TreeMap<kotlin.String?>? = nobridgemethods.`CharSet$1`()
   }
  }
+}
+
+open class `TreeMap$InnerEntry`<K>: nobridgemethods.Entry<K> {
+ internal constructor(): super()
 }
 
 open class `CharSet$1`: nobridgemethods.TreeMap<kotlin.String?> {

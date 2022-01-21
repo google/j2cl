@@ -87,7 +87,7 @@
 [assert (2 == x.getValue());] => [$Asserts.$assert(2 == x.m_getValue__());] "innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuper"
 [testOuterIsNotSuperAnon] => [m_testOuterIsNotSuperAnon__]
 [Outer.OuterIsNotSuper x = outerIsSuper.new OuterIsNotSuper() {
-    };] => [let x = $2.$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(this, this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);] "innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuperAnon"
+    };] => [let x = $2.$create__innerclassinitorder_InnerClassInitOrder(this);] "innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuperAnon"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert(2 == x.m_getValue__());] "innerclassinitorder.InnerClassInitOrder.testOuterIsNotSuperAnon"
 [testQualifiedSuperCall] => [m_testQualifiedSuperCall__]
@@ -111,7 +111,7 @@
 [assert (2 == x.getValue());] => [$Asserts.$assert(2 == x.m_getValue__());] "innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCall"
 [testUnqualifiedSuperCallAnon] => [m_testUnqualifiedSuperCallAnon__]
 [Outer.TestUnqualifiedSuperCall x = outerIsSuper.new TestUnqualifiedSuperCall() {
-    };] => [let x = $4.$create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(this, this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);] "innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCallAnon"
+    };] => [let x = $4.$create__innerclassinitorder_InnerClassInitOrder(this);] "innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCallAnon"
 [x] => [x] "x"
 [assert (2 == x.getValue());] => [$Asserts.$assert(2 == x.m_getValue__());] "innerclassinitorder.InnerClassInitOrder.testUnqualifiedSuperCallAnon"
 [main] => [m_main__arrayOf_java_lang_String]

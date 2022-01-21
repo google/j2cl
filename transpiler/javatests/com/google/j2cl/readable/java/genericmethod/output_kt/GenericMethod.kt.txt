@@ -11,6 +11,7 @@ open class GenericMethod<T_2> {
 
  open fun <T_1: java.lang.Error?> `fun`(t: T_1?) {
   genericmethod.`GenericMethod$1`<T_1, T_2>(this)
+  if (true) {}
   genericmethod.`GenericMethod$1LocalClass`<T_1, T_1, T_2>(this)
  }
 
@@ -84,27 +85,15 @@ open class GenericMethod<T_2> {
 }
 
 open class `GenericMethod$1`<T_1: java.lang.Error?, T_2>: genericmethod.GenericMethod<T_1> {
+ @JvmField val `this`: genericmethod.GenericMethod<T_2>?
+
  internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: genericmethod.GenericMethod<T_2>?
 
  open fun fun2(t: T_1?) {}
 
  open fun <T_2> fun2(t: T_2?) {}
-}
-
-open class `GenericMethod$1LocalClass`<T, T_1: java.lang.Error?, T_2>: genericmethod.GenericMethod<T> {
- internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: genericmethod.GenericMethod<T_2>?
-
- open fun fun2(t: T?) {}
-
- open fun <T_3: kotlin.Number?> fun2(t: T_3?) {}
 }
 
 open class `GenericMethod$SuperContainer`<C: genericmethod.`GenericMethod$Container`<*>?> {
@@ -129,4 +118,16 @@ open class `GenericMethod$Content` {
  internal open fun getProp(): kotlin.String? {
   return null
  }
+}
+
+open class `GenericMethod$1LocalClass`<T, T_1: java.lang.Error?, T_2>: genericmethod.GenericMethod<T> {
+ @JvmField val `this`: genericmethod.GenericMethod<T_2>?
+
+ internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
+  this.`this` = `$outer_this`
+ }
+
+ open fun fun2(t: T?) {}
+
+ open fun <T_3: kotlin.Number?> fun2(t: T_3?) {}
 }

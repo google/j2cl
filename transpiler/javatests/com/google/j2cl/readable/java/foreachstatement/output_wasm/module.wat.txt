@@ -279,8 +279,6 @@
            ;; Object o = $iterator.next();
            ;;@ foreachstatement/ForEachStatement.java:47:6
            (local.set $o (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) )))
-           (block
-           )
           )
          )
          (br 0)
@@ -331,8 +329,6 @@
       ;; String s = ((String) $iterator.next());
       ;;@ foreachstatement/ForEachStatement.java:60:4
       (local.set $s (ref.cast_static $java.lang.String (call_ref (local.get $$iterator)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator)) (i32.const 0))) ))))
-      (block
-      )
      )
     )
     (br 0)
@@ -356,8 +352,6 @@
        (local.set $$qualifier_1 (ref.cast_static $java.lang.Integer (call_ref (local.get $$iterator_1)(struct.get $java.util.Iterator.vtable $m_next__java_lang_Object (ref.cast_static $java.util.Iterator.vtable (array.get $itable (struct.get $java.lang.Object $itable (local.get $$iterator_1)) (i32.const 0))) ))))
        (call_ref (local.get $$qualifier_1)(struct.get $java.lang.Integer.vtable $m_intValue__int (struct.get $java.lang.Integer $vtable(local.get $$qualifier_1))))
       ))
-      (block
-      )
      )
     )
     (br 0)

@@ -40,6 +40,7 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
   private boolean isStatic;
   private TypeDeclaration typeDeclaration;
   @Visitable List<Member> members = new ArrayList<>();
+  @Visitable List<Type> types = new ArrayList<>();
   @Visitable List<Statement> loadTimeStatements = new ArrayList<>();
   private final SourcePosition sourcePosition;
   private boolean isAbstract;
@@ -142,6 +143,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
 
   public boolean isJsFunctionImplementation() {
     return typeDeclaration.isJsFunctionImplementation();
+  }
+
+  public List<Type> getTypes() {
+    return types;
+  }
+
+  public void addType(Type type) {
+    types.add(type);
   }
 
   public List<Member> getMembers() {

@@ -28,7 +28,6 @@ import javax.annotation.Nullable;
 public class Field extends Member {
   private final FieldDescriptor fieldDescriptor;
   @Visitable @Nullable Expression initializer;
-  private final Variable capturedVariable;
   // TODO(b/112150736): generalize concept of the source position for names to members.
   private final SourcePosition nameSourcePosition;
   // Only valid for enum fields, where it is >= 0.
@@ -38,13 +37,11 @@ public class Field extends Member {
       SourcePosition sourcePosition,
       FieldDescriptor fieldDescriptor,
       Expression initializer,
-      Variable capturedVariable,
       int enumOrdinal,
       SourcePosition nameSourcePosition) {
     super(sourcePosition);
     this.fieldDescriptor = checkNotNull(fieldDescriptor);
     this.initializer = initializer;
-    this.capturedVariable = capturedVariable;
     this.nameSourcePosition = checkNotNull(nameSourcePosition);
     this.enumOrdinal = enumOrdinal;
   }
@@ -56,10 +53,6 @@ public class Field extends Member {
 
   public Expression getInitializer() {
     return initializer;
-  }
-
-  public Variable getCapturedVariable() {
-    return this.capturedVariable;
   }
 
   public SourcePosition getNameSourcePosition() {
@@ -104,7 +97,6 @@ public class Field extends Member {
   public static class Builder {
     private FieldDescriptor fieldDescriptor;
     private Expression initializer;
-    private Variable capturedVariable;
     private SourcePosition sourcePosition;
     private SourcePosition nameSourcePosition = SourcePosition.NONE;
     private int enumOrdinal = -1;
@@ -113,7 +105,6 @@ public class Field extends Member {
       Builder builder = new Builder();
       builder.fieldDescriptor = field.getDescriptor();
       builder.initializer = field.getInitializer();
-      builder.capturedVariable = field.getCapturedVariable();
       builder.sourcePosition = field.getSourcePosition();
       builder.nameSourcePosition = field.getNameSourcePosition();
       builder.enumOrdinal = field.enumOrdinal;
@@ -131,11 +122,6 @@ public class Field extends Member {
 
     public Builder setInitializer(Expression initializer) {
       this.initializer = initializer;
-      return this;
-    }
-
-    public Builder setCapturedVariable(Variable capturedVariable) {
-      this.capturedVariable = capturedVariable;
       return this;
     }
 
@@ -162,7 +148,6 @@ public class Field extends Member {
           sourcePosition,
           fieldDescriptor,
           initializer,
-          capturedVariable,
           enumOrdinal,
           nameSourcePosition);
     }

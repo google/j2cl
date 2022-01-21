@@ -4,12 +4,12 @@
 ;;; Code for anonymousclass.AnonymousClass [static fields]
 (global $f_$initialized__anonymousclass_AnonymousClass (mut i32) (i32.const 0))
 
-;;; Code for anonymousclass.AnonymousClass.1 [static fields]
-(global $f_$initialized__anonymousclass_AnonymousClass_1 (mut i32) (i32.const 0))
-
 ;;; Code for anonymousclass.SomeInterface [static fields]
 (global $f_implicitlyStatic__anonymousclass_SomeInterface (mut (ref null $anonymousclass.SomeClass)) (ref.null $anonymousclass.SomeClass))
 (global $f_$initialized__anonymousclass_SomeInterface (mut i32) (i32.const 0))
+
+;;; Code for anonymousclass.AnonymousClass.1 [static fields]
+(global $f_$initialized__anonymousclass_AnonymousClass_1 (mut i32) (i32.const 0))
 
 ;;; Code for anonymousclass.SomeInterface.1 [static fields]
 (global $f_$initialized__anonymousclass_SomeInterface_1 (mut i32) (i32.const 0))
@@ -212,6 +212,44 @@
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass)
 
+;;; Code for anonymousclass.SomeInterface [INTERFACE]
+(type $anonymousclass.SomeInterface.vtable (struct_subtype (field $unused (ref null data))
+  data)
+)
+
+;;; void SomeInterface.$clinit()
+(func $$clinit__void@anonymousclass.SomeInterface
+ ;;@ anonymousclass/AnonymousClass.java:38:10
+ (block
+  ;; if (anonymousclass.SomeInterface.$initialized) return;
+  ;;@ anonymousclass/AnonymousClass.java:38:10
+  (if (global.get $f_$initialized__anonymousclass_SomeInterface)
+   (then
+    ;; return;
+    ;;@ anonymousclass/AnonymousClass.java:38:10
+    (return )
+   )
+  )
+  ;; (anonymousclass.SomeInterface.$initialized = true);
+  ;;@ anonymousclass/AnonymousClass.java:38:10
+  (global.set $f_$initialized__anonymousclass_SomeInterface (i32.const 1))
+  ;; (anonymousclass.SomeInterface.implicitlyStatic = anonymousclass.SomeInterface.1.$create(1));
+  ;;@ anonymousclass/AnonymousClass.java:39:2
+  (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $$create__int__anonymousclass_SomeInterface_1@anonymousclass.SomeInterface.1 (i32.const 1)))
+ )
+)
+
+;;; Class<?> SomeInterface.getClass()
+(func $m_getClass__java_lang_Class@anonymousclass.SomeInterface
+ (param $this (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.SomeInterface();
+  (return (call $function.no.side.effects.$getAnonymousclass.SomeInterface__java_lang_Class (ref.func $$getAnonymousclass.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@anonymousclass.SomeInterface)
+
 ;;; Code for anonymousclass.AnonymousClass.1 [CLASS]
 (type $anonymousclass.AnonymousClass.1 (struct_subtype 
  (field $vtable (ref $anonymousclass.AnonymousClass.1.vtable)) 
@@ -338,44 +376,6 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@anonymousclass.AnonymousClass.1)
-
-;;; Code for anonymousclass.SomeInterface [INTERFACE]
-(type $anonymousclass.SomeInterface.vtable (struct_subtype (field $unused (ref null data))
-  data)
-)
-
-;;; void SomeInterface.$clinit()
-(func $$clinit__void@anonymousclass.SomeInterface
- ;;@ anonymousclass/AnonymousClass.java:38:10
- (block
-  ;; if (anonymousclass.SomeInterface.$initialized) return;
-  ;;@ anonymousclass/AnonymousClass.java:38:10
-  (if (global.get $f_$initialized__anonymousclass_SomeInterface)
-   (then
-    ;; return;
-    ;;@ anonymousclass/AnonymousClass.java:38:10
-    (return )
-   )
-  )
-  ;; (anonymousclass.SomeInterface.$initialized = true);
-  ;;@ anonymousclass/AnonymousClass.java:38:10
-  (global.set $f_$initialized__anonymousclass_SomeInterface (i32.const 1))
-  ;; (anonymousclass.SomeInterface.implicitlyStatic = anonymousclass.SomeInterface.1.$create(1));
-  ;;@ anonymousclass/AnonymousClass.java:39:2
-  (global.set $f_implicitlyStatic__anonymousclass_SomeInterface (call $$create__int__anonymousclass_SomeInterface_1@anonymousclass.SomeInterface.1 (i32.const 1)))
- )
-)
-
-;;; Class<?> SomeInterface.getClass()
-(func $m_getClass__java_lang_Class@anonymousclass.SomeInterface
- (param $this (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getAnonymousclass.SomeInterface();
-  (return (call $function.no.side.effects.$getAnonymousclass.SomeInterface__java_lang_Class (ref.func $$getAnonymousclass.SomeInterface__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@anonymousclass.SomeInterface)
 
 ;;; Code for anonymousclass.SomeInterface.1 [CLASS]
 (type $anonymousclass.SomeInterface.1 (struct_subtype 

@@ -35,6 +35,7 @@ public class Main {
     testAbstractEquals();
     testJsCollection();
     testUnusedType();
+    testClinit();
   }
 
   private static void testComposite() {
@@ -171,5 +172,42 @@ public class Main {
     UsesJsCollection o1 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
     UsesJsCollection o2 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
     assertNotEquals(o1, o2);
+  }
+
+  @AutoValue
+  abstract static class AutoValueWithBuilderAndClinit {
+    private static int field;
+
+    private int getField() {
+      return field;
+    }
+
+    static {
+      field = 1;
+    }
+
+    @AutoValue.Builder
+    abstract static class Builder {
+      private int anotherField;
+
+      // Declare a non empty constructor to prevent the builder from being optimized.
+      Builder() {
+        anotherField = 1;
+      }
+
+      public abstract AutoValueWithBuilderAndClinit build();
+
+      static AutoValueWithBuilderAndClinit create() {
+        return new AutoValue_Main_AutoValueWithBuilderAndClinit.Builder().build();
+      }
+    }
+  }
+
+  /**
+   * Tests that clinit is called even if the @AutoValue class is optimized but the Builder is not.
+   */
+  private static void testClinit() {
+    AutoValueWithBuilderAndClinit o = AutoValueWithBuilderAndClinit.Builder.create();
+    assertEquals(1, o.getField());
   }
 }

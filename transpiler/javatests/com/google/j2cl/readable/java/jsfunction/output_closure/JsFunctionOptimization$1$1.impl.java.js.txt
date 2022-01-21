@@ -3,8 +3,8 @@ goog.module('jsfunction.JsFunctionOptimization.$1.$1$impl');
 const j_l_Object = goog.require('java.lang.Object$impl');
 const $Util = goog.require('nativebootstrap.Util$impl');
 
+let j_l_String = goog.forwardDeclare('java.lang.String$impl');
 let $1 = goog.forwardDeclare('jsfunction.JsFunctionOptimization.$1$impl');
-let $1_$1_$1 = goog.forwardDeclare('jsfunction.JsFunctionOptimization.$1.$1.$1$impl');
 let $2 = goog.forwardDeclare('jsfunction.JsFunctionOptimization.$1.$1.$2$impl');
 
 class $1_$1 extends j_l_Object {
@@ -35,7 +35,14 @@ class $1_$1 extends j_l_Object {
  
  m_m___$pp_jsfunction() {
   let var_1 = 1;
-  let f = $1_$1_$1.$create__jsfunction_JsFunctionOptimization_1_1__int__int__java_lang_String(this, this.$captured_r__jsfunction_JsFunctionOptimization_1_1, var_1, this.$captured_x__jsfunction_JsFunctionOptimization_1_1);
+  let f = (/** ?string */ s) =>{
+   let r1 = this.$captured_r__jsfunction_JsFunctionOptimization_1_1;
+   let var1 = var_1;
+   let x1 = this.$captured_x__jsfunction_JsFunctionOptimization_1_1;
+   return j_l_String.m_valueOf__java_lang_Object(j_l_String.m_valueOf__int(this.$captured_r__jsfunction_JsFunctionOptimization_1_1)) + j_l_String.m_valueOf__java_lang_Object(s) + j_l_String.m_valueOf__java_lang_Object(this.$captured_x__jsfunction_JsFunctionOptimization_1_1) + var_1 + j_l_String.m_valueOf__java_lang_Object(((/** ?string */ s_1) =>{
+    return j_l_String.m_valueOf__java_lang_Object(s_1) + r1 + j_l_String.m_valueOf__java_lang_Object(x1) + var1;
+   })('hello'));
+  };
   let f2 = $2.$create__jsfunction_JsFunctionOptimization_1_1__int__int__java_lang_String(this, this.$captured_r__jsfunction_JsFunctionOptimization_1_1, var_1, this.$captured_x__jsfunction_JsFunctionOptimization_1_1);
  }
  
@@ -50,7 +57,7 @@ class $1_$1 extends j_l_Object {
  }
  
  static $loadModules() {
-  $1_$1_$1 = goog.module.get('jsfunction.JsFunctionOptimization.$1.$1.$1$impl');
+  j_l_String = goog.module.get('java.lang.String$impl');
   $2 = goog.module.get('jsfunction.JsFunctionOptimization.$1.$1.$2$impl');
  }
 }

@@ -5,16 +5,18 @@ open class LocalClassInheritance {
 
  open fun test() {
   var f: Int = 1
+  if (true) {}
+  if (true) {}
  }
 }
 
 open class `LocalClassInheritance$1Parent` {
+ @JvmField val `this`: localclassinheritance.LocalClassInheritance?
+
  internal constructor(`$outer_this`: localclassinheritance.LocalClassInheritance?, `$captured_f`: Int): super() {
   this.`this` = `$outer_this`
   this.f = `$captured_f`
  }
-
- @JvmField val `this`: localclassinheritance.LocalClassInheritance?
 
  open fun n() {
   val i: Int = this.f
@@ -24,12 +26,12 @@ open class `LocalClassInheritance$1Parent` {
 }
 
 open class `LocalClassInheritance$1Child`: localclassinheritance.`LocalClassInheritance$1Parent` {
- internal constructor(`$outer_this`: localclassinheritance.LocalClassInheritance?, `$captured_f`: Int): super(`$captured_f`) {
+ @JvmField val `this`: localclassinheritance.LocalClassInheritance?
+
+ internal constructor(`$outer_this`: localclassinheritance.LocalClassInheritance?, `$captured_f`: Int): super(`$outer_this`, `$captured_f`) {
   this.`this` = `$outer_this`
   this.f = `$captured_f`
  }
-
- @JvmField val `this`: localclassinheritance.LocalClassInheritance?
 
  open override fun n() {
   val i: Int = this.f

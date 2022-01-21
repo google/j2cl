@@ -10,6 +10,16 @@ abstract class `Main$Foo`<T> {
  abstract open fun foo()
 }
 
+open class `Main$Bar$1`<T: java.lang.Comparable<*>?>: boundedtypesupercall.`Main$Foo`<T> {
+ @JvmField val `this`: boundedtypesupercall.`Main$Bar`<T>?
+
+ internal constructor(`$outer_this`: boundedtypesupercall.`Main$Bar`<T>?, `$_0`: T?): super(`$_0`) {
+  this.`this` = `$outer_this`
+ }
+
+ open override fun foo() {}
+}
+
 open class `Main$Bar`<T: java.lang.Comparable<*>?> {
  constructor(): super()
 
@@ -20,14 +30,4 @@ open class `Main$Bar`<T: java.lang.Comparable<*>?> {
  open fun doSomething(): boundedtypesupercall.`Main$Foo`<T>? {
   return boundedtypesupercall.`Main$Bar$1`<T>(this, this.getSomething())
  }
-}
-
-open class `Main$Bar$1`<T: java.lang.Comparable<*>?>: boundedtypesupercall.`Main$Foo`<T> {
- internal constructor(`$outer_this`: boundedtypesupercall.`Main$Bar`<T>?, `$_0`: T?): super(`$_0`) {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: boundedtypesupercall.`Main$Bar`<T>?
-
- open override fun foo() {}
 }

@@ -16,13 +16,10 @@
 package com.google.j2cl.transpiler.frontend.common;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import com.google.errorprone.annotations.FormatMethod;
 import com.google.j2cl.common.InternalCompilerError;
 import com.google.j2cl.common.SourcePosition;
@@ -30,10 +27,7 @@ import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
-import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.JavaScriptConstructorReference;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -44,25 +38,18 @@ import com.google.j2cl.transpiler.ast.NumberLiteral;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.StringLiteral;
-import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 /** Base class for implementing that AST conversion from different front ends. */
 public abstract class AbstractCompilationUnitBuilder {
 
   private final PackageInfoCache packageInfoCache = PackageInfoCache.get();
-  private final Map<Variable, Type> enclosingTypeByVariable = new HashMap<>();
-  private final Multimap<String, Variable> capturesByTypeName = LinkedHashMultimap.create();
 
   /** Type stack to keep track of the lexically enclosing types as they are being created. */
   private final List<Type> typeStack = new ArrayList<>();
@@ -227,10 +214,6 @@ public abstract class AbstractCompilationUnitBuilder {
       Expression qualifier,
       SourcePosition sourcePosition) {
 
-    qualifier =
-        resolveInstantiationQualifier(
-            qualifier, targetConstructorMethodDescriptor.getEnclosingTypeDescriptor());
-
     List<Variable> parameters =
         AstUtils.createParameterVariables(functionalMethodDescriptor.getParameterTypeDescriptors());
     checkArgument(
@@ -254,36 +237,6 @@ public abstract class AbstractCompilationUnitBuilder {
                 .build())
         .setSourcePosition(sourcePosition)
         .build();
-  }
-
-  /**
-   * Resolves the qualifier for an instantiation, by supplying an explicit reference to the required
-   * outer class instance if necessary.
-   */
-  protected Expression resolveInstantiationQualifier(
-      Expression qualifier, DeclaredTypeDescriptor targetTypeDescriptor) {
-    boolean needsQualifier =
-        targetTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance();
-    checkArgument(
-        qualifier == null || needsQualifier,
-        "NewInstance of non nested class should have no qualifier.");
-
-    // Resolve the qualifier of NewInstance that creates an instance of a nested class.
-    // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
-    qualifier =
-        needsQualifier && qualifier == null
-            // find the enclosing instance in non-strict mode, which means
-            // for example,
-            // class A {
-            //   class B {}
-            //   class C extends class A {
-            //     // The qualifier of new B() should be C.this, not A.this.
-            //     public void test() { new B(); }
-            //   }
-            // }
-            ? resolveImplicitOuterClassReference(targetTypeDescriptor.getEnclosingTypeDescriptor())
-            : qualifier;
-    return qualifier;
   }
 
   /**
@@ -328,213 +281,6 @@ public abstract class AbstractCompilationUnitBuilder {
                 .build())
         .setSourcePosition(sourcePosition)
         .build();
-  }
-
-  ////////////////////////////////////////////////////////////////////////////////////////////////
-  // Helpers to resolve captures.
-  ////////////////////////////////////////////////////////////////////////////////////////////////
-
-  /**
-   * Records associations of variables and their enclosing type.
-   *
-   * <p>Enclosing type is a broader category than declaring type since some variables (fields) have
-   * a declaring type (that is also their enclosing type) while other variables do not.
-   */
-  protected void recordEnclosingType(Variable variable, Type enclosingType) {
-    enclosingTypeByVariable.put(variable, enclosingType);
-  }
-
-  /**
-   * Returns the required nested path of field accesses needed to refer to a specific enclosing
-   * given by an explicit reference like {@code A.this} or {@code A.super}.
-   *
-   * <p>
-   *
-   * <pre><code>
-   *   class A extends Super {
-   *     void m() {}
-   *     class B {
-   *       class C {
-   *         { A a = A.this;}
-   *       }
-   *     }
-   *   }
-   * </code></pre>
-   *
-   * <p>In this example the outer class referred by {@code A.this} is 2 hops from the reference,
-   * hence the access returned would be {@code this.$outer_this.$outer_this}.
-   *
-   * <p>NOTE: Explicit outer references have to match the class exactly, i.e. references like {@code
-   * Super.this} instead of {@code A.this} will be rejected by the compiler.
-   */
-  protected Expression resolveExplicitOuterClassReference(
-      DeclaredTypeDescriptor targetTypeDescriptor) {
-    return resolveOuterClassReference(targetTypeDescriptor, true);
-  }
-
-  /**
-   * Returns the required nested path of field accesses needed to refer to a specific enclosing
-   * given by an implicit reference like an unqualified method call {@code m()} that might be a
-   * method of an enclosing class. E.g:
-   *
-   * <p>
-   *
-   * <pre><code>
-   *   class A {
-   *     void m() {}
-   *     class B {
-   *     }
-   *   }
-   *   class ASub extends A{
-   *     class BSub extends B{
-   *       { m(); }
-   *     }
-   *   }
-   * </code></pre>
-   *
-   * <p>In this example the outer class referred by the call to {@code A.m()} is {@code ASub} and
-   * not {@code A}, an the path return would be {@code this.$outer_this} since it is the immediate
-   * enclosing class of {@code BSub}.
-   */
-  protected Expression resolveImplicitOuterClassReference(
-      DeclaredTypeDescriptor targetTypeDescriptor) {
-    return resolveOuterClassReference(targetTypeDescriptor, false);
-  }
-
-  /**
-   * Returns a nested path of field accesses {@code this.$outer_this.....$outer_this} required to
-   * address a specific outer class.
-   *
-   * <p>The search for the enclosing class might be strict or non-strict, depending whether a
-   * subclass of the enclosing class is acceptable as a qualifier. When the member's qualifier is
-   * implicit, superclasses of the enclosing class are acceptable.
-   */
-  private Expression resolveOuterClassReference(
-      DeclaredTypeDescriptor targetTypeDescriptor, boolean strict) {
-    DeclaredTypeDescriptor currentTypeDescriptor = getCurrentType().getTypeDescriptor();
-    Expression qualifier = new ThisReference(currentTypeDescriptor);
-    DeclaredTypeDescriptor innerTypeDescriptor = currentTypeDescriptor;
-    while (innerTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
-      boolean found =
-          strict
-              ? innerTypeDescriptor.hasSameRawType(targetTypeDescriptor)
-              : innerTypeDescriptor.isSubtypeOf(targetTypeDescriptor);
-      if (found) {
-        break;
-      }
-
-      qualifier =
-          FieldAccess.Builder.from(
-                  AstUtils.getFieldDescriptorForEnclosingInstance(
-                      innerTypeDescriptor, innerTypeDescriptor.getEnclosingTypeDescriptor()))
-              .setQualifier(qualifier)
-              .build();
-      innerTypeDescriptor = innerTypeDescriptor.getEnclosingTypeDescriptor();
-    }
-    return qualifier;
-  }
-
-  /**
-   * Returns the expression to reference {@code variable} in the current context.
-   *
-   * <p>If the variable is not declared in the current context it is a capture. References to
-   * captured variables are recorded in the process of doing this resolution to determine the
-   * backing fields that are needed.
-   */
-  protected Expression resolveVariableReference(Variable variable) {
-    TypeDeclaration enclosingClassDeclaration =
-        checkNotNull(enclosingTypeByVariable.get(variable).getDeclaration());
-
-    if (getCurrentType().getDeclaration().equals(enclosingClassDeclaration)) {
-      return variable.createReference();
-    }
-
-    propagateCaptureOutward(variable);
-
-    // for reference to a captured variable, if it is in a constructor, translate to
-    // reference to outer parameter, otherwise, translate to reference to corresponding
-    // field created for the captured variable.
-    DeclaredTypeDescriptor currentTypeDescriptor = getCurrentType().getTypeDescriptor();
-    FieldDescriptor fieldDescriptor =
-        AstUtils.getFieldDescriptorForCapture(currentTypeDescriptor, variable);
-    ThisReference qualifier = new ThisReference(currentTypeDescriptor);
-    return FieldAccess.Builder.from(fieldDescriptor).setQualifier(qualifier).build();
-  }
-
-  /**
-   * Propagates the capture variable to the enclosing classes.
-   *
-   * <p>A reference to a captured variable from an inner class means that the inner class and all
-   * its enclosing classes up to (but excluding) the variable scope need to capture the variable,
-   * e.g.
-   *
-   * <pre><code>
-   *   void m(int captured) {}
-   *     class A {
-   *       class B {
-   *         { int a = captured; } // captured is captured by both A and B.
-   *       }
-   *     }
-   *   }
-   * </code></pre>
-   */
-  private void propagateCaptureOutward(Variable variable) {
-    TypeDeclaration enclosingClassDeclaration =
-        checkNotNull(enclosingTypeByVariable.get(variable).getDeclaration());
-
-    // the variable is declared outside current type, i.e. a captured variable to current
-    // type, and also a captured variable to the outer class in the type stack that is
-    // inside {@code enclosingClassRef}.
-    for (int i = typeStack.size() - 1; i >= 0; i--) {
-      if (typeStack.get(i).getDeclaration().equals(enclosingClassDeclaration)) {
-        break;
-      }
-      capturesByTypeName.put(typeStack.get(i).getDeclaration().getQualifiedSourceName(), variable);
-    }
-  }
-
-  /** Propagate all captures outward. */
-  protected void propagateAllCapturesOutward(TypeDeclaration typeDeclaration) {
-    getCapturedVariables(typeDeclaration).forEach(this::propagateCaptureOutward);
-  }
-
-  /** Returns the variables captured by a type. */
-  protected Collection<Variable> getCapturedVariables(TypeDeclaration typeDeclaration) {
-    return capturesByTypeName.get(typeDeclaration.getQualifiedSourceName());
-  }
-
-  /**
-   * Propagates the variables captured by the supertype.
-   *
-   * <p>The purpose of propagating the captures down the class hierarchy is to cover the following
-   * corner case for local classes.
-   *
-   * <p>
-   *
-   * <pre><code>
-   *     void f(int n) {
-   *       class LocalSuper {
-   *         // ....  code referencing n
-   *          int m() {  return n;  }
-   *       }
-   *       class LocalSub extends LocalSuper {
-   *       }
-   *
-   *       new LocalSub().m(); // Here due to capture conversion the captured variable needs to be
-   *                           // threaded throw LocalSub constructor.
-   *     }
-   *   </code></pre>
-   *
-   * <p>Propagating the capture allows an uniform treatment elsewhere, with the drawback that it
-   * ends up defining an extra field in LocalSub,
-   */
-  protected void propagateCapturesFromSupertype(TypeDeclaration typeDeclaration) {
-    if (typeDeclaration.getSuperTypeDescriptor() != null) {
-      capturesByTypeName.putAll(
-          typeDeclaration.getQualifiedSourceName(),
-          capturesByTypeName.get(
-              typeDeclaration.getSuperTypeDescriptor().getQualifiedSourceName()));
-    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////

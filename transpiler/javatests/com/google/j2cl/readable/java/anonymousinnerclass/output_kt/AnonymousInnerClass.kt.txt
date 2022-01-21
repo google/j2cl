@@ -4,14 +4,6 @@ open class A {
  internal constructor(): super()
 }
 
-open class `A$B` {
- internal constructor(`$outer_this`: anonymousinnerclass.A?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: anonymousinnerclass.A?
-}
-
 open class AnonymousInnerClass {
  constructor(): super()
 
@@ -19,54 +11,66 @@ open class AnonymousInnerClass {
   val ic: anonymousinnerclass.`AnonymousInnerClass$InnerClass`? = anonymousinnerclass.`AnonymousInnerClass$1`(this)
   val a: anonymousinnerclass.A? = anonymousinnerclass.A()
   val b: anonymousinnerclass.`A$B`? = anonymousinnerclass.`AnonymousInnerClass$2`(this, a)
+  if (true) {}
   val c: anonymousinnerclass.`AnonymousInnerClass$1C`? = anonymousinnerclass.`AnonymousInnerClass$3`(this, arg)
  }
 }
 
-open class `AnonymousInnerClass$InnerClass` {
- constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?): super() {
+open class `A$B` {
+ @JvmField val `this`: anonymousinnerclass.A?
+
+ internal constructor(`$outer_this`: anonymousinnerclass.A?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
 open class `AnonymousInnerClass$1`: anonymousinnerclass.`AnonymousInnerClass$InnerClass` {
- internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?): super() {
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
+
+ internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?): super(`$outer_this`) {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 }
 
 open class `AnonymousInnerClass$2`: anonymousinnerclass.`A$B` {
- internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$super_outer_this`: anonymousinnerclass.A?): super(`$super_outer_this`) {
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
+
+ internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$captured_a`: anonymousinnerclass.A?): super(`$captured_a`) {
   this.`this` = `$outer_this`
+  this.a = `$captured_a`
  }
 
+ @JvmField val a: anonymousinnerclass.A?
+}
+
+open class `AnonymousInnerClass$3`: anonymousinnerclass.`AnonymousInnerClass$1C` {
  @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
+
+ internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$captured_arg`: Int): super(`$outer_this`, `$captured_arg`) {
+  this.`this` = `$outer_this`
+  this.arg = `$captured_arg`
+ }
+
+ @JvmField val arg: Int
+}
+
+open class `AnonymousInnerClass$InnerClass` {
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
+
+ constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?): super() {
+  this.`this` = `$outer_this`
+ }
 }
 
 open class `AnonymousInnerClass$1C` {
+ @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
+
  internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$captured_arg`: Int): super() {
   this.`this` = `$outer_this`
   this.arg = `$captured_arg`
  }
 
- @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
-
  @JvmField var fInC: Int = this.arg
-
- @JvmField val arg: Int
-}
-
-open class `AnonymousInnerClass$3`: anonymousinnerclass.`AnonymousInnerClass$1C` {
- internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$captured_arg`: Int): super(`$captured_arg`) {
-  this.`this` = `$outer_this`
-  this.arg = `$captured_arg`
- }
-
- @JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
 
  @JvmField val arg: Int
 }

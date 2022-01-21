@@ -210,6 +210,7 @@ open class ArithmeticExpressions {
    f = f!! - 1
    `$value_2`
   }!! as java.lang.Integer).intValue()
+  if (true) {}
   val ref: arithmeticexpressions.`ArithmeticExpressions$1Ref`<kotlin.Int?>? = null
   ref!!.field = ref!!.field!! + 1
   val n: Int = 1 + ref!!.field!!
@@ -301,11 +302,11 @@ open class ArithmeticExpressions {
 }
 
 open class `ArithmeticExpressions$1Ref`<T> {
+ @JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
+
  internal constructor(`$outer_this`: arithmeticexpressions.ArithmeticExpressions?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
 
  @JvmField internal var field: T? = null
 }

@@ -41,7 +41,6 @@ import java.util.stream.Stream;
 
 /** Utility functions to manipulate J2CL AST. */
 public class AstUtils {
-  private static final String ENCLOSING_INSTANCE_NAME = "this";
 
   /** Returns the loadModules method descriptor for a particular type */
   public static MethodDescriptor getLoadModulesDescriptor(DeclaredTypeDescriptor typeDescriptor) {
@@ -163,33 +162,6 @@ public class AstUtils {
         : delegatedMethodDescriptor;
   }
 
-  /** Returns the added field descriptor corresponding to the captured variable. */
-  public static FieldDescriptor getFieldDescriptorForCapture(
-      DeclaredTypeDescriptor enclosingTypeDescriptor, Variable capturedVariable) {
-    return FieldDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingTypeDescriptor)
-        .setName(capturedVariable.getName())
-        .setTypeDescriptor(capturedVariable.getTypeDescriptor())
-        .setStatic(false)
-        .setFinal(true)
-        .setSynthetic(true)
-        .setOrigin(FieldOrigin.SYNTHETIC_CAPTURE_FIELD)
-        .build();
-  }
-
-  /** Returns the added field corresponding to the enclosing instance. */
-  public static FieldDescriptor getFieldDescriptorForEnclosingInstance(
-      DeclaredTypeDescriptor enclosingClassDescriptor, TypeDescriptor fieldTypeDescriptor) {
-    return FieldDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(enclosingClassDescriptor)
-        .setName(ENCLOSING_INSTANCE_NAME)
-        .setFinal(true)
-        .setSynthetic(true)
-        .setTypeDescriptor(fieldTypeDescriptor)
-        .setOrigin(FieldOrigin.SYNTHETIC_OUTER_FIELD)
-        .build();
-  }
-
   /**
    * Creates forwarding method {@code fromMethodDescriptor} that delegates to {@code
    * toMethodDescriptor}, e.g.
@@ -272,14 +244,6 @@ public class AstUtils {
 
     return createReturnOrExpressionStatement(
         sourcePosition, forwardingMethodCall, returnTypeDescriptor);
-  }
-
-  public static boolean isDelegatedConstructorCall(
-      MethodCall methodCall, DeclaredTypeDescriptor targetTypeDescriptor) {
-    if (methodCall == null || !methodCall.getTarget().isConstructor()) {
-      return false;
-    }
-    return methodCall.getTarget().isMemberOf(targetTypeDescriptor);
   }
 
   /** Returns {@code true} if the expression result is used by the parent. */
@@ -460,20 +424,6 @@ public class AstUtils {
   }
 
   /**
-   * Returns explicit qualifier for member reference (field access or method call).
-   *
-   * <p>If {@code qualifier} is null, returns EnclosingTypeDescriptor as the qualifier for static
-   * method/field and 'this' reference as the qualifier for instance method/field.
-   */
-  static Expression getExplicitQualifier(Expression qualifier, MemberDescriptor memberDescriptor) {
-    checkNotNull(memberDescriptor);
-    if (qualifier != null || !memberDescriptor.isInstanceMember()) {
-      return qualifier;
-    }
-    return new ThisReference(memberDescriptor.getEnclosingTypeDescriptor());
-  }
-
-  /**
    * Generates the following code:
    *
    * <p>$Util.$makeLambdaFunction(Type.prototype.m_equal, $instance, Type.$copy);
@@ -522,11 +472,13 @@ public class AstUtils {
 
   /** Returns a field declaration statement. */
   public static Statement declarationStatement(Field field, SourcePosition sourcePosition) {
-    boolean isPublic = field.getDescriptor().getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD;
+    FieldDescriptor fieldDescriptor = field.getDescriptor();
+    boolean isPublic = fieldDescriptor.getOrigin() != FieldOrigin.SYNTHETIC_BACKING_FIELD;
 
     Expression declarationExpression =
         FieldAccess.newBuilder()
-            .setTarget(field.getDescriptor())
+            .setTarget(fieldDescriptor)
+            .setDefaultInstanceQualifier()
             .setSourcePosition(field.getNameSourcePosition())
             .build();
 
@@ -539,10 +491,10 @@ public class AstUtils {
 
     return FieldDeclarationStatement.newBuilder()
         .setExpression(declarationExpression)
-        .setFieldDescriptor(field.getDescriptor())
+        .setFieldDescriptor(fieldDescriptor)
         .setPublic(isPublic)
         .setConst(field.isCompileTimeConstant())
-        .setDeprecated(field.getDescriptor().isDeprecated())
+        .setDeprecated(fieldDescriptor.isDeprecated())
         .setSourcePosition(
             field.isCompileTimeConstant() ? field.getSourcePosition() : sourcePosition)
         .build();
@@ -642,20 +594,14 @@ public class AstUtils {
   public static Method createImplicitAnonymousClassConstructor(
       SourcePosition sourcePosition,
       MethodDescriptor constructorDescriptor,
-      MethodDescriptor superConstructorDescriptor) {
-
-    // If the super qualifier is explicit then it is passed as the first parameter and the super
-    // constructor has 1 parameter less than the constructor being build.
-    boolean firstParameterIsSuperQualifier =
-        constructorDescriptor.getParameterTypeDescriptors().size()
-            != superConstructorDescriptor.getParameterTypeDescriptors().size();
+      MethodDescriptor superConstructorDescriptor,
+      Expression superCallQualifier) {
 
     List<Variable> constructorParameters = new ArrayList<>();
     int index = 0;
     for (TypeDescriptor parameterTypeDescriptor :
         constructorDescriptor.getParameterTypeDescriptors()) {
-      String parameterName =
-          firstParameterIsSuperQualifier && index == 0 ? "$super_outer_this" : "$_" + index;
+      String parameterName = "$_" + index;
       constructorParameters.add(
           Variable.newBuilder()
               .setName(parameterName)
@@ -664,21 +610,15 @@ public class AstUtils {
       index++;
     }
 
-    Expression qualifier =
-        firstParameterIsSuperQualifier ? constructorParameters.get(0).createReference() : null;
-
     List<Expression> superConstructorArguments =
-        (firstParameterIsSuperQualifier
-                ? constructorParameters.subList(1, constructorParameters.size())
-                : constructorParameters)
-            .stream().map(Variable::createReference).collect(toImmutableList());
+        constructorParameters.stream().map(Variable::createReference).collect(toImmutableList());
 
     return Method.newBuilder()
         .setMethodDescriptor(constructorDescriptor)
         .setParameters(constructorParameters)
         .addStatements(
             MethodCall.Builder.from(superConstructorDescriptor)
-                .setQualifier(qualifier)
+                .setQualifier(superCallQualifier)
                 .setArguments(superConstructorArguments)
                 .build()
                 .makeStatement(sourcePosition))
@@ -1102,5 +1042,33 @@ public class AstUtils {
     while (expressionList.size() < size) {
       expressionList.add(TypeDescriptors.get().javaLangObject.getNullValue());
     }
+  }
+
+  /**
+   * Given a target type (where the field or method is declared) and a context type, finds the
+   * closest enclosing type of the context type that is a subclass of the target type.
+   */
+  public static Expression resolveImplicitQualifier(
+      DeclaredTypeDescriptor contextTypeDescriptor, DeclaredTypeDescriptor targetTypeDescriptor) {
+    // The implicit qualifier is the first class from inner to outer context that has
+    // a targetTypeDescriptor supertype.
+    for (DeclaredTypeDescriptor qualifierTypeDescriptor = contextTypeDescriptor;
+        qualifierTypeDescriptor != null;
+        qualifierTypeDescriptor = qualifierTypeDescriptor.getEnclosingTypeDescriptor()) {
+      if (qualifierTypeDescriptor.isSubtypeOf(targetTypeDescriptor)) {
+        return new ThisReference(qualifierTypeDescriptor);
+      }
+    }
+
+    // Ideally this code path should not be reachable, however for the case of JsEnum and optimized
+    // @AutoValue/@AutoValue.Builder, the super type information in the type descriptor is
+    // inconsistent with the super type in the type object. This is due to the fact that
+    // optimizations that alter the class hierarchy are not reflected in the type model.
+    TypeDeclaration contextTypeDeclaration = contextTypeDescriptor.getTypeDeclaration();
+    checkState(
+        contextTypeDeclaration.isJsEnum()
+            || contextTypeDeclaration.isAnnotatedWithAutoValue()
+            || contextTypeDeclaration.isAnnotatedWithAutoValueBuilder());
+    return new ThisReference(contextTypeDescriptor);
   }
 }

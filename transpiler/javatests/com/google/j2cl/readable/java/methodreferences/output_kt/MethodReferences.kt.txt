@@ -115,11 +115,11 @@ fun interface `MethodReferences$ArrayProducer`<T> {
 }
 
 open class `MethodReferences$ObjectCapturingOuter`<T> {
+ @JvmField val `this`: methodreferences.MethodReferences<T>?
+
  internal constructor(`$outer_this`: methodreferences.MethodReferences<T>?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: methodreferences.MethodReferences<T>?
 
  internal open fun getMain(): methodreferences.MethodReferences<T>? {
   return this.`this`

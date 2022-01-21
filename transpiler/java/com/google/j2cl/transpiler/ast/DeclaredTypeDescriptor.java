@@ -462,8 +462,8 @@ public abstract class DeclaredTypeDescriptor extends TypeDescriptor
   }
 
   /**
-   * The list of fields declared in the type. Note: this does not include methods synthetic fields
-   * (like captures) nor supertype fields.
+   * The list of fields declared in the type. Note: this does not include synthetic fields (like
+   * captures) nor supertype fields.
    */
   @Memoized
   public Collection<FieldDescriptor> getDeclaredFieldDescriptors() {

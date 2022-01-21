@@ -199,7 +199,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         type,
         () -> {
           ;
-          convertTypeBody(type, typeElement, bodyDeclarations);
+          convertTypeBody(type, bodyDeclarations);
           return typeProcessor.apply(type);
         });
   }
@@ -213,9 +213,7 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         classDecl.sym, classDecl.getMembers(), sourcePositionNode, type -> null);
   }
 
-  private void convertTypeBody(Type type, ClassSymbol classSymbol, List<JCTree> bodyDeclarations) {
-    TypeDeclaration currentTypeDeclaration = type.getDeclaration();
-    propagateCapturesFromSupertype(currentTypeDeclaration);
+  private void convertTypeBody(Type type, List<JCTree> bodyDeclarations) {
     for (JCTree bodyDeclaration : bodyDeclarations) {
       if (bodyDeclaration instanceof JCVariableDecl) {
         JCVariableDecl fieldDeclaration = (JCVariableDecl) bodyDeclaration;
@@ -253,28 +251,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             "Unimplemented translation for BodyDeclaration type: %s.",
             bodyDeclaration.getClass().getName());
       }
-    }
-
-    for (Variable capturedVariable : getCapturedVariables(currentTypeDeclaration)) {
-      FieldDescriptor fieldDescriptor =
-          AstUtils.getFieldDescriptorForCapture(type.getTypeDescriptor(), capturedVariable);
-      type.addMember(
-          Field.Builder.from(fieldDescriptor)
-              .setCapturedVariable(capturedVariable)
-              .setSourcePosition(type.getSourcePosition())
-              .setNameSourcePosition(capturedVariable.getSourcePosition())
-              .build());
-    }
-    if (JavaEnvironment.capturesEnclosingInstance(classSymbol)) {
-      // add field for enclosing instance.
-      type.addMember(
-          0,
-          Field.Builder.from(
-                  AstUtils.getFieldDescriptorForEnclosingInstance(
-                      type.getTypeDescriptor(),
-                      type.getEnclosingTypeDeclaration().toUnparameterizedTypeDescriptor()))
-              .setSourcePosition(type.getSourcePosition())
-              .build());
     }
   }
 
@@ -334,7 +310,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
             variableElement,
             isParameter);
     variableByVariableElement.put(variableElement, variable);
-    recordEnclosingType(variable, getCurrentType());
     return variable;
   }
 
@@ -887,24 +862,14 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     MethodDescriptor targetMethodDescriptor =
         environment.createMethodDescriptor(
             (ExecutableType) memberReference.referentType, returnType, methodSymbol);
+    Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
     if (methodSymbol.isConstructor()) {
-      Expression qualifier =
-          targetMethodDescriptor
-                  .getEnclosingTypeDescriptor()
-                  .getTypeDeclaration()
-                  .isCapturingEnclosingInstance()
-              // Inner classes may have an implicit enclosing class qualifier (2).
-              ? resolveExplicitOuterClassReference(
-                  targetMethodDescriptor.getEnclosingTypeDescriptor())
-              : null;
-
       return createInstantiationLambda(
           functionalMethodDescriptor,
           targetMethodDescriptor,
           qualifier,
           getSourcePosition(memberReference));
     }
-    Expression qualifier = convertExpressionOrNull(memberReference.getQualifierExpression());
     return createMethodReferenceLambda(
         getSourcePosition(memberReference),
         qualifier,
@@ -960,18 +925,16 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
     }
 
     if (fieldAccess.name.contentEquals("this")) {
-      return resolveOuterClassReference(
+      return new ThisReference(
           environment
               .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toUnparameterizedTypeDescriptor(),
-          true);
+              .toUnparameterizedTypeDescriptor());
     }
     if (fieldAccess.name.contentEquals("super")) {
-      return resolveOuterClassReference(
+      return new SuperReference(
           environment
               .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toUnparameterizedTypeDescriptor(),
-          true);
+              .toUnparameterizedTypeDescriptor());
     }
     Expression qualifier;
     if (fieldAccess.sym instanceof VariableElement) {
@@ -993,13 +956,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
   }
 
   private Expression convertNewClass(JCNewClass expression) {
-    if (expression.getClassBody() != null) {
-      convertClassDeclaration(expression.getClassBody(), expression);
-    }
-    return convertInstantiation(expression);
-  }
+    Type anonymousInnerClass =
+        expression.getClassBody() != null
+            ? convertClassDeclaration(expression.getClassBody(), expression)
+            : null;
 
-  private Expression convertInstantiation(JCNewClass expression) {
     MethodSymbol constructorBinding = (MethodSymbol) expression.constructor;
     DeclaredTypeDescriptor targetType = environment.createDeclaredTypeDescriptor(expression.type);
     MethodDescriptor constructorMethodDescriptor =
@@ -1013,13 +974,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         convertArguments(constructorMethodDescriptor, expression.getArguments());
     DeclaredTypeDescriptor targetClassDescriptor =
         constructorMethodDescriptor.getEnclosingTypeDescriptor();
-
-    // Instantiation implicitly references all captured variables since in the flat class model
-    // captures become fields and need to be threaded through the constructors.
-    // This is crucial to cover some corner cases where the capture is never referenced in the
-    // class nor its superclasses but is implicitly referenced by invoking a constructor of
-    // the capturing class.
-    propagateAllCapturesOutward(targetClassDescriptor.getTypeDeclaration());
 
     if (targetClassDescriptor.getTypeDeclaration().isAnonymous() && qualifier != null) {
       // This is the qualifier to for the super invocation, pass as first parameter, since the
@@ -1036,27 +990,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         qualifier == null || needsQualifier,
         "NewInstance of non nested class should have no qualifier.");
 
-    // Resolve the qualifier of NewInstance that creates an instance of a nested class.
-    // Implicit 'this' doesn't always refer to 'this', it may refer to any enclosing instances.
-    qualifier =
-        needsQualifier && qualifier == null
-            // find the enclosing instance in non-strict mode, which means
-            // for example,
-            // class A {
-            //   class B {}
-            //   class C extends class A {
-            //     // The qualifier of new B() should be C.this, not A.this.
-            //     public void test() { new B(); }
-            //   }
-            // }
-            ? resolveOuterClassReference(
-                constructorMethodDescriptor
-                    .getEnclosingTypeDescriptor()
-                    .getEnclosingTypeDescriptor(),
-                false)
-            : qualifier;
-
     return NewInstance.Builder.from(constructorMethodDescriptor)
+        .setAnonymousInnerClass(anonymousInnerClass)
         .setQualifier(qualifier)
         .setArguments(arguments)
         .build();
@@ -1092,13 +1027,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         convertArguments(methodDescriptor, methodInvocation.getArguments());
 
     if (isSuperConstructorCall(methodInvocation)) {
-      DeclaredTypeDescriptor targetTypeDescriptor = methodDescriptor.getEnclosingTypeDescriptor();
-      if (qualifier == null
-          && targetTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
-        qualifier =
-            resolveOuterClassReference(targetTypeDescriptor.getEnclosingTypeDescriptor(), false);
-      }
-
       return MethodCall.Builder.from(methodDescriptor)
           .setQualifier(qualifier)
           .setArguments(arguments)
@@ -1112,15 +1040,6 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         && (qualifier.getTypeDescriptor().isInterface() || methodDescriptor.isDefaultMethod())) {
       // This is a default method call through super.
       isStaticDispatch = true;
-    } else if (hasSuperQualifier
-        && !qualifier.getTypeDescriptor().isSameBaseType(getCurrentType().getTypeDescriptor())) {
-      qualifier =
-          resolveOuterClassReference((DeclaredTypeDescriptor) qualifier.getTypeDescriptor(), false);
-    }
-    if (qualifier == null && methodDescriptor.isInstanceMember()) {
-      DeclaredTypeDescriptor enclosingTypeDescriptor =
-          methodDescriptor.getEnclosingTypeDescriptor();
-      qualifier = resolveOuterClassReference(enclosingTypeDescriptor, false);
     }
 
     return MethodCall.Builder.from(methodDescriptor)
@@ -1181,15 +1100,11 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
         || symbol.getKind() == ElementKind.PARAMETER
         || symbol.getKind() == ElementKind.EXCEPTION_PARAMETER) {
       Variable variable = variableByVariableElement.get(symbol);
-      return resolveVariableReference(variable);
+      return variable.createReference();
     }
 
     FieldDescriptor fieldDescriptor = environment.createFieldDescriptor(varSymbol, identifier.type);
-    Expression qualifier =
-        fieldDescriptor.isStatic()
-            ? null
-            : resolveOuterClassReference(fieldDescriptor.getEnclosingTypeDescriptor(), false);
-    return FieldAccess.newBuilder().setQualifier(qualifier).setTarget(fieldDescriptor).build();
+    return FieldAccess.newBuilder().setTarget(fieldDescriptor).build();
   }
 
   private static boolean isSuperConstructorCall(JCMethodInvocation methodInvocation) {
@@ -1434,37 +1349,5 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
               .compare(thisFilePath, thatFilePath)
               .result();
         });
-  }
-
-  /**
-   * Returns a nested path of field accesses {@code this.$outer_this.....$outer_this} required to
-   * address a specific outer class.
-   *
-   * <p>The search for the enclosing class might be strict or non-strict, depending whether a
-   * subclass of the enclosing class is acceptable as a qualifier. When the member's qualifier is
-   * implicit, superclasses of the enclosing class are acceptable.
-   */
-  private Expression resolveOuterClassReference(
-      DeclaredTypeDescriptor targetTypeDescriptor, boolean strict) {
-    Expression qualifier = new ThisReference(getCurrentType().getTypeDescriptor());
-    DeclaredTypeDescriptor innerTypeDescriptor = getCurrentType().getTypeDescriptor();
-    while (innerTypeDescriptor.getTypeDeclaration().isCapturingEnclosingInstance()) {
-      boolean found =
-          strict
-              ? innerTypeDescriptor.hasSameRawType(targetTypeDescriptor)
-              : innerTypeDescriptor.isSubtypeOf(targetTypeDescriptor);
-      if (found) {
-        break;
-      }
-
-      qualifier =
-          FieldAccess.Builder.from(
-                  AstUtils.getFieldDescriptorForEnclosingInstance(
-                      innerTypeDescriptor, innerTypeDescriptor.getEnclosingTypeDescriptor()))
-              .setQualifier(qualifier)
-              .build();
-      innerTypeDescriptor = innerTypeDescriptor.getEnclosingTypeDescriptor();
-    }
-    return qualifier;
   }
 }

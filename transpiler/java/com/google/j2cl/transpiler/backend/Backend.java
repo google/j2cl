@@ -31,7 +31,6 @@ import com.google.j2cl.transpiler.passes.EnumMethodsCreator;
 import com.google.j2cl.transpiler.passes.ExpandCompoundAssignments;
 import com.google.j2cl.transpiler.passes.ExtractNonIdempotentExpressions;
 import com.google.j2cl.transpiler.passes.FilloutMissingSourceMapInformation;
-import com.google.j2cl.transpiler.passes.FixSuperCallQualifiers;
 import com.google.j2cl.transpiler.passes.ImplementArraysAsClasses;
 import com.google.j2cl.transpiler.passes.ImplementAssertStatements;
 import com.google.j2cl.transpiler.passes.ImplementClassMetadataViaConstructors;
@@ -70,6 +69,7 @@ import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnType
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
+import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
 import com.google.j2cl.transpiler.passes.NormalizeArrayCreations;
@@ -103,7 +103,6 @@ import com.google.j2cl.transpiler.passes.NormalizeLiteralsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeLongs;
 import com.google.j2cl.transpiler.passes.NormalizeMultiExpressions;
 import com.google.j2cl.transpiler.passes.NormalizeNestedBlocks;
-import com.google.j2cl.transpiler.passes.NormalizeNestedClassConstructors;
 import com.google.j2cl.transpiler.passes.NormalizeNullLiterals;
 import com.google.j2cl.transpiler.passes.NormalizeOverlayMembers;
 import com.google.j2cl.transpiler.passes.NormalizeShifts;
@@ -119,6 +118,8 @@ import com.google.j2cl.transpiler.passes.RemoveAssertStatements;
 import com.google.j2cl.transpiler.passes.RemoveNoopStatements;
 import com.google.j2cl.transpiler.passes.RemoveUnneededCasts;
 import com.google.j2cl.transpiler.passes.RemoveUnneededJsDocCasts;
+import com.google.j2cl.transpiler.passes.ResolveCaptures;
+import com.google.j2cl.transpiler.passes.ResolveImplicitInstanceQualifiers;
 import com.google.j2cl.transpiler.passes.ResolveImplicitStaticQualifiers;
 import com.google.j2cl.transpiler.passes.RewriteAssignmentExpressions;
 import com.google.j2cl.transpiler.passes.RewriteReferenceEqualityOperations;
@@ -150,6 +151,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ true));
     }
 
@@ -161,8 +163,7 @@ public enum Backend {
           VerifySingleAstReference::new,
           VerifyParamAndArgCounts::new,
           VerifyReferenceScoping::new,
-
-          // Class structure normalizations.
+          // Passes that change the class hierarchy or nesting structure.
           () -> new OptimizeAutoValue(options.getOptimizeAutoValue()),
           ImplementLambdaExpressionsViaJsFunctionAdaptor::new,
           OptimizeAnonymousInnerClassesToFunctionExpressions::new,
@@ -170,16 +171,17 @@ public enum Backend {
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
+          // Resolve captures
+          ResolveCaptures::new,
+          // ... and flatten the class hierarchy.
+          MoveNestedClassesToTop::new,
           BridgeMethodsCreator::new,
           OptimizeEnums::new,
           EnumMethodsCreator::new,
           DevirtualizeBoxedTypesAndJsFunctionImplementations::new,
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
-          // Runs before normalizing nested classes.
           InsertCastOnNewInstances::new,
-          // Must run before Enum normalization
-          FixSuperCallQualifiers::new,
 
           // Runs after all passes that synthesize overlays.
           NormalizeEnumClasses::new,
@@ -220,7 +222,6 @@ public enum Backend {
           ImplementSynchronizedStatements::new,
           NormalizeFieldInitialization::new,
           ImplementInstanceInitialization::new,
-          NormalizeNestedClassConstructors::new,
           NormalizeConstructors::new,
           NormalizeCasts::new,
           NormalizeInstanceOfs::new,
@@ -281,6 +282,7 @@ public enum Backend {
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
       return ImmutableList.of(
+          ResolveImplicitInstanceQualifiers::new,
           () -> new NormalizeForEachStatement(/* useDoubleForIndexVariable= */ false));
     }
 
@@ -296,12 +298,14 @@ public enum Backend {
           // Default constructors and explicit super calls should be synthesized first.
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
+
+          // Resolve captures
+          ResolveCaptures::new,
+          // ... and flatten the class hierarchy.
+          MoveNestedClassesToTop::new,
           BridgeMethodsCreator::new,
           EnumMethodsCreator::new,
           () -> new ImplementSystemGetProperty(options.getDefinesForWasm()),
-
-          // Must run before Enum normalization
-          FixSuperCallQualifiers::new,
           NormalizeTryWithResources::new,
           NormalizeCatchClauses::new,
           NormalizeInstanceCompileTimeConstants::new,
@@ -333,7 +337,6 @@ public enum Backend {
           RewriteShortcutOperators::new,
           NormalizeFieldInitialization::new,
           ImplementInstanceInitialization::new,
-          NormalizeNestedClassConstructors::new,
           NormalizeLabels::new,
           ImplementStaticInitializationViaConditionChecks::new,
           ImplementClassMetadataViaGetters::new,
@@ -355,6 +358,7 @@ public enum Backend {
           ImplementArraysAsClasses::new,
           NormalizeInstantiationThroughFactoryMethods::new,
           NormalizeNullLiterals::new,
+          RemoveNoopStatements::new,
 
           // Post-verifications
           VerifySingleAstReference::new,
@@ -371,7 +375,7 @@ public enum Backend {
 
     @Override
     public ImmutableList<Supplier<NormalizationPass>> getDesugaringPassFactories() {
-      return ImmutableList.of();
+      return ImmutableList.of(ResolveImplicitInstanceQualifiers::new);
     }
 
     @Override
@@ -385,13 +389,17 @@ public enum Backend {
           // Normalizations
           CreateImplicitConstructors::new,
           InsertExplicitSuperCalls::new,
+
+          // Resolve captures
+          ResolveCaptures::new,
+          // ... and flatten the class hierarchy.
+          MoveNestedClassesToTop::new,
           NormalizeStaticMemberQualifiers::new,
           NormalizeMultiExpressions::new,
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           RewriteAssignmentExpressions::new,
           NormalizeLiteralsKotlin::new,
           NormalizeFieldInitializationKotlin::new,
-          NormalizeNestedClassConstructors::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,
           NormalizeLabeledStatements::new,

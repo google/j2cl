@@ -2,6 +2,12 @@
 (global $f_STATIC_FIELD__libraryinfo_Main (mut (ref null $java.lang.String)) (ref.null $java.lang.String))
 (global $f_$initialized__libraryinfo_Main (mut i32) (i32.const 0))
 
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
+;;; Code for libraryinfo.Main.1 [static fields]
+(global $f_$initialized__libraryinfo_Main_1 (mut i32) (i32.const 0))
+
 ;;; Code for libraryinfo.Main.JsTypeInterface [static fields]
 (global $f_$initialized__libraryinfo_Main_JsTypeInterface (mut i32) (i32.const 0))
 
@@ -33,14 +39,8 @@
 ;;; Code for libraryinfo.Main.MyJsType [static fields]
 (global $f_$initialized__libraryinfo_Main_MyJsType (mut i32) (i32.const 0))
 
-;;; Code for libraryinfo.Main.1 [static fields]
-(global $f_$initialized__libraryinfo_Main_1 (mut i32) (i32.const 0))
-
 ;;; Code for libraryinfo.Main.Foo [static fields]
 (global $f_$initialized__libraryinfo_Main_Foo (mut i32) (i32.const 0))
-
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
 
 ;;; Code for libraryinfo.Main [vtable.init]
 (global $libraryinfo.Main.vtable (ref $libraryinfo.Main.vtable) 
@@ -54,6 +54,39 @@
 
 ;;; Code for libraryinfo.Main [itable.init]
 (global $libraryinfo.Main.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [vtable.init]
+(global $libraryinfo.Main.$LambdaImplementor$1.vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable) 
+ (struct.new $libraryinfo.Main.$LambdaImplementor$1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
+  (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
+ )
+)
+
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [itable.init]
+(global $libraryinfo.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+ (struct.new $libraryinfo.Main.Function.vtable
+  (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
+ )
+ ))
+
+;;; Code for libraryinfo.Main.1 [vtable.init]
+(global $libraryinfo.Main.1.vtable (ref $libraryinfo.Main.1.vtable) 
+ (struct.new $libraryinfo.Main.1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.1)
+  (ref.func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1)
+ )
+)
+
+;;; Code for libraryinfo.Main.1 [itable.init]
+(global $libraryinfo.Main.1.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for libraryinfo.Main.FunctionImpl [vtable.init]
@@ -138,21 +171,6 @@
 (global $libraryinfo.Main.MyJsType.itable (ref $itable) (array.init_static $itable 
  ))
 
-;;; Code for libraryinfo.Main.1 [vtable.init]
-(global $libraryinfo.Main.1.vtable (ref $libraryinfo.Main.1.vtable) 
- (struct.new $libraryinfo.Main.1.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.1)
-  (ref.func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1)
- )
-)
-
-;;; Code for libraryinfo.Main.1 [itable.init]
-(global $libraryinfo.Main.1.itable (ref $itable) (array.init_static $itable 
- ))
-
 ;;; Code for libraryinfo.Main.Foo [vtable.init]
 (global $libraryinfo.Main.Foo.vtable (ref $libraryinfo.Main.Foo.vtable) 
  (struct.new $libraryinfo.Main.Foo.vtable
@@ -166,24 +184,6 @@
 
 ;;; Code for libraryinfo.Main.Foo [itable.init]
 (global $libraryinfo.Main.Foo.itable (ref $itable) (array.init_static $itable 
- ))
-
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [vtable.init]
-(global $libraryinfo.Main.$LambdaImplementor$1.vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable) 
- (struct.new $libraryinfo.Main.$LambdaImplementor$1.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
-  (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
- )
-)
-
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [itable.init]
-(global $libraryinfo.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
- (struct.new $libraryinfo.Main.Function.vtable
-  (ref.func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
- )
  ))
 
 ;;; Code for libraryinfo.Main [CLASS]
@@ -353,6 +353,202 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main)
+
+;;; Code for libraryinfo.Main.$LambdaImplementor$1 [CLASS]
+(type $libraryinfo.Main.$LambdaImplementor$1 (struct_subtype 
+ (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $libraryinfo.Main.$LambdaImplementor$1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
+(func $$create__libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
+ (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ ;;@ libraryinfo/Main.java:84:17
+ (local $$instance (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;;@ libraryinfo/Main.java:84:17
+  (local.set $$instance (struct.new $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ libraryinfo/Main.java:84:17
+  (call $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ libraryinfo/Main.java:84:17
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
+ (param $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ ;;@ libraryinfo/Main.java:84:17
+ (block
+  ;; libraryinfo.Main.$LambdaImplementor$1.$clinit();
+  ;;@ libraryinfo/Main.java:84:17
+  (call $$clinit__void@libraryinfo.Main.$LambdaImplementor$1 )
+  ;; Object.this.$ctor();
+  ;;@ libraryinfo/Main.java:84:17
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; void $LambdaImplementor$1.apply(String s)
+(func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1
+ (type $function.m_apply__java_lang_String__void)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $s (ref null $java.lang.String))
+ ;;@ libraryinfo/Main.java:84:17
+ (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $libraryinfo.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; libraryinfo.Main.log(s);
+  ;;@ libraryinfo/Main.java:84:22
+  (call $m_log__java_lang_Object__void@libraryinfo.Main (local.get $s))
+ )
+)
+(elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@libraryinfo.Main.$LambdaImplementor$1
+ ;;@ libraryinfo/Main.java:84:17
+ (block
+  ;; if (libraryinfo.Main.$LambdaImplementor$1.$initialized) return;
+  ;;@ libraryinfo/Main.java:84:17
+  (if (global.get $f_$initialized__libraryinfo_Main_$LambdaImplementor$1)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:84:17
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.$LambdaImplementor$1.$initialized = true);
+  ;;@ libraryinfo/Main.java:84:17
+  (global.set $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ libraryinfo/Main.java:84:17
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $libraryinfo.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.$LambdaImplementor$1();
+  (return (call $function.no.side.effects.$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class (ref.func $$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)
+
+;;; Code for libraryinfo.Main.1 [CLASS]
+(type $libraryinfo.Main.1 (struct_subtype 
+ (field $vtable (ref $libraryinfo.Main.1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $libraryinfo.Main.1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_foo__void_$pp_libraryinfo (ref $function.m_foo__void_$pp_libraryinfo))
+  $java.lang.Object.vtable)
+)
+
+;;; <anonymous> extends Object <anonymous> extends Object.$create()
+(func $$create__libraryinfo_Main_1@libraryinfo.Main.1
+ (result (ref null $libraryinfo.Main.1))
+ ;;@ libraryinfo/Main.java:89:17
+ (local $$instance (ref null $libraryinfo.Main.1))
+ (block
+  ;; <anonymous> extends Object $instance = new $1.<init>();
+  ;;@ libraryinfo/Main.java:89:17
+  (local.set $$instance (struct.new $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.1.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ libraryinfo/Main.java:89:17
+  (call $$ctor__void_$p_libraryinfo_Main_1@libraryinfo.Main.1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ libraryinfo/Main.java:89:17
+  (return (local.get $$instance))
+ )
+)
+
+;;; void <anonymous> extends Object.$ctor()
+(func $$ctor__void_$p_libraryinfo_Main_1@libraryinfo.Main.1
+ (param $this (ref null $libraryinfo.Main.1))
+ ;;@ libraryinfo/Main.java:89:17
+ (block
+  ;; libraryinfo.Main.1.$clinit();
+  ;;@ libraryinfo/Main.java:89:17
+  (call $$clinit__void@libraryinfo.Main.1 )
+  ;; Object.this.$ctor();
+  ;;@ libraryinfo/Main.java:89:17
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; void <anonymous> extends Object.foo()
+(func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1
+ (type $function.m_foo__void_$pp_libraryinfo)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ libraryinfo/Main.java:91:11
+ (local $this (ref null $libraryinfo.Main.1))
+ (local.set $this (ref.cast_static $libraryinfo.Main.1 (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1)
+
+;;; void <anonymous> extends Object.$clinit()
+(func $$clinit__void@libraryinfo.Main.1
+ ;;@ libraryinfo/Main.java:89:17
+ (block
+  ;; if (libraryinfo.Main.1.$initialized) return;
+  ;;@ libraryinfo/Main.java:89:17
+  (if (global.get $f_$initialized__libraryinfo_Main_1)
+   (then
+    ;; return;
+    ;;@ libraryinfo/Main.java:89:17
+    (return )
+   )
+  )
+  ;; (libraryinfo.Main.1.$initialized = true);
+  ;;@ libraryinfo/Main.java:89:17
+  (global.set $f_$initialized__libraryinfo_Main_1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ libraryinfo/Main.java:89:17
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> <anonymous> extends Object.getClass()
+(func $m_getClass__java_lang_Class@libraryinfo.Main.1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $libraryinfo.Main.1))
+ (local.set $this (ref.cast_static $libraryinfo.Main.1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.1();
+  (return (call $function.no.side.effects.$getLibraryinfo.Main.1__java_lang_Class (ref.func $$getLibraryinfo.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.1)
 
 ;;; Code for libraryinfo.Main.JsTypeInterface [INTERFACE]
 (type $libraryinfo.Main.JsTypeInterface.vtable (struct_subtype 
@@ -972,102 +1168,6 @@
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.MyJsType)
 
-;;; Code for libraryinfo.Main.1 [CLASS]
-(type $libraryinfo.Main.1 (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.1.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $libraryinfo.Main.1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_foo__void_$pp_libraryinfo (ref $function.m_foo__void_$pp_libraryinfo))
-  $java.lang.Object.vtable)
-)
-
-;;; <anonymous> extends Object <anonymous> extends Object.$create()
-(func $$create__libraryinfo_Main_1@libraryinfo.Main.1
- (result (ref null $libraryinfo.Main.1))
- ;;@ libraryinfo/Main.java:89:17
- (local $$instance (ref null $libraryinfo.Main.1))
- (block
-  ;; <anonymous> extends Object $instance = new $1.<init>();
-  ;;@ libraryinfo/Main.java:89:17
-  (local.set $$instance (struct.new $libraryinfo.Main.1 (ref.as_non_null (global.get $libraryinfo.Main.1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ libraryinfo/Main.java:89:17
-  (call $$ctor__void_$p_libraryinfo_Main_1@libraryinfo.Main.1 (local.get $$instance))
-  ;; return $instance;
-  ;;@ libraryinfo/Main.java:89:17
-  (return (local.get $$instance))
- )
-)
-
-;;; void <anonymous> extends Object.$ctor()
-(func $$ctor__void_$p_libraryinfo_Main_1@libraryinfo.Main.1
- (param $this (ref null $libraryinfo.Main.1))
- ;;@ libraryinfo/Main.java:89:17
- (block
-  ;; libraryinfo.Main.1.$clinit();
-  ;;@ libraryinfo/Main.java:89:17
-  (call $$clinit__void@libraryinfo.Main.1 )
-  ;; Object.this.$ctor();
-  ;;@ libraryinfo/Main.java:89:17
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; void <anonymous> extends Object.foo()
-(func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1
- (type $function.m_foo__void_$pp_libraryinfo)
- (param $this.untyped (ref null $java.lang.Object))
- ;;@ libraryinfo/Main.java:91:11
- (local $this (ref null $libraryinfo.Main.1))
- (local.set $this (ref.cast_static $libraryinfo.Main.1 (local.get $this.untyped)))
- (block
- )
-)
-(elem declare func $m_foo__void_$pp_libraryinfo@libraryinfo.Main.1)
-
-;;; void <anonymous> extends Object.$clinit()
-(func $$clinit__void@libraryinfo.Main.1
- ;;@ libraryinfo/Main.java:89:17
- (block
-  ;; if (libraryinfo.Main.1.$initialized) return;
-  ;;@ libraryinfo/Main.java:89:17
-  (if (global.get $f_$initialized__libraryinfo_Main_1)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:89:17
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.1.$initialized = true);
-  ;;@ libraryinfo/Main.java:89:17
-  (global.set $f_$initialized__libraryinfo_Main_1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ libraryinfo/Main.java:89:17
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> <anonymous> extends Object.getClass()
-(func $m_getClass__java_lang_Class@libraryinfo.Main.1
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $libraryinfo.Main.1))
- (local.set $this (ref.cast_static $libraryinfo.Main.1 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.1();
-  (return (call $function.no.side.effects.$getLibraryinfo.Main.1__java_lang_Class (ref.func $$getLibraryinfo.Main.1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.1)
-
 ;;; Code for libraryinfo.Main.Foo [CLASS]
 (type $libraryinfo.Main.Foo (struct_subtype 
  (field $vtable (ref $libraryinfo.Main.Foo.vtable)) 
@@ -1169,103 +1269,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.Foo)
-
-;;; Code for libraryinfo.Main.$LambdaImplementor$1 [CLASS]
-(type $libraryinfo.Main.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $libraryinfo.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $libraryinfo.Main.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_apply__java_lang_String__void (ref $function.m_apply__java_lang_String__void))
-  $java.lang.Object.vtable)
-)
-
-;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
-(func $$create__libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
- (result (ref null $libraryinfo.Main.$LambdaImplementor$1))
- ;;@ libraryinfo/Main.java:84:17
- (local $$instance (ref null $libraryinfo.Main.$LambdaImplementor$1))
- (block
-  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
-  ;;@ libraryinfo/Main.java:84:17
-  (local.set $$instance (struct.new $libraryinfo.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $libraryinfo.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ libraryinfo/Main.java:84:17
-  (call $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1 (local.get $$instance))
-  ;; return $instance;
-  ;;@ libraryinfo/Main.java:84:17
-  (return (local.get $$instance))
- )
-)
-
-;;; void $LambdaImplementor$1.$ctor()
-(func $$ctor__void_$p_libraryinfo_Main_$LambdaImplementor$1@libraryinfo.Main.$LambdaImplementor$1
- (param $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- ;;@ libraryinfo/Main.java:84:17
- (block
-  ;; libraryinfo.Main.$LambdaImplementor$1.$clinit();
-  ;;@ libraryinfo/Main.java:84:17
-  (call $$clinit__void@libraryinfo.Main.$LambdaImplementor$1 )
-  ;; Object.this.$ctor();
-  ;;@ libraryinfo/Main.java:84:17
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; void $LambdaImplementor$1.apply(String s)
-(func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1
- (type $function.m_apply__java_lang_String__void)
- (param $this.untyped (ref null $java.lang.Object))
- (param $s (ref null $java.lang.String))
- ;;@ libraryinfo/Main.java:84:17
- (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $libraryinfo.Main.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; libraryinfo.Main.log(s);
-  ;;@ libraryinfo/Main.java:84:22
-  (call $m_log__java_lang_Object__void@libraryinfo.Main (local.get $s))
- )
-)
-(elem declare func $m_apply__java_lang_String__void@libraryinfo.Main.$LambdaImplementor$1)
-
-;;; void $LambdaImplementor$1.$clinit()
-(func $$clinit__void@libraryinfo.Main.$LambdaImplementor$1
- ;;@ libraryinfo/Main.java:84:17
- (block
-  ;; if (libraryinfo.Main.$LambdaImplementor$1.$initialized) return;
-  ;;@ libraryinfo/Main.java:84:17
-  (if (global.get $f_$initialized__libraryinfo_Main_$LambdaImplementor$1)
-   (then
-    ;; return;
-    ;;@ libraryinfo/Main.java:84:17
-    (return )
-   )
-  )
-  ;; (libraryinfo.Main.$LambdaImplementor$1.$initialized = true);
-  ;;@ libraryinfo/Main.java:84:17
-  (global.set $f_$initialized__libraryinfo_Main_$LambdaImplementor$1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ libraryinfo/Main.java:84:17
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> $LambdaImplementor$1.getClass()
-(func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $libraryinfo.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $libraryinfo.Main.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getLibraryinfo.Main.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class (ref.func $$getLibraryinfo.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@libraryinfo.Main.$LambdaImplementor$1)

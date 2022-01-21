@@ -11,11 +11,11 @@ open class QualifiedSuperCall: qualifiedsupercall.Parent {
 }
 
 open class `QualifiedSuperCall$InnerClass` {
+ @JvmField val `this`: qualifiedsupercall.QualifiedSuperCall?
+
  constructor(`$outer_this`: qualifiedsupercall.QualifiedSuperCall?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: qualifiedsupercall.QualifiedSuperCall?
 
  open fun test() {
   this.`this`!!.`fun`()

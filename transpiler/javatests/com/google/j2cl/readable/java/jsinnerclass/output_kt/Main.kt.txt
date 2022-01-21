@@ -11,16 +11,6 @@ open class Main {
  }
 }
 
-open class `Main$Outer` {
- internal constructor(): super()
-
- @JvmField internal var a: Int = 2
-
- open fun method(): Int {
-  return jsinnerclass.`Main$Outer$Inner`(this).getB() + this.a
- }
-}
-
 open class `Main$Outer$Inner` {
  @JvmField val `this`: jsinnerclass.`Main$Outer`?
 
@@ -33,5 +23,15 @@ open class `Main$Outer$Inner` {
 
  open fun getB(): Int {
   return this.b
+ }
+}
+
+open class `Main$Outer` {
+ internal constructor(): super()
+
+ @JvmField internal var a: Int = 2
+
+ open fun method(): Int {
+  return jsinnerclass.`Main$Outer$Inner`(this).getB() + this.a
  }
 }

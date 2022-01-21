@@ -15,38 +15,26 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import com.google.j2cl.transpiler.ast.AbstractVisitor;
+
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Type;
 
 /** The base class for all J2cl Normalization passes. */
 public abstract class NormalizationPass {
-  private AbstractVisitor processor;
+  private CompilationUnit currentCompilationUnit;
 
   public final void execute(CompilationUnit compilationUnit) {
-    processor =
-        new AbstractVisitor() {
-          @Override
-          public boolean enterCompilationUnit(CompilationUnit node) {
-            applyTo(node);
-            return false;
-          }
-
-          @Override
-          public boolean enterType(Type node) {
-            applyTo(node);
-            return false;
-          }
-        };
-    compilationUnit.accept(processor);
+    currentCompilationUnit = compilationUnit;
+    applyTo(compilationUnit);
+    currentCompilationUnit = null;
   }
 
   public CompilationUnit getCompilationUnit() {
-    return processor.getCurrentCompilationUnit();
+    return currentCompilationUnit;
   }
 
   public void applyTo(CompilationUnit compilationUnit) {
-    compilationUnit.getTypes().forEach(t -> t.accept(processor));
+    compilationUnit.streamTypes().forEach(this::applyTo);
   }
 
   public void applyTo(Type type) {}

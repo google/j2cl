@@ -13,22 +13,14 @@
  */
 package com.google.j2cl.transpiler.passes;
 
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static com.google.common.collect.Streams.stream;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
-import com.google.j2cl.transpiler.ast.BinaryExpression;
-import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Expression;
-import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.LambdaImplementorTypeDescriptors;
 import com.google.j2cl.transpiler.ast.Method;
@@ -36,19 +28,14 @@ import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.Node;
 import com.google.j2cl.transpiler.ast.Statement;
-import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
-import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
-import com.google.j2cl.transpiler.ast.VariableReference;
 import com.google.j2cl.transpiler.ast.Visibility;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Implements lambdas by creating a class that implements the required interfaces.
@@ -62,49 +49,37 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
 
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    List<Type> newLambdaImplementors = new ArrayList<>();
-
     // (1) Replace each functional expression with an instantiation of the corresponding lambda
-    // implementor class; passing the captures as parameters to the constructor.
+    // implementor class.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteFunctionExpression(FunctionExpression functionExpression) {
             TypeDescriptor typeDescriptor = functionExpression.getTypeDescriptor();
 
+            boolean capturesEnclosingInstance = functionExpression.isCapturingEnclosingInstance();
+            DeclaredTypeDescriptor enclosingTypeDescriptor = getCurrentType().getTypeDescriptor();
             DeclaredTypeDescriptor implementorTypeDescriptor =
                 LambdaImplementorTypeDescriptors.createLambdaImplementorTypeDescriptor(
                     typeDescriptor,
-                    getCurrentType().getTypeDescriptor(),
-                    lambdaCounterPerCompilationUnit++);
+                    enclosingTypeDescriptor,
+                    lambdaCounterPerCompilationUnit++,
+                    capturesEnclosingInstance);
 
-            newLambdaImplementors.add(
-                createNewLambdaImplementorType(functionExpression, implementorTypeDescriptor));
-
-            ImmutableList.Builder<Expression> argumentsBuilder = new ImmutableList.Builder<>();
-            if (functionExpression.isReferencingEnclosingInstance()) {
-              argumentsBuilder.add(new ThisReference(getCurrentType().getTypeDescriptor()));
-            }
-            argumentsBuilder.addAll(
-                functionExpression.getCapturedVariables().stream()
-                    .map(Variable::createReference)
-                    .collect(toImmutableList()));
-
-            // new A$$LambdaImplementor( captures... )
+            // new A$$LambdaImplementor(...)
             return NewInstance.newBuilder()
-                .setTarget(
-                    getLambdaImplementorConstructorDescriptor(
-                        implementorTypeDescriptor,
-                        argumentsBuilder.build().stream()
-                            .map(Expression::getTypeDescriptor)
-                            .collect(toImmutableList())))
-                .setArguments(argumentsBuilder.build())
+                // Set the qualifier since it is expected that expressions after the early
+                // qualifier resolution be explicitly qualified.
+                .setQualifier(
+                    capturesEnclosingInstance
+                        ? new ThisReference(getCurrentType().getTypeDescriptor())
+                        : null)
+                .setAnonymousInnerClass(
+                    createNewLambdaImplementorType(functionExpression, implementorTypeDescriptor))
+                .setTarget(AstUtils.createImplicitConstructorDescriptor(implementorTypeDescriptor))
                 .build();
           }
         });
-
-    // (2) Add all the newly created implementors to the compilation unit.
-    compilationUnit.addTypes(newLambdaImplementors);
   }
 
   /**
@@ -112,20 +87,9 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
    *
    * <p><code>
    *   class LambdaImplementor implements FunctionalInterface {
-   *     private T1 capturedVariable1;
-   *         ...
-   *     private TN capturedVariablen;
-   *
-   *     public LambdaImplementor(T1 capturedVariable1, ..., TN capturedVariablen) {
-   *       this.capturedVariable1 = capturedVariable1;
-   *       ....
-   *       this.capturedVariablen = capturedVariablen;
-   *     }
-   *
    *     public t method(t1 p1, t2 p2, .....) {
-   *       ... body of the function expression with captures replaced.
+   *       ... body of the function expression.
    *     }
-   *
    *   }
    * </code>
    */
@@ -139,10 +103,9 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
     //
     //
     //   class LambdaImplementor implements Consumer<String>, Serializable {
-    //       LambdaImplementor( ...captures...);
-    //       ... fields for captures ...
+    //       LambdaImplementor();
     //       public void accept(String s) {
-    //         .. body of function expression with captures replaced...
+    //         .. body of function expression...
     //       }
     //   }
     //
@@ -153,116 +116,24 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
     Type lambdaImplementorType =
         new Type(sourcePosition, Visibility.PUBLIC, implementorTypeDescriptor.getTypeDeclaration());
 
-    Map<Node, Field> fieldsByCapture =
-        createFieldsForCaptures(functionExpression, implementorTypeDescriptor);
-
-    lambdaImplementorType.addMembers(fieldsByCapture.values());
-
-    lambdaImplementorType.addMember(
-        createLambdaImplementorConstructor(
-            sourcePosition, implementorTypeDescriptor, fieldsByCapture.values()));
-
     // public t method(t1 p1, t2 p2, .....) {
     //   ... code from function expression....;
     // }
     lambdaImplementorType.addMember(
-        createLambdaMethod(
-            sourcePosition, functionExpression, implementorTypeDescriptor, fieldsByCapture));
+        createLambdaMethod(sourcePosition, functionExpression, implementorTypeDescriptor));
 
     return lambdaImplementorType;
-  }
-
-  /** Dummy node to use as a key for the capture mapping of the enclosing instance. */
-  private static final Node THIS_REFERENCE = new Node() {};
-
-  private static Map<Node, Field> createFieldsForCaptures(
-      FunctionExpression functionExpression, DeclaredTypeDescriptor implementorTypeDescriptor) {
-    SourcePosition sourcePosition = functionExpression.getSourcePosition();
-    Map<Node, Field> fieldsByCapture = new LinkedHashMap<>();
-    if (functionExpression.isReferencingEnclosingInstance()) {
-      fieldsByCapture.put(
-          THIS_REFERENCE,
-          Field.Builder.from(
-                  FieldDescriptor.newBuilder()
-                      .setName("$captured.this")
-                      .setTypeDescriptor(implementorTypeDescriptor.getEnclosingTypeDescriptor())
-                      .setEnclosingTypeDescriptor(implementorTypeDescriptor)
-                      .setVisibility(Visibility.PRIVATE)
-                      .setFinal(true)
-                      .build())
-              .setSourcePosition(sourcePosition)
-              .build());
-    }
-
-    for (Variable capturedVariable : functionExpression.getCapturedVariables()) {
-      fieldsByCapture.put(
-          capturedVariable,
-          Field.Builder.from(
-                  FieldDescriptor.newBuilder()
-                      .setName(capturedVariable.getName())
-                      .setTypeDescriptor(capturedVariable.getTypeDescriptor())
-                      .setEnclosingTypeDescriptor(implementorTypeDescriptor)
-                      .setVisibility(Visibility.PRIVATE)
-                      .setFinal(true)
-                      .build())
-              .setSourcePosition(sourcePosition)
-              .build());
-    }
-    return fieldsByCapture;
-  }
-
-  /** Creates the constructor for the LambdaImplementor class. */
-  private static Method createLambdaImplementorConstructor(
-      SourcePosition sourcePosition,
-      DeclaredTypeDescriptor implementorTypeDescriptor,
-      Iterable<Field> captures) {
-
-    MethodDescriptor implementorConstructorDescriptor =
-        getLambdaImplementorConstructorDescriptor(
-            implementorTypeDescriptor,
-            stream(captures)
-                .map(Field::getDescriptor)
-                .map(FieldDescriptor::getTypeDescriptor)
-                .collect(toImmutableList()));
-
-    List<Variable> parameters = new ArrayList<>();
-    List<Statement> captureInitializers = new ArrayList<>();
-
-    for (Field capture : captures) {
-      Variable parameter =
-          Variable.newBuilder()
-              .setName(capture.getDescriptor().getName())
-              .setTypeDescriptor(capture.getDescriptor().getTypeDescriptor())
-              .setParameter(true)
-              .setFinal(true)
-              .build();
-      parameters.add(parameter);
-      captureInitializers.add(
-          BinaryExpression.Builder.asAssignmentTo(capture)
-              .setRightOperand(parameter)
-              .build()
-              .makeStatement(sourcePosition));
-    }
-
-    return Method.newBuilder()
-        .setMethodDescriptor(implementorConstructorDescriptor)
-        .setParameters(parameters)
-        .addStatements(captureInitializers)
-        .setSourcePosition(sourcePosition)
-        .build();
   }
 
   /**
    * Creates the method that implements this lambda.
    *
-   * <p>The body of the method is the code in {@code functionExpression} with the references to
-   * captured variables replaced by accesses to the corresponding fields.
+   * <p>The body of the method is the code in {@code functionExpression}.
    */
   private static Method createLambdaMethod(
       SourcePosition sourcePosition,
       FunctionExpression functionExpression,
-      DeclaredTypeDescriptor implementorTypeDescriptor,
-      Map<Node, Field> fieldsByCapture) {
+      DeclaredTypeDescriptor implementorTypeDescriptor) {
     List<Statement> body = new ArrayList<>();
     List<Variable> parameters = new ArrayList<>();
 
@@ -296,15 +167,7 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
       }
     }
 
-    // The body of the lambda implementation method is just the body of the function with
-    // the captures replaced by the corresponding field accesses.
-    body.addAll(
-        rewriteCaputredReferences(
-                sourcePosition,
-                implementorTypeDescriptor,
-                fieldsByCapture,
-                functionExpression.getBody().clone())
-            .getStatements());
+    body.addAll(functionExpression.getBody().getStatements());
 
     return Method.newBuilder()
         .setMethodDescriptor(lambdaMethodDescriptor)
@@ -314,75 +177,9 @@ public class ImplementLambdaExpressionsViaImplementorClasses extends Normalizati
         .build();
   }
 
-  private static Block rewriteCaputredReferences(
-      SourcePosition sourcePosition,
-      DeclaredTypeDescriptor implementorTypeDescriptor,
-      Map<Node, Field> fieldsByCapture,
-      Block body) {
-    body.accept(
-        new AbstractRewriter() {
-
-          // TODO(b/186272309): move the computation of captures from CompilationUnitBuilder to a
-          // pass.
-          @Override
-          public boolean shouldProcessNewInstance(NewInstance newInstance) {
-            TypeDeclaration targetClass =
-                newInstance.getTarget().getEnclosingTypeDescriptor().getTypeDeclaration();
-            if (targetClass.isAnonymous()
-                && targetClass.getDeclaredFieldDescriptors().stream()
-                    .anyMatch(FieldDescriptor::isCapture)) {
-              // TODO(b/186272309): Found an anonymous innerclass that has captures inside of a la
-              // lambda, throw an exception with a clear message. Not throwing here will result in
-              // a NPE later in the compiler which might be difficult for users to diagnose.
-              throw new IllegalStateException(
-                  "J2WASM does not support anonymous classes in lambdas");
-            }
-            return true;
-          }
-
-          @Override
-          public Expression rewriteVariableReference(VariableReference variableReference) {
-            Field captureField = fieldsByCapture.get(variableReference.getTarget());
-            if (captureField != null) {
-              return createCaptureFieldAccess(captureField);
-            }
-            return variableReference;
-          }
-
-          @Override
-          public Expression rewriteThisReference(ThisReference thisReference) {
-            return createCaptureFieldAccess(fieldsByCapture.get(THIS_REFERENCE));
-          }
-
-          @Override
-          public Expression rewriteSuperReference(SuperReference superReference) {
-            return createCaptureFieldAccess(fieldsByCapture.get(THIS_REFERENCE));
-          }
-
-          private FieldAccess createCaptureFieldAccess(Field captureField) {
-            return FieldAccess.newBuilder()
-                .setTarget(captureField.getDescriptor())
-                .setQualifier(new ThisReference(implementorTypeDescriptor))
-                .setSourcePosition(sourcePosition)
-                .build();
-          }
-        });
-    return body;
-  }
-
   /** Returns the MethodDescriptor for the functional method of the LambdaImplementor class. */
   private static MethodDescriptor getLambdaMethodDescriptor(
       DeclaredTypeDescriptor implementorTypeDescriptor) {
     return Iterables.getOnlyElement(implementorTypeDescriptor.getDeclaredMethodDescriptors());
-  }
-
-  /** Returns the MethodDescriptor for the constructor of the LambdaImplementor class. */
-  private static MethodDescriptor getLambdaImplementorConstructorDescriptor(
-      DeclaredTypeDescriptor implementorTypeDescriptor, List<TypeDescriptor> captures) {
-    return MethodDescriptor.newBuilder()
-        .setEnclosingTypeDescriptor(implementorTypeDescriptor)
-        .setConstructor(true)
-        .setParameterTypeDescriptors(captures)
-        .build();
   }
 }

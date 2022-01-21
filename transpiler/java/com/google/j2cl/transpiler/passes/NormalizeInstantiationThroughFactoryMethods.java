@@ -33,6 +33,7 @@ import com.google.j2cl.transpiler.ast.NewInstance;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.ReturnStatement;
 import com.google.j2cl.transpiler.ast.Statement;
+import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
@@ -116,7 +117,10 @@ public class NormalizeInstantiationThroughFactoryMethods extends NormalizationPa
 
             return MethodCall.Builder.from(
                     getCtorMethodDescriptorForConstructor(methodCall.getTarget()))
-                .setQualifier(methodCall.getQualifier())
+                .setQualifier(
+                    methodCall.getQualifier() == null
+                        ? new ThisReference(methodCall.getTarget().getEnclosingTypeDescriptor())
+                        : methodCall.getQualifier())
                 .setArguments(methodCall.getArguments())
                 .build();
           }

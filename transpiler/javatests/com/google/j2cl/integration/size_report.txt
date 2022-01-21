@@ -1,17 +1,27 @@
 Integration tests size report:
 **************************************
-There are 0 optimized size changes.
-Total size (of already existing tests) did not change.
+There are 14 optimized size changes.
+Total optimized size (of already existing tests) changed from
+  2040452 to 2040822 bytes (100%->100.0%) and from
+  723854 to 723935 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
 **************************************
-  none
+        old      new
+       1624     1606 instanceinnerclass.esnext (-1.1%)
+       2003     1985 instanceinnerclass (-0.9%)
+      12437    12429 wasm.esnext (-0.1%)
+      12980    12978 wasm (-0.0%)
 
 
 Expansion report highlights:
 **************************************
-  none
+        old      new
+       1607     1651 captures.esnext (2.7%)
+       2011     2059 captures (2.4%)
+        754      762 parallelhierarchies.esnext (1.1%)
+       1108     1118 parallelhierarchies (0.9%)
 
 
 Incremental size reports (non-gzip):
@@ -24,11 +34,11 @@ Incremental size reports (non-gzip):
 Uncompiled bundle reports:
 **************************************
         old      new
-    4004297  4000835 box2d_default (-0.1%)
-    2184640  2184328 box2d_default.minified (-0.0%)
+    4000835  4000941 box2d_default (0.0%)
+    2184328  2184332 box2d_default.minified (0.0%)
     1153183  1153183 box2d_default.rta (unchanged)
-    2413514  2410052 emptyclass (-0.1%)
-    1447278  1446966 emptyclass.minified (-0.0%)
+    2410052  2410158 emptyclass (0.0%)
+    1446966  1446970 emptyclass.minified (0.0%)
      688047   688047 emptyclass.rta (unchanged)
 
 
@@ -69,10 +79,10 @@ All reports:
        2622     2622 assertsimple.esnext (unchanged)
        5793     5793 autoboxing (unchanged)
        5395     5395 autoboxing.esnext (unchanged)
-       3053     3053 autovalue (unchanged)
-       2698     2698 autovalue.esnext (unchanged)
-       3310     3310 autovalue_inc (unchanged)
-       2946     2946 autovalue_inc.esnext (unchanged)
+       3053     3057 autovalue (0.1%)
+       2698     2702 autovalue.esnext (0.1%)
+       3310     3312 autovalue_inc (0.1%)
+       2946     2951 autovalue_inc.esnext (0.2%)
        2692     2692 autovalue_ref (unchanged)
        2437     2437 autovalue_ref.esnext (unchanged)
         998      998 backwardbridgemethod (unchanged)
@@ -95,8 +105,8 @@ All reports:
        1672     1672 bridgejsmethod.esnext (unchanged)
        2069     2069 bridgemethods (unchanged)
        1673     1673 bridgemethods.esnext (unchanged)
-       2011     2011 captures (unchanged)
-       1607     1607 captures.esnext (unchanged)
+       2011     2059 captures (2.4%)
+       1607     1651 captures.esnext (2.7%)
         943      943 cascadedstaticinit (unchanged)
         606      606 cascadedstaticinit.esnext (unchanged)
        1833     1833 casts (unchanged)
@@ -183,14 +193,14 @@ All reports:
         628      628 inlineinstancefieldinit.esnext (unchanged)
          22       22 innerclassinheritance (unchanged)
          22       22 innerclassinheritance.esnext (unchanged)
-       2068     2068 innerclassinitorder (unchanged)
-       1687     1687 innerclassinitorder.esnext (unchanged)
+       2068     2069 innerclassinitorder (0.0%)
+       1687     1688 innerclassinitorder.esnext (0.1%)
        2184     2184 instancecompiletimeconstant (unchanged)
        1825     1825 instancecompiletimeconstant.esnext (unchanged)
         953      953 instanceinitorder (unchanged)
         620      620 instanceinitorder.esnext (unchanged)
-       2003     2003 instanceinnerclass (unchanged)
-       1624     1624 instanceinnerclass.esnext (unchanged)
+       2003     1985 instanceinnerclass (-0.9%)
+       1624     1606 instanceinnerclass.esnext (-1.1%)
        1214     1214 instancejsmethods (unchanged)
         845      845 instancejsmethods.esnext (unchanged)
        3828     3828 instanceofs (unchanged)
@@ -325,8 +335,8 @@ All reports:
          22       22 packagecrosscall.esnext (unchanged)
        1795     1795 packageprivatemethods (unchanged)
        1324     1324 packageprivatemethods.esnext (unchanged)
-       1108     1108 parallelhierarchies (unchanged)
-        754      754 parallelhierarchies.esnext (unchanged)
+       1108     1118 parallelhierarchies (0.9%)
+        754      762 parallelhierarchies.esnext (1.1%)
          22       22 privatecrosscall (unchanged)
          22       22 privatecrosscall.esnext (unchanged)
          22       22 protectedcrosscall (unchanged)
@@ -409,8 +419,8 @@ All reports:
        3358     3358 varargs.esnext (unchanged)
        1007     1007 variables (unchanged)
         669      669 variables.esnext (unchanged)
-      12980    12980 wasm (unchanged)
-      12437    12437 wasm.esnext (unchanged)
+      12980    12978 wasm (-0.0%)
+      12437    12429 wasm.esnext (-0.1%)
         924      924 whilestatement (unchanged)
         589      589 whilestatement.esnext (unchanged)
        1982     1982 wideningfloatconversion (unchanged)

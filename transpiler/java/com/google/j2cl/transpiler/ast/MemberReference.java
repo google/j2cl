@@ -15,7 +15,6 @@
  */
 package com.google.j2cl.transpiler.ast;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.j2cl.common.visitor.Visitable;
@@ -28,9 +27,8 @@ public abstract class MemberReference extends Expression {
   private final MemberDescriptor target;
 
   MemberReference(Expression qualifier, MemberDescriptor target) {
+    this.qualifier = qualifier;
     this.target = checkNotNull(target);
-    this.qualifier = AstUtils.getExplicitQualifier(qualifier, target);
-    checkArgument(!target.isInstanceMember() || this.qualifier != null);
   }
 
   public MemberDescriptor getTarget() {
@@ -68,6 +66,13 @@ public abstract class MemberReference extends Expression {
 
     public final T setTarget(D target) {
       this.target = target;
+      return getThis();
+    }
+
+    public T setDefaultInstanceQualifier() {
+      if (target.isInstanceMember()) {
+        qualifier = new ThisReference(target.getEnclosingTypeDescriptor());
+      }
       return getThis();
     }
 

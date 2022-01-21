@@ -14,7 +14,5 @@ package(
 integration_test(
     name = "lambdas",
     srcs = glob(["*.java"]),
-    # TODO(b/186272309): Enable when captures are computed in the AST.
-    enable_wasm = False,
     j2cl_library_tags = ["manual"],
 )

@@ -247,14 +247,14 @@ public class BinaryExpression extends Expression {
     }
 
     public static Builder asAssignmentTo(Field field) {
-      return new Builder()
-          .setLeftOperand(FieldAccess.Builder.from(field).build())
-          .setOperator(BinaryOperator.ASSIGN);
+      return asAssignmentTo(field.getDescriptor());
     }
 
     public static Builder asAssignmentTo(FieldDescriptor fieldDescriptor) {
+
       return new Builder()
-          .setLeftOperand(FieldAccess.Builder.from(fieldDescriptor).build())
+          .setLeftOperand(
+              FieldAccess.Builder.from(fieldDescriptor).setDefaultInstanceQualifier().build())
           .setOperator(BinaryOperator.ASSIGN);
     }
 

@@ -14,17 +14,12 @@
 package com.google.j2cl.transpiler.passes;
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.collect.ImmutableSet.toImmutableSet;
 
-import com.google.common.base.Predicates;
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
-import com.google.j2cl.transpiler.ast.Field;
-import com.google.j2cl.transpiler.ast.FieldAccess;
-import com.google.j2cl.transpiler.ast.FieldDescriptor;
 import com.google.j2cl.transpiler.ast.FunctionExpression;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
@@ -35,10 +30,7 @@ import com.google.j2cl.transpiler.ast.SuperReference;
 import com.google.j2cl.transpiler.ast.ThisReference;
 import com.google.j2cl.transpiler.ast.Type;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
-import com.google.j2cl.transpiler.ast.TypeDescriptor;
-import com.google.j2cl.transpiler.ast.Variable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -48,19 +40,15 @@ import java.util.Set;
 public class OptimizeAnonymousInnerClassesToFunctionExpressions extends NormalizationPass {
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
-    final Map<TypeDescriptor, Type> optimizableJsFunctionsByTypeDescriptor =
-        collectOptimizableJsFunctionsByTypeDescriptor(compilationUnit);
-
+    /** Keeps track of the classes that were optimized away to fix references. */
+    Set<TypeDeclaration> optimizedClasses = new HashSet<>();
     // Replace each instantiation with the corresponding functional expression.
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteNewInstance(NewInstance newInstance) {
-            TypeDescriptor targetTypeDescriptor =
-                newInstance.getTarget().getEnclosingTypeDescriptor();
-            Type optimizableJsFunctionImplementation =
-                optimizableJsFunctionsByTypeDescriptor.get(targetTypeDescriptor);
-            if (optimizableJsFunctionImplementation != null) {
+            Type anonymousInnerClass = newInstance.getAnonymousInnerClass();
+            if (anonymousInnerClass != null && canBeOptimized(anonymousInnerClass)) {
               // Rewrites
               //
               //  new JsFunctionInterface() {
@@ -74,20 +62,12 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
               //
               //  (E e) -> { return e.toString(); }
               //
-              Set<Variable> enclosingCaptures =
-                  getCurrentType().getFields().stream()
-                      .map(Field::getCapturedVariable)
-                      .filter(Predicates.notNull())
-                      .collect(toImmutableSet());
-              return optimizeToFunctionExpression(
-                  optimizableJsFunctionImplementation, enclosingCaptures);
+              optimizedClasses.add(anonymousInnerClass.getDeclaration());
+              return optimizeToFunctionExpression(anonymousInnerClass);
             }
             return newInstance;
           }
         });
-
-    // Revmove the inner classes that where optimized away.
-    compilationUnit.getTypes().removeAll(optimizableJsFunctionsByTypeDescriptor.values());
 
     // Replace all references to the type that was optimized away.
     compilationUnit.accept(
@@ -96,7 +76,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
           public Node rewriteMethodCall(MethodCall methodCall) {
             DeclaredTypeDescriptor targetTypeDescriptor =
                 methodCall.getTarget().getEnclosingTypeDescriptor();
-            if (optimizableJsFunctionsByTypeDescriptor.containsKey(targetTypeDescriptor)) {
+            if (optimizedClasses.contains(targetTypeDescriptor.getTypeDeclaration())) {
               // The calls that are typed as directly to the anonymous inner class are redirected
               // to be calls though the interface type, e.g.
               //
@@ -116,41 +96,11 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
             }
             return methodCall;
           }
-
-          @Override
-          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-            if (optimizableJsFunctionsByTypeDescriptor.containsKey(
-                fieldAccess.getTarget().getEnclosingTypeDescriptor())) {
-              // Due to the cascading construction for captures in inner class construction,
-              // at the end some field references might be incorrectly referring
-              // the removed jsfunction class and need to point to the proper enclosing class.
-              return FieldAccess.Builder.from(
-                      FieldDescriptor.Builder.from(fieldAccess.getTarget())
-                          .setEnclosingTypeDescriptor(getCurrentType().getTypeDescriptor())
-                          .build())
-                  .setQualifier(fieldAccess.getQualifier())
-                  .build();
-            }
-            return fieldAccess;
-          }
-
-          @Override
-          public Node rewriteThisReference(ThisReference thisReference) {
-            if (optimizableJsFunctionsByTypeDescriptor.containsKey(
-                thisReference.getTypeDescriptor())) {
-              // Due to the cascading construction for captures in inner class construction,
-              // at the end some this references might be incorrectly referring
-              // the removed jsfunction class and need to point to the proper enclosing class.
-              return new ThisReference(getCurrentType().getTypeDescriptor());
-            }
-            return thisReference;
-          }
         });
   }
 
   /** Converts an anonymous inner class that implements a JsFunction into an FunctionExpression. */
-  private static FunctionExpression optimizeToFunctionExpression(
-      final Type type, final Set<Variable> enclosingCaptures) {
+  private static FunctionExpression optimizeToFunctionExpression(final Type type) {
     Method jsFunctionMethodImplementation = getSingleDeclaredMethod(type);
     DeclaredTypeDescriptor jsFunctionTypeDescriptor =
         type.getSuperInterfaceTypeDescriptors().get(0);
@@ -166,41 +116,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
                     .build())
             .build();
 
-    final Map<FieldDescriptor, Variable> capturesByFieldDescriptor = new HashMap<>();
-    for (Field field : type.getFields()) {
-      capturesByFieldDescriptor.put(field.getDescriptor(), field.getCapturedVariable());
-    }
-    lambdaMethodImplementation.accept(
-        new AbstractRewriter() {
-          @Override
-          public Node rewriteFieldAccess(FieldAccess fieldAccess) {
-            // Turn references to captured fields (which are represented as instance fields) back
-            // into references to the captured variable.
-            if (capturesByFieldDescriptor.containsKey(fieldAccess.getTarget())
-                && fieldAccess.getQualifier() instanceof ThisReference) {
-              Variable capturedVariable = capturesByFieldDescriptor.get(fieldAccess.getTarget());
-              if (capturedVariable != null && !enclosingCaptures.contains(capturedVariable)) {
-                return capturedVariable.createReference();
-              } else if (fieldAccess.getTarget().isEnclosingInstanceCapture()) {
-                return new ThisReference(
-                    type.getEnclosingTypeDeclaration().toUnparameterizedTypeDescriptor());
-              }
-            }
-            return fieldAccess;
-          }
-        });
     return lambdaMethodImplementation;
-  }
-
-  private static Map<TypeDescriptor, Type> collectOptimizableJsFunctionsByTypeDescriptor(
-      CompilationUnit compilationUnit) {
-    Map<TypeDescriptor, Type> optimizableJsFunctionsByTypeDescriptor = new HashMap<>();
-    for (Type type : compilationUnit.getTypes()) {
-      if (canBeOptimized(type)) {
-        optimizableJsFunctionsByTypeDescriptor.put(type.getTypeDescriptor(), type);
-      }
-    }
-    return optimizableJsFunctionsByTypeDescriptor;
   }
 
   /**
@@ -213,8 +129,8 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
       return false;
     }
 
-    // Do not optimize if there are fields that are not captures.
-    if (!type.getFields().stream().map(Field::getDescriptor).allMatch(FieldDescriptor::isCapture)) {
+    // Do not optimize if the class declares fields.
+    if (!type.getFields().isEmpty()) {
       return false;
     }
     if (getSingleDeclaredMethod(type) == null) {
@@ -223,7 +139,7 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
     }
 
     if (hasThisOrSuperReference(type)) {
-      // Can not refer to an itself.
+      // Can not refer to itself.
       return false;
     }
     return true;
@@ -251,24 +167,24 @@ public class OptimizeAnonymousInnerClassesToFunctionExpressions extends Normaliz
         .accept(
             new AbstractVisitor() {
               @Override
-              public boolean enterFieldAccess(FieldAccess fieldAccess) {
-                if (fieldAccess.getTarget().isMemberOf(type.getTypeDescriptor())
-                    && fieldAccess.getQualifier() instanceof ThisReference) {
-                  // Skip "this" references when accessing captures.
-                  return false;
-                }
-                return true;
-              }
-
-              @Override
               public boolean enterThisReference(ThisReference expression) {
-                hasThisOrSuperReference[0] = true;
+                if (expression
+                    .getTypeDescriptor()
+                    .getTypeDeclaration()
+                    .equals(type.getDeclaration())) {
+                  hasThisOrSuperReference[0] = true;
+                }
                 return false;
               }
 
               @Override
               public boolean enterSuperReference(SuperReference expression) {
-                hasThisOrSuperReference[0] = true;
+                if (expression
+                    .getTypeDescriptor()
+                    .getTypeDeclaration()
+                    .equals(type.getDeclaration())) {
+                  hasThisOrSuperReference[0] = true;
+                }
                 return false;
               }
             });

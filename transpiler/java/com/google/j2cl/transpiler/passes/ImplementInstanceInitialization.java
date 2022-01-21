@@ -19,6 +19,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Method;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
@@ -68,8 +69,9 @@ public class ImplementInstanceInitialization extends NormalizationPass {
   }
 
   private static void synthesizeInstanceInitCall(Method constructor) {
-    MethodDescriptor initMethodDescriptor =
-        constructor.getDescriptor().getEnclosingTypeDescriptor().getInitMethodDescriptor();
+    DeclaredTypeDescriptor enclosingTypeDescriptor =
+        constructor.getDescriptor().getEnclosingTypeDescriptor();
+    MethodDescriptor initMethodDescriptor = enclosingTypeDescriptor.getInitMethodDescriptor();
 
     SourcePosition sourcePosition = constructor.getBody().getSourcePosition();
 
@@ -81,6 +83,9 @@ public class ImplementInstanceInitialization extends NormalizationPass {
 
     constructorStatements.add(
         insertIndex,
-        MethodCall.Builder.from(initMethodDescriptor).build().makeStatement(sourcePosition));
+        MethodCall.Builder.from(initMethodDescriptor)
+            .setDefaultInstanceQualifier()
+            .build()
+            .makeStatement(sourcePosition));
   }
 }

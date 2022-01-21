@@ -14,12 +14,18 @@ open class AnonymousClass {
  }
 }
 
+interface SomeInterface {
+ companion object {
+  @JvmField val implicitlyStatic: anonymousclass.SomeClass? = anonymousclass.`SomeInterface$1`(1)
+ }
+}
+
 open class `AnonymousClass$1`: anonymousclass.SomeClass {
+ @JvmField val `this`: anonymousclass.AnonymousClass?
+
  internal constructor(`$outer_this`: anonymousclass.AnonymousClass?, `$_0`: Int): super(`$_0`) {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: anonymousclass.AnonymousClass?
 
  @JvmField internal var `object`: kotlin.Any? = this
 
@@ -27,12 +33,6 @@ open class `AnonymousClass$1`: anonymousclass.SomeClass {
 
  open override fun foo(): kotlin.String? {
   return "a"
- }
-}
-
-interface SomeInterface {
- companion object {
-  @JvmField val implicitlyStatic: anonymousclass.SomeClass? = anonymousclass.`SomeInterface$1`(1)
  }
 }
 

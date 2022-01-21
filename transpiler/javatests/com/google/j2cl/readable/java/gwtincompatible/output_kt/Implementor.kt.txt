@@ -8,6 +8,12 @@ open class Implementor: gwtincompatible.Interface, gwtincompatible.`Interface$Ne
  }
 }
 
+open class `Implementor$SomeEnum$1`: gwtincompatible.`Implementor$SomeEnum` {
+ internal constructor(): super()
+
+ internal open override fun method() {}
+}
+
 enum class `Implementor$SomeEnum`: kotlin.Enum<gwtincompatible.`Implementor$SomeEnum`?> {
  internal constructor(): super()
 
@@ -16,10 +22,4 @@ enum class `Implementor$SomeEnum`: kotlin.Enum<gwtincompatible.`Implementor$Some
  companion object {
   @JvmField val COMPATIBLE: gwtincompatible.`Implementor$SomeEnum` = gwtincompatible.`Implementor$SomeEnum$1`()
  }
-}
-
-open class `Implementor$SomeEnum$1`: gwtincompatible.`Implementor$SomeEnum` {
- internal constructor(): super()
-
- internal open override fun method() {}
 }

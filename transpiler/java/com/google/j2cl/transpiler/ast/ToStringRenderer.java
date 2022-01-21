@@ -318,6 +318,15 @@ class ToStringRenderer {
       }
 
       @Override
+      public boolean enterLibrary(Library library) {
+        for (CompilationUnit compilationUnit : library.getCompilationUnits()) {
+          accept(compilationUnit);
+          newLine();
+        }
+        return false;
+      }
+
+      @Override
       public boolean enterLiteral(Literal literal) {
         print(literal.getSourceText());
         return false;
@@ -373,6 +382,9 @@ class ToStringRenderer {
         }
         print("new ");
         printInvocation(newInstance);
+        if (newInstance.getAnonymousInnerClass() != null) {
+          printMembers(newInstance.getAnonymousInnerClass());
+        }
         return false;
       }
 
@@ -503,41 +515,14 @@ class ToStringRenderer {
 
       @Override
       public boolean enterType(Type type) {
-        print(type.isInterface() ? "interface " : (type.isEnum() ? "enum " : "class "));
-        print(type.getDeclaration().getReadableDescription());
-        if (type.getSuperTypeDescriptor() != null) {
-          print(" extends ");
-          print(type.getSuperTypeDescriptor());
-        }
-        String separator = " implements ";
-        for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
-          print(separator);
-          separator = ", ";
-          print(interfaceTypeDescriptor);
-        }
-        print(" {");
-        indent();
-        newLine();
-        for (Member member : type.getMembers()) {
-          accept(member);
-          newLine();
-        }
+        printType(type);
+        return false;
+      }
 
-        unIndent();
-        newLine();
-        print("}");
-
-        if (!type.getLoadTimeStatements().isEmpty()) {
-          newLine();
-          print("// load-time statements");
-          newLine();
-          type.getLoadTimeStatements()
-              .forEach(
-                  s -> {
-                    newLine();
-                    accept(s);
-                  });
-        }
+      @Override
+      public boolean enterLocalClassDeclarationStatement(
+          LocalClassDeclarationStatement typeDeclarationStatement) {
+        printType(typeDeclarationStatement.getLocalClass());
         return false;
       }
 
@@ -650,6 +635,51 @@ class ToStringRenderer {
         print("(");
         printSeparated(",", invocation.getArguments());
         print(")");
+      }
+
+      private void printType(Type type) {
+        print(type.isInterface() ? "interface " : (type.isEnum() ? "enum " : "class "));
+        print(type.getDeclaration().toString());
+        if (type.getSuperTypeDescriptor() != null) {
+          print(" extends " + type.getSuperTypeDescriptor());
+        }
+        if (!type.getSuperInterfaceTypeDescriptors().isEmpty()) {
+          String separator = " implements ";
+          for (TypeDescriptor interfaceTypeDescriptor : type.getSuperInterfaceTypeDescriptors()) {
+            print(separator);
+            separator = ", ";
+            print(interfaceTypeDescriptor);
+          }
+        }
+        printMembers(type);
+
+        if (!type.getLoadTimeStatements().isEmpty()) {
+          print("// load-time statements");
+          newLine();
+          type.getLoadTimeStatements()
+              .forEach(
+                  s -> {
+                    newLine();
+                    accept(s);
+                  });
+        }
+      }
+
+      private void printMembers(Type type) {
+        print(" {");
+        indent();
+        for (Type memberType : type.getTypes()) {
+          newLine();
+          accept(memberType);
+        }
+        for (Member member : type.getMembers()) {
+          newLine();
+          accept(member);
+        }
+
+        unIndent();
+        newLine();
+        print("}");
       }
 
       private void unIndent() {

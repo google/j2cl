@@ -66,6 +66,7 @@ open class BooleanOperations {
   if (ls || rs) {
    r = true
   }
+  if (true) {}
   var finalOuter: booleanoperations.`BooleanOperations$1Outer`? = booleanoperations.`BooleanOperations$1Outer`(this)
   finalOuter!!.b = finalOuter!!.b.or(true)
   var outer: booleanoperations.`BooleanOperations$1Outer`? = booleanoperations.`BooleanOperations$1Outer`(this)
@@ -81,24 +82,24 @@ open class BooleanOperations {
  }
 }
 
-open class `BooleanOperations$1Outer` {
- internal constructor(`$outer_this`: booleanoperations.BooleanOperations?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: booleanoperations.BooleanOperations?
-
- @JvmField internal var b: Boolean = false
-}
-
 open class `BooleanOperations$1Outer$Inner` {
+ @JvmField val `this`: booleanoperations.`BooleanOperations$1Outer`?
+
  internal constructor(`$outer_this`: booleanoperations.`BooleanOperations$1Outer`?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: booleanoperations.`BooleanOperations$1Outer`?
-
  init {
   this.`this`!!.b = this.`this`!!.b.or(true)
  }
+}
+
+open class `BooleanOperations$1Outer` {
+ @JvmField val `this`: booleanoperations.BooleanOperations?
+
+ internal constructor(`$outer_this`: booleanoperations.BooleanOperations?): super() {
+  this.`this` = `$outer_this`
+ }
+
+ @JvmField internal var b: Boolean = false
 }

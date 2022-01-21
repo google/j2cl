@@ -4,7 +4,6 @@ const TestUnqualifiedSuperCall = goog.require('innerclassinitorder.InnerClassIni
 const $Util = goog.require('nativebootstrap.Util$impl');
 
 let InnerClassInitOrder = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder$impl');
-let OuterIsSuper = goog.forwardDeclare('innerclassinitorder.InnerClassInitOrder.Outer.OuterIsSuper$impl');
 
 class $4 extends TestUnqualifiedSuperCall {
  /** @protected */
@@ -14,16 +13,16 @@ class $4 extends TestUnqualifiedSuperCall {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_4;
  }
  /** @return {!$4} */
- static $create__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(/** InnerClassInitOrder */ $outer_this, /** OuterIsSuper */ $super_outer_this) {
+ static $create__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
   $4.$clinit();
   let $instance = new $4();
-  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_4__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper($outer_this, $super_outer_this);
+  $instance.$ctor__innerclassinitorder_InnerClassInitOrder_4__innerclassinitorder_InnerClassInitOrder($outer_this);
   return $instance;
  }
  
- $ctor__innerclassinitorder_InnerClassInitOrder_4__innerclassinitorder_InnerClassInitOrder__innerclassinitorder_InnerClassInitOrder_Outer_OuterIsSuper(/** InnerClassInitOrder */ $outer_this, /** OuterIsSuper */ $super_outer_this) {
+ $ctor__innerclassinitorder_InnerClassInitOrder_4__innerclassinitorder_InnerClassInitOrder(/** InnerClassInitOrder */ $outer_this) {
   this.$outer_this__innerclassinitorder_InnerClassInitOrder_4 = $outer_this;
-  this.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall__innerclassinitorder_InnerClassInitOrder_Outer($super_outer_this);
+  this.$ctor__innerclassinitorder_InnerClassInitOrder_Outer_TestUnqualifiedSuperCall__innerclassinitorder_InnerClassInitOrder_Outer($outer_this.f_outerIsSuper__innerclassinitorder_InnerClassInitOrder_);
  }
  
  static $clinit() {

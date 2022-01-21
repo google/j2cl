@@ -1848,6 +1848,9 @@ public class JsInteropRestrictionsCheckerTest extends TestCase {
             "JsOverlay 'void MyJsEnum.anOverlayMethod()' can only be declared in a native type"
                 + " or @JsFunction interface.",
             "JsEnum constant 'MyJsEnum.B' cannot have a class body.",
+            // From (A::name) in MyJsEnum.main()
+            "JsEnum 'MyJsEnum' does not support 'String Enum.name()'.",
+            // From (super.name) in MyJsEnum.aMethod()
             "JsEnum 'MyJsEnum' does not support 'String Enum.name()'.",
             "JsEnum 'MyJsEnum' does not support 'MyJsEnum[] MyJsEnum.values()'. (b/118228329)",
             "JsEnum 'MyJsEnum' does not support 'MyJsEnum MyJsEnum.valueOf(String)'.",

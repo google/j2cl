@@ -102,13 +102,11 @@
 ...          }
         }] => [/**@type {number}*/
   this.$captured_r__jsfunction_JsFunctionOptimization_1_1 = 0;] "jsfunction.JsFunctionOptimization$1$1.<synthetic: ctor_js>"
-[r] => [$captured_r__jsfunction_JsFunctionOptimization_1_1] "r"
 [{
           void m() {
 ...          }
         }] => [/**@type {?string}*/
   this.$captured_x__jsfunction_JsFunctionOptimization_1_1;] "jsfunction.JsFunctionOptimization$1$1.<synthetic: ctor_js>"
-[x] => [$captured_x__jsfunction_JsFunctionOptimization_1_1] "x"
 [{
           void m() {
             final int var = 1;
@@ -219,14 +217,8 @@
           void m() {
 ...          }
         }] => [this.$outer_this__jsfunction_JsFunctionOptimization_1_1 = $outer_this;] "jsfunction.JsFunctionOptimization$1$1.<init>"
-[{
-          void m() {
-...          }
-        }] => [this.$captured_r__jsfunction_JsFunctionOptimization_1_1 = $captured_r;] "jsfunction.JsFunctionOptimization$1$1.<init>"
-[{
-          void m() {
-...          }
-        }] => [this.$captured_x__jsfunction_JsFunctionOptimization_1_1 = $captured_x;] "jsfunction.JsFunctionOptimization$1$1.<init>"
+[r] => [this.$captured_r__jsfunction_JsFunctionOptimization_1_1 = $captured_r;] "r"
+[x] => [this.$captured_x__jsfunction_JsFunctionOptimization_1_1 = $captured_x;] "x"
 [{
           void m() {
 ...          }
@@ -237,8 +229,26 @@
 [F f =
                 new F() {
 ...                  }
-                };] => [let f = $1_$1_$1.$create__jsfunction_JsFunctionOptimization_1_1__int__int__java_lang_String(this, this.$captured_r__jsfunction_JsFunctionOptimization_1_1, var_1, this.$captured_x__jsfunction_JsFunctionOptimization_1_1);] "jsfunction.JsFunctionOptimization$1$1.m"
+                };] => [let f = (/** ?string */ s) =>{
+   let r1 = this.$captured_r__jsfunction_JsFunctionOptimization_1_1;
+...   })('hello'));
+  };] "jsfunction.JsFunctionOptimization$1$1.m"
 [f] => [f] "f"
+[s] => [s] "s"
+[final int r1 = r;] => [let r1 = this.$captured_r__jsfunction_JsFunctionOptimization_1_1;] "jsfunction.JsFunctionOptimization$1$1$1.m"
+[r1] => [r1] "r1"
+[final int var1 = var;] => [let var1 = var_1;] "jsfunction.JsFunctionOptimization$1$1$1.m"
+[var1] => [var1] "var1"
+[final String x1 = x;] => [let x1 = this.$captured_x__jsfunction_JsFunctionOptimization_1_1;] "jsfunction.JsFunctionOptimization$1$1$1.m"
+[x1] => [x1] "x1"
+[return String.valueOf(r)
+                        + s
+...                          }
+                        }.m("hello");] => [return j_l_String.m_valueOf__java_lang_Object(j_l_String.m_valueOf__int(this.$captured_r__jsfunction_JsFunctionOptimization_1_1)) + j_l_String.m_valueOf__java_lang_Object(s) + j_l_String.m_valueOf__java_lang_Object(this.$captured_x__jsfunction_JsFunctionOptimization_1_1) + var_1 + j_l_String.m_valueOf__java_lang_Object(((/** ?string */ s_1) =>{
+    return j_l_String.m_valueOf__java_lang_Object(s_1) + r1 + j_l_String.m_valueOf__java_lang_Object(x1) + var1;
+   })('hello'));] "jsfunction.JsFunctionOptimization$1$1$1.m"
+[s] => [s_1] "s"
+[return s + r1 + x1 + var1;] => [return j_l_String.m_valueOf__java_lang_Object(s_1) + r1 + j_l_String.m_valueOf__java_lang_Object(x1) + var1;] "jsfunction.JsFunctionOptimization$1$1$1$1.m"
 [F f2 =
                 new F() {
 ...                  }

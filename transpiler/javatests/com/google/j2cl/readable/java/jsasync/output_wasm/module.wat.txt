@@ -1,8 +1,14 @@
 ;;; Code for jsasync.Main [static fields]
 (global $f_$initialized__jsasync_Main (mut i32) (i32.const 0))
 
+;;; Code for jsasync.Main.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__jsasync_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
 ;;; Code for jsasync.Main.1 [static fields]
 (global $f_$initialized__jsasync_Main_1 (mut i32) (i32.const 0))
+
+;;; Code for jsasync.Main.$LambdaImplementor$2 [static fields]
+(global $f_$initialized__jsasync_Main_$LambdaImplementor$2 (mut i32) (i32.const 0))
 
 ;;; Code for jsasync.Main.2 [static fields]
 (global $f_$initialized__jsasync_Main_2 (mut i32) (i32.const 0))
@@ -31,12 +37,6 @@
 ;;; Code for jsasync.Main.Promise [static fields]
 (global $f_$initialized__jsasync_Main_Promise (mut i32) (i32.const 0))
 
-;;; Code for jsasync.Main.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__jsasync_Main_$LambdaImplementor$1 (mut i32) (i32.const 0))
-
-;;; Code for jsasync.Main.$LambdaImplementor$2 [static fields]
-(global $f_$initialized__jsasync_Main_$LambdaImplementor$2 (mut i32) (i32.const 0))
-
 ;;; Code for jsasync.Main [vtable.init]
 (global $jsasync.Main.vtable (ref $jsasync.Main.vtable) 
  (struct.new $jsasync.Main.vtable
@@ -55,6 +55,27 @@
 (global $jsasync.Main.itable (ref $itable) (array.init_static $itable 
  ))
 
+;;; Code for jsasync.Main.$LambdaImplementor$1 [vtable.init]
+(global $jsasync.Main.$LambdaImplementor$1.vtable (ref $jsasync.Main.$LambdaImplementor$1.vtable) 
+ (struct.new $jsasync.Main.$LambdaImplementor$1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1)
+  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
+ )
+)
+
+;;; Code for jsasync.Main.$LambdaImplementor$1 [itable.init]
+(global $jsasync.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
+ (struct.new $jsasync.Main.BaseInterface.vtable
+  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
+ )
+ (struct.new $jsasync.Main.AsyncInterface.vtable
+  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
+ )
+ ))
+
 ;;; Code for jsasync.Main.1 [vtable.init]
 (global $jsasync.Main.1.vtable (ref $jsasync.Main.1.vtable) 
  (struct.new $jsasync.Main.1.vtable
@@ -70,6 +91,24 @@
 (global $jsasync.Main.1.itable (ref $itable) (array.init_static $itable 
  (struct.new $jsasync.Main.BaseInterface.vtable
   (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.1)
+ )
+ ))
+
+;;; Code for jsasync.Main.$LambdaImplementor$2 [vtable.init]
+(global $jsasync.Main.$LambdaImplementor$2.vtable (ref $jsasync.Main.$LambdaImplementor$2.vtable) 
+ (struct.new $jsasync.Main.$LambdaImplementor$2.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2)
+  (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
+ )
+)
+
+;;; Code for jsasync.Main.$LambdaImplementor$2 [itable.init]
+(global $jsasync.Main.$LambdaImplementor$2.itable (ref $itable) (array.init_static $itable 
+ (struct.new $jsasync.Main.AsyncJsFunctionInterface.vtable
+  (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
  )
  ))
 
@@ -123,45 +162,6 @@
 (global $jsasync.Main.Promise.itable (ref $itable) (array.init_static $itable 
  (struct.new $jsasync.Main.IThenable.vtable
   (ref.null data)
- )
- ))
-
-;;; Code for jsasync.Main.$LambdaImplementor$1 [vtable.init]
-(global $jsasync.Main.$LambdaImplementor$1.vtable (ref $jsasync.Main.$LambdaImplementor$1.vtable) 
- (struct.new $jsasync.Main.$LambdaImplementor$1.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1)
-  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
- )
-)
-
-;;; Code for jsasync.Main.$LambdaImplementor$1 [itable.init]
-(global $jsasync.Main.$LambdaImplementor$1.itable (ref $itable) (array.init_static $itable 
- (struct.new $jsasync.Main.BaseInterface.vtable
-  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
- )
- (struct.new $jsasync.Main.AsyncInterface.vtable
-  (ref.func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
- )
- ))
-
-;;; Code for jsasync.Main.$LambdaImplementor$2 [vtable.init]
-(global $jsasync.Main.$LambdaImplementor$2.vtable (ref $jsasync.Main.$LambdaImplementor$2.vtable) 
- (struct.new $jsasync.Main.$LambdaImplementor$2.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2)
-  (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
- )
-)
-
-;;; Code for jsasync.Main.$LambdaImplementor$2 [itable.init]
-(global $jsasync.Main.$LambdaImplementor$2.itable (ref $itable) (array.init_static $itable 
- (struct.new $jsasync.Main.AsyncJsFunctionInterface.vtable
-  (ref.func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
  )
  ))
 
@@ -376,6 +376,106 @@
 )
 (elem declare func $m_getClass__java_lang_Class@jsasync.Main)
 
+;;; Code for jsasync.Main.$LambdaImplementor$1 [CLASS]
+(type $jsasync.Main.$LambdaImplementor$1 (struct_subtype 
+ (field $vtable (ref $jsasync.Main.$LambdaImplementor$1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $jsasync.Main.$LambdaImplementor$1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_asyncCall__jsasync_Main_IThenable (ref $function.m_asyncCall__jsasync_Main_IThenable))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
+(func $$create__jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1
+ (result (ref null $jsasync.Main.$LambdaImplementor$1))
+ ;;@ jsasync/Main.java:51:23
+ (local $$instance (ref null $jsasync.Main.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;;@ jsasync/Main.java:51:23
+  (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ jsasync/Main.java:51:23
+  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:51:23
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1
+ (param $this (ref null $jsasync.Main.$LambdaImplementor$1))
+ ;;@ jsasync/Main.java:51:23
+ (block
+  ;; jsasync.Main.$LambdaImplementor$1.$clinit();
+  ;;@ jsasync/Main.java:51:23
+  (call $$clinit__void@jsasync.Main.$LambdaImplementor$1 )
+  ;; Object.this.$ctor();
+  ;;@ jsasync/Main.java:51:23
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; IThenable<Integer> $LambdaImplementor$1.asyncCall()
+(func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1
+ (type $function.m_asyncCall__jsasync_Main_IThenable)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ jsasync/Main.java:51:23
+ (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
+  ;;@ jsasync/Main.java:51:29
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast_static $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))))))
+ )
+)
+(elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@jsasync.Main.$LambdaImplementor$1
+ ;;@ jsasync/Main.java:51:23
+ (block
+  ;; if (jsasync.Main.$LambdaImplementor$1.$initialized) return;
+  ;;@ jsasync/Main.java:51:23
+  (if (global.get $f_$initialized__jsasync_Main_$LambdaImplementor$1)
+   (then
+    ;; return;
+    ;;@ jsasync/Main.java:51:23
+    (return )
+   )
+  )
+  ;; (jsasync.Main.$LambdaImplementor$1.$initialized = true);
+  ;;@ jsasync/Main.java:51:23
+  (global.set $f_$initialized__jsasync_Main_$LambdaImplementor$1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsasync/Main.java:51:23
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.$LambdaImplementor$1();
+  (return (call $function.no.side.effects.$getJsasync.Main.$LambdaImplementor$1__java_lang_Class (ref.func $$getJsasync.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1)
+
 ;;; Code for jsasync.Main.1 [CLASS]
 (type $jsasync.Main.1 (struct_subtype 
  (field $vtable (ref $jsasync.Main.1.vtable)) 
@@ -481,6 +581,106 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsasync.Main.1)
+
+;;; Code for jsasync.Main.$LambdaImplementor$2 [CLASS]
+(type $jsasync.Main.$LambdaImplementor$2 (struct_subtype 
+ (field $vtable (ref $jsasync.Main.$LambdaImplementor$2.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $jsasync.Main.$LambdaImplementor$2.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_doSomething__jsasync_Main_IThenable (ref $function.m_doSomething__jsasync_Main_IThenable))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
+(func $$create__jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2
+ (result (ref null $jsasync.Main.$LambdaImplementor$2))
+ ;;@ jsasync/Main.java:62:33
+ (local $$instance (ref null $jsasync.Main.$LambdaImplementor$2))
+ (block
+  ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>();
+  ;;@ jsasync/Main.java:62:33
+  (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ jsasync/Main.java:62:33
+  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2 (local.get $$instance))
+  ;; return $instance;
+  ;;@ jsasync/Main.java:62:33
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$2.$ctor()
+(func $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2
+ (param $this (ref null $jsasync.Main.$LambdaImplementor$2))
+ ;;@ jsasync/Main.java:62:33
+ (block
+  ;; jsasync.Main.$LambdaImplementor$2.$clinit();
+  ;;@ jsasync/Main.java:62:33
+  (call $$clinit__void@jsasync.Main.$LambdaImplementor$2 )
+  ;; Object.this.$ctor();
+  ;;@ jsasync/Main.java:62:33
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; IThenable<Integer> $LambdaImplementor$2.doSomething()
+(func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2
+ (type $function.m_doSomething__jsasync_Main_IThenable)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Object))
+ ;;@ jsasync/Main.java:62:33
+ (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
+ (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$2 (local.get $this.untyped)))
+ (block
+  ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
+  ;;@ jsasync/Main.java:62:39
+  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast_static $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))))))
+ )
+)
+(elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
+
+;;; void $LambdaImplementor$2.$clinit()
+(func $$clinit__void@jsasync.Main.$LambdaImplementor$2
+ ;;@ jsasync/Main.java:62:33
+ (block
+  ;; if (jsasync.Main.$LambdaImplementor$2.$initialized) return;
+  ;;@ jsasync/Main.java:62:33
+  (if (global.get $f_$initialized__jsasync_Main_$LambdaImplementor$2)
+   (then
+    ;; return;
+    ;;@ jsasync/Main.java:62:33
+    (return )
+   )
+  )
+  ;; (jsasync.Main.$LambdaImplementor$2.$initialized = true);
+  ;;@ jsasync/Main.java:62:33
+  (global.set $f_$initialized__jsasync_Main_$LambdaImplementor$2 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ jsasync/Main.java:62:33
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$2.getClass()
+(func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
+ (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$2 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.$LambdaImplementor$2();
+  (return (call $function.no.side.effects.$getJsasync.Main.$LambdaImplementor$2__java_lang_Class (ref.func $$getJsasync.Main.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2)
 
 ;;; Code for jsasync.Main.2 [CLASS]
 (type $jsasync.Main.2 (struct_subtype 
@@ -1014,203 +1214,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@jsasync.Main.Promise)
-
-;;; Code for jsasync.Main.$LambdaImplementor$1 [CLASS]
-(type $jsasync.Main.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $jsasync.Main.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsasync.Main.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_asyncCall__jsasync_Main_IThenable (ref $function.m_asyncCall__jsasync_Main_IThenable))
-  $java.lang.Object.vtable)
-)
-
-;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
-(func $$create__jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1
- (result (ref null $jsasync.Main.$LambdaImplementor$1))
- ;;@ jsasync/Main.java:51:23
- (local $$instance (ref null $jsasync.Main.$LambdaImplementor$1))
- (block
-  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
-  ;;@ jsasync/Main.java:51:23
-  (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$1 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ jsasync/Main.java:51:23
-  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1 (local.get $$instance))
-  ;; return $instance;
-  ;;@ jsasync/Main.java:51:23
-  (return (local.get $$instance))
- )
-)
-
-;;; void $LambdaImplementor$1.$ctor()
-(func $$ctor__void_$p_jsasync_Main_$LambdaImplementor$1@jsasync.Main.$LambdaImplementor$1
- (param $this (ref null $jsasync.Main.$LambdaImplementor$1))
- ;;@ jsasync/Main.java:51:23
- (block
-  ;; jsasync.Main.$LambdaImplementor$1.$clinit();
-  ;;@ jsasync/Main.java:51:23
-  (call $$clinit__void@jsasync.Main.$LambdaImplementor$1 )
-  ;; Object.this.$ctor();
-  ;;@ jsasync/Main.java:51:23
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; IThenable<Integer> $LambdaImplementor$1.asyncCall()
-(func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1
- (type $function.m_asyncCall__jsasync_Main_IThenable)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ jsasync/Main.java:51:23
- (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
-  ;;@ jsasync/Main.java:51:29
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast_static $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))))))
- )
-)
-(elem declare func $m_asyncCall__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$1)
-
-;;; void $LambdaImplementor$1.$clinit()
-(func $$clinit__void@jsasync.Main.$LambdaImplementor$1
- ;;@ jsasync/Main.java:51:23
- (block
-  ;; if (jsasync.Main.$LambdaImplementor$1.$initialized) return;
-  ;;@ jsasync/Main.java:51:23
-  (if (global.get $f_$initialized__jsasync_Main_$LambdaImplementor$1)
-   (then
-    ;; return;
-    ;;@ jsasync/Main.java:51:23
-    (return )
-   )
-  )
-  ;; (jsasync.Main.$LambdaImplementor$1.$initialized = true);
-  ;;@ jsasync/Main.java:51:23
-  (global.set $f_$initialized__jsasync_Main_$LambdaImplementor$1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ jsasync/Main.java:51:23
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> $LambdaImplementor$1.getClass()
-(func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsasync.Main.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getJsasync.Main.$LambdaImplementor$1__java_lang_Class (ref.func $$getJsasync.Main.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$1)
-
-;;; Code for jsasync.Main.$LambdaImplementor$2 [CLASS]
-(type $jsasync.Main.$LambdaImplementor$2 (struct_subtype 
- (field $vtable (ref $jsasync.Main.$LambdaImplementor$2.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $jsasync.Main.$LambdaImplementor$2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_doSomething__jsasync_Main_IThenable (ref $function.m_doSomething__jsasync_Main_IThenable))
-  $java.lang.Object.vtable)
-)
-
-;;; $LambdaImplementor$2 $LambdaImplementor$2.$create()
-(func $$create__jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2
- (result (ref null $jsasync.Main.$LambdaImplementor$2))
- ;;@ jsasync/Main.java:62:33
- (local $$instance (ref null $jsasync.Main.$LambdaImplementor$2))
- (block
-  ;; $LambdaImplementor$2 $instance = new $LambdaImplementor$2.<init>();
-  ;;@ jsasync/Main.java:62:33
-  (local.set $$instance (struct.new $jsasync.Main.$LambdaImplementor$2 (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $jsasync.Main.$LambdaImplementor$2.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ jsasync/Main.java:62:33
-  (call $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2 (local.get $$instance))
-  ;; return $instance;
-  ;;@ jsasync/Main.java:62:33
-  (return (local.get $$instance))
- )
-)
-
-;;; void $LambdaImplementor$2.$ctor()
-(func $$ctor__void_$p_jsasync_Main_$LambdaImplementor$2@jsasync.Main.$LambdaImplementor$2
- (param $this (ref null $jsasync.Main.$LambdaImplementor$2))
- ;;@ jsasync/Main.java:62:33
- (block
-  ;; jsasync.Main.$LambdaImplementor$2.$clinit();
-  ;;@ jsasync/Main.java:62:33
-  (call $$clinit__void@jsasync.Main.$LambdaImplementor$2 )
-  ;; Object.this.$ctor();
-  ;;@ jsasync/Main.java:62:33
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; IThenable<Integer> $LambdaImplementor$2.doSomething()
-(func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2
- (type $function.m_doSomething__jsasync_Main_IThenable)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Object))
- ;;@ jsasync/Main.java:62:33
- (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
- (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$2 (local.get $this.untyped)))
- (block
-  ;; return jsasync.Main.Promise.resolve(((Integer) jsasync.Main.await(jsasync.Main.Promise.resolve(java.lang.Integer.valueOf(5)))));
-  ;;@ jsasync/Main.java:62:39
-  (return (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (ref.cast_static $java.lang.Integer (call $m_await__jsasync_Main_IThenable__java_lang_Object@jsasync.Main (call $m_resolve__java_lang_Object__jsasync_Main_Promise@jsasync.Main.Promise (call $m_valueOf__int__java_lang_Integer@java.lang.Integer (i32.const 5)))))))
- )
-)
-(elem declare func $m_doSomething__jsasync_Main_IThenable@jsasync.Main.$LambdaImplementor$2)
-
-;;; void $LambdaImplementor$2.$clinit()
-(func $$clinit__void@jsasync.Main.$LambdaImplementor$2
- ;;@ jsasync/Main.java:62:33
- (block
-  ;; if (jsasync.Main.$LambdaImplementor$2.$initialized) return;
-  ;;@ jsasync/Main.java:62:33
-  (if (global.get $f_$initialized__jsasync_Main_$LambdaImplementor$2)
-   (then
-    ;; return;
-    ;;@ jsasync/Main.java:62:33
-    (return )
-   )
-  )
-  ;; (jsasync.Main.$LambdaImplementor$2.$initialized = true);
-  ;;@ jsasync/Main.java:62:33
-  (global.set $f_$initialized__jsasync_Main_$LambdaImplementor$2 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ jsasync/Main.java:62:33
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> $LambdaImplementor$2.getClass()
-(func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $jsasync.Main.$LambdaImplementor$2))
- (local.set $this (ref.cast_static $jsasync.Main.$LambdaImplementor$2 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getJsasync.Main.$LambdaImplementor$2();
-  (return (call $function.no.side.effects.$getJsasync.Main.$LambdaImplementor$2__java_lang_Class (ref.func $$getJsasync.Main.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@jsasync.Main.$LambdaImplementor$2)

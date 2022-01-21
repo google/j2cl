@@ -81,54 +81,8 @@ open class TestCase10036 {
  internal constructor(): super()
 }
 
-interface `TestCase10036$BI3` {
- fun get(value: kotlin.String?): kotlin.String? {
-  return "BI3 get String"
- }
-}
-
-fun interface `TestCase10036$BI2` {
- fun get(value: kotlin.String?): kotlin.String?
-}
-
-fun interface `TestCase10036$BI1`: bridgemethods.`TestCase10036$BI3` {
- override fun get(value: kotlin.String?): kotlin.String?
-}
-
-abstract class `TestCase10036$B`<B1: java.lang.Comparable<*>?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
- internal constructor(): super()
-
- abstract open fun get(value: B1?): kotlin.String?
-}
-
 open class TestCase102 {
  internal constructor(): super()
-}
-
-fun interface `TestCase102$BI2` {
- fun set(value: kotlin.String?)
-}
-
-fun interface `TestCase102$BI1` {
- fun set(value: kotlin.String?)
-}
-
-abstract class `TestCase102$B`<B1>: bridgemethods.`TestCase102$BI1`, bridgemethods.`TestCase102$BI2` {
- internal constructor(): super()
-
- abstract open fun set(value: B1?)
-}
-
-open class `TestCase102$C`<B1>: bridgemethods.`TestCase102$B`<B1> {
- internal constructor(`$outer_this`: bridgemethods.TestCase102?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: bridgemethods.TestCase102?
-
- open override fun set(value: kotlin.String?) {}
-
- open override fun set(value: B1?) {}
 }
 
 open class ParameterizedParent<T: bridgemethods.ParameterizedParent<T>?> {
@@ -149,4 +103,50 @@ open class ReparametrerizedChild<E: bridgemethods.ReparametrerizedChild<E>?>: br
 
 open class LeafChild: bridgemethods.ReparametrerizedChild<bridgemethods.LeafChild?> {
  internal constructor(): super()
+}
+
+interface `TestCase10036$BI3` {
+ fun get(value: kotlin.String?): kotlin.String? {
+  return "BI3 get String"
+ }
+}
+
+fun interface `TestCase10036$BI2` {
+ fun get(value: kotlin.String?): kotlin.String?
+}
+
+fun interface `TestCase10036$BI1`: bridgemethods.`TestCase10036$BI3` {
+ override fun get(value: kotlin.String?): kotlin.String?
+}
+
+abstract class `TestCase10036$B`<B1: java.lang.Comparable<*>?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
+ internal constructor(): super()
+
+ abstract open fun get(value: B1?): kotlin.String?
+}
+
+fun interface `TestCase102$BI2` {
+ fun set(value: kotlin.String?)
+}
+
+fun interface `TestCase102$BI1` {
+ fun set(value: kotlin.String?)
+}
+
+abstract class `TestCase102$B`<B1>: bridgemethods.`TestCase102$BI1`, bridgemethods.`TestCase102$BI2` {
+ internal constructor(): super()
+
+ abstract open fun set(value: B1?)
+}
+
+open class `TestCase102$C`<B1>: bridgemethods.`TestCase102$B`<B1> {
+ @JvmField val `this`: bridgemethods.TestCase102?
+
+ internal constructor(`$outer_this`: bridgemethods.TestCase102?): super() {
+  this.`this` = `$outer_this`
+ }
+
+ open override fun set(value: kotlin.String?) {}
+
+ open override fun set(value: B1?) {}
 }

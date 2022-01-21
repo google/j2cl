@@ -48,6 +48,7 @@ open class InnerClassInitOrder {
  }
 
  open fun testInnerClassLoop() {
+  if (true) {}
   val results: Array<innerclassinitorder.`InnerClassInitOrder$1AddNumber`?>? = arrayOfNulls<innerclassinitorder.`InnerClassInitOrder$1AddNumber`?>(10)
   if (true) {
    var i: Int = 0
@@ -75,7 +76,7 @@ open class InnerClassInitOrder {
  }
 
  open fun testOuterIsNotSuperAnon() {
-  val x: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsNotSuper`? = innerclassinitorder.`InnerClassInitOrder$2`(this, this.outerIsSuper)
+  val x: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsNotSuper`? = innerclassinitorder.`InnerClassInitOrder$2`(this)
   assert(2 == x!!.getValue())
  }
 
@@ -105,7 +106,7 @@ open class InnerClassInitOrder {
  }
 
  open fun testUnqualifiedSuperCallAnon() {
-  val x: innerclassinitorder.`InnerClassInitOrder$Outer$TestUnqualifiedSuperCall`? = innerclassinitorder.`InnerClassInitOrder$4`(this, this.outerIsSuper)
+  val x: innerclassinitorder.`InnerClassInitOrder$Outer$TestUnqualifiedSuperCall`? = innerclassinitorder.`InnerClassInitOrder$4`(this)
   assert(2 == x!!.getValue())
  }
 
@@ -132,9 +133,58 @@ open class InnerClassInitOrder {
  }
 }
 
+open class `InnerClassInitOrder$1`: innerclassinitorder.`InnerClassInitOrder$1AddNumber` {
+ @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+
+ internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, `$_0`: Int): super(`$outer_this`, `$_0`) {
+  this.`this` = `$outer_this`
+ }
+
+ open override fun act() {
+  this.`this`!!.number = this.`this`!!.number + this.num
+ }
+}
+
+open class `InnerClassInitOrder$2`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsNotSuper` {
+ @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+
+ internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?): super(`$outer_this`!!.outerIsSuper) {
+  this.`this` = `$outer_this`
+ }
+}
+
+open class `InnerClassInitOrder$3`: innerclassinitorder.`InnerClassInitOrder$Outer$TestQualifiedSuperCall` {
+ @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+
+ internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?): super() {
+  this.`this` = `$outer_this`
+ }
+}
+
+open class `InnerClassInitOrder$4`: innerclassinitorder.`InnerClassInitOrder$Outer$TestUnqualifiedSuperCall` {
+ @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+
+ internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?): super(`$outer_this`!!.outerIsSuper) {
+  this.`this` = `$outer_this`
+ }
+}
+
 open class `InnerClassInitOrder$OuterRefFromSuperCtorBase` {
  internal constructor(o: kotlin.Any?): super() {
   (o!! as java.lang.Object).toString()
+ }
+}
+
+open class `InnerClassInitOrder$OuterRefFromSuperCtorCall$1` {
+ @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromSuperCtorCall`?
+
+ internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromSuperCtorCall`?): super() {
+  this.`this` = `$outer_this`
+ }
+
+ open override fun toString(): kotlin.String? {
+  this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 100
+  return ""
  }
 }
 
@@ -146,15 +196,15 @@ open class `InnerClassInitOrder$OuterRefFromSuperCtorCall`: innerclassinitorder.
  }
 }
 
-open class `InnerClassInitOrder$OuterRefFromSuperCtorCall$1` {
- internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromSuperCtorCall`?): super() {
+open class `InnerClassInitOrder$OuterRefFromThisCtorCall$1` {
+ @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromThisCtorCall`?
+
+ internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromThisCtorCall`?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromSuperCtorCall`?
-
  open override fun toString(): kotlin.String? {
-  this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 100
+  this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 1000
   return ""
  }
 }
@@ -169,42 +219,12 @@ open class `InnerClassInitOrder$OuterRefFromThisCtorCall`: innerclassinitorder.`
  constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?): this(`$outer_this`, innerclassinitorder.`InnerClassInitOrder$OuterRefFromThisCtorCall$1`(this))
 }
 
-open class `InnerClassInitOrder$OuterRefFromThisCtorCall$1` {
- internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromThisCtorCall`?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$OuterRefFromThisCtorCall`?
-
- open override fun toString(): kotlin.String? {
-  this.`this`!!.`this`!!.number = this.`this`!!.`this`!!.number + 1000
-  return ""
- }
-}
-
-open class `InnerClassInitOrder$InnerClass` {
- internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?): super() {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
-
- init {
-  this.callInner()
- }
-
- internal open fun callInner() {
-  this.`this`!!.number = this.`this`!!.number + 1
-  innerclassinitorder.`InnerClassInitOrder$InnerClass$1ReallyInnerClass`(this)
- }
-}
-
 open class `InnerClassInitOrder$InnerClass$1ReallyInnerClass` {
+ @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$InnerClass`?
+
  internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$InnerClass`?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$InnerClass`?
 
  init {
   this.callReallyInner()
@@ -215,6 +235,44 @@ open class `InnerClassInitOrder$InnerClass$1ReallyInnerClass` {
  }
 }
 
+open class `InnerClassInitOrder$InnerClass` {
+ @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+
+ internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?): super() {
+  this.`this` = `$outer_this`
+ }
+
+ init {
+  this.callInner()
+ }
+
+ internal open fun callInner() {
+  this.`this`!!.number = this.`this`!!.number + 1
+  if (true) {}
+  innerclassinitorder.`InnerClassInitOrder$InnerClass$1ReallyInnerClass`(this)
+ }
+}
+
+open class `InnerClassInitOrder$P1$P2$P3`<T3, T2, T1>: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1> {
+ @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1>?
+
+ internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1>?): this(this, 1)
+
+ internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1>?, i: Int): super(`$outer_this`, i) {
+  this.`this` = `$outer_this`
+ }
+}
+
+open class `InnerClassInitOrder$P1$P2`<T2, T1>: innerclassinitorder.`InnerClassInitOrder$P1`<T1> {
+ @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$P1`<T1>?
+
+ internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1`<T1>?): this(this, 1)
+
+ internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1`<T1>?, i: Int): super(i) {
+  this.`this` = `$outer_this`
+ }
+}
+
 open class `InnerClassInitOrder$P1`<T1> {
  @JvmField internal val value: Int
 
@@ -222,34 +280,6 @@ open class `InnerClassInitOrder$P1`<T1> {
 
  internal constructor(i: Int): super() {
   this.value = i
- }
-}
-
-open class `InnerClassInitOrder$P1$P2`<T2, T1>: innerclassinitorder.`InnerClassInitOrder$P1`<T1> {
- @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$P1`<T1>?
-
- internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1`<T1>?): this(`$outer_this`, 1)
-
- internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1`<T1>?, i: Int): super(i) {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `InnerClassInitOrder$P1$P2$P3`<T3, T2, T1>: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1> {
- @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1>?
-
- internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1>?): this(`$outer_this`, 1)
-
- internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$P1$P2`<T2, T1>?, i: Int): super(`$outer_this`, i) {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `InnerClassInitOrder$ESOuter` {
- internal constructor(): super()
-
- open fun newESInner(): innerclassinitorder.`InnerClassInitOrder$ESOuter$ESInner`? {
-  return innerclassinitorder.`InnerClassInitOrder$ESOuter$ESInner`(this)
  }
 }
 
@@ -269,18 +299,18 @@ open class `InnerClassInitOrder$ESOuter$ESInner` {
  }
 }
 
+open class `InnerClassInitOrder$ESOuter` {
+ internal constructor(): super()
+
+ open fun newESInner(): innerclassinitorder.`InnerClassInitOrder$ESOuter$ESInner`? {
+  return innerclassinitorder.`InnerClassInitOrder$ESOuter$ESInner`(this)
+ }
+}
+
 open class `InnerClassInitOrder$ESInnerSubclass`: innerclassinitorder.`InnerClassInitOrder$ESOuter$ESInner` {
  internal constructor(outer: innerclassinitorder.`InnerClassInitOrder$ESOuter`?): super(outer)
 
  internal constructor(value: Int, outer: innerclassinitorder.`InnerClassInitOrder$ESOuter`?): super(outer, value)
-}
-
-open class `InnerClassInitOrder$ESWGOuter`<T> {
- internal constructor(): super()
-
- open fun newESWGInner(): innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<T>? {
-  return innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<T>(this)
- }
 }
 
 open class `InnerClassInitOrder$ESWGOuter$ESWGInner`<T> {
@@ -299,58 +329,41 @@ open class `InnerClassInitOrder$ESWGOuter$ESWGInner`<T> {
  }
 }
 
+open class `InnerClassInitOrder$ESWGOuter`<T> {
+ internal constructor(): super()
+
+ open fun newESWGInner(): innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<T>? {
+  return innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<T>(this)
+ }
+}
+
 open class `InnerClassInitOrder$ESWGInnerSubclass`: innerclassinitorder.`InnerClassInitOrder$ESWGOuter$ESWGInner`<kotlin.String?> {
  internal constructor(outer: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<kotlin.String?>?): super(outer)
 
  internal constructor(value: Int, outer: innerclassinitorder.`InnerClassInitOrder$ESWGOuter`<kotlin.String?>?): super(outer, value)
 }
 
-abstract class `InnerClassInitOrder$1AddNumber` {
- @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
-
- @JvmField internal var num: Int = 0
-
- constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, i: Int): super() {
-  this.`this` = `$outer_this`
-  this.num = i
- }
-
- abstract open fun act()
-}
-
-open class `InnerClassInitOrder$1`: innerclassinitorder.`InnerClassInitOrder$1AddNumber` {
- internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, `$_0`: Int): super(`$_0`) {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
-
- open override fun act() {
-  this.`this`!!.number = this.`this`!!.number + this.num
- }
-}
-
-open class `InnerClassInitOrder$Outer` {
- @JvmField protected val value: Int
-
- constructor(i: Int): super() {
-  this.value = i
- }
-
- open fun checkDispatch(): Int {
-  return 1
- }
-}
-
 open class `InnerClassInitOrder$Outer$OuterIsNotSuper` {
+ @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$Outer`?
+
  constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$Outer`?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$Outer`?
-
  open fun getValue(): Int {
   return this.`this`!!.value
+ }
+}
+
+open class `InnerClassInitOrder$Outer$OuterIsSuper$1`: innerclassinitorder.`InnerClassInitOrder$Outer` {
+ @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`?
+
+ internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`?, `$_0`: Int): super(`$_0`) {
+  this.`this` = `$outer_this`
+ }
+
+ open fun go(): Int {
+  return this.`this`!!.checkDispatch()
  }
 }
 
@@ -378,18 +391,6 @@ open class `InnerClassInitOrder$Outer$OuterIsSuper`: innerclassinitorder.`InnerC
  }
 }
 
-open class `InnerClassInitOrder$Outer$OuterIsSuper$1`: innerclassinitorder.`InnerClassInitOrder$Outer` {
- internal constructor(`$outer_this`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`?, `$_0`: Int): super(`$_0`) {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`?
-
- open fun go(): Int {
-  return this.`this`!!.checkDispatch()
- }
-}
-
 open class `InnerClassInitOrder$Outer$TestQualifiedSuperCall`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsNotSuper` {
  constructor(): super(innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`(innerclassinitorder.`InnerClassInitOrder$Outer`(1), 2))
 }
@@ -402,26 +403,27 @@ open class `InnerClassInitOrder$Outer$TestUnqualifiedSuperCall`: innerclassinito
  }
 }
 
-open class `InnerClassInitOrder$2`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsNotSuper` {
- internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, `$super_outer_this`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`?): super(`$super_outer_this`) {
-  this.`this` = `$outer_this`
+open class `InnerClassInitOrder$Outer` {
+ @JvmField protected val value: Int
+
+ constructor(i: Int): super() {
+  this.value = i
  }
 
- @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+ open fun checkDispatch(): Int {
+  return 1
+ }
 }
 
-open class `InnerClassInitOrder$3`: innerclassinitorder.`InnerClassInitOrder$Outer$TestQualifiedSuperCall` {
- internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?): super() {
+abstract class `InnerClassInitOrder$1AddNumber` {
+ @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+
+ @JvmField internal var num: Int = 0
+
+ constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, i: Int): super() {
   this.`this` = `$outer_this`
+  this.num = i
  }
 
- @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
-}
-
-open class `InnerClassInitOrder$4`: innerclassinitorder.`InnerClassInitOrder$Outer$TestUnqualifiedSuperCall` {
- internal constructor(`$outer_this`: innerclassinitorder.InnerClassInitOrder?, `$super_outer_this`: innerclassinitorder.`InnerClassInitOrder$Outer$OuterIsSuper`?): super(`$super_outer_this`) {
-  this.`this` = `$outer_this`
- }
-
- @JvmField val `this`: innerclassinitorder.InnerClassInitOrder?
+ abstract open fun act()
 }

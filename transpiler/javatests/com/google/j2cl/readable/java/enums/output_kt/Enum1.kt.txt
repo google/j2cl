@@ -39,10 +39,6 @@ enum class Enum2: kotlin.Enum<enums.Enum2?> {
  }
 }
 
-open class `Enum2$1`: enums.Enum2 {
- internal constructor(`$_0`: Int): super(`$_0`)
-}
-
 enum class Enum3: kotlin.Enum<enums.Enum3?> {
  internal constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?): super()
 
@@ -51,4 +47,8 @@ enum class Enum3: kotlin.Enum<enums.Enum3?> {
    return 1 + v!!
   }))
  }
+}
+
+open class `Enum2$1`: enums.Enum2 {
+ internal constructor(`$_0`: Int): super(`$_0`)
 }

@@ -21,7 +21,6 @@ import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.BooleanLiteral;
-import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
@@ -43,20 +42,18 @@ import com.google.j2cl.transpiler.ast.Variable;
 public class ImplementInstanceOfs extends NormalizationPass {
 
   @Override
-  public void applyTo(CompilationUnit compilationUnit) {
-    for (Type type : compilationUnit.getTypes()) {
+  public void applyTo(Type type) {
       if (type.getUnderlyingTypeDeclaration().isNoopCast()
           || type.getUnderlyingTypeDeclaration().isJsFunctionInterface()) {
-        // isInstance for JsFunction interfaces is implemented in the runtime object
-        // vmboostrap.JavaScriptFunction, so there is no need to generate any of these methods in
-        // the overlay.
-        continue;
+      // isInstance for JsFunction interfaces is implemented in the runtime object
+      // vmboostrap.JavaScriptFunction, so there is no need to generate any of these methods in
+      // the overlay.
+      return;
       }
 
       synthesizeMarkImplementor(type);
       synthesizeIsInstanceMethod(type);
       synthesizeMarkImplementorCalls(type);
-    }
   }
 
   /**

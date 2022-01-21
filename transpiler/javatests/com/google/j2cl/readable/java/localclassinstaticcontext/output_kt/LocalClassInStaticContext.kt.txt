@@ -8,11 +8,13 @@ open class LocalClassInStaticContext {
 
   @JvmStatic
   fun test() {
+   if (true) {}
    localclassinstaticcontext.`LocalClassInStaticContext$1A`()
    val a: kotlin.Any? = localclassinstaticcontext.`LocalClassInStaticContext$3`()
   }
 
   init {
+   if (true) {}
    localclassinstaticcontext.`LocalClassInStaticContext$1B`()
    val b: kotlin.Any? = localclassinstaticcontext.`LocalClassInStaticContext$2`()
   }
@@ -20,10 +22,6 @@ open class LocalClassInStaticContext {
 }
 
 open class `LocalClassInStaticContext$1` {
- internal constructor(): super()
-}
-
-open class `LocalClassInStaticContext$1A` {
  internal constructor(): super()
 }
 
@@ -35,12 +33,20 @@ open class `LocalClassInStaticContext$3` {
  }
 }
 
-open class `LocalClassInStaticContext$1B` {
+open class `LocalClassInStaticContext$2` {
  internal constructor(): super()
 }
 
-open class `LocalClassInStaticContext$2` {
- internal constructor(): super()
+open class `LocalClassInStaticContext$C$1D` {
+ @JvmField val `this`: localclassinstaticcontext.`LocalClassInStaticContext$C`?
+
+ internal constructor(`$outer_this`: localclassinstaticcontext.`LocalClassInStaticContext$C`?): super() {
+  this.`this` = `$outer_this`
+ }
+
+ open fun `fun`(): Int {
+  return this.`this`!!.f
+ }
 }
 
 open class `LocalClassInStaticContext$C` {
@@ -49,18 +55,15 @@ open class `LocalClassInStaticContext$C` {
  @JvmField var f: Int = 1
 
  open fun test() {
+  if (true) {}
   localclassinstaticcontext.`LocalClassInStaticContext$C$1D`(this).`fun`()
  }
 }
 
-open class `LocalClassInStaticContext$C$1D` {
- internal constructor(`$outer_this`: localclassinstaticcontext.`LocalClassInStaticContext$C`?): super() {
-  this.`this` = `$outer_this`
- }
+open class `LocalClassInStaticContext$1A` {
+ internal constructor(): super()
+}
 
- @JvmField val `this`: localclassinstaticcontext.`LocalClassInStaticContext$C`?
-
- open fun `fun`(): Int {
-  return this.`this`!!.f
- }
+open class `LocalClassInStaticContext$1B` {
+ internal constructor(): super()
 }

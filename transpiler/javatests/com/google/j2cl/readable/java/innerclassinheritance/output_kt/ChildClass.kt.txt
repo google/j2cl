@@ -24,16 +24,17 @@ open class ChildClass: innerclassinheritance.ParentOuter {
  open fun funInOuter() {}
 
  open fun testLocalClass() {
+  if (true) {}
   innerclassinheritance.`ChildClass$1LocalClass`(this).test()
  }
 }
 
 open class `ChildClass$InnerClass`: innerclassinheritance.ParentInner {
+ @JvmField val `this`: innerclassinheritance.ChildClass?
+
  internal constructor(`$outer_this`: innerclassinheritance.ChildClass?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: innerclassinheritance.ChildClass?
 
  @JvmField var fieldInInner: Int = 0
 
@@ -61,11 +62,11 @@ open class `ChildClass$InnerClass`: innerclassinheritance.ParentInner {
 }
 
 open class `ChildClass$1LocalClass`: innerclassinheritance.ChildClass {
+ @JvmField val `this`: innerclassinheritance.ChildClass?
+
  internal constructor(`$outer_this`: innerclassinheritance.ChildClass?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: innerclassinheritance.ChildClass?
 
  @JvmField internal var `object`: kotlin.Any? = this
 

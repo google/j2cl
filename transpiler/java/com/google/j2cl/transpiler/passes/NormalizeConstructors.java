@@ -188,9 +188,13 @@ public class NormalizeConstructors extends NormalizationPass {
               return methodCall;
             }
 
+            Expression qualifier =
+                methodCall.getQualifier() != null
+                    ? methodCall.getQualifier()
+                    : new ThisReference(methodCall.getTarget().getEnclosingTypeDescriptor());
             return MethodCall.Builder.from(
                     ctorMethodDescriptorFromJavaConstructor(methodCall.getTarget()))
-                .setQualifier(methodCall.getQualifier())
+                .setQualifier(qualifier)
                 .setArguments(methodCall.getArguments())
                 .build();
           }
@@ -229,10 +233,14 @@ public class NormalizeConstructors extends NormalizationPass {
     List<Statement> body =
         generateInstanceFieldDeclarationStatements(type, jsConstructorSourcePosition);
     // Must call the corresponding the $ctor method.
-    MethodDescriptor ctorDescriptor =
+    MethodDescriptor ctorMethodDescriptor =
         ctorMethodDescriptorFromJavaConstructor(jsConstructor.getDescriptor());
 
-    MethodCall ctorCall = MethodCall.Builder.from(ctorDescriptor).setArguments(arguments).build();
+    MethodCall ctorCall =
+        MethodCall.Builder.from(ctorMethodDescriptor)
+            .setDefaultInstanceQualifier()
+            .setArguments(arguments)
+            .build();
     body.add(ctorCall.makeStatement(jsConstructorSourcePosition));
 
     // Note that the super call arguments are empty if this @JsConstructor class is a subclass of a

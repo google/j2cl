@@ -16,6 +16,12 @@
 ;;; Code for intersectiontype.IntersectionTypeTest [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest (mut i32) (i32.const 0))
 
+;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [static fields]
+(global $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1 (mut i32) (i32.const 0))
+
+;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [static fields]
+(global $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2 (mut i32) (i32.const 0))
+
 ;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_MapEntry (mut i32) (i32.const 0))
 
@@ -27,12 +33,6 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest.EmptyB [static fields]
 (global $f_$initialized__intersectiontype_IntersectionTypeTest_EmptyB (mut i32) (i32.const 0))
-
-;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [static fields]
-(global $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1 (mut i32) (i32.const 0))
-
-;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [static fields]
-(global $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2 (mut i32) (i32.const 0))
 
 ;;; Code for intersectiontype.IntersectionTypeTest [vtable.init]
 (global $intersectiontype.IntersectionTypeTest.vtable (ref $intersectiontype.IntersectionTypeTest.vtable) 
@@ -48,35 +48,6 @@
 
 ;;; Code for intersectiontype.IntersectionTypeTest [itable.init]
 (global $intersectiontype.IntersectionTypeTest.itable (ref $itable) (array.init_static $itable 
- ))
-
-;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [vtable.init]
-(global $intersectiontype.IntersectionTypeTest.MapEntry.vtable (ref $intersectiontype.IntersectionTypeTest.MapEntry.vtable) 
- (struct.new $intersectiontype.IntersectionTypeTest.MapEntry.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry)
-  (ref.func $m_method__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest.MapEntry)
- )
-)
-
-;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [itable.init]
-(global $intersectiontype.IntersectionTypeTest.MapEntry.itable (ref $itable) (array.init_static $itable 
- ))
-
-;;; Code for intersectiontype.IntersectionTypeTest.A [vtable.init]
-(global $intersectiontype.IntersectionTypeTest.A.vtable (ref $intersectiontype.IntersectionTypeTest.A.vtable) 
- (struct.new $intersectiontype.IntersectionTypeTest.A.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.A)
- )
-)
-
-;;; Code for intersectiontype.IntersectionTypeTest.A [itable.init]
-(global $intersectiontype.IntersectionTypeTest.A.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [vtable.init]
@@ -119,6 +90,35 @@
  (struct.new $intersectiontype.Cmp2.vtable
   (ref.func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)
  )
+ ))
+
+;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [vtable.init]
+(global $intersectiontype.IntersectionTypeTest.MapEntry.vtable (ref $intersectiontype.IntersectionTypeTest.MapEntry.vtable) 
+ (struct.new $intersectiontype.IntersectionTypeTest.MapEntry.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.MapEntry)
+  (ref.func $m_method__java_lang_Object__intersectiontype_Getable@intersectiontype.IntersectionTypeTest.MapEntry)
+ )
+)
+
+;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [itable.init]
+(global $intersectiontype.IntersectionTypeTest.MapEntry.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for intersectiontype.IntersectionTypeTest.A [vtable.init]
+(global $intersectiontype.IntersectionTypeTest.A.vtable (ref $intersectiontype.IntersectionTypeTest.A.vtable) 
+ (struct.new $intersectiontype.IntersectionTypeTest.A.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.A)
+ )
+)
+
+;;; Code for intersectiontype.IntersectionTypeTest.A [itable.init]
+(global $intersectiontype.IntersectionTypeTest.A.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for intersectiontype.Getable [INTERFACE]
@@ -600,6 +600,207 @@
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest)
 
+;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [CLASS]
+(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (struct_subtype 
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_cmp__int (ref $function.m_cmp__int))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
+(func $$create__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ (result (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
+ ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+ (local $$instance (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
+ (block
+  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$1@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $$instance))
+  ;; return $instance;
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$1.$ctor()
+(func $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$1@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ (param $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
+ ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+ (block
+  ;; intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$clinit();
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (call $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 )
+  ;; Object.this.$ctor();
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; int $LambdaImplementor$1.cmp()
+(func $m_cmp__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ (type $function.m_cmp__int)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result i32)
+ ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+ (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return 1;
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:32
+  (return (i32.const 1))
+ )
+)
+(elem declare func $m_cmp__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
+
+;;; void $LambdaImplementor$1.$clinit()
+(func $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+ (block
+  ;; if (intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$initialized) return;
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1)
+   (then
+    ;; return;
+    ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+    (return )
+   )
+  )
+  ;; (intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$initialized = true);
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$1.getClass()
+(func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
+ (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1();
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
+
+;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [CLASS]
+(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (struct_subtype 
+ (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_cmp__int__int (ref $function.m_cmp__int__int))
+  $java.lang.Object.vtable)
+)
+
+;;; $LambdaImplementor$2<T> $LambdaImplementor$2.$create()
+(func $$create__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ (result (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
+ ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+ (local $$instance (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
+ (block
+  ;; $LambdaImplementor$2<T> $instance = new $LambdaImplementor$2.<init>();
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$2@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $$instance))
+  ;; return $instance;
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (return (local.get $$instance))
+ )
+)
+
+;;; void $LambdaImplementor$2.$ctor()
+(func $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$2@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ (param $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
+ ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+ (block
+  ;; intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$clinit();
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (call $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 )
+  ;; Object.this.$ctor();
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; int $LambdaImplementor$2.cmp(int a)
+(func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ (type $function.m_cmp__int__int)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $a i32)
+ (result i32)
+ ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+ (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
+ (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
+ (block
+  ;; return 1;
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:34
+  (return (i32.const 1))
+ )
+)
+(elem declare func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)
+
+;;; void $LambdaImplementor$2.$clinit()
+(func $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+ (block
+  ;; if (intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$initialized) return;
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2)
+   (then
+    ;; return;
+    ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+    (return )
+   )
+  )
+  ;; (intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$initialized = true);
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2 (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Class<?> $LambdaImplementor$2.getClass()
+(func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
+ (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2();
+  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)
+
 ;;; Code for intersectiontype.IntersectionTypeTest.MapEntry [CLASS]
 (type $intersectiontype.IntersectionTypeTest.MapEntry (struct_subtype 
  (field $vtable (ref $intersectiontype.IntersectionTypeTest.MapEntry.vtable)) 
@@ -856,204 +1057,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.EmptyB)
-
-;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 [CLASS]
-(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (struct_subtype 
- (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_cmp__int (ref $function.m_cmp__int))
-  $java.lang.Object.vtable)
-)
-
-;;; $LambdaImplementor$1 $LambdaImplementor$1.$create()
-(func $$create__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
- (result (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- ;;@ intersectiontype/IntersectionTypeTest.java:71:26
- (local $$instance (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- (block
-  ;; $LambdaImplementor$1 $instance = new $LambdaImplementor$1.<init>();
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$1@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $$instance))
-  ;; return $instance;
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (return (local.get $$instance))
- )
-)
-
-;;; void $LambdaImplementor$1.$ctor()
-(func $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$1@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
- (param $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- ;;@ intersectiontype/IntersectionTypeTest.java:71:26
- (block
-  ;; intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$clinit();
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (call $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 )
-  ;; Object.this.$ctor();
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; int $LambdaImplementor$1.cmp()
-(func $m_cmp__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
- (type $function.m_cmp__int)
- (param $this.untyped (ref null $java.lang.Object))
- (result i32)
- ;;@ intersectiontype/IntersectionTypeTest.java:71:26
- (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return 1;
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:32
-  (return (i32.const 1))
- )
-)
-(elem declare func $m_cmp__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
-
-;;; void $LambdaImplementor$1.$clinit()
-(func $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
- ;;@ intersectiontype/IntersectionTypeTest.java:71:26
- (block
-  ;; if (intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$initialized) return;
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1)
-   (then
-    ;; return;
-    ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-    (return )
-   )
-  )
-  ;; (intersectiontype.IntersectionTypeTest.$LambdaImplementor$1.$initialized = true);
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$1 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ intersectiontype/IntersectionTypeTest.java:71:26
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> $LambdaImplementor$1.getClass()
-(func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$1 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$1__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$1)
-
-;;; Code for intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 [CLASS]
-(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (struct_subtype 
- (field $vtable (ref $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
-  $java.lang.Object)
-)
-(type $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_cmp__int__int (ref $function.m_cmp__int__int))
-  $java.lang.Object.vtable)
-)
-
-;;; $LambdaImplementor$2<T> $LambdaImplementor$2.$create()
-(func $$create__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
- (result (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- ;;@ intersectiontype/IntersectionTypeTest.java:76:27
- (local $$instance (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- (block
-  ;; $LambdaImplementor$2<T> $instance = new $LambdaImplementor$2.<init>();
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (local.set $$instance (struct.new $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.vtable)) (ref.as_non_null (global.get $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.itable)) (i32.const 0)))
-  ;; $instance.$ctor();
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (call $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$2@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $$instance))
-  ;; return $instance;
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (return (local.get $$instance))
- )
-)
-
-;;; void $LambdaImplementor$2.$ctor()
-(func $$ctor__void_$p_intersectiontype_IntersectionTypeTest_$LambdaImplementor$2@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
- (param $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- ;;@ intersectiontype/IntersectionTypeTest.java:76:27
- (block
-  ;; intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$clinit();
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (call $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 )
-  ;; Object.this.$ctor();
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
- )
-)
-
-;;; int $LambdaImplementor$2.cmp(int a)
-(func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
- (type $function.m_cmp__int__int)
- (param $this.untyped (ref null $java.lang.Object))
- (param $a i32)
- (result i32)
- ;;@ intersectiontype/IntersectionTypeTest.java:76:27
- (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
- (block
-  ;; return 1;
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:34
-  (return (i32.const 1))
- )
-)
-(elem declare func $m_cmp__int__int@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)
-
-;;; void $LambdaImplementor$2.$clinit()
-(func $$clinit__void@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
- ;;@ intersectiontype/IntersectionTypeTest.java:76:27
- (block
-  ;; if (intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$initialized) return;
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (if (global.get $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2)
-   (then
-    ;; return;
-    ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-    (return )
-   )
-  )
-  ;; (intersectiontype.IntersectionTypeTest.$LambdaImplementor$2.$initialized = true);
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (global.set $f_$initialized__intersectiontype_IntersectionTypeTest_$LambdaImplementor$2 (i32.const 1))
-  ;; java.lang.Object.$clinit();
-  ;;@ intersectiontype/IntersectionTypeTest.java:76:27
-  (call $$clinit__void@java.lang.Object )
- )
-)
-
-;;; Class<?> $LambdaImplementor$2.getClass()
-(func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2))
- (local.set $this (ref.cast_static $intersectiontype.IntersectionTypeTest.$LambdaImplementor$2 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2();
-  (return (call $function.no.side.effects.$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class (ref.func $$getIntersectiontype.IntersectionTypeTest.$LambdaImplementor$2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@intersectiontype.IntersectionTypeTest.$LambdaImplementor$2)

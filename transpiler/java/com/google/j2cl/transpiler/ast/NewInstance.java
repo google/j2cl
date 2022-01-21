@@ -15,22 +15,27 @@
  */
 package com.google.j2cl.transpiler.ast;
 
+import static com.google.common.base.Preconditions.checkState;
 
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.List;
+import javax.annotation.Nullable;
 
 /**
  * Class for new instance expression.
  */
 @Visitable
 public class NewInstance extends Invocation {
+  @Visitable @Nullable Type anonymousInnerClass = null;
 
   private NewInstance(
       Expression qualifier,
       MethodDescriptor constructorMethodDescriptor,
-      List<Expression> arguments) {
+      List<Expression> arguments,
+      Type anonymousInnerClass) {
     super(qualifier, constructorMethodDescriptor, arguments);
+    this.anonymousInnerClass = anonymousInnerClass;
   }
 
   @Override
@@ -38,9 +43,21 @@ public class NewInstance extends Invocation {
     return (DeclaredTypeDescriptor) getTarget().getReturnTypeDescriptor();
   }
 
+  public Type getAnonymousInnerClass() {
+    return anonymousInnerClass;
+  }
+
   @Override
   public NewInstance clone() {
-    return new NewInstance(AstUtils.clone(qualifier), getTarget(), AstUtils.clone(arguments));
+    // clone() can only be called after anonymous inner types are normalized away. Even if the
+    // anonymous class was duplicated and the name changed, that would imply a semantic difference
+    // in Java (.getClass() would return different values).
+    // In general we don't support unrestricted cloning (there are other nodes that have
+    // restrictions too) so for the time being this node can only be cloned when it is safe to do
+    // so.
+    checkState(anonymousInnerClass == null);
+    return new NewInstance(
+        AstUtils.clone(qualifier), getTarget(), AstUtils.clone(arguments), anonymousInnerClass);
   }
 
   @Override
@@ -64,6 +81,8 @@ public class NewInstance extends Invocation {
    * list in sync.
    */
   public static class Builder extends Invocation.Builder<Builder, NewInstance> {
+    private Type anonymousInnerClass;
+
     public static Builder from(NewInstance newInstance) {
       return new Builder(newInstance);
     }
@@ -74,13 +93,19 @@ public class NewInstance extends Invocation {
       return builder;
     }
 
+    public Builder setAnonymousInnerClass(Type anonymousInnerClass) {
+      this.anonymousInnerClass = anonymousInnerClass;
+      return this;
+    }
+
     @Override
     public NewInstance build() {
-      return new NewInstance(getQualifier(), getTarget(), getArguments());
+      return new NewInstance(getQualifier(), getTarget(), getArguments(), anonymousInnerClass);
     }
-    
+
     private Builder(NewInstance newInstance) {
       super(newInstance);
+      this.anonymousInnerClass = newInstance.anonymousInnerClass;
     }
 
     private Builder() {}

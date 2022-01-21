@@ -17,6 +17,7 @@ import static com.google.j2cl.transpiler.ast.LambdaAdaptorTypeDescriptors.create
 
 import com.google.j2cl.common.SourcePosition;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
+import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.AstUtils;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -58,24 +59,28 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     // compilation unit and add the corresponding $adapt method to the functional interface.
     // Qualifying functional interfaces are functional interfaces that are not
     // @JsFunction nor @JsType(isNative=true)
-    for (Type type : compilationUnit.getTypes()) {
-      DeclaredTypeDescriptor typeDescriptor = type.getTypeDescriptor();
-      if (hasSharedLambdaAdaptor(typeDescriptor)) {
+    compilationUnit.accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitType(Type type) {
+            DeclaredTypeDescriptor typeDescriptor = type.getTypeDescriptor();
+            if (hasSharedLambdaAdaptor(typeDescriptor)) {
 
-        DeclaredTypeDescriptor adaptorTypeDescriptor =
-            LambdaAdaptorTypeDescriptors.createLambdaAdaptorTypeDescriptor(typeDescriptor);
-        DeclaredTypeDescriptor jsFunctionTypeDescriptor =
-            LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
+              DeclaredTypeDescriptor adaptorTypeDescriptor =
+                  LambdaAdaptorTypeDescriptors.createLambdaAdaptorTypeDescriptor(typeDescriptor);
+              DeclaredTypeDescriptor jsFunctionTypeDescriptor =
+                  LambdaAdaptorTypeDescriptors.createJsFunctionTypeDescriptor(typeDescriptor);
 
-        // Create and add the LambdaAdaptor type for the functional interface.
-        newLambdaAdaptors.add(
-            createLambdaAdaptorType(
-                type.getSourcePosition(), typeDescriptor, adaptorTypeDescriptor));
+              // Create and add the LambdaAdaptor type for the functional interface.
+              newLambdaAdaptors.add(
+                  createLambdaAdaptorType(
+                      type.getSourcePosition(), typeDescriptor, adaptorTypeDescriptor));
 
-        // Add the $adapt method to the functional interface to hide the adaptor class..
-        addAdaptMethod(type, jsFunctionTypeDescriptor, adaptorTypeDescriptor);
-      }
-    }
+              // Add the $adapt method to the functional interface to hide the adaptor class..
+              addAdaptMethod(type, jsFunctionTypeDescriptor, adaptorTypeDescriptor);
+            }
+          }
+        });
 
     // (2) Replace each instantiation with the corresponding functional expression, and create
     // the LambdaAdaptor classes intersection types and @JsType(isNative=true) lambdas.
@@ -311,7 +316,9 @@ public class ImplementLambdaExpressionsViaJsFunctionAdaptor extends Normalizatio
     adaptorType.addMember(
         AstUtils.createForwardingMethod(
             sourcePosition,
-            FieldAccess.Builder.from(jsFunctionFieldDescriptor).build(),
+            FieldAccess.Builder.from(jsFunctionFieldDescriptor)
+                .setDefaultInstanceQualifier()
+                .build(),
             adaptorForwarderMethodDescriptor,
             jsFunctionMethodDescriptor,
             /* jsDocDescription */ null));

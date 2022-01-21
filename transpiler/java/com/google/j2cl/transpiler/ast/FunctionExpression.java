@@ -23,10 +23,7 @@ import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 /** Class for an inline (lambda) function expression. */
 @Visitable
@@ -89,47 +86,22 @@ public class FunctionExpression extends Expression implements MethodLike {
     return body;
   }
 
-  /** Returns the variables that are captured by this functional expression. */
-  public List<Variable> getCapturedVariables() {
-    Set<Variable> capturedVariables = new LinkedHashSet<>();
-    Set<Variable> declaredVariables = new HashSet<>();
-    accept(
-        new AbstractVisitor() {
-          @Override
-          public void exitVariable(Variable variable) {
-            // Keep track of variables declared within this functional expression. These variables
-            // might appear as parameters in this or a nested functional expression or variable
-            // declarations. References to these variables are the only ones that are not captures.
-            declaredVariables.add(variable);
-          }
-
-          @Override
-          public void exitVariableReference(VariableReference variableReference) {
-            Variable variable = variableReference.getTarget();
-            if (!declaredVariables.contains(variable)) {
-              capturedVariables.add(variable);
-            }
-          }
-        });
-    return new ArrayList<>(capturedVariables);
-  }
-
   /** Returns true if this functional expression references the enclosing instance. */
-  public boolean isReferencingEnclosingInstance() {
-    boolean[] isReferencingEnclosingInstance = new boolean[1];
+  public boolean isCapturingEnclosingInstance() {
+    boolean[] hasEnclosingInstanceReferences = new boolean[1];
     accept(
         new AbstractVisitor() {
           @Override
           public void exitThisReference(ThisReference thisReference) {
-            isReferencingEnclosingInstance[0] = true;
+            hasEnclosingInstanceReferences[0] = true;
           }
 
           @Override
           public void exitSuperReference(SuperReference superReference) {
-            isReferencingEnclosingInstance[0] = true;
+            hasEnclosingInstanceReferences[0] = true;
           }
         });
-    return isReferencingEnclosingInstance[0];
+    return hasEnclosingInstanceReferences[0];
   }
 
   public boolean isJsVarargs() {

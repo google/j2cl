@@ -24,6 +24,7 @@ import com.google.j2cl.common.visitor.Visitable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * A model class that represents a Java Compilation Unit.
@@ -34,6 +35,7 @@ public class CompilationUnit extends Node {
   private final String filePath;
   private final String packageName;
   private final String packageRelativePath;
+  private boolean flattened = false;
 
   @Visitable List<Type> types = new ArrayList<>();
 
@@ -77,6 +79,29 @@ public class CompilationUnit extends Node {
 
   public List<Type> getTypes() {
     return types;
+  }
+
+  public Stream<Type> streamTypes() {
+    if (flattened) {
+      return getTypes().stream();
+    }
+    List<Type> allTypes = new ArrayList<>();
+    accept(
+        new AbstractVisitor() {
+          @Override
+          public void exitType(Type type) {
+            allTypes.add(type);
+          }
+        });
+    return allTypes.stream();
+  }
+
+  public boolean isFlattened() {
+    return flattened;
+  }
+
+  public void setFlattened() {
+    flattened = true;
   }
 
   @Override

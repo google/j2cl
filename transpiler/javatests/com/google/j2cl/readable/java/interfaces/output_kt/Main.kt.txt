@@ -41,19 +41,19 @@ fun interface `Main$SubInterface`: interfaces.`Main$Interface`<kotlin.String?> {
 }
 
 open class `Main$Implementor`: interfaces.`Main$SubInterface`, interfaces.`Main$Interface`<kotlin.String?> {
+ @JvmField val `this`: interfaces.Main?
+
  internal constructor(`$outer_this`: interfaces.Main?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: interfaces.Main?
 
  open override fun interfaceMethod() {}
 }
 
 abstract class `Main$AbstractImplementor`: interfaces.`Main$SubInterface` {
+ @JvmField val `this`: interfaces.Main?
+
  internal constructor(`$outer_this`: interfaces.Main?): super() {
   this.`this` = `$outer_this`
  }
-
- @JvmField val `this`: interfaces.Main?
 }

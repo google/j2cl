@@ -19,11 +19,11 @@
 ;;; Code for innerclassinheritance.MultipleNestings.Parent [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_Parent (mut i32) (i32.const 0))
 
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [static fields]
-(global $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1 (mut i32) (i32.const 0))
-
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [static fields]
 (global $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut i32) (i32.const 0))
+
+;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [static fields]
+(global $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1 (mut i32) (i32.const 0))
 
 ;;; Code for innerclassinheritance.ParentOuter [vtable.init]
 (global $innerclassinheritance.ParentOuter.vtable (ref $innerclassinheritance.ParentOuter.vtable) 
@@ -137,22 +137,6 @@
 (global $innerclassinheritance.MultipleNestings.Parent.itable (ref $itable) (array.init_static $itable 
  ))
 
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [vtable.init]
-(global $innerclassinheritance.MultipleNestings.InnerClass1.vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.vtable) 
- (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.vtable
-  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
-  (ref.func $m_hashCode__int@java.lang.Object)
-  (ref.func $m_toString__java_lang_String@java.lang.Object)
-  (ref.func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1)
-  (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent)
-  (ref.func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1)
- )
-)
-
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [itable.init]
-(global $innerclassinheritance.MultipleNestings.InnerClass1.itable (ref $itable) (array.init_static $itable 
- ))
-
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [vtable.init]
 (global $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable) 
  (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable
@@ -168,6 +152,22 @@
 
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [itable.init]
 (global $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [vtable.init]
+(global $innerclassinheritance.MultipleNestings.InnerClass1.vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.vtable) 
+ (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1)
+  (ref.func $m_fun__void@innerclassinheritance.MultipleNestings.Parent)
+  (ref.func $m_funInI1__void@innerclassinheritance.MultipleNestings.InnerClass1)
+ )
+)
+
+;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [itable.init]
+(global $innerclassinheritance.MultipleNestings.InnerClass1.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for innerclassinheritance.ParentOuter [CLASS]
@@ -1003,6 +1003,147 @@
 )
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.Parent)
 
+;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [CLASS]
+(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct_subtype 
+ (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+ (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
+ (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1)))
+  $innerclassinheritance.MultipleNestings.Parent)
+)
+(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_fun__void (ref $function.m_fun__void))
+ (field $m_funInI2__void (ref $function.m_funInI2__void))
+ (field $m_test__void (ref $function.m_test__void))
+  $innerclassinheritance.MultipleNestings.Parent.vtable)
+)
+
+;;; InnerClass2 InnerClass2.$create(InnerClass1 $outer_this)
+(func $$create__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (param $$outer_this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
+ (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ ;;@ innerclassinheritance/MultipleNestings.java:31:17
+ (local $$instance (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (block
+  ;; InnerClass2 $instance = new InnerClass2.<init>($outer_this);
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings.InnerClass1)))
+  ;; $instance.$ctor($outer_this);
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (call $$ctor__innerclassinheritance_MultipleNestings_InnerClass1__void_$p_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $$instance)(local.get $$outer_this))
+  ;; return $instance;
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (return (local.get $$instance))
+ )
+)
+
+;;; void InnerClass2.$ctor(InnerClass1 $outer_this)
+(func $$ctor__innerclassinheritance_MultipleNestings_InnerClass1__void_$p_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (param $$outer_this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
+ ;;@ innerclassinheritance/MultipleNestings.java:31:17
+ (block
+  ;; innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$clinit();
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (call $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 )
+  ;; (InnerClass2.this.this = $outer_this);
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (struct.set $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this) (local.get $$outer_this))
+  ;; Parent.this.$ctor(InnerClass2.this.this.this);
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (call $$ctor__innerclassinheritance_MultipleNestings__void_$p_innerclassinheritance_MultipleNestings_Parent@innerclassinheritance.MultipleNestings.Parent (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))))
+ )
+)
+
+;;; void InnerClass2.funInI2()
+(func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (type $function.m_funInI2__void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ innerclassinheritance/MultipleNestings.java:32:18
+ (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $this.untyped)))
+ (block
+ )
+)
+(elem declare func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
+
+;;; void InnerClass2.test()
+(func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (type $function.m_test__void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ innerclassinheritance/MultipleNestings.java:34:18
+ (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $this.untyped)))
+ (block
+  ;; InnerClass2.this.fun();
+  ;;@ innerclassinheritance/MultipleNestings.java:36:8
+  (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(local.get $this))))
+  ;; InnerClass2.this.fun();
+  ;;@ innerclassinheritance/MultipleNestings.java:37:8
+  (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(local.get $this))))
+  ;; InnerClass2.this.this.fun();
+  ;;@ innerclassinheritance/MultipleNestings.java:38:8
+  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))))
+  ;; InnerClass2.this.this.this.funInM();
+  ;;@ innerclassinheritance/MultipleNestings.java:41:8
+  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))))))
+  ;; InnerClass2.this.this.this.funInM();
+  ;;@ innerclassinheritance/MultipleNestings.java:42:8
+  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))))))
+  ;; InnerClass2.this.this.funInI1();
+  ;;@ innerclassinheritance/MultipleNestings.java:43:8
+  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))))
+  ;; InnerClass2.this.this.funInI1();
+  ;;@ innerclassinheritance/MultipleNestings.java:44:8
+  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))))
+  ;; InnerClass2.this.funInI2();
+  ;;@ innerclassinheritance/MultipleNestings.java:46:8
+  (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable $m_funInI2__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $vtable(local.get $this))))
+ )
+)
+(elem declare func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
+
+;;; void InnerClass2.$clinit()
+(func $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ ;;@ innerclassinheritance/MultipleNestings.java:31:17
+ (block
+  ;; if (innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$initialized) return;
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (if (global.get $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2)
+   (then
+    ;; return;
+    ;;@ innerclassinheritance/MultipleNestings.java:31:17
+    (return )
+   )
+  )
+  ;; (innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$initialized = true);
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (global.set $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (i32.const 1))
+  ;; innerclassinheritance.MultipleNestings.Parent.$clinit();
+  ;;@ innerclassinheritance/MultipleNestings.java:31:17
+  (call $$clinit__void@innerclassinheritance.MultipleNestings.Parent )
+ )
+)
+
+;;; Class<?> InnerClass2.getClass()
+(func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
+ (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2();
+  (return (call $function.no.side.effects.$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2__java_lang_Class (ref.func $$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
+
 ;;; Code for innerclassinheritance.MultipleNestings.InnerClass1 [CLASS]
 (type $innerclassinheritance.MultipleNestings.InnerClass1 (struct_subtype 
  (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.vtable)) 
@@ -1106,144 +1247,3 @@
  )
 )
 (elem declare func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1)
-
-;;; Code for innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 [CLASS]
-(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (struct_subtype 
- (field $vtable (ref $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) 
- (field $itable (ref $itable))
- (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
- (field $$outer_this__innerclassinheritance_MultipleNestings_Parent (mut (ref null $innerclassinheritance.MultipleNestings)))
- (field $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (mut (ref null $innerclassinheritance.MultipleNestings.InnerClass1)))
-  $innerclassinheritance.MultipleNestings.Parent)
-)
-(type $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable (struct_subtype 
- (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
- (field $m_hashCode__int (ref $function.m_hashCode__int))
- (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
- (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
- (field $m_fun__void (ref $function.m_fun__void))
- (field $m_funInI2__void (ref $function.m_funInI2__void))
- (field $m_test__void (ref $function.m_test__void))
-  $innerclassinheritance.MultipleNestings.Parent.vtable)
-)
-
-;;; InnerClass2 InnerClass2.$create(InnerClass1 $outer_this)
-(func $$create__innerclassinheritance_MultipleNestings_InnerClass1__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
- (param $$outer_this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
- (result (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
- ;;@ innerclassinheritance/MultipleNestings.java:31:17
- (local $$instance (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
- (block
-  ;; InnerClass2 $instance = new InnerClass2.<init>($outer_this);
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (local.set $$instance (struct.new $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable)) (ref.as_non_null (global.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.itable)) (i32.const 0) (ref.null $innerclassinheritance.MultipleNestings) (ref.null $innerclassinheritance.MultipleNestings.InnerClass1)))
-  ;; $instance.$ctor($outer_this);
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (call $$ctor__innerclassinheritance_MultipleNestings_InnerClass1__void_$p_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $$instance)(local.get $$outer_this))
-  ;; return $instance;
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (return (local.get $$instance))
- )
-)
-
-;;; void InnerClass2.$ctor(InnerClass1 $outer_this)
-(func $$ctor__innerclassinheritance_MultipleNestings_InnerClass1__void_$p_innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
- (param $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
- (param $$outer_this (ref null $innerclassinheritance.MultipleNestings.InnerClass1))
- ;;@ innerclassinheritance/MultipleNestings.java:31:17
- (block
-  ;; innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$clinit();
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (call $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 )
-  ;; (InnerClass2.this.this = $outer_this);
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (struct.set $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this) (local.get $$outer_this))
-  ;; Parent.this.$ctor($outer_this.this);
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (call $$ctor__innerclassinheritance_MultipleNestings__void_$p_innerclassinheritance_MultipleNestings_Parent@innerclassinheritance.MultipleNestings.Parent (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(local.get $$outer_this)))
- )
-)
-
-;;; void InnerClass2.funInI2()
-(func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
- (type $function.m_funInI2__void)
- (param $this.untyped (ref null $java.lang.Object))
- ;;@ innerclassinheritance/MultipleNestings.java:32:18
- (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
- (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $this.untyped)))
- (block
- )
-)
-(elem declare func $m_funInI2__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
-
-;;; void InnerClass2.test()
-(func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
- (type $function.m_test__void)
- (param $this.untyped (ref null $java.lang.Object))
- ;;@ innerclassinheritance/MultipleNestings.java:34:18
- (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
- (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $this.untyped)))
- (block
-  ;; InnerClass2.this.fun();
-  ;;@ innerclassinheritance/MultipleNestings.java:36:8
-  (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(local.get $this))))
-  ;; InnerClass2.this.fun();
-  ;;@ innerclassinheritance/MultipleNestings.java:37:8
-  (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(local.get $this))))
-  ;; InnerClass2.this.this.fun();
-  ;;@ innerclassinheritance/MultipleNestings.java:38:8
-  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.Parent.vtable $m_fun__void (struct.get $innerclassinheritance.MultipleNestings.Parent $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))))
-  ;; InnerClass2.this.this.this.funInM();
-  ;;@ innerclassinheritance/MultipleNestings.java:41:8
-  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))))))
-  ;; InnerClass2.this.this.this.funInM();
-  ;;@ innerclassinheritance/MultipleNestings.java:42:8
-  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))(struct.get $innerclassinheritance.MultipleNestings.vtable $m_funInM__void (struct.get $innerclassinheritance.MultipleNestings $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))))))
-  ;; InnerClass2.this.this.funInI1();
-  ;;@ innerclassinheritance/MultipleNestings.java:43:8
-  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))))
-  ;; InnerClass2.this.this.funInI1();
-  ;;@ innerclassinheritance/MultipleNestings.java:44:8
-  (call_ref (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this))(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.vtable $m_funInI1__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1 $vtable(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $$outer_this__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2(local.get $this)))))
-  ;; InnerClass2.this.funInI2();
-  ;;@ innerclassinheritance/MultipleNestings.java:46:8
-  (call_ref (local.get $this)(struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.vtable $m_funInI2__void (struct.get $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 $vtable(local.get $this))))
- )
-)
-(elem declare func $m_test__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)
-
-;;; void InnerClass2.$clinit()
-(func $$clinit__void@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
- ;;@ innerclassinheritance/MultipleNestings.java:31:17
- (block
-  ;; if (innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$initialized) return;
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (if (global.get $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2)
-   (then
-    ;; return;
-    ;;@ innerclassinheritance/MultipleNestings.java:31:17
-    (return )
-   )
-  )
-  ;; (innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2.$initialized = true);
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (global.set $f_$initialized__innerclassinheritance_MultipleNestings_InnerClass1_InnerClass2 (i32.const 1))
-  ;; innerclassinheritance.MultipleNestings.Parent.$clinit();
-  ;;@ innerclassinheritance/MultipleNestings.java:31:17
-  (call $$clinit__void@innerclassinheritance.MultipleNestings.Parent )
- )
-)
-
-;;; Class<?> InnerClass2.getClass()
-(func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2
- (type $function.m_getClass__java_lang_Class)
- (param $this.untyped (ref null $java.lang.Object))
- (result (ref null $java.lang.Class))
- (local $this (ref null $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2))
- (local.set $this (ref.cast_static $innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2 (local.get $this.untyped)))
- (block
-  ;; return javaemul.internal.ClassLiteralPool.$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2();
-  (return (call $function.no.side.effects.$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2__java_lang_Class (ref.func $$getInnerclassinheritance.MultipleNestings.InnerClass1.InnerClass2__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
- )
-)
-(elem declare func $m_getClass__java_lang_Class@innerclassinheritance.MultipleNestings.InnerClass1.InnerClass2)

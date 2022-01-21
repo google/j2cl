@@ -37,14 +37,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
 
   public abstract boolean isDeprecated();
 
-  public boolean isVariableCapture() {
-    return getOrigin() == FieldOrigin.SYNTHETIC_CAPTURE_FIELD;
-  }
-
-  public boolean isEnclosingInstanceCapture() {
-    return getOrigin() == FieldOrigin.SYNTHETIC_OUTER_FIELD;
-  }
-
   @Override
   public abstract FieldOrigin getOrigin();
 
@@ -122,7 +114,8 @@ public abstract class FieldDescriptor extends MemberDescriptor {
   }
 
   public boolean isCapture() {
-    return isVariableCapture() || isEnclosingInstanceCapture();
+    return getOrigin() == FieldOrigin.SYNTHETIC_CAPTURE_FIELD
+        || getOrigin() == FieldOrigin.SYNTHETIC_OUTER_FIELD;
   }
 
   public boolean isJsProperty() {
@@ -244,9 +237,6 @@ public abstract class FieldDescriptor extends MemberDescriptor {
     public FieldDescriptor build() {
       checkState(getName().isPresent());
       FieldDescriptor fieldDescriptor = autoBuild();
-
-      checkState(
-          !fieldDescriptor.isVariableCapture() || !fieldDescriptor.isEnclosingInstanceCapture());
 
       return interner.intern(fieldDescriptor);
     }

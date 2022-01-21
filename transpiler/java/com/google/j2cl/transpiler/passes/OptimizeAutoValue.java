@@ -112,6 +112,7 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
               Type typeToInline = superTypeToInlinedType.get(type.getDeclaration());
               if (typeToInline != null) {
                 inlineMembers(typeToInline, type);
+                inlineNestedTypes(typeToInline, type);
                 type.setAbstract(typeToInline.isAbstract());
               }
             });
@@ -177,6 +178,12 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             });
 
     to.addMembers(movedMembers.values());
+  }
+
+  private static void inlineNestedTypes(Type from, Type to) {
+    // Move all the directly nested types to the base class.
+    from.getTypes().forEach(to::addType);
+    from.getTypes().clear();
   }
 
   private static void rewriteTypeReferences(Library library, TypeReplacer fn) {
