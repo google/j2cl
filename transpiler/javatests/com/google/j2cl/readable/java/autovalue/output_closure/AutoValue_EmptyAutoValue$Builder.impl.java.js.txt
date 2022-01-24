@@ -1,0 +1,48 @@
+goog.module('autovalue.AutoValue_EmptyAutoValue.Builder$impl');
+
+const EmptyAutoValue_Builder = goog.require('autovalue.EmptyAutoValue.Builder$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let AutoValue__EmptyAutoValue = goog.forwardDeclare('autovalue.AutoValue_EmptyAutoValue$impl');
+let EmptyAutoValue = goog.forwardDeclare('autovalue.EmptyAutoValue$impl');
+
+class Builder extends EmptyAutoValue_Builder {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!Builder} */
+ static $create__() {
+  Builder.$clinit();
+  let $instance = new Builder();
+  $instance.$ctor__autovalue_AutoValue_EmptyAutoValue_Builder__();
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValue_EmptyAutoValue_Builder__() {
+  this.$ctor__autovalue_EmptyAutoValue_Builder__();
+ }
+ /** @override @return {EmptyAutoValue} */
+ m_build__() {
+  return AutoValue__EmptyAutoValue.$create__();
+ }
+ 
+ static $clinit() {
+  Builder.$clinit = () =>{};
+  Builder.$loadModules();
+  EmptyAutoValue_Builder.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Builder;
+ }
+ 
+ static $loadModules() {
+  AutoValue__EmptyAutoValue = goog.module.get('autovalue.AutoValue_EmptyAutoValue$impl');
+ }
+}
+$Util.$setClassMetadata(Builder, 'autovalue.AutoValue_EmptyAutoValue$Builder');
+
+exports = Builder;
+
+//# sourceMappingURL=AutoValue_EmptyAutoValue$Builder.js.map

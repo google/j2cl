@@ -1,9 +1,9 @@
 Integration tests size report:
 **************************************
-There are 2 optimized size changes.
+There are 4 optimized size changes.
 Total optimized size (of already existing tests) changed from
-  2040822 to 2045175 bytes (100%->100.2%) and from
-  723935 to 725393 bytes (100%->100.2%) gzipped.
+  2045175 to 2045990 bytes (100%->100.0%) and from
+  725393 to 725638 bytes (100%->100.0%) gzipped.
 
 
 Shrinkage report highlights:
@@ -14,14 +14,16 @@ Shrinkage report highlights:
 Expansion report highlights:
 **************************************
         old      new
-       1267     2002 foreachstatement.esnext (58.0%)
-       1635     2358 foreachstatement (44.2%)
+       3312     3384 autovalue_inc (2.2%)
+       2951     3012 autovalue_inc.esnext (2.1%)
+       2702     2757 autovalue.esnext (2.0%)
+       3057     3114 autovalue (1.9%)
 
 
 Incremental size reports (non-gzip):
 **************************************
         old      new
-        859      859 autovalue (unchanged)
+        859      860 autovalue (0.1%)
         948      948 autovalue.esnext (unchanged)
 
 
@@ -73,10 +75,10 @@ All reports:
        2622     2622 assertsimple.esnext (unchanged)
        5793     5793 autoboxing (unchanged)
        5395     5395 autoboxing.esnext (unchanged)
-       3057     3057 autovalue (unchanged)
-       2702     2702 autovalue.esnext (unchanged)
-       3312     3312 autovalue_inc (unchanged)
-       2951     2951 autovalue_inc.esnext (unchanged)
+       3057     3114 autovalue (1.9%)
+       2702     2757 autovalue.esnext (2.0%)
+       3312     3384 autovalue_inc (2.2%)
+       2951     3012 autovalue_inc.esnext (2.1%)
        2692     2692 autovalue_ref (unchanged)
        2437     2437 autovalue_ref.esnext (unchanged)
         998      998 backwardbridgemethod (unchanged)
@@ -163,8 +165,8 @@ All reports:
         782      782 fieldshadowing.esnext (unchanged)
         932      932 finallyblock (unchanged)
         601      601 finallyblock.esnext (unchanged)
-       1635     2358 foreachstatement (44.2%)
-       1267     2002 foreachstatement.esnext (58.0%)
+       2358     2358 foreachstatement (unchanged)
+       2002     2002 foreachstatement.esnext (unchanged)
        1014     1014 forstatement (unchanged)
         654      654 forstatement.esnext (unchanged)
          22       22 gwtincompatible (unchanged)

@@ -308,6 +308,14 @@ public class Type extends Node implements HasSourcePosition, HasJsNameInfo, HasR
     return getMethods().stream().filter(Member::isConstructor).collect(toImmutableList());
   }
 
+  public Method getDefaultConstructor() {
+    // TODO(b/215777271): This doesn't consider varags constructors as a default constructor.
+    return getMethods().stream()
+        .filter(m -> m.isConstructor() && m.getParameters().isEmpty())
+        .findFirst()
+        .orElse(null);
+  }
+
   @Override
   public String getSimpleJsName() {
     return typeDeclaration.getSimpleJsName();

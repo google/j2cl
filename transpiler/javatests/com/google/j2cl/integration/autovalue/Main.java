@@ -30,6 +30,7 @@ public class Main {
   public static void main(String... args) {
     testComposite();
     testUnreadValue();
+    testAutovalueWithCtor();
     testExtending();
     testMemoized();
     testAbstractEquals();
@@ -91,11 +92,44 @@ public class Main {
   @AutoValue
   protected abstract static class TypeWithUnreadField {
     public abstract int getUnreadField();
+
+    // Having constructors ensures that we didn't miss the right one while preserving fields.
+
+    TypeWithUnreadField(int foo) {}
+
+    TypeWithUnreadField() {}
   }
 
   private static void testUnreadValue() {
     assertNotEquals(
         new AutoValue_Main_TypeWithUnreadField(5), new AutoValue_Main_TypeWithUnreadField(6));
+  }
+
+  @AutoValue
+  protected abstract static class AutoValueWithCtors {
+    public abstract int foo();
+
+    int bar;
+
+    AutoValueWithCtors(int zoo) {
+      // Have an extra constructor to make sure correct constructor is called.
+    }
+
+    AutoValueWithCtors() {
+      bar = 42;
+    }
+  }
+
+  private static void testAutovalueWithCtor() {
+    AutoValueWithCtors o1 = new AutoValue_Main_AutoValueWithCtors(12);
+    assertEquals(42, o1.bar); // Make sure the parent constructor is still called.
+    AutoValueWithCtors o2 = new AutoValue_Main_AutoValueWithCtors(12);
+    assertEquals(o1, o2);
+    assertEquals(o1.hashCode(), o2.hashCode());
+
+    o1.bar = 2;
+    assertEquals(o1, o2);
+    assertEquals(o1.hashCode(), o2.hashCode());
   }
 
   private static class BaseClass {

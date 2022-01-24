@@ -37,6 +37,12 @@
 ;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [static fields]
 (global $f_$initialized__autovalue_AutoValue_DefaultNonEmptyConstructorAutoValue_Builder (mut i32) (i32.const 0))
 
+;;; Code for autovalue.AutoValue_EmptyAutoValue [static fields]
+(global $f_$initialized__autovalue_AutoValue_EmptyAutoValue (mut i32) (i32.const 0))
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [static fields]
+(global $f_$initialized__autovalue_AutoValue_EmptyAutoValue_Builder (mut i32) (i32.const 0))
+
 ;;; Code for autovalue.AutoValue_ExtendingAutoValue [static fields]
 (global $f_$initialized__autovalue_AutoValue_ExtendingAutoValue (mut i32) (i32.const 0))
 
@@ -78,6 +84,12 @@
 
 ;;; Code for autovalue.DefaultNonEmptyConstructorAutoValue.Builder [static fields]
 (global $f_$initialized__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (mut i32) (i32.const 0))
+
+;;; Code for autovalue.EmptyAutoValue [static fields]
+(global $f_$initialized__autovalue_EmptyAutoValue (mut i32) (i32.const 0))
+
+;;; Code for autovalue.EmptyAutoValue.Builder [static fields]
+(global $f_$initialized__autovalue_EmptyAutoValue_Builder (mut i32) (i32.const 0))
 
 ;;; Code for autovalue.ExtendingAutoValue [static fields]
 (global $f_$initialized__autovalue_ExtendingAutoValue (mut i32) (i32.const 0))
@@ -247,6 +259,35 @@
 
 ;;; Code for autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder [itable.init]
 (global $autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue [vtable.init]
+(global $autovalue.AutoValue_EmptyAutoValue.vtable (ref $autovalue.AutoValue_EmptyAutoValue.vtable) 
+ (struct.new $autovalue.AutoValue_EmptyAutoValue.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_EmptyAutoValue)
+  (ref.func $m_hashCode__int@autovalue.AutoValue_EmptyAutoValue)
+  (ref.func $m_toString__java_lang_String@autovalue.AutoValue_EmptyAutoValue)
+  (ref.func $m_getClass__java_lang_Class@autovalue.AutoValue_EmptyAutoValue)
+ )
+)
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue [itable.init]
+(global $autovalue.AutoValue_EmptyAutoValue.itable (ref $itable) (array.init_static $itable 
+ ))
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [vtable.init]
+(global $autovalue.AutoValue_EmptyAutoValue.Builder.vtable (ref $autovalue.AutoValue_EmptyAutoValue.Builder.vtable) 
+ (struct.new $autovalue.AutoValue_EmptyAutoValue.Builder.vtable
+  (ref.func $m_equals__java_lang_Object__boolean@java.lang.Object)
+  (ref.func $m_hashCode__int@java.lang.Object)
+  (ref.func $m_toString__java_lang_String@java.lang.Object)
+  (ref.func $m_getClass__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder)
+  (ref.func $m_build__autovalue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue.Builder)
+ )
+)
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [itable.init]
+(global $autovalue.AutoValue_EmptyAutoValue.Builder.itable (ref $itable) (array.init_static $itable 
  ))
 
 ;;; Code for autovalue.AutoValue_ExtendingAutoValue [vtable.init]
@@ -2589,6 +2630,264 @@
 )
 (elem declare func $m_getClass__java_lang_Class@autovalue.AutoValue_DefaultNonEmptyConstructorAutoValue.Builder)
 
+;;; Code for autovalue.AutoValue_EmptyAutoValue [CLASS]
+(type $autovalue.AutoValue_EmptyAutoValue (struct_subtype 
+ (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $autovalue.EmptyAutoValue)
+)
+(type $autovalue.AutoValue_EmptyAutoValue.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $autovalue.EmptyAutoValue.vtable)
+)
+
+;;; AutoValue_EmptyAutoValue AutoValue_EmptyAutoValue.$create()
+(func $$create__autovalue_AutoValue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue
+ (result (ref null $autovalue.AutoValue_EmptyAutoValue))
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:10
+ (local $$instance (ref null $autovalue.AutoValue_EmptyAutoValue))
+ (block
+  ;; AutoValue_EmptyAutoValue $instance = new AutoValue_EmptyAutoValue.<init>();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:10
+  (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:10
+  (call $$ctor__void_$p_autovalue_AutoValue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue (local.get $$instance))
+  ;; return $instance;
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:10
+  (return (local.get $$instance))
+ )
+)
+
+;;; void AutoValue_EmptyAutoValue.$ctor()
+(func $$ctor__void_$p_autovalue_AutoValue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue
+ (param $this (ref null $autovalue.AutoValue_EmptyAutoValue))
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:10
+ (block
+  ;; autovalue.AutoValue_EmptyAutoValue.$clinit();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:37
+  (call $$clinit__void@autovalue.AutoValue_EmptyAutoValue )
+  ;; EmptyAutoValue.this.$ctor();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:9:37
+  (call $$ctor__void_$p_autovalue_EmptyAutoValue@autovalue.EmptyAutoValue (local.get $this))
+ )
+)
+
+;;; String AutoValue_EmptyAutoValue.toString()
+(func $m_toString__java_lang_String@autovalue.AutoValue_EmptyAutoValue
+ (type $function.m_toString__java_lang_String)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.String))
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:13:16
+ (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.StringPool.$getString_|EmptyAutoVal...|();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:14:4
+  (return (call $function.no.side.effects.$getString_|EmptyAutoVal...|__java_lang_String (ref.func $$getString_|EmptyAutoVal...|__java_lang_String@javaemul.internal.StringPool) ))
+ )
+)
+(elem declare func $m_toString__java_lang_String@autovalue.AutoValue_EmptyAutoValue)
+
+;;; boolean AutoValue_EmptyAutoValue.equals(Object o)
+(func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_EmptyAutoValue
+ (type $function.m_equals__java_lang_Object__boolean)
+ (param $this.untyped (ref null $java.lang.Object))
+ (param $o (ref null $java.lang.Object))
+ (result i32)
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:19:17
+ (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (block
+  ;; if ((o == AutoValue_EmptyAutoValue.this)) {
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:20:4
+  (if (ref.eq (local.get $o) (local.get $this))
+   (then
+    (block
+     ;; return true;
+     ;;@ autovalue/AutoValue_EmptyAutoValue.java:21:6
+     (return (i32.const 1))
+    )
+   )
+  )
+  ;; if (o instanceof EmptyAutoValue) {
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:23:4
+  (if (ref.test_static $autovalue.EmptyAutoValue (local.get $o))
+   (then
+    (block
+     ;; return true;
+     ;;@ autovalue/AutoValue_EmptyAutoValue.java:24:6
+     (return (i32.const 1))
+    )
+   )
+  )
+  ;; return false;
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:26:4
+  (return (i32.const 0))
+ )
+)
+(elem declare func $m_equals__java_lang_Object__boolean@autovalue.AutoValue_EmptyAutoValue)
+
+;;; int AutoValue_EmptyAutoValue.hashCode()
+(func $m_hashCode__int@autovalue.AutoValue_EmptyAutoValue
+ (type $function.m_hashCode__int)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result i32)
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:30:13
+ (local $h$ i32)
+ (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (block
+  ;; int h$ = 1;
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:31:4
+  (local.set $h$ (i32.const 1))
+  ;; return h$;
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:32:4
+  (return (local.get $h$))
+ )
+)
+(elem declare func $m_hashCode__int@autovalue.AutoValue_EmptyAutoValue)
+
+;;; void AutoValue_EmptyAutoValue.$clinit()
+(func $$clinit__void@autovalue.AutoValue_EmptyAutoValue
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:7:12
+ (block
+  ;; if (autovalue.AutoValue_EmptyAutoValue.$initialized) return;
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:7:12
+  (if (global.get $f_$initialized__autovalue_AutoValue_EmptyAutoValue)
+   (then
+    ;; return;
+    ;;@ autovalue/AutoValue_EmptyAutoValue.java:7:12
+    (return )
+   )
+  )
+  ;; (autovalue.AutoValue_EmptyAutoValue.$initialized = true);
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:7:12
+  (global.set $f_$initialized__autovalue_AutoValue_EmptyAutoValue (i32.const 1))
+  ;; autovalue.EmptyAutoValue.$clinit();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:7:12
+  (call $$clinit__void@autovalue.EmptyAutoValue )
+ )
+)
+
+;;; Class<?> AutoValue_EmptyAutoValue.getClass()
+(func $m_getClass__java_lang_Class@autovalue.AutoValue_EmptyAutoValue
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.AutoValue_EmptyAutoValue))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_EmptyAutoValue (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAutovalue.AutoValue_EmptyAutoValue();
+  (return (call $function.no.side.effects.$getAutovalue.AutoValue_EmptyAutoValue__java_lang_Class (ref.func $$getAutovalue.AutoValue_EmptyAutoValue__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@autovalue.AutoValue_EmptyAutoValue)
+
+;;; Code for autovalue.AutoValue_EmptyAutoValue.Builder [CLASS]
+(type $autovalue.AutoValue_EmptyAutoValue.Builder (struct_subtype 
+ (field $vtable (ref $autovalue.AutoValue_EmptyAutoValue.Builder.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $autovalue.EmptyAutoValue.Builder)
+)
+(type $autovalue.AutoValue_EmptyAutoValue.Builder.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
+  $autovalue.EmptyAutoValue.Builder.vtable)
+)
+
+;;; Builder Builder.$create()
+(func $$create__autovalue_AutoValue_EmptyAutoValue_Builder@autovalue.AutoValue_EmptyAutoValue.Builder
+ (result (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:4
+ (local $$instance (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
+ (block
+  ;; Builder $instance = new Builder.<init>();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:4
+  (local.set $$instance (struct.new $autovalue.AutoValue_EmptyAutoValue.Builder (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.Builder.vtable)) (ref.as_non_null (global.get $autovalue.AutoValue_EmptyAutoValue.Builder.itable)) (i32.const 0)))
+  ;; $instance.$ctor();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:4
+  (call $$ctor__void_$p_autovalue_AutoValue_EmptyAutoValue_Builder@autovalue.AutoValue_EmptyAutoValue.Builder (local.get $$instance))
+  ;; return $instance;
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:4
+  (return (local.get $$instance))
+ )
+)
+
+;;; void Builder.$ctor()
+(func $$ctor__void_$p_autovalue_AutoValue_EmptyAutoValue_Builder@autovalue.AutoValue_EmptyAutoValue.Builder
+ (param $this (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:4
+ (block
+  ;; autovalue.AutoValue_EmptyAutoValue.Builder.$clinit();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:14
+  (call $$clinit__void@autovalue.AutoValue_EmptyAutoValue.Builder )
+  ;; Builder.this.$ctor();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:36:14
+  (call $$ctor__void_$p_autovalue_EmptyAutoValue_Builder@autovalue.EmptyAutoValue.Builder (local.get $this))
+ )
+)
+
+;;; EmptyAutoValue Builder.build()
+(func $m_build__autovalue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue.Builder
+ (type $function.m_build__autovalue_EmptyAutoValue)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $autovalue.EmptyAutoValue))
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:39:26
+ (local $this (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_EmptyAutoValue.Builder (local.get $this.untyped)))
+ (block
+  ;; return autovalue.AutoValue_EmptyAutoValue.$create();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:40:6
+  (return (call $$create__autovalue_AutoValue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue ))
+ )
+)
+(elem declare func $m_build__autovalue_EmptyAutoValue@autovalue.AutoValue_EmptyAutoValue.Builder)
+
+;;; void Builder.$clinit()
+(func $$clinit__void@autovalue.AutoValue_EmptyAutoValue.Builder
+ ;;@ autovalue/AutoValue_EmptyAutoValue.java:35:21
+ (block
+  ;; if (autovalue.AutoValue_EmptyAutoValue.Builder.$initialized) return;
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:35:21
+  (if (global.get $f_$initialized__autovalue_AutoValue_EmptyAutoValue_Builder)
+   (then
+    ;; return;
+    ;;@ autovalue/AutoValue_EmptyAutoValue.java:35:21
+    (return )
+   )
+  )
+  ;; (autovalue.AutoValue_EmptyAutoValue.Builder.$initialized = true);
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:35:21
+  (global.set $f_$initialized__autovalue_AutoValue_EmptyAutoValue_Builder (i32.const 1))
+  ;; autovalue.EmptyAutoValue.Builder.$clinit();
+  ;;@ autovalue/AutoValue_EmptyAutoValue.java:35:21
+  (call $$clinit__void@autovalue.EmptyAutoValue.Builder )
+ )
+)
+
+;;; Class<?> Builder.getClass()
+(func $m_getClass__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder
+ (type $function.m_getClass__java_lang_Class)
+ (param $this.untyped (ref null $java.lang.Object))
+ (result (ref null $java.lang.Class))
+ (local $this (ref null $autovalue.AutoValue_EmptyAutoValue.Builder))
+ (local.set $this (ref.cast_static $autovalue.AutoValue_EmptyAutoValue.Builder (local.get $this.untyped)))
+ (block
+  ;; return javaemul.internal.ClassLiteralPool.$getAutovalue.AutoValue_EmptyAutoValue.Builder();
+  (return (call $function.no.side.effects.$getAutovalue.AutoValue_EmptyAutoValue.Builder__java_lang_Class (ref.func $$getAutovalue.AutoValue_EmptyAutoValue.Builder__java_lang_Class@javaemul.internal.ClassLiteralPool) ))
+ )
+)
+(elem declare func $m_getClass__java_lang_Class@autovalue.AutoValue_EmptyAutoValue.Builder)
+
 ;;; Code for autovalue.AutoValue_ExtendingAutoValue [CLASS]
 (type $autovalue.AutoValue_ExtendingAutoValue (struct_subtype 
  (field $vtable (ref $autovalue.AutoValue_ExtendingAutoValue.vtable)) 
@@ -4104,6 +4403,109 @@
   (global.set $f_$initialized__autovalue_DefaultNonEmptyConstructorAutoValue_Builder (i32.const 1))
   ;; java.lang.Object.$clinit();
   ;;@ autovalue/DefaultNonEmptyConstructorAutoValue.java:32:24
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Code for autovalue.EmptyAutoValue [CLASS]
+(type $autovalue.EmptyAutoValue (struct_subtype 
+ (field $vtable (ref $autovalue.EmptyAutoValue.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $autovalue.EmptyAutoValue.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+  $java.lang.Object.vtable)
+)
+
+;;; void EmptyAutoValue.$ctor()
+(func $$ctor__void_$p_autovalue_EmptyAutoValue@autovalue.EmptyAutoValue
+ (param $this (ref null $autovalue.EmptyAutoValue))
+ ;;@ autovalue/EmptyAutoValue.java:21:22
+ (block
+  ;; autovalue.EmptyAutoValue.$clinit();
+  ;;@ autovalue/EmptyAutoValue.java:21:22
+  (call $$clinit__void@autovalue.EmptyAutoValue )
+  ;; Object.this.$ctor();
+  ;;@ autovalue/EmptyAutoValue.java:21:22
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; void EmptyAutoValue.$clinit()
+(func $$clinit__void@autovalue.EmptyAutoValue
+ ;;@ autovalue/EmptyAutoValue.java:21:22
+ (block
+  ;; if (autovalue.EmptyAutoValue.$initialized) return;
+  ;;@ autovalue/EmptyAutoValue.java:21:22
+  (if (global.get $f_$initialized__autovalue_EmptyAutoValue)
+   (then
+    ;; return;
+    ;;@ autovalue/EmptyAutoValue.java:21:22
+    (return )
+   )
+  )
+  ;; (autovalue.EmptyAutoValue.$initialized = true);
+  ;;@ autovalue/EmptyAutoValue.java:21:22
+  (global.set $f_$initialized__autovalue_EmptyAutoValue (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ autovalue/EmptyAutoValue.java:21:22
+  (call $$clinit__void@java.lang.Object )
+ )
+)
+
+;;; Code for autovalue.EmptyAutoValue.Builder [CLASS]
+(type $autovalue.EmptyAutoValue.Builder (struct_subtype 
+ (field $vtable (ref $autovalue.EmptyAutoValue.Builder.vtable)) 
+ (field $itable (ref $itable))
+ (field $f_$systemIdentityHashCode__java_lang_Object (mut i32))
+  $java.lang.Object)
+)
+(type $autovalue.EmptyAutoValue.Builder.vtable (struct_subtype 
+ (field $m_equals__java_lang_Object__boolean (ref $function.m_equals__java_lang_Object__boolean))
+ (field $m_hashCode__int (ref $function.m_hashCode__int))
+ (field $m_toString__java_lang_String (ref $function.m_toString__java_lang_String))
+ (field $m_getClass__java_lang_Class (ref $function.m_getClass__java_lang_Class))
+ (field $m_build__autovalue_EmptyAutoValue (ref $function.m_build__autovalue_EmptyAutoValue))
+  $java.lang.Object.vtable)
+)
+
+;;; void Builder.$ctor()
+(func $$ctor__void_$p_autovalue_EmptyAutoValue_Builder@autovalue.EmptyAutoValue.Builder
+ (param $this (ref null $autovalue.EmptyAutoValue.Builder))
+ ;;@ autovalue/EmptyAutoValue.java:23:24
+ (block
+  ;; autovalue.EmptyAutoValue.Builder.$clinit();
+  ;;@ autovalue/EmptyAutoValue.java:23:24
+  (call $$clinit__void@autovalue.EmptyAutoValue.Builder )
+  ;; Object.this.$ctor();
+  ;;@ autovalue/EmptyAutoValue.java:23:24
+  (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
+ )
+)
+
+;;; void Builder.$clinit()
+(func $$clinit__void@autovalue.EmptyAutoValue.Builder
+ ;;@ autovalue/EmptyAutoValue.java:23:24
+ (block
+  ;; if (autovalue.EmptyAutoValue.Builder.$initialized) return;
+  ;;@ autovalue/EmptyAutoValue.java:23:24
+  (if (global.get $f_$initialized__autovalue_EmptyAutoValue_Builder)
+   (then
+    ;; return;
+    ;;@ autovalue/EmptyAutoValue.java:23:24
+    (return )
+   )
+  )
+  ;; (autovalue.EmptyAutoValue.Builder.$initialized = true);
+  ;;@ autovalue/EmptyAutoValue.java:23:24
+  (global.set $f_$initialized__autovalue_EmptyAutoValue_Builder (i32.const 1))
+  ;; java.lang.Object.$clinit();
+  ;;@ autovalue/EmptyAutoValue.java:23:24
   (call $$clinit__void@java.lang.Object )
  )
 )

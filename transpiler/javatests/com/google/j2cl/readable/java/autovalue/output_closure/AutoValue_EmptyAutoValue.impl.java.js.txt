@@ -1,0 +1,62 @@
+goog.module('autovalue.AutoValue_EmptyAutoValue$impl');
+
+const EmptyAutoValue = goog.require('autovalue.EmptyAutoValue$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let $Equality = goog.forwardDeclare('nativebootstrap.Equality$impl');
+
+class AutoValue__EmptyAutoValue extends EmptyAutoValue {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @return {!AutoValue__EmptyAutoValue} */
+ static $create__() {
+  AutoValue__EmptyAutoValue.$clinit();
+  let $instance = new AutoValue__EmptyAutoValue();
+  $instance.$ctor__autovalue_AutoValue_EmptyAutoValue__();
+  return $instance;
+ }
+ 
+ $ctor__autovalue_AutoValue_EmptyAutoValue__() {
+  this.$ctor__autovalue_EmptyAutoValue__();
+ }
+ /** @override @return {?string} */
+ toString() {
+  return '{' + '}';
+ }
+ /** @override @return {boolean} */
+ equals(/** * */ o) {
+  if ($Equality.$same(o, this)) {
+   return true;
+  }
+  if (EmptyAutoValue.$isInstance(o)) {
+   return true;
+  }
+  return false;
+ }
+ /** @override @return {number} */
+ hashCode() {
+  let h$ = 1;
+  return h$;
+ }
+ 
+ static $clinit() {
+  AutoValue__EmptyAutoValue.$clinit = () =>{};
+  AutoValue__EmptyAutoValue.$loadModules();
+  EmptyAutoValue.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof AutoValue__EmptyAutoValue;
+ }
+ 
+ static $loadModules() {
+  $Equality = goog.module.get('nativebootstrap.Equality$impl');
+ }
+}
+$Util.$setClassMetadata(AutoValue__EmptyAutoValue, 'autovalue.AutoValue_EmptyAutoValue');
+
+exports = AutoValue__EmptyAutoValue;
+
+//# sourceMappingURL=AutoValue_EmptyAutoValue.js.map

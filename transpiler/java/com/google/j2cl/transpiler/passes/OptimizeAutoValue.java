@@ -24,6 +24,7 @@ import static com.google.j2cl.transpiler.ast.TypeDescriptor.replaceTypeDescripto
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.j2cl.common.SourcePosition;
@@ -100,6 +101,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         library
             .streamTypes()
             .filter(t -> optimizableTypes.contains(t.getDeclaration().getSuperTypeDeclaration()))
+            // Filter the unlikely empty AutoValue case to avoid handling edge cases.
+            .filter(t -> !t.getDeclaration().getDeclaredFieldDescriptors().isEmpty())
             .collect(
                 toImmutableMap(
                     t -> t.getSuperTypeDescriptor().getTypeDeclaration(), Function.identity()));
@@ -144,22 +147,32 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
   }
 
   private static boolean canBeInlinedTo(Type type) {
-    // Note that AutoValue will generate default ctor for Builders so would be only safe to inline
-    // the implementation if user didn't declare non-empty one.
-    // Most complete logic for safety here would be cross-checking all generated ctors against user
-    // declared ones but given the practical constraints of AutoValue, checking only this edge case
-    // should be good enough.
-    return type.getDeclaration().isAnnotatedWithAutoValue()
-        || (type.getDeclaration().isAnnotatedWithAutoValueBuilder()
-            && type.getConstructors().stream()
-                .filter(c -> c.getParameters().isEmpty())
-                .allMatch(Method::isEmpty));
+    if (type.getDeclaration().isAnnotatedWithAutoValueBuilder()) {
+      // Note that AutoValue.Builder will generate default ctor so would be only safe to inline
+      // the implementation if user didn't declare non-empty one.
+      // Most complete logic for safety here would be cross-checking all generated ctors against
+      // user declared ones but given the practical constraints of AutoValue, checking only this
+      // edge case should be good enough.
+      Method method = type.getDefaultConstructor();
+      return method == null || method.isEmpty();
+    }
+    return type.getDeclaration().isAnnotatedWithAutoValue();
   }
 
   private static void inlineMembers(Type from, Type to) {
     // Move all the members to base class except the java.lang.Object methods.
     // We could also have moved members from all subclasses however @Memoized methods are
     // overridden hence requires more complicated re-writing.
+
+    // Validate our assumption that AutoValue only generates single non-default constructor.
+    checkState(
+        !to.getDeclaration().isAnnotatedWithAutoValue()
+            || (from.getConstructors().size() == 1 && from.getDefaultConstructor() == null));
+
+    // We need to make sure inlined constructors explicitly call this() otherwise they would
+    // implicitly call super() and change the behavior from the original code (since existing
+    // implicit super() call was targeting the parent default constructor).
+    addThisCallToInlinedConstructors(from, to);
 
     // Note that the collection here will error out in duplicate keys so if any our
     // assumptions incorrect (e.g. no multiple static initializer), we should fail-fast.
@@ -177,7 +190,38 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
               return false;
             });
 
+    // Note that the adding to end here matters since later preserveFields will assume last
+    // constructor is the one that is coming from AutoValue implementation class.
     to.addMembers(movedMembers.values());
+  }
+
+  private static void addThisCallToInlinedConstructors(Type from, Type to) {
+    if (from.getDefaultConstructor() != null) {
+      // If there is new default constructor being inlined then there is nothing to worry about
+      // since either default doesn't exist or it is empty. Hence the implicit behavior is correct.
+      return;
+    }
+
+    Method defaultCtor = to.getDefaultConstructor();
+    if (defaultCtor == null) {
+      // If there are no default constructors in the parent, there is nothing to update since
+      // implicit behavior is still correct.
+      // TODO(b/215777271): Handle single varargs constructors which are currently not considered
+      // as targets for the parameterless and implicit super invocation but should.
+      return;
+    }
+
+    for (Method fromCtor : from.getConstructors()) {
+      checkState(!AstUtils.hasThisCall(fromCtor) && !AstUtils.hasSuperCall(fromCtor));
+      fromCtor
+          .getBody()
+          .getStatements()
+          .add(
+              0,
+              MethodCall.Builder.from(defaultCtor.getDescriptor())
+                  .build()
+                  .makeStatement(fromCtor.getBody().getSourcePosition()));
+    }
   }
 
   private static void inlineNestedTypes(Type from, Type to) {
@@ -476,7 +520,9 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
             .setArguments(AstUtils.maybePackageVarargs(preserveFn, fieldReferences))
             .build()
             .makeStatement(SourcePosition.NONE);
-    type.getConstructors().get(0).getBody().getStatements().add(preserveCall);
+
+    // Hack: Using the last constructor here since AutoValue constructor is appended to end.
+    Iterables.getLast(type.getConstructors()).getBody().getStatements().add(preserveCall);
   }
 
   private static void addExcludedFieldsDeclaration(

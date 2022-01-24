@@ -110,7 +110,7 @@ public class AutoValueTest {
   @Test
   public void testEmpty() throws Exception {
     Empty instance = Empty.create();
-    String expectedString = "Empty{}";
+    String expectedString = "{}";
     assertThat(instance.toString()).isEqualTo(expectedString);
     assertEquals(instance, instance);
     assertEquals(instance, Empty.create());
