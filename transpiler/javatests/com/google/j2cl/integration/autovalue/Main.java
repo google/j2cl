@@ -36,6 +36,7 @@ public class Main {
     testAbstractEquals();
     testJsCollection();
     testUnusedType();
+    testUnusedTypeExtending();
     testClinit();
   }
 
@@ -72,21 +73,6 @@ public class Main {
     assertEquals(componentB, compositeB.getComponentField());
     assertEquals(componentB.hashCode(), compositeB.getComponentField().hashCode());
     assertNotNull(compositeB.toString());
-  }
-
-  @AutoValue
-  protected abstract static class Unused {
-    public abstract int getIntField();
-
-    public abstract boolean getBooleanField();
-
-    public abstract String getStringField();
-
-    public abstract Double getDoubleField();
-  }
-
-  private static void testUnusedType() {
-    boolean resultUnused = (new Object()) instanceof AutoValue_Main_Unused;
   }
 
   @AutoValue
@@ -206,6 +192,35 @@ public class Main {
     UsesJsCollection o1 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
     UsesJsCollection o2 = new AutoValue_Main_UsesJsCollection((JsArray) (Object) new Object[] {1});
     assertNotEquals(o1, o2);
+  }
+
+  @AutoValue
+  protected abstract static class Unused {
+    public abstract int getIntField();
+
+    public abstract boolean getBooleanField();
+
+    public abstract String getStringField();
+
+    public abstract Double getDoubleField();
+  }
+
+  private static void testUnusedType() {
+    // Unused code to track/validate code removal with size tracking.
+    boolean resultUnused = (new Object()) instanceof AutoValue_Main_Unused;
+  }
+
+  @AutoValue
+  protected abstract static class UnusedExtending extends BaseClass {
+    public int zoo;
+
+    public abstract int foo();
+  }
+
+  private static void testUnusedTypeExtending() {
+    // Unused code to track/validate code removal with size tracking.
+    // In this particular case we make sure ValueType.mixin is utilized.
+    boolean resultUnused = (new Object()) instanceof AutoValue_Main_UnusedExtending;
   }
 
   @AutoValue
