@@ -56,7 +56,7 @@ private fun Renderer.renderField(field: Field) {
   val isFinal = field.descriptor.isFinal
   val typeDescriptor = field.descriptor.typeDescriptor
 
-  if (!field.descriptor.visibility.isPrivate) render("@JvmField ")
+  if (!field.descriptor.visibility.isPrivate) render("@kotlin.jvm.JvmField ")
   renderVisibility(field.descriptor.visibility)
   render(if (isFinal) "val " else "var ")
   renderIdentifier(field.descriptor.name!!)
@@ -75,7 +75,7 @@ private fun Renderer.renderInitializerBlock(initializerBlock: InitializerBlock) 
 
 private fun Renderer.renderMethodHeader(method: Method, kind: Kind) {
   if (method.isStatic) {
-    render("@JvmStatic")
+    render("@kotlin.jvm.JvmStatic")
     renderNewLine()
   }
   val methodDescriptor = method.descriptor

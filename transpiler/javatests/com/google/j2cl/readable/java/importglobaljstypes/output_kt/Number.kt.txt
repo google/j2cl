@@ -8,18 +8,18 @@ open class Number {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   external fun `fun`(x: Double): Boolean
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun test(x: Double): Boolean {
    return importglobaljstypes.Number.`fun`(x)
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   external internal fun getFromCharCodeFunction(): importglobaljstypes.`Number$NativeFunction`<kotlin.String?>?
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun fromCharCode(array: IntArray?): kotlin.String? {
    return importglobaljstypes.Number.getFromCharCodeFunction()!!.apply(null, array)
   }

@@ -3,13 +3,13 @@ package innerclasswithconstructor
 open class InnerClassWithConstructor {
  constructor(): super()
 
- @JvmField var a: Int = 0
+ @kotlin.jvm.JvmField var a: Int = 0
 }
 
 open class `InnerClassWithConstructor$InnerClass` {
- @JvmField val `this`: innerclasswithconstructor.InnerClassWithConstructor?
+ @kotlin.jvm.JvmField val `this`: innerclasswithconstructor.InnerClassWithConstructor?
 
- @JvmField var b: Int = 0
+ @kotlin.jvm.JvmField var b: Int = 0
 
  constructor(`$outer_this`: innerclasswithconstructor.InnerClassWithConstructor?, b: Int): super() {
   this.`this` = `$outer_this`

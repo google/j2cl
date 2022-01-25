@@ -4,7 +4,7 @@ open class Main {
  constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun main(vararg args: kotlin.String?) {
    assert(jsinnerclass.`Main$Outer`().method() == 5)
   }
@@ -12,7 +12,7 @@ open class Main {
 }
 
 open class `Main$Outer$Inner` {
- @JvmField val `this`: jsinnerclass.`Main$Outer`?
+ @kotlin.jvm.JvmField val `this`: jsinnerclass.`Main$Outer`?
 
  internal var b: Int = 0
 
@@ -29,7 +29,7 @@ open class `Main$Outer$Inner` {
 open class `Main$Outer` {
  internal constructor(): super()
 
- @JvmField internal var a: Int = 2
+ @kotlin.jvm.JvmField internal var a: Int = 2
 
  open fun method(): Int {
   return jsinnerclass.`Main$Outer$Inner`(this).getB() + this.a

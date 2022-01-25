@@ -8,14 +8,14 @@ interface `Main$Foo`: java.lang.annotation.Annotation {
  fun bar(): Int
 
  companion object {
-  @JvmField val CONSTANT: Int = 123
+  @kotlin.jvm.JvmField val CONSTANT: Int = 123
  }
 }
 
 interface `Main$Zoo`: java.lang.annotation.Annotation {}
 
 open class `Main$Bar` {
- @JvmField val `this`: annotation.Main?
+ @kotlin.jvm.JvmField val `this`: annotation.Main?
 
  internal constructor(`$outer_this`: annotation.Main?): super() {
   this.`this` = `$outer_this`

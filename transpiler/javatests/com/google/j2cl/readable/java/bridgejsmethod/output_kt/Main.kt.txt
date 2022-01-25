@@ -4,7 +4,7 @@ open class Main {
  constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun test() {
    val a: bridgejsmethod.`Main$A`<*>? = bridgejsmethod.`Main$A`<kotlin.Int?>()
    a!!.`fun`(1)
@@ -110,7 +110,7 @@ fun interface `Main$M` {
 }
 
 abstract class `Main$N`: bridgejsmethod.`Main$M` {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
   this.`this` = `$outer_this`
@@ -120,7 +120,7 @@ abstract class `Main$N`: bridgejsmethod.`Main$M` {
 }
 
 open class `Main$O`: bridgejsmethod.`Main$N` {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super(`$outer_this`) {
   this.`this` = `$outer_this`
@@ -138,7 +138,7 @@ fun interface `Main$P` {
 }
 
 abstract class `Main$Q`: bridgejsmethod.`Main$P` {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
   this.`this` = `$outer_this`
@@ -148,7 +148,7 @@ abstract class `Main$Q`: bridgejsmethod.`Main$P` {
 }
 
 abstract class `Main$R`: bridgejsmethod.`Main$Q` {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super(`$outer_this`) {
   this.`this` = `$outer_this`
@@ -160,7 +160,7 @@ abstract class `Main$R`: bridgejsmethod.`Main$Q` {
 }
 
 open class `Main$S`: bridgejsmethod.`Main$R` {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super(`$outer_this`) {
   this.`this` = `$outer_this`
@@ -168,7 +168,7 @@ open class `Main$S`: bridgejsmethod.`Main$R` {
 }
 
 open class `Main$GrandParent`<T> {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super() {
   this.`this` = `$outer_this`
@@ -180,7 +180,7 @@ open class `Main$GrandParent`<T> {
 }
 
 open class `Main$Parent`<T: bridgejsmethod.`Main$Parent`<T>?>: bridgejsmethod.`Main$GrandParent`<T> {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super(`$outer_this`) {
   this.`this` = `$outer_this`
@@ -192,7 +192,7 @@ open class `Main$Parent`<T: bridgejsmethod.`Main$Parent`<T>?>: bridgejsmethod.`M
 }
 
 open class `Main$Child`: bridgejsmethod.`Main$Parent`<bridgejsmethod.`Main$Child`?> {
- @JvmField val `this`: bridgejsmethod.Main?
+ @kotlin.jvm.JvmField val `this`: bridgejsmethod.Main?
 
  internal constructor(`$outer_this`: bridgejsmethod.Main?): super(`$outer_this`) {
   this.`this` = `$outer_this`

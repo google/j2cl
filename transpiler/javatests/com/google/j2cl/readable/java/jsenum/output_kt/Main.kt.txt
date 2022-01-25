@@ -4,7 +4,7 @@ open class Main {
  constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun testJsEnumSwitch() {
    var comparableJsEnum: jsenum.`Main$ComparableJsEnum`? = if (jsenum.`Main$ComparableJsEnum`.ONE.getValue() == 1) jsenum.`Main$ComparableJsEnum`.TWO else null
    SWITCH@ do {
@@ -49,7 +49,7 @@ open class Main {
    })
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun testBoxUnboxWithTypeInference() {
    val templatedField: jsenum.`Main$TemplatedField`<jsenum.`Main$ComparableJsEnum`?>? = jsenum.`Main$TemplatedField`<jsenum.`Main$ComparableJsEnum`?>(jsenum.`Main$ComparableJsEnum`.ONE)
    var unboxed: jsenum.`Main$ComparableJsEnum`? = templatedField!!.getValue()
@@ -60,12 +60,12 @@ open class Main {
    val b: Boolean = jsenum.`Main$ComparableJsEnum`.ONE === jsenum.Main.boxingPassthrough(jsenum.`Main$ComparableJsEnum`.ONE)
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun <T> boxingPassthrough(t: T?): T? {
    return t
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun boxingWithGenerics() {
    jsenum.`Main$Foo`<kotlin.Any?>(java.util.Optional.of(jsenum.`Main$IntJsEnum`.MINUSONE))
   }
@@ -80,11 +80,11 @@ enum class `Main$ComparableJsEnum` {
  }
 
  companion object {
-  @JvmField val ZERO: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
+  @kotlin.jvm.JvmField val ZERO: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
 
-  @JvmField val ONE: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
+  @kotlin.jvm.JvmField val ONE: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
 
-  @JvmField val TWO: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
+  @kotlin.jvm.JvmField val TWO: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
  }
 }
 
@@ -100,11 +100,11 @@ enum class `Main$IntJsEnum` {
  }
 
  companion object {
-  @JvmField val MINUSONE: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(-1)
+  @kotlin.jvm.JvmField val MINUSONE: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(-1)
 
-  @JvmField val TWENTY: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(20)
+  @kotlin.jvm.JvmField val TWENTY: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(20)
 
-  @JvmField val ELEVEN: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(11)
+  @kotlin.jvm.JvmField val ELEVEN: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(11)
  }
 }
 
@@ -120,9 +120,9 @@ enum class `Main$StringJsEnum` {
  }
 
  companion object {
-  @JvmField val ONE: jsenum.`Main$StringJsEnum` = jsenum.`Main$StringJsEnum`("ONE")
+  @kotlin.jvm.JvmField val ONE: jsenum.`Main$StringJsEnum` = jsenum.`Main$StringJsEnum`("ONE")
 
-  @JvmField val THREE: jsenum.`Main$StringJsEnum` = jsenum.`Main$StringJsEnum`("THREE")
+  @kotlin.jvm.JvmField val THREE: jsenum.`Main$StringJsEnum` = jsenum.`Main$StringJsEnum`("THREE")
  }
 }
 
@@ -138,9 +138,9 @@ enum class `Main$NonNullableStringJsEnum` {
  }
 
  companion object {
-  @JvmField val ONE: jsenum.`Main$NonNullableStringJsEnum` = jsenum.`Main$NonNullableStringJsEnum`("ONE")
+  @kotlin.jvm.JvmField val ONE: jsenum.`Main$NonNullableStringJsEnum` = jsenum.`Main$NonNullableStringJsEnum`("ONE")
 
-  @JvmField val THREE: jsenum.`Main$NonNullableStringJsEnum` = jsenum.`Main$NonNullableStringJsEnum`("THREE")
+  @kotlin.jvm.JvmField val THREE: jsenum.`Main$NonNullableStringJsEnum` = jsenum.`Main$NonNullableStringJsEnum`("THREE")
  }
 }
 
@@ -148,14 +148,14 @@ enum class `Main$NativeStringEnum` {
  internal constructor(): super()
 
  companion object {
-  @JvmField val ONE: jsenum.`Main$NativeStringEnum` = jsenum.`Main$NativeStringEnum`()
+  @kotlin.jvm.JvmField val ONE: jsenum.`Main$NativeStringEnum` = jsenum.`Main$NativeStringEnum`()
 
-  @JvmField val THREE: jsenum.`Main$NativeStringEnum` = jsenum.`Main$NativeStringEnum`()
+  @kotlin.jvm.JvmField val THREE: jsenum.`Main$NativeStringEnum` = jsenum.`Main$NativeStringEnum`()
  }
 }
 
 open class `Main$TemplatedField`<T> {
- @JvmField internal var value: T? = null
+ @kotlin.jvm.JvmField internal var value: T? = null
 
  internal constructor(value: T?): super() {
   this.value = value

@@ -4,12 +4,12 @@ open class InferReturn<T> {
  constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T_1> inferGeneric(foo: T_1?): inferreturn.InferReturn<T_1>? {
    return inferreturn.InferReturn<T_1>()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun tightenType(foo: inferreturn.InferReturn<kotlin.String?>?): inferreturn.InferReturn<inferreturn.InferReturn<kotlin.String?>?>? {
    if (foo !== null) {
     return inferreturn.InferReturn.inferGeneric(foo)
@@ -17,7 +17,7 @@ open class InferReturn<T> {
    return null
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun main() {
    val list: java.util.ArrayList<kotlin.Any?>? = inferreturn.InferReturn.newArrayList("foo")
    inferreturn.InferReturn.acceptsArrayListOfObject(list)
@@ -25,20 +25,20 @@ open class InferReturn<T> {
    inferreturn.InferReturn.acceptsArrayOfObject(array)
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <V> newArrayList(foo: V?): java.util.ArrayList<V>? {
    return java.util.ArrayList<V>()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <V> newArray(foo: V?): Array<V>? {
    return arrayOfNulls<kotlin.Any?>(0) as Array<V>?
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun acceptsArrayListOfObject(foo: java.util.ArrayList<kotlin.Any?>?) {}
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun acceptsArrayOfObject(foo: Array<kotlin.Any?>?) {}
  }
 }

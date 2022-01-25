@@ -3,9 +3,9 @@ package valueofnullable
 open class ValueOfNullable {
  constructor(): super()
 
- @JvmField internal var nullableString: kotlin.String? = "b"
+ @kotlin.jvm.JvmField internal var nullableString: kotlin.String? = "b"
 
- @JvmField internal var someChar: Char = 'a'
+ @kotlin.jvm.JvmField internal var someChar: Char = 'a'
 
- @JvmField internal var result: kotlin.String? = "" + this.someChar + this.nullableString
+ @kotlin.jvm.JvmField internal var result: kotlin.String? = "" + this.someChar + this.nullableString
 }

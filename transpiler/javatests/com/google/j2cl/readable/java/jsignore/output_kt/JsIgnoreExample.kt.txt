@@ -4,16 +4,16 @@ open class JsIgnoreExample {
  constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun exportedFunction() {}
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun notExportedFunction() {}
 
-  @JvmField var exportedField: Int = 10
+  @kotlin.jvm.JvmField var exportedField: Int = 10
 
-  @JvmField var notExportedField: Int = 20
+  @kotlin.jvm.JvmField var notExportedField: Int = 20
 
-  @JvmField val CONSTNAME: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+  @kotlin.jvm.JvmField val CONSTNAME: kotlin.Any? = (java.lang.Object() as kotlin.Any)
  }
 }

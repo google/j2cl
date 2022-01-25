@@ -4,9 +4,9 @@ open class StaticInitializers {
  constructor(): super()
 
  companion object {
-  @JvmField var a: Int = 5
+  @kotlin.jvm.JvmField var a: Int = 5
 
-  @JvmField var b: Int = staticinitializers.StaticInitializers.a * 2
+  @kotlin.jvm.JvmField var b: Int = staticinitializers.StaticInitializers.a * 2
 
   init {
    staticinitializers.StaticInitializers.a = 10

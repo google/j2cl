@@ -22,7 +22,7 @@ open class Casts {
   val l: kotlin.Long? = o as kotlin.Long?
   val s: kotlin.Short? = o as kotlin.Short?
   val n: kotlin.Number? = o as kotlin.Number?
-  val c: java.lang.Character? = o as java.lang.Character?
+  val c: kotlin.Char? = o as kotlin.Char?
   val bool: kotlin.Boolean? = o as kotlin.Boolean?
  }
 
@@ -91,13 +91,13 @@ open class Casts {
 }
 
 open class `Casts$Foo` {
- @JvmField val `this`: cast.Casts?
+ @kotlin.jvm.JvmField val `this`: cast.Casts?
 
  internal constructor(`$outer_this`: cast.Casts?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField var field: kotlin.Any? = (java.lang.Object() as kotlin.Any)
+ @kotlin.jvm.JvmField var field: kotlin.Any? = (java.lang.Object() as kotlin.Any)
 
  open fun method(): kotlin.Any? {
   return (java.lang.Object() as kotlin.Any)

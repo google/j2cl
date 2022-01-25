@@ -3,7 +3,7 @@ package instanceinnerclass
 open class InstanceInnerClass {
  constructor(): super()
 
- @JvmField var instanceField: Int = 0
+ @kotlin.jvm.JvmField var instanceField: Int = 0
 
  open fun funOuter() {}
 
@@ -13,15 +13,15 @@ open class InstanceInnerClass {
 }
 
 open class `InstanceInnerClass$InnerClass` {
- @JvmField val `this`: instanceinnerclass.InstanceInnerClass?
+ @kotlin.jvm.JvmField val `this`: instanceinnerclass.InstanceInnerClass?
 
  constructor(`$outer_this`: instanceinnerclass.InstanceInnerClass?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField var field: Int = this.`this`!!.instanceField + this.`this`!!.instanceField
+ @kotlin.jvm.JvmField var field: Int = this.`this`!!.instanceField + this.`this`!!.instanceField
 
- @JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this.`this`
+ @kotlin.jvm.JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this.`this`
 
  open fun funInner() {
   this.`this`!!.funOuter()

@@ -88,8 +88,8 @@ open class NumberCalls {
   (ll!! as java.lang.Long).intValue()
   (ll!! as java.lang.Long).longValue()
   (ll!! as java.lang.Long).shortValue()
-  val c: java.lang.Character? = java.lang.Character('a')
-  c!!.charValue()
+  val c: kotlin.Char? = (java.lang.Character('a') as kotlin.Char)
+  (c!! as java.lang.Character).charValue()
   val bool: kotlin.Boolean? = (java.lang.Boolean(true) as kotlin.Boolean)
   (bool!! as java.lang.Boolean).booleanValue()
  }

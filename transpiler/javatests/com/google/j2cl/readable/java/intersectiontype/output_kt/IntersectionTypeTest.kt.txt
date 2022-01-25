@@ -33,13 +33,13 @@ open class IntersectionTypeTest<U> {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> getAndSet(`object`: T?) where T: intersectiontype.Getable<*>?, T: intersectiontype.Setable? {
    `object`!!.set(1)
    `object`!!.get()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> cast(o: kotlin.Any?): intersectiontype.Getable<T>? {
    if (o === null) {
     return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
@@ -47,59 +47,59 @@ open class IntersectionTypeTest<U> {
    return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> cast1(s: kotlin.Any?): intersectiontype.Getable<java.lang.Comparable<kotlin.String?>?>? {
    return s as intersectiontype.Getable<java.lang.Comparable<kotlin.String?>?>? /* & intersectiontype.Setable? */
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> cast2(s: kotlin.Any?): intersectiontype.Getable<java.lang.Comparable<T>?>? {
    return s as intersectiontype.Getable<java.lang.Comparable<T>?>? /* & intersectiontype.Setable? */
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun method(): intersectiontype.Cmp? {
    return intersectiontype.Cmp (fun(): Int {
     return 1
    }) as intersectiontype.Cmp? /* & intersectiontype.Serial? */
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun method2(): intersectiontype.Cmp2<*>? {
    return intersectiontype.Cmp2<*> (fun(a: Int): Int {
     return 1
    }) as intersectiontype.Cmp2<*>? /* & intersectiontype.Serial? */
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun testClosureAssignment(o: kotlin.Any?) {
    val e: intersectiontype.`IntersectionTypeTest$A`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
    val g: intersectiontype.`IntersectionTypeTest$EmptyA`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
    val s: intersectiontype.`IntersectionTypeTest$EmptyB`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun <T> get(t: T?): T? {
    return t
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun <T> m(): T? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
    return intersectiontype.IntersectionTypeTest.get((java.lang.Object() as kotlin.Any)) as T?
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun <T> n(): intersectiontype.Getable<T>? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
    return null
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun <T> set(t: T?) where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {}
  }
 }
 
 open class `IntersectionTypeTest$MapEntry`<U> {
- @JvmField val `this`: intersectiontype.IntersectionTypeTest<U>?
+ @kotlin.jvm.JvmField val `this`: intersectiontype.IntersectionTypeTest<U>?
 
  internal constructor(`$outer_this`: intersectiontype.IntersectionTypeTest<U>?): super() {
   this.`this` = `$outer_this`

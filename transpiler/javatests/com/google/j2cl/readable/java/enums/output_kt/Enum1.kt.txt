@@ -4,14 +4,14 @@ enum class Enum1: kotlin.Enum<enums.Enum1?> {
  internal constructor(): super()
 
  companion object {
-  @JvmField val V1: enums.Enum1 = enums.Enum1()
+  @kotlin.jvm.JvmField val V1: enums.Enum1 = enums.Enum1()
 
-  @JvmField val V2: enums.Enum1 = enums.Enum1()
+  @kotlin.jvm.JvmField val V2: enums.Enum1 = enums.Enum1()
  }
 }
 
 enum class Enum2: kotlin.Enum<enums.Enum2?> {
- @JvmField internal var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
+ @kotlin.jvm.JvmField internal var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
 
  internal constructor(foo: Int): super() {
   this.foo = foo
@@ -22,20 +22,20 @@ enum class Enum2: kotlin.Enum<enums.Enum2?> {
  internal constructor(vararg somePars: kotlin.Any?): this(somePars!!.size)
 
  companion object {
-  @JvmField val VALUE1: enums.Enum2 = enums.Enum2(2)
+  @kotlin.jvm.JvmField val VALUE1: enums.Enum2 = enums.Enum2(2)
 
-  @JvmField val VALUE2: enums.Enum2 = enums.Enum2(enums.Enum1.V1)
+  @kotlin.jvm.JvmField val VALUE2: enums.Enum2 = enums.Enum2(enums.Enum1.V1)
 
-  @JvmField val VALUE3: enums.Enum2 = enums.Enum2(*arrayOf<kotlin.Any?>())
+  @kotlin.jvm.JvmField val VALUE3: enums.Enum2 = enums.Enum2(*arrayOf<kotlin.Any?>())
 
-  @JvmField val VALUE4: enums.Enum2 = enums.`Enum2$1`(5)
+  @kotlin.jvm.JvmField val VALUE4: enums.Enum2 = enums.`Enum2$1`(5)
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun f(o: kotlin.Any?): enums.Enum2? {
    return null
   }
 
-  @JvmField internal var C: enums.Enum2? = enums.Enum2.f((java.lang.Object() as kotlin.Any))
+  @kotlin.jvm.JvmField internal var C: enums.Enum2? = enums.Enum2.f((java.lang.Object() as kotlin.Any))
  }
 }
 
@@ -43,7 +43,7 @@ enum class Enum3: kotlin.Enum<enums.Enum3?> {
  internal constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?): super()
 
  companion object {
-  @JvmField val VALUE1: enums.Enum3 = enums.Enum3(java.util.function.Function<kotlin.Int?, kotlin.Int?> (fun(v: kotlin.Int?): kotlin.Int? {
+  @kotlin.jvm.JvmField val VALUE1: enums.Enum3 = enums.Enum3(java.util.function.Function<kotlin.Int?, kotlin.Int?> (fun(v: kotlin.Int?): kotlin.Int? {
    return 1 + v!!
   }))
  }

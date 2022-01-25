@@ -7,7 +7,7 @@ open class MultipleNestings {
 }
 
 open class `MultipleNestings$Parent` {
- @JvmField val `this`: innerclassinheritance.MultipleNestings?
+ @kotlin.jvm.JvmField val `this`: innerclassinheritance.MultipleNestings?
 
  constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super() {
   this.`this` = `$outer_this`
@@ -17,7 +17,7 @@ open class `MultipleNestings$Parent` {
 }
 
 open class `MultipleNestings$InnerClass1$InnerClass2`: innerclassinheritance.`MultipleNestings$Parent` {
- @JvmField val `this`: innerclassinheritance.`MultipleNestings$InnerClass1`?
+ @kotlin.jvm.JvmField val `this`: innerclassinheritance.`MultipleNestings$InnerClass1`?
 
  constructor(`$outer_this`: innerclassinheritance.`MultipleNestings$InnerClass1`?): super(this.`this`!!.`this`) {
   this.`this` = `$outer_this`
@@ -38,7 +38,7 @@ open class `MultipleNestings$InnerClass1$InnerClass2`: innerclassinheritance.`Mu
 }
 
 open class `MultipleNestings$InnerClass1`: innerclassinheritance.`MultipleNestings$Parent` {
- @JvmField val `this`: innerclassinheritance.MultipleNestings?
+ @kotlin.jvm.JvmField val `this`: innerclassinheritance.MultipleNestings?
 
  constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super(`$outer_this`) {
   this.`this` = `$outer_this`

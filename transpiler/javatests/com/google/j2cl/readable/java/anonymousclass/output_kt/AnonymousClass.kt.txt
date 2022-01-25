@@ -16,20 +16,20 @@ open class AnonymousClass {
 
 interface SomeInterface {
  companion object {
-  @JvmField val implicitlyStatic: anonymousclass.SomeClass? = anonymousclass.`SomeInterface$1`(1)
+  @kotlin.jvm.JvmField val implicitlyStatic: anonymousclass.SomeClass? = anonymousclass.`SomeInterface$1`(1)
  }
 }
 
 open class `AnonymousClass$1`: anonymousclass.SomeClass {
- @JvmField val `this`: anonymousclass.AnonymousClass?
+ @kotlin.jvm.JvmField val `this`: anonymousclass.AnonymousClass?
 
  internal constructor(`$outer_this`: anonymousclass.AnonymousClass?, `$_0`: Int): super(`$_0`) {
   this.`this` = `$outer_this`
  }
 
- @JvmField internal var `object`: kotlin.Any? = this
+ @kotlin.jvm.JvmField internal var `object`: kotlin.Any? = this
 
- @JvmField internal var outer: kotlin.Any? = this.`this`
+ @kotlin.jvm.JvmField internal var outer: kotlin.Any? = this.`this`
 
  open override fun foo(): kotlin.String? {
   return "a"

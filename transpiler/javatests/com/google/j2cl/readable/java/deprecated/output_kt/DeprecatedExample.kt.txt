@@ -1,16 +1,16 @@
 package deprecated
 
 open class DeprecatedExample {
- @JvmField var deprecatedInstanceField: kotlin.String? = "deprecated field"
+ @kotlin.jvm.JvmField var deprecatedInstanceField: kotlin.String? = "deprecated field"
 
  open fun deprecatedInstanceMethod(someArg: kotlin.String?) {}
 
  constructor(): super()
 
  companion object {
-  @JvmField val DEPRECATED_STATIC_FIELD: kotlin.String? = "deprecated field"
+  @kotlin.jvm.JvmField val DEPRECATED_STATIC_FIELD: kotlin.String? = "deprecated field"
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun deprecatedStaticMethod(someObject: kotlin.Any?) {}
  }
 }
@@ -27,7 +27,7 @@ enum class `DeprecatedExample$DeprecatedEnum`: kotlin.Enum<deprecated.`Deprecate
  internal constructor(): super()
 
  companion object {
-  @JvmField val A_VALUE: deprecated.`DeprecatedExample$DeprecatedEnum` = deprecated.`DeprecatedExample$DeprecatedEnum`()
+  @kotlin.jvm.JvmField val A_VALUE: deprecated.`DeprecatedExample$DeprecatedEnum` = deprecated.`DeprecatedExample$DeprecatedEnum`()
  }
 }
 
@@ -35,6 +35,6 @@ enum class `DeprecatedExample$DeprecatedJsEnum` {
  internal constructor(): super()
 
  companion object {
-  @JvmField val A_VALUE: deprecated.`DeprecatedExample$DeprecatedJsEnum` = deprecated.`DeprecatedExample$DeprecatedJsEnum`()
+  @kotlin.jvm.JvmField val A_VALUE: deprecated.`DeprecatedExample$DeprecatedJsEnum` = deprecated.`DeprecatedExample$DeprecatedJsEnum`()
  }
 }

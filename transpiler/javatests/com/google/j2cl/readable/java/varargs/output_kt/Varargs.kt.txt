@@ -23,10 +23,10 @@ open class Varargs {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> `fun`(vararg elements: T?) {}
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <E> bar(a: E?, b: E?) {
    varargs.Varargs.`fun`(*arrayOf<E?>(a, b))
   }

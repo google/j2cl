@@ -6,22 +6,22 @@ open class Foo {
  companion object {
   internal var f: Int = 0
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun getA(): Int {
    return jsproperties.Foo.f + 1
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun setA(x: Int) {
    jsproperties.Foo.f = x + 2
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun getB(): Int {
    return jsproperties.Foo.f + 3
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun setB(x: Int) {
    jsproperties.Foo.f = x + 4
   }
@@ -56,7 +56,7 @@ open class NativeFoo {
  external open fun getA(): kotlin.Any?
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   external fun getB(): Double
  }
 }

@@ -46,7 +46,7 @@ private val String.mappedKotlinQualifiedName: String?
       "java.lang.Boolean" -> "kotlin.Boolean"
       "java.lang.Byte" -> "kotlin.Byte"
       "java.lang.Cloneable" -> "kotlin.Cloneable"
-      "java.lang.Char" -> "kotlin.Char"
+      "java.lang.Character" -> "kotlin.Char"
       "java.lang.CharSequence" -> "kotlin.CharSequence"
       "java.lang.Double" -> "kotlin.Double"
       "java.lang.Enum" -> "kotlin.Enum"

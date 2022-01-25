@@ -44,13 +44,13 @@ open class GenericMethod<T_2> {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun acceptsContent(content: genericmethod.`GenericMethod$Content`?) {}
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun acceptsString(string: kotlin.String?) {}
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun testErasureCast_wildcard() {
    val list: java.util.List<genericmethod.`GenericMethod$Container`<*>?>? = null
    val content: genericmethod.`GenericMethod$Content`? = list!!.get(0)!!.get()
@@ -66,7 +66,7 @@ open class GenericMethod<T_2> {
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <CT: genericmethod.`GenericMethod$Container`<C>?, C: genericmethod.`GenericMethod$Content`?> testErasureCast_typeVariable() {
    val list: java.util.List<genericmethod.`GenericMethod$Container`<C>?>? = null
    val content: genericmethod.`GenericMethod$Content`? = list!!.get(0)!!.get()
@@ -85,7 +85,7 @@ open class GenericMethod<T_2> {
 }
 
 open class `GenericMethod$1`<T_1: java.lang.Error?, T_2>: genericmethod.GenericMethod<T_1> {
- @JvmField val `this`: genericmethod.GenericMethod<T_2>?
+ @kotlin.jvm.JvmField val `this`: genericmethod.GenericMethod<T_2>?
 
  internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
   this.`this` = `$outer_this`
@@ -121,7 +121,7 @@ open class `GenericMethod$Content` {
 }
 
 open class `GenericMethod$1LocalClass`<T, T_1: java.lang.Error?, T_2>: genericmethod.GenericMethod<T> {
- @JvmField val `this`: genericmethod.GenericMethod<T_2>?
+ @kotlin.jvm.JvmField val `this`: genericmethod.GenericMethod<T_2>?
 
  internal constructor(`$outer_this`: genericmethod.GenericMethod<T_2>?): super() {
   this.`this` = `$outer_this`

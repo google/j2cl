@@ -5,7 +5,7 @@ open class JsConstructorClass {
 }
 
 open class `JsConstructorClass$A` {
- @JvmField var fA: Int = 1
+ @kotlin.jvm.JvmField var fA: Int = 1
 
  constructor(x: Int): super() {
   this.fA = x
@@ -15,7 +15,7 @@ open class `JsConstructorClass$A` {
 }
 
 open class `JsConstructorClass$B`: jsconstructor.`JsConstructorClass$A` {
- @JvmField var fB: Int = 2
+ @kotlin.jvm.JvmField var fB: Int = 2
 
  constructor(x: Int): super(x + 1) {
   this.fB = 3
@@ -31,7 +31,7 @@ open class `JsConstructorClass$B`: jsconstructor.`JsConstructorClass$A` {
 }
 
 open class `JsConstructorClass$C`: jsconstructor.`JsConstructorClass$B` {
- @JvmField var fC: Int = 1
+ @kotlin.jvm.JvmField var fC: Int = 1
 
  constructor(x: Int): super(x * 2) {
   this.fC = 6
@@ -43,7 +43,7 @@ open class `JsConstructorClass$C`: jsconstructor.`JsConstructorClass$B` {
 }
 
 open class `JsConstructorClass$D`: jsconstructor.`JsConstructorClass$B` {
- @JvmField var fD: Int = 8
+ @kotlin.jvm.JvmField var fD: Int = 8
 
  constructor(): super(9) {
   this.fD = 10
@@ -55,7 +55,7 @@ open class `JsConstructorClass$D`: jsconstructor.`JsConstructorClass$B` {
 }
 
 open class `JsConstructorClass$E`: jsconstructor.`JsConstructorClass$C` {
- @JvmField var fE: Int = 11
+ @kotlin.jvm.JvmField var fE: Int = 11
 
  constructor(): super(10) {
   this.fE = 12
@@ -63,7 +63,7 @@ open class `JsConstructorClass$E`: jsconstructor.`JsConstructorClass$C` {
 }
 
 open class `JsConstructorClass$F`: jsconstructor.`JsConstructorClass$C` {
- @JvmField var fF: Int = 13
+ @kotlin.jvm.JvmField var fF: Int = 13
 
  constructor(x: Int): super(x + 2) {
   this.fF = x + 3
@@ -88,7 +88,7 @@ open class `JsConstructorClass$SubVarargs`: jsconstructor.`JsConstructorClass$Va
  constructor(j: Int): this((java.lang.Object() as kotlin.Any), intArrayOf(j))
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun subNativeInvocation() {
    val unusedS1: jsconstructor.`JsConstructorClass$SubVarargs`? = jsconstructor.`JsConstructorClass$SubVarargs`(2)
    val unusedS2: jsconstructor.`JsConstructorClass$SubVarargs`? = jsconstructor.`JsConstructorClass$SubVarargs`((java.lang.Object() as kotlin.Any), *intArrayOf(1, 2, 3))
@@ -97,7 +97,7 @@ open class `JsConstructorClass$SubVarargs`: jsconstructor.`JsConstructorClass$Va
 }
 
 open class `JsConstructorClass$InstanceVarargs`: jsconstructor.`JsConstructorClass$A` {
- @JvmField val `this`: jsconstructor.JsConstructorClass?
+ @kotlin.jvm.JvmField val `this`: jsconstructor.JsConstructorClass?
 
  constructor(`$outer_this`: jsconstructor.JsConstructorClass?, vararg args: Int): super(args!![1]) {
   this.`this` = `$outer_this`

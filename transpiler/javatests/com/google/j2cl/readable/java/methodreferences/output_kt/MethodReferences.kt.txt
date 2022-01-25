@@ -88,12 +88,12 @@ open class MethodReferences<T> {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun m(): kotlin.Any? {
    return (java.lang.Object() as kotlin.Any)
   }
 
-  @JvmField internal var staticStringProducer: methodreferences.`MethodReferences$Producer`<kotlin.String?>? = run {
+  @kotlin.jvm.JvmField internal var staticStringProducer: methodreferences.`MethodReferences$Producer`<kotlin.String?>? = run {
    val `$$q`: kotlin.Any? = methodreferences.MethodReferences.m()
    methodreferences.`MethodReferences$Producer`<kotlin.String?> (fun(): kotlin.String? {
     return (`$$q`!! as java.lang.Object).toString()
@@ -115,7 +115,7 @@ fun interface `MethodReferences$ArrayProducer`<T> {
 }
 
 open class `MethodReferences$ObjectCapturingOuter`<T> {
- @JvmField val `this`: methodreferences.MethodReferences<T>?
+ @kotlin.jvm.JvmField val `this`: methodreferences.MethodReferences<T>?
 
  internal constructor(`$outer_this`: methodreferences.MethodReferences<T>?): super() {
   this.`this` = `$outer_this`

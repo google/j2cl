@@ -25,11 +25,11 @@ fun interface `Main$Interface`<T> {
  internal fun privateMethod(t: T?) {}
 
  companion object {
-  @JvmField val a: Int = 1
+  @kotlin.jvm.JvmField val a: Int = 1
 
-  @JvmField val b: Int = 2
+  @kotlin.jvm.JvmField val b: Int = 2
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun staticInterfaceMethod() {}
  }
 }
@@ -41,7 +41,7 @@ fun interface `Main$SubInterface`: interfaces.`Main$Interface`<kotlin.String?> {
 }
 
 open class `Main$Implementor`: interfaces.`Main$SubInterface`, interfaces.`Main$Interface`<kotlin.String?> {
- @JvmField val `this`: interfaces.Main?
+ @kotlin.jvm.JvmField val `this`: interfaces.Main?
 
  internal constructor(`$outer_this`: interfaces.Main?): super() {
   this.`this` = `$outer_this`
@@ -51,7 +51,7 @@ open class `Main$Implementor`: interfaces.`Main$SubInterface`, interfaces.`Main$
 }
 
 abstract class `Main$AbstractImplementor`: interfaces.`Main$SubInterface` {
- @JvmField val `this`: interfaces.Main?
+ @kotlin.jvm.JvmField val `this`: interfaces.Main?
 
  internal constructor(`$outer_this`: interfaces.Main?): super() {
   this.`this` = `$outer_this`

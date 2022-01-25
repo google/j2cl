@@ -10,12 +10,12 @@ open class HashFunctions {
  constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> hashFunction(): overwrittentypevariables.HashFunction<T>? {
    return overwrittentypevariables.`HashFunctions$1`<T>()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T: kotlin.Enum<T>?> enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
    return overwrittentypevariables.`HashFunctions$2`<T>()
   }

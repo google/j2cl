@@ -3,7 +3,7 @@ package lambdas
 open class Lambdas {
  constructor(): super()
 
- @JvmField var field: Int = 100
+ @kotlin.jvm.JvmField var field: Int = 100
 
  open fun call(intf: lambdas.`Lambdas$FunctionalInterface`?, n: Int): Int {
   return this.field + intf!!.m(n)
@@ -108,31 +108,31 @@ open class Lambdas {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun testLambdaInStaticContext() {
    val f: lambdas.`Lambdas$FunctionalInterface`? = lambdas.`Lambdas$FunctionalInterface` (fun(i: Int): Int {
     return i
    })
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> testStaticMethodTypeVariableThroughLambda() {
    val wrapped: lambdas.`Lambdas$Functional`<T>? = lambdas.`Lambdas$Functional`<T> (fun(f: lambdas.`Lambdas$Functional`<T>?): lambdas.`Lambdas$Functional`<T>? {
     return lambdas.`Lambdas$2`<T>()
    })
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T: kotlin.Enum<T>?> callTypeVariableWithBounds(intf: lambdas.`Lambdas$GenericFunctionalInterface`<kotlin.Enum<T>?>?, e: kotlin.Enum<T>?): kotlin.Enum<T>? {
    return intf!!.m(e)
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun m(): kotlin.Any? {
    return null
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun testLambdaCallingStaticMethod() {
    val f: lambdas.`Lambdas$Function`<kotlin.Any?, *>? = lambdas.`Lambdas$Function`<kotlin.Any?, *> (fun(l: kotlin.Any?): kotlin.Any? {
     return lambdas.Lambdas.m()
@@ -141,7 +141,7 @@ open class Lambdas {
 
   internal var identityFunction: lambdas.`Lambdas$IdentityFunction`? = null
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <E> identity(): lambdas.`Lambdas$GenericJsFunction`<E, E>? {
    if (lambdas.Lambdas.identityFunction === null) {
     lambdas.Lambdas.identityFunction = lambdas.`Lambdas$IdentityFunction`()
@@ -149,7 +149,7 @@ open class Lambdas {
    return lambdas.Lambdas.identityFunction as lambdas.`Lambdas$GenericJsFunction`<E, E>?
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun testJsInteropLambdas() {
    val thenable: lambdas.`Lambdas$Thenable`<kotlin.String?>? = lambdas.`Lambdas$Thenable`<kotlin.String?> (fun(f1: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, kotlin.String?>?, f2: lambdas.`Lambdas$GenericJsFunction`<java.lang.Void?, kotlin.Throwable?>?) {
     f1!!.apply(null)
@@ -166,7 +166,7 @@ open class Lambdas {
    equals!!.get()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <U, V> testIntersectionTyping() {
    var o: kotlin.Any? = lambdas.`Lambdas$GenericFunctionalInterface`<kotlin.String?> (fun(x: kotlin.String?): kotlin.String? {
     return x
@@ -182,7 +182,7 @@ open class Lambdas {
 }
 
 open class `Lambdas$1`<T>: lambdas.`Lambdas$Functional`<T> {
- @JvmField val `this`: lambdas.Lambdas?
+ @kotlin.jvm.JvmField val `this`: lambdas.Lambdas?
 
  internal constructor(`$outer_this`: lambdas.Lambdas?): super() {
   this.`this` = `$outer_this`
@@ -202,7 +202,7 @@ open class `Lambdas$2`<T>: lambdas.`Lambdas$Functional`<T> {
 }
 
 open class `Lambdas$3` {
- @JvmField val `this`: lambdas.Lambdas?
+ @kotlin.jvm.JvmField val `this`: lambdas.Lambdas?
 
  internal constructor(`$outer_this`: lambdas.Lambdas?): super() {
   this.`this` = `$outer_this`
@@ -235,7 +235,7 @@ fun interface `Lambdas$Function`<T, R> {
  fun apply(t: T?): R?
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T_1> identity(): lambdas.`Lambdas$Function`<T_1, T_1>? {
    return lambdas.`Lambdas$Function`<T_1, T_1> (fun(t: T_1?): T_1? {
     return t
@@ -251,7 +251,7 @@ fun interface `Lambdas$FunctionalInterfaceWithMethodReturningVoid` {
 open class `Lambdas$Parent` {
  internal constructor(): super()
 
- @JvmField var fieldInParent: Int = 0
+ @kotlin.jvm.JvmField var fieldInParent: Int = 0
 
  open fun funInParent() {}
 }

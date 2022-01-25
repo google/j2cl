@@ -3,7 +3,7 @@ package cast
 open class CastGenerics<T, E: kotlin.Number?> {
  constructor(): super()
 
- @JvmField internal var field: T? = null
+ @kotlin.jvm.JvmField internal var field: T? = null
 
  internal open fun method(): T? {
   return null
@@ -37,7 +37,7 @@ open class CastGenerics<T, E: kotlin.Number?> {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T_1, U: T_1> testErasureCast() where T_1: cast.`CastGenerics$A`?, T_1: cast.`CastGenerics$B`? {
    var str: kotlin.String? = cast.CastGenerics<kotlin.String?, kotlin.Number?>().field
    str = cast.CastGenerics<kotlin.String?, kotlin.Number?>().method()
@@ -67,14 +67,14 @@ open class CastGenerics<T, E: kotlin.Number?> {
    containerImplementor!!.get()!!.mB()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun testCastToParamterizedType() {
    val o: kotlin.Any? = (java.lang.Integer(1) as kotlin.Int)
    var cc: cast.CastGenerics<java.lang.Error?, kotlin.Number?>? = o as cast.CastGenerics<java.lang.Error?, kotlin.Number?>?
    cc = o as cast.CastGenerics<*, *>?
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <T> doSomething(): cast.`CastGenerics$Foo`<T>? {
    return cast.`CastGenerics$1`<T>()
   }
@@ -122,7 +122,7 @@ open class `CastGenerics$Foo`<V> {
 }
 
 open class `CastGenerics$1Nested`<SS, TT: kotlin.Enum<*>?, T, E: kotlin.Number?> {
- @JvmField val `this`: cast.CastGenerics<T, E>?
+ @kotlin.jvm.JvmField val `this`: cast.CastGenerics<T, E>?
 
  internal constructor(`$outer_this`: cast.CastGenerics<T, E>?): super() {
   this.`this` = `$outer_this`

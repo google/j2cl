@@ -74,7 +74,7 @@ open class ArithmeticExpressions {
   k = y.code.toLong() == z!!
  }
 
- @JvmField var bar: Long = run {
+ @kotlin.jvm.JvmField var bar: Long = run {
   val `$value`: Long = arithmeticexpressions.ArithmeticExpressions.foo
   arithmeticexpressions.ArithmeticExpressions.foo = arithmeticexpressions.ArithmeticExpressions.foo + 1L
   `$value`
@@ -199,7 +199,7 @@ open class ArithmeticExpressions {
   }
   var b: kotlin.Byte? = 0
   b = (b!! + 1).toByte()
-  var ch: java.lang.Character? = 'c'
+  var ch: kotlin.Char? = 'c'
   ch = (ch!! + 1).toChar()
   (run {
    f = f!! + 1
@@ -216,7 +216,7 @@ open class ArithmeticExpressions {
   val n: Int = 1 + ref!!.field!!
  }
 
- @JvmField internal var intField: Long = 0L
+ @kotlin.jvm.JvmField internal var intField: Long = 0L
 
  open fun testExtendedOperands() {
   var boxedInteger: kotlin.Int? = 3
@@ -252,25 +252,25 @@ open class ArithmeticExpressions {
 
   internal val DOUBLE_CONSTANT_WITH_ARITHMETIC: Double = 2.200000047683716
 
-  @JvmField var one: Long = 1L
+  @kotlin.jvm.JvmField var one: Long = 1L
 
-  @JvmField var foo: Long = run {
+  @kotlin.jvm.JvmField var foo: Long = run {
    val `$value`: Long = arithmeticexpressions.ArithmeticExpressions.one
    arithmeticexpressions.ArithmeticExpressions.one = arithmeticexpressions.ArithmeticExpressions.one + 1L
    `$value`
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun getLongArray(): LongArray? {
    return null
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun getInteger(): kotlin.Int? {
    return null
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun testSideEffect() {
    run {
     val `$qualifier`: arithmeticexpressions.ArithmeticExpressions? = arithmeticexpressions.ArithmeticExpressions.getWithSideEffect()
@@ -283,14 +283,14 @@ open class ArithmeticExpressions {
    }
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun getWithSideEffect(): arithmeticexpressions.ArithmeticExpressions? {
    return null
   }
 
   internal var counter: Long = 0L
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   internal fun incrementCounter(): Long {
    return run {
     val `$value`: Long = arithmeticexpressions.ArithmeticExpressions.counter + 1L
@@ -302,11 +302,11 @@ open class ArithmeticExpressions {
 }
 
 open class `ArithmeticExpressions$1Ref`<T> {
- @JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
+ @kotlin.jvm.JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
 
  internal constructor(`$outer_this`: arithmeticexpressions.ArithmeticExpressions?): super() {
   this.`this` = `$outer_this`
  }
 
- @JvmField internal var field: T? = null
+ @kotlin.jvm.JvmField internal var field: T? = null
 }

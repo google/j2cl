@@ -8,7 +8,7 @@ open class Date {
  }
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun now(x: Double): Double {
    return importglobaljstypes.`Date$NativeDate`.now()
   }
@@ -19,7 +19,7 @@ open class `Date$NativeDate` {
  constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   external fun now(): Double
  }
 }

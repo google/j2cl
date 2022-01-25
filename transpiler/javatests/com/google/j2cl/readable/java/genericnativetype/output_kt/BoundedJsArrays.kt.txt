@@ -4,12 +4,12 @@ open class BoundedJsArrays {
  internal constructor(): super()
 
  companion object {
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <V> create(): genericnativetype.BoundedJsArray<V>? {
    return genericnativetype.BoundedJsArray.create()
   }
 
-  @JvmStatic
+  @kotlin.jvm.JvmStatic
   fun <V> createWithSize(size: Int): genericnativetype.BoundedJsArray<V>? {
    return genericnativetype.BoundedJsArray.create(size)
   }
