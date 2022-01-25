@@ -40,15 +40,6 @@ def _compile(
     jvm_deps, js_deps = _split_deps(deps)
     jvm_exports, js_exports = _split_deps(exports)
 
-    default_j2cl_javac_opts = [
-        # Avoid log site injection which introduces calls to unsupported APIs.
-        "-XDinjectLogSites=false",
-        # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
-        "-XDstringConcat=inline",
-    ]
-
-    javac_opts = default_j2cl_javac_opts + javac_opts
-
     has_kotlin_srcs = any([src for src in jvm_srcs if src.extension == "kt"])
     if not has_kotlin_srcs:
         # Avoid Kotlin toolchain for regular targets.
@@ -143,6 +134,7 @@ def _java_compile(
         mnemonic = "J2cl"):
     output_jar = output_jar or ctx.actions.declare_file("lib%s.jar" % name)
     stripped_java_srcs = [_strip_gwt_incompatible(ctx, name, srcs, mnemonic)] if srcs else []
+    javac_opts = DEFAULT_J2CL_JAVAC_OPTS + javac_opts
 
     if generate_kythe_action and ctx.var.get("GROK_ELLIPSIS_BUILD", None):
         # An unused JAR that is only generated so that we run javac with the non-stripped sources
@@ -270,6 +262,13 @@ def _j2cl_transpile(
         execution_requirements = {"supports-workers": "1"},
         mnemonic = "J2cl",
     )
+
+DEFAULT_J2CL_JAVAC_OPTS = [
+    # Avoid log site injection which introduces calls to unsupported APIs.
+    "-XDinjectLogSites=false",
+    # Avoid optimized JVM String concat which introduces calls to unsupported APIs.
+    "-XDstringConcat=inline",
+]
 
 J2CL_JAVA_TOOLCHAIN_ATTRS = {
     "_java_toolchain": attr.label(
