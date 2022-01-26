@@ -158,6 +158,12 @@ public class Arrays {
     String s = container.data[0];
   }
 
+  public void testCovariance() {
+    Object[] objectArray = null;
+    String[] stringArray = null;
+    objectArray = stringArray;
+  }
+
   private static class ArrayContainer<T> {
     T[] data;
   }

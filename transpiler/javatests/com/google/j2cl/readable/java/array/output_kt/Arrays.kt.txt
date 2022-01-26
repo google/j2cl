@@ -8,9 +8,9 @@ open class Arrays {
   objects = arrayOfNulls<kotlin.Any?>(0)
   objects = arrayOf<kotlin.Any?>(null, null)
   var objects2d: Array<Array<kotlin.Any?>?>? = arrayOfNulls<Array<kotlin.Any?>?>(5)
-  objects2d = arrayOf<Array<kotlin.Any?>?>(arrayOf<kotlin.Any?>(null, null), null)
+  objects2d = arrayOf<Array<kotlin.Any?>?>(arrayOf<kotlin.Any?>(null, null), null as Array<kotlin.Any?>)
   objects2d = arrayOfNulls<Array<kotlin.Any?>?>(20)
-  val arrayLiteral2d: Array<Array<kotlin.Any?>?>? = arrayOf<Array<kotlin.Any?>?>(arrayOf<kotlin.Any?>(null, null), null)
+  val arrayLiteral2d: Array<Array<kotlin.Any?>?>? = arrayOf<Array<kotlin.Any?>?>(arrayOf<kotlin.Any?>(null, null), null as Array<kotlin.Any?>)
   var `object`: kotlin.Any? = objects!![0]
   `object` = objects2d!![0]!![1]
   objects!![0] = null
@@ -22,7 +22,7 @@ open class Arrays {
   objects = arrayOfNulls<array.`Arrays$SomeObject`?>(0)
   objects = arrayOf<array.`Arrays$SomeObject`?>(null, null)
   var objects2d: Array<Array<array.`Arrays$SomeObject`?>?>? = arrayOfNulls<Array<array.`Arrays$SomeObject`?>?>(5)
-  objects2d = arrayOf<Array<array.`Arrays$SomeObject`?>?>(arrayOf<array.`Arrays$SomeObject`?>(null, null), null)
+  objects2d = arrayOf<Array<array.`Arrays$SomeObject`?>?>(arrayOf<array.`Arrays$SomeObject`?>(null, null), null as Array<array.`Arrays$SomeObject`?>)
   objects2d = arrayOfNulls<Array<array.`Arrays$SomeObject`?>?>(20)
   var someObject: array.`Arrays$SomeObject`? = objects!![0]
   someObject = objects2d!![0]!![1]
@@ -35,7 +35,7 @@ open class Arrays {
   ints = IntArray(0)
   ints = intArrayOf(0, 1)
   var ints2d: Array<IntArray?>? = arrayOfNulls<IntArray?>(5)
-  ints2d = arrayOf<IntArray?>(intArrayOf(1, 2), null)
+  ints2d = arrayOf<IntArray?>(intArrayOf(1, 2), null as IntArray)
   ints2d = arrayOfNulls<IntArray?>(20)
   var n: Int = ints!![0]
   n = ints2d!![0]!![1]
@@ -48,7 +48,7 @@ open class Arrays {
   longs = LongArray(0)
   longs = longArrayOf(0L, 1L)
   var longs2d: Array<LongArray?>? = arrayOfNulls<LongArray?>(5)
-  longs2d = arrayOf<LongArray?>(longArrayOf(1L, 2L), null)
+  longs2d = arrayOf<LongArray?>(longArrayOf(1L, 2L), null as LongArray)
   longs2d = arrayOfNulls<LongArray?>(20)
   var n: Long = longs!![0]
   n = longs2d!![0]!![1]
@@ -61,7 +61,7 @@ open class Arrays {
   booleans = arrayOfNulls<kotlin.Boolean?>(0)
   booleans = arrayOf<kotlin.Boolean?>(true, false)
   var booleans2d: Array<Array<kotlin.Boolean?>?>? = arrayOfNulls<Array<kotlin.Boolean?>?>(5)
-  booleans2d = arrayOf<Array<kotlin.Boolean?>?>(arrayOf<kotlin.Boolean?>(true, false), null)
+  booleans2d = arrayOf<Array<kotlin.Boolean?>?>(arrayOf<kotlin.Boolean?>(true, false), null as Array<kotlin.Boolean?>)
   booleans2d = arrayOfNulls<Array<kotlin.Boolean?>?>(20)
   var b: Boolean = booleans!![0]!!
   b = booleans2d!![0]!![1]!!
@@ -74,7 +74,7 @@ open class Arrays {
   strings = arrayOfNulls<kotlin.String?>(0)
   strings = arrayOf<kotlin.String?>(null, null)
   var strings2d: Array<Array<kotlin.String?>?>? = arrayOfNulls<Array<kotlin.String?>?>(5)
-  strings2d = arrayOf<Array<kotlin.String?>?>(arrayOf<kotlin.String?>(null, null), null)
+  strings2d = arrayOf<Array<kotlin.String?>?>(arrayOf<kotlin.String?>(null, null), null as Array<kotlin.String?>)
   strings2d = arrayOfNulls<Array<kotlin.String?>?>(20)
   var b: kotlin.String? = strings!![0]
   b = strings2d!![0]!![1]
@@ -87,7 +87,7 @@ open class Arrays {
   nativeObjects = arrayOfNulls<array.`Arrays$NativeType`?>(0)
   nativeObjects = arrayOf<array.`Arrays$NativeType`?>(null, null)
   var nativeObjects2d: Array<Array<array.`Arrays$NativeType`?>?>? = arrayOfNulls<Array<array.`Arrays$NativeType`?>?>(5)
-  nativeObjects2d = arrayOf<Array<array.`Arrays$NativeType`?>?>(arrayOf<array.`Arrays$NativeType`?>(null, null), null)
+  nativeObjects2d = arrayOf<Array<array.`Arrays$NativeType`?>?>(arrayOf<array.`Arrays$NativeType`?>(null, null), null as Array<array.`Arrays$NativeType`?>)
   nativeObjects2d = arrayOfNulls<Array<array.`Arrays$NativeType`?>?>(20)
   var nativeObject: array.`Arrays$NativeType`? = nativeObjects!![0]
   nativeObject = nativeObjects2d!![0]!![1]
@@ -98,6 +98,12 @@ open class Arrays {
  open fun testErasureCastsOnArrayAccess() {
   val container: array.`Arrays$ArrayContainer`<kotlin.String?>? = null
   val s: kotlin.String? = container!!.data!![0]
+ }
+
+ open fun testCovariance() {
+  var objectArray: Array<kotlin.Any?>? = null as Array<kotlin.Any?>
+  val stringArray: Array<kotlin.String?>? = null as Array<kotlin.String?>
+  objectArray = stringArray as Array<kotlin.Any?>
  }
 
  open fun testArraysSupertypeClosureTypes() {

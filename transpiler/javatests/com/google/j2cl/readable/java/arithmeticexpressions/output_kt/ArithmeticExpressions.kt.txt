@@ -81,7 +81,7 @@ open class ArithmeticExpressions {
  }
 
  open fun testCompoundArray() {
-  val ints: IntArray? = null
+  val ints: IntArray? = null as IntArray
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] - 1
   ints!![0] = ints!![0] * 1
@@ -140,7 +140,7 @@ open class ArithmeticExpressions {
     `$value_4`
    }
   }
-  val longs: LongArray? = null
+  val longs: LongArray? = null as LongArray
   longs!![0] = longs!![0] + 1L
   longs!![0] = longs!![0] - 1L
   longs!![0] = longs!![0] - 1L
@@ -155,11 +155,11 @@ open class ArithmeticExpressions {
     `$value_5`
    }
   }
-  val booleans: BooleanArray? = null
+  val booleans: BooleanArray? = null as BooleanArray
   booleans!![0] = booleans!![0].or(true)
-  val strings: Array<kotlin.String?>? = null
+  val strings: Array<kotlin.String?>? = null as Array<kotlin.String?>
   strings!![0] = "" + strings!![0] + null
-  val shorts: ShortArray? = null
+  val shorts: ShortArray? = null as ShortArray
   val b: Boolean = run {
    val `$array_8`: ShortArray? = shorts
    val `$index_8`: Int = 0
@@ -262,7 +262,7 @@ open class ArithmeticExpressions {
 
   @kotlin.jvm.JvmStatic
   internal fun getLongArray(): LongArray? {
-   return null
+   return null as LongArray
   }
 
   @kotlin.jvm.JvmStatic

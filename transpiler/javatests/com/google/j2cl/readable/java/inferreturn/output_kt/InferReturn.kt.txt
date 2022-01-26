@@ -21,7 +21,7 @@ open class InferReturn<T> {
   fun main() {
    val list: java.util.ArrayList<kotlin.Any?>? = inferreturn.InferReturn.newArrayList("foo")
    inferreturn.InferReturn.acceptsArrayListOfObject(list)
-   val array: Array<kotlin.Any?>? = inferreturn.InferReturn.newArray("foo")
+   val array: Array<kotlin.Any?>? = inferreturn.InferReturn.newArray("foo") as Array<kotlin.Any?>
    inferreturn.InferReturn.acceptsArrayOfObject(array)
   }
 

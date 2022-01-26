@@ -17,9 +17,9 @@ open class Varargs {
   v!!.test(1, *arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any)))
   v!!.test(1, *arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any)))
   v!!.test(1, *arrayOf<kotlin.Any?>())
-  v!!.test(1, *arrayOf<Array<kotlin.Any?>?>())
-  v!!.testCloneable(*arrayOf<Array<kotlin.Any?>?>())
-  v!!.testSerializable(*arrayOf<Array<kotlin.Any?>?>())
+  v!!.test(1, *arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Any?>)
+  v!!.testCloneable(*arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Cloneable?>)
+  v!!.testSerializable(*arrayOf<Array<kotlin.Any?>?>() as Array<java.io.Serializable?>)
  }
 
  companion object {

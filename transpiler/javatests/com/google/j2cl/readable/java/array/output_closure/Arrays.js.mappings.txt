@@ -113,6 +113,12 @@
 [container] => [container] "container"
 [String s = container.data[0];] => [let s = /**@type {!Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];] "array.Arrays.testErasureCastsOnArrayAccess"
 [s] => [s] "s"
+[testCovariance] => [m_testCovariance__]
+[Object[] objectArray = null;] => [let objectArray = null;] "array.Arrays.testCovariance"
+[objectArray] => [objectArray] "objectArray"
+[String[] stringArray = null;] => [let stringArray = null;] "array.Arrays.testCovariance"
+[stringArray] => [stringArray] "stringArray"
+[objectArray = stringArray;] => [objectArray = stringArray;] "array.Arrays.testCovariance"
 [testArraysSupertypeClosureTypes] => [m_testArraysSupertypeClosureTypes__]
 [consumesCloneable(new Object[10]);] => [this.m_consumesCloneable__java_lang_Cloneable(new Array(10));] "array.Arrays.testArraysSupertypeClosureTypes"
 [consumesSerializable(new Object[10]);] => [this.m_consumesSerializable__java_io_Serializable(new Array(10));] "array.Arrays.testArraysSupertypeClosureTypes"

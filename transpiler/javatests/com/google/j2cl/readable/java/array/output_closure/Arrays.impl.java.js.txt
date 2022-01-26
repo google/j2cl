@@ -127,6 +127,12 @@ class Arrays extends j_l_Object {
   let s = /**@type {!Array<?string>}*/ ($Arrays.$castTo(container.f_data__array_Arrays_ArrayContainer, j_l_String, 1))[0];
  }
  
+ m_testCovariance__() {
+  let objectArray = null;
+  let stringArray = null;
+  objectArray = stringArray;
+ }
+ 
  m_testArraysSupertypeClosureTypes__() {
   this.m_consumesCloneable__java_lang_Cloneable(new Array(10));
   this.m_consumesSerializable__java_io_Serializable(new Array(10));

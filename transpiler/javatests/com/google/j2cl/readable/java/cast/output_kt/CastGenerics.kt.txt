@@ -51,14 +51,14 @@ open class CastGenerics<T, E: kotlin.Number?> {
    val arrT: Array<T_1>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
-   var arrA: Array<cast.`CastGenerics$A`?>? = containerArrT!!.get()
-   var arrB: Array<cast.`CastGenerics$B`?>? = containerArrT!!.get()
+   var arrA: Array<cast.`CastGenerics$A`?>? = containerArrT!!.get() as Array<cast.`CastGenerics$A`?>
+   var arrB: Array<cast.`CastGenerics$B`?>? = containerArrT!!.get() as Array<cast.`CastGenerics$B`?>
    val containerArrU: cast.`CastGenerics$Container`<Array<U>?>? = null
    val arrU: Array<U>? = containerArrU!!.get()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
-   arrA = containerArrU!!.get()
-   arrB = containerArrU!!.get()
+   arrA = containerArrU!!.get() as Array<cast.`CastGenerics$A`?>
+   arrB = containerArrU!!.get() as Array<cast.`CastGenerics$B`?>
    val containerBase: cast.`CastGenerics$Container`<cast.`CastGenerics$BaseImplementor`?>? = null
    containerBase!!.get()!!.mA()
    containerBase!!.get()!!.mB()

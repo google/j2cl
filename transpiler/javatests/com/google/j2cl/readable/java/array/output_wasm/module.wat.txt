@@ -25,6 +25,7 @@
   (ref.func $m_testStringArrays__void_$pp_array@array.Arrays)
   (ref.func $m_testNativeArray__void@array.Arrays)
   (ref.func $m_testErasureCastsOnArrayAccess__void@array.Arrays)
+  (ref.func $m_testCovariance__void@array.Arrays)
   (ref.func $m_testArraysSupertypeClosureTypes__void@array.Arrays)
   (ref.func $m_consumesCloneable__java_lang_Cloneable__void@array.Arrays)
   (ref.func $m_consumesSerializable__java_io_Serializable__void@array.Arrays)
@@ -97,6 +98,7 @@
  (field $m_testStringArrays__void_$pp_array (ref $function.m_testStringArrays__void_$pp_array))
  (field $m_testNativeArray__void (ref $function.m_testNativeArray__void))
  (field $m_testErasureCastsOnArrayAccess__void (ref $function.m_testErasureCastsOnArrayAccess__void))
+ (field $m_testCovariance__void (ref $function.m_testCovariance__void))
  (field $m_testArraysSupertypeClosureTypes__void (ref $function.m_testArraysSupertypeClosureTypes__void))
  (field $m_consumesCloneable__java_lang_Cloneable__void (ref $function.m_consumesCloneable__java_lang_Cloneable__void))
  (field $m_consumesSerializable__java_io_Serializable__void (ref $function.m_consumesSerializable__java_io_Serializable__void))
@@ -482,19 +484,42 @@
 )
 (elem declare func $m_testErasureCastsOnArrayAccess__void@array.Arrays)
 
+;;; void Arrays.testCovariance()
+(func $m_testCovariance__void@array.Arrays
+ (type $function.m_testCovariance__void)
+ (param $this.untyped (ref null $java.lang.Object))
+ ;;@ array/Arrays.java:161:14
+ (local $objectArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $stringArray (ref null $javaemul.internal.WasmArray.OfObject))
+ (local $this (ref null $array.Arrays))
+ (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
+ (block
+  ;; Object[] objectArray = null;
+  ;;@ array/Arrays.java:162:4
+  (local.set $objectArray (ref.null $javaemul.internal.WasmArray.OfObject))
+  ;; String[] stringArray = null;
+  ;;@ array/Arrays.java:163:4
+  (local.set $stringArray (ref.null $javaemul.internal.WasmArray.OfObject))
+  ;; (objectArray = stringArray);
+  ;;@ array/Arrays.java:164:4
+  (local.set $objectArray (local.get $stringArray))
+ )
+)
+(elem declare func $m_testCovariance__void@array.Arrays)
+
 ;;; void Arrays.testArraysSupertypeClosureTypes()
 (func $m_testArraysSupertypeClosureTypes__void@array.Arrays
  (type $function.m_testArraysSupertypeClosureTypes__void)
  (param $this.untyped (ref null $java.lang.Object))
- ;;@ array/Arrays.java:165:14
+ ;;@ array/Arrays.java:171:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
   ;; Arrays.this.consumesCloneable(javaemul.internal.WasmArray.OfObject.$create(10));
-  ;;@ array/Arrays.java:166:4
+  ;;@ array/Arrays.java:172:4
   (call_ref (local.get $this)(call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesCloneable__java_lang_Cloneable__void (struct.get $array.Arrays $vtable(local.get $this))))
   ;; Arrays.this.consumesSerializable(javaemul.internal.WasmArray.OfObject.$create(10));
-  ;;@ array/Arrays.java:167:4
+  ;;@ array/Arrays.java:173:4
   (call_ref (local.get $this)(call $$create__int__javaemul_internal_WasmArray_OfObject@javaemul.internal.WasmArray.OfObject (i32.const 10))(struct.get $array.Arrays.vtable $m_consumesSerializable__java_io_Serializable__void (struct.get $array.Arrays $vtable(local.get $this))))
  )
 )
@@ -505,7 +530,7 @@
  (type $function.m_consumesCloneable__java_lang_Cloneable__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $cloneable (ref null $java.lang.Object))
- ;;@ array/Arrays.java:170:14
+ ;;@ array/Arrays.java:176:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
@@ -518,7 +543,7 @@
  (type $function.m_consumesSerializable__java_io_Serializable__void)
  (param $this.untyped (ref null $java.lang.Object))
  (param $serializable (ref null $java.lang.Object))
- ;;@ array/Arrays.java:172:14
+ ;;@ array/Arrays.java:178:14
  (local $this (ref null $array.Arrays))
  (local.set $this (ref.cast_static $array.Arrays (local.get $this.untyped)))
  (block
@@ -750,17 +775,17 @@
 ;;; ArrayContainer<T> ArrayContainer.$create()
 (func $$create__array_Arrays_ArrayContainer@array.Arrays.ArrayContainer
  (result (ref null $array.Arrays.ArrayContainer))
- ;;@ array/Arrays.java:161:23
+ ;;@ array/Arrays.java:167:23
  (local $$instance (ref null $array.Arrays.ArrayContainer))
  (block
   ;; ArrayContainer<T> $instance = new ArrayContainer.<init>();
-  ;;@ array/Arrays.java:161:23
+  ;;@ array/Arrays.java:167:23
   (local.set $$instance (struct.new $array.Arrays.ArrayContainer (ref.as_non_null (global.get $array.Arrays.ArrayContainer.vtable)) (ref.as_non_null (global.get $array.Arrays.ArrayContainer.itable)) (i32.const 0) (ref.null $javaemul.internal.WasmArray.OfObject)))
   ;; $instance.$ctor();
-  ;;@ array/Arrays.java:161:23
+  ;;@ array/Arrays.java:167:23
   (call $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer (local.get $$instance))
   ;; return $instance;
-  ;;@ array/Arrays.java:161:23
+  ;;@ array/Arrays.java:167:23
   (return (local.get $$instance))
  )
 )
@@ -768,32 +793,32 @@
 ;;; void ArrayContainer.$ctor()
 (func $$ctor__void_$p_array_Arrays_ArrayContainer@array.Arrays.ArrayContainer
  (param $this (ref null $array.Arrays.ArrayContainer))
- ;;@ array/Arrays.java:161:23
+ ;;@ array/Arrays.java:167:23
  (block
   ;; Object.this.$ctor();
-  ;;@ array/Arrays.java:161:23
+  ;;@ array/Arrays.java:167:23
   (call $$ctor__void_$p_java_lang_Object@java.lang.Object (local.get $this))
  )
 )
 
 ;;; void ArrayContainer.$clinit()
 (func $$clinit__void@array.Arrays.ArrayContainer
- ;;@ array/Arrays.java:161:23
+ ;;@ array/Arrays.java:167:23
  (block
   ;; if (array.Arrays.ArrayContainer.$initialized) return;
-  ;;@ array/Arrays.java:161:23
+  ;;@ array/Arrays.java:167:23
   (if (global.get $f_$initialized__array_Arrays_ArrayContainer)
    (then
     ;; return;
-    ;;@ array/Arrays.java:161:23
+    ;;@ array/Arrays.java:167:23
     (return )
    )
   )
   ;; (array.Arrays.ArrayContainer.$initialized = true);
-  ;;@ array/Arrays.java:161:23
+  ;;@ array/Arrays.java:167:23
   (global.set $f_$initialized__array_Arrays_ArrayContainer (i32.const 1))
   ;; java.lang.Object.$clinit();
-  ;;@ array/Arrays.java:161:23
+  ;;@ array/Arrays.java:167:23
   (call $$clinit__void@java.lang.Object )
  )
 )

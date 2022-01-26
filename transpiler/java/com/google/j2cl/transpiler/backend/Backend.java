@@ -56,6 +56,7 @@ import com.google.j2cl.transpiler.passes.InsertCastOnNewInstances;
 import com.google.j2cl.transpiler.passes.InsertCastsToTypeBounds;
 import com.google.j2cl.transpiler.passes.InsertErasureTypeSafetyCasts;
 import com.google.j2cl.transpiler.passes.InsertExceptionConversions;
+import com.google.j2cl.transpiler.passes.InsertExplicitArrayCoercionCasts;
 import com.google.j2cl.transpiler.passes.InsertExplicitSuperCalls;
 import com.google.j2cl.transpiler.passes.InsertIntegerCoercions;
 import com.google.j2cl.transpiler.passes.InsertJsEnumBoxingAndUnboxingConversions;
@@ -408,6 +409,7 @@ public enum Backend {
           InsertWideningPrimitiveConversionsKotlin::new,
           InsertNarrowingPrimitiveConversionsKotlin::new,
           NormalizeBasicCasts::new,
+          InsertExplicitArrayCoercionCasts::new,
           ImplementKotlinBitLevelOperators::new,
           InsertNotNullAssertions::new,
           NormalizeEqualityKotlin::new,
