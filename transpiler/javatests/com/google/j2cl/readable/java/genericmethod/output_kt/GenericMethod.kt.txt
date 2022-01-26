@@ -52,32 +52,32 @@ open class GenericMethod<T_2> {
 
   @kotlin.jvm.JvmStatic
   fun testErasureCast_wildcard() {
-   val list: java.util.List<genericmethod.`GenericMethod$Container`<*>?>? = null
-   val content: genericmethod.`GenericMethod$Content`? = list!!.get(0)!!.get()
+   val list: kotlin.collections.MutableList<genericmethod.`GenericMethod$Container`<*>?>? = null
+   val content: genericmethod.`GenericMethod$Content`? = (list!! as java.util.List<genericmethod.`GenericMethod$Container`<*>?>).get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
-   val nestedWildcardList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<*>?>? = null
-   val nestedContent: genericmethod.`GenericMethod$Content`? = nestedWildcardList!!.get(0)!!.get()!!.get()
+   val nestedWildcardList: kotlin.collections.MutableList<genericmethod.`GenericMethod$SuperContainer`<*>?>? = null
+   val nestedContent: genericmethod.`GenericMethod$Content`? = (nestedWildcardList!! as java.util.List<genericmethod.`GenericMethod$SuperContainer`<*>?>).get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
-   val deepWildcardList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<*>?>?>? = null
-   val deepContent: genericmethod.`GenericMethod$Content`? = deepWildcardList!!.get(0)!!.get()!!.get()
+   val deepWildcardList: kotlin.collections.MutableList<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<*>?>?>? = null
+   val deepContent: genericmethod.`GenericMethod$Content`? = (deepWildcardList!! as java.util.List<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<*>?>?>).get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }
 
   @kotlin.jvm.JvmStatic
   fun <CT: genericmethod.`GenericMethod$Container`<C>?, C: genericmethod.`GenericMethod$Content`?> testErasureCast_typeVariable() {
-   val list: java.util.List<genericmethod.`GenericMethod$Container`<C>?>? = null
-   val content: genericmethod.`GenericMethod$Content`? = list!!.get(0)!!.get()
+   val list: kotlin.collections.MutableList<genericmethod.`GenericMethod$Container`<C>?>? = null
+   val content: genericmethod.`GenericMethod$Content`? = (list!! as java.util.List<genericmethod.`GenericMethod$Container`<C>?>).get(0)!!.get()
    genericmethod.GenericMethod.acceptsString(content!!.getProp())
    genericmethod.GenericMethod.acceptsContent(content)
-   val nestedTypeVariableList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<CT>?>? = null
-   val nestedContent: genericmethod.`GenericMethod$Content`? = nestedTypeVariableList!!.get(0)!!.get()!!.get()
+   val nestedTypeVariableList: kotlin.collections.MutableList<genericmethod.`GenericMethod$SuperContainer`<CT>?>? = null
+   val nestedContent: genericmethod.`GenericMethod$Content`? = (nestedTypeVariableList!! as java.util.List<genericmethod.`GenericMethod$SuperContainer`<CT>?>).get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(nestedContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(nestedContent)
-   val deepTypeVariableList: java.util.List<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<C>?>?>? = null
-   val deepContent: genericmethod.`GenericMethod$Content`? = deepTypeVariableList!!.get(0)!!.get()!!.get()
+   val deepTypeVariableList: kotlin.collections.MutableList<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<C>?>?>? = null
+   val deepContent: genericmethod.`GenericMethod$Content`? = (deepTypeVariableList!! as java.util.List<genericmethod.`GenericMethod$SuperContainer`<genericmethod.`GenericMethod$Container`<C>?>?>).get(0)!!.get()!!.get()
    genericmethod.GenericMethod.acceptsString(deepContent!!.getProp())
    genericmethod.GenericMethod.acceptsContent(deepContent)
   }

@@ -14,7 +14,7 @@ open class Main {
      else ->
     }
    } while (false)
-   val comparable: java.lang.Comparable<*>? = comparableJsEnum
+   val comparable: kotlin.Comparable<*>? = comparableJsEnum
    comparableJsEnum = comparable as jsenum.`Main$ComparableJsEnum`?
    var intJsEnum: jsenum.`Main$IntJsEnum`? = if (jsenum.`Main$IntJsEnum`.ELEVEN.getValue() == 10) jsenum.`Main$IntJsEnum`.ELEVEN else null
    SWITCH_1@ do {
@@ -28,7 +28,7 @@ open class Main {
    intJsEnum = o as jsenum.`Main$IntJsEnum`?
    val equal: Boolean = intJsEnum === jsenum.`Main$IntJsEnum`.TWENTY
    var isInstance: Boolean = intJsEnum is jsenum.`Main$IntJsEnum`
-   isInstance = intJsEnum is java.lang.Comparable<*>
+   isInstance = intJsEnum is kotlin.Comparable<*>
    val stringJsEnum: jsenum.`Main$StringJsEnum`? = if (jsenum.`Main$StringJsEnum`.ONE.getValue() === "10") jsenum.`Main$StringJsEnum`.THREE else null
    SWITCH_2@ do {
     when (stringJsEnum!!) {

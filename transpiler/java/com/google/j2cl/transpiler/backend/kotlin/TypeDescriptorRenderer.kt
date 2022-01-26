@@ -43,22 +43,31 @@ private val String.mappedKotlinQualifiedName: String?
   get() =
     // TODO(b/204287086): Move Kotlin -> Java type translation out of the renderer.
     when (this) {
+      "java.lang.Annotation" -> "kotlin.Annotation"
       "java.lang.Boolean" -> "kotlin.Boolean"
       "java.lang.Byte" -> "kotlin.Byte"
-      "java.lang.Cloneable" -> "kotlin.Cloneable"
       "java.lang.Character" -> "kotlin.Char"
       "java.lang.CharSequence" -> "kotlin.CharSequence"
+      "java.lang.Cloneable" -> "kotlin.Cloneable"
+      "java.lang.Comparable" -> "kotlin.Comparable"
       "java.lang.Double" -> "kotlin.Double"
       "java.lang.Enum" -> "kotlin.Enum"
       "java.lang.Float" -> "kotlin.Float"
       "java.lang.Integer" -> "kotlin.Int"
+      "java.lang.Iterable" -> "kotlin.collections.MutableIterable"
       "java.lang.Long" -> "kotlin.Long"
       "java.lang.Number" -> "kotlin.Number"
       "java.lang.Object" -> "kotlin.Any"
       "java.lang.Short" -> "kotlin.Short"
       "java.lang.String" -> "kotlin.String"
       "java.lang.Throwable" -> "kotlin.Throwable"
-      // TODO(b/202058120): Handle remaining types.
+      "java.util.Collection" -> "kotlin.collections.MutableCollection"
+      "java.util.Iterator" -> "kotlin.collections.MutableIterator"
+      "java.util.List" -> "kotlin.collections.MutableList"
+      "java.util.ListIterator" -> "kotlin.collections.MutableListIterator"
+      "java.util.Map" -> "kotlin.collections.MutableMap"
+      "java.util.Map.Entry" -> "kotlin.collections.MutableMap.MutableEntry"
+      "java.util.Set" -> "kotlin.collections.MutableSet"
       else -> null
     }
 

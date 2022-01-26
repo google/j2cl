@@ -15,7 +15,7 @@ open class Parent {
   return c
  }
 
- open fun m(l: java.util.List<kotlin.String>?, c: typeannotations.Parent?): java.util.List<typeannotations.Parent>? {
+ open fun m(l: kotlin.collections.MutableList<kotlin.String>?, c: typeannotations.Parent?): kotlin.collections.MutableList<typeannotations.Parent>? {
   return java.util.ArrayList<typeannotations.Parent>()
  }
 }
@@ -34,7 +34,7 @@ open class TypeAnnotations {
  companion object {
   @kotlin.jvm.JvmStatic
   fun main() {
-   val list: java.util.List<kotlin.String>? = java.util.ArrayList<kotlin.String>()
+   val list: kotlin.collections.MutableList<kotlin.String>? = java.util.ArrayList<kotlin.String>()
   }
  }
 }
