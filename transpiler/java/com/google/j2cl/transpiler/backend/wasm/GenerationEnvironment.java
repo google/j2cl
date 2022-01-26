@@ -24,7 +24,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Streams;
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.Field;
@@ -44,7 +43,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 /** Allows mapping of middle end constructors to the backend. */
 class GenerationEnvironment {
@@ -245,15 +243,6 @@ class GenerationEnvironment {
   }
 
   private String generateFunctionTypeName(String prefix, MethodDescriptor methodDescriptor) {
-    Stream<TypeDescriptor> parameterStream =
-        methodDescriptor.getDispatchParameterTypeDescriptors().stream();
-    if (methodDescriptor.isPolymorphic()) {
-      parameterStream =
-          Streams.concat(Stream.of(TypeDescriptors.get().javaLangObject), parameterStream);
-    } else if (!methodDescriptor.isStatic()) {
-      parameterStream =
-          Streams.concat(Stream.of(methodDescriptor.getEnclosingTypeDescriptor()), parameterStream);
-    }
     return prefix + "." + methodDescriptor.getMangledName();
   }
 
