@@ -13,13 +13,13 @@ open class Varargs {
 
  open fun main() {
   val v: varargs.Varargs? = varargs.Varargs()
-  v!!.test(1, *arrayOf<kotlin.Any?>())
-  v!!.test(1, *arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any)))
-  v!!.test(1, *arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any)))
-  v!!.test(1, *arrayOf<kotlin.Any?>())
-  v!!.test(1, *arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Any?>)
-  v!!.testCloneable(*arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Cloneable?>)
-  v!!.testSerializable(*arrayOf<Array<kotlin.Any?>?>() as Array<java.io.Serializable?>)
+  v!!.test(1, *(arrayOf<kotlin.Any?>()))
+  v!!.test(1, *(arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any))))
+  v!!.test(1, *(arrayOf<kotlin.Any?>((java.lang.Object() as kotlin.Any))))
+  v!!.test(1, *(arrayOf<kotlin.Any?>()))
+  v!!.test(1, *(arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Any?>))
+  v!!.testCloneable(*(arrayOf<Array<kotlin.Any?>?>() as Array<kotlin.Cloneable?>))
+  v!!.testSerializable(*(arrayOf<Array<kotlin.Any?>?>() as Array<java.io.Serializable?>))
  }
 
  companion object {
@@ -28,7 +28,7 @@ open class Varargs {
 
   @kotlin.jvm.JvmStatic
   fun <E> bar(a: E?, b: E?) {
-   varargs.Varargs.`fun`(*arrayOf<E?>(a, b))
+   varargs.Varargs.`fun`(*(arrayOf<E?>(a, b)))
   }
  }
 }

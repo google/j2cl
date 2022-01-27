@@ -217,10 +217,13 @@ private fun Renderer.renderInvocation(invocation: Invocation) {
   renderInParentheses {
     val parameters = invocation.target.parameterDescriptors.zip(invocation.arguments)
     renderCommaSeparated(parameters) { (parameterDescriptor, argument) ->
+      // TODO(b/216523245): Handle spread operator using a pass in the AST.
       if (parameterDescriptor.isVarargs) {
         render("*")
+        renderInParentheses { renderExpression(argument) }
+      } else {
+        renderExpression(argument)
       }
-      renderExpression(argument)
     }
   }
 }

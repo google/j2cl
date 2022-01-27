@@ -55,7 +55,7 @@ open class Main {
    var unboxed: jsenum.`Main$ComparableJsEnum`? = templatedField!!.getValue()
    unboxed = templatedField!!.value
    templatedField!!.value = jsenum.`Main$ComparableJsEnum`.ONE
-   java.util.Arrays.asList(*arrayOf<kotlin.Any?>(jsenum.`Main$ComparableJsEnum`.ONE) as Array<jsenum.`Main$ComparableJsEnum`?>)
+   java.util.Arrays.asList(*(arrayOf<kotlin.Any?>(jsenum.`Main$ComparableJsEnum`.ONE) as Array<jsenum.`Main$ComparableJsEnum`?>))
    (templatedField!!.getValue()!! as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
    val b: Boolean = jsenum.`Main$ComparableJsEnum`.ONE === jsenum.Main.boxingPassthrough(jsenum.`Main$ComparableJsEnum`.ONE)
   }
