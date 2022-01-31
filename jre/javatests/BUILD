@@ -12,21 +12,17 @@ package(
     licenses = ["notice"],  # Apache 2.0
 )
 
-package_sources(
-    name = "emul_tests_lib_java_files",
-    srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_test"],
-    super_srcs = glob(["**/*.java"]),
-)
-
 j2cl_library(
     name = "emul_tests_lib",
     testonly = 1,
-    srcs = [
-        ":emul_tests_lib_java_files",
+    srcs = glob([
+        "**/*.java",
+        "**/*.js",
+    ]) + [
         # Bootstrap files are dropped in compiled mode so we add it as a srcs here.
         # TODO(b/62039178): Remove this.
         ":test_defines",
-    ] + glob(["**/*.js"]),
+    ],
     generate_build_test = False,
     javacopts = [
         "-Xep:DoNotCall:OFF",
@@ -61,8 +57,7 @@ package_sources(
 java_test(
     name = "AllEmulTest_Java",
     size = "small",
-    srcs = [
-        ":emul_tests_lib_java_files",
+    srcs = glob(["**/*.java"]) + [
         ":java_emul_internal",
     ],
     javacopts = [
