@@ -12,15 +12,16 @@ ValueType.filteredkeys = function(type) {
 };
 
 /**
- * @param {function(new:?,...):undefined} ctor
+ * @param {!Constructor} target Target.
+ * @param {!Constructor} source Source.
  * @param {number} flags
  * @param {...string} excluded_fields
  */
-ValueType.mixin = function(ctor, flags, ...excluded_fields) {
-  if (flags & 1) ctor.prototype.equals = ValueType.prototype.equals;
-  if (flags & 2) ctor.prototype.hashCode = ValueType.prototype.hashCode;
-  if (flags & 4) ctor.prototype.toString = ValueType.prototype.toString;
+ValueType.mixin = function(target, source, flags, ...excluded_fields) {
+  if (flags & 1) target.prototype.equals = source.prototype.equals;
+  if (flags & 2) target.prototype.hashCode = source.prototype.hashCode;
+  if (flags & 4) target.prototype.toString = source.prototype.toString;
   if (excluded_fields) {
-    ctor.prototype.$excluded_fields = excluded_fields;
+    target.prototype.$excluded_fields = excluded_fields;
   }
 };

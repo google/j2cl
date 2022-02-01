@@ -491,6 +491,8 @@ public class OptimizeAutoValue extends LibraryNormalizationPass {
         MethodCall.Builder.from(mixinMethodDescriptor)
             .setArguments(
                 new JavaScriptConstructorReference(autoValue.getDeclaration()),
+                new JavaScriptConstructorReference(
+                    TypeDescriptors.get().javaemulInternalValueType.getTypeDeclaration()),
                 NumberLiteral.fromInt(mask),
                 getProperyNameExpressions(autoValue.getDeclaration(), excludedFields))
             .build();
