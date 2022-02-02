@@ -21,6 +21,7 @@ import com.google.j2cl.transpiler.ast.BooleanLiteral;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.IfStatement;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.SwitchCase;
 
 /** Normalization pass which rewrites "{...}" block statements to "if (true) {...}". */
 public class NormalizeNestedBlocks extends NormalizationPass {
@@ -31,7 +32,7 @@ public class NormalizeNestedBlocks extends NormalizationPass {
           @Override
           public Node rewriteBlock(Block block) {
             // Rewrite nested block statements only.
-            return getParent() instanceof Block
+            return getParent() instanceof Block || getParent() instanceof SwitchCase
                 ? IfStatement.newBuilder()
                     .setSourcePosition(block.getSourcePosition())
                     .setConditionExpression(BooleanLiteral.get(true))

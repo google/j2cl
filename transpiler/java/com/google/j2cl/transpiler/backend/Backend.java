@@ -397,6 +397,7 @@ public enum Backend {
           // ... and flatten the class hierarchy.
           MoveNestedClassesToTop::new,
           NormalizeStaticMemberQualifiers::new,
+          () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),
           NormalizeMultiExpressions::new,
           () -> new ExpandCompoundAssignments(/* expandAll= */ true),
           RewriteAssignmentExpressions::new,

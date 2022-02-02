@@ -25,6 +25,7 @@ import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.AbstractVisitor;
 import com.google.j2cl.transpiler.ast.BinaryExpression;
 import com.google.j2cl.transpiler.ast.Block;
+import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.ExpressionStatement;
@@ -33,6 +34,7 @@ import com.google.j2cl.transpiler.ast.MultiExpression;
 import com.google.j2cl.transpiler.ast.Statement;
 import com.google.j2cl.transpiler.ast.SwitchCase;
 import com.google.j2cl.transpiler.ast.SwitchStatement;
+import com.google.j2cl.transpiler.ast.TryStatement;
 import com.google.j2cl.transpiler.ast.TypeDescriptors;
 import com.google.j2cl.transpiler.ast.Variable;
 import com.google.j2cl.transpiler.ast.VariableDeclarationExpression;
@@ -49,6 +51,16 @@ import java.util.List;
  * contexts like for loops, etc.
  */
 public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass {
+  private final boolean fromSwitchStatementsOnly;
+
+  public MoveVariableDeclarationsToEnclosingBlock() {
+    this(/* fromSwitchStatementsOnly= */ false);
+  }
+
+  public MoveVariableDeclarationsToEnclosingBlock(boolean fromSwitchStatementsOnly) {
+    this.fromSwitchStatementsOnly = fromSwitchStatementsOnly;
+  }
+
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     Multimap<Block, VariableDeclarationExpression> variableDeclarationsToRelocateByBlock =
@@ -58,6 +70,7 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
     // level expression in a statement and in the first component of a for each loops.
     // This visitor collects all variable declarations that appear in constructs where it would be
     // illegal to have them in JavaScript.
+    // TODO(b/216517933): Simplify using getParent()
     compilationUnit.accept(
         new AbstractVisitor() {
           Deque<Block> enclosingBlocks = new ArrayDeque<>();
@@ -145,14 +158,36 @@ public class MoveVariableDeclarationsToEnclosingBlock extends NormalizationPass 
           }
 
           @Override
+          public boolean enterTryStatement(TryStatement tryStatement) {
+            for (VariableDeclarationExpression resourceDeclaration :
+                tryStatement.getResourceDeclarations()) {
+              // Skip the top level resource declaration as it does not need to
+              // be rewritten.
+              visitInitializers(resourceDeclaration);
+            }
+            tryStatement.getBody().accept(this);
+            for (CatchClause catchClause : tryStatement.getCatchClauses()) {
+              catchClause.accept(this);
+            }
+            Block finallyBlock = tryStatement.getFinallyBlock();
+            if (finallyBlock != null) {
+              finallyBlock.accept(this);
+            }
+            return false;
+          }
+
+          @Override
           public void exitVariableDeclarationExpression(
               VariableDeclarationExpression variableDeclarationExpression) {
-            relocateToEnclosingBlock(variableDeclarationExpression);
+            // In Kotlin backend, the only thing we need is moving variable declarations out of
+            // switch statements which are explicitly handled in enterSwitchStatement.
+            if (!fromSwitchStatementsOnly) {
+              relocateToEnclosingBlock(variableDeclarationExpression);
+            }
           }
 
           private void relocateToEnclosingBlock(
               VariableDeclarationExpression variableDeclarationExpression) {
-
             variableDeclarationsToRelocateByBlock.put(
                 checkNotNull(enclosingBlocks.peek()), variableDeclarationExpression);
           }

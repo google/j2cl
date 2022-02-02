@@ -56,14 +56,21 @@ open class SwitchStatement {
  companion object {
   @kotlin.jvm.JvmStatic
   internal fun testSwitchVariableDeclarations() {
+   val unassigned: Int
+   val unassigned2: Int
+   val i: Int
+   val j: Int
+   val b: Int
+   val i_1: Int
    SWITCH@ do {
     when (3) {
      1 ->
-      val unassigned: Int
-      val unassigned2: Int
-      val i: Int = 0
-      val j: Int = 2
-      val b: Int = j + 1
+      null
+      i = 0
+      if (true) {
+       j = 2
+       b = j + 1
+      }
       break@SWITCH
      3 ->
       i = 3
@@ -74,7 +81,7 @@ open class SwitchStatement {
    SWITCH_1@ do {
     when (5) {
      5 ->
-      val i_1: Int = 1
+      i_1 = 1
       break@SWITCH_1
     }
    } while (false)
