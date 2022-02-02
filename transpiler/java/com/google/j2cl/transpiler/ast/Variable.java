@@ -27,7 +27,7 @@ import com.google.j2cl.common.visitor.Visitable;
 public class Variable extends NameDeclaration
     implements Cloneable<Variable>, HasUnusableByJsSuppression {
   private TypeDescriptor typeDescriptor;
-  private final boolean isFinal;
+  private boolean isFinal;
   private final boolean isParameter;
   private final SourcePosition sourcePosition;
   private final boolean isUnusableByJsSuppressed;
@@ -47,8 +47,16 @@ public class Variable extends NameDeclaration
     this.isUnusableByJsSuppressed = isUnusableByJsSuppressed;
   }
 
+  public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
+    this.typeDescriptor = checkNotNull(typeDescriptor);
+  }
+
   public TypeDescriptor getTypeDescriptor() {
     return typeDescriptor;
+  }
+
+  public void setFinal(boolean isFinal) {
+    this.isFinal = isFinal;
   }
 
   public boolean isFinal() {
@@ -57,10 +65,6 @@ public class Variable extends NameDeclaration
 
   public boolean isParameter() {
     return isParameter;
-  }
-
-  public void setTypeDescriptor(TypeDescriptor typeDescriptor) {
-    this.typeDescriptor = checkNotNull(typeDescriptor);
   }
 
   @Override

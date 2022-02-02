@@ -84,13 +84,13 @@ open class CastPrimitives {
  }
 
  open fun testImplicitArgumentCasts() {
-  var b: Byte = 127
-  var c: Char = 65535.toChar()
-  var s: Short = 32767
-  var i: Int = 2147483647
-  var l: Long = 9223372036854775807L
-  var f: Float = 3.4028235E38f
-  var d: Double = 1.7976931348623157E308
+  val b: Byte = 127
+  val c: Char = 65535.toChar()
+  val s: Short = 32767
+  val i: Int = 2147483647
+  val l: Long = 9223372036854775807L
+  val f: Float = 3.4028235E38f
+  val d: Double = 1.7976931348623157E308
   cast.CastPrimitives.getShort(b.toShort())
   cast.CastPrimitives.getInt(b.toInt())
   cast.CastPrimitives.getLong(b.toLong())

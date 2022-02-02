@@ -70,6 +70,7 @@ import com.google.j2cl.transpiler.passes.InsertTypeAnnotationOnGenericReturnType
 import com.google.j2cl.transpiler.passes.InsertUnboxingConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversions;
 import com.google.j2cl.transpiler.passes.InsertWideningPrimitiveConversionsKotlin;
+import com.google.j2cl.transpiler.passes.MakeVariablesFinal;
 import com.google.j2cl.transpiler.passes.MoveNestedClassesToTop;
 import com.google.j2cl.transpiler.passes.MoveVariableDeclarationsToEnclosingBlock;
 import com.google.j2cl.transpiler.passes.NormalizationPass;
@@ -416,6 +417,7 @@ public enum Backend {
 
           // Needs to run after non-null assertions are inserted.
           InsertStringConversionsKotlin::new,
+          MakeVariablesFinal::new,
 
           // Verification
           VerifySingleAstReference::new,
