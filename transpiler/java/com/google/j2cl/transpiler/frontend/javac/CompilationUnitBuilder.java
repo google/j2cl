@@ -928,7 +928,8 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       return new ThisReference(
           environment
               .createDeclarationForType((ClassSymbol) ((JCIdent) expression).sym)
-              .toUnparameterizedTypeDescriptor());
+              .toUnparameterizedTypeDescriptor(),
+          /* isQualified= */ true);
     }
     if (fieldAccess.name.contentEquals("super")) {
       return new SuperReference(

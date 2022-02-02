@@ -44,6 +44,7 @@ import com.google.j2cl.transpiler.ast.CatchClause;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.ConditionalExpression;
 import com.google.j2cl.transpiler.ast.ContinueStatement;
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor;
 import com.google.j2cl.transpiler.ast.DoWhileStatement;
 import com.google.j2cl.transpiler.ast.Expression;
 import com.google.j2cl.transpiler.ast.Expression.Associativity;
@@ -1103,7 +1104,10 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
       checkArgument(expression.getQualifier() instanceof SimpleName);
       ITypeBinding targetTypeBinding = (ITypeBinding) expression.getQualifier().resolveBinding();
       return MethodCall.Builder.from(methodDescriptor)
-          .setQualifier(new ThisReference(JdtUtils.createDeclaredTypeDescriptor(targetTypeBinding)))
+          .setQualifier(
+              new ThisReference(
+                  JdtUtils.createDeclaredTypeDescriptor(targetTypeBinding),
+                  /* isQualified= */ true))
           .setArguments(arguments)
           .setSourcePosition(getSourcePosition(expression))
           .setStaticDispatch(true)
@@ -1381,10 +1385,12 @@ public class CompilationUnitBuilder extends AbstractCompilationUnitBuilder {
 
     /** Resolves a potentially qualified this/super reference. */
     private ThisReference createQualifiedThisReference(Name qualifier) {
-      return new ThisReference(
-          qualifier != null
+      boolean isQualified = qualifier != null;
+      DeclaredTypeDescriptor typeDescriptor =
+          isQualified
               ? JdtUtils.createDeclaredTypeDescriptor(qualifier.resolveTypeBinding())
-              : getCurrentType().getTypeDescriptor());
+              : getCurrentType().getTypeDescriptor();
+      return new ThisReference(typeDescriptor, isQualified);
     }
   }
 

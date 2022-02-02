@@ -25,9 +25,19 @@ import com.google.j2cl.common.visitor.Visitable;
 @Visitable
 public class ThisReference extends Expression {
   private final DeclaredTypeDescriptor typeDescriptor;
+  /**
+   * Whether the "this" keyword appeard with a qualifier in the source. E.g. referencing the
+   * enclosing class instance.
+   */
+  private final boolean isQualified;
 
   public ThisReference(DeclaredTypeDescriptor typeDescriptor) {
+    this(typeDescriptor, false);
+  }
+
+  public ThisReference(DeclaredTypeDescriptor typeDescriptor, boolean isQualified) {
     this.typeDescriptor = typeDescriptor.toNonNullable();
+    this.isQualified = isQualified;
   }
 
   @Override
@@ -43,6 +53,10 @@ public class ThisReference extends Expression {
   @Override
   public boolean isEffectivelyInvariant() {
     return true;
+  }
+
+  public boolean isQualified() {
+    return isQualified;
   }
 
   @Override
