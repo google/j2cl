@@ -24,8 +24,10 @@ import com.google.j2cl.common.visitor.Visitable;
 /** DoWhile Statement. */
 @Visitable
 public class DoWhileStatement extends LoopStatement {
-  @Visitable Expression conditionExpression;
+  // The order of the @Visitable fields here should follow the ordering in the source code to
+  // ensure that the traversal is done according with the source ordering.
   @Visitable Statement body;
+  @Visitable Expression conditionExpression;
 
   public DoWhileStatement(
       SourcePosition sourcePosition, Expression conditionExpression, Statement body) {
