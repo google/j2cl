@@ -5,13 +5,13 @@ open class ArithmeticExpressions {
 
  open fun testCoercions() {
   var b: Byte = 1L.toByte()
-  var c: Char = 1L.toChar()
+  var c: Char = 1L.toInt().toChar()
   var s: Short = 1L.toShort()
   var i: Int = 1L.toInt()
   var f: Float = 1.0f
   var d: Double = 1.0
   b = 9223372036854775807L.toByte()
-  c = 9223372036854775807L.toChar()
+  c = 9223372036854775807L.toInt().toChar()
   s = 9223372036854775807L.toShort()
   i = 9223372036854775807L.toInt()
   f = 9.223372E18f
@@ -66,8 +66,8 @@ open class ArithmeticExpressions {
    s = (s.toInt() + 1).toShort()
    s
   }.toInt() == 10
-  var q: Int = 3.shr(2.toInt())
-  q = 3.ushr(2.toInt())
+  var q: Int = 3.shr(2)
+  q = 3.ushr(2)
   val x: Byte = ((a.toShort().toInt() + b.toShort().toByte().toInt()) * c.toByte().toShort().toInt()).toByte()
   val y: Char = 'y'
   val z: kotlin.Long? = 121L
@@ -90,9 +90,9 @@ open class ArithmeticExpressions {
   ints!![0] = ints!![0].xor(1)
   ints!![0] = ints!![0].or(1)
   ints!![0] = ints!![0] % 1
-  ints!![0] = ints!![0].shl(1.toInt())
-  ints!![0] = ints!![0].shr(1.toInt())
-  ints!![0] = ints!![0].ushr(1.toInt())
+  ints!![0] = ints!![0].shl(1)
+  ints!![0] = ints!![0].shr(1)
+  ints!![0] = ints!![0].ushr(1)
   ints!![0] = ints!![0] + 1
   ints!![0] = ints!![0] + 1
   var i: Int = 0
@@ -175,7 +175,7 @@ open class ArithmeticExpressions {
   d = d!! + c!!
   var i: Int = 43
   d = d!! + i
-  d = d!!.shl(i.toInt())
+  d = d!!.shl(i)
   i = i + c!!
   var e: kotlin.Int? = run {
    c = c!! + 1

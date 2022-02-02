@@ -15,8 +15,13 @@
  */
 package com.google.j2cl.transpiler.passes;
 
+import static com.google.common.base.CaseFormat.LOWER_CAMEL;
+import static com.google.common.base.CaseFormat.UPPER_CAMEL;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveChar;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveFloatOrDouble;
+import static com.google.j2cl.transpiler.ast.TypeDescriptors.isPrimitiveInt;
+
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.j2cl.transpiler.ast.AbstractRewriter;
 import com.google.j2cl.transpiler.ast.CastExpression;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
@@ -28,6 +33,7 @@ import com.google.j2cl.transpiler.ast.Kind;
 import com.google.j2cl.transpiler.ast.MethodCall;
 import com.google.j2cl.transpiler.ast.MethodDescriptor;
 import com.google.j2cl.transpiler.ast.Node;
+import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor;
 import com.google.j2cl.transpiler.ast.PrimitiveTypes;
 import com.google.j2cl.transpiler.ast.TypeDeclaration;
 import com.google.j2cl.transpiler.ast.TypeDescriptor;
@@ -35,87 +41,56 @@ import com.google.j2cl.transpiler.ast.TypeDescriptors;
 
 /** Replaces cast expression on primitive &amp; boxed types with corresponding cast method call. */
 public class NormalizeBasicCasts extends NormalizationPass {
-
   @Override
   public void applyTo(CompilationUnit compilationUnit) {
     compilationUnit.accept(
         new AbstractRewriter() {
           @Override
           public Node rewriteCastExpression(CastExpression castExpression) {
-            TypeDescriptor castToType = castExpression.getTypeDescriptor();
-            Expression innerExpression = castExpression.getExpression();
-            TypeDescriptor castFromType = innerExpression.getTypeDescriptor();
-            if (isBasicType(castToType) && isBasicType(castFromType)) {
-              TypeDescriptor castToPrimitiveType = castToType.toUnboxedType();
-              TypeDescriptor castFromPrimitiveType = castFromType.toUnboxedType();
-              // In Kotlin, chars are 'cast' by getting their character code, which is an Int field.
-              if (TypeDescriptors.isPrimitiveChar(castFromPrimitiveType)) {
-                innerExpression =
-                    implementCharPrimitiveCast(castToPrimitiveType, innerExpression, CODE);
-                if (TypeDescriptors.isPrimitiveInt(castToPrimitiveType)) {
-                  return innerExpression;
-                }
-              }
-              String castMethodName = castMethodNames.get(castToPrimitiveType);
-              if (castMethodName == null) {
-                // In Kotlin, there is no boolean cast so this should have been removed.
-                if (TypeDescriptors.isPrimitiveBoolean(castToPrimitiveType)) {
-                  return innerExpression;
-                }
-                // TODO(dpo): this should not happen, what's the appropriate behavior if it does?
-                return castExpression;
-              }
-              return implementNumericPrimitiveCast(
-                  castToPrimitiveType, innerExpression, castMethodName);
+            Expression fromExpression = castExpression.getExpression();
+            TypeDescriptor fromType = fromExpression.getTypeDescriptor();
+            TypeDescriptor toType = castExpression.getTypeDescriptor();
+            if (!isBasicType(toType) || !isBasicType(fromType)) {
+              return castExpression;
             }
-            return castExpression;
+
+            PrimitiveTypeDescriptor fromPrimitiveType = fromType.toUnboxedType();
+            PrimitiveTypeDescriptor toPrimitiveType = toType.toUnboxedType();
+
+            // Skip conversion if not needed.
+            if (fromPrimitiveType.equals(toPrimitiveType)) {
+              return fromExpression;
+            }
+
+            // Primitive char needs to be converted first to int through ".code".
+            if (isPrimitiveChar(fromPrimitiveType)) {
+              fromExpression = convertCharCode(fromExpression);
+              fromPrimitiveType = PrimitiveTypes.INT;
+            }
+
+            // Conversion to char must go through int.
+            if (isPrimitiveChar(toPrimitiveType) && !isPrimitiveInt(fromPrimitiveType)) {
+              fromExpression = convertTo(fromExpression, PrimitiveTypes.INT);
+              fromPrimitiveType = PrimitiveTypes.INT;
+            }
+
+            // Conversion from float/double to a type that is narrower than int must go through int.
+            if (isPrimitiveFloatOrDouble(fromPrimitiveType)
+                && PrimitiveTypes.INT.isWiderThan(toPrimitiveType)) {
+              fromExpression = convertTo(fromExpression, PrimitiveTypes.INT);
+              fromPrimitiveType = PrimitiveTypes.INT;
+            }
+
+            // Apply final conversion if needed.
+            return fromPrimitiveType.equals(toPrimitiveType)
+                ? fromExpression
+                : convertTo(fromExpression, toPrimitiveType);
           }
         });
   }
 
-  private static final String CODE = "code";
-
-  private static final ImmutableMap<TypeDescriptor, String> castMethodNames =
-      ImmutableMap.<TypeDescriptor, String>builder()
-          .put(PrimitiveTypes.BYTE, "toByte")
-          .put(PrimitiveTypes.SHORT, "toShort")
-          .put(PrimitiveTypes.CHAR, "toChar")
-          .put(PrimitiveTypes.INT, "toInt")
-          .put(PrimitiveTypes.LONG, "toLong")
-          .put(PrimitiveTypes.FLOAT, "toFloat")
-          .put(PrimitiveTypes.DOUBLE, "toDouble")
-          .build();
-
   private static boolean isBasicType(TypeDescriptor type) {
     return type.isPrimitive() || TypeDescriptors.isBoxedType(type);
-  }
-
-  private static Expression implementNumericPrimitiveCast(
-      TypeDescriptor castTypeDescriptor, Expression expression, String method) {
-
-    MethodDescriptor castToMethodDescriptor =
-        MethodDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
-            .setName(method)
-            .setReturnTypeDescriptor(castTypeDescriptor)
-            .build();
-
-    // expr.toBasicTypeName();
-    return MethodCall.Builder.from(castToMethodDescriptor).setQualifier(expression).build();
-  }
-
-  private static Expression implementCharPrimitiveCast(
-      TypeDescriptor castTypeDescriptor, Expression expression, String field) {
-
-    FieldDescriptor castToFieldDescriptor =
-        FieldDescriptor.newBuilder()
-            .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
-            .setName(field)
-            .setTypeDescriptor(castTypeDescriptor)
-            .build();
-
-    // expr.code;
-    return FieldAccess.Builder.from(castToFieldDescriptor).setQualifier(expression).build();
   }
 
   private static final DeclaredTypeDescriptor KOTLIN_BASIC_TYPE =
@@ -127,4 +102,27 @@ public class NormalizeBasicCasts extends NormalizationPass {
                   .setClassComponents(ImmutableList.of("BasicType"))
                   .build())
           .build();
+
+  private static final Expression convertCharCode(Expression expression) {
+    FieldDescriptor castToFieldDescriptor =
+        FieldDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
+            .setName("code")
+            .setTypeDescriptor(PrimitiveTypes.CHAR)
+            .build();
+
+    return FieldAccess.Builder.from(castToFieldDescriptor).setQualifier(expression).build();
+  }
+
+  private static Expression convertTo(
+      Expression expression, PrimitiveTypeDescriptor primitiveType) {
+    MethodDescriptor castToMethodDescriptor =
+        MethodDescriptor.newBuilder()
+            .setEnclosingTypeDescriptor(KOTLIN_BASIC_TYPE)
+            .setName("to" + LOWER_CAMEL.to(UPPER_CAMEL, primitiveType.getSimpleSourceName()))
+            .setReturnTypeDescriptor(primitiveType)
+            .build();
+
+    return MethodCall.Builder.from(castToMethodDescriptor).setQualifier(expression).build();
+  }
 }

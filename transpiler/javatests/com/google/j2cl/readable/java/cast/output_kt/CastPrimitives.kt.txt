@@ -11,23 +11,23 @@ open class CastPrimitives {
   var l: Long = 1L
   var f: Float = 1.1f
   var d: Double = 1.1
-  b = b.toByte()
-  c = b.toChar()
+  b = b
+  c = b.toInt().toChar()
   s = b.toShort()
   i = b.toInt()
   l = b.toLong()
   f = b.toFloat()
   d = b.toDouble()
   b = c.code.toByte()
-  c = c.code.toChar()
+  c = c
   s = c.code.toShort()
   i = c.code
   l = c.code.toLong()
   f = c.code.toFloat()
   d = c.code.toDouble()
   b = s.toByte()
-  c = s.toChar()
-  s = s.toShort()
+  c = s.toInt().toChar()
+  s = s
   i = s.toInt()
   l = s.toLong()
   f = s.toFloat()
@@ -35,31 +35,31 @@ open class CastPrimitives {
   b = i.toByte()
   c = i.toChar()
   s = i.toShort()
-  i = i.toInt()
+  i = i
   l = i.toLong()
   f = i.toFloat()
   d = i.toDouble()
   b = l.toByte()
-  c = l.toChar()
+  c = l.toInt().toChar()
   s = l.toShort()
   i = l.toInt()
-  l = l.toLong()
+  l = l
   f = l.toFloat()
   d = l.toDouble()
-  b = f.toByte()
-  c = f.toChar()
-  s = f.toShort()
+  b = f.toInt().toByte()
+  c = f.toInt().toChar()
+  s = f.toInt().toShort()
   i = f.toInt()
   l = f.toLong()
-  f = f.toFloat()
+  f = f
   d = f.toDouble()
-  b = d.toByte()
-  c = d.toChar()
-  s = d.toShort()
+  b = d.toInt().toByte()
+  c = d.toInt().toChar()
+  s = d.toInt().toShort()
   i = d.toInt()
   l = d.toLong()
   f = d.toFloat()
-  d = d.toDouble()
+  d = d
  }
 
  open fun testReferenceToPrimitive() {
@@ -123,7 +123,7 @@ open class CastPrimitives {
   if (true) {
    tlong = fint.toLong()
    tlong = tlong + fint.toLong()
-   tlong = tlong.shl(fint.toInt())
+   tlong = tlong.shl(fint)
   }
   if (true) {
    tlong = tlong + fchar.code.toLong()
@@ -132,7 +132,7 @@ open class CastPrimitives {
   }
   if (true) {
    tlong = flong * fint.toLong()
-   tlong = flong.shr(fint.toInt())
+   tlong = flong.shr(fint)
   }
   if (true) {
    tlong = flong + fshort.toLong()
