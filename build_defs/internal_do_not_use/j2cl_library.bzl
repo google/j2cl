@@ -54,6 +54,9 @@ _J2WASM_PACKAGES = [
 _AUTOVALUE_OPT_IN_PACKAGES = [
 ]
 
+_KOTLIN_OPT_IN_PACKAGES = [
+]
+
 def _tree_artifact_proxy_impl(ctx):
     js_files = ctx.attr.j2cl_library[J2clInfo]._private_.output_js
     return DefaultInfo(files = depset([js_files]), runfiles = ctx.runfiles([js_files]))
@@ -92,6 +95,13 @@ def j2cl_library(
             [p for p in _AUTOVALUE_OPT_IN_PACKAGES if native.package_name().startswith(p)],
         )
     args["optimize_autovalue"] = optimize_autovalue
+
+    # TODO(b/217287994): Replace with more traditional allow-listing.
+    kotlin_allowed = any([p for p in _KOTLIN_OPT_IN_PACKAGES if native.package_name().startswith(p)])
+    if kotlin_allowed:
+        args["j2cl_transpiler_override"] = (
+            "//build_defs/internal_do_not_use:BazelJ2clBuilderWithKolinSupport"
+        )
 
     j2cl_library_rule(
         name = name,

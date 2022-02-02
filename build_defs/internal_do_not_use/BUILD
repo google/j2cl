@@ -33,6 +33,11 @@ alias(
     actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilder",
 )
 
+alias(
+    name = "BazelJ2clBuilderWithKolinSupport",
+    actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilderWithKolinSupport",
+)
+
 # ***************************************************
 # Standard library related
 # ***************************************************

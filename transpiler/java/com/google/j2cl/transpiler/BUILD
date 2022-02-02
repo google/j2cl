@@ -71,3 +71,20 @@ java_binary(
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     runtime_deps = [":bazelbuilder_lib"],
 )
+
+# J2CL binary with Kotlin compiler dependency.
+# TODO(b/217287994): Remove after a regular dependency is allowed.
+java_binary(
+    name = "BazelJ2clBuilderWithKolinSupport",
+    jvm_flags = [
+        "-XX:+TieredCompilation",
+        "-Dj2cl.deterministicTimestamps=true",
+        "-Xss2M",
+    ],
+    main_class = "com.google.j2cl.transpiler.BazelJ2clBuilder",
+    visibility = ["//build_defs/internal_do_not_use:__pkg__"],
+    runtime_deps = [
+        ":bazelbuilder_lib",
+        "//transpiler/java/com/google/j2cl/transpiler/frontend/kotlin",
+    ],
+)

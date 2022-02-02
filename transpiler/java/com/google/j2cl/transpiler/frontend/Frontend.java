@@ -15,6 +15,8 @@
  */
 package com.google.j2cl.transpiler.frontend;
 
+import com.google.common.base.Throwables;
+import com.google.common.collect.Iterables;
 import com.google.j2cl.common.Problems;
 import com.google.j2cl.transpiler.ast.CompilationUnit;
 import com.google.j2cl.transpiler.ast.Library;
@@ -23,7 +25,8 @@ import com.google.j2cl.transpiler.frontend.javac.JavacParser;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitBuilder;
 import com.google.j2cl.transpiler.frontend.jdt.CompilationUnitsAndTypeBindings;
 import com.google.j2cl.transpiler.frontend.jdt.JdtParser;
-import com.google.j2cl.transpiler.frontend.kotlin.KotlinParser;
+import java.lang.reflect.Constructor;
+import java.util.Arrays;
 import java.util.List;
 
 /** Drives the frontend to parse, type check and resolve Java source code. */
@@ -62,7 +65,25 @@ public enum Frontend {
   KOTLIN {
     @Override
     public List<CompilationUnit> compile(FrontendOptions options, Problems problems) {
-      return new KotlinParser(options.getClasspaths(), problems).parseFiles(options.getSources());
+      try {
+        // Temporary workaround to turn Kotlin compiler dep into a soft runtime dependency.
+        // TODO(b/217287994): Remove after a regular dependency is allowed.
+        Class<?> kotlinParser =
+            Class.forName("com.google.j2cl.transpiler.frontend.kotlin.KotlinParser");
+        Constructor<?> parserCtor =
+            Iterables.getOnlyElement(Arrays.asList(kotlinParser.getDeclaredConstructors()));
+        Object parserInstance = parserCtor.newInstance(options.getClasspaths(), problems);
+        @SuppressWarnings("unchecked")
+        List<CompilationUnit> compilationUnits =
+            (List<CompilationUnit>)
+                kotlinParser
+                    .getMethod("parseFiles", List.class)
+                    .invoke(parserInstance, options.getSources());
+        return compilationUnits;
+      } catch (Exception e) {
+        Throwables.throwIfUnchecked(e);
+        throw new RuntimeException(e);
+      }
     }
 
     @Override

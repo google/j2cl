@@ -252,11 +252,16 @@ def _j2cl_transpile(
         args.add("-generatekytheindexingmetadata")
     args.add_all(srcs)
 
+    #  TODO(b/217287994): Remove the ability to do transpiler override.
+    j2cl_transpiler_override = None
+    if hasattr(ctx.executable, "j2cl_transpiler_override"):
+        j2cl_transpiler_override = ctx.executable.j2cl_transpiler_override
+
     ctx.actions.run(
         progress_message = "Transpiling to JavaScript %s" % ctx.label,
         inputs = depset(srcs, transitive = [classpath]),
         outputs = [output_dir, library_info_output],
-        executable = ctx.executable._j2cl_transpiler,
+        executable = j2cl_transpiler_override or ctx.executable._j2cl_transpiler,
         arguments = [args],
         env = dict(LANG = "en_US.UTF-8"),
         execution_requirements = {"supports-workers": "1"},
