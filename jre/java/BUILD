@@ -2,16 +2,13 @@
 #   j2cl/jre: JRE subset for transpilation.
 #
 
-load("//build_defs:rules.bzl", "j2cl_library", "j2wasm_library")
+load("//build_defs:rules.bzl", "j2cl_import", "j2cl_library", "j2wasm_library")
 load("@bazel_tools//tools/jdk:default_java_toolchain.bzl", "default_java_toolchain")
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_library")
 load(":package_sources.bzl", "package_sources")
 load(":jdk_system.bzl", "jdk_system")
 
-package(
-    default_visibility = ["//transpiler/javatests:__subpackages__"],
-    licenses = ["notice"],  # Apache 2.0
-)
+package(licenses = ["notice"])
 
 config_setting(
     name = "experimental_java11_support",
@@ -53,47 +50,52 @@ JRE_JAVAC_OPTS = JRE_JAVAC_VERSION_OPTS + [
     "-XDinjectLogSites=false",
 ]
 
+java_library(
+    name = "javaemul_internal_annotations",
+    srcs = glob(["javaemul/internal/annotations/*.java"]),
+)
+
+j2cl_import(
+    name = "javaemul_internal_annotations-j2cl",
+    jar = ":javaemul_internal_annotations",
+    visibility = [
+        "//third_party/java_src/jsinterop_base:__subpackages__",
+        "//transpiler/javatests:__subpackages__",
+    ],
+)
+
+BASE_JRE_SRCS = select({
+    ":experimental_java11_support": glob(
+        ["**/*.java"],
+        exclude = [
+            "javaemul/internal/annotations/**",
+        ],
+    ),
+    "//conditions:default": glob(
+        ["**/*.java"],
+        exclude = [
+            "module-info.java",
+            "javaemul/internal/annotations/**",
+        ],
+    ),
+})
+
 package_sources(
     name = "jre_java_files",
-    srcs = [
-        "//third_party:gwt_java_emul",
-        "//third_party:gwt_java_emul_internal",
-    ],
+    srcs = BASE_JRE_SRCS,
     excludes = glob(["super-wasm/**"]),
-    super_srcs = select({
-        ":experimental_java11_support": glob(["**/*.java"]),
-        "//conditions:default": glob(
-            ["**/*.java"],
-            exclude = ["module-info.java"],
-        ),
-    }),
 )
 
 package_sources(
     name = "jre_java_files-j2wasm",
-    srcs = [
-        "//third_party:gwt_java_emul",
-        "//third_party:gwt_java_emul_internal",
-    ],
+    srcs = BASE_JRE_SRCS,
     excludes = [
         "java/util/InternalHashCodeMap.java",  # J2WASM HashMap doesn't need it.
         "java/util/InternalStringMap.java",  # J2WASM HashMap doesn't need it.
         "java/util/AbstractHashMap.java",  # J2WASM HashMap doesn't need it.
-        "Casts.java",  # J2WASM doesn't need it.
+        "javaemul/internal/Casts.java",  # J2WASM doesn't need it.
     ],
-    super_srcs = select({
-        ":experimental_java11_support": glob(
-            ["**/*.java"],
-            exclude = glob(["**/super-wasm/*.java"]) + [
-                "javaemul/internal/LongUtils.java",  # GWT version actually works for WASM in this case.
-            ],
-        ),
-        "//conditions:default": glob(
-            ["**/*.java"],
-            exclude = ["module-info.java"],
-        ),
-    }),
-    super_wasm_srcs = glob(["super-wasm/**/*.java"]),
+    super_srcs = glob(["super-wasm/**/*.java"]),
 )
 
 filegroup(
@@ -108,6 +110,7 @@ filegroup(
     ) + [
         "//jre/java/javaemul/internal/vmbootstrap/primitives",
     ],
+    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
 )
 
 closure_js_library(
@@ -125,7 +128,7 @@ j2wasm_library(
     javacopts = JRE_JAVAC_OPTS,
     visibility = ["//build_defs/internal_do_not_use:__pkg__"],
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2wasm",
+        ":javaemul_internal_annotations-j2wasm",
         "//third_party:gwt-jsinterop-annotations-j2wasm",
     ],
 )
@@ -145,13 +148,14 @@ j2cl_library(
     javacopts = JRE_JAVAC_OPTS,
     visibility = [
         "//:__pkg__",
+        # Temporary for j2kt_library
         "//transpiler/javatests:__subpackages__",
     ],
     deps = [
+        ":javaemul_internal_annotations-j2cl",
         ":jre_externs",
         "//third_party:closure_math_long",
         "//third_party:closure_reflect",
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )
@@ -162,9 +166,9 @@ java_library(
     name = "jre_bootclasspath",
     srcs = [":jre_java_files"],
     javacopts = JRE_JAVAC_OPTS,
-    visibility = ["//transpiler/javatests:__subpackages__"],
+    visibility = ["//transpiler/javatests/com/google/j2cl/transpiler:__pkg__"],
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations",
+        ":javaemul_internal_annotations",
         "//third_party:gwt-jsinterop-annotations",
     ],
 )
@@ -173,9 +177,8 @@ java_library(
     name = "jre_bootclasspath-j2wasm",
     srcs = [":jre_java_files-j2wasm"],
     javacopts = JRE_JAVAC_OPTS,
-    visibility = ["//transpiler/javatests:__subpackages__"],
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations",
+        ":javaemul_internal_annotations",
         "//third_party:gwt-jsinterop-annotations",
     ],
 )

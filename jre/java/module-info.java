@@ -12,7 +12,6 @@
  * the License.
  */
 module java.base {
-  exports java.beans;
   exports java.io;
   exports java.lang.annotation;
   exports java.lang.invoke;

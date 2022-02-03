@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest;
 
-import com.google.gwt.emultest.java.internal.CoercionsTest;
 import com.google.gwt.emultest.java.io.BufferedWriterTest;
 import com.google.gwt.emultest.java.io.ByteArrayInputStreamTest;
 import com.google.gwt.emultest.java.io.ByteArrayOutputStreamTest;
@@ -69,8 +68,6 @@ import org.junit.runners.Suite.SuiteClasses;
 /** Test JRE emulations. */
 @RunWith(Suite.class)
 @SuiteClasses({
-  CoercionsTest.class,
-
   // -- java.io
   BufferedWriterTest.class,
   ByteArrayInputStreamTest.class,

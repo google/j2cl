@@ -4,7 +4,6 @@
 load("@io_bazel_rules_closure//closure:defs.bzl", "closure_js_binary")
 load(":j2cl_multi_test.bzl", "j2cl_multi_test")
 load("//javascript/tools/jscompiler/builddefs:flags.bzl", "VERBOSE_WARNING_FLAGS_STRICT", "WHITESPACE_ONLY_FLAGS")
-load("//jre/java:package_sources.bzl", "package_sources")
 load("//build_defs:rules.bzl", "j2cl_library", "j2cl_test")
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
@@ -40,26 +39,12 @@ j2cl_library(
     ],
 )
 
-package_sources(
-    name = "java_emul_internal",
-    srcs = ["//third_party/java_src/gwt/svn/trunk/user:java_emul_internal"],
-    excludes = [
-        # Emulated charset contains classes extending from
-        # java.nio.charset.Charset that are not implementing all Java methods.
-        # This is okay in the emulated version since emulated
-        # java.nio.charset.Charset does not have these methods.
-        "javaemul/internal/EmulatedCharset.java",
-    ],
-)
-
 # This runs all GWTTestCases for emul in a pure JRE, this way we can make sure that our tests
 # assert the right behaviour for the JRE emulation.
 java_test(
     name = "AllEmulTest_Java",
     size = "small",
-    srcs = glob(["**/*.java"]) + [
-        ":java_emul_internal",
-    ],
+    srcs = glob(["**/*.java"]),
     javacopts = [
         "-Xep:DoNotCall:OFF",
         "-Xep:IdentityBinaryExpression:OFF",
@@ -71,7 +56,6 @@ java_test(
     ],
     test_class = "com.google.gwt.emultest.AllTests",
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations",
         "//third_party:gwt-jsinterop-annotations",
         "//third_party:junit",
     ],
