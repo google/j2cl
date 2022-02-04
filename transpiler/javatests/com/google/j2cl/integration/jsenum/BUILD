@@ -20,7 +20,7 @@ integration_test(
     # JsInterop features are not supported in WASM.
     enable_wasm = False,
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
+        "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

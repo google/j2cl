@@ -18,8 +18,8 @@ integration_test(
     closure_defines = {"jre.classMetadata": "'STRIPPED'"},
     optimize_autovalue = True,
     deps = [
+        "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:auto_value-j2cl",
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

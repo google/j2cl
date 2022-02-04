@@ -14,7 +14,7 @@ j2wasm_library(
     srcs = glob(["*.java"]),
     javacopts = ["-XepDisableAllChecks"],
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2wasm",
+        "//jre/java:javaemul_internal_annotations-j2wasm",
         "//third_party:gwt-jsinterop-annotations-j2wasm",
         "//transpiler/javatests/com/google/j2cl/integration/testing:testing-j2wasm",
     ],
@@ -31,7 +31,7 @@ integration_test(
         "*.js",
     ]),
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
+        "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",
     ],
 )

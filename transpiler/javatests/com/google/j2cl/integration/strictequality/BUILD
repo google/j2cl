@@ -15,6 +15,6 @@ integration_test(
     name = "strictequality",
     srcs = ["Main.java"],
     deps = [
-        "//third_party:gwt-javaemul-internal-annotations-j2cl",
+        "//jre/java:javaemul_internal_annotations-j2cl",
     ],
 )

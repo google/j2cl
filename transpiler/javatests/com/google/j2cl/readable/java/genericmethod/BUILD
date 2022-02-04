@@ -10,5 +10,5 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    deps = ["//third_party:gwt-javaemul-internal-annotations-j2cl"],
+    deps = ["//jre/java:javaemul_internal_annotations-j2cl"],
 )

@@ -169,26 +169,6 @@ alias(
 )
 
 alias(
-    name = "gwt_java_emul",
-    actual = "@org_gwtproject_gwt//user:java_emul",
-)
-
-alias(
-    name = "gwt_java_emul_internal",
-    actual = "@org_gwtproject_gwt//user:java_emul_internal",
-)
-
-alias(
-    name = "gwt-javaemul-internal-annotations",
-    actual = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
-)
-
-j2cl_import(
-    name = "gwt-javaemul-internal-annotations-j2cl",
-    jar = "@org_gwtproject_gwt//user:gwt-javaemul-internal-annotations",
-)
-
-alias(
     name = "gwt-jsinterop-annotations",
     actual = "@com_google_jsinterop_annotations-j2cl//:jsinterop-annotations",
 )
