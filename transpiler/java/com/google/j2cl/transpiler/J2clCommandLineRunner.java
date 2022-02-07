@@ -58,7 +58,7 @@ public final class J2clCommandLineRunner extends CommandLineTool {
   Path output = Paths.get(".");
 
   @Option(name = "-optimizeautovalue", usage = "Enables optimizations of AutoValue types.")
-  boolean optimizeAutoValue = false;
+  boolean optimizeAutoValue = true;
 
   @Option(
       name = "-readablesourcemaps",

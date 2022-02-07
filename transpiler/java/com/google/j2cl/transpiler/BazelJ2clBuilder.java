@@ -83,7 +83,7 @@ final class BazelJ2clBuilder extends BazelWorker {
 
   @Option(
       name = "-optimizeautovalue",
-      usage = "Enables experimental optimizations for AutoValue. Not production ready.",
+      usage = "Enables optimizations of AutoValue types.",
       hidden = true)
   protected boolean optimizeAutoValue = false;
 

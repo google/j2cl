@@ -61,7 +61,7 @@ def _collect_runfiles(ctx, files, deps):
 _J2CL_INTERNAL_LIB_ATTRS = {
     "readable_source_maps": attr.bool(default = False),
     "readable_library_info": attr.bool(default = False),
-    "optimize_autovalue": attr.bool(default = False),
+    "optimize_autovalue": attr.bool(default = True),
     "experimental_enable_jspecify_support_do_not_enable_without_jspecify_static_checking_or_you_might_cause_an_outage": attr.bool(default = False),
 }
 
