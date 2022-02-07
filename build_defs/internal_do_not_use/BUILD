@@ -36,6 +36,8 @@ alias(
 alias(
     name = "BazelJ2clBuilderWithKolinSupport",
     actual = "//transpiler/java/com/google/j2cl/transpiler:BazelJ2clBuilderWithKolinSupport",
+    # WARNING: Don't increase the visibility without talking to Kotlin team.
+    visibility = ["//transpiler/javatests:__subpackages__"],
 )
 
 # ***************************************************
