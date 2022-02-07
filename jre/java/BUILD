@@ -59,7 +59,7 @@ j2cl_import(
     name = "javaemul_internal_annotations-j2cl",
     jar = ":javaemul_internal_annotations",
     visibility = [
-        "//third_party/java_src/jsinterop_base:__subpackages__",
+        "@com_google_jsinterop_base//:__subpackages__",
         "//transpiler/javatests:__subpackages__",
     ],
 )

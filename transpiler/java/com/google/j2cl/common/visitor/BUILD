@@ -1,7 +1,10 @@
 load("//build_defs:rules.bzl", "j2cl_import")
 
 package(
-    default_visibility = ["//visibility:public"],
+    default_visibility = [
+        "@com_google_jsinterop_generator//:__subpackages__",
+        "//transpiler:__subpackages__",
+    ],
     licenses = ["notice"],  # Apache 2.0
 )
 
