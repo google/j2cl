@@ -15,8 +15,6 @@
  */
 package java.lang;
 
-import jsinterop.annotations.JsType;
-
 /**
  * See <a
  * href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/NullPointerException.html">the
@@ -33,15 +31,5 @@ public class NullPointerException extends JsException {
 
   NullPointerException(Object typeError) {
     super(typeError);
-  }
-
-  // Do not add @Override since J2CL doesn't have the method.
-  Object createError(String msg) {
-    return new NativeTypeError(msg);
-  }
-
-  @JsType(isNative = true, name = "TypeError", namespace = "<window>")
-  private static class NativeTypeError {
-    NativeTypeError(String msg) { }
   }
 }

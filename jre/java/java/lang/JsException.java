@@ -39,7 +39,6 @@ public class JsException extends RuntimeException {
     super();
   }
 
-  // Note that this initialization path is only used for J2CL transpiler, not in GWT.
   @Override
   void privateInitError(Object error) {
     super.privateInitError(backingJsObject == UNINITIALIZED ? error : backingJsObject);
