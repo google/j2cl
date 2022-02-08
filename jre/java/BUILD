@@ -53,6 +53,9 @@ JRE_JAVAC_OPTS = JRE_JAVAC_VERSION_OPTS + [
 java_library(
     name = "javaemul_internal_annotations",
     srcs = glob(["javaemul/internal/annotations/*.java"]),
+    visibility = [
+        "@com_google_jsinterop_base//:__subpackages__",
+    ],
 )
 
 j2cl_import(
