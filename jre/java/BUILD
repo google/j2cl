@@ -154,6 +154,10 @@ j2cl_library(
         # Temporary for j2kt_library
         "//transpiler/javatests:__subpackages__",
     ],
+    exports = [
+        # J2CL transpiler optimizations to AutoValue may add this dependency.
+        "//third_party:closure_reflect",
+    ],
     deps = [
         ":javaemul_internal_annotations-j2cl",
         ":jre_externs",
