@@ -63,6 +63,7 @@ def _compile(
             jvm_deps,
             jvm_exports,
             plugins,
+            exported_plugins,
             output_jar,
             javac_opts,
         )
@@ -172,6 +173,7 @@ def _kt_compile(
         deps = [],
         exports = [],
         plugins = [],
+        exported_plugins = [],
         output_jar = None,
         javac_opts = []):
     fail("Kotlin frontend is disabled")
