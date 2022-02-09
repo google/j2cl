@@ -29,7 +29,6 @@ import java.util.Comparator;
 import java.util.Locale;
 import java.util.StringJoiner;
 import javaemul.internal.ArrayHelper;
-import javaemul.internal.Coercions;
 import javaemul.internal.EmulatedCharset;
 import javaemul.internal.JsUtils;
 import javaemul.internal.NativeRegExp;
@@ -407,7 +406,7 @@ public final class String implements Comparable<String>, CharSequence,
     int h = 0;
     for (int i = 0; i < length(); i++) {
       // Following is the common hash function '(31 * h + x)' as '(x << 5) - x' equal to '31 * x'.
-      h = Coercions.ensureInt((h << 5) - h + charAt(i));
+      h = (h << 5) - h + charAt(i);
     }
     return h;
   }

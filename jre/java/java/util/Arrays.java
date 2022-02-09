@@ -16,7 +16,6 @@
 
 package java.util;
 
-import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkArraySize;
 import static javaemul.internal.InternalPreconditions.checkCriticalArrayBounds;
@@ -664,7 +663,6 @@ public class Arrays {
       }
 
       hashCode = 31 * hashCode + hash;
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
 
     return hashCode;
@@ -999,7 +997,6 @@ public class Arrays {
     int hashCode = 1;
     for (boolean e : a) {
       hashCode = 31 * hashCode + Boolean.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1011,7 +1008,6 @@ public class Arrays {
     int hashCode = 1;
     for (byte e : a) {
       hashCode = 31 * hashCode + Byte.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1023,7 +1019,6 @@ public class Arrays {
     int hashCode = 1;
     for (char e : a) {
       hashCode = 31 * hashCode + Character.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1035,7 +1030,6 @@ public class Arrays {
     int hashCode = 1;
     for (double e : a) {
       hashCode = 31 * hashCode + Double.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1047,7 +1041,6 @@ public class Arrays {
     int hashCode = 1;
     for (float e : a) {
       hashCode = 31 * hashCode + Float.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1059,7 +1052,6 @@ public class Arrays {
     int hashCode = 1;
     for (int e : a) {
       hashCode = 31 * hashCode + Integer.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1071,7 +1063,6 @@ public class Arrays {
     int hashCode = 1;
     for (long e : a) {
       hashCode = 31 * hashCode + Long.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1083,7 +1074,6 @@ public class Arrays {
     int hashCode = 1;
     for (Object e : a) {
       hashCode = 31 * hashCode + Objects.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1095,7 +1085,6 @@ public class Arrays {
     int hashCode = 1;
     for (short e : a) {
       hashCode = 31 * hashCode + Short.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }

@@ -15,7 +15,6 @@
  */
 package java.util;
 
-import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkArgument;
 import static javaemul.internal.InternalPreconditions.checkElementIndex;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
@@ -1381,7 +1380,6 @@ public class Collections {
     int hashCode = 0;
     for (T e : collection) {
       hashCode = hashCode + Objects.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }
@@ -1393,7 +1391,6 @@ public class Collections {
     int hashCode = 1;
     for (T e : list) {
       hashCode = 31 * hashCode + Objects.hashCode(e);
-      hashCode = ensureInt(hashCode); // make sure we don't overflow
     }
     return hashCode;
   }

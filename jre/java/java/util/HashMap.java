@@ -15,7 +15,6 @@
  */
 package java.util;
 
-import static javaemul.internal.Coercions.ensureInt;
 
 import java.io.Serializable;
 
@@ -73,8 +72,6 @@ public class HashMap<K, V> extends AbstractHashMap<K, V> implements Cloneable,
     if (key == null) {
       return 0;
     }
-    int hashCode = key.hashCode();
-    // Coerce to int -- our classes all do this, but a user-written class might not.
-    return ensureInt(hashCode);
+    return key.hashCode();
   }
 }

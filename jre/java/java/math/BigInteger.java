@@ -34,7 +34,6 @@
  */
 package java.math;
 
-import static javaemul.internal.Coercions.ensureInt;
 import static javaemul.internal.InternalPreconditions.checkCriticalArgument;
 import static javaemul.internal.InternalPreconditions.checkNotNull;
 
@@ -846,7 +845,7 @@ public class BigInteger extends Number implements Comparable<BigInteger>,
   public int intValue() {
     int i = digits[0];
     // i is always positive except for Integer.MIN_VALUE because of int overflow
-    return sign > 0 ? i : ensureInt(-i);
+    return sign > 0 ? i : -i;
   }
 
   /**
