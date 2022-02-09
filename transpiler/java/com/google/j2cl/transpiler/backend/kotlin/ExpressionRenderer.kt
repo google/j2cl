@@ -24,6 +24,7 @@ import com.google.j2cl.transpiler.ast.BinaryOperator
 import com.google.j2cl.transpiler.ast.BooleanLiteral
 import com.google.j2cl.transpiler.ast.CastExpression
 import com.google.j2cl.transpiler.ast.ConditionalExpression
+import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.Expression
 import com.google.j2cl.transpiler.ast.ExpressionWithComment
 import com.google.j2cl.transpiler.ast.FieldAccess
@@ -71,8 +72,8 @@ fun Renderer.renderExpression(expression: Expression) {
     is NewInstance -> renderNewInstance(expression)
     is PostfixExpression -> renderPostfixExpression(expression)
     is PrefixExpression -> renderPrefixExpression(expression)
-    is SuperReference -> render("super")
-    is ThisReference -> render("this")
+    is SuperReference -> renderSuperReference(expression)
+    is ThisReference -> renderThisReference(expression)
     is VariableDeclarationExpression -> renderVariableDeclarationExpression(expression)
     is VariableReference -> renderVariableReference(expression)
     else -> renderTodo(expression::class.java.simpleName)
@@ -305,6 +306,22 @@ private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
     if (it == PrefixOperator.PLUS || it == PrefixOperator.MINUS) sourceBuilder.append(" ")
   }
   renderRightSubExpression(expression, expression.operand)
+}
+
+private fun Renderer.renderSuperReference(superReference: SuperReference) {
+  render("super")
+}
+
+private fun Renderer.renderThisReference(thisReference: ThisReference) {
+  render("this")
+  if (thisReference.isQualified) {
+    renderLabelReference(thisReference.typeDescriptor)
+  }
+}
+
+private fun Renderer.renderLabelReference(typeDescriptor: DeclaredTypeDescriptor) {
+  render("@")
+  renderIdentifier(typeDescriptor.typeDeclaration.simpleBinaryName)
 }
 
 private fun Renderer.renderVariableDeclarationExpression(

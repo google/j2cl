@@ -48,7 +48,7 @@ open class Lambdas {
   this.call(lambdas.`Lambdas$FunctionalInterface` (fun(i: Int): Int {
    this.funOuter()
    this.funOuter()
-   this.funOuter()
+   this@Lambdas.funOuter()
    return i + 2
   }), 10)
  }
@@ -263,10 +263,10 @@ open class `Lambdas$LambdaInSubClass`: lambdas.`Lambdas$Parent` {
   val l: lambdas.`Lambdas$FunctionalInterface`? = lambdas.`Lambdas$FunctionalInterface` (fun(i: Int): Int {
    this.funInParent()
    this.funInParent()
-   this.funInParent()
+   this@`Lambdas$LambdaInSubClass`.funInParent()
    var a: Int = this.fieldInParent
    a = this.fieldInParent
-   a = this.fieldInParent
+   a = this@`Lambdas$LambdaInSubClass`.fieldInParent
    return a
   })
  }
