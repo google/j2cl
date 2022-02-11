@@ -199,13 +199,6 @@ def setup_j2cl_workspace(**kwargs):
     )
 
     http_archive(
-        name = "org_gwtproject_gwt",
-        strip_prefix = "gwt-073679594c6ead7abe501009f8ba31eb390047fc",
-        url = "https://github.com/gwtproject/gwt/archive/073679594c6ead7abe501009f8ba31eb390047fc.zip",
-        sha256 = "731879b8e56024a34f36b83655975a474e1ac1dffdfe72724e337976ac0e1749",
-    )
-
-    http_archive(
         name = "org_jbox2d",
         strip_prefix = "jbox2d-jbox2d-2.2.1.1/jbox2d-library",
         urls = ["https://github.com/jbox2d/jbox2d/archive/jbox2d-2.2.1.1.zip"],
