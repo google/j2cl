@@ -17,7 +17,6 @@ package com.google.gwt.emultest.java.util;
 
 import static java.util.Arrays.asList;
 
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.testing.TestUtils;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -112,8 +111,6 @@ public class ArrayDequeTest extends TestCollection {
       new ArrayDeque<>(null);
       fail();
     } catch (NullPointerException expected) {
-      // expected
-    } catch (JavaScriptException expected) {
       // expected
     }
 

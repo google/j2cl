@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.junit.client.GWTTestCase;
 
 /**
@@ -36,33 +35,5 @@ public class ObjectTest extends GWTTestCase {
 
     Object obj2 = new Object();
     assertEquals(obj2.hashCode(), obj2.hashCode());
-  }
-
-  /**
-   * Tests that 'java.lang.Object.castableTypeMap' does not shadow a local field.
-   */
-  public void testCastableTypeMapShadow() {
-    final JavaScriptObject castableTypeMap = JavaScriptObject.createObject();
-    class TestClass {
-      public JavaScriptObject getCastableTypeMap() {
-        return castableTypeMap;
-      }
-    }
-    TestClass test = new TestClass();
-    assertEquals(castableTypeMap, test.getCastableTypeMap());
-  }
-
-  /**
-   * Tests that 'java.lang.Object.typeMarker' does not shadow a local field.
-   */
-  public void testTypeMarkerShadow() {
-    final JavaScriptObject typeMarker = JavaScriptObject.createObject();
-    class TestClass {
-      public JavaScriptObject getTypeMarker() {
-        return typeMarker;
-      }
-    }
-    TestClass test = new TestClass();
-    assertEquals(typeMarker, test.getTypeMarker());
   }
 }

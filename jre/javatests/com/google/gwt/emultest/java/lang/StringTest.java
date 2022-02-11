@@ -15,7 +15,6 @@
  */
 package com.google.gwt.emultest.java.lang;
 
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.testing.TestUtils;
 import java.io.UnsupportedEncodingException;
@@ -119,16 +118,12 @@ public class StringTest extends GWTTestCase {
       fail();
     } catch (NullPointerException e) {
       // expected
-    } catch (JavaScriptException e) {
-      // expected
     }
 
     try {
       returnNull().compareTo(returnNull());
       fail();
     } catch (NullPointerException e) {
-      // expected
-    } catch (JavaScriptException e) {
       // expected
     }
   }
@@ -155,16 +150,12 @@ public class StringTest extends GWTTestCase {
       fail();
     } catch (NullPointerException e) {
       // expected
-    } catch (JavaScriptException e) {
-      // expected
     }
 
     try {
       hideFromCompiler("").concat(returnNull());
       fail();
     } catch (NullPointerException e) {
-      // expected
-    } catch (JavaScriptException e) {
       // expected
     }
   }
@@ -201,15 +192,11 @@ public class StringTest extends GWTTestCase {
       new String(returnNull());
     } catch (NullPointerException e) {
       // expected
-    } catch (JavaScriptException e) {
-      // expected
     }
 
     try {
       new String(hideFromCompiler((StringBuilder) null));
     } catch (NullPointerException e) {
-      // expected
-    } catch (JavaScriptException e) {
       // expected
     }
   }
@@ -370,16 +357,12 @@ public class StringTest extends GWTTestCase {
       fail();
     } catch (NullPointerException e) {
       // expected
-    } catch (JavaScriptException e) {
-      // expected
     }
 
     try {
       returnNull().equals(returnNull());
       fail();
     } catch (NullPointerException e) {
-      // expected
-    } catch (JavaScriptException e) {
       // expected
     }
   }
@@ -399,16 +382,12 @@ public class StringTest extends GWTTestCase {
       fail();
     } catch (NullPointerException e) {
       // expected
-    } catch (JavaScriptException e) {
-      // expected
     }
 
     try {
       returnNull().equalsIgnoreCase(returnNull());
       fail();
     } catch (NullPointerException e) {
-      // expected
-    } catch (JavaScriptException e) {
       // expected
     }
   }
@@ -531,8 +510,6 @@ public class StringTest extends GWTTestCase {
       fail();
     } catch (NullPointerException e) {
       // expected
-    } catch (JavaScriptException e) {
-      // expected
     }
   }
 
@@ -551,8 +528,6 @@ public class StringTest extends GWTTestCase {
       fail();
     } catch (NullPointerException e) {
       // expected
-    } catch (JavaScriptException e) {
-      // expected
     }
   }
 
@@ -567,8 +542,6 @@ public class StringTest extends GWTTestCase {
       returnNull().intern();
       fail();
     } catch (NullPointerException e) {
-      // expected
-    } catch (JavaScriptException e) {
       // expected
     }
   }
