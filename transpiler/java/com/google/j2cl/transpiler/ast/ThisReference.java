@@ -71,7 +71,7 @@ public class ThisReference extends Expression {
 
   @Override
   public ThisReference clone() {
-    return new ThisReference(typeDescriptor);
+    return new ThisReference(typeDescriptor, isQualified);
   }
 
   @Override

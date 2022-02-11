@@ -1056,7 +1056,9 @@ public class AstUtils {
         qualifierTypeDescriptor != null;
         qualifierTypeDescriptor = qualifierTypeDescriptor.getEnclosingTypeDescriptor()) {
       if (qualifierTypeDescriptor.isSubtypeOf(targetTypeDescriptor)) {
-        return new ThisReference(qualifierTypeDescriptor);
+        // If the reference is to an enclosing type, then mark it as qualified.
+        boolean isQualified = !qualifierTypeDescriptor.hasSameRawType(contextTypeDescriptor);
+        return new ThisReference(qualifierTypeDescriptor, isQualified);
       }
     }
 
