@@ -90,6 +90,10 @@ public class Method extends Member implements MethodLike {
     return methodDescriptor.isConstructor();
   }
 
+  public boolean isPrimaryConstructor() {
+    return methodDescriptor.isPrimaryConstructor();
+  }
+
   @Override
   public boolean isMethod() {
     return true;

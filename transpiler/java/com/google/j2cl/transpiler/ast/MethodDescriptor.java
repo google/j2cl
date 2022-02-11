@@ -212,6 +212,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
   @Override
   public abstract boolean isConstructor();
 
+  public abstract boolean isPrimaryConstructor();
+
   public boolean isVarargs() {
     return getParameterDescriptors().stream().anyMatch(ParameterDescriptor::isVarargs);
   }
@@ -671,6 +673,7 @@ public abstract class MethodDescriptor extends MemberDescriptor {
         .setJsInfo(JsInfo.NONE)
         .setAbstract(false)
         .setConstructor(false)
+        .setPrimaryConstructor(false)
         .setDefaultMethod(false)
         .setNative(false)
         .setStatic(false)
@@ -893,6 +896,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
 
     public abstract Builder setConstructor(boolean isConstructor);
 
+    public abstract Builder setPrimaryConstructor(boolean isPrimaryConstructor);
+
     public abstract Builder setAbstract(boolean isAbstract);
 
     public abstract Builder setFinal(boolean isFinal);
@@ -1047,6 +1052,8 @@ public abstract class MethodDescriptor extends MemberDescriptor {
                 || getReturnTypeDescriptor().get().isSameBaseType(getEnclosingTypeDescriptor()));
 
         setName(CONSTRUCTOR_METHOD_NAME);
+      } else {
+        setPrimaryConstructor(false);
       }
 
       if (!getReturnTypeDescriptor().isPresent()) {
