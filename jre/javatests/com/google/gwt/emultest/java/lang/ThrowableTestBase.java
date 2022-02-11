@@ -33,23 +33,13 @@ public abstract class ThrowableTestBase extends GWTTestCase {
   }
 
   @JsMethod
-  protected static native Throwable createJsException(Object wrapped) /*-{
-    return @com.google.gwt.core.client.JavaScriptException::new(Ljava/lang/Object;)(wrapped);
-  }-*/;
+  protected static native Throwable createJsException(Object wrapped);
 
   @JsMethod
-  protected static native void throwNative(Object e) /*-{
-    throw e;
-  }-*/;
+  protected static native void throwNative(Object e);
 
   @JsMethod
-  protected static native Object catchNative(Thrower thrower) /*-{
-    try {
-      thrower();
-    } catch (e) {
-      return e;
-    }
-  }-*/;
+  protected static native Object catchNative(Thrower thrower);
 
   protected static Throwable catchJava(Thrower thrower) {
     try {

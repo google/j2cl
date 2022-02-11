@@ -1757,9 +1757,7 @@ public class Java8Test {
   }
 
   @JsMethod
-  private static native String callFromJSNI(VarargsFunction f) /*-{
-    return f(2, "a", "b", "c");
-  }-*/;
+  private static native String callFromJSNI(VarargsFunction f);
 
   @Test
   public void testJsVarargsLambda() {
@@ -2002,11 +2000,7 @@ public class Java8Test {
   }
 
   @JsMethod
-  private static native JsFunctionInterface createNative() /*-{
-    return function () {
-      return 5;
-    };
-  }-*/;
+  private static native JsFunctionInterface createNative();
 
   @Test
   public void testJsFunction_withOverlay() {

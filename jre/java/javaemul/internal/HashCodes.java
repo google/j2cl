@@ -36,9 +36,7 @@ public class HashCodes {
 
   private static int nextHash;
 
-  public static native int getObjectIdentityHashCode(Object o) /*-{
-    return o.$H || (o.$H = @HashCodes::getNextHash()());
-  }-*/;
+  public static native int getObjectIdentityHashCode(Object o);
 
   public static int getNextHash() {
     return ++nextHash;

@@ -27,9 +27,7 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class ArraysTest {
   @JsMethod
-  private static native Object createJsArray(int length) /*-{
-    return new Array(length);
-  }-*/;
+  private static native Object createJsArray(int length);
 
   @Test
   public void testObjectArray_empty() {

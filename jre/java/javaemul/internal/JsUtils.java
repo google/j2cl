@@ -53,9 +53,7 @@ public final class JsUtils {
   }
 
   @JsMethod
-  public static native int toDoubleFromUnsignedInt(int value) /*-{
-    return value >>> 0;
-  }-*/;
+  public static native int toDoubleFromUnsignedInt(int value);
 
   private static String numberToString(double value, int radix) {
     NativeNumber number = JsUtils.uncheckedCast(value);
@@ -69,27 +67,17 @@ public final class JsUtils {
     String toPrecision(int precision);
   }
 
-  public static native boolean isUndefined(Object value) /*-{
-    return value === undefined;
-  }-*/;
+  public static native boolean isUndefined(Object value);
 
-  public static native double unsafeCastToDouble(Object number) /*-{
-   return number;
-  }-*/;
+  public static native double unsafeCastToDouble(Object number);
 
-  public static native boolean unsafeCastToBoolean(Object bool) /*-{
-   return bool;
-  }-*/;
+  public static native boolean unsafeCastToBoolean(Object bool);
 
   @UncheckedCast
-  public static native <T> T uncheckedCast(@DoNotAutobox Object o) /*-{
-    return o;
-  }-*/;
+  public static native <T> T uncheckedCast(@DoNotAutobox Object o);
 
   @UncheckedCast
-  public static native <T> T getProperty(Object map, String key) /*-{
-    return map[key];
-  }-*/;
+  public static native <T> T getProperty(Object map, String key);
 
   @JsType(isNative = true, namespace = "<window>")
   static class ArrayBuffer {

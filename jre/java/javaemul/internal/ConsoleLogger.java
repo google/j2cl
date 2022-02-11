@@ -74,19 +74,7 @@ public class ConsoleLogger {
   }
 
   @SuppressWarnings("unusable-by-js")
-  private static native String getBackingErrorStack(Throwable t) /*-{
-    var backingError = t.@Throwable::backingJsObject;
-
-    // Converts CollectorLegacy (IE8/IE9/Safari5) function stack to something readable.
-    function stringify(fnStack) {
-      if (!fnStack || fnStack.length == 0) {
-        return "";
-      }
-      return "\t" + fnStack.join("\n\t");
-    }
-
-    return backingError && (backingError.stack || stringify(t["fnStack"]));
-  }-*/;
+  private static native String getBackingErrorStack(Throwable t);
 
   @JsType(isNative = true, namespace = "<window>", name = "Function")
   private interface LogFn {
