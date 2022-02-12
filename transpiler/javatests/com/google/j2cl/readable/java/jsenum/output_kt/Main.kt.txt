@@ -8,21 +8,39 @@ open class Main {
   fun testJsEnumSwitch() {
    var comparableJsEnum: jsenum.`Main$ComparableJsEnum`? = if (jsenum.`Main$ComparableJsEnum`.ONE.getValue() == 1) jsenum.`Main$ComparableJsEnum`.TWO else null
    SWITCH@ do {
-    when (comparableJsEnum!!) {
-     jsenum.`Main$ComparableJsEnum`.TWO ->
+    CASE@ do {
+     CASE_1@ do {
+      when (comparableJsEnum!!) {
+       jsenum.`Main$ComparableJsEnum`.TWO -> {
+        break@CASE_1
+       }
+       else -> {
+        break@CASE
+       }
+      }
       break@SWITCH
-     else ->
-    }
+     } while (false)
+     break@SWITCH
+    } while (false)
    } while (false)
    val comparable: kotlin.Comparable<*>? = comparableJsEnum
    comparableJsEnum = comparable as jsenum.`Main$ComparableJsEnum`?
    var intJsEnum: jsenum.`Main$IntJsEnum`? = if (jsenum.`Main$IntJsEnum`.ELEVEN.getValue() == 10) jsenum.`Main$IntJsEnum`.ELEVEN else null
    SWITCH_1@ do {
-    when (intJsEnum!!) {
-     jsenum.`Main$IntJsEnum`.TWENTY ->
+    CASE_2@ do {
+     CASE_3@ do {
+      when (intJsEnum!!) {
+       jsenum.`Main$IntJsEnum`.TWENTY -> {
+        break@CASE_3
+       }
+       else -> {
+        break@CASE_2
+       }
+      }
       break@SWITCH_1
-     else ->
-    }
+     } while (false)
+     break@SWITCH_1
+    } while (false)
    } while (false)
    val o: kotlin.Any? = intJsEnum
    intJsEnum = o as jsenum.`Main$IntJsEnum`?
@@ -31,11 +49,20 @@ open class Main {
    isInstance = intJsEnum is kotlin.Comparable<*>
    val stringJsEnum: jsenum.`Main$StringJsEnum`? = if (jsenum.`Main$StringJsEnum`.ONE.getValue() === "10") jsenum.`Main$StringJsEnum`.THREE else null
    SWITCH_2@ do {
-    when (stringJsEnum!!) {
-     jsenum.`Main$StringJsEnum`.ONE ->
+    CASE_4@ do {
+     CASE_5@ do {
+      when (stringJsEnum!!) {
+       jsenum.`Main$StringJsEnum`.ONE -> {
+        break@CASE_5
+       }
+       else -> {
+        break@CASE_4
+       }
+      }
       break@SWITCH_2
-     else ->
-    }
+     } while (false)
+     break@SWITCH_2
+    } while (false)
    } while (false)
    (jsenum.`Main$NativeStringEnum`.ONE as java.lang.Enum<jsenum.`Main$NativeStringEnum`?>).compareTo(jsenum.`Main$NativeStringEnum`.THREE)
    jsenum.`Main$NativeStringEnum`.ONE == jsenum.`Main$NativeStringEnum`.THREE

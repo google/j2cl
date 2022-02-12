@@ -15,41 +15,97 @@ open class SwitchStatement {
 
  open fun main() {
   SWITCH@ do {
-   when ("one") {
-    "one" ->
-    "two" ->
-     break@SWITCH
-    else ->
-     return
-   }
+   CASE@ do {
+    CASE_1@ do {
+     CASE_2@ do {
+      when ("one") {
+       "one" -> {
+        break@CASE_2
+       }
+       "two" -> {
+        break@CASE_1
+       }
+       else -> {
+        break@CASE
+       }
+      }
+      break@SWITCH
+     } while (false)
+    } while (false)
+    break@SWITCH
+   } while (false)
+   return
   } while (false)
   SWITCH_1@ do {
-   when ('1') {
-    '1' ->
-    '2' ->
-     break@SWITCH_1
-    else ->
-     return
-   }
+   CASE_3@ do {
+    CASE_4@ do {
+     CASE_5@ do {
+      when ('1') {
+       '1' -> {
+        break@CASE_5
+       }
+       '2' -> {
+        break@CASE_4
+       }
+       else -> {
+        break@CASE_3
+       }
+      }
+      break@SWITCH_1
+     } while (false)
+    } while (false)
+    break@SWITCH_1
+   } while (false)
+   return
   } while (false)
   SWITCH_2@ do {
-   when (1) {
-    -2 ->
-    1 ->
-    2 ->
-     break@SWITCH_2
-    else ->
-     return
-   }
+   CASE_6@ do {
+    CASE_7@ do {
+     CASE_8@ do {
+      CASE_9@ do {
+       when (1) {
+        -2 -> {
+         break@CASE_9
+        }
+        1 -> {
+         break@CASE_8
+        }
+        2 -> {
+         break@CASE_7
+        }
+        else -> {
+         break@CASE_6
+        }
+       }
+       break@SWITCH_2
+      } while (false)
+     } while (false)
+    } while (false)
+    break@SWITCH_2
+   } while (false)
+   return
   } while (false)
   SWITCH_3@ do {
-   when (switchstatement.Numbers.ONE) {
-    switchstatement.Numbers.ONE ->
-    switchstatement.Numbers.TWO ->
-     break@SWITCH_3
-    else ->
-     return
-   }
+   CASE_10@ do {
+    CASE_11@ do {
+     CASE_12@ do {
+      when (switchstatement.Numbers.ONE) {
+       switchstatement.Numbers.ONE -> {
+        break@CASE_12
+       }
+       switchstatement.Numbers.TWO -> {
+        break@CASE_11
+       }
+       else -> {
+        break@CASE_10
+       }
+      }
+      break@SWITCH_3
+     } while (false)
+    } while (false)
+    break@SWITCH_3
+   } while (false)
+   return
   } while (false)
  }
 
@@ -63,27 +119,41 @@ open class SwitchStatement {
    val b: Int
    val i_1: Int
    SWITCH@ do {
-    when (3) {
-     1 ->
-      null
-      i = 0
-      if (true) {
-       j = 2
-       b = j + 1
+    CASE@ do {
+     CASE_1@ do {
+      when (3) {
+       1 -> {
+        break@CASE_1
+       }
+       3 -> {
+        break@CASE
+       }
       }
       break@SWITCH
-     3 ->
-      i = 3
-      assert(i == 3)
-      return
-    }
+     } while (false)
+     null
+     i = 0
+     if (true) {
+      j = 2
+      b = j + 1
+     }
+     break@SWITCH
+    } while (false)
+    i = 3
+    assert(i == 3)
+    return
    } while (false)
    SWITCH_1@ do {
-    when (5) {
-     5 ->
-      i_1 = 1
-      break@SWITCH_1
-    }
+    CASE_2@ do {
+     when (5) {
+      5 -> {
+       break@CASE_2
+      }
+     }
+     break@SWITCH_1
+    } while (false)
+    i_1 = 1
+    break@SWITCH_1
    } while (false)
    assert(false)
   }

@@ -150,7 +150,9 @@ private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {
 private fun Renderer.renderSwitchCase(switchCase: SwitchCase) {
   if (switchCase.isDefault) render("else") else renderExpression(switchCase.caseExpression)
   render(" -> ")
-  renderIndented { renderStartingWithNewLines(switchCase.statements) { renderStatement(it) } }
+  renderInCurlyBrackets {
+    renderStartingWithNewLines(switchCase.statements) { renderStatement(it) }
+  }
 }
 
 private fun Renderer.renderSwitchStatement(switchStatement: SwitchStatement) {

@@ -18,6 +18,7 @@ package com.google.j2cl.transpiler.ast;
 import com.google.j2cl.common.visitor.Processor;
 import com.google.j2cl.common.visitor.Visitable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.Nullable;
@@ -81,6 +82,10 @@ public class SwitchCase extends Node implements Cloneable<SwitchCase> {
     public Builder setStatements(Collection<Statement> statements) {
       this.statements = new ArrayList<>(statements);
       return this;
+    }
+
+    public Builder setStatements(Statement... statements) {
+      return setStatements(Arrays.asList(statements));
     }
 
     public Builder addStatement(Statement statement) {

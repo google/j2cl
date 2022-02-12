@@ -112,6 +112,7 @@ import com.google.j2cl.transpiler.passes.NormalizeShifts;
 import com.google.j2cl.transpiler.passes.NormalizeStaticMemberQualifiers;
 import com.google.j2cl.transpiler.passes.NormalizeStaticNativeMemberReferences;
 import com.google.j2cl.transpiler.passes.NormalizeSwitchStatements;
+import com.google.j2cl.transpiler.passes.NormalizeSwitchStatementsKotlin;
 import com.google.j2cl.transpiler.passes.NormalizeTryWithResources;
 import com.google.j2cl.transpiler.passes.OptimizeAnonymousInnerClassesToFunctionExpressions;
 import com.google.j2cl.transpiler.passes.OptimizeAutoValue;
@@ -408,6 +409,7 @@ public enum Backend {
           NormalizeFieldInitializationKotlin::new,
           NormalizeLabels::new,
           NormalizeForStatements::new,
+          NormalizeSwitchStatementsKotlin::new,
           NormalizeLabeledStatements::new,
           NormalizeNestedBlocks::new,
           () -> new NormalizeShifts(/* narrowAllToInt= */ true),
