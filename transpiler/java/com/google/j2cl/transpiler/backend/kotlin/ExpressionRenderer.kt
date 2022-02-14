@@ -211,10 +211,10 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
   renderMethodCallHeader(expression)
-  renderInvocation(expression)
+  renderInvocationArguments(expression)
 }
 
-private fun Renderer.renderInvocation(invocation: Invocation) {
+internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
   renderInParentheses {
     val parameters = invocation.target.parameterDescriptors.zip(invocation.arguments)
     renderCommaSeparated(parameters) { (parameterDescriptor, argument) ->
@@ -284,13 +284,13 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   if (mapsToKotlin(typeDescriptor)) {
     renderInParentheses {
       renderJavaTypeDescriptor(typeDescriptor)
-      renderInvocation(expression)
+      renderInvocationArguments(expression)
       render(" as ")
       renderTypeDescriptor(expression.typeDescriptor)
     }
   } else {
     renderTypeDescriptor(expression.typeDescriptor)
-    renderInvocation(expression)
+    renderInvocationArguments(expression)
   }
 }
 

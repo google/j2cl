@@ -83,9 +83,9 @@ open class `JsConstructorClass$Varargs`: jsconstructor.`JsConstructorClass$A` {
 }
 
 open class `JsConstructorClass$SubVarargs`: jsconstructor.`JsConstructorClass$Varargs` {
- constructor(i: kotlin.Any?, vararg args: Int): super(args)
+ constructor(i: kotlin.Any?, vararg args: Int): super(*(args))
 
- constructor(j: Int): this((java.lang.Object() as kotlin.Any), intArrayOf(j))
+ constructor(j: Int): this((java.lang.Object() as kotlin.Any), *(intArrayOf(j)))
 
  companion object {
   @kotlin.jvm.JvmStatic

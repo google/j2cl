@@ -153,9 +153,7 @@ private fun Renderer.renderConstructorInvocation(method: Method) {
   getConstructorInvocation(method)?.let { constructorInvocation ->
     render(": ")
     render(if (constructorInvocation.target.inSameTypeAs(method.descriptor)) "this" else "super")
-    renderInParentheses {
-      renderCommaSeparated(constructorInvocation.arguments) { renderExpression(it) }
-    }
+    renderInvocationArguments(constructorInvocation)
   }
 }
 
