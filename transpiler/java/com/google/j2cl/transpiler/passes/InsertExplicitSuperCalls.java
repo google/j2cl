@@ -102,16 +102,6 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
    */
   private static MethodDescriptor getDefaultSuperConstructorTarget(Type type) {
     DeclaredTypeDescriptor superTypeDescriptor = type.getSuperTypeDescriptor();
-    if (type.isEnum()) {
-      // Enum is special, in subclasses the constructors have two implicit parameters
-      // (name and ordinal) which are omitted. But when looking at the methods in the Enum class,
-      // those parameters are explicit.
-      // Anyway, the super class here is always Enum, which does not have a varargs constructor,
-      // so we can dispatch to the implicit super constructor as before.
-      // The anonymous inner enum values ARE NOT handled here since they are created with an
-      // explicit super call to the target provided by the frontend..
-      return AstUtils.createImplicitConstructorDescriptor(superTypeDescriptor);
-    }
 
     // Get all possible targets of an implicit super() call. The targets can either be a
     // parameterless constructor or if there is no parameterless constructor a varargs constructor
@@ -122,27 +112,36 @@ public class InsertExplicitSuperCalls extends NormalizationPass {
         superTypeDescriptor.getDeclaredMethodDescriptors().stream()
             .filter(MethodDescriptor::isConstructor)
             .filter(m -> m.isVisibleFrom(type.getTypeDescriptor()))
-            .filter(m -> m.getParameterDescriptors().isEmpty())
+            .filter(
+                m ->
+                    m.getParameterDescriptors().isEmpty()
+                        // The implicit enum constructor targed is defined with two parameters.
+                        || (type.isEnum() && m.getParameterDescriptors().size() == 2))
             .collect(MoreCollectors.toOptional());
 
-    if (superContructor.isPresent()) {
-      return superContructor.get();
+    if (!superContructor.isPresent()) {
+      // If no 0-argument constructor find a 1-argument varargs constructor. There might be more
+      // than 1 varargs constructor, if so apply the more specific overload rule. At this point
+      // there should be no ambiguity and a more specific overload is guaranteed, This is because at
+      // this point type checking succeed in the frontend and if there were any ambiguity the
+      // compile would have produced an error already.
+      superContructor =
+          superTypeDescriptor.getDeclaredMethodDescriptors().stream()
+              .filter(MethodDescriptor::isConstructor)
+              .filter(m -> m.isVisibleFrom(type.getTypeDescriptor()))
+              .filter(m -> m.getParameterDescriptors().size() == 1)
+              .filter(m -> Iterables.getOnlyElement(m.getParameterDescriptors()).isVarargs())
+              .min(InsertExplicitSuperCalls::getParameterSpecificityComparator);
     }
 
-    // If no 0-argument constructor find a 1-argument varargs constructor. There might be more than
-    // 1 varargs constructor, if so apply the more specific overload rule. At this point there
-    // should be no ambiguity and a more specific overload is guaranteed, This is because at this
-    // point type checking succeed in the frontend and if there were any ambiguity the compile would
-    // have produced an error already.
-    superContructor =
-        superTypeDescriptor.getDeclaredMethodDescriptors().stream()
-            .filter(MethodDescriptor::isConstructor)
-            .filter(m -> m.isVisibleFrom(type.getTypeDescriptor()))
-            .filter(m -> m.getParameterDescriptors().size() == 1)
-            .filter(m -> Iterables.getOnlyElement(m.getParameterDescriptors()).isVarargs())
-            .min(InsertExplicitSuperCalls::getParameterSpecificityComparator);
-
     if (superContructor.isPresent()) {
+      if (type.isEnum()) {
+        // If the super type is java.lang.Enum, remove the implicit parameters from the descriptor
+        // which are present in the class, but should be implicit in the constructor invocations.
+        return MethodDescriptor.Builder.from(superContructor.get())
+            .removeParameterTypeDescriptors()
+            .build();
+      }
       return superContructor.get();
     }
 

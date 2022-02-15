@@ -993,6 +993,16 @@ public abstract class MethodDescriptor extends MemberDescriptor {
       return setParameterDescriptors(newParameterDescriptors);
     }
 
+    public Builder removeParameterTypeDescriptors() {
+      if (getDeclarationDescriptorOrNullIfSelf() != null) {
+        setDeclarationDescriptorOrNullIfSelf(
+            MethodDescriptor.Builder.from(getDeclarationDescriptorOrNullIfSelf())
+                .setParameterTypeDescriptors()
+                .build());
+      }
+      return setParameterDescriptors();
+    }
+
     abstract MethodDescriptor getDeclarationDescriptorOrNullIfSelf();
 
     abstract ImmutableList<ParameterDescriptor> getParameterDescriptors();
