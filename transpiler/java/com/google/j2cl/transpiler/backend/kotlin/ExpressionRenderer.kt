@@ -284,13 +284,13 @@ private fun Renderer.renderNewInstance(expression: NewInstance) {
   val typeDescriptor = expression.typeDescriptor
   if (mapsToKotlin(typeDescriptor)) {
     renderInParentheses {
-      renderJavaTypeDescriptor(typeDescriptor)
+      renderJavaTypeDescriptorWithProjectedBounds(typeDescriptor)
       renderInvocationArguments(expression)
       render(" as ")
       renderTypeDescriptor(expression.typeDescriptor)
     }
   } else {
-    renderTypeDescriptor(expression.typeDescriptor)
+    renderTypeDescriptorWithProjectedBounds(expression.typeDescriptor)
     renderInvocationArguments(expression)
   }
 }

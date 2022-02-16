@@ -23,8 +23,20 @@ class RawType {
     default void f(T t) {}
   }
 
+  static class Unbound<T> {}
+
+  static class Bound<T extends RawType> {}
+
+  class BoundRecursively<T extends BoundRecursively<T>> {}
+
   static class RawSubclass implements I {
     @Override
     public void f(RawType t) {}
+  }
+
+  void test() {
+    Unbound unbound = new Unbound();
+    Bound bound = new Bound();
+    BoundRecursively boundRecursively = new BoundRecursively();
   }
 }

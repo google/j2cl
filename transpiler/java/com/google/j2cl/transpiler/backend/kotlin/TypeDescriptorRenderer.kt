@@ -15,6 +15,7 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
+import com.google.common.collect.ImmutableList
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
@@ -24,6 +25,7 @@ import com.google.j2cl.transpiler.ast.PrimitiveTypes
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
+import com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithBound
 
 internal fun Renderer.renderJavaTypeDeclarationName(typeDeclaration: TypeDeclaration) {
   renderTypeDeclarationName(typeDeclaration, asJava = true)
@@ -72,27 +74,37 @@ private val String.mappedKotlinQualifiedName: String?
     }
 
 internal fun Renderer.renderTypeDescriptor(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = false)
+  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = false, projectBounds = false)
+}
+
+internal fun Renderer.renderTypeDescriptorWithProjectedBounds(typeDescriptor: TypeDescriptor) {
+  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = false, projectBounds = true)
 }
 
 internal fun Renderer.renderTypeDescriptorAsArgument(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = true, asJava = false)
+  renderTypeDescriptor(typeDescriptor, isArgument = true, asJava = false, projectBounds = false)
 }
 
 internal fun Renderer.renderJavaTypeDescriptor(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = true)
+  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = true, projectBounds = false)
+}
+
+internal fun Renderer.renderJavaTypeDescriptorWithProjectedBounds(typeDescriptor: TypeDescriptor) {
+  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = true, projectBounds = true)
 }
 
 private fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
-  isArgument: Boolean = false,
-  asJava: Boolean = false
+  isArgument: Boolean,
+  asJava: Boolean,
+  projectBounds: Boolean
 ) {
   when (typeDescriptor) {
     is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
-    is DeclaredTypeDescriptor -> renderDeclaredTypeDescriptor(typeDescriptor, asJava)
+    is DeclaredTypeDescriptor ->
+      renderDeclaredTypeDescriptor(typeDescriptor, asJava = asJava, projectBounds = projectBounds)
     is PrimitiveTypeDescriptor -> renderPrimitiveTypeDescriptor(typeDescriptor)
-    is TypeVariable -> renderTypeVariable(typeDescriptor, isArgument)
+    is TypeVariable -> renderTypeVariable(typeDescriptor, isArgument = isArgument)
     is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
     else -> throw InternalCompilerError("Unexpected ${typeDescriptor::class.java.simpleName}")
   }
@@ -122,20 +134,21 @@ private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDes
 
 private fun Renderer.renderDeclaredTypeDescriptor(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
-  asJava: Boolean
+  asJava: Boolean,
+  projectBounds: Boolean
 ) {
   renderTypeDeclarationName(declaredTypeDescriptor.typeDeclaration, asJava)
-  renderArguments(declaredTypeDescriptor)
+  renderArguments(declaredTypeDescriptor, projectBounds)
   renderNullableSuffix(declaredTypeDescriptor)
 }
 
-private fun Renderer.renderArguments(declaredTypeDescriptor: DeclaredTypeDescriptor) {
-  val parameters = declaredTypeDescriptor.typeDeclaration.typeParameterDescriptors
-  val arguments = declaredTypeDescriptor.typeArgumentDescriptors
+private fun Renderer.renderArguments(
+  declaredTypeDescriptor: DeclaredTypeDescriptor,
+  projectBounds: Boolean
+) {
+  val arguments = declaredTypeDescriptor.renderedTypeArgumentDescriptors(projectBounds)
   if (arguments.isNotEmpty()) {
     renderInAngleBrackets { renderCommaSeparated(arguments) { renderTypeDescriptorAsArgument(it) } }
-  } else if (parameters.isNotEmpty()) {
-    renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
   }
 }
 
@@ -180,4 +193,37 @@ private fun Renderer.renderIntersectionTypeDescriptor(
     render("& ")
     renderSeparatedWith(typeDescriptors.drop(1), " & ") { renderTypeDescriptor(it) }
   }
+}
+
+/**
+ * Returns type argument descriptors for rendering. RAW types will use projected arguments, using
+ * wildcards or bounds if {@code projectBounds} flag is {@code true}.
+ */
+private fun DeclaredTypeDescriptor.renderedTypeArgumentDescriptors(
+  projectBounds: Boolean
+): ImmutableList<TypeDescriptor> {
+  val parameters = typeDeclaration.typeParameterDescriptors
+  val arguments = typeArgumentDescriptors
+
+  // Return original arguments for non-raw types.
+  val isRaw = arguments.isEmpty() && parameters.isNotEmpty()
+  if (!isRaw) return arguments
+
+  // Convert type arguments to variables.
+  val typeDescriptor = toUnparameterizedTypeDescriptor()
+
+  // Find variables which will be projected to bounds, others will be projected to wildcards.
+  val variablesProjectedToBounds =
+    if (projectBounds) typeDescriptor.typeArgumentDescriptors.map { it as TypeVariable }.toSet()
+    else setOf()
+
+  // Replace variables with bounds or wildcards.
+  val projectedTypeDescriptor =
+    typeDescriptor.specializeTypeVariables { variable ->
+      if (variablesProjectedToBounds.contains(variable))
+        variable.boundTypeDescriptor.toRawTypeDescriptor()
+      else createWildcardWithBound(variable.boundTypeDescriptor)
+    }
+
+  return projectedTypeDescriptor.typeArgumentDescriptors
 }

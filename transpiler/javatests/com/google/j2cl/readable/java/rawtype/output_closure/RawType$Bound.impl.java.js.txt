@@ -1,0 +1,44 @@
+goog.module('rawtype.RawType.Bound$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+let RawType = goog.forwardDeclare('rawtype.RawType$impl');
+
+/**
+ * @template T
+ */
+class Bound extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!Bound<T>} */
+ static $create__() {
+  Bound.$clinit();
+  let $instance = new Bound();
+  $instance.$ctor__rawtype_RawType_Bound__();
+  return $instance;
+ }
+ 
+ $ctor__rawtype_RawType_Bound__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  Bound.$clinit = () =>{};
+  Bound.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Bound;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Bound, 'rawtype.RawType$Bound');
+
+exports = Bound;
+
+//# sourceMappingURL=RawType$Bound.js.map

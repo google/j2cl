@@ -1,0 +1,42 @@
+goog.module('rawtype.RawType.Unbound$impl');
+
+const j_l_Object = goog.require('java.lang.Object$impl');
+const $Util = goog.require('nativebootstrap.Util$impl');
+
+/**
+ * @template T
+ */
+class Unbound extends j_l_Object {
+ /** @protected */
+ constructor() {
+  super();
+ }
+ /** @template T @return {!Unbound<T>} */
+ static $create__() {
+  Unbound.$clinit();
+  let $instance = new Unbound();
+  $instance.$ctor__rawtype_RawType_Unbound__();
+  return $instance;
+ }
+ 
+ $ctor__rawtype_RawType_Unbound__() {
+  this.$ctor__java_lang_Object__();
+ }
+ 
+ static $clinit() {
+  Unbound.$clinit = () =>{};
+  Unbound.$loadModules();
+  j_l_Object.$clinit();
+ }
+ /** @return {boolean} */
+ static $isInstance(/** ? */ instance) {
+  return instance instanceof Unbound;
+ }
+ 
+ static $loadModules() {}
+}
+$Util.$setClassMetadata(Unbound, 'rawtype.RawType$Unbound');
+
+exports = Unbound;
+
+//# sourceMappingURL=RawType$Unbound.js.map
