@@ -188,7 +188,8 @@ private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
 private fun Renderer.renderNumberLiteral(numberLiteral: NumberLiteral) {
   when (numberLiteral.typeDescriptor.toUnboxedType()) {
     PrimitiveTypes.CHAR -> render("'${numberLiteral.value.toChar().escapedString}'")
-    PrimitiveTypes.INT -> render("${numberLiteral.value.toInt()}")
+    PrimitiveTypes.BYTE, PrimitiveTypes.SHORT, PrimitiveTypes.INT ->
+      render("${numberLiteral.value.toInt()}")
     PrimitiveTypes.LONG -> render("${numberLiteral.value.toLong()}L")
     PrimitiveTypes.FLOAT -> render("${numberLiteral.value.toFloat()}f")
     PrimitiveTypes.DOUBLE -> render("${numberLiteral.value.toDouble()}")

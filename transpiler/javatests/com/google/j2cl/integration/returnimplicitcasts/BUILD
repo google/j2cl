@@ -14,4 +14,5 @@ package(
 integration_test(
     name = "returnimplicitcasts",
     srcs = glob(["*.java"]),
+    enable_kt = True,
 )
