@@ -104,7 +104,9 @@ private fun Renderer.renderMethodModifiers(methodDescriptor: MethodDescriptor, k
   if (methodDescriptor.isNative) {
     render("external ")
   }
-  renderVisibility(methodDescriptor.visibility)
+  if (!methodDescriptor.isConstructor || kind != Kind.ENUM) {
+    renderVisibility(methodDescriptor.visibility)
+  }
   if (kind != Kind.INTERFACE) {
     if (methodDescriptor.isAbstract) render("abstract ")
     if (!methodDescriptor.isFinal &&

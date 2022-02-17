@@ -1,33 +1,28 @@
 package enums
 
-enum class Enum1: kotlin.Enum<enums.Enum1?>() {
- companion object {
-  @kotlin.jvm.JvmField val V1: enums.Enum1 = enums.Enum1
+enum class Enum1 {
+ V1,
+ V2;
 
-  @kotlin.jvm.JvmField val V2: enums.Enum1 = enums.Enum1
- }
 }
 
-enum class Enum2: kotlin.Enum<enums.Enum2?> {
+enum class Enum2 {
+ VALUE1(2),
+ VALUE2(enums.Enum1.V1),
+ VALUE3(*(arrayOf<kotlin.Any?>())),
+ VALUE4(5) {};
+
  @kotlin.jvm.JvmField internal var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
 
- internal constructor(foo: Int) {
+ constructor(foo: Int) {
   this.foo = foo
  }
 
- internal constructor(foo: kotlin.Enum<*>?): this((foo!! as java.lang.Enum<*>).ordinal())
+ constructor(foo: kotlin.Enum<*>?): this((foo!! as java.lang.Enum<*>).ordinal())
 
- internal constructor(vararg somePars: kotlin.Any?): this(somePars!!.size)
+ constructor(vararg somePars: kotlin.Any?): this(somePars!!.size)
 
  companion object {
-  @kotlin.jvm.JvmField val VALUE1: enums.Enum2 = enums.Enum2
-
-  @kotlin.jvm.JvmField val VALUE2: enums.Enum2 = enums.Enum2
-
-  @kotlin.jvm.JvmField val VALUE3: enums.Enum2 = enums.Enum2
-
-  @kotlin.jvm.JvmField val VALUE4: enums.Enum2 = object : enums.Enum2 {}
-
   @kotlin.jvm.JvmStatic
   internal fun f(o: kotlin.Any?): enums.Enum2? {
    return null
@@ -37,10 +32,10 @@ enum class Enum2: kotlin.Enum<enums.Enum2?> {
  }
 }
 
-enum class Enum3: kotlin.Enum<enums.Enum3?> {
- internal constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?)
+enum class Enum3 {
+ VALUE1(java.util.function.Function<kotlin.Int?, kotlin.Int?> (fun(v: kotlin.Int?): kotlin.Int? {
+  return 1 + v!!
+ }));
 
- companion object {
-  @kotlin.jvm.JvmField val VALUE1: enums.Enum3 = enums.Enum3
- }
+ constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?)
 }

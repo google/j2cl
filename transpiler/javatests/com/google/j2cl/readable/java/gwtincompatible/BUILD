@@ -26,8 +26,6 @@ readable_example(
     srcs = [
         "Implementor.java",
     ],
-    # TODO(b/201574151): Constructor Support
-    build_kt_readables = False,
     deps = [
         ":annotation",
         ":interface",

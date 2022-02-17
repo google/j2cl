@@ -22,15 +22,13 @@ open class DeprecatedExample {
   fun doAThing(aThing: kotlin.Any?)
  }
 
- enum class DeprecatedEnum: kotlin.Enum<deprecated.DeprecatedExample.DeprecatedEnum?>() {
-  companion object {
-   @kotlin.jvm.JvmField val A_VALUE: deprecated.DeprecatedExample.DeprecatedEnum = deprecated.DeprecatedExample.DeprecatedEnum
-  }
+ enum class DeprecatedEnum {
+  A_VALUE;
+
  }
 
  enum class DeprecatedJsEnum {
-  companion object {
-   @kotlin.jvm.JvmField val A_VALUE: deprecated.DeprecatedExample.DeprecatedJsEnum = deprecated.DeprecatedExample.DeprecatedJsEnum
-  }
+  A_VALUE;
+
  }
 }

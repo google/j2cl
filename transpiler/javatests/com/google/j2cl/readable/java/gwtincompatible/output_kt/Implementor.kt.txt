@@ -5,13 +5,11 @@ open class Implementor: gwtincompatible.Interface, gwtincompatible.Interface.Nes
   val a: Int = 4
  }
 
- enum class SomeEnum: kotlin.Enum<gwtincompatible.Implementor.SomeEnum?>() {
-  internal abstract open fun method()
+ enum class SomeEnum {
+  COMPATIBLE {
+   internal open override fun method() {}
+  };
 
-  companion object {
-   @kotlin.jvm.JvmField val COMPATIBLE: gwtincompatible.Implementor.SomeEnum = object : gwtincompatible.Implementor.SomeEnum {
-    internal open override fun method() {}
-   }
-  }
+  internal abstract open fun method()
  }
 }

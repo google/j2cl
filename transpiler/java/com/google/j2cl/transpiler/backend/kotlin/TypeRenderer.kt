@@ -16,8 +16,10 @@
 package com.google.j2cl.transpiler.backend.kotlin
 
 import com.google.j2cl.transpiler.ast.Kind
+import com.google.j2cl.transpiler.ast.NewInstance
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
+import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangEnum
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
 import com.google.j2cl.transpiler.ast.TypeVariable
 import java.util.stream.Collectors
@@ -56,7 +58,11 @@ fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
 
 private fun Renderer.renderSuperTypes(type: Type) {
   val superTypes =
-    type.superTypesStream.filter { !isJavaLangObject(it) }.collect(Collectors.toList())
+    type
+      .superTypesStream
+      .filter { !isJavaLangObject(it) }
+      .filter { !isJavaLangEnum(it) }
+      .collect(Collectors.toList())
   if (superTypes.isNotEmpty()) {
     val hasConstructors = type.constructors.isNotEmpty()
     render(": ")
@@ -70,6 +76,10 @@ private fun Renderer.renderSuperTypes(type: Type) {
 internal fun Renderer.renderTypeBody(type: Type) {
   render(" ")
   renderInCurlyBrackets {
+    if (type.isEnum) {
+      renderEnumValues(type)
+    }
+
     // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
     var (staticMembers, instanceMembers) = type.members.partition { it.isStatic }
 
@@ -85,6 +95,7 @@ internal fun Renderer.renderTypeBody(type: Type) {
       renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it, type.kind) }
     }
 
+    staticMembers = staticMembers.filter { !it.isEnumField }
     val renderCompanionObject = staticMembers.isNotEmpty()
     if (renderCompanionObject) {
       renderNewLine()
@@ -102,6 +113,21 @@ internal fun Renderer.renderTypeBody(type: Type) {
       renderSeparatedWithEmptyLine(type.types) { renderType(it) }
     }
   }
+}
+
+private fun Renderer.renderEnumValues(type: Type) {
+  renderNewLine()
+  renderSeparatedWith(type.enumFields, ",\n") { field ->
+    renderIdentifier(field.descriptor.name!!)
+    val newInstance = field.initializer as NewInstance
+
+    if (newInstance.arguments.isNotEmpty()) {
+      renderInvocationArguments(newInstance)
+    }
+
+    newInstance.anonymousInnerClass?.let { renderTypeBody(it) }
+  }
+  render(";\n")
 }
 
 // TODO(b/216796920): Remove when the bug is fixed.

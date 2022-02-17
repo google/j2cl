@@ -97,81 +97,65 @@ open class Main {
  }
 
  enum class ComparableJsEnum {
+  ZERO,
+  ONE,
+  TWO;
+
   open fun getValue(): Int {
    return (this as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).ordinal()
-  }
-
-  companion object {
-   @kotlin.jvm.JvmField val ZERO: jsenum.Main.ComparableJsEnum = jsenum.Main.ComparableJsEnum
-
-   @kotlin.jvm.JvmField val ONE: jsenum.Main.ComparableJsEnum = jsenum.Main.ComparableJsEnum
-
-   @kotlin.jvm.JvmField val TWO: jsenum.Main.ComparableJsEnum = jsenum.Main.ComparableJsEnum
   }
  }
 
  enum class IntJsEnum {
+  MINUSONE(-1),
+  TWENTY(20),
+  ELEVEN(11);
+
   internal var value: Int = 0
 
   open fun getValue(): Int {
    return this.value
   }
 
-  internal constructor(value: Int) {
+  constructor(value: Int) {
    this.value = value
-  }
-
-  companion object {
-   @kotlin.jvm.JvmField val MINUSONE: jsenum.Main.IntJsEnum = jsenum.Main.IntJsEnum
-
-   @kotlin.jvm.JvmField val TWENTY: jsenum.Main.IntJsEnum = jsenum.Main.IntJsEnum
-
-   @kotlin.jvm.JvmField val ELEVEN: jsenum.Main.IntJsEnum = jsenum.Main.IntJsEnum
   }
  }
 
  enum class StringJsEnum {
+  ONE("ONE"),
+  THREE("THREE");
+
   internal var value: kotlin.String? = null
 
   open fun getValue(): kotlin.String? {
    return this.value
   }
 
-  internal constructor(value: kotlin.String?) {
+  constructor(value: kotlin.String?) {
    this.value = value
-  }
-
-  companion object {
-   @kotlin.jvm.JvmField val ONE: jsenum.Main.StringJsEnum = jsenum.Main.StringJsEnum
-
-   @kotlin.jvm.JvmField val THREE: jsenum.Main.StringJsEnum = jsenum.Main.StringJsEnum
   }
  }
 
  enum class NonNullableStringJsEnum {
+  ONE("ONE"),
+  THREE("THREE");
+
   internal var value: kotlin.String = null
 
   open fun getValue(): kotlin.String? {
    return this.value
   }
 
-  internal constructor(value: kotlin.String?) {
+  constructor(value: kotlin.String?) {
    this.value = value!!
-  }
-
-  companion object {
-   @kotlin.jvm.JvmField val ONE: jsenum.Main.NonNullableStringJsEnum = jsenum.Main.NonNullableStringJsEnum
-
-   @kotlin.jvm.JvmField val THREE: jsenum.Main.NonNullableStringJsEnum = jsenum.Main.NonNullableStringJsEnum
   }
  }
 
  enum class NativeStringEnum {
-  companion object {
-   @kotlin.jvm.JvmField val ONE: jsenum.Main.NativeStringEnum = jsenum.Main.NativeStringEnum
+  ONE,
+  THREE;
 
-   @kotlin.jvm.JvmField val THREE: jsenum.Main.NativeStringEnum = jsenum.Main.NativeStringEnum
-  }
  }
 
  open class TemplatedField<T> {

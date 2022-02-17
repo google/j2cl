@@ -10,6 +10,5 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
-    build_kt_readables = False,
     deps = ["//jre/java:javaemul_internal_annotations-j2cl"],
 )
