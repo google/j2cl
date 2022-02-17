@@ -1,17 +1,7 @@
 package nestednativetype
 
 class NativeArray {
- constructor(): super()
-
  fun a(): kotlin.Any? {
-  return nestednativetype.`NativeArray$1`(this)
- }
-}
-
-open class `NativeArray$1` {
- @kotlin.jvm.JvmField val `this`: nestednativetype.NativeArray?
-
- internal constructor(`$outer_this`: nestednativetype.NativeArray?): super() {
-  this.`this` = `$outer_this`
+  return (object : java.lang.Object() {} as kotlin.Any)
  }
 }

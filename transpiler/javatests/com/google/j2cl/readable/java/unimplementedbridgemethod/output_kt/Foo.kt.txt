@@ -13,10 +13,6 @@ fun interface I<T> {
 
 fun interface J: unimplementedbridgemethod.I<kotlin.String?> {}
 
-abstract class Bar: unimplementedbridgemethod.J {
- internal constructor(): super()
-}
+abstract class Bar: unimplementedbridgemethod.J {}
 
-abstract class Foo: unimplementedbridgemethod.I<kotlin.String?> {
- constructor(): super()
-}
+abstract class Foo: unimplementedbridgemethod.I<kotlin.String?> {}

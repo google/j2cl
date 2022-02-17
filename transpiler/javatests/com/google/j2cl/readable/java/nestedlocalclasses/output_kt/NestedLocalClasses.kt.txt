@@ -1,85 +1,28 @@
 package nestedlocalclasses
 
 open class NestedLocalClasses {
- constructor(): super()
-
  open fun test(p: Int) {
   val localVar: Int = 1
-  if (true) {}
- }
-}
-
-open class `NestedLocalClasses$InterfaceWithThisReference$1`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference$1Super` {
- @kotlin.jvm.JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?
-
- internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?): super(this) {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `NestedLocalClasses$InterfaceWithThisReference$1Super`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference` {
- @kotlin.jvm.JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?
-
- internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference`?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-interface `NestedLocalClasses$InterfaceWithThisReference` {
- fun foo() {
-  if (true) {}
-  nestedlocalclasses.`NestedLocalClasses$InterfaceWithThisReference$1`(this)
- }
-}
-
-open class `NestedLocalClasses$1InnerClass$1InnerInnerClass` {
- @kotlin.jvm.JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?
-
- internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?, `$captured_localVar`: Int, `$captured_localVarInInnerClass`: Int): super() {
-  this.`this` = `$outer_this`
-  this.localVar = `$captured_localVar`
-  this.localVarInInnerClass = `$captured_localVarInInnerClass`
+  open class `1InnerClass` {
+   open fun `fun`() {
+    val localVarInInnerClass: Int = 1
+    open class `1InnerInnerClass` {
+     @kotlin.jvm.JvmField var fieldInInnerInnerClass: Int = localVar + localVarInInnerClass
+    }
+    `1InnerInnerClass`()
+    open class `1ClassIndirectlyCapturingLocal` {
+     init {
+      `1InnerInnerClass`()
+     }
+    }
+   }
+  }
  }
 
- @kotlin.jvm.JvmField var fieldInInnerInnerClass: Int = this.localVar + this.localVarInInnerClass
-
- @kotlin.jvm.JvmField val localVar: Int
-
- @kotlin.jvm.JvmField val localVarInInnerClass: Int
-}
-
-open class `NestedLocalClasses$1InnerClass$1ClassIndirectlyCapturingLocal` {
- @kotlin.jvm.JvmField val `this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?
-
- internal constructor(`$outer_this`: nestedlocalclasses.`NestedLocalClasses$1InnerClass`?, `$captured_localVar`: Int, `$captured_localVarInInnerClass`: Int): super() {
-  this.`this` = `$outer_this`
-  this.localVar = `$captured_localVar`
-  this.localVarInInnerClass = `$captured_localVarInInnerClass`
+ interface InterfaceWithThisReference {
+  fun foo() {
+   open class `1Super`: nestedlocalclasses.NestedLocalClasses.InterfaceWithThisReference {}
+   object : `1Super`() {}
+  }
  }
-
- init {
-  nestedlocalclasses.`NestedLocalClasses$1InnerClass$1InnerInnerClass`(this.`this`, this.localVar, this.localVarInInnerClass)
- }
-
- @kotlin.jvm.JvmField val localVar: Int
-
- @kotlin.jvm.JvmField val localVarInInnerClass: Int
-}
-
-open class `NestedLocalClasses$1InnerClass` {
- @kotlin.jvm.JvmField val `this`: nestedlocalclasses.NestedLocalClasses?
-
- internal constructor(`$outer_this`: nestedlocalclasses.NestedLocalClasses?, `$captured_localVar`: Int): super() {
-  this.`this` = `$outer_this`
-  this.localVar = `$captured_localVar`
- }
-
- open fun `fun`() {
-  val localVarInInnerClass: Int = 1
-  if (true) {}
-  nestedlocalclasses.`NestedLocalClasses$1InnerClass$1InnerInnerClass`(this, this.localVar, localVarInInnerClass)
-  if (true) {}
- }
-
- @kotlin.jvm.JvmField val localVar: Int
 }

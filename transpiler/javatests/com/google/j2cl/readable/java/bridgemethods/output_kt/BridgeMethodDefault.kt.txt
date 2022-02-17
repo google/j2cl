@@ -1,25 +1,19 @@
 package bridgemethods
 
 open class BridgeMethodDefault {
- internal constructor(): super()
-}
+ fun interface I<T> {
+  fun m(t: T?)
+ }
 
-fun interface `BridgeMethodDefault$I`<T> {
- fun m(t: T?)
-}
+ interface II: bridgemethods.BridgeMethodDefault.I<kotlin.String?> {
+  override fun m(s: kotlin.String?) {}
+ }
 
-interface `BridgeMethodDefault$II`: bridgemethods.`BridgeMethodDefault$I`<kotlin.String?> {
- override fun m(s: kotlin.String?) {}
-}
+ open class A: bridgemethods.BridgeMethodDefault.II {}
 
-open class `BridgeMethodDefault$A`: bridgemethods.`BridgeMethodDefault$II` {
- internal constructor(): super()
-}
+ interface JJ: bridgemethods.BridgeMethodDefault.I<kotlin.Any?> {
+  override fun m(o: kotlin.Any?) {}
+ }
 
-interface `BridgeMethodDefault$JJ`: bridgemethods.`BridgeMethodDefault$I`<kotlin.Any?> {
- override fun m(o: kotlin.Any?) {}
-}
-
-open class `BridgeMethodDefault$B`: bridgemethods.`BridgeMethodDefault$JJ` {
- internal constructor(): super()
+ open class B: bridgemethods.BridgeMethodDefault.JJ {}
 }

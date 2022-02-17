@@ -1,59 +1,45 @@
 package interfaces
 
 open class Main {
- constructor(): super()
-
  internal open fun testInterfaceMembers() {
-  val i: interfaces.`Main$Interface`<*>? = interfaces.`Main$Implementor`(this)
+  val i: interfaces.Main.Interface<*>? = Implementor()
   i!!.interfaceMethod()
   i!!.defaultMethod(null)
-  interfaces.`Main$Interface`.staticInterfaceMethod()
+  interfaces.Main.Interface.staticInterfaceMethod()
   val x: Int = run {
-   interfaces.`Main$Implementor`(this)
-   interfaces.`Main$Interface`.a
-  } + interfaces.`Main$Interface`.b
- }
-}
-
-fun interface `Main$Interface`<T> {
- fun interfaceMethod()
-
- fun defaultMethod(t: T?) {
-  this.privateMethod(t)
+   Implementor()
+   interfaces.Main.Interface.a
+  } + interfaces.Main.Interface.b
  }
 
- internal fun privateMethod(t: T?) {}
+ fun interface Interface<T> {
+  fun interfaceMethod()
 
- companion object {
-  @kotlin.jvm.JvmField val a: Int = 1
+  fun defaultMethod(t: T?) {
+   this.privateMethod(t)
+  }
 
-  @kotlin.jvm.JvmField val b: Int = 2
+  internal fun privateMethod(t: T?) {}
 
-  @kotlin.jvm.JvmStatic
-  fun staticInterfaceMethod() {}
- }
-}
+  companion object {
+   @kotlin.jvm.JvmField val a: Int = 1
 
-fun interface `Main$SubInterface`: interfaces.`Main$Interface`<kotlin.String?> {
- override fun defaultMethod(s: kotlin.String?) {
-  super.defaultMethod(s)
- }
-}
+   @kotlin.jvm.JvmField val b: Int = 2
 
-open class `Main$Implementor`: interfaces.`Main$SubInterface`, interfaces.`Main$Interface`<kotlin.String?> {
- @kotlin.jvm.JvmField val `this`: interfaces.Main?
-
- internal constructor(`$outer_this`: interfaces.Main?): super() {
-  this.`this` = `$outer_this`
+   @kotlin.jvm.JvmStatic
+   fun staticInterfaceMethod() {}
+  }
  }
 
- open override fun interfaceMethod() {}
-}
-
-abstract class `Main$AbstractImplementor`: interfaces.`Main$SubInterface` {
- @kotlin.jvm.JvmField val `this`: interfaces.Main?
-
- internal constructor(`$outer_this`: interfaces.Main?): super() {
-  this.`this` = `$outer_this`
+ fun interface SubInterface: interfaces.Main.Interface<kotlin.String?> {
+  override fun defaultMethod(s: kotlin.String?) {
+   super.defaultMethod(s)
+  }
  }
+
+ open inner class Implementor: interfaces.Main.SubInterface, interfaces.Main.Interface<kotlin.String?> {
+  open override fun interfaceMethod() {}
+ }
+
+ abstract inner class AbstractImplementor: interfaces.Main.SubInterface {}
 }

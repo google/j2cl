@@ -7,33 +7,23 @@ fun interface MyFunction<F, T> {
 fun interface HashFunction<T>: overwrittentypevariables.MyFunction<T, kotlin.String?> {}
 
 open class HashFunctions {
- constructor(): super()
-
  companion object {
   @kotlin.jvm.JvmStatic
   fun <T> hashFunction(): overwrittentypevariables.HashFunction<T>? {
-   return overwrittentypevariables.`HashFunctions$1`<T>()
+   return object : overwrittentypevariables.HashFunction<T> {
+    open override fun apply(input: T?): kotlin.String? {
+     return ""
+    }
+   }
   }
 
   @kotlin.jvm.JvmStatic
   fun <T: kotlin.Enum<T>?> enumHashFunction(): overwrittentypevariables.HashFunction<T>? {
-   return overwrittentypevariables.`HashFunctions$2`<T>()
+   return object : overwrittentypevariables.HashFunction<T> {
+    open override fun apply(input: T?): kotlin.String? {
+     return "" + (input!!!! as java.lang.Enum<T>).ordinal()
+    }
+   }
   }
- }
-}
-
-open class `HashFunctions$1`<T>: overwrittentypevariables.HashFunction<T> {
- internal constructor(): super()
-
- open override fun apply(input: T?): kotlin.String? {
-  return ""
- }
-}
-
-open class `HashFunctions$2`<T: kotlin.Enum<T>?>: overwrittentypevariables.HashFunction<T> {
- internal constructor(): super()
-
- open override fun apply(input: T?): kotlin.String? {
-  return "" + (input!! as java.lang.Enum<T>).ordinal()
  }
 }

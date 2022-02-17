@@ -19,11 +19,19 @@ import com.google.j2cl.transpiler.ast.Kind
 import com.google.j2cl.transpiler.ast.Type
 import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptors.isJavaLangObject
+import com.google.j2cl.transpiler.ast.TypeVariable
 import java.util.stream.Collectors
 
 fun Renderer.renderType(type: Type) {
   if (type.isClass && !type.declaration.isFinal) {
     if (type.declaration.isAbstract) render("abstract ") else render("open ")
+  }
+  if (type.enclosingTypeDeclaration != null &&
+      type.kind == Kind.CLASS &&
+      !type.isStatic &&
+      !type.declaration.isLocal
+  ) {
+    render("inner ")
   }
   render(
     when (type.kind) {
@@ -36,15 +44,13 @@ fun Renderer.renderType(type: Type) {
 
   renderSuperTypes(type)
   renderWhereClause(type.declaration.typeParameterDescriptors)
-
-  render(" ")
-  renderInCurlyBrackets { renderTypeBody(type) }
+  renderTypeBody(type)
 }
 
 fun Renderer.renderTypeDeclaration(declaration: TypeDeclaration) {
-  renderIdentifier(declaration.simpleBinaryName)
-  if (declaration.typeParameterDescriptors.isNotEmpty()) {
-    renderTypeParameters(declaration.typeParameterDescriptors)
+  renderIdentifier(declaration.classComponents.last())
+  declaration.renderedTypeParameterDescriptors.takeIf { it.isNotEmpty() }?.let { parameters ->
+    renderTypeParameters(parameters)
   }
 }
 
@@ -55,30 +61,54 @@ private fun Renderer.renderSuperTypes(type: Type) {
     val hasConstructors = type.constructors.isNotEmpty()
     render(": ")
     renderCommaSeparated(superTypes) { superType ->
-      renderTypeDescriptorWithProjectedBounds(superType.toNonNullable())
+      renderTypeDescriptor(superType.toNonNullable(), projectBounds = true)
       if (superType.isClass && !hasConstructors) render("()")
     }
   }
 }
 
-private fun Renderer.renderTypeBody(type: Type) {
-  // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
-  // TODO(b/399455906): Render enum values.
-  val (staticMembers, instanceMembers) = type.members.partition { it.isStatic }
+internal fun Renderer.renderTypeBody(type: Type) {
+  render(" ")
+  renderInCurlyBrackets {
+    // TODO(b/399455906): Remove short term hack to pull static methods into companion object.
+    var (staticMembers, instanceMembers) = type.members.partition { it.isStatic }
 
-  val renderInstanceMembers = instanceMembers.isNotEmpty()
-  if (renderInstanceMembers) {
-    renderNewLine()
-    renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it, type.kind) }
-  }
+    // Don't render constructors for anonymous classes.
+    // TODO(b/210670710): Remove when anonymous constructors are no longer synthesized.
+    if (type.declaration.isAnonymous) {
+      instanceMembers = instanceMembers.filter { !it.isConstructor }
+    }
 
-  if (staticMembers.isNotEmpty()) {
-    renderNewLine()
-    if (renderInstanceMembers) renderNewLine() // Empty line after last instance member.
-    render("companion object ")
-    renderInCurlyBrackets {
+    val renderInstanceMembers = instanceMembers.isNotEmpty()
+    if (renderInstanceMembers) {
       renderNewLine()
-      renderSeparatedWithEmptyLine(staticMembers) { renderMember(it, type.kind) }
+      renderSeparatedWithEmptyLine(instanceMembers) { renderMember(it, type.kind) }
+    }
+
+    val renderCompanionObject = staticMembers.isNotEmpty()
+    if (renderCompanionObject) {
+      renderNewLine()
+      if (renderInstanceMembers) renderNewLine() // Empty line after last instance member.
+      render("companion object ")
+      renderInCurlyBrackets {
+        renderNewLine()
+        renderSeparatedWithEmptyLine(staticMembers) { renderMember(it, type.kind) }
+      }
+    }
+
+    if (type.types.isNotEmpty()) {
+      renderNewLine()
+      if (renderInstanceMembers || renderCompanionObject) renderNewLine()
+      renderSeparatedWithEmptyLine(type.types) { renderType(it) }
     }
   }
 }
+
+// TODO(b/216796920): Remove when the bug is fixed.
+internal val TypeDeclaration.renderedTypeParameterDescriptors: List<TypeVariable>
+  get() {
+    val enclosingTypeDeclaration = enclosingTypeDeclaration
+    return if (enclosingTypeDeclaration == null || !isCapturingEnclosingInstance)
+      typeParameterDescriptors
+    else typeParameterDescriptors.dropLast(enclosingTypeDeclaration.typeParameterDescriptors.size)
+  }

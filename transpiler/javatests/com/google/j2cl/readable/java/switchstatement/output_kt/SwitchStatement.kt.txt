@@ -1,18 +1,14 @@
 package switchstatement
 
-enum class Numbers: kotlin.Enum<switchstatement.Numbers?> {
- internal constructor(): super()
-
+enum class Numbers: kotlin.Enum<switchstatement.Numbers?>() {
  companion object {
-  @kotlin.jvm.JvmField val ONE: switchstatement.Numbers = switchstatement.Numbers()
+  @kotlin.jvm.JvmField val ONE: switchstatement.Numbers = switchstatement.Numbers
 
-  @kotlin.jvm.JvmField val TWO: switchstatement.Numbers = switchstatement.Numbers()
+  @kotlin.jvm.JvmField val TWO: switchstatement.Numbers = switchstatement.Numbers
  }
 }
 
 open class SwitchStatement {
- constructor(): super()
-
  open fun main() {
   SWITCH@ do {
    CASE@ do {

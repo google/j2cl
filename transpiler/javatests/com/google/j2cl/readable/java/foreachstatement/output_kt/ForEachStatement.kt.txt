@@ -1,8 +1,6 @@
 package foreachstatement
 
 open class ForEachStatement {
- constructor(): super()
-
  open fun test(iterable: kotlin.collections.MutableIterable<kotlin.Throwable?>?) {
   FOR_EACH@ for (t in iterable!!) {
    (t!! as java.lang.Throwable).toString()
@@ -15,9 +13,9 @@ open class ForEachStatement {
  internal fun testMulticatch() {
   try {
    throw java.lang.Exception()
-  } catch (e: foreachstatement.`ForEachStatement$Exception1`) {
+  } catch (e: foreachstatement.ForEachStatement.Exception1) {
    FOR_EACH@ for (o in e) {}
-  } catch (e: foreachstatement.`ForEachStatement$Exception2`) {
+  } catch (e: foreachstatement.ForEachStatement.Exception2) {
    FOR_EACH@ for (o in e) {}
   }
  }
@@ -25,31 +23,25 @@ open class ForEachStatement {
  internal fun <T, U: T> testTypeVariable() where T: kotlin.Any?, T: kotlin.collections.MutableIterable<kotlin.String?>? {
   val iterable: U? = null
   FOR_EACH@ for (s in iterable) {}
-  val anotherIterable: foreachstatement.`ForEachStatement$IterableReturningTypeVariable`<*>? = null
+  val anotherIterable: foreachstatement.ForEachStatement.IterableReturningTypeVariable<*>? = null
   FOR_EACH_1@ for (s_1 in anotherIterable!!) {}
  }
-}
 
-open class `ForEachStatement$Exception1`: kotlin.collections.MutableIterable<kotlin.String?>, java.lang.Exception {
- internal constructor(): super()
-
- open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?>? {
-  return null
+ open class Exception1: kotlin.collections.MutableIterable<kotlin.String?>, java.lang.Exception() {
+  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.String?>? {
+   return null
+  }
  }
-}
 
-open class `ForEachStatement$Exception2`: kotlin.collections.MutableIterable<kotlin.Any?>, java.lang.Exception {
- internal constructor(): super()
-
- open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?>? {
-  return null
+ open class Exception2: kotlin.collections.MutableIterable<kotlin.Any?>, java.lang.Exception() {
+  open override fun iterator(): kotlin.collections.MutableIterator<kotlin.Any?>? {
+   return null
+  }
  }
-}
 
-open class `ForEachStatement$IterableReturningTypeVariable`<T: kotlin.collections.MutableIterator<kotlin.Int?>?>: kotlin.collections.MutableIterable<kotlin.Int?> {
- internal constructor(): super()
-
- open override fun iterator(): T? {
-  return null
+ open class IterableReturningTypeVariable<T: kotlin.collections.MutableIterator<kotlin.Int?>?>: kotlin.collections.MutableIterable<kotlin.Int?> {
+  open override fun iterator(): T? {
+   return null
+  }
  }
 }

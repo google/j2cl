@@ -1,25 +1,21 @@
 package importglobaljstypes
 
 open class Date {
- constructor(): super()
-
- open fun copy(d: importglobaljstypes.`Date$NativeDate`?): importglobaljstypes.`Date$NativeDate`? {
+ open fun copy(d: importglobaljstypes.Date.NativeDate?): importglobaljstypes.Date.NativeDate? {
   return d
  }
 
  companion object {
   @kotlin.jvm.JvmStatic
   fun now(x: Double): Double {
-   return importglobaljstypes.`Date$NativeDate`.now()
+   return importglobaljstypes.Date.NativeDate.now()
   }
  }
-}
 
-open class `Date$NativeDate` {
- constructor(): super()
-
- companion object {
-  @kotlin.jvm.JvmStatic
-  external fun now(): Double
+ open class NativeDate {
+  companion object {
+   @kotlin.jvm.JvmStatic
+   external fun now(): Double
+  }
  }
 }

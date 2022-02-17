@@ -1,8 +1,6 @@
 package instanceofexpression
 
 open class InstanceofExpressions {
- constructor(): super()
-
  open fun testInstanceofClass() {
   val `object`: kotlin.Any? = instanceofexpression.InstanceofExpressions()
   var b: Boolean
@@ -15,7 +13,7 @@ open class InstanceofExpressions {
   val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
   var b: Boolean
   b = o is java.io.Serializable
-  b = instanceofexpression.`InstanceofExpressions$1`(this) is java.io.Serializable
+  b = object : Serializable {} is java.io.Serializable
  }
 
  open fun testInstanceofBoxedType() {
@@ -54,13 +52,5 @@ open class InstanceofExpressions {
   a = objectDoubleArray is Array<Array<kotlin.String?>?>
   a = stringArray is Array<kotlin.Any?>
   a = stringArray is Array<kotlin.String?>
- }
-}
-
-open class `InstanceofExpressions$1`: java.io.Serializable {
- @kotlin.jvm.JvmField val `this`: instanceofexpression.InstanceofExpressions?
-
- internal constructor(`$outer_this`: instanceofexpression.InstanceofExpressions?): super() {
-  this.`this` = `$outer_this`
  }
 }

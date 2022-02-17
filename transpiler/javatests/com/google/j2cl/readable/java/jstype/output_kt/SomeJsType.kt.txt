@@ -1,8 +1,6 @@
 package jstype
 
 open class SomeJsType<T> {
- constructor(): super()
-
  @kotlin.jvm.JvmField var publicField: Int = 0
 
  internal var privateField: Int = 0
@@ -27,13 +25,13 @@ open class SomeJsType<T> {
   this.protectedMethod()
  }
 
- open fun testStarAndWildCard(s: jstype.`SomeJsType$Star`?, w: jstype.`SomeJsType$Wildcard`?): jstype.`SomeJsType$Wildcard`? {
+ open fun testStarAndWildCard(s: jstype.SomeJsType.Star?, w: jstype.SomeJsType.Wildcard?): jstype.SomeJsType.Wildcard? {
   val `object`: kotlin.Any? = (java.lang.Object() as kotlin.Any)
-  val star: jstype.`SomeJsType$Star`? = 3.0 as kotlin.Any? as jstype.`SomeJsType$Star`?
-  return star as jstype.`SomeJsType$Wildcard`?
+  val star: jstype.SomeJsType.Star? = 3.0 as kotlin.Any? as jstype.SomeJsType.Star?
+  return star as jstype.SomeJsType.Wildcard?
  }
+
+ interface Star {}
+
+ interface Wildcard {}
 }
-
-interface `SomeJsType$Star` {}
-
-interface `SomeJsType$Wildcard` {}

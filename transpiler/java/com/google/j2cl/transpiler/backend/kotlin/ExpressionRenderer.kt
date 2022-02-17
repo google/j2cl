@@ -136,7 +136,8 @@ private fun Renderer.renderExpressionWithComment(expressionWithComment: Expressi
 }
 
 private fun Renderer.renderFieldAccess(fieldAccess: FieldAccess) {
-  renderQualifiedName(fieldAccess, fieldAccess.target.name!!)
+  renderQualifier(fieldAccess)
+  renderIdentifier(fieldAccess.target.name!!)
 }
 
 private fun Renderer.renderFunctionExpression(functionExpression: FunctionExpression) {
@@ -181,7 +182,7 @@ private fun Renderer.renderStringLiteral(stringLiteral: StringLiteral) {
 }
 
 private fun Renderer.renderTypeLiteral(typeLiteral: TypeLiteral) {
-  renderTypeDescriptor(typeLiteral.referencedTypeDescriptor.toNonNullable())
+  renderTypeDescriptor(typeLiteral.referencedTypeDescriptor, asName = true)
   render("::class.java")
 }
 
@@ -211,7 +212,8 @@ private fun Renderer.renderConditionalExpression(conditionalExpression: Conditio
 }
 
 private fun Renderer.renderMethodCall(expression: MethodCall) {
-  renderMethodCallHeader(expression)
+  renderQualifier(expression)
+  renderIdentifier(expression.target.name!!)
   renderInvocationArguments(expression)
 }
 
@@ -228,10 +230,6 @@ internal fun Renderer.renderInvocationArguments(invocation: Invocation) {
       }
     }
   }
-}
-
-private fun Renderer.renderMethodCallHeader(expression: MethodCall) {
-  renderQualifiedName(expression, expression.target.name!!)
 }
 
 private fun Renderer.renderMultiExpression(multiExpression: MultiExpression) {
@@ -277,23 +275,52 @@ private fun Renderer.renderNewArrayOfSize(
 }
 
 private fun Renderer.renderNewInstance(expression: NewInstance) {
-  if (expression.qualifier != null) {
-    renderTodo("expression.qualify needs rendering: ${expression.qualifier})")
-    return
-  }
-  val typeDescriptor = expression.typeDescriptor
+  renderQualifier(expression)
+
+  var typeDescriptor = expression.typeDescriptor.nonAnonymousTypeDescriptor.toNonNullable()
   if (mapsToKotlin(typeDescriptor)) {
+    // If Java type maps to a Kotlin type (ie: java.lang.Double -> kotlin.Double), create an
+    // instance of the Java type and cast to Kotlin type, like:
+    // - (java.lang.Double("123") as kotlin.Double).
+    // TODO(b/216924456): Remove when proper Java-Kotlin member translation is implemented
     renderInParentheses {
-      renderJavaTypeDescriptorWithProjectedBounds(typeDescriptor)
-      renderInvocationArguments(expression)
+      if (expression.anonymousInnerClass != null) {
+        render("object : ")
+      }
+      renderTypeDescriptor(typeDescriptor, asJava = true, asName = true, projectBounds = true)
+      if (typeDescriptor.isClass) {
+        renderInvocationArguments(expression)
+      }
+      expression.anonymousInnerClass?.let { renderTypeBody(it) }
       render(" as ")
-      renderTypeDescriptor(expression.typeDescriptor)
+      renderTypeDescriptor(typeDescriptor, asName = true)
     }
   } else {
-    renderTypeDescriptorWithProjectedBounds(expression.typeDescriptor)
-    renderInvocationArguments(expression)
+    if (expression.anonymousInnerClass != null) {
+      render("object : ")
+    }
+
+    // Render fully-qualified type name if there's no qualifier, otherwise render qualifier and
+    // simple type name.
+    renderTypeDescriptor(
+      typeDescriptor,
+      asSimple = expression.qualifier != null,
+      projectBounds = true
+    )
+
+    // Render invocation for classes only - interfaces don't need it.
+    if (typeDescriptor.isClass) {
+      renderInvocationArguments(expression)
+    }
+
+    expression.anonymousInnerClass?.let { renderTypeBody(it) }
   }
 }
+
+private val DeclaredTypeDescriptor.nonAnonymousTypeDescriptor: DeclaredTypeDescriptor
+  get() =
+    if (typeDeclaration.isAnonymous) interfaceTypeDescriptors.firstOrNull() ?: superTypeDescriptor!!
+    else this
 
 private fun Renderer.renderPostfixExpression(expression: PostfixExpression) {
   renderLeftSubExpression(expression, expression.operand)
@@ -311,6 +338,7 @@ private fun Renderer.renderPrefixExpression(expression: PrefixExpression) {
 
 private fun Renderer.renderSuperReference(superReference: SuperReference) {
   render("super")
+  // TODO(b/214453506): Render optional qualifier
 }
 
 private fun Renderer.renderThisReference(thisReference: ThisReference) {
@@ -322,7 +350,7 @@ private fun Renderer.renderThisReference(thisReference: ThisReference) {
 
 private fun Renderer.renderLabelReference(typeDescriptor: DeclaredTypeDescriptor) {
   render("@")
-  renderIdentifier(typeDescriptor.typeDeclaration.simpleBinaryName)
+  renderIdentifier(typeDescriptor.typeDeclaration.classComponents.last())
 }
 
 private fun Renderer.renderVariableDeclarationExpression(
@@ -348,28 +376,51 @@ private fun Renderer.renderVariableDeclarationFragment(fragment: VariableDeclara
 
 fun Renderer.renderVariable(variable: Variable) {
   renderName(variable)
+
+  // Don't render anonymous types, since they are not denotable. They can be created from "var".
+  val typeDescriptor = variable.typeDescriptor
+  if (typeDescriptor is DeclaredTypeDescriptor && typeDescriptor.typeDeclaration.isAnonymous) {
+    return
+  }
+
   render(": ")
-  renderTypeDescriptor(variable.typeDescriptor)
+  renderTypeDescriptor(typeDescriptor)
 }
 
-private fun Renderer.renderQualifiedName(expression: MemberReference, name: String) {
-  if (expression.qualifier == null) {
-    // TODO(b/206482966): Move the checks in the backend to a verifier pass.
-    require(expression.target.isStatic) { "Unqualified references must be static" }
-    renderJavaTypeDeclarationName(expression.target.enclosingTypeDescriptor.typeDeclaration)
+private fun Renderer.renderQualifier(memberReference: MemberReference) {
+  val qualifier = memberReference.qualifier
+  if (qualifier == null) {
+    if (memberReference.target.isStatic) {
+      // TODO(b/206482966): Move the checks in the backend to a verifier pass.
+      renderTypeDescriptor(
+        memberReference.target.enclosingTypeDescriptor,
+        asJava = true,
+        asName = true
+      )
+      render(".")
+    }
   } else {
-    if (mapsToKotlin(expression.target.enclosingTypeDescriptor)) {
-      renderInParentheses {
-        renderLeftSubExpression(expression, expression.qualifier)
-        render(" as ")
-        renderJavaTypeDescriptor(expression.target.enclosingTypeDescriptor.toNonNullable())
+    if (memberReference is NewInstance && memberReference.typeDescriptor.typeDeclaration.isLocal) {
+      // Don't render qualifier for local classes.
+      // TODO(b/219950593): Implement a pass which will remove unnecessary qualifiers, and then
+      // remove this `if` branch.
+    } else if (memberReference.target.isInstanceMember || !qualifier.isNonQualifiedThisReference) {
+      // TODO(b/216924456): Remove when Java-Kotlin member translation is implemented
+      if (mapsToKotlin(memberReference.target.enclosingTypeDescriptor)) {
+        renderInParentheses {
+          renderLeftSubExpression(memberReference, qualifier)
+          render(" as ")
+          renderTypeDescriptor(
+            memberReference.target.enclosingTypeDescriptor.toNonNullable(),
+            asJava = true
+          )
+        }
+      } else {
+        renderLeftSubExpression(memberReference, qualifier)
       }
-    } else {
-      renderLeftSubExpression(expression, expression.qualifier)
+      render(".")
     }
   }
-  render(".")
-  renderIdentifier(name)
 }
 
 private fun Renderer.renderLeftSubExpression(expression: Expression, operand: Expression) {
@@ -384,3 +435,6 @@ private fun Renderer.renderExpressionInParens(expression: Expression, needsParen
   if (needsParentheses) renderInParentheses { renderExpression(expression) }
   else renderExpression(expression)
 }
+
+private val Expression.isNonQualifiedThisReference
+  get() = this is ThisReference && !isQualified

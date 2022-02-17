@@ -1,78 +1,27 @@
 package simplelocalclass
 
 open class SimpleLocalClass {
- constructor(): super()
-
  open fun test(p: Int) {
   val localVar: Int = 1
-  if (true) {}
-  simplelocalclass.`SimpleLocalClass$1InnerClass`(this, localVar, p).`fun`()
-  if (true) {}
-  simplelocalclass.`SimpleLocalClass$1InnerClassWithoutCaptures`(this)
+  open class `1InnerClass` {
+   open fun `fun`(): Int {
+    return localVar + p
+   }
+  }
+  `1InnerClass`().`fun`()
+  open class `1InnerClassWithoutCaptures` {}
+  `1InnerClassWithoutCaptures`()
  }
 
  open fun `fun`() {
   val localVar: Int = 1
-  if (true) {}
+  open class `2InnerClass` {
+   @kotlin.jvm.JvmField internal var field: Int = localVar
+  }
  }
 
  open fun foo() {
-  if (true) {}
-  if (true) {}
- }
-}
-
-open class `SimpleLocalClass$1InnerClass` {
- @kotlin.jvm.JvmField val `this`: simplelocalclass.SimpleLocalClass?
-
- internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?, `$captured_localVar`: Int, `$captured_p`: Int): super() {
-  this.`this` = `$outer_this`
-  this.localVar = `$captured_localVar`
-  this.p = `$captured_p`
- }
-
- open fun `fun`(): Int {
-  return this.localVar + this.p
- }
-
- @kotlin.jvm.JvmField val localVar: Int
-
- @kotlin.jvm.JvmField val p: Int
-}
-
-open class `SimpleLocalClass$1InnerClassWithoutCaptures` {
- @kotlin.jvm.JvmField val `this`: simplelocalclass.SimpleLocalClass?
-
- internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `SimpleLocalClass$2InnerClass` {
- @kotlin.jvm.JvmField val `this`: simplelocalclass.SimpleLocalClass?
-
- internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?, `$captured_localVar`: Int): super() {
-  this.`this` = `$outer_this`
-  this.localVar = `$captured_localVar`
- }
-
- @kotlin.jvm.JvmField internal var field: Int = this.localVar
-
- @kotlin.jvm.JvmField val localVar: Int
-}
-
-open class `SimpleLocalClass$1Abc$InnerClass` {
- @kotlin.jvm.JvmField val `this`: simplelocalclass.SimpleLocalClass?
-
- internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `SimpleLocalClass$1Klm$InnerClass` {
- @kotlin.jvm.JvmField val `this`: simplelocalclass.SimpleLocalClass?
-
- internal constructor(`$outer_this`: simplelocalclass.SimpleLocalClass?): super() {
-  this.`this` = `$outer_this`
+  open class `1Abc$InnerClass` {}
+  open class `1Klm$InnerClass` {}
  }
 }

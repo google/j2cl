@@ -1,82 +1,62 @@
 package innerclassinheritance
 
 open class ParentOuter {
- internal constructor(): super()
-
  @kotlin.jvm.JvmField var fieldInParentOuter: Int = 0
 
  open fun funInParentOuter() {}
 }
 
 open class ParentInner {
- internal constructor(): super()
-
  @kotlin.jvm.JvmField var fieldInParentInner: Int = 0
 
  open fun funInParentInner() {}
 }
 
-open class ChildClass: innerclassinheritance.ParentOuter {
- constructor(): super()
-
+open class ChildClass: innerclassinheritance.ParentOuter() {
  @kotlin.jvm.JvmField var fieldInOuter: Int = 0
 
  open fun funInOuter() {}
 
  open fun testLocalClass() {
-  if (true) {}
-  innerclassinheritance.`ChildClass$1LocalClass`(this).test()
- }
-}
+  open class `1LocalClass`: innerclassinheritance.ChildClass() {
+   @kotlin.jvm.JvmField internal var `object`: kotlin.Any? = this
 
-open class `ChildClass$InnerClass`: innerclassinheritance.ParentInner {
- @kotlin.jvm.JvmField val `this`: innerclassinheritance.ChildClass?
+   open override fun funInParentOuter() {}
 
- internal constructor(`$outer_this`: innerclassinheritance.ChildClass?): super() {
-  this.`this` = `$outer_this`
- }
-
- @kotlin.jvm.JvmField var fieldInInner: Int = 0
-
- open fun funInInner() {}
-
- open fun testInnerClass(): Int {
-  this.`this`!!.funInParentOuter()
-  this.`this`!!.funInParentOuter()
-  this.`this`!!.funInOuter()
-  this.`this`!!.funInOuter()
-  this.funInParentInner()
-  this.funInParentInner()
-  this.funInInner()
-  this.funInInner()
-  var a: Int = this.`this`!!.fieldInParentOuter
-  a = this.`this`!!.fieldInParentOuter
-  a = this.`this`!!.fieldInOuter
-  a = this.`this`!!.fieldInOuter
-  a = this.fieldInParentInner
-  a = this.fieldInParentInner
-  a = this.fieldInInner
-  a = this.fieldInInner
-  return a
- }
-}
-
-open class `ChildClass$1LocalClass`: innerclassinheritance.ChildClass {
- @kotlin.jvm.JvmField val `this`: innerclassinheritance.ChildClass?
-
- internal constructor(`$outer_this`: innerclassinheritance.ChildClass?): super() {
-  this.`this` = `$outer_this`
+   open fun test() {
+    this.funInOuter()
+    this@ChildClass.funInOuter()
+    this.funInParentOuter()
+    this.funInParentOuter()
+    this@ChildClass.funInParentOuter()
+   }
+  }
+  `1LocalClass`().test()
  }
 
- @kotlin.jvm.JvmField internal var `object`: kotlin.Any? = this
+ open inner class InnerClass: innerclassinheritance.ParentInner() {
+  @kotlin.jvm.JvmField var fieldInInner: Int = 0
 
- open override fun funInParentOuter() {}
+  open fun funInInner() {}
 
- open fun test() {
-  this.funInOuter()
-  this.`this`!!.funInOuter()
-  this.funInParentOuter()
-  this.funInParentOuter()
-  this.`this`!!.funInParentOuter()
+  open fun testInnerClass(): Int {
+   this@ChildClass.funInParentOuter()
+   this@ChildClass.funInParentOuter()
+   this@ChildClass.funInOuter()
+   this@ChildClass.funInOuter()
+   this.funInParentInner()
+   this.funInParentInner()
+   this.funInInner()
+   this.funInInner()
+   var a: Int = this@ChildClass.fieldInParentOuter
+   a = this@ChildClass.fieldInParentOuter
+   a = this@ChildClass.fieldInOuter
+   a = this@ChildClass.fieldInOuter
+   a = this.fieldInParentInner
+   a = this.fieldInParentInner
+   a = this.fieldInInner
+   a = this.fieldInInner
+   return a
+  }
  }
 }

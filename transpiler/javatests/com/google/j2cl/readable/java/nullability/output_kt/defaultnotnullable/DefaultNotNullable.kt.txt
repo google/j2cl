@@ -1,8 +1,6 @@
 package nullability.defaultnotnullable
 
 open class DefaultNotNullable {
- constructor(): super()
-
  internal var f1: kotlin.String = "Hello"
 
  internal var f2: kotlin.String? = null
@@ -36,18 +34,12 @@ open class DefaultNotNullable {
  }
 
  open fun m3(vararg args: kotlin.String?) {}
-}
 
-fun interface `DefaultNotNullable$ParameterizedInterface`<T> {
- fun add(t: T?)
-}
-
-open class `DefaultNotNullable$ImplementsParameterizedInterface`: nullability.defaultnotnullable.`DefaultNotNullable$ParameterizedInterface`<kotlin.String> {
- @kotlin.jvm.JvmField val `this`: nullability.defaultnotnullable.DefaultNotNullable?
-
- internal constructor(`$outer_this`: nullability.defaultnotnullable.DefaultNotNullable?): super() {
-  this.`this` = `$outer_this`
+ fun interface ParameterizedInterface<T> {
+  fun add(t: T?)
  }
 
- open override fun add(s: kotlin.String?) {}
+ open inner class ImplementsParameterizedInterface: nullability.defaultnotnullable.DefaultNotNullable.ParameterizedInterface<kotlin.String> {
+  open override fun add(s: kotlin.String?) {}
+ }
 }

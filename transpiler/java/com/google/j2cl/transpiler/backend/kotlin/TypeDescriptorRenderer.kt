@@ -15,28 +15,15 @@
  */
 package com.google.j2cl.transpiler.backend.kotlin
 
-import com.google.common.collect.ImmutableList
 import com.google.j2cl.common.InternalCompilerError
 import com.google.j2cl.transpiler.ast.ArrayTypeDescriptor
 import com.google.j2cl.transpiler.ast.DeclaredTypeDescriptor
 import com.google.j2cl.transpiler.ast.IntersectionTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypeDescriptor
 import com.google.j2cl.transpiler.ast.PrimitiveTypes
-import com.google.j2cl.transpiler.ast.TypeDeclaration
 import com.google.j2cl.transpiler.ast.TypeDescriptor
 import com.google.j2cl.transpiler.ast.TypeVariable
 import com.google.j2cl.transpiler.ast.TypeVariable.createWildcardWithBound
-
-internal fun Renderer.renderJavaTypeDeclarationName(typeDeclaration: TypeDeclaration) {
-  renderTypeDeclarationName(typeDeclaration, asJava = true)
-}
-
-private fun Renderer.renderTypeDeclarationName(typeDeclaration: TypeDeclaration, asJava: Boolean) {
-  val javaQualifiedName = typeDeclaration.qualifiedBinaryName
-  val mappedKotlinQualifiedName =
-    javaQualifiedName.takeUnless { asJava }?.run { mappedKotlinQualifiedName }
-  renderQualifiedName(mappedKotlinQualifiedName ?: javaQualifiedName)
-}
 
 internal fun Renderer.mapsToKotlin(typeDescriptor: DeclaredTypeDescriptor) =
   typeDescriptor.typeDeclaration.qualifiedBinaryName.mappedKotlinQualifiedName != null
@@ -73,36 +60,24 @@ private val String.mappedKotlinQualifiedName: String?
       else -> null
     }
 
-internal fun Renderer.renderTypeDescriptor(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = false, projectBounds = false)
-}
-
-internal fun Renderer.renderTypeDescriptorWithProjectedBounds(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = false, projectBounds = true)
-}
-
-internal fun Renderer.renderTypeDescriptorAsArgument(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = true, asJava = false, projectBounds = false)
-}
-
-internal fun Renderer.renderJavaTypeDescriptor(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = true, projectBounds = false)
-}
-
-internal fun Renderer.renderJavaTypeDescriptorWithProjectedBounds(typeDescriptor: TypeDescriptor) {
-  renderTypeDescriptor(typeDescriptor, isArgument = false, asJava = true, projectBounds = true)
-}
-
-private fun Renderer.renderTypeDescriptor(
+internal fun Renderer.renderTypeDescriptor(
   typeDescriptor: TypeDescriptor,
-  isArgument: Boolean,
-  asJava: Boolean,
-  projectBounds: Boolean
+  isArgument: Boolean = false,
+  asJava: Boolean = false,
+  projectBounds: Boolean = false,
+  asSimple: Boolean = false,
+  asName: Boolean = false
 ) {
   when (typeDescriptor) {
-    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor)
+    is ArrayTypeDescriptor -> renderArrayTypeDescriptor(typeDescriptor, asName = asName)
     is DeclaredTypeDescriptor ->
-      renderDeclaredTypeDescriptor(typeDescriptor, asJava = asJava, projectBounds = projectBounds)
+      renderDeclaredTypeDescriptor(
+        typeDescriptor,
+        asSimple = asSimple,
+        asJava = asJava,
+        asName = asName,
+        projectBounds = projectBounds
+      )
     is PrimitiveTypeDescriptor -> renderPrimitiveTypeDescriptor(typeDescriptor)
     is TypeVariable -> renderTypeVariable(typeDescriptor, isArgument = isArgument)
     is IntersectionTypeDescriptor -> renderIntersectionTypeDescriptor(typeDescriptor)
@@ -114,7 +89,10 @@ private fun Renderer.renderNullableSuffix(typeDescriptor: TypeDescriptor) {
   if (typeDescriptor.isNullable) render("?")
 }
 
-private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDescriptor) {
+private fun Renderer.renderArrayTypeDescriptor(
+  arrayTypeDescriptor: ArrayTypeDescriptor,
+  asName: Boolean
+) {
   when (val componentTypeDescriptor = arrayTypeDescriptor.componentTypeDescriptor!!) {
     PrimitiveTypes.BOOLEAN -> render("BooleanArray")
     PrimitiveTypes.CHAR -> render("CharArray")
@@ -126,29 +104,75 @@ private fun Renderer.renderArrayTypeDescriptor(arrayTypeDescriptor: ArrayTypeDes
     PrimitiveTypes.DOUBLE -> render("DoubleArray")
     else -> {
       render("Array")
-      renderInAngleBrackets { renderTypeDescriptorAsArgument(componentTypeDescriptor) }
+      if (!asName) {
+        renderInAngleBrackets { renderTypeDescriptor(componentTypeDescriptor, isArgument = true) }
+      }
     }
   }
-  renderNullableSuffix(arrayTypeDescriptor)
+  if (!asName) {
+    renderNullableSuffix(arrayTypeDescriptor)
+  }
 }
 
 private fun Renderer.renderDeclaredTypeDescriptor(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
   asJava: Boolean,
+  asSimple: Boolean,
+  asName: Boolean,
   projectBounds: Boolean
 ) {
-  renderTypeDeclarationName(declaredTypeDescriptor.typeDeclaration, asJava)
-  renderArguments(declaredTypeDescriptor, projectBounds)
-  renderNullableSuffix(declaredTypeDescriptor)
+  // Check if the Java type maps to Kotlin one, ie: java.lang.String -> kotlin.String
+  val mappedKotlinName =
+    declaredTypeDescriptor.qualifiedSourceName.takeUnless { asJava }?.run {
+      mappedKotlinQualifiedName
+    }
+
+  if (mappedKotlinName != null) {
+    // Render the mapped Kotlin type name.
+    renderQualifiedName(mappedKotlinName)
+  } else {
+    val enclosingTypeDescriptor = declaredTypeDescriptor.enclosingTypeDescriptor
+    // Render the original Java type.
+    if (asSimple || declaredTypeDescriptor.typeDeclaration.isLocal) {
+      // Don't render package name or enclosing type for local types.
+    } else if (enclosingTypeDescriptor != null) {
+      // Render the enclosing type if present.
+      renderDeclaredTypeDescriptor(
+        enclosingTypeDescriptor.toNonNullable(),
+        asJava = asJava,
+        asSimple = asSimple,
+        asName = asName || !declaredTypeDescriptor.typeDeclaration.isCapturingEnclosingInstance,
+        projectBounds = projectBounds
+      )
+      render(".")
+    } else {
+      // Render the package name for this top-level type.
+      declaredTypeDescriptor.typeDeclaration.packageName?.let { packageName ->
+        renderPackageName(packageName)
+        render(".")
+      }
+    }
+
+    renderIdentifier(declaredTypeDescriptor.typeDeclaration.classComponents.last())
+  }
+  if (!asName) {
+    renderArguments(declaredTypeDescriptor, projectBounds = projectBounds)
+    renderNullableSuffix(declaredTypeDescriptor)
+  }
 }
 
-private fun Renderer.renderArguments(
+internal fun Renderer.renderArguments(
   declaredTypeDescriptor: DeclaredTypeDescriptor,
   projectBounds: Boolean
 ) {
+  val parameters = declaredTypeDescriptor.typeDeclaration.renderedTypeParameterDescriptors
   val arguments = declaredTypeDescriptor.renderedTypeArgumentDescriptors(projectBounds)
   if (arguments.isNotEmpty()) {
-    renderInAngleBrackets { renderCommaSeparated(arguments) { renderTypeDescriptorAsArgument(it) } }
+    renderInAngleBrackets {
+      renderCommaSeparated(arguments) { renderTypeDescriptor(it, isArgument = true) }
+    }
+  } else if (parameters.isNotEmpty()) {
+    renderInAngleBrackets { renderCommaSeparated(parameters) { render("*") } }
   }
 }
 
@@ -201,9 +225,9 @@ private fun Renderer.renderIntersectionTypeDescriptor(
  */
 private fun DeclaredTypeDescriptor.renderedTypeArgumentDescriptors(
   projectBounds: Boolean
-): ImmutableList<TypeDescriptor> {
-  val parameters = typeDeclaration.typeParameterDescriptors
-  val arguments = typeArgumentDescriptors
+): List<TypeDescriptor> {
+  val parameters = typeDeclaration.renderedTypeParameterDescriptors
+  val arguments = renderedTypeArgumentDescriptors
 
   // Return original arguments for non-raw types.
   val isRaw = arguments.isEmpty() && parameters.isNotEmpty()
@@ -227,3 +251,12 @@ private fun DeclaredTypeDescriptor.renderedTypeArgumentDescriptors(
 
   return projectedTypeDescriptor.typeArgumentDescriptors
 }
+
+// TODO(b/216796920): Remove when the bug is fixed.
+private val DeclaredTypeDescriptor.renderedTypeArgumentDescriptors: List<TypeDescriptor>
+  get() {
+    val enclosingTypeDescriptor = enclosingTypeDescriptor
+    return if (enclosingTypeDescriptor == null || !typeDeclaration.isCapturingEnclosingInstance)
+      typeArgumentDescriptors
+    else typeArgumentDescriptors.dropLast(enclosingTypeDescriptor.typeArgumentDescriptors.size)
+  }

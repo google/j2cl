@@ -5,8 +5,6 @@ fun interface MyInterface {
 }
 
 open class SuperParent {
- internal constructor(): super()
-
  open fun `fun`(a: Int, b: Int): Int {
   return a + b + 111
  }
@@ -16,9 +14,7 @@ open class SuperParent {
  }
 }
 
-open class Parent: instancejsmethods.SuperParent {
- internal constructor(): super()
-
+open class Parent: instancejsmethods.SuperParent() {
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b
  }
@@ -32,9 +28,7 @@ open class Parent: instancejsmethods.SuperParent {
  }
 }
 
-open class Child: instancejsmethods.MyInterface, instancejsmethods.Parent {
- internal constructor(): super()
-
+open class Child: instancejsmethods.MyInterface, instancejsmethods.Parent() {
  open override fun `fun`(a: Int, b: Int): Int {
   return a + b + 1
  }
@@ -53,8 +47,6 @@ open class Child: instancejsmethods.MyInterface, instancejsmethods.Parent {
 }
 
 open class Main {
- constructor(): super()
-
  open fun testCallBySuperParent() {
   val sp: instancejsmethods.SuperParent? = instancejsmethods.SuperParent()
   val p: instancejsmethods.SuperParent? = instancejsmethods.Parent()

@@ -1,8 +1,6 @@
 package devirtualizedcalls
 
 open class CharSequenceCalls {
- constructor(): super()
-
  open fun test(cs: kotlin.CharSequence?) {
   (cs!! as java.lang.CharSequence).charAt(0)
  }

@@ -1,41 +1,17 @@
 package localclassinheritance
 
 open class LocalClassInheritance {
- constructor(): super()
-
  open fun test() {
   val f: Int = 1
-  if (true) {}
-  if (true) {}
+  open class `1Parent` {
+   open fun n() {
+    val i: Int = f
+   }
+  }
+  open class `1Child`: `1Parent`() {
+   open override fun n() {
+    val i: Int = f
+   }
+  }
  }
-}
-
-open class `LocalClassInheritance$1Parent` {
- @kotlin.jvm.JvmField val `this`: localclassinheritance.LocalClassInheritance?
-
- internal constructor(`$outer_this`: localclassinheritance.LocalClassInheritance?, `$captured_f`: Int): super() {
-  this.`this` = `$outer_this`
-  this.f = `$captured_f`
- }
-
- open fun n() {
-  val i: Int = this.f
- }
-
- @kotlin.jvm.JvmField val f: Int
-}
-
-open class `LocalClassInheritance$1Child`: localclassinheritance.`LocalClassInheritance$1Parent` {
- @kotlin.jvm.JvmField val `this`: localclassinheritance.LocalClassInheritance?
-
- internal constructor(`$outer_this`: localclassinheritance.LocalClassInheritance?, `$captured_f`: Int): super(`$outer_this`, `$captured_f`) {
-  this.`this` = `$outer_this`
-  this.f = `$captured_f`
- }
-
- open override fun n() {
-  val i: Int = this.f
- }
-
- @kotlin.jvm.JvmField val f: Int
 }

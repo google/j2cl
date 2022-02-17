@@ -1,33 +1,21 @@
 package boundedtypesupercall
 
 open class Main {
- constructor(): super()
-}
+ abstract class Foo<T> {
+  constructor(foo: T?)
 
-abstract class `Main$Foo`<T> {
- constructor(foo: T?): super()
-
- abstract open fun foo()
-}
-
-open class `Main$Bar$1`<T: kotlin.Comparable<*>?>: boundedtypesupercall.`Main$Foo`<T> {
- @kotlin.jvm.JvmField val `this`: boundedtypesupercall.`Main$Bar`<T>?
-
- internal constructor(`$outer_this`: boundedtypesupercall.`Main$Bar`<T>?, `$_0`: T?): super(`$_0`) {
-  this.`this` = `$outer_this`
+  abstract open fun foo()
  }
 
- open override fun foo() {}
-}
+ open class Bar<T: kotlin.Comparable<*>?> {
+  open fun getSomething(): T? {
+   return null
+  }
 
-open class `Main$Bar`<T: kotlin.Comparable<*>?> {
- constructor(): super()
-
- open fun getSomething(): T? {
-  return null
- }
-
- open fun doSomething(): boundedtypesupercall.`Main$Foo`<T>? {
-  return boundedtypesupercall.`Main$Bar$1`<T>(this, this.getSomething())
+  open fun doSomething(): boundedtypesupercall.Main.Foo<T>? {
+   return object : Foo<T>(this.getSomething()) {
+    open override fun foo() {}
+   }
+  }
  }
 }

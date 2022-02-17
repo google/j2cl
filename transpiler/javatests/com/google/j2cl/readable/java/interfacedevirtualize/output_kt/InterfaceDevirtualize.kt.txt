@@ -1,8 +1,6 @@
 package interfacedevirtualize
 
 open class InterfaceDevirtualize {
- constructor(): super()
-
  open fun <T> compare0(c: kotlin.Comparable<T>?, t: T?): Int {
   return (c!! as java.lang.Comparable<T>).compareTo(t)
  }

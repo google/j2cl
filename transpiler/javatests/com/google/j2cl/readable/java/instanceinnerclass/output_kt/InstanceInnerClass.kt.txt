@@ -1,30 +1,22 @@
 package instanceinnerclass
 
 open class InstanceInnerClass {
- constructor(): super()
-
  @kotlin.jvm.JvmField var instanceField: Int = 0
 
  open fun funOuter() {}
 
  open fun test() {
-  instanceinnerclass.`InstanceInnerClass$InnerClass`(instanceinnerclass.InstanceInnerClass())
- }
-}
-
-open class `InstanceInnerClass$InnerClass` {
- @kotlin.jvm.JvmField val `this`: instanceinnerclass.InstanceInnerClass?
-
- constructor(`$outer_this`: instanceinnerclass.InstanceInnerClass?): super() {
-  this.`this` = `$outer_this`
+  instanceinnerclass.InstanceInnerClass().InnerClass()
  }
 
- @kotlin.jvm.JvmField var field: Int = this.`this`!!.instanceField + this.`this`!!.instanceField
+ open inner class InnerClass {
+  @kotlin.jvm.JvmField var field: Int = this@InstanceInnerClass.instanceField + this@InstanceInnerClass.instanceField
 
- @kotlin.jvm.JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this.`this`
+  @kotlin.jvm.JvmField var enclosingInstance: instanceinnerclass.InstanceInnerClass? = this@InstanceInnerClass
 
- open fun funInner() {
-  this.`this`!!.funOuter()
-  this.`this`!!.funOuter()
+  open fun funInner() {
+   this@InstanceInnerClass.funOuter()
+   this@InstanceInnerClass.funOuter()
+  }
  }
 }

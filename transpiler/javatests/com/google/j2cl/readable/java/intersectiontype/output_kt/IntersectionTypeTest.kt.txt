@@ -19,15 +19,13 @@ fun interface Cmp2<T> {
 }
 
 open class IntersectionTypeTest<U> {
- constructor(): super()
-
  open fun cast3(s: kotlin.Any?): kotlin.Any? {
   return s
  }
 
  open fun testMethodCall() {
   val o: kotlin.Any? = intersectiontype.IntersectionTypeTest.m()
-  intersectiontype.IntersectionTypeTest.set(o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? */)
+  intersectiontype.IntersectionTypeTest.set(o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? */)
   intersectiontype.IntersectionTypeTest.set(intersectiontype.IntersectionTypeTest.m())
   val g: intersectiontype.Getable<*>? = intersectiontype.IntersectionTypeTest.n()
  }
@@ -73,9 +71,9 @@ open class IntersectionTypeTest<U> {
 
   @kotlin.jvm.JvmStatic
   fun testClosureAssignment(o: kotlin.Any?) {
-   val e: intersectiontype.`IntersectionTypeTest$A`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
-   val g: intersectiontype.`IntersectionTypeTest$EmptyA`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
-   val s: intersectiontype.`IntersectionTypeTest$EmptyB`? = o as intersectiontype.`IntersectionTypeTest$A`? /* & intersectiontype.`IntersectionTypeTest$EmptyA`? & intersectiontype.`IntersectionTypeTest$EmptyB`? */
+   val e: intersectiontype.IntersectionTypeTest.A? = o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? & intersectiontype.IntersectionTypeTest.EmptyB? */
+   val g: intersectiontype.IntersectionTypeTest.EmptyA? = o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? & intersectiontype.IntersectionTypeTest.EmptyB? */
+   val s: intersectiontype.IntersectionTypeTest.EmptyB? = o as intersectiontype.IntersectionTypeTest.A? /* & intersectiontype.IntersectionTypeTest.EmptyA? & intersectiontype.IntersectionTypeTest.EmptyB? */
   }
 
   @kotlin.jvm.JvmStatic
@@ -84,36 +82,28 @@ open class IntersectionTypeTest<U> {
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> m(): T? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
+  internal fun <T> m(): T? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
    return intersectiontype.IntersectionTypeTest.get((java.lang.Object() as kotlin.Any)) as T?
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> n(): intersectiontype.Getable<T>? where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {
+  internal fun <T> n(): intersectiontype.Getable<T>? where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {
    return null
   }
 
   @kotlin.jvm.JvmStatic
-  internal fun <T> set(t: T?) where T: intersectiontype.`IntersectionTypeTest$A`?, T: intersectiontype.`IntersectionTypeTest$EmptyA`? {}
- }
-}
-
-open class `IntersectionTypeTest$MapEntry`<U> {
- @kotlin.jvm.JvmField val `this`: intersectiontype.IntersectionTypeTest<U>?
-
- internal constructor(`$outer_this`: intersectiontype.IntersectionTypeTest<U>?): super() {
-  this.`this` = `$outer_this`
+  internal fun <T> set(t: T?) where T: intersectiontype.IntersectionTypeTest.A?, T: intersectiontype.IntersectionTypeTest.EmptyA? {}
  }
 
- open fun <T> method(o: kotlin.Any?): intersectiontype.Getable<T>? {
-  return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
+ open inner class MapEntry {
+  open fun <T> method(o: kotlin.Any?): intersectiontype.Getable<T>? {
+   return o as intersectiontype.Getable<T>? /* & intersectiontype.Setable? */
+  }
  }
+
+ open class A {}
+
+ interface EmptyA {}
+
+ interface EmptyB {}
 }
-
-open class `IntersectionTypeTest$A` {
- internal constructor(): super()
-}
-
-interface `IntersectionTypeTest$EmptyA` {}
-
-interface `IntersectionTypeTest$EmptyB` {}

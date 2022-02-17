@@ -1,8 +1,6 @@
 package devirtualizedcalls
 
 open class StringCalls {
- constructor(): super()
-
  open fun main() {
   val literal: kotlin.String? = "String"
   val sub: kotlin.String? = (literal!! as java.lang.String).substring(1)

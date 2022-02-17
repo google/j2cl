@@ -1,29 +1,19 @@
 package abstractinnerclass
 
 open class InnerClasses {
- constructor(): super()
-}
-
-fun interface `InnerClasses$A` {
- fun foo()
-}
-
-abstract class `InnerClasses$B`: abstractinnerclass.`InnerClasses$A` {
- internal constructor(): super()
-
- internal open fun bar() {
-  this.foo()
- }
-}
-
-abstract class `InnerClasses$C`: abstractinnerclass.`InnerClasses$A` {
- @kotlin.jvm.JvmField val `this`: abstractinnerclass.InnerClasses?
-
- internal constructor(`$outer_this`: abstractinnerclass.InnerClasses?): super() {
-  this.`this` = `$outer_this`
+ fun interface A {
+  fun foo()
  }
 
- internal open fun bar() {
-  this.foo()
+ abstract class B: abstractinnerclass.InnerClasses.A {
+  internal open fun bar() {
+   this.foo()
+  }
+ }
+
+ abstract inner class C: abstractinnerclass.InnerClasses.A {
+  internal open fun bar() {
+   this.foo()
+  }
  }
 }

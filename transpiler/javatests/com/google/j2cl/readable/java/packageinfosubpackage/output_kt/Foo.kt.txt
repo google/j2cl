@@ -1,11 +1,7 @@
 package packageinfosubpackage
 
 open class Foo {
- constructor(): super()
+ internal var nativeBar: packageinfosubpackage.Foo.NativeBar? = packageinfosubpackage.Foo.NativeBar()
 
- internal var nativeBar: packageinfosubpackage.`Foo$NativeBar`? = packageinfosubpackage.`Foo$NativeBar`()
-}
-
-open class `Foo$NativeBar` {
- internal constructor(): super()
+ open class NativeBar {}
 }

@@ -3,43 +3,29 @@ package anonymousclass
 abstract class SomeClass {
  abstract open fun foo(): kotlin.String?
 
- internal constructor(i: Int): super()
+ internal constructor(i: Int)
 }
 
 open class AnonymousClass {
- constructor(): super()
-
  open fun main() {
-  val instance: anonymousclass.SomeClass? = anonymousclass.`AnonymousClass$1`(this, 1)
+  val instance: anonymousclass.SomeClass? = object : SomeClass(1) {
+   @kotlin.jvm.JvmField internal var `object`: kotlin.Any? = this
+
+   @kotlin.jvm.JvmField internal var outer: kotlin.Any? = this@AnonymousClass
+
+   open override fun foo(): kotlin.String? {
+    return "a"
+   }
+  }
  }
 }
 
 interface SomeInterface {
  companion object {
-  @kotlin.jvm.JvmField val implicitlyStatic: anonymousclass.SomeClass? = anonymousclass.`SomeInterface$1`(1)
- }
-}
-
-open class `AnonymousClass$1`: anonymousclass.SomeClass {
- @kotlin.jvm.JvmField val `this`: anonymousclass.AnonymousClass?
-
- internal constructor(`$outer_this`: anonymousclass.AnonymousClass?, `$_0`: Int): super(`$_0`) {
-  this.`this` = `$outer_this`
- }
-
- @kotlin.jvm.JvmField internal var `object`: kotlin.Any? = this
-
- @kotlin.jvm.JvmField internal var outer: kotlin.Any? = this.`this`
-
- open override fun foo(): kotlin.String? {
-  return "a"
- }
-}
-
-open class `SomeInterface$1`: anonymousclass.SomeClass {
- internal constructor(`$_0`: Int): super(`$_0`)
-
- open override fun foo(): kotlin.String? {
-  return "a"
+  @kotlin.jvm.JvmField val implicitlyStatic: anonymousclass.SomeClass? = object : anonymousclass.SomeClass(1) {
+   open override fun foo(): kotlin.String? {
+    return "a"
+   }
+  }
  }
 }

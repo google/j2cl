@@ -1,13 +1,7 @@
 package subclassgenericclass
 
-open class GenericClass<T> {
- internal constructor(): super()
-}
+open class GenericClass<T> {}
 
-open class GenericSubclassGenericClass<T>: subclassgenericclass.GenericClass<T> {
- internal constructor(): super()
-}
+open class GenericSubclassGenericClass<T>: subclassgenericclass.GenericClass<T>() {}
 
-open class SubclassGenericClass: subclassgenericclass.GenericClass<subclassgenericclass.SubclassGenericClass?> {
- constructor(): super()
-}
+open class SubclassGenericClass: subclassgenericclass.GenericClass<subclassgenericclass.SubclassGenericClass?>() {}

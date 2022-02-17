@@ -1,8 +1,6 @@
 package packageprivatemethods.package2
 
-open class SubChild: packageprivatemethods.package1.Child {
- constructor(): super()
-
+open class SubChild: packageprivatemethods.package1.Child() {
  open override fun foo(a: Int): Int {
   return a + 3
  }

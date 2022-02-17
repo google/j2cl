@@ -1,8 +1,6 @@
 package jsmethod
 
 open class JsMethodExample {
- constructor(): super()
-
  external open fun <T: java.util.ArrayList<kotlin.String?>?> testMethod(): T?
 
  companion object {
@@ -14,20 +12,16 @@ open class JsMethodExample {
    jsmethod.JsMethodExample.log("test")
   }
  }
-}
 
-abstract class `JsMethodExample$Base`<T> {
- internal constructor(): super()
+ abstract class Base<T> {
+  open fun m(t: T?) {}
+ }
 
- open fun m(t: T?) {}
-}
+ fun interface I {
+  fun m(s: kotlin.String?)
+ }
 
-fun interface `JsMethodExample$I` {
- fun m(s: kotlin.String?)
-}
-
-open class `JsMethodExample$Sub`: jsmethod.`JsMethodExample$I`, jsmethod.`JsMethodExample$Base`<kotlin.String?> {
- internal constructor(): super()
-
- open override fun m(s: kotlin.String?) {}
+ open class Sub: jsmethod.JsMethodExample.I, jsmethod.JsMethodExample.Base<kotlin.String?>() {
+  open override fun m(s: kotlin.String?) {}
+ }
 }

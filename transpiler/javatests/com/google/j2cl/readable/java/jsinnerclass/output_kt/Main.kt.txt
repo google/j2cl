@@ -1,37 +1,30 @@
 package jsinnerclass
 
 open class Main {
- constructor(): super()
-
  companion object {
   @kotlin.jvm.JvmStatic
   fun main(vararg args: kotlin.String?) {
-   assert(jsinnerclass.`Main$Outer`().method() == 5)
+   assert(jsinnerclass.Main.Outer().method() == 5)
   }
  }
-}
 
-open class `Main$Outer$Inner` {
- @kotlin.jvm.JvmField val `this`: jsinnerclass.`Main$Outer`?
+ open class Outer {
+  @kotlin.jvm.JvmField internal var a: Int = 2
 
- internal var b: Int = 0
+  open fun method(): Int {
+   return Inner().getB() + this.a
+  }
 
- constructor(`$outer_this`: jsinnerclass.`Main$Outer`?): super() {
-  this.`this` = `$outer_this`
-  this.b = `$outer_this`!!.a + 1
- }
+  open inner class Inner {
+   internal var b: Int = 0
 
- open fun getB(): Int {
-  return this.b
- }
-}
+   constructor() {
+    this.b = this@Outer.a + 1
+   }
 
-open class `Main$Outer` {
- internal constructor(): super()
-
- @kotlin.jvm.JvmField internal var a: Int = 2
-
- open fun method(): Int {
-  return jsinnerclass.`Main$Outer$Inner`(this).getB() + this.a
+   open fun getB(): Int {
+    return this.b
+   }
+  }
  }
 }

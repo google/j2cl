@@ -5,77 +5,45 @@ fun interface MyInterface {
 }
 
 open class MixedNestings {
- constructor(): super()
-
  open fun mm() {}
 
  open fun test() {
-  mixednestings.`MixedNestings$A`(this).a()
- }
-}
-
-open class `MixedNestings$A$1B$1$1`: mixednestings.MyInterface {
- @kotlin.jvm.JvmField val `this`: mixednestings.`MixedNestings$A$1B$1`?
-
- internal constructor(`$outer_this`: mixednestings.`MixedNestings$A$1B$1`?): super() {
-  this.`this` = `$outer_this`
+  A().a()
  }
 
- open override fun `fun`(b: Int): Int {
-  return b
- }
-}
+ open inner class A {
+  open fun aa() {}
 
-open class `MixedNestings$A$1B$1`: mixednestings.MyInterface {
- @kotlin.jvm.JvmField val `this`: mixednestings.`MixedNestings$A$1B`?
+  open fun a() {
+   open class `1B` {
+    open fun bb() {}
 
- internal constructor(`$outer_this`: mixednestings.`MixedNestings$A$1B`?): super() {
-  this.`this` = `$outer_this`
- }
-
- open override fun `fun`(a: Int): Int {
-  val ii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(n: Int): Int {
-   this.`this`!!.`this`!!.`this`!!.mm()
-   this.`this`!!.`this`!!.aa()
-   this.`this`!!.bb()
-   val iii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(m: Int): Int {
-    this.`this`!!.`this`!!.`this`!!.mm()
-    this.`this`!!.`this`!!.aa()
-    this.`this`!!.bb()
-    return mixednestings.`MixedNestings$A$1B$1$1`(this).`fun`(100)
-   })
-   return iii!!.`fun`(200)
-  })
-  return ii!!.`fun`(300)
- }
-}
-
-open class `MixedNestings$A$1B` {
- @kotlin.jvm.JvmField val `this`: mixednestings.`MixedNestings$A`?
-
- internal constructor(`$outer_this`: mixednestings.`MixedNestings$A`?): super() {
-  this.`this` = `$outer_this`
- }
-
- open fun bb() {}
-
- open fun b(): Int {
-  val i: mixednestings.MyInterface? = mixednestings.`MixedNestings$A$1B$1`(this)
-  return i!!.`fun`(400)
- }
-}
-
-open class `MixedNestings$A` {
- @kotlin.jvm.JvmField val `this`: mixednestings.MixedNestings?
-
- internal constructor(`$outer_this`: mixednestings.MixedNestings?): super() {
-  this.`this` = `$outer_this`
- }
-
- open fun aa() {}
-
- open fun a() {
-  if (true) {}
-  mixednestings.`MixedNestings$A$1B`(this).b()
+    open fun b(): Int {
+     val i: mixednestings.MyInterface? = object : MyInterface {
+      open override fun `fun`(a: Int): Int {
+       val ii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(n: Int): Int {
+        this@MixedNestings.mm()
+        this@A.aa()
+        this@`1B`.bb()
+        val iii: mixednestings.MyInterface? = mixednestings.MyInterface (fun(m: Int): Int {
+         this@MixedNestings.mm()
+         this@A.aa()
+         this@`1B`.bb()
+         return object : MyInterface {
+          open override fun `fun`(b: Int): Int {
+           return b
+          }
+         }.`fun`(100)
+        })
+        return iii!!.`fun`(200)
+       })
+       return ii!!.`fun`(300)
+      }
+     }
+     return i!!.`fun`(400)
+    }
+   }
+   `1B`().b()
+  }
  }
 }

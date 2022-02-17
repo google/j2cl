@@ -1,69 +1,37 @@
 package localclassinstaticcontext
 
 open class LocalClassInStaticContext {
- constructor(): super()
-
  companion object {
-  @kotlin.jvm.JvmField var f: kotlin.Any? = localclassinstaticcontext.`LocalClassInStaticContext$1`()
+  @kotlin.jvm.JvmField var f: kotlin.Any? = (object : java.lang.Object() {} as kotlin.Any)
 
   @kotlin.jvm.JvmStatic
   fun test() {
-   if (true) {}
-   localclassinstaticcontext.`LocalClassInStaticContext$1A`()
-   val a: kotlin.Any? = localclassinstaticcontext.`LocalClassInStaticContext$3`()
+   open class `1A` {}
+   `1A`()
+   val a: kotlin.Any? = (object : java.lang.Object() {
+    internal open fun m() {
+     `1A`()
+    }
+   } as kotlin.Any)
   }
 
   init {
-   if (true) {}
-   localclassinstaticcontext.`LocalClassInStaticContext$1B`()
-   val b: kotlin.Any? = localclassinstaticcontext.`LocalClassInStaticContext$2`()
+   open class `1B` {}
+   `1B`()
+   val b: kotlin.Any? = (object : java.lang.Object() {} as kotlin.Any)
   }
  }
-}
 
-open class `LocalClassInStaticContext$1` {
- internal constructor(): super()
-}
+ open class C {
+  @kotlin.jvm.JvmField var f: Int = 1
 
-open class `LocalClassInStaticContext$3` {
- internal constructor(): super()
-
- internal open fun m() {
-  localclassinstaticcontext.`LocalClassInStaticContext$1A`()
+  open fun test() {
+   open class `1D` {
+    open fun `fun`(): Int {
+     return this@C.f
+    }
+   }
+   `1D`().`fun`()
+  }
  }
-}
-
-open class `LocalClassInStaticContext$2` {
- internal constructor(): super()
-}
-
-open class `LocalClassInStaticContext$C$1D` {
- @kotlin.jvm.JvmField val `this`: localclassinstaticcontext.`LocalClassInStaticContext$C`?
-
- internal constructor(`$outer_this`: localclassinstaticcontext.`LocalClassInStaticContext$C`?): super() {
-  this.`this` = `$outer_this`
- }
-
- open fun `fun`(): Int {
-  return this.`this`!!.f
- }
-}
-
-open class `LocalClassInStaticContext$C` {
- constructor(): super()
-
- @kotlin.jvm.JvmField var f: Int = 1
-
- open fun test() {
-  if (true) {}
-  localclassinstaticcontext.`LocalClassInStaticContext$C$1D`(this).`fun`()
- }
-}
-
-open class `LocalClassInStaticContext$1A` {
- internal constructor(): super()
-}
-
-open class `LocalClassInStaticContext$1B` {
- internal constructor(): super()
 }

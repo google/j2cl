@@ -1,8 +1,6 @@
 package cast
 
 open class CastGenerics<T, E: kotlin.Number?> {
- constructor(): super()
-
  @kotlin.jvm.JvmField internal var field: T? = null
 
  internal open fun method(): T? {
@@ -26,11 +24,15 @@ open class CastGenerics<T, E: kotlin.Number?> {
  }
 
  open fun <TT: kotlin.Enum<*>?> outerGenericMethod() {
-  if (true) {}
+  open class `1Nested`<SS, TT: kotlin.Enum<*>?> {
+   internal fun nestedGenericMethod(o: kotlin.Any?) {
+    val t: TT? = o as TT?
+   }
+  }
  }
 
- open fun <EE> method(o: kotlin.Any?): EE? where EE: cast.`CastGenerics$Empty1`?, EE: cast.`CastGenerics$Empty2`<EE>? {
-  if (o is cast.`CastGenerics$Empty1`) {
+ open fun <EE> method(o: kotlin.Any?): EE? where EE: cast.CastGenerics.Empty1?, EE: cast.CastGenerics.Empty2<EE>? {
+  if (o is cast.CastGenerics.Empty1) {
    return o as EE?
   }
   return null
@@ -38,31 +40,31 @@ open class CastGenerics<T, E: kotlin.Number?> {
 
  companion object {
   @kotlin.jvm.JvmStatic
-  fun <T_1, U: T_1> testErasureCast() where T_1: cast.`CastGenerics$A`?, T_1: cast.`CastGenerics$B`? {
+  fun <T_1, U: T_1> testErasureCast() where T_1: cast.CastGenerics.A?, T_1: cast.CastGenerics.B? {
    var str: kotlin.String? = cast.CastGenerics<kotlin.String?, kotlin.Number?>().field
    str = cast.CastGenerics<kotlin.String?, kotlin.Number?>().method()
-   val containerT: cast.`CastGenerics$Container`<T_1>? = null
+   val containerT: cast.CastGenerics.Container<T_1>? = null
    containerT!!.get()!!.mA()
    containerT!!.get()!!.mB()
-   val containerU: cast.`CastGenerics$Container`<U>? = null
+   val containerU: cast.CastGenerics.Container<U>? = null
    containerU!!.get()!!.mA()
    containerU!!.get()!!.mB()
-   val containerArrT: cast.`CastGenerics$Container`<Array<T_1>?>? = null
+   val containerArrT: cast.CastGenerics.Container<Array<T_1>?>? = null
    val arrT: Array<T_1>? = containerArrT!!.get()
    arrT!![0]!!.mA()
    arrT!![0]!!.mB()
-   var arrA: Array<cast.`CastGenerics$A`?>? = containerArrT!!.get() as Array<cast.`CastGenerics$A`?>
-   var arrB: Array<cast.`CastGenerics$B`?>? = containerArrT!!.get() as Array<cast.`CastGenerics$B`?>
-   val containerArrU: cast.`CastGenerics$Container`<Array<U>?>? = null
+   var arrA: Array<cast.CastGenerics.A?>? = containerArrT!!.get() as Array<cast.CastGenerics.A?>
+   var arrB: Array<cast.CastGenerics.B?>? = containerArrT!!.get() as Array<cast.CastGenerics.B?>
+   val containerArrU: cast.CastGenerics.Container<Array<U>?>? = null
    val arrU: Array<U>? = containerArrU!!.get()
    arrU!![0]!!.mA()
    arrU!![0]!!.mB()
-   arrA = containerArrU!!.get() as Array<cast.`CastGenerics$A`?>
-   arrB = containerArrU!!.get() as Array<cast.`CastGenerics$B`?>
-   val containerBase: cast.`CastGenerics$Container`<cast.`CastGenerics$BaseImplementor`?>? = null
+   arrA = containerArrU!!.get() as Array<cast.CastGenerics.A?>
+   arrB = containerArrU!!.get() as Array<cast.CastGenerics.B?>
+   val containerBase: cast.CastGenerics.Container<cast.CastGenerics.BaseImplementor?>? = null
    containerBase!!.get()!!.mA()
    containerBase!!.get()!!.mB()
-   val containerImplementor: cast.`CastGenerics$Container`<cast.`CastGenerics$Implementor`?>? = null
+   val containerImplementor: cast.CastGenerics.Container<cast.CastGenerics.Implementor?>? = null
    containerImplementor!!.get()!!.mA()
    containerImplementor!!.get()!!.mB()
   }
@@ -75,60 +77,36 @@ open class CastGenerics<T, E: kotlin.Number?> {
   }
 
   @kotlin.jvm.JvmStatic
-  fun <T> doSomething(): cast.`CastGenerics$Foo`<T>? {
-   return cast.`CastGenerics$1`<T>()
+  fun <T_1> doSomething(): cast.CastGenerics.Foo<T_1>? {
+   return object : cast.CastGenerics.Foo<T_1>() {}
   }
  }
-}
 
-open class `CastGenerics$1`<T>: cast.`CastGenerics$Foo`<T> {
- internal constructor(): super()
-}
-
-fun interface `CastGenerics$A` {
- fun mA()
-}
-
-fun interface `CastGenerics$B` {
- fun mB()
-}
-
-abstract class `CastGenerics$BaseImplementor`: cast.`CastGenerics$A`, cast.`CastGenerics$B` {
- internal constructor(): super()
-}
-
-open class `CastGenerics$Implementor`: cast.`CastGenerics$BaseImplementor` {
- internal constructor(): super()
-
- open override fun mA() {}
-
- open override fun mB() {}
-}
-
-open class `CastGenerics$Container`<T> {
- internal constructor(): super()
-
- internal open fun get(): T? {
-  return null
- }
-}
-
-interface `CastGenerics$Empty1` {}
-
-interface `CastGenerics$Empty2`<TT> {}
-
-open class `CastGenerics$Foo`<V> {
- constructor(): super()
-}
-
-open class `CastGenerics$1Nested`<SS, TT: kotlin.Enum<*>?, T, E: kotlin.Number?> {
- @kotlin.jvm.JvmField val `this`: cast.CastGenerics<T, E>?
-
- internal constructor(`$outer_this`: cast.CastGenerics<T, E>?): super() {
-  this.`this` = `$outer_this`
+ fun interface A {
+  fun mA()
  }
 
- internal fun nestedGenericMethod(o: kotlin.Any?) {
-  val t: TT? = o as TT?
+ fun interface B {
+  fun mB()
  }
+
+ abstract class BaseImplementor: cast.CastGenerics.A, cast.CastGenerics.B {}
+
+ open class Implementor: cast.CastGenerics.BaseImplementor() {
+  open override fun mA() {}
+
+  open override fun mB() {}
+ }
+
+ open class Container<T> {
+  internal open fun get(): T? {
+   return null
+  }
+ }
+
+ interface Empty1 {}
+
+ interface Empty2<TT> {}
+
+ open class Foo<V> {}
 }

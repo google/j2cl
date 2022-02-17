@@ -1,39 +1,25 @@
 package rawtype
 
 open class RawType {
- internal constructor(): super()
-
  @kotlin.jvm.JvmField internal var c: kotlin.Comparable<*>? = null
 
  internal open fun test() {
-  val unbound: rawtype.`RawType$Unbound`<*>? = rawtype.`RawType$Unbound`<kotlin.Any?>()
-  val bound: rawtype.`RawType$Bound`<*>? = rawtype.`RawType$Bound`<rawtype.RawType?>()
-  val boundRecursively: rawtype.`RawType$BoundRecursively`<*>? = rawtype.`RawType$BoundRecursively`<rawtype.`RawType$BoundRecursively`<*>?>(this)
+  val unbound: rawtype.RawType.Unbound<*>? = rawtype.RawType.Unbound<kotlin.Any?>()
+  val bound: rawtype.RawType.Bound<*>? = rawtype.RawType.Bound<rawtype.RawType?>()
+  val boundRecursively: rawtype.RawType.BoundRecursively<*>? = BoundRecursively<rawtype.RawType.BoundRecursively<*>?>()
  }
-}
 
-interface `RawType$I`<T: rawtype.RawType?> {
- fun f(t: T?) {}
-}
-
-open class `RawType$Unbound`<T> {
- internal constructor(): super()
-}
-
-open class `RawType$Bound`<T: rawtype.RawType?> {
- internal constructor(): super()
-}
-
-open class `RawType$BoundRecursively`<T: rawtype.`RawType$BoundRecursively`<T>?> {
- @kotlin.jvm.JvmField val `this`: rawtype.RawType?
-
- internal constructor(`$outer_this`: rawtype.RawType?): super() {
-  this.`this` = `$outer_this`
+ interface I<T: rawtype.RawType?> {
+  fun f(t: T?) {}
  }
-}
 
-open class `RawType$RawSubclass`: rawtype.`RawType$I`<rawtype.RawType?> {
- internal constructor(): super()
+ open class Unbound<T> {}
 
- open override fun f(t: rawtype.RawType?) {}
+ open class Bound<T: rawtype.RawType?> {}
+
+ open inner class BoundRecursively<T: rawtype.RawType.BoundRecursively<T>?> {}
+
+ open class RawSubclass: rawtype.RawType.I<rawtype.RawType?> {
+  open override fun f(t: rawtype.RawType?) {}
+ }
 }

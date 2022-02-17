@@ -1,8 +1,6 @@
 package cast
 
 open class Casts {
- constructor(): super()
-
  open fun testCastToClass() {
   val o: kotlin.Any? = (java.lang.Object() as kotlin.Any)
   val c: cast.Casts? = o as cast.Casts?
@@ -45,7 +43,7 @@ open class Casts {
   }
   if (o is cast.Casts) {
    val cAvoidsCastsTo_1: cast.Casts? = o as cast.Casts?
-   o = cast.`Casts$Foo`(this)
+   o = Foo()
    val cNotAvoidCastsTo_1: cast.Casts? = o as cast.Casts?
   }
   if (o is cast.Casts) {
@@ -61,7 +59,7 @@ open class Casts {
  }
 
  open fun testCastFieldAfterInstanceOf() {
-  var foo: cast.`Casts$Foo`? = cast.`Casts$Foo`(this)
+  var foo: cast.Casts.Foo? = Foo()
   if (foo!!.field is cast.Casts) {
    val c: cast.Casts? = foo!!.field as cast.Casts?
   }
@@ -72,7 +70,7 @@ open class Casts {
   }
   if (foo!!.field is cast.Casts) {
    val cAvoidsCastsTo_1: cast.Casts? = foo!!.field as cast.Casts?
-   foo = cast.`Casts$Foo`(this)
+   foo = Foo()
    val cNotAvoidCastsTo_1: cast.Casts? = foo!!.field as cast.Casts?
   }
   if (foo!!.field is cast.Casts) {
@@ -83,23 +81,17 @@ open class Casts {
  }
 
  open fun testCaseMethodAfterInstanceOf() {
-  val foo: cast.`Casts$Foo`? = cast.`Casts$Foo`(this)
+  val foo: cast.Casts.Foo? = Foo()
   if (foo!!.method() is cast.Casts) {
    val cNotAvoidCastsTo: cast.Casts? = foo!!.method() as cast.Casts?
   }
  }
-}
 
-open class `Casts$Foo` {
- @kotlin.jvm.JvmField val `this`: cast.Casts?
+ open inner class Foo {
+  @kotlin.jvm.JvmField var field: kotlin.Any? = (java.lang.Object() as kotlin.Any)
 
- internal constructor(`$outer_this`: cast.Casts?): super() {
-  this.`this` = `$outer_this`
- }
-
- @kotlin.jvm.JvmField var field: kotlin.Any? = (java.lang.Object() as kotlin.Any)
-
- open fun method(): kotlin.Any? {
-  return (java.lang.Object() as kotlin.Any)
+  open fun method(): kotlin.Any? {
+   return (java.lang.Object() as kotlin.Any)
+  }
  }
 }

@@ -1,8 +1,6 @@
 package arithmeticexpressions
 
 open class ArithmeticExpressions {
- constructor(): super()
-
  open fun testCoercions() {
   var b: Byte = 1L.toByte()
   var c: Char = 1L.toInt().toChar()
@@ -210,8 +208,10 @@ open class ArithmeticExpressions {
    f = f!! - 1
    `$value_2`
   }!! as java.lang.Integer).intValue()
-  if (true) {}
-  val ref: arithmeticexpressions.`ArithmeticExpressions$1Ref`<kotlin.Int?>? = null
+  open class `1Ref`<T> {
+   @kotlin.jvm.JvmField internal var field: T? = null
+  }
+  val ref: `1Ref`<kotlin.Int?>? = null
   ref!!.field = ref!!.field!! + 1
   val n: Int = 1 + ref!!.field!!
  }
@@ -299,14 +299,4 @@ open class ArithmeticExpressions {
    }
   }
  }
-}
-
-open class `ArithmeticExpressions$1Ref`<T> {
- @kotlin.jvm.JvmField val `this`: arithmeticexpressions.ArithmeticExpressions?
-
- internal constructor(`$outer_this`: arithmeticexpressions.ArithmeticExpressions?): super() {
-  this.`this` = `$outer_this`
- }
-
- @kotlin.jvm.JvmField internal var field: T? = null
 }

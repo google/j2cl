@@ -1,20 +1,15 @@
 package innerclasswithconstructor
 
 open class InnerClassWithConstructor {
- constructor(): super()
-
  @kotlin.jvm.JvmField var a: Int = 0
-}
 
-open class `InnerClassWithConstructor$InnerClass` {
- @kotlin.jvm.JvmField val `this`: innerclasswithconstructor.InnerClassWithConstructor?
+ open inner class InnerClass {
+  @kotlin.jvm.JvmField var b: Int = 0
 
- @kotlin.jvm.JvmField var b: Int = 0
+  constructor(b: Int) {
+   this.b = this@InnerClassWithConstructor.a + b
+  }
 
- constructor(`$outer_this`: innerclasswithconstructor.InnerClassWithConstructor?, b: Int): super() {
-  this.`this` = `$outer_this`
-  this.b = `$outer_this`!!.a + b
+  constructor(): this(this@InnerClassWithConstructor.a)
  }
-
- constructor(`$outer_this`: innerclasswithconstructor.InnerClassWithConstructor?): this(`$outer_this`, `$outer_this`!!.a)
 }

@@ -1,8 +1,6 @@
 package jsproperties
 
 open class Foo {
- internal constructor(): super()
-
  companion object {
   internal var f: Int = 0
 
@@ -29,8 +27,6 @@ open class Foo {
 }
 
 open class Bar {
- internal constructor(): super()
-
  internal var f: Int = 0
 
  open fun getA(): Int {
@@ -51,8 +47,6 @@ open class Bar {
 }
 
 open class NativeFoo {
- internal constructor(): super()
-
  external open fun getA(): kotlin.Any?
 
  companion object {
@@ -62,8 +56,6 @@ open class NativeFoo {
 }
 
 open class Main {
- constructor(): super()
-
  open fun testNativeJsProperty() {
   jsproperties.NativeFoo().getA()
   jsproperties.NativeFoo.getB()

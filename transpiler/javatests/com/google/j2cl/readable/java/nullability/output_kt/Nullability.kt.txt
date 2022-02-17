@@ -23,7 +23,7 @@ open class Nullability {
 
  internal var f12: kotlin.collections.MutableList<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
- constructor(a: kotlin.String): super()
+ constructor(a: kotlin.String)
 
  open fun m1(a: kotlin.String, b: kotlin.collections.MutableList<kotlin.Double>, c: kotlin.String?): kotlin.String {
   return ""
@@ -37,55 +37,45 @@ open class Nullability {
   return null
  }
 
- open fun m4(f: nullability.`Nullability$MyFunction`) {}
-}
+ open fun m4(f: nullability.Nullability.MyFunction) {}
 
-open class `Nullability$Foo`<T> {
- internal constructor(): super()
+ open class Foo<T> {
+  internal open fun bar(t: T?) {}
 
- internal open fun bar(t: T?) {}
+  internal open fun baz(): T? {
+   return null
+  }
 
- internal open fun baz(): T? {
-  return null
+  open override fun toString(): kotlin.String? {
+   return "Foo"
+  }
  }
 
- open override fun toString(): kotlin.String? {
-  return "Foo"
+ fun interface MyFunction {
+  fun x(a: kotlin.String): kotlin.String
  }
-}
 
-fun interface `Nullability$MyFunction` {
- fun x(a: kotlin.String): kotlin.String
-}
+ open class StringList: java.util.ArrayList<kotlin.String?>() {}
 
-open class `Nullability$StringList`: java.util.ArrayList<kotlin.String?> {
- constructor(): super()
-}
-
-open class `Nullability$StringComparator`: java.util.Comparator<kotlin.String> {
- constructor(): super()
-
- open override fun compare(a: kotlin.String, b: kotlin.String): Int {
-  return 0
+ open class StringComparator: java.util.Comparator<kotlin.String> {
+  open override fun compare(a: kotlin.String, b: kotlin.String): Int {
+   return 0
+  }
  }
-}
 
-open class `Nullability$NullableStringComparator`: java.util.Comparator<kotlin.String?> {
- constructor(): super()
-
- open override fun compare(a: kotlin.String?, b: kotlin.String?): Int {
-  return 0
+ open class NullableStringComparator: java.util.Comparator<kotlin.String?> {
+  open override fun compare(a: kotlin.String?, b: kotlin.String?): Int {
+   return 0
+  }
  }
-}
 
-fun interface `Nullability$NullableTemplatedReturn`<T> {
- fun foo(): T?
-}
+ fun interface NullableTemplatedReturn<T> {
+  fun foo(): T?
+ }
 
-open class `Nullability$NullableTemplatedReturnOverride`: nullability.`Nullability$NullableTemplatedReturn`<kotlin.String?> {
- constructor(): super()
-
- open override fun foo(): kotlin.String? {
-  return "foo"
+ open class NullableTemplatedReturnOverride: nullability.Nullability.NullableTemplatedReturn<kotlin.String?> {
+  open override fun foo(): kotlin.String? {
+   return "foo"
+  }
  }
 }

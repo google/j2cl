@@ -1,8 +1,6 @@
 package cast
 
 open class CastPrimitives {
- constructor(): super()
-
  open fun testPrimitiveCasts() {
   var b: Byte = 1
   var c: Char = 1.toChar()
@@ -99,12 +97,12 @@ open class CastPrimitives {
   cast.CastPrimitives.getFloat(l.toFloat())
   cast.CastPrimitives.getDouble(l.toDouble())
   cast.CastPrimitives.getDouble(f.toDouble())
-  cast.`CastPrimitives$IntValueHolder`(b.toInt())
-  cast.`CastPrimitives$IntValueHolder`(c.code)
-  cast.`CastPrimitives$IntValueHolder`(s.toInt())
-  cast.`CastPrimitives$LongValueHolder`(b.toLong())
-  cast.`CastPrimitives$LongValueHolder`(c.code.toLong())
-  cast.`CastPrimitives$LongValueHolder`(i.toLong())
+  cast.CastPrimitives.IntValueHolder(b.toInt())
+  cast.CastPrimitives.IntValueHolder(c.code)
+  cast.CastPrimitives.IntValueHolder(s.toInt())
+  cast.CastPrimitives.LongValueHolder(b.toLong())
+  cast.CastPrimitives.LongValueHolder(c.code.toLong())
+  cast.CastPrimitives.LongValueHolder(i.toLong())
  }
 
  open fun testImplicitLongAssignmentCasts() {
@@ -173,12 +171,12 @@ open class CastPrimitives {
    return value
   }
  }
-}
 
-open class `CastPrimitives$IntValueHolder` {
- internal constructor(value: Int): super()
-}
+ open class IntValueHolder {
+  internal constructor(value: Int)
+ }
 
-open class `CastPrimitives$LongValueHolder` {
- internal constructor(value: Long): super()
+ open class LongValueHolder {
+  internal constructor(value: Long)
+ }
 }

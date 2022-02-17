@@ -10,4 +10,6 @@ package(
 # Creates verification target
 readable_example(
     srcs = glob(["*.java"]),
+    # TODO(b/202428351): Support generics
+    build_kt_readables = False,
 )

@@ -26,6 +26,7 @@ import com.google.j2cl.transpiler.ast.ForEachStatement
 import com.google.j2cl.transpiler.ast.IfStatement
 import com.google.j2cl.transpiler.ast.LabelReference
 import com.google.j2cl.transpiler.ast.LabeledStatement
+import com.google.j2cl.transpiler.ast.LocalClassDeclarationStatement
 import com.google.j2cl.transpiler.ast.ReturnStatement
 import com.google.j2cl.transpiler.ast.Statement
 import com.google.j2cl.transpiler.ast.SwitchCase
@@ -48,6 +49,7 @@ fun Renderer.renderStatement(statement: Statement) {
     is ForEachStatement -> renderForEachStatement(statement)
     is IfStatement -> renderIfStatement(statement)
     is LabeledStatement -> renderLabeledStatement(statement)
+    is LocalClassDeclarationStatement -> renderLocalClassDeclarationStatement(statement)
     is ReturnStatement -> renderReturnStatement(statement)
     is SwitchStatement -> renderSwitchStatement(statement)
     is WhileStatement -> renderWhileStatement(statement)
@@ -137,6 +139,12 @@ private fun Renderer.renderLabeledStatement(labelStatement: LabeledStatement) {
   val innerStatement = labelStatement.statement
   if (innerStatement is LabeledStatement) renderInCurlyBrackets { renderStatement(innerStatement) }
   else renderStatement(innerStatement)
+}
+
+private fun Renderer.renderLocalClassDeclarationStatement(
+  localClassDeclarationStatement: LocalClassDeclarationStatement
+) {
+  renderType(localClassDeclarationStatement.localClass)
 }
 
 private fun Renderer.renderReturnStatement(returnStatement: ReturnStatement) {

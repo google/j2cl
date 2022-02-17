@@ -1,43 +1,17 @@
 package unreachableclass
 
 open class Main {
- constructor(): super()
-
  init {
   try {} catch (e: java.lang.RuntimeException) {
-   if (true) {}
-   unreachableclass.`Main$1A`(this).m()
-   unreachableclass.`Main$1`(this)
+   open class `1A` {
+    internal open fun m() {
+     open class `1B` {
+      internal fun n() {}
+     }
+    }
+   }
+   `1A`().m()
+   (object : java.lang.Object() {} as kotlin.Any)
   }
- }
-}
-
-open class `Main$1` {
- @kotlin.jvm.JvmField val `this`: unreachableclass.Main?
-
- internal constructor(`$outer_this`: unreachableclass.Main?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `Main$1A$1B` {
- @kotlin.jvm.JvmField val `this`: unreachableclass.`Main$1A`?
-
- internal constructor(`$outer_this`: unreachableclass.`Main$1A`?): super() {
-  this.`this` = `$outer_this`
- }
-
- internal fun n() {}
-}
-
-open class `Main$1A` {
- @kotlin.jvm.JvmField val `this`: unreachableclass.Main?
-
- internal constructor(`$outer_this`: unreachableclass.Main?): super() {
-  this.`this` = `$outer_this`
- }
-
- internal open fun m() {
-  if (true) {}
  }
 }

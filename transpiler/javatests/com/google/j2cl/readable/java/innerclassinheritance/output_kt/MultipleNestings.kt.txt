@@ -1,48 +1,28 @@
 package innerclassinheritance
 
 open class MultipleNestings {
- constructor(): super()
-
  open fun funInM() {}
-}
 
-open class `MultipleNestings$Parent` {
- @kotlin.jvm.JvmField val `this`: innerclassinheritance.MultipleNestings?
-
- constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super() {
-  this.`this` = `$outer_this`
+ open inner class Parent {
+  open fun `fun`() {}
  }
 
- open fun `fun`() {}
-}
+ open inner class InnerClass1: innerclassinheritance.MultipleNestings.Parent() {
+  open fun funInI1() {}
 
-open class `MultipleNestings$InnerClass1$InnerClass2`: innerclassinheritance.`MultipleNestings$Parent` {
- @kotlin.jvm.JvmField val `this`: innerclassinheritance.`MultipleNestings$InnerClass1`?
+  open inner class InnerClass2: innerclassinheritance.MultipleNestings.Parent() {
+   open fun funInI2() {}
 
- constructor(`$outer_this`: innerclassinheritance.`MultipleNestings$InnerClass1`?): super(this.`this`!!.`this`) {
-  this.`this` = `$outer_this`
+   open fun test() {
+    this.`fun`()
+    this.`fun`()
+    this@InnerClass1.`fun`()
+    this@MultipleNestings.funInM()
+    this@MultipleNestings.funInM()
+    this@InnerClass1.funInI1()
+    this@InnerClass1.funInI1()
+    this.funInI2()
+   }
+  }
  }
-
- open fun funInI2() {}
-
- open fun test() {
-  this.`fun`()
-  this.`fun`()
-  this.`this`!!.`fun`()
-  this.`this`!!.`this`!!.funInM()
-  this.`this`!!.`this`!!.funInM()
-  this.`this`!!.funInI1()
-  this.`this`!!.funInI1()
-  this.funInI2()
- }
-}
-
-open class `MultipleNestings$InnerClass1`: innerclassinheritance.`MultipleNestings$Parent` {
- @kotlin.jvm.JvmField val `this`: innerclassinheritance.MultipleNestings?
-
- constructor(`$outer_this`: innerclassinheritance.MultipleNestings?): super(`$outer_this`) {
-  this.`this` = `$outer_this`
- }
-
- open fun funInI1() {}
 }

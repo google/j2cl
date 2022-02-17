@@ -1,13 +1,5 @@
 package packageinfo
 
 open class Outer {
- constructor(): super()
-}
-
-open class `Outer$Inner` {
- @kotlin.jvm.JvmField val `this`: packageinfo.Outer?
-
- constructor(`$outer_this`: packageinfo.Outer?): super() {
-  this.`this` = `$outer_this`
- }
+ open inner class Inner {}
 }

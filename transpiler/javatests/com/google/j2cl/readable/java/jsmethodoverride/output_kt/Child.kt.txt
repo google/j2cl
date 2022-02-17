@@ -1,13 +1,9 @@
 package jsmethodoverride
 
 open class Parent {
- internal constructor(): super()
-
  open fun foo() {}
 }
 
-open class Child: jsmethodoverride.Parent {
- constructor(): super()
-
+open class Child: jsmethodoverride.Parent() {
  open override fun foo() {}
 }

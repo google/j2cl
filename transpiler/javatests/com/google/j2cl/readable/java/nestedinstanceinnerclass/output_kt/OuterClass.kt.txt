@@ -1,29 +1,15 @@
 package nestedinstanceinnerclass
 
 open class OuterClass {
- constructor(): super()
-
  open fun test() {
-  nestedinstanceinnerclass.`OuterClass$InnerClass$InnerInnerClass`(nestedinstanceinnerclass.`OuterClass$InnerClass`(nestedinstanceinnerclass.OuterClass()))
- }
-}
-
-open class `OuterClass$InnerClass$InnerInnerClass` {
- @kotlin.jvm.JvmField val `this`: nestedinstanceinnerclass.`OuterClass$InnerClass`?
-
- constructor(`$outer_this`: nestedinstanceinnerclass.`OuterClass$InnerClass`?): super() {
-  this.`this` = `$outer_this`
+  nestedinstanceinnerclass.OuterClass().InnerClass().InnerInnerClass()
  }
 
- @kotlin.jvm.JvmField var x: nestedinstanceinnerclass.`OuterClass$InnerClass`? = this.`this`
+ open inner class InnerClass {
+  open inner class InnerInnerClass {
+   @kotlin.jvm.JvmField var x: nestedinstanceinnerclass.OuterClass.InnerClass? = this@InnerClass
 
- @kotlin.jvm.JvmField var y: nestedinstanceinnerclass.OuterClass? = this.`this`!!.`this`
-}
-
-open class `OuterClass$InnerClass` {
- @kotlin.jvm.JvmField val `this`: nestedinstanceinnerclass.OuterClass?
-
- constructor(`$outer_this`: nestedinstanceinnerclass.OuterClass?): super() {
-  this.`this` = `$outer_this`
+   @kotlin.jvm.JvmField var y: nestedinstanceinnerclass.OuterClass? = this@OuterClass
+  }
  }
 }

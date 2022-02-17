@@ -1,8 +1,6 @@
 package jsdoctypemappings
 
 open class JsDocTypeMappings {
- constructor(): super()
-
  internal open fun returnComparatorWildcard(): java.util.Comparator<*>? {
   return null
  }
@@ -85,15 +83,15 @@ open class JsDocTypeMappings {
 
  internal open fun returnVoid() {}
 
- internal open fun returnNativeFunction(): jsdoctypemappings.`JsDocTypeMappings$NativeFunction`? {
+ internal open fun returnNativeFunction(): jsdoctypemappings.JsDocTypeMappings.NativeFunction? {
   return null
  }
 
- internal open fun returnNativeType(): jsdoctypemappings.`JsDocTypeMappings$NativeType`? {
+ internal open fun returnNativeType(): jsdoctypemappings.JsDocTypeMappings.NativeType? {
   return null
  }
 
- internal open fun returnExportedType(): jsdoctypemappings.`JsDocTypeMappings$ExportedType`? {
+ internal open fun returnExportedType(): jsdoctypemappings.JsDocTypeMappings.ExportedType? {
   return null
  }
 
@@ -101,67 +99,59 @@ open class JsDocTypeMappings {
   return null
  }
 
- internal open fun returnNativeNumber(): jsdoctypemappings.`JsDocTypeMappings$NativeNumber`? {
+ internal open fun returnNativeNumber(): jsdoctypemappings.JsDocTypeMappings.NativeNumber? {
   return null
  }
 
- internal open fun returnNativeBoolean(): jsdoctypemappings.`JsDocTypeMappings$NativeBoolean`? {
+ internal open fun returnNativeBoolean(): jsdoctypemappings.JsDocTypeMappings.NativeBoolean? {
   return null
  }
 
- internal open fun returnNativeString(): jsdoctypemappings.`JsDocTypeMappings$NativeString`? {
+ internal open fun returnNativeString(): jsdoctypemappings.JsDocTypeMappings.NativeString? {
   return null
  }
 
- internal open fun returnNativeNull(): jsdoctypemappings.`JsDocTypeMappings$NativeNull`? {
+ internal open fun returnNativeNull(): jsdoctypemappings.JsDocTypeMappings.NativeNull? {
   return null
  }
 
- internal open fun returnNativeUndefined(): jsdoctypemappings.`JsDocTypeMappings$NativeUndefined`? {
+ internal open fun returnNativeUndefined(): jsdoctypemappings.JsDocTypeMappings.NativeUndefined? {
   return null
  }
 
- internal open fun returnNativeVoid(): jsdoctypemappings.`JsDocTypeMappings$NativeVoid`? {
+ internal open fun returnNativeVoid(): jsdoctypemappings.JsDocTypeMappings.NativeVoid? {
   return null
  }
 
- internal open fun returnStar(): jsdoctypemappings.`JsDocTypeMappings$NativeStar`? {
+ internal open fun returnStar(): jsdoctypemappings.JsDocTypeMappings.NativeStar? {
   return null
  }
 
- internal open fun returnNativeWildcard(): jsdoctypemappings.`JsDocTypeMappings$NativeWildcard`? {
+ internal open fun returnNativeWildcard(): jsdoctypemappings.JsDocTypeMappings.NativeWildcard? {
   return null
  }
+
+ fun interface NativeFunction {
+  fun f()
+ }
+
+ open class NativeType {}
+
+ open inner class ExportedType {}
+
+ interface NativeNumber {}
+
+ interface NativeBoolean {}
+
+ interface NativeString {}
+
+ interface NativeNull {}
+
+ interface NativeUndefined {}
+
+ interface NativeVoid {}
+
+ interface NativeStar {}
+
+ interface NativeWildcard {}
 }
-
-fun interface `JsDocTypeMappings$NativeFunction` {
- fun f()
-}
-
-open class `JsDocTypeMappings$NativeType` {
- internal constructor(): super()
-}
-
-open class `JsDocTypeMappings$ExportedType` {
- @kotlin.jvm.JvmField val `this`: jsdoctypemappings.JsDocTypeMappings?
-
- internal constructor(`$outer_this`: jsdoctypemappings.JsDocTypeMappings?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-interface `JsDocTypeMappings$NativeNumber` {}
-
-interface `JsDocTypeMappings$NativeBoolean` {}
-
-interface `JsDocTypeMappings$NativeString` {}
-
-interface `JsDocTypeMappings$NativeNull` {}
-
-interface `JsDocTypeMappings$NativeUndefined` {}
-
-interface `JsDocTypeMappings$NativeVoid` {}
-
-interface `JsDocTypeMappings$NativeStar` {}
-
-interface `JsDocTypeMappings$NativeWildcard` {}

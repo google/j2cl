@@ -5,8 +5,6 @@ fun interface I<T, S> {
 }
 
 open class A<T, S> {
- internal constructor(): super()
-
  open fun `fun`(s: S?): T? {
   return null
  }
@@ -16,9 +14,7 @@ open class A<T, S> {
  }
 }
 
-open class B: bridgemethods.I<kotlin.Int?, kotlin.String?>, bridgemethods.A<kotlin.Number?, kotlin.String?> {
- internal constructor(): super()
-
+open class B: bridgemethods.I<kotlin.Int?, kotlin.String?>, bridgemethods.A<kotlin.Number?, kotlin.String?>() {
  open override fun `fun`(s: kotlin.String?): kotlin.Int? {
   return (java.lang.Integer(1) as kotlin.Int)
  }
@@ -30,6 +26,4 @@ interface SpecializedInterface {
  fun get(): kotlin.String?
 }
 
-open class AccidentalOverride: bridgemethods.SpecializedInterface, bridgemethods.A<kotlin.String?, kotlin.String?> {
- internal constructor(): super()
-}
+open class AccidentalOverride: bridgemethods.SpecializedInterface, bridgemethods.A<kotlin.String?, kotlin.String?>() {}

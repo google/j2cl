@@ -21,7 +21,7 @@ open class Main {
 
  internal var f12: kotlin.collections.MutableList<kotlin.String?>? = java.util.ArrayList<kotlin.String?>()
 
- constructor(a: kotlin.String): super()
+ constructor(a: kotlin.String)
 
  open fun m1(a: kotlin.String, b: kotlin.collections.MutableList<kotlin.Double>, c: kotlin.String?): kotlin.String {
   return ""
@@ -35,45 +35,39 @@ open class Main {
   return null
  }
 
- open fun m4(f: jsnonnull.`Main$MyFunction`) {}
-}
+ open fun m4(f: jsnonnull.Main.MyFunction) {}
 
-fun interface `Main$MyFunction` {
- fun x(a: kotlin.String): kotlin.String
-}
-
-open class `Main$StringComparator`: java.util.Comparator<kotlin.String> {
- constructor(): super()
-
- open override fun compare(a: kotlin.String, b: kotlin.String): Int {
-  return 0
+ fun interface MyFunction {
+  fun x(a: kotlin.String): kotlin.String
  }
-}
 
-open class `Main$NullableStringComparator`: java.util.Comparator<kotlin.String?> {
- constructor(): super()
-
- open override fun compare(a: kotlin.String?, b: kotlin.String?): Int {
-  return 0
+ open class StringComparator: java.util.Comparator<kotlin.String> {
+  open override fun compare(a: kotlin.String, b: kotlin.String): Int {
+   return 0
+  }
  }
-}
 
-open class `Main$NonNullableStringSubNullableComparator`: jsnonnull.`Main$NullableStringComparator` {
- constructor(): super()
-
- open override fun compare(a: kotlin.String, b: kotlin.String): Int {
-  return 0
+ open class NullableStringComparator: java.util.Comparator<kotlin.String?> {
+  open override fun compare(a: kotlin.String?, b: kotlin.String?): Int {
+   return 0
+  }
  }
-}
 
-interface `Main$NonNullableTemplatedReturn`<T> {
- fun get(): T?
+ open class NonNullableStringSubNullableComparator: jsnonnull.Main.NullableStringComparator() {
+  open override fun compare(a: kotlin.String, b: kotlin.String): Int {
+   return 0
+  }
+ }
 
- fun getArray(): Array<T>?
-}
+ interface NonNullableTemplatedReturn<T> {
+  fun get(): T?
 
-interface `Main$NonNullableTemplate`<T> {
- fun get(): T?
+  fun getArray(): Array<T>?
+ }
 
- fun getArray(): Array<T>?
+ interface NonNullableTemplate<T> {
+  fun get(): T?
+
+  fun getArray(): Array<T>?
+ }
 }

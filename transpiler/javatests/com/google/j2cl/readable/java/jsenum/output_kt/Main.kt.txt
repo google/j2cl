@@ -1,17 +1,15 @@
 package jsenum
 
 open class Main {
- constructor(): super()
-
  companion object {
   @kotlin.jvm.JvmStatic
   fun testJsEnumSwitch() {
-   var comparableJsEnum: jsenum.`Main$ComparableJsEnum`? = if (jsenum.`Main$ComparableJsEnum`.ONE.getValue() == 1) jsenum.`Main$ComparableJsEnum`.TWO else null
+   var comparableJsEnum: jsenum.Main.ComparableJsEnum? = if (jsenum.Main.ComparableJsEnum.ONE.getValue() == 1) jsenum.Main.ComparableJsEnum.TWO else null
    SWITCH@ do {
     CASE@ do {
      CASE_1@ do {
       when (comparableJsEnum!!) {
-       jsenum.`Main$ComparableJsEnum`.TWO -> {
+       jsenum.Main.ComparableJsEnum.TWO -> {
         break@CASE_1
        }
        else -> {
@@ -24,13 +22,13 @@ open class Main {
     } while (false)
    } while (false)
    val comparable: kotlin.Comparable<*>? = comparableJsEnum
-   comparableJsEnum = comparable as jsenum.`Main$ComparableJsEnum`?
-   var intJsEnum: jsenum.`Main$IntJsEnum`? = if (jsenum.`Main$IntJsEnum`.ELEVEN.getValue() == 10) jsenum.`Main$IntJsEnum`.ELEVEN else null
+   comparableJsEnum = comparable as jsenum.Main.ComparableJsEnum?
+   var intJsEnum: jsenum.Main.IntJsEnum? = if (jsenum.Main.IntJsEnum.ELEVEN.getValue() == 10) jsenum.Main.IntJsEnum.ELEVEN else null
    SWITCH_1@ do {
     CASE_2@ do {
      CASE_3@ do {
       when (intJsEnum!!) {
-       jsenum.`Main$IntJsEnum`.TWENTY -> {
+       jsenum.Main.IntJsEnum.TWENTY -> {
         break@CASE_3
        }
        else -> {
@@ -43,16 +41,16 @@ open class Main {
     } while (false)
    } while (false)
    val o: kotlin.Any? = intJsEnum
-   intJsEnum = o as jsenum.`Main$IntJsEnum`?
-   val equal: Boolean = intJsEnum === jsenum.`Main$IntJsEnum`.TWENTY
-   var isInstance: Boolean = intJsEnum is jsenum.`Main$IntJsEnum`
+   intJsEnum = o as jsenum.Main.IntJsEnum?
+   val equal: Boolean = intJsEnum === jsenum.Main.IntJsEnum.TWENTY
+   var isInstance: Boolean = intJsEnum is jsenum.Main.IntJsEnum
    isInstance = intJsEnum is kotlin.Comparable<*>
-   val stringJsEnum: jsenum.`Main$StringJsEnum`? = if (jsenum.`Main$StringJsEnum`.ONE.getValue() === "10") jsenum.`Main$StringJsEnum`.THREE else null
+   val stringJsEnum: jsenum.Main.StringJsEnum? = if (jsenum.Main.StringJsEnum.ONE.getValue() === "10") jsenum.Main.StringJsEnum.THREE else null
    SWITCH_2@ do {
     CASE_4@ do {
      CASE_5@ do {
       when (stringJsEnum!!) {
-       jsenum.`Main$StringJsEnum`.ONE -> {
+       jsenum.Main.StringJsEnum.ONE -> {
         break@CASE_5
        }
        else -> {
@@ -64,27 +62,27 @@ open class Main {
      break@SWITCH_2
     } while (false)
    } while (false)
-   (jsenum.`Main$NativeStringEnum`.ONE as java.lang.Enum<jsenum.`Main$NativeStringEnum`?>).compareTo(jsenum.`Main$NativeStringEnum`.THREE)
-   jsenum.`Main$NativeStringEnum`.ONE == jsenum.`Main$NativeStringEnum`.THREE
-   (jsenum.`Main$ComparableJsEnum`.ONE as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).compareTo(jsenum.`Main$ComparableJsEnum`.ZERO)
-   jsenum.`Main$ComparableJsEnum`.ONE == jsenum.`Main$ComparableJsEnum`.ZERO
-   val supplier: java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Supplier<jsenum.`Main$ComparableJsEnum`?> (fun(): jsenum.`Main$ComparableJsEnum`? {
-    return jsenum.`Main$ComparableJsEnum`.ONE
+   (jsenum.Main.NativeStringEnum.ONE as java.lang.Enum<jsenum.Main.NativeStringEnum?>).compareTo(jsenum.Main.NativeStringEnum.THREE)
+   jsenum.Main.NativeStringEnum.ONE == jsenum.Main.NativeStringEnum.THREE
+   (jsenum.Main.ComparableJsEnum.ONE as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).compareTo(jsenum.Main.ComparableJsEnum.ZERO)
+   jsenum.Main.ComparableJsEnum.ONE == jsenum.Main.ComparableJsEnum.ZERO
+   val supplier: java.util.function.Supplier<jsenum.Main.ComparableJsEnum?>? = java.util.function.Supplier<jsenum.Main.ComparableJsEnum?> (fun(): jsenum.Main.ComparableJsEnum? {
+    return jsenum.Main.ComparableJsEnum.ONE
    })
-   val consummer: java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?>? = java.util.function.Consumer<jsenum.`Main$ComparableJsEnum`?> (fun(e: jsenum.`Main$ComparableJsEnum`?) {
-    (e!! as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
+   val consummer: java.util.function.Consumer<jsenum.Main.ComparableJsEnum?>? = java.util.function.Consumer<jsenum.Main.ComparableJsEnum?> (fun(e: jsenum.Main.ComparableJsEnum?) {
+    (e!! as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).ordinal()
    })
   }
 
   @kotlin.jvm.JvmStatic
   internal fun testBoxUnboxWithTypeInference() {
-   val templatedField: jsenum.`Main$TemplatedField`<jsenum.`Main$ComparableJsEnum`?>? = jsenum.`Main$TemplatedField`<jsenum.`Main$ComparableJsEnum`?>(jsenum.`Main$ComparableJsEnum`.ONE)
-   var unboxed: jsenum.`Main$ComparableJsEnum`? = templatedField!!.getValue()
+   val templatedField: jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>? = jsenum.Main.TemplatedField<jsenum.Main.ComparableJsEnum?>(jsenum.Main.ComparableJsEnum.ONE)
+   var unboxed: jsenum.Main.ComparableJsEnum? = templatedField!!.getValue()
    unboxed = templatedField!!.value
-   templatedField!!.value = jsenum.`Main$ComparableJsEnum`.ONE
-   java.util.Arrays.asList(*(arrayOf<kotlin.Any?>(jsenum.`Main$ComparableJsEnum`.ONE) as Array<jsenum.`Main$ComparableJsEnum`?>))
-   (templatedField!!.getValue()!! as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
-   val b: Boolean = jsenum.`Main$ComparableJsEnum`.ONE === jsenum.Main.boxingPassthrough(jsenum.`Main$ComparableJsEnum`.ONE)
+   templatedField!!.value = jsenum.Main.ComparableJsEnum.ONE
+   java.util.Arrays.asList(*(arrayOf<kotlin.Any?>(jsenum.Main.ComparableJsEnum.ONE) as Array<jsenum.Main.ComparableJsEnum?>))
+   (templatedField!!.getValue()!! as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).ordinal()
+   val b: Boolean = jsenum.Main.ComparableJsEnum.ONE === jsenum.Main.boxingPassthrough(jsenum.Main.ComparableJsEnum.ONE)
   }
 
   @kotlin.jvm.JvmStatic
@@ -94,105 +92,101 @@ open class Main {
 
   @kotlin.jvm.JvmStatic
   internal fun boxingWithGenerics() {
-   jsenum.`Main$Foo`<kotlin.Any?>(java.util.Optional.of(jsenum.`Main$IntJsEnum`.MINUSONE))
+   jsenum.Main.Foo<kotlin.Any?>(java.util.Optional.of(jsenum.Main.IntJsEnum.MINUSONE))
   }
  }
-}
 
-enum class `Main$ComparableJsEnum` {
- internal constructor(): super()
+ enum class ComparableJsEnum {
+  open fun getValue(): Int {
+   return (this as java.lang.Enum<jsenum.Main.ComparableJsEnum?>).ordinal()
+  }
 
- open fun getValue(): Int {
-  return (this as java.lang.Enum<jsenum.`Main$ComparableJsEnum`?>).ordinal()
+  companion object {
+   @kotlin.jvm.JvmField val ZERO: jsenum.Main.ComparableJsEnum = jsenum.Main.ComparableJsEnum
+
+   @kotlin.jvm.JvmField val ONE: jsenum.Main.ComparableJsEnum = jsenum.Main.ComparableJsEnum
+
+   @kotlin.jvm.JvmField val TWO: jsenum.Main.ComparableJsEnum = jsenum.Main.ComparableJsEnum
+  }
  }
 
- companion object {
-  @kotlin.jvm.JvmField val ZERO: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
+ enum class IntJsEnum {
+  internal var value: Int = 0
 
-  @kotlin.jvm.JvmField val ONE: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
+  open fun getValue(): Int {
+   return this.value
+  }
 
-  @kotlin.jvm.JvmField val TWO: jsenum.`Main$ComparableJsEnum` = jsenum.`Main$ComparableJsEnum`()
- }
-}
+  internal constructor(value: Int) {
+   this.value = value
+  }
 
-enum class `Main$IntJsEnum` {
- internal var value: Int = 0
+  companion object {
+   @kotlin.jvm.JvmField val MINUSONE: jsenum.Main.IntJsEnum = jsenum.Main.IntJsEnum
 
- open fun getValue(): Int {
-  return this.value
- }
+   @kotlin.jvm.JvmField val TWENTY: jsenum.Main.IntJsEnum = jsenum.Main.IntJsEnum
 
- internal constructor(value: Int): super() {
-  this.value = value
- }
-
- companion object {
-  @kotlin.jvm.JvmField val MINUSONE: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(-1)
-
-  @kotlin.jvm.JvmField val TWENTY: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(20)
-
-  @kotlin.jvm.JvmField val ELEVEN: jsenum.`Main$IntJsEnum` = jsenum.`Main$IntJsEnum`(11)
- }
-}
-
-enum class `Main$StringJsEnum` {
- internal var value: kotlin.String? = null
-
- open fun getValue(): kotlin.String? {
-  return this.value
+   @kotlin.jvm.JvmField val ELEVEN: jsenum.Main.IntJsEnum = jsenum.Main.IntJsEnum
+  }
  }
 
- internal constructor(value: kotlin.String?): super() {
-  this.value = value
+ enum class StringJsEnum {
+  internal var value: kotlin.String? = null
+
+  open fun getValue(): kotlin.String? {
+   return this.value
+  }
+
+  internal constructor(value: kotlin.String?) {
+   this.value = value
+  }
+
+  companion object {
+   @kotlin.jvm.JvmField val ONE: jsenum.Main.StringJsEnum = jsenum.Main.StringJsEnum
+
+   @kotlin.jvm.JvmField val THREE: jsenum.Main.StringJsEnum = jsenum.Main.StringJsEnum
+  }
  }
 
- companion object {
-  @kotlin.jvm.JvmField val ONE: jsenum.`Main$StringJsEnum` = jsenum.`Main$StringJsEnum`("ONE")
+ enum class NonNullableStringJsEnum {
+  internal var value: kotlin.String = null
 
-  @kotlin.jvm.JvmField val THREE: jsenum.`Main$StringJsEnum` = jsenum.`Main$StringJsEnum`("THREE")
- }
-}
+  open fun getValue(): kotlin.String? {
+   return this.value
+  }
 
-enum class `Main$NonNullableStringJsEnum` {
- internal var value: kotlin.String = null
+  internal constructor(value: kotlin.String?) {
+   this.value = value!!
+  }
 
- open fun getValue(): kotlin.String? {
-  return this.value
- }
+  companion object {
+   @kotlin.jvm.JvmField val ONE: jsenum.Main.NonNullableStringJsEnum = jsenum.Main.NonNullableStringJsEnum
 
- internal constructor(value: kotlin.String?): super() {
-  this.value = value!!
- }
-
- companion object {
-  @kotlin.jvm.JvmField val ONE: jsenum.`Main$NonNullableStringJsEnum` = jsenum.`Main$NonNullableStringJsEnum`("ONE")
-
-  @kotlin.jvm.JvmField val THREE: jsenum.`Main$NonNullableStringJsEnum` = jsenum.`Main$NonNullableStringJsEnum`("THREE")
- }
-}
-
-enum class `Main$NativeStringEnum` {
- internal constructor(): super()
-
- companion object {
-  @kotlin.jvm.JvmField val ONE: jsenum.`Main$NativeStringEnum` = jsenum.`Main$NativeStringEnum`()
-
-  @kotlin.jvm.JvmField val THREE: jsenum.`Main$NativeStringEnum` = jsenum.`Main$NativeStringEnum`()
- }
-}
-
-open class `Main$TemplatedField`<T> {
- @kotlin.jvm.JvmField internal var value: T? = null
-
- internal constructor(value: T?): super() {
-  this.value = value
+   @kotlin.jvm.JvmField val THREE: jsenum.Main.NonNullableStringJsEnum = jsenum.Main.NonNullableStringJsEnum
+  }
  }
 
- internal open fun getValue(): T? {
-  return this.value
- }
-}
+ enum class NativeStringEnum {
+  companion object {
+   @kotlin.jvm.JvmField val ONE: jsenum.Main.NativeStringEnum = jsenum.Main.NativeStringEnum
 
-open class `Main$Foo`<T> {
- internal constructor(c: java.util.Optional<jsenum.`Main$IntJsEnum`?>?): super()
+   @kotlin.jvm.JvmField val THREE: jsenum.Main.NativeStringEnum = jsenum.Main.NativeStringEnum
+  }
+ }
+
+ open class TemplatedField<T> {
+  @kotlin.jvm.JvmField internal var value: T? = null
+
+  internal constructor(value: T?) {
+   this.value = value
+  }
+
+  internal open fun getValue(): T? {
+   return this.value
+  }
+ }
+
+ open class Foo<T> {
+  internal constructor(c: java.util.Optional<jsenum.Main.IntJsEnum?>?)
+ }
 }

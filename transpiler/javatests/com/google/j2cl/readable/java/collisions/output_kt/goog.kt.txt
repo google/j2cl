@@ -1,12 +1,8 @@
 package collisions
 
-open class goog {
- constructor(): super()
-}
+open class goog {}
 
 open class Blah {
- internal constructor(): super()
-
  companion object {
   @kotlin.jvm.JvmStatic
   external internal fun m()
@@ -16,13 +12,9 @@ open class Blah {
  }
 }
 
-open class foo {
- internal constructor(): super()
-}
+open class foo {}
 
 open class bar {
- internal constructor(): super()
-
  init {
   val foo: Int
   val bar: Int
@@ -40,8 +32,6 @@ open class bar {
 }
 
 open class Other<T> {
- internal constructor(): super()
-
  init {
   val T_1: Int = 3
   val o: collisions.Other<T>? = null as collisions.Other<T>?
@@ -55,8 +45,6 @@ open class Other<T> {
 }
 
 open class T<T: kotlin.Number?> {
- internal constructor(): super()
-
  internal open fun m(): T? {
   return null
  }

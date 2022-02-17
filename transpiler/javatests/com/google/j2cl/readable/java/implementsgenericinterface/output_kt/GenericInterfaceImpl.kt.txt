@@ -4,10 +4,6 @@ interface GenericInterface<T> {}
 
 interface GenericSubInterface<T>: implementsgenericinterface.GenericInterface<T> {}
 
-open class GenericInterfaceGenericImpl<T>: implementsgenericinterface.GenericInterface<T> {
- internal constructor(): super()
-}
+open class GenericInterfaceGenericImpl<T>: implementsgenericinterface.GenericInterface<T> {}
 
-open class GenericInterfaceImpl: implementsgenericinterface.GenericInterface<kotlin.Number?> {
- constructor(): super()
-}
+open class GenericInterfaceImpl: implementsgenericinterface.GenericInterface<kotlin.Number?> {}

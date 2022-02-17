@@ -1,19 +1,17 @@
 package enums
 
-enum class Enum1: kotlin.Enum<enums.Enum1?> {
- internal constructor(): super()
-
+enum class Enum1: kotlin.Enum<enums.Enum1?>() {
  companion object {
-  @kotlin.jvm.JvmField val V1: enums.Enum1 = enums.Enum1()
+  @kotlin.jvm.JvmField val V1: enums.Enum1 = enums.Enum1
 
-  @kotlin.jvm.JvmField val V2: enums.Enum1 = enums.Enum1()
+  @kotlin.jvm.JvmField val V2: enums.Enum1 = enums.Enum1
  }
 }
 
 enum class Enum2: kotlin.Enum<enums.Enum2?> {
  @kotlin.jvm.JvmField internal var foo: Int = (enums.Enum1.V1 as java.lang.Enum<enums.Enum1?>).ordinal()
 
- internal constructor(foo: Int): super() {
+ internal constructor(foo: Int) {
   this.foo = foo
  }
 
@@ -22,13 +20,13 @@ enum class Enum2: kotlin.Enum<enums.Enum2?> {
  internal constructor(vararg somePars: kotlin.Any?): this(somePars!!.size)
 
  companion object {
-  @kotlin.jvm.JvmField val VALUE1: enums.Enum2 = enums.Enum2(2)
+  @kotlin.jvm.JvmField val VALUE1: enums.Enum2 = enums.Enum2
 
-  @kotlin.jvm.JvmField val VALUE2: enums.Enum2 = enums.Enum2(enums.Enum1.V1)
+  @kotlin.jvm.JvmField val VALUE2: enums.Enum2 = enums.Enum2
 
-  @kotlin.jvm.JvmField val VALUE3: enums.Enum2 = enums.Enum2(*(arrayOf<kotlin.Any?>()))
+  @kotlin.jvm.JvmField val VALUE3: enums.Enum2 = enums.Enum2
 
-  @kotlin.jvm.JvmField val VALUE4: enums.Enum2 = enums.`Enum2$1`(5)
+  @kotlin.jvm.JvmField val VALUE4: enums.Enum2 = object : enums.Enum2 {}
 
   @kotlin.jvm.JvmStatic
   internal fun f(o: kotlin.Any?): enums.Enum2? {
@@ -40,15 +38,9 @@ enum class Enum2: kotlin.Enum<enums.Enum2?> {
 }
 
 enum class Enum3: kotlin.Enum<enums.Enum3?> {
- internal constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?): super()
+ internal constructor(function: java.util.function.Function<kotlin.Int?, kotlin.Int?>?)
 
  companion object {
-  @kotlin.jvm.JvmField val VALUE1: enums.Enum3 = enums.Enum3(java.util.function.Function<kotlin.Int?, kotlin.Int?> (fun(v: kotlin.Int?): kotlin.Int? {
-   return 1 + v!!
-  }))
+  @kotlin.jvm.JvmField val VALUE1: enums.Enum3 = enums.Enum3
  }
-}
-
-open class `Enum2$1`: enums.Enum2 {
- internal constructor(`$_0`: Int): super(`$_0`)
 }

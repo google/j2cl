@@ -1,76 +1,19 @@
 package anonymousinnerclass
 
 open class A {
- internal constructor(): super()
+ open inner class B {}
 }
 
 open class AnonymousInnerClass {
- constructor(): super()
-
  open fun test(arg: Int) {
-  val ic: anonymousinnerclass.`AnonymousInnerClass$InnerClass`? = anonymousinnerclass.`AnonymousInnerClass$1`(this)
+  val ic: anonymousinnerclass.AnonymousInnerClass.InnerClass? = object : InnerClass() {}
   val a: anonymousinnerclass.A? = anonymousinnerclass.A()
-  val b: anonymousinnerclass.`A$B`? = anonymousinnerclass.`AnonymousInnerClass$2`(this, a)
-  if (true) {}
-  val c: anonymousinnerclass.`AnonymousInnerClass$1C`? = anonymousinnerclass.`AnonymousInnerClass$3`(this, arg)
- }
-}
-
-open class `A$B` {
- @kotlin.jvm.JvmField val `this`: anonymousinnerclass.A?
-
- internal constructor(`$outer_this`: anonymousinnerclass.A?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `AnonymousInnerClass$1`: anonymousinnerclass.`AnonymousInnerClass$InnerClass` {
- @kotlin.jvm.JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
-
- internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?): super(`$outer_this`) {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `AnonymousInnerClass$2`: anonymousinnerclass.`A$B` {
- @kotlin.jvm.JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
-
- internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$captured_a`: anonymousinnerclass.A?): super(`$captured_a`) {
-  this.`this` = `$outer_this`
-  this.a = `$captured_a`
+  val b: anonymousinnerclass.A.B? = object : B() {}
+  open class `1C` {
+   @kotlin.jvm.JvmField var fInC: Int = arg
+  }
+  val c: `1C`? = object : `1C`() {}
  }
 
- @kotlin.jvm.JvmField val a: anonymousinnerclass.A?
-}
-
-open class `AnonymousInnerClass$3`: anonymousinnerclass.`AnonymousInnerClass$1C` {
- @kotlin.jvm.JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
-
- internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$captured_arg`: Int): super(`$outer_this`, `$captured_arg`) {
-  this.`this` = `$outer_this`
-  this.arg = `$captured_arg`
- }
-
- @kotlin.jvm.JvmField val arg: Int
-}
-
-open class `AnonymousInnerClass$InnerClass` {
- @kotlin.jvm.JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
-
- constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `AnonymousInnerClass$1C` {
- @kotlin.jvm.JvmField val `this`: anonymousinnerclass.AnonymousInnerClass?
-
- internal constructor(`$outer_this`: anonymousinnerclass.AnonymousInnerClass?, `$captured_arg`: Int): super() {
-  this.`this` = `$outer_this`
-  this.arg = `$captured_arg`
- }
-
- @kotlin.jvm.JvmField var fInC: Int = this.arg
-
- @kotlin.jvm.JvmField val arg: Int
+ open inner class InnerClass {}
 }

@@ -1,8 +1,6 @@
 package trycatch
 
 open class TryCatch {
- constructor(): super()
-
  open fun testMultiCatch() {
   try {
    throw java.lang.ClassCastException()
@@ -39,8 +37,8 @@ open class TryCatch {
  }
 
  open fun testTryWithResource() {
-  (trycatch.`TryCatch$ClosableThing`()).use { thing: trycatch.`TryCatch$ClosableThing`? ->
-   (trycatch.`TryCatch$ClosableThing`()).use { thing2: trycatch.`TryCatch$ClosableThing`? ->
+  (trycatch.TryCatch.ClosableThing()).use { thing: trycatch.TryCatch.ClosableThing? ->
+   (trycatch.TryCatch.ClosableThing()).use { thing2: trycatch.TryCatch.ClosableThing? ->
     try {
      throw java.lang.Exception()
     } catch (e: java.lang.Exception) {}
@@ -49,10 +47,10 @@ open class TryCatch {
  }
 
  open fun testTryWithResourceJava9() {
-  val thing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
-  val thing2: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
-  (thing).use { `$resource`: trycatch.`TryCatch$ClosableThing`? ->
-   (thing2).use { `$resource_1`: trycatch.`TryCatch$ClosableThing`? ->
+  val thing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  val thing2: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
+  (thing).use { `$resource`: trycatch.TryCatch.ClosableThing? ->
+   (thing2).use { `$resource_1`: trycatch.TryCatch.ClosableThing? ->
     try {
      throw java.lang.Exception()
     } catch (e: java.lang.Exception) {}
@@ -61,7 +59,7 @@ open class TryCatch {
  }
 
  open fun testTryWithResouceOnStaticField() {
-  (trycatch.TryCatch.closableThing).use { `$resource`: trycatch.`TryCatch$ClosableThing`? ->
+  (trycatch.TryCatch.closableThing).use { `$resource`: trycatch.TryCatch.ClosableThing? ->
    try {
     throw java.lang.Exception()
    } catch (e: java.lang.Exception) {}
@@ -95,12 +93,10 @@ open class TryCatch {
  }
 
  companion object {
-  internal val closableThing: trycatch.`TryCatch$ClosableThing`? = trycatch.`TryCatch$ClosableThing`()
+  internal val closableThing: trycatch.TryCatch.ClosableThing? = trycatch.TryCatch.ClosableThing()
  }
-}
 
-open class `TryCatch$ClosableThing`: java.lang.AutoCloseable {
- internal constructor(): super()
-
- open override fun close() {}
+ open class ClosableThing: java.lang.AutoCloseable {
+  open override fun close() {}
+ }
 }

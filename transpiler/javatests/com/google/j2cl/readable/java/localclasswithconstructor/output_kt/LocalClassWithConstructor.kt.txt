@@ -1,32 +1,19 @@
 package localclasswithconstructor
 
 open class LocalClassWithConstructor {
- constructor(): super()
-
  open fun test(p: Int) {
   val localVar: Int = 1
-  if (true) {}
-  localclasswithconstructor.`LocalClassWithConstructor$1LocalClass`(this, localVar, p, 1)
+  open class `1LocalClass` {
+   @kotlin.jvm.JvmField var field: Int = 0
+
+   constructor(a: Int, b: Int) {
+    this.field = localVar + a + b
+   }
+
+   constructor(a: Int): this(a, p) {
+    this.field = localVar
+   }
+  }
+  `1LocalClass`(1)
  }
-}
-
-open class `LocalClassWithConstructor$1LocalClass` {
- @kotlin.jvm.JvmField val `this`: localclasswithconstructor.LocalClassWithConstructor?
-
- @kotlin.jvm.JvmField var field: Int = 0
-
- constructor(`$outer_this`: localclasswithconstructor.LocalClassWithConstructor?, `$captured_localVar`: Int, `$captured_p`: Int, a: Int, b: Int): super() {
-  this.`this` = `$outer_this`
-  this.localVar = `$captured_localVar`
-  this.p = `$captured_p`
-  this.field = `$captured_localVar` + a + b
- }
-
- constructor(`$outer_this`: localclasswithconstructor.LocalClassWithConstructor?, `$captured_localVar`: Int, `$captured_p`: Int, a: Int): this(`$outer_this`, `$captured_localVar`, `$captured_p`, a, `$captured_p`) {
-  this.field = `$captured_localVar`
- }
-
- @kotlin.jvm.JvmField val localVar: Int
-
- @kotlin.jvm.JvmField val p: Int
 }

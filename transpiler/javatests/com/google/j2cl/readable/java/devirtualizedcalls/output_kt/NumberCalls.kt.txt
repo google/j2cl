@@ -1,8 +1,6 @@
 package devirtualizedcalls
 
 open class NumberCalls {
- constructor(): super()
-
  open fun main() {
   val i: kotlin.Number? = (java.lang.Integer(1) as kotlin.Int)
   (i!! as java.lang.Number).byteValue()

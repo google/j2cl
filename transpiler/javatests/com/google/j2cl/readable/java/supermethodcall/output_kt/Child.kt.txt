@@ -1,8 +1,6 @@
 package supermethodcall
 
 open class GrandParent {
- internal constructor(): super()
-
  open fun grandParentSimplest() {}
 
  open fun grandParentWithParams(foo: Int) {}
@@ -12,9 +10,7 @@ open class GrandParent {
  }
 }
 
-open class Parent: supermethodcall.GrandParent {
- internal constructor(): super()
-
+open class Parent: supermethodcall.GrandParent() {
  open fun parentSimplest() {}
 
  open fun parentWithParams(foo: Int) {}
@@ -24,9 +20,7 @@ open class Parent: supermethodcall.GrandParent {
  }
 }
 
-open class Child: supermethodcall.Parent {
- constructor(): super()
-
+open class Child: supermethodcall.Parent() {
  open override fun parentSimplest() {
   super.parentSimplest()
  }

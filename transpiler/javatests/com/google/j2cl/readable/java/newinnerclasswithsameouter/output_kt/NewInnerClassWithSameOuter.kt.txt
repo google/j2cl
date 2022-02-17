@@ -1,34 +1,14 @@
 package newinnerclasswithsameouter
 
 open class NewInnerClassWithSameOuter {
- constructor(): super()
-}
-
-open class `NewInnerClassWithSameOuter$A` {
- @kotlin.jvm.JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
-
- constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
-  this.`this` = `$outer_this`
+ open inner class A {
+  open fun test() {
+   this@NewInnerClassWithSameOuter.B()
+   this@NewInnerClassWithSameOuter.C()
+  }
  }
 
- open fun test() {
-  newinnerclasswithsameouter.`NewInnerClassWithSameOuter$B`(this.`this`)
-  newinnerclasswithsameouter.`NewInnerClassWithSameOuter$C`(this.`this`)
- }
-}
+ open inner class B {}
 
-open class `NewInnerClassWithSameOuter$B` {
- @kotlin.jvm.JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
-
- constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
-  this.`this` = `$outer_this`
- }
-}
-
-open class `NewInnerClassWithSameOuter$C` {
- @kotlin.jvm.JvmField val `this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?
-
- internal constructor(`$outer_this`: newinnerclasswithsameouter.NewInnerClassWithSameOuter?): super() {
-  this.`this` = `$outer_this`
- }
+ open inner class C {}
 }

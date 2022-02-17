@@ -5,16 +5,12 @@ fun interface Map<K, V> {
 }
 
 open class AbstractMap<K, V>: bridgemethods.Map<K, V> {
- internal constructor(): super()
-
  open override fun put(key: K?, value: V?): V? {
   return value
  }
 }
 
-open class EnumMap<K: kotlin.Enum<K>?, V>: bridgemethods.AbstractMap<K, V> {
- constructor(): super()
-
+open class EnumMap<K: kotlin.Enum<K>?, V>: bridgemethods.AbstractMap<K, V>() {
  open override fun put(key: K?, value: V?): V? {
   return value
  }

@@ -1,27 +1,17 @@
 package localclasswithoutergenerics
 
 open class LocalClassWithOuterGenerics<A> {
- constructor(): super()
-
  companion object {
   @kotlin.jvm.JvmStatic
   fun <T> foo() {
-   if (true) {}
-   val bar: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Bar`<T>? = localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Bar`<T>()
-   if (true) {}
-   val baz: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<kotlin.Any?, T>? = localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<kotlin.Any?, T>()
+   open class `1Bar`<T> {
+    internal open fun baz(other: `1Bar`<T>?) {}
+   }
+   val bar: `1Bar`<T>? = `1Bar`<T>()
+   open class `1Baz`<S, T> {
+    internal open fun qux(foo: `1Baz`<S, T>?, bar: `1Baz`<T, T>?, baz: `1Baz`<kotlin.String?, T>?) {}
+   }
+   val baz: `1Baz`<kotlin.Any?, T>? = `1Baz`<kotlin.Any?, T>()
   }
  }
-}
-
-open class `LocalClassWithOuterGenerics$1Bar`<T> {
- internal constructor(): super()
-
- internal open fun baz(other: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Bar`<T>?) {}
-}
-
-open class `LocalClassWithOuterGenerics$1Baz`<S, T> {
- internal constructor(): super()
-
- internal open fun qux(foo: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<S, T>?, bar: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<T, T>?, baz: localclasswithoutergenerics.`LocalClassWithOuterGenerics$1Baz`<kotlin.String?, T>?) {}
 }

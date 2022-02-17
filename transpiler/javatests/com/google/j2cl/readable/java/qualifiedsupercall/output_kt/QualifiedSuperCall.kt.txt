@@ -1,23 +1,13 @@
 package qualifiedsupercall
 
 open class Parent {
- internal constructor(): super()
-
  open fun `fun`() {}
 }
 
-open class QualifiedSuperCall: qualifiedsupercall.Parent {
- constructor(): super()
-}
-
-open class `QualifiedSuperCall$InnerClass` {
- @kotlin.jvm.JvmField val `this`: qualifiedsupercall.QualifiedSuperCall?
-
- constructor(`$outer_this`: qualifiedsupercall.QualifiedSuperCall?): super() {
-  this.`this` = `$outer_this`
- }
-
- open fun test() {
-  this.`this`!!.`fun`()
+open class QualifiedSuperCall: qualifiedsupercall.Parent() {
+ open inner class InnerClass {
+  open fun test() {
+   this@QualifiedSuperCall.`fun`()
+  }
  }
 }

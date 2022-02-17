@@ -7,14 +7,10 @@ interface SomeInterface<T, S> {
 }
 
 open class SuperParent<T, S> {
- internal constructor(): super()
-
  open fun foo(t: T?, s: S?) {}
 }
 
-open class Parent<T: java.lang.Error?>: bridgemethods.SuperParent<T, kotlin.Number?> {
- internal constructor(): super()
-
+open class Parent<T: java.lang.Error?>: bridgemethods.SuperParent<T, kotlin.Number?>() {
  open override fun foo(t: T?, s: kotlin.Number?) {}
 
  open fun <T_1: kotlin.Number?> bar(t: T_1?) {}
@@ -22,9 +18,7 @@ open class Parent<T: java.lang.Error?>: bridgemethods.SuperParent<T, kotlin.Numb
  open fun <T_1> `fun`(t: T_1?) {}
 }
 
-open class BridgeMethod: bridgemethods.SomeInterface<java.lang.AssertionError?, kotlin.Number?>, bridgemethods.Parent<java.lang.AssertionError?> {
- constructor(): super()
-
+open class BridgeMethod: bridgemethods.SomeInterface<java.lang.AssertionError?, kotlin.Number?>, bridgemethods.Parent<java.lang.AssertionError?>() {
  open override fun foo(a: java.lang.AssertionError?, n: kotlin.Number?) {}
 
  open override fun bar(t: kotlin.Number?) {}
@@ -37,40 +31,30 @@ fun interface SomeOtherFooInterface<T> {
 }
 
 open class DualUnrelatedBridges: bridgemethods.SomeInterface<kotlin.String?, kotlin.Double?>, bridgemethods.SomeOtherFooInterface<kotlin.String?> {
- internal constructor(): super()
-
  open override fun foo(s: kotlin.String?, n: kotlin.Double?) {}
 
  open override fun foo(s: kotlin.String?, n: kotlin.Number?) {}
 }
 
 open class SuperDualUnrelatedAccidentalBridges {
- internal constructor(): super()
-
  open fun foo(s: kotlin.String?, n: kotlin.Double?) {}
 
  open fun foo(s: kotlin.String?, n: kotlin.Number?) {}
 }
 
-open class DualUnrelatedAccidentalBridges: bridgemethods.SomeInterface<kotlin.String?, kotlin.Double?>, bridgemethods.SomeOtherFooInterface<kotlin.String?>, bridgemethods.SuperDualUnrelatedAccidentalBridges {
- internal constructor(): super()
-}
+open class DualUnrelatedAccidentalBridges: bridgemethods.SomeInterface<kotlin.String?, kotlin.Double?>, bridgemethods.SomeOtherFooInterface<kotlin.String?>, bridgemethods.SuperDualUnrelatedAccidentalBridges() {}
 
 fun interface Getter {
  fun get(s: kotlin.String?): kotlin.String?
 }
 
 open class ClassWithParameterizedGet<T> {
- internal constructor(): super()
-
  open fun get(t: T?): T? {
   return null
  }
 }
 
-open class AccidentalOverrideBridge: bridgemethods.Getter, bridgemethods.ClassWithParameterizedGet<kotlin.String?> {
- internal constructor(): super()
-
+open class AccidentalOverrideBridge: bridgemethods.Getter, bridgemethods.ClassWithParameterizedGet<kotlin.String?>() {
  open fun test() {
   val g: bridgemethods.Getter? = bridgemethods.AccidentalOverrideBridge()
   g!!.get("")
@@ -78,75 +62,55 @@ open class AccidentalOverrideBridge: bridgemethods.Getter, bridgemethods.ClassWi
 }
 
 open class TestCase10036 {
- internal constructor(): super()
+ interface BI3 {
+  fun get(value: kotlin.String?): kotlin.String? {
+   return "BI3 get String"
+  }
+ }
+
+ fun interface BI2 {
+  fun get(value: kotlin.String?): kotlin.String?
+ }
+
+ fun interface BI1: bridgemethods.TestCase10036.BI3 {
+  override fun get(value: kotlin.String?): kotlin.String?
+ }
+
+ abstract class B<B1: kotlin.Comparable<*>?>: bridgemethods.TestCase10036.BI1, bridgemethods.TestCase10036.BI2 {
+  abstract open fun get(value: B1?): kotlin.String?
+ }
 }
 
 open class TestCase102 {
- internal constructor(): super()
+ fun interface BI2 {
+  fun set(value: kotlin.String?)
+ }
+
+ fun interface BI1 {
+  fun set(value: kotlin.String?)
+ }
+
+ abstract class B<B1>: bridgemethods.TestCase102.BI1, bridgemethods.TestCase102.BI2 {
+  abstract open fun set(value: B1?)
+ }
+
+ open inner class C<B1>: bridgemethods.TestCase102.B<B1>() {
+  open override fun set(value: kotlin.String?) {}
+
+  open override fun set(value: B1?) {}
+ }
 }
 
 open class ParameterizedParent<T: bridgemethods.ParameterizedParent<T>?> {
- internal constructor(): super()
-
  internal open fun <Q: T> m(t: Q?): Q? {
   return null
  }
 }
 
-open class ReparametrerizedChild<E: bridgemethods.ReparametrerizedChild<E>?>: bridgemethods.ParameterizedParent<E> {
- internal constructor(): super()
-
+open class ReparametrerizedChild<E: bridgemethods.ReparametrerizedChild<E>?>: bridgemethods.ParameterizedParent<E>() {
  internal open fun <S: E> m(t: S?): S? {
   return null
  }
 }
 
-open class LeafChild: bridgemethods.ReparametrerizedChild<bridgemethods.LeafChild?> {
- internal constructor(): super()
-}
-
-interface `TestCase10036$BI3` {
- fun get(value: kotlin.String?): kotlin.String? {
-  return "BI3 get String"
- }
-}
-
-fun interface `TestCase10036$BI2` {
- fun get(value: kotlin.String?): kotlin.String?
-}
-
-fun interface `TestCase10036$BI1`: bridgemethods.`TestCase10036$BI3` {
- override fun get(value: kotlin.String?): kotlin.String?
-}
-
-abstract class `TestCase10036$B`<B1: kotlin.Comparable<*>?>: bridgemethods.`TestCase10036$BI1`, bridgemethods.`TestCase10036$BI2` {
- internal constructor(): super()
-
- abstract open fun get(value: B1?): kotlin.String?
-}
-
-fun interface `TestCase102$BI2` {
- fun set(value: kotlin.String?)
-}
-
-fun interface `TestCase102$BI1` {
- fun set(value: kotlin.String?)
-}
-
-abstract class `TestCase102$B`<B1>: bridgemethods.`TestCase102$BI1`, bridgemethods.`TestCase102$BI2` {
- internal constructor(): super()
-
- abstract open fun set(value: B1?)
-}
-
-open class `TestCase102$C`<B1>: bridgemethods.`TestCase102$B`<B1> {
- @kotlin.jvm.JvmField val `this`: bridgemethods.TestCase102?
-
- internal constructor(`$outer_this`: bridgemethods.TestCase102?): super() {
-  this.`this` = `$outer_this`
- }
-
- open override fun set(value: kotlin.String?) {}
-
- open override fun set(value: B1?) {}
-}
+open class LeafChild: bridgemethods.ReparametrerizedChild<bridgemethods.LeafChild?>() {}

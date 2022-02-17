@@ -1,8 +1,6 @@
 package strings
 
 open class Strings {
- constructor(): super()
-
  internal var someString: kotlin.String? = "This is a string literal"
 
  internal var nonBmpChar: kotlin.String? = "\uD800\uDF46"
@@ -29,27 +27,27 @@ open class Strings {
   s4 = "" + s4 + 1.0f
   s4 = "" + s4 + 1.toShort()
   run {
-   val `$qualifier`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
+   val `$qualifier`: strings.Strings.StringHolder = strings.Strings.StringHolder()
    run {
-    val `$qualifier_1`: strings.`Strings$StringHolder` = `$qualifier`
+    val `$qualifier_1`: strings.Strings.StringHolder = `$qualifier`
     val `$value`: kotlin.String? = "" + `$qualifier`.s + s4
     `$qualifier_1`.s = `$value`
     `$value`
    }
   }
   run {
-   val `$qualifier_2`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
+   val `$qualifier_2`: strings.Strings.StringHolder = strings.Strings.StringHolder()
    run {
-    val `$qualifier_3`: strings.`Strings$StringHolder` = `$qualifier_2`
+    val `$qualifier_3`: strings.Strings.StringHolder = `$qualifier_2`
     val `$value_1`: kotlin.String? = "" + `$qualifier_2`.s + c1
     `$qualifier_3`.s = `$value_1`
     `$value_1`
    }
   }
   run {
-   val `$qualifier_4`: strings.`Strings$StringHolder` = strings.`Strings$StringHolder`()
+   val `$qualifier_4`: strings.Strings.StringHolder = strings.Strings.StringHolder()
    run {
-    val `$qualifier_5`: strings.`Strings$StringHolder` = `$qualifier_4`
+    val `$qualifier_5`: strings.Strings.StringHolder = `$qualifier_4`
     val `$value_2`: kotlin.String? = "" + `$qualifier_4`.s + "o"
     `$qualifier_5`.s = `$value_2`
     `$value_2`
@@ -64,10 +62,8 @@ open class Strings {
 
   internal val ESCAPE_CODES_COPY: kotlin.String? = "\b\u000C\n\r\t\"\'\\\u0000\u007F\uD800\uDF46\uFF1A"
  }
-}
 
-open class `Strings$StringHolder` {
- internal constructor(): super()
-
- @kotlin.jvm.JvmField internal var s: kotlin.String? = "A"
+ open class StringHolder {
+  @kotlin.jvm.JvmField internal var s: kotlin.String? = "A"
+ }
 }

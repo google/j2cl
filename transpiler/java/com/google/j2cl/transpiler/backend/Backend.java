@@ -393,13 +393,6 @@ public enum Backend {
           VerifyReferenceScoping::new,
 
           // Normalizations
-          CreateImplicitConstructors::new,
-          InsertExplicitSuperCalls::new,
-
-          // Resolve captures
-          ResolveCaptures::new,
-          // ... and flatten the class hierarchy.
-          MoveNestedClassesToTop::new,
           NormalizeStaticMemberQualifiers::new,
           () -> new MoveVariableDeclarationsToEnclosingBlock(/* fromSwitchStatementsOnly= */ true),
           NormalizeMultiExpressions::new,
