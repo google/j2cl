@@ -22,4 +22,5 @@ j2wasm_library(
 integration_test(
     name = "narrowingdoubletofloat",
     srcs = glob(["*.java"]),
+    enable_kt = False,
 )

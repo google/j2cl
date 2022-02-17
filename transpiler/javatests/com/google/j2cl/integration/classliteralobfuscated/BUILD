@@ -23,6 +23,7 @@ integration_test(
     ],
     # String replacement does not occur in uncompiled_test
     disable_uncompiled_test = True,
+    enable_kt = False,
     # Class literal obfuscation is not implemented in WASM.
     enable_wasm = False,
     tags = ["manual"],

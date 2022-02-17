@@ -16,6 +16,7 @@ integration_test(
     name = "autovalue",
     srcs = glob(["*.java"]),
     closure_defines = {"jre.classMetadata": "'STRIPPED'"},
+    enable_kt = False,
     optimize_autovalue = True,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",

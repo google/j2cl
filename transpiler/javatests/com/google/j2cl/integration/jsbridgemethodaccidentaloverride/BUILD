@@ -14,5 +14,6 @@ package(
 integration_test(
     name = "jsbridgemethodaccidentaloverride",
     srcs = glob(["*.java"]),
+    enable_kt = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

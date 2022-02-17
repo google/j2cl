@@ -17,6 +17,7 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    enable_kt = False,
     # Disabled because it is testing bridging needed for @JsMethod.
     enable_wasm = False,
     suppress = ["JSC_TYPE_MISMATCH"],

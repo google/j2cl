@@ -13,6 +13,7 @@ integration_test(
         "*.java",
         "*.native.js",
     ]),
+    enable_kt = False,
     # staticinitfailfast tests that we throw an error when there is JavaScript
     # code that instantiates a Java class through its synthetic constructor thus
     # skipping the proper Java initialization semantics. Because the class in

@@ -13,5 +13,4 @@ package(
 integration_test(
     name = "instanceinitorder",
     srcs = glob(["*.java"]),
-    enable_kt = True,
 )

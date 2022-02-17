@@ -14,5 +14,4 @@ package(
 integration_test(
     name = "importsfullyqualified",
     srcs = glob(["*.java"]),
-    enable_kt = True,
 )

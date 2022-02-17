@@ -13,4 +13,5 @@ package(
 integration_test(
     name = "arrayliteral",
     srcs = glob(["*.java"]),
+    enable_kt = False,
 )

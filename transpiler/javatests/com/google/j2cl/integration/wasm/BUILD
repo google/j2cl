@@ -30,6 +30,7 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    enable_kt = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
         "//third_party:gwt-jsinterop-annotations-j2cl",

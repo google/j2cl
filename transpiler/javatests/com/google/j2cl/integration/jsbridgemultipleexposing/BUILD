@@ -14,6 +14,5 @@ package(
 integration_test(
     name = "jsbridgemultipleexposing",
     srcs = glob(["*.java"]),
-    enable_kt = True,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

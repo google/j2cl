@@ -13,4 +13,6 @@ package(
 integration_test(
     name = "backwardbridgemethod",
     srcs = glob(["*.java"]),
+    # TODO(b/202428351): Generics support
+    enable_kt = False,
 )

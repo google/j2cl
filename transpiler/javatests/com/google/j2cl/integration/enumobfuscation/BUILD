@@ -22,6 +22,8 @@ integration_test(
     ],
     # String replacement does not occur in uncompiled_test
     disable_uncompiled_test = True,
+    # TODO(b/219913874): java.lang.Enum to kotlin.Enum translation
+    enable_kt = False,
     # Enum obfuscation is not supported in WASM.
     enable_wasm = False,
     tags = ["manual"],

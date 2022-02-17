@@ -13,4 +13,6 @@ package(
 integration_test(
     name = "enums",
     srcs = glob(["*.java"]),
+    # TODO(b/219913874): java.lang.Enum to kotlin.Enum translation
+    enable_kt = False,
 )

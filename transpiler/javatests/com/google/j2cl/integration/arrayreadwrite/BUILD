@@ -13,5 +13,4 @@ package(
 integration_test(
     name = "arrayreadwrite",
     srcs = glob(["*.java"]),
-    enable_kt = True,
 )

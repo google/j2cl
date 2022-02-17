@@ -14,5 +14,6 @@ package(
 integration_test(
     name = "staticinitsuper",
     srcs = glob(["*.java"]),
+    enable_kt = False,
     tags = ["manual"],
 )

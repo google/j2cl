@@ -13,4 +13,5 @@ package(
 integration_test(
     name = "optimizedenums",
     srcs = glob(["*.java"]),
+    enable_kt = False,
 )

@@ -14,6 +14,7 @@ package(
 integration_test(
     name = "strictequality",
     srcs = ["Main.java"],
+    enable_kt = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
     ],

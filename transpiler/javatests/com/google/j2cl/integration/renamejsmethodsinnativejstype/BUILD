@@ -31,6 +31,7 @@ integration_test(
         "Main.java",
         "Main.native.js",
     ],
+    enable_kt = False,
     # JsInterop features are not supported in WASM.
     enable_wasm = False,
     deps = [

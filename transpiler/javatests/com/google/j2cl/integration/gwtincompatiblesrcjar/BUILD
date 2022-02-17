@@ -34,4 +34,5 @@ integration_test(
         ":libgwtincompatibleMain-src.jar",
         ":libgwtincompatibleOther-src.jar",
     ],
+    enable_kt = False,
 )

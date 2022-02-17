@@ -14,5 +14,6 @@ package(
 integration_test(
     name = "interfaces",
     srcs = glob(["*.java"]),
+    enable_kt = False,
     j2cl_library_tags = ["manual"],
 )

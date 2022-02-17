@@ -14,4 +14,5 @@ package(
 integration_test(
     name = "devirtualizedsupermethodcall",
     srcs = glob(["*.java"]),
+    enable_kt = False,
 )

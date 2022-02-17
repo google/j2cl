@@ -14,5 +14,6 @@ package(
 integration_test(
     name = "depsshallow",
     srcs = ["Main.java"],
+    enable_kt = False,
     deps = ["//transpiler/javatests/com/google/j2cl/integration/depsshallow/foo"],
 )

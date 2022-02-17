@@ -14,5 +14,7 @@ package(
 integration_test(
     name = "casts",
     srcs = glob(["*.java"]),
+    # TODO(b/202428351): Generics support
+    enable_kt = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
 )

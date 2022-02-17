@@ -17,6 +17,7 @@ integration_test(
         "*.java",
         "*.js",
     ]),
+    enable_kt = False,
     # JsInterop features are not supported in WASM.
     enable_wasm = False,
     suppress = ["JSC_TYPE_MISMATCH"],

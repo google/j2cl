@@ -23,5 +23,6 @@ integration_test(
     # Src's JUST the Main class and gets MainRootType as a dependency. Do not
     # change this since this is part of what the test is verifying.
     srcs = ["Main.java"],
+    enable_kt = False,
     deps = [":MainRootType"],
 )

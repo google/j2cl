@@ -13,4 +13,6 @@ package(
 integration_test(
     name = "fieldshadowing",
     srcs = glob(["*.java"]),
+    # TODO(b/202433397): Render override modifier
+    enable_kt = False,
 )

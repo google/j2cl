@@ -14,6 +14,7 @@ package(
 integration_test(
     name = "importglobaljstypes",
     srcs = glob(["*.java"]),
+    enable_kt = False,
     # JsInterop features are not supported in WASM.
     enable_wasm = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],

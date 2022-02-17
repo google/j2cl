@@ -14,4 +14,5 @@ package(
 integration_test(
     name = "casttoprimitives",
     srcs = glob(["*.java"]),
+    enable_kt = False,
 )

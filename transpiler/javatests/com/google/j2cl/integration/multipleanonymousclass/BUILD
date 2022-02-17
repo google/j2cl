@@ -14,4 +14,5 @@ package(
 integration_test(
     name = "multipleanonymousclass",
     srcs = glob(["*.java"]),
+    enable_kt = False,
 )

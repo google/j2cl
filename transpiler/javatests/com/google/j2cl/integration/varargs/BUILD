@@ -13,6 +13,7 @@ package(
 integration_test(
     name = "varargs",
     srcs = glob(["**/*.java"]),
+    enable_kt = False,
     deps = [
         "//jre/java:javaemul_internal_annotations-j2cl",
     ],

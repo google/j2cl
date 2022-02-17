@@ -15,6 +15,7 @@ package(
 integration_test(
     name = "selfreferencingnativetype",
     srcs = glob(["*.java"]),
+    enable_kt = False,
     # Uses jsinterop features not supported in WASM.
     enable_wasm = False,
     deps = ["//third_party:gwt-jsinterop-annotations-j2cl"],
